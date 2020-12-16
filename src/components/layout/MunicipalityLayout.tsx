@@ -148,10 +148,14 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                               .titel_sidebar
                           }
                         >
-                          {
-                            siteText.gemeente_ziekenhuisopnames_per_dag
-                              .tijdelijk_onbeschikbaar_titel
-                          }
+                          <SidebarMetric
+                            data={data}
+                            scope="gm"
+                            metricName="hospital_admissions"
+                            metricProperty="moving_average_hospital"
+                            localeTextKey="gemeente_ziekenhuisopnames_per_dag"
+                            differenceKey="hospital_admissions__moving_average_hospital"
+                          />
                         </MetricMenuItemLink>
                       </CategoryMenu>
                     </>

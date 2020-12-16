@@ -12,12 +12,15 @@ type TMetricHolder<T> = keyof Omit<
 >;
 
 export type TMunicipalityMetricName = TMetricHolder<
-  Omit<Municipalities, 'deceased' | 'hospital_admissions'>
+  Omit<Municipalities, 'deceased'>
 >;
 
-export type TRegionMetricName = TMetricHolder<
-  Omit<Regions, 'deceased' | 'hospital_admissions'>
->;
+export type TMunicipalityMetricType = ValueOf<
+  Pick<Municipalities, TMunicipalityMetricName>
+>[number] &
+  Partial<MunicipalityProperties>;
+
+export type TRegionMetricName = TMetricHolder<Omit<Regions, 'deceased'>>;
 
 export interface SafetyRegionProperties {
   vrcode: string;

@@ -641,7 +641,7 @@
       },
       {
         "cijfer": "Reproduction number",
-        "verantwoording": "The reproduction number is supplied every Tuesday as [open data](https://data.rivm.nl/covid-19/COVID-19_reproductiegetal.json) by the National Institute for Public Health and the Environment (RIVM). The description of this dataset can be found [here](https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/ed0699d1-c9d5-4436-8517-27eb993eab6e). The reproduction number (R) is not an exact value, but a reliable estimate. The value of R is based on (1) the number of ICU and hospital admissions, and (2) the day on which these ICU and hospital patients developed symptoms. The most up to date value of R provided on the coronavirus dashboard at any given time is always from at least two weeks ago. \n\nEstimates of R using data from less than 14 days ago could provide an indication of what the definitive value may be, but are not reliable predictors. Estimates using more recent data are less reliable because the data is not yet complete. It is, for instance, impossible to know how many newly confirmed cases will result in hospital admissions in the days ahead. \n\nUntil 3 November 2020, the graph showing the progression of R over time did not give a value of R for the most recent two weeks but did give a projection of this value in the form of a bandwidth. As of 3 November, the dashboard graph will no longer display this bandwidth."
+        "verantwoording": "The explanation of the data presented about the reproduction number is being translated and will follow shortly. In the meantime we refer to the explanation of the data presented in Dutch."
       },
       {
         "cijfer": "Nursing homes",
@@ -753,7 +753,7 @@
     "select_region_municipality_legend": "Select a municipality:",
     "select_region_type_legend": "Show numbers from:",
     "your_municipality": "Municipality",
-    "belangrijk_bericht": "There is a [national lockdown](https://www.rijksoverheid.nl/actueel/nieuws/2020/12/14/lockdown-nodig-om-snel-oplopend-aantal-besmettingen-tegen-te-gaan)."
+    "belangrijk_bericht": "There is a [national lockdown](https://www.rijksoverheid.nl/actueel/nieuws/2020/12/14/lockdown-nodig-om-snel-oplopend-aantal-besmettingen-tegen-te-gaan) until at least Tuesday 19 January."
   },
   "common": {
     "metadata": {
@@ -800,7 +800,7 @@
       "vroege_signalen": "Early indicators",
       "gedrag": "Behaviour",
       "kwetsbare_groepen": "Vulnerable groups",
-      "maatregelen": ""
+      "maatregelen": "Measures"
     }
   },
   "veiligheidsregio_layout": {
@@ -814,7 +814,7 @@
       "vroege_signalen": "Early indicators",
       "gedrag": "Behaviour",
       "kwetsbare_groepen": "Vulnerable groups",
-      "maatregelen": ""
+      "maatregelen": "Measures"
     }
   },
   "veiligheidsregio_metadata": {
@@ -1100,7 +1100,7 @@
       "title": "Level of risk per safety region | Dashboard Coronavirus | Government.nl",
       "description": "Overview of the level of risk per safety region in the Netherlands."
     },
-    "belangrijk_bericht": "There is a [national lockdown](https://www.rijksoverheid.nl/actueel/nieuws/2020/12/14/lockdown-nodig-om-snel-oplopend-aantal-besmettingen-tegen-te-gaan)."
+    "belangrijk_bericht": "There is a [national lockdown](https://www.rijksoverheid.nl/actueel/nieuws/2020/12/14/lockdown-nodig-om-snel-oplopend-aantal-besmettingen-tegen-te-gaan) until at least Tuesday 19 January."
   },
   "gemeente_index": {
     "selecteer_titel": "Select your municipality",
@@ -1961,23 +1961,23 @@
   },
   "maatregelen": {
     "categories": {
-      "er_op_uit": "",
-      "bezoek": "",
-      "samenkomst": "",
+      "er_op_uit": "Groups",
+      "bezoek": "At home",
+      "samenkomst": "Venues normally open to the public",
       "huwelijk": "",
       "verpleeghuis": "",
-      "horeca": "",
-      "sport": "",
+      "horeca": "Restaurants, bars and events",
+      "sport": "Sports",
       "reizen_binnenland": "",
       "reizen_buitenland": "",
-      "ov": "",
+      "ov": "Travel and transportation",
       "uitvaart": "",
-      "onderwijs": "",
+      "onderwijs": "Education and childcare",
       "werk": "",
-      "winkels": "",
+      "winkels": "Groceries and shopping",
       "alcohol": "",
       "algemeen": "",
-      "contactberoep": ""
+      "contactberoep": "Contact-based industries"
     },
     "headings": {
       "1": {
@@ -2025,7 +2025,7 @@
       "41": {
         "toelichting_risiconiveau": "",
         "extratoelichting": {
-          "titel": "",
+          "titel": "Current Measures",
           "toelichting": ""
         }
       },
@@ -2033,81 +2033,81 @@
         "toelichting_risiconiveau": "",
         "extratoelichting": {
           "titel": "",
-          "toelichting": ""
+          "toelichting": "Coronavirus is spreading rapidly. To ensure healthcare services remain available to all, we must limit our contact with others. The following measures apply from 15 December 2020 until at least 19 January 2021:"
         }
       }
     },
     "teksten": {
-      "0_algemeen_18": "",
-      "0_algemeen_19": "",
-      "0_algemeen_20": "",
-      "0_algemeen_21": "",
-      "0_algemeen_22": "",
-      "0_algemeen_23": "",
-      "41_bezoek_24": "",
-      "41_er_op_uit_25": "",
-      "41_samenkomst_26": "",
-      "41_horeca_27": "",
-      "41_horeca_28": "",
-      "41_horeca_29": "",
-      "41_winkels_30": "",
-      "41_winkels_31": "",
-      "41_winkels_32": "",
-      "41_contactberoep_33": "",
-      "41_sport_34": "",
-      "41_sport_35": "",
-      "41_sport_36": "",
-      "41_ov_37": "",
-      "41_ov_38": "",
-      "41_onderwijs_39": "",
-      "41_onderwijs_40": "",
-      "41_onderwijs_41": ""
+      "0_algemeen_18": "Work at home, unless this is impossible.",
+      "0_algemeen_19": "Keep 1.5 metres away from others.",
+      "0_algemeen_20": "Avoid busy places.",
+      "0_algemeen_21": "Wash your hands often.",
+      "0_algemeen_22": "Cough or sneeze into your elbow.",
+      "0_algemeen_23": "Where a face mask where this is mandatory.",
+      "41_bezoek_24": "No more than 2 visitors per day (excluding children under 13). From 24-26 December: no more than 3 visitors per day.",
+      "41_er_op_uit_25": "Indoors and outdoors: no more than 2 people or 1 household in a group.",
+      "41_samenkomst_26": "Museums, cinemas, theatres, zoos, libraries, swimming pools amusement parks and other venues normally open to the public are closed.",
+      "41_horeca_27": "All establishments serving food and drink are closed. Including hotel restaurants and room service.",
+      "41_horeca_28": "Takeaway meals may be ordered from restaurants.",
+      "41_horeca_29": "Events are prohibited.",
+      "41_winkels_30": "Non-essential shops are closed.",
+      "41_winkels_31": "Establishments including supermarkets, chemists, greengrocers and petrol stations may remain open.",
+      "41_winkels_32": "Ban on alcohol after 20.00.",
+      "41_contactberoep_33": "People working in non-medical contact-based industries, including hairdressers, tattooists, beauticians and masseurs cannot perform their work.",
+      "41_sport_34": "Outdoors: no more than 2 people, staying 1.5 metres apart at all times. This does not apply to children under 18 and elite athletes.",
+      "41_sport_35": "All indoor sports venues are closed.",
+      "41_sport_36": "No competitions or group lessons. This does not apply to elite athletes.",
+      "41_ov_37": "Stay home as much as possible. Public transport for essential travel only.",
+      "41_ov_38": "Do not travel abroad. Do not book any trips abroad until mid-March.",
+      "41_onderwijs_39": "Remote and online teaching in primary, secondary, secondary vocational and higher education and for all other forms of training and educational activities. Exemptions include exams, practical lessons and education for vulnerable pupils. These measures apply from 16 December 2020 until at least 17 January 2021.",
+      "41_onderwijs_40": "Childcare centres are closed. These measures apply from 16 December 2020 until at least 17 January 2021.",
+      "41_onderwijs_41": "Emergency childcare is available for children of key workers and for vulnerable children. These measures apply from 16 December 2020 until at least 17 January 2021."
     }
   },
   "nationaal_maatregelen": {
-    "titel": "",
-    "titel_sidebar": "",
+    "titel": "Measures",
+    "titel_sidebar": "Measures",
     "subtitel_sidebar": ""
   },
   "veiligheidsregio_maatregelen": {
-    "titel_sidebar": "",
-    "titel": "",
+    "titel_sidebar": "Measures",
+    "titel": "Measures in {{safetyRegionName}}",
     "titel_risiconiveau": "",
     "toelichting_risiconiveau": "",
     "linktext_riskpage": "",
-    "linktext_regionpage": "",
+    "linktext_regionpage": "Website safety region {{safetyRegionName}}",
     "titel_aanvullendemaatregelen": "",
     "toelichting_aanvullendemaatregelen": "",
     "metadata": {
-      "title": "",
-      "description": ""
+      "title": "Measures in {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
+      "description": "Overview of the corona measures in the safety region {{safetyRegionName}}."
     }
   },
   "veiligheidsregio_maatregelen_urls": {
-    "VR01": "",
-    "VR02": "",
-    "VR03": "",
-    "VR04": "",
-    "VR05": "",
-    "VR06": "",
-    "VR07": "",
-    "VR08": "",
-    "VR09": "",
-    "VR10": "",
-    "VR11": "",
-    "VR12": "",
-    "VR13": "",
-    "VR14": "",
-    "VR15": "",
-    "VR16": "",
-    "VR17": "",
-    "VR18": "",
-    "VR19": "",
-    "VR20": "",
-    "VR21": "",
-    "VR22": "",
-    "VR23": "",
-    "VR24": "",
-    "VR25": ""
+    "VR01": "http://www.veiligheidsregiogroningen.nl/",
+    "VR02": "https://www.veiligheidsregiofryslan.nl/",
+    "VR03": "http://www.vrd.nl/",
+    "VR04": "https://www.vrijsselland.nl/",
+    "VR05": "http://www.vrtwente.nl/",
+    "VR06": "https://www.vnog.nl/",
+    "VR07": "http://www.vggm.nl/vggm",
+    "VR08": "http://www.vrgz.nl/",
+    "VR09": "http://www.vru.nl/",
+    "VR10": "http://www.vrnhn.nl/",
+    "VR11": "https://www.veiligheidsregiozaanstreekwaterland.nl/",
+    "VR12": "http://www.vrk.nl/",
+    "VR13": "https://www.amsterdam.nl/veiligheidsregio/",
+    "VR14": "https://www.vrgooienvechtstreek.nl/",
+    "VR15": "https://haaglandenveilig.nl/",
+    "VR16": "https://www.hollandsmiddenveilig.nl/",
+    "VR17": "https://www.rijnmondveilig.nl/",
+    "VR18": "https://www.zhzveilig.nl/",
+    "VR19": "https://www.zeelandveilig.nl/",
+    "VR20": "https://www.vrmwb.nl/",
+    "VR21": "https://www.vrbn.nl/",
+    "VR22": "http://www.veiligheidsregiozob.nl/",
+    "VR23": "http://vrln.nl/",
+    "VR24": "http://www.vrzuidlimburg.nl/",
+    "VR25": "http://www.veiligheidsregioflevoland.nl/"
   }
 }

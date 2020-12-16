@@ -641,7 +641,7 @@
       },
       {
         "cijfer": "Reproductiegetal",
-        "verantwoording": "Het reproductiegetal wordt wekelijks (op dinsdag) beschikbaar gesteld via [open data](https://data.rivm.nl/covid-19/COVID-19_reproductiegetal.json) door het RIVM. Zie hier de beschrijving van deze [dataset](https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/ed0699d1-c9d5-4436-8517-27eb993eab6e). Het reproductiegetal (R) is geen exacte waarde, maar een betrouwbare schatting. De R-waarde is gebaseerd op (1) het aantal IC- en ziekenhuisopnamen en (2) de dag waarop deze patiënten symptomen ontwikkelden. Het coronadashboard geeft als meest actuele waarde de R weer van minimaal twee weken geleden. \n\nSchattingen van het reproductiegetal R recenter dan 14 dagen geleden kunnen een indicator zijn voor de uiteindelijke waarde, maar zijn niet betrouwbaar als voorspeller. De betrouwbaarheid van de schatting wordt kleiner voor recentere dagen, omdat de meldingen voor recente dagen nog niet volledig gerapporteerd zijn en de aantallen meldingen voor toekomstige dagen nog niet bekend kunnen zijn.\n\nTot 3 november liet de tabel voor de laatste twee weken geen waarde voor R zien maar werd wel de boven- en ondergrens geprojecteerd in een soort ‘pluim’. Met ingang van 3 november is deze ‘pluim’ niet meer zichtbaar op het dashboard."
+        "verantwoording": "Het reproductiegetal (de ‘R’) geeft het gemiddeld aantal mensen dat besmet wordt door een persoon met COVID-19. Het reproductiegetal wordt wekelijks (op dinsdag) beschikbaar gesteld via [open data](https://data.rivm.nl/covid-19/COVID-19_reproductiegetal.json) door het RIVM. [Zie hier de beschrijving van deze dataset](https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/ed0699d1-c9d5-4436-8517-27eb993eab6e). Het reproductiegetal (R) is geen exacte waarde, maar een betrouwbare schatting. \n\nVoor de schatting van dit reproductiegetal gebruikt het RIVM het aantal gemelde  positieve COVID-19 testuitslagen per dag. Voor een groot deel van de gemelde gevallen is de eerste ziektedag bekend, in andere gevallen wordt deze geschat. Door het aantal COVID-19  gevallen per datum van eerste ziektedag weer te geven is direct te zien of het aantal infecties toeneemt, piekt of afneemt. Voor de berekening van het reproductiegetal is het ook nodig te weten wat de tijdsduur is tussen de eerste ziektedag van een COVID-19 geval en de eerste ziektedag van zijn of haar besmetter. Deze tijdsduur is gemiddeld 4 dagen, berekend op basis van COVID-19 meldingen aan de GGD. Met deze informatie wordt vervolgens de waarde van het reproductiegetal berekend.\n\nHet coronadashboard geeft als meest actuele waarde de R weer van minimaal twee weken geleden. Schattingen van het reproductiegetal R recenter dan 14 dagen geleden kunnen een indicator zijn voor de uiteindelijke waarde, maar zijn niet betrouwbaar als voorspeller. De betrouwbaarheid van de schatting wordt kleiner voor recentere dagen, omdat de meldingen voor recente dagen nog niet volledig gerapporteerd zijn en de aantallen meldingen voor toekomstige dagen nog niet bekend kunnen zijn.\n\nTot 12 juni werd het reproductiegetal berekend op basis van COVID-19 ziekenhuisopnames omdat er tot dan toe minder getest werd. Tot 3 november liet de tabel voor de laatste twee weken geen waarde voor R zien maar werd wel de boven- en ondergrens geprojecteerd in een soort ‘pluim’. Met ingang van 3 november is deze ‘pluim’ niet meer zichtbaar op het dashboard."
       },
       {
         "cijfer": "Verpleeghuizen",
@@ -753,7 +753,7 @@
     "select_region_municipality_legend": "Selecteer een gemeente:",
     "select_region_type_legend": "Toon cijfers van:",
     "your_municipality": "Gemeente",
-    "belangrijk_bericht": "Er geldt een [landelijke lockdown](https://www.rijksoverheid.nl/actueel/nieuws/2020/12/14/lockdown-nodig-om-snel-oplopend-aantal-besmettingen-tegen-te-gaan)."
+    "belangrijk_bericht": "Er geldt een [landelijke lockdown](https://www.rijksoverheid.nl/actueel/nieuws/2020/12/14/lockdown-nodig-om-snel-oplopend-aantal-besmettingen-tegen-te-gaan) tot ten minste dinsdag 19 januari."
   },
   "common": {
     "metadata": {
@@ -1100,7 +1100,7 @@
       "title": "Risiconiveaus per veiligheidsregio | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Overzicht van het huidige risiconiveau per veiligheidsregio in Nederland."
     },
-    "belangrijk_bericht": "Er geldt een [landelijke lockdown](https://www.rijksoverheid.nl/actueel/nieuws/2020/12/14/lockdown-nodig-om-snel-oplopend-aantal-besmettingen-tegen-te-gaan)."
+    "belangrijk_bericht": "Er geldt een [landelijke lockdown](https://www.rijksoverheid.nl/actueel/nieuws/2020/12/14/lockdown-nodig-om-snel-oplopend-aantal-besmettingen-tegen-te-gaan) tot ten minste dinsdag 19 januari."
   },
   "gemeente_index": {
     "selecteer_titel": "Selecteer een gemeente",
@@ -1961,20 +1961,20 @@
   },
   "maatregelen": {
     "categories": {
-      "er_op_uit": "Er op uit",
-      "bezoek": "Thuisbezoek familie en vrienden",
-      "samenkomst": "Samenkomsten",
+      "er_op_uit": "Groepen",
+      "bezoek": "Thuis",
+      "samenkomst": "Publiek toegankelijke locaties",
       "huwelijk": "Huwelijksvoltrekkingen",
       "verpleeghuis": "Verpleeghuizen",
-      "horeca": "Horeca",
+      "horeca": "Horeca en evenementen",
       "sport": "Sport",
       "reizen_binnenland": "Binnenlandse reizen",
       "reizen_buitenland": "Buitenlandse reizen",
-      "ov": "OV",
+      "ov": "Vervoer en reizen",
       "uitvaart": "Uitvaart",
-      "onderwijs": "Onderwijs",
+      "onderwijs": "Onderwijs en kinderopvang",
       "werk": "Werk",
-      "winkels": "Winkels",
+      "winkels": "Winkelen en boodschappen",
       "alcohol": "Alcohol en softdrugs",
       "algemeen": "Algemeen",
       "contactberoep": "Contactberoepen"
@@ -2025,15 +2025,15 @@
       "41": {
         "toelichting_risiconiveau": "Er zijn zeer veel mensen besmettelijk en het dagelijks aantal nieuwe besmettingen is hoog. De regionale zorgcapaciteit is onvoldoende. Strenge, landelijke maatregelen zijn noodzakelijk.",
         "extratoelichting": {
-          "titel": "Maatregelen bij risiconiveau 4/ Lockdown (regionaal)",
+          "titel": "Maatregelen voor Lockdown",
           "toelichting": "In {{safetyRegionName}} is een regionale lockdown van kracht."
         }
       },
       "landelijk": {
         "toelichting_risiconiveau": "",
         "extratoelichting": {
-          "titel": "Landelijke maatregelen",
-          "toelichting": "Het kabinet heeft besloten dat er strengere landelijke maatregelen nodig zijn die er voor moeten zorgen dat het aantal besmettingen daalt. In de weken tot 27 oktober beoordeelt het kabinet wat er voor die periode daarna nodig is. Er moet voldoende bewijs zijn in vermindering van het aantal besmettingen en de druk op de reguliere zorg alvorens met zekerheid te kunnen zeggen dat de maatregelen effect hebben en dus heroverwogen kunnen worden."
+          "titel": "Nederland in Lockdown",
+          "toelichting": "Het coronavirus verspreidt zich razendsnel. Om de zorg toegankelijk te houden, moeten we onze contacten tot een minimum beperken. Van 15 december t/m in ieder geval 19 januari gelden de volgende maatregelen:"
         }
       }
     },
@@ -2065,13 +2065,13 @@
     }
   },
   "nationaal_maatregelen": {
-    "titel": "Risiconiveau en Maatregelen",
-    "titel_sidebar": "Risiconiveau en Maatregelen",
+    "titel": "Maatregelen",
+    "titel_sidebar": "Maatregelen",
     "subtitel_sidebar": "Er gelden landelijke maatregelen"
   },
   "veiligheidsregio_maatregelen": {
-    "titel_sidebar": "Risiconiveau en Maatregelen",
-    "titel": "Risiconiveau en Maatregelen in {{safetyRegionName}}",
+    "titel_sidebar": "Maatregelen",
+    "titel": "Maatregelen in {{safetyRegionName}}",
     "titel_risiconiveau": "Risiconiveau",
     "toelichting_risiconiveau": "De situatie in deze regio is zorgelijk en ontwikkelt zich negatief. Daarom zijn er naast de landelijke maatregelen aanvullende maatregelen getroffen.",
     "linktext_riskpage": "Meer over de risiconiveaus",
@@ -2079,7 +2079,7 @@
     "titel_aanvullendemaatregelen": "Aanvullende maatregelen",
     "toelichting_aanvullendemaatregelen": "Lokaal of regionaal kunnen aanvullend nog strengere maatregelen gelden. Kijk hiervoor op de website van de veiligheidsregio.",
     "metadata": {
-      "title": "Risiconiveau en Maatregelen in {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Maatregelen in {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Overzicht van de corona maatregelen in de veiligheidsregio {{safetyRegionName}}."
     }
   },
