@@ -258,13 +258,14 @@ function SafetyRegionLayout(
                                 .titel_sidebar
                             }
                           />
-                          <span className="metric-wrapper">
-                            {
-                              siteText
-                                .veiligheidsregio_ziekenhuisopnames_per_dag
-                                .tijdelijk_onbeschikbaar_titel
-                            }
-                          </span>
+                          <SidebarMetric
+                            data={data}
+                            scope="vr"
+                            metricName="results_per_region"
+                            metricProperty="hospital_moving_avg_per_region"
+                            localeTextKey="veiligheidsregio_ziekenhuisopnames_per_dag"
+                            differenceKey="results_per_region__hospital_moving_avg_per_region"
+                          />
                         </a>
                       </Link>
                     </MetricMenuItem>
