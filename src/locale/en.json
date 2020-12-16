@@ -2073,10 +2073,10 @@
     "titel_sidebar": "Measures",
     "titel": "Measures in {{safetyRegionName}}",
     "titel_risiconiveau": "",
-    "toelichting_risiconiveau": "",
+    "toelichting_risiconiveau": "For more information about your region, please check the website of your safety region.",
     "linktext_riskpage": "",
     "linktext_regionpage": "Website safety region {{safetyRegionName}}",
-    "titel_aanvullendemaatregelen": "",
+    "titel_aanvullendemaatregelen": "Additional information",
     "toelichting_aanvullendemaatregelen": "",
     "metadata": {
       "title": "Measures in {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
