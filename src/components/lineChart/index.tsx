@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { isFilled } from 'ts-is-present';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
-import { HighchartsWrapper } from '~/components/common/highcharts';
+import { HighchartsWrapper } from '~/components/highcharts-wrapper';
 import text from '~/locale/index';
 import { colors } from '~/style/theme';
 import { formatDateFromSeconds } from '~/utils/formatDate';
