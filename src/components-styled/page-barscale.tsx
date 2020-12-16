@@ -101,7 +101,7 @@ export function PageBarScale<T>({
         screenReaderText={text.barscale_screenreader_text}
         value={propertyValue}
         id={uniqueId}
-        rangeKey={config.barScale.rangesKey}
+        rangesKey={`${metricName}__${metricProperty}`}
         gradient={config.barScale.gradient}
         showValue={true}
         showAxis={true}

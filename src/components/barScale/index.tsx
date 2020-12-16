@@ -20,7 +20,7 @@ type BarscaleProps = {
   gradient: GradientStop[];
   id: string;
   screenReaderText: string;
-  rangeKey: string;
+  rangesKey: string;
   showAxis?: boolean;
   showValue?: boolean;
 };
@@ -33,14 +33,14 @@ export function BarScale({
   gradient,
   id,
   screenReaderText,
-  rangeKey,
+  rangesKey,
   showAxis,
   showValue = true,
 }: BarscaleProps) {
   // Generate a random ID used for clipPath and linearGradient ID's.
   const rand = useRef(Math.random().toString(36).substring(2, 15));
 
-  const { scale } = useDynamicScale(min, max, rangeKey, value);
+  const { scale } = useDynamicScale(min, max, rangesKey, value);
 
   const text = siteText.common.barScale;
 
