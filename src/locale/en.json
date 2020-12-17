@@ -1964,18 +1964,18 @@
       "er_op_uit": "Groups",
       "bezoek": "At home",
       "samenkomst": "Venues normally open to the public",
-      "huwelijk": "",
-      "verpleeghuis": "",
+      "huwelijk": "Wedding ceremonies",
+      "verpleeghuis": "Nursing homes",
       "horeca": "Restaurants, bars and events",
       "sport": "Sports",
-      "reizen_binnenland": "",
-      "reizen_buitenland": "",
+      "reizen_binnenland": "Domestic travel",
+      "reizen_buitenland": "Foreign travel",
       "ov": "Travel and transportation",
-      "uitvaart": "",
+      "uitvaart": "Funeral",
       "onderwijs": "Education and childcare",
-      "werk": "",
+      "werk": "Work",
       "winkels": "Groceries and shopping",
-      "alcohol": "",
+      "alcohol": "Alcohol and softdrugs",
       "algemeen": "General",
       "contactberoep": "Contact-based industries"
     },
@@ -1983,50 +1983,50 @@
       "1": {
         "toelichting_risiconiveau": "",
         "extratoelichting": {
-          "titel": "",
+          "titel": "Measures for levek of risk 1",
           "toelichting": ""
         }
       },
       "2": {
         "toelichting_risiconiveau": "",
         "extratoelichting": {
-          "titel": "",
+          "titel": "Measures for levek of risk 2",
           "toelichting": ""
         }
       },
       "3": {
-        "toelichting_risiconiveau": "",
+        "toelichting_risiconiveau": "There are a lot of infected people and the daily number of new infections is high. The regional health care capacity is insufficient. Measures are needed to regain control of the virus.",
         "extratoelichting": {
-          "titel": "",
+          "titel": "Measures for levek of risk 3",
           "toelichting": ""
         }
       },
       "4": {
-        "toelichting_risiconiveau": "",
+        "toelichting_risiconiveau": "There are a lot of infected people and the daily number of new infections is high. The regional health care capacity is insufficient. Strict, national measures are necessary.",
         "extratoelichting": {
-          "titel": "",
+          "titel": "Measures for levek of risk 4",
           "toelichting": ""
         }
       },
       "401": {
-        "toelichting_risiconiveau": "",
+        "toelichting_risiconiveau": "There are a lot of infected people and the daily number of new infections is high. The regional health care capacity is insufficient. Strict, national measures are necessary.",
         "extratoelichting": {
           "titel": "",
-          "toelichting": ""
+          "toelichting": "There are currently national measures in effect, despite the level of risk in any safety region."
         }
       },
       "402": {
-        "toelichting_risiconiveau": "",
+        "toelichting_risiconiveau": "There are a lot of infected people and the daily number of new infections is high. The regional health care capacity is insufficient. Strict, national measures are necessary.",
         "extratoelichting": {
           "titel": "",
-          "toelichting": ""
+          "toelichting": "There are currently national measures in effect, despite the level of risk in any safety region."
         }
       },
       "41": {
-        "toelichting_risiconiveau": "",
+        "toelichting_risiconiveau": "There are a lot of infected people and the daily number of new infections is high. The regional health care capacity is insufficient. Strict, national measures are necessary.",
         "extratoelichting": {
           "titel": "Current Measures",
-          "toelichting": ""
+          "toelichting": "In {{safetyRegionName}} there is a regional lockdown in effect."
         }
       },
       "landelijk": {
@@ -2062,31 +2062,31 @@
       "41_onderwijs_39": "Remote and online teaching in primary, secondary, secondary vocational and higher education and for all other forms of training and educational activities. Exemptions include exams, practical lessons and education for vulnerable pupils. These measures apply from 16 December 2020 until at least 17 January 2021.",
       "41_onderwijs_40": "Childcare centres are closed. These measures apply from 16 December 2020 until at least 17 January 2021.",
       "41_onderwijs_41": "Emergency childcare is available for children of key workers and for vulnerable children. These measures apply from 16 December 2020 until at least 17 January 2021.",
-      "41_algemeen_42": "",
-      "0_algemeen_42": "",
-      "0_algemeen_43": ""
+      "41_algemeen_42": "COVID-19 symptoms? Stay at home and get tested.",
+      "0_algemeen_42": "COVID-19 symptoms? Stay at home.",
+      "0_algemeen_43": "COVID-19 symptoms? Get tested."
     }
   },
   "nationaal_maatregelen": {
     "titel": "Measures",
     "titel_sidebar": "Measures",
-    "subtitel_sidebar": "",
-    "tabel_titel": ""
+    "subtitel_sidebar": "There are national measures",
+    "tabel_titel": "Current lockdown measures"
   },
   "veiligheidsregio_maatregelen": {
     "titel_sidebar": "Measures",
     "titel": "Measures in {{safetyRegionName}}",
-    "titel_risiconiveau": "",
+    "titel_risiconiveau": "Level of risk",
     "toelichting_risiconiveau": "For more information about your region, please check the website of your safety region.",
-    "linktext_riskpage": "",
+    "linktext_riskpage": "See more about the levels of risk.",
     "linktext_regionpage": "Website safety region {{safetyRegionName}}",
     "titel_aanvullendemaatregelen": "Additional information",
-    "toelichting_aanvullendemaatregelen": "",
+    "toelichting_aanvullendemaatregelen": "There can be additional measures on a regional level. Please take a look at the website of the safety region.",
     "metadata": {
       "title": "Measures in {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
       "description": "Overview of the corona measures in the safety region {{safetyRegionName}}."
     },
-    "subtitel_sidebar": ""
+    "subtitel_sidebar": "There are national measures"
   },
   "veiligheidsregio_maatregelen_urls": {
     "VR01": "http://www.veiligheidsregiogroningen.nl/",
