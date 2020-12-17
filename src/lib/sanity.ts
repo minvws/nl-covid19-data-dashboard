@@ -1,4 +1,4 @@
-// lib/sanity.js
+// lib/sanity.ts
 import {
   createClient,
   createImageUrlBuilder,
@@ -16,7 +16,7 @@ const config = {
    * https://nextjs.org/docs/basic-features/environment-variables
    **/
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || '',
   useCdn: process.env.NODE_ENV === 'production',
   /**
    * Set useCdn to `false` if your application require the freshest possible
@@ -29,7 +29,8 @@ const config = {
  * Set up a helper function for generating Image URLs with only the asset reference data in your documents.
  * Read more: https://www.sanity.io/docs/image-url
  **/
-export const urlFor = (source) => createImageUrlBuilder(config).image(source);
+export const urlFor = (source: any) =>
+  createImageUrlBuilder(config).image(source);
 
 // Set up the live preview subsscription hook
 export const usePreviewSubscription = createPreviewSubscriptionHook(config);
@@ -52,18 +53,18 @@ export const previewClient = createClient({
 });
 
 // Helper function for easily switching between normal client and preview client
-export const getClient = (usePreview) =>
+export const getClient = (usePreview: boolean) =>
   usePreview ? previewClient : sanityClient;
 
 // Helper function for using the current logged in user account
 export const useCurrentUser = createCurrentUserHook(config);
 
-export function localize(value, languages) {
+export function localize(value: any, languages: any): any {
   if (Array.isArray(value)) {
     return value.map((v) => localize(v, languages));
   } else if (typeof value == 'object') {
     if (/^locale[A-Z]/.test(value._type)) {
-      const language = languages.find((lang) => value[lang]);
+      const language = languages.find((lang: string) => value[lang]);
       return value[language];
     }
 

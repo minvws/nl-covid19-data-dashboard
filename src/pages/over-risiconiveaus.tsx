@@ -79,7 +79,7 @@ const OverRisicoNiveaus: FCWithLayout<OverRisiconiveausProps> = (props) => {
             <PortableText blocks={risico.description} />
 
             <article className={styles.faqList}>
-              {risico.content.map((item) => {
+              {risico.content.map((item: any) => {
                 return item.title ? (
                   <Collapsable
                     key={item._key}
