@@ -32,9 +32,7 @@
     "footer_nav": "Go to footer"
   },
   "header": {
-    "title": "Coronavirus dashboard",
-    "text": "The coronavirus dashboard provides information on the development of the coronavirus in the Netherlands.",
-    "link": "Read more about this dashboard",
+    "title": "Coronadashboard",
     "logo_alt": "Government of The Netherlands"
   },
   "nav": {
@@ -52,7 +50,11 @@
     },
     "title": "Corona Dashboard",
     "terug_naar_alle_cijfers": "Overview",
-    "terug_naar_alle_cijfers_homepage": "Overview"
+    "terug_naar_alle_cijfers_homepage": "Overview",
+    "menu": {
+      "open_menu": "Open menu",
+      "close_menu": "Close menu"
+    }
   },
   "ic_opnames_per_dag": {
     "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",

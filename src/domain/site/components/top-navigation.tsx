@@ -1,15 +1,16 @@
 import css from '@styled-system/css';
 import { Link } from '~/utils/link';
 import { useRouter } from 'next/router';
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { MaxWidth } from '~/components-styled/max-width';
 import text from '~/locale/index';
 import { isDefined } from 'ts-is-present';
 import { useBreakpoints } from '~/utils/useBreakpoints';
-import Menu from '~/assets/menu.svg'
-import Close from '~/assets/close.svg'
+import Menu from '~/assets/menu.svg';
+import Close from '~/assets/close.svg';
 import theme from '~/style/theme';
+import { VisuallyHidden } from '~/components-styled/visually-hidden';
 
 export function TopNavigation() {
   const router = useRouter();
@@ -29,36 +30,32 @@ export function TopNavigation() {
 
   return (
     <>
-      { isSmallScreen &&
+      {isSmallScreen && (
         <NavToggle
           onClick={toggleMenu}
           aria-expanded={isMenuOpen}
           aria-controls="main-navigation"
         >
           {isMenuOpen ? <Close /> : <Menu />}
-          {/* Menu */}
-        </NavToggle>}
-      {
-        (!isSmallScreen || isMenuOpen) &&
+          <VisuallyHidden>
+            {isMenuOpen ? text.nav.menu.close_menu : text.nav.menu.open_menu}
+          </VisuallyHidden>
+        </NavToggle>
+      )}
+      {(!isSmallScreen || isMenuOpen) && (
         <NavWrapper
           id="main-navigation"
           role="navigation"
-          aria-label={text.aria_labels.pagina_keuze}>
+          aria-label={text.aria_labels.pagina_keuze}
+        >
           <MaxWidth>
             <NavList>
-              <NavItem
-                href="/"
-                isActive={
-                  router.pathname === '/'
-                }
-              >
+              <NavItem href="/" isActive={router.pathname === '/'}>
                 {text.nav.links.actueel}
               </NavItem>
               <NavItem
                 href="/landelijk"
-                isActive={
-                  router.pathname.startsWith('/landelijk')
-                }
+                isActive={router.pathname.startsWith('/landelijk')}
               >
                 {text.nav.links.index}
               </NavItem>
@@ -67,13 +64,11 @@ export function TopNavigation() {
               </NavItem>
               <NavItem href="/gemeente">{text.nav.links.gemeente}</NavItem>
 
-              <NavItem href="/over">
-                {text.nav.links.over}
-              </NavItem>
+              <NavItem href="/over">{text.nav.links.over}</NavItem>
             </NavList>
           </MaxWidth>
         </NavWrapper>
-      }
+      )}
     </>
   );
 }
@@ -81,7 +76,7 @@ export function TopNavigation() {
 function NavItem({
   href,
   children,
-  isActive
+  isActive,
 }: {
   href: string;
   children: React.ReactNode;
@@ -91,27 +86,29 @@ function NavItem({
   return (
     <StyledListItem>
       <Link passHref href={href}>
-        <NavLink isActive={isDefined(isActive) ? isActive : pathname.startsWith(href)}>
-          <span>
-            {children}
-          </span>
+        <NavLink
+          isActive={isDefined(isActive) ? isActive : pathname.startsWith(href)}
+        >
+          <span>{children}</span>
         </NavLink>
       </Link>
     </StyledListItem>
   );
 }
 
-const NavToggle = styled.button(css({
-  ml: 'auto',
-  color: 'white',
-  bg: 'transparent',
-  p: 0,
-  m: 0,
-  border: 'none',
-  '&:focus': {
-    bg: 'rgba(0, 0, 0, 0.1)',
-  }
-}));
+const NavToggle = styled.button(
+  css({
+    ml: 'auto',
+    color: 'white',
+    bg: 'transparent',
+    p: 0,
+    m: 0,
+    border: 'none',
+    '&:focus': {
+      bg: 'rgba(0, 0, 0, 0.1)',
+    },
+  })
+);
 
 const NavWrapper = styled.nav(
   css({
@@ -130,8 +127,8 @@ const NavWrapper = styled.nav(
       mr: 0,
       mt: 0,
       pb: 1,
-      flex: '0 0 auto'
-    }
+      flex: '0 0 auto',
+    },
   })
 );
 
@@ -144,13 +141,13 @@ const NavList = styled.ol(
   })
 );
 
+// Lines in mobile menu between items
 const StyledListItem = styled.li(
   css({
     '& + &': {
       borderTop: '1px solid rgba(255, 255, 255, 0.25)',
       borderTopWidth: ['1px', null, null, 0],
-      overflow: 'hidden'
-    }
+    },
   })
 );
 
@@ -177,7 +174,7 @@ const NavLink = styled.a<{ isActive: boolean }>((x) =>
         left: [0, null, null, '1.5rem'],
         bottom: '0.6rem',
         height: '0.15rem',
-        position: 'absolute'
+        position: 'absolute',
       },
     },
 
@@ -185,7 +182,7 @@ const NavLink = styled.a<{ isActive: boolean }>((x) =>
     '&:hover, &:focus': {
       'span::before': {
         content: '""',
-      }
+      },
     },
 
     '&:focus': {
@@ -194,8 +191,8 @@ const NavLink = styled.a<{ isActive: boolean }>((x) =>
 
     ...(x.isActive
       ? {
-        fontWeight: 'bold',
-      }
+          fontWeight: 'bold',
+        }
       : undefined),
   })
 );
