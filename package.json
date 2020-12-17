@@ -14,7 +14,7 @@
     "@reach/combobox": "^0.11.2",
     "@reach/disclosure": "^0.11.2",
     "@sanity/block-content-to-react": "^2.0.7",
-    "@sanity/client": "^2.0.9",
+    "@sanity/client": "^2.1.0",
     "@styled-system/css": "^5.1.5",
     "@visx/axis": "^1.1.0",
     "@visx/event": "^1.0.0",

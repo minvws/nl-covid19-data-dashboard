@@ -92,18 +92,18 @@ const Verantwoording: FCWithLayout<VerantwoordingProps> = (props) => {
         <MaxWidth>
           <div className={styles.maxwidth}>
             <h2>{verantwoordingList.title}</h2>
-            <PortableText blocks={verantwoordingList.beschrijving} />
+            <PortableText blocks={verantwoordingList.description} />
             <article className={styles.faqList}>
               {verantwoordingList.content.map((item: any) => {
-                return item.titel && item.verantwoording ? (
+                return (
                   <Collapsable
                     key={item._key}
                     id={item._key}
-                    summary={item.titel}
+                    summary={item.title}
                   >
-                    <PortableText blocks={item.verantwoording} />
+                    <PortableText blocks={item.description} />
                   </Collapsable>
-                ) : null;
+                );
               })}
             </article>
           </div>

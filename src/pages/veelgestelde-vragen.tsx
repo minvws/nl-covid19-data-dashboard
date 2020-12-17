@@ -88,16 +88,13 @@ const Verantwoording: FCWithLayout<VeelgesteldeVragenProps> = (props) => {
 
             <article className={styles.faqList}>
               {faqList.content.map((item: any) => {
-                //@TODO, Why does this sometimes return empty strings for the
-                // antwoord key? Does this PR mess up something with promises/async behavior
-                // in getStaticProps?
                 return (
                   <Collapsable
                     key={item._key}
                     id={item._key}
-                    summary={item.vraag}
+                    summary={item.title}
                   >
-                    <PortableText blocks={item.antwoord} />
+                    <PortableText blocks={item.description} />
                   </Collapsable>
                 );
               })}

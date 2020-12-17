@@ -76,7 +76,7 @@ const Over: FCWithLayout<OverProps> = (props) => {
         <MaxWidth>
           <div className={styles.maxwidth}>
             <h2>{over.title}</h2>
-            <PortableText blocks={over.beschrijving} />
+            <PortableText blocks={over.description} />
           </div>
         </MaxWidth>
       </div>
