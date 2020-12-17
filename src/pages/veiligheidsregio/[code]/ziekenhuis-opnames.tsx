@@ -7,8 +7,8 @@ import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
+import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createMunicipalHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/municipal/create-municipal-hospital-admissions-tooltip';
 import { FCWithLayout } from '~/components/layout';
@@ -45,6 +45,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
           safetyRegionName,
         })}
       />
+
       <ContentHeader
         category={siteText.veiligheidsregio_layout.headings.ziekenhuizen}
         title={replaceVariablesInText(text.titel, {
@@ -63,7 +64,6 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
 
       <TwoKpiSection>
         <KpiTile
-          showDataWarning
           title={text.barscale_titel}
           description={text.extra_uitleg}
           metadata={{
@@ -81,29 +81,14 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
         </KpiTile>
       </TwoKpiSection>
 
-      {lastValue && (
-        <LineChartTile
-          showDataWarning
-          metadata={{ source: text.bronnen.rivm }}
-          title={text.linechart_titel}
-          description={text.linechart_description}
-          values={data.results_per_region.values
-            .filter((x) => isFilled(x.hospital_moving_avg_per_region))
-            .map((value) => ({
-              value: value.hospital_moving_avg_per_region,
-              date: value.date_of_report_unix,
-            }))}
-        />
-      )}
-
       <ChoroplethTile
-        showDataWarning
         title={replaceVariablesInText(text.map_titel, {
           safetyRegion: safetyRegionName,
         })}
         description={text.map_toelichting}
         legend={{
-          thresholds: regionThresholds.hospital_admissions.hospital_admissions,
+          thresholds:
+            municipalThresholds.hospital_admissions.hospital_admissions,
           title: siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel,
         }}
         metadata={{
@@ -122,6 +107,20 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
           onSelect={createSelectMunicipalHandler(router, 'ziekenhuis-opnames')}
         />
       </ChoroplethTile>
+
+      {lastValue && (
+        <LineChartTile
+          metadata={{ source: text.bronnen.rivm }}
+          title={text.linechart_titel}
+          description={text.linechart_description}
+          values={data.results_per_region.values
+            .filter((x) => isFilled(x.hospital_moving_avg_per_region))
+            .map((value) => ({
+              value: value.hospital_moving_avg_per_region,
+              date: value.date_of_report_unix,
+            }))}
+        />
+      )}
     </>
   );
 };
