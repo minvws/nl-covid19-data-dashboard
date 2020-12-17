@@ -140,7 +140,7 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
       <LineChartTile
         title={text.linechart_titel}
         description={text.linechart_description}
-        values={dataHospitalIntake.values.map((value: any) => ({
+        values={dataHospitalIntake.values.map((value) => ({
           value: value.moving_average_hospital,
           date: value.date_of_report_unix,
         }))}
