@@ -5,6 +5,7 @@ import text from '~/locale/index';
 export type RegionControlOption = 'municipal' | 'region';
 
 export interface ChartRegionControlsProps {
+  value?: 'municipal' | 'region';
   onChange: (value: RegionControlOption) => void;
 }
 
@@ -20,7 +21,7 @@ const items = [
 ];
 
 export function ChartRegionControls(props: ChartRegionControlsProps) {
-  const { onChange } = props;
+  const { value, onChange } = props;
 
-  return <RadioGroup items={items} onChange={onChange} />;
+  return <RadioGroup items={items} value={value} onChange={onChange} />;
 }

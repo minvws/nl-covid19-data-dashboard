@@ -29,7 +29,7 @@ export function RestrictionsTable(props: RestrictionsTableProps) {
 
   const restrictionsTable = useRestrictionsTable(data);
 
-  const breakpoints = useBreakpoints();
+  const breakpoints = useBreakpoints(true);
 
   const color = useEscalationColor(escalationLevel);
 
@@ -51,9 +51,11 @@ function MobileRestrictionsTable(props: TableProps) {
               <Cell
                 role="rowheader"
                 borderTop={'1px solid black'}
-                width="20em"
                 pt={3}
-                verticalAlign="top"
+                px={2}
+                pb={3}
+                verticalAlign="center"
+                backgroundColor="#F9F9F9"
               >
                 <InlineText fontWeight="bold">
                   {categoryLabels[row.categoryColumn]}
@@ -61,14 +63,14 @@ function MobileRestrictionsTable(props: TableProps) {
               </Cell>
             </Row>
             <Row>
-              <Cell pb={3} verticalAlign="top">
+              <Cell pb={3} verticalAlign="top" pt={2}>
                 <Box display="flex" flexDirection="column">
                   {row.restrictionsColumn.map((value) => (
                     <Box key={value.text} display="flex" flexDirection="row">
                       <Box as="span" flexShrink={0}>
                         {getIcon(value.Icon, color)}
                       </Box>
-                      <Box>{value.text}</Box>
+                      <Box pt="5px">{value.text}</Box>
                     </Box>
                   ))}
                 </Box>
@@ -92,9 +94,9 @@ function DesktopRestrictionsTable(props: TableProps) {
               role="rowheader"
               borderTop={'1px solid black'}
               backgroundColor="#F9F9F9"
-              width="20em"
+              width="12em"
               py={3}
-              px={1}
+              px={2}
               verticalAlign="top"
             >
               <InlineText fontWeight="bold">
@@ -114,7 +116,7 @@ function DesktopRestrictionsTable(props: TableProps) {
                     <Box as="span" flexShrink={0}>
                       {getIcon(value.Icon, color)}
                     </Box>
-                    <Box as="span" ml={1}>
+                    <Box as="span" ml={1} pt="5px">
                       {value.text}
                     </Box>
                   </Box>

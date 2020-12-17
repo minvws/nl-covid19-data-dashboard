@@ -1,8 +1,8 @@
 import Maatregelen from '~/assets/maatregelen.svg';
-import { Spacer } from '~/components-styled/base';
+import { Box, Spacer } from '~/components-styled/base';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiSection } from '~/components-styled/kpi-section';
-import { Heading } from '~/components-styled/typography';
+import { Heading, Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { RestrictionsTable } from '~/components/restrictions/restrictions-table';
@@ -23,8 +23,7 @@ const NationalRestrictions: FCWithLayout<NationalPageProps> = (props) => {
   const effectiveEscalationLevel: EscalationLevel =
     escalationLevel > 4 ? 4 : (escalationLevel as EscalationLevel);
 
-  const key = escalationLevel.toString() as keyof typeof text.maatregelen.headings;
-  const restrictionInfo = text.maatregelen.headings[key];
+  const restrictionInfo = text.maatregelen.headings['landelijk'];
 
   return (
     <>
@@ -34,15 +33,22 @@ const NationalRestrictions: FCWithLayout<NationalPageProps> = (props) => {
       />
 
       <ContentHeader
-        category={text.nationaal_layout.headings.maatregelen}
+        category={text.nationaal_layout.headings.algemeen}
         icon={<Maatregelen fill={theme.colors.restrictions} />}
         title={text.nationaal_maatregelen.titel}
       />
 
       <Spacer mb={3} />
 
-      <KpiSection display="flex" flexDirection="column">
+      <KpiSection flexDirection="column">
         <Heading level={3}>{restrictionInfo.extratoelichting.titel}</Heading>
+        <Box>
+          <Text m={0}>{restrictionInfo.extratoelichting.toelichting}</Text>
+        </Box>
+      </KpiSection>
+
+      <KpiSection display="flex" flexDirection="column">
+        <Heading level={3}>{text.nationaal_maatregelen.tabel_titel}</Heading>
         <RestrictionsTable
           data={data.restrictions.values}
           escalationLevel={effectiveEscalationLevel}

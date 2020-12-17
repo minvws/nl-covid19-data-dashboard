@@ -167,6 +167,10 @@ function SafetyRegionLayout(
                           title={
                             siteText.veiligheidsregio_maatregelen.titel_sidebar
                           }
+                          subtitle={
+                            siteText.veiligheidsregio_maatregelen
+                              .subtitel_sidebar
+                          }
                         />
                       </a>
                     </Link>
