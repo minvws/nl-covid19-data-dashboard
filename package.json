@@ -134,7 +134,6 @@
     "test:ci": "jest --ci",
     "format": "prettier --write **/*.{js,ts,tsx} *.{js,json,md,yml}",
     "lint": "eslint .",
-    "copy-fixtures": "ts-node --project src/tools/tsconfig.json src/tools/test/copy-fixtures.ts",
     "type-check": "yarn compile",
     "compile": "tsc --pretty --noEmit",
     "validate-json": "ts-node --project src/tools/tsconfig.json src/tools/validator/validate-json.ts",
