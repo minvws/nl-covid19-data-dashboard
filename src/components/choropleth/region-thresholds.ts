@@ -35,19 +35,19 @@ const hospitalAdmissionsThresholds: ChoroplethThresholdsValue[] = [
   },
   {
     color: colors.data.scale.blue[1],
-    threshold: 10,
+    threshold: 5,
   },
   {
     color: colors.data.scale.blue[2],
-    threshold: 16,
+    threshold: 10,
   },
   {
     color: colors.data.scale.blue[3],
-    threshold: 24,
+    threshold: 15,
   },
   {
     color: colors.data.scale.blue[4],
-    threshold: 31,
+    threshold: 20,
   },
 ];
 
