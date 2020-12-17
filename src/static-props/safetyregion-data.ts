@@ -6,10 +6,14 @@ import { Regionaal } from '~/types/data.d';
 import safetyRegions from '~/data/index';
 import { sortRegionalTimeSeriesInDataInPlace } from './data-sorting';
 
+import { TALLLanguages } from '~/locale/index';
+import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
+
 export interface ISafetyRegionData {
   data: Regionaal;
   safetyRegionName: string;
   lastGenerated: string;
+  text: TALLLanguages;
 }
 
 interface IProps {
@@ -27,15 +31,15 @@ interface IParams {
   };
 }
 
-/*
- * getSafetyRegionData loads the data for /veiligheidsregio pages.
+/**
+ * getSafetyRegionStaticProps loads the data for /veiligheidsregio pages.
  * It needs to be used as the Next.js `getStaticProps` function.
  *
  * Example:
  * ```ts
  * PostivelyTestedPeople.getLayout = getSafetyRegionLayout();
  *
- * export const getStaticProps = getSafetyRegionData();
+ * export const getStaticProps = getSafetyRegionStaticProps;
  *
  * export default PostivelyTestedPeople;
  * ```
@@ -49,36 +53,39 @@ interface IParams {
  * }
  * ```
  */
-export function getSafetyRegionData() {
-  return function ({ params }: IParams): IProps {
-    const { code } = params;
+export async function getSafetyRegionStaticProps({
+  params,
+}: IParams): Promise<IProps> {
+  const { code } = params;
 
-    // get data for the page
-    const filePath = path.join(process.cwd(), 'public', 'json', `${code}.json`);
-    const fileContents = fs.readFileSync(filePath, 'utf8');
-    const data = JSON.parse(fileContents) as Regionaal;
+  // get data for the page
+  const filePath = path.join(process.cwd(), 'public', 'json', `${code}.json`);
+  const fileContents = fs.readFileSync(filePath, 'utf8');
+  const data = JSON.parse(fileContents) as Regionaal;
 
-    sortRegionalTimeSeriesInDataInPlace(data);
+  sortRegionalTimeSeriesInDataInPlace(data);
 
-    const lastGenerated = data.last_generated;
+  const lastGenerated = data.last_generated;
 
-    const safetyRegionName =
-      safetyRegions.find((r) => r.code === code)?.name || '';
+  const safetyRegionName =
+    safetyRegions.find((r) => r.code === code)?.name || '';
 
-    return {
-      props: {
-        data,
-        safetyRegionName,
-        lastGenerated,
-      },
-    };
+  const text = parseMarkdownInLocale((await import('../locale/index')).default);
+
+  return {
+    props: {
+      data,
+      safetyRegionName,
+      lastGenerated,
+      text,
+    },
   };
 }
 
-/*
+/**
  * getSafetyRegionPaths creates an array of all the allowed
  * `/veiligheidsregio/[code]` routes. This should be used
- * together with `getSafetyRegionData`.
+ * together with `getSafetyRegionStaticProps`.
  */
 export function getSafetyRegionPaths(): () => IPaths {
   return function () {

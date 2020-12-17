@@ -5,27 +5,25 @@ import Getest from '~/assets/test.svg';
 import { Anchor } from '~/components-styled/anchor';
 import { Box } from '~/components-styled/base';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
+import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { MultipleLineChartTile } from '~/components-styled/multiple-line-chart-tile';
+import { PageBarScale } from '~/components-styled/page-barscale';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
-import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/use-safety-region-legenda-data';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
+import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
-import { ContentHeader } from '~/components/contentHeader';
-import { ContentHeader_weekRangeHack } from '~/components/contentHeader_weekRangeHack';
 import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { SEOHead } from '~/components/seoHead';
-import { PositivelyTestedPeopleBarScale } from '~/components/veiligheidsregio/positive-tested-people-barscale';
 import regionCodeToMunicipalCodeLookup from '~/data/regionCodeToMunicipalCodeLookup';
-import siteText from '~/locale/index';
 import {
-  getSafetyRegionData,
   getSafetyRegionPaths,
+  getSafetyRegionStaticProps,
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
 import { colors } from '~/style/theme';
@@ -35,11 +33,12 @@ import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
-const text = siteText.veiligheidsregio_positief_geteste_personen;
-const ggdText = siteText.veiligheidsregio_positief_geteste_personen_ggd;
-
 const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
-  const { data, safetyRegionName } = props;
+  const { data, safetyRegionName, text: siteText } = props;
+
+  const text = siteText.veiligheidsregio_positief_geteste_personen;
+  const ggdText = siteText.veiligheidsregio_positief_geteste_personen_ggd;
+
   const router = useRouter();
 
   const resultsPerRegion: ResultsPerRegion = data.results_per_region;
@@ -47,7 +46,6 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
   const ggdData = data.ggd.last_value;
   const ggdValues = data.ggd.values;
 
-  const legendItems = useSafetyRegionLegendaData('positive_tested_people');
   const municipalCodes = regionCodeToMunicipalCodeLookup[data.code];
   const selectedMunicipalCode = municipalCodes ? municipalCodes[0] : undefined;
 
@@ -70,9 +68,10 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: resultsPerRegion.last_value.date_of_report_unix,
-          dateInsertedUnix: resultsPerRegion.last_value.date_of_insertion_unix,
-          dataSource: text.bron,
+          dateInfo: resultsPerRegion.last_value.date_of_report_unix,
+          dateOfInsertionUnix:
+            resultsPerRegion.last_value.date_of_insertion_unix,
+          dataSources: [text.bronnen.rivm],
         }}
         reference={text.reference}
       />
@@ -82,12 +81,16 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           title={text.barscale_titel}
           metadata={{
             date: resultsPerRegion.last_value.date_of_report_unix,
-            source: text.bron,
+            source: text.bronnen.rivm,
           }}
         >
-          <PositivelyTestedPeopleBarScale
-            data={resultsPerRegion}
-            showAxis={true}
+          <PageBarScale
+            data={data}
+            scope="vr"
+            metricName="results_per_region"
+            metricProperty="infected_increase_per_region"
+            localeTextKey="veiligheidsregio_positief_geteste_personen"
+            differenceKey="results_per_region__infected_increase_per_region"
           />
           <Text>{text.barscale_toelichting}</Text>
         </KpiTile>
@@ -96,7 +99,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           title={text.kpi_titel}
           metadata={{
             date: resultsPerRegion.last_value.date_of_report_unix,
-            source: text.bron,
+            source: text.bronnen.rivm,
           }}
         >
           <KpiValue
@@ -104,8 +107,17 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
             absolute={Math.round(
               resultsPerRegion.last_value.total_reported_increase_per_region
             )}
+            difference={
+              data.difference
+                .results_per_region__total_reported_increase_per_region
+            }
           />
-          <Text>{text.kpi_toelichting}</Text>
+
+          <Text
+            as="div"
+            dangerouslySetInnerHTML={{ __html: text.kpi_toelichting }}
+          />
+
           <Box>
             <Heading level={4} fontSize={'1.2em'} mt={'1.5em'} mb={0}>
               <span
@@ -137,7 +149,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           value: value.infected_increase_per_region,
           date: value.date_of_report_unix,
         }))}
-        metadata={{ source: text.bron }}
+        metadata={{ source: text.bronnen.rivm }}
       />
 
       <ChoroplethTile
@@ -146,41 +158,43 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
         })}
         metadata={{
           date: resultsPerRegion.last_value.date_of_report_unix,
-          source: text.bron,
+          source: text.bronnen.rivm,
         }}
         description={text.map_toelichting}
-        legend={
-          legendItems // this data value should probably not be optional
-            ? {
-                title:
-                  siteText.positief_geteste_personen.chloropleth_legenda.titel,
-                items: legendItems,
-              }
-            : undefined
-        }
+        legend={{
+          title: siteText.positief_geteste_personen.chloropleth_legenda.titel,
+          thresholds:
+            regionThresholds.positive_tested_people.positive_tested_people,
+        }}
       >
         <MunicipalityChoropleth
           selected={selectedMunicipalCode}
           highlightSelection={false}
           metricName="positive_tested_people"
-          tooltipContent={createPositiveTestedPeopleMunicipalTooltip(router)}
+          metricProperty="positive_tested_people"
+          tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
+            createSelectMunicipalHandler(router)
+          )}
           onSelect={createSelectMunicipalHandler(router)}
         />
       </ChoroplethTile>
 
-      <ContentHeader_weekRangeHack
+      <ContentHeader
+        id="ggd"
         title={replaceVariablesInText(ggdText.titel, {
           safetyRegion: safetyRegionName,
         })}
-        id="ggd"
+        skipLinkAnchor={true}
         icon={<Afname />}
         subtitle={ggdText.toelichting}
         metadata={{
           datumsText: ggdText.datums,
           dateOfInsertionUnix: ggdData.date_of_insertion_unix,
-          weekStartUnix: ggdData.week_start_unix,
-          weekEndUnix: ggdData.week_end_unix,
-          dataSource: ggdText.bron,
+          dateInfo: {
+            weekStartUnix: ggdData.week_start_unix,
+            weekEndUnix: ggdData.week_end_unix,
+          },
+          dataSources: [ggdText.bronnen.rivm],
         }}
         reference={text.reference}
       />
@@ -190,22 +204,25 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           title={ggdText.totaal_getest_week_titel}
           metadata={{
             date: [ggdData.week_start_unix, ggdData.week_end_unix],
-            source: ggdText.bron,
+            source: ggdText.bronnen.rivm,
           }}
         >
-          <KpiValue absolute={ggdData.tested_total} />
+          <KpiValue
+            absolute={ggdData.tested_total}
+            difference={data.difference.ggd__tested_total}
+          />
           <Text>{ggdText.totaal_getest_week_uitleg}</Text>
         </KpiTile>
         <KpiTile
           title={ggdText.positief_getest_week_titel}
           metadata={{
             date: [ggdData.week_start_unix, ggdData.week_end_unix],
-            source: ggdText.bron,
+            source: ggdText.bronnen.rivm,
           }}
         >
           <KpiValue
-            absolute={ggdData.infected}
             percentage={ggdData.infected_percentage}
+            difference={data.difference.ggd__infected_percentage}
           />
           <Text>{ggdText.positief_getest_week_uitleg}</Text>
           <Text>
@@ -256,7 +273,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           return `${formatPercentage(y)}%`;
         }}
         metadata={{
-          source: ggdText.bron,
+          source: ggdText.bronnen.rivm,
         }}
       />
 
@@ -293,7 +310,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           },
         ]}
         metadata={{
-          source: ggdText.bron,
+          source: ggdText.bronnen.rivm,
         }}
       />
     </>
@@ -302,7 +319,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
 
 PostivelyTestedPeople.getLayout = getSafetyRegionLayout();
 
-export const getStaticProps = getSafetyRegionData();
+export const getStaticProps = getSafetyRegionStaticProps;
 export const getStaticPaths = getSafetyRegionPaths();
 
 export default PostivelyTestedPeople;

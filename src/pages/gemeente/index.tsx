@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
-import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
+import { MunicipalityNavigationMap } from '~/components/choropleth/municipality-navigation-map';
 import {
   createSelectMunicipalHandler,
   MunicipalitySelectionHandler,
@@ -22,12 +22,10 @@ const tooltipContent = (selectedHandler: MunicipalitySelectionHandler) => {
     };
 
     return (
-      context && (
-        <TooltipContent
-          title={context.gemnaam}
-          onSelect={onSelectMunicipal}
-        ></TooltipContent>
-      )
+      <TooltipContent
+        title={context.gemnaam}
+        onSelect={onSelectMunicipal}
+      ></TooltipContent>
     );
   };
 };
@@ -59,13 +57,9 @@ const Municipality: FCWithLayout<any> = () => {
           <p>{text.gemeente_index.selecteer_toelichting}</p>
         </div>
         <div className="map-container">
-          <MunicipalityChoropleth
-            isSelectorMap
+          <MunicipalityNavigationMap
             tooltipContent={tooltipContent(onSelectMunicipal)}
-            onSelect={createSelectMunicipalHandler(
-              router,
-              'positief-geteste-mensen'
-            )}
+            onSelect={createSelectMunicipalHandler(router)}
           />
         </div>
       </article>

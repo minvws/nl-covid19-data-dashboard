@@ -1,7 +1,5 @@
-import {
-  ChoroplethLegenda,
-  LegendaItem,
-} from '~/components-styled/choropleth-legenda';
+import { ChoroplethLegenda } from '~/components-styled/choropleth-legenda';
+import { ChoroplethThresholdsValue } from '~/components/choropleth/shared';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { Box } from './base';
 import {
@@ -25,34 +23,39 @@ interface DataProps {
 interface ChoroplethTileProps extends DataProps {
   title: string;
   description?: string | React.ReactNode;
-  onChangeControls?: (v: RegionControlOption) => void;
+  onChartRegionChange?: (v: RegionControlOption) => void;
+  chartRegion?: 'municipal' | 'region';
   children: React.ReactNode;
   legend?: {
     title: string;
-    items: LegendaItem[];
+    thresholds: ChoroplethThresholdsValue[];
   };
   metadata?: MetadataProps;
-  showDataWarning?: boolean;
 }
 
 export function ChoroplethTile<T>({
   title,
   description,
-  onChangeControls,
+  onChartRegionChange,
+  chartRegion,
   legend,
   children,
   metadata,
-  showDataWarning,
 }: ChoroplethTileProps) {
   const breakpoints = useBreakpoints();
   const legendaComponent = legend && (
-    <ChoroplethLegenda items={legend.items} title={legend.title} />
+    <ChoroplethLegenda thresholds={legend.thresholds} title={legend.title} />
   );
 
   return (
-    <ChartTileContainer metadata={metadata} showDataWarning={showDataWarning}>
-      <Box display="flex" flexDirection={{ _: 'column', lg: 'row' }}>
-        <Box mb={3} flex={{ lg: 1 }}>
+    <ChartTileContainer metadata={metadata}>
+      <Box
+        display="flex"
+        flexDirection={{ _: 'column', lg: 'row' }}
+        m={0}
+        as="figure"
+      >
+        <Box mb={3} flex={{ lg: 1 }} as="figcaption">
           <Box mb={[0, 2]}>
             <Heading level={3}>{title}</Heading>
             {typeof description === 'string' ? (
@@ -60,12 +63,15 @@ export function ChoroplethTile<T>({
             ) : (
               description
             )}
-            {onChangeControls && (
+            {onChartRegionChange && (
               <Box
                 display="flex"
                 justifyContent={{ _: 'center', lg: 'flex-start' }}
               >
-                <ChartRegionControls onChange={onChangeControls} />
+                <ChartRegionControls
+                  value={chartRegion}
+                  onChange={onChartRegionChange}
+                />
               </Box>
             )}
           </Box>

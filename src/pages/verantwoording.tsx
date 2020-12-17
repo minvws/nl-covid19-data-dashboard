@@ -1,13 +1,12 @@
 import fs from 'fs';
 import Head from 'next/head';
 import path from 'path';
-import { FCWithLayout, getLayoutWithMetadata } from '~/components/layout';
-import { MaxWidth } from '~/components/maxWidth';
-import siteText, { TALLLanguages } from '~/locale/index';
-import { MDToHTMLString } from '~/utils/MDToHTMLString';
-import { ensureUniqueSkipLinkIds, getSkipLinkId } from '~/utils/skipLinks';
-import styles from './over.module.scss';
 import { Collapsable } from '~/components-styled/collapsable';
+import { FCWithLayout, getLayoutWithMetadata } from '~/components/layout';
+import { MaxWidth } from '~/components-styled/max-width';
+import siteText, { TALLLanguages } from '~/locale/index';
+import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
+import styles from './over.module.scss';
 
 import { groq } from 'next-sanity';
 import {
@@ -43,18 +42,7 @@ const cijferVerantwoordingQuery = groq`
 `;
 
 export async function getStaticProps(): Promise<StaticProps> {
-  const text = (await import('../locale/index')).default;
-  const serializedContent = text.verantwoording.cijfers.map(
-    (item: ICijfer) => ({
-      ...item,
-      id: getSkipLinkId(item.cijfer),
-      verantwoording: MDToHTMLString(item.verantwoording),
-    })
-  );
-
-  ensureUniqueSkipLinkIds(serializedContent);
-
-  text.verantwoording.cijfers = serializedContent;
+  const text = parseMarkdownInLocale((await import('../locale/index')).default);
 
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
   const fileContents = fs.readFileSync(filePath, 'utf8');
@@ -106,8 +94,8 @@ const Verantwoording: FCWithLayout<VerantwoordingProps> = (props) => {
             <h2>{verantwoordingList.title}</h2>
             <PortableText blocks={verantwoordingList.beschrijving} />
             <article className={styles.faqList}>
-              {verantwoordingList.content.map((item: any) =>
-                item.titel && item.verantwoording ? (
+              {verantwoordingList.content.map((item: any) => {
+                return item.titel && item.verantwoording ? (
                   <Collapsable
                     key={item._key}
                     id={item._key}
@@ -115,14 +103,15 @@ const Verantwoording: FCWithLayout<VerantwoordingProps> = (props) => {
                   >
                     <PortableText blocks={item.verantwoording} />
                   </Collapsable>
-                ) : null
-              )}
+                ) : null;
+              })}
             </article>
           </div>
         </MaxWidth>
       </div>
     </>
   );
+  ``;
 };
 
 const metadata = {

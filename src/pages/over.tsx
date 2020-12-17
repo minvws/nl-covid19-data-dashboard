@@ -2,9 +2,9 @@ import fs from 'fs';
 import Head from 'next/head';
 import path from 'path';
 import { FCWithLayout, getLayoutWithMetadata } from '~/components/layout';
-import { MaxWidth } from '~/components/maxWidth';
+import { MaxWidth } from '~/components-styled/max-width';
 import siteText, { TALLLanguages } from '~/locale/index';
-import { MDToHTMLString } from '~/utils/MDToHTMLString';
+import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
 import styles from './over.module.scss';
 
 import { groq } from 'next-sanity';
@@ -35,9 +35,7 @@ const overQuery = groq`
 `;
 
 export async function getStaticProps(): Promise<StaticProps> {
-  const text = (await import('../locale/index')).default;
-
-  text.over_beschrijving.text = MDToHTMLString(text.over_beschrijving.text);
+  const text = parseMarkdownInLocale((await import('../locale/index')).default);
 
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
   const fileContents = fs.readFileSync(filePath, 'utf8');

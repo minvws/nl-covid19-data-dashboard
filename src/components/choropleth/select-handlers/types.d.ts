@@ -1,10 +1,11 @@
 export type PageName =
   | 'positief-geteste-mensen'
   | 'ziekenhuis-opnames'
-  | 'rioolwater';
+  | 'rioolwater'
+  | 'gehandicaptenzorg';
 
 export type RegioPageName =
   | PageName
-  | 'verpleeghuis-positief-geteste-personen'
-  | 'verpleeghuis-besmette-locaties'
-  | 'verpleeghuis-sterfte';
+  | 'verpleeghuiszorg'
+  | 'thuiswonende-ouderen'
+  | 'maatregelen';

@@ -2,10 +2,10 @@ import fs from 'fs';
 import Head from 'next/head';
 import path from 'path';
 import { FCWithLayout, getLayoutWithMetadata } from '~/components/layout';
-import { MaxWidth } from '~/components/maxWidth';
+import { MaxWidth } from '~/components-styled/max-width';
 import siteText, { TALLLanguages } from '~/locale/index';
-import { MDToHTMLString } from '~/utils/MDToHTMLString';
-import { ensureUniqueSkipLinkIds, getSkipLinkId } from '~/utils/skipLinks';
+import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
+
 import styles from './over.module.scss';
 import { Collapsable } from '~/components-styled/collapsable';
 
@@ -43,19 +43,7 @@ const faqQuery = groq`
 `;
 
 export async function getStaticProps(): Promise<StaticProps> {
-  const text: TALLLanguages = (await import('../locale/index')).default;
-  const serializedContent = text.over_veelgestelde_vragen.vragen.map(function (
-    item: IVraagEnAntwoord
-  ) {
-    return {
-      ...item,
-      id: getSkipLinkId(item.vraag),
-      antwoord: MDToHTMLString(item.antwoord),
-    };
-  });
-
-  ensureUniqueSkipLinkIds(serializedContent);
-  text.over_veelgestelde_vragen.vragen = serializedContent;
+  const text = parseMarkdownInLocale((await import('../locale/index')).default);
 
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
   const fileContents = fs.readFileSync(filePath, 'utf8');

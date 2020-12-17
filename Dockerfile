@@ -1,4 +1,4 @@
-# Stage 0 - Install dependancies
+# Stage 0 - Install dependencies
 FROM node:14 as react-build-base
 WORKDIR /app
 COPY package.json yarn.lock ./

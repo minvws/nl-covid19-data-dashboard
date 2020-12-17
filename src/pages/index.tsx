@@ -1,14 +1,18 @@
-import css from '@styled-system/css';
 import fs from 'fs';
 import { useRouter } from 'next/router';
 import path from 'path';
 import { useState } from 'react';
-import ExternalLink from '~/assets/external-link.svg';
 import Notification from '~/assets/notification.svg';
+import { AnchorTile } from '~/components-styled/anchor-tile';
+import { Box, Spacer } from '~/components-styled/base';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
+import { CategoryHeading } from '~/components-styled/content-header';
 import { HeadingWithIcon } from '~/components-styled/heading-with-icon';
-import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/use-safety-region-legenda-data';
+import { MessageTile } from '~/components-styled/message-tile';
+import { Text } from '~/components-styled/typography';
+import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
+import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
@@ -21,9 +25,8 @@ import { TALLLanguages } from '~/locale/index';
 import theme from '~/style/theme';
 import { EscalationLevels, National, Regions } from '~/types/data';
 import { assert } from '~/utils/assert';
-import { MDToHTMLString } from '~/utils/MDToHTMLString';
+import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import styles from './index.module.scss';
 import { EscalationMapLegenda } from './veiligheidsregio';
 
 interface StaticProps {
@@ -57,38 +60,39 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
     'municipal'
   );
 
-  const legendItems = useSafetyRegionLegendaData('positive_tested_people');
-
   return (
     <>
-      <HeadingWithIcon
-        icon={<Notification color={theme.colors.notification} />}
-        title={text.laatste_ontwikkelingen.title}
-        headingLevel={2}
-      />
-      <article
-        className={styles.notification}
-        css={css({ mb: 4, ml: [-4, null, 0], mr: [-4, null, 0] })}
+      <Box mb={3}>
+        <CategoryHeading level={1} hide={true}>
+          {text.nationaal_layout.headings.algemeen}
+        </CategoryHeading>
+        <HeadingWithIcon
+          icon={<Notification color={theme.colors.notification} />}
+          title={text.laatste_ontwikkelingen.title}
+          headingLevel={2}
+        />
+      </Box>
+      <AnchorTile
+        title={text.notificatie.titel}
+        href={text.notificatie.link.href}
+        label={text.notificatie.link.text}
+        external
+        shadow
       >
-        <div className={styles.textgroup}>
-          <h3 className={styles.header}>{text.notificatie.titel}</h3>
-          <p>
-            {replaceVariablesInText(
-              text.notificatie.bericht,
-              escalationLevelCounts
-            )}
-          </p>
-        </div>
-        <a
-          className={styles.link}
-          href={text.notificatie.link.href}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <ExternalLink />
-          <span>{text.notificatie.link.text}</span>
-        </a>
-      </article>
+        <Text>
+          {replaceVariablesInText(
+            text.notificatie.bericht,
+            escalationLevelCounts
+          )}
+        </Text>
+      </AnchorTile>
+
+      {text.regionaal_index.belangrijk_bericht && (
+        <>
+          <Spacer mt={4} />
+          <MessageTile message={text.regionaal_index.belangrijk_bericht} />
+        </>
+      )}
 
       <ChoroplethTile
         title={text.veiligheidsregio_index.selecteer_titel}
@@ -105,9 +109,11 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
       >
         <SafetyRegionChoropleth
           metricName="escalation_levels"
-          metricValueName="escalation_level"
-          onSelect={createSelectRegionHandler(router)}
-          tooltipContent={escalationTooltip(router)}
+          metricProperty="escalation_level"
+          onSelect={createSelectRegionHandler(router, 'maatregelen')}
+          tooltipContent={escalationTooltip(
+            createSelectRegionHandler(router, 'maatregelen')
+          )}
         />
       </ChoroplethTile>
 
@@ -117,30 +123,37 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
           date:
             data.infected_people_delta_normalized.last_value
               .date_of_report_unix,
-          source: text.positief_geteste_personen.bron,
+          source: text.positief_geteste_personen.bronnen.rivm,
         }}
         description={text.positief_geteste_personen.map_toelichting}
-        onChangeControls={setSelectedMap}
-        legend={
-          legendItems // this data value should probably not be optional
-            ? {
-                title: text.positief_geteste_personen.chloropleth_legenda.titel,
-                items: legendItems,
-              }
-            : undefined
-        }
+        onChartRegionChange={setSelectedMap}
+        chartRegion={selectedMap}
+        legend={{
+          thresholds:
+            selectedMap === 'municipal'
+              ? municipalThresholds.positive_tested_people
+                  .positive_tested_people
+              : regionThresholds.positive_tested_people.positive_tested_people,
+          title: text.positief_geteste_personen.chloropleth_legenda.titel,
+        }}
       >
         {selectedMap === 'municipal' && (
           <MunicipalityChoropleth
             metricName="positive_tested_people"
-            tooltipContent={createPositiveTestedPeopleMunicipalTooltip(router)}
+            metricProperty="positive_tested_people"
+            tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
+              createSelectMunicipalHandler(router)
+            )}
             onSelect={createSelectMunicipalHandler(router)}
           />
         )}
         {selectedMap === 'region' && (
           <SafetyRegionChoropleth
             metricName="positive_tested_people"
-            tooltipContent={createPositiveTestedPeopleRegionalTooltip(router)}
+            metricProperty="positive_tested_people"
+            tooltipContent={createPositiveTestedPeopleRegionalTooltip(
+              createSelectRegionHandler(router)
+            )}
             onSelect={createSelectRegionHandler(router)}
           />
         )}
@@ -149,7 +162,7 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
   );
 };
 
-Home.getLayout = getNationalLayout();
+Home.getLayout = getNationalLayout;
 
 /**
  * Calculate the counts of regions with a certain escalation level
@@ -180,13 +193,7 @@ const getEscalationCounts = (
 };
 
 export async function getStaticProps(): Promise<StaticProps> {
-  const text = (await import('../locale/index')).default;
-
-  const serializedContent = MDToHTMLString(
-    text.veiligheidsregio_index.selecteer_toelichting
-  );
-
-  text.veiligheidsregio_index.selecteer_toelichting = serializedContent;
+  const text = parseMarkdownInLocale((await import('../locale/index')).default);
 
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
   const fileContents = fs.readFileSync(filePath, 'utf8');

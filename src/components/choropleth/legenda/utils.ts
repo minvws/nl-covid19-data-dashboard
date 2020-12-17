@@ -1,21 +1,23 @@
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { ChoroplethThresholds, TRegionMetricName } from '../shared';
+import { ChoroplethThresholdsValue } from '../shared';
+import { get } from 'lodash';
+import { assert } from '~/utils/assert';
+import { isDefined } from 'ts-is-present';
 
-export function getSelectedThreshold(
-  metricName?: TRegionMetricName,
-  metricValueName?: string
+export function getDataThresholds<T>(
+  thresholdData: T,
+  metricName: keyof T,
+  metricProperty = '__USE_METRIC_NAME_THRESHOLD_DATA__'
 ) {
-  if (!metricName) {
-    return;
-  }
+  const thresholds =
+    get(thresholdData, [metricName, metricProperty]) ||
+    thresholdData[metricName];
 
-  // Even if a metricValueName is passed in, there's not necessarily
-  // a threshold defined for this. In that case we fall back to the threshold
-  // that exists for the metric name.
-  const thresholdInfo =
-    (metricValueName
-      ? (regionThresholds as any)?.[metricName]?.[metricValueName]
-      : regionThresholds[metricName]) ?? regionThresholds[metricName];
+  assert(
+    thresholds,
+    `No thresholds are defined for ${[metricName, metricProperty]
+      .filter(isDefined)
+      .join(':')}`
+  );
 
-  return thresholdInfo as ChoroplethThresholds;
+  return thresholds as ChoroplethThresholdsValue[];
 }

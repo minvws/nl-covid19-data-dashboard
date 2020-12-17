@@ -1,23 +1,32 @@
-import { useEffect, useRef } from 'react';
+import { RefObject, useEffect, useRef } from 'react';
 
-export function useOnClickOutside<T extends HTMLElement>(
-  ref: React.RefObject<T>,
+export function useOnClickOutside<T extends RefObject<Element>>(
+  ref: T[],
   handler: (event: MouseEvent | TouchEvent) => void
 ) {
   const handlerRef = useRef(handler);
   handlerRef.current = handler;
 
   useEffect(() => {
-    function listener(event: MouseEvent | TouchEvent) {
-      // Do nothing if clicking ref's element or descendent elements
-      if (
-        !ref.current ||
-        (event.target !== null && ref.current.contains(event.target as Node))
-      ) {
-        return;
-      }
+    const refs = Array.isArray(ref) ? ref : [ref];
 
-      handlerRef.current(event);
+    function listener(event: MouseEvent | TouchEvent) {
+      const clickedInsideRef = refs.find((ref) => {
+        let el = ref.current as Node | null;
+        /**
+         * IE11 does not support `.contains` on SVG elements. We'll traverse the
+         * DOM to find the first parent which does support that method.
+         */
+        while (el && !el.contains && el !== document.body) {
+          el = el.parentNode;
+        }
+
+        return el?.contains(event.target as Node);
+      });
+
+      if (!clickedInsideRef) {
+        handlerRef.current(event);
+      }
     }
 
     document.addEventListener('mousedown', listener);

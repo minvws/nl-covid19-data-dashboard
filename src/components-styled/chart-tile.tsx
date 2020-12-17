@@ -5,13 +5,13 @@ import { Box } from './base';
 import { ChartTileContainer } from './chart-tile-container';
 import { ChartTimeControls } from './chart-time-controls';
 import { MetadataProps } from './metadata';
+import { Heading } from './typography';
 
 interface ChartTileProps {
   children: React.ReactNode;
   metadata: MetadataProps;
   title: string;
   description?: React.ReactNode;
-  showDataWarning?: boolean;
 }
 
 interface ChartTileWithTimeframeProps extends Omit<ChartTileProps, 'children'> {
@@ -25,10 +25,9 @@ export function ChartTile({
   description,
   metadata,
   children,
-  showDataWarning,
 }: ChartTileProps) {
   return (
-    <ChartTileContainer metadata={metadata} showDataWarning={showDataWarning}>
+    <ChartTileContainer metadata={metadata}>
       <ChartTileHeader title={title} description={description} />
       {children}
     </ChartTileContainer>
@@ -41,7 +40,6 @@ export function ChartTileWithTimeframe({
   metadata,
   timeframeOptions = ['all', '5weeks', 'week'],
   timeframeInitialValue = '5weeks',
-  showDataWarning,
   children,
 }: ChartTileWithTimeframeProps) {
   const [timeframe, setTimeframe] = useState<TimeframeOption>(
@@ -49,7 +47,7 @@ export function ChartTileWithTimeframe({
   );
 
   return (
-    <ChartTileContainer metadata={metadata} showDataWarning={showDataWarning}>
+    <ChartTileContainer metadata={metadata}>
       <ChartTileHeader
         title={title}
         description={description}
@@ -79,11 +77,11 @@ function ChartTileHeader({
     <Box
       mb={3}
       display="flex"
-      flexDirection={{ _: 'column', xl: 'row' }}
+      flexDirection={{ _: 'column', lg: 'row' }}
       justifyContent="space-between"
     >
       <div css={css({ mb: [3, null, null, null, 0], mr: [0, 0, 2] })}>
-        <h3>{title}</h3>
+        <Heading level={3}>{title}</Heading>
         {description &&
           (typeof description === 'string' ? (
             <p css={css({ m: 0 })}>{description}</p>

@@ -3,10 +3,14 @@ import Head from 'next/head';
 import path from 'path';
 
 import { FCWithLayout, getLayoutWithMetadata } from '~/components/layout';
-import { MaxWidth } from '~/components/maxWidth';
+
+import { MaxWidth } from '~/components-styled/max-width';
 import siteText from '~/locale/index';
-import { MDToHTMLString } from '~/utils/MDToHTMLString';
+import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
+
 import styles from './over.module.scss';
+import { Collapsable } from '~/components-styled/collapsable';
+import { getSkipLinkId } from '~/utils/skipLinks';
 
 import { groq } from 'next-sanity';
 import {
@@ -35,11 +39,7 @@ const risicoQuery = groq`
 `;
 
 export async function getStaticProps(): Promise<StaticProps> {
-  const text = (await import('../locale/index')).default;
-
-  text.over_risiconiveaus.toelichting = MDToHTMLString(
-    text.over_risiconiveaus.toelichting
-  );
+  const text = parseMarkdownInLocale((await import('../locale/index')).default);
 
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
   const fileContents = fs.readFileSync(filePath, 'utf8');
@@ -81,6 +81,21 @@ const OverRisicoNiveaus: FCWithLayout<OverRisiconiveausProps> = (props) => {
           <div className={styles.maxwidth}>
             <h2>{risico.title}</h2>
             <PortableText blocks={risico.beschrijving} />
+
+            <article className={styles.faqList}>
+              {text.over_risiconiveaus.vragen.map((item) => {
+                const id = getSkipLinkId(item.vraag);
+                return item.vraag ? (
+                  <Collapsable key={id} id={id} summary={item.vraag}>
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: item.antwoord,
+                      }}
+                    />
+                  </Collapsable>
+                ) : null;
+              })}
+            </article>
           </div>
         </MaxWidth>
       </div>

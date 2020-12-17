@@ -5,19 +5,19 @@ import {
   ChartTile,
   ChartTileWithTimeframe,
 } from '~/components-styled/chart-tile';
+import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { Select } from '~/components-styled/select';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { BarChart } from '~/components/charts';
-import { ContentHeader_weekRangeHack } from '~/components/contentHeader_weekRangeHack';
 import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { SewerWaterChart } from '~/components/lineChart/sewer-water-chart';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import {
-  getSafetyRegionData,
+  getSafetyRegionStaticProps,
   getSafetyRegionPaths,
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
@@ -67,7 +67,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
           safetyRegionName,
         })}
       />
-      <ContentHeader_weekRangeHack
+      <ContentHeader
         category={siteText.veiligheidsregio_layout.headings.vroege_signalen}
         title={replaceVariablesInText(text.titel, {
           safetyRegion: safetyRegionName,
@@ -76,10 +76,12 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          weekStartUnix: sewerAverages.last_value.week_start_unix,
-          weekEndUnix: sewerAverages.last_value.week_end_unix,
+          dateInfo: {
+            weekStartUnix: sewerAverages.last_value.week_start_unix,
+            weekEndUnix: sewerAverages.last_value.week_end_unix,
+          },
           dateOfInsertionUnix: sewerAverages.last_value.date_of_insertion_unix,
-          dataSource: text.bron,
+          dataSources: [text.bronnen.rivm],
         }}
         reference={text.reference}
       />
@@ -94,12 +96,14 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
                 sewerAverages.last_value.week_start_unix,
                 sewerAverages.last_value.week_end_unix,
               ],
-              source: text.bron,
+              source: text.bronnen.rivm,
             }}
           >
             <KpiValue
+              data-cy="riool_normalized"
               absolute={barScaleData.value}
               valueAnnotation={siteText.waarde_annotaties.riool_normalized}
+              difference={data.difference.sewer__average}
             />
           </KpiTile>
           <KpiTile
@@ -113,10 +117,11 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
                 sewerAverages.last_value.week_start_unix,
                 sewerAverages.last_value.week_end_unix,
               ],
-              source: text.bron,
+              source: text.bronnen.rivm,
             }}
           >
             <KpiValue
+              data-cy="total_installation_count"
               absolute={data.sewer.last_value.total_installation_count}
             />
           </KpiTile>
@@ -126,7 +131,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
       {lineChartData && (
         <ChartTileWithTimeframe
           title={text.linechart_titel}
-          metadata={{ source: text.bron }}
+          metadata={{ source: text.bronnen.rivm }}
           timeframeOptions={['all', '5weeks']}
           timeframeInitialValue="all"
         >
@@ -174,7 +179,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
               sewerAverages.last_value.week_start_unix,
               sewerAverages.last_value.week_end_unix,
             ],
-            source: text.bron,
+            source: text.bronnen.rivm,
           }}
         >
           <BarChart
@@ -191,7 +196,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
 
 SewerWater.getLayout = getSafetyRegionLayout();
 
-export const getStaticProps = getSafetyRegionData();
+export const getStaticProps = getSafetyRegionStaticProps;
 export const getStaticPaths = getSafetyRegionPaths();
 
 export default SewerWater;

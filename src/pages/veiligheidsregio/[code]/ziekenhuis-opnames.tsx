@@ -1,26 +1,27 @@
 import { useRouter } from 'next/router';
+import { isFilled } from 'ts-is-present';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
+import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { useMunicipalLegendaData } from '~/components/choropleth/legenda/hooks/use-municipal-legenda-data';
+import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createMunicipalHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/municipal/create-municipal-hospital-admissions-tooltip';
-import { ContentHeader } from '~/components/contentHeader';
 import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { SEOHead } from '~/components/seoHead';
 import regionCodeToMunicipalCodeLookup from '~/data/regionCodeToMunicipalCodeLookup';
 import siteText from '~/locale/index';
 import {
-  getSafetyRegionData,
   getSafetyRegionPaths,
+  getSafetyRegionStaticProps,
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
-import { ResultsPerRegion } from '~/types/data.d';
+import { getLastFilledValue } from '~/utils/get-last-filled-value';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text = siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
@@ -29,10 +30,8 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
   const { data, safetyRegionName } = props;
   const router = useRouter();
 
-  const resultsPerRegion: ResultsPerRegion | undefined =
-    data?.results_per_region;
+  const lastValue = getLastFilledValue(data, 'results_per_region');
 
-  const legendItems = useMunicipalLegendaData('hospital_admissions');
   const municipalCodes = regionCodeToMunicipalCodeLookup[data.code];
   const selectedMunicipalCode = municipalCodes ? municipalCodes[0] : undefined;
 
@@ -46,6 +45,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
           safetyRegionName,
         })}
       />
+
       <ContentHeader
         category={siteText.veiligheidsregio_layout.headings.ziekenhuizen}
         title={replaceVariablesInText(text.titel, {
@@ -55,76 +55,79 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: resultsPerRegion.last_value.date_of_report_unix,
-          dateInsertedUnix: resultsPerRegion.last_value.date_of_insertion_unix,
-          dataSource: text.bron,
+          dateInfo: lastValue.date_of_report_unix,
+          dateOfInsertionUnix: lastValue.date_of_insertion_unix,
+          dataSources: [text.bronnen.rivm],
         }}
         reference={text.reference}
       />
 
       <TwoKpiSection>
         <KpiTile
-          showDataWarning
           title={text.barscale_titel}
           description={text.extra_uitleg}
           metadata={{
-            date: resultsPerRegion.last_value.date_of_report_unix,
-            source: text.bron,
+            date: lastValue.date_of_report_unix,
+            source: text.bronnen.rivm,
           }}
         >
           <KpiValue
-            absolute={
-              resultsPerRegion.last_value.hospital_moving_avg_per_region
+            data-cy="hospital_moving_avg_per_region"
+            absolute={lastValue.hospital_moving_avg_per_region}
+            difference={
+              data.difference.results_per_region__hospital_moving_avg_per_region
             }
           />
         </KpiTile>
       </TwoKpiSection>
 
-      {resultsPerRegion && (
-        <LineChartTile
-          showDataWarning
-          metadata={{ source: text.bron }}
-          title={text.linechart_titel}
-          description={text.linechart_description}
-          values={resultsPerRegion.values.map((value: any) => ({
-            value: value.hospital_moving_avg_per_region,
-            date: value.date_of_report_unix,
-          }))}
-        />
-      )}
-
       <ChoroplethTile
-        showDataWarning
         title={replaceVariablesInText(text.map_titel, {
           safetyRegion: safetyRegionName,
         })}
         description={text.map_toelichting}
-        legend={
-          legendItems && {
-            items: legendItems,
-            title: siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel,
-          }
-        }
+        legend={{
+          thresholds:
+            municipalThresholds.hospital_admissions.hospital_admissions,
+          title: siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel,
+        }}
         metadata={{
-          date: resultsPerRegion.last_value.date_of_report_unix,
-          source: text.bron,
+          date: lastValue.date_of_report_unix,
+          source: text.bronnen.rivm,
         }}
       >
         <MunicipalityChoropleth
           selected={selectedMunicipalCode}
           highlightSelection={false}
           metricName="hospital_admissions"
-          tooltipContent={createMunicipalHospitalAdmissionsTooltip(router)}
+          metricProperty="hospital_admissions"
+          tooltipContent={createMunicipalHospitalAdmissionsTooltip(
+            createSelectMunicipalHandler(router, 'ziekenhuis-opnames')
+          )}
           onSelect={createSelectMunicipalHandler(router, 'ziekenhuis-opnames')}
         />
       </ChoroplethTile>
+
+      {lastValue && (
+        <LineChartTile
+          metadata={{ source: text.bronnen.rivm }}
+          title={text.linechart_titel}
+          description={text.linechart_description}
+          values={data.results_per_region.values
+            .filter((x) => isFilled(x.hospital_moving_avg_per_region))
+            .map((value) => ({
+              value: value.hospital_moving_avg_per_region,
+              date: value.date_of_report_unix,
+            }))}
+        />
+      )}
     </>
   );
 };
 
 IntakeHospital.getLayout = getSafetyRegionLayout();
 
-export const getStaticProps = getSafetyRegionData();
+export const getStaticProps = getSafetyRegionStaticProps;
 export const getStaticPaths = getSafetyRegionPaths();
 
 export default IntakeHospital;

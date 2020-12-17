@@ -1,38 +1,37 @@
 import { useRouter } from 'next/router';
 import CoronaVirus from '~/assets/coronavirus.svg';
 import Locatie from '~/assets/locaties.svg';
-import Getest from '~/assets/test.svg';
+import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
+import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
-import { useSafetyRegionLegendaData } from '~/components/choropleth/legenda/hooks/use-safety-region-legenda-data';
+import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createInfectedLocationsRegionalTooltip } from '~/components/choropleth/tooltips/region/create-infected-locations-regional-tooltip';
-import { ContentHeader } from '~/components/contentHeader';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
-import getNlData, { INationalData } from '~/static-props/nl-data';
+import {
+  getNationalStaticProps,
+  NationalPageProps,
+} from '~/static-props/nl-data';
 
 const infectedLocationsText = siteText.verpleeghuis_besmette_locaties;
 const positiveTestedPeopleText =
   siteText.verpleeghuis_positief_geteste_personen;
 const locationDeaths = siteText.verpleeghuis_oversterfte;
 
-const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
+const NursingHomeCare: FCWithLayout<NationalPageProps> = (props) => {
   const { data } = props;
   const nursinghomeData = data.nursing_home;
 
   const router = useRouter();
-  const legendItems = useSafetyRegionLegendaData(
-    'nursing_home',
-    'infected_locations_percentage'
-  );
 
   return (
     <>
@@ -43,14 +42,18 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
 
       <ContentHeader
         category={siteText.nationaal_layout.headings.kwetsbare_groepen}
+        screenReaderCategory={
+          siteText.verpleeghuis_besmette_locaties.titel_sidebar
+        }
         title={positiveTestedPeopleText.titel}
-        icon={<Getest />}
+        icon={<Verpleeghuiszorg />}
         subtitle={positiveTestedPeopleText.pagina_toelichting}
         metadata={{
           datumsText: positiveTestedPeopleText.datums,
-          dateUnix: nursinghomeData.last_value.date_of_report_unix,
-          dateInsertedUnix: nursinghomeData.last_value.date_of_insertion_unix,
-          dataSource: positiveTestedPeopleText.bron,
+          dateInfo: nursinghomeData.last_value.date_of_report_unix,
+          dateOfInsertionUnix:
+            nursinghomeData.last_value.date_of_insertion_unix,
+          dataSources: [positiveTestedPeopleText.bronnen.rivm],
         }}
         reference={positiveTestedPeopleText.reference}
       />
@@ -61,18 +64,19 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
           description={positiveTestedPeopleText.extra_uitleg}
           metadata={{
             date: nursinghomeData.last_value.date_of_report_unix,
-            source: positiveTestedPeopleText.bron,
+            source: positiveTestedPeopleText.bronnen.rivm,
           }}
         >
           <KpiValue
-            data-cy="infected_daily_total"
+            data-cy="newly_infected_people"
             absolute={nursinghomeData.last_value.newly_infected_people}
+            difference={data.difference.nursing_home__newly_infected_people}
           />
         </KpiTile>
       </TwoKpiSection>
 
       <LineChartTile
-        metadata={{ source: positiveTestedPeopleText.bron }}
+        metadata={{ source: positiveTestedPeopleText.bronnen.rivm }}
         title={positiveTestedPeopleText.linechart_titel}
         values={nursinghomeData.values.map((value) => ({
           value: value.newly_infected_people,
@@ -81,14 +85,17 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
       />
 
       <ContentHeader
+        id="besmette-locaties"
+        skipLinkAnchor={true}
         title={infectedLocationsText.titel}
         icon={<Locatie />}
         subtitle={infectedLocationsText.pagina_toelichting}
         metadata={{
           datumsText: infectedLocationsText.datums,
-          dateUnix: nursinghomeData.last_value.date_of_report_unix,
-          dateInsertedUnix: nursinghomeData.last_value.date_of_insertion_unix,
-          dataSource: infectedLocationsText.bron,
+          dateInfo: nursinghomeData.last_value.date_of_report_unix,
+          dateOfInsertionUnix:
+            nursinghomeData.last_value.date_of_insertion_unix,
+          dataSources: [infectedLocationsText.bronnen.rivm],
         }}
         reference={infectedLocationsText.reference}
       />
@@ -98,14 +105,16 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
           title={infectedLocationsText.kpi_titel}
           metadata={{
             date: nursinghomeData.last_value.date_of_report_unix,
-            source: infectedLocationsText.bron,
+            source: infectedLocationsText.bronnen.rivm,
           }}
         >
           <KpiValue
+            data-cy="infected_locations_total"
             absolute={nursinghomeData.last_value.infected_locations_total}
             percentage={
               nursinghomeData.last_value.infected_locations_percentage
             }
+            difference={data.difference.nursing_home__infected_locations_total}
           />
           <Text>{infectedLocationsText.kpi_toelichting}</Text>
         </KpiTile>
@@ -114,11 +123,12 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
           title={infectedLocationsText.barscale_titel}
           metadata={{
             date: nursinghomeData.last_value.date_of_report_unix,
-            source: infectedLocationsText.bron,
+            source: infectedLocationsText.bronnen.rivm,
           }}
         >
           <KpiValue
-            absolute={nursinghomeData?.last_value.newly_infected_locations}
+            data-cy="newly_infected_locations"
+            absolute={nursinghomeData.last_value.newly_infected_locations}
           />
           <Text>{infectedLocationsText.barscale_toelichting}</Text>
         </KpiTile>
@@ -129,28 +139,26 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
         description={infectedLocationsText.map_toelichting}
         metadata={{
           date: nursinghomeData.last_value.date_of_report_unix,
-          source: infectedLocationsText.bron,
+          source: infectedLocationsText.bronnen.rivm,
         }}
-        legend={
-          legendItems && {
-            items: legendItems,
-            title: infectedLocationsText.chloropleth_legenda.titel,
-          }
-        }
+        legend={{
+          thresholds:
+            regionThresholds.nursing_home.infected_locations_percentage,
+          title: infectedLocationsText.chloropleth_legenda.titel,
+        }}
       >
         <SafetyRegionChoropleth
           metricName="nursing_home"
-          metricValueName="infected_locations_percentage"
-          tooltipContent={createInfectedLocationsRegionalTooltip(router)}
-          onSelect={createSelectRegionHandler(
-            router,
-            'verpleeghuis-besmette-locaties'
+          metricProperty="infected_locations_percentage"
+          tooltipContent={createInfectedLocationsRegionalTooltip(
+            createSelectRegionHandler(router, 'verpleeghuiszorg')
           )}
+          onSelect={createSelectRegionHandler(router, 'verpleeghuiszorg')}
         />
       </ChoroplethTile>
 
       <LineChartTile
-        metadata={{ source: infectedLocationsText.bron }}
+        metadata={{ source: infectedLocationsText.bronnen.rivm }}
         title={infectedLocationsText.linechart_titel}
         values={nursinghomeData.values.map((value) => ({
           value: value.infected_locations_total,
@@ -159,14 +167,17 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
       />
 
       <ContentHeader
+        id="sterfte"
+        skipLinkAnchor={true}
         title={locationDeaths.titel}
         icon={<CoronaVirus />}
         subtitle={locationDeaths.pagina_toelichting}
         metadata={{
           datumsText: locationDeaths.datums,
-          dateUnix: nursinghomeData.last_value.date_of_report_unix,
-          dateInsertedUnix: nursinghomeData.last_value.date_of_insertion_unix,
-          dataSource: locationDeaths.bron,
+          dateInfo: nursinghomeData.last_value.date_of_report_unix,
+          dateOfInsertionUnix:
+            nursinghomeData.last_value.date_of_insertion_unix,
+          dataSources: [locationDeaths.bronnen.rivm],
         }}
         reference={locationDeaths.reference}
       />
@@ -177,29 +188,30 @@ const NursingHomeInfectedLocations: FCWithLayout<INationalData> = (props) => {
           description={locationDeaths.extra_uitleg}
           metadata={{
             date: nursinghomeData.last_value.date_of_report_unix,
-            source: locationDeaths.bron,
+            source: locationDeaths.bronnen.rivm,
           }}
         >
-          <KpiValue absolute={nursinghomeData.last_value.deceased_daily} />
+          <KpiValue
+            data-cy="deceased_daily"
+            absolute={nursinghomeData.last_value.deceased_daily}
+          />
         </KpiTile>
       </TwoKpiSection>
 
-      {data && (
-        <LineChartTile
-          metadata={{ source: locationDeaths.bron }}
-          title={locationDeaths.linechart_titel}
-          values={nursinghomeData.values.map((value) => ({
-            value: value.deceased_daily,
-            date: value.date_of_report_unix,
-          }))}
-        />
-      )}
+      <LineChartTile
+        metadata={{ source: locationDeaths.bronnen.rivm }}
+        title={locationDeaths.linechart_titel}
+        values={nursinghomeData.values.map((value) => ({
+          value: value.deceased_daily,
+          date: value.date_of_report_unix,
+        }))}
+      />
     </>
   );
 };
 
-NursingHomeInfectedLocations.getLayout = getNationalLayout();
+NursingHomeCare.getLayout = getNationalLayout;
 
-export const getStaticProps = getNlData();
+export const getStaticProps = getNationalStaticProps;
 
-export default NursingHomeInfectedLocations;
+export default NursingHomeCare;

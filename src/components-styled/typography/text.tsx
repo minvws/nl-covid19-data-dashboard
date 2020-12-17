@@ -12,7 +12,7 @@ import {
   TypographyProps,
 } from 'styled-system';
 
-type TextProps = SpaceProps &
+export type TextProps = SpaceProps &
   LayoutProps &
   ColorProps &
   PositionProps &
@@ -23,6 +23,10 @@ type TextProps = SpaceProps &
  * text, only for headers we have a dedicated Title component.
  */
 export const Text = styled.p<TextProps>(
+  compose(margin, padding, typography, color)
+);
+
+export const InlineText = styled.span<TextProps>(
   compose(margin, padding, typography, color)
 );
 

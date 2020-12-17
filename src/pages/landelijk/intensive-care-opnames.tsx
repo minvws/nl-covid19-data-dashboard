@@ -1,25 +1,28 @@
 import Arts from '~/assets/arts.svg';
+import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { PageBarScale } from '~/components-styled/page-barscale';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
-import { ContentHeader_sourcesHack } from '~/components/contentHeader_sourcesHack';
-import { IntakeIntensiveCareBarscale } from '~/components/landelijk/intake-intensive-care-barscale';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
-import getNlData, { INationalData } from '~/static-props/nl-data';
+import {
+  getNationalStaticProps,
+  NationalPageProps,
+} from '~/static-props/nl-data';
 
 const text = siteText.ic_opnames_per_dag;
 
-const IntakeIntensiveCare: FCWithLayout<INationalData> = (props) => {
-  const { data: state } = props;
+const IntakeIntensiveCare: FCWithLayout<NationalPageProps> = (props) => {
+  const { data } = props;
 
-  const dataIntake = state.intake_intensivecare_ma;
+  const dataIntake = data.intake_intensivecare_ma;
 
-  const dataBeds = state.intensive_care_beds_occupied;
+  const dataBeds = data.intensive_care_beds_occupied;
 
   return (
     <>
@@ -27,17 +30,17 @@ const IntakeIntensiveCare: FCWithLayout<INationalData> = (props) => {
         title={text.metadata.title}
         description={text.metadata.description}
       />
-      <ContentHeader_sourcesHack
+      <ContentHeader
         category={siteText.nationaal_layout.headings.ziekenhuizen}
+        screenReaderCategory={siteText.ic_opnames_per_dag.titel_sidebar}
         title={text.titel}
         icon={<Arts />}
         subtitle={text.pagina_toelichting}
         metadata={{
           datumsText: text.datums,
-          dateUnix: dataIntake.last_value.date_of_report_unix,
-          dateInsertedUnix: dataIntake.last_value.date_of_insertion_unix,
-          dataSourceA: text.bronnen.nice,
-          dataSourceB: text.bronnen.lnaz,
+          dateInfo: dataIntake.last_value.date_of_report_unix,
+          dateOfInsertionUnix: dataIntake.last_value.date_of_insertion_unix,
+          dataSources: [text.bronnen.nice, text.bronnen.lnaz],
         }}
         reference={text.reference}
       />
@@ -50,7 +53,14 @@ const IntakeIntensiveCare: FCWithLayout<INationalData> = (props) => {
             source: text.bronnen.nice,
           }}
         >
-          <IntakeIntensiveCareBarscale data={dataIntake} showAxis={true} />
+          <PageBarScale
+            data={data}
+            scope="nl"
+            metricName="intake_intensivecare_ma"
+            metricProperty="moving_average_ic"
+            localeTextKey="ic_opnames_per_dag"
+            differenceKey="intake_intensivecare_ma__moving_average_ic"
+          />
           <Text>{text.extra_uitleg}</Text>
         </KpiTile>
 
@@ -62,8 +72,12 @@ const IntakeIntensiveCare: FCWithLayout<INationalData> = (props) => {
           }}
         >
           <KpiValue
+            data-cy="covid_occupied"
             absolute={dataBeds.last_value.covid_occupied}
             percentage={dataBeds.last_value.covid_percentage_of_all_occupied}
+            difference={
+              data.difference.intensive_care_beds_occupied__covid_occupied
+            }
           />
           <Text>{text.kpi_bedbezetting.description}</Text>
         </KpiTile>
@@ -92,8 +106,8 @@ const IntakeIntensiveCare: FCWithLayout<INationalData> = (props) => {
   );
 };
 
-IntakeIntensiveCare.getLayout = getNationalLayout();
+IntakeIntensiveCare.getLayout = getNationalLayout;
 
-export const getStaticProps = getNlData();
+export const getStaticProps = getNationalStaticProps;
 
 export default IntakeIntensiveCare;
