@@ -33,7 +33,12 @@ export function SidebarBarScale<T>({
    * A unique id is required for path rendering and should be constant between
    * server and client side rendering
    */
-  const uniqueId = ['sidebar', scope, metricName, metricProperty].join(':');
+  const uniqueId = [
+    'sidebar-bar-scale',
+    scope,
+    metricName,
+    metricProperty,
+  ].join(':');
 
   assert(
     isDefined(propertyValue),
