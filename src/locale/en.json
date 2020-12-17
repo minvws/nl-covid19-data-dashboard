@@ -1145,7 +1145,7 @@
       "titel": "Legend"
     },
     "valid_from": "Valid from {{validFrom}}",
-    "sidebar_label": ""
+    "sidebar_label": "Level of risk:"
   },
   "gemeente_layout": {
     "headings": {
