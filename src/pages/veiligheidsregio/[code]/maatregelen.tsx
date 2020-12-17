@@ -60,7 +60,7 @@ const RegionalRestrictions: FCWithLayout<ISafetyRegionData> = (props) => {
       />
 
       <ContentHeader
-        category={siteText.veiligheidsregio_layout.headings.maatregelen}
+        category={siteText.veiligheidsregio_layout.headings.algemeen}
         icon={<Maatregelen fill={theme.colors.restrictions} />}
         title={replaceVariablesInText(
           siteText.veiligheidsregio_maatregelen.titel,
@@ -85,7 +85,9 @@ const RegionalRestrictions: FCWithLayout<ISafetyRegionData> = (props) => {
       </KpiSection>
 
       <KpiSection display="flex" flexDirection="column">
-        <Heading level={3}>{restrictionInfo.extratoelichting.titel}</Heading>
+        <Heading level={3}>
+          {siteText.veiligheidsregio_maatregelen.tabel_titel}
+        </Heading>
         <RestrictionsTable
           data={data.restrictions.values}
           escalationLevel={effectiveEscalationLevel}

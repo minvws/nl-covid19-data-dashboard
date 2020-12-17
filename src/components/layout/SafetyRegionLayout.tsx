@@ -147,6 +147,9 @@ function SafetyRegionLayout(
             >
               <Category>{safetyRegionName}</Category>
               <Menu>
+                <Category>
+                  {siteText.veiligheidsregio_layout.headings.algemeen}
+                </Category>
                 <CategoryMenuItem
                   borderTop="1px solid"
                   borderTopColor="border"

@@ -814,6 +814,7 @@
       "vroege_signalen": "Early indicators",
       "gedrag": "Behaviour",
       "kwetsbare_groepen": "Vulnerable groups",
+      "algemeen": "General",
       "maatregelen": "Measures"
     }
   },
@@ -2075,6 +2076,7 @@
   },
   "veiligheidsregio_maatregelen": {
     "titel_sidebar": "Measures",
+    "tabel_titel": "Current lockdown measures",
     "titel": "Measures in {{safetyRegionName}}",
     "titel_risiconiveau": "Level of risk",
     "toelichting_risiconiveau": "For more information about your region, please check the website of your safety region.",
