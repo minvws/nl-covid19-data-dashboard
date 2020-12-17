@@ -8,11 +8,10 @@ import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { TALLLanguages } from '~/locale/';
 import {
-  getSafetyRegionData,
+  getSafetyRegionStaticProps,
   getSafetyRegionPaths,
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
-import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
 import { EscalationMapLegenda } from '..';
 
 type ActueelData = ISafetyRegionData & { text: TALLLanguages };
@@ -51,24 +50,7 @@ const SafetyRegionActueel: FCWithLayout<ActueelData> = (data) => {
 
 SafetyRegionActueel.getLayout = getSafetyRegionLayout();
 
+export const getStaticProps = getSafetyRegionStaticProps;
 export const getStaticPaths = getSafetyRegionPaths();
-
-export async function getStaticProps(args: {
-  params: {
-    code: string;
-  };
-}): Promise<{ props: ActueelData }> {
-  const text = parseMarkdownInLocale(
-    (await import('../../../locale/index')).default
-  );
-  const { props } = getSafetyRegionData()(args);
-
-  return {
-    props: {
-      text,
-      ...props,
-    },
-  };
-}
 
 export default SafetyRegionActueel;

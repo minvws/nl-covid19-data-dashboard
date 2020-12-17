@@ -13,7 +13,6 @@ import {
   getMunicipalityPaths,
   IMunicipalityData,
 } from '~/static-props/municipality-data';
-import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
 
 type ActueelData = IMunicipalityData & { text: TALLLanguages };
 
@@ -51,24 +50,7 @@ const MunicipalityActueel: FCWithLayout<ActueelData> = (data) => {
 
 MunicipalityActueel.getLayout = getMunicipalityLayout();
 
+export const getStaticProps = getMunicipalityData();
 export const getStaticPaths = getMunicipalityPaths();
-
-export async function getStaticProps(args: {
-  params: {
-    code: string;
-  };
-}): Promise<{ props: ActueelData }> {
-  const text = parseMarkdownInLocale(
-    (await import('../../../locale/index')).default
-  );
-  const { props } = getMunicipalityData()(args);
-
-  return {
-    props: {
-      text,
-      ...props,
-    },
-  };
-}
 
 export default MunicipalityActueel;
