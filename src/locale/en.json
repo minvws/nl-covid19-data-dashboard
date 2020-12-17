@@ -814,8 +814,8 @@
       "vroege_signalen": "Early indicators",
       "gedrag": "Behaviour",
       "kwetsbare_groepen": "Vulnerable groups",
-      "algemeen": "General",
-      "maatregelen": "Measures"
+      "maatregelen": "Measures",
+      "algemeen": ""
     }
   },
   "veiligheidsregio_metadata": {
@@ -2076,7 +2076,6 @@
   },
   "veiligheidsregio_maatregelen": {
     "titel_sidebar": "Measures",
-    "tabel_titel": "Current lockdown measures",
     "titel": "Measures in {{safetyRegionName}}",
     "titel_risiconiveau": "Level of risk",
     "toelichting_risiconiveau": "For more information about your region, please check the website of your safety region.",
@@ -2088,7 +2087,8 @@
       "title": "Measures in {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
       "description": "Overview of the corona measures in the safety region {{safetyRegionName}}."
     },
-    "subtitel_sidebar": "There are national measures"
+    "subtitel_sidebar": "There are national measures",
+    "tabel_titel": ""
   },
   "veiligheidsregio_maatregelen_urls": {
     "VR01": "http://www.veiligheidsregiogroningen.nl/",

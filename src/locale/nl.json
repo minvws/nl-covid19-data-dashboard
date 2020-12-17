@@ -814,8 +814,8 @@
       "vroege_signalen": "Vroege signalen",
       "gedrag": "Gedrag",
       "kwetsbare_groepen": "Kwetsbare groepen",
-      "algemeen": "Algemeen",
-      "maatregelen": "Maatregelen"
+      "maatregelen": "Maatregelen",
+      "algemeen": "Algemeen"
     }
   },
   "veiligheidsregio_metadata": {
@@ -2054,7 +2054,7 @@
       "41_winkels_30": "Niet-essentiële winkels dicht.",
       "41_winkels_31": "Onder andere supermarkten, drogisterijen, groentewinkels en tankstations open.",
       "41_winkels_32": "Alcoholverbod na 20.00 uur.",
-      "41_contactberoep_33": "Het uitoefenen van niet-medische contactberoepen zoals kappers, tatoeëerders en schoonheids- specialisten verboden.",
+      "41_contactberoep_33": "Het uitoefenen van niet-medische contactberoepen zoals kappers, tatoeëerders en schoonheidsspecialisten is verboden.",
       "41_sport_34": "Buiten met max. 2 personen op 1,5 meter afstand. Kinderen t/m 17 jaar en topsporters uitgezonderd.",
       "41_sport_35": "Binnensportlocaties dicht.",
       "41_sport_36": "Geen wedstrijden en groepslessen. Topsporters uitgezonderd.",
@@ -2076,7 +2076,6 @@
   },
   "veiligheidsregio_maatregelen": {
     "titel_sidebar": "Maatregelen",
-    "tabel_titel": "Maatregelen van Lockdown",
     "titel": "Maatregelen in {{safetyRegionName}}",
     "titel_risiconiveau": "Risiconiveau",
     "toelichting_risiconiveau": "Voor meer informatie over uw regio, kunt u terecht op de website van uw veiligheidsregio.",
@@ -2088,7 +2087,8 @@
       "title": "Maatregelen in {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Overzicht van de corona maatregelen in de veiligheidsregio {{safetyRegionName}}."
     },
-    "subtitel_sidebar": "Er gelden landelijke maatregelen"
+    "subtitel_sidebar": "Er gelden landelijke maatregelen",
+    "tabel_titel": "Maatregelen van Lockdown"
   },
   "veiligheidsregio_maatregelen_urls": {
     "VR01": "http://www.veiligheidsregiogroningen.nl/",
