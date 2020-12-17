@@ -6,11 +6,9 @@ import { FCWithLayout, getLayoutWithMetadata } from '~/components/layout';
 
 import { MaxWidth } from '~/components-styled/max-width';
 import siteText from '~/locale/index';
-import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
 
 import styles from './over.module.scss';
-import { Collapsable } from '~/components-styled/collapsable';
-import { getSkipLinkId } from '~/utils/skipLinks';
+// import { Collapsable } from '~/components-styled/collapsable';
 
 import { groq } from 'next-sanity';
 import {
@@ -39,8 +37,6 @@ const risicoQuery = groq`
 `;
 
 export async function getStaticProps(): Promise<StaticProps> {
-  const text = parseMarkdownInLocale((await import('../locale/index')).default);
-
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const lastGenerated = JSON.parse(fileContents).last_generated;
@@ -83,7 +79,7 @@ const OverRisicoNiveaus: FCWithLayout<OverRisiconiveausProps> = (props) => {
             <PortableText blocks={risico.beschrijving} />
 
             <article className={styles.faqList}>
-              {text.over_risiconiveaus.vragen.map((item) => {
+              {/* {text.over_risiconiveaus.vragen.map((item) => {
                 const id = getSkipLinkId(item.vraag);
                 return item.vraag ? (
                   <Collapsable key={id} id={id} summary={item.vraag}>
@@ -94,7 +90,7 @@ const OverRisicoNiveaus: FCWithLayout<OverRisiconiveausProps> = (props) => {
                     />
                   </Collapsable>
                 ) : null;
-              })}
+              })} */}
             </article>
           </div>
         </MaxWidth>
