@@ -175,7 +175,8 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
           source: text.bronnen.rivm,
         }}
         description={text.map_toelichting}
-        onChangeControls={setSelectedMap}
+        onChartRegionChange={setSelectedMap}
+        chartRegion={selectedMap}
         legend={{
           title: text.chloropleth_legenda.titel,
           thresholds:

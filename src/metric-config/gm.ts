@@ -1,4 +1,4 @@
-import { MetricConfig } from './types';
+import { MetricConfig } from './common';
 // import { colors } from '~/style/theme';
 import { Municipal } from '~/types/data';
 import { MetricKeys } from '~/components/choropleth/shared';

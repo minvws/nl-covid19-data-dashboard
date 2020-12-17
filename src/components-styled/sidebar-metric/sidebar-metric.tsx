@@ -6,6 +6,7 @@ import siteText, { TALLLanguages } from '~/locale/index';
 import { DataScope, getMetricConfig } from '~/metric-config';
 import { assert } from '~/utils/assert';
 import { formatDateFromSeconds } from '~/utils/formatDate';
+import { getLastFilledValue } from '~/utils/get-last-filled-value';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { SidebarBarScale } from './sidebar-barscale';
 import { SidebarKpiValue } from './sidebar-kpi-value';
@@ -14,7 +15,11 @@ interface SidebarMetricProps<T extends { difference: unknown }> {
   scope: DataScope;
   data: T;
   metricName: ValueOf<MetricKeys<T>>;
-  metricProperty: string;
+  /**
+   * Make metric property optional for odd case where we do not show a metric.
+   * Currently only behavior is doing that.
+   */
+  metricProperty?: string;
   localeTextKey: keyof TALLLanguages;
   differenceKey?: string;
   showBarScale?: boolean;
@@ -42,33 +47,40 @@ export function SidebarMetric<T extends { difference: unknown }>({
   annotationKey,
   altBarScaleMetric,
 }: SidebarMetricProps<T>) {
-  const lastValue = get(data, [
-    (metricName as unknown) as string,
-    'last_value',
-  ]);
-  const propertyValue = lastValue && lastValue[metricProperty];
+  /**
+   * This is a workaround for data which can contain null values on properties as part of the
+   * last_value object. This was added to facilitate VR hospital Nice data.
+   *
+   * @TODO work out proper solution with BE
+   */
+  const lastValue =
+    metricProperty === 'hospital_moving_avg_per_region'
+      ? getLastFilledValue(data, metricName)
+      : get(data, [(metricName as unknown) as string, 'last_value']);
 
-  assert(
-    isDefined(propertyValue),
-    `Missing value for metric property ${[
-      metricName,
-      'last_value',
-      metricProperty,
-    ]
-      .filter(isDefined)
-      .join(':')}`
-  );
+  const propertyValue = metricProperty && lastValue[metricProperty];
 
-  const config = getMetricConfig(
-    scope,
-    (metricName as unknown) as string,
-    metricProperty
-  );
+  if (metricProperty) {
+    assert(
+      isDefined(propertyValue),
+      `Missing value for metric property ${[
+        metricName,
+        'last_value',
+        metricProperty,
+      ]
+        .filter(isDefined)
+        .join(':')}`
+    );
+  }
+
   const commonText = siteText.common.metricKPI;
 
   /**
    * Because the locale files are not consistent in using kpi_titel and titel_kpi
    * we support both but kpi_titel has precedence.
+   *
+   * @TODO this should really be called sidebar_metric_description or something
+   * as it's not a title at all.
    */
   const title =
     get(siteText, [localeTextKey, 'kpi_titel']) ||
@@ -76,17 +88,31 @@ export function SidebarMetric<T extends { difference: unknown }>({
 
   assert(title, `Missing title at ${localeTextKey}.kpi_titel`);
 
-  const description = config.isWeeklyData
-    ? replaceVariablesInText(commonText.dateRangeOfReport, {
-        startDate: formatDateFromSeconds(lastValue.week_start_unix, 'axis'),
-        endDate: formatDateFromSeconds(lastValue.week_end_unix, 'axis'),
-      })
-    : replaceVariablesInText(commonText.dateOfReport, {
-        dateOfReport: formatDateFromSeconds(
-          lastValue.date_of_report_unix,
-          'medium'
-        ),
-      });
+  const config = getMetricConfig(
+    scope,
+    (metricName as unknown) as string,
+    metricProperty
+  );
+
+  let description = '';
+
+  try {
+    description = config.isWeeklyData
+      ? replaceVariablesInText(commonText.dateRangeOfReport, {
+          startDate: formatDateFromSeconds(lastValue.week_start_unix, 'axis'),
+          endDate: formatDateFromSeconds(lastValue.week_end_unix, 'axis'),
+        })
+      : replaceVariablesInText(commonText.dateOfReport, {
+          dateOfReport: formatDateFromSeconds(
+            lastValue.date_of_report_unix,
+            'medium'
+          ),
+        });
+  } catch (err) {
+    throw new Error(
+      `Failed to format description for ${metricName}:${metricProperty}, likely due to a timestamp week/day configuration mismatch. Error: ${err.message}`
+    );
+  }
 
   const differenceValue = differenceKey
     ? get(data, ['difference', (differenceKey as unknown) as string])
@@ -113,6 +139,14 @@ export function SidebarMetric<T extends { difference: unknown }>({
     assert(
       valueAnnotation,
       `Missing value annotation at waarde_annotaties:${annotationKey}`
+    );
+  }
+
+  if (!metricProperty) {
+    return (
+      <Box mx={'2.5rem'}>
+        <SidebarKpiValue title={title} description={description} />
+      </Box>
     );
   }
 

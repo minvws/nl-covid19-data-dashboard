@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
-import { HighchartsWrapper } from '~/components/common/highcharts';
+import { HighchartsWrapper } from '~/components/highcharts-wrapper';
 import { colors } from '~/style/theme';
 
 interface IProps {

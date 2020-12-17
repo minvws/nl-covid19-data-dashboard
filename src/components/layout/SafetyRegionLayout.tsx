@@ -4,6 +4,7 @@ import Arrow from '~/assets/arrow.svg';
 import ElderlyIcon from '~/assets/elderly.svg';
 import Gedrag from '~/assets/gedrag.svg';
 import Gehandicaptenzorg from '~/assets/gehandicapte-zorg.svg';
+import Maatregelen from '~/assets/maatregelen.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
@@ -18,13 +19,11 @@ import {
 import { TitleWithIcon } from '~/components-styled/aside/title-with-icon';
 import { SidebarMetric } from '~/components-styled/sidebar-metric';
 import { ComboBox } from '~/components/comboBox';
-import { DeceasedMetric } from '~/components/common/deceased-metric';
-import { ElderlyAtHomeMetric } from '~/components/common/elderly-at-home-metric';
 import { getLayout as getSiteLayout } from '~/components/layout';
 import safetyRegions from '~/data/index';
-import { BehaviorMetric } from '~/domain/behavior/behavior-metric';
 import siteText from '~/locale/index';
 import { ISafetyRegionData } from '~/static-props/safetyregion-data';
+import theme from '~/style/theme';
 import { Link } from '~/utils/link';
 import { useMediaQuery } from '~/utils/useMediaQuery';
 
@@ -148,6 +147,35 @@ function SafetyRegionLayout(
             >
               <Category>{safetyRegionName}</Category>
               <Menu>
+                <CategoryMenuItem
+                  borderTop="1px solid"
+                  borderTopColor="border"
+                  borderBottom="1px solid"
+                  borderBottomColor="border"
+                >
+                  <Menu>
+                    <Link href={`/veiligheidsregio/${code}/maatregelen`}>
+                      <a
+                        className={getClassName(
+                          `/veiligheidsregio/[code]/maatregelen`
+                        )}
+                      >
+                        <TitleWithIcon
+                          icon={
+                            <Maatregelen fill={theme.colors.restrictions} />
+                          }
+                          title={
+                            siteText.veiligheidsregio_maatregelen.titel_sidebar
+                          }
+                          subtitle={
+                            siteText.veiligheidsregio_maatregelen
+                              .subtitel_sidebar
+                          }
+                        />
+                      </a>
+                    </Link>
+                  </Menu>
+                </CategoryMenuItem>
                 <CategoryMenuItem>
                   <Category>
                     {siteText.veiligheidsregio_layout.headings.besmettingen}
@@ -200,14 +228,13 @@ function SafetyRegionLayout(
                               siteText.veiligheidsregio_sterfte.titel_sidebar
                             }
                           />
-                          <span className="metric-wrapper">
-                            <DeceasedMetric
-                              title={
-                                siteText.veiligheidsregio_sterfte.kpi_titel
-                              }
-                              data={data.deceased_rivm.last_value}
-                            />
-                          </span>
+                          <SidebarMetric
+                            data={data}
+                            scope="vr"
+                            metricName="deceased_rivm"
+                            metricProperty="covid_daily"
+                            localeTextKey="veiligheidsregio_sterfte"
+                          />
                         </a>
                       </Link>
                     </MetricMenuItem>
@@ -235,13 +262,14 @@ function SafetyRegionLayout(
                                 .titel_sidebar
                             }
                           />
-                          <span className="metric-wrapper">
-                            {
-                              siteText
-                                .veiligheidsregio_ziekenhuisopnames_per_dag
-                                .tijdelijk_onbeschikbaar_titel
-                            }
-                          </span>
+                          <SidebarMetric
+                            data={data}
+                            scope="vr"
+                            metricName="results_per_region"
+                            metricProperty="hospital_moving_avg_per_region"
+                            localeTextKey="veiligheidsregio_ziekenhuisopnames_per_dag"
+                            differenceKey="results_per_region__hospital_moving_avg_per_region"
+                          />
                         </a>
                       </Link>
                     </MetricMenuItem>
@@ -325,15 +353,13 @@ function SafetyRegionLayout(
                                 .titel_sidebar
                             }
                           />
-                          <span className="metric-wrapper">
-                            <ElderlyAtHomeMetric
-                              data={data.elderly_at_home.last_value}
-                              title={
-                                siteText.veiligheidsregio_thuiswonende_ouderen
-                                  .kpi_titel
-                              }
-                            />
-                          </span>
+                          <SidebarMetric
+                            data={data}
+                            scope="vr"
+                            metricName="elderly_at_home"
+                            metricProperty="positive_tested_daily"
+                            localeTextKey="veiligheidsregio_thuiswonende_ouderen"
+                          />
                         </a>
                       </Link>
                     </MetricMenuItem>
@@ -389,9 +415,12 @@ function SafetyRegionLayout(
                             icon={<Gedrag />}
                             title={siteText.regionaal_gedrag.sidebar.titel}
                           />
-                          <span className="metric-wrapper">
-                            <BehaviorMetric data={data.behavior} />
-                          </span>
+                          <SidebarMetric
+                            data={data}
+                            scope="vr"
+                            metricName="behavior"
+                            localeTextKey="gedrag_common"
+                          />
                         </a>
                       </Link>
                     </MetricMenuItem>

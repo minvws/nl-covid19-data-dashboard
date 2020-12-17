@@ -1,3 +1,4 @@
+
 {
   "andere_gegevens": "Other data",
   "blok_andere_gegevens": {
@@ -135,11 +136,11 @@
   "ziekenhuisopnames_per_dag": {
     "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
     "bron": {
-      "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
-      "text": "NICE foundation"
+      "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
+      "text": "RIVM"
     },
     "titel": "Hospital admissions per day",
-    "pagina_toelichting": "Number of confirmed COVID-19 cases who are admitted to a hospital per day.\n\nPlease note: as of 13 October 2020, data on hospital admissions is obtained from a new source.",
+    "pagina_toelichting": "Number of confirmed COVID-19 cases who are admitted to a hospital per day.\n\nPlease note: as of 17 December 2020, data on hospital admissions is obtained from a new source.",
     "barscale_titel": "Hospital admissions per day",
     "extra_uitleg": "Number of confirmed COVID-19 cases who are admitted to a hospital (excluding intensive care) per day. This number is an average for daily admissions over the past 3 days.\n\nNote: Although hospitals try to register COVID-19 patients promptly, it is likely that the numbers of the last days are yet incomplete.",
     "map_titel": "Distribution of hospital admissions in the Netherlands",
@@ -152,9 +153,9 @@
     },
     "bronnen": {
       "rivm": {
-        "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
-        "text": "NICE foundation",
-        "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv"
+        "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
+        "text": "RIVM",
+        "download": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.csv"
       },
       "lnaz": {
         "href": "https://lcps.nu/datafeed/",
@@ -162,13 +163,13 @@
         "download": "https://lcps.nu/wp-content/uploads/covid-19.csv"
       },
       "rivmSource": {
-        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
         "text": "RIVM"
       },
       "nice": {
-        "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
-        "text": "Stichting NICE",
-        "download": "https://stichting-nice.nl/covid-19/public/zkh/new-intake/confirmed"
+        "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
+        "text": "RIVM",
+        "download": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.csv"
       }
     },
     "kpi_bedbezetting": {
@@ -190,8 +191,8 @@
       "href": "/verantwoording#hospitals",
       "text": "Read more in 'explanation of the data presented'."
     },
-    "tijdelijk_onbeschikbaar_titel": "Map temporarily not available",
-    "tijdelijk_onbeschikbaar": "Hospital admissions per safety region and municipality are temporarily not shown. The dataset these numbers were based on (Osiris) is no longer sufficiently aligned with the actual number of hospital admissions.  Soon we expect to show admissions per safety region and municipality again, based on data from NICE, a better dataset. For hospital admissions on a national level NICE is already the source.",
+    "tijdelijk_onbeschikbaar_titel": "",
+    "tijdelijk_onbeschikbaar": "",
     "kpi_titel": "Average number of hospital admissions in 3 days"
   },
   "positief_geteste_personen": {
@@ -206,7 +207,7 @@
     "barscale_toelichting": "This figure shows how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
     "kpi_titel": "Number of confirmed cases",
-    "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.\n\n\n_Due to a prior ICT issue at the GGD, not all confirmed cases had been received on Monday and Tuesday. The backlog is added to the numbers on Wednesday, Thursday and Friday. Therefore, numbers on these days are higher than in reality._",
+    "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.",
     "map_titel": "Distribution of confirmed cases in the Netherlands",
     "map_toelichting": "These maps show how many confirmed cases of COVID-19 were reported yesterday per 100,000 inhabitants.",
     "linechart_titel": "Progression over time",
@@ -633,7 +634,7 @@
       },
       {
         "cijfer": "Hospitals",
-        "verantwoording": "New hospital admissions are made available as [open data](https://stichting-nice.nl/covid-19/public/zkh/new-intake/confirmed) by the Stichting NICE (the National Intensive Care Evaluation Registry). The description of this dataset can be found [here](https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie). The average number of daily hospital admissions is calculated using the figures for one day ago, two days ago and three days ago. Data for the present day is not included in this calculation, as the present day is not yet over and registration data is therefore incomplete. Although hospitals strive to register COVID-19 patients as fast as possible, there is usually some delay. As a result, the figures for the previous several days tend to be incomplete. That is why data on the dashboard is refreshed daily.\n\nPreviously, new hospital admissions on a national level were based on [open data](https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv) from RIVM. The description of this dataset can be found [here](https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427). This dataset uses the Osiris database. However, this database suffers from significant underreporting. The NICE database is more complete and uses a broader definition of hospital admission. RIVM figures include only those patients admitted to hospital because of COVID-19, whereas NICE figures also include patients who were admitted to the hospital for another reason but also have COVID-19.\n\nCurrently data from NICE is not available on the level of safety regions and municipalities. Unitil November 30 2020 hospital admissions for safety regions and municipalities shown on this dashboard where based on the Osiris database. This data no longer sufficiently aligned with the actual numbers. From December 10 we expect to show admissions per safety region and municipality again, based on data from NICE.\n\nThree hospitals currently do not share the daily number of admitions of patients with COVID-19 with Stichting NICE: the Tergooi hosptials, Rijnstate hospitals and Flevoziekenhuis. COVID-19 hospital admissions in these hospitals are therefore not part of the Hospital admissions per day, as shown on this dashboard. \n\nHospital occupancy rates (non-ICU) are obtained daily via [open data](https://lcps.nu/wp-content/uploads/covid-19.csv) from LCPS. The description of this dataset can be found [here](https://lcps.nu/datafeed/). The total occupancy numbers are not available prior to the 1st of June because certain quality checks have not been performed before this date. Therefore that data might be flawed and is not published by LCPS."
+        "verantwoording": "Every day RIVM makes [open data](https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.csv) available on new hospital admissions, not including ICU admissions. [The description of this data set can be found here](https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html). RIVM uses data collected by Stichting NICE (the National Intensive Care Evaluation Registry), an organisation, established by the professional association of ICU doctors, which registers available data from ICUs nationwide. The figures from the previous three days are used to calculate the average number of hospital admissions. Figures from the current day are not included in this average, because the data is not complete until the day has ended. Despite requests that hospitals register COVID 19 patients several times throughout the day, the registrations may fall slightly behind.\n\nThe dashboard previously used data from the Osiris database, which is provided primarily by the municipal health services (GGDs). However it has come to light that hospital admissions tend to be significantly underreported in the Osiris database because GGDs are not always informed when COVID 19 patients are admitted to hospital. The NICE data is more complete, but its definition of ‘hospital admission’ is also broader. Whereas the Osiris database includes only patients admitted to hospital due to COVID 19, the NICE database also includes hospital patients who have COVID 19 but who were admitted for another reason.\n\nThere are currently two hospitals who do not share their data on COVID 19 hospital admissions with Stichting NICE: Tergooi hospitals and Flevoziekenhuis. COVID 19 hospital admissions these two hospitals are therefore not included in the daily hospital admission figures published on the dashboard. On a national level this has little impact on the numbers, on the regional level the impact on the number is significant.  \n\nNon ICU hospital occupancy rates are made available as [open data](https://lcps.nu/wp-content/uploads/covid-19.csv) by LCPS (the national coordination centre for patient distribution). [The description of this data set can be found here](https://lcps.nu/datafeed/). Occupancy rates from before 1 June 2020 are not available because certain quality checks were not performed before this date. As a result, the data could be flawed and LCPS therefore does not include it in the open data. \n\nLCPS has also been collecting data on new hospital admissions since October 2020. Despite this, the dashboard uses the data from NICE, and not from LCPS. This is because LCPS provides only aggregated figures. The data is not disaggregated by patients’ age or sex, for example. It is therefore too limited to be of use for the dashboard, and cannot be used by RIVM.\n\nDifferences in the two registration systems are a result of what exactly they register, i.e. occupancy (capacity) versus patient counts. An increase in occupancy does not fully reflect changes in patient counts. When a patient is discharged from hospital, their bed does not become available immediately, for example. It’s also possible that a single bed may have several occupants over the course of a day. The data sets contain different information and are used for distinct purposes. These figures are not interchangeable as such."
       },
       {
         "cijfer": "Confirmed cases",
@@ -799,7 +800,8 @@
       "verpleeghuizen": "Nursing homes",
       "vroege_signalen": "Early indicators",
       "gedrag": "Behaviour",
-      "kwetsbare_groepen": "Vulnerable groups"
+      "kwetsbare_groepen": "Vulnerable groups",
+      "maatregelen": "Measures"
     }
   },
   "veiligheidsregio_layout": {
@@ -812,7 +814,8 @@
       "verpleeghuizen": "Nursing homes",
       "vroege_signalen": "Early indicators",
       "gedrag": "Behaviour",
-      "kwetsbare_groepen": "Vulnerable groups"
+      "kwetsbare_groepen": "Vulnerable groups",
+      "maatregelen": "Measures"
     }
   },
   "veiligheidsregio_metadata": {
@@ -836,7 +839,7 @@
     "linechart_titel": "Progression in hospital admissions over time",
     "barscale_screenreader_text": "{{value}} hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
     "bron": {
-      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
+      "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
       "text": "RIVM"
     },
     "linechart_description": "",
@@ -851,13 +854,13 @@
     },
     "bronnen": {
       "rivm": {
-        "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv",
-        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
+        "download": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.csv",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
         "text": "RIVM"
       }
     },
-    "tijdelijk_onbeschikbaar_titel": "Temporarily not available",
-    "tijdelijk_onbeschikbaar": "Hospital admissions per safety region and municipality are temporarily not shown. The dataset these numbers were based on (Osiris) is no longer sufficiently aligned with the actual number of hospital admissions.  Soon we expect to show admissions per safety region and municipality again, based on data from NICE, a better dataset. For hospital admissions on a national level NICE is already the source.",
+    "tijdelijk_onbeschikbaar_titel": "",
+    "tijdelijk_onbeschikbaar": "",
     "kpi_titel": "Average number of hospital admissions in 3 days"
   },
   "veiligheidsregio_positief_geteste_personen": {
@@ -870,7 +873,7 @@
     "barscale_toelichting": "This figure shows how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
     "kpi_titel": "Number of confirmed cases",
-    "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.\n\n\n_Due to a prior ICT issue at the GGD, not all confirmed cases had been received on Monday and Tuesday. The backlog is added to the numbers on Wednesday, Thursday and Friday. Therefore, numbers on these days are higher than in reality._",
+    "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.",
     "map_titel": "Distribution of confirmed cases in {{safetyRegion}}",
     "map_toelichting": "This map shows how many confirmed cases of COVID-19 were reported yesterday in the municipalities of this safety region per 100,000 inhabitants.",
     "linechart_titel": "Progression over time",
@@ -977,7 +980,7 @@
     "linechart_titel": "Progression in hospital admissions over time",
     "barscale_screenreader_text": "{{value}} hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
     "bron": {
-      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
+      "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
       "text": "RIVM"
     },
     "linechart_description": "",
@@ -992,13 +995,13 @@
     },
     "bronnen": {
       "rivm": {
-        "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv",
-        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
+        "download": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.csv",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
         "text": "RIVM"
       }
     },
-    "tijdelijk_onbeschikbaar_titel": "Temporarily not available",
-    "tijdelijk_onbeschikbaar": "Hospital admissions per safety region and municipality are temporarily not shown. The dataset these numbers were based on (Osiris) is no longer sufficiently aligned with the actual number of hospital admissions.  Soon we expect to show admissions per safety region and municipality again, based on data from NICE, a better dataset. For hospital admissions on a national level NICE is already the source.",
+    "tijdelijk_onbeschikbaar_titel": "",
+    "tijdelijk_onbeschikbaar": "",
     "kpi_titel": "Average number of hospital admissions in 3 days"
   },
   "gemeente_positief_geteste_personen": {
@@ -1011,7 +1014,7 @@
     "barscale_toelichting": "This number shows how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
     "kpi_titel": "Number of confirmed cases",
-    "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.\n\n\n_Due to a prior ICT issue at the GGD, not all confirmed cases had been received on Monday and Tuesday. The backlog is added to the numbers on Wednesday, Thursday and Friday. Therefore, numbers on these days are higher than in reality._",
+    "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.",
     "map_titel": "Distribution of confirmed cases in {{municipality}}",
     "map_toelichting": "This map shows how many confirmed cases of COVID-19 were reported yesterday in this municipality and other municipalities in the same safety region, per 100,000 inhabitants.",
     "linechart_titel": "Progression over time",
@@ -1142,7 +1145,8 @@
     "legenda": {
       "titel": "Legend"
     },
-    "valid_from": "Valid from {{validFrom}}"
+    "valid_from": "Valid from {{validFrom}}",
+    "sidebar_label": "Level of risk:"
   },
   "gemeente_layout": {
     "headings": {
@@ -1369,7 +1373,7 @@
       }
     }
   },
-  "data_warning_text": "Please note: this information is not as recent as the information for the national level. We're working on a resolution. For more information, see the page \"explanation of the data presented\".",
+  "data_warning_text": "",
   "veelgestelde_vragen_metadata": {
     "title": "Frequently asked questions | Dashboard Coronavirus COVID-19 | Government.nl",
     "description": "",
@@ -1568,7 +1572,8 @@
   },
   "infected_age_groups": {
     "title": "Distribution by age",
-    "description": "The blue (right) bars in this graph show which age group positive tested persons belong to. The gray (left) bars show how large each age group is in relation to the entire Dutch population. The blue and gray bars together show whether age groups have relatively more or less positive tested persons. For example: of all positive tested people is {{infectedPercentage}} between {{ageGroupRange}} years old (blue bar). Of all Dutch people is {{ageGroupPercentage}} between {{ageGroupRange}} years old (grey bar). The chart is updated daily and covers only the most recently reported cases.",
+    "description": "The blue (right) bars in this graph show which age group positive tested persons belong to. The gray (left) bars show how large each age group is in relation to the entire Dutch population. The blue and gray bars together show whether age groups have relatively more or less positive tested persons. For example: 10% of all positive tested persons are in their thirties (blue bar) and 14% of all Dutch people are in their thirties (gray bar). In this example, the age group thirties has relatively fewer positive tested people. The chart is updated daily and covers only the most recently reported cases.",
+    "example": "For example: of all positive tested people is {{infectedPercentage}} between {{ageGroupRange}} years old. Of all Dutch people is {{ageGroupPercentage}} between {{ageGroupRange}} years old. ",
     "graph": {
       "age_group_percentage_title": "Distribution of age groups in the Netherlands",
       "age_group_percentage_tooltip": "of the population is {{ageGroupRange}} years old.",
@@ -1954,5 +1959,161 @@
     "deceased_monitor_chart_legenda_registered": "Actual mortality",
     "deceased_monitor_chart_legenda_expected": "Predicted mortality",
     "deceased_monitor_chart_legenda_expected_margin": "Range of predicted mortality"
+  },
+  "maatregelen": {
+    "categories": {
+      "er_op_uit": "Groups",
+      "bezoek": "At home",
+      "samenkomst": "Venues normally open to the public",
+      "huwelijk": "Wedding ceremonies",
+      "verpleeghuis": "Nursing homes",
+      "horeca": "Restaurants, bars and events",
+      "sport": "Sports",
+      "reizen_binnenland": "Domestic travel",
+      "reizen_buitenland": "Foreign travel",
+      "ov": "Travel and transportation",
+      "uitvaart": "Funeral",
+      "onderwijs": "Education and childcare",
+      "werk": "Work",
+      "winkels": "Groceries and shopping",
+      "alcohol": "Alcohol and softdrugs",
+      "algemeen": "General",
+      "contactberoep": "Contact-based industries"
+    },
+    "headings": {
+      "1": {
+        "toelichting_risiconiveau": "",
+        "extratoelichting": {
+          "titel": "Measures for levek of risk 1",
+          "toelichting": ""
+        }
+      },
+      "2": {
+        "toelichting_risiconiveau": "",
+        "extratoelichting": {
+          "titel": "Measures for levek of risk 2",
+          "toelichting": ""
+        }
+      },
+      "3": {
+        "toelichting_risiconiveau": "There are a lot of infected people and the daily number of new infections is high. The regional health care capacity is insufficient. Measures are needed to regain control of the virus.",
+        "extratoelichting": {
+          "titel": "Measures for levek of risk 3",
+          "toelichting": ""
+        }
+      },
+      "4": {
+        "toelichting_risiconiveau": "There are a lot of infected people and the daily number of new infections is high. The regional health care capacity is insufficient. Strict, national measures are necessary.",
+        "extratoelichting": {
+          "titel": "Measures for levek of risk 4",
+          "toelichting": ""
+        }
+      },
+      "401": {
+        "toelichting_risiconiveau": "There are a lot of infected people and the daily number of new infections is high. The regional health care capacity is insufficient. Strict, national measures are necessary.",
+        "extratoelichting": {
+          "titel": "",
+          "toelichting": "There are currently national measures in effect, despite the level of risk in any safety region."
+        }
+      },
+      "402": {
+        "toelichting_risiconiveau": "There are a lot of infected people and the daily number of new infections is high. The regional health care capacity is insufficient. Strict, national measures are necessary.",
+        "extratoelichting": {
+          "titel": "",
+          "toelichting": "There are currently national measures in effect, despite the level of risk in any safety region."
+        }
+      },
+      "41": {
+        "toelichting_risiconiveau": "There are a lot of infected people and the daily number of new infections is high. The regional health care capacity is insufficient. Strict, national measures are necessary.",
+        "extratoelichting": {
+          "titel": "Current Measures",
+          "toelichting": "In {{safetyRegionName}} there is a regional lockdown in effect."
+        }
+      },
+      "landelijk": {
+        "toelichting_risiconiveau": "",
+        "extratoelichting": {
+          "titel": "The Netherlands in lockdown",
+          "toelichting": "Coronavirus is spreading rapidly. To ensure healthcare services remain available to all, we must limit our contact with others. The national measures apply from 15 December 2020 until at least 19 January 2021."
+        }
+      }
+    },
+    "teksten": {
+      "0_algemeen_18": "Work from home, unless this is not possible.",
+      "0_algemeen_19": "Keep 1.5 metres away from others.",
+      "0_algemeen_20": "If a place is busy, leave.",
+      "0_algemeen_21": "Wash your hands often.",
+      "0_algemeen_22": "Cough and sneeze into your elbow.",
+      "0_algemeen_23": "Wear a face mask where this is mandatory.",
+      "41_bezoek_24": "No more than 2 visitors per day (excluding children under 13). From 24-26 December: no more than 3 visitors per day.",
+      "41_er_op_uit_25": "Indoors and outdoors: no more than 2 people or 1 household in a group.",
+      "41_samenkomst_26": "Museums, cinemas, theatres, zoos, libraries, swimming pools amusement parks and other venues normally open to the public are closed.",
+      "41_horeca_27": "All establishments serving food and drink are closed. Including hotel restaurants and room service.",
+      "41_horeca_28": "Takeaway meals may be ordered from restaurants.",
+      "41_horeca_29": "Events are prohibited.",
+      "41_winkels_30": "Non-essential shops are closed.",
+      "41_winkels_31": "Establishments including supermarkets, chemists, greengrocers and petrol stations may remain open.",
+      "41_winkels_32": "Ban on alcohol after 20.00.",
+      "41_contactberoep_33": "People working in non-medical contact-based industries, including hairdressers, tattooists, beauticians and masseurs cannot perform their work.",
+      "41_sport_34": "No more than 2 people, staying 1.5 metres apart at all times. This does not apply to children under 18 and elite athletes.",
+      "41_sport_35": "All indoor sports venues are closed.",
+      "41_sport_36": "No competitions or group lessons. This does not apply to elite athletes.",
+      "41_ov_37": "Stay home as much as possible. Public transport for essential travel only.",
+      "41_ov_38": "Do not travel abroad. Do not book any trips abroad until mid-March.",
+      "41_onderwijs_39": "Remote and online teaching in primary, secondary, secondary vocational and higher education and for all other forms of training and educational activities. Exemptions include exams, practical lessons and education for vulnerable pupils. These measures apply from 16 December 2020 until at least 17 January 2021.",
+      "41_onderwijs_40": "Childcare centres are closed. These measures apply from 16 December 2020 until at least 17 January 2021.",
+      "41_onderwijs_41": "Emergency childcare is available for children of key workers and for vulnerable children. These measures apply from 16 December 2020 until at least 17 January 2021.",
+      "41_algemeen_42": "COVID-19 symptoms? Stay at home.",
+      "0_algemeen_42": "COVID-19 symptoms? Stay at home.",
+      "0_algemeen_43": "COVID-19 symptoms? Get tested."
+    }
+  },
+  "nationaal_maatregelen": {
+    "titel": "Measures",
+    "titel_sidebar": "Measures",
+    "subtitel_sidebar": "There are national measures",
+    "tabel_titel": "Current lockdown measures"
+  },
+  "veiligheidsregio_maatregelen": {
+    "titel_sidebar": "Measures",
+    "titel": "Measures in {{safetyRegionName}}",
+    "titel_risiconiveau": "Level of risk",
+    "toelichting_risiconiveau": "For more information about your region, please check the website of your safety region.",
+    "linktext_riskpage": "See more about the levels of risk.",
+    "linktext_regionpage": "Website safety region {{safetyRegionName}}",
+    "titel_aanvullendemaatregelen": "Additional information",
+    "toelichting_aanvullendemaatregelen": "There can be additional measures on a regional level. Please take a look at the website of the safety region.",
+    "metadata": {
+      "title": "Measures in {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
+      "description": "Overview of the corona measures in the safety region {{safetyRegionName}}."
+    },
+    "subtitel_sidebar": "There are national measures"
+  },
+  "veiligheidsregio_maatregelen_urls": {
+    "VR01": "http://www.veiligheidsregiogroningen.nl/",
+    "VR02": "https://www.veiligheidsregiofryslan.nl/",
+    "VR03": "http://www.vrd.nl/",
+    "VR04": "https://www.vrijsselland.nl/",
+    "VR05": "http://www.vrtwente.nl/",
+    "VR06": "https://www.vnog.nl/",
+    "VR07": "http://www.vggm.nl/vggm",
+    "VR08": "http://www.vrgz.nl/",
+    "VR09": "http://www.vru.nl/",
+    "VR10": "http://www.vrnhn.nl/",
+    "VR11": "https://www.veiligheidsregiozaanstreekwaterland.nl/",
+    "VR12": "http://www.vrk.nl/",
+    "VR13": "https://www.amsterdam.nl/veiligheidsregio/",
+    "VR14": "https://www.vrgooienvechtstreek.nl/",
+    "VR15": "https://haaglandenveilig.nl/",
+    "VR16": "https://www.hollandsmiddenveilig.nl/",
+    "VR17": "https://www.rijnmondveilig.nl/",
+    "VR18": "https://www.zhzveilig.nl/",
+    "VR19": "https://www.zeelandveilig.nl/",
+    "VR20": "https://www.vrmwb.nl/",
+    "VR21": "https://www.vrbn.nl/",
+    "VR22": "http://www.veiligheidsregiozob.nl/",
+    "VR23": "http://vrln.nl/",
+    "VR24": "http://www.vrzuidlimburg.nl/",
+    "VR25": "http://www.veiligheidsregioflevoland.nl/"
   }
 }

@@ -5,6 +5,7 @@ import Arts from '~/assets/arts.svg';
 import ElderlyIcon from '~/assets/elderly.svg';
 import Gedrag from '~/assets/gedrag.svg';
 import Gehandicaptenzorg from '~/assets/gehandicapte-zorg.svg';
+import Maatregelen from '~/assets/maatregelen.svg';
 import Notification from '~/assets/notification.svg';
 import ReproIcon from '~/assets/reproductiegetal.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
@@ -20,12 +21,9 @@ import {
   MetricMenuItem,
 } from '~/components-styled/aside/menu';
 import { TitleWithIcon } from '~/components-styled/aside/title-with-icon';
+import { Spacer } from '~/components-styled/base';
 import { SidebarMetric } from '~/components-styled/sidebar-metric';
-import { DeceasedMetric } from '~/components/common/deceased-metric';
-import { ElderlyAtHomeMetric } from '~/components/common/elderly-at-home-metric';
-import { InfectiousPeopleMetric } from '~/components/landelijk/infectious-people-metric';
 import Layout from '~/components/layout';
-import { BehaviorMetric } from '~/domain/behavior/behavior-metric';
 import siteText from '~/locale/index';
 import { NationalPageProps } from '~/static-props/nl-data';
 import theme from '~/style/theme';
@@ -157,6 +155,22 @@ function NationalLayout(props: NationalLayoutProps) {
                       </a>
                     </Link>
                   </MetricMenuItem>
+                  <MetricMenuItem>
+                    <Link href={`/landelijk/maatregelen`}>
+                      <a className={getClassName(`/landelijk/maatregelen`)}>
+                        <TitleWithIcon
+                          icon={
+                            <Maatregelen fill={theme.colors.restrictions} />
+                          }
+                          title={siteText.nationaal_maatregelen.titel_sidebar}
+                          subtitle={
+                            siteText.nationaal_maatregelen.subtitel_sidebar
+                          }
+                        />
+                        <Spacer mb={2} />
+                      </a>
+                    </Link>
+                  </MetricMenuItem>
                 </Menu>
               </CategoryMenuItem>
               <CategoryMenuItem>
@@ -204,14 +218,13 @@ function NationalLayout(props: NationalLayoutProps) {
                           icon={<Ziektegolf />}
                           title={siteText.besmettelijke_personen.titel_sidebar}
                         />
-                        <span className="metric-wrapper">
-                          <InfectiousPeopleMetric
-                            data={
-                              data.infectious_people_last_known_average
-                                ?.last_value
-                            }
-                          />
-                        </span>
+                        <SidebarMetric
+                          data={data}
+                          scope="nl"
+                          metricName="infectious_people_last_known_average"
+                          metricProperty="infectious_avg"
+                          localeTextKey="besmettelijke_personen"
+                        />
                       </a>
                     </Link>
                   </MetricMenuItem>
@@ -242,12 +255,13 @@ function NationalLayout(props: NationalLayoutProps) {
                           icon={<VirusIcon />}
                           title={siteText.sterfte.titel_sidebar}
                         />
-                        <span className="metric-wrapper">
-                          <DeceasedMetric
-                            title={siteText.sterfte.kpi_titel}
-                            data={data.deceased_rivm.last_value}
-                          />
-                        </span>
+                        <SidebarMetric
+                          data={data}
+                          scope="nl"
+                          metricName="deceased_rivm"
+                          metricProperty="covid_daily"
+                          localeTextKey="sterfte"
+                        />
                       </a>
                     </Link>
                   </MetricMenuItem>
@@ -377,12 +391,13 @@ function NationalLayout(props: NationalLayoutProps) {
                           icon={<ElderlyIcon />}
                           title={siteText.thuiswonende_ouderen.titel_sidebar}
                         />
-                        <span className="metric-wrapper">
-                          <ElderlyAtHomeMetric
-                            data={data.elderly_at_home.last_value}
-                            title={siteText.thuiswonende_ouderen.kpi_titel}
-                          />
-                        </span>
+                        <SidebarMetric
+                          data={data}
+                          scope="nl"
+                          metricName="elderly_at_home"
+                          metricProperty="positive_tested_daily"
+                          localeTextKey="thuiswonende_ouderen"
+                        />
                       </a>
                     </Link>
                   </MetricMenuItem>
@@ -449,9 +464,12 @@ function NationalLayout(props: NationalLayoutProps) {
                           icon={<Gedrag />}
                           title={siteText.nl_gedrag.sidebar.titel}
                         />
-                        <span className="metric-wrapper">
-                          <BehaviorMetric data={data.behavior} />
-                        </span>
+                        <SidebarMetric
+                          data={data}
+                          scope="nl"
+                          metricName="behavior"
+                          localeTextKey="gedrag_common"
+                        />
                       </a>
                     </Link>
                   </MetricMenuItem>
