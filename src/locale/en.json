@@ -2033,7 +2033,7 @@
         "toelichting_risiconiveau": "",
         "extratoelichting": {
           "titel": "The Netherlands in lockdown",
-          "toelichting": "Coronavirus is spreading rapidly. To ensure healthcare services remain available to all, we must limit our contact with others. The following measures apply from 15 December 2020 until at least 19 January 2021:"
+          "toelichting": "Coronavirus is spreading rapidly. To ensure healthcare services remain available to all, we must limit our contact with others. The national measures apply from 15 December 2020 until at least 19 January 2021."
         }
       }
     },
@@ -2062,8 +2062,9 @@
       "41_onderwijs_39": "Remote and online teaching in primary, secondary, secondary vocational and higher education and for all other forms of training and educational activities. Exemptions include exams, practical lessons and education for vulnerable pupils. These measures apply from 16 December 2020 until at least 17 January 2021.",
       "41_onderwijs_40": "Childcare centres are closed. These measures apply from 16 December 2020 until at least 17 January 2021.",
       "41_onderwijs_41": "Emergency childcare is available for children of key workers and for vulnerable children. These measures apply from 16 December 2020 until at least 17 January 2021.",
-      "0_algemeen_42": "Heb je klachten? Blijf thuis.",
-      "0_algemeen_43": "Heb je klachten? Laat je testen."
+      "41_algemeen_42": "",
+      "0_algemeen_42": "",
+      "0_algemeen_43": ""
     }
   },
   "nationaal_maatregelen": {
@@ -2074,7 +2075,6 @@
   },
   "veiligheidsregio_maatregelen": {
     "titel_sidebar": "Measures",
-    "subtitel_sidebar": "Lockdown Measures",
     "titel": "Measures in {{safetyRegionName}}",
     "titel_risiconiveau": "",
     "toelichting_risiconiveau": "For more information about your region, please check the website of your safety region.",
@@ -2085,7 +2085,8 @@
     "metadata": {
       "title": "Measures in {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
       "description": "Overview of the corona measures in the safety region {{safetyRegionName}}."
-    }
+    },
+    "subtitel_sidebar": ""
   },
   "veiligheidsregio_maatregelen_urls": {
     "VR01": "http://www.veiligheidsregiogroningen.nl/",
