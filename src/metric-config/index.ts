@@ -3,6 +3,7 @@ import { gm } from './gm';
 import { nl } from './nl';
 import { MetricConfig, NO_METRIC_PROPERTY } from './common';
 import { vr } from './vr';
+export { ranges } from './ranges';
 
 /**
  * This configuration declares properties about data to be used by various

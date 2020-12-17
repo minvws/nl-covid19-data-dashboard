@@ -82,7 +82,6 @@ export function SidebarBarScale<T>({
         screenReaderText={text.barscale_screenreader_text}
         value={propertyValue}
         id={uniqueId}
-        rangesKey={`${metricName}__${metricProperty}`}
         gradient={config.barScale.gradient}
         showValue={false}
       />

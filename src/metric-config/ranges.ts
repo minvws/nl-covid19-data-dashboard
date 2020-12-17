@@ -23,4 +23,6 @@ export const ranges = {
     min: 0,
     max: 0,
   },
-};
+} as const;
+
+export type Ranges = typeof ranges;
