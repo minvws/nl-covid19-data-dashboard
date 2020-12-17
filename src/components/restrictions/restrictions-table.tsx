@@ -51,7 +51,6 @@ function MobileRestrictionsTable(props: TableProps) {
               <Cell
                 role="rowheader"
                 borderTop={'1px solid black'}
-                width="20em"
                 pt={3}
                 px={2}
                 pb={3}
@@ -95,7 +94,7 @@ function DesktopRestrictionsTable(props: TableProps) {
               role="rowheader"
               borderTop={'1px solid black'}
               backgroundColor="#F9F9F9"
-              width="180em"
+              width="12em"
               py={3}
               px={2}
               verticalAlign="top"

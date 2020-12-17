@@ -14,11 +14,14 @@ import {
   SpaceProps,
   verticalAlign,
   VerticalAlignProps,
+  width,
+  WidthProps,
 } from 'styled-system';
 
 type TableProps = TableCellProps & PositionProps;
 
 type TableCellProps = TableBodyProps &
+  WidthProps &
   ColorProps &
   BorderProps &
   VerticalAlignProps;
@@ -37,5 +40,5 @@ export const TableBody = styled.tbody<TableBodyProps>(
 export const Row = styled.tr<ColorProps>(compose(color));
 
 export const Cell = styled.td<TableCellProps>(
-  compose(margin, padding, color, space, border, verticalAlign)
+  compose(margin, padding, color, space, border, verticalAlign, width)
 );
