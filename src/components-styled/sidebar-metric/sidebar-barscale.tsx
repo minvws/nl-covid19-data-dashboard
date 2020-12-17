@@ -83,7 +83,6 @@ export function SidebarBarScale<T>({
         value={propertyValue}
         id={uniqueId}
         gradient={config.barScale.gradient}
-        showValue={false}
       />
     </Box>
   );

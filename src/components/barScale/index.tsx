@@ -32,7 +32,7 @@ export function BarScale({
   id,
   screenReaderText,
   showAxis,
-  showValue = true,
+  showValue,
 }: BarscaleProps) {
   const scale = useDynamicScale(value, min, max);
 

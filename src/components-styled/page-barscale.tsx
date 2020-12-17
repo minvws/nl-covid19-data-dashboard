@@ -102,8 +102,8 @@ export function PageBarScale<T>({
         value={propertyValue}
         id={uniqueId}
         gradient={config.barScale.gradient}
-        showValue={true}
-        showAxis={true}
+        showValue
+        showAxis
       />
       {differenceKey && (
         <DifferenceIndicator
