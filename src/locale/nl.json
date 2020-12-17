@@ -39,6 +39,7 @@
   },
   "nav": {
     "links": {
+      "actueel": "Actueel",
       "index": "Landelijk",
       "over": "Over dit dashboard",
       "meer": "Meer informatie over het coronavirus",

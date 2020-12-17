@@ -15,21 +15,15 @@ export function SiteHeader() {
         <Logo />
         <LanguageSwitcher />
       </MaxWidth>
-      <Box backgroundColor="header" py={4} color="white">
-        <MaxWidth spacing={3}>
-          <Box fontSize={5} lineHeight={0} fontWeight="bold">
-            {text.header.title}
+      <Box backgroundColor="header" py={3} color="white">
+        <MaxWidth display="flex" flexWrap="wrap" alignItems="center" justifyContent="space-between">
+          <Box fontSize={3} py={[2, 2, 2, 3]} lineHeight={'1em'} fontWeight="bold">
+            {/* {text.header.title} */}
+            Coronadashboard
           </Box>
-          <p css={css({ m: 0 })}>
-            {text.header.text}{' '}
-            <Link passHref href="/over">
-              <a css={css({ color: 'white' })}>{text.header.link}</a>
-            </Link>
-          </p>
+
+          <TopNavigation />
         </MaxWidth>
-      </Box>
-      <Box backgroundColor="#aa004b" color="white">
-        <TopNavigation />
       </Box>
     </Box>
   );
