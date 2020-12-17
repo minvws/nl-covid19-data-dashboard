@@ -29,7 +29,7 @@ export function RestrictionsTable(props: RestrictionsTableProps) {
 
   const restrictionsTable = useRestrictionsTable(data);
 
-  const breakpoints = useBreakpoints();
+  const breakpoints = useBreakpoints(true);
 
   const color = useEscalationColor(escalationLevel);
 

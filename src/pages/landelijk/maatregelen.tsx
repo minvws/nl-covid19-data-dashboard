@@ -40,11 +40,9 @@ const NationalRestrictions: FCWithLayout<NationalPageProps> = (props) => {
 
       <Spacer mb={3} />
 
-      <KpiSection flexDirection={['column', 'row']}>
-        <Box flex={{ lg: '1 1 25%' }}>
-          <Heading level={3}>{restrictionInfo.extratoelichting.titel}</Heading>
-        </Box>
-        <Box flex={{ lg: '1 1 75%' }}>
+      <KpiSection flexDirection="column">
+        <Heading level={3}>{restrictionInfo.extratoelichting.titel}</Heading>
+        <Box>
           <Text m={0}>{restrictionInfo.extratoelichting.toelichting}</Text>
         </Box>
       </KpiSection>
