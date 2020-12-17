@@ -5,24 +5,24 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { MaxWidth } from '~/components-styled/max-width';
 import text from '~/locale/index';
-import { isDefined } from 'ts-is-present';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import Menu from '~/assets/menu.svg';
 import Close from '~/assets/close.svg';
 import theme from '~/style/theme';
 import { VisuallyHidden } from '~/components-styled/visually-hidden';
+import { asResponsiveArray } from '~/style/utils';
 
 export function TopNavigation() {
   const router = useRouter();
 
-  const [isSmallScreen, setIsSmallScreen] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(true);
-  const breakpoints = useBreakpoints();
+  const breakpoints = useBreakpoints(true);
+  const isSmallScreen = !breakpoints.md;
 
   useEffect(() => {
-    setIsSmallScreen(!breakpoints.md);
+    // Menu is opened by default as fallback: JS opens it
     setIsMenuOpen(false);
-  }, [breakpoints.md]);
+  }, []);
 
   function toggleMenu() {
     setIsMenuOpen(!isMenuOpen);
@@ -86,10 +86,8 @@ function NavItem({
   return (
     <StyledListItem>
       <Link passHref href={href}>
-        <NavLink
-          isActive={isDefined(isActive) ? isActive : pathname.startsWith(href)}
-        >
-          <span>{children}</span>
+        <NavLink isActive={isActive ?? pathname.startsWith(href)}>
+          <NavLinkSpan>{children}</NavLinkSpan>
         </NavLink>
       </Link>
     </StyledListItem>
@@ -132,12 +130,12 @@ const NavWrapper = styled.nav(
   })
 );
 
-const NavList = styled.ol(
+const NavList = styled.ul(
   css({
     listStyle: 'none',
     padding: 0,
     margin: 0,
-    display: ['block', null, null, 'flex'],
+    display: asResponsiveArray({ _: 'block', md: 'flex' }),
   })
 );
 
@@ -146,7 +144,7 @@ const StyledListItem = styled.li(
   css({
     '& + &': {
       borderTop: '1px solid rgba(255, 255, 255, 0.25)',
-      borderTopWidth: ['1px', null, null, 0],
+      borderTopWidth: asResponsiveArray({ _: '1px', md: 0 }),
     },
   })
 );
@@ -160,27 +158,16 @@ const NavLink = styled.a<{ isActive: boolean }>((x) =>
     color: 'white',
 
     // The span is a narrower element to position the underline to
-    '& span': {
-      display: 'inline-block',
-      px: [0, null, null, '1.5rem'],
-      py: '0.7rem',
-      position: 'relative',
-
+    [NavLinkSpan]: {
       // Styled underline
       '&::before': {
         content: x.isActive ? '""' : undefined,
-        bg: 'white',
-        right: [0, null, null, '1.5rem'],
-        left: [0, null, null, '1.5rem'],
-        bottom: '0.6rem',
-        height: '0.15rem',
-        position: 'absolute',
       },
     },
 
     // Show the underline
     '&:hover, &:focus': {
-      'span::before': {
+      [`${NavLinkSpan}::before`]: {
         content: '""',
       },
     },
@@ -196,3 +183,24 @@ const NavLink = styled.a<{ isActive: boolean }>((x) =>
       : undefined),
   })
 );
+
+const NavLinkSpan = styled.span(() => {
+  const horizontalSpace = asResponsiveArray({ _: 0, md: '1.5rem' });
+
+  return css({
+    display: 'inline-block',
+    px: horizontalSpace,
+    py: '0.7rem',
+    position: 'relative',
+
+    // Styled underline
+    '&::before': {
+      bg: 'white',
+      right: horizontalSpace,
+      left: horizontalSpace,
+      bottom: '0.6rem',
+      height: '0.15rem',
+      position: 'absolute',
+    },
+  });
+});
