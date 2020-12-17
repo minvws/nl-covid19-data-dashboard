@@ -17,6 +17,7 @@
     }
   },
   "required": [
+    "positive_tested_people__infected_daily_increase",
     "positive_tested_people__infected_daily_total",
     "hospital_admissions__moving_average_hospital"
   ],

@@ -1,9 +1,7 @@
 import { ReactNode } from 'react';
-import {
-  EscalationLevel,
-  EscalationLevelIcon,
-} from '~/components-styled/escalation-level-icon';
+import { EscalationLevelIcon } from '~/components-styled/escalation-level-icon';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
+import { EscalationLevel } from '~/components/restrictions/type';
 import text from '~/locale/index';
 import { EscalationLevels } from '~/types/data';
 import { formatDateFromSeconds } from '~/utils/formatDate';
@@ -16,7 +14,7 @@ export const escalationTooltip = (selectHandler: RegionSelectionHandler) => {
   return (context: SafetyRegionProperties & EscalationLevels): ReactNode => {
     const level = context.escalation_level as EscalationLevel;
 
-    const onSelect = (event: any) => {
+    const onSelect = (event: React.MouseEvent<HTMLElement>) => {
       event.stopPropagation();
       selectHandler(context);
     };
@@ -25,6 +23,13 @@ export const escalationTooltip = (selectHandler: RegionSelectionHandler) => {
       EscalationLevel,
       { titel: string; valid_from: string }
     >)[level];
+
+    const validFromText = replaceVariablesInText(
+      text.escalatie_niveau.valid_from,
+      {
+        validFrom: formatDateFromSeconds(context.valid_from_unix, 'short'),
+      }
+    );
 
     return (
       <TooltipContent title={context.vrname} onSelect={onSelect}>
@@ -35,12 +40,7 @@ export const escalationTooltip = (selectHandler: RegionSelectionHandler) => {
           <div>
             <strong>{escalationText.titel}</strong>
             <br />
-            {replaceVariablesInText(escalationText.valid_from, {
-              validFrom: formatDateFromSeconds(
-                context.valid_from_unix,
-                'short'
-              ),
-            })}
+            {validFromText}
           </div>
         </div>
       </TooltipContent>

@@ -25,7 +25,6 @@ import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import {
   getInstallationNames,
   getSewerWaterBarChartData,
-  getSewerWaterBarScaleData,
   getSewerWaterLineChartData,
   getSewerWaterScatterPlotData,
 } from '~/utils/sewer-water/municipality-sewer-water.util';
@@ -36,14 +35,12 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
   const { data, municipalityName } = props;
 
   const {
-    barScaleData,
     lineChartData,
     scatterPlotData,
     barChartData,
     sewerStationNames,
   } = useMemo(() => {
     return {
-      barScaleData: getSewerWaterBarScaleData(data),
       lineChartData: getSewerWaterLineChartData(data),
       scatterPlotData: getSewerWaterScatterPlotData(data),
       barChartData: getSewerWaterBarChartData(data),
@@ -101,25 +98,24 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
       />
 
       <TwoKpiSection>
-        {barScaleData?.value !== undefined && (
-          <KpiTile
-            title={text.barscale_titel}
-            description={text.extra_uitleg}
-            metadata={{
-              date: [
-                sewerAverages.last_value.week_start_unix,
-                sewerAverages.last_value.week_end_unix,
-              ],
-              source: text.bronnen.rivm,
-            }}
-          >
-            <KpiValue
-              data-cy="barscale_value"
-              absolute={barScaleData.value}
-              valueAnnotation={siteText.waarde_annotaties.riool_normalized}
-            />
-          </KpiTile>
-        )}
+        <KpiTile
+          title={text.barscale_titel}
+          description={text.extra_uitleg}
+          metadata={{
+            date: [
+              sewerAverages.last_value.week_start_unix,
+              sewerAverages.last_value.week_end_unix,
+            ],
+            source: text.bronnen.rivm,
+          }}
+        >
+          <KpiValue
+            data-cy="barscale_value"
+            absolute={sewerAverages.last_value.average}
+            valueAnnotation={siteText.waarde_annotaties.riool_normalized}
+            difference={data.difference.sewer__average}
+          />
+        </KpiTile>
 
         <KpiTile
           title={text.total_installation_count_titel}

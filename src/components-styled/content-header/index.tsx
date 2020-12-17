@@ -1,5 +1,4 @@
 import css from '@styled-system/css';
-import { Link } from '~/utils/link';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import {
@@ -13,6 +12,7 @@ import {
   InlineText,
   Text,
 } from '~/components-styled/typography';
+import { Link } from '~/utils/link';
 import { Box } from '../base';
 
 /*
@@ -141,18 +141,24 @@ export function ContentHeader(props: ContentHeaderProps) {
       )}
 
       <BodyBox>
-        <ReferenceBox>
-          <Text>
-            {subtitle}{' '}
-            <Link href={reference.href}>
-              <Text as="a" href={reference.href}>
-                {reference.text}
-              </Text>
-            </Link>
-          </Text>
-        </ReferenceBox>
+        {reference && (
+          <ReferenceBox>
+            <Text>
+              {subtitle}{' '}
+              <Link href={reference.href}>
+                <Text as="a" href={reference.href}>
+                  {reference.text}
+                </Text>
+              </Link>
+            </Text>
+          </ReferenceBox>
+        )}
 
-        <MetadataBox>{metadata && <Metadata {...metadata} />}</MetadataBox>
+        {metadata && (
+          <MetadataBox>
+            <Metadata {...metadata} />
+          </MetadataBox>
+        )}
       </BodyBox>
     </Header>
   );
@@ -161,9 +167,9 @@ export function ContentHeader(props: ContentHeaderProps) {
 interface ContentHeaderProps {
   id?: string;
   title: string;
-  subtitle: string;
+  subtitle?: string;
   metadata?: MetadataProps;
-  reference: {
+  reference?: {
     href: string;
     text: string;
   };

@@ -5,4 +5,8 @@ export type PageName =
   | 'gehandicaptenzorg'
   | 'actueel';
 
-export type RegioPageName = PageName | 'verpleeghuiszorg';
+export type RegioPageName =
+  | PageName
+  | 'verpleeghuiszorg'
+  | 'thuiswonende-ouderen'
+  | 'maatregelen';

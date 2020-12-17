@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import {
-  border,
-  BorderProps,
+  borders,
+  BordersProps,
   color,
   ColorProps,
   flexbox,
@@ -28,7 +28,7 @@ export type BoxProps = SpaceProps &
   ColorProps &
   PositionProps &
   TypographyProps &
-  BorderProps &
+  BordersProps &
   ShadowProps &
   GridProps;
 
@@ -47,7 +47,7 @@ export const Box = styled.div<BoxProps>(
   color,
   position,
   typography,
-  border,
+  borders,
   shadow,
   grid
 );

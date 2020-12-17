@@ -1,6 +1,6 @@
 import CoronaVirus from '~/assets/coronavirus.svg';
+import Gehandicaptenzorg from '~/assets/gehandicapte-zorg.svg';
 import Locatie from '~/assets/locaties.svg';
-import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
@@ -12,7 +12,7 @@ import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import {
-  getSafetyRegionData,
+  getSafetyRegionStaticProps,
   getSafetyRegionPaths,
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
@@ -49,7 +49,7 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
         title={replaceVariablesInText(positiveTestPeopleText.titel, {
           safetyRegion: safetyRegionName,
         })}
-        icon={<Verpleeghuiszorg />}
+        icon={<Gehandicaptenzorg />}
         subtitle={replaceVariablesInText(
           positiveTestPeopleText.pagina_toelichting,
           {
@@ -197,7 +197,7 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
 
 DisabilityCare.getLayout = getSafetyRegionLayout();
 
-export const getStaticProps = getSafetyRegionData();
+export const getStaticProps = getSafetyRegionStaticProps;
 export const getStaticPaths = getSafetyRegionPaths();
 
 export default DisabilityCare;

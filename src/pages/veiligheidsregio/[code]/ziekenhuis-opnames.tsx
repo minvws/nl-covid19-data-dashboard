@@ -1,30 +1,39 @@
+import { useRouter } from 'next/router';
+import { isFilled } from 'ts-is-present';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
-import { Box } from '~/components-styled/base';
+import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { ContentHeader } from '~/components-styled/content-header';
-import { Tile } from '~/components-styled/layout';
-import { Heading, Text } from '~/components-styled/typography';
+import { KpiTile } from '~/components-styled/kpi-tile';
+import { KpiValue } from '~/components-styled/kpi-value';
+import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { TwoKpiSection } from '~/components-styled/two-kpi-section';
+import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
+import { regionThresholds } from '~/components/choropleth/region-thresholds';
+import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
+import { createMunicipalHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/municipal/create-municipal-hospital-admissions-tooltip';
 import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import { SEOHead } from '~/components/seoHead';
+import regionCodeToMunicipalCodeLookup from '~/data/regionCodeToMunicipalCodeLookup';
 import siteText from '~/locale/index';
 import {
-  getSafetyRegionData,
   getSafetyRegionPaths,
+  getSafetyRegionStaticProps,
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
+import { getLastFilledValue } from '~/utils/get-last-filled-value';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text = siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
 
 const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
-  // const { data, safetyRegionName } = props;
-  // const router = useRouter();
+  const { data, safetyRegionName } = props;
+  const router = useRouter();
 
-  // const lastValue = data.results_per_region.last_value;
+  const lastValue = getLastFilledValue(data, 'results_per_region');
 
-  // const municipalCodes = regionCodeToMunicipalCodeLookup[data.code];
-  // const selectedMunicipalCode = municipalCodes ? municipalCodes[0] : undefined;
-  const { safetyRegionName } = props;
+  const municipalCodes = regionCodeToMunicipalCodeLookup[data.code];
+  const selectedMunicipalCode = municipalCodes ? municipalCodes[0] : undefined;
 
   return (
     <>
@@ -43,15 +52,15 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
         })}
         icon={<Ziekenhuis />}
         subtitle={text.pagina_toelichting}
-        // metadata={{
-        //   datumsText: text.datums,
-        //   dateInfo: lastValue.date_of_report_unix,
-        //   dateOfInsertionUnix: lastValue.date_of_insertion_unix,
-        //   dataSources: [text.bronnen.rivm],
-        // }}
+        metadata={{
+          datumsText: text.datums,
+          dateInfo: lastValue.date_of_report_unix,
+          dateOfInsertionUnix: lastValue.date_of_insertion_unix,
+          dataSources: [text.bronnen.rivm],
+        }}
         reference={text.reference}
       />
-      {/*
+
       <TwoKpiSection>
         <KpiTile
           showDataWarning
@@ -78,10 +87,12 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
           metadata={{ source: text.bronnen.rivm }}
           title={text.linechart_titel}
           description={text.linechart_description}
-          values={data.results_per_region.values.map((value) => ({
-            value: value.hospital_moving_avg_per_region,
-            date: value.date_of_report_unix,
-          }))}
+          values={data.results_per_region.values
+            .filter((x) => isFilled(x.hospital_moving_avg_per_region))
+            .map((value) => ({
+              value: value.hospital_moving_avg_per_region,
+              date: value.date_of_report_unix,
+            }))}
         />
       )}
 
@@ -105,27 +116,19 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
           highlightSelection={false}
           metricName="hospital_admissions"
           metricProperty="hospital_admissions"
-          tooltipContent={createMunicipalHospitalAdmissionsTooltip(router)}
+          tooltipContent={createMunicipalHospitalAdmissionsTooltip(
+            createSelectMunicipalHandler(router, 'ziekenhuis-opnames')
+          )}
           onSelect={createSelectMunicipalHandler(router, 'ziekenhuis-opnames')}
         />
       </ChoroplethTile>
-        reference={text.reference}
-      />
-      */}
-
-      <Tile>
-        <Heading level={3}>{text.tijdelijk_onbeschikbaar_titel}</Heading>
-        <Box width="70%">
-          <Text>{text.tijdelijk_onbeschikbaar}</Text>
-        </Box>
-      </Tile>
     </>
   );
 };
 
 IntakeHospital.getLayout = getSafetyRegionLayout();
 
-export const getStaticProps = getSafetyRegionData();
+export const getStaticProps = getSafetyRegionStaticProps;
 export const getStaticPaths = getSafetyRegionPaths();
 
 export default IntakeHospital;

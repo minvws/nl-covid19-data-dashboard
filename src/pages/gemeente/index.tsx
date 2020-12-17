@@ -22,12 +22,10 @@ const tooltipContent = (selectedHandler: MunicipalitySelectionHandler) => {
     };
 
     return (
-      context && (
-        <TooltipContent
-          title={context.gemnaam}
-          onSelect={onSelectMunicipal}
-        ></TooltipContent>
-      )
+      <TooltipContent
+        title={context.gemnaam}
+        onSelect={onSelectMunicipal}
+      ></TooltipContent>
     );
   };
 };
@@ -61,10 +59,7 @@ const Municipality: FCWithLayout<any> = () => {
         <div className="map-container">
           <MunicipalityNavigationMap
             tooltipContent={tooltipContent(onSelectMunicipal)}
-            onSelect={createSelectMunicipalHandler(
-              router,
-              'positief-geteste-mensen'
-            )}
+            onSelect={createSelectMunicipalHandler(router)}
           />
         </div>
       </article>

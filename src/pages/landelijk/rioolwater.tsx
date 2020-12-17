@@ -67,6 +67,7 @@ const SewerWater: FCWithLayout<NationalPageProps> = ({ data }) => {
             data-cy="sewer_average"
             absolute={sewerAverages.last_value.average}
             valueAnnotation={siteText.waarde_annotaties.riool_normalized}
+            difference={data.difference.sewer__average}
           />
         </KpiTile>
         <KpiTile

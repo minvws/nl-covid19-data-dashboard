@@ -1,7 +1,7 @@
 import { FCWithLayout } from '~/components/layout';
 import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
 import {
-  getSafetyRegionData,
+  getSafetyRegionStaticProps,
   getSafetyRegionPaths,
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
@@ -12,7 +12,7 @@ const SafetyRegion: FCWithLayout<ISafetyRegionData> = () => {
 
 SafetyRegion.getLayout = getSafetyRegionLayout();
 
-export const getStaticProps = getSafetyRegionData();
+export const getStaticProps = getSafetyRegionStaticProps;
 export const getStaticPaths = getSafetyRegionPaths();
 
 export default SafetyRegion;

@@ -13,6 +13,7 @@ import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { MultipleLineChartTile } from '~/components-styled/multiple-line-chart-tile';
+import { PageBarScale } from '~/components-styled/page-barscale';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
@@ -22,13 +23,12 @@ import { createSelectMunicipalHandler } from '~/components/choropleth/select-han
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
 import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/create-positive-tested-people-regional-tooltip';
-import { PositiveTestedPeopleBarScale } from '~/components/landelijk/positive-tested-people-barscale';
 import { FCWithLayout } from '~/components/layout';
 import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
 import { AgeDemographic } from '~/domain/infected-people/age-demographic/age-demographic';
 import { formatAgeGroupRange } from '~/domain/infected-people/age-demographic/age-demographic-chart';
-import siteText from '~/locale/index';
+
 import {
   getNationalStaticProps,
   NationalPageProps,
@@ -40,9 +40,6 @@ import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-
-const text = siteText.positief_geteste_personen;
-const ggdText = siteText.positief_geteste_personen_ggd;
 
 /* Retrieves certain age demographic data to be used in the example text. */
 function getAgeDemographicExampleData(data: NationalInfectedAgeGroups) {
@@ -63,7 +60,12 @@ function getAgeDemographicExampleData(data: NationalInfectedAgeGroups) {
   };
 }
 
-const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
+const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
+  data,
+  text: siteText,
+}) => {
+  const text = siteText.positief_geteste_personen;
+  const ggdText = siteText.positief_geteste_personen_ggd;
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>(
     'municipal'
   );
@@ -108,7 +110,14 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
             source: text.bronnen.rivm,
           }}
         >
-          <PositiveTestedPeopleBarScale data={data} showAxis />
+          <PageBarScale
+            data={data}
+            scope="nl"
+            metricName="infected_people_delta_normalized"
+            metricProperty="infected_daily_increase"
+            localeTextKey="positief_geteste_personen"
+            differenceKey="infected_people_delta_normalized__infected_daily_increase"
+          />
 
           <Text>{text.barscale_toelichting}</Text>
         </KpiTile>
@@ -129,7 +138,12 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
               data.difference.infected_people_total__infected_daily_total
             }
           />
-          <Text>{text.kpi_toelichting}</Text>
+
+          <Text
+            as="div"
+            dangerouslySetInnerHTML={{ __html: text.kpi_toelichting }}
+          />
+
           <Box>
             <Heading level={4} fontSize={'1.2em'} mt={'1.5em'} mb={0}>
               <span
@@ -216,18 +230,15 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
 
       <ChartTile
         title={siteText.infected_age_groups.title}
-        description={siteText.infected_age_groups.description}
+        description={replaceVariablesInText(
+          siteText.infected_age_groups.description,
+          ageDemographicExampleData
+        )}
         metadata={{
           date: dataInfectedDelta.last_value.date_of_report_unix,
           source: text.bronnen.rivm,
         }}
       >
-        <Text mt={0}>
-          {replaceVariablesInText(
-            siteText.infected_age_groups.example,
-            ageDemographicExampleData
-          )}
-        </Text>
         <AgeDemographic data={data.infected_age_groups} />
       </ChartTile>
 
@@ -263,6 +274,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
           <KpiValue
             data-cy="ggd_tested_total"
             absolute={dataGgdLastValue.tested_total}
+            difference={data.difference.ggd__tested_total}
           />
           <Text>{ggdText.totaal_getest_week_uitleg}</Text>
         </KpiTile>
@@ -278,8 +290,8 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({ data }) => {
         >
           <KpiValue
             data-cy="ggd_infected"
-            absolute={dataGgdLastValue.infected}
             percentage={dataGgdLastValue.infected_percentage}
+            difference={data.difference.ggd__infected_percentage}
           />
           <Text>{ggdText.positief_getest_week_uitleg}</Text>
           <Text>
