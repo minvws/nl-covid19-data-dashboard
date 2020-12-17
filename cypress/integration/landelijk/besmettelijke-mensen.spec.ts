@@ -1,14 +1,9 @@
 import { NationalContext } from 'cypress/integration/types';
-import { beforeNationalTests } from 'cypress/support/beforeNationalTests';
-import { checkKpiValues } from 'cypress/support/checkKpiValues';
-import { swallowResizeObserverError } from 'cypress/support/swallowResizeObserverError';
 import { formatNumber } from '~/utils/formatNumber';
 
 context('Landelijk - Besmettelijke mensen', () => {
-  swallowResizeObserverError();
-
   before(() => {
-    beforeNationalTests('besmettelijke-mensen');
+    cy.beforeNationalTests('besmettelijke-mensen');
   });
 
   it('Should show the correct KPI values', function (this: NationalContext) {
@@ -19,6 +14,6 @@ context('Landelijk - Besmettelijke mensen', () => {
       infectious_avg: formatNumber(lastValue.infectious_avg),
     };
 
-    checkKpiValues(kpiTestInfo);
+    cy.checkKpiValues(kpiTestInfo);
   });
 });

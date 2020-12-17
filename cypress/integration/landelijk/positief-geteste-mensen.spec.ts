@@ -1,14 +1,9 @@
 import { NationalContext } from 'cypress/integration/types';
-import { beforeNationalTests } from 'cypress/support/beforeNationalTests';
-import { checkKpiValues } from 'cypress/support/checkKpiValues';
-import { swallowResizeObserverError } from 'cypress/support/swallowResizeObserverError';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 
 context('Landelijk - Positief geteste mensen', () => {
-  swallowResizeObserverError();
-
   before(() => {
-    beforeNationalTests('positief-geteste-mensen');
+    cy.beforeNationalTests('positief-geteste-mensen');
   });
 
   it('Should show the correct KPI values', function (this: NationalContext) {
@@ -20,14 +15,11 @@ context('Landelijk - Positief geteste mensen', () => {
       infected_daily_total: formatNumber(
         infectedTotalLastValue.infected_daily_total
       ),
-      ggd_infected: [
-        formatNumber(ggdLastValue.infected),
-        formatPercentage(ggdLastValue.infected_percentage),
-      ],
+      ggd_infected: formatPercentage(ggdLastValue.infected_percentage),
       ggd_tested_total: formatNumber(ggdLastValue.tested_total),
     };
 
-    checkKpiValues(kpiTestInfo);
+    cy.checkKpiValues(kpiTestInfo);
   });
 
   xit('Should navigate to the appropriate municipality page after clicking on the choropleth', function (this: NationalContext) {

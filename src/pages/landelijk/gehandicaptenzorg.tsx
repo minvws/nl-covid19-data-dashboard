@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import CoronaVirus from '~/assets/coronavirus.svg';
+import Gehandicaptenzorg from '~/assets/gehandicapte-zorg.svg';
 import Locatie from '~/assets/locaties.svg';
-import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
@@ -47,7 +47,7 @@ const DisabilityCare: FCWithLayout<NationalPageProps> = (props) => {
           siteText.verpleeghuis_positief_geteste_personen.titel_sidebar
         }
         title={positiveTestedPeopleText.titel}
-        icon={<Verpleeghuiszorg />}
+        icon={<Gehandicaptenzorg />}
         subtitle={positiveTestedPeopleText.pagina_toelichting}
         metadata={{
           datumsText: positiveTestedPeopleText.datums,

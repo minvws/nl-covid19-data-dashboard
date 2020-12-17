@@ -6,11 +6,11 @@ import { isDefined } from 'ts-is-present';
 export function getDataThresholds<T>(
   thresholdData: T,
   metricName: keyof T,
-  metricProperty?: string
+  metricProperty = '__USE_METRIC_NAME_THRESHOLD_DATA__'
 ) {
-  const thresholds = metricProperty
-    ? get(thresholdData, [metricName, metricProperty])
-    : thresholdData[metricName];
+  const thresholds =
+    get(thresholdData, [metricName, metricProperty]) ||
+    thresholdData[metricName];
 
   assert(
     thresholds,

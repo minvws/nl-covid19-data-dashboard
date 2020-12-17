@@ -24,9 +24,12 @@ export default function App(props: AppPropsWithLayout) {
 
   useEffect(() => {
     window.document.documentElement.classList.add('js');
-    const handleRouteChange = () => {
+    const handleRouteChange = (pathname: string) => {
       piwik.pageview();
-      scrollToTop();
+
+      if (!pathname.includes('#')) {
+        scrollToTop();
+      }
     };
 
     Router.events.on('routeChangeComplete', handleRouteChange);

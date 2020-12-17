@@ -1,5 +1,6 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
+import { borders, BordersProps } from 'styled-system';
 
 export const Menu = styled.ul(
   css({
@@ -9,7 +10,7 @@ export const Menu = styled.ul(
   })
 );
 
-export const CategoryMenuItem = styled.li({});
+export const CategoryMenuItem = styled.li<BordersProps>(borders);
 
 export const MetricMenuItem = styled.li(
   css({

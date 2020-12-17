@@ -1,14 +1,9 @@
 import { NationalContext } from 'cypress/integration/types';
-import { beforeNationalTests } from 'cypress/support/beforeNationalTests';
-import { checkKpiValues } from 'cypress/support/checkKpiValues';
-import { swallowResizeObserverError } from 'cypress/support/swallowResizeObserverError';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 
 context('Landelijk - IC Opnames', () => {
-  swallowResizeObserverError();
-
   before(() => {
-    beforeNationalTests('intensive-care-opnames');
+    cy.beforeNationalTests('intensive-care-opnames');
   });
 
   it('Should show the correct KPI values', function (this: NationalContext) {
@@ -21,6 +16,6 @@ context('Landelijk - IC Opnames', () => {
       ],
     };
 
-    checkKpiValues(kpiTestInfo);
+    cy.checkKpiValues(kpiTestInfo);
   });
 });

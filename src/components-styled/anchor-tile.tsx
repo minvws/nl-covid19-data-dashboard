@@ -24,7 +24,7 @@ export function AnchorTile({
   shadow = false,
 }: AnchorTileProps) {
   return (
-    <Container shadow={shadow}>
+    <Container spacing={2} shadow={shadow}>
       <Content>
         <Heading level={3}>{title}</Heading>
         {children}
@@ -55,7 +55,7 @@ const Container = styled(Tile)<{ shadow: boolean }>((x) =>
   css({
     display: 'flex',
     mx: [-4, null, 0],
-    flexDirection: ['column', null, 'row'],
+    flexDirection: ['column', null, null, null, 'row'],
     boxShadow: x.shadow ? 'tile' : 'none',
   })
 );
@@ -73,19 +73,30 @@ const Anchor = styled.a(
   })
 );
 
-const IconContainer = styled.span(css({ mr: 2 }));
+const IconContainer = styled.span(
+  css({
+    mr: 2,
+    svg: { width: 24, height: 24, display: 'block', maxWidth: 'initial' },
+  })
+);
 
+/**
+ * @TODO Refactor this linkContainer, its unreadable due to its responsive
+ * styling.
+ */
 const LinkContainer = styled.div(
   css({
     flexShrink: 1,
     flex: '1 1 30%',
     display: 'flex',
     alignItems: 'center',
+    justifyContent: ['center', 'center', null],
     border: 0,
-    borderTop: ['1px solid', 'none'],
-    borderLeft: [null, null, '1px solid'],
-    borderLeftColor: [null, null, '#c4c4c4'],
-    pl: [null, null, 4],
-    ml: [null, null, 4],
+    borderTop: ['1px solid #c4c4c4', null, null, null, 'none'],
+    borderLeft: [null, null, null, null, '1px solid'],
+    borderLeftColor: [null, null, null, null, '#c4c4c4'],
+    pt: [3, 3, 3, 3, null],
+    pl: [null, null, null, null, 4],
+    ml: [null, null, null, null, 4],
   })
 );
