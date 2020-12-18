@@ -4,7 +4,7 @@ import text from '~/locale/index';
 
 export type RegionControlOption = 'municipal' | 'region';
 
-export interface ChartRegionControlsProps {
+interface ChartRegionControlsProps {
   value?: 'municipal' | 'region';
   onChange: (value: RegionControlOption) => void;
 }

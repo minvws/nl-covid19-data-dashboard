@@ -2,7 +2,7 @@ import fs from 'fs';
 import { jsonBasePath, localeBasePath } from './base-paths';
 import { validatePlaceholders } from './custom-validations/validate-placeholders';
 
-export type CustomValidationFunction = (
+type CustomValidationFunction = (
   input: Record<string, unknown>
 ) => string[] | undefined;
 

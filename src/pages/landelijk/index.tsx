@@ -1,5 +1,5 @@
-import { FCWithLayout } from '~/components/layout';
-import { getNationalLayout } from '~/components/layout/NationalLayout';
+import { FCWithLayout } from '~/domain/layout/layout';
+import { getNationalLayout } from '~/domain/layout/national-layout';
 import {
   getNationalStaticProps,
   NationalPageProps,

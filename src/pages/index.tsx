@@ -9,6 +9,7 @@ import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { CategoryHeading } from '~/components-styled/content-header';
 import { HeadingWithIcon } from '~/components-styled/heading-with-icon';
 import { MessageTile } from '~/components-styled/message-tile';
+import { TileList } from '~/components-styled/tile-list';
 import { Text } from '~/components-styled/typography';
 import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
@@ -19,8 +20,8 @@ import { createSelectRegionHandler } from '~/components/choropleth/select-handle
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
 import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/create-positive-tested-people-regional-tooltip';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
-import { FCWithLayout } from '~/components/layout';
-import { getNationalLayout } from '~/components/layout/NationalLayout';
+import { FCWithLayout } from '~/domain/layout/layout';
+import { getNationalLayout } from '~/domain/layout/national-layout';
 import { TALLLanguages } from '~/locale/index';
 import theme from '~/style/theme';
 import { EscalationLevels, National, Regions } from '~/types/data';
@@ -40,7 +41,7 @@ interface INationalHomepageData {
   escalationLevelCounts: EscalationLevelCounts;
 }
 
-/*
+/**
  * The keys in this object are used to find and replace values in the translation files.
  * Adjustments here need to be applied in Lokalize too.
  * This is also why the keys are a bit more verbose.
@@ -61,8 +62,8 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
   );
 
   return (
-    <>
-      <Box mb={3}>
+    <TileList>
+      <Box>
         <CategoryHeading level={1} hide={true}>
           {text.nationaal_layout.headings.algemeen}
         </CategoryHeading>
@@ -72,6 +73,7 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
           headingLevel={2}
         />
       </Box>
+
       <AnchorTile
         title={text.notificatie.titel}
         href={text.notificatie.link.href}
@@ -158,7 +160,7 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
           />
         )}
       </ChoroplethTile>
-    </>
+    </TileList>
   );
 };
 

@@ -1,12 +1,13 @@
 import { useRouter } from 'next/router';
 import Maatregelen from '~/assets/maatregelen.svg';
 import { AnchorTile } from '~/components-styled/anchor-tile';
-import { Box, Spacer } from '~/components-styled/base';
+import { Box } from '~/components-styled/base';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiSection } from '~/components-styled/kpi-section';
+import { TileList } from '~/components-styled/tile-list';
 import { Heading, Text } from '~/components-styled/typography';
-import { FCWithLayout } from '~/components/layout';
-import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
+import { FCWithLayout } from '~/domain/layout/layout';
+import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { RestrictionsTable } from '~/components/restrictions/restrictions-table';
 import { EscalationLevel } from '~/components/restrictions/type';
 import { SEOHead } from '~/components/seoHead';
@@ -58,53 +59,52 @@ const RegionalRestrictions: FCWithLayout<ISafetyRegionData> = (props) => {
           safetyRegionName,
         })}
       />
-
-      <ContentHeader
-        category={siteText.veiligheidsregio_layout.headings.algemeen}
-        icon={<Maatregelen fill={theme.colors.restrictions} />}
-        title={replaceVariablesInText(
-          siteText.veiligheidsregio_maatregelen.titel,
-          {
-            safetyRegionName,
-          }
-        )}
-      />
-
-      <Spacer mb={3} />
-
-      <KpiSection flexDirection="column">
-        <Heading level={3}>{restrictionInfo.extratoelichting.titel}</Heading>
-        <Box>
-          <Text m={0}>
-            {replaceVariablesInText(
-              restrictionInfo.extratoelichting.toelichting,
-              { safetyRegionName }
-            )}
-          </Text>
-        </Box>
-      </KpiSection>
-
-      <KpiSection display="flex" flexDirection="column">
-        <Heading level={3}>
-          {siteText.veiligheidsregio_maatregelen.tabel_titel}
-        </Heading>
-        <RestrictionsTable
-          data={data.restrictions.values}
-          escalationLevel={effectiveEscalationLevel}
+      <TileList>
+        <ContentHeader
+          category={siteText.veiligheidsregio_layout.headings.algemeen}
+          icon={<Maatregelen fill={theme.colors.restrictions} />}
+          title={replaceVariablesInText(
+            siteText.veiligheidsregio_maatregelen.titel,
+            {
+              safetyRegionName,
+            }
+          )}
         />
-      </KpiSection>
 
-      <AnchorTile
-        external
-        shadow
-        title={text.titel_aanvullendemaatregelen}
-        href={regioUrl}
-        label={replaceVariablesInText(text.linktext_regionpage, {
-          safetyRegionName,
-        })}
-      >
-        {text.toelichting_aanvullendemaatregelen}
-      </AnchorTile>
+        <KpiSection flexDirection="column">
+          <Heading level={3}>{restrictionInfo.extratoelichting.titel}</Heading>
+          <Box>
+            <Text m={0}>
+              {replaceVariablesInText(
+                restrictionInfo.extratoelichting.toelichting,
+                { safetyRegionName }
+              )}
+            </Text>
+          </Box>
+        </KpiSection>
+
+        <KpiSection display="flex" flexDirection="column">
+          <Heading level={3}>
+            {siteText.veiligheidsregio_maatregelen.tabel_titel}
+          </Heading>
+          <RestrictionsTable
+            data={data.restrictions.values}
+            escalationLevel={effectiveEscalationLevel}
+          />
+        </KpiSection>
+
+        <AnchorTile
+          external
+          shadow
+          title={text.titel_aanvullendemaatregelen}
+          href={regioUrl}
+          label={replaceVariablesInText(text.linktext_regionpage, {
+            safetyRegionName,
+          })}
+        >
+          {text.toelichting_aanvullendemaatregelen}
+        </AnchorTile>
+      </TileList>
     </>
   );
 };

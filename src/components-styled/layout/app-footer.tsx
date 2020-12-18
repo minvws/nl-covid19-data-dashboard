@@ -1,5 +1,4 @@
 import css from '@styled-system/css';
-import { Link } from '~/utils/link';
 import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components-styled/base';
@@ -7,9 +6,10 @@ import { ExternalLink } from '~/components-styled/external-link';
 import { MaxWidth } from '~/components-styled/max-width';
 import text from '~/locale/index';
 import { formatDateFromSeconds } from '~/utils/formatDate';
+import { Link } from '~/utils/link';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
-export function SiteFooter({ lastGenerated }: { lastGenerated: string }) {
+export function AppFooter({ lastGenerated }: { lastGenerated: string }) {
   return (
     <footer>
       <Box bg="blue" color="white" py={4} zIndex={4} position="relative">
@@ -18,6 +18,7 @@ export function SiteFooter({ lastGenerated }: { lastGenerated: string }) {
           flexDirection={['column', null, 'row']}
           spacing={4}
           spacingHorizontal
+          px={3}
         >
           <Box>
             <Box fontSize={3} fontWeight="bold">

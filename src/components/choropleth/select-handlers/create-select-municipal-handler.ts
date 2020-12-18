@@ -8,13 +8,16 @@ export type MunicipalitySelectionHandler = (
 
 export function createSelectMunicipalHandler(
   router: NextRouter,
-  pageName: PageName = 'positief-geteste-mensen'
+  pageName: PageName = 'positief-geteste-mensen',
+  openMenu?: boolean
 ): MunicipalitySelectionHandler {
   return (context: MunicipalityProperties) => {
     if (!context) {
       return;
     }
 
-    router.push(`/gemeente/${context.gemcode}/${pageName}`);
+    router.push(
+      `/gemeente/${context.gemcode}/${pageName}` + (openMenu ? '?menu=1' : '')
+    );
   };
 }

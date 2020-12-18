@@ -1,19 +1,25 @@
-import text from '~/locale/index';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 
-export function SkipLinks() {
+export function SkipLinkMenu({
+  ariaLabel,
+  links,
+}: {
+  ariaLabel: string;
+  links: Array<{ href: string; label: string }>;
+}) {
   return (
-    <SkipLinkMenu role="navigation" aria-label={text.aria_labels.skip_links}>
-      <SkipLink href="#content">{text.skiplinks.inhoud}</SkipLink>
-      <SkipLink href="#main-navigation">{text.skiplinks.nav}</SkipLink>
-      <SkipLink href="#metric-navigation">{text.skiplinks.metric_nav}</SkipLink>
-      <SkipLink href="#footer-navigation">{text.skiplinks.footer_nav}</SkipLink>
-    </SkipLinkMenu>
+    <StyledSkipLinkMenu role="navigation" aria-label={ariaLabel}>
+      {links.map((x) => (
+        <SkipLink key={x.href} href={x.href}>
+          {x.label}
+        </SkipLink>
+      ))}
+    </StyledSkipLinkMenu>
   );
 }
 
-const SkipLinkMenu = styled.nav(
+const StyledSkipLinkMenu = styled.nav(
   css({
     position: 'absolute',
     zIndex: '100',

@@ -1,8 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
-
-
 @font-face {
   font-family: 'RO Sans';
   font-weight: normal;
@@ -71,12 +69,46 @@ html {
   color: $text-color;
   font-style: normal;
   font-weight: normal;
-  font-size: 1rem;
-  line-height: 1.5;
+  font-size: ${(x) => x.theme.fontSizes[2]} ;
+  line-height: ${(x) => x.theme.lineHeights[2]};
+
+  margin: 0;
+  background: #f3f3f3;
+  overflow-anchor: none;
 }
 
 img,
 svg {
   max-width: 100%;
+}
+
+main {
+  /**
+   * IE11 does not support the main tag, the following line makes it styleable
+   */
+  display: block;
+}
+
+/* Remove outline from programatically focussed elements. */
+[tabindex='-1'] {
+  outline: none;
+}
+
+
+a {
+  color: ${(x) => x.theme.colors.link};
+}
+
+a:focus {
+  outline: 2px dotted ${(x) => x.theme.colors.link};
+  outline-offset: 0;
+}
+
+button::-moz-focus-inner {
+  border: 0;
+}
+
+.inline-kpi {
+  font-variant-numeric: tabular-nums;
 }
 `;

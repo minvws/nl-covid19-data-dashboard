@@ -1,5 +1,5 @@
 import { Spacer } from './base';
-import { Tile } from './layout';
+import { Tile } from '~/components-styled/tile';
 import { Metadata, MetadataProps } from './metadata';
 
 export function ChartTileContainer({
@@ -10,7 +10,7 @@ export function ChartTileContainer({
   metadata?: MetadataProps;
 }) {
   return (
-    <Tile mb={4} ml={{ _: -4, sm: 0 }} mr={{ _: -4, sm: 0 }}>
+    <Tile>
       {children}
 
       {metadata && (

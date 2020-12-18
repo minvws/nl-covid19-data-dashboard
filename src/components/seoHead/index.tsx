@@ -2,7 +2,7 @@ import Head from 'next/head';
 
 import siteText from '~/locale/index';
 
-export type SEOHeadProps = {
+type SEOHeadProps = {
   title?: string;
   description?: string;
   url?: string;

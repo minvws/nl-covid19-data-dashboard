@@ -2,9 +2,10 @@ import Maatregelen from '~/assets/maatregelen.svg';
 import { Box, Spacer } from '~/components-styled/base';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiSection } from '~/components-styled/kpi-section';
+import { TileList } from '~/components-styled/tile-list';
 import { Heading, Text } from '~/components-styled/typography';
-import { FCWithLayout } from '~/components/layout';
-import { getNationalLayout } from '~/components/layout/NationalLayout';
+import { FCWithLayout } from '~/domain/layout/layout';
+import { getNationalLayout } from '~/domain/layout/national-layout';
 import { RestrictionsTable } from '~/components/restrictions/restrictions-table';
 import { EscalationLevel } from '~/components/restrictions/type';
 import { SEOHead } from '~/components/seoHead';
@@ -31,29 +32,30 @@ const NationalRestrictions: FCWithLayout<NationalPageProps> = (props) => {
         title={text.nationaal_metadata.title}
         description={text.nationaal_metadata.description}
       />
-
-      <ContentHeader
-        category={text.nationaal_layout.headings.algemeen}
-        icon={<Maatregelen fill={theme.colors.restrictions} />}
-        title={text.nationaal_maatregelen.titel}
-      />
-
-      <Spacer mb={3} />
-
-      <KpiSection flexDirection="column">
-        <Heading level={3}>{restrictionInfo.extratoelichting.titel}</Heading>
-        <Box>
-          <Text m={0}>{restrictionInfo.extratoelichting.toelichting}</Text>
-        </Box>
-      </KpiSection>
-
-      <KpiSection display="flex" flexDirection="column">
-        <Heading level={3}>{text.nationaal_maatregelen.tabel_titel}</Heading>
-        <RestrictionsTable
-          data={data.restrictions.values}
-          escalationLevel={effectiveEscalationLevel}
+      <TileList>
+        <ContentHeader
+          category={text.nationaal_layout.headings.algemeen}
+          icon={<Maatregelen fill={theme.colors.restrictions} />}
+          title={text.nationaal_maatregelen.titel}
         />
-      </KpiSection>
+
+        <Spacer mb={3} />
+
+        <KpiSection flexDirection="column">
+          <Heading level={3}>{restrictionInfo.extratoelichting.titel}</Heading>
+          <Box>
+            <Text m={0}>{restrictionInfo.extratoelichting.toelichting}</Text>
+          </Box>
+        </KpiSection>
+
+        <KpiSection display="flex" flexDirection="column">
+          <Heading level={3}>{text.nationaal_maatregelen.tabel_titel}</Heading>
+          <RestrictionsTable
+            data={data.restrictions.values}
+            escalationLevel={effectiveEscalationLevel}
+          />
+        </KpiSection>
+      </TileList>
     </>
   );
 };
