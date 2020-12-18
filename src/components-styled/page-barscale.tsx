@@ -42,7 +42,9 @@ export function PageBarScale<T>({
    * A unique id is required for path rendering and should be constant between
    * server and client side rendering
    */
-  const uniqueId = ['sidebar', scope, metricName, metricProperty].join(':');
+  const uniqueId = ['page-bar-scale', scope, metricName, metricProperty].join(
+    ':'
+  );
 
   assert(
     isDefined(propertyValue),
@@ -101,10 +103,9 @@ export function PageBarScale<T>({
         screenReaderText={text.barscale_screenreader_text}
         value={propertyValue}
         id={uniqueId}
-        rangeKey={config.barScale.rangesKey}
         gradient={config.barScale.gradient}
-        showValue={true}
-        showAxis={true}
+        showValue
+        showAxis
       />
       {differenceKey && (
         <DifferenceIndicator

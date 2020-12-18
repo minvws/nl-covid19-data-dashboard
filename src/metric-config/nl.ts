@@ -35,7 +35,6 @@ export const nl: NlConfig = {
         min: 0,
         max: 2,
         signaalwaarde: 1,
-        rangesKey: 'reproduction_index_avg',
         gradient: [
           {
             color: GREEN,
@@ -65,7 +64,6 @@ export const nl: NlConfig = {
         min: 0,
         max: 100,
         signaalwaarde: 40,
-        rangesKey: 'moving_average_hospital',
         gradient: [
           {
             color: GREEN,
@@ -89,7 +87,6 @@ export const nl: NlConfig = {
       barScale: {
         min: 0,
         max: 30,
-        rangesKey: 'moving_average_ic',
         signaalwaarde: 10,
         gradient: [
           {
@@ -114,7 +111,6 @@ export const nl: NlConfig = {
         min: 0,
         max: 10,
         signaalwaarde: 7,
-        rangesKey: 'infected_daily_increase',
         gradient: [
           {
             color: GREEN,
