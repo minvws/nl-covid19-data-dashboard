@@ -30,10 +30,8 @@ export function CategoryMenu({
   children: ReactNode;
 }) {
   return (
-    <Box as="li">
-      <Category pt={5} pb={3}>
-        {title}
-      </Category>
+    <Box as="li" spacing={3} pt={5}>
+      <Category>{title}</Category>
       <Menu>{children}</Menu>
     </Box>
   );

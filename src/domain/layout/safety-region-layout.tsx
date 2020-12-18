@@ -15,7 +15,7 @@ import {
   MetricMenuItemLink,
 } from '~/components-styled/aside/menu';
 import { SidebarMetric } from '~/components-styled/sidebar-metric';
-import { Heading } from '~/components-styled/typography';
+import { Text } from '~/components-styled/typography';
 import { getLayout as getSiteLayout } from '~/domain/layout/layout';
 import { AppContent } from '~/components-styled/layout/app-content';
 import siteText from '~/locale/index';
@@ -94,9 +94,9 @@ function SafetyRegionLayout(
                 aria-label={siteText.aria_labels.metriek_navigatie}
                 role="navigation"
               >
-                <Heading level={3} as="p" px={3}>
+                <Text fontSize={3} fontWeight="bold" px={3} m={0} mb={-3}>
                   {safetyRegionName}
-                </Heading>
+                </Text>
                 <Menu>
                   <CategoryMenu
                     title={siteText.veiligheidsregio_layout.headings.algemeen}
