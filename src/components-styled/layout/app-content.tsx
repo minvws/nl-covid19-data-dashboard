@@ -10,15 +10,15 @@ import { Link } from '~/utils/link';
 
 interface AppContentProps {
   children: React.ReactNode;
-  renderSidebar: React.ReactNode;
-  renderSearch?: React.ReactNode;
+  sidebarComponent: React.ReactNode;
+  searchComponent?: React.ReactNode;
   hideMenuButton?: boolean;
 }
 
 export function AppContent({
   children,
-  renderSidebar,
-  renderSearch,
+  sidebarComponent,
+  searchComponent,
   hideMenuButton,
 }: AppContentProps) {
   const router = useRouter();
@@ -45,8 +45,8 @@ export function AppContent({
 
         <StyledSidebar>
           <ResponsiveVisible isVisible={isMenuOpen}>
-            {renderSearch}
-            {renderSidebar}
+            {searchComponent}
+            {sidebarComponent}
           </ResponsiveVisible>
         </StyledSidebar>
 

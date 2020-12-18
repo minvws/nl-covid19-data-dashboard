@@ -89,8 +89,8 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
       </Head>
       <AppContent
         hideMenuButton={isMainRoute}
-        renderSearch={<MunicipalityComboBox />}
-        renderSidebar={
+        searchComponent={<MunicipalityComboBox />}
+        sidebarComponent={
           <>
             {showMetricLinks && (
               <nav

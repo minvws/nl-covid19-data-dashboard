@@ -86,7 +86,7 @@ function NationalLayout(props: NationalLayoutProps) {
       </Head>
 
       <AppContent
-        renderSidebar={
+        sidebarComponent={
           <nav
             /** re-mount when route changes in order to blur anchors */
             key={router.asPath}

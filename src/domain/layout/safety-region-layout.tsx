@@ -83,8 +83,8 @@ function SafetyRegionLayout(
 
       <AppContent
         hideMenuButton={isMainRoute}
-        renderSearch={<SafetyRegionComboBox />}
-        renderSidebar={
+        searchComponent={<SafetyRegionComboBox />}
+        sidebarComponent={
           <>
             {showMetricLinks && (
               <nav
