@@ -1863,7 +1863,7 @@
       "kpi_daily_title": "Aantal 70-plussers overleden aan COVID-19, per dag",
       "kpi_daily_description": "Aantal thuiswonende 70-plussers in deze regio waarvan gisteren is gemeld dat ze zijn overleden aan COVID-19",
       "line_chart_daily_title": "Dagelijks aantal aan COVID-19 overleden thuiswonende 70-plussers",
-      "datums": "Laatste waarden verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt."
+      "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt."
     },
     "kpi_titel": "Aantal positief geteste mensen"
   },
