@@ -11,8 +11,8 @@ import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createSewerRegionalTooltip } from '~/components/choropleth/tooltips/region/create-sewer-regional-tooltip';
-import { FCWithLayout } from '~/components/layout';
-import { getNationalLayout } from '~/components/layout/NationalLayout';
+import { FCWithLayout } from '~/domain/layout/layout';
+import { getNationalLayout } from '~/domain/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import {

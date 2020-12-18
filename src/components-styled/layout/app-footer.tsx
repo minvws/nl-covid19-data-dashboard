@@ -9,7 +9,7 @@ import { formatDateFromSeconds } from '~/utils/formatDate';
 import { Link } from '~/utils/link';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
-export function SiteFooter({ lastGenerated }: { lastGenerated: string }) {
+export function AppFooter({ lastGenerated }: { lastGenerated: string }) {
   return (
     <footer>
       <Box bg="blue" color="white" py={4} zIndex={4} position="relative">

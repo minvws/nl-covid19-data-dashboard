@@ -20,8 +20,8 @@ import { createSelectRegionHandler } from '~/components/choropleth/select-handle
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
 import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/create-positive-tested-people-regional-tooltip';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
-import { FCWithLayout } from '~/components/layout';
-import { getNationalLayout } from '~/components/layout/NationalLayout';
+import { FCWithLayout } from '~/domain/layout/layout';
+import { getNationalLayout } from '~/domain/layout/NationalLayout';
 import { TALLLanguages } from '~/locale/index';
 import theme from '~/style/theme';
 import { EscalationLevels, National, Regions } from '~/types/data';

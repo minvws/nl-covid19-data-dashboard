@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import { Box } from '~/components-styled/base';
-import { Cell, Row, Table, TableBody } from '~/components-styled/layout/table';
+import { Cell, Row, Table, TableBody } from '~/components-styled/table';
 import { InlineText } from '~/components-styled/typography';
 import {
   RestrictionsTableData,

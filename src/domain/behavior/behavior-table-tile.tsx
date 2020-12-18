@@ -3,7 +3,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { isDefined, isPresent } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
-import { Tile } from '~/components-styled/layout';
+import { Tile } from '~/components-styled/tile';
 import { PercentageBar } from '~/components-styled/percentage-bar';
 import { Heading } from '~/components-styled/typography';
 import siteText from '~/locale/index';

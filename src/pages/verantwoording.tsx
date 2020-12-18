@@ -2,7 +2,7 @@ import fs from 'fs';
 import Head from 'next/head';
 import path from 'path';
 import { Collapsable } from '~/components-styled/collapsable';
-import { FCWithLayout, getLayoutWithMetadata } from '~/components/layout';
+import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import { MaxWidth } from '~/components-styled/max-width';
 import siteText, { TALLLanguages } from '~/locale/index';
 import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';

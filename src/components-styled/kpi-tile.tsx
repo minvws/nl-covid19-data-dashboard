@@ -1,6 +1,6 @@
 import { Box, Spacer } from './base';
 import { Heading } from './typography';
-import { Tile } from './layout';
+import { Tile } from '~/components-styled/tile';
 import { MetadataProps, Metadata } from './metadata';
 
 interface KpiTileProps {

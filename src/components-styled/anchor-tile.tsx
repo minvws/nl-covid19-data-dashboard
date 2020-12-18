@@ -1,7 +1,7 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import ExternalLinkIcon from '~/assets/external-link.svg';
-import { Tile } from '~/components-styled/layout';
+import { Tile } from '~/components-styled/tile';
 import { Heading } from '~/components-styled/typography';
 import { Link } from '~/utils/link';
 import { ExternalLink } from './external-link';

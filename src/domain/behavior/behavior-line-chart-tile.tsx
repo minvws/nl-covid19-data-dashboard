@@ -3,7 +3,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { isDefined } from 'ts-is-present';
 import { Box, Spacer } from '~/components-styled/base';
-import { Tile } from '~/components-styled/layout';
+import { Tile } from '~/components-styled/tile';
 import { Select } from '~/components-styled/select';
 import { Heading } from '~/components-styled/typography';
 import siteText from '~/locale/index';

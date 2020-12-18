@@ -8,19 +8,19 @@ import { MaxWidth } from '~/components-styled/max-width';
 import siteText from '~/locale/index';
 import { Link } from '~/utils/link';
 
-interface SiteContentProps {
+interface AppContentProps {
   children: React.ReactNode;
   renderSidebar: React.ReactNode;
   renderSearch?: React.ReactNode;
   hideMenuButton?: boolean;
 }
 
-export function SiteContent({
+export function AppContent({
   children,
   renderSidebar,
   renderSearch,
   hideMenuButton,
-}: SiteContentProps) {
+}: AppContentProps) {
   const router = useRouter();
 
   const menuOpenUrl = {
@@ -38,7 +38,7 @@ export function SiteContent({
 
   return (
     <MaxWidth px={[0, 0, 0, 0, 3]}>
-      <SiteContentContainer>
+      <AppContentContainer>
         {!hideMenuButton && (
           <MenuButton href={menuOpenUrl} isVisible={!isMenuOpen} />
         )}
@@ -50,7 +50,7 @@ export function SiteContent({
           </ResponsiveVisible>
         </StyledSidebar>
 
-        <StyledSiteContent
+        <StyledAppContent
           /** id is for hash navigation */
           id="content"
         >
@@ -60,13 +60,13 @@ export function SiteContent({
             </ResponsiveVisible>
             <MenuLink href={menuOpenUrl} isVisible={!isMenuOpen} />
           </Box>
-        </StyledSiteContent>
-      </SiteContentContainer>
+        </StyledAppContent>
+      </AppContentContainer>
     </MaxWidth>
   );
 }
 
-const SiteContentContainer = styled.div(
+const AppContentContainer = styled.div(
   css({
     display: ['block', null, null, 'flex'],
     flexDirection: ['column', null, null, 'row'],
@@ -76,7 +76,7 @@ const SiteContentContainer = styled.div(
   })
 );
 
-const StyledSiteContent = styled.main(
+const StyledAppContent = styled.main(
   css({
     bg: 'page',
     zIndex: 2,
@@ -185,13 +185,17 @@ const StyledMenuButton = styled.a<{ isVisible: boolean }>((x) =>
 
 function Arrow() {
   return (
-    <ArrowIcon
+    <span
       css={css({
-        height: '10px',
-        width: '16px',
-        transform: 'rotate(90deg)',
-        marginRight: '0.7em',
+        svg: {
+          height: '10px',
+          width: '16px',
+          transform: 'rotate(90deg)',
+          marginRight: '0.7em',
+        },
       })}
-    />
+    >
+      <ArrowIcon />
+    </span>
   );
 }

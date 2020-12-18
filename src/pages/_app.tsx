@@ -6,7 +6,7 @@ import Router from 'next/router';
 import { useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import '~/components/comboBox/comboBox.scss';
-import { FCWithLayout } from '~/components/layout';
+import { FCWithLayout } from '~/domain/layout/layout';
 import * as piwik from '~/lib/piwik';
 import '~/scss/style.scss';
 import { GlobalStyle } from '~/style/global-style';

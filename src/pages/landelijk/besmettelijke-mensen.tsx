@@ -7,8 +7,8 @@ import { Legenda } from '~/components-styled/legenda';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { AreaChart } from '~/components/charts/index';
-import { FCWithLayout } from '~/components/layout';
-import { getNationalLayout } from '~/components/layout/NationalLayout';
+import { FCWithLayout } from '~/domain/layout/layout';
+import { getNationalLayout } from '~/domain/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import {

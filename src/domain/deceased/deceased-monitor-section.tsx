@@ -4,7 +4,6 @@ import { AnchorTile } from '~/components-styled/anchor-tile';
 import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { Legenda } from '~/components-styled/legenda';
-import { TileList } from '~/components-styled/tile-list';
 import DeceasedMonitor from '~/domain/deceased/components/deceased-monitor-chart';
 import siteText from '~/locale/index';
 import { NationalDeceasedCbs, RegionalDeceasedCbs } from '~/types/data';
@@ -19,7 +18,7 @@ export function DeceasedMonitorSection({
   const theme = useTheme();
 
   return (
-    <TileList>
+    <>
       <ContentHeader
         title={text.title}
         icon={<CoronaVirusIcon />}
@@ -87,6 +86,6 @@ export function DeceasedMonitorSection({
           ]}
         />
       </ChartTile>
-    </TileList>
+    </>
   );
 }

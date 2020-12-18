@@ -12,9 +12,9 @@ import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-ch
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
 import styles from '~/components/choropleth/tooltips/tooltip.module.scss';
-import { FCWithLayout } from '~/components/layout';
-import { SafetyRegionComboBox } from '~/components/layout/safety-region-combo-box';
-import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
+import { FCWithLayout } from '~/domain/layout/layout';
+import { SafetyRegionComboBox } from '~/domain/layout/safety-region-combo-box';
+import { getSafetyRegionLayout } from '~/domain/layout/SafetyRegionLayout';
 import { SEOHead } from '~/components/seoHead';
 import { TALLLanguages } from '~/locale/index';
 import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';

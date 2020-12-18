@@ -19,8 +19,8 @@ import {
   MetricMenuItemLink,
 } from '~/components-styled/aside/menu';
 import { SidebarMetric } from '~/components-styled/sidebar-metric';
-import Layout from '~/components/layout';
-import { SiteContent } from '~/domain/site/site-content';
+import { Layout } from '~/domain/layout/layout';
+import { AppContent } from '~/components-styled/layout/app-content';
 import siteText from '~/locale/index';
 import { NationalPageProps } from '~/static-props/nl-data';
 import theme from '~/style/theme';
@@ -85,7 +85,7 @@ function NationalLayout(props: NationalLayoutProps) {
         />
       </Head>
 
-      <SiteContent
+      <AppContent
         renderSidebar={
           <nav
             /** re-mount when route changes in order to blur anchors */
@@ -326,7 +326,7 @@ function NationalLayout(props: NationalLayoutProps) {
         }
       >
         {children}
-      </SiteContent>
+      </AppContent>
     </>
   );
 }

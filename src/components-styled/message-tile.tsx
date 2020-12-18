@@ -2,7 +2,7 @@ import css from '@styled-system/css';
 import styled from 'styled-components';
 import Warning from '~/assets/warning.svg';
 import { Box } from './base';
-import { Tile } from './layout';
+import { Tile } from '~/components-styled/tile';
 
 interface MessageTileProps {
   message: React.ReactNode;

@@ -1,5 +1,5 @@
-import { FCWithLayout } from '~/components/layout';
-import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
+import { FCWithLayout } from '~/domain/layout/layout';
+import { getSafetyRegionLayout } from '~/domain/layout/SafetyRegionLayout';
 import {
   getSafetyRegionStaticProps,
   getSafetyRegionPaths,

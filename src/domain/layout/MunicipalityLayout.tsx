@@ -12,8 +12,8 @@ import {
 import { Box } from '~/components-styled/base';
 import { SidebarMetric } from '~/components-styled/sidebar-metric';
 import { Text } from '~/components-styled/typography';
-import { getLayout as getSiteLayout } from '~/components/layout';
-import { SiteContent } from '~/domain/site/site-content';
+import { getLayout as getSiteLayout } from '~/domain/layout/layout';
+import { AppContent } from '~/components-styled/layout/app-content';
 import siteText from '~/locale/index';
 import { IMunicipalityData } from '~/static-props/municipality-data';
 import { getSafetyRegionForMunicipalityCode } from '~/utils/getSafetyRegionForMunicipalityCode';
@@ -87,7 +87,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
           title="Nederland"
         />
       </Head>
-      <SiteContent
+      <AppContent
         hideMenuButton={isMainRoute}
         renderSearch={<MunicipalityComboBox />}
         renderSidebar={
@@ -192,7 +192,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
         }
       >
         {children}
-      </SiteContent>
+      </AppContent>
     </>
   );
 }

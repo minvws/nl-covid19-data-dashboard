@@ -12,8 +12,8 @@ import { municipalThresholds } from '~/components/choropleth/municipal-threshold
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createMunicipalHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/municipal/create-municipal-hospital-admissions-tooltip';
-import { FCWithLayout } from '~/components/layout';
-import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
+import { FCWithLayout } from '~/domain/layout/layout';
+import { getSafetyRegionLayout } from '~/domain/layout/SafetyRegionLayout';
 import { SEOHead } from '~/components/seoHead';
 import regionCodeToMunicipalCodeLookup from '~/data/regionCodeToMunicipalCodeLookup';
 import siteText from '~/locale/index';

@@ -1,5 +1,5 @@
 import { Spacer } from './base';
-import { Tile } from './layout';
+import { Tile } from '~/components-styled/tile';
 import { Metadata, MetadataProps } from './metadata';
 
 export function ChartTileContainer({

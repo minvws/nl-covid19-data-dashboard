@@ -16,8 +16,8 @@ import {
 } from '~/components-styled/aside/menu';
 import { SidebarMetric } from '~/components-styled/sidebar-metric';
 import { Heading } from '~/components-styled/typography';
-import { getLayout as getSiteLayout } from '~/components/layout';
-import { SiteContent } from '~/domain/site/site-content';
+import { getLayout as getSiteLayout } from '~/domain/layout/layout';
+import { AppContent } from '~/components-styled/layout/app-content';
 import siteText from '~/locale/index';
 import { ISafetyRegionData } from '~/static-props/safetyregion-data';
 import { colors } from '~/style/theme';
@@ -81,7 +81,7 @@ function SafetyRegionLayout(
         />
       </Head>
 
-      <SiteContent
+      <AppContent
         hideMenuButton={isMainRoute}
         renderSearch={<SafetyRegionComboBox />}
         renderSidebar={
@@ -284,7 +284,7 @@ function SafetyRegionLayout(
         }
       >
         {children}
-      </SiteContent>
+      </AppContent>
     </>
   );
 }

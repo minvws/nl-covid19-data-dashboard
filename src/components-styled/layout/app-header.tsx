@@ -8,7 +8,7 @@ import { LanguageSwitcher } from './components/language-switcher';
 import { Logo } from './components/logo';
 import { TopNavigation } from './components/top-navigation';
 
-export function SiteHeader() {
+export function AppHeader() {
   return (
     <Box as="header" zIndex={4} position="relative" bg="white">
       <MaxWidth px={3}>
