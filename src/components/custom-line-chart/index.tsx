@@ -7,7 +7,7 @@ import { ValueAnnotation } from '~/components-styled/value-annotation';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
 import { calculateYMax, Value } from '../lineChart';
-import Chart, { defaultMargin } from './chart';
+import { Chart, defaultMargin } from './chart';
 import { Tooltip } from './chart/tooltip';
 
 const valueToDate = (d: number) => new Date(d * 1000);
