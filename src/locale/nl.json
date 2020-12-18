@@ -206,7 +206,7 @@
     "barscale_toelichting": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
     "barscale_screenreader_text": "{{value}} positief geteste mensen per dag.",
     "kpi_titel": "Aantal positief geteste mensen",
-    "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn en COVID-19 hebben. Een deel van de meldingen zijn positieve tests van eerdere dagen, die later zijn doorgegeven.",
+    "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn en COVID-19 hebben. Een deel van de meldingen zijn positieve tests van eerdere dagen, die later zijn doorgegeven.  \n\n_Door een eerdere ICT-storing bij de GGD zijn op maandag en dinsdag niet alle meldingen ontvangen. De achterstanden komen erbij op woensdag, donderdag en vrijdag. Daardoor vallen de dagcijfers op deze dagen hoger uit dan werkelijk._",
     "map_titel": "Verdeling positief geteste mensen in Nederland",
     "map_toelichting": "Deze kaarten laten zien van hoeveel mensen gisteren is gemeld dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
     "linechart_titel": "Verloop over tijd",
@@ -753,7 +753,7 @@
     "select_region_municipality_legend": "Selecteer een gemeente:",
     "select_region_type_legend": "Toon cijfers van:",
     "your_municipality": "Gemeente",
-    "belangrijk_bericht": "Er geldt een [landelijke lockdown](https://www.rijksoverheid.nl/actueel/nieuws/2020/12/14/lockdown-nodig-om-snel-oplopend-aantal-besmettingen-tegen-te-gaan) tot ten minste dinsdag 19 januari."
+    "belangrijk_bericht": "Er geldt een [landelijke lockdown](/landelijk/maatregelen) tot en met ten minste dinsdag 19 januari."
   },
   "common": {
     "metadata": {
@@ -873,7 +873,7 @@
     "barscale_toelichting": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
     "barscale_screenreader_text": "{{value}} positief geteste mensen per dag.",
     "kpi_titel": "Aantal positief geteste mensen",
-    "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn en COVID-19 hebben. Een deel van de meldingen zijn positieve tests van eerdere dagen, die later zijn doorgegeven.",
+    "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn en COVID-19 hebben. Een deel van de meldingen zijn positieve tests van eerdere dagen, die later zijn doorgegeven.  \n\n_Door een eerdere ICT-storing bij de GGD zijn op maandag en dinsdag niet alle meldingen ontvangen. De achterstanden komen erbij op woensdag, donderdag en vrijdag. Daardoor vallen de dagcijfers op deze dagen hoger uit dan werkelijk._",
     "map_titel": "Verdeling positief geteste mensen in {{safetyRegion}}",
     "map_toelichting": "Deze kaart laat zien van hoeveel mensen in de gemeenten van deze veiligheidsregio's gisteren gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
     "linechart_titel": "Verloop over tijd",
@@ -1014,7 +1014,7 @@
     "barscale_toelichting": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
     "barscale_screenreader_text": "{{value}} positief geteste mensen per dag.",
     "kpi_titel": "Aantal positief geteste mensen",
-    "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn en COVID-19 hebben. Een deel van de meldingen zijn positieve tests van eerdere dagen, die later zijn doorgegeven.",
+    "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn en COVID-19 hebben. Een deel van de meldingen zijn positieve tests van eerdere dagen, die later zijn doorgegeven.  \n\n_Door een eerdere ICT-storing bij de GGD zijn op maandag en dinsdag niet alle meldingen ontvangen. De achterstanden komen erbij op woensdag, donderdag en vrijdag. Daardoor vallen de dagcijfers op deze dagen hoger uit dan werkelijk._",
     "map_titel": "Verdeling positief geteste mensen in {{municipality}}",
     "map_toelichting": "Deze kaart laat zien van hoeveel mensen in deze gemeente en in andere gemeenten in dezelfde veiligheidsregio gisteren gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
     "linechart_titel": "Verloop over tijd",
@@ -1101,7 +1101,7 @@
       "title": "Risiconiveaus per veiligheidsregio | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Overzicht van het huidige risiconiveau per veiligheidsregio in Nederland."
     },
-    "belangrijk_bericht": "Er geldt een [landelijke lockdown](https://www.rijksoverheid.nl/actueel/nieuws/2020/12/14/lockdown-nodig-om-snel-oplopend-aantal-besmettingen-tegen-te-gaan) tot ten minste dinsdag 19 januari."
+    "belangrijk_bericht": "Er geldt een [landelijke lockdown](/landelijk/maatregelen) tot en met ten minste dinsdag 19 januari."
   },
   "gemeente_index": {
     "selecteer_titel": "Selecteer een gemeente",
@@ -1827,7 +1827,7 @@
       "description": "Thuiswonende 70-plussers in {{safetyRegion}}."
     },
     "section_positive_tested": {
-      "title": "Thuiswonende 70-plussers in {{safetyRegion}} - nieuwe besmettingen",
+      "title": "Thuiswonende 70-plussers in {{safetyRegion}} -nieuwe besmettingen",
       "description": "Personen van 70 jaar of ouder zijn extra kwetsbaar bij een besmetting met het coronavirus. Door zicht te houden op het aantal besmettingen onder deze groep kunnen de juiste maatregelen genomen worden om het virus in te dammen. Het gaat hierbij alleen om zelfstandig wonende 70-plussers.",
       "reference": {
         "href": "/verantwoording#thuiswonende-70-plussers",
@@ -1848,8 +1848,8 @@
       "datums": "Laatste waarden verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt."
     },
     "section_deceased": {
-      "title": "Thuiswonende 70-plussers in {{safetyRegion}} - sterfte",
-      "description": "Aantal thuiswonende personen van 70 jaar of ouder in deze veiligheidsregio die zijn overleden aan COVID-19, per dag.",
+      "title": "Thuiswonende 70-plussers in {{safetyRegion}} - COVID-19 sterfte",
+      "description": "Aantal thuiswonende 70-plussers in deze veiligheidsregio die zijn overleden aan COVID-19, per dag.",
       "reference": {
         "href": "/verantwoording#thuiswonende-70-plussers",
         "text": "Lees meer in de cijferverantwoording."
@@ -1862,9 +1862,9 @@
         }
       },
       "kpi_daily_title": "Aantal 70-plussers overleden aan COVID-19, per dag",
-      "kpi_daily_description": "Aantal thuiswonende personen van 70 jaar of ouder in deze regio waarvan gisteren is gemeld dat ze zijn overleden aan COVID-19",
-      "line_chart_daily_title": "Dagelijks aantal aan COVID-19 overleden thuiswonende 70-plussers: verloop over tijd",
-      "datums": "Laatste waarden verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt."
+      "kpi_daily_description": "Aantal thuiswonende 70-plussers in deze regio waarvan gisteren is gemeld dat ze zijn overleden aan COVID-19",
+      "line_chart_daily_title": "Dagelijks aantal aan COVID-19 overleden thuiswonende 70-plussers",
+      "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt."
     },
     "kpi_titel": "Aantal positief geteste mensen"
   },
@@ -1946,11 +1946,11 @@
       "text": "Lees meer in de cijferverantwoording."
     },
     "cbs_message": {
-      "title": "Sterfte in week 49 nog steeds verhoogd",
+      "title": "Sterfte neemt verder toe in week 50",
       "published_text": "Publicatiedatum: vrijdag 4 december",
-      "message": "In week 49 (30 november tot en met 6 december 2020) overleden naar schatting 3 450 mensen. Dat zijn er ongeveer 75 meer dan een week eerder, toen 3 373 mensen overleden. In de winter neemt het aantal overledenen altijd toe. De sterfte in week 49 is echter nog 400 hoger dan verwacht voor deze periode. Dat meldt het CBS op basis van de voorlopige sterftecijfers per week.",
+      "message": "In week 50 (7 tot en met 13 december 2020) overleden naar schatting 3 550 mensen. Dat zijn er ruim 50 meer dan een week eerder, toen 3 494 mensen overleden. In de winter neemt het aantal overledenen altijd toe. De sterfte in week 50 is echter nog 450 hoger dan verwacht voor deze periode. Dat meldt het CBS op basis van de voorlopige sterftecijfers per week.",
       "link": {
-        "href": "https://www.cbs.nl/nl-nl/nieuws/2020/50/sterfte-in-week-49-nog-steeds-verhoogd",
+        "href": "https://www.cbs.nl/nl-nl/nieuws/2020/51/sterfte-neemt-verder-toe-in-week-50",
         "text": "Website CBS"
       }
     },
