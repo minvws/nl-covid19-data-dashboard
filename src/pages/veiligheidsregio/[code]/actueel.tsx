@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { Tile } from '~/components-styled/layout';
+import { MaxWidth } from '~/components-styled/max-width';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
-import { FCWithLayout } from '~/components/layout';
-import { getSafetyRegionLayout } from '~/components/layout/SafetyRegionLayout';
+import { FCWithLayout, getLayoutWithMetadata } from '~/components/layout';
 import { TALLLanguages } from '~/locale/';
 import {
   getSafetyRegionStaticProps,
@@ -21,7 +21,7 @@ const SafetyRegionActueel: FCWithLayout<ActueelData> = (data) => {
   const { text } = data;
 
   return (
-    <>
+    <MaxWidth>
       <Tile>De actuele situatie in {data.safetyRegionName}</Tile>
       <Tile>Artikelen</Tile>
       <ChoroplethTile
@@ -44,11 +44,13 @@ const SafetyRegionActueel: FCWithLayout<ActueelData> = (data) => {
           tooltipContent={escalationTooltip(createSelectRegionHandler(router))}
         />
       </ChoroplethTile>
-    </>
+    </MaxWidth>
   );
 };
 
-SafetyRegionActueel.getLayout = getSafetyRegionLayout();
+/** @TODO Fill metadata / adjust layout */
+const metadata = {};
+SafetyRegionActueel.getLayout = getLayoutWithMetadata(metadata);
 
 export const getStaticProps = getSafetyRegionStaticProps;
 export const getStaticPaths = getSafetyRegionPaths();
