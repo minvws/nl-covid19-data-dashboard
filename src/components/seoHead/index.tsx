@@ -125,13 +125,6 @@ export function SEOHead(props: SEOHeadProps): any {
         type="font/woff"
       />
 
-      <link
-        rel="preload"
-        href="/json/RANGES.json"
-        as="fetch"
-        crossOrigin="anonymous"
-      />
-
       <meta key="description" name="description" content={description} />
       <meta
         key="image"

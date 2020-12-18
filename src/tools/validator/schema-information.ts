@@ -27,7 +27,6 @@ export function getSchemaInformation(
   // This struct defines which JSON files should be validated with which schema.
   const schemaInformation: Record<string, SchemaInfo> = {
     national: { files: ['NL.json'], basePath: jsonPath },
-    ranges: { files: ['RANGES.json'], basePath: jsonPath },
     regional: {
       files: filterFilenames(dataJsons, /^VR[0-9]+.json$/),
       basePath: jsonPath,
