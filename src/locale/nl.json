@@ -32,13 +32,12 @@
     "footer_nav": "Ga direct naar de footer navigatie"
   },
   "header": {
-    "title": "Dashboard coronavirus",
-    "text": "Het dashboard coronavirus geeft informatie over de ontwikkeling van het coronavirus in Nederland.",
-    "link": "Lees meer over dit dashboard",
+    "title": "Coronadashboard",
     "logo_alt": "Rijksoverheid"
   },
   "nav": {
     "links": {
+      "actueel": "Actueel",
       "index": "Landelijk",
       "over": "Over dit dashboard",
       "meer": "Meer informatie over het coronavirus",
@@ -51,7 +50,11 @@
     },
     "title": "Corona Dashboard",
     "terug_naar_alle_cijfers": "Terug naar alle cijfers",
-    "terug_naar_alle_cijfers_homepage": "Terug naar alle cijfers"
+    "terug_naar_alle_cijfers_homepage": "Terug naar alle cijfers",
+    "menu": {
+      "open_menu": "Open menu",
+      "close_menu": "Sluit menu"
+    }
   },
   "ic_opnames_per_dag": {
     "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
