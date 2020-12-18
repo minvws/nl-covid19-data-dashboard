@@ -42,7 +42,6 @@ export function LineChartTile<T extends Value>({
                 {...chartProps}
                 width={parent.width}
                 timeframe={timeframe}
-                {...chartProps}
               />
             )}
           </ParentSize>
