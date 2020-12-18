@@ -814,6 +814,7 @@
       "vroege_signalen": "Vroege signalen",
       "gedrag": "Gedrag",
       "kwetsbare_groepen": "Kwetsbare groepen",
+      "algemeen": "Algemeen",
       "maatregelen": "Maatregelen"
     }
   },
@@ -2075,6 +2076,7 @@
   },
   "veiligheidsregio_maatregelen": {
     "titel_sidebar": "Maatregelen",
+    "tabel_titel": "Maatregelen van Lockdown",
     "titel": "Maatregelen in {{safetyRegionName}}",
     "titel_risiconiveau": "Risiconiveau",
     "toelichting_risiconiveau": "Voor meer informatie over uw regio, kunt u terecht op de website van uw veiligheidsregio.",
