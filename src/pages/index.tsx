@@ -4,6 +4,7 @@ import path from 'path';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { Tile } from '~/components-styled/layout';
 import { MaxWidth } from '~/components-styled/max-width';
+import { QuickLinks } from '~/components-styled/quick-links';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
@@ -53,6 +54,14 @@ const Home: FCWithLayout<IHomeData> = (data) => {
           )}
         />
       </ChoroplethTile>
+
+      <QuickLinks
+        links={[
+          { href: '/landelijk', text: 'Cijfers van Nederland' },
+          { href: '/veiligheidsregio', text: 'Cijfers per veiligheidsregio' },
+          { href: '/gemeentes', text: 'Cijfers per gemeente' },
+        ]}
+      ></QuickLinks>
     </MaxWidth>
   );
 };
