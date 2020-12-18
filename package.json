@@ -22,7 +22,6 @@
     "@visx/scale": "^1.1.0",
     "@visx/shape": "^1.1.0",
     "@visx/text": "^1.1.0",
-    "core-js": "^3.6.5",
     "d3-scale": "2.2.2",
     "date-fns": "^2.15.0",
     "geojson": "^0.5.0",

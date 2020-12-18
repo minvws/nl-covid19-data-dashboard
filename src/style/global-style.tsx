@@ -107,4 +107,8 @@ a:focus {
 button::-moz-focus-inner {
   border: 0;
 }
+
+.inline-kpi {
+  font-variant-numeric: tabular-nums;
+}
 `;

@@ -1,6 +1,7 @@
 import { Feature, MultiPolygon } from 'geojson';
 import { ReactNode } from 'react';
 import { AspectRatio } from '~/components-styled/aspect-ratio';
+import { colors } from '~/style/theme';
 import { Choropleth } from './choropleth';
 import { useChartDimensions, useMunicipalityNavigationData } from './hooks';
 import { Path } from './path';
@@ -42,7 +43,7 @@ export function MunicipalityNavigationMap<T>(
         id={gemcode}
         d={path}
         fill={'#fff'}
-        stroke={'#01689b'}
+        stroke={colors.blue}
         strokeWidth={0.5}
       />
     );
@@ -60,8 +61,8 @@ export function MunicipalityNavigationMap<T>(
         id={gemcode}
         key={gemcode}
         d={path}
-        stroke="#01689b"
-        fill="#01689b"
+        stroke={colors.blue}
+        fill={colors.blue}
       />
     );
   };

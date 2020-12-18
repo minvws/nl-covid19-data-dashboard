@@ -12,7 +12,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { Box } from '~/components-styled/base';
 import text from '~/locale/index';
 import { assert } from '~/utils/assert';
-import { useMediaQuery } from '~/utils/useMediaQuery';
+import { useBreakpoints } from '~/utils/useBreakpoints';
 import { useThrottle } from '~/utils/useThrottle';
 
 type TOption = {
@@ -49,7 +49,8 @@ export function ComboBox<Option extends TOption>(props: TProps<Option>) {
   const inputRef = useRef<HTMLInputElement>();
   const [inputValue, setInputValue] = useState<string>('');
   const results = useSearchedOptions<Option>(inputValue, options);
-  const isLargeScreen = useMediaQuery('(min-width: 1000px)');
+  const breakpoints = useBreakpoints();
+  const isLargeScreen = breakpoints.md;
   const hasRegionSelected = !!code;
 
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>): void {
