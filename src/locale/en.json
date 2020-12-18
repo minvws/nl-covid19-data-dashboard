@@ -206,7 +206,7 @@
     "barscale_toelichting": "This figure shows how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
     "kpi_titel": "Number of confirmed cases",
-    "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.  \n\n_Due to a prior ICT issue at the GGD, not all confirmed cases had been received on Monday and Tuesday. The backlog is added to the numbers on Wednesday, Thursday and Friday. Therefore, numbers on these days are higher than in reality._",
+    "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.",
     "map_titel": "Distribution of confirmed cases in the Netherlands",
     "map_toelichting": "These maps show how many confirmed cases of COVID-19 were reported yesterday per 100,000 inhabitants.",
     "linechart_titel": "Progression over time",
@@ -641,7 +641,7 @@
       },
       {
         "cijfer": "Reproduction number",
-        "verantwoording": "The explanation of the data presented about the reproduction number is being translated and will follow shortly. In the meantime we refer to the explanation of the data presented in Dutch."
+        "verantwoording": "The reproduction number (R) shows the number of people who are infected, on average, by one person with COVID-19. These figures are supplied weekly (on Tuesdays) as open data by the National Institute for Public Health and the Environment (RIVM). The description of this data set can be found here. The reproduction number (R) is not an exact value but a reliable estimate. \n\nRIVM uses the reported number of daily positive test results to calculate R. In most cases, the day on which symptoms first presented is known. In other cases, an estimate can be made of this date. Depicting the number of COVID-19 cases according to the first day of symptoms gives a clear picture of whether the number of transmissions is increasing, at its peak or decreasing. In order to estimate R, it is also necessary to know the length of time between the first day of symptoms of a new COVID-19 case and the first day of symptoms of the person who infected them. This has been calculated to be 4 days on average, based on COVID-19 cases reported to the municipal health service (GGD). This information is then used to calculate the reproduction number.\n\nThe most up-to-date value of R provided on the coronavirus dashboard at any given time is always from at least two weeks ago. Estimates of R using data from less than 14 days ago could provide an indication of what the definitive value may be, but are not reliable predictors. Estimates using more recent data are less reliable because the data is not yet complete. It is, for instance, impossible to know how many newly confirmed cases will result in hospital admissions in the days ahead.\n\nUntil 11 June 2020 R was calculated on the basis of COVID-19 hospital admissions as large-scale testing was not yet underway. Until 2 November 2020, the graph showing the progression of R over time did not give a value of R for the most recent two weeks but did give a projection of this value in the form of a bandwidth. As of 3 November, the dashboard graph no longer displays this bandwidth."
       },
       {
         "cijfer": "Nursing homes",
@@ -753,7 +753,7 @@
     "select_region_municipality_legend": "Select a municipality:",
     "select_region_type_legend": "Show numbers from:",
     "your_municipality": "Municipality",
-    "belangrijk_bericht": "There is a [national lockdown](/landelijk/maatregelen) until at least Tuesday 19 January."
+    "belangrijk_bericht": "There is a [national lockdown](https://www.rijksoverheid.nl/actueel/nieuws/2020/12/14/lockdown-nodig-om-snel-oplopend-aantal-besmettingen-tegen-te-gaan) until at least Tuesday 19 January."
   },
   "common": {
     "metadata": {
@@ -814,8 +814,8 @@
       "vroege_signalen": "Early indicators",
       "gedrag": "Behaviour",
       "kwetsbare_groepen": "Vulnerable groups",
-      "algemeen": "General",
-      "maatregelen": "Measures"
+      "maatregelen": "Measures",
+      "algemeen": "General"
     }
   },
   "veiligheidsregio_metadata": {
@@ -873,7 +873,7 @@
     "barscale_toelichting": "This figure shows how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
     "kpi_titel": "Number of confirmed cases",
-    "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.  \n\n_Due to a prior ICT issue at the GGD, not all confirmed cases had been received on Monday and Tuesday. The backlog is added to the numbers on Wednesday, Thursday and Friday. Therefore, numbers on these days are higher than in reality._",
+    "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.",
     "map_titel": "Distribution of confirmed cases in {{safetyRegion}}",
     "map_toelichting": "This map shows how many confirmed cases of COVID-19 were reported yesterday in the municipalities of this safety region per 100,000 inhabitants.",
     "linechart_titel": "Progression over time",
@@ -1014,7 +1014,7 @@
     "barscale_toelichting": "This number shows how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
     "kpi_titel": "Number of confirmed cases",
-    "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.  \n\n_Due to a prior ICT issue at the GGD, not all confirmed cases had been received on Monday and Tuesday. The backlog is added to the numbers on Wednesday, Thursday and Friday. Therefore, numbers on these days are higher than in reality._",
+    "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.",
     "map_titel": "Distribution of confirmed cases in {{municipality}}",
     "map_toelichting": "This map shows how many confirmed cases of COVID-19 were reported yesterday in this municipality and other municipalities in the same safety region, per 100,000 inhabitants.",
     "linechart_titel": "Progression over time",
@@ -1101,7 +1101,7 @@
       "title": "Level of risk per safety region | Dashboard Coronavirus | Government.nl",
       "description": "Overview of the level of risk per safety region in the Netherlands."
     },
-    "belangrijk_bericht": "There is a [national lockdown](/landelijk/maatregelen) until at least Tuesday 19 January."
+    "belangrijk_bericht": "There is a [national lockdown](https://www.rijksoverheid.nl/actueel/nieuws/2020/12/14/lockdown-nodig-om-snel-oplopend-aantal-besmettingen-tegen-te-gaan) until at least Tuesday 19 January."
   },
   "gemeente_index": {
     "selecteer_titel": "Select your municipality",
@@ -1827,7 +1827,7 @@
       "description": "Over-70s living at home in {{safetyRegion}}"
     },
     "section_positive_tested": {
-      "title": "People over-70 in {{safetyRegion}} living at home ",
+      "title": "People over-70 in {{safetyRegion}} living at home - newly confirmed cases",
       "description": "People aged over 70 are extra vulnerable to coronavirus infection. Keeping track of the number of infections among over-70s who are still living independently in their own homes makes targeted measures possible.",
       "reference": {
         "href": "/verantwoording#people-over-70-living-at-home",
@@ -1848,7 +1848,7 @@
       "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis."
     },
     "section_deceased": {
-      "title": "People over 70 in {{safetyRegion}} living at home – COVID-19 deaths",
+      "title": "People over 70 in {{safetyRegion}} living at home – deaths",
       "description": "Number of over-70s living at home in this region deceased due to COVID-19, per day.",
       "reference": {
         "href": "/verantwoording#people-over-70-living-at-home",
@@ -1863,7 +1863,7 @@
       },
       "kpi_daily_title": "COVID-19 deaths among over-70s living at home, per day",
       "kpi_daily_description": "The number of people over 70 living at home in this safety region who were reported as deceased due to COVID-19 yesterday",
-      "line_chart_daily_title": "Number of COVID-19 deaths among over-70s living at home",
+      "line_chart_daily_title": "Number of COVID-19 deaths among over-70s living at home: progression over time",
       "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis."
     },
     "kpi_titel": "Confirmed cases"
@@ -1946,11 +1946,11 @@
       "text": "Read more in 'explanation of the data presented'"
     },
     "cbs_message": {
-      "title": "Mortality rising further in week 50",
+      "title": "Mortality still elevated in week 49",
       "published_text": "Date of publication: Friday 4 December",
-      "message": "In week 50 (7 to 13 December inclusive), the estimated number of deaths stood at 3,550. This is over 50 more than in the previous week, when there were 3,494 deaths. Mortality is always higher in winter. However, there were still 450 more deaths than would normally be expected in this period. Statistics Netherlands (CBS) reports this based on the provisional weekly figures on mortality.",
+      "message": "In week 49 (30 November to 6 December inclusive), the estimated number of deaths stood at 3,450. This is approximately 75 more than in the previous week, when there were 3,373 deaths. Mortality is always higher in winter. However, there were still 400 more deaths recorded in week 49 than normally expected for this period. Statistics Netherlands (CBS) reports this based on the latest provisional weekly mortality figures.",
       "link": {
-        "href": "https://www.cbs.nl/en-gb/news/2020/51/mortality-rising-further-in-week-50",
+        "href": "https://www.cbs.nl/en-gb/news/2020/50/mortality-still-elevated-in-week-49",
         "text": "Website CBS"
       }
     },
@@ -2076,7 +2076,6 @@
   },
   "veiligheidsregio_maatregelen": {
     "titel_sidebar": "Measures",
-    "tabel_titel": "Current lockdown measures",
     "titel": "Measures in {{safetyRegionName}}",
     "titel_risiconiveau": "Level of risk",
     "toelichting_risiconiveau": "For more information about your region, please check the website of your safety region.",
@@ -2088,7 +2087,8 @@
       "title": "Measures in {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
       "description": "Overview of the corona measures in the safety region {{safetyRegionName}}."
     },
-    "subtitel_sidebar": "There are national measures"
+    "subtitel_sidebar": "There are national measures",
+    "tabel_titel": "Current lockdown measures"
   },
   "veiligheidsregio_maatregelen_urls": {
     "VR01": "http://www.veiligheidsregiogroningen.nl/",
