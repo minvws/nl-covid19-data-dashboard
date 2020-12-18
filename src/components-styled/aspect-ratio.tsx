@@ -1,5 +1,5 @@
 import css from '@styled-system/css';
-import { ReactNode } from 'react';
+import { forwardRef, ReactNode } from 'react';
 import styled from 'styled-components';
 
 interface AspectRatioProps {
@@ -10,13 +10,13 @@ interface AspectRatioProps {
   children: ReactNode;
 }
 
-export function AspectRatio({ ratio, children }: AspectRatioProps) {
-  return (
-    <StyledAspectRatio ratio={ratio}>
+export const AspectRatio = forwardRef<HTMLDivElement, AspectRatioProps>(
+  ({ ratio, children }, ref) => (
+    <StyledAspectRatio ratio={ratio} ref={ref}>
       <Inner>{children}</Inner>
     </StyledAspectRatio>
-  );
-}
+  )
+);
 
 const StyledAspectRatio = styled.div<{ ratio: number }>((x) =>
   css({

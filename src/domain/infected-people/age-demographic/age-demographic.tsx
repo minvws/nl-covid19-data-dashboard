@@ -41,27 +41,25 @@ export function AgeDemographic({ data }: AgeDemographicProps) {
   });
 
   return (
-    <Box mx={-4}>
-      <Box position="relative">
-        <div ref={sizeRef}>
-          <AgeDemographicChart
-            coordinates={coordinates}
-            openTooltip={openTooltip}
-            closeTooltip={closeTooltip}
-            keyboardTooltip={keyboardTooltip}
-          />
-        </div>
+    <Box position="relative">
+      <div ref={sizeRef}>
+        <AgeDemographicChart
+          coordinates={coordinates}
+          openTooltip={openTooltip}
+          closeTooltip={closeTooltip}
+          keyboardTooltip={keyboardTooltip}
+        />
+      </div>
 
-        <Tooltip
-          controls="age-demographic-chart"
-          tooltipState={tooltipState}
-          width={AGE_GROUP_TOOLTIP_WIDTH}
-        >
-          {tooltipState.value && (
-            <AgeDemographicTooltipContent value={tooltipState.value} />
-          )}
-        </Tooltip>
-      </Box>
+      <Tooltip
+        controls="age-demographic-chart"
+        tooltipState={tooltipState}
+        width={AGE_GROUP_TOOLTIP_WIDTH}
+      >
+        {tooltipState.value && (
+          <AgeDemographicTooltipContent value={tooltipState.value} />
+        )}
+      </Tooltip>
     </Box>
   );
 }

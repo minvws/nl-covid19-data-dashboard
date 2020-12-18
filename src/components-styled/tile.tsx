@@ -1,4 +1,4 @@
-import { Box } from '../base';
+import { Box } from './base';
 import { css } from '@styled-system/css';
 import styled from 'styled-components';
 

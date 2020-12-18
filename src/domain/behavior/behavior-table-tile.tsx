@@ -3,7 +3,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { isDefined, isPresent } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
-import { Tile } from '~/components-styled/layout';
+import { Tile } from '~/components-styled/tile';
 import { PercentageBar } from '~/components-styled/percentage-bar';
 import { Heading } from '~/components-styled/typography';
 import siteText from '~/locale/index';
@@ -129,23 +129,7 @@ export function BehaviorTableTile({
   const [behaviorType, setBehaviorType] = useState<BehaviorType>('compliance');
 
   return (
-    <Tile
-      /**
-       * The mb here could alternatively be applied using a <Spacer/> in the
-       * page markup. It's a choice, whether we like to include the bottom
-       * margin on all our commonly used components or keep everything flexible
-       * and use spacers in the context where the component is used.
-       */
-      mb={4}
-      /**
-       * The ml and mr negative margins should not be part of this component
-       * ideally, but are the results of the page layout having paddings even on
-       * small screens. We can remove this once we make all page section
-       * elements full-width and remove the padding from the page layout.
-       */
-      ml={{ _: -4, sm: 0 }}
-      mr={{ _: -4, sm: 0 }}
-    >
+    <Tile>
       <Heading level={3}>{title}</Heading>
       <Box display="flex" justifyContent="start">
         <BehaviorTypeControl value={behaviorType} onChange={setBehaviorType} />

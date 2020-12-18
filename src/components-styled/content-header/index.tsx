@@ -21,7 +21,7 @@ import { Box } from '../base';
 */
 const HeaderBox = styled.header<{
   hasIcon: boolean;
-  skipLinkAnchor: boolean;
+  skipLinkAnchor?: boolean;
 }>((x) =>
   css({
     mt: 0,
@@ -31,20 +31,16 @@ const HeaderBox = styled.header<{
 );
 
 interface HeaderProps {
+  children: ReactNode;
+  hasIcon: boolean;
   id?: string;
   skipLinkAnchor?: boolean;
-  hasIcon: boolean;
-  children: ReactNode;
 }
 
 const Header = (props: HeaderProps) => {
   const { hasIcon, children, skipLinkAnchor, id } = props;
   return (
-    <HeaderBox
-      id={id}
-      hasIcon={hasIcon}
-      skipLinkAnchor={Boolean(skipLinkAnchor)}
-    >
+    <HeaderBox id={id} hasIcon={hasIcon} skipLinkAnchor={skipLinkAnchor}>
       {children}
     </HeaderBox>
   );
@@ -71,7 +67,7 @@ export const CategoryHeading = styled(Heading)<{ hide: boolean }>(
     })
 );
 
-export const AriaInlineText = styled(InlineText)(
+const AriaInlineText = styled(InlineText)(
   css({
     position: 'absolute',
     left: '-10000px',
@@ -79,13 +75,6 @@ export const AriaInlineText = styled(InlineText)(
     width: '1px',
     height: '1px',
     overflow: 'hidden',
-  })
-);
-
-const BodyBox = styled(Box)(
-  css({
-    display: [null, null, null, 'flex'],
-    marginLeft: [null, null, null, 5],
   })
 );
 
@@ -119,47 +108,54 @@ export function ContentHeader(props: ContentHeaderProps) {
   } = props;
 
   return (
-    <Header id={id} skipLinkAnchor={skipLinkAnchor} hasIcon={Boolean(icon)}>
-      {category && (
-        <CategoryHeading level={1} hide={hideCategory}>
-          {category}
-          {screenReaderCategory && (
-            <AriaInlineText> - {screenReaderCategory}</AriaInlineText>
+    <Header id={id} skipLinkAnchor={skipLinkAnchor} hasIcon={!!icon}>
+      <Box px={[4, null, 0]} spacing={1}>
+        {category && (
+          <CategoryHeading level={1} hide={hideCategory}>
+            {category}
+            {screenReaderCategory && (
+              <AriaInlineText> - {screenReaderCategory}</AriaInlineText>
+            )}
+          </CategoryHeading>
+        )}
+        {icon ? (
+          <HeadingWithIcon
+            icon={icon}
+            title={title}
+            headingLevel={headingLevel}
+          />
+        ) : (
+          <Heading level={headingLevel} fontSize={4}>
+            {title}
+          </Heading>
+        )}
+
+        <Box
+          spacing={3}
+          display="flex"
+          flexDirection={['column', null, null, null, 'row']}
+          ml={[null, null, null, 5]}
+        >
+          {reference && (
+            <ReferenceBox>
+              <Text m={0}>
+                {subtitle}{' '}
+                <Link href={reference.href}>
+                  <Text as="a" href={reference.href}>
+                    {reference.text}
+                  </Text>
+                </Link>
+              </Text>
+            </ReferenceBox>
           )}
-        </CategoryHeading>
-      )}
-      {icon ? (
-        <HeadingWithIcon
-          icon={icon}
-          title={title}
-          headingLevel={headingLevel}
-        />
-      ) : (
-        <Heading level={headingLevel} fontSize={4}>
-          {title}
-        </Heading>
-      )}
 
-      <BodyBox>
-        {reference && (
-          <ReferenceBox>
-            <Text>
-              {subtitle}{' '}
-              <Link href={reference.href}>
-                <Text as="a" href={reference.href}>
-                  {reference.text}
-                </Text>
-              </Link>
-            </Text>
-          </ReferenceBox>
-        )}
-
-        {metadata && (
-          <MetadataBox>
-            <Metadata {...metadata} />
-          </MetadataBox>
-        )}
-      </BodyBox>
+          {metadata && (
+            <MetadataBox>
+              <Metadata {...metadata} />
+            </MetadataBox>
+          )}
+        </Box>
+      </Box>
     </Header>
   );
 }

@@ -1,16 +1,16 @@
 import css from '@styled-system/css';
-import { Link } from '~/utils/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { MaxWidth } from '~/components-styled/max-width';
 import text from '~/locale/index';
+import { Link } from '~/utils/link';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import Menu from '~/assets/menu.svg';
 import Close from '~/assets/close.svg';
 import theme from '~/style/theme';
 import { VisuallyHidden } from '~/components-styled/visually-hidden';
 import { asResponsiveArray } from '~/style/utils';
+import { MaxWidth } from '~/components-styled/max-width';
 
 export function TopNavigation() {
   const router = useRouter();
@@ -112,8 +112,6 @@ const NavWrapper = styled.nav(
   css({
     borderTop: '1px solid rgba(255, 255, 255, 0.25)',
     borderTopWidth: '1px',
-    ml: -3,
-    mr: -3,
     mt: 3,
     pt: 1,
     pb: 0,
@@ -185,7 +183,7 @@ const NavLink = styled.a<{ isActive: boolean }>((x) =>
 );
 
 const NavLinkSpan = styled.span(() => {
-  const horizontalSpace = asResponsiveArray({ _: 0, md: '1.5rem' });
+  const horizontalSpace = asResponsiveArray({ _: '1.5rem', md: '1.5rem' });
 
   return css({
     display: 'inline-block',

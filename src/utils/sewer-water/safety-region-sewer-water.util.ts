@@ -11,13 +11,7 @@ const text = siteText.veiligheidsregio_rioolwater_metingen;
  * All of this code seems duplicate now that the type names are unified.
  */
 
-// Specific interfaces to pass data between the formatting functions and the highcharts configs
-export interface SewerWaterMetadata {
-  dataAvailable: boolean;
-  oneInstallation: boolean;
-}
-
-export interface SewerWaterBarScaleData {
+interface SewerWaterBarScaleData {
   value: number | undefined;
   unix: number | undefined;
   dateInsertedUnix: number | undefined;
@@ -32,12 +26,12 @@ interface SewerWaterLineChartValue {
   week_end_unix: number;
 }
 
-export interface SewerWaterLineChartData {
+interface SewerWaterLineChartData {
   averageValues: SewerWaterLineChartValue[];
   averageLabelText: string;
 }
 
-export interface SewerWaterBarChartData {
+interface SewerWaterBarChartData {
   keys: string[];
   data: Highcharts.XrangePointOptionsObject[];
 }

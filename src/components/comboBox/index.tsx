@@ -5,16 +5,17 @@ import {
   ComboboxOption,
   ComboboxPopover,
 } from '@reach/combobox';
+import css from '@styled-system/css';
 import matchSorter from 'match-sorter';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Box } from '~/components-styled/base';
 import text from '~/locale/index';
 import { assert } from '~/utils/assert';
-import { useMediaQuery } from '~/utils/useMediaQuery';
+import { useBreakpoints } from '~/utils/useBreakpoints';
 import { useThrottle } from '~/utils/useThrottle';
 
-export type TOption = {
+type TOption = {
   displayName?: string;
   name: string;
 };
@@ -25,7 +26,7 @@ type TProps<Option extends TOption> = {
   onSelect: (option: Option) => void;
 };
 
-/*
+/**
  * Combobox is an accessible dropdown with search.
  *
  * @param options - Options to render. Needs to at least contain a key `name` with a string as value.
@@ -48,7 +49,8 @@ export function ComboBox<Option extends TOption>(props: TProps<Option>) {
   const inputRef = useRef<HTMLInputElement>();
   const [inputValue, setInputValue] = useState<string>('');
   const results = useSearchedOptions<Option>(inputValue, options);
-  const isLargeScreen = useMediaQuery('(min-width: 1000px)');
+  const breakpoints = useBreakpoints();
+  const isLargeScreen = breakpoints.md;
   const hasRegionSelected = !!code;
 
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>): void {
@@ -83,7 +85,7 @@ export function ComboBox<Option extends TOption>(props: TProps<Option>) {
   }, [isLargeScreen, hasRegionSelected]);
 
   return (
-    <Box role="search">
+    <Box role="search" css={css({ '[data-reach-combobox]': { px: 3, py: 4 } })}>
       <Combobox openOnFocus onSelect={handleSelect}>
         <ComboboxInput
           ref={inputRef}

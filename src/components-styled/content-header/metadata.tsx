@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import ClockIcon from '~/assets/clock.svg';
 import DatabaseIcon from '~/assets/database.svg';
 import DownloadIcon from '~/assets/download.svg';
@@ -8,7 +9,7 @@ import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { Box } from '../base';
 import { ExternalLink } from '../external-link';
 import { Text } from '../typography';
-import { Fragment } from 'react';
+
 interface Datasource {
   href: string;
   text: string;
@@ -39,7 +40,7 @@ export function Metadata(props: MetadataProps) {
     .map((x) => ({ href: x.download, text: x.text }));
 
   return (
-    <Box spacing={2} my={3}>
+    <Box spacing={2}>
       <Box display="flex" alignItems="flex-start" color="annotation">
         <Box as="span" minWidth="1.8rem" mt={1}>
           <ClockIcon aria-hidden color={theme.colors.annotation} />

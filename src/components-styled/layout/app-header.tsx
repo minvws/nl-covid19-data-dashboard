@@ -6,10 +6,10 @@ import { LanguageSwitcher } from './components/language-switcher';
 import { Logo } from './components/logo';
 import { TopNavigation } from './components/top-navigation';
 
-export function SiteHeader() {
+export function AppHeader() {
   return (
     <Box as="header" zIndex={4} position="relative" bg="white">
-      <MaxWidth>
+      <MaxWidth px={3}>
         <Logo />
         <LanguageSwitcher />
       </MaxWidth>
@@ -19,6 +19,7 @@ export function SiteHeader() {
           flexWrap="wrap"
           alignItems="center"
           justifyContent="space-between"
+          px={3}
         >
           <Box
             fontSize={3}

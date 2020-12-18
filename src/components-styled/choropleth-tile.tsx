@@ -23,24 +23,24 @@ interface DataProps {
 interface ChoroplethTileProps extends DataProps {
   title: string;
   description?: string | React.ReactNode;
-  onChangeControls?: (v: RegionControlOption) => void;
+  onChartRegionChange?: (v: RegionControlOption) => void;
+  chartRegion?: 'municipal' | 'region';
   children: React.ReactNode;
   legend?: {
     title: string;
     thresholds: ChoroplethThresholdsValue[];
   };
   metadata?: MetadataProps;
-  showDataWarning?: boolean;
 }
 
 export function ChoroplethTile<T>({
   title,
   description,
-  onChangeControls,
+  onChartRegionChange,
+  chartRegion,
   legend,
   children,
   metadata,
-  showDataWarning,
 }: ChoroplethTileProps) {
   const breakpoints = useBreakpoints();
   const legendaComponent = legend && (
@@ -48,7 +48,7 @@ export function ChoroplethTile<T>({
   );
 
   return (
-    <ChartTileContainer metadata={metadata} showDataWarning={showDataWarning}>
+    <ChartTileContainer metadata={metadata}>
       <Box
         display="flex"
         flexDirection={{ _: 'column', lg: 'row' }}
@@ -63,12 +63,15 @@ export function ChoroplethTile<T>({
             ) : (
               description
             )}
-            {onChangeControls && (
+            {onChartRegionChange && (
               <Box
                 display="flex"
                 justifyContent={{ _: 'center', lg: 'flex-start' }}
               >
-                <ChartRegionControls onChange={onChangeControls} />
+                <ChartRegionControls
+                  value={chartRegion}
+                  onChange={onChartRegionChange}
+                />
               </Box>
             )}
           </Box>

@@ -2,7 +2,30 @@ import React from 'react';
 import { useTheme } from 'styled-components';
 import { useMediaQuery } from './useMediaQuery';
 
-export function useBreakpoints(initialValue?: boolean) {
+export function useBreakpoints(
+  initialValue?: boolean
+): {
+  /**
+   * ~420px
+   */
+  xs: boolean;
+  /**
+   * ~768px
+   */
+  sm: boolean;
+  /**
+   * ~960px
+   */
+  md: boolean;
+  /**
+   * ~1200px
+   */
+  lg: boolean;
+  /**
+   * ~1600px
+   */
+  xl: boolean;
+} {
   const { mediaQueries } = useTheme();
   const xs = useMediaQuery(mediaQueries.xs, initialValue);
   const sm = useMediaQuery(mediaQueries.sm, initialValue);

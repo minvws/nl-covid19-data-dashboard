@@ -16,13 +16,7 @@ export type TooltipSettings = {
   data: string;
 };
 
-export type TRenderCallback = (
-  feature: Feature<any, any>,
-  path: string,
-  index: number
-) => ReactNode;
-
-export type TProps<T1, T2, T3> = {
+type TProps<T1, T2, T3> = {
   // This is the main feature collection that displays the features that will
   // be colored in as part of the choropleth
   featureCollection: FeatureCollection<MultiPolygon, T1>;

@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
-import { Tile } from '~/components-styled/layout';
+import { Tile } from '~/components-styled/tile';
 import { MaxWidth } from '~/components-styled/max-width';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
-import { FCWithLayout, getLayoutWithMetadata } from '~/components/layout';
+import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import { TALLLanguages } from '~/locale/';
 import { EscalationMapLegenda } from '~/pages/veiligheidsregio';
 import {
