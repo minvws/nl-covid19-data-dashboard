@@ -11,6 +11,7 @@ import { HeadingWithIcon } from '~/components-styled/heading-with-icon';
 import { MessageTile } from '~/components-styled/message-tile';
 import { TileList } from '~/components-styled/tile-list';
 import { Text } from '~/components-styled/typography';
+import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
@@ -127,10 +128,14 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
           source: text.positief_geteste_personen.bronnen.rivm,
         }}
         description={text.positief_geteste_personen.map_toelichting}
-        onChangeControls={setSelectedMap}
+        onChartRegionChange={setSelectedMap}
+        chartRegion={selectedMap}
         legend={{
           thresholds:
-            regionThresholds.positive_tested_people.positive_tested_people,
+            selectedMap === 'municipal'
+              ? municipalThresholds.positive_tested_people
+                  .positive_tested_people
+              : regionThresholds.positive_tested_people.positive_tested_people,
           title: text.positief_geteste_personen.chloropleth_legenda.titel,
         }}
       >

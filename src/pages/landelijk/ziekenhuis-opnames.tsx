@@ -9,6 +9,7 @@ import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { PageBarScale } from '~/components-styled/page-barscale';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
+import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
@@ -31,7 +32,7 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
   const { data } = props;
   const router = useRouter();
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
-    'municipal'
+    'region'
   );
   const dataHospitalIntake = data.intake_hospital_ma;
   const dataHospitalBeds = data.hospital_beds_occupied;
@@ -98,45 +99,22 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
           </KpiTile>
         </TwoKpiSection>
 
-        <LineChartTile
-          title={text.linechart_titel}
-          description={text.linechart_description}
-          values={dataHospitalIntake.values.map((value: any) => ({
-            value: value.moving_average_hospital,
-            date: value.date_of_report_unix,
-          }))}
-          signaalwaarde={40}
-          metadata={{
-            source: text.bronnen.nice,
-          }}
-        />
-
-        <LineChartTile
-          title={text.chart_bedbezetting.title}
-          description={text.chart_bedbezetting.description}
-          values={dataHospitalBeds.values.map((value) => ({
-            value: value.covid_occupied,
-            date: value.date_of_report_unix,
-          }))}
-          metadata={{
-            source: text.bronnen.lnaz,
-          }}
-        />
-
         <ChoroplethTile
           title={text.map_titel}
           description={text.map_toelichting}
-          onChangeControls={setSelectedMap}
+          onChartRegionChange={setSelectedMap}
+          chartRegion={selectedMap}
           legend={{
             thresholds:
-              regionThresholds.hospital_admissions.hospital_admissions,
+              selectedMap === 'municipal'
+                ? municipalThresholds.hospital_admissions.hospital_admissions
+                : regionThresholds.hospital_admissions.hospital_admissions,
             title: text.chloropleth_legenda.titel,
           }}
           metadata={{
             date: dataHospitalIntake.last_value.date_of_report_unix,
             source: text.bronnen.nice,
           }}
-          showDataWarning
         >
           {selectedMap === 'municipal' && (
             <MunicipalityChoropleth
@@ -162,6 +140,31 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
             />
           )}
         </ChoroplethTile>
+
+        <LineChartTile
+          title={text.linechart_titel}
+          description={text.linechart_description}
+          values={dataHospitalIntake.values.map((value) => ({
+            value: value.moving_average_hospital,
+            date: value.date_of_report_unix,
+          }))}
+          signaalwaarde={40}
+          metadata={{
+            source: text.bronnen.nice,
+          }}
+        />
+
+        <LineChartTile
+          title={text.chart_bedbezetting.title}
+          description={text.chart_bedbezetting.description}
+          values={dataHospitalBeds.values.map((value) => ({
+            value: value.covid_occupied,
+            date: value.date_of_report_unix,
+          }))}
+          metadata={{
+            source: text.bronnen.lnaz,
+          }}
+        />
       </TileList>
     </>
   );

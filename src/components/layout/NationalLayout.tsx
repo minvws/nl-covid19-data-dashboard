@@ -97,12 +97,6 @@ function NationalLayout(props: NationalLayoutProps) {
             <Menu>
               <CategoryMenu title={siteText.nationaal_layout.headings.algemeen}>
                 <MetricMenuItemLink
-                  href="/landelijk/maatregelen"
-                  icon={<Maatregelen fill={theme.colors.restrictions} />}
-                  title={siteText.nationaal_maatregelen.titel_sidebar}
-                />
-
-                <MetricMenuItemLink
                   href={{
                     pathname: '/',
                     query: breakpoints.md
@@ -114,6 +108,12 @@ function NationalLayout(props: NationalLayoutProps) {
                   icon={<Notification color={theme.colors.notification} />}
                   title={siteText.laatste_ontwikkelingen.title}
                   subtitle={siteText.laatste_ontwikkelingen.menu_subtitle}
+                />
+                <MetricMenuItemLink
+                  href="/landelijk/maatregelen"
+                  icon={<Maatregelen fill={theme.colors.restrictions} />}
+                  title={siteText.nationaal_maatregelen.titel_sidebar}
+                  subtitle={siteText.nationaal_maatregelen.subtitel_sidebar}
                 />
               </CategoryMenu>
               <CategoryMenu

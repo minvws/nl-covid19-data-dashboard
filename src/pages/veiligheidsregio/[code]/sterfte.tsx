@@ -34,6 +34,7 @@ const DeceasedRegionalPage: FCWithLayout<ISafetyRegionData> = (props) => {
           safetyRegion,
         })}
       />
+
       <TileList>
         <ContentHeader
           category={siteText.veiligheidsregio_layout.headings.besmettingen}
@@ -88,6 +89,9 @@ const DeceasedRegionalPage: FCWithLayout<ISafetyRegionData> = (props) => {
           timeframeOptions={['all', '5weeks']}
           timeframeInitialValue="all"
           title={text.section_deceased_rivm.line_chart_covid_daily_title}
+          description={
+            text.section_deceased_rivm.line_chart_covid_daily_description
+          }
           values={dataRivm.values.map((value) => ({
             value: value.covid_daily,
             date: value.date_of_report_unix,

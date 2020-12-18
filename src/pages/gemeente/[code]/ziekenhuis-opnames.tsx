@@ -41,7 +41,6 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
           municipalityName,
         })}
       />
-
       <TileList>
         <ContentHeader
           category={siteText.gemeente_layout.headings.ziekenhuizen}
@@ -61,7 +60,6 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
 
         <TwoKpiSection>
           <KpiTile
-            showDataWarning
             title={text.barscale_titel}
             description={text.extra_uitleg}
             metadata={{
@@ -79,27 +77,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
           </KpiTile>
         </TwoKpiSection>
 
-        {lastValue && (
-          <ChartTileWithTimeframe
-            showDataWarning
-            title={text.linechart_titel}
-            description={text.linechart_description}
-            metadata={{ source: text.bronnen.rivm }}
-          >
-            {(timeframe) => (
-              <LineChart
-                timeframe={timeframe}
-                values={data.hospital_admissions.values.map((value) => ({
-                  value: value.moving_average_hospital,
-                  date: value.date_of_report_unix,
-                }))}
-              />
-            )}
-          </ChartTileWithTimeframe>
-        )}
-
         <ChoroplethTile
-          showDataWarning
           title={replaceVariablesInText(text.map_titel, {
             municipality: municipalityName,
           })}
@@ -127,6 +105,24 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
             )}
           />
         </ChoroplethTile>
+
+        {lastValue && (
+          <ChartTileWithTimeframe
+            title={text.linechart_titel}
+            description={text.linechart_description}
+            metadata={{ source: text.bronnen.rivm }}
+          >
+            {(timeframe) => (
+              <LineChart
+                timeframe={timeframe}
+                values={data.hospital_admissions.values.map((value) => ({
+                  value: value.moving_average_hospital,
+                  date: value.date_of_report_unix,
+                }))}
+              />
+            )}
+          </ChartTileWithTimeframe>
+        )}
       </TileList>
     </>
   );

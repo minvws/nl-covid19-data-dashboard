@@ -15,6 +15,7 @@ import {
   MetricMenuItemLink,
 } from '~/components-styled/aside/menu';
 import { SidebarMetric } from '~/components-styled/sidebar-metric';
+import { Heading } from '~/components-styled/typography';
 import { getLayout as getSiteLayout } from '~/components/layout';
 import { SiteContent } from '~/domain/site/site-content';
 import siteText from '~/locale/index';
@@ -93,13 +94,21 @@ function SafetyRegionLayout(
                 aria-label={siteText.aria_labels.metriek_navigatie}
                 role="navigation"
               >
+                <Heading level={3} as="p" px={3}>
+                  {safetyRegionName}
+                </Heading>
                 <Menu>
-                  <CategoryMenu title={safetyRegionName}>
+                  <CategoryMenu
+                    title={siteText.veiligheidsregio_layout.headings.algemeen}
+                  >
                     <MetricMenuItemLink
                       href={`/veiligheidsregio/${code}/maatregelen`}
                       icon={<Maatregelen fill={colors.restrictions} />}
                       title={
                         siteText.veiligheidsregio_maatregelen.titel_sidebar
+                      }
+                      subtitle={
+                        siteText.veiligheidsregio_maatregelen.subtitel_sidebar
                       }
                     />
                   </CategoryMenu>

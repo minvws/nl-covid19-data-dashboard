@@ -29,7 +29,6 @@ import { getNationalLayout } from '~/components/layout/NationalLayout';
 import { SEOHead } from '~/components/seoHead';
 import { AgeDemographic } from '~/domain/infected-people/age-demographic/age-demographic';
 import { formatAgeGroupRange } from '~/domain/infected-people/age-demographic/age-demographic-chart';
-
 import {
   getNationalStaticProps,
   NationalPageProps,
@@ -179,7 +178,8 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
             source: text.bronnen.rivm,
           }}
           description={text.map_toelichting}
-          onChangeControls={setSelectedMap}
+          onChartRegionChange={setSelectedMap}
+          chartRegion={selectedMap}
           legend={{
             title: text.chloropleth_legenda.titel,
             thresholds:

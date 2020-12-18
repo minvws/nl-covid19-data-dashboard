@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import { isFilled } from 'ts-is-present';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { ContentHeader } from '~/components-styled/content-header';
@@ -7,8 +8,8 @@ import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
+import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createMunicipalHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/municipal/create-municipal-hospital-admissions-tooltip';
 import { FCWithLayout } from '~/components/layout';
@@ -21,6 +22,7 @@ import {
   getSafetyRegionStaticProps,
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
+import { getLastFilledValue } from '~/utils/get-last-filled-value';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text = siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
@@ -29,7 +31,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
   const { data, safetyRegionName } = props;
   const router = useRouter();
 
-  const lastValue = data.results_per_region.last_value;
+  const lastValue = getLastFilledValue(data, 'results_per_region');
 
   const municipalCodes = regionCodeToMunicipalCodeLookup[data.code];
   const selectedMunicipalCode = municipalCodes ? municipalCodes[0] : undefined;
@@ -44,6 +46,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
           safetyRegionName,
         })}
       />
+
       <TileList>
         <ContentHeader
           category={siteText.veiligheidsregio_layout.headings.ziekenhuizen}
@@ -63,7 +66,6 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
 
         <TwoKpiSection>
           <KpiTile
-            showDataWarning
             title={text.barscale_titel}
             description={text.extra_uitleg}
             metadata={{
@@ -82,28 +84,14 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
           </KpiTile>
         </TwoKpiSection>
 
-        {lastValue && (
-          <LineChartTile
-            showDataWarning
-            metadata={{ source: text.bronnen.rivm }}
-            title={text.linechart_titel}
-            description={text.linechart_description}
-            values={data.results_per_region.values.map((value) => ({
-              value: value.hospital_moving_avg_per_region,
-              date: value.date_of_report_unix,
-            }))}
-          />
-        )}
-
         <ChoroplethTile
-          showDataWarning
           title={replaceVariablesInText(text.map_titel, {
             safetyRegion: safetyRegionName,
           })}
           description={text.map_toelichting}
           legend={{
             thresholds:
-              regionThresholds.hospital_admissions.hospital_admissions,
+              municipalThresholds.hospital_admissions.hospital_admissions,
             title: siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel,
           }}
           metadata={{
@@ -125,7 +113,21 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
             )}
           />
         </ChoroplethTile>
-      </TileList>{' '}
+
+        {lastValue && (
+          <LineChartTile
+            metadata={{ source: text.bronnen.rivm }}
+            title={text.linechart_titel}
+            description={text.linechart_description}
+            values={data.results_per_region.values
+              .filter((x) => isFilled(x.hospital_moving_avg_per_region))
+              .map((value) => ({
+                value: value.hospital_moving_avg_per_region,
+                date: value.date_of_report_unix,
+              }))}
+          />
+        )}
+      </TileList>
     </>
   );
 };
