@@ -1826,7 +1826,7 @@
       "description": "Thuiswonende 70-plussers in {{safetyRegion}}."
     },
     "section_positive_tested": {
-      "title": "Thuiswonende 70-plussers in {{safetyRegion}} ",
+      "title": "Thuiswonende 70-plussers in {{safetyRegion}} -nieuwe besmettingen",
       "description": "Personen van 70 jaar of ouder zijn extra kwetsbaar bij een besmetting met het coronavirus. Door zicht te houden op het aantal besmettingen onder deze groep kunnen de juiste maatregelen genomen worden om het virus in te dammen. Het gaat hierbij alleen om zelfstandig wonende 70-plussers.",
       "reference": {
         "href": "/verantwoording#thuiswonende-70-plussers",
