@@ -1,15 +1,13 @@
 import { useTooltip } from '@visx/tooltip';
-import { UseTooltipParams } from '@visx/tooltip/lib/hooks/useTooltip';
 import { extent } from 'd3-array';
-import { ReactNode, useCallback, useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
-import text from '~/locale/index';
 import { formatDateFromSeconds } from '~/utils/formatDate';
-import { formatNumber } from '~/utils/formatNumber';
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
-import { Chart, defaultMargin } from './chart';
+import { calculateYMax, Value } from '../lineChart';
+import Chart, { defaultMargin } from './chart';
 import { Tooltip } from './chart/tooltip';
 
 const valueToDate = (d: number) => new Date(d * 1000);
@@ -18,22 +16,26 @@ const formatXAxis = (date: Date) =>
   formatDateFromSeconds(dateToValue(date), 'axis');
 const formatYAxisFunc = (y: number) => y.toString();
 
-export type Value = {
-  date: any;
-  value?: number;
-};
-
-export interface LineChartProps<T> {
+/**
+ * @TODO In order to support rendering multiple trends we will have to make the
+ * type of `Value` more flexible/generic, for example by allowing it to hold an
+ * array of numbers instead of a single number.
+ *
+ * To do this (improve on the original chart interface) we'll first need to move
+ * away from having this new line chart be a drop-in replacement for the old
+ * one.
+ */
+export type CustomLineChartProps<T> = {
   values: T[];
-  width?: number;
+  width: number;
   height?: number;
   timeframe?: TimeframeOption;
   signaalwaarde?: number;
-  formatTooltip?: (data: T) => ReactNode;
+  formatTooltip?: (value: T) => React.ReactNode;
   formatYAxis?: (y: number) => string;
   showFill?: boolean;
   valueAnnotation?: string;
-}
+};
 
 export function LineChart<T extends Value>({
   values,
@@ -45,20 +47,18 @@ export function LineChart<T extends Value>({
   formatYAxis = formatYAxisFunc,
   showFill = true,
   valueAnnotation,
-}: LineChartProps<T>) {
+}: CustomLineChartProps<T>) {
   const {
     tooltipData,
     tooltipLeft = 0,
     tooltipTop = 0,
     showTooltip,
     hideTooltip,
-  }: UseTooltipParams<T> = useTooltip();
+  } = useTooltip<T>();
 
-  const benchmark = useMemo(() => {
-    return signaalwaarde
-      ? { value: signaalwaarde, label: text.common.barScale.signaalwaarde }
-      : undefined;
-  }, [signaalwaarde]);
+  const benchmark = signaalwaarde
+    ? { value: signaalwaarde, label: 'Signaalwaarde' }
+    : undefined;
 
   const graphData = useMemo(() => {
     const filteredData = getFilteredValues(
@@ -130,33 +130,13 @@ export function LineChart<T extends Value>({
             y={tooltipTop + defaultMargin.top}
           >
             {formatTooltip
-              ? formatTooltip({
-                  ...tooltipData,
-                  date: dateToValue(tooltipData.date),
-                })
-              : `${formatDateFromSeconds(
-                  dateToValue(tooltipData.date)
-                )}: ${formatNumber(tooltipData.value)}`}
+              ? formatTooltip(tooltipData)
+              : `${formatDateFromSeconds(tooltipData.date)}: ${
+                  tooltipData.value
+                }`}
           </Tooltip>
         )}
       </Box>
     </Box>
   );
-}
-
-/**
- * From all the defined values, extract the highest number so we know how to
- * scale the y-axis
- */
-function calculateYMax(values: Value[], signaalwaarde = -Infinity) {
-  const maxValue = values
-    .map((x) => x.value)
-    .filter(isDefined)
-    .reduce((acc, value) => (value > acc ? value : acc), -Infinity);
-
-  /**
-   * Value cannot be 0, hence the 1
-   * If the value is below signaalwaarde, make sure the signaalwaarde floats in the middle
-   */
-  return Math.max(maxValue, signaalwaarde * 2, 1);
 }

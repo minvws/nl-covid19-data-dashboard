@@ -1,5 +1,6 @@
-import React, { useMemo } from 'react';
-import { isFilled } from 'ts-is-present';
+import Highcharts from 'highcharts';
+import React, { ReactNode, useMemo } from 'react';
+import { isDefined } from 'ts-is-present';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
 import { HighchartsWrapper } from '~/components/common/highcharts';
 import text from '~/locale/index';
@@ -10,7 +11,7 @@ import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
 
 export type Value = {
   date: number;
-  value: number | null;
+  value?: number;
 };
 
 const SIGNAALWAARDE_Z_INDEX = 5;
@@ -28,7 +29,7 @@ export interface LineChartProps<T> {
 function getChartOptions<T extends Value>(
   values: T[],
   signaalwaarde?: number,
-  formatTooltip?: (value: T) => string,
+  formatTooltip?: (value: T) => ReactNode,
   formatYAxis?: (y: number) => string,
   showFill?: boolean
 ) {
@@ -75,11 +76,14 @@ function getChartOptions<T extends Value>(
       backgroundColor: '#FFF',
       borderColor: '#01689B',
       borderRadius: 0,
-      formatter: function (): string {
-        if (formatTooltip) {
-          return formatTooltip(values[this.point.index]);
-        }
-        return `${formatDateFromSeconds(this.x)}: ${formatNumber(this.y)}`;
+      formatter: function () {
+        /**
+         * Here we trick Highcharts in thinking we return a string, because it
+         * does render ReactNode but doesn't allow it as a return value here.
+         */
+        return formatTooltip
+          ? (formatTooltip(values[this.point.index]) as string)
+          : `${formatDateFromSeconds(this.x)}: ${formatNumber(this.y)}`;
       },
     },
     yAxis: {
@@ -231,7 +235,7 @@ export default function LineChart<T extends Value>({
 export function calculateYMax(values: Value[], signaalwaarde = -Infinity) {
   const maxValue = values
     .map((x) => x.value)
-    .filter(isFilled)
+    .filter(isDefined)
     .reduce((acc, value) => (value > acc ? value : acc), -Infinity);
 
   /**
