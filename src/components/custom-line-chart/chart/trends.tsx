@@ -1,38 +1,48 @@
-import { useCallback } from 'react';
-import { AreaClosed, LinePath, Bar } from '@visx/shape';
 import { localPoint } from '@visx/event';
+import { AreaClosed, Bar, LinePath } from '@visx/shape';
+import { useCallback } from 'react';
 
-export const trendTypes = {
-  line: 'line',
-  area: 'area',
+export type DataPoint = {
+  date: Date;
+  value?: number;
 };
 
-export type Props = {
+export type TrendType = 'line' | 'area';
+
+export type TrendsProps = {
   isHovered: boolean;
-  trend: any;
-  type: string;
+  trend: DataPoint[];
+  type: TrendType;
   x: any;
   y: any;
-  handleHover: any;
-  size: any;
-  bisect: any;
+  onHover: (
+    event: React.TouchEvent<SVGRectElement> | React.MouseEvent<SVGRectElement>,
+    data?: DataPoint,
+    xPosition?: number,
+    yPosition?: number
+  ) => void;
+  height: number;
+  width: number;
+  bisect: (trend: DataPoint[], mx: number) => DataPoint;
   color: string;
 };
 
-// TODO: update to accept series prop which accepts an array of
-// trends to enable plotting of multiple lines
-function Trends({
+/**
+ * @TODO update to accept series prop which accepts an array of trends to enable plotting of multiple lines
+ */
+export function Trends({
   trend,
-  type = trendTypes.line,
+  type = 'line',
   color,
   x,
   y,
-  handleHover,
-  size,
+  onHover,
+  height,
+  width,
   isHovered,
   bisect,
-}: Props) {
-  const onPointerMove = useCallback(
+}: TrendsProps) {
+  const handlePointerMove = useCallback(
     (
       event: React.TouchEvent<SVGRectElement> | React.MouseEvent<SVGRectElement>
     ) => {
@@ -41,14 +51,14 @@ function Trends({
       const { x: xPosition } = localPoint(event) || { x: 0 };
       const pointData = bisect(trend, xPosition);
 
-      handleHover(event, pointData, x(pointData.date), y(pointData.value));
+      onHover(event, pointData, x(pointData.date), y(pointData.value));
     },
-    [handleHover, y, x, trend, bisect]
+    [onHover, y, x, trend, bisect]
   );
 
   return (
     <>
-      {type === trendTypes.line && (
+      {type === 'line' && (
         <LinePath
           data={trend}
           x={(d: any) => x(d.date)}
@@ -58,20 +68,20 @@ function Trends({
         />
       )}
 
-      {type === trendTypes.area && (
+      {type === 'area' && (
         <>
           <AreaClosed
             data={trend}
-            x={(d: any) => x(d.date)}
-            y={(d: any) => y(d.value)}
+            x={(d: DataPoint) => x(d.date)}
+            y={(d: DataPoint) => y(d.value)}
             fill={color}
             fillOpacity={0.05}
             yScale={y}
           />
           <LinePath
             data={trend}
-            x={(d: any) => x(d.date)}
-            y={(d: any) => y(d.value)}
+            x={(d: DataPoint) => x(d.date)}
+            y={(d: DataPoint) => y(d.value)}
             stroke={color}
             strokeWidth={isHovered ? 3 : 2}
           />
@@ -81,17 +91,15 @@ function Trends({
       <Bar
         x={0}
         y={0}
-        width={size.width}
-        height={size.height}
+        width={width}
+        height={height}
         fill="transparent"
         rx={14}
-        onTouchStart={onPointerMove}
-        onTouchMove={onPointerMove}
-        onMouseMove={onPointerMove}
-        onMouseLeave={(event) => handleHover(event)}
+        onTouchStart={handlePointerMove}
+        onTouchMove={handlePointerMove}
+        onMouseMove={handlePointerMove}
+        onMouseLeave={(event) => onHover(event)}
       />
     </>
   );
 }
-
-export default Trends;

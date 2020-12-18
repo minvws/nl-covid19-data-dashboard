@@ -1,20 +1,20 @@
-import { useCallback, useMemo, ReactNode } from 'react';
 import { useTooltip } from '@visx/tooltip';
 import { extent } from 'd3-array';
-import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
-import { formatDateFromSeconds } from '~/utils/formatDate';
+import { useCallback, useMemo } from 'react';
+import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
-import Chart, { defaultMargin } from './chart';
-import { trendTypes } from './chart/trends';
-import { Tooltip } from './chart/tooltip';
+import { formatDateFromSeconds } from '~/utils/formatDate';
+import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
 import { calculateYMax, Value } from '../lineChart';
-import { isDefined } from 'ts-is-present';
+import Chart, { defaultMargin } from './chart';
+import { Tooltip } from './chart/tooltip';
 
 const valueToDate = (d: number) => new Date(d * 1000);
 const dateToValue = (d: Date) => d.valueOf() / 1000;
 const formatXAxis = (date: Date) =>
   formatDateFromSeconds(dateToValue(date), 'axis');
+const formatYAxisFunc = (y: number) => y.toString();
 
 /**
  * @TODO In order to support rendering multiple trends we will have to make the
@@ -37,14 +37,14 @@ export type CustomLineChartProps<T> = {
   valueAnnotation?: string;
 };
 
-export function CustomLineChart<T extends Value>({
+export function LineChart<T extends Value>({
   values,
   width = 500,
   height = 250,
   timeframe = '5weeks',
   signaalwaarde,
   formatTooltip,
-  formatYAxis,
+  formatYAxis = formatYAxisFunc,
   showFill = true,
   valueAnnotation,
 }: CustomLineChartProps<T>) {
@@ -80,7 +80,7 @@ export function CustomLineChart<T extends Value>({
     signaalwaarde,
   ]);
 
-  const handleTooltip = useCallback(
+  const handleHover = useCallback(
     (
       event:
         | React.TouchEvent<SVGRectElement>
@@ -111,14 +111,14 @@ export function CustomLineChart<T extends Value>({
       <Box position="relative">
         <Chart
           trend={graphData}
-          type={showFill ? trendTypes.area : trendTypes.line}
+          type={showFill ? 'area' : 'line'}
           height={height}
           width={width}
           xDomain={xDomain}
           yDomain={yDomain}
           formatYAxis={formatYAxis}
           formatXAxis={formatXAxis}
-          handleHover={handleTooltip}
+          onHover={handleHover}
           isHovered={!!tooltipData}
           benchmark={benchmark}
         />

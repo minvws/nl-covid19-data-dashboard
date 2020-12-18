@@ -1,6 +1,6 @@
 import css from '@styled-system/css';
 import { ReactNode } from 'react';
-import { Box } from '~/components-styled/base';
+import styled from 'styled-components';
 import { colors } from '~/style/theme';
 
 const BOUND_OFFSET = 70;
@@ -12,7 +12,7 @@ type Bounds = {
   bottom: number;
 };
 
-export type Props = {
+export type TooltipProps = {
   children: ReactNode;
   x: number;
   y: number;
@@ -20,6 +20,55 @@ export type Props = {
   borderColor?: string;
   bounds: Bounds;
 };
+
+type PointProps = {
+  indicatorColor: string;
+};
+const Point = styled.div<PointProps>`
+  pointer-events: none;
+  position: absolute;
+  height: 18px;
+  width: 18px;
+
+  &::after {
+    content: '';
+    position: absolute;
+    height: 8px;
+    width: 8px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border: 1px solid white;
+    background: ${(props) => props.indicatorColor || 'black'};
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    height: 18px;
+    width: 18px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: ${(props) => props.indicatorColor || 'black'};
+    opacity: 0.2;
+  }
+`;
+
+type TooltipContainerProps = {
+  borderColor: string;
+};
+const TooltipContainer = styled.div<TooltipContainerProps>`
+  pointer-events: none;
+  position: absolute;
+  min-width: 72;
+  white-space: nowrap;
+  background: white;
+  border: ${(props) => `1px solid ${props.borderColor || 'black'}`};
+  ${css({
+    px: 2,
+    py: 1,
+    fontSize: 1,
+  })};
+`;
 
 /**
  * @TODO improve how bounds are used to keep tooltips within the chart
@@ -31,7 +80,7 @@ export function Tooltip({
   primaryColor = colors.data.primary,
   borderColor = '#01689B',
   bounds,
-}: Props) {
+}: TooltipProps) {
   const yTransform = 'calc(-100% - 10px)';
 
   let xTransform = '-50%';
@@ -44,59 +93,19 @@ export function Tooltip({
 
   return (
     <>
-      <Box
-        position="absolute"
-        top={y}
-        left={x}
-        css={css({ pointerEvents: 'none' })}
-      >
-        <Box
-          position="absolute"
-          top={0}
-          left={0}
-          bg={primaryColor}
-          borderRadius="50%"
-          height="18px"
-          width="18px"
-          opacity={0.2}
-          css={css({
-            transform: 'translate(-50%,-50%)',
-          })}
-        />
-        <Box
-          position="absolute"
-          top={0}
-          left={0}
-          bg={primaryColor}
-          borderRadius="50%"
-          width="8px"
-          height="8px"
-          border="1px solid white"
-          css={css({
-            transform: 'translate(-50%,-50%)',
-          })}
-        />
-      </Box>
+      <Point style={{ top: y, left: x }} indicatorColor={primaryColor} />
 
-      <Box
-        bg="white"
-        border={`1px solid ${borderColor}`}
-        top={y}
-        left={x}
-        position="absolute"
-        minWidth={72}
-        px={2}
-        py={1}
-        fontSize={1}
-        css={css({
+      <TooltipContainer
+        style={{
+          top: y,
+          left: x,
           transform: `translate(${xTransform},${yTransform})`,
-          pointerEvents: 'none',
           transition: 'left 0.075s, top 0.075s',
-          whiteSpace: 'nowrap',
-        })}
+        }}
+        borderColor={borderColor}
       >
         {children}
-      </Box>
+      </TooltipContainer>
     </>
   );
 }

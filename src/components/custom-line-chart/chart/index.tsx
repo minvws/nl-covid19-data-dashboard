@@ -1,14 +1,13 @@
-import { useCallback, memo } from 'react';
-import { scaleTime, scaleLinear } from '@visx/scale';
-import { bisector } from 'd3-array';
-import { AxisLeft, AxisBottom } from '@visx/axis';
+import { AxisBottom, AxisLeft } from '@visx/axis';
 import { GridRows } from '@visx/grid';
 import { Group } from '@visx/group';
+import { scaleLinear, scaleTime } from '@visx/scale';
 import { Line } from '@visx/shape';
 import { Text } from '@visx/text';
-
+import { bisector } from 'd3-array';
+import { memo, useCallback } from 'react';
 import { colors } from '~/style/theme';
-import Trends from './trends';
+import { DataPoint, Trends, TrendType } from './trends';
 
 const NUM_TICKS = 3;
 export const defaultMargin = { top: 10, right: 20, bottom: 30, left: 30 };
@@ -19,22 +18,32 @@ const defaultColors = {
   benchmark: '#4f5458',
 };
 
-export type ChartProps = {
-  benchmark: any;
+type Benchmark = {
+  value: number;
+  label: string;
+};
+
+type ChartProps = {
+  benchmark?: Benchmark;
   isHovered: boolean;
-  trend: any[];
-  type: string;
-  handleHover: any;
-  xDomain: any[];
-  yDomain: any[];
+  trend: DataPoint[];
+  type: TrendType;
+  onHover: (
+    event: React.TouchEvent<SVGRectElement> | React.MouseEvent<SVGRectElement>,
+    data?: any,
+    xPosition?: number,
+    yPosition?: number
+  ) => void;
+  xDomain: [any, any];
+  yDomain: number[];
   width: number;
   height: number;
   margin?: { top: number; right: number; bottom: number; left: number };
-  formatXAxis: any;
-  formatYAxis: any;
+  formatXAxis: (x: any) => string;
+  formatYAxis: (y: any) => string;
 };
 
-function Chart({
+export const Chart = memo(function Chart({
   trend,
   type,
   width,
@@ -42,7 +51,7 @@ function Chart({
   margin = defaultMargin,
   xDomain,
   yDomain,
-  handleHover,
+  onHover,
   isHovered,
   benchmark,
   formatXAxis,
@@ -64,17 +73,8 @@ function Chart({
     nice: NUM_TICKS,
   });
 
-  type DataPoint = {
-    date: Date;
-    value: number;
-    week: {
-      start: number;
-      end: number;
-    };
-  };
-
   const bisect = useCallback(
-    (trend: Array<DataPoint>, mx: number) => {
+    (trend: DataPoint[], mx: number) => {
       if (trend.length === 1) return trend[0];
 
       const bisect = bisector((d: DataPoint) => d.date).left;
@@ -153,17 +153,16 @@ function Chart({
         <Trends
           trend={trend}
           type={type}
-          size={bounded}
+          height={bounded.height}
+          width={bounded.width}
           x={x}
           y={y}
           color={defaultColors.main}
-          handleHover={handleHover}
+          onHover={onHover}
           isHovered={isHovered}
           bisect={bisect}
         />
       </Group>
     </svg>
   );
-}
-
-export default memo(Chart);
+});
