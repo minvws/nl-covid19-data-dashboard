@@ -33,7 +33,7 @@ export function AgeDemographic({ data }: AgeDemographicProps) {
   const {
     openTooltip,
     closeTooltip,
-    keyboardTooltip,
+    keyboardNavigateTooltip,
     tooltipState,
   } = useTooltip<NationalInfectedAgeGroupsValue>({
     values: coordinates.values,
@@ -45,9 +45,9 @@ export function AgeDemographic({ data }: AgeDemographicProps) {
       <div ref={sizeRef}>
         <AgeDemographicChart
           coordinates={coordinates}
-          openTooltip={openTooltip}
-          closeTooltip={closeTooltip}
-          keyboardTooltip={keyboardTooltip}
+          onMouseMoveBar={openTooltip}
+          onMouseLeaveBar={closeTooltip}
+          onKeyInput={keyboardNavigateTooltip}
         />
       </div>
 

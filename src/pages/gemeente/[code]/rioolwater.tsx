@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
+import { BarChart } from '~/components-styled/bar-chart/bar-chart';
 import { Box } from '~/components-styled/base';
 import {
   ChartTile,
@@ -11,7 +12,6 @@ import { KpiValue } from '~/components-styled/kpi-value';
 import { Select } from '~/components-styled/select';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { BarChart } from '~/components/charts';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getMunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { SewerWaterChart } from '~/components/lineChart/sewer-water-chart';
@@ -195,9 +195,11 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
             }}
           >
             <BarChart
-              keys={barChartData.keys}
-              data={barChartData.data}
-              axisTitle={text.bar_chart_axis_title}
+              values={barChartData.values}
+              xAxisTitle={text.bar_chart_axis_title}
+              accessibilityDescription={
+                text.bar_chart_accessibility_description
+              }
               valueAnnotation={siteText.waarde_annotaties.riool_normalized}
             />
           </ChartTile>
