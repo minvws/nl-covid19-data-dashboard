@@ -2,7 +2,8 @@ import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { UrlObject } from 'url';
-import Arrow from '~/assets/arrow.svg';
+import ArrowIcon from '~/assets/arrow.svg';
+import { Box } from '~/components-styled/base';
 import { MaxWidth } from '~/components-styled/max-width';
 import siteText from '~/locale/index';
 import { Link } from '~/utils/link';
@@ -35,12 +36,12 @@ export function SiteContent({
     (router.pathname === '/' && !('menu' in router.query)) ||
     router.query.menu === '1';
 
-  const menuButton = <MenuButton href={menuOpenUrl} isVisible={!isMenuOpen} />;
-
   return (
     <MaxWidth px={[0, 0, 0, 0, 3]}>
       <SiteContentContainer>
-        {!hideMenuButton && menuButton}
+        {!hideMenuButton && (
+          <MenuButton href={menuOpenUrl} isVisible={!isMenuOpen} />
+        )}
 
         <StyledSidebar>
           <ResponsiveVisible isVisible={isMenuOpen}>
@@ -53,12 +54,13 @@ export function SiteContent({
           /** id is for hash navigation */
           id="content"
         >
-          <ResponsiveVisible isVisible={!isMenuOpen}>
-            {children}
-          </ResponsiveVisible>
+          <Box spacing={4}>
+            <ResponsiveVisible isVisible={!isMenuOpen}>
+              {children}
+            </ResponsiveVisible>
+            <MenuLink href={menuOpenUrl} isVisible={!isMenuOpen} />
+          </Box>
         </StyledSiteContent>
-
-        {menuButton}
       </SiteContentContainer>
     </MaxWidth>
   );
@@ -82,8 +84,6 @@ const StyledSiteContent = styled.main(
     minWidth: 0,
     flexGrow: 1,
     flexShrink: 1,
-    pt: 4,
-    px: [0, 0, 4],
   })
 );
 
@@ -131,6 +131,31 @@ function MenuButton({
   );
 }
 
+function MenuLink({
+  href,
+  isVisible,
+}: {
+  href: UrlObject | string;
+  isVisible: boolean;
+}) {
+  const router = useRouter();
+  return (
+    <Link href={href} passHref>
+      <a
+        css={css({
+          px: [2, null, 0],
+          display: [isVisible ? 'block' : 'none', null, null, 'none'],
+        })}
+      >
+        <Arrow />
+        {router.pathname === '/'
+          ? siteText.nav.terug_naar_alle_cijfers_homepage
+          : siteText.nav.terug_naar_alle_cijfers}
+      </a>
+    </Link>
+  );
+}
+
 const StyledMenuButton = styled.a<{ isVisible: boolean }>((x) =>
   css({
     background: 'white',
@@ -150,13 +175,6 @@ const StyledMenuButton = styled.a<{ isVisible: boolean }>((x) =>
       textDecoration: 'underline',
     },
 
-    '> svg': {
-      height: '10px',
-      width: '16px',
-      transform: 'rotate(90deg)',
-      marginRight: '0.7em',
-    },
-
     display: [x.isVisible ? 'block' : 'none', null, null, 'none'],
 
     '.has-no-js &': {
@@ -164,3 +182,16 @@ const StyledMenuButton = styled.a<{ isVisible: boolean }>((x) =>
     },
   })
 );
+
+function Arrow() {
+  return (
+    <ArrowIcon
+      css={css({
+        height: '10px',
+        width: '16px',
+        transform: 'rotate(90deg)',
+        marginRight: '0.7em',
+      })}
+    />
+  );
+}
