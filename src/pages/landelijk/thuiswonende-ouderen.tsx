@@ -13,7 +13,7 @@ import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-ch
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createRegionElderlyAtHomeTooltip } from '~/components/choropleth/tooltips/region/create-region-elderly-at-home-tooltip';
 import { FCWithLayout } from '~/domain/layout/layout';
-import { getNationalLayout } from '~/domain/layout/NationalLayout';
+import { getNationalLayout } from '~/domain/layout/national-layout';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import {

@@ -21,7 +21,7 @@ import { AppContent } from '~/components-styled/layout/app-content';
 import siteText from '~/locale/index';
 import { ISafetyRegionData } from '~/static-props/safetyregion-data';
 import { colors } from '~/style/theme';
-import { SafetyRegionComboBox } from './safety-region-combo-box';
+import { SafetyRegionComboBox } from './components/safety-region-combo-box';
 
 export function getSafetyRegionLayout() {
   return function (

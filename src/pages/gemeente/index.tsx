@@ -10,8 +10,8 @@ import {
 import { MunicipalityProperties } from '~/components/choropleth/shared';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
 import { FCWithLayout } from '~/domain/layout/layout';
-import { getMunicipalityLayout } from '~/domain/layout/MunicipalityLayout';
-import { SafetyRegionComboBox } from '~/domain/layout/safety-region-combo-box';
+import { getMunicipalityLayout } from '~/domain/layout/municipality-layout';
+import { SafetyRegionComboBox } from '~/domain/layout/components/safety-region-combo-box';
 import { SEOHead } from '~/components/seoHead';
 import text from '~/locale/index';
 import getLastGeneratedData from '~/static-props/last-generated-data';

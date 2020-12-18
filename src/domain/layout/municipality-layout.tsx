@@ -18,7 +18,7 @@ import siteText from '~/locale/index';
 import { IMunicipalityData } from '~/static-props/municipality-data';
 import { getSafetyRegionForMunicipalityCode } from '~/utils/getSafetyRegionForMunicipalityCode';
 import { Link } from '~/utils/link';
-import { MunicipalityComboBox } from './municipality-combo-box';
+import { MunicipalityComboBox } from './components/municipality-combo-box';
 
 /**
  * When you navigate to /gemeente root from the top menu, there is no GM code

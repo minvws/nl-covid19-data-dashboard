@@ -5,7 +5,7 @@ import { KpiSection } from '~/components-styled/kpi-section';
 import { TileList } from '~/components-styled/tile-list';
 import { Heading, Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/domain/layout/layout';
-import { getNationalLayout } from '~/domain/layout/NationalLayout';
+import { getNationalLayout } from '~/domain/layout/national-layout';
 import { RestrictionsTable } from '~/components/restrictions/restrictions-table';
 import { EscalationLevel } from '~/components/restrictions/type';
 import { SEOHead } from '~/components/seoHead';

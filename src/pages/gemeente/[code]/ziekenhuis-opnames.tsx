@@ -12,7 +12,7 @@ import { MunicipalityChoropleth } from '~/components/choropleth/municipality-cho
 import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createMunicipalHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/municipal/create-municipal-hospital-admissions-tooltip';
 import { FCWithLayout } from '~/domain/layout/layout';
-import { getMunicipalityLayout } from '~/domain/layout/MunicipalityLayout';
+import { getMunicipalityLayout } from '~/domain/layout/municipality-layout';
 import LineChart from '~/components/lineChart';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';

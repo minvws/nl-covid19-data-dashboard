@@ -1,5 +1,5 @@
 import { FCWithLayout } from '~/domain/layout/layout';
-import { getMunicipalityLayout } from '~/domain/layout/MunicipalityLayout';
+import { getMunicipalityLayout } from '~/domain/layout/municipality-layout';
 import {
   getMunicipalityData,
   getMunicipalityPaths,
