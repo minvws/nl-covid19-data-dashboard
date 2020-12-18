@@ -1,38 +1,13 @@
 import css from '@styled-system/css';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Box } from '../base';
 import { Heading, HeadingProps } from '../typography';
 
 type TitleWithIconProps = {
   title: string;
-  icon: JSX.Element;
+  icon: ReactNode;
   subtitle?: string;
 } & Omit<HeadingProps, 'children' | 'level'>;
-
-function Icon({ children }: { children: React.ReactNode }) {
-  return (
-    <Box
-      flex="0 0 auto"
-      display="flex"
-      flexDirection="row"
-      flexWrap="nowrap"
-      justifyContent="center"
-      alignItems="center"
-      padding={0}
-      marginRight={0}
-      css={css({
-        width: '2.5rem',
-        height: '2.5rem',
-        '& svg': {
-          width: '2.5rem',
-          height: '2.5rem',
-        },
-      })}
-    >
-      {children}
-    </Box>
-  );
-}
 
 /**
  * This is a title (with an icon) that looks like a heading, but isn't rendered using an H* element.
@@ -66,6 +41,31 @@ export function TitleWithIcon(props: TitleWithIconProps) {
         </Heading>
         {subtitle}
       </Box>
+    </Box>
+  );
+}
+
+function Icon({ children }: { children: ReactNode }) {
+  return (
+    <Box
+      flex="0 0 auto"
+      display="flex"
+      flexDirection="row"
+      flexWrap="nowrap"
+      justifyContent="center"
+      alignItems="center"
+      padding={0}
+      marginRight={0}
+      css={css({
+        width: '2.5rem',
+        height: '2.5rem',
+        '& svg': {
+          width: '2.5rem',
+          height: '2.5rem',
+        },
+      })}
+    >
+      {children}
     </Box>
   );
 }

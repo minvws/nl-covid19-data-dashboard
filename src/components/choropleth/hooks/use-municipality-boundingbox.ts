@@ -9,7 +9,6 @@ import { RegionGeoJSON } from '../shared';
  * @param regionGeo
  * @param selectedMunicipality
  */
-
 export function useMunicipalityBoundingbox(
   regionGeo: RegionGeoJSON,
   selectedMunicipality?: string

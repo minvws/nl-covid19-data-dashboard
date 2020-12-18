@@ -10,7 +10,6 @@ interface LineChartTileProps<T> extends LineChartProps<T> {
   timeframeOptions?: TimeframeOption[];
   timeframeInitialValue?: TimeframeOption;
   footer?: React.ReactNode;
-  showDataWarning?: boolean;
 }
 
 export function LineChartTile<T extends Value>({
@@ -20,7 +19,6 @@ export function LineChartTile<T extends Value>({
   timeframeOptions = ['all', '5weeks', 'week'],
   timeframeInitialValue = '5weeks',
   footer,
-  showDataWarning,
   ...chartProps
 }: LineChartTileProps<T>) {
   return (
@@ -30,7 +28,6 @@ export function LineChartTile<T extends Value>({
       metadata={metadata}
       timeframeOptions={timeframeOptions}
       timeframeInitialValue={timeframeInitialValue}
-      showDataWarning={showDataWarning}
     >
       {(timeframe) => (
         <>

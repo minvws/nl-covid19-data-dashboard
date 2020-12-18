@@ -10,15 +10,11 @@ import {
   TRegionMetricName,
 } from '../shared';
 
-export type TGetRegionFunc<T> = (id: string) => T | SafetyRegionProperties;
-
-export type TSafetyRegionDataInfo<T> = [TGetRegionFunc<T>, boolean];
-
 interface RegionMetricValue extends SafetyRegionProperties {
   [key: string]: unknown;
 }
 
-export interface RegionChoroplethValue extends RegionMetricValue {
+interface RegionChoroplethValue extends RegionMetricValue {
   __color_value: number;
 }
 

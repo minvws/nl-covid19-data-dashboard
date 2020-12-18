@@ -4,12 +4,7 @@ import { Box } from '~/components-styled/base';
 
 export const MaxWidth = styled(Box)(
   css({
-    maxWidth: 1200,
+    maxWidth: 1400,
     margin: '0 auto',
-    padding: '0 1em',
-
-    '@media (min-width: 1400px)': {
-      maxWidth: 1400,
-    },
   })
 );

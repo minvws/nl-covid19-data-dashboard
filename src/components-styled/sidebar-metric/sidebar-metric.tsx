@@ -143,15 +143,11 @@ export function SidebarMetric<T extends { difference: unknown }>({
   }
 
   if (!metricProperty) {
-    return (
-      <Box mx={'2.5rem'}>
-        <SidebarKpiValue title={title} description={description} />
-      </Box>
-    );
+    return <SidebarKpiValue title={title} description={description} />;
   }
 
   return (
-    <Box spacing={1} mx={'2.5rem'}>
+    <Box spacing={1}>
       <SidebarKpiValue
         title={title}
         value={propertyValue}

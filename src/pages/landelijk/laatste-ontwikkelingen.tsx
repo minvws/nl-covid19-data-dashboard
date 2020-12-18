@@ -9,6 +9,7 @@ import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { CategoryHeading } from '~/components-styled/content-header';
 import { HeadingWithIcon } from '~/components-styled/heading-with-icon';
 import { MessageTile } from '~/components-styled/message-tile';
+import { TileList } from '~/components-styled/tile-list';
 import { Text } from '~/components-styled/typography';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
@@ -18,8 +19,8 @@ import { createSelectRegionHandler } from '~/components/choropleth/select-handle
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
 import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/create-positive-tested-people-regional-tooltip';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
-import { FCWithLayout } from '~/components/layout';
-import { getNationalLayout } from '~/components/layout/NationalLayout';
+import { FCWithLayout } from '~/domain/layout/layout';
+import { getNationalLayout } from '~/domain/layout/national-layout';
 import { TALLLanguages } from '~/locale/index';
 import theme from '~/style/theme';
 import { EscalationLevels, National, Regions } from '~/types/data';
@@ -60,8 +61,8 @@ const LatestDevelopments: FCWithLayout<ILatestDevelopmentsData> = (props) => {
   );
 
   return (
-    <>
-      <Box mb={3}>
+    <TileList>
+      <Box>
         <CategoryHeading level={1} hide={true}>
           {text.nationaal_layout.headings.algemeen}
         </CategoryHeading>
@@ -123,7 +124,8 @@ const LatestDevelopments: FCWithLayout<ILatestDevelopmentsData> = (props) => {
           source: text.positief_geteste_personen.bronnen.rivm,
         }}
         description={text.positief_geteste_personen.map_toelichting}
-        onChangeControls={setSelectedMap}
+        onChartRegionChange={setSelectedMap}
+        chartRegion={selectedMap}
         legend={{
           thresholds:
             regionThresholds.positive_tested_people.positive_tested_people,
@@ -151,7 +153,7 @@ const LatestDevelopments: FCWithLayout<ILatestDevelopmentsData> = (props) => {
           />
         )}
       </ChoroplethTile>
-    </>
+    </TileList>
   );
 };
 

@@ -8,15 +8,15 @@ export interface TooltipCoordinates {
 }
 
 export type GetTooltipCoordinates<T> = (
-  event?: MouseEvent<any>,
-  value?: T
+  value: T,
+  event?: MouseEvent<any>
 ) => TooltipCoordinates;
 
 interface TooltipProps<T> {
-  controls: string;
   children: ReactNode;
   tooltipState: TooltipState<T>;
-  width: number;
+  width?: number;
+  controls?: string;
 }
 
 interface TooltipState<T> {
@@ -59,9 +59,9 @@ export function useTooltip<T>({
   }
 
   const openTooltip = useCallback(
-    (event: MouseEvent<any>, value: T) => {
+    (value: T, event: MouseEvent<any>) => {
       debounceMouseEvents(() => {
-        setCoordinates(getTooltipCoordinates(event, value));
+        setCoordinates(getTooltipCoordinates(value, event));
         setIsVisible(true);
         setValue(value);
       });
@@ -75,7 +75,7 @@ export function useTooltip<T>({
     });
   }, []);
 
-  const keyboardTooltip = useCallback(
+  const keyboardNavigateTooltip = useCallback(
     (event: any) => {
       if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') {
         return;
@@ -98,7 +98,7 @@ export function useTooltip<T>({
 
       requestAnimationFrame(() => {
         setKeyboardValueIndex(newIndex);
-        setCoordinates(getTooltipCoordinates(undefined, newValue));
+        setCoordinates(getTooltipCoordinates(newValue, undefined));
         setValue(newValue);
         setIsVisible(true);
       });
@@ -106,7 +106,7 @@ export function useTooltip<T>({
     [getTooltipCoordinates, keyboardValueIndex, values]
   );
 
-  return { openTooltip, closeTooltip, keyboardTooltip, tooltipState };
+  return { openTooltip, closeTooltip, keyboardNavigateTooltip, tooltipState };
 }
 
 export function Tooltip<T>({
@@ -127,7 +127,7 @@ export function Tooltip<T>({
         transition: 'left 0.15s, top 0.15s',
         transform: 'translate(0, 20px)',
         pointerEvents: 'none',
-        width: `${width}px`,
+        width: width ? `${width}px` : 'auto',
         boxShadow: 'tile',
         borderRadius: 1,
         zIndex: 42,

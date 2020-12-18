@@ -29,7 +29,6 @@ export const vr: VrConfig = {
         min: 0,
         max: 10,
         signaalwaarde: 7,
-        rangesKey: 'infected_daily_increase',
         gradient: [
           {
             color: GREEN,

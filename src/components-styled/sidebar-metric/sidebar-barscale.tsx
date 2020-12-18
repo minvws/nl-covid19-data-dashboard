@@ -33,7 +33,12 @@ export function SidebarBarScale<T>({
    * A unique id is required for path rendering and should be constant between
    * server and client side rendering
    */
-  const uniqueId = ['sidebar', scope, metricName, metricProperty].join(':');
+  const uniqueId = [
+    'sidebar-bar-scale',
+    scope,
+    metricName,
+    metricProperty,
+  ].join(':');
 
   assert(
     isDefined(propertyValue),
@@ -82,9 +87,7 @@ export function SidebarBarScale<T>({
         screenReaderText={text.barscale_screenreader_text}
         value={propertyValue}
         id={uniqueId}
-        rangeKey={config.barScale.rangesKey}
         gradient={config.barScale.gradient}
-        showValue={false}
       />
     </Box>
   );

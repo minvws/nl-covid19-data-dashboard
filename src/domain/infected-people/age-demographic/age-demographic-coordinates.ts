@@ -132,8 +132,8 @@ function calculateAgeDemographicCoordinates(
   // Method for the tooltip to retrieve coordinates based on
   // The event and/or the value
   const getTooltipCoordinates: GetTooltipCoordinates<NationalInfectedAgeGroupsValue> = (
-    event?: MouseEvent<any>,
-    value?: NationalInfectedAgeGroupsValue
+    value: NationalInfectedAgeGroupsValue,
+    event?: MouseEvent<any>
   ): TooltipCoordinates => {
     const point = event ? localPoint(event) || { x: width } : { x: 0 };
 
@@ -143,7 +143,7 @@ function calculateAgeDemographicCoordinates(
 
     // On desktop: align the tooltip with the bars
     // Not for keyboard (they don't pass a mouse event)
-    if (!isSmallScreen && event && value) {
+    if (!isSmallScreen && event) {
       const infectedPercentageSide = point.x > width / 2;
       if (infectedPercentageSide) {
         // Align the top left of the tooltip with the middle of the infected percentage bar
@@ -161,7 +161,7 @@ function calculateAgeDemographicCoordinates(
       }
     }
 
-    const top = value ? ageGroupRangePoint(value) : 0;
+    const top = ageGroupRangePoint(value);
     return { left, top };
   };
 

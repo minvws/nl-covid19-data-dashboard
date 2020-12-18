@@ -1,7 +1,7 @@
-import css from '@styled-system/css';
 import { Feature, MultiPolygon } from 'geojson';
 import { ReactNode } from 'react';
 import { AspectRatio } from '~/components-styled/aspect-ratio';
+import { colors } from '~/style/theme';
 import { Choropleth } from './choropleth';
 import { useChartDimensions, useMunicipalityNavigationData } from './hooks';
 import { Path } from './path';
@@ -43,7 +43,7 @@ export function MunicipalityNavigationMap<T>(
         id={gemcode}
         d={path}
         fill={'#fff'}
-        stroke={'#01689b'}
+        stroke={colors.blue}
         strokeWidth={0.5}
       />
     );
@@ -61,8 +61,8 @@ export function MunicipalityNavigationMap<T>(
         id={gemcode}
         key={gemcode}
         d={path}
-        stroke={'#01689b'}
-        fill={'#01689b'}
+        stroke={colors.blue}
+        fill={colors.blue}
       />
     );
   };
@@ -83,19 +83,17 @@ export function MunicipalityNavigationMap<T>(
   };
 
   return (
-    <div ref={ref} css={css({ bg: 'transparent', position: 'relative' })}>
-      <AspectRatio ratio={1 / ratio}>
-        <Choropleth
-          featureCollection={municipalGeo}
-          hovers={municipalGeo}
-          boundingBox={countryGeo}
-          dimensions={dimensions}
-          featureCallback={featureCallback}
-          hoverCallback={hoverCallback}
-          onPathClick={onClick}
-          getTooltipContent={getTooltipContent}
-        />
-      </AspectRatio>
-    </div>
+    <AspectRatio ratio={1 / ratio} ref={ref}>
+      <Choropleth
+        featureCollection={municipalGeo}
+        hovers={municipalGeo}
+        boundingBox={countryGeo}
+        dimensions={dimensions}
+        featureCallback={featureCallback}
+        hoverCallback={hoverCallback}
+        onPathClick={onClick}
+        getTooltipContent={getTooltipContent}
+      />
+    </AspectRatio>
   );
 }

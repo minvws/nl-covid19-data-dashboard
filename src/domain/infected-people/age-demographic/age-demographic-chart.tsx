@@ -4,7 +4,7 @@ import { GridColumns } from '@visx/grid';
 import { Group } from '@visx/group';
 import { Bar } from '@visx/shape';
 import { Text } from '@visx/text';
-import { memo, MouseEvent } from 'react';
+import { KeyboardEvent, memo, MouseEvent } from 'react';
 import styled from 'styled-components';
 import siteText from '~/locale/index';
 import { colors } from '~/style/theme';
@@ -18,12 +18,12 @@ const text = siteText.infected_age_groups;
 
 interface AgeDemographicChartProps {
   coordinates: AgeDemographicCoordinates;
-  openTooltip: (
-    event: MouseEvent<any>,
-    value: NationalInfectedAgeGroupsValue
+  onMouseMoveBar: (
+    value: NationalInfectedAgeGroupsValue,
+    event: MouseEvent<SVGElement>
   ) => void;
-  closeTooltip: () => void;
-  keyboardTooltip: (event: any) => void;
+  onMouseLeaveBar: () => void;
+  onKeyInput: (event: KeyboardEvent<SVGElement>) => void;
 }
 
 const TickValue = ({ x, y, formattedValue }: TickRendererProps) => {
@@ -45,7 +45,7 @@ export const formatAgeGroupRange = (range: string): string => {
 };
 
 export const AgeDemographicChart = memo<AgeDemographicChartProps>(
-  ({ coordinates, keyboardTooltip, openTooltip, closeTooltip }) => {
+  ({ coordinates, onKeyInput, onMouseMoveBar, onMouseLeaveBar }) => {
     const {
       width,
       height,
@@ -72,7 +72,7 @@ export const AgeDemographicChart = memo<AgeDemographicChartProps>(
         id="age-demographic-chart"
         aria-label={text.graph.accessibility_description}
         tabIndex={0}
-        onKeyUp={(event) => keyboardTooltip(event)}
+        onKeyUp={(event) => onKeyInput(event)}
         css={css({
           '&:focus': {
             outline: 'none',
@@ -130,8 +130,8 @@ export const AgeDemographicChart = memo<AgeDemographicChartProps>(
           return (
             <StyledGroup
               key={index}
-              onMouseMove={(event) => openTooltip(event, value)}
-              onMouseLeave={closeTooltip}
+              onMouseMove={(event) => onMouseMoveBar(value, event)}
+              onMouseLeave={onMouseLeaveBar}
             >
               {/* This bar takes all width to display the background color on hover */}
               <StyledHoverBar

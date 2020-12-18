@@ -12,7 +12,6 @@ interface ChartTileProps {
   metadata: MetadataProps;
   title: string;
   description?: React.ReactNode;
-  showDataWarning?: boolean;
 }
 
 interface ChartTileWithTimeframeProps extends Omit<ChartTileProps, 'children'> {
@@ -26,10 +25,9 @@ export function ChartTile({
   description,
   metadata,
   children,
-  showDataWarning,
 }: ChartTileProps) {
   return (
-    <ChartTileContainer metadata={metadata} showDataWarning={showDataWarning}>
+    <ChartTileContainer metadata={metadata}>
       <ChartTileHeader title={title} description={description} />
       {children}
     </ChartTileContainer>
@@ -42,7 +40,6 @@ export function ChartTileWithTimeframe({
   metadata,
   timeframeOptions = ['all', '5weeks', 'week'],
   timeframeInitialValue = '5weeks',
-  showDataWarning,
   children,
 }: ChartTileWithTimeframeProps) {
   const [timeframe, setTimeframe] = useState<TimeframeOption>(
@@ -50,7 +47,7 @@ export function ChartTileWithTimeframe({
   );
 
   return (
-    <ChartTileContainer metadata={metadata} showDataWarning={showDataWarning}>
+    <ChartTileContainer metadata={metadata}>
       <ChartTileHeader
         title={title}
         description={description}

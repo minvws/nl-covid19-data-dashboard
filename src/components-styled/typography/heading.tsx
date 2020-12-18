@@ -50,7 +50,7 @@ type StyledHeadingProps = MarginProps &
 
 const composedStyles = compose(margin, padding, typography, color);
 
-export const Heading1 = styled.h1<StyledHeadingProps>(composedStyles);
+const Heading1 = styled.h1<StyledHeadingProps>(composedStyles);
 
 Heading1.defaultProps = {
   fontFamily: 'body',

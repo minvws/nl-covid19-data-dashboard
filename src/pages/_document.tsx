@@ -42,7 +42,7 @@ class MyDocument extends Document {
     const locale = getLocale();
 
     return (
-      <Html lang={locale}>
+      <Html lang={locale} className="has-no-js">
         <Head />
         <body>
           <Main />

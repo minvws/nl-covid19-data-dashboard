@@ -2,7 +2,7 @@ import { ErrorObject, ValidateFunction } from 'ajv';
 import { isDefined } from 'ts-is-present';
 import { SchemaInfo } from './schema-information';
 
-export type ValidationResult = {
+type ValidationResult = {
   isValid: boolean;
   schemaErrors?: (ErrorObject | string)[];
 };

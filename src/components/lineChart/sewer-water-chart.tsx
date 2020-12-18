@@ -12,7 +12,7 @@ import {
   Value,
 } from './hooks/useSewerWaterChartOptions';
 
-export type TProps<T extends SewerPerInstallationBaseValue> = {
+type TProps<T extends SewerPerInstallationBaseValue> = {
   averageValues: Value[];
   scatterPlotValues?: T[];
   text: TranslationStrings;
