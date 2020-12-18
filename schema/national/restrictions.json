@@ -48,12 +48,15 @@
             "horeca",
             "sport",
             "reizen_binnenland",
+            "reizen_buitenland",
             "ov",
             "uitvaart",
             "onderwijs",
             "werk",
             "winkels",
-            "alcohol"
+            "alcohol",
+            "algemeen",
+            "contactberoep"
           ]
         },
         "restriction_order": {

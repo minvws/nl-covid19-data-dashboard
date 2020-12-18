@@ -1,4 +1,4 @@
-import { HighchartsWrapper } from '~/components/common/highcharts';
+import { HighchartsWrapper } from '~/components/highcharts-wrapper';
 import {
   NationalDeceasedCbsValue,
   RegionalDeceasedCbsValue,

@@ -1,65 +1,33 @@
 import { scaleLinear, ScaleLinear } from 'd3-scale';
-import useSWR from 'swr';
-
-interface IDynamicScale {
-  isValidating: boolean;
-  scale: ScaleLinear<number, number>;
-}
+/**
+ * Not sure why this is 1.05. Any value between 1 and 1.5 seems to have the same
+ * effect.
+ */
+const STRETCH_FACTOR = 1.05;
 
 /**
- * Use this hook to get an x-scale for your barcharts
- * You use this by providing an imperative, desired min and max for your domains
+ * Calculate the bar chart scale, based on desired min/max but stretched if
+ * value is out of bounds.
  *
- * We compare the extent of your domain with your data value and max value returned by the
- * backend, and use the data value or the max value from the backend as the scale max for your
- * scale when it's higher than the imperative max value. This guarantee the scale won't break
- * if suddenly the value is higher than your desired min/max extent.
+ * This function used to incorporate calculated min/max ranges for data but was
+ * later disabled because only the last_value is displayed in the
+ * bar chart.
+ *
+ * This is a simplified version which should give us the same results, and can
+ * later be enhanced if we choose re-introduce the use of calculated ranges.
  */
-
 export function useDynamicScale(
+  value: number,
   min: number,
-  max: number,
-  dataKey: string,
-  value: number
-): IDynamicScale {
-  const { data, isValidating } = useSWR('/json/RANGES.json');
-
-  let dataMax;
-
-  if (dataKey) {
-    dataMax = data?.min_max_values?.last_value?.[`max_${dataKey}`];
-  }
-
-  let scaleMax = max;
-
-  const isValueHigherThanMax = value > max;
-  const isDataMaxHigherThanMax = dataMax > max;
-
-  if (value) {
-    // The first and most important check, did we find an absolute max value across
-    // the complete dataset for this metric? Then we want to use that as the
-    // new max.
-    // Disabled for now because the max reported in the dataset reports the max over
-    // full history of a metric, and we need the latest value.
-    // eslint-disable-next-line no-constant-condition
-    if (false) {
-      if (isDataMaxHigherThanMax) {
-        scaleMax = dataMax;
-        // This second check, which theoretically shouldn't happen anymore but we leave it in for good
-        // measure, would ensure even if the back-end reports a wrong max value, the scale
-        // never breaks.
-      }
-    } else if (isValueHigherThanMax) {
-      scaleMax = value * 1.05;
-    }
-  }
+  max: number
+): ScaleLinear<number, number> {
+  const scaleMax = value < max ? max : value * STRETCH_FACTOR;
+  const scaleMin = value > min ? min : value / STRETCH_FACTOR;
 
   const scale: ScaleLinear<number, number> = scaleLinear()
-    .domain([min, scaleMax])
-    .range([0, 100]);
+    .domain([scaleMin, scaleMax])
+    .range([0, 100])
+    .nice(2);
 
-  if (isValueHigherThanMax || isDataMaxHigherThanMax) {
-    scale.nice(2);
-  }
-  return { scale, isValidating };
+  return scale;
 }

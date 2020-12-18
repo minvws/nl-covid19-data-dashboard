@@ -2,7 +2,7 @@ import { RadioGroup } from '~/components-styled/radio-group';
 import text from '~/locale/index';
 import { BehaviorType } from '../behavior-types';
 
-export interface BehaviorTypeControlProps {
+interface BehaviorTypeControlProps {
   onChange: (value: BehaviorType) => void;
   value: BehaviorType;
 }

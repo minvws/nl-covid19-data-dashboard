@@ -1,36 +1,11 @@
-$base-font-stack: 'RO Sans', sans-serif;
-
 $page-background: #f3f3f3;
-$page-background-active: #ebebeb;
 $icon-color: #01689b;
-$button-color: $icon-color;
-
-$red: #cd005a;
 
 $text-color: #000;
 $text-color-grey: #595959;
 $text-color-active: $icon-color;
 
-$graph-col-base: #ca005d;
-$map-col-base: #957101;
-
-$graph-col-background: #fff;
-$map-col-background: $graph-col-background;
-
-$graph-font-color: $graph-col-base;
-$map-font-color: $map-col-base;
-
-$graph-icon-color: $graph-col-base;
-$map-icon-color: $map-col-base;
-
-$graph-icon-color: $graph-col-base;
-$map-icon-color: $map-col-base;
-
-$graph-border-color: $graph-col-base;
-$map-border-color: $map-col-base;
-
 $default-radius: 5px;
-$default-padding: 1rem;
 $default-margin: 1rem;
 
 $box-shadow: 0 -1px 1px 0 #e5e5e5, 0 1px 1px 0 #e5e5e5, 0 2px 2px 0 #e5e5e5,

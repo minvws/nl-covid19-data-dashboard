@@ -2,7 +2,7 @@ import Head from 'next/head';
 
 import siteText from '~/locale/index';
 
-export type SEOHeadProps = {
+type SEOHeadProps = {
   title?: string;
   description?: string;
   url?: string;
@@ -123,13 +123,6 @@ export function SEOHead(props: SEOHeadProps): any {
         href="/webfonts/RO-SansWebText-Bold.woff"
         as="font"
         type="font/woff"
-      />
-
-      <link
-        rel="preload"
-        href="/json/RANGES.json"
-        as="fetch"
-        crossOrigin="anonymous"
       />
 
       <meta key="description" name="description" content={description} />

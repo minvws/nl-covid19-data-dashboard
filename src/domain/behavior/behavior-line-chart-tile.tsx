@@ -3,7 +3,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { isDefined } from 'ts-is-present';
 import { Box, Spacer } from '~/components-styled/base';
-import { Tile } from '~/components-styled/layout';
+import { Tile } from '~/components-styled/tile';
 import { Select } from '~/components-styled/select';
 import { Heading } from '~/components-styled/typography';
 import siteText from '~/locale/index';
@@ -56,23 +56,7 @@ export function BehaviorLineChartTile({
     .filter(isDefined);
 
   return (
-    <Tile
-      /**
-       * The mb here could alternatively be applied using a <Spacer/> in the
-       * page markup. It's a choice, whether we like to include the bottom
-       * margin on all our commonly used components or keep everything flexible
-       * and use spacers in the context where the component is used.
-       */
-      mb={4}
-      /**
-       * The ml and mr negative margins should not be part of this component
-       * ideally, but are the results of the page layout having paddings even on
-       * small screens. We can remove this once we make all page section
-       * elements full-width and remove the padding from the page layout.
-       */
-      ml={{ _: -4, sm: 0 }}
-      mr={{ _: -4, sm: 0 }}
-    >
+    <Tile>
       <Header>
         <Box mr={{ lg: '1em' }} mb={{ lg: '1em' }}>
           <Heading level={3}>{title}</Heading>

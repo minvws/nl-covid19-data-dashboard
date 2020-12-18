@@ -16,12 +16,12 @@ import { BarChartValue } from '~/components-styled/bar-chart/bar-chart-coordinat
 const text = siteText.gemeente_rioolwater_metingen;
 
 // Specific interfaces to pass data between the formatting functions and the highcharts configs
-export interface SewerWaterMetadata {
+interface SewerWaterMetadata {
   dataAvailable: boolean;
   oneInstallation: boolean;
 }
 
-export interface SewerWaterBarScaleData {
+interface SewerWaterBarScaleData {
   value: number | undefined;
   unix: number | undefined;
   dateInsertedUnix: number | undefined;
@@ -36,7 +36,7 @@ interface SewerWaterLineChartValue {
   week_end_unix: number;
 }
 
-export interface SewerWaterLineChartData {
+interface SewerWaterLineChartData {
   averageValues: SewerWaterLineChartValue[];
   averageLabelText: string;
 }

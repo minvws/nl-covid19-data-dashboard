@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Dot from '~/assets/dot.svg';
 import Line from '~/assets/line.svg';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
-import { HighchartsWrapper } from '~/components/common/highcharts';
+import { HighchartsWrapper } from '~/components/highcharts-wrapper';
 import { TimeframeOption } from '~/utils/timeframe';
 import {
   SewerPerInstallationBaseValue,
@@ -12,7 +12,7 @@ import {
   Value,
 } from './hooks/useSewerWaterChartOptions';
 
-export type TProps<T extends SewerPerInstallationBaseValue> = {
+type TProps<T extends SewerPerInstallationBaseValue> = {
   averageValues: Value[];
   scatterPlotValues?: T[];
   text: TranslationStrings;

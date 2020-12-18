@@ -1,5 +1,5 @@
 import { Box } from './base';
-import { Tile } from './layout';
+import { Tile } from '~/components-styled/tile';
 import { Metadata, MetadataProps } from './metadata';
 import { Heading, Text } from './typography';
 

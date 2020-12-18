@@ -7,7 +7,7 @@ export const Category = styled(Text)(
     fontSize: 3,
     lineHeight: 1,
     px: 3,
-    pt: 4,
+    m: 0,
     fontWeight: 'bold',
   })
 );

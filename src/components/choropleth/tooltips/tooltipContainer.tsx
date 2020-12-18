@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction, useEffect, useRef } from 'react';
 import { TooltipSettings } from '../choropleth';
 import styles from './tooltip.module.scss';
 
-export type TTooltipProps = {
+type TTooltipProps = {
   left: number;
   top: number;
   setTooltip: Dispatch<SetStateAction<TooltipSettings | undefined>>;

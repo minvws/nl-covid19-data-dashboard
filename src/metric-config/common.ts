@@ -15,7 +15,6 @@ export type BarScaleConfig = {
   max: number;
   signaalwaarde: number;
   gradient: { color: string; value: number }[];
-  rangesKey: string;
 };
 
 /**

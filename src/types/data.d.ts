@@ -11,7 +11,7 @@ export interface Municipal {
   name: string;
   code: string;
   difference: MunicipalDifference;
-  hospital_admissions?: MunicipalHospitalAdmissions;
+  hospital_admissions: MunicipalHospitalAdmissions;
   positive_tested_people: MunicipalPositiveTestedPeople;
   sewer?: MunicipalSewer;
   sewer_per_installation?: MunicipalSewerPerInstallation;
@@ -95,7 +95,7 @@ export interface Municipalities {
   proto_name: "MUNICIPALITIES";
   name: string;
   code: string;
-  hospital_admissions?: MunicipalitiesHospitalAdmissions[];
+  hospital_admissions: MunicipalitiesHospitalAdmissions[];
   positive_tested_people: MunicipalitiesPositiveTestedPeople[];
 }
 export interface MunicipalitiesHospitalAdmissions {
@@ -137,7 +137,7 @@ export interface National {
   ggd: NationalGgd;
   nursing_home: NationalNursingHome;
   disability_care: NationalDisabilityCare;
-  restrictions?: NationalRestrictions;
+  restrictions: NationalRestrictions;
   behavior: NationalBehavior;
   deceased_rivm: NationalDeceasedRivm;
   deceased_cbs: NationalDeceasedCbs;
@@ -399,12 +399,15 @@ export interface NationalRestrictionValue {
     | "horeca"
     | "sport"
     | "reizen_binnenland"
+    | "reizen_buitenland"
     | "ov"
     | "uitvaart"
     | "onderwijs"
     | "werk"
     | "winkels"
-    | "alcohol";
+    | "alcohol"
+    | "algemeen"
+    | "contactberoep";
   restriction_order: number;
   valid_from_unix: number;
 }
@@ -576,7 +579,7 @@ export interface Regionaal {
   ggd: RegionalGgd;
   nursing_home: RegionalNursingHome;
   disability_care: RegionalDisabilityCare;
-  restrictions?: RegionalRestrictions;
+  restrictions: RegionalRestrictions;
   behavior: RegionalBehavior;
   deceased_rivm: RegionalDeceasedRivm;
   deceased_cbs: RegionalDeceasedCbs;
@@ -649,12 +652,12 @@ export interface RegionaalValue {
   vrcode: string;
   total_reported_increase_per_region: number;
   infected_total_counts_per_region: number;
-  hospital_total_counts_per_region: number;
+  hospital_total_counts_per_region: number | null;
   active_clusters?: number | null;
   cluster_average?: number | null;
   infected_increase_per_region: number;
-  hospital_increase_per_region: number;
-  hospital_moving_avg_per_region: number;
+  hospital_increase_per_region: number | null;
+  hospital_moving_avg_per_region: number | null;
   date_of_insertion_unix: number;
 }
 export interface RegionalGgd {
@@ -705,7 +708,7 @@ export interface RegionalRestrictions {
 export interface RegionalRestrictionValue {
   restriction_id: string;
   target_region: "nl" | "vr";
-  escalation_level: 0 | 1 | 2 | 3 | 4 | 41 | 401;
+  escalation_level: 0 | 1 | 2 | 3 | 4 | 41 | 401 | 402;
   category_id:
     | "er_op_uit"
     | "bezoek"
@@ -715,14 +718,18 @@ export interface RegionalRestrictionValue {
     | "horeca"
     | "sport"
     | "reizen_binnenland"
+    | "reizen_buitenland"
     | "ov"
     | "uitvaart"
     | "onderwijs"
     | "werk"
     | "winkels"
-    | "alcohol";
+    | "alcohol"
+    | "algemeen"
+    | "contactberoep";
   restriction_order: number;
   valid_from_unix: number;
+  vrcode: string;
 }
 export interface RegionalBehavior {
   values: RegionalBehaviorValue[];
@@ -805,7 +812,7 @@ export interface Regions {
   proto_name: "REGIONS";
   name: string;
   code: string;
-  hospital_admissions?: RegionHospitalAdmissions[];
+  hospital_admissions: RegionHospitalAdmissions[];
   positive_tested_people: RegionPositiveTestedPeople[];
   escalation_levels: EscalationLevels[];
   nursing_home: RegionsNursingHome[];

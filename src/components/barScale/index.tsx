@@ -1,5 +1,4 @@
 import { scaleQuantile, scaleThreshold } from 'd3-scale';
-import { useRef } from 'react';
 import { ScreenReaderOnly } from '~/components/screenReaderOnly';
 import siteText from '~/locale/index';
 import { formatNumber } from '~/utils/formatNumber';
@@ -20,7 +19,6 @@ type BarscaleProps = {
   gradient: GradientStop[];
   id: string;
   screenReaderText: string;
-  rangeKey: string;
   showAxis?: boolean;
   showValue?: boolean;
 };
@@ -33,14 +31,10 @@ export function BarScale({
   gradient,
   id,
   screenReaderText,
-  rangeKey,
   showAxis,
-  showValue = true,
+  showValue,
 }: BarscaleProps) {
-  // Generate a random ID used for clipPath and linearGradient ID's.
-  const rand = useRef(Math.random().toString(36).substring(2, 15));
-
-  const { scale } = useDynamicScale(min, max, rangeKey, value);
+  const scale = useDynamicScale(value, min, max);
 
   const text = siteText.common.barScale;
 
@@ -66,7 +60,7 @@ export function BarScale({
       <div className={styles.root} aria-hidden="true">
         <svg xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <clipPath id={`cut-off${id}-${rand.current}`}>
+            <clipPath id={`${id}-cut-off`}>
               <rect
                 x="0"
                 y={36}
@@ -78,7 +72,7 @@ export function BarScale({
               />
             </clipPath>
             <linearGradient
-              id={`barColor${id}-${rand.current}`}
+              id={`${id}-bar-color`}
               gradientUnits="userSpaceOnUse"
             >
               {color.domain().map((value) => (
@@ -99,8 +93,8 @@ export function BarScale({
               ry="2"
               width="100%"
               height="10"
-              clipPath={`url(#cut-off${id}-${rand.current})`}
-              fill={`url(#barColor${id}-${rand.current})`}
+              clipPath={`url(#${id}-cut-off)`}
+              fill={`url(#${id}-bar-color)`}
             />
             <rect
               x="0"
@@ -109,7 +103,7 @@ export function BarScale({
               ry="2"
               width="100%"
               height="4"
-              fill={`url(#barColor${id}-${rand.current})`}
+              fill={`url(#${id}-bar-color)`}
             />
           </g>
 
