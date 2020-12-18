@@ -1826,7 +1826,7 @@
       "description": "Over-70s living at home in {{safetyRegion}}"
     },
     "section_positive_tested": {
-      "title": "People over-70 in {{safetyRegion}} living at home - newly confirmed cases",
+      "title": "People over-70 in {{safetyRegion}} living at home ",
       "description": "People aged over 70 are extra vulnerable to coronavirus infection. Keeping track of the number of infections among over-70s who are still living independently in their own homes makes targeted measures possible.",
       "reference": {
         "href": "/verantwoording#people-over-70-living-at-home",
@@ -1847,7 +1847,7 @@
       "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis."
     },
     "section_deceased": {
-      "title": "People over 70 in {{safetyRegion}} living at home – deaths",
+      "title": "People over 70 in {{safetyRegion}} living at home – COVID-19 deaths",
       "description": "Number of over-70s living at home in this region deceased due to COVID-19, per day.",
       "reference": {
         "href": "/verantwoording#people-over-70-living-at-home",
@@ -1862,7 +1862,7 @@
       },
       "kpi_daily_title": "COVID-19 deaths among over-70s living at home, per day",
       "kpi_daily_description": "The number of people over 70 living at home in this safety region who were reported as deceased due to COVID-19 yesterday",
-      "line_chart_daily_title": "Number of COVID-19 deaths among over-70s living at home: progression over time",
+      "line_chart_daily_title": "Number of COVID-19 deaths among over-70s living at home",
       "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis."
     },
     "kpi_titel": "Confirmed cases"
