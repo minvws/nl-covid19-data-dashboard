@@ -142,7 +142,7 @@ const NavList = styled.ul(
 // Lines in mobile menu between items
 const StyledListItem = styled.li(
   css({
-    '& + &': {
+    '&:not(:first-child)': {
       borderTop: '1px solid rgba(255, 255, 255, 0.25)',
       borderTopWidth: asResponsiveArray({ _: '1px', md: 0 }),
     },
