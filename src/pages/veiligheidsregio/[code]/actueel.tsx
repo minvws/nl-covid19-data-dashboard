@@ -49,7 +49,9 @@ const SafetyRegionActueel: FCWithLayout<ActueelData> = (data) => {
 };
 
 /** @TODO Fill metadata / adjust layout */
-const metadata = {};
+const metadata = {
+  title: '',
+};
 SafetyRegionActueel.getLayout = getLayoutWithMetadata(metadata);
 
 export const getStaticProps = getSafetyRegionStaticProps;

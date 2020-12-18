@@ -49,7 +49,9 @@ const MunicipalityActueel: FCWithLayout<ActueelData> = (data) => {
 };
 
 /** @TODO Fill metadata / adjust layout */
-const metadata = {};
+const metadata = {
+  title: '',
+};
 MunicipalityActueel.getLayout = getLayoutWithMetadata(metadata);
 
 export const getStaticProps = getMunicipalityData();

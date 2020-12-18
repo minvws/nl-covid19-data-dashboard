@@ -58,7 +58,9 @@ const Home: FCWithLayout<IHomeData> = (data) => {
 };
 
 /** @TODO Fill metadata / adjust layout */
-const metadata = {};
+const metadata = {
+  title: '',
+};
 Home.getLayout = getLayoutWithMetadata(metadata);
 
 export async function getStaticProps(): Promise<StaticProps> {
