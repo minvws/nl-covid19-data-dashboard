@@ -938,6 +938,7 @@
     "linechart_titel": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners over tijd",
     "bar_chart_title": "Meest recente meetwaarde per locatie in {{safetyRegion}}",
     "bar_chart_axis_title": "Gemiddelde aantal virusdeeltjes per 100.000 inwoners",
+    "bar_chart_accessibility_description": "",
     "bron": {
       "text": "RIVM",
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
@@ -1065,6 +1066,7 @@
     "linechart_titel": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners over tijd",
     "bar_chart_title": "Meest recente meetwaarde per locatie in {{municipality}}",
     "bar_chart_axis_title": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners",
+    "bar_chart_accessibility_description": "",
     "bron": {
       "text": "RIVM",
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
@@ -1949,11 +1951,11 @@
       "text": "Lees meer in de cijferverantwoording."
     },
     "cbs_message": {
-      "title": "Sterfte in week 49 nog steeds verhoogd",
+      "title": "Sterfte neemt verder toe in week 50",
       "published_text": "Publicatiedatum: vrijdag 4 december",
-      "message": "In week 49 (30 november tot en met 6 december 2020) overleden naar schatting 3 450 mensen. Dat zijn er ongeveer 75 meer dan een week eerder, toen 3 373 mensen overleden. In de winter neemt het aantal overledenen altijd toe. De sterfte in week 49 is echter nog 400 hoger dan verwacht voor deze periode. Dat meldt het CBS op basis van de voorlopige sterftecijfers per week.",
+      "message": "In week 50 (7 tot en met 13 december 2020) overleden naar schatting 3 550 mensen. Dat zijn er ruim 50 meer dan een week eerder, toen 3 494 mensen overleden. In de winter neemt het aantal overledenen altijd toe. De sterfte in week 50 is echter nog 450 hoger dan verwacht voor deze periode. Dat meldt het CBS op basis van de voorlopige sterftecijfers per week.",
       "link": {
-        "href": "https://www.cbs.nl/nl-nl/nieuws/2020/50/sterfte-in-week-49-nog-steeds-verhoogd",
+        "href": "https://www.cbs.nl/nl-nl/nieuws/2020/51/sterfte-neemt-verder-toe-in-week-50",
         "text": "Website CBS"
       }
     },

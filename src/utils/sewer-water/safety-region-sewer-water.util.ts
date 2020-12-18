@@ -1,3 +1,4 @@
+import { BarChartValue } from '~/components-styled/bar-chart/bar-chart-coordinates';
 import siteText from '~/locale/index';
 import { colors } from '~/style/theme';
 import { Regionaal, RegionalSewerPerInstallationValue } from '~/types/data.d';
@@ -31,9 +32,8 @@ interface SewerWaterLineChartData {
   averageLabelText: string;
 }
 
-interface SewerWaterBarChartData {
-  keys: string[];
-  data: Highcharts.XrangePointOptionsObject[];
+export interface SewerWaterBarChartData {
+  values: BarChartValue[];
 }
 
 export function getSewerWaterBarScaleData(
@@ -105,34 +105,25 @@ export function getSewerWaterBarChartData(
   // Concat keys and data to glue the "average" as first bar and then
   // the RWZI-locations from highest to lowest
   return {
-    keys: [
-      text.average,
-      ...sortedInstallations.map((i) => i.last_value.rwzi_awzi_name),
-    ],
-    data: [
+    values: [
       {
-        y: data.sewer.last_value.average,
+        label: text.average,
+        value: data.sewer.last_value.average,
         color: colors.data.primary,
-        label: data.sewer.last_value
-          ? `${formatDateFromSeconds(
-              data.sewer.last_value.week_unix,
-              'short'
-            )}: ${formatNumber(data.sewer.last_value.average)}`
-          : false,
-      } as Highcharts.XrangePointOptionsObject,
-      ...sortedInstallations.map(
-        (installation) =>
-          ({
-            y: installation.last_value.rna_normalized,
-            color: '#C1C1C1',
-            label: installation.last_value
-              ? `${formatDateFromSeconds(
-                  installation.last_value.date_measurement_unix,
-                  'short'
-                )}: ${formatNumber(installation.last_value.rna_normalized)}`
-              : false,
-          } as Highcharts.XrangePointOptionsObject)
-      ),
+        tooltip: `${formatDateFromSeconds(
+          data.sewer.last_value.week_unix,
+          'short'
+        )}: ${formatNumber(data.sewer.last_value.average)}`,
+      },
+      ...sortedInstallations.map((installation) => ({
+        label: installation.last_value.rwzi_awzi_name,
+        value: installation.last_value.rna_normalized,
+        color: '#C1C1C1',
+        tooltip: `${formatDateFromSeconds(
+          installation.last_value.date_measurement_unix,
+          'short'
+        )}: ${formatNumber(installation.last_value.rna_normalized)}`,
+      })),
     ],
   };
 }
