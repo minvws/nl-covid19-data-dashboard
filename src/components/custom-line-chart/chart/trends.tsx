@@ -61,8 +61,8 @@ export function Trends({
       {type === 'line' && (
         <LinePath
           data={trend}
-          x={(d: any) => x(d.date)}
-          y={(d: any) => y(d.value)}
+          x={(d: DataPoint) => x(d.date)}
+          y={(d: DataPoint) => y(d.value)}
           stroke={color}
           strokeWidth={isHovered ? 3 : 2}
         />
