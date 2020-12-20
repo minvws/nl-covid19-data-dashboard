@@ -20,7 +20,7 @@ export interface LineChartProps<T> {
   values: T[];
   signaalwaarde?: number;
   timeframe?: TimeframeOption;
-  formatTooltip?: (value: T) => string;
+  formatTooltip?: (value: T) => React.ReactNode;
   formatYAxis?: (y: number) => string;
   showFill?: boolean;
   valueAnnotation?: string;

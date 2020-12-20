@@ -9,6 +9,7 @@ import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
 import { calculateYMax, Value } from '../lineChart';
 import { Chart, defaultMargin } from './chart';
 import { Tooltip } from './chart/tooltip';
+import text from '~/locale/index';
 
 const valueToDate = (d: number) => new Date(d * 1000);
 const dateToValue = (d: Date) => d.valueOf() / 1000;
@@ -57,7 +58,7 @@ export function LineChart<T extends Value>({
   } = useTooltip<T>();
 
   const benchmark = signaalwaarde
-    ? { value: signaalwaarde, label: 'Signaalwaarde' }
+    ? { value: signaalwaarde, label: text.common.barScale.signaalwaarde }
     : undefined;
 
   const graphData = useMemo(() => {
