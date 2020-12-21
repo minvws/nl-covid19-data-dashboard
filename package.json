@@ -1,0 +1,5 @@
+{
+
+    "private": true,
+    "workspaces": ["corona-dashboard-cms", "corona-dashboard-app"]
+  }
