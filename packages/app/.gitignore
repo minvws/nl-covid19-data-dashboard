@@ -5,9 +5,7 @@
 /out
 
 # dependencies
-/node_modules
-/.pnp
-.pnp.js
+node_modules
 
 # testing
 /coverage
@@ -18,10 +16,8 @@
 
 # misc
 .DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env
+.env.*
 .idea/
 
 # CI/CD
