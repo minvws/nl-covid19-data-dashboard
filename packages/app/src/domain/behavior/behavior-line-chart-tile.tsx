@@ -1,7 +1,7 @@
 import css from '@styled-system/css';
 import { useState } from 'react';
 import styled from 'styled-components';
-import { isDefined } from 'ts-is-present';
+import { isPresent } from 'ts-is-present';
 import { Box, Spacer } from '~/components-styled/base';
 import { Tile } from '~/components-styled/tile';
 import { Select } from '~/components-styled/select';
@@ -42,7 +42,7 @@ export function BehaviorLineChartTile({
       const hasEnoughData =
         (values as NationalBehaviorValue[])
           .map((x) => x[valueKey])
-          .filter(isDefined).length > 1;
+          .filter(isPresent).length > 1;
 
       return hasEnoughData
         ? {
@@ -53,7 +53,7 @@ export function BehaviorLineChartTile({
           }
         : undefined;
     })
-    .filter(isDefined);
+    .filter(isPresent);
 
   return (
     <Tile>
@@ -105,7 +105,7 @@ export function BehaviorLineChartTile({
                   } as Value)
                 : undefined
             )
-            .filter(isDefined)
+            .filter(isPresent)
         )}
         linesConfig={behaviorIdentifierWithData.map(({ id }) => ({
           id,
