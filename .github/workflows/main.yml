@@ -1,9 +1,5 @@
 name: Main
 
-defaults:
-  run:
-    working-directory: corona-dashboard-app
-
 on:
   push:
     branches:
@@ -39,7 +35,6 @@ jobs:
       - name: Lint code
         run: yarn lint
 
-
   compile:
     runs-on: ubuntu-latest
     needs: init
@@ -49,7 +44,7 @@ jobs:
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
       - name: Compile code
-        run: npx tsc
+        run: yarn compile
 
   test:
     runs-on: ubuntu-latest

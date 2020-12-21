@@ -4,10 +4,9 @@ The dashboard provides information on the outbreak and prevalence of COVID-19 in
 
 ## Monorepositoy
 
-We've switched to a monorepository that contains both the front-end and the CMS configuration. If you want to run the front-end locally, go into `packages/web/` and check out the README there.
+We've switched to a monorepo that contains both the front-end and the CMS configuration. If you want to run the front-end locally, go into `packages/app` and check out the README there.
 
 ### Starting the front-end
-`yarn`
-`cd corona-dashboard-app`
+
 `yarn download`
 `yarn dev`
