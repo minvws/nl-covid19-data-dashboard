@@ -18,20 +18,20 @@ COPY . .
 RUN yarn build
 
 # Stage 2 - Build EN application
-FROM node:14 as react-build-en
-ARG NEXT_PUBLIC_LOCALE=en
-WORKDIR /app
-COPY --from=react-build-base /app/node_modules /app/node_modules
-COPY --from=react-build-base /app/packages/app/ /app/packages/app/node_modules
-COPY . .
-RUN yarn build
+# FROM node:14 as react-build-en
+# ARG NEXT_PUBLIC_LOCALE=en
+# WORKDIR /app
+# COPY --from=react-build-base /app/node_modules /app/node_modules
+# COPY --from=react-build-base /app/packages/app/ /app/packages/app/node_modules
+# COPY . .
+# RUN yarn build
 
 # Stage 3 - the production environment
 FROM bitnami/nginx:latest
 COPY --from=react-build-nl /app/packages/app/out /app/nl
-COPY --from=react-build-en /app/packages/app/out /app/en
+# COPY --from=react-build-en /app/packages/app/out /app/en
 RUN ls -al
-COPY    /app/packages/app/nginx.conf \
+COPY --from=react-build-base /app/packages/app/nginx.conf \
         /app/packages/app/nginx_headers.conf \
         /app/packages/app/nginx_common.conf \
         /app/packages/app/nginx_en.conf \
