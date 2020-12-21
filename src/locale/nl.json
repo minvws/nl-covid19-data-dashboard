@@ -98,7 +98,7 @@
     "kpi_titel": "Gemiddeld aantal intensive care-opnames over 3 dagen"
   },
   "verdenkingen_huisartsen": {
-    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
     "bron": {
       "href": "https://www.nivel.nl/nl/nivel-zorgregistraties-eerste-lijn/nivel-zorgregistraties-eerste-lijn",
       "text": "Nivel Zorgregistraties Eerste Lijn"
