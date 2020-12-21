@@ -2,8 +2,9 @@ import fs from 'fs';
 import { useRouter } from 'next/router';
 import path from 'path';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
-import { Tile } from '~/components-styled/tile';
+import { LandelijkeToelichting } from '~/components-styled/landelijke-toelichting';
 import { MaxWidth } from '~/components-styled/max-width';
+import { Tile } from '~/components-styled/tile';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
@@ -53,6 +54,8 @@ const Home: FCWithLayout<IHomeData> = (data) => {
           )}
         />
       </ChoroplethTile>
+
+      <LandelijkeToelichting />
     </MaxWidth>
   );
 };

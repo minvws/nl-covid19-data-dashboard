@@ -14,7 +14,9 @@
     "link": {
       "text": "View the full message from the RIVM",
       "href": "https://www.rivm.nl/en/novel-coronavirus-covid-19/current-information"
-    }
+    },
+    "subtitel": "",
+    "datum": ""
   },
   "error_titel": {
     "text": "Something went wrong"

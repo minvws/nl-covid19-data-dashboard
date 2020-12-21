@@ -99,6 +99,7 @@ export const colors = {
   border: '#c4c4c4',
   lightBlue: '#E0EEF6',
   restrictions: '#CD0059',
+  contextualContent: '#e5eff8',
 
   data: {
     primary: '#007BC7',
