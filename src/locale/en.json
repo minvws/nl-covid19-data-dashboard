@@ -934,8 +934,7 @@
     "barscale_screenreader_text": "{{value}} virus particles per 100.000 inhabitants",
     "linechart_titel": "Average number of virus particles per 100.000 inhabitants over time",
     "bar_chart_title": "Most recent measurement per location in {{safetyRegion}}",
-    "bar_chart_axis_title": "Average number of coronavirus particles per 100,000 inhabitants",
-    "bar_chart_accessibility_description": "",
+    "bar_chart_axis_title": "Average number of coronavirus particles (x100 billion) per 100,000 inhabitants",
     "bron": {
       "text": "RIVM",
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
@@ -966,7 +965,8 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
       }
     },
-    "kpi_titel": "Average number of coronavirus particles per 100.000 people"
+    "kpi_titel": "Average number of coronavirus particles per 100.000 people",
+    "bar_chart_accessibility_description": ""
   },
   "gemeente_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Hospital admissions",
@@ -1063,7 +1063,6 @@
     "linechart_titel": "Average number of virus particles per 100.000 inhabitants over time",
     "bar_chart_title": "Most recent measurement per location in {{municipality}}",
     "bar_chart_axis_title": "Average number of coronavirus particles per 100,000 inhabitants",
-    "bar_chart_accessibility_description": "",
     "bron": {
       "text": "RIVM",
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
@@ -1094,7 +1093,8 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
       }
     },
-    "kpi_titel": "Average number of coronavirus particles per 100.000 people"
+    "kpi_titel": "Average number of coronavirus particles per 100.000 people",
+    "bar_chart_accessibility_description": ""
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Level of risk",
