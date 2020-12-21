@@ -1,6 +1,8 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
+import Chevron from '~/assets/chevron.svg';
 import siteText from '~/locale/index';
+import theme from '~/style/theme';
 import { Link } from '~/utils/link';
 import { Box } from './base';
 import { ContentHeader } from './content-header';
@@ -20,9 +22,9 @@ export function DataSitemap() {
             justifyContent="space-between"
           >
             <Box>
-              <Text fontWeight="bold">
+              <StyledHeader>
                 {siteText.nationaal_layout.headings.besmettingen}
-              </Text>
+              </StyledHeader>
               <DataSiteMapLink
                 href="/landelijk/positief-geteste-mensen"
                 text={siteText.positief_geteste_personen.titel_sidebar}
@@ -35,11 +37,15 @@ export function DataSitemap() {
                 href="/landelijk/reproductiegetal"
                 text={siteText.reproductiegetal.titel_sidebar}
               />
+              <DataSiteMapLink
+                href="/landelijk/sterfte"
+                text={siteText.sterfte.titel_sidebar}
+              />
             </Box>
             <Box>
-              <Text fontWeight="bold">
+              <StyledHeader>
                 {siteText.nationaal_layout.headings.ziekenhuizen}
-              </Text>
+              </StyledHeader>
               <DataSiteMapLink
                 href="/landelijk/ziekenhuis-opnames"
                 text={siteText.ziekenhuisopnames_per_dag.titel_sidebar}
@@ -50,9 +56,9 @@ export function DataSitemap() {
               />
             </Box>
             <Box>
-              <Text fontWeight="bold">
+              <StyledHeader>
                 {siteText.nationaal_layout.headings.kwetsbare_groepen}
-              </Text>
+              </StyledHeader>
               <DataSiteMapLink
                 href="/landelijk/verpleeghuiszorg"
                 text={siteText.verpleeghuis_besmette_locaties.titel_sidebar}
@@ -69,9 +75,9 @@ export function DataSitemap() {
               />
             </Box>
             <Box>
-              <Text fontWeight="bold">
+              <StyledHeader>
                 {siteText.nationaal_layout.headings.vroege_signalen}
-              </Text>
+              </StyledHeader>
               <DataSiteMapLink
                 href="/landelijk/rioolwater"
                 text={siteText.rioolwater_metingen.titel_sidebar}
@@ -82,9 +88,9 @@ export function DataSitemap() {
               />
             </Box>
             <Box>
-              <Text fontWeight="bold">
+              <StyledHeader>
                 {siteText.nationaal_layout.headings.gedrag}
-              </Text>
+              </StyledHeader>
               <DataSiteMapLink
                 href="/landelijk/rioolwater"
                 text={siteText.nl_gedrag.sidebar.titel}
@@ -107,24 +113,24 @@ function DataSiteMapLink(props: DataSiteMapLinkProps) {
   return (
     <Link href={href}>
       <StyledLink>
-        <div>{text}</div>
+        {text} <Chevron width="12px" height="12px" color={theme.colors.blue} />
       </StyledLink>
     </Link>
   );
 }
 
+const StyledHeader = styled(Text).attrs({ as: 'span' })(
+  css({
+    fontWeight: 'bold',
+    display: 'block',
+    pb: 2,
+  })
+);
+
 const StyledLink = styled.a(
   css({
     fontWeight: 'bold',
-    '&::after': {
-      backgroundImage: `url('/images/chevron.svg')`,
-      backgroundSize: '0.6em 1.2em',
-      height: '1.2em',
-      width: '0.6em',
-      display: 'block',
-      position: 'absolute',
-      right: '1em',
-      top: '1.35em',
-    },
+    display: 'block',
+    pb: 2,
   })
 );
