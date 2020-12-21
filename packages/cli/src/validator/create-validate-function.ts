@@ -1,18 +1,18 @@
-import Ajv, { ValidateFunction } from 'ajv';
-import fs from 'fs';
-import path from 'path';
-import { equalsRootProperty } from './ajv-keywords/equalsRootProperty';
-import { validRestrictionId } from './ajv-keywords/validRestrictionId';
+import Ajv, { ValidateFunction } from "ajv";
+import fs from "fs";
+import path from "path";
+import { equalsRootProperty } from "./ajv-keywords/equalsRootProperty";
+import { validRestrictionId } from "./ajv-keywords/validRestrictionId";
 
 /**
- * Loads the given uri and parses its conts to JSON
+ * Loads the given uri and parses its contents to JSON
  * @param basePath The given base directory name
  * @param uri The given filename
  */
 function loadSchema(basePath: string, uri: string): Promise<any> {
   return fs.promises
     .readFile(path.join(basePath, uri), {
-      encoding: 'utf8',
+      encoding: "utf8",
     })
     .then((data: string) => JSON.parse(data));
 }
@@ -26,7 +26,7 @@ export function createValidateFunction(schemaPath: string) {
   const basePath = path.dirname(schemaPath);
   const schema = JSON.parse(
     fs.readFileSync(schemaPath, {
-      encoding: 'utf8',
+      encoding: "utf8",
     })
   );
 
@@ -36,8 +36,8 @@ export function createValidateFunction(schemaPath: string) {
     allErrors: true,
   });
   validator
-    .addKeyword('equalsRootProperty', equalsRootProperty)
-    .addKeyword('validRestrictionId', validRestrictionId);
+    .addKeyword("equalsRootProperty", equalsRootProperty)
+    .addKeyword("validRestrictionId", validRestrictionId);
   return validator.compileAsync(schema).then((validate) => {
     return validate;
   }) as Promise<ValidateFunction>;
