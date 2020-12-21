@@ -5,8 +5,8 @@ COPY . .
 RUN yarn
 
 # Validation stage
-RUN yarn workspace @corona-dashboard/app validate-json
-RUN yarn workspace @corona-dashboard/app generate-typescript
+# RUN yarn workspace @corona-dashboard/app validate-json
+# RUN yarn workspace @corona-dashboard/app generate-typescript
 
 # Stage 1 - Build NL application
 FROM node:14 as react-build-nl
