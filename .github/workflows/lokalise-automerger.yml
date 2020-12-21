@@ -1,11 +1,14 @@
 name: Lokalise PR validation, auto approve and merge
+defaults:
+  run:
+    working-directory: corona-dashboard-app
 on:
   pull_request:
     branches:
       - master
       - develop
     paths:
-      - 'src/locale/*.json'
+      - 'corona-dashboard-app/src/locale/*.json'
 jobs:
   autocheckandapprove:
     # More handy functions: https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#startswith
@@ -29,13 +32,10 @@ jobs:
           node-version: '14'
       - name: Yarn install
         run: yarn install
-        working-directory: ./corona-dashboard-app
       - name: Validate en.json
         run: yarn validate-single locale en.json
-        working-directory: ./corona-dashboard-app
       - name: Validate nl.json
         run: yarn validate-single locale nl.json
-        working-directory: ./corona-dashboard-app
 
       - name: Add label
         uses: buildsville/add-remove-label@v1
