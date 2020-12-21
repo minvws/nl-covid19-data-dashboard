@@ -16,7 +16,7 @@ export type TooltipSettings = {
   data: string;
 };
 
-type TProps<T1, T2, T3> = {
+type TProps<T1, T3> = {
   // This is the main feature collection that displays the features that will
   // be colored in as part of the choropleth
   featureCollection: FeatureCollection<MultiPolygon, T1>;
@@ -60,10 +60,10 @@ type TProps<T1, T2, T3> = {
  * @param props
  */
 
-export function Choropleth<T1, T2, T3>({
+export function Choropleth<T1, T3>({
   getTooltipContent,
   ...props
-}: TProps<T1, T2, T3>) {
+}: TProps<T1, T3>) {
   const [tooltip, setTooltip] = useState<TooltipSettings>();
   const isTouch = useIsTouchDevice();
 
@@ -96,15 +96,12 @@ export function Choropleth<T1, T2, T3>({
 
 type FitSize = [[number, number], any];
 
-type ChoroplethMapProps<T1, T2, T3> = Omit<
-  TProps<T1, T2, T3>,
-  'getTooltipContent'
-> & {
+type ChoroplethMapProps<T1, T3> = Omit<TProps<T1, T3>, 'getTooltipContent'> & {
   setTooltip: (tooltip: TooltipSettings | undefined) => void;
 };
 
-const ChoroplethMap: <T1, T2, T3>(
-  props: ChoroplethMapProps<T1, T2, T3> & {
+const ChoroplethMap: <T1, T3>(
+  props: ChoroplethMapProps<T1, T3> & {
     hoverRef: React.RefObject<SVGGElement>;
   }
 ) => JSX.Element | null = memo((props) => {
