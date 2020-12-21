@@ -1,9 +1,10 @@
 # Stage 0 - Install dependencies
 FROM node:14 as react-build-base
 WORKDIR /app
-COPY package.json yarn.lock ./
-RUN yarn
+# COPY .package.json ../../yarn.lock ./
+
 COPY . .
+RUN yarn
 
 # Validation stage
 RUN yarn validate-json && yarn generate-typescript
