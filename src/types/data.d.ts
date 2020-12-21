@@ -135,6 +135,7 @@ export interface National {
   hospital_beds_occupied: HospitalBedsOccupied;
   intensive_care_beds_occupied: IntensiveCareBedsOccupied;
   ggd: NationalGgd;
+  ggd_average: NationalGgdAverage;
   nursing_home: NationalNursingHome;
   disability_care: NationalDisabilityCare;
   restrictions: NationalRestrictions;
@@ -352,7 +353,17 @@ export interface NationalGgdValue {
   infected: number;
   infected_percentage: number;
   tested_total: number;
-  week_unix: number;
+  date_of_report_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NationalGgdAverage {
+  values: NationalGgdAverageValue[];
+  last_value: NationalGgdAverageValue;
+}
+export interface NationalGgdAverageValue {
+  infected_average: number;
+  infected_percentage_average?: number;
+  tested_total_average: number;
   week_start_unix: number;
   week_end_unix: number;
   date_of_insertion_unix: number;
@@ -577,6 +588,7 @@ export interface Regionaal {
   sewer_per_installation: RegionalSewerPerInstallation;
   results_per_region: ResultsPerRegion;
   ggd: RegionalGgd;
+  ggd_average: RegionalGgdAverage;
   nursing_home: RegionalNursingHome;
   disability_care: RegionalDisabilityCare;
   restrictions: RegionalRestrictions;
@@ -668,7 +680,18 @@ export interface RegionalGgdValue {
   infected: number;
   infected_percentage: number;
   tested_total: number;
-  week_unix: number;
+  date_of_report_unix: number;
+  date_of_insertion_unix: number;
+  vrcode: string;
+}
+export interface RegionalGgdAverage {
+  values: RegionalGgdAverageValue[];
+  last_value: RegionalGgdAverageValue;
+}
+export interface RegionalGgdAverageValue {
+  infected_average: number;
+  infected_percentage_average: number;
+  tested_total_average: number;
   week_start_unix: number;
   week_end_unix: number;
   date_of_insertion_unix: number;
