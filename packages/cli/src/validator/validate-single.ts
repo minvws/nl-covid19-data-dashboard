@@ -5,7 +5,7 @@ import meow from 'meow';
 import path from 'path';
 import { createValidateFunction } from './create-validate-function';
 import { executeValidations } from './execute-validations';
-import { schemaDirectory } from './get-schema-names';
+import { schemaDirectory } from './config';
 import { getSchemaInformation } from './schema-information';
 
 const schemaInformation = getSchemaInformation();
@@ -16,7 +16,7 @@ const cli = meow(
   `
     Usage
       $ validate-single <schema-name> <json-path>
- 
+
     Examples
       $ validate-single national nl.json
 `
