@@ -1,33 +1,15 @@
 import path from "path";
 
-/**
- * Fully qualified path to the json data files
- */
-export const jsonDirectory = path.join(
+const appBasePath = path.join(
   __dirname,
   "..", // src
   "..", // cli
   "..", // packages
-  "app",
-  "public",
-  "json"
+  "app"
 );
 
-export const localeDirectory = path.join(
-  __dirname,
-  "..", // src
-  "..", // cli
-  "..", // packages
-  "app",
-  "src",
-  "locale"
-);
+export const jsonDirectory = path.join(appBasePath, "public", "json");
 
-export const schemaDirectory = path.join(
-  __dirname,
-  "..", // src
-  "..", // cli
-  "..", // packages
-  "app",
-  "schema"
-);
+export const localeDirectory = path.join(appBasePath, "src", "locale");
+
+export const schemaDirectory = path.join(appBasePath, "schema");
