@@ -24,6 +24,7 @@
     "hospital_beds_occupied",
     "intensive_care_beds_occupied",
     "ggd",
+    "ggd_average",
     "nursing_home",
     "behavior",
     "restrictions",
@@ -102,6 +103,9 @@
     },
     "ggd": {
       "$ref": "ggd.json"
+    },
+    "ggd_average": {
+      "$ref": "ggd_average.json"
     },
     "nursing_home": {
       "$ref": "nursing_home.json"

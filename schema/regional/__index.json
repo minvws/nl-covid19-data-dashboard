@@ -9,6 +9,7 @@
     "code",
     "results_per_region",
     "ggd",
+    "ggd_average",
     "nursing_home",
     "sewer",
     "sewer_per_installation",
@@ -51,6 +52,9 @@
     },
     "ggd": {
       "$ref": "ggd.json"
+    },
+    "ggd_average": {
+      "$ref": "ggd_average.json"
     },
     "nursing_home": {
       "$ref": "nursing_home.json"
