@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "lib": ["esnext"],
+    "target": "es2018",
+    "strict": true,
+    "moduleResolution": "node",
+    "rootDir": ".",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "paths": {
+      "@corona-dashboard/*": ["./*/src"]
+    }
+  }
+}

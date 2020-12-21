@@ -1,7 +1,18 @@
 {
   "private": true,
-  "workspaces": [
-    "corona-dashboard-cms",
-    "corona-dashboard-app"
-  ]
+  "scripts": {
+    "test": "yarn workspaces run test",
+    "clean": "rimraf .build-cache",
+    "build": "yarn workspaces run build",
+    "compile": "yarn workspaces run compile",
+    "lint": "yarn workspaces run lint",
+    "format": "yarn workspaces run format",
+    "cy:open": "yarn workspace @gemini/e2e cy:open",
+    "cy:run": "yarn workspace @gemini/e2e cy:run"
+  },
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  }
 }
