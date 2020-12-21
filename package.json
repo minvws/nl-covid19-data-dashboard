@@ -1,4 +1,5 @@
 {
+  "name": "corona-dashboard",
   "private": true,
   "scripts": {
     "test": "yarn workspaces run test",
