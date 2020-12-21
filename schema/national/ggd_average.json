@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "regional_ggd",
+  "title": "national_ggd_average",
   "type": "object",
   "properties": {
     "values": {
@@ -17,36 +17,35 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "regional_ggd_value",
+      "title": "national_ggd_average_value",
       "type": "object",
       "properties": {
-        "infected": {
+        "infected_average": {
           "type": "integer"
         },
-        "infected_percentage": {
+        "infected_percentage_average": {
           "type": "number"
         },
-        "tested_total": {
+        "tested_total_average": {
           "type": "integer"
         },
-        "date_of_report_unix": {
+        "week_start_unix": {
+          "type": "integer"
+        },
+        "week_end_unix": {
           "type": "integer"
         },
         "date_of_insertion_unix": {
           "type": "integer"
-        },
-        "vrcode": {
-          "type": "string",
-          "equalsRootProperty": "code"
         }
       },
       "required": [
-        "infected",
+        "tested_total_average",
         "infected_percentage",
-        "tested_total",
-        "date_of_report_unix",
-        "date_of_insertion_unix",
-        "vrcode"
+        "infected_average",
+        "week_start_unix",
+        "week_end_unix",
+        "date_of_insertion_unix"
       ],
       "additionalProperties": false
     }
