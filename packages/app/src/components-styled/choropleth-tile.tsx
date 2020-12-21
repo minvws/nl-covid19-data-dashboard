@@ -33,7 +33,7 @@ interface ChoroplethTileProps extends DataProps {
   metadata?: MetadataProps;
 }
 
-export function ChoroplethTile({
+export function ChoroplethTile<T>({
   title,
   description,
   onChartRegionChange,
