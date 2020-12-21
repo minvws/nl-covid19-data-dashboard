@@ -1,0 +1,10 @@
+{
+  "include": [
+    "./node_modules/@sanity/base/types/**/*.ts",
+    "./**/*.ts",
+    "./**/*.tsx"
+  ],
+  "compilerOptions": {
+    "jsx": "react"
+  }
+}

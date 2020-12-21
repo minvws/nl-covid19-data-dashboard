@@ -1,0 +1,29 @@
+{
+  "name": "@corona-dashboard/cms",
+  "private": true,
+  "version": "2.9.0",
+  "description": "",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "sanity start",
+    "test": "sanity check"
+  },
+  "keywords": [
+    "sanity"
+  ],
+  "dependencies": {
+    "@sanity/base": "^2.1.3",
+    "@sanity/components": "^2.1.0",
+    "@sanity/core": "^2.1.2",
+    "@sanity/default-layout": "^2.1.3",
+    "@sanity/default-login": "^2.1.0",
+    "@sanity/desk-tool": "^2.1.3",
+    "@sanity/vision": "^2.1.0",
+    "prop-types": "^15.6",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-icons": "^4.1.0",
+    "sanity-mobile-preview": "^1.0.7"
+  },
+  "devDependencies": {}
+}

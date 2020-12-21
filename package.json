@@ -10,7 +10,8 @@
     "lint": "yarn workspaces run lint",
     "format": "yarn workspaces run format",
     "dev": "yarn workspace @corona-dashboard/app dev",
-    "download": "yarn workspace @corona-dashboard/app download"
+    "download": "yarn workspace @corona-dashboard/app download",
+    "start": "yarn workspace @corona-dashboard/cms start"
   },
   "workspaces": {
     "packages": [
