@@ -13,6 +13,7 @@ import {
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
 import { EscalationMapLegenda } from '..';
+import { QuickLinks } from '~/components-styled/quick-links';
 
 type ActueelData = ISafetyRegionData & { text: TALLLanguages };
 
@@ -44,6 +45,18 @@ const SafetyRegionActueel: FCWithLayout<ActueelData> = (data) => {
           tooltipContent={escalationTooltip(createSelectRegionHandler(router))}
         />
       </ChoroplethTile>
+
+      <QuickLinks
+        header="Bekijk alle cijfers van het dashboard"
+        links={[
+          { href: '/landelijk', text: 'Cijfers van Nederland' },
+          {
+            href: `/veiligheidsregio/${router.query.code}/positief-geteste-mensen`,
+            text: `Cijfers van ${data.safetyRegionName}`,
+          },
+          { href: `/gemeentes`, text: 'Cijfers per gemeente' },
+        ]}
+      ></QuickLinks>
     </MaxWidth>
   );
 };

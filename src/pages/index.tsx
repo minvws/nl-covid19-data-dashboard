@@ -56,6 +56,7 @@ const Home: FCWithLayout<IHomeData> = (data) => {
       </ChoroplethTile>
 
       <QuickLinks
+        header="Bekijk alle cijfers van het dashboard"
         links={[
           { href: '/landelijk', text: 'Cijfers van Nederland' },
           { href: '/veiligheidsregio', text: 'Cijfers per veiligheidsregio' },

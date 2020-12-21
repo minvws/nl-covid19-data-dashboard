@@ -13,12 +13,18 @@ import {
   getMunicipalityPaths,
   IMunicipalityData,
 } from '~/static-props/municipality-data';
+import { QuickLinks } from '~/components-styled/quick-links';
+import { getSafetyRegionForMunicipalityCode } from '~/utils/getSafetyRegionForMunicipalityCode';
 
 type ActueelData = IMunicipalityData & { text: TALLLanguages };
 
 const MunicipalityActueel: FCWithLayout<ActueelData> = (data) => {
   const router = useRouter();
   const { text } = data;
+  const safetyRegionForMunicipality =
+    typeof router.query.code === 'string'
+      ? getSafetyRegionForMunicipalityCode(router.query.code)
+      : undefined;
 
   return (
     <MaxWidth>
@@ -44,6 +50,26 @@ const MunicipalityActueel: FCWithLayout<ActueelData> = (data) => {
           tooltipContent={escalationTooltip(createSelectRegionHandler(router))}
         />
       </ChoroplethTile>
+
+      <QuickLinks
+        header="Bekijk alle cijfers van het dashboard"
+        links={[
+          { href: '/landelijk', text: 'Cijfers van Nederland' },
+          safetyRegionForMunicipality
+            ? {
+                href: `/veiligheidsregio/${safetyRegionForMunicipality.code}/positief-geteste-mensen`,
+                text: `Cijfers van ${safetyRegionForMunicipality.name}`,
+              }
+            : {
+                href: '/veiligheidsregio',
+                text: 'Cijfers per veiligheidsregio',
+              },
+          {
+            href: `/gemeente/${router.query.code}/positief-geteste-mensen`,
+            text: `Cijfers van ${data.municipalityName}`,
+          },
+        ]}
+      ></QuickLinks>
     </MaxWidth>
   );
 };
