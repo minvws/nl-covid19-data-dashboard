@@ -1,9 +1,8 @@
 # Stage 0 - Install dependancies
 FROM node:14 as react-build-base
 WORKDIR /app
-COPY package.json yarn.lock ./
-RUN yarn
 COPY . .
+RUN yarn
 
 # Validation stage
 WORKDIR /app/packages/app/
