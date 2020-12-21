@@ -2,7 +2,7 @@
 const fs = require('fs');
 const globby = require('globby');
 const prettier = require('prettier');
-const gemeenteData = require('../../data/gemeente_veiligheidsregio.json');
+const gemeenteData = require('./src/data/gemeente_veiligheidsregio.json');
 
 // regioData being generated as we can't import an ES export into CommonJS
 const regioData = [...Array(25).keys()].map(
@@ -82,7 +82,7 @@ const generateSitemap = async function (locale) {
 
   const sitemap = `
     <?xml version="1.0" encoding="UTF-8"?>
-    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
+    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
       <url>
