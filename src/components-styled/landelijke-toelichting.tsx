@@ -20,13 +20,11 @@ export function LandelijkeToelichting() {
         <img src="images/toelichting-afbeelding.png" />
       </Box>
       <Box flex="1 1 75%" pl={[null, 4]}>
-        <Box display="flex">
-          <Text mt={0}>{siteText.notificatie.subtitel}</Text>
-          <Text mt={0} mx={2}>
-            {'\u2022'}
-          </Text>
-          <Text mt={0}> {siteText.notificatie.datum}</Text>
-        </Box>
+        <Text mt={0} color="gray">
+          {siteText.notificatie.subtitel}
+          {' \u2022 '}
+          {siteText.notificatie.datum}
+        </Text>
         <Heading level={2}>{siteText.notificatie.titel}</Heading>
         <Text>{siteText.notificatie.bericht}</Text>
         <Box display="flex" flexDirection="row">
