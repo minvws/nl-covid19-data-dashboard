@@ -34,6 +34,8 @@ jobs:
         uses: bahmutov/npm-install@v1
       - name: Lint code
         run: yarn lint
+        working-directory: ./corona-dashboard-app
+
 
   compile:
     runs-on: ubuntu-latest
@@ -45,6 +47,7 @@ jobs:
         uses: bahmutov/npm-install@v1
       - name: Compile code
         run: npx tsc
+        working-directory: ./corona-dashboard-app
 
   test:
     runs-on: ubuntu-latest
@@ -55,3 +58,4 @@ jobs:
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
       - run: yarn test:ci
+        working-directory: ./corona-dashboard-app

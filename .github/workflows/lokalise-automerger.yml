@@ -29,10 +29,13 @@ jobs:
           node-version: '14'
       - name: Yarn install
         run: yarn install
+        working-directory: ./corona-dashboard-app
       - name: Validate en.json
         run: yarn validate-single locale en.json
+        working-directory: ./corona-dashboard-app
       - name: Validate nl.json
         run: yarn validate-single locale nl.json
+        working-directory: ./corona-dashboard-app
 
       - name: Add label
         uses: buildsville/add-remove-label@v1
