@@ -1,13 +1,13 @@
 /* eslint no-console: 0 */
 
-import chalk from "chalk";
-import fs from "fs";
-import meow from "meow";
-import path from "path";
-import { createValidateFunction } from "./create-validate-function";
-import { executeValidations } from "./execute-validations";
-import { schemaDirectory } from "./config";
-import { getSchemaInformation, SchemaInfo } from "./schema-information";
+import chalk from 'chalk';
+import fs from 'fs';
+import meow from 'meow';
+import path from 'path';
+import { createValidateFunction } from './create-validate-function';
+import { executeValidations } from './execute-validations';
+import { schemaDirectory } from './config';
+import { getSchemaInformation, SchemaInfo } from './schema-information';
 
 const cli = meow(
   `
@@ -24,7 +24,7 @@ const cliArgs = cli.input;
 const customJsonPathArg = cliArgs[0];
 
 const customJsonPath = customJsonPathArg
-  ? path.join(__dirname, "..", "..", customJsonPathArg)
+  ? path.join(__dirname, '..', '..', customJsonPathArg)
   : undefined;
 
 const schemaInformation = getSchemaInformation(customJsonPath);
@@ -63,11 +63,11 @@ Promise.all(validationPromises)
     const flatResult = validationResults.flat();
 
     if (flatResult.indexOf(false) > -1) {
-      throw new Error("Validation errors occurred...");
+      throw new Error('Validation errors occurred...');
     }
 
     console.info(
-      chalk.bold.green("\n  All validations finished without errors!  \n")
+      chalk.bold.green('\n  All validations finished without errors!  \n')
     );
   })
   .catch((error) => {
@@ -108,7 +108,7 @@ async function validate(schemaName: string, schemaInfo: SchemaInfo) {
       }
     }
     const contentAsString = fs.readFileSync(jsonFilePath, {
-      encoding: "utf8",
+      encoding: 'utf8',
     });
 
     let data: any = null;

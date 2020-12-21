@@ -1,15 +1,15 @@
-import path from "path";
+import path from 'path';
 
 const appBasePath = path.join(
   __dirname,
-  "..", // src
-  "..", // cli
-  "..", // packages
-  "app"
+  '..', // src
+  '..', // cli
+  '..', // packages
+  'app'
 );
 
-export const jsonDirectory = path.join(appBasePath, "public", "json");
+export const jsonDirectory = path.join(appBasePath, 'public', 'json');
 
-export const localeDirectory = path.join(appBasePath, "src", "locale");
+export const localeDirectory = path.join(appBasePath, 'src', 'locale');
 
-export const schemaDirectory = path.join(appBasePath, "schema");
+export const schemaDirectory = path.join(appBasePath, 'schema');

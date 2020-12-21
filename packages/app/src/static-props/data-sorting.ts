@@ -31,9 +31,9 @@ export function sortRegionalTimeSeriesInDataInPlace(data: Regionaal) {
      * inside values, so we need to process that separately.
      */
     if (propertyName === 'sewer_per_installation') {
-      const nestedSeries = data[propertyName] as SewerTimeSeriesData<
-        Timestamped
-      >;
+      const nestedSeries = data[
+        propertyName
+      ] as SewerTimeSeriesData<Timestamped>;
 
       nestedSeries.values = nestedSeries.values.map((x) => {
         x.values = sortTimeSeriesValues(x.values);
@@ -61,9 +61,9 @@ export function sortMunicipalTimeSeriesInDataInPlace(data: Municipal) {
      * inside values, so we need to process that separately.
      */
     if (propertyName === 'sewer_per_installation') {
-      const nestedSeries = data[propertyName] as SewerTimeSeriesData<
-        Timestamped
-      >;
+      const nestedSeries = data[
+        propertyName
+      ] as SewerTimeSeriesData<Timestamped>;
 
       nestedSeries.values = nestedSeries.values.map((x) => {
         x.values = sortTimeSeriesValues(x.values);

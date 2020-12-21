@@ -1,12 +1,12 @@
 /* eslint no-console: 0 */
-import chalk from "chalk";
-import fs from "fs";
-import meow from "meow";
-import path from "path";
-import { createValidateFunction } from "./create-validate-function";
-import { executeValidations } from "./execute-validations";
-import { schemaDirectory } from "./config";
-import { getSchemaInformation } from "./schema-information";
+import chalk from 'chalk';
+import fs from 'fs';
+import meow from 'meow';
+import path from 'path';
+import { createValidateFunction } from './create-validate-function';
+import { executeValidations } from './execute-validations';
+import { schemaDirectory } from './config';
+import { getSchemaInformation } from './schema-information';
 
 const schemaInformation = getSchemaInformation();
 
@@ -29,7 +29,7 @@ if (cliArgs.length !== 2) {
     `
 Expected two commandline arguments: schema-name and json-filename.
 
-Where schema-name must be one of these values: ${validSchemaNames.join(", ")}
+Where schema-name must be one of these values: ${validSchemaNames.join(', ')}
 and json-filename must be a file associated with that schema.
 
 `
@@ -43,7 +43,7 @@ const jsonFileName = cliArgs[1];
 if (!validSchemaNames.includes(schemaName)) {
   console.error(
     `Invalid schema name argument '${schemaName}', must be one of the following values: ${validSchemaNames.join(
-      ", "
+      ', '
     )}.`
   );
   process.exit(1);
@@ -71,7 +71,7 @@ createValidateFunction(
   const fileName = path.join(basePath, jsonFileName);
   const schemaInfo = schemaInformation[schemaName];
   const contentAsString = fs.readFileSync(fileName, {
-    encoding: "utf8",
+    encoding: 'utf8',
   });
 
   let data: any = null;

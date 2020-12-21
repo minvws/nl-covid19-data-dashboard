@@ -1,19 +1,19 @@
 /* eslint no-console: 0 */
 
-import fs from "fs";
-import path from "path";
-import { compile, JSONSchema } from "json-schema-to-typescript";
-import { createValidateFunction } from "./validator/create-validate-function";
-import { schemaDirectory } from "./validator/config";
+import fs from 'fs';
+import path from 'path';
+import { compile, JSONSchema } from 'json-schema-to-typescript';
+import { createValidateFunction } from './validator/create-validate-function';
+import { schemaDirectory } from './validator/config';
 
 // The directory where the resulting data.d.ts file will be saved
 const outputPath = path.join(
   __dirname,
-  "..", // tools
-  "..", // packages
-  "app",
-  "src",
-  "types"
+  '..', // tools
+  '..', // packages
+  'app',
+  'src',
+  'types'
 );
 
 const bannerComment =
@@ -26,12 +26,12 @@ export function getSchemaNames(): string[] {
   );
 }
 
-const schemaNames = getSchemaNames().filter((name) => name !== "locale");
+const schemaNames = getSchemaNames().filter((name) => name !== 'locale');
 
 const promises = schemaNames.map(generateTypeScriptFromSchema);
 
 Promise.all(promises).then((result) => {
-  saveDefinitionsFile(result.join("\n"));
+  saveDefinitionsFile(result.join('\n'));
 });
 
 /**
@@ -46,7 +46,7 @@ function generateTypeScriptFromSchema(schemaName: string) {
   const generateOptions = {
     cwd: path.join(schemaDirectory, schemaName),
     ignoreMinAndMaxItems: true,
-    bannerComment: "",
+    bannerComment: '',
   };
 
   return createValidateFunction(
@@ -66,9 +66,9 @@ function generateTypeScriptFromSchema(schemaName: string) {
 }
 
 function saveDefinitionsFile(typeDefinitions: string) {
-  const outputFile = path.join(outputPath, "data.d.ts");
+  const outputFile = path.join(outputPath, 'data.d.ts');
   fs.writeFileSync(outputFile, `${bannerComment}${typeDefinitions}`, {
-    encoding: "utf8",
+    encoding: 'utf8',
   });
   console.info(`Written typescript definitions output to file '${outputFile}'`);
 }

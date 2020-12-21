@@ -117,7 +117,7 @@
     "start": "next start",
     "test": "jest --watch",
     "test:ci": "jest --ci",
-    "format": "prettier --write **/*.{js,ts,tsx} *.{js,json,md,yml}",
+    "format": "prettier --write src/**/*.{js,ts,tsx} *.{js,json,md,yml}",
     "lint": "eslint .",
     "type-check": "yarn compile",
     "compile": "tsc --pretty --noEmit",

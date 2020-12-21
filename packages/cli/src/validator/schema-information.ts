@@ -1,6 +1,6 @@
-import fs from "fs";
-import { jsonDirectory, localeDirectory } from "./config";
-import { validatePlaceholders } from "./custom-validations/validate-placeholders";
+import fs from 'fs';
+import { jsonDirectory, localeDirectory } from './config';
+import { validatePlaceholders } from './custom-validations/validate-placeholders';
 
 type CustomValidationFunction = (
   input: Record<string, unknown>
@@ -26,7 +26,7 @@ export function getSchemaInformation(
 
   // This object defines which JSON files should be validated with which schema.
   const schemaInformation: Record<string, SchemaInfo> = {
-    national: { files: ["NL.json"], basePath: jsonPath },
+    national: { files: ['NL.json'], basePath: jsonPath },
     regional: {
       files: filterFilenames(dataJsons, /^VR[0-9]+.json$/),
       basePath: jsonPath,
@@ -35,8 +35,8 @@ export function getSchemaInformation(
       files: filterFilenames(dataJsons, /^GM[0-9]+.json$/),
       basePath: jsonPath,
     },
-    municipalities: { files: ["MUNICIPALITIES.json"], basePath: jsonPath },
-    regions: { files: ["REGIONS.json"], basePath: jsonPath },
+    municipalities: { files: ['MUNICIPALITIES.json'], basePath: jsonPath },
+    regions: { files: ['REGIONS.json'], basePath: jsonPath },
     locale: {
       files: filterFilenames(localeJsons, /[^.]+.json$/),
       basePath: localeDirectory,

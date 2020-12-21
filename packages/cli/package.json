@@ -10,7 +10,7 @@
     "build": "tsc",
     "test": "echo 'No tests available'",
     "test:ci": "echo 'No tests available'",
-    "format": "prettier --write **/*.{js,ts,tsx} *.{js,json,md,yml}",
+    "format": "prettier --write src/**/*.{js,ts,tsx} *.{js,json,md,yml}",
     "lint": "eslint .",
     "type-check": "yarn compile",
     "compile": "tsc --pretty --noEmit",
