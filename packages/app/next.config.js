@@ -1,6 +1,6 @@
 const withPlugins = require('next-compose-plugins');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
-const sitemap = require('./src/tools/sitemap/generate-sitemap.js');
+const sitemap = require('./generate-sitemap.js');
 
 const withTM = require('next-transpile-modules')([
   '@visx/tooltip',

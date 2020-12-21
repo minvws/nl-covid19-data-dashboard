@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { jsonBasePath, localeBasePath } from './base-paths';
+import { jsonDirectory, localeDirectory } from './config';
 import { validatePlaceholders } from './custom-validations/validate-placeholders';
 
 type CustomValidationFunction = (
@@ -16,15 +16,15 @@ export type SchemaInfo = {
 export function getSchemaInformation(
   customJsonPath?: string
 ): Record<string, SchemaInfo> {
-  const jsonPath = customJsonPath ?? jsonBasePath;
+  const jsonPath = customJsonPath ?? jsonDirectory;
 
-  const localeJsons = fs.readdirSync(localeBasePath);
+  const localeJsons = fs.readdirSync(localeDirectory);
 
   const dataJsons = fs.existsSync(jsonPath)
     ? fs.readdirSync(jsonPath).concat(localeJsons)
     : localeJsons;
 
-  // This struct defines which JSON files should be validated with which schema.
+  // This object defines which JSON files should be validated with which schema.
   const schemaInformation: Record<string, SchemaInfo> = {
     national: { files: ['NL.json'], basePath: jsonPath },
     regional: {
@@ -39,7 +39,7 @@ export function getSchemaInformation(
     regions: { files: ['REGIONS.json'], basePath: jsonPath },
     locale: {
       files: filterFilenames(localeJsons, /[^.]+.json$/),
-      basePath: localeBasePath,
+      basePath: localeDirectory,
       customValidations: [validatePlaceholders],
     },
   };

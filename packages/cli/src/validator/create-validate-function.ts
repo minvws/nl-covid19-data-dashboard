@@ -5,7 +5,7 @@ import { equalsRootProperty } from './ajv-keywords/equalsRootProperty';
 import { validRestrictionId } from './ajv-keywords/validRestrictionId';
 
 /**
- * Loads the given uri and parses its conts to JSON
+ * Loads the given uri and parses its contents to JSON
  * @param basePath The given base directory name
  * @param uri The given filename
  */
