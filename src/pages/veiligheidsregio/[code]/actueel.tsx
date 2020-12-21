@@ -14,27 +14,29 @@ import {
 } from '~/static-props/safetyregion-data';
 import { EscalationMapLegenda } from '..';
 import { QuickLinks } from '~/components-styled/quick-links';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 type ActueelData = ISafetyRegionData & { text: TALLLanguages };
 
 const SafetyRegionActueel: FCWithLayout<ActueelData> = (data) => {
   const router = useRouter();
-  const { text } = data;
+  const siteText = data.text;
+  const text = data.text.veiligheidsregio_actueel;
 
   return (
     <MaxWidth>
       <Tile>De actuele situatie in {data.safetyRegionName}</Tile>
       <Tile>Artikelen</Tile>
       <ChoroplethTile
-        title={text.veiligheidsregio_index.selecteer_titel}
+        title={siteText.veiligheidsregio_index.selecteer_titel}
         description={
           <>
             <span
               dangerouslySetInnerHTML={{
-                __html: text.veiligheidsregio_index.selecteer_toelichting,
+                __html: siteText.veiligheidsregio_index.selecteer_toelichting,
               }}
             />
-            <EscalationMapLegenda text={text} />
+            <EscalationMapLegenda text={siteText} />
           </>
         }
       >
@@ -47,14 +49,17 @@ const SafetyRegionActueel: FCWithLayout<ActueelData> = (data) => {
       </ChoroplethTile>
 
       <QuickLinks
-        header="Bekijk alle cijfers van het dashboard"
+        header={text.quick_links.header}
         links={[
-          { href: '/landelijk', text: 'Cijfers van Nederland' },
+          { href: '/landelijk', text: text.quick_links.links.nationaal },
           {
             href: `/veiligheidsregio/${router.query.code}/positief-geteste-mensen`,
-            text: `Cijfers van ${data.safetyRegionName}`,
+            text: replaceVariablesInText(
+              text.quick_links.links.veiligheidsregio,
+              { safetyRegionName: data.safetyRegionName }
+            ),
           },
-          { href: `/gemeentes`, text: 'Cijfers per gemeente' },
+          { href: '/gemeentes', text: text.quick_links.links.gemeente },
         ]}
       ></QuickLinks>
     </MaxWidth>

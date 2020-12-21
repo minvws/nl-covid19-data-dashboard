@@ -26,22 +26,23 @@ interface IHomeData {
 
 const Home: FCWithLayout<IHomeData> = (data) => {
   const router = useRouter();
-  const { text } = data;
+  const siteText = data.text;
+  const text = data.text.nationaal_actueel;
 
   return (
     <MaxWidth>
       <Tile>De actuele situatie in Nederland</Tile>
       <Tile>Artikelen</Tile>
       <ChoroplethTile
-        title={text.veiligheidsregio_index.selecteer_titel}
+        title={siteText.veiligheidsregio_index.selecteer_titel}
         description={
           <>
             <span
               dangerouslySetInnerHTML={{
-                __html: text.veiligheidsregio_index.selecteer_toelichting,
+                __html: siteText.veiligheidsregio_index.selecteer_toelichting,
               }}
             />
-            <EscalationMapLegenda text={text} />
+            <EscalationMapLegenda text={siteText} />
           </>
         }
       >
@@ -56,11 +57,14 @@ const Home: FCWithLayout<IHomeData> = (data) => {
       </ChoroplethTile>
 
       <QuickLinks
-        header="Bekijk alle cijfers van het dashboard"
+        header={text.quick_links.header}
         links={[
-          { href: '/landelijk', text: 'Cijfers van Nederland' },
-          { href: '/veiligheidsregio', text: 'Cijfers per veiligheidsregio' },
-          { href: '/gemeentes', text: 'Cijfers per gemeente' },
+          { href: '/landelijk', text: text.quick_links.links.nationaal },
+          {
+            href: '/veiligheidsregio',
+            text: text.quick_links.links.veiligheidsregio,
+          },
+          { href: '/gemeentes', text: text.quick_links.links.gemeente },
         ]}
       ></QuickLinks>
     </MaxWidth>
