@@ -7,8 +7,7 @@
     "compile": "yarn workspaces run compile",
     "lint": "yarn workspaces run lint",
     "format": "yarn workspaces run format",
-    "cy:open": "yarn workspace @gemini/e2e cy:open",
-    "cy:run": "yarn workspace @gemini/e2e cy:run"
+    "dev": "yarn workspace @corona-dashboard/app dev"
   },
   "workspaces": {
     "packages": [
