@@ -4,12 +4,19 @@ import Chevron from '~/assets/chevron.svg';
 import siteText from '~/locale/index';
 import theme from '~/style/theme';
 import { Link } from '~/utils/link';
+import { useBreakpoints } from '~/utils/useBreakpoints';
 import { Box } from './base';
 import { ContentHeader } from './content-header';
 import { Tile } from './tile';
 import { Text } from './typography';
 
 export function DataSitemap() {
+  const breakpoints = useBreakpoints();
+
+  if (!breakpoints.md) {
+    return null;
+  }
+
   return (
     <Tile>
       <ContentHeader title={siteText.nationaal_actueel.data_sitemap_titel} />
