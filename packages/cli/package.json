@@ -7,7 +7,7 @@
     "ts-node": "^9.1.1"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "echo 'No build available because this package is not meant for direct consumption'",
     "test": "echo 'No tests available'",
     "test:ci": "echo 'No tests available'",
     "format": "prettier --write src/**/*.{js,ts,tsx} *.{js,json,md,yml}",
