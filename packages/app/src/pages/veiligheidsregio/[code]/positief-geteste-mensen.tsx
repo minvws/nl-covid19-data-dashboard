@@ -129,7 +129,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
                       {
                         name: 'percentage',
                         value: `${formatPercentage(
-                          ggdLastValue.infected_percentage_average
+                          ggdLastValue.infected_percentage
                         )}%`,
                       },
                     ]),
@@ -210,7 +210,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
             }}
           >
             <KpiValue
-              absolute={ggdLastValue.tested_total_average}
+              absolute={ggdLastValue.tested_total}
               difference={data.difference.ggd__tested_total}
             />
             <Text>{ggdText.totaal_getest_week_uitleg}</Text>
@@ -223,7 +223,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
             }}
           >
             <KpiValue
-              percentage={ggdLastValue.infected_percentage_average}
+              percentage={ggdLastValue.infected_percentage}
               difference={data.difference.ggd__infected_percentage}
             />
             <Text>{ggdText.positief_getest_week_uitleg}</Text>
@@ -236,11 +236,11 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
                     [
                       {
                         name: 'numerator',
-                        value: formatNumber(ggdLastValue.infected_average),
+                        value: formatNumber(ggdLastValue.infected),
                       },
                       {
                         name: 'denominator',
-                        value: formatNumber(ggdLastValue.tested_total_average),
+                        value: formatNumber(ggdLastValue.tested_total),
                       },
                     ]
                   ),

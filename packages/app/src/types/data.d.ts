@@ -147,8 +147,8 @@ export interface National {
 export interface NationalDifference {
   infected_people_delta_normalized__infected_daily_increase: DifferenceDecimal;
   infected_people_total__infected_daily_total: DifferenceInteger;
-  ggd__tested_total: DifferenceInteger;
-  ggd__infected_percentage: DifferenceDecimal;
+  ggd_average__tested_total_average: DifferenceInteger;
+  ggd_average__infected_percentage_average: DifferenceDecimal;
   reproduction_index_last_known_average__reproduction_index_avg: DifferenceDecimal;
   infectious_people_count_normalized__infectious_avg_normalized: DifferenceDecimal;
   intake_hospital_ma__moving_average_hospital: DifferenceDecimal;
@@ -361,9 +361,9 @@ export interface NationalGgdAverage {
   last_value: NationalGgdAverageValue;
 }
 export interface NationalGgdAverageValue {
-  infected_average: number;
-  infected_percentage_average: number;
-  tested_total_average: number;
+  infected: number;
+  infected_percentage: number;
+  tested_total: number;
   week_start_unix: number;
   week_end_unix: number;
   date_of_insertion_unix: number;
@@ -529,8 +529,8 @@ export interface Regionaal {
 export interface RegionalDifference {
   results_per_region__infected_increase_per_region: DifferenceDecimal;
   results_per_region__total_reported_increase_per_region: DifferenceInteger;
-  ggd__tested_total: DifferenceInteger;
-  ggd__infected_percentage: DifferenceDecimal;
+  ggd_average__tested_total: DifferenceInteger;
+  ggd_average__infected_percentage: DifferenceDecimal;
   results_per_region__hospital_moving_avg_per_region: DifferenceDecimal;
   results_per_region__hospital_total_counts_per_region: DifferenceInteger;
   sewer__average: DifferenceDecimal;
@@ -618,9 +618,9 @@ export interface RegionalGgdAverage {
   last_value: RegionalGgdAverageValue;
 }
 export interface RegionalGgdAverageValue {
-  infected_average: number;
-  infected_percentage_average: number;
-  tested_total_average: number;
+  infected: number;
+  infected_percentage: number;
+  tested_total: number;
   week_start_unix: number;
   week_end_unix: number;
   date_of_insertion_unix: number;

@@ -156,7 +156,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
                       {
                         name: 'percentage',
                         value: `${formatPercentage(
-                          dataGgdLastValue.infected_percentage_average
+                          dataGgdLastValue.infected_percentage
                         )}%`,
                       },
                     ]),
@@ -277,7 +277,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
           >
             <KpiValue
               data-cy="ggd_tested_total"
-              absolute={dataGgdLastValue.tested_total_average}
+              absolute={dataGgdLastValue.tested_total}
               difference={data.difference.ggd__tested_total}
             />
             <Text>{ggdText.totaal_getest_week_uitleg}</Text>
@@ -294,7 +294,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
           >
             <KpiValue
               data-cy="ggd_infected"
-              percentage={dataGgdLastValue.infected_percentage_average}
+              percentage={dataGgdLastValue.infected_percentage}
               difference={data.difference.ggd__infected_percentage}
             />
             <Text>{ggdText.positief_getest_week_uitleg}</Text>
@@ -307,13 +307,11 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
                     [
                       {
                         name: 'numerator',
-                        value: formatNumber(dataGgdLastValue.infected_average),
+                        value: formatNumber(dataGgdLastValue.infected),
                       },
                       {
                         name: 'denominator',
-                        value: formatNumber(
-                          dataGgdLastValue.tested_total_average
-                        ),
+                        value: formatNumber(dataGgdLastValue.tested_total),
                       },
                     ]
                   ),

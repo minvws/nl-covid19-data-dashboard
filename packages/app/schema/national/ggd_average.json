@@ -20,13 +20,13 @@
       "title": "national_ggd_average_value",
       "type": "object",
       "properties": {
-        "infected_average": {
+        "infected": {
           "type": "integer"
         },
-        "infected_percentage_average": {
+        "infected_percentage": {
           "type": "number"
         },
-        "tested_total_average": {
+        "tested_total": {
           "type": "integer"
         },
         "week_start_unix": {
@@ -40,9 +40,9 @@
         }
       },
       "required": [
-        "tested_total_average",
-        "infected_percentage_average",
-        "infected_average",
+        "tested_total",
+        "infected_percentage",
+        "infected",
         "week_start_unix",
         "week_end_unix",
         "date_of_insertion_unix"
