@@ -39,8 +39,6 @@ const NationalRestrictions: FCWithLayout<NationalPageProps> = (props) => {
           title={text.nationaal_maatregelen.titel}
         />
 
-        <Spacer mb={3} />
-
         <KpiSection flexDirection="column">
           <Heading level={3}>{restrictionInfo.extratoelichting.titel}</Heading>
           <Box>

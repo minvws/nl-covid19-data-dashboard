@@ -30,9 +30,9 @@ jobs:
       - name: Yarn install
         run: yarn install
       - name: Validate en.json
-        run: yarn validate-single locale en.json
+        run: yarn workspace @corona-dashboard/app validate-single locale en.json
       - name: Validate nl.json
-        run: yarn validate-single locale nl.json
+        run: yarn workspace @corona-dashboard/app validate-single locale nl.json
 
       - name: Add label
         uses: buildsville/add-remove-label@v1
