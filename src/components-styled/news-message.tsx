@@ -1,39 +1,54 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import ExternalLinkIcon from '~/assets/external-link.svg';
-import siteText from '~/locale';
-import theme from '~/style/theme';
 import { Box } from './base';
 import { ExternalLink } from './external-link';
 import { Tile } from './tile';
 import { Heading, Text } from './typography';
 
-export function LandelijkeToelichting() {
+type NewsMessageProps = {
+  imageSrc: string;
+  title: string;
+  subtitle: string;
+  publishedAt: string;
+  href: string;
+  anchorText: string;
+  message: string;
+};
+
+export function NewsMessage(props: NewsMessageProps) {
+  const {
+    imageSrc,
+    title,
+    subtitle,
+    publishedAt,
+    href,
+    anchorText,
+    message,
+  } = props;
   return (
     <Tile
       css={css({
-        bg: theme.colors.contextualContent,
+        bg: 'contextualContent',
         flexDirection: [null, 'row'],
       })}
     >
       <Box flex="1 1 25%">
-        <img src="images/toelichting-afbeelding.png" />
+        <img src={imageSrc} />
       </Box>
       <Box flex="1 1 75%" pl={[null, 4]}>
         <Text mt={0} color="gray">
-          {siteText.notificatie.subtitel}
-          {' \u2022 '}
-          {siteText.notificatie.datum}
+          {subtitle}
+          {' • '}
+          {publishedAt}
         </Text>
-        <Heading level={2}>{siteText.notificatie.titel}</Heading>
-        <Text>{siteText.notificatie.bericht}</Text>
+        <Heading level={2}>{title}</Heading>
+        <Text>{message}</Text>
         <Box display="flex" flexDirection="row">
           <IconContainer>
             <ExternalLinkIcon />
           </IconContainer>
-          <ExternalLink href={siteText.notificatie.link.href}>
-            {siteText.notificatie.link.text}
-          </ExternalLink>
+          <ExternalLink href={href}>{anchorText}</ExternalLink>
         </Box>
       </Box>
     </Tile>
