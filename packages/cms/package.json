@@ -28,5 +28,7 @@
     "react-icons": "^4.1.0",
     "sanity-mobile-preview": "^1.0.7"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@sanity/cli": "^2.1.0"
+  }
 }
