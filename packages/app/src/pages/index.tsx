@@ -5,11 +5,13 @@ import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { MaxWidth } from '~/components-styled/max-width';
 import { NewsMessage } from '~/components-styled/news-message';
 import { Tile } from '~/components-styled/tile';
+import { TileList } from '~/components-styled/tile-list';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import { DataSitemap } from '~/domain/topical/data-site-map';
+import { Search } from '~/domain/topical/search';
 import siteText from '~/locale';
 import { TALLLanguages } from '~/locale/';
 import { National } from '~/types/data';
@@ -32,42 +34,45 @@ const Home: FCWithLayout<IHomeData> = (data) => {
 
   return (
     <MaxWidth>
-      <Tile>De actuele situatie in Nederland</Tile>
-      <Tile>Artikelen</Tile>
-      <ChoroplethTile
-        title={text.veiligheidsregio_index.selecteer_titel}
-        description={
-          <>
-            <span
-              dangerouslySetInnerHTML={{
-                __html: text.veiligheidsregio_index.selecteer_toelichting,
-              }}
-            />
-            <EscalationMapLegenda text={text} />
-          </>
-        }
-      >
-        <SafetyRegionChoropleth
-          metricName="escalation_levels"
-          metricProperty="escalation_level"
-          onSelect={createSelectRegionHandler(router, 'maatregelen')}
-          tooltipContent={escalationTooltip(
-            createSelectRegionHandler(router, 'maatregelen')
-          )}
+      <TileList>
+        <Search />
+        <Tile>De actuele situatie in Nederland</Tile>
+        <Tile>Artikelen</Tile>
+        <ChoroplethTile
+          title={text.veiligheidsregio_index.selecteer_titel}
+          description={
+            <>
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: text.veiligheidsregio_index.selecteer_toelichting,
+                }}
+              />
+              <EscalationMapLegenda text={text} />
+            </>
+          }
+        >
+          <SafetyRegionChoropleth
+            metricName="escalation_levels"
+            metricProperty="escalation_level"
+            onSelect={createSelectRegionHandler(router, 'maatregelen')}
+            tooltipContent={escalationTooltip(
+              createSelectRegionHandler(router, 'maatregelen')
+            )}
+          />
+        </ChoroplethTile>
+
+        <NewsMessage
+          imageSrc="images/toelichting-afbeelding.png"
+          linkText={siteText.notificatie.link.text}
+          href={siteText.notificatie.link.href}
+          message={siteText.notificatie.bericht}
+          publishedAt={siteText.notificatie.datum}
+          subtitle={siteText.notificatie.subtitel}
+          title={siteText.notificatie.titel}
         />
-      </ChoroplethTile>
 
-      <NewsMessage
-        imageSrc="images/toelichting-afbeelding.png"
-        linkText={siteText.notificatie.link.text}
-        href={siteText.notificatie.link.href}
-        message={siteText.notificatie.bericht}
-        publishedAt={siteText.notificatie.datum}
-        subtitle={siteText.notificatie.subtitel}
-        title={siteText.notificatie.titel}
-      />
-
-      <DataSitemap />
+        <DataSitemap />
+      </TileList>
     </MaxWidth>
   );
 };

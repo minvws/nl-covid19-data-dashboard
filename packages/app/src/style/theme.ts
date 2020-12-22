@@ -1,13 +1,14 @@
+// prettier-ignore
 const space = [
-  0,
-  '0.25rem', // 1 -   4px at default zoom
-  '0.5rem', // 2 -   8px
-  '1rem', // 4 -  16px
-  '2rem', // 5 -  32px
-  '4rem', // 6 -  64px
-  '8rem', // 7 - 128px
-  '16rem', // 8 - 256px
-  '32rem', // 9 - 512px
+  0,          // 0 -   0px
+  '0.25rem',  // 1 -   4px at default zoom
+  '0.5rem',   // 2 -   8px
+  '1rem',     // 3 -  16px
+  '2rem',     // 4 -  32px
+  '4rem',     // 5 -  64px
+  '8rem',     // 6 - 128px
+  '16rem',    // 7 - 256px
+  '32rem',    // 8 - 512px
 ] as const;
 
 /**
@@ -25,13 +26,14 @@ const fonts = {
   code: "source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace",
 } as const;
 
+// prettier-ignore
 const fontSizes = [
-  '0.6875rem', // 11px, used in chart dates labels
-  '0.875rem', // 14px, made up to fill the gap.
-  '1rem',
-  '1.42383rem',
-  '2rem',
-  '2.02729rem',
+  '0.6875rem',  // 11px, used in chart dates labels
+  '0.875rem',   // 14px, made up to fill the gap.
+  '1rem',       // 16px
+  '1.42383rem', // 22.78128px
+  '2rem',       // 32px
+  '2.02729rem', // 32.43664px
 ] as const;
 
 const fontWeights = {
