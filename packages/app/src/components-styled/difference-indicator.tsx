@@ -23,19 +23,18 @@ const DAY_IN_SECONDS = 24 * 60 * 60;
 
 interface DifferenceIndicatorProps {
   value: DifferenceDecimal | DifferenceInteger;
-  isContextSidebar?: boolean;
   isDecimal?: boolean;
-  format?: 'sidebar' | 'tile' | 'inline';
+  context?: 'sidebar' | 'tile' | 'inline';
 }
 
 export function DifferenceIndicator(props: DifferenceIndicatorProps) {
-  const { value, isDecimal, format } = props;
+  const { value, isDecimal, context } = props;
 
-  if (format === 'sidebar') {
+  if (context === 'sidebar') {
     return renderSidebarIndicator(value)
   }
 
-  if (format === 'inline') {
+  if (context === 'inline') {
     return renderInlineIndicator(value, isDecimal);
   }
 

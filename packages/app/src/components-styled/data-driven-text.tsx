@@ -57,7 +57,7 @@ export function DataDrivenText({ data, differenceKey, metricName, metricProperty
     })}
     {' '}
     {replaceComponentsInText(additionalText, {
-      differenceIndicator: <DifferenceIndicator value={differenceValue} format="inline" />,
+      differenceIndicator: <DifferenceIndicator value={differenceValue} context="inline" />,
       oldDate: <RelativeDate dateInSeconds={differenceValue.old_date_of_report_unix} />
     })}
   </p>;
