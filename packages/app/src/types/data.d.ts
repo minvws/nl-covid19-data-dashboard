@@ -147,8 +147,8 @@ export interface National {
 export interface NationalDifference {
   infected_people_delta_normalized__infected_daily_increase: DifferenceDecimal;
   infected_people_total__infected_daily_total: DifferenceInteger;
-  ggd_average__tested_total_average: DifferenceInteger;
-  ggd_average__infected_percentage_average: DifferenceDecimal;
+  ggd_average__tested_total: DifferenceInteger;
+  ggd_average__infected_percentage: DifferenceDecimal;
   reproduction_index_last_known_average__reproduction_index_avg: DifferenceDecimal;
   infectious_people_count_normalized__infectious_avg_normalized: DifferenceDecimal;
   intake_hospital_ma__moving_average_hospital: DifferenceDecimal;

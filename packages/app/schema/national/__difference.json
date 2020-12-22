@@ -9,10 +9,10 @@
     "infected_people_total__infected_daily_total": {
       "$ref": "#/definitions/diff_integer"
     },
-    "ggd_average__tested_total_average": {
+    "ggd_average__tested_total": {
       "$ref": "#/definitions/diff_integer"
     },
-    "ggd_average__infected_percentage_average": {
+    "ggd_average__infected_percentage": {
       "$ref": "#/definitions/diff_decimal"
     },
     "reproduction_index_last_known_average__reproduction_index_avg": {
@@ -55,8 +55,8 @@
   "required": [
     "infected_people_delta_normalized__infected_daily_increase",
     "infected_people_total__infected_daily_total",
-    "ggd_average__tested_total_average",
-    "ggd_average__infected_percentage_average",
+    "ggd_average__tested_total",
+    "ggd_average__infected_percentage",
     "reproduction_index_last_known_average__reproduction_index_avg",
     "infectious_people_count_normalized__infectious_avg_normalized",
     "intake_hospital_ma__moving_average_hospital",

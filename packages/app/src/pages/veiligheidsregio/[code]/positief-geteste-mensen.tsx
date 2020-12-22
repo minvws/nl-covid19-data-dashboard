@@ -211,7 +211,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           >
             <KpiValue
               absolute={ggdLastValue.tested_total}
-              difference={data.difference.ggd__tested_total}
+              difference={data.difference.ggd_average__tested_total}
             />
             <Text>{ggdText.totaal_getest_week_uitleg}</Text>
           </KpiTile>
@@ -224,7 +224,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           >
             <KpiValue
               percentage={ggdLastValue.infected_percentage}
-              difference={data.difference.ggd__infected_percentage}
+              difference={data.difference.ggd_average__infected_percentage}
             />
             <Text>{ggdText.positief_getest_week_uitleg}</Text>
             <Text>

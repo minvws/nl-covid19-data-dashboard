@@ -278,7 +278,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
             <KpiValue
               data-cy="ggd_tested_total"
               absolute={dataGgdLastValue.tested_total}
-              difference={data.difference.ggd__tested_total}
+              difference={data.difference.ggd_average__tested_total}
             />
             <Text>{ggdText.totaal_getest_week_uitleg}</Text>
           </KpiTile>
@@ -295,7 +295,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
             <KpiValue
               data-cy="ggd_infected"
               percentage={dataGgdLastValue.infected_percentage}
-              difference={data.difference.ggd__infected_percentage}
+              difference={data.difference.ggd_average__infected_percentage}
             />
             <Text>{ggdText.positief_getest_week_uitleg}</Text>
             <Text>
