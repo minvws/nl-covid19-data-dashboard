@@ -136,7 +136,7 @@
     "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
     "bron": {
       "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
-      "text": "RIVM"
+      "text": "NICE via RIVM"
     },
     "titel": "Hospital admissions per day",
     "pagina_toelichting": "Number of confirmed COVID-19 cases who are admitted to a hospital per day.\n\nPlease note: as of 17 December 2020, data on hospital admissions is obtained from a new source.",
@@ -163,11 +163,11 @@
       },
       "rivmSource": {
         "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
-        "text": "RIVM"
+        "text": "NICE via RIVM"
       },
       "nice": {
         "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
-        "text": "RIVM",
+        "text": "NICE via RIVM",
         "download": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.csv"
       }
     },
@@ -840,7 +840,7 @@
     "barscale_screenreader_text": "{{value}} hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
     "bron": {
       "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
-      "text": "RIVM"
+      "text": "NICE via RIVM"
     },
     "linechart_description": "",
     "metadata": {
@@ -981,7 +981,7 @@
     "barscale_screenreader_text": "{{value}} hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
     "bron": {
       "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
-      "text": "RIVM"
+      "text": "NICE via RIVM"
     },
     "linechart_description": "",
     "metadata": {
