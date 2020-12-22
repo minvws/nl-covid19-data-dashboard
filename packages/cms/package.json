@@ -7,7 +7,8 @@
   "scripts": {
     "start": "sanity start",
     "test": "sanity check",
-    "compile": "echo 'Placeholder to support yarn compile in repo root, until we use TS'"
+    "compile": "echo 'Placeholder to support yarn compile in repo root, until we use TS'",
+    "lint": "echo '@TODO add eslint'"
   },
   "keywords": [
     "sanity"
