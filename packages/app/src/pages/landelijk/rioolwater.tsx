@@ -106,13 +106,21 @@ const SewerWater: FCWithLayout<NationalPageProps> = ({ data }) => {
             source: text.bronnen.rivm,
           }}
           formatTooltip={(x) => {
-            return `<strong>${formatDateFromSeconds(
-              x.week.start,
-              'short'
-            )} - ${formatDateFromSeconds(
-              x.week.end,
-              'short'
-            )}:</strong> ${formatNumber(x.value)}`;
+            /**
+             * @TODO this stuff with strong doesn't result in actual strong text
+             * but this apparently is also broken in the HighCharts implementation
+             */
+            return (
+              <div>
+                <strong>
+                  {`${formatDateFromSeconds(
+                    x.week.start,
+                    'short'
+                  )} - ${formatDateFromSeconds(x.week.end, 'short')}: `}
+                </strong>
+                {formatNumber(x.value)}
+              </div>
+            );
           }}
           valueAnnotation={siteText.waarde_annotaties.riool_normalized}
         />

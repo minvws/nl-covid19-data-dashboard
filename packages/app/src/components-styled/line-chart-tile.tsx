@@ -1,6 +1,6 @@
 import { ParentSize } from '@visx/responsive';
-import { LineChart } from '~/components/custom-line-chart/index';
-import { LineChartProps, Value } from '~/components/lineChart';
+import { LineChart, LineChartProps } from '~/components-styled/line-chart';
+import { Value } from '~/components-styled/line-chart/helpers';
 import { TimeframeOption } from '~/utils/timeframe';
 import { ChartTileWithTimeframe } from './chart-tile';
 import { MetadataProps } from './metadata';

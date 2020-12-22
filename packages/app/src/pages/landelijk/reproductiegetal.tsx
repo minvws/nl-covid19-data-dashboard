@@ -75,7 +75,9 @@ const ReproductionIndex: FCWithLayout<NationalPageProps> = (props) => {
             metadata={{ source: text.bronnen.rivm }}
             title={text.linechart_titel}
             values={data.reproduction_index.values.map((value) => ({
-              value: value.reproduction_index_avg,
+              value: value.reproduction_index_avg
+                ? value.reproduction_index_avg
+                : undefined,
               date: value.date_of_report_unix,
             }))}
             signaalwaarde={1}

@@ -1,7 +1,7 @@
 import {
   MultipleLineChart,
   MultipleLineChartProps,
-} from '~/components/lineChart/multipleLineChart.tsx';
+} from '~/components/lineChart/multipleLineChart';
 import { TimeframeOption } from '~/utils/timeframe';
 import { ChartTileWithTimeframe } from './chart-tile';
 import { MetadataProps } from './metadata';
