@@ -41,7 +41,7 @@
       },
       "required": [
         "tested_total_average",
-        "infected_percentage",
+        "infected_percentage_average",
         "infected_average",
         "week_start_unix",
         "week_end_unix",

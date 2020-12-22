@@ -362,7 +362,7 @@ export interface NationalGgdAverage {
 }
 export interface NationalGgdAverageValue {
   infected_average: number;
-  infected_percentage_average?: number;
+  infected_percentage_average: number;
   tested_total_average: number;
   week_start_unix: number;
   week_end_unix: number;
