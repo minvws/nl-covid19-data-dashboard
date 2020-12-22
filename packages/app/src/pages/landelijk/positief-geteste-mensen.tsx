@@ -72,7 +72,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
   const router = useRouter();
 
   const dataInfectedDelta = data.infected_people_delta_normalized;
-  const dataGgdLastValue = data.ggd.last_value;
+  const dataGgdLastValue = data.ggd_average.last_value;
   const dataGgdValues = data.ggd.values;
 
   const ageDemographicExampleData = getAgeDemographicExampleData(
@@ -156,7 +156,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
                       {
                         name: 'percentage',
                         value: `${formatPercentage(
-                          dataGgdLastValue.infected_percentage
+                          dataGgdLastValue.infected_percentage_average
                         )}%`,
                       },
                     ]),
@@ -277,7 +277,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
           >
             <KpiValue
               data-cy="ggd_tested_total"
-              absolute={dataGgdLastValue.tested_total}
+              absolute={dataGgdLastValue.tested_total_average}
               difference={data.difference.ggd__tested_total}
             />
             <Text>{ggdText.totaal_getest_week_uitleg}</Text>
@@ -294,7 +294,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
           >
             <KpiValue
               data-cy="ggd_infected"
-              percentage={dataGgdLastValue.infected_percentage}
+              percentage={dataGgdLastValue.infected_percentage_average}
               difference={data.difference.ggd__infected_percentage}
             />
             <Text>{ggdText.positief_getest_week_uitleg}</Text>
@@ -307,11 +307,13 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
                     [
                       {
                         name: 'numerator',
-                        value: formatNumber(dataGgdLastValue.infected),
+                        value: formatNumber(dataGgdLastValue.infected_average),
                       },
                       {
                         name: 'denominator',
-                        value: formatNumber(dataGgdLastValue.tested_total),
+                        value: formatNumber(
+                          dataGgdLastValue.tested_total_average
+                        ),
                       },
                     ]
                   ),
@@ -327,18 +329,11 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
           description={ggdText.linechart_percentage_toelichting}
           values={dataGgdValues.map((value) => ({
             value: value.infected_percentage,
-            date: value.week_unix,
-            week: {
-              start: value.week_start_unix,
-              end: value.week_end_unix,
-            },
+            date: value.date_of_report_unix,
           }))}
           formatTooltip={(x) => {
             return `<strong>${formatDateFromSeconds(
-              x.week.start,
-              'short'
-            )} - ${formatDateFromSeconds(
-              x.week.end,
+              x.date,
               'short'
             )}:</strong> ${formatPercentage(x.value)}%`;
           }}
@@ -357,18 +352,24 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
           values={[
             dataGgdValues.map((value) => ({
               value: value.tested_total,
-              date: value.week_unix,
+              date: value.date_of_report_unix,
+              /**
+               * @TODO MultipleLineChart should not depend on week range
+               */
               week: {
-                start: value.week_start_unix,
-                end: value.week_end_unix,
+                start: 0,
+                end: 0,
               },
             })),
             dataGgdValues.map((value) => ({
               value: value.infected,
-              date: value.week_unix,
+              date: value.date_of_report_unix,
+              /**
+               * @TODO MultipleLineChart should not depend on week range
+               */
               week: {
-                start: value.week_start_unix,
-                end: value.week_end_unix,
+                start: 0,
+                end: 0,
               },
             })),
           ]}
