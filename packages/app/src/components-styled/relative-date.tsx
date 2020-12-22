@@ -11,10 +11,10 @@ import { formatDateFromSeconds } from "~/utils/formatDate";
 
 interface RelativeDateProps {
   dateInSeconds: number;
-  capitalize?: boolean;
+  isCapitalized?: boolean;
 }
 
-export function RelativeDate({ dateInSeconds, capitalize }: RelativeDateProps) {
+export function RelativeDate({ dateInSeconds, isCapitalized }: RelativeDateProps) {
   const isoDate = formatDateFromSeconds(dateInSeconds, 'iso');
   const fullDate = formatDateFromSeconds(dateInSeconds, 'medium');
 
@@ -22,7 +22,7 @@ export function RelativeDate({ dateInSeconds, capitalize }: RelativeDateProps) {
   // Non-JS versions are the day and month.
   let displayDate = formatDateFromSeconds(dateInSeconds, 'relative');
 
-  if (capitalize) {
+  if (isCapitalized) {
     displayDate = displayDate.charAt(0).toUpperCase() + displayDate.substr(1);
   }
 
