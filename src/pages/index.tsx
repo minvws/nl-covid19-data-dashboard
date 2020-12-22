@@ -2,12 +2,13 @@ import fs from 'fs';
 import { useRouter } from 'next/router';
 import path from 'path';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
-import { Tile } from '~/components-styled/tile';
 import { MaxWidth } from '~/components-styled/max-width';
+import { Tile } from '~/components-styled/tile';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
+import { DataSitemap } from '~/domain/topical/data-site-map';
 import { TALLLanguages } from '~/locale/';
 import { National } from '~/types/data';
 import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
@@ -53,6 +54,8 @@ const Home: FCWithLayout<IHomeData> = (data) => {
           )}
         />
       </ChoroplethTile>
+
+      <DataSitemap />
     </MaxWidth>
   );
 };
