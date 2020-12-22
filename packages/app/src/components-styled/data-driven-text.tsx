@@ -52,7 +52,7 @@ export function DataDrivenText({ data, differenceKey, metricName, metricProperty
 
   return <p>
     {replaceComponentsInText(baseText, {
-      newDate: <RelativeDate dateInSeconds={differenceValue.new_date_of_report_unix} />,
+      newDate: <RelativeDate dateInSeconds={differenceValue.new_date_of_report_unix} capitalize />,
       propertyValue: <strong>{formatNumber(propertyValue)}</strong>
     })}
     {' '}

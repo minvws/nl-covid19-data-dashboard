@@ -747,7 +747,8 @@
   },
   "utils": {
     "date_today": "vandaag",
-    "date_yesterday": "gisteren"
+    "date_yesterday": "gisteren",
+    "date_day_before_yesterday": "eergisteren"
   },
   "nationaal_actueel": {
     "data_sitemap_titel": "Alle landelijke cijfers op dit dashboard",

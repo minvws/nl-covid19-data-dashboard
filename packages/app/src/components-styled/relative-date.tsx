@@ -11,15 +11,20 @@ import { formatDateFromSeconds } from "~/utils/formatDate";
 
 interface RelativeDateProps {
   dateInSeconds: number;
+  capitalize?: boolean;
 }
 
-export function RelativeDate({ dateInSeconds }: RelativeDateProps) {
+export function RelativeDate({ dateInSeconds, capitalize }: RelativeDateProps) {
   const isoDate = formatDateFromSeconds(dateInSeconds, 'iso');
   const fullDate = formatDateFromSeconds(dateInSeconds, 'medium');
 
-  // Relative dates only become relative whn ran in the browser with JS on.
+  // Relative dates only become relative when run in the browser with JS on.
   // Non-JS versions are the day and month.
-  const displayDate = formatDateFromSeconds(dateInSeconds, 'relative');
+  let displayDate = formatDateFromSeconds(dateInSeconds, 'relative');
+
+  if (capitalize) {
+    displayDate = displayDate.charAt(0).toUpperCase() + displayDate.substr(1);
+  }
 
   return <Time dateTime={isoDate} title={fullDate}>{displayDate}</Time>
 }

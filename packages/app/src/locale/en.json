@@ -747,7 +747,8 @@
   },
   "utils": {
     "date_today": "today",
-    "date_yesterday": "yesterday"
+    "date_yesterday": "yesterday",
+    "date_day_before_yesterday": "the day before yesterday"
   },
   "nationaal_actueel": {
     "data_sitemap_titel": "",
