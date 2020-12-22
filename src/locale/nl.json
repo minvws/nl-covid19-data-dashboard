@@ -14,7 +14,9 @@
     "link": {
       "text": "Bekijk de toelichting van het RIVM",
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel"
-    }
+    },
+    "subtitel": "Wekelijkse landelijke toelichting",
+    "datum": "12 december 2020"
   },
   "error_titel": {
     "text": "Er is iets misgegaan"

@@ -10,7 +10,7 @@ import { Link } from '~/utils/link';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 
 export function DataSitemap() {
-  const breakpoints = useBreakpoints();
+  const breakpoints = useBreakpoints(true);
 
   if (!breakpoints.md) {
     return null;

@@ -3,12 +3,14 @@ import { useRouter } from 'next/router';
 import path from 'path';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { MaxWidth } from '~/components-styled/max-width';
+import { NewsMessage } from '~/components-styled/news-message';
 import { Tile } from '~/components-styled/tile';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import { DataSitemap } from '~/domain/topical/data-site-map';
+import siteText from '~/locale';
 import { TALLLanguages } from '~/locale/';
 import { National } from '~/types/data';
 import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
@@ -54,6 +56,16 @@ const Home: FCWithLayout<IHomeData> = (data) => {
           )}
         />
       </ChoroplethTile>
+
+      <NewsMessage
+        imageSrc="images/toelichting-afbeelding.png"
+        linkText={siteText.notificatie.link.text}
+        href={siteText.notificatie.link.href}
+        message={siteText.notificatie.bericht}
+        publishedAt={siteText.notificatie.datum}
+        subtitle={siteText.notificatie.subtitel}
+        title={siteText.notificatie.titel}
+      />
 
       <DataSitemap />
     </MaxWidth>
