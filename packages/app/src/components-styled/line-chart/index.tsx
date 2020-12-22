@@ -6,9 +6,9 @@ import { Box } from '~/components-styled/base';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
-import { calculateYMax, Value } from '../lineChart';
+import { calculateYMax, Value } from './helpers';
 import { Chart, defaultMargin } from './chart';
-import { Tooltip } from './chart/tooltip';
+import { Tooltip } from './tooltip';
 import text from '~/locale/index';
 
 const valueToDate = (d: number) => new Date(d * 1000);
@@ -26,9 +26,9 @@ const formatYAxisFunc = (y: number) => y.toString();
  * away from having this new line chart be a drop-in replacement for the old
  * one.
  */
-export type CustomLineChartProps<T> = {
+export type LineChartProps<T> = {
   values: T[];
-  width: number;
+  width?: number;
   height?: number;
   timeframe?: TimeframeOption;
   signaalwaarde?: number;
@@ -48,7 +48,7 @@ export function LineChart<T extends Value>({
   formatYAxis = formatYAxisFunc,
   showFill = true,
   valueAnnotation,
-}: CustomLineChartProps<T>) {
+}: LineChartProps<T>) {
   const {
     tooltipData,
     tooltipLeft = 0,
