@@ -39,7 +39,7 @@ export function DifferenceIndicator(props: DifferenceIndicatorProps) {
     return renderInlineIndicator(value, isDecimal);
   }
 
-  renderTileIndicator(value, isDecimal);
+  return renderTileIndicator(value, isDecimal);
 }
 
 function renderSidebarIndicator(value: DifferenceDecimal | DifferenceInteger) {
@@ -95,7 +95,7 @@ function renderInlineIndicator(
         <IconContainer color="red">
           <IconUp />
         </IconContainer>
-        <Span mr="0.3em">
+        <Span>
           {splitText[0]}
         </Span>
       </Container>
@@ -113,7 +113,7 @@ function renderInlineIndicator(
         <IconContainer color="data.primary">
           <IconDown />
         </IconContainer>
-        <Span mr="0.3em">
+        <Span>
           {splitText[0]}
         </Span>
       </Container>
@@ -203,7 +203,7 @@ const IconContainer = styled(Span)(
   })
 );
 
-const Container = styled.div(
+const Container = styled.span(
   css({
     whiteSpace: 'nowrap',
     display: 'inline-block',

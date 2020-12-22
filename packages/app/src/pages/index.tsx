@@ -39,7 +39,9 @@ const Home: FCWithLayout<IHomeData> = (data) => {
         data={data.data}
         metricName="infected_people_total"
         metricProperty="infected_daily_total"
-        differenceKey="infected_people_total__infected_daily_total" />
+        differenceKey="infected_people_total__infected_daily_total"
+        baseTexts={siteText.nationaal_actueel.data_driven_texts.infected_people_total.base}
+        additionalTexts={siteText.nationaal_actueel.data_driven_texts.infected_people_total.additional} />
       <ChoroplethTile
         title={text.veiligheidsregio_index.selecteer_titel}
         description={

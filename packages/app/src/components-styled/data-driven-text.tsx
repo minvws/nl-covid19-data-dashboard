@@ -1,21 +1,24 @@
-import { numberFormat } from "highcharts";
 import { get } from "lodash";
 import { isDefined } from "ts-is-present";
 import { National } from "~/types/data";
 import { assert } from "~/utils/assert";
-import { formatDateFromMilliseconds } from "~/utils/formatDate";
 import { formatNumber } from "~/utils/formatNumber";
 import { getLastFilledValue } from "~/utils/get-last-filled-value";
+import { getPluralizedText, PluralizationTexts } from "~/utils/get-pluralized-text";
+import { replaceComponentsInText } from "~/utils/replace-components-in-text";
 import { DifferenceIndicator } from "./difference-indicator";
+import { RelativeDate } from "./relative-date";
 
 interface DataDrivenTextProps {
   data: National;
   differenceKey: string;
   metricName: string;
   metricProperty: string;
+  baseTexts: PluralizationTexts;
+  additionalTexts: PluralizationTexts;
 }
 
-export function DataDrivenText({ data, differenceKey, metricName, metricProperty }: DataDrivenTextProps) {
+export function DataDrivenText({ data, differenceKey, metricName, metricProperty, baseTexts, additionalTexts }: DataDrivenTextProps) {
 
   const lastValue =
     metricProperty === 'hospital_moving_avg_per_region'
@@ -44,8 +47,18 @@ export function DataDrivenText({ data, differenceKey, metricName, metricProperty
     `Missing value for difference:${differenceKey}`
   );
 
+  const baseText = getPluralizedText(baseTexts, propertyValue);
+  const additionalText = getPluralizedText(additionalTexts, differenceValue.difference);
+
   return <p>
-    {formatDateFromMilliseconds(differenceValue.new_date_of_report_unix, 'relative')} zijn <strong>{formatNumber(propertyValue)}</strong> nieuwe positieve tests gemeld.
-    Dat zijn er <DifferenceIndicator value={differenceValue} format="inline" /> dan {formatDateFromMilliseconds(differenceValue.old_date_of_report_unix, 'relative')}
-  </p>
+    {replaceComponentsInText(baseText, {
+      newDate: <RelativeDate dateInSeconds={differenceValue.new_date_of_report_unix} />,
+      propertyValue: <strong>{formatNumber(propertyValue)}</strong>
+    })}
+    {' '}
+    {replaceComponentsInText(additionalText, {
+      differenceIndicator: <DifferenceIndicator value={differenceValue} format="inline" />,
+      oldDate: <RelativeDate dateInSeconds={differenceValue.old_date_of_report_unix} />
+    })}
+  </p>;
 }
