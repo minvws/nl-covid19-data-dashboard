@@ -18,10 +18,10 @@ import { MunicipalityChoropleth } from '~/components/choropleth/municipality-cho
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
-import { FCWithLayout } from '~/domain/layout/layout';
-import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { SEOHead } from '~/components/seoHead';
 import regionCodeToMunicipalCodeLookup from '~/data/regionCodeToMunicipalCodeLookup';
+import { FCWithLayout } from '~/domain/layout/layout';
+import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import {
   getSafetyRegionPaths,
   getSafetyRegionStaticProps,
@@ -263,13 +263,21 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
             },
           }))}
           formatTooltip={(x) => {
-            return `<strong>${formatDateFromSeconds(
-              x.week.start,
-              'short'
-            )} - ${formatDateFromSeconds(
-              x.week.end,
-              'short'
-            )}:</strong> ${formatPercentage(x.value)}%`;
+            /**
+             * @TODO this stuff with strong doesn't result in actual strong text
+             * but this apparently is also broken in the HighCharts implementation
+             */
+            return (
+              <div>
+                <strong>
+                  {`${formatDateFromSeconds(
+                    x.week.start,
+                    'short'
+                  )} - ${formatDateFromSeconds(x.week.end, 'short')}: `}
+                </strong>
+                {`${formatPercentage(x.value)}%`}
+              </div>
+            );
           }}
           formatYAxis={(y: number) => {
             return `${formatPercentage(y)}%`;
