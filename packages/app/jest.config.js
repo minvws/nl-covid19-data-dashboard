@@ -1,22 +1,10 @@
 module.exports = {
-  preset: 'ts-jest',
-  collectCoverageFrom: [
-    '**/*.{js,jsx,ts,tsx}',
-    '!**/*.d.ts',
-    '!**/node_modules/**',
+  roots: ['<rootDir>/src'],
+  testMatch: [
+    '**/__tests__/**/*.+(ts|tsx|js)',
+    '**/?(*.)+(spec|test).+(ts|tsx|js)',
   ],
-  setupFilesAfterEnv: ['<rootDir>/setupTests.js'],
-  testPathIgnorePatterns: ['/node_modules/', '/.next/', '/out', '/cypress'],
   transform: {
-    '^.+\\.(js|jsx|ts|tsx)$': '<rootDir>/node_modules/babel-jest',
-  },
-  transformIgnorePatterns: [
-    '/node_modules/',
-    '^.+\\.module\\.(css|sass|scss)$',
-  ],
-  moduleNameMapper: {
-    '\\.svg': '<rootDir>/__mocks__/svgrMock.js',
-    '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
-    '^~/(.*)$': '<rootDir>/src/$1',
+    '^.+\\.(ts|tsx)$': 'ts-jest',
   },
 };
