@@ -15,7 +15,7 @@ WORKDIR /app
 COPY --from=react-build-base /app/node_modules /app/node_modules
 COPY --from=react-build-base /app/packages/app/ /app/packages/app/node_modules
 COPY . .
-RUN yarn build
+RUN yarn workspace @corona-dashboard/app build
 
 # Stage 2 - Build EN application
 FROM node:14 as react-build-en
@@ -24,7 +24,7 @@ WORKDIR /app
 COPY --from=react-build-base /app/node_modules /app/node_modules
 COPY --from=react-build-base /app/packages/app/ /app/packages/app/node_modules
 COPY . .
-RUN yarn build
+RUN yarn workspace @corona-dashboard/app build
 
 # Stage 3 - the production environment
 FROM bitnami/nginx:latest

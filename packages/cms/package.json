@@ -7,6 +7,7 @@
   "scripts": {
     "start": "sanity start",
     "test": "sanity check",
+    "test:ci": "yarn run test",
     "compile": "echo 'Placeholder to support yarn compile in repo root, until we use TS'",
     "lint": "echo '@TODO add eslint'"
   },
@@ -27,5 +28,7 @@
     "react-icons": "^4.1.0",
     "sanity-mobile-preview": "^1.0.7"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@sanity/cli": "^2.1.0"
+  }
 }
