@@ -263,6 +263,10 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
             },
           }))}
           formatTooltip={(x) => {
+            /**
+             * @TODO this stuff with strong doesn't result in actual strong text
+             * but this apparently is also broken in the HighCharts implementation
+             */
             return (
               <div>
                 <strong>
