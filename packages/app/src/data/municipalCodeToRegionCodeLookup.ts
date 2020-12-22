@@ -1,3 +1,6 @@
+// This lookup was generated with data downloaded from this location:
+// https://opendata.cbs.nl/statline/?dl=32C14#/CBS/nl/dataset/84929NED/table?ts=1608646266160
+
 const municipalCodeToRegionCodeLookup: Record<string, string> = {
   GM1680: 'VR03',
   GM0358: 'VR13',
@@ -16,7 +19,6 @@ const municipalCodeToRegionCodeLookup: Record<string, string> = {
   GM0362: 'VR13',
   GM0363: 'VR13',
   GM0200: 'VR06',
-  GM0003: 'VR01',
   GM0202: 'VR07',
   GM0106: 'VR03',
   GM0743: 'VR22',
@@ -66,7 +68,6 @@ const municipalCodeToRegionCodeLookup: Record<string, string> = {
   GM0148: 'VR04',
   GM1891: 'VR02',
   GM0503: 'VR15',
-  GM0010: 'VR01',
   GM0762: 'VR22',
   GM0150: 'VR04',
   GM0384: 'VR13',
@@ -84,6 +85,7 @@ const municipalCodeToRegionCodeLookup: Record<string, string> = {
   GM0385: 'VR11',
   GM0228: 'VR07',
   GM0317: 'VR09',
+  GM1979: 'VR01',
   GM0770: 'VR22',
   GM1903: 'VR24',
   GM0772: 'VR22',
@@ -111,7 +113,6 @@ const municipalCodeToRegionCodeLookup: Record<string, string> = {
   GM0014: 'VR01',
   GM1729: 'VR24',
   GM0158: 'VR05',
-  GM0788: 'VR21',
   GM0392: 'VR12',
   GM0394: 'VR12',
   GM1655: 'VR20',
@@ -178,7 +179,6 @@ const municipalCodeToRegionCodeLookup: Record<string, string> = {
   GM0262: 'VR06',
   GM0809: 'VR20',
   GM0331: 'VR09',
-  GM0024: 'VR01',
   GM0168: 'VR05',
   GM0263: 'VR08',
   GM1641: 'VR23',

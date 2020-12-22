@@ -1,3 +1,6 @@
+// This lookup was generated with data downloaded from this location:
+// https://opendata.cbs.nl/statline/?dl=32C14#/CBS/nl/dataset/84929NED/table?ts=1608646266160
+
 const regionCodeToMunicipalCodeLookup: Record<string, string[]> = {
   VR03: [
     'GM1680',
@@ -197,20 +200,6 @@ const regionCodeToMunicipalCodeLookup: Record<string, string[]> = {
     'GM0351',
     'GM0355',
   ],
-  VR01: [
-    'GM0003',
-    'GM0010',
-    'GM0014',
-    'GM1966',
-    'GM0024',
-    'GM1952',
-    'GM1895',
-    'GM0765',
-    'GM0037',
-    'GM0047',
-    'GM1969',
-    'GM1950',
-  ],
   VR07: [
     'GM0202',
     'GM0203',
@@ -319,7 +308,6 @@ const regionCodeToMunicipalCodeLookup: Record<string, string[]> = {
     'GM0757',
     'GM1684',
     'GM0786',
-    'GM0788',
     'GM0796',
     'GM0797',
     'GM1685',
@@ -381,6 +369,18 @@ const regionCodeToMunicipalCodeLookup: Record<string, string[]> = {
     'GM0629',
     'GM1783',
     'GM0637',
+  ],
+  VR01: [
+    'GM1979',
+    'GM0014',
+    'GM1966',
+    'GM1952',
+    'GM1895',
+    'GM0765',
+    'GM0037',
+    'GM0047',
+    'GM1969',
+    'GM1950',
   ],
 };
 
