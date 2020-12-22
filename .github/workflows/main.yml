@@ -44,7 +44,7 @@ jobs:
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
       - name: Compile code
-        run: npx tsc
+        run: yarn compile
 
   test:
     runs-on: ubuntu-latest
