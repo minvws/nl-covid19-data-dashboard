@@ -9,8 +9,8 @@
     "title": "Last updated"
   },
   "notificatie": {
-    "titel": "Hospital and IC admissions rose sharply.",
-    "bericht": "The increasing number of COVID-19 positives during the past two weeks was followed by an increase in the number of hospital and IC admissions last week. In the past week the number of newly admitted patients to the hospital with COVID-19 increased by 20% compared to the previous week. Also, in intensive care units an increase in the number of new COVID-19 patients has been reported (+ 24%), compared to a week earlier. In nursing homes and residential care centers was a significant increase (+ 61%) in the number of Corona infected locations.",
+    "titel": "All signals on red",
+    "bericht": "The spread of the coronavirus (SARS-COV-2) in the Netherlands continues. In the week of 16 to 22 December, 82,340 newly tested COVID-19 positives were reported. The percentage of positive test results increased to 13.6% in the week of 14 to 20 December. Again, more people with COVID-19 were admitted to the hospital and ICU during the past week. In nursing homes and residential care centers the number of coronavirus infected locations also increased. The reproduction number was 1.25 (lower limit: 1.22 – upper limit 1.27) on 4 December.",
     "link": {
       "text": "View the full message from the RIVM",
       "href": "https://www.rivm.nl/en/novel-coronavirus-covid-19/current-information"
@@ -1113,7 +1113,7 @@
   },
   "laatste_ontwikkelingen": {
     "title": "Latest developments",
-    "menu_subtitle": "Hospital and IC admissions rose sharply.",
+    "menu_subtitle": "All signals on red",
     "alle_cijfers_header": "Want to see all data?",
     "alle_cijfers_link": "View all"
   },
