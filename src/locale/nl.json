@@ -9,8 +9,8 @@
     "title": "Laatst bijgewerkt"
   },
   "notificatie": {
-    "titel": "Ziekenhuis- en IC opnames fors gestegen. ",
-    "bericht": "Het toenemende aantal meldingen van mensen met een positieve corona testuitslag gedurende de afgelopen twee weken werd in de afgelopen week gevolgd door een stijging in het aantal ziekenhuis- en IC opnames. Het aantal nieuwe patiënten dat met COVID-19 in de afgelopen week in het ziekenhuis is opgenomen is in vergelijking met de week daarvoor met 20% gestegen. Ook op de intensive care afdelingen is er een flinke toename (+ 24%),  van het aantal nieuwe COVID-19 patiënten gemeld, in vergelijking met een week eerder. Ook bij verpleeghuizen en woonzorgcentra is een aanzienlijke toename van 61%  in het aantal locaties met besmettingen te zien.",
+    "titel": "Alle signalen op rood",
+    "bericht": "De opmars van het coronavirus (SARS-COV-2) in Nederland gaat onverminderd door. In de week van 16 tot en met 22 december is het aantal meldingen van mensen met een positieve corona testuitslag toegenomen tot 82.340 meldingen. Het percentage mensen dat positief testte steeg naar 13,6%. In de week van 14 tot 20 december werden weer meer mensen met COVID-19 in het ziekenhuis en op de IC opgenomen. Ook bij verpleeghuizen en woonzorgcentra is het aantal locaties met besmettingen verder toegenomen. Het reproductiegetal was op 4 december 1,25 (ondergrens 1,22 – 1,27 bovengrens).",
     "link": {
       "text": "Bekijk de toelichting van het RIVM",
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel"
@@ -1113,7 +1113,7 @@
   },
   "laatste_ontwikkelingen": {
     "title": "Laatste ontwikkelingen",
-    "menu_subtitle": "Ziekenhuis- en IC opnames fors gestegen",
+    "menu_subtitle": "Alle signalen op rood",
     "alle_cijfers_header": "Benieuwd naar alle cijfers?",
     "alle_cijfers_link": "Bekijk alle cijfers"
   },
