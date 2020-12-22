@@ -106,13 +106,17 @@ const SewerWater: FCWithLayout<NationalPageProps> = ({ data }) => {
             source: text.bronnen.rivm,
           }}
           formatTooltip={(x) => {
-            return `<strong>${formatDateFromSeconds(
-              x.week.start,
-              'short'
-            )} - ${formatDateFromSeconds(
-              x.week.end,
-              'short'
-            )}:</strong> ${formatNumber(x.value)}`;
+            return (
+              <div>
+                <strong>
+                  {`${formatDateFromSeconds(
+                    x.week.start,
+                    'short'
+                  )} - ${formatDateFromSeconds(x.week.end, 'short')}: `}
+                </strong>
+                {formatNumber(x.value)}
+              </div>
+            );
           }}
           valueAnnotation={siteText.waarde_annotaties.riool_normalized}
         />
