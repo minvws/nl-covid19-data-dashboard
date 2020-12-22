@@ -57,7 +57,7 @@ const Home: FCWithLayout<IHomeData> = (data) => {
 
       <NewsMessage
         imageSrc="images/toelichting-afbeelding.png"
-        anchorText={siteText.notificatie.link.text}
+        linkText={siteText.notificatie.link.text}
         href={siteText.notificatie.link.href}
         message={siteText.notificatie.bericht}
         publishedAt={siteText.notificatie.datum}

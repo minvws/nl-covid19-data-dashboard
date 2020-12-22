@@ -12,7 +12,7 @@ type NewsMessageProps = {
   subtitle: string;
   publishedAt: string;
   href: string;
-  anchorText: string;
+  linkText: string;
   message: string;
 };
 
@@ -23,7 +23,7 @@ export function NewsMessage(props: NewsMessageProps) {
     subtitle,
     publishedAt,
     href,
-    anchorText,
+    linkText,
     message,
   } = props;
   return (
@@ -48,7 +48,7 @@ export function NewsMessage(props: NewsMessageProps) {
           <IconContainer>
             <ExternalLinkIcon />
           </IconContainer>
-          <ExternalLink href={href}>{anchorText}</ExternalLink>
+          <ExternalLink href={href}>{linkText}</ExternalLink>
         </Box>
       </Box>
     </Tile>
