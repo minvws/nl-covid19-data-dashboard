@@ -749,6 +749,10 @@
     "date_today": "vandaag",
     "date_yesterday": "gisteren"
   },
+  "nationaal_actueel": {
+    "data_sitemap_titel": "Alle landelijke cijfers op dit dashboard",
+    "data_sitemap_toelichting": "Op het corona dashboard worden de cijfers van meerdere onderwerpen gepresenteerd. In verloop van tijd zullen er nieuwe onderwerpen worden toegevoegd of bestaande ondeerwerpen worden uitgebreid. Alle onderwerpen zijn onderverdeelt in categorieen. Dit is een overzicht van de categorieen en hun onderwerpen."
+  },
   "regionaal_index": {
     "your_safety_region": "Veiligheidsregio",
     "select_safety_region_municipality": "Selecteer een veiligheidsregio of gemeente",

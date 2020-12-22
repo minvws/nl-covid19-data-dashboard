@@ -749,6 +749,10 @@
     "date_today": "today",
     "date_yesterday": "yesterday"
   },
+  "nationaal_actueel": {
+    "data_sitemap_titel": "",
+    "data_sitemap_toelichting": ""
+  },
   "regionaal_index": {
     "your_safety_region": "Safety region",
     "select_safety_region_municipality": "Select a safety region or municipality",
