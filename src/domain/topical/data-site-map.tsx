@@ -1,13 +1,13 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import Chevron from '~/assets/chevron.svg';
+import { Box } from '~/components-styled/base';
+import { ContentHeader } from '~/components-styled/content-header';
+import { Tile } from '~/components-styled/tile';
+import { InlineText, Text } from '~/components-styled/typography';
 import siteText from '~/locale/index';
 import { Link } from '~/utils/link';
 import { useBreakpoints } from '~/utils/useBreakpoints';
-import { Box } from '../../components-styled/base';
-import { ContentHeader } from '../../components-styled/content-header';
-import { Tile } from '../../components-styled/tile';
-import { InlineText, Text } from '../../components-styled/typography';
 
 export function DataSitemap() {
   const breakpoints = useBreakpoints();
