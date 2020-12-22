@@ -2,13 +2,12 @@ import css from '@styled-system/css';
 import styled from 'styled-components';
 import Chevron from '~/assets/chevron.svg';
 import siteText from '~/locale/index';
-import theme from '~/style/theme';
 import { Link } from '~/utils/link';
 import { useBreakpoints } from '~/utils/useBreakpoints';
-import { Box } from './base';
-import { ContentHeader } from './content-header';
-import { Tile } from './tile';
-import { Text } from './typography';
+import { Box } from '../../components-styled/base';
+import { ContentHeader } from '../../components-styled/content-header';
+import { Tile } from '../../components-styled/tile';
+import { InlineText, Text } from '../../components-styled/typography';
 
 export function DataSitemap() {
   const breakpoints = useBreakpoints();
@@ -28,7 +27,7 @@ export function DataSitemap() {
             flexDirection="row"
             justifyContent="space-between"
           >
-            <Box>
+            <Box spacing={2}>
               <StyledHeader>
                 {siteText.nationaal_layout.headings.besmettingen}
               </StyledHeader>
@@ -49,7 +48,7 @@ export function DataSitemap() {
                 text={siteText.sterfte.titel_sidebar}
               />
             </Box>
-            <Box>
+            <Box spacing={2}>
               <StyledHeader>
                 {siteText.nationaal_layout.headings.ziekenhuizen}
               </StyledHeader>
@@ -62,7 +61,7 @@ export function DataSitemap() {
                 text={siteText.ic_opnames_per_dag.titel_sidebar}
               />
             </Box>
-            <Box>
+            <Box spacing={2}>
               <StyledHeader>
                 {siteText.nationaal_layout.headings.kwetsbare_groepen}
               </StyledHeader>
@@ -81,7 +80,7 @@ export function DataSitemap() {
                 text={siteText.thuiswonende_ouderen.titel_sidebar}
               />
             </Box>
-            <Box>
+            <Box spacing={2}>
               <StyledHeader>
                 {siteText.nationaal_layout.headings.vroege_signalen}
               </StyledHeader>
@@ -94,7 +93,7 @@ export function DataSitemap() {
                 text={siteText.verdenkingen_huisartsen.titel_sidebar}
               />
             </Box>
-            <Box>
+            <Box spacing={2}>
               <StyledHeader>
                 {siteText.nationaal_layout.headings.gedrag}
               </StyledHeader>
@@ -120,17 +119,16 @@ function DataSiteMapLink(props: DataSiteMapLinkProps) {
   return (
     <Link href={href}>
       <StyledLink>
-        {text} <Chevron width="12px" height="12px" color={theme.colors.blue} />
+        {text} <Chevron width="12px" height="12px" />
       </StyledLink>
     </Link>
   );
 }
 
-const StyledHeader = styled(Text).attrs({ as: 'span' })(
+const StyledHeader = styled(InlineText)(
   css({
     fontWeight: 'bold',
     display: 'block',
-    pb: 2,
   })
 );
 
@@ -138,6 +136,5 @@ const StyledLink = styled.a(
   css({
     fontWeight: 'bold',
     display: 'block',
-    pb: 2,
   })
 );
