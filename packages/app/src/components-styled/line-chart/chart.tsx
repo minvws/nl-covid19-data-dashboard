@@ -4,13 +4,16 @@ import { Group } from '@visx/group';
 import { scaleLinear, scaleTime } from '@visx/scale';
 import { Line } from '@visx/shape';
 import { Text } from '@visx/text';
-import { bisector } from 'd3-array';
+import { bisectLeft } from 'd3-array';
 import { memo, useCallback } from 'react';
 import { colors } from '~/style/theme';
-import { DataPoint, Trends, TrendType } from './trends';
+import { TrendValue } from './helpers';
+import { Trend, TrendType } from './trend';
 
 const NUM_TICKS = 3;
+
 export const defaultMargin = { top: 10, right: 20, bottom: 30, left: 30 };
+
 const defaultColors = {
   main: colors.data.primary,
   axis: '#C4C4C4',
@@ -26,7 +29,7 @@ type Benchmark = {
 type ChartProps = {
   benchmark?: Benchmark;
   isHovered: boolean;
-  trend: DataPoint[];
+  trend: TrendValue[];
   type: TrendType;
   onHover: (
     event: React.TouchEvent<SVGRectElement> | React.MouseEvent<SVGRectElement>,
@@ -34,7 +37,7 @@ type ChartProps = {
     xPosition?: number,
     yPosition?: number
   ) => void;
-  xDomain: [any, any];
+  xDomain: [number, number];
   yDomain: number[];
   width: number;
   height: number;
@@ -74,19 +77,28 @@ export const Chart = memo(function Chart({
   });
 
   const bisect = useCallback(
-    (trend: DataPoint[], mx: number) => {
+    (trend: TrendValue[], xPosition: number) => {
       if (trend.length === 1) return trend[0];
 
-      const bisect = bisector((d: DataPoint) => d.date).left;
-      const date: Date = x.invert(mx - margin.left);
-      const index: number = bisect(trend, date, 1);
+      const dateInSeconds = x.invert(xPosition - margin.left).getSeconds();
 
-      const d0: DataPoint = trend[index - 1];
-      const d1: DataPoint = trend[index];
+      // const bisectorFn = bisector((d: TrendValue) => d.date_unix).left;
 
-      return +date - +d0.date > +d1.date - +date ? d1 : d0;
+      // const index: number = bisectorFn(trend, date, 1);
+      const index = bisectLeft(
+        trend.map((x) => x.date_unix),
+        dateInSeconds,
+        1
+      );
+
+      const d0 = trend[index - 1];
+      const d1 = trend[index];
+
+      return dateInSeconds - d0.date_unix > d1.date_unix - dateInSeconds
+        ? d1
+        : d0;
     },
-    [x, margin]
+    [margin, x]
   );
 
   return (
@@ -150,7 +162,7 @@ export const Chart = memo(function Chart({
           </Group>
         )}
 
-        <Trends
+        <Trend
           trend={trend}
           type={type}
           height={bounded.height}

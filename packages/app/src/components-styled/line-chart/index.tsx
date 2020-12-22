@@ -5,29 +5,28 @@ import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
 import { formatDateFromSeconds } from '~/utils/formatDate';
-import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
-import { calculateYMax, Value } from './helpers';
+import { TimeframeOption } from '~/utils/timeframe';
+import { calculateYMax, getTrendData, TrendValue, Value } from './helpers';
 import { Chart, defaultMargin } from './chart';
 import { Tooltip } from './tooltip';
 import text from '~/locale/index';
 
-const valueToDate = (d: number) => new Date(d * 1000);
 const dateToValue = (d: Date) => d.valueOf() / 1000;
 const formatXAxis = (date: Date) =>
   formatDateFromSeconds(dateToValue(date), 'axis');
 const formatYAxisFunc = (y: number) => y.toString();
 
-/**
- * @TODO In order to support rendering multiple trends we will have to make the
- * type of `Value` more flexible/generic, for example by allowing it to hold an
- * array of numbers instead of a single number.
- *
- * To do this (improve on the original chart interface) we'll first need to move
- * away from having this new line chart be a drop-in replacement for the old
- * one.
- */
 export type LineChartProps<T> = {
   values: T[];
+  linesConfig: [
+    {
+      valueKey: keyof T;
+      /**
+       * For later when implementing multi line charts
+       */
+      color?: string;
+    }
+  ];
   width?: number;
   height?: number;
   timeframe?: TimeframeOption;
@@ -40,6 +39,7 @@ export type LineChartProps<T> = {
 
 export function LineChart<T extends Value>({
   values,
+  linesConfig,
   width = 500,
   height = 250,
   timeframe = '5weeks',
@@ -55,31 +55,34 @@ export function LineChart<T extends Value>({
     tooltipTop = 0,
     showTooltip,
     hideTooltip,
-  } = useTooltip<T>();
+  } = useTooltip<T & TrendValue>();
+
+  const valueKeys = linesConfig.map((x) => x.valueKey) as string[];
 
   const benchmark = signaalwaarde
     ? { value: signaalwaarde, label: text.common.barScale.signaalwaarde }
     : undefined;
 
-  const graphData = useMemo(() => {
-    const filteredData = getFilteredValues(
-      values,
-      timeframe,
-      (value) => value.date * 1000
-    );
-    return filteredData.map((point) => ({
-      ...point,
-      date: valueToDate(point.date),
-    }));
-  }, [values, timeframe]);
+  const trendData = useMemo(
+    () => getTrendData(values, valueKeys[0], timeframe),
+    [values, valueKeys, timeframe]
+  );
 
-  const xDomain = useMemo(() => extent(graphData.map((d) => d.date)), [
-    graphData,
-  ]);
-  const yDomain = useMemo(() => [0, calculateYMax(graphData, signaalwaarde)], [
-    graphData,
-    signaalwaarde,
-  ]);
+  const xDomain = useMemo(() => {
+    const domain = extent<number>(trendData.map((d) => d.date_unix));
+    /**
+     * Is this really needed to make xDomain strongly typed? Why would we want
+     * to deal with [undefined, undefined] ?
+     */
+    return isDefined(domain[0])
+      ? (domain as [number, number])
+      : ([0, 0] as [number, number]);
+  }, [trendData]);
+
+  const yDomain = useMemo(
+    () => [0, calculateYMax(values, valueKeys, signaalwaarde)],
+    [values, valueKeys, signaalwaarde]
+  );
 
   const handleHover = useCallback(
     (
@@ -111,7 +114,7 @@ export function LineChart<T extends Value>({
 
       <Box position="relative">
         <Chart
-          trend={graphData}
+          trend={trendData}
           type={showFill ? 'area' : 'line'}
           height={height}
           width={width}
@@ -131,9 +134,9 @@ export function LineChart<T extends Value>({
             y={tooltipTop + defaultMargin.top}
           >
             {formatTooltip
-              ? formatTooltip(tooltipData)
-              : `${formatDateFromSeconds(tooltipData.date)}: ${
-                  tooltipData.value
+              ? formatTooltip(tooltipData as T)
+              : `${formatDateFromSeconds(tooltipData.date_unix)}: ${
+                  tooltipData[valueKeys[0]]
                 }`}
           </Tooltip>
         )}

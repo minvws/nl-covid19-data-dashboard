@@ -1,36 +1,32 @@
 import { localPoint } from '@visx/event';
 import { AreaClosed, Bar, LinePath } from '@visx/shape';
+// import { ScaleLinear, ScaleTime } from 'd3-scale';
 import { useCallback } from 'react';
-
-export type DataPoint = {
-  date: Date;
-  value?: number;
-};
+import { TrendValue } from './helpers';
 
 export type TrendType = 'line' | 'area';
 
-export type TrendsProps = {
+export type TrendProps = {
   isHovered: boolean;
-  trend: DataPoint[];
+  trend: TrendValue[];
   type: TrendType;
+  // x: ScaleTime<number, number>;
+  // y: ScaleLinear<number, number>;
   x: any;
   y: any;
   onHover: (
     event: React.TouchEvent<SVGRectElement> | React.MouseEvent<SVGRectElement>,
-    data?: DataPoint,
+    data?: TrendValue,
     xPosition?: number,
     yPosition?: number
   ) => void;
   height: number;
   width: number;
-  bisect: (trend: DataPoint[], mx: number) => DataPoint;
+  bisect: (trend: TrendValue[], mx: number) => TrendValue;
   color: string;
 };
 
-/**
- * @TODO update to accept series prop which accepts an array of trends to enable plotting of multiple lines
- */
-export function Trends({
+export function Trend({
   trend,
   type = 'line',
   color,
@@ -41,7 +37,7 @@ export function Trends({
   width,
   isHovered,
   bisect,
-}: TrendsProps) {
+}: TrendProps) {
   const handlePointerMove = useCallback(
     (
       event: React.TouchEvent<SVGRectElement> | React.MouseEvent<SVGRectElement>
@@ -51,7 +47,7 @@ export function Trends({
       const { x: xPosition } = localPoint(event) || { x: 0 };
       const pointData = bisect(trend, xPosition);
 
-      onHover(event, pointData, x(pointData.date), y(pointData.value));
+      onHover(event, pointData, x(pointData.date_unix), y(pointData.value));
     },
     [onHover, y, x, trend, bisect]
   );
@@ -61,8 +57,8 @@ export function Trends({
       {type === 'line' && (
         <LinePath
           data={trend}
-          x={(d: DataPoint) => x(d.date)}
-          y={(d: DataPoint) => y(d.value)}
+          x={(d) => x(d.date_unix)}
+          y={(d) => y(d.value)}
           stroke={color}
           strokeWidth={isHovered ? 3 : 2}
         />
@@ -72,16 +68,16 @@ export function Trends({
         <>
           <AreaClosed
             data={trend}
-            x={(d: DataPoint) => x(d.date)}
-            y={(d: DataPoint) => y(d.value)}
+            x={(d) => x(d.date_unix)}
+            y={(d) => y(d.value)}
             fill={color}
             fillOpacity={0.05}
             yScale={y}
           />
           <LinePath
             data={trend}
-            x={(d: DataPoint) => x(d.date)}
-            y={(d: DataPoint) => y(d.value)}
+            x={(d) => x(d.date_unix)}
+            y={(d) => y(d.value)}
             stroke={color}
             strokeWidth={isHovered ? 3 : 2}
           />
