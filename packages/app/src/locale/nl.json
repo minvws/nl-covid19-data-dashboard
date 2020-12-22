@@ -136,7 +136,7 @@
     "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
     "bron": {
       "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
-      "text": "RIVM"
+      "text": "NICE via RIVM"
     },
     "titel": "Ziekenhuisopnames per dag",
     "pagina_toelichting": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen.\n\nLet op: Sinds 17 december wordt een nieuwe bron gebruikt voor de ziekenhuisopnames.",
@@ -163,11 +163,11 @@
       },
       "rivmSource": {
         "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
-        "text": "RIVM"
+        "text": "NICE via RIVM"
       },
       "nice": {
         "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
-        "text": "RIVM",
+        "text": "NICE via RIVM",
         "download": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.csv"
       }
     },
@@ -840,7 +840,7 @@
     "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "bron": {
       "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
-      "text": "RIVM"
+      "text": "NICE via RIVM"
     },
     "linechart_description": "",
     "metadata": {
@@ -982,7 +982,7 @@
     "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "bron": {
       "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
-      "text": "RIVM"
+      "text": "NICE via RIVM"
     },
     "linechart_description": "",
     "metadata": {
