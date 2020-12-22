@@ -25,14 +25,21 @@ interface DifferenceIndicatorProps {
   value: DifferenceDecimal | DifferenceInteger;
   isContextSidebar?: boolean;
   isDecimal?: boolean;
+  format?: 'sidebar' | 'tile' | 'inline';
 }
 
 export function DifferenceIndicator(props: DifferenceIndicatorProps) {
-  const { isContextSidebar, value, isDecimal } = props;
+  const { value, isDecimal, format } = props;
 
-  return isContextSidebar
-    ? renderSidebarIndicator(value)
-    : renderTileIndicator(value, isDecimal);
+  if (format === 'sidebar') {
+    return renderSidebarIndicator(value)
+  }
+
+  if (format === 'inline') {
+    return renderInlineIndicator(value, isDecimal);
+  }
+
+  renderTileIndicator(value, isDecimal);
 }
 
 function renderSidebarIndicator(value: DifferenceDecimal | DifferenceInteger) {
@@ -63,6 +70,64 @@ function renderSidebarIndicator(value: DifferenceDecimal | DifferenceInteger) {
       <IconContainer color="lightGray">
         <IconGelijk />
       </IconContainer>
+    </Container>
+  );
+}
+
+function renderInlineIndicator(
+  value: DifferenceDecimal | DifferenceInteger,
+  isDecimal?: boolean
+) {
+  const { difference } = value;
+
+  const differenceFormattedString = isDecimal
+    ? formatPercentage(Math.abs(difference))
+    : formatNumber(Math.abs(difference));
+
+  if (difference > 0) {
+    const splitText = text.toename.split(' ');
+
+    return (
+      <Container>
+        <Span fontWeight="bold">
+          {differenceFormattedString}
+        </Span>
+        <IconContainer color="red">
+          <IconUp />
+        </IconContainer>
+        <Span mr="0.3em">
+          {splitText[0]}
+        </Span>
+      </Container>
+    );
+  }
+
+  if (difference < 0) {
+    const splitText = text.afname.split(' ');
+
+    return (
+      <Container>
+        <Span fontWeight="bold">
+          {differenceFormattedString}
+        </Span>
+        <IconContainer color="data.primary">
+          <IconDown />
+        </IconContainer>
+        <Span mr="0.3em">
+          {splitText[0]}
+        </Span>
+      </Container>
+    );
+  }
+
+  return (
+    <Container>
+      <IconContainer color="lightGray">
+        <IconGelijk />
+      </IconContainer>
+      <Span>
+        {text.gelijk}
+      </Span>
     </Container>
   );
 }
