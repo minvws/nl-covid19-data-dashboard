@@ -123,7 +123,7 @@ export const colors = {
 const radii = [0, 5, 10];
 
 const shadows = {
-  tile: `0 -1px 1px 0 ${colors.shadow}, 0 1px 1px 0 ${colors.shadow}, 0 2px 2px 0 ${colors.shadow}, 0 4px 4px 0 ${colors.shadow}, 0 6px 6px 0 ${colors.shadow}`,
+  tile: ' 0px 4px 8px rgba(0, 0, 0, 0.1)',
 } as const;
 
 const theme = {
