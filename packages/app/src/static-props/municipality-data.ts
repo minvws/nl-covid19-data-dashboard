@@ -1,12 +1,10 @@
 import fs from 'fs';
 import path from 'path';
-
-import { Municipal } from '~/types/data.d';
-
-import municipalities from '~/data/gemeente_veiligheidsregio.json';
-import { sortMunicipalTimeSeriesInDataInPlace } from './data-sorting';
+import municipalities from '~/data/municipalSearchData';
 import { TALLLanguages } from '~/locale';
+import { Municipal } from '~/types/data.d';
 import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
+import { sortMunicipalTimeSeriesInDataInPlace } from './data-sorting';
 
 export interface IMunicipalityData {
   data: Municipal;
