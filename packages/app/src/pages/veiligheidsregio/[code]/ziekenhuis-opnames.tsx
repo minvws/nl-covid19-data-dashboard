@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-import { isFilled } from 'ts-is-present';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { ContentHeader } from '~/components-styled/content-header';
@@ -12,10 +11,10 @@ import { municipalThresholds } from '~/components/choropleth/municipal-threshold
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createMunicipalHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/municipal/create-municipal-hospital-admissions-tooltip';
-import { FCWithLayout } from '~/domain/layout/layout';
-import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { SEOHead } from '~/components/seoHead';
 import regionCodeToMunicipalCodeLookup from '~/data/regionCodeToMunicipalCodeLookup';
+import { FCWithLayout } from '~/domain/layout/layout';
+import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import siteText from '~/locale/index';
 import {
   getSafetyRegionPaths,
@@ -119,14 +118,12 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
             metadata={{ source: text.bronnen.rivm }}
             title={text.linechart_titel}
             description={text.linechart_description}
-            values={data.results_per_region.values
-              .filter((x) => isFilled(x.hospital_moving_avg_per_region))
-              .map((value) => ({
-                value: value.hospital_moving_avg_per_region
-                  ? value.hospital_moving_avg_per_region
-                  : undefined,
-                date: value.date_of_report_unix,
-              }))}
+            values={data.results_per_region.values}
+            linesConfig={[
+              {
+                metricProperty: 'hospital_moving_avg_per_region',
+              },
+            ]}
           />
         )}
       </TileList>

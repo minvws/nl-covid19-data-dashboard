@@ -1,20 +1,19 @@
 import { useRouter } from 'next/router';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
-import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
+import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createMunicipalHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/municipal/create-municipal-hospital-admissions-tooltip';
+import { SEOHead } from '~/components/seoHead';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getMunicipalityLayout } from '~/domain/layout/municipality-layout';
-import { LineChart } from '~/components-styled/line-chart';
-import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import {
   getMunicipalityData,
@@ -107,21 +106,19 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
         </ChoroplethTile>
 
         {lastValue && (
-          <ChartTileWithTimeframe
+          <LineChartTile
             title={text.linechart_titel}
             description={text.linechart_description}
             metadata={{ source: text.bronnen.rivm }}
-          >
-            {(timeframe) => (
-              <LineChart
-                timeframe={timeframe}
-                values={data.hospital_admissions.values.map((value) => ({
-                  value: value.moving_average_hospital,
-                  date: value.date_of_report_unix,
-                }))}
-              />
-            )}
-          </ChartTileWithTimeframe>
+            timeframeOptions={['all', '5weeks', 'week']}
+            timeframeInitialValue="5weeks"
+            values={data.hospital_admissions.values}
+            linesConfig={[
+              {
+                metricProperty: 'moving_average_hospital',
+              },
+            ]}
+          />
         )}
       </TileList>
     </>

@@ -9,7 +9,7 @@ import text from '~/locale/index';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { TimeframeOption } from '~/utils/timeframe';
-import { Chart, defaultMargin } from './chart';
+import { Chart, defaultMargin } from './components/chart';
 import {
   calculateYMax,
   getTrendData,
@@ -19,7 +19,7 @@ import {
   Value,
   WeeklyValue,
 } from './helpers';
-import { Tooltip } from './tooltip';
+import { Tooltip } from './components/tooltip';
 
 const dateToValue = (d: Date) => d.valueOf() / 1000;
 const formatXAxis = (date: Date) =>
@@ -71,11 +71,18 @@ export function LineChart<T extends Value>({
     hideTooltip,
   } = useTooltip<T & TrendValue>();
 
-  const metricProperties = linesConfig.map((x) => x.metricProperty) as string[];
+  const metricProperties = useMemo(
+    () => linesConfig.map((x) => x.metricProperty) as string[],
+    [linesConfig]
+  );
 
-  const benchmark = signaalwaarde
-    ? { value: signaalwaarde, label: text.common.barScale.signaalwaarde }
-    : undefined;
+  const benchmark = useMemo(
+    () =>
+      signaalwaarde
+        ? { value: signaalwaarde, label: text.common.barScale.signaalwaarde }
+        : undefined,
+    [signaalwaarde]
+  );
 
   const trendData = useMemo(
     () => getTrendData(values, metricProperties[0], timeframe),
@@ -154,7 +161,7 @@ export function LineChart<T extends Value>({
           >
             {formatTooltip
               ? formatTooltip(tooltipData)
-              : formatStandardTooltip(
+              : formatDefaultTooltip(
                   (tooltipData as unknown) as Value & TrendValue,
                   isPercentage
                 )}
@@ -165,7 +172,7 @@ export function LineChart<T extends Value>({
   );
 }
 
-function formatStandardTooltip<T extends Value & TrendValue>(
+function formatDefaultTooltip<T extends Value & TrendValue>(
   value: T,
   isPercentage?: boolean
 ) {
@@ -192,6 +199,37 @@ function formatStandardTooltip<T extends Value & TrendValue>(
         ? `${formatPercentage(value.__value)}%`
         : formatNumber(value.__value)
     }`;
+  }
+
+  if (isDailyValue([value])) {
+    const date = formatDateFromSeconds(
+      (value as TrendValue).__date.getSeconds()
+    );
+    const valueStr = isPercentage
+      ? `${formatPercentage(value.__value)}%`
+      : formatNumber(value.__value);
+
+    return `${date}: ${valueStr}`;
+  }
+
+  if (isWeeklyValue([value])) {
+    /**
+     * Type narrowing should make the cast to WeeklyValue unnecessary but
+     * somehow it doesn't seem to work here.
+     */
+    const dateFrom = formatDateFromSeconds(
+      (value as WeeklyValue).week_start_unix,
+      'short'
+    );
+    const dateTo = formatDateFromSeconds(
+      (value as WeeklyValue).week_end_unix,
+      'short'
+    );
+    const valueStr = isPercentage
+      ? `${formatPercentage(value.__value)}%`
+      : formatNumber(value.__value);
+
+    return `${dateFrom} - ${dateTo}: ${valueStr}`;
   }
 
   throw new Error(

@@ -92,10 +92,12 @@ const DeceasedRegionalPage: FCWithLayout<ISafetyRegionData> = (props) => {
           description={
             text.section_deceased_rivm.line_chart_covid_daily_description
           }
-          values={dataRivm.values.map((value) => ({
-            value: value.covid_daily,
-            date: value.date_of_report_unix,
-          }))}
+          values={dataRivm.values}
+          linesConfig={[
+            {
+              metricProperty: 'covid_daily',
+            },
+          ]}
           metadata={{ source: text.section_deceased_rivm.bronnen.rivm }}
         />
 
