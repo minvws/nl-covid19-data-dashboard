@@ -84,8 +84,6 @@ const Home: FCWithLayout<IHomeData> = (data) => {
         />
       </ChoroplethTile>
 
-<<<<<<< HEAD
-=======
       <NewsMessage
         imageSrc="images/toelichting-afbeelding.png"
         linkText={notificatie.link.text}
@@ -96,7 +94,6 @@ const Home: FCWithLayout<IHomeData> = (data) => {
         title={notificatie.titel}
       />
 
->>>>>>> 79e228991ca96fe8404c6a3c154f624f6968b9d2
       <DataSitemap />
 
       <QuickLinks
