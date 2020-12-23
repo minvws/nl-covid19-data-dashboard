@@ -5,11 +5,14 @@ import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { MaxWidth } from '~/components-styled/max-width';
 import { NewsMessage } from '~/components-styled/news-message';
 import { Tile } from '~/components-styled/tile';
+import { Text } from '~/components-styled/typography';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import { DataSitemap } from '~/domain/topical/data-site-map';
+import { TopicalRow } from '~/domain/topical/topical-row';
+import { TopicalTile } from '~/domain/topical/topical-tile';
 import siteText from '~/locale';
 import { TALLLanguages } from '~/locale/';
 import { National } from '~/types/data';
@@ -34,6 +37,28 @@ const Home: FCWithLayout<IHomeData> = (data) => {
     <MaxWidth>
       <Tile>De actuele situatie in Nederland</Tile>
       <Tile>Artikelen</Tile>
+
+      <TopicalRow>
+        <TopicalTile>
+          <Text as="h3">Aantal positieve testen</Text>
+        </TopicalTile>
+        <TopicalTile>
+          <Text as="h3">Ziekenhuisopnames</Text>
+        </TopicalTile>
+        <TopicalTile>
+          <Text as="h3">Risiconiveau &amp; maatregelen</Text>
+        </TopicalTile>
+      </TopicalRow>
+
+      <NewsMessage
+        imageSrc="images/toelichting-afbeelding.png"
+        linkText={siteText.notificatie.link.text}
+        href={siteText.notificatie.link.href}
+        message={siteText.notificatie.bericht}
+        publishedAt={siteText.notificatie.datum}
+        subtitle={siteText.notificatie.subtitel}
+        title={siteText.notificatie.titel}
+      />
       <ChoroplethTile
         title={text.veiligheidsregio_index.selecteer_titel}
         description={
@@ -56,16 +81,6 @@ const Home: FCWithLayout<IHomeData> = (data) => {
           )}
         />
       </ChoroplethTile>
-
-      <NewsMessage
-        imageSrc="images/toelichting-afbeelding.png"
-        linkText={siteText.notificatie.link.text}
-        href={siteText.notificatie.link.href}
-        message={siteText.notificatie.bericht}
-        publishedAt={siteText.notificatie.datum}
-        subtitle={siteText.notificatie.subtitel}
-        title={siteText.notificatie.titel}
-      />
 
       <DataSitemap />
     </MaxWidth>
