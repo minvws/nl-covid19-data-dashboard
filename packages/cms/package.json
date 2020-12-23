@@ -6,6 +6,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "start": "sanity start",
+    "build": "sanity build",
     "test": "sanity check",
     "test:ci": "yarn run test",
     "compile": "echo 'Placeholder to support yarn compile in repo root, until we use TS'",
