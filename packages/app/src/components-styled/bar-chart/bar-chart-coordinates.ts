@@ -85,14 +85,16 @@ function generateBarChartCoordinates(
   const getBarSize = createPoint(valueScale, getValue);
   const getBarOffset = createPoint(labelScale, getLabel);
 
-  function getTooltipCoordinates(value: BarChartValue, event: any) {
+  function getTooltipCoordinates(value: BarChartValue) {
     const labelScaleStep = labelScale.step();
+    const paddingBottom = (labelScaleStep * labelScale.paddingOuter() / 2);
 
-    // Calculate the tooltip centered to the bar
-    const top = (getBarOffset(value) ?? 0) + ((labelScaleStep * labelScale.paddingOuter() / 2)) - labelScaleStep;
+    // Set the offset first, than calculate the padding on the bottom side and substract it with 1 full step to align
+    // Since the tooltip is placed right under the bar the padding calculation needs to be done
+    const top = getBarOffset(value) + paddingBottom - labelScaleStep;
 
     // Calculate if the tooltip is inside of the window size and if event target exists 
-    const left = event && event.target.getBoundingClientRect().right + BAR_CHART_TOOLTIP_MAX_WIDTH <= window.innerWidth 
+    const left = barsWidth - getBarSize(value) >= BAR_CHART_TOOLTIP_MAX_WIDTH 
       ? (getBarSize(value) ?? 0) + spacing.left + spacingLabel
       : spacing.left + spacingLabel
     

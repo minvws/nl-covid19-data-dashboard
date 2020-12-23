@@ -148,7 +148,6 @@ const StyledHoverBar = styled(Bar)(
     fill: 'transparent',
     // transparent stroke is to capture mouse movements in between bars for the tooltip
     stroke: 'transparent',
-    strokeWidth: 12,
 
     [`${StyledGroup}:hover &`]: {
       fill: 'lightBlue',
