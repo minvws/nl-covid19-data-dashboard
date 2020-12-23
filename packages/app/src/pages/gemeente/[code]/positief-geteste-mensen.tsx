@@ -100,10 +100,12 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
           <LineChartTile
             title={text.linechart_titel}
             description={text.linechart_toelichting}
-            values={data.positive_tested_people.values.map((value) => ({
-              value: value.infected_daily_increase,
-              date: value.date_of_report_unix,
-            }))}
+            values={data.positive_tested_people.values}
+            linesConfig={[
+              {
+                metricProperty: 'infected_daily_increase',
+              },
+            ]}
             metadata={{
               source: text.bronnen.rivm,
             }}

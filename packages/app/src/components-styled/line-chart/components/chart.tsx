@@ -1,16 +1,19 @@
-import { AxisBottom, AxisLeft } from '@visx/axis';
+import { AxisBottom, AxisLeft, TickFormatter } from '@visx/axis';
 import { GridRows } from '@visx/grid';
 import { Group } from '@visx/group';
 import { scaleLinear, scaleTime } from '@visx/scale';
 import { Line } from '@visx/shape';
 import { Text } from '@visx/text';
-import { bisector } from 'd3-array';
+import { bisectLeft } from 'd3-array';
 import { memo, useCallback } from 'react';
 import { colors } from '~/style/theme';
-import { DataPoint, Trends, TrendType } from './trends';
+import { TrendValue } from '../helpers';
+import { Trend, TrendType } from './trend';
 
 const NUM_TICKS = 3;
+
 export const defaultMargin = { top: 10, right: 20, bottom: 30, left: 30 };
+
 const defaultColors = {
   main: colors.data.primary,
   axis: '#C4C4C4',
@@ -26,7 +29,7 @@ type Benchmark = {
 type ChartProps = {
   benchmark?: Benchmark;
   isHovered: boolean;
-  trend: DataPoint[];
+  trend: TrendValue[];
   type: TrendType;
   onHover: (
     event: React.TouchEvent<SVGRectElement> | React.MouseEvent<SVGRectElement>,
@@ -34,14 +37,16 @@ type ChartProps = {
     xPosition?: number,
     yPosition?: number
   ) => void;
-  xDomain: [any, any];
+  xDomain: [Date, Date];
   yDomain: number[];
   width: number;
   height: number;
   margin?: { top: number; right: number; bottom: number; left: number };
-  formatXAxis: (x: any) => string;
-  formatYAxis: (y: any) => string;
+  formatXAxis: TickFormatter<Date>;
+  formatYAxis: TickFormatter<number>;
 };
+
+type AnyTickFormatter = (value: any) => string;
 
 export const Chart = memo(function Chart({
   trend,
@@ -62,46 +67,50 @@ export const Chart = memo(function Chart({
     height: height - margin.top - margin.bottom,
   };
 
-  const x = scaleTime({
+  const xScale = scaleTime({
     domain: xDomain,
     range: [0, bounded.width],
   });
 
-  const y = scaleLinear({
+  const yScale = scaleLinear({
     domain: yDomain,
     range: [bounded.height, 0],
     nice: NUM_TICKS,
   });
 
   const bisect = useCallback(
-    (trend: DataPoint[], mx: number) => {
+    (trend: TrendValue[], xPosition: number) => {
       if (trend.length === 1) return trend[0];
 
-      const bisect = bisector((d: DataPoint) => d.date).left;
-      const date: Date = x.invert(mx - margin.left);
-      const index: number = bisect(trend, date, 1);
+      const date = xScale.invert(xPosition - margin.left);
 
-      const d0: DataPoint = trend[index - 1];
-      const d1: DataPoint = trend[index];
+      const index = bisectLeft(
+        trend.map((x) => x.__date),
+        date,
+        1
+      );
 
-      return +date - +d0.date > +d1.date - +date ? d1 : d0;
+      const d0 = trend[index - 1];
+      const d1 = trend[index];
+
+      return +date - +d0.__date > +d1.__date - +date ? d1 : d0;
     },
-    [x, margin]
+    [margin, xScale]
   );
 
   return (
-    <svg width={width} height={height}>
+    <svg width={width} height={height} role="img">
       <Group left={margin.left} top={margin.top}>
         <GridRows
-          scale={y}
+          scale={yScale}
           width={bounded.width}
           numTicks={NUM_TICKS}
           stroke={defaultColors.axis}
         />
         <AxisBottom
-          scale={x}
-          tickValues={x.domain()}
-          tickFormat={formatXAxis}
+          scale={xScale}
+          tickValues={xScale.domain()}
+          tickFormat={formatXAxis as AnyTickFormatter}
           top={bounded.height}
           stroke={defaultColors.axis}
           tickLabelProps={() => ({
@@ -112,12 +121,12 @@ export const Chart = memo(function Chart({
           hideTicks
         />
         <AxisLeft
-          scale={y}
+          scale={yScale}
           numTicks={4}
           hideTicks
           hideAxisLine
           stroke={defaultColors.axis}
-          tickFormat={formatYAxis}
+          tickFormat={formatYAxis as AnyTickFormatter}
           tickLabelProps={() => ({
             fill: defaultColors.axisLabels,
             fontSize: 12,
@@ -128,7 +137,7 @@ export const Chart = memo(function Chart({
         />
 
         {benchmark && (
-          <Group top={y(benchmark.value)}>
+          <Group top={yScale(benchmark.value)}>
             <Text fontSize="14px" dy={-8} fill={defaultColors.benchmark}>
               {benchmark.value}
             </Text>
@@ -150,13 +159,13 @@ export const Chart = memo(function Chart({
           </Group>
         )}
 
-        <Trends
+        <Trend
           trend={trend}
           type={type}
           height={bounded.height}
           width={bounded.width}
-          x={x}
-          y={y}
+          xScale={xScale}
+          yScale={yScale}
           color={defaultColors.main}
           onHover={onHover}
           isHovered={isHovered}

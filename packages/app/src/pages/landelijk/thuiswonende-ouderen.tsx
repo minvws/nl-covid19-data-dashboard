@@ -86,10 +86,12 @@ const ElderlyAtHomeNationalPage: FCWithLayout<NationalPageProps> = (props) => {
         <LineChartTile
           timeframeOptions={['all', '5weeks']}
           title={text.section_positive_tested.line_chart_daily_title}
-          values={elderlyAtHomeData.values.map((value) => ({
-            value: value.positive_tested_daily,
-            date: value.date_of_report_unix,
-          }))}
+          values={elderlyAtHomeData.values}
+          linesConfig={[
+            {
+              metricProperty: 'positive_tested_daily',
+            },
+          ]}
           metadata={{ source: text.section_positive_tested.bronnen.rivm }}
         />
 
@@ -151,10 +153,12 @@ const ElderlyAtHomeNationalPage: FCWithLayout<NationalPageProps> = (props) => {
         <LineChartTile
           timeframeOptions={['all', '5weeks']}
           title={text.section_deceased.line_chart_daily_title}
-          values={elderlyAtHomeData.values.map((value) => ({
-            value: value.deceased_daily,
-            date: value.date_of_report_unix,
-          }))}
+          values={elderlyAtHomeData.values}
+          linesConfig={[
+            {
+              metricProperty: 'deceased_daily',
+            },
+          ]}
           metadata={{ source: text.section_positive_tested.bronnen.rivm }}
         />
       </TileList>

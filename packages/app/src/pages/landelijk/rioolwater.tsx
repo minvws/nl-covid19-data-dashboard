@@ -11,16 +11,14 @@ import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createSewerRegionalTooltip } from '~/components/choropleth/tooltips/region/create-sewer-regional-tooltip';
+import { SEOHead } from '~/components/seoHead';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
-import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import {
   getNationalStaticProps,
   NationalPageProps,
 } from '~/static-props/nl-data';
-import { formatDateFromSeconds } from '~/utils/formatDate';
-import { formatNumber } from '~/utils/formatNumber';
 
 const text = siteText.rioolwater_metingen;
 
@@ -97,30 +95,14 @@ const SewerWater: FCWithLayout<NationalPageProps> = ({ data }) => {
         <LineChartTile
           title={text.linechart_titel}
           timeframeOptions={['all', '5weeks']}
-          values={sewerAverages.values.map((value) => ({
-            value: Number(value.average),
-            date: value.week_unix,
-            week: { start: value.week_start_unix, end: value.week_end_unix },
-          }))}
+          values={sewerAverages.values}
+          linesConfig={[
+            {
+              metricProperty: 'average',
+            },
+          ]}
           metadata={{
             source: text.bronnen.rivm,
-          }}
-          formatTooltip={(x) => {
-            /**
-             * @TODO this stuff with strong doesn't result in actual strong text
-             * but this apparently is also broken in the HighCharts implementation
-             */
-            return (
-              <div>
-                <strong>
-                  {`${formatDateFromSeconds(
-                    x.week.start,
-                    'short'
-                  )} - ${formatDateFromSeconds(x.week.end, 'short')}: `}
-                </strong>
-                {formatNumber(x.value)}
-              </div>
-            );
           }}
           valueAnnotation={siteText.waarde_annotaties.riool_normalized}
         />
