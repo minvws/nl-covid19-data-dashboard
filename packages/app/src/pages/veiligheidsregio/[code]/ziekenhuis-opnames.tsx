@@ -122,7 +122,9 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
             values={data.results_per_region.values
               .filter((x) => isFilled(x.hospital_moving_avg_per_region))
               .map((value) => ({
-                value: value.hospital_moving_avg_per_region,
+                value: value.hospital_moving_avg_per_region
+                  ? value.hospital_moving_avg_per_region
+                  : undefined,
                 date: value.date_of_report_unix,
               }))}
           />
