@@ -1,6 +1,7 @@
 import fs from 'fs';
 import { useRouter } from 'next/router';
 import path from 'path';
+import GetestIcon from '~/assets/test.svg';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { MaxWidth } from '~/components-styled/max-width';
 import { NewsMessage } from '~/components-styled/news-message';
@@ -10,12 +11,12 @@ import { createSelectRegionHandler } from '~/components/choropleth/select-handle
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import { DataSitemap } from '~/domain/topical/data-site-map';
+import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import siteText from '~/locale';
 import { TALLLanguages } from '~/locale/';
 import { National } from '~/types/data';
 import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
 import { EscalationMapLegenda } from './veiligheidsregio';
-
 interface StaticProps {
   props: IHomeData;
 }
@@ -26,14 +27,23 @@ interface IHomeData {
   lastGenerated: string;
 }
 
-const Home: FCWithLayout<IHomeData> = (data) => {
+const Home: FCWithLayout<IHomeData> = (homeData) => {
   const router = useRouter();
-  const { text } = data;
+  const { text } = homeData;
+
+  const dataInfectedDelta = homeData.data.infected_people_delta_normalized;
 
   return (
     <MaxWidth>
       <Tile>De actuele situatie in Nederland</Tile>
-      <Tile>Artikelen</Tile>
+      <Tile>
+        <MiniTrendTile
+          title={text.nationaal_actueel.mini_trend_tiles.positief_getest.title}
+          text={'data driven text'}
+          icon={<GetestIcon />}
+          trendData={dataInfectedDelta.values}
+        />
+      </Tile>
       <ChoroplethTile
         title={text.veiligheidsregio_index.selecteer_titel}
         description={
