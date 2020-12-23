@@ -4,25 +4,32 @@ import styled from 'styled-components';
 import text from '~/locale';
 import { useHotkey } from '~/utils/hotkey/use-hotkey';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { useBreakpoints } from '~/utils/useBreakpoints';
 import { HitList } from './hit-list';
 import { paddedStyle } from './search-input';
 import { useHitFocus } from './use-hit-focus';
-import { useSearchResults } from './use-search-results';
+import { Option, useSearchResults } from './use-search-results';
 
 interface SearchResultsProps {
   value: string;
   onHasHitFocusChange: (hasFocus: boolean) => void;
   id: string;
+  onSelect: (hit: Option, openInNewWindow: boolean) => void;
 }
 
 export function SearchResults({
+  id,
   value,
   onHasHitFocusChange,
-  id,
+  onSelect,
 }: SearchResultsProps) {
+  const breakpoints = useBreakpoints();
   const onHasHitFocusChangeRef = useRef(onHasHitFocusChange);
   const { gmHits, vrHits, hits } = useSearchResults(value);
-  const { focusRef, focusIndex, setFocusIndex } = useHitFocus(hits.length);
+  const { focusRef, focusIndex, setFocusIndex } = useHitFocus(
+    hits.length,
+    (index, openInNewWindow) => onSelect(hits[index].data, openInNewWindow)
+  );
 
   useEffect(() => {
     onHasHitFocusChangeRef.current = onHasHitFocusChange;
@@ -48,43 +55,67 @@ export function SearchResults({
     { preventDefault: false }
   );
 
+  const gmList = (
+    <HitList
+      key="gm"
+      hits={gmHits}
+      title={text.common.gm_plural}
+      focusIndex={focusIndex}
+      focusRef={focusRef}
+      noHitsMessage={replaceVariablesInText(text.search.no_hits, {
+        search: value,
+        subject: text.common.gm_plural,
+      })}
+      onHover={setFocusIndex}
+      onFocus={(index) => {
+        onHasHitFocusChange(true);
+        setFocusIndex(index);
+      }}
+    />
+  );
+
+  const vrList = (
+    <HitList
+      key="vr"
+      hits={vrHits}
+      title={text.common.vr_plural}
+      focusIndex={focusIndex}
+      focusRef={focusRef}
+      noHitsMessage={replaceVariablesInText(text.search.no_hits, {
+        search: value,
+        subject: text.common.vr_plural,
+      })}
+      onHover={setFocusIndex}
+      onFocus={(index) => {
+        onHasHitFocusChange(true);
+        setFocusIndex(index);
+      }}
+    />
+  );
+
+  /**
+   * On narrow devices we'll render the category with the best result on top
+   */
+  const vrHasBestResult =
+    [...hits].sort((a, b) => b.score - a.score)[0]?.data.type === 'vr';
+
   return (
     <StyledSearchResults
       role="listbox"
       id={id}
       onPointerDown={() => onHasHitFocusChange(true)}
     >
-      <HitList
-        hits={gmHits}
-        title={text.common.gm_plural}
-        focusIndex={focusIndex}
-        focusRef={focusRef}
-        noHitsMessage={replaceVariablesInText(text.search.no_hits, {
-          search: value,
-          subject: text.common.gm_plural,
-        })}
-        onHover={setFocusIndex}
-        onFocus={(index) => {
-          onHasHitFocusChange(true);
-          setFocusIndex(index);
-        }}
-      />
-
-      <HitList
-        hits={vrHits}
-        title={text.common.vr_plural}
-        focusIndex={focusIndex}
-        focusRef={focusRef}
-        noHitsMessage={replaceVariablesInText(text.search.no_hits, {
-          search: value,
-          subject: text.common.vr_plural,
-        })}
-        onHover={setFocusIndex}
-        onFocus={(index) => {
-          onHasHitFocusChange(true);
-          setFocusIndex(index);
-        }}
-      />
+      {breakpoints.md ? (
+        <>
+          {gmList}
+          {vrList}
+        </>
+      ) : (
+        <>
+          {vrHasBestResult ? vrList : gmList}
+          {vrHasBestResult ? gmList : vrList}
+        </>
+      )}
     </StyledSearchResults>
   );
 }
@@ -92,6 +123,7 @@ export function SearchResults({
 const StyledSearchResults = styled.div(
   paddedStyle,
   css({
+    pr: 50,
     display: 'flex',
     flexDirection: ['column', null, null, 'row'],
     '& > *:not(:last-child)': {

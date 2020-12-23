@@ -2135,6 +2135,7 @@
 
   "search": {
     "placeholder": "Find a municipality or safery region",
+    "clear":"Clear search",
     "no_hits": "No {{subject}} found with “{{search}}”"
   }
 }

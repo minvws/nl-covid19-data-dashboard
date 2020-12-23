@@ -2,7 +2,10 @@ import { useRef, useState } from 'react';
 import scrollIntoView from 'scroll-into-view-if-needed';
 import { useHotkey } from '~/utils/hotkey/use-hotkey';
 
-export function useHitFocus(count: number) {
+export function useHitFocus(
+  count: number,
+  onSelect: (index: number, openInNewWindow: boolean) => void
+) {
   const [focusIndex, setFocusIndex] = useState(0);
   const focusRef = useRef<HTMLAnchorElement>(null);
 
@@ -30,7 +33,7 @@ export function useHitFocus(count: number) {
   useHotkey(
     'enter',
     () => {
-      focusRef.current?.click();
+      focusRef.current && onSelect(focusIndex, false);
     },
     { allowRepeat: true }
   );
@@ -38,7 +41,7 @@ export function useHitFocus(count: number) {
   useHotkey(
     'command+enter',
     () => {
-      focusRef.current && window.open(focusRef.current.href, '_blank');
+      focusRef.current && onSelect(focusIndex, true);
     },
     { allowRepeat: true }
   );
@@ -46,7 +49,7 @@ export function useHitFocus(count: number) {
   useHotkey(
     'control+enter',
     () => {
-      focusRef.current && window.open(focusRef.current.href, '_blank');
+      focusRef.current && onSelect(focusIndex, true);
     },
     { allowRepeat: true }
   );

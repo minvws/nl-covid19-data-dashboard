@@ -2135,6 +2135,7 @@
 
   "search": {
     "placeholder": "Zoek een gemeente of veiligheidsregio",
+    "clear": "Zoekopdracht wissen",
     "no_hits": "Geen {{subject}} gevonden met “{{search}}”"
   }
 }
