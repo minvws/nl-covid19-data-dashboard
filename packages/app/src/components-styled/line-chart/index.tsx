@@ -1,15 +1,17 @@
+import { TickFormatter } from '@visx/axis';
 import { useTooltip } from '@visx/tooltip';
 import { extent } from 'd3-array';
 import { useCallback, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
-import { formatDateFromSeconds } from '~/utils/formatDate';
-import { TimeframeOption } from '~/utils/timeframe';
-import { calculateYMax, getTrendData, TrendValue, Value } from './helpers';
-import { Chart, defaultMargin } from './chart';
-import { Tooltip } from './tooltip';
 import text from '~/locale/index';
+import { formatDateFromSeconds } from '~/utils/formatDate';
+import { formatNumber } from '~/utils/formatNumber';
+import { TimeframeOption } from '~/utils/timeframe';
+import { Chart, defaultMargin } from './chart';
+import { calculateYMax, getTrendData, TrendValue, Value } from './helpers';
+import { Tooltip } from './tooltip';
 
 const dateToValue = (d: Date) => d.valueOf() / 1000;
 const formatXAxis = (date: Date) =>
@@ -20,7 +22,7 @@ export type LineChartProps<T> = {
   values: T[];
   linesConfig: [
     {
-      valueKey: keyof T;
+      metricProperty: keyof T;
       /**
        * For later when implementing multi line charts
        */
@@ -32,7 +34,8 @@ export type LineChartProps<T> = {
   timeframe?: TimeframeOption;
   signaalwaarde?: number;
   formatTooltip?: (value: T) => React.ReactNode;
-  formatYAxis?: (y: number) => string;
+  formatXAxis?: TickFormatter<Date>;
+  formatYAxis?: TickFormatter<number>;
   showFill?: boolean;
   valueAnnotation?: string;
 };
@@ -57,31 +60,26 @@ export function LineChart<T extends Value>({
     hideTooltip,
   } = useTooltip<T & TrendValue>();
 
-  const valueKeys = linesConfig.map((x) => x.valueKey) as string[];
+  const metricProperties = linesConfig.map((x) => x.metricProperty) as string[];
 
   const benchmark = signaalwaarde
     ? { value: signaalwaarde, label: text.common.barScale.signaalwaarde }
     : undefined;
 
   const trendData = useMemo(
-    () => getTrendData(values, valueKeys[0], timeframe),
-    [values, valueKeys, timeframe]
+    () => getTrendData(values, metricProperties[0], timeframe),
+    [values, metricProperties, timeframe]
   );
 
   const xDomain = useMemo(() => {
-    const domain = extent<number>(trendData.map((d) => d.date_unix));
-    /**
-     * Is this really needed to make xDomain strongly typed? Why would we want
-     * to deal with [undefined, undefined] ?
-     */
-    return isDefined(domain[0])
-      ? (domain as [number, number])
-      : ([0, 0] as [number, number]);
+    const domain = extent(trendData.map((d) => d.__date));
+
+    return isDefined(domain[0]) ? (domain as [Date, Date]) : undefined;
   }, [trendData]);
 
   const yDomain = useMemo(
-    () => [0, calculateYMax(values, valueKeys, signaalwaarde)],
-    [values, valueKeys, signaalwaarde]
+    () => [0, calculateYMax(values, metricProperties, signaalwaarde)],
+    [values, metricProperties, signaalwaarde]
   );
 
   const handleHover = useCallback(
@@ -105,6 +103,10 @@ export function LineChart<T extends Value>({
     },
     [showTooltip, hideTooltip]
   );
+
+  if (!xDomain) {
+    return null;
+  }
 
   return (
     <Box>
@@ -134,10 +136,10 @@ export function LineChart<T extends Value>({
             y={tooltipTop + defaultMargin.top}
           >
             {formatTooltip
-              ? formatTooltip(tooltipData as T)
-              : `${formatDateFromSeconds(tooltipData.date_unix)}: ${
-                  tooltipData[valueKeys[0]]
-                }`}
+              ? formatTooltip(tooltipData)
+              : `${formatDateFromSeconds(
+                  tooltipData.__date.getSeconds()
+                )}: ${formatNumber(tooltipData.__value)}`}
           </Tooltip>
         )}
       </Box>

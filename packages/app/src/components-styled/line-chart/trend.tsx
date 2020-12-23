@@ -47,7 +47,7 @@ export function Trend({
       const { x: xPosition } = localPoint(event) || { x: 0 };
       const pointData = bisect(trend, xPosition);
 
-      onHover(event, pointData, x(pointData.date_unix), y(pointData.value));
+      onHover(event, pointData, x(pointData.__date), y(pointData.__value));
     },
     [onHover, y, x, trend, bisect]
   );
@@ -57,8 +57,8 @@ export function Trend({
       {type === 'line' && (
         <LinePath
           data={trend}
-          x={(d) => x(d.date_unix)}
-          y={(d) => y(d.value)}
+          x={(d) => x(d.__date)}
+          y={(d) => y(d.__value)}
           stroke={color}
           strokeWidth={isHovered ? 3 : 2}
         />
@@ -68,16 +68,16 @@ export function Trend({
         <>
           <AreaClosed
             data={trend}
-            x={(d) => x(d.date_unix)}
-            y={(d) => y(d.value)}
+            x={(d) => x(d.__date)}
+            y={(d) => y(d.__value)}
             fill={color}
             fillOpacity={0.05}
             yScale={y}
           />
           <LinePath
             data={trend}
-            x={(d) => x(d.date_unix)}
-            y={(d) => y(d.value)}
+            x={(d) => x(d.__date)}
+            y={(d) => y(d.__value)}
             stroke={color}
             strokeWidth={isHovered ? 3 : 2}
           />

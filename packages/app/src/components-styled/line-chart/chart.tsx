@@ -1,4 +1,4 @@
-import { AxisBottom, AxisLeft } from '@visx/axis';
+import { AxisBottom, AxisLeft, TickFormatter } from '@visx/axis';
 import { GridRows } from '@visx/grid';
 import { Group } from '@visx/group';
 import { scaleLinear, scaleTime } from '@visx/scale';
@@ -37,14 +37,16 @@ type ChartProps = {
     xPosition?: number,
     yPosition?: number
   ) => void;
-  xDomain: [number, number];
+  xDomain: [Date, Date];
   yDomain: number[];
   width: number;
   height: number;
   margin?: { top: number; right: number; bottom: number; left: number };
-  formatXAxis: (x: any) => string;
-  formatYAxis: (y: any) => string;
+  formatXAxis: TickFormatter<Date>;
+  formatYAxis: TickFormatter<number>;
 };
+
+type AnyTickFormatter = (value: any) => string;
 
 export const Chart = memo(function Chart({
   trend,
@@ -80,23 +82,20 @@ export const Chart = memo(function Chart({
     (trend: TrendValue[], xPosition: number) => {
       if (trend.length === 1) return trend[0];
 
-      const dateInSeconds = x.invert(xPosition - margin.left).getSeconds();
-
-      // const bisectorFn = bisector((d: TrendValue) => d.date_unix).left;
+      // const bisectorFn = bisector((d: TrendValue) => d.__date).left;
+      const date = x.invert(xPosition - margin.left);
 
       // const index: number = bisectorFn(trend, date, 1);
       const index = bisectLeft(
-        trend.map((x) => x.date_unix),
-        dateInSeconds,
+        trend.map((x) => x.__date),
+        date,
         1
       );
 
       const d0 = trend[index - 1];
       const d1 = trend[index];
 
-      return dateInSeconds - d0.date_unix > d1.date_unix - dateInSeconds
-        ? d1
-        : d0;
+      return +date - +d0.__date > +d1.__date - +date ? d1 : d0;
     },
     [margin, x]
   );
@@ -113,7 +112,7 @@ export const Chart = memo(function Chart({
         <AxisBottom
           scale={x}
           tickValues={x.domain()}
-          tickFormat={formatXAxis}
+          tickFormat={formatXAxis as AnyTickFormatter}
           top={bounded.height}
           stroke={defaultColors.axis}
           tickLabelProps={() => ({
@@ -129,7 +128,7 @@ export const Chart = memo(function Chart({
           hideTicks
           hideAxisLine
           stroke={defaultColors.axis}
-          tickFormat={formatYAxis}
+          tickFormat={formatYAxis as AnyTickFormatter}
           tickLabelProps={() => ({
             fill: defaultColors.axisLabels,
             fontSize: 12,

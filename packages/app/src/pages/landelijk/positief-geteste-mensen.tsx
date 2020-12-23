@@ -223,10 +223,8 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
           title={text.linechart_titel}
           description={text.linechart_toelichting}
           signaalwaarde={7}
-          values={dataInfectedDelta.values.map((value) => ({
-            value: value.infected_daily_increase,
-            date: value.date_of_report_unix,
-          }))}
+          values={dataInfectedDelta.values}
+          linesConfig={[{ metricProperty: 'infected_daily_increase' }]}
           metadata={{
             source: text.bronnen.rivm,
           }}
@@ -326,7 +324,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
           title={ggdText.linechart_percentage_titel}
           description={ggdText.linechart_percentage_toelichting}
           values={dataGgdValues}
-          linesConfig={[{ valueKey: 'infected_percentage' }]}
+          linesConfig={[{ metricProperty: 'infected_percentage' }]}
           formatTooltip={(x) => {
             return `<strong>${formatDateFromSeconds(
               x.week_start_unix,

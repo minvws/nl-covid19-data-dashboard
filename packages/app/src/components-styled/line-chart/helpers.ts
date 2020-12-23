@@ -1,27 +1,48 @@
-import { isPresent } from 'ts-is-present';
+import { isDefined, isPresent } from 'ts-is-present';
+import { assert } from '~/utils/assert';
 import { getDaysForTimeframe, TimeframeOption } from '~/utils/timeframe';
 
 export type Value = DailyValue | WeeklyValue;
 
 export type DailyValue = {
   date_of_report_unix: number;
-  [key: string]: number | null;
 };
 
 export type WeeklyValue = {
   week_start_unix: number;
   week_end_unix: number;
-  [key: string]: number | null;
 };
 
+/**
+ * To read an arbitrary value property from the passed in data, we need to cast
+ * the type to a dictionary internally, otherwise TS will complain the index
+ * signature is missing on the passed in value type T.
+ */
+export type AnyValue = Record<string, number | null>;
+export type AnyFilteredValue = Record<string, number>;
+
 export function isDailyValue(timeSeries: Value[]): timeSeries is DailyValue[] {
-  return (timeSeries as DailyValue[])[0].date_of_report_unix !== undefined;
+  const firstValue = (timeSeries as DailyValue[])[0];
+
+  assert(
+    isDefined(firstValue),
+    'Unable to determine timestamps if time series is empty'
+  );
+
+  return firstValue.date_of_report_unix !== undefined;
 }
 
 export function isWeeklyValue(
   timeSeries: Value[]
 ): timeSeries is WeeklyValue[] {
-  return (timeSeries as WeeklyValue[])[0].week_end_unix !== undefined;
+  const firstValue = (timeSeries as WeeklyValue[])[0];
+
+  assert(
+    isDefined(firstValue),
+    'Unable to determine timestamps if time series is empty'
+  );
+
+  return firstValue.week_end_unix !== undefined;
 }
 
 /**
@@ -32,14 +53,14 @@ export function isWeeklyValue(
  */
 export function calculateYMax(
   values: Value[],
-  valueKeys: string[],
+  metricProperties: string[],
   signaalwaarde = -Infinity
 ) {
   const peakValues: number[] = [];
 
-  for (const key in valueKeys) {
+  for (const key of metricProperties) {
     const peakValue = values
-      .map((x) => x[key])
+      .map((x) => (x as AnyValue)[key])
       .filter(isPresent) // omit null values
       .reduce((acc, value) => (value > acc ? value : acc), -Infinity);
 
@@ -86,32 +107,33 @@ function getTimeframeBoundaryUnix(timeframe: TimeframeOption) {
     return 0;
   }
   const days = getDaysForTimeframe(timeframe);
-  return new Date().getTime() - days * oneDayInSeconds;
+  return Date.now() / 1000 - days * oneDayInSeconds;
 }
 
 // const valueToDate = (d: number) => new Date(d * 1000);
 
 export type TrendValue = {
-  date_unix: number;
-  value: number;
-  // [key: string]: number;
+  __date: Date;
+  __value: number;
 };
 
-// export type DataPoint = {
-//   date_unix: number;
-//   value: number;
-// };
+const timestampToDate = (d: number) => new Date(d * 1000);
 
 export function getTrendData(
   values: Value[],
   valueKey: string,
   timeframe: TimeframeOption
 ): TrendValue[] {
-  /**
-   * Not sure why we need to cast to Value[] here. The map function won't allow
-   * mapping over DailyValue[] | WeeklyValue[]
-   */
-  const valuesInFrame = getTimeframeValues(values, timeframe) as Value[];
+  const valuesInFrame = getTimeframeValues(values, timeframe);
+
+  if (valuesInFrame.length === 0) {
+    /**
+     * It could happen that you are using an old dataset and select last week as
+     * a timeframe at which point the values will be empty. This would not
+     * happen on production, but for development we can just render nothing.
+     */
+    return [];
+  }
 
   if (isDailyValue(valuesInFrame)) {
     return valuesInFrame
@@ -120,19 +142,23 @@ export function getTrendData(
          * Not sure why we need to cast to number if isPresent is used to filter
          * out the null values.
          */
-        value: x[valueKey] as number,
-        date_unix: x.date_of_report_unix,
+        __value: (x as AnyValue)[valueKey] as number,
+        __date: timestampToDate(x.date_of_report_unix),
       }))
-      .filter((x) => isPresent(x.value));
+      .filter((x) => isPresent(x.__value));
   }
 
   if (isWeeklyValue(valuesInFrame)) {
     return valuesInFrame
       .map((x) => ({
-        value: x[valueKey] as number,
-        date_unix: x.week_start_unix,
+        /**
+         * Not sure why we need to cast to number if isPresent is used to filter
+         * out the null values.
+         */
+        __value: (x as AnyValue)[valueKey] as number,
+        __date: timestampToDate(x.week_start_unix),
       }))
-      .filter((x) => isPresent(x.value));
+      .filter((x) => isPresent(x.__value));
   }
 
   throw new Error(
