@@ -36,7 +36,6 @@ import {
 import { colors } from '~/style/theme';
 import { NationalInfectedAgeGroups } from '~/types/data.d';
 import { assert } from '~/utils/assert';
-import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
@@ -223,10 +222,8 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
           title={text.linechart_titel}
           description={text.linechart_toelichting}
           signaalwaarde={7}
-          values={dataInfectedDelta.values.map((value) => ({
-            value: value.infected_daily_increase,
-            date: value.date_of_report_unix,
-          }))}
+          values={dataInfectedDelta.values}
+          linesConfig={[{ metricProperty: 'infected_daily_increase' }]}
           metadata={{
             source: text.bronnen.rivm,
           }}
@@ -325,34 +322,9 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
           timeframeOptions={['all', '5weeks']}
           title={ggdText.linechart_percentage_titel}
           description={ggdText.linechart_percentage_toelichting}
-          values={dataGgdValues.map((value) => ({
-            value: value.infected_percentage,
-            date: value.week_unix,
-            week: {
-              start: value.week_start_unix,
-              end: value.week_end_unix,
-            },
-          }))}
-          formatTooltip={(x) => {
-            /**
-             * @TODO this stuff with strong doesn't result in actual strong text
-             * but this apparently is also broken in the HighCharts implementation
-             */
-            return (
-              <div>
-                <strong>
-                  {`${formatDateFromSeconds(
-                    x.week.start,
-                    'short'
-                  )} - ${formatDateFromSeconds(x.week.end, 'short')}: `}
-                </strong>
-                {`${formatPercentage(x.value)}%`}
-              </div>
-            );
-          }}
-          formatYAxis={(y: number) => {
-            return `${formatPercentage(y)}%`;
-          }}
+          values={dataGgdValues}
+          linesConfig={[{ metricProperty: 'infected_percentage' }]}
+          isPercentage
           metadata={{
             source: ggdText.bronnen.rivm,
           }}

@@ -1,53 +1,67 @@
+import { TickFormatter } from '@visx/axis';
 import { useTooltip } from '@visx/tooltip';
 import { extent } from 'd3-array';
 import { useCallback, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
-import { formatDateFromSeconds } from '~/utils/formatDate';
-import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
-import { calculateYMax, Value } from './helpers';
-import { Chart, defaultMargin } from './chart';
-import { Tooltip } from './tooltip';
 import text from '~/locale/index';
+import { formatDateFromSeconds } from '~/utils/formatDate';
+import { formatNumber, formatPercentage } from '~/utils/formatNumber';
+import { TimeframeOption } from '~/utils/timeframe';
+import { Chart, defaultMargin } from './components/chart';
+import {
+  calculateYMax,
+  getTrendData,
+  isDailyValue,
+  isWeeklyValue,
+  TrendValue,
+  Value,
+  WeeklyValue,
+} from './helpers';
+import { Tooltip } from './components/tooltip';
 
-const valueToDate = (d: number) => new Date(d * 1000);
 const dateToValue = (d: Date) => d.valueOf() / 1000;
 const formatXAxis = (date: Date) =>
   formatDateFromSeconds(dateToValue(date), 'axis');
-const formatYAxisFunc = (y: number) => y.toString();
+const formatYAxisFn = (y: number) => y.toString();
+const formatYAxisPercentageFn = (y: number) => `${formatPercentage(y)}%`;
 
-/**
- * @TODO In order to support rendering multiple trends we will have to make the
- * type of `Value` more flexible/generic, for example by allowing it to hold an
- * array of numbers instead of a single number.
- *
- * To do this (improve on the original chart interface) we'll first need to move
- * away from having this new line chart be a drop-in replacement for the old
- * one.
- */
 export type LineChartProps<T> = {
   values: T[];
+  linesConfig: [
+    {
+      metricProperty: keyof T;
+      /**
+       * For later when implementing multi line charts
+       */
+      color?: string;
+    }
+  ];
   width?: number;
   height?: number;
   timeframe?: TimeframeOption;
   signaalwaarde?: number;
   formatTooltip?: (value: T) => React.ReactNode;
-  formatYAxis?: (y: number) => string;
+  formatXAxis?: TickFormatter<Date>;
+  formatYAxis?: TickFormatter<number>;
   showFill?: boolean;
   valueAnnotation?: string;
+  isPercentage?: boolean;
 };
 
 export function LineChart<T extends Value>({
   values,
+  linesConfig,
   width = 500,
   height = 250,
   timeframe = '5weeks',
   signaalwaarde,
   formatTooltip,
-  formatYAxis = formatYAxisFunc,
+  formatYAxis,
   showFill = true,
   valueAnnotation,
+  isPercentage,
 }: LineChartProps<T>) {
   const {
     tooltipData,
@@ -55,31 +69,36 @@ export function LineChart<T extends Value>({
     tooltipTop = 0,
     showTooltip,
     hideTooltip,
-  } = useTooltip<T>();
+  } = useTooltip<T & TrendValue>();
 
-  const benchmark = signaalwaarde
-    ? { value: signaalwaarde, label: text.common.barScale.signaalwaarde }
-    : undefined;
+  const metricProperties = useMemo(
+    () => linesConfig.map((x) => x.metricProperty) as string[],
+    [linesConfig]
+  );
 
-  const graphData = useMemo(() => {
-    const filteredData = getFilteredValues(
-      values,
-      timeframe,
-      (value) => value.date * 1000
-    );
-    return filteredData.map((point) => ({
-      ...point,
-      date: valueToDate(point.date),
-    }));
-  }, [values, timeframe]);
+  const benchmark = useMemo(
+    () =>
+      signaalwaarde
+        ? { value: signaalwaarde, label: text.common.barScale.signaalwaarde }
+        : undefined,
+    [signaalwaarde]
+  );
 
-  const xDomain = useMemo(() => extent(graphData.map((d) => d.date)), [
-    graphData,
-  ]);
-  const yDomain = useMemo(() => [0, calculateYMax(graphData, signaalwaarde)], [
-    graphData,
-    signaalwaarde,
-  ]);
+  const trendData = useMemo(
+    () => getTrendData(values, metricProperties[0], timeframe),
+    [values, metricProperties, timeframe]
+  );
+
+  const xDomain = useMemo(() => {
+    const domain = extent(trendData.map((d) => d.__date));
+
+    return isDefined(domain[0]) ? (domain as [Date, Date]) : undefined;
+  }, [trendData]);
+
+  const yDomain = useMemo(
+    () => [0, calculateYMax(values, metricProperties, signaalwaarde)],
+    [values, metricProperties, signaalwaarde]
+  );
 
   const handleHover = useCallback(
     (
@@ -103,6 +122,10 @@ export function LineChart<T extends Value>({
     [showTooltip, hideTooltip]
   );
 
+  if (!xDomain) {
+    return null;
+  }
+
   return (
     <Box>
       {valueAnnotation && (
@@ -111,13 +134,19 @@ export function LineChart<T extends Value>({
 
       <Box position="relative">
         <Chart
-          trend={graphData}
+          trend={trendData}
           type={showFill ? 'area' : 'line'}
           height={height}
           width={width}
           xDomain={xDomain}
           yDomain={yDomain}
-          formatYAxis={formatYAxis}
+          formatYAxis={
+            formatYAxis
+              ? formatYAxis
+              : isPercentage
+              ? formatYAxisPercentageFn
+              : formatYAxisFn
+          }
           formatXAxis={formatXAxis}
           onHover={handleHover}
           isHovered={!!tooltipData}
@@ -132,12 +161,78 @@ export function LineChart<T extends Value>({
           >
             {formatTooltip
               ? formatTooltip(tooltipData)
-              : `${formatDateFromSeconds(tooltipData.date)}: ${
-                  tooltipData.value
-                }`}
+              : formatDefaultTooltip(
+                  (tooltipData as unknown) as Value & TrendValue,
+                  isPercentage
+                )}
           </Tooltip>
         )}
       </Box>
     </Box>
+  );
+}
+
+function formatDefaultTooltip<T extends Value & TrendValue>(
+  value: T,
+  isPercentage?: boolean
+) {
+  const isDaily = isDailyValue([value]);
+  const isWeekly = isWeeklyValue([value]);
+
+  if (isDaily) {
+    return `${formatDateFromSeconds(
+      (value as TrendValue).__date.getSeconds()
+    )}: ${
+      isPercentage
+        ? `${formatPercentage(value.__value)}%`
+        : formatNumber(value.__value)
+    }`;
+  } else if (isWeekly) {
+    return `${formatDateFromSeconds(
+      (value as WeeklyValue).week_start_unix,
+      'short'
+    )} - ${formatDateFromSeconds(
+      (value as WeeklyValue).week_end_unix,
+      'short'
+    )}: ${
+      isPercentage
+        ? `${formatPercentage(value.__value)}%`
+        : formatNumber(value.__value)
+    }`;
+  }
+
+  if (isDailyValue([value])) {
+    const date = formatDateFromSeconds(
+      (value as TrendValue).__date.getSeconds()
+    );
+    const valueStr = isPercentage
+      ? `${formatPercentage(value.__value)}%`
+      : formatNumber(value.__value);
+
+    return `${date}: ${valueStr}`;
+  }
+
+  if (isWeeklyValue([value])) {
+    /**
+     * Type narrowing should make the cast to WeeklyValue unnecessary but
+     * somehow it doesn't seem to work here.
+     */
+    const dateFrom = formatDateFromSeconds(
+      (value as WeeklyValue).week_start_unix,
+      'short'
+    );
+    const dateTo = formatDateFromSeconds(
+      (value as WeeklyValue).week_end_unix,
+      'short'
+    );
+    const valueStr = isPercentage
+      ? `${formatPercentage(value.__value)}%`
+      : formatNumber(value.__value);
+
+    return `${dateFrom} - ${dateTo}: ${valueStr}`;
+  }
+
+  throw new Error(
+    `Invalid value passed to format tooltip function: ${JSON.stringify(value)}`
   );
 }
