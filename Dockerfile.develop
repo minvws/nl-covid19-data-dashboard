@@ -1,5 +1,5 @@
 # Stage 0 - Install dependancies
-FROM node:14-alpine
+FROM node:14 AS build-env
 WORKDIR /app
 COPY . .
 RUN yarn
@@ -12,5 +12,8 @@ RUN yarn workspace @corona-dashboard/cli generate-typescript
 ARG NEXT_PUBLIC_LOCALE=en
 RUN yarn workspace @corona-dashboard/app build
 
+FROM node:14-alpine
+WORKDIR /app
+COPY --from=build-env /app /app
 EXPOSE 8080
 CMD ["yarn",  "start"]
