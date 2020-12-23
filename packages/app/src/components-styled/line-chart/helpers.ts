@@ -47,7 +47,7 @@ export function isWeeklyValue(
 
 /**
  * From all the defined values, extract the highest number so we know how to
- * scale the y-axis. We need to do this for each fo the keys that are used to
+ * scale the y-axis. We need to do this for each of the keys that are used to
  * render lines, so that the axis scales with whatever key contains the highest
  * values.
  */
