@@ -81,5 +81,6 @@ const StyledSearchContainer = styled.div<{ isFloating: boolean }>((x) =>
     borderRadius: 1,
     boxShadow: 'tile',
     zIndex: 10,
+    background: 'white',
   })
 );

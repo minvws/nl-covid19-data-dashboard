@@ -92,7 +92,6 @@ export function SearchResults({
 const StyledSearchResults = styled.div(
   paddedStyle,
   css({
-    bg: 'white',
     display: 'flex',
     flexDirection: ['column', null, null, 'row'],
     '& > *:not(:last-child)': {
