@@ -26,8 +26,8 @@ export const getMinimumUnixForTimeframe = (
 type CompareCallbackFunction<T> = (value: T) => number;
 
 /**
- * Filter arrays of any provided types based on the timeframe.
- * Uses a callback to retrieve the unix time zone to compare with.
+ * Filter arrays of any provided types based on the timeframe. Uses a callback
+ * to retrieve the unix time zone to compare with.
  * @param values
  * @param timeframe
  * @param compareCallback

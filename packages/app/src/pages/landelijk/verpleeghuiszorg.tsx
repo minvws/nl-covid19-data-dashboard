@@ -79,10 +79,12 @@ const NursingHomeCare: FCWithLayout<NationalPageProps> = (props) => {
         <LineChartTile
           metadata={{ source: positiveTestedPeopleText.bronnen.rivm }}
           title={positiveTestedPeopleText.linechart_titel}
-          values={nursinghomeData.values.map((value) => ({
-            value: value.newly_infected_people,
-            date: value.date_of_report_unix,
-          }))}
+          values={nursinghomeData.values}
+          linesConfig={[
+            {
+              metricProperty: 'newly_infected_people',
+            },
+          ]}
         />
 
         <ContentHeader
@@ -163,10 +165,12 @@ const NursingHomeCare: FCWithLayout<NationalPageProps> = (props) => {
         <LineChartTile
           metadata={{ source: infectedLocationsText.bronnen.rivm }}
           title={infectedLocationsText.linechart_titel}
-          values={nursinghomeData.values.map((value) => ({
-            value: value.infected_locations_total,
-            date: value.date_of_report_unix,
-          }))}
+          values={nursinghomeData.values}
+          linesConfig={[
+            {
+              metricProperty: 'infected_locations_total',
+            },
+          ]}
         />
 
         <ContentHeader
@@ -204,10 +208,12 @@ const NursingHomeCare: FCWithLayout<NationalPageProps> = (props) => {
         <LineChartTile
           metadata={{ source: locationDeaths.bronnen.rivm }}
           title={locationDeaths.linechart_titel}
-          values={nursinghomeData.values.map((value) => ({
-            value: value.deceased_daily,
-            date: value.date_of_report_unix,
-          }))}
+          values={nursinghomeData.values}
+          linesConfig={[
+            {
+              metricProperty: 'deceased_daily',
+            },
+          ]}
         />
       </TileList>
     </>
