@@ -110,8 +110,6 @@ function getTimeframeBoundaryUnix(timeframe: TimeframeOption) {
   return Date.now() / 1000 - days * oneDayInSeconds;
 }
 
-// const valueToDate = (d: number) => new Date(d * 1000);
-
 export type TrendValue = {
   __date: Date;
   __value: number;

@@ -82,10 +82,8 @@ export const Chart = memo(function Chart({
     (trend: TrendValue[], xPosition: number) => {
       if (trend.length === 1) return trend[0];
 
-      // const bisectorFn = bisector((d: TrendValue) => d.__date).left;
       const date = xScale.invert(xPosition - margin.left);
 
-      // const index: number = bisectorFn(trend, date, 1);
       const index = bisectLeft(
         trend.map((x) => x.__date),
         date,
