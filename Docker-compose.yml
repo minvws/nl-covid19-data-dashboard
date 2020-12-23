@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  web-nl:
+    build:
+      context: .
+      dockerfile: Dockerfile.develop
+      args:
+        NEXT_PUBLIC_LOCALE: 'nl'
+    ports:
+      - '8080:8080'
