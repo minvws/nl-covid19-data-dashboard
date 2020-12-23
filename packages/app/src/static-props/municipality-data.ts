@@ -88,7 +88,7 @@ export function getMunicipalityData() {
  */
 export function getMunicipalityPaths(): () => IPaths {
   return function () {
-    const paths = municipalities.map((municipality) => ({
+    const paths = municipalities.slice(0, 1).map((municipality) => ({
       params: { code: municipality.gemcode },
     }));
 

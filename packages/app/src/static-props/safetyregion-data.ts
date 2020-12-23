@@ -92,7 +92,7 @@ export function getSafetyRegionPaths(): () => IPaths {
     const filteredRegions = safetyRegions.filter(
       (region) => region.code.indexOf('VR') === 0
     );
-    const paths = filteredRegions.map((region) => ({
+    const paths = filteredRegions.slice(0, 1).map((region) => ({
       params: { code: region.code },
     }));
 
