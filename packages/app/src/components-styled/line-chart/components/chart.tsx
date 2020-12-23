@@ -7,7 +7,7 @@ import { Text } from '@visx/text';
 import { bisectLeft } from 'd3-array';
 import { memo, useCallback } from 'react';
 import { colors } from '~/style/theme';
-import { TrendValue } from './helpers';
+import { TrendValue } from '../helpers';
 import { Trend, TrendType } from './trend';
 
 const NUM_TICKS = 3;
@@ -99,7 +99,7 @@ export const Chart = memo(function Chart({
   );
 
   return (
-    <svg width={width} height={height} role='img'>
+    <svg width={width} height={height} role="img">
       <Group left={margin.left} top={margin.top}>
         <GridRows
           scale={yScale}

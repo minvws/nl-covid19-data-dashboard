@@ -117,7 +117,7 @@ export type TrendValue = {
 
 const timestampToDate = (d: number) => new Date(d * 1000);
 
-export function getTrendData<T>(
+export function getTrendData(
   values: Value[],
   valueKey: string,
   timeframe: TimeframeOption

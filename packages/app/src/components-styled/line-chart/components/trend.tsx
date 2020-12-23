@@ -1,7 +1,7 @@
 import { localPoint } from '@visx/event';
 import { AreaClosed, Bar, LinePath } from '@visx/shape';
 import { useCallback } from 'react';
-import { TrendValue } from './helpers';
+import { TrendValue } from '../helpers';
 
 export type TrendType = 'line' | 'area';
 
