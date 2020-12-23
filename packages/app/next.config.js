@@ -11,14 +11,14 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
 
-const commitHash = require('child_process')
-  .execSync('git rev-parse --short HEAD')
-  .toString()
-  .trim();
+// const commitHash = require('child_process')
+//   .execSync('git rev-parse --short HEAD')
+//   .toString()
+//   .trim();
 
 const nextConfig = {
   env: {
-    COMMIT_ID: commitHash,
+    COMMIT_ID: 'replace-me-later-with-a-real-git-hash',
   },
   reactStrictMode: true, // Enables react strict mode https://nextjs.org/docs/api-reference/next.config.js/react-strict-mode
 
