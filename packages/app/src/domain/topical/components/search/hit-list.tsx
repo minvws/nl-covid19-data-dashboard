@@ -1,10 +1,12 @@
 import css from '@styled-system/css';
-import { forwardRef, RefObject } from 'react';
+import { forwardRef, ReactNode, RefObject } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components-styled/base';
 import { Text } from '~/components-styled/typography';
+import { VisuallyHidden } from '~/components-styled/visually-hidden';
 import { Link } from '~/utils/link';
 import { Hit, Option } from './use-search-results';
+import siteText from '~/locale';
 
 interface HitListProps {
   title: string;
@@ -36,11 +38,18 @@ export function HitList({
               <HitLink
                 ref={x.index === focusIndex ? focusRef : undefined}
                 href={x.data.link}
-                name={x.data.name}
                 hasFocus={focusIndex === x.index}
                 onHover={() => onHover(x.index)}
                 onFocus={() => onFocus(x.index)}
-              />
+              >
+                <VisuallyHidden>
+                  {x.data.type === 'gm'
+                    ? siteText.common.gm_singular
+                    : siteText.common.vr_singular}
+                  {': '}
+                </VisuallyHidden>
+                {x.data.name}
+              </HitLink>
             </li>
           ))}
         </StyledHitList>
@@ -72,14 +81,14 @@ const StyledHitList = styled.ol(
 
 interface HitLinkProps {
   href: string;
-  name: string;
+  children: ReactNode;
   hasFocus: boolean;
   onHover: () => void;
   onFocus: () => void;
 }
 
 const HitLink = forwardRef<HTMLAnchorElement, HitLinkProps>(
-  ({ href, name, hasFocus, onHover, onFocus }, ref) => {
+  ({ href, children, hasFocus, onHover, onFocus }, ref) => {
     return (
       <Link passHref href={href}>
         <StyledHitLink
@@ -87,8 +96,10 @@ const HitLink = forwardRef<HTMLAnchorElement, HitLinkProps>(
           hasFocus={hasFocus}
           onFocus={onFocus}
           onMouseMove={onHover}
+          role="option"
+          aria-selected={hasFocus ? 'true' : 'false'}
         >
-          {name}
+          {children}
         </StyledHitLink>
       </Link>
     );

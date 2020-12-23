@@ -1,31 +1,24 @@
 import css from '@styled-system/css';
 import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
+import text from '~/locale';
 import { useHotkey } from '~/utils/hotkey/use-hotkey';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { HitList } from './hit-list';
+import { paddedStyle } from './search-input';
 import { useHitFocus } from './use-hit-focus';
 import { useSearchResults } from './use-search-results';
-
-const text = {
-  municipality_header: 'Gemeentes',
-  safety_region_header: "Veiligheidsregio's",
-
-  municipality_no_hits: 'Geen gemeentes gevonden met “{{search}}”',
-  safety_region_no_hits: "Geen veiligheidsregio's gevonden met “{{search}}”",
-};
-
-const ICON_SPACE = 50;
-const ICON_SPACE_LARGE = 66;
 
 interface SearchResultsProps {
   value: string;
   onHasHitFocusChange: (hasFocus: boolean) => void;
+  id: string;
 }
 
 export function SearchResults({
   value,
   onHasHitFocusChange,
+  id,
 }: SearchResultsProps) {
   const onHasHitFocusChangeRef = useRef(onHasHitFocusChange);
   const { gmHits, vrHits, hits } = useSearchResults(value);
@@ -56,16 +49,21 @@ export function SearchResults({
   );
 
   return (
-    <StyledSearchResults>
+    <StyledSearchResults
+      role="listbox"
+      id={id}
+      onPointerDown={() => onHasHitFocusChange(true)}
+    >
       <HitList
         hits={gmHits}
-        title={text.municipality_header}
+        title={text.common.gm_plural}
         focusIndex={focusIndex}
         focusRef={focusRef}
-        noHitsMessage={replaceVariablesInText(text.municipality_no_hits, {
+        noHitsMessage={replaceVariablesInText(text.search.no_hits, {
           search: value,
+          subject: text.common.gm_plural,
         })}
-        onHover={(index) => setFocusIndex(index)}
+        onHover={setFocusIndex}
         onFocus={(index) => {
           onHasHitFocusChange(true);
           setFocusIndex(index);
@@ -74,13 +72,14 @@ export function SearchResults({
 
       <HitList
         hits={vrHits}
-        title={text.safety_region_header}
+        title={text.common.vr_plural}
         focusIndex={focusIndex}
         focusRef={focusRef}
-        noHitsMessage={replaceVariablesInText(text.safety_region_no_hits, {
+        noHitsMessage={replaceVariablesInText(text.search.no_hits, {
           search: value,
+          subject: text.common.vr_plural,
         })}
-        onHover={(index) => setFocusIndex(index)}
+        onHover={setFocusIndex}
         onFocus={(index) => {
           onHasHitFocusChange(true);
           setFocusIndex(index);
@@ -89,11 +88,6 @@ export function SearchResults({
     </StyledSearchResults>
   );
 }
-
-const paddedStyle = css({
-  p: ['1rem', null, null, '1.5rem'],
-  px: [ICON_SPACE, null, null, ICON_SPACE_LARGE],
-});
 
 const StyledSearchResults = styled.div(
   paddedStyle,

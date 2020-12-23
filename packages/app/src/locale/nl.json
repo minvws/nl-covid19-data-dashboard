@@ -765,6 +765,10 @@
     "belangrijk_bericht": "Er geldt een [landelijke lockdown](https://www.rijksoverheid.nl/actueel/nieuws/2020/12/14/lockdown-nodig-om-snel-oplopend-aantal-besmettingen-tegen-te-gaan) tot en met ten minste dinsdag 19 januari."
   },
   "common": {
+    "gm_singular": "gemeente",
+    "gm_plural": "gemeentes",
+    "vr_singular": "veiligheidsregio",
+    "vr_plural": "veiligheidsregio's",
     "metadata": {
       "source": "Bron",
       "date": "Waarde van {{date}}",
@@ -2127,5 +2131,10 @@
     "VR23": "http://vrln.nl/",
     "VR24": "http://www.vrzuidlimburg.nl/",
     "VR25": "http://www.veiligheidsregioflevoland.nl/"
+  },
+
+  "search": {
+    "placeholder": "Zoek een gemeente of veiligheidsregio",
+    "no_hits": "Geen {{subject}} gevonden met “{{search}}”"
   }
 }
