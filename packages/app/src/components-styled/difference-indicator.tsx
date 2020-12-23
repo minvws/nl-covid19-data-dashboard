@@ -1,5 +1,4 @@
 import css from '@styled-system/css';
-import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import {
   color,
@@ -17,6 +16,7 @@ import siteText from '~/locale/index';
 import { DifferenceDecimal, DifferenceInteger } from '~/types/data';
 import { formatDateFromMilliseconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
+import { useIsMounted } from '~/utils/use-is-mounted';
 
 const text = siteText.toe_en_afname;
 const DAY_IN_SECONDS = 24 * 60 * 60;
@@ -152,8 +152,7 @@ const Container = styled.div(
 );
 
 function TimespanText({ date }: { date: number }) {
-  const [isMounted, setIsMounted] = useState(false);
-  useEffect(() => setIsMounted(true), []);
+  const isMounted = useIsMounted();
 
   const fullDate = formatDateFromMilliseconds(date * 1000, 'medium');
   const text = getTimespanText(date);
