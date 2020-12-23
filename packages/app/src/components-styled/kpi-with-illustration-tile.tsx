@@ -36,7 +36,7 @@ export function KpiWithIllustrationTile({
           flexGrow={0}
           flexShrink={0}
           flexBasis={{ _: '100%', lg: '50%' }}
-          flex={1}
+          flex={{ lg: 1 }}
           pr={{ lg: 4 }}
         >
           <Heading level={3}>{title}</Heading>
@@ -54,7 +54,7 @@ export function KpiWithIllustrationTile({
           flexGrow={0}
           flexShrink={0}
           flexBasis={{ _: '100%', lg: '50%' }}
-          flex={1}
+          flex={{ lg: 1 }}
           pl={{ lg: 4 }}
         >
           <img
