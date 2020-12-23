@@ -13,27 +13,34 @@ import {
   getMunicipalityPaths,
   IMunicipalityData,
 } from '~/static-props/municipality-data';
+import { QuickLinks } from '~/components-styled/quick-links';
+import { getSafetyRegionForMunicipalityCode } from '~/utils/getSafetyRegionForMunicipalityCode';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 type ActueelData = IMunicipalityData & { text: TALLLanguages };
 
 const MunicipalityActueel: FCWithLayout<ActueelData> = (data) => {
   const router = useRouter();
-  const { text } = data;
+  const text = data.text.gemeente_actueel;
+  const safetyRegionForMunicipality =
+    typeof router.query.code === 'string'
+      ? getSafetyRegionForMunicipalityCode(router.query.code)
+      : undefined;
 
   return (
     <MaxWidth>
       <Tile>De actuele situatie in {data.municipalityName}</Tile>
       <Tile>Artikelen</Tile>
       <ChoroplethTile
-        title={text.veiligheidsregio_index.selecteer_titel}
+        title={text.risiconiveaus.selecteer_titel}
         description={
           <>
             <span
               dangerouslySetInnerHTML={{
-                __html: text.veiligheidsregio_index.selecteer_toelichting,
+                __html: text.risiconiveaus.selecteer_toelichting,
               }}
             />
-            <EscalationMapLegenda text={text} />
+            <EscalationMapLegenda text={data.text} />
           </>
         }
       >
@@ -44,6 +51,31 @@ const MunicipalityActueel: FCWithLayout<ActueelData> = (data) => {
           tooltipContent={escalationTooltip(createSelectRegionHandler(router))}
         />
       </ChoroplethTile>
+
+      <QuickLinks
+        header={text.quick_links.header}
+        links={[
+          { href: '/landelijk', text: text.quick_links.links.nationaal },
+          safetyRegionForMunicipality
+            ? {
+              href: `/veiligheidsregio/${safetyRegionForMunicipality.code}/positief-geteste-mensen`,
+              text: replaceVariablesInText(
+                text.quick_links.links.veiligheidsregio,
+                { safetyRegionName: safetyRegionForMunicipality.name }
+              ),
+            }
+            : {
+              href: '/veiligheidsregio',
+              text: text.quick_links.links.veiligheidsregio_fallback,
+            },
+          {
+            href: '/gemeentes',
+            text: replaceVariablesInText(text.quick_links.links.gemeente, {
+              municipalityName: data.municipalityName,
+            }),
+          },
+        ]}
+      ></QuickLinks>
     </MaxWidth>
   );
 };

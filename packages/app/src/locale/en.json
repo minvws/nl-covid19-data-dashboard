@@ -750,8 +750,20 @@
     "date_yesterday": "yesterday"
   },
   "nationaal_actueel": {
+    "risiconiveaus": {
+      "selecteer_titel": "Risiconiveaus",
+      "selecteer_toelichting": "De kaart geeft het risiconiveau per veiligheidsregio weer.\n\n[Meer over de risiconiveaus](/over-risiconiveaus)"
+    },
     "data_sitemap_titel": "",
-    "data_sitemap_toelichting": ""
+    "data_sitemap_toelichting": "",
+    "quick_links":  {
+      "header": "Bekijk alle cijfers van het dashboard",
+      "links": {
+        "nationaal": "Cijfers van Nederland",
+        "veiligheidsregio": "Cijfers per veiligheidsregio",
+        "gemeente": "Cijfers per gemeente"
+      }
+    }
   },
   "regionaal_index": {
     "your_safety_region": "Safety region",
@@ -2127,5 +2139,34 @@
     "VR23": "http://vrln.nl/",
     "VR24": "http://www.vrzuidlimburg.nl/",
     "VR25": "http://www.veiligheidsregioflevoland.nl/"
+  },
+  "veiligheidsregio_actueel": {
+    "risiconiveaus": {
+      "selecteer_titel": "Risiconiveaus",
+      "selecteer_toelichting": "De kaart geeft het risiconiveau per veiligheidsregio weer.\n\n[Meer over de risiconiveaus](/over-risiconiveaus)"
+    },
+    "quick_links":  {
+      "header": "Bekijk alle cijfers van het dashboard",
+      "links": {
+        "nationaal": "Cijfers van Nederland",
+        "veiligheidsregio": "`Cijfers van {{safetyRegion}}`",
+        "gemeente": "Cijfers per gemeente"
+      }
+    }
+  },
+  "gemeente_actueel": {
+    "risiconiveaus": {
+      "selecteer_titel": "Risiconiveaus",
+      "selecteer_toelichting": "De kaart geeft het risiconiveau per veiligheidsregio weer.\n\n[Meer over de risiconiveaus](/over-risiconiveaus)"
+    },
+    "quick_links":  {
+      "header": "Bekijk alle cijfers van het dashboard",
+      "links": {
+        "nationaal": "Cijfers van Nederland",
+        "veiligheidsregio": "`Cijfers van {{safetyRegion}}`",
+        "veiligheidsregio_fallback": "Cijfers per veiligheidsregio",
+        "gemeente": "Cijfers van {{municipalityName}}"
+      }
+    }
   }
 }
