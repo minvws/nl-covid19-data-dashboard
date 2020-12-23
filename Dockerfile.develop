@@ -1,0 +1,16 @@
+# Stage 0 - Install dependancies
+FROM node:14 as react-build-base
+WORKDIR /app
+COPY . .
+RUN yarn
+
+# Validation stage
+RUN yarn workspace @corona-dashboard/cli validate-json
+RUN yarn workspace @corona-dashboard/cli generate-typescript
+
+# Stage 2 - Build EN application
+ARG NEXT_PUBLIC_LOCALE=en
+RUN yarn workspace @corona-dashboard/app build
+
+EXPOSE 8080
+CMD ["yarn",  "start"]

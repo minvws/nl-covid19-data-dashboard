@@ -11,7 +11,7 @@
     "format": "yarn workspaces run format",
     "dev": "yarn workspace @corona-dashboard/app dev",
     "download": "yarn workspace @corona-dashboard/app download",
-    "start": "yarn workspace @corona-dashboard/cms start"
+    "start": "yarn workspace @corona-dashboard/app start"
   },
   "workspaces": {
     "packages": [
