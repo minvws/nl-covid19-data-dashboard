@@ -119,11 +119,11 @@ export type TrendValue = {
 
 const timestampToDate = (d: number) => new Date(d * 1000);
 
-export function getTrendData(
+export function getTrendData<T>(
   values: Value[],
   valueKey: string,
   timeframe: TimeframeOption
-): TrendValue[] {
+): (TrendValue & Value)[] {
   const valuesInFrame = getTimeframeValues(values, timeframe);
 
   if (valuesInFrame.length === 0) {
@@ -138,6 +138,7 @@ export function getTrendData(
   if (isDailyValue(valuesInFrame)) {
     return valuesInFrame
       .map((x) => ({
+        ...x,
         /**
          * Not sure why we need to cast to number if isPresent is used to filter
          * out the null values.
@@ -151,6 +152,7 @@ export function getTrendData(
   if (isWeeklyValue(valuesInFrame)) {
     return valuesInFrame
       .map((x) => ({
+        ...x,
         /**
          * Not sure why we need to cast to number if isPresent is used to filter
          * out the null values.

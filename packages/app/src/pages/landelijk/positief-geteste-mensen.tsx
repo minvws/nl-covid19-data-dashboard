@@ -24,11 +24,11 @@ import { createSelectMunicipalHandler } from '~/components/choropleth/select-han
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
 import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/create-positive-tested-people-regional-tooltip';
-import { FCWithLayout } from '~/domain/layout/layout';
-import { getNationalLayout } from '~/domain/layout/national-layout';
 import { SEOHead } from '~/components/seoHead';
 import { AgeDemographic } from '~/domain/infected-people/age-demographic/age-demographic';
 import { formatAgeGroupRange } from '~/domain/infected-people/age-demographic/age-demographic-chart';
+import { FCWithLayout } from '~/domain/layout/layout';
+import { getNationalLayout } from '~/domain/layout/national-layout';
 import {
   getNationalStaticProps,
   NationalPageProps,
@@ -36,7 +36,6 @@ import {
 import { colors } from '~/style/theme';
 import { NationalInfectedAgeGroups } from '~/types/data.d';
 import { assert } from '~/utils/assert';
-import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
@@ -325,18 +324,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
           description={ggdText.linechart_percentage_toelichting}
           values={dataGgdValues}
           linesConfig={[{ metricProperty: 'infected_percentage' }]}
-          formatTooltip={(x) => {
-            return `<strong>${formatDateFromSeconds(
-              x.week_start_unix,
-              'short'
-            )} - ${formatDateFromSeconds(
-              x.week_end_unix,
-              'short'
-            )}:</strong> ${formatPercentage(x.infected_percentage)}%`;
-          }}
-          formatYAxis={(y: number) => {
-            return `${formatPercentage(y)}%`;
-          }}
+          isPercentage
           metadata={{
             source: ggdText.bronnen.rivm,
           }}

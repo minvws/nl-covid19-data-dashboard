@@ -7,16 +7,25 @@ import { Box } from '~/components-styled/base';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
 import text from '~/locale/index';
 import { formatDateFromSeconds } from '~/utils/formatDate';
-import { formatNumber } from '~/utils/formatNumber';
+import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { TimeframeOption } from '~/utils/timeframe';
 import { Chart, defaultMargin } from './chart';
-import { calculateYMax, getTrendData, TrendValue, Value } from './helpers';
+import {
+  calculateYMax,
+  getTrendData,
+  isDailyValue,
+  isWeeklyValue,
+  TrendValue,
+  Value,
+  WeeklyValue,
+} from './helpers';
 import { Tooltip } from './tooltip';
 
 const dateToValue = (d: Date) => d.valueOf() / 1000;
 const formatXAxis = (date: Date) =>
   formatDateFromSeconds(dateToValue(date), 'axis');
-const formatYAxisFunc = (y: number) => y.toString();
+const formatYAxisFn = (y: number) => y.toString();
+const formatYAxisPercentageFn = (y: number) => `${formatPercentage(y)}%`;
 
 export type LineChartProps<T> = {
   values: T[];
@@ -38,6 +47,7 @@ export type LineChartProps<T> = {
   formatYAxis?: TickFormatter<number>;
   showFill?: boolean;
   valueAnnotation?: string;
+  isPercentage?: boolean;
 };
 
 export function LineChart<T extends Value>({
@@ -48,9 +58,10 @@ export function LineChart<T extends Value>({
   timeframe = '5weeks',
   signaalwaarde,
   formatTooltip,
-  formatYAxis = formatYAxisFunc,
+  formatYAxis,
   showFill = true,
   valueAnnotation,
+  isPercentage,
 }: LineChartProps<T>) {
   const {
     tooltipData,
@@ -122,7 +133,13 @@ export function LineChart<T extends Value>({
           width={width}
           xDomain={xDomain}
           yDomain={yDomain}
-          formatYAxis={formatYAxis}
+          formatYAxis={
+            formatYAxis
+              ? formatYAxis
+              : isPercentage
+              ? formatYAxisPercentageFn
+              : formatYAxisFn
+          }
           formatXAxis={formatXAxis}
           onHover={handleHover}
           isHovered={!!tooltipData}
@@ -137,12 +154,47 @@ export function LineChart<T extends Value>({
           >
             {formatTooltip
               ? formatTooltip(tooltipData)
-              : `${formatDateFromSeconds(
-                  tooltipData.__date.getSeconds()
-                )}: ${formatNumber(tooltipData.__value)}`}
+              : formatStandardTooltip(
+                  (tooltipData as unknown) as Value & TrendValue,
+                  isPercentage
+                )}
           </Tooltip>
         )}
       </Box>
     </Box>
+  );
+}
+
+function formatStandardTooltip<T extends Value & TrendValue>(
+  value: T,
+  isPercentage?: boolean
+) {
+  const isDaily = isDailyValue([value]);
+  const isWeekly = isWeeklyValue([value]);
+
+  if (isDaily) {
+    return `${formatDateFromSeconds(
+      (value as TrendValue).__date.getSeconds()
+    )}: ${
+      isPercentage
+        ? `${formatPercentage(value.__value)}%`
+        : formatNumber(value.__value)
+    }`;
+  } else if (isWeekly) {
+    return `${formatDateFromSeconds(
+      (value as WeeklyValue).week_start_unix,
+      'short'
+    )} - ${formatDateFromSeconds(
+      (value as WeeklyValue).week_end_unix,
+      'short'
+    )}: ${
+      isPercentage
+        ? `${formatPercentage(value.__value)}%`
+        : formatNumber(value.__value)
+    }`;
+  }
+
+  throw new Error(
+    `Invalid value passed to format tooltip function: ${JSON.stringify(value)}`
   );
 }

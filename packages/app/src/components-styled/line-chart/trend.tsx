@@ -1,6 +1,5 @@
 import { localPoint } from '@visx/event';
 import { AreaClosed, Bar, LinePath } from '@visx/shape';
-// import { ScaleLinear, ScaleTime } from 'd3-scale';
 import { useCallback } from 'react';
 import { TrendValue } from './helpers';
 
@@ -10,10 +9,17 @@ export type TrendProps = {
   isHovered: boolean;
   trend: TrendValue[];
   type: TrendType;
-  // x: ScaleTime<number, number>;
-  // y: ScaleLinear<number, number>;
-  x: any;
-  y: any;
+  /**
+   * I would like to type these as follows:
+   *
+   * xScale: ScaleTime<number, number>;
+   * yScale: ScaleLinear<number, number>;
+   *
+   * ... using the types from 'd3-scale' but the visx components used here do not
+   * allow it.
+   */
+  xScale: any;
+  yScale: any;
   onHover: (
     event: React.TouchEvent<SVGRectElement> | React.MouseEvent<SVGRectElement>,
     data?: TrendValue,
@@ -22,7 +28,7 @@ export type TrendProps = {
   ) => void;
   height: number;
   width: number;
-  bisect: (trend: TrendValue[], mx: number) => TrendValue;
+  bisect: (trend: TrendValue[], xPosition: number) => TrendValue;
   color: string;
 };
 
@@ -30,8 +36,8 @@ export function Trend({
   trend,
   type = 'line',
   color,
-  x,
-  y,
+  xScale,
+  yScale,
   onHover,
   height,
   width,
@@ -44,12 +50,17 @@ export function Trend({
     ) => {
       if (trend.length < 1) return null;
 
-      const { x: xPosition } = localPoint(event) || { x: 0 };
-      const pointData = bisect(trend, xPosition);
+      const { x } = localPoint(event) || { x: 0 };
+      const pointData = bisect(trend, x);
 
-      onHover(event, pointData, x(pointData.__date), y(pointData.__value));
+      onHover(
+        event,
+        pointData,
+        xScale(pointData.__date),
+        yScale(pointData.__value)
+      );
     },
-    [onHover, y, x, trend, bisect]
+    [onHover, yScale, xScale, trend, bisect]
   );
 
   return (
@@ -57,8 +68,8 @@ export function Trend({
       {type === 'line' && (
         <LinePath
           data={trend}
-          x={(d) => x(d.__date)}
-          y={(d) => y(d.__value)}
+          x={(d) => xScale(d.__date)}
+          y={(d) => yScale(d.__value)}
           stroke={color}
           strokeWidth={isHovered ? 3 : 2}
         />
@@ -68,16 +79,16 @@ export function Trend({
         <>
           <AreaClosed
             data={trend}
-            x={(d) => x(d.__date)}
-            y={(d) => y(d.__value)}
+            x={(d) => xScale(d.__date)}
+            y={(d) => yScale(d.__value)}
             fill={color}
             fillOpacity={0.05}
-            yScale={y}
+            yScale={yScale}
           />
           <LinePath
             data={trend}
-            x={(d) => x(d.__date)}
-            y={(d) => y(d.__value)}
+            x={(d) => xScale(d.__date)}
+            y={(d) => yScale(d.__value)}
             stroke={color}
             strokeWidth={isHovered ? 3 : 2}
           />

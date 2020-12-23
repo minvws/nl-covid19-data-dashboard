@@ -67,12 +67,12 @@ export const Chart = memo(function Chart({
     height: height - margin.top - margin.bottom,
   };
 
-  const x = scaleTime({
+  const xScale = scaleTime({
     domain: xDomain,
     range: [0, bounded.width],
   });
 
-  const y = scaleLinear({
+  const yScale = scaleLinear({
     domain: yDomain,
     range: [bounded.height, 0],
     nice: NUM_TICKS,
@@ -83,7 +83,7 @@ export const Chart = memo(function Chart({
       if (trend.length === 1) return trend[0];
 
       // const bisectorFn = bisector((d: TrendValue) => d.__date).left;
-      const date = x.invert(xPosition - margin.left);
+      const date = xScale.invert(xPosition - margin.left);
 
       // const index: number = bisectorFn(trend, date, 1);
       const index = bisectLeft(
@@ -97,21 +97,21 @@ export const Chart = memo(function Chart({
 
       return +date - +d0.__date > +d1.__date - +date ? d1 : d0;
     },
-    [margin, x]
+    [margin, xScale]
   );
 
   return (
     <svg width={width} height={height}>
       <Group left={margin.left} top={margin.top}>
         <GridRows
-          scale={y}
+          scale={yScale}
           width={bounded.width}
           numTicks={NUM_TICKS}
           stroke={defaultColors.axis}
         />
         <AxisBottom
-          scale={x}
-          tickValues={x.domain()}
+          scale={xScale}
+          tickValues={xScale.domain()}
           tickFormat={formatXAxis as AnyTickFormatter}
           top={bounded.height}
           stroke={defaultColors.axis}
@@ -123,7 +123,7 @@ export const Chart = memo(function Chart({
           hideTicks
         />
         <AxisLeft
-          scale={y}
+          scale={yScale}
           numTicks={4}
           hideTicks
           hideAxisLine
@@ -139,7 +139,7 @@ export const Chart = memo(function Chart({
         />
 
         {benchmark && (
-          <Group top={y(benchmark.value)}>
+          <Group top={yScale(benchmark.value)}>
             <Text fontSize="14px" dy={-8} fill={defaultColors.benchmark}>
               {benchmark.value}
             </Text>
@@ -166,8 +166,8 @@ export const Chart = memo(function Chart({
           type={type}
           height={bounded.height}
           width={bounded.width}
-          x={x}
-          y={y}
+          xScale={xScale}
+          yScale={yScale}
           color={defaultColors.main}
           onHover={onHover}
           isHovered={isHovered}
