@@ -21,7 +21,6 @@ type ActueelData = IMunicipalityData & { text: TALLLanguages };
 
 const MunicipalityActueel: FCWithLayout<ActueelData> = (data) => {
   const router = useRouter();
-  const siteText = data.text;
   const text = data.text.gemeente_actueel;
   const safetyRegionForMunicipality =
     typeof router.query.code === 'string'
@@ -33,15 +32,15 @@ const MunicipalityActueel: FCWithLayout<ActueelData> = (data) => {
       <Tile>De actuele situatie in {data.municipalityName}</Tile>
       <Tile>Artikelen</Tile>
       <ChoroplethTile
-        title={siteText.veiligheidsregio_index.selecteer_titel}
+        title={text.risiconiveaus.selecteer_titel}
         description={
           <>
             <span
               dangerouslySetInnerHTML={{
-                __html: siteText.veiligheidsregio_index.selecteer_toelichting,
+                __html: text.risiconiveaus.selecteer_toelichting,
               }}
             />
-            <EscalationMapLegenda text={siteText} />
+            <EscalationMapLegenda text={data.text} />
           </>
         }
       >
@@ -59,16 +58,16 @@ const MunicipalityActueel: FCWithLayout<ActueelData> = (data) => {
           { href: '/landelijk', text: text.quick_links.links.nationaal },
           safetyRegionForMunicipality
             ? {
-                href: `/veiligheidsregio/${safetyRegionForMunicipality.code}/positief-geteste-mensen`,
-                text: replaceVariablesInText(
-                  text.quick_links.links.veiligheidsregio,
-                  { safetyRegionName: safetyRegionForMunicipality.name }
-                ),
-              }
+              href: `/veiligheidsregio/${safetyRegionForMunicipality.code}/positief-geteste-mensen`,
+              text: replaceVariablesInText(
+                text.quick_links.links.veiligheidsregio,
+                { safetyRegionName: safetyRegionForMunicipality.name }
+              ),
+            }
             : {
-                href: '/veiligheidsregio',
-                text: text.quick_links.links.veiligheidsregio_fallback,
-              },
+              href: '/veiligheidsregio',
+              text: text.quick_links.links.veiligheidsregio_fallback,
+            },
           {
             href: '/gemeentes',
             text: replaceVariablesInText(text.quick_links.links.gemeente, {

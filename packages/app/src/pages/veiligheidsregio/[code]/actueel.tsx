@@ -20,7 +20,6 @@ type ActueelData = ISafetyRegionData & { text: TALLLanguages };
 
 const SafetyRegionActueel: FCWithLayout<ActueelData> = (data) => {
   const router = useRouter();
-  const siteText = data.text;
   const text = data.text.veiligheidsregio_actueel;
 
   return (
@@ -28,15 +27,15 @@ const SafetyRegionActueel: FCWithLayout<ActueelData> = (data) => {
       <Tile>De actuele situatie in {data.safetyRegionName}</Tile>
       <Tile>Artikelen</Tile>
       <ChoroplethTile
-        title={siteText.veiligheidsregio_index.selecteer_titel}
+        title={text.risiconiveaus.selecteer_titel}
         description={
           <>
             <span
               dangerouslySetInnerHTML={{
-                __html: siteText.veiligheidsregio_index.selecteer_toelichting,
+                __html: text.risiconiveaus.selecteer_toelichting,
               }}
             />
-            <EscalationMapLegenda text={siteText} />
+            <EscalationMapLegenda text={data.text} />
           </>
         }
       >

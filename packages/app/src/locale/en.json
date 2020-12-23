@@ -750,6 +750,10 @@
     "date_yesterday": "yesterday"
   },
   "nationaal_actueel": {
+    "risiconiveaus": {
+      "selecteer_titel": "Risiconiveaus",
+      "selecteer_toelichting": "De kaart geeft het risiconiveau per veiligheidsregio weer.\n\n[Meer over de risiconiveaus](/over-risiconiveaus)"
+    },
     "data_sitemap_titel": "",
     "data_sitemap_toelichting": "",
     "quick_links":  {
@@ -2137,6 +2141,10 @@
     "VR25": "http://www.veiligheidsregioflevoland.nl/"
   },
   "veiligheidsregio_actueel": {
+    "risiconiveaus": {
+      "selecteer_titel": "Risiconiveaus",
+      "selecteer_toelichting": "De kaart geeft het risiconiveau per veiligheidsregio weer.\n\n[Meer over de risiconiveaus](/over-risiconiveaus)"
+    },
     "quick_links":  {
       "header": "Bekijk alle cijfers van het dashboard",
       "links": {
@@ -2147,6 +2155,10 @@
     }
   },
   "gemeente_actueel": {
+    "risiconiveaus": {
+      "selecteer_titel": "Risiconiveaus",
+      "selecteer_toelichting": "De kaart geeft het risiconiveau per veiligheidsregio weer.\n\n[Meer over de risiconiveaus](/over-risiconiveaus)"
+    },
     "quick_links":  {
       "header": "Bekijk alle cijfers van het dashboard",
       "links": {

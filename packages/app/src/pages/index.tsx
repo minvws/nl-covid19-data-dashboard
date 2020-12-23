@@ -11,7 +11,6 @@ import { createSelectRegionHandler } from '~/components/choropleth/select-handle
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import { DataSitemap } from '~/domain/topical/data-site-map';
-import siteText from '~/locale';
 import { TALLLanguages } from '~/locale/';
 import { National } from '~/types/data';
 import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
@@ -29,7 +28,7 @@ interface IHomeData {
 
 const Home: FCWithLayout<IHomeData> = (data) => {
   const router = useRouter();
-  const siteText = data.text;
+  const notificatie = data.text.notificatie;
   const text = data.text.nationaal_actueel;
 
   return (
@@ -37,15 +36,15 @@ const Home: FCWithLayout<IHomeData> = (data) => {
       <Tile>De actuele situatie in Nederland</Tile>
       <Tile>Artikelen</Tile>
       <ChoroplethTile
-        title={siteText.veiligheidsregio_index.selecteer_titel}
+        title={text.risiconiveaus.selecteer_titel}
         description={
           <>
             <span
               dangerouslySetInnerHTML={{
-                __html: siteText.veiligheidsregio_index.selecteer_toelichting,
+                __html: text.risiconiveaus.selecteer_toelichting,
               }}
             />
-            <EscalationMapLegenda text={siteText} />
+            <EscalationMapLegenda text={data.text} />
           </>
         }
       >
@@ -61,12 +60,12 @@ const Home: FCWithLayout<IHomeData> = (data) => {
 
       <NewsMessage
         imageSrc="images/toelichting-afbeelding.png"
-        linkText={siteText.notificatie.link.text}
-        href={siteText.notificatie.link.href}
-        message={siteText.notificatie.bericht}
-        publishedAt={siteText.notificatie.datum}
-        subtitle={siteText.notificatie.subtitel}
-        title={siteText.notificatie.titel}
+        linkText={notificatie.link.text}
+        href={notificatie.link.href}
+        message={notificatie.bericht}
+        publishedAt={notificatie.datum}
+        subtitle={notificatie.subtitel}
+        title={notificatie.titel}
       />
 
       <DataSitemap />
