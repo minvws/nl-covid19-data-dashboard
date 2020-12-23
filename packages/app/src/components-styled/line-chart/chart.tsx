@@ -99,7 +99,7 @@ export const Chart = memo(function Chart({
   );
 
   return (
-    <svg width={width} height={height}>
+    <svg width={width} height={height} role='img'>
       <Group left={margin.left} top={margin.top}>
         <GridRows
           scale={yScale}
