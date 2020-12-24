@@ -1,24 +1,16 @@
 import css from '@styled-system/css';
-import {
-  FormEvent,
-  forwardRef,
-  MouseEvent,
-  ReactNode,
-  useRef,
-  useState,
-} from 'react';
+import { useRouter } from 'next/router';
+import { forwardRef, ReactNode, useRef, useState } from 'react';
 import styled from 'styled-components';
 import useResizeObserver from 'use-resize-observer/polyfilled';
 import { Box } from '~/components-styled/base';
-import { useIsMounted } from '~/utils/use-is-mounted';
-import { SearchInput } from './search-input';
-import { SearchResults } from './search-results';
 import siteText from '~/locale';
+import { useIsMounted } from '~/utils/use-is-mounted';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useBreakpoints } from '~/utils/useBreakpoints';
-import { Option, useSearchResults } from './use-search-results';
-import { useRouter } from 'next/router';
-import { useHitFocus } from './use-hit-focus';
+import { SearchInput } from './search-input';
+import { SearchResults } from './search-results';
+import { useSearchResults } from './use-search-results';
 
 export function Search() {
   const containerRef = useRef<HTMLFormElement>(null);
@@ -48,7 +40,7 @@ export function Search() {
 
   useOnClickOutside([containerRef], () => setHasHitFocus(false));
 
-  const showResults = value; //&& (hasFocus || hasHitFocus || !breakpoints.md);
+  const showResults = value && (hasFocus || hasHitFocus || !breakpoints.md);
 
   const ariaControlsId = useRef(`id-search`);
 
