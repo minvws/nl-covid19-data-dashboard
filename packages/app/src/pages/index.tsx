@@ -1,5 +1,6 @@
 import fs from 'fs';
 import { useRouter } from 'next/router';
+import { GetStaticProps } from 'next';
 import path from 'path';
 import { useState } from 'react';
 import Notification from '~/assets/notification.svg';
@@ -39,6 +40,7 @@ interface INationalHomepageData {
   text: TALLLanguages;
   lastGenerated: string;
   escalationLevelCounts: EscalationLevelCounts;
+  locale: 'nl_NL' | 'en_GB';
 }
 
 /**
@@ -55,11 +57,14 @@ type EscalationLevelCounts = {
 };
 
 const Home: FCWithLayout<INationalHomepageData> = (props) => {
-  const { data, text, escalationLevelCounts } = props;
+  const { data, text, escalationLevelCounts, locale } = props;
   const router = useRouter();
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
     'municipal'
   );
+
+  // eslint-disable-next-line no-console
+  console.log(`according to next.js you are looking at the ${locale} locale`);
 
   return (
     <TileList>
@@ -194,7 +199,9 @@ const getEscalationCounts = (
   return counts;
 };
 
-export async function getStaticProps(): Promise<StaticProps> {
+export async function getStaticProps({
+  locale,
+}: GetStaticProps): Promise<StaticProps> {
   const text = parseMarkdownInLocale((await import('../locale/index')).default);
 
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
@@ -229,7 +236,9 @@ export async function getStaticProps(): Promise<StaticProps> {
   const escalationLevels = regionsData.escalation_levels;
   const escalationLevelCounts = getEscalationCounts(escalationLevels);
 
-  return { props: { data, escalationLevelCounts, text, lastGenerated } };
+  return {
+    props: { data, escalationLevelCounts, text, lastGenerated, locale },
+  };
 }
 
 export default Home;
