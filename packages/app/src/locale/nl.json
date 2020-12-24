@@ -774,6 +774,7 @@
       "dateRangeOfReport": "Waarde van {{startDate}} - {{endDate}}"
     },
     "tooltip": {
+      "positive_tested_value": "{{totalPositiveValue}} per 100.000",
       "positive_tested_people": "{{totalPositiveTestedPeople}} in totaal"
     },
     "niveau": "niveau",
