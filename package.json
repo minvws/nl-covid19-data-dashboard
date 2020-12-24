@@ -1,6 +1,11 @@
 {
   "name": "corona-dashboard",
   "private": true,
+  "resolutions": {
+    "//": "Visx internally uses version 3 but this isn't compatible with IE11",
+    "d3-scale": "^2",
+    "@types/d3-scale": "^2"
+  },
   "scripts": {
     "test": "yarn workspaces run test",
     "test:ci": "yarn workspaces run test:ci",

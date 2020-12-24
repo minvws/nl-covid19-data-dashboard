@@ -3,10 +3,6 @@
   "version": "2.9.0",
   "private": true,
   "license": "EUROPEAN UNION PUBLIC LICENCE v. 1.2",
-  "resolutions": {
-    "//": "Visx internally uses version 3 but this isn't compatible with IE11",
-    "d3-scale": "^2"
-  },
   "dependencies": {
     "@formatjs/intl-datetimeformat": "^2.6.7",
     "@formatjs/intl-getcanonicallocales": "^1.4.5",
