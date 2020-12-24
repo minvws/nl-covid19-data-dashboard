@@ -38,7 +38,7 @@ export function MiniTrendTile<T extends Value>(props: MiniTrendTileProps<T>) {
               linesConfig={[{ metricProperty }]}
               componentCallback={componentCallback}
               showMarkerLine={true}
-              formatTooltip={(value: TrendValue) => formatNumber(value.__value)}
+              formatTooltip={(value: any) => formatNumber(value.__value)}
             />
           )}
         </ParentSize>
