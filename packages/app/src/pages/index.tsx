@@ -2,6 +2,7 @@ import fs from 'fs';
 import { useRouter } from 'next/router';
 import path from 'path';
 import GetestIcon from '~/assets/test.svg';
+import { Box } from '~/components-styled/base';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { MaxWidth } from '~/components-styled/max-width';
 import { NewsMessage } from '~/components-styled/news-message';
@@ -37,12 +38,38 @@ const Home: FCWithLayout<IHomeData> = (homeData) => {
     <MaxWidth>
       <Tile>De actuele situatie in Nederland</Tile>
       <Tile>
-        <MiniTrendTile
-          title={text.nationaal_actueel.mini_trend_tiles.positief_getest.title}
-          text={'data driven text'}
-          icon={<GetestIcon />}
-          trendData={dataInfectedDelta.values}
-        />
+        <Box display="flex" flexDirection="row">
+          <MiniTrendTile
+            flex="1 1 33%"
+            title={
+              text.nationaal_actueel.mini_trend_tiles.positief_getest.title
+            }
+            text={'data driven text'}
+            icon={<GetestIcon />}
+            trendData={dataInfectedDelta.values}
+            metricProperty="infected_daily_increase"
+          />
+          <MiniTrendTile
+            flex="1 1 33%"
+            title={
+              text.nationaal_actueel.mini_trend_tiles.positief_getest.title
+            }
+            text={'data driven text'}
+            icon={<GetestIcon />}
+            trendData={dataInfectedDelta.values}
+            metricProperty="infected_daily_increase"
+          />
+          <MiniTrendTile
+            flex="1 1 33%"
+            title={
+              text.nationaal_actueel.mini_trend_tiles.positief_getest.title
+            }
+            text={'data driven text'}
+            icon={<GetestIcon />}
+            trendData={dataInfectedDelta.values}
+            metricProperty="infected_daily_increase"
+          />
+        </Box>
       </Tile>
       <ChoroplethTile
         title={text.veiligheidsregio_index.selecteer_titel}

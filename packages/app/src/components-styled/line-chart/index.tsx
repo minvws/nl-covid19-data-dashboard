@@ -6,10 +6,18 @@ import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
 import text from '~/locale/index';
-import { formatDateFromSeconds } from '~/utils/formatDate';
+import {
+  formatDateFromMilliseconds,
+  formatDateFromSeconds,
+} from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { TimeframeOption } from '~/utils/timeframe';
-import { Chart, defaultMargin } from './components/chart';
+import {
+  Chart,
+  ComponentCallbackFunction,
+  defaultMargin,
+} from './components/chart';
+import { Tooltip } from './components/tooltip';
 import {
   calculateYMax,
   getTrendData,
@@ -19,7 +27,6 @@ import {
   Value,
   WeeklyValue,
 } from './helpers';
-import { Tooltip } from './components/tooltip';
 
 const dateToValue = (d: Date) => d.valueOf() / 1000;
 const formatXAxis = (date: Date) =>
@@ -48,6 +55,7 @@ export type LineChartProps<T> = {
   showFill?: boolean;
   valueAnnotation?: string;
   isPercentage?: boolean;
+  componentCallback?: ComponentCallbackFunction;
 };
 
 export function LineChart<T extends Value>({
@@ -62,6 +70,7 @@ export function LineChart<T extends Value>({
   showFill = true,
   valueAnnotation,
   isPercentage,
+  componentCallback,
 }: LineChartProps<T>) {
   const {
     tooltipData,
@@ -151,6 +160,7 @@ export function LineChart<T extends Value>({
           onHover={handleHover}
           isHovered={!!tooltipData}
           benchmark={benchmark}
+          componentCallback={componentCallback}
         />
 
         {isDefined(tooltipData) && (
@@ -180,8 +190,8 @@ function formatDefaultTooltip<T extends Value & TrendValue>(
   const isWeekly = isWeeklyValue([value]);
 
   if (isDaily) {
-    return `${formatDateFromSeconds(
-      (value as TrendValue).__date.getSeconds()
+    return `${formatDateFromMilliseconds(
+      (value as TrendValue).__date.getTime()
     )}: ${
       isPercentage
         ? `${formatPercentage(value.__value)}%`

@@ -1,11 +1,17 @@
-import { AxisBottom, AxisLeft, TickFormatter } from '@visx/axis';
+import {
+  AxisBottom,
+  AxisLeft,
+  TickFormatter,
+  TickLabelProps,
+} from '@visx/axis';
 import { GridRows } from '@visx/grid';
 import { Group } from '@visx/group';
 import { scaleLinear, scaleTime } from '@visx/scale';
 import { Line } from '@visx/shape';
 import { Text } from '@visx/text';
 import { bisectLeft } from 'd3-array';
-import { memo, useCallback } from 'react';
+import { NumberValue, ScaleLinear, ScaleTime } from 'd3-scale';
+import { memo, ReactNode, useCallback } from 'react';
 import { colors } from '~/style/theme';
 import { TrendValue } from '../helpers';
 import { Trend, TrendType } from './trend';
@@ -26,6 +32,10 @@ type Benchmark = {
   label: string;
 };
 
+export type ComponentCallbackFunction = (
+  callbackInfo: ComponentCallbackInfo
+) => ReactNode | undefined;
+
 type ChartProps = {
   benchmark?: Benchmark;
   isHovered: boolean;
@@ -44,6 +54,7 @@ type ChartProps = {
   margin?: { top: number; right: number; bottom: number; left: number };
   formatXAxis: TickFormatter<Date>;
   formatYAxis: TickFormatter<number>;
+  componentCallback?: ComponentCallbackFunction;
 };
 
 type AnyTickFormatter = (value: any) => string;
@@ -61,6 +72,7 @@ export const Chart = memo(function Chart({
   benchmark,
   formatXAxis,
   formatYAxis,
+  componentCallback = (_callbackInfo: ComponentCallbackInfo) => undefined,
 }: ChartProps) {
   const bounded = {
     width: width - margin.left - margin.right,
@@ -101,40 +113,58 @@ export const Chart = memo(function Chart({
   return (
     <svg width={width} height={height} role="img">
       <Group left={margin.left} top={margin.top}>
-        <GridRows
-          scale={yScale}
-          width={bounded.width}
-          numTicks={NUM_TICKS}
-          stroke={defaultColors.axis}
-        />
-        <AxisBottom
-          scale={xScale}
-          tickValues={xScale.domain()}
-          tickFormat={formatXAxis as AnyTickFormatter}
-          top={bounded.height}
-          stroke={defaultColors.axis}
-          tickLabelProps={() => ({
-            dx: -25,
-            fill: defaultColors.axisLabels,
-            fontSize: 12,
-          })}
-          hideTicks
-        />
-        <AxisLeft
-          scale={yScale}
-          numTicks={4}
-          hideTicks
-          hideAxisLine
-          stroke={defaultColors.axis}
-          tickFormat={formatYAxis as AnyTickFormatter}
-          tickLabelProps={() => ({
-            fill: defaultColors.axisLabels,
-            fontSize: 12,
-            dx: -5,
-            textAnchor: 'end',
-            verticalAnchor: 'middle',
-          })}
-        />
+        {createComponent(
+          {
+            type: 'GridRows',
+            configuration: {
+              scale: yScale,
+              width: bounded.width,
+              numTicks: NUM_TICKS,
+              stroke: defaultColors.axis,
+            },
+          },
+          componentCallback
+        )}
+        {createComponent(
+          {
+            type: 'AxisBottom',
+            configuration: {
+              scale: xScale,
+              tickValues: xScale.domain(),
+              tickFormat: formatXAxis as AnyTickFormatter,
+              top: bounded.height,
+              stroke: defaultColors.axis,
+              tickLabelProps: () => ({
+                dx: -25,
+                fill: defaultColors.axisLabels,
+                fontSize: 12,
+              }),
+              hideTicks: true,
+            },
+          },
+          componentCallback
+        )}
+        {createComponent(
+          {
+            type: 'AxisLeft',
+            configuration: {
+              scale: yScale,
+              numTicks: 4,
+              hideTicks: true,
+              hideAxisLine: true,
+              stroke: defaultColors.axis,
+              tickFormat: formatYAxis as AnyTickFormatter,
+              tickLabelProps: () => ({
+                fill: defaultColors.axisLabels,
+                fontSize: 12,
+                dx: -5,
+                textAnchor: 'end',
+                verticalAnchor: 'middle',
+              }),
+            },
+          },
+          componentCallback
+        )}
 
         {benchmark && (
           <Group top={yScale(benchmark.value)}>
@@ -175,3 +205,66 @@ export const Chart = memo(function Chart({
     </svg>
   );
 });
+
+function createComponent(
+  callbackInfo: ComponentCallbackInfo,
+  componentCallback: ComponentCallbackFunction
+) {
+  const result = componentCallback(callbackInfo);
+  switch (callbackInfo.type) {
+    case 'GridRows': {
+      return result !== undefined ? (
+        result
+      ) : (
+        <GridRows {...(callbackInfo.configuration as any)} />
+      );
+    }
+    case 'AxisBottom':
+      return result !== undefined ? (
+        result
+      ) : (
+        <AxisBottom {...(callbackInfo.configuration as any)} />
+      );
+    case 'AxisLeft':
+      return result !== undefined ? (
+        result
+      ) : (
+        <AxisLeft {...(callbackInfo.configuration as any)} />
+      );
+  }
+}
+
+export type ComponentCallbackInfo =
+  | {
+      type: 'GridRows';
+      configuration: {
+        scale: ScaleLinear<number, number>;
+        width: number;
+        numTicks: number;
+        stroke: string;
+      };
+    }
+  | {
+      type: 'AxisBottom';
+      configuration: {
+        scale: ScaleTime<number, number>;
+        tickValues: any[];
+        tickFormat: AnyTickFormatter;
+        top: number;
+        stroke: string;
+        tickLabelProps: TickLabelProps<NumberValue> | undefined;
+        hideTicks: boolean;
+      };
+    }
+  | {
+      type: 'AxisLeft';
+      configuration: {
+        scale: ScaleLinear<number, number>;
+        numTicks: number;
+        hideTicks: boolean;
+        hideAxisLine: boolean;
+        stroke: string;
+        tickFormat: AnyTickFormatter;
+        tickLabelProps: TickLabelProps<NumberValue> | undefined;
+      };
+    };
