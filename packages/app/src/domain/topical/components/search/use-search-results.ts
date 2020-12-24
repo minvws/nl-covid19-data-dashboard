@@ -52,7 +52,6 @@ export function useSearchResults(term: string) {
 }
 
 const HITS: Option[] = [
-  ...[],
   ...municipalities.map((x) => ({
     type: 'gm' as const,
     code: x.gemcode,
