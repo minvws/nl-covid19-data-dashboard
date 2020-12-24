@@ -24,6 +24,7 @@ import styled from 'styled-components';
 import Getest from '~/assets/test.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { Spacer } from '~/components-styled/base';
+import { DataDrivenText } from '~/components-styled/data-driven-text';
 
 interface StaticProps {
   props: IHomeData;
@@ -48,10 +49,24 @@ const Home: FCWithLayout<IHomeData> = (data) => {
         <Text as="h1" css={css({ fontSize: '1.6875rem', fontWeight: 'normal' })}>De actuele situatie in <b>Nederland:</b></Text>
         <TopicalRow>
           <TopicalTile icon={<Getest />} title='Aantal positieve testen'>
-            <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas condimentum augue et nulla sollicitudin eleifend. Curabitur consequat, dui in consectetur venenatis, urna urna aliquam leo, sed mollis enim elit ac odio.</Text>
+
+            <DataDrivenText
+              data={data.data}
+              metricName="infected_people_total"
+              metricProperty="infected_daily_total"
+              differenceKey="infected_people_total__infected_daily_total"
+              valueTexts={text.data_driven_texts.infected_people_total.value}
+              differenceTexts={text.data_driven_texts.infected_people_total.difference} />
           </TopicalTile>
           <TopicalTile icon={<Ziekenhuis />} title="Ziekenhuisopnames">
-            <Text>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla facilisi. Nulla laoreet mattis nulla, a gravida magna malesuada sed. Aenean quis gravida massa. </Text>
+
+            <DataDrivenText
+              data={data.data}
+              metricName="intake_hospital_ma"
+              metricProperty="moving_average_hospital"
+              differenceKey="intake_hospital_ma__moving_average_hospital"
+              valueTexts={text.data_driven_texts.intake_hospital.value}
+              differenceTexts={text.data_driven_texts.intake_hospital.difference} />
           </TopicalTile>
           <TopicalTile icon={<Ziekenhuis />} title="Risiconiveau &amp; maatregelen">
             <Text>Donec quis posuere massa. Maecenas posuere magna eros, ut ornare arcu vehicula at. </Text>
