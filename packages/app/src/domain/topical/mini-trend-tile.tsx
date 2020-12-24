@@ -7,6 +7,7 @@ import { ComponentCallbackInfo } from '~/components-styled/line-chart/components
 import { Value } from '~/components-styled/line-chart/helpers';
 import { Heading } from '~/components-styled/typography';
 import { formatDateFromMilliseconds } from '~/utils/formatDate';
+import { formatNumber } from '~/utils/formatNumber';
 
 type MiniTrendTileProps<T extends Value> = {
   icon: JSX.Element;
@@ -36,6 +37,8 @@ export function MiniTrendTile<T extends Value>(props: MiniTrendTileProps<T>) {
               values={trendData}
               linesConfig={[{ metricProperty }]}
               componentCallback={componentCallback}
+              showMarkerLine={true}
+              formatTooltip={(value: TrendValue) => formatNumber(value.__value)}
             />
           )}
         </ParentSize>
@@ -64,6 +67,7 @@ function componentCallback(callbackInfo: ComponentCallbackInfo) {
         }
         return formatLastDate(d);
       };
+
       const tickLabelProps = (value: Date, index: number) => {
         const labelProps = callbackInfo.configuration.tickLabelProps
           ? callbackInfo.configuration.tickLabelProps(value, index)
@@ -71,6 +75,7 @@ function componentCallback(callbackInfo: ComponentCallbackInfo) {
         labelProps.textAnchor = value === domain[0] ? 'start' : 'middle';
         return labelProps;
       };
+
       return (
         <AxisBottom
           {...(callbackInfo.configuration as any)}

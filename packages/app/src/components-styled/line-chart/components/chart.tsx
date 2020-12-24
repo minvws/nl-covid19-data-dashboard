@@ -18,7 +18,19 @@ import { Trend, TrendType } from './trend';
 
 const NUM_TICKS = 3;
 
-export const defaultMargin = { top: 10, right: 20, bottom: 30, left: 30 };
+export type ChartMargins = {
+  top: number;
+  right: number;
+  bottom: number;
+  left: number;
+};
+
+export const defaultMargin: ChartMargins = {
+  top: 10,
+  right: 20,
+  bottom: 30,
+  left: 30,
+};
 
 const defaultColors = {
   main: colors.data.primary,

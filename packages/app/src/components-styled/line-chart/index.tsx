@@ -1,7 +1,7 @@
 import { TickFormatter } from '@visx/axis';
 import { useTooltip } from '@visx/tooltip';
 import { extent } from 'd3-array';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
@@ -14,9 +14,11 @@ import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { TimeframeOption } from '~/utils/timeframe';
 import {
   Chart,
+  ChartMargins,
   ComponentCallbackFunction,
   defaultMargin,
 } from './components/chart';
+import { Marker } from './components/marker';
 import { Tooltip } from './components/tooltip';
 import {
   calculateYMax,
@@ -56,6 +58,7 @@ export type LineChartProps<T> = {
   valueAnnotation?: string;
   isPercentage?: boolean;
   componentCallback?: ComponentCallbackFunction;
+  showMarkerLine?: boolean;
 };
 
 export function LineChart<T extends Value>({
@@ -71,6 +74,7 @@ export function LineChart<T extends Value>({
   valueAnnotation,
   isPercentage,
   componentCallback,
+  showMarkerLine = false,
 }: LineChartProps<T>) {
   const {
     tooltipData,
@@ -79,6 +83,17 @@ export function LineChart<T extends Value>({
     showTooltip,
     hideTooltip,
   } = useTooltip<T & TrendValue>();
+
+  const [markerInfo, setMarkerInfo] = useState<
+    | {
+        xPosition: number;
+        yPosition: number;
+        height: number;
+        data: any;
+        margins: ChartMargins;
+      }
+    | undefined
+  >(undefined);
 
   const metricProperties = useMemo(
     () => linesConfig.map((x) => x.metricProperty) as string[],
@@ -120,11 +135,19 @@ export function LineChart<T extends Value>({
     ) => {
       if (event.type === 'mouseleave') {
         hideTooltip();
+        setMarkerInfo(undefined);
       } else {
         showTooltip({
           tooltipData: data,
           tooltipLeft: xPosition,
           tooltipTop: yPosition,
+        });
+        setMarkerInfo({
+          xPosition: xPosition + defaultMargin.left,
+          yPosition: yPosition + defaultMargin.top,
+          height,
+          margins: defaultMargin,
+          data,
         });
       }
     },
@@ -176,6 +199,17 @@ export function LineChart<T extends Value>({
                   isPercentage
                 )}
           </Tooltip>
+        )}
+
+        {markerInfo && (
+          <Marker
+            x={markerInfo.xPosition}
+            y={markerInfo.yPosition}
+            data={markerInfo.data}
+            height={markerInfo.height}
+            margins={markerInfo.margins}
+            showLine={showMarkerLine}
+          />
         )}
       </Box>
     </Box>
