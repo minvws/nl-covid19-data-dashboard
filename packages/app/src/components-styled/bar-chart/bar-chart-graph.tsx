@@ -94,7 +94,7 @@ export function BarChartGraph({
 
       {values.map((value, index) => {
         return (
-          <StyledGroup key={index}>
+          <HoverGroup key={index}>
             <Text
               textAnchor="end"
               verticalAnchor="middle"
@@ -124,7 +124,7 @@ export function BarChartGraph({
               onMouseMove={(event) => onMouseMoveBar(value, event)}
               onMouseLeave={onMouseLeaveBar}
             />
-          </StyledGroup>
+          </HoverGroup>
         );
       })}
     </StyledSvg>
@@ -142,14 +142,14 @@ const StyledSvg = styled.svg(
   })
 );
 
-const StyledGroup = styled(Group)({});
+const HoverGroup = styled(Group)({});
 const StyledHoverBar = styled(Bar)(
   css({
     fill: 'transparent',
     // transparent stroke is to capture mouse movements in between bars for the tooltip
     stroke: 'transparent',
 
-    [`${StyledGroup}:hover &`]: {
+    [`${HoverGroup}:hover &`]: {
       fill: 'lightBlue',
     },
   })

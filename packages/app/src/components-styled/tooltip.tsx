@@ -152,7 +152,6 @@ export function Tooltip<T>({
                 borderBottom: '5px solid transparent',
                 borderRight:  '7px solid white'
               }
-              break;
             default:
               return {}
           }
