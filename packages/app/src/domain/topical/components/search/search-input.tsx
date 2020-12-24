@@ -18,11 +18,21 @@ interface SearchInputProps {
   onBlur: () => void;
   ariaControls: string;
   isDisabled: boolean;
+  focusIndex: number;
 }
 
 export const SearchInput = forwardRef<HTMLDivElement, SearchInputProps>(
   (
-    { value, placeholder, onChange, onFocus, onBlur, ariaControls, isDisabled },
+    {
+      value,
+      placeholder,
+      onChange,
+      onFocus,
+      onBlur,
+      ariaControls,
+      isDisabled,
+      focusIndex,
+    },
     ref
   ) => {
     const inputRef = useRef<HTMLInputElement>(null);
@@ -63,6 +73,7 @@ export const SearchInput = forwardRef<HTMLDivElement, SearchInputProps>(
           id={id.current}
           aria-autocomplete="list"
           aria-controls={ariaControls}
+          aria-activedescendant={`${ariaControls}-result-${focusIndex}`}
           disabled={isDisabled}
         />
       </Box>

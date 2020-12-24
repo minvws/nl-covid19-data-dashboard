@@ -16,8 +16,9 @@ import { SearchResults } from './search-results';
 import siteText from '~/locale';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useBreakpoints } from '~/utils/useBreakpoints';
-import { Option } from './use-search-results';
+import { Option, useSearchResults } from './use-search-results';
 import { useRouter } from 'next/router';
+import { useHitFocus } from './use-hit-focus';
 
 export function Search() {
   const containerRef = useRef<HTMLFormElement>(null);
@@ -30,19 +31,26 @@ export function Search() {
   const breakpoints = useBreakpoints();
   const router = useRouter();
 
-  useOnClickOutside([containerRef], () => setHasHitFocus(false));
-
-  const showResults = value && (hasFocus || hasHitFocus || !breakpoints.md);
-
-  const ariaControlsId = useRef(`id-${Math.random()}`);
-
-  function handleSelect(option: Option, openInNewWindow: boolean) {
-    setValueSubmitted(option.name);
+  const {
+    hits,
+    vrHits,
+    gmHits,
+    focusIndex,
+    focusRef,
+    setFocusIndex,
+  } = useSearchResults(value, (option, openInNewWindow) => {
+    setValueSubmitted(option.data.name);
 
     return openInNewWindow
-      ? window.open(option.link, '_blank')
-      : router.push(option.link);
-  }
+      ? window.open(option.data.link, '_blank')
+      : router.push(option.data.link);
+  });
+
+  useOnClickOutside([containerRef], () => setHasHitFocus(false));
+
+  const showResults = value; //&& (hasFocus || hasHitFocus || !breakpoints.md);
+
+  const ariaControlsId = useRef(`id-search`);
 
   return (
     <SearchForm
@@ -53,7 +61,8 @@ export function Search() {
       <Box
         role="combobox"
         aria-expanded={showResults ? 'true' : 'false'}
-        aria-haspopup="listbox"
+        aria-haspopup="grid"
+        aria-owns={ariaControlsId.current}
       >
         <SearchInput
           ref={heightRef}
@@ -63,6 +72,7 @@ export function Search() {
           onFocus={() => setHasFocus(true)}
           onBlur={() => setHasFocus(false)}
           ariaControls={ariaControlsId.current}
+          focusIndex={focusIndex}
           isDisabled={!!valueSubmitted}
         />
         {showResults && (
@@ -70,7 +80,12 @@ export function Search() {
             id={ariaControlsId.current}
             value={value}
             onHasHitFocusChange={setHasHitFocus}
-            onSelect={handleSelect}
+            hits={hits}
+            vrHits={vrHits}
+            gmHits={gmHits}
+            focusIndex={focusIndex}
+            focusRef={focusRef}
+            setFocusIndex={setFocusIndex}
           />
         )}
       </Box>

@@ -16,6 +16,7 @@ interface HitListProps {
   focusRef: RefObject<HTMLAnchorElement>;
   onHover: (index: number) => void;
   onFocus: (index: number) => void;
+  ariaId: string;
 }
 
 export function HitList({
@@ -26,6 +27,7 @@ export function HitList({
   noHitsMessage,
   onFocus,
   onHover,
+  ariaId,
 }: HitListProps) {
   return (
     <Box spacing={3}>
@@ -41,12 +43,12 @@ export function HitList({
                 hasFocus={focusIndex === x.index}
                 onHover={() => onHover(x.index)}
                 onFocus={() => onFocus(x.index)}
+                id={`${ariaId}-result-${x.index}`}
               >
                 <VisuallyHidden>
                   {x.data.type === 'gm'
                     ? siteText.common.gm_singular
-                    : siteText.common.vr_singular}
-                  {': '}
+                    : siteText.common.vr_singular}{' '}
                 </VisuallyHidden>
                 {x.data.name}
               </HitLink>
@@ -85,10 +87,11 @@ interface HitLinkProps {
   hasFocus: boolean;
   onHover: () => void;
   onFocus: () => void;
+  id: string;
 }
 
 const HitLink = forwardRef<HTMLAnchorElement, HitLinkProps>(
-  ({ href, children, hasFocus, onHover, onFocus }, ref) => {
+  ({ href, children, hasFocus, onHover, onFocus, id }, ref) => {
     return (
       <Link passHref href={href}>
         <StyledHitLink
@@ -97,6 +100,7 @@ const HitLink = forwardRef<HTMLAnchorElement, HitLinkProps>(
           onFocus={onFocus}
           onMouseMove={onHover}
           role="option"
+          id={id}
           aria-selected={hasFocus ? 'true' : 'false'}
         >
           {children}

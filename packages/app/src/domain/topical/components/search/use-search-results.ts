@@ -1,8 +1,9 @@
 import matchSorter from 'match-sorter';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
 import municipalities from '~/data/gemeente_veiligheidsregio.json';
 import safetyRegions from '~/data/index';
+import { useHitFocus } from './use-hit-focus';
 
 export interface Option {
   type: 'gm' | 'vr';
@@ -19,39 +20,68 @@ export interface Hit<T> {
   data: T;
 }
 
-export function useSearchResults(term: string) {
+export function useSearchResults(
+  term: string,
+  onSubmit: (option: Hit<Option>, openInNewWindow: boolean) => void
+) {
   const termTrimmed = term.trim();
 
-  return useMemo(() => {
-    const hits =
-      termTrimmed === ''
-        ? HITS
-        : matchSorter(HITS, termTrimmed, {
-            keys: ['searchTerms'],
-          });
+  const { hits, vrHits, gmHits } = useMemo(() => {
+    const hits = search(termTrimmed);
+    const gmHits = hits.filter((x) => x.data.type === 'gm');
+    const vrHits = hits.filter((x) => x.data.type === 'vr');
 
-    const gmHitsSliced = hits.filter((x) => x.type === 'gm').slice(0, 10);
-    const vrHitsSliced = hits.filter((x) => x.type === 'vr').slice(0, 10);
-
-    const hitsWithIndex = [...gmHitsSliced, ...vrHitsSliced].map(
-      (data, index) =>
-        ({
-          id: data.code,
-          data,
-          index,
-          score: 1 - hits.indexOf(data) / hits.length,
-        } as Hit<Option>)
-    );
-
-    return {
-      hits: hitsWithIndex,
-      gmHits: hitsWithIndex.filter((x) => x.data.type === 'gm'),
-      vrHits: hitsWithIndex.filter((x) => x.data.type === 'vr'),
-    };
+    return { hits, gmHits, vrHits };
   }, [termTrimmed]);
+
+  const { focusRef, focusIndex, setFocusIndex } = useHitFocus(
+    hits.length,
+    (index, openInNewWindow) => onSubmit(hits[index], openInNewWindow)
+  );
+
+  useEffect(() => {
+    /**
+     * On input-change we'll reset the focus index to 0. It's possible that
+     * there is a stronger hit among the VR hits (2nd column). If so, we won't
+     * reset the index to 0, instead it will be set to the index of that hit.
+     */
+    const index = vrHits[0]?.score === 1 ? vrHits[0].index : 0;
+
+    setFocusIndex(index);
+  }, [setFocusIndex, term, vrHits]);
+
+  return { hits, gmHits, vrHits, focusIndex, setFocusIndex, focusRef };
 }
 
-const HITS: Option[] = [
+function search(term: string, limit = 10) {
+  let options = [...ALL_HITS];
+
+  if (term !== '') {
+    options = matchSorter(options, term, {
+      keys: ['searchTerms'],
+    });
+  }
+
+  const hits = [
+    ...options.filter((x) => x.type === 'gm').slice(0, limit),
+    ...options.filter((x) => x.type === 'vr').slice(0, limit),
+  ].map(
+    (data, index) =>
+      ({
+        id: data.code,
+        data,
+        index,
+        /**
+         * Set score based on the order of the initial hits
+         */
+        score: 1 - options.indexOf(data) / options.length,
+      } as Hit<Option>)
+  );
+
+  return hits;
+}
+
+const ALL_HITS: Option[] = [
   ...municipalities.map((x) => ({
     type: 'gm' as const,
     code: x.gemcode,

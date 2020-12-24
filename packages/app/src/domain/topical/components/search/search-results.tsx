@@ -1,5 +1,5 @@
 import css from '@styled-system/css';
-import { useEffect, useRef } from 'react';
+import { RefObject, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import text from '~/locale';
 import { useHotkey } from '~/utils/hotkey/use-hotkey';
@@ -7,29 +7,34 @@ import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { HitList } from './hit-list';
 import { paddedStyle } from './search-input';
-import { useHitFocus } from './use-hit-focus';
-import { Option, useSearchResults } from './use-search-results';
+import { Hit, Option } from './use-search-results';
 
 interface SearchResultsProps {
   value: string;
   onHasHitFocusChange: (hasFocus: boolean) => void;
   id: string;
-  onSelect: (hit: Option, openInNewWindow: boolean) => void;
+  hits: Hit<Option>[];
+  vrHits: Hit<Option>[];
+  gmHits: Hit<Option>[];
+  focusIndex: number;
+  focusRef: RefObject<HTMLAnchorElement>;
+  setFocusIndex: (index: number) => void;
 }
 
 export function SearchResults({
   id,
   value,
   onHasHitFocusChange,
-  onSelect,
+  hits,
+  vrHits,
+  gmHits,
+  focusIndex,
+  focusRef,
+  setFocusIndex,
 }: SearchResultsProps) {
   const breakpoints = useBreakpoints();
+
   const onHasHitFocusChangeRef = useRef(onHasHitFocusChange);
-  const { gmHits, vrHits, hits } = useSearchResults(value);
-  const { focusRef, focusIndex, setFocusIndex } = useHitFocus(
-    hits.length,
-    (index, openInNewWindow) => onSelect(hits[index].data, openInNewWindow)
-  );
 
   useEffect(() => {
     onHasHitFocusChangeRef.current = onHasHitFocusChange;
@@ -62,6 +67,7 @@ export function SearchResults({
       title={text.common.gm_plural}
       focusIndex={focusIndex}
       focusRef={focusRef}
+      ariaId={id}
       noHitsMessage={replaceVariablesInText(text.search.no_hits, {
         search: value,
         subject: text.common.gm_plural,
@@ -81,6 +87,7 @@ export function SearchResults({
       title={text.common.vr_plural}
       focusIndex={focusIndex}
       focusRef={focusRef}
+      ariaId={id}
       noHitsMessage={replaceVariablesInText(text.search.no_hits, {
         search: value,
         subject: text.common.vr_plural,
