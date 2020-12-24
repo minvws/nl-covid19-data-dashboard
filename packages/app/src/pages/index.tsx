@@ -19,6 +19,11 @@ import { TALLLanguages } from '~/locale/';
 import { National } from '~/types/data';
 import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
 import { EscalationMapLegenda } from './veiligheidsregio';
+import css from '@styled-system/css';
+import styled from 'styled-components';
+import Getest from '~/assets/test.svg';
+import Ziekenhuis from '~/assets/ziekenhuis.svg';
+import { Spacer } from '~/components-styled/base';
 
 interface StaticProps {
   props: IHomeData;
@@ -36,78 +41,75 @@ const Home: FCWithLayout<IHomeData> = (data) => {
   const text = data.text.nationaal_actueel;
 
   return (
-    <MaxWidth>
-      <Tile>De actuele situatie in Nederland</Tile>
-      <Tile>Artikelen</Tile>
+    <ActueelLayout>
+      <MaxWidth>
+        <Text color="annotation">Laats bijgewerkt: gisteren om 17:00</Text>
 
-      <TopicalRow>
-        <TopicalTile>
-          <Text as="h3">Aantal positieve testen</Text>
-        </TopicalTile>
-        <TopicalTile>
-          <Text as="h3">Ziekenhuisopnames</Text>
-        </TopicalTile>
-        <TopicalTile>
-          <Text as="h3">Risiconiveau &amp; maatregelen</Text>
-        </TopicalTile>
-      </TopicalRow>
+        <Text as="h1" css={css({ fontSize: '1.6875rem', fontWeight: 'normal' })}>De actuele situatie in <b>Nederland:</b></Text>
+        <TopicalRow>
+          <TopicalTile icon={<Getest />} title='Aantal positieve testen'>
+            <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas condimentum augue et nulla sollicitudin eleifend. Curabitur consequat, dui in consectetur venenatis, urna urna aliquam leo, sed mollis enim elit ac odio.</Text>
+          </TopicalTile>
+          <TopicalTile icon={<Ziekenhuis />} title="Ziekenhuisopnames">
+            <Text>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla facilisi. Nulla laoreet mattis nulla, a gravida magna malesuada sed. Aenean quis gravida massa. </Text>
+          </TopicalTile>
+          <TopicalTile icon={<Ziekenhuis />} title="Risiconiveau &amp; maatregelen">
+            <Text>Donec quis posuere massa. Maecenas posuere magna eros, ut ornare arcu vehicula at. </Text>
+          </TopicalTile>
+        </TopicalRow>
 
-      <NewsMessage
-        imageSrc="images/toelichting-afbeelding.png"
-        linkText={siteText.notificatie.link.text}
-        href={siteText.notificatie.link.href}
-        message={siteText.notificatie.bericht}
-        publishedAt={siteText.notificatie.datum}
-        subtitle={siteText.notificatie.subtitel}
-        title={siteText.notificatie.titel}
-      />
-      <ChoroplethTile
-        title={text.risiconiveaus.selecteer_titel}
-        description={
-          <>
-            <span
-              dangerouslySetInnerHTML={{
-                __html: text.risiconiveaus.selecteer_toelichting,
-              }}
-            />
-            <EscalationMapLegenda text={data.text} />
-          </>
-        }
-      >
-        <SafetyRegionChoropleth
-          metricName="escalation_levels"
-          metricProperty="escalation_level"
-          onSelect={createSelectRegionHandler(router, 'maatregelen')}
-          tooltipContent={escalationTooltip(
-            createSelectRegionHandler(router, 'maatregelen')
-          )}
+        <Spacer />
+
+        <QuickLinks
+          header={text.quick_links.header}
+          links={[
+            { href: '/landelijk', text: text.quick_links.links.nationaal },
+            {
+              href: '/veiligheidsregio',
+              text: text.quick_links.links.veiligheidsregio,
+            },
+            { href: '/gemeentes', text: text.quick_links.links.gemeente },
+          ]}
         />
-      </ChoroplethTile>
 
-      <NewsMessage
-        imageSrc="images/toelichting-afbeelding.png"
-        linkText={notificatie.link.text}
-        href={notificatie.link.href}
-        message={notificatie.bericht}
-        publishedAt={notificatie.datum}
-        subtitle={notificatie.subtitel}
-        title={notificatie.titel}
-      />
+        <Spacer />
 
-      <DataSitemap />
+        <NewsMessage
+          imageSrc="images/toelichting-afbeelding.png"
+          linkText={siteText.notificatie.link.text}
+          href={siteText.notificatie.link.href}
+          message={siteText.notificatie.bericht}
+          publishedAt={siteText.notificatie.datum}
+          subtitle={siteText.notificatie.subtitel}
+          title={siteText.notificatie.titel}
+        />
 
-      <QuickLinks
-        header={text.quick_links.header}
-        links={[
-          { href: '/landelijk', text: text.quick_links.links.nationaal },
-          {
-            href: '/veiligheidsregio',
-            text: text.quick_links.links.veiligheidsregio,
-          },
-          { href: '/gemeentes', text: text.quick_links.links.gemeente },
-        ]}
-      ></QuickLinks>
-    </MaxWidth >
+        <ChoroplethTile
+          title={text.risiconiveaus.selecteer_titel}
+          description={
+            <>
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: text.risiconiveaus.selecteer_toelichting,
+                }}
+              />
+              <EscalationMapLegenda text={data.text} />
+            </>
+          }
+        >
+          <SafetyRegionChoropleth
+            metricName="escalation_levels"
+            metricProperty="escalation_level"
+            onSelect={createSelectRegionHandler(router, 'maatregelen')}
+            tooltipContent={escalationTooltip(
+              createSelectRegionHandler(router, 'maatregelen')
+            )}
+          />
+        </ChoroplethTile>
+
+        <DataSitemap />
+      </MaxWidth>
+    </ActueelLayout>
   );
 };
 
@@ -145,3 +147,8 @@ export async function getStaticProps(): Promise<StaticProps> {
 }
 
 export default Home;
+
+const ActueelLayout = styled.div(css({
+  bg: 'white',
+  p: 2
+}))
