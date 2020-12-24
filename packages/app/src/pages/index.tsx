@@ -199,9 +199,7 @@ const getEscalationCounts = (
   return counts;
 };
 
-export async function getStaticProps({
-  locale,
-}: GetStaticProps): Promise<StaticProps> {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const text = parseMarkdownInLocale((await import('../locale/index')).default);
 
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
@@ -239,6 +237,6 @@ export async function getStaticProps({
   return {
     props: { data, escalationLevelCounts, text, lastGenerated, locale },
   };
-}
+};
 
 export default Home;
