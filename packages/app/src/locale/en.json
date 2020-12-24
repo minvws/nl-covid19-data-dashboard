@@ -747,7 +747,8 @@
   },
   "utils": {
     "date_today": "today",
-    "date_yesterday": "yesterday"
+    "date_yesterday": "yesterday",
+    "date_day_before_yesterday": "the day before yesterday"
   },
   "nationaal_actueel": {
     "risiconiveaus": {
@@ -756,6 +757,20 @@
     },
     "data_sitemap_titel": "",
     "data_sitemap_toelichting": "",
+    "data_driven_texts": {
+      "infected_people_total": {
+        "value": {
+          "zero": "{{newDate}} there were no newly reported infected people.",
+          "singular": "{{newDate}} there was {{propertyValue}} newly reported infected person.",
+          "plural": "{{newDate}} there were {{propertyValue}} newly reported infected people."
+        },
+        "difference": {
+          "zero": "This is the same as {{oldDate}}",
+          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
+          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+        }
+      }
+    },
     "quick_links":  {
       "header": "Bekijk alle cijfers van het dashboard",
       "links": {
