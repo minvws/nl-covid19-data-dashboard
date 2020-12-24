@@ -1,7 +1,15 @@
 import { assert } from "~/utils/assert";
 import { ReactNode, Fragment } from "react";
 
-export function replaceComponentsInText(text: string, replacementMap: Record<string, ReactNode | string | number>): ReactNode {
+/**
+ * Provided text can be filled with placeholders such as
+ * `This is the {{exampleName}} example`
+ * can be replaced with whatever ReactNode
+ * is provided in `replacementMap.exampleName`.
+ */
+export function replaceComponentsInText(text: string, replacementMap: Record<string, ReactNode>): ReactNode {
+  // Regex captures eg "name" in "Hello {{name}}" for all placeholders
+  // and parts becomes ["Hello", "name", ""]
   const parts = text.split(/\{\{([^}]+)\}\}/g);
   return <>
     {parts.map((part, index) => {

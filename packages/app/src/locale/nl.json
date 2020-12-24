@@ -759,12 +759,12 @@
     "data_sitemap_toelichting": "Op het corona dashboard worden de cijfers van meerdere onderwerpen gepresenteerd. In verloop van tijd zullen er nieuwe onderwerpen worden toegevoegd of bestaande ondeerwerpen worden uitgebreid. Alle onderwerpen zijn onderverdeelt in categorieen. Dit is een overzicht van de categorieen en hun onderwerpen.",
     "data_driven_texts": {
       "infected_people_total": {
-        "base": {
+        "value": {
           "zero": "{{newDate}} zijn er geen nieuwe positieve tests gemeld.",
           "singular": "{{newDate}} is {{propertyValue}} nieuwe positieve test gemeld.",
           "plural": "{{newDate}} zijn {{propertyValue}} nieuwe positieve tests gemeld."
         },
-        "additional": {
+        "difference": {
           "zero": "Dat is gelijk aan {{oldDate}}",
           "singular": "Dat is er {{differenceIndicator}} dan {{oldDate}}.",
           "plural": "Dat zijn er {{differenceIndicator}} dan {{oldDate}}."

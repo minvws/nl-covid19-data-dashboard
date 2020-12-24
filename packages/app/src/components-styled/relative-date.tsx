@@ -1,8 +1,8 @@
 /**
  * The RelativeDate provides a relative date in a context in which it can be interpeted
- * * as human readable relative date, if possible
- * * a full date in a tooltip
- * * machine readable iso dates
+ * - as human readable relative date, if possible
+ * - a full date in a tooltip
+ * - machine readable iso dates
  */
 
 import css from "@styled-system/css";
@@ -25,6 +25,8 @@ export function RelativeDate({ dateInSeconds, isCapitalized }: RelativeDateProps
   if (isCapitalized) {
     displayDate = displayDate.charAt(0).toUpperCase() + displayDate.substr(1);
   }
+
+  // @Todo useIsMounted hook which will be available when the actueel search is merged
 
   return <Time dateTime={isoDate} title={fullDate}>{displayDate}</Time>
 }
