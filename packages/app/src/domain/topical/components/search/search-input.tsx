@@ -25,6 +25,7 @@ export const SearchInput = forwardRef<HTMLDivElement, SearchInputProps>(
     { value, placeholder, onChange, onFocus, onBlur, ariaControls, isDisabled },
     ref
   ) => {
+    const inputRef = useRef<HTMLInputElement>(null);
     const id = useRef(`id-${Math.random()}`);
 
     return (
@@ -33,11 +34,26 @@ export const SearchInput = forwardRef<HTMLDivElement, SearchInputProps>(
           <SearchIcon />
         </IconContainer>
 
+        {!isDisabled && value && (
+          <IconContainer
+            as="button"
+            align="right"
+            onClick={() => {
+              inputRef.current?.focus();
+              onChange('');
+            }}
+          >
+            <VisuallyHidden>{text.search.clear}</VisuallyHidden>
+            <CloseIcon />
+          </IconContainer>
+        )}
+
         <VisuallyHidden>
           <label htmlFor={id.current}>{placeholder}</label>
         </VisuallyHidden>
 
         <StyledSearchInput
+          ref={inputRef}
           type="search"
           placeholder={placeholder}
           value={value}
@@ -49,12 +65,6 @@ export const SearchInput = forwardRef<HTMLDivElement, SearchInputProps>(
           aria-controls={ariaControls}
           disabled={isDisabled}
         />
-        {value && (
-          <IconContainer as="button" align="right" onClick={() => onChange('')}>
-            <VisuallyHidden>{text.search.clear}</VisuallyHidden>
-            <CloseIcon />
-          </IconContainer>
-        )}
       </Box>
     );
   }

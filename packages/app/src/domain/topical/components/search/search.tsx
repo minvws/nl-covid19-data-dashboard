@@ -25,7 +25,7 @@ export function Search() {
   const [value, setValue] = useState('');
   const [hasFocus, setHasFocus] = useState(false);
   const [hasHitFocus, setHasHitFocus] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [valueSubmitted, setValueSubmitted] = useState<string>();
   const isMounted = useIsMounted();
   const breakpoints = useBreakpoints();
   const router = useRouter();
@@ -37,7 +37,8 @@ export function Search() {
   const ariaControlsId = useRef(`id-${Math.random()}`);
 
   function handleSelect(option: Option, openInNewWindow: boolean) {
-    setIsSubmitting(true);
+    setValueSubmitted(option.name);
+
     return openInNewWindow
       ? window.open(option.link, '_blank')
       : router.push(option.link);
@@ -56,13 +57,13 @@ export function Search() {
       >
         <SearchInput
           ref={heightRef}
-          value={value}
+          value={valueSubmitted || value}
           placeholder={siteText.search.placeholder}
           onChange={setValue}
           onFocus={() => setHasFocus(true)}
           onBlur={() => setHasFocus(false)}
           ariaControls={ariaControlsId.current}
-          isDisabled={isSubmitting}
+          isDisabled={!!valueSubmitted}
         />
         {showResults && (
           <SearchResults
