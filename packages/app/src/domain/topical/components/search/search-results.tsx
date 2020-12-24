@@ -1,104 +1,16 @@
 import css from '@styled-system/css';
-import { RefObject, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import text from '~/locale';
 import { useHotkey } from '~/utils/hotkey/use-hotkey';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { useBreakpoints } from '~/utils/useBreakpoints';
+import { useSearchContext } from './context';
 import { HitList } from './hit-list';
 import { paddedStyle } from './search-input';
-import { Hit, Option } from './use-search-results';
 
-interface SearchResultsProps {
-  value: string;
-  onHasHitFocusChange: (hasFocus: boolean) => void;
-  id: string;
-  hits: Hit<Option>[];
-  vrHits: Hit<Option>[];
-  gmHits: Hit<Option>[];
-  focusIndex: number;
-  focusRef: RefObject<HTMLAnchorElement>;
-  setFocusIndex: (index: number) => void;
-}
-
-export function SearchResults({
-  id,
-  value,
-  onHasHitFocusChange,
-  hits,
-  vrHits,
-  gmHits,
-  focusIndex,
-  focusRef,
-  setFocusIndex,
-}: SearchResultsProps) {
+export function SearchResults() {
+  const { id, hits, setHasHitFocus } = useSearchContext();
   const breakpoints = useBreakpoints();
 
-  const onHasHitFocusChangeRef = useRef(onHasHitFocusChange);
-
-  useEffect(() => {
-    onHasHitFocusChangeRef.current = onHasHitFocusChange;
-  }, [onHasHitFocusChange]);
-
-  useEffect(() => {
-    /**
-     * On input-change we'll reset the focus index to 0. It's possible that
-     * there is a stronger hit among the VR hits (2nd column). If so, we won't
-     * reset the index to 0, instead it will be set to the index of that hit.
-     */
-    const index = vrHits[0]?.score === 1 ? vrHits[0].index : 0;
-
-    setFocusIndex(index);
-    onHasHitFocusChangeRef.current(false);
-  }, [setFocusIndex, value, vrHits]);
-
-  useHotkey(
-    'esc',
-    () => {
-      onHasHitFocusChangeRef.current(false);
-    },
-    { preventDefault: false }
-  );
-
-  const gmList = (
-    <HitList
-      key="gm"
-      hits={gmHits}
-      title={text.common.gm_plural}
-      focusIndex={focusIndex}
-      focusRef={focusRef}
-      ariaId={id}
-      noHitsMessage={replaceVariablesInText(text.search.no_hits, {
-        search: value,
-        subject: text.common.gm_plural,
-      })}
-      onHover={setFocusIndex}
-      onFocus={(index) => {
-        onHasHitFocusChange(true);
-        setFocusIndex(index);
-      }}
-    />
-  );
-
-  const vrList = (
-    <HitList
-      key="vr"
-      hits={vrHits}
-      title={text.common.vr_plural}
-      focusIndex={focusIndex}
-      focusRef={focusRef}
-      ariaId={id}
-      noHitsMessage={replaceVariablesInText(text.search.no_hits, {
-        search: value,
-        subject: text.common.vr_plural,
-      })}
-      onHover={setFocusIndex}
-      onFocus={(index) => {
-        onHasHitFocusChange(true);
-        setFocusIndex(index);
-      }}
-    />
-  );
+  useHotkey('esc', () => setHasHitFocus(false), { preventDefault: false });
 
   /**
    * On narrow devices we'll render the category with the best result on top
@@ -106,23 +18,17 @@ export function SearchResults({
   const vrHasBestResult =
     [...hits].sort((a, b) => b.score - a.score)[0]?.data.type === 'vr';
 
+  const col1Scope = breakpoints.md ? 'gm' : vrHasBestResult ? 'vr' : 'gm';
+  const col2Scope = breakpoints.md ? 'vr' : vrHasBestResult ? 'gm' : 'vr';
+
   return (
     <StyledSearchResults
-      role="listbox"
       id={id}
-      onPointerDown={() => onHasHitFocusChange(true)}
+      role="listbox"
+      onPointerDown={() => setHasHitFocus(true)}
     >
-      {breakpoints.md ? (
-        <>
-          {gmList}
-          {vrList}
-        </>
-      ) : (
-        <>
-          {vrHasBestResult ? vrList : gmList}
-          {vrHasBestResult ? gmList : vrList}
-        </>
-      )}
+      <HitList key={col1Scope} scope={col1Scope} />
+      <HitList key={col2Scope} scope={col2Scope} />
     </StyledSearchResults>
   );
 }

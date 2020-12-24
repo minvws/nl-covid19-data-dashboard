@@ -1,34 +1,28 @@
 import css from '@styled-system/css';
-import { forwardRef, ReactNode, RefObject } from 'react';
+import { forwardRef, ReactNode } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components-styled/base';
 import { Text } from '~/components-styled/typography';
 import { VisuallyHidden } from '~/components-styled/visually-hidden';
+import { default as siteText, default as text } from '~/locale';
 import { Link } from '~/utils/link';
-import { Hit, Option } from './use-search-results';
-import siteText from '~/locale';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { useSearchContext } from './context';
 
 interface HitListProps {
-  title: string;
-  hits: Hit<Option>[];
-  noHitsMessage: string;
-  focusIndex: number;
-  focusRef: RefObject<HTMLAnchorElement>;
-  onHover: (index: number) => void;
-  onFocus: (index: number) => void;
-  ariaId: string;
+  scope: 'vr' | 'gm';
 }
 
-export function HitList({
-  title,
-  hits,
-  focusIndex,
-  focusRef,
-  noHitsMessage,
-  onFocus,
-  onHover,
-  ariaId,
-}: HitListProps) {
+export function HitList({ scope }: HitListProps) {
+  const { gmHits, vrHits, term, getOptionProps } = useSearchContext();
+
+  const hits = scope === 'vr' ? vrHits : gmHits;
+  const title = scope === 'vr' ? text.common.vr_plural : text.common.gm_plural;
+  const noHitsMessage = replaceVariablesInText(text.search.no_hits, {
+    search: term,
+    subject: scope === 'vr' ? text.common.vr_plural : text.common.gm_plural,
+  });
+
   return (
     <Box spacing={3}>
       <HitListHeader>{title}</HitListHeader>
@@ -37,14 +31,7 @@ export function HitList({
         <StyledHitList>
           {hits.map((x) => (
             <li key={x.id}>
-              <HitLink
-                ref={x.index === focusIndex ? focusRef : undefined}
-                href={x.data.link}
-                hasFocus={focusIndex === x.index}
-                onHover={() => onHover(x.index)}
-                onFocus={() => onFocus(x.index)}
-                id={`${ariaId}-result-${x.index}`}
-              >
+              <HitLink {...getOptionProps(x)}>
                 <VisuallyHidden>
                   {x.data.type === 'gm'
                     ? siteText.common.gm_singular
@@ -61,25 +48,6 @@ export function HitList({
     </Box>
   );
 }
-
-const HitListHeader = styled.span(
-  css({
-    display: 'block',
-    textTransform: 'uppercase',
-    fontSize: 1,
-    fontWeight: 'bold',
-    px: 2,
-  })
-);
-
-const StyledHitList = styled.ol(
-  css({
-    listStyle: 'none',
-    p: 0,
-    m: 0,
-    width: ['100%', null, null, 320],
-  })
-);
 
 interface HitLinkProps {
   href: string;
@@ -120,5 +88,24 @@ const StyledHitLink = styled.a<{ hasFocus: boolean }>((x) =>
     bg: x.hasFocus ? 'contextualContent' : 'transparant',
     transitionProperty: 'background',
     transitionDuration: x.hasFocus ? '0ms' : '120ms',
+  })
+);
+
+const HitListHeader = styled.span(
+  css({
+    display: 'block',
+    textTransform: 'uppercase',
+    fontSize: 1,
+    fontWeight: 'bold',
+    px: 2,
+  })
+);
+
+const StyledHitList = styled.ol(
+  css({
+    listStyle: 'none',
+    p: 0,
+    m: 0,
+    width: ['100%', null, null, 320],
   })
 );

@@ -1,87 +1,38 @@
 import css from '@styled-system/css';
-import { useRouter } from 'next/router';
-import { forwardRef, ReactNode, useRef, useState } from 'react';
+import { forwardRef, ReactNode, useRef } from 'react';
 import styled from 'styled-components';
 import useResizeObserver from 'use-resize-observer/polyfilled';
 import { Box } from '~/components-styled/base';
-import siteText from '~/locale';
 import { useIsMounted } from '~/utils/use-is-mounted';
-import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useBreakpoints } from '~/utils/useBreakpoints';
+import { SearchContextProvider } from './context';
 import { SearchInput } from './search-input';
 import { SearchResults } from './search-results';
-import { useSearchResults } from './use-search-results';
 
 export function Search() {
-  const containerRef = useRef<HTMLFormElement>(null);
   const { height, ref: heightRef } = useResizeObserver<HTMLDivElement>();
-  const [value, setValue] = useState('');
-  const [hasFocus, setHasFocus] = useState(false);
-  const [hasHitFocus, setHasHitFocus] = useState(false);
-  const [valueSubmitted, setValueSubmitted] = useState<string>();
+  const containerRef = useRef<HTMLFormElement>(null);
+
   const isMounted = useIsMounted();
   const breakpoints = useBreakpoints();
-  const router = useRouter();
-
-  const {
-    hits,
-    vrHits,
-    gmHits,
-    focusIndex,
-    focusRef,
-    setFocusIndex,
-  } = useSearchResults(value, (option, openInNewWindow) => {
-    setValueSubmitted(option.data.name);
-
-    return openInNewWindow
-      ? window.open(option.data.link, '_blank')
-      : router.push(option.data.link);
-  });
-
-  useOnClickOutside([containerRef], () => setHasHitFocus(false));
-
-  const showResults = value && (hasFocus || hasHitFocus || !breakpoints.md);
-
-  const ariaControlsId = useRef(`id-search`);
 
   return (
-    <SearchForm
-      ref={containerRef}
-      height={height}
-      isFloating={isMounted && breakpoints.md}
-    >
-      <Box
-        role="combobox"
-        aria-expanded={showResults ? 'true' : 'false'}
-        aria-haspopup="grid"
-        aria-owns={ariaControlsId.current}
-      >
-        <SearchInput
-          ref={heightRef}
-          value={valueSubmitted || value}
-          placeholder={siteText.search.placeholder}
-          onChange={setValue}
-          onFocus={() => setHasFocus(true)}
-          onBlur={() => setHasFocus(false)}
-          ariaControls={ariaControlsId.current}
-          focusIndex={focusIndex}
-          isDisabled={!!valueSubmitted}
-        />
-        {showResults && (
-          <SearchResults
-            id={ariaControlsId.current}
-            value={value}
-            onHasHitFocusChange={setHasHitFocus}
-            hits={hits}
-            vrHits={vrHits}
-            gmHits={gmHits}
-            focusIndex={focusIndex}
-            focusRef={focusRef}
-            setFocusIndex={setFocusIndex}
-          />
-        )}
-      </Box>
-    </SearchForm>
+    <SearchContextProvider containerRef={containerRef}>
+      {(context) => (
+        <SearchForm
+          ref={containerRef}
+          height={height}
+          isFloating={isMounted && breakpoints.md}
+        >
+          <Box {...context.comboboxProps}>
+            <Box position="relative" ref={heightRef}>
+              <SearchInput />
+            </Box>
+            {context.showResults && <SearchResults />}
+          </Box>
+        </SearchForm>
+      )}
+    </SearchContextProvider>
   );
 }
 

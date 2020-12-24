@@ -1,85 +1,54 @@
 import css from '@styled-system/css';
-import { forwardRef, useRef } from 'react';
+import { useRef } from 'react';
 import styled from 'styled-components';
-import SearchIcon from '~/assets/search-icon.svg';
 import CloseIcon from '~/assets/close.svg';
+import SearchIcon from '~/assets/search-icon.svg';
 import { Box } from '~/components-styled/base';
 import { VisuallyHidden } from '~/components-styled/visually-hidden';
-import text from '~/locale';
+import { default as siteText, default as text } from '~/locale';
+import { useSearchContext } from './context';
 
 const ICON_SPACE = 50;
 const ICON_SPACE_LARGE = 66;
 
-interface SearchInputProps {
-  value: string;
-  placeholder: string;
-  onChange: (value: string) => void;
-  onFocus: () => void;
-  onBlur: () => void;
-  ariaControls: string;
-  isDisabled: boolean;
-  focusIndex: number;
-}
+export function SearchInput() {
+  const { id, inputProps, setTerm } = useSearchContext();
+  const inputRef = useRef<HTMLInputElement>(null);
 
-export const SearchInput = forwardRef<HTMLDivElement, SearchInputProps>(
-  (
-    {
-      value,
-      placeholder,
-      onChange,
-      onFocus,
-      onBlur,
-      ariaControls,
-      isDisabled,
-      focusIndex,
-    },
-    ref
-  ) => {
-    const inputRef = useRef<HTMLInputElement>(null);
-    const id = useRef(`id-${Math.random()}`);
+  return (
+    <Box position="relative">
+      <IconContainer align="left">
+        <SearchIcon />
+      </IconContainer>
 
-    return (
-      <Box position="relative" ref={ref}>
-        <IconContainer align="left">
-          <SearchIcon />
+      {!inputProps.disabled && inputProps.value && (
+        <IconContainer
+          as="button"
+          align="right"
+          onClick={() => {
+            inputRef.current?.focus();
+            setTerm('');
+          }}
+        >
+          <VisuallyHidden>{text.search.clear}</VisuallyHidden>
+          <CloseIcon />
         </IconContainer>
+      )}
 
-        {!isDisabled && value && (
-          <IconContainer
-            as="button"
-            align="right"
-            onClick={() => {
-              inputRef.current?.focus();
-              onChange('');
-            }}
-          >
-            <VisuallyHidden>{text.search.clear}</VisuallyHidden>
-            <CloseIcon />
-          </IconContainer>
-        )}
+      <VisuallyHidden>
+        <label htmlFor={`${id}-input`}>{siteText.search.placeholder}</label>
+      </VisuallyHidden>
 
-        <VisuallyHidden>
-          <label htmlFor={id.current}>{placeholder}</label>
-        </VisuallyHidden>
-
-        <StyledSearchInput
-          ref={inputRef}
-          type="search"
-          placeholder={placeholder}
-          value={value}
-          onChange={(x) => onChange(x.target.value)}
-          onFocus={onFocus}
-          onBlur={onBlur}
-          id={id.current}
-          aria-autocomplete="list"
-          aria-controls={ariaControls}
-          aria-activedescendant={`${ariaControls}-result-${focusIndex}`}
-          disabled={isDisabled}
-        />
-      </Box>
-    );
-  }
-);
+      <StyledSearchInput
+        ref={inputRef}
+        type="search"
+        id={`${id}-input`}
+        placeholder={siteText.search.placeholder}
+        {...inputProps}
+      />
+    </Box>
+  );
+}
 
 export const paddedStyle = css({
   p: ['1rem', null, null, '1.5rem'],
