@@ -123,7 +123,8 @@ export function SearchResults({
 const StyledSearchResults = styled.div(
   paddedStyle,
   css({
-    pr: 50,
+    /** negative margin necessary for text alignment */
+    mx: -2,
     display: 'flex',
     flexDirection: ['column', null, null, 'row'],
     '& > *:not(:last-child)': {

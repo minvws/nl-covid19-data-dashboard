@@ -28,7 +28,7 @@ export function HitList({
   onHover,
 }: HitListProps) {
   return (
-    <Box mx={-2} spacing={3}>
+    <Box spacing={3}>
       <HitListHeader>{title}</HitListHeader>
 
       {hits.length > 0 ? (
