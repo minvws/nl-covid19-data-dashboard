@@ -2,6 +2,7 @@ import { scaleBand, scaleLinear, ScaleTypeToD3Scale } from '@visx/scale';
 import { ScaleBand } from 'd3-scale';
 import { useMemo } from 'react';
 import { GetTooltipCoordinates } from '../tooltip';
+import { BAR_CHART_TOOLTIP_MAX_WIDTH } from './bar-chart-graph';
 
 export interface BarChartValue {
   value: number;
@@ -57,7 +58,7 @@ function generateBarChartCoordinates(
   const spacingLabel = 10;
 
   const barsWidth = width - spacing.left - spacing.right;
-  const barsHeight = values.length * 40;
+  const barsHeight = values.length * 35;
   const height = barsHeight + spacing.top + spacing.bottom;
 
   const numTicks = 10;
@@ -75,7 +76,7 @@ function generateBarChartCoordinates(
     range: [spacing.top, height - spacing.bottom],
     round: true,
     domain: values.map(getLabel),
-    padding: 0.2,
+    padding: 0.4,
   });
 
   const createPoint = (scale: any, accessor: any) => (value: BarChartValue) =>
@@ -84,13 +85,22 @@ function generateBarChartCoordinates(
   const getBarSize = createPoint(valueScale, getValue);
   const getBarOffset = createPoint(labelScale, getLabel);
 
-  // const xPoint = (value: BarChartValue) => xScale(getValue(value));
-  // const yPoint = (value: BarChartValue) => yScale(getLabel(value));
-
   function getTooltipCoordinates(value: BarChartValue) {
-    const left = getBarSize(value) ?? 0 + spacing.left;
-    const top = getBarOffset(value) ?? 0 + spacing.top;
+    const labelScaleStep = labelScale.step();
+    const paddingBottom = (labelScaleStep * labelScale.paddingOuter() / 2);
 
+    /**
+    * Set the offset first, than calculate the padding on the bottom side and substract it with 1 full step to align 
+    * Since the tooltip is placed right under the bar the padding calculation needs to be done
+    */ 
+
+    const top = getBarOffset(value) + paddingBottom - labelScaleStep;
+
+    // Calculate if the tooltip is inside of the window size and if event target exists 
+    const left = barsWidth - getBarSize(value) >= BAR_CHART_TOOLTIP_MAX_WIDTH 
+      ? (getBarSize(value) ?? 0) + spacing.left + spacingLabel
+      : spacing.left + spacingLabel
+    
     return { left, top };
   }
 
