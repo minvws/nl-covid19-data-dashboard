@@ -60,6 +60,7 @@ export type LineChartProps<T> = {
   componentCallback?: ComponentCallbackFunction;
   showMarkerLine?: boolean;
   formatMarkerLabel?: (value: T) => string;
+  margin?: ChartMargins;
 };
 
 export function LineChart<T extends Value>({
@@ -77,6 +78,7 @@ export function LineChart<T extends Value>({
   componentCallback,
   showMarkerLine = false,
   formatMarkerLabel,
+  margin = defaultMargin,
 }: LineChartProps<T>) {
   const {
     tooltipData,
@@ -145,10 +147,10 @@ export function LineChart<T extends Value>({
           tooltipTop: yPosition,
         });
         setMarkerInfo({
-          xPosition: xPosition + defaultMargin.left,
-          yPosition: yPosition + defaultMargin.top,
+          xPosition: xPosition + margin.left,
+          yPosition: yPosition + margin.top,
           height,
-          margins: defaultMargin,
+          margins: margin,
           data,
         });
       }
@@ -186,13 +188,14 @@ export function LineChart<T extends Value>({
           isHovered={!!tooltipData}
           benchmark={benchmark}
           componentCallback={componentCallback}
+          margin={margin}
         />
 
         {isDefined(tooltipData) && (
           <Tooltip
             bounds={{ right: width, left: 0, top: 0, bottom: height }}
-            x={tooltipLeft + defaultMargin.left}
-            y={tooltipTop + defaultMargin.top}
+            x={tooltipLeft + margin.left}
+            y={tooltipTop + margin.top}
           >
             {formatTooltip
               ? formatTooltip(tooltipData)

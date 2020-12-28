@@ -63,7 +63,7 @@ type ChartProps = {
   yDomain: number[];
   width: number;
   height: number;
-  margin?: { top: number; right: number; bottom: number; left: number };
+  margin?: ChartMargins;
   formatXAxis: TickFormatter<Date>;
   formatYAxis: TickFormatter<number>;
   componentCallback?: ComponentCallbackFunction;

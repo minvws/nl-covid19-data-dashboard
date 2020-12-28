@@ -6,8 +6,10 @@ import GetestIcon from '~/assets/test.svg';
 import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
 import { Box } from '~/components-styled/base';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
+import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { MaxWidth } from '~/components-styled/max-width';
 import { NewsMessage } from '~/components-styled/news-message';
+import { QuickLinks } from '~/components-styled/quick-links';
 import { Tile } from '~/components-styled/tile';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
@@ -15,7 +17,6 @@ import { escalationTooltip } from '~/components/choropleth/tooltips/region/escal
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import { DataSitemap } from '~/domain/topical/data-site-map';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
-import siteText from '~/locale';
 import { TALLLanguages } from '~/locale/';
 import { National } from '~/types/data';
 import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
@@ -31,13 +32,14 @@ interface IHomeData {
   lastGenerated: string;
 }
 
-const Home: FCWithLayout<IHomeData> = (homeData) => {
+const Home: FCWithLayout<IHomeData> = (data) => {
   const router = useRouter();
-  const { text } = homeData;
+  const notificatie = data.text.notificatie;
+  const text = data.text.nationaal_actueel;
 
-  const dataInfectedDelta = homeData.data.infected_people_delta_normalized;
-  const dataHospitalIntake = homeData.data.intake_hospital_ma;
-  const dataIntake = homeData.data.intake_intensivecare_ma;
+  const dataInfectedDelta = data.data.infected_people_delta_normalized;
+  const dataHospitalIntake = data.data.intake_hospital_ma;
+  const dataIntake = data.data.intake_intensivecare_ma;
 
   return (
     <MaxWidth>
@@ -46,28 +48,59 @@ const Home: FCWithLayout<IHomeData> = (homeData) => {
         <Box display="flex" flexDirection="row">
           <MiniTrendTile
             flex="1 1 33%"
-            title={
-              text.nationaal_actueel.mini_trend_tiles.positief_getest.title
+            title={text.mini_trend_tiles.positief_getest.title}
+            text={
+              <DataDrivenText
+                data={data.data}
+                metricName="infected_people_total"
+                metricProperty="infected_daily_total"
+                differenceKey="infected_people_total__infected_daily_total"
+                valueTexts={text.data_driven_texts.infected_people_total.value}
+                differenceTexts={
+                  text.data_driven_texts.infected_people_total.difference
+                }
+              />
             }
-            text={'data driven text'}
             icon={<GetestIcon />}
             trendData={dataInfectedDelta.values}
             metricProperty="infected_daily_increase"
           />
           <MiniTrendTile
             flex="1 1 33%"
-            title={
-              text.nationaal_actueel.mini_trend_tiles.ziekenhuis_opnames.title
+            title={text.mini_trend_tiles.ziekenhuis_opnames.title}
+            text={
+              <DataDrivenText
+                data={data.data}
+                metricName="intake_hospital_ma"
+                metricProperty="moving_average_hospital"
+                differenceKey="intake_hospital_ma__moving_average_hospital"
+                valueTexts={text.data_driven_texts.intake_hospital_ma.value}
+                differenceTexts={
+                  text.data_driven_texts.intake_hospital_ma.difference
+                }
+              />
             }
-            text={'data driven text'}
             icon={<ZiekenhuisIcon />}
             trendData={dataHospitalIntake.values}
             metricProperty="moving_average_hospital"
           />
           <MiniTrendTile
             flex="1 1 33%"
-            title={text.nationaal_actueel.mini_trend_tiles.ic_opnames.title}
-            text={'data driven text'}
+            title={text.mini_trend_tiles.ic_opnames.title}
+            text={
+              <DataDrivenText
+                data={data.data}
+                metricName="intake_intensivecare_ma"
+                metricProperty="moving_average_ic"
+                differenceKey="intake_intensivecare_ma__moving_average_ic"
+                valueTexts={
+                  text.data_driven_texts.intake_intensivecare_ma.value
+                }
+                differenceTexts={
+                  text.data_driven_texts.intake_intensivecare_ma.difference
+                }
+              />
+            }
             icon={<ArtsIcon />}
             trendData={dataIntake.values}
             metricProperty="moving_average_ic"
@@ -75,15 +108,15 @@ const Home: FCWithLayout<IHomeData> = (homeData) => {
         </Box>
       </Tile>
       <ChoroplethTile
-        title={text.veiligheidsregio_index.selecteer_titel}
+        title={text.risiconiveaus.selecteer_titel}
         description={
           <>
             <span
               dangerouslySetInnerHTML={{
-                __html: text.veiligheidsregio_index.selecteer_toelichting,
+                __html: text.risiconiveaus.selecteer_toelichting,
               }}
             />
-            <EscalationMapLegenda text={text} />
+            <EscalationMapLegenda text={data.text} />
           </>
         }
       >
@@ -99,15 +132,27 @@ const Home: FCWithLayout<IHomeData> = (homeData) => {
 
       <NewsMessage
         imageSrc="images/toelichting-afbeelding.png"
-        linkText={siteText.notificatie.link.text}
-        href={siteText.notificatie.link.href}
-        message={siteText.notificatie.bericht}
-        publishedAt={siteText.notificatie.datum}
-        subtitle={siteText.notificatie.subtitel}
-        title={siteText.notificatie.titel}
+        linkText={notificatie.link.text}
+        href={notificatie.link.href}
+        message={notificatie.bericht}
+        publishedAt={notificatie.datum}
+        subtitle={notificatie.subtitel}
+        title={notificatie.titel}
       />
 
       <DataSitemap />
+
+      <QuickLinks
+        header={text.quick_links.header}
+        links={[
+          { href: '/landelijk', text: text.quick_links.links.nationaal },
+          {
+            href: '/veiligheidsregio',
+            text: text.quick_links.links.veiligheidsregio,
+          },
+          { href: '/gemeentes', text: text.quick_links.links.gemeente },
+        ]}
+      ></QuickLinks>
     </MaxWidth>
   );
 };

@@ -1,11 +1,13 @@
 import { AxisBottom, AxisLeft } from '@visx/axis';
 import { GridRows } from '@visx/grid';
 import { ParentSize } from '@visx/responsive';
+import { ReactNode } from 'react';
 import { Box, BoxProps } from '~/components-styled/base';
 import { LineChart } from '~/components-styled/line-chart';
 import {
   AnyTickFormatter,
   ComponentCallbackInfo,
+  defaultMargin,
 } from '~/components-styled/line-chart/components/chart';
 import { TrendValue, Value } from '~/components-styled/line-chart/helpers';
 import { Heading } from '~/components-styled/typography';
@@ -15,7 +17,7 @@ import { formatNumber } from '~/utils/formatNumber';
 type MiniTrendTileProps<T> = {
   icon: JSX.Element;
   title: string;
-  text: string;
+  text: ReactNode;
   trendData: T[];
   metricProperty: keyof T;
 } & BoxProps;
@@ -25,28 +27,36 @@ export function MiniTrendTile<T extends Value>(props: MiniTrendTileProps<T>) {
   return (
     <Box {...(boxProps as any)} display="flex" flexDirection="column">
       <Box flexDirection="row" display="flex">
-        {icon}
-        <Heading level={4} as="h2">
-          {title}
-        </Heading>
-      </Box>
-      <Box>{text}</Box>
-      <Box>
-        <ParentSize>
-          {(parent) => (
-            <LineChart
-              width={parent.width}
-              timeframe="5weeks"
-              values={trendData}
-              linesConfig={[{ metricProperty }]}
-              componentCallback={componentCallback}
-              showMarkerLine={true}
-              formatTooltip={(value: T & TrendValue) =>
-                formatNumber(value.__value)
-              }
-            />
-          )}
-        </ParentSize>
+        <Box width="4rem" height="4rem" display="flex" mr={1}>
+          {icon}
+        </Box>
+        <Box>
+          <Heading level={4} as="h2">
+            {title}
+          </Heading>
+          {text}
+          <Box>
+            <ParentSize>
+              {(parent) => (
+                <LineChart
+                  width={parent.width}
+                  timeframe="5weeks"
+                  values={trendData}
+                  linesConfig={[{ metricProperty }]}
+                  componentCallback={componentCallback}
+                  showMarkerLine={true}
+                  formatTooltip={(value: T & TrendValue) =>
+                    formatNumber(value.__value)
+                  }
+                  margin={{
+                    ...defaultMargin,
+                    left: 0,
+                  }}
+                />
+              )}
+            </ParentSize>
+          </Box>
+        </Box>
       </Box>
     </Box>
   );
@@ -77,7 +87,8 @@ function componentCallback(callbackInfo: ComponentCallbackInfo) {
         const labelProps = callbackInfo.configuration.tickLabelProps
           ? callbackInfo.configuration.tickLabelProps(value, index)
           : {};
-        labelProps.textAnchor = value === domain[0] ? 'start' : 'middle';
+        labelProps.textAnchor = value === domain[0] ? 'start' : 'end';
+        labelProps.dx = 0;
         return labelProps;
       };
 
@@ -93,9 +104,21 @@ function componentCallback(callbackInfo: ComponentCallbackInfo) {
     case 'AxisLeft': {
       const domain = callbackInfo.configuration.scale.domain();
       const lastItem = domain[domain.length - 1];
+
+      const tickLabelProps = (value: Date, index: number) => {
+        const labelProps = callbackInfo.configuration.tickLabelProps
+          ? callbackInfo.configuration.tickLabelProps(value, index)
+          : {};
+        labelProps.textAnchor = 'start';
+        labelProps.dx = 10;
+        labelProps.dy = -6;
+        return labelProps;
+      };
+
       return (
         <AxisLeft
           {...(callbackInfo.configuration as any)}
+          tickLabelProps={tickLabelProps}
           tickValues={[lastItem]}
         />
       );

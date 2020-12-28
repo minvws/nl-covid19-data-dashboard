@@ -747,9 +747,14 @@
   },
   "utils": {
     "date_today": "today",
-    "date_yesterday": "yesterday"
+    "date_yesterday": "yesterday",
+    "date_day_before_yesterday": "the day before yesterday"
   },
   "nationaal_actueel": {
+    "risiconiveaus": {
+      "selecteer_titel": "Risiconiveaus",
+      "selecteer_toelichting": "De kaart geeft het risiconiveau per veiligheidsregio weer.\n\n[Meer over de risiconiveaus](/over-risiconiveaus)"
+    },
     "data_sitemap_titel": "",
     "data_sitemap_toelichting": "",
     "mini_trend_tiles": {
@@ -761,6 +766,52 @@
       },
       "ic_opnames": {
         "title": ""
+      }
+    },
+    "data_driven_texts": {
+      "infected_people_total": {
+        "value": {
+          "zero": "{{newDate}} there were no newly reported infected people.",
+          "singular": "{{newDate}} there was {{propertyValue}} newly reported infected person.",
+          "plural": "{{newDate}} there were {{propertyValue}} newly reported infected people."
+        },
+        "difference": {
+          "zero": "This is the same as {{oldDate}}",
+          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
+          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+        }
+      },
+      "intake_hospital_ma": {
+        "value": {
+          "zero": "{{newDate}} there were no newly reported hospital intakes.",
+          "singular": "{{newDate}} there was {{propertyValue}} newly reported hospital intake.",
+          "plural": "{{newDate}} there were {{propertyValue}} newly reported hospital intakes."
+        },
+        "difference": {
+          "zero": "This is the same as {{oldDate}}",
+          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
+          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+        }
+      },
+      "intake_intensivecare_ma": {
+        "value": {
+          "zero": "{{newDate}} there were no newly reported intensive care admissions.",
+          "singular": "{{newDate}} there was {{propertyValue}} newly reported intensive care admission.",
+          "plural": "{{newDate}} there were {{propertyValue}} newly reported intensive care admissions."
+        },
+        "difference": {
+          "zero": "This is the same as {{oldDate}}",
+          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
+          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+        }
+      }
+    },
+    "quick_links": {
+      "header": "Bekijk alle cijfers van het dashboard",
+      "links": {
+        "nationaal": "Cijfers van Nederland",
+        "veiligheidsregio": "Cijfers per veiligheidsregio",
+        "gemeente": "Cijfers per gemeente"
       }
     }
   },
@@ -2135,5 +2186,34 @@
     "VR23": "http://vrln.nl/",
     "VR24": "http://www.vrzuidlimburg.nl/",
     "VR25": "http://www.veiligheidsregioflevoland.nl/"
+  },
+  "veiligheidsregio_actueel": {
+    "risiconiveaus": {
+      "selecteer_titel": "Risiconiveaus",
+      "selecteer_toelichting": "De kaart geeft het risiconiveau per veiligheidsregio weer.\n\n[Meer over de risiconiveaus](/over-risiconiveaus)"
+    },
+    "quick_links": {
+      "header": "Bekijk alle cijfers van het dashboard",
+      "links": {
+        "nationaal": "Cijfers van Nederland",
+        "veiligheidsregio": "`Cijfers van {{safetyRegion}}`",
+        "gemeente": "Cijfers per gemeente"
+      }
+    }
+  },
+  "gemeente_actueel": {
+    "risiconiveaus": {
+      "selecteer_titel": "Risiconiveaus",
+      "selecteer_toelichting": "De kaart geeft het risiconiveau per veiligheidsregio weer.\n\n[Meer over de risiconiveaus](/over-risiconiveaus)"
+    },
+    "quick_links": {
+      "header": "Bekijk alle cijfers van het dashboard",
+      "links": {
+        "nationaal": "Cijfers van Nederland",
+        "veiligheidsregio": "`Cijfers van {{safetyRegion}}`",
+        "veiligheidsregio_fallback": "Cijfers per veiligheidsregio",
+        "gemeente": "Cijfers van {{municipalityName}}"
+      }
+    }
   }
 }
