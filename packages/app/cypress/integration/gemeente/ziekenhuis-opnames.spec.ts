@@ -10,7 +10,7 @@ context('Gemeente - Ziekenhuis opnames', () => {
     const lastValue = this.municipalData.hospital.last_value;
 
     const kpiTestInfo = {
-      moving_average_hospital: formatNumber(
+      admissions_moving_average: formatNumber(
         lastValue.admissions_moving_average
       ),
     };
