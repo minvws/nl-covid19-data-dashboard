@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "national_deceased_cbs",
+  "type": "object",
+  "properties": {
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/value"
+      }
+    },
+    "last_value": {
+      "$ref": "#/definitions/value"
+    }
+  },
+  "required": ["values", "last_value"],
+  "additionalProperties": false,
+  "definitions": {
+    "value": {
+      "title": "national_deceased_cbs_value",
+      "type": "object",
+      "properties": {
+        "registered": {
+          "type": "integer"
+        },
+        "expected": {
+          "type": "integer"
+        },
+        "expected_min": {
+          "type": "integer"
+        },
+        "expected_max": {
+          "type": "integer"
+        },
+        "week_start_unix": {
+          "type": "integer"
+        },
+        "week_end_unix": {
+          "type": "integer"
+        },
+        "date_of_insertion_unix": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "registered",
+        "expected",
+        "expected_min",
+        "expected_max",
+        "date_of_insertion_unix",
+        "week_start_unix",
+        "week_end_unix"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
