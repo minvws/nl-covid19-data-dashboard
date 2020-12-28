@@ -115,7 +115,7 @@ export function Tooltip<T>({
   children,
   tooltipState,
   width,
-  tooltipArrow
+  tooltipArrow,
 }: TooltipProps<T>) {
   return (
     <Box
@@ -139,7 +139,7 @@ export function Tooltip<T>({
           visibility: 'hidden',
         },
         '&::after': () => {
-          switch(tooltipArrow) {
+          switch (tooltipArrow) {
             case 'left':
               return {
                 content: '""',
@@ -150,12 +150,12 @@ export function Tooltip<T>({
                 zIndex: -1,
                 borderTop: '5px solid transparent',
                 borderBottom: '5px solid transparent',
-                borderRight:  '7px solid white'
-              }
+                borderRight: '7px solid white',
+              };
             default:
-              return {}
+              return {};
           }
-        }
+        },
       })}
     >
       {children}

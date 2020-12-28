@@ -33,7 +33,7 @@ export const createPositiveTestedPeopleMunicipalTooltip = (
             <>
               <p className="info-value">
                 {replaceVariablesInText(text.positive_tested_value, {
-                  totalPositiveValue: `${positive_tested_people}`
+                  totalPositiveValue: `${positive_tested_people}`,
                 })}
               </p>
               <p className="info-total">

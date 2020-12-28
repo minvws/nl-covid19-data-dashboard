@@ -83,13 +83,13 @@ const ReferenceBox = styled(Box)(
   css({
     maxWidth: '30em',
     marginRight: 3,
-    flex: asResponsiveArray({ md: '1 1 auto', lg: '1 1 60%' })
+    flex: asResponsiveArray({ md: '1 1 auto', lg: '1 1 60%' }),
   })
 );
 
 const MetadataBox = styled(Box)(
   css({
-    flex: asResponsiveArray({ md: '1 1 auto', lg: '1 1 40%' })
+    flex: asResponsiveArray({ md: '1 1 auto', lg: '1 1 40%' }),
   })
 );
 

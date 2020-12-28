@@ -1,13 +1,13 @@
-import { get } from "lodash";
-import { isDefined } from "ts-is-present";
-import { National } from "~/types/data";
-import { assert } from "~/utils/assert";
-import { formatNumber } from "~/utils/formatNumber";
-import { getLastFilledValue } from "~/utils/get-last-filled-value";
-import { replaceComponentsInText } from "~/utils/replace-components-in-text";
-import { DifferenceIndicator } from "./difference-indicator";
-import { RelativeDate } from "./relative-date";
-import { Text } from "./typography";
+import { get } from 'lodash';
+import { isDefined } from 'ts-is-present';
+import { National } from '~/types/data';
+import { assert } from '~/utils/assert';
+import { formatNumber } from '~/utils/formatNumber';
+import { getLastFilledValue } from '~/utils/get-last-filled-value';
+import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { DifferenceIndicator } from './difference-indicator';
+import { RelativeDate } from './relative-date';
+import { Text } from './typography';
 
 interface DataDrivenTextProps {
   data: National;
@@ -19,9 +19,13 @@ interface DataDrivenTextProps {
 }
 
 export function DataDrivenText({
-  data, differenceKey, metricName, metricProperty, valueTexts, differenceTexts
+  data,
+  differenceKey,
+  metricName,
+  metricProperty,
+  valueTexts,
+  differenceTexts,
 }: DataDrivenTextProps) {
-
   // @Todo move to a lastValue abstraction
   const lastValue =
     metricProperty === 'hospital_moving_avg_per_region'
@@ -51,19 +55,34 @@ export function DataDrivenText({
   );
 
   const baseText = getPluralizedText(valueTexts, propertyValue);
-  const additionalText = getPluralizedText(differenceTexts, differenceValue.difference);
+  const additionalText = getPluralizedText(
+    differenceTexts,
+    differenceValue.difference
+  );
 
-  return <Text>
-    {replaceComponentsInText(baseText, {
-      newDate: <RelativeDate dateInSeconds={differenceValue.new_date_of_report_unix} isCapitalized />,
-      propertyValue: <strong>{formatNumber(propertyValue)}</strong>
-    })}
-    {' '}
-    {replaceComponentsInText(additionalText, {
-      differenceIndicator: <DifferenceIndicator value={differenceValue} context="inline" />,
-      oldDate: <RelativeDate dateInSeconds={differenceValue.old_date_of_report_unix} />
-    })}
-  </Text>;
+  return (
+    <Text>
+      {replaceComponentsInText(baseText, {
+        newDate: (
+          <RelativeDate
+            dateInSeconds={differenceValue.new_date_of_report_unix}
+            isCapitalized
+          />
+        ),
+        propertyValue: <strong>{formatNumber(propertyValue)}</strong>,
+      })}{' '}
+      {replaceComponentsInText(additionalText, {
+        differenceIndicator: (
+          <DifferenceIndicator value={differenceValue} context="inline" />
+        ),
+        oldDate: (
+          <RelativeDate
+            dateInSeconds={differenceValue.old_date_of_report_unix}
+          />
+        ),
+      })}
+    </Text>
+  );
 }
 
 type PluralizationTexts = Record<'zero' | 'singular' | 'plural', string>;
@@ -78,4 +97,3 @@ function getPluralizedText(texts: PluralizationTexts, count: number): string {
   }
   return texts.plural;
 }
-

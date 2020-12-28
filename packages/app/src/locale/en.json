@@ -792,6 +792,10 @@
     "belangrijk_bericht": "There is a [national lockdown](https://www.rijksoverheid.nl/actueel/nieuws/2020/12/14/lockdown-nodig-om-snel-oplopend-aantal-besmettingen-tegen-te-gaan) until at least Tuesday 19 January."
   },
   "common": {
+    "gm_singular": "municipality",
+    "gm_plural": "municipalities",
+    "vr_singular": "safety region",
+    "vr_plural": "safety regions",
     "metadata": {
       "source": "Source",
       "date": "Value of {{date}}",
@@ -2156,6 +2160,13 @@
     "VR24": "http://www.vrzuidlimburg.nl/",
     "VR25": "http://www.veiligheidsregioflevoland.nl/"
   },
+
+  "search": {
+    "placeholder": "Find a municipality or safery region",
+    "clear":"Clear search",
+    "no_hits": "No {{subject}} found with “{{search}}”"
+  },
+
   "veiligheidsregio_actueel": {
     "risiconiveaus": {
       "selecteer_titel": "Risiconiveaus",

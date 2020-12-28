@@ -116,13 +116,14 @@ function useSearchedOptions<Option extends TOption>(
   options: Option[]
 ): Option[] {
   const throttledTerm = useThrottle(term, 100);
-  return useMemo(() => {
-    const sortByName = (a: Option, b: Option) => a.name.localeCompare(b.name);
 
-    if (throttledTerm.trim() === '') return options.sort(sortByName);
-
-    return matchSorter(options, throttledTerm.trim(), {
-      keys: [(item: Option) => item.name, 'searchTerms', 'displayName'],
-    });
-  }, [throttledTerm, options]);
+  return useMemo(
+    () =>
+      throttledTerm.trim() === ''
+        ? options.sort((a: Option, b: Option) => a.name.localeCompare(b.name))
+        : matchSorter(options, throttledTerm.trim(), {
+            keys: [(item: Option) => item.name, 'searchTerms', 'displayName'],
+          }),
+    [throttledTerm, options]
+  );
 }

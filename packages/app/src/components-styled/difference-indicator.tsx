@@ -1,5 +1,4 @@
 import css from '@styled-system/css';
-import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import {
   color,
@@ -17,6 +16,7 @@ import siteText from '~/locale/index';
 import { DifferenceDecimal, DifferenceInteger } from '~/types/data';
 import { formatDateFromMilliseconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
+import { useIsMounted } from '~/utils/use-is-mounted';
 
 const text = siteText.toe_en_afname;
 const DAY_IN_SECONDS = 24 * 60 * 60;
@@ -31,7 +31,7 @@ export function DifferenceIndicator(props: DifferenceIndicatorProps) {
   const { value, isDecimal, context } = props;
 
   if (context === 'sidebar') {
-    return renderSidebarIndicator(value)
+    return renderSidebarIndicator(value);
   }
 
   if (context === 'inline') {
@@ -88,15 +88,11 @@ function renderInlineIndicator(
 
     return (
       <Container>
-        <Span fontWeight="bold">
-          {differenceFormattedString}
-        </Span>
+        <Span fontWeight="bold">{differenceFormattedString}</Span>
         <IconContainer color="red">
           <IconUp />
         </IconContainer>
-        <Span>
-          {splitText[0]}
-        </Span>
+        <Span>{splitText[0]}</Span>
       </Container>
     );
   }
@@ -106,15 +102,11 @@ function renderInlineIndicator(
 
     return (
       <Container>
-        <Span fontWeight="bold">
-          {differenceFormattedString}
-        </Span>
+        <Span fontWeight="bold">{differenceFormattedString}</Span>
         <IconContainer color="data.primary">
           <IconDown />
         </IconContainer>
-        <Span>
-          {splitText[0]}
-        </Span>
+        <Span>{splitText[0]}</Span>
       </Container>
     );
   }
@@ -124,9 +116,7 @@ function renderInlineIndicator(
       <IconContainer color="lightGray">
         <IconGelijk />
       </IconContainer>
-      <Span>
-        {text.gelijk}
-      </Span>
+      <Span>{text.gelijk}</Span>
     </Container>
   );
 }
@@ -216,8 +206,7 @@ const Container = styled.span(
 );
 
 function TimespanText({ date }: { date: number }) {
-  const [isMounted, setIsMounted] = useState(false);
-  useEffect(() => setIsMounted(true), []);
+  const isMounted = useIsMounted();
 
   const fullDate = formatDateFromMilliseconds(date * 1000, 'medium');
   const text = getTimespanText(date);
