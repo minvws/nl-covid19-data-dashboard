@@ -13,8 +13,19 @@ export interface Option {
 }
 
 export interface Hit<T> {
+  /**
+   * The `index` holds the position of a hit.
+   */
   index: number;
+
+  /**
+   * The score is a float between 0 and 1.
+   * A score of 1 equals the best match.
+   */
   score: number;
+  /**
+   * The `id` is unique for every hit.
+   */
   id: string;
   data: T;
 }

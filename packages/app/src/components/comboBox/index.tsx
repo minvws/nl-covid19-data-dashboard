@@ -116,10 +116,12 @@ function useSearchedOptions<Option extends TOption>(
   options: Option[]
 ): Option[] {
   const throttledTerm = useThrottle(term, 100);
-  const sortByName = (a: Option, b: Option) => a.name.localeCompare(b.name);
 
   return useMemo(() => {
-    if (throttledTerm.trim() === '') return options.sort(sortByName);
+    if (throttledTerm.trim() === '')
+      return options.sort((a: Option, b: Option) =>
+        a.name.localeCompare(b.name)
+      );
 
     return matchSorter(options, throttledTerm.trim(), {
       keys: [(item: Option) => item.name, 'searchTerms', 'displayName'],

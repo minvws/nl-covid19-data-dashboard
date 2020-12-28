@@ -16,11 +16,13 @@ interface HitListProps {
 export function HitList({ scope }: HitListProps) {
   const { gmHits, vrHits, term, getOptionProps } = useSearchContext();
 
-  const hits = scope === 'vr' ? vrHits : gmHits;
-  const title = scope === 'vr' ? text.common.vr_plural : text.common.gm_plural;
+  const isScopeVr = scope === 'vr';
+
+  const hits = isScopeVr ? vrHits : gmHits;
+  const title = isScopeVr ? text.common.vr_plural : text.common.gm_plural;
   const noHitsMessage = replaceVariablesInText(text.search.no_hits, {
     search: term,
-    subject: scope === 'vr' ? text.common.vr_plural : text.common.gm_plural,
+    subject: isScopeVr ? text.common.vr_plural : text.common.gm_plural,
   });
 
   return (

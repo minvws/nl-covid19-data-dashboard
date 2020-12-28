@@ -8,6 +8,10 @@ export function useHotkey(
   callback: Callback,
   options: OptionsWithDisabled = {}
 ) {
+  /**
+   * We'll serialize the incoming arguments for our effects dependencies
+   * shallow comparison.
+   */
   const optionsStr = JSON.stringify(options);
   const hotkeyStr = JSON.stringify(hotkey);
 
@@ -19,7 +23,10 @@ export function useHotkey(
   }, [callback]);
 
   React.useEffect(() => {
-    const hotkey: string | string[] = JSON.parse(hotkeyStr);
+    /**
+     * We'll parse the serialized arguments to recreate the argument objects.
+     */
+    const hotkeyParsed: string | string[] = JSON.parse(hotkeyStr);
     const { disabled, ...options }: OptionsWithDisabled = JSON.parse(
       optionsStr
     );
@@ -32,9 +39,9 @@ export function useHotkey(
       hotkeyContextRef.current = hotkeyContext;
 
       const handler = () => callbackRef.current();
-      hotkeyContext.register(hotkey, handler);
+      hotkeyContext.register(hotkeyParsed, handler);
 
-      return () => hotkeyContext.unregister(hotkey, handler);
+      return () => hotkeyContext.unregister(hotkeyParsed, handler);
     }
   }, [hotkeyStr, optionsStr]);
 }

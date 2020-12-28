@@ -11,7 +11,7 @@ import {
 import { assert } from '~/utils/assert';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useBreakpoints } from '~/utils/useBreakpoints';
-import { useHitFocus } from './use-hit-focus';
+import { useHitSelection } from './use-hit-selection';
 import { Hit, Option, useSearchResults } from './use-search-results';
 
 type SearchContext = ReturnType<typeof useSearchContextValue>;
@@ -50,24 +50,39 @@ function useSearchContextValue<T extends Element>(containerRef: RefObject<T>) {
 
   const id = '__search';
 
+  /**
+   * current search term
+   */
   const [term, setTerm] = useState('');
-  const [hasInputFocus, setHasInputFocus] = useState(false);
-  const [hasHitFocus, setHasHitFocus] = useState(false);
+
+  /**
+   * when a hit is selected (e.g. hitting return-key) the input's value will be
+   * replaced with the value of the selected hit.
+   */
   const [termSubmitted, setTermSubmitted] = useState('');
 
+  /**
+   * Used for showing/hiding search results
+   */
+  const [hasInputFocus, setHasInputFocus] = useState(false);
+  const [hasHitFocus, setHasHitFocus] = useState(false);
+
+  /**
+   * the useSearchResults-hook which will perform the actual search
+   */
   const { hits, vrHits, gmHits } = useSearchResults(term);
 
-  const { focusRef, focusIndex, setFocusIndex } = useHitFocus(
-    hits.length,
-    (index, openInNewWindow) => {
+  const { focusRef, focusIndex, setFocusIndex } = useHitSelection({
+    numberOfHits: hits.length,
+    onSelectHit: (index, openInNewWindow) => {
       const option = hits[index];
       setTermSubmitted(option.data.name);
 
       return openInNewWindow
         ? window.open(option.data.link, '_blank')
         : router.push(option.data.link);
-    }
-  );
+    },
+  });
 
   useEffect(() => {
     /**
@@ -91,31 +106,15 @@ function useSearchContextValue<T extends Element>(containerRef: RefObject<T>) {
 
   useOnClickOutside([containerRef], () => setHasHitFocus(false));
 
-  useEffect(() => {
-    /**
-     * On input-change we'll reset the focus index to 0. It's possible that
-     * there is a stronger hit among the VR hits (2nd column). If so, we won't
-     * reset the index to 0, instead it will be set to the index of that hit.
-     */
-    const index = vrHits[0]?.score === 1 ? vrHits[0].index : 0;
-
-    setFocusIndex(index);
-    setHasHitFocus(false);
-  }, [setFocusIndex, setHasHitFocus, term, vrHits]);
-
   return {
-    id,
-
-    showResults,
-
-    term,
-    setTerm,
-
-    hits,
     gmHits,
-    vrHits,
-
+    hits,
+    id,
     setHasHitFocus,
+    setTerm,
+    showResults,
+    term,
+    vrHits,
 
     inputProps: {
       value: termSubmitted || term,

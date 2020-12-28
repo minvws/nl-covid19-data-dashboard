@@ -62,7 +62,7 @@ const StyledSearchInput = styled.input(
     width: '100%',
     borderRadius: 1,
     border: 0,
-    fontSize: [16, null, null, 18],
+    fontSize: ['1rem', null, null, '1.125rem'],
     m: 0,
     '&::-webkit-search-cancel-button': {
       display: 'none',
