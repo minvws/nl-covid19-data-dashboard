@@ -51,7 +51,7 @@ export type LineChartProps<T> = {
   height?: number;
   timeframe?: TimeframeOption;
   signaalwaarde?: number;
-  formatTooltip?: (value: T) => React.ReactNode;
+  formatTooltip?: (value: T & TrendValue) => React.ReactNode;
   formatXAxis?: TickFormatter<Date>;
   formatYAxis?: TickFormatter<number>;
   showFill?: boolean;
@@ -59,6 +59,7 @@ export type LineChartProps<T> = {
   isPercentage?: boolean;
   componentCallback?: ComponentCallbackFunction;
   showMarkerLine?: boolean;
+  formatMarkerLabel?: (value: T) => string;
 };
 
 export function LineChart<T extends Value>({
@@ -75,6 +76,7 @@ export function LineChart<T extends Value>({
   isPercentage,
   componentCallback,
   showMarkerLine = false,
+  formatMarkerLabel,
 }: LineChartProps<T>) {
   const {
     tooltipData,
@@ -89,7 +91,7 @@ export function LineChart<T extends Value>({
         xPosition: number;
         yPosition: number;
         height: number;
-        data: any;
+        data: T;
         margins: ChartMargins;
       }
     | undefined
@@ -120,8 +122,8 @@ export function LineChart<T extends Value>({
   }, [trendData]);
 
   const yDomain = useMemo(
-    () => [0, calculateYMax(values, metricProperties, signaalwaarde)],
-    [values, metricProperties, signaalwaarde]
+    () => [0, calculateYMax(trendData, metricProperties, signaalwaarde)],
+    [trendData, metricProperties, signaalwaarde]
   );
 
   const handleHover = useCallback(
@@ -209,6 +211,7 @@ export function LineChart<T extends Value>({
             height={markerInfo.height}
             margins={markerInfo.margins}
             showLine={showMarkerLine}
+            formatLabel={formatMarkerLabel}
           />
         )}
       </Box>

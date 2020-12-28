@@ -73,7 +73,8 @@ export function calculateYMax(
    * Value cannot be 0, hence the 1 If the value is below signaalwaarde, make
    * sure the signaalwaarde floats in the middle
    */
-  return Math.max(overallMaximum, signaalwaarde * 2, 1);
+  const result = Math.max(overallMaximum, signaalwaarde * 2, 1);
+  return result;
 }
 
 /**

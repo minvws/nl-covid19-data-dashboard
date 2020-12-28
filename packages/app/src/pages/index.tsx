@@ -1,7 +1,9 @@
 import fs from 'fs';
 import { useRouter } from 'next/router';
 import path from 'path';
+import ArtsIcon from '~/assets/arts.svg';
 import GetestIcon from '~/assets/test.svg';
+import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
 import { Box } from '~/components-styled/base';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { MaxWidth } from '~/components-styled/max-width';
@@ -18,6 +20,7 @@ import { TALLLanguages } from '~/locale/';
 import { National } from '~/types/data';
 import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
 import { EscalationMapLegenda } from './veiligheidsregio';
+
 interface StaticProps {
   props: IHomeData;
 }
@@ -33,6 +36,8 @@ const Home: FCWithLayout<IHomeData> = (homeData) => {
   const { text } = homeData;
 
   const dataInfectedDelta = homeData.data.infected_people_delta_normalized;
+  const dataHospitalIntake = homeData.data.intake_hospital_ma;
+  const dataIntake = homeData.data.intake_intensivecare_ma;
 
   return (
     <MaxWidth>
@@ -52,22 +57,20 @@ const Home: FCWithLayout<IHomeData> = (homeData) => {
           <MiniTrendTile
             flex="1 1 33%"
             title={
-              text.nationaal_actueel.mini_trend_tiles.positief_getest.title
+              text.nationaal_actueel.mini_trend_tiles.ziekenhuis_opnames.title
             }
             text={'data driven text'}
-            icon={<GetestIcon />}
-            trendData={dataInfectedDelta.values}
-            metricProperty="infected_daily_increase"
+            icon={<ZiekenhuisIcon />}
+            trendData={dataHospitalIntake.values}
+            metricProperty="moving_average_hospital"
           />
           <MiniTrendTile
             flex="1 1 33%"
-            title={
-              text.nationaal_actueel.mini_trend_tiles.positief_getest.title
-            }
+            title={text.nationaal_actueel.mini_trend_tiles.ic_opnames.title}
             text={'data driven text'}
-            icon={<GetestIcon />}
-            trendData={dataInfectedDelta.values}
-            metricProperty="infected_daily_increase"
+            icon={<ArtsIcon />}
+            trendData={dataIntake.values}
+            metricProperty="moving_average_ic"
           />
         </Box>
       </Tile>

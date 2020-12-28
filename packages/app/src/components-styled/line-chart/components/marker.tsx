@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Text } from '~/components-styled/typography';
 import { colors } from '~/style/theme';
 import { formatDateFromMilliseconds } from '~/utils/formatDate';
+import { TrendValue, Value } from '../helpers';
 import { ChartMargins } from './chart';
 
 type PointProps = {
@@ -61,7 +62,7 @@ const MarkerContainer = styled.div`
   min-width: 5em;
 `;
 
-type MarkerProps = {
+type MarkerProps<T> = {
   x: number;
   y: number;
   height: number;
@@ -69,9 +70,10 @@ type MarkerProps = {
   data: any;
   margins: ChartMargins;
   showLine: boolean;
+  formatLabel?: (data: T) => string;
 };
 
-export function Marker(props: MarkerProps) {
+export function Marker<T>(props: MarkerProps<T>) {
   const {
     primaryColor = colors.data.primary,
     x,
@@ -80,6 +82,7 @@ export function Marker(props: MarkerProps) {
     height,
     margins,
     showLine = false,
+    formatLabel = defaultFormatLabel,
   } = props;
 
   return (
@@ -95,11 +98,15 @@ export function Marker(props: MarkerProps) {
           />
           <Label>
             <Text fontSize={0} fontWeight="bold" m={0}>
-              {formatDateFromMilliseconds(data.__date.getTime())}
+              {formatLabel(data)}
             </Text>
           </Label>
         </>
       )}
     </MarkerContainer>
   );
+}
+
+function defaultFormatLabel<T extends Value & TrendValue>(data: T): string {
+  return formatDateFromMilliseconds(data.__date.getTime());
 }

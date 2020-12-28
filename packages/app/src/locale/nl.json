@@ -755,6 +755,12 @@
     "mini_trend_tiles": {
       "positief_getest": {
         "title": "Aantal positieve testen"
+      },
+      "ziekenhuis_opnames": {
+        "title": "Ziekenhuisopnames"
+      },
+      "ic_opnames": {
+        "title": "Intensive care-opnames"
       }
     }
   },
@@ -792,7 +798,9 @@
       "positive_tested_people": "{{totalPositiveTestedPeople}} in totaal"
     },
     "niveau": "niveau",
-    "clear_select_input": "Leegmaken"
+    "clear_select_input": "Leegmaken",
+    "gisteren": "Gisteren",
+    "vandaag": "Vandaag"
   },
   "seoHead": {
     "default_description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",

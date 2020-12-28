@@ -3,13 +3,16 @@ import { GridRows } from '@visx/grid';
 import { ParentSize } from '@visx/responsive';
 import { Box, BoxProps } from '~/components-styled/base';
 import { LineChart } from '~/components-styled/line-chart';
-import { ComponentCallbackInfo } from '~/components-styled/line-chart/components/chart';
-import { Value } from '~/components-styled/line-chart/helpers';
+import {
+  AnyTickFormatter,
+  ComponentCallbackInfo,
+} from '~/components-styled/line-chart/components/chart';
+import { TrendValue, Value } from '~/components-styled/line-chart/helpers';
 import { Heading } from '~/components-styled/typography';
-import { formatDateFromMilliseconds } from '~/utils/formatDate';
+import text from '~/locale';
 import { formatNumber } from '~/utils/formatNumber';
 
-type MiniTrendTileProps<T extends Value> = {
+type MiniTrendTileProps<T> = {
   icon: JSX.Element;
   title: string;
   text: string;
@@ -38,7 +41,9 @@ export function MiniTrendTile<T extends Value>(props: MiniTrendTileProps<T>) {
               linesConfig={[{ metricProperty }]}
               componentCallback={componentCallback}
               showMarkerLine={true}
-              formatTooltip={(value: any) => formatNumber(value.__value)}
+              formatTooltip={(value: T & TrendValue) =>
+                formatNumber(value.__value)
+              }
             />
           )}
         </ParentSize>
@@ -65,7 +70,7 @@ function componentCallback(callbackInfo: ComponentCallbackInfo) {
         if (d === domain[0]) {
           return callbackInfo.configuration.tickFormat(d);
         }
-        return formatLastDate(d);
+        return formatLastDate(d, callbackInfo.configuration.tickFormat);
       };
 
       const tickLabelProps = (value: Date, index: number) => {
@@ -99,18 +104,18 @@ function componentCallback(callbackInfo: ComponentCallbackInfo) {
 }
 
 const DAY_IN_SECONDS = 24 * 60 * 60;
-function formatLastDate(date: Date) {
+function formatLastDate(date: Date, defaultFormat: AnyTickFormatter) {
   const days = Math.floor(
     (Date.now() / 1000 - date.valueOf() / 1000) / DAY_IN_SECONDS
   );
 
   if (days < 1) {
-    return 'vandaag';
+    return text.common.vandaag;
   }
 
   if (days < 2) {
-    return 'gisteren';
+    return text.common.gisteren;
   }
 
-  return formatDateFromMilliseconds(date.getTime(), 'short');
+  return defaultFormat(date);
 }

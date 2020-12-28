@@ -69,7 +69,7 @@ type ChartProps = {
   componentCallback?: ComponentCallbackFunction;
 };
 
-type AnyTickFormatter = (value: any) => string;
+export type AnyTickFormatter = (value: any) => string;
 
 export const Chart = memo(function Chart({
   trend,
