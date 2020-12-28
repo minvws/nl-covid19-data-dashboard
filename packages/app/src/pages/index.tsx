@@ -37,7 +37,7 @@ const Home: FCWithLayout<IHomeData> = (data) => {
   const notificatie = data.text.notificatie;
   const text = data.text.nationaal_actueel;
 
-  const dataInfectedDelta = data.data.infected_people_total;
+  const dataInfectedTotal = data.data.infected_people_total;
   const dataHospitalIntake = data.data.intake_hospital_ma;
   const dataIntake = data.data.intake_intensivecare_ma;
 
@@ -62,7 +62,7 @@ const Home: FCWithLayout<IHomeData> = (data) => {
               />
             }
             icon={<GetestIcon />}
-            trendData={dataInfectedDelta.values}
+            trendData={dataInfectedTotal.values}
             metricProperty="infected_daily_total"
           />
           <MiniTrendTile
