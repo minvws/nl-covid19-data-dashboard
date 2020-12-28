@@ -87,10 +87,12 @@ const IntakeIntensiveCare: FCWithLayout<NationalPageProps> = (props) => {
 
         <LineChartTile
           title={text.linechart_titel}
-          values={dataIntake.values.map((value) => ({
-            value: value.moving_average_ic,
-            date: value.date_of_report_unix,
-          }))}
+          values={dataIntake.values}
+          linesConfig={[
+            {
+              metricProperty: 'moving_average_ic',
+            },
+          ]}
           signaalwaarde={10}
           metadata={{ source: text.bronnen.nice }}
         />
@@ -98,10 +100,12 @@ const IntakeIntensiveCare: FCWithLayout<NationalPageProps> = (props) => {
         <LineChartTile
           title={text.chart_bedbezetting.title}
           description={text.chart_bedbezetting.description}
-          values={dataBeds.values.map((value) => ({
-            value: value.covid_occupied,
-            date: value.date_of_report_unix,
-          }))}
+          values={dataBeds.values}
+          linesConfig={[
+            {
+              metricProperty: 'covid_occupied',
+            },
+          ]}
           metadata={{ source: text.bronnen.lnaz }}
         />
       </TileList>

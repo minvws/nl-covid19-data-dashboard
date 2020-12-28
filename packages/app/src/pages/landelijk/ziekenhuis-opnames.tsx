@@ -144,11 +144,13 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
         <LineChartTile
           title={text.linechart_titel}
           description={text.linechart_description}
-          values={dataHospitalIntake.values.map((value) => ({
-            value: value.moving_average_hospital,
-            date: value.date_of_report_unix,
-          }))}
+          values={dataHospitalIntake.values}
           signaalwaarde={40}
+          linesConfig={[
+            {
+              metricProperty: 'moving_average_hospital',
+            },
+          ]}
           metadata={{
             source: text.bronnen.nice,
           }}
@@ -157,10 +159,12 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
         <LineChartTile
           title={text.chart_bedbezetting.title}
           description={text.chart_bedbezetting.description}
-          values={dataHospitalBeds.values.map((value) => ({
-            value: value.covid_occupied,
-            date: value.date_of_report_unix,
-          }))}
+          values={dataHospitalBeds.values}
+          linesConfig={[
+            {
+              metricProperty: 'covid_occupied',
+            },
+          ]}
           metadata={{
             source: text.bronnen.lnaz,
           }}

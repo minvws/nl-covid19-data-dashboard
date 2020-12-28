@@ -24,7 +24,6 @@ export function getLastFilledValue<T>(
     return lastValue;
   }
 
-  // console.log('+++ get last full item from values array');
   const values = get(data, [(metricName as unknown) as string, 'values']);
 
   assert(values, `Unable to find ${metricName}.values[]`);

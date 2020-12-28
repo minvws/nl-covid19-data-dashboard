@@ -191,7 +191,6 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
               accessibilityDescription={
                 text.bar_chart_accessibility_description
               }
-              valueAnnotation={siteText.waarde_annotaties.riool_normalized}
             />
           </ChartTile>
         )}

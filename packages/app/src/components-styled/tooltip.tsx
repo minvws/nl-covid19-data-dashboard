@@ -17,6 +17,7 @@ interface TooltipProps<T> {
   tooltipState: TooltipState<T>;
   width?: number;
   controls?: string;
+  tooltipArrow?: string;
 }
 
 interface TooltipState<T> {
@@ -114,6 +115,7 @@ export function Tooltip<T>({
   children,
   tooltipState,
   width,
+  tooltipArrow
 }: TooltipProps<T>) {
   return (
     <Box
@@ -136,6 +138,24 @@ export function Tooltip<T>({
         '&[aria-hidden="true"]': {
           visibility: 'hidden',
         },
+        '&::after': () => {
+          switch(tooltipArrow) {
+            case 'left':
+              return {
+                content: '""',
+                position: 'absolute',
+                transform: 'translateY(-50%)',
+                top: '50%',
+                left: '-7px',
+                zIndex: -1,
+                borderTop: '5px solid transparent',
+                borderBottom: '5px solid transparent',
+                borderRight:  '7px solid white'
+              }
+            default:
+              return {}
+          }
+        }
       })}
     >
       {children}

@@ -18,10 +18,10 @@ import { MunicipalityChoropleth } from '~/components/choropleth/municipality-cho
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
-import { FCWithLayout } from '~/domain/layout/layout';
-import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { SEOHead } from '~/components/seoHead';
 import regionCodeToMunicipalCodeLookup from '~/data/regionCodeToMunicipalCodeLookup';
+import { FCWithLayout } from '~/domain/layout/layout';
+import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import {
   getSafetyRegionPaths,
   getSafetyRegionStaticProps,
@@ -29,7 +29,6 @@ import {
 } from '~/static-props/safetyregion-data';
 import { colors } from '~/style/theme';
 import { ResultsPerRegion } from '~/types/data.d';
-import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
@@ -147,10 +146,12 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           title={text.linechart_titel}
           description={text.linechart_toelichting}
           signaalwaarde={7}
-          values={resultsPerRegion.values.map((value) => ({
-            value: value.infected_increase_per_region,
-            date: value.date_of_report_unix,
-          }))}
+          values={resultsPerRegion.values}
+          linesConfig={[
+            {
+              metricProperty: 'infected_increase_per_region',
+            },
+          ]}
           metadata={{ source: text.bronnen.rivm }}
         />
 
@@ -254,26 +255,13 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           timeframeOptions={['all', '5weeks']}
           title={ggdText.linechart_percentage_titel}
           description={ggdText.linechart_percentage_toelichting}
-          values={ggdValues.map((value) => ({
-            value: value.infected_percentage,
-            date: value.week_unix,
-            week: {
-              start: value.week_start_unix,
-              end: value.week_end_unix,
+          values={ggdValues}
+          linesConfig={[
+            {
+              metricProperty: 'infected_percentage',
             },
-          }))}
-          formatTooltip={(x) => {
-            return `<strong>${formatDateFromSeconds(
-              x.week.start,
-              'short'
-            )} - ${formatDateFromSeconds(
-              x.week.end,
-              'short'
-            )}:</strong> ${formatPercentage(x.value)}%`;
-          }}
-          formatYAxis={(y: number) => {
-            return `${formatPercentage(y)}%`;
-          }}
+          ]}
+          isPercentage
           metadata={{
             source: ggdText.bronnen.rivm,
           }}

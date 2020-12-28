@@ -13,6 +13,7 @@ import {
   Text,
 } from '~/components-styled/typography';
 import { Link } from '~/utils/link';
+import { asResponsiveArray } from '~/style/utils';
 import { Box } from '../base';
 
 /*
@@ -82,13 +83,13 @@ const ReferenceBox = styled(Box)(
   css({
     maxWidth: '30em',
     marginRight: 3,
-    flex: [null, null, null, '1 1 60%'],
+    flex: asResponsiveArray({ md: '1 1 auto', lg: '1 1 60%' })
   })
 );
 
 const MetadataBox = styled(Box)(
   css({
-    flex: [null, null, null, '1 1 40%'],
+    flex: asResponsiveArray({ md: '1 1 auto', lg: '1 1 40%' })
   })
 );
 

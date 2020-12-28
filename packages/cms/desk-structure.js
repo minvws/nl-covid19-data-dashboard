@@ -3,12 +3,12 @@ import SanityMobilePreview from "sanity-mobile-preview";
 import "sanity-mobile-preview/dist/index.css?raw";
 
 import S from "@sanity/desk-tool/structure-builder";
-import { GoSettings } from "react-icons/Go";
+import { GoSettings } from "react-icons/go";
 
-import { MdQuestionAnswer } from "react-icons/Md";
+import { MdQuestionAnswer } from "react-icons/md";
 
-import { BsCardChecklist, BsMap } from "react-icons/Bs";
-import { GrCircleInformation } from "react-icons/Gr";
+import { BsCardChecklist, BsMap } from "react-icons/bs";
+import { GrCircleInformation } from "react-icons/gr";
 
 import ColorblindPreview from "./previews/colorblind-filter/ColorblindPreview";
 import { assemblePreviewUrl } from "./previews/assemblePreviewUrl";
