@@ -108,7 +108,7 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
             thresholds:
               selectedMap === 'municipal'
                 ? municipalThresholds.hospital_admissions.hospital_admissions
-                : regionThresholds.hospital_admissions.hospital_admissions,
+                : regionThresholds.hospital.admissions_moving_average,
             title: text.chloropleth_legenda.titel,
           }}
           metadata={{
