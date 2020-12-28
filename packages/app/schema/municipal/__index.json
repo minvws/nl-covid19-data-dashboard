@@ -9,6 +9,7 @@
     "name",
     "code",
     "positive_tested_people",
+    "hospital",
     "difference"
   ],
   "properties": {
