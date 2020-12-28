@@ -52,15 +52,15 @@ Definitions](#guidelines-for-new-definitions)
   group data by context + source, thus using a single JSON definition for each
   combination. For example "bedbezetting" for hospitals and IC are coming from a
   single source, so we could have them in a single JSON file, but we split them
-  into intensive_care_beds_occupied and hospitals_beds_occupied, so that
-  intensive_care_beds_occupied can live next to intensive_care_intake.
+  into intensive_care_lcps and hospitals_beds_occupied, so that
+  intensive_care_lcps can live next to intensive_care_intake.
 
 ### Guidelines For New Definitions
 
 Use these guidelines when defining a new schema:
 
 1. Name files starting with context and appended by subject. For example
-   `intensive_care_beds_occupied.json` or `intensive_care_intake.json`. This way
+   `intensive_care_lcps.json` or `intensive_care_intake.json`. This way
    the files will sort naturally. Context is **singular** i.e. intensive_care
    and not intensive_cares.
 2. The titles of the root and the definition, are used to generate the
@@ -81,7 +81,7 @@ Use these guidelines when defining a new schema:
    example is `moving_average` in `hospital_intake (HospitalIntake) > values (HospitalIntakeValue[]) > moving_average`
 
 Most files currently do not follow these guidelines. If you want to see examples
-look at `intensive_care_beds_occupied.json`, `intensive_care_intake.json` or
+look at `intensive_care_lcps.json`, `intensive_care_intake.json` or
 `regional/nursing_home.json`.
 
 ### Naming Choices

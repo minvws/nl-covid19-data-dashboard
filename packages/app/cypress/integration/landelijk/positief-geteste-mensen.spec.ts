@@ -7,14 +7,11 @@ context('Landelijk - Positief geteste mensen', () => {
   });
 
   it('Should show the correct KPI values', function (this: NationalContext) {
-    const infectedTotalLastValue = this.nationalData.infected_people_total
-      .last_value;
+    const infectedTotalLastValue = this.nationalData.tested_overall.last_value;
     const ggdLastValue = this.nationalData.ggd.last_value;
 
     const kpiTestInfo = {
-      infected_daily_total: formatNumber(
-        infectedTotalLastValue.infected_daily_total
-      ),
+      infected: formatNumber(infectedTotalLastValue.infected),
       ggd_infected: formatPercentage(ggdLastValue.infected_percentage),
       ggd_tested_total: formatNumber(ggdLastValue.tested_total),
     };

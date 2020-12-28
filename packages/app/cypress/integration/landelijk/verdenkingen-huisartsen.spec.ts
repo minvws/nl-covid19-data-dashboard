@@ -7,11 +7,11 @@ context('Landelijk - Verdenkingen huisartsen', () => {
   });
 
   it('Should show the correct KPI values', function (this: NationalContext) {
-    const lastValue = this.nationalData.verdenkingen_huisartsen.last_value;
+    const lastValue = this.nationalData.doctor.last_value;
 
     const kpiTestInfo = {
-      geschat_aantal: formatNumber(lastValue.geschat_aantal),
-      incidentie: formatNumber(lastValue.incidentie),
+      covid_symptoms: formatNumber(lastValue.covid_symptoms),
+      covid_symptoms_per_100k: formatNumber(lastValue.covid_symptoms_per_100k),
     };
 
     cy.checkKpiValues(kpiTestInfo);

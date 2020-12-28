@@ -130,8 +130,8 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                           <SidebarMetric
                             data={data}
                             scope="gm"
-                            metricName="positive_tested_people"
-                            metricProperty="infected_daily_total"
+                            metricName="tested_overall"
+                            metricProperty="infected"
                             localeTextKey="gemeente_positief_geteste_personen"
                             differenceKey="positive_tested_people__infected_daily_total"
                           />

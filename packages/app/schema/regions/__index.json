@@ -9,7 +9,7 @@
     "name",
     "code",
     "escalation_levels",
-    "positive_tested_people",
+    "tested_overall",
     "nursing_home",
     "behavior",
     "hospital_nice",
@@ -41,11 +41,11 @@
         "$ref": "hospital_nice.json"
       }
     },
-    "positive_tested_people": {
+    "tested_overall": {
       "type": "array",
       "maxItems": 25,
       "items": {
-        "$ref": "positive_tested_people.json"
+        "$ref": "tested_overall.json"
       }
     },
     "escalation_levels": {

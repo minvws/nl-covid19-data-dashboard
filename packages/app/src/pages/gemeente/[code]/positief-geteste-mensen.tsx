@@ -26,7 +26,7 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
   const { data, municipalityName, text: siteText } = props;
 
   const text = siteText.gemeente_positief_geteste_personen;
-  const lastValue = data.positive_tested_people.last_value;
+  const lastValue = data.tested_overall.last_value;
 
   const router = useRouter();
 
@@ -83,8 +83,8 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
             }}
           >
             <KpiValue
-              data-cy="infected_daily_total"
-              absolute={lastValue.infected_daily_total}
+              data-cy="infected"
+              absolute={lastValue.infected}
               difference={
                 data.difference.positive_tested_people__infected_daily_total
               }
@@ -96,11 +96,11 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
           </KpiTile>
         </TwoKpiSection>
 
-        {data.positive_tested_people && (
+        {data.tested_overall && (
           <LineChartTile
             title={text.linechart_titel}
             description={text.linechart_toelichting}
-            values={data.positive_tested_people.values}
+            values={data.tested_overall.values}
             linesConfig={[
               {
                 metricProperty: 'infected_daily_increase',
@@ -118,8 +118,7 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
           })}
           description={text.map_toelichting}
           legend={{
-            thresholds:
-              municipalThresholds.positive_tested_people.positive_tested_people,
+            thresholds: municipalThresholds.tested_overall.infected_per_100k,
             title: siteText.positief_geteste_personen.chloropleth_legenda.titel,
           }}
           metadata={{
@@ -129,8 +128,8 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
         >
           <MunicipalityChoropleth
             selected={data.code}
-            metricName="positive_tested_people"
-            metricProperty="positive_tested_people"
+            metricName="tested_overall"
+            metricProperty="infected_per_100k"
             tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
               createSelectMunicipalHandler(router)
             )}

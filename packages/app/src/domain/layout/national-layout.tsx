@@ -127,8 +127,8 @@ function NationalLayout(props: NationalLayoutProps) {
                   <SidebarMetric
                     data={data}
                     scope="nl"
-                    metricName="infected_people_total"
-                    metricProperty="infected_daily_total"
+                    metricName="tested_overall"
+                    metricProperty="infected"
                     altBarScaleMetric={{
                       metricName: 'infected_people_delta_normalized',
                       metricProperty: 'infected_daily_increase',
@@ -161,8 +161,8 @@ function NationalLayout(props: NationalLayoutProps) {
                   <SidebarMetric
                     data={data}
                     scope="nl"
-                    metricName="reproduction_index_last_known_average"
-                    metricProperty="reproduction_index_avg"
+                    metricName="reproduction"
+                    metricProperty="index_average"
                     localeTextKey="reproductiegetal"
                     showBarScale={true}
                   />
@@ -216,10 +216,10 @@ function NationalLayout(props: NationalLayoutProps) {
                   <SidebarMetric
                     data={data}
                     scope="nl"
-                    metricName="intake_intensivecare_ma"
+                    metricName="intensive_care_nice"
                     metricProperty="moving_average_ic"
                     localeTextKey="ic_opnames_per_dag"
-                    differenceKey="intake_intensivecare_ma__moving_average_ic"
+                    differenceKey="intensive_care_nice__admissions_moving_average"
                     showBarScale={true}
                   />
                 </MetricMenuItemLink>
@@ -294,15 +294,15 @@ function NationalLayout(props: NationalLayoutProps) {
                 <MetricMenuItemLink
                   href="/landelijk/verdenkingen-huisartsen"
                   icon={<Arts />}
-                  title={siteText.verdenkingen_huisartsen.titel_sidebar}
+                  title={siteText.doctor.titel_sidebar}
                 >
                   <SidebarMetric
                     data={data}
                     scope="nl"
-                    metricName="verdenkingen_huisartsen"
-                    metricProperty="geschat_aantal"
+                    metricName="doctor"
+                    metricProperty="covid_symptoms"
                     localeTextKey="verdenkingen_huisartsen"
-                    differenceKey="huisarts_verdenkingen__geschat_aantal"
+                    differenceKey="doctor__covid_symptoms"
                   />
                 </MetricMenuItemLink>
               </CategoryMenu>

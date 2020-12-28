@@ -133,16 +133,15 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
         legend={{
           thresholds:
             selectedMap === 'municipal'
-              ? municipalThresholds.positive_tested_people
-                  .positive_tested_people
-              : regionThresholds.positive_tested_people.positive_tested_people,
+              ? municipalThresholds.tested_overall.infected_per_100k
+              : regionThresholds.tested_overall.infected_per_100k,
           title: text.positief_geteste_personen.chloropleth_legenda.titel,
         }}
       >
         {selectedMap === 'municipal' && (
           <MunicipalityChoropleth
-            metricName="positive_tested_people"
-            metricProperty="positive_tested_people"
+            metricName="tested_overall"
+            metricProperty="infected_per_100k"
             tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
               createSelectMunicipalHandler(router)
             )}
@@ -151,8 +150,8 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
         )}
         {selectedMap === 'region' && (
           <SafetyRegionChoropleth
-            metricName="positive_tested_people"
-            metricProperty="positive_tested_people"
+            metricName="tested_overall"
+            metricProperty="infected_per_100k"
             tooltipContent={createPositiveTestedPeopleRegionalTooltip(
               createSelectRegionHandler(router)
             )}

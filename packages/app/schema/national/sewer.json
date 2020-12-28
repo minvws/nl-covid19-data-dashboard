@@ -4,7 +4,6 @@
       "title": "national_sewer_value",
       "type": "object",
       "required": [
-        "week_unix",
         "average",
         "date_of_insertion_unix",
         "total_installation_count",
@@ -13,9 +12,6 @@
       ],
       "additionalProperties": false,
       "properties": {
-        "week_unix": {
-          "type": "integer"
-        },
         "average": {
           "type": "number"
         },

@@ -1,23 +1,26 @@
 {
   "definitions": {
-    "item": {
-      "title": "infected_people_clusters_last_value",
+    "value": {
+      "title": "national_infectious_people_value",
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "active_clusters",
-        "cluster_average",
+        "margin_low",
+        "estimate",
+        "margin_high",
         "date_of_report_unix",
         "date_of_insertion_unix"
       ],
       "properties": {
-        "active_clusters": {
-          "type": ["number", "null"],
+        "margin_low": {
+          "type": "integer"
+        },
+        "estimate": {
+          "type": ["integer", "null"],
           "nullable": true
         },
-        "cluster_average": {
-          "type": ["number", "null"],
-          "nullable": true
+        "margin_high": {
+          "type": "integer"
         },
         "date_of_report_unix": {
           "type": "integer"
@@ -29,8 +32,7 @@
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "infected_people_clusters.json",
-  "title": "infected_people_clusters",
+  "title": "national_infectious_people",
   "type": "object",
   "required": ["values", "last_value"],
   "additionalProperties": false,
@@ -38,11 +40,11 @@
     "values": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/item"
+        "$ref": "#/definitions/value"
       }
     },
     "last_value": {
-      "$ref": "#/definitions/item"
+      "$ref": "#/definitions/value"
     }
   }
 }

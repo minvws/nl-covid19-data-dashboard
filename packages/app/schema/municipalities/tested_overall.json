@@ -1,26 +1,26 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
-  "title": "region_positive_tested_people",
+  "title": "municipalities_tested_overall",
   "additionalProperties": false,
   "required": [
     "date_of_report_unix",
-    "vrcode",
-    "positive_tested_people",
+    "gmcode",
+    "infected_per_100k",
     "date_of_insertion_unix"
   ],
   "properties": {
     "date_of_report_unix": {
       "type": "integer"
     },
-    "vrcode": {
+    "gmcode": {
       "type": "string",
-      "pattern": "^VR[0-9]+$"
+      "pattern": "^GM[0-9]+$"
     },
-    "positive_tested_people": {
+    "infected_per_100k": {
       "type": "number"
     },
-    "total_positive_tested_people": {
+    "infected": {
       "type": "integer"
     },
     "date_of_insertion_unix": {

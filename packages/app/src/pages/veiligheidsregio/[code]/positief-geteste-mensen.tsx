@@ -41,7 +41,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
 
   const router = useRouter();
 
-  const resultsPerRegion: ResultsPerRegion = data.results_per_region;
+  const resultsPerRegion: ResultsPerRegion = data.tested_overall;
 
   const ggdData = data.ggd.last_value;
   const ggdValues = data.ggd.values;
@@ -88,10 +88,10 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
             <PageBarScale
               data={data}
               scope="vr"
-              metricName="results_per_region"
-              metricProperty="infected_increase_per_region"
+              metricName="tested_overall"
+              metricProperty="infected_per_100k"
               localeTextKey="veiligheidsregio_positief_geteste_personen"
-              differenceKey="results_per_region__infected_increase_per_region"
+              differenceKey="tested_overall__infected_per_100k"
             />
             <Text>{text.barscale_toelichting}</Text>
           </KpiTile>
@@ -104,14 +104,9 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
             }}
           >
             <KpiValue
-              data-cy="total_reported_increase_per_region"
-              absolute={Math.round(
-                resultsPerRegion.last_value.total_reported_increase_per_region
-              )}
-              difference={
-                data.difference
-                  .results_per_region__total_reported_increase_per_region
-              }
+              data-cy="infected"
+              absolute={Math.round(resultsPerRegion.last_value.infected)}
+              difference={data.difference.tested_overall__infected}
             />
 
             <Text
@@ -149,7 +144,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           values={resultsPerRegion.values}
           linesConfig={[
             {
-              metricProperty: 'infected_increase_per_region',
+              metricProperty: 'infected_per_100k',
             },
           ]}
           metadata={{ source: text.bronnen.rivm }}
@@ -166,15 +161,14 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           description={text.map_toelichting}
           legend={{
             title: siteText.positief_geteste_personen.chloropleth_legenda.titel,
-            thresholds:
-              regionThresholds.positive_tested_people.positive_tested_people,
+            thresholds: regionThresholds.tested_overall.infected_per_100k,
           }}
         >
           <MunicipalityChoropleth
             selected={selectedMunicipalCode}
             highlightSelection={false}
-            metricName="positive_tested_people"
-            metricProperty="positive_tested_people"
+            metricName="tested_overall"
+            metricProperty="infected_per_100k"
             tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
               createSelectMunicipalHandler(router)
             )}

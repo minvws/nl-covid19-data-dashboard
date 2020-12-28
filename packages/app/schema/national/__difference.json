@@ -3,22 +3,19 @@
   "title": "national_difference",
   "type": "object",
   "properties": {
-    "infected_people_delta_normalized__infected_daily_increase": {
+    "tested_overall__infected_per_100k": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "infected_people_total__infected_daily_total": {
+    "tested_overall__infected": {
       "$ref": "#/definitions/diff_integer"
     },
-    "ggd__tested_total": {
+    "tested_ggd__tested_total": {
       "$ref": "#/definitions/diff_integer"
     },
-    "ggd__infected_percentage": {
+    "tested_ggd__infected_percentage": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "reproduction_index_last_known_average__reproduction_index_avg": {
-      "$ref": "#/definitions/diff_decimal"
-    },
-    "infectious_people_count_normalized__infectious_avg_normalized": {
+    "infectious_people_last_full_value__count_average": {
       "$ref": "#/definitions/diff_decimal"
     },
     "hospital_nice__admissions_moving_average": {
@@ -27,16 +24,16 @@
     "hospital_lcps__beds_occupied_covid": {
       "$ref": "#/definitions/diff_integer"
     },
-    "intake_intensivecare_ma__moving_average_ic": {
+    "intensive_care_nice__admissions_moving_average": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "intensive_care_beds_occupied__covid_occupied": {
+    "intensive_care_lcps__beds_occupied_covid": {
       "$ref": "#/definitions/diff_integer"
     },
-    "huisarts_verdenkingen__incidentie": {
+    "doctor__covid_symptoms_per_100k": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "huisarts_verdenkingen__geschat_aantal": {
+    "doctor__covid_symptoms": {
       "$ref": "#/definitions/diff_integer"
     },
     "sewer__average": {
@@ -50,21 +47,24 @@
     },
     "nursing_home__deceased_daily": {
       "$ref": "#/definitions/diff_integer"
+    },
+    "reproduction_last_full_value__index_average": {
+      "$ref": "#/definitions/diff_decimal"
     }
   },
   "required": [
-    "infected_people_delta_normalized__infected_daily_increase",
-    "infected_people_total__infected_daily_total",
+    "tested_overall__infected_per_100k",
+    "tested_overall__infected",
     "hospital_nice__admissions_moving_average",
     "hospital_lcps__beds_occupied_covid",
-    "ggd__tested_total",
-    "ggd__infected_percentage",
-    "reproduction_index_last_known_average__reproduction_index_avg",
-    "infectious_people_count_normalized__infectious_avg_normalized",
-    "intake_intensivecare_ma__moving_average_ic",
-    "intensive_care_beds_occupied__covid_occupied",
-    "huisarts_verdenkingen__incidentie",
-    "huisarts_verdenkingen__geschat_aantal",
+    "tested_ggd__tested_total",
+    "tested_ggd__infected_percentage",
+    "reproduction_last_full_value__index_average",
+    "infectious_people_last_full_value__count_average",
+    "intensive_care_nice__admissions_moving_average",
+    "intensive_care_lcps__beds_occupied_covid",
+    "doctor__covid_symptoms_per_100k",
+    "doctor__covid_symptoms",
     "sewer__average",
     "nursing_home__newly_infected_people",
     "nursing_home__infected_locations_total",

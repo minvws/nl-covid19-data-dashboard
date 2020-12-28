@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "intensive_care_beds_occupied",
+  "title": "national_tested_ggd",
   "type": "object",
   "properties": {
     "values": {
@@ -17,19 +17,25 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "intensive_care_beds_occupied_value",
+      "title": "national_tested_ggd_value",
       "type": "object",
       "properties": {
-        "covid_occupied": {
+        "infected": {
           "type": "integer"
         },
-        "non_covid_occupied": {
-          "type": "integer"
-        },
-        "covid_percentage_of_all_occupied": {
+        "infected_percentage": {
           "type": "number"
         },
-        "date_of_report_unix": {
+        "tested_total": {
+          "type": "integer"
+        },
+        "week_unix": {
+          "type": "integer"
+        },
+        "week_start_unix": {
+          "type": "integer"
+        },
+        "week_end_unix": {
           "type": "integer"
         },
         "date_of_insertion_unix": {
@@ -37,10 +43,12 @@
         }
       },
       "required": [
-        "covid_occupied",
-        "non_covid_occupied",
-        "covid_percentage_of_all_occupied",
-        "date_of_report_unix",
+        "tested_total",
+        "infected_percentage",
+        "infected",
+        "week_unix",
+        "week_start_unix",
+        "week_end_unix",
         "date_of_insertion_unix"
       ],
       "additionalProperties": false

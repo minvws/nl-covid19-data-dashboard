@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "national_huisarts_verdenkingen",
+  "title": "regional_tested_ggd",
   "type": "object",
   "properties": {
     "values": {
@@ -17,9 +17,18 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "national_huisarts_verdenkingen_value",
+      "title": "regional_tested_ggd_value",
       "type": "object",
       "properties": {
+        "infected": {
+          "type": "integer"
+        },
+        "infected_percentage": {
+          "type": "number"
+        },
+        "tested_total": {
+          "type": "integer"
+        },
         "week_unix": {
           "type": "integer"
         },
@@ -29,23 +38,23 @@
         "week_end_unix": {
           "type": "integer"
         },
-        "incidentie": {
-          "type": "number"
-        },
-        "geschat_aantal": {
-          "type": "number"
-        },
         "date_of_insertion_unix": {
           "type": "integer"
+        },
+        "vrcode": {
+          "type": "string",
+          "equalsRootProperty": "code"
         }
       },
       "required": [
+        "infected",
+        "infected_percentage",
+        "tested_total",
         "week_unix",
         "week_start_unix",
         "week_end_unix",
-        "incidentie",
-        "geschat_aantal",
-        "date_of_insertion_unix"
+        "date_of_insertion_unix",
+        "vrcode"
       ],
       "additionalProperties": false
     }

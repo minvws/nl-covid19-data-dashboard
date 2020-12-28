@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "national_ggd",
+  "title": "national_doctor",
   "type": "object",
   "properties": {
     "values": {
@@ -17,18 +17,9 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "national_ggd_value",
+      "title": "national_doctor_value",
       "type": "object",
       "properties": {
-        "infected": {
-          "type": "integer"
-        },
-        "infected_percentage": {
-          "type": "number"
-        },
-        "tested_total": {
-          "type": "integer"
-        },
         "week_unix": {
           "type": "integer"
         },
@@ -38,17 +29,22 @@
         "week_end_unix": {
           "type": "integer"
         },
+        "covid_symptoms_per_100k": {
+          "type": "number"
+        },
+        "covid_symptoms": {
+          "type": "number"
+        },
         "date_of_insertion_unix": {
           "type": "integer"
         }
       },
       "required": [
-        "tested_total",
-        "infected_percentage",
-        "infected",
         "week_unix",
         "week_start_unix",
         "week_end_unix",
+        "covid_symptoms_per_100k",
+        "covid_symptoms",
         "date_of_insertion_unix"
       ],
       "additionalProperties": false

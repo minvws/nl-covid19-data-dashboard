@@ -7,7 +7,7 @@ context('Regionaal - Ziekenhuis opnames', () => {
   });
 
   xit('Should show the correct KPI values', async function (this: RegionalContext) {
-    const lastValue = this.regionData.results_per_region.last_value;
+    const lastValue = this.regionData.hospital.last_value;
 
     const kpiTestInfo = {
       admissions_moving_average: formatNumber(

@@ -132,10 +132,8 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
             }}
           >
             <KpiValue
-              data-cy="infected_daily_total"
-              absolute={
-                data.infected_people_total.last_value.infected_daily_total
-              }
+              data-cy="infected"
+              absolute={data.tested_overall.last_value.infected}
               difference={
                 data.difference.infected_people_total__infected_daily_total
               }
@@ -181,8 +179,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
           chartRegion={selectedMap}
           legend={{
             title: text.chloropleth_legenda.titel,
-            thresholds:
-              regionThresholds.positive_tested_people.positive_tested_people,
+            thresholds: regionThresholds.tested_overall.infected_per_100k,
           }}
         >
           {/**
@@ -198,8 +195,8 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
            */}
           {selectedMap === 'municipal' && (
             <MunicipalityChoropleth
-              metricName="positive_tested_people"
-              metricProperty="positive_tested_people"
+              metricName="tested_overall"
+              metricProperty="infected_per_100k"
               tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
                 createSelectMunicipalHandler(router)
               )}
@@ -208,8 +205,8 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
           )}
           {selectedMap === 'region' && (
             <SafetyRegionChoropleth
-              metricName="positive_tested_people"
-              metricProperty="positive_tested_people"
+              metricName="tested_overall"
+              metricProperty="infected_per_100k"
               tooltipContent={createPositiveTestedPeopleRegionalTooltip(
                 createSelectRegionHandler(router)
               )}

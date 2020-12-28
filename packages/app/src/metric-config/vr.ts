@@ -23,8 +23,8 @@ export const vr: VrConfig = {
       isWeeklyData: true,
     },
   },
-  results_per_region: {
-    infected_increase_per_region: {
+  tested_overall: {
+    infected_per_100k: {
       barScale: {
         min: 0,
         max: 10,

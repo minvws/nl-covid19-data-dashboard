@@ -21,9 +21,9 @@ const text = siteText.ic_opnames_per_dag;
 const IntakeIntensiveCare: FCWithLayout<NationalPageProps> = (props) => {
   const { data } = props;
 
-  const dataIntake = data.intake_intensivecare_ma;
+  const dataIntake = data.intensive_care_nice;
 
-  const dataBeds = data.intensive_care_beds_occupied;
+  const dataBeds = data.intensive_care_lcps;
 
   return (
     <>
@@ -58,10 +58,10 @@ const IntakeIntensiveCare: FCWithLayout<NationalPageProps> = (props) => {
             <PageBarScale
               data={data}
               scope="nl"
-              metricName="intake_intensivecare_ma"
+              metricName="intensive_care_nice"
               metricProperty="moving_average_ic"
               localeTextKey="ic_opnames_per_dag"
-              differenceKey="intake_intensivecare_ma__moving_average_ic"
+              differenceKey="intensive_care_nice__admissions_moving_average"
             />
             <Text>{text.extra_uitleg}</Text>
           </KpiTile>
@@ -76,9 +76,9 @@ const IntakeIntensiveCare: FCWithLayout<NationalPageProps> = (props) => {
             <KpiValue
               data-cy="covid_occupied"
               absolute={dataBeds.last_value.covid_occupied}
-              percentage={dataBeds.last_value.covid_percentage_of_all_occupied}
+              percentage={dataBeds.last_value.beds_occupied_covid_percentage}
               difference={
-                data.difference.intensive_care_beds_occupied__covid_occupied
+                data.difference.intensive_care_lcps__beds_occupied_covid
               }
             />
             <Text>{text.kpi_bedbezetting.description}</Text>
