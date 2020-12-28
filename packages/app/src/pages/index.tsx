@@ -17,6 +17,7 @@ import { TALLLanguages } from '~/locale/';
 import { National } from '~/types/data';
 import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
 import { EscalationMapLegenda } from './veiligheidsregio';
+import { DataDrivenText } from '~/components-styled/data-driven-text';
 
 interface StaticProps {
   props: IHomeData;
@@ -39,6 +40,16 @@ const Home: FCWithLayout<IHomeData> = (data) => {
         <Search />
         <Tile>De actuele situatie in Nederland</Tile>
         <Tile>Artikelen</Tile>
+        <DataDrivenText
+          data={data.data}
+          metricName="infected_people_total"
+          metricProperty="infected_daily_total"
+          differenceKey="infected_people_total__infected_daily_total"
+          valueTexts={text.data_driven_texts.infected_people_total.value}
+          differenceTexts={
+            text.data_driven_texts.infected_people_total.difference
+          }
+        />
         <ChoroplethTile
           title={text.risiconiveaus.selecteer_titel}
           description={

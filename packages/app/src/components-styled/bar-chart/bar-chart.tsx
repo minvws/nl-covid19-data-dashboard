@@ -50,8 +50,7 @@ export function BarChart({
           accessibilityDescription={accessibilityDescription}
         />
       </div>
-
-      <Tooltip tooltipState={tooltipState}>
+      <Tooltip tooltipState={tooltipState} tooltipArrow={'left'}>
         {tooltipState.value && (
           <BarChartTooltipContent value={tooltipState.value} />
         )}

@@ -23,7 +23,11 @@ if ('__setDefaultTimeZone' in Intl.DateTimeFormat) {
   (Intl.DateTimeFormat as any).__setDefaultTimeZone('Europe/Amsterdam');
 }
 
-import { isToday, isYesterday } from 'date-fns';
+import { isToday, isYesterday, isSameDay, subDays } from 'date-fns';
+
+function isDayBeforeYesterday(date: number): boolean {
+  return isSameDay(date, subDays(Date.now(), 2));
+}
 
 import siteText from '~/locale/index';
 import { getLocale } from '~/utils/getLocale';
@@ -115,6 +119,8 @@ export function formatDateFromMilliseconds(
   if (style === 'relative' && typeof window !== 'undefined') {
     if (isToday(milliseconds)) return siteText.utils.date_today;
     if (isYesterday(milliseconds)) return siteText.utils.date_yesterday;
+    if (isDayBeforeYesterday(milliseconds))
+      return siteText.utils.date_day_before_yesterday;
   }
 
   return DayMonth.format(milliseconds);

@@ -44,6 +44,7 @@ export function SearchInput() {
         type="search"
         id={`${id}-input`}
         placeholder={siteText.search.placeholder}
+        autoComplete="off"
         {...inputProps}
       />
     </Box>
