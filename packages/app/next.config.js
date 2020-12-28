@@ -55,8 +55,10 @@ const nextConfig = {
       })
     );
 
+    /**
+     * Add the polyfill.js file to our entries
+     */
     const originalEntry = config.entry;
-
     config.entry = async () => {
       const entries = await originalEntry();
 
