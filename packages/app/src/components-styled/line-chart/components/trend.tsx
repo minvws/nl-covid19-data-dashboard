@@ -1,6 +1,4 @@
-import { localPoint } from '@visx/event';
-import { AreaClosed, Bar, LinePath } from '@visx/shape';
-import { useCallback } from 'react';
+import { AreaClosed, LinePath } from '@visx/shape';
 import { TrendValue } from '../helpers';
 
 export type TrendType = 'line' | 'area';
@@ -20,15 +18,6 @@ export type TrendProps = {
    */
   xScale: any;
   yScale: any;
-  onHover: (
-    event: React.TouchEvent<SVGRectElement> | React.MouseEvent<SVGRectElement>,
-    data?: TrendValue,
-    xPosition?: number,
-    yPosition?: number
-  ) => void;
-  height: number;
-  width: number;
-  bisect: (trend: TrendValue[], xPosition: number) => TrendValue;
   color: string;
 };
 
@@ -38,31 +27,8 @@ export function Trend({
   color,
   xScale,
   yScale,
-  onHover,
-  height,
-  width,
   isHovered,
-  bisect,
 }: TrendProps) {
-  const handlePointerMove = useCallback(
-    (
-      event: React.TouchEvent<SVGRectElement> | React.MouseEvent<SVGRectElement>
-    ) => {
-      if (trend.length < 1) return null;
-
-      const { x } = localPoint(event) || { x: 0 };
-      const pointData = bisect(trend, x);
-
-      onHover(
-        event,
-        pointData,
-        xScale(pointData.__date),
-        yScale(pointData.__value)
-      );
-    },
-    [onHover, yScale, xScale, trend, bisect]
-  );
-
   return (
     <>
       {type === 'line' && (
@@ -94,19 +60,6 @@ export function Trend({
           />
         </>
       )}
-
-      <Bar
-        x={0}
-        y={0}
-        width={width}
-        height={height}
-        fill="transparent"
-        rx={14}
-        onTouchStart={handlePointerMove}
-        onTouchMove={handlePointerMove}
-        onMouseMove={handlePointerMove}
-        onMouseLeave={(event) => onHover(event)}
-      />
     </>
   );
 }

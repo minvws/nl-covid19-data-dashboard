@@ -5,10 +5,19 @@ import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
 import text from '~/locale/index';
-import { formatDateFromSeconds } from '~/utils/formatDate';
+import {
+  formatDateFromMilliseconds,
+  formatDateFromSeconds,
+} from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { TimeframeOption } from '~/utils/timeframe';
-import { Chart, defaultMargin } from './components/chart';
+import {
+  Chart,
+  ChartPadding,
+  defaultPadding,
+  HoverPoint,
+} from './components/chart';
+import { Marker } from './components/marker';
 import { Tooltip } from './components/tooltip';
 import {
   calculateYMax,
@@ -47,6 +56,9 @@ export type LineChartProps<T> = {
   showFill?: boolean;
   valueAnnotation?: string;
   isPercentage?: boolean;
+  showMarkerLine?: boolean;
+  formatMarkerLabel?: (value: T) => string;
+  padding?: ChartPadding;
 };
 
 export function LineChart<T extends Value>({
@@ -61,6 +73,9 @@ export function LineChart<T extends Value>({
   showFill = true,
   valueAnnotation,
   isPercentage,
+  showMarkerLine = false,
+  formatMarkerLabel,
+  padding = defaultPadding,
 }: LineChartProps<T>) {
   const {
     tooltipData,
@@ -69,6 +84,12 @@ export function LineChart<T extends Value>({
     showTooltip,
     hideTooltip,
   } = useTooltip<T & TrendValue>();
+
+  const [markerProps, setMarkerProps] = useState<{
+    height: number;
+    data: HoverPoint[];
+    padding: ChartPadding;
+  }>();
 
   const metricProperties = useMemo(
     () => linesConfig.map((x) => x.metricProperty) as string[],
@@ -101,20 +122,23 @@ export function LineChart<T extends Value>({
 
   const handleHover = useCallback(
     (
-      event:
-        | React.TouchEvent<SVGRectElement>
-        | React.MouseEvent<SVGRectElement>,
-      data,
-      xPosition,
-      yPosition
+      event: React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>,
+      hoverPoints?: any[]
     ) => {
       if (event.type === 'mouseleave') {
         hideTooltip();
-      } else {
+        setMarkerProps(undefined);
+      } else if (hoverPoints) {
+        const last = hoverPoints[hoverPoints.length - 1];
         showTooltip({
-          tooltipData: data,
-          tooltipLeft: xPosition,
-          tooltipTop: yPosition,
+          tooltipData: last.data,
+          tooltipLeft: last.x,
+          tooltipTop: last.y,
+        });
+        setMarkerProps({
+          data: hoverPoints,
+          height,
+          padding,
         });
       }
     },
@@ -155,8 +179,8 @@ export function LineChart<T extends Value>({
         {isDefined(tooltipData) && (
           <Tooltip
             bounds={{ right: width, left: 0, top: 0, bottom: height }}
-            x={tooltipLeft + defaultMargin.left}
-            y={tooltipTop + defaultMargin.top}
+            x={tooltipLeft + defaultPadding.left}
+            y={tooltipTop + defaultPadding.top}
           >
             {formatTooltip
               ? formatTooltip(tooltipData)
@@ -165,6 +189,14 @@ export function LineChart<T extends Value>({
                   isPercentage
                 )}
           </Tooltip>
+        )}
+
+        {markerProps && (
+          <Marker
+            {...markerProps}
+            showLine={showMarkerLine}
+            formatLabel={formatMarkerLabel}
+          />
         )}
       </Box>
     </Box>
@@ -179,8 +211,8 @@ function formatDefaultTooltip<T extends Value & TrendValue>(
   const isWeekly = isWeeklyValue([value]);
 
   if (isDaily) {
-    return `${formatDateFromSeconds(
-      (value as TrendValue).__date.getSeconds()
+    return `${formatDateFromMilliseconds(
+      (value as TrendValue).__date.getTime()
     )}: ${
       isPercentage
         ? `${formatPercentage(value.__value)}%`
