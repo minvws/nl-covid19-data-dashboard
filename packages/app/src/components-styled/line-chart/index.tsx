@@ -5,10 +5,20 @@ import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
 import text from '~/locale/index';
-import { formatDateFromSeconds } from '~/utils/formatDate';
+import {
+  formatDateFromMilliseconds,
+  formatDateFromSeconds,
+} from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { TimeframeOption } from '~/utils/timeframe';
-import { Chart, defaultMargin } from './components/chart';
+import {
+  Chart,
+  ChartPadding,
+  ComponentCallbackFunction,
+  defaultPadding,
+} from './components/chart';
+import { Marker } from './components/marker';
+import { Tooltip } from './components/tooltip';
 import {
   calculateYMax,
   getTrendData,
@@ -18,7 +28,6 @@ import {
   Value,
   WeeklyValue,
 } from './helpers';
-import { Tooltip } from './components/tooltip';
 
 const dateToValue = (d: Date) => d.valueOf() / 1000;
 const formatXAxis = (date: Date) =>
@@ -41,12 +50,16 @@ export type LineChartProps<T> = {
   height?: number;
   timeframe?: TimeframeOption;
   signaalwaarde?: number;
-  formatTooltip?: (value: T) => React.ReactNode;
+  formatTooltip?: (value: T & TrendValue) => React.ReactNode;
   formatXAxis?: TickFormatter<Date>;
   formatYAxis?: TickFormatter<number>;
   showFill?: boolean;
   valueAnnotation?: string;
   isPercentage?: boolean;
+  componentCallback?: ComponentCallbackFunction;
+  showMarkerLine?: boolean;
+  formatMarkerLabel?: (value: T) => string;
+  padding?: ChartPadding;
 };
 
 export function LineChart<T extends Value>({
@@ -61,6 +74,10 @@ export function LineChart<T extends Value>({
   showFill = true,
   valueAnnotation,
   isPercentage,
+  componentCallback,
+  showMarkerLine = false,
+  formatMarkerLabel,
+  padding = defaultPadding,
 }: LineChartProps<T>) {
   const {
     tooltipData,
@@ -69,6 +86,14 @@ export function LineChart<T extends Value>({
     showTooltip,
     hideTooltip,
   } = useTooltip<T & TrendValue>();
+
+  const [markerProps, setMarkerProps] = useState<{
+    x: number;
+    y: number;
+    height: number;
+    data: T;
+    padding: ChartPadding;
+  }>();
 
   const metricProperties = useMemo(
     () => linesConfig.map((x) => x.metricProperty) as string[],
@@ -95,8 +120,8 @@ export function LineChart<T extends Value>({
   }, [trendData]);
 
   const yDomain = useMemo(
-    () => [0, calculateYMax(values, metricProperties, signaalwaarde)],
-    [values, metricProperties, signaalwaarde]
+    () => [0, calculateYMax(trendData, metricProperties, signaalwaarde)],
+    [trendData, metricProperties, signaalwaarde]
   );
 
   const handleHover = useCallback(
@@ -110,11 +135,19 @@ export function LineChart<T extends Value>({
     ) => {
       if (event.type === 'mouseleave') {
         hideTooltip();
+        setMarkerProps(undefined);
       } else {
         showTooltip({
           tooltipData: data,
           tooltipLeft: xPosition,
           tooltipTop: yPosition,
+        });
+        setMarkerProps({
+          x: xPosition + padding.left,
+          y: yPosition + padding.top,
+          height,
+          padding,
+          data,
         });
       }
     },
@@ -150,13 +183,15 @@ export function LineChart<T extends Value>({
           onHover={handleHover}
           isHovered={!!tooltipData}
           benchmark={benchmark}
+          componentCallback={componentCallback}
+          padding={padding}
         />
 
         {isDefined(tooltipData) && (
           <Tooltip
             bounds={{ right: width, left: 0, top: 0, bottom: height }}
-            x={tooltipLeft + defaultMargin.left}
-            y={tooltipTop + defaultMargin.top}
+            x={tooltipLeft + padding.left}
+            y={tooltipTop + padding.top}
           >
             {formatTooltip
               ? formatTooltip(tooltipData)
@@ -165,6 +200,14 @@ export function LineChart<T extends Value>({
                   isPercentage
                 )}
           </Tooltip>
+        )}
+
+        {markerProps && (
+          <Marker
+            {...markerProps}
+            showLine={showMarkerLine}
+            formatLabel={formatMarkerLabel}
+          />
         )}
       </Box>
     </Box>
@@ -179,8 +222,8 @@ function formatDefaultTooltip<T extends Value & TrendValue>(
   const isWeekly = isWeeklyValue([value]);
 
   if (isDaily) {
-    return `${formatDateFromSeconds(
-      (value as TrendValue).__date.getSeconds()
+    return `${formatDateFromMilliseconds(
+      (value as TrendValue).__date.getTime()
     )}: ${
       isPercentage
         ? `${formatPercentage(value.__value)}%`

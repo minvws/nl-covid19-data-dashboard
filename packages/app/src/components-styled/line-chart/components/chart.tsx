@@ -5,14 +5,26 @@ import { scaleLinear, scaleTime } from '@visx/scale';
 import { Line } from '@visx/shape';
 import { Text } from '@visx/text';
 import { bisectLeft } from 'd3-array';
-import { memo, useCallback } from 'react';
+import { ComponentProps, memo, ReactNode, useCallback } from 'react';
 import { colors } from '~/style/theme';
 import { TrendValue } from '../helpers';
 import { Trend, TrendType } from './trend';
 
 const NUM_TICKS = 3;
 
-export const defaultMargin = { top: 10, right: 20, bottom: 30, left: 30 };
+export type ChartPadding = {
+  top: number;
+  right: number;
+  bottom: number;
+  left: number;
+};
+
+export const defaultPadding: ChartPadding = {
+  top: 10,
+  right: 20,
+  bottom: 30,
+  left: 30,
+};
 
 const defaultColors = {
   main: colors.data.primary,
@@ -25,6 +37,10 @@ type Benchmark = {
   value: number;
   label: string;
 };
+
+export type ComponentCallbackFunction = (
+  callbackInfo: ComponentCallbackInfo
+) => ReactNode | undefined;
 
 type ChartProps = {
   benchmark?: Benchmark;
@@ -41,19 +57,20 @@ type ChartProps = {
   yDomain: number[];
   width: number;
   height: number;
-  margin?: { top: number; right: number; bottom: number; left: number };
+  padding?: ChartPadding;
   formatXAxis: TickFormatter<Date>;
   formatYAxis: TickFormatter<number>;
+  componentCallback?: ComponentCallbackFunction;
 };
 
-type AnyTickFormatter = (value: any) => string;
+export type AnyTickFormatter = (value: any) => string;
 
 export const Chart = memo(function Chart({
   trend,
   type,
   width,
   height,
-  margin = defaultMargin,
+  padding = defaultPadding,
   xDomain,
   yDomain,
   onHover,
@@ -61,10 +78,11 @@ export const Chart = memo(function Chart({
   benchmark,
   formatXAxis,
   formatYAxis,
+  componentCallback = () => undefined,
 }: ChartProps) {
   const bounded = {
-    width: width - margin.left - margin.right,
-    height: height - margin.top - margin.bottom,
+    width: width - padding.left - padding.right,
+    height: height - padding.top - padding.bottom,
   };
 
   const xScale = scaleTime({
@@ -82,7 +100,7 @@ export const Chart = memo(function Chart({
     (trend: TrendValue[], xPosition: number) => {
       if (trend.length === 1) return trend[0];
 
-      const date = xScale.invert(xPosition - margin.left);
+      const date = xScale.invert(xPosition - padding.left);
 
       const index = bisectLeft(
         trend.map((x) => x.__date),
@@ -95,46 +113,64 @@ export const Chart = memo(function Chart({
 
       return +date - +d0.__date > +d1.__date - +date ? d1 : d0;
     },
-    [margin, xScale]
+    [padding, xScale]
   );
 
   return (
     <svg width={width} height={height} role="img">
-      <Group left={margin.left} top={margin.top}>
-        <GridRows
-          scale={yScale}
-          width={bounded.width}
-          numTicks={NUM_TICKS}
-          stroke={defaultColors.axis}
-        />
-        <AxisBottom
-          scale={xScale}
-          tickValues={xScale.domain()}
-          tickFormat={formatXAxis as AnyTickFormatter}
-          top={bounded.height}
-          stroke={defaultColors.axis}
-          tickLabelProps={() => ({
-            dx: -25,
-            fill: defaultColors.axisLabels,
-            fontSize: 12,
-          })}
-          hideTicks
-        />
-        <AxisLeft
-          scale={yScale}
-          numTicks={4}
-          hideTicks
-          hideAxisLine
-          stroke={defaultColors.axis}
-          tickFormat={formatYAxis as AnyTickFormatter}
-          tickLabelProps={() => ({
-            fill: defaultColors.axisLabels,
-            fontSize: 12,
-            dx: -5,
-            textAnchor: 'end',
-            verticalAnchor: 'middle',
-          })}
-        />
+      <Group left={padding.left} top={padding.top}>
+        {createComponent(
+          {
+            type: 'GridRows',
+            props: {
+              scale: yScale,
+              width: bounded.width,
+              numTicks: NUM_TICKS,
+              stroke: defaultColors.axis,
+            },
+          },
+          componentCallback
+        )}
+        {createComponent(
+          {
+            type: 'AxisBottom',
+            props: {
+              scale: xScale,
+              tickValues: xScale.domain(),
+              tickFormat: formatXAxis as AnyTickFormatter,
+              top: bounded.height,
+              stroke: defaultColors.axis,
+              tickLabelProps: () => ({
+                dx: -25,
+                fill: defaultColors.axisLabels,
+                fontSize: 12,
+              }),
+              hideTicks: true,
+            },
+          },
+          componentCallback
+        )}
+        {createComponent(
+          {
+            type: 'AxisLeft',
+            props: {
+              scale: yScale,
+              numTicks: 4,
+              hideTicks: true,
+              hideAxisLine: true,
+              stroke: defaultColors.axis,
+              tickFormat: formatYAxis as AnyTickFormatter,
+              tickLabelProps: () => ({
+                fill: defaultColors.axisLabels,
+                fontSize: 12,
+                dx: -5,
+                textAnchor: 'end',
+                verticalAnchor: 'middle',
+              }),
+            },
+          },
+          componentCallback
+        )}
 
         {benchmark && (
           <Group top={yScale(benchmark.value)}>
@@ -175,3 +211,45 @@ export const Chart = memo(function Chart({
     </svg>
   );
 });
+
+function createComponent(
+  callbackInfo: ComponentCallbackInfo,
+  componentCallback: ComponentCallbackFunction
+) {
+  const result = componentCallback(callbackInfo);
+  switch (callbackInfo.type) {
+    case 'GridRows': {
+      return result !== undefined ? (
+        result
+      ) : (
+        <GridRows {...callbackInfo.props} />
+      );
+    }
+    case 'AxisBottom':
+      return result !== undefined ? (
+        result
+      ) : (
+        <AxisBottom {...callbackInfo.props} />
+      );
+    case 'AxisLeft':
+      return result !== undefined ? (
+        result
+      ) : (
+        <AxisLeft {...callbackInfo.props} />
+      );
+  }
+}
+
+export type ComponentCallbackInfo =
+  | {
+      type: 'GridRows';
+      props: ComponentProps<typeof GridRows>;
+    }
+  | {
+      type: 'AxisBottom';
+      props: ComponentProps<typeof AxisBottom>;
+    }
+  | {
+      type: 'AxisLeft';
+      props: ComponentProps<typeof AxisLeft>;
+    };
