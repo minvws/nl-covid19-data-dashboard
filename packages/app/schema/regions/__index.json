@@ -12,7 +12,7 @@
     "positive_tested_people",
     "nursing_home",
     "behavior",
-    "hospital",
+    "hospital_nice",
     "elderly_at_home",
     "disability_care",
     "sewer"
@@ -33,12 +33,12 @@
       "type": "string",
       "const": { "$data": "1/proto_name" }
     },
-    "hospital": {
+    "hospital_nice": {
       "type": "array",
       "minItems": 25,
       "maxItems": 25,
       "items": {
-        "$ref": "hospital.json"
+        "$ref": "hospital_nice.json"
       }
     },
     "positive_tested_people": {

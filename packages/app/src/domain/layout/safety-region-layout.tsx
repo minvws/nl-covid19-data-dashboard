@@ -171,10 +171,10 @@ function SafetyRegionLayout(
                       <SidebarMetric
                         data={data}
                         scope="vr"
-                        metricName="results_per_region"
-                        metricProperty="hospital_moving_avg_per_region"
+                        metricName="hospital_nice"
+                        metricProperty="admissions_moving_average"
                         localeTextKey="veiligheidsregio_ziekenhuisopnames_per_dag"
-                        differenceKey="results_per_region__hospital_moving_avg_per_region"
+                        differenceKey="hospital_nice__admissions_moving_average"
                       />
                     </MetricMenuItemLink>
                   </CategoryMenu>

@@ -28,7 +28,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
   const { data, municipalityName } = props;
   const router = useRouter();
 
-  const lastValue = data.hospital.last_value;
+  const lastValue = data.hospital_nice.last_value;
 
   return (
     <>
@@ -85,12 +85,13 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
           description={text.map_toelichting}
           legend={{
             title: siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel,
-            thresholds: municipalThresholds.hospital.admissions_moving_average,
+            thresholds:
+              municipalThresholds.hospital_nice.admissions_moving_average,
           }}
         >
           <MunicipalityChoropleth
             selected={data.code}
-            metricName="hospital"
+            metricName="hospital_nice"
             metricProperty="admissions_moving_average"
             tooltipContent={createMunicipalHospitalAdmissionsTooltip(
               createSelectMunicipalHandler(router, 'ziekenhuis-opnames')

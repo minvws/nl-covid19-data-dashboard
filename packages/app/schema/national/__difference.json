@@ -21,10 +21,10 @@
     "infectious_people_count_normalized__infectious_avg_normalized": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "hospital__admissions_moving_average": {
+    "hospital_nice__admissions_moving_average": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "hospital__beds_occupied_covid": {
+    "hospital_lcps__beds_occupied_covid": {
       "$ref": "#/definitions/diff_integer"
     },
     "intake_intensivecare_ma__moving_average_ic": {
@@ -55,8 +55,8 @@
   "required": [
     "infected_people_delta_normalized__infected_daily_increase",
     "infected_people_total__infected_daily_total",
-    "hospital__admissions_moving_average",
-    "hospital__beds_occupied_covid",
+    "hospital_nice__admissions_moving_average",
+    "hospital_lcps__beds_occupied_covid",
     "ggd__tested_total",
     "ggd__infected_percentage",
     "reproduction_index_last_known_average__reproduction_index_avg",

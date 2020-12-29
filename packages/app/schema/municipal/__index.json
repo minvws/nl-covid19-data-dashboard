@@ -9,7 +9,7 @@
     "name",
     "code",
     "positive_tested_people",
-    "hospital",
+    "hospital_nice",
     "difference"
   ],
   "properties": {
@@ -31,8 +31,8 @@
     "difference": {
       "$ref": "__difference.json"
     },
-    "hospital": {
-      "$ref": "hospital.json"
+    "hospital_nice": {
+      "$ref": "hospital_nice.json"
     },
     "positive_tested_people": {
       "$ref": "positive_tested_people.json"
