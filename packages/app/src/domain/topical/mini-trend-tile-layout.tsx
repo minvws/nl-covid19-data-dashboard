@@ -7,14 +7,14 @@ type MiniTrendTileLayoutProps = {
 };
 
 export function MiniTrendTileLayout({ children }: MiniTrendTileLayoutProps) {
-  const miniTrendTiles = Children.toArray(children);
+  const tiles = Children.toArray(children);
 
-  const columnWidth = `${Math.floor(100 / miniTrendTiles.length)}%`;
+  const columnWidth = `${Math.floor(100 / tiles.length)}%`;
 
   return (
     <Tile>
       <Box display="flex" flexDirection="row">
-        {miniTrendTiles.map((tile: ReactNode) => (
+        {tiles.map((tile: ReactNode) => (
           <Box flex={`1 1 ${columnWidth}`}>{tile}</Box>
         ))}
       </Box>

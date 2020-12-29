@@ -25,7 +25,7 @@ export function MiniTrendTile<T extends Value>(props: MiniTrendTileProps<T>) {
   const { icon, title, text, trendData, metricProperty, ...boxProps } = props;
   return (
     <Box display="flex" flexDirection="column">
-      <Box flexDirection="row" display="flex">
+      <Box display="flex">
         <Box width="4rem" height="4rem" display="flex" mr={1}>
           {icon}
         </Box>
