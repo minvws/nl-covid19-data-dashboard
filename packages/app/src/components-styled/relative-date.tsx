@@ -5,16 +5,19 @@
  * - machine readable iso dates
  */
 
-import css from "@styled-system/css";
-import styled from "styled-components";
-import { formatDateFromSeconds } from "~/utils/formatDate";
+import css from '@styled-system/css';
+import styled from 'styled-components';
+import { formatDateFromSeconds } from '~/utils/formatDate';
 
 interface RelativeDateProps {
   dateInSeconds: number;
   isCapitalized?: boolean;
 }
 
-export function RelativeDate({ dateInSeconds, isCapitalized }: RelativeDateProps) {
+export function RelativeDate({
+  dateInSeconds,
+  isCapitalized,
+}: RelativeDateProps) {
   const isoDate = formatDateFromSeconds(dateInSeconds, 'iso');
   const fullDate = formatDateFromSeconds(dateInSeconds, 'medium');
 
@@ -28,9 +31,15 @@ export function RelativeDate({ dateInSeconds, isCapitalized }: RelativeDateProps
 
   // @Todo useIsMounted hook which will be available when the actueel search is merged
 
-  return <Time dateTime={isoDate} title={fullDate}>{displayDate}</Time>
+  return (
+    <Time dateTime={isoDate} title={fullDate}>
+      {displayDate}
+    </Time>
+  );
 }
 
-const Time = styled.time(css({
-  cursor: 'help'
-}));
+const Time = styled.time(
+  css({
+    cursor: 'help',
+  })
+);

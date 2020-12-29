@@ -113,7 +113,7 @@ export function BarChartGraph({
               height={labelScale.bandwidth()}
               width={barsWidth}
             />
-            
+
             {/* Bar has a minimum width of 5 pixels to stay visible / clickable */}
             <Bar
               x={spacing.left}

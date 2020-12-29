@@ -26,7 +26,7 @@ if ('__setDefaultTimeZone' in Intl.DateTimeFormat) {
 import { isToday, isYesterday, isSameDay, subDays } from 'date-fns';
 
 function isDayBeforeYesterday(date: number): boolean {
-  return isSameDay(date, subDays(Date.now(), 2))
+  return isSameDay(date, subDays(Date.now(), 2));
 }
 
 import siteText from '~/locale/index';
@@ -119,7 +119,8 @@ export function formatDateFromMilliseconds(
   if (style === 'relative' && typeof window !== 'undefined') {
     if (isToday(milliseconds)) return siteText.utils.date_today;
     if (isYesterday(milliseconds)) return siteText.utils.date_yesterday;
-    if (isDayBeforeYesterday(milliseconds)) return siteText.utils.date_day_before_yesterday;
+    if (isDayBeforeYesterday(milliseconds))
+      return siteText.utils.date_day_before_yesterday;
   }
 
   return DayMonth.format(milliseconds);
