@@ -9,6 +9,7 @@ import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { TimeframeOption } from '~/utils/timeframe';
 import { Chart, defaultMargin } from './components/chart';
+import { Tooltip } from './components/tooltip';
 import {
   calculateYMax,
   getTrendData,
@@ -18,7 +19,6 @@ import {
   Value,
   WeeklyValue,
 } from './helpers';
-import { Tooltip } from './components/tooltip';
 
 const dateToValue = (d: Date) => d.valueOf() / 1000;
 const formatXAxis = (date: Date) =>
@@ -95,8 +95,8 @@ export function LineChart<T extends Value>({
   }, [trendData]);
 
   const yDomain = useMemo(
-    () => [0, calculateYMax(values, metricProperties, signaalwaarde)],
-    [values, metricProperties, signaalwaarde]
+    () => [0, calculateYMax(trendData, metricProperties, signaalwaarde)],
+    [trendData, metricProperties, signaalwaarde]
   );
 
   const handleHover = useCallback(
