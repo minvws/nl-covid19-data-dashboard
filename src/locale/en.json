@@ -9,8 +9,8 @@
     "title": "Last updated"
   },
   "notificatie": {
-    "titel": "All signals on red",
-    "bericht": "The spread of the coronavirus (SARS-COV-2) in the Netherlands continues. In the week of 16 to 22 December, 82,340 newly tested COVID-19 positives were reported. The percentage of positive test results increased to 13.6% in the week of 14 to 20 December. Again, more people with COVID-19 were admitted to the hospital and ICU during the past week. In nursing homes and residential care centers the number of coronavirus infected locations also increased. The reproduction number was 1.25 (lower limit: 1.22 – upper limit 1.27) on 4 December.",
+    "titel": "Percentage of positive test results decreased slightly",
+    "bericht": "In the week of 23 to 29 December, 67,388 newly tested COVID-19 positives were reported. This is a slight decrease of 11,7% compared to the week before. The percentage of positive test results also decreased somewhat from 13.7% to 13.0% in the past week. In the week of 21 to 27 December, more people with COVID-19 were admitted to the hospital while the number of ICU admissions stabilized. The reproduction number was 1.15 (lower limit: 1.12 – upper limit 1.77) on 11 December. The number of infectious people in The Netherlands increased to almost 165,000 (lower limit: 125,078; upper limit: 202,633) on 17 December.",
     "link": {
       "text": "View the full message from the RIVM",
       "href": "https://www.rivm.nl/en/novel-coronavirus-covid-19/current-information"
@@ -1113,7 +1113,7 @@
   },
   "laatste_ontwikkelingen": {
     "title": "Latest developments",
-    "menu_subtitle": "All signals on red",
+    "menu_subtitle": "Decrease percentage of positive test results",
     "alle_cijfers_header": "Want to see all data?",
     "alle_cijfers_link": "View all"
   },
