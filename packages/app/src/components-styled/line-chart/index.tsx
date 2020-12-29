@@ -13,9 +13,9 @@ import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { TimeframeOption } from '~/utils/timeframe';
 import {
   Chart,
-  ChartMargins,
+  ChartPadding,
   ComponentCallbackFunction,
-  defaultMargin,
+  defaultPadding,
 } from './components/chart';
 import { Marker } from './components/marker';
 import { Tooltip } from './components/tooltip';
@@ -59,7 +59,7 @@ export type LineChartProps<T> = {
   componentCallback?: ComponentCallbackFunction;
   showMarkerLine?: boolean;
   formatMarkerLabel?: (value: T) => string;
-  margin?: ChartMargins;
+  padding?: ChartPadding;
 };
 
 export function LineChart<T extends Value>({
@@ -77,7 +77,7 @@ export function LineChart<T extends Value>({
   componentCallback,
   showMarkerLine = false,
   formatMarkerLabel,
-  margin = defaultMargin,
+  padding = defaultPadding,
 }: LineChartProps<T>) {
   const {
     tooltipData,
@@ -87,16 +87,13 @@ export function LineChart<T extends Value>({
     hideTooltip,
   } = useTooltip<T & TrendValue>();
 
-  const [markerInfo, setMarkerInfo] = useState<
-    | {
-        xPosition: number;
-        yPosition: number;
-        height: number;
-        data: T;
-        margins: ChartMargins;
-      }
-    | undefined
-  >(undefined);
+  const [markerProps, setMarkerProps] = useState<{
+    x: number;
+    y: number;
+    height: number;
+    data: T;
+    padding: ChartPadding;
+  }>();
 
   const metricProperties = useMemo(
     () => linesConfig.map((x) => x.metricProperty) as string[],
@@ -138,18 +135,18 @@ export function LineChart<T extends Value>({
     ) => {
       if (event.type === 'mouseleave') {
         hideTooltip();
-        setMarkerInfo(undefined);
+        setMarkerProps(undefined);
       } else {
         showTooltip({
           tooltipData: data,
           tooltipLeft: xPosition,
           tooltipTop: yPosition,
         });
-        setMarkerInfo({
-          xPosition: xPosition + margin.left,
-          yPosition: yPosition + margin.top,
+        setMarkerProps({
+          x: xPosition + padding.left,
+          y: yPosition + padding.top,
           height,
-          margins: margin,
+          padding,
           data,
         });
       }
@@ -187,14 +184,14 @@ export function LineChart<T extends Value>({
           isHovered={!!tooltipData}
           benchmark={benchmark}
           componentCallback={componentCallback}
-          margin={margin}
+          padding={padding}
         />
 
         {isDefined(tooltipData) && (
           <Tooltip
             bounds={{ right: width, left: 0, top: 0, bottom: height }}
-            x={tooltipLeft + margin.left}
-            y={tooltipTop + margin.top}
+            x={tooltipLeft + padding.left}
+            y={tooltipTop + padding.top}
           >
             {formatTooltip
               ? formatTooltip(tooltipData)
@@ -205,13 +202,9 @@ export function LineChart<T extends Value>({
           </Tooltip>
         )}
 
-        {markerInfo && (
+        {markerProps && (
           <Marker
-            x={markerInfo.xPosition}
-            y={markerInfo.yPosition}
-            data={markerInfo.data}
-            height={markerInfo.height}
-            margins={markerInfo.margins}
+            {...markerProps}
             showLine={showMarkerLine}
             formatLabel={formatMarkerLabel}
           />

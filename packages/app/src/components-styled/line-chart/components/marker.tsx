@@ -3,9 +3,9 @@ import { Text } from '~/components-styled/typography';
 import { colors } from '~/style/theme';
 import { formatDateFromMilliseconds } from '~/utils/formatDate';
 import { TrendValue, Value } from '../helpers';
-import { ChartMargins } from './chart';
+import { ChartPadding } from './chart';
 
-type PointProps = {
+type ColorProps = {
   indicatorColor: string;
 };
 
@@ -14,7 +14,7 @@ const Label = styled.div`
   background-color: white;
 `;
 
-const DottedLine = styled.div<PointProps>`
+const DottedLine = styled.div<ColorProps>`
   pointer-events: none;
   width: 1px;
   border-left-width: 1px;
@@ -22,7 +22,7 @@ const DottedLine = styled.div<PointProps>`
   border-left-color: ${(props) => props.indicatorColor || 'black'};
 `;
 
-const Point = styled.div<PointProps>`
+const Point = styled.div<ColorProps>`
   pointer-events: none;
   height: 18px;
   width: 18px;
@@ -68,7 +68,7 @@ type MarkerProps<T> = {
   height: number;
   primaryColor?: string;
   data: any;
-  margins: ChartMargins;
+  padding: ChartPadding;
   showLine: boolean;
   formatLabel?: (data: T) => string;
 };
@@ -80,7 +80,7 @@ export function Marker<T>(props: MarkerProps<T>) {
     y,
     data,
     height,
-    margins,
+    padding,
     showLine = false,
     formatLabel = defaultFormatLabel,
   } = props;
@@ -93,7 +93,7 @@ export function Marker<T>(props: MarkerProps<T>) {
           <DottedLine
             indicatorColor={primaryColor}
             style={{
-              height: `${height - y - (margins.top + margins.bottom + 6)}px`,
+              height: `${height - y - (padding.top + padding.bottom + 6)}px`,
             }}
           />
           <Label>
