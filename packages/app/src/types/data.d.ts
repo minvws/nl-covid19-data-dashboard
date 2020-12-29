@@ -11,7 +11,7 @@ export interface Municipal {
   name: string;
   code: string;
   difference: MunicipalDifference;
-  hospital_admissions: MunicipalHospitalAdmissions;
+  hospital_nice: MunicipalHospitalNice;
   positive_tested_people: MunicipalPositiveTestedPeople;
   sewer?: MunicipalSewer;
   sewer_per_installation?: MunicipalSewerPerInstallation;
@@ -19,7 +19,7 @@ export interface Municipal {
 export interface MunicipalDifference {
   positive_tested_people__infected_daily_increase: DifferenceDecimal;
   positive_tested_people__infected_daily_total: DifferenceInteger;
-  hospital_admissions__moving_average_hospital: DifferenceDecimal;
+  hospital_nice__admissions_moving_average: DifferenceDecimal;
   sewer__average?: DifferenceDecimal;
 }
 export interface DifferenceDecimal {
@@ -34,15 +34,15 @@ export interface DifferenceInteger {
   old_date_of_report_unix: number;
   new_date_of_report_unix: number;
 }
-export interface MunicipalHospitalAdmissions {
-  values: HospitalAdmissionsLastValue[];
-  last_value: HospitalAdmissionsLastValue;
+export interface MunicipalHospitalNice {
+  values: MunicipalHospitalNiceValue[];
+  last_value: MunicipalHospitalNiceValue;
 }
-export interface HospitalAdmissionsLastValue {
+export interface MunicipalHospitalNiceValue {
   date_of_report_unix: number;
   gmcode: string;
   municipality_name: string;
-  moving_average_hospital: number;
+  admissions_moving_average: number;
   date_of_insertion_unix: number;
 }
 export interface MunicipalPositiveTestedPeople {
@@ -95,13 +95,13 @@ export interface Municipalities {
   proto_name: "MUNICIPALITIES";
   name: string;
   code: string;
-  hospital_admissions: MunicipalitiesHospitalAdmissions[];
+  hospital_nice: MunicipalitiesHospitalNice[];
   positive_tested_people: MunicipalitiesPositiveTestedPeople[];
 }
-export interface MunicipalitiesHospitalAdmissions {
+export interface MunicipalitiesHospitalNice {
   date_of_report_unix: number;
   gmcode: string;
-  hospital_admissions: number;
+  admissions_moving_average: number;
   date_of_insertion_unix: number;
 }
 export interface MunicipalitiesPositiveTestedPeople {
@@ -119,7 +119,6 @@ export interface National {
   code: string;
   difference: NationalDifference;
   verdenkingen_huisartsen: NationalHuisartsVerdenkingen;
-  intake_hospital_ma: IntakeHospitalMa;
   infectious_people_count: InfectiousPeopleCount;
   infectious_people_count_normalized: InfectiousPeopleCountNormalized;
   intake_intensivecare_ma: IntakeIntensivecareMa;
@@ -132,7 +131,8 @@ export interface National {
   infectious_people_last_known_average: InfectiousPeopleLastKnownAverage;
   sewer: NationalSewer;
   sewer_per_installation: NationalSewerPerInstallation;
-  hospital_beds_occupied: HospitalBedsOccupied;
+  hospital_nice: NationalHospitalNice;
+  hospital_lcps: NationalHospitalLcps;
   intensive_care_beds_occupied: IntensiveCareBedsOccupied;
   ggd: NationalGgd;
   nursing_home: NationalNursingHome;
@@ -150,8 +150,8 @@ export interface NationalDifference {
   ggd__infected_percentage: DifferenceDecimal;
   reproduction_index_last_known_average__reproduction_index_avg: DifferenceDecimal;
   infectious_people_count_normalized__infectious_avg_normalized: DifferenceDecimal;
-  intake_hospital_ma__moving_average_hospital: DifferenceDecimal;
-  hospital_beds_occupied__covid_occupied: DifferenceInteger;
+  hospital_nice__admissions_moving_average: DifferenceDecimal;
+  hospital_lcps__beds_occupied_covid: DifferenceInteger;
   intake_intensivecare_ma__moving_average_ic: DifferenceDecimal;
   intensive_care_beds_occupied__covid_occupied: DifferenceInteger;
   huisarts_verdenkingen__incidentie: DifferenceDecimal;
@@ -183,15 +183,6 @@ export interface NationalHuisartsVerdenkingenValue {
   week_end_unix: number;
   incidentie: number;
   geschat_aantal: number;
-  date_of_insertion_unix: number;
-}
-export interface IntakeHospitalMa {
-  values: IntakeHospitalMaLastValue[];
-  last_value: IntakeHospitalMaLastValue;
-}
-export interface IntakeHospitalMaLastValue {
-  moving_average_hospital: number;
-  date_of_report_unix: number;
   date_of_insertion_unix: number;
 }
 export interface InfectiousPeopleCount {
@@ -324,12 +315,21 @@ export interface NationalSewerPerInstallationValue {
   rna_normalized: number;
   date_of_insertion_unix: number;
 }
-export interface HospitalBedsOccupied {
-  values: HospitalBedsOccupiedValue[];
-  last_value: HospitalBedsOccupiedValue;
+export interface NationalHospitalNice {
+  values: NationalHospitalNiceValue[];
+  last_value: NationalHospitalNiceValue;
 }
-export interface HospitalBedsOccupiedValue {
-  covid_occupied: number;
+export interface NationalHospitalNiceValue {
+  admissions_moving_average: number;
+  date_of_report_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NationalHospitalLcps {
+  values: NationalHospitalLcpsValue[];
+  last_value: NationalHospitalLcpsValue;
+}
+export interface NationalHospitalLcpsValue {
+  beds_occupied_covid: number;
   date_of_report_unix: number;
   date_of_insertion_unix: number;
 }
@@ -505,6 +505,7 @@ export interface Regionaal {
   sewer: RegionalSewer;
   sewer_per_installation: RegionalSewerPerInstallation;
   results_per_region: ResultsPerRegion;
+  hospital_nice: RegionalHospitalNice;
   ggd: RegionalGgd;
   nursing_home: RegionalNursingHome;
   disability_care: RegionalDisabilityCare;
@@ -519,8 +520,7 @@ export interface RegionalDifference {
   results_per_region__total_reported_increase_per_region: DifferenceInteger;
   ggd__tested_total: DifferenceInteger;
   ggd__infected_percentage: DifferenceDecimal;
-  results_per_region__hospital_moving_avg_per_region: DifferenceDecimal;
-  results_per_region__hospital_total_counts_per_region: DifferenceInteger;
+  hospital_nice__admissions_moving_average: DifferenceDecimal;
   sewer__average: DifferenceDecimal;
   nursing_home__newly_infected_people: DifferenceInteger;
   nursing_home__infected_locations_total: DifferenceInteger;
@@ -581,12 +581,18 @@ export interface RegionaalValue {
   vrcode: string;
   total_reported_increase_per_region: number;
   infected_total_counts_per_region: number;
-  hospital_total_counts_per_region: number | null;
   active_clusters?: number | null;
   cluster_average?: number | null;
   infected_increase_per_region: number;
-  hospital_increase_per_region: number | null;
-  hospital_moving_avg_per_region: number | null;
+  date_of_insertion_unix: number;
+}
+export interface RegionalHospitalNice {
+  values: RegionalHospitalNiceValue[];
+  last_value: RegionalHospitalNiceValue;
+}
+export interface RegionalHospitalNiceValue {
+  admissions_moving_average: number;
+  date_of_report_unix: number;
   date_of_insertion_unix: number;
 }
 export interface RegionalGgd {
@@ -741,19 +747,19 @@ export interface Regions {
   proto_name: "REGIONS";
   name: string;
   code: string;
-  hospital_admissions: RegionHospitalAdmissions[];
+  hospital_nice: RegionsHospitalNice[];
   positive_tested_people: RegionPositiveTestedPeople[];
   escalation_levels: EscalationLevels[];
   nursing_home: RegionsNursingHome[];
-  disability_care: RegionsDisabilityCare[];
   sewer: RegionsSewer[];
   behavior: RegionsBehavior[];
+  disability_care: RegionsDisabilityCare[];
   elderly_at_home: RegionsElderlyAtHome[];
 }
-export interface RegionHospitalAdmissions {
+export interface RegionsHospitalNice {
   date_of_report_unix: number;
   vrcode: string;
-  hospital_admissions: number;
+  admissions_moving_average: number;
   date_of_insertion_unix: number;
 }
 export interface RegionPositiveTestedPeople {
@@ -771,16 +777,6 @@ export interface EscalationLevels {
   date_of_insertion_unix: number;
 }
 export interface RegionsNursingHome {
-  newly_infected_people: number;
-  newly_infected_locations: number;
-  infected_locations_total: number;
-  infected_locations_percentage: number;
-  deceased_daily: number;
-  date_of_report_unix: number;
-  date_of_insertion_unix: number;
-  vrcode: string;
-}
-export interface RegionsDisabilityCare {
   newly_infected_people: number;
   newly_infected_locations: number;
   infected_locations_total: number;
@@ -833,6 +829,16 @@ export interface RegionsBehavior {
   week_start_unix: number;
   week_end_unix: number;
   date_of_insertion_unix: number;
+}
+export interface RegionsDisabilityCare {
+  newly_infected_people: number;
+  newly_infected_locations: number;
+  infected_locations_total: number;
+  infected_locations_percentage: number;
+  deceased_daily: number;
+  date_of_report_unix: number;
+  date_of_insertion_unix: number;
+  vrcode: string;
 }
 export interface RegionsElderlyAtHome {
   positive_tested_daily: number;

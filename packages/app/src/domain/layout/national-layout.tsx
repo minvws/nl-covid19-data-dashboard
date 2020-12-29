@@ -200,10 +200,10 @@ function NationalLayout(props: NationalLayoutProps) {
                   <SidebarMetric
                     data={data}
                     scope="nl"
-                    metricName="intake_hospital_ma"
-                    metricProperty="moving_average_hospital"
+                    metricName="hospital_nice"
+                    metricProperty="admissions_moving_average"
                     localeTextKey="ziekenhuisopnames_per_dag"
-                    differenceKey="intake_hospital_ma__moving_average_hospital"
+                    differenceKey="hospital_nice__admissions_moving_average"
                     showBarScale={true}
                   />
                 </MetricMenuItemLink>

@@ -57,8 +57,8 @@ export const nl: NlConfig = {
     },
   },
 
-  intake_hospital_ma: {
-    moving_average_hospital: {
+  hospital_nice: {
+    admissions_moving_average: {
       isDecimal: true,
       barScale: {
         min: 0,

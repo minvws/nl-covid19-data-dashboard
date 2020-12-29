@@ -54,7 +54,7 @@ export function SidebarMetric<T extends { difference: unknown }>({
    * @TODO work out proper solution with BE
    */
   const lastValue =
-    metricProperty === 'hospital_moving_avg_per_region'
+    metricProperty === 'admissions_moving_average'
       ? getLastFilledValue(data, metricName)
       : get(data, [(metricName as unknown) as string, 'last_value']);
 

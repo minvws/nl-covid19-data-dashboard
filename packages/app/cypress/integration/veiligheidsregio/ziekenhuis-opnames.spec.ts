@@ -10,8 +10,8 @@ context('Regionaal - Ziekenhuis opnames', () => {
     const lastValue = this.regionData.results_per_region.last_value;
 
     const kpiTestInfo = {
-      hospital_moving_avg_per_region: formatNumber(
-        lastValue.hospital_moving_avg_per_region
+      admissions_moving_average: formatNumber(
+        lastValue.admissions_moving_average
       ),
     };
 

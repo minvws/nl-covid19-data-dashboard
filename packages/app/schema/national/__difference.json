@@ -21,10 +21,10 @@
     "infectious_people_count_normalized__infectious_avg_normalized": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "intake_hospital_ma__moving_average_hospital": {
+    "hospital_nice__admissions_moving_average": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "hospital_beds_occupied__covid_occupied": {
+    "hospital_lcps__beds_occupied_covid": {
       "$ref": "#/definitions/diff_integer"
     },
     "intake_intensivecare_ma__moving_average_ic": {
@@ -55,12 +55,12 @@
   "required": [
     "infected_people_delta_normalized__infected_daily_increase",
     "infected_people_total__infected_daily_total",
+    "hospital_nice__admissions_moving_average",
+    "hospital_lcps__beds_occupied_covid",
     "ggd__tested_total",
     "ggd__infected_percentage",
     "reproduction_index_last_known_average__reproduction_index_avg",
     "infectious_people_count_normalized__infectious_avg_normalized",
-    "intake_hospital_ma__moving_average_hospital",
-    "hospital_beds_occupied__covid_occupied",
     "intake_intensivecare_ma__moving_average_ic",
     "intensive_care_beds_occupied__covid_occupied",
     "huisarts_verdenkingen__incidentie",

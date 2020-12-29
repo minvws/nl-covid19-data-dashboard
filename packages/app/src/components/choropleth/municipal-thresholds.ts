@@ -86,6 +86,6 @@ export const municipalThresholds = {
   positive_tested_people: {
     positive_tested_people: positiveTestedThresholds,
   },
-  hospital_admissions: { hospital_admissions: hospitalAdmissionsThresholds },
+  hospital_nice: { admissions_moving_average: hospitalAdmissionsThresholds },
   elderly_at_home: elderlyAtHomeThresholds,
 } as const;

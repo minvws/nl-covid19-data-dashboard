@@ -7,7 +7,7 @@ import {
   Dictionary,
   RegionGeoJSON,
   SafetyRegionProperties,
-  TRegionMetricName,
+  RegionsMetricName,
 } from '../shared';
 
 interface RegionMetricValue extends SafetyRegionProperties {
@@ -43,7 +43,7 @@ type UseRegionDataReturnValue = {
 
 export function useSafetyRegionData(
   featureCollection: RegionGeoJSON,
-  metricName: TRegionMetricName,
+  metricName: RegionsMetricName,
   metricProperty: string
 ): UseRegionDataReturnValue {
   const { data } = useSWR<Regions>('/json/REGIONS.json');

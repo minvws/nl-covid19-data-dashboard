@@ -151,10 +151,10 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                           <SidebarMetric
                             data={data}
                             scope="gm"
-                            metricName="hospital_admissions"
-                            metricProperty="moving_average_hospital"
+                            metricName="hospital_nice"
+                            metricProperty="admissions_moving_average"
                             localeTextKey="gemeente_ziekenhuisopnames_per_dag"
-                            differenceKey="hospital_admissions__moving_average_hospital"
+                            differenceKey="hospital_nice__admissions__moving_average"
                           />
                         </MetricMenuItemLink>
                       </CategoryMenu>

@@ -1,12 +1,12 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
-  "title": "municipalities_hospital_admissions",
+  "title": "municipalities_hospital_nice",
   "additionalProperties": false,
   "required": [
     "date_of_report_unix",
     "gmcode",
-    "hospital_admissions",
+    "admissions_moving_average",
     "date_of_insertion_unix"
   ],
   "properties": {
@@ -17,7 +17,7 @@
       "type": "string",
       "pattern": "^GM[0-9]+$"
     },
-    "hospital_admissions": {
+    "admissions_moving_average": {
       "type": "number"
     },
     "date_of_insertion_unix": {

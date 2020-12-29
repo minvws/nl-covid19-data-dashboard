@@ -8,7 +8,7 @@
     "proto_name",
     "name",
     "code",
-    "hospital_admissions",
+    "hospital_nice",
     "positive_tested_people"
   ],
   "properties": {
@@ -27,11 +27,11 @@
       "type": "string",
       "const": { "$data": "1/proto_name" }
     },
-    "hospital_admissions": {
+    "hospital_nice": {
       "type": "array",
       "maxItems": 355,
       "items": {
-        "$ref": "hospital_admissions.json"
+        "$ref": "hospital_nice.json"
       }
     },
     "positive_tested_people": {
