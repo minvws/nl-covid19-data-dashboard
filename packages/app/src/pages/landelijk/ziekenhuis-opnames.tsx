@@ -36,7 +36,8 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
   );
   const dataHospitalNice = data.hospital_nice;
   const dataHospitalLcps = data.hospital_lcps;
-  const lastValue = data.hospital.last_value;
+  const lastValueNice = data.hospital_nice.last_value;
+  const lastValueLcps = data.hospital_lcps.last_value;
 
   return (
     <>
@@ -55,8 +56,8 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
           subtitle={text.pagina_toelichting}
           metadata={{
             datumsText: text.datums,
-            dateInfo: lastValue.date_of_report_unix,
-            dateOfInsertionUnix: lastValue.date_of_insertion_unix,
+            dateInfo: lastValueNice.date_of_report_unix,
+            dateOfInsertionUnix: lastValueNice.date_of_insertion_unix,
             dataSources: [text.bronnen.nice, text.bronnen.lnaz],
           }}
           reference={text.reference}
@@ -67,7 +68,7 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
             title={text.barscale_titel}
             description={text.extra_uitleg}
             metadata={{
-              date: lastValue.date_of_report_unix,
+              date: lastValueNice.date_of_report_unix,
               source: text.bronnen.nice,
             }}
           >
@@ -85,14 +86,14 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
             title={text.kpi_bedbezetting.title}
             description={text.kpi_bedbezetting.description}
             metadata={{
-              date: lastValue.date_of_report_unix,
+              date: lastValueLcps.date_of_report_unix,
               source: text.bronnen.lnaz,
             }}
           >
             <KpiValue
               data-cy="covid_occupied"
-              absolute={lastValue.beds_occupied_covid}
-              difference={data.difference.hospital__beds_occupied_covid}
+              absolute={lastValueLcps.beds_occupied_covid}
+              difference={data.difference.hospital_lcps__beds_occupied_covid}
             />
           </KpiTile>
         </TwoKpiSection>
@@ -110,7 +111,7 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
             title: text.chloropleth_legenda.titel,
           }}
           metadata={{
-            date: lastValue.date_of_report_unix,
+            date: lastValueNice.date_of_report_unix,
             source: text.bronnen.nice,
           }}
         >

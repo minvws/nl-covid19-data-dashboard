@@ -2,11 +2,13 @@ import { ReactNode } from 'react';
 import { MunicipalitySelectionHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { MunicipalityProperties } from '~/components/choropleth/shared';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
-import { MunicipalHospitalValue } from '~/types/data';
+import { MunicipalHospitalNiceValue } from '~/types/data';
 
 export const createMunicipalHospitalAdmissionsTooltip = (
   selectHandler: MunicipalitySelectionHandler
-) => (context: MunicipalityProperties & MunicipalHospitalValue): ReactNode => {
+) => (
+  context: MunicipalityProperties & MunicipalHospitalNiceValue
+): ReactNode => {
   const onSelect = (event: any) => {
     event.stopPropagation();
     selectHandler(context);

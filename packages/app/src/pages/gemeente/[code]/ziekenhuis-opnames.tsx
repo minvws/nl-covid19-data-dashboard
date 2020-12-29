@@ -69,7 +69,9 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
             <KpiValue
               data-cy="admissions_moving_average"
               absolute={lastValue.admissions_moving_average}
-              difference={data.difference.hospital__admissions_moving_average}
+              difference={
+                data.difference.hospital_nice__admissions_moving_average
+              }
             />
           </KpiTile>
         </TwoKpiSection>
@@ -110,7 +112,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
             metadata={{ source: text.bronnen.rivm }}
             timeframeOptions={['all', '5weeks', 'week']}
             timeframeInitialValue="5weeks"
-            values={data.hospital.values}
+            values={data.hospital_nice.values}
             linesConfig={[
               {
                 metricProperty: 'admissions_moving_average',

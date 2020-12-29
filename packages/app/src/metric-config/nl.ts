@@ -57,7 +57,7 @@ export const nl: NlConfig = {
     },
   },
 
-  hospital: {
+  hospital_nice: {
     admissions_moving_average: {
       isDecimal: true,
       barScale: {
