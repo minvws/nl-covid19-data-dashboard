@@ -35,16 +35,6 @@ const TooltipContainer = styled.div<TooltipContainerProps>`
     px: 2,
     py: 1,
     fontSize: 1,
-    '&:before': {
-      content: '',
-      position: 'absolute',
-      top: '100%',
-      left: '20px',
-      width: 0,
-      borderTop: '20px solid black',
-      borderLeft: '20px solid transparent',
-      borderRight: '20px solid transparent',
-    },
   })};
   z-index: 100;
 `;
