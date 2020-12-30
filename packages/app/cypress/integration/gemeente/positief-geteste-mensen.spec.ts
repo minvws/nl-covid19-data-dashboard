@@ -10,7 +10,7 @@ context('Gemeente - Positief geteste mensen', () => {
     const lastValue = this.municipalData.tested_overall.last_value;
 
     const kpiTestInfo = {
-      infected_daily_increase: formatNumber(lastValue.infected_daily_increase),
+      infected_per_100k: formatNumber(lastValue.infected_per_100k),
       infected: formatNumber(lastValue.infected),
     };
 

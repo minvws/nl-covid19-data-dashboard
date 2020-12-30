@@ -106,7 +106,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
         <TwoKpiSection>
           <KpiTile
             title={text.barscale_titel}
-            data-cy="infected_daily_increase"
+            data-cy="infected_per_100k"
             metadata={{
               date: dataInfectedDelta.last_value.date_of_report_unix,
               source: text.bronnen.rivm,
@@ -116,9 +116,9 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
               data={data}
               scope="nl"
               metricName="infected_people_delta_normalized"
-              metricProperty="infected_daily_increase"
+              metricProperty="infected_per_100k"
               localeTextKey="positief_geteste_personen"
-              differenceKey="infected_people_delta_normalized__infected_daily_increase"
+              differenceKey="infected_people_delta_normalized__infected_per_100k"
             />
 
             <Text>{text.barscale_toelichting}</Text>
@@ -134,9 +134,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
             <KpiValue
               data-cy="infected"
               absolute={data.tested_overall.last_value.infected}
-              difference={
-                data.difference.infected_people_total__infected_daily_total
-              }
+              difference={data.difference.infected_people_total__infected}
             />
 
             <Text
@@ -220,7 +218,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
           description={text.linechart_toelichting}
           signaalwaarde={7}
           values={dataInfectedDelta.values}
-          linesConfig={[{ metricProperty: 'infected_daily_increase' }]}
+          linesConfig={[{ metricProperty: 'infected_per_100k' }]}
           metadata={{
             source: text.bronnen.rivm,
           }}

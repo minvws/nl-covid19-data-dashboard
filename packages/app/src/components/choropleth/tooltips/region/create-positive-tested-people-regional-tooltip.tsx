@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
 import siteText from '~/locale/index';
-import { RegionPositiveTestedPeople } from '~/types/data';
+import { RegionsTestedOverall } from '~/types/data';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { RegionSelectionHandler } from '../../select-handlers/create-select-region-handler';
@@ -10,9 +10,7 @@ const text = siteText.common.tooltip;
 
 export const createPositiveTestedPeopleRegionalTooltip = (
   selectHandler: RegionSelectionHandler
-) => (
-  context: SafetyRegionProperties & RegionPositiveTestedPeople
-): ReactNode => {
+) => (context: SafetyRegionProperties & RegionsTestedOverall): ReactNode => {
   const { vrname, infected_per_100k, infected } = context;
 
   const onSelect = (event: any) => {

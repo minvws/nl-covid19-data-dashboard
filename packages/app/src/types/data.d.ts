@@ -17,8 +17,8 @@ export interface Municipal {
   sewer_per_installation?: MunicipalSewerPerInstallation;
 }
 export interface MunicipalDifference {
-  tested_overall__infected_daily_increase: DifferenceDecimal;
-  tested_overall__infected_daily_total: DifferenceInteger;
+  tested_overall__infected_per_100k: DifferenceDecimal;
+  tested_overall__infected: DifferenceInteger;
   hospital_nice__admissions_moving_average: DifferenceDecimal;
   sewer__average?: DifferenceDecimal;
 }
@@ -50,7 +50,7 @@ export interface MunicipalTestedOverall {
 export interface MunicipalTestedOverallValue {
   date_of_report_unix: number;
   infected: number;
-  infected_daily_increase: number;
+  infected_per_100k: number;
   date_of_insertion_unix: number;
 }
 export interface MunicipalSewer {

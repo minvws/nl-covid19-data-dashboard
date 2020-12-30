@@ -131,10 +131,10 @@ function NationalLayout(props: NationalLayoutProps) {
                     metricProperty="infected"
                     altBarScaleMetric={{
                       metricName: 'infected_people_delta_normalized',
-                      metricProperty: 'infected_daily_increase',
+                      metricProperty: 'infected_per_100k',
                     }}
                     localeTextKey="positief_geteste_personen"
-                    differenceKey="infected_people_total__infected_daily_total"
+                    differenceKey="infected_people_total__infected"
                     showBarScale={true}
                   />
                 </MetricMenuItemLink>
@@ -294,7 +294,7 @@ function NationalLayout(props: NationalLayoutProps) {
                 <MetricMenuItemLink
                   href="/landelijk/verdenkingen-huisartsen"
                   icon={<Arts />}
-                  title={siteText.doctor.titel_sidebar}
+                  title={siteText.verdenkingen_huisartsen.titel_sidebar}
                 >
                   <SidebarMetric
                     data={data}

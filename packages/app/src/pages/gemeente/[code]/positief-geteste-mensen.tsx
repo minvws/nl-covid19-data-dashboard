@@ -66,10 +66,10 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
             }}
           >
             <KpiValue
-              data-cy="infected_daily_increase"
-              absolute={lastValue.infected_daily_increase}
+              data-cy="infected_per_100k"
+              absolute={lastValue.infected_per_100k}
               difference={
-                data.difference.positive_tested_people__infected_daily_increase
+                data.difference.positive_tested_people__infected_per_100k
               }
             />
             <Text>{text.barscale_toelichting}</Text>
@@ -85,9 +85,7 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
             <KpiValue
               data-cy="infected"
               absolute={lastValue.infected}
-              difference={
-                data.difference.positive_tested_people__infected_daily_total
-              }
+              difference={data.difference.tested_overall__infected}
             />
             <Text
               as="div"
@@ -103,7 +101,7 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
             values={data.tested_overall.values}
             linesConfig={[
               {
-                metricProperty: 'infected_daily_increase',
+                metricProperty: 'infected_per_100k',
               },
             ]}
             metadata={{

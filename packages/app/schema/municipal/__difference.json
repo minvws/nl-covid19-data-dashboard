@@ -3,10 +3,10 @@
   "title": "municipal_difference",
   "type": "object",
   "properties": {
-    "tested_overall__infected_daily_increase": {
+    "tested_overall__infected_per_100k": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "tested_overall__infected_daily_total": {
+    "tested_overall__infected": {
       "$ref": "#/definitions/diff_integer"
     },
     "hospital_nice__admissions_moving_average": {
@@ -17,8 +17,8 @@
     }
   },
   "required": [
-    "tested_overall__infected_daily_increase",
-    "tested_overall__infected_daily_total",
+    "tested_overall__infected_per_100k",
+    "tested_overall__infected",
     "hospital_nice__admissions_moving_average"
   ],
   "additionalProperties": false,

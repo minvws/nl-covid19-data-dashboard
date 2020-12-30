@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
 import siteText from '~/locale/index';
-import { MunicipalitiesPositiveTestedPeople } from '~/types/data';
+import { MunicipalitiesTestedOverall } from '~/types/data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { MunicipalitySelectionHandler } from '../../select-handlers/create-select-municipal-handler';
 import { MunicipalityProperties } from '../../shared';
@@ -10,7 +10,7 @@ const text = siteText.common.tooltip;
 export const createPositiveTestedPeopleMunicipalTooltip = (
   selectHandler?: MunicipalitySelectionHandler
 ) => (
-  context: MunicipalityProperties & MunicipalitiesPositiveTestedPeople
+  context: MunicipalityProperties & MunicipalitiesTestedOverall
 ): ReactNode => {
   const { gemnaam, infected_per_100k, infected } = context;
 

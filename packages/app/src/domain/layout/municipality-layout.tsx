@@ -133,7 +133,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                             metricName="tested_overall"
                             metricProperty="infected"
                             localeTextKey="gemeente_positief_geteste_personen"
-                            differenceKey="positive_tested_people__infected_daily_total"
+                            differenceKey="positive_tested_people__infected"
                           />
                         </MetricMenuItemLink>
                       </CategoryMenu>
