@@ -44,7 +44,7 @@ const formatYAxisPercentageFn = (y: number) => `${formatPercentage(y)}%`;
 // This type limits the allowed property names to those with a number type,
 // so its like keyof T, but filtered down to only the appropriate properties.
 export type NumberProperty<T> = {
-  [K in keyof T]: T[K] extends number ? K : never;
+  [K in keyof T]: T[K] extends number | null ? K : never;
 }[keyof T];
 
 export type LineConfig<T> = {
