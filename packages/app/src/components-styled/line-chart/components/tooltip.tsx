@@ -35,6 +35,7 @@ const TooltipContainer = styled.div<TooltipContainerProps>`
     py: 1,
     fontSize: 1,
   })};
+  z-index: 100;
 `;
 
 /**

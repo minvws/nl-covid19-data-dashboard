@@ -209,25 +209,28 @@ export function LineChart<T extends Value>({
             x: xScale(data.__date),
             y: yScale(data.__value),
           } as HoverPoint<T>;
-        })
-        .sort(sortByClosest);
+        });
+      const nearest = hoverPoints.slice().sort(sortByClosest);
 
-      toggleHoverElements(false, hoverPoints);
+      toggleHoverElements(false, hoverPoints, nearest[0]);
     },
     [bisect, trendsList]
   );
 
   const toggleHoverElements = useCallback(
-    (hide: boolean, hoverPoints?: HoverPoint<T>[]) => {
+    (
+      hide: boolean,
+      hoverPoints?: HoverPoint<T>[],
+      nearestPoint?: HoverPoint<T>
+    ) => {
       if (hide) {
         hideTooltip();
         setMarkerProps(undefined);
-      } else if (hoverPoints?.length) {
-        const first = hoverPoints[0];
+      } else if (hoverPoints?.length && nearestPoint) {
         showTooltip({
           tooltipData: hoverPoints.map((x) => x.data),
-          tooltipLeft: first.x,
-          tooltipTop: first.y,
+          tooltipLeft: nearestPoint.x,
+          tooltipTop: nearestPoint.y,
         });
         setMarkerProps({
           data: hoverPoints,
@@ -238,6 +241,8 @@ export function LineChart<T extends Value>({
     },
     [showTooltip, hideTooltip]
   );
+
+  const trendType = showFill ? 'area' : 'line';
 
   if (!xDomain) {
     return null;
@@ -271,7 +276,7 @@ export function LineChart<T extends Value>({
               {trendsList.map((trend, index) => (
                 <Trend
                   trend={trend}
-                  type={showFill ? 'area' : 'line'}
+                  type={trendType}
                   xScale={renderProps.xScale}
                   yScale={renderProps.yScale}
                   color={linesConfig[index].color ?? colors.data.primary}
