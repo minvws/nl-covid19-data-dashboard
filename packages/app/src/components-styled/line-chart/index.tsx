@@ -275,7 +275,7 @@ export function LineChart<T extends Value>({
                   xScale={renderProps.xScale}
                   yScale={renderProps.yScale}
                   color={linesConfig[index].color ?? colors.data.primary}
-                  onHover={(event: any) => handleHover(event, renderProps)}
+                  onHover={handleHover}
                 />
               ))}
             </>

@@ -1,6 +1,7 @@
 import { AreaClosed, LinePath } from '@visx/shape';
 import { MouseEvent, TouchEvent, useState } from 'react';
 import { TrendValue } from '../helpers';
+import { ChartScales } from './chart-axes';
 
 export type TrendType = 'line' | 'area';
 
@@ -19,7 +20,10 @@ export type TrendProps = {
   xScale: any;
   yScale: any;
   color: string;
-  onHover: (event: TouchEvent<SVGElement> | MouseEvent<SVGElement>) => void;
+  onHover: (
+    event: TouchEvent<SVGElement> | MouseEvent<SVGElement>,
+    scales: ChartScales
+  ) => void;
 };
 
 export function Trend({
@@ -32,11 +36,13 @@ export function Trend({
 }: TrendProps) {
   const [isHovered, setIsHovered] = useState(false);
 
+  const scales = { xScale, yScale };
+
   const internalOnHover = (
     event: TouchEvent<SVGElement> | MouseEvent<SVGElement>
   ) => {
     setIsHovered(event.type !== 'mouseleave');
-    onHover(event);
+    onHover(event, scales);
   };
 
   return (
