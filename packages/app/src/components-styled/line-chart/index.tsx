@@ -11,16 +11,16 @@ import text from '~/locale/index';
 import { colors } from '~/style/theme';
 import {
   formatDateFromMilliseconds,
-  formatDateFromSeconds,
+  formatDateFromSeconds
 } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { TimeframeOption } from '~/utils/timeframe';
+import { Legenda } from '../legenda';
 import {
   ChartAxes,
   ChartPadding,
   ChartScales,
-  defaultPadding,
-  HoverPoint,
+  defaultPadding
 } from './components/chart-axes';
 import { Marker } from './components/marker';
 import { Tooltip } from './components/tooltip';
@@ -32,7 +32,7 @@ import {
   isWeeklyValue,
   TrendValue,
   Value,
-  WeeklyValue,
+  WeeklyValue
 } from './helpers';
 
 const dateToValue = (d: Date) => d.valueOf() / 1000;
@@ -41,22 +41,26 @@ const formatXAxis = (date: Date) =>
 const formatYAxisFn = (y: number) => y.toString();
 const formatYAxisPercentageFn = (y: number) => `${formatPercentage(y)}%`;
 
+// This type limits the allowed property names to those with a number type,
+// so its like keyof T, but filtered down to only the appropriate properties.
+export type NumberProperty<T> = {
+  [K in keyof T]: T[K] extends number ? K : never;
+}[keyof T];
+
+export type LineConfig<T> = {
+  metricProperty: NumberProperty<T>;
+  color?: string;
+  legendLabel?: string;
+};
+
 export type LineChartProps<T> = {
   values: T[];
-  linesConfig: [
-    {
-      metricProperty: keyof T;
-      /**
-       * For later when implementing multi line charts
-       */
-      color?: string;
-    }
-  ];
+  linesConfig: LineConfig<T>[];
   width?: number;
   height?: number;
   timeframe?: TimeframeOption;
   signaalwaarde?: number;
-  formatTooltip?: (value: T) => React.ReactNode;
+  formatTooltip?: (value: (T & TrendValue & Value)[]) => React.ReactNode;
   formatXAxis?: TickFormatter<Date>;
   formatYAxis?: TickFormatter<number>;
   showFill?: boolean;
@@ -65,9 +69,15 @@ export type LineChartProps<T> = {
   showMarkerLine?: boolean;
   formatMarkerLabel?: (value: T) => string;
   padding?: ChartPadding;
+  showLegend?: boolean;
 };
 
-export type HoverPoint = { data: Value; x: number; y: number };
+export type HoverPoint<T> = {
+  data: T & Value & TrendValue;
+  color: string;
+  x: number;
+  y: number;
+};
 
 export function LineChart<T extends Value>({
   values,
@@ -84,6 +94,7 @@ export function LineChart<T extends Value>({
   showMarkerLine = false,
   formatMarkerLabel,
   padding = defaultPadding,
+  showLegend = false,
 }: LineChartProps<T>) {
   const {
     tooltipData,
@@ -91,16 +102,16 @@ export function LineChart<T extends Value>({
     tooltipTop = 0,
     showTooltip,
     hideTooltip,
-  } = useTooltip<T & TrendValue>();
+  } = useTooltip<T & Value & TrendValue>();
 
   const [markerProps, setMarkerProps] = useState<{
     height: number;
-    data: HoverPoint[];
+    data: HoverPoint<T>[];
     padding: ChartPadding;
   }>();
 
   const metricProperties = useMemo(
-    () => linesConfig.map((x) => x.metricProperty) as string[],
+    () => linesConfig.map((x) => x.metricProperty),
     [linesConfig]
   );
 
@@ -132,7 +143,7 @@ export function LineChart<T extends Value>({
 
   const bisect = useCallback(
     (
-      trend: TrendValue[],
+      trend: (T & TrendValue & Value)[],
       xPosition: number,
       xScale: ScaleTime<number, number>
     ) => {
@@ -157,7 +168,7 @@ export function LineChart<T extends Value>({
     [padding]
   );
 
-  const distance = (point1: HoverPoint, point2: Point) => {
+  const distance = (point1: HoverPoint<unknown>, point2: Point) => {
     const x = point2.x - point1.x;
     const y = point2.y - point1.y;
     return Math.sqrt(x * x + y * y);
@@ -168,45 +179,54 @@ export function LineChart<T extends Value>({
       event: React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>,
       scales: ChartScales
     ) => {
-      if (!trendsList.length) {
-        return;
+      if (!trendsList.length || event.type === 'mouseleave') {
+        toggleHoverElements(true);
       }
 
       const { xScale, yScale } = scales;
 
       const point = localPoint(event) || ({ x: 0, y: 0 } as Point);
 
-      const sortByDistance = (left: HoverPoint, right: HoverPoint) =>
+      const sortByDistance = (left: HoverPoint<T>, right: HoverPoint<T>) =>
         distance(left, point) - distance(right, point);
 
       const hoverPoints = trendsList
-        .map((trends) => bisect(trends, point.x, xScale))
+        .map((trends, index) => {
+          const data = bisect(trends, point.x, xScale);
+          return data
+            ? {
+                data,
+                color: linesConfig[index].color ?? colors.data.primary,
+              }
+            : undefined;
+        })
         .filter(isDefined)
-        .map((data) => {
+        .map<HoverPoint<T>>(({ data, color }) => {
           return {
             data,
+            color,
             x: xScale(data.__date),
             y: yScale(data.__value),
-          };
+          } as HoverPoint<T>;
         })
         .sort(sortByDistance);
 
-      toggleHoverElements(event.type === 'mouseleave', hoverPoints);
+      toggleHoverElements(false, hoverPoints);
     },
     [bisect, trendsList]
   );
 
   const toggleHoverElements = useCallback(
-    (hide: boolean, hoverPoints?: any[]) => {
+    (hide: boolean, hoverPoints?: HoverPoint<T>[]) => {
       if (hide) {
         hideTooltip();
-        setMarkerProps(undefined);
-      } else if (hoverPoints) {
-        const last = hoverPoints[hoverPoints.length - 1];
+        //setMarkerProps(undefined);
+      } else if (hoverPoints?.length) {
+        const first = hoverPoints[0];
         showTooltip({
-          tooltipData: last.data,
-          tooltipLeft: last.x,
-          tooltipTop: last.y,
+          tooltipData: hoverPoints.map((x) => x.data),
+          tooltipLeft: first.x,
+          tooltipTop: first.y,
         });
         setMarkerProps({
           data: hoverPoints,
@@ -247,13 +267,13 @@ export function LineChart<T extends Value>({
         >
           {(renderProps) => (
             <>
-              {trendsList.map((trend) => (
+              {trendsList.map((trend, index) => (
                 <Trend
                   trend={trend}
                   type={showFill ? 'area' : 'line'}
                   xScale={renderProps.xScale}
                   yScale={renderProps.yScale}
-                  color={colors.data.primary}
+                  color={linesConfig[index].color ?? colors.data.primary}
                 />
               ))}
             </>
@@ -268,10 +288,7 @@ export function LineChart<T extends Value>({
           >
             {formatTooltip
               ? formatTooltip(tooltipData)
-              : formatDefaultTooltip(
-                  (tooltipData as unknown) as Value & TrendValue,
-                  isPercentage
-                )}
+              : formatDefaultTooltip(tooltipData, isPercentage)}
           </Tooltip>
         )}
 
@@ -282,15 +299,27 @@ export function LineChart<T extends Value>({
             formatLabel={formatMarkerLabel}
           />
         )}
+
+        {showLegend && (
+          <Legenda
+            items={linesConfig.map((x) => ({
+              color: x.color ?? colors.data.primary,
+              label: x.legendLabel ?? '',
+              shape: 'line',
+            }))}
+          />
+        )}
       </Box>
     </Box>
   );
 }
 
 function formatDefaultTooltip<T extends Value & TrendValue>(
-  value: T,
+  values: T[],
   isPercentage?: boolean
 ) {
+  // default tooltip assumes one line is rendered:
+  const value = values[0];
   const isDaily = isDailyValue([value]);
   const isWeekly = isWeeklyValue([value]);
 
@@ -348,17 +377,17 @@ function formatDefaultTooltip<T extends Value & TrendValue>(
   }
 
   throw new Error(
-    `Invalid value passed to format tooltip function: ${JSON.stringify(value)}`
+    `Invalid value passed to format tooltip function: ${JSON.stringify(values)}`
   );
 }
 
 function useTooltip<T>() {
-  const [tooltipData, setTooltipData] = useState<T>();
+  const [tooltipData, setTooltipData] = useState<T[]>();
   const [tooltipLeft, setTooltipLeft] = useState<number>();
   const [tooltipTop, setTooltipTop] = useState<number>();
 
   const showTooltip = useCallback(
-    (x: { tooltipData: T; tooltipLeft: number; tooltipTop: number }) => {
+    (x: { tooltipData: T[]; tooltipLeft: number; tooltipTop: number }) => {
       setTooltipData(x.tooltipData);
       setTooltipLeft(x.tooltipLeft);
       setTooltipTop(x.tooltipTop);

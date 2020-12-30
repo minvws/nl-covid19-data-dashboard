@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import { Text } from '~/components-styled/typography';
 import { colors } from '~/style/theme';
 import { formatDateFromMilliseconds } from '~/utils/formatDate';
+import { HoverPoint } from '..';
+import { TrendValue, Value } from '../helpers';
 import { ChartPadding } from './chart-axes';
 
 type ColorProps = {
@@ -9,12 +11,10 @@ type ColorProps = {
 };
 
 const Label = styled.div`
-  pointer-events: none;
   background-color: white;
 `;
 
 const DottedLine = styled.div<ColorProps>`
-  pointer-events: none;
   width: 1px;
   border-left-width: 1px;
   border-left-style: dashed;
@@ -22,7 +22,6 @@ const DottedLine = styled.div<ColorProps>`
 `;
 
 const Point = styled.div<ColorProps>`
-  pointer-events: none;
   position: relative;
   height: 18px;
   width: 18px;
@@ -43,7 +42,7 @@ const Point = styled.div<ColorProps>`
     position: absolute;
     height: 18px;
     width: 18px;
-    transform: translate(0, -50%);
+    transform: translate(0, -45%);
     border-radius: 50%;
     background: ${(props) => props.indicatorColor || 'black'};
     opacity: 0.2;
@@ -52,27 +51,26 @@ const Point = styled.div<ColorProps>`
 
 const MarkerContainer = styled.div`
   transform: translate(-50%, 0);
-  pointer-events: none;
   position: absolute;
   display: flex;
   flex-direction: column;
   align-items: center;
   flex-grow: 0;
   flex-shrink: 0;
-  min-width: 5em;
-  background-color: rgba(0, 0, 255, 0.05);
+  min-width: 26px;
+  background-color: rgba(0, 0, 0, 0.03);
 `;
 
-type MarkerProps = {
-  data: HoverPoint[];
+type MarkerProps<T> = {
+  data: HoverPoint<T>[];
   height: number;
   primaryColor?: string;
   padding: ChartPadding;
   showLine: boolean;
-  formatLabel?: (data: ChartValue) => string;
+  formatLabel?: (data: T & Value & TrendValue) => string;
 };
 
-export function Marker(props: MarkerProps) {
+export function Marker<T>(props: MarkerProps<T>) {
   const {
     primaryColor = colors.data.primary,
     data,
@@ -90,8 +88,8 @@ export function Marker(props: MarkerProps) {
         height: height - (padding.top + padding.bottom),
       }}
     >
-      {data.map((d) => (
-        <Point indicatorColor={primaryColor} style={{ top: d.y }} />
+      {data.map((d, index) => (
+        <Point indicatorColor={d.color} style={{ top: d.y - index * 18 }} />
       ))}
 
       {showLine && (
@@ -115,6 +113,6 @@ export function Marker(props: MarkerProps) {
   );
 }
 
-function defaultFormatLabel(data: ChartValue): string {
+function defaultFormatLabel<T>(data: T & Value & TrendValue): string {
   return formatDateFromMilliseconds(data.__date.getTime());
 }

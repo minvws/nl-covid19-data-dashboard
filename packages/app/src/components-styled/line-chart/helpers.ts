@@ -1,6 +1,7 @@
 import { isDefined, isPresent } from 'ts-is-present';
 import { assert } from '~/utils/assert';
 import { getDaysForTimeframe, TimeframeOption } from '~/utils/timeframe';
+import { NumberProperty } from '.';
 
 export type Value = DailyValue | WeeklyValue;
 
@@ -116,7 +117,7 @@ const timestampToDate = (d: number) => new Date(d * 1000);
 
 export function getTrendData<T>(
   values: (T & Value)[],
-  valueKeys: string[],
+  valueKeys: NumberProperty<T>[],
   timeframe: TimeframeOption
 ): (T & TrendValue & Value)[][] {
   return valueKeys.map((key) => getSingleTrendData(values, key, timeframe));
@@ -124,7 +125,7 @@ export function getTrendData<T>(
 
 export function getSingleTrendData<T>(
   values: (T & Value)[],
-  valueKey: string,
+  valueKey: NumberProperty<T>,
   timeframe: TimeframeOption
 ): (T & TrendValue & Value)[] {
   const valuesInFrame = getTimeframeValues<T>(values, timeframe);
@@ -146,7 +147,7 @@ export function getSingleTrendData<T>(
          * Not sure why we need to cast to number if isPresent is used to filter
          * out the null values.
          */
-        __value: (x as AnyValue)[valueKey] as number,
+        __value: (x[valueKey] as unknown) as number,
         __date: timestampToDate(x.date_of_report_unix),
       }))
       .filter((x) => isPresent(x.__value));
@@ -160,7 +161,7 @@ export function getSingleTrendData<T>(
          * Not sure why we need to cast to number if isPresent is used to filter
          * out the null values.
          */
-        __value: (x as AnyValue)[valueKey] as number,
+        __value: (x[valueKey] as unknown) as number,
         __date: timestampToDate(x.week_start_unix),
       }))
       .filter((x) => isPresent(x.__value));
