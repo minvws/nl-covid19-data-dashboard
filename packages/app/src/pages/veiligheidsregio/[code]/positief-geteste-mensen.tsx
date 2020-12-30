@@ -43,8 +43,8 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
 
   const resultsPerRegion: ResultsPerRegion = data.tested_overall;
 
-  const ggdData = data.ggd.last_value;
-  const ggdValues = data.ggd.values;
+  const ggdData = data.tested_ggd.last_value;
+  const ggdValues = data.tested_ggd.values;
 
   const municipalCodes = regionCodeToMunicipalCodeLookup[data.code];
   const selectedMunicipalCode = municipalCodes ? municipalCodes[0] : undefined;

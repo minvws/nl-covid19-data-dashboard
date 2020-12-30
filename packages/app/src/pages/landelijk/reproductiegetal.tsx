@@ -22,7 +22,7 @@ const text = siteText.reproductiegetal;
 const ReproductionIndex: FCWithLayout<NationalPageProps> = (props) => {
   const { data } = props;
 
-  const lastFilledValue = getLastFilledValue(data, 'reproduction');
+  const lastFilledValue = getLastFilledValue(data.reproduction);
 
   return (
     <>

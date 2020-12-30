@@ -1,7 +1,12 @@
 import { FeatureCollection, MultiPolygon } from 'geojson';
 import { Municipalities, Regions } from '~/types/data';
 
-type MetricKeys<T> = keyof Omit<
+export type Metric<T> = {
+  values: T[];
+  last_value: T;
+};
+
+export type MetricKeys<T> = keyof Omit<
   T,
   'last_generated' | 'proto_name' | 'name' | 'code'
 >;

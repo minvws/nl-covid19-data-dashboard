@@ -34,20 +34,20 @@ import {
   NationalPageProps,
 } from '~/static-props/nl-data';
 import { colors } from '~/style/theme';
-import { NationalInfectedAgeGroups } from '~/types/data.d';
+import { NationalTestedPerAgeGroup } from '~/types/data.d';
 import { assert } from '~/utils/assert';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 /* Retrieves certain age demographic data to be used in the example text. */
-function getAgeDemographicExampleData(data: NationalInfectedAgeGroups) {
+function getAgeDemographicExampleData(data: NationalTestedPerAgeGroup) {
   const ageGroupRange = '20-29';
   const value = data.values.find((x) => x.age_group_range === ageGroupRange);
 
   assert(
     value,
-    `NationalInfectedAgeGroups should contain a value for age group ${ageGroupRange}`
+    `NationalTestedPerAgeGroup should contain a value for age group ${ageGroupRange}`
   );
 
   return {
@@ -71,11 +71,11 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
   const router = useRouter();
 
   const dataInfectedDelta = data.tested_overall;
-  const dataGgdLastValue = data.ggd.last_value;
-  const dataGgdValues = data.ggd.values;
+  const dataGgdLastValue = data.tested_ggd.last_value;
+  const dataGgdValues = data.tested_ggd.values;
 
   const ageDemographicExampleData = getAgeDemographicExampleData(
-    data.infected_age_groups
+    data.tested_per_age_group
   );
 
   return (
@@ -134,7 +134,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
             <KpiValue
               data-cy="infected"
               absolute={data.tested_overall.last_value.infected}
-              difference={data.difference.infected_people_total__infected}
+              difference={data.difference.tested_overall__infected}
             />
 
             <Text
@@ -235,7 +235,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
             source: text.bronnen.rivm,
           }}
         >
-          <AgeDemographic data={data.infected_age_groups} />
+          <AgeDemographic data={data.tested_per_age_group} />
         </ChartTile>
 
         <ContentHeader
@@ -270,7 +270,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
             <KpiValue
               data-cy="ggd_tested_total"
               absolute={dataGgdLastValue.tested_total}
-              difference={data.difference.ggd__tested_total}
+              difference={data.difference.tested_ggd__tested_total}
             />
             <Text>{ggdText.totaal_getest_week_uitleg}</Text>
           </KpiTile>
@@ -287,7 +287,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
             <KpiValue
               data-cy="ggd_infected"
               percentage={dataGgdLastValue.infected_percentage}
-              difference={data.difference.ggd__infected_percentage}
+              difference={data.difference.tested_ggd__infected_percentage}
             />
             <Text>{ggdText.positief_getest_week_uitleg}</Text>
             <Text>

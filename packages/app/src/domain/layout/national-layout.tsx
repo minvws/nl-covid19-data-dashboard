@@ -134,7 +134,7 @@ function NationalLayout(props: NationalLayoutProps) {
                       metricProperty: 'infected_per_100k',
                     }}
                     localeTextKey="positief_geteste_personen"
-                    differenceKey="infected_people_total__infected"
+                    differenceKey="tested_overall__infected"
                     showBarScale={true}
                   />
                 </MetricMenuItemLink>
