@@ -11,7 +11,7 @@ import text from '~/locale/index';
 import { colors } from '~/style/theme';
 import {
   formatDateFromMilliseconds,
-  formatDateFromSeconds
+  formatDateFromSeconds,
 } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { TimeframeOption } from '~/utils/timeframe';
@@ -20,7 +20,7 @@ import {
   ChartAxes,
   ChartPadding,
   ChartScales,
-  defaultPadding
+  defaultPadding,
 } from './components/chart-axes';
 import { Marker } from './components/marker';
 import { Tooltip } from './components/tooltip';
@@ -32,7 +32,7 @@ import {
   isWeeklyValue,
   TrendValue,
   Value,
-  WeeklyValue
+  WeeklyValue,
 } from './helpers';
 
 const dateToValue = (d: Date) => d.valueOf() / 1000;
@@ -220,7 +220,7 @@ export function LineChart<T extends Value>({
     (hide: boolean, hoverPoints?: HoverPoint<T>[]) => {
       if (hide) {
         hideTooltip();
-        //setMarkerProps(undefined);
+        setMarkerProps(undefined);
       } else if (hoverPoints?.length) {
         const first = hoverPoints[0];
         showTooltip({
