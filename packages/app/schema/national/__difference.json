@@ -15,7 +15,7 @@
     "tested_ggd__infected_percentage": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "infectious_people_last_full_value__count_average": {
+    "infectious_people__count_average": {
       "$ref": "#/definitions/diff_decimal"
     },
     "hospital_nice__admissions_moving_average": {
@@ -48,7 +48,7 @@
     "nursing_home__deceased_daily": {
       "$ref": "#/definitions/diff_integer"
     },
-    "reproduction_last_full_value__index_average": {
+    "reproduction__index_average": {
       "$ref": "#/definitions/diff_decimal"
     }
   },
@@ -59,8 +59,8 @@
     "hospital_lcps__beds_occupied_covid",
     "tested_ggd__tested_total",
     "tested_ggd__infected_percentage",
-    "reproduction_last_full_value__index_average",
-    "infectious_people_last_full_value__count_average",
+    "reproduction__index_average",
+    "infectious_people__count_average",
     "intensive_care_nice__admissions_moving_average",
     "intensive_care_lcps__beds_occupied_covid",
     "doctor__covid_symptoms_per_100k",
