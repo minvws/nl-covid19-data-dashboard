@@ -70,7 +70,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
   );
   const router = useRouter();
 
-  const dataInfectedDelta = data.infected_people_delta_normalized;
+  const dataInfectedDelta = data.tested_overall;
   const dataGgdLastValue = data.ggd.last_value;
   const dataGgdValues = data.ggd.values;
 
@@ -115,10 +115,10 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
             <PageBarScale
               data={data}
               scope="nl"
-              metricName="infected_people_delta_normalized"
+              metricName="tested_overall"
               metricProperty="infected_per_100k"
               localeTextKey="positief_geteste_personen"
-              differenceKey="infected_people_delta_normalized__infected_per_100k"
+              differenceKey="tested_overall__infected_per_100k"
             />
 
             <Text>{text.barscale_toelichting}</Text>

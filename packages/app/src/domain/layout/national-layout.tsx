@@ -130,7 +130,7 @@ function NationalLayout(props: NationalLayoutProps) {
                     metricName="tested_overall"
                     metricProperty="infected"
                     altBarScaleMetric={{
-                      metricName: 'infected_people_delta_normalized',
+                      metricName: 'tested_overall',
                       metricProperty: 'infected_per_100k',
                     }}
                     localeTextKey="positief_geteste_personen"
