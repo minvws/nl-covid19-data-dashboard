@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Text } from '~/components-styled/typography';
 import { colors } from '~/style/theme';
 import { formatDateFromMilliseconds } from '~/utils/formatDate';
-import { ChartPadding, ChartValue, HoverPoint } from './chart';
+import { ChartPadding } from './chart-axes';
 
 type ColorProps = {
   indicatorColor: string;
@@ -93,6 +93,7 @@ export function Marker(props: MarkerProps) {
       {data.map((d) => (
         <Point indicatorColor={primaryColor} style={{ top: d.y }} />
       ))}
+
       {showLine && (
         <>
           <DottedLine

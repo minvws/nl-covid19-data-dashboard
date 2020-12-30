@@ -1,17 +1,11 @@
 import { AxisBottom, AxisLeft, TickFormatter } from '@visx/axis';
-import { localPoint } from '@visx/event';
 import { GridRows } from '@visx/grid';
 import { Group } from '@visx/group';
-import { Point } from '@visx/point';
 import { scaleLinear, scaleTime } from '@visx/scale';
 import { Bar, Line } from '@visx/shape';
 import { Text } from '@visx/text';
-import { bisectLeft } from 'd3-array';
-import { memo, useCallback } from 'react';
-import { isDefined } from 'ts-is-present';
-import { colors } from '~/style/theme';
-import { DailyValue, TrendValue, WeeklyValue } from '../helpers';
-import { Trend, TrendType } from './trend';
+import { ScaleLinear, ScaleTime } from 'd3-scale';
+import { memo, MouseEvent, ReactNode, TouchEvent } from 'react';
 
 const NUM_TICKS = 3;
 
@@ -30,7 +24,6 @@ export const defaultPadding: ChartPadding = {
 };
 
 const defaultColors = {
-  main: colors.data.primary,
   axis: '#C4C4C4',
   axisLabels: '#666666',
   benchmark: '#4f5458',
@@ -41,18 +34,16 @@ type Benchmark = {
   label: string;
 };
 
-export type ChartValue = (TrendValue & DailyValue) | (TrendValue & WeeklyValue);
-
-export type HoverPoint = { data: ChartValue; x: number; y: number };
+export type ChartScales = {
+  xScale: ScaleTime<number, number>;
+  yScale: ScaleLinear<number, number>;
+};
 
 type ChartProps = {
   benchmark?: Benchmark;
-  isHovered: boolean;
-  trend: ChartValue[] | ChartValue[][];
-  type: TrendType;
   onHover: (
     event: React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>,
-    hoverPoints?: HoverPoint[]
+    scales: ChartScales
   ) => void;
   xDomain: [Date, Date];
   yDomain: number[];
@@ -61,28 +52,23 @@ type ChartProps = {
   padding?: ChartPadding;
   formatXAxis: TickFormatter<Date>;
   formatYAxis: TickFormatter<number>;
+  children: (props: ChartScales) => ReactNode;
 };
 
 type AnyTickFormatter = (value: any) => string;
 
-export const Chart = memo(function Chart({
-  trend,
-  type,
+export const ChartAxes = memo(function Chart({
   width,
   height,
   padding = defaultPadding,
   xDomain,
   yDomain,
   onHover,
-  isHovered,
   benchmark,
   formatXAxis,
   formatYAxis,
+  children,
 }: ChartProps) {
-  const trends = Array.isArray(trend[0])
-    ? (trend as ChartValue[][])
-    : ([trend] as ChartValue[][]);
-
   const bounded = {
     width: width - padding.left - padding.right,
     height: height - padding.top - padding.bottom,
@@ -99,61 +85,11 @@ export const Chart = memo(function Chart({
     nice: NUM_TICKS,
   });
 
-  const bisect = useCallback(
-    (trend: ChartValue[], xPosition: number) => {
-      if (!trend.length) return;
-      if (trend.length === 1) return trend[0];
+  const scales = { xScale, yScale };
 
-      const date = xScale.invert(xPosition - padding.left);
-
-      const index = bisectLeft(
-        trend.map((x) => x.__date),
-        date,
-        1
-      );
-
-      const d0 = trend[index - 1];
-      const d1 = trend[index];
-
-      return +date - +d0.__date > +d1.__date - +date ? d1 : d0;
-    },
-    [padding, xScale]
-  );
-
-  const distance = (point1: HoverPoint, point2: Point) => {
-    const x = point2.x - point1.x;
-    const y = point2.y - point1.y;
-    return Math.sqrt(x * x + y * y);
-  };
-
-  const handlePointerMove = useCallback(
-    (event: React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>) => {
-      console.log('hit!');
-      if (!trends.length) {
-        return;
-      }
-
-      const point = localPoint(event) || ({ x: 0, y: 0 } as Point);
-
-      const sortByDistance = (left: HoverPoint, right: HoverPoint) =>
-        distance(left, point) - distance(right, point);
-
-      const hoverPoints = trends
-        .map((trend) => bisect(trend, point.x))
-        .filter(isDefined)
-        .map((data) => {
-          return {
-            data,
-            x: xScale(data.__date),
-            y: yScale(data.__value),
-          };
-        })
-        .sort(sortByDistance);
-
-      onHover(event, hoverPoints);
-    },
-    [onHover, yScale, xScale, trends, bisect]
-  );
+  const handleMouse = (
+    event: TouchEvent<SVGElement> | MouseEvent<SVGElement>
+  ) => onHover(event, scales);
 
   return (
     <svg width={width} height={height} role="img">
@@ -216,27 +152,18 @@ export const Chart = memo(function Chart({
           </Group>
         )}
 
-        {trends.map((trend) => (
-          <Trend
-            trend={trend}
-            type={type}
-            xScale={xScale}
-            yScale={yScale}
-            color={defaultColors.main}
-            isHovered={isHovered}
-          />
-        ))}
+        {children(scales)}
+
         <Bar
           x={0}
           y={0}
           width={width}
           height={height}
           fill="transparent"
-          rx={14}
-          onTouchStart={handlePointerMove}
-          onTouchMove={handlePointerMove}
-          onMouseMove={handlePointerMove}
-          onMouseLeave={(event) => onHover(event)}
+          onTouchStart={handleMouse}
+          onTouchMove={handleMouse}
+          onMouseMove={handleMouse}
+          onMouseLeave={handleMouse}
         />
       </Group>
     </svg>

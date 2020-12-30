@@ -1,10 +1,14 @@
 import { TickFormatter } from '@visx/axis';
-import { extent } from 'd3-array';
+import { localPoint } from '@visx/event';
+import { Point } from '@visx/point';
+import { bisectLeft, extent } from 'd3-array';
+import { ScaleTime } from 'd3-scale';
 import { useCallback, useMemo, useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
 import text from '~/locale/index';
+import { colors } from '~/style/theme';
 import {
   formatDateFromMilliseconds,
   formatDateFromSeconds,
@@ -12,13 +16,15 @@ import {
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { TimeframeOption } from '~/utils/timeframe';
 import {
-  Chart,
+  ChartAxes,
   ChartPadding,
+  ChartScales,
   defaultPadding,
   HoverPoint,
-} from './components/chart';
+} from './components/chart-axes';
 import { Marker } from './components/marker';
 import { Tooltip } from './components/tooltip';
+import { Trend } from './components/trend';
 import {
   calculateYMax,
   getTrendData,
@@ -60,6 +66,8 @@ export type LineChartProps<T> = {
   formatMarkerLabel?: (value: T) => string;
   padding?: ChartPadding;
 };
+
+export type HoverPoint = { data: Value; x: number; y: number };
 
 export function LineChart<T extends Value>({
   values,
@@ -104,28 +112,93 @@ export function LineChart<T extends Value>({
     [signaalwaarde]
   );
 
-  const trendData = useMemo(
-    () => getTrendData(values, metricProperties[0], timeframe),
+  const trendsList = useMemo(
+    () => getTrendData(values, metricProperties, timeframe),
     [values, metricProperties, timeframe]
   );
 
   const xDomain = useMemo(() => {
-    const domain = extent(trendData.map((d) => d.__date));
+    const allData = trendsList.flat();
+    const domain = extent(allData.map((d) => d.__date));
 
     return isDefined(domain[0]) ? (domain as [Date, Date]) : undefined;
-  }, [trendData]);
+  }, [trendsList]);
 
-  const yDomain = useMemo(
-    () => [0, calculateYMax(trendData, metricProperties, signaalwaarde)],
-    [trendData, metricProperties, signaalwaarde]
+  const yDomain = useMemo(() => [0, calculateYMax(trendsList, signaalwaarde)], [
+    trendsList,
+    metricProperties,
+    signaalwaarde,
+  ]);
+
+  const bisect = useCallback(
+    (
+      trend: TrendValue[],
+      xPosition: number,
+      xScale: ScaleTime<number, number>
+    ) => {
+      if (!trend.length) return;
+      if (trend.length === 1) return trend[0];
+
+      const date = xScale.invert(xPosition - padding.left);
+
+      const index = bisectLeft(
+        trend.map((x) => x.__date),
+        date,
+        1
+      );
+
+      const d0 = trend[index - 1];
+      const d1 = trend[index];
+
+      if (!d1) return d0;
+
+      return +date - +d0.__date > +d1.__date - +date ? d1 : d0;
+    },
+    [padding]
   );
+
+  const distance = (point1: HoverPoint, point2: Point) => {
+    const x = point2.x - point1.x;
+    const y = point2.y - point1.y;
+    return Math.sqrt(x * x + y * y);
+  };
 
   const handleHover = useCallback(
     (
       event: React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>,
-      hoverPoints?: any[]
+      scales: ChartScales
     ) => {
-      if (event.type === 'mouseleave') {
+      if (!trendsList.length) {
+        return;
+      }
+
+      const { xScale, yScale } = scales;
+
+      const point = localPoint(event) || ({ x: 0, y: 0 } as Point);
+
+      const sortByDistance = (left: HoverPoint, right: HoverPoint) =>
+        distance(left, point) - distance(right, point);
+
+      const hoverPoints = trendsList
+        .map((trends) => bisect(trends, point.x, xScale))
+        .filter(isDefined)
+        .map((data) => {
+          return {
+            data,
+            x: xScale(data.__date),
+            y: yScale(data.__value),
+          };
+        })
+        .sort(sortByDistance);
+
+      toggleHoverElements(event.type === 'mouseleave', hoverPoints);
+    },
+    [bisect, trendsList]
+  );
+
+  const toggleHoverElements = useCallback(
+    (hide: boolean, hoverPoints?: any[]) => {
+      if (hide) {
         hideTooltip();
         setMarkerProps(undefined);
       } else if (hoverPoints) {
@@ -156,9 +229,7 @@ export function LineChart<T extends Value>({
       )}
 
       <Box position="relative">
-        <Chart
-          trend={trendData}
-          type={showFill ? 'area' : 'line'}
+        <ChartAxes
           height={height}
           width={width}
           xDomain={xDomain}
@@ -172,9 +243,22 @@ export function LineChart<T extends Value>({
           }
           formatXAxis={formatXAxis}
           onHover={handleHover}
-          isHovered={!!tooltipData}
           benchmark={benchmark}
-        />
+        >
+          {(renderProps) => (
+            <>
+              {trendsList.map((trend) => (
+                <Trend
+                  trend={trend}
+                  type={showFill ? 'area' : 'line'}
+                  xScale={renderProps.xScale}
+                  yScale={renderProps.yScale}
+                  color={colors.data.primary}
+                />
+              ))}
+            </>
+          )}
+        </ChartAxes>
 
         {isDefined(tooltipData) && (
           <Tooltip

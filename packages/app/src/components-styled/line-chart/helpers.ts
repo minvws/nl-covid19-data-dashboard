@@ -21,7 +21,9 @@ export type WeeklyValue = {
 export type AnyValue = Record<string, number | null>;
 export type AnyFilteredValue = Record<string, number>;
 
-export function isDailyValue(timeSeries: Value[]): timeSeries is DailyValue[] {
+export function isDailyValue<T>(
+  timeSeries: (T & Value)[]
+): timeSeries is (T & DailyValue)[] {
   const firstValue = (timeSeries as DailyValue[])[0];
 
   assert(
@@ -32,9 +34,9 @@ export function isDailyValue(timeSeries: Value[]): timeSeries is DailyValue[] {
   return firstValue.date_of_report_unix !== undefined;
 }
 
-export function isWeeklyValue(
-  timeSeries: Value[]
-): timeSeries is WeeklyValue[] {
+export function isWeeklyValue<T>(
+  timeSeries: (T & Value)[]
+): timeSeries is (T & WeeklyValue)[] {
   const firstValue = (timeSeries as WeeklyValue[])[0];
 
   assert(
@@ -52,20 +54,15 @@ export function isWeeklyValue(
  * values.
  */
 export function calculateYMax(
-  values: Value[],
-  metricProperties: string[],
+  values: TrendValue[][],
   signaalwaarde = -Infinity
 ) {
-  const peakValues: number[] = [];
-
-  for (const key of metricProperties) {
-    const peakValue = values
-      .map((x) => (x as AnyValue)[key])
+  const peakValues = values.map((list) =>
+    list
+      .map((x) => x.__value)
       .filter(isPresent) // omit null values
-      .reduce((acc, value) => (value > acc ? value : acc), -Infinity);
-
-    peakValues.push(peakValue);
-  }
+      .reduce((acc, value) => (value > acc ? value : acc), -Infinity)
+  );
 
   const overallMaximum = Math.max(...peakValues);
 
@@ -83,8 +80,8 @@ export function calculateYMax(
  * in as-is from the data, and we detect what type of timestamp we should filter
  * on.
  */
-export function getTimeframeValues(
-  values: Value[],
+export function getTimeframeValues<T>(
+  values: (T & Value)[],
   timeframe: TimeframeOption
 ) {
   const boundary = getTimeframeBoundaryUnix(timeframe);
@@ -117,12 +114,20 @@ export type TrendValue = {
 
 const timestampToDate = (d: number) => new Date(d * 1000);
 
-export function getTrendData(
-  values: Value[],
+export function getTrendData<T>(
+  values: (T & Value)[],
+  valueKeys: string[],
+  timeframe: TimeframeOption
+): (T & TrendValue & Value)[][] {
+  return valueKeys.map((key) => getSingleTrendData(values, key, timeframe));
+}
+
+export function getSingleTrendData<T>(
+  values: (T & Value)[],
   valueKey: string,
   timeframe: TimeframeOption
-): (TrendValue & Value)[] {
-  const valuesInFrame = getTimeframeValues(values, timeframe);
+): (T & TrendValue & Value)[] {
+  const valuesInFrame = getTimeframeValues<T>(values, timeframe);
 
   if (valuesInFrame.length === 0) {
     /**
@@ -133,7 +138,7 @@ export function getTrendData(
     return [];
   }
 
-  if (isDailyValue(valuesInFrame)) {
+  if (isDailyValue<T>(valuesInFrame)) {
     return valuesInFrame
       .map((x) => ({
         ...x,
@@ -147,7 +152,7 @@ export function getTrendData(
       .filter((x) => isPresent(x.__value));
   }
 
-  if (isWeeklyValue(valuesInFrame)) {
+  if (isWeeklyValue<T>(valuesInFrame)) {
     return valuesInFrame
       .map((x) => ({
         ...x,
