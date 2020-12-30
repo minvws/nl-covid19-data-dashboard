@@ -186,9 +186,13 @@ export function LineChart<T extends Value>({
 
       const { xScale, yScale } = scales;
 
-      const point = localPoint(event) || ({ x: 0, y: 0 } as Point);
+      const point = localPoint(event);
 
-      const sortByClosest = (left: HoverPoint<T>, right: HoverPoint<T>) =>
+      if (!point) {
+        return;
+      }
+
+      const sortByNearest = (left: HoverPoint<T>, right: HoverPoint<T>) =>
         distance(left, point) - distance(right, point);
 
       const hoverPoints = trendsList
@@ -210,7 +214,7 @@ export function LineChart<T extends Value>({
             y: yScale(data.__value),
           } as HoverPoint<T>;
         });
-      const nearest = hoverPoints.slice().sort(sortByClosest);
+      const nearest = hoverPoints.slice().sort(sortByNearest);
 
       toggleHoverElements(false, hoverPoints, nearest[0]);
     },

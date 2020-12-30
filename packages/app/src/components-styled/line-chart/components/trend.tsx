@@ -41,7 +41,8 @@ export function Trend({
   const internalOnHover = (
     event: TouchEvent<SVGElement> | MouseEvent<SVGElement>
   ) => {
-    setIsHovered(event.type !== 'mouseleave');
+    const isLeave = event.type === 'mouseleave';
+    setIsHovered(!isLeave);
     onHover(event, scales);
   };
 
@@ -49,12 +50,17 @@ export function Trend({
     <>
       {type === 'area' && (
         <AreaClosed
+          style={{ pointerEvents: 'all' }}
           data={trend}
           x={(d) => xScale(d.__date)}
           y={(d) => yScale(d.__value)}
           fill={color}
           fillOpacity={0.05}
           yScale={yScale}
+          onTouchStart={internalOnHover}
+          onMouseLeave={internalOnHover}
+          onMouseOver={internalOnHover}
+          onMouseMove={internalOnHover}
         />
       )}
       <LinePath
@@ -67,6 +73,7 @@ export function Trend({
         onTouchStart={internalOnHover}
         onMouseLeave={internalOnHover}
         onMouseOver={internalOnHover}
+        onMouseMove={internalOnHover}
       />
     </>
   );
