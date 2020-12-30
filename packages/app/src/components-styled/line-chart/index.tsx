@@ -181,6 +181,7 @@ export function LineChart<T extends Value>({
     ) => {
       if (!trendsList.length || event.type === 'mouseleave') {
         toggleHoverElements(true);
+        return;
       }
 
       const { xScale, yScale } = scales;

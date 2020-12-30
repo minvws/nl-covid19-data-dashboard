@@ -11,10 +11,12 @@ type ColorProps = {
 };
 
 const Label = styled.div`
+  pointer-events: none;
   background-color: white;
 `;
 
 const DottedLine = styled.div<ColorProps>`
+  pointer-events: none;
   width: 1px;
   border-left-width: 1px;
   border-left-style: dashed;
@@ -22,6 +24,7 @@ const DottedLine = styled.div<ColorProps>`
 `;
 
 const Point = styled.div<ColorProps>`
+  pointer-events: none;
   position: relative;
   height: 18px;
   width: 18px;
@@ -50,6 +53,7 @@ const Point = styled.div<ColorProps>`
 `;
 
 const MarkerContainer = styled.div`
+  pointer-events: none;
   transform: translate(-50%, 0);
   position: absolute;
   display: flex;
