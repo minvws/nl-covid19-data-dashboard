@@ -100,10 +100,6 @@ function sortTimeSeriesValues(values: Timestamped[]) {
     return values.sort((a, b) => a.date_of_report_unix - b.date_of_report_unix);
   } else if (isWeekTimestamped(values)) {
     return values.sort((a, b) => a.week_end_unix - b.week_end_unix);
-  } else if (isMeasurementTimestamped(values)) {
-    return values.sort(
-      (a, b) => a.date_measurement_unix - b.date_measurement_unix
-    );
   }
 
   /**
@@ -123,10 +119,6 @@ interface ReportTimestamped {
 
 interface WeekTimestamped {
   week_end_unix: number;
-}
-
-interface MeasurementTimestamped {
-  date_measurement_unix: number;
 }
 
 interface TimeSeriesData<T> {
@@ -159,15 +151,6 @@ function isWeekTimestamped(
   timeSeries: Timestamped[]
 ): timeSeries is WeekTimestamped[] {
   return (timeSeries as WeekTimestamped[])[0].week_end_unix !== undefined;
-}
-
-function isMeasurementTimestamped(
-  timeSeries: Timestamped[]
-): timeSeries is MeasurementTimestamped[] {
-  return (
-    (timeSeries as MeasurementTimestamped[])[0].date_measurement_unix !==
-    undefined
-  );
 }
 
 function isWhitelistedProperty(propertyName: string) {

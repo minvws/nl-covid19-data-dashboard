@@ -7,7 +7,7 @@ import { colors } from '~/style/theme';
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
 
 export interface SewerPerInstallationBaseValue {
-  date_measurement_unix: number;
+  date_of_report_unix: number;
   rna_normalized: number;
   rwzi_awzi_name: string;
 }
@@ -83,7 +83,7 @@ export function useSewerWaterChartOptions<
         ? getFilteredValues(
             scatterPlotValues,
             timeframe,
-            (value) => value.date_measurement_unix * 1000
+            (value) => value.date_of_report_unix * 1000
           )
         : [],
     [scatterPlotValues, timeframe]
@@ -101,7 +101,7 @@ export function useSewerWaterChartOptions<
       return Math.max(max, value.week_start_unix);
     }, 0);
     const scatterMaxDate = filteredScatterPlotValues.reduce((max, value) => {
-      return Math.max(max, value.date_measurement_unix);
+      return Math.max(max, value.date_of_report_unix);
     }, 0);
 
     const tooltipTypes: Record<string, Week[] | 'rwzi' | 'scatter'> = {
@@ -116,7 +116,7 @@ export function useSewerWaterChartOptions<
       color: '#CDCDCD',
       enableMouseTracking: selectedRWZI === undefined,
       data: filteredScatterPlotValues?.map((value) => ({
-        x: value.date_measurement_unix,
+        x: value.date_of_report_unix,
         y: value.rna_normalized,
         installationName: value.rwzi_awzi_name,
       })),
@@ -188,7 +188,7 @@ export function useSewerWaterChartOptions<
         series.push({
           type: 'line',
           data: scatterValues.map((scatterValue) => ({
-            x: scatterValue.date_measurement_unix,
+            x: scatterValue.date_of_report_unix,
             y: scatterValue.rna_normalized,
             rwzi: true,
           })),

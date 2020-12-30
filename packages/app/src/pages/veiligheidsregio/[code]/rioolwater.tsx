@@ -26,7 +26,6 @@ import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import {
   getInstallationNames,
   getSewerWaterBarChartData,
-  getSewerWaterBarScaleData,
   getSewerWaterLineChartData,
   getSewerWaterScatterPlotData,
 } from '~/utils/sewer-water/safety-region-sewer-water.util';
@@ -37,14 +36,12 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
   const { data, safetyRegionName } = props;
 
   const {
-    barScaleData,
     lineChartData,
     barChartData,
     scatterPlotData,
     sewerStationNames,
   } = useMemo(() => {
     return {
-      barScaleData: getSewerWaterBarScaleData(data),
       lineChartData: getSewerWaterLineChartData(data),
       barChartData: getSewerWaterBarChartData(data),
       scatterPlotData: getSewerWaterScatterPlotData(data),
@@ -89,47 +86,45 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
           reference={text.reference}
         />
 
-        {barScaleData && barScaleData.value !== undefined && (
-          <TwoKpiSection>
-            <KpiTile
-              title={text.barscale_titel}
-              description={text.extra_uitleg}
-              metadata={{
-                date: [
-                  sewerAverages.last_value.week_start_unix,
-                  sewerAverages.last_value.week_end_unix,
-                ],
-                source: text.bronnen.rivm,
-              }}
-            >
-              <KpiValue
-                data-cy="riool_normalized"
-                absolute={barScaleData.value}
-                valueAnnotation={siteText.waarde_annotaties.riool_normalized}
-                difference={data.difference.sewer__average}
-              />
-            </KpiTile>
-            <KpiTile
-              title={text.total_installation_count_titel}
-              description={
-                text.total_installation_count_description +
-                `<p style="color:#595959">${text.rwzi_abbrev}</p>`
-              }
-              metadata={{
-                date: [
-                  sewerAverages.last_value.week_start_unix,
-                  sewerAverages.last_value.week_end_unix,
-                ],
-                source: text.bronnen.rivm,
-              }}
-            >
-              <KpiValue
-                data-cy="total_installation_count"
-                absolute={data.sewer.last_value.total_installation_count}
-              />
-            </KpiTile>
-          </TwoKpiSection>
-        )}
+        <TwoKpiSection>
+          <KpiTile
+            title={text.barscale_titel}
+            description={text.extra_uitleg}
+            metadata={{
+              date: [
+                sewerAverages.last_value.week_start_unix,
+                sewerAverages.last_value.week_end_unix,
+              ],
+              source: text.bronnen.rivm,
+            }}
+          >
+            <KpiValue
+              data-cy="riool_normalized"
+              absolute={data.sewer.last_value.average}
+              valueAnnotation={siteText.waarde_annotaties.riool_normalized}
+              difference={data.difference.sewer__average}
+            />
+          </KpiTile>
+          <KpiTile
+            title={text.total_installation_count_titel}
+            description={
+              text.total_installation_count_description +
+              `<p style="color:#595959">${text.rwzi_abbrev}</p>`
+            }
+            metadata={{
+              date: [
+                sewerAverages.last_value.week_start_unix,
+                sewerAverages.last_value.week_end_unix,
+              ],
+              source: text.bronnen.rivm,
+            }}
+          >
+            <KpiValue
+              data-cy="total_installation_count"
+              absolute={data.sewer.last_value.total_installation_count}
+            />
+          </KpiTile>
+        </TwoKpiSection>
 
         {lineChartData && (
           <ChartTileWithTimeframe
