@@ -19,6 +19,7 @@ export type TrendProps = {
   xScale: any;
   yScale: any;
   color: string;
+  onHover: (event: TouchEvent<SVGElement> | MouseEvent<SVGElement>) => void;
 };
 
 export function Trend({
@@ -27,13 +28,15 @@ export function Trend({
   color,
   xScale,
   yScale,
+  onHover,
 }: TrendProps) {
   const [isHovered, setIsHovered] = useState(false);
 
-  const handleMouse = (
+  const internalOnHover = (
     event: TouchEvent<SVGElement> | MouseEvent<SVGElement>
   ) => {
-    console.log(event.type);
+    setIsHovered(event.type !== 'mouseleave');
+    onHover(event);
   };
 
   return (
@@ -55,9 +58,9 @@ export function Trend({
         y={(d) => yScale(d.__value)}
         stroke={color}
         strokeWidth={isHovered ? 3 : 2}
-        onTouchStart={handleMouse}
-        onMouseLeave={handleMouse}
-        onMouseOver={handleMouse}
+        onTouchStart={internalOnHover}
+        onMouseLeave={internalOnHover}
+        onMouseOver={internalOnHover}
       />
     </>
   );

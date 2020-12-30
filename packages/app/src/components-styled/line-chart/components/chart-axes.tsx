@@ -152,8 +152,6 @@ export const ChartAxes = memo(function Chart({
           </Group>
         )}
 
-        {children(scales)}
-
         <Bar
           x={0}
           y={0}
@@ -165,6 +163,8 @@ export const ChartAxes = memo(function Chart({
           onMouseMove={handleMouse}
           onMouseLeave={handleMouse}
         />
+
+        {children(scales)}
       </Group>
     </svg>
   );

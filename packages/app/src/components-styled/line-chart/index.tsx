@@ -188,15 +188,15 @@ export function LineChart<T extends Value>({
 
       const point = localPoint(event) || ({ x: 0, y: 0 } as Point);
 
-      const sortByDistance = (left: HoverPoint<T>, right: HoverPoint<T>) =>
+      const sortByClosest = (left: HoverPoint<T>, right: HoverPoint<T>) =>
         distance(left, point) - distance(right, point);
 
       const hoverPoints = trendsList
         .map((trends, index) => {
-          const data = bisect(trends, point.x, xScale);
-          return data
+          const trendValue = bisect(trends, point.x, xScale);
+          return trendValue
             ? {
-                data,
+                data: trendValue,
                 color: linesConfig[index].color ?? colors.data.primary,
               }
             : undefined;
@@ -210,7 +210,7 @@ export function LineChart<T extends Value>({
             y: yScale(data.__value),
           } as HoverPoint<T>;
         })
-        .sort(sortByDistance);
+        .sort(sortByClosest);
 
       toggleHoverElements(false, hoverPoints);
     },
@@ -275,6 +275,7 @@ export function LineChart<T extends Value>({
                   xScale={renderProps.xScale}
                   yScale={renderProps.yScale}
                   color={linesConfig[index].color ?? colors.data.primary}
+                  onHover={(event: any) => handleHover(event, renderProps)}
                 />
               ))}
             </>
