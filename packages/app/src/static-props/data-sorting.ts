@@ -111,7 +111,7 @@ function sortTimeSeriesValues(values: Timestamped[]) {
   );
 }
 
-type Timestamped = ReportTimestamped | WeekTimestamped | MeasurementTimestamped;
+type Timestamped = ReportTimestamped | WeekTimestamped;
 
 interface ReportTimestamped {
   date_of_report_unix: number;

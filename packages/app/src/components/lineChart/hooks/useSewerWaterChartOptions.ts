@@ -9,6 +9,10 @@ import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
 export interface SewerPerInstallationBaseValue {
   date_of_report_unix: number;
   rna_normalized: number;
+  /**
+   * This property is injected for each sample because scatter plot chart gets
+   * its input from all samples merged into one big array.
+   */
   rwzi_awzi_name: string;
 }
 

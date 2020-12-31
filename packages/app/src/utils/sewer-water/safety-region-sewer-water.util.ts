@@ -1,7 +1,7 @@
 import { BarChartValue } from '~/components-styled/bar-chart/bar-chart-coordinates';
 import siteText from '~/locale/index';
 import { colors } from '~/style/theme';
-import { Regionaal, RegionalSewerPerInstallationValue } from '~/types/data.d';
+import { Regionaal } from '~/types/data.d';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 
@@ -34,15 +34,21 @@ export function getInstallationNames(data: Regionaal): string[] {
     .sort((a, b) => a.localeCompare(b));
 }
 
-export function getSewerWaterScatterPlotData(
-  data: Regionaal
-): RegionalSewerPerInstallationValue[] | undefined {
-  const values = data.sewer_per_installation.values.flatMap(
-    (value) => value.values
+export function getSewerWaterScatterPlotData(data: Regionaal) {
+  /**
+   * @TODO we could improve on this. The values per installation are merged here
+   * into one big array, and because of this the chart needs to have the awzi
+   * name injected for every sample so that down the line it can separate values
+   * based on the selected installation. This creates overhead that should be
+   * unnecessary. The chart could be made to handle the incoming values
+   * organized in a per-installation manner.
+   */
+  const values = data.sewer_per_installation.values.flatMap((value) =>
+    value.values.map((x) => ({ ...x, rwzi_awzi_name: value.rwzi_awzi_name }))
   );
   /**
-   * All individual `value.values`-arrays are already sorted correctly, but
-   * due to merging them into one array the sort might be off.
+   * All individual `value.values`-arrays are already sorted correctly, but due
+   * to merging them into one array the sort might be off.
    */
   values.sort((a, b) => a.date_of_report_unix - b.date_of_report_unix);
 
@@ -52,9 +58,8 @@ export function getSewerWaterScatterPlotData(
 export function getSewerWaterLineChartData(
   data: Regionaal
 ): SewerWaterLineChartData | undefined {
-  // More than one RWZI installation:
-  // Average line === the averages from `sewer_measurements`
-  // Grey lines are the RWZI locations
+  // More than one RWZI installation: Average line === the averages from
+  // `sewer_measurements` Grey lines are the RWZI locations
   const averageValues = data.sewer.values;
 
   return {
@@ -78,8 +83,8 @@ export function getSewerWaterBarChartData(
     }
   );
 
-  // Concat keys and data to glue the "average" as first bar and then
-  // the RWZI-locations from highest to lowest
+  // Concat keys and data to glue the "average" as first bar and then the
+  // RWZI-locations from highest to lowest
   return {
     values: [
       {

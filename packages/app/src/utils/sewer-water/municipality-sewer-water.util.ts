@@ -170,8 +170,16 @@ export function getSewerWaterBarChartData(
 }
 
 export function getSewerWaterScatterPlotData(data: Municipal) {
-  const values = data.sewer_per_installation?.values.flatMap(
-    (value) => value.values
+  /**
+   * @TODO we could improve on this. The values per installation are merged here
+   * into one big array, and because of this the chart needs to have the awzi
+   * name injected for every sample so that down the line it can separate values
+   * based on the selected installation. This creates overhead that should be
+   * unnecessary. The chart could be made to handle the incoming values
+   * organized in a per-installation manner.
+   */
+  const values = data.sewer_per_installation?.values.flatMap((value) =>
+    value.values.map((x) => ({ ...x, rwzi_awzi_name: value.rwzi_awzi_name }))
   );
 
   /**

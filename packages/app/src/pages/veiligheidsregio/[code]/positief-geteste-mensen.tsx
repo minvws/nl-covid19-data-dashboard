@@ -28,12 +28,11 @@ import {
   ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
 import { colors } from '~/style/theme';
-import { ResultsPerRegion } from '~/types/data.d';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
-const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
+const PositivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
   const { data, safetyRegionName, text: siteText } = props;
 
   const text = siteText.veiligheidsregio_positief_geteste_personen;
@@ -41,7 +40,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
 
   const router = useRouter();
 
-  const resultsPerRegion: ResultsPerRegion = data.tested_overall;
+  const lastValue = data.tested_overall.last_value;
 
   const ggdData = data.tested_ggd.last_value;
   const ggdValues = data.tested_ggd.values;
@@ -69,9 +68,8 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           subtitle={text.pagina_toelichting}
           metadata={{
             datumsText: text.datums,
-            dateInfo: resultsPerRegion.last_value.date_of_report_unix,
-            dateOfInsertionUnix:
-              resultsPerRegion.last_value.date_of_insertion_unix,
+            dateInfo: lastValue.date_of_report_unix,
+            dateOfInsertionUnix: lastValue.date_of_insertion_unix,
             dataSources: [text.bronnen.rivm],
           }}
           reference={text.reference}
@@ -81,7 +79,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           <KpiTile
             title={text.barscale_titel}
             metadata={{
-              date: resultsPerRegion.last_value.date_of_report_unix,
+              date: lastValue.date_of_report_unix,
               source: text.bronnen.rivm,
             }}
           >
@@ -99,13 +97,13 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           <KpiTile
             title={text.kpi_titel}
             metadata={{
-              date: resultsPerRegion.last_value.date_of_report_unix,
+              date: lastValue.date_of_report_unix,
               source: text.bronnen.rivm,
             }}
           >
             <KpiValue
               data-cy="infected"
-              absolute={Math.round(resultsPerRegion.last_value.infected)}
+              absolute={Math.round(lastValue.infected)}
               difference={data.difference.tested_overall__infected}
             />
 
@@ -141,7 +139,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           title={text.linechart_titel}
           description={text.linechart_toelichting}
           signaalwaarde={7}
-          values={resultsPerRegion.values}
+          values={data.tested_overall.values}
           linesConfig={[
             {
               metricProperty: 'infected_per_100k',
@@ -155,7 +153,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
             safetyRegion: safetyRegionName,
           })}
           metadata={{
-            date: resultsPerRegion.last_value.date_of_report_unix,
+            date: lastValue.date_of_report_unix,
             source: text.bronnen.rivm,
           }}
           description={text.map_toelichting}
@@ -302,9 +300,9 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
   );
 };
 
-PostivelyTestedPeople.getLayout = getSafetyRegionLayout();
+PositivelyTestedPeople.getLayout = getSafetyRegionLayout();
 
 export const getStaticProps = getSafetyRegionStaticProps;
 export const getStaticPaths = getSafetyRegionPaths();
 
-export default PostivelyTestedPeople;
+export default PositivelyTestedPeople;
