@@ -315,13 +315,15 @@ export function LineChart<T extends Value>({
         )}
 
         {showLegend && (
-          <Legenda
-            items={linesConfig.map((x) => ({
-              color: x.color ?? colors.data.primary,
-              label: x.legendLabel ?? '',
-              shape: 'line',
-            }))}
-          />
+          <Box pl={`${padding.left}px`}>
+            <Legenda
+              items={linesConfig.map((x) => ({
+                color: x.color ?? colors.data.primary,
+                label: x.legendLabel ?? '',
+                shape: 'line',
+              }))}
+            />
+          </Box>
         )}
       </Box>
     </Box>
