@@ -25,6 +25,7 @@ export function Legenda({ items }: LegendProps) {
 const List = styled.ul(
   css({
     listStyle: 'none',
+    pl: 4,
   })
 );
 
