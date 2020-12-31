@@ -82,7 +82,7 @@ export const nl: NlConfig = {
     },
   },
   intensive_care_nice: {
-    moving_average_ic: {
+    admissions_moving_average: {
       isDecimal: true,
       barScale: {
         min: 0,

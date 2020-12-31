@@ -59,7 +59,7 @@ const IntakeIntensiveCare: FCWithLayout<NationalPageProps> = (props) => {
               data={data}
               scope="nl"
               metricName="intensive_care_nice"
-              metricProperty="moving_average_ic"
+              metricProperty="admissions_moving_average"
               localeTextKey="ic_opnames_per_dag"
               differenceKey="intensive_care_nice__admissions_moving_average"
             />
@@ -74,8 +74,8 @@ const IntakeIntensiveCare: FCWithLayout<NationalPageProps> = (props) => {
             }}
           >
             <KpiValue
-              data-cy="covid_occupied"
-              absolute={dataBeds.last_value.covid_occupied}
+              data-cy="beds_occupied_covid"
+              absolute={dataBeds.last_value.beds_occupied_covid}
               percentage={dataBeds.last_value.beds_occupied_covid_percentage}
               difference={
                 data.difference.intensive_care_lcps__beds_occupied_covid
@@ -90,7 +90,7 @@ const IntakeIntensiveCare: FCWithLayout<NationalPageProps> = (props) => {
           values={dataIntake.values}
           linesConfig={[
             {
-              metricProperty: 'moving_average_ic',
+              metricProperty: 'admissions_moving_average',
             },
           ]}
           signaalwaarde={10}
@@ -103,7 +103,7 @@ const IntakeIntensiveCare: FCWithLayout<NationalPageProps> = (props) => {
           values={dataBeds.values}
           linesConfig={[
             {
-              metricProperty: 'covid_occupied',
+              metricProperty: 'beds_occupied_covid',
             },
           ]}
           metadata={{ source: text.bronnen.lnaz }}

@@ -217,7 +217,7 @@ function NationalLayout(props: NationalLayoutProps) {
                     data={data}
                     scope="nl"
                     metricName="intensive_care_nice"
-                    metricProperty="moving_average_ic"
+                    metricProperty="admissions_moving_average"
                     localeTextKey="ic_opnames_per_dag"
                     differenceKey="intensive_care_nice__admissions_moving_average"
                     showBarScale={true}
