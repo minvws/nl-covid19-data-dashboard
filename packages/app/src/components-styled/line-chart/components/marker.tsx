@@ -21,6 +21,7 @@ const DottedLine = styled.div<ColorProps>`
   border-left-width: 1px;
   border-left-style: dashed;
   border-left-color: ${(props) => props.indicatorColor || 'black'};
+  position: relative;
 `;
 
 const Point = styled.div<ColorProps>`
@@ -65,6 +66,16 @@ const MarkerContainer = styled.div`
   background-color: rgba(0, 0, 0, 0.03);
 `;
 
+const LineContainer = styled.div`
+  pointer-events: none;
+  transform: translate(-50%, 0);
+  min-width: 26px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+`;
+
 type MarkerProps<T> = {
   data: HoverPoint<T>[];
   height: number;
@@ -84,30 +95,35 @@ export function Marker<T>(props: MarkerProps<T>) {
     formatLabel = defaultFormatLabel,
   } = props;
 
-  return (
-    <MarkerContainer
-      style={{
-        top: padding.top,
-        left: data[0].x + padding.left,
-        height: height - (padding.top + padding.bottom),
-      }}
-    >
-      {data.map((d, index) => (
-        <Point
-          indicatorColor={d.color ?? colors.data.primary}
-          style={{ top: d.y - index * 18 }}
-          key={d.y}
-        />
-      ))}
+  const topY = data.reduce((min, d) => {
+    return Math.min(d.y, min);
+  }, Infinity);
 
+  return (
+    <>
+      <MarkerContainer
+        style={{
+          top: padding.top,
+          left: data[0].x + padding.left,
+          height: height - (padding.top + padding.bottom),
+        }}
+      >
+        {data.map((d, index) => (
+          <Point
+            indicatorColor={d.color ?? colors.data.primary}
+            style={{ top: d.y - index * 18 }}
+            key={d.y}
+          />
+        ))}
+      </MarkerContainer>
       {showLine && (
-        <>
+        <LineContainer
+          style={{ top: `${topY + 9}px`, left: data[0].x + padding.left }}
+        >
           <DottedLine
             indicatorColor={primaryColor}
             style={{
-              height: `${
-                height - data[0].y - (padding.top + padding.bottom + 6)
-              }px`,
+              height: `${height - topY - (padding.top + padding.bottom) + 9}px`,
             }}
           />
           <Label>
@@ -115,9 +131,9 @@ export function Marker<T>(props: MarkerProps<T>) {
               {formatLabel(data[0].data)}
             </Text>
           </Label>
-        </>
+        </LineContainer>
       )}
-    </MarkerContainer>
+    </>
   );
 }
 
