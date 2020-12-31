@@ -339,7 +339,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
           showLegend
           padding={{
             ...defaultPadding,
-            left: 50,
+            left: 45,
           }}
           values={dataGgdValues}
           linesConfig={[

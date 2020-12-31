@@ -123,7 +123,7 @@ export const ChartAxes = memo(function Chart({
           tickLabelProps={() => ({
             fill: defaultColors.axisLabels,
             fontSize: 12,
-            dx: -5,
+            dx: 0,
             textAnchor: 'end',
             verticalAnchor: 'middle',
           })}
