@@ -226,7 +226,7 @@ export function LineChart<T extends Value>({
           return trendValue
             ? {
                 data: trendValue,
-                color: linesConfig[index].color ?? colors.data.primary,
+                color: linesConfig[index].color,
               }
             : undefined;
         })
@@ -279,16 +279,18 @@ export function LineChart<T extends Value>({
           {(renderProps) => (
             <>
               {trendsList.map((trend, index) => (
-                <Trend
-                  key={index}
-                  trend={trend}
-                  type={trendType}
-                  style={linesConfig[index].style}
-                  xScale={renderProps.xScale}
-                  yScale={renderProps.yScale}
-                  color={linesConfig[index].color}
-                  onHover={handleHover}
-                />
+                <>
+                  <Trend
+                    key={index}
+                    trend={trend}
+                    type={trendType}
+                    style={linesConfig[index].style}
+                    xScale={renderProps.xScale}
+                    yScale={renderProps.yScale}
+                    color={linesConfig[index].color}
+                    onHover={handleHover}
+                  />
+                </>
               ))}
             </>
           )}
