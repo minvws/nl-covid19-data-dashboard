@@ -50,6 +50,7 @@ export type NumberProperty<T> = {
 export type LineConfig<T> = {
   metricProperty: NumberProperty<T>;
   color?: string;
+  style?: 'solid' | 'dashed';
   legendLabel?: string;
 };
 
@@ -281,9 +282,10 @@ export function LineChart<T extends Value>({
                   key={index}
                   trend={trend}
                   type={trendType}
+                  style={linesConfig[index].style}
                   xScale={renderProps.xScale}
                   yScale={renderProps.yScale}
-                  color={linesConfig[index].color ?? colors.data.primary}
+                  color={linesConfig[index].color}
                   onHover={handleHover}
                 />
               ))}

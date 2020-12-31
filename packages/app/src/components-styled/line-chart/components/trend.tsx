@@ -1,13 +1,16 @@
 import { AreaClosed, LinePath } from '@visx/shape';
 import { MouseEvent, TouchEvent, useState } from 'react';
+import { colors } from '~/style/theme';
 import { TrendValue } from '../helpers';
 import { ChartScales } from './chart-axes';
 
 export type TrendType = 'line' | 'area';
+export type LineStyle = 'solid' | 'dashed';
 
 export type TrendProps = {
   trend: TrendValue[];
-  type: TrendType;
+  type?: TrendType;
+  style?: LineStyle;
   /**
    * I would like to type these as follows:
    *
@@ -19,7 +22,7 @@ export type TrendProps = {
    */
   xScale: any;
   yScale: any;
-  color: string;
+  color?: string;
   onHover: (
     event: TouchEvent<SVGElement> | MouseEvent<SVGElement>,
     scales: ChartScales
@@ -29,7 +32,8 @@ export type TrendProps = {
 export function Trend({
   trend,
   type = 'line',
-  color,
+  style = 'solid',
+  color = colors.data.primary,
   xScale,
   yScale,
   onHover,
@@ -45,6 +49,8 @@ export function Trend({
     setIsHovered(!isLeave);
     onHover(event, scales);
   };
+
+  const dashes = style === 'dashed' ? 4 : undefined;
 
   return (
     <>
@@ -70,6 +76,7 @@ export function Trend({
         y={(d) => yScale(d.__value)}
         stroke={color}
         strokeWidth={isHovered ? 3 : 2}
+        strokeDasharray={dashes}
         onTouchStart={internalOnHover}
         onMouseLeave={internalOnHover}
         onMouseOver={internalOnHover}

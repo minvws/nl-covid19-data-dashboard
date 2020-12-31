@@ -96,7 +96,7 @@ export function Marker<T>(props: MarkerProps<T>) {
         <Point
           indicatorColor={d.color}
           style={{ top: d.y - index * 18 }}
-          key={index}
+          key={d.y}
         />
       ))}
 
