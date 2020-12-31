@@ -76,8 +76,8 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
           metadata={{
             datumsText: text.datums,
             dateInfo: {
-              weekStartUnix: sewerAverages.last_value.week_start_unix,
-              weekEndUnix: sewerAverages.last_value.week_end_unix,
+              weekStartUnix: sewerAverages.last_value.date_start_unix,
+              weekEndUnix: sewerAverages.last_value.date_end_unix,
             },
             dateOfInsertionUnix:
               sewerAverages.last_value.date_of_insertion_unix,
@@ -92,8 +92,8 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
             description={text.extra_uitleg}
             metadata={{
               date: [
-                sewerAverages.last_value.week_start_unix,
-                sewerAverages.last_value.week_end_unix,
+                sewerAverages.last_value.date_start_unix,
+                sewerAverages.last_value.date_end_unix,
               ],
               source: text.bronnen.rivm,
             }}
@@ -113,8 +113,8 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
             }
             metadata={{
               date: [
-                sewerAverages.last_value.week_start_unix,
-                sewerAverages.last_value.week_end_unix,
+                sewerAverages.last_value.date_start_unix,
+                sewerAverages.last_value.date_end_unix,
               ],
               source: text.bronnen.rivm,
             }}
@@ -174,8 +174,8 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
             })}
             metadata={{
               date: [
-                sewerAverages.last_value.week_start_unix,
-                sewerAverages.last_value.week_end_unix,
+                sewerAverages.last_value.date_start_unix,
+                sewerAverages.last_value.date_end_unix,
               ],
               source: text.bronnen.rivm,
             }}

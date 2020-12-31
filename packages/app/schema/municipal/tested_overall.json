@@ -5,13 +5,13 @@
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "date_of_report_unix",
+        "date_unix",
         "infected",
         "infected_per_100k",
         "date_of_insertion_unix"
       ],
       "properties": {
-        "date_of_report_unix": {
+        "date_unix": {
           "type": "integer"
         },
         "infected": {

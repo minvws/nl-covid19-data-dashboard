@@ -40,7 +40,7 @@ const IntakeIntensiveCare: FCWithLayout<NationalPageProps> = (props) => {
           subtitle={text.pagina_toelichting}
           metadata={{
             datumsText: text.datums,
-            dateInfo: dataIntake.last_value.date_of_report_unix,
+            dateInfo: dataIntake.last_value.date_unix,
             dateOfInsertionUnix: dataIntake.last_value.date_of_insertion_unix,
             dataSources: [text.bronnen.nice, text.bronnen.lnaz],
           }}
@@ -51,7 +51,7 @@ const IntakeIntensiveCare: FCWithLayout<NationalPageProps> = (props) => {
           <KpiTile
             title={text.barscale_titel}
             metadata={{
-              date: dataIntake.last_value.date_of_report_unix,
+              date: dataIntake.last_value.date_unix,
               source: text.bronnen.nice,
             }}
           >
@@ -69,7 +69,7 @@ const IntakeIntensiveCare: FCWithLayout<NationalPageProps> = (props) => {
           <KpiTile
             title={text.kpi_bedbezetting.title}
             metadata={{
-              date: dataBeds.last_value.date_of_report_unix,
+              date: dataBeds.last_value.date_unix,
               source: text.bronnen.lnaz,
             }}
           >

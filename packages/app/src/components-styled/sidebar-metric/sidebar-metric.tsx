@@ -92,14 +92,11 @@ export function SidebarMetric<T extends { difference: unknown }>({
   try {
     description = config.isWeeklyData
       ? replaceVariablesInText(commonText.dateRangeOfReport, {
-          startDate: formatDateFromSeconds(lastValue.week_start_unix, 'axis'),
-          endDate: formatDateFromSeconds(lastValue.week_end_unix, 'axis'),
+          startDate: formatDateFromSeconds(lastValue.date_start_unix, 'axis'),
+          endDate: formatDateFromSeconds(lastValue.date_end_unix, 'axis'),
         })
       : replaceVariablesInText(commonText.dateOfReport, {
-          dateOfReport: formatDateFromSeconds(
-            lastValue.date_of_report_unix,
-            'medium'
-          ),
+          dateOfReport: formatDateFromSeconds(lastValue.date_unix, 'medium'),
         });
   } catch (err) {
     throw new Error(

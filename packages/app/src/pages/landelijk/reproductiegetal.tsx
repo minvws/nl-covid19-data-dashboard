@@ -39,7 +39,7 @@ const ReproductionIndex: FCWithLayout<NationalPageProps> = (props) => {
           subtitle={text.pagina_toelichting}
           metadata={{
             datumsText: text.datums,
-            dateInfo: lastFilledValue.date_of_report_unix,
+            dateInfo: lastFilledValue.date_unix,
             dateOfInsertionUnix: lastFilledValue.date_of_insertion_unix,
             dataSources: [text.bronnen.rivm],
           }}
@@ -50,7 +50,7 @@ const ReproductionIndex: FCWithLayout<NationalPageProps> = (props) => {
           <KpiWithIllustrationTile
             title={text.barscale_titel}
             metadata={{
-              date: lastFilledValue.date_of_report_unix,
+              date: lastFilledValue.date_unix,
               source: text.bronnen.rivm,
             }}
             illustration={{

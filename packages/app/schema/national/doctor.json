@@ -20,10 +20,10 @@
       "title": "national_doctor_value",
       "type": "object",
       "properties": {
-        "week_start_unix": {
+        "date_start_unix": {
           "type": "integer"
         },
-        "week_end_unix": {
+        "date_end_unix": {
           "type": "integer"
         },
         "covid_symptoms_per_100k": {
@@ -37,8 +37,8 @@
         }
       },
       "required": [
-        "week_start_unix",
-        "week_end_unix",
+        "date_start_unix",
+        "date_end_unix",
         "covid_symptoms_per_100k",
         "covid_symptoms",
         "date_of_insertion_unix"

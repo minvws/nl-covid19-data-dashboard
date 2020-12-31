@@ -7,7 +7,7 @@
       "required": [
         "infected",
         "infected_per_100k",
-        "date_of_report_unix",
+        "date_unix",
         "date_of_insertion_unix"
       ],
       "properties": {
@@ -17,7 +17,7 @@
         "infected_per_100k": {
           "type": "number"
         },
-        "date_of_report_unix": {
+        "date_unix": {
           "type": "integer"
         },
         "date_of_insertion_unix": {

@@ -6,14 +6,14 @@
       "additionalProperties": false,
       "required": [
         "admissions_moving_average",
-        "date_of_report_unix",
+        "date_unix",
         "date_of_insertion_unix"
       ],
       "properties": {
         "admissions_moving_average": {
           "type": "number"
         },
-        "date_of_report_unix": {
+        "date_unix": {
           "type": "integer"
         },
         "date_of_insertion_unix": {

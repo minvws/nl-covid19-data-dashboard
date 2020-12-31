@@ -64,7 +64,7 @@ export function useMunicipalityData(
   metricName: MunicipalitiesMetricName,
   metricProperty: string
 ): UseMunicipalityDataReturnValue {
-  const { data } = useSWR<Municipalities>('/json/MUNICIPALITIES.json');
+  const { data } = useSWR<Municipalities>('/json/GM_COLLECTION.json');
 
   return useMemo(() => {
     const propertyData = featureCollection.features.reduce(

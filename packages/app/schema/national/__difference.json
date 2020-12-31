@@ -82,19 +82,14 @@
         "difference": {
           "type": "integer"
         },
-        "old_date_of_report_unix": {
+        "old_date_unix": {
           "type": "integer"
         },
-        "new_date_of_report_unix": {
+        "new_date_unix": {
           "type": "integer"
         }
       },
-      "required": [
-        "old_value",
-        "difference",
-        "old_date_of_report_unix",
-        "new_date_of_report_unix"
-      ],
+      "required": ["old_value", "difference", "old_date_unix", "new_date_unix"],
       "additionalProperties": false
     },
     "diff_decimal": {
@@ -107,19 +102,14 @@
         "difference": {
           "type": "number"
         },
-        "old_date_of_report_unix": {
+        "old_date_unix": {
           "type": "integer"
         },
-        "new_date_of_report_unix": {
+        "new_date_unix": {
           "type": "integer"
         }
       },
-      "required": [
-        "old_value",
-        "difference",
-        "old_date_of_report_unix",
-        "new_date_of_report_unix"
-      ],
+      "required": ["old_value", "difference", "old_date_unix", "new_date_unix"],
       "additionalProperties": false
     }
   }

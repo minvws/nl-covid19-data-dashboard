@@ -46,7 +46,7 @@ export function useSafetyRegionData(
   metricName: RegionsMetricName,
   metricProperty: string
 ): UseRegionDataReturnValue {
-  const { data } = useSWR<Regions>('/json/REGIONS.json');
+  const { data } = useSWR<Regions>('/json/VR_COLLECTION.json');
 
   return useMemo(() => {
     if (!data) {

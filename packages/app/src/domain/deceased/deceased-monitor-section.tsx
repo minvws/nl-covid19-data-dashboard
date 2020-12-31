@@ -27,8 +27,8 @@ export function DeceasedMonitorSection({
         metadata={{
           datumsText: text.datums,
           dateInfo: {
-            weekStartUnix: data.last_value.week_start_unix,
-            weekEndUnix: data.last_value.week_end_unix,
+            weekStartUnix: data.last_value.date_start_unix,
+            weekEndUnix: data.last_value.date_end_unix,
           },
           dateOfInsertionUnix: data.last_value.date_of_insertion_unix,
           dataSources: [text.bronnen.cbs],

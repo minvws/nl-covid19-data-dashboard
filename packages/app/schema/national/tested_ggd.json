@@ -29,10 +29,10 @@
         "tested_total": {
           "type": "integer"
         },
-        "week_start_unix": {
+        "date_start_unix": {
           "type": "integer"
         },
-        "week_end_unix": {
+        "date_end_unix": {
           "type": "integer"
         },
         "date_of_insertion_unix": {
@@ -43,8 +43,8 @@
         "tested_total",
         "infected_percentage",
         "infected",
-        "week_start_unix",
-        "week_end_unix",
+        "date_start_unix",
+        "date_end_unix",
         "date_of_insertion_unix"
       ],
       "additionalProperties": false

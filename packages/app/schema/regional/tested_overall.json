@@ -4,13 +4,13 @@
       "title": "regional_tested_overall_value",
       "additionalProperties": false,
       "required": [
-        "date_of_report_unix",
+        "date_unix",
         "infected",
         "infected_per_100k",
         "date_of_insertion_unix"
       ],
       "properties": {
-        "date_of_report_unix": { "type": "integer" },
+        "date_unix": { "type": "integer" },
         "infected": { "type": "number" },
         "infected_per_100k": { "type": "number" },
         "date_of_insertion_unix": { "type": "integer" }

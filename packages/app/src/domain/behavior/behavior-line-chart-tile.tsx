@@ -96,11 +96,11 @@ export function BehaviorLineChartTile({
               valueKey in value
                 ? ({
                     label,
-                    date: value.week_start_unix,
+                    date: value.date_start_unix,
                     value: value[valueKey],
                     week: {
-                      start: value.week_start_unix,
-                      end: value.week_end_unix,
+                      start: value.date_start_unix,
+                      end: value.date_end_unix,
                     },
                   } as Value)
                 : undefined

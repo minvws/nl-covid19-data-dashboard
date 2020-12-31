@@ -40,7 +40,7 @@ const InfectiousPeople: FCWithLayout<NationalPageProps> = (props) => {
           subtitle={text.toelichting_pagina}
           metadata={{
             datumsText: text.datums,
-            dateInfo: lastFullValue.date_of_report_unix,
+            dateInfo: lastFullValue.date_unix,
             dateOfInsertionUnix: lastFullValue.date_of_insertion_unix,
             dataSources: [text.bronnen.rivm],
           }}
@@ -52,7 +52,7 @@ const InfectiousPeople: FCWithLayout<NationalPageProps> = (props) => {
             title={text.cijfer_titel}
             description={text.cijfer_toelichting}
             metadata={{
-              date: lastFullValue.date_of_report_unix,
+              date: lastFullValue.date_unix,
               source: text.bronnen.rivm,
             }}
           >
@@ -81,7 +81,7 @@ const InfectiousPeople: FCWithLayout<NationalPageProps> = (props) => {
                   avg: value.estimate,
                   min: value.margin_low,
                   max: value.margin_high,
-                  date: value.date_of_report_unix,
+                  date: value.date_unix,
                 }))}
                 rangeLegendLabel={text.rangeLegendLabel}
                 lineLegendLabel={text.lineLegendLabel}
