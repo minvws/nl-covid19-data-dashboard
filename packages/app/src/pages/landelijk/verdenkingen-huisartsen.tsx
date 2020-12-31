@@ -37,7 +37,7 @@ const SuspectedPatients: FCWithLayout<NationalPageProps> = (props) => {
           subtitle={text.pagina_toelichting}
           metadata={{
             datumsText: text.datums,
-            dateInfo: lastValue.week_unix,
+            dateInfo: lastValue.week_end_unix,
             dateOfInsertionUnix: lastValue.date_of_insertion_unix,
             dataSources: [text.bronnen.nivel],
           }}
@@ -48,7 +48,7 @@ const SuspectedPatients: FCWithLayout<NationalPageProps> = (props) => {
           <KpiTile
             title={text.kpi_titel}
             metadata={{
-              date: lastValue.week_unix,
+              date: lastValue.week_end_unix,
               source: text.bronnen.nivel,
             }}
           >
@@ -62,7 +62,7 @@ const SuspectedPatients: FCWithLayout<NationalPageProps> = (props) => {
           <KpiTile
             title={text.normalized_kpi_titel}
             metadata={{
-              date: lastValue.week_unix,
+              date: lastValue.week_end_unix,
               source: text.bronnen.nivel,
             }}
           >
@@ -85,7 +85,7 @@ const SuspectedPatients: FCWithLayout<NationalPageProps> = (props) => {
               timeframe={timeframe}
               values={data.doctor.values.map((value) => ({
                 value: value.covid_symptoms_per_100k,
-                date: value.week_unix,
+                date: value.week_end_unix,
                 week: {
                   start: value.week_start_unix,
                   end: value.week_end_unix,

@@ -266,7 +266,7 @@ const PositivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           values={[
             ggdValues.map((value) => ({
               value: value.tested_total,
-              date: value.week_unix,
+              date: value.week_end_unix,
               week: {
                 start: value.week_start_unix,
                 end: value.week_end_unix,
@@ -274,7 +274,7 @@ const PositivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
             })),
             ggdValues.map((value) => ({
               value: value.infected,
-              date: value.week_unix,
+              date: value.week_end_unix,
               week: {
                 start: value.week_start_unix,
                 end: value.week_end_unix,

@@ -91,7 +91,7 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
             }}
           >
             <KpiValue
-              data-cy="covid_occupied"
+              data-cy="beds_occupied_covid"
               absolute={lastValueLcps.beds_occupied_covid}
               difference={data.difference.hospital_lcps__beds_occupied_covid}
             />

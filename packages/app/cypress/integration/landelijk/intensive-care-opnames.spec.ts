@@ -10,8 +10,8 @@ context('Landelijk - IC Opnames', () => {
     const lastValue = this.nationalData.intensive_care_lcps.last_value;
 
     const kpiTestInfo = {
-      covid_occupied: [
-        formatNumber(lastValue.covid_occupied),
+      beds_occupied_covid: [
+        formatNumber(lastValue.beds_occupied_covid),
         `(${formatPercentage(lastValue.beds_occupied_covid_percentage)}%)`,
       ],
     };

@@ -20,7 +20,7 @@
       "title": "national_intensive_care_lcps_value",
       "type": "object",
       "properties": {
-        "covid_occupied": {
+        "beds_occupied_covid": {
           "type": "integer"
         },
         "beds_occupied_non_covid": {
@@ -37,7 +37,7 @@
         }
       },
       "required": [
-        "covid_occupied",
+        "beds_occupied_covid",
         "beds_occupied_non_covid",
         "beds_occupied_covid_percentage",
         "date_of_report_unix",
