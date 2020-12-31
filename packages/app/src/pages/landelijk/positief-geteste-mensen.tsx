@@ -12,6 +12,7 @@ import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { defaultPadding } from '~/components-styled/line-chart/components/chart-axes';
 import { PageBarScale } from '~/components-styled/page-barscale';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
@@ -336,6 +337,10 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
           description={ggdText.linechart_totaltests_toelichting}
           showFill={false}
           showLegend
+          padding={{
+            ...defaultPadding,
+            left: 50,
+          }}
           values={dataGgdValues}
           linesConfig={[
             {

@@ -260,6 +260,7 @@ export function LineChart<T extends Value>({
 
       <Box position="relative">
         <ChartAxes
+          padding={padding}
           height={height}
           width={width}
           xDomain={xDomain}
@@ -296,8 +297,8 @@ export function LineChart<T extends Value>({
         {isDefined(tooltipData) && (
           <Tooltip
             bounds={{ right: width, left: 0, top: 0, bottom: height }}
-            x={tooltipLeft + defaultPadding.left}
-            y={tooltipTop + defaultPadding.top}
+            x={tooltipLeft + padding.left}
+            y={tooltipTop + padding.top}
           >
             {formatTooltip
               ? formatTooltip(tooltipData)
