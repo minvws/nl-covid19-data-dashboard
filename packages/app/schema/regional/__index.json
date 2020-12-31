@@ -7,9 +7,9 @@
     "proto_name",
     "name",
     "code",
-    "results_per_region",
+    "tested_overall",
     "hospital_nice",
-    "ggd",
+    "tested_ggd",
     "nursing_home",
     "sewer",
     "sewer_per_installation",
@@ -47,14 +47,14 @@
     "sewer_per_installation": {
       "$ref": "sewer_per_installation.json"
     },
-    "results_per_region": {
-      "$ref": "results_per_region.json"
+    "tested_overall": {
+      "$ref": "tested_overall.json"
     },
     "hospital_nice": {
       "$ref": "hospital_nice.json"
     },
-    "ggd": {
-      "$ref": "ggd.json"
+    "tested_ggd": {
+      "$ref": "tested_ggd.json"
     },
     "nursing_home": {
       "$ref": "nursing_home.json"

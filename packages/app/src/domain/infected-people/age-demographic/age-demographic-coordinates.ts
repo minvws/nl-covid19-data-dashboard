@@ -7,8 +7,8 @@ import {
   TooltipCoordinates,
 } from '~/components-styled/tooltip';
 import {
-  NationalInfectedAgeGroups,
-  NationalInfectedAgeGroupsValue,
+  NationalTestedPerAgeGroup,
+  NationalTestedPerAgeGroupValue,
 } from '~/types/data';
 import { AGE_GROUP_TOOLTIP_WIDTH } from './age-demographic-chart';
 
@@ -21,10 +21,10 @@ export interface AgeDemographicCoordinates {
   ageGroupPercentageScale: ValueOf<ScaleTypeToD3Scale<any, any, any>>;
   infectedPercentageScale: ValueOf<ScaleTypeToD3Scale<any, any, any>>;
   ageGroupRangeScale: ScaleBand<string>;
-  ageGroupPercentagePoint: (value: NationalInfectedAgeGroupsValue) => any;
-  infectedPercentagePoint: (value: NationalInfectedAgeGroupsValue) => any;
-  ageGroupRangePoint: (value: NationalInfectedAgeGroupsValue) => any;
-  getTooltipCoordinates: GetTooltipCoordinates<NationalInfectedAgeGroupsValue>;
+  ageGroupPercentagePoint: (value: NationalTestedPerAgeGroupValue) => any;
+  infectedPercentagePoint: (value: NationalTestedPerAgeGroupValue) => any;
+  ageGroupRangePoint: (value: NationalTestedPerAgeGroupValue) => any;
+  getTooltipCoordinates: GetTooltipCoordinates<NationalTestedPerAgeGroupValue>;
   isSmallScreen: boolean;
   margin: {
     top: number;
@@ -32,13 +32,13 @@ export interface AgeDemographicCoordinates {
     bottom: number;
     left: number;
   };
-  values: NationalInfectedAgeGroupsValue[];
-  ageGroupRange: (value: NationalInfectedAgeGroupsValue) => string;
+  values: NationalTestedPerAgeGroupValue[];
+  ageGroupRange: (value: NationalTestedPerAgeGroupValue) => string;
   ageRangeAxisWidth: number;
 }
 
 export function useAgeDemographicCoordinates(
-  data: NationalInfectedAgeGroups,
+  data: NationalTestedPerAgeGroup,
   isSmallScreen: boolean,
   parentWidth: number
 ) {
@@ -48,7 +48,7 @@ export function useAgeDemographicCoordinates(
 }
 
 function calculateAgeDemographicCoordinates(
-  data: NationalInfectedAgeGroups,
+  data: NationalTestedPerAgeGroup,
   isSmallScreen: boolean,
   parentWidth: number
 ): AgeDemographicCoordinates {
@@ -78,11 +78,11 @@ function calculateAgeDemographicCoordinates(
   const yMax = height - margin.top - margin.bottom;
 
   // Helper functions to retrieve parts of the values
-  const ageGroupPercentage = (value: NationalInfectedAgeGroupsValue) =>
+  const ageGroupPercentage = (value: NationalTestedPerAgeGroupValue) =>
     value.age_group_percentage * 100;
-  const infectedPercentage = (value: NationalInfectedAgeGroupsValue) =>
+  const infectedPercentage = (value: NationalTestedPerAgeGroupValue) =>
     value.infected_percentage * 100;
-  const ageGroupRange = (value: NationalInfectedAgeGroupsValue) =>
+  const ageGroupRange = (value: NationalTestedPerAgeGroupValue) =>
     value.age_group_range;
 
   // Scales to map between values and coordinates
@@ -117,7 +117,7 @@ function calculateAgeDemographicCoordinates(
   // Compose together the scale and accessor functions to get point functions
   // The any/any is needed as typing would be a-flexible; and without it Typescript would complain
   const createPoint = (scale: any, accessor: any) => (
-    value: NationalInfectedAgeGroupsValue
+    value: NationalTestedPerAgeGroupValue
   ) => scale(accessor(value));
   const ageGroupPercentagePoint = createPoint(
     ageGroupPercentageScale,
@@ -131,8 +131,8 @@ function calculateAgeDemographicCoordinates(
 
   // Method for the tooltip to retrieve coordinates based on
   // The event and/or the value
-  const getTooltipCoordinates: GetTooltipCoordinates<NationalInfectedAgeGroupsValue> = (
-    value: NationalInfectedAgeGroupsValue,
+  const getTooltipCoordinates: GetTooltipCoordinates<NationalTestedPerAgeGroupValue> = (
+    value: NationalTestedPerAgeGroupValue,
     event?: MouseEvent<any>
   ): TooltipCoordinates => {
     const point = event ? localPoint(event) || { x: width } : { x: 0 };
@@ -152,7 +152,7 @@ function calculateAgeDemographicCoordinates(
           ageRangeAxisWidth / 2 +
           infectedPercentagePoint(value) / 2;
       } else {
-        // Align the top right of the tooltio with the middle of the age group percentage bar
+        // Align the top right of the tooltip with the middle of the age group percentage bar
         left =
           width / 2 -
           ageRangeAxisWidth / 2 -

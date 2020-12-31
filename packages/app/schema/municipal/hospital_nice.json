@@ -5,22 +5,13 @@
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "gmcode",
-        "municipality_name",
         "admissions_moving_average",
-        "date_of_report_unix",
+        "date_unix",
         "date_of_insertion_unix"
       ],
       "properties": {
-        "date_of_report_unix": {
+        "date_unix": {
           "type": "integer"
-        },
-        "gmcode": {
-          "type": "string",
-          "equalsRootProperty": "code"
-        },
-        "municipality_name": {
-          "type": "string"
         },
         "admissions_moving_average": {
           "type": "number"

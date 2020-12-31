@@ -50,7 +50,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
           subtitle={text.pagina_toelichting}
           metadata={{
             datumsText: text.datums,
-            dateInfo: lastValue.date_of_report_unix,
+            dateInfo: lastValue.date_unix,
             dateOfInsertionUnix: lastValue.date_of_insertion_unix,
             dataSources: [text.bronnen.rivm],
           }}
@@ -62,7 +62,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
             title={text.barscale_titel}
             description={text.extra_uitleg}
             metadata={{
-              date: lastValue.date_of_report_unix,
+              date: lastValue.date_unix,
               source: text.bronnen.rivm,
             }}
           >
@@ -81,7 +81,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
             municipality: municipalityName,
           })}
           metadata={{
-            date: lastValue.date_of_report_unix,
+            date: lastValue.date_unix,
             source: text.bronnen.rivm,
           }}
           description={text.map_toelichting}

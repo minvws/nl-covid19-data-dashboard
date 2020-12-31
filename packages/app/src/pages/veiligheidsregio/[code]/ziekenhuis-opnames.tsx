@@ -30,7 +30,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
   const { data, safetyRegionName } = props;
   const router = useRouter();
 
-  const lastValue = getLastFilledValue(data, 'hospital');
+  const lastValue = getLastFilledValue(data.hospital_nice);
 
   const municipalCodes = regionCodeToMunicipalCodeLookup[data.code];
   const selectedMunicipalCode = municipalCodes ? municipalCodes[0] : undefined;
@@ -56,7 +56,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
           subtitle={text.pagina_toelichting}
           metadata={{
             datumsText: text.datums,
-            dateInfo: lastValue.date_of_report_unix,
+            dateInfo: lastValue.date_unix,
             dateOfInsertionUnix: lastValue.date_of_insertion_unix,
             dataSources: [text.bronnen.rivm],
           }}
@@ -68,7 +68,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
             title={text.barscale_titel}
             description={text.extra_uitleg}
             metadata={{
-              date: lastValue.date_of_report_unix,
+              date: lastValue.date_unix,
               source: text.bronnen.rivm,
             }}
           >
@@ -93,7 +93,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
             title: siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel,
           }}
           metadata={{
-            date: lastValue.date_of_report_unix,
+            date: lastValue.date_unix,
             source: text.bronnen.rivm,
           }}
         >

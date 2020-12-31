@@ -9,7 +9,7 @@
     "name",
     "code",
     "hospital_nice",
-    "positive_tested_people"
+    "tested_overall"
   ],
   "properties": {
     "last_generated": {
@@ -17,7 +17,7 @@
     },
     "proto_name": {
       "type": "string",
-      "enum": ["MUNICIPALITIES"]
+      "enum": ["GM_COLLECTION"]
     },
     "name": {
       "type": "string",
@@ -34,11 +34,11 @@
         "$ref": "hospital_nice.json"
       }
     },
-    "positive_tested_people": {
+    "tested_overall": {
       "type": "array",
       "maxItems": 355,
       "items": {
-        "$ref": "positive_tested_people.json"
+        "$ref": "tested_overall.json"
       }
     }
   }

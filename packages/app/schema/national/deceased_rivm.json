@@ -26,7 +26,7 @@
         "covid_total": {
           "type": "integer"
         },
-        "date_of_report_unix": {
+        "date_unix": {
           "type": "integer"
         },
         "date_of_insertion_unix": {
@@ -36,7 +36,7 @@
       "required": [
         "covid_daily",
         "covid_total",
-        "date_of_report_unix",
+        "date_unix",
         "date_of_insertion_unix"
       ],
       "additionalProperties": false

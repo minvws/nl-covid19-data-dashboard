@@ -1,8 +1,8 @@
 import { Box } from '~/components-styled/base';
 import { Tooltip, useTooltip } from '~/components-styled/tooltip';
 import {
-  NationalInfectedAgeGroups,
-  NationalInfectedAgeGroupsValue,
+  NationalTestedPerAgeGroup,
+  NationalTestedPerAgeGroupValue,
 } from '~/types/data';
 import { useElementSize } from '~/utils/use-element-size';
 import { useBreakpoints } from '~/utils/useBreakpoints';
@@ -14,7 +14,7 @@ import { useAgeDemographicCoordinates } from './age-demographic-coordinates';
 import { AgeDemographicTooltipContent } from './age-demographic-tooltip-content';
 
 interface AgeDemographicProps {
-  data: NationalInfectedAgeGroups;
+  data: NationalTestedPerAgeGroup;
 }
 
 export function AgeDemographic({ data }: AgeDemographicProps) {
@@ -35,7 +35,7 @@ export function AgeDemographic({ data }: AgeDemographicProps) {
     closeTooltip,
     keyboardNavigateTooltip,
     tooltipState,
-  } = useTooltip<NationalInfectedAgeGroupsValue>({
+  } = useTooltip<NationalTestedPerAgeGroupValue>({
     values: coordinates.values,
     getTooltipCoordinates: coordinates.getTooltipCoordinates,
   });

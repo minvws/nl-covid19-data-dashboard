@@ -1,7 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "infected_people_total.json",
-  "title": "national_infected_people_total",
+  "title": "national_tested_ggd",
   "type": "object",
   "properties": {
     "values": {
@@ -18,13 +17,22 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "national_infected_people_total_value",
+      "title": "national_tested_ggd_value",
       "type": "object",
       "properties": {
-        "infected_daily_total": {
+        "infected": {
+          "type": "integer"
+        },
+        "infected_percentage": {
           "type": "number"
         },
-        "date_of_report_unix": {
+        "tested_total": {
+          "type": "integer"
+        },
+        "date_start_unix": {
+          "type": "integer"
+        },
+        "date_end_unix": {
           "type": "integer"
         },
         "date_of_insertion_unix": {
@@ -32,8 +40,11 @@
         }
       },
       "required": [
-        "infected_daily_total",
-        "date_of_report_unix",
+        "tested_total",
+        "infected_percentage",
+        "infected",
+        "date_start_unix",
+        "date_end_unix",
         "date_of_insertion_unix"
       ],
       "additionalProperties": false

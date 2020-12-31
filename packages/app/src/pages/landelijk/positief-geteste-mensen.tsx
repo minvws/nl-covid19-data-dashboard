@@ -34,20 +34,20 @@ import {
   NationalPageProps,
 } from '~/static-props/nl-data';
 import { colors } from '~/style/theme';
-import { NationalInfectedAgeGroups } from '~/types/data.d';
+import { NationalTestedPerAgeGroup } from '~/types/data.d';
 import { assert } from '~/utils/assert';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 /* Retrieves certain age demographic data to be used in the example text. */
-function getAgeDemographicExampleData(data: NationalInfectedAgeGroups) {
+function getAgeDemographicExampleData(data: NationalTestedPerAgeGroup) {
   const ageGroupRange = '20-29';
   const value = data.values.find((x) => x.age_group_range === ageGroupRange);
 
   assert(
     value,
-    `NationalInfectedAgeGroups should contain a value for age group ${ageGroupRange}`
+    `NationalTestedPerAgeGroup should contain a value for age group ${ageGroupRange}`
   );
 
   return {
@@ -70,12 +70,12 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
   );
   const router = useRouter();
 
-  const dataInfectedDelta = data.infected_people_delta_normalized;
-  const dataGgdLastValue = data.ggd.last_value;
-  const dataGgdValues = data.ggd.values;
+  const dataInfectedDelta = data.tested_overall;
+  const dataGgdLastValue = data.tested_ggd.last_value;
+  const dataGgdValues = data.tested_ggd.values;
 
   const ageDemographicExampleData = getAgeDemographicExampleData(
-    data.infected_age_groups
+    data.tested_per_age_group
   );
 
   return (
@@ -95,7 +95,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
           subtitle={text.pagina_toelichting}
           metadata={{
             datumsText: text.datums,
-            dateInfo: dataInfectedDelta.last_value.date_of_report_unix,
+            dateInfo: dataInfectedDelta.last_value.date_unix,
             dateOfInsertionUnix:
               dataInfectedDelta.last_value.date_of_insertion_unix,
             dataSources: [text.bronnen.rivm],
@@ -106,19 +106,19 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
         <TwoKpiSection>
           <KpiTile
             title={text.barscale_titel}
-            data-cy="infected_daily_increase"
+            data-cy="infected_per_100k"
             metadata={{
-              date: dataInfectedDelta.last_value.date_of_report_unix,
+              date: dataInfectedDelta.last_value.date_unix,
               source: text.bronnen.rivm,
             }}
           >
             <PageBarScale
               data={data}
               scope="nl"
-              metricName="infected_people_delta_normalized"
-              metricProperty="infected_daily_increase"
+              metricName="tested_overall"
+              metricProperty="infected_per_100k"
               localeTextKey="positief_geteste_personen"
-              differenceKey="infected_people_delta_normalized__infected_daily_increase"
+              differenceKey="tested_overall__infected_per_100k"
             />
 
             <Text>{text.barscale_toelichting}</Text>
@@ -127,18 +127,14 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
           <KpiTile
             title={text.kpi_titel}
             metadata={{
-              date: dataInfectedDelta.last_value.date_of_report_unix,
+              date: dataInfectedDelta.last_value.date_unix,
               source: text.bronnen.rivm,
             }}
           >
             <KpiValue
-              data-cy="infected_daily_total"
-              absolute={
-                data.infected_people_total.last_value.infected_daily_total
-              }
-              difference={
-                data.difference.infected_people_total__infected_daily_total
-              }
+              data-cy="infected"
+              absolute={data.tested_overall.last_value.infected}
+              difference={data.difference.tested_overall__infected}
             />
 
             <Text
@@ -173,7 +169,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
           data-cy="chloropleths"
           title={text.map_titel}
           metadata={{
-            date: dataInfectedDelta.last_value.date_of_report_unix,
+            date: dataInfectedDelta.last_value.date_unix,
             source: text.bronnen.rivm,
           }}
           description={text.map_toelichting}
@@ -181,8 +177,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
           chartRegion={selectedMap}
           legend={{
             title: text.chloropleth_legenda.titel,
-            thresholds:
-              regionThresholds.positive_tested_people.positive_tested_people,
+            thresholds: regionThresholds.tested_overall.infected_per_100k,
           }}
         >
           {/**
@@ -198,8 +193,8 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
            */}
           {selectedMap === 'municipal' && (
             <MunicipalityChoropleth
-              metricName="positive_tested_people"
-              metricProperty="positive_tested_people"
+              metricName="tested_overall"
+              metricProperty="infected_per_100k"
               tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
                 createSelectMunicipalHandler(router)
               )}
@@ -208,8 +203,8 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
           )}
           {selectedMap === 'region' && (
             <SafetyRegionChoropleth
-              metricName="positive_tested_people"
-              metricProperty="positive_tested_people"
+              metricName="tested_overall"
+              metricProperty="infected_per_100k"
               tooltipContent={createPositiveTestedPeopleRegionalTooltip(
                 createSelectRegionHandler(router)
               )}
@@ -223,7 +218,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
           description={text.linechart_toelichting}
           signaalwaarde={7}
           values={dataInfectedDelta.values}
-          linesConfig={[{ metricProperty: 'infected_daily_increase' }]}
+          linesConfig={[{ metricProperty: 'infected_per_100k' }]}
           metadata={{
             source: text.bronnen.rivm,
           }}
@@ -236,11 +231,11 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
             ageDemographicExampleData
           )}
           metadata={{
-            date: dataInfectedDelta.last_value.date_of_report_unix,
+            date: dataInfectedDelta.last_value.date_unix,
             source: text.bronnen.rivm,
           }}
         >
-          <AgeDemographic data={data.infected_age_groups} />
+          <AgeDemographic data={data.tested_per_age_group} />
         </ChartTile>
 
         <ContentHeader
@@ -252,8 +247,8 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
           metadata={{
             datumsText: ggdText.datums,
             dateInfo: {
-              weekStartUnix: dataGgdLastValue.week_start_unix,
-              weekEndUnix: dataGgdLastValue.week_end_unix,
+              weekStartUnix: dataGgdLastValue.date_start_unix,
+              weekEndUnix: dataGgdLastValue.date_end_unix,
             },
             dateOfInsertionUnix: dataGgdLastValue.date_of_insertion_unix,
             dataSources: [ggdText.bronnen.rivm],
@@ -266,8 +261,8 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
             title={ggdText.totaal_getest_week_titel}
             metadata={{
               date: [
-                dataGgdLastValue.week_start_unix,
-                dataGgdLastValue.week_end_unix,
+                dataGgdLastValue.date_start_unix,
+                dataGgdLastValue.date_end_unix,
               ],
               source: ggdText.bronnen.rivm,
             }}
@@ -275,7 +270,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
             <KpiValue
               data-cy="ggd_tested_total"
               absolute={dataGgdLastValue.tested_total}
-              difference={data.difference.ggd__tested_total}
+              difference={data.difference.tested_ggd__tested_total}
             />
             <Text>{ggdText.totaal_getest_week_uitleg}</Text>
           </KpiTile>
@@ -283,8 +278,8 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
             title={ggdText.positief_getest_week_titel}
             metadata={{
               date: [
-                dataGgdLastValue.week_start_unix,
-                dataGgdLastValue.week_end_unix,
+                dataGgdLastValue.date_start_unix,
+                dataGgdLastValue.date_end_unix,
               ],
               source: ggdText.bronnen.rivm,
             }}
@@ -292,7 +287,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
             <KpiValue
               data-cy="ggd_infected"
               percentage={dataGgdLastValue.infected_percentage}
-              difference={data.difference.ggd__infected_percentage}
+              difference={data.difference.tested_ggd__infected_percentage}
             />
             <Text>{ggdText.positief_getest_week_uitleg}</Text>
             <Text>
@@ -337,18 +332,18 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
           values={[
             dataGgdValues.map((value) => ({
               value: value.tested_total,
-              date: value.week_unix,
+              date: value.week_end_unix,
               week: {
-                start: value.week_start_unix,
-                end: value.week_end_unix,
+                start: value.date_start_unix,
+                end: value.date_end_unix,
               },
             })),
             dataGgdValues.map((value) => ({
               value: value.infected,
-              date: value.week_unix,
+              date: value.week_end_unix,
               week: {
-                start: value.week_start_unix,
-                end: value.week_end_unix,
+                start: value.date_start_unix,
+                end: value.date_end_unix,
               },
             })),
           ]}

@@ -1,28 +1,23 @@
 {
   "definitions": {
-    "item": {
-      "title": "infectious_people_count_last_value",
+    "value": {
+      "title": "national_tested_overall_value",
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "infectious_low",
-        "infectious_avg",
-        "infectious_high",
-        "date_of_report_unix",
+        "infected",
+        "infected_per_100k",
+        "date_unix",
         "date_of_insertion_unix"
       ],
       "properties": {
-        "infectious_low": {
+        "infected": {
+          "type": "integer"
+        },
+        "infected_per_100k": {
           "type": "number"
         },
-        "infectious_avg": {
-          "type": ["number", "null"],
-          "nullable": true
-        },
-        "infectious_high": {
-          "type": "number"
-        },
-        "date_of_report_unix": {
+        "date_unix": {
           "type": "integer"
         },
         "date_of_insertion_unix": {
@@ -32,8 +27,7 @@
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "infectious_people_count.json",
-  "title": "infectious_people_count",
+  "title": "national_tested_overall",
   "type": "object",
   "required": ["values", "last_value"],
   "additionalProperties": false,
@@ -41,11 +35,11 @@
     "values": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/item"
+        "$ref": "#/definitions/value"
       }
     },
     "last_value": {
-      "$ref": "#/definitions/item"
+      "$ref": "#/definitions/value"
     }
   }
 }

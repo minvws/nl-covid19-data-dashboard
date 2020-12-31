@@ -1,26 +1,24 @@
 {
   "definitions": {
-    "item": {
-      "title": "infected_people_clusters_last_value",
+    "value": {
+      "title": "municipal_tested_overall_value",
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "active_clusters",
-        "cluster_average",
-        "date_of_report_unix",
+        "date_unix",
+        "infected",
+        "infected_per_100k",
         "date_of_insertion_unix"
       ],
       "properties": {
-        "active_clusters": {
-          "type": ["number", "null"],
-          "nullable": true
-        },
-        "cluster_average": {
-          "type": ["number", "null"],
-          "nullable": true
-        },
-        "date_of_report_unix": {
+        "date_unix": {
           "type": "integer"
+        },
+        "infected": {
+          "type": "number"
+        },
+        "infected_per_100k": {
+          "type": "number"
         },
         "date_of_insertion_unix": {
           "type": "integer"
@@ -29,8 +27,8 @@
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "infected_people_clusters.json",
-  "title": "infected_people_clusters",
+  "$id": "tested_overall.json",
+  "title": "municipal_tested_overall",
   "type": "object",
   "required": ["values", "last_value"],
   "additionalProperties": false,
@@ -38,11 +36,11 @@
     "values": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/item"
+        "$ref": "#/definitions/value"
       }
     },
     "last_value": {
-      "$ref": "#/definitions/item"
+      "$ref": "#/definitions/value"
     }
   }
 }

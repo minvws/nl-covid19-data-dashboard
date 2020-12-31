@@ -6,7 +6,6 @@ import siteText, { TALLLanguages } from '~/locale/index';
 import { DataScope, getMetricConfig } from '~/metric-config';
 import { assert } from '~/utils/assert';
 import { formatDateFromSeconds } from '~/utils/formatDate';
-import { getLastFilledValue } from '~/utils/get-last-filled-value';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { SidebarBarScale } from './sidebar-barscale';
 import { SidebarKpiValue } from './sidebar-kpi-value';
@@ -47,16 +46,10 @@ export function SidebarMetric<T extends { difference: unknown }>({
   annotationKey,
   altBarScaleMetric,
 }: SidebarMetricProps<T>) {
-  /**
-   * This is a workaround for data which can contain null values on properties as part of the
-   * last_value object. This was added to facilitate VR hospital Nice data.
-   *
-   * @TODO work out proper solution with BE
-   */
-  const lastValue =
-    metricProperty === 'admissions_moving_average'
-      ? getLastFilledValue(data, metricName)
-      : get(data, [(metricName as unknown) as string, 'last_value']);
+  const lastValue = get(data, [
+    (metricName as unknown) as string,
+    'last_value',
+  ]);
 
   const propertyValue = metricProperty && lastValue[metricProperty];
 
@@ -99,14 +92,11 @@ export function SidebarMetric<T extends { difference: unknown }>({
   try {
     description = config.isWeeklyData
       ? replaceVariablesInText(commonText.dateRangeOfReport, {
-          startDate: formatDateFromSeconds(lastValue.week_start_unix, 'axis'),
-          endDate: formatDateFromSeconds(lastValue.week_end_unix, 'axis'),
+          startDate: formatDateFromSeconds(lastValue.date_start_unix, 'axis'),
+          endDate: formatDateFromSeconds(lastValue.date_end_unix, 'axis'),
         })
       : replaceVariablesInText(commonText.dateOfReport, {
-          dateOfReport: formatDateFromSeconds(
-            lastValue.date_of_report_unix,
-            'medium'
-          ),
+          dateOfReport: formatDateFromSeconds(lastValue.date_unix, 'medium'),
         });
   } catch (err) {
     throw new Error(

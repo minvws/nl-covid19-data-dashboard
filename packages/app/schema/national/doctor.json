@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "national_huisarts_verdenkingen",
+  "title": "national_doctor",
   "type": "object",
   "properties": {
     "values": {
@@ -17,22 +17,19 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "national_huisarts_verdenkingen_value",
+      "title": "national_doctor_value",
       "type": "object",
       "properties": {
-        "week_unix": {
+        "date_start_unix": {
           "type": "integer"
         },
-        "week_start_unix": {
+        "date_end_unix": {
           "type": "integer"
         },
-        "week_end_unix": {
-          "type": "integer"
-        },
-        "incidentie": {
+        "covid_symptoms_per_100k": {
           "type": "number"
         },
-        "geschat_aantal": {
+        "covid_symptoms": {
           "type": "number"
         },
         "date_of_insertion_unix": {
@@ -40,11 +37,10 @@
         }
       },
       "required": [
-        "week_unix",
-        "week_start_unix",
-        "week_end_unix",
-        "incidentie",
-        "geschat_aantal",
+        "date_start_unix",
+        "date_end_unix",
+        "covid_symptoms_per_100k",
+        "covid_symptoms",
         "date_of_insertion_unix"
       ],
       "additionalProperties": false
