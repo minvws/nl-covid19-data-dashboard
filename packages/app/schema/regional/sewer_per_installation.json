@@ -22,13 +22,9 @@
     "value": {
       "title": "regional_sewer_per_installation_value",
       "additionalProperties": false,
-      "required": [
-        "date_of_report_unix",
-        "rna_normalized",
-        "date_of_insertion_unix"
-      ],
+      "required": ["date_unix", "rna_normalized", "date_of_insertion_unix"],
       "properties": {
-        "date_of_report_unix": {
+        "date_unix": {
           "type": "integer"
         },
         "rna_normalized": {

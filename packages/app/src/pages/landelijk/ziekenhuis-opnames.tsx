@@ -56,7 +56,7 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
           subtitle={text.pagina_toelichting}
           metadata={{
             datumsText: text.datums,
-            dateInfo: lastValueNice.date_of_report_unix,
+            dateInfo: lastValueNice.date_unix,
             dateOfInsertionUnix: lastValueNice.date_of_insertion_unix,
             dataSources: [text.bronnen.nice, text.bronnen.lnaz],
           }}
@@ -68,7 +68,7 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
             title={text.barscale_titel}
             description={text.extra_uitleg}
             metadata={{
-              date: lastValueNice.date_of_report_unix,
+              date: lastValueNice.date_unix,
               source: text.bronnen.nice,
             }}
           >
@@ -86,7 +86,7 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
             title={text.kpi_bedbezetting.title}
             description={text.kpi_bedbezetting.description}
             metadata={{
-              date: lastValueLcps.date_of_report_unix,
+              date: lastValueLcps.date_unix,
               source: text.bronnen.lnaz,
             }}
           >
@@ -111,7 +111,7 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
             title: text.chloropleth_legenda.titel,
           }}
           metadata={{
-            date: lastValueNice.date_of_report_unix,
+            date: lastValueNice.date_unix,
             source: text.bronnen.nice,
           }}
         >

@@ -73,7 +73,7 @@ Use these guidelines when defining a new schema:
    `nursing_home.json` which exists in both national and regional folders.
 4. Property names should first say what it measuring is and then optionally
    postfix the how it was measured, but the latter only if required for clarity,
-   i.e. `date_of_report_unix` first describes what it is and then how it is
+   i.e. `date_unix` first describes what it is and then how it is
    formatted.
 5. Sometimes the JSON file contains only data for 1 measurement. In that case it
    is probably already evident from the title (= generated type) what the

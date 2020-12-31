@@ -15,8 +15,8 @@ const text = siteText.veiligheidsregio_rioolwater_metingen;
 interface SewerWaterLineChartValue {
   date: number;
   value: number;
-  week_start_unix: number;
-  week_end_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
 }
 
 interface SewerWaterLineChartData {
@@ -50,7 +50,7 @@ export function getSewerWaterScatterPlotData(data: Regionaal) {
    * All individual `value.values`-arrays are already sorted correctly, but due
    * to merging them into one array the sort might be off.
    */
-  values.sort((a, b) => a.date_of_report_unix - b.date_of_report_unix);
+  values.sort((a, b) => a.date_unix - b.date_unix);
 
   return values;
 }
@@ -67,7 +67,7 @@ export function getSewerWaterLineChartData(
       return {
         ...value,
         value: value.average,
-        date: value.week_end_unix,
+        date: value.date_end_unix,
       };
     }),
     averageLabelText: text.graph_average_label_text,
@@ -92,7 +92,7 @@ export function getSewerWaterBarChartData(
         value: data.sewer.last_value.average,
         color: colors.data.primary,
         tooltip: `${formatDateFromSeconds(
-          data.sewer.last_value.week_end_unix,
+          data.sewer.last_value.date_end_unix,
           'short'
         )}: ${formatNumber(data.sewer.last_value.average)}`,
       },
@@ -101,7 +101,7 @@ export function getSewerWaterBarChartData(
         value: installation.last_value.rna_normalized,
         color: '#C1C1C1',
         tooltip: `${formatDateFromSeconds(
-          installation.last_value.date_of_report_unix,
+          installation.last_value.date_unix,
           'short'
         )}: ${formatNumber(installation.last_value.rna_normalized)}`,
       })),

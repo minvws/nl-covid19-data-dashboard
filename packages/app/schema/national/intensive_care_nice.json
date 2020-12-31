@@ -4,16 +4,12 @@
       "title": "national_intensive_care_nice_value",
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "moving_average_ic",
-        "date_of_report_unix",
-        "date_of_insertion_unix"
-      ],
+      "required": ["moving_average_ic", "date_unix", "date_of_insertion_unix"],
       "properties": {
         "moving_average_ic": {
           "type": "number"
         },
-        "date_of_report_unix": {
+        "date_unix": {
           "type": "integer"
         },
         "date_of_insertion_unix": {

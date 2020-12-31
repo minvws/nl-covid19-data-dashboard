@@ -8,7 +8,7 @@
         "margin_low",
         "estimate",
         "margin_high",
-        "date_of_report_unix",
+        "date_unix",
         "date_of_insertion_unix"
       ],
       "properties": {
@@ -22,7 +22,7 @@
         "margin_high": {
           "type": "integer"
         },
-        "date_of_report_unix": {
+        "date_unix": {
           "type": "integer"
         },
         "date_of_insertion_unix": {

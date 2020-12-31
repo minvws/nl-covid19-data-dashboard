@@ -5,17 +5,17 @@
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "week_start_unix",
-        "week_end_unix",
+        "date_start_unix",
+        "date_end_unix",
         "average",
         "total_installation_count",
         "date_of_insertion_unix"
       ],
       "properties": {
-        "week_start_unix": {
+        "date_start_unix": {
           "type": "integer"
         },
-        "week_end_unix": {
+        "date_end_unix": {
           "type": "integer"
         },
         "average": {

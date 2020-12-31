@@ -189,10 +189,10 @@ function formatDefaultTooltip<T extends Value & TrendValue>(
     }`;
   } else if (isWeekly) {
     return `${formatDateFromSeconds(
-      (value as WeeklyValue).week_start_unix,
+      (value as WeeklyValue).date_start_unix,
       'short'
     )} - ${formatDateFromSeconds(
-      (value as WeeklyValue).week_end_unix,
+      (value as WeeklyValue).date_end_unix,
       'short'
     )}: ${
       isPercentage
@@ -218,11 +218,11 @@ function formatDefaultTooltip<T extends Value & TrendValue>(
      * somehow it doesn't seem to work here.
      */
     const dateFrom = formatDateFromSeconds(
-      (value as WeeklyValue).week_start_unix,
+      (value as WeeklyValue).date_start_unix,
       'short'
     );
     const dateTo = formatDateFromSeconds(
-      (value as WeeklyValue).week_end_unix,
+      (value as WeeklyValue).date_end_unix,
       'short'
     );
     const valueStr = isPercentage

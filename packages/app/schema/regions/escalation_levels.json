@@ -4,14 +4,14 @@
   "title": "escalation_levels",
   "additionalProperties": false,
   "required": [
-    "date_of_report_unix",
+    "date_unix",
     "vrcode",
     "escalation_level",
     "valid_from_unix",
     "date_of_insertion_unix"
   ],
   "properties": {
-    "date_of_report_unix": {
+    "date_unix": {
       "type": "integer"
     },
     "vrcode": {

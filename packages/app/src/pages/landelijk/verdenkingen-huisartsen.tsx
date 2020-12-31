@@ -87,8 +87,8 @@ const SuspectedPatients: FCWithLayout<NationalPageProps> = (props) => {
                 value: value.covid_symptoms_per_100k,
                 date: value.week_unix,
                 week: {
-                  start: value.week_start_unix,
-                  end: value.week_end_unix,
+                  start: value.date_start_unix,
+                  end: value.date_end_unix,
                 },
               }))}
             />

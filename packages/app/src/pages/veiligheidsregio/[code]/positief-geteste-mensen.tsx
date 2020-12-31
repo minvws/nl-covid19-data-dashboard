@@ -68,7 +68,7 @@ const PositivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           subtitle={text.pagina_toelichting}
           metadata={{
             datumsText: text.datums,
-            dateInfo: lastValue.date_of_report_unix,
+            dateInfo: lastValue.date_unix,
             dateOfInsertionUnix: lastValue.date_of_insertion_unix,
             dataSources: [text.bronnen.rivm],
           }}
@@ -79,7 +79,7 @@ const PositivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           <KpiTile
             title={text.barscale_titel}
             metadata={{
-              date: lastValue.date_of_report_unix,
+              date: lastValue.date_unix,
               source: text.bronnen.rivm,
             }}
           >
@@ -97,7 +97,7 @@ const PositivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           <KpiTile
             title={text.kpi_titel}
             metadata={{
-              date: lastValue.date_of_report_unix,
+              date: lastValue.date_unix,
               source: text.bronnen.rivm,
             }}
           >
@@ -153,7 +153,7 @@ const PositivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
             safetyRegion: safetyRegionName,
           })}
           metadata={{
-            date: lastValue.date_of_report_unix,
+            date: lastValue.date_unix,
             source: text.bronnen.rivm,
           }}
           description={text.map_toelichting}
@@ -186,8 +186,8 @@ const PositivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
             datumsText: ggdText.datums,
             dateOfInsertionUnix: ggdData.date_of_insertion_unix,
             dateInfo: {
-              weekStartUnix: ggdData.week_start_unix,
-              weekEndUnix: ggdData.week_end_unix,
+              weekStartUnix: ggdData.date_start_unix,
+              weekEndUnix: ggdData.date_end_unix,
             },
             dataSources: [ggdText.bronnen.rivm],
           }}
@@ -198,7 +198,7 @@ const PositivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           <KpiTile
             title={ggdText.totaal_getest_week_titel}
             metadata={{
-              date: [ggdData.week_start_unix, ggdData.week_end_unix],
+              date: [ggdData.date_start_unix, ggdData.date_end_unix],
               source: ggdText.bronnen.rivm,
             }}
           >
@@ -211,7 +211,7 @@ const PositivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           <KpiTile
             title={ggdText.positief_getest_week_titel}
             metadata={{
-              date: [ggdData.week_start_unix, ggdData.week_end_unix],
+              date: [ggdData.date_start_unix, ggdData.date_end_unix],
               source: ggdText.bronnen.rivm,
             }}
           >
@@ -268,16 +268,16 @@ const PositivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
               value: value.tested_total,
               date: value.week_unix,
               week: {
-                start: value.week_start_unix,
-                end: value.week_end_unix,
+                start: value.date_start_unix,
+                end: value.date_end_unix,
               },
             })),
             ggdValues.map((value) => ({
               value: value.infected,
               date: value.week_unix,
               week: {
-                start: value.week_start_unix,
-                end: value.week_end_unix,
+                start: value.date_start_unix,
+                end: value.date_end_unix,
               },
             })),
           ]}

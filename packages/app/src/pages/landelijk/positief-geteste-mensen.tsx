@@ -95,7 +95,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
           subtitle={text.pagina_toelichting}
           metadata={{
             datumsText: text.datums,
-            dateInfo: dataInfectedDelta.last_value.date_of_report_unix,
+            dateInfo: dataInfectedDelta.last_value.date_unix,
             dateOfInsertionUnix:
               dataInfectedDelta.last_value.date_of_insertion_unix,
             dataSources: [text.bronnen.rivm],
@@ -108,7 +108,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
             title={text.barscale_titel}
             data-cy="infected_per_100k"
             metadata={{
-              date: dataInfectedDelta.last_value.date_of_report_unix,
+              date: dataInfectedDelta.last_value.date_unix,
               source: text.bronnen.rivm,
             }}
           >
@@ -127,7 +127,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
           <KpiTile
             title={text.kpi_titel}
             metadata={{
-              date: dataInfectedDelta.last_value.date_of_report_unix,
+              date: dataInfectedDelta.last_value.date_unix,
               source: text.bronnen.rivm,
             }}
           >
@@ -169,7 +169,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
           data-cy="chloropleths"
           title={text.map_titel}
           metadata={{
-            date: dataInfectedDelta.last_value.date_of_report_unix,
+            date: dataInfectedDelta.last_value.date_unix,
             source: text.bronnen.rivm,
           }}
           description={text.map_toelichting}
@@ -231,7 +231,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
             ageDemographicExampleData
           )}
           metadata={{
-            date: dataInfectedDelta.last_value.date_of_report_unix,
+            date: dataInfectedDelta.last_value.date_unix,
             source: text.bronnen.rivm,
           }}
         >
@@ -247,8 +247,8 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
           metadata={{
             datumsText: ggdText.datums,
             dateInfo: {
-              weekStartUnix: dataGgdLastValue.week_start_unix,
-              weekEndUnix: dataGgdLastValue.week_end_unix,
+              weekStartUnix: dataGgdLastValue.date_start_unix,
+              weekEndUnix: dataGgdLastValue.date_end_unix,
             },
             dateOfInsertionUnix: dataGgdLastValue.date_of_insertion_unix,
             dataSources: [ggdText.bronnen.rivm],
@@ -261,8 +261,8 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
             title={ggdText.totaal_getest_week_titel}
             metadata={{
               date: [
-                dataGgdLastValue.week_start_unix,
-                dataGgdLastValue.week_end_unix,
+                dataGgdLastValue.date_start_unix,
+                dataGgdLastValue.date_end_unix,
               ],
               source: ggdText.bronnen.rivm,
             }}
@@ -278,8 +278,8 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
             title={ggdText.positief_getest_week_titel}
             metadata={{
               date: [
-                dataGgdLastValue.week_start_unix,
-                dataGgdLastValue.week_end_unix,
+                dataGgdLastValue.date_start_unix,
+                dataGgdLastValue.date_end_unix,
               ],
               source: ggdText.bronnen.rivm,
             }}
@@ -334,16 +334,16 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
               value: value.tested_total,
               date: value.week_unix,
               week: {
-                start: value.week_start_unix,
-                end: value.week_end_unix,
+                start: value.date_start_unix,
+                end: value.date_end_unix,
               },
             })),
             dataGgdValues.map((value) => ({
               value: value.infected,
               date: value.week_unix,
               week: {
-                start: value.week_start_unix,
-                end: value.week_end_unix,
+                start: value.date_start_unix,
+                end: value.date_end_unix,
               },
             })),
           ]}

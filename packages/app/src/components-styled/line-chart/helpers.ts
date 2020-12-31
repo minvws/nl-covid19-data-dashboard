@@ -5,12 +5,12 @@ import { getDaysForTimeframe, TimeframeOption } from '~/utils/timeframe';
 export type Value = DailyValue | WeeklyValue;
 
 export type DailyValue = {
-  date_of_report_unix: number;
+  date_unix: number;
 };
 
 export type WeeklyValue = {
-  week_start_unix: number;
-  week_end_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
 };
 
 /**
@@ -29,7 +29,7 @@ export function isDailyValue(timeSeries: Value[]): timeSeries is DailyValue[] {
     'Unable to determine timestamps if time series is empty'
   );
 
-  return firstValue.date_of_report_unix !== undefined;
+  return firstValue.date_unix !== undefined;
 }
 
 export function isWeeklyValue(
@@ -42,7 +42,7 @@ export function isWeeklyValue(
     'Unable to determine timestamps if time series is empty'
   );
 
-  return firstValue.week_end_unix !== undefined;
+  return firstValue.date_end_unix !== undefined;
 }
 
 /**
@@ -90,11 +90,11 @@ export function getTimeframeValues(
   const boundary = getTimeframeBoundaryUnix(timeframe);
 
   if (isDailyValue(values)) {
-    return values.filter((x) => x.date_of_report_unix >= boundary);
+    return values.filter((x) => x.date_unix >= boundary);
   }
 
   if (isWeeklyValue(values)) {
-    return values.filter((x) => x.week_start_unix >= boundary);
+    return values.filter((x) => x.date_start_unix >= boundary);
   }
 
   throw new Error(`Incompatible timestamps are used in value ${values[0]}`);
@@ -142,7 +142,7 @@ export function getTrendData(
          * out the null values.
          */
         __value: (x as AnyValue)[valueKey] as number,
-        __date: timestampToDate(x.date_of_report_unix),
+        __date: timestampToDate(x.date_unix),
       }))
       .filter((x) => isPresent(x.__value));
   }
@@ -156,7 +156,7 @@ export function getTrendData(
          * out the null values.
          */
         __value: (x as AnyValue)[valueKey] as number,
-        __date: timestampToDate(x.week_start_unix),
+        __date: timestampToDate(x.date_start_unix),
       }))
       .filter((x) => isPresent(x.__value));
   }

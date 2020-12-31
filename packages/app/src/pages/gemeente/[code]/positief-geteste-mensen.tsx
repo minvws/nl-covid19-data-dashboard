@@ -50,7 +50,7 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
           subtitle={text.pagina_toelichting}
           metadata={{
             datumsText: text.datums,
-            dateInfo: lastValue.date_of_report_unix,
+            dateInfo: lastValue.date_unix,
             dateOfInsertionUnix: lastValue.date_of_insertion_unix,
             dataSources: [text.bronnen.rivm],
           }}
@@ -61,7 +61,7 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
           <KpiTile
             title={text.barscale_titel}
             metadata={{
-              date: lastValue.date_of_report_unix,
+              date: lastValue.date_unix,
               source: text.bronnen.rivm,
             }}
           >
@@ -76,7 +76,7 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
           <KpiTile
             title={text.kpi_titel}
             metadata={{
-              date: lastValue.date_of_report_unix,
+              date: lastValue.date_unix,
               source: text.bronnen.rivm,
             }}
           >
@@ -118,7 +118,7 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
             title: siteText.positief_geteste_personen.chloropleth_legenda.titel,
           }}
           metadata={{
-            date: lastValue.date_of_report_unix,
+            date: lastValue.date_unix,
             source: text.bronnen.rivm,
           }}
         >

@@ -122,7 +122,7 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
       <ChoroplethTile
         title={text.positief_geteste_personen.map_titel}
         metadata={{
-          date: data.tested_overall.last_value.date_of_report_unix,
+          date: data.tested_overall.last_value.date_unix,
           source: text.positief_geteste_personen.bronnen.rivm,
         }}
         description={text.positief_geteste_personen.map_toelichting}
