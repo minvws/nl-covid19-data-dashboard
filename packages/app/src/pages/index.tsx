@@ -218,7 +218,7 @@ export async function getStaticProps(): Promise<StaticProps> {
     process.cwd(),
     'public',
     'json',
-    'REGIONS.json'
+    'VR_COLLECTION.json'
   );
   const regionsFileContents = fs.readFileSync(regionsFilePath, 'utf8');
   const regionsData = JSON.parse(regionsFileContents) as Regions;
