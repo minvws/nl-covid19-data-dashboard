@@ -93,7 +93,11 @@ export function Marker<T>(props: MarkerProps<T>) {
       }}
     >
       {data.map((d, index) => (
-        <Point indicatorColor={d.color} style={{ top: d.y - index * 18 }} />
+        <Point
+          indicatorColor={d.color}
+          style={{ top: d.y - index * 18 }}
+          key={index}
+        />
       ))}
 
       {showLine && (

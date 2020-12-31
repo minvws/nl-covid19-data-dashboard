@@ -137,7 +137,6 @@ export function LineChart<T extends Value>({
 
   const yDomain = useMemo(() => [0, calculateYMax(trendsList, signaalwaarde)], [
     trendsList,
-    metricProperties,
     signaalwaarde,
   ]);
 
@@ -173,6 +172,31 @@ export function LineChart<T extends Value>({
     const y = point2.y - point1.y;
     return Math.sqrt(x * x + y * y);
   };
+
+  const toggleHoverElements = useCallback(
+    (
+      hide: boolean,
+      hoverPoints?: HoverPoint<T>[],
+      nearestPoint?: HoverPoint<T>
+    ) => {
+      if (hide) {
+        hideTooltip();
+        setMarkerProps(undefined);
+      } else if (hoverPoints?.length && nearestPoint) {
+        showTooltip({
+          tooltipData: hoverPoints.map((x) => x.data),
+          tooltipLeft: nearestPoint.x,
+          tooltipTop: nearestPoint.y,
+        });
+        setMarkerProps({
+          data: hoverPoints,
+          height,
+          padding,
+        });
+      }
+    },
+    [showTooltip, hideTooltip, height, padding]
+  );
 
   const handleHover = useCallback(
     (
@@ -218,32 +242,7 @@ export function LineChart<T extends Value>({
 
       toggleHoverElements(false, hoverPoints, nearest[0]);
     },
-    [bisect, trendsList]
-  );
-
-  const toggleHoverElements = useCallback(
-    (
-      hide: boolean,
-      hoverPoints?: HoverPoint<T>[],
-      nearestPoint?: HoverPoint<T>
-    ) => {
-      if (hide) {
-        hideTooltip();
-        setMarkerProps(undefined);
-      } else if (hoverPoints?.length && nearestPoint) {
-        showTooltip({
-          tooltipData: hoverPoints.map((x) => x.data),
-          tooltipLeft: nearestPoint.x,
-          tooltipTop: nearestPoint.y,
-        });
-        setMarkerProps({
-          data: hoverPoints,
-          height,
-          padding,
-        });
-      }
-    },
-    [showTooltip, hideTooltip]
+    [bisect, trendsList, linesConfig, toggleHoverElements]
   );
 
   const trendType = showFill ? 'area' : 'line';
@@ -279,6 +278,7 @@ export function LineChart<T extends Value>({
             <>
               {trendsList.map((trend, index) => (
                 <Trend
+                  key={index}
                   trend={trend}
                   type={trendType}
                   xScale={renderProps.xScale}
