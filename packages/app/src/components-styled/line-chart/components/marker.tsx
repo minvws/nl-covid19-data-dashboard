@@ -5,9 +5,9 @@ import { formatDateFromMilliseconds } from '~/utils/formatDate';
 import { ChartPadding } from '.';
 import { TrendValue, Value } from '../helpers';
 
-export type HoverPoint<T> = {
-  data: T & Value & TrendValue;
-  color: string;
+export type HoverPoint<T extends Value> = {
+  data: T & TrendValue;
+  color?: string;
   x: number;
   y: number;
 };
@@ -82,16 +82,16 @@ const LineContainer = styled.div`
   position: absolute;
 `;
 
-type MarkerProps<T> = {
+type MarkerProps<T extends Value> = {
   data: HoverPoint<T>[];
   height: number;
   primaryColor?: string;
   padding: ChartPadding;
   showLine: boolean;
-  formatLabel?: (data: T & Value & TrendValue) => string;
+  formatLabel?: (data: T & TrendValue) => string;
 };
 
-export function Marker<T>(props: MarkerProps<T>) {
+export function Marker<T extends Value>(props: MarkerProps<T>) {
   const {
     primaryColor = colors.data.primary,
     data,
@@ -143,6 +143,6 @@ export function Marker<T>(props: MarkerProps<T>) {
   );
 }
 
-function defaultFormatLabel<T>(data: T & Value & TrendValue): string {
+function defaultFormatLabel<T>(data: T & TrendValue): string {
   return formatDateFromMilliseconds(data.__date.getTime());
 }

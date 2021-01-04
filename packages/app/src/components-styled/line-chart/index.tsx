@@ -162,7 +162,7 @@ export function LineChart<T extends Value>({
     [padding]
   );
 
-  const distance = (point1: HoverPoint<unknown>, point2: Point) => {
+  const distance = (point1: HoverPoint<Value>, point2: Point) => {
     const x = point2.x - point1.x;
     const y = point2.y - point1.y;
     return Math.sqrt(x * x + y * y);
@@ -225,14 +225,16 @@ export function LineChart<T extends Value>({
             : undefined;
         })
         .filter(isDefined)
-        .map<HoverPoint<T>>(({ data, color }) => {
-          return {
-            data,
-            color,
-            x: xScale(data.__date),
-            y: yScale(data.__value),
-          } as HoverPoint<T>;
-        });
+        .map<HoverPoint<T>>(
+          ({ data, color }: { data: any; color?: string }) => {
+            return {
+              data,
+              color,
+              x: xScale(data.__date) ?? 0,
+              y: yScale(data.__value) ?? 0,
+            };
+          }
+        );
       const nearest = hoverPoints.slice().sort(sortByNearest);
 
       toggleHoverElements(false, hoverPoints, nearest[0]);
@@ -336,9 +338,7 @@ function formatDefaultTooltip<T extends Value>(
   const isWeekly = isWeeklyValue(values);
 
   if (isDaily) {
-    return `${formatDateFromMilliseconds(
-      (value as TrendValue).__date.getTime()
-    )}: ${
+    return `${formatDateFromMilliseconds(value.__date.getTime())}: ${
       isPercentage
         ? `${formatPercentage(value.__value)}%`
         : formatNumber(value.__value)
@@ -362,7 +362,7 @@ function formatDefaultTooltip<T extends Value>(
   );
 }
 
-function useTooltip<T>() {
+function useTooltip<T extends Value>() {
   const [tooltipData, setTooltipData] = useState<T[]>();
   const [tooltipLeft, setTooltipLeft] = useState<number>();
   const [tooltipTop, setTooltipTop] = useState<number>();
