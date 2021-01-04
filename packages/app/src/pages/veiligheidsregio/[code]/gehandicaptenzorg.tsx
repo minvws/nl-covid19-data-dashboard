@@ -59,7 +59,7 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
           )}
           metadata={{
             datumsText: positiveTestPeopleText.datums,
-            dateInfo: lastValue.date_unix,
+            dateOrRange: lastValue.date_unix,
             dateOfInsertionUnix: lastValue.date_of_insertion_unix,
             dataSources: [positiveTestPeopleText.bronnen.rivm],
           }}
@@ -103,7 +103,7 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
           subtitle={locationsText.pagina_toelichting}
           metadata={{
             datumsText: locationsText.datums,
-            dateInfo: lastValue.date_unix,
+            dateOrRange: lastValue.date_unix,
             dateOfInsertionUnix: lastValue.date_of_insertion_unix,
             dataSources: [locationsText.bronnen.rivm],
           }}
@@ -165,7 +165,7 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
           subtitle={mortalityText.pagina_toelichting}
           metadata={{
             datumsText: mortalityText.datums,
-            dateInfo: lastValue.date_unix,
+            dateOrRange: lastValue.date_unix,
             dateOfInsertionUnix: lastValue.date_of_insertion_unix,
             dataSources: [mortalityText.bronnen.rivm],
           }}

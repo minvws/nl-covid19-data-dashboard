@@ -38,7 +38,7 @@ const DeceasedNationalPage: FCWithLayout<NationalPageProps> = (props) => {
           reference={text.section_deceased_rivm.reference}
           metadata={{
             datumsText: text.section_deceased_rivm.datums,
-            dateInfo: dataRivm.last_value.date_unix,
+            dateOrRange: dataRivm.last_value.date_unix,
             dateOfInsertionUnix: dataRivm.last_value.date_of_insertion_unix,
             dataSources: [text.section_deceased_rivm.bronnen.rivm],
           }}

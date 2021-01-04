@@ -38,9 +38,9 @@ const BehaviorPage: FCWithLayout<NationalPageProps> = (props) => {
           subtitle={text.pagina.toelichting}
           metadata={{
             datumsText: text.datums,
-            dateInfo: {
-              weekStartUnix: behaviorData.last_value.date_start_unix,
-              weekEndUnix: behaviorData.last_value.date_end_unix,
+            dateOrRange: {
+              start: behaviorData.last_value.date_start_unix,
+              end: behaviorData.last_value.date_end_unix,
             },
             dateOfInsertionUnix: behaviorData.last_value.date_of_insertion_unix,
             dataSources: [text.bronnen.rivm],

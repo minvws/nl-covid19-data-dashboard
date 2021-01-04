@@ -37,7 +37,7 @@ const SuspectedPatients: FCWithLayout<NationalPageProps> = (props) => {
           subtitle={text.pagina_toelichting}
           metadata={{
             datumsText: text.datums,
-            dateInfo: lastValue.date_end_unix,
+            dateOrRange: lastValue.date_end_unix,
             dateOfInsertionUnix: lastValue.date_of_insertion_unix,
             dataSources: [text.bronnen.nivel],
           }}

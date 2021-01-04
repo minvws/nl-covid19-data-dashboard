@@ -95,7 +95,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
           subtitle={text.pagina_toelichting}
           metadata={{
             datumsText: text.datums,
-            dateInfo: dataInfectedDelta.last_value.date_unix,
+            dateOrRange: dataInfectedDelta.last_value.date_unix,
             dateOfInsertionUnix:
               dataInfectedDelta.last_value.date_of_insertion_unix,
             dataSources: [text.bronnen.rivm],
@@ -246,9 +246,9 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
           subtitle={ggdText.toelichting}
           metadata={{
             datumsText: ggdText.datums,
-            dateInfo: {
-              weekStartUnix: dataGgdAverageLastValue.date_start_unix,
-              weekEndUnix: dataGgdAverageLastValue.date_end_unix,
+            dateOrRange: {
+              start: dataGgdAverageLastValue.date_start_unix,
+              end: dataGgdAverageLastValue.date_end_unix,
             },
             dateOfInsertionUnix: dataGgdAverageLastValue.date_of_insertion_unix,
             dataSources: [ggdText.bronnen.rivm],

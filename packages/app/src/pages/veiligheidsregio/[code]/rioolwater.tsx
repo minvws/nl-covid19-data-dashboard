@@ -75,9 +75,9 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
           subtitle={text.pagina_toelichting}
           metadata={{
             datumsText: text.datums,
-            dateInfo: {
-              weekStartUnix: sewerAverages.last_value.date_start_unix,
-              weekEndUnix: sewerAverages.last_value.date_end_unix,
+            dateOrRange: {
+              start: sewerAverages.last_value.date_start_unix,
+              end: sewerAverages.last_value.date_end_unix,
             },
             dateOfInsertionUnix:
               sewerAverages.last_value.date_of_insertion_unix,
