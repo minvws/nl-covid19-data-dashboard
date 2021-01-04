@@ -4,6 +4,7 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import { Box } from '~/components-styled/base';
 import { getLocale } from '~/utils/getLocale';
+import { LinkRadialLine } from '@visx/shape';
 
 export function LanguageSwitcher() {
   const router = useRouter();
@@ -17,25 +18,23 @@ export function LanguageSwitcher() {
 
     return (
       <Box height={55} mt={-55} textAlign="right">
-        <LanguageLink
-          as={Link}
-          href={router.asPath}
-          locale="nl"
-          isActive={routerLocale === 'nl'}
-          title="Website in het Nederlands"
-        >
-          NL
-        </LanguageLink>
+        <Link href={router.asPath} locale="nl" passHref>
+          <LanguageLink
+            isActive={routerLocale === 'nl'}
+            title="Website in het Nederlands"
+          >
+            NL
+          </LanguageLink>
+        </Link>
         <span aria-hidden="true">|</span>
-        <LanguageLink
-          as={Link}
-          href={router.asPath}
-          locale="en-GB"
-          isActive={routerLocale === 'en-GB'}
-          title="Website in English"
-        >
-          EN
-        </LanguageLink>
+        <Link href={router.asPath} locale="en-GB" passHref>
+          <LanguageLink
+            isActive={routerLocale === 'en-GB'}
+            title="Website in English"
+          >
+            EN
+          </LanguageLink>
+        </Link>
       </Box>
     );
   }
@@ -47,7 +46,6 @@ export function LanguageSwitcher() {
         lang="nl"
         hrefLang="nl"
         isActive={locale === 'nl'}
-        locale="nl_NL"
         title="Website in het Nederlands"
       >
         NL
