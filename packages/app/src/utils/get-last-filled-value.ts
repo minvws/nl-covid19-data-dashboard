@@ -19,8 +19,6 @@ export function getLastFilledValue<T>(metric: Metric<T>) {
 
   const values = metric.values;
 
-  // assert(values, `Unable to find ${metricName}.values[]`);
-
   /**
    * Start iterating over the most recent values. Do not mutate because it will
    * flip the charts x-axis.
@@ -32,6 +30,7 @@ export function getLastFilledValue<T>(metric: Metric<T>) {
       return value as T;
     }
   }
+
   throw new Error(
     `Failed to find full non-null object for data shaped like ${JSON.stringify(
       lastValue
