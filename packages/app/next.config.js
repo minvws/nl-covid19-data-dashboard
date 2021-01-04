@@ -23,6 +23,11 @@ const i18Settings = {
   // This is the default locale you want to be used when visiting
   // a non-locale prefixed path e.g. `/hello`
   defaultLocale: 'nl-NL',
+  // When localeDetection is set to false Next.js will no longe
+  // automatically redirect based on the user's preferred locale
+  // and will only provide locale information detected from either the
+  // locale based domain or locale path as described above.
+  localeDetection: false,
   // This is a list of locale domains and the default locale they
   // should handle (these are only required when setting up domain routing)
   domains: [
