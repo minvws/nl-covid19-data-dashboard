@@ -27,7 +27,6 @@ const DottedLine = styled.div<ColorProps>`
   border-left-width: 1px;
   border-left-style: dashed;
   border-left-color: ${(props) => props.indicatorColor || 'black'};
-  position: relative;
 `;
 
 const Point = styled.div<ColorProps>`
