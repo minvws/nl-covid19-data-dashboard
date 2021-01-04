@@ -2118,5 +2118,6 @@
     "VR23": "http://vrln.nl/",
     "VR24": "http://www.vrzuidlimburg.nl/",
     "VR25": "http://www.veiligheidsregioflevoland.nl/"
-  }
+  },
+  "common.tooltip.positive_tested_value": ""
 }
