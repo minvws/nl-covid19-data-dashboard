@@ -147,8 +147,8 @@ function NationalLayout(props: NationalLayoutProps) {
                   <SidebarMetric
                     data={data}
                     scope="nl"
-                    metricName="infectious_people_last_known_average"
-                    metricProperty="infectious_avg"
+                    metricName="infectious_people"
+                    metricProperty="estimate"
                     localeTextKey="besmettelijke_personen"
                   />
                 </MetricMenuItemLink>

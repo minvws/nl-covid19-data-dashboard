@@ -11,7 +11,7 @@ interface SidebarBarScaleProps<T> {
   scope: DataScope;
   data: T;
   localeTextKey: keyof TALLLanguages;
-  metricName: ValueOf<MetricKeys<T>>;
+  metricName: MetricKeys<T>;
   metricProperty: string;
 }
 

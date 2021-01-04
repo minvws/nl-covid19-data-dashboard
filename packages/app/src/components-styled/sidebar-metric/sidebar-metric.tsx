@@ -3,9 +3,14 @@ import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
 import { MetricKeys } from '~/components/choropleth/shared';
 import siteText, { TALLLanguages } from '~/locale/index';
-import { DataScope, getMetricConfig } from '~/metric-config';
+import {
+  DataScope,
+  getMetricConfig,
+  metricContainsPartialData,
+} from '~/metric-config';
 import { assert } from '~/utils/assert';
 import { formatDateFromSeconds } from '~/utils/formatDate';
+import { getLastFilledValue } from '~/utils/get-last-filled-value';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { SidebarBarScale } from './sidebar-barscale';
 import { SidebarKpiValue } from './sidebar-kpi-value';
@@ -13,7 +18,7 @@ import { SidebarKpiValue } from './sidebar-kpi-value';
 interface SidebarMetricProps<T extends { difference: unknown }> {
   scope: DataScope;
   data: T;
-  metricName: ValueOf<MetricKeys<T>>;
+  metricName: MetricKeys<T>;
   /**
    * Make metric property optional for odd case where we do not show a metric.
    * Currently only behavior is doing that.
@@ -30,7 +35,7 @@ interface SidebarMetricProps<T extends { difference: unknown }> {
    * metric name and metric property.
    */
   altBarScaleMetric?: {
-    metricName: ValueOf<MetricKeys<T>>;
+    metricName: MetricKeys<T>;
     metricProperty: string;
   };
 }
@@ -46,10 +51,14 @@ export function SidebarMetric<T extends { difference: unknown }>({
   annotationKey,
   altBarScaleMetric,
 }: SidebarMetricProps<T>) {
-  const lastValue = get(data, [
-    (metricName as unknown) as string,
-    'last_value',
-  ]);
+  const lastValue = metricContainsPartialData((metricName as unknown) as string)
+    ? // @ts-ignore
+      (getLastFilledValue(data[metricName]) as data[metricName])
+    : get(data, [(metricName as unknown) as string, 'last_value']);
+
+  // console.log(metricName, data[metricName]);
+  // @ts-ignore
+  // const lastValue = getLastFilledValue(data[metricName]) as data[metricName];
 
   const propertyValue = metricProperty && lastValue[metricProperty];
 

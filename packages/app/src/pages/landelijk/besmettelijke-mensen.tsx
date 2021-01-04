@@ -57,7 +57,7 @@ const InfectiousPeople: FCWithLayout<NationalPageProps> = (props) => {
             }}
           >
             <KpiValue
-              data-cy="infectious_avg"
+              data-cy="estimate"
               /**
                * Somehow non-null assertion via ! was not allowed. At this point
                * we can be sure that estimate exists

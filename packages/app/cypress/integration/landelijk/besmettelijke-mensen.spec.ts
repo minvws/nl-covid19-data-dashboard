@@ -1,5 +1,6 @@
 import { NationalContext } from 'cypress/integration/types';
 import { formatNumber } from '~/utils/formatNumber';
+import { getLastFilledValue } from '~/utils/get-last-filled-value';
 
 context('Landelijk - Besmettelijke mensen', () => {
   before(() => {
@@ -7,11 +8,10 @@ context('Landelijk - Besmettelijke mensen', () => {
   });
 
   it('Should show the correct KPI values', function (this: NationalContext) {
-    const lastValue = this.nationalData.infectious_people_last_known_average
-      .last_value;
+    const lastValue = getLastFilledValue(this.nationalData.infectious_people);
 
     const kpiTestInfo = {
-      infectious_avg: formatNumber(lastValue.infectious_avg),
+      estimate: formatNumber(lastValue.estimate),
     };
 
     cy.checkKpiValues(kpiTestInfo);
