@@ -51,14 +51,15 @@ export function SidebarMetric<T extends { difference: unknown }>({
   annotationKey,
   altBarScaleMetric,
 }: SidebarMetricProps<T>) {
+  /**
+   * @TODO this is still a bit messy due to improper typing. Not sure how to
+   * fix this easily. The getLastFilledValue function is not strongly typed on
+   * a certain metric but here we don't have that type as input.
+   */
   const lastValue = metricContainsPartialData((metricName as unknown) as string)
     ? // @ts-ignore
       (getLastFilledValue(data[metricName]) as data[metricName])
     : get(data, [(metricName as unknown) as string, 'last_value']);
-
-  // console.log(metricName, data[metricName]);
-  // @ts-ignore
-  // const lastValue = getLastFilledValue(data[metricName]) as data[metricName];
 
   const propertyValue = metricProperty && lastValue[metricProperty];
 
