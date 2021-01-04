@@ -3,7 +3,7 @@ const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const sitemap = require('./generate-sitemap.js');
 
 const withTM = require('next-transpile-modules')([
-  '@visx/tooltip',
+  '@visx/scale',
   '@visx/event',
 ]);
 
@@ -54,6 +54,22 @@ const nextConfig = {
         paths: true,
       })
     );
+
+    /**
+     * Add the polyfill.js file to our entries
+     */
+    const originalEntry = config.entry;
+    config.entry = async () => {
+      const entries = await originalEntry();
+
+      if (
+        entries['main.js'] &&
+        !entries['main.js'].includes('./src/polyfills.js')
+      ) {
+        entries['main.js'].unshift('./src/polyfills.js');
+      }
+      return entries;
+    };
 
     return config;
   },
