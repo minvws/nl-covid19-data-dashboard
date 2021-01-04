@@ -1,6 +1,7 @@
 import { isDefined, isPresent } from 'ts-is-present';
 import { assert } from '~/utils/assert';
 import { getDaysForTimeframe, TimeframeOption } from '~/utils/timeframe';
+import { NumberProperty } from '.';
 
 export type Value = DailyValue | WeeklyValue;
 
@@ -52,20 +53,15 @@ export function isWeeklyValue(
  * values.
  */
 export function calculateYMax(
-  values: Value[],
-  metricProperties: string[],
+  values: TrendValue[][],
   signaalwaarde = -Infinity
 ) {
-  const peakValues: number[] = [];
-
-  for (const key of metricProperties) {
-    const peakValue = values
-      .map((x) => (x as AnyValue)[key])
+  const peakValues = values.map((list) =>
+    list
+      .map((x) => x.__value)
       .filter(isPresent) // omit null values
-      .reduce((acc, value) => (value > acc ? value : acc), -Infinity);
-
-    peakValues.push(peakValue);
-  }
+      .reduce((acc, value) => (value > acc ? value : acc), -Infinity)
+  );
 
   const overallMaximum = Math.max(...peakValues);
 
@@ -117,9 +113,17 @@ export type TrendValue = {
 
 const timestampToDate = (d: number) => new Date(d * 1000);
 
-export function getTrendData(
-  values: Value[],
-  valueKey: string,
+export function getTrendData<T extends Value>(
+  values: T[],
+  valueKeys: NumberProperty<T>[],
+  timeframe: TimeframeOption
+): (TrendValue & Value)[][] {
+  return valueKeys.map((key) => getSingleTrendData(values, key, timeframe));
+}
+
+export function getSingleTrendData<T extends Value>(
+  values: T[],
+  valueKey: NumberProperty<T>,
   timeframe: TimeframeOption
 ): (TrendValue & Value)[] {
   const valuesInFrame = getTimeframeValues(values, timeframe);
@@ -141,7 +145,7 @@ export function getTrendData(
          * Not sure why we need to cast to number if isPresent is used to filter
          * out the null values.
          */
-        __value: (x as AnyValue)[valueKey] as number,
+        __value: x[valueKey as keyof DailyValue],
         __date: timestampToDate(x.date_of_report_unix),
       }))
       .filter((x) => isPresent(x.__value));
@@ -155,7 +159,7 @@ export function getTrendData(
          * Not sure why we need to cast to number if isPresent is used to filter
          * out the null values.
          */
-        __value: (x as AnyValue)[valueKey] as number,
+        __value: x[valueKey as keyof WeeklyValue],
         __date: timestampToDate(x.week_start_unix),
       }))
       .filter((x) => isPresent(x.__value));

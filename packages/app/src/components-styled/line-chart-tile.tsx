@@ -5,7 +5,7 @@ import { TimeframeOption } from '~/utils/timeframe';
 import { ChartTileWithTimeframe } from './chart-tile';
 import { MetadataProps } from './metadata';
 
-interface LineChartTileProps<T> extends LineChartProps<T> {
+interface LineChartTileProps<T extends Value> extends LineChartProps<T> {
   title: string;
   metadata: MetadataProps;
   description?: string;
