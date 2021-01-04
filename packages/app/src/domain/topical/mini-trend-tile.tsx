@@ -3,22 +3,22 @@ import { GridRows } from '@visx/grid';
 import { ParentSize } from '@visx/responsive';
 import { ReactNode } from 'react';
 import { Box } from '~/components-styled/base';
-import { LineChart } from '~/components-styled/line-chart';
+import { LineChart, NumberProperty } from '~/components-styled/line-chart';
 import {
   ComponentCallbackInfo,
   defaultPadding,
-} from '~/components-styled/line-chart/components/chart';
+} from '~/components-styled/line-chart/components';
 import { Value } from '~/components-styled/line-chart/helpers';
 import { Heading } from '~/components-styled/typography';
 import text from '~/locale';
 import { formatNumber } from '~/utils/formatNumber';
 
-type MiniTrendTileProps<T> = {
+type MiniTrendTileProps<T extends Value> = {
   icon: JSX.Element;
   title: string;
   text: ReactNode;
   trendData: T[];
-  metricProperty: keyof T;
+  metricProperty: NumberProperty<T>;
 };
 
 export function MiniTrendTile<T extends Value>(props: MiniTrendTileProps<T>) {
@@ -44,7 +44,7 @@ export function MiniTrendTile<T extends Value>(props: MiniTrendTileProps<T>) {
                   linesConfig={[{ metricProperty }]}
                   componentCallback={componentCallback}
                   showMarkerLine={true}
-                  formatTooltip={(value) => formatNumber(value.__value)}
+                  formatTooltip={(values) => formatNumber(values[0].__value)}
                   padding={{
                     ...defaultPadding,
                     left: 0,

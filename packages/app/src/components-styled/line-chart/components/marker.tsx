@@ -2,8 +2,15 @@ import styled from 'styled-components';
 import { Text } from '~/components-styled/typography';
 import { colors } from '~/style/theme';
 import { formatDateFromMilliseconds } from '~/utils/formatDate';
+import { ChartPadding } from '.';
 import { TrendValue, Value } from '../helpers';
-import { ChartPadding } from './chart';
+
+export type HoverPoint<T extends Value> = {
+  data: T & TrendValue;
+  color?: string;
+  x: number;
+  y: number;
+};
 
 type ColorProps = {
   indicatorColor: string;
@@ -24,6 +31,7 @@ const DottedLine = styled.div<ColorProps>`
 
 const Point = styled.div<ColorProps>`
   pointer-events: none;
+  position: relative;
   height: 18px;
   width: 18px;
 
@@ -43,7 +51,7 @@ const Point = styled.div<ColorProps>`
     position: absolute;
     height: 18px;
     width: 18px;
-    transform: translate(0, -50%);
+    transform: translate(0, -45%);
     border-radius: 50%;
     background: ${(props) => props.indicatorColor || 'black'};
     opacity: 0.2;
@@ -51,33 +59,40 @@ const Point = styled.div<ColorProps>`
 `;
 
 const MarkerContainer = styled.div`
-  transform: translate(-50%, 0);
   pointer-events: none;
+  transform: translate(-50%, 0);
   position: absolute;
   display: flex;
   flex-direction: column;
   align-items: center;
   flex-grow: 0;
   flex-shrink: 0;
-  min-width: 5em;
+  min-width: 26px;
+  background-color: rgba(0, 0, 0, 0.03);
 `;
 
-type MarkerProps<T> = {
-  x: number;
-  y: number;
+const LineContainer = styled.div`
+  pointer-events: none;
+  transform: translate(-50%, 0);
+  min-width: 26px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+`;
+
+type MarkerProps<T extends Value> = {
+  data: HoverPoint<T>[];
   height: number;
   primaryColor?: string;
-  data: any;
   padding: ChartPadding;
   showLine: boolean;
-  formatLabel?: (data: T) => string;
+  formatLabel?: (data: T & TrendValue) => string;
 };
 
-export function Marker<T>(props: MarkerProps<T>) {
+export function Marker<T extends Value>(props: MarkerProps<T>) {
   const {
     primaryColor = colors.data.primary,
-    x,
-    y,
     data,
     height,
     padding,
@@ -85,28 +100,48 @@ export function Marker<T>(props: MarkerProps<T>) {
     formatLabel = defaultFormatLabel,
   } = props;
 
+  const topY = data.reduce((min, d) => {
+    return Math.min(d.y, min);
+  }, Infinity);
+
   return (
-    <MarkerContainer style={{ top: y, left: x }}>
-      <Point indicatorColor={primaryColor} />
+    <>
+      <MarkerContainer
+        style={{
+          top: padding.top,
+          left: data[0].x + padding.left,
+          height: height - (padding.top + padding.bottom),
+        }}
+      >
+        {data.map((d, index) => (
+          <Point
+            indicatorColor={d.color ?? colors.data.primary}
+            style={{ top: d.y - index * 18 }}
+            key={d.y}
+          />
+        ))}
+      </MarkerContainer>
       {showLine && (
-        <>
+        <LineContainer
+          style={{ top: `${topY + 9}px`, left: data[0].x + padding.left }}
+        >
           <DottedLine
             indicatorColor={primaryColor}
             style={{
-              height: `${height - y - (padding.top + padding.bottom + 6)}px`,
+              height: `${height - topY - (padding.top + padding.bottom) + 9}px`,
             }}
           />
           <Label>
             <Text fontSize={0} fontWeight="bold" m={0}>
-              {formatLabel(data)}
+              {formatLabel(data[0].data)}
             </Text>
           </Label>
-        </>
+        </LineContainer>
       )}
-    </MarkerContainer>
+    </>
   );
 }
 
-function defaultFormatLabel<T extends Value & TrendValue>(data: T): string {
+function defaultFormatLabel<T>(data: T & TrendValue): string {
   return formatDateFromMilliseconds(data.__date.getTime());
 }

@@ -2,13 +2,10 @@ import { AxisBottom, AxisLeft, TickFormatter } from '@visx/axis';
 import { GridRows } from '@visx/grid';
 import { Group } from '@visx/group';
 import { scaleLinear, scaleTime } from '@visx/scale';
-import { Line } from '@visx/shape';
+import { Bar, Line } from '@visx/shape';
 import { Text } from '@visx/text';
-import { bisectLeft } from 'd3-array';
-import { ComponentProps, memo, ReactNode, useCallback } from 'react';
-import { colors } from '~/style/theme';
-import { TrendValue } from '../helpers';
-import { Trend, TrendType } from './trend';
+import { ScaleLinear, ScaleTime } from 'd3-scale';
+import { ComponentProps, memo, MouseEvent, ReactNode, TouchEvent } from 'react';
 
 const NUM_TICKS = 3;
 
@@ -27,7 +24,6 @@ export const defaultPadding: ChartPadding = {
 };
 
 const defaultColors = {
-  main: colors.data.primary,
   axis: '#C4C4C4',
   axisLabels: '#666666',
   benchmark: '#4f5458',
@@ -38,20 +34,20 @@ type Benchmark = {
   label: string;
 };
 
+export type ChartScales = {
+  xScale: ScaleTime<number, number>;
+  yScale: ScaleLinear<number, number>;
+};
+
 export type ComponentCallbackFunction = (
   callbackInfo: ComponentCallbackInfo
 ) => ReactNode | undefined;
 
-type ChartProps = {
+type ChartAxesProps = {
   benchmark?: Benchmark;
-  isHovered: boolean;
-  trend: TrendValue[];
-  type: TrendType;
   onHover: (
-    event: React.TouchEvent<SVGRectElement> | React.MouseEvent<SVGRectElement>,
-    data?: any,
-    xPosition?: number,
-    yPosition?: number
+    event: React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>,
+    scales: ChartScales
   ) => void;
   xDomain: [Date, Date];
   yDomain: number[];
@@ -60,26 +56,25 @@ type ChartProps = {
   padding?: ChartPadding;
   formatXAxis: TickFormatter<Date>;
   formatYAxis: TickFormatter<number>;
+  children: (props: ChartScales) => ReactNode;
   componentCallback?: ComponentCallbackFunction;
 };
 
-export type AnyTickFormatter = (value: any) => string;
+type AnyTickFormatter = (value: any) => string;
 
-export const Chart = memo(function Chart({
-  trend,
-  type,
+export const ChartAxes = memo(function ChartAxes({
   width,
   height,
   padding = defaultPadding,
   xDomain,
   yDomain,
   onHover,
-  isHovered,
   benchmark,
   formatXAxis,
   formatYAxis,
+  children,
   componentCallback = () => undefined,
-}: ChartProps) {
+}: ChartAxesProps) {
   const bounded = {
     width: width - padding.left - padding.right,
     height: height - padding.top - padding.bottom,
@@ -96,25 +91,11 @@ export const Chart = memo(function Chart({
     nice: NUM_TICKS,
   });
 
-  const bisect = useCallback(
-    (trend: TrendValue[], xPosition: number) => {
-      if (trend.length === 1) return trend[0];
+  const scales = { xScale, yScale };
 
-      const date = xScale.invert(xPosition - padding.left);
-
-      const index = bisectLeft(
-        trend.map((x) => x.__date),
-        date,
-        1
-      );
-
-      const d0 = trend[index - 1];
-      const d1 = trend[index];
-
-      return +date - +d0.__date > +d1.__date - +date ? d1 : d0;
-    },
-    [padding, xScale]
-  );
+  const handleMouse = (
+    event: TouchEvent<SVGElement> | MouseEvent<SVGElement>
+  ) => onHover(event, scales);
 
   return (
     <svg width={width} height={height} role="img">
@@ -163,7 +144,7 @@ export const Chart = memo(function Chart({
               tickLabelProps: () => ({
                 fill: defaultColors.axisLabels,
                 fontSize: 12,
-                dx: -5,
+                dx: 0,
                 textAnchor: 'end',
                 verticalAnchor: 'middle',
               }),
@@ -195,18 +176,19 @@ export const Chart = memo(function Chart({
           </Group>
         )}
 
-        <Trend
-          trend={trend}
-          type={type}
-          height={bounded.height}
-          width={bounded.width}
-          xScale={xScale}
-          yScale={yScale}
-          color={defaultColors.main}
-          onHover={onHover}
-          isHovered={isHovered}
-          bisect={bisect}
+        <Bar
+          x={0}
+          y={0}
+          width={width}
+          height={height}
+          fill="transparent"
+          onTouchStart={handleMouse}
+          onTouchMove={handleMouse}
+          onMouseMove={handleMouse}
+          onMouseLeave={handleMouse}
         />
+
+        {children(scales)}
       </Group>
     </svg>
   );

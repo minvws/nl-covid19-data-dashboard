@@ -22,6 +22,7 @@ export type TooltipProps = {
 type TooltipContainerProps = {
   borderColor: string;
 };
+
 const TooltipContainer = styled.div<TooltipContainerProps>`
   pointer-events: none;
   position: absolute;
@@ -34,6 +35,7 @@ const TooltipContainer = styled.div<TooltipContainerProps>`
     py: 1,
     fontSize: 1,
   })};
+  z-index: 100;
 `;
 
 /**

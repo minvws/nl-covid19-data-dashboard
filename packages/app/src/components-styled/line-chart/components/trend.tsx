@@ -1,14 +1,16 @@
-import { localPoint } from '@visx/event';
-import { AreaClosed, Bar, LinePath } from '@visx/shape';
-import { useCallback } from 'react';
+import { AreaClosed, LinePath } from '@visx/shape';
+import { MouseEvent, TouchEvent, useState } from 'react';
+import { colors } from '~/style/theme';
 import { TrendValue } from '../helpers';
+import { ChartScales } from './chart-axes';
 
 export type TrendType = 'line' | 'area';
+export type LineStyle = 'solid' | 'dashed';
 
 export type TrendProps = {
-  isHovered: boolean;
   trend: TrendValue[];
-  type: TrendType;
+  type?: TrendType;
+  style?: LineStyle;
   /**
    * I would like to type these as follows:
    *
@@ -20,92 +22,65 @@ export type TrendProps = {
    */
   xScale: any;
   yScale: any;
+  color?: string;
   onHover: (
-    event: React.TouchEvent<SVGRectElement> | React.MouseEvent<SVGRectElement>,
-    data?: TrendValue,
-    xPosition?: number,
-    yPosition?: number
+    event: TouchEvent<SVGElement> | MouseEvent<SVGElement>,
+    scales: ChartScales
   ) => void;
-  height: number;
-  width: number;
-  bisect: (trend: TrendValue[], xPosition: number) => TrendValue;
-  color: string;
 };
 
 export function Trend({
   trend,
   type = 'line',
-  color,
+  style = 'solid',
+  color = colors.data.primary,
   xScale,
   yScale,
   onHover,
-  height,
-  width,
-  isHovered,
-  bisect,
 }: TrendProps) {
-  const handlePointerMove = useCallback(
-    (
-      event: React.TouchEvent<SVGRectElement> | React.MouseEvent<SVGRectElement>
-    ) => {
-      if (trend.length < 1) return null;
+  const [isHovered, setIsHovered] = useState(false);
 
-      const { x } = localPoint(event) || { x: 0 };
-      const pointData = bisect(trend, x);
+  const scales = { xScale, yScale };
 
-      onHover(
-        event,
-        pointData,
-        xScale(pointData.__date),
-        yScale(pointData.__value)
-      );
-    },
-    [onHover, yScale, xScale, trend, bisect]
-  );
+  const handleHover = (
+    event: TouchEvent<SVGElement> | MouseEvent<SVGElement>
+  ) => {
+    const isLeave = event.type === 'mouseleave';
+    setIsHovered(!isLeave);
+    onHover(event, scales);
+  };
+
+  const dashes = style === 'dashed' ? 4 : undefined;
 
   return (
     <>
-      {type === 'line' && (
-        <LinePath
+      {type === 'area' && (
+        <AreaClosed
+          style={{ pointerEvents: 'all' }}
           data={trend}
           x={(d) => xScale(d.__date)}
           y={(d) => yScale(d.__value)}
-          stroke={color}
-          strokeWidth={isHovered ? 3 : 2}
+          fill={color}
+          fillOpacity={0.05}
+          yScale={yScale}
+          onTouchStart={handleHover}
+          onMouseLeave={handleHover}
+          onMouseOver={handleHover}
+          onMouseMove={handleHover}
         />
       )}
-
-      {type === 'area' && (
-        <>
-          <AreaClosed
-            data={trend}
-            x={(d) => xScale(d.__date)}
-            y={(d) => yScale(d.__value)}
-            fill={color}
-            fillOpacity={0.05}
-            yScale={yScale}
-          />
-          <LinePath
-            data={trend}
-            x={(d) => xScale(d.__date)}
-            y={(d) => yScale(d.__value)}
-            stroke={color}
-            strokeWidth={isHovered ? 3 : 2}
-          />
-        </>
-      )}
-
-      <Bar
-        x={0}
-        y={0}
-        width={width}
-        height={height}
-        fill="transparent"
-        rx={14}
-        onTouchStart={handlePointerMove}
-        onTouchMove={handlePointerMove}
-        onMouseMove={handlePointerMove}
-        onMouseLeave={(event) => onHover(event)}
+      <LinePath
+        style={{ pointerEvents: 'all' }}
+        data={trend}
+        x={(d) => xScale(d.__date)}
+        y={(d) => yScale(d.__value)}
+        stroke={color}
+        strokeWidth={isHovered ? 3 : 2}
+        strokeDasharray={dashes}
+        onTouchStart={handleHover}
+        onMouseLeave={handleHover}
+        onMouseOver={handleHover}
+        onMouseMove={handleHover}
       />
     </>
   );
