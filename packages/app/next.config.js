@@ -19,10 +19,10 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 const i18Settings = {
   // These are all the locales you want to support in
   // your application
-  locales: ['en-GB', 'nl-NL'],
+  locales: ['en-GB', 'nl'],
   // This is the default locale you want to be used when visiting
   // a non-locale prefixed path e.g. `/hello`
-  defaultLocale: 'nl-NL',
+  defaultLocale: 'nl',
   // When localeDetection is set to false Next.js will no longe
   // automatically redirect based on the user's preferred locale
   // and will only provide locale information detected from either the
@@ -37,7 +37,7 @@ const i18Settings = {
     },
     {
       domain: process.env.PREVIEW_SERVER_NL,
-      defaultLocale: 'nl-NL',
+      defaultLocale: 'nl',
     },
   ],
 };

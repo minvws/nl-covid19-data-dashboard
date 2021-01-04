@@ -30,17 +30,14 @@ import { assert } from '~/utils/assert';
 import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { EscalationMapLegenda } from './veiligheidsregio';
-
-interface StaticProps {
-  props: INationalHomepageData;
-}
+import { getLocale } from '~/utils/getLocale';
 
 interface INationalHomepageData {
   data: National;
   text: TALLLanguages;
   lastGenerated: string;
   escalationLevelCounts: EscalationLevelCounts;
-  locale: 'nl_NL' | 'en_GB';
+  locale: 'nl' | 'en_GB';
 }
 
 /**
@@ -199,7 +196,13 @@ const getEscalationCounts = (
   return counts;
 };
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
+export const getStaticProps: GetStaticProps = async (context) => {
+  // This locale variable comes from Next.js, not from our custom code
+  // We set a default using the existing getLocale function because on
+  // non-preview servers this would return undefined, which is
+  // unacceptable in getStaticProps
+  const { locale = getLocale() } = context;
+
   const text = parseMarkdownInLocale((await import('../locale/index')).default);
 
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
