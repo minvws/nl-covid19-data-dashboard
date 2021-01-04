@@ -31,13 +31,7 @@ export function KpiWithIllustrationTile({
   return (
     <Tile>
       <Box display="flex" flexWrap="wrap">
-        <Box
-          mb={4}
-          flexGrow={0}
-          flexShrink={0}
-          flexBasis={{ _: '100%', lg: '50%' }}
-          pr={{ lg: 4 }}
-        >
+        <Box mb={4} flex={{ _: '0 0 100%', lg: '1' }} pr={{ lg: 4 }}>
           <Heading level={3}>{title}</Heading>
           {children}
           {description && (
@@ -49,12 +43,7 @@ export function KpiWithIllustrationTile({
             />
           )}
         </Box>
-        <Box
-          flexGrow={0}
-          flexShrink={0}
-          flexBasis={{ _: '100%', lg: '50%' }}
-          pl={{ lg: 4 }}
-        >
+        <Box flex={{ _: '0 0 100%', lg: '1' }} pl={{ lg: 4 }}>
           <img
             width={315}
             height={100}

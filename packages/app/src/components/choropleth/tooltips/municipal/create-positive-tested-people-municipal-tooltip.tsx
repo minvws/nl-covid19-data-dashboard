@@ -31,7 +31,11 @@ export const createPositiveTestedPeopleMunicipalTooltip = (
         <span>
           {positive_tested_people !== undefined ? (
             <>
-              <p className="info-value">{positive_tested_people} per 100.000</p>
+              <p className="info-value">
+                {replaceVariablesInText(text.positive_tested_value, {
+                  totalPositiveValue: `${positive_tested_people}`
+                })}
+              </p>
               <p className="info-total">
                 {replaceVariablesInText(text.positive_tested_people, {
                   totalPositiveTestedPeople: `${total_positive_tested_people}`,

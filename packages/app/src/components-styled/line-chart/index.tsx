@@ -1,7 +1,6 @@
 import { TickFormatter } from '@visx/axis';
-import { useTooltip } from '@visx/tooltip';
 import { extent } from 'd3-array';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
@@ -10,6 +9,7 @@ import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { TimeframeOption } from '~/utils/timeframe';
 import { Chart, defaultMargin } from './components/chart';
+import { Tooltip } from './components/tooltip';
 import {
   calculateYMax,
   getTrendData,
@@ -19,7 +19,6 @@ import {
   Value,
   WeeklyValue,
 } from './helpers';
-import { Tooltip } from './components/tooltip';
 
 const dateToValue = (d: Date) => d.valueOf() / 1000;
 const formatXAxis = (date: Date) =>
@@ -96,8 +95,8 @@ export function LineChart<T extends Value>({
   }, [trendData]);
 
   const yDomain = useMemo(
-    () => [0, calculateYMax(values, metricProperties, signaalwaarde)],
-    [values, metricProperties, signaalwaarde]
+    () => [0, calculateYMax(trendData, metricProperties, signaalwaarde)],
+    [trendData, metricProperties, signaalwaarde]
   );
 
   const handleHover = useCallback(
@@ -235,4 +234,33 @@ function formatDefaultTooltip<T extends Value & TrendValue>(
   throw new Error(
     `Invalid value passed to format tooltip function: ${JSON.stringify(value)}`
   );
+}
+
+function useTooltip<T>() {
+  const [tooltipData, setTooltipData] = useState<T>();
+  const [tooltipLeft, setTooltipLeft] = useState<number>();
+  const [tooltipTop, setTooltipTop] = useState<number>();
+
+  const showTooltip = useCallback(
+    (x: { tooltipData: T; tooltipLeft: number; tooltipTop: number }) => {
+      setTooltipData(x.tooltipData);
+      setTooltipLeft(x.tooltipLeft);
+      setTooltipTop(x.tooltipTop);
+    },
+    []
+  );
+
+  const hideTooltip = useCallback(() => {
+    setTooltipData(undefined);
+    setTooltipLeft(undefined);
+    setTooltipTop(undefined);
+  }, []);
+
+  return {
+    tooltipData,
+    tooltipLeft,
+    tooltipTop,
+    showTooltip,
+    hideTooltip,
+  };
 }

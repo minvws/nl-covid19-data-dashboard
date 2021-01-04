@@ -9,6 +9,8 @@ import styled from 'styled-components';
 import theme, { colors } from '~/style/theme';
 import { BarChartCoordinates, BarChartValue } from './bar-chart-coordinates';
 
+export const BAR_CHART_TOOLTIP_MAX_WIDTH = 200;
+
 interface BarChartGraphProps {
   coordinates: BarChartCoordinates;
   onMouseMoveBar: (value: BarChartValue, event: MouseEvent<SVGElement>) => void;
@@ -92,17 +94,26 @@ export function BarChartGraph({
 
       {values.map((value, index) => {
         return (
-          <Group key={index}>
+          <HoverGroup key={index}>
             <Text
               textAnchor="end"
               verticalAnchor="middle"
-              y={getBarOffset(value) ?? 0 + labelScale.bandwidth() / 2}
+              y={(getBarOffset(value) ?? 0) + labelScale.bandwidth() / 2}
               x={spacing.left - spacingLabel}
               fill={colors.annotation}
               fontSize={theme.fontSizes[0]}
             >
               {getLabel(value)}
             </Text>
+
+            {/* This bar takes all width to display the background color on hover */}
+            <StyledHoverBar
+              x={spacing.left}
+              y={getBarOffset(value) ?? 0}
+              height={labelScale.bandwidth()}
+              width={barsWidth}
+            />
+            
             {/* Bar has a minimum width of 5 pixels to stay visible / clickable */}
             <Bar
               x={spacing.left}
@@ -113,7 +124,7 @@ export function BarChartGraph({
               onMouseMove={(event) => onMouseMoveBar(value, event)}
               onMouseLeave={onMouseLeaveBar}
             />
-          </Group>
+          </HoverGroup>
         );
       })}
     </StyledSvg>
@@ -127,6 +138,19 @@ const StyledSvg = styled.svg(
       fontSize: 1,
       fill: 'annotation',
       fontFamily: '"RO Sans", Calibri, sans-serif',
+    },
+  })
+);
+
+const HoverGroup = styled(Group)({});
+const StyledHoverBar = styled(Bar)(
+  css({
+    fill: 'transparent',
+    // transparent stroke is to capture mouse movements in between bars for the tooltip
+    stroke: 'transparent',
+
+    [`${HoverGroup}:hover &`]: {
+      fill: 'lightBlue',
     },
   })
 );
