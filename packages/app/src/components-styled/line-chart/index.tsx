@@ -326,14 +326,14 @@ export function LineChart<T extends Value>({
   );
 }
 
-function formatDefaultTooltip<T extends Value & TrendValue>(
-  values: T[],
+function formatDefaultTooltip<T extends Value>(
+  values: (T & TrendValue)[],
   isPercentage?: boolean
 ) {
   // default tooltip assumes one line is rendered:
   const value = values[0];
-  const isDaily = isDailyValue([value]);
-  const isWeekly = isWeeklyValue([value]);
+  const isDaily = isDailyValue(values);
+  const isWeekly = isWeeklyValue(values);
 
   if (isDaily) {
     return `${formatDateFromMilliseconds(
@@ -345,47 +345,16 @@ function formatDefaultTooltip<T extends Value & TrendValue>(
     }`;
   } else if (isWeekly) {
     return `${formatDateFromSeconds(
-      (value as WeeklyValue).week_start_unix,
+      ((value as unknown) as WeeklyValue).week_start_unix,
       'short'
     )} - ${formatDateFromSeconds(
-      (value as WeeklyValue).week_end_unix,
+      ((value as unknown) as WeeklyValue).week_end_unix,
       'short'
     )}: ${
       isPercentage
         ? `${formatPercentage(value.__value)}%`
         : formatNumber(value.__value)
     }`;
-  }
-
-  if (isDailyValue([value])) {
-    const date = formatDateFromSeconds(
-      (value as TrendValue).__date.getSeconds()
-    );
-    const valueStr = isPercentage
-      ? `${formatPercentage(value.__value)}%`
-      : formatNumber(value.__value);
-
-    return `${date}: ${valueStr}`;
-  }
-
-  if (isWeeklyValue([value])) {
-    /**
-     * Type narrowing should make the cast to WeeklyValue unnecessary but
-     * somehow it doesn't seem to work here.
-     */
-    const dateFrom = formatDateFromSeconds(
-      (value as WeeklyValue).week_start_unix,
-      'short'
-    );
-    const dateTo = formatDateFromSeconds(
-      (value as WeeklyValue).week_end_unix,
-      'short'
-    );
-    const valueStr = isPercentage
-      ? `${formatPercentage(value.__value)}%`
-      : formatNumber(value.__value);
-
-    return `${dateFrom} - ${dateTo}: ${valueStr}`;
   }
 
   throw new Error(
