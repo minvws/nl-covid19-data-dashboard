@@ -774,7 +774,6 @@
       "dateRangeOfReport": "Value from {{startDate}} - {{endDate}}"
     },
     "tooltip": {
-      "positive_tested_value": "{{totalPositiveValue}} per 100.000",
       "positive_tested_people": "{{totalPositiveTestedPeople}} in total"
     },
     "niveau": "level",
@@ -1949,11 +1948,11 @@
       "text": "Read more in 'explanation of the data presented'"
     },
     "cbs_message": {
-      "title": "Mortality rising further in week 50",
+      "title": "Almost 4 thousand deaths in week 51",
       "published_text": "Date of publication: Friday 4 December",
-      "message": "In week 50 (7 to 13 December inclusive), the estimated number of deaths stood at 3,550. This is over 50 more than in the previous week, when there were 3,494 deaths. Mortality is always higher in winter. However, there were still 450 more deaths than would normally be expected in this period. Statistics Netherlands (CBS) reports this based on the provisional weekly figures on mortality.",
+      "message": "In week 50 (7 to 13 December inclusive), the estimated number of deaths stood at 3,550. This is over 50 more than in the previous week, when there were 3,494 deaths. Mortality is always higher in winter. However, there were still 450 more deaths than would normally be expected in this period. Statistics Netherlands (CBS) reports this based on the provisional weekly figures on mortality. \n\nThis interpretation is based on the previous numbers published by the CBS. The interpretation based on the newest numbers will be available from Wednesday 30 December.",
       "link": {
-        "href": "https://www.cbs.nl/en-gb/news/2020/51/mortality-rising-further-in-week-50",
+        "href": "https://www.cbs.nl/en-gb/news/2020/53/almost-4-thousand-deaths-in-week-51",
         "text": "Website CBS"
       }
     },
@@ -2048,7 +2047,7 @@
       "0_algemeen_21": "Wash your hands often.",
       "0_algemeen_22": "Cough and sneeze into your elbow.",
       "0_algemeen_23": "Wear a face mask where this is mandatory.",
-      "41_bezoek_24": "No more than 2 visitors per day (excluding children under 13). From 24-26 December: no more than 3 visitors per day.",
+      "41_bezoek_24": "No more than 2 visitors per day (excluding children under 13).",
       "41_er_op_uit_25": "Indoors and outdoors: no more than 2 people or 1 household in a group.",
       "41_samenkomst_26": "Museums, cinemas, theatres, zoos, libraries, swimming pools, amusement parks and other venues normally open to the public, are closed.",
       "41_horeca_27": "All establishments serving food and drink are closed. This includes hotel restaurants and room service.",

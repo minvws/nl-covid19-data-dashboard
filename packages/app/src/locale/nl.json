@@ -774,7 +774,6 @@
       "dateRangeOfReport": "Waarde van {{startDate}} - {{endDate}}"
     },
     "tooltip": {
-      "positive_tested_value": "{{totalPositiveValue}} per 100.000",
       "positive_tested_people": "{{totalPositiveTestedPeople}} in totaal"
     },
     "niveau": "niveau",
@@ -1949,11 +1948,11 @@
       "text": "Lees meer in de cijferverantwoording."
     },
     "cbs_message": {
-      "title": "Sterfte neemt verder toe in week 50",
+      "title": "Bijna 4 duizend mensen overleden in week 51",
       "published_text": "Publicatiedatum: vrijdag 4 december",
-      "message": "In week 50 (7 tot en met 13 december 2020) overleden naar schatting 3 550 mensen. Dat zijn er ruim 50 meer dan een week eerder, toen 3 494 mensen overleden. In de winter neemt het aantal overledenen altijd toe. De sterfte in week 50 is echter nog 450 hoger dan verwacht voor deze periode. Dat meldt het CBS op basis van de voorlopige sterftecijfers per week.",
+      "message": "In week 51 (14 tot en met 20 december 2020) overleden naar schatting bijna 4 duizend mensen. Dat zijn er bijna 400 meer dan een week eerder, toen 3 580 mensen overleden. De sterfte in week 51 is 800 hoger dan verwacht voor deze periode. In 2020 overleden tot en met week 51 ruim 162 duizend mensen, 13 duizend meer dan verwacht. Dat meldt het CBS op basis van de voorlopige sterftecijfers per week.",
       "link": {
-        "href": "https://www.cbs.nl/nl-nl/nieuws/2020/51/sterfte-neemt-verder-toe-in-week-50",
+        "href": "https://www.cbs.nl/nl-nl/nieuws/2020/53/bijna-4-duizend-mensen-overleden-in-week-51",
         "text": "Website CBS"
       }
     },
@@ -2048,7 +2047,7 @@
       "0_algemeen_21": "Was vaak je handen.",
       "0_algemeen_22": "Hoest en nies in je elleboog.",
       "0_algemeen_23": "Draag een mondkapje waar dat verplicht is.",
-      "41_bezoek_24": "Ontvang max. 2 personen per dag (excl. kinderen t/m 12 jaar). Voor de periode 24 t/m 26 december geldt: ontvang max. 3 personen per dag.",
+      "41_bezoek_24": "Ontvang max. 2 personen per dag (excl. kinderen t/m 12 jaar).",
       "41_er_op_uit_25": "Binnen en buiten: groep van max. 2 personen of 1 huishouden.",
       "41_samenkomst_26": "Onder andere musea, bioscopen, theaters, dierenparken, bibliotheken, zwembaden en pretparken dicht.",
       "41_horeca_27": "Eet- en drinkgelegenheden dicht. Ook in hotels, incl. roomservice.",
