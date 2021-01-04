@@ -44,18 +44,18 @@ const formatYAxisPercentageFn = (y: number) => `${formatPercentage(y)}%`;
 
 // This type limits the allowed property names to those with a number type,
 // so its like keyof T, but filtered down to only the appropriate properties.
-export type NumberProperty<T> = {
+export type NumberProperty<T extends Value> = {
   [K in keyof T]: T[K] extends number | null ? K : never;
 }[keyof T];
 
-export type LineConfig<T> = {
+export type LineConfig<T extends Value> = {
   metricProperty: NumberProperty<T>;
   color?: string;
   style?: 'solid' | 'dashed';
   legendLabel?: string;
 };
 
-export type LineChartProps<T> = {
+export type LineChartProps<T extends Value> = {
   values: T[];
   linesConfig: LineConfig<T>[];
   width?: number;
@@ -137,7 +137,7 @@ export function LineChart<T extends Value>({
 
   const bisect = useCallback(
     (
-      trend: (T & TrendValue & Value)[],
+      trend: (TrendValue & Value)[],
       xPosition: number,
       xScale: ScaleTime<number, number>
     ) => {

@@ -126,7 +126,7 @@ export function getSingleTrendData<T extends Value>(
   valueKey: NumberProperty<T>,
   timeframe: TimeframeOption
 ): (TrendValue & Value)[] {
-  const valuesInFrame = getTimeframeValues<T>(values, timeframe);
+  const valuesInFrame = getTimeframeValues(values, timeframe);
 
   if (valuesInFrame.length === 0) {
     /**
@@ -145,7 +145,7 @@ export function getSingleTrendData<T extends Value>(
          * Not sure why we need to cast to number if isPresent is used to filter
          * out the null values.
          */
-        __value: (x[valueKey] as unknown) as number,
+        __value: x[valueKey as keyof DailyValue],
         __date: timestampToDate(x.date_of_report_unix),
       }))
       .filter((x) => isPresent(x.__value));
@@ -159,7 +159,7 @@ export function getSingleTrendData<T extends Value>(
          * Not sure why we need to cast to number if isPresent is used to filter
          * out the null values.
          */
-        __value: (x[valueKey] as unknown) as number,
+        __value: x[valueKey as keyof WeeklyValue],
         __date: timestampToDate(x.week_start_unix),
       }))
       .filter((x) => isPresent(x.__value));
