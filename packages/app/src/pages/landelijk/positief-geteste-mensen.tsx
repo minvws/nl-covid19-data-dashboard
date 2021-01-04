@@ -71,8 +71,8 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
   const router = useRouter();
 
   const dataInfectedDelta = data.tested_overall;
-  const dataGgdLastValue = data.tested_ggd.last_value;
-  const dataGgdValues = data.tested_ggd.values;
+  const dataGgdAverageLastValue = data.tested_ggd_average.last_value;
+  const dataGgdDailyValues = data.tested_ggd_daily.values;
 
   const ageDemographicExampleData = getAgeDemographicExampleData(
     data.tested_per_age_group
@@ -151,7 +151,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
                       {
                         name: 'percentage',
                         value: `${formatPercentage(
-                          dataGgdLastValue.infected_percentage
+                          dataGgdAverageLastValue.infected_percentage
                         )}%`,
                       },
                     ]),
@@ -247,10 +247,10 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
           metadata={{
             datumsText: ggdText.datums,
             dateInfo: {
-              weekStartUnix: dataGgdLastValue.date_start_unix,
-              weekEndUnix: dataGgdLastValue.date_end_unix,
+              weekStartUnix: dataGgdAverageLastValue.date_start_unix,
+              weekEndUnix: dataGgdAverageLastValue.date_end_unix,
             },
-            dateOfInsertionUnix: dataGgdLastValue.date_of_insertion_unix,
+            dateOfInsertionUnix: dataGgdAverageLastValue.date_of_insertion_unix,
             dataSources: [ggdText.bronnen.rivm],
           }}
           reference={text.reference}
@@ -261,16 +261,16 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
             title={ggdText.totaal_getest_week_titel}
             metadata={{
               date: [
-                dataGgdLastValue.date_start_unix,
-                dataGgdLastValue.date_end_unix,
+                dataGgdAverageLastValue.date_start_unix,
+                dataGgdAverageLastValue.date_end_unix,
               ],
               source: ggdText.bronnen.rivm,
             }}
           >
             <KpiValue
               data-cy="ggd_tested_total"
-              absolute={dataGgdLastValue.tested_total}
-              difference={data.difference.tested_ggd__tested_total}
+              absolute={dataGgdAverageLastValue.tested_total}
+              difference={data.difference.tested_ggd_average__tested_total}
             />
             <Text>{ggdText.totaal_getest_week_uitleg}</Text>
           </KpiTile>
@@ -278,16 +278,18 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
             title={ggdText.positief_getest_week_titel}
             metadata={{
               date: [
-                dataGgdLastValue.date_start_unix,
-                dataGgdLastValue.date_end_unix,
+                dataGgdAverageLastValue.date_start_unix,
+                dataGgdAverageLastValue.date_end_unix,
               ],
               source: ggdText.bronnen.rivm,
             }}
           >
             <KpiValue
               data-cy="ggd_infected"
-              percentage={dataGgdLastValue.infected_percentage}
-              difference={data.difference.tested_ggd__infected_percentage}
+              percentage={dataGgdAverageLastValue.infected_percentage}
+              difference={
+                data.difference.tested_ggd_average__infected_percentage
+              }
             />
             <Text>{ggdText.positief_getest_week_uitleg}</Text>
             <Text>
@@ -299,11 +301,13 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
                     [
                       {
                         name: 'numerator',
-                        value: formatNumber(dataGgdLastValue.infected),
+                        value: formatNumber(dataGgdAverageLastValue.infected),
                       },
                       {
                         name: 'denominator',
-                        value: formatNumber(dataGgdLastValue.tested_total),
+                        value: formatNumber(
+                          dataGgdAverageLastValue.tested_total
+                        ),
                       },
                     ]
                   ),
@@ -317,7 +321,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
           timeframeOptions={['all', '5weeks']}
           title={ggdText.linechart_percentage_titel}
           description={ggdText.linechart_percentage_toelichting}
-          values={dataGgdValues}
+          values={dataGgdDailyValues}
           linesConfig={[{ metricProperty: 'infected_percentage' }]}
           isPercentage
           metadata={{
@@ -330,20 +334,24 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
           title={ggdText.linechart_totaltests_titel}
           description={ggdText.linechart_totaltests_toelichting}
           values={[
-            dataGgdValues.map((value) => ({
+            /**
+             * @TODO remove the dependency on these week timestaps. It is daily
+             * data now
+             */
+            dataGgdDailyValues.map((value) => ({
               value: value.tested_total,
-              date: value.date_end_unix,
+              date: value.date_unix,
               week: {
-                start: value.date_start_unix,
-                end: value.date_end_unix,
+                start: value.date_unix,
+                end: value.date_unix,
               },
             })),
-            dataGgdValues.map((value) => ({
+            dataGgdDailyValues.map((value) => ({
               value: value.infected,
-              date: value.date_end_unix,
+              date: value.date_unix,
               week: {
-                start: value.date_start_unix,
-                end: value.date_end_unix,
+                start: value.date_unix,
+                end: value.date_unix,
               },
             })),
           ]}

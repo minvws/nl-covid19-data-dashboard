@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "national_tested_ggd",
+  "title": "regional_tested_ggd_daily",
   "type": "object",
   "properties": {
     "values": {
@@ -17,7 +17,7 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "national_tested_ggd_value",
+      "title": "regional_tested_ggd_daily_value",
       "type": "object",
       "properties": {
         "infected": {
@@ -37,15 +37,20 @@
         },
         "date_of_insertion_unix": {
           "type": "integer"
+        },
+        "vrcode": {
+          "type": "string",
+          "equalsRootProperty": "code"
         }
       },
       "required": [
-        "tested_total",
-        "infected_percentage",
         "infected",
+        "infected_percentage",
+        "tested_total",
         "date_start_unix",
         "date_end_unix",
-        "date_of_insertion_unix"
+        "date_of_insertion_unix",
+        "vrcode"
       ],
       "additionalProperties": false
     }
