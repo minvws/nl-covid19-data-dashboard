@@ -19,3 +19,5 @@ node_modules
 /*.code-workspace
 /cypress/screenshots
 /cypress/videos
+
+.vercel
