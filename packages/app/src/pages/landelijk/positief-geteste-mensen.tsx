@@ -77,7 +77,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
   const ageDemographicExampleData = getAgeDemographicExampleData(
     data.infected_age_groups
   );
-
+    
   return (
     <>
       <SEOHead
@@ -105,26 +105,6 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
 
         <TwoKpiSection>
           <KpiTile
-            title={text.barscale_titel}
-            data-cy="infected_daily_increase"
-            metadata={{
-              date: dataInfectedDelta.last_value.date_of_report_unix,
-              source: text.bronnen.rivm,
-            }}
-          >
-            <PageBarScale
-              data={data}
-              scope="nl"
-              metricName="infected_people_delta_normalized"
-              metricProperty="infected_daily_increase"
-              localeTextKey="positief_geteste_personen"
-              differenceKey="infected_people_delta_normalized__infected_daily_increase"
-            />
-
-            <Text>{text.barscale_toelichting}</Text>
-          </KpiTile>
-
-          <KpiTile
             title={text.kpi_titel}
             metadata={{
               date: dataInfectedDelta.last_value.date_of_report_unix,
@@ -145,7 +125,6 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
               as="div"
               dangerouslySetInnerHTML={{ __html: text.kpi_toelichting }}
             />
-
             <Box>
               <Heading level={4} fontSize={'1.2em'} mt={'1.5em'} mb={0}>
                 <span
@@ -166,6 +145,25 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
                 <Anchor name="ggd" text={ggdText.summary_link_cta} />
               </Text>
             </Box>
+          </KpiTile>
+          <KpiTile
+            title={text.barscale_titel}
+            data-cy="infected_daily_increase"
+            metadata={{
+              date: dataInfectedDelta.last_value.date_of_report_unix,
+              source: text.bronnen.rivm,
+            }}
+          >
+            <PageBarScale
+              data={data}
+              scope="nl"
+              metricName="infected_people_delta_normalized"
+              metricProperty="infected_daily_increase"
+              localeTextKey="positief_geteste_personen"
+              differenceKey="infected_people_delta_normalized__infected_daily_increase"
+            />
+
+            <Text>{text.barscale_toelichting}</Text>
           </KpiTile>
         </TwoKpiSection>
 
