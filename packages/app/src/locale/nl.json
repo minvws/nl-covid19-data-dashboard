@@ -774,7 +774,8 @@
       "dateRangeOfReport": "Waarde van {{startDate}} - {{endDate}}"
     },
     "tooltip": {
-      "positive_tested_people": "{{totalPositiveTestedPeople}} in totaal"
+      "positive_tested_people": "{{totalPositiveTestedPeople}} in totaal",
+      "positive_tested_value": ""
     },
     "niveau": "niveau",
     "clear_select_input": "Leegmaken"
@@ -2118,6 +2119,5 @@
     "VR23": "http://vrln.nl/",
     "VR24": "http://www.vrzuidlimburg.nl/",
     "VR25": "http://www.veiligheidsregioflevoland.nl/"
-  },
-  "common.tooltip.positive_tested_value": ""
+  }
 }
