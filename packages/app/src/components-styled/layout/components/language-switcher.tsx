@@ -1,12 +1,44 @@
 import css from '@styled-system/css';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import styled from 'styled-components';
 import { Box } from '~/components-styled/base';
 import { getLocale } from '~/utils/getLocale';
 
 export function LanguageSwitcher() {
   const router = useRouter();
+
+  const { locale: routerLocale } = router;
+
   const locale = getLocale();
+
+  if (process.env.NEXT_PUBLIC_IS_PREVIEW_SERVER) {
+    console.log(router.asPath, routerLocale);
+
+    return (
+      <Box height={55} mt={-55} textAlign="right">
+        <LanguageLink
+          as={Link}
+          href={router.asPath}
+          locale="nl"
+          isActive={routerLocale === 'nl'}
+          title="Website in het Nederlands"
+        >
+          NL
+        </LanguageLink>
+        <span aria-hidden="true">|</span>
+        <LanguageLink
+          as={Link}
+          href={router.asPath}
+          locale="en-GB"
+          isActive={routerLocale === 'en-GB'}
+          title="Website in English"
+        >
+          EN
+        </LanguageLink>
+      </Box>
+    );
+  }
 
   return (
     <Box height={55} mt={-55} textAlign="right">
@@ -15,6 +47,7 @@ export function LanguageSwitcher() {
         lang="nl"
         hrefLang="nl"
         isActive={locale === 'nl'}
+        locale="nl_NL"
         title="Website in het Nederlands"
       >
         NL

@@ -100,7 +100,7 @@ const nextConfig = {
   },
 };
 
-if (process.env.IS_PREVIEW_SERVER) {
+if (process.env.NEXT_PUBLIC_IS_PREVIEW_SERVER) {
   nextConfig.i18n = i18Settings;
 }
 
