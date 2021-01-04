@@ -15,7 +15,7 @@
           "type": "integer"
         },
         "infected": {
-          "type": "number"
+          "type": "integer"
         },
         "infected_per_100k": {
           "type": "number"
