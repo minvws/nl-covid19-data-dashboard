@@ -22,9 +22,7 @@ export type WeeklyValue = {
 export type AnyValue = Record<string, number | null>;
 export type AnyFilteredValue = Record<string, number>;
 
-export function isDailyValue<T>(
-  timeSeries: (T & Value)[]
-): timeSeries is (T & DailyValue)[] {
+export function isDailyValue(timeSeries: Value[]): timeSeries is DailyValue[] {
   const firstValue = (timeSeries as DailyValue[])[0];
 
   assert(
@@ -35,9 +33,9 @@ export function isDailyValue<T>(
   return firstValue.date_of_report_unix !== undefined;
 }
 
-export function isWeeklyValue<T>(
-  timeSeries: (T & Value)[]
-): timeSeries is (T & WeeklyValue)[] {
+export function isWeeklyValue(
+  timeSeries: Value[]
+): timeSeries is WeeklyValue[] {
   const firstValue = (timeSeries as WeeklyValue[])[0];
 
   assert(
@@ -81,8 +79,8 @@ export function calculateYMax(
  * in as-is from the data, and we detect what type of timestamp we should filter
  * on.
  */
-export function getTimeframeValues<T>(
-  values: (T & Value)[],
+export function getTimeframeValues(
+  values: Value[],
   timeframe: TimeframeOption
 ) {
   const boundary = getTimeframeBoundaryUnix(timeframe);
@@ -115,19 +113,19 @@ export type TrendValue = {
 
 const timestampToDate = (d: number) => new Date(d * 1000);
 
-export function getTrendData<T>(
-  values: (T & Value)[],
+export function getTrendData<T extends Value>(
+  values: T[],
   valueKeys: NumberProperty<T>[],
   timeframe: TimeframeOption
-): (T & TrendValue & Value)[][] {
+): (TrendValue & Value)[][] {
   return valueKeys.map((key) => getSingleTrendData(values, key, timeframe));
 }
 
-export function getSingleTrendData<T>(
-  values: (T & Value)[],
+export function getSingleTrendData<T extends Value>(
+  values: T[],
   valueKey: NumberProperty<T>,
   timeframe: TimeframeOption
-): (T & TrendValue & Value)[] {
+): (TrendValue & Value)[] {
   const valuesInFrame = getTimeframeValues<T>(values, timeframe);
 
   if (valuesInFrame.length === 0) {
@@ -139,7 +137,7 @@ export function getSingleTrendData<T>(
     return [];
   }
 
-  if (isDailyValue<T>(valuesInFrame)) {
+  if (isDailyValue(valuesInFrame)) {
     return valuesInFrame
       .map((x) => ({
         ...x,
@@ -153,7 +151,7 @@ export function getSingleTrendData<T>(
       .filter((x) => isPresent(x.__value));
   }
 
-  if (isWeeklyValue<T>(valuesInFrame)) {
+  if (isWeeklyValue(valuesInFrame)) {
     return valuesInFrame
       .map((x) => ({
         ...x,

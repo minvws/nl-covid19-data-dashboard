@@ -2,9 +2,15 @@ import styled from 'styled-components';
 import { Text } from '~/components-styled/typography';
 import { colors } from '~/style/theme';
 import { formatDateFromMilliseconds } from '~/utils/formatDate';
-import { HoverPoint } from '..';
+import { ChartPadding } from '.';
 import { TrendValue, Value } from '../helpers';
-import { ChartPadding } from './chart-axes';
+
+export type HoverPoint<T> = {
+  data: T & Value & TrendValue;
+  color: string;
+  x: number;
+  y: number;
+};
 
 type ColorProps = {
   indicatorColor: string;

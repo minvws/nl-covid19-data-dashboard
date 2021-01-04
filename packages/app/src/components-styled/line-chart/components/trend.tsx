@@ -42,7 +42,7 @@ export function Trend({
 
   const scales = { xScale, yScale };
 
-  const internalOnHover = (
+  const handleHover = (
     event: TouchEvent<SVGElement> | MouseEvent<SVGElement>
   ) => {
     const isLeave = event.type === 'mouseleave';
@@ -63,10 +63,10 @@ export function Trend({
           fill={color}
           fillOpacity={0.05}
           yScale={yScale}
-          onTouchStart={internalOnHover}
-          onMouseLeave={internalOnHover}
-          onMouseOver={internalOnHover}
-          onMouseMove={internalOnHover}
+          onTouchStart={handleHover}
+          onMouseLeave={handleHover}
+          onMouseOver={handleHover}
+          onMouseMove={handleHover}
         />
       )}
       <LinePath
@@ -77,10 +77,10 @@ export function Trend({
         stroke={color}
         strokeWidth={isHovered ? 3 : 2}
         strokeDasharray={dashes}
-        onTouchStart={internalOnHover}
-        onMouseLeave={internalOnHover}
-        onMouseOver={internalOnHover}
-        onMouseMove={internalOnHover}
+        onTouchStart={handleHover}
+        onMouseLeave={handleHover}
+        onMouseOver={handleHover}
+        onMouseMove={handleHover}
       />
     </>
   );

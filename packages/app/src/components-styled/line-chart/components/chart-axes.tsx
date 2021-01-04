@@ -39,7 +39,7 @@ export type ChartScales = {
   yScale: ScaleLinear<number, number>;
 };
 
-type ChartProps = {
+type ChartAxesProps = {
   benchmark?: Benchmark;
   onHover: (
     event: React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>,
@@ -57,7 +57,7 @@ type ChartProps = {
 
 type AnyTickFormatter = (value: any) => string;
 
-export const ChartAxes = memo(function Chart({
+export const ChartAxes = memo(function ChartAxes({
   width,
   height,
   padding = defaultPadding,
@@ -68,7 +68,7 @@ export const ChartAxes = memo(function Chart({
   formatXAxis,
   formatYAxis,
   children,
-}: ChartProps) {
+}: ChartAxesProps) {
   const bounded = {
     width: width - padding.left - padding.right,
     height: height - padding.top - padding.bottom,

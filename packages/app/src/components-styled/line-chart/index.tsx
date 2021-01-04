@@ -21,10 +21,11 @@ import {
   ChartPadding,
   ChartScales,
   defaultPadding,
-} from './components/chart-axes';
-import { Marker } from './components/marker';
-import { Tooltip } from './components/tooltip';
-import { Trend } from './components/trend';
+  HoverPoint,
+  Marker,
+  Tooltip,
+  Trend,
+} from './components';
 import {
   calculateYMax,
   getTrendData,
@@ -71,13 +72,6 @@ export type LineChartProps<T> = {
   formatMarkerLabel?: (value: T) => string;
   padding?: ChartPadding;
   showLegend?: boolean;
-};
-
-export type HoverPoint<T> = {
-  data: T & Value & TrendValue;
-  color: string;
-  x: number;
-  y: number;
 };
 
 export function LineChart<T extends Value>({
