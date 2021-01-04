@@ -332,7 +332,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
           values={[
             dataGgdValues.map((value) => ({
               value: value.tested_total,
-              date: value.week_end_unix,
+              date: value.date_end_unix,
               week: {
                 start: value.date_start_unix,
                 end: value.date_end_unix,
@@ -340,7 +340,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
             })),
             dataGgdValues.map((value) => ({
               value: value.infected,
-              date: value.week_end_unix,
+              date: value.date_end_unix,
               week: {
                 start: value.date_start_unix,
                 end: value.date_end_unix,
