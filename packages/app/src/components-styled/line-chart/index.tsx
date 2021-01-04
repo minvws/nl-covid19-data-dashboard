@@ -62,7 +62,7 @@ export type LineChartProps<T extends Value> = {
   height?: number;
   timeframe?: TimeframeOption;
   signaalwaarde?: number;
-  formatTooltip?: (value: (T & TrendValue & Value)[]) => React.ReactNode;
+  formatTooltip?: (value: (T & TrendValue)[]) => React.ReactNode;
   formatXAxis?: TickFormatter<Date>;
   formatYAxis?: TickFormatter<number>;
   showFill?: boolean;
@@ -97,7 +97,7 @@ export function LineChart<T extends Value>({
     tooltipTop = 0,
     showTooltip,
     hideTooltip,
-  } = useTooltip<T & Value & TrendValue>();
+  } = useTooltip<T & TrendValue>();
 
   const [markerProps, setMarkerProps] = useState<{
     height: number;
