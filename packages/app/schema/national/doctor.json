@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "regional_deceased_cbs",
+  "title": "national_doctor",
   "type": "object",
   "properties": {
     "values": {
@@ -17,38 +17,30 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "regional_deceased_cbs_value",
+      "title": "national_doctor_value",
       "type": "object",
       "properties": {
-        "registered": {
-          "type": "integer"
-        },
-        "expected": {
-          "type": "integer"
-        },
-        "expected_min": {
-          "type": "integer"
-        },
-        "expected_max": {
-          "type": "integer"
-        },
         "date_start_unix": {
           "type": "integer"
         },
         "date_end_unix": {
           "type": "integer"
         },
+        "covid_symptoms_per_100k": {
+          "type": "number"
+        },
+        "covid_symptoms": {
+          "type": "number"
+        },
         "date_of_insertion_unix": {
           "type": "integer"
         }
       },
       "required": [
-        "registered",
-        "expected",
-        "expected_min",
-        "expected_max",
         "date_start_unix",
         "date_end_unix",
+        "covid_symptoms_per_100k",
+        "covid_symptoms",
         "date_of_insertion_unix"
       ],
       "additionalProperties": false

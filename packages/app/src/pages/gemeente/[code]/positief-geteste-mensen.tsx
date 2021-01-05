@@ -26,7 +26,7 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
   const { data, municipalityName, text: siteText } = props;
 
   const text = siteText.gemeente_positief_geteste_personen;
-  const lastValue = data.positive_tested_people.last_value;
+  const lastValue = data.tested_overall.last_value;
 
   const router = useRouter();
 
@@ -50,7 +50,7 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
           subtitle={text.pagina_toelichting}
           metadata={{
             datumsText: text.datums,
-            dateInfo: lastValue.date_of_report_unix,
+            dateOrRange: lastValue.date_unix,
             dateOfInsertionUnix: lastValue.date_of_insertion_unix,
             dataSources: [text.bronnen.rivm],
           }}
@@ -61,16 +61,14 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
           <KpiTile
             title={text.barscale_titel}
             metadata={{
-              date: lastValue.date_of_report_unix,
+              date: lastValue.date_unix,
               source: text.bronnen.rivm,
             }}
           >
             <KpiValue
-              data-cy="infected_daily_increase"
-              absolute={lastValue.infected_daily_increase}
-              difference={
-                data.difference.positive_tested_people__infected_daily_increase
-              }
+              data-cy="infected_per_100k"
+              absolute={lastValue.infected_per_100k}
+              difference={data.difference.tested_overall__infected_per_100k}
             />
             <Text>{text.barscale_toelichting}</Text>
           </KpiTile>
@@ -78,16 +76,14 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
           <KpiTile
             title={text.kpi_titel}
             metadata={{
-              date: lastValue.date_of_report_unix,
+              date: lastValue.date_unix,
               source: text.bronnen.rivm,
             }}
           >
             <KpiValue
-              data-cy="infected_daily_total"
-              absolute={lastValue.infected_daily_total}
-              difference={
-                data.difference.positive_tested_people__infected_daily_total
-              }
+              data-cy="infected"
+              absolute={lastValue.infected}
+              difference={data.difference.tested_overall__infected}
             />
             <Text
               as="div"
@@ -99,10 +95,10 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
         <LineChartTile
           title={text.linechart_titel}
           description={text.linechart_toelichting}
-          values={data.positive_tested_people.values}
+          values={data.tested_overall.values}
           linesConfig={[
             {
-              metricProperty: 'infected_daily_increase',
+              metricProperty: 'infected_per_100k',
             },
           ]}
           metadata={{
@@ -116,19 +112,18 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
           })}
           description={text.map_toelichting}
           legend={{
-            thresholds:
-              municipalThresholds.positive_tested_people.positive_tested_people,
+            thresholds: municipalThresholds.tested_overall.infected_per_100k,
             title: siteText.positief_geteste_personen.chloropleth_legenda.titel,
           }}
           metadata={{
-            date: lastValue.date_of_report_unix,
+            date: lastValue.date_unix,
             source: text.bronnen.rivm,
           }}
         >
           <MunicipalityChoropleth
             selected={data.code}
-            metricName="positive_tested_people"
-            metricProperty="positive_tested_people"
+            metricName="tested_overall"
+            metricProperty="infected_per_100k"
             tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
               createSelectMunicipalHandler(router)
             )}

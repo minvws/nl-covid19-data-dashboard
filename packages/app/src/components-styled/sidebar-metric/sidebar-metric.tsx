@@ -3,7 +3,11 @@ import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
 import { MetricKeys } from '~/components/choropleth/shared';
 import siteText, { TALLLanguages } from '~/locale/index';
-import { DataScope, getMetricConfig } from '~/metric-config';
+import {
+  DataScope,
+  getMetricConfig,
+  metricContainsPartialData,
+} from '~/metric-config';
 import { assert } from '~/utils/assert';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { getLastFilledValue } from '~/utils/get-last-filled-value';
@@ -14,7 +18,7 @@ import { SidebarKpiValue } from './sidebar-kpi-value';
 interface SidebarMetricProps<T extends { difference: unknown }> {
   scope: DataScope;
   data: T;
-  metricName: ValueOf<MetricKeys<T>>;
+  metricName: MetricKeys<T>;
   /**
    * Make metric property optional for odd case where we do not show a metric.
    * Currently only behavior is doing that.
@@ -31,7 +35,7 @@ interface SidebarMetricProps<T extends { difference: unknown }> {
    * metric name and metric property.
    */
   altBarScaleMetric?: {
-    metricName: ValueOf<MetricKeys<T>>;
+    metricName: MetricKeys<T>;
     metricProperty: string;
   };
 }
@@ -48,15 +52,14 @@ export function SidebarMetric<T extends { difference: unknown }>({
   altBarScaleMetric,
 }: SidebarMetricProps<T>) {
   /**
-   * This is a workaround for data which can contain null values on properties as part of the
-   * last_value object. This was added to facilitate VR hospital Nice data.
-   *
-   * @TODO work out proper solution with BE
+   * @TODO this is still a bit messy due to improper typing. Not sure how to
+   * fix this easily. The getLastFilledValue function is not strongly typed on
+   * a certain metric but here we don't have that type as input.
    */
-  const lastValue =
-    metricProperty === 'hospital_moving_avg_per_region'
-      ? getLastFilledValue(data, metricName)
-      : get(data, [(metricName as unknown) as string, 'last_value']);
+  const lastValue = metricContainsPartialData((metricName as unknown) as string)
+    ? // @ts-ignore
+      (getLastFilledValue(data[metricName]) as data[metricName])
+    : get(data, [(metricName as unknown) as string, 'last_value']);
 
   const propertyValue = metricProperty && lastValue[metricProperty];
 
@@ -99,14 +102,11 @@ export function SidebarMetric<T extends { difference: unknown }>({
   try {
     description = config.isWeeklyData
       ? replaceVariablesInText(commonText.dateRangeOfReport, {
-          startDate: formatDateFromSeconds(lastValue.week_start_unix, 'axis'),
-          endDate: formatDateFromSeconds(lastValue.week_end_unix, 'axis'),
+          startDate: formatDateFromSeconds(lastValue.date_start_unix, 'axis'),
+          endDate: formatDateFromSeconds(lastValue.date_end_unix, 'axis'),
         })
       : replaceVariablesInText(commonText.dateOfReport, {
-          dateOfReport: formatDateFromSeconds(
-            lastValue.date_of_report_unix,
-            'medium'
-          ),
+          dateOfReport: formatDateFromSeconds(lastValue.date_unix, 'medium'),
         });
   } catch (err) {
     throw new Error(
