@@ -21,7 +21,7 @@ export default {
       readOnly: true,
     },
     {
-      name: "content",
+      name: "questions",
       type: "array",
       title: "Vragen",
       description:

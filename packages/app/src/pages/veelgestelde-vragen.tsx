@@ -7,22 +7,18 @@ import siteText from '~/locale/index';
 import { getSkipLinkId } from '~/utils/skipLinks';
 import styles from './over.module.scss';
 import { Collapsable } from '~/components-styled/collapsable';
-import targetLanguage from '../locale/index'
-import { groq } from 'next-sanity'
-import {
-  getClient,
-  localize,
-  PortableText
-  } from '~/lib/sanity'
+import targetLanguage from '../locale/index';
+import { groq } from 'next-sanity';
+import { getClient, localize, PortableText } from '~/lib/sanity';
 interface StaticProps {
   props: VeelgesteldeVragenProps;
 }
 
 interface VeelgesteldeVragenProps {
-  text: {
+  data: {
     title: string;
     description: string;
-    content: Array<{ content: Array<any>, title: string}>
+    questions: Array<{ content: Array<any>; title: string }>;
   };
   lastGenerated: string;
 }
@@ -40,13 +36,13 @@ export async function getStaticProps(): Promise<StaticProps> {
   const lastGenerated = JSON.parse(fileContents).last_generated;
 
   const faqData = await getClient(false).fetch(faqQuery);
-  const faqList = localize(faqData, [targetLanguage, 'nl']);
+  const data = localize(faqData, [targetLanguage, 'nl']);
 
-  return { props: { text: faqList, lastGenerated } };
+  return { props: { data, lastGenerated } };
 }
 
 const Verantwoording: FCWithLayout<VeelgesteldeVragenProps> = (props) => {
-  const { text } = props;
+  const { data } = props;
 
   return (
     <>
@@ -67,20 +63,24 @@ const Verantwoording: FCWithLayout<VeelgesteldeVragenProps> = (props) => {
       <div className={styles.container}>
         <MaxWidth>
           <div className={styles.maxwidth}>
-            <h2>{ text.title }</h2>
-            <PortableText blocks={ text.description } />
+            <h2>{data.title}</h2>
+            <PortableText blocks={data.description} />
 
-            <article className={styles.faqList}>
-              {text.content.map((item: any) => {
-                const id = getSkipLinkId(item.title);
-                return (
-                  <Collapsable key={id} id={id} summary={item.title}>
-                    <PortableText blocks={ item.content } />
-                  </Collapsable>
-                );
-              })}
-            </article>
-          </div> 
+            {data.questions ? (
+              <article className={styles.faqList}>
+                {data.questions.map((item: any) => {
+                  const id = getSkipLinkId(item.title);
+                  return (
+                    <Collapsable key={id} id={id} summary={item.title}>
+                      <PortableText blocks={item.content} />
+                    </Collapsable>
+                  );
+                })}
+              </article>
+            ) : (
+              <p>Er zijn geen vragen gevonden</p>
+            )}
+          </div>
         </MaxWidth>
       </div>
     </>
