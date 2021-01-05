@@ -9,8 +9,8 @@
     "title": "Last updated"
   },
   "notificatie": {
-    "titel": "Percentage of positive test results decreased slightly",
-    "bericht": "In the week of 23 to 29 December, 67,388 newly tested COVID-19 positives were reported. This is a slight decrease of 11,7% compared to the week before. The percentage of positive test results also decreased somewhat from 13.7% to 13.0% in the past week. In the week of 21 to 27 December, more people with COVID-19 were admitted to the hospital while the number of ICU admissions stabilized. The reproduction number was 1.15 (lower limit: 1.12 – upper limit 1.77) on 11 December. The number of infectious people in The Netherlands increased to almost 165,000 (lower limit: 125,078; upper limit: 202,633) on 17 December.",
+    "titel": "Convincing decline not visible yet",
+    "bericht": "Convincing effects of the lockdown that started on 15 December have yet to be seen. The number of people that got tested and the number of people with a positive test result decreased, but the percentage of positive test results remained high. Possibly,  people were less inclined to get tested during the holidays, or that the lockdown is effective and less people have COVID-like symptoms. In the week of 28 December to 3 January, less people with COVID-19 were admitted to the hospital. The number of ICU admissions increased compared to the week before. To reduce the pressure on hospital care, it is and remains necessary to stay at home as much as possible, and to get tested if you have symptoms.",
     "link": {
       "text": "View the full message from the RIVM",
       "href": "https://www.rivm.nl/en/novel-coronavirus-covid-19/current-information"
@@ -1113,7 +1113,7 @@
   },
   "laatste_ontwikkelingen": {
     "title": "Latest developments",
-    "menu_subtitle": "Decrease percentage of positive test results",
+    "menu_subtitle": "Convincing decline not visible yet",
     "alle_cijfers_header": "Want to see all data?",
     "alle_cijfers_link": "View all"
   },

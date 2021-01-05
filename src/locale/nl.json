@@ -9,8 +9,8 @@
     "title": "Laatst bijgewerkt"
   },
   "notificatie": {
-    "titel": "Percentage positief geteste mensen iets afgenomen",
-    "bericht": "In de week van 23 tot en met 29 december zijn 67.388 personen met een positieve coronatestuitslag gemeld. Dit is een lichte daling van 11,7% vergeleken met de week ervoor. Het percentage positief is de afgelopen week iets afgenomen van 13,7% naar 13,0%. In de week van 21 tot 27 december werden iets meer mensen met COVID-19 in het ziekenhuis opgenomen vergeleken met de week ervoor. Het aantal mensen dat op de IC werd opgenomen stabiliseerde. Het reproductiegetal was op 11 december 1,15 (ondergrens 1,12 – 1,17 bovengrens). Het aantal besmettelijke personen in Nederland was op 17 december bijna 165 duizend (ondergrens 125.078 – 202.633 ondergrens) en is gestegen vergeleken met de week ervoor.",
+    "titel": "Overtuigende daling nog niet zichtbaar",
+    "bericht": "Overtuigende effecten van de lockdown van 15 december blijven vooralsnog uit. Het aantal mensen dat zich liet testen en het aantal mensen met een positieve testuitslag daalde weliswaar, maar het percentage positieve testen bleef deze week hoog. Het kan zijn dat mensen tijdens en na de feestdagen minder geneigd waren om zich te laten testen, of dat de lockdown wel effect heeft en minder mensen klachten hebben. Het aantal nieuwe ziekenhuisopnames was lager dan vorige week. Het aantal nieuwe IC opnames is iets hoger vergeleken met de week ervoor. Om te zorgen dat de druk op de zorg afneemt, is en blijft het noodzakelijk om zoveel mogelijk thuis te blijven, en om je te laten testen als je klachten hebt.",
     "link": {
       "text": "Bekijk de toelichting van het RIVM",
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel"
@@ -1113,7 +1113,7 @@
   },
   "laatste_ontwikkelingen": {
     "title": "Laatste ontwikkelingen",
-    "menu_subtitle": "Daling percentage positief geteste mensen",
+    "menu_subtitle": "Overtuigende daling nog niet zichtbaar",
     "alle_cijfers_header": "Benieuwd naar alle cijfers?",
     "alle_cijfers_link": "Bekijk alle cijfers"
   },
