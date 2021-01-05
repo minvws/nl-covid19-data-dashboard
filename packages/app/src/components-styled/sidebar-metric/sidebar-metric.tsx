@@ -58,7 +58,7 @@ export function SidebarMetric<T extends { difference: unknown }>({
    */
   const lastValue = metricContainsPartialData(metricName as string)
     ? getLastFilledValue((data[metricName] as unknown) as Metric<unknown>)
-    : get(data, [(metricName as unknown) as string, 'last_value']);
+    : get(data, [metricName as string, 'last_value']);
 
   const propertyValue = metricProperty && lastValue[metricProperty];
 

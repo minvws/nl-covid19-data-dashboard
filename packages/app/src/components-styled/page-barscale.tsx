@@ -45,7 +45,7 @@ export function PageBarScale<T>({
    */
   const lastValue = metricContainsPartialData(metricName as string)
     ? getLastFilledValue((data[metricName] as unknown) as Metric<unknown>)
-    : get(data, [(metricName as unknown) as string, 'last_value']);
+    : get(data, [metricName as string, 'last_value']);
 
   const propertyValue = lastValue && lastValue[metricProperty];
 
