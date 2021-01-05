@@ -1,6 +1,5 @@
 import fs from 'fs';
 import { useRouter } from 'next/router';
-import { GetStaticProps } from 'next';
 import path from 'path';
 import { useState } from 'react';
 import Notification from '~/assets/notification.svg';
@@ -30,14 +29,16 @@ import { assert } from '~/utils/assert';
 import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { EscalationMapLegenda } from './veiligheidsregio';
-import { getLocale } from '~/utils/getLocale';
+
+interface StaticProps {
+  props: INationalHomepageData;
+}
 
 interface INationalHomepageData {
   data: National;
   text: TALLLanguages;
   lastGenerated: string;
   escalationLevelCounts: EscalationLevelCounts;
-  locale: 'nl' | 'en_GB';
 }
 
 /**
@@ -54,14 +55,11 @@ type EscalationLevelCounts = {
 };
 
 const Home: FCWithLayout<INationalHomepageData> = (props) => {
-  const { data, text, escalationLevelCounts, locale } = props;
+  const { data, text, escalationLevelCounts } = props;
   const router = useRouter();
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
     'municipal'
   );
-
-  // eslint-disable-next-line no-console
-  console.log(`according to next.js you are looking at the ${locale} locale`);
 
   return (
     <TileList>
@@ -196,13 +194,7 @@ const getEscalationCounts = (
   return counts;
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
-  // This locale variable comes from Next.js, not from our custom code
-  // We set a default using the existing getLocale function because on
-  // non-preview servers this would return undefined, which is
-  // unacceptable in getStaticProps
-  const { locale = getLocale() } = context;
-
+export async function getStaticProps(): Promise<StaticProps> {
   const text = parseMarkdownInLocale((await import('../locale/index')).default);
 
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
@@ -237,9 +229,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const escalationLevels = regionsData.escalation_levels;
   const escalationLevelCounts = getEscalationCounts(escalationLevels);
 
-  return {
-    props: { data, escalationLevelCounts, text, lastGenerated, locale },
-  };
-};
+  return { props: { data, escalationLevelCounts, text, lastGenerated } };
+}
 
 export default Home;
