@@ -130,10 +130,10 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                           <SidebarMetric
                             data={data}
                             scope="gm"
-                            metricName="positive_tested_people"
-                            metricProperty="infected_daily_total"
+                            metricName="tested_overall"
+                            metricProperty="infected"
                             localeTextKey="gemeente_positief_geteste_personen"
-                            differenceKey="positive_tested_people__infected_daily_total"
+                            differenceKey="positive_tested_people__infected"
                           />
                         </MetricMenuItemLink>
                       </CategoryMenu>
@@ -151,10 +151,10 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                           <SidebarMetric
                             data={data}
                             scope="gm"
-                            metricName="hospital_admissions"
-                            metricProperty="moving_average_hospital"
+                            metricName="hospital_nice"
+                            metricProperty="admissions_moving_average"
                             localeTextKey="gemeente_ziekenhuisopnames_per_dag"
-                            differenceKey="hospital_admissions__moving_average_hospital"
+                            differenceKey="hospital_nice__admissions__moving_average"
                           />
                         </MetricMenuItemLink>
                       </CategoryMenu>

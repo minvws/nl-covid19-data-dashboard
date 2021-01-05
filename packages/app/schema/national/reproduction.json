@@ -1,28 +1,30 @@
 {
   "definitions": {
-    "item": {
-      "title": "infectious_people_count_normalized_last_value",
+    "value": {
+      "title": "national_reproduction_value",
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "infectious_low_normalized",
-        "infectious_avg_normalized",
-        "infectious_high_normalized",
-        "date_of_report_unix",
+        "index_low",
+        "index_average",
+        "index_high",
+        "date_unix",
         "date_of_insertion_unix"
       ],
       "properties": {
-        "infectious_low_normalized": {
-          "type": "number"
-        },
-        "infectious_avg_normalized": {
+        "index_low": {
           "type": ["number", "null"],
           "nullable": true
         },
-        "infectious_high_normalized": {
-          "type": "number"
+        "index_average": {
+          "type": ["number", "null"],
+          "nullable": true
         },
-        "date_of_report_unix": {
+        "index_high": {
+          "type": ["number", "null"],
+          "nullable": true
+        },
+        "date_unix": {
           "type": "integer"
         },
         "date_of_insertion_unix": {
@@ -32,8 +34,8 @@
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "infectious_people_count_normalized.json",
-  "title": "infectious_people_count_normalized",
+  "$id": "reproduction.json",
+  "title": "national_reproduction",
   "type": "object",
   "required": ["values", "last_value"],
   "additionalProperties": false,
@@ -41,11 +43,11 @@
     "values": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/item"
+        "$ref": "#/definitions/value"
       }
     },
     "last_value": {
-      "$ref": "#/definitions/item"
+      "$ref": "#/definitions/value"
     }
   }
 }

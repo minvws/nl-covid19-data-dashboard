@@ -4,18 +4,14 @@
       "title": "national_sewer_value",
       "type": "object",
       "required": [
-        "week_unix",
         "average",
         "date_of_insertion_unix",
         "total_installation_count",
-        "week_start_unix",
-        "week_end_unix"
+        "date_start_unix",
+        "date_end_unix"
       ],
       "additionalProperties": false,
       "properties": {
-        "week_unix": {
-          "type": "integer"
-        },
         "average": {
           "type": "number"
         },
@@ -25,10 +21,10 @@
         "date_of_insertion_unix": {
           "type": "integer"
         },
-        "week_start_unix": {
+        "date_start_unix": {
           "type": "integer"
         },
-        "week_end_unix": {
+        "date_end_unix": {
           "type": "integer"
         }
       }

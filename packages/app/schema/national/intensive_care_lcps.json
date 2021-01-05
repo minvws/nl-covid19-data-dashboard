@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "regional_nursing_home",
+  "title": "national_intensive_care_lcps",
   "type": "object",
   "properties": {
     "values": {
@@ -17,44 +17,31 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "regional_nursing_home_value",
+      "title": "national_intensive_care_lcps_value",
       "type": "object",
       "properties": {
-        "newly_infected_people": {
+        "beds_occupied_covid": {
           "type": "integer"
         },
-        "newly_infected_locations": {
+        "beds_occupied_non_covid": {
           "type": "integer"
         },
-        "infected_locations_total": {
-          "type": "integer"
-        },
-        "infected_locations_percentage": {
+        "beds_occupied_covid_percentage": {
           "type": "number"
-        },
-        "deceased_daily": {
-          "type": "integer"
         },
         "date_unix": {
           "type": "integer"
         },
         "date_of_insertion_unix": {
           "type": "integer"
-        },
-        "vrcode": {
-          "type": "string",
-          "equalsRootProperty": "code"
         }
       },
       "required": [
-        "newly_infected_people",
-        "newly_infected_locations",
-        "infected_locations_total",
-        "infected_locations_percentage",
-        "deceased_daily",
+        "beds_occupied_covid",
+        "beds_occupied_non_covid",
+        "beds_occupied_covid_percentage",
         "date_unix",
-        "date_of_insertion_unix",
-        "vrcode"
+        "date_of_insertion_unix"
       ],
       "additionalProperties": false
     }

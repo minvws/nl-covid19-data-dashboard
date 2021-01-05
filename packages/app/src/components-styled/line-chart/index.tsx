@@ -31,6 +31,7 @@ import {
   getTrendData,
   isDailyValue,
   isWeeklyValue,
+  NumberProperty,
   TrendValue,
   Value,
   WeeklyValue,
@@ -39,14 +40,8 @@ import {
 const dateToValue = (d: Date) => d.valueOf() / 1000;
 const formatXAxis = (date: Date) =>
   formatDateFromSeconds(dateToValue(date), 'axis');
-const formatYAxisFn = (y: number) => y.toString();
+const formatYAxisFn = (y: number) => formatNumber(y);
 const formatYAxisPercentageFn = (y: number) => `${formatPercentage(y)}%`;
-
-// This type limits the allowed property names to those with a number type,
-// so its like keyof T, but filtered down to only the appropriate properties.
-export type NumberProperty<T extends Value> = {
-  [K in keyof T]: T[K] extends number | null ? K : never;
-}[keyof T];
 
 export type LineConfig<T extends Value> = {
   metricProperty: NumberProperty<T>;
@@ -107,12 +102,6 @@ export function LineChart<T extends Value>({
     hideTooltip,
   } = useTooltip<T & TrendValue>();
 
-  const [markerProps, setMarkerProps] = useState<{
-    height: number;
-    data: HoverPoint<T>[];
-    padding: ChartPadding;
-  }>();
-
   const metricProperties = useMemo(
     () => linesConfig.map((x) => x.metricProperty),
     [linesConfig]
@@ -138,10 +127,21 @@ export function LineChart<T extends Value>({
     return isDefined(domain[0]) ? (domain as [Date, Date]) : undefined;
   }, [trendsList]);
 
-  const yDomain = useMemo(() => [0, calculateYMax(trendsList, signaalwaarde)], [
+  const yMax = useMemo(() => calculateYMax(trendsList, signaalwaarde), [
     trendsList,
     signaalwaarde,
   ]);
+
+  const yDomain = useMemo(() => [0, yMax], [yMax]);
+
+  // Increase space for larger labels
+  padding = { ...padding, left: Math.max(yMax.toFixed(0).length * 10, defaultPadding.left) };
+
+  const [markerProps, setMarkerProps] = useState<{
+    height: number;
+    data: HoverPoint<T>[];
+    padding: ChartPadding;
+  }>();
 
   const bisect = useCallback(
     (
@@ -353,10 +353,10 @@ function formatDefaultTooltip<T extends Value>(
     }`;
   } else if (isWeekly) {
     return `${formatDateFromSeconds(
-      ((value as unknown) as WeeklyValue).week_start_unix,
+      ((value as unknown) as WeeklyValue).date_start_unix,
       'short'
     )} - ${formatDateFromSeconds(
-      ((value as unknown) as WeeklyValue).week_end_unix,
+      ((value as unknown) as WeeklyValue).date_end_unix,
       'short'
     )}: ${
       isPercentage

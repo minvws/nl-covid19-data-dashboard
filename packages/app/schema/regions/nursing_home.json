@@ -19,7 +19,7 @@
     "deceased_daily": {
       "type": "integer"
     },
-    "date_of_report_unix": {
+    "date_unix": {
       "type": "integer"
     },
     "date_of_insertion_unix": {
@@ -36,7 +36,7 @@
     "infected_locations_total",
     "infected_locations_percentage",
     "deceased_daily",
-    "date_of_report_unix",
+    "date_unix",
     "date_of_insertion_unix",
     "vrcode"
   ],

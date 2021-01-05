@@ -15,13 +15,14 @@ import {
   getNationalStaticProps,
   NationalPageProps,
 } from '~/static-props/nl-data';
+import { getLastFilledValue } from '~/utils/get-last-filled-value';
 
 const text = siteText.reproductiegetal;
 
 const ReproductionIndex: FCWithLayout<NationalPageProps> = (props) => {
   const { data } = props;
 
-  const lastKnownValidData = data.reproduction_index_last_known_average;
+  const lastFilledValue = getLastFilledValue(data.reproduction);
 
   return (
     <>
@@ -38,9 +39,8 @@ const ReproductionIndex: FCWithLayout<NationalPageProps> = (props) => {
           subtitle={text.pagina_toelichting}
           metadata={{
             datumsText: text.datums,
-            dateInfo: lastKnownValidData.last_value.date_of_report_unix,
-            dateOfInsertionUnix:
-              lastKnownValidData.last_value.date_of_insertion_unix,
+            dateOrRange: lastFilledValue.date_unix,
+            dateOfInsertionUnix: lastFilledValue.date_of_insertion_unix,
             dataSources: [text.bronnen.rivm],
           }}
           reference={text.reference}
@@ -50,7 +50,7 @@ const ReproductionIndex: FCWithLayout<NationalPageProps> = (props) => {
           <KpiWithIllustrationTile
             title={text.barscale_titel}
             metadata={{
-              date: lastKnownValidData.last_value.date_of_report_unix,
+              date: lastFilledValue.date_unix,
               source: text.bronnen.rivm,
             }}
             illustration={{
@@ -62,22 +62,22 @@ const ReproductionIndex: FCWithLayout<NationalPageProps> = (props) => {
             <PageBarScale
               data={data}
               scope="nl"
-              metricName="reproduction_index_last_known_average"
-              metricProperty="reproduction_index_avg"
+              metricName="reproduction"
+              metricProperty="index_average"
               localeTextKey="reproductiegetal"
             />
             <Text>{text.barscale_toelichting}</Text>
           </KpiWithIllustrationTile>
         </TwoKpiSection>
 
-        {data.reproduction_index.values && (
+        {data.reproduction.values && (
           <LineChartTile
             metadata={{ source: text.bronnen.rivm }}
             title={text.linechart_titel}
-            values={data.reproduction_index.values}
+            values={data.reproduction.values}
             linesConfig={[
               {
-                metricProperty: 'reproduction_index_avg',
+                metricProperty: 'index_average',
               },
             ]}
             signaalwaarde={1}

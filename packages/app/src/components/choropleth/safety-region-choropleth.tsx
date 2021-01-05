@@ -12,11 +12,11 @@ import {
 } from './hooks';
 import { getDataThresholds } from './legenda/utils';
 import { Path } from './path';
-import { SafetyRegionProperties, TRegionMetricName } from './shared';
+import { SafetyRegionProperties, RegionsMetricName } from './shared';
 import { countryGeo, regionGeo } from './topology';
 
 type SafetyRegionChoroplethProps<T> = {
-  metricName: TRegionMetricName;
+  metricName: RegionsMetricName;
   metricProperty: string;
   selected?: string;
   highlightSelection?: boolean;
