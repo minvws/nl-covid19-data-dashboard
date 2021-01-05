@@ -9,7 +9,8 @@
     "code",
     "tested_overall",
     "hospital_nice",
-    "tested_ggd",
+    "tested_ggd_daily",
+    "tested_ggd_average",
     "nursing_home",
     "sewer",
     "sewer_per_installation",
@@ -53,8 +54,11 @@
     "hospital_nice": {
       "$ref": "hospital_nice.json"
     },
-    "tested_ggd": {
-      "$ref": "tested_ggd.json"
+    "tested_ggd_daily": {
+      "$ref": "tested_ggd_daily.json"
+    },
+    "tested_ggd_average": {
+      "$ref": "tested_ggd_average.json"
     },
     "nursing_home": {
       "$ref": "nursing_home.json"

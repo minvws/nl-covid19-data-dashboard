@@ -9,10 +9,16 @@
     "tested_overall__infected": {
       "$ref": "#/definitions/diff_integer"
     },
-    "ggd__tested_total": {
+    "tested_ggd_average__tested_total": {
       "$ref": "#/definitions/diff_integer"
     },
-    "ggd__infected_percentage": {
+    "tested_ggd_average__infected_percentage": {
+      "$ref": "#/definitions/diff_decimal"
+    },
+    "tested_ggd_daily__tested_total": {
+      "$ref": "#/definitions/diff_integer"
+    },
+    "tested_ggd_daily__infected_percentage": {
       "$ref": "#/definitions/diff_decimal"
     },
     "hospital_nice__admissions_moving_average": {
@@ -35,8 +41,10 @@
     "tested_overall__infected_per_100k",
     "tested_overall__infected",
     "hospital_nice__admissions_moving_average",
-    "ggd__tested_total",
-    "ggd__infected_percentage",
+    "tested_ggd_daily__tested_total",
+    "tested_ggd_daily__infected_percentage",
+    "tested_ggd_average__tested_total",
+    "tested_ggd_average__infected_percentage",
     "sewer__average",
     "nursing_home__newly_infected_people",
     "nursing_home__infected_locations_total",

@@ -50,7 +50,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
           subtitle={text.pagina_toelichting}
           metadata={{
             datumsText: text.datums,
-            dateInfo: lastValue.date_unix,
+            dateOrRange: lastValue.date_unix,
             dateOfInsertionUnix: lastValue.date_of_insertion_unix,
             dataSources: [text.bronnen.rivm],
           }}

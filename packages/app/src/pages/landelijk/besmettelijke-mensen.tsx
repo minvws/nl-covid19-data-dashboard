@@ -40,7 +40,7 @@ const InfectiousPeople: FCWithLayout<NationalPageProps> = (props) => {
           subtitle={text.toelichting_pagina}
           metadata={{
             datumsText: text.datums,
-            dateInfo: lastFullValue.date_unix,
+            dateOrRange: lastFullValue.date_unix,
             dateOfInsertionUnix: lastFullValue.date_of_insertion_unix,
             dataSources: [text.bronnen.rivm],
           }}

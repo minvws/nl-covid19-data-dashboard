@@ -39,7 +39,7 @@ const ReproductionIndex: FCWithLayout<NationalPageProps> = (props) => {
           subtitle={text.pagina_toelichting}
           metadata={{
             datumsText: text.datums,
-            dateInfo: lastFilledValue.date_unix,
+            dateOrRange: lastFilledValue.date_unix,
             dateOfInsertionUnix: lastFilledValue.date_of_insertion_unix,
             dataSources: [text.bronnen.rivm],
           }}
