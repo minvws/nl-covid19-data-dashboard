@@ -1,7 +1,7 @@
 import { get } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { BarScale } from '~/components/barScale';
-import { MetricKeys } from '~/components/choropleth/shared';
+import { Metric, MetricKeys } from '~/components/choropleth/shared';
 import siteText, { TALLLanguages } from '~/locale/index';
 import { assert } from '~/utils/assert';
 import { getLastFilledValue } from '~/utils/get-last-filled-value';
@@ -23,7 +23,7 @@ interface PageBarScaleProps<T> {
   scope: DataScope;
   data: T;
   localeTextKey: keyof TALLLanguages;
-  metricName: ValueOf<MetricKeys<T>>;
+  metricName: MetricKeys<T>;
   metricProperty: string;
   differenceKey?: string;
 }
@@ -43,9 +43,8 @@ export function PageBarScale<T>({
    * fix this easily. The getLastFilledValue function is now strongly typed on
    * a certain metric but here we don't have that type as input.
    */
-  const lastValue = metricContainsPartialData((metricName as unknown) as string)
-    ? // @ts-ignore
-      (getLastFilledValue(data[metricName]) as data[metricName])
+  const lastValue = metricContainsPartialData(metricName as string)
+    ? getLastFilledValue((data[metricName] as unknown) as Metric<unknown>)
     : get(data, [(metricName as unknown) as string, 'last_value']);
 
   const propertyValue = lastValue && lastValue[metricProperty];
