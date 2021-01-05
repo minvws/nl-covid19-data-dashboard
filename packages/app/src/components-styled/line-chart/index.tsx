@@ -135,7 +135,13 @@ export function LineChart<T extends Value>({
   const yDomain = useMemo(() => [0, yMax], [yMax]);
 
   // Increase space for larger labels
-  padding = { ...padding, left: Math.max(yMax.toFixed(0).length * 10, defaultPadding.left) };
+  const calculatedPadding = useMemo(
+    () => ({
+      ...padding,
+      left: Math.max(yMax.toFixed(0).length * 10, defaultPadding.left),
+    }),
+    [padding, yMax]
+  );
 
   const [markerProps, setMarkerProps] = useState<{
     height: number;
@@ -152,7 +158,7 @@ export function LineChart<T extends Value>({
       if (!trend.length) return;
       if (trend.length === 1) return trend[0];
 
-      const date = xScale.invert(xPosition - padding.left);
+      const date = xScale.invert(xPosition - calculatedPadding.left);
 
       const index = bisectLeft(
         trend.map((x) => x.__date),
@@ -167,7 +173,7 @@ export function LineChart<T extends Value>({
 
       return +date - +d0.__date > +d1.__date - +date ? d1 : d0;
     },
-    [padding]
+    [calculatedPadding]
   );
 
   const distance = (point1: HoverPoint<Value>, point2: Point) => {
