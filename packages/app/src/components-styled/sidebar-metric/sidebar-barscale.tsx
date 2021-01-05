@@ -1,10 +1,15 @@
 import { get } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { BarScale } from '~/components/barScale';
-import { MetricKeys } from '~/components/choropleth/shared';
+import { Metric, MetricKeys } from '~/components/choropleth/shared';
 import siteText, { TALLLanguages } from '~/locale/index';
 import { assert } from '~/utils/assert';
-import { DataScope, getMetricConfig } from '../../metric-config';
+import { getLastFilledValue } from '~/utils/get-last-filled-value';
+import {
+  DataScope,
+  getMetricConfig,
+  metricContainsPartialData,
+} from '../../metric-config';
 import { Box } from '../base';
 
 interface SidebarBarScaleProps<T> {
@@ -23,10 +28,14 @@ export function SidebarBarScale<T>({
   localeTextKey,
 }: SidebarBarScaleProps<T>) {
   const text = siteText[localeTextKey] as Record<string, string>;
-  const lastValue = get(data, [
-    (metricName as unknown) as string,
-    'last_value',
-  ]);
+  /**
+   * @TODO this is still a bit messy due to improper typing. Not sure how to
+   * fix this easily. The getLastFilledValue function is now strongly typed on
+   * a certain metric but here we don't have that type as input.
+   */
+  const lastValue = metricContainsPartialData(metricName as string)
+    ? getLastFilledValue((data[metricName] as unknown) as Metric<unknown>)
+    : get(data, [metricName as string, 'last_value']);
   const propertyValue = lastValue && lastValue[metricProperty];
 
   /**
