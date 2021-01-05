@@ -69,7 +69,7 @@ function NationalLayout(props: NationalLayoutProps) {
   const isMenuOpen =
     (router.pathname === '/' && !('menu' in router.query)) ||
     router.query.menu === '1';
-
+  
   return (
     <>
       <Head>
@@ -126,10 +126,10 @@ function NationalLayout(props: NationalLayoutProps) {
                   title={siteText.vaccinaties.titel_sidebar}
                 >
                   <SidebarMetric
-                    data={data}
+                    data={siteText.vaccinaties}
                     scope="nl"
-                    metricName="infectious_people_last_known_average"
-                    metricProperty="infectious_avg"
+                    metricName="sidebar"
+                    metricProperty="total_vaccinated"
                     localeTextKey="vaccinaties"
                   />
                 </MetricMenuItemLink>

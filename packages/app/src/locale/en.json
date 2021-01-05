@@ -688,8 +688,8 @@
         "verantwoording": "Every day the National Institute for Public Health and the Environment (RIVM) provides [open data](https://data.rivm.nl/covid-19/COVID-19_thuiswonend_70plus.csv) about the COVID-19 situation among over-70s living at home. A description of the data set can be found [here](https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/40508e17-7296-4f39-ad25-8ddd0c904087). This data cannot always be clearly linked to a specific safety region. As a result, the total sum of numbers at safety-region level may be less than the numbers at national level. The number of deaths is based on the date of death. However, when the date of death is unknown that death is not included in this statistic in the dashboard.\n\nFor its calculations RIVM uses test results and mortality data which it receives from the municipal health service (GGD). When people get tested for coronavirus, the GGD also records certain personal details, such as their age and whether they live in a nursing home or disability care home. RIVM calculates the number of new cases among over-70s living at home by, first, determining the total number of new cases in this age group and then subtracting the number of infections:\n- Amongst nursing home residents \n- Amongst care workers\n- Amongst people that can be linked to a care home via their address \n- Amongst people that can be linked to a care home because of the setting of their infection.\n\nThe population of over-70s living at home is highly diverse in terms of their health and living situation. Many over-70s are active and in good health. But others live with at least one chronic disease and/or have physical or cognitive limitations, and are less active. It is not possible at this time to distinguish between COVID-19 infections among active and inactive over-70s living at home because information about activity levels is not recorded when people get tested for coronavirus.\n\nThe dashboard also shows the number of daily confirmed cases per 100,000 for over-70s living at home. The total number of over-70s living at home is based on data collected by Statistics Netherlands on the number of over-70s living in a private household (Households: size, composition, position, 1 January; cbs.nl). This group consists of roughly 2.3 million people."
       },
       {
-        "cijfer": "",
-        "verantwoording": ""
+        "cijfer": "Vaccinaties",
+        "verantwoording": "Vaccinaties verantwoording komt hier!"
       },
       {
         "cijfer": "",
@@ -1900,6 +1900,69 @@
       "line_chart_covid_daily_description": "This graph shows the number of reported deaths from COVID-19, in the selected period of time."
     },
     "kpi_titel": "Daily reported deaths from COVID-19"
+  },
+  "vaccinaties": {
+    "titel_sidebar": "Vaccinaties",
+    "titel_kpi": "Totaal aantal eerste vaccinaties toegediend",
+    "metadata": {
+      "title": "Vaccinaties | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "#"
+    },
+    "sidebar": {
+      "last_value": {
+        "total_vaccinated": "2187",
+        "date_of_report_unix": "1609718400",
+        "date_of_insertion_unix": "1609766591"
+      }
+    },
+    "date_of_report_unix": "1609632000",
+    "date_of_insertion_unix": "1609632000",
+    "section_vaccinations_rivm": {
+      "title": "COVID-19 vaccinaties",
+      "description": "Op deze pagina is informatie te vinden omtrent vaccineren voor COVID-19 in Nederland.",
+      "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+      "reference": {
+        "href": "/verantwoording#vaccinaties",
+        "text": "Lees meer in de cijferverantwoording."
+      },
+      "bronnen": {
+        "rivm": {
+          "href": "#",
+          "text": "RIVM",
+          "download": ""
+        },
+        "vws": {
+          "href": "#",
+          "text": "VWS",
+          "download": ""
+        }
+      },
+      "kpi_first_vaccinations": {
+        "title": "Aantal eerste vaccinaties toegediend",
+        "value": "2187",
+        "description": "Dit getal laat zien hoeveel mensen totaal hun eerste vaccinatie hebben gekregen in Nederland."
+      },
+      "kpi_rate": {
+        "title": "Vaccinatiegraad",
+        "value": "0.4",
+        "target": "Streefwaarde 70%",
+        "description": "Dit getal laat zien hoeveel mensen totaal hun eerste vaccinatie hebben gekregen in Nederland."
+      },
+      "kpi_stock": {
+        "title": "Vaccins in voorraad",
+        "value": "12400",
+        "description": "Dit getal laat het aantal vaccins dat we op dit moment in voorraad hebben."
+      },
+      "kpi_expected_delivery": {
+        "title": "Verwachte levering",
+        "value": "18000000",
+        "description": "Dit getal laat het aantal vaccins zien dat we in de nabije toekomst verwachten."
+      }
+    },
+    "section_vaccinations_more_information": {
+      "title": "Meer informatie",
+      "description": "In de komende periode wordt gewerkt aan uitbreiding van de cijfers op deze pagina. Voor meer informatie over de cijfers zie de [cijferverantwoording](#). Meer informatie over de vaccinaties zelf kunt u vinden op [https://www.rijksoverheid.nl/onderwerpen/coronavirus-vaccinatie](https://www.rijksoverheid.nl/onderwerpen/coronavirus-vaccinatie)"
+    }
   },
   "veiligheidsregio_sterfte": {
     "titel_sidebar": "Deaths",
