@@ -357,13 +357,13 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
           metadata={{
             source: ggdText.bronnen.rivm,
           }}
-          formatTooltip={(d) => {
-            const percentage = (d[1].__value * 100) / d[0].__value;
+          formatTooltip={(x) => {
+            const percentage = (x[1].__value * 100) / x[0].__value;
 
             return (
               <>
-                {formatDateFromSeconds(d[0].week_start_unix, 'short')} -{' '}
-                {formatDateFromSeconds(d[0].week_end_unix, 'short')}
+                {formatDateFromSeconds(x[0].week_start_unix, 'short')} -{' '}
+                {formatDateFromSeconds(x[0].week_end_unix, 'short')}
                 <br />
                 <span
                   style={{
@@ -373,8 +373,8 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
                     borderRadius: '50%',
                     display: 'inline-block',
                   }}
-                ></span>{' '}
-                {formatNumber(d[0].__value)}
+                />{' '}
+                {formatNumber(x[0].__value)}
                 <br />
                 <span
                   style={{
@@ -384,8 +384,8 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
                     borderRadius: '50%',
                     display: 'inline-block',
                   }}
-                ></span>{' '}
-                {formatNumber(d[1].__value)} ({formatPercentage(percentage)}%)
+                />{' '}
+                {formatNumber(x[1].__value)} ({formatPercentage(percentage)}%)
               </>
             );
           }}
