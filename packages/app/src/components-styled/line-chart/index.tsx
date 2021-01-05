@@ -126,15 +126,20 @@ export function LineChart<T extends Value>({
 
   const yDomain = useMemo(() => [0, yMax], [yMax]);
 
-  // Increase space for larger labels
-  const padding: ChartPadding = useMemo(
-    () => ({
+  const padding: ChartPadding = useMemo(() => {
+    const { top, right, bottom, left } = {
       ...defaultPadding,
       ...overridePadding,
-      left: Math.max(yMax.toFixed(0).length * 10, defaultPadding.left)
-    }),
-    [overridePadding, yMax]
-  );
+    };
+
+    return {
+      top,
+      right,
+      bottom,
+      // Increase space for larger labels
+      left: Math.max(yMax.toFixed(0).length * 10, left),
+    };
+  }, [overridePadding, yMax]);
 
   const [markerProps, setMarkerProps] = useState<{
     height: number;
