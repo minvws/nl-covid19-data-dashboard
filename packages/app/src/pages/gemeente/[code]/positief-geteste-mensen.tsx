@@ -92,21 +92,19 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
           </KpiTile>
         </TwoKpiSection>
 
-        {data.tested_overall && (
-          <LineChartTile
-            title={text.linechart_titel}
-            description={text.linechart_toelichting}
-            values={data.tested_overall.values}
-            linesConfig={[
-              {
-                metricProperty: 'infected_per_100k',
-              },
-            ]}
-            metadata={{
-              source: text.bronnen.rivm,
-            }}
-          />
-        )}
+        <LineChartTile
+          title={text.linechart_titel}
+          description={text.linechart_toelichting}
+          values={data.tested_overall.values}
+          linesConfig={[
+            {
+              metricProperty: 'infected_per_100k',
+            },
+          ]}
+          metadata={{
+            source: text.bronnen.rivm,
+          }}
+        />
 
         <ChoroplethTile
           title={replaceVariablesInText(text.map_titel, {

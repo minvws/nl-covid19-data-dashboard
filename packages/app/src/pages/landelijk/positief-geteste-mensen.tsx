@@ -12,7 +12,6 @@ import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
-import { defaultPadding } from '~/components-styled/line-chart/components/chart-axes';
 import { PageBarScale } from '~/components-styled/page-barscale';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
@@ -334,10 +333,9 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
           timeframeOptions={['all', '5weeks']}
           title={ggdText.linechart_totaltests_titel}
           description={ggdText.linechart_totaltests_toelichting}
-          showFill={false}
+          hideFill={true}
           showLegend
           padding={{
-            ...defaultPadding,
             left: 45,
           }}
           values={dataGgdDailyValues}
@@ -356,12 +354,12 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
           metadata={{
             source: ggdText.bronnen.rivm,
           }}
-          formatTooltip={(d) => {
-            const percentage = (d[1].__value * 100) / d[0].__value;
+          formatTooltip={(x) => {
+            const percentage = (x[1].__value * 100) / x[0].__value;
 
             return (
               <>
-                {formatDateFromSeconds(d[0].date_unix, 'short')}
+                {formatDateFromSeconds(x[0].date_unix, 'short')}
                 <br />
                 <span
                   style={{
@@ -371,8 +369,8 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
                     borderRadius: '50%',
                     display: 'inline-block',
                   }}
-                ></span>{' '}
-                {formatNumber(d[0].__value)}
+                />{' '}
+                {formatNumber(x[0].__value)}
                 <br />
                 <span
                   style={{
@@ -382,8 +380,8 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
                     borderRadius: '50%',
                     display: 'inline-block',
                   }}
-                ></span>{' '}
-                {formatNumber(d[1].__value)} ({formatPercentage(percentage)}%)
+                />{' '}
+                {formatNumber(x[1].__value)} ({formatPercentage(percentage)}%)
               </>
             );
           }}
