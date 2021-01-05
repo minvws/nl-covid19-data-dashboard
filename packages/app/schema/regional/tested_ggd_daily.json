@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "regional_tested_ggd_daily",
+  "type": "object",
+  "properties": {
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/value"
+      }
+    },
+    "last_value": {
+      "$ref": "#/definitions/value"
+    }
+  },
+  "required": ["values", "last_value"],
+  "additionalProperties": false,
+  "definitions": {
+    "value": {
+      "title": "regional_tested_ggd_daily_value",
+      "type": "object",
+      "properties": {
+        "infected": {
+          "type": "integer"
+        },
+        "infected_percentage": {
+          "type": "number"
+        },
+        "tested_total": {
+          "type": "integer"
+        },
+        "date_unix": {
+          "type": "integer"
+        },
+        "date_of_insertion_unix": {
+          "type": "integer"
+        },
+        "vrcode": {
+          "type": "string",
+          "equalsRootProperty": "code"
+        }
+      },
+      "required": [
+        "infected",
+        "infected_percentage",
+        "tested_total",
+        "date_unix",
+        "date_of_insertion_unix",
+        "vrcode"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

@@ -42,8 +42,8 @@ const PositivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
 
   const lastValue = data.tested_overall.last_value;
 
-  const ggdData = data.tested_ggd.last_value;
-  const ggdValues = data.tested_ggd.values;
+  const ggdAverageLastValue = data.tested_ggd_average.last_value;
+  const ggdDailyValues = data.tested_ggd_daily.values;
 
   const municipalCodes = regionCodeToMunicipalCodeLookup[data.code];
   const selectedMunicipalCode = municipalCodes ? municipalCodes[0] : undefined;
@@ -68,7 +68,7 @@ const PositivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           subtitle={text.pagina_toelichting}
           metadata={{
             datumsText: text.datums,
-            dateInfo: lastValue.date_unix,
+            dateOrRange: lastValue.date_unix,
             dateOfInsertionUnix: lastValue.date_of_insertion_unix,
             dataSources: [text.bronnen.rivm],
           }}
@@ -121,7 +121,7 @@ const PositivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
                       {
                         name: 'percentage',
                         value: `${formatPercentage(
-                          ggdData.infected_percentage
+                          ggdAverageLastValue.infected_percentage
                         )}%`,
                       },
                     ]),
@@ -184,10 +184,10 @@ const PositivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           subtitle={ggdText.toelichting}
           metadata={{
             datumsText: ggdText.datums,
-            dateOfInsertionUnix: ggdData.date_of_insertion_unix,
-            dateInfo: {
-              weekStartUnix: ggdData.date_start_unix,
-              weekEndUnix: ggdData.date_end_unix,
+            dateOfInsertionUnix: ggdAverageLastValue.date_of_insertion_unix,
+            dateOrRange: {
+              start: ggdAverageLastValue.date_start_unix,
+              end: ggdAverageLastValue.date_end_unix,
             },
             dataSources: [ggdText.bronnen.rivm],
           }}
@@ -198,26 +198,28 @@ const PositivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           <KpiTile
             title={ggdText.totaal_getest_week_titel}
             metadata={{
-              date: [ggdData.date_start_unix, ggdData.date_end_unix],
+              date: ggdAverageLastValue.date_end_unix,
               source: ggdText.bronnen.rivm,
             }}
           >
             <KpiValue
-              absolute={ggdData.tested_total}
-              difference={data.difference.ggd__tested_total}
+              absolute={ggdAverageLastValue.tested_total}
+              difference={data.difference.tested_ggd_average__tested_total}
             />
             <Text>{ggdText.totaal_getest_week_uitleg}</Text>
           </KpiTile>
           <KpiTile
             title={ggdText.positief_getest_week_titel}
             metadata={{
-              date: [ggdData.date_start_unix, ggdData.date_end_unix],
+              date: ggdAverageLastValue.date_end_unix,
               source: ggdText.bronnen.rivm,
             }}
           >
             <KpiValue
-              percentage={ggdData.infected_percentage}
-              difference={data.difference.ggd__infected_percentage}
+              percentage={ggdAverageLastValue.infected_percentage}
+              difference={
+                data.difference.tested_ggd_average__infected_percentage
+              }
             />
             <Text>{ggdText.positief_getest_week_uitleg}</Text>
             <Text>
@@ -229,11 +231,11 @@ const PositivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
                     [
                       {
                         name: 'numerator',
-                        value: formatNumber(ggdData.infected),
+                        value: formatNumber(ggdAverageLastValue.infected),
                       },
                       {
                         name: 'denominator',
-                        value: formatNumber(ggdData.tested_total),
+                        value: formatNumber(ggdAverageLastValue.tested_total),
                       },
                     ]
                   ),
@@ -247,7 +249,7 @@ const PositivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           timeframeOptions={['all', '5weeks']}
           title={ggdText.linechart_percentage_titel}
           description={ggdText.linechart_percentage_toelichting}
-          values={ggdValues}
+          values={ggdDailyValues}
           linesConfig={[
             {
               metricProperty: 'infected_percentage',
@@ -264,20 +266,24 @@ const PositivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           title={ggdText.linechart_totaltests_titel}
           description={ggdText.linechart_totaltests_toelichting}
           values={[
-            ggdValues.map((value) => ({
+            /**
+             * @TODO remove the dependency on these week timestaps. It is daily
+             * data now
+             */
+            ggdDailyValues.map((value) => ({
               value: value.tested_total,
-              date: value.date_end_unix,
+              date: value.date_unix,
               week: {
-                start: value.date_start_unix,
-                end: value.date_end_unix,
+                start: value.date_unix,
+                end: value.date_unix,
               },
             })),
-            ggdValues.map((value) => ({
+            ggdDailyValues.map((value) => ({
               value: value.infected,
-              date: value.date_end_unix,
+              date: value.date_unix,
               week: {
-                start: value.date_start_unix,
-                end: value.date_end_unix,
+                start: value.date_unix,
+                end: value.date_unix,
               },
             })),
           ]}

@@ -40,7 +40,7 @@ const IntakeIntensiveCare: FCWithLayout<NationalPageProps> = (props) => {
           subtitle={text.pagina_toelichting}
           metadata={{
             datumsText: text.datums,
-            dateInfo: dataIntake.last_value.date_unix,
+            dateOrRange: dataIntake.last_value.date_unix,
             dateOfInsertionUnix: dataIntake.last_value.date_of_insertion_unix,
             dataSources: [text.bronnen.nice, text.bronnen.lnaz],
           }}

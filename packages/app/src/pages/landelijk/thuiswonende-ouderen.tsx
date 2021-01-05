@@ -42,7 +42,7 @@ const ElderlyAtHomeNationalPage: FCWithLayout<NationalPageProps> = (props) => {
           subtitle={text.section_positive_tested.description}
           metadata={{
             datumsText: text.section_positive_tested.datums,
-            dateInfo: elderlyAtHomeData.last_value.date_unix,
+            dateOrRange: elderlyAtHomeData.last_value.date_unix,
             dateOfInsertionUnix:
               elderlyAtHomeData.last_value.date_of_insertion_unix,
             dataSources: [text.section_positive_tested.bronnen.rivm],
@@ -126,7 +126,7 @@ const ElderlyAtHomeNationalPage: FCWithLayout<NationalPageProps> = (props) => {
           subtitle={text.section_deceased.description}
           metadata={{
             datumsText: text.section_deceased.datums,
-            dateInfo: elderlyAtHomeData.last_value.date_unix,
+            dateOrRange: elderlyAtHomeData.last_value.date_unix,
             dateOfInsertionUnix:
               elderlyAtHomeData.last_value.date_of_insertion_unix,
             dataSources: [text.section_deceased.bronnen.rivm],

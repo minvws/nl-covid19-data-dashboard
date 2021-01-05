@@ -9,12 +9,13 @@
     "deceased_rivm",
     "difference",
     "disability_care",
+    "doctor",
     "elderly_at_home",
     "hospital_lcps",
     "hospital_nice",
     "infectious_people",
-    "intensive_care_nice",
     "intensive_care_lcps",
+    "intensive_care_nice",
     "last_generated",
     "name",
     "nursing_home",
@@ -22,10 +23,10 @@
     "reproduction",
     "restrictions",
     "sewer",
-    "tested_ggd",
+    "tested_ggd_daily",
+    "tested_ggd_average",
     "tested_overall",
-    "tested_per_age_group",
-    "doctor"
+    "tested_per_age_group"
   ],
   "additionalProperties": false,
   "properties": {
@@ -77,8 +78,11 @@
     "intensive_care_lcps": {
       "$ref": "intensive_care_lcps.json"
     },
-    "tested_ggd": {
-      "$ref": "tested_ggd.json"
+    "tested_ggd_daily": {
+      "$ref": "tested_ggd_daily.json"
+    },
+    "tested_ggd_average": {
+      "$ref": "tested_ggd_average.json"
     },
     "nursing_home": {
       "$ref": "nursing_home.json"

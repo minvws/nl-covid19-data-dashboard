@@ -57,7 +57,7 @@ const NursingHomeCare: FCWithLayout<ISafetyRegionData> = (props) => {
           )}
           metadata={{
             datumsText: positiveTestPeopleText.datums,
-            dateInfo: nursinghomeLastValue.date_unix,
+            dateOrRange: nursinghomeLastValue.date_unix,
             dateOfInsertionUnix: nursinghomeLastValue.date_of_insertion_unix,
             dataSources: [positiveTestPeopleText.bronnen.rivm],
           }}
@@ -102,7 +102,7 @@ const NursingHomeCare: FCWithLayout<ISafetyRegionData> = (props) => {
           subtitle={locationsText.pagina_toelichting}
           metadata={{
             datumsText: locationsText.datums,
-            dateInfo: nursinghomeLastValue.date_unix,
+            dateOrRange: nursinghomeLastValue.date_unix,
             dateOfInsertionUnix: nursinghomeLastValue.date_of_insertion_unix,
             dataSources: [locationsText.bronnen.rivm],
           }}
@@ -167,7 +167,7 @@ const NursingHomeCare: FCWithLayout<ISafetyRegionData> = (props) => {
           subtitle={mortalityText.pagina_toelichting}
           metadata={{
             datumsText: mortalityText.datums,
-            dateInfo: nursinghomeLastValue.date_unix,
+            dateOrRange: nursinghomeLastValue.date_unix,
             dateOfInsertionUnix: nursinghomeLastValue.date_of_insertion_unix,
             dataSources: [mortalityText.bronnen.rivm],
           }}

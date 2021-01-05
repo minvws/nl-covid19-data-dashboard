@@ -56,7 +56,7 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
           subtitle={text.pagina_toelichting}
           metadata={{
             datumsText: text.datums,
-            dateInfo: lastValueNice.date_unix,
+            dateOrRange: lastValueNice.date_unix,
             dateOfInsertionUnix: lastValueNice.date_of_insertion_unix,
             dataSources: [text.bronnen.nice, text.bronnen.lnaz],
           }}
