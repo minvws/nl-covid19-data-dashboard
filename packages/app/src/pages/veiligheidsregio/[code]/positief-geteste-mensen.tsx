@@ -271,7 +271,7 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           timeframeOptions={['all', '5weeks']}
           title={ggdText.linechart_totaltests_titel}
           description={ggdText.linechart_totaltests_toelichting}
-          showFill={false}
+          hideFill={true}
           showLegend
           padding={{
             left: 45,

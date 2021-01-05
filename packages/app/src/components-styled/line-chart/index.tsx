@@ -65,7 +65,7 @@ export type LineChartProps<T extends Value> = {
   formatTooltip?: (value: (T & TrendValue)[]) => React.ReactNode;
   formatXAxis?: TickFormatter<Date>;
   formatYAxis?: TickFormatter<number>;
-  showFill?: boolean;
+  hideFill?: boolean;
   valueAnnotation?: string;
   isPercentage?: boolean;
   showMarkerLine?: boolean;
@@ -83,7 +83,7 @@ export function LineChart<T extends Value>({
   signaalwaarde,
   formatTooltip,
   formatYAxis,
-  showFill = true,
+  hideFill = false,
   valueAnnotation,
   isPercentage,
   showMarkerLine = false,
@@ -250,7 +250,7 @@ export function LineChart<T extends Value>({
     [bisect, trendsList, linesConfig, toggleHoverElements]
   );
 
-  const trendType = showFill ? 'area' : 'line';
+  const trendType = hideFill ? 'line' : 'area';
 
   if (!xDomain) {
     return null;
