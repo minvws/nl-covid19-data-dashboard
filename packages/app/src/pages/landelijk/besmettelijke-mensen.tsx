@@ -63,6 +63,7 @@ const InfectiousPeople: FCWithLayout<NationalPageProps> = (props) => {
                * we can be sure that estimate exists
                */
               absolute={lastFullValue.estimate || 0}
+              difference={data.difference.infectious_people__estimate}
             />
           </KpiTile>
         </TwoKpiSection>

@@ -150,6 +150,7 @@ function NationalLayout(props: NationalLayoutProps) {
                     metricName="infectious_people"
                     metricProperty="estimate"
                     localeTextKey="besmettelijke_personen"
+                    differenceKey="infectious_people__estimate"
                   />
                 </MetricMenuItemLink>
 
