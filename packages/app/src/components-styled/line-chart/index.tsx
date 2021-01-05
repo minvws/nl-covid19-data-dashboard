@@ -86,14 +86,6 @@ export function LineChart<T extends Value>({
   padding: overridePadding,
   showLegend = false,
 }: LineChartProps<T>) {
-  const padding: ChartPadding = useMemo(
-    () => ({
-      ...defaultPadding,
-      ...overridePadding,
-    }),
-    [overridePadding]
-  );
-
   const {
     tooltipData,
     tooltipLeft = 0,
@@ -134,14 +126,20 @@ export function LineChart<T extends Value>({
 
   const yDomain = useMemo(() => [0, yMax], [yMax]);
 
-  // Increase space for larger labels
-  const calculatedPadding = useMemo(
-    () => ({
-      ...padding,
-      left: Math.max(yMax.toFixed(0).length * 10, defaultPadding.left),
-    }),
-    [padding, yMax]
-  );
+  const padding: ChartPadding = useMemo(() => {
+    const { top, right, bottom, left } = {
+      ...defaultPadding,
+      ...overridePadding,
+    };
+
+    return {
+      top,
+      right,
+      bottom,
+      // Increase space for larger labels
+      left: Math.max(yMax.toFixed(0).length * 10, left),
+    };
+  }, [overridePadding, yMax]);
 
   const [markerProps, setMarkerProps] = useState<{
     height: number;
@@ -158,7 +156,7 @@ export function LineChart<T extends Value>({
       if (!trend.length) return;
       if (trend.length === 1) return trend[0];
 
-      const date = xScale.invert(xPosition - calculatedPadding.left);
+      const date = xScale.invert(xPosition - padding.left);
 
       const index = bisectLeft(
         trend.map((x) => x.__date),
@@ -173,7 +171,7 @@ export function LineChart<T extends Value>({
 
       return +date - +d0.__date > +d1.__date - +date ? d1 : d0;
     },
-    [calculatedPadding]
+    [padding]
   );
 
   const distance = (point1: HoverPoint<Value>, point2: Point) => {
@@ -256,7 +254,27 @@ export function LineChart<T extends Value>({
     [bisect, trendsList, linesConfig, toggleHoverElements]
   );
 
-  const trendType = hideFill ? 'line' : 'area';
+  const renderAxes = useCallback(
+    (x: ChartScales) => (
+      <>
+        {trendsList.map((trend, index) => (
+          <>
+            <Trend
+              key={index}
+              trend={trend}
+              type={hideFill ? 'line' : 'area'}
+              style={linesConfig[index].style}
+              xScale={x.xScale}
+              yScale={x.yScale}
+              color={linesConfig[index].color}
+              onHover={handleHover}
+            />
+          </>
+        ))}
+      </>
+    ),
+    [handleHover, linesConfig, hideFill, trendsList]
+  );
 
   if (!xDomain) {
     return null;
@@ -286,24 +304,7 @@ export function LineChart<T extends Value>({
           onHover={handleHover}
           benchmark={benchmark}
         >
-          {(renderProps) => (
-            <>
-              {trendsList.map((trend, index) => (
-                <>
-                  <Trend
-                    key={index}
-                    trend={trend}
-                    type={trendType}
-                    style={linesConfig[index].style}
-                    xScale={renderProps.xScale}
-                    yScale={renderProps.yScale}
-                    color={linesConfig[index].color}
-                    onHover={handleHover}
-                  />
-                </>
-              ))}
-            </>
-          )}
+          {renderAxes}
         </ChartAxes>
 
         {isDefined(tooltipData) && (
