@@ -11,40 +11,14 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
 
-// const commitHash = require('child_process')
-//   .execSync('git rev-parse --short HEAD')
-//   .toString()
-//   .trim();
-
-const i18Settings = {
-  // These are all the locales you want to support in
-  // your application
-  locales: ['en-GB', 'nl'],
-  // This is the default locale you want to be used when visiting
-  // a non-locale prefixed path e.g. `/hello`
-  defaultLocale: 'nl',
-  // When localeDetection is set to false Next.js will no longe
-  // automatically redirect based on the user's preferred locale
-  // and will only provide locale information detected from either the
-  // locale based domain or locale path as described above.
-  localeDetection: false,
-  // This is a list of locale domains and the default locale they
-  // should handle (these are only required when setting up domain routing)
-  domains: [
-    {
-      domain: process.env.PREVIEW_SERVER_EN,
-      defaultLocale: 'en-GB',
-    },
-    {
-      domain: process.env.PREVIEW_SERVER_NL,
-      defaultLocale: 'nl',
-    },
-  ],
-};
+const commitHash = require('child_process')
+  .execSync('git rev-parse --short HEAD')
+  .toString()
+  .trim();
 
 const nextConfig = {
   env: {
-    COMMIT_ID: 'replace-me-later-with-a-real-git-hash',
+    COMMIT_ID: commitHash,
   },
   reactStrictMode: true, // Enables react strict mode https://nextjs.org/docs/api-reference/next.config.js/react-strict-mode
   webpack(config, { isServer }) {
@@ -99,10 +73,6 @@ const nextConfig = {
     return config;
   },
 };
-
-if (process.env.NEXT_PUBLIC_IS_PREVIEW_SERVER) {
-  nextConfig.i18n = i18Settings;
-}
 
 const plugins = [withTM, withBundleAnalyzer];
 
