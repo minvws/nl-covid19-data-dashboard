@@ -338,23 +338,34 @@ function formatDefaultTooltip<T extends Value>(
   const isWeekly = isWeeklyValue(values);
 
   if (isDaily) {
-    return `${formatDateFromMilliseconds(value.__date.getTime())}: ${
-      isPercentage
-        ? `${formatPercentage(value.__value)}%`
-        : formatNumber(value.__value)
-    }`;
+    return (
+      <>
+        <b>{formatDateFromMilliseconds(value.__date.getTime())}: </b>
+        {isPercentage
+          ? `${formatPercentage(value.__value)}%`
+          : formatNumber(value.__value)}
+      </>
+    );
   } else if (isWeekly) {
-    return `${formatDateFromSeconds(
-      ((value as unknown) as WeeklyValue).week_start_unix,
-      'short'
-    )} - ${formatDateFromSeconds(
-      ((value as unknown) as WeeklyValue).week_end_unix,
-      'short'
-    )}: ${
-      isPercentage
-        ? `${formatPercentage(value.__value)}%`
-        : formatNumber(value.__value)
-    }`;
+    return (
+      <>
+        <b>
+          {formatDateFromSeconds(
+            ((value as unknown) as WeeklyValue).week_start_unix,
+            'short'
+          )}{' '}
+          -{' '}
+          {formatDateFromSeconds(
+            ((value as unknown) as WeeklyValue).week_end_unix,
+            'short'
+          )}
+          :
+        </b>{' '}
+        {isPercentage
+          ? `${formatPercentage(value.__value)}%`
+          : formatNumber(value.__value)}
+      </>
+    );
   }
 
   throw new Error(
