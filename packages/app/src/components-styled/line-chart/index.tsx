@@ -156,7 +156,7 @@ export function LineChart<T extends Value>({
       if (!trend.length) return;
       if (trend.length === 1) return trend[0];
 
-      const date = xScale.invert(xPosition - calculatedPadding.left);
+      const date = xScale.invert(xPosition - padding.left);
 
       const index = bisectLeft(
         trend.map((x) => x.__date),
@@ -171,7 +171,7 @@ export function LineChart<T extends Value>({
 
       return +date - +d0.__date > +d1.__date - +date ? d1 : d0;
     },
-    [calculatedPadding]
+    [padding]
   );
 
   const distance = (point1: HoverPoint<Value>, point2: Point) => {
