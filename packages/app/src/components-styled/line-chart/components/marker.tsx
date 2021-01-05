@@ -5,6 +5,8 @@ import { formatDateFromMilliseconds } from '~/utils/formatDate';
 import { ChartPadding } from '.';
 import { TrendValue, Value } from '../helpers';
 
+export const MARKER_MIN_WIDTH = 26;
+
 export type HoverPoint<T extends Value> = {
   data: T & TrendValue;
   color?: string;
@@ -67,14 +69,14 @@ const MarkerContainer = styled.div`
   align-items: center;
   flex-grow: 0;
   flex-shrink: 0;
-  min-width: 26px;
+  min-width: ${MARKER_MIN_WIDTH}px;
   background-color: rgba(0, 0, 0, 0.03);
 `;
 
 const LineContainer = styled.div`
   pointer-events: none;
   transform: translate(-50%, 0);
-  min-width: 26px;
+  min-width: ${MARKER_MIN_WIDTH}px;
   display: flex;
   flex-direction: column;
   align-items: center;

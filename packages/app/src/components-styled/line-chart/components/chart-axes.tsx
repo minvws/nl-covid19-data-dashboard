@@ -6,6 +6,7 @@ import { Bar, Line } from '@visx/shape';
 import { Text } from '@visx/text';
 import { ScaleLinear, ScaleTime } from 'd3-scale';
 import { memo, MouseEvent, ReactNode, TouchEvent } from 'react';
+import { MARKER_MIN_WIDTH } from './marker';
 
 const NUM_TICKS = 3;
 
@@ -69,19 +70,20 @@ export const ChartAxes = memo(function ChartAxes({
   formatYAxis,
   children,
 }: ChartAxesProps) {
-  const bounded = {
+  const bounds = {
     width: width - padding.left - padding.right,
     height: height - padding.top - padding.bottom,
   };
 
+  const markerPadding = MARKER_MIN_WIDTH / 2;
   const xScale = scaleTime({
     domain: xDomain,
-    range: [0, bounded.width],
+    range: [markerPadding, bounds.width - markerPadding],
   });
 
   const yScale = scaleLinear({
     domain: yDomain,
-    range: [bounded.height, 0],
+    range: [bounds.height, 0],
     nice: NUM_TICKS,
   });
 
@@ -96,7 +98,7 @@ export const ChartAxes = memo(function ChartAxes({
       <Group left={padding.left} top={padding.top}>
         <GridRows
           scale={yScale}
-          width={bounded.width}
+          width={bounds.width}
           numTicks={NUM_TICKS}
           stroke={defaultColors.axis}
         />
@@ -104,7 +106,7 @@ export const ChartAxes = memo(function ChartAxes({
           scale={xScale}
           tickValues={xScale.domain()}
           tickFormat={formatXAxis as AnyTickFormatter}
-          top={bounded.height}
+          top={bounds.height}
           stroke={defaultColors.axis}
           tickLabelProps={() => ({
             dx: -25,
@@ -137,7 +139,7 @@ export const ChartAxes = memo(function ChartAxes({
             <Text
               fontSize="14px"
               dy={-8}
-              dx={bounded.width}
+              dx={bounds.width}
               textAnchor="end"
               fill={defaultColors.benchmark}
             >
@@ -147,7 +149,7 @@ export const ChartAxes = memo(function ChartAxes({
               stroke={defaultColors.benchmark}
               strokeDasharray="4,3"
               from={{ x: 0, y: 0 }}
-              to={{ x: bounded.width, y: 0 }}
+              to={{ x: bounds.width, y: 0 }}
             />
           </Group>
         )}
