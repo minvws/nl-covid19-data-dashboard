@@ -357,7 +357,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
 
             return (
               <>
-                {formatDateFromSeconds(d[0].week_end_unix, 'short')}
+                {formatDateFromSeconds(d[0].date_end_unix, 'short')}
                 <br />
                 <span
                   style={{
