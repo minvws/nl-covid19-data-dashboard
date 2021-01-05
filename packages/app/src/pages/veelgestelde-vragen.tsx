@@ -7,7 +7,7 @@ import siteText from '~/locale/index';
 import { getSkipLinkId } from '~/utils/skipLinks';
 import styles from './over.module.scss';
 import { Collapsable } from '~/components-styled/collapsable';
-import targetLanguage from '../locale/index';
+import { targetLanguage } from '../locale/index';
 import { groq } from 'next-sanity';
 import { getClient, localize, PortableText } from '~/lib/sanity';
 interface StaticProps {
@@ -24,10 +24,7 @@ interface VeelgesteldeVragenProps {
 }
 
 const faqQuery = groq`
-  *[_type == 'veelgesteldeVragen']
-  {
-    ...
-  }[0]
+  *[_type == 'veelgesteldeVragen'][0]
 `;
 
 export async function getStaticProps(): Promise<StaticProps> {
