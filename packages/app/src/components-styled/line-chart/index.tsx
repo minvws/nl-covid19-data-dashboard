@@ -254,7 +254,27 @@ export function LineChart<T extends Value>({
     [bisect, trendsList, linesConfig, toggleHoverElements]
   );
 
-  const trendType = hideFill ? 'line' : 'area';
+  const renderAxes = useCallback(
+    (x: ChartScales) => (
+      <>
+        {trendsList.map((trend, index) => (
+          <>
+            <Trend
+              key={index}
+              trend={trend}
+              type={hideFill ? 'line' : 'area'}
+              style={linesConfig[index].style}
+              xScale={x.xScale}
+              yScale={x.yScale}
+              color={linesConfig[index].color}
+              onHover={handleHover}
+            />
+          </>
+        ))}
+      </>
+    ),
+    [handleHover, linesConfig, hideFill, trendsList]
+  );
 
   if (!xDomain) {
     return null;
@@ -284,24 +304,7 @@ export function LineChart<T extends Value>({
           onHover={handleHover}
           benchmark={benchmark}
         >
-          {(renderProps) => (
-            <>
-              {trendsList.map((trend, index) => (
-                <>
-                  <Trend
-                    key={index}
-                    trend={trend}
-                    type={trendType}
-                    style={linesConfig[index].style}
-                    xScale={renderProps.xScale}
-                    yScale={renderProps.yScale}
-                    color={linesConfig[index].color}
-                    onHover={handleHover}
-                  />
-                </>
-              ))}
-            </>
-          )}
+          {renderAxes}
         </ChartAxes>
 
         {isDefined(tooltipData) && (
