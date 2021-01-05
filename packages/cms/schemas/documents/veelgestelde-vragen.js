@@ -15,6 +15,12 @@ export default {
       title: "Beschrijving",
     },
     {
+      name: "slug",
+      type: "slug",
+      title: "Slug",
+      readOnly: true,
+    },
+    {
       name: "content",
       type: "array",
       title: "Vragen",
