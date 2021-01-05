@@ -9,7 +9,6 @@ import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
-import { MultipleLineChartTile } from '~/components-styled/multiple-line-chart-tile';
 import { PageBarScale } from '~/components-styled/page-barscale';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
@@ -29,6 +28,7 @@ import {
 } from '~/static-props/safetyregion-data';
 import { colors } from '~/style/theme';
 import { ResultsPerRegion } from '~/types/data.d';
+import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
@@ -267,40 +267,62 @@ const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           }}
         />
 
-        <MultipleLineChartTile
+        <LineChartTile
           timeframeOptions={['all', '5weeks']}
           title={ggdText.linechart_totaltests_titel}
           description={ggdText.linechart_totaltests_toelichting}
-          values={[
-            ggdValues.map((value) => ({
-              value: value.tested_total,
-              date: value.week_unix,
-              week: {
-                start: value.week_start_unix,
-                end: value.week_end_unix,
-              },
-            })),
-            ggdValues.map((value) => ({
-              value: value.infected,
-              date: value.week_unix,
-              week: {
-                start: value.week_start_unix,
-                end: value.week_end_unix,
-              },
-            })),
-          ]}
+          hideFill={true}
+          showLegend
+          padding={{
+            left: 45,
+          }}
+          values={ggdValues}
           linesConfig={[
             {
+              metricProperty: 'tested_total',
               color: colors.data.secondary,
               legendLabel: ggdText.linechart_totaltests_legend_label,
             },
             {
+              metricProperty: 'infected',
               color: colors.data.primary,
               legendLabel: ggdText.linechart_positivetests_legend_label,
             },
           ]}
           metadata={{
             source: ggdText.bronnen.rivm,
+          }}
+          formatTooltip={(x) => {
+            const percentage = (x[1].__value * 100) / x[0].__value;
+
+            return (
+              <>
+                {formatDateFromSeconds(x[0].week_start_unix, 'short')} -{' '}
+                {formatDateFromSeconds(x[0].week_end_unix, 'short')}
+                <br />
+                <span
+                  style={{
+                    height: '0.5em',
+                    width: '0.5em',
+                    backgroundColor: colors.data.secondary,
+                    borderRadius: '50%',
+                    display: 'inline-block',
+                  }}
+                />{' '}
+                {formatNumber(x[0].__value)}
+                <br />
+                <span
+                  style={{
+                    height: '0.5em',
+                    width: '0.5em',
+                    backgroundColor: colors.data.primary,
+                    borderRadius: '50%',
+                    display: 'inline-block',
+                  }}
+                />{' '}
+                {formatNumber(x[1].__value)} ({formatPercentage(percentage)}%)
+              </>
+            );
           }}
         />
       </TileList>

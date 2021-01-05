@@ -65,12 +65,12 @@ export type LineChartProps<T extends Value> = {
   formatTooltip?: (value: (T & TrendValue)[]) => React.ReactNode;
   formatXAxis?: TickFormatter<Date>;
   formatYAxis?: TickFormatter<number>;
-  showFill?: boolean;
+  hideFill?: boolean;
   valueAnnotation?: string;
   isPercentage?: boolean;
   showMarkerLine?: boolean;
   formatMarkerLabel?: (value: T) => string;
-  padding?: ChartPadding;
+  padding?: Partial<ChartPadding>;
   showLegend?: boolean;
 };
 
@@ -83,14 +83,22 @@ export function LineChart<T extends Value>({
   signaalwaarde,
   formatTooltip,
   formatYAxis,
-  showFill = true,
+  hideFill = false,
   valueAnnotation,
   isPercentage,
   showMarkerLine = false,
   formatMarkerLabel,
-  padding = defaultPadding,
+  padding: overridePadding,
   showLegend = false,
 }: LineChartProps<T>) {
+  const padding: ChartPadding = useMemo(
+    () => ({
+      ...defaultPadding,
+      ...overridePadding,
+    }),
+    [overridePadding]
+  );
+
   const {
     tooltipData,
     tooltipLeft = 0,
@@ -186,7 +194,7 @@ export function LineChart<T extends Value>({
         setMarkerProps({
           data: hoverPoints,
           height,
-          padding,
+          padding: padding,
         });
       }
     },
@@ -242,7 +250,7 @@ export function LineChart<T extends Value>({
     [bisect, trendsList, linesConfig, toggleHoverElements]
   );
 
-  const trendType = showFill ? 'area' : 'line';
+  const trendType = hideFill ? 'line' : 'area';
 
   if (!xDomain) {
     return null;
