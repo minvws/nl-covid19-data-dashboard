@@ -8,17 +8,12 @@ export default async function preview(
   // Check the secret and next parameters
   // This secret should only be known to this API route and the CMS
 
-  console.log(req.query);
-
   if (req.query.secret !== process.env.SANITY_PREVIEW_SECRET || !req.query) {
     return res.status(401).json({ message: 'Invalid token' });
   }
 
   // Fetch the headless CMS to check if the provided `slug` exists
   const post = await getPreviewPageBySlug(req.query.slug);
-
-  console.log(req.query.id);
-  console.log(post);
 
   // If the slug doesn't exist prevent preview mode from being enabled
   if (!post) {
