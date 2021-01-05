@@ -86,14 +86,6 @@ export function LineChart<T extends Value>({
   padding: overridePadding,
   showLegend = false,
 }: LineChartProps<T>) {
-  const padding: ChartPadding = useMemo(
-    () => ({
-      ...defaultPadding,
-      ...overridePadding,
-    }),
-    [overridePadding]
-  );
-
   const {
     tooltipData,
     tooltipLeft = 0,
@@ -135,7 +127,14 @@ export function LineChart<T extends Value>({
   const yDomain = useMemo(() => [0, yMax], [yMax]);
 
   // Increase space for larger labels
-  padding = { ...padding, left: Math.max(yMax.toFixed(0).length * 10, defaultPadding.left) };
+  const padding: ChartPadding = useMemo(
+    () => ({
+      ...defaultPadding,
+      ...overridePadding,
+      left: Math.max(yMax.toFixed(0).length * 10, defaultPadding.left)
+    }),
+    [overridePadding, yMax]
+  );
 
   const [markerProps, setMarkerProps] = useState<{
     height: number;
