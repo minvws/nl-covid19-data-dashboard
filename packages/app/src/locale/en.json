@@ -9,8 +9,8 @@
     "title": "Last updated"
   },
   "notificatie": {
-    "titel": "Hospital and IC admissions rose sharply.",
-    "bericht": "The increasing number of COVID-19 positives during the past two weeks was followed by an increase in the number of hospital and IC admissions last week. In the past week the number of newly admitted patients to the hospital with COVID-19 increased by 20% compared to the previous week. Also, in intensive care units an increase in the number of new COVID-19 patients has been reported (+ 24%), compared to a week earlier. In nursing homes and residential care centers was a significant increase (+ 61%) in the number of Corona infected locations.",
+    "titel": "Convincing decline not visible yet",
+    "bericht": "Convincing effects of the lockdown that started on 15 December have yet to be seen. The number of people that got tested and the number of people with a positive test result decreased, but the percentage of positive test results remained high. Possibly,  people were less inclined to get tested during the holidays, or that the lockdown is effective and less people have COVID-like symptoms. In the week of 28 December to 3 January, less people with COVID-19 were admitted to the hospital. The number of ICU admissions increased compared to the week before. To reduce the pressure on hospital care, it is and remains necessary to stay at home as much as possible, and to get tested if you have symptoms.",
     "link": {
       "text": "View the full message from the RIVM",
       "href": "https://www.rivm.nl/en/novel-coronavirus-covid-19/current-information"
@@ -582,11 +582,11 @@
       },
       {
         "vraag": "What can I use the figures about my municipality or region for?",
-        "antwoord": "Coronavirus doesn’t spread uniformly. Sometimes it flares up in one region, while in others the infection rate remains low. If we have an accurate picture of this, we can combat the virus quickly and in a targeted manner. That’s why the data on the dashboard is also broken down by municipality/region. This also helps mayors decide if local measures are necessary."
+        "antwoord": "Het coronavirus verspreidt zich niet overal even snel. Soms vlamt het virus in bepaalde regio op, terwijl in een andere regio het aantal besmettingen beperkt blijft. Als we die informatie goed in beeld hebben, kunnen we het virus gericht en snel bestrijden daar waar het opleeft. Daarom worden de cijfers op het dashboard ook per gemeente of regio’s weergegeven. Dit helpt ook burgemeesters om lokale of regionale maatregelen te nemen."
       },
       {
         "vraag": "Is this one of the apps that was announced?",
-        "antwoord": "No, this is not an app. An anonymous contact tracing app is being developed so that people can find out if they might have been in close proximity to someone carrying coronavirus, and to advise them what to do. A home monitoring app will help the municipal health service (GGD) stay in touch with people with suspected or confirmed coronavirus infection."
+        "antwoord": "Nee, dit is geen app. De app voor anonieme contactopsporing wordt ontwikkeld om te weten of je misschien contact hebt gehad met iemand die besmet is met het coronavirus en om je een advies te geven als dat zo is. De app voor thuisrapportage ondersteunt de GGD door op afstand contact te houden met mensen met een (verdenking van) besmetting."
       },
       {
         "vraag": "Does the dashboard respect my privacy?",
@@ -594,7 +594,7 @@
       },
       {
         "vraag": "What conclusions can I draw based on the information on this dashboard?",
-        "antwoord": "The dashboard shows how the situation per region is developing with regard to coronavirus. The data is used by municipal, regional and central government authorities to decide on the measures necessary to stop the spread of the virus."
+        "antwoord": "Het dashboard geeft inzicht in de ontwikkeling van het coronavirus in de verschillende regio’s. De informatie in het dashboard wordt door  gemeenten, regio’s en het Rijk  gebruikt om te bepalen welke maatregelen nodig zijn om het virus in te dammen. "
       },
       {
         "vraag": "I can see that coronavirus is under control in my region. So why do the same measures apply here as in other regions?",
@@ -1116,7 +1116,7 @@
   },
   "laatste_ontwikkelingen": {
     "title": "Latest developments",
-    "menu_subtitle": "Hospital and IC admissions rose sharply.",
+    "menu_subtitle": "Convincing decline not visible yet",
     "alle_cijfers_header": "Want to see all data?",
     "alle_cijfers_link": "View all"
   },

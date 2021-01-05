@@ -9,8 +9,8 @@
     "title": "Laatst bijgewerkt"
   },
   "notificatie": {
-    "titel": "Ziekenhuis- en IC opnames fors gestegen. ",
-    "bericht": "Het toenemende aantal meldingen van mensen met een positieve corona testuitslag gedurende de afgelopen twee weken werd in de afgelopen week gevolgd door een stijging in het aantal ziekenhuis- en IC opnames. Het aantal nieuwe patiënten dat met COVID-19 in de afgelopen week in het ziekenhuis is opgenomen is in vergelijking met de week daarvoor met 20% gestegen. Ook op de intensive care afdelingen is er een flinke toename (+ 24%),  van het aantal nieuwe COVID-19 patiënten gemeld, in vergelijking met een week eerder. Ook bij verpleeghuizen en woonzorgcentra is een aanzienlijke toename van 61%  in het aantal locaties met besmettingen te zien.",
+    "titel": "Overtuigende daling nog niet zichtbaar",
+    "bericht": "Overtuigende effecten van de lockdown van 15 december blijven vooralsnog uit. Het aantal mensen dat zich liet testen en het aantal mensen met een positieve testuitslag daalde weliswaar, maar het percentage positieve testen bleef deze week hoog. Het kan zijn dat mensen tijdens en na de feestdagen minder geneigd waren om zich te laten testen, of dat de lockdown wel effect heeft en minder mensen klachten hebben. Het aantal nieuwe ziekenhuisopnames was lager dan vorige week. Het aantal nieuwe IC opnames is iets hoger vergeleken met de week ervoor. Om te zorgen dat de druk op de zorg afneemt, is en blijft het noodzakelijk om zoveel mogelijk thuis te blijven, en om je te laten testen als je klachten hebt.",
     "link": {
       "text": "Bekijk de toelichting van het RIVM",
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel"
@@ -1116,7 +1116,7 @@
   },
   "laatste_ontwikkelingen": {
     "title": "Laatste ontwikkelingen",
-    "menu_subtitle": "Ziekenhuis- en IC opnames fors gestegen",
+    "menu_subtitle": "Overtuigende daling nog niet zichtbaar",
     "alle_cijfers_header": "Benieuwd naar alle cijfers?",
     "alle_cijfers_link": "Bekijk alle cijfers"
   },
