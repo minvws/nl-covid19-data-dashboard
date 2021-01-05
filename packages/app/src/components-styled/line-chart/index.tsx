@@ -70,7 +70,7 @@ export type LineChartProps<T extends Value> = {
   isPercentage?: boolean;
   showMarkerLine?: boolean;
   formatMarkerLabel?: (value: T) => string;
-  padding?: ChartPadding;
+  padding?: Partial<ChartPadding>;
   showLegend?: boolean;
 };
 
@@ -88,9 +88,17 @@ export function LineChart<T extends Value>({
   isPercentage,
   showMarkerLine = false,
   formatMarkerLabel,
-  padding = defaultPadding,
+  padding = {},
   showLegend = false,
 }: LineChartProps<T>) {
+  const chartPadding: ChartPadding = useMemo(
+    () => ({
+      ...defaultPadding,
+      ...padding,
+    }),
+    [padding]
+  );
+
   const {
     tooltipData,
     tooltipLeft = 0,
@@ -144,7 +152,7 @@ export function LineChart<T extends Value>({
       if (!trend.length) return;
       if (trend.length === 1) return trend[0];
 
-      const date = xScale.invert(xPosition - padding.left);
+      const date = xScale.invert(xPosition - chartPadding.left);
 
       const index = bisectLeft(
         trend.map((x) => x.__date),
@@ -159,7 +167,7 @@ export function LineChart<T extends Value>({
 
       return +date - +d0.__date > +d1.__date - +date ? d1 : d0;
     },
-    [padding]
+    [chartPadding]
   );
 
   const distance = (point1: HoverPoint<Value>, point2: Point) => {
@@ -186,11 +194,11 @@ export function LineChart<T extends Value>({
         setMarkerProps({
           data: hoverPoints,
           height,
-          padding,
+          padding: chartPadding,
         });
       }
     },
-    [showTooltip, hideTooltip, height, padding]
+    [showTooltip, hideTooltip, height, chartPadding]
   );
 
   const handleHover = useCallback(
@@ -256,7 +264,7 @@ export function LineChart<T extends Value>({
 
       <Box position="relative">
         <ChartAxes
-          padding={padding}
+          padding={chartPadding}
           height={height}
           width={width}
           xDomain={xDomain}
@@ -295,8 +303,8 @@ export function LineChart<T extends Value>({
         {isDefined(tooltipData) && (
           <Tooltip
             bounds={{ right: width, left: 0, top: 0, bottom: height }}
-            x={tooltipLeft + padding.left}
-            y={tooltipTop + padding.top}
+            x={tooltipLeft + chartPadding.left}
+            y={tooltipTop + chartPadding.top}
           >
             {formatTooltip
               ? formatTooltip(tooltipData)
@@ -313,7 +321,7 @@ export function LineChart<T extends Value>({
         )}
 
         {showLegend && (
-          <Box pl={`${padding.left}px`}>
+          <Box pl={`${chartPadding.left}px`}>
             <Legenda
               items={linesConfig.map((x) => ({
                 color: x.color ?? colors.data.primary,
