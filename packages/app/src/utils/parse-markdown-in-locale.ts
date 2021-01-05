@@ -17,6 +17,7 @@ const MARKDOWN_KEYS = [
   'positief_geteste_personen.kpi_toelichting',
   'veiligheidsregio_positief_geteste_personen.kpi_toelichting',
   'gemeente_positief_geteste_personen.kpi_toelichting',
+  'vaccinaties.section_vaccinations_more_information.description',
 ];
 
 export function parseMarkdownInLocale(text: TALLLanguages) {

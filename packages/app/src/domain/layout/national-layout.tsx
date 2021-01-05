@@ -11,6 +11,7 @@ import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
 import VirusIcon from '~/assets/virus.svg';
+import VaccinatieIcon from '~/assets/vaccinaties.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import Ziektegolf from '~/assets/ziektegolf.svg';
 import {
@@ -121,6 +122,19 @@ function NationalLayout(props: NationalLayoutProps) {
               <CategoryMenu
                 title={siteText.nationaal_layout.headings.besmettingen}
               >
+                <MetricMenuItemLink
+                  href="/landelijk/vaccinaties"
+                  icon={<VaccinatieIcon />}
+                  title={siteText.vaccinaties.titel_sidebar}
+                >
+                  <SidebarMetric
+                    data={data}
+                    scope="nl"
+                    metricName="infectious_people_last_known_average"
+                    metricProperty="infectious_avg"
+                    localeTextKey="vaccinaties"
+                  />
+                </MetricMenuItemLink>
                 <MetricMenuItemLink
                   href="/landelijk/positief-geteste-mensen"
                   icon={<GetestIcon />}
