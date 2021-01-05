@@ -40,7 +40,7 @@ import {
 const dateToValue = (d: Date) => d.valueOf() / 1000;
 const formatXAxis = (date: Date) =>
   formatDateFromSeconds(dateToValue(date), 'axis');
-const formatYAxisFn = (y: number) => y.toString();
+const formatYAxisFn = (y: number) => formatNumber(y);
 const formatYAxisPercentageFn = (y: number) => `${formatPercentage(y)}%`;
 
 export type LineConfig<T extends Value> = {
@@ -102,12 +102,6 @@ export function LineChart<T extends Value>({
     hideTooltip,
   } = useTooltip<T & TrendValue>();
 
-  const [markerProps, setMarkerProps] = useState<{
-    height: number;
-    data: HoverPoint<T>[];
-    padding: ChartPadding;
-  }>();
-
   const metricProperties = useMemo(
     () => linesConfig.map((x) => x.metricProperty),
     [linesConfig]
@@ -133,10 +127,21 @@ export function LineChart<T extends Value>({
     return isDefined(domain[0]) ? (domain as [Date, Date]) : undefined;
   }, [trendsList]);
 
-  const yDomain = useMemo(() => [0, calculateYMax(trendsList, signaalwaarde)], [
+  const yMax = useMemo(() => calculateYMax(trendsList, signaalwaarde), [
     trendsList,
     signaalwaarde,
   ]);
+
+  const yDomain = useMemo(() => [0, yMax], [yMax]);
+
+  // Increase space for larger labels
+  padding = { ...padding, left: Math.max(yMax.toFixed(0).length * 10, defaultPadding.left) };
+
+  const [markerProps, setMarkerProps] = useState<{
+    height: number;
+    data: HoverPoint<T>[];
+    padding: ChartPadding;
+  }>();
 
   const bisect = useCallback(
     (
