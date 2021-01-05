@@ -1,5 +1,5 @@
 import Maatregelen from '~/assets/maatregelen.svg';
-import { Box, Spacer } from '~/components-styled/base';
+import { Box } from '~/components-styled/base';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiSection } from '~/components-styled/kpi-section';
 import { TileList } from '~/components-styled/tile-list';
@@ -38,8 +38,6 @@ const NationalRestrictions: FCWithLayout<NationalPageProps> = (props) => {
           icon={<Maatregelen fill={theme.colors.restrictions} />}
           title={text.nationaal_maatregelen.titel}
         />
-
-        <Spacer mb={3} />
 
         <KpiSection flexDirection="column">
           <Heading level={3}>{restrictionInfo.extratoelichting.titel}</Heading>

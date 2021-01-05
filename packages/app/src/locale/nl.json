@@ -9,8 +9,8 @@
     "title": "Laatst bijgewerkt"
   },
   "notificatie": {
-    "titel": "Ziekenhuis- en IC opnames fors gestegen. ",
-    "bericht": "Het toenemende aantal meldingen van mensen met een positieve corona testuitslag gedurende de afgelopen twee weken werd in de afgelopen week gevolgd door een stijging in het aantal ziekenhuis- en IC opnames. Het aantal nieuwe patiënten dat met COVID-19 in de afgelopen week in het ziekenhuis is opgenomen is in vergelijking met de week daarvoor met 20% gestegen. Ook op de intensive care afdelingen is er een flinke toename (+ 24%),  van het aantal nieuwe COVID-19 patiënten gemeld, in vergelijking met een week eerder. Ook bij verpleeghuizen en woonzorgcentra is een aanzienlijke toename van 61%  in het aantal locaties met besmettingen te zien.",
+    "titel": "Overtuigende daling nog niet zichtbaar",
+    "bericht": "Overtuigende effecten van de lockdown van 15 december blijven vooralsnog uit. Het aantal mensen dat zich liet testen en het aantal mensen met een positieve testuitslag daalde weliswaar, maar het percentage positieve testen bleef deze week hoog. Het kan zijn dat mensen tijdens en na de feestdagen minder geneigd waren om zich te laten testen, of dat de lockdown wel effect heeft en minder mensen klachten hebben. Het aantal nieuwe ziekenhuisopnames was lager dan vorige week. Het aantal nieuwe IC opnames is iets hoger vergeleken met de week ervoor. Om te zorgen dat de druk op de zorg afneemt, is en blijft het noodzakelijk om zoveel mogelijk thuis te blijven, en om je te laten testen als je klachten hebt.",
     "link": {
       "text": "Bekijk de toelichting van het RIVM",
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel"
@@ -100,8 +100,8 @@
   "verdenkingen_huisartsen": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
     "bron": {
-      "href": "https://www.nivel.nl/nl/nivel-zorgregistraties-eerste-lijn/nivel-zorgregistraties-eerste-lijn",
-      "text": "Nivel Zorgregistraties Eerste Lijn"
+      "href": "https://www.nivel.nl/nl/nivel-zorgregistraties-eerste-lijn/monitor-cijfers-covid-19-achtige-klachten-huisartsenpraktijken#opendata",
+      "text": "Nivel"
     },
     "estimated_amount_of_patients": "Geschat aantal patiënten met COVID-19-achtige klachten:",
     "titel": "Aantal patiënten met eerste melding van COVID-19 klachten bij de huisarts",
@@ -126,9 +126,9 @@
     },
     "bronnen": {
       "nivel": {
-        "download": "",
-        "href": "https://www.nivel.nl/nl/nivel-zorgregistraties-eerste-lijn/nivel-zorgregistraties-eerste-lijn",
-        "text": "Nivel Zorgregistraties Eerste Lijn"
+        "download": "https://www.nivel.nl/sites/default/files/covid/Nivel-verdenkingen-COVID-19.json",
+        "href": "https://www.nivel.nl/nl/nivel-zorgregistraties-eerste-lijn/monitor-cijfers-covid-19-achtige-klachten-huisartsenpraktijken#opendata",
+        "text": "Nivel"
       }
     }
   },
@@ -136,7 +136,7 @@
     "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
     "bron": {
       "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
-      "text": "RIVM"
+      "text": "NICE via RIVM"
     },
     "titel": "Ziekenhuisopnames per dag",
     "pagina_toelichting": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen.\n\nLet op: Sinds 17 december wordt een nieuwe bron gebruikt voor de ziekenhuisopnames.",
@@ -153,7 +153,7 @@
     "bronnen": {
       "rivm": {
         "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
-        "text": "RIVM",
+        "text": "NICE via RIVM",
         "download": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.csv"
       },
       "lnaz": {
@@ -163,11 +163,11 @@
       },
       "rivmSource": {
         "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
-        "text": "RIVM"
+        "text": "NICE via RIVM"
       },
       "nice": {
         "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
-        "text": "RIVM",
+        "text": "NICE via RIVM",
         "download": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.csv"
       }
     },
@@ -276,8 +276,8 @@
     "geen_signaalwaarde_beschikbaar": "Vanwege een storing is deze informatie op dit moment helaas niet compleet. Aan een oplossing wordt gewerkt.",
     "geen_signaalwaarde_beschikbaar_lees_waarom": "Lees hier waarom",
     "toelichting_pagina": "Als iemand het coronavirus oploopt, dan is deze persoon een tijd lang besmettelijk voor anderen. Hoe lang dit duurt verschilt van persoon tot persoon. Het aantal besmettelijke mensen is een schatting op basis van een aantal gegevensbronnen. Het exacte aantal is onbekend, maar we kunnen wel aangeven of het gaat om tientallen, honderden, duizenden of meer.",
-    "barscale_titel": "Gemiddeld aantal besmettelijke mensen per 100.000 inwoners ",
-    "barscale_screenreader_text": "{{value}} besmettelijke mensen",
+    "barscale_titel": "Gemiddeld aantal besmettelijke mensen per 100.000 inwoners",
+    "barscale_screenreader_text": "{{value}} besmettelijke mensen ",
     "cijfer_titel": "Geschat aantal besmettelijke mensen in Nederland:",
     "cijfer_toelichting": "Een schatting van hoeveel mensen met COVID-19 besmettelijk zijn voor anderen. Dit getal wordt door het RIVM berekend.",
     "linechart_titel": "Verloop over tijd",
@@ -633,11 +633,11 @@
       },
       {
         "cijfer": "Ziekenhuizen",
-        "verantwoording": "Dagelijks worden door het RIVM nieuwe ziekenhuisopnames, exclusief intensive care opnames, beschikbaar gesteld als [open data](https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.csv). [Zie hier de beschrijving van deze dataset](https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html). Het RIVM baseert zich op informatie die wordt verzameld door Stichting NICE (Nationale Intensive Care Evaluatie). De stichting is opgericht door de beroepsgroep van intensivisten en verzorgt de registratie van beschikbare data van IC-afdelingen. Met deze data wordt het gemiddeld aantal opnamen berekend van de afgelopen drie dagen (gisteren, eergisteren en de dag daarvoor). Opnames van de lopende dag (vandaag) worden dus niet meegenomen. Zolang de dag nog niet verstreken is, zijn die gegevens namelijk niet volledig. Ondanks het feit dat aan de ziekenhuizen wordt gevraagd om de COVID-19 patiënten meerdere keren per dag te registreren, kan het zijn dat de registratie iets achter loopt.\n\nVoorheen gebruikte het dashboard cijfers uit de Osiris database. De gegevens in Osiris zijn voornamelijk afkomstig van de GGD’en. Osiris kent inmiddels echter een aanzienlijke onderrapportage van ziekenhuisopnames doordat de GGD’en niet altijd meer informatie krijgen over ziekenhuisopnames van Covid-patiënten. Het bestand van NICE is completer, maar hanteert ook een ruimere definitie van ziekenhuisopname. Osiris neemt alleen de patiënten mee die vanwege COVID-19 in het ziekenhuis liggen, terwijl NICE ook ziekenhuisopnames rapporteert van patiënten met COVID-19, maar die om een andere reden in het ziekenhuis zijn opgenomen.\n\nTwee ziekenhuizen delen hun COVID-19 ziekenhuisopnamen op dit moment niet met Stichting NICE: de Tergooiziekenhuizen en het Flevoziekenhuis. COVID-19 ziekenhuisopnamen in deze twee ziekenhuizen maken dus geen deel uit van het aantal ziekenhuisopnamen per dag zoals op het dashboard getoond. Dit betreft een betrekkelijk kleine afwijking op het landelijke cijfer, maar mogelijk wel een grotere afwijking op regionaal niveau. \n\nDe bezetting van ziekenhuisbedden (exclusief IC-bedden) wordt als [open data](https://lcps.nu/wp-content/uploads/covid-19.csv) beschikbaar gesteld door het LCPS. [Zie hier de beschrijving van deze dataset](https://lcps.nu/datafeed/). De bedbezetting cijfers van vóór 1 juni zijn niet beschikbaar omdat bepaalde kwaliteitscontroles niet hebben plaatsgevonden vóór deze datum. Daardoor kunnen deze gegevens onvolkomenheden bevatten en worden die niet door het LCPS als open data gepubliceerd. \n\nHet LCPS verzamelt sinds oktober 2020 ook cijfers over nieuwe ziekenhuisopnames. Toch gebruiken we de cijfers van NICE, en niet van het LCPS. Dit doen we omdat de cijfers van het LCPS alleen op geaggregeerd niveau beschikbaar zijn. Ze geven bijvoorbeeld geen informatie over de leeftijd en het geslacht van patiënten. Dat maakt de cijfers van het LCPS te beperkt voor dit dashboard en onbruikbaar voor het RIVM.\n\nEr zijn verschillen tussen de twee registratiesystemen doordat ze zich op verschillende zaken richten: de bedbezetting (capaciteit; LCPS) versus patiënten (NICE). Een toename van de bezetting zegt maar voor een deel iets over het aantal nieuwe patiënten. Zo is een bed bijvoorbeeld niet meteen beschikbaar als er een patiënt is ontslagen. Ook is het mogelijk dat één bed gedurende de dag door meerdere patiënten bezet wordt. Beide dataverzamelingen bevatten dus verschillende gegevens en dienen andere doelen. De cijfers zijn niet zonder meer uitwisselbaar."
+        "verantwoording": "Dagelijks worden door het RIVM nieuwe ziekenhuisopnames, exclusief intensive care opnames, beschikbaar gesteld als [open data](https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.csv). Zie [hier](https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html) de beschrijving van deze dataset. Het RIVM baseert zich op informatie die wordt verzameld door Stichting NICE (Nationale Intensive Care Evaluatie). De stichting is opgericht door de beroepsgroep van intensivisten en verzorgt de registratie van beschikbare data van IC-afdelingen. Met deze data wordt het gemiddeld aantal opnamen berekend van de afgelopen drie dagen (gisteren, eergisteren en de dag daarvoor). Opnames van de lopende dag (vandaag) worden dus niet meegenomen. Zolang de dag nog niet verstreken is, zijn die gegevens namelijk niet volledig. Ondanks het feit dat aan de ziekenhuizen wordt gevraagd om de COVID-19 patiënten meerdere keren per dag te registreren, kan het zijn dat de registratie iets achter loopt.\n\nVoorheen gebruikte het dashboard cijfers uit de Osiris database. De gegevens in Osiris zijn voornamelijk afkomstig van de GGD’en. Osiris kent inmiddels echter een aanzienlijke onderrapportage van ziekenhuisopnames doordat de GGD’en niet altijd meer informatie krijgen over ziekenhuisopnames van Covid-patiënten. Het bestand van NICE is completer, maar hanteert ook een ruimere definitie van ziekenhuisopname. Osiris neemt alleen de patiënten mee die vanwege COVID-19 in het ziekenhuis liggen, terwijl NICE ook ziekenhuisopnames rapporteert van patiënten met COVID-19, maar die om een andere reden in het ziekenhuis zijn opgenomen.\n\nTwee ziekenhuizen delen hun COVID-19 ziekenhuisopnamen op dit moment niet met Stichting NICE: de Tergooiziekenhuizen en het Flevoziekenhuis. COVID-19 ziekenhuisopnamen in deze twee ziekenhuizen maken dus geen deel uit van het aantal ziekenhuisopnamen per dag zoals op het dashboard getoond. Dit betreft een betrekkelijk kleine afwijking op het landelijke cijfer, maar mogelijk wel een grotere afwijking op regionaal niveau. \n\nDe bezetting van ziekenhuisbedden (exclusief IC-bedden) wordt als [open data](https://lcps.nu/wp-content/uploads/covid-19.csv) beschikbaar gesteld door het LCPS. [Zie hier de beschrijving van deze dataset](https://lcps.nu/datafeed/). De bedbezetting cijfers van vóór 1 juni zijn niet beschikbaar omdat bepaalde kwaliteitscontroles niet hebben plaatsgevonden vóór deze datum. Daardoor kunnen deze gegevens onvolkomenheden bevatten en worden die niet door het LCPS als open data gepubliceerd. \n\nHet LCPS verzamelt sinds oktober 2020 ook cijfers over nieuwe ziekenhuisopnames. Toch gebruiken we de cijfers van NICE, en niet van het LCPS. Dit doen we omdat de cijfers van het LCPS alleen op geaggregeerd niveau beschikbaar zijn. Ze geven bijvoorbeeld geen informatie over de leeftijd en het geslacht van patiënten. Dat maakt de cijfers van het LCPS te beperkt voor dit dashboard en onbruikbaar voor het RIVM.\n\nEr zijn verschillen tussen de twee registratiesystemen doordat ze zich op verschillende zaken richten: de bedbezetting (capaciteit; LCPS) versus patiënten (NICE). Een toename van de bezetting zegt maar voor een deel iets over het aantal nieuwe patiënten. Zo is een bed bijvoorbeeld niet meteen beschikbaar als er een patiënt is ontslagen. Ook is het mogelijk dat één bed gedurende de dag door meerdere patiënten bezet wordt. Beide dataverzamelingen bevatten dus verschillende gegevens en dienen andere doelen. De cijfers zijn niet zonder meer uitwisselbaar."
       },
       {
         "cijfer": "Positieve testen",
-        "verantwoording": "Het aantal positief geteste mensen wordt dagelijks gepubliceerd als [open data](https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv) door het RIVM. Zie [hier](https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427) de beschrijving van deze dataset. Het gaat om het aantal positief geteste mensen die aan het RIVM gemeld zijn in de afgelopen 24 uur, tot 10.00 op de dag van publicatie van het cijfer. De datum die gebruikt wordt, is de datum van melding door de GGD bij het RIVM. Dat is dus niet hetzelfde als de datum waarop mensen zijn getest. \n\nArtsen en laboratoria moeten besmettingen met infectieziekten melden bij de GGD. Er worden echter ook - steeds vaker - tests afgenomen door particuliere organisaties en door individuen. De uitslagen hiervan worden niet altijd bij de GGD gemeld of de melding telt niet mee omdat de test die gebruikt is niet voldoet aan de normen van het RIVM. Het (dagelijks) aantal besmettingen dat we op het dashboard weergeven geeft dus geen compleet beeld. Daar moet rekening mee gehouden worden bij het interpreteren van dit cijfer. \n\nHet doorgeven van cijfers is deels mensenwerk. Het komt voor dat op het moment dat het RIVM de balans opmaakt over het laatste etmaal nog niet alle besmettingen goed zijn doorgegeven door de GGD’en. Ontbrekende meldingen worden dan later alsnog doorgegeven. Het ontbreken van meldingen of het vertraagd doorgeven van meldingen kan het dagelijkse beeld vertekenen. Het voortschrijdende gemiddelde filtert dit soort fluctuaties eruit en geeft daarom vaak een beter beeld. \n\nHet RIVM kan ook met terugwerkende kracht correcties uitvoeren op eerder gepubliceerde cijfers. Deze correcties komen dan in het open databestand te staan en worden overgenomen door het dashboard. Het databestand registreert op niveau van veiligheidsregio en gemeente. Om tot landelijke gegevens te komen tellen we alle meldingen bij elkaar op. In het aanleverbestand wordt voor sommige meldingen de gemeente en/of veiligheidsregio niet vermeld, omdat die gegevens ontbreken. Die kunnen dan niet op dat niveau worden getoond, maar wel op landelijk niveau. \n\nWe berekenen op basis van de absolute aantallen het relatieve aantal positief geteste mensen naar rato van het aantal inwoners. Dit doen we door het aantal positief geteste mensen te delen door het aantal inwoners van Nederland. We geven dit weer als het aantal positief geteste personen per 100.000 inwoners. Het aantal inwoners landelijk, per veiligheidsregio en per gemeente wordt gebaseerd op deze [CBS-indeling](https://opendata.cbs.nl/#/CBS/nl/dataset/84721NED/table?dl=3A154). \n\nDe leeftijdsverdeling wordt bepaald op basis van een [ander open data bestand van het RIVM](https://data.rivm.nl/covid-19/COVID-19_casus_landelijk.csv). Dit omdat in het gemeentelijke bestand geen leeftijden worden geregistreerd. Er kunnen daarom kleine verschillen ontstaan tussen de tabel zoals weergegeven in de 'wekelijks update epidemiologische situatie COVID-19 in Nederland' op de website van het RIVM en zoals weergeven op het dashboard. De getoonde leeftijdsverdeling in het aantal positief geteste personen betreffen alleen de gevallen die gemeld zijn sinds de één na laatste update van het dashboard. De bevolkingsgrootte per leeftijdsgroep wordt bepaald aan de hand van deze [CBS-indeling](https://opendata.cbs.nl/#/CBS/nl/dataset/03759ned/table).\n\nDe signaalwaarde voor het aantal positief geteste mensen bedraagt 7 op de 100.000 inwoners. Dit betekent dat vanaf deze waarde mogelijk het aantal besmettingen te hard oploopt om het virus in de hand te houden. Deze waarde wordt bijvoorbeeld ook in Duitsland gehanteerd. Een signaalwaarde functioneert als een ‘alarmbel’ om met urgentie naar de situatie te kijken. \n\nVoor het berekenen van het percentage positief geteste mensen wordt alleen gekeken naar de tests die via de GGD plaatsvinden en waarvan de testuitslag bekend is. De gegevens over de GGD teststraten worden wekelijks door het RIVM aangeleverd bij het ministerie van VWS."
+        "verantwoording": "Het aantal positief geteste mensen wordt dagelijks gepubliceerd als [open data](https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv) door het RIVM. Zie [hier](https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427) de beschrijving van deze dataset. Het gaat om het aantal positief geteste mensen die aan het RIVM gemeld zijn in de afgelopen 24 uur, tot 10.00 op de dag van publicatie van het cijfer. De datum die gebruikt wordt, is de datum van melding door de GGD bij het RIVM. Dat is dus niet hetzelfde als de datum waarop mensen zijn getest. \n\nArtsen en laboratoria moeten besmettingen met infectieziekten melden bij de GGD. Er worden echter ook - steeds vaker - tests afgenomen door particuliere organisaties en door individuen. De uitslagen hiervan worden niet altijd bij de GGD gemeld of de melding telt niet mee omdat de test die gebruikt is niet voldoet aan de normen van het RIVM. Het (dagelijks) aantal besmettingen dat we op het dashboard weergeven geeft dus geen compleet beeld. Daar moet rekening mee gehouden worden bij het interpreteren van dit cijfer. \n\nHet doorgeven van cijfers is deels mensenwerk. Het komt voor dat op het moment dat het RIVM de balans opmaakt over het laatste etmaal nog niet alle besmettingen goed zijn doorgegeven door de GGD’en. Ontbrekende meldingen worden dan later alsnog doorgegeven. Het ontbreken van meldingen of het vertraagd doorgeven van meldingen kan het dagelijkse beeld vertekenen. Het voortschrijdende gemiddelde filtert dit soort fluctuaties eruit en geeft daarom vaak een beter beeld. \n\nHet RIVM kan ook met terugwerkende kracht correcties uitvoeren op eerder gepubliceerde cijfers. Deze correcties komen dan in het open databestand te staan en worden overgenomen door het dashboard. Het databestand registreert op niveau van veiligheidsregio en gemeente. Om tot landelijke gegevens te komen tellen we alle meldingen bij elkaar op. In het aanleverbestand wordt voor sommige meldingen de gemeente en/of veiligheidsregio niet vermeld, omdat die gegevens ontbreken. Die kunnen dan niet op dat niveau worden getoond, maar wel op landelijk niveau. \n\nWe berekenen op basis van de absolute aantallen het relatieve aantal positief geteste mensen naar rato van het aantal inwoners. Dit doen we door het aantal positief geteste mensen te delen door het aantal inwoners van Nederland. We geven dit weer als het aantal positief geteste personen per 100.000 inwoners. Het aantal inwoners landelijk, per veiligheidsregio en per gemeente wordt gebaseerd op deze [CBS-indeling](https://opendata.cbs.nl/#/CBS/nl/dataset/84721NED/table?dl=3A154). \n\nDe leeftijdsverdeling wordt bepaald op basis van een [ander open data bestand van het RIVM](https://data.rivm.nl/covid-19/COVID-19_casus_landelijk.csv). Dit omdat in het gemeentelijke bestand geen leeftijden worden geregistreerd. Er kunnen daarom kleine verschillen ontstaan tussen de tabel zoals weergegeven in de 'wekelijks update epidemiologische situatie COVID-19 in Nederland' op de website van het RIVM en zoals weergeven op het dashboard. De getoonde leeftijdsverdeling in het aantal positief geteste personen betreffen alleen de gevallen die gemeld zijn sinds de één na laatste update van het dashboard. De bevolkingsgrootte per leeftijdsgroep wordt bepaald aan de hand van deze [CBS-indeling](https://opendata.cbs.nl/#/CBS/nl/dataset/03759ned/table).\n\nDe signaalwaarde voor het aantal positief geteste mensen bedraagt 7 op de 100.000 inwoners. Dit betekent dat vanaf deze waarde mogelijk het aantal besmettingen te hard oploopt om het virus in de hand te houden. Deze waarde wordt bijvoorbeeld ook in Duitsland gehanteerd. Een signaalwaarde functioneert als een ‘alarmbel’ om met urgentie naar de situatie te kijken. \nVoor \n\nDe gegevens over de GGD teststraten worden dagelijks door het RIVM aangeleverd bij het ministerie van VWS.  Voor het berekenen van het percentage positief geteste mensen wordt alleen gekeken naar de tests die via de GGD plaatsvinden en waarvan de testuitslag bekend is. We bereken het zevendaags gemiddelde van de testuitslagen van tests die zijn afgenomen tot en met drie dagen geleden. Tests die in de afgelopen twee dagen zijn afgenomen, worden niet meegenomen in de berekening omdat het een paar dagen kan duren voordat de uitslag van een test binnen is. Zo weten we dat alle testuitslagen binnen zijn en het percentage positieve tests de verhouding juist weergeeft."
       },
       {
         "cijfer": "Reproductiegetal",
@@ -653,11 +653,11 @@
       },
       {
         "cijfer": "Huisartsen",
-        "verantwoording": "Van een representatieve steekproef van zo’n 350 huisartsenpraktijken uit heel Nederland ontvangt Nivel Zorgregistraties Eerste Lijn wekelijks gegevens over verleende zorg aan hun patiënten. Op basis hiervan berekent Nivel het aantal patiënten met COVID-19-achtige klachten in de afgelopen week. Dit doet het Nivel op basis van diagnosecodes die door de huisartsen worden aangevinkt (‘Acute infectie bovenste luchtwegen’, ‘Andere infectie(s) luchtwegen’, ‘Influenza’, ‘Pneumonie’, ‘Andere virusziekte(n)’, ’Andere infectieziekte’, ‘Koorts’, ‘Benauwdheid’, ‘Hoesten’ ) en aanvullende omschrijvingen van de huisarts die wijzen op COVID-19-achtige klachten. \n\nOm een grotere precisie te bereiken, berekent het Nivel ook de cijfers van de voorgaande weken opnieuw. Ze nemen daarbij eventueel later bekend geworden gegevens mee. Deze informatie wordt wekelijks (op donderdag) beschikbaar gesteld door Nivel Zorgregistraties Eerste Lijn en als JSON-file aangeleverd bij het ministerie van VWS. Het bronbestand rapport de aantallen per week. De weeknummers uit dit bestand worden omgezet naar de datum van de zondag van de betreffende week voor weergave op het dashboard. De waarden voor de betreffende weken uit het bestand worden daarbij direct overgenomen voor op het dashboard."
+        "verantwoording": "Informatie over huisartsen worden wekelijks (op donderdag) beschikbaar gesteld via [open data](https://www.nivel.nl/sites/default/files/covid/Nivel-verdenkingen-COVID-19.json) door Nivel. Zie [hier](https://www.nivel.nl/nl/nivel-zorgregistraties-eerste-lijn/monitor-cijfers-covid-19-achtige-klachten-huisartsenpraktijken#opendata) de beschrijving van deze dataset. Van een representatieve steekproef van zo’n 350 huisartsenpraktijken uit heel Nederland ontvangt Nivel wekelijks gegevens over verleende zorg aan hun patiënten. Op basis hiervan berekent Nivel het aantal patiënten met COVID-19-achtige klachten in de afgelopen week. Dit doet het Nivel op basis van diagnosecodes die door de huisartsen worden aangevinkt (‘Acute infectie bovenste luchtwegen’, ‘Andere infectie(s) luchtwegen’, ‘Influenza’, ‘Pneumonie’, ‘Andere virusziekte(n)’, ’Andere infectieziekte’, ‘Koorts’, ‘Benauwdheid’, ‘Hoesten’ ) en aanvullende omschrijvingen van de huisarts die wijzen op COVID-19-achtige klachten. \n\nOm een grotere precisie te bereiken, berekent het Nivel ook de cijfers van de voorgaande weken opnieuw. Ze nemen daarbij eventueel later bekend geworden gegevens mee. Het open data rapporteert de aantallen per week."
       },
       {
         "cijfer": "Rioolwater",
-        "verantwoording": "De cijfers over rioolwater worden beschikbaar gesteld via [open data](https://data.rivm.nl/covid-19/COVID-19_rioolwaterdata.csv) door het RIVM. Zie [hier](https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9) de beschrijving van deze dataset. In rioolwater kun je ziekteverwekkers zoals het coronavirus meten omdat die met ontlasting via de wc in het rioolwater komen. Dit onderzoek laat zien hoeveel virusdeeltjes in het rioolwater zitten afkomstig uit ontlasting van besmette personen. Deze metingen worden gedaan bij meer dan 300 rioolwaterzuiveringsinstallaties in het hele land. Op elke locatie analyseren onderzoekers van het RIVM minimaal eens per week rioolwater dat in 24 uur verzameld is. Per week kan het aantal gemeten locaties variëren, omdat niet elke meting succesvol wordt afgerond. In de open data staat per datum bij welke locaties gemeten is. \n\nSinds 3 november wordt op het dashboard het aantal virusdeeltjes niet meer per milliliter rioolwater getoond, maar per 100.000 inwoners. Het CBS heeft in samenwerking met de waterschappen het aantal aangesloten inwoners per rioolwaterzuiveringsinstallatie in kaart gebracht. Dit stelt het RIVM in staat om het aantal virusdeeltjes per 100.000 inwoners te berekenen. Ook corrigeert het RIVM nu voor de hoeveelheid water die tijdens de meting bij de rioolwaterzuiveringsinstallatie binnenkomt (meer regenwater verdunt immers); dit wordt het debiet genoemd. Deze correctie wordt gedaan op gegevens vanaf 7 september. Daarom zijn de gegevens op het dashboard niet meer zichtbaar van vóór die datum. Dit valt samen met de uitbreiding op 7 september van het aantal locaties waar wordt gemeten van circa 80 naar 318.    \n\nBij een meting kan het aantal virusdeeltjes in het rioolwater zo laag zijn, dat het niet gemeten wordt. Dan staat de meetwaarde op 0. Voor sommige metingen geeft het RIVM aan dat ze niet representatief zijn. Deze metingen worden bij het inladen van de gegevens in het dashboard eruit gefilterd. In het huidige onderzoek kunnen trends in aantallen virusdeeltjes zoals een stijging of daling worden gezien. Meer onderzoek is nodig om conclusies aan deze trends te kunnen verbinden. \n\nHet weekgemiddelde wordt berekend door eerst per meetlocatie het gemiddelde van alle meetwaarden in die week te berekenen. Daarna wordt er op landelijk, veiligheidsregio en gemeente niveau het weekgemiddelde berekent over alle bijbehorende meetlocaties. De weken lopen van maandag t/m zondag. Het gemiddelde voor een week wordt pas berekend in de daarop volgende dinsdag. Dit zodat de week compleet is afgerond, en er tijd is geweest voor het RIVM om de monsters te ontvangen, te analyseren en erover te rapporteren. Let op: het kan voorkomen dat er na dinsdag alsnog gegevens bijkomen van de vorige week, of zelfs de weken daarvoor. Daarom wordt het open databestand dagelijks opnieuw ingelezen. De weekgemiddelden worden hierbij steeds opnieuw berekend. Eventuele correcties op eerdere weken worden doorgevoerd. De meetwaarden per afzonderlijke locatie staan in de grafiek op het dashboard op de datum waarop de meting is uitgevoerd.\n\nOm te bepalen welke zuiveringsinstallatie tot welke veiligheidsregio behoort, wordt gekeken naar het verzorgingsgebied van deze locatie. Dit is het gebied waarvoor de zuiveringsinstallatie rioolwater zuivert. Het RIVM levert per locatie voor hoeveel procent deze in een veiligheidsregio valt. Deze verdeling is nog niet volledig accuraat en wordt de komende tijd verder uitgewerkt. Sommige locaties hebben een verzorgingsgebied dat meerdere veiligheidsregio’s bevat. Als dat zo is, wordt de locatie op het dashboard volledig toegewezen aan de veiligheidsregio die het grootste deel van het verzorgingsgebied omvat. Voor het koppelen van locaties met gemeenten wordt momenteel gekeken naar de postcode van de locatie. Met gebruik van de CBS-indeling gemeente voor postcode wordt vervolgens deze postcode vertaald naar een gemeente. In een paar gevallen kwam hier geen match uit. Voor die uitzonderingen is handmatig op basis van coördinaten gekeken op de kaart tot welke gemeente de locaties behoren. Let op: deze koppelingen zijn mogelijk niet volledig accuraat, want het verzorgingsgebied van een zuiveringsinstallatie hoeft niet gelijk te lopen met gemeentegrenzen. Er wordt gewerkt aan een meer nauwkeurige koppeling tussen locatie en gemeente.\n\nDe legenda van de landelijke kaart is per 26 november opnieuw geijkt. Hiermee worden onderlinge verschillen tussen veiligheidsregio's duidelijker getoond."
+        "verantwoording": "De cijfers over rioolwater worden beschikbaar gesteld via [open data](https://data.rivm.nl/covid-19/COVID-19_rioolwaterdata.csv) door het RIVM. Zie [hier](https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9) de beschrijving van deze dataset. In rioolwater kun je ziekteverwekkers zoals het coronavirus meten omdat die met ontlasting via de wc in het rioolwater komen. Dit onderzoek laat zien hoeveel virusdeeltjes in het rioolwater zitten afkomstig uit ontlasting van besmette personen. Deze metingen worden gedaan bij meer dan 300 rioolwaterzuiveringsinstallaties in het hele land. Op elke locatie analyseren onderzoekers van het RIVM minimaal eens per week rioolwater dat in 24 uur verzameld is. Per week kan het aantal gemeten locaties variëren, omdat niet elke meting succesvol wordt afgerond. In de open data staat per datum bij welke locaties gemeten is. \n\nSinds 3 november wordt op het dashboard het aantal virusdeeltjes niet meer per milliliter rioolwater getoond, maar per 100.000 inwoners. Het CBS heeft in samenwerking met de waterschappen het aantal aangesloten inwoners per rioolwaterzuiveringsinstallatie in kaart gebracht. Dit stelt het RIVM in staat om het aantal virusdeeltjes per 100.000 inwoners te berekenen. Ook corrigeert het RIVM nu voor de hoeveelheid water die tijdens de meting bij de rioolwaterzuiveringsinstallatie binnenkomt (meer regenwater verdunt immers); dit wordt het debiet genoemd. Deze correctie wordt gedaan op gegevens vanaf 7 september. Daarom zijn de gegevens op het dashboard niet meer zichtbaar van vóór die datum. Dit valt samen met de uitbreiding op 7 september van het aantal locaties waar wordt gemeten van circa 80 naar 318.    \n\nBij een meting kan het aantal virusdeeltjes in het rioolwater zo laag zijn, dat het niet gemeten wordt. Dan staat de meetwaarde op 0. Voor sommige metingen geeft het RIVM aan dat ze niet representatief zijn. Deze metingen worden bij het inladen van de gegevens in het dashboard eruit gefilterd. In het huidige onderzoek kunnen trends in aantallen virusdeeltjes zoals een stijging of daling worden gezien. Meer onderzoek is nodig om conclusies aan deze trends te kunnen verbinden. \n\nHet weekgemiddelde wordt berekend door eerst per meetlocatie het gemiddelde van alle meetwaarden in die week te berekenen. Daarna wordt er op landelijk, veiligheidsregio en gemeente niveau het weekgemiddelde berekend over alle bijbehorende meetlocaties. De weken lopen van maandag t/m zondag. Het gemiddelde voor een week wordt pas berekend in de daarop volgende dinsdag. Dit zodat de week compleet is afgerond, en er tijd is geweest voor het RIVM om de monsters te ontvangen, te analyseren en erover te rapporteren. Let op: het kan voorkomen dat er na dinsdag alsnog gegevens bijkomen van de vorige week, of zelfs de weken daarvoor. Daarom wordt het open databestand dagelijks opnieuw ingelezen. De weekgemiddelden worden hierbij steeds opnieuw berekend. Eventuele correcties op eerdere weken worden doorgevoerd. De meetwaarden per afzonderlijke locatie staan in de grafiek op het dashboard op de datum waarop de meting is uitgevoerd.\n\nOm te bepalen welke zuiveringsinstallatie tot welke veiligheidsregio behoort, wordt gekeken naar het verzorgingsgebied van deze locatie. Dit is het gebied waarvoor de zuiveringsinstallatie rioolwater zuivert. Het RIVM levert per locatie voor hoeveel procent deze in een veiligheidsregio valt. Deze verdeling is nog niet volledig accuraat en wordt de komende tijd verder uitgewerkt. Sommige locaties hebben een verzorgingsgebied dat meerdere veiligheidsregio’s bevat. Als dat zo is, wordt de locatie op het dashboard volledig toegewezen aan de veiligheidsregio die het grootste deel van het verzorgingsgebied omvat. Voor het koppelen van locaties met gemeenten wordt momenteel gekeken naar de postcode van de locatie. Met gebruik van de CBS-indeling gemeente voor postcode wordt vervolgens deze postcode vertaald naar een gemeente. In een paar gevallen kwam hier geen match uit. Voor die uitzonderingen is handmatig op basis van coördinaten gekeken op de kaart tot welke gemeente de locaties behoren. Let op: deze koppelingen zijn mogelijk niet volledig accuraat, want het verzorgingsgebied van een zuiveringsinstallatie hoeft niet gelijk te lopen met gemeentegrenzen. Er wordt gewerkt aan een meer nauwkeurige koppeling tussen locatie en gemeente.\n\nDe legenda van de landelijke kaart is per 26 november opnieuw geijkt. Hiermee worden onderlinge verschillen tussen veiligheidsregio's duidelijker getoond."
       },
       {
         "cijfer": "“Waarde van” en “Verkregen”",
@@ -669,7 +669,7 @@
       },
       {
         "cijfer": "Gedrag",
-        "verantwoording": "Deze gegevens worden elke drie weken geactualiseerd en als open databestand gepubliceerd door het [RIVM](https://data.rivm.nl/covid-19/COVID-19_gedrag.html). Op de dag dat het nieuwe bestand beschikbaar is, worden ook de gegevens op het Dashboard Coronavirus geactualiseerd. Het databestand bevat gegevens over het gedrag van de Nederlandse bevolking in relatie tot de corona gedragsregels. De basis hiervoor is een enquête.\n\nDe dataverzameling vindt telkens plaats via het internet (CAWI). Bij deze methode wordt de geprogrammeerde vragenlijst op internet geplaatst. De uitnodigingen voor het invullen van de enquête worden via e-mail verzonden. In de uitnodiging wordt het doel van het onderzoek toegelicht en RIVM als opdrachtgever genoemd. De Gedragsunit van het RIVM heeft de vragenlijst opgesteld. \n\nDe deelnemers aan het onderzoek zijn geselecteerd uit het Kantar Consumentenpanel (NIPObase). De steekproef bestaat uit respondenten van 16 jaar en ouder. De steekproeven zijn per veiligheidsregio representatief uitgezet naar geslacht, leeftijd (5 categorieën) en hoogst gevolgde opleiding (3 categorieën) (op randtotalen). Er is uitgegaan van een respons van 50%, waarbij een bruto steekproef van n=9.780 is uitgezet. \n\nDe steekproef is gedurende een week online beschikbaar voor de respondenten. Daarna wordt de dataverzameling afgesloten. Er vindt een controle plaats op de betrouwbaarheid van de antwoorden. Om de representativiteit voor de Nederlandse bevolking te verhogen worden de resultaten in twee stappen gewogen op basis van de de CBS populatiecijfers:\n\n1 Eerst is elke veiligheidsregio gewogen naar de ideaalcijfers van desbetreffende regio (op Sekse, Leeftijd en Opleiding).\n2 Vervolgens is elke veiligheidsregio ‘ingewogen’ in het totaal volgens het aandeel dat desbetreffende regio heeft in Nederland\n\nVervolgens wordt de dataset verstuurd naar het RIVM. Het RIVM berekent op een gestandaardiseerde manier de indicatoren die in het open databestand zijn opgenomen."
+        "verantwoording": "Deze gegevens worden elke drie weken geactualiseerd en als open databestand gepubliceerd door het [RIVM](https://data.rivm.nl/covid-19/COVID-19_gedrag.html). Zie [hier](https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/8a72d78a-fcf8-4882-b0ab-cd594961a267) de beschrijving van deze dataset. Op de dag dat het nieuwe bestand beschikbaar is, worden ook de gegevens op het Dashboard Coronavirus geactualiseerd. Het databestand bevat gegevens over het gedrag van de Nederlandse bevolking in relatie tot de corona gedragsregels. De basis hiervoor is een enquête.\n\nDe dataverzameling vindt telkens plaats via het internet (CAWI). Bij deze methode wordt de geprogrammeerde vragenlijst op internet geplaatst. De uitnodigingen voor het invullen van de enquête worden via e-mail verzonden. In de uitnodiging wordt het doel van het onderzoek toegelicht en RIVM als opdrachtgever genoemd. De Gedragsunit van het RIVM heeft de vragenlijst opgesteld. \n\nDe deelnemers aan het onderzoek zijn geselecteerd uit het Kantar Consumentenpanel (NIPObase). De steekproef bestaat uit respondenten van 16 jaar en ouder. De steekproeven zijn per veiligheidsregio representatief uitgezet naar geslacht, leeftijd (5 categorieën) en hoogst gevolgde opleiding (3 categorieën) (op randtotalen). Er is uitgegaan van een respons van 50%, waarbij een bruto steekproef van n=9.780 is uitgezet. \n\nDe steekproef is gedurende een week online beschikbaar voor de respondenten. Daarna wordt de dataverzameling afgesloten. Er vindt een controle plaats op de betrouwbaarheid van de antwoorden. Om de representativiteit voor de Nederlandse bevolking te verhogen worden de resultaten in twee stappen gewogen op basis van de de CBS populatiecijfers:\n\n1 Eerst is elke veiligheidsregio gewogen naar de ideaalcijfers van desbetreffende regio (op Sekse, Leeftijd en Opleiding).\n2 Vervolgens is elke veiligheidsregio ‘ingewogen’ in het totaal volgens het aandeel dat desbetreffende regio heeft in Nederland\n\nVervolgens wordt de dataset verstuurd naar het RIVM. Het RIVM berekent op een gestandaardiseerde manier de indicatoren die in het open databestand zijn opgenomen."
       },
       {
         "cijfer": "Sterfte",
@@ -688,8 +688,8 @@
         "verantwoording": "De informatie over thuiswonende 70-plussers wordt dagelijks beschikbaar gesteld via [open data](https://data.rivm.nl/covid-19/COVID-19_thuiswonend_70plus.csv) door het RIVM. Zie [hier](https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/40508e17-7296-4f39-ad25-8ddd0c904087) de beschrijving van deze dataset. In de aangeleverde gegevens is soms de veiligheidsregio onbekend. Dit heeft als gevolg dat het totaal van de weergegeven cijfers op veiligheidsregio niveau minder kan zijn dan wat er op landelijk niveau wordt getoond. Het aantal overleden personen wordt getoond op basis van de datum van overlijden. De overlijdensdatum is echter niet altijd bekend. Als de datum niet bekend is, dan zijn die gevallen niet op het dashboard zichtbaar.\n\nHet RIVM baseert zich op testresultaten en sterfgevallen zoals door de GGD’ en bij het RIVM gemeld. Bij het melden van een positieve testuitslag door de GGD wordt (onder meer) geregistreerd hoe oud iemand is en of de persoon in een verpleeghuis of instelling voor gehandicaptenzorg woont. Het RIVM stelt het aantal (nieuwe) besmettingen van thuiswonenden van 70 jaar of ouder vast door het totaal aantal (nieuwe) besmettingen in de leeftijdsklasse 70 jaar of ouder vast te stellen en daarop in mindering te brengen het aantal besmettingen:\n- Onder bewoners van een instelling\n- Onder mensen die werkzaam zijn in de zorg \n- Onder mensen die via hun adres gelinkt kunnen worden aan een verpleeghuis of een locatie voor gehandicaptenzorg \n- Onder mensen die op basis van setting van besmetting of voorkomen in een vrij tekstveld gelinkt kunnen worden aan een verpleeghuis of gehandicaptenzorginstelling.\n\nDe groep thuiswonenden van 70 jaar is een diverse groep ten aanzien van de woonsituatie en gezondheidssituatie. Een groot deel van de 70-plussers is vitaal en heeft een goede gezondheid. Een ander deel heeft één of meerdere chronische aandoeningen of fysieke of cognitieve beperkingen en is minder vitaal. Op dit moment is het nog niet mogelijk op het dashboard een onderscheid aan te brengen tussen de besmettingen onder vitale en minder vitale thuiswonende ouderen omdat deze informatie niet standaard wordt vastgelegd wanneer een coronatest wordt afgenomen.\n\nHet dashboard toont welk deel van de thuiswonende ouderen van 70 jaar of ouder die dag besmet is geraakt. Voor totaal aantal thuiswonende ouderen van 70 jaar is gebruik gemaakt van gegevens van het CBS over het aantal personen van 70 jaar dat in een particulier huishouden woont (StatLine - Huishoudens; personen naar geslacht, leeftijd en regio, 1 januari (cbs.nl). Het gaat in totaal om 2,3 mln. personen. "
       },
       {
-        "cijfer": "",
-        "verantwoording": ""
+        "cijfer": "Gemeentelijke herindeling",
+        "verantwoording": "Per 1 januari 2021 zijn verschillende gemeentes [samengevoegd](https://www.rijksoverheid.nl/onderwerpen/gemeenten/gemeentelijke-herindeling). Het RIVM verwerkt deze herindeling per 7 januari in de data die het aanlevert voor het Dashboard coronavirus. Vervolgens wordt het dashboard hierop aangepast."
       },
       {
         "cijfer": "",
@@ -774,7 +774,8 @@
       "dateRangeOfReport": "Waarde van {{startDate}} - {{endDate}}"
     },
     "tooltip": {
-      "positive_tested_people": "{{totalPositiveTestedPeople}} in totaal"
+      "positive_tested_people": "{{totalPositiveTestedPeople}} in totaal",
+      "positive_tested_value": ""
     },
     "niveau": "niveau",
     "clear_select_input": "Leegmaken"
@@ -840,7 +841,7 @@
     "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "bron": {
       "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
-      "text": "RIVM"
+      "text": "NICE via RIVM"
     },
     "linechart_description": "",
     "metadata": {
@@ -856,7 +857,7 @@
       "rivm": {
         "download": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.csv",
         "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
-        "text": "RIVM"
+        "text": "NICE via RIVM"
       }
     },
     "tijdelijk_onbeschikbaar_titel": "",
@@ -976,13 +977,13 @@
     "screen_reader_graph_content": "{{value}} opnames.",
     "barscale_titel": "Ziekenhuisopnames per dag",
     "extra_uitleg": "Aantal mensen uit deze gemeente met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de gemelde ziekenhuisopnames over de afgelopen 3 dagen.",
-    "map_titel": "Verdeling ziekenhuisopnames in {{municipality}}",
+    "map_titel": "Verdeling ziekenhuisopnames in veiligheidsregio van {{municipality}}",
     "map_toelichting": "Deze kaarten laten zien hoe de verdeling van ziekenhuisopnames is in Nederland per dag.",
     "linechart_titel": "Ziekenhuisopnames over tijd",
     "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "bron": {
       "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
-      "text": "RIVM"
+      "text": "NICE via RIVM"
     },
     "linechart_description": "",
     "metadata": {
@@ -998,7 +999,7 @@
       "rivm": {
         "download": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.csv",
         "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
-        "text": "RIVM"
+        "text": "NICE via RIVM"
       }
     },
     "tijdelijk_onbeschikbaar_titel": "",
@@ -1016,7 +1017,7 @@
     "barscale_screenreader_text": "{{value}} positief geteste mensen per dag.",
     "kpi_titel": "Aantal positief geteste mensen",
     "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn en COVID-19 hebben. Een deel van de meldingen zijn positieve tests van eerdere dagen, die later zijn doorgegeven.",
-    "map_titel": "Verdeling positief geteste mensen in {{municipality}}",
+    "map_titel": "Verdeling positief geteste mensen in veiligheidsregio van {{municipality}}",
     "map_toelichting": "Deze kaart laat zien van hoeveel mensen in deze gemeente en in andere gemeenten in dezelfde veiligheidsregio gisteren gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
     "linechart_titel": "Verloop over tijd",
     "linechart_toelichting": "Deze grafiek laat zien van hoeveel mensen in de geselecteerde periode in deze gemeente gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
@@ -1115,7 +1116,7 @@
   },
   "laatste_ontwikkelingen": {
     "title": "Laatste ontwikkelingen",
-    "menu_subtitle": "Ziekenhuis- en IC opnames fors gestegen",
+    "menu_subtitle": "Overtuigende daling nog niet zichtbaar",
     "alle_cijfers_header": "Benieuwd naar alle cijfers?",
     "alle_cijfers_link": "Bekijk alle cijfers"
   },
@@ -1169,18 +1170,18 @@
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
     },
-    "toelichting": "Dit getal zegt iets over het totaal aantal personen dat via de GGD getest, waarvan een uitslag bekend is en hoeveel daarvan een positieve uitslag hadden. Let op dat de meeste testen via de GGD lopen, maar dit niet voor alle testen geldt. Daarom wijkt het absolute aantal positief geteste personen af van het aantal positief geteste personen door de GGD.",
-    "totaal_getest_week_titel": "Aantal geteste personen via GGD",
-    "totaal_getest_week_uitleg": "Aantal personen die in één week via de GGD getest zijn, en waarvan de testuitslag bekend is.",
+    "toelichting": "De cijfers hieronder geven inzicht in het aantal tests via de GGD-teststraten en van welk deel daarvan de uitslag positief is. Als het percentage positieve tests toeneemt kan dat erop wijzen dat de verspreiding van het virus toeneemt. Let op dat de meeste testen via de GGD lopen, maar dit niet voor alle testen geldt. Daarom wijkt het absolute aantal positief geteste personen af van het aantal positief testen door de GGD",
+    "totaal_getest_week_titel": "Gemiddeld aantal GGD testen per dag",
+    "totaal_getest_week_uitleg": "Het gemiddelde aantal testen per dag, waarvan de uitslag bekend is. Dit is het gemiddelde over zeven dagen.",
     "positief_getest_week_titel": "Positief geteste personen",
-    "positief_getest_week_uitleg": "Aantal en percentage positief geteste personen die in één week via de GGD getest zijn. Voor het berekenen van het percentage worden alleen tests meegeteld waarvan de testuitslag bekend is.",
+    "positief_getest_week_uitleg": "Percentage positieve testen in de GGD-teststraten, waarvan de uitslag bekend is. Dit is het gemiddelde over zeven dagen. Voor het berekenen van het percentage worden alleen tests meegeteld waarvan de testuitslag bekend is.",
     "positief_getest_getest_week_uitleg": "Dit zijn {{numerator}} van {{denominator}} geteste personen",
     "linechart_percentage_titel": "Percentage positieve testen over tijd",
-    "linechart_percentage_toelichting": "Deze grafiek toont het percentage positief geteste mensen door de GGD over tijd",
+    "linechart_percentage_toelichting": "Deze grafiek toont het percentage GGD testen die een positieve uitslag hebben, ten opzichte van alle GGD testen waarvan de uitslag bekend is. De gegevens zijn gesorteerd op de datum waarop de test bij de GGD heeft plaatsgevonden. Het duurt gemiddeld één tot twee dagen voordat testuitslagen bekend zijn.",
     "linechart_totaltests_titel": "Aantal testen over tijd",
-    "linechart_totaltests_toelichting": "Deze grafiek toont het aantal afgenomen testen waarvan de uitslag bekend is over tijd, in vergelijking met het aantal positieve testen.",
-    "linechart_totaltests_legend_label": "Alle GGD tests",
-    "linechart_positivetests_legend_label": "Alle positieve testen van de GGD",
+    "linechart_totaltests_toelichting": "Deze grafiek toont het aantal bekende testuitslagen in de GGD-teststraten over tijd, en hoeveel daarvan een positieve uitslag hebben. De gegevens zijn gesorteerd op de datum waarop de test bij de GGD heeft plaatsgevonden. Het duurt gemiddeld één tot twee dagen voordat testuitslagen bekend zijn.",
+    "linechart_totaltests_legend_label": "GGD testen waarvan uitslag bekend is",
+    "linechart_positivetests_legend_label": "GGD testen met een positieve uitslag",
     "reference": {
       "href": "/verantwoording#positieve-testen",
       "text": "Lees meer in de cijferverantwoording."
@@ -1254,18 +1255,18 @@
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
       "text": "RIVM"
     },
-    "toelichting": "Dit getal zegt iets over het totaal aantal personen dat via de GGD getest, waarvan een uitslag bekend is en hoeveel daarvan een positieve uitslag hadden. Let op dat de meeste testen via de GGD lopen, maar dit niet voor alle testen geldt. Daarom wijkt het absolute aantal positief geteste personen af van het aantal positief geteste personen door de GGD.",
-    "totaal_getest_week_titel": "Aantal geteste personen via GGD",
-    "totaal_getest_week_uitleg": "Aantal personen die in één week via de GGD getest zijn, en waarvan de testuitslag bekend is.",
+    "toelichting": "De cijfers hieronder geven inzicht in het aantal tests via de GGD-teststraten en van welk deel daarvan de uitslag positief is. Als het percentage positieve tests toeneemt kan dat erop wijzen dat de verspreiding van het virus toeneemt. Let op dat de meeste testen via de GGD lopen, maar dit niet voor alle testen geldt. Daarom wijkt het absolute aantal positief geteste personen af van het aantal positief testen door de GGD.",
+    "totaal_getest_week_titel": "Gemiddeld aantal GGD testen per dag",
+    "totaal_getest_week_uitleg": "Het gemiddelde aantal testen per dag, waarvan de uitslag bekend is. Dit is het gemiddelde over zeven dagen.",
     "positief_getest_week_titel": "Positief geteste personen",
-    "positief_getest_week_uitleg": "Aantal en percentage positief geteste personen die in één week via de GGD getest zijn. Voor het berekenen van het percentage worden alleen tests meegeteld waarvan de testuitslag bekend is.",
+    "positief_getest_week_uitleg": "Percentage positieve testen in de GGD-teststraten, waarvan de uitslag bekend is. Dit is het gemiddelde over zeven dagen. Voor het berekenen van het percentage worden alleen tests meegeteld waarvan de testuitslag bekend is.",
     "positief_getest_getest_week_uitleg": "Dit zijn {{numerator}} van {{denominator}} geteste personen",
     "linechart_percentage_titel": "Percentage positieve testen over tijd",
-    "linechart_percentage_toelichting": "Deze grafiek toont het percentage positief geteste mensen door de GGD over tijd",
+    "linechart_percentage_toelichting": "Deze grafiek toont het percentage GGD testen die een positieve uitslag hebben, ten opzichte van alle GGD testen waarvan de uitslag bekend is. De gegevens zijn gesorteerd op de datum waarop de test bij de GGD heeft plaatsgevonden. Het duurt gemiddeld één tot twee dagen voordat testuitslagen bekend zijn.",
     "linechart_totaltests_titel": "Aantal testen over tijd",
-    "linechart_totaltests_toelichting": "Deze grafiek toont het aantal afgenomen testen waarvan de uitslag bekend is over tijd, in vergelijking met het aantal positieve testen.",
-    "linechart_totaltests_legend_label": "Alle GGD tests",
-    "linechart_positivetests_legend_label": "Alle positieve testen van de GGD",
+    "linechart_totaltests_toelichting": "Deze grafiek toont het aantal bekende testuitslagen in de GGD-teststraten over tijd, en hoeveel daarvan een positieve uitslag hebben. De gegevens zijn gesorteerd op de datum waarop de test bij de GGD heeft plaatsgevonden. Het duurt gemiddeld één tot twee dagen voordat testuitslagen bekend zijn.",
+    "linechart_totaltests_legend_label": "GGD testen waarvan uitslag bekend is",
+    "linechart_positivetests_legend_label": "GGD testen met een positieve uitslag",
     "reference": {
       "href": "/verantwoording#positieve-testen",
       "text": "Lees meer in de cijferverantwoording."
@@ -1460,8 +1461,8 @@
         "support": ""
       },
       "voetnoot": {
-        "compliance": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft de gedragsregels te volgen in zijn/haar dagelijks leven \n* Als er een verschil is met de vorige meting kan dat met 95% zekerheid gezegd worden.",
-        "support": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft achter de gedragsregel te staan.\n* Als er een verschil is met de vorige meting kan dat met 95% zekerheid gezegd worden."
+        "compliance": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft de gedragsregels te volgen in zijn/haar dagelijks leven \n* De rechter kolom geeft aan of met minstens 95% zekerheid gezegd kan worden dat er een statistisch verantwoord verschil is vergeleken met de vorige meting.",
+        "support": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft achter de gedragsregel te staan.\n* De rechter kolom geeft aan of met minstens 95% zekerheid gezegd kan worden dat er een statistisch verantwoord verschil is vergeleken met de vorige meting."
       },
       "voetnoot_asterisk": {
         "compliance": "",
@@ -1525,8 +1526,8 @@
         "support": ""
       },
       "voetnoot": {
-        "compliance": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft de gedragsregels te volgen in zijn/haar dagelijks leven \n* Als er een verschil is met de vorige meting kan dat met 95% zekerheid gezegd worden.",
-        "support": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft achter de gedragsregel te staan.\n* Als er een verschil is met de vorige meting kan dat met 95% zekerheid gezegd worden."
+        "compliance": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft de gedragsregels te volgen in zijn/haar dagelijks leven \n* De rechter kolom geeft aan of met minstens 95% zekerheid gezegd kan worden dat er een statistisch verantwoord verschil is vergeleken met de vorige meting.",
+        "support": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft achter de gedragsregel te staan.\n* De rechter kolom geeft aan of met minstens 95% zekerheid gezegd kan worden dat er een statistisch verantwoord verschil is vergeleken met de vorige meting."
       },
       "voetnoot_asterisk": {
         "compliance": "",
@@ -1948,11 +1949,11 @@
       "text": "Lees meer in de cijferverantwoording."
     },
     "cbs_message": {
-      "title": "Sterfte neemt verder toe in week 50",
+      "title": "Bijna 4 duizend mensen overleden in week 51",
       "published_text": "Publicatiedatum: vrijdag 4 december",
-      "message": "In week 50 (7 tot en met 13 december 2020) overleden naar schatting 3 550 mensen. Dat zijn er ruim 50 meer dan een week eerder, toen 3 494 mensen overleden. In de winter neemt het aantal overledenen altijd toe. De sterfte in week 50 is echter nog 450 hoger dan verwacht voor deze periode. Dat meldt het CBS op basis van de voorlopige sterftecijfers per week.",
+      "message": "In week 51 (14 tot en met 20 december 2020) overleden naar schatting bijna 4 duizend mensen. Dat zijn er bijna 400 meer dan een week eerder, toen 3 580 mensen overleden. De sterfte in week 51 is 800 hoger dan verwacht voor deze periode. In 2020 overleden tot en met week 51 ruim 162 duizend mensen, 13 duizend meer dan verwacht. Dat meldt het CBS op basis van de voorlopige sterftecijfers per week.",
       "link": {
-        "href": "https://www.cbs.nl/nl-nl/nieuws/2020/51/sterfte-neemt-verder-toe-in-week-50",
+        "href": "https://www.cbs.nl/nl-nl/nieuws/2020/53/bijna-4-duizend-mensen-overleden-in-week-51",
         "text": "Website CBS"
       }
     },
@@ -2047,7 +2048,7 @@
       "0_algemeen_21": "Was vaak je handen.",
       "0_algemeen_22": "Hoest en nies in je elleboog.",
       "0_algemeen_23": "Draag een mondkapje waar dat verplicht is.",
-      "41_bezoek_24": "Ontvang max. 2 personen per dag (excl. kinderen t/m 12 jaar). Voor de periode 24 t/m 26 december geldt: ontvang max. 3 personen per dag.",
+      "41_bezoek_24": "Ontvang max. 2 personen per dag (excl. kinderen t/m 12 jaar).",
       "41_er_op_uit_25": "Binnen en buiten: groep van max. 2 personen of 1 huishouden.",
       "41_samenkomst_26": "Onder andere musea, bioscopen, theaters, dierenparken, bibliotheken, zwembaden en pretparken dicht.",
       "41_horeca_27": "Eet- en drinkgelegenheden dicht. Ook in hotels, incl. roomservice.",

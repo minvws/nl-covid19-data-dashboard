@@ -55,8 +55,8 @@ export function SewerWaterChart<T extends SewerPerInstallationBaseValue>(
               .map((serie) => (
                 <LegendItem key={serie.name}>
                   <LegendMarker>
-                    {serie.type === 'scatter' && <Dot fill={serie.color} />}
-                    {serie.type === 'line' && <Line stroke={serie.color} />}
+                    {serie.type === 'scatter' && <Dot color={serie.color} />}
+                    {serie.type === 'line' && <Line color={serie.color} />}
                   </LegendMarker>
                   <div>{serie.description}</div>
                 </LegendItem>

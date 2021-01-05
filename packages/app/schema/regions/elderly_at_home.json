@@ -12,7 +12,7 @@
     "deceased_daily": {
       "type": "integer"
     },
-    "date_of_report_unix": {
+    "date_unix": {
       "type": "integer"
     },
     "date_of_insertion_unix": {
@@ -27,7 +27,7 @@
     "positive_tested_daily",
     "positive_tested_daily_per_100k",
     "deceased_daily",
-    "date_of_report_unix",
+    "date_unix",
     "date_of_insertion_unix",
     "vrcode"
   ],

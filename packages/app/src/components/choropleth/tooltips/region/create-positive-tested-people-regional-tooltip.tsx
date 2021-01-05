@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
 import siteText from '~/locale/index';
-import { RegionPositiveTestedPeople } from '~/types/data';
+import { RegionsTestedOverall } from '~/types/data';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { RegionSelectionHandler } from '../../select-handlers/create-select-region-handler';
@@ -10,14 +10,8 @@ const text = siteText.common.tooltip;
 
 export const createPositiveTestedPeopleRegionalTooltip = (
   selectHandler: RegionSelectionHandler
-) => (
-  context: SafetyRegionProperties & RegionPositiveTestedPeople
-): ReactNode => {
-  const {
-    vrname,
-    positive_tested_people,
-    total_positive_tested_people,
-  } = context;
+) => (context: SafetyRegionProperties & RegionsTestedOverall): ReactNode => {
+  const { vrname, infected_per_100k, infected } = context;
 
   const onSelect = (event: any) => {
     event.stopPropagation();
@@ -27,11 +21,11 @@ export const createPositiveTestedPeopleRegionalTooltip = (
   return (
     <TooltipContent title={vrname} onSelect={onSelect}>
       <p className="info-value">
-        {formatNumber(positive_tested_people)} per 100.000
+        {formatNumber(infected_per_100k)} per 100.000
       </p>
       <p className="info-total">
         {replaceVariablesInText(text.positive_tested_people, {
-          totalPositiveTestedPeople: `${total_positive_tested_people}`,
+          totalPositiveTestedPeople: `${infected}`,
         })}
       </p>
     </TooltipContent>

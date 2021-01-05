@@ -59,7 +59,7 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
           )}
           metadata={{
             datumsText: positiveTestPeopleText.datums,
-            dateInfo: lastValue.date_of_report_unix,
+            dateOrRange: lastValue.date_unix,
             dateOfInsertionUnix: lastValue.date_of_insertion_unix,
             dataSources: [positiveTestPeopleText.bronnen.rivm],
           }}
@@ -71,7 +71,7 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
             title={positiveTestPeopleText.barscale_titel}
             description={positiveTestPeopleText.extra_uitleg}
             metadata={{
-              date: lastValue.date_of_report_unix,
+              date: lastValue.date_unix,
               source: positiveTestPeopleText.bronnen.rivm,
             }}
           >
@@ -85,10 +85,12 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
         <LineChartTile
           metadata={{ source: positiveTestPeopleText.bronnen.rivm }}
           title={positiveTestPeopleText.linechart_titel}
-          values={values.map((value) => ({
-            value: value.newly_infected_people,
-            date: value.date_of_report_unix,
-          }))}
+          values={values}
+          linesConfig={[
+            {
+              metricProperty: 'newly_infected_people',
+            },
+          ]}
         />
 
         <ContentHeader
@@ -101,7 +103,7 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
           subtitle={locationsText.pagina_toelichting}
           metadata={{
             datumsText: locationsText.datums,
-            dateInfo: lastValue.date_of_report_unix,
+            dateOrRange: lastValue.date_unix,
             dateOfInsertionUnix: lastValue.date_of_insertion_unix,
             dataSources: [locationsText.bronnen.rivm],
           }}
@@ -112,7 +114,7 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
           <KpiTile
             title={locationsText.kpi_titel}
             metadata={{
-              date: lastValue.date_of_report_unix,
+              date: lastValue.date_unix,
               source: locationsText.bronnen.rivm,
             }}
           >
@@ -126,7 +128,7 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
           <KpiTile
             title={locationsText.barscale_titel}
             metadata={{
-              date: lastValue.date_of_report_unix,
+              date: lastValue.date_unix,
               source: locationsText.bronnen.rivm,
             }}
           >
@@ -141,10 +143,12 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
         {lastValue.infected_locations_total !== undefined && (
           <LineChartTile
             title={locationsText.linechart_titel}
-            values={values.map((value) => ({
-              value: value.infected_locations_total,
-              date: value.date_of_report_unix,
-            }))}
+            values={values}
+            linesConfig={[
+              {
+                metricProperty: 'infected_locations_total',
+              },
+            ]}
             metadata={{
               source: locationsText.bronnen.rivm,
             }}
@@ -161,7 +165,7 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
           subtitle={mortalityText.pagina_toelichting}
           metadata={{
             datumsText: mortalityText.datums,
-            dateInfo: lastValue.date_of_report_unix,
+            dateOrRange: lastValue.date_unix,
             dateOfInsertionUnix: lastValue.date_of_insertion_unix,
             dataSources: [mortalityText.bronnen.rivm],
           }}
@@ -173,7 +177,7 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
             title={mortalityText.barscale_titel}
             description={mortalityText.extra_uitleg}
             metadata={{
-              date: lastValue.date_of_report_unix,
+              date: lastValue.date_unix,
               source: mortalityText.bronnen.rivm,
             }}
           >
@@ -187,10 +191,12 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
         <LineChartTile
           metadata={{ source: mortalityText.bronnen.rivm }}
           title={mortalityText.linechart_titel}
-          values={values.map((value) => ({
-            value: value.deceased_daily,
-            date: value.date_of_report_unix,
-          }))}
+          values={values}
+          linesConfig={[
+            {
+              metricProperty: 'deceased_daily',
+            },
+          ]}
         />
       </TileList>
     </>

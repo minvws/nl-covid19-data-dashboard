@@ -38,7 +38,7 @@ const DeceasedNationalPage: FCWithLayout<NationalPageProps> = (props) => {
           reference={text.section_deceased_rivm.reference}
           metadata={{
             datumsText: text.section_deceased_rivm.datums,
-            dateInfo: dataRivm.last_value.date_of_report_unix,
+            dateOrRange: dataRivm.last_value.date_unix,
             dateOfInsertionUnix: dataRivm.last_value.date_of_insertion_unix,
             dataSources: [text.section_deceased_rivm.bronnen.rivm],
           }}
@@ -48,7 +48,7 @@ const DeceasedNationalPage: FCWithLayout<NationalPageProps> = (props) => {
           <KpiTile
             title={text.section_deceased_rivm.kpi_covid_daily_title}
             metadata={{
-              date: dataRivm.last_value.date_of_report_unix,
+              date: dataRivm.last_value.date_unix,
               source: text.section_deceased_rivm.bronnen.rivm,
             }}
           >
@@ -63,7 +63,7 @@ const DeceasedNationalPage: FCWithLayout<NationalPageProps> = (props) => {
           <KpiTile
             title={text.section_deceased_rivm.kpi_covid_total_title}
             metadata={{
-              date: dataRivm.last_value.date_of_report_unix,
+              date: dataRivm.last_value.date_unix,
               source: text.section_deceased_rivm.bronnen.rivm,
             }}
           >
@@ -84,10 +84,12 @@ const DeceasedNationalPage: FCWithLayout<NationalPageProps> = (props) => {
           description={
             text.section_deceased_rivm.line_chart_covid_daily_description
           }
-          values={dataRivm.values.map((value) => ({
-            value: value.covid_daily,
-            date: value.date_of_report_unix,
-          }))}
+          values={dataRivm.values}
+          linesConfig={[
+            {
+              metricProperty: 'covid_daily',
+            },
+          ]}
           metadata={{ source: text.section_deceased_rivm.bronnen.rivm }}
         />
 

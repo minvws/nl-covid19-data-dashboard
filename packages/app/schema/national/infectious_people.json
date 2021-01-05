@@ -1,0 +1,50 @@
+{
+  "definitions": {
+    "value": {
+      "title": "national_infectious_people_value",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "margin_low",
+        "estimate",
+        "margin_high",
+        "date_unix",
+        "date_of_insertion_unix"
+      ],
+      "properties": {
+        "margin_low": {
+          "type": "integer"
+        },
+        "estimate": {
+          "type": ["integer", "null"],
+          "nullable": true
+        },
+        "margin_high": {
+          "type": "integer"
+        },
+        "date_unix": {
+          "type": "integer"
+        },
+        "date_of_insertion_unix": {
+          "type": "integer"
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "national_infectious_people",
+  "type": "object",
+  "required": ["values", "last_value"],
+  "additionalProperties": false,
+  "properties": {
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/value"
+      }
+    },
+    "last_value": {
+      "$ref": "#/definitions/value"
+    }
+  }
+}

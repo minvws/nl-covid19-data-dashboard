@@ -38,11 +38,6 @@ export default function App(props: AppPropsWithLayout) {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `try { window.document.documentElement.classList.remove('has-no-js'); } catch(err) {};`,
-        }}
-      />
       {pageWithLayout}
     </ThemeProvider>
   );

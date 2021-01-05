@@ -11,20 +11,28 @@ RUN yarn workspace @corona-dashboard/cli generate-typescript
 # Stage 1 - Build NL application
 FROM node:14 as react-build-nl
 ARG NEXT_PUBLIC_LOCALE=nl
+ARG NEXT_PUBLIC_SANITY_PROJECT_ID
+
 WORKDIR /app
 COPY --from=react-build-base /app/node_modules /app/node_modules
 COPY --from=react-build-base /app/packages/app/ /app/packages/app/node_modules
 COPY . .
-RUN yarn build
+RUN yarn workspace @corona-dashboard/app build
+RUN yarn workspace @corona-dashboard/app export
+
 
 # Stage 2 - Build EN application
 FROM node:14 as react-build-en
 ARG NEXT_PUBLIC_LOCALE=en
+ARG NEXT_PUBLIC_SANITY_PROJECT_ID
+
 WORKDIR /app
 COPY --from=react-build-base /app/node_modules /app/node_modules
 COPY --from=react-build-base /app/packages/app/ /app/packages/app/node_modules
 COPY . .
-RUN yarn build
+RUN yarn workspace @corona-dashboard/app build
+RUN yarn workspace @corona-dashboard/app export
+
 
 # Stage 3 - the production environment
 FROM bitnami/nginx:latest

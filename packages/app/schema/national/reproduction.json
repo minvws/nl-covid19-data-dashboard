@@ -1,0 +1,53 @@
+{
+  "definitions": {
+    "value": {
+      "title": "national_reproduction_value",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "index_low",
+        "index_average",
+        "index_high",
+        "date_unix",
+        "date_of_insertion_unix"
+      ],
+      "properties": {
+        "index_low": {
+          "type": ["number", "null"],
+          "nullable": true
+        },
+        "index_average": {
+          "type": ["number", "null"],
+          "nullable": true
+        },
+        "index_high": {
+          "type": ["number", "null"],
+          "nullable": true
+        },
+        "date_unix": {
+          "type": "integer"
+        },
+        "date_of_insertion_unix": {
+          "type": "integer"
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "reproduction.json",
+  "title": "national_reproduction",
+  "type": "object",
+  "required": ["values", "last_value"],
+  "additionalProperties": false,
+  "properties": {
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/value"
+      }
+    },
+    "last_value": {
+      "$ref": "#/definitions/value"
+    }
+  }
+}

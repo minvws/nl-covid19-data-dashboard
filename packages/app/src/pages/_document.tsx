@@ -43,7 +43,9 @@ class MyDocument extends Document {
 
     return (
       <Html lang={locale} className="has-no-js">
-        <Head />
+        <Head>
+          <script src="/init.js" async />
+        </Head>
         <body>
           <Main />
 
