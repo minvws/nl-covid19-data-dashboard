@@ -28,8 +28,7 @@
     "tested_ggd_daily",
     "tested_ggd_average",
     "tested_overall",
-    "tested_per_age_group",
-    "verdenkingen_huisartsen"
+    "tested_per_age_group"
   ],
   "additionalProperties": false,
   "properties": {
