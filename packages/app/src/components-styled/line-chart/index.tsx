@@ -88,7 +88,7 @@ export function LineChart<T extends Value>({
   isPercentage,
   showMarkerLine = false,
   formatMarkerLabel,
-  padding: overridePadding = {},
+  padding: overridePadding,
   showLegend = false,
 }: LineChartProps<T>) {
   const padding: ChartPadding = useMemo(
