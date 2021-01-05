@@ -1901,6 +1901,60 @@
     },
     "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
   },
+  "vaccinaties": {
+    "titel_sidebar": "Vaccinaties",
+    "titel_kpi": "Totaal aantal eerste vaccinaties toegediend",
+    "metadata": {
+      "title": "Vaccinaties | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "#"
+    },
+    "section_vaccinations_rivm": {
+      "title": "COVID-19 vaccinaties",
+      "description": "Op deze pagina is informatie te vinden omtrent vaccineren voor COVID-19 in Nederland.",
+      "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+      "reference": {
+        "href": "/verantwoording#vaccinaties",
+        "text": "Lees meer in de cijferverantwoording."
+      },
+      "bronnen": {
+        "rivm": {
+          "href": "#",
+          "text": "RIVM",
+          "download": "#"
+        },
+        "vws": {
+          "href": "#",
+          "text": "VWS",
+          "download": "#"
+        }
+      },
+      "kpi_first_vaccinations": {
+        "title": "Aantal eerste vaccinaties toegediend",
+        "value": 2187,
+        "description": "Dit getal laat zien hoeveel mensen totaal hun eerste vaccinatie hebben gekregen in Nederland."
+      },
+      "kpi_rate": {
+        "title": "Vaccinatiegraad",
+        "value": 0.4,
+        "target": "Streefwaarde 70%",
+        "description": "Dit getal laat zien hoeveel mensen totaal hun eerste vaccinatie hebben gekregen in Nederland."
+      },
+      "kpi_stock": {
+        "title": "Vaccins in voorraad",
+        "value": 12400,
+        "description": "Dit getal laat het aantal vaccins dat we op dit moment in voorraad hebben."
+      },
+      "kpi_expected_delivery": {
+        "title": "Verwachte levering",
+        "value": 18000000,
+        "description": "Dit getal laat het aantal vaccins zien dat we in de nabije toekomst verwachten."
+      }
+    },
+    "section_vaccinations_more_information": {
+      "title": "Meer informatie",
+      "description": "In de komende periode wordt gewerkt aan uitbreiding van de cijfers op deze pagina.\n\nVoor meer informatie over de cijfers zie de [cijferverantwoording](#). Meer informatie over de vaccinaties zelf kunt u vinden op [https://www.rijksoverheid.nl/onderwerpen/coronavirus-vaccinatie](https://www.rijksoverheid.nl/onderwerpen/coronavirus-vaccinatie)"
+    }
+  },
   "veiligheidsregio_sterfte": {
     "titel_sidebar": "Sterfte",
     "titel_kpi": "Gemeld aantal patiënten overleden aan COVID-19 per dag",
