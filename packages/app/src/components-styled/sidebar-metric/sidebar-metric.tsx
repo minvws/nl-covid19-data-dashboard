@@ -1,7 +1,7 @@
 import { get } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
-import { MetricKeys } from '~/components/choropleth/shared';
+import { Metric, MetricKeys } from '~/components/choropleth/shared';
 import siteText, { TALLLanguages } from '~/locale/index';
 import {
   DataScope,
@@ -53,13 +53,12 @@ export function SidebarMetric<T extends { difference: unknown }>({
 }: SidebarMetricProps<T>) {
   /**
    * @TODO this is still a bit messy due to improper typing. Not sure how to
-   * fix this easily. The getLastFilledValue function is not strongly typed on
+   * fix this easily. The getLastFilledValue function is now strongly typed on
    * a certain metric but here we don't have that type as input.
    */
-  const lastValue = metricContainsPartialData((metricName as unknown) as string)
-    ? // @ts-ignore
-      (getLastFilledValue(data[metricName]) as data[metricName])
-    : get(data, [(metricName as unknown) as string, 'last_value']);
+  const lastValue = metricContainsPartialData(metricName as string)
+    ? getLastFilledValue((data[metricName] as unknown) as Metric<unknown>)
+    : get(data, [metricName as string, 'last_value']);
 
   const propertyValue = metricProperty && lastValue[metricProperty];
 
