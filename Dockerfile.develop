@@ -1,0 +1,29 @@
+# Stage 0 - Install dependancies
+FROM node:14 AS build-env
+
+# Required arguments for Nextjs
+ARG NEXT_PUBLIC_IS_PREVIEW_SERVER_ARG
+ARG PREVIEW_SERVER_NL_ARG
+ARG PREVIEW_SERVER_EN_ARG
+
+ENV NEXT_PUBLIC_IS_PREVIEW_SERVER ${NEXT_PUBLIC_IS_PREVIEW_SERVER_ARG}
+ENV PREVIEW_SERVER_NL ${PREVIEW_SERVER_NL_ARG}
+ENV PREVIEW_SERVER_EN ${PREVIEW_SERVER_EN_ARG}
+
+WORKDIR /app
+COPY . .
+RUN yarn
+
+# Validation stage
+RUN yarn workspace @corona-dashboard/cli validate-json
+RUN yarn workspace @corona-dashboard/cli generate-typescript
+
+# Stage 2 - Build EN application
+RUN yarn workspace @corona-dashboard/app build
+
+#FROM node:14-alpine
+FROM node:14
+WORKDIR /app
+COPY --from=build-env /app /app
+EXPOSE 8080
+CMD ["yarn",  "start"]
