@@ -17,7 +17,7 @@ interface StaticProps {
 interface VeelgesteldeVragenProps {
   data: {
     title: string;
-    description: string;
+    description: string | null;
     questions: Array<{ content: Array<any>; title: string }>;
   };
   lastGenerated: string;
@@ -61,7 +61,8 @@ const Verantwoording: FCWithLayout<VeelgesteldeVragenProps> = (props) => {
         <MaxWidth>
           <div className={styles.maxwidth}>
             <h2>{data.title}</h2>
-            <PortableText blocks={data.description} />
+
+            {data.description && <PortableText blocks={data.description} />}
 
             {data.questions ? (
               <article className={styles.faqList}>
