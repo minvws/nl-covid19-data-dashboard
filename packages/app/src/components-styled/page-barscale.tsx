@@ -40,7 +40,7 @@ export function PageBarScale<T>({
 
   /**
    * @TODO this is still a bit messy due to improper typing. Not sure how to
-   * fix this easily. The getLastFilledValue function is not strongly typed on
+   * fix this easily. The getLastFilledValue function is now strongly typed on
    * a certain metric but here we don't have that type as input.
    */
   const lastValue = metricContainsPartialData((metricName as unknown) as string)
