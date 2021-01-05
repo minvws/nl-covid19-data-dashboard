@@ -4,9 +4,9 @@ import chalk from 'chalk';
 import fs from 'fs';
 import meow from 'meow';
 import path from 'path';
+import { schemaDirectory } from './config';
 import { createValidateFunction } from './create-validate-function';
 import { executeValidations } from './execute-validations';
-import { schemaDirectory } from './config';
 import { getSchemaInformation, SchemaInfo } from './schema-information';
 
 const cli = meow(
@@ -39,7 +39,7 @@ if (!customJsonPathArg) {
     process.exit(1);
   }
 
-  if (schemaInformation.municipal.files.length !== 355) {
+  if (schemaInformation.municipal.files.length !== 352) {
     console.error(
       chalk.bgRed.bold(
         `\n Expected 355 municipal files, actually found ${schemaInformation.municipal.files.length} \n`
