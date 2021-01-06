@@ -6,13 +6,9 @@ export type RegionSelectionHandler = (context: SafetyRegionProperties) => void;
 
 export function createSelectRegionHandler(
   router: NextRouter,
-  pageName: RegioPageName = 'positief-geteste-mensen'
+  pageName: RegioPageName
 ): RegionSelectionHandler {
   return (context: SafetyRegionProperties) => {
-    if (!context) {
-      return;
-    }
-
     router.push(`/veiligheidsregio/${context.vrcode}/${pageName}`);
   };
 }
