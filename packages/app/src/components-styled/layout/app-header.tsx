@@ -9,7 +9,7 @@ import { TopNavigation } from './components/top-navigation';
 export function AppHeader() {
   return (
     <Box as="header" zIndex={4} position="relative" bg="white">
-      <MaxWidth px={3}>
+      <MaxWidth px={{ _: 3, sm: 4 }}>
         <Logo />
         <LanguageSwitcher />
       </MaxWidth>
@@ -19,7 +19,7 @@ export function AppHeader() {
           flexWrap="wrap"
           alignItems="center"
           justifyContent="space-between"
-          px={3}
+          px={{ _: 3, sm: 4 }}
         >
           <Box
             fontSize={3}

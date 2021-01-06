@@ -120,7 +120,7 @@ const NavWrapper = styled.nav(
     [`@media ${theme.mediaQueries.md}`]: {
       borderTopWidth: 0,
       ml: 'auto',
-      mr: 0,
+      mr: -3,
       mt: 0,
       pb: 1,
       flex: '0 0 auto',
@@ -182,23 +182,21 @@ const NavLink = styled.a<{ isActive: boolean }>((x) =>
   })
 );
 
-const NavLinkSpan = styled.span(() => {
-  const horizontalSpace = asResponsiveArray({ _: '1.5rem', md: '1.5rem' });
-
-  return css({
+const NavLinkSpan = styled.span(
+  css({
     display: 'inline-block',
-    px: horizontalSpace,
+    px: 3,
     py: '0.7rem',
     position: 'relative',
 
     // Styled underline
     '&::before': {
       bg: 'white',
-      right: horizontalSpace,
-      left: horizontalSpace,
+      right: 3,
+      left: 3,
       bottom: '0.6rem',
       height: '0.15rem',
       position: 'absolute',
     },
-  });
-});
+  })
+);

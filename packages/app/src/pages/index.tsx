@@ -8,10 +8,12 @@ import { MaxWidth } from '~/components-styled/max-width';
 import { NewsMessage } from '~/components-styled/news-message';
 import { QuickLinks } from '~/components-styled/quick-links';
 import { Tile } from '~/components-styled/tile';
+import { TileList } from '~/components-styled/tile-list';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
+import { Search } from '~/domain/topical/components/search';
 import { DataSitemap } from '~/domain/topical/data-site-map';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
@@ -43,109 +45,114 @@ const Home: FCWithLayout<IHomeData> = (data) => {
 
   return (
     <MaxWidth>
-      <Tile>De actuele situatie in Nederland</Tile>
-      <MiniTrendTileLayout>
-        <MiniTrendTile
-          title={text.mini_trend_tiles.positief_getest.title}
-          text={
-            <DataDrivenText
-              data={data.data}
-              metricName="tested_overall"
-              metricProperty="infected_per_100k"
-              differenceKey="tested_overall__infected_per_100k"
-              valueTexts={text.data_driven_texts.infected_people_total.value}
-              differenceTexts={
-                text.data_driven_texts.infected_people_total.difference
-              }
-            />
-          }
-          icon={<GetestIcon />}
-          trendData={dataInfectedTotal.values}
-          metricProperty="infected_per_100k"
+      <TileList>
+        <Search />
+        <Tile>De actuele situatie in Nederland</Tile>
+        <MiniTrendTileLayout>
+          <MiniTrendTile
+            title={text.mini_trend_tiles.positief_getest.title}
+            text={
+              <DataDrivenText
+                data={data.data}
+                metricName="tested_overall"
+                metricProperty="infected_per_100k"
+                differenceKey="tested_overall__infected_per_100k"
+                valueTexts={text.data_driven_texts.infected_people_total.value}
+                differenceTexts={
+                  text.data_driven_texts.infected_people_total.difference
+                }
+              />
+            }
+            icon={<GetestIcon />}
+            trendData={dataInfectedTotal.values}
+            metricProperty="infected_per_100k"
+          />
+          <MiniTrendTile
+            title={text.mini_trend_tiles.ziekenhuis_opnames.title}
+            text={
+              <DataDrivenText
+                data={data.data}
+                metricName="hospital_nice"
+                metricProperty="admissions_moving_average"
+                differenceKey="hospital_nice__admissions_moving_average"
+                valueTexts={text.data_driven_texts.intake_hospital_ma.value}
+                differenceTexts={
+                  text.data_driven_texts.intake_hospital_ma.difference
+                }
+              />
+            }
+            icon={<ZiekenhuisIcon />}
+            trendData={dataHospitalIntake.values}
+            metricProperty="admissions_moving_average"
+          />
+          <MiniTrendTile
+            title={text.mini_trend_tiles.ic_opnames.title}
+            text={
+              <DataDrivenText
+                data={data.data}
+                metricName="intensive_care_nice"
+                metricProperty="admissions_moving_average"
+                differenceKey="intensive_care_nice__admissions_moving_average"
+                valueTexts={
+                  text.data_driven_texts.intake_intensivecare_ma.value
+                }
+                differenceTexts={
+                  text.data_driven_texts.intake_intensivecare_ma.difference
+                }
+              />
+            }
+            icon={<ArtsIcon />}
+            trendData={dataIntake.values}
+            metricProperty="admissions_moving_average"
+          />
+        </MiniTrendTileLayout>
+        <QuickLinks
+          header={text.quick_links.header}
+          links={[
+            { href: '/landelijk', text: text.quick_links.links.nationaal },
+            {
+              href: '/veiligheidsregio',
+              text: text.quick_links.links.veiligheidsregio,
+            },
+            { href: '/gemeentes', text: text.quick_links.links.gemeente },
+          ]}
         />
-        <MiniTrendTile
-          title={text.mini_trend_tiles.ziekenhuis_opnames.title}
-          text={
-            <DataDrivenText
-              data={data.data}
-              metricName="hospital_nice"
-              metricProperty="admissions_moving_average"
-              differenceKey="hospital_nice__admissions_moving_average"
-              valueTexts={text.data_driven_texts.intake_hospital_ma.value}
-              differenceTexts={
-                text.data_driven_texts.intake_hospital_ma.difference
-              }
-            />
-          }
-          icon={<ZiekenhuisIcon />}
-          trendData={dataHospitalIntake.values}
-          metricProperty="admissions_moving_average"
-        />
-        <MiniTrendTile
-          title={text.mini_trend_tiles.ic_opnames.title}
-          text={
-            <DataDrivenText
-              data={data.data}
-              metricName="intensive_care_nice"
-              metricProperty="admissions_moving_average"
-              differenceKey="intensive_care_nice__admissions_moving_average"
-              valueTexts={text.data_driven_texts.intake_intensivecare_ma.value}
-              differenceTexts={
-                text.data_driven_texts.intake_intensivecare_ma.difference
-              }
-            />
-          }
-          icon={<ArtsIcon />}
-          trendData={dataIntake.values}
-          metricProperty="admissions_moving_average"
-        />
-      </MiniTrendTileLayout>
-      <QuickLinks
-        header={text.quick_links.header}
-        links={[
-          { href: '/landelijk', text: text.quick_links.links.nationaal },
-          {
-            href: '/veiligheidsregio',
-            text: text.quick_links.links.veiligheidsregio,
-          },
-          { href: '/gemeentes', text: text.quick_links.links.gemeente },
-        ]}
-      />
 
-      <ChoroplethTile
-        title={text.risiconiveaus.selecteer_titel}
-        description={
-          <>
-            <span
-              dangerouslySetInnerHTML={{
-                __html: text.risiconiveaus.selecteer_toelichting,
-              }}
-            />
-            <EscalationMapLegenda text={data.text} />
-          </>
-        }
-      >
-        <SafetyRegionChoropleth
-          metricName="escalation_levels"
-          metricProperty="escalation_level"
-          onSelect={createSelectRegionHandler(router, 'maatregelen')}
-          tooltipContent={escalationTooltip(
-            createSelectRegionHandler(router, 'maatregelen')
-          )}
+        <ChoroplethTile
+          title={text.risiconiveaus.selecteer_titel}
+          description={
+            <>
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: text.risiconiveaus.selecteer_toelichting,
+                }}
+              />
+              <EscalationMapLegenda text={data.text} />
+            </>
+          }
+        >
+          <SafetyRegionChoropleth
+            metricName="escalation_levels"
+            metricProperty="escalation_level"
+            onSelect={createSelectRegionHandler(router, 'maatregelen')}
+            tooltipContent={escalationTooltip(
+              createSelectRegionHandler(router, 'maatregelen')
+            )}
+          />
+        </ChoroplethTile>
+
+        <NewsMessage
+          imageSrc="images/toelichting-afbeelding.png"
+          linkText={notificatie.link.text}
+          href={notificatie.link.href}
+          message={notificatie.bericht}
+          publishedAt={notificatie.datum}
+          subtitle={notificatie.subtitel}
+          title={notificatie.titel}
         />
-      </ChoroplethTile>
 
-      <NewsMessage
-        imageSrc="images/toelichting-afbeelding.png"
-        linkText={notificatie.link.text}
-        href={notificatie.link.href}
-        message={notificatie.bericht}
-        publishedAt={notificatie.datum}
-        subtitle={notificatie.subtitel}
-        title={notificatie.titel}
-      />
-
-      <DataSitemap />
+        <DataSitemap />
+      </TileList>
     </MaxWidth>
   );
 };
