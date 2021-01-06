@@ -31,6 +31,7 @@ import {
   getTrendData,
   isDailyValue,
   isWeeklyValue,
+  NumberProperty,
   TrendValue,
   Value,
   WeeklyValue,
@@ -39,14 +40,8 @@ import {
 const dateToValue = (d: Date) => d.valueOf() / 1000;
 const formatXAxis = (date: Date) =>
   formatDateFromSeconds(dateToValue(date), 'axis');
-const formatYAxisFn = (y: number) => y.toString();
+const formatYAxisFn = (y: number) => formatNumber(y);
 const formatYAxisPercentageFn = (y: number) => `${formatPercentage(y)}%`;
-
-// This type limits the allowed property names to those with a number type,
-// so its like keyof T, but filtered down to only the appropriate properties.
-export type NumberProperty<T extends Value> = {
-  [K in keyof T]: T[K] extends number | null ? K : never;
-}[keyof T];
 
 export type LineConfig<T extends Value> = {
   metricProperty: NumberProperty<T>;
@@ -65,12 +60,12 @@ export type LineChartProps<T extends Value> = {
   formatTooltip?: (value: (T & TrendValue)[]) => React.ReactNode;
   formatXAxis?: TickFormatter<Date>;
   formatYAxis?: TickFormatter<number>;
-  showFill?: boolean;
+  hideFill?: boolean;
   valueAnnotation?: string;
   isPercentage?: boolean;
   showMarkerLine?: boolean;
   formatMarkerLabel?: (value: T) => string;
-  padding?: ChartPadding;
+  padding?: Partial<ChartPadding>;
   showLegend?: boolean;
 };
 
@@ -83,12 +78,12 @@ export function LineChart<T extends Value>({
   signaalwaarde,
   formatTooltip,
   formatYAxis,
-  showFill = true,
+  hideFill = false,
   valueAnnotation,
   isPercentage,
   showMarkerLine = false,
   formatMarkerLabel,
-  padding = defaultPadding,
+  padding: overridePadding,
   showLegend = false,
 }: LineChartProps<T>) {
   const {
@@ -98,12 +93,6 @@ export function LineChart<T extends Value>({
     showTooltip,
     hideTooltip,
   } = useTooltip<T & TrendValue>();
-
-  const [markerProps, setMarkerProps] = useState<{
-    height: number;
-    data: HoverPoint<T>[];
-    padding: ChartPadding;
-  }>();
 
   const metricProperties = useMemo(
     () => linesConfig.map((x) => x.metricProperty),
@@ -130,10 +119,33 @@ export function LineChart<T extends Value>({
     return isDefined(domain[0]) ? (domain as [Date, Date]) : undefined;
   }, [trendsList]);
 
-  const yDomain = useMemo(() => [0, calculateYMax(trendsList, signaalwaarde)], [
+  const yMax = useMemo(() => calculateYMax(trendsList, signaalwaarde), [
     trendsList,
     signaalwaarde,
   ]);
+
+  const yDomain = useMemo(() => [0, yMax], [yMax]);
+
+  const padding: ChartPadding = useMemo(() => {
+    const { top, right, bottom, left } = {
+      ...defaultPadding,
+      ...overridePadding,
+    };
+
+    return {
+      top,
+      right,
+      bottom,
+      // Increase space for larger labels
+      left: Math.max(yMax.toFixed(0).length * 10, left),
+    };
+  }, [overridePadding, yMax]);
+
+  const [markerProps, setMarkerProps] = useState<{
+    height: number;
+    data: HoverPoint<T>[];
+    padding: ChartPadding;
+  }>();
 
   const bisect = useCallback(
     (
@@ -186,7 +198,7 @@ export function LineChart<T extends Value>({
         setMarkerProps({
           data: hoverPoints,
           height,
-          padding,
+          padding: padding,
         });
       }
     },
@@ -242,7 +254,27 @@ export function LineChart<T extends Value>({
     [bisect, trendsList, linesConfig, toggleHoverElements]
   );
 
-  const trendType = showFill ? 'area' : 'line';
+  const renderAxes = useCallback(
+    (x: ChartScales) => (
+      <>
+        {trendsList.map((trend, index) => (
+          <>
+            <Trend
+              key={index}
+              trend={trend}
+              type={hideFill ? 'line' : 'area'}
+              style={linesConfig[index].style}
+              xScale={x.xScale}
+              yScale={x.yScale}
+              color={linesConfig[index].color}
+              onHover={handleHover}
+            />
+          </>
+        ))}
+      </>
+    ),
+    [handleHover, linesConfig, hideFill, trendsList]
+  );
 
   if (!xDomain) {
     return null;
@@ -272,24 +304,7 @@ export function LineChart<T extends Value>({
           onHover={handleHover}
           benchmark={benchmark}
         >
-          {(renderProps) => (
-            <>
-              {trendsList.map((trend, index) => (
-                <>
-                  <Trend
-                    key={index}
-                    trend={trend}
-                    type={trendType}
-                    style={linesConfig[index].style}
-                    xScale={renderProps.xScale}
-                    yScale={renderProps.yScale}
-                    color={linesConfig[index].color}
-                    onHover={handleHover}
-                  />
-                </>
-              ))}
-            </>
-          )}
+          {renderAxes}
         </ChartAxes>
 
         {isDefined(tooltipData) && (
@@ -345,10 +360,10 @@ function formatDefaultTooltip<T extends Value>(
     }`;
   } else if (isWeekly) {
     return `${formatDateFromSeconds(
-      ((value as unknown) as WeeklyValue).week_start_unix,
+      ((value as unknown) as WeeklyValue).date_start_unix,
       'short'
     )} - ${formatDateFromSeconds(
-      ((value as unknown) as WeeklyValue).week_end_unix,
+      ((value as unknown) as WeeklyValue).date_end_unix,
       'short'
     )}: ${
       isPercentage

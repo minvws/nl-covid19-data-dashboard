@@ -1,26 +1,18 @@
 import { FeatureCollection, MultiPolygon } from 'geojson';
 import { Municipalities, Regions } from '~/types/data';
 
+export type Metric<T> = {
+  values: T[];
+  last_value: T;
+};
+
 export type MetricKeys<T> = keyof Omit<
   T,
   'last_generated' | 'proto_name' | 'name' | 'code'
 >;
 
-type TMetricHolder<T> = keyof Omit<
-  T,
-  'last_generated' | 'proto_name' | 'name' | 'code'
->;
-
-export type TMunicipalityMetricName = TMetricHolder<
-  Omit<Municipalities, 'deceased'>
->;
-
-export type TMunicipalityMetricType = ValueOf<
-  Pick<Municipalities, TMunicipalityMetricName>
->[number] &
-  Partial<MunicipalityProperties>;
-
-export type TRegionMetricName = TMetricHolder<Omit<Regions, 'deceased'>>;
+export type MunicipalitiesMetricName = MetricKeys<Municipalities>;
+export type RegionsMetricName = MetricKeys<Regions>;
 
 export interface SafetyRegionProperties {
   vrcode: string;

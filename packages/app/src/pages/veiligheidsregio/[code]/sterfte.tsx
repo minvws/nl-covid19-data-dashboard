@@ -46,7 +46,7 @@ const DeceasedRegionalPage: FCWithLayout<ISafetyRegionData> = (props) => {
           reference={text.section_deceased_rivm.reference}
           metadata={{
             datumsText: text.section_deceased_rivm.datums,
-            dateInfo: dataRivm.last_value.date_of_report_unix,
+            dateOrRange: dataRivm.last_value.date_unix,
             dateOfInsertionUnix: dataRivm.last_value.date_of_insertion_unix,
             dataSources: [text.section_deceased_rivm.bronnen.rivm],
           }}
@@ -56,7 +56,7 @@ const DeceasedRegionalPage: FCWithLayout<ISafetyRegionData> = (props) => {
           <KpiTile
             title={text.section_deceased_rivm.kpi_covid_daily_title}
             metadata={{
-              date: dataRivm.last_value.date_of_report_unix,
+              date: dataRivm.last_value.date_unix,
               source: text.section_deceased_rivm.bronnen.rivm,
             }}
           >
@@ -71,7 +71,7 @@ const DeceasedRegionalPage: FCWithLayout<ISafetyRegionData> = (props) => {
           <KpiTile
             title={text.section_deceased_rivm.kpi_covid_total_title}
             metadata={{
-              date: dataRivm.last_value.date_of_report_unix,
+              date: dataRivm.last_value.date_unix,
               source: text.section_deceased_rivm.bronnen.rivm,
             }}
           >

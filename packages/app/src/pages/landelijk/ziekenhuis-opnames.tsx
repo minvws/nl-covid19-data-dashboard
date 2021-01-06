@@ -34,8 +34,10 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
     'region'
   );
-  const dataHospitalIntake = data.intake_hospital_ma;
-  const dataHospitalBeds = data.hospital_beds_occupied;
+  const dataHospitalNice = data.hospital_nice;
+  const dataHospitalLcps = data.hospital_lcps;
+  const lastValueNice = data.hospital_nice.last_value;
+  const lastValueLcps = data.hospital_lcps.last_value;
 
   return (
     <>
@@ -54,9 +56,8 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
           subtitle={text.pagina_toelichting}
           metadata={{
             datumsText: text.datums,
-            dateInfo: dataHospitalIntake.last_value.date_of_report_unix,
-            dateOfInsertionUnix:
-              dataHospitalIntake.last_value.date_of_insertion_unix,
+            dateOrRange: lastValueNice.date_unix,
+            dateOfInsertionUnix: lastValueNice.date_of_insertion_unix,
             dataSources: [text.bronnen.nice, text.bronnen.lnaz],
           }}
           reference={text.reference}
@@ -67,17 +68,17 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
             title={text.barscale_titel}
             description={text.extra_uitleg}
             metadata={{
-              date: dataHospitalIntake.last_value.date_of_report_unix,
+              date: lastValueNice.date_unix,
               source: text.bronnen.nice,
             }}
           >
             <PageBarScale
               data={data}
               scope="nl"
-              metricName="intake_hospital_ma"
-              metricProperty="moving_average_hospital"
+              metricName="hospital_nice"
+              metricProperty="admissions_moving_average"
               localeTextKey="ziekenhuisopnames_per_dag"
-              differenceKey="intake_hospital_ma__moving_average_hospital"
+              differenceKey="hospital_nice__admissions_moving_average"
             />
           </KpiTile>
 
@@ -85,16 +86,14 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
             title={text.kpi_bedbezetting.title}
             description={text.kpi_bedbezetting.description}
             metadata={{
-              date: dataHospitalBeds.last_value.date_of_report_unix,
+              date: lastValueLcps.date_unix,
               source: text.bronnen.lnaz,
             }}
           >
             <KpiValue
-              data-cy="covid_occupied"
-              absolute={dataHospitalBeds.last_value.covid_occupied}
-              difference={
-                data.difference.hospital_beds_occupied__covid_occupied
-              }
+              data-cy="beds_occupied_covid"
+              absolute={lastValueLcps.beds_occupied_covid}
+              difference={data.difference.hospital_lcps__beds_occupied_covid}
             />
           </KpiTile>
         </TwoKpiSection>
@@ -107,19 +106,19 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
           legend={{
             thresholds:
               selectedMap === 'municipal'
-                ? municipalThresholds.hospital_admissions.hospital_admissions
-                : regionThresholds.hospital_admissions.hospital_admissions,
+                ? municipalThresholds.hospital_nice.admissions_moving_average
+                : regionThresholds.hospital_nice.admissions_moving_average,
             title: text.chloropleth_legenda.titel,
           }}
           metadata={{
-            date: dataHospitalIntake.last_value.date_of_report_unix,
+            date: lastValueNice.date_unix,
             source: text.bronnen.nice,
           }}
         >
           {selectedMap === 'municipal' && (
             <MunicipalityChoropleth
-              metricName="hospital_admissions"
-              metricProperty="hospital_admissions"
+              metricName="hospital_nice"
+              metricProperty="admissions_moving_average"
               tooltipContent={createMunicipalHospitalAdmissionsTooltip(
                 createSelectMunicipalHandler(router, 'ziekenhuis-opnames')
               )}
@@ -131,8 +130,8 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
           )}
           {selectedMap === 'region' && (
             <SafetyRegionChoropleth
-              metricName="hospital_admissions"
-              metricProperty="hospital_admissions"
+              metricName="hospital_nice"
+              metricProperty="admissions_moving_average"
               tooltipContent={createRegionHospitalAdmissionsTooltip(
                 createSelectRegionHandler(router, 'ziekenhuis-opnames')
               )}
@@ -144,11 +143,11 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
         <LineChartTile
           title={text.linechart_titel}
           description={text.linechart_description}
-          values={dataHospitalIntake.values}
+          values={dataHospitalNice.values}
           signaalwaarde={40}
           linesConfig={[
             {
-              metricProperty: 'moving_average_hospital',
+              metricProperty: 'admissions_moving_average',
             },
           ]}
           metadata={{
@@ -159,10 +158,10 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
         <LineChartTile
           title={text.chart_bedbezetting.title}
           description={text.chart_bedbezetting.description}
-          values={dataHospitalBeds.values}
+          values={dataHospitalLcps.values}
           linesConfig={[
             {
-              metricProperty: 'covid_occupied',
+              metricProperty: 'beds_occupied_covid',
             },
           ]}
           metadata={{

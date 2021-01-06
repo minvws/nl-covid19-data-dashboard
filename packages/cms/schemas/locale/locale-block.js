@@ -18,6 +18,8 @@ export default {
     title: lang.title,
     name: lang.id,
     type: "array",
+    validation: (Rule) => Rule.required(),
+
     of: [{ type: "block" }],
     fieldset: lang.isDefault ? null : "translations",
   })),

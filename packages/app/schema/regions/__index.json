@@ -9,13 +9,13 @@
     "name",
     "code",
     "escalation_levels",
-    "hospital_admissions",
-    "positive_tested_people",
+    "tested_overall",
     "nursing_home",
-    "sewer",
     "behavior",
+    "hospital_nice",
     "elderly_at_home",
-    "disability_care"
+    "disability_care",
+    "sewer"
   ],
   "properties": {
     "last_generated": {
@@ -23,7 +23,7 @@
     },
     "proto_name": {
       "type": "string",
-      "enum": ["REGIONS"]
+      "enum": ["VR_COLLECTION"]
     },
     "name": {
       "type": "string",
@@ -33,20 +33,19 @@
       "type": "string",
       "const": { "$data": "1/proto_name" }
     },
-    "hospital_admissions": {
+    "hospital_nice": {
       "type": "array",
       "minItems": 25,
       "maxItems": 25,
       "items": {
-        "$ref": "hospital_admissions.json"
+        "$ref": "hospital_nice.json"
       }
     },
-    "positive_tested_people": {
+    "tested_overall": {
       "type": "array",
-      "minItems": 25,
       "maxItems": 25,
       "items": {
-        "$ref": "positive_tested_people.json"
+        "$ref": "tested_overall.json"
       }
     },
     "escalation_levels": {
@@ -65,14 +64,6 @@
         "$ref": "nursing_home.json"
       }
     },
-    "disability_care": {
-      "type": "array",
-      "minItems": 25,
-      "maxItems": 25,
-      "items": {
-        "$ref": "disability_care.json"
-      }
-    },
     "sewer": {
       "type": "array",
       "minItems": 25,
@@ -87,6 +78,14 @@
       "maxItems": 25,
       "items": {
         "$ref": "behavior.json"
+      }
+    },
+    "disability_care": {
+      "type": "array",
+      "minItems": 25,
+      "maxItems": 25,
+      "items": {
+        "$ref": "disability_care.json"
       }
     },
     "elderly_at_home": {

@@ -21,7 +21,6 @@ const nextConfig = {
     COMMIT_ID: commitHash,
   },
   reactStrictMode: true, // Enables react strict mode https://nextjs.org/docs/api-reference/next.config.js/react-strict-mode
-
   webpack(config, { isServer }) {
     if (
       isServer &&

@@ -32,10 +32,10 @@
         "expected_max": {
           "type": "integer"
         },
-        "week_start_unix": {
+        "date_start_unix": {
           "type": "integer"
         },
-        "week_end_unix": {
+        "date_end_unix": {
           "type": "integer"
         },
         "date_of_insertion_unix": {
@@ -47,8 +47,8 @@
         "expected",
         "expected_min",
         "expected_max",
-        "week_start_unix",
-        "week_end_unix",
+        "date_start_unix",
+        "date_end_unix",
         "date_of_insertion_unix"
       ],
       "additionalProperties": false
