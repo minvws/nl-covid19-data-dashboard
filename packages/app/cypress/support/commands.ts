@@ -24,6 +24,7 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
+import { sortNationalTimeSeriesInDataInPlace } from '~/static-props/data-sorting';
 import { Municipal, National, Regionaal } from '~/types/data';
 
 // Must be declared global to be detected by typescript (allows import/export)
@@ -113,6 +114,9 @@ Cypress.Commands.add('beforeNationalTests', (pageName: string) => {
   cy.swallowResizeObserverError();
 
   cy.fixture<National>('NL.json')
+    .then((nationalData) => {
+      sortNationalTimeSeriesInDataInPlace(nationalData);
+    })
     .as('nationalData')
     .visit(`/landelijk/${pageName}`);
 
