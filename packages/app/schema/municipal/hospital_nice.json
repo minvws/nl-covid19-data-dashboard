@@ -1,20 +1,20 @@
 {
   "definitions": {
-    "item": {
-      "title": "intake_intensivecare_ma_last_value",
+    "value": {
+      "title": "municipal_hospital_nice_value",
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "moving_average_ic",
-        "date_of_report_unix",
+        "admissions_moving_average",
+        "date_unix",
         "date_of_insertion_unix"
       ],
       "properties": {
-        "moving_average_ic": {
-          "type": "number"
-        },
-        "date_of_report_unix": {
+        "date_unix": {
           "type": "integer"
+        },
+        "admissions_moving_average": {
+          "type": "number"
         },
         "date_of_insertion_unix": {
           "type": "integer"
@@ -23,8 +23,7 @@
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "intake_intensivecare_ma.json",
-  "title": "intake_intensivecare_ma",
+  "title": "municipal_hospital_nice",
   "type": "object",
   "required": ["values", "last_value"],
   "additionalProperties": false,
@@ -32,11 +31,11 @@
     "values": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/item"
+        "$ref": "#/definitions/value"
       }
     },
     "last_value": {
-      "$ref": "#/definitions/item"
+      "$ref": "#/definitions/value"
     }
   }
 }

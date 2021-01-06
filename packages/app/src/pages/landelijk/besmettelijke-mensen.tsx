@@ -15,15 +15,15 @@ import {
   getNationalStaticProps,
   NationalPageProps,
 } from '~/static-props/nl-data';
+import { getLastFilledValue } from '~/utils/get-last-filled-value';
 
 const text = siteText.besmettelijke_personen;
 
 const InfectiousPeople: FCWithLayout<NationalPageProps> = (props) => {
   const { data } = props;
 
-  const count = data.infectious_people_count;
-  const infectiousPeopleLastKnownAverage =
-    data.infectious_people_last_known_average;
+  const lastFullValue = getLastFilledValue(data.infectious_people);
+  const values = data.infectious_people.values;
 
   return (
     <>
@@ -40,11 +40,8 @@ const InfectiousPeople: FCWithLayout<NationalPageProps> = (props) => {
           subtitle={text.toelichting_pagina}
           metadata={{
             datumsText: text.datums,
-            dateInfo:
-              infectiousPeopleLastKnownAverage.last_value.date_of_report_unix,
-            dateOfInsertionUnix:
-              infectiousPeopleLastKnownAverage.last_value
-                .date_of_insertion_unix,
+            dateOrRange: lastFullValue.date_unix,
+            dateOfInsertionUnix: lastFullValue.date_of_insertion_unix,
             dataSources: [text.bronnen.rivm],
           }}
           reference={text.reference}
@@ -55,58 +52,57 @@ const InfectiousPeople: FCWithLayout<NationalPageProps> = (props) => {
             title={text.cijfer_titel}
             description={text.cijfer_toelichting}
             metadata={{
-              date:
-                infectiousPeopleLastKnownAverage.last_value.date_of_report_unix,
+              date: lastFullValue.date_unix,
               source: text.bronnen.rivm,
             }}
           >
             <KpiValue
-              data-cy="infectious_avg"
-              absolute={
-                infectiousPeopleLastKnownAverage.last_value.infectious_avg
-              }
+              data-cy="estimate"
+              /**
+               * Somehow non-null assertion via ! was not allowed. At this point
+               * we can be sure that estimate exists
+               */
+              absolute={lastFullValue.estimate || 0}
             />
           </KpiTile>
         </TwoKpiSection>
 
-        {count?.values && (
-          <ChartTileWithTimeframe
-            metadata={{ source: text.bronnen.rivm }}
-            title={text.linechart_titel}
-            timeframeOptions={['all', '5weeks']}
-            timeframeInitialValue="5weeks"
-          >
-            {(timeframe) => (
-              <>
-                <AreaChart
-                  timeframe={timeframe}
-                  data={count.values.map((value) => ({
-                    avg: value.infectious_avg,
-                    min: value.infectious_low,
-                    max: value.infectious_high,
-                    date: value.date_of_report_unix,
-                  }))}
-                  rangeLegendLabel={text.rangeLegendLabel}
-                  lineLegendLabel={text.lineLegendLabel}
-                />
-                <Legenda
-                  items={[
-                    {
-                      label: text.legenda_line,
-                      color: 'data.primary',
-                      shape: 'line',
-                    },
-                    {
-                      label: text.legenda_marge,
-                      color: 'data.fill',
-                      shape: 'square',
-                    },
-                  ]}
-                />
-              </>
-            )}
-          </ChartTileWithTimeframe>
-        )}
+        <ChartTileWithTimeframe
+          metadata={{ source: text.bronnen.rivm }}
+          title={text.linechart_titel}
+          timeframeOptions={['all', '5weeks']}
+          timeframeInitialValue="5weeks"
+        >
+          {(timeframe) => (
+            <>
+              <AreaChart
+                timeframe={timeframe}
+                data={values.map((value) => ({
+                  avg: value.estimate,
+                  min: value.margin_low,
+                  max: value.margin_high,
+                  date: value.date_unix,
+                }))}
+                rangeLegendLabel={text.rangeLegendLabel}
+                lineLegendLabel={text.lineLegendLabel}
+              />
+              <Legenda
+                items={[
+                  {
+                    label: text.legenda_line,
+                    color: 'data.primary',
+                    shape: 'line',
+                  },
+                  {
+                    label: text.legenda_marge,
+                    color: 'data.fill',
+                    shape: 'square',
+                  },
+                ]}
+              />
+            </>
+          )}
+        </ChartTileWithTimeframe>
       </TileList>
     </>
   );

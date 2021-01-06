@@ -1,6 +1,13 @@
 {
   "name": "corona-dashboard",
   "private": true,
+  "resolutions": {
+    "//": "Visx internally uses d3-array@v2 but this isn't compatible with IE11",
+    "d3-array": "^1",
+    "//": "Visx internally uses version d3-scale@v3 but this isn't compatible with IE11",
+    "d3-scale": "^2",
+    "@types/d3-scale": "^2"
+  },
   "scripts": {
     "test": "yarn workspaces run test",
     "test:ci": "yarn workspaces run test:ci",
@@ -11,7 +18,7 @@
     "format": "yarn workspaces run format",
     "dev": "yarn workspace @corona-dashboard/app dev",
     "download": "yarn workspace @corona-dashboard/app download",
-    "start": "yarn workspace @corona-dashboard/cms start"
+    "start": "yarn workspace @corona-dashboard/app start"
   },
   "workspaces": {
     "packages": [

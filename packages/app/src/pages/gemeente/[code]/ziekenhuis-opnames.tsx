@@ -28,7 +28,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
   const { data, municipalityName } = props;
   const router = useRouter();
 
-  const lastValue = data.hospital_admissions.last_value;
+  const lastValue = data.hospital_nice.last_value;
 
   return (
     <>
@@ -50,7 +50,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
           subtitle={text.pagina_toelichting}
           metadata={{
             datumsText: text.datums,
-            dateInfo: lastValue.date_of_report_unix,
+            dateOrRange: lastValue.date_unix,
             dateOfInsertionUnix: lastValue.date_of_insertion_unix,
             dataSources: [text.bronnen.rivm],
           }}
@@ -62,15 +62,15 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
             title={text.barscale_titel}
             description={text.extra_uitleg}
             metadata={{
-              date: lastValue.date_of_report_unix,
+              date: lastValue.date_unix,
               source: text.bronnen.rivm,
             }}
           >
             <KpiValue
-              data-cy="moving_average_hospital"
-              absolute={lastValue.moving_average_hospital}
+              data-cy="admissions_moving_average"
+              absolute={lastValue.admissions_moving_average}
               difference={
-                data.difference.hospital_admissions__moving_average_hospital
+                data.difference.hospital_nice__admissions_moving_average
               }
             />
           </KpiTile>
@@ -81,20 +81,20 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
             municipality: municipalityName,
           })}
           metadata={{
-            date: lastValue.date_of_report_unix,
+            date: lastValue.date_unix,
             source: text.bronnen.rivm,
           }}
           description={text.map_toelichting}
           legend={{
             title: siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel,
             thresholds:
-              municipalThresholds.hospital_admissions.hospital_admissions,
+              municipalThresholds.hospital_nice.admissions_moving_average,
           }}
         >
           <MunicipalityChoropleth
             selected={data.code}
-            metricName="hospital_admissions"
-            metricProperty="hospital_admissions"
+            metricName="hospital_nice"
+            metricProperty="admissions_moving_average"
             tooltipContent={createMunicipalHospitalAdmissionsTooltip(
               createSelectMunicipalHandler(router, 'ziekenhuis-opnames')
             )}
@@ -112,10 +112,10 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
             metadata={{ source: text.bronnen.rivm }}
             timeframeOptions={['all', '5weeks', 'week']}
             timeframeInitialValue="5weeks"
-            values={data.hospital_admissions.values}
+            values={data.hospital_nice.values}
             linesConfig={[
               {
-                metricProperty: 'moving_average_hospital',
+                metricProperty: 'admissions_moving_average',
               },
             ]}
           />

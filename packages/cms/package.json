@@ -23,6 +23,7 @@
     "@sanity/default-layout": "^2.1.3",
     "@sanity/default-login": "^2.1.0",
     "@sanity/desk-tool": "^2.1.3",
+    "@sanity/production-preview": "^2.1.0",
     "@sanity/vision": "^2.1.0",
     "prop-types": "^15.6",
     "react": "^17.0.1",

@@ -1,7 +1,6 @@
-import { every, get } from 'lodash';
+import { every } from 'lodash';
 import { isFilled } from 'ts-is-present';
-import { MetricKeys } from '~/components/choropleth/shared';
-import { assert } from './assert';
+import { Metric } from '~/components/choropleth/shared';
 
 /**
  * This function attempts to get the lastValue but then checks whether all
@@ -11,22 +10,14 @@ import { assert } from './assert';
  *
  * If no value is found an exception is thrown.
  */
-export function getLastFilledValue<T>(
-  data: T,
-  metricName: ValueOf<MetricKeys<T>>
-) {
-  const lastValue = get(data, [
-    (metricName as unknown) as string,
-    'last_value',
-  ]);
+export function getLastFilledValue<T>(metric: Metric<T>) {
+  const lastValue = metric.last_value as Record<string, unknown>;
 
   if (hasAllPropertiesFilled(lastValue)) {
-    return lastValue;
+    return lastValue as T;
   }
 
-  const values = get(data, [(metricName as unknown) as string, 'values']);
-
-  assert(values, `Unable to find ${metricName}.values[]`);
+  const values = metric.values;
 
   /**
    * Start iterating over the most recent values. Do not mutate because it will
@@ -36,11 +27,14 @@ export function getLastFilledValue<T>(
 
   for (const value of reversedValues) {
     if (hasAllPropertiesFilled(value)) {
-      return value;
+      return value as T;
     }
   }
+
   throw new Error(
-    `Failed to find full non-null object for ${metricName}.values[]}`
+    `Failed to find full non-null object for data shaped like ${JSON.stringify(
+      lastValue
+    )}`
   );
 }
 

@@ -8,7 +8,7 @@ import { KeyboardEvent, memo, MouseEvent } from 'react';
 import styled from 'styled-components';
 import siteText from '~/locale/index';
 import { colors } from '~/style/theme';
-import { NationalInfectedAgeGroupsValue } from '~/types/data.d';
+import { NationalTestedPerAgeGroupValue } from '~/types/data.d';
 import { formatPercentage } from '~/utils/formatNumber';
 import { AgeDemographicCoordinates } from './age-demographic-coordinates';
 
@@ -19,7 +19,7 @@ const text = siteText.infected_age_groups;
 interface AgeDemographicChartProps {
   coordinates: AgeDemographicCoordinates;
   onMouseMoveBar: (
-    value: NationalInfectedAgeGroupsValue,
+    value: NationalTestedPerAgeGroupValue,
     event: MouseEvent<SVGElement>
   ) => void;
   onMouseLeaveBar: () => void;

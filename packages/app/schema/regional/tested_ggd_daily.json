@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "regional_ggd",
+  "title": "regional_tested_ggd_daily",
   "type": "object",
   "properties": {
     "values": {
@@ -17,7 +17,7 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "regional_ggd_value",
+      "title": "regional_tested_ggd_daily_value",
       "type": "object",
       "properties": {
         "infected": {
@@ -29,13 +29,7 @@
         "tested_total": {
           "type": "integer"
         },
-        "week_unix": {
-          "type": "integer"
-        },
-        "week_start_unix": {
-          "type": "integer"
-        },
-        "week_end_unix": {
+        "date_unix": {
           "type": "integer"
         },
         "date_of_insertion_unix": {
@@ -50,9 +44,7 @@
         "infected",
         "infected_percentage",
         "tested_total",
-        "week_unix",
-        "week_start_unix",
-        "week_end_unix",
+        "date_unix",
         "date_of_insertion_unix",
         "vrcode"
       ],

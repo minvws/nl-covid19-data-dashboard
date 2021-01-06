@@ -1,7 +1,6 @@
 import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
-import { colors } from '~/style/theme';
 
 const BOUND_OFFSET = 70;
 
@@ -21,41 +20,10 @@ export type TooltipProps = {
   bounds: Bounds;
 };
 
-type PointProps = {
-  indicatorColor: string;
-};
-const Point = styled.div<PointProps>`
-  pointer-events: none;
-  position: absolute;
-  height: 18px;
-  width: 18px;
-
-  &::after {
-    content: '';
-    position: absolute;
-    height: 8px;
-    width: 8px;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    border: 1px solid white;
-    background: ${(props) => props.indicatorColor || 'black'};
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    height: 18px;
-    width: 18px;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    background: ${(props) => props.indicatorColor || 'black'};
-    opacity: 0.2;
-  }
-`;
-
 type TooltipContainerProps = {
   borderColor: string;
 };
+
 const TooltipContainer = styled.div<TooltipContainerProps>`
   pointer-events: none;
   position: absolute;
@@ -68,6 +36,7 @@ const TooltipContainer = styled.div<TooltipContainerProps>`
     py: 1,
     fontSize: 1,
   })};
+  z-index: 100;
 `;
 
 /**
@@ -77,7 +46,6 @@ export function Tooltip({
   children,
   x,
   y,
-  primaryColor = colors.data.primary,
   borderColor = '#01689B',
   bounds,
 }: TooltipProps) {
@@ -92,20 +60,16 @@ export function Tooltip({
   }
 
   return (
-    <>
-      <Point style={{ top: y, left: x }} indicatorColor={primaryColor} />
-
-      <TooltipContainer
-        style={{
-          top: y,
-          left: x,
-          transform: `translate(${xTransform},${yTransform})`,
-          transition: 'left 0.075s, top 0.075s',
-        }}
-        borderColor={borderColor}
-      >
-        {children}
-      </TooltipContainer>
-    </>
+    <TooltipContainer
+      style={{
+        top: y,
+        left: x,
+        transform: `translate(${xTransform},${yTransform})`,
+        transition: 'left 0.075s, top 0.075s',
+      }}
+      borderColor={borderColor}
+    >
+      {children}
+    </TooltipContainer>
   );
 }
