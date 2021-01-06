@@ -40,7 +40,6 @@ export function getNationalLayout(
     </Layout>
   );
 }
-
 interface NationalLayoutProps extends NationalPageProps {
   children: React.ReactNode;
 }
@@ -126,8 +125,7 @@ function NationalLayout(props: NationalLayoutProps) {
                   title={siteText.vaccinaties.titel_sidebar}
                 >
                   <SidebarMetric
-                    // @ts-ignore
-                    data={siteText.vaccinaties}
+                    data={siteText.vaccinaties.data}
                     scope="nl"
                     metricName="sidebar"
                     metricProperty="total_vaccinated"

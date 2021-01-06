@@ -1908,35 +1908,40 @@
       "title": "Vaccinaties | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "#"
     },
-    "sidebar": {
-      "last_value": {
-        "total_vaccinated": "2187",
-        "date_of_report_unix": "1609718400",
-        "date_of_insertion_unix": "1609766591"
+    "title": "COVID-19 vaccinaties",
+    "description": "Op deze pagina is informatie te vinden omtrent vaccineren voor COVID-19 in Nederland.",
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "reference": {
+      "href": "/verantwoording#vaccinaties",
+      "text": "Lees meer in de cijferverantwoording."
+    },
+    "bronnen": {
+      "rivm": {
+        "href": "#",
+        "text": "RIVM",
+        "download": ""
+      },
+      "vws": {
+        "href": "#",
+        "text": "VWS",
+        "download": ""
       }
     },
-    "date_of_report_unix": "1609632000",
-    "date_of_insertion_unix": "1609632000",
-    "section_vaccinations_rivm": {
-      "title": "COVID-19 vaccinaties",
-      "description": "Op deze pagina is informatie te vinden omtrent vaccineren voor COVID-19 in Nederland.",
-      "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-      "reference": {
-        "href": "/verantwoording#vaccinaties",
-        "text": "Lees meer in de cijferverantwoording."
-      },
-      "bronnen": {
-        "rivm": {
-          "href": "#",
-          "text": "RIVM",
-          "download": ""
-        },
-        "vws": {
-          "href": "#",
-          "text": "VWS",
-          "download": ""
+    "section_vaccinations_more_information": {
+      "title": "Meer informatie",
+      "description": "In de komende periode wordt gewerkt aan uitbreiding van de cijfers op deze pagina. Voor meer informatie over de cijfers zie de [cijferverantwoording](#). Meer informatie over de vaccinaties zelf kunt u vinden op [https://www.rijksoverheid.nl/onderwerpen/coronavirus-vaccinatie](https://www.rijksoverheid.nl/onderwerpen/coronavirus-vaccinatie)"
+    },
+    "data": {
+      "difference": "",
+      "sidebar": {
+        "last_value": {
+          "total_vaccinated": "2187",
+          "date_of_report_unix": "1609632000",
+          "date_of_insertion_unix": "1609632000"
         }
       },
+      "date_of_report_unix": "1609632000",
+      "date_of_insertion_unix": "1609632000",
       "kpi_first_vaccinations": {
         "title": "Aantal eerste vaccinaties toegediend",
         "value": "2187",
@@ -1958,10 +1963,6 @@
         "value": "18000000",
         "description": "Dit getal laat het aantal vaccins zien dat we in de nabije toekomst verwachten."
       }
-    },
-    "section_vaccinations_more_information": {
-      "title": "Meer informatie",
-      "description": "In de komende periode wordt gewerkt aan uitbreiding van de cijfers op deze pagina. Voor meer informatie over de cijfers zie de [cijferverantwoording](#). Meer informatie over de vaccinaties zelf kunt u vinden op [https://www.rijksoverheid.nl/onderwerpen/coronavirus-vaccinatie](https://www.rijksoverheid.nl/onderwerpen/coronavirus-vaccinatie)"
     }
   },
   "veiligheidsregio_sterfte": {

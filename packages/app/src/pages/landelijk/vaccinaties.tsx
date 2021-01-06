@@ -20,7 +20,6 @@ const text = siteText.vaccinaties;
 const VaccinationPage: FCWithLayout<NationalPageProps> = (props) => {
   return (
     <>
-      {' '}
       <SEOHead
         title={text.metadata.title}
         description={text.metadata.description}
@@ -28,46 +27,46 @@ const VaccinationPage: FCWithLayout<NationalPageProps> = (props) => {
       <TileList>
         <ContentHeader
           category={siteText.nationaal_layout.headings.besmettingen}
-          title={text.section_vaccinations_rivm.title}
+          title={text.title}
           icon={<VaccinatieIcon />}
-          subtitle={text.section_vaccinations_rivm.description}
-          reference={text.section_vaccinations_rivm.reference}
+          subtitle={text.description}
+          reference={text.reference}
           metadata={{
-            datumsText: text.section_vaccinations_rivm.datums,
-            dateInfo: parseFloat(text.date_of_report_unix),
-            dateOfInsertionUnix: parseFloat(text.date_of_insertion_unix),
-            dataSources: [text.section_vaccinations_rivm.bronnen.rivm, text.section_vaccinations_rivm.bronnen.vws],
+            datumsText: text.datums,
+            dateInfo: parseFloat(text.data.date_of_report_unix),
+            dateOfInsertionUnix: parseFloat(text.data.date_of_insertion_unix),
+            dataSources: [text.bronnen.rivm, text.bronnen.vws],
           }}
         />
         <TwoKpiSection>
           <KpiTile
-            title={text.section_vaccinations_rivm.kpi_first_vaccinations.title}
-            metadata={{ date: parseFloat(text.date_of_report_unix), source: text.section_vaccinations_rivm.bronnen.rivm}}
+            title={text.data.kpi_first_vaccinations.title}
+            metadata={{ date: parseFloat(text.data.date_of_report_unix), source: text.bronnen.rivm}}
           >
-            <KpiValue absolute={parseFloat(text.section_vaccinations_rivm.kpi_first_vaccinations.value)}/>
-            <Text mb={4}>{text.section_vaccinations_rivm.kpi_first_vaccinations.description}</Text>
+            <KpiValue absolute={parseFloat(text.data.kpi_first_vaccinations.value)}/>
+            <Text mb={4}>{text.data.kpi_first_vaccinations.description}</Text>
 
-            <Heading level={3}>{text.section_vaccinations_rivm.kpi_rate.title}</Heading>
-            <KpiValue percentage={parseFloat(text.section_vaccinations_rivm.kpi_rate.value)}/>
+            <Heading level={3}>{text.data.kpi_rate.title}</Heading>
+            <KpiValue percentage={parseFloat(text.data.kpi_rate.value)}/>
             <Text
               my={0}
               color="annotation"
               fontSize={1}>
-              {text.section_vaccinations_rivm.kpi_rate.target}
+              {text.data.kpi_rate.target}
             </Text>
-            <Text>{text.section_vaccinations_rivm.kpi_rate.description}</Text>
+            <Text>{text.data.kpi_rate.description}</Text>
           </KpiTile>
            
           <KpiTile
-            title={text.section_vaccinations_rivm.kpi_stock.title}
-            metadata={{ date: parseFloat(text.date_of_report_unix), source: text.section_vaccinations_rivm.bronnen.vws}}
+            title={text.data.kpi_stock.title}
+            metadata={{ date: parseFloat(text.data.date_of_report_unix), source: text.bronnen.vws}}
           >
-            <KpiValue absolute={parseFloat(text.section_vaccinations_rivm.kpi_stock.value)}/>
-            <Text mb={4}>{text.section_vaccinations_rivm.kpi_stock.description}</Text>
+            <KpiValue absolute={parseFloat(text.data.kpi_stock.value)}/>
+            <Text mb={4}>{text.data.kpi_stock.description}</Text>
 
-            <Heading level={3}>{text.section_vaccinations_rivm.kpi_expected_delivery.title}</Heading>
-            <KpiValue absolute={parseFloat(text.section_vaccinations_rivm.kpi_expected_delivery.value)}/>
-            <Text>{text.section_vaccinations_rivm.kpi_expected_delivery.description}</Text>
+            <Heading level={3}>{text.data.kpi_expected_delivery.title}</Heading>
+            <KpiValue absolute={parseFloat(text.data.kpi_expected_delivery.value)}/>
+            <Text>{text.data.kpi_expected_delivery.description}</Text>
           </KpiTile>
         </TwoKpiSection>
 
