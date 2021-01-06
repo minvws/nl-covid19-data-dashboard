@@ -158,31 +158,31 @@ export default () =>
             ])
         ),
 
-      // S.listItem()
-      //   .title("Cijferverantwoording")
-      //   .schemaType("cijferVerantwoording")
-      //   .icon(BsCardChecklist)
-      //   .child(
-      //     S.editor()
-      //       .title("Cijferverantwoording")
-      //       .schemaType("cijferVerantwoording")
-      //       .documentId("cijferVerantwoording")
-      //       .views([
-      //         S.view.form(),
-      //         S.view
-      //           .component(WebPreview)
-      //           .title("Web")
-      //           .options({ previewURL: `${previewURL}/verantwoording` }),
-      //         S.view
-      //           .component(IFrameMobilePreview)
-      //           .options({ previewURL: `${previewURL}/verantwoording` })
-      //           .title("Mobile"),
-      //         S.view
-      //           .component(ColorblindPreview)
-      //           .options({ previewURL: `${previewURL}/verantwoording` })
-      //           .title("Color Blindness"),
-      //       ])
-      //   ),
+      S.listItem()
+        .title("Cijferverantwoording")
+        .schemaType("cijferVerantwoording")
+        .icon(BsCardChecklist)
+        .child(
+          S.editor()
+            .title("Cijferverantwoording")
+            .schemaType("cijferVerantwoording")
+            .documentId("cijferVerantwoording")
+            .views([
+              S.view.form(),
+              // S.view
+              //   .component(WebPreview)
+              //   .title("Web")
+              //   .options({ previewURL: `${previewURL}/verantwoording` }),
+              // S.view
+              //   .component(IFrameMobilePreview)
+              //   .options({ previewURL: `${previewURL}/verantwoording` })
+              //   .title("Mobile"),
+              // S.view
+              //   .component(ColorblindPreview)
+              //   .options({ previewURL: `${previewURL}/verantwoording` })
+              //   .title("Color Blindness"),
+            ])
+        ),
 
       // Add a visual divider (optional)
       S.divider(),

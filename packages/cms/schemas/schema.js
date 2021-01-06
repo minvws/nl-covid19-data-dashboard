@@ -9,7 +9,7 @@ import schemaTypes from "all:part:@sanity/base/schema-type";
 // import siteSettings from "./documents/siteSettings";
 // import laatsteOntwikkelingen from "./documents/laatste-ontwikkelingen";
 import veelgesteldeVragen from "./documents/veelgestelde-vragen";
-// import cijferVerantwoording from "./documents/cijfer-verantwoording";
+import cijferVerantwoording from "./documents/cijfer-verantwoording";
 // import overDitDashboard from "./documents/over-dit-dashboard";
 // import overRisicoNiveaus from "./documents/over-risico-niveaus";
 
@@ -33,7 +33,7 @@ export default createSchema({
     // siteSettings,
     // laatsteOntwikkelingen,
     veelgesteldeVragen,
-    // cijferVerantwoording,
+    cijferVerantwoording,
     // overDitDashboard,
     // overRisicoNiveaus,
     //objects
