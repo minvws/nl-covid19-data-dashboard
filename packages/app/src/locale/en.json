@@ -1932,7 +1932,7 @@
       "description": "In de komende periode wordt gewerkt aan uitbreiding van de cijfers op deze pagina. Voor meer informatie over de cijfers zie de [cijferverantwoording](#). Meer informatie over de vaccinaties zelf kunt u vinden op [https://www.rijksoverheid.nl/onderwerpen/coronavirus-vaccinatie](https://www.rijksoverheid.nl/onderwerpen/coronavirus-vaccinatie)"
     },
     "data": {
-      "difference": "",
+      "difference": "Do not edit this text, this is a temporary workaround",
       "sidebar": {
         "last_value": {
           "total_vaccinated": "2187",
