@@ -18,7 +18,8 @@
     "format": "yarn workspaces run format",
     "dev": "yarn workspace @corona-dashboard/app dev",
     "download": "yarn workspace @corona-dashboard/app download",
-    "start": "yarn workspace @corona-dashboard/app start"
+    "start": "yarn workspace @corona-dashboard/app start",
+    "validate-json": "yarn workspace @corona-dashboard/cli validate-json"
   },
   "workspaces": {
     "packages": [
