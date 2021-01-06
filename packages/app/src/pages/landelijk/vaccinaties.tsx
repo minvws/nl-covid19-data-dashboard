@@ -33,7 +33,7 @@ const VaccinationPage: FCWithLayout<NationalPageProps> = (props) => {
           reference={text.reference}
           metadata={{
             datumsText: text.datums,
-            dateInfo: parseFloat(text.data.date_of_report_unix),
+            dateOrRange: parseFloat(text.data.date_of_insertion_unix),
             dateOfInsertionUnix: parseFloat(text.data.date_of_insertion_unix),
             dataSources: [text.bronnen.rivm, text.bronnen.vws],
           }}
@@ -41,47 +41,59 @@ const VaccinationPage: FCWithLayout<NationalPageProps> = (props) => {
         <TwoKpiSection>
           <KpiTile
             title={text.data.kpi_first_vaccinations.title}
-            metadata={{ date: parseFloat(text.data.date_of_report_unix), source: text.bronnen.rivm}}
+            metadata={{
+              date: parseFloat(text.data.date_of_report_unix),
+              source: text.bronnen.rivm,
+            }}
           >
-            <KpiValue absolute={parseFloat(text.data.kpi_first_vaccinations.value)}/>
+            <KpiValue
+              absolute={parseFloat(text.data.kpi_first_vaccinations.value)}
+            />
             <Text mb={4}>{text.data.kpi_first_vaccinations.description}</Text>
 
             <Heading level={3}>{text.data.kpi_rate.title}</Heading>
-            <KpiValue percentage={parseFloat(text.data.kpi_rate.value)}/>
-            <Text
-              my={0}
-              color="annotation"
-              fontSize={1}>
+            <KpiValue percentage={parseFloat(text.data.kpi_rate.value)} />
+            <Text my={0} color="annotation" fontSize={1}>
               {text.data.kpi_rate.target}
             </Text>
             <Text>{text.data.kpi_rate.description}</Text>
           </KpiTile>
-           
+
           <KpiTile
             title={text.data.kpi_stock.title}
-            metadata={{ date: parseFloat(text.data.date_of_report_unix), source: text.bronnen.vws}}
+            metadata={{
+              date: parseFloat(text.data.date_of_report_unix),
+              source: text.bronnen.vws,
+            }}
           >
-            <KpiValue absolute={parseFloat(text.data.kpi_stock.value)}/>
+            <KpiValue absolute={parseFloat(text.data.kpi_stock.value)} />
             <Text mb={4}>{text.data.kpi_stock.description}</Text>
 
             <Heading level={3}>{text.data.kpi_expected_delivery.title}</Heading>
-            <KpiValue absolute={parseFloat(text.data.kpi_expected_delivery.value)}/>
+            <KpiValue
+              absolute={parseFloat(text.data.kpi_expected_delivery.value)}
+            />
             <Text>{text.data.kpi_expected_delivery.description}</Text>
           </KpiTile>
         </TwoKpiSection>
 
-        <KpiTile title={text.section_vaccinations_more_information.title} metadata={{}}>
+        <KpiTile
+          title={text.section_vaccinations_more_information.title}
+          metadata={{}}
+        >
           <Text
-              as="div"
-              dangerouslySetInnerHTML={{
-                __html: props.text.vaccinaties.section_vaccinations_more_information.description,
-              }}
-            />
-          </KpiTile>
+            as="div"
+            dangerouslySetInnerHTML={{
+              __html:
+                props.text.vaccinaties.section_vaccinations_more_information
+                  .description,
+            }}
+          />
+        </KpiTile>
       </TileList>
     </>
-  )
-}
+  );
+};
 
 VaccinationPage.getLayout = getNationalLayout;
 
