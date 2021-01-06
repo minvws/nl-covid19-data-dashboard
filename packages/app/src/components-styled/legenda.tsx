@@ -25,14 +25,17 @@ export function Legenda({ items }: LegendProps) {
 const List = styled.ul(
   css({
     listStyle: 'none',
-    pl: 4,
+    px: 0
   })
 );
 
 const Item = styled.li(
   css({
-    my: 3,
+    my: 2,
     position: 'relative',
+    display: 'inline-block',
+    pl: '25px',
+    mr: 3
   })
 );
 
@@ -41,7 +44,7 @@ const Shape = styled.div<{ color: string }>((x) =>
     content: '',
     display: 'block',
     position: 'absolute',
-    left: '-25px',
+    left: '0px',
 
     backgroundColor: x.color,
   })
