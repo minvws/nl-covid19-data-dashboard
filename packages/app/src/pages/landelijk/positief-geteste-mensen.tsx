@@ -204,9 +204,12 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
               metricName="tested_overall"
               metricProperty="infected_per_100k"
               tooltipContent={createPositiveTestedPeopleRegionalTooltip(
-                createSelectRegionHandler(router)
+                createSelectRegionHandler(router, 'positief-geteste-mensen')
               )}
-              onSelect={createSelectRegionHandler(router)}
+              onSelect={createSelectRegionHandler(
+                router,
+                'positief-geteste-mensen'
+              )}
             />
           )}
         </ChoroplethTile>
