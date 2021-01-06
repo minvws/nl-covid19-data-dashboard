@@ -79,7 +79,7 @@ const AppContentContainer = styled.div(
 const StyledAppContent = styled.main(
   css({
     bg: 'page',
-    zIndex: 2,
+    zIndex: 3,
     width: '100%',
     minWidth: 0,
     flexGrow: 1,
