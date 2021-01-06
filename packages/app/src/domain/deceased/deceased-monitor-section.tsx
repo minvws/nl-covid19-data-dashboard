@@ -1,6 +1,7 @@
 import { useTheme } from 'styled-components';
 import CoronaVirusIcon from '~/assets/coronavirus.svg';
 import { AnchorTile } from '~/components-styled/anchor-tile';
+import { Box } from '~/components-styled/base';
 import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { Legenda } from '~/components-styled/legenda';
@@ -66,6 +67,8 @@ export function DeceasedMonitorSection({
             },
           }}
         />
+
+      <Box pl='56px'>
         <Legenda
           items={[
             {
@@ -85,6 +88,7 @@ export function DeceasedMonitorSection({
             },
           ]}
         />
+        </Box>
       </ChartTile>
     </>
   );
