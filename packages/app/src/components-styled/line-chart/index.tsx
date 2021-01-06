@@ -367,12 +367,12 @@ function formatDefaultTooltip<T extends Value>(
       <>
         <Text as="span" fontWeight="bold">
           {formatDateFromSeconds(
-            ((value as unknown) as WeeklyValue).week_start_unix,
+            ((value as unknown) as WeeklyValue).date_start_unix,
             'short'
           )}{' '}
           -{' '}
           {formatDateFromSeconds(
-            ((value as unknown) as WeeklyValue).week_end_unix,
+            ((value as unknown) as WeeklyValue).date_end_unix,
             'short'
           )}
           :
