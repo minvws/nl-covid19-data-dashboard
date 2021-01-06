@@ -1941,8 +1941,8 @@
       "sidebar": {
         "last_value": {
           "total_vaccinated": "2187",
-          "date_of_report_unix": "1609632000",
-          "date_of_insertion_unix": "1609632000"
+          "date_unix": "1609944084",
+          "date_of_insertion_unix": "1609944084"
         }
       },
       "date_of_report_unix": "1609632000",
