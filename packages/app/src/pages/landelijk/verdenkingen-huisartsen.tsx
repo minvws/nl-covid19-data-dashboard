@@ -20,7 +20,7 @@ const text = siteText.verdenkingen_huisartsen;
 
 const SuspectedPatients: FCWithLayout<NationalPageProps> = (props) => {
   const { data } = props;
-  const lastValue = data.verdenkingen_huisartsen.last_value;
+  const lastValue = data.doctor.last_value;
 
   return (
     <>
@@ -37,7 +37,7 @@ const SuspectedPatients: FCWithLayout<NationalPageProps> = (props) => {
           subtitle={text.pagina_toelichting}
           metadata={{
             datumsText: text.datums,
-            dateInfo: lastValue.week_unix,
+            dateOrRange: lastValue.date_end_unix,
             dateOfInsertionUnix: lastValue.date_of_insertion_unix,
             dataSources: [text.bronnen.nivel],
           }}
@@ -48,28 +48,28 @@ const SuspectedPatients: FCWithLayout<NationalPageProps> = (props) => {
           <KpiTile
             title={text.kpi_titel}
             metadata={{
-              date: [lastValue.week_start_unix, lastValue.week_end_unix],
+              date: [lastValue.date_start_unix, lastValue.date_end_unix],
               source: text.bronnen.nivel,
             }}
           >
             <KpiValue
-              absolute={lastValue.geschat_aantal}
-              data-cy="geschat_aantal"
-              difference={data.difference.huisarts_verdenkingen__geschat_aantal}
+              absolute={lastValue.covid_symptoms}
+              data-cy="covid_symptoms"
+              difference={data.difference.doctor__covid_symptoms}
             />
             <Text>{text.barscale_toelichting}</Text>
           </KpiTile>
           <KpiTile
             title={text.normalized_kpi_titel}
             metadata={{
-              date: [lastValue.week_start_unix, lastValue.week_end_unix],
+              date: [lastValue.date_start_unix, lastValue.date_end_unix],
               source: text.bronnen.nivel,
             }}
           >
             <KpiValue
-              absolute={lastValue.incidentie}
-              data-cy="incidentie"
-              difference={data.difference.huisarts_verdenkingen__incidentie}
+              absolute={lastValue.covid_symptoms_per_100k}
+              data-cy="covid_symptoms_per_100k"
+              difference={data.difference.doctor__covid_symptoms_per_100k}
             />
             <Text>{text.normalized_kpi_toelichting}</Text>
           </KpiTile>
@@ -83,12 +83,12 @@ const SuspectedPatients: FCWithLayout<NationalPageProps> = (props) => {
           {(timeframe) => (
             <LineChartWithWeekTooltip
               timeframe={timeframe}
-              values={data.verdenkingen_huisartsen.values.map((value) => ({
-                value: value.incidentie,
-                date: value.week_unix,
+              values={data.doctor.values.map((value) => ({
+                value: value.covid_symptoms_per_100k,
+                date: value.date_end_unix,
                 week: {
-                  start: value.week_start_unix,
-                  end: value.week_end_unix,
+                  start: value.date_start_unix,
+                  end: value.date_end_unix,
                 },
               }))}
             />

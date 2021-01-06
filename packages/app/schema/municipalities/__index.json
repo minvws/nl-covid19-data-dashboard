@@ -8,8 +8,8 @@
     "proto_name",
     "name",
     "code",
-    "hospital_admissions",
-    "positive_tested_people"
+    "hospital_nice",
+    "tested_overall"
   ],
   "properties": {
     "last_generated": {
@@ -17,7 +17,7 @@
     },
     "proto_name": {
       "type": "string",
-      "enum": ["MUNICIPALITIES"]
+      "enum": ["GM_COLLECTION"]
     },
     "name": {
       "type": "string",
@@ -27,18 +27,18 @@
       "type": "string",
       "const": { "$data": "1/proto_name" }
     },
-    "hospital_admissions": {
+    "hospital_nice": {
       "type": "array",
       "maxItems": 355,
       "items": {
-        "$ref": "hospital_admissions.json"
+        "$ref": "hospital_nice.json"
       }
     },
-    "positive_tested_people": {
+    "tested_overall": {
       "type": "array",
       "maxItems": 355,
       "items": {
-        "$ref": "positive_tested_people.json"
+        "$ref": "tested_overall.json"
       }
     }
   }

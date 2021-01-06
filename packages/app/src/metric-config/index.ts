@@ -39,3 +39,9 @@ export function getMetricConfig(
 
   return config as MetricConfig;
 }
+
+const metricNamesHoldingPartialData = ['infectious_people', 'reproduction'];
+
+export function metricContainsPartialData(metricName: string) {
+  return metricNamesHoldingPartialData.includes(metricName);
+}

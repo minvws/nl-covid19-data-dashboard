@@ -125,7 +125,7 @@ function renderTileIndicator(
   value: DifferenceDecimal | DifferenceInteger,
   isDecimal?: boolean
 ) {
-  const { difference, old_date_of_report_unix } = value;
+  const { difference, old_date_unix } = value;
 
   const differenceFormattedString = isDecimal
     ? formatPercentage(Math.abs(difference))
@@ -143,7 +143,7 @@ function renderTileIndicator(
           {differenceFormattedString} {splitText[0]}
         </Span>
         <Span color="annotation">
-          {splitText[1]} <TimespanText date={old_date_of_report_unix} />
+          {splitText[1]} <TimespanText date={old_date_unix} />
         </Span>
       </Container>
     );
@@ -161,7 +161,7 @@ function renderTileIndicator(
           {differenceFormattedString} {splitText[0]}
         </Span>
         <Span>
-          {splitText[1]} <TimespanText date={old_date_of_report_unix} />
+          {splitText[1]} <TimespanText date={old_date_unix} />
         </Span>
       </Container>
     );
@@ -173,7 +173,7 @@ function renderTileIndicator(
         <IconGelijk />
       </IconContainer>
       <Span>
-        {text.gelijk} <TimespanText date={old_date_of_report_unix} />
+        {text.gelijk} <TimespanText date={old_date_unix} />
       </Span>
     </Container>
   );

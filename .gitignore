@@ -13,6 +13,11 @@ node_modules
 
 # CI/CD
 /env
+/public/json
 .gitlab-ci.yml
 
 /*.code-workspace
+/cypress/screenshots
+/cypress/videos
+
+.vercel

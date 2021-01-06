@@ -1,9 +1,8 @@
 import { get } from 'lodash';
 import { isDefined } from 'ts-is-present';
-import { National } from '~/types/data';
+import { DifferenceDecimal, DifferenceInteger, National } from '~/types/data';
 import { assert } from '~/utils/assert';
 import { formatNumber } from '~/utils/formatNumber';
-import { getLastFilledValue } from '~/utils/get-last-filled-value';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { DifferenceIndicator } from './difference-indicator';
 import { RelativeDate } from './relative-date';
@@ -26,11 +25,7 @@ export function DataDrivenText({
   valueTexts,
   differenceTexts,
 }: DataDrivenTextProps) {
-  // @Todo move to a lastValue abstraction
-  const lastValue =
-    metricProperty === 'hospital_moving_avg_per_region'
-      ? getLastFilledValue(data, metricName)
-      : get(data, [(metricName as unknown) as string, 'last_value']);
+  const lastValue = get(data, [metricName, 'last_value']);
 
   const propertyValue = metricProperty && lastValue[metricProperty];
 
@@ -45,7 +40,10 @@ export function DataDrivenText({
       .join(':')}`
   );
 
-  const differenceValue = differenceKey
+  const differenceValue:
+    | DifferenceInteger
+    | DifferenceDecimal
+    | undefined = differenceKey
     ? get(data, ['difference', differenceKey])
     : undefined;
 
@@ -65,7 +63,7 @@ export function DataDrivenText({
       {replaceComponentsInText(baseText, {
         newDate: (
           <RelativeDate
-            dateInSeconds={differenceValue.new_date_of_report_unix}
+            dateInSeconds={differenceValue.new_date_unix}
             isCapitalized
           />
         ),
@@ -75,11 +73,7 @@ export function DataDrivenText({
         differenceIndicator: (
           <DifferenceIndicator value={differenceValue} context="inline" />
         ),
-        oldDate: (
-          <RelativeDate
-            dateInSeconds={differenceValue.old_date_of_report_unix}
-          />
-        ),
+        oldDate: <RelativeDate dateInSeconds={differenceValue.old_date_unix} />,
       })}
     </Text>
   );

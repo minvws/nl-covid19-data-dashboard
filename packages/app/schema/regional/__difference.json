@@ -3,23 +3,26 @@
   "title": "regional_difference",
   "type": "object",
   "properties": {
-    "results_per_region__infected_increase_per_region": {
+    "tested_overall__infected_per_100k": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "results_per_region__total_reported_increase_per_region": {
+    "tested_overall__infected": {
       "$ref": "#/definitions/diff_integer"
     },
-    "ggd__tested_total": {
+    "tested_ggd_average__tested_total": {
       "$ref": "#/definitions/diff_integer"
     },
-    "ggd__infected_percentage": {
+    "tested_ggd_average__infected_percentage": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "results_per_region__hospital_moving_avg_per_region": {
+    "tested_ggd_daily__tested_total": {
+      "$ref": "#/definitions/diff_integer"
+    },
+    "tested_ggd_daily__infected_percentage": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "results_per_region__hospital_total_counts_per_region": {
-      "$ref": "#/definitions/diff_integer"
+    "hospital_nice__admissions_moving_average": {
+      "$ref": "#/definitions/diff_decimal"
     },
     "sewer__average": {
       "$ref": "#/definitions/diff_decimal"
@@ -35,12 +38,13 @@
     }
   },
   "required": [
-    "results_per_region__infected_increase_per_region",
-    "results_per_region__total_reported_increase_per_region",
-    "ggd__tested_total",
-    "ggd__infected_percentage",
-    "results_per_region__hospital_moving_avg_per_region",
-    "results_per_region__hospital_total_counts_per_region",
+    "tested_overall__infected_per_100k",
+    "tested_overall__infected",
+    "hospital_nice__admissions_moving_average",
+    "tested_ggd_daily__tested_total",
+    "tested_ggd_daily__infected_percentage",
+    "tested_ggd_average__tested_total",
+    "tested_ggd_average__infected_percentage",
     "sewer__average",
     "nursing_home__newly_infected_people",
     "nursing_home__infected_locations_total",
@@ -58,19 +62,14 @@
         "difference": {
           "type": "integer"
         },
-        "old_date_of_report_unix": {
+        "old_date_unix": {
           "type": "integer"
         },
-        "new_date_of_report_unix": {
+        "new_date_unix": {
           "type": "integer"
         }
       },
-      "required": [
-        "old_value",
-        "difference",
-        "old_date_of_report_unix",
-        "new_date_of_report_unix"
-      ],
+      "required": ["old_value", "difference", "old_date_unix", "new_date_unix"],
       "additionalProperties": false
     },
     "diff_decimal": {
@@ -83,19 +82,14 @@
         "difference": {
           "type": "number"
         },
-        "old_date_of_report_unix": {
+        "old_date_unix": {
           "type": "integer"
         },
-        "new_date_of_report_unix": {
+        "new_date_unix": {
           "type": "integer"
         }
       },
-      "required": [
-        "old_value",
-        "difference",
-        "old_date_of_report_unix",
-        "new_date_of_report_unix"
-      ],
+      "required": ["old_value", "difference", "old_date_unix", "new_date_unix"],
       "additionalProperties": false
     }
   }

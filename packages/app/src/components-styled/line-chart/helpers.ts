@@ -1,17 +1,22 @@
 import { isDefined, isPresent } from 'ts-is-present';
 import { assert } from '~/utils/assert';
 import { getDaysForTimeframe, TimeframeOption } from '~/utils/timeframe';
-import { NumberProperty } from '.';
 
 export type Value = DailyValue | WeeklyValue;
 
+// This type limits the allowed property names to those with a number type,
+// so its like keyof T, but filtered down to only the appropriate properties.
+export type NumberProperty<T extends Value> = {
+  [K in keyof T]: T[K] extends number | null ? K : never;
+}[keyof T];
+
 export type DailyValue = {
-  date_of_report_unix: number;
+  date_unix: number;
 };
 
 export type WeeklyValue = {
-  week_start_unix: number;
-  week_end_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
 };
 
 /**
@@ -30,7 +35,7 @@ export function isDailyValue(timeSeries: Value[]): timeSeries is DailyValue[] {
     'Unable to determine timestamps if time series is empty'
   );
 
-  return firstValue.date_of_report_unix !== undefined;
+  return firstValue.date_unix !== undefined;
 }
 
 export function isWeeklyValue(
@@ -43,7 +48,7 @@ export function isWeeklyValue(
     'Unable to determine timestamps if time series is empty'
   );
 
-  return firstValue.week_end_unix !== undefined;
+  return firstValue.date_end_unix !== undefined;
 }
 
 /**
@@ -86,11 +91,11 @@ export function getTimeframeValues(
   const boundary = getTimeframeBoundaryUnix(timeframe);
 
   if (isDailyValue(values)) {
-    return values.filter((x) => x.date_of_report_unix >= boundary);
+    return values.filter((x) => x.date_unix >= boundary);
   }
 
   if (isWeeklyValue(values)) {
-    return values.filter((x) => x.week_start_unix >= boundary);
+    return values.filter((x) => x.date_start_unix >= boundary);
   }
 
   throw new Error(`Incompatible timestamps are used in value ${values[0]}`);
@@ -146,7 +151,7 @@ export function getSingleTrendData<T extends Value>(
          * out the null values.
          */
         __value: x[valueKey as keyof DailyValue],
-        __date: timestampToDate(x.date_of_report_unix),
+        __date: timestampToDate(x.date_unix),
       }))
       .filter((x) => isPresent(x.__value));
   }
@@ -160,7 +165,7 @@ export function getSingleTrendData<T extends Value>(
          * out the null values.
          */
         __value: x[valueKey as keyof WeeklyValue],
-        __date: timestampToDate(x.week_start_unix),
+        __date: timestampToDate(x.date_start_unix),
       }))
       .filter((x) => isPresent(x.__value));
   }

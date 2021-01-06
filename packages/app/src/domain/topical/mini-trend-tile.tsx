@@ -3,12 +3,12 @@ import { GridRows } from '@visx/grid';
 import { ParentSize } from '@visx/responsive';
 import { ReactNode } from 'react';
 import { Box } from '~/components-styled/base';
-import { LineChart, NumberProperty } from '~/components-styled/line-chart';
+import { LineChart } from '~/components-styled/line-chart';
 import {
   ComponentCallbackInfo,
   defaultPadding,
 } from '~/components-styled/line-chart/components';
-import { Value } from '~/components-styled/line-chart/helpers';
+import { NumberProperty, Value } from '~/components-styled/line-chart/helpers';
 import { Heading } from '~/components-styled/typography';
 import text from '~/locale';
 import { formatNumber } from '~/utils/formatNumber';
@@ -22,7 +22,7 @@ type MiniTrendTileProps<T extends Value> = {
 };
 
 export function MiniTrendTile<T extends Value>(props: MiniTrendTileProps<T>) {
-  const { icon, title, text, trendData, metricProperty, ...boxProps } = props;
+  const { icon, title, text, trendData, metricProperty } = props;
   return (
     <Box display="flex" flexDirection="column">
       <Box display="flex">

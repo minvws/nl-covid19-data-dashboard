@@ -1,8 +1,11 @@
-import '@formatjs/intl-getcanonicallocales/polyfill';
-import '@formatjs/intl-datetimeformat/polyfill';
 import '@formatjs/intl-datetimeformat/locale-data/en';
 import '@formatjs/intl-datetimeformat/locale-data/nl';
-import { assert } from '~/utils/assert';
+import '@formatjs/intl-datetimeformat/polyfill';
+import '@formatjs/intl-getcanonicallocales/polyfill';
+import { isSameDay, isToday, isYesterday, subDays } from 'date-fns';
+import siteText from '~/locale/index';
+import { getLocale } from '~/utils/getLocale';
+import { assert } from './assert';
 
 // Adding the Europe/Amsterdam time zone manually since its the only being used.
 // The data was pulled from the @formatjs/add-golden-ts.js file.
@@ -23,14 +26,9 @@ if ('__setDefaultTimeZone' in Intl.DateTimeFormat) {
   (Intl.DateTimeFormat as any).__setDefaultTimeZone('Europe/Amsterdam');
 }
 
-import { isToday, isYesterday, isSameDay, subDays } from 'date-fns';
-
 function isDayBeforeYesterday(date: number): boolean {
   return isSameDay(date, subDays(Date.now(), 2));
 }
-
-import siteText from '~/locale/index';
-import { getLocale } from '~/utils/getLocale';
 
 const locale = getLocale();
 

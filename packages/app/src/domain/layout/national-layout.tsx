@@ -127,14 +127,14 @@ function NationalLayout(props: NationalLayoutProps) {
                   <SidebarMetric
                     data={data}
                     scope="nl"
-                    metricName="infected_people_total"
-                    metricProperty="infected_daily_total"
+                    metricName="tested_overall"
+                    metricProperty="infected"
                     altBarScaleMetric={{
-                      metricName: 'infected_people_delta_normalized',
-                      metricProperty: 'infected_daily_increase',
+                      metricName: 'tested_overall',
+                      metricProperty: 'infected_per_100k',
                     }}
                     localeTextKey="positief_geteste_personen"
-                    differenceKey="infected_people_total__infected_daily_total"
+                    differenceKey="tested_overall__infected"
                     showBarScale={true}
                   />
                 </MetricMenuItemLink>
@@ -147,8 +147,8 @@ function NationalLayout(props: NationalLayoutProps) {
                   <SidebarMetric
                     data={data}
                     scope="nl"
-                    metricName="infectious_people_last_known_average"
-                    metricProperty="infectious_avg"
+                    metricName="infectious_people"
+                    metricProperty="estimate"
                     localeTextKey="besmettelijke_personen"
                   />
                 </MetricMenuItemLink>
@@ -161,8 +161,8 @@ function NationalLayout(props: NationalLayoutProps) {
                   <SidebarMetric
                     data={data}
                     scope="nl"
-                    metricName="reproduction_index_last_known_average"
-                    metricProperty="reproduction_index_avg"
+                    metricName="reproduction"
+                    metricProperty="index_average"
                     localeTextKey="reproductiegetal"
                     showBarScale={true}
                   />
@@ -200,10 +200,10 @@ function NationalLayout(props: NationalLayoutProps) {
                   <SidebarMetric
                     data={data}
                     scope="nl"
-                    metricName="intake_hospital_ma"
-                    metricProperty="moving_average_hospital"
+                    metricName="hospital_nice"
+                    metricProperty="admissions_moving_average"
                     localeTextKey="ziekenhuisopnames_per_dag"
-                    differenceKey="intake_hospital_ma__moving_average_hospital"
+                    differenceKey="hospital_nice__admissions_moving_average"
                     showBarScale={true}
                   />
                 </MetricMenuItemLink>
@@ -216,10 +216,10 @@ function NationalLayout(props: NationalLayoutProps) {
                   <SidebarMetric
                     data={data}
                     scope="nl"
-                    metricName="intake_intensivecare_ma"
-                    metricProperty="moving_average_ic"
+                    metricName="intensive_care_nice"
+                    metricProperty="admissions_moving_average"
                     localeTextKey="ic_opnames_per_dag"
-                    differenceKey="intake_intensivecare_ma__moving_average_ic"
+                    differenceKey="intensive_care_nice__admissions_moving_average"
                     showBarScale={true}
                   />
                 </MetricMenuItemLink>
@@ -299,10 +299,10 @@ function NationalLayout(props: NationalLayoutProps) {
                   <SidebarMetric
                     data={data}
                     scope="nl"
-                    metricName="verdenkingen_huisartsen"
-                    metricProperty="geschat_aantal"
+                    metricName="doctor"
+                    metricProperty="covid_symptoms"
                     localeTextKey="verdenkingen_huisartsen"
-                    differenceKey="huisarts_verdenkingen__geschat_aantal"
+                    differenceKey="doctor__covid_symptoms"
                   />
                 </MetricMenuItemLink>
               </CategoryMenu>

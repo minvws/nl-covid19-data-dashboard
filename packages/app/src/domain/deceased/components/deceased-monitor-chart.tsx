@@ -63,7 +63,7 @@ function useHighchartOptions(values: CbsValue[], config: SeriesConfig) {
       lineColor: '#C4C4C4',
       gridLineColor: '#ca005d',
       type: 'datetime',
-      categories: values.map((x) => x.week_start_unix.toString()),
+      categories: values.map((x) => x.date_start_unix.toString()),
       title: {
         text: null,
       },
@@ -82,15 +82,15 @@ function useHighchartOptions(values: CbsValue[], config: SeriesConfig) {
         rotation: ('0' as unknown) as number,
         formatter: function () {
           const value = values.find(
-            (x) => x.week_start_unix === Number(this.value)
+            (x) => x.date_start_unix === Number(this.value)
           );
 
           if (!value) return '';
 
           return this.isFirst
-            ? formatDateFromSeconds(value.week_start_unix, 'axis')
+            ? formatDateFromSeconds(value.date_start_unix, 'axis')
             : this.isLast
-            ? formatDateFromSeconds(value.week_end_unix, 'axis')
+            ? formatDateFromSeconds(value.date_end_unix, 'axis')
             : '';
         },
       },
@@ -121,11 +121,11 @@ function useHighchartOptions(values: CbsValue[], config: SeriesConfig) {
       borderRadius: 0,
       xDateFormat: '%d %b %y',
       formatter() {
-        const value = values.find((x) => x.week_start_unix === Number(this.x));
+        const value = values.find((x) => x.date_start_unix === Number(this.x));
 
         if (!value) return;
 
-        const dateText = [value.week_start_unix, value.week_end_unix]
+        const dateText = [value.date_start_unix, value.date_end_unix]
           .map((x) => formatDateFromSeconds(x, 'medium'))
           .join(' - ');
 
@@ -152,7 +152,7 @@ function useHighchartOptions(values: CbsValue[], config: SeriesConfig) {
       {
         type: 'arearange',
         data: values.map((x) => [
-          createDate(x.week_start_unix),
+          createDate(x.date_start_unix),
           x.expected_min,
           x.expected_max,
         ]),
@@ -166,7 +166,7 @@ function useHighchartOptions(values: CbsValue[], config: SeriesConfig) {
       },
       {
         type: 'line',
-        data: values.map((x) => [createDate(x.week_start_unix), x.expected]),
+        data: values.map((x) => [createDate(x.date_start_unix), x.expected]),
         name: config.expected.label,
         color: config.expected.color,
         lineWidth: 2,
@@ -183,7 +183,7 @@ function useHighchartOptions(values: CbsValue[], config: SeriesConfig) {
       },
       {
         type: 'line',
-        data: values.map((x) => [createDate(x.week_start_unix), x.registered]),
+        data: values.map((x) => [createDate(x.date_start_unix), x.registered]),
         name: config.registered.label,
         color: config.registered.color,
         lineWidth: 2,

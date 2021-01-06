@@ -42,7 +42,7 @@ const ElderlyAtHomeNationalPage: FCWithLayout<NationalPageProps> = (props) => {
           subtitle={text.section_positive_tested.description}
           metadata={{
             datumsText: text.section_positive_tested.datums,
-            dateInfo: elderlyAtHomeData.last_value.date_of_report_unix,
+            dateOrRange: elderlyAtHomeData.last_value.date_unix,
             dateOfInsertionUnix:
               elderlyAtHomeData.last_value.date_of_insertion_unix,
             dataSources: [text.section_positive_tested.bronnen.rivm],
@@ -54,7 +54,7 @@ const ElderlyAtHomeNationalPage: FCWithLayout<NationalPageProps> = (props) => {
           <KpiTile
             title={text.section_positive_tested.kpi_daily_title}
             metadata={{
-              date: elderlyAtHomeData.last_value.date_of_report_unix,
+              date: elderlyAtHomeData.last_value.date_unix,
               source: text.section_positive_tested.bronnen.rivm,
             }}
           >
@@ -67,7 +67,7 @@ const ElderlyAtHomeNationalPage: FCWithLayout<NationalPageProps> = (props) => {
           <KpiTile
             title={text.section_positive_tested.kpi_daily_per_100k_title}
             metadata={{
-              date: elderlyAtHomeData.last_value.date_of_report_unix,
+              date: elderlyAtHomeData.last_value.date_unix,
               source: text.section_positive_tested.bronnen.rivm,
             }}
           >
@@ -101,7 +101,7 @@ const ElderlyAtHomeNationalPage: FCWithLayout<NationalPageProps> = (props) => {
             text.section_positive_tested.choropleth_daily_description
           }
           metadata={{
-            date: elderlyAtHomeData.last_value.date_of_report_unix,
+            date: elderlyAtHomeData.last_value.date_unix,
             source: text.section_positive_tested.bronnen.rivm,
           }}
           legend={{
@@ -126,7 +126,7 @@ const ElderlyAtHomeNationalPage: FCWithLayout<NationalPageProps> = (props) => {
           subtitle={text.section_deceased.description}
           metadata={{
             datumsText: text.section_deceased.datums,
-            dateInfo: elderlyAtHomeData.last_value.date_of_report_unix,
+            dateOrRange: elderlyAtHomeData.last_value.date_unix,
             dateOfInsertionUnix:
               elderlyAtHomeData.last_value.date_of_insertion_unix,
             dataSources: [text.section_deceased.bronnen.rivm],
@@ -139,7 +139,7 @@ const ElderlyAtHomeNationalPage: FCWithLayout<NationalPageProps> = (props) => {
             title={text.section_deceased.kpi_daily_title}
             description={text.section_deceased.kpi_daily_description}
             metadata={{
-              date: elderlyAtHomeData.last_value.date_of_report_unix,
+              date: elderlyAtHomeData.last_value.date_unix,
               source: text.section_deceased.bronnen.rivm,
             }}
           >

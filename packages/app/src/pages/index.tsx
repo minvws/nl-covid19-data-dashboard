@@ -1,6 +1,4 @@
-import fs from 'fs';
 import { useRouter } from 'next/router';
-import path from 'path';
 import ArtsIcon from '~/assets/arts.svg';
 import GetestIcon from '~/assets/test.svg';
 import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
@@ -18,6 +16,7 @@ import { DataSitemap } from '~/domain/topical/data-site-map';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
 import { TALLLanguages } from '~/locale/';
+import { loadJsonFromDataFile } from '~/static-props/utils/load-json-from-data-file';
 import { National } from '~/types/data';
 import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
 import { EscalationMapLegenda } from './veiligheidsregio';
@@ -37,9 +36,9 @@ const Home: FCWithLayout<IHomeData> = (data) => {
   const notificatie = data.text.notificatie;
   const text = data.text.nationaal_actueel;
 
-  const dataInfectedTotal = data.data.infected_people_total;
-  const dataHospitalIntake = data.data.intake_hospital_ma;
-  const dataIntake = data.data.intake_intensivecare_ma;
+  const dataInfectedTotal = data.data.tested_overall;
+  const dataHospitalIntake = data.data.hospital_nice;
+  const dataIntake = data.data.intensive_care_nice;
 
   return (
     <MaxWidth>
@@ -50,9 +49,9 @@ const Home: FCWithLayout<IHomeData> = (data) => {
           text={
             <DataDrivenText
               data={data.data}
-              metricName="infected_people_total"
-              metricProperty="infected_daily_total"
-              differenceKey="infected_people_total__infected_daily_total"
+              metricName="tested_overall"
+              metricProperty="infected_per_100k"
+              differenceKey="tested_overall__infected_per_100k"
               valueTexts={text.data_driven_texts.infected_people_total.value}
               differenceTexts={
                 text.data_driven_texts.infected_people_total.difference
@@ -61,16 +60,16 @@ const Home: FCWithLayout<IHomeData> = (data) => {
           }
           icon={<GetestIcon />}
           trendData={dataInfectedTotal.values}
-          metricProperty="infected_daily_total"
+          metricProperty="infected_per_100k"
         />
         <MiniTrendTile
           title={text.mini_trend_tiles.ziekenhuis_opnames.title}
           text={
             <DataDrivenText
               data={data.data}
-              metricName="intake_hospital_ma"
-              metricProperty="moving_average_hospital"
-              differenceKey="intake_hospital_ma__moving_average_hospital"
+              metricName="hospital_nice"
+              metricProperty="admissions_moving_average"
+              differenceKey="hospital_nice__admissions_moving_average"
               valueTexts={text.data_driven_texts.intake_hospital_ma.value}
               differenceTexts={
                 text.data_driven_texts.intake_hospital_ma.difference
@@ -79,16 +78,16 @@ const Home: FCWithLayout<IHomeData> = (data) => {
           }
           icon={<ZiekenhuisIcon />}
           trendData={dataHospitalIntake.values}
-          metricProperty="moving_average_hospital"
+          metricProperty="admissions_moving_average"
         />
         <MiniTrendTile
           title={text.mini_trend_tiles.ic_opnames.title}
           text={
             <DataDrivenText
               data={data.data}
-              metricName="intake_intensivecare_ma"
-              metricProperty="moving_average_ic"
-              differenceKey="intake_intensivecare_ma__moving_average_ic"
+              metricName="intensive_care_nice"
+              metricProperty="admissions_moving_average"
+              differenceKey="intensive_care_nice__admissions_moving_average"
               valueTexts={text.data_driven_texts.intake_intensivecare_ma.value}
               differenceTexts={
                 text.data_driven_texts.intake_intensivecare_ma.difference
@@ -97,7 +96,7 @@ const Home: FCWithLayout<IHomeData> = (data) => {
           }
           icon={<ArtsIcon />}
           trendData={dataIntake.values}
-          metricProperty="moving_average_ic"
+          metricProperty="admissions_moving_average"
         />
       </MiniTrendTileLayout>
       <QuickLinks
@@ -159,9 +158,7 @@ Home.getLayout = getLayoutWithMetadata(metadata);
 export async function getStaticProps(): Promise<StaticProps> {
   const text = parseMarkdownInLocale((await import('../locale/index')).default);
 
-  const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
-  const fileContents = fs.readFileSync(filePath, 'utf8');
-  const data = JSON.parse(fileContents) as National;
+  const data = loadJsonFromDataFile<National>('NL.json');
 
   // Strip away unused data (values) from staticProps
   // keep last_values because we use them!

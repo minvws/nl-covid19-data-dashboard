@@ -18,8 +18,8 @@ export const nl: NlConfig = {
       isWeeklyData: true,
     },
   },
-  verdenkingen_huisartsen: {
-    geschat_aantal: {
+  doctor: {
+    covid_symptoms: {
       isWeeklyData: true,
     },
   },
@@ -28,8 +28,8 @@ export const nl: NlConfig = {
       isWeeklyData: true,
     },
   },
-  reproduction_index_last_known_average: {
-    reproduction_index_avg: {
+  reproduction: {
+    index_average: {
       isDecimal: true,
       barScale: {
         min: 0,
@@ -57,8 +57,8 @@ export const nl: NlConfig = {
     },
   },
 
-  intake_hospital_ma: {
-    moving_average_hospital: {
+  hospital_nice: {
+    admissions_moving_average: {
       isDecimal: true,
       barScale: {
         min: 0,
@@ -81,8 +81,8 @@ export const nl: NlConfig = {
       },
     },
   },
-  intake_intensivecare_ma: {
-    moving_average_ic: {
+  intensive_care_nice: {
+    admissions_moving_average: {
       isDecimal: true,
       barScale: {
         min: 0,
@@ -105,8 +105,8 @@ export const nl: NlConfig = {
       },
     },
   },
-  infected_people_delta_normalized: {
-    infected_daily_increase: {
+  tested_overall: {
+    infected_per_100k: {
       barScale: {
         min: 0,
         max: 10,
