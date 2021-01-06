@@ -45,7 +45,7 @@ const VaccinationPage: FCWithLayout<NationalPageProps> = (props) => {
             metadata={{ date: parseFloat(text.date_of_report_unix), source: text.section_vaccinations_rivm.bronnen.rivm}}
           >
             <KpiValue absolute={parseFloat(text.section_vaccinations_rivm.kpi_first_vaccinations.value)}/>
-            <Text mb={'1.5rem'}>{text.section_vaccinations_rivm.kpi_first_vaccinations.description}</Text>
+            <Text mb={4}>{text.section_vaccinations_rivm.kpi_first_vaccinations.description}</Text>
 
             <Heading level={3}>{text.section_vaccinations_rivm.kpi_rate.title}</Heading>
             <KpiValue percentage={parseFloat(text.section_vaccinations_rivm.kpi_rate.value)}/>
@@ -63,7 +63,7 @@ const VaccinationPage: FCWithLayout<NationalPageProps> = (props) => {
             metadata={{ date: parseFloat(text.date_of_report_unix), source: text.section_vaccinations_rivm.bronnen.vws}}
           >
             <KpiValue absolute={parseFloat(text.section_vaccinations_rivm.kpi_stock.value)}/>
-            <Text mb={'1.5rem'}>{text.section_vaccinations_rivm.kpi_stock.description}</Text>
+            <Text mb={4}>{text.section_vaccinations_rivm.kpi_stock.description}</Text>
 
             <Heading level={3}>{text.section_vaccinations_rivm.kpi_expected_delivery.title}</Heading>
             <KpiValue absolute={parseFloat(text.section_vaccinations_rivm.kpi_expected_delivery.value)}/>
