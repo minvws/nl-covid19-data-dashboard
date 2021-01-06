@@ -59,7 +59,6 @@ export function AppFooter({ lastGenerated }: { lastGenerated: string }) {
 }
 
 function LastGeneratedMessage({ date }: { date: string }) {
-  console.log(date);
   const dateIso = formatDateFromSeconds(Number(date), 'iso');
   const dateLong = formatDateFromSeconds(Number(date), 'long');
 

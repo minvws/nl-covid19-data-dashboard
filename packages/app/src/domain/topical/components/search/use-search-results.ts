@@ -1,8 +1,8 @@
 import matchSorter from 'match-sorter';
 import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
-import municipalities from '~/data/gemeente_veiligheidsregio.json';
 import safetyRegions from '~/data/index';
+import municipalities from '~/data/municipalSearchData';
 
 export interface Option {
   type: 'gm' | 'vr';

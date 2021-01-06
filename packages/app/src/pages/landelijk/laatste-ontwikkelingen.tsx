@@ -11,6 +11,7 @@ import { HeadingWithIcon } from '~/components-styled/heading-with-icon';
 import { MessageTile } from '~/components-styled/message-tile';
 import { TileList } from '~/components-styled/tile-list';
 import { Text } from '~/components-styled/typography';
+import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
@@ -118,9 +119,7 @@ const LatestDevelopments: FCWithLayout<ILatestDevelopmentsData> = (props) => {
       <ChoroplethTile
         title={text.positief_geteste_personen.map_titel}
         metadata={{
-          date:
-            data.infected_people_delta_normalized.last_value
-              .date_of_report_unix,
+          date: data.infectious_people.last_value.date_unix,
           source: text.positief_geteste_personen.bronnen.rivm,
         }}
         description={text.positief_geteste_personen.map_toelichting}
@@ -128,14 +127,16 @@ const LatestDevelopments: FCWithLayout<ILatestDevelopmentsData> = (props) => {
         chartRegion={selectedMap}
         legend={{
           thresholds:
-            regionThresholds.positive_tested_people.positive_tested_people,
+            selectedMap === 'municipal'
+              ? municipalThresholds.tested_overall.infected_per_100k
+              : regionThresholds.tested_overall.infected_per_100k,
           title: text.positief_geteste_personen.chloropleth_legenda.titel,
         }}
       >
         {selectedMap === 'municipal' && (
           <MunicipalityChoropleth
-            metricName="positive_tested_people"
-            metricProperty="positive_tested_people"
+            metricName="tested_overall"
+            metricProperty="infected_per_100k"
             tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
               createSelectMunicipalHandler(router)
             )}
@@ -144,8 +145,8 @@ const LatestDevelopments: FCWithLayout<ILatestDevelopmentsData> = (props) => {
         )}
         {selectedMap === 'region' && (
           <SafetyRegionChoropleth
-            metricName="positive_tested_people"
-            metricProperty="positive_tested_people"
+            metricName="tested_overall"
+            metricProperty="infected_per_100k"
             tooltipContent={createPositiveTestedPeopleRegionalTooltip(
               createSelectRegionHandler(router)
             )}
