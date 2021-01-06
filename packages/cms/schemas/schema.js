@@ -6,15 +6,15 @@ import schemaTypes from "all:part:@sanity/base/schema-type";
 
 // documents are items that are published/queriable
 // some of these are 'singletons' but that's not enforced by the API
-import siteSettings from "./documents/siteSettings";
-import laatsteOntwikkelingen from "./documents/laatste-ontwikkelingen";
+// import siteSettings from "./documents/siteSettings";
+// import laatsteOntwikkelingen from "./documents/laatste-ontwikkelingen";
 import veelgesteldeVragen from "./documents/veelgestelde-vragen";
-import cijferVerantwoording from "./documents/cijfer-verantwoording";
-import overDitDashboard from "./documents/over-dit-dashboard";
-import overRisicoNiveaus from "./documents/over-risico-niveaus";
+// import cijferVerantwoording from "./documents/cijfer-verantwoording";
+// import overDitDashboard from "./documents/over-dit-dashboard";
+// import overRisicoNiveaus from "./documents/over-risico-niveaus";
 
 //objects are building blocks, but not queryable in itself
-import openGraph from "./objects/open-graph";
+// import openGraph from "./objects/open-graph";
 import collapsible from "./objects/collapsible";
 
 // These 2 locale helpers are technically objects too, but we keep them grouped here
@@ -30,14 +30,14 @@ export default createSchema({
   // to the ones provided by any plugins that are installed
   types: schemaTypes.concat([
     //documents
-    siteSettings,
-    laatsteOntwikkelingen,
+    // siteSettings,
+    // laatsteOntwikkelingen,
     veelgesteldeVragen,
-    cijferVerantwoording,
-    overDitDashboard,
-    overRisicoNiveaus,
+    // cijferVerantwoording,
+    // overDitDashboard,
+    // overRisicoNiveaus,
     //objects
-    openGraph,
+    // openGraph,
     collapsible,
     //locale helpers
     localeString,

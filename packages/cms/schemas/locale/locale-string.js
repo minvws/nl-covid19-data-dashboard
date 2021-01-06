@@ -18,7 +18,6 @@ export default {
     title: lang.title,
     name: lang.id,
     type: "string",
-    validation: (Rule) => Rule.required(),
     fieldset: lang.isDefault ? null : "translations",
   })),
 };
