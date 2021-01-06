@@ -23,6 +23,7 @@ type MiniTrendTileProps<T extends Value> = {
 
 export function MiniTrendTile<T extends Value>(props: MiniTrendTileProps<T>) {
   const { icon, title, text, trendData, metricProperty } = props;
+
   return (
     <Box display="flex" flexDirection="column">
       <Box display="flex">

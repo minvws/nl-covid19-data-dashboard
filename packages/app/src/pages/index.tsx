@@ -16,6 +16,7 @@ import { DataSitemap } from '~/domain/topical/data-site-map';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
 import { TALLLanguages } from '~/locale/';
+import { sortNationalTimeSeriesInDataInPlace } from '~/static-props/data-sorting';
 import { loadJsonFromDataFile } from '~/static-props/utils/load-json-from-data-file';
 import { National } from '~/types/data';
 import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
@@ -174,6 +175,8 @@ export async function getStaticProps(): Promise<StaticProps> {
       }
     }
   }
+
+  sortNationalTimeSeriesInDataInPlace(data);
 
   const lastGenerated = data.last_generated;
 
