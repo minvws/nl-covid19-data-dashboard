@@ -3,9 +3,9 @@
     "installation": {
       "title": "regional_sewer_per_installation_installation",
       "additionalProperties": false,
-      "required": ["rwzi_awzi_code", "values", "last_value"],
+      "required": ["rwzi_awzi_name", "values", "last_value"],
       "properties": {
-        "rwzi_awzi_code": {
+        "rwzi_awzi_name": {
           "type": "string"
         },
         "values": {
@@ -22,48 +22,10 @@
     "value": {
       "title": "regional_sewer_per_installation_value",
       "additionalProperties": false,
-      "required": [
-        "date_measurement_unix",
-        "week",
-        "week_start_unix",
-        "week_end_unix",
-        "rwzi_awzi_code",
-        "rwzi_awzi_name",
-        "vrcode",
-        "vrnaam",
-        "gmcode",
-        "rna_normalized",
-        "date_of_insertion_unix"
-      ],
+      "required": ["date_unix", "rna_normalized", "date_of_insertion_unix"],
       "properties": {
-        "date_measurement_unix": {
+        "date_unix": {
           "type": "integer"
-        },
-        "week": {
-          "type": "integer"
-        },
-        "week_start_unix": {
-          "type": "integer"
-        },
-        "week_end_unix": {
-          "type": "integer"
-        },
-        "rwzi_awzi_code": {
-          "type": "string"
-        },
-        "rwzi_awzi_name": {
-          "type": "string"
-        },
-        "vrcode": {
-          "type": "string",
-          "equalsRootProperty": "code"
-        },
-        "vrnaam": {
-          "type": "string"
-        },
-        "gmcode": {
-          "type": "string",
-          "pattern": "^GM[0-9]+$"
         },
         "rna_normalized": {
           "type": "number"

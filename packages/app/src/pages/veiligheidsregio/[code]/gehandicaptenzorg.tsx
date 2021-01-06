@@ -59,7 +59,7 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
           )}
           metadata={{
             datumsText: positiveTestPeopleText.datums,
-            dateInfo: lastValue.date_of_report_unix,
+            dateOrRange: lastValue.date_unix,
             dateOfInsertionUnix: lastValue.date_of_insertion_unix,
             dataSources: [positiveTestPeopleText.bronnen.rivm],
           }}
@@ -71,7 +71,7 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
             title={positiveTestPeopleText.barscale_titel}
             description={positiveTestPeopleText.extra_uitleg}
             metadata={{
-              date: lastValue.date_of_report_unix,
+              date: lastValue.date_unix,
               source: positiveTestPeopleText.bronnen.rivm,
             }}
           >
@@ -103,7 +103,7 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
           subtitle={locationsText.pagina_toelichting}
           metadata={{
             datumsText: locationsText.datums,
-            dateInfo: lastValue.date_of_report_unix,
+            dateOrRange: lastValue.date_unix,
             dateOfInsertionUnix: lastValue.date_of_insertion_unix,
             dataSources: [locationsText.bronnen.rivm],
           }}
@@ -114,7 +114,7 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
           <KpiTile
             title={locationsText.kpi_titel}
             metadata={{
-              date: lastValue.date_of_report_unix,
+              date: lastValue.date_unix,
               source: locationsText.bronnen.rivm,
             }}
           >
@@ -128,7 +128,7 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
           <KpiTile
             title={locationsText.barscale_titel}
             metadata={{
-              date: lastValue.date_of_report_unix,
+              date: lastValue.date_unix,
               source: locationsText.bronnen.rivm,
             }}
           >
@@ -165,7 +165,7 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
           subtitle={mortalityText.pagina_toelichting}
           metadata={{
             datumsText: mortalityText.datums,
-            dateInfo: lastValue.date_of_report_unix,
+            dateOrRange: lastValue.date_unix,
             dateOfInsertionUnix: lastValue.date_of_insertion_unix,
             dataSources: [mortalityText.bronnen.rivm],
           }}
@@ -177,7 +177,7 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
             title={mortalityText.barscale_titel}
             description={mortalityText.extra_uitleg}
             metadata={{
-              date: lastValue.date_of_report_unix,
+              date: lastValue.date_unix,
               source: mortalityText.bronnen.rivm,
             }}
           >

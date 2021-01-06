@@ -163,7 +163,7 @@ const StyledMenuButton = styled.a<{ isVisible: boolean }>((x) =>
     padding: '1em',
     boxShadow: 'tile',
     position: 'relative',
-    zIndex: '2',
+    zIndex: '4',
     textDecoration: 'none',
 
     '&.backButtonFooter': {

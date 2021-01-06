@@ -129,14 +129,14 @@ function SafetyRegionLayout(
                       <SidebarMetric
                         data={data}
                         scope="vr"
-                        metricName="results_per_region"
-                        metricProperty="total_reported_increase_per_region"
+                        metricName="tested_overall"
+                        metricProperty="infected"
                         altBarScaleMetric={{
-                          metricName: 'results_per_region',
-                          metricProperty: 'infected_increase_per_region',
+                          metricName: 'tested_overall',
+                          metricProperty: 'infected_per_100k',
                         }}
                         localeTextKey="veiligheidsregio_positief_geteste_personen"
-                        differenceKey="results_per_region__total_reported_increase_per_region"
+                        differenceKey="tested_overall__infected"
                         showBarScale={true}
                       />
                     </MetricMenuItemLink>
@@ -171,10 +171,10 @@ function SafetyRegionLayout(
                       <SidebarMetric
                         data={data}
                         scope="vr"
-                        metricName="results_per_region"
-                        metricProperty="hospital_moving_avg_per_region"
+                        metricName="hospital_nice"
+                        metricProperty="admissions_moving_average"
                         localeTextKey="veiligheidsregio_ziekenhuisopnames_per_dag"
-                        differenceKey="results_per_region__hospital_moving_avg_per_region"
+                        differenceKey="hospital_nice__admissions_moving_average"
                       />
                     </MetricMenuItemLink>
                   </CategoryMenu>

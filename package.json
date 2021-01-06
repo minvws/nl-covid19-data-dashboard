@@ -18,11 +18,18 @@
     "format": "yarn workspaces run format",
     "dev": "yarn workspace @corona-dashboard/app dev",
     "download": "yarn workspace @corona-dashboard/app download",
-    "start": "yarn workspace @corona-dashboard/cms start"
+    "start": "yarn workspace @corona-dashboard/app start",
+    "validate-json": "yarn workspace @corona-dashboard/cli validate-json"
   },
   "workspaces": {
     "packages": [
       "packages/*"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn workspace @corona-dashboard/app lint-staged",
+      "pre-push": "yarn workspace @corona-dashboard/app run type-check"
+    }
   }
 }

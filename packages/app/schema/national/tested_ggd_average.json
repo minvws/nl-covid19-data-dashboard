@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "hospital_beds_occupied",
+  "title": "national_tested_ggd_average",
   "type": "object",
   "properties": {
     "values": {
@@ -17,13 +17,22 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "hospital_beds_occupied_value",
+      "title": "national_tested_ggd_average_value",
       "type": "object",
       "properties": {
-        "covid_occupied": {
+        "infected": {
           "type": "integer"
         },
-        "date_of_report_unix": {
+        "infected_percentage": {
+          "type": "number"
+        },
+        "tested_total": {
+          "type": "integer"
+        },
+        "date_start_unix": {
+          "type": "integer"
+        },
+        "date_end_unix": {
           "type": "integer"
         },
         "date_of_insertion_unix": {
@@ -31,8 +40,11 @@
         }
       },
       "required": [
-        "covid_occupied",
-        "date_of_report_unix",
+        "tested_total",
+        "infected_percentage",
+        "infected",
+        "date_start_unix",
+        "date_end_unix",
         "date_of_insertion_unix"
       ],
       "additionalProperties": false

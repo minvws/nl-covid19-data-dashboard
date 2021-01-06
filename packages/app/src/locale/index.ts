@@ -14,7 +14,7 @@ export type TLanguageKey = keyof TLanguages;
 
 const languages: TLanguages = { en, nl } as const;
 
-const targetLanguage: TLanguageKey =
+export const targetLanguage: TLanguageKey =
   (process.env.NEXT_PUBLIC_LOCALE as TLanguageKey) || 'nl';
 const dictionary: TALLLanguages = languages[targetLanguage];
 

@@ -1,27 +1,24 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
-  "title": "municipalities_positive_tested_people",
+  "title": "municipalities_hospital_nice",
   "additionalProperties": false,
   "required": [
-    "date_of_report_unix",
+    "date_unix",
     "gmcode",
-    "positive_tested_people",
+    "admissions_moving_average",
     "date_of_insertion_unix"
   ],
   "properties": {
-    "date_of_report_unix": {
+    "date_unix": {
       "type": "integer"
     },
     "gmcode": {
       "type": "string",
       "pattern": "^GM[0-9]+$"
     },
-    "positive_tested_people": {
+    "admissions_moving_average": {
       "type": "number"
-    },
-    "total_positive_tested_people": {
-      "type": "integer"
     },
     "date_of_insertion_unix": {
       "type": "integer"

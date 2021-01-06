@@ -41,9 +41,9 @@ const SewerWater: FCWithLayout<NationalPageProps> = ({ data }) => {
           subtitle={text.pagina_toelichting}
           metadata={{
             datumsText: text.datums,
-            dateInfo: {
-              weekStartUnix: sewerAverages.last_value.week_start_unix,
-              weekEndUnix: sewerAverages.last_value.week_end_unix,
+            dateOrRange: {
+              start: sewerAverages.last_value.date_start_unix,
+              end: sewerAverages.last_value.date_end_unix,
             },
             dateOfInsertionUnix:
               sewerAverages.last_value.date_of_insertion_unix,
@@ -58,8 +58,8 @@ const SewerWater: FCWithLayout<NationalPageProps> = ({ data }) => {
             description={text.extra_uitleg}
             metadata={{
               date: [
-                sewerAverages.last_value.week_start_unix,
-                sewerAverages.last_value.week_end_unix,
+                sewerAverages.last_value.date_start_unix,
+                sewerAverages.last_value.date_end_unix,
               ],
               source: text.bronnen.rivm,
             }}
@@ -79,8 +79,8 @@ const SewerWater: FCWithLayout<NationalPageProps> = ({ data }) => {
             }
             metadata={{
               date: [
-                sewerAverages.last_value.week_start_unix,
-                sewerAverages.last_value.week_end_unix,
+                sewerAverages.last_value.date_start_unix,
+                sewerAverages.last_value.date_end_unix,
               ],
               source: text.bronnen.rivm,
             }}
@@ -112,8 +112,8 @@ const SewerWater: FCWithLayout<NationalPageProps> = ({ data }) => {
           description={text.map_toelichting}
           metadata={{
             date: [
-              sewerAverages.last_value.week_start_unix,
-              sewerAverages.last_value.week_end_unix,
+              sewerAverages.last_value.date_start_unix,
+              sewerAverages.last_value.date_end_unix,
             ],
             source: text.bronnen.rivm,
           }}
