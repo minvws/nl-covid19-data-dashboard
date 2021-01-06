@@ -59,7 +59,7 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
 
         <TwoKpiSection>
           <KpiTile
-            title={text.barscale_titel}
+            title={text.kpi_titel}
             metadata={{
               date: lastValue.date_unix,
               source: text.bronnen.rivm,
@@ -74,7 +74,7 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
           </KpiTile>
 
           <KpiTile
-            title={text.kpi_titel}
+            title={text.barscale_titel}
             metadata={{
               date: lastValue.date_unix,
               source: text.bronnen.rivm,
