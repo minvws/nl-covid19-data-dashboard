@@ -184,11 +184,11 @@ const elderlyAtHomeThresholds: ChoroplethThresholdsValue[] = [
 ];
 
 export const regionThresholds = {
-  positive_tested_people: {
-    positive_tested_people: positiveTestedThresholds,
+  tested_overall: {
+    infected_per_100k: positiveTestedThresholds,
   },
-  hospital_admissions: {
-    hospital_admissions: hospitalAdmissionsThresholds,
+  hospital_nice: {
+    admissions_moving_average: hospitalAdmissionsThresholds,
   },
   escalation_levels: {
     escalation_level: escalationThresholds,

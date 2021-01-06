@@ -3,40 +3,43 @@
   "title": "national_difference",
   "type": "object",
   "properties": {
-    "infected_people_delta_normalized__infected_daily_increase": {
+    "tested_overall__infected_per_100k": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "infected_people_total__infected_daily_total": {
+    "tested_overall__infected": {
       "$ref": "#/definitions/diff_integer"
     },
-    "ggd__tested_total": {
+    "tested_ggd_daily__tested_total": {
       "$ref": "#/definitions/diff_integer"
     },
-    "ggd__infected_percentage": {
+    "tested_ggd_daily__infected_percentage": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "reproduction_index_last_known_average__reproduction_index_avg": {
-      "$ref": "#/definitions/diff_decimal"
-    },
-    "infectious_people_count_normalized__infectious_avg_normalized": {
-      "$ref": "#/definitions/diff_decimal"
-    },
-    "intake_hospital_ma__moving_average_hospital": {
-      "$ref": "#/definitions/diff_decimal"
-    },
-    "hospital_beds_occupied__covid_occupied": {
+    "tested_ggd_average__tested_total": {
       "$ref": "#/definitions/diff_integer"
     },
-    "intake_intensivecare_ma__moving_average_ic": {
+    "tested_ggd_average__infected_percentage": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "intensive_care_beds_occupied__covid_occupied": {
+    "infectious_people__count_average": {
+      "$ref": "#/definitions/diff_decimal"
+    },
+    "hospital_nice__admissions_moving_average": {
+      "$ref": "#/definitions/diff_decimal"
+    },
+    "hospital_lcps__beds_occupied_covid": {
       "$ref": "#/definitions/diff_integer"
     },
-    "huisarts_verdenkingen__incidentie": {
+    "intensive_care_nice__admissions_moving_average": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "huisarts_verdenkingen__geschat_aantal": {
+    "intensive_care_lcps__beds_occupied_covid": {
+      "$ref": "#/definitions/diff_integer"
+    },
+    "doctor__covid_symptoms_per_100k": {
+      "$ref": "#/definitions/diff_decimal"
+    },
+    "doctor__covid_symptoms": {
       "$ref": "#/definitions/diff_integer"
     },
     "sewer__average": {
@@ -50,21 +53,26 @@
     },
     "nursing_home__deceased_daily": {
       "$ref": "#/definitions/diff_integer"
+    },
+    "reproduction__index_average": {
+      "$ref": "#/definitions/diff_decimal"
     }
   },
   "required": [
-    "infected_people_delta_normalized__infected_daily_increase",
-    "infected_people_total__infected_daily_total",
-    "ggd__tested_total",
-    "ggd__infected_percentage",
-    "reproduction_index_last_known_average__reproduction_index_avg",
-    "infectious_people_count_normalized__infectious_avg_normalized",
-    "intake_hospital_ma__moving_average_hospital",
-    "hospital_beds_occupied__covid_occupied",
-    "intake_intensivecare_ma__moving_average_ic",
-    "intensive_care_beds_occupied__covid_occupied",
-    "huisarts_verdenkingen__incidentie",
-    "huisarts_verdenkingen__geschat_aantal",
+    "tested_overall__infected_per_100k",
+    "tested_overall__infected",
+    "hospital_nice__admissions_moving_average",
+    "hospital_lcps__beds_occupied_covid",
+    "tested_ggd_daily__tested_total",
+    "tested_ggd_daily__infected_percentage",
+    "tested_ggd_average__tested_total",
+    "tested_ggd_average__infected_percentage",
+    "reproduction__index_average",
+    "infectious_people__count_average",
+    "intensive_care_nice__admissions_moving_average",
+    "intensive_care_lcps__beds_occupied_covid",
+    "doctor__covid_symptoms_per_100k",
+    "doctor__covid_symptoms",
     "sewer__average",
     "nursing_home__newly_infected_people",
     "nursing_home__infected_locations_total",
@@ -82,19 +90,14 @@
         "difference": {
           "type": "integer"
         },
-        "old_date_of_report_unix": {
+        "old_date_unix": {
           "type": "integer"
         },
-        "new_date_of_report_unix": {
+        "new_date_unix": {
           "type": "integer"
         }
       },
-      "required": [
-        "old_value",
-        "difference",
-        "old_date_of_report_unix",
-        "new_date_of_report_unix"
-      ],
+      "required": ["old_value", "difference", "old_date_unix", "new_date_unix"],
       "additionalProperties": false
     },
     "diff_decimal": {
@@ -107,19 +110,14 @@
         "difference": {
           "type": "number"
         },
-        "old_date_of_report_unix": {
+        "old_date_unix": {
           "type": "integer"
         },
-        "new_date_of_report_unix": {
+        "new_date_unix": {
           "type": "integer"
         }
       },
-      "required": [
-        "old_value",
-        "difference",
-        "old_date_of_report_unix",
-        "new_date_of_report_unix"
-      ],
+      "required": ["old_value", "difference", "old_date_unix", "new_date_unix"],
       "additionalProperties": false
     }
   }

@@ -16,24 +16,28 @@ interface Datasource {
   download: string;
 }
 
-interface WeekRange {
-  weekStartUnix: number;
-  weekEndUnix: number;
+interface DateRange {
+  start: number;
+  end: number;
 }
 
 export interface MetadataProps {
   dataSources: Datasource[];
   datumsText: string;
-  dateInfo: number | WeekRange;
+  dateOrRange: number | DateRange;
   dateOfInsertionUnix: number;
 }
 
 const text = siteText.common.metadata;
 
 export function Metadata(props: MetadataProps) {
-  const { dataSources, datumsText, dateInfo, dateOfInsertionUnix } = props;
+  const { dataSources, datumsText, dateOrRange, dateOfInsertionUnix } = props;
 
-  const dateText = formateDateText(dateInfo, dateOfInsertionUnix, datumsText);
+  const dateText = formateDateText(
+    dateOrRange,
+    dateOfInsertionUnix,
+    datumsText
+  );
 
   const dataDownloads = dataSources
     .filter((x) => Boolean(x.download.trim()))
@@ -105,12 +109,12 @@ function MetadataItem(props: MetadataItemProps) {
 }
 
 function formateDateText(
-  dateInfo: number | WeekRange,
+  dateOrRange: number | DateRange,
   dateOfInsertionUnix: number,
   datumsText: string
 ) {
-  if (typeof dateInfo === 'number') {
-    const dateOfReport = formatDateFromSeconds(dateInfo, 'weekday-medium');
+  if (typeof dateOrRange === 'number') {
+    const dateOfReport = formatDateFromSeconds(dateOrRange, 'weekday-medium');
     const dateOfInsertion = formatDateFromSeconds(
       dateOfInsertionUnix,
       'weekday-medium'
@@ -121,13 +125,10 @@ function formateDateText(
     });
   } else {
     const weekStart = formatDateFromSeconds(
-      dateInfo.weekStartUnix,
+      dateOrRange.start,
       'weekday-medium'
     );
-    const weekEnd = formatDateFromSeconds(
-      dateInfo.weekEndUnix,
-      'weekday-medium'
-    );
+    const weekEnd = formatDateFromSeconds(dateOrRange.end, 'weekday-medium');
     const dateOfInsertion = formatDateFromSeconds(
       dateOfInsertionUnix,
       'weekday-medium'

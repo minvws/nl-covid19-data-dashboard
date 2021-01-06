@@ -35,8 +35,8 @@ export function getSchemaInformation(
       files: filterFilenames(dataJsons, /^GM[0-9]+.json$/),
       basePath: jsonPath,
     },
-    municipalities: { files: ['MUNICIPALITIES.json'], basePath: jsonPath },
-    regions: { files: ['REGIONS.json'], basePath: jsonPath },
+    municipalities: { files: ['GM_COLLECTION.json'], basePath: jsonPath },
+    regions: { files: ['VR_COLLECTION.json'], basePath: jsonPath },
     locale: {
       files: filterFilenames(localeJsons, /[^.]+.json$/),
       basePath: localeDirectory,

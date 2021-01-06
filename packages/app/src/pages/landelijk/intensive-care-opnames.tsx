@@ -21,9 +21,9 @@ const text = siteText.ic_opnames_per_dag;
 const IntakeIntensiveCare: FCWithLayout<NationalPageProps> = (props) => {
   const { data } = props;
 
-  const dataIntake = data.intake_intensivecare_ma;
+  const dataIntake = data.intensive_care_nice;
 
-  const dataBeds = data.intensive_care_beds_occupied;
+  const dataBeds = data.intensive_care_lcps;
 
   return (
     <>
@@ -40,7 +40,7 @@ const IntakeIntensiveCare: FCWithLayout<NationalPageProps> = (props) => {
           subtitle={text.pagina_toelichting}
           metadata={{
             datumsText: text.datums,
-            dateInfo: dataIntake.last_value.date_of_report_unix,
+            dateOrRange: dataIntake.last_value.date_unix,
             dateOfInsertionUnix: dataIntake.last_value.date_of_insertion_unix,
             dataSources: [text.bronnen.nice, text.bronnen.lnaz],
           }}
@@ -51,17 +51,17 @@ const IntakeIntensiveCare: FCWithLayout<NationalPageProps> = (props) => {
           <KpiTile
             title={text.barscale_titel}
             metadata={{
-              date: dataIntake.last_value.date_of_report_unix,
+              date: dataIntake.last_value.date_unix,
               source: text.bronnen.nice,
             }}
           >
             <PageBarScale
               data={data}
               scope="nl"
-              metricName="intake_intensivecare_ma"
-              metricProperty="moving_average_ic"
+              metricName="intensive_care_nice"
+              metricProperty="admissions_moving_average"
               localeTextKey="ic_opnames_per_dag"
-              differenceKey="intake_intensivecare_ma__moving_average_ic"
+              differenceKey="intensive_care_nice__admissions_moving_average"
             />
             <Text>{text.extra_uitleg}</Text>
           </KpiTile>
@@ -69,16 +69,16 @@ const IntakeIntensiveCare: FCWithLayout<NationalPageProps> = (props) => {
           <KpiTile
             title={text.kpi_bedbezetting.title}
             metadata={{
-              date: dataBeds.last_value.date_of_report_unix,
+              date: dataBeds.last_value.date_unix,
               source: text.bronnen.lnaz,
             }}
           >
             <KpiValue
-              data-cy="covid_occupied"
-              absolute={dataBeds.last_value.covid_occupied}
-              percentage={dataBeds.last_value.covid_percentage_of_all_occupied}
+              data-cy="beds_occupied_covid"
+              absolute={dataBeds.last_value.beds_occupied_covid}
+              percentage={dataBeds.last_value.beds_occupied_covid_percentage}
               difference={
-                data.difference.intensive_care_beds_occupied__covid_occupied
+                data.difference.intensive_care_lcps__beds_occupied_covid
               }
             />
             <Text>{text.kpi_bedbezetting.description}</Text>
@@ -90,7 +90,7 @@ const IntakeIntensiveCare: FCWithLayout<NationalPageProps> = (props) => {
           values={dataIntake.values}
           linesConfig={[
             {
-              metricProperty: 'moving_average_ic',
+              metricProperty: 'admissions_moving_average',
             },
           ]}
           signaalwaarde={10}
@@ -103,7 +103,7 @@ const IntakeIntensiveCare: FCWithLayout<NationalPageProps> = (props) => {
           values={dataBeds.values}
           linesConfig={[
             {
-              metricProperty: 'covid_occupied',
+              metricProperty: 'beds_occupied_covid',
             },
           ]}
           metadata={{ source: text.bronnen.lnaz }}
