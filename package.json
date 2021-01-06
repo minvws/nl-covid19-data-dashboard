@@ -20,11 +20,19 @@
     "download": "yarn workspace @corona-dashboard/app download",
     "start": "yarn workspace @corona-dashboard/app start",
     "validate-json": "yarn workspace @corona-dashboard/cli validate-json",
-    "generate-typescript": "yarn workspace @corona-dashboard/cli generate-typescript"
+    "validate-single": "yarn workspace @corona-dashboard/cli validate-single",
+    "generate-typescript": "yarn workspace @corona-dashboard/cli generate-typescript",
+    "e2e": "yarn workspace @corona-dashboard/app e2e"
   },
   "workspaces": {
     "packages": [
       "packages/*"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn workspace @corona-dashboard/app lint-staged",
+      "pre-push": "yarn workspace @corona-dashboard/app run type-check"
+    }
   }
 }

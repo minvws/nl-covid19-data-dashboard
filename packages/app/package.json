@@ -76,7 +76,7 @@
     "babel-plugin-styled-components": "^1.11.1",
     "chalk": "^4.1.0",
     "cross-env": "^7.0.3",
-    "cypress": "^6.1.0",
+    "cypress": "^6.2.1",
     "download": "^8.0.0",
     "download-cli": "^1.1.1",
     "eslint": "^7.7.0",
@@ -100,12 +100,6 @@
     "start-server-and-test": "^1.11.4",
     "ts-jest": "^26.4.4",
     "typescript": "^4.1.2"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "yarn run type-check"
-    }
   },
   "lint-staged": {
     "*.@(ts|tsx)": [

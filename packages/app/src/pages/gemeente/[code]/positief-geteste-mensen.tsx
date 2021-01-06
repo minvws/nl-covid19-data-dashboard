@@ -66,9 +66,9 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
             }}
           >
             <KpiValue
-              data-cy="infected_per_100k"
-              absolute={lastValue.infected_per_100k}
-              difference={data.difference.tested_overall__infected_per_100k}
+              data-cy="infected"
+              absolute={lastValue.infected}
+              difference={data.difference.tested_overall__infected}
             />
             <Text>{text.barscale_toelichting}</Text>
           </KpiTile>
@@ -81,9 +81,9 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
             }}
           >
             <KpiValue
-              data-cy="infected"
-              absolute={lastValue.infected}
-              difference={data.difference.tested_overall__infected}
+              data-cy="infected_per_100k"
+              absolute={lastValue.infected_per_100k}
+              difference={data.difference.tested_overall__infected_per_100k}
             />
             <Text
               as="div"

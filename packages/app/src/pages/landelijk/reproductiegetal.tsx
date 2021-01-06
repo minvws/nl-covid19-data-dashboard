@@ -1,4 +1,5 @@
 import Repro from '~/assets/reproductiegetal.svg';
+import { Box } from '~/components-styled/base';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiWithIllustrationTile } from '~/components-styled/kpi-with-illustration-tile';
 import { Legenda } from '~/components-styled/legenda';
@@ -84,15 +85,17 @@ const ReproductionIndex: FCWithLayout<NationalPageProps> = (props) => {
             timeframeOptions={['all', '5weeks']}
             hideFill={true}
             footer={
-              <Legenda
-                items={[
-                  {
-                    label: text.legenda_r,
-                    color: 'data.primary',
-                    shape: 'line',
-                  },
-                ]}
-              />
+              <Box pl='30px'>
+                <Legenda
+                  items={[
+                    {
+                      label: text.legenda_r,
+                      color: 'data.primary',
+                      shape: 'line',
+                   },
+                  ]}
+                />
+              </Box>
             }
           />
         )}

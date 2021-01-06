@@ -96,7 +96,7 @@ export interface MunicipalitiesTestedOverall {
   date_unix: number;
   gmcode: string;
   infected_per_100k: number;
-  infected?: number;
+  infected: number;
   date_of_insertion_unix: number;
 }
 
@@ -133,7 +133,7 @@ export interface NationalDifference {
   tested_ggd_daily__infected_percentage: DifferenceDecimal;
   tested_ggd_average__tested_total: DifferenceInteger;
   tested_ggd_average__infected_percentage: DifferenceDecimal;
-  infectious_people__count_average: DifferenceDecimal;
+  infectious_people__estimate: DifferenceInteger;
   hospital_nice__admissions_moving_average: DifferenceDecimal;
   hospital_lcps__beds_occupied_covid: DifferenceInteger;
   intensive_care_nice__admissions_moving_average: DifferenceDecimal;
@@ -692,7 +692,7 @@ export interface RegionsTestedOverall {
   date_unix: number;
   vrcode: string;
   infected_per_100k: number;
-  infected?: number;
+  infected: number;
   date_of_insertion_unix: number;
 }
 export interface EscalationLevels {

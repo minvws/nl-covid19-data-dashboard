@@ -6,6 +6,7 @@
   "required": [
     "date_unix",
     "vrcode",
+    "infected",
     "infected_per_100k",
     "date_of_insertion_unix"
   ],
