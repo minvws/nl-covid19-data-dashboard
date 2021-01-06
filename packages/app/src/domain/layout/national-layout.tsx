@@ -126,6 +126,7 @@ function NationalLayout(props: NationalLayoutProps) {
                   title={siteText.vaccinaties.titel_sidebar}
                 >
                   <SidebarMetric
+                    // @ts-ignore
                     data={siteText.vaccinaties}
                     scope="nl"
                     metricName="sidebar"
