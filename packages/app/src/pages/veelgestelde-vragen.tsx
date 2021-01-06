@@ -63,7 +63,7 @@ const Verantwoording: FCWithLayout<VeelgesteldeVragenProps> = (props) => {
 
             {data.description && <PortableText blocks={data.description} />}
 
-            {data.questions ? (
+            {data.questions && (
               <article className={styles.faqList}>
                 {data.questions.map((item: any) => {
                   const id = getSkipLinkId(item.title);
@@ -74,8 +74,6 @@ const Verantwoording: FCWithLayout<VeelgesteldeVragenProps> = (props) => {
                   );
                 })}
               </article>
-            ) : (
-              <p>Er zijn geen vragen gevonden</p>
             )}
           </div>
         </MaxWidth>

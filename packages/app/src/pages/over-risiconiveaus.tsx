@@ -65,7 +65,7 @@ const OverRisicoNiveaus: FCWithLayout<OverRisiconiveausProps> = (props) => {
 
             {data.description && <PortableText blocks={data.description} />}
 
-            {data.collapsibleList ? (
+            {data.collapsibleList && (
               <article className={styles.faqList}>
                 {data.collapsibleList.map((item: any) => {
                   const id = getSkipLinkId(item.title);
@@ -76,8 +76,6 @@ const OverRisicoNiveaus: FCWithLayout<OverRisiconiveausProps> = (props) => {
                   );
                 })}
               </article>
-            ) : (
-              <p>Er zijn geen vragen gevonden</p>
             )}
           </div>
         </MaxWidth>

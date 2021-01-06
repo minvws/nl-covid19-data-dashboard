@@ -64,7 +64,7 @@ const Verantwoording: FCWithLayout<VerantwoordingProps> = (props) => {
             <h2>{data.title}</h2>
             {data.description && <PortableText blocks={data.description} />}
 
-            {data.collapsibleList ? (
+            {data.collapsibleList && (
               <article className={styles.faqList}>
                 {data.collapsibleList.map((item: any) => {
                   const id = getSkipLinkId(item.title);
@@ -75,8 +75,6 @@ const Verantwoording: FCWithLayout<VerantwoordingProps> = (props) => {
                   );
                 })}
               </article>
-            ) : (
-              <p>Er zijn geen verantwoordingen gevonden</p>
             )}
           </div>
         </MaxWidth>
