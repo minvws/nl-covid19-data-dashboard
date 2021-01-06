@@ -24,7 +24,7 @@ interface VerantwoordingProps {
   lastGenerated: string;
 }
 
-const faqQuery = groq`
+const verantwoordingQuery = groq`
   *[_type == 'cijferVerantwoording'][0]
 `;
 
@@ -33,7 +33,7 @@ export async function getStaticProps(): Promise<StaticProps> {
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const lastGenerated = JSON.parse(fileContents).last_generated;
 
-  const verantwoordingData = await getClient(false).fetch(faqQuery);
+  const verantwoordingData = await getClient(false).fetch(verantwoordingQuery);
   const data = localize(verantwoordingData, [targetLanguage, 'nl']);
 
   return { props: { data, lastGenerated } };
