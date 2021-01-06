@@ -22,19 +22,6 @@
         }
       }
     },
-    "over_veelgestelde_vragen": {
-      "type": "object",
-      "required": ["vragen"],
-      "additionalProperties": true,
-      "properties": {
-        "vragen": {
-          "type": "array",
-          "items": {
-            "type": "object"
-          }
-        }
-      }
-    },
     "positief_geteste_personen": {
       "type": "object",
       "additionalProperties": true,
