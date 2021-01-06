@@ -2,7 +2,7 @@
 const fs = require('fs');
 const globby = require('globby');
 const prettier = require('prettier');
-const gemeenteData = require('./src/data/gemeente_veiligheidsregio.json');
+const gemeenteCodes = require('./gemeentecodes.json');
 
 // regioData being generated as we can't import an ES export into CommonJS
 const regioData = [...Array(25).keys()].map(
@@ -74,8 +74,8 @@ const generateSitemap = async function (locale) {
   });
 
   gemeentePaths.forEach((p) => {
-    gemeenteData.forEach((gemeente) => {
-      const pathWithCode = p.path.replace('[code]', gemeente.gemcode);
+    gemeenteCodes.forEach((code) => {
+      const pathWithCode = p.path.replace('[code]', code);
       allPathsWithPriorities.push({ path: pathWithCode, priority: p.priority });
     });
   });

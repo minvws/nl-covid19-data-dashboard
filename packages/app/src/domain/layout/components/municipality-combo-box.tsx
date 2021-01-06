@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { ComboBox } from '~/components/comboBox';
-import municipalities from '~/data/gemeente_veiligheidsregio.json';
+import municipalities from '~/data/municipalSearchData';
 import siteText from '~/locale/index';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 
