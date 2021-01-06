@@ -42,7 +42,7 @@ if (!customJsonPathArg) {
   if (schemaInformation.municipal.files.length !== 352) {
     console.error(
       chalk.bgRed.bold(
-        `\n Expected 355 municipal files, actually found ${schemaInformation.municipal.files.length} \n`
+        `\n Expected 352 municipal files, actually found ${schemaInformation.municipal.files.length} \n`
       )
     );
     process.exit(1);
