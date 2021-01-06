@@ -6,6 +6,7 @@ import { ScaleTime } from 'd3-scale';
 import { useCallback, useMemo, useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
+import { Text } from '~/components-styled/typography';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
 import text from '~/locale/index';
 import { colors } from '~/style/theme';
@@ -340,7 +341,7 @@ function formatDefaultTooltip<T extends Value>(
   if (isDaily) {
     return (
       <>
-        <b>{formatDateFromMilliseconds(value.__date.getTime())}: </b>
+        <Text as="span" fontWeight="bold">{formatDateFromMilliseconds(value.__date.getTime())}: </Text>
         {isPercentage
           ? `${formatPercentage(value.__value)}%`
           : formatNumber(value.__value)}
@@ -349,7 +350,7 @@ function formatDefaultTooltip<T extends Value>(
   } else if (isWeekly) {
     return (
       <>
-        <b>
+        <Text as="span" fontWeight="bold">
           {formatDateFromSeconds(
             ((value as unknown) as WeeklyValue).week_start_unix,
             'short'
@@ -360,7 +361,7 @@ function formatDefaultTooltip<T extends Value>(
             'short'
           )}
           :
-        </b>{' '}
+        </Text>{' '}
         {isPercentage
           ? `${formatPercentage(value.__value)}%`
           : formatNumber(value.__value)}
