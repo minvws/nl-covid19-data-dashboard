@@ -208,7 +208,7 @@
     "kpi_titel": "Aantal positief geteste mensen",
     "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn en COVID-19 hebben. Een deel van de meldingen zijn positieve tests van eerdere dagen, die later zijn doorgegeven.",
     "map_titel": "Verdeling positief geteste mensen in Nederland",
-    "map_toelichting": "Deze kaarten laten zien van hoeveel mensen gisteren is gemeld dat ze positief getest zijn op COVID-19, 'per 100.000' wordt gebruikt om vergelijkingen te kunnen maken tussen regio's.",
+    "map_toelichting": "Deze kaarten laten zien van hoeveel mensen gisteren is gemeld dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
     "linechart_titel": "Verloop over tijd",
     "linechart_toelichting": "Deze grafiek laat zien van hoeveel mensen in de geselecteerde periode gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
@@ -631,7 +631,7 @@
       },
       {
         "cijfer": "Gemeentelijke herindeling",
-        "verantwoording": "Per 1 januari 2021 zijn verschillende gemeentes [samengevoegd](https://www.rijksoverheid.nl/onderwerpen/gemeenten/gemeentelijke-herindeling). Het RIVM verwerkt deze herindeling per 7 januari in de data die het aanlevert voor het Dashboard coronavirus. Vervolgens wordt het dashboard hierop aangepast."
+        "verantwoording": "Per 1 januari 2021 zijn verschillende gemeentes [samengevoegd](https://www.rijksoverheid.nl/onderwerpen/gemeenten/gemeentelijke-herindeling). Het RIVM verwerkt deze herindeling per 7 januari in de data die het aanlevert voor het Dashboard coronavirus. Vervolgens wordt het dashboard hierop aangepast.\n\nOp 7 januari zijn de gemeentekaarten op het dashboard aangepast. Door deze herindelingen veranderen ook de grenzen van de veiligheidsregio’s Midden- en West-Brabant en Brabant-Noord. Visueel kunnen we dit laatste echter nu nog niet op het dashboard weergeven. Dit wordt later alsnog gedaan."
       },
       {
         "cijfer": "",
