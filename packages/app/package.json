@@ -101,12 +101,6 @@
     "ts-jest": "^26.4.4",
     "typescript": "^4.1.2"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "yarn run type-check"
-    }
-  },
   "lint-staged": {
     "*.@(ts|tsx)": [
       "yarn lint",
