@@ -3,11 +3,10 @@ import Head from 'next/head';
 import path from 'path';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import { MaxWidth } from '~/components-styled/max-width';
-import siteText from '~/locale/index';
+import siteText, { targetLanguage } from '~/locale/index';
 import { getSkipLinkId } from '~/utils/skipLinks';
 import styles from './over.module.scss';
 import { Collapsable } from '~/components-styled/collapsable';
-import { targetLanguage } from '../locale/index';
 import { groq } from 'next-sanity';
 import { getClient, localize, PortableText } from '~/lib/sanity';
 interface StaticProps {

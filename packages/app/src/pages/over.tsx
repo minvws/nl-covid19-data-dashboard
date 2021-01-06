@@ -3,31 +3,41 @@ import Head from 'next/head';
 import path from 'path';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import { MaxWidth } from '~/components-styled/max-width';
-import siteText, { TALLLanguages } from '~/locale/index';
-import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
+import siteText, { targetLanguage } from '~/locale/index';
 import styles from './over.module.scss';
+
+import { groq } from 'next-sanity';
+import { getClient, localize, PortableText } from '~/lib/sanity';
 
 interface StaticProps {
   props: OverProps;
 }
 
 interface OverProps {
-  text: TALLLanguages;
+  data: {
+    title: string;
+    description: string | null;
+  };
   lastGenerated: string;
 }
 
-export async function getStaticProps(): Promise<StaticProps> {
-  const text = parseMarkdownInLocale((await import('../locale/index')).default);
+const overQuery = groq`
+  *[_type == 'overDitDashboard'][0]
+`;
 
+export async function getStaticProps(): Promise<StaticProps> {
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const lastGenerated = JSON.parse(fileContents).last_generated;
 
-  return { props: { text, lastGenerated } };
+  const overData = await getClient(false).fetch(overQuery);
+  const data = localize(overData, [targetLanguage, 'nl']);
+
+  return { props: { data, lastGenerated } };
 }
 
 const Over: FCWithLayout<OverProps> = (props) => {
-  const { text } = props;
+  const { data } = props;
 
   return (
     <>
@@ -48,10 +58,9 @@ const Over: FCWithLayout<OverProps> = (props) => {
       <div className={styles.container}>
         <MaxWidth>
           <div className={styles.maxwidth}>
-            <h2>{text.over_titel.text}</h2>
-            <div
-              dangerouslySetInnerHTML={{ __html: text.over_beschrijving.text }}
-            />
+            <h2>{data.title}</h2>
+
+            {data.description && <PortableText blocks={data.description} />}
           </div>
         </MaxWidth>
       </div>
