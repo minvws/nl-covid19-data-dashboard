@@ -555,64 +555,6 @@
   },
   "over_veelgestelde_vragen": {
     "text": "Frequently asked questions",
-    "vragen": [
-      {
-        "vraag": "What is the dashboard for?",
-        "antwoord": "The dashboard presents up-to-date information about coronavirus in the Netherlands. It uses data provided by the National Institute for Public Health and the Environment (RIVM), municipal health services (GGDs) and hospitals. The dashboard shows, for example, how many people have been tested for the virus, and how many tested positive."
-      },
-      {
-        "vraag": "Why a dashboard?",
-        "antwoord": "Over the past several months, many people have become ill because of coronavirus and many people have died. Until there is an effective vaccine, the virus can easily flare up and again make large numbers of people ill. The dashboard shows if and where the virus is gaining ground. Using this information we can take control measures faster and in a more targeted way, such as introducing additional measures only in the regions with sharply increasing infection rates. Measures must always be based on a comprehensive political assessment of all relevant aspects, including broader social and economic interests."
-      },
-      {
-        "vraag": "Whose dashboard is it?",
-        "antwoord": "This dashboard has been commissioned by the Ministry of Health, Welfare and Sport. New types of data will be added to it in the weeks ahead."
-      },
-      {
-        "vraag": "Why use these figures?",
-        "antwoord": "The data on the dashboard gives a good overall view of the situation regarding coronavirus in the Netherlands. Some of the figures are about the virus and new outbreaks. Other figures help administrators to better calculate the risk of new waves of infection."
-      },
-      {
-        "vraag": "Why is the dashboard still being developed?",
-        "antwoord": "The dashboard will remain under development as long as coronavirus is still with us, because we are always looking to see if we can add better data. Moreover, it takes time to set up the dashboard properly. So we’re expanding it step by step. We also want the information on this website to be easy to read on any device, and to be available in Dutch and in English. "
-      },
-      {
-        "vraag": "What is an alert value?",
-        "antwoord": "An alert value is a kind of ‘alarm bell’, determined by the Ministry of VWS. These alarm bells can go off if a large number of people test positive, fall ill or are admitted to hospital at the same time. It’s been calculated that the healthcare sector would soon be unable to cope if daily hospital admissions for COVID-19 exceed 40 per day for an extended period of time. "
-      },
-      {
-        "vraag": "What can I use the figures about my municipality or region for?",
-        "antwoord": "Het coronavirus verspreidt zich niet overal even snel. Soms vlamt het virus in bepaalde regio op, terwijl in een andere regio het aantal besmettingen beperkt blijft. Als we die informatie goed in beeld hebben, kunnen we het virus gericht en snel bestrijden daar waar het opleeft. Daarom worden de cijfers op het dashboard ook per gemeente of regio’s weergegeven. Dit helpt ook burgemeesters om lokale of regionale maatregelen te nemen."
-      },
-      {
-        "vraag": "Is this one of the apps that was announced?",
-        "antwoord": "Nee, dit is geen app. De app voor anonieme contactopsporing wordt ontwikkeld om te weten of je misschien contact hebt gehad met iemand die besmet is met het coronavirus en om je een advies te geven als dat zo is. De app voor thuisrapportage ondersteunt de GGD door op afstand contact te houden met mensen met een (verdenking van) besmetting."
-      },
-      {
-        "vraag": "Does the dashboard respect my privacy?",
-        "antwoord": "Yes, the dashboard complies with privacy rules, so the data can’t be traced back to individuals. All the data is provided by the National Institute for Public Health and the Environment (RIVM), municipal health services (GGDs) and hospitals, and is accessible to everyone. The dashboard lists its data sources. "
-      },
-      {
-        "vraag": "What conclusions can I draw based on the information on this dashboard?",
-        "antwoord": "Het dashboard geeft inzicht in de ontwikkeling van het coronavirus in de verschillende regio’s. De informatie in het dashboard wordt door  gemeenten, regio’s en het Rijk  gebruikt om te bepalen welke maatregelen nodig zijn om het virus in te dammen. "
-      },
-      {
-        "vraag": "I can see that coronavirus is under control in my region. So why do the same measures apply here as in other regions?",
-        "antwoord": "The situation varies widely, and some regions have been worse affected than others. But the virus can easily spread across the country and that’s why many measures apply nationwide. Sometimes, extra measures are taken in a specific region if there are many extra cases there. These are largely based on input from experts, and consultations with the GGDs and safety regions. "
-      },
-      {
-        "vraag": "I’ve found a technical vulnerability in the website. Where can I report this?",
-        "antwoord": "We work together with the National Cyber Security Centre (NCSC). Please notify them of the vulnerability as soon as possible using their [form](https://www.ncsc.nl/contact/kwetsbaarheid-melden/cvd-meldingen-formulier) before making the issue publicly known. We will deal with your notification and resolve it as quickly as possible together with the NCSC."
-      },
-      {
-        "vraag": "Who can I contact with questions about coronavirus and COVID-19?",
-        "antwoord": "Please call the public information number 0800-1351 from within the Netherlands (open between 8.00 and 20.00). From outside the Netherlands, call +31 20 205 1351."
-      },
-      {
-        "vraag": "Why do I find a different value for the total number of confirmed cases (people who tested positive) as shown on the site, if I add all the reported confirmed cases per safety region? ",
-        "antwoord": "We calculate the increase in the number of confirmed cases (people who tested positive) by deducting the current day’s cumulative number of confirmed cases reported from the cumulative number reported the day before. Any corrections to historical data, such as double counting, are processed by the RIVM on the day the error was discovered. This means the number of new cases reported for that day is lower than the actual number, but this is offset by the numbers being too high on previous days. Because of such corrections, it is possible for the current day’s cumulative number to be lower than the number for the day before. This is then depicted as 0 (zero) on the dashboard, as a negative number is confusing. This is why discrepancies arise when regional data is aggregated into national data. If you would use the negative values of the safety regions to calculate the daily number of confirmed cases, you would find the correct values."
-      }
-    ],
     "titel": "Frequently asked questions",
     "paragraaf": ""
   },
