@@ -1117,7 +1117,7 @@
     "totaal_getest_week_uitleg": "Het gemiddelde aantal testen per dag, waarvan de uitslag bekend is. Dit is het gemiddelde over zeven dagen.",
     "positief_getest_week_titel": "Positief geteste personen",
     "positief_getest_week_uitleg": "Percentage positieve testen in de GGD-teststraten, waarvan de uitslag bekend is. Dit is het gemiddelde over zeven dagen. Voor het berekenen van het percentage worden alleen tests meegeteld waarvan de testuitslag bekend is.",
-    "positief_getest_getest_week_uitleg": "Dit zijn {{numerator}} van {{denominator}} geteste personen",
+    "positief_getest_getest_week_uitleg": "Dit zijn {{numerator}} van {{denominator}} tests met een bekende uitslag.",
     "linechart_percentage_titel": "Percentage positieve testen over tijd",
     "linechart_percentage_toelichting": "Deze grafiek toont het percentage GGD testen die een positieve uitslag hebben, ten opzichte van alle GGD testen waarvan de uitslag bekend is. De gegevens zijn gesorteerd op de datum waarop de test bij de GGD heeft plaatsgevonden. Het duurt gemiddeld één tot twee dagen voordat testuitslagen bekend zijn.",
     "linechart_totaltests_titel": "Aantal testen over tijd",
