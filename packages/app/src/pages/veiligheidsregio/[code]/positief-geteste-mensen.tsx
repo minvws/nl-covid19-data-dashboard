@@ -77,24 +77,6 @@ const PositivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
 
         <TwoKpiSection>
           <KpiTile
-            title={text.barscale_titel}
-            metadata={{
-              date: lastValue.date_unix,
-              source: text.bronnen.rivm,
-            }}
-          >
-            <PageBarScale
-              data={data}
-              scope="vr"
-              metricName="tested_overall"
-              metricProperty="infected_per_100k"
-              localeTextKey="veiligheidsregio_positief_geteste_personen"
-              differenceKey="tested_overall__infected_per_100k"
-            />
-            <Text>{text.barscale_toelichting}</Text>
-          </KpiTile>
-
-          <KpiTile
             title={text.kpi_titel}
             metadata={{
               date: lastValue.date_unix,
@@ -132,6 +114,24 @@ const PositivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
                 <Anchor name="ggd" text={ggdText.summary_link_cta} />
               </Text>
             </Box>
+          </KpiTile>
+
+          <KpiTile
+            title={text.barscale_titel}
+            metadata={{
+              date: lastValue.date_unix,
+              source: text.bronnen.rivm,
+            }}
+          >
+            <PageBarScale
+              data={data}
+              scope="vr"
+              metricName="tested_overall"
+              metricProperty="infected_per_100k"
+              localeTextKey="veiligheidsregio_positief_geteste_personen"
+              differenceKey="tested_overall__infected_per_100k"
+            />
+            <Text>{text.barscale_toelichting}</Text>
           </KpiTile>
         </TwoKpiSection>
 

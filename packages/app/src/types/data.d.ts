@@ -96,7 +96,7 @@ export interface MunicipalitiesTestedOverall {
   date_unix: number;
   gmcode: string;
   infected_per_100k: number;
-  infected?: number;
+  infected: number;
   date_of_insertion_unix: number;
 }
 
@@ -692,7 +692,7 @@ export interface RegionsTestedOverall {
   date_unix: number;
   vrcode: string;
   infected_per_100k: number;
-  infected?: number;
+  infected: number;
   date_of_insertion_unix: number;
 }
 export interface EscalationLevels {
