@@ -555,64 +555,6 @@
   },
   "over_veelgestelde_vragen": {
     "text": "Veelgestelde vragen",
-    "vragen": [
-      {
-        "vraag": "Wat doet dit dashboard?",
-        "antwoord": "Het dashboard laat actuele cijfers zien over het coronavirus in Nederland. Die informatie komt van het RIVM, de GGD’en en de ziekenhuizen. Op het dashboard is bijvoorbeeld te zien hoeveel mensen getest zijn op corona en hoeveel daarvan besmet zijn. "
-      },
-      {
-        "vraag": "Waarom een dashboard?",
-        "antwoord": "Door het coronavirus zijn in de afgelopen maanden veel mensen ziek geworden en overleden. Totdat we een goed vaccin hebben, kan het virus makkelijk weer grote groepen mensen ziek maken. Met het dashboard is te zien of en waar het virus weer opleeft. Zo kunnen we nieuwe uitbraken van het virus sneller en preciezer bestrijden. Bijvoorbeeld met maatregelen voor regio’s waar het virus de kop opsteekt. Maatregelen vragen altijd om integrale politieke weging. Bij het nemen van maatregelen wordt dus ook gekeken naar maatschappelijke en economische belangen. "
-      },
-      {
-        "vraag": "Van wie is dit dashboard?",
-        "antwoord": "Dit dashboard is ontwikkeld in opdracht van het ministerie van Volksgezondheid, Welzijn en Sport. De komende weken komen er meer gegevens bij."
-      },
-      {
-        "vraag": "Waarom deze cijfers?",
-        "antwoord": "De cijfers op dit dashboard geven samen een goed overzicht. Sommige cijfers zeggen iets over het virus en nieuwe uitbraken. Andere cijfers helpen bestuurders om de kans op nieuwe oplevingen beter in te schatten."
-      },
-      {
-        "vraag": "Waarom is het dashboard nog in ontwikkeling?",
-        "antwoord": "Het dashboard is continu in ontwikkeling (zolang het virus nog “onder ons” is), omdat we voortdurend kijken of we betere data kunnen toevoegen. Daarbij kost het tijd om zo’n dashboard goed te bouwen. Daarom wordt het dashboard  stap voor stap uitgebreid. Ook willen we dat de informatie op deze website goed te lezen is op iedere computer of telefoon, in het Nederlands en in het Engels."
-      },
-      {
-        "vraag": "Wat is een signaalwaarde?",
-        "antwoord": "Een signaalwaarde is een soort `alarmbel’ die door het ministerie van VWS wordt vastgesteld. Die alarmbellen kunnen afgaan als er veel mensen tegelijkertijd ziek worden, in het ziekenhuis worden opgenomen, of positief getest worden. Zo is berekend dat als er langdurig meer dan 40 mensen per dag in het ziekenhuis worden opgenomen, de zorg al snel overbelast kan raken."
-      },
-      {
-        "vraag": "Wat kan ik met cijfers over mijn gemeente of regio?",
-        "antwoord": "Het coronavirus verspreidt zich niet overal even snel. Soms vlamt het virus in bepaalde regio op, terwijl in een andere regio het aantal besmettingen beperkt blijft. Als we die informatie goed in beeld hebben, kunnen we het virus gericht en snel bestrijden daar waar het opleeft. Daarom worden de cijfers op het dashboard ook per gemeente of regio’s weergegeven. Dit helpt ook burgemeesters om lokale of regionale maatregelen te nemen."
-      },
-      {
-        "vraag": "Is dit een van de aangekondigde apps?",
-        "antwoord": "Nee, dit is geen app. De app voor anonieme contactopsporing wordt ontwikkeld om te weten of je misschien contact hebt gehad met iemand die besmet is met het coronavirus en om je een advies te geven als dat zo is. De app voor thuisrapportage ondersteunt de GGD door op afstand contact te houden met mensen met een (verdenking van) besmetting."
-      },
-      {
-        "vraag": "Houden jullie rekening met mijn privacy in dit dashboard?",
-        "antwoord": "Ja, het dashboard voldoet aan de privacyrichtlijnen. Je kunt dus niet zien bij wie welke gegevens horen. De gegevens zijn niet herleidbaar tot personen. Alle data van het dashboard zijn voor iedereen toegankelijk en zijn verkrijgbaar bij het RIVM, de GGD’en en de ziekenhuizen. Het dashboard verwijst naar die databronnen."
-      },
-      {
-        "vraag": "Welke conclusies kan ik uit dit dashboard trekken?",
-        "antwoord": "Het dashboard geeft inzicht in de ontwikkeling van het coronavirus in de verschillende regio’s. De informatie in het dashboard wordt door  gemeenten, regio’s en het Rijk  gebruikt om te bepalen welke maatregelen nodig zijn om het virus in te dammen. "
-      },
-      {
-        "vraag": "Ik zie dat het goed gaat in mijn regio. Waarom gelden in mijn regio dezelfde maatregelen als in andere regio’s?",
-        "antwoord": "Er bestaan grote verschillen tussen regio’s. In de ene regio heeft het virus tot nu toe veel harder toegeslagen dan in de andere. Toch kan het virus overal in het land makkelijk om zich heen grijpen. Veel maatregelen gelden daarom in het hele land. Soms gelden extra maatregelen in een bepaalde regio. Dat gebeurt als daar veel extra besmettingen worden vastgesteld. Dus: duiding van experts en gesprekken met GGD en veiligheidsregio’s bepalen in grote mate de maatregelen die worden genomen."
-      },
-      {
-        "vraag": "Ik zie een technisch zwakke plek op de website. Waar kan ik dit melden?",
-        "antwoord": "Wij werken samen met het Nationaal Cyber Security Centrum (NCSC). Stel het NCSC zo snel mogelijk op de hoogte via het [formulier](https://www.ncsc.nl/contact/kwetsbaarheid-melden/cvd-meldingen-formulier) voordat u dit aan de buitenwereld kenbaar maakt. In samenwerking met het NCSC nemen we de bevinding in behandeling en lossen dit zo snel mogelijk op."
-      },
-      {
-        "vraag": "Waar kan ik terecht met vragen over het coronavirus?",
-        "antwoord": "U kunt terecht bij het publieksinformatienummer 0800 - 1351 (tussen 08:00 en 20:00 uur). Vanuit het buitenland is het nummer te bereiken door te bellen naar +31 20 205 1351."
-      },
-      {
-        "vraag": "Hoe komt het dat als ik het aantal positief geteste mensen per regio bij elkaar optel, er een ander getal uitkomt dan het landelijke cijfer?",
-        "antwoord": "We berekenen de toename van het aantal positief geteste mensen door het gerapporteerde cumulatief aantal meldingen van positief geteste mensen van vandaag, af te trekken van het cumulatief aantal van gisteren. Correcties over oude data, zoals dubbeltellingen, worden door het RIVM verwerkt op de datum dat dit bekend is. Het gerapporteerde nieuwe aantal meldingen voor die dag ligt dan lager dan het feitelijk aantal die dag. Daar staat tegenover dat voorgaande dagen er dus teveel gevallen zijn gerapporteerd. Door correctie kan het cumulatieve aantal van vandaag lager zijn dan het cumulatieve aantal van gisteren. In die gevallen wordt er op het dashboard de waarde 0 gepresenteerd in plaats van een negatief waarde; een negatieve waarde is namelijk verwarrend. Daarom krijg je uiteindelijk verschillen als je regio's optelt naar landelijk. Als je de negatieve waarden zou meerekenen kom je wel op de juiste getallen uit."
-      }
-    ],
     "titel": "Veelgestelde vragen",
     "paragraaf": ""
   },
