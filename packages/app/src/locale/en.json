@@ -631,7 +631,7 @@
       },
       {
         "cijfer": "Municipal mergers",
-        "verantwoording": "On 1 January 2021 several new municipalities were formed by merging existing municipalities. (Click [here]((https://www.rijksoverheid.nl/onderwerpen/gemeenten/gemeentelijke-herindeling) for policy documents concerning municipal mergers (in Dutch).) From 7 January the National Institute for Public Health and the Environment (RIVM) will process the data it provides for the coronavirus dashboard in accordance with this municipal boundary reform. The information on the dashboard will be adjusted accordingly."
+        "verantwoording": "On 1 January 2021 several new municipalities were formed by merging existing municipalities. (Click [here](https://www.rijksoverheid.nl/onderwerpen/gemeenten/gemeentelijke-herindeling) for policy documents concerning municipal mergers (in Dutch).) From 7 January the National Institute for Public Health and the Environment (RIVM) will process the data it provides for the coronavirus dashboard in accordance with this municipal boundary reform. The information on the dashboard will be adjusted accordingly.\n\nOn January 7, the municipal maps on the dashboard were changed. As a result, the borders of the security regions Midden- en West-Brabant and Brabant-Noord have also changed. The latter is not yet visible on the map. The map will be updated as soon as possible."
       },
       {
         "cijfer": "",
@@ -824,7 +824,13 @@
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -1397,12 +1403,12 @@
         "support": ""
       },
       "voetnoot": {
-        "compliance": "This table shows the percentage of survey respondents who reported following each of the basic rules in their daily life.\n* Any difference compared to the previous measurement can be shown with 95% certainty. ",
-        "support": "This table shows the percentage of survey respondents who reported supporting each of the basic rules.\n* Any difference compared to the previous measurement can be shown with 95% certainty. "
+        "compliance": "This table shows the percentage of survey respondents who reported following each of the basic rules in their daily life.",
+        "support": "This table shows the percentage of survey respondents who reported following each of the basic rules in their daily life."
       },
       "voetnoot_asterisk": {
-        "compliance": "",
-        "support": ""
+        "compliance": "* Any difference compared to the previous measurement can be shown with 95% certainty.",
+        "support": "* Any difference compared to the previous measurement can be shown with 95% certainty."
       }
     },
     "basisregels_over_tijd": {
@@ -1466,8 +1472,8 @@
         "support": "This table shows the percentage of survey respondents who reported supporting each of the basic rules.\n* Any difference compared to the previous measurement can be shown with 95% certainty. "
       },
       "voetnoot_asterisk": {
-        "compliance": "",
-        "support": ""
+        "compliance": "* Any difference compared to the previous measurement can be shown with 95% certainty.",
+        "support": "* Any difference compared to the previous measurement can be shown with 95% certainty."
       }
     },
     "basisregels_over_tijd": {
@@ -1513,7 +1519,6 @@
   "infected_age_groups": {
     "title": "Distribution by age",
     "description": "The blue (right) bars in this graph show which age group positive tested persons belong to. The gray (left) bars show how large each age group is in relation to the entire Dutch population. The blue and gray bars together show whether age groups have relatively more or less positive tested persons. For example: 10% of all positive tested persons are in their thirties (blue bar) and 14% of all Dutch people are in their thirties (gray bar). In this example, the age group thirties has relatively fewer positive tested people. The chart is updated daily and covers only the most recently reported cases.",
-    "example": "For example: of all positive tested people is {{infectedPercentage}} between {{ageGroupRange}} years old. Of all Dutch people is {{ageGroupPercentage}} between {{ageGroupRange}} years old. ",
     "graph": {
       "age_group_percentage_title": "Distribution of age groups in the Netherlands",
       "age_group_percentage_tooltip": "of the population is {{ageGroupRange}} years old.",
@@ -1521,7 +1526,8 @@
       "infected_percentage_tooltip": "of the total amount of positive tested persons is {{ageGroupRange}} years old. ",
       "age_group_range_tooltip": "{{ageGroupRange}} years old. ",
       "accessibility_description": "Graph with percentages for the distribution of the population and the distribution of positive tested age groups."
-    }
+    },
+    "example": "For example: of all positive tested people is {{infectedPercentage}} between {{ageGroupRange}} years old. Of all Dutch people is {{ageGroupPercentage}} between {{ageGroupRange}} years old. "
   },
   "gehandicaptenzorg_besmette_locaties": {
     "datums": "Latest values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
