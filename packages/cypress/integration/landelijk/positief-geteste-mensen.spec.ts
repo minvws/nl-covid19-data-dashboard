@@ -24,14 +24,16 @@ context('Landelijk - Positief geteste mensen', () => {
     cy.checkKpiValues(kpiTestInfo);
   });
 
-  xit('Should navigate to the appropriate municipality page after clicking on the choropleth', function (this: NationalContext) {
-    const testMunicipalCode = 'GM0003';
+  it('Should navigate to the appropriate municipality page after clicking on the choropleth', function (this: NationalContext) {
+    const testMunicipalCode = 'GM1970';
+
+    cy.wait(1000);
 
     const aPath = cy.get(
-      `[data-cy=choropleths] [data-cy=choropleth-hovers] path[data-id=${testMunicipalCode}]`
+      `[data-cy=choropleths] path[data-id=${testMunicipalCode}]`
     );
 
-    aPath.click().then(() => {
+    aPath.click({ force: true }).then(() => {
       cy.location().should((loc) => {
         expect(loc.pathname).to.eq(
           `/gemeente/${testMunicipalCode}/positief-geteste-mensen`

@@ -2,6 +2,7 @@ import css from '@styled-system/css';
 import { Feature, MultiPolygon } from 'geojson';
 import { ReactNode, useCallback } from 'react';
 import { AspectRatio } from '~/components-styled/aspect-ratio';
+import { DataProps } from '~/types/attributes';
 import { Choropleth } from './choropleth';
 import {
   useChartDimensions,
@@ -13,7 +14,7 @@ import {
 import { getDataThresholds } from './legenda/utils';
 import { municipalThresholds } from './municipal-thresholds';
 import { Path } from './path';
-import { MunicipalityProperties, MunicipalitiesMetricName } from './shared';
+import { MunicipalitiesMetricName, MunicipalityProperties } from './shared';
 import { countryGeo, municipalGeo, regionGeo } from './topology';
 
 type MunicipalityChoroplethProps<T> = {
@@ -23,7 +24,7 @@ type MunicipalityChoroplethProps<T> = {
   highlightSelection?: boolean;
   onSelect?: (context: MunicipalityProperties) => void;
   tooltipContent?: (context: MunicipalityProperties & T) => ReactNode;
-};
+} & DataProps;
 
 /**
  * This component renders a map of the Netherlands with the outlines of all the municipalities which
@@ -88,7 +89,6 @@ export function MunicipalityChoropleth<T>(
       return (
         <Path
           key={gemcode}
-          id={gemcode}
           d={path}
           fill={hasData && fill ? fill : '#fff'}
           stroke={

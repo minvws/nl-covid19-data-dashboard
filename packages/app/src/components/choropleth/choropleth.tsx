@@ -143,6 +143,7 @@ const ChoroplethMap: <T1, T3>(
           isTouch ? undefined : createSvgMouseOutHandler(timeout, setTooltip)
         }
         onClick={createSvgClickHandler(onPathClick, setTooltip, isTouch)}
+        data-cy="choropleth-map"
       >
         <clipPath id={clipPathId.current}>
           <rect
@@ -214,7 +215,7 @@ function MercatorGroup<G extends Geometry, P>(props: MercatorGroupProps<G, P>) {
   return (
     <Mercator data={data} fitSize={fitSize}>
       {({ features }) => (
-        <g data-cy="choropleth-features">
+        <g>
           {features.map(
             ({ feature, path, index }) => path && render(feature, path, index)
           )}

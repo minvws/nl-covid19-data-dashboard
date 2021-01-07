@@ -164,7 +164,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
         </TwoKpiSection>
 
         <ChoroplethTile
-          data-cy="chloropleths"
+          data-cy="choropleths"
           title={text.map_titel}
           metadata={{
             date: dataInfectedDelta.last_value.date_unix,
