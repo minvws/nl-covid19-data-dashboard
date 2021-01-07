@@ -25,14 +25,15 @@ interface DifferenceIndicatorProps {
   value: DifferenceDecimal | DifferenceInteger;
   isContextSidebar?: boolean;
   isDecimal?: boolean;
+  staticTimespan?: string;
 }
 
 export function DifferenceIndicator(props: DifferenceIndicatorProps) {
-  const { isContextSidebar, value, isDecimal } = props;
+  const { isContextSidebar, value, isDecimal, staticTimespan } = props;
 
   return isContextSidebar
     ? renderSidebarIndicator(value)
-    : renderTileIndicator(value, isDecimal);
+    : renderTileIndicator(value, isDecimal, staticTimespan);
 }
 
 function renderSidebarIndicator(value: DifferenceDecimal | DifferenceInteger) {
@@ -69,13 +70,18 @@ function renderSidebarIndicator(value: DifferenceDecimal | DifferenceInteger) {
 
 function renderTileIndicator(
   value: DifferenceDecimal | DifferenceInteger,
-  isDecimal?: boolean
+  isDecimal?: boolean,
+  staticTimespan?: string
 ) {
   const { difference, old_date_unix } = value;
 
   const differenceFormattedString = isDecimal
     ? formatPercentage(Math.abs(difference))
     : formatNumber(Math.abs(difference));
+
+  const timespanTextNode = staticTimespan ?? (
+    <TimespanText date={old_date_unix} />
+  );
 
   if (difference > 0) {
     const splitText = text.toename.split(' ');
@@ -88,8 +94,9 @@ function renderTileIndicator(
         <Span fontWeight="bold" mr="0.3em">
           {differenceFormattedString} {splitText[0]}
         </Span>
+
         <Span color="annotation">
-          {splitText[1]} <TimespanText date={old_date_unix} />
+          {splitText[1]} {timespanTextNode}
         </Span>
       </Container>
     );
@@ -107,7 +114,7 @@ function renderTileIndicator(
           {differenceFormattedString} {splitText[0]}
         </Span>
         <Span>
-          {splitText[1]} <TimespanText date={old_date_unix} />
+          {splitText[1]} {timespanTextNode}
         </Span>
       </Container>
     );
@@ -119,7 +126,7 @@ function renderTileIndicator(
         <IconGelijk />
       </IconContainer>
       <Span>
-        {text.gelijk} <TimespanText date={old_date_unix} />
+        {text.gelijk} {timespanTextNode}
       </Span>
     </Container>
   );
