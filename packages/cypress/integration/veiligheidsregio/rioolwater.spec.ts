@@ -1,4 +1,4 @@
-import { RegionalContext } from 'cypress/integration/types';
+import { RegionalContext } from '@/integration/types';
 import { formatNumber } from '~/utils/formatNumber';
 
 context('Regionaal - Rioolwater', () => {

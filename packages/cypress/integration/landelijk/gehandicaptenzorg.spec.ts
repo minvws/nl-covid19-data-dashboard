@@ -1,4 +1,4 @@
-import { NationalContext } from 'cypress/integration/types';
+import { NationalContext } from '@/integration/types';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 
 context('Landelijk - Gehandicaptenzorg', () => {

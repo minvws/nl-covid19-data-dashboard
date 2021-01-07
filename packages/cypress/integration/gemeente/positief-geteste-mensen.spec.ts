@@ -1,4 +1,4 @@
-import { MunicipalContext } from 'cypress/integration/types';
+import { MunicipalContext } from '@/integration/types';
 import { formatNumber } from '~/utils/formatNumber';
 
 context('Gemeente - Positief geteste mensen', () => {

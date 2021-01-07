@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
-    "baseUrl": "../app",
+    "baseUrl": ".",
     "paths": {
-      "~/*": ["src/*"]
+      "~/*": ["../app/src/*"],
+      "@/*": ["/*"]
     },
     "target": "es5",
     "lib": ["dom", "esnext"],
