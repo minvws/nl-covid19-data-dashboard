@@ -12,7 +12,7 @@ import {
 } from './hooks';
 import { getDataThresholds } from './legenda/utils';
 import { Path } from './path';
-import { SafetyRegionProperties, RegionsMetricName } from './shared';
+import { RegionsMetricName, SafetyRegionProperties } from './shared';
 import { countryGeo, regionGeo } from './topology';
 
 type SafetyRegionChoroplethProps<T> = {
@@ -86,7 +86,6 @@ export function SafetyRegionChoropleth<T>(
       return (
         <Path
           key={vrcode}
-          id={vrcode}
           d={path}
           fill={fill}
           stroke={isWhiteFill ? '#c4c4c4' : '#fff'}
