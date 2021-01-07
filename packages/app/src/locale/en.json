@@ -717,7 +717,7 @@
     },
     "tooltip": {
       "positive_tested_people": "{{totalPositiveTestedPeople}} in total",
-      "positive_tested_value": ""
+      "positive_tested_value": "{{totalPositiveValue}} per 100.000"
     },
     "niveau": "level",
     "clear_select_input": "Empty"
