@@ -40,7 +40,11 @@ const MunicipalityActueel: FCWithLayout<ActueelData> = (data) => {
                 __html: text.risiconiveaus.selecteer_toelichting,
               }}
             />
-            <EscalationMapLegenda text={data.text} />
+            <EscalationMapLegenda
+              text={text}
+              metricName="escalation_levels"
+              metricProperty="escalation_level"
+            />
           </>
         }
       >
@@ -58,16 +62,16 @@ const MunicipalityActueel: FCWithLayout<ActueelData> = (data) => {
           { href: '/landelijk', text: text.quick_links.links.nationaal },
           safetyRegionForMunicipality
             ? {
-              href: `/veiligheidsregio/${safetyRegionForMunicipality.code}/positief-geteste-mensen`,
-              text: replaceVariablesInText(
-                text.quick_links.links.veiligheidsregio,
-                { safetyRegionName: safetyRegionForMunicipality.name }
-              ),
-            }
+                href: `/veiligheidsregio/${safetyRegionForMunicipality.code}/positief-geteste-mensen`,
+                text: replaceVariablesInText(
+                  text.quick_links.links.veiligheidsregio,
+                  { safetyRegionName: safetyRegionForMunicipality.name }
+                ),
+              }
             : {
-              href: '/veiligheidsregio',
-              text: text.quick_links.links.veiligheidsregio_fallback,
-            },
+                href: '/veiligheidsregio',
+                text: text.quick_links.links.veiligheidsregio_fallback,
+              },
           {
             href: '/gemeentes',
             text: replaceVariablesInText(text.quick_links.links.gemeente, {

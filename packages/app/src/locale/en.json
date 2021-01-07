@@ -1159,7 +1159,9 @@
       }
     },
     "legenda": {
-      "titel": "Legend"
+      "titel": "Legend",
+      "geen_regio": "geen regio's",
+      "regios": "{{amount}} regio's"  
     },
     "valid_from": "Valid from {{validFrom}}",
     "sidebar_label": "Level of risk:"

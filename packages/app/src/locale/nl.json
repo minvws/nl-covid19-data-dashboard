@@ -1159,7 +1159,9 @@
       }
     },
     "legenda": {
-      "titel": "Legenda"
+      "titel": "Legenda",
+      "geen_regio": "geen regio's",
+      "regios": "{{amount}} regio's"  
     },
     "valid_from": "Geldig vanaf {{validFrom}}",
     "sidebar_label": "Risiconiveau:"

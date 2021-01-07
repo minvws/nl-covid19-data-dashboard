@@ -104,7 +104,11 @@ const LatestDevelopments: FCWithLayout<ILatestDevelopmentsData> = (props) => {
                 __html: text.veiligheidsregio_index.selecteer_toelichting,
               }}
             />
-            <EscalationMapLegenda text={text} />
+            <EscalationMapLegenda
+              metricName="escalation_levels"
+              metricProperty="escalation_level"
+              text={text}
+            />
           </>
         }
       >

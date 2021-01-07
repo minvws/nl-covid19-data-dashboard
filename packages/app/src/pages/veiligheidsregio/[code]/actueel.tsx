@@ -35,7 +35,11 @@ const SafetyRegionActueel: FCWithLayout<ActueelData> = (data) => {
                 __html: text.risiconiveaus.selecteer_toelichting,
               }}
             />
-            <EscalationMapLegenda text={data.text} />
+            <EscalationMapLegenda
+              metricName="escalation_levels"
+              metricProperty="escalation_level"
+              text={data.text}
+            />
           </>
         }
       >

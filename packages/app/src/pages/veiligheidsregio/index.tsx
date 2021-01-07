@@ -1,6 +1,6 @@
-import css from '@styled-system/css';
 import fs from 'fs';
 import { useRouter } from 'next/router';
+import { useMemo } from 'react';
 import path from 'path';
 import { Box } from '~/components-styled/base';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
@@ -11,6 +11,12 @@ import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
+import {
+  useChoroplethColorScale,
+  useSafetyRegionData,
+} from '~/components/choropleth/hooks';
+import { getDataThresholds } from '~/components/choropleth/legenda/utils';
+import { regionGeo } from '~/components/choropleth/topology';
 import styles from '~/components/choropleth/tooltips/tooltip.module.scss';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { SafetyRegionComboBox } from '~/domain/layout/components/safety-region-combo-box';
@@ -19,36 +25,110 @@ import { SEOHead } from '~/components/seoHead';
 import { TALLLanguages } from '~/locale/index';
 import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
 import { useBreakpoints } from '~/utils/useBreakpoints';
+import { RegionsMetricName } from '~/components/choropleth/shared';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const escalationThresholds =
   regionThresholds.escalation_levels.escalation_level;
 
 interface EscalationMapLegendaProps {
   text: TALLLanguages;
+  metricName: RegionsMetricName;
+  metricProperty: string;
+}
+interface EscalationBarLegendaProps {
+  info: {
+    amount: number;
+    color: string;
+    threshold: number;
+  };
+  text: any;
+  totalItems: number;
 }
 
 export const EscalationMapLegenda = (props: EscalationMapLegendaProps) => {
-  const { text } = props;
+  const { text, metricName, metricProperty } = props;
+
+  const { getChoroplethValue, hasData } = useSafetyRegionData(
+    regionGeo,
+    metricName,
+    metricProperty
+  );
+
+  const selectedThreshold = getDataThresholds(
+    regionThresholds,
+    metricName,
+    metricProperty
+  );
+
+  const getFillColor = useChoroplethColorScale(
+    getChoroplethValue,
+    selectedThreshold
+  );
+
+  const totalItems = regionGeo.features.length;
+
+  const sortedEscalationArray = useMemo(() => {
+    if (!hasData) return [];
+
+    // Add an amount key to the escalation object to count the amount of items
+    const sortedEscalationArray = escalationThresholds.map((item) => ({
+      ...item,
+      amount: regionGeo.features.filter(
+        (i) => item.color === getFillColor(i.properties.vrcode)
+      ).length,
+    }));
+
+    return sortedEscalationArray;
+  }, [getFillColor, hasData]);
 
   return (
     <div className={styles.legenda} aria-label="legend">
-      <h3 css={css({ maxWidth: '20em' })}>
-        {text.escalatie_niveau.legenda.titel}
-      </h3>
-      {escalationThresholds.map((info) => (
+      <h3>{text.escalatie_niveau.legenda.titel}</h3>
+      {sortedEscalationArray.map((info) => (
         <div
           className={styles.escalationInfoLegenda}
           key={`legenda-item-${info?.threshold}`}
         >
-          <div className={styles.bubbleLegenda}>
-            <EscalationLevelIcon level={info.threshold} />
-          </div>
-          <div className={styles.escalationTextLegenda}>
-            {text.escalatie_niveau.types[info.threshold].titel}
-          </div>
+          <Box display="flex" alignItems="center" width="10rem">
+            <div className={styles.bubbleLegenda}>
+              <EscalationLevelIcon level={info.threshold} />
+            </div>
+            <Box alignItems={'center'}>
+              {text.escalatie_niveau.types[info.threshold].titel}
+            </Box>
+          </Box>
+
+          <EscalationBarLegenda
+            info={info}
+            totalItems={totalItems}
+            text={text.escalatie_niveau.legenda}
+          />
         </div>
       ))}
     </div>
+  );
+};
+
+const EscalationBarLegenda = (props: EscalationBarLegendaProps) => {
+  const { info, totalItems, text } = props;
+
+  const barWidth = info.amount / totalItems;
+
+  return (
+    <Box flexGrow={1} paddingY={1} display="flex">
+      <Box
+        flexGrow={barWidth}
+        backgroundColor={info.color}
+        height={'100%'}
+        paddingRight={1}
+      />
+      <Box paddingLeft={2}>
+        {info.amount
+          ? replaceVariablesInText(text.regios, { amount: info.amount })
+          : text.geen_regio}
+      </Box>
+    </Box>
   );
 };
 
@@ -92,7 +172,11 @@ const SafetyRegion: FCWithLayout<any> = (props) => {
                   __html: text.veiligheidsregio_index.selecteer_toelichting,
                 }}
               />
-              <EscalationMapLegenda text={text} />
+              <EscalationMapLegenda
+                text={text}
+                metricName="escalation_levels"
+                metricProperty="escalation_level"
+              />
             </>
           }
         >
