@@ -1,0 +1,24 @@
+{
+  "name": "@corona-dashboard/cli",
+  "private": true,
+  "version": "1.0.0",
+  "dependencies": {
+    "meow": "^8.0.0",
+    "ts-node": "^9.1.1"
+  },
+  "scripts": {
+    "build": "echo 'No build available because @corona-dashboard/cli is not meant for direct consumption'",
+    "test": "echo 'No tests available for @corona-dashboard/cli'",
+    "test:ci": "echo 'No tests available for @corona-dashboard/cli'",
+    "format": "prettier --write src/**/*.{js,ts,tsx} *.{js,json,md,yml}",
+    "lint": "echo 'No linter configured for @corona-dashboard/cli'",
+    "type-check": "echo 'No type-check configured for @corona-dashboard/cli'",
+    "compile": "echo 'No compiler configured for @corona-dashboard/cli'",
+    "validate-json": "ts-node src/validator/validate-all.ts",
+    "validate-single": "ts-node src/validator/validate-single.ts",
+    "generate-typescript": "ts-node src/generate-typescript.ts"
+  },
+  "devDependencies": {
+    "@types/meow": "^5.0.0"
+  }
+}

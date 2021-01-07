@@ -1,4 +1,3 @@
 node_modules
-build
-.dockerignore
-Dockerfile
+.github
+packages/app/node_modules

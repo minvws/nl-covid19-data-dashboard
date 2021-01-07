@@ -1,0 +1,85 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "regionaal",
+  "required": [
+    "last_generated",
+    "proto_name",
+    "name",
+    "code",
+    "tested_overall",
+    "hospital_nice",
+    "tested_ggd_daily",
+    "tested_ggd_average",
+    "nursing_home",
+    "sewer",
+    "sewer_per_installation",
+    "restrictions",
+    "difference",
+    "deceased_rivm",
+    "deceased_cbs",
+    "elderly_at_home",
+    "disability_care",
+    "behavior"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "last_generated": {
+      "type": "string"
+    },
+    "proto_name": {
+      "type": "string",
+      "pattern": "^VR[0-9]+$"
+    },
+    "name": {
+      "type": "string",
+      "const": { "$data": "1/proto_name" }
+    },
+    "code": {
+      "type": "string",
+      "const": { "$data": "1/proto_name" }
+    },
+    "difference": {
+      "$ref": "__difference.json"
+    },
+    "sewer": {
+      "$ref": "sewer.json"
+    },
+    "sewer_per_installation": {
+      "$ref": "sewer_per_installation.json"
+    },
+    "tested_overall": {
+      "$ref": "tested_overall.json"
+    },
+    "hospital_nice": {
+      "$ref": "hospital_nice.json"
+    },
+    "tested_ggd_daily": {
+      "$ref": "tested_ggd_daily.json"
+    },
+    "tested_ggd_average": {
+      "$ref": "tested_ggd_average.json"
+    },
+    "nursing_home": {
+      "$ref": "nursing_home.json"
+    },
+    "disability_care": {
+      "$ref": "disability_care.json"
+    },
+    "restrictions": {
+      "$ref": "restrictions.json"
+    },
+    "behavior": {
+      "$ref": "behavior.json"
+    },
+    "deceased_rivm": {
+      "$ref": "deceased_rivm.json"
+    },
+    "deceased_cbs": {
+      "$ref": "deceased_cbs.json"
+    },
+    "elderly_at_home": {
+      "$ref": "elderly_at_home.json"
+    }
+  }
+}

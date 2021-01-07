@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "municipal",
+  "additionalProperties": false,
+  "required": [
+    "last_generated",
+    "proto_name",
+    "name",
+    "code",
+    "tested_overall",
+    "hospital_nice",
+    "difference"
+  ],
+  "properties": {
+    "last_generated": {
+      "type": "string"
+    },
+    "proto_name": {
+      "type": "string",
+      "pattern": "^GM[0-9]+$"
+    },
+    "name": {
+      "type": "string",
+      "const": { "$data": "1/proto_name" }
+    },
+    "code": {
+      "type": "string",
+      "const": { "$data": "1/proto_name" }
+    },
+    "difference": {
+      "$ref": "__difference.json"
+    },
+    "hospital_nice": {
+      "$ref": "hospital_nice.json"
+    },
+    "tested_overall": {
+      "$ref": "tested_overall.json"
+    },
+    "sewer": {
+      "$ref": "sewer.json"
+    },
+    "sewer_per_installation": {
+      "$ref": "sewer_per_installation.json"
+    }
+  }
+}
