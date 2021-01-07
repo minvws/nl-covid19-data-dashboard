@@ -824,7 +824,13 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
+    "barscale_keys": [
+      "0 tot 20",
+      "20 tot 40",
+      "40 tot 60",
+      "60 tot 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -1397,12 +1403,12 @@
         "support": ""
       },
       "voetnoot": {
-        "compliance": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft de gedragsregels te volgen in zijn/haar dagelijks leven \n* De rechter kolom geeft aan of met minstens 95% zekerheid gezegd kan worden dat er een statistisch verantwoord verschil is vergeleken met de vorige meting.",
-        "support": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft achter de gedragsregel te staan.\n* De rechter kolom geeft aan of met minstens 95% zekerheid gezegd kan worden dat er een statistisch verantwoord verschil is vergeleken met de vorige meting."
+        "compliance": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft de gedragsregels te volgen in zijn/haar dagelijks leven.",
+        "support": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft de gedragsregels te volgen in zijn/haar dagelijks leven."
       },
       "voetnoot_asterisk": {
-        "compliance": "",
-        "support": ""
+        "compliance": "* De rechter kolom geeft aan of met minstens 95% zekerheid gezegd kan worden dat er een statistisch verantwoord verschil is vergeleken met de vorige meting.",
+        "support": "* De rechter kolom geeft aan of met minstens 95% zekerheid gezegd kan worden dat er een statistisch verantwoord verschil is vergeleken met de vorige meting."
       }
     },
     "basisregels_over_tijd": {
@@ -1466,8 +1472,8 @@
         "support": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft achter de gedragsregel te staan.\n* De rechter kolom geeft aan of met minstens 95% zekerheid gezegd kan worden dat er een statistisch verantwoord verschil is vergeleken met de vorige meting."
       },
       "voetnoot_asterisk": {
-        "compliance": "",
-        "support": ""
+        "compliance": "* De rechter kolom geeft aan of met minstens 95% zekerheid gezegd kan worden dat er een statistisch verantwoord verschil is vergeleken met de vorige meting.",
+        "support": "* De rechter kolom geeft aan of met minstens 95% zekerheid gezegd kan worden dat er een statistisch verantwoord verschil is vergeleken met de vorige meting."
       }
     },
     "basisregels_over_tijd": {
@@ -1513,7 +1519,6 @@
   "infected_age_groups": {
     "title": "Verdeling naar leeftijd",
     "description": "De blauwe rechterbalken in deze grafiek laten zien tot welke leeftijdsgroep positief geteste personen behoren. De grijze linkerbalken tonen hoe groot elke leeftijdsgroep is ten opzichte van de hele Nederlandse bevolking. De blauwe en grijze balken laten samen zien of leeftijdsgroepen naar verhouding meer of minder positief geteste personen hebben. Bijvoorbeeld: van alle positief geteste personen is 10% een dertiger (blauwe balk) en van alle Nederlanders is 14% een dertiger (grijze balk). De leeftijdsgroep dertigers heeft in dit voorbeeld naar verhouding minder positief geteste personen. De grafiek wordt dagelijks bijgewerkt en gaat alleen over de meest recent gemelde gevallen.",
-    "example": "Bijvoorbeeld: Van alle positief geteste mensen is {{infectedPercentage}} tussen de {{ageGroupRange}} jaar. Van alle Nederlanders is {{ageGroupPercentage}} tussen de {{ageGroupRange}} jaar.",
     "graph": {
       "age_group_percentage_title": "Verdeling leeftijdsgroepen in Nederland",
       "age_group_percentage_tooltip": "van de bevolking is {{ageGroupRange}} jaar",
@@ -1521,7 +1526,8 @@
       "infected_percentage_tooltip": "van het aantal positief geteste mensen is {{ageGroupRange}} jaar",
       "age_group_range_tooltip": "{{ageGroupRange}} jaar",
       "accessibility_description": "Grafiek met percentages voor de verdeling van de bevolking en de verdeling van positief geteste leeftijdsgroepen."
-    }
+    },
+    "example": "Bijvoorbeeld: Van alle positief geteste mensen is {{infectedPercentage}} tussen de {{ageGroupRange}} jaar. Van alle Nederlanders is {{ageGroupPercentage}} tussen de {{ageGroupRange}} jaar."
   },
   "gehandicaptenzorg_besmette_locaties": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
