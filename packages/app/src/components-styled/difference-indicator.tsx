@@ -31,8 +31,6 @@ interface DifferenceIndicatorProps {
 export function DifferenceIndicator(props: DifferenceIndicatorProps) {
   const { isContextSidebar, value, isDecimal, staticTimespan } = props;
 
-  // console.log('+++ staticTimespan', staticTimespan);
-
   return isContextSidebar
     ? renderSidebarIndicator(value)
     : renderTileIndicator(value, isDecimal, staticTimespan);
@@ -81,9 +79,7 @@ function renderTileIndicator(
     ? formatPercentage(Math.abs(difference))
     : formatNumber(Math.abs(difference));
 
-  const timespanTextNode = staticTimespan ? (
-    staticTimespan
-  ) : (
+  const timespanTextNode = staticTimespan ?? (
     <TimespanText date={old_date_unix} />
   );
 
