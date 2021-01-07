@@ -21,6 +21,7 @@
     "start": "yarn workspace @corona-dashboard/app start",
     "validate-json": "yarn workspace @corona-dashboard/cli validate-json",
     "validate-single": "yarn workspace @corona-dashboard/cli validate-single",
+    "cy:open": "yarn workspace @corona-dashboard/cypress cy:open",
     "cy:ci": "yarn workspace @corona-dashboard/cypress cy:ci"
   },
   "workspaces": {
