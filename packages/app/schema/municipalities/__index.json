@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "municipalities",
+  "additionalProperties": false,
+  "required": [
+    "last_generated",
+    "proto_name",
+    "name",
+    "code",
+    "hospital_nice",
+    "tested_overall"
+  ],
+  "properties": {
+    "last_generated": {
+      "type": "string"
+    },
+    "proto_name": {
+      "type": "string",
+      "enum": ["GM_COLLECTION"]
+    },
+    "name": {
+      "type": "string",
+      "const": { "$data": "1/proto_name" }
+    },
+    "code": {
+      "type": "string",
+      "const": { "$data": "1/proto_name" }
+    },
+    "hospital_nice": {
+      "type": "array",
+      "maxItems": 355,
+      "items": {
+        "$ref": "hospital_nice.json"
+      }
+    },
+    "tested_overall": {
+      "type": "array",
+      "maxItems": 355,
+      "items": {
+        "$ref": "tested_overall.json"
+      }
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "regions_sewer",
+  "additionalProperties": false,
+  "required": [
+    "date_start_unix",
+    "date_end_unix",
+    "vrcode",
+    "average",
+    "total_installation_count",
+    "date_of_insertion_unix"
+  ],
+  "properties": {
+    "date_start_unix": {
+      "type": "integer"
+    },
+    "date_end_unix": {
+      "type": "integer"
+    },
+    "vrcode": {
+      "type": "string",
+      "pattern": "^VR[0-9]+$"
+    },
+    "average": {
+      "type": "number"
+    },
+    "total_installation_count": {
+      "type": "number"
+    },
+    "date_of_insertion_unix": {
+      "type": "integer"
+    }
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "national_difference",
+  "type": "object",
+  "properties": {
+    "tested_overall__infected_per_100k": {
+      "$ref": "#/definitions/diff_decimal"
+    },
+    "tested_overall__infected": {
+      "$ref": "#/definitions/diff_integer"
+    },
+    "tested_ggd_daily__tested_total": {
+      "$ref": "#/definitions/diff_integer"
+    },
+    "tested_ggd_daily__infected_percentage": {
+      "$ref": "#/definitions/diff_decimal"
+    },
+    "tested_ggd_average__tested_total": {
+      "$ref": "#/definitions/diff_integer"
+    },
+    "tested_ggd_average__infected_percentage": {
+      "$ref": "#/definitions/diff_decimal"
+    },
+    "infectious_people__estimate": {
+      "$ref": "#/definitions/diff_integer"
+    },
+    "hospital_nice__admissions_moving_average": {
+      "$ref": "#/definitions/diff_decimal"
+    },
+    "hospital_lcps__beds_occupied_covid": {
+      "$ref": "#/definitions/diff_integer"
+    },
+    "intensive_care_nice__admissions_moving_average": {
+      "$ref": "#/definitions/diff_decimal"
+    },
+    "intensive_care_lcps__beds_occupied_covid": {
+      "$ref": "#/definitions/diff_integer"
+    },
+    "doctor__covid_symptoms_per_100k": {
+      "$ref": "#/definitions/diff_decimal"
+    },
+    "doctor__covid_symptoms": {
+      "$ref": "#/definitions/diff_integer"
+    },
+    "sewer__average": {
+      "$ref": "#/definitions/diff_decimal"
+    },
+    "nursing_home__newly_infected_people": {
+      "$ref": "#/definitions/diff_integer"
+    },
+    "nursing_home__infected_locations_total": {
+      "$ref": "#/definitions/diff_integer"
+    },
+    "nursing_home__deceased_daily": {
+      "$ref": "#/definitions/diff_integer"
+    },
+    "reproduction__index_average": {
+      "$ref": "#/definitions/diff_decimal"
+    }
+  },
+  "required": [
+    "tested_overall__infected_per_100k",
+    "tested_overall__infected",
+    "hospital_nice__admissions_moving_average",
+    "hospital_lcps__beds_occupied_covid",
+    "tested_ggd_daily__tested_total",
+    "tested_ggd_daily__infected_percentage",
+    "tested_ggd_average__tested_total",
+    "tested_ggd_average__infected_percentage",
+    "reproduction__index_average",
+    "infectious_people__estimate",
+    "intensive_care_nice__admissions_moving_average",
+    "intensive_care_lcps__beds_occupied_covid",
+    "doctor__covid_symptoms_per_100k",
+    "doctor__covid_symptoms",
+    "sewer__average",
+    "nursing_home__newly_infected_people",
+    "nursing_home__infected_locations_total",
+    "nursing_home__deceased_daily"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "diff_integer": {
+      "title": "difference_integer",
+      "type": "object",
+      "properties": {
+        "old_value": {
+          "type": "integer"
+        },
+        "difference": {
+          "type": "integer"
+        },
+        "old_date_unix": {
+          "type": "integer"
+        },
+        "new_date_unix": {
+          "type": "integer"
+        }
+      },
+      "required": ["old_value", "difference", "old_date_unix", "new_date_unix"],
+      "additionalProperties": false
+    },
+    "diff_decimal": {
+      "title": "difference_decimal",
+      "type": "object",
+      "properties": {
+        "old_value": {
+          "type": "number"
+        },
+        "difference": {
+          "type": "number"
+        },
+        "old_date_unix": {
+          "type": "integer"
+        },
+        "new_date_unix": {
+          "type": "integer"
+        }
+      },
+      "required": ["old_value", "difference", "old_date_unix", "new_date_unix"],
+      "additionalProperties": false
+    }
+  }
+}

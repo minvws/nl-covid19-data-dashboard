@@ -1,0 +1,26 @@
+export default {
+  name: "overRisicoNiveaus",
+  type: "document",
+  title: "Over risico niveaus",
+  __experimental_actions: ["update", /* 'create', 'delete', */ "publish"],
+  fields: [
+    {
+      name: "title",
+      type: "localeString",
+      title: "Titel",
+    },
+    {
+      name: "description",
+      type: "localeBlock",
+      title: "Beschrijving",
+    },
+    {
+      name: "content",
+      type: "array",
+      title: "Uitklapbare informatie",
+      description:
+        "Je kan uitklapbare informatie toevoegen, de volgorde veranderen, de teksten bijwerken of verwijderen",
+      of: [{ type: "collapsible" }],
+    },
+  ],
+};

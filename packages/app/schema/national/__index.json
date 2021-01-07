@@ -1,0 +1,109 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "national",
+  "required": [
+    "behavior",
+    "code",
+    "deceased_cbs",
+    "deceased_rivm",
+    "difference",
+    "disability_care",
+    "doctor",
+    "elderly_at_home",
+    "hospital_lcps",
+    "hospital_nice",
+    "infectious_people",
+    "intensive_care_lcps",
+    "intensive_care_nice",
+    "last_generated",
+    "name",
+    "nursing_home",
+    "proto_name",
+    "reproduction",
+    "restrictions",
+    "sewer",
+    "tested_ggd_daily",
+    "tested_ggd_average",
+    "tested_overall",
+    "tested_per_age_group"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "last_generated": {
+      "type": "string"
+    },
+    "proto_name": {
+      "type": "string",
+      "enum": ["NL"]
+    },
+    "name": {
+      "type": "string",
+      "const": { "$data": "1/proto_name" }
+    },
+    "code": {
+      "type": "string",
+      "const": { "$data": "1/proto_name" }
+    },
+    "difference": {
+      "$ref": "__difference.json"
+    },
+    "doctor": {
+      "$ref": "doctor.json"
+    },
+    "infectious_people": {
+      "$ref": "infectious_people.json"
+    },
+    "intensive_care_nice": {
+      "$ref": "intensive_care_nice.json"
+    },
+    "tested_overall": {
+      "$ref": "tested_overall.json"
+    },
+    "tested_per_age_group": {
+      "$ref": "tested_per_age_group.json"
+    },
+    "reproduction": {
+      "$ref": "reproduction.json"
+    },
+    "sewer": {
+      "$ref": "sewer.json"
+    },
+    "hospital_nice": {
+      "$ref": "hospital_nice.json"
+    },
+    "hospital_lcps": {
+      "$ref": "hospital_lcps.json"
+    },
+    "intensive_care_lcps": {
+      "$ref": "intensive_care_lcps.json"
+    },
+    "tested_ggd_daily": {
+      "$ref": "tested_ggd_daily.json"
+    },
+    "tested_ggd_average": {
+      "$ref": "tested_ggd_average.json"
+    },
+    "nursing_home": {
+      "$ref": "nursing_home.json"
+    },
+    "disability_care": {
+      "$ref": "disability_care.json"
+    },
+    "restrictions": {
+      "$ref": "restrictions.json"
+    },
+    "behavior": {
+      "$ref": "behavior.json"
+    },
+    "deceased_rivm": {
+      "$ref": "deceased_rivm.json"
+    },
+    "deceased_cbs": {
+      "$ref": "deceased_cbs.json"
+    },
+    "elderly_at_home": {
+      "$ref": "elderly_at_home.json"
+    }
+  }
+}
