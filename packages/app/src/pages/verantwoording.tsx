@@ -64,7 +64,7 @@ const Verantwoording: FCWithLayout<VerantwoordingProps> = (props) => {
             {data.description && <PortableText blocks={data.description} />}
             {data.collapsibleList && (
               <article className={styles.faqList}>
-                {data.collapsibleList.map((item: any) => {
+                {data.collapsibleList.map((item) => {
                   const id = getSkipLinkId(item.title);
                   return (
                     <Collapsable key={id} id={id} summary={item.title}>
