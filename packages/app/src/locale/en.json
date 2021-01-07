@@ -717,7 +717,7 @@
     },
     "tooltip": {
       "positive_tested_people": "{{totalPositiveTestedPeople}} in total",
-      "positive_tested_value": ""
+      "positive_tested_value": "{{totalPositiveValue}} per 100.000"
     },
     "niveau": "level",
     "clear_select_input": "Empty"
@@ -1114,14 +1114,14 @@
     },
     "toelichting": "The figures below provide information on the overall number of tests conducted at GGD test locations and the percentage of positive results. An increase in the percentage of positive tests could be an indication that transmission of the virus is on the rise. Please note that most but not all tests are conducted by the GGD. This means that the total number of people who have tested positive differs from the number of people who have tested positive at GGD test locations. ",
     "totaal_getest_week_titel": "Average number of tests conducted by the GGD per day",
-    "totaal_getest_week_uitleg": "The average number of tests conducted per day (for which the results are known). This figure is a seven-day average. ",
+    "totaal_getest_week_uitleg": "The average number of tests conducted per day, calculated over 7 days. The tests of which the results are as yet unknown, are excluded from this average.",
     "positief_getest_week_titel": "Number of people who have tested positive ",
     "positief_getest_week_uitleg": "Percentage of positive tests conducted at GGD test locations (for which results are known).  This figure is a seven-day average.",
     "positief_getest_getest_week_uitleg": "This represents {{numerator}} of {{denominator}} tests for which the result is known.",
     "linechart_percentage_titel": "Percentage of GGD positive test results, over time",
-    "linechart_percentage_toelichting": "This graph shows the percentage of tests conducted by the GGD with positive results in relation to the total number of GGD tests for which the results are known. The data is organised based on the date on which the tests were conducted by the GGD. On average it takes one to two days before test results are known.",
+    "linechart_percentage_toelichting": "This graph shows the daily percentage of tests conducted by the GGD with positive results in relation to the total number of GGD tests conducted that day for which the results are known. The data is organised based on the date on which the tests were conducted by the GGD. On average it takes one to two days before test results are known.",
     "linechart_totaltests_titel": "Number of test results over time",
-    "linechart_totaltests_toelichting": "This graph shows the number of tests conducted at GGD test locations for which the results are known and the number of known results that are positive, over time. The data is organised based on the date on which the tests were conducted by the GGD. On average it takes one to two days before test results are known.",
+    "linechart_totaltests_toelichting": "This graph shows the daily number of tests conducted at GGD test locations for which the results are known and the number of known results that are positive, over time. The data is organised based on the date on which the tests were conducted by the GGD. On average it takes one to two days before test results are known.",
     "linechart_totaltests_legend_label": "GGD tests for which results are known",
     "linechart_positivetests_legend_label": "GGD tests with a positive result",
     "reference": {
@@ -1199,14 +1199,14 @@
     },
     "toelichting": "The figures below provide information on the overall number of tests conducted at GGD test locations and the percentage of positive results. An increase in the percentage of positive tests could be an indication that transmission of the virus is on the rise. Please note that most but not all tests are conducted by the GGD. This means that the total number of people who have tested positive differs from the number of people who have tested positive at GGD test locations. ",
     "totaal_getest_week_titel": "Average number of tests conducted by the GGD per day",
-    "totaal_getest_week_uitleg": "The average number of tests conducted per day (for which the results are known). This figure is a seven-day average. ",
+    "totaal_getest_week_uitleg": "The average number of tests conducted per day, calculated over 7 days. The tests of which the results are as yet unknown, are excluded from this average.",
     "positief_getest_week_titel": "Number of people who have tested positive ",
     "positief_getest_week_uitleg": "Percentage of positive tests conducted at GGD test locations (for which results are known).  This figure is a seven-day average. ",
     "positief_getest_getest_week_uitleg": "This represents {{numerator}} of {{denominator}} tests for which the result is known",
     "linechart_percentage_titel": "Percentage of GGD positive test results, over time",
-    "linechart_percentage_toelichting": "This graph shows the percentage of tests conducted by the GGD with positive results in relation to the total number of GGD tests for which the results are known. The data is organised based on the date on which the tests were conducted by the GGD. On average it takes one to two days before test results are known.",
+    "linechart_percentage_toelichting": "This graph shows the daily percentage of tests conducted by the GGD with positive results in relation to the total number of GGD tests conducted that day for which the results are known. The data is organised based on the date on which the tests were conducted by the GGD. On average it takes one to two days before test results are known.",
     "linechart_totaltests_titel": "Number of test results over time",
-    "linechart_totaltests_toelichting": "This graph shows the number of tests conducted at GGD test locations for which the results are known and the number of known results that are positive, over time. The data is organised based on the date on which the tests were conducted by the GGD. On average it takes one to two days before test results are known.",
+    "linechart_totaltests_toelichting": "This graph shows the daily number of tests conducted at GGD test locations for which the results are known and the number of known results that are positive, over time. The data is organised based on the date on which the tests were conducted by the GGD. On average it takes one to two days before test results are known.\n",
     "linechart_totaltests_legend_label": "GGD tests for which results are known",
     "linechart_positivetests_legend_label": "GGD tests with a positive result",
     "reference": {
