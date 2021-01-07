@@ -1,0 +1,9 @@
+{
+  "fixturesFolder": "../app/public/json",
+  "integrationFolder": "integration",
+  "pluginsFile": "plugins",
+  "screenshotsFolder": "screenshots",
+  "supportFile": "support/index.ts",
+  "videosFolder": "videos",
+  "baseUrl": "https://cdb-develop-nl.vws-cdb-tst.test.overheid.standaardplatform.rijksapps.nl"
+}

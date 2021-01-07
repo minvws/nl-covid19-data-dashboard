@@ -1,0 +1,13 @@
+{
+  "name": "corona-dashboard-cypress-tests",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "cypress": "^6.2.1"
+  },
+  "scripts": {
+    "cy:open": "cypress open",
+    "cy:ci": "cypress run --headless --browser chrome --config-file ./cypress-ci.json"
+  }
+}
