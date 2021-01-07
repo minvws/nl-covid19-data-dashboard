@@ -7,8 +7,10 @@ import { MaxWidth } from '~/components-styled/max-width';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import { getClient, localize, PortableText } from '~/lib/sanity';
 import siteText, { targetLanguage } from '~/locale/index';
+import { CollapsibleList } from '~/types/cms';
 import { getSkipLinkId } from '~/utils/skipLinks';
 import styles from './over.module.scss';
+
 interface StaticProps {
   props: VeelgesteldeVragenProps;
 }
@@ -16,8 +18,8 @@ interface StaticProps {
 interface VeelgesteldeVragenProps {
   data: {
     title: string;
-    description: string | null;
-    questions: Array<{ content: Array<any>; title: string }>;
+    description: unknown[] | null;
+    questions: CollapsibleList[];
   };
   lastGenerated: string;
 }

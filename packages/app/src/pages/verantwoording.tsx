@@ -7,6 +7,7 @@ import { MaxWidth } from '~/components-styled/max-width';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import { getClient, localize, PortableText } from '~/lib/sanity';
 import siteText, { targetLanguage } from '~/locale/index';
+import { CollapsibleList } from '~/types/cms';
 import { getSkipLinkId } from '~/utils/skipLinks';
 import styles from './over.module.scss';
 
@@ -17,8 +18,8 @@ interface StaticProps {
 interface VerantwoordingProps {
   data: {
     title: string;
-    description: string | null;
-    collapsibleList: Array<{ content: Array<any>; title: string }>;
+    description: unknown[] | null;
+    collapsibleList: CollapsibleList[];
   };
   lastGenerated: string;
 }

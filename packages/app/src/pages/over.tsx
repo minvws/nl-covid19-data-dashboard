@@ -15,7 +15,7 @@ interface StaticProps {
 interface OverProps {
   data: {
     title: string;
-    description: string | null;
+    description: unknown[] | null;
   };
   lastGenerated: string;
 }
