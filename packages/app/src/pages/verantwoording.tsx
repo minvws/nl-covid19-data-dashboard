@@ -17,7 +17,7 @@ interface StaticProps {
 
 interface VerantwoordingProps {
   data: {
-    title: string;
+    title: string | null;
     description: unknown[] | null;
     collapsibleList: CollapsibleList[];
   };
@@ -60,9 +60,8 @@ const Verantwoording: FCWithLayout<VerantwoordingProps> = (props) => {
       <div className={styles.container}>
         <MaxWidth>
           <div className={styles.maxwidth}>
-            <h2>{data.title}</h2>
+            {data.title && <h2>{data.title}</h2>}
             {data.description && <PortableText blocks={data.description} />}
-
             {data.collapsibleList && (
               <article className={styles.faqList}>
                 {data.collapsibleList.map((item: any) => {

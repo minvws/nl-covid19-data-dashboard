@@ -17,7 +17,7 @@ interface StaticProps {
 
 interface VeelgesteldeVragenProps {
   data: {
-    title: string;
+    title: string | null;
     description: unknown[] | null;
     questions: CollapsibleList[];
   };
@@ -60,10 +60,8 @@ const Verantwoording: FCWithLayout<VeelgesteldeVragenProps> = (props) => {
       <div className={styles.container}>
         <MaxWidth>
           <div className={styles.maxwidth}>
-            <h2>{data.title}</h2>
-
+            {data.title && <h2>{data.title}</h2>}
             {data.description && <PortableText blocks={data.description} />}
-
             {data.questions && (
               <article className={styles.faqList}>
                 {data.questions.map((item: any) => {
