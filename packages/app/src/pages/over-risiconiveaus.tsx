@@ -1,15 +1,14 @@
 import fs from 'fs';
+import { groq } from 'next-sanity';
 import Head from 'next/head';
 import path from 'path';
-import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
-import { MaxWidth } from '~/components-styled/max-width';
-import siteText, { targetLanguage } from '~/locale/index';
-import styles from './over.module.scss';
 import { Collapsable } from '~/components-styled/collapsable';
-import { getSkipLinkId } from '~/utils/skipLinks';
-
-import { groq } from 'next-sanity';
+import { MaxWidth } from '~/components-styled/max-width';
+import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import { getClient, localize, PortableText } from '~/lib/sanity';
+import siteText, { targetLanguage } from '~/locale/index';
+import { getSkipLinkId } from '~/utils/skipLinks';
+import styles from './over.module.scss';
 
 interface StaticProps {
   props: OverRisiconiveausProps;

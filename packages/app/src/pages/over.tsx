@@ -1,13 +1,12 @@
 import fs from 'fs';
+import { groq } from 'next-sanity';
 import Head from 'next/head';
 import path from 'path';
-import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import { MaxWidth } from '~/components-styled/max-width';
+import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
+import { getClient, localize, PortableText } from '~/lib/sanity';
 import siteText, { targetLanguage } from '~/locale/index';
 import styles from './over.module.scss';
-
-import { groq } from 'next-sanity';
-import { getClient, localize, PortableText } from '~/lib/sanity';
 
 interface StaticProps {
   props: OverProps;
