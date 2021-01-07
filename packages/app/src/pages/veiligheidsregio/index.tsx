@@ -42,7 +42,7 @@ interface EscalationBarLegendaProps {
     color: string;
     threshold: number;
   };
-  text: any;
+  label: any;
   totalItems: number;
 }
 
@@ -102,7 +102,7 @@ export const EscalationMapLegenda = (props: EscalationMapLegendaProps) => {
           <EscalationBarLegenda
             info={info}
             totalItems={totalItems}
-            text={text.escalatie_niveau.legenda}
+            label={text.escalatie_niveau.legenda}
           />
         </div>
       ))}
@@ -111,7 +111,7 @@ export const EscalationMapLegenda = (props: EscalationMapLegendaProps) => {
 };
 
 const EscalationBarLegenda = (props: EscalationBarLegendaProps) => {
-  const { info, totalItems, text } = props;
+  const { info, totalItems, label } = props;
 
   const barWidth = info.amount / totalItems;
 
@@ -125,8 +125,8 @@ const EscalationBarLegenda = (props: EscalationBarLegendaProps) => {
       />
       <Box paddingLeft={2}>
         {info.amount
-          ? replaceVariablesInText(text.regios, { amount: info.amount })
-          : text.geen_regio}
+          ? replaceVariablesInText(label.regios, { amount: info.amount })
+          : label.geen_regio}
       </Box>
     </Box>
   );
