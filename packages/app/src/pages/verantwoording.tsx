@@ -23,17 +23,16 @@ interface VerantwoordingProps {
   lastGenerated: string;
 }
 
-const verantwoordingQuery = groq`
-  *[_type == 'cijferVerantwoording'][0]
-`;
-
 export async function getStaticProps(): Promise<StaticProps> {
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const lastGenerated = JSON.parse(fileContents).last_generated;
 
-  const verantwoordingData = await getClient(false).fetch(verantwoordingQuery);
-  const data = localize(verantwoordingData, [targetLanguage, 'nl']);
+  const query = groq`
+  *[_type == 'cijferVerantwoording'][0]
+`;
+  const rawData = await getClient(false).fetch(query);
+  const data = localize(rawData, [targetLanguage, 'nl']);
 
   return { props: { data, lastGenerated } };
 }

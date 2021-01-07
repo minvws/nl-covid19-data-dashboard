@@ -23,17 +23,16 @@ interface OverRisiconiveausProps {
   lastGenerated: string;
 }
 
-const risicoQuery = groq`
-  *[_type == 'overRisicoNiveaus'][0]
-`;
-
 export async function getStaticProps(): Promise<StaticProps> {
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const lastGenerated = JSON.parse(fileContents).last_generated;
 
-  const risicoData = await getClient(false).fetch(risicoQuery);
-  const data = localize(risicoData, [targetLanguage, 'nl']);
+  const query = groq`
+  *[_type == 'overRisicoNiveaus'][0]
+`;
+  const rawData = await getClient(false).fetch(query);
+  const data = localize(rawData, [targetLanguage, 'nl']);
 
   return { props: { data, lastGenerated } };
 }

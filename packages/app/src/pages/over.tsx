@@ -20,17 +20,16 @@ interface OverProps {
   lastGenerated: string;
 }
 
-const overQuery = groq`
-  *[_type == 'overDitDashboard'][0]
-`;
-
 export async function getStaticProps(): Promise<StaticProps> {
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const lastGenerated = JSON.parse(fileContents).last_generated;
 
-  const overData = await getClient(false).fetch(overQuery);
-  const data = localize(overData, [targetLanguage, 'nl']);
+  const query = groq`
+  *[_type == 'overDitDashboard'][0]
+`;
+  const rawData = await getClient(false).fetch(query);
+  const data = localize(rawData, [targetLanguage, 'nl']);
 
   return { props: { data, lastGenerated } };
 }

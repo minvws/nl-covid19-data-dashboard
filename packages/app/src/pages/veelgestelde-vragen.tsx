@@ -22,17 +22,16 @@ interface VeelgesteldeVragenProps {
   lastGenerated: string;
 }
 
-const faqQuery = groq`
-  *[_type == 'veelgesteldeVragen'][0]
-`;
-
 export async function getStaticProps(): Promise<StaticProps> {
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const lastGenerated = JSON.parse(fileContents).last_generated;
 
-  const faqData = await getClient(false).fetch(faqQuery);
-  const data = localize(faqData, [targetLanguage, 'nl']);
+  const query = groq`
+  *[_type == 'veelgesteldeVragen'][0]
+`;
+  const rawData = await getClient(false).fetch(query);
+  const data = localize(rawData, [targetLanguage, 'nl']);
 
   return { props: { data, lastGenerated } };
 }
