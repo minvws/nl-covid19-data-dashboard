@@ -1,6 +1,4 @@
-import fs from 'fs';
 import { useRouter } from 'next/router';
-import path from 'path';
 import { useState } from 'react';
 import Notification from '~/assets/notification.svg';
 import { AnchorTile } from '~/components-styled/anchor-tile';
@@ -22,40 +20,48 @@ import { createPositiveTestedPeopleRegionalTooltip } from '~/components/chorople
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
-import { TALLLanguages } from '~/locale/index';
+import { getNationalStaticProps, StaticProps } from '~/static-props/nl-data';
 import theme from '~/style/theme';
-import { EscalationLevels, National, Regions } from '~/types/data';
+import { EscalationLevels, National } from '~/types/data';
 import { assert } from '~/utils/assert';
-import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { EscalationMapLegenda } from './veiligheidsregio';
 
-interface StaticProps {
-  props: INationalHomepageData;
+export async function getStaticProps() {
+  const { props } = await getNationalStaticProps({
+    choropleth: {
+      vr: (x) => ({
+        escalation_levels: x.escalation_levels,
+        tested_overall: x.tested_overall,
+      }),
+      gm: (x) => ({
+        tested_overall: x.tested_overall,
+      }),
+    },
+  })();
+
+  const dataClone = JSON.parse(JSON.stringify(props.data)) as National;
+
+  // Strip away unused data (values) from staticProps
+  // keep last_values because we use them!
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  for (const metric of Object.values(dataClone)) {
+    if (typeof metric === 'object' && metric !== null) {
+      for (const [metricProperty, metricValue] of Object.entries(metric)) {
+        if (metricProperty === 'values') {
+          (metricValue as {
+            values: Array<unknown>;
+          }).values = [];
+        }
+      }
+    }
+  }
+
+  return { props: { ...props, data: dataClone } };
 }
 
-interface INationalHomepageData {
-  data: National;
-  text: TALLLanguages;
-  lastGenerated: string;
-  escalationLevelCounts: EscalationLevelCounts;
-}
-
-/**
- * The keys in this object are used to find and replace values in the translation files.
- * Adjustments here need to be applied in Lokalize too.
- * This is also why the keys are a bit more verbose.
- */
-type EscalationLevelCounts = {
-  escalationLevel1: number;
-  escalationLevel2: number;
-  escalationLevel3: number;
-  escalationLevel4: number;
-  escalationLevel5: number;
-};
-
-const Home: FCWithLayout<INationalHomepageData> = (props) => {
-  const { data, text, escalationLevelCounts } = props;
+const Home: FCWithLayout<StaticProps<typeof getStaticProps>> = (props) => {
+  const { data, text, choropleth } = props;
   const router = useRouter();
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
     'municipal'
@@ -84,7 +90,7 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
         <Text>
           {replaceVariablesInText(
             text.notificatie.bericht,
-            escalationLevelCounts
+            getEscalationCounts(choropleth.vr.escalation_levels)
           )}
         </Text>
       </AnchorTile>
@@ -110,6 +116,7 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
         }
       >
         <SafetyRegionChoropleth
+          data={choropleth.vr}
           metricName="escalation_levels"
           metricProperty="escalation_level"
           onSelect={createSelectRegionHandler(router, 'maatregelen')}
@@ -138,6 +145,7 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
       >
         {selectedMap === 'municipal' && (
           <MunicipalityChoropleth
+            data={choropleth.gm}
             metricName="tested_overall"
             metricProperty="infected_per_100k"
             tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
@@ -148,6 +156,7 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
         )}
         {selectedMap === 'region' && (
           <SafetyRegionChoropleth
+            data={choropleth.vr}
             metricName="tested_overall"
             metricProperty="infected_per_100k"
             tooltipContent={createPositiveTestedPeopleRegionalTooltip(
@@ -165,6 +174,8 @@ const Home: FCWithLayout<INationalHomepageData> = (props) => {
 };
 
 Home.getLayout = getNationalLayout;
+
+export default Home;
 
 /**
  * Calculate the counts of regions with a certain escalation level
@@ -194,42 +205,15 @@ const getEscalationCounts = (
   return counts;
 };
 
-export async function getStaticProps(): Promise<StaticProps> {
-  const text = parseMarkdownInLocale((await import('../locale/index')).default);
-
-  const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
-  const fileContents = fs.readFileSync(filePath, 'utf8');
-  const data = JSON.parse(fileContents) as National;
-
-  // Strip away unused data (values) from staticProps
-  // keep last_values because we use them!
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  for (const metric of Object.values(data)) {
-    if (typeof metric === 'object' && metric !== null) {
-      for (const [metricProperty, metricValue] of Object.entries(metric)) {
-        if (metricProperty === 'values') {
-          (metricValue as {
-            values: Array<unknown>;
-          }).values = [];
-        }
-      }
-    }
-  }
-
-  const lastGenerated = data.last_generated;
-  const regionsFilePath = path.join(
-    process.cwd(),
-    'public',
-    'json',
-    'VR_COLLECTION.json'
-  );
-  const regionsFileContents = fs.readFileSync(regionsFilePath, 'utf8');
-  const regionsData = JSON.parse(regionsFileContents) as Regions;
-
-  const escalationLevels = regionsData.escalation_levels;
-  const escalationLevelCounts = getEscalationCounts(escalationLevels);
-
-  return { props: { data, escalationLevelCounts, text, lastGenerated } };
-}
-
-export default Home;
+/**
+ * The keys in this object are used to find and replace values in the translation files.
+ * Adjustments here need to be applied in Lokalize too.
+ * This is also why the keys are a bit more verbose.
+ */
+type EscalationLevelCounts = {
+  escalationLevel1: number;
+  escalationLevel2: number;
+  escalationLevel3: number;
+  escalationLevel4: number;
+  escalationLevel5: number;
+};

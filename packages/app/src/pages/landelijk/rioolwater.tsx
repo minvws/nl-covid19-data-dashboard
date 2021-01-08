@@ -15,14 +15,20 @@ import { SEOHead } from '~/components/seoHead';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import siteText from '~/locale/index';
-import {
-  getNationalStaticProps,
-  NationalPageProps,
-} from '~/static-props/nl-data';
+import { getNationalStaticProps, StaticProps } from '~/static-props/nl-data';
 
 const text = siteText.rioolwater_metingen;
 
-const SewerWater: FCWithLayout<NationalPageProps> = ({ data }) => {
+export const getStaticProps = getNationalStaticProps({
+  choropleth: {
+    vr: ({ sewer }) => ({ sewer }),
+  },
+});
+
+const SewerWater: FCWithLayout<StaticProps<typeof getStaticProps>> = ({
+  data,
+  choropleth,
+}) => {
   const sewerAverages = data.sewer;
   const router = useRouter();
 
@@ -123,6 +129,7 @@ const SewerWater: FCWithLayout<NationalPageProps> = ({ data }) => {
           }}
         >
           <SafetyRegionChoropleth
+            data={choropleth.vr}
             metricName="sewer"
             metricProperty="average"
             tooltipContent={createSewerRegionalTooltip(
@@ -137,7 +144,5 @@ const SewerWater: FCWithLayout<NationalPageProps> = ({ data }) => {
 };
 
 SewerWater.getLayout = getNationalLayout;
-
-export const getStaticProps = getNationalStaticProps;
 
 export default SewerWater;
