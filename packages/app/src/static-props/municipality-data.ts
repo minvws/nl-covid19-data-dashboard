@@ -1,57 +1,27 @@
 import fs from 'fs';
 import path from 'path';
 import municipalities from '~/data/municipalSearchData';
-import { TALLLanguages } from '~/locale';
 import { Municipal } from '~/types/data.d';
 import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
+import { ChoroplethSettings, getChoroplethData } from './choropleth-data';
 import { sortMunicipalTimeSeriesInDataInPlace } from './data-sorting';
 
-export interface IMunicipalityData {
-  data: Municipal;
-  lastGenerated: string;
-  municipalityName: string;
-  text: TALLLanguages;
+interface MunicipalityPagePropsSettings<T1, T2> {
+  choropleth?: ChoroplethSettings<T1, T2>;
 }
 
-interface IPaths {
-  paths: Array<{ params: { code: string } }>;
-  fallback: boolean;
-}
+export type ISafetyRegionData = Await<
+  ReturnType<ReturnType<typeof getMunicipalityStaticProps>>
+>['props'];
 
-interface IProps {
-  props: IMunicipalityData;
-}
+export type IMunicipalityData = Await<
+  ReturnType<ReturnType<typeof getMunicipalityStaticProps>>
+>['props'];
 
-interface IParams {
-  params: {
-    code: string;
-  };
-}
-
-/**
- * getMunicipalityData loads the data for /gemeente pages.
- * It needs to be used as the Next.js `getStaticProps` function.
- *
- * Example:
- * ```ts
- * PositivelyTestedPeople.getLayout = getMunicipalityLayout();
- *
- * export const getStaticProps = getMunicipalityData();
- *
- * export default PositivelyTestedPeople;
- * ```
- *
- * The `IMunicipalityData` should be used in conjunction with `FCWithLayout`
- *
- * Example:
- * ```ts
- * const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = props => {
- *   // ...
- * }
- * ```
- */
-export function getMunicipalityData() {
-  return async function ({ params }: IParams): Promise<IProps> {
+export function getMunicipalityStaticProps<T1 = undefined, T2 = undefined>(
+  settings?: MunicipalityPagePropsSettings<T1, T2>
+) {
+  return async function ({ params }: { params: { code: string } }) {
     const { code } = params;
 
     const filePath = path.join(process.cwd(), 'public', 'json', `${code}.json`);
@@ -74,6 +44,7 @@ export function getMunicipalityData() {
         municipalityName,
         lastGenerated,
         text,
+        choropleth: getChoroplethData(settings?.choropleth),
       },
     };
   };
@@ -84,7 +55,7 @@ export function getMunicipalityData() {
  * `/gemeente/[code]` routes. This should be used
  * together with `getMunicipalityData`.
  */
-export function getMunicipalityPaths(): () => IPaths {
+export function getMunicipalityPaths() {
   return function () {
     const paths = municipalities.map((municipality) => ({
       params: { code: municipality.gemcode },

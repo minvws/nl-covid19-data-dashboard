@@ -16,14 +16,22 @@ import { SEOHead } from '~/components/seoHead';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getMunicipalityLayout } from '~/domain/layout/municipality-layout';
 import {
-  getMunicipalityData,
   getMunicipalityPaths,
-  IMunicipalityData,
+  getMunicipalityStaticProps,
 } from '~/static-props/municipality-data';
+import { StaticProps } from '~/static-props/types';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
-const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
-  const { data, municipalityName, text: siteText } = props;
+export const getStaticProps = getMunicipalityStaticProps({
+  choropleth: {
+    gm: ({ tested_overall }) => ({ tested_overall }),
+  },
+});
+
+const PositivelyTestedPeople: FCWithLayout<
+  StaticProps<typeof getStaticProps>
+> = (props) => {
+  const { data, choropleth, municipalityName, text: siteText } = props;
 
   const text = siteText.gemeente_positief_geteste_personen;
   const lastValue = data.tested_overall.last_value;
@@ -122,6 +130,7 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
         >
           <MunicipalityChoropleth
             selected={data.code}
+            data={choropleth.gm}
             metricName="tested_overall"
             metricProperty="infected_per_100k"
             tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
@@ -137,7 +146,6 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
 
 PositivelyTestedPeople.getLayout = getMunicipalityLayout();
 
-export const getStaticProps = getMunicipalityData();
 export const getStaticPaths = getMunicipalityPaths();
 
 export default PositivelyTestedPeople;

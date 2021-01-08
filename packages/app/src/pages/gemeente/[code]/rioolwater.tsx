@@ -18,7 +18,7 @@ import { SewerWaterChart } from '~/components/lineChart/sewer-water-chart';
 import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import {
-  getMunicipalityData,
+  getMunicipalityStaticProps,
   getMunicipalityPaths,
   IMunicipalityData,
 } from '~/static-props/municipality-data';
@@ -211,7 +211,7 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
 
 SewerWater.getLayout = getMunicipalityLayout();
 
-export const getStaticProps = getMunicipalityData();
+export const getStaticProps = getMunicipalityStaticProps();
 export const getStaticPaths = getMunicipalityPaths();
 
 export default SewerWater;
