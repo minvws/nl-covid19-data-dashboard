@@ -154,7 +154,7 @@ const ElderlyAtHomeRegionalPage: FCWithLayout<ISafetyRegionData> = (props) => {
 
 ElderlyAtHomeRegionalPage.getLayout = getSafetyRegionLayout();
 
-export const getStaticProps = getSafetyRegionStaticProps;
+export const getStaticProps = getSafetyRegionStaticProps();
 export const getStaticPaths = getSafetyRegionPaths();
 
 export default ElderlyAtHomeRegionalPage;

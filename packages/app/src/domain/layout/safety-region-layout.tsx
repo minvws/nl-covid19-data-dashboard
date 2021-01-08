@@ -27,12 +27,11 @@ export function getSafetyRegionLayout() {
   return function (
     page: React.ReactNode,
     pageProps: ISafetyRegionData
-  ): React.ReactNode {
-    return getSiteLayout(
-      siteText.veiligheidsregio_metadata,
-      pageProps.lastGenerated
-    )(<SafetyRegionLayout {...pageProps}>{page}</SafetyRegionLayout>);
-  };
+) {
+  return getSiteLayout(
+    siteText.veiligheidsregio_metadata,
+    pageProps.lastGenerated
+  )(<SafetyRegionLayout {...pageProps}>{page}</SafetyRegionLayout>);
 }
 
 /**

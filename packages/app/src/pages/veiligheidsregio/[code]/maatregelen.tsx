@@ -111,7 +111,7 @@ const RegionalRestrictions: FCWithLayout<ISafetyRegionData> = (props) => {
 
 RegionalRestrictions.getLayout = getSafetyRegionLayout();
 
-export const getStaticProps = getSafetyRegionStaticProps;
+export const getStaticProps = getSafetyRegionStaticProps();
 export const getStaticPaths = getSafetyRegionPaths();
 
 export default RegionalRestrictions;

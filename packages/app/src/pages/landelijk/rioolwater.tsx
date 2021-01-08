@@ -15,7 +15,8 @@ import { SEOHead } from '~/components/seoHead';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import siteText from '~/locale/index';
-import { getNationalStaticProps, StaticProps } from '~/static-props/nl-data';
+import { getNationalStaticProps } from '~/static-props/nl-data';
+import { StaticProps } from '~/static-props/types';
 
 const text = siteText.rioolwater_metingen;
 

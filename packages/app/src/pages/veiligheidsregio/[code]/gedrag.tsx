@@ -93,7 +93,7 @@ const BehaviorPage: FCWithLayout<ISafetyRegionData> = (props) => {
 
 BehaviorPage.getLayout = getSafetyRegionLayout();
 
-export const getStaticProps = getSafetyRegionStaticProps;
+export const getStaticProps = getSafetyRegionStaticProps();
 export const getStaticPaths = getSafetyRegionPaths();
 
 export default BehaviorPage;

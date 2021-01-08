@@ -12,45 +12,31 @@ import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-ch
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
 import styles from '~/components/choropleth/tooltips/tooltip.module.scss';
-import { FCWithLayout } from '~/domain/layout/layout';
-import { SafetyRegionComboBox } from '~/domain/layout/components/safety-region-combo-box';
-import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { SEOHead } from '~/components/seoHead';
+import { SafetyRegionComboBox } from '~/domain/layout/components/safety-region-combo-box';
+import { FCWithLayout } from '~/domain/layout/layout';
+import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { TALLLanguages } from '~/locale/index';
+import { getChoroplethData } from '~/static-props/choropleth-data';
+import { StaticProps } from '~/static-props/types';
 import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 
-const escalationThresholds =
-  regionThresholds.escalation_levels.escalation_level;
+export async function getStaticProps() {
+  const choropleth = getChoroplethData({
+    vr: ({ escalation_levels }) => ({ escalation_levels }),
+  });
 
-interface EscalationMapLegendaProps {
-  text: TALLLanguages;
-}
-
-export const EscalationMapLegenda = (props: EscalationMapLegendaProps) => {
-  const { text } = props;
-
-  return (
-    <div className={styles.legenda} aria-label="legend">
-      <h3 css={css({ maxWidth: '20em' })}>
-        {text.escalatie_niveau.legenda.titel}
-      </h3>
-      {escalationThresholds.map((info) => (
-        <div
-          className={styles.escalationInfoLegenda}
-          key={`legenda-item-${info?.threshold}`}
-        >
-          <div className={styles.bubbleLegenda}>
-            <EscalationLevelIcon level={info.threshold} />
-          </div>
-          <div className={styles.escalationTextLegenda}>
-            {text.escalatie_niveau.types[info.threshold].titel}
-          </div>
-        </div>
-      ))}
-    </div>
+  const text = parseMarkdownInLocale(
+    (await import('../../locale/index')).default
   );
-};
+
+  const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
+  const fileContents = fs.readFileSync(filePath, 'utf8');
+  const lastGenerated = JSON.parse(fileContents).last_generated;
+
+  return { props: { text, lastGenerated, choropleth } };
+}
 
 // Passing `any` to `FCWithLayout` because we
 // can't do `getStaticProps` on this page because we require
@@ -59,11 +45,12 @@ export const EscalationMapLegenda = (props: EscalationMapLegendaProps) => {
 // the data is always there. Making the data optional would mean
 // lots of unnecessary null checks on those pages.
 
-const SafetyRegion: FCWithLayout<any> = (props) => {
+const SafetyRegion: FCWithLayout<StaticProps<typeof getStaticProps>> = ({
+  text,
+  choropleth,
+}) => {
   const router = useRouter();
   const breakpoints = useBreakpoints();
-
-  const { text } = props;
 
   return (
     <>
@@ -97,6 +84,7 @@ const SafetyRegion: FCWithLayout<any> = (props) => {
           }
         >
           <SafetyRegionChoropleth
+            data={choropleth.vr}
             metricName="escalation_levels"
             metricProperty="escalation_level"
             onSelect={createSelectRegionHandler(router, 'maatregelen')}
@@ -110,23 +98,38 @@ const SafetyRegion: FCWithLayout<any> = (props) => {
   );
 };
 
-SafetyRegion.getLayout = getSafetyRegionLayout();
-
-interface StaticProps {
-  text: TALLLanguages;
-  lastGenerated: string;
-}
-
-export async function getStaticProps(): Promise<{ props: StaticProps }> {
-  const text = parseMarkdownInLocale(
-    (await import('../../locale/index')).default
-  );
-
-  const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
-  const fileContents = fs.readFileSync(filePath, 'utf8');
-  const lastGenerated = JSON.parse(fileContents).last_generated;
-
-  return { props: { text, lastGenerated } };
-}
+SafetyRegion.getLayout = getSafetyRegionLayout as any;
 
 export default SafetyRegion;
+
+interface EscalationMapLegendaProps {
+  text: TALLLanguages;
+}
+
+const escalationThresholds =
+  regionThresholds.escalation_levels.escalation_level;
+
+export const EscalationMapLegenda = (props: EscalationMapLegendaProps) => {
+  const { text } = props;
+
+  return (
+    <div className={styles.legenda} aria-label="legend">
+      <h3 css={css({ maxWidth: '20em' })}>
+        {text.escalatie_niveau.legenda.titel}
+      </h3>
+      {escalationThresholds.map((info) => (
+        <div
+          className={styles.escalationInfoLegenda}
+          key={`legenda-item-${info?.threshold}`}
+        >
+          <div className={styles.bubbleLegenda}>
+            <EscalationLevelIcon level={info.threshold} />
+          </div>
+          <div className={styles.escalationTextLegenda}>
+            {text.escalatie_niveau.types[info.threshold].titel}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};

@@ -28,7 +28,8 @@ import { AgeDemographic } from '~/domain/infected-people/age-demographic/age-dem
 import { formatAgeGroupRange } from '~/domain/infected-people/age-demographic/age-demographic-chart';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
-import { getNationalStaticProps, StaticProps } from '~/static-props/nl-data';
+import { getNationalStaticProps } from '~/static-props/nl-data';
+import { StaticProps } from '~/static-props/types';
 import { colors } from '~/style/theme';
 import { NationalTestedPerAgeGroup } from '~/types/data.d';
 import { assert } from '~/utils/assert';

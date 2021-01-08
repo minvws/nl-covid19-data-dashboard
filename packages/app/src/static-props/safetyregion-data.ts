@@ -1,84 +1,50 @@
 import fs from 'fs';
 import path from 'path';
-
-import { Regionaal } from '~/types/data.d';
-
 import safetyRegions from '~/data/index';
+import { Regionaal } from '~/types/data.d';
+import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
+import { ChoroplethSettings, getChoroplethData } from './choropleth-data';
 import { sortRegionalTimeSeriesInDataInPlace } from './data-sorting';
 
-import { TALLLanguages } from '~/locale/index';
-import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
-
-export interface ISafetyRegionData {
-  data: Regionaal;
-  safetyRegionName: string;
-  lastGenerated: string;
-  text: TALLLanguages;
+interface SafetyRegionPagePropsSettings<T1, T2> {
+  choropleth?: ChoroplethSettings<T1, T2>;
 }
 
-interface IProps {
-  props: ISafetyRegionData;
-}
+export type ISafetyRegionData = Await<
+  ReturnType<ReturnType<typeof getSafetyRegionStaticProps>>
+>['props'];
 
-interface IPaths {
-  paths: Array<{ params: { code: string } }>;
-  fallback: boolean;
-}
+export function getSafetyRegionStaticProps<T1 = undefined, T2 = undefined>(
+  settings?: SafetyRegionPagePropsSettings<T1, T2>
+) {
+  return async ({ params }: { params: { code: string } }) => {
+    const { code } = params;
 
-interface IParams {
-  params: {
-    code: string;
-  };
-}
+    // get data for the page
+    const filePath = path.join(process.cwd(), 'public', 'json', `${code}.json`);
+    const fileContents = fs.readFileSync(filePath, 'utf8');
+    const data = JSON.parse(fileContents) as Regionaal;
 
-/**
- * getSafetyRegionStaticProps loads the data for /veiligheidsregio pages.
- * It needs to be used as the Next.js `getStaticProps` function.
- *
- * Example:
- * ```ts
- * PostivelyTestedPeople.getLayout = getSafetyRegionLayout();
- *
- * export const getStaticProps = getSafetyRegionStaticProps;
- *
- * export default PostivelyTestedPeople;
- * ```
- *
- * The `ISafetyRegionData` should be used in conjuction with `FCWithLayout`
- *
- * Example:
- * ```ts
- * const PostivelyTestedPeople: FCWithLayout<ISafetyRegionData> = props => {
- *   // ...
- * }
- * ```
- */
-export async function getSafetyRegionStaticProps({
-  params,
-}: IParams): Promise<IProps> {
-  const { code } = params;
+    sortRegionalTimeSeriesInDataInPlace(data);
 
-  // get data for the page
-  const filePath = path.join(process.cwd(), 'public', 'json', `${code}.json`);
-  const fileContents = fs.readFileSync(filePath, 'utf8');
-  const data = JSON.parse(fileContents) as Regionaal;
+    const lastGenerated = data.last_generated;
 
-  sortRegionalTimeSeriesInDataInPlace(data);
+    const safetyRegionName =
+      safetyRegions.find((r) => r.code === code)?.name || '';
 
-  const lastGenerated = data.last_generated;
+    const text = parseMarkdownInLocale(
+      (await import('../locale/index')).default
+    );
 
-  const safetyRegionName =
-    safetyRegions.find((r) => r.code === code)?.name || '';
-
-  const text = parseMarkdownInLocale((await import('../locale/index')).default);
-
-  return {
-    props: {
-      data,
-      safetyRegionName,
-      lastGenerated,
-      text,
-    },
+    return {
+      props: {
+        data,
+        safetyRegionName,
+        lastGenerated,
+        text,
+        choropleth: getChoroplethData(settings?.choropleth),
+      },
+    };
   };
 }
 
@@ -87,7 +53,7 @@ export async function getSafetyRegionStaticProps({
  * `/veiligheidsregio/[code]` routes. This should be used
  * together with `getSafetyRegionStaticProps`.
  */
-export function getSafetyRegionPaths(): () => IPaths {
+export function getSafetyRegionPaths() {
   return function () {
     const filteredRegions = safetyRegions.filter(
       (region) => region.code.indexOf('VR') === 0
@@ -96,7 +62,10 @@ export function getSafetyRegionPaths(): () => IPaths {
       params: { code: region.code },
     }));
 
-    // { fallback: false } means other routes should 404.
-    return { paths, fallback: false };
+    return {
+      paths,
+      // other routes should 404
+      fallback: false,
+    };
   };
 }

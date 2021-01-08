@@ -20,7 +20,8 @@ import { createPositiveTestedPeopleRegionalTooltip } from '~/components/chorople
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
-import { getNationalStaticProps, StaticProps } from '~/static-props/nl-data';
+import { getNationalStaticProps } from '~/static-props/nl-data';
+import { StaticProps } from '~/static-props/types';
 import theme from '~/style/theme';
 import { EscalationLevels, National } from '~/types/data';
 import { assert } from '~/utils/assert';

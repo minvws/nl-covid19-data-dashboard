@@ -24,16 +24,24 @@ import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import {
   getSafetyRegionPaths,
   getSafetyRegionStaticProps,
-  ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
+import { StaticProps } from '~/static-props/types';
 import { colors } from '~/style/theme';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
-const PositivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
-  const { data, safetyRegionName, text: siteText } = props;
+export const getStaticProps = getSafetyRegionStaticProps({
+  choropleth: {
+    gm: ({ tested_overall }) => ({ tested_overall }),
+  },
+});
+
+const PositivelyTestedPeople: FCWithLayout<
+  StaticProps<typeof getStaticProps>
+> = (props) => {
+  const { data, choropleth, safetyRegionName, text: siteText } = props;
 
   const text = siteText.veiligheidsregio_positief_geteste_personen;
   const ggdText = siteText.veiligheidsregio_positief_geteste_personen_ggd;
@@ -165,6 +173,7 @@ const PositivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           <MunicipalityChoropleth
             selected={selectedMunicipalCode}
             highlightSelection={false}
+            data={choropleth.gm}
             metricName="tested_overall"
             metricProperty="infected_per_100k"
             tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
@@ -325,7 +334,6 @@ const PositivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
 
 PositivelyTestedPeople.getLayout = getSafetyRegionLayout();
 
-export const getStaticProps = getSafetyRegionStaticProps;
 export const getStaticPaths = getSafetyRegionPaths();
 
 export default PositivelyTestedPeople;

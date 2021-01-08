@@ -19,14 +19,22 @@ import siteText from '~/locale/index';
 import {
   getSafetyRegionPaths,
   getSafetyRegionStaticProps,
-  ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
+import { StaticProps } from '~/static-props/types';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text = siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
 
-const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
-  const { data, safetyRegionName } = props;
+export const getStaticProps = getSafetyRegionStaticProps({
+  choropleth: {
+    gm: ({ hospital_nice }) => ({ hospital_nice }),
+  },
+});
+
+const IntakeHospital: FCWithLayout<StaticProps<typeof getStaticProps>> = (
+  props
+) => {
+  const { data, safetyRegionName, choropleth } = props;
   const router = useRouter();
 
   const lastValue = data.hospital_nice.last_value;
@@ -99,6 +107,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
           <MunicipalityChoropleth
             selected={selectedMunicipalCode}
             highlightSelection={false}
+            data={choropleth.gm}
             metricName="hospital_nice"
             metricProperty="admissions_moving_average"
             tooltipContent={createMunicipalHospitalAdmissionsTooltip(
@@ -131,7 +140,6 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
 
 IntakeHospital.getLayout = getSafetyRegionLayout();
 
-export const getStaticProps = getSafetyRegionStaticProps;
 export const getStaticPaths = getSafetyRegionPaths();
 
 export default IntakeHospital;

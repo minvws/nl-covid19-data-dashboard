@@ -109,7 +109,7 @@ const DeceasedRegionalPage: FCWithLayout<ISafetyRegionData> = (props) => {
 
 DeceasedRegionalPage.getLayout = getSafetyRegionLayout();
 
-export const getStaticProps = getSafetyRegionStaticProps;
+export const getStaticProps = getSafetyRegionStaticProps();
 
 export const getStaticPaths = getSafetyRegionPaths();
 
