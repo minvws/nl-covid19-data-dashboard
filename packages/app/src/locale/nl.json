@@ -2074,8 +2074,8 @@
       "infected_per_100k": {
         "full_sentence": "Deze kaart toont dat {{first}} en {{last}}.",
         "full_sentence_single": "Deze kaart toont dat {{first}}.",
-        "sentence": "{{count}} {{area}} tussen de {{rangeLow}} en {{rangeHigh}} positief geteste mensen {{verb}}",
-        "last_sentence": "{{count}} {{area}} meer dan {{rangeLow}} positief geteste mensen {{verb}}"
+        "sentence": "{{count}} {{area}} tussen de {{rangeLow}} en {{rangeHigh}} positief geteste mensen per 100000 inwoners {{verb}}",
+        "last_sentence": "{{count}} {{area}} meer dan {{rangeLow}} positief geteste mensen per 100000 inwoners {{verb}}"
       }
     },
     "escalation_levels": {
@@ -2084,6 +2084,46 @@
         "full_sentence_single": "Deze kaart toont dat {{first}}.",
         "sentence": "{{count}} {{area}} risiconiveau {{rangeLow}} {{verb}}",
         "last_sentence": "{{count}} {{area}} risiconiveau {{rangeLow}} {{verb}}"
+      }
+    },
+    "hospital_nice": {
+      "admissions_moving_average": {
+        "full_sentence": "Deze kaart toont dat {{first}} en {{last}}.",
+        "full_sentence_single": "Deze kaart toont dat {{first}}.",
+        "sentence": "{{count}} {{area}} tussen de {{rangeLow}} en {{rangeHigh}} ziekenhuisopnames {{verb}}",
+        "last_sentence": "{{count}} {{area}} meer dan {{rangeLow}} ziekenhuisopnames {{verb}}"
+      }
+    },
+    "nursing_home": {
+      "infected_locations_percentage": {
+        "full_sentence": "Deze kaart toont dat {{first}} en {{last}}.",
+        "full_sentence_single": "Deze kaart toont dat {{first}}.",
+        "sentence": "{{count}} {{area}} tussen de {{rangeLow}} en {{rangeHigh}} procent besmette locaties {{verb}}",
+        "last_sentence": "{{count}} {{area}} meer dan {{rangeLow}} procent besmette locaties {{verb}}"
+      }
+    },
+    "disability_care": {
+      "infected_locations_percentage": {
+        "full_sentence": "Deze kaart toont dat {{first}} en {{last}}.",
+        "full_sentence_single": "Deze kaart toont dat {{first}}.",
+        "sentence": "{{count}} {{area}} tussen de {{rangeLow}} en {{rangeHigh}} procent besmette locaties {{verb}}",
+        "last_sentence": "{{count}} {{area}} meer dan {{rangeLow}} procent besmette locaties {{verb}}"
+      }
+    },
+    "elderly_at_home": {
+      "positive_tested_daily_per_100k": {
+        "full_sentence": "Deze kaart toont dat {{first}} en {{last}}.",
+        "full_sentence_single": "Deze kaart toont dat {{first}}.",
+        "sentence": "{{count}} {{area}} tussen de {{rangeLow}} en {{rangeHigh}} besmettingen per 100000 personen {{verb}}",
+        "last_sentence": "{{count}} {{area}} meer dan {{rangeLow}} besmettingen per 100000 personen {{verb}}"
+      }
+    },
+    "sewer": {
+      "average": {
+        "full_sentence": "Deze kaart toont dat {{first}} en {{last}}.",
+        "full_sentence_single": "Deze kaart toont dat {{first}}.",
+        "sentence": "{{count}} {{area}} tussen de {{rangeLow}} x 100 miljard en {{rangeHigh}} x 100 miljard virusdeeltjes per 100000 inwoners {{verb}}",
+        "last_sentence": "{{count}} {{area}} meer dan {{rangeLow}} x 100 miljard virusdeeltjes per 100000 inwoners {{verb}}"
       }
     }
   }

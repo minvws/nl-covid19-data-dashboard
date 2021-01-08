@@ -13,7 +13,7 @@ export function useChoroplethDataDescription<T>(
   gemcodes?: string[]
 ) {
   return useMemo(() => {
-    const dynamicTexts = (siteText.choropleth as any)[metricName][
+    const dynamicTexts = (siteText.choropleth as any)[metricName]?.[
       metricProperty
     ];
 
@@ -32,10 +32,9 @@ export function useChoroplethDataDescription<T>(
 
     const ranges = thresholds
       .map((t, index) => {
-        const range = [
-          t.threshold,
-          (thresholds[index + 1]?.threshold ?? Infinity) - 1,
-        ];
+        const nextThreshold =
+          (thresholds[index + 1]?.threshold ?? Infinity) - 1;
+        const range = [t.threshold, nextThreshold];
         const result = {
           rangeLow: range[0],
           rangeHigh: range[1],
