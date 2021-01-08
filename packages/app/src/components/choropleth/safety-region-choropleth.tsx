@@ -76,7 +76,6 @@ export function SafetyRegionChoropleth<T>(
     metricProperty,
     'region'
   );
-  console.log(dataDescription);
 
   const getFillColor = useChoroplethColorScale(
     getChoroplethValue,
