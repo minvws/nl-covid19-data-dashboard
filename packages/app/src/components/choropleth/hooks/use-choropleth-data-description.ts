@@ -49,6 +49,10 @@ export function useChoroplethDataDescription<T>(
       })
       .filter((x) => x.count > 0);
 
+    if (ranges.length == 0) {
+      return '';
+    }
+
     const texts = ranges.map((range) => {
       const txt =
         range.rangeHigh === Infinity
