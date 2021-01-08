@@ -2,6 +2,7 @@ import css from '@styled-system/css';
 import { Feature, MultiPolygon } from 'geojson';
 import { ReactNode, useCallback } from 'react';
 import { AspectRatio } from '~/components-styled/aspect-ratio';
+import { Municipalities } from '~/types/data';
 import { Choropleth } from './choropleth';
 import {
   useChartDimensions,
@@ -16,8 +17,9 @@ import { Path } from './path';
 import { MunicipalityProperties, MunicipalitiesMetricName } from './shared';
 import { countryGeo, municipalGeo, regionGeo } from './topology';
 
-type MunicipalityChoroplethProps<T> = {
-  metricName: MunicipalitiesMetricName;
+type MunicipalityChoroplethProps<T, K extends MunicipalitiesMetricName> = {
+  data: Pick<Municipalities, K>;
+  metricName: K;
   metricProperty: string;
   selected?: string;
   highlightSelection?: boolean;
@@ -38,10 +40,11 @@ type MunicipalityChoroplethProps<T> = {
  *
  * @param props
  */
-export function MunicipalityChoropleth<T>(
-  props: MunicipalityChoroplethProps<T>
+export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
+  props: MunicipalityChoroplethProps<T, K>
 ) {
   const {
+    data,
     selected,
     metricName,
     metricProperty,
@@ -58,7 +61,8 @@ export function MunicipalityChoropleth<T>(
   const { getChoroplethValue, hasData } = useMunicipalityData(
     municipalGeo,
     metricName,
-    metricProperty
+    metricProperty,
+    data
   );
 
   const safetyRegionMunicipalCodes = useRegionMunicipalities(selected);
