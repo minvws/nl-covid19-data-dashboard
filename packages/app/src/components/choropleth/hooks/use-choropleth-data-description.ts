@@ -60,9 +60,13 @@ export function useChoroplethDataDescription<T>(
       return replaceVariablesInText(txt, { ...range, verb, area });
     });
 
-    return replaceVariablesInText(dynamicTexts.full_sentence, {
-      first: texts.slice(0, -1).join(', '),
-      last: texts.slice(-1).join(''),
-    });
+    return texts.length > 1
+      ? replaceVariablesInText(dynamicTexts.full_sentence, {
+          first: texts.slice(0, -1).join(', '),
+          last: texts.slice(-1).join(''),
+        })
+      : replaceVariablesInText(dynamicTexts.full_sentence_single, {
+          first: texts[0],
+        });
   }, [thresholds, gmValues, metricName, metricProperty, area, gemcodes]);
 }

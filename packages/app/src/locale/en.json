@@ -2076,6 +2076,14 @@
         "sentence": "{{count}} {{area}} {{verb} } between {{rangeLow}} and {{rangeHigh}} positive tested people",
         "last_sentence": "{{count}} {{area}} {{verb}} more than {{rangeLow}} positive tested people"
       }
+    },
+    "escalation_levels": {
+      "escalation_level": {
+        "full_sentence": "This map shows that {{first}} en {{last}}.",
+        "full_sentence_single": "This map shows that {{first}}.",
+        "sentence": "{{count}} {{area}} {{verb}} risklevel {{rangeLow}}",
+        "last_sentence": "{{count}} {{area}} {{verb}} risklevel {{rangeLow}}"
+      }
     }
   }
 }

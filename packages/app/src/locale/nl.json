@@ -2073,8 +2073,17 @@
     "tested_overall": {
       "infected_per_100k": {
         "full_sentence": "Deze kaart toont dat {{first}} en {{last}}.",
+        "full_sentence_single": "Deze kaart toont dat {{first}}.",
         "sentence": "{{count}} {{area}} tussen de {{rangeLow}} en {{rangeHigh}} positief geteste mensen {{verb}}",
         "last_sentence": "{{count}} {{area}} meer dan {{rangeLow}} positief geteste mensen {{verb}}"
+      }
+    },
+    "escalation_levels": {
+      "escalation_level": {
+        "full_sentence": "Deze kaart toont dat {{first}} en {{last}}.",
+        "full_sentence_single": "Deze kaart toont dat {{first}}.",
+        "sentence": "{{count}} {{area}} risiconiveau {{rangeLow}} {{verb}}",
+        "last_sentence": "{{count}} {{area}} risiconiveau {{rangeLow}} {{verb}}"
       }
     }
   }
