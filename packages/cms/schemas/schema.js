@@ -8,10 +8,13 @@ import schemaTypes from "all:part:@sanity/base/schema-type";
 // some of these are 'singletons' but that's not enforced by the API
 // import siteSettings from "./documents/siteSettings";
 // import laatsteOntwikkelingen from "./documents/laatste-ontwikkelingen";
-import veelgesteldeVragen from "./documents/veelgestelde-vragen";
-import cijferVerantwoording from "./documents/cijfer-verantwoording";
-import overRisicoNiveaus from "./documents/over-risico-niveaus";
-import overDitDashboard from "./documents/over-dit-dashboard";
+import veelgesteldeVragen from "./documents/pages/veelgestelde-vragen";
+import cijferVerantwoording from "./documents/pages/cijfer-verantwoording";
+import overRisicoNiveaus from "./documents/pages/over-risico-niveaus";
+import overDitDashboard from "./documents/pages/over-dit-dashboard";
+
+// Lokalize replacement?
+import staticMessage from "./documents/i18n/static-message";
 
 //objects are building blocks, but not queryable in itself
 // import openGraph from "./objects/open-graph";
@@ -32,10 +35,13 @@ export default createSchema({
     //documents
     // siteSettings,
     // laatsteOntwikkelingen,
+    //pages
     veelgesteldeVragen,
     cijferVerantwoording,
     overRisicoNiveaus,
     overDitDashboard,
+    //i18n
+    staticMessage,
     //objects
     // openGraph,
     collapsible,
