@@ -120,7 +120,9 @@ const ChoroplethMap: <T1, T3>(
   } = props;
 
   const clipPathId = useRef(`_${Math.random().toString(36).substring(2, 15)}`);
-  const titleId = useRef(`_${Math.random().toString(36).substring(2, 15)}`);
+  const dataDescriptionId = useRef(
+    `_${Math.random().toString(36).substring(2, 15)}`
+  );
   const timeout = useRef(-1);
   const isTouch = useIsTouchDevice();
 
@@ -137,7 +139,7 @@ const ChoroplethMap: <T1, T3>(
 
   return (
     <>
-      <span id={titleId.current} style={{ display: 'none' }}>
+      <span id={dataDescriptionId.current} style={{ display: 'none' }}>
         {dataDescription}
       </span>
       <svg
@@ -149,7 +151,7 @@ const ChoroplethMap: <T1, T3>(
           isTouch ? undefined : createSvgMouseOutHandler(timeout, setTooltip)
         }
         onClick={createSvgClickHandler(onPathClick, setTooltip, isTouch)}
-        aria-labelledby={titleId.current}
+        aria-labelledby={dataDescriptionId.current}
       >
         <clipPath id={clipPathId.current}>
           <rect
