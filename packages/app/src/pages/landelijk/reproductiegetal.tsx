@@ -110,6 +110,6 @@ const ReproductionIndex: FCWithLayout<NationalPageProps> = (props) => {
 
 ReproductionIndex.getLayout = getNationalLayout;
 
-export const getStaticProps = getNationalStaticProps;
+export const getStaticProps = getNationalStaticProps();
 
 export default ReproductionIndex;

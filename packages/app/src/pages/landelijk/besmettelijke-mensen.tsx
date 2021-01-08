@@ -111,6 +111,6 @@ const InfectiousPeople: FCWithLayout<NationalPageProps> = (props) => {
 
 InfectiousPeople.getLayout = getNationalLayout;
 
-export const getStaticProps = getNationalStaticProps;
+export const getStaticProps = getNationalStaticProps();
 
 export default InfectiousPeople;

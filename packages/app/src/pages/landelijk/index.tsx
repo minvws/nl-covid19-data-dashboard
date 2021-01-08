@@ -11,6 +11,6 @@ const National: FCWithLayout<NationalPageProps> = () => {
 
 National.getLayout = getNationalLayout;
 
-export const getStaticProps = getNationalStaticProps;
+export const getStaticProps = getNationalStaticProps();
 
 export default National;

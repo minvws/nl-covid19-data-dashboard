@@ -101,6 +101,6 @@ const SuspectedPatients: FCWithLayout<NationalPageProps> = (props) => {
 
 SuspectedPatients.getLayout = getNationalLayout;
 
-export const getStaticProps = getNationalStaticProps;
+export const getStaticProps = getNationalStaticProps();
 
 export default SuspectedPatients;

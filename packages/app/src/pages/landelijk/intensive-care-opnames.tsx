@@ -115,6 +115,6 @@ const IntakeIntensiveCare: FCWithLayout<NationalPageProps> = (props) => {
 
 IntakeIntensiveCare.getLayout = getNationalLayout;
 
-export const getStaticProps = getNationalStaticProps;
+export const getStaticProps = getNationalStaticProps();
 
 export default IntakeIntensiveCare;

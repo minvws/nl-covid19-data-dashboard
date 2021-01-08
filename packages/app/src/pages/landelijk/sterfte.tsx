@@ -101,6 +101,6 @@ const DeceasedNationalPage: FCWithLayout<NationalPageProps> = (props) => {
 
 DeceasedNationalPage.getLayout = getNationalLayout;
 
-export const getStaticProps = getNationalStaticProps;
+export const getStaticProps = getNationalStaticProps();
 
 export default DeceasedNationalPage;
