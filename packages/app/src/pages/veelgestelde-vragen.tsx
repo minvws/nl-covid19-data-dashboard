@@ -1,39 +1,39 @@
 import fs from 'fs';
+import { groq } from 'next-sanity';
 import Head from 'next/head';
 import path from 'path';
-import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
+import { Collapsable } from '~/components-styled/collapsable';
 import { MaxWidth } from '~/components-styled/max-width';
-import siteText from '~/locale/index';
+import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
+import { getClient, localize, PortableText } from '~/lib/sanity';
+import siteText, { targetLanguage } from '~/locale/index';
+import { CollapsibleList } from '~/types/cms';
 import { getSkipLinkId } from '~/utils/skipLinks';
 import styles from './over.module.scss';
-import { Collapsable } from '~/components-styled/collapsable';
-import { targetLanguage } from '../locale/index';
-import { groq } from 'next-sanity';
-import { getClient, localize, PortableText } from '~/lib/sanity';
+
 interface StaticProps {
   props: VeelgesteldeVragenProps;
 }
 
 interface VeelgesteldeVragenProps {
   data: {
-    title: string;
-    description: string | null;
-    questions: Array<{ content: Array<any>; title: string }>;
+    title: string | null;
+    description: unknown[] | null;
+    questions: CollapsibleList[];
   };
   lastGenerated: string;
 }
-
-const faqQuery = groq`
-  *[_type == 'veelgesteldeVragen'][0]
-`;
 
 export async function getStaticProps(): Promise<StaticProps> {
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const lastGenerated = JSON.parse(fileContents).last_generated;
 
-  const faqData = await getClient(false).fetch(faqQuery);
-  const data = localize(faqData, [targetLanguage, 'nl']);
+  const query = groq`
+  *[_type == 'veelgesteldeVragen'][0]
+`;
+  const rawData = await getClient(false).fetch(query);
+  const data = localize(rawData, [targetLanguage, 'nl']);
 
   return { props: { data, lastGenerated } };
 }
@@ -60,13 +60,11 @@ const Verantwoording: FCWithLayout<VeelgesteldeVragenProps> = (props) => {
       <div className={styles.container}>
         <MaxWidth>
           <div className={styles.maxwidth}>
-            <h2>{data.title}</h2>
-
+            {data.title && <h2>{data.title}</h2>}
             {data.description && <PortableText blocks={data.description} />}
-
-            {data.questions ? (
+            {data.questions && (
               <article className={styles.faqList}>
-                {data.questions.map((item: any) => {
+                {data.questions.map((item) => {
                   const id = getSkipLinkId(item.title);
                   return (
                     <Collapsable key={id} id={id} summary={item.title}>
@@ -75,8 +73,6 @@ const Verantwoording: FCWithLayout<VeelgesteldeVragenProps> = (props) => {
                   );
                 })}
               </article>
-            ) : (
-              <p>Er zijn geen vragen gevonden</p>
             )}
           </div>
         </MaxWidth>
