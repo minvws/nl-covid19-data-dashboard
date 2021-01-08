@@ -17,6 +17,9 @@ dist
 .idea/
 !.env.local.example
 
+# Datasets
+*.tar.gz
+
 # CI/CD
 /env
 /public/json
