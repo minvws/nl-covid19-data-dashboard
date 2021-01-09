@@ -4,6 +4,9 @@ import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { ChoroplethThresholdsValue } from '../shared';
 import { DataValue } from './use-municipality-data';
 
+/**
+ * This hooks generates a text that describes the distribution of the choropleth data for accessibility purposes.
+ */
 export function useChoroplethDataDescription<T>(
   thresholds: ChoroplethThresholdsValue[],
   gmValues: DataValue[],
@@ -13,9 +16,7 @@ export function useChoroplethDataDescription<T>(
   gemcodes?: string[]
 ) {
   return useMemo(() => {
-    const dynamicTexts = (siteText.choropleth as any)[metricName]?.[
-      metricProperty
-    ];
+    const dynamicTexts = getDynamicText(metricName, metricProperty);
 
     if (!dynamicTexts) {
       return '';
@@ -72,4 +73,24 @@ export function useChoroplethDataDescription<T>(
           first: texts[0],
         });
   }, [thresholds, gmValues, metricName, metricProperty, area, gemcodes]);
+}
+
+function getDynamicText<T>(metricName: keyof T, metricProperty: string) {
+  if (metricName !== 'behavior') {
+    return (siteText.choropleth as any)[metricName]?.[metricProperty];
+  } else {
+    const parts = metricProperty.split('_');
+    const restrictionKey = parts.slice(0, -1).join('_');
+    const restriction = (siteText.gedrag_onderwerpen as any)[restrictionKey];
+    const type = parts.slice(-1).join('');
+    const texts = (siteText.choropleth as any)[metricName]?.[type];
+    return {
+      ...texts,
+      sentence: texts.sentence.replace('{{restriction}}', restriction),
+      last_sentence: texts.last_sentence.replace(
+        '{{restriction}}',
+        restriction
+      ),
+    };
+  }
 }

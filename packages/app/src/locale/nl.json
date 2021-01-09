@@ -2125,6 +2125,20 @@
         "sentence": "{{count}} {{area}} tussen de {{rangeLow}} x 100 miljard en {{rangeHigh}} x 100 miljard virusdeeltjes per 100000 inwoners {{verb}}",
         "last_sentence": "{{count}} {{area}} meer dan {{rangeLow}} x 100 miljard virusdeeltjes per 100000 inwoners {{verb}}"
       }
+    },
+    "behavior": {
+      "compliance": {
+        "full_sentence": "Deze kaart toont dat {{first}} en {{last}}.",
+        "full_sentence_single": "Deze kaart toont dat {{first}}.",
+        "sentence": "{{count}} {{area}} tussen de {{rangeLow}} en {{rangeHigh}} procent deelnemers {{verb}} die zich aan de maatregel '{{restriction}}' houden",
+        "last_sentence": "{{count}} {{area}} meer dan {{rangeLow}} procent deelnemers {{verb}} die zich aan de maatregel '{{restriction}}' houden"
+      },
+      "support": {
+        "full_sentence": "Deze kaart toont dat {{first}} en {{last}}.",
+        "full_sentence_single": "Deze kaart toont dat {{first}}.",
+        "sentence": "{{count}} {{area}} tussen de {{rangeLow}} en {{rangeHigh}} procent draagvlak {{verb}} voor de maatregel '{{restriction}}'",
+        "last_sentence": "{{count}} {{area}} meer dan {{rangeLow}} procent draagvlak {{verb}} voor de maatregel '{{restriction}}'"
+      }
     }
   }
 }
