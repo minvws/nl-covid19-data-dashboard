@@ -11,6 +11,7 @@ import {
   useMunicipalityData,
   useRegionMunicipalities,
 } from './hooks';
+import { useChoroplethDataDescription } from './hooks/use-choropleth-data-description';
 import { getDataThresholds } from './legenda/utils';
 import { municipalThresholds } from './municipal-thresholds';
 import { Path } from './path';
@@ -56,7 +57,7 @@ export function MunicipalityChoropleth<T>(
 
   const [boundingbox] = useMunicipalityBoundingbox(regionGeo, selected);
 
-  const { getChoroplethValue, hasData } = useMunicipalityData(
+  const { getChoroplethValue, hasData, values } = useMunicipalityData(
     municipalGeo,
     metricName,
     metricProperty
@@ -68,6 +69,15 @@ export function MunicipalityChoropleth<T>(
     municipalThresholds,
     metricName,
     metricProperty
+  );
+
+  const dataDescription = useChoroplethDataDescription(
+    thresholdValues,
+    values,
+    metricName,
+    metricProperty,
+    'gm',
+    safetyRegionMunicipalCodes
   );
 
   const getFillColor = useChoroplethColorScale(
@@ -154,6 +164,7 @@ export function MunicipalityChoropleth<T>(
     <div ref={ref} css={css({ bg: 'transparent', position: 'relative' })}>
       <AspectRatio ratio={1 / ratio}>
         <Choropleth
+          description={dataDescription}
           featureCollection={municipalGeo}
           hovers={hasData ? municipalGeo : undefined}
           boundingBox={boundingbox || countryGeo}

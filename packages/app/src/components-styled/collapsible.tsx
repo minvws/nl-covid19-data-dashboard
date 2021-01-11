@@ -97,7 +97,7 @@ interface CollapsableProps extends BoxProps {
   id?: string;
 }
 
-export const Collapsable = ({ summary, children, id }: CollapsableProps) => {
+export const Collapsible = ({ summary, children, id }: CollapsableProps) => {
   const [open, setOpen] = useState(false);
   const [panelHeight, setPanelHeight] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -137,7 +137,7 @@ export const Collapsable = ({ summary, children, id }: CollapsableProps) => {
 
   /**
    * Checks the hash part of the URL to see if it matches this instances id.
-   * If so, the collapsable needs to be opened.
+   * If so, the collapsible needs to be opened.
    */
   const checkLocationHash = useCallback(() => {
     if (window?.location.hash.substr(1) === id) {

@@ -48,6 +48,8 @@ export function TitleWithIcon(props: TitleWithIconProps) {
 function Icon({ children }: { children: ReactNode }) {
   return (
     <Box
+      role="img"
+      aria-hidden="true"
       flex="0 0 auto"
       display="flex"
       flexDirection="row"
