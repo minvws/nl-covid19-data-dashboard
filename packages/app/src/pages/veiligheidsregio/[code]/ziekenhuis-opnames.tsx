@@ -75,7 +75,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
               data-cy="hospital_moving_avg_per_region"
               absolute={lastValue.admissions_moving_average}
               difference={
-                data.difference.hospital_nice__admissions_moving_average
+                data.difference.hospital_nice__admissions_on_date_of_reporting
               }
             />
           </KpiTile>

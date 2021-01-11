@@ -78,7 +78,7 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
               metricName="hospital_nice"
               metricProperty="admissions_moving_average"
               localeTextKey="ziekenhuisopnames_per_dag"
-              differenceKey="hospital_nice__admissions_moving_average"
+              differenceKey="hospital_nice__admissions_on_date_of_reporting"
             />
           </KpiTile>
 
