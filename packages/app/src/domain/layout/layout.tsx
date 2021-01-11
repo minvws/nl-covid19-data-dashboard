@@ -18,7 +18,9 @@ interface LayoutProps {
 
 export type FCWithLayout<
   PropsOrGetStaticProps = void,
-  Props = PropsOrGetStaticProps extends (...args: any) => any
+  Props = PropsOrGetStaticProps extends (
+    ...args: any[]
+  ) => Promise<{ props: any }>
     ? StaticProps<PropsOrGetStaticProps>
     : PropsOrGetStaticProps
 > = React.FC<Props> & {
