@@ -1,5 +1,5 @@
 {
-  "name": "@corona-dashboard/cypress",
+  "name": "@corona-dashboard/e2e",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
