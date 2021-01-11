@@ -21,7 +21,7 @@ export async function getStaticProps() {
   const query = groq`
   *[_type == 'overDitDashboard'][0]
 `;
-  const rawData = await getClient(false).fetch<OverData>(query);
+  const rawData = await getClient().fetch<OverData>(query);
   const data = localize(rawData, [targetLanguage, 'nl']);
 
   return { props: { data, lastGenerated } };

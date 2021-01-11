@@ -53,9 +53,9 @@ export const previewClient = createClient({
   token: process.env.SANITY_API_TOKEN,
 });
 
-// Helper function for easily switching between normal client and preview client
-export const getClient = (usePreview = false) =>
-  usePreview ? previewClient : sanityClient;
+// Helper functions for getting normal client and preview client
+export const getClient = () => sanityClient;
+export const getPreviewClient = () => previewClient;
 
 // Helper function for using the current logged in user account
 export const useCurrentUser = createCurrentUserHook(config);

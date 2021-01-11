@@ -25,7 +25,7 @@ export async function getStaticProps() {
   const query = groq`
   *[_type == 'veelgesteldeVragen'][0]
 `;
-  const rawData = await getClient(false).fetch<VeelgesteldeVragenData>(query);
+  const rawData = await getClient().fetch<VeelgesteldeVragenData>(query);
   const data = localize(rawData, [targetLanguage, 'nl']);
 
   return { props: { data, lastGenerated } };

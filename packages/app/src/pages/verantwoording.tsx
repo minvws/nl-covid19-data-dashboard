@@ -10,21 +10,13 @@ import siteText, { targetLanguage } from '~/locale/index';
 import { CollapsibleList } from '~/types/cms';
 import { getSkipLinkId } from '~/utils/skipLinks';
 import styles from './over.module.scss';
-
-interface StaticProps {
-  props: VerantwoordingProps;
+interface VerantwoordingData {
+  title: string | null;
+  description: unknown[] | null;
+  collapsibleList: CollapsibleList[];
 }
 
-interface VerantwoordingProps {
-  data: {
-    title: string | null;
-    description: unknown[] | null;
-    collapsibleList: CollapsibleList[];
-  };
-  lastGenerated: string;
-}
-
-export async function getStaticProps(): Promise<StaticProps> {
+export async function getStaticProps() {
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const lastGenerated = JSON.parse(fileContents).last_generated;
@@ -32,13 +24,13 @@ export async function getStaticProps(): Promise<StaticProps> {
   const query = groq`
   *[_type == 'cijferVerantwoording'][0]
 `;
-  const rawData = await getClient(false).fetch(query);
+  const rawData = await getClient().fetch<VerantwoordingData>(query);
   const data = localize(rawData, [targetLanguage, 'nl']);
 
   return { props: { data, lastGenerated } };
 }
 
-const Verantwoording: FCWithLayout<VerantwoordingProps> = (props) => {
+const Verantwoording: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data } = props;
 
   return (

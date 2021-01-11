@@ -25,7 +25,7 @@ export async function getStaticProps() {
   const query = groq`
   *[_type == 'overRisicoNiveaus'][0]
 `;
-  const rawData = await getClient(false).fetch<OverRisiconiveausData>(query);
+  const rawData = await getClient().fetch<OverRisiconiveausData>(query);
   const data = localize(rawData, [targetLanguage, 'nl']);
 
   return { props: { data, lastGenerated } };

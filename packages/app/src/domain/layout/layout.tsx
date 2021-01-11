@@ -6,7 +6,6 @@ import { AppFooter } from '~/components-styled/layout/app-footer';
 import { AppHeader } from '~/components-styled/layout/app-header';
 import { SkipLinkMenu } from '~/components-styled/skip-link-menu';
 import { ILastGeneratedData } from '~/static-props/last-generated-data';
-import { StaticProps } from '~/static-props/types';
 
 interface LayoutProps {
   url?: string;
@@ -15,6 +14,10 @@ interface LayoutProps {
   openGraphImage?: string;
   twitterImage?: string;
 }
+
+type StaticProps<T extends (...args: any) => any> = Await<
+  ReturnType<T>
+>['props'];
 
 export type FCWithLayout<
   PropsOrGetStaticProps = void,
