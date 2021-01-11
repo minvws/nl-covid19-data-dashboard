@@ -2,7 +2,7 @@ import fs from 'fs';
 import { groq } from 'next-sanity';
 import Head from 'next/head';
 import path from 'path';
-import { Collapsable } from '~/components-styled/collapsable';
+import { Collapsible } from '~/components-styled/collapsible';
 import { MaxWidth } from '~/components-styled/max-width';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import { getClient, localize, PortableText } from '~/lib/sanity';
@@ -67,9 +67,9 @@ const Verantwoording: FCWithLayout<VerantwoordingProps> = (props) => {
                 {data.collapsibleList.map((item) => {
                   const id = getSkipLinkId(item.title);
                   return (
-                    <Collapsable key={id} id={id} summary={item.title}>
+                    <Collapsible key={id} id={id} summary={item.title}>
                       <PortableText blocks={item.content} />
-                    </Collapsable>
+                    </Collapsible>
                   );
                 })}
               </article>
