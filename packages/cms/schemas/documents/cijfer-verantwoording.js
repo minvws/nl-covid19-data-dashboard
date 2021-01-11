@@ -23,4 +23,10 @@ export default {
       of: [{ type: "collapsible" }],
     },
   ],
+  preview: {
+    select: {
+      title: "title.nl",
+      subtitle: "description.nl",
+    },
+  },
 };
