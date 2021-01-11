@@ -740,13 +740,7 @@
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": [
-      "0 to 20",
-      "20 to 40",
-      "40 to 60",
-      "60 to 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -1931,5 +1925,74 @@
     "VR23": "http://vrln.nl/",
     "VR24": "http://www.vrzuidlimburg.nl/",
     "VR25": "http://www.veiligheidsregioflevoland.nl/"
+  },
+  "choropleth": {
+    "verb": {
+      "singular": "has",
+      "plural": "have"
+    },
+    "gm": {
+      "singular": "municipality",
+      "plural": "municipalities"
+    },
+    "vr": {
+      "singular": "safetyregion",
+      "plural": "safetyregions"
+    },
+    "tested_overall": {
+      "infected_per_100k": {
+        "full_sentence": "This map shows that {{first}} and {{last}}.",
+        "sentence": "{{count}} {{area}} {{verb} } between {{rangeLow}} and {{rangeHigh}} positive tested people per 100000 inhabitants",
+        "last_sentence": "{{count}} {{area}} {{verb}} more than {{rangeLow}} positive tested people per 100000 inhabitants"
+      }
+    },
+    "escalation_levels": {
+      "escalation_level": {
+        "full_sentence": "This map shows that {{first}} and {{last}}.",
+        "full_sentence_single": "This map shows that {{first}}.",
+        "sentence": "{{count}} {{area}} {{verb}} risklevel {{rangeLow}}",
+        "last_sentence": "{{count}} {{area}} {{verb}} risklevel {{rangeLow}}"
+      }
+    },
+    "hospital_nice": {
+      "admissions_moving_average": {
+        "full_sentence": "This map shows that {{first}} and {{last}}.",
+        "full_sentence_single": "This map shows that {{first}}.",
+        "sentence": "{{count}} {{area}}  {{verb}} between {{rangeLow}} and {{rangeHigh}} hospital admissions",
+        "last_sentence": "{{count}} {{area}} {{verb}} more than {{rangeLow}} hospital admissions"
+      }
+    },
+    "nursing_home": {
+      "infected_locations_percentage": {
+        "full_sentence": "This map shows that {{first}} and {{last}}.",
+        "full_sentence_single": "This map shows that {{first}}.",
+        "sentence": "{{count}} {{area}} {{verb}} between {{rangeLow}} and {{rangeHigh}} percent infected locations",
+        "last_sentence": "{{count}} {{area}} {{verb}} more than {{rangeLow}} percent infected locations"
+      }
+    },
+    "disability_care": {
+      "infected_locations_percentage": {
+        "full_sentence": "This map shows that {{first}} and {{last}}.",
+        "full_sentence_single": "This map shows that {{first}}.",
+        "sentence": "{{count}} {{area}} {{verb}} between {{rangeLow}} and {{rangeHigh}} percent infected locations",
+        "last_sentence": "{{count}} {{area}} {{verb}} more than {{rangeLow}} percent infected locations"
+      }
+    },
+    "elderly_at_home": {
+      "positive_tested_daily_per_100k": {
+        "full_sentence": "This map shows that {{first}} and {{last}}.",
+        "full_sentence_single": "This map shows that {{first}}.",
+        "sentence": "{{count}} {{area}} {{verb}} between {{rangeLow}} and {{rangeHigh}} infections per 100000 people",
+        "last_sentence": "{{count}} {{area}} {{verb}} more than {{rangeLow}} infections per 100000 people"
+      }
+    },
+    "sewer": {
+      "average": {
+        "full_sentence": "This map shows that {{first}} and {{last}}.",
+        "full_sentence_single": "This map shows that {{first}}.",
+        "sentence": "{{count}} {{area}} {{verb}} between {{rangeLow}} x 100 billion and {{rangeHigh}} x 100 billion virus particles per 100000 inhabitants",
+        "last_sentence": "{{count}} {{area}} {{verb}} more than {{rangeLow}} x 100 billion virus particles per 100000 inhabitants"
+      }
+    }
   }
 }

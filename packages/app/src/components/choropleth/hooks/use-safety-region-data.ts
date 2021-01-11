@@ -6,9 +6,10 @@ import { assert } from '~/utils/assert';
 import {
   Dictionary,
   RegionGeoJSON,
-  SafetyRegionProperties,
   RegionsMetricName,
+  SafetyRegionProperties,
 } from '../shared';
+import { DataValue } from './use-municipality-data';
 
 interface RegionMetricValue extends SafetyRegionProperties {
   [key: string]: unknown;
@@ -23,6 +24,7 @@ export type GetRegionDataFunctionType = (id: string) => RegionChoroplethValue;
 type UseRegionDataReturnValue = {
   getChoroplethValue: GetRegionDataFunctionType;
   hasData: boolean;
+  values: DataValue[];
 };
 
 /**
@@ -53,8 +55,15 @@ export function useSafetyRegionData(
       return {
         getChoroplethValue: (id) => ({ ...propertyData[id], __color_value: 0 }),
         hasData: false,
+        values: [],
       };
     }
+
+    const values =
+      (data?.[metricName] as any[])?.map((x) => ({
+        code: x.vrcode,
+        value: x[metricProperty],
+      })) ?? [];
 
     const metricForAllRegions = (data[metricName] as unknown) as
       | RegionMetricValue[]
@@ -101,6 +110,6 @@ export function useSafetyRegionData(
       return value || { ...propertyData[id], __color_value: 0 };
     };
 
-    return { getChoroplethValue, hasData };
+    return { getChoroplethValue, hasData, values };
   }, [data, metricName, metricProperty, featureCollection.features]);
 }

@@ -740,13 +740,7 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": [
-      "0 tot 20",
-      "20 tot 40",
-      "40 tot 60",
-      "60 tot 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -1931,5 +1925,89 @@
     "VR23": "http://vrln.nl/",
     "VR24": "http://www.vrzuidlimburg.nl/",
     "VR25": "http://www.veiligheidsregioflevoland.nl/"
+  },
+  "choropleth": {
+    "verb": {
+      "singular": "heeft",
+      "plural": "hebben"
+    },
+    "gm": {
+      "singular": "gemeente",
+      "plural": "gemeentes"
+    },
+    "vr": {
+      "singular": "veiligheidsregio",
+      "plural": "veiligheidsregios"
+    },
+    "tested_overall": {
+      "infected_per_100k": {
+        "full_sentence": "Deze kaart toont dat {{first}} en {{last}}.",
+        "full_sentence_single": "Deze kaart toont dat {{first}}.",
+        "sentence": "{{count}} {{area}} tussen de {{rangeLow}} en {{rangeHigh}} positief geteste mensen per 100000 inwoners {{verb}}",
+        "last_sentence": "{{count}} {{area}} meer dan {{rangeLow}} positief geteste mensen per 100000 inwoners {{verb}}"
+      }
+    },
+    "escalation_levels": {
+      "escalation_level": {
+        "full_sentence": "Deze kaart toont dat {{first}} en {{last}}.",
+        "full_sentence_single": "Deze kaart toont dat {{first}}.",
+        "sentence": "{{count}} {{area}} risiconiveau {{rangeLow}} {{verb}}",
+        "last_sentence": "{{count}} {{area}} risiconiveau {{rangeLow}} {{verb}}"
+      }
+    },
+    "hospital_nice": {
+      "admissions_moving_average": {
+        "full_sentence": "Deze kaart toont dat {{first}} en {{last}}.",
+        "full_sentence_single": "Deze kaart toont dat {{first}}.",
+        "sentence": "{{count}} {{area}} tussen de {{rangeLow}} en {{rangeHigh}} ziekenhuisopnames {{verb}}",
+        "last_sentence": "{{count}} {{area}} meer dan {{rangeLow}} ziekenhuisopnames {{verb}}"
+      }
+    },
+    "nursing_home": {
+      "infected_locations_percentage": {
+        "full_sentence": "Deze kaart toont dat {{first}} en {{last}}.",
+        "full_sentence_single": "Deze kaart toont dat {{first}}.",
+        "sentence": "{{count}} {{area}} tussen de {{rangeLow}} en {{rangeHigh}} procent besmette locaties {{verb}}",
+        "last_sentence": "{{count}} {{area}} meer dan {{rangeLow}} procent besmette locaties {{verb}}"
+      }
+    },
+    "disability_care": {
+      "infected_locations_percentage": {
+        "full_sentence": "Deze kaart toont dat {{first}} en {{last}}.",
+        "full_sentence_single": "Deze kaart toont dat {{first}}.",
+        "sentence": "{{count}} {{area}} tussen de {{rangeLow}} en {{rangeHigh}} procent besmette locaties {{verb}}",
+        "last_sentence": "{{count}} {{area}} meer dan {{rangeLow}} procent besmette locaties {{verb}}"
+      }
+    },
+    "elderly_at_home": {
+      "positive_tested_daily_per_100k": {
+        "full_sentence": "Deze kaart toont dat {{first}} en {{last}}.",
+        "full_sentence_single": "Deze kaart toont dat {{first}}.",
+        "sentence": "{{count}} {{area}} tussen de {{rangeLow}} en {{rangeHigh}} besmettingen per 100000 personen {{verb}}",
+        "last_sentence": "{{count}} {{area}} meer dan {{rangeLow}} besmettingen per 100000 personen {{verb}}"
+      }
+    },
+    "sewer": {
+      "average": {
+        "full_sentence": "Deze kaart toont dat {{first}} en {{last}}.",
+        "full_sentence_single": "Deze kaart toont dat {{first}}.",
+        "sentence": "{{count}} {{area}} tussen de {{rangeLow}} x 100 miljard en {{rangeHigh}} x 100 miljard virusdeeltjes per 100000 inwoners {{verb}}",
+        "last_sentence": "{{count}} {{area}} meer dan {{rangeLow}} x 100 miljard virusdeeltjes per 100000 inwoners {{verb}}"
+      }
+    },
+    "behavior": {
+      "compliance": {
+        "full_sentence": "Deze kaart toont dat {{first}} en {{last}}.",
+        "full_sentence_single": "Deze kaart toont dat {{first}}.",
+        "sentence": "{{count}} {{area}} tussen de {{rangeLow}} en {{rangeHigh}} procent deelnemers {{verb}} die zich aan de maatregel '{{restriction}}' houden",
+        "last_sentence": "{{count}} {{area}} meer dan {{rangeLow}} procent deelnemers {{verb}} die zich aan de maatregel '{{restriction}}' houden"
+      },
+      "support": {
+        "full_sentence": "Deze kaart toont dat {{first}} en {{last}}.",
+        "full_sentence_single": "Deze kaart toont dat {{first}}.",
+        "sentence": "{{count}} {{area}} tussen de {{rangeLow}} en {{rangeHigh}} procent draagvlak {{verb}} voor de maatregel '{{restriction}}'",
+        "last_sentence": "{{count}} {{area}} meer dan {{rangeLow}} procent draagvlak {{verb}} voor de maatregel '{{restriction}}'"
+      }
+    }
   }
 }
