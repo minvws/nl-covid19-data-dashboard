@@ -3,12 +3,13 @@
     "baseUrl": ".",
     "paths": {
       "~/*": ["../app/src/*"],
-      "@/*": ["/*"]
+      "@/*": ["./*"]
     },
+    "moduleResolution": "node",
     "target": "es5",
     "lib": ["dom", "esnext"],
     "module": "esnext",
-    "types": ["cypress"]
+    "types": ["cypress", "node"]
   },
-  "include": ["../src/types/data.d.ts", "**/*.ts"]
+  "include": ["../app/src/types/data.d.ts", "**/*.ts"]
 }
