@@ -1,5 +1,9 @@
 import { Context } from 'mocha';
-import { Municipal, National, Regionaal } from '~/types/data';
+import {
+  Municipal,
+  National,
+  Regionaal,
+} from '@corona-dashboard/app/types/data';
 
 export type RegionalContext = Context & {
   regionData: Regionaal;

@@ -1,5 +1,8 @@
-import { NationalContext } from '@/integration/types';
-import { formatNumber, formatPercentage } from '~/utils/formatNumber';
+import { NationalContext } from '~/integration/types';
+import {
+  formatNumber,
+  formatPercentage,
+} from '@corona-dashboard/app/utils/formatNumber';
 
 context('Landelijk - Verpleeghuiszorg', () => {
   before(() => {

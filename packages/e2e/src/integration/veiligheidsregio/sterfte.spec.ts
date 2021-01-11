@@ -1,5 +1,5 @@
-import { RegionalContext } from '@/integration/types';
-import { formatNumber } from '~/utils/formatNumber';
+import { RegionalContext } from '~/integration/types';
+import { formatNumber } from '@corona-dashboard/app/utils/formatNumber';
 
 context('Regionaal - Sterfte', () => {
   before(() => {

@@ -1,15 +1,19 @@
 {
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "rootDir": "src",
     "baseUrl": ".",
     "paths": {
-      "~/*": ["../app/src/*"],
-      "@/*": ["./*"]
+      "~/*": ["src/*"]
     },
     "moduleResolution": "node",
-    "target": "es5",
+    "target": "es2018",
     "lib": ["dom", "esnext"],
     "module": "esnext",
-    "types": ["cypress", "node"]
+    "types": ["cypress", "node"],
+    "sourceMap": true
   },
-  "include": ["../app/src/types/data.d.ts", "**/*.ts"]
+  "references": [{ "path": "../app" }],
+  // "include": ["../app/src/types/data.d.ts", "**/*.ts"]
+  "include": ["src"]
 }

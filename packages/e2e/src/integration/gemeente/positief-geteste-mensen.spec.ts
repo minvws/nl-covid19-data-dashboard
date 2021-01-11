@@ -1,5 +1,5 @@
-import { MunicipalContext } from '@/integration/types';
-import { formatNumber } from '~/utils/formatNumber';
+import { MunicipalContext } from '~/integration/types';
+import { formatNumber } from '@corona-dashboard/app/utils/formatNumber';
 
 context('Gemeente - Positief geteste mensen', () => {
   before(() => {

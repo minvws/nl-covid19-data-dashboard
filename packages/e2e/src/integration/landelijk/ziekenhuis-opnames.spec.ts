@@ -1,5 +1,5 @@
-import { NationalContext } from '@/integration/types';
-import { formatNumber } from '~/utils/formatNumber';
+import { NationalContext } from '~/integration/types';
+import { formatNumber } from '@corona-dashboard/app/utils/formatNumber';
 
 context('Landelijk - Ziekenhuis opnames', () => {
   before(() => {
