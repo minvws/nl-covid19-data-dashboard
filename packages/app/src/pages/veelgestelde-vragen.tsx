@@ -25,7 +25,7 @@ interface VeelgesteldeVragenProps {
   lastGenerated: string;
 }
 
-export async function getStaticProps(): Promise<StaticProps> {
+export async function getStaticProps(preview = false): Promise<StaticProps> {
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const lastGenerated = JSON.parse(fileContents).last_generated;
@@ -33,7 +33,7 @@ export async function getStaticProps(): Promise<StaticProps> {
   const query = groq`
   *[_type == 'veelgesteldeVragen'][0]
 `;
-  const rawData = await getClient(false).fetch(query);
+  const rawData = await getClient(preview).fetch(query);
   const data = localize(rawData, [targetLanguage, 'nl']);
 
   return { props: { data, lastGenerated } };
