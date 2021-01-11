@@ -15,4 +15,10 @@ export default {
       title: "Beschrijving",
     },
   ],
+  preview: {
+    select: {
+      title: "title.nl",
+      subtitle: "description.nl",
+    },
+  },
 };
