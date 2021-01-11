@@ -1,28 +1,38 @@
 import fs from 'fs';
+import { groq } from 'next-sanity';
 import Head from 'next/head';
 import path from 'path';
-import { Collapsable } from '~/components-styled/collapsable';
+import { Collapsible } from '~/components-styled/collapsible';
 import { MaxWidth } from '~/components-styled/max-width';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
-import siteText from '~/locale/index';
-import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
+import { getClient, localize, PortableText } from '~/lib/sanity';
+import siteText, { targetLanguage } from '~/locale/index';
+import { CollapsibleList } from '~/types/cms';
 import { getSkipLinkId } from '~/utils/skipLinks';
 import styles from './over.module.scss';
 
-export async function getStaticProps() {
-  const text = parseMarkdownInLocale((await import('../locale/index')).default);
+interface OverRisiconiveausData {
+  title: string | null;
+  description: unknown[] | null;
+  collapsibleList: CollapsibleList[];
+}
 
+export async function getStaticProps() {
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const lastGenerated = JSON.parse(fileContents).last_generated;
 
-  return { props: { text, lastGenerated } };
+  const query = groq`
+  *[_type == 'overRisicoNiveaus'][0]
+`;
+  const rawData = await getClient(false).fetch<OverRisiconiveausData>(query);
+  const data = localize(rawData, [targetLanguage, 'nl']);
+
+  return { props: { data, lastGenerated } };
 }
 
 const OverRisicoNiveaus: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { text } = props;
-
-  const { over_risiconiveaus } = text;
+  const { data } = props;
 
   return (
     <>
@@ -43,26 +53,20 @@ const OverRisicoNiveaus: FCWithLayout<typeof getStaticProps> = (props) => {
       <div className={styles.container}>
         <MaxWidth>
           <div className={styles.maxwidth}>
-            <h2>{over_risiconiveaus.title}</h2>
-            <div
-              dangerouslySetInnerHTML={{
-                __html: over_risiconiveaus.paragraaf,
-              }}
-            />
-            <article className={styles.faqList}>
-              {text.over_risiconiveaus.vragen.map((item) => {
-                const id = getSkipLinkId(item.vraag);
-                return item.vraag ? (
-                  <Collapsable key={id} id={id} summary={item.vraag}>
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: item.antwoord,
-                      }}
-                    />
-                  </Collapsable>
-                ) : null;
-              })}
-            </article>
+            {data.title && <h2>{data.title}</h2>}
+            {data.description && <PortableText blocks={data.description} />}
+            {data.collapsibleList && (
+              <article className={styles.faqList}>
+                {data.collapsibleList.map((item) => {
+                  const id = getSkipLinkId(item.title);
+                  return (
+                    <Collapsible key={id} id={id} summary={item.title}>
+                      <PortableText blocks={item.content} />
+                    </Collapsible>
+                  );
+                })}
+              </article>
+            )}
           </div>
         </MaxWidth>
       </div>

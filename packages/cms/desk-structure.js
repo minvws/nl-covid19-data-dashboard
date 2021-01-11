@@ -80,57 +80,57 @@ export default () =>
       //       .documentId("siteSettings")
       //   ),
 
-      // S.listItem()
-      //   .title("Over dit dashboard")
-      //   .schemaType("overDitDashboard")
-      //   .icon(GrCircleInformation)
-      //   .child(
-      //     S.editor()
-      //       .title("Over dit dashboard")
-      //       .schemaType("overDitDashboard")
-      //       .documentId("overDitDashboard")
-      //       .views([
-      //         S.view.form(),
-      //         S.view
-      //           .component(WebPreview)
-      //           .options({ previewURL: `${previewURL}/over` })
-      //           .title("Web"),
-      //         S.view
-      //           .component(IFrameMobilePreview)
-      //           .options({ previewURL: `${previewURL}/over` })
-      //           .title("Mobile"),
-      //         S.view
-      //           .component(ColorblindPreview)
-      //           .options({ previewURL: `${previewURL}/over` })
-      //           .title("Color Blindness"),
-      //       ])
-      //   ),
+      S.listItem()
+        .title("Over dit dashboard")
+        .schemaType("overDitDashboard")
+        .icon(GrCircleInformation)
+        .child(
+          S.editor()
+            .title("Over dit dashboard")
+            .schemaType("overDitDashboard")
+            .documentId("overDitDashboard")
+            .views([
+              S.view.form(),
+              // S.view
+              //   .component(WebPreview)
+              //   .options({ previewURL: `${previewURL}/over` })
+              //   .title("Web"),
+              // S.view
+              //   .component(IFrameMobilePreview)
+              //   .options({ previewURL: `${previewURL}/over` })
+              //   .title("Mobile"),
+              // S.view
+              //   .component(ColorblindPreview)
+              //   .options({ previewURL: `${previewURL}/over` })
+              //   .title("Color Blindness"),
+            ])
+        ),
 
-      // S.listItem()
-      //   .title("Over de risiconiveaus")
-      //   .schemaType("overRisicoNiveaus")
-      //   .icon(BsMap)
-      //   .child(
-      //     S.editor()
-      //       .title("Over de risiconiveaus")
-      //       .schemaType("overRisicoNiveaus")
-      //       .documentId("overRisicoNiveaus")
-      //       .views([
-      //         S.view.form(),
-      //         S.view
-      //           .component(WebPreview)
-      //           .options({ previewURL: `${previewURL}/over-risiconiveaus` })
-      //           .title("Web"),
-      //         S.view
-      //           .component(IFrameMobilePreview)
-      //           .options({ previewURL: `${previewURL}/over-risiconiveaus` })
-      //           .title("Mobile"),
-      //         S.view
-      //           .component(ColorblindPreview)
-      //           .options({ previewURL: `${previewURL}/over-risiconiveaus` })
-      //           .title("Color Blindness"),
-      //       ])
-      //   ),
+      S.listItem()
+        .title("Over de risiconiveaus")
+        .schemaType("overRisicoNiveaus")
+        .icon(BsMap)
+        .child(
+          S.editor()
+            .title("Over de risiconiveaus")
+            .schemaType("overRisicoNiveaus")
+            .documentId("overRisicoNiveaus")
+            .views([
+              S.view.form(),
+              // S.view
+              //   .component(WebPreview)
+              //   .options({ previewURL: `${previewURL}/over-risiconiveaus` })
+              //   .title("Web"),
+              // S.view
+              //   .component(IFrameMobilePreview)
+              //   .options({ previewURL: `${previewURL}/over-risiconiveaus` })
+              //   .title("Mobile"),
+              // S.view
+              //   .component(ColorblindPreview)
+              //   .options({ previewURL: `${previewURL}/over-risiconiveaus` })
+              //   .title("Color Blindness"),
+            ])
+        ),
 
       S.listItem()
         .title("Veelgestelde vragen")
@@ -158,31 +158,31 @@ export default () =>
             ])
         ),
 
-      // S.listItem()
-      //   .title("Cijferverantwoording")
-      //   .schemaType("cijferVerantwoording")
-      //   .icon(BsCardChecklist)
-      //   .child(
-      //     S.editor()
-      //       .title("Cijferverantwoording")
-      //       .schemaType("cijferVerantwoording")
-      //       .documentId("cijferVerantwoording")
-      //       .views([
-      //         S.view.form(),
-      //         S.view
-      //           .component(WebPreview)
-      //           .title("Web")
-      //           .options({ previewURL: `${previewURL}/verantwoording` }),
-      //         S.view
-      //           .component(IFrameMobilePreview)
-      //           .options({ previewURL: `${previewURL}/verantwoording` })
-      //           .title("Mobile"),
-      //         S.view
-      //           .component(ColorblindPreview)
-      //           .options({ previewURL: `${previewURL}/verantwoording` })
-      //           .title("Color Blindness"),
-      //       ])
-      //   ),
+      S.listItem()
+        .title("Cijferverantwoording")
+        .schemaType("cijferVerantwoording")
+        .icon(BsCardChecklist)
+        .child(
+          S.editor()
+            .title("Cijferverantwoording")
+            .schemaType("cijferVerantwoording")
+            .documentId("cijferVerantwoording")
+            .views([
+              S.view.form(),
+              // S.view
+              //   .component(WebPreview)
+              //   .title("Web")
+              //   .options({ previewURL: `${previewURL}/verantwoording` }),
+              // S.view
+              //   .component(IFrameMobilePreview)
+              //   .options({ previewURL: `${previewURL}/verantwoording` })
+              //   .title("Mobile"),
+              // S.view
+              //   .component(ColorblindPreview)
+              //   .options({ previewURL: `${previewURL}/verantwoording` })
+              //   .title("Color Blindness"),
+            ])
+        ),
 
       // Add a visual divider (optional)
       S.divider(),

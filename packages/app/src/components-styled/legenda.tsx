@@ -25,7 +25,7 @@ export function Legenda({ items }: LegendProps) {
 const List = styled.ul(
   css({
     listStyle: 'none',
-    px: 0
+    px: 0,
   })
 );
 
@@ -35,7 +35,7 @@ const Item = styled.li(
     mr: 3,
     position: 'relative',
     display: 'inline-block',
-    pl: '25px' // alignment with shape
+    pl: '25px', // alignment with shape
   })
 );
 
