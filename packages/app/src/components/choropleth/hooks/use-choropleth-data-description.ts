@@ -59,8 +59,8 @@ export function useChoroplethDataDescription<T>(
         range.rangeHigh === Infinity
           ? dynamicTexts.last_sentence
           : dynamicTexts.sentence;
-      const verb = range.count > 1 ? verbs.plural : verbs.single;
-      const area = range.count > 1 ? areas.plural : areas.single;
+      const verb = range.count > 1 ? verbs.plural : verbs.singular;
+      const area = range.count > 1 ? areas.plural : areas.singular;
       return replaceVariablesInText(txt, { ...range, verb, area });
     });
 

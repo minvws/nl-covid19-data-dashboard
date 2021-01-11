@@ -2059,15 +2059,15 @@
   },
   "choropleth": {
     "verb": {
-      "single": "heeft",
+      "singular": "heeft",
       "plural": "hebben"
     },
     "municipal": {
-      "single": "gemeente",
+      "singular": "gemeente",
       "plural": "gemeentes"
     },
     "region": {
-      "single": "veiligheidsregio",
+      "singular": "veiligheidsregio",
       "plural": "veiligheidsregios"
     },
     "tested_overall": {

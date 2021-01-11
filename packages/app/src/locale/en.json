@@ -2059,15 +2059,15 @@
   },
   "choropleth": {
     "verb": {
-      "single": "has",
+      "singular": "has",
       "plural": "have"
     },
     "municipal": {
-      "single": "municipality",
+      "singular": "municipality",
       "plural": "municipalities"
     },
     "region": {
-      "single": "safetyregion",
+      "singular": "safetyregion",
       "plural": "safetyregions"
     },
     "tested_overall": {
