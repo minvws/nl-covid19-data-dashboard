@@ -1,5 +1,3 @@
-/* eslint no-console: 0 */
-
 import chalk from 'chalk';
 import fs from 'fs';
 import meow from 'meow';
@@ -7,7 +5,7 @@ import path from 'path';
 import { schemaDirectory } from './config';
 import { createValidateFunction } from './create-validate-function';
 import { executeValidations } from './execute-validations';
-import { getSchemaInformation, SchemaInfo } from './schema-information';
+import { getSchemaInfo, SchemaItemInfo } from './schema-information';
 
 const cli = meow(
   `
@@ -27,22 +25,22 @@ const customJsonPath = customJsonPathArg
   ? path.join(__dirname, '..', '..', customJsonPathArg)
   : undefined;
 
-const schemaInformation = getSchemaInformation(customJsonPath);
+const schemaInfo = getSchemaInfo(customJsonPath);
 
 if (!customJsonPathArg) {
-  if (schemaInformation.regional.files.length !== 25) {
+  if (schemaInfo.vr.files.length !== 25) {
     console.error(
       chalk.bgRed.bold(
-        `\n Expected 25 region files, actually found ${schemaInformation.regional.files.length} \n`
+        `\n Expected 25 region files, actually found ${schemaInfo.vr.files.length} \n`
       )
     );
     process.exit(1);
   }
 
-  if (schemaInformation.municipal.files.length !== 352) {
+  if (schemaInfo.gm.files.length !== 352) {
     console.error(
       chalk.bgRed.bold(
-        `\n Expected 352 municipal files, actually found ${schemaInformation.municipal.files.length} \n`
+        `\n Expected 352 municipal files, actually found ${schemaInfo.gm.files.length} \n`
       )
     );
     process.exit(1);
@@ -50,15 +48,15 @@ if (!customJsonPathArg) {
 }
 
 // The validations are asynchronous so this reducer gathers all the Promises in one array.
-const validationPromises = Object.keys(schemaInformation).map<
-  Promise<boolean[]>
->((schemaName) => validate(schemaName, schemaInformation[schemaName]));
+const promisedValidations = Object.keys(schemaInfo).map((schemaName) =>
+  validate(schemaName, schemaInfo[schemaName])
+);
 
 // Here the script waits for all the validations to finish, the result of each run is simply
 // a true or false. So if the result array contains one or more false values, we
 // throw an error. That way the script finishes with an error code which can be picked
 // up by CI.
-Promise.all(validationPromises)
+Promise.all(promisedValidations)
   .then((validationResults) => {
     const flatResult = validationResults.flat();
 
@@ -83,7 +81,7 @@ Promise.all(validationPromises)
  * @param schemaInfo An object describing the files, path and custom validations for the given schema name
  * @returns An array of promises that will resolve either to true or false dependent on the validation result
  */
-async function validate(schemaName: string, schemaInfo: SchemaInfo) {
+async function validate(schemaName: string, schemaInfo: SchemaItemInfo) {
   const validateFunction = await createValidateFunction(
     path.join(schemaDirectory, schemaName, `__index.json`)
   );
