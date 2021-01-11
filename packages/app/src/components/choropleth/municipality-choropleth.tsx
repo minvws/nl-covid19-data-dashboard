@@ -75,7 +75,7 @@ export function MunicipalityChoropleth<T>(
     values,
     metricName,
     metricProperty,
-    'municipal',
+    'gm',
     safetyRegionMunicipalCodes
   );
 

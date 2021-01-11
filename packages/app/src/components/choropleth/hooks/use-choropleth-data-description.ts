@@ -12,11 +12,11 @@ export function useChoroplethDataDescription<T>(
   gmValues: DataValue[],
   metricName: keyof T,
   metricProperty: string,
-  area: 'region' | 'municipal',
+  area: 'vr' | 'gm',
   gemcodes?: string[]
 ) {
   return useMemo(() => {
-    const dynamicTexts = getDynamicText(metricName, metricProperty);
+    const dynamicTexts = getDynamicTextTemplates(metricName, metricProperty);
 
     if (!dynamicTexts) {
       return '';
@@ -75,10 +75,20 @@ export function useChoroplethDataDescription<T>(
   }, [thresholds, gmValues, metricName, metricProperty, area, gemcodes]);
 }
 
-function getDynamicText<T>(metricName: keyof T, metricProperty: string) {
-  if (metricName !== 'behavior') {
-    return (siteText.choropleth as any)[metricName]?.[metricProperty];
-  } else {
+/**
+ * Retrieves the text templates for the given metric.
+ *
+ * Behavior represents an exception here. In order to avoid having to define
+ * a separate sentence for each restriction and each type (support and compliance)
+ * an extra placeholder called {{restriction}} is added to the sentence which
+ * is replaced with the currently selected restriction (extracted from the metric property)
+ * and then returned.
+ */
+function getDynamicTextTemplates<T>(
+  metricName: keyof T,
+  metricProperty: string
+) {
+  if (metricName === 'behavior') {
     const parts = metricProperty.split('_');
     const restrictionKey = parts.slice(0, -1).join('_');
     const restriction = (siteText.gedrag_onderwerpen as any)[restrictionKey];
@@ -92,5 +102,7 @@ function getDynamicText<T>(metricName: keyof T, metricProperty: string) {
         restriction
       ),
     };
+  } else {
+    return (siteText.choropleth as any)[metricName]?.[metricProperty];
   }
 }

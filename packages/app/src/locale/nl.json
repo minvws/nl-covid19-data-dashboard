@@ -2062,11 +2062,11 @@
       "singular": "heeft",
       "plural": "hebben"
     },
-    "municipal": {
+    "gm": {
       "singular": "gemeente",
       "plural": "gemeentes"
     },
-    "region": {
+    "vr": {
       "singular": "veiligheidsregio",
       "plural": "veiligheidsregios"
     },

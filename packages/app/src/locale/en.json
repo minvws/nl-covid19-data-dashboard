@@ -2062,11 +2062,11 @@
       "singular": "has",
       "plural": "have"
     },
-    "municipal": {
+    "gm": {
       "singular": "municipality",
       "plural": "municipalities"
     },
-    "region": {
+    "vr": {
       "singular": "safetyregion",
       "plural": "safetyregions"
     },
