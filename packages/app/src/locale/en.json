@@ -1942,7 +1942,7 @@
     "tested_overall": {
       "infected_per_100k": {
         "full_sentence": "This map shows that {{first}} and {{last}}.",
-        "sentence": "{{count}} {{area}} {{verb} } between {{rangeLow}} and {{rangeHigh}} positive tested people per 100000 inhabitants",
+        "sentence": "{{count}} {{area}} {{verb}} between {{rangeLow}} and {{rangeHigh}} positive tested people per 100000 inhabitants",
         "last_sentence": "{{count}} {{area}} {{verb}} more than {{rangeLow}} positive tested people per 100000 inhabitants"
       }
     },
