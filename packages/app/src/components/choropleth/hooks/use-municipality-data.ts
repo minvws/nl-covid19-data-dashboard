@@ -80,12 +80,6 @@ export function useMunicipalityData(
       {} as Record<string, MunicipalityProperties>
     );
 
-    const values =
-      (data?.[metricName] as any[])?.map((x) => ({
-        code: x.gmcode,
-        value: x[metricProperty],
-      })) ?? [];
-
     if (!data) {
       return {
         getChoroplethValue: (id) => ({
@@ -96,6 +90,12 @@ export function useMunicipalityData(
         values: [],
       };
     }
+
+    const values =
+      (data?.[metricName] as any[])?.map((x) => ({
+        code: x.gmcode,
+        value: x[metricProperty],
+      })) ?? [];
 
     const metricsForAllMunicipalities = (data[metricName] as unknown) as
       | MunicipalityMetricValue[]
