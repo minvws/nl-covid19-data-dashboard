@@ -1,5 +1,6 @@
 import fs from 'fs';
-import { jsonDirectory } from './config';
+import { jsonDirectory, localeDirectory } from './config';
+import { validatePlaceholders } from './custom-validations/validate-placeholders';
 
 type CustomValidationFunction = (
   input: Record<string, unknown>
@@ -31,6 +32,11 @@ export function getSchemaInfo(path: string = jsonDirectory) {
     },
     gm_collection: { files: ['GM_COLLECTION.json'], basePath: path },
     vr_collection: { files: ['VR_COLLECTION.json'], basePath: path },
+    locale: {
+      files: ['en.json', 'nl.json'],
+      basePath: localeDirectory,
+      customValidations: [validatePlaceholders],
+    },
   };
 
   return info;
