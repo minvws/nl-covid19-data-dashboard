@@ -68,6 +68,7 @@ export type LineChartProps<T extends Value> = {
   formatMarkerLabel?: (value: T) => string;
   padding?: Partial<ChartPadding>;
   showLegend?: boolean;
+  uniqueAriaId?: string;
 };
 
 export function LineChart<T extends Value>({
@@ -86,6 +87,7 @@ export function LineChart<T extends Value>({
   formatMarkerLabel,
   padding: overridePadding,
   showLegend = false,
+  uniqueAriaId,
 }: LineChartProps<T>) {
   const {
     tooltipData,
@@ -304,6 +306,7 @@ export function LineChart<T extends Value>({
           formatXAxis={formatXAxis}
           onHover={handleHover}
           benchmark={benchmark}
+          uniqueAriaId={uniqueAriaId}
         >
           {renderAxes}
         </ChartAxes>
@@ -356,7 +359,9 @@ function formatDefaultTooltip<T extends Value>(
   if (isDaily) {
     return (
       <>
-        <Text as="span" fontWeight="bold">{formatDateFromMilliseconds(value.__date.getTime())}: </Text>
+        <Text as="span" fontWeight="bold">
+          {formatDateFromMilliseconds(value.__date.getTime())}:{' '}
+        </Text>
         {isPercentage
           ? `${formatPercentage(value.__value)}%`
           : formatNumber(value.__value)}

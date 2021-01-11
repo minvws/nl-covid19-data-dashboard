@@ -12,12 +12,16 @@ interface ChartTileProps {
   metadata: MetadataProps;
   title: string;
   description?: React.ReactNode;
+  ariaDescription?: string;
+  uniqueAriaId: string;
 }
 
 interface ChartTileWithTimeframeProps extends Omit<ChartTileProps, 'children'> {
   children: (timeframe: TimeframeOption) => React.ReactNode;
   timeframeOptions?: TimeframeOption[];
   timeframeInitialValue?: TimeframeOption;
+  uniqueAriaId: string;
+  ariaDescription?: string;
 }
 
 export function ChartTile({
@@ -25,10 +29,17 @@ export function ChartTile({
   description,
   metadata,
   children,
+  ariaDescription,
+  uniqueAriaId,
 }: ChartTileProps) {
   return (
     <ChartTileContainer metadata={metadata}>
-      <ChartTileHeader title={title} description={description} />
+      <ChartTileHeader
+        title={title}
+        description={description}
+        ariaDescription={ariaDescription}
+        uniqueAriaId={uniqueAriaId}
+      />
       {children}
     </ChartTileContainer>
   );
@@ -41,6 +52,8 @@ export function ChartTileWithTimeframe({
   timeframeOptions = ['all', '5weeks', 'week'],
   timeframeInitialValue = '5weeks',
   children,
+  uniqueAriaId,
+  ariaDescription,
 }: ChartTileWithTimeframeProps) {
   const [timeframe, setTimeframe] = useState<TimeframeOption>(
     timeframeInitialValue
@@ -54,6 +67,8 @@ export function ChartTileWithTimeframe({
         timeframe={timeframe}
         timeframeOptions={timeframeOptions}
         onTimeframeChange={setTimeframe}
+        uniqueAriaId={uniqueAriaId}
+        ariaDescription={ariaDescription}
       />
       {children(timeframe)}
     </ChartTileContainer>
@@ -66,12 +81,16 @@ function ChartTileHeader({
   timeframe,
   timeframeOptions,
   onTimeframeChange,
+  uniqueAriaId,
+  ariaDescription,
 }: {
   title: string;
   description?: React.ReactNode;
   timeframe?: TimeframeOption;
   timeframeOptions?: TimeframeOption[];
   onTimeframeChange?: (timeframe: TimeframeOption) => void;
+  uniqueAriaId: string;
+  ariaDescription?: string;
 }) {
   return (
     <Box
@@ -82,11 +101,18 @@ function ChartTileHeader({
     >
       <div css={css({ mb: [3, null, null, null, 0], mr: [0, 0, 2] })}>
         <Heading level={3}>{title}</Heading>
+        {!description && (
+          <div css={css({ display: 'none' })} aria-labelledby={uniqueAriaId}>
+            {ariaDescription}
+          </div>
+        )}
         {description &&
           (typeof description === 'string' ? (
-            <p css={css({ m: 0 })}>{description}</p>
+            <p aria-labelledby={uniqueAriaId} css={css({ m: 0 })}>
+              {description}
+            </p>
           ) : (
-            description
+            <div aria-labelledby={uniqueAriaId}>{description}</div>
           ))}
       </div>
       {timeframe && onTimeframeChange && (

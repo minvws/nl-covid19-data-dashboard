@@ -80,6 +80,10 @@ const ReproductionIndex: FCWithLayout<NationalPageProps> = (props) => {
             metadata={{ source: text.bronnen.rivm }}
             title={text.linechart_titel}
             values={data.reproduction.values}
+            ariaDescription={
+              siteText.accessibility_grafieken.nl
+                .reproductiegetal_verloop_over_tijd_aria_description
+            }
             linesConfig={[
               {
                 metricProperty: 'index_average',

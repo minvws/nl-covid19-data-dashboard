@@ -1931,5 +1931,10 @@
     "VR23": "http://vrln.nl/",
     "VR24": "http://www.vrzuidlimburg.nl/",
     "VR25": "http://www.veiligheidsregioflevoland.nl/"
+  },
+  "accessibility_grafieken": {
+    "nl": {
+      "reproductiegetal_verloop_over_tijd_aria_description": "Dit is een aria descriptie van de grafiek op de reproductiegetal pagina."
+    }
   }
 }

@@ -8,21 +8,30 @@ import { MetadataProps } from './metadata';
 interface LineChartTileProps<T extends Value> extends LineChartProps<T> {
   title: string;
   metadata: MetadataProps;
-  description?: string;
+  description?: string | null;
   timeframeOptions?: TimeframeOption[];
   timeframeInitialValue?: TimeframeOption;
   footer?: React.ReactNode;
+  ariaDescription?: string;
 }
 
 export function LineChartTile<T extends Value>({
   metadata,
   title,
-  description,
+  description = null,
   timeframeOptions = ['all', '5weeks', 'week'],
   timeframeInitialValue = '5weeks',
   footer,
+  ariaDescription,
   ...chartProps
 }: LineChartTileProps<T>) {
+  if (!description && !ariaDescription)
+    throw new Error(
+      `This graph doesn't include a description, please add a ariaDescription property`
+    );
+
+  const uniqueAriaId = title.replace(/\W+/g, '-').toLowerCase() as string;
+
   return (
     <ChartTileWithTimeframe
       title={title}
@@ -30,6 +39,8 @@ export function LineChartTile<T extends Value>({
       metadata={metadata}
       timeframeOptions={timeframeOptions}
       timeframeInitialValue={timeframeInitialValue}
+      uniqueAriaId={uniqueAriaId}
+      ariaDescription={ariaDescription}
     >
       {(timeframe) => (
         <>
@@ -39,6 +50,7 @@ export function LineChartTile<T extends Value>({
                 {...chartProps}
                 width={parent.width}
                 timeframe={timeframe}
+                uniqueAriaId={uniqueAriaId}
               />
             )}
           </ParentSize>
