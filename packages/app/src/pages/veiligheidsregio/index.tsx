@@ -99,9 +99,9 @@ const SafetyRegion: FCWithLayout<any> = (props) => {
           <SafetyRegionChoropleth
             metricName="escalation_levels"
             metricProperty="escalation_level"
-            onSelect={createSelectRegionHandler(router)}
+            onSelect={createSelectRegionHandler(router, 'maatregelen')}
             tooltipContent={escalationTooltip(
-              createSelectRegionHandler(router)
+              createSelectRegionHandler(router, 'maatregelen')
             )}
           />
         </ChoroplethTile>

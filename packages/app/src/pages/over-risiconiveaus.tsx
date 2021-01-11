@@ -1,37 +1,45 @@
 import fs from 'fs';
+import { groq } from 'next-sanity';
 import Head from 'next/head';
 import path from 'path';
-import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
-import { MaxWidth } from '~/components-styled/max-width';
-import siteText, { TALLLanguages } from '~/locale/index';
-import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
-import styles from './over.module.scss';
 import { Collapsable } from '~/components-styled/collapsable';
+import { MaxWidth } from '~/components-styled/max-width';
+import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
+import { getClient, localize, PortableText } from '~/lib/sanity';
+import siteText, { targetLanguage } from '~/locale/index';
+import { CollapsibleList } from '~/types/cms';
 import { getSkipLinkId } from '~/utils/skipLinks';
+import styles from './over.module.scss';
 
 interface StaticProps {
   props: OverRisiconiveausProps;
 }
 
 interface OverRisiconiveausProps {
-  text: TALLLanguages;
+  data: {
+    title: string | null;
+    description: unknown[] | null;
+    collapsibleList: CollapsibleList[];
+  };
   lastGenerated: string;
 }
 
 export async function getStaticProps(): Promise<StaticProps> {
-  const text = parseMarkdownInLocale((await import('../locale/index')).default);
-
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const lastGenerated = JSON.parse(fileContents).last_generated;
 
-  return { props: { text, lastGenerated } };
+  const query = groq`
+  *[_type == 'overRisicoNiveaus'][0]
+`;
+  const rawData = await getClient(false).fetch(query);
+  const data = localize(rawData, [targetLanguage, 'nl']);
+
+  return { props: { data, lastGenerated } };
 }
 
 const OverRisicoNiveaus: FCWithLayout<OverRisiconiveausProps> = (props) => {
-  const { text } = props;
-
-  const { over_risiconiveaus } = text;
+  const { data } = props;
 
   return (
     <>
@@ -52,26 +60,20 @@ const OverRisicoNiveaus: FCWithLayout<OverRisiconiveausProps> = (props) => {
       <div className={styles.container}>
         <MaxWidth>
           <div className={styles.maxwidth}>
-            <h2>{over_risiconiveaus.title}</h2>
-            <div
-              dangerouslySetInnerHTML={{
-                __html: over_risiconiveaus.paragraaf,
-              }}
-            />
-            <article className={styles.faqList}>
-              {text.over_risiconiveaus.vragen.map((item) => {
-                const id = getSkipLinkId(item.vraag);
-                return item.vraag ? (
-                  <Collapsable key={id} id={id} summary={item.vraag}>
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: item.antwoord,
-                      }}
-                    />
-                  </Collapsable>
-                ) : null;
-              })}
-            </article>
+            {data.title && <h2>{data.title}</h2>}
+            {data.description && <PortableText blocks={data.description} />}
+            {data.collapsibleList && (
+              <article className={styles.faqList}>
+                {data.collapsibleList.map((item) => {
+                  const id = getSkipLinkId(item.title);
+                  return (
+                    <Collapsable key={id} id={id} summary={item.title}>
+                      <PortableText blocks={item.content} />
+                    </Collapsable>
+                  );
+                })}
+              </article>
+            )}
           </div>
         </MaxWidth>
       </div>

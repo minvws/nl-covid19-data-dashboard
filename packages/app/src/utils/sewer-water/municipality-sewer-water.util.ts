@@ -21,19 +21,11 @@ interface SewerWaterMetadata {
   oneInstallation: boolean;
 }
 
-interface SewerWaterBarScaleData {
-  value: number | undefined;
-  unix: number | undefined;
-  dateInsertedUnix: number | undefined;
-  week_start_unix: number | undefined;
-  week_end_unix: number | undefined;
-}
-
 interface SewerWaterLineChartValue {
   date: number;
   value: number;
-  week_start_unix: number;
-  week_end_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
 }
 
 interface SewerWaterLineChartData {
@@ -68,45 +60,6 @@ function getSewerWaterMetadata(data: Municipal): SewerWaterMetadata {
 }
 
 /**
- * Formats data to be used for the bar scale component for sewer water
- * The formatting differs based on the amount of RWZI locations
- * @param data
- */
-export function getSewerWaterBarScaleData(
-  data: Municipal
-): SewerWaterBarScaleData | undefined {
-  const { dataAvailable, oneInstallation } = getSewerWaterMetadata(data);
-
-  if (!dataAvailable) {
-    return;
-  }
-
-  if (oneInstallation) {
-    assert(data.sewer_per_installation, 'Missing sewer per installation data');
-    const barScaleData = data.sewer_per_installation.values[0].last_value;
-
-    return {
-      value: barScaleData.rna_normalized,
-      unix: barScaleData.date_measurement_unix,
-      dateInsertedUnix: barScaleData.date_of_insertion_unix,
-      week_end_unix: barScaleData.week_end_unix,
-      week_start_unix: barScaleData.week_start_unix,
-    };
-  } else {
-    assert(data.sewer, 'Missing sewer data');
-    const barScaleData = data.sewer.last_value;
-
-    return {
-      value: barScaleData.average,
-      unix: barScaleData.week_unix,
-      dateInsertedUnix: barScaleData.date_of_insertion_unix,
-      week_end_unix: barScaleData.week_end_unix,
-      week_start_unix: barScaleData.week_start_unix,
-    };
-  }
-}
-
-/**
  * Formats data to be used for the line chart component for sewer water
  * The formatting differs based on the amount of RWZI locations
  * @param data
@@ -132,13 +85,20 @@ export function getSewerWaterLineChartData(
         return {
           ...value,
           value: value.rna_normalized,
-          date: value.date_measurement_unix,
+          date: value.date_unix,
+          /**
+           * This is hack because the line chart expects week range data but
+           * it doesn't actually show it. The original data doesn't contain
+           * these week start/end timestamps anymore.
+           */
+          date_end_unix: value.date_unix,
+          date_start_unix: value.date_unix,
         };
       }),
       averageLabelText: replaceVariablesInText(
         text.graph_average_label_text_rwzi,
         {
-          name: data.sewer_per_installation.values[0].last_value.rwzi_awzi_name,
+          name: data.sewer_per_installation.values[0].rwzi_awzi_name,
         }
       ),
     };
@@ -155,7 +115,7 @@ export function getSewerWaterLineChartData(
       return {
         ...value,
         value: value.average,
-        date: value.week_unix,
+        date: value.date_end_unix,
       };
     }),
     averageLabelText: text.graph_average_label_text,
@@ -192,16 +152,16 @@ export function getSewerWaterBarChartData(
         value: data.sewer.last_value.average,
         color: colors.data.primary,
         tooltip: `${formatDateFromSeconds(
-          data.sewer.last_value.week_unix,
+          data.sewer.last_value.date_end_unix,
           'short'
         )}: ${formatNumber(data.sewer.last_value.average)}`,
       },
       ...installations.map((installation) => ({
-        label: installation.last_value.rwzi_awzi_name,
+        label: installation.rwzi_awzi_name,
         value: installation.last_value.rna_normalized,
         color: '#C1C1C1',
         tooltip: `${formatDateFromSeconds(
-          installation.last_value.date_measurement_unix,
+          installation.last_value.date_unix,
           'short'
         )}: ${formatNumber(installation.last_value.rna_normalized)}`,
       })),
@@ -210,26 +170,29 @@ export function getSewerWaterBarChartData(
 }
 
 export function getSewerWaterScatterPlotData(data: Municipal) {
-  const values = data.sewer_per_installation?.values.flatMap(
-    (value) => value.values
+  /**
+   * @TODO we could improve on this. The values per installation are merged here
+   * into one big array, and because of this the chart needs to have the awzi
+   * name injected for every sample so that down the line it can separate values
+   * based on the selected installation. This creates overhead that should be
+   * unnecessary. The chart could be made to handle the incoming values
+   * organized in a per-installation manner.
+   */
+  const values = data.sewer_per_installation?.values.flatMap((value) =>
+    value.values.map((x) => ({ ...x, rwzi_awzi_name: value.rwzi_awzi_name }))
   );
 
   /**
    * All individual `value.values`-arrays are already sorted correctly, but
    * due to merging them into one array the sort might be off.
    */
-  values?.sort((a, b) => a.date_measurement_unix - b.date_measurement_unix);
+  values?.sort((a, b) => a.date_unix - b.date_unix);
 
   return values;
 }
 
 export function getInstallationNames(data: Municipal): string[] {
-  return (
-    (data.sewer_per_installation?.values || [])
-      .flatMap((value) => value.values)
-      .map((value) => value.rwzi_awzi_name)
-      // deduplicate installation names
-      .filter((value, index, arr) => arr.indexOf(value) === index)
-      .sort((a, b) => a.localeCompare(b))
-  );
+  return (data.sewer_per_installation?.values || [])
+    .map((value) => value.rwzi_awzi_name)
+    .sort((a, b) => a.localeCompare(b));
 }

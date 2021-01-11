@@ -13,11 +13,11 @@ import {
 import { getDataThresholds } from './legenda/utils';
 import { municipalThresholds } from './municipal-thresholds';
 import { Path } from './path';
-import { MunicipalityProperties, TMunicipalityMetricName } from './shared';
+import { MunicipalityProperties, MunicipalitiesMetricName } from './shared';
 import { countryGeo, municipalGeo, regionGeo } from './topology';
 
 type MunicipalityChoroplethProps<T> = {
-  metricName: TMunicipalityMetricName;
+  metricName: MunicipalitiesMetricName;
   metricProperty: string;
   selected?: string;
   highlightSelection?: boolean;
@@ -145,7 +145,6 @@ export function MunicipalityChoropleth<T>(
   const getTooltipContent = (id: string) => {
     if (tooltipContent) {
       const data = getChoroplethValue(id);
-
       return tooltipContent(data as any);
     }
     return null;

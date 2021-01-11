@@ -38,9 +38,9 @@ const BehaviorPage: FCWithLayout<ISafetyRegionData> = (props) => {
           subtitle={text.pagina.toelichting}
           metadata={{
             datumsText: text.datums,
-            dateInfo: {
-              weekStartUnix: behaviorData.last_value.week_start_unix,
-              weekEndUnix: behaviorData.last_value.week_end_unix,
+            dateOrRange: {
+              start: behaviorData.last_value.date_start_unix,
+              end: behaviorData.last_value.date_end_unix,
             },
             dateOfInsertionUnix: behaviorData.last_value.date_of_insertion_unix,
             dataSources: [text.bronnen.rivm],
@@ -59,8 +59,8 @@ const BehaviorPage: FCWithLayout<ISafetyRegionData> = (props) => {
             metadata={{
               source: text.kpi.aantal_respondenten.bron,
               date: [
-                behaviorData.last_value.week_start_unix,
-                behaviorData.last_value.week_end_unix,
+                behaviorData.last_value.date_start_unix,
+                behaviorData.last_value.date_end_unix,
               ],
             }}
           >

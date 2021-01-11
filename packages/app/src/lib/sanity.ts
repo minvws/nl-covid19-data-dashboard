@@ -65,7 +65,10 @@ export function localize(value: any, languages: any): any {
   } else if (typeof value == 'object') {
     if (/^locale[A-Z]/.test(value._type)) {
       const language = languages.find((lang: string) => value[lang]);
-      return value[language];
+
+      // React will trip if you return undefined, which could happen
+      // if you don't fill in anything in the CMS
+      return value[language] === undefined ? null : value[language];
     }
 
     return Object.keys(value).reduce((result, key) => {

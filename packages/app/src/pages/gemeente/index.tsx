@@ -9,10 +9,10 @@ import {
 } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { MunicipalityProperties } from '~/components/choropleth/shared';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
+import { SEOHead } from '~/components/seoHead';
+import { MunicipalityComboBox } from '~/domain/layout/components/municipality-combo-box';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getMunicipalityLayout } from '~/domain/layout/municipality-layout';
-import { SafetyRegionComboBox } from '~/domain/layout/components/safety-region-combo-box';
-import { SEOHead } from '~/components/seoHead';
 import text from '~/locale/index';
 import getLastGeneratedData from '~/static-props/last-generated-data';
 import { useBreakpoints } from '~/utils/useBreakpoints';
@@ -55,7 +55,7 @@ const Municipality: FCWithLayout<any> = () => {
 
       {!breakpoints.md && (
         <Box bg="white">
-          <SafetyRegionComboBox />
+          <MunicipalityComboBox />
         </Box>
       )}
 

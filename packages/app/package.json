@@ -76,7 +76,7 @@
     "babel-plugin-styled-components": "^1.11.1",
     "chalk": "^4.1.0",
     "cross-env": "^7.0.3",
-    "cypress": "^6.1.0",
+    "cypress": "^6.2.1",
     "download": "^8.0.0",
     "download-cli": "^1.1.1",
     "eslint": "^7.7.0",
@@ -101,12 +101,6 @@
     "ts-jest": "^26.4.4",
     "typescript": "^4.1.2"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "yarn run type-check"
-    }
-  },
   "lint-staged": {
     "*.@(ts|tsx)": [
       "yarn lint",
@@ -121,7 +115,7 @@
     "start": "next start -H 0.0.0.0 -p 8080",
     "test": "jest --watch",
     "test:ci": "jest --ci",
-    "format": "prettier --write src/**/*.{js,ts,tsx} *.{js,json,md,yml}",
+    "format": "prettier --write src/**/*.{js,ts,tsx} *.{js,json,md}",
     "lint": "eslint .",
     "type-check": "yarn compile",
     "compile": "tsc --pretty --noEmit",

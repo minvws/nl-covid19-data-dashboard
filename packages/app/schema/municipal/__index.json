@@ -8,8 +8,8 @@
     "proto_name",
     "name",
     "code",
-    "hospital_admissions",
-    "positive_tested_people",
+    "tested_overall",
+    "hospital_nice",
     "difference"
   ],
   "properties": {
@@ -31,11 +31,11 @@
     "difference": {
       "$ref": "__difference.json"
     },
-    "hospital_admissions": {
-      "$ref": "hospital_admissions.json"
+    "hospital_nice": {
+      "$ref": "hospital_nice.json"
     },
-    "positive_tested_people": {
-      "$ref": "positive_tested_people.json"
+    "tested_overall": {
+      "$ref": "tested_overall.json"
     },
     "sewer": {
       "$ref": "sewer.json"

@@ -4,13 +4,19 @@ import { getDaysForTimeframe, TimeframeOption } from '~/utils/timeframe';
 
 export type Value = DailyValue | WeeklyValue;
 
+// This type limits the allowed property names to those with a number type,
+// so its like keyof T, but filtered down to only the appropriate properties.
+export type NumberProperty<T extends Value> = {
+  [K in keyof T]: T[K] extends number | null ? K : never;
+}[keyof T];
+
 export type DailyValue = {
-  date_of_report_unix: number;
+  date_unix: number;
 };
 
 export type WeeklyValue = {
-  week_start_unix: number;
-  week_end_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
 };
 
 /**
@@ -29,7 +35,7 @@ export function isDailyValue(timeSeries: Value[]): timeSeries is DailyValue[] {
     'Unable to determine timestamps if time series is empty'
   );
 
-  return firstValue.date_of_report_unix !== undefined;
+  return firstValue.date_unix !== undefined;
 }
 
 export function isWeeklyValue(
@@ -42,7 +48,7 @@ export function isWeeklyValue(
     'Unable to determine timestamps if time series is empty'
   );
 
-  return firstValue.week_end_unix !== undefined;
+  return firstValue.date_end_unix !== undefined;
 }
 
 /**
@@ -52,20 +58,15 @@ export function isWeeklyValue(
  * values.
  */
 export function calculateYMax(
-  values: Value[],
-  metricProperties: string[],
+  values: TrendValue[][],
   signaalwaarde = -Infinity
 ) {
-  const peakValues: number[] = [];
-
-  for (const key of metricProperties) {
-    const peakValue = values
-      .map((x) => (x as AnyValue)[key])
+  const peakValues = values.map((list) =>
+    list
+      .map((x) => x.__value)
       .filter(isPresent) // omit null values
-      .reduce((acc, value) => (value > acc ? value : acc), -Infinity);
-
-    peakValues.push(peakValue);
-  }
+      .reduce((acc, value) => (value > acc ? value : acc), -Infinity)
+  );
 
   const overallMaximum = Math.max(...peakValues);
 
@@ -90,11 +91,11 @@ export function getTimeframeValues(
   const boundary = getTimeframeBoundaryUnix(timeframe);
 
   if (isDailyValue(values)) {
-    return values.filter((x) => x.date_of_report_unix >= boundary);
+    return values.filter((x) => x.date_unix >= boundary);
   }
 
   if (isWeeklyValue(values)) {
-    return values.filter((x) => x.week_start_unix >= boundary);
+    return values.filter((x) => x.date_start_unix >= boundary);
   }
 
   throw new Error(`Incompatible timestamps are used in value ${values[0]}`);
@@ -117,9 +118,17 @@ export type TrendValue = {
 
 const timestampToDate = (d: number) => new Date(d * 1000);
 
-export function getTrendData(
-  values: Value[],
-  valueKey: string,
+export function getTrendData<T extends Value>(
+  values: T[],
+  valueKeys: NumberProperty<T>[],
+  timeframe: TimeframeOption
+): (TrendValue & Value)[][] {
+  return valueKeys.map((key) => getSingleTrendData(values, key, timeframe));
+}
+
+export function getSingleTrendData<T extends Value>(
+  values: T[],
+  valueKey: NumberProperty<T>,
   timeframe: TimeframeOption
 ): (TrendValue & Value)[] {
   const valuesInFrame = getTimeframeValues(values, timeframe);
@@ -141,8 +150,8 @@ export function getTrendData(
          * Not sure why we need to cast to number if isPresent is used to filter
          * out the null values.
          */
-        __value: (x as AnyValue)[valueKey] as number,
-        __date: timestampToDate(x.date_of_report_unix),
+        __value: x[valueKey as keyof DailyValue],
+        __date: timestampToDate(x.date_unix),
       }))
       .filter((x) => isPresent(x.__value));
   }
@@ -155,8 +164,8 @@ export function getTrendData(
          * Not sure why we need to cast to number if isPresent is used to filter
          * out the null values.
          */
-        __value: (x as AnyValue)[valueKey] as number,
-        __date: timestampToDate(x.week_start_unix),
+        __value: x[valueKey as keyof WeeklyValue],
+        __date: timestampToDate(x.date_start_unix),
       }))
       .filter((x) => isPresent(x.__value));
   }

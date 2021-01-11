@@ -15,7 +15,7 @@ export function SafetyRegionComboBox() {
       onSelect={(region) =>
         router.push(
           breakpoints.md
-            ? `/veiligheidsregio/${region.code}/positief-geteste-mensen`
+            ? `/veiligheidsregio/${region.code}/maatregelen`
             : `/veiligheidsregio/${region.code}?menu=1`
         )
       }

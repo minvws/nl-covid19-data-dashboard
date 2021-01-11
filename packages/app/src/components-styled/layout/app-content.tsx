@@ -79,7 +79,7 @@ const AppContentContainer = styled.div(
 const StyledAppContent = styled.main(
   css({
     bg: 'page',
-    zIndex: 2,
+    zIndex: 3,
     width: '100%',
     minWidth: 0,
     flexGrow: 1,
@@ -163,7 +163,7 @@ const StyledMenuButton = styled.a<{ isVisible: boolean }>((x) =>
     padding: '1em',
     boxShadow: 'tile',
     position: 'relative',
-    zIndex: '2',
+    zIndex: '4',
     textDecoration: 'none',
 
     '&.backButtonFooter': {

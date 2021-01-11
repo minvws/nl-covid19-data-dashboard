@@ -15,7 +15,7 @@ export default {
       title: "Beschrijving",
     },
     {
-      name: "content",
+      name: "collapsibleList",
       type: "array",
       title: "Uitklapbare informatie",
       description:

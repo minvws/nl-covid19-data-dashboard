@@ -7,11 +7,11 @@ context('Gemeente - Positief geteste mensen', () => {
   });
 
   it('Should show the correct KPI values', function (this: MunicipalContext) {
-    const lastValue = this.municipalData.positive_tested_people.last_value;
+    const lastValue = this.municipalData.tested_overall.last_value;
 
     const kpiTestInfo = {
-      infected_daily_increase: formatNumber(lastValue.infected_daily_increase),
-      infected_daily_total: formatNumber(lastValue.infected_daily_total),
+      infected_per_100k: formatNumber(lastValue.infected_per_100k),
+      infected: formatNumber(lastValue.infected),
     };
 
     cy.checkKpiValues(kpiTestInfo);
