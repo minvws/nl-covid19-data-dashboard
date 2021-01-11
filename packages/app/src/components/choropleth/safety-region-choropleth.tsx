@@ -144,7 +144,7 @@ export function SafetyRegionChoropleth<T>(
     <div ref={ref} css={css({ position: 'relative', bg: 'transparent' })}>
       <AspectRatio ratio={1 / ratio}>
         <Choropleth
-          dataDescription={dataDescription}
+          description={dataDescription}
           featureCollection={regionGeo}
           hovers={hasData ? regionGeo : undefined}
           boundingBox={boundingBox || countryGeo}

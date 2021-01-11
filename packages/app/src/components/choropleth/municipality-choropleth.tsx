@@ -164,7 +164,7 @@ export function MunicipalityChoropleth<T>(
     <div ref={ref} css={css({ bg: 'transparent', position: 'relative' })}>
       <AspectRatio ratio={1 / ratio}>
         <Choropleth
-          dataDescription={dataDescription}
+          description={dataDescription}
           featureCollection={municipalGeo}
           hovers={hasData ? municipalGeo : undefined}
           boundingBox={boundingbox || countryGeo}
