@@ -8,10 +8,10 @@
     "cypress": "^6.2.1"
   },
   "scripts": {
-    "lint": "echo 'No linter configured for @corona-dashboard/cypress'",
+    "lint": "echo 'No linter configured for @corona-dashboard/e2e'",
     "compile": "tsc --pretty --noEmit",
-    "test:ci": "echo 'No unit tests available for @corona-dashboard/cypress'",
-    "cy:open": "cypress open",
-    "cy:ci": "cypress run --headless --browser chrome --config-file ./cypress-ci.json"
+    "test:ci": "echo 'No unit tests available for @corona-dashboard/e2e'",
+    "e2e": "cypress open",
+    "e2e:ci": "cypress run --headless --browser chrome --config-file ./cypress-ci.json"
   }
 }
