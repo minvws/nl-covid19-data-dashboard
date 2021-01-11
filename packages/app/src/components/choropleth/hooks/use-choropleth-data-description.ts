@@ -5,7 +5,7 @@ import { ChoroplethThresholdsValue } from '../shared';
 import { DataValue } from './use-municipality-data';
 
 /**
- * This hooks generates a text that describes the distribution of the choropleth data for accessibility purposes.
+ * This hook generates a text that describes the distribution of the choropleth data for accessibility purposes.
  */
 export function useChoroplethDataDescription<T>(
   thresholds: ChoroplethThresholdsValue[],
