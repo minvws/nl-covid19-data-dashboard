@@ -1,22 +1,13 @@
 import fs from 'fs';
 import Head from 'next/head';
 import path from 'path';
-import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import { MaxWidth } from '~/components-styled/max-width';
-import siteText, { TALLLanguages } from '~/locale/index';
+import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
+import siteText from '~/locale/index';
 import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
 import styles from './over.module.scss';
 
-interface StaticProps {
-  props: OverProps;
-}
-
-interface OverProps {
-  text: TALLLanguages;
-  lastGenerated: string;
-}
-
-export async function getStaticProps(): Promise<StaticProps> {
+export async function getStaticProps() {
   const text = parseMarkdownInLocale((await import('../locale/index')).default);
 
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
@@ -26,7 +17,7 @@ export async function getStaticProps(): Promise<StaticProps> {
   return { props: { text, lastGenerated } };
 }
 
-const Over: FCWithLayout<OverProps> = (props) => {
+const Over: FCWithLayout<typeof getStaticProps> = (props) => {
   const { text } = props;
 
   return (

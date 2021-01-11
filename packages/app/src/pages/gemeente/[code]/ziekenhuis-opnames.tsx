@@ -19,7 +19,6 @@ import {
   getMunicipalityPaths,
   getMunicipalityStaticProps,
 } from '~/static-props/municipality-data';
-import { StaticProps } from '~/static-props/types';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text = siteText.gemeente_ziekenhuisopnames_per_dag;
@@ -30,9 +29,7 @@ export const getStaticProps = getMunicipalityStaticProps({
   },
 });
 
-const IntakeHospital: FCWithLayout<StaticProps<typeof getStaticProps>> = (
-  props
-) => {
+const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data, choropleth, municipalityName } = props;
   const router = useRouter();
 

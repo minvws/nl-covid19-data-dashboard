@@ -10,35 +10,29 @@ import { Collapsable } from '~/components-styled/collapsable';
 import { targetLanguage } from '../locale/index';
 import { groq } from 'next-sanity';
 import { getClient, localize, PortableText } from '~/lib/sanity';
-interface StaticProps {
-  props: VeelgesteldeVragenProps;
-}
 
-interface VeelgesteldeVragenProps {
-  data: {
-    title: string;
-    description: string | null;
-    questions: Array<{ content: Array<any>; title: string }>;
-  };
-  lastGenerated: string;
+interface faqData {
+  title: string;
+  description: string | null;
+  questions: Array<{ content: unknown[]; title: string }>;
 }
 
 const faqQuery = groq`
   *[_type == 'veelgesteldeVragen'][0]
 `;
 
-export async function getStaticProps(): Promise<StaticProps> {
+export async function getStaticProps() {
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
   const fileContents = fs.readFileSync(filePath, 'utf8');
-  const lastGenerated = JSON.parse(fileContents).last_generated;
+  const lastGenerated = JSON.parse(fileContents).last_generated as string;
 
-  const faqData = await getClient(false).fetch(faqQuery);
+  const faqData = await getClient().fetch<faqData>(faqQuery);
   const data = localize(faqData, [targetLanguage, 'nl']);
 
   return { props: { data, lastGenerated } };
 }
 
-const Verantwoording: FCWithLayout<VeelgesteldeVragenProps> = (props) => {
+const Verantwoording: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data } = props;
 
   return (

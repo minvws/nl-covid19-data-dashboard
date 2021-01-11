@@ -17,7 +17,6 @@ import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import siteText from '~/locale/index';
 import { getNationalStaticProps } from '~/static-props/nl-data';
-import { StaticProps } from '~/static-props/types';
 
 const text = siteText.thuiswonende_ouderen;
 
@@ -25,9 +24,10 @@ export const getStaticProps = getNationalStaticProps({
   choropleth: { vr: ({ elderly_at_home }) => ({ elderly_at_home }) },
 });
 
-const ElderlyAtHomeNationalPage: FCWithLayout<
-  StaticProps<typeof getStaticProps>
-> = ({ data, choropleth }) => {
+const ElderlyAtHomeNationalPage: FCWithLayout<typeof getStaticProps> = ({
+  data,
+  choropleth,
+}) => {
   const router = useRouter();
   const elderlyAtHomeData = data.elderly_at_home;
 

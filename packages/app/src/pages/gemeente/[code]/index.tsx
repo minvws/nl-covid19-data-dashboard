@@ -1,12 +1,11 @@
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getMunicipalityLayout } from '~/domain/layout/municipality-layout';
 import {
-  getMunicipalityStaticProps,
   getMunicipalityPaths,
-  IMunicipalityData,
+  getMunicipalityStaticProps,
 } from '~/static-props/municipality-data';
 
-const Municipality: FCWithLayout<IMunicipalityData> = () => {
+const Municipality: FCWithLayout<typeof getStaticProps> = () => {
   return null;
 };
 

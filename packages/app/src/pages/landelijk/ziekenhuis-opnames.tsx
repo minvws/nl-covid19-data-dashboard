@@ -22,7 +22,6 @@ import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import siteText from '~/locale/index';
 import { getNationalStaticProps } from '~/static-props/nl-data';
-import { StaticProps } from '~/static-props/types';
 
 const text = siteText.ziekenhuisopnames_per_dag;
 
@@ -33,9 +32,7 @@ export const getStaticProps = getNationalStaticProps({
   },
 });
 
-const IntakeHospital: FCWithLayout<StaticProps<typeof getStaticProps>> = (
-  props
-) => {
+const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data, choropleth } = props;
   const router = useRouter();
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(

@@ -18,7 +18,6 @@ import { FCWithLayout } from '~/domain/layout/layout';
 import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { TALLLanguages } from '~/locale/index';
 import { getChoroplethData } from '~/static-props/choropleth-data';
-import { StaticProps } from '~/static-props/types';
 import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 
@@ -45,7 +44,7 @@ export async function getStaticProps() {
 // the data is always there. Making the data optional would mean
 // lots of unnecessary null checks on those pages.
 
-const SafetyRegion: FCWithLayout<StaticProps<typeof getStaticProps>> = ({
+const SafetyRegion: FCWithLayout<typeof getStaticProps> = ({
   text,
   choropleth,
 }) => {
@@ -98,7 +97,7 @@ const SafetyRegion: FCWithLayout<StaticProps<typeof getStaticProps>> = ({
   );
 };
 
-SafetyRegion.getLayout = getSafetyRegionLayout as any;
+SafetyRegion.getLayout = getSafetyRegionLayout() as any;
 
 export default SafetyRegion;
 

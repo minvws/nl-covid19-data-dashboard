@@ -1,24 +1,15 @@
 import fs from 'fs';
 import Head from 'next/head';
 import path from 'path';
-import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
-import { MaxWidth } from '~/components-styled/max-width';
-import siteText, { TALLLanguages } from '~/locale/index';
-import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
-import styles from './over.module.scss';
 import { Collapsable } from '~/components-styled/collapsable';
+import { MaxWidth } from '~/components-styled/max-width';
+import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
+import siteText from '~/locale/index';
+import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
 import { getSkipLinkId } from '~/utils/skipLinks';
+import styles from './over.module.scss';
 
-interface StaticProps {
-  props: OverRisiconiveausProps;
-}
-
-interface OverRisiconiveausProps {
-  text: TALLLanguages;
-  lastGenerated: string;
-}
-
-export async function getStaticProps(): Promise<StaticProps> {
+export async function getStaticProps() {
   const text = parseMarkdownInLocale((await import('../locale/index')).default);
 
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
@@ -28,7 +19,7 @@ export async function getStaticProps(): Promise<StaticProps> {
   return { props: { text, lastGenerated } };
 }
 
-const OverRisicoNiveaus: FCWithLayout<OverRisiconiveausProps> = (props) => {
+const OverRisicoNiveaus: FCWithLayout<typeof getStaticProps> = (props) => {
   const { text } = props;
 
   const { over_risiconiveaus } = text;

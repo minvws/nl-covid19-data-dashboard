@@ -6,21 +6,20 @@ import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
-import { FCWithLayout } from '~/domain/layout/layout';
-import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { SEOHead } from '~/components/seoHead';
 import { DeceasedMonitorSection } from '~/domain/deceased/deceased-monitor-section';
+import { FCWithLayout } from '~/domain/layout/layout';
+import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import siteText from '~/locale/index';
 import {
   getSafetyRegionPaths,
   getSafetyRegionStaticProps,
-  ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text = siteText.veiligheidsregio_sterfte;
 
-const DeceasedRegionalPage: FCWithLayout<ISafetyRegionData> = (props) => {
+const DeceasedRegionalPage: FCWithLayout<typeof getStaticProps> = (props) => {
   const {
     safetyRegionName: safetyRegion,
     data: { deceased_cbs: dataCbs, deceased_rivm: dataRivm },

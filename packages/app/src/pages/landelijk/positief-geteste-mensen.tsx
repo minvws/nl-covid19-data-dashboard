@@ -29,7 +29,6 @@ import { formatAgeGroupRange } from '~/domain/infected-people/age-demographic/ag
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import { getNationalStaticProps } from '~/static-props/nl-data';
-import { StaticProps } from '~/static-props/types';
 import { colors } from '~/style/theme';
 import { NationalTestedPerAgeGroup } from '~/types/data.d';
 import { assert } from '~/utils/assert';
@@ -45,9 +44,11 @@ export const getStaticProps = getNationalStaticProps({
   },
 });
 
-const PositivelyTestedPeople: FCWithLayout<
-  StaticProps<typeof getStaticProps>
-> = ({ data, choropleth, text: siteText }) => {
+const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
+  data,
+  choropleth,
+  text: siteText,
+}) => {
   const text = siteText.positief_geteste_personen;
   const ggdText = siteText.positief_geteste_personen_ggd;
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>(

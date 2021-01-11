@@ -19,7 +19,6 @@ import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import siteText from '~/locale/index';
 import { getNationalStaticProps } from '~/static-props/nl-data';
-import { StaticProps } from '~/static-props/types';
 
 const infectedLocationsText = siteText.gehandicaptenzorg_besmette_locaties;
 const positiveTestedPeopleText =
@@ -32,9 +31,7 @@ export const getStaticProps = getNationalStaticProps({
   },
 });
 
-const DisabilityCare: FCWithLayout<StaticProps<typeof getStaticProps>> = (
-  props
-) => {
+const DisabilityCare: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data, choropleth } = props;
   const lastValue = data.disability_care.last_value;
   const values = data.disability_care.values;

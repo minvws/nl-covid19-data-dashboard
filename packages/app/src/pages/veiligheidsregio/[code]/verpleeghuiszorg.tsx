@@ -8,14 +8,13 @@ import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
+import { SEOHead } from '~/components/seoHead';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
-import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import {
   getSafetyRegionPaths,
   getSafetyRegionStaticProps,
-  ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
@@ -24,7 +23,7 @@ const positiveTestPeopleText =
   siteText.veiligheidsregio_verpleeghuis_positief_geteste_personen;
 const mortalityText = siteText.veiligheidsregio_verpleeghuis_oversterfte;
 
-const NursingHomeCare: FCWithLayout<ISafetyRegionData> = (props) => {
+const NursingHomeCare: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data, safetyRegionName } = props;
 
   const nursinghomeLastValue = data.nursing_home.last_value;

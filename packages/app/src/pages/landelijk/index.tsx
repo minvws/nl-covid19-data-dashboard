@@ -1,11 +1,8 @@
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
-import {
-  getNationalStaticProps,
-  NationalPageProps,
-} from '~/static-props/nl-data';
+import { getNationalStaticProps } from '~/static-props/nl-data';
 
-const National: FCWithLayout<NationalPageProps> = () => {
+const National: FCWithLayout<typeof getStaticProps> = () => {
   return null;
 };
 

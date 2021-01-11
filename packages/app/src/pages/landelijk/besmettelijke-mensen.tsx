@@ -7,19 +7,16 @@ import { Legenda } from '~/components-styled/legenda';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { AreaChart } from '~/components/charts/index';
+import { SEOHead } from '~/components/seoHead';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
-import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
-import {
-  getNationalStaticProps,
-  NationalPageProps,
-} from '~/static-props/nl-data';
+import { getNationalStaticProps } from '~/static-props/nl-data';
 import { getLastFilledValue } from '~/utils/get-last-filled-value';
 
 const text = siteText.besmettelijke_personen;
 
-const InfectiousPeople: FCWithLayout<NationalPageProps> = (props) => {
+const InfectiousPeople: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data } = props;
 
   const lastFullValue = getLastFilledValue(data.infectious_people);

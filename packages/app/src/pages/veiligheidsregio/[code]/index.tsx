@@ -1,12 +1,11 @@
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import {
-  getSafetyRegionStaticProps,
   getSafetyRegionPaths,
-  ISafetyRegionData,
+  getSafetyRegionStaticProps,
 } from '~/static-props/safetyregion-data';
 
-const SafetyRegion: FCWithLayout<ISafetyRegionData> = () => {
+const SafetyRegion: FCWithLayout<typeof getStaticProps> = () => {
   return null;
 };
 

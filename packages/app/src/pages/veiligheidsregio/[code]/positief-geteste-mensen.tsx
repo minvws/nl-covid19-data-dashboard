@@ -25,7 +25,6 @@ import {
   getSafetyRegionPaths,
   getSafetyRegionStaticProps,
 } from '~/static-props/safetyregion-data';
-import { StaticProps } from '~/static-props/types';
 import { colors } from '~/style/theme';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
@@ -38,9 +37,7 @@ export const getStaticProps = getSafetyRegionStaticProps({
   },
 });
 
-const PositivelyTestedPeople: FCWithLayout<
-  StaticProps<typeof getStaticProps>
-> = (props) => {
+const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data, choropleth, safetyRegionName, text: siteText } = props;
 
   const text = siteText.veiligheidsregio_positief_geteste_personen;

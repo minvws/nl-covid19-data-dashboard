@@ -15,6 +15,7 @@ import { FCWithLayout } from '~/domain/layout/layout';
 import { getMunicipalityLayout } from '~/domain/layout/municipality-layout';
 import text from '~/locale/index';
 import getLastGeneratedData from '~/static-props/last-generated-data';
+import { IMunicipalityData } from '~/static-props/municipality-data';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 
 const tooltipContent = (selectedHandler: MunicipalitySelectionHandler) => {
@@ -36,7 +37,7 @@ const tooltipContent = (selectedHandler: MunicipalitySelectionHandler) => {
 // All other pages which use `getMunicipalityLayout` can assume
 // the data is always there. Making the data optional would mean
 // lots of unnecessary null checks on those pages.
-const Municipality: FCWithLayout<any> = () => {
+const Municipality: FCWithLayout<IMunicipalityData> = () => {
   const router = useRouter();
   const breakpoints = useBreakpoints();
 

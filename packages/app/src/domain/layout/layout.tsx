@@ -6,6 +6,7 @@ import { AppFooter } from '~/components-styled/layout/app-footer';
 import { AppHeader } from '~/components-styled/layout/app-header';
 import { SkipLinkMenu } from '~/components-styled/skip-link-menu';
 import { ILastGeneratedData } from '~/static-props/last-generated-data';
+import { StaticProps } from '~/static-props/types';
 
 interface LayoutProps {
   url?: string;
@@ -15,7 +16,12 @@ interface LayoutProps {
   twitterImage?: string;
 }
 
-export type FCWithLayout<Props = void> = React.FC<Props> & {
+export type FCWithLayout<
+  PropsOrGetStaticProps = void,
+  Props = PropsOrGetStaticProps extends (...args: any) => any
+    ? StaticProps<PropsOrGetStaticProps>
+    : PropsOrGetStaticProps
+> = React.FC<Props> & {
   getLayout: (page: React.ReactNode, pageProps: Props) => React.ReactNode;
 };
 

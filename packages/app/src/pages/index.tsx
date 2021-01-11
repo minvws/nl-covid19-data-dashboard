@@ -21,7 +21,6 @@ import { escalationTooltip } from '~/components/choropleth/tooltips/region/escal
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import { getNationalStaticProps } from '~/static-props/nl-data';
-import { StaticProps } from '~/static-props/types';
 import theme from '~/style/theme';
 import { EscalationLevels, National } from '~/types/data';
 import { assert } from '~/utils/assert';
@@ -61,7 +60,7 @@ export async function getStaticProps() {
   return { props: { ...props, data: dataClone } };
 }
 
-const Home: FCWithLayout<StaticProps<typeof getStaticProps>> = (props) => {
+const Home: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data, text, choropleth } = props;
   const router = useRouter();
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(

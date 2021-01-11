@@ -38,7 +38,7 @@ class MyDocument extends Document {
     }
   }
 
-  render(): React.ReactElement {
+  render() {
     const locale = getLocale();
 
     return (

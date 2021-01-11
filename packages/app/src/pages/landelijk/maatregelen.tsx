@@ -4,18 +4,19 @@ import { ContentHeader } from '~/components-styled/content-header';
 import { KpiSection } from '~/components-styled/kpi-section';
 import { TileList } from '~/components-styled/tile-list';
 import { Heading, Text } from '~/components-styled/typography';
-import { FCWithLayout } from '~/domain/layout/layout';
-import { getNationalLayout } from '~/domain/layout/national-layout';
 import { RestrictionsTable } from '~/components/restrictions/restrictions-table';
 import { EscalationLevel } from '~/components/restrictions/type';
 import { SEOHead } from '~/components/seoHead';
+import { FCWithLayout } from '~/domain/layout/layout';
+import { getNationalLayout } from '~/domain/layout/national-layout';
 import text from '~/locale';
-import { NationalPageProps } from '~/static-props/nl-data';
+import { getNationalStaticProps } from '~/static-props/nl-data';
 import theme from '~/style/theme';
 import { useEscalationLevel } from '~/utils/use-escalation-level';
-export { getStaticProps } from '~/pages';
 
-const NationalRestrictions: FCWithLayout<NationalPageProps> = (props) => {
+export const getStaticProps = getNationalStaticProps();
+
+const NationalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data } = props;
 
   const escalationLevel = useEscalationLevel(data.restrictions.values);

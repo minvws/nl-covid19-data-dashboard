@@ -20,7 +20,6 @@ import {
   getSafetyRegionPaths,
   getSafetyRegionStaticProps,
 } from '~/static-props/safetyregion-data';
-import { StaticProps } from '~/static-props/types';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text = siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
@@ -31,9 +30,7 @@ export const getStaticProps = getSafetyRegionStaticProps({
   },
 });
 
-const IntakeHospital: FCWithLayout<StaticProps<typeof getStaticProps>> = (
-  props
-) => {
+const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data, safetyRegionName, choropleth } = props;
   const router = useRouter();
 

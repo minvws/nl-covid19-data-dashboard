@@ -19,7 +19,6 @@ import {
   getMunicipalityPaths,
   getMunicipalityStaticProps,
 } from '~/static-props/municipality-data';
-import { StaticProps } from '~/static-props/types';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 export const getStaticProps = getMunicipalityStaticProps({
@@ -28,9 +27,7 @@ export const getStaticProps = getMunicipalityStaticProps({
   },
 });
 
-const PositivelyTestedPeople: FCWithLayout<
-  StaticProps<typeof getStaticProps>
-> = (props) => {
+const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data, choropleth, municipalityName, text: siteText } = props;
 
   const text = siteText.gemeente_positief_geteste_personen;

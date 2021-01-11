@@ -12,15 +12,14 @@ import { KpiValue } from '~/components-styled/kpi-value';
 import { Select } from '~/components-styled/select';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { FCWithLayout } from '~/domain/layout/layout';
-import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { SewerWaterChart } from '~/components/lineChart/sewer-water-chart';
 import { SEOHead } from '~/components/seoHead';
+import { FCWithLayout } from '~/domain/layout/layout';
+import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import siteText from '~/locale/index';
 import {
   getSafetyRegionPaths,
   getSafetyRegionStaticProps,
-  ISafetyRegionData,
 } from '~/static-props/safetyregion-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import {
@@ -32,7 +31,7 @@ import {
 
 const text = siteText.veiligheidsregio_rioolwater_metingen;
 
-const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
+const SewerWater: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data, safetyRegionName } = props;
 
   const {
