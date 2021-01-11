@@ -9,6 +9,8 @@ import * as piwik from '~/lib/piwik';
 import { GlobalStyle } from '~/style/global-style';
 import theme from '~/style/theme';
 
+import { IntlProvider, FormattedMessage, FormattedNumber } from 'react-intl';
+
 type AppPropsWithLayout = AppProps & {
   Component: FCWithLayout;
 };
@@ -37,8 +39,10 @@ export default function App(props: AppPropsWithLayout) {
 
   return (
     <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      {pageWithLayout}
+      <IntlProvider locale="nl" defaultLocale="nl">
+        <GlobalStyle />
+        {pageWithLayout}
+      </IntlProvider>
     </ThemeProvider>
   );
 }

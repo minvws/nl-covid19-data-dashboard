@@ -9,6 +9,8 @@ import { formatDateFromSeconds } from '~/utils/formatDate';
 import { Link } from '~/utils/link';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
+import { IntlProvider, FormattedMessage, FormattedNumber } from 'react-intl';
+
 export function AppFooter({ lastGenerated }: { lastGenerated: string }) {
   return (
     <footer>
@@ -47,6 +49,10 @@ export function AppFooter({ lastGenerated }: { lastGenerated: string }) {
                 </Item>
                 <Item href={text.nav.links.meer_href} isExternal>
                   {text.nav.links.meer}
+                </Item>
+
+                <Item href={text.nav.links.meer_href} isExternal>
+                  <FormattedMessage defaultMessage="Meer informatie over het coronavirus" />
                 </Item>
               </FooterList>
             </nav>
