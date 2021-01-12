@@ -17,6 +17,7 @@ import { Search } from '~/domain/topical/components/search';
 import { DataSitemap } from '~/domain/topical/data-site-map';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
+import { RiskLevelsTile } from '~/domain/topical/risk-levels-tile';
 import { TALLLanguages } from '~/locale/';
 import { sortNationalTimeSeriesInDataInPlace } from '~/static-props/data-sorting';
 import { loadJsonFromDataFile } from '~/static-props/utils/load-json-from-data-file';
@@ -144,6 +145,8 @@ const Home: FCWithLayout<IHomeData> = (data) => {
             )}
           />
         </ChoroplethTile>
+
+        <RiskLevelsTile />
 
         <NewsMessage
           imageSrc="images/toelichting-afbeelding.png"
