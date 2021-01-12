@@ -22,7 +22,7 @@ export function EscalationLevelInfoLabel(props: EscalationLevelProps) {
       flexShrink={0}
     >
       <EscalationLevelIcon level={escalationLevel} />
-      <Text as="span" ml=".5em" fontWeight="bold">
+      <Text as="span" ml={2} fontWeight="bold">
         {siteText.escalatie_niveau.types[escalationLevel].titel}
       </Text>
     </Box>
