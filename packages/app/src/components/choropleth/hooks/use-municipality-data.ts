@@ -36,9 +36,15 @@ export type GetMunicipalityDataFunctionType = (
   id: string
 ) => MunicipalityChoroplethValue;
 
+export type DataValue = {
+  value: number;
+  code: string;
+};
+
 type UseMunicipalityDataReturnValue = {
   getChoroplethValue: GetMunicipalityDataFunctionType;
   hasData: boolean;
+  values: DataValue[];
 };
 
 export function useMunicipalityNavigationData(
@@ -55,6 +61,7 @@ export function useMunicipalityNavigationData(
       __color_value: 0,
     }),
     hasData: true,
+    values: [],
   };
 }
 
@@ -78,8 +85,15 @@ export function useMunicipalityData<K extends MunicipalitiesMetricName>(
           __color_value: 0,
         }),
         hasData: false,
+        values: [],
       };
     }
+
+    const values =
+      (data?.[metricName] as any[])?.map((x) => ({
+        code: x.gmcode,
+        value: x[metricProperty],
+      })) ?? [];
 
     const metricsForAllMunicipalities = (data[metricName] as unknown) as
       | MunicipalityMetricValue[]
@@ -119,6 +133,6 @@ export function useMunicipalityData<K extends MunicipalitiesMetricName>(
       return value || { ...propertyData[id], __color_value: 0 };
     };
 
-    return { getChoroplethValue, hasData };
+    return { getChoroplethValue, hasData, values };
   }, [data, metricName, metricProperty, featureCollection]);
 }

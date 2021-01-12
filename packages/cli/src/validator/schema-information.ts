@@ -6,45 +6,40 @@ type CustomValidationFunction = (
   input: Record<string, unknown>
 ) => string[] | undefined;
 
-export type SchemaInfo = {
+export type SchemaItemInfo = {
   files: string[];
   basePath: string;
   customValidations?: CustomValidationFunction[];
   optional?: boolean;
 };
 
-export function getSchemaInformation(
-  customJsonPath?: string
-): Record<string, SchemaInfo> {
-  const jsonPath = customJsonPath ?? jsonDirectory;
+export function getSchemaInfo(path: string = jsonDirectory) {
+  if (!fs.existsSync(path)) {
+    throw new Error(`Path ${path} does not exist`);
+  }
 
-  const localeJsons = fs.readdirSync(localeDirectory);
+  const fileList = fs.readdirSync(path);
 
-  const dataJsons = fs.existsSync(jsonPath)
-    ? fs.readdirSync(jsonPath).concat(localeJsons)
-    : localeJsons;
-
-  // This object defines which JSON files should be validated with which schema.
-  const schemaInformation: Record<string, SchemaInfo> = {
-    national: { files: ['NL.json'], basePath: jsonPath },
-    regional: {
-      files: filterFilenames(dataJsons, /^VR[0-9]+.json$/),
-      basePath: jsonPath,
+  const info: Record<string, SchemaItemInfo> = {
+    nl: { files: ['NL.json'], basePath: path },
+    vr: {
+      files: getFileNames(fileList, /^VR[0-9]+.json$/),
+      basePath: path,
     },
-    municipal: {
-      files: filterFilenames(dataJsons, /^GM[0-9]+.json$/),
-      basePath: jsonPath,
+    gm: {
+      files: getFileNames(fileList, /^GM[0-9]+.json$/),
+      basePath: path,
     },
-    municipalities: { files: ['GM_COLLECTION.json'], basePath: jsonPath },
-    regions: { files: ['VR_COLLECTION.json'], basePath: jsonPath },
+    gm_collection: { files: ['GM_COLLECTION.json'], basePath: path },
+    vr_collection: { files: ['VR_COLLECTION.json'], basePath: path },
     locale: {
-      files: filterFilenames(localeJsons, /[^.]+.json$/),
+      files: ['en.json', 'nl.json'],
       basePath: localeDirectory,
       customValidations: [validatePlaceholders],
     },
   };
 
-  return schemaInformation;
+  return info;
 }
 
 /**
@@ -53,6 +48,6 @@ export function getSchemaInformation(
  * @param fileList The given list of file names
  * @param pattern The given regular expression
  */
-function filterFilenames(fileList: string[], pattern: RegExp) {
+function getFileNames(fileList: string[], pattern: RegExp) {
   return fileList.filter((filename) => filename.match(pattern));
 }
