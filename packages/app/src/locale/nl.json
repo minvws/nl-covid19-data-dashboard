@@ -9,7 +9,7 @@
     "title": "Laatst bijgewerkt"
   },
   "notificatie": {
-    "titel": "Overtuigende daling nog niet zichtbaar",
+    "titel": "Voorzichtige daling zichtbaar",
     "bericht": "Overtuigende effecten van de lockdown van 15 december blijven vooralsnog uit. Het aantal mensen dat zich liet testen en het aantal mensen met een positieve testuitslag daalde weliswaar, maar het percentage positieve testen bleef deze week hoog. Het kan zijn dat mensen tijdens en na de feestdagen minder geneigd waren om zich te laten testen, of dat de lockdown wel effect heeft en minder mensen klachten hebben. Het aantal nieuwe ziekenhuisopnames was lager dan vorige week. Het aantal nieuwe IC opnames is iets hoger vergeleken met de week ervoor. Om te zorgen dat de druk op de zorg afneemt, is en blijft het noodzakelijk om zoveel mogelijk thuis te blijven, en om je te laten testen als je klachten hebt.",
     "link": {
       "text": "Bekijk de toelichting van het RIVM",
@@ -980,7 +980,7 @@
   },
   "laatste_ontwikkelingen": {
     "title": "Laatste ontwikkelingen",
-    "menu_subtitle": "Overtuigende daling nog niet zichtbaar",
+    "menu_subtitle": "Voorzichtige daling zichtbaar",
     "alle_cijfers_header": "Benieuwd naar alle cijfers?",
     "alle_cijfers_link": "Bekijk alle cijfers"
   },
