@@ -47,6 +47,10 @@ const StyledLabel = styled.label(
     '@media (min-width: 768px)': {
       fontSize: 2,
     },
+
+    '@media (max-width: 390px)': {
+      p: '0.2em 0.75em',
+    },
   })
 );
 
