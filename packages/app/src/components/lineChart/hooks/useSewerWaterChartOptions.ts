@@ -300,8 +300,6 @@ export function useSewerWaterChartOptions<
         formatter: function (): false | string {
           const tooltipType = tooltipTypes[this.series.name];
 
-          console.log('nee');
-
           if (!tooltipType) {
             return false;
           }
