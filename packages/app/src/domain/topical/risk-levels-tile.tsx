@@ -16,7 +16,7 @@ type EscalationLevelExplanationProps = {
 function EscalationLevelExplanation(props: EscalationLevelExplanationProps) {
   const { level, explanation } = props;
   return (
-    <Box display="flex">
+    <Box display="flex" flexDirection={{ _: 'column', lg: 'row' }}>
       <EscalationLevelInfoLabel escalationLevel={level} width="10rem" />
       <Text>{explanation}</Text>
     </Box>
@@ -30,7 +30,7 @@ export function RiskLevelsTile() {
         summary={siteText.escalatie_niveau.tile_title}
         hideBorder={true}
       >
-        <Box py={3}>
+        <Box my={3}>
           <EscalationLevelExplanation
             level={1}
             explanation={siteText.escalatie_niveau.types['1'].toelichting}
