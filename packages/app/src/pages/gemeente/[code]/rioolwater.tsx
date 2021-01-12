@@ -53,15 +53,6 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
 
   const [selectedInstallation, setSelectedInstallation] = useState<string>();
 
-  if (!sewerAverages) {
-    /**
-     * It is possible that there is no sewer data available for this GM. Then
-     * this page should never be linked because the sidebar item is then
-     * disabled.
-     */
-    return null;
-  }
-
   /**
    * Only render a scatter plot when there's data coming from more than one
    * sewer station
@@ -73,6 +64,15 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
 
     return sewerStationNames.length > 1;
   }, [sewerStationNames]);
+
+  if (!sewerAverages) {
+    /**
+     * It is possible that there is no sewer data available for this GM. Then
+     * this page should never be linked because the sidebar item is then
+     * disabled.
+     */
+    return null;
+  }
 
   return (
     <>
