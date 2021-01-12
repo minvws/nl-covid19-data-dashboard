@@ -20,7 +20,7 @@ interface OverRisiconiveausData {
 export async function getStaticProps() {
   const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
   const fileContents = fs.readFileSync(filePath, 'utf8');
-  const lastGenerated = JSON.parse(fileContents).last_generated;
+  const lastGenerated = JSON.parse(fileContents).last_generated as string;
 
   const query = groq`
   *[_type == 'overRisicoNiveaus'][0]

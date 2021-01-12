@@ -71,7 +71,7 @@ export function localize<T>(value: T, languages: TLanguageKey[]): T {
     if (/^locale[A-Z]/.test(anyValue._type)) {
       const language = languages.find((lang: string) => (value as any)[lang]);
 
-      return anyValue[language || '__non_existing'] ?? null;
+      return (language && anyValue[language]) ?? null;
     }
 
     return Object.keys(anyValue).reduce(
