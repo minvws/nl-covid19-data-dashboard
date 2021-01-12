@@ -15,9 +15,9 @@ import { escalationTooltip } from '~/components/choropleth/tooltips/region/escal
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import { Search } from '~/domain/topical/components/search';
 import { DataSitemap } from '~/domain/topical/data-site-map';
+import { EscalationLevelExplanationsTile } from '~/domain/topical/escalation-level-explanations-tile';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
-import { RiskLevelExplanationsTile } from '~/domain/topical/risk-levels-tile';
 import { TALLLanguages } from '~/locale/';
 import { sortNationalTimeSeriesInDataInPlace } from '~/static-props/data-sorting';
 import { loadJsonFromDataFile } from '~/static-props/utils/load-json-from-data-file';
@@ -146,7 +146,7 @@ const Home: FCWithLayout<IHomeData> = (data) => {
           />
         </ChoroplethTile>
 
-        <RiskLevelExplanationsTile />
+        <EscalationLevelExplanationsTile />
 
         <NewsMessage
           imageSrc="images/toelichting-afbeelding.png"
