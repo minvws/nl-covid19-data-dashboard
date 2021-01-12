@@ -10,9 +10,10 @@ import {
   useSafetyRegionBoundingbox,
   useSafetyRegionData,
 } from './hooks';
+import { useChoroplethDataDescription } from './hooks/use-choropleth-data-description';
 import { getDataThresholds } from './legenda/utils';
 import { Path } from './path';
-import { SafetyRegionProperties, RegionsMetricName } from './shared';
+import { RegionsMetricName, SafetyRegionProperties } from './shared';
 import { countryGeo, regionGeo } from './topology';
 
 type SafetyRegionChoroplethProps<T> = {
@@ -56,7 +57,7 @@ export function SafetyRegionChoropleth<T>(
 
   const boundingBox = useSafetyRegionBoundingbox(regionGeo, selected);
 
-  const { getChoroplethValue, hasData } = useSafetyRegionData(
+  const { getChoroplethValue, hasData, values } = useSafetyRegionData(
     regionGeo,
     metricName,
     metricProperty
@@ -66,6 +67,14 @@ export function SafetyRegionChoropleth<T>(
     regionThresholds,
     metricName,
     metricProperty
+  );
+
+  const dataDescription = useChoroplethDataDescription(
+    selectedThreshold,
+    values,
+    metricName,
+    metricProperty,
+    'vr'
   );
 
   const getFillColor = useChoroplethColorScale(
@@ -135,6 +144,7 @@ export function SafetyRegionChoropleth<T>(
     <div ref={ref} css={css({ position: 'relative', bg: 'transparent' })}>
       <AspectRatio ratio={1 / ratio}>
         <Choropleth
+          description={dataDescription}
           featureCollection={regionGeo}
           hovers={hasData ? regionGeo : undefined}
           boundingBox={boundingBox || countryGeo}

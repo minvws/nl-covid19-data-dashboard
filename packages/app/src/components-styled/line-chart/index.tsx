@@ -360,7 +360,9 @@ function formatDefaultTooltip<T extends Value>(
   if (isDaily) {
     return (
       <>
-        <Text as="span" fontWeight="bold">{formatDateFromMilliseconds(value.__date.getTime())}: </Text>
+        <Text as="span" fontWeight="bold">
+          {`${formatDateFromMilliseconds(value.__date.getTime())}: `}
+        </Text>
         {isPercentage
           ? `${formatPercentage(value.__value)}%`
           : formatNumber(value.__value)}

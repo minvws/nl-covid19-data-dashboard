@@ -1,6 +1,6 @@
 import Chevron from '~/assets/chevron.svg';
 import { Box } from '~/components-styled/base';
-import { Collapsable } from '~/components-styled/collapsable';
+import { Collapsible } from '~/components-styled/collapsible';
 import { EscalationLevelInfoLabel } from '~/components-styled/escalation-level';
 import { Tile } from '~/components-styled/tile';
 import { Text } from '~/components-styled/typography';
@@ -26,7 +26,7 @@ function EscalationLevelExplanation(props: EscalationLevelExplanationProps) {
 export function EscalationLevelExplanationsTile() {
   return (
     <Tile>
-      <Collapsable summary={siteText.escalatie_niveau.tile_title} hideBorder>
+      <Collapsible summary={siteText.escalatie_niveau.tile_title} hideBorder>
         <Box my={3}>
           <EscalationLevelExplanation
             level={1}
@@ -53,7 +53,7 @@ export function EscalationLevelExplanationsTile() {
             </Link>
           </Box>
         </Box>
-      </Collapsable>
+      </Collapsible>
     </Tile>
   );
 }
