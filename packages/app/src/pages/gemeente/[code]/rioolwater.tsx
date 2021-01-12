@@ -12,10 +12,10 @@ import { KpiValue } from '~/components-styled/kpi-value';
 import { Select } from '~/components-styled/select';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { FCWithLayout } from '~/domain/layout/layout';
-import { getMunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { SewerWaterChart } from '~/components/lineChart/sewer-water-chart';
 import { SEOHead } from '~/components/seoHead';
+import { FCWithLayout } from '~/domain/layout/layout';
+import { getMunicipalityLayout } from '~/domain/layout/municipality-layout';
 import siteText from '~/locale/index';
 import {
   getMunicipalityData,
@@ -66,7 +66,13 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
    * Only render a scatter plot when there's data coming from more than one
    * sewer station
    */
-  const enableScatterPlot = sewerStationNames.length > 1;
+  const enableScatterPlot = useMemo(() => {
+    if (sewerStationNames.length === 1) {
+      setSelectedInstallation(sewerStationNames[0]);
+    }
+
+    return sewerStationNames.length > 1;
+  }, [sewerStationNames]);
 
   return (
     <>
