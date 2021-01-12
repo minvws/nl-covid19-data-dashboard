@@ -25,7 +25,7 @@ function EscalationLevelExplanation(props: EscalationLevelExplanationProps) {
 
 export function RiskLevelsTile() {
   return (
-    <Tile bg="white">
+    <Tile>
       <Collapsable summary={siteText.escalatie_niveau.tile_title} hideBorder>
         <Box my={3}>
           <EscalationLevelExplanation
