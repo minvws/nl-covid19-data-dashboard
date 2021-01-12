@@ -10,7 +10,7 @@
   },
   "notificatie": {
     "titel": "Slight decline visible",
-    "bericht": "Convincing effects of the lockdown that started on 15 December have yet to be seen. The number of people that got tested and the number of people with a positive test result decreased, but the percentage of positive test results remained high. Possibly,  people were less inclined to get tested during the holidays, or that the lockdown is effective and less people have COVID-like symptoms. In the week of 28 December to 3 January, less people with COVID-19 were admitted to the hospital. The number of ICU admissions increased compared to the week before. To reduce the pressure on hospital care, it is and remains necessary to stay at home as much as possible, and to get tested if you have symptoms.",
+    "bericht": "For the second week in a row, the number of COVID-19 positives decreased slightly . The percentage of people with a positive test result also declined somewhat. In the week of 4 to 10 January, less people with COVID-19 were newly admitted to the hospital and ICU, compared to the week before. Also, there were less newly reported infected locations of nursing homes and residential care centers in the past week. The decreasing numbers are a first effect of the lockdown that started on 15 December.",
     "link": {
       "text": "View the full message from the RIVM",
       "href": "https://www.rivm.nl/en/novel-coronavirus-covid-19/current-information"
@@ -617,7 +617,7 @@
     "select_region_municipality_legend": "Select a municipality:",
     "select_region_type_legend": "Show numbers from:",
     "your_municipality": "Municipality",
-    "belangrijk_bericht": "There is a [national lockdown](https://www.rijksoverheid.nl/actueel/nieuws/2020/12/14/lockdown-nodig-om-snel-oplopend-aantal-besmettingen-tegen-te-gaan) until at least Tuesday 19 January."
+    "belangrijk_bericht": "There is a [national lockdown](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen) until at least Tuesday 19 January."
   },
   "common": {
     "metadata": {
@@ -968,7 +968,7 @@
       "title": "Level of risk per safety region | Dashboard Coronavirus | Government.nl",
       "description": "Overview of the level of risk per safety region in the Netherlands."
     },
-    "belangrijk_bericht": "There is a [national lockdown](https://www.rijksoverheid.nl/actueel/nieuws/2020/12/14/lockdown-nodig-om-snel-oplopend-aantal-besmettingen-tegen-te-gaan) until at least Tuesday 19 January."
+    "belangrijk_bericht": "There is a [national lockdown](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen) until at least Tuesday 19 January."
   },
   "gemeente_index": {
     "selecteer_titel": "Select your municipality",
