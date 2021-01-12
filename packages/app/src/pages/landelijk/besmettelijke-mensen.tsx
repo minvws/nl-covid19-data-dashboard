@@ -73,6 +73,7 @@ const InfectiousPeople: FCWithLayout<NationalPageProps> = (props) => {
           title={text.linechart_titel}
           timeframeOptions={['all', '5weeks']}
           timeframeInitialValue="5weeks"
+          ariaDescription=""
         >
           {(timeframe) => (
             <>

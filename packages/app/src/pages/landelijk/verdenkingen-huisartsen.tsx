@@ -17,6 +17,7 @@ import {
 } from '~/static-props/nl-data';
 
 const text = siteText.verdenkingen_huisartsen;
+const accessibilityGraphs = siteText.accessibility_grafieken as any;
 
 const SuspectedPatients: FCWithLayout<NationalPageProps> = (props) => {
   const { data } = props;
@@ -78,6 +79,7 @@ const SuspectedPatients: FCWithLayout<NationalPageProps> = (props) => {
         <ChartTileWithTimeframe
           title={text.linechart_titel}
           metadata={{ source: text.bronnen.nivel }}
+          ariaDescription={accessibilityGraphs.nl.verdenkingen_huisartsen}
           timeframeOptions={['all', '5weeks']}
         >
           {(timeframe) => (

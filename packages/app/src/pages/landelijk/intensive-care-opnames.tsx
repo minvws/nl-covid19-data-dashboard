@@ -17,6 +17,7 @@ import {
 } from '~/static-props/nl-data';
 
 const text = siteText.ic_opnames_per_dag;
+const accessibilityGraphs = siteText.accessibility_grafieken as any;
 
 const IntakeIntensiveCare: FCWithLayout<NationalPageProps> = (props) => {
   const { data } = props;
@@ -88,6 +89,7 @@ const IntakeIntensiveCare: FCWithLayout<NationalPageProps> = (props) => {
         <LineChartTile
           title={text.linechart_titel}
           values={dataIntake.values}
+          ariaDescription={accessibilityGraphs.nl.intensive_care_opnames}
           linesConfig={[
             {
               metricProperty: 'admissions_moving_average',

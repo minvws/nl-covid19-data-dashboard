@@ -27,6 +27,7 @@ import {
 } from '~/static-props/nl-data';
 
 const text = siteText.ziekenhuisopnames_per_dag;
+const accessibilityGraphs = siteText.accessibility_grafieken as any;
 
 const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
   const { data } = props;
@@ -142,7 +143,8 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
 
         <LineChartTile
           title={text.linechart_titel}
-          description={text.linechart_description}
+          description="test"
+          ariaDescription={accessibilityGraphs.nl.ziekenhuisopnames}
           values={dataHospitalNice.values}
           signaalwaarde={40}
           linesConfig={[

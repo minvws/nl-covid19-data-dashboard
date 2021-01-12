@@ -23,6 +23,7 @@ const locationsText = siteText.veiligheidsregio_verpleeghuis_besmette_locaties;
 const positiveTestPeopleText =
   siteText.veiligheidsregio_verpleeghuis_positief_geteste_personen;
 const mortalityText = siteText.veiligheidsregio_verpleeghuis_oversterfte;
+const accessibilityGraphs = siteText.accessibility_grafieken as any;
 
 const NursingHomeCare: FCWithLayout<ISafetyRegionData> = (props) => {
   const { data, safetyRegionName } = props;
@@ -84,6 +85,7 @@ const NursingHomeCare: FCWithLayout<ISafetyRegionData> = (props) => {
         <LineChartTile
           metadata={{ source: positiveTestPeopleText.bronnen.rivm }}
           title={positiveTestPeopleText.linechart_titel}
+          ariaDescription={accessibilityGraphs.vr.verpleeghuiszorg_positief}
           values={data.nursing_home.values}
           linesConfig={[
             {
@@ -145,6 +147,9 @@ const NursingHomeCare: FCWithLayout<ISafetyRegionData> = (props) => {
         {nursinghomeLastValue.infected_locations_total !== undefined && (
           <LineChartTile
             title={locationsText.linechart_titel}
+            ariaDescription={
+              accessibilityGraphs.vr.verpleeghuiszorg_besmette_locaties
+            }
             values={data.nursing_home.values}
             linesConfig={[
               {
@@ -196,6 +201,7 @@ const NursingHomeCare: FCWithLayout<ISafetyRegionData> = (props) => {
             metadata={{ source: mortalityText.bronnen.rivm }}
             title={mortalityText.linechart_titel}
             values={data.nursing_home.values}
+            ariaDescription={accessibilityGraphs.vr.verpleeghuiszorg_overleden}
             linesConfig={[
               {
                 metricProperty: 'deceased_daily',

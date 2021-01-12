@@ -13,15 +13,15 @@ interface ChartTileProps {
   title: string;
   description?: React.ReactNode;
   ariaDescription?: string;
-  uniqueAriaId: string;
+  uniqueAriaId?: string;
 }
 
 interface ChartTileWithTimeframeProps extends Omit<ChartTileProps, 'children'> {
   children: (timeframe: TimeframeOption) => React.ReactNode;
   timeframeOptions?: TimeframeOption[];
   timeframeInitialValue?: TimeframeOption;
-  uniqueAriaId: string;
   ariaDescription?: string;
+  uniqueAriaId?: string;
 }
 
 export function ChartTile({
@@ -30,8 +30,16 @@ export function ChartTile({
   metadata,
   children,
   ariaDescription,
-  uniqueAriaId,
 }: ChartTileProps) {
+  if (!description && !ariaDescription)
+    throw new Error(
+      `This graph doesn't include a description, please add a ariaDescription property`
+    );
+
+  // const uniqueAriaId = title.replace(/\W+/g, '-').toLowerCase() as string;
+  const uniqueAriaId = `_${Math.random().toString(36).substring(2, 15)}`;
+  // const clonedReactElement = cloneElement(children as React.ReactElement<any>, {uniqueAriaId})
+
   return (
     <ChartTileContainer metadata={metadata}>
       <ChartTileHeader
@@ -58,6 +66,8 @@ export function ChartTileWithTimeframe({
   const [timeframe, setTimeframe] = useState<TimeframeOption>(
     timeframeInitialValue
   );
+
+  // if (!description && !ariaDescription) throw new Error(`This graph doesn't include a description, please add a ariaDescription property`);
 
   return (
     <ChartTileContainer metadata={metadata}>
@@ -89,7 +99,7 @@ function ChartTileHeader({
   timeframe?: TimeframeOption;
   timeframeOptions?: TimeframeOption[];
   onTimeframeChange?: (timeframe: TimeframeOption) => void;
-  uniqueAriaId: string;
+  uniqueAriaId?: string;
   ariaDescription?: string;
 }) {
   return (

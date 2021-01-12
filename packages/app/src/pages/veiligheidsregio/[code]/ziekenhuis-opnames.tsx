@@ -24,6 +24,7 @@ import {
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text = siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
+const accessibilityGraphs = siteText.accessibility_grafieken as any;
 
 const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
   const { data, safetyRegionName } = props;
@@ -110,12 +111,11 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
             )}
           />
         </ChoroplethTile>
-
         {lastValue && (
           <LineChartTile
             metadata={{ source: text.bronnen.rivm }}
             title={text.linechart_titel}
-            description={text.linechart_description}
+            ariaDescription={accessibilityGraphs.vr.ziekenhuis_opnames}
             values={data.hospital_nice.values}
             linesConfig={[
               {

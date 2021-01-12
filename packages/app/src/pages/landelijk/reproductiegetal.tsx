@@ -19,6 +19,7 @@ import {
 import { getLastFilledValue } from '~/utils/get-last-filled-value';
 
 const text = siteText.reproductiegetal;
+const accessibilityGraphs = siteText.accessibility_grafieken as any;
 
 const ReproductionIndex: FCWithLayout<NationalPageProps> = (props) => {
   const { data } = props;
@@ -80,10 +81,7 @@ const ReproductionIndex: FCWithLayout<NationalPageProps> = (props) => {
             metadata={{ source: text.bronnen.rivm }}
             title={text.linechart_titel}
             values={data.reproduction.values}
-            ariaDescription={
-              siteText.accessibility_grafieken.nl
-                .reproductiegetal_verloop_over_tijd_aria_description
-            }
+            ariaDescription={accessibilityGraphs.nl.reproductiegetal_verloop}
             linesConfig={[
               {
                 metricProperty: 'index_average',

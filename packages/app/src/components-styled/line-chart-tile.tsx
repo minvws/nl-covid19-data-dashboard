@@ -25,12 +25,12 @@ export function LineChartTile<T extends Value>({
   ariaDescription,
   ...chartProps
 }: LineChartTileProps<T>) {
-  if (!description && !ariaDescription)
-    throw new Error(
-      `This graph doesn't include a description, please add a ariaDescription property`
-    );
+  // if (!description && !ariaDescription)
+  //   throw new Error(
+  //     `This graph doesn't include a description, please add a ariaDescription property`
+  //   );
 
-  const uniqueAriaId = title.replace(/\W+/g, '-').toLowerCase() as string;
+  const uniqueAriaId = `_${Math.random().toString(36).substring(2, 15)}`;
 
   return (
     <ChartTileWithTimeframe

@@ -27,6 +27,7 @@ const infectedLocationsText = siteText.gehandicaptenzorg_besmette_locaties;
 const positiveTestedPeopleText =
   siteText.gehandicaptenzorg_positief_geteste_personen;
 const locationDeaths = siteText.gehandicaptenzorg_oversterfte;
+const accessibilityGraphs = siteText.accessibility_grafieken as any;
 
 const DisabilityCare: FCWithLayout<NationalPageProps> = (props) => {
   const { data } = props;
@@ -78,6 +79,9 @@ const DisabilityCare: FCWithLayout<NationalPageProps> = (props) => {
         <LineChartTile
           metadata={{ source: positiveTestedPeopleText.bronnen.rivm }}
           title={positiveTestedPeopleText.linechart_titel}
+          ariaDescription={
+            accessibilityGraphs.nl.gehandicaptenzorg_positief_getest
+          }
           values={values}
           linesConfig={[
             {
@@ -155,10 +159,10 @@ const DisabilityCare: FCWithLayout<NationalPageProps> = (props) => {
           />
         </ChoroplethTile>
 
+        {/* GAAT KAPOT? */}
         <LineChartTile
           metadata={{ source: infectedLocationsText.bronnen.rivm }}
           title={infectedLocationsText.linechart_titel}
-          values={values}
           linesConfig={[
             {
               metricProperty: 'infected_locations_total',
@@ -200,6 +204,7 @@ const DisabilityCare: FCWithLayout<NationalPageProps> = (props) => {
         <LineChartTile
           metadata={{ source: locationDeaths.bronnen.rivm }}
           title={locationDeaths.linechart_titel}
+          ariaDescription={accessibilityGraphs.nl.gehandicaptenzorg_overleden}
           values={values}
           linesConfig={[
             {
