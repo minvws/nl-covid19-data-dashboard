@@ -159,10 +159,13 @@ const DisabilityCare: FCWithLayout<NationalPageProps> = (props) => {
           />
         </ChoroplethTile>
 
-        {/* GAAT KAPOT? */}
         <LineChartTile
           metadata={{ source: infectedLocationsText.bronnen.rivm }}
           title={infectedLocationsText.linechart_titel}
+          values={values}
+          ariaDescription={
+            accessibilityGraphs.nl.gehandicaptenzorg_besmette_locaties
+          }
           linesConfig={[
             {
               metricProperty: 'infected_locations_total',

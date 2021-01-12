@@ -33,12 +33,10 @@ export function ChartTile({
 }: ChartTileProps) {
   if (!description && !ariaDescription)
     throw new Error(
-      `This graph doesn't include a description, please add a ariaDescription property`
+      `This graph doesn't include a valid description nor an ariaDescription, please add one of them.`
     );
 
-  // const uniqueAriaId = title.replace(/\W+/g, '-').toLowerCase() as string;
   const uniqueAriaId = `_${Math.random().toString(36).substring(2, 15)}`;
-  // const clonedReactElement = cloneElement(children as React.ReactElement<any>, {uniqueAriaId})
 
   return (
     <ChartTileContainer metadata={metadata}>
@@ -66,8 +64,6 @@ export function ChartTileWithTimeframe({
   const [timeframe, setTimeframe] = useState<TimeframeOption>(
     timeframeInitialValue
   );
-
-  // if (!description && !ariaDescription) throw new Error(`This graph doesn't include a description, please add a ariaDescription property`);
 
   return (
     <ChartTileContainer metadata={metadata}>

@@ -25,10 +25,10 @@ export function LineChartTile<T extends Value>({
   ariaDescription,
   ...chartProps
 }: LineChartTileProps<T>) {
-  // if (!description && !ariaDescription)
-  //   throw new Error(
-  //     `This graph doesn't include a description, please add a ariaDescription property`
-  //   );
+  if (!description && !ariaDescription)
+    throw new Error(
+      `This graph doesn't include a valid description nor an ariaDescription, please add one of them.`
+    );
 
   const uniqueAriaId = `_${Math.random().toString(36).substring(2, 15)}`;
 
