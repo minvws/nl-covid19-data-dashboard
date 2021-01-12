@@ -39,6 +39,7 @@ import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { formatDateFromMilliseconds } from '~/utils/formatDate';
 
 /* Retrieves certain age demographic data to be used in the example text. */
 function getAgeDemographicExampleData(data: NationalTestedPerAgeGroup) {
@@ -222,6 +223,41 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
           linesConfig={[{ metricProperty: 'infected_per_100k' }]}
           metadata={{
             source: text.bronnen.rivm,
+          }}
+          formatTooltip={(values) => {
+            const value = values[0];
+
+            return (
+              <Text textAlign="center" m={0}>
+                <span style={{ fontWeight: 'bold' }}>
+                  {formatDateFromMilliseconds(value.__date.getTime())}
+                </span>
+                <br />
+                <span
+                  style={{
+                    height: '0.5em',
+                    width: '0.5em',
+                    marginBottom: '0.5px',
+                    backgroundColor: colors.data.primary,
+                    borderRadius: '50%',
+                    display: 'inline-block',
+                  }}
+                />{' '}
+                {replaceVariablesInText(
+                  siteText.common.tooltip.positive_tested_value,
+                  {
+                    totalPositiveValue: formatNumber(value.__value),
+                  }
+                )}
+                <br />
+                {replaceVariablesInText(
+                  siteText.common.tooltip.positive_tested_people,
+                  {
+                    totalPositiveTestedPeople: formatNumber(value.infected),
+                  }
+                )}
+              </Text>
+            );
           }}
         />
 
