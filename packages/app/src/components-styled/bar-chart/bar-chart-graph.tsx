@@ -113,7 +113,7 @@ export function BarChartGraph({
               height={labelScale.bandwidth()}
               width={barsWidth}
             />
-            
+
             {/* Bar has a minimum width of 5 pixels to stay visible / clickable */}
             <Bar
               x={spacing.left}
@@ -134,6 +134,9 @@ export function BarChartGraph({
 // Visx only allows to style labels through a classname
 const StyledSvg = styled.svg(
   css({
+    '&:focus': {
+      outline: 'none',
+    },
     '& .bar-chart-x-axis-label': {
       fontSize: 1,
       fill: 'annotation',
