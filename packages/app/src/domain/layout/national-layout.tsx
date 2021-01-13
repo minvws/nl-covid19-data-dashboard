@@ -181,7 +181,6 @@ function NationalLayout(props: NationalLayoutProps) {
                     metricName="deceased_rivm"
                     metricProperty="covid_daily"
                     localeTextKey="sterfte"
-                    differenceKey="deceased_rivm__covid_daily"
                   />
                 </MetricMenuItemLink>
               </CategoryMenu>
@@ -258,7 +257,6 @@ function NationalLayout(props: NationalLayoutProps) {
                     metricName="disability_care"
                     metricProperty="newly_infected_people"
                     localeTextKey="gehandicaptenzorg_positief_geteste_personen"
-                    differenceKey="disability_care__newly_infected_people"
                   />
                 </MetricMenuItemLink>
 
@@ -273,7 +271,6 @@ function NationalLayout(props: NationalLayoutProps) {
                     metricName="elderly_at_home"
                     metricProperty="positive_tested_daily"
                     localeTextKey="thuiswonende_ouderen"
-                    differenceKey="elderly_at_home__positive_tested_daily"
                   />
                 </MetricMenuItemLink>
               </CategoryMenu>
