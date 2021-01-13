@@ -746,13 +746,7 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": [
-      "0 tot 20",
-      "20 tot 40",
-      "40 tot 60",
-      "60 tot 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -1933,7 +1927,9 @@
       "41_onderwijs_41": "Er is noodopvang voor kinderen van ouders met cruciale beroepen en kinderen in een kwetsbare positie. Dit geldt van 16 december t/m in ieder geval 17 januari.",
       "41_algemeen_42": "Heb je klachten? Blijf thuis.",
       "0_algemeen_42": "Heb je klachten? Blijf thuis.",
-      "0_algemeen_43": "Heb je klachten? Laat je testen."
+      "0_algemeen_43": "Heb je klachten? Laat je testen.",
+      "0_algemeen_44": "Heb je klachten? Ontvang geen bezoek.",
+      "41_ov_45": "Reis alleen met het ov voor noodzakelijke reizen."
     }
   },
   "nationaal_maatregelen": {
