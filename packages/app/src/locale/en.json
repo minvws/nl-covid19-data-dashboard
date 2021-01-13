@@ -1841,7 +1841,7 @@
       "41": {
         "toelichting_risiconiveau": "There are a lot of infected people and the daily number of new infections is high. The regional health care capacity is insufficient. Strict, national measures are necessary.",
         "extratoelichting": {
-          "titel": "Current Measures",
+          "titel": "Current lockdown measures",
           "toelichting": "In {{safetyRegionName}} there is a regional lockdown in effect."
         }
       },
