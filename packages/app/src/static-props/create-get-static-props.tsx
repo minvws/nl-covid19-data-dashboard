@@ -1,5 +1,11 @@
 import { GetStaticPropsContext } from 'next';
 
+/**
+ * This file looks unnecessarily complex, but it's a way to tell the TS compiler
+ * this createGetStaticProps can receive an X amount of getters. It will merge
+ * all results into a single object, all properly typed.
+ */
+
 export function createGetStaticProps<R0>(
   fn: () => Promise<R0> | R0
 ): () => Promise<{ props: R0 }>;
