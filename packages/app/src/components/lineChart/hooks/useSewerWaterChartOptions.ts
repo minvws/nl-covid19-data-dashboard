@@ -1,3 +1,4 @@
+import { uniq } from 'lodash';
 import { useMemo } from 'react';
 import { colors } from '~/style/theme';
 import { formatDateFromSeconds } from '~/utils/formatDate';
@@ -113,14 +114,8 @@ export function useSewerWaterChartOptions<
       [text.secondary_label_text]: 'scatter',
     };
 
-    const installationNames = filteredScatterPlotValues.reduce<string[]>(
-      (acc, item) => {
-        if (acc.indexOf(item.rwzi_awzi_name) < 0) {
-          acc.push(item.rwzi_awzi_name);
-        }
-        return acc;
-      },
-      []
+    const installationNames = uniq(
+      filteredScatterPlotValues.map((x) => x.rwzi_awzi_name)
     );
 
     const series: (
