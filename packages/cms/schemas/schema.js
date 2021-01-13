@@ -12,7 +12,6 @@ import veelgesteldeVragen from "./documents/veelgestelde-vragen";
 import cijferVerantwoording from "./documents/cijfer-verantwoording";
 import overRisicoNiveaus from "./documents/over-risico-niveaus";
 import overDitDashboard from "./documents/over-dit-dashboard";
-import imagePipelineTest from "./documents/image-pipeline-test";
 
 //objects are building blocks, but not queryable in itself
 // import openGraph from "./objects/open-graph";
@@ -37,7 +36,6 @@ export default createSchema({
     cijferVerantwoording,
     overRisicoNiveaus,
     overDitDashboard,
-    imagePipelineTest,
     //objects
     // openGraph,
     collapsible,
