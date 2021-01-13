@@ -19,6 +19,7 @@ interface OverProps {
     title: string | null;
     description: unknown[] | null;
   };
+  imageData: any;
   lastGenerated: string;
 }
 
@@ -43,7 +44,7 @@ export async function getStaticProps(): Promise<StaticProps> {
   return { props: { data, imageData, lastGenerated } };
 }
 // find closest resized element
-function closest(width) {
+function closest(width: number) {
   const sizes = [320, 640, 768, 1024, 1280, 1536, 2048];
 
   return sizes.reduce((a, b) => {
@@ -58,7 +59,13 @@ function closest(width) {
   });
 }
 
-const myLoader = ({ src, width }) => {
+interface LoaderProps {
+  src: string;
+  width: number;
+}
+
+const myLoader = (props: LoaderProps) => {
+  const { src, width } = props;
   const filename = src.split('.')[0];
   const extension = src.split('.')[1];
 
@@ -92,9 +99,10 @@ const Over: FCWithLayout<OverProps> = (props) => {
 
             <Image
               loader={myLoader}
+              layout="responsive"
               src={`${coverImage.assetId}.${coverImage.extension}`}
-              width="300"
-              height="100"
+              width="630"
+              height={630 / coverImage.metadata.dimensions.aspectRatio}
             />
 
             {data.description && <PortableText blocks={data.description} />}
