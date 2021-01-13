@@ -166,6 +166,7 @@ function NationalLayout(props: NationalLayoutProps) {
                     metricProperty="index_average"
                     localeTextKey="reproductiegetal"
                     showBarScale={true}
+                    differenceKey="reproduction__index_average"
                   />
                 </MetricMenuItemLink>
 

@@ -59,7 +59,7 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
 
         <TwoKpiSection>
           <KpiTile
-            title={text.barscale_titel}
+            title={text.kpi_titel}
             metadata={{
               date: lastValue.date_unix,
               source: text.bronnen.rivm,
@@ -70,11 +70,14 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
               absolute={lastValue.infected}
               difference={data.difference.tested_overall__infected}
             />
-            <Text>{text.barscale_toelichting}</Text>
+            <Text
+              as="div"
+              dangerouslySetInnerHTML={{ __html: text.kpi_toelichting }}
+            />
           </KpiTile>
 
           <KpiTile
-            title={text.kpi_titel}
+            title={text.barscale_titel}
             metadata={{
               date: lastValue.date_unix,
               source: text.bronnen.rivm,
@@ -85,10 +88,7 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
               absolute={lastValue.infected_per_100k}
               difference={data.difference.tested_overall__infected_per_100k}
             />
-            <Text
-              as="div"
-              dangerouslySetInnerHTML={{ __html: text.kpi_toelichting }}
-            />
+            <Text>{text.barscale_toelichting}</Text>
           </KpiTile>
         </TwoKpiSection>
 

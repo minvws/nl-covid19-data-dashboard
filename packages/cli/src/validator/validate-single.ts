@@ -1,4 +1,3 @@
-/* eslint no-console: 0 */
 import chalk from 'chalk';
 import fs from 'fs';
 import meow from 'meow';
@@ -6,9 +5,9 @@ import path from 'path';
 import { createValidateFunction } from './create-validate-function';
 import { executeValidations } from './execute-validations';
 import { schemaDirectory } from './config';
-import { getSchemaInformation } from './schema-information';
+import { getSchemaInfo } from './schema-information';
 
-const schemaInformation = getSchemaInformation();
+const schemaInformation = getSchemaInfo();
 
 const validSchemaNames = Object.keys(schemaInformation);
 
@@ -27,7 +26,7 @@ const cliArgs = cli.input;
 if (cliArgs.length !== 2) {
   console.error(
     `
-Expected two commandline arguments: schema-name and json-filename.
+Expected two command line arguments: schema-name and json-filename.
 
 Where schema-name must be one of these values: ${validSchemaNames.join(', ')}
 and json-filename must be a file associated with that schema.

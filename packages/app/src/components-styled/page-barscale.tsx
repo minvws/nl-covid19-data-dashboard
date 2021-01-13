@@ -26,6 +26,7 @@ interface PageBarScaleProps<T> {
   metricName: MetricKeys<T>;
   metricProperty: string;
   differenceKey?: string;
+  differenceStaticTimespan?: string;
 }
 
 export function PageBarScale<T>({
@@ -35,6 +36,7 @@ export function PageBarScale<T>({
   metricProperty,
   localeTextKey,
   differenceKey,
+  differenceStaticTimespan,
 }: PageBarScaleProps<T>) {
   const text = siteText[localeTextKey] as Record<string, string>;
 
@@ -122,6 +124,7 @@ export function PageBarScale<T>({
         <DifferenceIndicator
           value={differenceValue}
           isDecimal={config.isDecimal}
+          staticTimespan={differenceStaticTimespan}
         />
       )}
     </Box>
