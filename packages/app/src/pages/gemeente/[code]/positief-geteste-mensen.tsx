@@ -15,17 +15,25 @@ import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropl
 import { SEOHead } from '~/components/seoHead';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getMunicipalityLayout } from '~/domain/layout/municipality-layout';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
-  getMunicipalityPaths,
-  getMunicipalityStaticProps,
-} from '~/static-props/municipality-data';
+  createGetChoroplethData,
+  getGmData,
+  getLastGeneratedDate,
+  getText,
+} from '~/static-props/get-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
-export const getStaticProps = getMunicipalityStaticProps({
-  choropleth: {
+export { getStaticPaths } from '~/static-paths/gm';
+
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getText,
+  getGmData,
+  createGetChoroplethData({
     gm: ({ tested_overall }) => ({ tested_overall }),
-  },
-});
+  })
+);
 
 const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data, choropleth, municipalityName, text: siteText } = props;
@@ -142,7 +150,5 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
 };
 
 PositivelyTestedPeople.getLayout = getMunicipalityLayout();
-
-export const getStaticPaths = getMunicipalityPaths();
 
 export default PositivelyTestedPeople;

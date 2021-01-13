@@ -21,21 +21,29 @@ import { SEOHead } from '~/components/seoHead';
 import regionCodeToMunicipalCodeLookup from '~/data/regionCodeToMunicipalCodeLookup';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
-  getSafetyRegionPaths,
-  getSafetyRegionStaticProps,
-} from '~/static-props/safetyregion-data';
+  createGetChoroplethData,
+  getLastGeneratedDate,
+  getText,
+  getVrData,
+} from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
-export const getStaticProps = getSafetyRegionStaticProps({
-  choropleth: {
+export { getStaticPaths } from '~/static-paths/vr';
+
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getText,
+  getVrData,
+  createGetChoroplethData({
     gm: ({ tested_overall }) => ({ tested_overall }),
-  },
-});
+  })
+);
 
 const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data, choropleth, safetyRegionName, text: siteText } = props;
@@ -330,7 +338,5 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
 };
 
 PositivelyTestedPeople.getLayout = getSafetyRegionLayout();
-
-export const getStaticPaths = getSafetyRegionPaths();
 
 export default PositivelyTestedPeople;

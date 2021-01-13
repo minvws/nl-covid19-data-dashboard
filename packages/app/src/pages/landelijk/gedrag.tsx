@@ -14,15 +14,22 @@ import { MoreInformation } from '~/domain/behavior/components/more-information';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import siteText from '~/locale/index';
-import { getNationalStaticProps } from '~/static-props/nl-data';
+import {
+  createGetChoroplethData,
+  getNlData,
+  getLastGeneratedDate,
+} from '~/static-props/get-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 
 const text = siteText.nl_gedrag;
 
-export const getStaticProps = getNationalStaticProps({
-  choropleth: {
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getNlData,
+  createGetChoroplethData({
     vr: ({ behavior }) => ({ behavior }),
-  },
-});
+  })
+);
 
 const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
   data,

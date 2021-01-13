@@ -12,13 +12,18 @@ import { SEOHead } from '~/components/seoHead';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import siteText from '~/locale/index';
-import {
-  getSafetyRegionPaths,
-  getSafetyRegionStaticProps,
-} from '~/static-props/safetyregion-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import { getLastGeneratedDate, getVrData } from '~/static-props/get-data';
 import theme from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { useEscalationLevel } from '~/utils/use-escalation-level';
+
+export { getStaticPaths } from '~/static-paths/vr';
+
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getVrData
+);
 
 const text = siteText.veiligheidsregio_maatregelen;
 type VRCode = keyof typeof siteText.veiligheidsregio_maatregelen_urls;
@@ -109,8 +114,5 @@ const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
 };
 
 RegionalRestrictions.getLayout = getSafetyRegionLayout();
-
-export const getStaticProps = getSafetyRegionStaticProps();
-export const getStaticPaths = getSafetyRegionPaths();
 
 export default RegionalRestrictions;

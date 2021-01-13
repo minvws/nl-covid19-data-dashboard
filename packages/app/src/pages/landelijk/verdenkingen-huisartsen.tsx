@@ -11,9 +11,15 @@ import { SEOHead } from '~/components/seoHead';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import siteText from '~/locale/index';
-import { getNationalStaticProps } from '~/static-props/nl-data';
+import { getNlData, getLastGeneratedDate } from '~/static-props/get-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 
 const text = siteText.verdenkingen_huisartsen;
+
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getNlData
+);
 
 const SuspectedPatients: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data } = props;
@@ -97,7 +103,5 @@ const SuspectedPatients: FCWithLayout<typeof getStaticProps> = (props) => {
 };
 
 SuspectedPatients.getLayout = getNationalLayout;
-
-export const getStaticProps = getNationalStaticProps();
 
 export default SuspectedPatients;

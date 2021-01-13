@@ -1,12 +1,15 @@
-import fs from 'fs';
 import { groq } from 'next-sanity';
 import Head from 'next/head';
-import path from 'path';
 import { Collapsible } from '~/components-styled/collapsible';
 import { MaxWidth } from '~/components-styled/max-width';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
-import { getClient, localize, PortableText } from '~/lib/sanity';
-import siteText, { targetLanguage } from '~/locale/index';
+import { PortableText } from '~/lib/sanity';
+import siteText from '~/locale/index';
+import {
+  createGetContent,
+  getLastGeneratedDate,
+} from '~/static-props/get-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import { CollapsibleList } from '~/types/cms';
 import { getSkipLinkId } from '~/utils/skipLinks';
 import styles from './over.module.scss';
@@ -17,22 +20,15 @@ interface OverRisiconiveausData {
   collapsibleList: CollapsibleList[];
 }
 
-export async function getStaticProps() {
-  const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
-  const fileContents = fs.readFileSync(filePath, 'utf8');
-  const lastGenerated = JSON.parse(fileContents).last_generated as string;
-
-  const query = groq`
-  *[_type == 'overRisicoNiveaus'][0]
-`;
-  const rawData = await getClient().fetch<OverRisiconiveausData>(query);
-  const data = localize(rawData, [targetLanguage, 'nl']);
-
-  return { props: { data, lastGenerated } };
-}
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  createGetContent<OverRisiconiveausData>(groq`
+    *[_type == 'overRisicoNiveaus'][0]
+  `)
+);
 
 const OverRisicoNiveaus: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { data } = props;
+  const { content } = props;
 
   return (
     <>
@@ -53,11 +49,13 @@ const OverRisicoNiveaus: FCWithLayout<typeof getStaticProps> = (props) => {
       <div className={styles.container}>
         <MaxWidth>
           <div className={styles.maxwidth}>
-            {data.title && <h2>{data.title}</h2>}
-            {data.description && <PortableText blocks={data.description} />}
-            {data.collapsibleList && (
+            {content.title && <h2>{content.title}</h2>}
+            {content.description && (
+              <PortableText blocks={content.description} />
+            )}
+            {content.collapsibleList && (
               <article className={styles.faqList}>
-                {data.collapsibleList.map((item) => {
+                {content.collapsibleList.map((item) => {
                   const id = getSkipLinkId(item.title);
                   return (
                     <Collapsible key={id} id={id} summary={item.title}>

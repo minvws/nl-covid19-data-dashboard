@@ -11,9 +11,15 @@ import { DeceasedMonitorSection } from '~/domain/deceased/deceased-monitor-secti
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import siteText from '~/locale/index';
-import { getNationalStaticProps } from '~/static-props/nl-data';
+import { getNlData, getLastGeneratedDate } from '~/static-props/get-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 
 const text = siteText.sterfte;
+
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getNlData
+);
 
 const DeceasedNationalPage: FCWithLayout<typeof getStaticProps> = (props) => {
   const dataCbs = props.data.deceased_cbs;
@@ -97,7 +103,5 @@ const DeceasedNationalPage: FCWithLayout<typeof getStaticProps> = (props) => {
 };
 
 DeceasedNationalPage.getLayout = getNationalLayout;
-
-export const getStaticProps = getNationalStaticProps();
 
 export default DeceasedNationalPage;

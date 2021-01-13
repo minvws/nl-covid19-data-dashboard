@@ -1,11 +1,14 @@
-import fs from 'fs';
 import { groq } from 'next-sanity';
 import Head from 'next/head';
-import path from 'path';
 import { MaxWidth } from '~/components-styled/max-width';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
-import { getClient, localize, PortableText } from '~/lib/sanity';
-import siteText, { targetLanguage } from '~/locale/index';
+import { PortableText } from '~/lib/sanity';
+import siteText from '~/locale/index';
+import {
+  createGetContent,
+  getLastGeneratedDate,
+} from '~/static-props/get-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import styles from './over.module.scss';
 
 interface OverData {
@@ -13,22 +16,15 @@ interface OverData {
   description: unknown[] | null;
 }
 
-export async function getStaticProps() {
-  const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
-  const fileContents = fs.readFileSync(filePath, 'utf8');
-  const lastGenerated = JSON.parse(fileContents).last_generated as string;
-
-  const query = groq`
-  *[_type == 'overDitDashboard'][0]
-`;
-  const rawData = await getClient().fetch<OverData>(query);
-  const data = localize(rawData, [targetLanguage, 'nl']);
-
-  return { props: { data, lastGenerated } };
-}
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  createGetContent<OverData>(groq`
+    *[_type == 'overDitDashboard'][0]
+  `)
+);
 
 const Over: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { data } = props;
+  const { content } = props;
 
   return (
     <>
@@ -49,8 +45,10 @@ const Over: FCWithLayout<typeof getStaticProps> = (props) => {
       <div className={styles.container}>
         <MaxWidth>
           <div className={styles.maxwidth}>
-            {data.title && <h2>{data.title}</h2>}
-            {data.description && <PortableText blocks={data.description} />}
+            {content.title && <h2>{content.title}</h2>}
+            {content.description && (
+              <PortableText blocks={content.description} />
+            )}
           </div>
         </MaxWidth>
       </div>
