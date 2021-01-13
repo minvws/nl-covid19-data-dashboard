@@ -617,7 +617,7 @@
     "select_region_municipality_legend": "Select a municipality:",
     "select_region_type_legend": "Show numbers from:",
     "your_municipality": "Municipality",
-    "belangrijk_bericht": "There is a [national lockdown](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen) until at least Tuesday 19 January."
+    "belangrijk_bericht": "There is a [national lockdown](https://coronadashboard.government.nl/landelijk/maatregelen) until at least 9 February."
   },
   "common": {
     "metadata": {
@@ -968,7 +968,7 @@
       "title": "Level of risk per safety region | Dashboard Coronavirus | Government.nl",
       "description": "Overview of the level of risk per safety region in the Netherlands."
     },
-    "belangrijk_bericht": "There is a [national lockdown](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen) until at least Tuesday 19 January."
+    "belangrijk_bericht": "There is a [national lockdown](https://coronadashboard.government.nl/landelijk/maatregelen) until at least 9 February."
   },
   "gemeente_index": {
     "selecteer_titel": "Select your municipality",
