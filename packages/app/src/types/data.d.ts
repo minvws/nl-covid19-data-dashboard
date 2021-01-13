@@ -125,6 +125,7 @@ export interface National {
   deceased_rivm: NationalDeceasedRivm;
   deceased_cbs: NationalDeceasedCbs;
   elderly_at_home: NationalElderlyAtHome;
+  behavior_app: NationalBehaviorApp;
 }
 export interface NationalDifference {
   tested_overall__infected_per_100k: DifferenceDecimal;
@@ -145,6 +146,7 @@ export interface NationalDifference {
   nursing_home__infected_locations_total: DifferenceInteger;
   nursing_home__deceased_daily: DifferenceInteger;
   reproduction__index_average: DifferenceDecimal;
+  behavior_app__warning_daily: DifferenceInteger;
 }
 export interface DifferenceDecimal {
   old_value: number;
@@ -418,6 +420,16 @@ export interface NationalElderlyAtHomeValue {
   positive_tested_daily: number;
   positive_tested_daily_per_100k: number;
   deceased_daily: number;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NationalBehaviorApp {
+  values: NationalBehaviorAppValue[];
+  last_value: NationalBehaviorAppValue;
+}
+export interface NationalBehaviorAppValue {
+  download_total: number;
+  warning_daily: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }

@@ -4,6 +4,7 @@
   "title": "national",
   "required": [
     "behavior",
+    "behavior_app",
     "code",
     "deceased_cbs",
     "deceased_rivm",
@@ -104,6 +105,9 @@
     },
     "elderly_at_home": {
       "$ref": "elderly_at_home.json"
+    },
+    "behavior_app": {
+      "$ref": "behavior_app.json"
     }
   }
 }
