@@ -1,6 +1,8 @@
 import fs from 'fs';
 import { groq } from 'next-sanity';
 import Head from 'next/head';
+import Image from 'next/image';
+
 import path from 'path';
 import { MaxWidth } from '~/components-styled/max-width';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
@@ -28,14 +30,44 @@ export async function getStaticProps(): Promise<StaticProps> {
   const query = groq`
   *[_type == 'overDitDashboard'][0]
 `;
+
+  const imageQuery = groq`*[_type == 'imagePipelineTest'][0]{
+    ...,
+    "coverImage": coverImage.asset->
+  }`;
+
   const rawData = await getClient(false).fetch(query);
+  const imageData = await getClient(false).fetch(imageQuery);
   const data = localize(rawData, [targetLanguage, 'nl']);
 
-  return { props: { data, lastGenerated } };
+  return { props: { data, imageData, lastGenerated } };
+}
+// find closest resized element
+function closest(width) {
+  const sizes = [320, 640, 768, 1024, 1280, 1536, 2048];
+
+  return sizes.reduce((a, b) => {
+    const aDiff = Math.abs(a - width);
+    const bDiff = Math.abs(b - width);
+
+    if (aDiff == bDiff) {
+      return a > b ? a : b;
+    } else {
+      return bDiff < aDiff ? b : a;
+    }
+  });
 }
 
+const myLoader = ({ src, width }) => {
+  const filename = src.split('.')[0];
+  const extension = src.split('.')[1];
+
+  return `/sanity/${filename}-${closest(width)}.${extension}`;
+};
+
 const Over: FCWithLayout<OverProps> = (props) => {
-  const { data } = props;
+  const { data, imageData } = props;
+  const { coverImage } = imageData;
 
   return (
     <>
@@ -57,6 +89,14 @@ const Over: FCWithLayout<OverProps> = (props) => {
         <MaxWidth>
           <div className={styles.maxwidth}>
             {data.title && <h2>{data.title}</h2>}
+
+            <Image
+              loader={myLoader}
+              src={`${coverImage.assetId}.${coverImage.extension}`}
+              width="300"
+              height="100"
+            />
+
             {data.description && <PortableText blocks={data.description} />}
           </div>
         </MaxWidth>
