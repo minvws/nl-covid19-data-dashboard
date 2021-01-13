@@ -7,11 +7,29 @@ import { targetLanguage, TALLLanguages } from '~/locale/index';
 import { Link } from '~/utils/link';
 import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
 
-interface Article {
+export interface Article {
   title: string;
   slug: {
     current: string;
   };
+  intro: Block;
+  content: RichContentBlock[];
+  metaDescription: string;
+  publicactionDate: string;
+}
+
+interface Block {
+  _type: string;
+}
+
+interface RichContentBlock {}
+
+interface RichConentImageBlock {}
+
+interface RichContentLineChartBlock {
+  _type: 'lineChart';
+  metricName: string;
+  metricProperty: string;
 }
 
 interface StaticProps {
@@ -45,6 +63,8 @@ export async function getStaticProps(): Promise<StaticProps> {
 
 const Artikelen: FCWithLayout<ArtikelenProps> = (props) => {
   const { articles } = props;
+
+  console.log(articles);
 
   return (
     <>

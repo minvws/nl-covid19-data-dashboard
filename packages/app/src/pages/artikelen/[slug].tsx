@@ -6,13 +6,7 @@ import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import { getClient, localize } from '~/lib/sanity';
 import { targetLanguage, TALLLanguages } from '~/locale/index';
 import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
-
-interface Article {
-  title: string;
-  slug: {
-    current: string;
-  };
-}
+import { Article } from '.';
 
 interface StaticProps {
   props: ArtikelProps;
