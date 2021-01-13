@@ -185,14 +185,14 @@ function getTimespanText(oldDate: number) {
   }
 
   if (days < 7) {
-    return `${days} ${text.tijdverloop.dagen} ${text.tijdverloop.geleden}`;
+    return `${days} ${text.tijdverloop.dagen} ${text.tijdverloop.ervoor}`;
   }
 
   const weeks = Math.floor(days / 7);
 
   if (weeks < 2) {
-    return `${weeks} ${text.tijdverloop.week.enkelvoud} ${text.tijdverloop.geleden}`;
+    return `${weeks} ${text.tijdverloop.week.enkelvoud} ${text.tijdverloop.ervoor}`;
   }
 
-  return `${weeks} ${text.tijdverloop.week.meervoud} ${text.tijdverloop.geleden}`;
+  return `${weeks} ${text.tijdverloop.week.meervoud} ${text.tijdverloop.ervoor}`;
 }
