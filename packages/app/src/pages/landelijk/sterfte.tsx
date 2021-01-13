@@ -55,6 +55,7 @@ const DeceasedNationalPage: FCWithLayout<NationalPageProps> = (props) => {
             <KpiValue
               data-cy="covid_daily"
               absolute={dataRivm.last_value.covid_daily}
+              difference={props.data.difference.deceased_rivm__covid_daily}
             />
             <Text>
               {text.section_deceased_rivm.kpi_covid_daily_description}

@@ -19,8 +19,6 @@ export type MetricKeys<T> = keyof Omit<
 export type MunicipalitiesMetricName = MetricKeys<Municipalities>;
 export type RegionsMetricName = MetricKeys<Regions>;
 
-// export type NationalDifferenceKeys = keyof NationalDifference;
-
 export type DifferenceKeys =
   | keyof NationalDifference
   | keyof RegionaalDifference
