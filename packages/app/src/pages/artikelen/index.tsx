@@ -49,15 +49,13 @@ const Artikelen: FCWithLayout<ArtikelenProps> = (props) => {
   return (
     <>
       <h1>Artikelen!</h1>
-      {articles.map((article) => {
-        return (
-          <div key={`article-${article.slug.current}`}>
-            <Link href={`/artikelen/${article.slug.current}`} passHref>
-              <a>{article.title}</a>
-            </Link>
-          </div>
-        );
-      })}
+      {articles.map((article) => (
+        <div key={`article-${article.slug.current}`}>
+          <Link href={`/artikelen/${article.slug.current}`} passHref>
+            <a>{article.title}</a>
+          </Link>
+        </div>
+      ))}
     </>
   );
 };

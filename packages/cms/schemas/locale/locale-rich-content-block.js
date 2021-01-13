@@ -1,3 +1,4 @@
+
 const supportedLanguages = [
   { id: "nl", title: "Nederlands", isDefault: true },
   { id: "en", title: "Engels" },
@@ -13,7 +14,23 @@ export default {
     type: "array",
     of: [
       {
-        type: "block"
+        type: "block",
+
+        // Only allow these block styles
+        styles: [
+          {title: 'Normal', value: 'normal'},
+          {title: 'H2', value: 'h2'},
+          {title: 'H3', value: 'h3'}
+        ],
+        lists: [],
+        marks: {
+          // Only allow these decorators
+          decorators: [
+            {title: 'Strong', value: 'strong'},
+            {title: 'Emphasis', value: 'em'}
+          ],
+          annotations: []
+        }
       },
       {
         type: "image"
