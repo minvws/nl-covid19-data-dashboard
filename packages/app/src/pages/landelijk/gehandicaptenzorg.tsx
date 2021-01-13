@@ -22,8 +22,8 @@ import {
   createGetChoroplethData,
   getNlData,
   getLastGeneratedDate,
-} from '~/static-props/data';
-import { createGetStaticProps } from '~/static-props/utils/create-get-static-props';
+} from '~/static-props/get-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 
 const infectedLocationsText = siteText.gehandicaptenzorg_besmette_locaties;
 const positiveTestedPeopleText =

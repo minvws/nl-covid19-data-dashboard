@@ -12,23 +12,22 @@ import { SEOHead } from '~/components/seoHead';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import siteText from '~/locale/index';
-import { getVrData, getLastGeneratedDate } from '~/static-props/data';
-import { createGetStaticProps } from '~/static-props/utils/create-get-static-props';
-import { getPaths } from '~/static-props/vr-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import { getLastGeneratedDate, getVrData } from '~/static-props/get-data';
 import theme from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { useEscalationLevel } from '~/utils/use-escalation-level';
 
-const text = siteText.veiligheidsregio_maatregelen;
-type VRCode = keyof typeof siteText.veiligheidsregio_maatregelen_urls;
-type HeadingKey = keyof typeof siteText.maatregelen.headings;
-
-export const getStaticPaths = getPaths();
+export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   getVrData
 );
+
+const text = siteText.veiligheidsregio_maatregelen;
+type VRCode = keyof typeof siteText.veiligheidsregio_maatregelen_urls;
+type HeadingKey = keyof typeof siteText.maatregelen.headings;
 
 const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data, safetyRegionName } = props;

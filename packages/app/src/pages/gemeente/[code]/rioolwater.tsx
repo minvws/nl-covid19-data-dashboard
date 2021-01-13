@@ -17,9 +17,8 @@ import { SEOHead } from '~/components/seoHead';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getMunicipalityLayout } from '~/domain/layout/municipality-layout';
 import siteText from '~/locale/index';
-import { getGmData, getLastGeneratedDate } from '~/static-props/data';
-import { getPaths } from '~/static-props/gm-data';
-import { createGetStaticProps } from '~/static-props/utils/create-get-static-props';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import { getGmData, getLastGeneratedDate } from '~/static-props/get-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import {
   getInstallationNames,
@@ -28,14 +27,14 @@ import {
   getSewerWaterScatterPlotData,
 } from '~/utils/sewer-water/municipality-sewer-water.util';
 
-const text = siteText.gemeente_rioolwater_metingen;
-
-export const getStaticPaths = getPaths();
+export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   getGmData
 );
+
+const text = siteText.gemeente_rioolwater_metingen;
 
 const SewerWater: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data, municipalityName } = props;

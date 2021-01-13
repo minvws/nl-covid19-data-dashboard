@@ -4,8 +4,11 @@ import { MaxWidth } from '~/components-styled/max-width';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import { PortableText } from '~/lib/sanity';
 import siteText from '~/locale/index';
-import { createGetContent, getLastGeneratedDate } from '~/static-props/data';
-import { createGetStaticProps } from '~/static-props/utils/create-get-static-props';
+import {
+  createGetContent,
+  getLastGeneratedDate,
+} from '~/static-props/get-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import styles from './over.module.scss';
 
 interface OverData {

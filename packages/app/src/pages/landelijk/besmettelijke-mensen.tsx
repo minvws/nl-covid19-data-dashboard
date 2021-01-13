@@ -11,8 +11,8 @@ import { SEOHead } from '~/components/seoHead';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import siteText from '~/locale/index';
-import { getNlData, getLastGeneratedDate } from '~/static-props/data';
-import { createGetStaticProps } from '~/static-props/utils/create-get-static-props';
+import { getNlData, getLastGeneratedDate } from '~/static-props/get-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import { getLastFilledValue } from '~/utils/get-last-filled-value';
 
 const text = siteText.besmettelijke_personen;

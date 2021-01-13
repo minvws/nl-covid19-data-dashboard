@@ -16,18 +16,15 @@ import regionCodeToMunicipalCodeLookup from '~/data/regionCodeToMunicipalCodeLoo
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import siteText from '~/locale/index';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
-  getVrData,
   getLastGeneratedDate,
-} from '~/static-props/data';
-import { createGetStaticProps } from '~/static-props/utils/create-get-static-props';
-import { getPaths } from '~/static-props/vr-data';
+  getVrData,
+} from '~/static-props/get-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
-const text = siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
-
-export const getStaticPaths = getPaths();
+export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -36,6 +33,8 @@ export const getStaticProps = createGetStaticProps(
     gm: ({ hospital_nice }) => ({ hospital_nice }),
   })
 );
+
+const text = siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
 
 const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data, safetyRegionName, choropleth } = props;

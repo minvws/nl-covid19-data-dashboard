@@ -1,10 +1,9 @@
 import municipalities from '~/data/municipalSearchData';
 
 /**
- * getPaths creates an array of all the allowed `/gemeente/[code]` routes.
- * This should be used together with `getMunicipalityData`.
+ * getStaticPaths creates an array of all the allowed `/gemeente/[code]` routes.
  */
-export function getPaths() {
+export function getStaticPaths() {
   return function () {
     const paths = municipalities.map((municipality) => ({
       params: { code: municipality.gemcode },

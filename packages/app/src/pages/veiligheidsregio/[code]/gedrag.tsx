@@ -13,19 +13,22 @@ import { MoreInformation } from '~/domain/behavior/components/more-information';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import siteText from '~/locale/index';
-import { getVrData, getLastGeneratedDate, getText } from '~/static-props/data';
-import { createGetStaticProps } from '~/static-props/utils/create-get-static-props';
-import { getPaths } from '~/static-props/vr-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  getLastGeneratedDate,
+  getText,
+  getVrData,
+} from '~/static-props/get-data';
 
-const text = siteText.regionaal_gedrag;
-
-export const getStaticPaths = getPaths();
+export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   getText,
   getVrData
 );
+
+const text = siteText.regionaal_gedrag;
 
 const BehaviorPage: FCWithLayout<typeof getStaticProps> = (props) => {
   const behaviorData = props.data.behavior;

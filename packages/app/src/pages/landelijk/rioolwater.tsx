@@ -19,8 +19,8 @@ import {
   createGetChoroplethData,
   getNlData,
   getLastGeneratedDate,
-} from '~/static-props/data';
-import { createGetStaticProps } from '~/static-props/utils/create-get-static-props';
+} from '~/static-props/get-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 
 const text = siteText.rioolwater_metingen;
 

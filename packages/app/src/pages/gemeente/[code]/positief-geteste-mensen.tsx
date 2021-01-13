@@ -15,17 +15,16 @@ import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropl
 import { SEOHead } from '~/components/seoHead';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getMunicipalityLayout } from '~/domain/layout/municipality-layout';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   getGmData,
   getLastGeneratedDate,
   getText,
-} from '~/static-props/data';
-import { getPaths } from '~/static-props/gm-data';
-import { createGetStaticProps } from '~/static-props/utils/create-get-static-props';
+} from '~/static-props/get-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
-export const getStaticPaths = getPaths();
+export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,

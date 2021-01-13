@@ -16,7 +16,7 @@ import {
   sortMunicipalTimeSeriesInDataInPlace,
   sortNationalTimeSeriesInDataInPlace,
   sortRegionalTimeSeriesInDataInPlace,
-} from './data-sorting';
+} from './sort-data';
 import { loadJsonFromFile } from './utils/load-json-from-file';
 
 /**

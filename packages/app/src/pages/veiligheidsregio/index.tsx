@@ -15,8 +15,8 @@ import {
   createGetChoroplethData,
   getLastGeneratedDate,
   getText,
-} from '~/static-props/data';
-import { createGetStaticProps } from '~/static-props/utils/create-get-static-props';
+} from '~/static-props/get-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 
 export const getStaticProps = createGetStaticProps(

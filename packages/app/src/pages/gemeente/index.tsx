@@ -14,8 +14,8 @@ import { MunicipalityComboBox } from '~/domain/layout/components/municipality-co
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getMunicipalityLayout } from '~/domain/layout/municipality-layout';
 import text from '~/locale/index';
-import { getLastGeneratedDate } from '~/static-props/data';
-import { createGetStaticProps } from '~/static-props/utils/create-get-static-props';
+import { getLastGeneratedDate } from '~/static-props/get-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 
 const tooltipContent = (selectedHandler: MunicipalitySelectionHandler) => {

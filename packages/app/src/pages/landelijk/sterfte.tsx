@@ -11,8 +11,8 @@ import { DeceasedMonitorSection } from '~/domain/deceased/deceased-monitor-secti
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import siteText from '~/locale/index';
-import { getNlData, getLastGeneratedDate } from '~/static-props/data';
-import { createGetStaticProps } from '~/static-props/utils/create-get-static-props';
+import { getNlData, getLastGeneratedDate } from '~/static-props/get-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 
 const text = siteText.sterfte;
 

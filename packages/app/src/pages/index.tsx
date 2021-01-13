@@ -21,13 +21,13 @@ import { createPositiveTestedPeopleRegionalTooltip } from '~/components/chorople
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
-  getNlData,
   getLastGeneratedDate,
+  getNlData,
   getText,
-} from '~/static-props/data';
-import { createGetStaticProps } from '~/static-props/utils/create-get-static-props';
+} from '~/static-props/get-data';
 import theme from '~/style/theme';
 import { EscalationLevels } from '~/types/data';
 import { assert } from '~/utils/assert';

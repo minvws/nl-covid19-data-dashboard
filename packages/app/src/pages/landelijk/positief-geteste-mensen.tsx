@@ -33,8 +33,8 @@ import {
   getNlData,
   getLastGeneratedDate,
   getText,
-} from '~/static-props/data';
-import { createGetStaticProps } from '~/static-props/utils/create-get-static-props';
+} from '~/static-props/get-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import { colors } from '~/style/theme';
 import { NationalTestedPerAgeGroup } from '~/types/data.d';
 import { assert } from '~/utils/assert';
