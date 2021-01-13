@@ -27,7 +27,7 @@ const infectedLocationsText = siteText.verpleeghuis_besmette_locaties;
 const positiveTestedPeopleText =
   siteText.verpleeghuis_positief_geteste_personen;
 const locationDeaths = siteText.verpleeghuis_oversterfte;
-const accessibilityGraphs = siteText.accessibility_grafieken as any;
+const accessibilityGraphsDescriptions = siteText.accessibility.grafieken;
 
 const NursingHomeCare: FCWithLayout<NationalPageProps> = (props) => {
   const { data } = props;
@@ -82,7 +82,7 @@ const NursingHomeCare: FCWithLayout<NationalPageProps> = (props) => {
           title={positiveTestedPeopleText.linechart_titel}
           values={nursinghomeData.values}
           ariaDescription={
-            accessibilityGraphs.nl.verpleeghuiszorg_positief_getest
+            accessibilityGraphsDescriptions.nl.verpleeghuiszorg_positief_getest
           }
           linesConfig={[
             {
@@ -171,7 +171,8 @@ const NursingHomeCare: FCWithLayout<NationalPageProps> = (props) => {
           title={infectedLocationsText.linechart_titel}
           values={nursinghomeData.values}
           ariaDescription={
-            accessibilityGraphs.nl.verpleeghuiszorg_besmette_locaties
+            accessibilityGraphsDescriptions.nl
+              .verpleeghuiszorg_besmette_locaties
           }
           linesConfig={[
             {
@@ -217,7 +218,8 @@ const NursingHomeCare: FCWithLayout<NationalPageProps> = (props) => {
           title={locationDeaths.linechart_titel}
           values={nursinghomeData.values}
           ariaDescription={
-            accessibilityGraphs.nl.verpleeghuiszorg_besmette_locaties
+            accessibilityGraphsDescriptions.nl
+              .verpleeghuiszorg_besmette_locaties
           }
           linesConfig={[
             {

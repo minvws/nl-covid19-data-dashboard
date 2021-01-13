@@ -9,6 +9,7 @@ import { TCombinedChartDimensions } from './hooks/use-chart-dimensions';
 import { Path } from './path';
 import { Tooltip } from './tooltips/tooltipContainer';
 import { countryGeo } from './topology';
+import uniqueId from '~/utils/useUniqueId';
 
 export type TooltipSettings = {
   left: number;
@@ -117,7 +118,7 @@ const ChoroplethMap: <T1, T3>(
     hoverRef,
   } = props;
 
-  const clipPathId = useRef(`_${Math.random().toString(36).substring(2, 15)}`);
+  const clipPathId = useRef(uniqueId());
   const timeout = useRef(-1);
   const isTouch = useIsTouchDevice();
 

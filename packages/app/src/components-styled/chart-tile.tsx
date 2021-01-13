@@ -6,14 +6,15 @@ import { ChartTileContainer } from './chart-tile-container';
 import { ChartTimeControls } from './chart-time-controls';
 import { MetadataProps } from './metadata';
 import { Heading } from './typography';
-
+import useUniqueId from '~/utils/useUniqueId';
+import { assert } from '~/utils/assert';
 interface ChartTileProps {
   children: React.ReactNode;
   metadata: MetadataProps;
   title: string;
   description?: React.ReactNode;
   ariaDescription?: string;
-  uniqueAriaId?: string;
+  uniqueId?: string;
 }
 
 interface ChartTileWithTimeframeProps extends Omit<ChartTileProps, 'children'> {
@@ -21,7 +22,7 @@ interface ChartTileWithTimeframeProps extends Omit<ChartTileProps, 'children'> {
   timeframeOptions?: TimeframeOption[];
   timeframeInitialValue?: TimeframeOption;
   ariaDescription?: string;
-  uniqueAriaId?: string;
+  uniqueId?: string;
 }
 
 export function ChartTile({
@@ -31,12 +32,12 @@ export function ChartTile({
   children,
   ariaDescription,
 }: ChartTileProps) {
-  if (!description && !ariaDescription)
-    throw new Error(
-      `This graph doesn't include a valid description nor an ariaDescription, please add one of them.`
-    );
+  assert(
+    !(!description && !ariaDescription),
+    `This graph doesn't include a valid description nor an ariaDescription, please add one of them.`
+  );
 
-  const uniqueAriaId = `_${Math.random().toString(36).substring(2, 15)}`;
+  const uniqueId = useUniqueId();
 
   return (
     <ChartTileContainer metadata={metadata}>
@@ -44,7 +45,7 @@ export function ChartTile({
         title={title}
         description={description}
         ariaDescription={ariaDescription}
-        uniqueAriaId={uniqueAriaId}
+        uniqueId={uniqueId}
       />
       {children}
     </ChartTileContainer>
@@ -58,7 +59,7 @@ export function ChartTileWithTimeframe({
   timeframeOptions = ['all', '5weeks', 'week'],
   timeframeInitialValue = '5weeks',
   children,
-  uniqueAriaId,
+  uniqueId,
   ariaDescription,
 }: ChartTileWithTimeframeProps) {
   const [timeframe, setTimeframe] = useState<TimeframeOption>(
@@ -73,7 +74,7 @@ export function ChartTileWithTimeframe({
         timeframe={timeframe}
         timeframeOptions={timeframeOptions}
         onTimeframeChange={setTimeframe}
-        uniqueAriaId={uniqueAriaId}
+        uniqueId={uniqueId}
         ariaDescription={ariaDescription}
       />
       {children(timeframe)}
@@ -87,7 +88,7 @@ function ChartTileHeader({
   timeframe,
   timeframeOptions,
   onTimeframeChange,
-  uniqueAriaId,
+  uniqueId,
   ariaDescription,
 }: {
   title: string;
@@ -95,7 +96,7 @@ function ChartTileHeader({
   timeframe?: TimeframeOption;
   timeframeOptions?: TimeframeOption[];
   onTimeframeChange?: (timeframe: TimeframeOption) => void;
-  uniqueAriaId?: string;
+  uniqueId?: string;
   ariaDescription?: string;
 }) {
   return (
@@ -108,17 +109,17 @@ function ChartTileHeader({
       <div css={css({ mb: [3, null, null, null, 0], mr: [0, 0, 2] })}>
         <Heading level={3}>{title}</Heading>
         {!description && (
-          <div css={css({ display: 'none' })} aria-labelledby={uniqueAriaId}>
+          <div css={css({ display: 'none' })} aria-labelledby={uniqueId}>
             {ariaDescription}
           </div>
         )}
         {description &&
           (typeof description === 'string' ? (
-            <p aria-labelledby={uniqueAriaId} css={css({ m: 0 })}>
+            <p aria-labelledby={uniqueId} css={css({ m: 0 })}>
               {description}
             </p>
           ) : (
-            <div aria-labelledby={uniqueAriaId}>{description}</div>
+            <div aria-labelledby={uniqueId}>{description}</div>
           ))}
       </div>
       {timeframe && onTimeframeChange && (

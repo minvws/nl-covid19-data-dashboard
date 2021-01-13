@@ -31,7 +31,7 @@ import {
 } from '~/utils/sewer-water/municipality-sewer-water.util';
 
 const text = siteText.gemeente_rioolwater_metingen;
-const accessibilityGraphs = siteText.accessibility_grafieken as any;
+const accessibilityGraphsDescriptions = siteText.accessibility.grafieken;
 
 const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
   const { data, municipalityName } = props;
@@ -188,7 +188,7 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
               municipality: municipalityName,
             })}
             ariaDescription={
-              accessibilityGraphs.gm.rioolwater_meetwaarde_over_tijd
+              accessibilityGraphsDescriptions.gm.rioolwater_meetwaarde
             }
             metadata={{
               date: [

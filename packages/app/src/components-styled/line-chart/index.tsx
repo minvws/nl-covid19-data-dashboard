@@ -68,7 +68,7 @@ export type LineChartProps<T extends Value> = {
   formatMarkerLabel?: (value: T) => string;
   padding?: Partial<ChartPadding>;
   showLegend?: boolean;
-  uniqueAriaId?: string;
+  uniqueId?: string;
 };
 
 export function LineChart<T extends Value>({
@@ -87,7 +87,7 @@ export function LineChart<T extends Value>({
   formatMarkerLabel,
   padding: overridePadding,
   showLegend = false,
-  uniqueAriaId,
+  uniqueId,
 }: LineChartProps<T>) {
   const {
     tooltipData,
@@ -306,7 +306,7 @@ export function LineChart<T extends Value>({
           formatXAxis={formatXAxis}
           onHover={handleHover}
           benchmark={benchmark}
-          uniqueAriaId={uniqueAriaId}
+          uniqueId={uniqueId}
         >
           {renderAxes}
         </ChartAxes>

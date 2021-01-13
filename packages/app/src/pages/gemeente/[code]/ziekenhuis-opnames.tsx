@@ -23,7 +23,7 @@ import {
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text = siteText.gemeente_ziekenhuisopnames_per_dag;
-const accessibilityGraphs = siteText.accessibility_grafieken as any;
+const accessibilityGraphsDescriptions = siteText.accessibility.grafieken;
 
 const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
   const { data, municipalityName } = props;
@@ -110,7 +110,9 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
           <LineChartTile
             title={text.linechart_titel}
             description={text.linechart_description}
-            ariaDescription={accessibilityGraphs.gm.ziekenhuis_opnames}
+            ariaDescription={
+              accessibilityGraphsDescriptions.gm.ziekenhuis_opnames
+            }
             metadata={{ source: text.bronnen.rivm }}
             timeframeOptions={['all', '5weeks', 'week']}
             timeframeInitialValue="5weeks"

@@ -4,11 +4,12 @@ import { Value } from '~/components-styled/line-chart/helpers';
 import { TimeframeOption } from '~/utils/timeframe';
 import { ChartTileWithTimeframe } from './chart-tile';
 import { MetadataProps } from './metadata';
-
+import useUniqueId from '~/utils/useUniqueId';
+import { assert } from '~/utils/assert';
 interface LineChartTileProps<T extends Value> extends LineChartProps<T> {
   title: string;
   metadata: MetadataProps;
-  description?: string | null;
+  description?: string;
   timeframeOptions?: TimeframeOption[];
   timeframeInitialValue?: TimeframeOption;
   footer?: React.ReactNode;
@@ -18,19 +19,18 @@ interface LineChartTileProps<T extends Value> extends LineChartProps<T> {
 export function LineChartTile<T extends Value>({
   metadata,
   title,
-  description = null,
+  description,
   timeframeOptions = ['all', '5weeks', 'week'],
   timeframeInitialValue = '5weeks',
   footer,
   ariaDescription,
   ...chartProps
 }: LineChartTileProps<T>) {
-  if (!description && !ariaDescription)
-    throw new Error(
-      `This graph doesn't include a valid description nor an ariaDescription, please add one of them.`
-    );
-
-  const uniqueAriaId = `_${Math.random().toString(36).substring(2, 15)}`;
+  assert(
+    description || ariaDescription,
+    `This graph doesn't include a valid description nor an ariaDescription, please add one of them.`
+  );
+  const uniqueId = useUniqueId();
 
   return (
     <ChartTileWithTimeframe
@@ -39,7 +39,7 @@ export function LineChartTile<T extends Value>({
       metadata={metadata}
       timeframeOptions={timeframeOptions}
       timeframeInitialValue={timeframeInitialValue}
-      uniqueAriaId={uniqueAriaId}
+      uniqueId={uniqueId}
       ariaDescription={ariaDescription}
     >
       {(timeframe) => (
@@ -50,7 +50,7 @@ export function LineChartTile<T extends Value>({
                 {...chartProps}
                 width={parent.width}
                 timeframe={timeframe}
-                uniqueAriaId={uniqueAriaId}
+                uniqueId={uniqueId}
               />
             )}
           </ParentSize>
