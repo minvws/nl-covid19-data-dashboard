@@ -755,6 +755,9 @@
         "veiligheidsregio": "Cijfers per veiligheidsregio",
         "gemeente": "Cijfers per gemeente"
       }
+    },
+    "latest_articles": {
+      "title": "Wekelijkse berichten"
     }
   },
   "regionaal_index": {
@@ -1161,7 +1164,7 @@
     "legenda": {
       "titel": "Legenda",
       "geen_regio": "geen regio's",
-      "regios": "{{amount}} regio's"  
+      "regios": "{{amount}} regio's"
     },
     "valid_from": "Geldig vanaf {{validFrom}}",
     "sidebar_label": "Risiconiveau:"

@@ -1161,7 +1161,7 @@
     "legenda": {
       "titel": "Legend",
       "geen_regio": "geen regio's",
-      "regios": "{{amount}} regio's"  
+      "regios": "{{amount}} regio's"
     },
     "valid_from": "Valid from {{validFrom}}",
     "sidebar_label": "Level of risk:"
@@ -2138,7 +2138,7 @@
   "common.tooltip.positive_tested_value": "",
   "search": {
     "placeholder": "Find a municipality or safery region",
-    "clear":"Clear search",
+    "clear": "Clear search",
     "no_hits": "No {{subject}} found with “{{search}}”"
   },
 
@@ -2154,6 +2154,9 @@
         "veiligheidsregio": "`Cijfers van {{safetyRegion}}`",
         "gemeente": "Cijfers per gemeente"
       }
+    },
+    "latest_articles": {
+      "title": "Wekelijkse berichten"
     }
   },
   "gemeente_actueel": {

@@ -15,6 +15,7 @@ import { escalationTooltip } from '~/components/choropleth/tooltips/region/escal
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import { Search } from '~/domain/topical/components/search';
 import { DataSitemap } from '~/domain/topical/data-site-map';
+import { LatestArticles } from '~/domain/topical/latest-articles';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
 import { TALLLanguages } from '~/locale/';
@@ -156,6 +157,8 @@ const Home: FCWithLayout<IHomeData> = (data) => {
         />
 
         <DataSitemap />
+
+        <LatestArticles />
       </TileList>
     </MaxWidth>
   );
