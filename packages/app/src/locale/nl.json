@@ -139,11 +139,11 @@
       "text": "NICE via RIVM"
     },
     "titel": "Ziekenhuisopnames per dag",
-    "pagina_toelichting": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen.\n\nLet op: Sinds 17 december wordt een nieuwe bron gebruikt voor de ziekenhuisopnames.",
+    "pagina_toelichting": "Toestroom van patiënten met COVID-19 kan ervoor zorgen dat ziekenhuizen het te druk krijgen en zorg niet meer kunnen leveren. We houden hier op basis van verschillende bronnen bij hoeveel ziekenhuisbedden (exclusief IC) bezet worden door patiënten met COVID-19 en hoeveel patiënten dagelijks in de ziekenhuizen worden opgenomen, zowel landelijk als regionaal.  \n\nLet op: Sinds 14 januari wordt niet meer een driedaags gemiddelde getoond. In plaats daarvan staat het aantal ziekenhuisopnames die op één dag gemeld zijn. Verder staan in de grafiek met het verloop over tijd de ziekenhuisopnames gesorteerd op de dag dat mensen zijn opgenomen.   ",
     "barscale_titel": "Ziekenhuisopnames per dag",
-    "extra_uitleg": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis (exclusief IC) is opgenomen. Dit cijfer is een gemiddelde van de gemelde ziekenhuisopnames over de afgelopen 3 dagen.\n\nLet op: Hoewel ziekenhuizen proberen om COVID-19 patiënten snel te registreren, is het aannemelijk dat de registratie achter loopt. Om deze reden zijn de aantallen van de afgelopen dagen meestal nog onvolledig.",
+    "extra_uitleg": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis (exclusief IC) is opgenomen. Dit cijfer is het aantal ziekenhuisopnames dat op één dag gemeld zijn. Dit kunnen ook meldingen zijn van opnamen van eerdere dagen. Dat komt omdat de registratie van ziekenhuisopnames vaak niet gelijk op de dag van opname gebeurt. Omdat het meldingen van één dag zijn, geeft dit cijfer toch een goed beeld van de actuele ontwikkeling van het aantal ziekenhuisopnames.",
     "map_titel": "Verdeling ziekenhuisopnames in Nederland",
-    "map_toelichting": "Deze kaarten laten zien hoe de verdeling van ziekenhuisopnames is in Nederland per dag.",
+    "map_toelichting": "Deze kaarten laten zien hoe de verdeling van ziekenhuisopnames is in Nederland. Hier worden de ziekenhuisopnames getoond die op één dag gemeld zijn bij Stichting NICE.",
     "linechart_titel": "Ziekenhuisopnames over tijd",
     "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "chloropleth_legenda": {
@@ -179,20 +179,20 @@
       "title": "Bezetting ziekenhuisbedden over tijd",
       "description": "Deze grafiek toont het verloop in het aantal ziekenhuisbedden (exclusief IC-bedden) dat is bezet door patiënten met COVID-19."
     },
-    "linechart_description": "",
+    "linechart_description": "In deze grafiek staan de ziekenhuisopnames op basis van de dag dat mensen daadwerkelijk zijn opgenomen. Omdat de registratie van ziekenhuisopnames achter loopt en dit vaak niet op de dag van opname al gebeurd is, zijn de meest recente dagen nog onvolledig.",
     "metadata": {
       "title": "Ziekenhuisopnames | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Landelijk overzicht van het aantal mensen met COVID-19 dat een ziekenhuis is opgenomen."
     },
     "titel_sidebar": "Ziekenhuisopnames",
-    "titel_kpi": "Gemiddeld aantal ziekenhuisopnames over 3 dagen",
+    "titel_kpi": "Aantal ziekenhuisopnames die op één dag gemeld zijn",
     "reference": {
       "href": "/verantwoording#ziekenhuizen",
-      "text": "Lees meer in de cijferverantwoording."
+      "text": "Lees meer over het tellen van ziekenhuisopnames en het verschil tussen diverse databronnen in de cijferverantwoording."
     },
     "tijdelijk_onbeschikbaar_titel": "",
     "tijdelijk_onbeschikbaar": "",
-    "kpi_titel": "Gemiddeld aantal ziekenhuisopnames over 3 dagen"
+    "kpi_titel": "Aantal ziekenhuisopnames die op één dag gemeld zijn"
   },
   "positief_geteste_personen": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -611,7 +611,7 @@
     "select_region_municipality_legend": "Selecteer een gemeente:",
     "select_region_type_legend": "Toon cijfers van:",
     "your_municipality": "Gemeente",
-    "belangrijk_bericht": "Er geldt een [landelijke lockdown](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen) tot en met ten minste dinsdag 19 januari."
+    "belangrijk_bericht": "Er geldt een [landelijke lockdown](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen) tot en met in ieder geval 9 februari."
   },
   "common": {
     "metadata": {
@@ -688,28 +688,28 @@
   "veiligheidsregio_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Ziekenhuisopnames",
     "titel": "Ziekenhuisopnames per dag van inwoners {{safetyRegion}}",
-    "pagina_toelichting": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen.",
+    "pagina_toelichting": "Toestroom van patiënten met COVID-19 kan ervoor zorgen dat ziekenhuizen het te druk krijgen en zorg niet meer kunnen leveren. We houden hier op basis van verschillende bronnen bij hoeveel ziekenhuisbedden (exclusief IC) bezet worden door patiënten met COVID-19 en hoeveel patiënten dagelijks in de ziekenhuizen worden opgenomen, zowel landelijk als regionaal.\n\nLet op: Sinds 14 januari wordt niet meer een driedaags gemiddelde getoond. In plaats daarvan staat het aantal ziekenhuisopnames die op één dag gemeld zijn. Verder staan in de grafiek met het verloop over tijd de ziekenhuisopnames gesorteerd op de dag dat mensen zijn opgenomen.   ",
     "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
     "screen_reader_graph_content": "{{value}} opnames.",
     "barscale_titel": "Ziekenhuisopnames per dag",
-    "extra_uitleg": "Aantal mensen uit deze veiligheidsregio met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de gemelde ziekenhuisopnames over de afgelopen 3 dagen.",
+    "extra_uitleg": "Aantal mensen uit deze veiligheidsregio met COVID-19 dat per dag in een ziekenhuis (exclusief IC) is opgenomen. Dit cijfer is het aantal ziekenhuisopnames dat op één dag gemeld zijn. Dit kunnen ook meldingen zijn van opnamen van eerdere dagen. Dat komt omdat de registratie van ziekenhuisopnames vaak niet gelijk op de dag van opname gebeurt. Omdat het meldingen van één dag zijn, geeft dit cijfer toch een goed beeld van de actuele ontwikkeling van het aantal ziekenhuisopnames.",
     "map_titel": "Verdeling ziekenhuisopnames in {{safetyRegion}}",
-    "map_toelichting": "Deze kaarten laten zien hoe de verdeling van ziekenhuisopnames is in Nederland per dag.",
+    "map_toelichting": "Deze kaarten laten zien hoe de verdeling van ziekenhuisopnames is in Nederland. Hier worden de ziekenhuisopnames getoond die op één dag gemeld zijn bij Stichting NICE.",
     "linechart_titel": "Ziekenhuisopnames over tijd",
     "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "bron": {
       "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
       "text": "NICE via RIVM"
     },
-    "linechart_description": "",
+    "linechart_description": "In deze grafiek staan de ziekenhuisopnames op basis van de dag dat mensen daadwerkelijk zijn opgenomen. Omdat de registratie van ziekenhuisopnames achter loopt en dit vaak niet op de dag van opname al gebeurd is, zijn de meest recente dagen nog onvolledig.",
     "metadata": {
       "title": "Ziekenhuisopnames inwoners {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Overzicht van het aantal mensen in de veiligheidsregio {{safetyRegionName}} die met COVID-19 in het ziekenhuis zijn opgenomen."
     },
-    "titel_kpi": "Gemiddeld aantal ziekenhuisopnames over 3 dagen",
+    "titel_kpi": "Aantal ziekenhuisopnames die op één dag gemeld zijn",
     "reference": {
       "href": "/verantwoording#ziekenhuizen",
-      "text": "Lees meer in de cijferverantwoording."
+      "text": "Lees meer over het tellen van ziekenhuisopnames en het verschil tussen diverse databronnen in de cijferverantwoording."
     },
     "bronnen": {
       "rivm": {
@@ -720,7 +720,7 @@
     },
     "tijdelijk_onbeschikbaar_titel": "",
     "tijdelijk_onbeschikbaar": "",
-    "kpi_titel": "Gemiddeld aantal ziekenhuisopnames over 3 dagen"
+    "kpi_titel": "Aantal ziekenhuisopnames die op één dag gemeld zijn"
   },
   "veiligheidsregio_positief_geteste_personen": {
     "titel_sidebar": "Positief geteste mensen",
@@ -830,28 +830,28 @@
   "gemeente_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Ziekenhuisopnames",
     "titel": "Ziekenhuisopnames per dag van inwoners {{municipality}}",
-    "pagina_toelichting": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen.",
+    "pagina_toelichting": "Toestroom van patiënten met COVID-19 kan ervoor zorgen dat ziekenhuizen het te druk krijgen en zorg niet meer kunnen leveren. We houden hier op basis van verschillende bronnen bij hoeveel ziekenhuisbedden (exclusief IC) bezet worden door patiënten met COVID-19 en hoeveel patiënten dagelijks in de ziekenhuizen worden opgenomen, zowel landelijk als regionaal.\n\nLet op: Sinds 14 januari wordt niet meer een driedaags gemiddelde getoond. In plaats daarvan staat het aantal ziekenhuisopnames die op één dag gemeld zijn. Verder staan in de grafiek met het verloop over tijd de ziekenhuisopnames gesorteerd op de dag dat mensen zijn opgenomen.   ",
     "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
     "screen_reader_graph_content": "{{value}} opnames.",
     "barscale_titel": "Ziekenhuisopnames per dag",
-    "extra_uitleg": "Aantal mensen uit deze gemeente met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de gemelde ziekenhuisopnames over de afgelopen 3 dagen.",
+    "extra_uitleg": "Aantal mensen uit deze gemeente met COVID-19 dat per dag in een ziekenhuis (exclusief IC) is opgenomen. Dit cijfer is het aantal ziekenhuisopnames dat op één dag gemeld zijn. Dit kunnen ook meldingen zijn van opnamen van eerdere dagen. Dat komt omdat de registratie van ziekenhuisopnames vaak niet gelijk op de dag van opname gebeurt. Omdat het meldingen van één dag zijn, geeft dit cijfer toch een goed beeld van de actuele ontwikkeling van het aantal ziekenhuisopnames.",
     "map_titel": "Verdeling ziekenhuisopnames in veiligheidsregio van {{municipality}}",
-    "map_toelichting": "Deze kaarten laten zien hoe de verdeling van ziekenhuisopnames is in Nederland per dag.",
+    "map_toelichting": "Deze kaarten laten zien hoe de verdeling van ziekenhuisopnames is in Nederland. Hier worden de ziekenhuisopnames getoond die op één dag gemeld zijn bij Stichting NICE.",
     "linechart_titel": "Ziekenhuisopnames over tijd",
     "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "bron": {
       "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
       "text": "NICE via RIVM"
     },
-    "linechart_description": "",
+    "linechart_description": "In deze grafiek staan de ziekenhuisopnames op basis van de dag dat mensen daadwerkelijk zijn opgenomen. Omdat de registratie van ziekenhuisopnames achter loopt en dit vaak niet op de dag van opname al gebeurd is, zijn de meest recente dagen nog onvolledig.",
     "metadata": {
       "title": "Ziekenhuisopnames inwoners {{municipalityName}} | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Overzicht van het aantal mensen in de gemeente {{municipalityName}} die met COVID-19 in het ziekenhuis zijn opgenomen."
     },
-    "titel_kpi": "Gemiddeld aantal ziekenhuisopnames over 3 dagen",
+    "titel_kpi": "Aantal ziekenhuisopnames die op één dag gemeld zijn",
     "reference": {
       "href": "/verantwoording#ziekenhuizen",
-      "text": "Lees meer in de cijferverantwoording."
+      "text": "Lees meer over het tellen van ziekenhuisopnames en het verschil tussen diverse databronnen in de cijferverantwoording."
     },
     "bronnen": {
       "rivm": {
@@ -862,7 +862,7 @@
     },
     "tijdelijk_onbeschikbaar_titel": "",
     "tijdelijk_onbeschikbaar": "",
-    "kpi_titel": "Gemiddeld aantal ziekenhuisopnames over 3 dagen"
+    "kpi_titel": "Aantal ziekenhuisopnames die op één dag gemeld zijn"
   },
   "gemeente_positief_geteste_personen": {
     "titel_sidebar": "Positief geteste mensen",
@@ -962,7 +962,7 @@
       "title": "Risiconiveaus per veiligheidsregio | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Overzicht van het huidige risiconiveau per veiligheidsregio in Nederland."
     },
-    "belangrijk_bericht": "Er geldt een [landelijke lockdown](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen) tot en met ten minste dinsdag 19 januari."
+    "belangrijk_bericht": "Er geldt een [landelijke lockdown](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen) tot en met in ieder geval 9 februari."
   },
   "gemeente_index": {
     "selecteer_titel": "Selecteer een gemeente",
@@ -1849,7 +1849,7 @@
         "toelichting_risiconiveau": "",
         "extratoelichting": {
           "titel": "Nederland in Lockdown",
-          "toelichting": "Het coronavirus verspreidt zich razendsnel. Om de zorg toegankelijk te houden, moeten we onze contacten tot een minimum beperken. Van 15 december t/m in ieder geval 19 januari gelden er landelijke maatregelen."
+          "toelichting": "Het coronavirus verspreidt zich razendsnel. Om de zorg toegankelijk te houden, moeten we onze contacten tot een minimum beperken. Van 15 december t/m in ieder geval 9 februari gelden er landelijke maatregelen."
         }
       }
     },

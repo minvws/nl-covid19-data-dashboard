@@ -522,8 +522,8 @@
     "map_titel": "Average number of virus particles per 100.000 inhabitants",
     "map_toelichting": "This map shows the average number of virus particles per 100.000 inhabitants, per safety region. Please note: on the 26th of November the legend has been revised.",
     "legenda_titel": "",
-    "map_tooltip": "{{value}} x100 billion virus particles per 100.000 inhabitants",
-    "map_tooltip_value": "",
+    "map_tooltip": "per 100.000 inhabitants",
+    "map_tooltip_value": "{{value}} x100 billion",
     "reference": {
       "href": "/verantwoording#sewage-water",
       "text": "Read more in 'explanation of the data presented'."
@@ -611,7 +611,7 @@
     "select_region_municipality_legend": "Select a municipality:",
     "select_region_type_legend": "Show numbers from:",
     "your_municipality": "Municipality",
-    "belangrijk_bericht": "There is a [national lockdown](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen) until at least Tuesday 19 January."
+    "belangrijk_bericht": "There is a [national lockdown](https://coronadashboard.government.nl/landelijk/maatregelen) until at least 9 February."
   },
   "common": {
     "metadata": {
@@ -962,7 +962,7 @@
       "title": "Level of risk per safety region | Dashboard Coronavirus | Government.nl",
       "description": "Overview of the level of risk per safety region in the Netherlands."
     },
-    "belangrijk_bericht": "There is a [national lockdown](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen) until at least Tuesday 19 January."
+    "belangrijk_bericht": "There is a [national lockdown](https://coronadashboard.government.nl/landelijk/maatregelen) until at least 9 February."
   },
   "gemeente_index": {
     "selecteer_titel": "Select your municipality",
@@ -1849,7 +1849,7 @@
         "toelichting_risiconiveau": "",
         "extratoelichting": {
           "titel": "The Netherlands in lockdown",
-          "toelichting": "Coronavirus is spreading rapidly. To ensure healthcare services remain available to all, we must limit our contact with others. The national measures apply from 15 December 2020 until at least 19 January 2021."
+          "toelichting": "Coronavirus is spreading rapidly. To ensure healthcare services remain available to all, we must limit our contact with others. The national measures apply from 15 December 2020 until at least 9 February 2021."
         }
       }
     },
