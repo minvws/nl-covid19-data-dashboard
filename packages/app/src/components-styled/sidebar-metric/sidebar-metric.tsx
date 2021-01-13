@@ -1,7 +1,11 @@
 import { get } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
-import { Metric, MetricKeys } from '~/components/choropleth/shared';
+import {
+  Metric,
+  MetricKeys,
+  DifferenceKey,
+} from '~/components/choropleth/shared';
 import siteText, { TALLLanguages } from '~/locale/index';
 import {
   DataScope,
@@ -25,7 +29,7 @@ interface SidebarMetricProps<T extends { difference: unknown }> {
    */
   metricProperty?: string;
   localeTextKey: keyof TALLLanguages;
-  differenceKey?: string;
+  differenceKey?: DifferenceKey;
   showBarScale?: boolean;
   annotationKey?: string;
 
