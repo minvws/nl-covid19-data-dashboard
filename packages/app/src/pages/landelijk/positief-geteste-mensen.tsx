@@ -28,7 +28,13 @@ import { AgeDemographic } from '~/domain/infected-people/age-demographic/age-dem
 import { formatAgeGroupRange } from '~/domain/infected-people/age-demographic/age-demographic-chart';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
-import { getNationalStaticProps } from '~/static-props/nl-data';
+import {
+  createGetChoroplethData,
+  createGetNlData,
+  getLastGeneratedDate,
+  getText,
+} from '~/static-props/data';
+import { createGetStaticProps } from '~/static-props/utils/create-get-static-props';
 import { colors } from '~/style/theme';
 import { NationalTestedPerAgeGroup } from '~/types/data.d';
 import { assert } from '~/utils/assert';
@@ -37,12 +43,15 @@ import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
-export const getStaticProps = getNationalStaticProps({
-  choropleth: {
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getText,
+  createGetNlData(),
+  createGetChoroplethData({
     gm: ({ tested_overall }) => ({ tested_overall }),
     vr: ({ tested_overall }) => ({ tested_overall }),
-  },
-});
+  })
+);
 
 const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
   data,

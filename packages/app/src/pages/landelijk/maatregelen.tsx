@@ -10,11 +10,15 @@ import { SEOHead } from '~/components/seoHead';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import text from '~/locale';
-import { getNationalStaticProps } from '~/static-props/nl-data';
+import { createGetNlData, getLastGeneratedDate } from '~/static-props/data';
+import { createGetStaticProps } from '~/static-props/utils/create-get-static-props';
 import theme from '~/style/theme';
 import { useEscalationLevel } from '~/utils/use-escalation-level';
 
-export const getStaticProps = getNationalStaticProps();
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  createGetNlData()
+);
 
 const NationalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data } = props;

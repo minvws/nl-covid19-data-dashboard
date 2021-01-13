@@ -11,13 +11,19 @@ import { DeceasedMonitorSection } from '~/domain/deceased/deceased-monitor-secti
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import siteText from '~/locale/index';
-import {
-  getSafetyRegionPaths,
-  getSafetyRegionStaticProps,
-} from '~/static-props/safetyregion-data';
+import { getVrData, getLastGeneratedDate } from '~/static-props/data';
+import { createGetStaticProps } from '~/static-props/utils/create-get-static-props';
+import { getPaths } from '~/static-props/vr-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text = siteText.veiligheidsregio_sterfte;
+
+export const getStaticPaths = getPaths();
+
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getVrData
+);
 
 const DeceasedRegionalPage: FCWithLayout<typeof getStaticProps> = (props) => {
   const {
@@ -107,9 +113,5 @@ const DeceasedRegionalPage: FCWithLayout<typeof getStaticProps> = (props) => {
 };
 
 DeceasedRegionalPage.getLayout = getSafetyRegionLayout();
-
-export const getStaticProps = getSafetyRegionStaticProps();
-
-export const getStaticPaths = getSafetyRegionPaths();
 
 export default DeceasedRegionalPage;

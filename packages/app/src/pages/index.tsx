@@ -5,6 +5,7 @@ import { AnchorTile } from '~/components-styled/anchor-tile';
 import { Box, Spacer } from '~/components-styled/base';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { CategoryHeading } from '~/components-styled/content-header';
+import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
 import { HeadingWithIcon } from '~/components-styled/heading-with-icon';
 import { MessageTile } from '~/components-styled/message-tile';
 import { TileList } from '~/components-styled/tile-list';
@@ -20,45 +21,44 @@ import { createPositiveTestedPeopleRegionalTooltip } from '~/components/chorople
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
-import { getNationalStaticProps } from '~/static-props/nl-data';
+import {
+  createGetChoroplethData,
+  createGetNlData,
+  getLastGeneratedDate,
+  getText,
+} from '~/static-props/data';
+import { createGetStaticProps } from '~/static-props/utils/create-get-static-props';
 import theme from '~/style/theme';
-import { EscalationLevels, National } from '~/types/data';
+import { EscalationLevels } from '~/types/data';
 import { assert } from '~/utils/assert';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { EscalationMapLegenda } from './veiligheidsregio';
 
-export async function getStaticProps() {
-  const { props } = await getNationalStaticProps({
-    choropleth: {
-      vr: (x) => ({
-        escalation_levels: x.escalation_levels,
-        tested_overall: x.tested_overall,
-      }),
-      gm: (x) => ({
-        tested_overall: x.tested_overall,
-      }),
-    },
-  })();
-
-  const dataClone = JSON.parse(JSON.stringify(props.data)) as National;
-
-  // Strip away unused data (values) from staticProps
-  // keep last_values because we use them!
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  for (const metric of Object.values(dataClone)) {
-    if (typeof metric === 'object' && metric !== null) {
-      for (const [metricProperty, metricValue] of Object.entries(metric)) {
-        if (metricProperty === 'values') {
-          (metricValue as {
-            values: Array<unknown>;
-          }).values = [];
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getText,
+  createGetChoroplethData({
+    vr: ({ escalation_levels, tested_overall }) => ({
+      escalation_levels,
+      tested_overall,
+    }),
+    gm: ({ tested_overall }) => ({ tested_overall }),
+  }),
+  createGetNlData((data) => {
+    for (const metric of Object.values(data)) {
+      if (typeof metric === 'object' && metric !== null) {
+        for (const [metricProperty, metricValue] of Object.entries(metric)) {
+          if (metricProperty === 'values') {
+            (metricValue as {
+              values: Array<unknown>;
+            }).values = [];
+          }
         }
       }
     }
-  }
 
-  return { props: { ...props, data: dataClone } };
-}
+    return data;
+  })
+);
 
 const Home: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data, text, choropleth } = props;
@@ -111,7 +111,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                 __html: text.veiligheidsregio_index.selecteer_toelichting,
               }}
             />
-            <EscalationMapLegenda text={text} />
+            <EscalationMapLegenda />
           </>
         }
       >

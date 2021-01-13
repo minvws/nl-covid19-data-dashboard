@@ -16,18 +16,23 @@ import { FCWithLayout } from '~/domain/layout/layout';
 import { getMunicipalityLayout } from '~/domain/layout/municipality-layout';
 import siteText from '~/locale/index';
 import {
-  getMunicipalityPaths,
-  getMunicipalityStaticProps,
-} from '~/static-props/municipality-data';
+  createGetChoroplethData,
+  getGmData,
+  getLastGeneratedDate,
+} from '~/static-props/data';
+import { getPaths } from '~/static-props/gm-data';
+import { createGetStaticProps } from '~/static-props/utils/create-get-static-props';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text = siteText.gemeente_ziekenhuisopnames_per_dag;
 
-export const getStaticProps = getMunicipalityStaticProps({
-  choropleth: {
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getGmData,
+  createGetChoroplethData({
     gm: ({ hospital_nice }) => ({ hospital_nice }),
-  },
-});
+  })
+);
 
 const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data, choropleth, municipalityName } = props;
@@ -133,6 +138,6 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
 
 IntakeHospital.getLayout = getMunicipalityLayout();
 
-export const getStaticPaths = getMunicipalityPaths();
+export const getStaticPaths = getPaths();
 
 export default IntakeHospital;

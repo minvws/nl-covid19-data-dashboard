@@ -10,13 +10,19 @@ import { SEOHead } from '~/components/seoHead';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import siteText from '~/locale/index';
-import {
-  getSafetyRegionPaths,
-  getSafetyRegionStaticProps,
-} from '~/static-props/safetyregion-data';
+import { getVrData, getLastGeneratedDate } from '~/static-props/data';
+import { createGetStaticProps } from '~/static-props/utils/create-get-static-props';
+import { getPaths } from '~/static-props/vr-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text = siteText.veiligheidsregio_thuiswonende_ouderen;
+
+export const getStaticPaths = getPaths();
+
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getVrData
+);
 
 const ElderlyAtHomeRegionalPage: FCWithLayout<typeof getStaticProps> = (
   props
@@ -154,8 +160,5 @@ const ElderlyAtHomeRegionalPage: FCWithLayout<typeof getStaticProps> = (
 };
 
 ElderlyAtHomeRegionalPage.getLayout = getSafetyRegionLayout();
-
-export const getStaticProps = getSafetyRegionStaticProps();
-export const getStaticPaths = getSafetyRegionPaths();
 
 export default ElderlyAtHomeRegionalPage;

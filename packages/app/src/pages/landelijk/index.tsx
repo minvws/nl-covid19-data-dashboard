@@ -1,13 +1,14 @@
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
-import { getNationalStaticProps } from '~/static-props/nl-data';
+import { createGetNlData, getLastGeneratedDate } from '~/static-props/data';
+import { createGetStaticProps } from '~/static-props/utils/create-get-static-props';
 
-const National: FCWithLayout<typeof getStaticProps> = () => {
-  return null;
-};
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  createGetNlData()
+);
 
+const National: FCWithLayout<typeof getStaticProps> = () => null;
 National.getLayout = getNationalLayout;
-
-export const getStaticProps = getNationalStaticProps();
 
 export default National;

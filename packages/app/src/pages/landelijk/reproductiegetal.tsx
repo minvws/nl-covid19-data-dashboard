@@ -12,10 +12,16 @@ import { SEOHead } from '~/components/seoHead';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import siteText from '~/locale/index';
-import { getNationalStaticProps } from '~/static-props/nl-data';
+import { createGetNlData, getLastGeneratedDate } from '~/static-props/data';
+import { createGetStaticProps } from '~/static-props/utils/create-get-static-props';
 import { getLastFilledValue } from '~/utils/get-last-filled-value';
 
 const text = siteText.reproductiegetal;
+
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  createGetNlData()
+);
 
 const ReproductionIndex: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data } = props;
@@ -106,7 +112,5 @@ const ReproductionIndex: FCWithLayout<typeof getStaticProps> = (props) => {
 };
 
 ReproductionIndex.getLayout = getNationalLayout;
-
-export const getStaticProps = getNationalStaticProps();
 
 export default ReproductionIndex;

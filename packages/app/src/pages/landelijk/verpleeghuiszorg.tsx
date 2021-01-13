@@ -18,16 +18,25 @@ import { SEOHead } from '~/components/seoHead';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import siteText from '~/locale/index';
-import { getNationalStaticProps } from '~/static-props/nl-data';
+import {
+  createGetChoroplethData,
+  createGetNlData,
+  getLastGeneratedDate,
+} from '~/static-props/data';
+import { createGetStaticProps } from '~/static-props/utils/create-get-static-props';
 
 const infectedLocationsText = siteText.verpleeghuis_besmette_locaties;
 const positiveTestedPeopleText =
   siteText.verpleeghuis_positief_geteste_personen;
 const locationDeaths = siteText.verpleeghuis_oversterfte;
 
-export const getStaticProps = getNationalStaticProps({
-  choropleth: { vr: ({ nursing_home }) => ({ nursing_home }) },
-});
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  createGetNlData(),
+  createGetChoroplethData({
+    vr: ({ nursing_home }) => ({ nursing_home }),
+  })
+);
 
 const NursingHomeCare: FCWithLayout<typeof getStaticProps> = ({
   data,

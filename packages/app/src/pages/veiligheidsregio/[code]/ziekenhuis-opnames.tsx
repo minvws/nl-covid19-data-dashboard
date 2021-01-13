@@ -17,18 +17,25 @@ import { FCWithLayout } from '~/domain/layout/layout';
 import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import siteText from '~/locale/index';
 import {
-  getSafetyRegionPaths,
-  getSafetyRegionStaticProps,
-} from '~/static-props/safetyregion-data';
+  createGetChoroplethData,
+  getVrData,
+  getLastGeneratedDate,
+} from '~/static-props/data';
+import { createGetStaticProps } from '~/static-props/utils/create-get-static-props';
+import { getPaths } from '~/static-props/vr-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text = siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
 
-export const getStaticProps = getSafetyRegionStaticProps({
-  choropleth: {
+export const getStaticPaths = getPaths();
+
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getVrData,
+  createGetChoroplethData({
     gm: ({ hospital_nice }) => ({ hospital_nice }),
-  },
-});
+  })
+);
 
 const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data, safetyRegionName, choropleth } = props;
@@ -136,7 +143,5 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
 };
 
 IntakeHospital.getLayout = getSafetyRegionLayout();
-
-export const getStaticPaths = getSafetyRegionPaths();
 
 export default IntakeHospital;

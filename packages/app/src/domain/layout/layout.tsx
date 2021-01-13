@@ -8,8 +8,8 @@ import { SkipLinkMenu } from '~/components-styled/skip-link-menu';
 import { ILastGeneratedData } from '~/static-props/last-generated-data';
 
 interface LayoutProps {
-  url?: string;
   title: string;
+  url?: string;
   description?: string;
   openGraphImage?: string;
   twitterImage?: string;
