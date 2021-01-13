@@ -4,17 +4,28 @@ import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { ChoroplethThresholdsValue } from '../shared';
 import { DataValue } from './use-municipality-data';
 
+type HookArgs = {
+  thresholdValues: ChoroplethThresholdsValue[];
+  values: DataValue[];
+  metricName: string;
+  metricProperty: string;
+  area: 'vr' | 'gm';
+  gmCodes?: string[];
+};
+
 /**
  * This hook generates a text that describes the distribution of the choropleth data for accessibility purposes.
  */
-export function useChoroplethDataDescription<T>(
-  thresholds: ChoroplethThresholdsValue[],
-  gmValues: DataValue[],
-  metricName: keyof T,
-  metricProperty: string,
-  area: 'vr' | 'gm',
-  gemcodes?: string[]
-) {
+export function useChoroplethDataDescription(args: HookArgs) {
+  const {
+    thresholdValues,
+    values,
+    metricName,
+    metricProperty,
+    area,
+    gmCodes,
+  } = args;
+
   return useMemo(() => {
     const dynamicTexts = getDynamicTextTemplates(metricName, metricProperty);
 
@@ -25,21 +36,19 @@ export function useChoroplethDataDescription<T>(
     const areas = siteText.choropleth[area];
     const verbs = siteText.choropleth.verb;
 
-    const filteredGmValues = gemcodes
-      ? gmValues.filter((gm) => {
-          return gemcodes.indexOf(gm.code) > -1;
-        })
-      : gmValues;
+    const filteredValues = gmCodes
+      ? values.filter((value) => gmCodes.indexOf(value.code) > -1)
+      : values;
 
-    const ranges = thresholds
+    const ranges = thresholdValues
       .map((t, index) => {
         const nextThreshold =
-          (thresholds[index + 1]?.threshold ?? Infinity) - 1;
+          (thresholdValues[index + 1]?.threshold ?? Infinity) - 1;
         const range = [t.threshold, nextThreshold];
         const result = {
           rangeLow: range[0],
           rangeHigh: range[1],
-          count: filteredGmValues.reduce((acc, gm) => {
+          count: filteredValues.reduce((acc, gm) => {
             if (gm.value >= range[0] && gm.value <= range[1]) {
               return ++acc;
             }
@@ -72,7 +81,7 @@ export function useChoroplethDataDescription<T>(
       : replaceVariablesInText(dynamicTexts.full_sentence_single, {
           first: texts[0],
         });
-  }, [thresholds, gmValues, metricName, metricProperty, area, gemcodes]);
+  }, [thresholdValues, values, metricName, metricProperty, area, gmCodes]);
 }
 
 /**
@@ -84,10 +93,7 @@ export function useChoroplethDataDescription<T>(
  * is replaced with the currently selected restriction (extracted from the metric property)
  * and then returned.
  */
-function getDynamicTextTemplates<T>(
-  metricName: keyof T,
-  metricProperty: string
-) {
+function getDynamicTextTemplates(metricName: string, metricProperty: string) {
   if (metricName === 'behavior') {
     const parts = metricProperty.split('_');
     const restrictionKey = parts.slice(0, -1).join('_');

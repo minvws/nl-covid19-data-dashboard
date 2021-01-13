@@ -70,14 +70,14 @@ export function MunicipalityChoropleth<T>(
     metricProperty
   );
 
-  const dataDescription = useChoroplethDataDescription(
+  const dataDescription = useChoroplethDataDescription({
     thresholdValues,
     values,
     metricName,
     metricProperty,
-    'gm',
-    safetyRegionMunicipalCodes
-  );
+    area: 'gm',
+    gmCodes: safetyRegionMunicipalCodes,
+  });
 
   const getFillColor = useChoroplethColorScale(
     getChoroplethValue,

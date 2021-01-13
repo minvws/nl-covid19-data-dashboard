@@ -63,23 +63,23 @@ export function SafetyRegionChoropleth<T>(
     metricProperty
   );
 
-  const selectedThreshold = getDataThresholds(
+  const thresholdValues = getDataThresholds(
     regionThresholds,
     metricName,
     metricProperty
   );
 
-  const dataDescription = useChoroplethDataDescription(
-    selectedThreshold,
+  const dataDescription = useChoroplethDataDescription({
+    thresholdValues,
     values,
     metricName,
     metricProperty,
-    'vr'
-  );
+    area: 'vr',
+  });
 
   const getFillColor = useChoroplethColorScale(
     getChoroplethValue,
-    selectedThreshold
+    thresholdValues
   );
 
   const featureCallback = useCallback(
