@@ -1841,7 +1841,7 @@
       "41": {
         "toelichting_risiconiveau": "Er zijn zeer veel mensen besmettelijk en het dagelijks aantal nieuwe besmettingen is hoog. De regionale zorgcapaciteit is onvoldoende. Strenge, landelijke maatregelen zijn noodzakelijk.",
         "extratoelichting": {
-          "titel": "Maatregelen voor Lockdown",
+          "titel": "Maatregelen van de lockdown",
           "toelichting": "In {{safetyRegionName}} is een regionale lockdown van kracht."
         }
       },
@@ -1877,7 +1877,7 @@
       "41_ov_38": "Blijf in Nederland en boek geen reis naar het buitenland t/m 31 maart.",
       "41_onderwijs_39": "Onderwijs op afstand voor po, vo, mbo, hbo, wo en alle overige onderwijs-, trainings- en educatieve activiteiten. Onder andere examens, praktijklessen en onderwijs voor kwetsbare leerlingen uitgezonderd. Dit geldt tot en met 7 februari. Op een later moment wordt besloten of het po vanaf 25 januari geheel open kan.",
       "41_onderwijs_40": "Kinderopvang dicht. Dit geldt tot en met 7 februari. Op een later moment wordt besloten of de kinderopvang vanaf 25 januari geheel open kan.",
-      "41_onderwijs_41": "Er is noodopvang voor kinderen van ouders met cruciale beroepen en kinderen in een kwetsbare positie. Dit geldt van 16 december t/m in ieder geval 17 januari.",
+      "41_onderwijs_41": "Er is noodopvang voor kinderen van ouders met cruciale beroepen en kinderen in een kwetsbare positie.",
       "41_algemeen_42": "Heb je klachten? Blijf thuis.",
       "0_algemeen_42": "Heb je klachten? Blijf in thuisquarantaine.",
       "0_algemeen_43": "Heb je klachten? Laat je testen.",
