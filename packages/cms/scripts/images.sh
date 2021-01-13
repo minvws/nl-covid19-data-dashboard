@@ -1,12 +1,12 @@
 # Start with a clean slate
 rm *.tar.gz
-rm -rf export development-export-*
+rm -rf export production-export-*
 rm -rf ../app/public/sanity
 
 # Download the data and unzip it in a predictable folder
-sanity dataset export development development.tar.gz --overwrite
+sanity dataset export production production.tar.gz --overwrite
 tar -xzf *.gz 
-mv development-export* export
+mv production-export* export
 
 # Rename sha1-widthxheight.extension to sha1.extension
 cd export/images
