@@ -18,7 +18,7 @@ SEOHead.defaultProps = {
   url: siteText.seoHead.default_url,
 };
 
-export function SEOHead(props: SEOHeadProps): any {
+export function SEOHead(props: SEOHeadProps) {
   const { description, openGraphImage, title, twitterImage, url } = props;
 
   return (

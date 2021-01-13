@@ -15,17 +15,28 @@ import { SEOHead } from '~/components/seoHead';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getMunicipalityLayout } from '~/domain/layout/municipality-layout';
 import siteText from '~/locale/index';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
-  getMunicipalityData,
-  getMunicipalityPaths,
-  IMunicipalityData,
-} from '~/static-props/municipality-data';
+  createGetChoroplethData,
+  getGmData,
+  getLastGeneratedDate,
+} from '~/static-props/get-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+
+export { getStaticPaths } from '~/static-paths/gm';
+
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getGmData,
+  createGetChoroplethData({
+    gm: ({ hospital_nice }) => ({ hospital_nice }),
+  })
+);
 
 const text = siteText.gemeente_ziekenhuisopnames_per_dag;
 
-const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
-  const { data, municipalityName } = props;
+const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
+  const { data, choropleth, municipalityName } = props;
   const router = useRouter();
 
   const lastValue = data.hospital_nice.last_value;
@@ -93,6 +104,7 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
         >
           <MunicipalityChoropleth
             selected={data.code}
+            data={choropleth.gm}
             metricName="hospital_nice"
             metricProperty="admissions_on_date_of_reporting"
             tooltipContent={createMunicipalHospitalAdmissionsTooltip(
@@ -126,8 +138,5 @@ const IntakeHospital: FCWithLayout<IMunicipalityData> = (props) => {
 };
 
 IntakeHospital.getLayout = getMunicipalityLayout();
-
-export const getStaticProps = getMunicipalityData();
-export const getStaticPaths = getMunicipalityPaths();
 
 export default IntakeHospital;

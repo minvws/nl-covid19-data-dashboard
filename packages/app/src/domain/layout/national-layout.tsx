@@ -22,13 +22,19 @@ import { SidebarMetric } from '~/components-styled/sidebar-metric';
 import { Layout } from '~/domain/layout/layout';
 import { AppContent } from '~/components-styled/layout/app-content';
 import siteText from '~/locale/index';
-import { NationalPageProps } from '~/static-props/nl-data';
 import theme from '~/style/theme';
 import { useBreakpoints } from '~/utils/useBreakpoints';
+import { National } from '~/types/data';
+
+interface NationalLayoutProps {
+  lastGenerated: string;
+  data: National;
+  children?: React.ReactNode;
+}
 
 export function getNationalLayout(
   page: React.ReactNode,
-  pageProps: NationalPageProps
+  pageProps: NationalLayoutProps
 ) {
   return (
     <Layout
@@ -38,10 +44,6 @@ export function getNationalLayout(
       <NationalLayout {...pageProps}>{page}</NationalLayout>
     </Layout>
   );
-}
-
-interface NationalLayoutProps extends NationalPageProps {
-  children: React.ReactNode;
 }
 
 /**

@@ -12,20 +12,33 @@ import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createRegionElderlyAtHomeTooltip } from '~/components/choropleth/tooltips/region/create-region-elderly-at-home-tooltip';
+import { SEOHead } from '~/components/seoHead';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
-import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import {
-  getNationalStaticProps,
-  NationalPageProps,
-} from '~/static-props/nl-data';
+  createGetChoroplethData,
+  getNlData,
+  getLastGeneratedDate,
+} from '~/static-props/get-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 
 const text = siteText.thuiswonende_ouderen;
 
-const ElderlyAtHomeNationalPage: FCWithLayout<NationalPageProps> = (props) => {
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getNlData,
+  createGetChoroplethData({
+    vr: ({ elderly_at_home }) => ({ elderly_at_home }),
+  })
+);
+
+const ElderlyAtHomeNationalPage: FCWithLayout<typeof getStaticProps> = ({
+  data,
+  choropleth,
+}) => {
   const router = useRouter();
-  const elderlyAtHomeData = props.data.elderly_at_home;
+  const elderlyAtHomeData = data.elderly_at_home;
 
   return (
     <>
@@ -111,6 +124,7 @@ const ElderlyAtHomeNationalPage: FCWithLayout<NationalPageProps> = (props) => {
           }}
         >
           <SafetyRegionChoropleth
+            data={choropleth.vr}
             metricName="elderly_at_home"
             metricProperty="positive_tested_daily_per_100k"
             tooltipContent={createRegionElderlyAtHomeTooltip(
@@ -167,7 +181,5 @@ const ElderlyAtHomeNationalPage: FCWithLayout<NationalPageProps> = (props) => {
 };
 
 ElderlyAtHomeNationalPage.getLayout = getNationalLayout;
-
-export const getStaticProps = getNationalStaticProps;
 
 export default ElderlyAtHomeNationalPage;

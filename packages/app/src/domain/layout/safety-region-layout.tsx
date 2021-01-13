@@ -14,20 +14,24 @@ import {
   Menu,
   MetricMenuItemLink,
 } from '~/components-styled/aside/menu';
+import { AppContent } from '~/components-styled/layout/app-content';
 import { SidebarMetric } from '~/components-styled/sidebar-metric';
 import { Text } from '~/components-styled/typography';
 import { getLayout as getSiteLayout } from '~/domain/layout/layout';
-import { AppContent } from '~/components-styled/layout/app-content';
 import siteText from '~/locale/index';
-import { ISafetyRegionData } from '~/static-props/safetyregion-data';
 import { colors } from '~/style/theme';
+import { Regionaal } from '~/types/data';
 import { SafetyRegionComboBox } from './components/safety-region-combo-box';
 
+interface SafetyRegionLayoutProps {
+  lastGenerated: string;
+  data?: Regionaal;
+  safetyRegionName?: string;
+  children?: React.ReactNode;
+}
+
 export function getSafetyRegionLayout() {
-  return function (
-    page: React.ReactNode,
-    pageProps: ISafetyRegionData
-  ): React.ReactNode {
+  return function (page: React.ReactNode, pageProps: SafetyRegionLayoutProps) {
     return getSiteLayout(
       siteText.veiligheidsregio_metadata,
       pageProps.lastGenerated
@@ -51,9 +55,7 @@ export function getSafetyRegionLayout() {
  * More info on persistent layouts:
  * https:adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
  */
-function SafetyRegionLayout(
-  props: ISafetyRegionData & { children: React.ReactNode }
-) {
+function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
   const { children, data, safetyRegionName } = props;
 
   const router = useRouter();
@@ -86,7 +88,11 @@ function SafetyRegionLayout(
         searchComponent={<SafetyRegionComboBox />}
         sidebarComponent={
           <>
-            {showMetricLinks && (
+            {/**
+             * data is only available on /veiligheidsregio/{VRxx} routes
+             * and therefore optional
+             */}
+            {data && showMetricLinks && (
               <nav
                 /** re-mount when route changes in order to blur anchors */
                 key={router.asPath}

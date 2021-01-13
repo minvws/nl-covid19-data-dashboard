@@ -17,19 +17,30 @@ import { createSelectMunicipalHandler } from '~/components/choropleth/select-han
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createMunicipalHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/municipal/create-municipal-hospital-admissions-tooltip';
 import { createRegionHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/region/create-region-hospital-admissions-tooltip';
+import { SEOHead } from '~/components/seoHead';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
-import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import {
-  getNationalStaticProps,
-  NationalPageProps,
-} from '~/static-props/nl-data';
+  createGetChoroplethData,
+  getNlData,
+  getLastGeneratedDate,
+} from '~/static-props/get-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 
 const text = siteText.ziekenhuisopnames_per_dag;
 
-const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
-  const { data } = props;
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getNlData,
+  createGetChoroplethData({
+    vr: ({ hospital_nice }) => ({ hospital_nice }),
+    gm: ({ hospital_nice }) => ({ hospital_nice }),
+  })
+);
+
+const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
+  const { data, choropleth } = props;
   const router = useRouter();
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
     'region'
@@ -119,6 +130,7 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
         >
           {selectedMap === 'municipal' && (
             <MunicipalityChoropleth
+              data={choropleth.gm}
               metricName="hospital_nice"
               metricProperty="admissions_on_date_of_reporting"
               tooltipContent={createMunicipalHospitalAdmissionsTooltip(
@@ -132,6 +144,7 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
           )}
           {selectedMap === 'region' && (
             <SafetyRegionChoropleth
+              data={choropleth.vr}
               metricName="hospital_nice"
               metricProperty="admissions_on_date_of_reporting"
               tooltipContent={createRegionHospitalAdmissionsTooltip(
@@ -176,7 +189,5 @@ const IntakeHospital: FCWithLayout<NationalPageProps> = (props) => {
 };
 
 IntakeHospital.getLayout = getNationalLayout;
-
-export const getStaticProps = getNationalStaticProps;
 
 export default IntakeHospital;
