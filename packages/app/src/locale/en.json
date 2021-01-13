@@ -522,8 +522,8 @@
     "map_titel": "Average number of virus particles per 100.000 inhabitants",
     "map_toelichting": "This map shows the average number of virus particles per 100.000 inhabitants, per safety region. Please note: on the 26th of November the legend has been revised.",
     "legenda_titel": "",
-    "map_tooltip": "{{value}} x100 billion virus particles per 100.000 inhabitants",
-    "map_tooltip_value": "",
+    "map_tooltip": "per 100.000 inhabitants",
+    "map_tooltip_value": "{{value}} x100 billion",
     "reference": {
       "href": "/verantwoording#sewage-water",
       "text": "Read more in 'explanation of the data presented'."
