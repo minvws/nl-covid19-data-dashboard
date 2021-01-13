@@ -4,7 +4,7 @@ import { Box } from '~/components-styled/base';
 import {
   Metric,
   MetricKeys,
-  DifferenceKeys,
+  DifferenceKey,
 } from '~/components/choropleth/shared';
 import siteText, { TALLLanguages } from '~/locale/index';
 import {
@@ -29,7 +29,7 @@ interface SidebarMetricProps<T extends { difference: unknown }> {
    */
   metricProperty?: string;
   localeTextKey: keyof TALLLanguages;
-  differenceKey?: DifferenceKeys;
+  differenceKey?: DifferenceKey;
   showBarScale?: boolean;
   annotationKey?: string;
 

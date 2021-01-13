@@ -19,7 +19,7 @@ export type MetricKeys<T> = keyof Omit<
 export type MunicipalitiesMetricName = MetricKeys<Municipalities>;
 export type RegionsMetricName = MetricKeys<Regions>;
 
-export type DifferenceKeys =
+export type DifferenceKey =
   | keyof NationalDifference
   | keyof RegionaalDifference
   | keyof MunicipalDifference;
