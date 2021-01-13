@@ -15,7 +15,7 @@ export default {
       title: "Beschrijving",
     },
     {
-      name: "content",
+      name: "collapsibleList",
       type: "array",
       title: "Verantwoordingen",
       description:
@@ -23,4 +23,10 @@ export default {
       of: [{ type: "collapsible" }],
     },
   ],
+  preview: {
+    select: {
+      title: "title.nl",
+      subtitle: "description.nl",
+    },
+  },
 };

@@ -38,8 +38,8 @@ export default createSchema({
     laatsteOntwikkelingen,
     veelgesteldeVragen,
     cijferVerantwoording,
-    overDitDashboard,
     overRisicoNiveaus,
+    overDitDashboard,
     //objects
     // openGraph,
     lineChart,

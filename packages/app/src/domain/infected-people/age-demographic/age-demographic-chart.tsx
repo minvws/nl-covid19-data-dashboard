@@ -74,6 +74,7 @@ export const AgeDemographicChart = memo<AgeDemographicChartProps>(
         tabIndex={0}
         onKeyUp={(event) => onKeyInput(event)}
         css={css({
+          overflow: 'visible',
           '&:focus': {
             outline: 'none',
           },

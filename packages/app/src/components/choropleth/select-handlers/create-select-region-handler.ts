@@ -9,10 +9,6 @@ export function createSelectRegionHandler(
   pageName: RegioPageName = 'actueel'
 ): RegionSelectionHandler {
   return (context: SafetyRegionProperties) => {
-    if (!context) {
-      return;
-    }
-
     router.push(`/veiligheidsregio/${context.vrcode}/${pageName}`);
   };
 }
