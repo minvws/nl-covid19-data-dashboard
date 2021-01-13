@@ -118,7 +118,7 @@ const ChoroplethMap: <T1, T3>(
     hoverRef,
   } = props;
 
-  const clipPathId = useRef(uniqueId());
+  const clipPathId = uniqueId();
   const timeout = useRef(-1);
   const isTouch = useIsTouchDevice();
 
@@ -145,7 +145,7 @@ const ChoroplethMap: <T1, T3>(
         }
         onClick={createSvgClickHandler(onPathClick, setTooltip, isTouch)}
       >
-        <clipPath id={clipPathId.current}>
+        <clipPath id={clipPathId}>
           <rect
             x={dimensions.marginLeft}
             y={0}
@@ -160,7 +160,7 @@ const ChoroplethMap: <T1, T3>(
         <rect x={0} y={0} width={width} height={height} fill={'none'} rx={14} />
         <g
           transform={`translate(${marginLeft},${marginTop})`}
-          clipPath={`url(#${clipPathId.current})`}
+          clipPath={`url(#${clipPathId})`}
         >
           <MercatorGroup
             data={featureCollection.features}

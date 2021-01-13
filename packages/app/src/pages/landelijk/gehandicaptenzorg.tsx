@@ -27,7 +27,7 @@ const infectedLocationsText = siteText.gehandicaptenzorg_besmette_locaties;
 const positiveTestedPeopleText =
   siteText.gehandicaptenzorg_positief_geteste_personen;
 const locationDeaths = siteText.gehandicaptenzorg_oversterfte;
-const accessibilityGraphsDescriptions = siteText.accessibility.grafieken;
+const graphDescriptions = siteText.accessibility.grafieken;
 
 const DisabilityCare: FCWithLayout<NationalPageProps> = (props) => {
   const { data } = props;
@@ -79,9 +79,7 @@ const DisabilityCare: FCWithLayout<NationalPageProps> = (props) => {
         <LineChartTile
           metadata={{ source: positiveTestedPeopleText.bronnen.rivm }}
           title={positiveTestedPeopleText.linechart_titel}
-          ariaDescription={
-            accessibilityGraphsDescriptions.nl.gehandicaptenzorg_positief_getest
-          }
+          ariaDescription={graphDescriptions.gehandicaptenzorg_positief_getest}
           values={values}
           linesConfig={[
             {
@@ -164,8 +162,7 @@ const DisabilityCare: FCWithLayout<NationalPageProps> = (props) => {
           title={infectedLocationsText.linechart_titel}
           values={values}
           ariaDescription={
-            accessibilityGraphsDescriptions.nl
-              .gehandicaptenzorg_besmette_locaties
+            graphDescriptions.gehandicaptenzorg_besmette_locaties
           }
           linesConfig={[
             {
@@ -208,9 +205,7 @@ const DisabilityCare: FCWithLayout<NationalPageProps> = (props) => {
         <LineChartTile
           metadata={{ source: locationDeaths.bronnen.rivm }}
           title={locationDeaths.linechart_titel}
-          ariaDescription={
-            accessibilityGraphsDescriptions.nl.gehandicaptenzorg_overleden
-          }
+          ariaDescription={graphDescriptions.gehandicaptenzorg_overleden}
           values={values}
           linesConfig={[
             {

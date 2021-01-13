@@ -1934,38 +1934,21 @@
   },
   "accessibility": {
     "grafieken" : {
-      "nl": {
-        "reproductiegetal_verloop": "Dit is een grafiek die het reproductie getal over tijd weergeeft.",
-        "ziekenhuisopnames": "Dit is een grafiek die de ziekenhuisopnames over tijd weergeeft.",
-        "intensive_care_opnames": "Dit is een grafiek die de intensive care opnames over tijd weergeeft.",
-        "verpleeghuiszorg_positief_getest": "Dit is een grafiek die in de verpleeghuizen de postief getesten over tijd weergeeft.",
-        "verpleeghuiszorg_besmette_locaties": "Dit is een grafiek die in de verpleeghuizen de besmette locaties over tijd weergeeft.",
-        "verpleeghuiszorg_overleden_getest": "Dit is een grafiek die in de verpleeghuiszorg overleden getesten over tijd weergeeft.",
-        "gehandicaptenzorg_positief_getest": "Dit is een grafiek die in de gehandicaptenzorg postief getesten over tijd weergeeft.",
-        "gehandicaptenzorg_besmette_locaties": "Dit is een grafiek die besmette locaties over tijd weergeeft.",
-        "gehandicaptenzorg_overleden": "Dit is een grafiek die gehandicaptenzorg overledenen over tijd weergeeft.",
-        "thuiswonende_ouderen_besmettingen": "Dit is een grafiek die bij de thuiswonende ouderen besmettingen over tijd weergeeft.",
-        "thuiswonende_ouderen_overleden": "Dit is een grafiek die bij de thuiswonende ouderen overleden over tijd weergeeft.",
-        "rioolwater_virusdeeltjes": "Dit is een grafiek die in het rioolwater virusdeeltjes over tijd weergeeft.",
-        "verdenkingen_huisartsen": "Dit is een grafiek die verdekingen van de huisartsen over tijd weergeeft."
-      },
-      "vr": {
-        "ziekenhuis_opnames": "Dit is een grafiek die ziekenhuis opnames over tijd weergeeft.",
-        "verpleeghuiszorg_positief": "Dit is een grafiek die in de verpleeghuiszorg postief getesten over tijd weergeeft.",
-        "verpleeghuiszorg_besmette_locaties": "Dit is een grafiek die in de verpleeghuiszorg besmette locaties over tijd weergeeft.",
-        "verpleeghuiszorg_overleden": "Dit is een grafiek die in de verpleeghuiszorg overledenen over tijd weergeeft.",
-        "gehandicaptenzorg_positief_getest": "Dit is een grafiek die in de gehandicaptenzorg positief getesten over tijd weergeeft.",
-        "gehandicaptenzorg_besmette_locaties": "Dit is een grafiek die in de gehandicaptenzorg besmette locaties over tijd weergeeft.",
-        "gehandicaptenzorg__overleden": "Dit is een grafiek die in de gehandicaptenzorg overledenen over tijd weergeeft.",
-        "thuiswonende_ouderen_besmettingen": "Dit is een grafiek die bij de thuiswonende ouderen besmettingen over tijd weergeeft.",
-        "thuiswonende_ouderen_overleden": "Dit is een grafiek die bij de thuiswonende ouderen overledenen over tijd weergeeft.",
-        "rioolwater_virusdeeltjes": "Dit is een grafiek die in het rioolwater virusdeeltjes over tijd weergeeft.",
-        "rioolwater_meetwaarde": "Dit is een grafiek die in het rioolwater de meetwaarde over tijd weergeeft."
-      },
-      "gm": {
-        "ziekenhuis_opnames": "Dit is een grafiek die de ziekenhuis opnames over tijd weergeeft.",
-        "rioolwater_meetwaarde": "Dit is een grafiek die in het rioolwater de meetwaarde over tijd weergeeft."
-      }
+      "reproductiegetal_verloop": "Dit is een grafiek die het reproductie getal over tijd weergeeft.",
+      "ziekenhuisopnames": "Dit is een grafiek die de ziekenhuisopnames over tijd weergeeft.",
+      "intensive_care_opnames": "Dit is een grafiek die de intensive care opnames over tijd weergeeft.",
+      "verpleeghuiszorg_positief_getest": "Dit is een grafiek die in de verpleeghuizen de postief getesten over tijd weergeeft.",
+      "verpleeghuiszorg_besmette_locaties": "Dit is een grafiek die in de verpleeghuizen de besmette locaties over tijd weergeeft.",
+      "verpleeghuiszorg_overleden_getest": "Dit is een grafiek die in de verpleeghuiszorg overleden getesten over tijd weergeeft.",
+      "gehandicaptenzorg_positief_getest": "Dit is een grafiek die in de gehandicaptenzorg postief getesten over tijd weergeeft.",
+      "gehandicaptenzorg_besmette_locaties": "Dit is een grafiek die besmette locaties over tijd weergeeft.",
+      "gehandicaptenzorg_overleden": "Dit is een grafiek die gehandicaptenzorg overledenen over tijd weergeeft.",
+      "thuiswonende_ouderen_besmettingen": "Dit is een grafiek die bij de thuiswonende ouderen besmettingen over tijd weergeeft.",
+      "thuiswonende_ouderen_overleden": "Dit is een grafiek die bij de thuiswonende ouderen overleden over tijd weergeeft.",
+      "rioolwater_virusdeeltjes": "Dit is een grafiek die in het rioolwater virusdeeltjes over tijd weergeeft.",
+      "verdenkingen_huisartsen": "Dit is een grafiek die verdekingen van de huisartsen over tijd weergeeft.",
+      "ziekenhuis_opnames": "Dit is een grafiek die de ziekenhuis opnames over tijd weergeeft.",
+      "rioolwater_meetwaarde": "Dit is een grafiek die in het rioolwater de meetwaarde over tijd weergeeft."
     }
   }
 }

@@ -31,7 +31,7 @@ import {
 } from '~/utils/sewer-water/safety-region-sewer-water.util';
 
 const text = siteText.veiligheidsregio_rioolwater_metingen;
-const accessibilityGraphsDescriptions = siteText.accessibility.grafieken;
+const graphDescriptions = siteText.accessibility.grafieken;
 
 const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
   const { data, safetyRegionName } = props;
@@ -130,9 +130,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
         {lineChartData && (
           <ChartTileWithTimeframe
             title={text.linechart_titel}
-            ariaDescription={
-              accessibilityGraphsDescriptions.vr.rioolwater_meetwaarde
-            }
+            ariaDescription={graphDescriptions.rioolwater_meetwaarde}
             metadata={{ source: text.bronnen.rivm }}
             timeframeOptions={['all', '5weeks']}
             timeframeInitialValue="all"
@@ -176,9 +174,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
             title={replaceVariablesInText(text.bar_chart_title, {
               safetyRegion: safetyRegionName,
             })}
-            ariaDescription={
-              accessibilityGraphsDescriptions.vr.rioolwater_meetwaarde
-            }
+            ariaDescription={graphDescriptions.rioolwater_meetwaarde}
             metadata={{
               date: [
                 sewerAverages.last_value.date_start_unix,

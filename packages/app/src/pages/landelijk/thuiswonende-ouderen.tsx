@@ -22,7 +22,7 @@ import {
 } from '~/static-props/nl-data';
 
 const text = siteText.thuiswonende_ouderen;
-const accessibilityGraphsDescriptions = siteText.accessibility.grafieken;
+const graphDescriptions = siteText.accessibility.grafieken;
 
 const ElderlyAtHomeNationalPage: FCWithLayout<NationalPageProps> = (props) => {
   const router = useRouter();
@@ -88,9 +88,7 @@ const ElderlyAtHomeNationalPage: FCWithLayout<NationalPageProps> = (props) => {
           timeframeOptions={['all', '5weeks']}
           title={text.section_positive_tested.line_chart_daily_title}
           values={elderlyAtHomeData.values}
-          ariaDescription={
-            accessibilityGraphsDescriptions.nl.thuiswonende_ouderen_besmettingen
-          }
+          ariaDescription={graphDescriptions.thuiswonende_ouderen_besmettingen}
           linesConfig={[
             {
               metricProperty: 'positive_tested_daily',
@@ -158,9 +156,7 @@ const ElderlyAtHomeNationalPage: FCWithLayout<NationalPageProps> = (props) => {
           timeframeOptions={['all', '5weeks']}
           title={text.section_deceased.line_chart_daily_title}
           values={elderlyAtHomeData.values}
-          ariaDescription={
-            accessibilityGraphsDescriptions.nl.thuiswonende_ouderen_overleden
-          }
+          ariaDescription={graphDescriptions.thuiswonende_ouderen_overleden}
           linesConfig={[
             {
               metricProperty: 'deceased_daily',

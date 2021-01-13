@@ -17,7 +17,7 @@ import {
 } from '~/static-props/nl-data';
 
 const text = siteText.verdenkingen_huisartsen;
-const accessibilityGraphsDescriptions = siteText.accessibility.grafieken;
+const graphDescriptions = siteText.accessibility.grafieken;
 
 const SuspectedPatients: FCWithLayout<NationalPageProps> = (props) => {
   const { data } = props;
@@ -79,9 +79,7 @@ const SuspectedPatients: FCWithLayout<NationalPageProps> = (props) => {
         <ChartTileWithTimeframe
           title={text.linechart_titel}
           metadata={{ source: text.bronnen.nivel }}
-          ariaDescription={
-            accessibilityGraphsDescriptions.nl.verdenkingen_huisartsen
-          }
+          ariaDescription={graphDescriptions.verdenkingen_huisartsen}
           timeframeOptions={['all', '5weeks']}
         >
           {(timeframe) => (

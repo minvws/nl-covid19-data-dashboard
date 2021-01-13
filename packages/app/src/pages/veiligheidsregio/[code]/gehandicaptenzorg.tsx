@@ -24,7 +24,7 @@ const locationsText =
 const positiveTestPeopleText =
   siteText.veiligheidsregio_gehandicaptenzorg_positief_geteste_personen;
 const mortalityText = siteText.veiligheidsregio_gehandicaptenzorg_oversterfte;
-const accessibilityGraphsDescriptions = siteText.accessibility.grafieken;
+const graphDescriptions = siteText.accessibility.grafieken;
 
 const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
   const { data, safetyRegionName } = props;
@@ -86,9 +86,7 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
         <LineChartTile
           metadata={{ source: positiveTestPeopleText.bronnen.rivm }}
           title={positiveTestPeopleText.linechart_titel}
-          ariaDescription={
-            accessibilityGraphsDescriptions.vr.gehandicaptenzorg_positief_getest
-          }
+          ariaDescription={graphDescriptions.gehandicaptenzorg_positief_getest}
           values={values}
           linesConfig={[
             {
@@ -149,8 +147,7 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
             title={locationsText.linechart_titel}
             values={values}
             ariaDescription={
-              accessibilityGraphsDescriptions.vr
-                .gehandicaptenzorg_besmette_locaties
+              graphDescriptions.gehandicaptenzorg_besmette_locaties
             }
             linesConfig={[
               {
@@ -200,9 +197,7 @@ const DisabilityCare: FCWithLayout<ISafetyRegionData> = (props) => {
           metadata={{ source: mortalityText.bronnen.rivm }}
           title={mortalityText.linechart_titel}
           values={values}
-          ariaDescription={
-            accessibilityGraphsDescriptions.vr.gehandicaptenzorg__overleden
-          }
+          ariaDescription={graphDescriptions.gehandicaptenzorg_overleden}
           linesConfig={[
             {
               metricProperty: 'deceased_daily',

@@ -18,7 +18,7 @@ import {
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const text = siteText.veiligheidsregio_thuiswonende_ouderen;
-const accessibilityGraphsDescriptions = siteText.accessibility.grafieken;
+const graphDescriptions = siteText.accessibility.grafieken;
 
 const ElderlyAtHomeRegionalPage: FCWithLayout<ISafetyRegionData> = (props) => {
   const { safetyRegionName, data } = props;
@@ -95,9 +95,7 @@ const ElderlyAtHomeRegionalPage: FCWithLayout<ISafetyRegionData> = (props) => {
           timeframeOptions={['all', '5weeks']}
           title={text.section_positive_tested.line_chart_daily_title}
           values={elderlyAtHomeData.values}
-          ariaDescription={
-            accessibilityGraphsDescriptions.vr.thuiswonende_ouderen_besmettingen
-          }
+          ariaDescription={graphDescriptions.thuiswonende_ouderen_besmettingen}
           linesConfig={[
             {
               metricProperty: 'positive_tested_daily',
@@ -143,9 +141,7 @@ const ElderlyAtHomeRegionalPage: FCWithLayout<ISafetyRegionData> = (props) => {
         <LineChartTile
           timeframeOptions={['all', '5weeks']}
           title={text.section_deceased.line_chart_daily_title}
-          ariaDescription={
-            accessibilityGraphsDescriptions.vr.thuiswonende_ouderen_overleden
-          }
+          ariaDescription={graphDescriptions.thuiswonende_ouderen_overleden}
           values={elderlyAtHomeData.values}
           linesConfig={[
             {

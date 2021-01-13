@@ -21,7 +21,7 @@ import {
 } from '~/static-props/nl-data';
 
 const text = siteText.rioolwater_metingen;
-const accessibilityGraphsDescriptions = siteText.accessibility.grafieken;
+const graphDescriptions = siteText.accessibility.grafieken;
 
 const SewerWater: FCWithLayout<NationalPageProps> = ({ data }) => {
   const sewerAverages = data.sewer;
@@ -96,9 +96,7 @@ const SewerWater: FCWithLayout<NationalPageProps> = ({ data }) => {
         <LineChartTile
           title={text.linechart_titel}
           timeframeOptions={['all', '5weeks']}
-          ariaDescription={
-            accessibilityGraphsDescriptions.nl.rioolwater_virusdeeltjes
-          }
+          ariaDescription={graphDescriptions.rioolwater_virusdeeltjes}
           values={sewerAverages.values}
           linesConfig={[
             {
