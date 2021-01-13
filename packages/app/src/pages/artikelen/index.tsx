@@ -64,8 +64,6 @@ export async function getStaticProps(): Promise<StaticProps> {
 const Artikelen: FCWithLayout<ArtikelenProps> = (props) => {
   const { articles } = props;
 
-  console.log(articles);
-
   return (
     <>
       <h1>Artikelen!</h1>
