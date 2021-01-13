@@ -23,7 +23,7 @@ import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import {
   createGetChoroplethData,
-  createGetNlData,
+  getNlData,
   getLastGeneratedDate,
   getText,
 } from '~/static-props/data';
@@ -43,7 +43,9 @@ export const getStaticProps = createGetStaticProps(
     }),
     gm: ({ tested_overall }) => ({ tested_overall }),
   }),
-  createGetNlData((data) => {
+  () => {
+    const data = getNlData();
+
     for (const metric of Object.values(data)) {
       if (typeof metric === 'object' && metric !== null) {
         for (const [metricProperty, metricValue] of Object.entries(metric)) {
@@ -57,7 +59,7 @@ export const getStaticProps = createGetStaticProps(
     }
 
     return data;
-  })
+  }
 );
 
 const Home: FCWithLayout<typeof getStaticProps> = (props) => {

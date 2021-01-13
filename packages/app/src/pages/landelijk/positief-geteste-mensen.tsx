@@ -30,7 +30,7 @@ import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import {
   createGetChoroplethData,
-  createGetNlData,
+  getNlData,
   getLastGeneratedDate,
   getText,
 } from '~/static-props/data';
@@ -46,7 +46,7 @@ import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   getText,
-  createGetNlData(),
+  getNlData,
   createGetChoroplethData({
     gm: ({ tested_overall }) => ({ tested_overall }),
     vr: ({ tested_overall }) => ({ tested_overall }),

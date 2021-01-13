@@ -23,7 +23,7 @@ import { getNationalLayout } from '~/domain/layout/national-layout';
 import siteText from '~/locale/index';
 import {
   createGetChoroplethData,
-  createGetNlData,
+  getNlData,
   getLastGeneratedDate,
 } from '~/static-props/data';
 import { createGetStaticProps } from '~/static-props/utils/create-get-static-props';
@@ -32,7 +32,7 @@ const text = siteText.ziekenhuisopnames_per_dag;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  createGetNlData(),
+  getNlData,
   createGetChoroplethData({
     vr: ({ hospital_nice }) => ({ hospital_nice }),
     gm: ({ hospital_nice }) => ({ hospital_nice }),

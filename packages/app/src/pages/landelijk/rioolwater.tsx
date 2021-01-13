@@ -17,7 +17,7 @@ import { getNationalLayout } from '~/domain/layout/national-layout';
 import siteText from '~/locale/index';
 import {
   createGetChoroplethData,
-  createGetNlData,
+  getNlData,
   getLastGeneratedDate,
 } from '~/static-props/data';
 import { createGetStaticProps } from '~/static-props/utils/create-get-static-props';
@@ -26,7 +26,7 @@ const text = siteText.rioolwater_metingen;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  createGetNlData(),
+  getNlData,
   createGetChoroplethData({
     vr: ({ sewer }) => ({ sewer }),
   })

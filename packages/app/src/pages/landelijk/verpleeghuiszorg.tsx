@@ -20,7 +20,7 @@ import { getNationalLayout } from '~/domain/layout/national-layout';
 import siteText from '~/locale/index';
 import {
   createGetChoroplethData,
-  createGetNlData,
+  getNlData,
   getLastGeneratedDate,
 } from '~/static-props/data';
 import { createGetStaticProps } from '~/static-props/utils/create-get-static-props';
@@ -32,7 +32,7 @@ const locationDeaths = siteText.verpleeghuis_oversterfte;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  createGetNlData(),
+  getNlData,
   createGetChoroplethData({
     vr: ({ nursing_home }) => ({ nursing_home }),
   })

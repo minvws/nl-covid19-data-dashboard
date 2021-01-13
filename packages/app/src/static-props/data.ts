@@ -25,7 +25,7 @@ import { loadJsonFromFile } from './utils/load-json-from-file';
  *     export const getStaticProps = createGetStaticProps(
  *       getLastGeneratedDate,
  *       getVrData,
- *       getChoroplethData({
+ *       createGetChoroplethData({
  *         gm: x => ({ y: x.hospital_nice})
  *       })
  *     )({});
@@ -64,14 +64,13 @@ export async function getText() {
   };
 }
 
-export function createGetNlData<T = National>(format?: (data: National) => T) {
-  return () => {
-    const nlClone = JSON.parse(JSON.stringify(json.nl)) as National;
+export function getNlData() {
+  // clone data to prevent mutation of the original
+  const data = JSON.parse(JSON.stringify(json.nl)) as National;
 
-    sortNationalTimeSeriesInDataInPlace(nlClone);
+  sortNationalTimeSeriesInDataInPlace(data);
 
-    return { data: format ? format(nlClone) : nlClone };
-  };
+  return { data };
 }
 
 export function getVrData(context: GetStaticPropsContext) {
