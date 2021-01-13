@@ -11,7 +11,6 @@
         "janssen",
         "sanofi",
         "date_of_insertion_unix",
-        "total_installation_count",
         "date_unix"
       ],
       "additionalProperties": false,
@@ -32,9 +31,6 @@
           "type": "number"
         },
         "sanofi": {
-          "type": "number"
-        },
-        "total": {
           "type": "number"
         },
         "date_of_insertion_unix": {
