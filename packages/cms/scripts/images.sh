@@ -8,13 +8,10 @@ sanity dataset export development development.tar.gz --overwrite
 tar -xzf *.gz 
 mv development-export* export
 
-cd export/images
-
 # Rename sha1-widthxheight.extension to sha1.extension
+cd export/images
 for f in *; do mv "$f" "`echo $f | sed s/\-[0-9]*x[0-9]*//g`"; done;
-# Output resized images using imagemagick: $f.ext => $f-width.ext.
-# Demo = resize to 300px wide.
-# for f in *; do convert "$f" -resize 300x "`echo $f | sed 's|\.|\-300\.|g'`"; done;
+
 # Put images in the public images folder of application.
 mkdir ../../../app/public/sanity
 mv * ../../../app/public/sanity
