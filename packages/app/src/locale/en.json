@@ -139,11 +139,11 @@
       "text": "NICE via RIVM"
     },
     "titel": "Hospital admissions per day",
-    "pagina_toelichting": "Number of confirmed COVID-19 cases who are admitted to a hospital per day.\n\nPlease note: as of 17 December 2020, data on hospital admissions is obtained from a new source.",
+    "pagina_toelichting": "An increase COVID-19 patient admissions could have as consequence that hospitals will become full and can therefore not deliver care. This page shows the number of hospital beds (excl. ICU) that are occupied by COVID-19 patients  and the daily number of patients admitted to hospital. This is illustrated nationally and regionally, based on a variety of sources.\n\nPlease note: From14th January the three daily average will not be displayed anymore. This will be replaced by the number of hospital admissions that are reported on one single day. The graph will furthermore show the progression of hospital admissions, sorted on the day that people have been admitted.\n",
     "barscale_titel": "Hospital admissions per day",
-    "extra_uitleg": "Number of confirmed COVID-19 cases who are admitted to a hospital (excluding intensive care) per day. This number is an average for daily admissions over the past 3 days.\n\nNote: Although hospitals try to register COVID-19 patients promptly, it is likely that the numbers of the last days are yet incomplete.",
+    "extra_uitleg": "Number of people with COVID-19 admitted to hospital (excl. ICU) on a daily basis. This number entails the amount of hospital admissions reported on one day. These could include admissions from previous days, because the admissions are not necessarily reported on the day of admission. This figure is deemed to provide a good reflection of the current developments, as recordings of one day of admissions are illustrated.",
     "map_titel": "Distribution of hospital admissions in the Netherlands",
-    "map_toelichting": "These maps show the daily hospital admissions in the Netherlands.",
+    "map_toelichting": "These maps show an overview of hospital admissions in the Netherlands. It shows hospital admissions that are reported to Stichting NICE on one day.",
     "linechart_titel": "Progression in hospital admissions over time",
     "barscale_screenreader_text": "{{value}} hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
     "chloropleth_legenda": {
@@ -179,20 +179,20 @@
       "title": "Hospital bed occupancy over time",
       "description": "This graph shows the progression of the number of non-ICU hospital beds occupied by COVID-19 patients."
     },
-    "linechart_description": "",
+    "linechart_description": "This graph shows the progression of hospital admissions based on the day that people have been admitted. Because registration of hospital admissions can take a few days, it is likely that the numbers of the last days are yet incomplete.",
     "metadata": {
       "title": "Hospital admissions | Dashboard Coronavirus | Government.nl",
       "description": "Number of confirmed COVID-19 cases who are admitted to a hospital in the Netherlands."
     },
     "titel_sidebar": "Hospital admissions",
-    "titel_kpi": "Average number of hospital admissions in 3 days",
+    "titel_kpi": "Number of hospital admissions reported on one day. ",
     "reference": {
       "href": "/verantwoording#hospitals",
       "text": "Read more in 'explanation of the data presented'."
     },
     "tijdelijk_onbeschikbaar_titel": "",
     "tijdelijk_onbeschikbaar": "",
-    "kpi_titel": "Average number of hospital admissions in 3 days"
+    "kpi_titel": "Number of hospital admissions reported on one day. "
   },
   "positief_geteste_personen": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -688,25 +688,25 @@
   "veiligheidsregio_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Hospital admissions",
     "titel": "Hospital admissions per day of residents in {{safetyRegion}}",
-    "pagina_toelichting": "Number of confirmed COVID-19 cases who are admitted to a hospital per day.",
+    "pagina_toelichting": "An increase COVID-19 patient admissions could have as consequence that hospitals will become full and can therefore not deliver care. This page shows the number of hospital beds (excl. ICU) that are occupied by COVID-19 patients  and the daily number of patients admitted to hospital. This is illustrated nationally and regionally, based on a variety of sources.\n\nPlease note: From14th January the three daily average will not be displayed anymore. This will be replaced by the number of hospital admissions that are reported on one single day. The graph will furthermore show the progression of hospital admissions, sorted on the day that people have been admitted.\n",
     "datums": "Calculated: {{dateOfReport}}. Updated daily.",
     "screen_reader_graph_content": "{{value}} admissions.",
     "barscale_titel": "Hospital admissions per day",
-    "extra_uitleg": "Number of confirmed COVID-19 cases from this safety region who are admitted to a hospital per day. This number is an average for daily admissions over the past 3 days.",
+    "extra_uitleg": "Number of people from this safety region with COVID-19 admitted to hospital (excl. ICU) on a daily basis. This number entails the amount of hospital admissions reported on one day. These could include admissions from previous days, because the admissions are not necessarily reported on the day of admission. This figure is deemed to provide a good reflection of the current developments, as recordings of one day of admissions are illustrated.",
     "map_titel": "Distribution of hospital admissions in {{safetyRegion}}",
-    "map_toelichting": "These maps show the daily hospital admissions in the Netherlands.",
+    "map_toelichting": "These maps show an overview of hospital admissions in the Netherlands. It shows hospital admissions that are reported to Stichting NICE on one day.",
     "linechart_titel": "Progression in hospital admissions over time",
     "barscale_screenreader_text": "{{value}} hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
     "bron": {
       "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
       "text": "NICE via RIVM"
     },
-    "linechart_description": "",
+    "linechart_description": "This graph shows the progression of hospital admissions based on the day that people have been admitted. Because registration of hospital admissions can take a few days, it is likely that the numbers of the last days are yet incomplete.",
     "metadata": {
       "title": "Hospital admissions residents {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
       "description": "Confirmed cases of COVID-19 in safety region {{safetyRegionName}} who are admitted to a hospital."
     },
-    "titel_kpi": "Average number of hospital admissions in 3 days",
+    "titel_kpi": "Number of hospital admissions reported on one day. ",
     "reference": {
       "href": "/verantwoording#hospitals",
       "text": "Read more in 'explanation of the data presented'."
@@ -720,7 +720,7 @@
     },
     "tijdelijk_onbeschikbaar_titel": "",
     "tijdelijk_onbeschikbaar": "",
-    "kpi_titel": "Average number of hospital admissions in 3 days"
+    "kpi_titel": "Number of hospital admissions reported on one day. "
   },
   "veiligheidsregio_positief_geteste_personen": {
     "titel_sidebar": "Confirmed cases",
@@ -830,25 +830,25 @@
   "gemeente_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Hospital admissions",
     "titel": "Hospital admissions per day of residents in {{municipality}}",
-    "pagina_toelichting": "Number of confirmed COVID-19 cases who are admitted to a hospital per day.",
+    "pagina_toelichting": "An increase COVID-19 patient admissions could have as consequence that hospitals will become full and can therefore not deliver care. This page shows the number of hospital beds (excl. ICU) that are occupied by COVID-19 patients  and the daily number of patients admitted to hospital. This is illustrated nationally and regionally, based on a variety of sources.\n\nPlease note: From14th January the three daily average will not be displayed anymore. This will be replaced by the number of hospital admissions that are reported on one single day. The graph will furthermore show the progression of hospital admissions, sorted on the day that people have been admitted.",
     "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
     "screen_reader_graph_content": "{{value}} admissions.",
     "barscale_titel": "Hospital admissions per day",
-    "extra_uitleg": "Number of confirmed COVID-19 cases from this municipality who are admitted to a hospital per day. This number is an average for daily admissions over the past 3 days.",
+    "extra_uitleg": "Number of people from this municipality with COVID-19 admitted to hospital (excl. ICU) on a daily basis. This number entails the amount of hospital admissions reported on one day. These could include admissions from previous days, because the admissions are not necessarily reported on the day of admission. This figure is deemed to provide a good reflection of the current developments, as recordings of one day of admissions are illustrated.",
     "map_titel": "Distribution of hospital admissions in safety region of {{municipality}}",
-    "map_toelichting": "These maps show the daily hospital admissions in the Netherlands.",
+    "map_toelichting": "These maps show an overview of hospital admissions in the Netherlands. It shows hospital admissions that are reported to Stichting NICE on one day.",
     "linechart_titel": "Progression in hospital admissions over time",
     "barscale_screenreader_text": "{{value}} hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
     "bron": {
       "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
       "text": "NICE via RIVM"
     },
-    "linechart_description": "",
+    "linechart_description": "This graph shows the progression of hospital admissions based on the day that people have been admitted. Because registration of hospital admissions can take a few days, it is likely that the numbers of the last days are yet incomplete.",
     "metadata": {
       "title": "Hospital admissions {{municipalityName}} | Dashboard Coronavirus | Government.nl",
       "description": "Overview of the number of confirmed COVID-19 cases in {{municipalityName}} who are admitted to a hospital per day."
     },
-    "titel_kpi": "Average number of hospital admissions in 3 days",
+    "titel_kpi": "Number of hospital admissions reported on one day. ",
     "reference": {
       "href": "/verantwoording#hospitals",
       "text": "Read more in 'explanation of the data presented'."
@@ -862,7 +862,7 @@
     },
     "tijdelijk_onbeschikbaar_titel": "",
     "tijdelijk_onbeschikbaar": "",
-    "kpi_titel": "Average number of hospital admissions in 3 days"
+    "kpi_titel": "Number of hospital admissions reported on one day. "
   },
   "gemeente_positief_geteste_personen": {
     "titel_sidebar": "Confirmed cases",
