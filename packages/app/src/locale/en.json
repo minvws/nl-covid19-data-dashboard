@@ -1901,8 +1901,8 @@
       "landelijk": {
         "toelichting_risiconiveau": "",
         "extratoelichting": {
-          "titel": "The Netherlands in lockdown",
-          "toelichting": "Coronavirus is spreading rapidly. To ensure healthcare services remain available to all, we must limit our contact with others. The national measures apply from 15 December 2020 until at least 19 January 2021."
+          "titel": "The Netherlands to remain in lockdown",
+          "toelichting": "The number of infected people is falling slightly. This shows that the lockdown is starting to work. To continue this decline, we will remain in lockdown until at least 9 February inclusive."
         }
       }
     },
@@ -1926,13 +1926,13 @@
       "41_sport_34": "No more than 2 people, staying 1.5 metres apart at all times. This does not apply to children under 18 and elite athletes.",
       "41_sport_35": "All indoor sports venues are closed.",
       "41_sport_36": "No competitions or group lessons. This does not apply to elite athletes.",
-      "41_ov_37": "Stay home as much as possible. Public transport for essential travel only.",
-      "41_ov_38": "Do not travel abroad. Do not book any trips abroad until mid-March.",
-      "41_onderwijs_39": "Remote and online teaching in primary, secondary, secondary vocational and higher education and for all other forms of training and educational activities. Exemptions include exams, practical lessons and education for vulnerable pupils. These measures apply from 16 December 2020 until at least 17 January 2021.",
-      "41_onderwijs_40": "Childcare centres are closed. These measures apply from 16 December 2020 until at least 17 January 2021.",
-      "41_onderwijs_41": "Emergency childcare is available for children of key workers and for vulnerable children. These measures apply from 16 December 2020 until at least 17 January 2021.",
+      "41_ov_37": "Stay home as much as possible.",
+      "41_ov_38": "Stay in The Netherlands and do not book trips abroad until 31 March.",
+      "41_onderwijs_39": "Remote and online teaching in primary, secondary, secondary vocational and higher education and for all other forms of training and educational activities. Exemptions include exams, practical lessons and education for vulnerable pupils. These measures apply until 7 February. It will be decided at a later moment if primary schools can reopen as from 25 January.",
+      "41_onderwijs_40": "Childcare centres are closed. These measures apply until 7 February. It will be decided at a later moment if childcare centres can reopen as from 25 January.",
+      "41_onderwijs_41": "Emergency childcare is available for children of key workers and for vulnerable children.",
       "41_algemeen_42": "COVID-19 symptoms? Stay at home.",
-      "0_algemeen_42": "COVID-19 symptoms? Stay at home.",
+      "0_algemeen_42": "COVID-19 symptoms? Quarantine at home.",
       "0_algemeen_43": "COVID-19 symptoms? Get tested.",
       "0_algemeen_44": "COVID-19 symptoms? Do not receive any visitors.",
       "41_ov_45": "Public transport for essential travel only."
