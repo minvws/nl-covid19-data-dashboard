@@ -172,9 +172,9 @@ function SafetyRegionLayout(
                         data={data}
                         scope="vr"
                         metricName="hospital_nice"
-                        metricProperty="admissions_moving_average"
+                        metricProperty="admissions_on_date_of_reporting"
                         localeTextKey="veiligheidsregio_ziekenhuisopnames_per_dag"
-                        differenceKey="hospital_nice__admissions_moving_average"
+                        differenceKey="hospital_nice__admissions_on_date_of_reporting"
                       />
                     </MetricMenuItemLink>
                   </CategoryMenu>

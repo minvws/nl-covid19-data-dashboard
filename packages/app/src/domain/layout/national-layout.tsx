@@ -203,9 +203,9 @@ function NationalLayout(props: NationalLayoutProps) {
                     data={data}
                     scope="nl"
                     metricName="hospital_nice"
-                    metricProperty="admissions_moving_average"
+                    metricProperty="admissions_on_date_of_reporting"
                     localeTextKey="ziekenhuisopnames_per_dag"
-                    differenceKey="hospital_nice__admissions_moving_average"
+                    differenceKey="hospital_nice__admissions_on_date_of_reporting"
                     showBarScale={true}
                   />
                 </MetricMenuItemLink>

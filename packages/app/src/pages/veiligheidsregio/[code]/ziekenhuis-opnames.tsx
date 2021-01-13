@@ -73,9 +73,9 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
           >
             <KpiValue
               data-cy="hospital_moving_avg_per_region"
-              absolute={lastValue.admissions_moving_average}
+              absolute={lastValue.admissions_on_date_of_reporting}
               difference={
-                data.difference.hospital_nice__admissions_moving_average
+                data.difference.hospital_nice__admissions_on_date_of_reporting
               }
             />
           </KpiTile>
@@ -88,7 +88,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
           description={text.map_toelichting}
           legend={{
             thresholds:
-              municipalThresholds.hospital_nice.admissions_moving_average,
+              municipalThresholds.hospital_nice.admissions_on_date_of_reporting,
             title: siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel,
           }}
           metadata={{
@@ -100,7 +100,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
             selected={selectedMunicipalCode}
             highlightSelection={false}
             metricName="hospital_nice"
-            metricProperty="admissions_moving_average"
+            metricProperty="admissions_on_date_of_reporting"
             tooltipContent={createMunicipalHospitalAdmissionsTooltip(
               createSelectMunicipalHandler(router, 'ziekenhuis-opnames')
             )}
@@ -119,7 +119,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
             values={data.hospital_nice.values}
             linesConfig={[
               {
-                metricProperty: 'admissions_moving_average',
+                metricProperty: 'admissions_on_date_of_reporting',
               },
             ]}
           />
