@@ -1942,7 +1942,7 @@
     "titel": "Maatregelen",
     "titel_sidebar": "Maatregelen",
     "subtitel_sidebar": "Er gelden landelijke maatregelen",
-    "tabel_titel": "Maatregelen van Lockdown"
+    "tabel_titel": "Maatregelen van de lockdown"
   },
   "veiligheidsregio_maatregelen": {
     "titel_sidebar": "Maatregelen",
@@ -1958,7 +1958,7 @@
       "description": "Overzicht van de corona maatregelen in de veiligheidsregio {{safetyRegionName}}."
     },
     "subtitel_sidebar": "Er gelden landelijke maatregelen",
-    "tabel_titel": "Maatregelen van Lockdown"
+    "tabel_titel": "Maatregelen van de lockdown"
   },
   "veiligheidsregio_maatregelen_urls": {
     "VR01": "http://www.veiligheidsregiogroningen.nl/",

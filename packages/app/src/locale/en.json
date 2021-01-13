@@ -1958,7 +1958,7 @@
       "description": "Overview of the corona measures in the safety region {{safetyRegionName}}."
     },
     "subtitel_sidebar": "There are national measures",
-    "tabel_titel": ""
+    "tabel_titel": "Current lockdown measures"
   },
   "veiligheidsregio_maatregelen_urls": {
     "VR01": "http://www.veiligheidsregiogroningen.nl/",
