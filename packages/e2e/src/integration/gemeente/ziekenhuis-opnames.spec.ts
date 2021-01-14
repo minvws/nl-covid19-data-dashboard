@@ -1,5 +1,5 @@
 import { MunicipalContext } from '~/integration/types';
-import { formatNumber } from '@corona-dashboard/app/utils/formatNumber';
+import { formatNumber } from '@corona-dashboard/common';
 
 context('Gemeente - Ziekenhuis opnames', () => {
   before(() => {

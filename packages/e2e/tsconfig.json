@@ -13,7 +13,6 @@
     "types": ["cypress", "node"],
     "sourceMap": true
   },
-  "references": [{ "path": "../app" }],
-  // "include": ["../app/src/types/data.d.ts", "**/*.ts"]
+  "references": [{ "path": "../common" }],
   "include": ["src"]
 }

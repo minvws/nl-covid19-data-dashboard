@@ -1,5 +1,5 @@
 import { NationalContext } from '~/integration/types';
-import { formatNumber } from '@corona-dashboard/app/utils/formatNumber';
+import { formatNumber } from '@corona-dashboard/common';
 import { getLastFilledValue } from '@corona-dashboard/app/utils/get-last-filled-value';
 
 context('Landelijk - Besmettelijke mensen', () => {

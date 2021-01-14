@@ -1,8 +1,5 @@
 import { RegionalContext } from '~/integration/types';
-import {
-  formatNumber,
-  formatPercentage,
-} from '@corona-dashboard/app/utils/formatNumber';
+import { formatNumber, formatPercentage } from '@corona-dashboard/common';
 
 context('Regionaal - Gehandicaptenzorg', () => {
   before(() => {

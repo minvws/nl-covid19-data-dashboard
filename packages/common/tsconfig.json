@@ -12,10 +12,9 @@
     "outDir": "./dist",
     "rootDir": "./src",
     "composite": true,
-    // "tsBuildInfoFile": "../../.build-cache/common.tsbuildinfo",
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true
   },
-  "include": ["src/**/*.ts", "**/*.tsx", "**/*.js"]
+  "include": ["src"]
 }
