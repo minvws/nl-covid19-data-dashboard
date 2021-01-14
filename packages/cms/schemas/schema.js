@@ -32,7 +32,7 @@ export default createSchema({
   // Then proceed to concatenate our document type
   // to the ones provided by any plugins that are installed
   types: schemaTypes.concat([
-    //documents
+    /* DOCUMENTS */
     // siteSettings,
     artikel,
     laatsteOntwikkelingen,
@@ -40,11 +40,11 @@ export default createSchema({
     cijferVerantwoording,
     overRisicoNiveaus,
     overDitDashboard,
-    //objects
+    /* OBJECTS */
     // openGraph,
     lineChart,
     collapsible,
-    //locale helpers
+    /* LOCALE HELPERS */
     localeString,
     localeBlock,
     localeRichContentBlock,

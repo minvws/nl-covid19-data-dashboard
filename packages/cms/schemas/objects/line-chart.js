@@ -1,3 +1,9 @@
+/**
+ * This object is used to render line charts within content blocks.
+ * 
+ * @ToDo: More fields / configuration for this is needed.
+ */
+
 export default {
   title: "Lijngrafiek",
   name: "lineChart",

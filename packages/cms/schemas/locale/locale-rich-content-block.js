@@ -7,7 +7,7 @@ const supportedLanguages = [
 export default {
   name: "localeRichContentBlock",
   type: "object",
-  title: "Locale Rich Content Block",
+  title: "Content",
   fields: supportedLanguages.map((lang) => ({
     title: lang.title,
     name: lang.id,
