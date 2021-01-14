@@ -4,7 +4,6 @@ interface LoaderProps {
   src: string;
   width: number;
 }
-
 export interface SanityImageProps {
   assetId: string;
   extension: string;
@@ -19,6 +18,7 @@ export function imageLoader(props: LoaderProps) {
   const { src, width } = props;
   const filename = src.split('.')[0];
   const extension = src.split('.')[1];
+  const url = `cms/${filename}-${findClosestSize(width)}.${extension}`;
 
-  return `cms/${filename}-${findClosestSize(width)}.${extension}`;
+  return url;
 }

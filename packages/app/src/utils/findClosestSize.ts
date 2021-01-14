@@ -1,8 +1,8 @@
+const config = require('~/config.js');
+
 // find closest resized element
 export function findClosestSize(width: number) {
-  const sizes = [320, 640, 768, 1024, 1280, 1536, 2048];
-
-  return sizes.reduce((a, b) => {
+  return config.sizes.reduce((a: number, b: number) => {
     const aDiff = Math.abs(a - width);
     const bDiff = Math.abs(b - width);
 
