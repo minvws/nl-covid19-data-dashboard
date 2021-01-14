@@ -51,19 +51,15 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
 
   const sewerAverages = data.sewer;
 
-  const [selectedInstallation, setSelectedInstallation] = useState<string>();
+  const [selectedInstallation, setSelectedInstallation] = useState<
+    string | undefined
+  >(sewerStationNames.length === 1 ? sewerStationNames[0] : undefined);
 
   /**
    * Only render a scatter plot when there's data coming from more than one
    * sewer station
    */
-  const enableScatterPlot = useMemo(() => {
-    if (sewerStationNames.length === 1) {
-      setSelectedInstallation(sewerStationNames[0]);
-    }
-
-    return sewerStationNames.length > 1;
-  }, [sewerStationNames]);
+  const enableScatterPlot = sewerStationNames.length > 1;
 
   if (!sewerAverages) {
     /**
