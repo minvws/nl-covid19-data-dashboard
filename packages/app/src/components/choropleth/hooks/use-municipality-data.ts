@@ -1,6 +1,5 @@
 import { set } from 'lodash';
 import { useMemo } from 'react';
-import useSWR from 'swr';
 import { Municipalities } from '~/types/data';
 import { assert } from '~/utils/assert';
 import {
@@ -66,13 +65,12 @@ export function useMunicipalityNavigationData(
   };
 }
 
-export function useMunicipalityData(
+export function useMunicipalityData<K extends MunicipalitiesMetricName>(
   featureCollection: MunicipalGeoJSON,
-  metricName: MunicipalitiesMetricName,
-  metricProperty: string
+  metricName: K,
+  metricProperty: string,
+  data: Pick<Municipalities, K>
 ): UseMunicipalityDataReturnValue {
-  const { data } = useSWR<Municipalities>('/json/GM_COLLECTION.json');
-
   return useMemo(() => {
     const propertyData = featureCollection.features.reduce(
       (acc, feature) =>

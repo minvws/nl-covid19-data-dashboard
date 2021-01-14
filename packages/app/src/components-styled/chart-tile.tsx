@@ -39,7 +39,7 @@ export function ChartTileWithTimeframe({
   description,
   metadata,
   timeframeOptions = ['all', '5weeks', 'week'],
-  timeframeInitialValue = '5weeks',
+  timeframeInitialValue = 'all',
   children,
 }: ChartTileWithTimeframeProps) {
   const [timeframe, setTimeframe] = useState<TimeframeOption>(

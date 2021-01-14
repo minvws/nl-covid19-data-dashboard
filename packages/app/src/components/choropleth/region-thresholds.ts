@@ -188,7 +188,7 @@ export const regionThresholds = {
     infected_per_100k: positiveTestedThresholds,
   },
   hospital_nice: {
-    admissions_moving_average: hospitalAdmissionsThresholds,
+    admissions_on_date_of_reporting: hospitalAdmissionsThresholds,
   },
   escalation_levels: {
     escalation_level: escalationThresholds,

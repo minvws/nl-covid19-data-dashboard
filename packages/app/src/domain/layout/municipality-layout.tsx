@@ -10,34 +10,30 @@ import {
   MetricMenuItemLink,
 } from '~/components-styled/aside/menu';
 import { Box } from '~/components-styled/base';
+import { AppContent } from '~/components-styled/layout/app-content';
 import { SidebarMetric } from '~/components-styled/sidebar-metric';
 import { Text } from '~/components-styled/typography';
-import { getLayout as getSiteLayout } from '~/domain/layout/layout';
-import { AppContent } from '~/components-styled/layout/app-content';
+import { getLayout } from '~/domain/layout/layout';
 import siteText from '~/locale/index';
-import { IMunicipalityData } from '~/static-props/municipality-data';
+import { Municipal } from '~/types/data';
 import { getSafetyRegionForMunicipalityCode } from '~/utils/getSafetyRegionForMunicipalityCode';
 import { Link } from '~/utils/link';
 import { MunicipalityComboBox } from './components/municipality-combo-box';
 
-/**
- * When you navigate to /gemeente root from the top menu, there is no GM code
- * and the data will be undefined. That's why we use Partial here, so that TS
- * knows that data and other props from data are not guaranteed to be present.
- */
-interface MunicipalityLayoutProps extends Partial<IMunicipalityData> {
-  children: React.ReactNode;
+interface MunicipalityLayoutProps {
+  lastGenerated: string;
+  data?: Municipal;
+  municipalityName?: string;
+  children?: React.ReactNode;
 }
 
 export function getMunicipalityLayout() {
   return function (
     page: React.ReactNode,
-    pageProps: IMunicipalityData & {
-      lastGenerated: string;
-    }
+    pageProps: MunicipalityLayoutProps
   ): React.ReactNode {
     const lastGenerated = pageProps.lastGenerated;
-    return getSiteLayout(
+    return getLayout(
       siteText.gemeente_metadata,
       lastGenerated
     )(<MunicipalityLayout {...pageProps}>{page}</MunicipalityLayout>);
@@ -152,9 +148,9 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                             data={data}
                             scope="gm"
                             metricName="hospital_nice"
-                            metricProperty="admissions_moving_average"
+                            metricProperty="admissions_on_date_of_reporting"
                             localeTextKey="gemeente_ziekenhuisopnames_per_dag"
-                            differenceKey="hospital_nice__admissions_moving_average"
+                            differenceKey="hospital_nice__admissions_on_date_of_reporting"
                           />
                         </MetricMenuItemLink>
                       </CategoryMenu>
