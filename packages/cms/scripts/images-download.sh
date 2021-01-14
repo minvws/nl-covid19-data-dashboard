@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Start with a clean slate
 rm *.tar.gz
 rm -rf export production-export-*
