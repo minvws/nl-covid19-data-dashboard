@@ -16,7 +16,7 @@ export const createMunicipalHospitalAdmissionsTooltip = (
 
   return (
     <TooltipContent title={context.gemnaam} onSelect={onSelect}>
-      <strong>{context.admissions_moving_average}</strong>
+      <strong>{context.admissions_on_date_of_reporting}</strong>
     </TooltipContent>
   );
 };

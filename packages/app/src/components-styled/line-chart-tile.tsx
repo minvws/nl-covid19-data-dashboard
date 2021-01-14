@@ -21,7 +21,7 @@ export function LineChartTile<T extends Value>({
   title,
   description,
   timeframeOptions = ['all', '5weeks', 'week'],
-  timeframeInitialValue = '5weeks',
+  timeframeInitialValue = 'all',
   footer,
   ariaDescription,
   ...chartProps

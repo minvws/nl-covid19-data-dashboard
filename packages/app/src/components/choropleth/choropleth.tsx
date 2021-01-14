@@ -49,6 +49,7 @@ type TProps<T1, T3> = {
   // This callback is invoked right before a tooltip is shown for one of the features in the featureCollection property.
   // The id is the value that is assigned to the data-id attribute in the featureCallback.
   getTooltipContent: (id: string) => ReactNode;
+  description?: string;
 };
 
 /**
@@ -116,9 +117,12 @@ const ChoroplethMap: <T1, T3>(
     onPathClick,
     setTooltip,
     hoverRef,
+    description,
   } = props;
 
   const clipPathId = uniqueId();
+  const dataDescriptionId = uniqueId();
+
   const timeout = useRef(-1);
   const isTouch = useIsTouchDevice();
 
@@ -135,6 +139,9 @@ const ChoroplethMap: <T1, T3>(
 
   return (
     <>
+      <span id={dataDescriptionId} style={{ display: 'none' }}>
+        {description}
+      </span>
       <svg
         width="100%"
         height="100%"
@@ -144,6 +151,7 @@ const ChoroplethMap: <T1, T3>(
           isTouch ? undefined : createSvgMouseOutHandler(timeout, setTooltip)
         }
         onClick={createSvgClickHandler(onPathClick, setTooltip, isTouch)}
+        aria-labelledby={dataDescriptionId}
       >
         <clipPath id={clipPathId}>
           <rect

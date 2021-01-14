@@ -3,6 +3,7 @@ import { Box } from './base';
 import { css } from '@styled-system/css';
 import styled from 'styled-components';
 import useUniqueId from '~/utils/useUniqueId';
+import { asResponsiveArray } from '~/style/utils';
 interface RadioGroupItem<T extends string> {
   label: string;
   value: T;
@@ -26,14 +27,13 @@ const StyledLabel = styled.label(
   css({
     flex: '0 1 auto',
     color: 'button',
-    fontSize: 1,
+    fontSize: asResponsiveArray({ _: 1, sm: 2 }),
     textAlign: 'center',
-    p: '0.2em 1.5em',
+    p: asResponsiveArray({ _: '0.25em 0.5em', xs: '0.2em 1.5em' }),
     borderStyle: 'solid',
     borderColor: 'button',
     borderWidth: '1px 0 1px 1px',
     whiteSpace: 'nowrap',
-
     cursor: 'pointer',
 
     '&:last-child': {
@@ -42,10 +42,6 @@ const StyledLabel = styled.label(
 
     '&:hover, &:focus': {
       bg: '#cae1ed',
-    },
-
-    '@media (min-width: 768px)': {
-      fontSize: 2,
     },
   })
 );

@@ -2,6 +2,7 @@ import css from '@styled-system/css';
 import { Feature, MultiPolygon } from 'geojson';
 import { ReactNode, useCallback } from 'react';
 import { AspectRatio } from '~/components-styled/aspect-ratio';
+import { Municipalities } from '~/types/data';
 import { Choropleth } from './choropleth';
 import {
   useChartDimensions,
@@ -10,14 +11,16 @@ import {
   useMunicipalityData,
   useRegionMunicipalities,
 } from './hooks';
+import { useChoroplethDataDescription } from './hooks/use-choropleth-data-description';
 import { getDataThresholds } from './legenda/utils';
 import { municipalThresholds } from './municipal-thresholds';
 import { Path } from './path';
-import { MunicipalityProperties, MunicipalitiesMetricName } from './shared';
+import { MunicipalitiesMetricName, MunicipalityProperties } from './shared';
 import { countryGeo, municipalGeo, regionGeo } from './topology';
 
-type MunicipalityChoroplethProps<T> = {
-  metricName: MunicipalitiesMetricName;
+type MunicipalityChoroplethProps<T, K extends MunicipalitiesMetricName> = {
+  data: Pick<Municipalities, K>;
+  metricName: K;
   metricProperty: string;
   selected?: string;
   highlightSelection?: boolean;
@@ -38,10 +41,11 @@ type MunicipalityChoroplethProps<T> = {
  *
  * @param props
  */
-export function MunicipalityChoropleth<T>(
-  props: MunicipalityChoroplethProps<T>
+export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
+  props: MunicipalityChoroplethProps<T, K>
 ) {
   const {
+    data,
     selected,
     metricName,
     metricProperty,
@@ -55,10 +59,11 @@ export function MunicipalityChoropleth<T>(
 
   const [boundingbox] = useMunicipalityBoundingbox(regionGeo, selected);
 
-  const { getChoroplethValue, hasData } = useMunicipalityData(
+  const { getChoroplethValue, hasData, values } = useMunicipalityData(
     municipalGeo,
     metricName,
-    metricProperty
+    metricProperty,
+    data
   );
 
   const safetyRegionMunicipalCodes = useRegionMunicipalities(selected);
@@ -67,6 +72,15 @@ export function MunicipalityChoropleth<T>(
     municipalThresholds,
     metricName,
     metricProperty
+  );
+
+  const dataDescription = useChoroplethDataDescription(
+    thresholdValues,
+    values,
+    metricName,
+    metricProperty,
+    'gm',
+    safetyRegionMunicipalCodes
   );
 
   const getFillColor = useChoroplethColorScale(
@@ -154,6 +168,7 @@ export function MunicipalityChoropleth<T>(
     <div ref={ref} css={css({ bg: 'transparent', position: 'relative' })}>
       <AspectRatio ratio={1 / ratio}>
         <Choropleth
+          description={dataDescription}
           featureCollection={municipalGeo}
           hovers={hasData ? municipalGeo : undefined}
           boundingBox={boundingbox || countryGeo}
