@@ -1051,6 +1051,8 @@
   },
   "escalatie_niveau": {
     "titel": "Level of risk",
+    "tile_title": "",
+    "lees_meer": "",
     "toelichting": "The map indicates the level of risk per safety region.\n\n[More about risk levels](/over-risiconiveaus)",
     "types": {
       "1": {

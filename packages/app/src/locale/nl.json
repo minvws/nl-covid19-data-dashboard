@@ -1054,23 +1054,25 @@
   },
   "escalatie_niveau": {
     "titel": "Risiconiveaus",
+    "tile_title": "Wat betekenen de vier risiconiveau's?",
+    "lees_meer": "Meer informatie over risiconiveau's",
     "toelichting": "De kaart geeft het risiconiveau per veiligheidsregio weer.\n\n[Meer over de risiconiveaus](/over-risiconiveaus)",
     "types": {
       "1": {
         "titel": "Waakzaam",
-        "toelichting": ""
+        "toelichting": "De situatie is beheersbaar en het aantal nieuwe besmettingen is laag. Kwetsbare groepen dienen alert te zijn en er is voldoende zorgcapaciteit."
       },
       "2": {
         "titel": "Zorgelijk",
-        "toelichting": ""
+        "toelichting": "Het aantal nieuwe besmettingen en de druk op de zorgcapaciteit neemt toe. Aanvullende maatregelen zijn nodig om de verspreiding van het virus weer onder controle te krijgen."
       },
       "3": {
         "titel": "Ernstig",
-        "toelichting": ""
+        "toelichting": "Het aantal nieuwe besmettingen neemt snel toe en de zorgcapaciteit is onvoldoende. Hard ingrijpen is noodzakelijk om de kwetsbaren te beschermen."
       },
       "4": {
         "titel": "Zeer Ernstig",
-        "toelichting": ""
+        "toelichting": "Er zijn zeer veel mensen besmettelijk, het dagelijks aantal nieuwe besmettingen is hoog en de regionale zorgcapaciteit is onvoldoende. Strenge, landelijke maatregelen zijn noodzakelijk om verdere escalatie te voorkomen."
       },
       "5": {
         "titel": "Lockdown",
