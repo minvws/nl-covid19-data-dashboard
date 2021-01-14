@@ -7,7 +7,7 @@ let walkPath = "../app/public/cms";
 // These are the sizes we want to resize our original images to
 const sizes = [320, 640, 768, 1024, 1280, 1536, 2048];
 
-const walk = function (dir, done) {
+function walk(dir, done) {
   fs.readdir(dir, function (error, list) {
     if (error) {
       return done(error);
@@ -52,7 +52,7 @@ const walk = function (dir, done) {
       });
     })();
   });
-};
+}
 
 // optional command line params
 //      source for walk path
