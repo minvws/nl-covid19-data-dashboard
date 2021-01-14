@@ -2,7 +2,7 @@ import fs from 'fs';
 import { groq } from 'next-sanity';
 import path from 'path';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
-import { getClient, localize } from '~/lib/sanity';
+import { getPreviewClient, localize } from '~/lib/sanity';
 import { targetLanguage, TALLLanguages } from '~/locale/index';
 import { Article } from '~/types/cms';
 import { Link } from '~/utils/link';
@@ -31,8 +31,8 @@ export async function getStaticProps(): Promise<StaticProps> {
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const lastGenerated = JSON.parse(fileContents).last_generated;
 
-  const articlesData = await getClient(true).fetch(articlesQuery);
-  const articles = localize(articlesData, [targetLanguage, 'nl']);
+  const articlesData = await getPreviewClient().fetch(articlesQuery);
+  const articles = localize<Article[]>(articlesData, [targetLanguage, 'nl']);
 
   return { props: { text, lastGenerated, articles } };
 }

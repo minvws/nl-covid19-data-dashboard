@@ -3,7 +3,7 @@ import { groq } from 'next-sanity';
 import { Params } from 'next/dist/next-server/server/router';
 import path from 'path';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
-import { getClient, localize } from '~/lib/sanity';
+import { getPreviewClient, localize } from '~/lib/sanity';
 import { targetLanguage, TALLLanguages } from '~/locale/index';
 import { Article } from '~/types/cms';
 import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
@@ -27,10 +27,10 @@ const articleQuery = (slug: string) => groq`
 `;
 
 export async function getStaticPaths() {
-  const articlesData = await getClient(true).fetch(articlesQuery);
-  const articles = localize(articlesData, [targetLanguage, 'nl']);
+  const articlesData = await getPreviewClient().fetch(articlesQuery);
+  const articles = localize<Article[]>(articlesData, [targetLanguage, 'nl']);
 
-  const paths = articles.map((article: Article) => ({
+  const paths = articles.map((article) => ({
     params: { slug: article.slug.current },
   }));
 
@@ -51,8 +51,8 @@ export async function getStaticProps({
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const lastGenerated = JSON.parse(fileContents).last_generated;
 
-  const articleData = await getClient(true).fetch(articleQuery(params.slug));
-  const article = localize(articleData, [targetLanguage, 'nl']);
+  const articleData = await getPreviewClient().fetch(articleQuery(params.slug));
+  const article = localize<Article>(articleData, [targetLanguage, 'nl']);
 
   return { props: { text, lastGenerated, article } };
 }
