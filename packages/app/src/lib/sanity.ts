@@ -60,6 +60,11 @@ export const getClient = (usePreview: boolean) =>
 export const useCurrentUser = createCurrentUserHook(config);
 
 export function localize(value: any, languages: any): any {
+  if (value === null) {
+    console.error('Data is null');
+    return null;
+  }
+
   if (Array.isArray(value)) {
     return value.map((v) => localize(v, languages));
   } else if (typeof value == 'object') {

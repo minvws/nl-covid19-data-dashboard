@@ -69,7 +69,7 @@ const myLoader = (props: LoaderProps) => {
   const filename = src.split('.')[0];
   const extension = src.split('.')[1];
 
-  return `/sanity/${filename}-${closest(width)}.${extension}`;
+  return `/cms/${filename}-${closest(width)}.${extension}`;
 };
 
 const Over: FCWithLayout<OverProps> = (props) => {
