@@ -19,6 +19,10 @@ import { Box } from '../base';
 /*
   the left margin '-100w' and left padding '100w' hack ensures skip link anchors to have a (non visible) start at the left side of the screen.
   This fixes odd skip-link behavior in IE11
+
+  Since this hack makes the part of the sidebar unclickable because the padding is overlapping it.
+  This is fixed by first setting a pointer even none to the HeaderBox element if there is a skip-link and create 
+  a new child element with the PointerEventBox that resets the pointer-events again so it works as expected.
 */
 const HeaderBox = styled.header<{
   hasIcon: boolean;
@@ -28,6 +32,7 @@ const HeaderBox = styled.header<{
     mt: 0,
     ml: x.skipLinkAnchor ? '-100vw' : x.hasIcon ? undefined : 5,
     pl: x.skipLinkAnchor ? '100vw' : undefined,
+    pointerEvents: x.skipLinkAnchor ? 'none' : 'auto',
   })
 );
 
@@ -42,7 +47,11 @@ const Header = (props: HeaderProps) => {
   const { hasIcon, children, skipLinkAnchor, id } = props;
   return (
     <HeaderBox id={id} hasIcon={hasIcon} skipLinkAnchor={skipLinkAnchor}>
-      {children}
+      {skipLinkAnchor ? (
+        <PointerEventsBox>{children}</PointerEventsBox>
+      ) : (
+        children
+      )}
     </HeaderBox>
   );
 };
@@ -79,17 +88,23 @@ const AriaInlineText = styled(InlineText)(
   })
 );
 
-const ReferenceBox = styled(Box)(
+const ReferenceBox = styled.div(
   css({
     maxWidth: '30em',
     marginRight: 3,
-    flex: asResponsiveArray({ md: '1 1 auto', lg: '1 1 60%' })
+    flex: asResponsiveArray({ md: '1 1 auto', lg: '1 1 60%' }),
   })
 );
 
 const MetadataBox = styled(Box)(
   css({
-    flex: asResponsiveArray({ md: '1 1 auto', lg: '1 1 40%' })
+    flex: asResponsiveArray({ md: '1 1 auto', lg: '1 1 40%' }),
+  })
+);
+
+const PointerEventsBox = styled(Box)(
+  css({
+    pointerEvents: 'auto',
   })
 );
 
