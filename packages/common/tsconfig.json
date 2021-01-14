@@ -1,0 +1,21 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "module": "esnext",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "target": "es5",
+    "allowJs": false,
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["src/*"]
+    },
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "composite": true,
+    // "tsBuildInfoFile": "../../.build-cache/common.tsbuildinfo",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true
+  },
+  "include": ["src/**/*.ts", "**/*.tsx", "**/*.js"]
+}

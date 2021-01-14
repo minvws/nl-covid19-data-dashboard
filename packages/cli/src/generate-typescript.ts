@@ -9,7 +9,7 @@ const outputPath = path.join(
   __dirname,
   '..', // tools
   '..', // packages
-  'app',
+  'common',
   'src',
   'types'
 );
