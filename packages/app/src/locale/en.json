@@ -1479,8 +1479,8 @@
     },
     "bronnen": {
       "rivm": {
-        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
-        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "download": "https://data.rivm.nl/covid-19/COVID-19_gehandicaptenzorg.csv",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_gehandicaptenzorg.html",
         "text": "RIVM"
       }
     }
@@ -1538,8 +1538,8 @@
     },
     "bronnen": {
       "rivm": {
-        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
-        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "download": "https://data.rivm.nl/covid-19/COVID-19_gehandicaptenzorg.csv",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_gehandicaptenzorg.html",
         "text": "RIVM"
       }
     },
@@ -1548,7 +1548,7 @@
   "veiligheidsregio_gehandicaptenzorg_oversterfte": {
     "datums": "Latest values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
-      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+      "href": "https://data.rivm.nl/covid-19/COVID-19_gehandicaptenzorg.html",
       "text": "RIVM"
     },
     "titel": "Disability care homes in {{safetyRegion}} – deaths",
@@ -1570,8 +1570,8 @@
     },
     "bronnen": {
       "rivm": {
-        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
-        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "download": "https://data.rivm.nl/covid-19/COVID-19_gehandicaptenzorg.csv",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_gehandicaptenzorg.html",
         "text": "RIVM"
       }
     }
@@ -1582,7 +1582,7 @@
     "pagina_toelichting": "This is an estimate of the number of disability care homes in this region that currently have at least one confirmed COVID-19 case.",
     "barscale_titel": "Number of new locations per day",
     "barscale_toelichting": "This figure shows the number of disability care homes where at least one resident was reported as testing positive for COVID-19. A disability care home is considered to have a new outbreak if there had been no new cases of COVID-19 in the home in the previous 28 days (i.e. twice the length of the incubation period).",
-    "kpi_titel": "Total no. of infected locations ",
+    "kpi_titel": "Total no. of infected locations",
     "kpi_toelichting": "This figure shows the total number of disability care homes that have reported at least one confirmed COVID-19 case, based on a positive test, in the last 28 days. The percentage expresses the share of all disability care homes in the Netherlands with confirmed COVID-19 cases.",
     "linechart_titel": "Total no. of infected locations – progression over time",
     "barscale_screenreader_text": "",
@@ -1597,8 +1597,8 @@
     },
     "bronnen": {
       "rivm": {
-        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
-        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "download": "https://data.rivm.nl/covid-19/COVID-19_gehandicaptenzorg.csv",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_gehandicaptenzorg.html",
         "text": "RIVM"
       }
     }
@@ -1628,8 +1628,8 @@
     },
     "bronnen": {
       "rivm": {
-        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
-        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "download": "https://data.rivm.nl/covid-19/COVID-19_gehandicaptenzorg.csv",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_gehandicaptenzorg.html",
         "text": "RIVM"
       }
     },
