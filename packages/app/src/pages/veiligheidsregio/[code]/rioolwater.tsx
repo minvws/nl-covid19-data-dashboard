@@ -57,7 +57,7 @@ const SewerWater: FCWithLayout<typeof getStaticProps> = (props) => {
 
   const [selectedInstallation, setSelectedInstallation] = useState<
     string | undefined
-  >();
+  >(sewerStationNames.length === 1 ? sewerStationNames[0] : undefined);
 
   return (
     <>

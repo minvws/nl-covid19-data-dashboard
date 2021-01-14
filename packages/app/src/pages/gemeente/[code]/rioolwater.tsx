@@ -55,7 +55,15 @@ const SewerWater: FCWithLayout<typeof getStaticProps> = (props) => {
 
   const sewerAverages = data.sewer;
 
-  const [selectedInstallation, setSelectedInstallation] = useState<string>();
+  const [selectedInstallation, setSelectedInstallation] = useState<
+    string | undefined
+  >(sewerStationNames.length === 1 ? sewerStationNames[0] : undefined);
+
+  /**
+   * Only render a scatter plot when there's data coming from more than one
+   * sewer station
+   */
+  const enableScatterPlot = sewerStationNames.length > 1;
 
   if (!sewerAverages) {
     /**
@@ -65,12 +73,6 @@ const SewerWater: FCWithLayout<typeof getStaticProps> = (props) => {
      */
     return null;
   }
-
-  /**
-   * Only render a scatter plot when there's data coming from more than one
-   * sewer station
-   */
-  const enableScatterPlot = sewerStationNames.length > 1;
 
   return (
     <>
