@@ -13,8 +13,8 @@
     "compile": "echo 'Placeholder to support yarn compile in repo root, until we use TS'",
     "lint": "echo '@TODO add eslint'",
     "images": "run-s images:download images:resize",
-    "images:download": "bash scripts/images.sh",
-    "images:resize": "node scripts/resize.js"
+    "images:download": "bash scripts/images-download.sh",
+    "images:resize": "node scripts/images-resize.js"
   },
   "keywords": [
     "sanity"

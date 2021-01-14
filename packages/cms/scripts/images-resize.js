@@ -2,7 +2,7 @@ const sharp = require("sharp");
 const fs = require("fs");
 const path = require("path");
 
-const walkPath = "../app/public/sanity";
+const walkPath = "../app/public/cms";
 
 // These are the sizes we want to resize our original images to
 const sizes = [320, 640, 768, 1024, 1280, 1536, 2048];
@@ -41,7 +41,7 @@ const walk = function (dir, done) {
           console.log(`Now resizing: ${file}`);
 
           sizes.forEach((size) => {
-            const output = `../app/public/sanity/${filename}-${size}${ext}`;
+            const output = `../app/public/cms/${filename}-${size}${ext}`;
             sharp(file)
               .resize({ width: size, withoutEnlargement: true })
               .toFile(output);
