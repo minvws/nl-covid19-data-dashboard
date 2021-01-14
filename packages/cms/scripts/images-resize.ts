@@ -2,7 +2,7 @@ const sharp = require("sharp");
 const fs = require("fs");
 const path = require("path");
 
-const walkPath = "../app/public/cms";
+let walkPath = "../app/public/cms";
 
 // These are the sizes we want to resize our original images to
 const sizes = [320, 640, 768, 1024, 1280, 1536, 2048];
