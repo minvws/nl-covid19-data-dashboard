@@ -139,9 +139,9 @@
       "text": "NICE via RIVM"
     },
     "titel": "Hospital admissions per day",
-    "pagina_toelichting": "An increase COVID-19 patient admissions could have as consequence that hospitals will become full and can therefore not deliver care. This page shows the number of hospital beds (excl. ICU) that are occupied by COVID-19 patients  and the daily number of patients admitted to hospital. This is illustrated nationally and regionally, based on a variety of sources. Please note: From14th January the three daily average will not be displayed anymore. This will be replaced by the number of hospital admissions that are reported on one single day. The graph will furthermore show the progression of hospital admissions, sorted on the day that people have been admitted.",
+    "pagina_toelichting": "A rise in the number of patients with COVID-19 could overburden hospitals. This section of the dashboard shows the number regular hospital beds occupied by patients with COVID-19 and the number of patients with COVID-19 admitted to hospital each day. The dashboard provides national and regional figures drawn from various sources. Please note: as of 14 January 2021 the dashboard shows the number of hospital admissions reported daily. We no longer show a three-day average.",
     "barscale_titel": "Hospital admissions per day",
-    "extra_uitleg": "Number of people with COVID-19 admitted to hospital (excl. ICU) on a daily basis. This number entails the amount of hospital admissions reported on one day. These could include admissions from previous days, because the admissions are not necessarily reported on the day of admission. This figure is deemed to provide a good reflection of the current developments, as recordings of one day of admissions are illustrated.",
+    "extra_uitleg": "Number of people with COVID-19 admitted to hospital daily (excluding ICU admissions). This figure shows how many hospital admissions are reported per day. It may include hospital admissions that occurred in previous days because reporting delays are common.",
     "map_titel": "Distribution of hospital admissions in the Netherlands",
     "map_toelichting": "These maps show an overview of hospital admissions in the Netherlands. It shows hospital admissions that are reported to Stichting NICE on one day.",
     "linechart_titel": "Progression in hospital admissions over time",
@@ -688,7 +688,7 @@
   "veiligheidsregio_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Hospital admissions",
     "titel": "Hospital admissions per day of residents in {{safetyRegion}}",
-    "pagina_toelichting": "An increase COVID-19 patient admissions could have as consequence that hospitals will become full and can therefore not deliver care. This page shows the number of hospital beds (excl. ICU) that are occupied by COVID-19 patients  and the daily number of patients admitted to hospital. This is illustrated nationally and regionally, based on a variety of sources.\n\nPlease note: From14th January the three daily average will not be displayed anymore. This will be replaced by the number of hospital admissions that are reported on one single day. The graph will furthermore show the progression of hospital admissions, sorted on the day that people have been admitted.",
+    "pagina_toelichting": "A rise in the number of patients with COVID-19 could overburden hospitals. This section of the dashboard shows the number regular hospital beds occupied by patients with COVID-19 and the number of patients with COVID-19 admitted to hospital each day. The dashboard provides national and regional figures drawn from various sources. Please note: as of 14 January 2021 the dashboard shows the number of hospital admissions reported daily. We no longer show a three-day average.",
     "datums": "Calculated: {{dateOfReport}}. Updated daily.",
     "screen_reader_graph_content": "{{value}} admissions.",
     "barscale_titel": "Hospital admissions per day",
@@ -720,7 +720,7 @@
     },
     "tijdelijk_onbeschikbaar_titel": "",
     "tijdelijk_onbeschikbaar": "",
-    "kpi_titel": "Number of hospital admissions reported on one day. "
+    "kpi_titel": "Number of hospital admissions reported daily."
   },
   "veiligheidsregio_positief_geteste_personen": {
     "titel_sidebar": "Confirmed cases",
@@ -830,7 +830,7 @@
   "gemeente_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Hospital admissions",
     "titel": "Hospital admissions per day of residents in {{municipality}}",
-    "pagina_toelichting": "An increase COVID-19 patient admissions could have as consequence that hospitals will become full and can therefore not deliver care. This page shows the number of hospital beds (excl. ICU) that are occupied by COVID-19 patients  and the daily number of patients admitted to hospital. This is illustrated nationally and regionally, based on a variety of sources.\n\nPlease note: From 14th January the three daily average will not be displayed anymore. This will be replaced by the number of hospital admissions that are reported on one single day. The graph will furthermore show the progression of hospital admissions, sorted on the day that people have been admitted.",
+    "pagina_toelichting": "A rise in the number of patients with COVID-19 could overburden hospitals. This section of the dashboard shows the number regular hospital beds occupied by patients with COVID-19 and the number of patients with COVID-19 admitted to hospital each day. The dashboard provides national and regional figures drawn from various sources. Please note: as of 14 January 2021 the dashboard shows the number of hospital admissions reported daily. We no longer show a three-day average.",
     "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
     "screen_reader_graph_content": "{{value}} admissions.",
     "barscale_titel": "Hospital admissions per day",
@@ -1851,8 +1851,8 @@
       "landelijk": {
         "toelichting_risiconiveau": "",
         "extratoelichting": {
-          "titel": "The Netherlands to remain in lockdown",
-          "toelichting": "The number of infected people is falling slightly. This shows that the lockdown is starting to work. To continue this decline, we will remain in lockdown until at least 9 February inclusive."
+          "titel": "Netherlands stay lockdown",
+          "toelichting": "The COVID-19 infection rate is falling slightly. This shows the lockdown is starting to work. To make sure numbers keep falling, the lockdown will continue until at least 9 February inclusive."
         }
       }
     },
@@ -1877,14 +1877,14 @@
       "41_sport_35": "All indoor sports venues are closed.",
       "41_sport_36": "No competitions or group lessons. This does not apply to elite athletes.",
       "41_ov_37": "Stay home as much as possible.",
-      "41_ov_38": "Stay in The Netherlands and do not book trips abroad until 31 March.",
-      "41_onderwijs_39": "Remote and online teaching in primary, secondary, secondary vocational and higher education and for all other forms of training and educational activities. Exemptions include exams, practical lessons and education for vulnerable pupils. These measures apply until 7 February. It will be decided at a later moment if primary schools can reopen as from 25 January.",
-      "41_onderwijs_40": "Childcare centres are closed. These measures apply until 7 February. It will be decided at a later moment if childcare centres can reopen as from 25 January.",
+      "41_ov_38": "Do not travel abroad or book trips abroad until 31 March inclusive.",
+      "41_onderwijs_39": "Remote and online teaching in primary, secondary, secondary vocational and higher education and for all other forms of training and educational activities. Exemptions include exams, practical lessons and education for vulnerable pupils. These measures apply until 7 February 2021 inclusive. A decision will follow on whether primary schools can reopen fully from 25 January.",
+      "41_onderwijs_40": "Childcare centres are closed. These measures apply until 7 February 2021 inclusive. A decision will follow on whether childcare can reopen fully from 25 January.",
       "41_onderwijs_41": "Emergency childcare is available for children of key workers and for vulnerable children.",
       "41_algemeen_42": "COVID-19 symptoms? Stay at home.",
-      "0_algemeen_42": "COVID-19 symptoms? Quarantine at home.",
+      "0_algemeen_42": "COVID-19 symptoms? Self-quarantine",
       "0_algemeen_43": "COVID-19 symptoms? Get tested.",
-      "0_algemeen_44": "COVID-19 symptoms? Do not receive any visitors.",
+      "0_algemeen_44": "COVID-19 symptoms? Do not receive visitors.",
       "41_ov_45": "Public transport for essential travel only."
     }
   },
