@@ -8,8 +8,7 @@
 # build and data exports
 dist
 export
-development.tar.gz
-production.tar.gz
+*.tar.gz
 
 # misc
 .DS_Store
