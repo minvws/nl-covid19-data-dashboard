@@ -24,7 +24,7 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
-import { sortNationalTimeSeriesInDataInPlace } from '~/static-props/data-sorting';
+import { sortNationalTimeSeriesInDataInPlace } from '~/static-props/sort-data';
 import { Municipal, National, Regionaal } from '~/types/data';
 
 // Must be declared global to be detected by typescript (allows import/export)

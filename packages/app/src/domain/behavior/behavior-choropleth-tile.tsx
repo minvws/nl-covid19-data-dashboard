@@ -24,7 +24,11 @@ const unusedRules = [
   'wear_mask_public_transport',
 ];
 
-export function BehaviorChoroplethTile() {
+export function BehaviorChoroplethTile({
+  data,
+}: {
+  data: { behavior: RegionsBehavior[] };
+}) {
   const [type, setType] = useState<BehaviorType>('compliance');
   const [currentId, setCurrentId] = useState<BehaviorIdentifier>('wash_hands');
   const router = useRouter();
@@ -62,6 +66,7 @@ export function BehaviorChoroplethTile() {
       }}
     >
       <SafetyRegionChoropleth
+        data={data}
         metricName="behavior"
         metricProperty={metricValueName}
         tooltipContent={(context: RegionsBehavior & SafetyRegionProperties) => {

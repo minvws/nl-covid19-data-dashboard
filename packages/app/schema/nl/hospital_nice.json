@@ -20,8 +20,11 @@
       "title": "national_hospital_nice_value",
       "type": "object",
       "properties": {
-        "admissions_moving_average": {
-          "type": "number"
+        "admissions_on_date_of_admission": {
+          "type": "integer"
+        },
+        "admissions_on_date_of_reporting": {
+          "type": "integer"
         },
         "date_unix": {
           "type": "integer"
@@ -31,7 +34,8 @@
         }
       },
       "required": [
-        "admissions_moving_average",
+        "admissions_on_date_of_admission",
+        "admissions_on_date_of_reporting",
         "date_unix",
         "date_of_insertion_unix"
       ],

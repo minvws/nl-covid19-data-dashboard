@@ -7,19 +7,22 @@ import { Legenda } from '~/components-styled/legenda';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { AreaChart } from '~/components/charts/index';
+import { SEOHead } from '~/components/seoHead';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
-import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
-import {
-  getNationalStaticProps,
-  NationalPageProps,
-} from '~/static-props/nl-data';
+import { getNlData, getLastGeneratedDate } from '~/static-props/get-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import { getLastFilledValue } from '~/utils/get-last-filled-value';
 
 const text = siteText.besmettelijke_personen;
 
-const InfectiousPeople: FCWithLayout<NationalPageProps> = (props) => {
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getNlData
+);
+
+const InfectiousPeople: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data } = props;
 
   const lastFullValue = getLastFilledValue(data.infectious_people);
@@ -72,7 +75,6 @@ const InfectiousPeople: FCWithLayout<NationalPageProps> = (props) => {
           metadata={{ source: text.bronnen.rivm }}
           title={text.linechart_titel}
           timeframeOptions={['all', '5weeks']}
-          timeframeInitialValue="5weeks"
         >
           {(timeframe) => (
             <>
@@ -110,7 +112,5 @@ const InfectiousPeople: FCWithLayout<NationalPageProps> = (props) => {
 };
 
 InfectiousPeople.getLayout = getNationalLayout;
-
-export const getStaticProps = getNationalStaticProps;
 
 export default InfectiousPeople;

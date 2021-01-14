@@ -3,6 +3,7 @@ import { Feature, MultiPolygon } from 'geojson';
 import { ReactNode, useCallback } from 'react';
 import { AspectRatio } from '~/components-styled/aspect-ratio';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
+import { Regions } from '~/types/data';
 import { Choropleth } from './choropleth';
 import {
   useChartDimensions,
@@ -16,8 +17,9 @@ import { Path } from './path';
 import { RegionsMetricName, SafetyRegionProperties } from './shared';
 import { countryGeo, regionGeo } from './topology';
 
-type SafetyRegionChoroplethProps<T> = {
-  metricName: RegionsMetricName;
+type SafetyRegionChoroplethProps<T, K extends RegionsMetricName> = {
+  data: Pick<Regions, K>;
+  metricName: K;
   metricProperty: string;
   selected?: string;
   highlightSelection?: boolean;
@@ -40,10 +42,11 @@ type SafetyRegionChoroplethProps<T> = {
  *
  * @param props
  */
-export function SafetyRegionChoropleth<T>(
-  props: SafetyRegionChoroplethProps<T>
+export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
+  props: SafetyRegionChoroplethProps<T, K>
 ) {
   const {
+    data,
     selected,
     highlightSelection = true,
     metricName,
@@ -60,7 +63,8 @@ export function SafetyRegionChoropleth<T>(
   const { getChoroplethValue, hasData, values } = useSafetyRegionData(
     regionGeo,
     metricName,
-    metricProperty
+    metricProperty,
+    data
   );
 
   const selectedThreshold = getDataThresholds(
