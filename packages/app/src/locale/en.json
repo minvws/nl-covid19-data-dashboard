@@ -830,7 +830,7 @@
   "gemeente_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Hospital admissions",
     "titel": "Hospital admissions per day of residents in {{municipality}}",
-    "pagina_toelichting": "An increase COVID-19 patient admissions could have as consequence that hospitals will become full and can therefore not deliver care. This page shows the number of hospital beds (excl. ICU) that are occupied by COVID-19 patients  and the daily number of patients admitted to hospital. This is illustrated nationally and regionally, based on a variety of sources.\n\nPlease note: From14th January the three daily average will not be displayed anymore. This will be replaced by the number of hospital admissions that are reported on one single day. The graph will furthermore show the progression of hospital admissions, sorted on the day that people have been admitted.",
+    "pagina_toelichting": "An increase COVID-19 patient admissions could have as consequence that hospitals will become full and can therefore not deliver care. This page shows the number of hospital beds (excl. ICU) that are occupied by COVID-19 patients  and the daily number of patients admitted to hospital. This is illustrated nationally and regionally, based on a variety of sources.\n\nPlease note: From 14th January the three daily average will not be displayed anymore. This will be replaced by the number of hospital admissions that are reported on one single day. The graph will furthermore show the progression of hospital admissions, sorted on the day that people have been admitted.",
     "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
     "screen_reader_graph_content": "{{value}} admissions.",
     "barscale_titel": "Hospital admissions per day",
