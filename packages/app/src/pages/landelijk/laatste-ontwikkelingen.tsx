@@ -1,12 +1,11 @@
-import fs from 'fs';
 import { useRouter } from 'next/router';
-import path from 'path';
 import { useState } from 'react';
 import Notification from '~/assets/notification.svg';
 import { AnchorTile } from '~/components-styled/anchor-tile';
 import { Box, Spacer } from '~/components-styled/base';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { CategoryHeading } from '~/components-styled/content-header';
+import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
 import { HeadingWithIcon } from '~/components-styled/heading-with-icon';
 import { MessageTile } from '~/components-styled/message-tile';
 import { TileList } from '~/components-styled/tile-list';
@@ -22,40 +21,49 @@ import { createPositiveTestedPeopleRegionalTooltip } from '~/components/chorople
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
-import { TALLLanguages } from '~/locale/index';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetChoroplethData,
+  getLastGeneratedDate,
+  getNlData,
+  getText,
+} from '~/static-props/get-data';
 import theme from '~/style/theme';
-import { EscalationLevels, National, Regions } from '~/types/data';
+import { EscalationLevels } from '~/types/data';
 import { assert } from '~/utils/assert';
-import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { EscalationMapLegenda } from '../veiligheidsregio';
 
-interface StaticProps {
-  props: ILatestDevelopmentsData;
-}
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getText,
+  createGetChoroplethData({
+    vr: ({ escalation_levels, tested_overall }) => ({
+      escalation_levels,
+      tested_overall,
+    }),
+    gm: ({ tested_overall }) => ({ tested_overall }),
+  }),
+  () => {
+    const data = getNlData();
 
-interface ILatestDevelopmentsData {
-  data: National;
-  text: TALLLanguages;
-  lastGenerated: string;
-  escalationLevelCounts: EscalationLevelCounts;
-}
+    for (const metric of Object.values(data)) {
+      if (typeof metric === 'object' && metric !== null) {
+        for (const [metricProperty, metricValue] of Object.entries(metric)) {
+          if (metricProperty === 'values') {
+            (metricValue as {
+              values: Array<unknown>;
+            }).values = [];
+          }
+        }
+      }
+    }
 
-/*
- * The keys in this object are used to find and replace values in the translation files.
- * Adjustments here need to be applied in Lokalize too.
- * This is also why the keys are a bit more verbose.
- */
-type EscalationLevelCounts = {
-  escalationLevel1: number;
-  escalationLevel2: number;
-  escalationLevel3: number;
-  escalationLevel4: number;
-  escalationLevel5: number;
-};
+    return data;
+  }
+);
 
-const LatestDevelopments: FCWithLayout<ILatestDevelopmentsData> = (props) => {
-  const { data, text, escalationLevelCounts } = props;
+const LatestDevelopments: FCWithLayout<typeof getStaticProps> = (props) => {
+  const { data, text, choropleth } = props;
   const router = useRouter();
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
     'municipal'
@@ -83,7 +91,7 @@ const LatestDevelopments: FCWithLayout<ILatestDevelopmentsData> = (props) => {
         <Text>
           {replaceVariablesInText(
             text.notificatie.bericht,
-            escalationLevelCounts
+            getEscalationCounts(choropleth.vr.escalation_levels)
           )}
         </Text>
       </AnchorTile>
@@ -105,14 +113,15 @@ const LatestDevelopments: FCWithLayout<ILatestDevelopmentsData> = (props) => {
               }}
             />
             <EscalationMapLegenda
+              data={choropleth.vr}
               metricName="escalation_levels"
               metricProperty="escalation_level"
-              text={text}
             />
           </>
         }
       >
         <SafetyRegionChoropleth
+          data={choropleth.vr}
           metricName="escalation_levels"
           metricProperty="escalation_level"
           onSelect={createSelectRegionHandler(router)}
@@ -139,6 +148,7 @@ const LatestDevelopments: FCWithLayout<ILatestDevelopmentsData> = (props) => {
       >
         {selectedMap === 'municipal' && (
           <MunicipalityChoropleth
+            data={choropleth.gm}
             metricName="tested_overall"
             metricProperty="infected_per_100k"
             tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
@@ -149,6 +159,7 @@ const LatestDevelopments: FCWithLayout<ILatestDevelopmentsData> = (props) => {
         )}
         {selectedMap === 'region' && (
           <SafetyRegionChoropleth
+            data={choropleth.vr}
             metricName="tested_overall"
             metricProperty="infected_per_100k"
             tooltipContent={createPositiveTestedPeopleRegionalTooltip(
@@ -163,6 +174,20 @@ const LatestDevelopments: FCWithLayout<ILatestDevelopmentsData> = (props) => {
 };
 
 LatestDevelopments.getLayout = getNationalLayout;
+export default LatestDevelopments;
+
+/**
+ * The keys in this object are used to find and replace values in the translation files.
+ * Adjustments here need to be applied in Lokalize too.
+ * This is also why the keys are a bit more verbose.
+ */
+type EscalationLevelCounts = {
+  escalationLevel1: number;
+  escalationLevel2: number;
+  escalationLevel3: number;
+  escalationLevel4: number;
+  escalationLevel5: number;
+};
 
 /**
  * Calculate the counts of regions with a certain escalation level
@@ -191,45 +216,3 @@ const getEscalationCounts = (
 
   return counts;
 };
-
-export async function getStaticProps(): Promise<StaticProps> {
-  const text = parseMarkdownInLocale(
-    (await import('../../locale/index')).default
-  );
-
-  const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
-  const fileContents = fs.readFileSync(filePath, 'utf8');
-  const data = JSON.parse(fileContents) as National;
-
-  // Strip away unused data (values) from staticProps
-  // keep last_values because we use them!
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  for (const metric of Object.values(data)) {
-    if (typeof metric === 'object' && metric !== null) {
-      for (const [metricProperty, metricValue] of Object.entries(metric)) {
-        if (metricProperty === 'values') {
-          (metricValue as {
-            values: Array<unknown>;
-          }).values = [];
-        }
-      }
-    }
-  }
-
-  const lastGenerated = data.last_generated;
-  const regionsFilePath = path.join(
-    process.cwd(),
-    'public',
-    'json',
-    'REGIONS.json'
-  );
-  const regionsFileContents = fs.readFileSync(regionsFilePath, 'utf8');
-  const regionsData = JSON.parse(regionsFileContents) as Regions;
-
-  const escalationLevels = regionsData.escalation_levels;
-  const escalationLevelCounts = getEscalationCounts(escalationLevels);
-
-  return { props: { data, escalationLevelCounts, text, lastGenerated } };
-}
-
-export default LatestDevelopments;

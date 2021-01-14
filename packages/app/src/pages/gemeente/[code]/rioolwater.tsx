@@ -12,16 +12,13 @@ import { KpiValue } from '~/components-styled/kpi-value';
 import { Select } from '~/components-styled/select';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { FCWithLayout } from '~/domain/layout/layout';
-import { getMunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { SewerWaterChart } from '~/components/lineChart/sewer-water-chart';
 import { SEOHead } from '~/components/seoHead';
+import { FCWithLayout } from '~/domain/layout/layout';
+import { getMunicipalityLayout } from '~/domain/layout/municipality-layout';
 import siteText from '~/locale/index';
-import {
-  getMunicipalityData,
-  getMunicipalityPaths,
-  IMunicipalityData,
-} from '~/static-props/municipality-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import { getGmData, getLastGeneratedDate } from '~/static-props/get-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import {
   getInstallationNames,
@@ -30,9 +27,16 @@ import {
   getSewerWaterScatterPlotData,
 } from '~/utils/sewer-water/municipality-sewer-water.util';
 
+export { getStaticPaths } from '~/static-paths/gm';
+
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getGmData
+);
+
 const text = siteText.gemeente_rioolwater_metingen;
 
-const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
+const SewerWater: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data, municipalityName } = props;
 
   const {
@@ -210,8 +214,5 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
 };
 
 SewerWater.getLayout = getMunicipalityLayout();
-
-export const getStaticProps = getMunicipalityData();
-export const getStaticPaths = getMunicipalityPaths();
 
 export default SewerWater;

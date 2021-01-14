@@ -58,15 +58,15 @@ export function AgeDemographicTooltipContent({
         })}
       </Text>
       <Legend>
-        <LegendItem>
-          <b>{formatPercentage(value.age_group_percentage * 100)}%</b>{' '}
-          {replaceVariablesInText(text.graph.age_group_percentage_tooltip, {
-            ageGroupRange: formatAgeGroupRange(value.age_group_range),
-          })}
-        </LegendItem>
         <LegendItem className="infected-percentage">
           <b>{formatPercentage(value.infected_percentage * 100)}%</b>{' '}
           {replaceVariablesInText(text.graph.infected_percentage_tooltip, {
+            ageGroupRange: formatAgeGroupRange(value.age_group_range),
+          })}
+        </LegendItem>
+        <LegendItem>
+          <b>{formatPercentage(value.age_group_percentage * 100)}%</b>{' '}
+          {replaceVariablesInText(text.graph.age_group_percentage_tooltip, {
             ageGroupRange: formatAgeGroupRange(value.age_group_range),
           })}
         </LegendItem>

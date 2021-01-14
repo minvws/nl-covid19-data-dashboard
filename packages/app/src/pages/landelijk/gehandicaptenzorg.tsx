@@ -14,22 +14,32 @@ import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createDisablityInfectedLocationsRegionalTooltip } from '~/components/choropleth/tooltips/region/create-disability-infected-locations-regional-tooltip';
+import { SEOHead } from '~/components/seoHead';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
-import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import {
-  getNationalStaticProps,
-  NationalPageProps,
-} from '~/static-props/nl-data';
+  createGetChoroplethData,
+  getNlData,
+  getLastGeneratedDate,
+} from '~/static-props/get-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 
 const infectedLocationsText = siteText.gehandicaptenzorg_besmette_locaties;
 const positiveTestedPeopleText =
   siteText.gehandicaptenzorg_positief_geteste_personen;
 const locationDeaths = siteText.gehandicaptenzorg_oversterfte;
 
-const DisabilityCare: FCWithLayout<NationalPageProps> = (props) => {
-  const { data } = props;
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getNlData,
+  createGetChoroplethData({
+    vr: ({ disability_care }) => ({ disability_care }),
+  })
+);
+
+const DisabilityCare: FCWithLayout<typeof getStaticProps> = (props) => {
+  const { data, choropleth } = props;
   const lastValue = data.disability_care.last_value;
   const values = data.disability_care.values;
 
@@ -146,6 +156,7 @@ const DisabilityCare: FCWithLayout<NationalPageProps> = (props) => {
           }}
         >
           <SafetyRegionChoropleth
+            data={choropleth.vr}
             metricName="disability_care"
             metricProperty="infected_locations_percentage"
             tooltipContent={createDisablityInfectedLocationsRegionalTooltip(
@@ -213,7 +224,5 @@ const DisabilityCare: FCWithLayout<NationalPageProps> = (props) => {
 };
 
 DisabilityCare.getLayout = getNationalLayout;
-
-export const getStaticProps = getNationalStaticProps;
 
 export default DisabilityCare;
