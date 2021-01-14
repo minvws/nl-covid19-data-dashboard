@@ -65,7 +65,7 @@ const Over: FCWithLayout<typeof getStaticProps> = (props) => {
 
             <Image
               src={`/${coverImage.assetId}.${coverImage.extension}`}
-              width="630"
+              width={630}
               height={630 / coverImage.metadata.dimensions.aspectRatio}
             />
 
