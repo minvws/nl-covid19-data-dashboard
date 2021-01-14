@@ -1,33 +1,30 @@
-import fs from 'fs';
+import { groq } from 'next-sanity';
 import Head from 'next/head';
-import path from 'path';
-import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import { MaxWidth } from '~/components-styled/max-width';
-import siteText, { TALLLanguages } from '~/locale/index';
-import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
+import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
+import { PortableText } from '~/lib/sanity';
+import siteText from '~/locale/index';
+import {
+  createGetContent,
+  getLastGeneratedDate,
+} from '~/static-props/get-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import styles from './over.module.scss';
 
-interface StaticProps {
-  props: OverProps;
+interface OverData {
+  title: string | null;
+  description: unknown[] | null;
 }
 
-interface OverProps {
-  text: TALLLanguages;
-  lastGenerated: string;
-}
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  createGetContent<OverData>(groq`
+    *[_type == 'overDitDashboard'][0]
+  `)
+);
 
-export async function getStaticProps(): Promise<StaticProps> {
-  const text = parseMarkdownInLocale((await import('../locale/index')).default);
-
-  const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
-  const fileContents = fs.readFileSync(filePath, 'utf8');
-  const lastGenerated = JSON.parse(fileContents).last_generated;
-
-  return { props: { text, lastGenerated } };
-}
-
-const Over: FCWithLayout<OverProps> = (props) => {
-  const { text } = props;
+const Over: FCWithLayout<typeof getStaticProps> = (props) => {
+  const { content } = props;
 
   return (
     <>
@@ -48,10 +45,10 @@ const Over: FCWithLayout<OverProps> = (props) => {
       <div className={styles.container}>
         <MaxWidth>
           <div className={styles.maxwidth}>
-            <h2>{text.over_titel.text}</h2>
-            <div
-              dangerouslySetInnerHTML={{ __html: text.over_beschrijving.text }}
-            />
+            {content.title && <h2>{content.title}</h2>}
+            {content.description && (
+              <PortableText blocks={content.description} />
+            )}
           </div>
         </MaxWidth>
       </div>

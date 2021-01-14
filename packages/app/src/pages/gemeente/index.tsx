@@ -9,12 +9,13 @@ import {
 } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { MunicipalityProperties } from '~/components/choropleth/shared';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
+import { SEOHead } from '~/components/seoHead';
+import { MunicipalityComboBox } from '~/domain/layout/components/municipality-combo-box';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getMunicipalityLayout } from '~/domain/layout/municipality-layout';
-import { SafetyRegionComboBox } from '~/domain/layout/components/safety-region-combo-box';
-import { SEOHead } from '~/components/seoHead';
 import text from '~/locale/index';
-import getLastGeneratedData from '~/static-props/last-generated-data';
+import { getLastGeneratedDate } from '~/static-props/get-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 
 const tooltipContent = (selectedHandler: MunicipalitySelectionHandler) => {
@@ -30,13 +31,9 @@ const tooltipContent = (selectedHandler: MunicipalitySelectionHandler) => {
   };
 };
 
-// Passing `any` to `FCWithLayout` because we
-// can't do `getStaticProps` on this page because we require
-// a code, but is is the screen we select a code (municipality).
-// All other pages which use `getMunicipalityLayout` can assume
-// the data is always there. Making the data optional would mean
-// lots of unnecessary null checks on those pages.
-const Municipality: FCWithLayout<any> = () => {
+export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
+
+const Municipality: FCWithLayout<typeof getStaticProps> = () => {
   const router = useRouter();
   const breakpoints = useBreakpoints();
 
@@ -55,7 +52,7 @@ const Municipality: FCWithLayout<any> = () => {
 
       {!breakpoints.md && (
         <Box bg="white">
-          <SafetyRegionComboBox />
+          <MunicipalityComboBox />
         </Box>
       )}
 
@@ -85,6 +82,5 @@ const Municipality: FCWithLayout<any> = () => {
 };
 
 Municipality.getLayout = getMunicipalityLayout();
-export const getStaticProps = getLastGeneratedData();
 
 export default Municipality;

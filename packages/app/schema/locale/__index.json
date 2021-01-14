@@ -3,25 +3,8 @@
   "type": "object",
   "title": "locale",
   "additionalProperties": true,
-  "required": [
-    "verantwoording",
-    "over_veelgestelde_vragen",
-    "positief_geteste_personen"
-  ],
+  "required": ["positief_geteste_personen"],
   "properties": {
-    "verantwoording": {
-      "type": "object",
-      "required": ["cijfers"],
-      "additionalProperties": true,
-      "properties": {
-        "cijfers": {
-          "type": "array",
-          "items": {
-            "type": "object"
-          }
-        }
-      }
-    },
     "positief_geteste_personen": {
       "type": "object",
       "additionalProperties": true,

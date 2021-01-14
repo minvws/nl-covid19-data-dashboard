@@ -18,7 +18,7 @@ export const createRegionHospitalAdmissionsTooltip = (
   return (
     context && (
       <TooltipContent title={context.vrname} onSelect={onSelect}>
-        <strong>{formatNumber(context.admissions_moving_average)}</strong>
+        <strong>{formatNumber(context.admissions_on_date_of_reporting)}</strong>
       </TooltipContent>
     )
   );

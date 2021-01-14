@@ -15,15 +15,28 @@ import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropl
 import { SEOHead } from '~/components/seoHead';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getMunicipalityLayout } from '~/domain/layout/municipality-layout';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
-  getMunicipalityData,
-  getMunicipalityPaths,
-  IMunicipalityData,
-} from '~/static-props/municipality-data';
+  createGetChoroplethData,
+  getGmData,
+  getLastGeneratedDate,
+  getText,
+} from '~/static-props/get-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
-const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
-  const { data, municipalityName, text: siteText } = props;
+export { getStaticPaths } from '~/static-paths/gm';
+
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getText,
+  getGmData,
+  createGetChoroplethData({
+    gm: ({ tested_overall }) => ({ tested_overall }),
+  })
+);
+
+const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
+  const { data, choropleth, municipalityName, text: siteText } = props;
 
   const text = siteText.gemeente_positief_geteste_personen;
   const lastValue = data.tested_overall.last_value;
@@ -59,7 +72,7 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
 
         <TwoKpiSection>
           <KpiTile
-            title={text.barscale_titel}
+            title={text.kpi_titel}
             metadata={{
               date: lastValue.date_unix,
               source: text.bronnen.rivm,
@@ -70,11 +83,14 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
               absolute={lastValue.infected}
               difference={data.difference.tested_overall__infected}
             />
-            <Text>{text.barscale_toelichting}</Text>
+            <Text
+              as="div"
+              dangerouslySetInnerHTML={{ __html: text.kpi_toelichting }}
+            />
           </KpiTile>
 
           <KpiTile
-            title={text.kpi_titel}
+            title={text.barscale_titel}
             metadata={{
               date: lastValue.date_unix,
               source: text.bronnen.rivm,
@@ -85,10 +101,7 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
               absolute={lastValue.infected_per_100k}
               difference={data.difference.tested_overall__infected_per_100k}
             />
-            <Text
-              as="div"
-              dangerouslySetInnerHTML={{ __html: text.kpi_toelichting }}
-            />
+            <Text>{text.barscale_toelichting}</Text>
           </KpiTile>
         </TwoKpiSection>
 
@@ -122,6 +135,7 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
         >
           <MunicipalityChoropleth
             selected={data.code}
+            data={choropleth.gm}
             metricName="tested_overall"
             metricProperty="infected_per_100k"
             tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
@@ -136,8 +150,5 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
 };
 
 PositivelyTestedPeople.getLayout = getMunicipalityLayout();
-
-export const getStaticProps = getMunicipalityData();
-export const getStaticPaths = getMunicipalityPaths();
 
 export default PositivelyTestedPeople;

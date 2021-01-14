@@ -4,6 +4,7 @@ import GetestIcon from '~/assets/test.svg';
 import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { DataDrivenText } from '~/components-styled/data-driven-text';
+import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
 import { MaxWidth } from '~/components-styled/max-width';
 import { NewsMessage } from '~/components-styled/news-message';
 import { QuickLinks } from '~/components-styled/quick-links';
@@ -18,31 +19,52 @@ import { DataSitemap } from '~/domain/topical/data-site-map';
 import { LatestArticles } from '~/domain/topical/latest-articles';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
-import { TALLLanguages } from '~/locale/';
-import { sortNationalTimeSeriesInDataInPlace } from '~/static-props/data-sorting';
-import { loadJsonFromDataFile } from '~/static-props/utils/load-json-from-data-file';
-import { National } from '~/types/data';
-import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
-import { EscalationMapLegenda } from './veiligheidsregio';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetChoroplethData,
+  getLastGeneratedDate,
+  getNlData,
+  getText,
+} from '~/static-props/get-data';
 
-interface StaticProps {
-  props: IHomeData;
-}
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getText,
+  createGetChoroplethData({
+    vr: ({ escalation_levels, tested_overall }) => ({
+      escalation_levels,
+      tested_overall,
+    }),
+    gm: ({ tested_overall }) => ({ tested_overall }),
+  }),
+  () => {
+    const data = getNlData();
 
-interface IHomeData {
-  data: National;
-  text: TALLLanguages;
-  lastGenerated: string;
-}
+    for (const metric of Object.values(data)) {
+      if (typeof metric === 'object' && metric !== null) {
+        for (const [metricProperty, metricValue] of Object.entries(metric)) {
+          if (metricProperty === 'values') {
+            (metricValue as {
+              values: Array<unknown>;
+            }).values = [];
+          }
+        }
+      }
+    }
 
-const Home: FCWithLayout<IHomeData> = (data) => {
+    return data;
+  }
+);
+
+const Home: FCWithLayout<typeof getStaticProps> = (props) => {
+  const { text: siteText, data, choropleth } = props;
   const router = useRouter();
-  const notificatie = data.text.notificatie;
-  const text = data.text.nationaal_actueel;
+  const notificatie = siteText.notificatie;
+  const text = siteText.nationaal_actueel;
 
-  const dataInfectedTotal = data.data.tested_overall;
-  const dataHospitalIntake = data.data.hospital_nice;
-  const dataIntake = data.data.intensive_care_nice;
+  const dataInfectedTotal = data.tested_overall;
+  const dataHospitalIntake = data.hospital_nice;
+  const dataIntake = data.intensive_care_nice;
 
   return (
     <MaxWidth>
@@ -54,7 +76,7 @@ const Home: FCWithLayout<IHomeData> = (data) => {
             title={text.mini_trend_tiles.positief_getest.title}
             text={
               <DataDrivenText
-                data={data.data}
+                data={data}
                 metricName="tested_overall"
                 metricProperty="infected_per_100k"
                 differenceKey="tested_overall__infected_per_100k"
@@ -72,10 +94,10 @@ const Home: FCWithLayout<IHomeData> = (data) => {
             title={text.mini_trend_tiles.ziekenhuis_opnames.title}
             text={
               <DataDrivenText
-                data={data.data}
+                data={data}
                 metricName="hospital_nice"
-                metricProperty="admissions_moving_average"
-                differenceKey="hospital_nice__admissions_moving_average"
+                metricProperty="admissions_on_date_of_reporting"
+                differenceKey="hospital_nice__admissions_on_date_of_reporting"
                 valueTexts={text.data_driven_texts.intake_hospital_ma.value}
                 differenceTexts={
                   text.data_driven_texts.intake_hospital_ma.difference
@@ -84,13 +106,13 @@ const Home: FCWithLayout<IHomeData> = (data) => {
             }
             icon={<ZiekenhuisIcon />}
             trendData={dataHospitalIntake.values}
-            metricProperty="admissions_moving_average"
+            metricProperty="admissions_on_date_of_reporting"
           />
           <MiniTrendTile
             title={text.mini_trend_tiles.ic_opnames.title}
             text={
               <DataDrivenText
-                data={data.data}
+                data={data}
                 metricName="intensive_care_nice"
                 metricProperty="admissions_moving_average"
                 differenceKey="intensive_care_nice__admissions_moving_average"
@@ -129,14 +151,15 @@ const Home: FCWithLayout<IHomeData> = (data) => {
                 }}
               />
               <EscalationMapLegenda
+                data={choropleth.vr}
                 metricName="escalation_levels"
                 metricProperty="escalation_level"
-                text={data.text}
               />
             </>
           }
         >
           <SafetyRegionChoropleth
+            data={choropleth.vr}
             metricName="escalation_levels"
             metricProperty="escalation_level"
             onSelect={createSelectRegionHandler(router, 'maatregelen')}
@@ -169,32 +192,5 @@ const metadata = {
   title: '',
 };
 Home.getLayout = getLayoutWithMetadata(metadata);
-
-export async function getStaticProps(): Promise<StaticProps> {
-  const text = parseMarkdownInLocale((await import('../locale/index')).default);
-
-  const data = loadJsonFromDataFile<National>('NL.json');
-
-  // Strip away unused data (values) from staticProps
-  // keep last_values because we use them!
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  for (const metric of Object.values(data)) {
-    if (typeof metric === 'object' && metric !== null) {
-      for (const [metricProperty, metricValue] of Object.entries(metric)) {
-        if (metricProperty === 'values') {
-          (metricValue as {
-            values: Array<unknown>;
-          }).values = [];
-        }
-      }
-    }
-  }
-
-  sortNationalTimeSeriesInDataInPlace(data);
-
-  const lastGenerated = data.last_generated;
-
-  return { props: { data, text, lastGenerated } };
-}
 
 export default Home;

@@ -6,19 +6,22 @@ import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
-import { FCWithLayout } from '~/domain/layout/layout';
-import { getNationalLayout } from '~/domain/layout/national-layout';
 import { SEOHead } from '~/components/seoHead';
 import { DeceasedMonitorSection } from '~/domain/deceased/deceased-monitor-section';
+import { FCWithLayout } from '~/domain/layout/layout';
+import { getNationalLayout } from '~/domain/layout/national-layout';
 import siteText from '~/locale/index';
-import {
-  getNationalStaticProps,
-  NationalPageProps,
-} from '~/static-props/nl-data';
+import { getNlData, getLastGeneratedDate } from '~/static-props/get-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 
 const text = siteText.sterfte;
 
-const DeceasedNationalPage: FCWithLayout<NationalPageProps> = (props) => {
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getNlData
+);
+
+const DeceasedNationalPage: FCWithLayout<typeof getStaticProps> = (props) => {
   const dataCbs = props.data.deceased_cbs;
   const dataRivm = props.data.deceased_rivm;
 
@@ -100,7 +103,5 @@ const DeceasedNationalPage: FCWithLayout<NationalPageProps> = (props) => {
 };
 
 DeceasedNationalPage.getLayout = getNationalLayout;
-
-export const getStaticProps = getNationalStaticProps;
 
 export default DeceasedNationalPage;
