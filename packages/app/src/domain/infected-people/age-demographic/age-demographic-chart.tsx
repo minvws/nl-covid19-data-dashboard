@@ -64,8 +64,8 @@ export const AgeDemographicChart = memo<AgeDemographicChartProps>(
       ageGroupRange,
     } = coordinates;
 
-    const breakpoints = useBreakpoints();
-    const numTicksOnBreakpoint = breakpoints.xs ? numTicks : 2;
+    const { xs } = useBreakpoints();
+    const numTicksOnBreakpoint = xs ? numTicks : 2;
 
     return (
       <svg
