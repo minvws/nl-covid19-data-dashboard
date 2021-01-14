@@ -9,7 +9,9 @@ type ReadMoreLinkProps = {
 export function ReadMoreLink({ text, route }: ReadMoreLinkProps) {
   return (
     <Link href={route}>
-      <a>{text}</a> <Chevron width="14px" height="14px" />
+      <a>
+        {text} <Chevron width="14px" height="14px" />
+      </a>
     </Link>
   );
 }

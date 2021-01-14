@@ -16,8 +16,8 @@ import { escalationTooltip } from '~/components/choropleth/tooltips/region/escal
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import { Search } from '~/domain/topical/components/search';
 import { DataSitemap } from '~/domain/topical/data-site-map';
-import { LatestArticles } from '~/domain/topical/latest-articles';
 import { EscalationLevelExplanationsTile } from '~/domain/topical/escalation-level-explanations-tile';
+import { LatestArticles } from '~/domain/topical/latest-articles';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
