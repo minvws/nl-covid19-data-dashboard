@@ -29,9 +29,12 @@ import { formatAgeGroupRange } from '~/domain/infected-people/age-demographic/ag
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import {
-  getNationalStaticProps,
-  NationalPageProps,
-} from '~/static-props/nl-data';
+  createGetChoroplethData,
+  getNlData,
+  getLastGeneratedDate,
+  getText,
+} from '~/static-props/get-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import { colors } from '~/style/theme';
 import { NationalTestedPerAgeGroup } from '~/types/data.d';
 import { assert } from '~/utils/assert';
@@ -39,28 +42,21 @@ import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { formatDateFromMilliseconds } from '~/utils/formatDate';
 
-/* Retrieves certain age demographic data to be used in the example text. */
-function getAgeDemographicExampleData(data: NationalTestedPerAgeGroup) {
-  const ageGroupRange = '20-29';
-  const value = data.values.find((x) => x.age_group_range === ageGroupRange);
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getText,
+  getNlData,
+  createGetChoroplethData({
+    gm: ({ tested_overall }) => ({ tested_overall }),
+    vr: ({ tested_overall }) => ({ tested_overall }),
+  })
+);
 
-  assert(
-    value,
-    `NationalTestedPerAgeGroup should contain a value for age group ${ageGroupRange}`
-  );
-
-  return {
-    ageGroupRange: formatAgeGroupRange(ageGroupRange),
-    ageGroupPercentage: `${formatPercentage(
-      value.age_group_percentage * 100
-    )}%`,
-    infectedPercentage: `${formatPercentage(value.infected_percentage * 100)}%`,
-  };
-}
-
-const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
+const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
   data,
+  choropleth,
   text: siteText,
 }) => {
   const text = siteText.positief_geteste_personen;
@@ -191,6 +187,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
            */}
           {selectedMap === 'municipal' && (
             <MunicipalityChoropleth
+              data={choropleth.gm}
               metricName="tested_overall"
               metricProperty="infected_per_100k"
               tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
@@ -201,6 +198,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
           )}
           {selectedMap === 'region' && (
             <SafetyRegionChoropleth
+              data={choropleth.vr}
               metricName="tested_overall"
               metricProperty="infected_per_100k"
               tooltipContent={createPositiveTestedPeopleRegionalTooltip(
@@ -222,6 +220,41 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
           linesConfig={[{ metricProperty: 'infected_per_100k' }]}
           metadata={{
             source: text.bronnen.rivm,
+          }}
+          formatTooltip={(values) => {
+            const value = values[0];
+
+            return (
+              <Text textAlign="center" m={0}>
+                <span style={{ fontWeight: 'bold' }}>
+                  {formatDateFromMilliseconds(value.__date.getTime())}
+                </span>
+                <br />
+                <span
+                  style={{
+                    height: '0.5em',
+                    width: '0.5em',
+                    marginBottom: '0.5px',
+                    backgroundColor: colors.data.primary,
+                    borderRadius: '50%',
+                    display: 'inline-block',
+                  }}
+                />{' '}
+                {replaceVariablesInText(
+                  siteText.common.tooltip.positive_tested_value,
+                  {
+                    totalPositiveValue: formatNumber(value.__value),
+                  }
+                )}
+                <br />
+                {replaceVariablesInText(
+                  siteText.common.tooltip.positive_tested_people,
+                  {
+                    totalPositiveTestedPeople: formatNumber(value.infected),
+                  }
+                )}
+              </Text>
+            );
           }}
         />
 
@@ -273,7 +306,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
               absolute={dataGgdAverageLastValue.tested_total}
               difference={data.difference.tested_ggd_average__tested_total}
               differenceStaticTimespan={
-                siteText.toe_en_afname.tijdverloop.hiervoor
+                siteText.toe_en_afname.tijdverloop.vorige_week
               }
             />
             <Text>{ggdText.totaal_getest_week_uitleg}</Text>
@@ -295,7 +328,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
                 data.difference.tested_ggd_average__infected_percentage
               }
               differenceStaticTimespan={
-                siteText.toe_en_afname.tijdverloop.hiervoor
+                siteText.toe_en_afname.tijdverloop.vorige_week
               }
             />
             <Text>{ggdText.positief_getest_week_uitleg}</Text>
@@ -400,6 +433,23 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
 
 PositivelyTestedPeople.getLayout = getNationalLayout;
 
-export const getStaticProps = getNationalStaticProps;
-
 export default PositivelyTestedPeople;
+
+/* Retrieves certain age demographic data to be used in the example text. */
+function getAgeDemographicExampleData(data: NationalTestedPerAgeGroup) {
+  const ageGroupRange = '20-29';
+  const value = data.values.find((x) => x.age_group_range === ageGroupRange);
+
+  assert(
+    value,
+    `NationalTestedPerAgeGroup should contain a value for age group ${ageGroupRange}`
+  );
+
+  return {
+    ageGroupRange: formatAgeGroupRange(ageGroupRange),
+    ageGroupPercentage: `${formatPercentage(
+      value.age_group_percentage * 100
+    )}%`,
+    infectedPercentage: `${formatPercentage(value.infected_percentage * 100)}%`,
+  };
+}

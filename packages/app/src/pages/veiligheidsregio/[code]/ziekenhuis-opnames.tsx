@@ -16,17 +16,28 @@ import regionCodeToMunicipalCodeLookup from '~/data/regionCodeToMunicipalCodeLoo
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import siteText from '~/locale/index';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
-  getSafetyRegionPaths,
-  getSafetyRegionStaticProps,
-  ISafetyRegionData,
-} from '~/static-props/safetyregion-data';
+  createGetChoroplethData,
+  getLastGeneratedDate,
+  getVrData,
+} from '~/static-props/get-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+
+export { getStaticPaths } from '~/static-paths/vr';
+
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getVrData,
+  createGetChoroplethData({
+    gm: ({ hospital_nice }) => ({ hospital_nice }),
+  })
+);
 
 const text = siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
 
-const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
-  const { data, safetyRegionName } = props;
+const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
+  const { data, safetyRegionName, choropleth } = props;
   const router = useRouter();
 
   const lastValue = data.hospital_nice.last_value;
@@ -73,9 +84,9 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
           >
             <KpiValue
               data-cy="hospital_moving_avg_per_region"
-              absolute={lastValue.admissions_moving_average}
+              absolute={lastValue.admissions_on_date_of_reporting}
               difference={
-                data.difference.hospital_nice__admissions_moving_average
+                data.difference.hospital_nice__admissions_on_date_of_reporting
               }
             />
           </KpiTile>
@@ -88,7 +99,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
           description={text.map_toelichting}
           legend={{
             thresholds:
-              municipalThresholds.hospital_nice.admissions_moving_average,
+              municipalThresholds.hospital_nice.admissions_on_date_of_reporting,
             title: siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel,
           }}
           metadata={{
@@ -99,8 +110,9 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
           <MunicipalityChoropleth
             selected={selectedMunicipalCode}
             highlightSelection={false}
+            data={choropleth.gm}
             metricName="hospital_nice"
-            metricProperty="admissions_moving_average"
+            metricProperty="admissions_on_date_of_reporting"
             tooltipContent={createMunicipalHospitalAdmissionsTooltip(
               createSelectMunicipalHandler(router, 'ziekenhuis-opnames')
             )}
@@ -119,7 +131,7 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
             values={data.hospital_nice.values}
             linesConfig={[
               {
-                metricProperty: 'admissions_moving_average',
+                metricProperty: 'admissions_on_date_of_admission',
               },
             ]}
           />
@@ -130,8 +142,5 @@ const IntakeHospital: FCWithLayout<ISafetyRegionData> = (props) => {
 };
 
 IntakeHospital.getLayout = getSafetyRegionLayout();
-
-export const getStaticProps = getSafetyRegionStaticProps;
-export const getStaticPaths = getSafetyRegionPaths();
 
 export default IntakeHospital;

@@ -3,6 +3,7 @@ import { Feature, MultiPolygon } from 'geojson';
 import { ReactNode, useCallback } from 'react';
 import { AspectRatio } from '~/components-styled/aspect-ratio';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
+import { Regions } from '~/types/data';
 import { Choropleth } from './choropleth';
 import {
   useChartDimensions,
@@ -10,13 +11,15 @@ import {
   useSafetyRegionBoundingbox,
   useSafetyRegionData,
 } from './hooks';
+import { useChoroplethDataDescription } from './hooks/use-choropleth-data-description';
 import { getDataThresholds } from './legenda/utils';
 import { Path } from './path';
-import { SafetyRegionProperties, RegionsMetricName } from './shared';
+import { RegionsMetricName, SafetyRegionProperties } from './shared';
 import { countryGeo, regionGeo } from './topology';
 
-type SafetyRegionChoroplethProps<T> = {
-  metricName: RegionsMetricName;
+type SafetyRegionChoroplethProps<T, K extends RegionsMetricName> = {
+  data: Pick<Regions, K>;
+  metricName: K;
   metricProperty: string;
   selected?: string;
   highlightSelection?: boolean;
@@ -39,10 +42,11 @@ type SafetyRegionChoroplethProps<T> = {
  *
  * @param props
  */
-export function SafetyRegionChoropleth<T>(
-  props: SafetyRegionChoroplethProps<T>
+export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
+  props: SafetyRegionChoroplethProps<T, K>
 ) {
   const {
+    data,
     selected,
     highlightSelection = true,
     metricName,
@@ -56,16 +60,25 @@ export function SafetyRegionChoropleth<T>(
 
   const boundingBox = useSafetyRegionBoundingbox(regionGeo, selected);
 
-  const { getChoroplethValue, hasData } = useSafetyRegionData(
+  const { getChoroplethValue, hasData, values } = useSafetyRegionData(
     regionGeo,
     metricName,
-    metricProperty
+    metricProperty,
+    data
   );
 
   const selectedThreshold = getDataThresholds(
     regionThresholds,
     metricName,
     metricProperty
+  );
+
+  const dataDescription = useChoroplethDataDescription(
+    selectedThreshold,
+    values,
+    metricName,
+    metricProperty,
+    'vr'
   );
 
   const getFillColor = useChoroplethColorScale(
@@ -135,6 +148,7 @@ export function SafetyRegionChoropleth<T>(
     <div ref={ref} css={css({ position: 'relative', bg: 'transparent' })}>
       <AspectRatio ratio={1 / ratio}>
         <Choropleth
+          description={dataDescription}
           featureCollection={regionGeo}
           hovers={hasData ? regionGeo : undefined}
           boundingBox={boundingBox || countryGeo}

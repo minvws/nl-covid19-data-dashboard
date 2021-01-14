@@ -259,18 +259,16 @@ export function LineChart<T extends Value>({
     (x: ChartScales) => (
       <>
         {trendsList.map((trend, index) => (
-          <>
-            <Trend
-              key={index}
-              trend={trend}
-              type={hideFill ? 'line' : 'area'}
-              style={linesConfig[index].style}
-              xScale={x.xScale}
-              yScale={x.yScale}
-              color={linesConfig[index].color}
-              onHover={handleHover}
-            />
-          </>
+          <Trend
+            key={index}
+            trend={trend}
+            type={hideFill ? 'line' : 'area'}
+            style={linesConfig[index].style}
+            xScale={x.xScale}
+            yScale={x.yScale}
+            color={linesConfig[index].color}
+            onHover={handleHover}
+          />
         ))}
       </>
     ),
@@ -356,7 +354,9 @@ function formatDefaultTooltip<T extends Value>(
   if (isDaily) {
     return (
       <>
-        <Text as="span" fontWeight="bold">{formatDateFromMilliseconds(value.__date.getTime())}: </Text>
+        <Text as="span" fontWeight="bold">
+          {formatDateFromMilliseconds(value.__date.getTime()) + ': '}
+        </Text>
         {isPercentage
           ? `${formatPercentage(value.__value)}%`
           : formatNumber(value.__value)}

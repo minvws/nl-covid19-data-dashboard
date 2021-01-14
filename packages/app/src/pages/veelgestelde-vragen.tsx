@@ -1,45 +1,34 @@
-import fs from 'fs';
+import { groq } from 'next-sanity';
 import Head from 'next/head';
-import path from 'path';
-import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
+import { Collapsible } from '~/components-styled/collapsible';
 import { MaxWidth } from '~/components-styled/max-width';
+import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
+import { PortableText } from '~/lib/sanity';
 import siteText from '~/locale/index';
+import {
+  createGetContent,
+  getLastGeneratedDate,
+} from '~/static-props/get-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import { CollapsibleList } from '~/types/cms';
 import { getSkipLinkId } from '~/utils/skipLinks';
 import styles from './over.module.scss';
-import { Collapsable } from '~/components-styled/collapsable';
-import { targetLanguage } from '../locale/index';
-import { groq } from 'next-sanity';
-import { getClient, localize, PortableText } from '~/lib/sanity';
-interface StaticProps {
-  props: VeelgesteldeVragenProps;
+
+interface VeelgesteldeVragenData {
+  title: string | null;
+  description: unknown[] | null;
+  questions: CollapsibleList[];
 }
 
-interface VeelgesteldeVragenProps {
-  data: {
-    title: string;
-    description: string | null;
-    questions: Array<{ content: Array<any>; title: string }>;
-  };
-  lastGenerated: string;
-}
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  createGetContent<VeelgesteldeVragenData>(groq`
+    *[_type == 'veelgesteldeVragen'][0]
+  `)
+);
 
-const faqQuery = groq`
-  *[_type == 'veelgesteldeVragen'][0]
-`;
-
-export async function getStaticProps(): Promise<StaticProps> {
-  const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
-  const fileContents = fs.readFileSync(filePath, 'utf8');
-  const lastGenerated = JSON.parse(fileContents).last_generated;
-
-  const faqData = await getClient(false).fetch(faqQuery);
-  const data = localize(faqData, [targetLanguage, 'nl']);
-
-  return { props: { data, lastGenerated } };
-}
-
-const Verantwoording: FCWithLayout<VeelgesteldeVragenProps> = (props) => {
-  const { data } = props;
+const Verantwoording: FCWithLayout<typeof getStaticProps> = (props) => {
+  const { content } = props;
 
   return (
     <>
@@ -60,23 +49,21 @@ const Verantwoording: FCWithLayout<VeelgesteldeVragenProps> = (props) => {
       <div className={styles.container}>
         <MaxWidth>
           <div className={styles.maxwidth}>
-            <h2>{data.title}</h2>
-
-            {data.description && <PortableText blocks={data.description} />}
-
-            {data.questions ? (
+            {content.title && <h2>{content.title}</h2>}
+            {content.description && (
+              <PortableText blocks={content.description} />
+            )}
+            {content.questions && (
               <article className={styles.faqList}>
-                {data.questions.map((item: any) => {
+                {content.questions.map((item) => {
                   const id = getSkipLinkId(item.title);
                   return (
-                    <Collapsable key={id} id={id} summary={item.title}>
+                    <Collapsible key={id} id={id} summary={item.title}>
                       <PortableText blocks={item.content} />
-                    </Collapsable>
+                    </Collapsible>
                   );
                 })}
               </article>
-            ) : (
-              <p>Er zijn geen vragen gevonden</p>
             )}
           </div>
         </MaxWidth>
