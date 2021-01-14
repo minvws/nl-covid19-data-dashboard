@@ -28,6 +28,7 @@ const HeaderBox = styled.header<{
     mt: 0,
     ml: x.skipLinkAnchor ? '-100vw' : x.hasIcon ? undefined : 5,
     pl: x.skipLinkAnchor ? '100vw' : undefined,
+    pointerEvents: 'none',
   })
 );
 
@@ -42,7 +43,11 @@ const Header = (props: HeaderProps) => {
   const { hasIcon, children, skipLinkAnchor, id } = props;
   return (
     <HeaderBox id={id} hasIcon={hasIcon} skipLinkAnchor={skipLinkAnchor}>
-      {children}
+      {skipLinkAnchor ? (
+        <PointerEventsBox>{children}</PointerEventsBox>
+      ) : (
+        children
+      )}
     </HeaderBox>
   );
 };
@@ -83,13 +88,19 @@ const ReferenceBox = styled(Box)(
   css({
     maxWidth: '30em',
     marginRight: 3,
-    flex: asResponsiveArray({ md: '1 1 auto', lg: '1 1 60%' })
+    flex: asResponsiveArray({ md: '1 1 auto', lg: '1 1 60%' }),
   })
 );
 
 const MetadataBox = styled(Box)(
   css({
-    flex: asResponsiveArray({ md: '1 1 auto', lg: '1 1 40%' })
+    flex: asResponsiveArray({ md: '1 1 auto', lg: '1 1 40%' }),
+  })
+);
+
+const PointerEventsBox = styled(Box)(
+  css({
+    pointerEvents: 'auto',
   })
 );
 
