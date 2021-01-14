@@ -1,4 +1,4 @@
-// lib/sanity.ts
+// lib/sanity.tsx
 import {
   createClient,
   createImageUrlBuilder,
@@ -6,6 +6,7 @@ import {
   createPreviewSubscriptionHook,
   createCurrentUserHook,
 } from 'next-sanity';
+import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 import { TLanguageKey } from '~/locale';
 
 const config = {
@@ -30,7 +31,7 @@ const config = {
  * Set up a helper function for generating Image URLs with only the asset reference data in your documents.
  * Read more: https://www.sanity.io/docs/image-url
  **/
-export const urlFor = (source: any) =>
+export const urlFor = (source: SanityImageSource) =>
   createImageUrlBuilder(config).image(source);
 
 // Set up the live preview subsscription hook

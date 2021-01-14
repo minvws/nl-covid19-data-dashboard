@@ -26,6 +26,7 @@ export interface Article {
   content: RichContentBlock[] | null;
   metaDescription: string;
   publicationDate: string;
+  isHighlighted: boolean;
 }
 
 type RichContentBlock =
@@ -43,6 +44,9 @@ interface Block {
 interface RichContentImageBlock {
   _key: string;
   _type: 'image';
+  alt: string;
+  isFullWidth?: boolean;
+  caption?: string;
 }
 
 // @TODO more properties are needed

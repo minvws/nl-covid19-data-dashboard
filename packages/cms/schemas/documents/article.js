@@ -54,6 +54,9 @@ export default {
       title: 'Afbeelding',
       name: 'cover',
       type: 'image',
+      options: {
+        hotspot: true
+      },
       fields: [
         {
           title: 'Omschrijving',

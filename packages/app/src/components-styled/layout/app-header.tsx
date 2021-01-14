@@ -19,7 +19,7 @@ export function AppHeader() {
           flexWrap="wrap"
           alignItems="center"
           justifyContent="space-between"
-          px={{ _: 3, sm: 4 }}
+          px={{ _: 3, sm: 4, md: 3, lg: 4 }}
         >
           <Box
             fontSize={3}

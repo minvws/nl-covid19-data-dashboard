@@ -123,8 +123,13 @@ export const colors = {
 const radii = [0, 5, 10];
 
 const shadows = {
-  tile: ' 0px 4px 8px rgba(0, 0, 0, 0.1)',
+  tile: '0px 4px 8px rgba(0, 0, 0, 0.1)',
 } as const;
+
+const sizes = {
+  maxWidth: 1400,
+  contentWidth: 700,
+};
 
 const theme = {
   fonts,
@@ -137,6 +142,7 @@ const theme = {
   colors,
   radii,
   shadows,
+  sizes,
 } as const;
 
 type Theme = typeof theme;
