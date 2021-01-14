@@ -4,33 +4,9 @@ import path from 'path';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import { getClient, localize } from '~/lib/sanity';
 import { targetLanguage, TALLLanguages } from '~/locale/index';
+import { Article } from '~/types/cms';
 import { Link } from '~/utils/link';
 import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
-
-export interface Article {
-  title: string;
-  slug: {
-    current: string;
-  };
-  intro: Block;
-  content: RichContentBlock[];
-  metaDescription: string;
-  publicactionDate: string;
-}
-
-interface Block {
-  _type: string;
-}
-
-interface RichContentBlock {}
-
-interface RichConentImageBlock {}
-
-interface RichContentLineChartBlock {
-  _type: 'lineChart';
-  metricName: string;
-  metricProperty: string;
-}
 
 interface StaticProps {
   props: ArtikelenProps;

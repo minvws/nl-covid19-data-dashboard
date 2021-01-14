@@ -5,8 +5,8 @@ import path from 'path';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import { getClient, localize } from '~/lib/sanity';
 import { targetLanguage, TALLLanguages } from '~/locale/index';
+import { Article } from '~/types/cms';
 import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
-import { Article } from '.';
 
 interface StaticProps {
   props: ArtikelProps;
