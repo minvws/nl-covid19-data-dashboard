@@ -1,45 +1,34 @@
-import fs from 'fs';
 import { groq } from 'next-sanity';
 import Head from 'next/head';
-import path from 'path';
 import { Collapsible } from '~/components-styled/collapsible';
 import { MaxWidth } from '~/components-styled/max-width';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
-import { getClient, localize, PortableText } from '~/lib/sanity';
-import siteText, { targetLanguage } from '~/locale/index';
+import { PortableText } from '~/lib/sanity';
+import siteText from '~/locale/index';
+import {
+  createGetContent,
+  getLastGeneratedDate,
+} from '~/static-props/get-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import { CollapsibleList } from '~/types/cms';
 import { getSkipLinkId } from '~/utils/skipLinks';
 import styles from './over.module.scss';
 
-interface StaticProps {
-  props: VerantwoordingProps;
+interface VerantwoordingData {
+  title: string | null;
+  description: unknown[] | null;
+  collapsibleList: CollapsibleList[];
 }
 
-interface VerantwoordingProps {
-  data: {
-    title: string | null;
-    description: unknown[] | null;
-    collapsibleList: CollapsibleList[];
-  };
-  lastGenerated: string;
-}
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  createGetContent<VerantwoordingData>(groq`
+    *[_type == 'cijferVerantwoording'][0]
+  `)
+);
 
-export async function getStaticProps(): Promise<StaticProps> {
-  const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
-  const fileContents = fs.readFileSync(filePath, 'utf8');
-  const lastGenerated = JSON.parse(fileContents).last_generated;
-
-  const query = groq`
-  *[_type == 'cijferVerantwoording'][0]
-`;
-  const rawData = await getClient(false).fetch(query);
-  const data = localize(rawData, [targetLanguage, 'nl']);
-
-  return { props: { data, lastGenerated } };
-}
-
-const Verantwoording: FCWithLayout<VerantwoordingProps> = (props) => {
-  const { data } = props;
+const Verantwoording: FCWithLayout<typeof getStaticProps> = (props) => {
+  const { content } = props;
 
   return (
     <>
@@ -60,11 +49,13 @@ const Verantwoording: FCWithLayout<VerantwoordingProps> = (props) => {
       <div className={styles.container}>
         <MaxWidth>
           <div className={styles.maxwidth}>
-            {data.title && <h2>{data.title}</h2>}
-            {data.description && <PortableText blocks={data.description} />}
-            {data.collapsibleList && (
+            {content.title && <h2>{content.title}</h2>}
+            {content.description && (
+              <PortableText blocks={content.description} />
+            )}
+            {content.collapsibleList && (
               <article className={styles.faqList}>
-                {data.collapsibleList.map((item) => {
+                {content.collapsibleList.map((item) => {
                   const id = getSkipLinkId(item.title);
                   return (
                     <Collapsible key={id} id={id} summary={item.title}>

@@ -7,18 +7,21 @@ import { PageBarScale } from '~/components-styled/page-barscale';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
+import { SEOHead } from '~/components/seoHead';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
-import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
-import {
-  getNationalStaticProps,
-  NationalPageProps,
-} from '~/static-props/nl-data';
+import { getNlData, getLastGeneratedDate } from '~/static-props/get-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 
 const text = siteText.ic_opnames_per_dag;
 
-const IntakeIntensiveCare: FCWithLayout<NationalPageProps> = (props) => {
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getNlData
+);
+
+const IntakeIntensiveCare: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data } = props;
 
   const dataIntake = data.intensive_care_nice;
@@ -114,7 +117,5 @@ const IntakeIntensiveCare: FCWithLayout<NationalPageProps> = (props) => {
 };
 
 IntakeIntensiveCare.getLayout = getNationalLayout;
-
-export const getStaticProps = getNationalStaticProps;
 
 export default IntakeIntensiveCare;

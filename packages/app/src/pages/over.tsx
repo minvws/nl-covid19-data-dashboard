@@ -1,48 +1,25 @@
-import fs from 'fs';
 import { groq } from 'next-sanity';
 import Head from 'next/head';
+
 import Image from 'next/image';
 
-import path from 'path';
 import { MaxWidth } from '~/components-styled/max-width';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
-import { getClient, localize, PortableText } from '~/lib/sanity';
-import siteText, { targetLanguage } from '~/locale/index';
+import { PortableText } from '~/lib/sanity';
+import siteText from '~/locale/index';
+import { getContent, getLastGeneratedDate } from '~/static-props/get-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import styles from './over.module.scss';
 
-interface StaticProps {
-  props: OverProps;
+interface OverData {
+  title: string | null;
+  description: unknown[] | null;
 }
 
-interface OverProps {
-  data: {
-    title: string | null;
-    description: unknown[] | null;
-  };
-  imageData: any;
-  lastGenerated: string;
+interface ImageData {
+  coverImage: unknown;
 }
 
-export async function getStaticProps(): Promise<StaticProps> {
-  const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
-  const fileContents = fs.readFileSync(filePath, 'utf8');
-  const lastGenerated = JSON.parse(fileContents).last_generated;
-
-  const query = groq`
-  *[_type == 'overDitDashboard'][0]
-`;
-
-  const imageQuery = groq`*[_type == 'imagePipelineTest'][0]{
-    ...,
-    "coverImage": coverImage.asset->
-  }`;
-
-  const rawData = await getClient(false).fetch(query);
-  const imageData = await getClient(false).fetch(imageQuery);
-  const data = localize(rawData, [targetLanguage, 'nl']);
-
-  return { props: { data, imageData, lastGenerated } };
-}
 // find closest resized element
 function closest(width: number) {
   const sizes = [320, 640, 768, 1024, 1280, 1536, 2048];
@@ -72,9 +49,28 @@ const myLoader = (props: LoaderProps) => {
   return `/cms/${filename}-${closest(width)}.${extension}`;
 };
 
-const Over: FCWithLayout<OverProps> = (props) => {
-  const { data, imageData } = props;
-  const { coverImage } = imageData;
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+
+  async () => ({
+    content: await getContent<OverData>(groq`
+      *[_type == 'overDitDashboard'][0]
+    `),
+  }),
+
+  async () => ({
+    imageContent: await getContent<ImageData>(groq`
+      *[_type == 'imagePipelineTest'][0]{
+      ...,
+      "coverImage": coverImage.asset->
+    }
+    `),
+  })
+);
+
+const Over: FCWithLayout<typeof getStaticProps> = (props) => {
+  const { content, imageContent } = props;
+  const { coverImage } = imageContent;
 
   return (
     <>
@@ -95,7 +91,7 @@ const Over: FCWithLayout<OverProps> = (props) => {
       <div className={styles.container}>
         <MaxWidth>
           <div className={styles.maxwidth}>
-            {data.title && <h2>{data.title}</h2>}
+            {content.title && <h2>{content.title}</h2>}
 
             <Image
               loader={myLoader}
@@ -105,7 +101,9 @@ const Over: FCWithLayout<OverProps> = (props) => {
               height={630 / coverImage.metadata.dimensions.aspectRatio}
             />
 
-            {data.description && <PortableText blocks={data.description} />}
+            {content.description && (
+              <PortableText blocks={content.description} />
+            )}
           </div>
         </MaxWidth>
       </div>
