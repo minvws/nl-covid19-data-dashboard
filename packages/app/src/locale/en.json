@@ -1376,7 +1376,8 @@
         "enkelvoud": "week",
         "meervoud": "weeks"
       },
-      "hiervoor": "before"
+      "vorige_week": "last week",
+      "ervoor": "before"
     }
   },
   "aria_labels": {

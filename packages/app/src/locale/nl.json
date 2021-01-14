@@ -1368,6 +1368,7 @@
     "toename": "meer dan",
     "afname": "minder dan",
     "gelijk": "gelijk aan",
+    "ervoor": "ervoor",
     "tijdverloop": {
       "gisteren": "gisteren",
       "geleden": "geleden",
@@ -1376,7 +1377,8 @@
         "enkelvoud": "week",
         "meervoud": "weken"
       },
-      "hiervoor": "hiervoor"
+      "vorige_week": "vorige week",
+      "ervoor": "ervoor"
     }
   },
   "aria_labels": {
