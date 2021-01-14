@@ -123,7 +123,6 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
             description={text.linechart_description}
             metadata={{ source: text.bronnen.rivm }}
             timeframeOptions={['all', '5weeks', 'week']}
-            timeframeInitialValue="5weeks"
             values={data.hospital_nice.values}
             linesConfig={[
               {

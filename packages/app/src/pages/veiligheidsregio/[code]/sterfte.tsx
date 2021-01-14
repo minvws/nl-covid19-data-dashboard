@@ -91,7 +91,6 @@ const DeceasedRegionalPage: FCWithLayout<typeof getStaticProps> = (props) => {
 
         <LineChartTile
           timeframeOptions={['all', '5weeks']}
-          timeframeInitialValue="all"
           title={text.section_deceased_rivm.line_chart_covid_daily_title}
           description={
             text.section_deceased_rivm.line_chart_covid_daily_description
