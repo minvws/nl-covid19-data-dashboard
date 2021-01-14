@@ -6,21 +6,13 @@ import siteText from '~/locale/index';
 
 export type EscalationLevelProps = {
   escalationLevel: EscalationLevel;
-  width?: string;
 };
 
 export function EscalationLevelInfoLabel(props: EscalationLevelProps) {
-  const { escalationLevel, width } = props;
+  const { escalationLevel } = props;
 
   return (
-    <Box
-      display="flex"
-      width={width}
-      alignItems="center"
-      justifyContent="flex-start"
-      flexGrow={0}
-      flexShrink={0}
-    >
+    <Box display="flex" alignItems="center" justifyContent="flex-start">
       <EscalationLevelIcon level={escalationLevel} />
       <Text as="span" ml={2} fontWeight="bold">
         {siteText.escalatie_niveau.types[escalationLevel].titel}
