@@ -14,7 +14,7 @@
     "lint": "echo '@TODO add eslint'",
     "images": "run-s images:download images:resize",
     "images:download": "bash scripts/images-download.sh",
-    "images:resize": "node scripts/images-resize.js"
+    "images:resize": "ts-node scripts/images-resize.js"
   },
   "keywords": [
     "sanity"
