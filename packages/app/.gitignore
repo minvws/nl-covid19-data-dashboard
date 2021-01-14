@@ -5,7 +5,7 @@
 /out
 
 # Images that are processed by Sanity/Resizing
-public/sanity
+public/cms
 
 # dependencies
 node_modules
