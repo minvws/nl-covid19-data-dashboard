@@ -1051,6 +1051,8 @@
   },
   "escalatie_niveau": {
     "titel": "Level of risk",
+    "tile_title": "",
+    "lees_meer": "",
     "toelichting": "The map indicates the level of risk per safety region.\n\n[More about risk levels](/over-risiconiveaus)",
     "types": {
       "1": {
@@ -1077,7 +1079,7 @@
     "legenda": {
       "titel": "Legend",
       "geen_regio": "geen regio's",
-      "regios": "{{amount}} regio's"  
+      "regios": "{{amount}} regio's"
     },
     "valid_from": "Valid from {{validFrom}}",
     "sidebar_label": "Level of risk:"
@@ -2010,7 +2012,7 @@
   "common.tooltip.positive_tested_value": "",
   "search": {
     "placeholder": "Find a municipality or safery region",
-    "clear":"Clear search",
+    "clear": "Clear search",
     "no_hits": "No {{subject}} found with “{{search}}”"
   },
 
