@@ -58,7 +58,7 @@ export const nl: NlConfig = {
   },
 
   hospital_nice: {
-    admissions_moving_average: {
+    admissions_on_date_of_reporting: {
       isDecimal: true,
       barScale: {
         min: 0,

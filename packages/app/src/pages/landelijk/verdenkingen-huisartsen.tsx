@@ -6,19 +6,22 @@ import { KpiValue } from '~/components-styled/kpi-value';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
-import { FCWithLayout } from '~/domain/layout/layout';
-import { getNationalLayout } from '~/domain/layout/national-layout';
 import { LineChartWithWeekTooltip } from '~/components/lineChart/lineChartWithWeekTooltip';
 import { SEOHead } from '~/components/seoHead';
+import { FCWithLayout } from '~/domain/layout/layout';
+import { getNationalLayout } from '~/domain/layout/national-layout';
 import siteText from '~/locale/index';
-import {
-  getNationalStaticProps,
-  NationalPageProps,
-} from '~/static-props/nl-data';
+import { getNlData, getLastGeneratedDate } from '~/static-props/get-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 
 const text = siteText.verdenkingen_huisartsen;
 
-const SuspectedPatients: FCWithLayout<NationalPageProps> = (props) => {
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getNlData
+);
+
+const SuspectedPatients: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data } = props;
   const lastValue = data.doctor.last_value;
 
@@ -100,7 +103,5 @@ const SuspectedPatients: FCWithLayout<NationalPageProps> = (props) => {
 };
 
 SuspectedPatients.getLayout = getNationalLayout;
-
-export const getStaticProps = getNationalStaticProps;
 
 export default SuspectedPatients;

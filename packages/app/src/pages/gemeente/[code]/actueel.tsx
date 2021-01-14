@@ -1,27 +1,38 @@
 import { useRouter } from 'next/router';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
-import { Tile } from '~/components-styled/tile';
+import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
 import { MaxWidth } from '~/components-styled/max-width';
+import { QuickLinks } from '~/components-styled/quick-links';
+import { Tile } from '~/components-styled/tile';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
-import { TALLLanguages } from '~/locale/';
-import { EscalationMapLegenda } from '~/pages/veiligheidsregio';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
-  getMunicipalityData,
-  getMunicipalityPaths,
-  IMunicipalityData,
-} from '~/static-props/municipality-data';
-import { QuickLinks } from '~/components-styled/quick-links';
+  createGetChoroplethData,
+  getGmData,
+  getLastGeneratedDate,
+  getText,
+} from '~/static-props/get-data';
 import { getSafetyRegionForMunicipalityCode } from '~/utils/getSafetyRegionForMunicipalityCode';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
-type ActueelData = IMunicipalityData & { text: TALLLanguages };
+export { getStaticPaths } from '~/static-paths/gm';
 
-const MunicipalityActueel: FCWithLayout<ActueelData> = (data) => {
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getText,
+  getGmData,
+  createGetChoroplethData({
+    vr: ({ escalation_levels }) => ({ escalation_levels }),
+  })
+);
+
+const MunicipalityActueel: FCWithLayout<typeof getStaticProps> = (props) => {
+  const { text: siteText, municipalityName, choropleth } = props;
   const router = useRouter();
-  const text = data.text.gemeente_actueel;
+  const text = siteText.gemeente_actueel;
   const safetyRegionForMunicipality =
     typeof router.query.code === 'string'
       ? getSafetyRegionForMunicipalityCode(router.query.code)
@@ -29,7 +40,7 @@ const MunicipalityActueel: FCWithLayout<ActueelData> = (data) => {
 
   return (
     <MaxWidth>
-      <Tile>De actuele situatie in {data.municipalityName}</Tile>
+      <Tile>De actuele situatie in {municipalityName}</Tile>
       <Tile>Artikelen</Tile>
       <ChoroplethTile
         title={text.risiconiveaus.selecteer_titel}
@@ -41,7 +52,7 @@ const MunicipalityActueel: FCWithLayout<ActueelData> = (data) => {
               }}
             />
             <EscalationMapLegenda
-              text={data.text}
+              data={choropleth.vr}
               metricName="escalation_levels"
               metricProperty="escalation_level"
             />
@@ -49,6 +60,7 @@ const MunicipalityActueel: FCWithLayout<ActueelData> = (data) => {
         }
       >
         <SafetyRegionChoropleth
+          data={choropleth.vr}
           metricName="escalation_levels"
           metricProperty="escalation_level"
           onSelect={createSelectRegionHandler(router)}
@@ -75,7 +87,7 @@ const MunicipalityActueel: FCWithLayout<ActueelData> = (data) => {
           {
             href: '/gemeentes',
             text: replaceVariablesInText(text.quick_links.links.gemeente, {
-              municipalityName: data.municipalityName,
+              municipalityName: municipalityName,
             }),
           },
         ]}
@@ -89,8 +101,5 @@ const metadata = {
   title: '',
 };
 MunicipalityActueel.getLayout = getLayoutWithMetadata(metadata);
-
-export const getStaticProps = getMunicipalityData();
-export const getStaticPaths = getMunicipalityPaths();
 
 export default MunicipalityActueel;
