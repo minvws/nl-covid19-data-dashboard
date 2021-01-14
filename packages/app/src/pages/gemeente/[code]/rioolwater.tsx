@@ -145,7 +145,6 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
             title={text.linechart_titel}
             metadata={{ source: text.bronnen.rivm }}
             timeframeOptions={['all', '5weeks']}
-            timeframeInitialValue="all"
           >
             {(timeframe) => (
               <>
