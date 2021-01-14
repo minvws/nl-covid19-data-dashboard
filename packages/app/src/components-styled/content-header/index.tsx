@@ -28,7 +28,7 @@ const HeaderBox = styled.header<{
     mt: 0,
     ml: x.skipLinkAnchor ? '-100vw' : x.hasIcon ? undefined : 5,
     pl: x.skipLinkAnchor ? '100vw' : undefined,
-    pointerEvents: 'none',
+    pointerEvents: x.skipLinkAnchor ? 'none' : 'auto',
   })
 );
 
