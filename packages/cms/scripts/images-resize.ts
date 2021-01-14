@@ -2,7 +2,7 @@ const sharp = require("sharp");
 const fs = require("fs");
 const path = require("path");
 
-let walkPath = "../app/public/cms";
+const walkPath = "../app/public/cms";
 
 // These are the sizes we want to resize our original images to
 const sizes = [320, 640, 768, 1024, 1280, 1536, 2048];
@@ -53,14 +53,6 @@ function walk(dir, done) {
     })();
   });
 }
-
-// optional command line params
-//      source for walk path
-process.argv.forEach(function (val, index, array) {
-  if (val.indexOf("source") !== -1) {
-    walkPath = val.split("=")[1];
-  }
-});
 
 console.log("-------------------------------------------------------------");
 console.log(`We're going to resize images in ${walkPath}...`);
