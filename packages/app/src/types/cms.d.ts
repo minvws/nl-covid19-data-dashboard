@@ -8,6 +8,16 @@ export type CollapsibleList = {
   title: string;
 };
 
+export interface SanityImageProps {
+  assetId: string;
+  extension: string;
+  metadata: {
+    dimensions: {
+      aspectRatio: number;
+    };
+  };
+}
+
 declare module 'picosanity' {
   type QueryParams = { [key: string]: unknown };
 

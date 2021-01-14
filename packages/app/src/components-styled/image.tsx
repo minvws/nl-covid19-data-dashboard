@@ -1,4 +1,5 @@
 import { findClosestSize } from '~/utils/findClosestSize';
+import styled from 'styled-components/';
 const config = require('~/config.js');
 
 type ImageProps = {
@@ -7,6 +8,11 @@ type ImageProps = {
   height: number;
   alt?: string;
 };
+
+const Img = styled.img`
+  max-width: 100%;
+  height: auto;
+`;
 
 /**
  *
@@ -28,12 +34,12 @@ export function Image(props: ImageProps) {
   const url = `/cms${filename}-${findClosestSize(width)}.${extension}`;
 
   return (
-    <img
+    <Img
       src={url}
       srcSet={srcSet}
       alt={alt}
       width={width}
-      height={height}
+      height={Math.floor(height)}
       loading="lazy"
     />
   );

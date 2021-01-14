@@ -1,16 +1,14 @@
-import { groq } from 'next-sanity';
-import Head from 'next/head';
-
-import Image from 'next/image';
-
-import { MaxWidth } from '~/components-styled/max-width';
-import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
-import { PortableText } from '~/lib/sanity';
-import siteText from '~/locale/index';
-import { getContent, getLastGeneratedDate } from '~/static-props/get-data';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
+import { getContent, getLastGeneratedDate } from '~/static-props/get-data';
+import { groq } from 'next-sanity';
+import { Image } from '~/components-styled/image';
+import { MaxWidth } from '~/components-styled/max-width';
+import { PortableText } from '~/lib/sanity';
+import { SanityImageProps } from '~/types/cms';
+import Head from 'next/head';
+import siteText from '~/locale/index';
 import styles from './over.module.scss';
-import { imageLoader, SanityImageProps } from '~/utils/imageLoader';
 
 interface OverData {
   title: string | null;
@@ -66,8 +64,6 @@ const Over: FCWithLayout<typeof getStaticProps> = (props) => {
             {content.title && <h2>{content.title}</h2>}
 
             <Image
-              loader={imageLoader}
-              layout="responsive"
               src={`/${coverImage.assetId}.${coverImage.extension}`}
               width="630"
               height={630 / coverImage.metadata.dimensions.aspectRatio}
