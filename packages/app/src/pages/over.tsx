@@ -17,7 +17,15 @@ interface OverData {
 }
 
 interface ImageData {
-  coverImage: unknown;
+  coverImage: {
+    assetId: string;
+    extension: string;
+    metadata: {
+      dimensions: {
+        aspectRatio: number;
+      };
+    };
+  };
 }
 
 // find closest resized element
