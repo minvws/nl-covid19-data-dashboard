@@ -4,8 +4,8 @@
   "title": "national",
   "required": [
     "behavior",
-    "behavior_app",
     "code",
+    "corona_app",
     "deceased_cbs",
     "deceased_rivm",
     "difference",
@@ -106,8 +106,8 @@
     "elderly_at_home": {
       "$ref": "elderly_at_home.json"
     },
-    "behavior_app": {
-      "$ref": "behavior_app.json"
+    "corona_app": {
+      "$ref": "corona_app.json"
     }
   }
 }

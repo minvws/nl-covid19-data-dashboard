@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "national_behavior_app",
+  "title": "nl_corona_app",
   "type": "object",
   "properties": {
     "values": {
@@ -17,13 +17,13 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "national_behavior_app_value",
+      "title": "national_corona_app_value",
       "type": "object",
       "properties": {
-        "download_total": {
+        "downloaded_total": {
           "type": "integer"
         },
-        "warning_daily": {
+        "warned_daily": {
           "type": "integer"
         },
         "date_unix": {
@@ -34,8 +34,8 @@
         }
       },
       "required": [
-        "download_total",
-        "warning_daily",
+        "downloaded_total",
+        "warned_daily",
         "date_unix",
         "date_of_insertion_unix"
       ],

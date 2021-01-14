@@ -57,7 +57,7 @@
     "reproduction__index_average": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "behavior_app__warning_daily": {
+    "corona_app__warned_daily": {
       "$ref": "#/definitions/diff_integer"
     }
   },
@@ -80,7 +80,7 @@
     "nursing_home__newly_infected_people",
     "nursing_home__infected_locations_total",
     "nursing_home__deceased_daily",
-    "behavior_app__warning_daily"
+    "corona_app__warned_daily"
   ],
   "additionalProperties": false,
   "definitions": {
