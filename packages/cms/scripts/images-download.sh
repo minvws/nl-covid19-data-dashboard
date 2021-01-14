@@ -8,7 +8,7 @@ rm -rf ../app/public/cms
 # Download the data and unzip it in a predictable folder
 sanity dataset export production production.tar.gz --overwrite
 tar -xzf *.gz 
-mv production-export* export
+mv *-export* export
 
 # Rename sha1-widthxheight.extension to sha1.extension
 cd export/images
