@@ -10,7 +10,7 @@ import siteText from '~/locale/index';
 import { getContent, getLastGeneratedDate } from '~/static-props/get-data';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import styles from './over.module.scss';
-import { findClosestSize } from '~/utils/findClosestSize';
+import { imageLoader, SanityImageProps } from '~/utils/imageLoader';
 
 interface OverData {
   title: string | null;
@@ -18,29 +18,8 @@ interface OverData {
 }
 
 interface ImageData {
-  coverImage: {
-    assetId: string;
-    extension: string;
-    metadata: {
-      dimensions: {
-        aspectRatio: number;
-      };
-    };
-  };
+  coverImage: SanityImageProps;
 }
-
-interface LoaderProps {
-  src: string;
-  width: number;
-}
-
-const myLoader = (props: LoaderProps) => {
-  const { src, width } = props;
-  const filename = src.split('.')[0];
-  const extension = src.split('.')[1];
-
-  return `cms/${filename}-${findClosestSize(width)}.${extension}`;
-};
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -87,7 +66,7 @@ const Over: FCWithLayout<typeof getStaticProps> = (props) => {
             {content.title && <h2>{content.title}</h2>}
 
             <Image
-              loader={myLoader}
+              loader={imageLoader}
               layout="responsive"
               src={`/${coverImage.assetId}.${coverImage.extension}`}
               width="630"
