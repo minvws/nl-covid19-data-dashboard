@@ -10,6 +10,7 @@ import siteText from '~/locale/index';
 import { getContent, getLastGeneratedDate } from '~/static-props/get-data';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import styles from './over.module.scss';
+import { findClosestSize } from '~/utils/findClosestSize';
 
 interface OverData {
   title: string | null;
@@ -28,22 +29,6 @@ interface ImageData {
   };
 }
 
-// find closest resized element
-function closest(width: number) {
-  const sizes = [320, 640, 768, 1024, 1280, 1536, 2048];
-
-  return sizes.reduce((a, b) => {
-    const aDiff = Math.abs(a - width);
-    const bDiff = Math.abs(b - width);
-
-    if (aDiff == bDiff) {
-      return a > b ? a : b;
-    } else {
-      return bDiff < aDiff ? b : a;
-    }
-  });
-}
-
 interface LoaderProps {
   src: string;
   width: number;
@@ -54,7 +39,7 @@ const myLoader = (props: LoaderProps) => {
   const filename = src.split('.')[0];
   const extension = src.split('.')[1];
 
-  return `/cms/${filename}-${closest(width)}.${extension}`;
+  return `cms/${filename}-${findClosestSize(width)}.${extension}`;
 };
 
 export const getStaticProps = createGetStaticProps(
@@ -104,7 +89,7 @@ const Over: FCWithLayout<typeof getStaticProps> = (props) => {
             <Image
               loader={myLoader}
               layout="responsive"
-              src={`${coverImage.assetId}.${coverImage.extension}`}
+              src={`/${coverImage.assetId}.${coverImage.extension}`}
               width="630"
               height={630 / coverImage.metadata.dimensions.aspectRatio}
             />
