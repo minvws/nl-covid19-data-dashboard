@@ -1,29 +1,23 @@
-import fs from 'fs';
 import { groq } from 'next-sanity';
-import { Params } from 'next/dist/next-server/server/router';
-import path from 'path';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import { getPreviewClient, localize } from '~/lib/sanity';
 import { targetLanguage, TALLLanguages } from '~/locale/index';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetContent,
+  getLastGeneratedDate,
+} from '~/static-props/get-data';
 import { Article } from '~/types/cms';
-import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
+import { assert } from '~/utils/assert';
 
-interface StaticProps {
-  props: ArtikelProps;
-}
-
-interface ArtikelProps {
+interface ArticleDetailProps {
   text: TALLLanguages;
-  article: Article;
+  content: Article;
   lastGenerated: string;
 }
 
 const articlesQuery = groq`
 *[_type == 'artikel']
-`;
-
-const articleQuery = (slug: string) => groq`
-*[_type == 'artikel' && slug.current == '${slug}'][0]
 `;
 
 export async function getStaticPaths() {
@@ -38,29 +32,20 @@ export async function getStaticPaths() {
   return { paths, fallback: false };
 }
 
-export async function getStaticProps({
-  params,
-}: {
-  params: Params;
-}): Promise<StaticProps> {
-  const text = parseMarkdownInLocale(
-    (await import('../../locale/index')).default
-  );
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  createGetContent<Article[]>((context) => {
+    assert(context?.params?.slug, 'Slug required to retrieve article');
+    return groq`
+  *[_type == 'artikel' && slug.current == '${context.params.slug}'][0]
+  `;
+  })
+);
 
-  const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
-  const fileContents = fs.readFileSync(filePath, 'utf8');
-  const lastGenerated = JSON.parse(fileContents).last_generated;
+const ArticleDetail: FCWithLayout<ArticleDetailProps> = (props) => {
+  const { content } = props;
 
-  const articleData = await getPreviewClient().fetch(articleQuery(params.slug));
-  const article = localize<Article>(articleData, [targetLanguage, 'nl']);
-
-  return { props: { text, lastGenerated, article } };
-}
-
-const Artikelen: FCWithLayout<ArtikelProps> = (props) => {
-  const { article } = props;
-
-  return <h1>{article.title}</h1>;
+  return <h1>{content.title}</h1>;
 };
 
 const metadata = {
@@ -68,6 +53,6 @@ const metadata = {
   description: 'TODO',
 };
 
-Artikelen.getLayout = getLayoutWithMetadata(metadata);
+ArticleDetail.getLayout = getLayoutWithMetadata(metadata);
 
-export default Artikelen;
+export default ArticleDetail;

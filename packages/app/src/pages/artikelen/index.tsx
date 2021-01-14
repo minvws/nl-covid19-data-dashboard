@@ -1,49 +1,34 @@
-import fs from 'fs';
 import { groq } from 'next-sanity';
-import path from 'path';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
-import { getPreviewClient, localize } from '~/lib/sanity';
-import { targetLanguage, TALLLanguages } from '~/locale/index';
+import { TALLLanguages } from '~/locale/index';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetContent,
+  getLastGeneratedDate,
+} from '~/static-props/get-data';
 import { Article } from '~/types/cms';
 import { Link } from '~/utils/link';
-import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
 
-interface StaticProps {
-  props: ArtikelenProps;
-}
-
-interface ArtikelenProps {
+interface ArticlesOverviewProps {
   text: TALLLanguages;
-  articles: Article[];
+  content: Article[];
   lastGenerated: string;
 }
 
-const articlesQuery = groq`
-*[_type == 'artikel']
-`;
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  createGetContent<Article[]>(groq`
+    *[_type == 'artikel']
+  `)
+);
 
-export async function getStaticProps(): Promise<StaticProps> {
-  const text = parseMarkdownInLocale(
-    (await import('../../locale/index')).default
-  );
-
-  const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
-  const fileContents = fs.readFileSync(filePath, 'utf8');
-  const lastGenerated = JSON.parse(fileContents).last_generated;
-
-  const articlesData = await getPreviewClient().fetch(articlesQuery);
-  const articles = localize<Article[]>(articlesData, [targetLanguage, 'nl']);
-
-  return { props: { text, lastGenerated, articles } };
-}
-
-const Artikelen: FCWithLayout<ArtikelenProps> = (props) => {
-  const { articles } = props;
+const ArticlesOverview: FCWithLayout<ArticlesOverviewProps> = (props) => {
+  const { content } = props;
 
   return (
     <>
-      <h1>Artikelen!</h1>
-      {articles.map((article) => (
+      <h1>Todo: Artikelen!</h1>
+      {content.map((article) => (
         <div key={`article-${article.slug.current}`}>
           <Link href={`/artikelen/${article.slug.current}`} passHref>
             <a>{article.title}</a>
@@ -59,6 +44,6 @@ const metadata = {
   description: 'TODO',
 };
 
-Artikelen.getLayout = getLayoutWithMetadata(metadata);
+ArticlesOverview.getLayout = getLayoutWithMetadata(metadata);
 
-export default Artikelen;
+export default ArticlesOverview;
