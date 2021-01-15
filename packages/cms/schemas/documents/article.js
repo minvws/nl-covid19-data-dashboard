@@ -65,6 +65,7 @@ export default {
     select: {
       title: "title.nl",
       subtitle: "publicationDate",
+      media: "cover"
     },
   },
 }
