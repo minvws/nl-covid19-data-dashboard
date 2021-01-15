@@ -1,7 +1,6 @@
 {
   "name": "@corona-dashboard/e2e",
   "version": "1.0.0",
-  "main": "index.js",
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^14.14.20",
