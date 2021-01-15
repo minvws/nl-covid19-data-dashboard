@@ -305,9 +305,6 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
               data-cy="ggd_tested_total"
               absolute={dataGgdAverageLastValue.tested_total}
               difference={data.difference.tested_ggd_average__tested_total}
-              differenceStaticTimespan={
-                siteText.toe_en_afname.tijdverloop.vorige_week
-              }
             />
             <Text>{ggdText.totaal_getest_week_uitleg}</Text>
           </KpiTile>
@@ -326,9 +323,6 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
               percentage={dataGgdAverageLastValue.infected_percentage}
               difference={
                 data.difference.tested_ggd_average__infected_percentage
-              }
-              differenceStaticTimespan={
-                siteText.toe_en_afname.tijdverloop.vorige_week
               }
             />
             <Text>{ggdText.positief_getest_week_uitleg}</Text>
