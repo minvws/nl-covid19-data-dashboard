@@ -7,7 +7,7 @@ import { GoSettings } from "react-icons/go";
 
 import { MdQuestionAnswer } from "react-icons/md";
 
-import { BsCardChecklist, BsMap } from "react-icons/bs";
+import { BsCardChecklist, BsMap, BsTable } from "react-icons/bs";
 import { GrCircleInformation } from "react-icons/gr";
 
 import ColorblindPreview from "./previews/colorblind-filter/ColorblindPreview";
@@ -63,6 +63,7 @@ const hiddenDocTypes = (listItem) =>
     "cijferVerantwoording",
     "overDitDashboard",
     "overRisicoNiveaus",
+    "roadmap",
   ].includes(listItem.getId());
 
 export default () =>
@@ -130,6 +131,18 @@ export default () =>
               //   .options({ previewURL: `${previewURL}/over-risiconiveaus` })
               //   .title("Color Blindness"),
             ])
+        ),
+
+      S.listItem()
+        .title("Routekaart")
+        .schemaType("roadmap")
+        .icon(BsTable)
+        .child(
+          S.editor()
+            .title("Routekaart")
+            .schemaType("roadmap")
+            .documentId("roadmap")
+            .views([S.view.form()])
         ),
 
       S.listItem()
