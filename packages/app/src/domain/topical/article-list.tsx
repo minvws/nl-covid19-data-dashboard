@@ -8,11 +8,12 @@ import siteText from '~/locale';
 import { LatestArticle } from '~/pages';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 
-type LatestArticlesProps = {
+type ArticleListProps = {
   articles: LatestArticle[];
+  hideLink?: boolean;
 };
 
-export function LatestArticles({ articles }: LatestArticlesProps) {
+export function ArticleList({ articles, hideLink }: ArticleListProps) {
   const breakpoints = useBreakpoints();
 
   return (
@@ -32,13 +33,15 @@ export function LatestArticles({ articles }: LatestArticlesProps) {
           justifyContent="flex-end"
           display="flex"
         >
-          <LinkWithIcon
-            href="/artikelen"
-            icon={<ArrowIcon />}
-            iconPlacement="right"
-          >
-            {siteText.nationaal_actueel.latest_articles.all_articles}
-          </LinkWithIcon>
+          {!hideLink && (
+            <LinkWithIcon
+              href="/artikelen"
+              icon={<ArrowIcon />}
+              iconPlacement="right"
+            >
+              {siteText.nationaal_actueel.latest_articles.all_articles}
+            </LinkWithIcon>
+          )}
         </Box>
       </Box>
       <Box

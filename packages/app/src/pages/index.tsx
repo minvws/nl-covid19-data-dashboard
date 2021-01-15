@@ -15,10 +15,10 @@ import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-ch
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
+import { ArticleList } from '~/domain/topical/article-list';
 import { Search } from '~/domain/topical/components/search';
 import { DataSitemap } from '~/domain/topical/data-site-map';
 import { EscalationLevelExplanationsTile } from '~/domain/topical/escalation-level-explanations-tile';
-import { LatestArticles } from '~/domain/topical/latest-articles';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
@@ -195,7 +195,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
 
         <DataSitemap />
 
-        <LatestArticles articles={content} />
+        <ArticleList articles={content} />
       </TileList>
     </MaxWidth>
   );
