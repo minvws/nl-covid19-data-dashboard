@@ -7,7 +7,7 @@ export default {
     {
       title: "Titel van de routekaart",
       name: "title",
-      type: "string",
+      type: "localeString",
     },
     {
       title: "Maatregelen categorien",

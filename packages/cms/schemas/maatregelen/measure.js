@@ -7,7 +7,7 @@ export default {
       title: "Maatregel",
       description: "Beschrijf de maatregel voor deze categorie",
       name: "measure",
-      type: "string",
+      type: "localeString",
     },
   ],
 };

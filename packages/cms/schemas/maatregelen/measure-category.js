@@ -7,7 +7,7 @@ export default {
       title: "Titel van groep",
       description: "Hoe noem je deze groep?",
       name: "title",
-      type: "string",
+      type: "localeString",
     },
     {
       title: "Maatregelen",
