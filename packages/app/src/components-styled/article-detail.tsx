@@ -7,7 +7,7 @@ import { Heading } from '~/components-styled/typography';
 import siteText from '~/locale';
 import { Article } from '~/types/cms';
 import { formatDateFromMilliseconds } from '~/utils/formatDate';
-import { RichContent } from '../domain/cms/rich-content';
+import { RichContent } from './cms/rich-content';
 import { LinkWithIcon } from './link-with-icon';
 
 interface ArticleDetailProps {

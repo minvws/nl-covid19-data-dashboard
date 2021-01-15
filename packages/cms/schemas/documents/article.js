@@ -59,8 +59,7 @@ export default {
       },
       fields: [
         {
-          title: 'Omschrijving',
-          description: 'alt-tekst',
+          title: 'Alternatieve tekst (toegankelijkheid)',
           name: 'alt',
           type: 'localeString',
         },
