@@ -1,5 +1,6 @@
 import { groq } from 'next-sanity';
-import { ArticleDetail } from '~/domain/article/article';
+import { Box } from '~/components-styled/base';
+import { ArticleDetail } from '~/domain/article/article-detail';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import { getClient, localize } from '~/lib/sanity';
 import { targetLanguage } from '~/locale/index';
@@ -40,7 +41,11 @@ export const getStaticProps = createGetStaticProps(
 const ArticleDetailPage: FCWithLayout<typeof getStaticProps> = (props) => {
   const { content } = props;
 
-  return <ArticleDetail article={content} />;
+  return (
+    <Box backgroundColor="white">
+      <ArticleDetail article={content} />
+    </Box>
+  );
 };
 
 const metadata = {

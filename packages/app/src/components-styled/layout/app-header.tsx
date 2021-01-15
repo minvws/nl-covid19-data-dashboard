@@ -9,9 +9,11 @@ import { TopNavigation } from './components/top-navigation';
 export function AppHeader() {
   return (
     <Box as="header" zIndex={4} position="relative" bg="white">
-      <MaxWidth px={{ _: 3, sm: 4 }}>
+      <MaxWidth px={{ _: 3, sm: 4, md: 3, lg: 4 }}>
         <Logo />
-        <LanguageSwitcher />
+        <Box px={3}>
+          <LanguageSwitcher />
+        </Box>
       </MaxWidth>
       <Box backgroundColor="header" py={3} color="white">
         <MaxWidth

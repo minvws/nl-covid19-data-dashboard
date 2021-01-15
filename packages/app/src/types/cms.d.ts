@@ -15,18 +15,35 @@ export interface Article {
     _type: 'slug';
     current: string;
   };
-  cover: {
-    _type: 'image';
-    asset: {
-      _ref: string;
-      _type: 'reference';
-    };
-  };
+  cover: ImageBlock;
   intro: Block | null;
   content: RichContentBlock[] | null;
   metaDescription: string;
   publicationDate: string;
   isHighlighted: boolean;
+}
+
+interface ImageBlock {
+  _type: 'image';
+  asset: {
+    _ref: string;
+    _type: 'reference';
+  };
+  alt: string;
+  crop?: {
+    _type: 'sanity.imageCrop';
+    top: string;
+    right: string;
+    bottom: string;
+    left: string;
+  };
+  hotspot?: {
+    _type: 'sanity.imageHotspot';
+    height: number;
+    width: number;
+    x: number;
+    y: number;
+  };
 }
 
 type RichContentBlock =
@@ -41,10 +58,7 @@ interface Block {
 }
 
 // @TODO more properties are needed
-interface RichContentImageBlock {
-  _key: string;
-  _type: 'image';
-  alt: string;
+interface RichContentImageBlock extends ImageBlock {
   isFullWidth?: boolean;
   caption?: string;
 }

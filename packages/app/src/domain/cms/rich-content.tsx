@@ -1,60 +1,30 @@
-import { PortableText, urlFor } from '~/lib/sanity';
-import { RichContentBlock, RichContentImageBlock } from '~/types/cms';
-import { assert } from '~/utils/assert';
-
 //@ts-expect-error types are not available
 import BlockContent from '@sanity/block-content-to-react';
 import { Box } from '~/components-styled/base';
+import { ContentBlock } from '~/components-styled/cms/content-block';
+import { Image } from '~/components-styled/cms/image-block';
+import { PortableText } from '~/lib/sanity';
+import { Block, RichContentBlock } from '~/types/cms';
 
-export function RichContent({ blocks }: { blocks: RichContentBlock[] }) {
-  return <PortableText blocks={blocks} serializers={serializers} />;
+export function RichContent({
+  blocks,
+}: {
+  blocks: Block | RichContentBlock[];
+}) {
+  return (
+    <Box fontSize="1.125rem">
+      <PortableText blocks={blocks} serializers={serializers} />
+    </Box>
+  );
 }
 
 const serializers = {
   types: {
-    block: Block,
+    block: (props: unknown) => (
+      <ContentBlock>
+        {BlockContent.defaultSerializers.types.block(props)}
+      </ContentBlock>
+    ),
     image: Image,
   },
 };
-
-function Block(props: unknown) {
-  return (
-    <Box mx="auto" maxWidth={{ md: 'contentWidth' }}>
-      {BlockContent.defaultSerializers.types.block(props)}
-    </Box>
-  );
-}
-
-function Image({ node }: { node: RichContentImageBlock }) {
-  const url = urlFor(node).toString();
-  assert(
-    url !== null,
-    `could not get url for node: ${JSON.stringify(node, null, 2)}`
-  );
-
-  const caption = node.caption && <figcaption>{node.caption}</figcaption>;
-
-  return node.isFullWidth ? (
-    <Box bg="page">
-      <Box mx="auto" px={3} py={4} maxWidth={{ md: 'maxWidth' }}>
-        <Box as="figure" role="group" spacing={3}>
-          <Box
-            as="img"
-            borderRadius={1}
-            boxShadow="tile"
-            src={url}
-            alt={node.alt}
-          />
-          {caption}
-        </Box>
-      </Box>
-    </Box>
-  ) : (
-    <Box maxWidth={{ md: 'contentWidth' }}>
-      <Box as="figure" role="group" spacing={3}>
-        <img src={url} alt={node.alt} />
-        {caption}
-      </Box>
-    </Box>
-  );
-}

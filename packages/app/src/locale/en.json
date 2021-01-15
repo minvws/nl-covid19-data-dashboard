@@ -1,4 +1,9 @@
 {
+  "article_detail": {
+    "back_link": {
+      "text": "Back to all articles"
+    }
+  },
   "andere_gegevens": "Other data",
   "blok_andere_gegevens": {
     "title": "Other data",

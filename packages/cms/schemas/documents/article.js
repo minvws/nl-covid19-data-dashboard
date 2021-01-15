@@ -61,7 +61,7 @@ export default {
         {
           title: 'Omschrijving',
           description: 'alt-tekst',
-          name: 'description',
+          name: 'alt',
           type: 'localeString',
         },
       ],
