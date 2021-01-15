@@ -1,17 +1,16 @@
 import { groq } from 'next-sanity';
 import { MaxWidth } from '~/components-styled/max-width';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
-import { ArticleList } from '~/domain/topical/article-list';
+import { ArticleList, ArticleSummary } from '~/domain/topical/article-list';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
 } from '~/static-props/get-data';
-import { LatestArticle } from '..';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  createGetContent<LatestArticle[]>(
+  createGetContent<ArticleSummary[]>(
     groq`*[_type == 'article'] | order(publicationDate) {title, slug, summary, cover}`
   )
 );

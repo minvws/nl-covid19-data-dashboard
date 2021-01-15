@@ -5,11 +5,16 @@ import { LinkWithIcon } from '~/components-styled/link-with-icon';
 import { Tile } from '~/components-styled/tile';
 import { Heading, Text } from '~/components-styled/typography';
 import siteText from '~/locale';
-import { LatestArticle } from '~/pages';
+import { Article } from '~/types/cms';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 
+export type ArticleSummary = Pick<
+  Article,
+  'title' | 'slug' | 'summary' | 'cover'
+>;
+
 type ArticleListProps = {
-  articles: LatestArticle[];
+  articles: ArticleSummary[];
   hideLink?: boolean;
 };
 
