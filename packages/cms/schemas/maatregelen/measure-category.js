@@ -17,4 +17,9 @@ export default {
       of: [{ type: "measureGroup" }],
     },
   ],
+  preview: {
+    select: {
+      title: "title.nl",
+    },
+  },
 };

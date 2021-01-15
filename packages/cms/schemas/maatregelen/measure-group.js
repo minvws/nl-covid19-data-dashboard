@@ -43,4 +43,9 @@ export default {
       ],
     },
   ],
+  preview: {
+    select: {
+      title: "title.nl",
+    },
+  },
 };

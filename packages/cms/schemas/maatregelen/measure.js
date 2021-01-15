@@ -10,4 +10,9 @@ export default {
       type: "localeString",
     },
   ],
+  preview: {
+    select: {
+      title: "measure.nl",
+    },
+  },
 };
