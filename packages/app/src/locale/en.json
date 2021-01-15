@@ -1368,6 +1368,7 @@
     "toename": "more than",
     "afname": "less than",
     "gelijk": "equal to",
+    "vorige_waarde": "the previous value",
     "tijdverloop": {
       "gisteren": "yesterday",
       "geleden": "ago",

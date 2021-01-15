@@ -1368,6 +1368,7 @@
     "toename": "meer dan",
     "afname": "minder dan",
     "gelijk": "gelijk aan",
+    "vorige_waarde": "de vorige waarde",
     "tijdverloop": {
       "gisteren": "gisteren",
       "geleden": "geleden",
