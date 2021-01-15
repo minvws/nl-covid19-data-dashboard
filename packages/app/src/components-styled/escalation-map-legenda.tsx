@@ -69,7 +69,6 @@ export function EscalationMapLegenda<K extends RegionsMetricName>(
           className={styles.escalationInfoLegenda}
           key={`legenda-item-${info?.threshold}`}
         >
-          asdfasdf
           <Box display="flex" alignItems="center" width="10rem">
             <div className={styles.bubbleLegenda}>
               <EscalationLevelIcon level={info.threshold} />

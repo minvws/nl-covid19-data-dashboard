@@ -120,7 +120,6 @@ const NavWrapper = styled.nav(
     [`@media ${theme.mediaQueries.md}`]: {
       borderTopWidth: 0,
       ml: 'auto',
-      mr: -3,
       mt: 0,
       pb: 1,
       flex: '0 0 auto',
