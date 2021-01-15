@@ -57,7 +57,7 @@ const SewerWater: FCWithLayout<typeof getStaticProps> = (props) => {
 
   const [selectedInstallation, setSelectedInstallation] = useState<
     string | undefined
-  >();
+  >(sewerStationNames.length === 1 ? sewerStationNames[0] : undefined);
 
   return (
     <>
@@ -135,7 +135,6 @@ const SewerWater: FCWithLayout<typeof getStaticProps> = (props) => {
             title={text.linechart_titel}
             metadata={{ source: text.bronnen.rivm }}
             timeframeOptions={['all', '5weeks']}
-            timeframeInitialValue="all"
           >
             {(timeframe) => (
               <>

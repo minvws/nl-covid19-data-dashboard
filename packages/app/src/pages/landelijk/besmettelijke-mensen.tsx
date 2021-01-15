@@ -75,7 +75,6 @@ const InfectiousPeople: FCWithLayout<typeof getStaticProps> = (props) => {
           metadata={{ source: text.bronnen.rivm }}
           title={text.linechart_titel}
           timeframeOptions={['all', '5weeks']}
-          timeframeInitialValue="5weeks"
         >
           {(timeframe) => (
             <>
