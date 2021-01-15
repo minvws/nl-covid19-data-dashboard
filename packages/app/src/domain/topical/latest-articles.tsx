@@ -17,7 +17,7 @@ export function LatestArticles({ articles }: LatestArticlesProps) {
       </Heading>
       <Box display="flex" spacing={4} spacingHorizontal={true}>
         {articles.map((x) => (
-          <Box flex="1 1 33%" key={x.slug.current}>
+          <Box flex="0 0 33%" key={x.slug.current}>
             <ArticleSummary
               slug={x.slug.current}
               title={x.title}
