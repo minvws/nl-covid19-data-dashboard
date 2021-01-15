@@ -1,5 +1,5 @@
 import { FeatureCollection, MultiPolygon } from 'geojson';
-import { Municipalities, Regions } from '~/types/data';
+import { Municipalities, Regions } from './data';
 
 export type Metric<T> = {
   values: T[];

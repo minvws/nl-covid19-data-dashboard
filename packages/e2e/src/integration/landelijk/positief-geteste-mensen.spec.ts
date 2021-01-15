@@ -1,6 +1,9 @@
 import { NationalContext } from '~/integration/types';
-import { formatNumber, formatPercentage } from '@corona-dashboard/common';
-import { getLastFilledValue } from '@corona-dashboard/app/utils/get-last-filled-value';
+import {
+  formatNumber,
+  formatPercentage,
+  getLastFilledValue,
+} from '@corona-dashboard/common';
 
 context('Landelijk - Positief geteste mensen', () => {
   before(() => {
