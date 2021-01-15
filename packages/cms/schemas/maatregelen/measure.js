@@ -9,11 +9,5 @@ export default {
       name: "measure",
       type: "string",
     },
-    {
-      title: "Icoon",
-      description: "Kies een icoon voor deze maatregel",
-      name: "icon",
-      type: "string",
-    },
   ],
 };
