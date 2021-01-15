@@ -26,12 +26,17 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
           <Heading level={1} mb={0}>
             {article.title}
           </Heading>
-          <time css={css({ color: 'gray' })} dateTime={article.publicationDate}>
-            {formatDateFromMilliseconds(
-              new Date(article.publicationDate).getTime(),
-              'medium'
-            )}
-          </time>
+          {article.publicationDate && (
+            <time
+              css={css({ color: 'gray' })}
+              dateTime={article.publicationDate}
+            >
+              {formatDateFromMilliseconds(
+                new Date(article.publicationDate).getTime(),
+                'medium'
+              )}
+            </time>
+          )}
         </Box>
 
         {article.intro && (
