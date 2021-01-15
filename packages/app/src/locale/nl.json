@@ -179,7 +179,7 @@
       "title": "Bezetting ziekenhuisbedden over tijd",
       "description": "Deze grafiek toont het verloop in het aantal ziekenhuisbedden (exclusief IC-bedden) dat is bezet door patiënten met COVID-19."
     },
-    "linechart_description": "In deze grafiek staan de ziekenhuisopnames vermeld op de dag dat mensen ook echt zijn opgenomen, in plaats van op de dag dat ze gemeld zijn. Zo kunnen we namelijk de ontwikkeling van het coronavirus in Nederland goed zien. Omdat het aanmelden van ziekenhuisopnames vaak een paar dagen later gebeurt, zijn de laatste dagen nog niet compleet.",
+    "linechart_description": "In deze grafiek staan de ziekenhuisopnames vermeld op de dag dat mensen ook echt zijn opgenomen, in plaats van op de dag dat ze gemeld zijn. Zo kunnen we namelijk de ontwikkeling van het coronavirus in Nederland goed zien. Let op: omdat het aanmelden van ziekenhuisopnames vaak een paar dagen later gebeurt, zijn de meest recente dagen nooit compleet en kan het lijken alsof het aantal ziekenhuisopnames afneemt terwijl dit niet zo is.",
     "metadata": {
       "title": "Ziekenhuisopnames | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Landelijk overzicht van het aantal mensen met COVID-19 dat een ziekenhuis is opgenomen."
@@ -701,7 +701,7 @@
       "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
       "text": "NICE via RIVM"
     },
-    "linechart_description": "In deze grafiek staan de ziekenhuisopnames vermeld op de dag dat mensen ook echt zijn opgenomen, in plaats van op de dag dat ze gemeld zijn. Zo kunnen we namelijk de ontwikkeling van het coronavirus in Nederland goed zien. Omdat het aanmelden van ziekenhuisopnames vaak een paar dagen later gebeurt, zijn de laatste dagen nog niet compleet.",
+    "linechart_description": "In deze grafiek staan de ziekenhuisopnames vermeld op de dag dat mensen ook echt zijn opgenomen, in plaats van op de dag dat ze gemeld zijn. Zo kunnen we namelijk de ontwikkeling van het coronavirus in Nederland goed zien. Let op: omdat het aanmelden van ziekenhuisopnames vaak een paar dagen later gebeurt, zijn de meest recente dagen nooit compleet en kan het lijken alsof het aantal ziekenhuisopnames afneemt terwijl dit niet zo is.",
     "metadata": {
       "title": "Ziekenhuisopnames inwoners {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Overzicht van het aantal mensen in de veiligheidsregio {{safetyRegionName}} die met COVID-19 in het ziekenhuis zijn opgenomen."
@@ -843,7 +843,7 @@
       "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
       "text": "NICE via RIVM"
     },
-    "linechart_description": "In deze grafiek staan de ziekenhuisopnames vermeld op de dag dat mensen ook echt zijn opgenomen, in plaats van op de dag dat ze gemeld zijn. Zo kunnen we namelijk de ontwikkeling van het coronavirus in Nederland goed zien. Omdat het aanmelden van ziekenhuisopnames vaak een paar dagen later gebeurt, zijn de laatste dagen nog niet compleet.",
+    "linechart_description": "In deze grafiek staan de ziekenhuisopnames vermeld op de dag dat mensen ook echt zijn opgenomen, in plaats van op de dag dat ze gemeld zijn. Zo kunnen we namelijk de ontwikkeling van het coronavirus in Nederland goed zien. Let op: omdat het aanmelden van ziekenhuisopnames vaak een paar dagen later gebeurt, zijn de meest recente dagen nooit compleet en kan het lijken alsof het aantal ziekenhuisopnames afneemt terwijl dit niet zo is.",
     "metadata": {
       "title": "Ziekenhuisopnames inwoners {{municipalityName}} | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Overzicht van het aantal mensen in de gemeente {{municipalityName}} die met COVID-19 in het ziekenhuis zijn opgenomen."
@@ -1368,7 +1368,6 @@
     "toename": "meer dan",
     "afname": "minder dan",
     "gelijk": "gelijk aan",
-    "vorige_waarde": "de vorige waarde",
     "tijdverloop": {
       "gisteren": "gisteren",
       "geleden": "geleden",
@@ -1381,7 +1380,8 @@
       "vorige_week": "vorige week",
       "ervoor": "ervoor"
     },
-    "ervoor": "ervoor"
+    "ervoor": "ervoor",
+    "vorige_waarde": "de vorige waarde"
   },
   "aria_labels": {
     "pagina_keuze": "Landelijk, regio of gemeente menu",
@@ -1392,6 +1392,7 @@
   "infected_age_groups": {
     "title": "Verdeling naar leeftijd",
     "description": "De blauwe rechterbalken in deze grafiek laten zien tot welke leeftijdsgroep positief geteste personen behoren. De grijze linkerbalken tonen hoe groot elke leeftijdsgroep is ten opzichte van de hele Nederlandse bevolking. De blauwe en grijze balken laten samen zien of leeftijdsgroepen naar verhouding meer of minder positief geteste personen hebben. Bijvoorbeeld: van alle positief geteste personen is 10% een dertiger (blauwe balk) en van alle Nederlanders is 14% een dertiger (grijze balk). De leeftijdsgroep dertigers heeft in dit voorbeeld naar verhouding minder positief geteste personen. De grafiek wordt dagelijks bijgewerkt en gaat alleen over de meest recent gemelde gevallen.",
+    "example": "Bijvoorbeeld: Van alle positief geteste mensen is {{infectedPercentage}} tussen de {{ageGroupRange}} jaar. Van alle Nederlanders is {{ageGroupPercentage}} tussen de {{ageGroupRange}} jaar.",
     "graph": {
       "age_group_percentage_title": "Verdeling leeftijdsgroepen in Nederland",
       "age_group_percentage_tooltip": "van de bevolking is {{ageGroupRange}} jaar",
@@ -1399,8 +1400,7 @@
       "infected_percentage_tooltip": "van het aantal positief geteste mensen is {{ageGroupRange}} jaar",
       "age_group_range_tooltip": "{{ageGroupRange}} jaar",
       "accessibility_description": "Grafiek met percentages voor de verdeling van de bevolking en de verdeling van positief geteste leeftijdsgroepen."
-    },
-    "example": "Bijvoorbeeld: Van alle positief geteste mensen is {{infectedPercentage}} tussen de {{ageGroupRange}} jaar. Van alle Nederlanders is {{ageGroupPercentage}} tussen de {{ageGroupRange}} jaar."
+    }
   },
   "gehandicaptenzorg_besmette_locaties": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
