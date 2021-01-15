@@ -55,6 +55,7 @@ type RichContentBlock =
 interface Block {
   _key: string;
   _type: string;
+  children: unknown[];
 }
 
 // @TODO more properties are needed

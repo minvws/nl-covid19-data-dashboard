@@ -2,14 +2,14 @@ import { groq } from 'next-sanity';
 import { ArticleDetail } from '~/components-styled/article-detail';
 import { Box } from '~/components-styled/base';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
-import { getClient, localize } from '~/lib/sanity';
+import { getClient, localize, urlFor } from '~/lib/sanity';
 import { targetLanguage } from '~/locale/index';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
 } from '~/static-props/get-data';
-import { Article } from '~/types/cms';
+import { Article, Block } from '~/types/cms';
 import { assert } from '~/utils/assert';
 
 const articlesQuery = groq`
@@ -48,11 +48,47 @@ const ArticleDetailPage: FCWithLayout<typeof getStaticProps> = (props) => {
   );
 };
 
-const metadata = {
-  title: '@TODO',
-  description: '@TODO',
+/**
+ *  @TODO this implementation below is not very sexy yet, its hacked together
+ * to simply have _something_
+ */
+ArticleDetailPage.getLayout = (page, props) => {
+  return getLayoutWithMetadata({
+    title: getTitle(props.content.title),
+    description: toPlainText(props.content.intro),
+    openGraphImage: urlFor(props.content.cover).toString() || undefined,
+    twitterImage: urlFor(props.content.cover).toString() || undefined,
+  })(page, props);
 };
 
-ArticleDetailPage.getLayout = getLayoutWithMetadata(metadata);
-
 export default ArticleDetailPage;
+
+function getTitle(title: string) {
+  const suffix =
+    process.env.NEXT_PUBLIC_LOCALE === 'nl'
+      ? 'Dashboard Coronavirus | Rijksoverheid.nl'
+      : 'Dashboard Coronavirus | Government.nl';
+
+  return `${title} | ${suffix}`;
+}
+
+function toPlainText(blocks: Block | Block[] | null) {
+  if (!blocks) return '';
+
+  return (
+    (Array.isArray(blocks) ? blocks : [blocks])
+      // loop through each block
+      .map((block) => {
+        // if it's not a text block with children,
+        // return nothing
+        if (block._type !== 'block' || !block.children) {
+          return '';
+        }
+        // loop through the children spans, and join the
+        // text strings
+        return block.children.map((child) => (child as any).text).join('');
+      })
+      // join the paragraphs leaving split by two linebreaks
+      .join('\n\n')
+  );
+}
