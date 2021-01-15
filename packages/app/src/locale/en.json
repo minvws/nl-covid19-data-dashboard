@@ -671,6 +671,9 @@
         "veiligheidsregio": "Cijfers per veiligheidsregio",
         "gemeente": "Cijfers per gemeente"
       }
+    },
+    "latest_articles": {
+      "title": "Wekelijkse berichten"
     }
   },
   "regionaal_index": {
