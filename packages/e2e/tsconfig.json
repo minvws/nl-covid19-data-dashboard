@@ -11,7 +11,9 @@
     "lib": ["dom", "esnext"],
     "module": "esnext",
     "types": ["cypress", "node"],
-    "sourceMap": true
+    "sourceMap": true,
+    "strict": false,
+    "isolatedModules": false
   },
   "references": [{ "path": "../common" }],
   "include": ["src"]

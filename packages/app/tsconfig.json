@@ -12,6 +12,6 @@
     }
   },
   "references": [{ "path": "../common" }],
-  "exclude": ["node_modules", ".next", "out", "cypress"],
+  "exclude": ["node_modules", ".next", "out"],
   "include": ["next-env.d.ts", "src"]
 }
