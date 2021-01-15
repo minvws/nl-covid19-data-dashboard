@@ -46,14 +46,26 @@ export default {
       },
       {
         type: 'image',
-        fields: [
-          {
-            title: 'Omschrijving',
-            description: 'alt-tekst',
-            name: 'description',
-            type: 'string',
-          },
-        ],
+        fields: [{
+          name: 'alt',
+          title: 'Alternatieve tekst (toegankelijkheid)',
+          type: 'string',
+          validation: Rule => Rule.required(),
+          options: {
+            isHighlighted: true
+          }
+        },
+        {
+          name: 'isFullWidth',
+          title: 'Afbeelding breed weergeven?',
+          type: 'boolean',
+        },
+        {
+          name: 'caption',
+          title: 'Onderschrift',
+          type: 'text',
+        }]
+
       },
       // @TODO
       // {

@@ -1,9 +1,10 @@
+import { uniq } from 'lodash';
 import { useMemo } from 'react';
+import { colors } from '~/style/theme';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import { getItemFromArray } from '~/utils/getItemFromArray';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { colors } from '~/style/theme';
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
 
 export interface SewerPerInstallationBaseValue {
@@ -113,47 +114,56 @@ export function useSewerWaterChartOptions<
       [text.secondary_label_text]: 'scatter',
     };
 
-    const scatterSerie: Highcharts.SeriesScatterOptions = {
-      type: 'scatter',
-      name: text.secondary_label_text,
-      description: text.secondary_label_text,
-      color: '#CDCDCD',
-      enableMouseTracking: selectedRWZI === undefined,
-      data: filteredScatterPlotValues?.map((value) => ({
-        x: value.date_unix,
-        y: value.rna_normalized,
-        installationName: value.rwzi_awzi_name,
-      })),
-      marker: {
-        symbol: 'circle',
-        radius: 3,
-      },
-    };
+    const installationNames = uniq(
+      filteredScatterPlotValues.map((x) => x.rwzi_awzi_name)
+    );
 
     const series: (
       | Highcharts.SeriesLineOptions
       | Highcharts.SeriesScatterOptions
-    )[] = [scatterSerie];
+    )[] = [];
 
-    series.push({
-      type: 'line',
-      data: filteredAverageValues.map((x) => [x.date, x.value]),
-      name: text.average_label_text,
-      description: text.average_label_text,
-      showInLegend: true,
-      color: selectedRWZI ? '#A9A9A9' : colors.data.primary,
-      enableMouseTracking: selectedRWZI === undefined,
-      allowPointSelect: false,
-      marker: {
-        symbol: 'circle',
-        enabled: !hasMultipleValues,
-      },
-      states: {
-        inactive: {
-          opacity: 1,
+    if (installationNames.length > 1) {
+      const scatterSerie: Highcharts.SeriesScatterOptions = {
+        type: 'scatter',
+        name: text.secondary_label_text,
+        description: text.secondary_label_text,
+        color: '#CDCDCD',
+        enableMouseTracking: selectedRWZI === undefined,
+        data: filteredScatterPlotValues?.map((value) => ({
+          x: value.date_unix,
+          y: value.rna_normalized,
+          installationName: value.rwzi_awzi_name,
+        })),
+        marker: {
+          symbol: 'circle',
+          radius: 3,
         },
-      },
-    });
+      };
+      series.push(scatterSerie);
+    }
+
+    if (installationNames.length > 1) {
+      series.push({
+        type: 'line',
+        data: filteredAverageValues.map((x) => [x.date, x.value]),
+        name: text.average_label_text,
+        description: text.average_label_text,
+        showInLegend: true,
+        color: selectedRWZI ? '#A9A9A9' : colors.data.primary,
+        enableMouseTracking: selectedRWZI === undefined,
+        allowPointSelect: false,
+        marker: {
+          symbol: 'circle',
+          enabled: !hasMultipleValues,
+        },
+        states: {
+          inactive: {
+            opacity: 1,
+          },
+        },
+      });
+    }
 
     // If the max scatter plot date is higher than the averages, we want to draw
     // a dotted line for the missing days between the max scatter date

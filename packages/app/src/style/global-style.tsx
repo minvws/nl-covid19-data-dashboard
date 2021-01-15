@@ -66,7 +66,7 @@ html {
 */
  body {
   font-family: 'RO Sans', Calibri, sans-serif;
-  color: $text-color;
+  color: ${(x) => x.theme.colors.body};
   font-style: normal;
   font-weight: normal;
   font-size: ${(x) => x.theme.fontSizes[2]} ;
@@ -110,5 +110,9 @@ button::-moz-focus-inner {
 
 .inline-kpi {
   font-variant-numeric: tabular-nums;
+}
+
+figure {
+  margin: 0
 }
 `;

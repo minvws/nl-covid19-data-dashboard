@@ -54,7 +54,7 @@ const Verantwoording: FCWithLayout<typeof getStaticProps> = (props) => {
               <PortableText blocks={content.description} />
             )}
             {content.collapsibleList && (
-              <article className={styles.faqList}>
+              <article>
                 {content.collapsibleList.map((item) => {
                   const id = getSkipLinkId(item.title);
                   return (

@@ -131,7 +131,7 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
             values={data.hospital_nice.values}
             linesConfig={[
               {
-                metricProperty: 'admissions_on_date_of_reporting',
+                metricProperty: 'admissions_on_date_of_admission',
               },
             ]}
           />

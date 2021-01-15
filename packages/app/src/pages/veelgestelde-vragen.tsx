@@ -54,7 +54,7 @@ const Verantwoording: FCWithLayout<typeof getStaticProps> = (props) => {
               <PortableText blocks={content.description} />
             )}
             {content.questions && (
-              <article className={styles.faqList}>
+              <article>
                 {content.questions.map((item) => {
                   const id = getSkipLinkId(item.title);
                   return (

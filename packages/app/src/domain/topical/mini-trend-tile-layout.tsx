@@ -13,7 +13,7 @@ export function MiniTrendTileLayout({ children }: MiniTrendTileLayoutProps) {
 
   return (
     <Tile>
-      <Box display="flex">
+      <Box display={{ _: 'block', md: 'flex' }}>
         {tiles.map((tile: ReactNode, index: number) => (
           <Box flex={`1 1 ${columnWidth}`} key={index}>
             {tile}

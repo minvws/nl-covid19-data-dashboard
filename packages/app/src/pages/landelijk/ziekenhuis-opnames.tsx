@@ -162,7 +162,7 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
           signaalwaarde={40}
           linesConfig={[
             {
-              metricProperty: 'admissions_on_date_of_reporting',
+              metricProperty: 'admissions_on_date_of_admission',
             },
           ]}
           metadata={{

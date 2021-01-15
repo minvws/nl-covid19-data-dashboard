@@ -22,7 +22,8 @@
     "validate-json": "yarn workspace @corona-dashboard/cli validate-json",
     "validate-single": "yarn workspace @corona-dashboard/cli validate-single",
     "generate-typescript": "yarn workspace @corona-dashboard/cli generate-typescript",
-    "e2e": "yarn workspace @corona-dashboard/app e2e"
+    "e2e": "yarn workspace @corona-dashboard/app e2e",
+    "cms": "yarn workspace @corona-dashboard/cms start"
   },
   "workspaces": {
     "packages": [
