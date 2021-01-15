@@ -5,7 +5,7 @@ import { MunicipalitiesTestedOverall } from '~/types/data';
 import { formatPercentage } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { MunicipalitySelectionHandler } from '../../select-handlers/create-select-municipal-handler';
-import { MunicipalityProperties } from '../../shared';
+import { MunicipalityProperties } from '@corona-dashboard/common';
 const text = siteText.common.tooltip;
 
 export const createPositiveTestedPeopleMunicipalTooltip = (

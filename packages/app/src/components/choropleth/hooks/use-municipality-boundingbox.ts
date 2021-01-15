@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import municipalCodeToRegionCodeLookup from '~/data/municipalCodeToRegionCodeLookup';
-import { RegionGeoJSON } from '../shared';
+import { RegionGeoJSON } from '@corona-dashboard/common';
 
 /**
  * This hook returns the feature of the safety region to which the given municipality code belongs.

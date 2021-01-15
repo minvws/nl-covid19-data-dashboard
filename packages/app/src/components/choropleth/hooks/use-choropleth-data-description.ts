@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import siteText from '~/locale';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { ChoroplethThresholdsValue } from '../shared';
+import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
 import { DataValue } from './use-municipality-data';
 
 /**

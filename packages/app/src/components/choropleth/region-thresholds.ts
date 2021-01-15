@@ -1,5 +1,5 @@
 import { colors } from '~/style/theme';
-import { ChoroplethThresholdsValue } from './shared';
+import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
 
 const positiveTestedThresholds: ChoroplethThresholdsValue[] = [
   {

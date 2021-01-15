@@ -14,7 +14,10 @@ import {
 import { useChoroplethDataDescription } from './hooks/use-choropleth-data-description';
 import { getDataThresholds } from './legenda/utils';
 import { Path } from './path';
-import { RegionsMetricName, SafetyRegionProperties } from './shared';
+import {
+  RegionsMetricName,
+  SafetyRegionProperties,
+} from '@corona-dashboard/common';
 import { countryGeo, regionGeo } from './topology';
 
 type SafetyRegionChoroplethProps<T, K extends RegionsMetricName> = {

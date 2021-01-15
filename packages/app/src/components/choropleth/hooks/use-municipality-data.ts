@@ -7,7 +7,7 @@ import {
   MunicipalGeoJSON,
   MunicipalitiesMetricName,
   MunicipalityProperties,
-} from '../shared';
+} from '@corona-dashboard/common';
 
 /**
  * This hook takes a metric name, extracts the associated data from the json/municipalities.json

@@ -16,7 +16,10 @@ import { useChoroplethDataDescription } from './hooks/use-choropleth-data-descri
 import { getDataThresholds } from './legenda/utils';
 import { municipalThresholds } from './municipal-thresholds';
 import { Path } from './path';
-import { MunicipalitiesMetricName, MunicipalityProperties } from './shared';
+import {
+  MunicipalitiesMetricName,
+  MunicipalityProperties,
+} from '@corona-dashboard/common';
 import { countryGeo, municipalGeo, regionGeo } from './topology';
 
 type MunicipalityChoroplethProps<T, K extends MunicipalitiesMetricName> = {

@@ -7,7 +7,7 @@ import {
   RegionGeoJSON,
   RegionsMetricName,
   SafetyRegionProperties,
-} from '../shared';
+} from '@corona-dashboard/common';
 import { DataValue } from './use-municipality-data';
 
 interface RegionMetricValue extends SafetyRegionProperties {

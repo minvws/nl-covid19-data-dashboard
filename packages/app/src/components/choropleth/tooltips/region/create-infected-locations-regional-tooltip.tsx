@@ -3,7 +3,7 @@ import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent'
 import { RegionsNursingHome } from '~/types/data';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { RegionSelectionHandler } from '../../select-handlers/create-select-region-handler';
-import { SafetyRegionProperties } from '../../shared';
+import { SafetyRegionProperties } from '@corona-dashboard/common';
 
 export const createInfectedLocationsRegionalTooltip = (
   selectHandler: RegionSelectionHandler

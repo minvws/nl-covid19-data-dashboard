@@ -7,7 +7,7 @@ import { EscalationLevels } from '~/types/data';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { RegionSelectionHandler } from '../../select-handlers/create-select-region-handler';
-import { SafetyRegionProperties } from '../../shared';
+import { SafetyRegionProperties } from '@corona-dashboard/common';
 import styles from '../tooltip.module.scss';
 
 export const escalationTooltip = (selectHandler: RegionSelectionHandler) => {
