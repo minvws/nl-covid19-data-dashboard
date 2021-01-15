@@ -7,7 +7,7 @@ interface LinkWithIconProps {
   href: UrlObject | string;
   children: ReactNode;
   icon: ReactNode;
-  iconPlacement: 'left' | 'right';
+  iconPlacement?: 'left' | 'right';
 }
 
 export function LinkWithIcon({

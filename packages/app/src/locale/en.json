@@ -678,7 +678,9 @@
       }
     },
     "latest_articles": {
-      "title": "Wekelijkse berichten"
+      "title": "",
+      "subtitle": "",
+      "all_articles": ""
     }
   },
   "regionaal_index": {
@@ -2040,11 +2042,6 @@
         "veiligheidsregio": "`Cijfers van {{safetyRegion}}`",
         "gemeente": "Cijfers per gemeente"
       }
-    },
-    "latest_articles": {
-      "title": "",
-      "subtitle": "",
-      "all_articles": ""
     }
   },
   "gemeente_actueel": {
