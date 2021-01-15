@@ -1465,6 +1465,59 @@
     shallow-equals "^1.0.0"
     styled-components "^5.2.1"
 
+"@sanity/base@2.1.6":
+  version "2.1.6"
+  resolved "https://registry.npmjs.org/@sanity/base/-/base-2.1.6.tgz#0cacdb33c0aa41f26abc25c4be28b4acc654dc0c"
+  dependencies:
+    "@popperjs/core" "^2.5.4"
+    "@reach/auto-id" "^0.10.5"
+    "@sanity/bifur-client" "^0.0.7"
+    "@sanity/client" "2.1.4"
+    "@sanity/color" "^1.0.0"
+    "@sanity/generate-help-url" "2.1.4"
+    "@sanity/icons" "^1.0.0"
+    "@sanity/image-url" "^0.140.19"
+    "@sanity/initial-value-templates" "2.1.4"
+    "@sanity/mutator" "2.1.4"
+    "@sanity/schema" "2.1.4"
+    "@sanity/state-router" "2.1.4"
+    "@sanity/structure" "2.1.4"
+    "@sanity/transaction-collator" "2.1.4"
+    "@sanity/types" "2.1.4"
+    "@sanity/ui" "^0.28.0"
+    "@sanity/util" "2.1.4"
+    "@sanity/validation" "2.1.4"
+    boundless-arrow-key-navigation "^1.1.0"
+    chance "^1.0.4"
+    circular-at "^1.0.3"
+    classnames "^2.2.5"
+    dataloader "^2.0.0"
+    date-fns "^2.16.1"
+    dom-scroll-into-view "^1.2.1"
+    element-resize-detector "^1.1.14"
+    history "^4.6.3"
+    lodash "^4.17.15"
+    nano-pubsub "^2.0.0"
+    nanoid "^3.1.9"
+    observable-callback "^1.0.1"
+    oneline "^1.0.3"
+    popper-max-size-modifier "^0.2.0"
+    promise-props "^1.0.0"
+    raf "^3.4.1"
+    react-click-outside "^3.0.0"
+    react-fast-compare "^2.0.2"
+    react-icon-base "^2.1.2"
+    react-intl "^2.2.2"
+    react-popper "^2.2.4"
+    react-props-stream "^1.0.0"
+    react-refractor "^2.1.2"
+    react-sortable-hoc "^1.11.0"
+    react-split-pane "^0.1.84"
+    rxjs "^6.5.3"
+    semver-compare "^1.0.0"
+    shallow-equals "^1.0.0"
+    styled-components "^5.2.1"
+
 "@sanity/bifur-client@^0.0.7":
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/@sanity/bifur-client/-/bifur-client-0.0.7.tgz#88822a8a0edf7898a6e42e4e030956a94106a049"
@@ -1733,6 +1786,46 @@
   resolved "https://registry.npmjs.org/@sanity/form-builder/-/form-builder-2.1.4.tgz#e07948df93c0c5274e4ef96812388f6ad8b9f155"
   dependencies:
     "@sanity/base" "2.1.4"
+    "@sanity/block-tools" "2.1.4"
+    "@sanity/generate-help-url" "2.1.4"
+    "@sanity/icons" "^1.0.0"
+    "@sanity/imagetool" "2.1.4"
+    "@sanity/mutator" "2.1.4"
+    "@sanity/portable-text-editor" "0.1.25"
+    "@sanity/types" "2.1.4"
+    "@sanity/ui" "^0.28.0"
+    "@sanity/util" "2.1.4"
+    "@sanity/uuid" "^3.0.1"
+    attr-accept "^1.1.0"
+    classnames "^2.2.5"
+    date-fns "^2.16.1"
+    debug "^3.1.0"
+    diff-match-patch "^1.0.4"
+    exif-component "^1.0.1"
+    get-random-values "^1.2.0"
+    get-window "^1.1.1"
+    humanize-list "^1.0.1"
+    immutable "^3.8.1"
+    is-equal "^1.5.5"
+    is-hotkey "^0.1.4"
+    lodash "^4.17.15"
+    moment "^2.19.1"
+    nano-pubsub "^2.0.0"
+    object-inspect "^1.6.0"
+    popper.js "1.16.1"
+    react-click-outside "^3.0.0"
+    react-container-query "^0.11.0"
+    react-datepicker "^1.8.0"
+    react-measure "^2.3.0"
+    rxjs "^6.5.3"
+    shallow-equals "^1.0.0"
+    speakingurl "^13.0.0"
+
+"@sanity/form-builder@^2.0.1":
+  version "2.1.6"
+  resolved "https://registry.npmjs.org/@sanity/form-builder/-/form-builder-2.1.6.tgz#0ac23798a527ee01fdc7d6b731ed6542e8f8075f"
+  dependencies:
+    "@sanity/base" "2.1.6"
     "@sanity/block-tools" "2.1.4"
     "@sanity/generate-help-url" "2.1.4"
     "@sanity/icons" "^1.0.0"
@@ -2425,17 +2518,27 @@
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/@types/d3-path/-/d3-path-1.0.9.tgz#73526b150d14cd96e701597cbf346cfd1fd4a58c"
 
-"@types/d3-scale@^2", "@types/d3-scale@^2.2.0", "@types/d3-scale@^3.1.0":
+"@types/d3-scale@^2.2.0":
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/@types/d3-scale/-/d3-scale-2.2.4.tgz#ca0d4b84d2f88fe058480f81354d14041a667b96"
   dependencies:
     "@types/d3-time" "^1"
+
+"@types/d3-scale@^3.1.0":
+  version "3.2.2"
+  resolved "https://registry.npmjs.org/@types/d3-scale/-/d3-scale-3.2.2.tgz#5e28d0b1c599328aaec6094219f10a2570be6d74"
+  dependencies:
+    "@types/d3-time" "*"
 
 "@types/d3-shape@^1.3.1":
   version "1.3.5"
   resolved "https://registry.yarnpkg.com/@types/d3-shape/-/d3-shape-1.3.5.tgz#c0164c1be1429473016f855871d487f806c4e968"
   dependencies:
     "@types/d3-path" "^1"
+
+"@types/d3-time@*":
+  version "2.0.0"
+  resolved "https://registry.npmjs.org/@types/d3-time/-/d3-time-2.0.0.tgz#831dd093db91f16b83ba980e194bb8e4bcef44d6"
 
 "@types/d3-time@^1", "@types/d3-time@^1.0.10":
   version "1.1.1"
@@ -4325,7 +4428,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@2.2.6, classnames@^2.2.5:
+classnames@2.2.6, classnames@^2.2.5, classnames@^2.2.6:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
 
@@ -5209,9 +5312,13 @@ cypress@^6.2.1:
     url "^0.11.0"
     yauzl "^2.10.0"
 
-d3-array@1, d3-array@^1, d3-array@^1.2.0:
+d3-array@1, d3-array@^1.2.0:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/d3-array/-/d3-array-1.2.4.tgz#635ce4d5eea759f6f605863dbcfc30edc737f71f"
+
+d3-array@^2.3.0:
+  version "2.9.1"
+  resolved "https://registry.npmjs.org/d3-array/-/d3-array-2.9.1.tgz#f355cc72b46c8649b3f9212029e2d681cb5b9643"
 
 d3-collection@1:
   version "1.0.7"
@@ -5221,9 +5328,17 @@ d3-color@1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/d3-color/-/d3-color-1.4.1.tgz#c52002bf8846ada4424d55d97982fef26eb3bc8a"
 
+"d3-color@1 - 2":
+  version "2.0.0"
+  resolved "https://registry.npmjs.org/d3-color/-/d3-color-2.0.0.tgz#8d625cab42ed9b8f601a1760a389f7ea9189d62e"
+
 d3-format@1:
   version "1.4.5"
   resolved "https://registry.yarnpkg.com/d3-format/-/d3-format-1.4.5.tgz#374f2ba1320e3717eb74a9356c67daee17a7edb4"
+
+"d3-format@1 - 2":
+  version "2.0.0"
+  resolved "https://registry.npmjs.org/d3-format/-/d3-format-2.0.0.tgz#a10bcc0f986c372b729ba447382413aabf5b0767"
 
 d3-geo@^1.11.3:
   version "1.12.1"
@@ -5237,11 +5352,17 @@ d3-interpolate@1, d3-interpolate@^1.4.0:
   dependencies:
     d3-color "1"
 
+"d3-interpolate@1.2.0 - 2":
+  version "2.0.1"
+  resolved "https://registry.npmjs.org/d3-interpolate/-/d3-interpolate-2.0.1.tgz#98be499cfb8a3b94d4ff616900501a64abc91163"
+  dependencies:
+    d3-color "1 - 2"
+
 d3-path@1, d3-path@^1.0.5:
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/d3-path/-/d3-path-1.0.9.tgz#48c050bb1fe8c262493a8caf5524e3e9591701cf"
 
-d3-scale@^2, d3-scale@^3.0.1:
+d3-scale@^2:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/d3-scale/-/d3-scale-2.2.2.tgz#4e880e0b2745acaaddd3ede26a9e908a9e17b81f"
   dependencies:
@@ -5251,6 +5372,16 @@ d3-scale@^2, d3-scale@^3.0.1:
     d3-interpolate "1"
     d3-time "1"
     d3-time-format "2"
+
+d3-scale@^3.0.1:
+  version "3.2.3"
+  resolved "https://registry.npmjs.org/d3-scale/-/d3-scale-3.2.3.tgz#be380f57f1f61d4ff2e6cbb65a40593a51649cfd"
+  dependencies:
+    d3-array "^2.3.0"
+    d3-format "1 - 2"
+    d3-interpolate "1.2.0 - 2"
+    d3-time "1 - 2"
+    d3-time-format "2 - 3"
 
 d3-shape@^1.0.6, d3-shape@^1.2.0:
   version "1.3.7"
@@ -5264,9 +5395,19 @@ d3-time-format@2:
   dependencies:
     d3-time "1"
 
+"d3-time-format@2 - 3":
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/d3-time-format/-/d3-time-format-3.0.0.tgz#df8056c83659e01f20ac5da5fdeae7c08d5f1bb6"
+  dependencies:
+    d3-time "1 - 2"
+
 d3-time@1, d3-time@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/d3-time/-/d3-time-1.1.0.tgz#b1e19d307dae9c900b7e5b25ffc5dcc249a8a0f1"
+
+"d3-time@1 - 2":
+  version "2.0.0"
+  resolved "https://registry.npmjs.org/d3-time/-/d3-time-2.0.0.tgz#ad7c127d17c67bd57a4c61f3eaecb81108b1e0ab"
 
 d@1, d@^1.0.1:
   version "1.0.1"
@@ -11784,6 +11925,10 @@ property-information@^5.0.0:
   dependencies:
     xtend "^4.0.0"
 
+proptypes@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.npmjs.org/proptypes/-/proptypes-1.1.0.tgz#78b3828a5aa6bb1308939e0de3c6044dfd4bd239"
+
 proto-list@~1.2.1:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/proto-list/-/proto-list-1.2.4.tgz#212d5bfe1318306a420f6402b8e26ff39647a849"
@@ -12001,6 +12146,15 @@ react-datepicker@^1.8.0:
     react-onclickoutside "^6.7.1"
     react-popper "^1.0.2"
 
+react-dom@^16.13.1:
+  version "16.14.0"
+  resolved "https://registry.npmjs.org/react-dom/-/react-dom-16.14.0.tgz#7ad838ec29a777fb3c75c3a190f661cf92ab8b89"
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
+    scheduler "^0.19.1"
+
 react-dom@^17.0.1:
   version "17.0.1"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-17.0.1.tgz#1de2560474ec9f0e334285662ede52dbc5426fc6"
@@ -12165,6 +12319,14 @@ react-tiny-virtual-list@^2.0.5:
   resolved "https://registry.yarnpkg.com/react-tiny-virtual-list/-/react-tiny-virtual-list-2.2.0.tgz#eafb6fcf764e4ed41150ff9752cdaad8b35edf4a"
   dependencies:
     prop-types "^15.5.7"
+
+react@^16.13.1:
+  version "16.14.0"
+  resolved "https://registry.npmjs.org/react/-/react-16.14.0.tgz#94d776ddd0aaa37da3eda8fc5b6b18a4c9a3114d"
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
 
 react@^17.0.1:
   version "17.0.1"
@@ -12746,6 +12908,17 @@ sanity-diff-patch@^1.0.9:
 sanity-mobile-preview@^1.0.7:
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/sanity-mobile-preview/-/sanity-mobile-preview-1.0.7.tgz#70c7e2bcf31b89a4ecac56427ea5c51b49ccfc7b"
+
+sanity-plugin-tabs@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.npmjs.org/sanity-plugin-tabs/-/sanity-plugin-tabs-2.0.1.tgz#24ba817a288a789cdc71238232a037f12b02937a"
+  dependencies:
+    "@sanity/form-builder" "^2.0.1"
+    classnames "^2.2.6"
+    prop-types "^15.7.2"
+    proptypes "^1.1.0"
+    react "^16.13.1"
+    react-dom "^16.13.1"
 
 sass-graph@2.2.5:
   version "2.2.5"

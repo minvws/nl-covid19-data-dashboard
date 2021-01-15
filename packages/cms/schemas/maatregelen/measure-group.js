@@ -56,7 +56,7 @@ export default {
         { name: "ernstig", title: "Ernstig", options: { sortOrder: 30 } },
         {
           name: "zeerErnstig",
-          title: "zeer ernstig",
+          title: "Zeer Ernstig",
           options: { sortOrder: 40 },
         },
       ],
