@@ -1,6 +1,5 @@
 import { groq } from 'next-sanity';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
-import { TALLLanguages } from '~/locale/index';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
@@ -9,12 +8,6 @@ import {
 import { Article } from '~/types/cms';
 import { Link } from '~/utils/link';
 
-interface ArticlesOverviewProps {
-  text: TALLLanguages;
-  content: Article[];
-  lastGenerated: string;
-}
-
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   createGetContent<Article[]>(groq`
@@ -22,14 +15,14 @@ export const getStaticProps = createGetStaticProps(
   `)
 );
 
-const ArticlesOverview: FCWithLayout<ArticlesOverviewProps> = (props) => {
+const ArticlesOverview: FCWithLayout<typeof getStaticProps> = (props) => {
   const { content } = props;
 
   return (
     <>
-      <h1>Todo: Artikelen!</h1>
+      <h1>@Todo: Artikelen!</h1>
       {content.map((article) => (
-        <div key={`article-${article.slug.current}`}>
+        <div key={article.slug.current}>
           <Link href={`/artikelen/${article.slug.current}`} passHref>
             <a>{article.title}</a>
           </Link>
@@ -40,8 +33,8 @@ const ArticlesOverview: FCWithLayout<ArticlesOverviewProps> = (props) => {
 };
 
 const metadata = {
-  title: 'TODO',
-  description: 'TODO',
+  title: '@TODO',
+  description: '@TODO',
 };
 
 ArticlesOverview.getLayout = getLayoutWithMetadata(metadata);

@@ -22,7 +22,7 @@ node_modules
 
 # CI/CD
 /env
-/public/json*
+/public/json
 .gitlab-ci.yml
 
 npm-debug.log*
