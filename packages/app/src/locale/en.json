@@ -721,7 +721,8 @@
     "niveau": "level",
     "clear_select_input": "Empty",
     "gisteren": "Yesterday",
-    "vandaag": "Today"
+    "vandaag": "Today",
+    "read_more": "Read more"
   },
   "seoHead": {
     "default_description": "Information on the development of the coronavirus in The Netherlands.",
@@ -2041,7 +2042,9 @@
       }
     },
     "latest_articles": {
-      "title": ""
+      "title": "",
+      "subtitle": "",
+      "all_articles": ""
     }
   },
   "gemeente_actueel": {

@@ -31,7 +31,10 @@ import {
 } from '~/static-props/get-data';
 import { Article } from '~/types/cms';
 
-export type LatestArticle = Pick<Article, 'title' | 'slug' | 'intro' | 'cover'>;
+export type LatestArticle = Pick<
+  Article,
+  'title' | 'slug' | 'summary' | 'cover'
+>;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -44,7 +47,7 @@ export const getStaticProps = createGetStaticProps(
     gm: ({ tested_overall }) => ({ tested_overall }),
   }),
   createGetContent<LatestArticle[]>(
-    groq`*[_type == 'article'] | order(publicationDate) {title, slug, intro, cover}[0..2]`
+    groq`*[_type == 'article'] | order(publicationDate) {title, slug, summary, cover}[0..2]`
   ),
   () => {
     const data = getNlData();
