@@ -1,11 +1,11 @@
 export default {
   title: "Artikel",
-  name: "artikel",
+  name: "article",
   type: "document",
   fieldsets: [
     {
-      name: "metadata",
       title: "Metadata",
+      name: "metadata",
       options: {
         collapsible: true,
         collapsed: true

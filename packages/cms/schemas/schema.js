@@ -7,7 +7,7 @@ import schemaTypes from "all:part:@sanity/base/schema-type";
 // documents are items that are published/queriable
 // some of these are 'singletons' but that's not enforced by the API
 // import siteSettings from "./documents/siteSettings";
-import artikel from "./documents/artikel";
+import article from "./documents/article";
 import cijferVerantwoording from "./documents/cijfer-verantwoording";
 import laatsteOntwikkelingen from "./documents/laatste-ontwikkelingen";
 import overDitDashboard from "./documents/over-dit-dashboard";
@@ -34,7 +34,7 @@ export default createSchema({
   types: schemaTypes.concat([
     /* DOCUMENTS */
     // siteSettings,
-    artikel,
+    article,
     laatsteOntwikkelingen,
     veelgesteldeVragen,
     cijferVerantwoording,

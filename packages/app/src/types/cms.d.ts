@@ -12,8 +12,15 @@ export interface Article {
   title: string;
   slug: {
     _key: string;
-    _type: string;
+    _type: 'slug';
     current: string;
+  };
+  cover: {
+    _type: 'image';
+    asset: {
+      _ref: string;
+      _type: 'reference';
+    };
   };
   intro: Block | null;
   content: RichContentBlock[] | null;

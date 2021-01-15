@@ -11,7 +11,7 @@ import { Article } from '~/types/cms';
 import { assert } from '~/utils/assert';
 
 const articlesQuery = groq`
-*[_type == 'artikel']
+*[_type == 'article']
 `;
 
 export async function getStaticPaths() {
@@ -31,7 +31,7 @@ export const getStaticProps = createGetStaticProps(
   createGetContent<Article>((context) => {
     assert(context?.params?.slug, 'Slug required to retrieve article');
     return groq`
-  *[_type == 'artikel' && slug.current == '${context.params.slug}'][0]
+  *[_type == 'article' && slug.current == '${context.params.slug}'][0]
   `;
   })
 );

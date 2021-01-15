@@ -11,7 +11,7 @@ import { Link } from '~/utils/link';
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   createGetContent<Article[]>(groq`
-    *[_type == 'artikel']
+    *[_type == 'article']
   `)
 );
 

@@ -35,9 +35,10 @@ export default {
       {
         type: "image"
       },
-      {
-        type: "lineChart"
-      }
+      // @TODO
+      // {
+      //   type: "lineChart"
+      // }
     ]
   })),
 };
