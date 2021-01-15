@@ -1,3 +1,4 @@
+import { groq } from 'next-sanity';
 import { useRouter } from 'next/router';
 import ArtsIcon from '~/assets/arts.svg';
 import GetestIcon from '~/assets/test.svg';
@@ -23,10 +24,12 @@ import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
+  createGetContent,
   getLastGeneratedDate,
   getNlData,
   getText,
 } from '~/static-props/get-data';
+import { Article } from '~/types/cms';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -38,6 +41,7 @@ export const getStaticProps = createGetStaticProps(
     }),
     gm: ({ tested_overall }) => ({ tested_overall }),
   }),
+  createGetContent<Article[]>(groq`*[_type == 'article']`),
   () => {
     const data = getNlData();
 
@@ -58,7 +62,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const Home: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { text: siteText, data, choropleth } = props;
+  const { text: siteText, data, choropleth, content } = props;
   const router = useRouter();
   const notificatie = siteText.notificatie;
   const text = siteText.nationaal_actueel;
@@ -184,7 +188,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
 
         <DataSitemap />
 
-        <LatestArticles />
+        <LatestArticles articles={content} />
       </TileList>
     </MaxWidth>
   );

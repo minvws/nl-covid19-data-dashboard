@@ -7,11 +7,11 @@ type ArticleSummaryProps = {
   slug: string;
   title: string;
   summary: string;
-  imageSrc: string;
+  coverImageSrc: string;
 };
 
 export function ArticleSummary(props: ArticleSummaryProps) {
-  const { slug, title, summary, imageSrc } = props;
+  const { slug, title, summary, coverImageSrc } = props;
 
   return (
     <Box>
