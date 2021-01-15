@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
 import siteText from '~/locale/index';
-import { MunicipalitiesTestedOverall } from '~/types/data';
+import { MunicipalitiesTestedOverall } from '@corona-dashboard/common';
 import { formatPercentage } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { MunicipalitySelectionHandler } from '../../select-handlers/create-select-municipal-handler';

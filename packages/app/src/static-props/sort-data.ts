@@ -1,4 +1,4 @@
-import { Municipal, National, Regionaal } from '~/types/data.d';
+import { Municipal, National, Regionaal } from '@corona-dashboard/common.d';
 
 export function sortNationalTimeSeriesInDataInPlace(data: National) {
   const timeSeriesPropertyNames = getTimeSeriesPropertyNames(data).filter(

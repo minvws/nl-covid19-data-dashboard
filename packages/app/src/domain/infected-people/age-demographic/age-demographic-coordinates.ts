@@ -9,7 +9,7 @@ import {
 import {
   NationalTestedPerAgeGroup,
   NationalTestedPerAgeGroupValue,
-} from '~/types/data';
+} from '@corona-dashboard/common';
 import { AGE_GROUP_TOOLTIP_WIDTH } from './age-demographic-chart';
 
 export interface AgeDemographicCoordinates {

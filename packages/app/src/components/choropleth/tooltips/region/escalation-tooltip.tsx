@@ -3,7 +3,7 @@ import { EscalationLevelIcon } from '~/components-styled/escalation-level-icon';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
 import { EscalationLevel } from '~/components/restrictions/type';
 import text from '~/locale/index';
-import { EscalationLevels } from '~/types/data';
+import { EscalationLevels } from '@corona-dashboard/common';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { RegionSelectionHandler } from '../../select-handlers/create-select-region-handler';

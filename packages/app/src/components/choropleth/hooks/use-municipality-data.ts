@@ -1,6 +1,6 @@
 import { set } from 'lodash';
 import { useMemo } from 'react';
-import { Municipalities } from '~/types/data';
+import { Municipalities } from '@corona-dashboard/common';
 import { assert } from '~/utils/assert';
 import {
   Dictionary,

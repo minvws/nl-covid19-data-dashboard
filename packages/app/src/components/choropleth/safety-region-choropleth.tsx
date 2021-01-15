@@ -3,7 +3,7 @@ import { Feature, MultiPolygon } from 'geojson';
 import { ReactNode, useCallback } from 'react';
 import { AspectRatio } from '~/components-styled/aspect-ratio';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { Regions } from '~/types/data';
+import { Regions } from '@corona-dashboard/common';
 import { Choropleth } from './choropleth';
 import {
   useChartDimensions,

@@ -1,2 +1,2 @@
 *.tsbuildinfo
-dist
+/dist

@@ -1,6 +1,6 @@
 import { set } from 'lodash';
 import { useMemo } from 'react';
-import { Regions } from '~/types/data';
+import { Regions } from '@corona-dashboard/common';
 import { assert } from '~/utils/assert';
 import {
   Dictionary,

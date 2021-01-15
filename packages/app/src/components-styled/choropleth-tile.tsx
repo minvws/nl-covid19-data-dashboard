@@ -1,5 +1,5 @@
 import { ChoroplethLegenda } from '~/components-styled/choropleth-legenda';
-import { ChoroplethThresholdsValue } from '~/components/choropleth/shared';
+import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
 import { DataProps } from '~/types/attributes';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { Box } from './base';

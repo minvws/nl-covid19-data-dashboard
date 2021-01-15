@@ -10,7 +10,7 @@ import {
   National,
   Regionaal,
   Regions,
-} from '~/types/data';
+} from '@corona-dashboard/common';
 import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
 import {
   sortMunicipalTimeSeriesInDataInPlace,

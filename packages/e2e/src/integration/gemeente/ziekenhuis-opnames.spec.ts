@@ -11,7 +11,7 @@ context('Gemeente - Ziekenhuis opnames', () => {
 
     const kpiTestInfo = {
       admissions_moving_average: formatNumber(
-        lastValue.admissions_moving_average
+        lastValue.admissions_on_date_of_admission
       ),
     };
 

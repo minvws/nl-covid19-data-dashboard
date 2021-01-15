@@ -3,7 +3,7 @@ import { Feature, MultiPolygon } from 'geojson';
 import { ReactNode, useCallback } from 'react';
 import { AspectRatio } from '~/components-styled/aspect-ratio';
 import { DataProps } from '~/types/attributes';
-import { Municipalities } from '~/types/data';
+import { Municipalities } from '@corona-dashboard/common';
 import { Choropleth } from './choropleth';
 import {
   useChartDimensions,
