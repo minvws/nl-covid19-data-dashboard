@@ -1,5 +1,8 @@
-import { Municipal, National, Regionaal } from '@corona-dashboard/common.d';
+import { Municipal, National, Regionaal } from '@corona-dashboard/common';
 
+/**
+ * @TODO remove this content since it is now part of common
+ */
 export function sortNationalTimeSeriesInDataInPlace(data: National) {
   const timeSeriesPropertyNames = getTimeSeriesPropertyNames(data).filter(
     // restrictions doesn't have any timeseries so needs to be removed from this list

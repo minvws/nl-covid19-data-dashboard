@@ -1,7 +1,7 @@
 import { BarChartValue } from '~/components-styled/bar-chart/bar-chart-coordinates';
 import siteText from '~/locale/index';
 import { colors } from '~/style/theme';
-import { Regionaal } from '@corona-dashboard/common.d';
+import { Regionaal } from '@corona-dashboard/common';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 

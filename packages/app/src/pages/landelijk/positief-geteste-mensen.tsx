@@ -36,7 +36,7 @@ import {
 } from '~/static-props/get-data';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import { colors } from '~/style/theme';
-import { NationalTestedPerAgeGroup } from '@corona-dashboard/common.d';
+import { NationalTestedPerAgeGroup } from '@corona-dashboard/common';
 import { assert } from '~/utils/assert';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
