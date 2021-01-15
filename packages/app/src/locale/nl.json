@@ -1368,7 +1368,6 @@
     "toename": "meer dan",
     "afname": "minder dan",
     "gelijk": "gelijk aan",
-    "vorige_waarde": "de vorige waarde",
     "tijdverloop": {
       "gisteren": "gisteren",
       "geleden": "geleden",
@@ -1381,7 +1380,8 @@
       "vorige_week": "vorige week",
       "ervoor": "ervoor"
     },
-    "ervoor": "ervoor"
+    "ervoor": "ervoor",
+    "vorige_waarde": "de vorige waarde"
   },
   "aria_labels": {
     "pagina_keuze": "Landelijk, regio of gemeente menu",
