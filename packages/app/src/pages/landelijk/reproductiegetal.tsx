@@ -70,9 +70,6 @@ const ReproductionIndex: FCWithLayout<typeof getStaticProps> = (props) => {
               metricProperty="index_average"
               localeTextKey="reproductiegetal"
               differenceKey="reproduction__index_average"
-              differenceStaticTimespan={
-                siteText.toe_en_afname.tijdverloop.vorige_week
-              }
             />
             <Text>{text.barscale_toelichting}</Text>
           </KpiWithIllustrationTile>
