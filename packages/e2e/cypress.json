@@ -1,9 +1,9 @@
 {
   "fixturesFolder": "../app/public/json",
-  "integrationFolder": "integration",
-  "pluginsFile": "plugins",
+  "integrationFolder": "src/integration",
+  "pluginsFile": "src/plugins",
   "screenshotsFolder": "screenshots",
-  "supportFile": "support/index.ts",
+  "supportFile": "src/support/index.ts",
   "videosFolder": "videos",
   "baseUrl": "http://localhost:3000"
 }
