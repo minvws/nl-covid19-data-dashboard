@@ -1,6 +1,6 @@
 import { groq } from 'next-sanity';
+import { ArticleDetail } from '~/components-styled/article-detail';
 import { Box } from '~/components-styled/base';
-import { ArticleDetail } from '~/domain/article/article-detail';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import { getClient, localize } from '~/lib/sanity';
 import { targetLanguage } from '~/locale/index';
