@@ -42,8 +42,14 @@ export function getLastGeneratedDate() {
   };
 }
 
-export function createGetContent<T>(query: string) {
-  return async () => {
+export function createGetContent<T>(
+  queryOrQueryGetter: string | ((context: GetStaticPropsContext) => string)
+) {
+  return async (context: GetStaticPropsContext) => {
+    const query =
+      typeof queryOrQueryGetter === 'function'
+        ? queryOrQueryGetter(context)
+        : queryOrQueryGetter;
     const rawContent = await getClient().fetch<T>(query);
     const content = localize(rawContent, [targetLanguage, 'nl']);
 
