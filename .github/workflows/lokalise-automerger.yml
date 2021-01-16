@@ -29,6 +29,8 @@ jobs:
           node-version: "14"
       - name: Yarn install
         run: yarn install
+      - name: Ensure JSON directory for datafiles exists
+        run: mkdir -p packages/app/public/json/
       - name: Validate en.json
         run: yarn workspace @corona-dashboard/cli validate-single locale en.json
       - name: Validate nl.json
