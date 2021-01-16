@@ -143,7 +143,7 @@
     "barscale_titel": "Ziekenhuisopnames per dag",
     "extra_uitleg": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis (exclusief IC) is opgenomen. Dit cijfer laat het aantal ziekenhuisopnames zien dat op één dag gemeld is. Dit kunnen ook meldingen zijn van opnames van eerdere dagen.",
     "map_titel": "Verdeling ziekenhuisopnames in Nederland",
-    "map_toelichting": "Deze kaarten laten zien hoe de ziekenhuisopnames zijn verdeeld over Nederland. Het gaat dan om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE. De Tergooiziekenhuizen, Ziekenhuis Amstelland en het Flevoziekenhuis delen hun COVID-19 ziekenhuisopnames op dit moment niet met Stichting NICE. Daardoor zijn de cijfers van sommige veiligheidsregio’s en gemeenten op de kaart lager dan eigenlijk het geval is.",
+    "map_toelichting": "Deze kaarten laat zien in welke gemeenten patiënten wonen die met COVID-19 in het ziekenhuis worden opgenomen. Let op: patiënten kunnen ook in een ander deel van Nederland worden opgenomen. De kaart laat dus niet zien hoeveel patiënten per ziekenhuis worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE. De Tergooiziekenhuizen, Ziekenhuis Amstelland en het Flevoziekenhuis delen hun COVID-19 ziekenhuisopnames op dit moment niet met Stichting NICE. Daardoor zijn de cijfers van sommige veiligheidsregio’s en gemeenten op de kaart lager dan eigenlijk het geval is.",
     "linechart_titel": "Ziekenhuisopnames over tijd",
     "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "chloropleth_legenda": {
@@ -694,7 +694,7 @@
     "barscale_titel": "Ziekenhuisopnames per dag",
     "extra_uitleg": "Aantal mensen uit deze veiligheidsregio met COVID-19 dat per dag in een ziekenhuis (exclusief IC) is opgenomen. Dit cijfer is het aantal ziekenhuisopnames dat op één dag gemeld zijn. Dit kunnen ook meldingen zijn van opnamen van eerdere dagen.",
     "map_titel": "Verdeling ziekenhuisopnames in {{safetyRegion}}",
-    "map_toelichting": "Deze kaarten laten zien hoe de ziekenhuisopnames zijn verdeeld over Nederland. Het gaat dan om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE. De Tergooiziekenhuizen, Ziekenhuis Amstelland en het Flevoziekenhuis delen hun COVID-19 ziekenhuisopnames op dit moment niet met Stichting NICE. Daardoor zijn de cijfers van sommige veiligheidsregio’s en gemeenten op de kaart lager dan eigenlijk het geval is.",
+    "map_toelichting": "Deze kaarten laat zien in welke gemeenten patiënten wonen die met COVID-19 in het ziekenhuis worden opgenomen. Let op: patiënten kunnen ook in een ander deel van Nederland worden opgenomen. De kaart laat dus niet zien hoeveel patiënten per ziekenhuis worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE. De Tergooiziekenhuizen, Ziekenhuis Amstelland en het Flevoziekenhuis delen hun COVID-19 ziekenhuisopnames op dit moment niet met Stichting NICE. Daardoor zijn de cijfers van sommige veiligheidsregio’s en gemeenten op de kaart lager dan eigenlijk het geval is.",
     "linechart_titel": "Ziekenhuisopnames over tijd",
     "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "bron": {
@@ -836,7 +836,7 @@
     "barscale_titel": "Ziekenhuisopnames per dag",
     "extra_uitleg": "Aantal mensen uit deze gemeente met COVID-19 dat per dag in een ziekenhuis (exclusief IC) is opgenomen. Dit cijfer is het aantal ziekenhuisopnames dat op één dag gemeld zijn. Dit kunnen ook meldingen zijn van opnamen van eerdere dagen. Dat komt omdat de registratie van ziekenhuisopnames vaak niet gelijk op de dag van opname gebeurt. Omdat het meldingen van één dag zijn, geeft dit cijfer toch een goed beeld van de actuele ontwikkeling van het aantal ziekenhuisopnames.",
     "map_titel": "Verdeling ziekenhuisopnames in veiligheidsregio van {{municipality}}",
-    "map_toelichting": "Deze kaarten laten zien hoe de ziekenhuisopnames zijn verdeeld over Nederland. Het gaat dan om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE. De Tergooiziekenhuizen, Ziekenhuis Amstelland en het Flevoziekenhuis delen hun COVID-19 ziekenhuisopnames op dit moment niet met Stichting NICE. Daardoor zijn de cijfers van sommige veiligheidsregio’s en gemeenten op de kaart lager dan eigenlijk het geval is.",
+    "map_toelichting": "Deze kaarten laat zien in welke gemeenten patiënten wonen die met COVID-19 in het ziekenhuis worden opgenomen. Let op: patiënten kunnen ook in een ander deel van Nederland worden opgenomen. De kaart laat dus niet zien hoeveel patiënten per ziekenhuis worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE. De Tergooiziekenhuizen, Ziekenhuis Amstelland en het Flevoziekenhuis delen hun COVID-19 ziekenhuisopnames op dit moment niet met Stichting NICE. Daardoor zijn de cijfers van sommige veiligheidsregio’s en gemeenten op de kaart lager dan eigenlijk het geval is.",
     "linechart_titel": "Ziekenhuisopnames over tijd",
     "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "bron": {
