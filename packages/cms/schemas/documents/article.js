@@ -47,6 +47,8 @@ export default {
     },
     {
       title: "Samenvatting",
+      description:
+        "Dit is een korte samenvatting van het artikel die getoond wordt in de artikel blokken op de overzichtspagina",
       name: "summary",
       type: "localeText",
       validation: (Rule) =>
