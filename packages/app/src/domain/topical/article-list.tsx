@@ -1,5 +1,7 @@
+import css from '@styled-system/css';
+import styled from 'styled-components';
 import ArrowIcon from '~/assets/arrow.svg';
-import { ArticleSummary } from '~/components-styled/article-summary';
+import { ArticleLink } from '~/components-styled/article-link';
 import { Box } from '~/components-styled/base';
 import { LinkWithIcon } from '~/components-styled/link-with-icon';
 import { Tile } from '~/components-styled/tile';
@@ -14,11 +16,11 @@ export type ArticleSummary = Pick<
 >;
 
 type ArticleListProps = {
-  articles: ArticleSummary[];
+  articleSummaries: ArticleSummary[];
   hideLink?: boolean;
 };
 
-export function ArticleList({ articles, hideLink }: ArticleListProps) {
+export function ArticleList({ articleSummaries, hideLink }: ArticleListProps) {
   const breakpoints = useBreakpoints();
 
   return (
@@ -26,17 +28,23 @@ export function ArticleList({ articles, hideLink }: ArticleListProps) {
       <Heading level={2}>
         {siteText.nationaal_actueel.latest_articles.title}
       </Heading>
-      <Box display="flex" alignItems="flex-end" mb={4}>
-        <Box flex="0 0 33%">
+      <Box
+        display="flex"
+        alignItems={{ _: undefined, lg: 'flex-end' }}
+        mb={4}
+        flexDirection={{ _: 'column', lg: 'row' }}
+      >
+        <Box flex={{ _: undefined, lg: '0 0 33%' }}>
           <Text m={0}>
             {siteText.nationaal_actueel.latest_articles.subtitle}
           </Text>
         </Box>
         <Box
-          flex="0 0 66%"
-          alignContent="flex-end"
-          justifyContent="flex-end"
-          display="flex"
+          flex={{ _: undefined, lg: '0 0 66%' }}
+          alignContent={{ _: undefined, lg: 'flex-end' }}
+          justifyContent={{ _: undefined, lg: 'flex-end' }}
+          display={{ _: undefined, lg: 'flex' }}
+          mt={{ _: 2, lg: undefined }}
         >
           {!hideLink && (
             <LinkWithIcon
@@ -51,21 +59,39 @@ export function ArticleList({ articles, hideLink }: ArticleListProps) {
       </Box>
       <Box
         display="flex"
-        spacing={4}
         spacingHorizontal={breakpoints.lg}
         flexDirection={{ _: 'column', lg: 'row' }}
+        flexWrap="wrap"
+        justifyContent="space-between"
       >
-        {articles.map((x) => (
-          <Box flex="0 0 33%" key={x.slug.current}>
-            <ArticleSummary
-              slug={x.slug.current}
-              title={x.title}
-              summary={x.summary}
-              cover={x.cover}
-            />
-          </Box>
+        {articleSummaries.map((summary) => (
+          <ArticleBox key={summary.slug.current}>
+            <ArticleLink articleSummary={summary} />
+          </ArticleBox>
+        ))}
+        {articleSummaries.map((summary) => (
+          <ArticleBox key={summary.slug.current}>
+            <ArticleLink articleSummary={summary} />
+          </ArticleBox>
+        ))}
+        {articleSummaries.map((summary) => (
+          <ArticleBox key={summary.slug.current}>
+            <ArticleLink articleSummary={summary} />
+          </ArticleBox>
+        ))}
+        {articleSummaries.map((summary) => (
+          <ArticleBox key={summary.slug.current}>
+            <ArticleLink articleSummary={summary} />
+          </ArticleBox>
         ))}
       </Box>
     </Tile>
   );
 }
+
+const ArticleBox = styled(Box)(
+  css({
+    flex: '0 0 auto',
+    marginTop: 3,
+  })
+);

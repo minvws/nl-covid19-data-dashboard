@@ -1,17 +1,12 @@
 import { supportedLanguages } from "./supported-languages";
 
 export default {
-  name: "localeBlock",
+  name: "localeText",
   type: "object",
-  title: "Locale Block Content",
+  title: "Locale Text Content",
   fields: supportedLanguages.map((lang) => ({
     title: lang.title,
     name: lang.id,
-    type: "array",
-    of: [
-      {
-        type: "block",
-      },
-    ],
+    type: "text",
   })),
 };

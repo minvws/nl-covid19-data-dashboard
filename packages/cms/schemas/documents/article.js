@@ -48,7 +48,12 @@ export default {
     {
       title: "Samenvatting",
       name: "summary",
-      type: "localeBlock",
+      type: "localeText",
+      validation: (Rule) =>
+        Rule.fields({
+          nl: (fieldRule) => fieldRule.required().max(120),
+          en: (fieldRule) => fieldRule.required().max(120),
+        }),
     },
     {
       title: "Intro",

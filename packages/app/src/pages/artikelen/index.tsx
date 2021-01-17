@@ -20,7 +20,7 @@ const ArticlesOverview: FCWithLayout<typeof getStaticProps> = (props) => {
 
   return (
     <MaxWidth>
-      <ArticleList articles={content} hideLink={true} />
+      <ArticleList articleSummaries={content} hideLink={true} />
     </MaxWidth>
   );
 };

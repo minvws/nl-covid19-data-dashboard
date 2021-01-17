@@ -15,7 +15,7 @@ import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-ch
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
-import { ArticleList, ArticleSummary } from '~/domain/topical/article-list';
+import { ArticleList } from '~/domain/topical/article-list';
 import { Search } from '~/domain/topical/components/search';
 import { DataSitemap } from '~/domain/topical/data-site-map';
 import { EscalationLevelExplanationsTile } from '~/domain/topical/escalation-level-explanations-tile';
@@ -189,7 +189,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
 
         <DataSitemap />
 
-        <ArticleList articles={content} />
+        <ArticleList articleSummaries={content} />
       </TileList>
     </MaxWidth>
   );
