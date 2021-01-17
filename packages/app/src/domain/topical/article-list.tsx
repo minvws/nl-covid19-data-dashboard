@@ -1,19 +1,13 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import ArrowIcon from '~/assets/arrow.svg';
-import { ArticleLink } from '~/components-styled/article-link';
+import { ArticleLink, ArticleSummary } from '~/components-styled/article-link';
 import { Box } from '~/components-styled/base';
 import { LinkWithIcon } from '~/components-styled/link-with-icon';
 import { Tile } from '~/components-styled/tile';
 import { Heading, Text } from '~/components-styled/typography';
 import siteText from '~/locale';
-import { Article } from '~/types/cms';
 import { useBreakpoints } from '~/utils/useBreakpoints';
-
-export type ArticleSummary = Pick<
-  Article,
-  'title' | 'slug' | 'summary' | 'cover'
->;
 
 type ArticleListProps = {
   articleSummaries: ArticleSummary[];

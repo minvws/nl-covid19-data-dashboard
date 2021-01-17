@@ -1,10 +1,15 @@
 import ArrowIcon from '~/assets/arrow.svg';
 import { Image } from '~/components-styled/cms/image-block';
 import { LinkWithIcon } from '~/components-styled/link-with-icon';
-import { ArticleSummary } from '~/domain/topical/article-list';
 import siteText from '~/locale';
+import { Article } from '~/types/cms';
 import { Box } from './base';
 import { Heading, Text } from './typography';
+
+export type ArticleSummary = Pick<
+  Article,
+  'title' | 'slug' | 'summary' | 'cover'
+>;
 
 type ArticleLinkProps = {
   articleSummary: ArticleSummary;
