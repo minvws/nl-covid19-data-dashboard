@@ -18,7 +18,14 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
   return (
     <Box bg="white" py={{ _: 4, md: 5 }}>
       <ContentBlock spacing={3}>
-        <LinkWithIcon href="/artikelen" icon={<ArrowIcon />}>
+        <LinkWithIcon
+          href="/artikelen"
+          icon={
+            <span css={css({ svg: { transform: 'rotate(90deg)' } })}>
+              <ArrowIcon />
+            </span>
+          }
+        >
           {siteText.article_detail.back_link.text}
         </LinkWithIcon>
 

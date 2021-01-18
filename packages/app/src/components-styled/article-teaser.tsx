@@ -1,3 +1,4 @@
+import css from '@styled-system/css';
 import ArrowIcon from '~/assets/arrow.svg';
 import { LinkWithIcon } from '~/components-styled/link-with-icon';
 import { urlFor } from '~/lib/sanity';
@@ -41,7 +42,11 @@ export function ArticleTeaser(props: ArticleLinkProps) {
         <Text>{summary}</Text>
         <LinkWithIcon
           href={`/artikelen/${slug}`}
-          icon={<ArrowIcon />}
+          icon={
+            <span css={css({ svg: { transform: 'rotate(-90deg)' } })}>
+              <ArrowIcon />
+            </span>
+          }
           iconPlacement="right"
         >
           {siteText.common.read_more}

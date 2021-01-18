@@ -31,8 +31,6 @@ export function LinkWithIcon({
             svg: {
               height: '10px',
               width: '12px',
-              transform:
-                iconPlacement == 'left' ? 'rotate(90deg)' : 'rotate(-90deg)',
               marginRight: 3,
             },
           })}
