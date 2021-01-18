@@ -1,5 +1,5 @@
-import React, { useCallback, useState } from "react";
-import PropTypes from "prop-types";
+import React, { useCallback, useState } from 'react';
+import PropTypes from 'prop-types';
 
 import {
   Grid,
@@ -13,14 +13,14 @@ import {
   Text,
   Button,
   Stack,
-} from "@sanity/ui";
+} from '@sanity/ui';
 
-import PatchEvent, { set, unset } from "part:@sanity/form-builder/patch-event";
+import PatchEvent, { set, unset } from 'part:@sanity/form-builder/patch-event';
 
-import { restrictionIcons } from "./icons";
+import { restrictionIcons } from './icons';
 
 const createPatchFrom = (value) =>
-  PatchEvent.from(value === "" ? unset() : set(String(value)));
+  PatchEvent.from(value === '' ? unset() : set(String(value)));
 
 export default function Icon(props) {
   const [open, setOpen] = useState(false);
@@ -75,7 +75,7 @@ export default function Icon(props) {
               <Flex
                 direction="column"
                 align="center"
-                onClick={(event) => onChange(createPatchFrom(""))}
+                onClick={(event) => onChange(createPatchFrom(''))}
               >
                 <span>Geen icoon</span>
                 <Radio checked={value === undefined} readOnly />

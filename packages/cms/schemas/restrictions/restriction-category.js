@@ -1,38 +1,38 @@
-import React from "react";
+import React from 'react';
 
-import IconComponent from "../../components/icons/icon";
-import { restrictionIcons } from "../../components/icons/icons";
+import IconComponent from '../../components/icons/icon';
+import { restrictionIcons } from '../../components/icons/icons';
 
 export default {
-  title: "Restrictie Categorie",
-  name: "restrictionCategory",
-  type: "object",
+  title: 'Restrictie Categorie',
+  name: 'restrictionCategory',
+  type: 'object',
   fields: [
     {
-      title: "Titel van groep",
-      description: "Hoe noem je deze groep maatregelen?",
-      name: "title",
-      type: "localeString",
+      title: 'Titel van groep',
+      description: 'Hoe noem je deze groep maatregelen?',
+      name: 'title',
+      type: 'localeString',
     },
     {
-      title: "Icoon",
-      description: "Welk icoon moet er naast de maatregelen categorie staan?",
-      name: "icon",
-      type: "string",
+      title: 'Icoon',
+      description: 'Welk icoon moet er naast de maatregelen categorie staan?',
+      name: 'icon',
+      type: 'string',
       inputComponent: IconComponent,
     },
     {
-      title: "Maatregelen",
-      description: "Per groep bestaat er een lijst maatregelen",
-      name: "restrictions",
-      type: "array",
-      of: [{ type: "restrictionGroup" }],
+      title: 'Maatregelen',
+      description: 'Per groep bestaat er een lijst maatregelen',
+      name: 'restrictions',
+      type: 'array',
+      of: [{ type: 'restrictionGroup' }],
     },
   ],
   preview: {
     select: {
-      title: "title.nl",
-      icon: "icon",
+      title: 'title.nl',
+      icon: 'icon',
     },
     prepare(selection) {
       const { title, icon } = selection;
