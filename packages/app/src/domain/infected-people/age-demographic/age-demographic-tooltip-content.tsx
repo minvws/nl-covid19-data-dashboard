@@ -2,7 +2,7 @@ import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Text } from '~/components-styled/typography';
 import siteText from '~/locale/index';
-import { NationalTestedPerAgeGroupValue } from '~/types/data';
+import { NationalTestedPerAgeGroupValue } from '@corona-dashboard/common';
 import { formatPercentage } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { formatAgeGroupRange } from './age-demographic-chart';

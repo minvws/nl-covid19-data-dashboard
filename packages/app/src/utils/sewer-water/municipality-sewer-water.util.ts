@@ -1,4 +1,4 @@
-import { Municipal } from '~/types/data.d';
+import { Municipal } from '@corona-dashboard/common';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';

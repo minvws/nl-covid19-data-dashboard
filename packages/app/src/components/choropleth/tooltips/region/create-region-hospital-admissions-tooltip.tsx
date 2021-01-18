@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
 import { RegionSelectionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
-import { SafetyRegionProperties } from '~/components/choropleth/shared';
+import { SafetyRegionProperties } from '@corona-dashboard/common';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
-import { RegionalHospitalNiceValue } from '~/types/data';
+import { RegionalHospitalNiceValue } from '@corona-dashboard/common';
 import { formatNumber } from '~/utils/formatNumber';
 
 export const createRegionHospitalAdmissionsTooltip = (

@@ -1,11 +1,11 @@
 import { ReactNode } from 'react';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
 import siteText from '~/locale/index';
-import { RegionsTestedOverall } from '~/types/data';
+import { RegionsTestedOverall } from '@corona-dashboard/common';
 import { formatPercentage } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { RegionSelectionHandler } from '../../select-handlers/create-select-region-handler';
-import { SafetyRegionProperties } from '../../shared';
+import { SafetyRegionProperties } from '@corona-dashboard/common';
 const text = siteText.common.tooltip;
 
 export const createPositiveTestedPeopleRegionalTooltip = (
