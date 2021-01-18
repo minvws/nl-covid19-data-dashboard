@@ -24,7 +24,7 @@ import { DataSitemap } from '~/domain/topical/data-site-map';
 import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
-import { TopicalChoroplethTile } from '~/domain/topical/topical-choropleth-tile';
+import { TopicalChoroplethContainer } from '~/domain/topical/topical-choropleth-container';
 import { TopicalTile } from '~/domain/topical/topical-tile';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
@@ -176,21 +176,21 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
 
           <TopicalTile>
             <>
-              <TopicalChoroplethTile
+              <TopicalChoroplethContainer
                 title={text.risiconiveaus.selecteer_titel}
                 description={
-                  <>
-                    <span
-                      dangerouslySetInnerHTML={{
-                        __html: text.risiconiveaus.selecteer_toelichting,
-                      }}
-                    />
-                    <EscalationMapLegenda
-                      data={choropleth.vr}
-                      metricName="escalation_levels"
-                      metricProperty="escalation_level"
-                    />
-                  </>
+                  <span
+                    dangerouslySetInnerHTML={{
+                      __html: text.risiconiveaus.selecteer_toelichting,
+                    }}
+                  />
+                }
+                legendComponent={
+                  <EscalationMapLegenda
+                    data={choropleth.vr}
+                    metricName="escalation_levels"
+                    metricProperty="escalation_level"
+                  />
                 }
               >
                 <SafetyRegionChoropleth
@@ -202,7 +202,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                     createSelectRegionHandler(router, 'maatregelen')
                   )}
                 />
-              </TopicalChoroplethTile>
+              </TopicalChoroplethContainer>
               <Box
                 borderTopWidth="1px"
                 borderTopStyle="solid"

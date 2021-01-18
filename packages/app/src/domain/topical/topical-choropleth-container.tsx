@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { Box } from '~/components-styled/base';
 import { ChoroplethLegenda } from '~/components-styled/choropleth-legenda';
 import { Heading, Text } from '~/components-styled/typography';
@@ -14,7 +15,7 @@ interface DataProps {
   'data-cy'?: string;
 }
 
-interface ChoroplethTileProps extends DataProps {
+interface TopicalChoroplethContainerProps extends DataProps {
   title: string;
   description?: string | React.ReactNode;
   children: React.ReactNode;
@@ -22,18 +23,22 @@ interface ChoroplethTileProps extends DataProps {
     title: string;
     thresholds: ChoroplethThresholdsValue[];
   };
+  legendComponent?: ReactNode;
 }
 
-export function TopicalChoroplethTile({
+export function TopicalChoroplethContainer({
   title,
   description,
   legend,
+  legendComponent,
   children,
-}: ChoroplethTileProps) {
+}: TopicalChoroplethContainerProps) {
   const breakpoints = useBreakpoints();
-  const legendaComponent = legend && (
-    <ChoroplethLegenda thresholds={legend.thresholds} title={legend.title} />
-  );
+  const legendaComponent =
+    (legend && (
+      <ChoroplethLegenda thresholds={legend.thresholds} title={legend.title} />
+    )) ??
+    legendComponent;
 
   return (
     <Box
@@ -44,7 +49,11 @@ export function TopicalChoroplethTile({
     >
       <Box mb={3} flex={{ lg: 1 }} as="figcaption">
         <Box mb={[0, 2]}>
-          <Heading level={2} fontSize="3.5em" lineHeight="1em">
+          <Heading
+            level={2}
+            fontSize={{ _: '2.5em', lg: '3.5em' }}
+            lineHeight="1em"
+          >
             {title}
           </Heading>
           {typeof description === 'string' ? (
@@ -54,11 +63,7 @@ export function TopicalChoroplethTile({
           )}
         </Box>
 
-        {legendaComponent && breakpoints.lg && (
-          <Box display="flex" flexDirection="row" alignItems="flex-center">
-            {legendaComponent}
-          </Box>
-        )}
+        {legendaComponent && breakpoints.lg && <div>{legendaComponent}</div>}
       </Box>
 
       <Box flex={{ lg: 1 }} ml={[0, 0, 3]}>

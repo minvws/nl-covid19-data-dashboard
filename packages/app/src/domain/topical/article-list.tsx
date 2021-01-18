@@ -21,7 +21,13 @@ export function ArticleList({ articleSummaries, hideLink }: ArticleListProps) {
   const breakpoints = useBreakpoints();
 
   return (
-    <Box>
+    <Box
+      css={css({
+        display: 'flex',
+        flexDirection: 'column',
+        padding: 4,
+      })}
+    >
       <Heading level={2}>
         {siteText.nationaal_actueel.latest_articles.title}
       </Heading>
