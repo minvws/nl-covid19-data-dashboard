@@ -1,18 +1,17 @@
 import Arts from '~/assets/arts.svg';
-import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
-import { LineChartWithWeekTooltip } from '~/components/lineChart/lineChartWithWeekTooltip';
 import { SEOHead } from '~/components/seoHead';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import siteText from '~/locale/index';
 import { getNlData, getLastGeneratedDate } from '~/static-props/get-data';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import { LineChartTile } from '~/components-styled/line-chart-tile';
 
 const text = siteText.verdenkingen_huisartsen;
 const graphDescriptions = siteText.accessibility.grafieken;
@@ -79,26 +78,18 @@ const SuspectedPatients: FCWithLayout<typeof getStaticProps> = (props) => {
           </KpiTile>
         </TwoKpiSection>
 
-        <ChartTileWithTimeframe
-          title={text.linechart_titel}
-          metadata={{ source: text.bronnen.nivel }}
-          ariaDescription={graphDescriptions.verdenkingen_huisartsen}
+        <LineChartTile
           timeframeOptions={['all', '5weeks']}
-        >
-          {(timeframe) => (
-            <LineChartWithWeekTooltip
-              timeframe={timeframe}
-              values={data.doctor.values.map((value) => ({
-                value: value.covid_symptoms_per_100k,
-                date: value.date_end_unix,
-                week: {
-                  start: value.date_start_unix,
-                  end: value.date_end_unix,
-                },
-              }))}
-            />
-          )}
-        </ChartTileWithTimeframe>
+          title={text.linechart_titel}
+          values={data.doctor.values}
+          ariaDescription={graphDescriptions.verdenkingen_huisartsen}
+          linesConfig={[
+            {
+              metricProperty: 'covid_symptoms_per_100k',
+            },
+          ]}
+          metadata={{ source: text.bronnen.nivel }}
+        />
       </TileList>
     </>
   );
