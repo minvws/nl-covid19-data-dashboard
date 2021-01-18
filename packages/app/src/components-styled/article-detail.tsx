@@ -20,11 +20,7 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
       <ContentBlock spacing={3}>
         <LinkWithIcon
           href="/artikelen"
-          icon={
-            <span css={css({ svg: { transform: 'rotate(90deg)' } })}>
-              <ArrowIcon />
-            </span>
-          }
+          icon={<ArrowIcon css={css({ transform: 'rotate(90deg)' })} />}
         >
           {siteText.article_detail.back_link.text}
         </LinkWithIcon>
