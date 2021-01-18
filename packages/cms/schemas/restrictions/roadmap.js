@@ -14,7 +14,7 @@ export default {
       description: "De maatregelen zijn onderverdeeld in categorien",
       name: "categories",
       type: "array",
-      of: [{ type: "measureCategory" }],
+      of: [{ type: "restrictionCategory" }],
     },
   ],
 };

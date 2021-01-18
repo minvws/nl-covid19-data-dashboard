@@ -14,10 +14,10 @@ import overRisicoNiveaus from "./documents/over-risico-niveaus";
 import overDitDashboard from "./documents/over-dit-dashboard";
 
 // routekaart en maatregelen
-import measureGroup from "./maatregelen/measure-group.js";
-import measureCategory from "./maatregelen/measure-category.js";
-import roadmap from "./maatregelen/roadmap.js";
-import measure from "./maatregelen/measure.js";
+import restrictionGroup from "./restrictions/restriction-group.js";
+import restrictionCategory from "./restrictions/restriction-category.js";
+import roadmap from "./restrictions/roadmap.js";
+import restriction from "./restrictions/restriction.js";
 
 //objects are building blocks, but not queryable in itself
 // import openGraph from "./objects/open-graph";
@@ -42,11 +42,11 @@ export default createSchema({
     cijferVerantwoording,
     overRisicoNiveaus,
     overDitDashboard,
-    /** Maatregelen */
-    measureGroup,
-    measureCategory,
+    /** Restrictions */
+    restrictionGroup,
+    restrictionCategory,
     roadmap,
-    measure,
+    restriction,
 
     //objects
     // openGraph,

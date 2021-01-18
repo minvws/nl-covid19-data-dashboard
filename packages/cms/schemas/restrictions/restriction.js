@@ -1,12 +1,12 @@
 export default {
   type: "object",
   title: "Maatregel",
-  name: "measure",
+  name: "restriction",
   fields: [
     {
       title: "Maatregel",
       description: "Beschrijf de maatregel voor deze categorie",
-      name: "measure",
+      name: "restriction",
       type: "localeString",
     },
   ],

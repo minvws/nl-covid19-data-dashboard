@@ -2,7 +2,7 @@ import Tabs from "sanity-plugin-tabs";
 
 export default {
   title: "Maatregel groep",
-  name: "measureGroup",
+  name: "restrictionGroup",
   type: "object",
   fields: [
     {
@@ -46,7 +46,7 @@ export default {
     // },
 
     {
-      name: "measures",
+      name: "restrictions",
       type: "object",
       inputComponent: Tabs,
 
@@ -66,28 +66,28 @@ export default {
           name: "waakzaam",
           type: "array",
           fieldset: "waakzaam",
-          of: [{ type: "measure" }],
+          of: [{ type: "restriction" }],
         },
         {
           title: "Maatregelen",
           name: "zorgelijk",
           type: "array",
           fieldset: "zorgelijk",
-          of: [{ type: "measure" }],
+          of: [{ type: "restriction" }],
         },
         {
           title: "Maatregelen",
           name: "ernstig",
           type: "array",
           fieldset: "ernstig",
-          of: [{ type: "measure" }],
+          of: [{ type: "restriction" }],
         },
         {
           title: "Maatregelen",
           name: "zeerErnstig",
           type: "array",
           fieldset: "zeerErnstig",
-          of: [{ type: "measure" }],
+          of: [{ type: "restriction" }],
         },
       ],
     },
