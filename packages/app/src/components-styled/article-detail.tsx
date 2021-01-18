@@ -2,7 +2,7 @@ import css from '@styled-system/css';
 import ArrowIcon from '~/assets/arrow.svg';
 import { Box } from '~/components-styled/base';
 import { ContentBlock } from '~/components-styled/cms/content-block';
-import { Image } from '~/components-styled/cms/image-block';
+import { Image } from '~/components-styled/cms/image';
 import { Heading } from '~/components-styled/typography';
 import siteText from '~/locale';
 import { Article } from '~/types/cms';
