@@ -22,22 +22,17 @@ type escalationRecord = EscalationLevel | number;
 interface RiskLevelIndicatorProps {
   title: string;
   description: string;
-  linkText: string;
-  href: string;
   code: string;
+  link: {
+    title: string;
+    href: string;
+  };
   escalationTypes: Record<escalationRecord, escalationTypesType>;
   escalationLevel: EscalationLevel | number;
 }
 
 export function RiskLevelIndicator(props: RiskLevelIndicatorProps) {
-  const {
-    title,
-    description,
-    linkText,
-    href,
-    escalationTypes,
-    escalationLevel,
-  } = props;
+  const { title, description, link, escalationTypes, escalationLevel } = props;
 
   const filteredEscalationLevel = escalationThresholds.find(
     (item) => item.threshold === escalationLevel
@@ -67,23 +62,24 @@ export function RiskLevelIndicator(props: RiskLevelIndicatorProps) {
           {`${escalationLevel} ${escalationTypes[escalationLevel].titel}`}
         </Box>
       </Box>
-      <Text>
-        {description} <br />
+
+      <Text mb="0">{description}</Text>
+      <Text mt="0">
         {`${escalationLevel}: `}
-        <StyledSpan>
+        <EscalationLevelTitle>
           {escalationTypes[escalationLevel].titel.toLowerCase()}
-        </StyledSpan>
+        </EscalationLevelTitle>
       </Text>
-      <Link href={href}>
-        <Text as="a" href={href}>
-          {linkText}
+      <Link href={link.href}>
+        <Text as="a" href={link.href}>
+          {link.title}
         </Text>
       </Link>
     </>
   );
 }
 
-const StyledSpan = styled.span(
+const EscalationLevelTitle = styled.span(
   css({
     fontWeight: 'bold',
   })

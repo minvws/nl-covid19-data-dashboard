@@ -33,18 +33,19 @@ const SafetyRegionActueel: FCWithLayout<typeof getStaticProps> = (props) => {
   const { text: siteText, choropleth } = props;
   const router = useRouter();
   const text = siteText.veiligheidsregio_actueel;
-  const regionText = siteText.escalatie_niveau;
+  const escalationText = siteText.escalatie_niveau;
+  const riskLevelText = siteText.risiconiveau_maatregelen;
 
-  const regionCode =
-    typeof router.query.code === 'string' ? router.query.code : undefined;
-
-  const riskLevelText = siteText.risoconiveau_maatregelen;
+  const regionCode = router.query.code;
 
   const filteredRegion = props.choropleth.vr.escalation_levels.find(
     (item) => item.vrcode === regionCode
   );
 
-  assert(filteredRegion, 'Could not find a region code');
+  assert(
+    filteredRegion,
+    `Could not find a "vrcode" to match with the region: ${regionCode} to get the the current "escalation_level" of it.`
+  );
 
   return (
     <MaxWidth>
@@ -55,11 +56,13 @@ const SafetyRegionActueel: FCWithLayout<typeof getStaticProps> = (props) => {
         <RiskLevelIndicator
           title={riskLevelText.title}
           description={riskLevelText.description.vr}
-          linkText={riskLevelText.bekijk_href}
+          link={{
+            title: riskLevelText.bekijk_href,
+            href: `/veiligheidsregio/${regionCode}/maatregelen`,
+          }}
           escalationLevel={filteredRegion.escalation_level}
           code={filteredRegion.vrcode}
-          href={`/veiligheidsregio/${regionCode}/maatregelen`}
-          escalationTypes={regionText.types}
+          escalationTypes={escalationText.types}
         />
       </Tile>
 
