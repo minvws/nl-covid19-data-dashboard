@@ -1,5 +1,5 @@
 import { groq } from 'next-sanity';
-import { ArticleSummary } from '~/components-styled/article-link';
+import { ArticleSummary } from '~/components-styled/article-teaser';
 import { MaxWidth } from '~/components-styled/max-width';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';

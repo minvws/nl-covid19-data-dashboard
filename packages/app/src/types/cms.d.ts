@@ -16,7 +16,7 @@ export interface Article {
     current: string;
   };
   cover: ImageBlock;
-  summary: Block | null;
+  summary: Block;
   intro: Block | null;
   content: RichContentBlock[] | null;
   metaDescription: string;

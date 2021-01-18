@@ -1,7 +1,10 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import ArrowIcon from '~/assets/arrow.svg';
-import { ArticleLink, ArticleSummary } from '~/components-styled/article-link';
+import {
+  ArticleSummary,
+  ArticleTeaser,
+} from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
 import { LinkWithIcon } from '~/components-styled/link-with-icon';
 import { Tile } from '~/components-styled/tile';
@@ -25,7 +28,7 @@ export function ArticleList({ articleSummaries, hideLink }: ArticleListProps) {
       </Heading>
       <Box
         display="flex"
-        alignItems={{ _: undefined, lg: 'flex-end' }}
+        alignItems={{ lg: 'flex-end' }}
         flexDirection={{ _: 'column', lg: 'row' }}
       >
         <Box flex={{ _: undefined, lg: '0 0 33%' }}>
@@ -34,10 +37,10 @@ export function ArticleList({ articleSummaries, hideLink }: ArticleListProps) {
           </Text>
         </Box>
         <Box
-          flex={{ _: undefined, lg: '0 0 66%' }}
-          alignContent={{ _: undefined, lg: 'flex-end' }}
-          justifyContent={{ _: undefined, lg: 'flex-end' }}
-          display={{ _: undefined, lg: 'flex' }}
+          flex={{ lg: '0 0 66%' }}
+          alignContent={{ lg: 'flex-end' }}
+          justifyContent={{ lg: 'flex-end' }}
+          display={{ lg: 'flex' }}
           mt={{ _: 2, lg: undefined }}
         >
           {!hideLink && (
@@ -59,7 +62,12 @@ export function ArticleList({ articleSummaries, hideLink }: ArticleListProps) {
       >
         {articleSummaries.map((summary) => (
           <ArticleBox key={summary.slug.current}>
-            <ArticleLink articleSummary={summary} />
+            <ArticleTeaser
+              title={summary.title}
+              slug={summary.slug.current}
+              summary={summary.summary}
+              cover={summary.cover}
+            />
           </ArticleBox>
         ))}
       </Box>

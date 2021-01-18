@@ -17,6 +17,11 @@ export default {
       title: "Titel",
       name: "title",
       type: "localeString",
+      validation: (Rule) =>
+        Rule.fields({
+          nl: (fieldRule) => fieldRule.reset().required(),
+          en: (fieldRule) => fieldRule.reset().required(),
+        }),
     },
     {
       title: "Slug",
@@ -32,6 +37,11 @@ export default {
       name: "metaDescription",
       type: "localeString",
       fieldset: "metadata",
+      validation: (Rule) =>
+        Rule.fields({
+          nl: (fieldRule) => fieldRule.reset().required(),
+          en: (fieldRule) => fieldRule.reset().required(),
+        }),
     },
     {
       title: "Publicatie datum",
@@ -44,6 +54,7 @@ export default {
         calendarTodayLabel: "Today",
       },
       fieldset: "metadata",
+      validation: (Rule) => Rule.required(),
     },
     {
       title: "Samenvatting",
@@ -53,14 +64,19 @@ export default {
       type: "localeText",
       validation: (Rule) =>
         Rule.fields({
-          nl: (fieldRule) => fieldRule.required().max(120),
-          en: (fieldRule) => fieldRule.required().max(120),
+          nl: (fieldRule) => fieldRule.reset().required().max(120),
+          en: (fieldRule) => fieldRule.reset().required().max(120),
         }),
     },
     {
       title: "Intro",
       name: "intro",
       type: "localeBlock",
+      validation: (Rule) =>
+        Rule.fields({
+          nl: (fieldRule) => fieldRule.reset().required(),
+          en: (fieldRule) => fieldRule.reset().required(),
+        }),
     },
     {
       title: "Afbeelding",
@@ -76,11 +92,17 @@ export default {
           type: "localeString",
         },
       ],
+      validation: (Rule) => Rule.required(),
     },
     {
       title: "Content",
       name: "content",
       type: "localeRichContentBlock",
+      validation: (Rule) =>
+        Rule.fields({
+          nl: (fieldRule) => fieldRule.reset().required(),
+          en: (fieldRule) => fieldRule.reset().required(),
+        }),
     },
   ],
   preview: {

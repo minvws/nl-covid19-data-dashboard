@@ -2,10 +2,10 @@ import ArrowIcon from '~/assets/arrow.svg';
 import { LinkWithIcon } from '~/components-styled/link-with-icon';
 import { urlFor } from '~/lib/sanity';
 import siteText from '~/locale';
-import { Article, ImageBlock, RichContentImageBlock } from '~/types/cms';
+import { Article, Block, ImageBlock } from '~/types/cms';
 import { assert } from '~/utils/assert';
+import { BackgroundImage } from './background-image-box';
 import { Box } from './base';
-import { BackgroundImageBox } from './base/background-image-box';
 import { Heading, Text } from './typography';
 
 export type ArticleSummary = Pick<
@@ -14,11 +14,14 @@ export type ArticleSummary = Pick<
 >;
 
 type ArticleLinkProps = {
-  articleSummary: ArticleSummary;
+  title: string;
+  slug: string;
+  summary: Block;
+  cover: ImageBlock;
 };
 
-export function ArticleLink(props: ArticleLinkProps) {
-  const { articleSummary } = props;
+export function ArticleTeaser(props: ArticleLinkProps) {
+  const { title, slug, summary, cover } = props;
 
   return (
     <Box
@@ -32,16 +35,12 @@ export function ArticleLink(props: ArticleLinkProps) {
       maxWidth={{ _: '20rem', lg: '24rem' }}
       overflow="hidden"
     >
-      {articleSummary.cover && <CoverImage image={articleSummary.cover} />}
+      {<CoverImage image={cover} />}
       <Box padding={3}>
-        <Heading level={3}>{articleSummary.title}</Heading>
-        {articleSummary.summary && (
-          <Box>
-            <Text>{articleSummary.summary}</Text>
-          </Box>
-        )}
+        <Heading level={3}>{title}</Heading>
+        <Text>{summary}</Text>
         <LinkWithIcon
-          href={`/artikelen/${articleSummary.slug.current}`}
+          href={`/artikelen/${slug}`}
           icon={<ArrowIcon />}
           iconPlacement="right"
         >
@@ -53,26 +52,24 @@ export function ArticleLink(props: ArticleLinkProps) {
 }
 
 type CoverImageProps = {
-  image: ImageBlock | RichContentImageBlock;
+  image: ImageBlock;
 };
 
 function CoverImage({ image }: CoverImageProps) {
   const url = urlFor(image).url();
   assert(
     url !== null,
-    `could not get url for node: ${JSON.stringify(image, null, 2)}`
+    `Could not get url for node: ${JSON.stringify(image, null, 2)}`
   );
 
   const { hotspot } = image;
-
-  console.dir(hotspot);
 
   const bgPosition = hotspot
     ? `${hotspot.x * 100}% ${hotspot.y * 100}%`
     : undefined;
 
   return (
-    <BackgroundImageBox
+    <BackgroundImage
       style={{ height: '200px', width: '100%' }}
       backgroundImage={`url(${url})`}
       backgroundPosition={bgPosition}
@@ -80,6 +77,6 @@ function CoverImage({ image }: CoverImageProps) {
       backgroundSize="cover"
       title={image.alt}
       role="img"
-    ></BackgroundImageBox>
+    ></BackgroundImage>
   );
 }
