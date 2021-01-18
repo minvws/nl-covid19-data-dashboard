@@ -7,6 +7,7 @@ import { MDToHTMLString } from './MDToHTMLString';
  */
 const MARKDOWN_KEYS = [
   'regionaal_index.belangrijk_bericht',
+  'vaccinaties.section_vaccinations_more_information.description',
   'veiligheidsregio_index.selecteer_toelichting',
   'veiligheidsregio_index.belangrijk_bericht',
   'over_risiconiveaus.paragraaf',
@@ -17,7 +18,6 @@ const MARKDOWN_KEYS = [
   'positief_geteste_personen.kpi_toelichting',
   'veiligheidsregio_positief_geteste_personen.kpi_toelichting',
   'gemeente_positief_geteste_personen.kpi_toelichting',
-  'vaccinaties.section_vaccinations_more_information.description',
 ];
 
 export function parseMarkdownInLocale(text: TALLLanguages) {
