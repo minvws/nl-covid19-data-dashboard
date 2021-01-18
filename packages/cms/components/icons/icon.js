@@ -58,8 +58,7 @@ export default function Icon(props) {
         >
           <Box padding={4}>
             <Grid columns={[4, 6]} gap={[1, 1, 2, 3]}>
-              {allIcons.map((icon) => {
-                return (
+              {allIcons.map((icon) => (
                   <Flex
                     key={icon[0]}
                     direction="column"
@@ -70,7 +69,7 @@ export default function Icon(props) {
                     <Radio checked={value === icon[0]} readOnly />
                   </Flex>
                 );
-              })}
+              )}
 
               <Flex
                 direction="column"
