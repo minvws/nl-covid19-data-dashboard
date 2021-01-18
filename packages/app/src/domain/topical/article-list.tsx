@@ -62,11 +62,6 @@ export function ArticleList({ articleSummaries, hideLink }: ArticleListProps) {
             <ArticleLink articleSummary={summary} />
           </ArticleBox>
         ))}
-        {articleSummaries.map((summary) => (
-          <ArticleBox key={summary.slug.current}>
-            <ArticleLink articleSummary={summary} />
-          </ArticleBox>
-        ))}
       </Box>
     </Tile>
   );

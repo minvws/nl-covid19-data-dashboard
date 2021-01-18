@@ -1,9 +1,11 @@
 import ArrowIcon from '~/assets/arrow.svg';
-import { Image } from '~/components-styled/cms/image-block';
 import { LinkWithIcon } from '~/components-styled/link-with-icon';
+import { urlFor } from '~/lib/sanity';
 import siteText from '~/locale';
-import { Article } from '~/types/cms';
+import { Article, ImageBlock, RichContentImageBlock } from '~/types/cms';
+import { assert } from '~/utils/assert';
 import { Box } from './base';
+import { BackgroundImageBox } from './base/background-image-box';
 import { Heading, Text } from './typography';
 
 export type ArticleSummary = Pick<
@@ -30,11 +32,7 @@ export function ArticleLink(props: ArticleLinkProps) {
       maxWidth={{ _: '20rem', lg: '24rem' }}
       overflow="hidden"
     >
-      {articleSummary.cover && (
-        <Box mx={-4}>
-          <Image node={articleSummary.cover} />
-        </Box>
-      )}
+      {articleSummary.cover && <CoverImage image={articleSummary.cover} />}
       <Box padding={3}>
         <Heading level={3}>{articleSummary.title}</Heading>
         {articleSummary.summary && (
@@ -51,5 +49,30 @@ export function ArticleLink(props: ArticleLinkProps) {
         </LinkWithIcon>
       </Box>
     </Box>
+  );
+}
+
+type CoverImageProps = {
+  image: ImageBlock | RichContentImageBlock;
+};
+
+function CoverImage({ image }: CoverImageProps) {
+  const url = urlFor(image).url();
+  assert(
+    url !== null,
+    `could not get url for node: ${JSON.stringify(image, null, 2)}`
+  );
+
+  console.dir(image);
+
+  return (
+    <BackgroundImageBox
+      style={{ height: '200px', width: '100%' }}
+      backgroundImage={`url(${url})`}
+      backgroundRepeat="no-repeat"
+      backgroundSize="100% 200px"
+      title={image.alt}
+      role="img"
+    ></BackgroundImageBox>
   );
 }
