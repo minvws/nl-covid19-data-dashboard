@@ -9,7 +9,7 @@ import { SearchContextProvider } from './context';
 import { SearchInput } from './search-input';
 import { SearchResults } from './search-results';
 
-export function Search() {
+export function Search({ initialValue }: { initialValue?: string }) {
   const { height, ref: heightRef } = useResizeObserver<HTMLDivElement>();
   const containerRef = useRef<HTMLFormElement>(null);
 
@@ -17,7 +17,10 @@ export function Search() {
   const breakpoints = useBreakpoints();
 
   return (
-    <SearchContextProvider containerRef={containerRef}>
+    <SearchContextProvider
+      containerRef={containerRef}
+      initialValue={initialValue}
+    >
       {(context) => (
         <SearchForm
           ref={containerRef}
