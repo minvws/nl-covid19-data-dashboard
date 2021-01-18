@@ -38,7 +38,7 @@ export default function Icon(props) {
         <Heading as="div" size={0}>
           {type.title}
         </Heading>
-        {value === undefined && <Text>No icon selected</Text>}
+        {value === undefined && <Text>Er is geen icoon geselecteerd</Text>}
         {value !== undefined && (
           <Box>
             <img src={restrictionIcons[value]} width="36" height="36" />
@@ -46,18 +46,17 @@ export default function Icon(props) {
         )}
 
         <Box>
-          <Button onClick={onOpen} text="Change icon" tone="brand" />
+          <Button onClick={onOpen} text="Verander icoon" />
         </Box>
       </Stack>
       {open && (
         <Dialog
-          header="Example"
+          header="Kies een icoon"
           id="dialog-example"
           onClose={onClose}
           zOffset={1000}
         >
           <Box padding={4}>
-            <Text>Verander icoon</Text>
             <Grid columns={[4, 6]} gap={[1, 1, 2, 3]}>
               {allIcons.map((icon) => {
                 return (
