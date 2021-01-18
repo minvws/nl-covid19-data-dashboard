@@ -255,7 +255,7 @@ export function LineChart<T extends Value>({
     [bisect, trendsList, linesConfig, toggleHoverElements]
   );
 
-  const renderAxes = useCallback(
+  const renderTrendLines = useCallback(
     (x: ChartScales) => (
       <>
         {trendsList.map((trend, index) => (
@@ -305,7 +305,7 @@ export function LineChart<T extends Value>({
           onHover={handleHover}
           benchmark={benchmark}
         >
-          {renderAxes}
+          {renderTrendLines}
         </ChartAxes>
 
         {isDefined(tooltipData) && (
