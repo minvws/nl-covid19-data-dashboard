@@ -63,14 +63,21 @@ function CoverImage({ image }: CoverImageProps) {
     `could not get url for node: ${JSON.stringify(image, null, 2)}`
   );
 
-  console.dir(image);
+  const { hotspot } = image;
+
+  console.dir(hotspot);
+
+  const bgPosition = hotspot
+    ? `${(hotspot.x ?? 0) * 100}% ${(hotspot.y ?? 0) * 100}%`
+    : undefined;
 
   return (
     <BackgroundImageBox
       style={{ height: '200px', width: '100%' }}
       backgroundImage={`url(${url})`}
+      backgroundPosition={bgPosition}
       backgroundRepeat="no-repeat"
-      backgroundSize="100% 200px"
+      backgroundSize="cover"
       title={image.alt}
       role="img"
     ></BackgroundImageBox>
