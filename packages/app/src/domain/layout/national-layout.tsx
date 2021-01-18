@@ -23,13 +23,19 @@ import { SidebarMetric } from '~/components-styled/sidebar-metric';
 import { Layout } from '~/domain/layout/layout';
 import { AppContent } from '~/components-styled/layout/app-content';
 import siteText from '~/locale/index';
-import { NationalPageProps } from '~/static-props/nl-data';
 import theme from '~/style/theme';
 import { useBreakpoints } from '~/utils/useBreakpoints';
+import { National } from '~/types/data';
+
+interface NationalLayoutProps {
+  lastGenerated: string;
+  data: National;
+  children?: React.ReactNode;
+}
 
 export function getNationalLayout(
   page: React.ReactNode,
-  pageProps: NationalPageProps
+  pageProps: NationalLayoutProps
 ) {
   return (
     <Layout
@@ -40,10 +46,6 @@ export function getNationalLayout(
     </Layout>
   );
 }
-interface NationalLayoutProps extends NationalPageProps {
-  children: React.ReactNode;
-}
-
 /**
  * NationalLayout is a composition of persistent layouts.
  *
@@ -68,7 +70,7 @@ function NationalLayout(props: NationalLayoutProps) {
   const isMenuOpen =
     (router.pathname === '/' && !('menu' in router.query)) ||
     router.query.menu === '1';
-  
+
   return (
     <>
       <Head>
@@ -163,6 +165,7 @@ function NationalLayout(props: NationalLayoutProps) {
                     metricName="infectious_people"
                     metricProperty="estimate"
                     localeTextKey="besmettelijke_personen"
+                    differenceKey="infectious_people__estimate"
                   />
                 </MetricMenuItemLink>
 
@@ -178,6 +181,7 @@ function NationalLayout(props: NationalLayoutProps) {
                     metricProperty="index_average"
                     localeTextKey="reproductiegetal"
                     showBarScale={true}
+                    differenceKey="reproduction__index_average"
                   />
                 </MetricMenuItemLink>
 
@@ -214,9 +218,9 @@ function NationalLayout(props: NationalLayoutProps) {
                     data={data}
                     scope="nl"
                     metricName="hospital_nice"
-                    metricProperty="admissions_moving_average"
+                    metricProperty="admissions_on_date_of_reporting"
                     localeTextKey="ziekenhuisopnames_per_dag"
-                    differenceKey="hospital_nice__admissions_moving_average"
+                    differenceKey="hospital_nice__admissions_on_date_of_reporting"
                     showBarScale={true}
                   />
                 </MetricMenuItemLink>

@@ -9,6 +9,7 @@ import { TCombinedChartDimensions } from './hooks/use-chart-dimensions';
 import { Path } from './path';
 import { Tooltip } from './tooltips/tooltipContainer';
 import { countryGeo } from './topology';
+import uniqueId from '~/utils/useUniqueId';
 
 export type TooltipSettings = {
   left: number;
@@ -48,6 +49,7 @@ type TProps<T1, T3> = {
   // This callback is invoked right before a tooltip is shown for one of the features in the featureCollection property.
   // The id is the value that is assigned to the data-id attribute in the featureCallback.
   getTooltipContent: (id: string) => ReactNode;
+  description?: string;
 };
 
 /**
@@ -115,9 +117,12 @@ const ChoroplethMap: <T1, T3>(
     onPathClick,
     setTooltip,
     hoverRef,
+    description,
   } = props;
 
-  const clipPathId = useRef(`_${Math.random().toString(36).substring(2, 15)}`);
+  const clipPathId = uniqueId();
+  const dataDescriptionId = uniqueId();
+
   const timeout = useRef(-1);
   const isTouch = useIsTouchDevice();
 
@@ -134,6 +139,9 @@ const ChoroplethMap: <T1, T3>(
 
   return (
     <>
+      <span id={dataDescriptionId} style={{ display: 'none' }}>
+        {description}
+      </span>
       <svg
         width="100%"
         height="100%"
@@ -143,8 +151,9 @@ const ChoroplethMap: <T1, T3>(
           isTouch ? undefined : createSvgMouseOutHandler(timeout, setTooltip)
         }
         onClick={createSvgClickHandler(onPathClick, setTooltip, isTouch)}
+        aria-labelledby={dataDescriptionId}
       >
-        <clipPath id={clipPathId.current}>
+        <clipPath id={clipPathId}>
           <rect
             x={dimensions.marginLeft}
             y={0}
@@ -159,7 +168,7 @@ const ChoroplethMap: <T1, T3>(
         <rect x={0} y={0} width={width} height={height} fill={'none'} rx={14} />
         <g
           transform={`translate(${marginLeft},${marginTop})`}
-          clipPath={`url(#${clipPathId.current})`}
+          clipPath={`url(#${clipPathId})`}
         >
           <MercatorGroup
             data={featureCollection.features}

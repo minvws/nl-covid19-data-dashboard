@@ -1,24 +1,28 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
-  "title": "municipalities_hospital_nice",
+  "title": "regions_tested_overall",
   "additionalProperties": false,
   "required": [
     "date_unix",
-    "gmcode",
-    "admissions_moving_average",
+    "vrcode",
+    "infected",
+    "infected_per_100k",
     "date_of_insertion_unix"
   ],
   "properties": {
     "date_unix": {
       "type": "integer"
     },
-    "gmcode": {
+    "vrcode": {
       "type": "string",
-      "pattern": "^GM[0-9]+$"
+      "pattern": "^VR[0-9]+$"
     },
-    "admissions_moving_average": {
+    "infected_per_100k": {
       "type": "number"
+    },
+    "infected": {
+      "type": "integer"
     },
     "date_of_insertion_unix": {
       "type": "integer"

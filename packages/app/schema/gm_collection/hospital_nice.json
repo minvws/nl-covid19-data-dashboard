@@ -1,12 +1,13 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
-  "title": "municipalities_tested_overall",
+  "title": "municipalities_hospital_nice",
   "additionalProperties": false,
   "required": [
     "date_unix",
     "gmcode",
-    "infected_per_100k",
+    "admissions_on_date_of_admission",
+    "admissions_on_date_of_reporting",
     "date_of_insertion_unix"
   ],
   "properties": {
@@ -17,10 +18,10 @@
       "type": "string",
       "pattern": "^GM[0-9]+$"
     },
-    "infected_per_100k": {
-      "type": "number"
+    "admissions_on_date_of_admission": {
+      "type": "integer"
     },
-    "infected": {
+    "admissions_on_date_of_reporting": {
       "type": "integer"
     },
     "date_of_insertion_unix": {

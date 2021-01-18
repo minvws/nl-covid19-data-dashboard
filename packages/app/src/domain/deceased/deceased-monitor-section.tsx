@@ -1,6 +1,7 @@
 import { useTheme } from 'styled-components';
 import CoronaVirusIcon from '~/assets/coronavirus.svg';
 import { AnchorTile } from '~/components-styled/anchor-tile';
+import { Box } from '~/components-styled/base';
 import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { Legenda } from '~/components-styled/legenda';
@@ -66,25 +67,28 @@ export function DeceasedMonitorSection({
             },
           }}
         />
-        <Legenda
-          items={[
-            {
-              label: text.deceased_monitor_chart_legenda_registered,
-              color: theme.colors.data.primary,
-              shape: 'line',
-            },
-            {
-              label: text.deceased_monitor_chart_legenda_expected,
-              color: '#5BADDB',
-              shape: 'line',
-            },
-            {
-              label: text.deceased_monitor_chart_legenda_expected_margin,
-              color: '#D0EDFF',
-              shape: 'square',
-            },
-          ]}
-        />
+
+        <Box pl="56px">
+          <Legenda
+            items={[
+              {
+                label: text.deceased_monitor_chart_legenda_registered,
+                color: theme.colors.data.primary,
+                shape: 'line',
+              },
+              {
+                label: text.deceased_monitor_chart_legenda_expected,
+                color: '#5BADDB',
+                shape: 'line',
+              },
+              {
+                label: text.deceased_monitor_chart_legenda_expected_margin,
+                color: '#D0EDFF',
+                shape: 'square',
+              },
+            ]}
+          />
+        </Box>
       </ChartTile>
     </>
   );

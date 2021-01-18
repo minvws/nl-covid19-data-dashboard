@@ -1,18 +1,16 @@
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getMunicipalityLayout } from '~/domain/layout/municipality-layout';
-import {
-  getMunicipalityData,
-  getMunicipalityPaths,
-  IMunicipalityData,
-} from '~/static-props/municipality-data';
+import { getGmData, getLastGeneratedDate } from '~/static-props/get-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 
-const Municipality: FCWithLayout<IMunicipalityData> = () => {
-  return null;
-};
+export { getStaticPaths } from '~/static-paths/gm';
 
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getGmData
+);
+
+const Municipality: FCWithLayout<typeof getStaticProps> = () => null;
 Municipality.getLayout = getMunicipalityLayout();
-
-export const getStaticProps = getMunicipalityData();
-export const getStaticPaths = getMunicipalityPaths();
 
 export default Municipality;

@@ -9,15 +9,25 @@ import { Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import { SEOHead } from '~/components/seoHead';
-import siteText from '~/locale/index';
+
 import {
-  getNationalStaticProps,
-  NationalPageProps,
-} from '~/static-props/nl-data';
+  getNlData,
+  getLastGeneratedDate,
+  getText,
+} from '~/static-props/get-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 
-const text = siteText.vaccinaties;
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getNlData,
+  getText
+);
 
-const VaccinationPage: FCWithLayout<NationalPageProps> = (props) => {
+const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
+  text: siteText,
+}) => {
+  const text = siteText.vaccinaties;
+
   return (
     <>
       <SEOHead
@@ -84,9 +94,7 @@ const VaccinationPage: FCWithLayout<NationalPageProps> = (props) => {
           <Text
             as="div"
             dangerouslySetInnerHTML={{
-              __html:
-                props.text.vaccinaties.section_vaccinations_more_information
-                  .description,
+              __html: text.section_vaccinations_more_information.description,
             }}
           />
         </KpiTile>
@@ -96,7 +104,5 @@ const VaccinationPage: FCWithLayout<NationalPageProps> = (props) => {
 };
 
 VaccinationPage.getLayout = getNationalLayout;
-
-export const getStaticProps = getNationalStaticProps;
 
 export default VaccinationPage;

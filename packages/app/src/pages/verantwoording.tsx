@@ -1,35 +1,34 @@
-import fs from 'fs';
+import { groq } from 'next-sanity';
 import Head from 'next/head';
-import path from 'path';
-import { Collapsable } from '~/components-styled/collapsable';
-import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
+import { Collapsible } from '~/components-styled/collapsible';
 import { MaxWidth } from '~/components-styled/max-width';
-import siteText, { TALLLanguages } from '~/locale/index';
-import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
+import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
+import { PortableText } from '~/lib/sanity';
+import siteText from '~/locale/index';
+import {
+  createGetContent,
+  getLastGeneratedDate,
+} from '~/static-props/get-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import { CollapsibleList } from '~/types/cms';
 import { getSkipLinkId } from '~/utils/skipLinks';
 import styles from './over.module.scss';
 
-interface StaticProps {
-  props: VerantwoordingProps;
+interface VerantwoordingData {
+  title: string | null;
+  description: unknown[] | null;
+  collapsibleList: CollapsibleList[];
 }
 
-interface VerantwoordingProps {
-  text: TALLLanguages;
-  lastGenerated: string;
-}
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  createGetContent<VerantwoordingData>(groq`
+    *[_type == 'cijferVerantwoording'][0]
+  `)
+);
 
-export async function getStaticProps(): Promise<StaticProps> {
-  const text = parseMarkdownInLocale((await import('../locale/index')).default);
-
-  const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
-  const fileContents = fs.readFileSync(filePath, 'utf8');
-  const lastGenerated = JSON.parse(fileContents).last_generated;
-
-  return { props: { text, lastGenerated } };
-}
-
-const Verantwoording: FCWithLayout<VerantwoordingProps> = (props) => {
-  const { text } = props;
+const Verantwoording: FCWithLayout<typeof getStaticProps> = (props) => {
+  const { content } = props;
 
   return (
     <>
@@ -50,23 +49,22 @@ const Verantwoording: FCWithLayout<VerantwoordingProps> = (props) => {
       <div className={styles.container}>
         <MaxWidth>
           <div className={styles.maxwidth}>
-            <h2>{text.verantwoording.title}</h2>
-            <p>{text.verantwoording.paragraaf}</p>
-            <article className={styles.faqList}>
-              {text.verantwoording.cijfers.map((item) => {
-                const id = getSkipLinkId(item.cijfer);
-
-                return item.verantwoording && item.cijfer ? (
-                  <Collapsable key={id} id={id} summary={item.cijfer}>
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: item.verantwoording,
-                      }}
-                    ></div>
-                  </Collapsable>
-                ) : null;
-              })}
-            </article>
+            {content.title && <h2>{content.title}</h2>}
+            {content.description && (
+              <PortableText blocks={content.description} />
+            )}
+            {content.collapsibleList && (
+              <article className={styles.faqList}>
+                {content.collapsibleList.map((item) => {
+                  const id = getSkipLinkId(item.title);
+                  return (
+                    <Collapsible key={id} id={id} summary={item.title}>
+                      <PortableText blocks={item.content} />
+                    </Collapsible>
+                  );
+                })}
+              </article>
+            )}
           </div>
         </MaxWidth>
       </div>

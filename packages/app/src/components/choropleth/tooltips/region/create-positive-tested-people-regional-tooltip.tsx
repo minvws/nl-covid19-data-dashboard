@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
 import siteText from '~/locale/index';
 import { RegionsTestedOverall } from '~/types/data';
-import { formatNumber } from '~/utils/formatNumber';
+import { formatPercentage } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { RegionSelectionHandler } from '../../select-handlers/create-select-region-handler';
 import { SafetyRegionProperties } from '../../shared';
@@ -21,7 +21,7 @@ export const createPositiveTestedPeopleRegionalTooltip = (
   return (
     <TooltipContent title={vrname} onSelect={onSelect}>
       <p className="info-value">
-        {formatNumber(infected_per_100k)} per 100.000
+        {formatPercentage(infected_per_100k)} per 100.000
       </p>
       <p className="info-total">
         {replaceVariablesInText(text.positive_tested_people, {

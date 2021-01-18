@@ -6,6 +6,7 @@ import { ScaleTime } from 'd3-scale';
 import { useCallback, useMemo, useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
+import { Text } from '~/components-styled/typography';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
 import text from '~/locale/index';
 import { colors } from '~/style/theme';
@@ -67,6 +68,7 @@ export type LineChartProps<T extends Value> = {
   formatMarkerLabel?: (value: T) => string;
   padding?: Partial<ChartPadding>;
   showLegend?: boolean;
+  uniqueId?: string;
 };
 
 export function LineChart<T extends Value>({
@@ -85,6 +87,7 @@ export function LineChart<T extends Value>({
   formatMarkerLabel,
   padding: overridePadding,
   showLegend = false,
+  uniqueId,
 }: LineChartProps<T>) {
   const {
     tooltipData,
@@ -258,18 +261,16 @@ export function LineChart<T extends Value>({
     (x: ChartScales) => (
       <>
         {trendsList.map((trend, index) => (
-          <>
-            <Trend
-              key={index}
-              trend={trend}
-              type={hideFill ? 'line' : 'area'}
-              style={linesConfig[index].style}
-              xScale={x.xScale}
-              yScale={x.yScale}
-              color={linesConfig[index].color}
-              onHover={handleHover}
-            />
-          </>
+          <Trend
+            key={index}
+            trend={trend}
+            type={hideFill ? 'line' : 'area'}
+            style={linesConfig[index].style}
+            xScale={x.xScale}
+            yScale={x.yScale}
+            color={linesConfig[index].color}
+            onHover={handleHover}
+          />
         ))}
       </>
     ),
@@ -303,6 +304,7 @@ export function LineChart<T extends Value>({
           formatXAxis={formatXAxis}
           onHover={handleHover}
           benchmark={benchmark}
+          uniqueId={uniqueId}
         >
           {renderAxes}
         </ChartAxes>
@@ -353,23 +355,36 @@ function formatDefaultTooltip<T extends Value>(
   const isWeekly = isWeeklyValue(values);
 
   if (isDaily) {
-    return `${formatDateFromMilliseconds(value.__date.getTime())}: ${
-      isPercentage
-        ? `${formatPercentage(value.__value)}%`
-        : formatNumber(value.__value)
-    }`;
+    return (
+      <>
+        <Text as="span" fontWeight="bold">
+          {formatDateFromMilliseconds(value.__date.getTime()) + ': '}
+        </Text>
+        {isPercentage
+          ? `${formatPercentage(value.__value)}%`
+          : formatNumber(value.__value)}
+      </>
+    );
   } else if (isWeekly) {
-    return `${formatDateFromSeconds(
-      ((value as unknown) as WeeklyValue).date_start_unix,
-      'short'
-    )} - ${formatDateFromSeconds(
-      ((value as unknown) as WeeklyValue).date_end_unix,
-      'short'
-    )}: ${
-      isPercentage
-        ? `${formatPercentage(value.__value)}%`
-        : formatNumber(value.__value)
-    }`;
+    return (
+      <>
+        <Text as="span" fontWeight="bold">
+          {formatDateFromSeconds(
+            ((value as unknown) as WeeklyValue).date_start_unix,
+            'short'
+          )}{' '}
+          -{' '}
+          {formatDateFromSeconds(
+            ((value as unknown) as WeeklyValue).date_end_unix,
+            'short'
+          )}
+          :
+        </Text>{' '}
+        {isPercentage
+          ? `${formatPercentage(value.__value)}%`
+          : formatNumber(value.__value)}
+      </>
+    );
   }
 
   throw new Error(

@@ -21,19 +21,32 @@ import { SEOHead } from '~/components/seoHead';
 import regionCodeToMunicipalCodeLookup from '~/data/regionCodeToMunicipalCodeLookup';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
-  getSafetyRegionPaths,
-  getSafetyRegionStaticProps,
-  ISafetyRegionData,
-} from '~/static-props/safetyregion-data';
+  createGetChoroplethData,
+  getLastGeneratedDate,
+  getText,
+  getVrData,
+} from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
-const PositivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
-  const { data, safetyRegionName, text: siteText } = props;
+export { getStaticPaths } from '~/static-paths/vr';
+
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getText,
+  getVrData,
+  createGetChoroplethData({
+    gm: ({ tested_overall }) => ({ tested_overall }),
+  })
+);
+
+const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
+  const { data, choropleth, safetyRegionName, text: siteText } = props;
 
   const text = siteText.veiligheidsregio_positief_geteste_personen;
   const ggdText = siteText.veiligheidsregio_positief_geteste_personen_ggd;
@@ -77,24 +90,6 @@ const PositivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
 
         <TwoKpiSection>
           <KpiTile
-            title={text.barscale_titel}
-            metadata={{
-              date: lastValue.date_unix,
-              source: text.bronnen.rivm,
-            }}
-          >
-            <PageBarScale
-              data={data}
-              scope="vr"
-              metricName="tested_overall"
-              metricProperty="infected_per_100k"
-              localeTextKey="veiligheidsregio_positief_geteste_personen"
-              differenceKey="tested_overall__infected_per_100k"
-            />
-            <Text>{text.barscale_toelichting}</Text>
-          </KpiTile>
-
-          <KpiTile
             title={text.kpi_titel}
             metadata={{
               date: lastValue.date_unix,
@@ -133,6 +128,24 @@ const PositivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
               </Text>
             </Box>
           </KpiTile>
+
+          <KpiTile
+            title={text.barscale_titel}
+            metadata={{
+              date: lastValue.date_unix,
+              source: text.bronnen.rivm,
+            }}
+          >
+            <PageBarScale
+              data={data}
+              scope="vr"
+              metricName="tested_overall"
+              metricProperty="infected_per_100k"
+              localeTextKey="veiligheidsregio_positief_geteste_personen"
+              differenceKey="tested_overall__infected_per_100k"
+            />
+            <Text>{text.barscale_toelichting}</Text>
+          </KpiTile>
         </TwoKpiSection>
 
         <LineChartTile
@@ -165,6 +178,7 @@ const PositivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           <MunicipalityChoropleth
             selected={selectedMunicipalCode}
             highlightSelection={false}
+            data={choropleth.gm}
             metricName="tested_overall"
             metricProperty="infected_per_100k"
             tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
@@ -324,8 +338,5 @@ const PositivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
 };
 
 PositivelyTestedPeople.getLayout = getSafetyRegionLayout();
-
-export const getStaticProps = getSafetyRegionStaticProps;
-export const getStaticPaths = getSafetyRegionPaths();
 
 export default PositivelyTestedPeople;

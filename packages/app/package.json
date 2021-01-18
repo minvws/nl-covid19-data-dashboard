@@ -1,6 +1,6 @@
 {
   "name": "@corona-dashboard/app",
-  "version": "2.9.0",
+  "version": "2.11.1",
   "private": true,
   "license": "EUROPEAN UNION PUBLIC LICENCE v. 1.2",
   "dependencies": {
@@ -76,7 +76,7 @@
     "babel-plugin-styled-components": "^1.11.1",
     "chalk": "^4.1.0",
     "cross-env": "^7.0.3",
-    "cypress": "^6.1.0",
+    "cypress": "^6.2.1",
     "download": "^8.0.0",
     "download-cli": "^1.1.1",
     "eslint": "^7.7.0",
@@ -115,7 +115,7 @@
     "start": "next start -H 0.0.0.0 -p 8080",
     "test": "jest --watch",
     "test:ci": "jest --ci",
-    "format": "prettier --write src/**/*.{js,ts,tsx} *.{js,json,md,yml}",
+    "format": "prettier --write src/**/*.{js,ts,tsx} *.{js,json,md}",
     "lint": "eslint .",
     "type-check": "yarn compile",
     "compile": "tsc --pretty --noEmit",

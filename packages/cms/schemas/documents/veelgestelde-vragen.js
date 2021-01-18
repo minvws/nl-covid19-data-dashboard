@@ -15,12 +15,6 @@ export default {
       title: "Beschrijving",
     },
     {
-      name: "slug",
-      type: "slug",
-      title: "Slug",
-      readOnly: true,
-    },
-    {
       name: "questions",
       type: "array",
       title: "Vragen",
@@ -29,4 +23,10 @@ export default {
       of: [{ type: "collapsible" }],
     },
   ],
+  preview: {
+    select: {
+      title: "title.nl",
+      subtitle: "description.nl",
+    },
+  },
 };

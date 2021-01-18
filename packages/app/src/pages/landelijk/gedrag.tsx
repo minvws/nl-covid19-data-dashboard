@@ -6,23 +6,36 @@ import { Tile } from '~/components-styled/tile';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
-import { FCWithLayout } from '~/domain/layout/layout';
-import { getNationalLayout } from '~/domain/layout/national-layout';
 import { SEOHead } from '~/components/seoHead';
 import { BehaviorChoroplethTile } from '~/domain/behavior/behavior-choropleth-tile';
 import { BehaviorLineChartTile } from '~/domain/behavior/behavior-line-chart-tile';
 import { BehaviorTableTile } from '~/domain/behavior/behavior-table-tile';
 import { MoreInformation } from '~/domain/behavior/components/more-information';
+import { FCWithLayout } from '~/domain/layout/layout';
+import { getNationalLayout } from '~/domain/layout/national-layout';
 import siteText from '~/locale/index';
 import {
-  getNationalStaticProps,
-  NationalPageProps,
-} from '~/static-props/nl-data';
+  createGetChoroplethData,
+  getNlData,
+  getLastGeneratedDate,
+} from '~/static-props/get-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 
 const text = siteText.nl_gedrag;
 
-const BehaviorPage: FCWithLayout<NationalPageProps> = (props) => {
-  const behaviorData = props.data.behavior;
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getNlData,
+  createGetChoroplethData({
+    vr: ({ behavior }) => ({ behavior }),
+  })
+);
+
+const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
+  data,
+  choropleth,
+}) => {
+  const behaviorData = data.behavior;
 
   return (
     <>
@@ -85,7 +98,7 @@ const BehaviorPage: FCWithLayout<NationalPageProps> = (props) => {
           introduction={text.basisregels_over_tijd.intro}
         />
 
-        <BehaviorChoroplethTile />
+        <BehaviorChoroplethTile data={choropleth.vr} />
 
         <MoreInformation />
       </TileList>
@@ -94,7 +107,5 @@ const BehaviorPage: FCWithLayout<NationalPageProps> = (props) => {
 };
 
 BehaviorPage.getLayout = getNationalLayout;
-
-export const getStaticProps = getNationalStaticProps;
 
 export default BehaviorPage;
