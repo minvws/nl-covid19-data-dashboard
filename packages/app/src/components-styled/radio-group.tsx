@@ -1,7 +1,8 @@
-import { Fragment, useRef, useState } from 'react';
+import { Fragment, useState } from 'react';
 import { Box } from './base';
 import { css } from '@styled-system/css';
 import styled from 'styled-components';
+import useUniqueId from '~/utils/useUniqueId';
 import { asResponsiveArray } from '~/style/utils';
 interface RadioGroupItem<T extends string> {
   label: string;
@@ -61,7 +62,7 @@ export function RadioGroup<T extends string>(props: RadioGroupProps<T>) {
     value ?? items[0].value
   );
 
-  const id = useComponentId();
+  const id = useUniqueId();
 
   const onLocalChange = (value: T): void => {
     if (value !== selectedValue) {
@@ -89,25 +90,4 @@ export function RadioGroup<T extends string>(props: RadioGroupProps<T>) {
       ))}
     </Box>
   );
-}
-
-/**
- * Generic hook for using a unique component id
- * See https://gist.github.com/sqren/fc897c1629979e669714893df966b1b7#gistcomment-3189166
- *
- * Currently only used here, so it's kept local, but if we start using it
- * elsewhere it should be moved of course.
- */
-let uniqueId = 0;
-const getUniqueId = () => String(uniqueId++);
-
-// This was the previous uid generator
-// const getUniqueId = () => Math.random().toString(36).substr(2);
-
-function useComponentId() {
-  const idRef = useRef<string>();
-  if (idRef.current === undefined) {
-    idRef.current = getUniqueId();
-  }
-  return idRef.current;
 }

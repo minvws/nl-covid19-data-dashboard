@@ -17,6 +17,7 @@ import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import { getLastFilledValue } from '~/utils/get-last-filled-value';
 
 const text = siteText.reproductiegetal;
+const graphDescriptions = siteText.accessibility.grafieken;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -80,6 +81,7 @@ const ReproductionIndex: FCWithLayout<typeof getStaticProps> = (props) => {
             metadata={{ source: text.bronnen.rivm }}
             title={text.linechart_titel}
             values={data.reproduction.values}
+            ariaDescription={graphDescriptions.reproductiegetal_verloop}
             linesConfig={[
               {
                 metricProperty: 'index_average',

@@ -9,6 +9,7 @@ import { TCombinedChartDimensions } from './hooks/use-chart-dimensions';
 import { Path } from './path';
 import { Tooltip } from './tooltips/tooltipContainer';
 import { countryGeo } from './topology';
+import uniqueId from '~/utils/useUniqueId';
 
 export type TooltipSettings = {
   left: number;
@@ -119,10 +120,9 @@ const ChoroplethMap: <T1, T3>(
     description,
   } = props;
 
-  const clipPathId = useRef(`_${Math.random().toString(36).substring(2, 15)}`);
-  const dataDescriptionId = useRef(
-    `_${Math.random().toString(36).substring(2, 15)}`
-  );
+  const clipPathId = uniqueId();
+  const dataDescriptionId = uniqueId();
+
   const timeout = useRef(-1);
   const isTouch = useIsTouchDevice();
 
@@ -139,7 +139,7 @@ const ChoroplethMap: <T1, T3>(
 
   return (
     <>
-      <span id={dataDescriptionId.current} style={{ display: 'none' }}>
+      <span id={dataDescriptionId} style={{ display: 'none' }}>
         {description}
       </span>
       <svg
@@ -151,9 +151,9 @@ const ChoroplethMap: <T1, T3>(
           isTouch ? undefined : createSvgMouseOutHandler(timeout, setTooltip)
         }
         onClick={createSvgClickHandler(onPathClick, setTooltip, isTouch)}
-        aria-labelledby={dataDescriptionId.current}
+        aria-labelledby={dataDescriptionId}
       >
-        <clipPath id={clipPathId.current}>
+        <clipPath id={clipPathId}>
           <rect
             x={dimensions.marginLeft}
             y={0}
@@ -168,7 +168,7 @@ const ChoroplethMap: <T1, T3>(
         <rect x={0} y={0} width={width} height={height} fill={'none'} rx={14} />
         <g
           transform={`translate(${marginLeft},${marginTop})`}
-          clipPath={`url(#${clipPathId.current})`}
+          clipPath={`url(#${clipPathId})`}
         >
           <MercatorGroup
             data={featureCollection.features}

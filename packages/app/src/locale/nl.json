@@ -1938,6 +1938,25 @@
     "VR24": "http://www.vrzuidlimburg.nl/",
     "VR25": "http://www.veiligheidsregioflevoland.nl/"
   },
+  "accessibility": {
+    "grafieken" : {
+      "reproductiegetal_verloop": "Dit is een grafiek die het reproductie getal over tijd weergeeft.",
+      "ziekenhuisopnames": "Dit is een grafiek die de ziekenhuisopnames over tijd weergeeft.",
+      "intensive_care_opnames": "Dit is een grafiek die de intensive care opnames over tijd weergeeft.",
+      "verpleeghuiszorg_positief_getest": "Dit is een grafiek die in de verpleeghuizen de postief getesten over tijd weergeeft.",
+      "verpleeghuiszorg_besmette_locaties": "Dit is een grafiek die in de verpleeghuizen de besmette locaties over tijd weergeeft.",
+      "verpleeghuiszorg_overleden_getest": "Dit is een grafiek die in de verpleeghuiszorg overleden getesten over tijd weergeeft.",
+      "gehandicaptenzorg_positief_getest": "Dit is een grafiek die in de gehandicaptenzorg postief getesten over tijd weergeeft.",
+      "gehandicaptenzorg_besmette_locaties": "Dit is een grafiek die besmette locaties over tijd weergeeft.",
+      "gehandicaptenzorg_overleden": "Dit is een grafiek die gehandicaptenzorg overledenen over tijd weergeeft.",
+      "thuiswonende_ouderen_besmettingen": "Dit is een grafiek die bij de thuiswonende ouderen besmettingen over tijd weergeeft.",
+      "thuiswonende_ouderen_overleden": "Dit is een grafiek die bij de thuiswonende ouderen overleden over tijd weergeeft.",
+      "rioolwater_virusdeeltjes": "Dit is een grafiek die in het rioolwater virusdeeltjes over tijd weergeeft.",
+      "verdenkingen_huisartsen": "Dit is een grafiek die verdekingen van de huisartsen over tijd weergeeft.",
+      "ziekenhuis_opnames": "Dit is een grafiek die de ziekenhuis opnames over tijd weergeeft.",
+      "rioolwater_meetwaarde": "Dit is een grafiek die in het rioolwater de meetwaarde over tijd weergeeft."
+    }
+  },
   "choropleth": {
     "verb": {
       "singular": "heeft",
