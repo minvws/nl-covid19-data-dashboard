@@ -2,7 +2,7 @@ import css from '@styled-system/css';
 import styled from 'styled-components';
 import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
-import { Tile } from './tile';
+import { Box } from './base';
 import { Heading } from './typography';
 
 interface QuickLinksProps {
@@ -17,7 +17,7 @@ interface QuickLink {
 
 export function QuickLinks({ header, links }: QuickLinksProps) {
   return (
-    <Tile variant="withoutBorder">
+    <Box>
       <Heading level={2} fontSize="18px">
         {header}
       </Heading>
@@ -30,7 +30,7 @@ export function QuickLinks({ header, links }: QuickLinksProps) {
           </Item>
         ))}
       </List>
-    </Tile>
+    </Box>
   );
 }
 

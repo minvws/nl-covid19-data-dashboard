@@ -16,7 +16,7 @@ import { escalationTooltip } from '~/components/choropleth/tooltips/region/escal
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import { Search } from '~/domain/topical/components/search';
 import { DataSitemap } from '~/domain/topical/data-site-map';
-import { EscalationLevelExplanationsTile } from '~/domain/topical/escalation-level-explanations-tile';
+import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
@@ -53,7 +53,7 @@ const SafetyRegionActueel: FCWithLayout<typeof getStaticProps> = (props) => {
         <TileList>
           <MessageTile message={siteText.regionaal_index.belangrijk_bericht} />
 
-          <Search />
+          <Search initialValue={props.safetyRegionName} />
 
           <Heading level={1} fontWeight="normal">
             De actuele situatie in <strong>{props.safetyRegionName}</strong>
@@ -114,7 +114,7 @@ const SafetyRegionActueel: FCWithLayout<typeof getStaticProps> = (props) => {
               },
               { href: '/gemeentes', text: text.quick_links.links.gemeente },
             ]}
-          ></QuickLinks>
+          />
 
           <ChoroplethTile
             title={text.risiconiveaus.selecteer_titel}
@@ -144,7 +144,7 @@ const SafetyRegionActueel: FCWithLayout<typeof getStaticProps> = (props) => {
             />
           </ChoroplethTile>
 
-          <EscalationLevelExplanationsTile />
+          <EscalationLevelExplanations />
 
           <DataSitemap />
         </TileList>

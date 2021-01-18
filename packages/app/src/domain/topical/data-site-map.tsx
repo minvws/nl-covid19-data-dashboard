@@ -2,7 +2,6 @@ import css from '@styled-system/css';
 import styled from 'styled-components';
 import Chevron from '~/assets/chevron.svg';
 import { Box } from '~/components-styled/base';
-import { Tile } from '~/components-styled/tile';
 import { Heading, InlineText, Text } from '~/components-styled/typography';
 import siteText from '~/locale/index';
 import { Link } from '~/utils/link';
@@ -16,7 +15,7 @@ export function DataSitemap() {
   }
 
   return (
-    <Tile variant="withoutBorder">
+    <Box>
       <Heading level={2}>
         {siteText.nationaal_actueel.data_sitemap_titel}
       </Heading>
@@ -98,7 +97,7 @@ export function DataSitemap() {
           </Box>
         </Box>
       </Box>
-    </Tile>
+    </Box>
   );
 }
 

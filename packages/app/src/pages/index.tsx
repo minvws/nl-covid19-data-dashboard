@@ -21,7 +21,7 @@ import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import { Search } from '~/domain/topical/components/search';
 import { DataSitemap } from '~/domain/topical/data-site-map';
-import { EscalationLevelExplanationsTile } from '~/domain/topical/escalation-level-explanations-tile';
+import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
@@ -200,7 +200,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
             />
           </ChoroplethTile>
 
-          <EscalationLevelExplanationsTile />
+          <EscalationLevelExplanations />
 
           <DataSitemap />
 
