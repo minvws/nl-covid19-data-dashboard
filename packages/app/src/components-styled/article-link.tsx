@@ -68,7 +68,7 @@ function CoverImage({ image }: CoverImageProps) {
   console.dir(hotspot);
 
   const bgPosition = hotspot
-    ? `${(hotspot.x ?? 0) * 100}% ${(hotspot.y ?? 0) * 100}%`
+    ? `${hotspot.x * 100}% ${hotspot.y * 100}%`
     : undefined;
 
   return (
