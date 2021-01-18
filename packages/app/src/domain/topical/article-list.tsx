@@ -7,6 +7,7 @@ import { LinkWithIcon } from '~/components-styled/link-with-icon';
 import { Tile } from '~/components-styled/tile';
 import { Heading, Text } from '~/components-styled/typography';
 import siteText from '~/locale';
+import { asResponsiveArray } from '~/style/utils';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 
 type ArticleListProps = {
@@ -25,7 +26,6 @@ export function ArticleList({ articleSummaries, hideLink }: ArticleListProps) {
       <Box
         display="flex"
         alignItems={{ _: undefined, lg: 'flex-end' }}
-        mb={4}
         flexDirection={{ _: 'column', lg: 'row' }}
       >
         <Box flex={{ _: undefined, lg: '0 0 33%' }}>
@@ -56,18 +56,7 @@ export function ArticleList({ articleSummaries, hideLink }: ArticleListProps) {
         spacingHorizontal={breakpoints.lg}
         flexDirection={{ _: 'column', lg: 'row' }}
         flexWrap="wrap"
-        justifyContent="space-between"
       >
-        {articleSummaries.map((summary) => (
-          <ArticleBox key={summary.slug.current}>
-            <ArticleLink articleSummary={summary} />
-          </ArticleBox>
-        ))}
-        {articleSummaries.map((summary) => (
-          <ArticleBox key={summary.slug.current}>
-            <ArticleLink articleSummary={summary} />
-          </ArticleBox>
-        ))}
         {articleSummaries.map((summary) => (
           <ArticleBox key={summary.slug.current}>
             <ArticleLink articleSummary={summary} />
@@ -87,5 +76,6 @@ const ArticleBox = styled(Box)(
   css({
     flex: '0 0 auto',
     marginTop: 3,
+    marginRight: asResponsiveArray({ _: 0, lg: 4 }),
   })
 );

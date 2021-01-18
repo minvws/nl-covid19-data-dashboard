@@ -28,6 +28,7 @@ export function ArticleLink(props: ArticleLinkProps) {
       maxHeight={'26rem'}
       minWidth={{ _: '20rem', lg: '24rem' }}
       maxWidth={{ _: '20rem', lg: '24rem' }}
+      overflow="hidden"
     >
       {articleSummary.cover && (
         <Box mx={-4}>
