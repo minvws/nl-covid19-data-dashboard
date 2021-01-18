@@ -75,7 +75,7 @@ function useSearchContextValue<T extends Element>(
   /**
    * By default narrow devices will show search-results when the input field
    * has a value. We don't want to show these results when the value is
-   * preset/prepolated.
+   * pre-set/pre-populated.
    * To fix this we will listen to an initial focus event on the input element,
    * if that initial event is recognized, we'll allow the results to show.
    */
