@@ -15,7 +15,7 @@ export default class Icon extends React.Component {
     type: PropTypes.shape({
       title: PropTypes.string,
     }).isRequired,
-    value: PropTypes.number,
+    value: PropTypes.string,
     onChange: PropTypes.func.isRequired,
   };
 
@@ -38,12 +38,13 @@ export default class Icon extends React.Component {
           {allIcons.map((icon) => {
             return (
               <Flex
+                key={icon[0]}
                 direction="column"
                 align="center"
                 onClick={(event) => onChange(createPatchFrom(icon[0]))}
               >
-                <img key={icon[0]} src={icon[1]} />
-                <Radio checked={value === icon[0]} />
+                <img src={icon[1]} />
+                <Radio checked={value === icon[0]} readOnly />
               </Flex>
             );
           })}
@@ -53,8 +54,8 @@ export default class Icon extends React.Component {
             align="center"
             onClick={(event) => onChange(createPatchFrom(""))}
           >
-            <span>No icon</span>
-            <Radio checked={value === undefined} />
+            <span>Geen icoon</span>
+            <Radio checked={value === undefined} readOnly />
           </Flex>
         </Grid>
       </ThemeProvider>

@@ -31,9 +31,6 @@ export default {
 
       return {
         title: title,
-
-        // `media` takes a function, string or React element
-        // Remember to import React from 'react' if you are rendering React components like below
         media: (
           <img
             src={restrictionIcons[icon]}

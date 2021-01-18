@@ -1,4 +1,7 @@
+import React from "react";
 import Tabs from "sanity-plugin-tabs";
+import IconComponent from "../../components/icons/icon";
+import { restrictionIcons } from "../../components/icons/icons";
 
 export default {
   title: "Maatregel groep",
@@ -11,40 +14,13 @@ export default {
       name: "title",
       type: "localeString",
     },
-    // {
-    //   title: "Maatregelen",
-    //   description:
-    //     "Schrijf per risiconiveau op wat de geldende maatregelen zijn. Let op, maatregelen in een lockdown vallen niet onder deze routekaart!",
-    //   name: "measures",
-    //   type: "object",
-    //   fields: [
-    //     {
-    //       title: "Waakzaam",
-    //       name: "waakzaam",
-    //       type: "array",
-    //       of: [{ type: "measure" }],
-    //     },
-    //     {
-    //       title: "Zorgelijk",
-    //       name: "zorgelijk",
-    //       type: "array",
-    //       of: [{ type: "measure" }],
-    //     },
-    //     {
-    //       title: "Ernstig",
-    //       name: "ernstig",
-    //       type: "array",
-    //       of: [{ type: "measure" }],
-    //     },
-    //     {
-    //       title: "Zeer Ernstig",
-    //       name: "zeerErnstig",
-    //       type: "array",
-    //       of: [{ type: "measure" }],
-    //     },
-    //   ],
-    // },
-
+    {
+      title: "Icoon",
+      description: "Welk icoon moet er naast de maatregelen groep staan?",
+      name: "icon",
+      type: "string",
+      inputComponent: IconComponent,
+    },
     {
       name: "restrictions",
       type: "object",
@@ -95,6 +71,22 @@ export default {
   preview: {
     select: {
       title: "title.nl",
+      icon: "icon",
     },
+  },
+  prepare(selection) {
+    const { title, icon } = selection;
+
+    console.log({ title, icon });
+
+    return {
+      title: title,
+      media: (
+        <img
+          src={restrictionIcons[icon]}
+          alt="Selection icon for restriction"
+        />
+      ),
+    };
   },
 };
