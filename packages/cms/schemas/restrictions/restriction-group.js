@@ -73,20 +73,22 @@ export default {
       title: "title.nl",
       icon: "icon",
     },
-  },
-  prepare(selection) {
-    const { title, icon } = selection;
+    prepare(selection) {
+      const { title, icon } = selection;
+      return {
+        title: title,
 
-    console.log({ title, icon });
-
-    return {
-      title: title,
-      media: (
-        <img
-          src={restrictionIcons[icon]}
-          alt="Selection icon for restriction"
-        />
-      ),
-    };
+        // `media` takes a function, string or React element
+        // Remember to import React from 'react' if you are rendering React components like below
+        media: icon ? (
+          <img
+            width="36"
+            height="36"
+            src={restrictionIcons[icon]}
+            alt="Icoon"
+          />
+        ) : null,
+      };
+    },
   },
 };

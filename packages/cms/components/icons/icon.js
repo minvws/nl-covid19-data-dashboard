@@ -43,7 +43,7 @@ export default class Icon extends React.Component {
                 align="center"
                 onClick={(event) => onChange(createPatchFrom(icon[0]))}
               >
-                <img src={icon[1]} />
+                <img src={icon[1]} width="36" height="36" />
                 <Radio checked={value === icon[0]} readOnly />
               </Flex>
             );
