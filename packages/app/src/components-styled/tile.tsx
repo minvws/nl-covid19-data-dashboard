@@ -1,13 +1,25 @@
 import { css } from '@styled-system/css';
 import styled from 'styled-components';
-import { variant } from 'styled-system';
+import {
+  borders,
+  color,
+  flexbox,
+  grid,
+  layout,
+  position,
+  shadow,
+  space,
+  typography,
+  variant,
+} from 'styled-system';
+import { spacing } from '~/style/functions/spacing';
 import { BoxProps } from './base';
 
-interface TileProps {
+interface TileProps extends BoxProps {
   variant?: string;
 }
 
-export const Tile = styled.article<TileProps & BoxProps>(
+export const Tile = styled.article<TileProps>(
   css({
     boxSizing: 'border-box',
     minWidth: 0,
@@ -20,10 +32,20 @@ export const Tile = styled.article<TileProps & BoxProps>(
   }),
   variant({
     variants: {
-      withoutBorder: {
+      withoutBorder: css({
         boxShadow: 'none',
         p: 0,
-      },
+      }),
     },
-  })
+  }),
+  space,
+  spacing,
+  layout,
+  flexbox,
+  color,
+  position,
+  typography,
+  borders,
+  shadow,
+  grid
 );
