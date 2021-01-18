@@ -10,13 +10,11 @@ import {
   National,
   Regionaal,
   Regions,
-} from '~/types/data';
-import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
-import {
   sortMunicipalTimeSeriesInDataInPlace,
   sortNationalTimeSeriesInDataInPlace,
   sortRegionalTimeSeriesInDataInPlace,
-} from './sort-data';
+} from '@corona-dashboard/common';
+import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
 import { loadJsonFromFile } from './utils/load-json-from-file';
 
 /**

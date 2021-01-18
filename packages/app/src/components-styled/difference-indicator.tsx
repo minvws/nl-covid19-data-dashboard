@@ -14,7 +14,7 @@ import IconGelijk from '~/assets/gelijk.svg';
 import IconUp from '~/assets/pijl-omhoog.svg';
 import IconDown from '~/assets/pijl-omlaag.svg';
 import siteText from '~/locale/index';
-import { DifferenceDecimal, DifferenceInteger } from '~/types/data';
+import { DifferenceDecimal, DifferenceInteger } from '@corona-dashboard/common';
 import { formatDateFromMilliseconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 

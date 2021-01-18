@@ -3,7 +3,7 @@ import { Feature, MultiPolygon } from 'geojson';
 import { ReactNode, useCallback } from 'react';
 import { AspectRatio } from '~/components-styled/aspect-ratio';
 import { DataProps } from '~/types/attributes';
-import { Municipalities } from '~/types/data';
+import { Municipalities } from '@corona-dashboard/common';
 import { Choropleth } from './choropleth';
 import {
   useChartDimensions,
@@ -16,7 +16,10 @@ import { useChoroplethDataDescription } from './hooks/use-choropleth-data-descri
 import { getDataThresholds } from './legenda/utils';
 import { municipalThresholds } from './municipal-thresholds';
 import { Path } from './path';
-import { MunicipalitiesMetricName, MunicipalityProperties } from './shared';
+import {
+  MunicipalitiesMetricName,
+  MunicipalityProperties,
+} from '@corona-dashboard/common';
 import { countryGeo, municipalGeo, regionGeo } from './topology';
 
 type MunicipalityChoroplethProps<T, K extends MunicipalitiesMetricName> = {
