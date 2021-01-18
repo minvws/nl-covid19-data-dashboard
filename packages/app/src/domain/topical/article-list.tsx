@@ -69,14 +69,6 @@ export function ArticleList({ articleSummaries, hideLink }: ArticleListProps) {
             />
           </ArticleBox>
         ))}
-        <ArticleBox key={'JA'}>
-          <ArticleTeaser
-            title={articleSummaries[0].title}
-            slug={articleSummaries[0].slug.current}
-            summary={articleSummaries[0].summary}
-            cover={articleSummaries[0].cover}
-          />
-        </ArticleBox>
       </Box>
     </Box>
   );
@@ -93,7 +85,7 @@ const ArticleBox = styled.div(
       lg: 'calc(33% - 32px)',
     }),
     '&:nth-child(3n+2)': {
-      mx: asResponsiveArray({ md: 4, lg: 4 }),
+      mx: asResponsiveArray({ md: '48px', lg: '48px' }),
     },
   })
 );
