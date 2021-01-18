@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import { variant } from 'styled-system';
 import { BoxProps } from './base';
 
-interface TileProps extends BoxProps {
+interface TileProps {
   variant?: string;
 }
 
-export const Tile = styled.article<TileProps>(
+export const Tile = styled.article<TileProps & BoxProps>(
   css({
     boxSizing: 'border-box',
     minWidth: 0,

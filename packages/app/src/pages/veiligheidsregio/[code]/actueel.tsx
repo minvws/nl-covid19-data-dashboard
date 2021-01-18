@@ -1,6 +1,9 @@
 import { useRouter } from 'next/router';
+import GetestIcon from '~/assets/test.svg';
+import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
 import { Box } from '~/components-styled/base';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
+import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
 import { MaxWidth } from '~/components-styled/max-width';
 import { MessageTile } from '~/components-styled/message-tile';
@@ -14,6 +17,8 @@ import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import { Search } from '~/domain/topical/components/search';
 import { DataSitemap } from '~/domain/topical/data-site-map';
 import { EscalationLevelExplanationsTile } from '~/domain/topical/escalation-level-explanations-tile';
+import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
+import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
@@ -35,9 +40,12 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const SafetyRegionActueel: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { text: siteText, choropleth } = props;
+  const { text: siteText, choropleth, data } = props;
   const router = useRouter();
   const text = siteText.veiligheidsregio_actueel;
+
+  const dataInfectedTotal = data.tested_overall;
+  const dataHospitalIntake = data.hospital_nice;
 
   return (
     <Box bg="white" pb={4}>
@@ -50,6 +58,48 @@ const SafetyRegionActueel: FCWithLayout<typeof getStaticProps> = (props) => {
           <Heading level={1} fontWeight="normal">
             De actuele situatie in <strong>{props.safetyRegionName}</strong>
           </Heading>
+
+          <MiniTrendTileLayout>
+            <MiniTrendTile
+              title={text.mini_trend_tiles.positief_getest.title}
+              text={
+                <DataDrivenText
+                  data={data}
+                  metricName="tested_overall"
+                  metricProperty="infected_per_100k"
+                  differenceKey="tested_overall__infected_per_100k"
+                  valueTexts={
+                    text.data_driven_texts.infected_people_total.value
+                  }
+                  differenceTexts={
+                    text.data_driven_texts.infected_people_total.difference
+                  }
+                />
+              }
+              icon={<GetestIcon />}
+              trendData={dataInfectedTotal.values}
+              metricProperty="infected_per_100k"
+            />
+
+            <MiniTrendTile
+              title={text.mini_trend_tiles.ziekenhuis_opnames.title}
+              text={
+                <DataDrivenText
+                  data={data}
+                  metricName="hospital_nice"
+                  metricProperty="admissions_on_date_of_reporting"
+                  differenceKey="hospital_nice__admissions_on_date_of_reporting"
+                  valueTexts={text.data_driven_texts.intake_hospital_ma.value}
+                  differenceTexts={
+                    text.data_driven_texts.intake_hospital_ma.difference
+                  }
+                />
+              }
+              icon={<ZiekenhuisIcon />}
+              trendData={dataHospitalIntake.values}
+              metricProperty="admissions_on_date_of_reporting"
+            />
+          </MiniTrendTileLayout>
 
           <QuickLinks
             header={text.quick_links.header}

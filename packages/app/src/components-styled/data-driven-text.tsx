@@ -1,6 +1,12 @@
 import { get } from 'lodash';
 import { isDefined } from 'ts-is-present';
-import { DifferenceDecimal, DifferenceInteger, National } from '~/types/data';
+import {
+  DifferenceDecimal,
+  DifferenceInteger,
+  Municipal,
+  National,
+  Regionaal,
+} from '~/types/data';
 import { assert } from '~/utils/assert';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
@@ -9,7 +15,7 @@ import { RelativeDate } from './relative-date';
 import { Text } from './typography';
 
 interface DataDrivenTextProps {
-  data: National;
+  data: National | Regionaal | Municipal;
   differenceKey: string;
   metricName: keyof National;
   metricProperty: string;
