@@ -1,0 +1,23 @@
+{
+  "name": "@corona-dashboard/e2e",
+  "version": "1.0.0",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^14.14.20",
+    "@typescript-eslint/eslint-plugin": "^4.13.0",
+    "@typescript-eslint/parser": "^4.13.0",
+    "cypress": "^6.2.1",
+    "eslint": "^7.8.0",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.20.1",
+    "prettier": "^2.1.1"
+  },
+  "scripts": {
+    "lint": "echo 'No linter configured for @corona-dashboard/e2e'",
+    "compile": "tsc --pretty --noEmit",
+    "test:ci": "echo 'No unit tests available for @corona-dashboard/e2e'",
+    "e2e": "cypress open",
+    "e2e:ci": "cypress run --headless --browser chrome --config-file ./cypress-ci.json"
+  }
+}

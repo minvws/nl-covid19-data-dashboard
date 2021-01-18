@@ -2,7 +2,7 @@ import { HighchartsWrapper } from '~/components/highcharts-wrapper';
 import {
   NationalDeceasedCbsValue,
   RegionalDeceasedCbsValue,
-} from '~/types/data';
+} from '@corona-dashboard/common';
 import { createDate } from '~/utils/createDate';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';

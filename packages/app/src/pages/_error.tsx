@@ -1,8 +1,11 @@
-import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import { MaxWidth } from '~/components-styled/max-width';
+import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import text from '~/locale/index';
-import getLastGeneratedData from '~/static-props/last-generated-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import { getLastGeneratedDate } from '~/static-props/get-data';
 import styles from './error.module.scss';
+
+export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
 
 const ErrorPage: FCWithLayout = () => {
   return (
@@ -26,6 +29,5 @@ const ErrorPage: FCWithLayout = () => {
 };
 
 ErrorPage.getLayout = getLayoutWithMetadata(text.error_metadata);
-export const getStaticProps = getLastGeneratedData();
 
 export default ErrorPage;

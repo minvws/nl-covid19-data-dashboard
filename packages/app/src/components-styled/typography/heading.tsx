@@ -1,9 +1,9 @@
+import css from '@styled-system/css';
 import React from 'react';
 import styled from 'styled-components';
 import {
   color,
   ColorProps,
-  compose,
   margin,
   MarginProps,
   padding,
@@ -48,55 +48,39 @@ type StyledHeadingProps = MarginProps &
   TypographyProps &
   ColorProps;
 
-const composedStyles = compose(margin, padding, typography, color);
+const composedStyles = [
+  css({
+    fontFamily: 'body',
+    lineHeight: 2,
+    mt: 0,
+  }),
+  margin,
+  padding,
+  typography,
+  color,
+];
 
-const Heading1 = styled.h1<StyledHeadingProps>(composedStyles);
+const Heading1 = styled.h1<StyledHeadingProps>(
+  css({ fontSize: 5, mb: 4 }),
+  ...composedStyles
+);
 
-Heading1.defaultProps = {
-  fontFamily: 'body',
-  fontSize: 5,
-  lineHeight: 2,
-  color: 'body',
-  mt: 0,
-  mb: 4,
-};
+const Heading2 = styled.h2<StyledHeadingProps>(
+  css({ fontSize: 4, mb: 3 }),
+  ...composedStyles
+);
 
-const Heading2 = styled.h2<StyledHeadingProps>(composedStyles);
+const Heading3 = styled.h3<StyledHeadingProps>(
+  css({ fontSize: 3, mb: 3 }),
+  ...composedStyles
+);
 
-Heading2.defaultProps = {
-  fontFamily: 'body',
-  fontSize: 4,
-  lineHeight: 2,
-  mt: 0,
-  mb: 3,
-};
+const Heading4 = styled.h4<StyledHeadingProps>(
+  css({ fontSize: 2, mb: 3 }),
+  ...composedStyles
+);
 
-const Heading3 = styled.h3<StyledHeadingProps>(composedStyles);
-
-Heading3.defaultProps = {
-  fontFamily: 'body',
-  fontSize: 3,
-  lineHeight: 2,
-  mt: 0,
-  mb: 3,
-};
-
-const Heading4 = styled.h4<StyledHeadingProps>(composedStyles);
-
-Heading4.defaultProps = {
-  fontFamily: 'body',
-  fontSize: 2,
-  lineHeight: 2,
-  mt: 0,
-  mb: 3,
-};
-
-const Heading5 = styled.h5<StyledHeadingProps>(composedStyles);
-
-Heading5.defaultProps = {
-  fontFamily: 'body',
-  fontSize: 1,
-  lineHeight: 2,
-  mt: 0,
-  mb: 3,
-};
+const Heading5 = styled.h5<StyledHeadingProps>(
+  css({ fontSize: 1, mb: 3 }),
+  ...composedStyles
+);

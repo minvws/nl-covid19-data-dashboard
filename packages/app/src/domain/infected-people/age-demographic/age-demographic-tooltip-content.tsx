@@ -2,7 +2,7 @@ import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Text } from '~/components-styled/typography';
 import siteText from '~/locale/index';
-import { NationalTestedPerAgeGroupValue } from '~/types/data';
+import { NationalTestedPerAgeGroupValue } from '@corona-dashboard/common';
 import { formatPercentage } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { formatAgeGroupRange } from './age-demographic-chart';
@@ -58,15 +58,15 @@ export function AgeDemographicTooltipContent({
         })}
       </Text>
       <Legend>
-        <LegendItem>
-          <b>{formatPercentage(value.age_group_percentage * 100)}%</b>{' '}
-          {replaceVariablesInText(text.graph.age_group_percentage_tooltip, {
-            ageGroupRange: formatAgeGroupRange(value.age_group_range),
-          })}
-        </LegendItem>
         <LegendItem className="infected-percentage">
           <b>{formatPercentage(value.infected_percentage * 100)}%</b>{' '}
           {replaceVariablesInText(text.graph.infected_percentage_tooltip, {
+            ageGroupRange: formatAgeGroupRange(value.age_group_range),
+          })}
+        </LegendItem>
+        <LegendItem>
+          <b>{formatPercentage(value.age_group_percentage * 100)}%</b>{' '}
+          {replaceVariablesInText(text.graph.age_group_percentage_tooltip, {
             ageGroupRange: formatAgeGroupRange(value.age_group_range),
           })}
         </LegendItem>
