@@ -4,12 +4,9 @@ import { ParentSize } from '@visx/responsive';
 import { ReactNode } from 'react';
 import { Box } from '~/components-styled/base';
 import { LineChart } from '~/components-styled/line-chart';
-import {
-  ComponentCallbackInfo,
-  defaultPadding,
-} from '~/components-styled/line-chart/components';
+import { ComponentCallbackInfo } from '~/components-styled/line-chart/components';
 import { NumberProperty, Value } from '~/components-styled/line-chart/helpers';
-import { Heading } from '~/components-styled/typography';
+import { Heading, Text } from '~/components-styled/typography';
 import text from '~/locale';
 import { formatNumber } from '~/utils/formatNumber';
 
@@ -24,34 +21,36 @@ type MiniTrendTileProps<T extends Value> = {
 export function MiniTrendTile<T extends Value>(props: MiniTrendTileProps<T>) {
   const { icon, title, text, trendData, metricProperty } = props;
 
+  const value = trendData[trendData.length - 1][metricProperty];
+
   return (
-    <Box position="relative" pb={3} pl={{ _: 0, md: '3.5rem' }}>
+    <Box position="relative" pb={3}>
       <Box width="4rem" height="4rem" position="absolute" left={0} mr={1}>
         {icon}
       </Box>
-      <Heading level={4} as="h2" py={2} pl={{ _: '3.5rem', md: 0 }}>
+      <Heading level={3} as="h2" py={2} pl={{ _: '3.5rem' }}>
         {title}
       </Heading>
+      <Text fontSize="3rem" fontWeight="bold" my={0}>
+        {formatNumber((value as unknown) as number)}
+      </Text>
       {text}
-      <Box>
-        <ParentSize>
-          {(parent) => (
-            <LineChart
-              width={parent.width}
-              timeframe="5weeks"
-              values={trendData}
-              linesConfig={[{ metricProperty }]}
-              componentCallback={componentCallback}
-              showMarkerLine={true}
-              formatTooltip={(values) => formatNumber(values[0].__value)}
-              padding={{
-                ...defaultPadding,
-                left: 0,
-              }}
-            />
-          )}
-        </ParentSize>
-      </Box>
+      <ParentSize>
+        {(parent) => (
+          <LineChart
+            width={parent.width}
+            timeframe="5weeks"
+            values={trendData}
+            linesConfig={[{ metricProperty }]}
+            componentCallback={componentCallback}
+            showMarkerLine={true}
+            formatTooltip={(values) => formatNumber(values[0].__value)}
+            padding={{
+              left: 0,
+            }}
+          />
+        )}
+      </ParentSize>
     </Box>
   );
 }

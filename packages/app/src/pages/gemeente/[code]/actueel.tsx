@@ -71,8 +71,8 @@ const MunicipalityActueel: FCWithLayout<typeof getStaticProps> = (props) => {
                 <DataDrivenText
                   data={data}
                   metricName="tested_overall"
-                  metricProperty="infected_per_100k"
-                  differenceKey="tested_overall__infected_per_100k"
+                  metricProperty="infected"
+                  differenceKey="tested_overall__infected"
                   valueTexts={
                     text.data_driven_texts.infected_people_total.value
                   }
@@ -83,7 +83,7 @@ const MunicipalityActueel: FCWithLayout<typeof getStaticProps> = (props) => {
               }
               icon={<GetestIcon />}
               trendData={dataInfectedTotal.values}
-              metricProperty="infected_per_100k"
+              metricProperty="infected"
             />
 
             <MiniTrendTile

@@ -44,6 +44,7 @@ export function ArticleTeaser(props: ArticleLinkProps) {
           href={`/artikelen/${slug}`}
           icon={<ArrowIcon css={css({ transform: 'rotate(-90deg)' })} />}
           iconPlacement="right"
+          fontWeight="bold"
         >
           {siteText.common.read_more}
         </LinkWithIcon>

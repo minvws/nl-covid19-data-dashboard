@@ -8,6 +8,7 @@ interface LinkWithIconProps {
   children: ReactNode;
   icon: ReactNode;
   iconPlacement?: 'left' | 'right';
+  fontWeight?: 'bold' | 'normal';
 }
 
 export function LinkWithIcon({
@@ -15,12 +16,14 @@ export function LinkWithIcon({
   icon,
   children,
   iconPlacement = 'left',
+  fontWeight = 'normal',
 }: LinkWithIconProps) {
   return (
     <Link href={href} passHref>
       <a
         css={css({
           display: 'inline-block',
+          fontWeight: fontWeight ?? 'normal',
           textDecoration: 'none',
           '&:hover': { textDecoration: 'underline' },
         })}
