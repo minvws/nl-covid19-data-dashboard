@@ -15,6 +15,7 @@ import overDitDashboard from './documents/over-dit-dashboard';
 
 // routekaart en maatregelen
 import restrictionGroup from './restrictions/restriction-group.js';
+import restrictionGroupLockdown from './restrictions/restriction-group-lockdown.js';
 import restrictionCategory from './restrictions/restriction-category.js';
 import roadmap from './restrictions/roadmap.js';
 import restriction from './restrictions/restriction.js';
@@ -44,6 +45,7 @@ export default createSchema({
     overDitDashboard,
     /** Restrictions */
     restrictionGroup,
+    restrictionGroupLockdown,
     restrictionCategory,
     roadmap,
     restriction,
