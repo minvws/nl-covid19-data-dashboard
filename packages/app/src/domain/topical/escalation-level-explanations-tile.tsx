@@ -1,12 +1,12 @@
-import Chevron from '~/assets/chevron.svg';
+import ArrowIcon from '~/assets/arrow.svg';
 import { Box } from '~/components-styled/base';
 import { Collapsible } from '~/components-styled/collapsible';
 import { EscalationLevelInfoLabel } from '~/components-styled/escalation-level';
+import { LinkWithIcon } from '~/components-styled/link-with-icon';
 import { Tile } from '~/components-styled/tile';
 import { Text } from '~/components-styled/typography';
 import { EscalationLevel } from '~/components/restrictions/type';
 import siteText from '~/locale';
-import { Link } from '~/utils/link';
 
 type EscalationLevelExplanationProps = {
   level: EscalationLevel;
@@ -47,12 +47,13 @@ export function EscalationLevelExplanationsTile() {
             explanation={siteText.escalatie_niveau.types['4'].toelichting}
           />
           <Box mt={4}>
-            <Link href="/over-risiconiveaus">
-              <a>
-                {siteText.escalatie_niveau.lees_meer}{' '}
-                <Chevron width="14px" height="14px" />
-              </a>
-            </Link>
+            <LinkWithIcon
+              href="/over-risiconiveaus"
+              icon={<ArrowIcon />}
+              iconPlacement="right"
+            >
+              {siteText.escalatie_niveau.lees_meer}
+            </LinkWithIcon>
           </Box>
         </Box>
       </Collapsible>

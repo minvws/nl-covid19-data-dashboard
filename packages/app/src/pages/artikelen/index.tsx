@@ -1,42 +1,32 @@
 import { groq } from 'next-sanity';
+import { ArticleSummary } from '~/components-styled/article-teaser';
+import { MaxWidth } from '~/components-styled/max-width';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
+import { ArticleList } from '~/domain/topical/article-list';
+import siteText from '~/locale';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
 } from '~/static-props/get-data';
-import { Article } from '~/types/cms';
-import { Link } from '~/utils/link';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  createGetContent<Article[]>(groq`
-    *[_type == 'article']
-  `)
+  createGetContent<ArticleSummary[]>(
+    groq`*[_type == 'article'] | order(publicationDate) {title, slug, summary, cover}`
+  )
 );
 
 const ArticlesOverview: FCWithLayout<typeof getStaticProps> = (props) => {
   const { content } = props;
 
   return (
-    <>
-      <h1>@Todo: Artikelen!</h1>
-      {content.map((article) => (
-        <div key={article.slug.current}>
-          <Link href={`/artikelen/${article.slug.current}`} passHref>
-            <a>{article.title}</a>
-          </Link>
-        </div>
-      ))}
-    </>
+    <MaxWidth>
+      <ArticleList articleSummaries={content} hideLink={true} />
+    </MaxWidth>
   );
 };
 
-const metadata = {
-  title: '@TODO',
-  description: '@TODO',
-};
-
-ArticlesOverview.getLayout = getLayoutWithMetadata(metadata);
+ArticlesOverview.getLayout = getLayoutWithMetadata(siteText.articles_metadata);
 
 export default ArticlesOverview;

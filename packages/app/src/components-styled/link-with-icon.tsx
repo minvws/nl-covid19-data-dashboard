@@ -1,15 +1,21 @@
-import { Link } from '~/utils/link';
-import { ReactNode } from 'react';
 import css from '@styled-system/css';
+import { ReactNode } from 'react';
 import { UrlObject } from 'url';
+import { Link } from '~/utils/link';
 
 interface LinkWithIconProps {
   href: UrlObject | string;
   children: ReactNode;
   icon: ReactNode;
+  iconPlacement?: 'left' | 'right';
 }
 
-export function LinkWithIcon({ href, icon, children }: LinkWithIconProps) {
+export function LinkWithIcon({
+  href,
+  icon,
+  children,
+  iconPlacement = 'left',
+}: LinkWithIconProps) {
   return (
     <Link href={href} passHref>
       <a
@@ -19,19 +25,19 @@ export function LinkWithIcon({ href, icon, children }: LinkWithIconProps) {
           '&:hover': { textDecoration: 'underline' },
         })}
       >
+        {iconPlacement == 'right' && children}
         <span
           css={css({
             svg: {
               height: '10px',
               width: '12px',
-              transform: 'rotate(90deg)',
               marginRight: 3,
             },
           })}
         >
           {icon}
         </span>
-        {children}
+        {iconPlacement == 'left' && children}
       </a>
     </Link>
   );

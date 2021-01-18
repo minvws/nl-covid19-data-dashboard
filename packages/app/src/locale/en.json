@@ -591,6 +591,11 @@
     "description": "Information on the development of the coronavirus in the Netherlands.",
     "url": "https://coronadashboard.government.nl/verantwoording"
   },
+  "articles_metadata": {
+    "title": "Articles Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
+    "description": "",
+    "url": "https://coronadashboard.rijksoverheid.nl/artikelen"
+  },
   "metadata": {
     "description": "Information on the development of the coronavirus in the Netherlands.",
     "titel": "COVID-19 Dashboard error message | Government.nl",
@@ -676,6 +681,11 @@
         "veiligheidsregio": "Cijfers per veiligheidsregio",
         "gemeente": "Cijfers per gemeente"
       }
+    },
+    "latest_articles": {
+      "title": "",
+      "subtitle": "",
+      "all_articles": ""
     }
   },
   "regionaal_index": {
@@ -718,7 +728,8 @@
     "niveau": "level",
     "clear_select_input": "Empty",
     "gisteren": "Yesterday",
-    "vandaag": "Today"
+    "vandaag": "Today",
+    "read_more": "Read more"
   },
   "seoHead": {
     "default_description": "Information on the development of the coronavirus in The Netherlands.",

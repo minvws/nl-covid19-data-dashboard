@@ -2,7 +2,7 @@ import css from '@styled-system/css';
 import ArrowIcon from '~/assets/arrow.svg';
 import { Box } from '~/components-styled/base';
 import { ContentBlock } from '~/components-styled/cms/content-block';
-import { Image } from '~/components-styled/cms/image-block';
+import { Image } from '~/components-styled/cms/image';
 import { Heading } from '~/components-styled/typography';
 import siteText from '~/locale';
 import { Article } from '~/types/cms';
@@ -18,7 +18,10 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
   return (
     <Box bg="white" py={{ _: 4, md: 5 }}>
       <ContentBlock spacing={3}>
-        <LinkWithIcon href="/artikelen" icon={<ArrowIcon />}>
+        <LinkWithIcon
+          href="/artikelen"
+          icon={<ArrowIcon css={css({ transform: 'rotate(90deg)' })} />}
+        >
           {siteText.article_detail.back_link.text}
         </LinkWithIcon>
 

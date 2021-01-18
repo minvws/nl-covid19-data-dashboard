@@ -2,7 +2,7 @@
 import BlockContent from '@sanity/block-content-to-react';
 import { Box } from '~/components-styled/base';
 import { ContentBlock } from '~/components-styled/cms/content-block';
-import { Image } from '~/components-styled/cms/image-block';
+import { Image } from '~/components-styled/cms/image';
 import { PortableText } from '~/lib/sanity';
 import { Block, RichContentBlock } from '~/types/cms';
 
