@@ -2128,5 +2128,13 @@
         "last_sentence": "{{count}} {{area}} meer dan {{rangeLow}} procent draagvlak {{verb}} voor de maatregel '{{restriction}}'"
       }
     }
+  },
+  "risoconiveau_maatregelen": {
+    "title": "Risiconiveau & maatregelen",
+    "description": {
+      "vr": "Voor de veiligheidsregio geldt het risiconiveau",
+      "gm": "Voor de veiligheidsregio van deze gemeente geldt het risiconiveau"
+    },
+    "bekijk_href": "Bekijk de maatregelen"
   }
 }

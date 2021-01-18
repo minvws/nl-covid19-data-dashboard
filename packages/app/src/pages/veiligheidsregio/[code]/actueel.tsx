@@ -16,8 +16,9 @@ import {
   getVrData,
 } from '~/static-props/get-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-
 export { getStaticPaths } from '~/static-paths/vr';
+import { RiskLevelIndicator } from '~/components-styled/risk-level-indicator';
+import { assert } from '~/utils/assert';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -32,11 +33,36 @@ const SafetyRegionActueel: FCWithLayout<typeof getStaticProps> = (props) => {
   const { text: siteText, choropleth } = props;
   const router = useRouter();
   const text = siteText.veiligheidsregio_actueel;
+  const regionText = siteText.escalatie_niveau;
+
+  const regionCode =
+    typeof router.query.code === 'string' ? router.query.code : undefined;
+
+  const riskLevelText = siteText.risoconiveau_maatregelen;
+
+  const filteredRegion = props.choropleth.vr.escalation_levels.find(
+    (item) => item.vrcode === regionCode
+  );
+
+  assert(filteredRegion, 'Could not find a region code');
 
   return (
     <MaxWidth>
       <Tile>De actuele situatie in {props.safetyRegionName}</Tile>
       <Tile>Artikelen</Tile>
+
+      <Tile>
+        <RiskLevelIndicator
+          title={riskLevelText.title}
+          description={riskLevelText.description.vr}
+          linkText={riskLevelText.bekijk_href}
+          escalationLevel={filteredRegion.escalation_level}
+          code={filteredRegion.vrcode}
+          href={`/veiligheidsregio/${regionCode}/maatregelen`}
+          escalationTypes={regionText.types}
+        />
+      </Tile>
+
       <ChoroplethTile
         title={text.risiconiveaus.selecteer_titel}
         description={
