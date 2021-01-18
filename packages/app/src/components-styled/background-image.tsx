@@ -12,13 +12,13 @@ import {
   LayoutProps,
 } from 'styled-system';
 
-export type BackgroundImageProps = BackgroundImageProps &
+export type BackgroundImageLocalProps = BackgroundImageProps &
   BackgroundPositionProps &
   BackgroundSizeProps &
   BackgroundRepeatProps &
   LayoutProps;
 
-export const BackgroundImage = styled.div<BackgroundImageProps>(
+export const BackgroundImage = styled.div<BackgroundImageLocalProps>(
   { boxSizing: 'border-box', minWidth: 0 },
   backgroundImage,
   backgroundPosition,

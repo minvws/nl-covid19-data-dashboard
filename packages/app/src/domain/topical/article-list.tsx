@@ -75,7 +75,7 @@ export function ArticleList({ articleSummaries, hideLink }: ArticleListProps) {
   );
 }
 
-const ArticleBox = styled(Box)(
+const ArticleBox = styled.div(
   css({
     flex: '0 0 auto',
     marginTop: 3,

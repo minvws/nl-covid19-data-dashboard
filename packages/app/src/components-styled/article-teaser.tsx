@@ -4,7 +4,7 @@ import { urlFor } from '~/lib/sanity';
 import siteText from '~/locale';
 import { Article, Block, ImageBlock } from '~/types/cms';
 import { assert } from '~/utils/assert';
-import { BackgroundImage } from './background-image-box';
+import { BackgroundImage } from './background-image';
 import { Box } from './base';
 import { Heading, Text } from './typography';
 
@@ -75,8 +75,8 @@ function CoverImage({ image }: CoverImageProps) {
       backgroundPosition={bgPosition}
       backgroundRepeat="no-repeat"
       backgroundSize="cover"
-      title={image.alt}
+      aria-label={image.alt}
       role="img"
-    ></BackgroundImage>
+    />
   );
 }
