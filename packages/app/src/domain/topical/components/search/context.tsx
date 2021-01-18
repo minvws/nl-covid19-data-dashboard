@@ -19,6 +19,7 @@ type SearchContext = ReturnType<typeof useSearchContextValue>;
 interface SearchContextProviderProps<T extends Element> {
   containerRef: RefObject<T>;
   children: (context: SearchContext) => ReactNode;
+  initialValue?: string;
 }
 
 const searchContext = createContext<SearchContext | undefined>(undefined);
@@ -26,8 +27,9 @@ const searchContext = createContext<SearchContext | undefined>(undefined);
 export function SearchContextProvider<T extends Element>({
   children,
   containerRef,
+  initialValue = '',
 }: SearchContextProviderProps<T>) {
-  const value = useSearchContextValue(containerRef);
+  const value = useSearchContextValue(initialValue, containerRef);
 
   return (
     <searchContext.Provider value={value}>
@@ -44,7 +46,10 @@ export function useSearchContext() {
   return context;
 }
 
-function useSearchContextValue<T extends Element>(containerRef: RefObject<T>) {
+function useSearchContextValue<T extends Element>(
+  initialValue: string,
+  containerRef: RefObject<T>
+) {
   const router = useRouter();
   const breakpoints = useBreakpoints();
 
@@ -53,7 +58,7 @@ function useSearchContextValue<T extends Element>(containerRef: RefObject<T>) {
   /**
    * current search term
    */
-  const [term, setTerm] = useState('');
+  const [term, setTerm] = useState(initialValue);
 
   /**
    * when a hit is selected (e.g. hitting return-key) the input's value will be
@@ -66,6 +71,18 @@ function useSearchContextValue<T extends Element>(containerRef: RefObject<T>) {
    */
   const [hasInputFocus, setHasInputFocus] = useState(false);
   const [hasHitFocus, setHasHitFocus] = useState(false);
+
+  /**
+   * By default narrow devices will show search-results when the input field
+   * has a value. We don't want to show these results when the value is
+   * pre-set/pre-populated.
+   * To fix this we will listen to an initial focus event on the input element,
+   * if that initial event is recognized, we'll allow the results to show.
+   */
+  const [hasHadInputFocus, setHasHadInputFocus] = useState(false);
+  useEffect(() => {
+    if (hasInputFocus) setHasHadInputFocus(true);
+  }, [hasInputFocus]);
 
   /**
    * the useSearchResults-hook which will perform the actual search
@@ -102,7 +119,9 @@ function useSearchContextValue<T extends Element>(containerRef: RefObject<T>) {
   const getOptionId = (index: number) => `${id}-result-${index}`;
 
   const showResults =
-    !!term && (hasInputFocus || hasHitFocus || !breakpoints.md);
+    hasHadInputFocus &&
+    !!term &&
+    (hasInputFocus || hasHitFocus || !breakpoints.md);
 
   useOnClickOutside([containerRef], () => setHasHitFocus(false));
 
