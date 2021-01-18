@@ -8,7 +8,7 @@ import { KeyboardEvent, memo, MouseEvent } from 'react';
 import styled from 'styled-components';
 import siteText from '~/locale/index';
 import { colors } from '~/style/theme';
-import { NationalTestedPerAgeGroupValue } from '~/types/data.d';
+import { NationalTestedPerAgeGroupValue } from '@corona-dashboard/common';
 import { formatPercentage } from '~/utils/formatNumber';
 import { AgeDemographicCoordinates } from './age-demographic-coordinates';
 export const AGE_GROUP_TOOLTIP_WIDTH = 340;

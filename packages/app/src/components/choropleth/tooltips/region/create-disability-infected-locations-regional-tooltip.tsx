@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
-import { RegionsDisabilityCare } from '~/types/data';
+import { RegionsDisabilityCare } from '@corona-dashboard/common';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { RegionSelectionHandler } from '../../select-handlers/create-select-region-handler';
-import { SafetyRegionProperties } from '../../shared';
+import { SafetyRegionProperties } from '@corona-dashboard/common';
 import { TooltipContent } from '../tooltipContent';
 
 export const createDisablityInfectedLocationsRegionalTooltip = (

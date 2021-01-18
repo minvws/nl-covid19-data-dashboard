@@ -11,6 +11,7 @@
       "~/*": ["src/*"]
     }
   },
-  "exclude": ["node_modules", ".next", "out", "cypress"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.js"]
+  "references": [{ "path": "../common" }],
+  "exclude": ["node_modules", ".next", "out"],
+  "include": ["next-env.d.ts", "src"]
 }

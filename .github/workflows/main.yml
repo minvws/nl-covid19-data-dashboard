@@ -43,7 +43,9 @@ jobs:
         uses: actions/checkout@v2
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
-      - name: Compile code
+      - name: Build common module
+        run: yarn workspace @corona-dashboard/common build
+      - name: Compile all code
         run: yarn compile
 
   test:
@@ -54,4 +56,6 @@ jobs:
         uses: actions/checkout@v2
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
+      - name: Build common module
+        run: yarn workspace @corona-dashboard/common build
       - run: yarn test:ci

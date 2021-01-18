@@ -3,7 +3,7 @@ import { Tooltip, useTooltip } from '~/components-styled/tooltip';
 import {
   NationalTestedPerAgeGroup,
   NationalTestedPerAgeGroupValue,
-} from '~/types/data';
+} from '@corona-dashboard/common';
 import { useElementSize } from '~/utils/use-element-size';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import {

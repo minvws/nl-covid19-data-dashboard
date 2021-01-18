@@ -1,9 +1,9 @@
-import { Fragment, useState } from 'react';
-import { Box } from './base';
 import { css } from '@styled-system/css';
+import { Fragment, useState } from 'react';
 import styled from 'styled-components';
-import useUniqueId from '~/utils/useUniqueId';
 import { asResponsiveArray } from '~/style/utils';
+import useUniqueId from '~/utils/useUniqueId';
+import { Box } from './base';
 interface RadioGroupItem<T extends string> {
   label: string;
   value: T;
@@ -72,7 +72,7 @@ export function RadioGroup<T extends string>(props: RadioGroupProps<T>) {
   };
 
   return (
-    <Box bg="white" display="flex" justifyContent="center">
+    <Box bg="white" display="flex" justifyContent="center" data-cy="radiogroup">
       {items.map((item, index) => (
         <Fragment key={`radiogroup-${id}-input-${index}`}>
           <StyledInput
