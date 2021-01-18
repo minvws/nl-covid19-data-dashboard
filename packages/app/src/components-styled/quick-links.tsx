@@ -2,7 +2,8 @@ import css from '@styled-system/css';
 import styled from 'styled-components';
 import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
-import { Text } from './typography';
+import { Tile } from './tile';
+import { Heading } from './typography';
 
 interface QuickLinksProps {
   header: string;
@@ -16,8 +17,10 @@ interface QuickLink {
 
 export function QuickLinks({ header, links }: QuickLinksProps) {
   return (
-    <>
-      <Text as="h2">{header}</Text>
+    <Tile variant="withoutBorder">
+      <Heading level={2} fontSize="18px">
+        {header}
+      </Heading>
       <List>
         {links.map((link, index) => (
           <Item key={`${link.text}-${index}`}>
@@ -27,7 +30,7 @@ export function QuickLinks({ header, links }: QuickLinksProps) {
           </Item>
         ))}
       </List>
-    </>
+    </Tile>
   );
 }
 

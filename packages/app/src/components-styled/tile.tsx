@@ -1,14 +1,29 @@
-import { Box } from './base';
 import { css } from '@styled-system/css';
 import styled from 'styled-components';
+import { variant } from 'styled-system';
+import { BoxProps } from './base';
 
-export const Tile = styled(Box).attrs({ as: 'article' })(
+interface TileProps extends BoxProps {
+  variant?: string;
+}
+
+export const Tile = styled.article<TileProps>(
   css({
+    boxSizing: 'border-box',
+    minWidth: 0,
     display: 'flex',
     flexDirection: 'column',
-    bg: 'white',
     p: 4,
     borderRadius: 1,
     boxShadow: 'tile',
+    bg: 'white',
+  }),
+  variant({
+    variants: {
+      withoutBorder: {
+        boxShadow: 'none',
+        p: 0,
+      },
+    },
   })
 );

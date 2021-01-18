@@ -1,13 +1,19 @@
 import { useRouter } from 'next/router';
+import { Box } from '~/components-styled/base';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
 import { MaxWidth } from '~/components-styled/max-width';
+import { MessageTile } from '~/components-styled/message-tile';
 import { QuickLinks } from '~/components-styled/quick-links';
-import { Tile } from '~/components-styled/tile';
+import { TileList } from '~/components-styled/tile-list';
+import { Heading } from '~/components-styled/typography';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
+import { Search } from '~/domain/topical/components/search';
+import { DataSitemap } from '~/domain/topical/data-site-map';
+import { EscalationLevelExplanationsTile } from '~/domain/topical/escalation-level-explanations-tile';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
@@ -39,60 +45,76 @@ const MunicipalityActueel: FCWithLayout<typeof getStaticProps> = (props) => {
       : undefined;
 
   return (
-    <MaxWidth>
-      <Tile>De actuele situatie in {municipalityName}</Tile>
-      <Tile>Artikelen</Tile>
-      <ChoroplethTile
-        title={text.risiconiveaus.selecteer_titel}
-        description={
-          <>
-            <span
-              dangerouslySetInnerHTML={{
-                __html: text.risiconiveaus.selecteer_toelichting,
-              }}
-            />
-            <EscalationMapLegenda
+    <Box bg="white" pb={4}>
+      <MaxWidth>
+        <TileList>
+          <MessageTile message={siteText.regionaal_index.belangrijk_bericht} />
+
+          <Search />
+
+          <Heading level={1} fontWeight="normal">
+            De actuele situatie in <strong>{municipalityName}</strong>
+          </Heading>
+
+          <QuickLinks
+            header={text.quick_links.header}
+            links={[
+              { href: '/landelijk', text: text.quick_links.links.nationaal },
+              safetyRegionForMunicipality
+                ? {
+                    href: `/veiligheidsregio/${safetyRegionForMunicipality.code}/positief-geteste-mensen`,
+                    text: replaceVariablesInText(
+                      text.quick_links.links.veiligheidsregio,
+                      { safetyRegionName: safetyRegionForMunicipality.name }
+                    ),
+                  }
+                : {
+                    href: '/veiligheidsregio',
+                    text: text.quick_links.links.veiligheidsregio_fallback,
+                  },
+              {
+                href: '/gemeentes',
+                text: replaceVariablesInText(text.quick_links.links.gemeente, {
+                  municipalityName: municipalityName,
+                }),
+              },
+            ]}
+          ></QuickLinks>
+
+          <ChoroplethTile
+            title={text.risiconiveaus.selecteer_titel}
+            description={
+              <>
+                <span
+                  dangerouslySetInnerHTML={{
+                    __html: text.risiconiveaus.selecteer_toelichting,
+                  }}
+                />
+                <EscalationMapLegenda
+                  data={choropleth.vr}
+                  metricName="escalation_levels"
+                  metricProperty="escalation_level"
+                />
+              </>
+            }
+          >
+            <SafetyRegionChoropleth
               data={choropleth.vr}
               metricName="escalation_levels"
               metricProperty="escalation_level"
+              onSelect={createSelectRegionHandler(router)}
+              tooltipContent={escalationTooltip(
+                createSelectRegionHandler(router)
+              )}
             />
-          </>
-        }
-      >
-        <SafetyRegionChoropleth
-          data={choropleth.vr}
-          metricName="escalation_levels"
-          metricProperty="escalation_level"
-          onSelect={createSelectRegionHandler(router)}
-          tooltipContent={escalationTooltip(createSelectRegionHandler(router))}
-        />
-      </ChoroplethTile>
+          </ChoroplethTile>
 
-      <QuickLinks
-        header={text.quick_links.header}
-        links={[
-          { href: '/landelijk', text: text.quick_links.links.nationaal },
-          safetyRegionForMunicipality
-            ? {
-                href: `/veiligheidsregio/${safetyRegionForMunicipality.code}/positief-geteste-mensen`,
-                text: replaceVariablesInText(
-                  text.quick_links.links.veiligheidsregio,
-                  { safetyRegionName: safetyRegionForMunicipality.name }
-                ),
-              }
-            : {
-                href: '/veiligheidsregio',
-                text: text.quick_links.links.veiligheidsregio_fallback,
-              },
-          {
-            href: '/gemeentes',
-            text: replaceVariablesInText(text.quick_links.links.gemeente, {
-              municipalityName: municipalityName,
-            }),
-          },
-        ]}
-      ></QuickLinks>
-    </MaxWidth>
+          <EscalationLevelExplanationsTile />
+
+          <DataSitemap />
+        </TileList>
+      </MaxWidth>
+    </Box>
   );
 };
 

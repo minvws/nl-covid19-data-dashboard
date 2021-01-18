@@ -27,7 +27,7 @@ function EscalationLevelExplanation(props: EscalationLevelExplanationProps) {
 
 export function EscalationLevelExplanationsTile() {
   return (
-    <Tile>
+    <Tile variant="withoutBorder">
       <Collapsible summary={siteText.escalatie_niveau.tile_title} hideBorder>
         <Box my={3}>
           <EscalationLevelExplanation
