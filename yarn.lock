@@ -1290,7 +1290,7 @@
   version "1.0.0-next.11"
   resolved "https://registry.yarnpkg.com/@polka/url/-/url-1.0.0-next.11.tgz#aeb16f50649a91af79dbe36574b66d0f9e4d9f71"
 
-"@popperjs/core@^2.5.4":
+"@popperjs/core@^2.5.4", "@popperjs/core@^2.6.0":
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.6.0.tgz#f022195afdfc942e088ee2101285a1d31c7d727f"
 
@@ -1891,7 +1891,7 @@
     split2 "^3.2.2"
     throttle-debounce "^3.0.1"
 
-"@sanity/icons@^1.0.0":
+"@sanity/icons@^1.0.0", "@sanity/icons@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@sanity/icons/-/icons-1.0.1.tgz#5a570e7ee3b400c7a4b94dfab1d656d37ce1f765"
 
@@ -2156,6 +2156,22 @@
     "@sanity/color" "^2.0.11"
     "@sanity/icons" "^1.0.0"
     framer-motion "^2.9.5"
+    popper-max-size-modifier "^0.2.0"
+    react-is "^17.0.1"
+    react-popper "^2.2.4"
+    react-refractor "^2.1.2"
+
+"@sanity/ui@^0.32.4":
+  version "0.32.4"
+  resolved "https://registry.yarnpkg.com/@sanity/ui/-/ui-0.32.4.tgz#a5faa0265b66984f1223d2c3939b9841b6cfc595"
+  integrity sha512-zUXahMDbf0VnD4zgf3c+A3iMY0Tkx9vny0fLpz28sYv8crpGnb0wjHPp52fHtXGDdZ4CzS2zPZXQIg2tlpNL8Q==
+  dependencies:
+    "@juggle/resize-observer" "^3.2.0"
+    "@popperjs/core" "^2.6.0"
+    "@reach/auto-id" "^0.12.1"
+    "@sanity/color" "^2.0.11"
+    "@sanity/icons" "^1.0.1"
+    framer-motion "^3.1.3"
     popper-max-size-modifier "^0.2.0"
     react-is "^17.0.1"
     react-popper "^2.2.4"
@@ -6907,6 +6923,24 @@ framer-motion@^2.9.5:
   optionalDependencies:
     "@emotion/is-prop-valid" "^0.8.2"
 
+framer-motion@^3.1.3:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-3.2.1.tgz#66eeb883a0b5c425dd7767ecacdeac451c184cdb"
+  integrity sha512-5AWrh4JElgFAXWLqk0u8lVcdkigyuofyEy2LSsjuCxKbAb1hHqRn3PPdrV0KgPrysTHq95QO1bHFTLA7/Q8g+Q==
+  dependencies:
+    framesync "^5.0.0"
+    hey-listen "^1.0.8"
+    popmotion "^9.1.0"
+    style-value-types "^4.0.1"
+    tslib "^1.10.0"
+  optionalDependencies:
+    "@emotion/is-prop-valid" "^0.8.2"
+
+framesync@5.0.0, framesync@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/framesync/-/framesync-5.0.0.tgz#7de8caedf53ac441118e79680f1beb7391c328b6"
+  integrity sha512-wd8t+JsQGisluSv1twiEeDv0aNGpavGb9q7xgIk9fGbcIWkNXF/KVtrjnOrCwBWJuiXxlJfNkcvGudsI32FxYA==
+
 framesync@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/framesync/-/framesync-4.1.0.tgz#69a8db3ca432dc70d6a76ba882684a1497ef068a"
@@ -10835,6 +10869,16 @@ popmotion@9.0.0-rc.20:
     style-value-types "^3.1.9"
     tslib "^1.10.0"
 
+popmotion@^9.1.0:
+  version "9.1.0"
+  resolved "https://registry.yarnpkg.com/popmotion/-/popmotion-9.1.0.tgz#4360d06bd18ce8baa8f9284ecec7d55344af6325"
+  integrity sha512-+J7pzzBy5kk2qsP8ilowKs/CH+HoZa3kOGEBNCleCvsPXEF3nKHdfAR3SboMyPvdpIrofaT7ZIy/xWgz446Azw==
+  dependencies:
+    framesync "5.0.0"
+    hey-listen "^1.0.8"
+    style-value-types "^4.0.1"
+    tslib "^1.10.0"
+
 popper-max-size-modifier@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/popper-max-size-modifier/-/popper-max-size-modifier-0.2.0.tgz#1574744401296a488b4974909d130a85db94256f"
@@ -13701,6 +13745,14 @@ style-loader@^0.20.1:
 style-value-types@^3.1.9:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/style-value-types/-/style-value-types-3.2.0.tgz#eb89cab1340823fa7876f3e289d29d99c92111bb"
+  dependencies:
+    hey-listen "^1.0.8"
+    tslib "^1.10.0"
+
+style-value-types@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/style-value-types/-/style-value-types-4.0.1.tgz#23f05dd03e8a850654defc22cf03ebac572aaa00"
+  integrity sha512-aOV/HHyynIyTmU27qfs0oAHhFde6BFIvV4+nMerE2MAPZMwYOeQk1/F3S6djxF2u4HdbiieCPs3ZzWsbNUoc9A==
   dependencies:
     hey-listen "^1.0.8"
     tslib "^1.10.0"
