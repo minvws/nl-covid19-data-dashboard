@@ -1,6 +1,7 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import ExternalLinkIcon from '~/assets/external-link.svg';
+import { asResponsiveArray } from '~/style/utils';
 import { Box } from './base';
 import { ExternalLink } from './external-link';
 import { Tile } from './tile';
@@ -30,13 +31,13 @@ export function NewsMessage(props: NewsMessageProps) {
     <Tile
       css={css({
         bg: 'contextualContent',
-        flexDirection: [null, 'row'],
+        flexDirection: asResponsiveArray({ lg: 'row' }),
       })}
     >
-      <Box flex="1 1 25%">
+      <Box flex={{ lg: '1 1 25%' }}>
         <img src={imageSrc} />
       </Box>
-      <Box flex="1 1 75%" pl={[null, 4]}>
+      <Box flex={{ lg: '1 1 75%' }} pl={[null, 4]}>
         <Text mt={0} color="gray">
           {subtitle}
           {' • '}
