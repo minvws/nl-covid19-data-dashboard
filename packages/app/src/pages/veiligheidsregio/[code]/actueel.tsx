@@ -34,7 +34,6 @@ const SafetyRegionActueel: FCWithLayout<typeof getStaticProps> = (props) => {
   const router = useRouter();
   const text = siteText.veiligheidsregio_actueel;
   const escalationText = siteText.escalatie_niveau;
-  const riskLevelText = siteText.risiconiveau_maatregelen;
 
   const regionCode = router.query.code;
 
@@ -54,10 +53,10 @@ const SafetyRegionActueel: FCWithLayout<typeof getStaticProps> = (props) => {
 
       <Tile>
         <RiskLevelIndicator
-          title={riskLevelText.title}
-          description={riskLevelText.description.vr}
+          title={text.risoconiveau_maatregelen.title}
+          description={text.risoconiveau_maatregelen.description}
           link={{
-            title: riskLevelText.bekijk_href,
+            title: text.risoconiveau_maatregelen.bekijk_href,
             href: `/veiligheidsregio/${regionCode}/maatregelen`,
           }}
           escalationLevel={filteredRegion.escalation_level}

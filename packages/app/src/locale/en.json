@@ -2021,6 +2021,11 @@
       "selecteer_titel": "Risiconiveaus",
       "selecteer_toelichting": "De kaart geeft het risiconiveau per veiligheidsregio weer.\n\n[Meer over de risiconiveaus](/over-risiconiveaus)"
     },
+    "risoconiveau_maatregelen": {
+      "title": "Risiconiveau & maatregelen",
+      "description": "Voor de veiligheidsregio geldt het risiconiveau",
+      "bekijk_href": "Bekijk de maatregelen"
+    },
     "quick_links": {
       "header": "Bekijk alle cijfers van het dashboard",
       "links": {
@@ -2034,6 +2039,11 @@
     "risiconiveaus": {
       "selecteer_titel": "Risiconiveaus",
       "selecteer_toelichting": "De kaart geeft het risiconiveau per veiligheidsregio weer.\n\n[Meer over de risiconiveaus](/over-risiconiveaus)"
+    },
+    "risoconiveau_maatregelen": {
+      "title": "Risiconiveau & maatregelen",
+      "description": "Voor de veiligheidsregio van deze gemeente geldt het risiconiveau",
+      "bekijk_href": "Bekijk de maatregelen"
     },
     "quick_links": {
       "header": "Bekijk alle cijfers van het dashboard",
@@ -2128,13 +2138,5 @@
         "last_sentence": ""
       }
     }
-  },
-  "risiconiveau_maatregelen": {
-    "title": "Risiconiveau & maatregelen",
-    "description": {
-      "vr": "Voor de veiligheidsregio van deze veiligheidsregio geldt het risiconiveau",
-      "gm": "Voor de veiligheidsregio van deze gemeente geldt het risiconiveau"
-    },
-    "bekijk_href": "Bekijk de maatregelen"
   }
 }
