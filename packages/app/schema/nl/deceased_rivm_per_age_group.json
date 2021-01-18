@@ -21,8 +21,6 @@
         "age_group_range",
         "age_group_percentage",
         "covid_percentage",
-        "date_start_unix",
-        "date_end_unix",
         "date_of_insertion_unix"
       ],
       "properties": {
@@ -34,12 +32,6 @@
         },
         "covid_percentage": {
           "type": "number"
-        },
-        "date_start_unix": {
-          "type": "integer"
-        },
-        "date_end_unix": {
-          "type": "integer"
         },
         "date_of_insertion_unix": {
           "type": "integer"
