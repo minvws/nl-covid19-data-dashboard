@@ -59,17 +59,16 @@ export default function Icon(props) {
           <Box padding={4}>
             <Grid columns={[4, 6]} gap={[1, 1, 2, 3]}>
               {allIcons.map((icon) => (
-                  <Flex
-                    key={icon[0]}
-                    direction="column"
-                    align="center"
-                    onClick={(event) => onChange(createPatchFrom(icon[0]))}
-                  >
-                    <img src={icon[1]} width="36" height="36" />
-                    <Radio checked={value === icon[0]} readOnly />
-                  </Flex>
-                );
-              )}
+                <Flex
+                  key={icon[0]}
+                  direction="column"
+                  align="center"
+                  onClick={(event) => onChange(createPatchFrom(icon[0]))}
+                >
+                  <img src={icon[1]} width="36" height="36" />
+                  <Radio checked={value === icon[0]} readOnly />
+                </Flex>
+              ))}
 
               <Flex
                 direction="column"
