@@ -104,27 +104,6 @@ const MunicipalityActueel: FCWithLayout<typeof getStaticProps> = (props) => {
               trendData={dataHospitalIntake.values}
               metricProperty="admissions_on_date_of_reporting"
             />
-            {/* 
-            <MiniTrendTile
-              title={text.mini_trend_tiles.ic_opnames.title}
-              text={
-                <DataDrivenText
-                  data={data}
-                  metricName="intensive_care_nice"
-                  metricProperty="admissions_moving_average"
-                  differenceKey="intensive_care_nice__admissions_moving_average"
-                  valueTexts={
-                    text.data_driven_texts.intake_intensivecare_ma.value
-                  }
-                  differenceTexts={
-                    text.data_driven_texts.intake_intensivecare_ma.difference
-                  }
-                />
-              }
-              icon={<ArtsIcon />}
-              trendData={dataIntake.values}
-              metricProperty="admissions_moving_average"
-            /> */}
           </MiniTrendTileLayout>
 
           <QuickLinks
