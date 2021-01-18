@@ -18,7 +18,7 @@ interface QuickLink {
 export function QuickLinks({ header, links }: QuickLinksProps) {
   return (
     <Box>
-      <Heading level={2} fontSize="18px">
+      <Heading level={2} fontSize="1.125rem">
         {header}
       </Heading>
       <List>
