@@ -11,7 +11,6 @@ import { colors } from '~/style/theme';
 import { NationalTestedPerAgeGroupValue } from '~/types/data.d';
 import { formatPercentage } from '~/utils/formatNumber';
 import { AgeDemographicCoordinates } from './age-demographic-coordinates';
-import { useBreakpoints } from '~/utils/useBreakpoints';
 export const AGE_GROUP_TOOLTIP_WIDTH = 340;
 
 const text = siteText.infected_age_groups;
@@ -63,9 +62,6 @@ export const AgeDemographicChart = memo<AgeDemographicChartProps>(
       values,
       ageGroupRange,
     } = coordinates;
-
-    const { xs } = useBreakpoints();
-    const numTicksOnBreakpoint = xs ? numTicks : 2;
 
     return (
       <svg
@@ -178,7 +174,7 @@ export const AgeDemographicChart = memo<AgeDemographicChartProps>(
           scale={ageGroupPercentageScale}
           left={margin.left}
           top={height - margin.bottom}
-          numTicks={numTicksOnBreakpoint}
+          numTicks={numTicks}
           hideTicks={true}
           hideAxisLine={true}
           tickFormat={(a) => `${formatPercentage(a as number)}%`}
@@ -189,7 +185,7 @@ export const AgeDemographicChart = memo<AgeDemographicChartProps>(
           scale={infectedPercentageScale}
           left={width / 2 + ageRangeAxisWidth / 2}
           top={height - margin.bottom}
-          numTicks={numTicksOnBreakpoint}
+          numTicks={numTicks}
           hideTicks={true}
           hideAxisLine={true}
           tickFormat={(a) => `${formatPercentage(a as number)}%`}
