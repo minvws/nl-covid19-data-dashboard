@@ -40,17 +40,24 @@ export interface AgeDemographicCoordinates {
 export function useAgeDemographicCoordinates(
   data: NationalTestedPerAgeGroup,
   isSmallScreen: boolean,
-  parentWidth: number
+  parentWidth: number,
+  isExtraSmallScreen: boolean
 ) {
   return useMemo(() => {
-    return calculateAgeDemographicCoordinates(data, isSmallScreen, parentWidth);
-  }, [data, isSmallScreen, parentWidth]);
+    return calculateAgeDemographicCoordinates(
+      data,
+      isSmallScreen,
+      parentWidth,
+      isExtraSmallScreen
+    );
+  }, [data, isSmallScreen, parentWidth, isExtraSmallScreen]);
 }
 
 function calculateAgeDemographicCoordinates(
   data: NationalTestedPerAgeGroup,
   isSmallScreen: boolean,
-  parentWidth: number
+  parentWidth: number,
+  isExtraSmallScreen: boolean
 ): AgeDemographicCoordinates {
   const values = data.values.sort((a, b) => {
     return b.age_group_range.localeCompare(a.age_group_range);
@@ -71,7 +78,7 @@ function calculateAgeDemographicCoordinates(
     right: marginX,
   };
 
-  const numTicks = isSmallScreen ? 3 : 4;
+  const numTicks = isSmallScreen ? (isExtraSmallScreen ? 3 : 2) : 4;
 
   // Bounds of the graph
   const xMax = (width - margin.left - margin.right - ageRangeAxisWidth) / 2;

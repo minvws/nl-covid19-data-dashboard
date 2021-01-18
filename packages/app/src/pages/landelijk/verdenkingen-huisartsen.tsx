@@ -15,6 +15,7 @@ import { getNlData, getLastGeneratedDate } from '~/static-props/get-data';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 
 const text = siteText.verdenkingen_huisartsen;
+const graphDescriptions = siteText.accessibility.grafieken;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -81,6 +82,7 @@ const SuspectedPatients: FCWithLayout<typeof getStaticProps> = (props) => {
         <ChartTileWithTimeframe
           title={text.linechart_titel}
           metadata={{ source: text.bronnen.nivel }}
+          ariaDescription={graphDescriptions.verdenkingen_huisartsen}
           timeframeOptions={['all', '5weeks']}
         >
           {(timeframe) => (

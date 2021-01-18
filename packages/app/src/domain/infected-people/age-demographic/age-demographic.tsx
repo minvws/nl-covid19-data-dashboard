@@ -19,14 +19,16 @@ interface AgeDemographicProps {
 
 export function AgeDemographic({ data }: AgeDemographicProps) {
   const [sizeRef, size] = useElementSize<HTMLDivElement>(400);
-  const breakpoints = useBreakpoints();
-  const isSmallScreen = !breakpoints.xl;
+  const { xs, xl } = useBreakpoints();
+  const isSmallScreen = !xl;
+  const isExtraSmallScreen = xs;
 
   // Calculate graph's coordinates based on the data, the component width and wheher we are on a small screen or not.
   const coordinates = useAgeDemographicCoordinates(
     data,
     isSmallScreen,
-    size.width
+    size.width,
+    isExtraSmallScreen
   );
 
   // Generate tooltip event handlers and state based on values and tooltip coordinates callback

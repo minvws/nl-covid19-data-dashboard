@@ -35,6 +35,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const text = siteText.veiligheidsregio_rioolwater_metingen;
+const graphDescriptions = siteText.accessibility.grafieken;
 
 const SewerWater: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data, safetyRegionName } = props;
@@ -133,6 +134,7 @@ const SewerWater: FCWithLayout<typeof getStaticProps> = (props) => {
         {lineChartData && (
           <ChartTileWithTimeframe
             title={text.linechart_titel}
+            ariaDescription={graphDescriptions.rioolwater_meetwaarde}
             metadata={{ source: text.bronnen.rivm }}
             timeframeOptions={['all', '5weeks']}
           >
@@ -175,6 +177,7 @@ const SewerWater: FCWithLayout<typeof getStaticProps> = (props) => {
             title={replaceVariablesInText(text.bar_chart_title, {
               safetyRegion: safetyRegionName,
             })}
+            ariaDescription={graphDescriptions.rioolwater_meetwaarde}
             metadata={{
               date: [
                 sewerAverages.last_value.date_start_unix,

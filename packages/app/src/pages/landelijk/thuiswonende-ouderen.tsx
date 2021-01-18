@@ -24,6 +24,7 @@ import {
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 
 const text = siteText.thuiswonende_ouderen;
+const graphDescriptions = siteText.accessibility.grafieken;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -100,6 +101,7 @@ const ElderlyAtHomeNationalPage: FCWithLayout<typeof getStaticProps> = ({
           timeframeOptions={['all', '5weeks']}
           title={text.section_positive_tested.line_chart_daily_title}
           values={elderlyAtHomeData.values}
+          ariaDescription={graphDescriptions.thuiswonende_ouderen_besmettingen}
           linesConfig={[
             {
               metricProperty: 'positive_tested_daily',
@@ -168,6 +170,7 @@ const ElderlyAtHomeNationalPage: FCWithLayout<typeof getStaticProps> = ({
           timeframeOptions={['all', '5weeks']}
           title={text.section_deceased.line_chart_daily_title}
           values={elderlyAtHomeData.values}
+          ariaDescription={graphDescriptions.thuiswonende_ouderen_overleden}
           linesConfig={[
             {
               metricProperty: 'deceased_daily',
