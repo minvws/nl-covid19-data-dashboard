@@ -6,20 +6,27 @@ import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
+import { SEOHead } from '~/components/seoHead';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
-import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
-import {
-  getSafetyRegionPaths,
-  getSafetyRegionStaticProps,
-  ISafetyRegionData,
-} from '~/static-props/safetyregion-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import { getLastGeneratedDate, getVrData } from '~/static-props/get-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
-const text = siteText.veiligheidsregio_thuiswonende_ouderen;
+export { getStaticPaths } from '~/static-paths/vr';
 
-const ElderlyAtHomeRegionalPage: FCWithLayout<ISafetyRegionData> = (props) => {
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getVrData
+);
+
+const text = siteText.veiligheidsregio_thuiswonende_ouderen;
+const graphDescriptions = siteText.accessibility.grafieken;
+
+const ElderlyAtHomeRegionalPage: FCWithLayout<typeof getStaticProps> = (
+  props
+) => {
   const { safetyRegionName, data } = props;
   const elderlyAtHomeData = data.elderly_at_home;
 
@@ -94,6 +101,7 @@ const ElderlyAtHomeRegionalPage: FCWithLayout<ISafetyRegionData> = (props) => {
           timeframeOptions={['all', '5weeks']}
           title={text.section_positive_tested.line_chart_daily_title}
           values={elderlyAtHomeData.values}
+          ariaDescription={graphDescriptions.thuiswonende_ouderen_besmettingen}
           linesConfig={[
             {
               metricProperty: 'positive_tested_daily',
@@ -139,6 +147,7 @@ const ElderlyAtHomeRegionalPage: FCWithLayout<ISafetyRegionData> = (props) => {
         <LineChartTile
           timeframeOptions={['all', '5weeks']}
           title={text.section_deceased.line_chart_daily_title}
+          ariaDescription={graphDescriptions.thuiswonende_ouderen_overleden}
           values={elderlyAtHomeData.values}
           linesConfig={[
             {
@@ -153,8 +162,5 @@ const ElderlyAtHomeRegionalPage: FCWithLayout<ISafetyRegionData> = (props) => {
 };
 
 ElderlyAtHomeRegionalPage.getLayout = getSafetyRegionLayout();
-
-export const getStaticProps = getSafetyRegionStaticProps;
-export const getStaticPaths = getSafetyRegionPaths();
 
 export default ElderlyAtHomeRegionalPage;

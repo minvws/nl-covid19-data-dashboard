@@ -11,7 +11,6 @@ import { colors } from '~/style/theme';
 import { NationalTestedPerAgeGroupValue } from '~/types/data.d';
 import { formatPercentage } from '~/utils/formatNumber';
 import { AgeDemographicCoordinates } from './age-demographic-coordinates';
-
 export const AGE_GROUP_TOOLTIP_WIDTH = 340;
 
 const text = siteText.infected_age_groups;
