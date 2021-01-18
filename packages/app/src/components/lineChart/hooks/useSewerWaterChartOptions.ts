@@ -210,7 +210,10 @@ export function useSewerWaterChartOptions<
           description: replaceVariablesInText(text.daily_label_text, {
             name: selectedRWZI,
           }),
-          color: colors.data.secondary,
+          color:
+            installationNames.length > 1
+              ? colors.data.secondary
+              : colors.data.primary,
           allowPointSelect: false,
           marker: {
             symbol: 'circle',
