@@ -25,7 +25,6 @@ export function ArticleList({ articleSummaries, hideLink }: ArticleListProps) {
       css={css({
         display: 'flex',
         flexDirection: 'column',
-        padding: 4,
       })}
     >
       <Heading level={2}>
