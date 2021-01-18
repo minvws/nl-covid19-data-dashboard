@@ -7,7 +7,6 @@ import {
 } from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
 import { LinkWithIcon } from '~/components-styled/link-with-icon';
-import { Tile } from '~/components-styled/tile';
 import { Heading, Text } from '~/components-styled/typography';
 import siteText from '~/locale';
 import { asResponsiveArray } from '~/style/utils';
@@ -22,7 +21,7 @@ export function ArticleList({ articleSummaries, hideLink }: ArticleListProps) {
   const breakpoints = useBreakpoints();
 
   return (
-    <Tile>
+    <Box>
       <Heading level={2}>
         {siteText.nationaal_actueel.latest_articles.title}
       </Heading>
@@ -71,7 +70,7 @@ export function ArticleList({ articleSummaries, hideLink }: ArticleListProps) {
           </ArticleBox>
         ))}
       </Box>
-    </Tile>
+    </Box>
   );
 }
 
