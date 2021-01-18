@@ -59,12 +59,7 @@ export function ArticleList({ articleSummaries, hideLink }: ArticleListProps) {
           )}
         </Box>
       </Box>
-      <Box
-        display="flex"
-        spacingHorizontal={breakpoints.lg}
-        flexDirection={{ _: 'column', lg: 'row' }}
-        flexWrap="wrap"
-      >
+      <Box display="block" margin={0} maxWidth="100%" mt={3}>
         {articleSummaries.map((summary) => (
           <ArticleBox key={summary.slug.current}>
             <ArticleTeaser
@@ -75,6 +70,14 @@ export function ArticleList({ articleSummaries, hideLink }: ArticleListProps) {
             />
           </ArticleBox>
         ))}
+        <ArticleBox key={'JA'}>
+          <ArticleTeaser
+            title={articleSummaries[0].title}
+            slug={articleSummaries[0].slug.current}
+            summary={articleSummaries[0].summary}
+            cover={articleSummaries[0].cover}
+          />
+        </ArticleBox>
       </Box>
     </Box>
   );
@@ -82,8 +85,16 @@ export function ArticleList({ articleSummaries, hideLink }: ArticleListProps) {
 
 const ArticleBox = styled.div(
   css({
-    flex: '0 0 auto',
-    marginTop: 3,
-    marginRight: asResponsiveArray({ _: 0, lg: 4 }),
+    display: 'inline-block',
+    marginBottom: 4,
+    width: asResponsiveArray({
+      _: '100%',
+      sm: '50%',
+      md: 'calc(33% - 32px)',
+      lg: 'calc(33% - 32px)',
+    }),
+    '&:nth-child(3n+2)': {
+      mx: asResponsiveArray({ md: 4, lg: 4 }),
+    },
   })
 );
