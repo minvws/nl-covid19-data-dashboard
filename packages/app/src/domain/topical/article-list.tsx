@@ -31,7 +31,7 @@ export function ArticleList({ articleSummaries, hideLink }: ArticleListProps) {
         alignItems={{ lg: 'flex-end' }}
         flexDirection={{ _: 'column', lg: 'row' }}
       >
-        <Box flex={{ _: undefined, lg: '0 0 33%' }}>
+        <Box flex={{ lg: '0 0 33%' }}>
           <Text m={0}>
             {siteText.nationaal_actueel.latest_articles.subtitle}
           </Text>
