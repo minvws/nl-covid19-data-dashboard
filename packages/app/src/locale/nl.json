@@ -591,6 +591,11 @@
     "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
     "url": "https://coronadashboard.rijksoverheid.nl/verantwoording"
   },
+  "articles_metadata": {
+    "title": "Artikelen Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
+    "description": "",
+    "url": "https://coronadashboard.rijksoverheid.nl/artikelen"
+  },
   "metadata": {
     "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
     "titel": "COVID-19 Dashboard foutmelding | Rijksoverheid.nl",
@@ -676,6 +681,11 @@
         "veiligheidsregio": "Cijfers per veiligheidsregio",
         "gemeente": "Cijfers per gemeente"
       }
+    },
+    "latest_articles": {
+      "title": "Wekelijkse berichten",
+      "subtitle": "Elke week wordt hier een nieuw bericht geplaatst die een bepaald onderwerp rondom het corona virus uitlegt.",
+      "all_articles": "Bekijk alle artikelen"
     }
   },
   "regionaal_index": {
@@ -718,7 +728,8 @@
     "niveau": "niveau",
     "clear_select_input": "Leegmaken",
     "gisteren": "Gisteren",
-    "vandaag": "Vandaag"
+    "vandaag": "Vandaag",
+    "read_more": "Lees meer"
   },
   "seoHead": {
     "default_description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",

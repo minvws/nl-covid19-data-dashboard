@@ -1,7 +1,4 @@
-const supportedLanguages = [
-  { id: "nl", title: "Nederlands", isDefault: true },
-  { id: "en", title: "Engels" },
-];
+import { supportedLanguages } from "./supported-languages";
 
 export default {
   name: "localeString",

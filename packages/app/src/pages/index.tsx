@@ -1,8 +1,10 @@
+import { groq } from 'next-sanity';
 import { useRouter } from 'next/router';
 import ArtsIcon from '~/assets/arts.svg';
 import GetestIcon from '~/assets/test.svg';
 import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
 import { Box } from '~/components-styled/base';
+import { ArticleSummary } from '~/components-styled/article-teaser';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
@@ -16,6 +18,7 @@ import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-ch
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
+import { ArticleList } from '~/domain/topical/article-list';
 import { Search } from '~/domain/topical/components/search';
 import { DataSitemap } from '~/domain/topical/data-site-map';
 import { EscalationLevelExplanationsTile } from '~/domain/topical/escalation-level-explanations-tile';
@@ -24,6 +27,7 @@ import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
+  createGetContent,
   getLastGeneratedDate,
   getNlData,
   getText,
@@ -39,6 +43,9 @@ export const getStaticProps = createGetStaticProps(
     }),
     gm: ({ tested_overall }) => ({ tested_overall }),
   }),
+  createGetContent<ArticleSummary[]>(
+    groq`*[_type == 'article'] | order(publicationDate) {title, slug, summary, cover}[0..2]`
+  ),
   () => {
     const data = getNlData();
 
@@ -59,7 +66,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const Home: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { text: siteText, data, choropleth } = props;
+  const { text: siteText, data, choropleth, content } = props;
   const router = useRouter();
   const notificatie = siteText.notificatie;
   const text = siteText.nationaal_actueel;
@@ -196,6 +203,8 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
           <EscalationLevelExplanationsTile />
 
           <DataSitemap />
+
+          <ArticleList articleSummaries={content} />
         </TileList>
       </MaxWidth>
     </Box>

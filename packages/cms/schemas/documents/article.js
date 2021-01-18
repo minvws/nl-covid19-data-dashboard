@@ -1,11 +1,11 @@
 export default {
-  title: 'Artikel',
-  name: 'article',
-  type: 'document',
+  title: "Artikel",
+  name: "article",
+  type: "document",
   fieldsets: [
     {
-      title: 'Metadata',
-      name: 'metadata',
+      title: "Metadata",
+      name: "metadata",
       options: {
         collapsible: true,
         collapsed: true,
@@ -14,68 +14,102 @@ export default {
   ],
   fields: [
     {
-      title: 'Titel',
-      name: 'title',
-      type: 'localeString',
+      title: "Titel",
+      name: "title",
+      type: "localeString",
+      validation: (Rule) =>
+        Rule.fields({
+          nl: (fieldRule) => fieldRule.reset().required(),
+          en: (fieldRule) => fieldRule.reset().required(),
+        }),
     },
     {
-      title: 'Slug',
-      name: 'slug',
-      type: 'slug',
+      title: "Slug",
+      name: "slug",
+      type: "slug",
       options: {
-        source: 'title.nl',
+        source: "title.nl",
       },
-      fieldset: 'metadata',
+      fieldset: "metadata",
     },
     {
-      title: 'Meta description',
-      name: 'metaDescription',
-      type: 'localeString',
-      fieldset: 'metadata',
+      title: "Meta description",
+      name: "metaDescription",
+      type: "localeString",
+      fieldset: "metadata",
+      validation: (Rule) =>
+        Rule.fields({
+          nl: (fieldRule) => fieldRule.reset().required(),
+          en: (fieldRule) => fieldRule.reset().required(),
+        }),
     },
     {
-      title: 'Publicatie datum',
-      name: 'publicationDate',
-      type: 'datetime',
+      title: "Publicatie datum",
+      name: "publicationDate",
+      type: "datetime",
       options: {
-        dateFormat: 'YYYY-MM-DD',
-        timeFormat: 'HH:mm',
+        dateFormat: "YYYY-MM-DD",
+        timeFormat: "HH:mm",
         timeStep: 15,
-        calendarTodayLabel: 'Today',
+        calendarTodayLabel: "Today",
       },
-      fieldset: 'metadata',
+      fieldset: "metadata",
+      validation: (Rule) => Rule.required(),
     },
     {
-      title: 'Intro',
-      name: 'intro',
-      type: 'localeBlock',
+      title: "Samenvatting",
+      description:
+        "Dit is een korte samenvatting van het artikel die getoond wordt in de artikelblokken op de overzichtspagina.",
+      name: "summary",
+      type: "localeText",
+      validation: (Rule) =>
+        Rule.fields({
+          nl: (fieldRule) => fieldRule.reset().required().max(120),
+          en: (fieldRule) => fieldRule.reset().required().max(120),
+        }),
     },
     {
-      title: 'Afbeelding',
-      name: 'cover',
-      type: 'image',
+      title: "Intro",
+      name: "intro",
+      type: "localeBlock",
+      validation: (Rule) =>
+        Rule.fields({
+          nl: (fieldRule) => fieldRule.reset().required(),
+          en: (fieldRule) => fieldRule.reset().required(),
+        }),
+    },
+    {
+      title: "Afbeelding",
+      name: "cover",
+      type: "image",
       options: {
-        hotspot: true
+        hotspot: true,
       },
       fields: [
         {
-          title: 'Alternatieve tekst (toegankelijkheid)',
-          name: 'alt',
-          type: 'localeString',
+          title: "Alternatieve tekst (toegankelijkheid)",
+          name: "alt",
+          type: "localeString",
         },
       ],
+      validation: (Rule) => Rule.required(),
     },
     {
-      title: 'Content',
-      name: 'content',
-      type: 'localeRichContentBlock',
+      title: "Content",
+      name: "content",
+      type: "localeRichContentBlock",
+      validation: (Rule) =>
+        Rule.fields({
+          nl: (fieldRule) => fieldRule.reset().required(),
+          en: (fieldRule) => fieldRule.reset().required(),
+        }),
     },
   ],
   preview: {
     select: {
-      title: 'title.nl',
-      subtitle: 'publicationDate',
-      media: 'cover',
+      title: "title.nl",
+      subtitle: "publicationDate",
+      media: "cover",
     },
   },
 };
