@@ -1,3 +1,4 @@
+import { EscalationLevels } from '@corona-dashboard/common';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Notification from '~/assets/notification.svg';
@@ -29,7 +30,6 @@ import {
   getText,
 } from '~/static-props/get-data';
 import theme from '~/style/theme';
-import { EscalationLevels } from '~/types/data';
 import { assert } from '~/utils/assert';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
