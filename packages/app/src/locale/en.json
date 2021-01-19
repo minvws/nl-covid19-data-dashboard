@@ -9,8 +9,8 @@
     "title": "Last updated"
   },
   "notificatie": {
-    "titel": "Slight decline visible",
-    "bericht": "For the second week in a row, the number of COVID-19 positives decreased slightly . The percentage of people with a positive test result also declined somewhat. In the week of 4 to 10 January, less people with COVID-19 were newly admitted to the hospital and ICU, compared to the week before. Also, there were less newly reported infected locations of nursing homes and residential care centers in the past week. The decreasing numbers are a first effect of the lockdown that started on 15 December.",
+    "titel": "New COVID-19 variant overshadows more positive developments",
+    "bericht": "A moderately positive overview can be observed in the week of 13 to 19 January, as an effect of the lockdown that started on 15 December. In that week, the reported number of people who tested positive for COVID-19 decreased by 21.5% compared to the week before, dropping to 38.776 newly reported COVID-19 infections. This overview is overshadowed by the rising number of cases involving the SARS-CoV-2 variant that resulted in a massive influx of patients in hospitals in the United Kingdom and Ireland. It is estimated that in the Netherlands about 10% of the people who became infected last week have the more contagious UK variant. That is twice as many compared to the week before that. \nWe are facing two variants of the virus that seem to be spreading in the Netherlands at different speeds. As a result, there are essentially two separate COVID-19 epidemics: one epidemic involving the ‘old’ variant, in which infections are decreasing, and another epidemic involving the UK variant, in which infections are increasing.",
     "link": {
       "text": "View the full message from the RIVM",
       "href": "https://www.rivm.nl/en/novel-coronavirus-covid-19/current-information"
@@ -974,7 +974,7 @@
   },
   "laatste_ontwikkelingen": {
     "title": "Latest developments",
-    "menu_subtitle": "Slight decline visible",
+    "menu_subtitle": "Increase of new COVID-19 variant",
     "alle_cijfers_header": "Want to see all data?",
     "alle_cijfers_link": "View all"
   },

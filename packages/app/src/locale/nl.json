@@ -9,8 +9,8 @@
     "title": "Laatst bijgewerkt"
   },
   "notificatie": {
-    "titel": "Voorzichtige daling zichtbaar",
-    "bericht": "Voor de tweede week op rij is het aantal meldingen iets gedaald. Het percentage mensen met een positieve coronatestuitslag daalde licht. Het aantal nieuwe ziekenhuis- en IC-opnames lag lager dan de week daarvoor. Ook werden er minder nieuwe verpleeghuizen met coronabesmettingen gemeld. De dalende cijfers zijn een eerste effect van de lockdown die op 15 december inging.",
+    "titel": "Opmars nieuwe coronavarianten overschaduwt positiever beeld",
+    "bericht": "We zien een gematigd positief beeld in de week van 13 tot en met 19 januari, een effect van de lockdown die op 15 december inging. Het aantal meldingen van mensen met een positieve coronatestuitslag is in die week, in vergelijking met de week ervoor, met 21,5% gedaald naar 38.776 meldingen. Dit actuele beeld wordt overschaduwd door de snelle opmars van de coronavariant die in het Verenigd Koninkrijk en Ierland tot een zeer hoge toestroom aan patiënten in de ziekenhuizen heeft geleid. Geschat wordt dat van de mensen die afgelopen week besmet werden in Nederland, er ongeveer 10% de meer besmettelijke Britse variant heeft. Dat is een verdubbeling ten opzichte van de week ervoor. We hebben te maken met twee virusvarianten die zich met verschillende snelheden lijken te verspreiden in Nederland. Daardoor zijn er eigenlijk twee aparte corona-epidemieën. Een epidemie met de ‘oude’ variant, waarin het aantal infecties daalt, en een epidemie met de Britse variant waarin het aantal infecties juist toeneemt.",
     "link": {
       "text": "Bekijk de toelichting van het RIVM",
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel"
@@ -974,7 +974,7 @@
   },
   "laatste_ontwikkelingen": {
     "title": "Laatste ontwikkelingen",
-    "menu_subtitle": "Voorzichtige daling zichtbaar",
+    "menu_subtitle": "Opmars nieuwe coronavariant",
     "alle_cijfers_header": "Benieuwd naar alle cijfers?",
     "alle_cijfers_link": "Bekijk alle cijfers"
   },
