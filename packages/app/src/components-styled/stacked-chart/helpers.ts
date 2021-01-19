@@ -52,15 +52,10 @@ export function isWeeklyValue(
 }
 
 /**
- * From all the defined values, extract the highest number so we know how to
- * scale the y-axis. We need to do this for each of the keys that are used to
- * render lines, so that the axis scales with whatever key contains the highest
- * values.
+ * From all the defined values, stack all values for each position and find the
+ * highest sum.
  */
-export function calculateYMax(
-  values: TrendValue[][],
-  signaalwaarde = -Infinity
-) {
+export function calculateYMaxStacked(values: TrendValue[][]) {
   const peakValues = values.map((list) =>
     list
       .map((x) => x.__value)
@@ -70,11 +65,13 @@ export function calculateYMax(
 
   const overallMaximum = Math.max(...peakValues);
 
+  return overallMaximum;
+
   /**
    * Value cannot be 0, hence the 1 If the value is below signaalwaarde, make
    * sure the signaalwaarde floats in the middle
    */
-  return Math.max(overallMaximum, signaalwaarde * 2, 1);
+  // return Math.max(overallMaximum, signaalwaarde * 2, 1);
 }
 
 /**

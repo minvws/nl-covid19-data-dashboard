@@ -43,6 +43,8 @@ import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { formatDateFromMilliseconds } from '~/utils/formatDate';
+import { Tile } from '~/components-styled/tile';
+import { StackedChart } from '~/components-styled/stacked-chart';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -98,6 +100,10 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
           }}
           reference={text.reference}
         />
+
+        <Tile>
+          <StackedChart />
+        </Tile>
 
         <TwoKpiSection>
           <KpiTile

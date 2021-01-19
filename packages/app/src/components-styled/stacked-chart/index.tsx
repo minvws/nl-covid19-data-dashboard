@@ -8,16 +8,22 @@ import { colors } from '~/style/theme';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { Legenda } from '../legenda';
+import { getTrendData } from './helpers';
 import {
   ChartAxes,
-  ChartPadding,
+  // ChartPadding,
   ChartScales,
   defaultPadding,
-  HoverPoint,
+  // HoverPoint,
   Marker,
   Tooltip,
 } from './components';
-import { calculateYMax, NumberProperty, TrendValue, Value } from './helpers';
+import {
+  calculateYMaxStacked,
+  NumberProperty,
+  TrendValue,
+  Value,
+} from './helpers';
 
 const dateToValue = (d: Date) => d.valueOf() / 1000;
 const formatXAxis = (date: Date) =>
@@ -33,7 +39,7 @@ export type Config<T extends Value> = {
 
 export type StackedChartProps<T extends Value> = {
   values: T[];
-  config: Config<T>;
+  config: Config<T>[];
   valueAnnotation?: string;
   width?: number;
   height?: number;
@@ -44,6 +50,7 @@ export type StackedChartProps<T extends Value> = {
 };
 
 export function StackedChart<T extends Value>({
+  values,
   config,
   width = 500,
   height = 250,
@@ -60,17 +67,23 @@ export function StackedChart<T extends Value>({
     hideTooltip,
   } = useTooltip<T & TrendValue>();
 
+  const metricProperties = useMemo(() => config.map((x) => x.metricProperty), [
+    config,
+  ]);
+
+  const trendsList = useMemo(
+    () => getTrendData(values, metricProperties, 'all'),
+    [values, metricProperties, timeframe]
+  );
+
   const xDomain = useMemo(() => {
-    // const allData = trendsList.flat();
+    const allData = trendsList.flat();
     const domain = extent(allData.map((d) => d.__date));
 
     return isDefined(domain[0]) ? (domain as [Date, Date]) : undefined;
   }, [trendsList]);
 
-  const yMax = useMemo(() => calculateYMax(trendsList, signaalwaarde), [
-    trendsList,
-    signaalwaarde,
-  ]);
+  const yMax = useMemo(() => calculateYMaxStacked(trendsList), [trendsList]);
 
   const yDomain = useMemo(() => [0, yMax], [yMax]);
 
