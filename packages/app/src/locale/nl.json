@@ -2024,21 +2024,21 @@
   },
   "accessibility": {
     "grafieken": {
-      "reproductiegetal_verloop": "Dit is een grafiek die het reproductie getal over tijd weergeeft.",
-      "ziekenhuisopnames": "Dit is een grafiek die de ziekenhuisopnames over tijd weergeeft.",
-      "intensive_care_opnames": "Dit is een grafiek die de intensive care opnames over tijd weergeeft.",
-      "verpleeghuiszorg_positief_getest": "Dit is een grafiek die in de verpleeghuizen de postief getesten over tijd weergeeft.",
-      "verpleeghuiszorg_besmette_locaties": "Dit is een grafiek die in de verpleeghuizen de besmette locaties over tijd weergeeft.",
-      "verpleeghuiszorg_overleden_getest": "Dit is een grafiek die in de verpleeghuiszorg overleden getesten over tijd weergeeft.",
-      "gehandicaptenzorg_positief_getest": "Dit is een grafiek die in de gehandicaptenzorg postief getesten over tijd weergeeft.",
+      "reproductiegetal_verloop": "Deze grafiek geeft het reproductiegetal over tijd weer.",
+      "ziekenhuisopnames": "Deze grafiek toont het aantal ziekenhuisopnames over tijd.",
+      "intensive_care_opnames": "Deze grafiek geeft de intensive care opnames over tijd weer.",
+      "verpleeghuiszorg_positief_getest": "Deze grafiek toont het aantal bewoners van verpleeghuislocaties waarvan gemeld dat ze positief getest zijn op COVID-19.",
+      "verpleeghuiszorg_besmette_locaties": "Deze grafiek toont het aantal besmette verpleeghuislocaties over tijd.",
+      "verpleeghuiszorg_overleden_getest": "Deze grafiek toont het aantal overleden bewoners van verpleeghuislocaties waarvan gemeld dat ze positief getest zijn op COVID-19.",
+      "gehandicaptenzorg_positief_getest": "Deze grafiek toont het aantal bewoners van een instelling voor gehandicaptenzorg waarvan gemeld dat ze positief getest zijn op COVID-19.",
       "gehandicaptenzorg_besmette_locaties": "Deze grafiek toont het totaal aantal besmette gehandicaptenzorglocaties over tijd.",
       "gehandicaptenzorg_overleden": "Deze grafiek toont het aantal overleden bewoners van instellingen voor gehandicaptenzorg over tijd.",
-      "thuiswonende_ouderen_besmettingen": "Dit is een grafiek die bij de thuiswonende ouderen besmettingen over tijd weergeeft.",
-      "thuiswonende_ouderen_overleden": "Dit is een grafiek die bij de thuiswonende ouderen overleden over tijd weergeeft.",
-      "rioolwater_virusdeeltjes": "Dit is een grafiek die in het rioolwater virusdeeltjes over tijd weergeeft.",
-      "verdenkingen_huisartsen": "Dit is een grafiek die verdekingen van de huisartsen over tijd weergeeft.",
-      "ziekenhuis_opnames": "Dit is een grafiek die de ziekenhuis opnames over tijd weergeeft.",
-      "rioolwater_meetwaarde": "Dit is een grafiek die in het rioolwater de meetwaarde over tijd weergeeft."
+      "thuiswonende_ouderen_besmettingen": "Deze grafiek toont het aantal besmettingen onder thuiswonende ouderen over tijd.",
+      "thuiswonende_ouderen_overleden": "Deze grafiek toont het aantal aan COVID-19 overledenen onder thuiswonende ouderen over tijd.",
+      "rioolwater_virusdeeltjes": "Deze grafiek toont het gemiddeld aantal virusdeeltjes per 100.000 inwoners over tijd.",
+      "verdenkingen_huisartsen": "Deze grafiek toont het geschat aantal patiënten met eerste melding van COVID-19 klachten bij de huisarts over tijd.",
+      "ziekenhuis_opnames": "Deze grafiek toont het aantal ziekenhuisopnames over tijd.",
+      "rioolwater_meetwaarde": "Deze grafiek toont de meest recente meetwaarde van het gemiddeld aantal virusdeeltjes per 100.000 inwoners per rioolwaterzuiveringslocatie."
     }
   }
 }
