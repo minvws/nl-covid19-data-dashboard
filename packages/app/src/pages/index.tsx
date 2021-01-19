@@ -5,7 +5,7 @@ import ArtsIcon from '~/assets/arts.svg';
 import GetestIcon from '~/assets/test.svg';
 import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
 import { ArticleSummary } from '~/components-styled/article-teaser';
-import { Box } from '~/components-styled/base';
+import { Box, Spacer } from '~/components-styled/base';
 import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
 import { MaxWidth } from '~/components-styled/max-width';
@@ -227,8 +227,6 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                 </Box>
               </>
             </TopicalTile>
-
-            <EscalationLevelExplanations />
 
             <DataSitemap />
 

@@ -184,7 +184,7 @@ const MunicipalityActueel: FCWithLayout<typeof getStaticProps> = (props) => {
                 <Box
                   borderTopWidth="1px"
                   borderTopStyle="solid"
-                  borderTopColor="gray"
+                  borderTopColor="#DDD"
                   mt={3}
                   mx={-4}
                 >
