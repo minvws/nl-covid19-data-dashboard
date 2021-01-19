@@ -57,7 +57,7 @@ function MobileLockdownTable(props: LockdownTableData) {
                     {group.restrictions.map((restriction) => {
                       return (
                         <Box
-                          key={restriction.restriction}
+                          key={restriction._key}
                           display="flex"
                           flexDirection="row"
                           alignItems="center"
@@ -77,7 +77,7 @@ function MobileLockdownTable(props: LockdownTableData) {
                               <Box size={36} />
                             )}
                           </Box>
-                          <Box>{restriction.restriction}</Box>
+                          <Box>{restriction.text}</Box>
                         </Box>
                       );
                     })}
@@ -144,7 +144,7 @@ function DesktopLockdownTable(props: LockdownTableData) {
                           )}
                         </Box>
                         <Box as="span" ml={1}>
-                          {restriction.restriction}
+                          {restriction.text}
                         </Box>
                       </Box>
                     );

@@ -10,7 +10,7 @@ export default {
     {
       title: 'Maatregel',
       description: 'Beschrijf de maatregel voor deze categorie',
-      name: 'restriction',
+      name: 'text',
       type: 'localeString',
     },
     {
@@ -23,7 +23,7 @@ export default {
   ],
   preview: {
     select: {
-      title: 'restriction.nl',
+      title: 'text.nl',
       icon: 'icon',
     },
     prepare(selection) {

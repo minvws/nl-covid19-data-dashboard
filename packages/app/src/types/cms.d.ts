@@ -22,7 +22,7 @@ export type Restriction = {
   icon?: string;
   _key: strinig;
   _type: 'restriction';
-  restriction: string;
+  text: string;
 };
 
 export type LockdownDataGroup = {
