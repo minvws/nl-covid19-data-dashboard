@@ -9,13 +9,11 @@ import {
 import { useElementSize } from '~/utils/use-element-size';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { AGE_GROUP_TOOLTIP_WIDTH } from './age-demographic-chart';
+import { AgeDemographicDefaultValue } from './types';
 
-export interface AgeDemographicDefaultValue {
-  age_group_percentage: number;
-  age_group_range: string;
-}
-
-export interface AgeDemographicCoordinates<T> {
+export interface AgeDemographicCoordinates<
+  T extends AgeDemographicDefaultValue
+> {
   width: number;
   height: number;
   numTicks: number;
@@ -42,7 +40,11 @@ export interface AgeDemographicCoordinates<T> {
 
 export function useAgeDemographicCoordinates<
   T extends AgeDemographicDefaultValue
->(data: { values: T[] }, metricProperty: keyof T) {
+>(
+  data: { values: T[] },
+  metricProperty: keyof T,
+  visuallyMaxPercentage?: number
+) {
   const [ref, { width }] = useElementSize<HTMLDivElement>(400);
   const { xs, xl } = useBreakpoints();
   const isSmallScreen = !xl;
@@ -54,9 +56,17 @@ export function useAgeDemographicCoordinates<
       metricProperty,
       isSmallScreen,
       width,
-      isExtraSmallScreen
+      isExtraSmallScreen,
+      visuallyMaxPercentage
     );
-  }, [data, metricProperty, isSmallScreen, width, isExtraSmallScreen]);
+  }, [
+    data,
+    metricProperty,
+    isSmallScreen,
+    width,
+    isExtraSmallScreen,
+    visuallyMaxPercentage,
+  ]);
 
   return [ref, coordinates] as const;
 }
@@ -68,7 +78,8 @@ function calculateAgeDemographicCoordinates<
   metricProperty: keyof T,
   isSmallScreen: boolean,
   parentWidth: number,
-  isExtraSmallScreen: boolean
+  isExtraSmallScreen: boolean,
+  visuallyMaxPercentage?: number
 ): AgeDemographicCoordinates<T> {
   const values = data.values.sort((a, b) => {
     return b.age_group_range.localeCompare(a.age_group_range);
@@ -113,15 +124,24 @@ function calculateAgeDemographicCoordinates<
     ),
   ];
 
+  if (visuallyMaxPercentage) {
+    domainPercentages[1] = Math.min(
+      visuallyMaxPercentage,
+      domainPercentages[1]
+    );
+  }
+
   const ageGroupPercentageScale = scaleLinear({
     range: [xMax, 0],
     round: true,
     domain: domainPercentages,
+    clamp: true,
   });
   const infectedPercentageScale = scaleLinear({
     range: [0, xMax],
     round: true,
     domain: domainPercentages,
+    clamp: true,
   });
   const ageGroupRangeScale = scaleBand({
     range: [margin.top, height - margin.top],
