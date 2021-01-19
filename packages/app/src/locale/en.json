@@ -2024,21 +2024,21 @@
   },
   "accessibility": {
     "grafieken": {
-      "reproductiegetal_verloop": "",
-      "ziekenhuisopnames": "",
-      "intensive_care_opnames": "",
-      "verpleeghuiszorg_positief_getest": "",
-      "verpleeghuiszorg_besmette_locaties": "",
-      "verpleeghuiszorg_overleden_getest": "",
-      "gehandicaptenzorg_positief_getest": "",
+      "reproductiegetal_verloop": "This figure shows the progression over time of the reproduction number.",
+      "ziekenhuisopnames": "This figure shows the progression in hospital admissions over time.",
+      "intensive_care_opnames": "This figure shows the progression over time of intensive care admissions.",
+      "verpleeghuiszorg_positief_getest": "This figure shows the number of confirmed cases amongst nursing home residents.",
+      "verpleeghuiszorg_besmette_locaties": "This figure shows the progression of the number of infected nursing home locations over time.",
+      "verpleeghuiszorg_overleden_getest": "This figure shows the number of deceased confirmed cases amongst nursing home residents.",
+      "gehandicaptenzorg_positief_getest": "This figure shows the number of confirmed cases amongst disability care homes.",
       "gehandicaptenzorg_besmette_locaties": "This figure shows the progression of the number of infected disability care home locations over time.",
       "gehandicaptenzorg_overleden": "This figure shows the progression in the number of deceased disability care home residents over time.",
-      "thuiswonende_ouderen_besmettingen": "",
-      "thuiswonende_ouderen_overleden": "",
-      "rioolwater_virusdeeltjes": "",
-      "verdenkingen_huisartsen": "",
-      "ziekenhuis_opnames": "",
-      "rioolwater_meetwaarde": ""
+      "thuiswonende_ouderen_besmettingen": "This figure shows the progression over time in daily confirmed cases among over-70s living at home.",
+      "thuiswonende_ouderen_overleden": "This figure shows the progression over time in the number of COVID-19 deaths among over-70s living at home.",
+      "rioolwater_virusdeeltjes": "This figure shows the progression over time in the average amount of virus particles in waste water, per 100.000 residents.",
+      "verdenkingen_huisartsen": "This figure shows the progression over time in the estimated number of patients with symptoms that could indicate COVID-19.",
+      "ziekenhuis_opnames": "This figure shows the progression in hospital admissions over time.",
+      "rioolwater_meetwaarde": "This figure shows the most recent measured values of the average amount of virus particles per 100.000 residents per sewage processing facility."
     }
   }
 }
