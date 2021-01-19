@@ -84,6 +84,7 @@ const mediaQueries = {
 } as const;
 
 export const colors = {
+  body: '#000000',
   page: '#f3f3f3',
   blue: '#01689b',
   icon: '#01689b',
@@ -92,6 +93,7 @@ export const colors = {
   shadow: '#e5e5e5',
   gray: '#808080',
   lightGray: '#dfdfdf',
+  tileGray: '#f8f8f8',
   annotation: '#595959',
   header: '#cd005a',
   notification: '#cd005a',
@@ -123,8 +125,13 @@ export const colors = {
 const radii = [0, 5, 10];
 
 const shadows = {
-  tile: ' 0px 4px 8px rgba(0, 0, 0, 0.1)',
+  tile: '0px 4px 8px rgba(0, 0, 0, 0.1)',
 } as const;
+
+const sizes = {
+  maxWidth: 1400,
+  contentWidth: 700,
+};
 
 const theme = {
   fonts,
@@ -137,6 +144,7 @@ const theme = {
   colors,
   radii,
   shadows,
+  sizes,
 } as const;
 
 type Theme = typeof theme;

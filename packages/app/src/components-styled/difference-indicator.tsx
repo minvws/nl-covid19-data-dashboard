@@ -1,3 +1,9 @@
+import {
+  DifferenceDecimal,
+  DifferenceInteger,
+  formatNumber,
+  formatPercentage,
+} from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import {
@@ -13,13 +19,8 @@ import IconGelijk from '~/assets/gelijk.svg';
 import IconUp from '~/assets/pijl-omhoog.svg';
 import IconDown from '~/assets/pijl-omlaag.svg';
 import siteText from '~/locale/index';
-import { DifferenceDecimal, DifferenceInteger } from '~/types/data';
-import { formatDateFromMilliseconds } from '~/utils/formatDate';
-import { formatNumber, formatPercentage } from '~/utils/formatNumber';
-import { useIsMounted } from '~/utils/use-is-mounted';
 
 const text = siteText.toe_en_afname;
-const DAY_IN_SECONDS = 24 * 60 * 60;
 
 interface DifferenceIndicatorProps {
   value: DifferenceDecimal | DifferenceInteger;
@@ -127,15 +128,13 @@ function renderTileIndicator(
   isDecimal?: boolean,
   staticTimespan?: string
 ) {
-  const { difference, old_date_unix } = value;
+  const { difference } = value;
 
   const differenceFormattedString = isDecimal
     ? formatPercentage(Math.abs(difference))
     : formatNumber(Math.abs(difference));
 
-  const timespanTextNode = staticTimespan ?? (
-    <TimespanText date={old_date_unix} />
-  );
+  const timespanTextNode = staticTimespan ?? text.vorige_waarde;
 
   if (difference > 0) {
     const splitText = text.toename.split(' ');
@@ -211,41 +210,3 @@ const Container = styled.span(
     },
   })
 );
-
-function TimespanText({ date }: { date: number }) {
-  const isMounted = useIsMounted();
-
-  const fullDate = formatDateFromMilliseconds(date * 1000, 'medium');
-  const text = getTimespanText(date);
-
-  return <Span title={fullDate}>{isMounted ? text : fullDate}</Span>;
-}
-
-/**
- * @TODO discuss logic for this
- *
- * 6 days is more like a week
- * and 13 days more like two weeks
- *
- * Think this way we can prevent rounding errors. In our data timespans should
- * typically be a few days or a week or multiple weeks anyway.
- */
-function getTimespanText(oldDate: number) {
-  const days = Math.floor((Date.now() / 1000 - oldDate) / DAY_IN_SECONDS);
-
-  if (days < 2) {
-    return text.tijdverloop.gisteren;
-  }
-
-  if (days < 7) {
-    return `${days} ${text.tijdverloop.dagen} ${text.tijdverloop.geleden}`;
-  }
-
-  const weeks = Math.floor(days / 7);
-
-  if (weeks < 2) {
-    return `${weeks} ${text.tijdverloop.week.enkelvoud} ${text.tijdverloop.geleden}`;
-  }
-
-  return `${weeks} ${text.tijdverloop.week.meervoud} ${text.tijdverloop.geleden}`;
-}

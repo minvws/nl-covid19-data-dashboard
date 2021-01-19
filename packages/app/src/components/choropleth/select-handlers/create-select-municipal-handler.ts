@@ -1,5 +1,5 @@
 import { NextRouter } from 'next/router';
-import { MunicipalityProperties } from '../shared';
+import { MunicipalityProperties } from '@corona-dashboard/common';
 import { PageName } from './types';
 
 export type MunicipalitySelectionHandler = (

@@ -9,14 +9,12 @@ import {
   National,
   Regionaal,
   Regions,
-} from '~/types/data';
-import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
-import {
   sortMunicipalTimeSeriesInDataInPlace,
   sortNationalTimeSeriesInDataInPlace,
   sortRegionalTimeSeriesInDataInPlace,
-} from './sort-data';
+} from '@corona-dashboard/common';
 import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
+import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
 
 /**
  * Usage:
@@ -42,8 +40,14 @@ export function getLastGeneratedDate() {
   };
 }
 
-export function createGetContent<T>(query: string) {
-  return async () => {
+export function createGetContent<T>(
+  queryOrQueryGetter: string | ((context: GetStaticPropsContext) => string)
+) {
+  return async (context: GetStaticPropsContext) => {
+    const query =
+      typeof queryOrQueryGetter === 'function'
+        ? queryOrQueryGetter(context)
+        : queryOrQueryGetter;
     const rawContent = await getClient().fetch<T>(query);
     const content = localize(rawContent, [targetLanguage, 'nl']);
 

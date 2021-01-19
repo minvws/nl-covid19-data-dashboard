@@ -1,4 +1,9 @@
 {
+  "article_detail": {
+    "back_link": {
+      "text": "Terug naar alle artikelen"
+    }
+  },
   "andere_gegevens": "Andere gegevens",
   "blok_andere_gegevens": {
     "title": "Andere gegevens",
@@ -144,11 +149,11 @@
       "text": "NICE via RIVM"
     },
     "titel": "Ziekenhuisopnames per dag",
-    "pagina_toelichting": "Toestroom van patiënten met COVID-19 kan ervoor zorgen dat ziekenhuizen het te druk krijgen en zorg niet meer kunnen leveren. We houden hier op basis van verschillende bronnen bij hoeveel ziekenhuisbedden (exclusief IC) bezet worden door patiënten met COVID-19 en hoeveel patiënten dagelijks in de ziekenhuizen worden opgenomen, zowel landelijk als regionaal.  \n\nLet op: Sinds 14 januari wordt niet meer een driedaags gemiddelde getoond. In plaats daarvan staat het aantal ziekenhuisopnames die op één dag gemeld zijn. Verder staan in de grafiek met het verloop over tijd de ziekenhuisopnames gesorteerd op de dag dat mensen zijn opgenomen.   ",
-    "barscale_titel": "Ziekenhuisopnames per dag",
-    "extra_uitleg": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis (exclusief IC) is opgenomen. Dit cijfer is het aantal ziekenhuisopnames dat op één dag gemeld zijn. Dit kunnen ook meldingen zijn van opnamen van eerdere dagen. Dat komt omdat de registratie van ziekenhuisopnames vaak niet gelijk op de dag van opname gebeurt. Omdat het meldingen van één dag zijn, geeft dit cijfer toch een goed beeld van de actuele ontwikkeling van het aantal ziekenhuisopnames.",
-    "map_titel": "Verdeling ziekenhuisopnames in Nederland",
-    "map_toelichting": "Deze kaarten laten zien hoe de verdeling van ziekenhuisopnames is in Nederland. Hier worden de ziekenhuisopnames getoond die op één dag gemeld zijn bij Stichting NICE.",
+    "pagina_toelichting": "Groei van het aantal patiënten met COVID-19 kan ervoor zorgen dat ziekenhuizen het te druk krijgen. We houden hier het aantal patiënten bij dat met COVID-19 wordt opgenomen op de verpleegafdelingen van de ziekenhuizen en het aantal bedden dat daar door patiënten met COVID-19 wordt bezet. We houden dit zowel landelijk als regionaal bij en dat doen we op basis van verschillende bronnen. Let op: vanaf 14 januari wordt ook het aantal opnames dat op één dag gemeld is getoond (inclusief opnames op eerdere datums maar later gemeld). Er wordt geen driedaags gemiddelde meer getoond.",
+    "barscale_titel": "Gemeld aantal ziekenhuisopnames per dag",
+    "extra_uitleg": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis (exclusief IC) is opgenomen. Dit cijfer laat het aantal ziekenhuisopnames zien dat op één dag gemeld is. Dit kunnen ook meldingen zijn van opnames van eerdere dagen.",
+    "map_titel": "Woonplaats opgenomen patiënten",
+    "map_toelichting": "Deze kaarten laat zien in welke gemeenten of veiligheidsregio’s patiënten wonen die met COVID-19 op de verpleegafdeling van het ziekenhuis worden opgenomen. Let op: patiënten kunnen ook in een ander deel van Nederland worden opgenomen. De kaart laat dus niet zien hoeveel patiënten per ziekenhuis worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE. Tergooi, Ziekenhuis Amstelland en het Flevoziekenhuis delen hun COVID-19 ziekenhuisopnames op dit moment niet met Stichting NICE. Daardoor zijn de cijfers van sommige veiligheidsregio’s en gemeenten op de kaart lager dan eigenlijk het geval is.",
     "linechart_titel": "Ziekenhuisopnames over tijd",
     "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "chloropleth_legenda": {
@@ -184,20 +189,20 @@
       "title": "Bezetting ziekenhuisbedden over tijd",
       "description": "Deze grafiek toont het verloop in het aantal ziekenhuisbedden (exclusief IC-bedden) dat is bezet door patiënten met COVID-19."
     },
-    "linechart_description": "In deze grafiek staan de ziekenhuisopnames op basis van de dag dat mensen daadwerkelijk zijn opgenomen. Omdat de registratie van ziekenhuisopnames achter loopt en dit vaak niet op de dag van opname al gebeurd is, zijn de meest recente dagen nog onvolledig.",
+    "linechart_description": "In deze grafiek staan de ziekenhuisopnames vermeld op de dag dat mensen ook echt zijn opgenomen, in plaats van op de dag dat ze gemeld zijn. Zo kunnen we namelijk de ontwikkeling van het coronavirus in Nederland goed zien. Let op: omdat het aanmelden van ziekenhuisopnames vaak een paar dagen later gebeurt, zijn de meest recente dagen nooit compleet en kan het lijken alsof het aantal ziekenhuisopnames afneemt terwijl dit niet zo is.",
     "metadata": {
       "title": "Ziekenhuisopnames | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Landelijk overzicht van het aantal mensen met COVID-19 dat een ziekenhuis is opgenomen."
     },
     "titel_sidebar": "Ziekenhuisopnames",
-    "titel_kpi": "Aantal ziekenhuisopnames die op één dag gemeld zijn",
+    "titel_kpi": "Het aantal ziekenhuisopnames dat op één dag gemeld is.",
     "reference": {
       "href": "/verantwoording#ziekenhuizen",
       "text": "Lees meer over het tellen van ziekenhuisopnames en het verschil tussen diverse databronnen in de cijferverantwoording."
     },
     "tijdelijk_onbeschikbaar_titel": "",
     "tijdelijk_onbeschikbaar": "",
-    "kpi_titel": "Aantal ziekenhuisopnames die op één dag gemeld zijn"
+    "kpi_titel": "Het aantal ziekenhuisopnames dat op één dag gemeld is."
   },
   "positief_geteste_personen": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -280,7 +285,7 @@
     "lineLegendLabel": "Besmettelijke mensen",
     "geen_signaalwaarde_beschikbaar": "Vanwege een storing is deze informatie op dit moment helaas niet compleet. Aan een oplossing wordt gewerkt.",
     "geen_signaalwaarde_beschikbaar_lees_waarom": "Lees hier waarom",
-    "toelichting_pagina": "Als iemand het coronavirus oploopt, dan is deze persoon een tijd lang besmettelijk voor anderen. Hoe lang dit duurt verschilt van persoon tot persoon. Het aantal besmettelijke mensen is een schatting op basis van een aantal gegevensbronnen. Het exacte aantal is onbekend, maar we kunnen wel aangeven of het gaat om tientallen, honderden, duizenden of meer.",
+    "toelichting_pagina": "Als iemand het coronavirus oploopt, dan is deze persoon een tijd lang besmettelijk voor anderen. Hoe lang dit duurt verschilt van persoon tot persoon. Het aantal besmettelijke mensen is een schatting op basis van een aantal gegevensbronnen. Het exacte aantal is onbekend, maar we kunnen wel aangeven of het gaat om tientallen, honderden, duizenden of meer. ",
     "barscale_titel": "Gemiddeld aantal besmettelijke mensen per 100.000 inwoners",
     "barscale_screenreader_text": "{{value}} besmettelijke mensen",
     "cijfer_titel": "Geschat aantal besmettelijke mensen in Nederland:",
@@ -525,7 +530,7 @@
     "total_installation_count_description": "Wekelijks aantal rioolwaterzuiveringsinstallaties die minimaal één keer een meting hebben gerapporteerd. Het weekgemiddelde wordt berekend door het gemiddelde te nemen van alle metingen op deze locaties. Per week kan dit aantal variëren omdat niet alle metingen altijd lukken.",
     "rwzi_abbrev": "",
     "map_titel": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners in rioolwater",
-    "map_toelichting": "Deze kaart toont het gemiddeld aantal virusdeeltjes per 100.000 inwoners, per veiligheidsregio. Let op: per 26 november is de legenda opnieuw geijkt.",
+    "map_toelichting": "Deze kaart toont het gemiddeld aantal virusdeeltjes per 100.000 inwoners, per veiligheidsregio.",
     "legenda_titel": "Legenda",
     "map_tooltip": "per 100.000 inwoners",
     "map_tooltip_value": "{{value}} x100 miljard",
@@ -586,6 +591,11 @@
     "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
     "url": "https://coronadashboard.rijksoverheid.nl/verantwoording"
   },
+  "articles_metadata": {
+    "title": "Artikelen Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
+    "description": "",
+    "url": "https://coronadashboard.rijksoverheid.nl/artikelen"
+  },
   "metadata": {
     "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
     "titel": "COVID-19 Dashboard foutmelding | Rijksoverheid.nl",
@@ -610,8 +620,8 @@
   },
   "nationaal_actueel": {
     "risiconiveaus": {
-      "selecteer_titel": "Risiconiveaus",
-      "selecteer_toelichting": "De kaart geeft het risiconiveau per veiligheidsregio weer.\n\n[Meer over de risiconiveaus](/over-risiconiveaus)"
+      "selecteer_titel": "De risicokaart van Nederland",
+      "selecteer_toelichting": "Iedere week wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. In welk risiconiveau een regio zit, wordt bepaald door te kijken naar de situatie van een regio, die van de omliggende regio's en de situatie in de rest van het land.\n\n**Er geldt een [landelijke lockdown](/landelijk/maatregelen) tot en met in ieder geval 9 februari.**"
     },
     "data_sitemap_titel": "Alle landelijke cijfers op dit dashboard",
     "data_sitemap_toelichting": "Op het corona dashboard worden de cijfers van meerdere onderwerpen gepresenteerd. In verloop van tijd zullen er nieuwe onderwerpen worden toegevoegd of bestaande ondeerwerpen worden uitgebreid. Alle onderwerpen zijn onderverdeelt in categorieen. Dit is een overzicht van de categorieen en hun onderwerpen.",
@@ -671,6 +681,11 @@
         "veiligheidsregio": "Cijfers per veiligheidsregio",
         "gemeente": "Cijfers per gemeente"
       }
+    },
+    "latest_articles": {
+      "title": "Wekelijkse berichten",
+      "subtitle": "Elke week wordt hier een nieuw bericht geplaatst die een bepaald onderwerp rondom het corona virus uitlegt.",
+      "all_articles": "Bekijk alle artikelen"
     }
   },
   "regionaal_index": {
@@ -713,7 +728,8 @@
     "niveau": "niveau",
     "clear_select_input": "Leegmaken",
     "gisteren": "Gisteren",
-    "vandaag": "Vandaag"
+    "vandaag": "Vandaag",
+    "read_more": "Lees meer"
   },
   "seoHead": {
     "default_description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
@@ -764,26 +780,26 @@
   },
   "veiligheidsregio_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Ziekenhuisopnames",
-    "titel": "Ziekenhuisopnames per dag van inwoners {{safetyRegion}}",
-    "pagina_toelichting": "Toestroom van patiënten met COVID-19 kan ervoor zorgen dat ziekenhuizen het te druk krijgen en zorg niet meer kunnen leveren. We houden hier op basis van verschillende bronnen bij hoeveel ziekenhuisbedden (exclusief IC) bezet worden door patiënten met COVID-19 en hoeveel patiënten dagelijks in de ziekenhuizen worden opgenomen, zowel landelijk als regionaal.\n\nLet op: Sinds 14 januari wordt niet meer een driedaags gemiddelde getoond. In plaats daarvan staat het aantal ziekenhuisopnames die op één dag gemeld zijn. Verder staan in de grafiek met het verloop over tijd de ziekenhuisopnames gesorteerd op de dag dat mensen zijn opgenomen.   ",
+    "titel": "Gemeld aantal ziekenhuisopnames per dag van inwoners {{safetyRegion}}",
+    "pagina_toelichting": "Groei van het aantal patiënten met COVID-19 kan ervoor zorgen dat ziekenhuizen het te druk krijgen. We houden hier het aantal patiënten bij dat met COVID-19 wordt opgenomen op de verpleegafdelingen van de ziekenhuizen en het aantal bedden dat daar door patiënten met COVID-19 wordt bezet. We houden dit zowel landelijk als regionaal bij en dat doen we op basis van verschillende bronnen. Let op: Vanaf 14 januari wordt ook het aantal opnames dat op één dag gemeld is getoond (inclusief opnames op eerdere datums maar later gemeld). Er wordt geen driedaags gemiddelde meer getoond. ",
     "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
     "screen_reader_graph_content": "{{value}} opnames.",
-    "barscale_titel": "Ziekenhuisopnames per dag",
-    "extra_uitleg": "Aantal mensen uit deze veiligheidsregio met COVID-19 dat per dag in een ziekenhuis (exclusief IC) is opgenomen. Dit cijfer is het aantal ziekenhuisopnames dat op één dag gemeld zijn. Dit kunnen ook meldingen zijn van opnamen van eerdere dagen. Dat komt omdat de registratie van ziekenhuisopnames vaak niet gelijk op de dag van opname gebeurt. Omdat het meldingen van één dag zijn, geeft dit cijfer toch een goed beeld van de actuele ontwikkeling van het aantal ziekenhuisopnames.",
+    "barscale_titel": "Gemeld aantal ziekenhuisopnames per dag",
+    "extra_uitleg": "Aantal mensen uit deze veiligheidsregio met COVID-19 dat per dag in een ziekenhuis (exclusief IC) is opgenomen. Dit cijfer is het aantal ziekenhuisopnames dat op één dag gemeld zijn. Dit kunnen ook meldingen zijn van opnamen van eerdere dagen.",
     "map_titel": "Verdeling ziekenhuisopnames in {{safetyRegion}}",
-    "map_toelichting": "Deze kaarten laten zien hoe de verdeling van ziekenhuisopnames is in Nederland. Hier worden de ziekenhuisopnames getoond die op één dag gemeld zijn bij Stichting NICE.",
+    "map_toelichting": "Deze kaarten laat zien in welke gemeenten of veiligheidsregio’s patiënten wonen die met COVID-19 op de verpleegafdeling van het ziekenhuis worden opgenomen. Let op: patiënten kunnen ook in een ander deel van Nederland worden opgenomen. De kaart laat dus niet zien hoeveel patiënten per ziekenhuis worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE. Tergooi, Ziekenhuis Amstelland en het Flevoziekenhuis delen hun COVID-19 ziekenhuisopnames op dit moment niet met Stichting NICE. Daardoor zijn de cijfers van sommige veiligheidsregio’s en gemeenten op de kaart lager dan eigenlijk het geval is.",
     "linechart_titel": "Ziekenhuisopnames over tijd",
     "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "bron": {
       "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
       "text": "NICE via RIVM"
     },
-    "linechart_description": "In deze grafiek staan de ziekenhuisopnames op basis van de dag dat mensen daadwerkelijk zijn opgenomen. Omdat de registratie van ziekenhuisopnames achter loopt en dit vaak niet op de dag van opname al gebeurd is, zijn de meest recente dagen nog onvolledig.",
+    "linechart_description": "In deze grafiek staan de ziekenhuisopnames vermeld op de dag dat mensen ook echt zijn opgenomen, in plaats van op de dag dat ze gemeld zijn. Zo kunnen we namelijk de ontwikkeling van het coronavirus in Nederland goed zien. Let op: omdat het aanmelden van ziekenhuisopnames vaak een paar dagen later gebeurt, zijn de meest recente dagen nooit compleet en kan het lijken alsof het aantal ziekenhuisopnames afneemt terwijl dit niet zo is.",
     "metadata": {
       "title": "Ziekenhuisopnames inwoners {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Overzicht van het aantal mensen in de veiligheidsregio {{safetyRegionName}} die met COVID-19 in het ziekenhuis zijn opgenomen."
     },
-    "titel_kpi": "Aantal ziekenhuisopnames die op één dag gemeld zijn",
+    "titel_kpi": "Het aantal ziekenhuisopnames dat op één dag gemeld is.",
     "reference": {
       "href": "/verantwoording#ziekenhuizen",
       "text": "Lees meer over het tellen van ziekenhuisopnames en het verschil tussen diverse databronnen in de cijferverantwoording."
@@ -797,7 +813,7 @@
     },
     "tijdelijk_onbeschikbaar_titel": "",
     "tijdelijk_onbeschikbaar": "",
-    "kpi_titel": "Aantal ziekenhuisopnames die op één dag gemeld zijn"
+    "kpi_titel": "Het aantal ziekenhuisopnames dat op één dag gemeld is. "
   },
   "veiligheidsregio_positief_geteste_personen": {
     "titel_sidebar": "Positief geteste mensen",
@@ -900,26 +916,26 @@
   },
   "gemeente_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Ziekenhuisopnames",
-    "titel": "Ziekenhuisopnames per dag van inwoners {{municipality}}",
-    "pagina_toelichting": "Toestroom van patiënten met COVID-19 kan ervoor zorgen dat ziekenhuizen het te druk krijgen en zorg niet meer kunnen leveren. We houden hier op basis van verschillende bronnen bij hoeveel ziekenhuisbedden (exclusief IC) bezet worden door patiënten met COVID-19 en hoeveel patiënten dagelijks in de ziekenhuizen worden opgenomen, zowel landelijk als regionaal.\n\nLet op: Sinds 14 januari wordt niet meer een driedaags gemiddelde getoond. In plaats daarvan staat het aantal ziekenhuisopnames die op één dag gemeld zijn. Verder staan in de grafiek met het verloop over tijd de ziekenhuisopnames gesorteerd op de dag dat mensen zijn opgenomen.   ",
+    "titel": "Gemeld aantal ziekenhuisopnames per dag van inwoners {{municipality}}",
+    "pagina_toelichting": "Groei van het aantal patiënten met COVID-19 kan ervoor zorgen dat ziekenhuizen het te druk krijgen. We houden hier het aantal patiënten bij dat met COVID-19 wordt opgenomen op de verpleegafdelingen van de ziekenhuizen en het aantal bedden dat daar door patiënten met COVID-19 wordt bezet. We houden dit zowel landelijk als regionaal bij en dat doen we op basis van verschillende bronnen. Lees meer over het tellen van ziekenhuisopnames en de bronnen die we daarvoor gebruiken in de cijferverantwoording.\n\nLet op: vanaf 14 januari laten we ook het aantal opnames zien dat op één dag gemeld is (inclusief opnames op eerdere datums maar later gemeld). We laten geen driedaags gemiddelde meer zien.",
     "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
     "screen_reader_graph_content": "{{value}} opnames.",
-    "barscale_titel": "Ziekenhuisopnames per dag",
-    "extra_uitleg": "Aantal mensen uit deze gemeente met COVID-19 dat per dag in een ziekenhuis (exclusief IC) is opgenomen. Dit cijfer is het aantal ziekenhuisopnames dat op één dag gemeld zijn. Dit kunnen ook meldingen zijn van opnamen van eerdere dagen. Dat komt omdat de registratie van ziekenhuisopnames vaak niet gelijk op de dag van opname gebeurt. Omdat het meldingen van één dag zijn, geeft dit cijfer toch een goed beeld van de actuele ontwikkeling van het aantal ziekenhuisopnames.",
+    "barscale_titel": "Gemeld aantal ziekenhuisopnames per dag",
+    "extra_uitleg": "Aantal mensen uit deze gemeente met COVID-19 dat per dag in een ziekenhuis (exclusief IC) is opgenomen. Dit cijfer is het aantal ziekenhuisopnames dat op één dag gemeld zijn. Dit kunnen ook meldingen zijn van opnamen van eerdere dagen. Patiënten kunnen in een ziekenhuis elders in Nederland zijn opgenomen.",
     "map_titel": "Verdeling ziekenhuisopnames in veiligheidsregio van {{municipality}}",
-    "map_toelichting": "Deze kaarten laten zien hoe de verdeling van ziekenhuisopnames is in Nederland. Hier worden de ziekenhuisopnames getoond die op één dag gemeld zijn bij Stichting NICE.",
+    "map_toelichting": "Deze kaarten laat zien in welke gemeenten of veiligheidsregio’s patiënten wonen die met COVID-19 op de verpleegafdeling van het ziekenhuis worden opgenomen. Let op: patiënten kunnen ook in een ander deel van Nederland worden opgenomen. De kaart laat dus niet zien hoeveel patiënten per ziekenhuis worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE. Tergooi, Ziekenhuis Amstelland en het Flevoziekenhuis delen hun COVID-19 ziekenhuisopnames op dit moment niet met Stichting NICE. Daardoor zijn de cijfers van sommige veiligheidsregio’s en gemeenten op de kaart lager dan eigenlijk het geval is.",
     "linechart_titel": "Ziekenhuisopnames over tijd",
     "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "bron": {
       "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
       "text": "NICE via RIVM"
     },
-    "linechart_description": "In deze grafiek staan de ziekenhuisopnames op basis van de dag dat mensen daadwerkelijk zijn opgenomen. Omdat de registratie van ziekenhuisopnames achter loopt en dit vaak niet op de dag van opname al gebeurd is, zijn de meest recente dagen nog onvolledig.",
+    "linechart_description": "In deze grafiek staan de ziekenhuisopnames vermeld op de dag dat mensen ook echt zijn opgenomen, in plaats van op de dag dat ze gemeld zijn. Zo kunnen we namelijk de ontwikkeling van het coronavirus in Nederland goed zien. Let op: omdat het aanmelden van ziekenhuisopnames vaak een paar dagen later gebeurt, zijn de meest recente dagen nooit compleet en kan het lijken alsof het aantal ziekenhuisopnames afneemt terwijl dit niet zo is.",
     "metadata": {
       "title": "Ziekenhuisopnames inwoners {{municipalityName}} | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Overzicht van het aantal mensen in de gemeente {{municipalityName}} die met COVID-19 in het ziekenhuis zijn opgenomen."
     },
-    "titel_kpi": "Aantal ziekenhuisopnames die op één dag gemeld zijn",
+    "titel_kpi": "Het aantal ziekenhuisopnames dat op één dag gemeld is.",
     "reference": {
       "href": "/verantwoording#ziekenhuizen",
       "text": "Lees meer over het tellen van ziekenhuisopnames en het verschil tussen diverse databronnen in de cijferverantwoording."
@@ -933,7 +949,7 @@
     },
     "tijdelijk_onbeschikbaar_titel": "",
     "tijdelijk_onbeschikbaar": "",
-    "kpi_titel": "Aantal ziekenhuisopnames die op één dag gemeld zijn"
+    "kpi_titel": "Het aantal ziekenhuisopnames dat op één dag gemeld is."
   },
   "gemeente_positief_geteste_personen": {
     "titel_sidebar": "Positief geteste mensen",
@@ -1451,8 +1467,12 @@
         "enkelvoud": "week",
         "meervoud": "weken"
       },
-      "hiervoor": "hiervoor"
-    }
+      "hiervoor": "hiervoor",
+      "vorige_week": "vorige week",
+      "ervoor": "ervoor"
+    },
+    "ervoor": "ervoor",
+    "vorige_waarde": "de vorige waarde"
   },
   "aria_labels": {
     "pagina_keuze": "Landelijk, regio of gemeente menu",
@@ -1560,8 +1580,8 @@
     },
     "bronnen": {
       "rivm": {
-        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
-        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "download": "https://data.rivm.nl/covid-19/COVID-19_gehandicaptenzorg.csv",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_gehandicaptenzorg.html",
         "text": "RIVM"
       }
     },
@@ -1592,8 +1612,8 @@
     },
     "bronnen": {
       "rivm": {
-        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
-        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "download": "https://data.rivm.nl/covid-19/COVID-19_gehandicaptenzorg.csv",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_gehandicaptenzorg.html",
         "text": "RIVM"
       }
     }
@@ -1619,8 +1639,8 @@
     },
     "bronnen": {
       "rivm": {
-        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
-        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "download": "https://data.rivm.nl/covid-19/COVID-19_gehandicaptenzorg.csv",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_gehandicaptenzorg.html",
         "text": "RIVM"
       }
     }
@@ -1650,8 +1670,8 @@
     },
     "bronnen": {
       "rivm": {
-        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
-        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "download": "https://data.rivm.nl/covid-19/COVID-19_gehandicaptenzorg.csv",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_gehandicaptenzorg.html",
         "text": "RIVM"
       }
     },
@@ -1836,11 +1856,11 @@
       "text": "Lees meer in de cijferverantwoording."
     },
     "cbs_message": {
-      "title": "Sterfte in week 52 bij mensen met langdurige zorg verder toegenomen",
+      "title": "Bijna 4 duizend mensen overleden in eerste week van 2021",
       "published_text": "Publicatiedatum: vrijdag 4 december",
-      "message": "In week 52 (21 tot en met 27 december 2020) overleden 3,8 duizend mensen. De sterfte bij mensen met langdurige zorg is verder toegenomen. Er overleden bijna 40 procent meer Wlz-zorggebruikers dan je in deze periode zou verwachten. Bij de overige bevolking is het aantal overledenen vrijwel normaal voor de tijd van het jaar. Dat meldt het CBS op basis van de voorlopige sterftecijfers per week.",
+      "message": "In de eerste week van 2021 (4 tot en met 10 januari) overleden naar schatting bijna 4 duizend mensen. Dat zijn 650 meer sterfgevallen dan verwacht voor deze periode. In de laatste week van 2020 (28 december 2020 tot en met 3 januari 2021) stierven ruim 4 duizend mensen, bijna 800 meer dan verwacht. In heel 2020 overleden bijna 169 duizend mensen, ruim 15 duizend meer dan verwacht. Dat meldt het CBS op basis van de voorlopige sterftecijfers per week.",
       "link": {
-        "href": "https://www.cbs.nl/nl-nl/nieuws/2021/01/sterfte-in-week-52-bij-mensen-met-langdurige-zorg-verder-toegenomen",
+        "href": "https://www.cbs.nl/nl-nl/nieuws/2021/02/bijna-4-duizend-mensen-overleden-in-eerste-week-van-2021",
         "text": "Website CBS"
       }
     },
@@ -1916,7 +1936,7 @@
       "41": {
         "toelichting_risiconiveau": "Er zijn zeer veel mensen besmettelijk en het dagelijks aantal nieuwe besmettingen is hoog. De regionale zorgcapaciteit is onvoldoende. Strenge, landelijke maatregelen zijn noodzakelijk.",
         "extratoelichting": {
-          "titel": "Maatregelen voor Lockdown",
+          "titel": "Maatregelen van de lockdown",
           "toelichting": "In {{safetyRegionName}} is een regionale lockdown van kracht."
         }
       },
@@ -1952,7 +1972,7 @@
       "41_ov_38": "Blijf in Nederland en boek geen reis naar het buitenland t/m 31 maart.",
       "41_onderwijs_39": "Onderwijs op afstand voor po, vo, mbo, hbo, wo en alle overige onderwijs-, trainings- en educatieve activiteiten. Onder andere examens, praktijklessen en onderwijs voor kwetsbare leerlingen uitgezonderd. Dit geldt tot en met 7 februari. Op een later moment wordt besloten of het po vanaf 25 januari geheel open kan.",
       "41_onderwijs_40": "Kinderopvang dicht. Dit geldt tot en met 7 februari. Op een later moment wordt besloten of de kinderopvang vanaf 25 januari geheel open kan.",
-      "41_onderwijs_41": "Er is noodopvang voor kinderen van ouders met cruciale beroepen en kinderen in een kwetsbare positie. Dit geldt van 16 december t/m in ieder geval 17 januari.",
+      "41_onderwijs_41": "Er is noodopvang voor kinderen van ouders met cruciale beroepen en kinderen in een kwetsbare positie.",
       "41_algemeen_42": "Heb je klachten? Blijf thuis.",
       "0_algemeen_42": "Heb je klachten? Blijf in thuisquarantaine.",
       "0_algemeen_43": "Heb je klachten? Laat je testen.",
@@ -2026,6 +2046,55 @@
       "description": "Voor de veiligheidsregio geldt het risiconiveau",
       "bekijk_href": "Bekijk de maatregelen"
     },
+    "mini_trend_tiles": {
+      "positief_getest": {
+        "title": "Aantal positieve testen"
+      },
+      "ziekenhuis_opnames": {
+        "title": "Ziekenhuisopnames"
+      },
+      "ic_opnames": {
+        "title": "Intensive care-opnames"
+      }
+    },
+    "data_driven_texts": {
+      "infected_people_total": {
+        "value": {
+          "zero": "{{newDate}} there were no newly reported infected people.",
+          "singular": "{{newDate}} there was {{propertyValue}} newly reported infected person.",
+          "plural": "{{newDate}} there were {{propertyValue}} newly reported infected people."
+        },
+        "difference": {
+          "zero": "This is the same as {{oldDate}}",
+          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
+          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+        }
+      },
+      "intake_hospital_ma": {
+        "value": {
+          "zero": "{{newDate}} there were no newly reported hospital intakes.",
+          "singular": "{{newDate}} there was {{propertyValue}} newly reported hospital intake.",
+          "plural": "{{newDate}} there were {{propertyValue}} newly reported hospital intakes."
+        },
+        "difference": {
+          "zero": "This is the same as {{oldDate}}",
+          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
+          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+        }
+      },
+      "intake_intensivecare_ma": {
+        "value": {
+          "zero": "{{newDate}} there were no newly reported intensive care admissions.",
+          "singular": "{{newDate}} there was {{propertyValue}} newly reported intensive care admission.",
+          "plural": "{{newDate}} there were {{propertyValue}} newly reported intensive care admissions."
+        },
+        "difference": {
+          "zero": "This is the same as {{oldDate}}",
+          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
+          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+        }
+      }
+    },
     "quick_links": {
       "header": "Bekijk alle cijfers van het dashboard",
       "links": {
@@ -2045,6 +2114,55 @@
       "description": "Voor de veiligheidsregio van deze gemeente geldt het risiconiveau",
       "bekijk_href": "Bekijk de maatregelen"
     },
+    "mini_trend_tiles": {
+      "positief_getest": {
+        "title": "Aantal positieve testen"
+      },
+      "ziekenhuis_opnames": {
+        "title": "Ziekenhuisopnames"
+      },
+      "ic_opnames": {
+        "title": "Intensive care-opnames"
+      }
+    },
+    "data_driven_texts": {
+      "infected_people_total": {
+        "value": {
+          "zero": "{{newDate}} there were no newly reported infected people.",
+          "singular": "{{newDate}} there was {{propertyValue}} newly reported infected person.",
+          "plural": "{{newDate}} there were {{propertyValue}} newly reported infected people."
+        },
+        "difference": {
+          "zero": "This is the same as {{oldDate}}",
+          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
+          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+        }
+      },
+      "intake_hospital_ma": {
+        "value": {
+          "zero": "{{newDate}} there were no newly reported hospital intakes.",
+          "singular": "{{newDate}} there was {{propertyValue}} newly reported hospital intake.",
+          "plural": "{{newDate}} there were {{propertyValue}} newly reported hospital intakes."
+        },
+        "difference": {
+          "zero": "This is the same as {{oldDate}}",
+          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
+          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+        }
+      },
+      "intake_intensivecare_ma": {
+        "value": {
+          "zero": "{{newDate}} there were no newly reported intensive care admissions.",
+          "singular": "{{newDate}} there was {{propertyValue}} newly reported intensive care admission.",
+          "plural": "{{newDate}} there were {{propertyValue}} newly reported intensive care admissions."
+        },
+        "difference": {
+          "zero": "This is the same as {{oldDate}}",
+          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
+          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+        }
+      }
+    },
     "quick_links": {
       "header": "Bekijk alle cijfers van het dashboard",
       "links": {
@@ -2053,6 +2171,25 @@
         "veiligheidsregio_fallback": "Cijfers per veiligheidsregio",
         "gemeente": "Cijfers van {{municipalityName}}"
       }
+    }
+  },
+  "accessibility": {
+    "grafieken": {
+      "reproductiegetal_verloop": "Dit is een grafiek die het reproductie getal over tijd weergeeft.",
+      "ziekenhuisopnames": "Dit is een grafiek die de ziekenhuisopnames over tijd weergeeft.",
+      "intensive_care_opnames": "Dit is een grafiek die de intensive care opnames over tijd weergeeft.",
+      "verpleeghuiszorg_positief_getest": "Dit is een grafiek die in de verpleeghuizen de postief getesten over tijd weergeeft.",
+      "verpleeghuiszorg_besmette_locaties": "Dit is een grafiek die in de verpleeghuizen de besmette locaties over tijd weergeeft.",
+      "verpleeghuiszorg_overleden_getest": "Dit is een grafiek die in de verpleeghuiszorg overleden getesten over tijd weergeeft.",
+      "gehandicaptenzorg_positief_getest": "Dit is een grafiek die in de gehandicaptenzorg postief getesten over tijd weergeeft.",
+      "gehandicaptenzorg_besmette_locaties": "Dit is een grafiek die besmette locaties over tijd weergeeft.",
+      "gehandicaptenzorg_overleden": "Dit is een grafiek die gehandicaptenzorg overledenen over tijd weergeeft.",
+      "thuiswonende_ouderen_besmettingen": "Dit is een grafiek die bij de thuiswonende ouderen besmettingen over tijd weergeeft.",
+      "thuiswonende_ouderen_overleden": "Dit is een grafiek die bij de thuiswonende ouderen overleden over tijd weergeeft.",
+      "rioolwater_virusdeeltjes": "Dit is een grafiek die in het rioolwater virusdeeltjes over tijd weergeeft.",
+      "verdenkingen_huisartsen": "Dit is een grafiek die verdekingen van de huisartsen over tijd weergeeft.",
+      "ziekenhuis_opnames": "Dit is een grafiek die de ziekenhuis opnames over tijd weergeeft.",
+      "rioolwater_meetwaarde": "Dit is een grafiek die in het rioolwater de meetwaarde over tijd weergeeft."
     }
   },
   "choropleth": {

@@ -8,17 +8,18 @@ interface AspectRatioProps {
    */
   ratio: number;
   children: ReactNode;
+  dataCy?: string;
 }
 
 export const AspectRatio = forwardRef<HTMLDivElement, AspectRatioProps>(
-  ({ ratio, children }, ref) => (
-    <StyledAspectRatio ratio={ratio} ref={ref}>
+  ({ ratio, children, dataCy }, ref) => (
+    <StyledAspectRatio ratio={ratio} ref={ref} dataCy={dataCy}>
       <Inner>{children}</Inner>
     </StyledAspectRatio>
   )
 );
 
-const StyledAspectRatio = styled.div<{ ratio: number }>((x) =>
+const StyledAspectRatio = styled.div<{ ratio: number; dataCy?: string }>((x) =>
   css({
     position: 'relative',
     width: '100%',

@@ -25,36 +25,32 @@ export function MiniTrendTile<T extends Value>(props: MiniTrendTileProps<T>) {
   const { icon, title, text, trendData, metricProperty } = props;
 
   return (
-    <Box display="flex" flexDirection="column">
-      <Box display="flex">
-        <Box width="4rem" height="4rem" display="flex" mr={1}>
-          {icon}
-        </Box>
-        <Box>
-          <Heading level={4} as="h2">
-            {title}
-          </Heading>
-          {text}
-          <Box>
-            <ParentSize>
-              {(parent) => (
-                <LineChart
-                  width={parent.width}
-                  timeframe="5weeks"
-                  values={trendData}
-                  linesConfig={[{ metricProperty }]}
-                  componentCallback={componentCallback}
-                  showMarkerLine={true}
-                  formatTooltip={(values) => formatNumber(values[0].__value)}
-                  padding={{
-                    ...defaultPadding,
-                    left: 0,
-                  }}
-                />
-              )}
-            </ParentSize>
-          </Box>
-        </Box>
+    <Box position="relative" pb={3} pl={{ _: 0, md: '3.5rem' }}>
+      <Box width="4rem" height="4rem" position="absolute" left={0} mr={1}>
+        {icon}
+      </Box>
+      <Heading level={4} as="h2" py={2} pl={{ _: '3.5rem', md: 0 }}>
+        {title}
+      </Heading>
+      {text}
+      <Box>
+        <ParentSize>
+          {(parent) => (
+            <LineChart
+              width={parent.width}
+              timeframe="5weeks"
+              values={trendData}
+              linesConfig={[{ metricProperty }]}
+              componentCallback={componentCallback}
+              showMarkerLine={true}
+              formatTooltip={(values) => formatNumber(values[0].__value)}
+              padding={{
+                ...defaultPadding,
+                left: 0,
+              }}
+            />
+          )}
+        </ParentSize>
       </Box>
     </Box>
   );

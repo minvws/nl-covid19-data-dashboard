@@ -1,6 +1,6 @@
-import { MetricKeys } from '~/components/choropleth/shared';
+import { MetricKeys } from '@corona-dashboard/common';
 import { colors } from '~/style/theme';
-import { Regionaal } from '~/types/data';
+import { Regionaal } from '@corona-dashboard/common';
 import { MetricConfig, NO_METRIC_PROPERTY } from './common';
 
 const GREEN = colors.data.gradient.green;

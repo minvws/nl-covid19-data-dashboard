@@ -29,6 +29,7 @@ const infectedLocationsText = siteText.gehandicaptenzorg_besmette_locaties;
 const positiveTestedPeopleText =
   siteText.gehandicaptenzorg_positief_geteste_personen;
 const locationDeaths = siteText.gehandicaptenzorg_oversterfte;
+const graphDescriptions = siteText.accessibility.grafieken;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -88,6 +89,7 @@ const DisabilityCare: FCWithLayout<typeof getStaticProps> = (props) => {
         <LineChartTile
           metadata={{ source: positiveTestedPeopleText.bronnen.rivm }}
           title={positiveTestedPeopleText.linechart_titel}
+          ariaDescription={graphDescriptions.gehandicaptenzorg_positief_getest}
           values={values}
           linesConfig={[
             {
@@ -170,6 +172,9 @@ const DisabilityCare: FCWithLayout<typeof getStaticProps> = (props) => {
           metadata={{ source: infectedLocationsText.bronnen.rivm }}
           title={infectedLocationsText.linechart_titel}
           values={values}
+          ariaDescription={
+            graphDescriptions.gehandicaptenzorg_besmette_locaties
+          }
           linesConfig={[
             {
               metricProperty: 'infected_locations_total',
@@ -211,6 +216,7 @@ const DisabilityCare: FCWithLayout<typeof getStaticProps> = (props) => {
         <LineChartTile
           metadata={{ source: locationDeaths.bronnen.rivm }}
           title={locationDeaths.linechart_titel}
+          ariaDescription={graphDescriptions.gehandicaptenzorg_overleden}
           values={values}
           linesConfig={[
             {

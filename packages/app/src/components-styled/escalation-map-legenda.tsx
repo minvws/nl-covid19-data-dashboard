@@ -1,3 +1,4 @@
+import { Regions, RegionsMetricName } from '@corona-dashboard/common';
 import { useMemo } from 'react';
 import { Box } from '~/components-styled/base';
 import { EscalationLevelIcon } from '~/components-styled/escalation-level-icon';
@@ -7,11 +8,9 @@ import {
 } from '~/components/choropleth/hooks';
 import { getDataThresholds } from '~/components/choropleth/legenda/utils';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { RegionsMetricName } from '~/components/choropleth/shared';
 import styles from '~/components/choropleth/tooltips/tooltip.module.scss';
 import { regionGeo } from '~/components/choropleth/topology';
 import text from '~/locale';
-import { Regions } from '~/types/data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const escalationThresholds =
@@ -69,7 +68,6 @@ export function EscalationMapLegenda<K extends RegionsMetricName>(
           className={styles.escalationInfoLegenda}
           key={`legenda-item-${info?.threshold}`}
         >
-          asdfasdf
           <Box display="flex" alignItems="center" width="10rem">
             <div className={styles.bubbleLegenda}>
               <EscalationLevelIcon level={info.threshold} />
