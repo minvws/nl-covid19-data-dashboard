@@ -125,7 +125,7 @@ export interface National {
   restrictions: NationalRestrictions;
   behavior: NationalBehavior;
   deceased_rivm: NationalDeceasedRivm;
-  deceased_rivm_per_age_group?: NlDeceasedRivmPerAgeGroup;
+  deceased_rivm_per_age_group: NlDeceasedRivmPerAgeGroup;
   deceased_cbs: NationalDeceasedCbs;
   elderly_at_home: NationalElderlyAtHome;
 }
