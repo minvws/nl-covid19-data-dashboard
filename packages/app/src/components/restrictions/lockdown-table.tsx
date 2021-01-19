@@ -42,9 +42,8 @@ function MobileLockdownTable(props: LockdownTableData) {
                 <Cell
                   role="rowheader"
                   borderTop={'1px solid black'}
-                  pt={3}
                   px={2}
-                  pb={3}
+                  py={3}
                   verticalAlign="center"
                   backgroundColor="#F9F9F9"
                 >
