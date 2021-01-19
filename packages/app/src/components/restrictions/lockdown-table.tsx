@@ -5,20 +5,18 @@ import { InlineText } from '~/components-styled/typography';
 import { useEscalationColor } from '~/utils/use-escalation-color';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { restrictionIcons } from './restriction-icons';
-import { EscalationLevel } from './type';
 import { LockdownData } from '~/types/cms';
 
 export type LockdownTableProps = {
   data: LockdownData;
-  escalationLevel: EscalationLevel;
 };
 
 export function LockdownTable(props: LockdownTableProps) {
-  const { data, escalationLevel } = props;
+  const { data } = props;
 
   const breakpoints = useBreakpoints(true);
 
-  const color = useEscalationColor(escalationLevel);
+  const color = useEscalationColor(4);
 
   if (breakpoints.lg) {
     return <DesktopLockdownTable data={data} color={color} />;
@@ -103,7 +101,9 @@ function DesktopLockdownTable(props: LockdownTableData) {
                 px={2}
                 verticalAlign="top"
               >
-                <InlineText fontWeight="bold">{group.title}</InlineText>
+                <InlineText mt="5px" fontWeight="bold">
+                  {group.title}
+                </InlineText>
               </Cell>
               <Cell
                 borderTop={'1px solid black'}
