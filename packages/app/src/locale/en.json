@@ -1808,8 +1808,10 @@
       "description": "#"
     },
     "title": "COVID-19 vaccinaties",
-    "description": "Op deze pagina is informatie te vinden omtrent vaccineren voor COVID-19 in Nederland.",
+    "description": "Vaccineren is de belangrijkste stap naar een leven zonder coronaregels. Op 6 januari 2021 is Nederland begonnen met vaccineren. Kwetsbare mensen, hun zorgmedewerkers en medewerkers in de acute zorg mogen als eerste een vaccinatie halen. Uiteindelijk komt iedereen van 18 jaar of ouder aan de beurt. De cijfers op deze pagina laten zie hoeveel vaccins zijn toegediend en hoeveel vaccins er beschikbaar zijn en komen.",
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "date_unix": "1611058309",
+    "date_of_insertion_unix": "1611058309",
     "reference": {
       "href": "/verantwoording#vaccinaties",
       "text": "Lees meer in de cijferverantwoording."
@@ -1819,49 +1821,48 @@
         "href": "#",
         "text": "RIVM",
         "download": ""
-      },
-      "vws": {
-        "href": "#",
-        "text": "VWS",
-        "download": ""
       }
-    },
-    "section_vaccinations_more_information": {
-      "title": "Meer informatie",
-      "description": "In de komende periode wordt gewerkt aan uitbreiding van de cijfers op deze pagina. Voor meer informatie over de cijfers zie de [cijferverantwoording](#). Meer informatie over de vaccinaties zelf kunt u vinden op [https://www.rijksoverheid.nl/onderwerpen/coronavirus-vaccinatie](https://www.rijksoverheid.nl/onderwerpen/coronavirus-vaccinatie)"
     },
     "data": {
       "difference": "Do not remove this key. It is required as a temporary workaround",
       "sidebar": {
         "last_value": {
           "total_vaccinated": "2187",
-          "date_unix": "1609944084",
-          "date_of_insertion_unix": "1609944084"
+          "date_unix": "1611058309",
+          "date_of_insertion_unix": "1611058309"
         }
       },
-      "date_of_report_unix": "1609632000",
-      "date_of_insertion_unix": "1609632000",
-      "kpi_first_vaccinations": {
-        "title": "Aantal eerste vaccinaties toegediend",
+      "kpi_total": {
+        "title": "Totaal toegediende vaccins",
         "value": "2187",
-        "description": "Dit getal laat zien hoeveel mensen totaal hun eerste vaccinatie hebben gekregen in Nederland."
-      },
-      "kpi_rate": {
-        "title": "Vaccinatiegraad",
-        "value": "0.4",
-        "target": "Streefwaarde 70%",
-        "description": "Dit getal laat zien hoeveel mensen totaal hun eerste vaccinatie hebben gekregen in Nederland."
-      },
-      "kpi_stock": {
-        "title": "Vaccins in voorraad",
-        "value": "12400",
-        "description": "Dit getal laat het aantal vaccins dat we op dit moment in voorraad hebben."
+        "description": "Aantal vaccins dat ziekenhuizen in Nederland hebben toegediend tot nu. Let op: dit cijfer telt alleen de gegevens die op dit moment bekend zijn.",
+        "date_of_report_unix": "1611058309",
+        "date_of_insertion_unix": "1611058309",
+        "administered": [
+          { 
+            "value": "1254",
+            "description": "toegediend door GGD"
+          },
+          { 
+            "value": "633",
+            "description": "toegediend door ziekenhuizen"
+          },          { 
+            "value": "300",
+            "description": "toegediend door langdurige zorginstellingen"
+          }
+        ]
       },
       "kpi_expected_delivery": {
-        "title": "Verwachte levering",
-        "value": "18000000",
-        "description": "Dit getal laat het aantal vaccins zien dat we in de nabije toekomst verwachten."
+        "title": "Verwachte levering vaccins",
+        "value": "18 miljoen",
+        "description": "Aantal vaccins dat Nederland de komende drie maanden verwacht te krijgen. Elke week ontvangt Nederland een deel van de vaccins.",
+        "date_of_report_unix": "1611058309",
+        "date_of_insertion_unix": "1611058309"
       }
+    },
+    "section_vaccinations_more_information": {
+      "title": "Aantallen nog onbekend",
+      "description": "We zijn bezig om meer data te verkrijgen van verschillende bronnen betreffende vorraad en vaccinatie cijfers. Op dit moment zijn de volgende vaccinatie gegevens niet op het Dashboard Coronavirus beschikbaar:\n - Totaal vaccins op vorraad\n - Vaccins toegediend door huisartsen"
     }
   },
   "veiligheidsregio_sterfte": {

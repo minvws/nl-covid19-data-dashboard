@@ -9,6 +9,9 @@ import { Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import { SEOHead } from '~/components/seoHead';
+import { css } from '@styled-system/css';
+import { formatNumber } from '~/utils/formatNumber';
+import styled from 'styled-components';
 
 import {
   getNlData,
@@ -43,65 +46,72 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
           reference={text.reference}
           metadata={{
             datumsText: text.datums,
-            dateOrRange: parseFloat(text.data.date_of_insertion_unix),
-            dateOfInsertionUnix: parseFloat(text.data.date_of_insertion_unix),
-            dataSources: [text.bronnen.rivm, text.bronnen.vws],
+            dateOrRange: parseFloat(text.date_of_insertion_unix),
+            dateOfInsertionUnix: parseFloat(text.date_of_insertion_unix),
+            dataSources: [text.bronnen.rivm],
           }}
         />
         <TwoKpiSection>
           <KpiTile
-            title={text.data.kpi_first_vaccinations.title}
+            title={text.data.kpi_total.title}
             metadata={{
-              date: parseFloat(text.data.date_of_report_unix),
+              date: parseFloat(text.data.kpi_total.date_of_report_unix),
               source: text.bronnen.rivm,
             }}
           >
-            <KpiValue
-              absolute={parseFloat(text.data.kpi_first_vaccinations.value)}
-            />
-            <Text mb={4}>{text.data.kpi_first_vaccinations.description}</Text>
-
-            <Heading level={3}>{text.data.kpi_rate.title}</Heading>
-            <KpiValue percentage={parseFloat(text.data.kpi_rate.value)} />
-            <Text my={0} color="annotation" fontSize={1}>
-              {text.data.kpi_rate.target}
-            </Text>
-            <Text>{text.data.kpi_rate.description}</Text>
+            <KpiValue absolute={parseFloat(text.data.kpi_total.value)} />
+            <Text mb={3}>{text.data.kpi_total.description}</Text>
+            {text.data.kpi_total.administered.map((item) => (
+              <>
+                <Heading level={4} fontSize={'1.1em'} mt={3} mb={0}>
+                  <span css={css({ color: 'data.primary' })}>
+                    {formatNumber(parseFloat(item.value))}
+                  </span>
+                  {` ${item.description}`}
+                </Heading>
+              </>
+            ))}
           </KpiTile>
 
           <KpiTile
-            title={text.data.kpi_stock.title}
+            title={text.data.kpi_expected_delivery.title}
             metadata={{
-              date: parseFloat(text.data.date_of_report_unix),
-              source: text.bronnen.vws,
+              date: parseFloat(
+                text.data.kpi_expected_delivery.date_of_report_unix
+              ),
+              source: text.bronnen.rivm,
             }}
           >
-            <KpiValue absolute={parseFloat(text.data.kpi_stock.value)} />
-            <Text mb={4}>{text.data.kpi_stock.description}</Text>
-
-            <Heading level={3}>{text.data.kpi_expected_delivery.title}</Heading>
-            <KpiValue
-              absolute={parseFloat(text.data.kpi_expected_delivery.value)}
+            <KpiValue text={text.data.kpi_expected_delivery.value} />
+            <Text mb={4}>{text.data.kpi_expected_delivery.description}</Text>
+            <Heading level={3}>
+              {text.section_vaccinations_more_information.title}
+            </Heading>
+            <Text
+              mb={0}
+              as={StyledParagraph}
+              dangerouslySetInnerHTML={{
+                __html: text.section_vaccinations_more_information.description,
+              }}
             />
-            <Text>{text.data.kpi_expected_delivery.description}</Text>
           </KpiTile>
         </TwoKpiSection>
-
-        <KpiTile
-          title={text.section_vaccinations_more_information.title}
-          metadata={{}}
-        >
-          <Text
-            as="div"
-            dangerouslySetInnerHTML={{
-              __html: text.section_vaccinations_more_information.description,
-            }}
-          />
-        </KpiTile>
       </TileList>
     </>
   );
 };
+
+const StyledParagraph = styled.div(
+  css({
+    p: {
+      marginBottom: 0,
+    },
+    ul: {
+      marginTop: 0,
+      paddingLeft: '1.2rem',
+    },
+  })
+);
 
 VaccinationPage.getLayout = getNationalLayout;
 
