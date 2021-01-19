@@ -5,7 +5,7 @@ import ArrowIcon from '~/assets/arrow.svg';
 import { TitleWithIcon } from '~/components-styled/aside/title-with-icon';
 import { Box } from '~/components-styled/base';
 import { LinkWithIcon } from '~/components-styled/link-with-icon';
-import { Heading, InlineText, Text } from '~/components-styled/typography';
+import { InlineText, Text } from '~/components-styled/typography';
 import siteText from '~/locale/index';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 

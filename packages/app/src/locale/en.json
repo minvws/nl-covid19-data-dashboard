@@ -626,8 +626,8 @@
       "description": "Actuele situatie in Nederland"
     },
     "risiconiveaus": {
-      "selecteer_titel": "Risiconiveaus",
-      "selecteer_toelichting": "De kaart geeft het risiconiveau per veiligheidsregio weer.\n\n[Meer over de risiconiveaus](/over-risiconiveaus)"
+      "selecteer_titel": "",
+      "selecteer_toelichting": ""
     },
     "data_sitemap_titel": "",
     "data_sitemap_toelichting": "",

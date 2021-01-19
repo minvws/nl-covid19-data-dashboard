@@ -13,7 +13,7 @@ import { Heading } from '~/components-styled/typography';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
-import { FCWithLayout } from '~/domain/layout/layout';
+import { FCWithLayout, getDefaultLayout } from '~/domain/layout/layout';
 import { Search } from '~/domain/topical/components/search';
 import { DataSitemap } from '~/domain/topical/data-sitemap';
 import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
