@@ -38,12 +38,11 @@ export function Icon(props) {
         <Heading as="div" size={0}>
           {type.title}
         </Heading>
-        {value === undefined && <Text>Er is geen icoon geselecteerd</Text>}
-        {value !== undefined && (
+        {value === undefined ? <Text>Er is geen icoon geselecteerd</Text> :
           <Box>
             <img src={restrictionIcons[value]} width="36" height="36" />
           </Box>
-        )}
+        }
 
         <Box>
           <Button onClick={onOpen} text="Verander icoon" />
