@@ -339,7 +339,7 @@ export function LineChart<T extends Value>({
           />
         )}
 
-        {showLegend && (
+        {showLegend && legendItems && (
           <Box pl={`${padding.left}px`}>
             <Legenda items={legendItems} />
           </Box>
