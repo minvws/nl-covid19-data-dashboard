@@ -23,9 +23,9 @@ const createPatchFrom = (value) =>
   PatchEvent.from(value === '' ? unset() : set(String(value)));
 
 export function Icon(props) {
-  const [open, setOpen] = useState(false);
-  const onClose = useCallback(() => setOpen(false), []);
-  const onOpen = useCallback(() => setOpen(true), []);
+  const [isOpen, setIsOpen] = useState(false);
+  const onClose = useCallback(() => setIsOpen(false), []);
+  const onOpen = useCallback(() => setIsOpen(true), []);
 
   const { type, value, onChange } = props;
 
@@ -49,7 +49,7 @@ export function Icon(props) {
           <Button onClick={onOpen} text="Verander icoon" />
         </Box>
       </Stack>
-      {open && (
+      {isOpen && (
         <Dialog
           header="Kies een icoon"
           id="dialog-example"
