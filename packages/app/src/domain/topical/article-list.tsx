@@ -80,10 +80,13 @@ const ArticleBox = styled.div(
     marginBottom: 4,
     width: asResponsiveArray({
       _: '100%',
-      sm: '50%',
+      sm: 'calc(50% - 16px)',
       md: 'calc(33% - 32px)',
       lg: 'calc(33% - 32px)',
     }),
+    '&:nth-child(n+2)': {
+      ml: asResponsiveArray({ sm: '32px' }),
+    },
     '&:nth-child(3n+2)': {
       mx: asResponsiveArray({ md: '48px', lg: '48px' }),
     },
