@@ -70,6 +70,7 @@ export type LineChartProps<T extends Value> = {
   padding?: Partial<ChartPadding>;
   showLegend?: boolean;
   componentCallback?: ComponentCallbackFunction;
+  uniqueId?: string;
 };
 
 export function LineChart<T extends Value>({
@@ -89,6 +90,7 @@ export function LineChart<T extends Value>({
   padding: overridePadding,
   showLegend = false,
   componentCallback,
+  uniqueId,
 }: LineChartProps<T>) {
   const {
     tooltipData,
@@ -300,6 +302,7 @@ export function LineChart<T extends Value>({
           onHover={handleHover}
           benchmark={benchmark}
           componentCallback={componentCallback}
+          uniqueId={uniqueId}
         >
           {renderAxes}
         </ChartAxes>

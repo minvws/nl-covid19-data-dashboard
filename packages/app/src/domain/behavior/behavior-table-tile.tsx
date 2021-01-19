@@ -7,7 +7,10 @@ import { Tile } from '~/components-styled/tile';
 import { PercentageBar } from '~/components-styled/percentage-bar';
 import { Heading } from '~/components-styled/typography';
 import siteText from '~/locale/index';
-import { NationalBehaviorValue, RegionalBehaviorValue } from '~/types/data';
+import {
+  NationalBehaviorValue,
+  RegionalBehaviorValue,
+} from '@corona-dashboard/common';
 import { formatPercentage } from '~/utils/formatNumber';
 import {
   BehaviorIdentifier,

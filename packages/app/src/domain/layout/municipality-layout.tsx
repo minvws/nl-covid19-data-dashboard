@@ -15,7 +15,7 @@ import { SidebarMetric } from '~/components-styled/sidebar-metric';
 import { Text } from '~/components-styled/typography';
 import { getLayout } from '~/domain/layout/layout';
 import siteText from '~/locale/index';
-import { Municipal } from '~/types/data';
+import { Municipal } from '@corona-dashboard/common';
 import { getSafetyRegionForMunicipalityCode } from '~/utils/getSafetyRegionForMunicipalityCode';
 import { Link } from '~/utils/link';
 import { MunicipalityComboBox } from './components/municipality-combo-box';

@@ -23,6 +23,7 @@ import {
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 
 const text = siteText.rioolwater_metingen;
+const graphDescriptions = siteText.accessibility.grafieken;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -108,6 +109,7 @@ const SewerWater: FCWithLayout<typeof getStaticProps> = ({
         <LineChartTile
           title={text.linechart_titel}
           timeframeOptions={['all', '5weeks']}
+          ariaDescription={graphDescriptions.rioolwater_virusdeeltjes}
           values={sewerAverages.values}
           linesConfig={[
             {

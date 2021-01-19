@@ -34,6 +34,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const text = siteText.gemeente_ziekenhuisopnames_per_dag;
+const graphDescriptions = siteText.accessibility.grafieken;
 
 const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data, choropleth, municipalityName } = props;
@@ -121,6 +122,7 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
           <LineChartTile
             title={text.linechart_titel}
             description={text.linechart_description}
+            ariaDescription={graphDescriptions.ziekenhuis_opnames}
             metadata={{ source: text.bronnen.rivm }}
             timeframeOptions={['all', '5weeks', 'week']}
             values={data.hospital_nice.values}
