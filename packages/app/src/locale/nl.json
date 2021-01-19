@@ -504,7 +504,7 @@
       "text": "RIVM",
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
     },
-    "titel": "Rioolwatermeting",
+    "titel": "Virusdeeltjes in rioolwater",
     "pagina_toelichting": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners in rioolwater. Om het weekgemiddelde te berekenen worden alle meetwaarden van circa 300 locaties bij elkaar opgeteld en gedeeld door het aantal metingen.",
     "barscale_titel": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners",
     "extra_uitleg": "Alle rioolmeetwaarden van één week worden bij elkaar opgeteld en gedeeld door het aantal metingen, om tot dit wekelijkse landelijke gemiddelde te komen.",
@@ -784,7 +784,7 @@
   },
   "veiligheidsregio_rioolwater_metingen": {
     "titel_sidebar": "Rioolwatermeting",
-    "titel": "Rioolwatermeting in {{safetyRegion}}",
+    "titel": "Virusdeeltjes in rioolwater {{safetyRegion}}",
     "pagina_toelichting": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners in rioolwater. Om het weekgemiddelde te berekenen worden alle meetwaarden van deze veiligheidsregio bij elkaar opgeteld en gedeeld door het aantal metingen.",
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "screen_reader_graph_content": "{{value}} virusdeeltjes per 100.000 inwoners",
@@ -912,7 +912,7 @@
   },
   "gemeente_rioolwater_metingen": {
     "titel_sidebar": "Rioolwatermeting",
-    "titel": "Rioolwatermeting in {{municipality}}",
+    "titel": "Virusdeeltjes in rioolwater {{municipality}}",
     "pagina_toelichting": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners in rioolwater. Om het weekgemiddelde te berekenen worden alle meetwaarden van deze gemeente bij elkaar opgeteld en gedeeld door het aantal metingen.",
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "screen_reader_graph_content": "{{value}} virusdeeltjes per 100.000 inwoners",
