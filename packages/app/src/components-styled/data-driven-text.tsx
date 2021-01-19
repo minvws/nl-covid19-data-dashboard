@@ -1,12 +1,12 @@
-import { get } from 'lodash';
-import { isDefined } from 'ts-is-present';
 import {
   DifferenceDecimal,
   DifferenceInteger,
   Municipal,
   National,
   Regionaal,
-} from '~/types/data';
+} from '@corona-dashboard/common';
+import { get } from 'lodash';
+import { isDefined } from 'ts-is-present';
 import { assert } from '~/utils/assert';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';

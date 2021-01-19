@@ -10,7 +10,6 @@ import { LinkWithIcon } from '~/components-styled/link-with-icon';
 import { Heading, Text } from '~/components-styled/typography';
 import siteText from '~/locale';
 import { asResponsiveArray } from '~/style/utils';
-import { useBreakpoints } from '~/utils/useBreakpoints';
 
 type ArticleListProps = {
   articleSummaries: ArticleSummary[];
@@ -18,8 +17,6 @@ type ArticleListProps = {
 };
 
 export function ArticleList({ articleSummaries, hideLink }: ArticleListProps) {
-  const breakpoints = useBreakpoints();
-
   return (
     <Box
       css={css({

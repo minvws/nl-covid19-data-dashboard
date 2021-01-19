@@ -31,6 +31,11 @@ import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 
 export { getStaticPaths } from '~/static-paths/vr';
+import { RiskLevelIndicator } from '~/components-styled/risk-level-indicator';
+import { assert } from '~/utils/assert';
+import { TopicalChoroplethContainer } from '~/domain/topical/topical-choropleth-container';
+import { TopicalTile } from '~/domain/topical/topical-tile';
+import css from '@styled-system/css';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -45,6 +50,18 @@ const SafetyRegionActueel: FCWithLayout<typeof getStaticProps> = (props) => {
   const { text: siteText, choropleth, data } = props;
   const router = useRouter();
   const text = siteText.veiligheidsregio_actueel;
+  const escalationText = siteText.escalatie_niveau;
+
+  const regionCode = router.query.code;
+
+  const filteredRegion = props.choropleth.vr.escalation_levels.find(
+    (item) => item.vrcode === regionCode
+  );
+
+  assert(
+    filteredRegion,
+    `Could not find a "vrcode" to match with the region: ${regionCode} to get the the current "escalation_level" of it.`
+  );
 
   const dataInfectedTotal = data.tested_overall;
   const dataHospitalIntake = data.hospital_nice;
@@ -116,6 +133,18 @@ const SafetyRegionActueel: FCWithLayout<typeof getStaticProps> = (props) => {
               />
             </MiniTrendTileLayout>
 
+            <RiskLevelIndicator
+              title={text.risoconiveau_maatregelen.title}
+              description={text.risoconiveau_maatregelen.description}
+              link={{
+                title: text.risoconiveau_maatregelen.bekijk_href,
+                href: `/veiligheidsregio/${regionCode}/maatregelen`,
+              }}
+              escalationLevel={filteredRegion.escalation_level}
+              code={filteredRegion.vrcode}
+              escalationTypes={escalationText.types}
+            />
+
             <QuickLinks
               header={text.quick_links.header}
               links={[
@@ -131,35 +160,48 @@ const SafetyRegionActueel: FCWithLayout<typeof getStaticProps> = (props) => {
               ]}
             />
 
-            <ChoroplethTile
-              title={text.risiconiveaus.selecteer_titel}
-              description={
-                <>
-                  <span
-                    dangerouslySetInnerHTML={{
-                      __html: text.risiconiveaus.selecteer_toelichting,
-                    }}
-                  />
-                  <EscalationMapLegenda
+            <TopicalTile>
+              <>
+                <TopicalChoroplethContainer
+                  title={text.risiconiveaus.selecteer_titel}
+                  description={
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: text.risiconiveaus.selecteer_toelichting,
+                      }}
+                    />
+                  }
+                  legendComponent={
+                    <EscalationMapLegenda
+                      data={choropleth.vr}
+                      metricName="escalation_levels"
+                      metricProperty="escalation_level"
+                    />
+                  }
+                >
+                  <SafetyRegionChoropleth
                     data={choropleth.vr}
                     metricName="escalation_levels"
                     metricProperty="escalation_level"
+                    onSelect={createSelectRegionHandler(router, 'maatregelen')}
+                    tooltipContent={escalationTooltip(
+                      createSelectRegionHandler(router, 'maatregelen')
+                    )}
                   />
-                </>
-              }
-            >
-              <SafetyRegionChoropleth
-                data={choropleth.vr}
-                metricName="escalation_levels"
-                metricProperty="escalation_level"
-                onSelect={createSelectRegionHandler(router)}
-                tooltipContent={escalationTooltip(
-                  createSelectRegionHandler(router)
-                )}
-              />
-            </ChoroplethTile>
-
-            <EscalationLevelExplanations />
+                </TopicalChoroplethContainer>
+                <Box
+                  borderTopWidth="1px"
+                  borderTopStyle="solid"
+                  borderTopColor="gray"
+                  mt={3}
+                  mx={-4}
+                >
+                  <TopicalTile css={css({ mb: 0, pb: 0 })}>
+                    <EscalationLevelExplanations />
+                  </TopicalTile>
+                </Box>
+              </>
+            </TopicalTile>
 
             <DataSitemap />
           </TileList>

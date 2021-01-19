@@ -30,6 +30,9 @@ import { getSafetyRegionForMunicipalityCode } from '~/utils/getSafetyRegionForMu
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { SEOHead } from '~/components/seoHead';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { TopicalChoroplethContainer } from '~/domain/topical/topical-choropleth-container';
+import { TopicalTile } from '~/domain/topical/topical-tile';
+import css from '@styled-system/css';
 
 export { getStaticPaths } from '~/static-paths/gm';
 
@@ -149,35 +152,48 @@ const MunicipalityActueel: FCWithLayout<typeof getStaticProps> = (props) => {
               ]}
             />
 
-            <ChoroplethTile
-              title={text.risiconiveaus.selecteer_titel}
-              description={
-                <>
-                  <span
-                    dangerouslySetInnerHTML={{
-                      __html: text.risiconiveaus.selecteer_toelichting,
-                    }}
-                  />
-                  <EscalationMapLegenda
+            <TopicalTile>
+              <>
+                <TopicalChoroplethContainer
+                  title={text.risiconiveaus.selecteer_titel}
+                  description={
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: text.risiconiveaus.selecteer_toelichting,
+                      }}
+                    />
+                  }
+                  legendComponent={
+                    <EscalationMapLegenda
+                      data={choropleth.vr}
+                      metricName="escalation_levels"
+                      metricProperty="escalation_level"
+                    />
+                  }
+                >
+                  <SafetyRegionChoropleth
                     data={choropleth.vr}
                     metricName="escalation_levels"
                     metricProperty="escalation_level"
+                    onSelect={createSelectRegionHandler(router, 'maatregelen')}
+                    tooltipContent={escalationTooltip(
+                      createSelectRegionHandler(router, 'maatregelen')
+                    )}
                   />
-                </>
-              }
-            >
-              <SafetyRegionChoropleth
-                data={choropleth.vr}
-                metricName="escalation_levels"
-                metricProperty="escalation_level"
-                onSelect={createSelectRegionHandler(router)}
-                tooltipContent={escalationTooltip(
-                  createSelectRegionHandler(router)
-                )}
-              />
-            </ChoroplethTile>
-
-            <EscalationLevelExplanations />
+                </TopicalChoroplethContainer>
+                <Box
+                  borderTopWidth="1px"
+                  borderTopStyle="solid"
+                  borderTopColor="gray"
+                  mt={3}
+                  mx={-4}
+                >
+                  <TopicalTile css={css({ mb: 0, pb: 0 })}>
+                    <EscalationLevelExplanations />
+                  </TopicalTile>
+                </Box>
+              </>
+            </TopicalTile>
 
             <DataSitemap />
           </TileList>

@@ -1,8 +1,8 @@
+import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
 import { ReactNode } from 'react';
 import { Box } from '~/components-styled/base';
 import { ChoroplethLegenda } from '~/components-styled/choropleth-legenda';
 import { Heading, Text } from '~/components-styled/typography';
-import { ChoroplethThresholdsValue } from '~/components/choropleth/shared';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 
 /**
