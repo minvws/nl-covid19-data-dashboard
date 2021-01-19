@@ -1,4 +1,5 @@
 import CoronaVirusIcon from '~/assets/coronavirus.svg';
+import { AgeDemographic } from '~/components-styled/age-demographic';
 import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
@@ -8,7 +9,6 @@ import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
 import { SEOHead } from '~/components/seoHead';
-import { AgeDemographic } from '~/domain/deceased/age-demographic';
 import { DeceasedMonitorSection } from '~/domain/deceased/deceased-monitor-section';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
@@ -134,10 +134,6 @@ const DeceasedNationalPage: FCWithLayout<typeof getStaticProps> = (props) => {
             <AgeDemographic
               data={dataDeceasedPerAgeGroup}
               metricProperty="covid_percentage"
-              // series={[
-              //   color: 'gray',
-              //   metricProperty: 'age_group_'
-              // ]}
             />
           </ChartTile>
         )}
