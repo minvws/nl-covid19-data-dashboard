@@ -25,16 +25,18 @@ export function LinkWithIcon({
           display: 'inline-block',
           fontWeight: fontWeight ?? 'normal',
           textDecoration: 'none',
-          '&:hover': { textDecoration: 'underline' },
+          '&:hover,&:focus': {
+            textDecoration: 'underline',
+          },
         })}
       >
         {iconPlacement == 'right' && children}
         <span
           css={css({
             svg: {
-              height: '10px',
-              width: '12px',
-              marginRight: 3,
+              height: '11px',
+              width: '13px',
+              mx: '3px',
             },
           })}
         >

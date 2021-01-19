@@ -1,11 +1,11 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
+import ArrowIcon from '~/assets/arrow.svg';
 import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { Box } from './base';
-import { Heading } from './typography';
-import ArrowIcon from '~/assets/arrow.svg';
 import { LinkWithIcon } from './link-with-icon';
+import { Heading } from './typography';
 
 interface QuickLinksProps {
   header: string;
@@ -27,8 +27,6 @@ export function QuickLinks({ header, links }: QuickLinksProps) {
         {links.map((link, index) => (
           <Item key={`${link.text}-${index}`}>
             <Link href={link.href}>
-              {/* <QuickLink href={link.href}>{link.text}</QuickLink> */}
-
               <LinkWithIcon
                 href={link.href}
                 icon={<ArrowIcon css={css({ transform: 'rotate(-90deg)' })} />}
