@@ -3107,6 +3107,16 @@
     classnames "^2.2.5"
     prop-types "^15.6.2"
 
+"@visx/pattern@1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@visx/pattern/-/pattern-1.1.0.tgz#8c1dd6069853e1306b90aa35ea6a09280d97a10e"
+  integrity sha512-mjuc/fvDb5rfKkvfDKyduwjbB2bidJtLj5q0GzhGeXImKxlqG255VwMSrkyPsPSmSnV39EHSrfKb/2oc/gSUGA==
+  dependencies:
+    "@types/classnames" "^2.2.9"
+    "@types/react" "*"
+    classnames "^2.2.5"
+    prop-types "^15.5.10"
+
 "@visx/point@1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@visx/point/-/point-1.0.0.tgz#c93cd540989ded394aab8d56cbdc7ca4891c3dd9"

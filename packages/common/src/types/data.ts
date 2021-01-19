@@ -124,6 +124,7 @@ export interface National {
   restrictions: NationalRestrictions;
   behavior: NationalBehavior;
   deceased_rivm: NationalDeceasedRivm;
+  deceased_rivm_per_age_group: NlDeceasedRivmPerAgeGroup;
   deceased_cbs: NationalDeceasedCbs;
   elderly_at_home: NationalElderlyAtHome;
 }
@@ -397,6 +398,15 @@ export interface NationalDeceasedRivmValue {
   covid_daily: number;
   covid_total: number;
   date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlDeceasedRivmPerAgeGroup {
+  values: NlDeceasedRivmPerAgeGroupValue[];
+}
+export interface NlDeceasedRivmPerAgeGroupValue {
+  age_group_range: string;
+  age_group_percentage: number;
+  covid_percentage: number;
   date_of_insertion_unix: number;
 }
 export interface NationalDeceasedCbs {

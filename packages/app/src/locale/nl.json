@@ -1392,14 +1392,33 @@
   "infected_age_groups": {
     "title": "Verdeling naar leeftijd",
     "description": "De blauwe rechterbalken in deze grafiek laten zien tot welke leeftijdsgroep positief geteste personen behoren. De grijze linkerbalken tonen hoe groot elke leeftijdsgroep is ten opzichte van de hele Nederlandse bevolking. De blauwe en grijze balken laten samen zien of leeftijdsgroepen naar verhouding meer of minder positief geteste personen hebben. Bijvoorbeeld: van alle positief geteste personen is 10% een dertiger (blauwe balk) en van alle Nederlanders is 14% een dertiger (grijze balk). De leeftijdsgroep dertigers heeft in dit voorbeeld naar verhouding minder positief geteste personen. De grafiek wordt dagelijks bijgewerkt en gaat alleen over de meest recent gemelde gevallen.",
-    "example": "Bijvoorbeeld: Van alle positief geteste mensen is {{infectedPercentage}} tussen de {{ageGroupRange}} jaar. Van alle Nederlanders is {{ageGroupPercentage}} tussen de {{ageGroupRange}} jaar.",
     "graph": {
+      "accessibility_description": "Grafiek met percentages voor de verdeling van de bevolking en de verdeling van positief geteste leeftijdsgroepen.",
+      "clipped_value_message": "Deze waarde is groter dan in de grafiek is weergegeven",
       "age_group_percentage_title": "Verdeling leeftijdsgroepen in Nederland",
       "age_group_percentage_tooltip": "van de bevolking is {{ageGroupRange}} jaar",
-      "infected_percentage_title": "Positieve testen per leeftijdsgroep",
-      "infected_percentage_tooltip": "van het aantal positief geteste mensen is {{ageGroupRange}} jaar",
-      "age_group_range_tooltip": "{{ageGroupRange}} jaar",
-      "accessibility_description": "Grafiek met percentages voor de verdeling van de bevolking en de verdeling van positief geteste leeftijdsgroepen."
+      "value_percentage_title": "Positieve testen per leeftijdsgroep",
+      "value_percentage_tooltip": "van het aantal positief geteste mensen is {{ageGroupRange}} jaar",
+      "age_group_range_tooltip": "{{ageGroupRange}} jaar"
+    }
+  },
+  "deceased_age_groups": {
+    "title": "Verdeling naar leeftijd",
+    "description": "De blauwe rechterbalken in deze grafiek laten zien tot welke leeftijdsgroep de aan COVID-19 overleden personen behoren. De grijze linkerbalken tonen hoe groot elke leeftijdsgroep is ten opzichte van de hele Nederlandse bevolking. De blauwe en grijze balken laten samen zien of leeftijdsgroepen naar verhouding meer of minder aan COVID-19 overleden personen hebben. Stel dat de grijze balk toont dat 12% van alle Nederlanders een zestiger is, en de blauwe balk geeft bijvoorbeeld aan dat 10% van alle aan COVID-19 overleden personen een zestiger is, dan heeft deze leeftijdsgroep naar verhouding minder aan COVID-19 overleden personen. De grafiek wordt dagelijks bijgewerkt en gaat over sterftegevallen sinds de uitbraak van het virus.  Let op dat iedereen onder de vijftig in één leeftijdsgroep is geplaatst door het RIVM.",
+    "bronnen": {
+      "rivm": {
+        "text": "RIVM",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_casus_landelijk.html"
+      }
+    },
+    "graph": {
+      "accessibility_description": "Grafiek met percentages voor de verdeling van de bevolking en de verdeling van positief geteste leeftijdsgroepen.",
+      "clipped_value_message": "Deze waarde is groter dan in de grafiek is weergegeven",
+      "age_group_percentage_title": "Verdeling leeftijdsgroepen in Nederland",
+      "age_group_percentage_tooltip": "van de bevolking is {{ageGroupRange}} jaar",
+      "value_percentage_title": "Overledenen per leeftijdsgroep",
+      "value_percentage_tooltip": "van het aantal overleden personen is {{ageGroupRange}} jaar",
+      "age_group_range_tooltip": "{{ageGroupRange}} jaar"
     }
   },
   "gehandicaptenzorg_besmette_locaties": {
