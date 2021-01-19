@@ -97,23 +97,21 @@ const DeceasedNationalPage: FCWithLayout<typeof getStaticProps> = (props) => {
           metadata={{ source: text.section_deceased_rivm.bronnen.rivm }}
         />
 
-        {dataDeceasedPerAgeGroup && (
-          <ChartTile
-            title={siteText.deceased_age_groups.title}
-            description={siteText.deceased_age_groups.description}
-            metadata={{
-              date: dataRivm.last_value.date_unix,
-              source: siteText.deceased_age_groups.bronnen.rivm,
-            }}
-          >
-            <AgeDemographic
-              data={dataDeceasedPerAgeGroup}
-              metricProperty="covid_percentage"
-              visuallyMaxPercentage={45}
-              text={siteText.deceased_age_groups.graph}
-            />
-          </ChartTile>
-        )}
+        <ChartTile
+          title={siteText.deceased_age_groups.title}
+          description={siteText.deceased_age_groups.description}
+          metadata={{
+            date: dataRivm.last_value.date_unix,
+            source: siteText.deceased_age_groups.bronnen.rivm,
+          }}
+        >
+          <AgeDemographic
+            data={dataDeceasedPerAgeGroup}
+            metricProperty="covid_percentage"
+            visuallyMaxPercentage={45}
+            text={siteText.deceased_age_groups.graph}
+          />
+        </ChartTile>
 
         <DeceasedMonitorSection data={dataCbs} />
       </TileList>

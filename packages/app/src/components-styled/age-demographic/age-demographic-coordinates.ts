@@ -124,6 +124,9 @@ function calculateAgeDemographicCoordinates<
     ),
   ];
 
+  /**
+   * If there's a `visuallyMaxPercentage`-prop we'll clip the domain to that value
+   */
   if (visuallyMaxPercentage) {
     domainPercentages[1] = Math.min(
       visuallyMaxPercentage,
