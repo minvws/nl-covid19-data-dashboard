@@ -17,8 +17,9 @@ import overDitDashboard from './documents/over-dit-dashboard';
 import restrictionGroup from './restrictions/restriction-group.js';
 import restrictionGroupLockdown from './restrictions/restriction-group-lockdown.js';
 import restrictionCategory from './restrictions/restriction-category.js';
-import roadmap from './restrictions/roadmap.js';
 import restriction from './restrictions/restriction.js';
+import roadmap from './restrictions/roadmap.js';
+import lockdown from './restrictions/lockdown.js';
 
 //objects are building blocks, but not queryable in itself
 // import openGraph from "./objects/open-graph";
@@ -48,6 +49,7 @@ export default createSchema({
     restrictionGroupLockdown,
     restrictionCategory,
     roadmap,
+    lockdown,
     restriction,
 
     //objects
