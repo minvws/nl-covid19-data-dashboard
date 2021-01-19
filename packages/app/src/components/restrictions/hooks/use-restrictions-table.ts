@@ -4,7 +4,7 @@ import siteText from '~/locale/index';
 import {
   NationalRestrictionValue,
   RegionalRestrictionValue,
-} from '~/types/data';
+} from '@corona-dashboard/common';
 
 const restrictionTexts: Record<string, string> = siteText.maatregelen.teksten;
 

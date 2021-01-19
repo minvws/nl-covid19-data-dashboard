@@ -1,5 +1,5 @@
 import { NextRouter } from 'next/router';
-import { SafetyRegionProperties } from '../shared';
+import { SafetyRegionProperties } from '@corona-dashboard/common';
 import { RegioPageName } from './types';
 
 export type RegionSelectionHandler = (context: SafetyRegionProperties) => void;

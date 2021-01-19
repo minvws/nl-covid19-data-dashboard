@@ -5,7 +5,7 @@ import { colors } from '~/style/theme';
 import { Choropleth } from './choropleth';
 import { useChartDimensions, useMunicipalityNavigationData } from './hooks';
 import { Path } from './path';
-import { MunicipalityProperties } from './shared';
+import { MunicipalityProperties } from '@corona-dashboard/common';
 import { countryGeo, municipalGeo } from './topology';
 
 type MunicipalityNavigationMapProps<T> = {

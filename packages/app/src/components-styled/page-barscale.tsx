@@ -1,10 +1,13 @@
+import {
+  getLastFilledValue,
+  Metric,
+  MetricKeys,
+} from '@corona-dashboard/common';
 import { get } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { BarScale } from '~/components/barScale';
-import { Metric, MetricKeys } from '~/components/choropleth/shared';
 import siteText, { TALLLanguages } from '~/locale/index';
 import { assert } from '~/utils/assert';
-import { getLastFilledValue } from '~/utils/get-last-filled-value';
 import {
   DataScope,
   getMetricConfig,

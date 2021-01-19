@@ -1,6 +1,6 @@
 import { isDefined } from 'ts-is-present';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
-import { DifferenceDecimal, DifferenceInteger } from '~/types/data';
+import { DifferenceDecimal, DifferenceInteger } from '@corona-dashboard/common';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { Box } from '../base';
 import { DifferenceIndicator } from '../difference-indicator';

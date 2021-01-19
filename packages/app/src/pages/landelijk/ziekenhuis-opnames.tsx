@@ -29,6 +29,7 @@ import {
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 
 const text = siteText.ziekenhuisopnames_per_dag;
+const graphDescriptions = siteText.accessibility.grafieken;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -157,7 +158,7 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
 
         <LineChartTile
           title={text.linechart_titel}
-          description={text.linechart_description}
+          ariaDescription={graphDescriptions.ziekenhuisopnames}
           values={dataHospitalNice.values}
           signaalwaarde={40}
           linesConfig={[
