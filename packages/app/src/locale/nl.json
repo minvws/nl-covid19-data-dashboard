@@ -9,8 +9,8 @@
     "title": "Laatst bijgewerkt"
   },
   "notificatie": {
-    "titel": "Voorzichtige daling zichtbaar",
-    "bericht": "Voor de tweede week op rij is het aantal meldingen iets gedaald. Het percentage mensen met een positieve coronatestuitslag daalde licht. Het aantal nieuwe ziekenhuis- en IC-opnames lag lager dan de week daarvoor. Ook werden er minder nieuwe verpleeghuizen met coronabesmettingen gemeld. De dalende cijfers zijn een eerste effect van de lockdown die op 15 december inging.",
+    "titel": "Opmars nieuwe coronavarianten overschaduwt positiever beeld",
+    "bericht": "We zien een gematigd positief beeld in de week van 13 tot en met 19 januari, een effect van de lockdown die op 15 december inging. Het aantal meldingen van mensen met een positieve coronatestuitslag is in die week, in vergelijking met de week ervoor, met 21,5% gedaald naar 38.776 meldingen. Dit actuele beeld wordt overschaduwd door de snelle opmars van de coronavariant die in het Verenigd Koninkrijk en Ierland tot een zeer hoge toestroom aan patiënten in de ziekenhuizen heeft geleid. Geschat wordt dat van de mensen die afgelopen week besmet werden in Nederland, er ongeveer 10% de meer besmettelijke Britse variant heeft. Dat is een verdubbeling ten opzichte van de week ervoor. We hebben te maken met twee virusvarianten die zich met verschillende snelheden lijken te verspreiden in Nederland. Daardoor zijn er eigenlijk twee aparte corona-epidemieën. Een epidemie met de ‘oude’ variant, waarin het aantal infecties daalt, en een epidemie met de Britse variant waarin het aantal infecties juist toeneemt. ",
     "link": {
       "text": "Bekijk de toelichting van het RIVM",
       "href": "https://www.rivm.nl/coronavirus-covid-19/actueel"
@@ -974,7 +974,7 @@
   },
   "laatste_ontwikkelingen": {
     "title": "Laatste ontwikkelingen",
-    "menu_subtitle": "Voorzichtige daling zichtbaar",
+    "menu_subtitle": "Opmars nieuwe coronavariant",
     "alle_cijfers_header": "Benieuwd naar alle cijfers?",
     "alle_cijfers_link": "Bekijk alle cijfers"
   },
@@ -1392,33 +1392,17 @@
   "infected_age_groups": {
     "title": "Verdeling naar leeftijd",
     "description": "De blauwe rechterbalken in deze grafiek laten zien tot welke leeftijdsgroep positief geteste personen behoren. De grijze linkerbalken tonen hoe groot elke leeftijdsgroep is ten opzichte van de hele Nederlandse bevolking. De blauwe en grijze balken laten samen zien of leeftijdsgroepen naar verhouding meer of minder positief geteste personen hebben. Bijvoorbeeld: van alle positief geteste personen is 10% een dertiger (blauwe balk) en van alle Nederlanders is 14% een dertiger (grijze balk). De leeftijdsgroep dertigers heeft in dit voorbeeld naar verhouding minder positief geteste personen. De grafiek wordt dagelijks bijgewerkt en gaat alleen over de meest recent gemelde gevallen.",
+    "example": "Bijvoorbeeld: Van alle positief geteste mensen is {{infectedPercentage}} tussen de {{ageGroupRange}} jaar. Van alle Nederlanders is {{ageGroupPercentage}} tussen de {{ageGroupRange}} jaar.",
     "graph": {
-      "accessibility_description": "Grafiek met percentages voor de verdeling van de bevolking en de verdeling van positief geteste leeftijdsgroepen.",
-      "clipped_value_message": "Deze waarde is groter dan in de grafiek is weergegeven",
       "age_group_percentage_title": "Verdeling leeftijdsgroepen in Nederland",
       "age_group_percentage_tooltip": "van de bevolking is {{ageGroupRange}} jaar",
+      "infected_percentage_title": "Positieve testen per leeftijdsgroep",
+      "infected_percentage_tooltip": "van het aantal positief geteste mensen is {{ageGroupRange}} jaar",
+      "age_group_range_tooltip": "{{ageGroupRange}} jaar",
+      "accessibility_description": "Grafiek met percentages voor de verdeling van de bevolking en de verdeling van positief geteste leeftijdsgroepen.",
+      "clipped_value_message": "Deze waarde is groter dan in de grafiek is weergegeven",
       "value_percentage_title": "Positieve testen per leeftijdsgroep",
-      "value_percentage_tooltip": "van het aantal positief geteste mensen is {{ageGroupRange}} jaar",
-      "age_group_range_tooltip": "{{ageGroupRange}} jaar"
-    }
-  },
-  "deceased_age_groups": {
-    "title": "Verdeling naar leeftijd",
-    "description": "De blauwe rechterbalken in deze grafiek laten zien tot welke leeftijdsgroep de aan COVID-19 overleden personen behoren. De grijze linkerbalken tonen hoe groot elke leeftijdsgroep is ten opzichte van de hele Nederlandse bevolking. De blauwe en grijze balken laten samen zien of leeftijdsgroepen naar verhouding meer of minder aan COVID-19 overleden personen hebben. Stel dat de grijze balk toont dat 12% van alle Nederlanders een zestiger is, en de blauwe balk geeft bijvoorbeeld aan dat 10% van alle aan COVID-19 overleden personen een zestiger is, dan heeft deze leeftijdsgroep naar verhouding minder aan COVID-19 overleden personen. De grafiek wordt dagelijks bijgewerkt en gaat over sterftegevallen sinds de uitbraak van het virus.  Let op dat iedereen onder de vijftig in één leeftijdsgroep is geplaatst door het RIVM.",
-    "bronnen": {
-      "rivm": {
-        "text": "RIVM",
-        "href": "https://data.rivm.nl/covid-19/COVID-19_casus_landelijk.html"
-      }
-    },
-    "graph": {
-      "accessibility_description": "Grafiek met percentages voor de verdeling van de bevolking en de verdeling van positief geteste leeftijdsgroepen.",
-      "clipped_value_message": "Deze waarde is groter dan in de grafiek is weergegeven",
-      "age_group_percentage_title": "Verdeling leeftijdsgroepen in Nederland",
-      "age_group_percentage_tooltip": "van de bevolking is {{ageGroupRange}} jaar",
-      "value_percentage_title": "Overledenen per leeftijdsgroep",
-      "value_percentage_tooltip": "van het aantal overleden personen is {{ageGroupRange}} jaar",
-      "age_group_range_tooltip": "{{ageGroupRange}} jaar"
+      "value_percentage_tooltip": "van het aantal positief geteste mensen is {{ageGroupRange}} jaar"
     }
   },
   "gehandicaptenzorg_besmette_locaties": {
@@ -2058,6 +2042,25 @@
       "verdenkingen_huisartsen": "Deze grafiek toont het geschat aantal patiënten met eerste melding van COVID-19 klachten bij de huisarts over tijd.",
       "ziekenhuis_opnames": "Deze grafiek toont het aantal ziekenhuisopnames over tijd.",
       "rioolwater_meetwaarde": "Deze grafiek toont de meest recente meetwaarde van het gemiddeld aantal virusdeeltjes per 100.000 inwoners per rioolwaterzuiveringslocatie."
+    }
+  },
+  "deceased_age_groups": {
+    "title": "Verdeling naar leeftijd",
+    "description": "De blauwe rechterbalken in deze grafiek laten zien tot welke leeftijdsgroep de aan COVID-19 overleden personen behoren. De grijze linkerbalken tonen hoe groot elke leeftijdsgroep is ten opzichte van de hele Nederlandse bevolking. De blauwe en grijze balken laten samen zien of leeftijdsgroepen naar verhouding meer of minder aan COVID-19 overleden personen hebben. Stel dat de grijze balk toont dat 12% van alle Nederlanders een zestiger is, en de blauwe balk geeft bijvoorbeeld aan dat 10% van alle aan COVID-19 overleden personen een zestiger is, dan heeft deze leeftijdsgroep naar verhouding minder aan COVID-19 overleden personen. De grafiek wordt dagelijks bijgewerkt en gaat over sterftegevallen sinds de uitbraak van het virus.  Let op dat iedereen onder de vijftig in één leeftijdsgroep is geplaatst door het RIVM.",
+    "bronnen": {
+      "rivm": {
+        "text": "RIVM",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_casus_landelijk.html"
+      }
+    },
+    "graph": {
+      "accessibility_description": "Grafiek met percentages voor de verdeling van de bevolking en de verdeling van positief geteste leeftijdsgroepen.",
+      "clipped_value_message": "Deze waarde is groter dan in de grafiek is weergegeven",
+      "age_group_percentage_title": "Verdeling leeftijdsgroepen in Nederland",
+      "age_group_percentage_tooltip": "van de bevolking is {{ageGroupRange}} jaar",
+      "value_percentage_title": "Overledenen per leeftijdsgroep",
+      "value_percentage_tooltip": "van het aantal overleden personen is {{ageGroupRange}} jaar",
+      "age_group_range_tooltip": "{{ageGroupRange}} jaar"
     }
   }
 }
