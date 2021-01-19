@@ -21,14 +21,22 @@ export function ArticleList({ articleSummaries, hideLink }: ArticleListProps) {
   const breakpoints = useBreakpoints();
 
   return (
-    <Box>
-      <Heading level={2}>
-        {siteText.nationaal_actueel.latest_articles.title}
-      </Heading>
+    <Box
+      css={css({
+        display: 'flex',
+        flexDirection: 'column',
+      })}
+    >
+      <Box px={{ _: 4, md: 0 }}>
+        <Heading level={2}>
+          {siteText.nationaal_actueel.latest_articles.title}
+        </Heading>
+      </Box>
       <Box
         display="flex"
         alignItems={{ lg: 'flex-end' }}
         flexDirection={{ _: 'column', lg: 'row' }}
+        px={{ _: 4, md: 0 }}
       >
         <Box flex={{ lg: '0 0 33%' }}>
           <Text m={0}>
@@ -53,12 +61,7 @@ export function ArticleList({ articleSummaries, hideLink }: ArticleListProps) {
           )}
         </Box>
       </Box>
-      <Box
-        display="flex"
-        spacingHorizontal={breakpoints.lg}
-        flexDirection={{ _: 'column', lg: 'row' }}
-        flexWrap="wrap"
-      >
+      <Box display="block" margin={0} maxWidth="100%" mt={3}>
         {articleSummaries.map((summary) => (
           <ArticleBox key={summary.slug.current}>
             <ArticleTeaser
@@ -76,8 +79,19 @@ export function ArticleList({ articleSummaries, hideLink }: ArticleListProps) {
 
 const ArticleBox = styled.div(
   css({
-    flex: '0 0 auto',
-    marginTop: 3,
-    marginRight: asResponsiveArray({ _: 0, lg: 4 }),
+    display: 'inline-block',
+    marginBottom: 4,
+    width: asResponsiveArray({
+      _: '100%',
+      sm: 'calc(50% - 16px)',
+      md: 'calc(33% - 32px)',
+      lg: 'calc(33% - 32px)',
+    }),
+    '&:nth-child(even)': {
+      ml: asResponsiveArray({ sm: '32px' }),
+    },
+    '&:nth-child(3n+2)': {
+      mx: asResponsiveArray({ md: '48px', lg: '48px' }),
+    },
   })
 );

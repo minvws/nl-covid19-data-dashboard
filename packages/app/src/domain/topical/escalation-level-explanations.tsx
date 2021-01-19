@@ -1,3 +1,4 @@
+import css from '@styled-system/css';
 import ArrowIcon from '~/assets/arrow.svg';
 import { Box } from '~/components-styled/base';
 import { Collapsible } from '~/components-styled/collapsible';
@@ -47,7 +48,7 @@ export function EscalationLevelExplanations() {
         <Box mt={4}>
           <LinkWithIcon
             href="/over-risiconiveaus"
-            icon={<ArrowIcon />}
+            icon={<ArrowIcon css={css({ transform: 'rotate(-90deg)' })} />}
             iconPlacement="right"
           >
             {siteText.escalatie_niveau.lees_meer}

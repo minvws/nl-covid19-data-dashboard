@@ -1,11 +1,11 @@
+import css from '@styled-system/css';
 import { groq } from 'next-sanity';
 import { useRouter } from 'next/router';
 import ArtsIcon from '~/assets/arts.svg';
 import GetestIcon from '~/assets/test.svg';
 import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
-import { Box } from '~/components-styled/base';
 import { ArticleSummary } from '~/components-styled/article-teaser';
-import { ChoroplethTile } from '~/components-styled/choropleth-tile';
+import { Box } from '~/components-styled/base';
 import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
 import { MaxWidth } from '~/components-styled/max-width';
@@ -24,6 +24,8 @@ import { DataSitemap } from '~/domain/topical/data-site-map';
 import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
+import { TopicalChoroplethContainer } from '~/domain/topical/topical-choropleth-container';
+import { TopicalTile } from '~/domain/topical/topical-tile';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
@@ -172,35 +174,48 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
             title={notificatie.titel}
           />
 
-          <ChoroplethTile
-            title={text.risiconiveaus.selecteer_titel}
-            description={
-              <>
-                <span
-                  dangerouslySetInnerHTML={{
-                    __html: text.risiconiveaus.selecteer_toelichting,
-                  }}
-                />
-                <EscalationMapLegenda
+          <TopicalTile>
+            <>
+              <TopicalChoroplethContainer
+                title={text.risiconiveaus.selecteer_titel}
+                description={
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: text.risiconiveaus.selecteer_toelichting,
+                    }}
+                  />
+                }
+                legendComponent={
+                  <EscalationMapLegenda
+                    data={choropleth.vr}
+                    metricName="escalation_levels"
+                    metricProperty="escalation_level"
+                  />
+                }
+              >
+                <SafetyRegionChoropleth
                   data={choropleth.vr}
                   metricName="escalation_levels"
                   metricProperty="escalation_level"
+                  onSelect={createSelectRegionHandler(router, 'maatregelen')}
+                  tooltipContent={escalationTooltip(
+                    createSelectRegionHandler(router, 'maatregelen')
+                  )}
                 />
-              </>
-            }
-          >
-            <SafetyRegionChoropleth
-              data={choropleth.vr}
-              metricName="escalation_levels"
-              metricProperty="escalation_level"
-              onSelect={createSelectRegionHandler(router, 'maatregelen')}
-              tooltipContent={escalationTooltip(
-                createSelectRegionHandler(router, 'maatregelen')
-              )}
-            />
-          </ChoroplethTile>
-
-          <EscalationLevelExplanations />
+              </TopicalChoroplethContainer>
+              <Box
+                borderTopWidth="1px"
+                borderTopStyle="solid"
+                borderTopColor="gray"
+                mt={3}
+                mx={-4}
+              >
+                <TopicalTile css={css({ mb: 0, pb: 0 })}>
+                  <EscalationLevelExplanations />
+                </TopicalTile>
+              </Box>
+            </>
+          </TopicalTile>
 
           <DataSitemap />
 
