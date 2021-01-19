@@ -6,13 +6,16 @@ import {
   GetTooltipCoordinates,
   TooltipCoordinates,
 } from '~/components-styled/tooltip';
-import {
-  NationalTestedPerAgeGroup,
-  NationalTestedPerAgeGroupValue,
-} from '~/types/data';
+import { useElementSize } from '~/utils/use-element-size';
+import { useBreakpoints } from '~/utils/useBreakpoints';
 import { AGE_GROUP_TOOLTIP_WIDTH } from './age-demographic-chart';
 
-export interface AgeDemographicCoordinates {
+export interface AgeDemographicDefaultValue {
+  age_group_percentage: number;
+  age_group_range: string;
+}
+
+export interface AgeDemographicCoordinates<T> {
   width: number;
   height: number;
   numTicks: number;
@@ -21,10 +24,10 @@ export interface AgeDemographicCoordinates {
   ageGroupPercentageScale: ValueOf<ScaleTypeToD3Scale<any, any, any>>;
   infectedPercentageScale: ValueOf<ScaleTypeToD3Scale<any, any, any>>;
   ageGroupRangeScale: ScaleBand<string>;
-  ageGroupPercentagePoint: (value: NationalTestedPerAgeGroupValue) => any;
-  infectedPercentagePoint: (value: NationalTestedPerAgeGroupValue) => any;
-  ageGroupRangePoint: (value: NationalTestedPerAgeGroupValue) => any;
-  getTooltipCoordinates: GetTooltipCoordinates<NationalTestedPerAgeGroupValue>;
+  ageGroupPercentagePoint: (value: T) => any;
+  infectedPercentagePoint: (value: T) => any;
+  ageGroupRangePoint: (value: T) => any;
+  getTooltipCoordinates: GetTooltipCoordinates<T>;
   isSmallScreen: boolean;
   margin: {
     top: number;
@@ -32,33 +35,41 @@ export interface AgeDemographicCoordinates {
     bottom: number;
     left: number;
   };
-  values: NationalTestedPerAgeGroupValue[];
-  ageGroupRange: (value: NationalTestedPerAgeGroupValue) => string;
+  values: T[];
+  ageGroupRange: (value: T) => string;
   ageRangeAxisWidth: number;
 }
 
-export function useAgeDemographicCoordinates(
-  data: NationalTestedPerAgeGroup,
-  isSmallScreen: boolean,
-  parentWidth: number,
-  isExtraSmallScreen: boolean
-) {
-  return useMemo(() => {
+export function useAgeDemographicCoordinates<
+  T extends AgeDemographicDefaultValue
+>(data: { values: T[] }, metricProperty: keyof T) {
+  const [ref, { width }] = useElementSize<HTMLDivElement>(400);
+  const { xs, xl } = useBreakpoints();
+  const isSmallScreen = !xl;
+  const isExtraSmallScreen = xs;
+
+  const coordinates = useMemo(() => {
     return calculateAgeDemographicCoordinates(
       data,
+      metricProperty,
       isSmallScreen,
-      parentWidth,
+      width,
       isExtraSmallScreen
     );
-  }, [data, isSmallScreen, parentWidth, isExtraSmallScreen]);
+  }, [data, metricProperty, isSmallScreen, width, isExtraSmallScreen]);
+
+  return [ref, coordinates] as const;
 }
 
-function calculateAgeDemographicCoordinates(
-  data: NationalTestedPerAgeGroup,
+function calculateAgeDemographicCoordinates<
+  T extends AgeDemographicDefaultValue
+>(
+  data: { values: T[] },
+  metricProperty: keyof T,
   isSmallScreen: boolean,
   parentWidth: number,
   isExtraSmallScreen: boolean
-): AgeDemographicCoordinates {
+): AgeDemographicCoordinates<T> {
   const values = data.values.sort((a, b) => {
     return b.age_group_range.localeCompare(a.age_group_range);
   });
@@ -85,12 +96,10 @@ function calculateAgeDemographicCoordinates(
   const yMax = height - margin.top - margin.bottom;
 
   // Helper functions to retrieve parts of the values
-  const ageGroupPercentage = (value: NationalTestedPerAgeGroupValue) =>
-    value.age_group_percentage * 100;
-  const infectedPercentage = (value: NationalTestedPerAgeGroupValue) =>
-    value.infected_percentage * 100;
-  const ageGroupRange = (value: NationalTestedPerAgeGroupValue) =>
-    value.age_group_range;
+  const ageGroupPercentage = (value: T) => value.age_group_percentage * 100;
+  const getValue = (value: T) =>
+    ((value[metricProperty] as unknown) as number) * 100;
+  const ageGroupRange = (value: T) => value.age_group_range;
 
   // Scales to map between values and coordinates
 
@@ -99,7 +108,7 @@ function calculateAgeDemographicCoordinates(
     0,
     Math.max(
       ...values.map((value) =>
-        Math.max(ageGroupPercentage(value), infectedPercentage(value))
+        Math.max(ageGroupPercentage(value), getValue(value))
       )
     ),
   ];
@@ -123,23 +132,22 @@ function calculateAgeDemographicCoordinates(
 
   // Compose together the scale and accessor functions to get point functions
   // The any/any is needed as typing would be a-flexible; and without it Typescript would complain
-  const createPoint = (scale: any, accessor: any) => (
-    value: NationalTestedPerAgeGroupValue
-  ) => scale(accessor(value));
+  const createPoint = (scale: any, accessor: any) => (value: T) =>
+    scale(accessor(value));
   const ageGroupPercentagePoint = createPoint(
     ageGroupPercentageScale,
     ageGroupPercentage
   );
   const infectedPercentagePoint = createPoint(
     infectedPercentageScale,
-    infectedPercentage
+    getValue
   );
   const ageGroupRangePoint = createPoint(ageGroupRangeScale, ageGroupRange);
 
   // Method for the tooltip to retrieve coordinates based on
   // The event and/or the value
-  const getTooltipCoordinates: GetTooltipCoordinates<NationalTestedPerAgeGroupValue> = (
-    value: NationalTestedPerAgeGroupValue,
+  const getTooltipCoordinates: GetTooltipCoordinates<T> = (
+    value: T,
     event?: MouseEvent<any>
   ): TooltipCoordinates => {
     const point = event ? localPoint(event) || { x: width } : { x: 0 };

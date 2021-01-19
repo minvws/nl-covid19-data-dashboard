@@ -1,35 +1,28 @@
 import { Box } from '~/components-styled/base';
 import { Tooltip, useTooltip } from '~/components-styled/tooltip';
-import {
-  NationalTestedPerAgeGroup,
-  NationalTestedPerAgeGroupValue,
-} from '~/types/data';
-import { useElementSize } from '~/utils/use-element-size';
-import { useBreakpoints } from '~/utils/useBreakpoints';
+import siteText from '~/locale/index';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import {
   AgeDemographicChart,
   AGE_GROUP_TOOLTIP_WIDTH,
+  formatAgeGroupRange,
 } from './age-demographic-chart';
-import { useAgeDemographicCoordinates } from './age-demographic-coordinates';
+import {
+  AgeDemographicDefaultValue,
+  useAgeDemographicCoordinates,
+} from './age-demographic-coordinates';
 import { AgeDemographicTooltipContent } from './age-demographic-tooltip-content';
 
-interface AgeDemographicProps {
-  data: NationalTestedPerAgeGroup;
-}
+const text = siteText.infected_age_groups;
 
-export function AgeDemographic({ data }: AgeDemographicProps) {
-  const [sizeRef, size] = useElementSize<HTMLDivElement>(400);
-  const { xs, xl } = useBreakpoints();
-  const isSmallScreen = !xl;
-  const isExtraSmallScreen = xs;
-
-  // Calculate graph's coordinates based on the data, the component width and wheher we are on a small screen or not.
-  const coordinates = useAgeDemographicCoordinates(
-    data,
-    isSmallScreen,
-    size.width,
-    isExtraSmallScreen
-  );
+export function AgeDemographic<T extends AgeDemographicDefaultValue>({
+  data,
+  metricProperty,
+}: {
+  data: { values: T[] };
+  metricProperty: keyof T;
+}) {
+  const [ref, coordinates] = useAgeDemographicCoordinates(data, metricProperty);
 
   // Generate tooltip event handlers and state based on values and tooltip coordinates callback
   const {
@@ -37,14 +30,14 @@ export function AgeDemographic({ data }: AgeDemographicProps) {
     closeTooltip,
     keyboardNavigateTooltip,
     tooltipState,
-  } = useTooltip<NationalTestedPerAgeGroupValue>({
+  } = useTooltip<T>({
     values: coordinates.values,
     getTooltipCoordinates: coordinates.getTooltipCoordinates,
   });
 
   return (
     <Box position="relative">
-      <div ref={sizeRef}>
+      <div ref={ref}>
         <AgeDemographicChart
           coordinates={coordinates}
           onMouseMoveBar={openTooltip}
@@ -59,7 +52,10 @@ export function AgeDemographic({ data }: AgeDemographicProps) {
         width={AGE_GROUP_TOOLTIP_WIDTH}
       >
         {tooltipState.value && (
-          <AgeDemographicTooltipContent value={tooltipState.value} />
+          <AgeDemographicTooltipContent
+            value={tooltipState.value}
+            metricProperty={metricProperty}
+          />
         )}
       </Tooltip>
     </Box>
