@@ -1,6 +1,6 @@
 import React from 'react';
 
-import IconComponent from '../../components/icons/icon';
+import { Icon } from '../../components/icons/icon';
 import { restrictionIcons } from '../../components/icons/icons';
 
 export default {
@@ -19,7 +19,7 @@ export default {
       description: 'Welk icoon moet er naast de maatregelen categorie staan?',
       name: 'icon',
       type: 'string',
-      inputComponent: IconComponent,
+      inputComponent: Icon,
     },
     {
       title: 'Maatregelen',

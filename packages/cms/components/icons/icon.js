@@ -22,7 +22,7 @@ import { restrictionIcons } from './icons';
 const createPatchFrom = (value) =>
   PatchEvent.from(value === '' ? unset() : set(String(value)));
 
-export default function Icon(props) {
+export function Icon(props) {
   const [open, setOpen] = useState(false);
   const onClose = useCallback(() => setOpen(false), []);
   const onOpen = useCallback(() => setOpen(true), []);
