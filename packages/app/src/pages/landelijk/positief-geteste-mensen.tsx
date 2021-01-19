@@ -102,7 +102,72 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
         />
 
         <Tile>
-          <StackedChart />
+          <StackedChart
+            values={[
+              {
+                pfizer: 0.1,
+                moderna: 0.2,
+                astra_zeneca: 0.3,
+                cure_vac: 0,
+                janssen: 0,
+                sanofi: 0.15,
+                date_of_insertion_unix: 0,
+                date_unix: Date.parse('01 January 2021 00:00 UTC') / 1000,
+              },
+              {
+                pfizer: 0.2,
+                moderna: 0.1,
+                astra_zeneca: 0.4,
+                cure_vac: 0,
+                janssen: 0.2,
+                sanofi: 0.05,
+                date_of_insertion_unix: 0,
+                date_unix: Date.parse('01 April 2021 00:00 UTC') / 1000,
+              },
+              {
+                pfizer: 0.13,
+                moderna: 0.24,
+                astra_zeneca: 0.15,
+                cure_vac: 0.3,
+                janssen: 0.1,
+                sanofi: 0,
+                date_of_insertion_unix: 0,
+                date_unix: Date.parse('01 July 2021 00:00 UTC') / 1000,
+              },
+            ]}
+            config={[
+              {
+                metricProperty: 'pfizer',
+                color: '#333',
+                legendLabel: 'Pfizer',
+              },
+              {
+                metricProperty: 'moderna',
+                color: '#555',
+                legendLabel: 'Moderna',
+              },
+              {
+                metricProperty: 'astra_zeneca',
+                color: '#ccc',
+                legendLabel: 'Astra Zeneca',
+              },
+              {
+                metricProperty: 'cure_vac',
+                color: '#aaa',
+                legendLabel: 'Cure Vac',
+              },
+              {
+                metricProperty: 'janssen',
+                color: '#444',
+                legendLabel: 'Janssen',
+              },
+              {
+                metricProperty: 'sanofi',
+                color: '#888',
+                legendLabel: 'Sanofi',
+              },
+            ]}
+          />
         </Tile>
 
         <TwoKpiSection>
