@@ -6,6 +6,7 @@ import { TileList } from '~/components-styled/tile-list';
 import { Heading, Text } from '~/components-styled/typography';
 import { RestrictionsTable } from '~/components/restrictions/restrictions-table';
 import { LockdownTable } from '~/components/restrictions/lockdown-table';
+import { PortableText } from '~/lib/sanity';
 
 import { EscalationLevel } from '~/components/restrictions/type';
 import { SEOHead } from '~/components/seoHead';
@@ -45,8 +46,6 @@ const NationalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
 
   const { lockdown: showLockdown } = lockdown;
 
-  console.log(lockdown);
-
   // const escalationLevelData = useEscalationLevel(data.restrictions.values);
   const escalationLevel = 4;
 
@@ -70,10 +69,19 @@ const NationalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
         />
 
         <KpiSection flexDirection="column">
-          <Heading level={3}>{restrictionInfo.extratoelichting.titel}</Heading>
-          <Box>
-            <Text m={0}>{restrictionInfo.extratoelichting.toelichting}</Text>
-          </Box>
+          {showLockdown ? (
+            <>
+              <Heading level={3}>{lockdown.message.title}</Heading>
+              <PortableText blocks={lockdown.message.description} />
+            </>
+          ) : (
+            <>
+              <Heading level={3}>
+                {restrictionInfo.extratoelichting.titel}
+              </Heading>
+              <Text m={0}>{restrictionInfo.extratoelichting.toelichting}</Text>
+            </>
+          )}
         </KpiSection>
 
         {showLockdown ? (

@@ -17,11 +17,15 @@ export default {
       type: 'boolean',
     },
     {
-      title: 'Lockdown melding',
+      title: 'Lockdown boodschap',
       name: 'message',
       description:
         'Als de knop aanstaat tonen wij deze waarschuwing op de landingspagina',
-      type: 'localeBlock',
+      type: 'object',
+      fields: [
+        { title: 'Titel', name: 'title', type: 'localeString' },
+        { title: 'Lopende tekst', name: 'description', type: 'localeBlock' },
+      ],
     },
     {
       title: 'Lockdown groepen',

@@ -41,7 +41,10 @@ export type LockdownData = {
   _updatedAt: string;
   groups: LockdownDataGroup[];
   lockdown: boolean;
-  message: [];
+  message: {
+    title: string;
+    description: unknown[] | null;
+  };
   title: string;
 };
 declare module 'picosanity' {
