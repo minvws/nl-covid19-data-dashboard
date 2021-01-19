@@ -12,16 +12,13 @@ import { KpiValue } from '~/components-styled/kpi-value';
 import { Select } from '~/components-styled/select';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { FCWithLayout } from '~/domain/layout/layout';
-import { getMunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { SewerWaterChart } from '~/components/lineChart/sewer-water-chart';
 import { SEOHead } from '~/components/seoHead';
+import { FCWithLayout } from '~/domain/layout/layout';
+import { getMunicipalityLayout } from '~/domain/layout/municipality-layout';
 import siteText from '~/locale/index';
-import {
-  getMunicipalityData,
-  getMunicipalityPaths,
-  IMunicipalityData,
-} from '~/static-props/municipality-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import { getGmData, getLastGeneratedDate } from '~/static-props/get-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import {
   getInstallationNames,
@@ -30,9 +27,17 @@ import {
   getSewerWaterScatterPlotData,
 } from '~/utils/sewer-water/municipality-sewer-water.util';
 
-const text = siteText.gemeente_rioolwater_metingen;
+export { getStaticPaths } from '~/static-paths/gm';
 
-const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getGmData
+);
+
+const text = siteText.gemeente_rioolwater_metingen;
+const graphDescriptions = siteText.accessibility.grafieken;
+
+const SewerWater: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data, municipalityName } = props;
 
   const {
@@ -51,7 +56,15 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
 
   const sewerAverages = data.sewer;
 
-  const [selectedInstallation, setSelectedInstallation] = useState<string>();
+  const [selectedInstallation, setSelectedInstallation] = useState<
+    string | undefined
+  >(sewerStationNames.length === 1 ? sewerStationNames[0] : undefined);
+
+  /**
+   * Only render a scatter plot when there's data coming from more than one
+   * sewer station
+   */
+  const enableScatterPlot = sewerStationNames.length > 1;
 
   if (!sewerAverages) {
     /**
@@ -61,12 +74,6 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
      */
     return null;
   }
-
-  /**
-   * Only render a scatter plot when there's data coming from more than one
-   * sewer station
-   */
-  const enableScatterPlot = sewerStationNames.length > 1;
 
   return (
     <>
@@ -145,7 +152,6 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
             title={text.linechart_titel}
             metadata={{ source: text.bronnen.rivm }}
             timeframeOptions={['all', '5weeks']}
-            timeframeInitialValue="all"
           >
             {(timeframe) => (
               <>
@@ -186,6 +192,7 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
             title={replaceVariablesInText(text.bar_chart_title, {
               municipality: municipalityName,
             })}
+            ariaDescription={graphDescriptions.rioolwater_meetwaarde}
             metadata={{
               date: [
                 sewerAverages.last_value.date_start_unix,
@@ -210,8 +217,5 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
 };
 
 SewerWater.getLayout = getMunicipalityLayout();
-
-export const getStaticProps = getMunicipalityData();
-export const getStaticPaths = getMunicipalityPaths();
 
 export default SewerWater;

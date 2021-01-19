@@ -139,11 +139,11 @@
       "text": "NICE via RIVM"
     },
     "titel": "Hospital admissions per day",
-    "pagina_toelichting": "Number of confirmed COVID-19 cases who are admitted to a hospital per day.\n\nPlease note: as of 17 December 2020, data on hospital admissions is obtained from a new source.",
-    "barscale_titel": "Hospital admissions per day",
-    "extra_uitleg": "Number of confirmed COVID-19 cases who are admitted to a hospital (excluding intensive care) per day. This number is an average for daily admissions over the past 3 days.\n\nNote: Although hospitals try to register COVID-19 patients promptly, it is likely that the numbers of the last days are yet incomplete.",
-    "map_titel": "Distribution of hospital admissions in the Netherlands",
-    "map_toelichting": "These maps show the daily hospital admissions in the Netherlands.",
+    "pagina_toelichting": "A rise in the number of patients with COVID-19 could overburden hospitals. This section of the dashboard shows the number regular hospital beds occupied by patients with COVID-19 and the number of patients with COVID-19 admitted to hospital each day. The dashboard provides national and regional figures drawn from various sources. Please note: as of 14 January 2021 the dashboard shows the number of hospital admissions reported daily. We no longer show a three-day average.",
+    "barscale_titel": "Hospital admissions reported per day",
+    "extra_uitleg": "Number of people with COVID-19 admitted to hospital daily (excluding ICU admissions). This figure shows how many hospital admissions are reported per day. It may include hospital admissions that occurred in previous days because reporting delays are common.",
+    "map_titel": "Residence of patients admitted to hospital",
+    "map_toelichting": "This map shows the distribution of hospital admissions in the Netherlands. It reflects the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE). Tergooi hospitals, Ziekenhuis Amsterlland and Flevoziekenhuis do not currently share their COVID-19 hospital admission data with Stichting NICE. As a result, the actual figures in some safety regions and municipalities will be higher than they appear on the map.",
     "linechart_titel": "Progression in hospital admissions over time",
     "barscale_screenreader_text": "{{value}} hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
     "chloropleth_legenda": {
@@ -179,20 +179,20 @@
       "title": "Hospital bed occupancy over time",
       "description": "This graph shows the progression of the number of non-ICU hospital beds occupied by COVID-19 patients."
     },
-    "linechart_description": "",
+    "linechart_description": "This graph shows hospital admissions. The figure for each day indicates the number of people actually admitted on that day, not the number of admissions reported on that day. This gives a clear picture of the development of coronavirus in the Netherlands. There are often reporting delays of a few days for hospital admissions; data for the most recent days is therefore incomplete.",
     "metadata": {
       "title": "Hospital admissions | Dashboard Coronavirus | Government.nl",
       "description": "Number of confirmed COVID-19 cases who are admitted to a hospital in the Netherlands."
     },
     "titel_sidebar": "Hospital admissions",
-    "titel_kpi": "Average number of hospital admissions in 3 days",
+    "titel_kpi": "Number of hospital admissions reported on one day. ",
     "reference": {
       "href": "/verantwoording#hospitals",
       "text": "Read more in 'explanation of the data presented'."
     },
     "tijdelijk_onbeschikbaar_titel": "",
     "tijdelijk_onbeschikbaar": "",
-    "kpi_titel": "Average number of hospital admissions in 3 days"
+    "kpi_titel": "Number of hospital admissions reported on one day. "
   },
   "positief_geteste_personen": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -520,10 +520,10 @@
     "total_installation_count_description": "Weekly number of sewage water treatment plants that have reported at least one measurement. The weekly average is calculated by taking the average of all measurements at these locations. This number can vary each week because not all measurements are successful.",
     "rwzi_abbrev": "",
     "map_titel": "Average number of virus particles per 100.000 inhabitants",
-    "map_toelichting": "This map shows the average number of virus particles per 100.000 inhabitants, per safety region. Please note: on the 26th of November the legend has been revised.",
+    "map_toelichting": "This map shows the average number of virus particles per 100.000 inhabitants, per safety region.",
     "legenda_titel": "",
-    "map_tooltip": "{{value}} x100 billion virus particles per 100.000 inhabitants",
-    "map_tooltip_value": "",
+    "map_tooltip": "per 100.000 inhabitants",
+    "map_tooltip_value": "{{value}} x100 billion",
     "reference": {
       "href": "/verantwoording#sewage-water",
       "text": "Read more in 'explanation of the data presented'."
@@ -611,7 +611,7 @@
     "select_region_municipality_legend": "Select a municipality:",
     "select_region_type_legend": "Show numbers from:",
     "your_municipality": "Municipality",
-    "belangrijk_bericht": "There is a [national lockdown](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen) until at least Tuesday 19 January."
+    "belangrijk_bericht": "There is a [national lockdown](https://coronadashboard.government.nl/landelijk/maatregelen) until at least 9 February."
   },
   "common": {
     "metadata": {
@@ -687,26 +687,26 @@
   },
   "veiligheidsregio_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Hospital admissions",
-    "titel": "Hospital admissions per day of residents in {{safetyRegion}}",
-    "pagina_toelichting": "Number of confirmed COVID-19 cases who are admitted to a hospital per day.",
+    "titel": "Reported hospital admissions per day of residents in {{safetyRegion}}",
+    "pagina_toelichting": "A rise in the number of patients with COVID-19 could overburden hospitals. This section of the dashboard shows the number regular hospital beds occupied by patients with COVID-19 and the number of patients with COVID-19 admitted to hospital each day. The dashboard provides national and regional figures drawn from various sources. Please note: as of 14 January 2021 the dashboard shows the number of hospital admissions reported daily. We no longer show a three-day average.",
     "datums": "Calculated: {{dateOfReport}}. Updated daily.",
     "screen_reader_graph_content": "{{value}} admissions.",
-    "barscale_titel": "Hospital admissions per day",
-    "extra_uitleg": "Number of confirmed COVID-19 cases from this safety region who are admitted to a hospital per day. This number is an average for daily admissions over the past 3 days.",
+    "barscale_titel": "Hospital admissions reported per day",
+    "extra_uitleg": "Number of people from this safety region with COVID-19 admitted to hospital (excl. ICU) on a daily basis. This number entails the amount of hospital admissions reported on one day and can include admissions from previous days. Patients can be admitted to hospitals in other regions.",
     "map_titel": "Distribution of hospital admissions in {{safetyRegion}}",
-    "map_toelichting": "These maps show the daily hospital admissions in the Netherlands.",
+    "map_toelichting": "This map shows the distribution of hospital admissions in the Netherlands. It reflects the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE). Tergooi hospitals, Ziekenhuis Amsterlland and Flevoziekenhuis do not currently share their COVID-19 hospital admission data with Stichting NICE. As a result, the actual figures in some safety regions and municipalities will be higher than they appear on the map.",
     "linechart_titel": "Progression in hospital admissions over time",
     "barscale_screenreader_text": "{{value}} hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
     "bron": {
       "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
       "text": "NICE via RIVM"
     },
-    "linechart_description": "",
+    "linechart_description": "This graph shows hospital admissions. The figure for each day indicates the number of people actually admitted on that day, not the number of admissions reported on that day. This gives a clear picture of the development of coronavirus in the Netherlands. There are often reporting delays of a few days for hospital admissions; data for the most recent days is therefore incomplete. ",
     "metadata": {
       "title": "Hospital admissions residents {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
       "description": "Confirmed cases of COVID-19 in safety region {{safetyRegionName}} who are admitted to a hospital."
     },
-    "titel_kpi": "Average number of hospital admissions in 3 days",
+    "titel_kpi": "Number of hospital admissions reported on one day. ",
     "reference": {
       "href": "/verantwoording#hospitals",
       "text": "Read more in 'explanation of the data presented'."
@@ -720,7 +720,7 @@
     },
     "tijdelijk_onbeschikbaar_titel": "",
     "tijdelijk_onbeschikbaar": "",
-    "kpi_titel": "Average number of hospital admissions in 3 days"
+    "kpi_titel": "Number of hospital admissions reported daily."
   },
   "veiligheidsregio_positief_geteste_personen": {
     "titel_sidebar": "Confirmed cases",
@@ -829,26 +829,26 @@
   },
   "gemeente_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Hospital admissions",
-    "titel": "Hospital admissions per day of residents in {{municipality}}",
-    "pagina_toelichting": "Number of confirmed COVID-19 cases who are admitted to a hospital per day.",
+    "titel": "Reported hospital admissions per day of residents in {{municipality}}",
+    "pagina_toelichting": "A rise in the number of patients with COVID-19 could overburden hospitals. This section of the dashboard shows the number regular hospital beds occupied by patients with COVID-19 and the number of patients with COVID-19 admitted to hospital each day. The dashboard provides national and regional figures drawn from various sources. Please note: as of 14 January 2021 the dashboard shows the number of hospital admissions reported daily. We no longer show a three-day average.",
     "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
     "screen_reader_graph_content": "{{value}} admissions.",
-    "barscale_titel": "Hospital admissions per day",
-    "extra_uitleg": "Number of confirmed COVID-19 cases from this municipality who are admitted to a hospital per day. This number is an average for daily admissions over the past 3 days.",
+    "barscale_titel": "Hospital admissions reported per day",
+    "extra_uitleg": "Number of people from this municipality with COVID-19 admitted to hospital (excl. ICU) on a daily basis. This number entails the amount of hospital admissions reported on one day. These could include admissions from previous days. Patients can be admitted to hospitals in other regions.",
     "map_titel": "Distribution of hospital admissions in safety region of {{municipality}}",
-    "map_toelichting": "These maps show the daily hospital admissions in the Netherlands.",
+    "map_toelichting": "This map shows the distribution of hospital admissions in the Netherlands. It reflects the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE). Tergooi hospitals, Ziekenhuis Amstelland and Flevoziekenhuis do not currently share their COVID-19 hospital admission data with Stichting NICE. As a result, the actual figures in some safety regions and municipalities will be higher than they appear on the map.",
     "linechart_titel": "Progression in hospital admissions over time",
     "barscale_screenreader_text": "{{value}} hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
     "bron": {
       "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
       "text": "NICE via RIVM"
     },
-    "linechart_description": "",
+    "linechart_description": "This graph shows hospital admissions. The figure for each day indicates the number of people actually admitted on that day, not the number of admissions reported on that day. This gives a clear picture of the development of coronavirus in the Netherlands. There are often reporting delays of a few days for hospital admissions; data for the most recent days is therefore incomplete. ",
     "metadata": {
       "title": "Hospital admissions {{municipalityName}} | Dashboard Coronavirus | Government.nl",
       "description": "Overview of the number of confirmed COVID-19 cases in {{municipalityName}} who are admitted to a hospital per day."
     },
-    "titel_kpi": "Average number of hospital admissions in 3 days",
+    "titel_kpi": "Number of hospital admissions reported on one day. ",
     "reference": {
       "href": "/verantwoording#hospitals",
       "text": "Read more in 'explanation of the data presented'."
@@ -862,7 +862,7 @@
     },
     "tijdelijk_onbeschikbaar_titel": "",
     "tijdelijk_onbeschikbaar": "",
-    "kpi_titel": "Average number of hospital admissions in 3 days"
+    "kpi_titel": "Number of hospital admissions reported on one day. "
   },
   "gemeente_positief_geteste_personen": {
     "titel_sidebar": "Confirmed cases",
@@ -962,7 +962,7 @@
       "title": "Level of risk per safety region | Dashboard Coronavirus | Government.nl",
       "description": "Overview of the level of risk per safety region in the Netherlands."
     },
-    "belangrijk_bericht": "There is a [national lockdown](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen) until at least Tuesday 19 January."
+    "belangrijk_bericht": "There is a [national lockdown](https://coronadashboard.government.nl/landelijk/maatregelen) until at least 9 February."
   },
   "gemeente_index": {
     "selecteer_titel": "Select your municipality",
@@ -1376,8 +1376,12 @@
         "enkelvoud": "week",
         "meervoud": "weeks"
       },
-      "hiervoor": "before"
-    }
+      "hiervoor": "before",
+      "vorige_week": "",
+      "ervoor": ""
+    },
+    "ervoor": "",
+    "vorige_waarde": "the previous value"
   },
   "aria_labels": {
     "pagina_keuze": "National, regional or municipality menu",
@@ -1485,8 +1489,8 @@
     },
     "bronnen": {
       "rivm": {
-        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
-        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "download": "https://data.rivm.nl/covid-19/COVID-19_gehandicaptenzorg.csv",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_gehandicaptenzorg.html",
         "text": "RIVM"
       }
     },
@@ -1517,8 +1521,8 @@
     },
     "bronnen": {
       "rivm": {
-        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
-        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "download": "https://data.rivm.nl/covid-19/COVID-19_gehandicaptenzorg.csv",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_gehandicaptenzorg.html",
         "text": "RIVM"
       }
     }
@@ -1544,8 +1548,8 @@
     },
     "bronnen": {
       "rivm": {
-        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
-        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "download": "https://data.rivm.nl/covid-19/COVID-19_gehandicaptenzorg.csv",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_gehandicaptenzorg.html",
         "text": "RIVM"
       }
     }
@@ -1575,8 +1579,8 @@
     },
     "bronnen": {
       "rivm": {
-        "download": "https://data.rivm.nl/covid-19/COVID-19_verpleeghuizen.csv",
-        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "download": "https://data.rivm.nl/covid-19/COVID-19_gehandicaptenzorg.csv",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_gehandicaptenzorg.html",
         "text": "RIVM"
       }
     },
@@ -1761,11 +1765,11 @@
       "text": "Read more in 'explanation of the data presented'"
     },
     "cbs_message": {
-      "title": "Week 52: mortality further up among long-term care users",
+      "title": "Almost 4 thousand deaths in first week of 2021",
       "published_text": "Date of publication: Friday 4 December",
-      "message": "In week 52 of 2020 (21 to 27 December inclusive), there were 3.8 thousand deaths. The number of deaths rose further among people receiving long-term care. In this group, almost 40 percent more deaths were recorded than the expected number for this period. Mortality among the rest of the population is almost normal for this time of year. Statistics Netherlands (CBS) reports this based on the provisional weekly figures on mortality.",
+      "message": "Estimated mortality in week 2021 (4 to 10 January 2021 inclusive) stood at almost 4 thousand. This is 650 deaths in excess of the expected number for this period. Mortality in the last week of 2020 (28 December 2020 to 3 January 2021 inclusive) stood at over 4 thousand; this was 800 more than expected mortality. In 2020, the total number of deaths stood at almost 169 thousand, which is more than 15 thousand excess deaths. Statistics Netherlands (CBS) reports this based on the provisional weekly figures on mortality.",
       "link": {
-        "href": "https://www.cbs.nl/en-gb/news/2021/01/week-52-mortality-further-up-among-long-term-care-users",
+        "href": "https://www.cbs.nl/en-gb/news/2021/02/almost-4-thousand-deaths-in-first-week-of-2021",
         "text": "Website CBS"
       }
     },
@@ -1841,15 +1845,15 @@
       "41": {
         "toelichting_risiconiveau": "There are a lot of infected people and the daily number of new infections is high. The regional health care capacity is insufficient. Strict, national measures are necessary.",
         "extratoelichting": {
-          "titel": "Current Measures",
+          "titel": "Current lockdown measures",
           "toelichting": "In {{safetyRegionName}} there is a regional lockdown in effect."
         }
       },
       "landelijk": {
         "toelichting_risiconiveau": "",
         "extratoelichting": {
-          "titel": "The Netherlands in lockdown",
-          "toelichting": "Coronavirus is spreading rapidly. To ensure healthcare services remain available to all, we must limit our contact with others. The national measures apply from 15 December 2020 until at least 19 January 2021."
+          "titel": "Netherlands stays in lockdown",
+          "toelichting": "The COVID-19 infection rate is falling slightly. This shows the lockdown is starting to work. To make sure numbers keep falling, the lockdown will continue until at least 9 February inclusive."
         }
       }
     },
@@ -1873,14 +1877,16 @@
       "41_sport_34": "No more than 2 people, staying 1.5 metres apart at all times. This does not apply to children under 18 and elite athletes.",
       "41_sport_35": "All indoor sports venues are closed.",
       "41_sport_36": "No competitions or group lessons. This does not apply to elite athletes.",
-      "41_ov_37": "Stay home as much as possible. Public transport for essential travel only.",
-      "41_ov_38": "Do not travel abroad. Do not book any trips abroad until mid-March.",
-      "41_onderwijs_39": "Remote and online teaching in primary, secondary, secondary vocational and higher education and for all other forms of training and educational activities. Exemptions include exams, practical lessons and education for vulnerable pupils. These measures apply from 16 December 2020 until at least 17 January 2021.",
-      "41_onderwijs_40": "Childcare centres are closed. These measures apply from 16 December 2020 until at least 17 January 2021.",
-      "41_onderwijs_41": "Emergency childcare is available for children of key workers and for vulnerable children. These measures apply from 16 December 2020 until at least 17 January 2021.",
+      "41_ov_37": "Stay home as much as possible.",
+      "41_ov_38": "Do not travel abroad or book trips abroad until 31 March inclusive.",
+      "41_onderwijs_39": "Remote and online teaching in primary, secondary, secondary vocational and higher education and for all other forms of training and educational activities. Exemptions include exams, practical lessons and education for vulnerable pupils. These measures apply until 7 February 2021 inclusive. A decision will follow on whether primary schools can reopen fully from 25 January.",
+      "41_onderwijs_40": "Childcare centres are closed. These measures apply until 7 February 2021 inclusive. A decision will follow on whether childcare can reopen fully from 25 January.",
+      "41_onderwijs_41": "Emergency childcare is available for children of key workers and for vulnerable children.",
       "41_algemeen_42": "COVID-19 symptoms? Stay at home.",
-      "0_algemeen_42": "COVID-19 symptoms? Stay at home.",
-      "0_algemeen_43": "COVID-19 symptoms? Get tested."
+      "0_algemeen_42": "COVID-19 symptoms? Self-quarantine.",
+      "0_algemeen_43": "COVID-19 symptoms? Get tested.",
+      "0_algemeen_44": "COVID-19 symptoms? Do not receive visitors.",
+      "41_ov_45": "Public transport for essential travel only."
     }
   },
   "nationaal_maatregelen": {
@@ -1903,7 +1909,7 @@
       "description": "Overview of the corona measures in the safety region {{safetyRegionName}}."
     },
     "subtitel_sidebar": "There are national measures",
-    "tabel_titel": ""
+    "tabel_titel": "Current lockdown measures"
   },
   "veiligheidsregio_maatregelen_urls": {
     "VR01": "http://www.veiligheidsregiogroningen.nl/",
@@ -2014,6 +2020,25 @@
         "sentence": "",
         "last_sentence": ""
       }
+    }
+  },
+  "accessibility": {
+    "grafieken": {
+      "reproductiegetal_verloop": "",
+      "ziekenhuisopnames": "",
+      "intensive_care_opnames": "",
+      "verpleeghuiszorg_positief_getest": "",
+      "verpleeghuiszorg_besmette_locaties": "",
+      "verpleeghuiszorg_overleden_getest": "",
+      "gehandicaptenzorg_positief_getest": "",
+      "gehandicaptenzorg_besmette_locaties": "",
+      "gehandicaptenzorg_overleden": "",
+      "thuiswonende_ouderen_besmettingen": "",
+      "thuiswonende_ouderen_overleden": "",
+      "rioolwater_virusdeeltjes": "",
+      "verdenkingen_huisartsen": "",
+      "ziekenhuis_opnames": "",
+      "rioolwater_meetwaarde": ""
     }
   }
 }

@@ -12,16 +12,13 @@ import { KpiValue } from '~/components-styled/kpi-value';
 import { Select } from '~/components-styled/select';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { FCWithLayout } from '~/domain/layout/layout';
-import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { SewerWaterChart } from '~/components/lineChart/sewer-water-chart';
 import { SEOHead } from '~/components/seoHead';
+import { FCWithLayout } from '~/domain/layout/layout';
+import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import siteText from '~/locale/index';
-import {
-  getSafetyRegionPaths,
-  getSafetyRegionStaticProps,
-  ISafetyRegionData,
-} from '~/static-props/safetyregion-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import { getLastGeneratedDate, getVrData } from '~/static-props/get-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import {
   getInstallationNames,
@@ -30,9 +27,17 @@ import {
   getSewerWaterScatterPlotData,
 } from '~/utils/sewer-water/safety-region-sewer-water.util';
 
-const text = siteText.veiligheidsregio_rioolwater_metingen;
+export { getStaticPaths } from '~/static-paths/vr';
 
-const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getVrData
+);
+
+const text = siteText.veiligheidsregio_rioolwater_metingen;
+const graphDescriptions = siteText.accessibility.grafieken;
+
+const SewerWater: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data, safetyRegionName } = props;
 
   const {
@@ -53,7 +58,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
 
   const [selectedInstallation, setSelectedInstallation] = useState<
     string | undefined
-  >();
+  >(sewerStationNames.length === 1 ? sewerStationNames[0] : undefined);
 
   return (
     <>
@@ -129,9 +134,9 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
         {lineChartData && (
           <ChartTileWithTimeframe
             title={text.linechart_titel}
+            ariaDescription={graphDescriptions.rioolwater_meetwaarde}
             metadata={{ source: text.bronnen.rivm }}
             timeframeOptions={['all', '5weeks']}
-            timeframeInitialValue="all"
           >
             {(timeframe) => (
               <>
@@ -172,6 +177,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
             title={replaceVariablesInText(text.bar_chart_title, {
               safetyRegion: safetyRegionName,
             })}
+            ariaDescription={graphDescriptions.rioolwater_meetwaarde}
             metadata={{
               date: [
                 sewerAverages.last_value.date_start_unix,
@@ -195,8 +201,5 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
 };
 
 SewerWater.getLayout = getSafetyRegionLayout();
-
-export const getStaticProps = getSafetyRegionStaticProps;
-export const getStaticPaths = getSafetyRegionPaths();
 
 export default SewerWater;

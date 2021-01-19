@@ -6,26 +6,30 @@ import { ContentHeader } from '~/components-styled/content-header';
 import { KpiSection } from '~/components-styled/kpi-section';
 import { TileList } from '~/components-styled/tile-list';
 import { Heading, Text } from '~/components-styled/typography';
-import { FCWithLayout } from '~/domain/layout/layout';
-import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { RestrictionsTable } from '~/components/restrictions/restrictions-table';
 import { EscalationLevel } from '~/components/restrictions/type';
 import { SEOHead } from '~/components/seoHead';
+import { FCWithLayout } from '~/domain/layout/layout';
+import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import siteText from '~/locale/index';
-import {
-  getSafetyRegionPaths,
-  getSafetyRegionStaticProps,
-  ISafetyRegionData,
-} from '~/static-props/safetyregion-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import { getLastGeneratedDate, getVrData } from '~/static-props/get-data';
 import theme from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { useEscalationLevel } from '~/utils/use-escalation-level';
+
+export { getStaticPaths } from '~/static-paths/vr';
+
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getVrData
+);
 
 const text = siteText.veiligheidsregio_maatregelen;
 type VRCode = keyof typeof siteText.veiligheidsregio_maatregelen_urls;
 type HeadingKey = keyof typeof siteText.maatregelen.headings;
 
-const RegionalRestrictions: FCWithLayout<ISafetyRegionData> = (props) => {
+const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data, safetyRegionName } = props;
 
   const router = useRouter();
@@ -110,8 +114,5 @@ const RegionalRestrictions: FCWithLayout<ISafetyRegionData> = (props) => {
 };
 
 RegionalRestrictions.getLayout = getSafetyRegionLayout();
-
-export const getStaticProps = getSafetyRegionStaticProps;
-export const getStaticPaths = getSafetyRegionPaths();
 
 export default RegionalRestrictions;
