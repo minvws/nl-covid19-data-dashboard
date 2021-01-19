@@ -177,8 +177,8 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
               <>
                 <Box display="flex" alignItems="center" flexDirection="column">
                   {isInrange && (
-                    <Text as="span" fontSize={0}>
-                      (onvolledig)
+                    <Text as="span" fontSize={0} color={colors.annotation}>
+                      ({siteText.common.incomplete})
                     </Text>
                   )}
                   <Box>
