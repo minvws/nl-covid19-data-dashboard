@@ -15,38 +15,42 @@ import { getNationalLayout } from '~/domain/layout/national-layout';
 import siteText from '~/locale/index';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import { getLastGeneratedDate, getNlData } from '~/static-props/get-data';
-import { NlDeceasedRivmPerAgeGroupValue } from '~/types/data';
 
 const text = siteText.sterfte;
 
-export const getStaticProps = createGetStaticProps(getLastGeneratedDate, () => {
-  /**
-   * Generate test data
-   * @TODO clean up
-   */
-  const { data } = getNlData();
+// export const getStaticProps = createGetStaticProps(getLastGeneratedDate, () => {
+//   /**
+//    * Generate test data
+//    * @TODO clean up
+//    */
+//   const { data } = getNlData();
 
-  data.deceased_rivm_per_age_group = {
-    values: (data.tested_per_age_group.values
-      .map(
-        (x) =>
-          Number(x.age_group_range.split('-')[0]) > 49 && {
-            age_group_range:
-              Number(x.age_group_range.split('-')[0]) === 50
-                ? '< 50*'
-                : x.age_group_range,
-            age_group_percentage: x.age_group_percentage,
-            date_of_insertion_unix: x.date_of_insertion_unix,
-            covid_percentage: x.infected_percentage,
-          }
-      )
-      .filter(
-        (x) => x !== false
-      ) as unknown) as NlDeceasedRivmPerAgeGroupValue[],
-  };
+//   data.deceased_rivm_per_age_group = {
+//     values: (data.tested_per_age_group.values
+//       .map(
+//         (x) =>
+//           Number(x.age_group_range.split('-')[0]) > 49 && {
+//             age_group_range:
+//               Number(x.age_group_range.split('-')[0]) === 50
+//                 ? '< 50*'
+//                 : x.age_group_range,
+//             age_group_percentage: x.age_group_percentage,
+//             date_of_insertion_unix: x.date_of_insertion_unix,
+//             covid_percentage: x.infected_percentage,
+//           }
+//       )
+//       .filter(
+//         (x) => x !== false
+//       ) as unknown) as NlDeceasedRivmPerAgeGroupValue[],
+//   };
 
-  return { data };
-});
+//   return { data };
+// });
+
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getNlData
+);
 
 const DeceasedNationalPage: FCWithLayout<typeof getStaticProps> = (props) => {
   const dataCbs = props.data.deceased_cbs;
