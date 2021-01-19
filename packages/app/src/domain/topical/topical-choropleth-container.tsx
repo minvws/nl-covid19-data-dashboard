@@ -41,13 +41,8 @@ export function TopicalChoroplethContainer({
     legendComponent;
 
   return (
-    <Box
-      display="flex"
-      flexDirection={{ _: 'column', lg: 'row' }}
-      m={0}
-      as="figure"
-    >
-      <Box mb={3} flex={{ lg: 1 }} as="figcaption">
+    <Box display="flex" flexDirection={{ _: 'column', lg: 'row' }} m={0}>
+      <Box mb={3} flex={{ lg: 1 }}>
         <Box mb={[0, 2]}>
           <Heading
             level={2}
