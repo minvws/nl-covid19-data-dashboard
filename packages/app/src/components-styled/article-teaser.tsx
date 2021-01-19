@@ -32,7 +32,6 @@ export function ArticleTeaser(props: ArticleLinkProps) {
       borderRadius={4}
       minHeight={'26rem'}
       maxHeight={'26rem'}
-      width="100%"
       overflow="hidden"
     >
       {<CoverImage image={cover} />}

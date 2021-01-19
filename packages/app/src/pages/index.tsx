@@ -179,7 +179,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
               <TopicalChoroplethContainer
                 title={text.risiconiveaus.selecteer_titel}
                 description={
-                  <span
+                  <div
                     dangerouslySetInnerHTML={{
                       __html: text.risiconiveaus.selecteer_toelichting,
                     }}
