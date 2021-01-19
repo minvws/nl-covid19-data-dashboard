@@ -276,6 +276,7 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
           <AgeDemographic
             data={data.tested_per_age_group}
             metricProperty="infected_percentage"
+            text={siteText.infected_age_groups.graph}
           />
         </ChartTile>
 

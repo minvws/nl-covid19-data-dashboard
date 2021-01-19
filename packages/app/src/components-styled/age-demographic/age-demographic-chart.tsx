@@ -9,19 +9,17 @@ import { KeyboardEvent, memo, MouseEvent } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components-styled/base';
 import { Text } from '~/components-styled/typography';
-import siteText from '~/locale/index';
 import { colors } from '~/style/theme';
 import { formatPercentage } from '~/utils/formatNumber';
 import { AgeDemographicCoordinates } from './age-demographic-coordinates';
-import { AgeDemographicDefaultValue } from './types';
+import { AgeDemographicChartText, AgeDemographicDefaultValue } from './types';
 import { formatAgeGroupRange } from './utils';
 
 export const AGE_GROUP_TOOLTIP_WIDTH = 340;
 
-const text = siteText.infected_age_groups;
-
 interface AgeDemographicChartProps<T extends AgeDemographicDefaultValue> {
   coordinates: AgeDemographicCoordinates<T>;
+  text: AgeDemographicChartText;
   onMouseMoveBar: (value: T, event: MouseEvent<SVGElement>) => void;
   onMouseLeaveBar: () => void;
   onKeyInput: (event: KeyboardEvent<SVGElement>) => void;
@@ -49,6 +47,7 @@ export const AgeDemographicChart = memo(
 
 function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
   coordinates,
+  text,
   onKeyInput,
   onMouseMoveBar,
   onMouseLeaveBar,
@@ -73,7 +72,7 @@ function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
     ageGroupRange,
   } = coordinates;
 
-  const hasClippedValue = values.map(
+  const hasClippedValue = !!values.find(
     (value) =>
       getIsClipped(value.age_group_percentage, visuallyMaxPercentage) ||
       getIsClipped(
@@ -89,7 +88,7 @@ function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
         height={height}
         role="img"
         id="age-demographic-chart"
-        aria-label={text.graph.accessibility_description}
+        aria-label={text.accessibility_description}
         tabIndex={0}
         onKeyUp={(event) => onKeyInput(event)}
         css={css({
@@ -109,7 +108,7 @@ function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
           fontSize="1rem"
           width={xMax - 10}
         >
-          {text.graph.age_group_percentage_title}
+          {text.age_group_percentage_title}
         </VisxText>
         <VisxText
           textAnchor="start"
@@ -121,7 +120,7 @@ function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
           fontSize="1rem"
           width={xMax - 10}
         >
-          {text.graph.infected_percentage_title}
+          {text.value_percentage_title}
         </VisxText>
 
         {/* Vertical lines */}
@@ -159,7 +158,7 @@ function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
           width={6}
           stroke={colors.data.primary}
           strokeWidth={2}
-          orientation={['diagonalRightToLeft']}
+          orientation={['diagonal']}
         />
 
         {values.map((value, index) => {
@@ -255,7 +254,7 @@ function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
       </svg>
 
       {hasClippedValue && (
-        <Text color="gray">* {text.graph.has_clipped_value_message}</Text>
+        <Text color="gray">* {text.clipped_value_message}</Text>
       )}
     </Box>
   );

@@ -18,35 +18,6 @@ import { getLastGeneratedDate, getNlData } from '~/static-props/get-data';
 
 const text = siteText.sterfte;
 
-// export const getStaticProps = createGetStaticProps(getLastGeneratedDate, () => {
-//   /**
-//    * Generate test data
-//    * @TODO clean up
-//    */
-//   const { data } = getNlData();
-
-//   data.deceased_rivm_per_age_group = {
-//     values: (data.tested_per_age_group.values
-//       .map(
-//         (x) =>
-//           Number(x.age_group_range.split('-')[0]) > 49 && {
-//             age_group_range:
-//               Number(x.age_group_range.split('-')[0]) === 50
-//                 ? '< 50*'
-//                 : x.age_group_range,
-//             age_group_percentage: x.age_group_percentage,
-//             date_of_insertion_unix: x.date_of_insertion_unix,
-//             covid_percentage: x.infected_percentage,
-//           }
-//       )
-//       .filter(
-//         (x) => x !== false
-//       ) as unknown) as NlDeceasedRivmPerAgeGroupValue[],
-//   };
-
-//   return { data };
-// });
-
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   getNlData
@@ -139,6 +110,7 @@ const DeceasedNationalPage: FCWithLayout<typeof getStaticProps> = (props) => {
               data={dataDeceasedPerAgeGroup}
               metricProperty="covid_percentage"
               visuallyMaxPercentage={45}
+              text={siteText.deceased_age_groups.graph}
             />
           </ChartTile>
         )}

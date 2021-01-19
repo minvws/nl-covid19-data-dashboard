@@ -6,16 +6,18 @@ import {
 } from './age-demographic-chart';
 import { useAgeDemographicCoordinates } from './age-demographic-coordinates';
 import { AgeDemographicTooltipContent } from './age-demographic-tooltip-content';
-import { AgeDemographicDefaultValue } from './types';
+import { AgeDemographicChartText, AgeDemographicDefaultValue } from './types';
 
 export function AgeDemographic<T extends AgeDemographicDefaultValue>({
   data,
   metricProperty,
   visuallyMaxPercentage,
+  text,
 }: {
   data: { values: T[] };
   metricProperty: keyof T;
   visuallyMaxPercentage?: number;
+  text: AgeDemographicChartText;
 }) {
   const [ref, coordinates] = useAgeDemographicCoordinates(
     data,
@@ -44,6 +46,7 @@ export function AgeDemographic<T extends AgeDemographicDefaultValue>({
           onKeyInput={keyboardNavigateTooltip}
           visuallyMaxPercentage={visuallyMaxPercentage}
           metricProperty={metricProperty}
+          text={text}
         />
       </div>
 
@@ -56,6 +59,7 @@ export function AgeDemographic<T extends AgeDemographicDefaultValue>({
           <AgeDemographicTooltipContent
             value={tooltipState.value}
             metricProperty={metricProperty}
+            text={text}
           />
         )}
       </Tooltip>
