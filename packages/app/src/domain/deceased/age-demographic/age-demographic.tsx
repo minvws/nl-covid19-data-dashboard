@@ -1,19 +1,14 @@
 import { Box } from '~/components-styled/base';
 import { Tooltip, useTooltip } from '~/components-styled/tooltip';
-import siteText from '~/locale/index';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import {
   AgeDemographicChart,
   AGE_GROUP_TOOLTIP_WIDTH,
-  formatAgeGroupRange,
 } from './age-demographic-chart';
 import {
   AgeDemographicDefaultValue,
   useAgeDemographicCoordinates,
 } from './age-demographic-coordinates';
 import { AgeDemographicTooltipContent } from './age-demographic-tooltip-content';
-
-const text = siteText.infected_age_groups;
 
 export function AgeDemographic<T extends AgeDemographicDefaultValue>({
   data,

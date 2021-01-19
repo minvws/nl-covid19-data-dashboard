@@ -24,8 +24,10 @@ import { createSelectRegionHandler } from '~/components/choropleth/select-handle
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
 import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/create-positive-tested-people-regional-tooltip';
 import { SEOHead } from '~/components/seoHead';
-import { AgeDemographic } from '~/domain/infected-people/age-demographic/age-demographic';
-import { formatAgeGroupRange } from '~/domain/infected-people/age-demographic/age-demographic-chart';
+import {
+  AgeDemographic,
+  formatAgeGroupRange,
+} from '~/domain/deceased/age-demographic';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import {
@@ -269,7 +271,10 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
             source: text.bronnen.rivm,
           }}
         >
-          <AgeDemographic data={data.tested_per_age_group} />
+          <AgeDemographic
+            data={data.tested_per_age_group}
+            metricProperty="infected_percentage"
+          />
         </ChartTile>
 
         <ContentHeader

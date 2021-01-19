@@ -4,7 +4,7 @@ import { Text } from '~/components-styled/typography';
 import siteText from '~/locale/index';
 import { formatPercentage } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { formatAgeGroupRange } from './age-demographic-chart';
+import { formatAgeGroupRange } from './utils';
 import { AgeDemographicDefaultValue } from './age-demographic-coordinates';
 
 const text = siteText.infected_age_groups;

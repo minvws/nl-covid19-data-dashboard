@@ -10,6 +10,7 @@ import siteText from '~/locale/index';
 import { colors } from '~/style/theme';
 import { formatPercentage } from '~/utils/formatNumber';
 import { AgeDemographicCoordinates } from './age-demographic-coordinates';
+import { formatAgeGroupRange } from './utils';
 
 export const AGE_GROUP_TOOLTIP_WIDTH = 340;
 
@@ -34,10 +35,6 @@ const TickValue = ({ x, y, formattedValue }: TickRendererProps) => {
       {formattedValue}
     </Text>
   );
-};
-
-export const formatAgeGroupRange = (range: string): string => {
-  return range.split('-').join(' – ');
 };
 
 export const AgeDemographicChart = memo(
