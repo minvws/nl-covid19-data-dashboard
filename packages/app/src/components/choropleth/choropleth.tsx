@@ -9,7 +9,7 @@ import { TCombinedChartDimensions } from './hooks/use-chart-dimensions';
 import { Path } from './path';
 import { Tooltip } from './tooltips/tooltipContainer';
 import { countryGeo } from './topology';
-import uniqueId from '~/utils/useUniqueId';
+import { useUniqueId } from '~/utils/useUniqueId';
 
 export type TooltipSettings = {
   left: number;
@@ -120,8 +120,8 @@ const ChoroplethMap: <T1, T3>(
     description,
   } = props;
 
-  const clipPathId = uniqueId();
-  const dataDescriptionId = uniqueId();
+  const clipPathId = useUniqueId();
+  const dataDescriptionId = useUniqueId();
 
   const timeout = useRef(-1);
   const isTouch = useIsTouchDevice();
@@ -151,6 +151,7 @@ const ChoroplethMap: <T1, T3>(
           isTouch ? undefined : createSvgMouseOutHandler(timeout, setTooltip)
         }
         onClick={createSvgClickHandler(onPathClick, setTooltip, isTouch)}
+        data-cy="choropleth-map"
         aria-labelledby={dataDescriptionId}
       >
         <clipPath id={clipPathId}>
@@ -223,7 +224,7 @@ function MercatorGroup<G extends Geometry, P>(props: MercatorGroupProps<G, P>) {
   return (
     <Mercator data={data} fitSize={fitSize}>
       {({ features }) => (
-        <g data-cy="choropleth-features">
+        <g>
           {features.map(
             ({ feature, path, index }) => path && render(feature, path, index)
           )}

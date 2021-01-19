@@ -7,7 +7,10 @@ import { ContentHeader } from '~/components-styled/content-header';
 import { Legenda } from '~/components-styled/legenda';
 import DeceasedMonitor from '~/domain/deceased/components/deceased-monitor-chart';
 import siteText from '~/locale/index';
-import { NationalDeceasedCbs, RegionalDeceasedCbs } from '~/types/data';
+import {
+  NationalDeceasedCbs,
+  RegionalDeceasedCbs,
+} from '@corona-dashboard/common';
 
 const text = siteText.section_sterftemonitor;
 

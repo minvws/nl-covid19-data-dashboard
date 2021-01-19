@@ -3,7 +3,7 @@ import { color } from 'styled-system';
 import { isDefined } from 'ts-is-present';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
-import { DifferenceDecimal, DifferenceInteger } from '~/types/data';
+import { DifferenceDecimal, DifferenceInteger } from '@corona-dashboard/common';
 import { DifferenceIndicator } from '~/components-styled/difference-indicator';
 
 interface KpiValueProps {

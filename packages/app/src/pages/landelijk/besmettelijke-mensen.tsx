@@ -13,7 +13,7 @@ import { getNationalLayout } from '~/domain/layout/national-layout';
 import siteText from '~/locale/index';
 import { getNlData, getLastGeneratedDate } from '~/static-props/get-data';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
-import { getLastFilledValue } from '~/utils/get-last-filled-value';
+import { getLastFilledValue } from '@corona-dashboard/common';
 
 const text = siteText.besmettelijke_personen;
 
