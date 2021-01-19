@@ -28,6 +28,7 @@ import {
 } from '~/static-props/get-data';
 import { getSafetyRegionForMunicipalityCode } from '~/utils/getSafetyRegionForMunicipalityCode';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import rawSiteText from '~/locale/index';
 
 export { getStaticPaths } from '~/static-paths/gm';
 
@@ -168,9 +169,8 @@ const MunicipalityActueel: FCWithLayout<typeof getStaticProps> = (props) => {
   );
 };
 
-/** @TODO Fill metadata / adjust layout */
 const metadata = {
-  title: '',
+  ...rawSiteText.gemeente_actueel.metadata,
 };
 MunicipalityActueel.getLayout = getLayoutWithMetadata(metadata);
 

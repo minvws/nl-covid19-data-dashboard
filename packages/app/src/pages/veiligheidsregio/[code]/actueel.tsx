@@ -27,6 +27,7 @@ import {
   getVrData,
 } from '~/static-props/get-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import rawSiteText from '~/locale/index';
 
 export { getStaticPaths } from '~/static-paths/vr';
 
@@ -153,9 +154,8 @@ const SafetyRegionActueel: FCWithLayout<typeof getStaticProps> = (props) => {
   );
 };
 
-/** @TODO Fill metadata / adjust layout */
 const metadata = {
-  title: '',
+  ...rawSiteText.veiligheidsregio_actueel.metadata,
 };
 SafetyRegionActueel.getLayout = getLayoutWithMetadata(metadata);
 

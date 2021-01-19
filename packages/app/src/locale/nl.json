@@ -619,6 +619,10 @@
     "date_day_before_yesterday": "eergisteren"
   },
   "nationaal_actueel": {
+    "metadata": {
+      "title": "Actueel",
+      "description": "Actueel"
+    },
     "risiconiveaus": {
       "selecteer_titel": "Risiconiveaus",
       "selecteer_toelichting": "De kaart geeft het risiconiveau per veiligheidsregio weer.\n\n[Meer over de risiconiveaus](/over-risiconiveaus)"
@@ -2037,6 +2041,10 @@
   },
 
   "veiligheidsregio_actueel": {
+    "metadata": {
+      "title": "Actueel",
+      "description": "Actueel"
+    },
     "risiconiveaus": {
       "selecteer_titel": "Risiconiveaus",
       "selecteer_toelichting": "De kaart geeft het risiconiveau per veiligheidsregio weer.\n\n[Meer over de risiconiveaus](/over-risiconiveaus)"
@@ -2100,6 +2108,10 @@
     }
   },
   "gemeente_actueel": {
+    "metadata": {
+      "title": "Actueel",
+      "description": "Actueel"
+    },
     "risiconiveaus": {
       "selecteer_titel": "Risiconiveaus",
       "selecteer_toelichting": "De kaart geeft het risiconiveau per veiligheidsregio weer.\n\n[Meer over de risiconiveaus](/over-risiconiveaus)"

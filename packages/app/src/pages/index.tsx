@@ -3,8 +3,8 @@ import { useRouter } from 'next/router';
 import ArtsIcon from '~/assets/arts.svg';
 import GetestIcon from '~/assets/test.svg';
 import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
-import { Box } from '~/components-styled/base';
 import { ArticleSummary } from '~/components-styled/article-teaser';
+import { Box } from '~/components-styled/base';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
@@ -32,6 +32,7 @@ import {
   getNlData,
   getText,
 } from '~/static-props/get-data';
+import rawSiteText from '~/locale/index';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -211,9 +212,8 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
   );
 };
 
-/** @TODO Fill metadata / adjust layout */
 const metadata = {
-  title: '',
+  ...rawSiteText.nationaal_actueel.metadata,
 };
 Home.getLayout = getLayoutWithMetadata(metadata);
 
