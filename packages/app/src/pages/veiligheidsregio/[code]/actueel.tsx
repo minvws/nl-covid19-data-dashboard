@@ -27,8 +27,9 @@ import {
   getVrData,
 } from '~/static-props/get-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-
 export { getStaticPaths } from '~/static-paths/vr';
+import { RiskLevelIndicator } from '~/components-styled/risk-level-indicator';
+import { assert } from '~/utils/assert';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -43,6 +44,18 @@ const SafetyRegionActueel: FCWithLayout<typeof getStaticProps> = (props) => {
   const { text: siteText, choropleth, data } = props;
   const router = useRouter();
   const text = siteText.veiligheidsregio_actueel;
+  const escalationText = siteText.escalatie_niveau;
+
+  const regionCode = router.query.code;
+
+  const filteredRegion = props.choropleth.vr.escalation_levels.find(
+    (item) => item.vrcode === regionCode
+  );
+
+  assert(
+    filteredRegion,
+    `Could not find a "vrcode" to match with the region: ${regionCode} to get the the current "escalation_level" of it.`
+  );
 
   const dataInfectedTotal = data.tested_overall;
   const dataHospitalIntake = data.hospital_nice;
@@ -100,6 +113,18 @@ const SafetyRegionActueel: FCWithLayout<typeof getStaticProps> = (props) => {
               metricProperty="admissions_on_date_of_reporting"
             />
           </MiniTrendTileLayout>
+
+          <RiskLevelIndicator
+            title={text.risoconiveau_maatregelen.title}
+            description={text.risoconiveau_maatregelen.description}
+            link={{
+              title: text.risoconiveau_maatregelen.bekijk_href,
+              href: `/veiligheidsregio/${regionCode}/maatregelen`,
+            }}
+            escalationLevel={filteredRegion.escalation_level}
+            code={filteredRegion.vrcode}
+            escalationTypes={escalationText.types}
+          />
 
           <QuickLinks
             header={text.quick_links.header}
