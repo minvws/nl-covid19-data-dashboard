@@ -20,7 +20,7 @@ import { Text } from '~/components-styled/typography';
 import { getLayout as getSiteLayout } from '~/domain/layout/layout';
 import siteText from '~/locale/index';
 import { colors } from '~/style/theme';
-import { Regionaal } from '~/types/data';
+import { Regionaal } from '@corona-dashboard/common';
 import { SafetyRegionComboBox } from './components/safety-region-combo-box';
 
 interface SafetyRegionLayoutProps {

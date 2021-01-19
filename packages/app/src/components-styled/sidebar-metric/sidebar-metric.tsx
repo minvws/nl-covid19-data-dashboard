@@ -1,7 +1,7 @@
 import { get } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
-import { Metric, MetricKeys } from '~/components/choropleth/shared';
+import { Metric, MetricKeys } from '@corona-dashboard/common';
 import siteText, { TALLLanguages } from '~/locale/index';
 import {
   DataScope,
@@ -10,7 +10,7 @@ import {
 } from '~/metric-config';
 import { assert } from '~/utils/assert';
 import { formatDateFromSeconds } from '~/utils/formatDate';
-import { getLastFilledValue } from '~/utils/get-last-filled-value';
+import { getLastFilledValue } from '@corona-dashboard/common';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { SidebarBarScale } from './sidebar-barscale';
 import { SidebarKpiValue } from './sidebar-kpi-value';

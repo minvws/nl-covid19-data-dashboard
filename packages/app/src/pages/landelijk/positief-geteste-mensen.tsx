@@ -38,7 +38,7 @@ import {
   getText,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
-import { NationalTestedPerAgeGroup } from '~/types/data.d';
+import { NationalTestedPerAgeGroup } from '@corona-dashboard/common';
 import { assert } from '~/utils/assert';
 import {
   formatDateFromMilliseconds,
@@ -164,7 +164,7 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
         </TwoKpiSection>
 
         <ChoroplethTile
-          data-cy="chloropleths"
+          data-cy="choropleths"
           title={text.map_titel}
           metadata={{
             date: dataInfectedDelta.last_value.date_unix,

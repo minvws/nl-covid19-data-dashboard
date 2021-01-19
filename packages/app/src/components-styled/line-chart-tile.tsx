@@ -4,7 +4,7 @@ import { Value } from '~/components-styled/line-chart/helpers';
 import { TimeframeOption } from '~/utils/timeframe';
 import { ChartTileWithTimeframe } from './chart-tile';
 import { MetadataProps } from './metadata';
-import useUniqueId from '~/utils/useUniqueId';
+import { useUniqueId } from '~/utils/useUniqueId';
 import { assert } from '~/utils/assert';
 interface LineChartTileProps<T extends Value> extends LineChartProps<T> {
   title: string;
