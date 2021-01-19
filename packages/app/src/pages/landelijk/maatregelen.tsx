@@ -23,20 +23,22 @@ import { useEscalationLevel } from '~/utils/use-escalation-level';
 import { groq } from 'next-sanity';
 
 type MaatregelenData = {
-  title: string;
+  lockdown: unknown;
+  roadmap: unknown;
 };
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   getNlData,
   createGetContent<MaatregelenData>(groq`
-  *[_type == 'roadmap'][0]
-`)
+    {
+      'lockdown': *[_type == 'lockdown'][0],
+      'roadmap': *[_type == 'roadmap'][0]
+    }`)
 );
 
 const NationalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data, content } = props;
-  console.log(content);
 
   const escalationLevel = useEscalationLevel(data.restrictions.values);
 
