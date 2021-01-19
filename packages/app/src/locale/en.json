@@ -620,8 +620,8 @@
   },
   "nationaal_actueel": {
     "metadata": {
-      "title": "Actueel",
-      "description": "Actueel"
+      "title": "Actuele situatie in Nederland",
+      "description": "Actuele situatie in Nederland"
     },
     "risiconiveaus": {
       "selecteer_titel": "Risiconiveaus",
@@ -2042,8 +2042,8 @@
 
   "veiligheidsregio_actueel": {
     "metadata": {
-      "title": "Actueel",
-      "description": "Actueel"
+      "title": "Actuele situatie in {{safetyRegionName}}",
+      "description": "Actuele situatie in {{safetyRegionName}}"
     },
     "risiconiveaus": {
       "selecteer_titel": "Risiconiveaus",
@@ -2109,8 +2109,8 @@
   },
   "gemeente_actueel": {
     "metadata": {
-      "title": "Actueel",
-      "description": "Actueel"
+      "title": "Actuele situatie in {{municipalityName}}",
+      "description": "Actuele situatie in {{municipalityName}}"
     },
     "risiconiveaus": {
       "selecteer_titel": "Risiconiveaus",
