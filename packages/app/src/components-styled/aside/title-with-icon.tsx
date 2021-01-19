@@ -7,7 +7,7 @@ type TitleWithIconProps = {
   title: string;
   icon: ReactNode;
   subtitle?: string;
-} & Omit<HeadingProps, 'children' | 'level'>;
+} & Omit<HeadingProps, 'children'>;
 
 /**
  * This is a title (with an icon) that looks like a heading, but isn't rendered using an H* element.
@@ -16,7 +16,7 @@ type TitleWithIconProps = {
  * @param props
  */
 export function TitleWithIcon(props: TitleWithIconProps) {
-  const { icon, title, subtitle, ...headingProps } = props;
+  const { icon, title, subtitle, level = 4, ...headingProps } = props;
 
   return (
     <Box
@@ -30,7 +30,7 @@ export function TitleWithIcon(props: TitleWithIconProps) {
 
       <Box>
         <Heading
-          level={4}
+          level={level}
           mb={0}
           mr={3}
           fontWeight="bold"

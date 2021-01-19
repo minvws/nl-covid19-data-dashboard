@@ -619,6 +619,12 @@
     "date_day_before_yesterday": "the day before yesterday"
   },
   "nationaal_actueel": {
+    "title": "Actuele situatie in {{the_netherlands}}",
+    "the_netherlands": "The Netherlands",
+    "metadata": {
+      "title": "Actuele situatie in Nederland",
+      "description": "Actuele situatie in Nederland"
+    },
     "risiconiveaus": {
       "selecteer_titel": "",
       "selecteer_toelichting": ""
@@ -2037,6 +2043,11 @@
   },
 
   "veiligheidsregio_actueel": {
+    "title": "De actuele situatie in {{safetyRegionName}}",
+    "metadata": {
+      "title": "Actuele situatie in {{safetyRegionName}}",
+      "description": "Actuele situatie in {{safetyRegionName}}"
+    },
     "risiconiveaus": {
       "selecteer_titel": "Risiconiveaus",
       "selecteer_toelichting": "De kaart geeft het risiconiveau per veiligheidsregio weer.\n\n[Meer over de risiconiveaus](/over-risiconiveaus)"
@@ -2105,6 +2116,11 @@
     }
   },
   "gemeente_actueel": {
+    "title": "Actuele situatie in {{municipalityName}}",
+    "metadata": {
+      "title": "Actuele situatie in {{municipalityName}}",
+      "description": "Actuele situatie in {{municipalityName}}"
+    },
     "risiconiveaus": {
       "selecteer_titel": "Risiconiveaus",
       "selecteer_toelichting": "De kaart geeft het risiconiveau per veiligheidsregio weer.\n\n[Meer over de risiconiveaus](/over-risiconiveaus)"

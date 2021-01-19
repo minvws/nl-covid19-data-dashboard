@@ -1,8 +1,10 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
+import ArrowIcon from '~/assets/arrow.svg';
 import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { Box } from './base';
+import { LinkWithIcon } from './link-with-icon';
 import { Heading } from './typography';
 
 interface QuickLinksProps {
@@ -18,14 +20,21 @@ interface QuickLink {
 export function QuickLinks({ header, links }: QuickLinksProps) {
   return (
     <Box>
-      <Heading level={2} fontSize="1.125rem">
+      <Heading level={2} fontSize="1.125rem" m={0}>
         {header}
       </Heading>
       <List>
         {links.map((link, index) => (
           <Item key={`${link.text}-${index}`}>
             <Link href={link.href}>
-              <QuickLink href={link.href}>{link.text}</QuickLink>
+              <LinkWithIcon
+                href={link.href}
+                icon={<ArrowIcon css={css({ transform: 'rotate(-90deg)' })} />}
+                iconPlacement="right"
+                fontWeight="bold"
+              >
+                {link.text}
+              </LinkWithIcon>
             </Link>
           </Item>
         ))}
@@ -49,19 +58,5 @@ const Item = styled.li(
     listStyle: 'none',
     mr: 4,
     py: 1,
-  })
-);
-
-const QuickLink = styled.a(
-  css({
-    textDecoration: 'none',
-    fontWeight: 'bold',
-    display: 'inline-block',
-    pr: 3,
-    backgroundImage: `url('/images/chevron.svg')`,
-    // match aspect ratio of chevron.svg
-    backgroundSize: '0.6em 1.2em',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: '100% 50%',
   })
 );

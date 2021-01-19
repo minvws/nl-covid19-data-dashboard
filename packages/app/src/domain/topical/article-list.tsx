@@ -52,6 +52,7 @@ export function ArticleList({ articleSummaries, hideLink }: ArticleListProps) {
               href="/artikelen"
               icon={<ArrowIcon css={css({ transform: 'rotate(-90deg)' })} />}
               iconPlacement="right"
+              fontWeight="bold"
             >
               {siteText.nationaal_actueel.latest_articles.all_articles}
             </LinkWithIcon>
