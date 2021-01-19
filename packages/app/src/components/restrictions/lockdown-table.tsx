@@ -65,7 +65,7 @@ function MobileLockdownTable(props: LockdownTableData) {
                             {restriction.icon ? (
                               getIcon(restrictionIcons[restriction.icon], color)
                             ) : (
-                              <Box size={32} />
+                              <Box size={36} />
                             )}
                           </Box>
                           <Box pt="5px">{restriction.restriction}</Box>
@@ -124,7 +124,7 @@ function DesktopLockdownTable(props: LockdownTableData) {
                           {restriction.icon ? (
                             getIcon(restrictionIcons[restriction.icon], color)
                           ) : (
-                            <Box size={32} />
+                            <Box size={36} />
                           )}
                         </Box>
                         <Box as="span" ml={1} pt="5px">
