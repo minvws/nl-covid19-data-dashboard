@@ -38,7 +38,10 @@ export function getLayoutWithMetadata(metadata: LayoutProps) {
 }
 
 export function getDefaultLayout() {
-  return function (page: React.ReactNode, pageProps: any) {
+  return function <T extends { lastGenerated: string }>(
+    page: React.ReactNode,
+    pageProps: T
+  ) {
     const lastGenerated = pageProps.lastGenerated;
     return getLayout(siteText.metadata, lastGenerated)(<>{page}</>);
   };

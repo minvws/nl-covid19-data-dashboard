@@ -23,7 +23,7 @@ export function LinkWithIcon({
       <a
         css={css({
           display: 'inline-block',
-          fontWeight: fontWeight ?? 'normal',
+          fontWeight,
           textDecoration: 'none',
           '&:hover,&:focus': {
             textDecoration: 'underline',

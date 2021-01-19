@@ -96,7 +96,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
 
             <Heading level={1} fontWeight="normal">
               {replaceComponentsInText(text.title, {
-                theNetherlands: <strong>{text.theNetherlands}</strong>,
+                the_netherlands: <strong>{text.the_netherlands}</strong>,
               })}
             </Heading>
 

@@ -619,8 +619,8 @@
     "date_day_before_yesterday": "the day before yesterday"
   },
   "nationaal_actueel": {
-    "title": "Actuele situatie in {{theNetherlands}}",
-    "theNetherlands": "The Netherlands",
+    "title": "Actuele situatie in {{the_netherlands}}",
+    "the_netherlands": "The Netherlands",
     "metadata": {
       "title": "Actuele situatie in Nederland",
       "description": "Actuele situatie in Nederland"
