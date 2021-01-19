@@ -6,6 +6,7 @@ import { useEscalationColor } from '~/utils/use-escalation-color';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { restrictionIcons } from './restriction-icons';
 import { LockdownData } from '~/types/cms';
+import { css } from '@styled-system/css';
 
 export type LockdownTableProps = {
   data: LockdownData;
@@ -59,15 +60,24 @@ function MobileLockdownTable(props: LockdownTableData) {
                           key={restriction.restriction}
                           display="flex"
                           flexDirection="row"
+                          alignItems="center"
                         >
-                          <Box as="span" flexShrink={0}>
+                          <Box
+                            as="span"
+                            flexShrink={0}
+                            css={css({
+                              svg: {
+                                display: 'block',
+                              },
+                            })}
+                          >
                             {restriction.icon ? (
                               getIcon(restrictionIcons[restriction.icon], color)
                             ) : (
                               <Box size={36} />
                             )}
                           </Box>
-                          <Box pt="5px">{restriction.restriction}</Box>
+                          <Box>{restriction.restriction}</Box>
                         </Box>
                       );
                     })}
@@ -100,9 +110,7 @@ function DesktopLockdownTable(props: LockdownTableData) {
                 px={2}
                 verticalAlign="top"
               >
-                <InlineText mt="5px" fontWeight="bold">
-                  {group.title}
-                </InlineText>
+                <InlineText fontWeight="bold">{group.title}</InlineText>
               </Cell>
               <Cell
                 borderTop={'1px solid black'}
@@ -118,15 +126,24 @@ function DesktopLockdownTable(props: LockdownTableData) {
                         key={restriction._key}
                         display="flex"
                         flexDirection="row"
+                        alignItems="center"
                       >
-                        <Box as="span" flexShrink={0}>
+                        <Box
+                          as="span"
+                          flexShrink={0}
+                          css={css({
+                            svg: {
+                              display: 'block',
+                            },
+                          })}
+                        >
                           {restriction.icon ? (
                             getIcon(restrictionIcons[restriction.icon], color)
                           ) : (
                             <Box size={36} />
                           )}
                         </Box>
-                        <Box as="span" ml={1} pt="5px">
+                        <Box as="span" ml={1}>
                           {restriction.restriction}
                         </Box>
                       </Box>
