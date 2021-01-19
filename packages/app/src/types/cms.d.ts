@@ -40,7 +40,7 @@ export type LockdownData = {
   _type: 'lockdown';
   _updatedAt: string;
   groups: LockdownDataGroup[];
-  lockdown: boolean;
+  showLockdown: boolean;
   message: {
     title: string;
     description: unknown[] | null;

@@ -50,7 +50,7 @@ const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
   const { content, safetyRegionName } = props;
 
   const { lockdown } = content;
-  const { lockdown: showLockdown } = lockdown;
+  const { showLockdown } = lockdown;
 
   const router = useRouter();
   const code = (router.query.code as unknown) as VRCode;

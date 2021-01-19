@@ -40,7 +40,7 @@ const NationalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
   const { content } = props;
   const { lockdown } = content;
 
-  const { lockdown: showLockdown } = lockdown;
+  const { showLockdown } = lockdown;
 
   // const escalationLevelData = useEscalationLevel(data.restrictions.values);
 

@@ -11,7 +11,7 @@ export default {
     },
     {
       title: 'Schakel lockdown in?',
-      name: 'lockdown',
+      name: 'showLockdown',
       description:
         'In een lockdown is de routekaart minder van belang. Als deze knop aanstaat tonen wij niet de routekaart, maar de lockdown maatregelen.',
       type: 'boolean',
