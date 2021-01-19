@@ -17,7 +17,7 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "national_corona_app_value",
+      "title": "nl_corona_app_value",
       "type": "object",
       "properties": {
         "downloaded_total": {
