@@ -152,6 +152,7 @@ const SewerWater: FCWithLayout<typeof getStaticProps> = (props) => {
             title={text.linechart_titel}
             metadata={{ source: text.bronnen.rivm }}
             timeframeOptions={['all', '5weeks']}
+            ariaDescription={graphDescriptions.rioolwater_virusdeeltjes}
           >
             {(timeframe) => (
               <>

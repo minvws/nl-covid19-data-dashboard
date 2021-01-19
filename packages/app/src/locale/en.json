@@ -2024,21 +2024,21 @@
   },
   "accessibility": {
     "grafieken": {
-      "reproductiegetal_verloop": "",
-      "ziekenhuisopnames": "",
-      "intensive_care_opnames": "",
-      "verpleeghuiszorg_positief_getest": "",
-      "verpleeghuiszorg_besmette_locaties": "",
-      "verpleeghuiszorg_overleden_getest": "",
-      "gehandicaptenzorg_positief_getest": "",
+      "reproductiegetal_verloop": "_",
+      "ziekenhuisopnames": "_",
+      "intensive_care_opnames": "_",
+      "verpleeghuiszorg_positief_getest": "_",
+      "verpleeghuiszorg_besmette_locaties": "_",
+      "verpleeghuiszorg_overleden_getest": "_",
+      "gehandicaptenzorg_positief_getest": "_",
       "gehandicaptenzorg_besmette_locaties": "This figure shows the progression of the number of infected disability care home locations over time.",
       "gehandicaptenzorg_overleden": "This figure shows the progression in the number of deceased disability care home residents over time.",
-      "thuiswonende_ouderen_besmettingen": "",
-      "thuiswonende_ouderen_overleden": "",
-      "rioolwater_virusdeeltjes": "",
-      "verdenkingen_huisartsen": "",
-      "ziekenhuis_opnames": "",
-      "rioolwater_meetwaarde": ""
+      "thuiswonende_ouderen_besmettingen": "_",
+      "thuiswonende_ouderen_overleden": "_",
+      "rioolwater_virusdeeltjes": "_",
+      "verdenkingen_huisartsen": "_",
+      "ziekenhuis_opnames": "_",
+      "rioolwater_meetwaarde": "_"
     }
   }
 }
