@@ -1,5 +1,6 @@
 import { groq } from 'next-sanity';
 import { ArticleSummary } from '~/components-styled/article-teaser';
+import { Box } from '~/components-styled/base';
 import { MaxWidth } from '~/components-styled/max-width';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
@@ -21,9 +22,11 @@ const ArticlesOverview: FCWithLayout<typeof getStaticProps> = (props) => {
   const { content } = props;
 
   return (
-    <MaxWidth>
-      <ArticleList articleSummaries={content} hideLink={true} />
-    </MaxWidth>
+    <Box backgroundColor="white" py={{ _: 4, md: 5 }}>
+      <MaxWidth>
+        <ArticleList articleSummaries={content} hideLink={true} />
+      </MaxWidth>
+    </Box>
   );
 };
 
