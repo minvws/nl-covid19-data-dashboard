@@ -24,7 +24,7 @@ interface AgeDemographicChartProps<T extends AgeDemographicDefaultValue> {
   onMouseLeaveBar: () => void;
   onKeyInput: (event: KeyboardEvent<SVGElement>) => void;
   metricProperty: keyof T;
-  visuallyMaxPercentage?: number;
+  displayMaxPercentage?: number;
 }
 
 const TickValue = ({ x, y, formattedValue }: TickRendererProps) => {
@@ -52,7 +52,7 @@ function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
   onMouseMoveBar,
   onMouseLeaveBar,
   metricProperty,
-  visuallyMaxPercentage,
+  displayMaxPercentage,
 }: AgeDemographicChartProps<T>) {
   const {
     width,
@@ -74,10 +74,10 @@ function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
 
   const hasClippedValue = !!values.find(
     (value) =>
-      getIsClipped(value.age_group_percentage, visuallyMaxPercentage) ||
+      getIsClipped(value.age_group_percentage, displayMaxPercentage) ||
       getIsClipped(
         (value[metricProperty] as unknown) as number,
-        visuallyMaxPercentage
+        displayMaxPercentage
       )
   );
 
@@ -167,12 +167,12 @@ function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
 
           const isClippedAgeGroup = getIsClipped(
             value.age_group_percentage,
-            visuallyMaxPercentage
+            displayMaxPercentage
           );
 
           const isClippedInfectedPercentage = getIsClipped(
             (value[metricProperty] as unknown) as number,
-            visuallyMaxPercentage
+            displayMaxPercentage
           );
 
           const isClippedValue =
@@ -274,11 +274,8 @@ const StyledHoverBar = styled(Bar)(
   })
 );
 
-function getIsClipped(
-  value: number,
-  visuallyMaxPercentage: number | undefined
-) {
-  if (!visuallyMaxPercentage) return false;
+function getIsClipped(value: number, maxValue: number | undefined) {
+  if (!maxValue) return false;
 
-  return value * 100 > visuallyMaxPercentage;
+  return value * 100 > maxValue;
 }

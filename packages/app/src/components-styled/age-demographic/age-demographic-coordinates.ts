@@ -43,7 +43,7 @@ export function useAgeDemographicCoordinates<
 >(
   data: { values: T[] },
   metricProperty: keyof T,
-  visuallyMaxPercentage?: number
+  displayMaxPercentage?: number
 ) {
   const [ref, { width }] = useElementSize<HTMLDivElement>(400);
   const { xs, xl } = useBreakpoints();
@@ -57,7 +57,7 @@ export function useAgeDemographicCoordinates<
       isSmallScreen,
       width,
       isExtraSmallScreen,
-      visuallyMaxPercentage
+      displayMaxPercentage
     );
   }, [
     data,
@@ -65,7 +65,7 @@ export function useAgeDemographicCoordinates<
     isSmallScreen,
     width,
     isExtraSmallScreen,
-    visuallyMaxPercentage,
+    displayMaxPercentage,
   ]);
 
   return [ref, coordinates] as const;
@@ -79,7 +79,7 @@ function calculateAgeDemographicCoordinates<
   isSmallScreen: boolean,
   parentWidth: number,
   isExtraSmallScreen: boolean,
-  visuallyMaxPercentage?: number
+  displayMaxPercentage?: number
 ): AgeDemographicCoordinates<T> {
   const values = data.values.sort((a, b) => {
     return b.age_group_range.localeCompare(a.age_group_range);
@@ -125,13 +125,10 @@ function calculateAgeDemographicCoordinates<
   ];
 
   /**
-   * If there's a `visuallyMaxPercentage`-prop we'll clip the domain to that value
+   * If there's a `displayMaxPercentage`-prop we'll clip the domain to that value
    */
-  if (visuallyMaxPercentage) {
-    domainPercentages[1] = Math.min(
-      visuallyMaxPercentage,
-      domainPercentages[1]
-    );
+  if (displayMaxPercentage) {
+    domainPercentages[1] = Math.min(displayMaxPercentage, domainPercentages[1]);
   }
 
   const ageGroupPercentageScale = scaleLinear({

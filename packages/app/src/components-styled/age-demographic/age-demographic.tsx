@@ -11,18 +11,18 @@ import { AgeDemographicChartText, AgeDemographicDefaultValue } from './types';
 export function AgeDemographic<T extends AgeDemographicDefaultValue>({
   data,
   metricProperty,
-  visuallyMaxPercentage,
+  displayMaxPercentage,
   text,
 }: {
   data: { values: T[] };
   metricProperty: keyof T;
-  visuallyMaxPercentage?: number;
+  displayMaxPercentage?: number;
   text: AgeDemographicChartText;
 }) {
   const [ref, coordinates] = useAgeDemographicCoordinates(
     data,
     metricProperty,
-    visuallyMaxPercentage
+    displayMaxPercentage
   );
 
   // Generate tooltip event handlers and state based on values and tooltip coordinates callback
@@ -44,7 +44,7 @@ export function AgeDemographic<T extends AgeDemographicDefaultValue>({
           onMouseMoveBar={openTooltip}
           onMouseLeaveBar={closeTooltip}
           onKeyInput={keyboardNavigateTooltip}
-          visuallyMaxPercentage={visuallyMaxPercentage}
+          displayMaxPercentage={displayMaxPercentage}
           metricProperty={metricProperty}
           text={text}
         />

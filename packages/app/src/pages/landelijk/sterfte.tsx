@@ -108,7 +108,7 @@ const DeceasedNationalPage: FCWithLayout<typeof getStaticProps> = (props) => {
           <AgeDemographic
             data={dataDeceasedPerAgeGroup}
             metricProperty="covid_percentage"
-            visuallyMaxPercentage={45}
+            displayMaxPercentage={45}
             text={siteText.deceased_age_groups.graph}
           />
         </ChartTile>
