@@ -14,7 +14,7 @@ import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-ch
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
 import { SEOHead } from '~/components/seoHead';
-import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
+import { FCWithLayout, getDefaultLayout } from '~/domain/layout/layout';
 import { Search } from '~/domain/topical/components/search';
 import { DataSitemap } from '~/domain/topical/data-sitemap';
 import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
@@ -28,6 +28,7 @@ import {
   getVrData,
 } from '~/static-props/get-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 
 export { getStaticPaths } from '~/static-paths/vr';
 
@@ -68,7 +69,9 @@ const SafetyRegionActueel: FCWithLayout<typeof getStaticProps> = (props) => {
             <Search initialValue={props.safetyRegionName} />
 
             <Heading level={1} fontWeight="normal">
-              De actuele situatie in <strong>{props.safetyRegionName}</strong>
+              {replaceComponentsInText(text.title, {
+                safetyRegionName: <strong>{props.safetyRegionName}</strong>,
+              })}
             </Heading>
 
             <MiniTrendTileLayout>

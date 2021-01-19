@@ -1,6 +1,8 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
+import NederlandIcon from '~/assets/nederland.svg';
 import ArrowIcon from '~/assets/arrow.svg';
+import { TitleWithIcon } from '~/components-styled/aside/title-with-icon';
 import { Box } from '~/components-styled/base';
 import { LinkWithIcon } from '~/components-styled/link-with-icon';
 import { Heading, InlineText, Text } from '~/components-styled/typography';
@@ -16,9 +18,12 @@ export function DataSitemap() {
 
   return (
     <Box>
-      <Heading level={2}>
-        {siteText.nationaal_actueel.data_sitemap_titel}
-      </Heading>
+      <TitleWithIcon
+        level={2}
+        title={siteText.nationaal_actueel.data_sitemap_titel}
+        fontSize="1.25rem"
+        icon={<NederlandIcon />}
+      />
       <Box>
         <Text>{siteText.nationaal_actueel.data_sitemap_toelichting}</Text>
         <Box display="flex" flexDirection="row" justifyContent="space-between">

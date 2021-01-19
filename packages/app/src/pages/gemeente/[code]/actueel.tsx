@@ -13,7 +13,7 @@ import { Heading } from '~/components-styled/typography';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
-import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
+import { FCWithLayout } from '~/domain/layout/layout';
 import { Search } from '~/domain/topical/components/search';
 import { DataSitemap } from '~/domain/topical/data-sitemap';
 import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
@@ -29,6 +29,7 @@ import {
 import { getSafetyRegionForMunicipalityCode } from '~/utils/getSafetyRegionForMunicipalityCode';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { SEOHead } from '~/components/seoHead';
+import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 
 export { getStaticPaths } from '~/static-paths/gm';
 
@@ -73,7 +74,9 @@ const MunicipalityActueel: FCWithLayout<typeof getStaticProps> = (props) => {
             <Search initialValue={municipalityName} />
 
             <Heading level={1} fontWeight="normal">
-              De actuele situatie in <strong>{municipalityName}</strong>
+              {replaceComponentsInText(text.title, {
+                municipalityName: <strong>{municipalityName}</strong>,
+              })}
             </Heading>
 
             <MiniTrendTileLayout>

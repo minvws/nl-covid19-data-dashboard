@@ -33,6 +33,7 @@ import {
   getNlData,
   getText,
 } from '~/static-props/get-data';
+import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -92,7 +93,9 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
             <Search />
 
             <Heading level={1} fontWeight="normal">
-              De actuele situatie in <strong>Nederland</strong>
+              {replaceComponentsInText(text.title, {
+                theNetherlands: <strong>{text.theNetherlands}</strong>,
+              })}
             </Heading>
 
             <MiniTrendTileLayout>

@@ -619,6 +619,8 @@
     "date_day_before_yesterday": "eergisteren"
   },
   "nationaal_actueel": {
+    "title": "Actuele situatie in {{theNetherlands}}",
+    "theNetherlands": "Nederland",
     "metadata": {
       "title": "Actuele situatie in Nederland",
       "description": "Actuele situatie in Nederland"
@@ -2041,6 +2043,7 @@
   },
 
   "veiligheidsregio_actueel": {
+    "title": "De actuele situatie in {{safetyRegionName}}",
     "metadata": {
       "title": "Actuele situatie in {{safetyRegionName}}",
       "description": "Actuele situatie in {{safetyRegionName}}"
@@ -2108,6 +2111,7 @@
     }
   },
   "gemeente_actueel": {
+    "title": "Actuele situatie in {{municipalityName}}",
     "metadata": {
       "title": "Actuele situatie in {{municipalityName}}",
       "description": "Actuele situatie in {{municipalityName}}"
