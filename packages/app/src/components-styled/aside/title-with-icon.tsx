@@ -1,13 +1,14 @@
 import css from '@styled-system/css';
 import React, { ReactNode } from 'react';
 import { Box } from '../base';
-import { Heading, HeadingProps } from '../typography';
+import { Heading, HeadingLevel, HeadingProps } from '../typography';
 
 type TitleWithIconProps = {
   title: string;
   icon: ReactNode;
   subtitle?: string;
-} & Omit<HeadingProps, 'children'>;
+  level?: HeadingLevel;
+} & Omit<HeadingProps, 'children' | 'level'>;
 
 /**
  * This is a title (with an icon) that looks like a heading, but isn't rendered using an H* element.
