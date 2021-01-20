@@ -29,7 +29,7 @@
     "tested_overall",
     "tested_per_age_group",
     "vaccine_availability",
-    "vaccination"
+    "vaccine_support"
   ],
   "additionalProperties": false,
   "properties": {
@@ -114,8 +114,8 @@
     "vaccine_availability": {
       "$ref": "vaccine_availability.json"
     },
-	"vaccination": {
-      "$ref": "vaccination.json"
+    "vaccine_support": {
+      "$ref": "vaccine_support.json"
     }
   }
 }
