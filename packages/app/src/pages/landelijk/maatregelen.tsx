@@ -1,3 +1,4 @@
+import css from '@styled-system/css';
 import { ContentHeader } from '~/components-styled/content-header';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
@@ -6,8 +7,10 @@ import { KpiSection } from '~/components-styled/kpi-section';
 import { LockdownTable } from '~/components/restrictions/lockdown-table';
 import { PortableText } from '~/lib/sanity';
 import { SEOHead } from '~/components/seoHead';
+import { Box } from '~/components-styled/base/box';
 import { TileList } from '~/components-styled/tile-list';
 import Maatregelen from '~/assets/maatregelen.svg';
+
 import text from '~/locale';
 import {
   getNlData,
@@ -64,10 +67,16 @@ const NationalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
 
         {showLockdown && (
           <KpiSection flexDirection="column">
-            <>
+            <Box
+              css={css({
+                'p:last-child': {
+                  margin: '0',
+                },
+              })}
+            >
               <Heading level={3}>{lockdown.message.title}</Heading>
               <PortableText blocks={lockdown.message.description} />
-            </>
+            </Box>
           </KpiSection>
         )}
 
