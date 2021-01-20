@@ -12,7 +12,7 @@ import {
   ChartScales,
   ComponentCallbackFunction,
   defaultPadding,
-} from '~/components-styled/chart-axes';
+} from '~/components-styled/line-chart/components';
 import { Text } from '~/components-styled/typography';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
 import text from '~/locale/index';

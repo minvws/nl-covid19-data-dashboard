@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ChartPadding } from '~/components-styled/chart-axes';
+import { ChartPadding } from '~/components-styled/line-chart/components';
 import { Text } from '~/components-styled/typography';
 import { colors } from '~/style/theme';
 import { formatDateFromMilliseconds } from '~/utils/formatDate';

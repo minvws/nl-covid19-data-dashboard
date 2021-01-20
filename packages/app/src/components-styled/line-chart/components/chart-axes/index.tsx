@@ -6,7 +6,7 @@ import { Bar, Line } from '@visx/shape';
 import { Text } from '@visx/text';
 import { ScaleLinear, ScaleTime } from 'd3-scale';
 import { ComponentProps, memo, MouseEvent, ReactNode, TouchEvent } from 'react';
-import { MARKER_MIN_WIDTH } from '../line-chart/components/marker';
+import { MARKER_MIN_WIDTH } from '../marker';
 
 const NUM_TICKS = 3;
 

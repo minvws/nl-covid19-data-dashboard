@@ -7,7 +7,7 @@ import {
   ChartBounds,
   ComponentCallbackFunction,
   ComponentCallbackInfo,
-} from '~/components-styled/chart-axes';
+} from '~/components-styled/line-chart/components';
 import { DateRange } from '~/utils/get-trailing-date-range';
 
 type CustomBarProps = AddSVGProps<BarProps, SVGRectElement>;
