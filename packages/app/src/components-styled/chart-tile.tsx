@@ -6,7 +6,7 @@ import { ChartTileContainer } from './chart-tile-container';
 import { ChartTimeControls } from './chart-time-controls';
 import { MetadataProps } from './metadata';
 import { Heading } from './typography';
-import useUniqueId from '~/utils/useUniqueId';
+import { useUniqueId } from '~/utils/useUniqueId';
 import { assert } from '~/utils/assert';
 interface ChartTileProps {
   children: React.ReactNode;

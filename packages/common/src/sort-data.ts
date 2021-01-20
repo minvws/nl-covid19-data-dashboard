@@ -152,5 +152,5 @@ function isWeekTimestamped(
 }
 
 function isWhitelistedProperty(propertyName: string) {
-  return ['restrictions'].includes(propertyName);
+  return ['restrictions', 'deceased_rivm_per_age_group'].includes(propertyName);
 }

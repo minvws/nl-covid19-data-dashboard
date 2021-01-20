@@ -14,8 +14,8 @@
     "title": "Last updated"
   },
   "notificatie": {
-    "titel": "Slight decline visible",
-    "bericht": "For the second week in a row, the number of COVID-19 positives decreased slightly . The percentage of people with a positive test result also declined somewhat. In the week of 4 to 10 January, less people with COVID-19 were newly admitted to the hospital and ICU, compared to the week before. Also, there were less newly reported infected locations of nursing homes and residential care centers in the past week. The decreasing numbers are a first effect of the lockdown that started on 15 December.",
+    "titel": "New COVID-19 variant overshadows more positive developments",
+    "bericht": "A moderately positive overview can be observed in the week of 13 to 19 January, as an effect of the lockdown that started on 15 December. In that week, the reported number of people who tested positive for COVID-19 decreased by 21.5% compared to the week before, dropping to 38.776 newly reported COVID-19 infections. This overview is overshadowed by the rising number of cases involving the SARS-CoV-2 variant that resulted in a massive influx of patients in hospitals in the United Kingdom and Ireland. It is estimated that in the Netherlands about 10% of the people who became infected last week have the more contagious UK variant. That is twice as many compared to the week before that. \nWe are facing two variants of the virus that seem to be spreading in the Netherlands at different speeds. As a result, there are essentially two separate COVID-19 epidemics: one epidemic involving the ‘old’ variant, in which infections are decreasing, and another epidemic involving the UK variant, in which infections are increasing.",
     "link": {
       "text": "View the full message from the RIVM",
       "href": "https://www.rivm.nl/en/novel-coronavirus-covid-19/current-information"
@@ -514,8 +514,8 @@
       "text": "RIVM",
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
     },
-    "titel": "Sewage water examination",
-    "pagina_toelichting": "Average number of coronavirus particles per 100.000 inhabitants found in wastewater. The weekly average is calculated by adding up all the values measured at roughly 300 locations and dividing this by the number of measurements taken.",
+    "titel": "Virus particles in wastewater",
+    "pagina_toelichting": "Average number of coronavirus particles per 100.000 inhabitants found in wastewater. The weekly average is calculated by adding up all the values measured at roughly 300 locations and dividing this by the number of measurements taken.If someone is infected with coronavirus, coronavirus particles will usually be present in their excrement, which is carried away into the sewers. By testing wastewater samples collected at treatment plants, we can find out how much of the virus is present in a given area. Such testing is still experimental. In the long run we hope that wastewater testing will enable early detection and monitoring of coronavirus.",
     "barscale_titel": "Average number of virus particles per 100.000 inhabitants",
     "extra_uitleg": "The weekly average for all of the Netherlands is calculated by adding up all the values measured in one week and dividing this by the number of measurements taken.",
     "barscale_screenreader_text": "{{value}} virus particles per 100.000 inhabitants",
@@ -536,7 +536,7 @@
     "map_tooltip_value": "{{value}} x100 billion",
     "reference": {
       "href": "/verantwoording#sewage-water",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "Find out more about testing wastewater for coronavirus in the explanation of data presented."
     },
     "bronnen": {
       "rivm": {
@@ -791,7 +791,7 @@
     "datums": "Calculated: {{dateOfReport}}. Updated daily.",
     "screen_reader_graph_content": "{{value}} admissions.",
     "barscale_titel": "Hospital admissions reported per day",
-    "extra_uitleg": "Number of people from this safety region with COVID-19 admitted to hospital (excl. ICU) on a daily basis. This number entails the amount of hospital admissions reported on one day. These could include admissions from previous days, because the admissions are not necessarily reported on the day of admission. This figure is deemed to provide a good reflection of the current developments, as recordings of one day of admissions are illustrated.",
+    "extra_uitleg": "Number of people from this safety region with COVID-19 admitted to hospital (excl. ICU) on a daily basis. This number entails the amount of hospital admissions reported on one day and can include admissions from previous days. Patients can be admitted to hospitals in other regions.",
     "map_titel": "Distribution of hospital admissions in {{safetyRegion}}",
     "map_toelichting": "This map shows the distribution of hospital admissions in the Netherlands. It reflects the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE). Tergooi hospitals, Ziekenhuis Amsterlland and Flevoziekenhuis do not currently share their COVID-19 hospital admission data with Stichting NICE. As a result, the actual figures in some safety regions and municipalities will be higher than they appear on the map.",
     "linechart_titel": "Progression in hospital admissions over time",
@@ -877,8 +877,8 @@
   },
   "veiligheidsregio_rioolwater_metingen": {
     "titel_sidebar": "Sewage water examination",
-    "titel": "Sewage water examination in {{safetyRegion}}",
-    "pagina_toelichting": "Average number of coronavirus particles per 100.000 inhabitants found in wastewater. The weekly average is calculated by adding up all the values measured in this safety region and dividing this by the number of measurements taken.",
+    "titel": "Virus particles in wastewater {{safetyRegion}}",
+    "pagina_toelichting": "If someone is infected with coronavirus, coronavirus particles will usually be present in their excrement, which is carried away into the sewers. By testing wastewater samples collected at treatment plants, we can find out how much of the virus is present in a given area. Such testing is still experimental. In the long run we hope that wastewater testing will enable early detection and monitoring of coronavirus.",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "screen_reader_graph_content": "{{value}} virus particles per 100.000 inhabitants",
     "barscale_titel": "Average number of coronavirus particles per 100,000 inhabitants",
@@ -908,7 +908,7 @@
     "rwzi_abbrev": "",
     "reference": {
       "href": "/verantwoording#sewage-water",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "Find out more about testing wastewater for coronavirus in the explanation of data presented."
     },
     "bronnen": {
       "rivm": {
@@ -1005,8 +1005,8 @@
   },
   "gemeente_rioolwater_metingen": {
     "titel_sidebar": "Sewage water examination",
-    "titel": "Sewage water examination in {{municipality}}",
-    "pagina_toelichting": "Average number of coronavirus particles per 100.000 inhabitants found in wastewater. The weekly average is calculated by adding up all the values measured in this municipality and dividing this by the number of measurements taken.",
+    "titel": "Virus particles in wastewater {{municipality}}",
+    "pagina_toelichting": "If someone is infected with coronavirus, coronavirus particles will usually be present in their excrement, which is carried away into the sewers. By testing wastewater samples collected at treatment plants, we can find out how much of the virus is present in a given area. Such testing is still experimental. In the long run we hope that wastewater testing will enable early detection and monitoring of coronavirus.",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "screen_reader_graph_content": "{{value}} virus particles per 100.000 inhabitants",
     "barscale_titel": "Average number of virus particles per 100,000 inhabitants",
@@ -1036,7 +1036,7 @@
     "graph_range_description": "",
     "reference": {
       "href": "/verantwoording#sewage-water",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "Find out more about testing wastewater for coronavirus in the explanation of data presented."
     },
     "bronnen": {
       "rivm": {
@@ -1067,7 +1067,7 @@
   },
   "laatste_ontwikkelingen": {
     "title": "Latest developments",
-    "menu_subtitle": "Slight decline visible",
+    "menu_subtitle": "Increase of new COVID-19 variant",
     "alle_cijfers_header": "Want to see all data?",
     "alle_cijfers_link": "View all"
   },
@@ -1496,7 +1496,10 @@
       "infected_percentage_title": "Confirmed cases by age group",
       "infected_percentage_tooltip": "of the total amount of positive tested persons is {{ageGroupRange}} years old. ",
       "age_group_range_tooltip": "{{ageGroupRange}} years old. ",
-      "accessibility_description": "Graph with percentages for the distribution of the population and the distribution of positive tested age groups."
+      "accessibility_description": "Graph with percentages for the distribution of the population and the distribution of positive tested age groups.",
+      "clipped_value_message": "",
+      "value_percentage_title": "",
+      "value_percentage_tooltip": ""
     }
   },
   "gehandicaptenzorg_besmette_locaties": {
@@ -2189,25 +2192,6 @@
       }
     }
   },
-  "accessibility": {
-    "grafieken": {
-      "reproductiegetal_verloop": "Dit is een grafiek die het reproductie getal over tijd weergeeft.",
-      "ziekenhuisopnames": "Dit is een grafiek die de ziekenhuisopnames over tijd weergeeft.",
-      "intensive_care_opnames": "Dit is een grafiek die de intensive care opnames over tijd weergeeft.",
-      "verpleeghuiszorg_positief_getest": "Dit is een grafiek die in de verpleeghuizen de postief getesten over tijd weergeeft.",
-      "verpleeghuiszorg_besmette_locaties": "Dit is een grafiek die in de verpleeghuizen de besmette locaties over tijd weergeeft.",
-      "verpleeghuiszorg_overleden_getest": "Dit is een grafiek die in de verpleeghuiszorg overleden getesten over tijd weergeeft.",
-      "gehandicaptenzorg_positief_getest": "Dit is een grafiek die in de gehandicaptenzorg postief getesten over tijd weergeeft.",
-      "gehandicaptenzorg_besmette_locaties": "Dit is een grafiek die besmette locaties over tijd weergeeft.",
-      "gehandicaptenzorg_overleden": "Dit is een grafiek die gehandicaptenzorg overledenen over tijd weergeeft.",
-      "thuiswonende_ouderen_besmettingen": "Dit is een grafiek die bij de thuiswonende ouderen besmettingen over tijd weergeeft.",
-      "thuiswonende_ouderen_overleden": "Dit is een grafiek die bij de thuiswonende ouderen overleden over tijd weergeeft.",
-      "rioolwater_virusdeeltjes": "Dit is een grafiek die in het rioolwater virusdeeltjes over tijd weergeeft.",
-      "verdenkingen_huisartsen": "Dit is een grafiek die verdekingen van de huisartsen over tijd weergeeft.",
-      "ziekenhuis_opnames": "Dit is een grafiek die de ziekenhuis opnames over tijd weergeeft.",
-      "rioolwater_meetwaarde": "Dit is een grafiek die in het rioolwater de meetwaarde over tijd weergeeft."
-    }
-  },
   "choropleth": {
     "verb": {
       "singular": "has",
@@ -2290,6 +2274,44 @@
         "sentence": "",
         "last_sentence": ""
       }
+    }
+  },
+  "accessibility": {
+    "grafieken": {
+      "reproductiegetal_verloop": "This figure shows the progression over time of the reproduction number.",
+      "ziekenhuisopnames": "This figure shows the progression in hospital admissions over time.",
+      "intensive_care_opnames": "This figure shows the progression over time of intensive care admissions.",
+      "verpleeghuiszorg_positief_getest": "This figure shows the number of confirmed cases amongst nursing home residents.",
+      "verpleeghuiszorg_besmette_locaties": "This figure shows the progression of the number of infected nursing home locations over time.",
+      "verpleeghuiszorg_overleden_getest": "This figure shows the number of deceased confirmed cases amongst nursing home residents.",
+      "gehandicaptenzorg_positief_getest": "This figure shows the number of confirmed cases amongst disability care homes.",
+      "gehandicaptenzorg_besmette_locaties": "This figure shows the progression of the number of infected disability care home locations over time.",
+      "gehandicaptenzorg_overleden": "This figure shows the progression in the number of deceased disability care home residents over time.",
+      "thuiswonende_ouderen_besmettingen": "This figure shows the progression over time in daily confirmed cases among over-70s living at home.",
+      "thuiswonende_ouderen_overleden": "This figure shows the progression over time in the number of COVID-19 deaths among over-70s living at home.",
+      "rioolwater_virusdeeltjes": "This figure shows the progression over time in the average amount of virus particles in waste water, per 100.000 residents.",
+      "verdenkingen_huisartsen": "This figure shows the progression over time in the estimated number of patients with symptoms that could indicate COVID-19.",
+      "ziekenhuis_opnames": "This figure shows the progression in hospital admissions over time.",
+      "rioolwater_meetwaarde": "This figure shows the most recent measured values of the average amount of virus particles per 100.000 residents per sewage processing facility."
+    }
+  },
+  "deceased_age_groups": {
+    "title": "",
+    "description": "",
+    "bronnen": {
+      "rivm": {
+        "text": "",
+        "href": ""
+      }
+    },
+    "graph": {
+      "accessibility_description": "",
+      "clipped_value_message": "",
+      "age_group_percentage_title": "",
+      "age_group_percentage_tooltip": "",
+      "value_percentage_title": "",
+      "value_percentage_tooltip": "",
+      "age_group_range_tooltip": ""
     }
   }
 }

@@ -2,32 +2,34 @@ import css from '@styled-system/css';
 import { AxisBottom, TickRendererProps } from '@visx/axis';
 import { GridColumns } from '@visx/grid';
 import { Group } from '@visx/group';
+import { PatternLines } from '@visx/pattern';
 import { Bar } from '@visx/shape';
-import { Text } from '@visx/text';
+import { Text as VisxText } from '@visx/text';
 import { KeyboardEvent, memo, MouseEvent } from 'react';
 import styled from 'styled-components';
-import siteText from '~/locale/index';
+import { Box } from '~/components-styled/base';
+import { Text } from '~/components-styled/typography';
 import { colors } from '~/style/theme';
-import { NationalTestedPerAgeGroupValue } from '@corona-dashboard/common';
 import { formatPercentage } from '~/utils/formatNumber';
 import { AgeDemographicCoordinates } from './age-demographic-coordinates';
+import { AgeDemographicChartText, AgeDemographicDefaultValue } from './types';
+import { formatAgeGroupRange } from './utils';
+
 export const AGE_GROUP_TOOLTIP_WIDTH = 340;
 
-const text = siteText.infected_age_groups;
-
-interface AgeDemographicChartProps {
-  coordinates: AgeDemographicCoordinates;
-  onMouseMoveBar: (
-    value: NationalTestedPerAgeGroupValue,
-    event: MouseEvent<SVGElement>
-  ) => void;
+interface AgeDemographicChartProps<T extends AgeDemographicDefaultValue> {
+  coordinates: AgeDemographicCoordinates<T>;
+  text: AgeDemographicChartText;
+  onMouseMoveBar: (value: T, event: MouseEvent<SVGElement>) => void;
   onMouseLeaveBar: () => void;
   onKeyInput: (event: KeyboardEvent<SVGElement>) => void;
+  metricProperty: keyof T;
+  displayMaxPercentage?: number;
 }
 
 const TickValue = ({ x, y, formattedValue }: TickRendererProps) => {
   return (
-    <Text
+    <VisxText
       x={x}
       y={y}
       fill={colors.annotation}
@@ -35,41 +37,58 @@ const TickValue = ({ x, y, formattedValue }: TickRendererProps) => {
       textAnchor="middle"
     >
       {formattedValue}
-    </Text>
+    </VisxText>
   );
 };
 
-export const formatAgeGroupRange = (range: string): string => {
-  return range.split('-').join(' – ');
-};
+export const AgeDemographicChart = memo(
+  AgeDemographicChartWithGenerics
+) as typeof AgeDemographicChartWithGenerics;
 
-export const AgeDemographicChart = memo<AgeDemographicChartProps>(
-  ({ coordinates, onKeyInput, onMouseMoveBar, onMouseLeaveBar }) => {
-    const {
-      width,
-      height,
-      numTicks,
-      xMax,
-      yMax,
-      ageRangeAxisWidth,
-      ageGroupPercentageScale,
-      infectedPercentageScale,
-      ageGroupRangeScale,
-      ageGroupPercentagePoint,
-      infectedPercentagePoint,
-      ageGroupRangePoint,
-      margin,
-      values,
-      ageGroupRange,
-    } = coordinates;
+function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
+  coordinates,
+  text,
+  onKeyInput,
+  onMouseMoveBar,
+  onMouseLeaveBar,
+  metricProperty,
+  displayMaxPercentage,
+}: AgeDemographicChartProps<T>) {
+  const {
+    width,
+    height,
+    numTicks,
+    xMax,
+    yMax,
+    ageRangeAxisWidth,
+    ageGroupPercentageScale,
+    infectedPercentageScale,
+    ageGroupRangeScale,
+    ageGroupPercentagePoint,
+    infectedPercentagePoint,
+    ageGroupRangePoint,
+    margin,
+    values,
+    ageGroupRange,
+  } = coordinates;
 
-    return (
+  const hasClippedValue = !!values.find(
+    (value) =>
+      getIsClipped(value.age_group_percentage, displayMaxPercentage) ||
+      getIsClipped(
+        (value[metricProperty] as unknown) as number,
+        displayMaxPercentage
+      )
+  );
+
+  return (
+    <Box>
       <svg
         width={width}
         height={height}
         role="img"
         id="age-demographic-chart"
-        aria-label={text.graph.accessibility_description}
+        aria-label={text.accessibility_description}
         tabIndex={0}
         onKeyUp={(event) => onKeyInput(event)}
         css={css({
@@ -79,7 +98,7 @@ export const AgeDemographicChart = memo<AgeDemographicChartProps>(
           },
         })}
       >
-        <Text
+        <VisxText
           textAnchor="end"
           verticalAnchor="start"
           y={0}
@@ -89,9 +108,9 @@ export const AgeDemographicChart = memo<AgeDemographicChartProps>(
           fontSize="1rem"
           width={xMax - 10}
         >
-          {text.graph.age_group_percentage_title}
-        </Text>
-        <Text
+          {text.age_group_percentage_title}
+        </VisxText>
+        <VisxText
           textAnchor="start"
           verticalAnchor="start"
           y={0}
@@ -101,8 +120,8 @@ export const AgeDemographicChart = memo<AgeDemographicChartProps>(
           fontSize="1rem"
           width={xMax - 10}
         >
-          {text.graph.infected_percentage_title}
-        </Text>
+          {text.value_percentage_title}
+        </VisxText>
 
         {/* Vertical lines */}
         <GridColumns
@@ -124,9 +143,41 @@ export const AgeDemographicChart = memo<AgeDemographicChartProps>(
           stroke={colors.border}
         />
 
+        <PatternLines
+          id="is-clipped-pattern-age-range"
+          height={6}
+          width={6}
+          stroke={colors.data.neutral}
+          strokeWidth={2}
+          orientation={['diagonalRightToLeft']}
+        />
+
+        <PatternLines
+          id="is-clipped-pattern-infected-percentage"
+          height={6}
+          width={6}
+          stroke={colors.data.primary}
+          strokeWidth={2}
+          orientation={['diagonal']}
+        />
+
         {values.map((value, index) => {
           const ageGroupPercentageWidth = xMax - ageGroupPercentagePoint(value);
           const infectedPercentageWidth = infectedPercentagePoint(value);
+
+          const isClippedAgeGroup = getIsClipped(
+            value.age_group_percentage,
+            displayMaxPercentage
+          );
+
+          const isClippedInfectedPercentage = getIsClipped(
+            (value[metricProperty] as unknown) as number,
+            displayMaxPercentage
+          );
+
+          const isClippedValue =
+            isClippedAgeGroup || isClippedInfectedPercentage;
+
           return (
             <StyledGroup
               key={index}
@@ -145,9 +196,13 @@ export const AgeDemographicChart = memo<AgeDemographicChartProps>(
                 y={ageGroupRangePoint(value)}
                 height={ageGroupRangeScale.bandwidth()}
                 width={ageGroupPercentageWidth}
-                fill={colors.data.neutral}
+                fill={
+                  isClippedAgeGroup
+                    ? `url(#is-clipped-pattern-age-range)`
+                    : colors.data.neutral
+                }
               />
-              <Text
+              <VisxText
                 textAnchor="middle"
                 verticalAnchor="middle"
                 y={
@@ -156,14 +211,19 @@ export const AgeDemographicChart = memo<AgeDemographicChartProps>(
                 x={width / 2}
                 fill={colors.annotation}
               >
-                {formatAgeGroupRange(ageGroupRange(value))}
-              </Text>
+                {formatAgeGroupRange(ageGroupRange(value)) +
+                  (isClippedValue ? ' *' : '')}
+              </VisxText>
               <Bar
                 x={width / 2 + ageRangeAxisWidth / 2}
                 y={ageGroupRangePoint(value)}
                 height={ageGroupRangeScale.bandwidth()}
                 width={infectedPercentageWidth}
-                fill={colors.data.primary}
+                fill={
+                  isClippedInfectedPercentage
+                    ? `url(#is-clipped-pattern-infected-percentage)`
+                    : colors.data.primary
+                }
               />
             </StyledGroup>
           );
@@ -192,9 +252,13 @@ export const AgeDemographicChart = memo<AgeDemographicChartProps>(
           tickComponent={TickValue}
         />
       </svg>
-    );
-  }
-);
+
+      {hasClippedValue && (
+        <Text color="gray">* {text.clipped_value_message}</Text>
+      )}
+    </Box>
+  );
+}
 
 const StyledGroup = styled(Group)({});
 const StyledHoverBar = styled(Bar)(
@@ -209,3 +273,9 @@ const StyledHoverBar = styled(Bar)(
     },
   })
 );
+
+function getIsClipped(value: number, maxValue: number | undefined) {
+  if (!maxValue) return false;
+
+  return value * 100 > maxValue;
+}

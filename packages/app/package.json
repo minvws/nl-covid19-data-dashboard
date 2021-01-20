@@ -10,6 +10,7 @@
     "@reach/disclosure": "^0.11.2",
     "@styled-system/css": "^5.1.5",
     "@visx/axis": "1.1.0",
+    "@visx/pattern":"1.1.0",
     "@visx/event": "1.0.0",
     "@visx/geo": "1.0.0",
     "@visx/grid": "1.1.0",

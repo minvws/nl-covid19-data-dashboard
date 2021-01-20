@@ -10,7 +10,7 @@
     "test": "echo 'There are no tests for packages/common yet'",
     "test:ci": "echo 'There are no tests for packages/common yet.'",
     "build": "tsc && tscpaths -p tsconfig.json -s ./src -o ./dist",
-    "clean": "del-cli dist",
+    "clean": "del-cli dist tsconfig.tsbuildinfo",
     "compile": "tsc -b .",
     "lint": "eslint 'src/**/*.{js,ts,tsx}'",
     "format": "prettier --write \"src/**/*.{ts,tsx,md,json,yml}\" \"*.{js,json,md,yml}\""
