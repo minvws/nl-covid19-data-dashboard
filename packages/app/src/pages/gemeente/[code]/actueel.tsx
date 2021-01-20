@@ -2,7 +2,6 @@ import { useRouter } from 'next/router';
 import GetestIcon from '~/assets/test.svg';
 import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
 import { Box } from '~/components-styled/base';
-import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
 import { MaxWidth } from '~/components-styled/max-width';
@@ -33,8 +32,11 @@ import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { TopicalChoroplethContainer } from '~/domain/topical/topical-choropleth-container';
 import { TopicalTile } from '~/domain/topical/topical-tile';
 import css from '@styled-system/css';
-
+import { RiskLevelIndicator } from '~/components-styled/risk-level-indicator';
 export { getStaticPaths } from '~/static-paths/gm';
+import { assert } from '~/utils/assert';
+import { Text } from '~/components-styled/typography';
+import { Link } from '~/utils/link';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -56,6 +58,16 @@ const MunicipalityActueel: FCWithLayout<typeof getStaticProps> = (props) => {
 
   const dataInfectedTotal = data.tested_overall;
   const dataHospitalIntake = data.hospital_nice;
+  const escalationText = siteText.escalatie_niveau;
+
+  const filteredRegion = props.choropleth.vr.escalation_levels.find(
+    (item) => item.vrcode === safetyRegionForMunicipality?.code
+  );
+
+  assert(
+    filteredRegion,
+    `Could not find a "vrcode" to match with the region: ${safetyRegionForMunicipality?.code} to get the the current "escalation_level" of it.`
+  );
 
   return (
     <>
@@ -68,7 +80,7 @@ const MunicipalityActueel: FCWithLayout<typeof getStaticProps> = (props) => {
         })}
       />
       <Box bg="white" pb={4}>
-        <MaxWidth>
+        <MaxWidth px={{ _: 3, sm: 0 }}>
           <TileList>
             <MessageTile
               message={siteText.regionaal_index.belangrijk_bericht}
@@ -76,11 +88,20 @@ const MunicipalityActueel: FCWithLayout<typeof getStaticProps> = (props) => {
 
             <Search initialValue={municipalityName} />
 
-            <Heading level={1} fontWeight="normal">
+            <Heading level={1} fontWeight="normal" fontSize="1.75rem">
               {replaceComponentsInText(text.title, {
                 municipalityName: <strong>{municipalityName}</strong>,
               })}
             </Heading>
+
+            <Text mt={0}>
+              {siteText.common.veiligheidsregio_label}{' '}
+              <Link
+                href={`/veiligheidsregio/${safetyRegionForMunicipality?.code}/actueel`}
+              >
+                <a>{safetyRegionForMunicipality?.name}</a>
+              </Link>
+            </Text>
 
             <MiniTrendTileLayout>
               <MiniTrendTile
@@ -122,6 +143,18 @@ const MunicipalityActueel: FCWithLayout<typeof getStaticProps> = (props) => {
                 trendData={dataHospitalIntake.values}
                 metricProperty="admissions_on_date_of_reporting"
               />
+
+              <RiskLevelIndicator
+                title={text.risoconiveau_maatregelen.title}
+                description={text.risoconiveau_maatregelen.description}
+                link={{
+                  title: text.risoconiveau_maatregelen.bekijk_href,
+                  href: `/veiligheidsregio/${safetyRegionForMunicipality?.code}/maatregelen`,
+                }}
+                escalationLevel={filteredRegion.escalation_level}
+                code={filteredRegion.vrcode}
+                escalationTypes={escalationText.types}
+              />
             </MiniTrendTileLayout>
 
             <QuickLinks
@@ -141,7 +174,7 @@ const MunicipalityActueel: FCWithLayout<typeof getStaticProps> = (props) => {
                       text: text.quick_links.links.veiligheidsregio_fallback,
                     },
                 {
-                  href: '/gemeentes',
+                  href: `/gemeente/${router.query.code}/positief-geteste-mensen`,
                   text: replaceVariablesInText(
                     text.quick_links.links.gemeente,
                     {
@@ -184,7 +217,7 @@ const MunicipalityActueel: FCWithLayout<typeof getStaticProps> = (props) => {
                 <Box
                   borderTopWidth="1px"
                   borderTopStyle="solid"
-                  borderTopColor="gray"
+                  borderTopColor="#C4C4C4"
                   mt={3}
                   mx={-4}
                 >

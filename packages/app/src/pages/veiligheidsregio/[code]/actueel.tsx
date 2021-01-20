@@ -2,7 +2,6 @@ import { useRouter } from 'next/router';
 import GetestIcon from '~/assets/test.svg';
 import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
 import { Box } from '~/components-styled/base';
-import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
 import { MaxWidth } from '~/components-styled/max-width';
@@ -77,7 +76,7 @@ const SafetyRegionActueel: FCWithLayout<typeof getStaticProps> = (props) => {
         })}
       />
       <Box bg="white" pb={4}>
-        <MaxWidth>
+        <MaxWidth px={{ _: 3, sm: 0 }}>
           <TileList>
             <MessageTile
               message={siteText.regionaal_index.belangrijk_bericht}
@@ -85,7 +84,7 @@ const SafetyRegionActueel: FCWithLayout<typeof getStaticProps> = (props) => {
 
             <Search initialValue={props.safetyRegionName} />
 
-            <Heading level={1} fontWeight="normal">
+            <Heading level={1} fontWeight="normal" fontSize="1.75rem">
               {replaceComponentsInText(text.title, {
                 safetyRegionName: <strong>{props.safetyRegionName}</strong>,
               })}
@@ -131,19 +130,19 @@ const SafetyRegionActueel: FCWithLayout<typeof getStaticProps> = (props) => {
                 trendData={dataHospitalIntake.values}
                 metricProperty="admissions_on_date_of_reporting"
               />
-            </MiniTrendTileLayout>
 
-            <RiskLevelIndicator
-              title={text.risoconiveau_maatregelen.title}
-              description={text.risoconiveau_maatregelen.description}
-              link={{
-                title: text.risoconiveau_maatregelen.bekijk_href,
-                href: `/veiligheidsregio/${regionCode}/maatregelen`,
-              }}
-              escalationLevel={filteredRegion.escalation_level}
-              code={filteredRegion.vrcode}
-              escalationTypes={escalationText.types}
-            />
+              <RiskLevelIndicator
+                title={text.risoconiveau_maatregelen.title}
+                description={text.risoconiveau_maatregelen.description}
+                link={{
+                  title: text.risoconiveau_maatregelen.bekijk_href,
+                  href: `/veiligheidsregio/${regionCode}/maatregelen`,
+                }}
+                escalationLevel={filteredRegion.escalation_level}
+                code={filteredRegion.vrcode}
+                escalationTypes={escalationText.types}
+              />
+            </MiniTrendTileLayout>
 
             <QuickLinks
               header={text.quick_links.header}
@@ -156,7 +155,7 @@ const SafetyRegionActueel: FCWithLayout<typeof getStaticProps> = (props) => {
                     { safetyRegionName: props.safetyRegionName }
                   ),
                 },
-                { href: '/gemeentes', text: text.quick_links.links.gemeente },
+                { href: '/gemeente', text: text.quick_links.links.gemeente },
               ]}
             />
 
@@ -192,7 +191,7 @@ const SafetyRegionActueel: FCWithLayout<typeof getStaticProps> = (props) => {
                 <Box
                   borderTopWidth="1px"
                   borderTopStyle="solid"
-                  borderTopColor="gray"
+                  borderTopColor="#C4C4C4"
                   mt={3}
                   mx={-4}
                 >

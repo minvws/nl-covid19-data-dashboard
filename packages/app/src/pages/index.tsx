@@ -5,7 +5,7 @@ import ArtsIcon from '~/assets/arts.svg';
 import GetestIcon from '~/assets/test.svg';
 import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
 import { ArticleSummary } from '~/components-styled/article-teaser';
-import { Box, Spacer } from '~/components-styled/base';
+import { Box } from '~/components-styled/base';
 import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
 import { MaxWidth } from '~/components-styled/max-width';
@@ -86,7 +86,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
         description={text.metadata.description}
       />
       <Box bg="white" pb={4}>
-        <MaxWidth>
+        <MaxWidth px={{ _: 3, sm: 0 }}>
           <TileList>
             <MessageTile
               message={siteText.regionaal_index.belangrijk_bericht}
@@ -171,7 +171,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                   href: '/veiligheidsregio',
                   text: text.quick_links.links.veiligheidsregio,
                 },
-                { href: '/gemeentes', text: text.quick_links.links.gemeente },
+                { href: '/gemeente', text: text.quick_links.links.gemeente },
               ]}
             />
 
@@ -217,7 +217,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                 <Box
                   borderTopWidth="1px"
                   borderTopStyle="solid"
-                  borderTopColor="gray"
+                  borderTopColor="#C4C4C4"
                   mt={3}
                   mx={-4}
                 >

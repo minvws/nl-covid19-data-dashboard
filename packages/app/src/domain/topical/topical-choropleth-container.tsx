@@ -46,7 +46,7 @@ export function TopicalChoroplethContainer({
         <Box mb={[0, 2]}>
           <Heading
             level={2}
-            fontSize={{ _: '2.5em', lg: '3.5em' }}
+            fontSize={{ _: '2.5em', lg: '3em' }}
             lineHeight="1em"
           >
             {title}
@@ -61,7 +61,7 @@ export function TopicalChoroplethContainer({
         {legendaComponent && breakpoints.lg && <div>{legendaComponent}</div>}
       </Box>
 
-      <Box flex={{ lg: 1 }} ml={[0, 0, 3]}>
+      <Box flex={{ _: 1, lg: 0.5 }} ml={[0, 0, 3]} p={{ _: 0, lg: 4 }}>
         <div>{children}</div>
 
         {legendaComponent && !breakpoints.lg && (
