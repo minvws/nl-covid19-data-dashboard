@@ -17,7 +17,7 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "nl_behavior_value",
+      "title": "nl_vaccination_value",
       "type": "object",
       "properties": {
         "support_percentage": {

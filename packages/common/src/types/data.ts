@@ -435,10 +435,10 @@ export interface NationalElderlyAtHomeValue {
   date_of_insertion_unix: number;
 }
 export interface NlVaccination {
-  values: NlBehaviorValue[];
-  last_value: NlBehaviorValue;
+  values: NlVaccinationValue[];
+  last_value: NlVaccinationValue;
 }
-export interface NlBehaviorValue {
+export interface NlVaccinationValue {
   support_percentage?: number;
   date_start_unix: number;
   date_end_unix: number;
