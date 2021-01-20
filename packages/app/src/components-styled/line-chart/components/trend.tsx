@@ -1,8 +1,8 @@
 import { AreaClosed, LinePath } from '@visx/shape';
 import { MouseEvent, TouchEvent, useState } from 'react';
+import { ChartScales } from '~/components-styled/line-chart/components';
 import { colors } from '~/style/theme';
 import { TrendValue } from '../helpers';
-import { ChartScales } from './chart-axes';
 
 export type TrendType = 'line' | 'area';
 export type LineStyle = 'solid' | 'dashed';

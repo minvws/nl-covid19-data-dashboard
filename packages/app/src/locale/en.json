@@ -145,6 +145,8 @@
     "map_titel": "Residence of patients admitted to hospital",
     "map_toelichting": "This map shows the distribution of hospital admissions in the Netherlands. It reflects the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE). Tergooi hospitals, Ziekenhuis Amsterlland and Flevoziekenhuis do not currently share their COVID-19 hospital admission data with Stichting NICE. As a result, the actual figures in some safety regions and municipalities will be higher than they appear on the map.",
     "linechart_titel": "Progression in hospital admissions over time",
+    "linechart_legend_titel": "hospital admissions",
+    "linechart_legend_underreported_titel": "Under reported while data is delayed",
     "barscale_screenreader_text": "{{value}} hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
     "chloropleth_legenda": {
       "titel": "Hospital admissions",
@@ -636,7 +638,8 @@
       "positive_tested_value": "{{totalPositiveValue}} per 100.000"
     },
     "niveau": "level",
-    "clear_select_input": "Empty"
+    "clear_select_input": "Empty",
+    "incomplete": "incomplete"
   },
   "seoHead": {
     "default_description": "Information on the development of the coronavirus in The Netherlands.",
@@ -696,6 +699,8 @@
     "map_titel": "Distribution of hospital admissions in {{safetyRegion}}",
     "map_toelichting": "This map shows the distribution of hospital admissions in the Netherlands. It reflects the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE). Tergooi hospitals, Ziekenhuis Amsterlland and Flevoziekenhuis do not currently share their COVID-19 hospital admission data with Stichting NICE. As a result, the actual figures in some safety regions and municipalities will be higher than they appear on the map.",
     "linechart_titel": "Progression in hospital admissions over time",
+    "linechart_legend_titel": "",
+    "linechart_legend_underreported_titel": "",
     "barscale_screenreader_text": "{{value}} hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
     "bron": {
       "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
@@ -740,13 +745,7 @@
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": [
-      "0 to 20",
-      "20 to 40",
-      "40 to 60",
-      "60 to 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -838,6 +837,8 @@
     "map_titel": "Distribution of hospital admissions in safety region of {{municipality}}",
     "map_toelichting": "This map shows the distribution of hospital admissions in the Netherlands. It reflects the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE). Tergooi hospitals, Ziekenhuis Amstelland and Flevoziekenhuis do not currently share their COVID-19 hospital admission data with Stichting NICE. As a result, the actual figures in some safety regions and municipalities will be higher than they appear on the map.",
     "linechart_titel": "Progression in hospital admissions over time",
+    "linechart_legend_titel": "",
+    "linechart_legend_underreported_titel": "",
     "barscale_screenreader_text": "{{value}} hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
     "bron": {
       "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
