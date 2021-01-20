@@ -128,6 +128,7 @@ export interface National {
   deceased_cbs: NationalDeceasedCbs;
   elderly_at_home: NationalElderlyAtHome;
   vaccine_availability: NlVaccineAvailability;
+  vaccine_support: NlVaccineSupport;
 }
 export interface NationalDifference {
   tested_overall__infected_per_100k: DifferenceDecimal;
@@ -447,6 +448,16 @@ export interface NlVaccineAvailabilityValue {
   sanofi: number;
   date_of_insertion_unix: number;
   date_unix: number;
+}
+export interface NlVaccineSupport {
+  values: NlVaccineSupportValue[];
+  last_value: NlVaccineSupportValue;
+}
+export interface NlVaccineSupportValue {
+  percentage: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
 }
 
 export interface Regionaal {
