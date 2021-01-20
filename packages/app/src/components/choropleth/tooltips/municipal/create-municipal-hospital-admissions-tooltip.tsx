@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
 import { MunicipalitySelectionHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
-import { MunicipalityProperties } from '~/components/choropleth/shared';
+import { MunicipalityProperties } from '@corona-dashboard/common';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
-import { MunicipalHospitalNiceValue } from '~/types/data';
+import { MunicipalHospitalNiceValue } from '@corona-dashboard/common';
 
 export const createMunicipalHospitalAdmissionsTooltip = (
   selectHandler: MunicipalitySelectionHandler

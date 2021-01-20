@@ -23,8 +23,10 @@ import {
   getText,
 } from '~/static-props/get-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-
+import { formatDateFromMilliseconds } from '~/utils/formatDate';
 export { getStaticPaths } from '~/static-paths/gm';
+import { colors } from '~/style/theme';
+import { formatNumber } from '~/utils/formatNumber';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -116,6 +118,41 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
           ]}
           metadata={{
             source: text.bronnen.rivm,
+          }}
+          formatTooltip={(values) => {
+            const value = values[0];
+
+            return (
+              <Text textAlign="center" m={0}>
+                <span style={{ fontWeight: 'bold' }}>
+                  {formatDateFromMilliseconds(value.__date.getTime())}
+                </span>
+                <br />
+                <span
+                  style={{
+                    height: '0.5em',
+                    width: '0.5em',
+                    marginBottom: '0.5px',
+                    backgroundColor: colors.data.primary,
+                    borderRadius: '50%',
+                    display: 'inline-block',
+                  }}
+                />{' '}
+                {replaceVariablesInText(
+                  siteText.common.tooltip.positive_tested_value,
+                  {
+                    totalPositiveValue: formatNumber(value.__value),
+                  }
+                )}
+                <br />
+                {replaceVariablesInText(
+                  siteText.common.tooltip.positive_tested_people,
+                  {
+                    totalPositiveTestedPeople: formatNumber(value.infected),
+                  }
+                )}
+              </Text>
+            );
           }}
         />
 

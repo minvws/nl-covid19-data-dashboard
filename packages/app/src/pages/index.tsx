@@ -29,7 +29,7 @@ import {
   getText,
 } from '~/static-props/get-data';
 import theme from '~/style/theme';
-import { EscalationLevels } from '~/types/data';
+import { EscalationLevels } from '@corona-dashboard/common';
 import { assert } from '~/utils/assert';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 

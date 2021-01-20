@@ -1,0 +1,38 @@
+{
+  "name": "@corona-dashboard/common",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
+  "scripts": {
+    "test": "echo 'There are no tests for packages/common yet'",
+    "test:ci": "echo 'There are no tests for packages/common yet.'",
+    "build": "tsc && tscpaths -p tsconfig.json -s ./src -o ./dist",
+    "clean": "del-cli dist tsconfig.tsbuildinfo",
+    "compile": "tsc -b .",
+    "lint": "eslint 'src/**/*.{js,ts,tsx}'",
+    "format": "prettier --write \"src/**/*.{ts,tsx,md,json,yml}\" \"*.{js,json,md,yml}\""
+  },
+  "license": "ISC",
+  "dependencies": {
+    "geojson": "^0.5.0",
+    "ts-is-present": "^1.2.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.14",
+    "@typescript-eslint/eslint-plugin": "^4.13.0",
+    "@typescript-eslint/parser": "^4.13.0",
+    "del-cli": "^3.0.1",
+    "eslint": "^7.8.0",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.20.1",
+    "jest": "^26.4.2",
+    "prettier": "^2.1.1",
+    "ts-jest": "^26.3.0",
+    "tscpaths": "^0.0.9",
+    "typescript": "^4.1.2"
+  }
+}
