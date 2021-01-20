@@ -13,7 +13,7 @@
     "bericht": "A moderately positive overview can be observed in the week of 13 to 19 January, as an effect of the lockdown that started on 15 December. In that week, the reported number of people who tested positive for COVID-19 decreased by 21.5% compared to the week before, dropping to 38.776 newly reported COVID-19 infections. This overview is overshadowed by the rising number of cases involving the SARS-CoV-2 variant that resulted in a massive influx of patients in hospitals in the United Kingdom and Ireland. It is estimated that in the Netherlands about 10% of the people who became infected last week have the more contagious UK variant. That is twice as many compared to the week before that. \nWe are facing two variants of the virus that seem to be spreading in the Netherlands at different speeds. As a result, there are essentially two separate COVID-19 epidemics: one epidemic involving the ‘old’ variant, in which infections are decreasing, and another epidemic involving the UK variant, in which infections are increasing.",
     "link": {
       "text": "View the full message from the RIVM",
-      "href": "https://www.rivm.nl/en/novel-coronavirus-covid-19/current-information"
+      "href": "https://www.rivm.nl/en/news/rise-in-new-COVID-19-variants-overshadows-more-positive-developments"
     }
   },
   "error_titel": {
@@ -194,7 +194,7 @@
     "tijdelijk_onbeschikbaar": "",
     "kpi_titel": "Number of hospital admissions reported on one day. ",
     "linechart_legend_titel": "",
-    "linechart_legend_underreported_titel": ""
+    "linechart_legend_underreported_titel": "Data for recent days is incomplete due to reporting delays"
   },
   "positief_geteste_personen": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
