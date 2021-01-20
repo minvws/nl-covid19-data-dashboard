@@ -15,7 +15,6 @@ import { FCWithLayout } from '~/domain/layout/layout';
 import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import siteText from '~/locale/index';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
-import { groq } from 'next-sanity';
 import { LockdownData, RoadmapData } from '~/types/cms';
 
 import {
@@ -34,15 +33,17 @@ type MaatregelenData = {
   roadmap?: RoadmapData;
 };
 
+const query = `
+{
+  'lockdown': *[_type == 'lockdown'][0],
+  // We will need the roadmap when lockdown is disabled in the CMS.
+  // 'roadmap': *[_type == 'roadmap'][0]
+}`;
+
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   getVrData,
-  createGetContent<MaatregelenData>(groq`
-  {
-    'lockdown': *[_type == 'lockdown'][0],
-    // We will need the roadmap when lockdown is disabled in the CMS.
-    // 'roadmap': *[_type == 'roadmap'][0]
-  }`)
+  createGetContent<MaatregelenData>(query)
 );
 
 const text = siteText.veiligheidsregio_maatregelen;
