@@ -1,3 +1,4 @@
+import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import Maatregelen from '~/assets/maatregelen.svg';
 import { AnchorTile } from '~/components-styled/anchor-tile';
@@ -9,6 +10,7 @@ import { TileList } from '~/components-styled/tile-list';
 import { Heading } from '~/components-styled/typography';
 // import { EscalationLevel } from '~/components/restrictions/type';
 import { SEOHead } from '~/components/seoHead';
+import { Box } from '~/components-styled/base/box';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import siteText from '~/locale/index';
@@ -91,10 +93,16 @@ const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
 
         {showLockdown && (
           <KpiSection flexDirection="column">
-            <>
+            <Box
+              css={css({
+                'p:last-child': {
+                  margin: '0',
+                },
+              })}
+            >
               <Heading level={3}>{lockdown.message.title}</Heading>
               <PortableText blocks={lockdown.message.description} />
-            </>
+            </Box>
           </KpiSection>
         )}
 
