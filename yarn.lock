@@ -1670,7 +1670,7 @@
   resolved "https://registry.yarnpkg.com/@sanity/cli/-/cli-2.1.4.tgz#301d5c530f9b3b8a78563cb75b4c8d12c7894bb5"
   integrity sha512-/e9+ne2Zp0XZCf64XMWsRQTL/hr6B7UGMqqurKb/WxsVQAl6aKFvSY9q3QPiHuKZsJCRVlJCZSCrBvED1E4UBg==
 
-"@sanity/client@2.1.4":
+"@sanity/client@2.1.4", "@sanity/client@^2.1.4":
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/@sanity/client/-/client-2.1.4.tgz#89f64d4ec706b6c9e70605c2249677c22cab984e"
   integrity sha512-3S5+9Q0StcDUN9M2a+YJqnbTshV0Zx/9f3fig/DC3FJQp8stdplwZ3b5nQ+D9G5fciT0UsaS2DuAK+OXXGfpLw==
@@ -1964,27 +1964,12 @@
   resolved "https://registry.yarnpkg.com/@sanity/generate-help-url/-/generate-help-url-0.140.0.tgz#f60ab75be5fdc346b9f0d1c2a0858aa3c2870109"
   integrity sha512-H/G/WA9S22TXcXST52CIiTsHx3S2hH0gvK7LnI5w76vfKS0obnDPh8jrPg4xeNRYGPuV9MHYRlyERGpRGoo4Qw==
 
-"@sanity/groq-store@^0.1.3":
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/@sanity/groq-store/-/groq-store-0.1.3.tgz#5521368c7d713a43156149c013092cd3b852f439"
-  integrity sha512-0XPm2imLvcT0M9RVHhM5dDqSEl1PvrOu3RGDnTYtLV3XQVwy5hyPFaQpNZ7dLlhRal9b3KWSNcBLQPdhAtZUFg==
-  dependencies:
-    "@sanity/types" "^2.0.1"
-    eventsource "^1.0.7"
-    fast-deep-equal "^3.1.3"
-    groq "^2.0.9"
-    groq-js "^0.2.0"
-    mendoza "^2.1.1"
-    simple-get "^4.0.0"
-    split2 "^3.2.2"
-    throttle-debounce "^3.0.1"
-
 "@sanity/icons@^1.0.0", "@sanity/icons@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@sanity/icons/-/icons-1.0.1.tgz#5a570e7ee3b400c7a4b94dfab1d656d37ce1f765"
   integrity sha512-30zlJbmkkYHtklwHgVnwZLC+sjDGbpAnwqzf7/IADkTiR+Z4UNzlsmN/mD8ltMKYn8HXzSXkzbGZgo1uQb70ng==
 
-"@sanity/image-url@0.140.19", "@sanity/image-url@^0.140.15", "@sanity/image-url@^0.140.19":
+"@sanity/image-url@^0.140.15", "@sanity/image-url@^0.140.19":
   version "0.140.19"
   resolved "https://registry.yarnpkg.com/@sanity/image-url/-/image-url-0.140.19.tgz#6adfea7b7768a1708eba6bdcfe9eb0746d2bb1f9"
   integrity sha512-itPCTXNyF2MFdXMlwmpcXEiZU7AvSxyQpOaCQ3x8uODIl3GY22KAHYzz6rIGzWU63u0DN/Y8O1ChsblPLqnI5Q==
@@ -2218,7 +2203,7 @@
     "@types/node" "^8.0.0"
     lodash "^4.17.15"
 
-"@sanity/types@2.1.4", "@sanity/types@^2.0.0", "@sanity/types@^2.0.1":
+"@sanity/types@2.1.4", "@sanity/types@^2.0.0":
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/@sanity/types/-/types-2.1.4.tgz#e4fa90ef1af7ee42352e26d405701af56fbc7f39"
   integrity sha512-Eyk/D9ZfLR18aiJwQCiUgGufeL5mcRpRQiGqhs08OfpFiWjm7S47AzL1cAnhyI3iYUPpJUCQbAV3A8zT+x3B4w==
@@ -6270,7 +6255,7 @@ depd@^1.1.2, depd@~1.1.2:
   resolved "https://registry.yarnpkg.com/depd/-/depd-1.1.2.tgz#9bcd52e14c097763e749b274c4346ed2e560b5a9"
   integrity sha1-m81S4UwJd2PnSbJ0xDRu0uVgtak=
 
-dequal@2.0.2, dequal@^2.0.2:
+dequal@2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/dequal/-/dequal-2.0.2.tgz#85ca22025e3a87e65ef75a7a437b35284a7e319d"
   integrity sha512-q9K8BlJVxK7hQYqa6XISGmBZbtQQWVXSrRrWreHC94rMt1QL/Impruc+7p2CYSYuVIUr+YCt6hjrs1kkdJRTug==
@@ -7076,7 +7061,7 @@ eventsource-polyfill@^0.9.6:
   resolved "https://registry.yarnpkg.com/eventsource-polyfill/-/eventsource-polyfill-0.9.6.tgz#10e0d187f111b167f28fdab918843ce7d818f13c"
   integrity sha1-EODRh/ERsWfyj9q5GIQ859gY8Tw=
 
-eventsource@^1.0.6, eventsource@^1.0.7:
+eventsource@^1.0.6:
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/eventsource/-/eventsource-1.0.7.tgz#8fbc72c93fcd34088090bc0a4e64f4b5cee6d8d0"
   integrity sha512-4Ln17+vVT0k8aWq+t/bF5arcS3EpT9gYtW66EPacdj/mAFevznsnyoHLPy2BA8gbIQeIHoPsvwmfBftfcG//BQ==
@@ -7321,7 +7306,7 @@ fast-deep-equal@^1.0.0:
   resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-1.1.0.tgz#c053477817c86b51daa853c81e059b733d023614"
   integrity sha1-wFNHeBfIa1HaqFPIHgWbcz0CNhQ=
 
-fast-deep-equal@^3.1.1, fast-deep-equal@^3.1.3:
+fast-deep-equal@^3.1.1:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-3.1.3.tgz#3a7d56b559d6cbc3eb512325244e619a65c6c525"
   integrity sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==
@@ -8237,16 +8222,6 @@ graceful-fs@^4.1.10, graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.
   version "4.2.4"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.4.tgz#2256bde14d3632958c465ebc96dc467ca07a29fb"
   integrity sha512-WjKPNJF79dtJAVniUlGGWHYGz2jWxT6VhN/4m1NdkbZ2nOsEF+cI1Edgql5zCRhs/VsQYRvrXctxktVXZUkixw==
-
-groq-js@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/groq-js/-/groq-js-0.2.0.tgz#abd4870014a1ccdf0936d5d75a78063aff9197c0"
-  integrity sha512-qJeuEgziddryH1ClsJvMoZM9aXNQbBViNZZrJwhHKr2wU8HGGM7uNWNVFglWXMX60MMaa2SClX3UohP76Ut68g==
-
-groq@^2.0.9:
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/groq/-/groq-2.1.4.tgz#aa555c2ee904831ddc8dccae4fa0a4ff7647e1cf"
-  integrity sha512-RoUkPOhr9nKGhpGNkA5h6EgF/kzEfrrxRxblPHQqURrncXBd+KYzcJHQmR4UBFOg9OK9ZUhxXPJrLdlA3dqHIg==
 
 growly@^1.3.0:
   version "1.3.0"
@@ -11255,18 +11230,6 @@ next-compose-plugins@^2.2.0:
   resolved "https://registry.yarnpkg.com/next-compose-plugins/-/next-compose-plugins-2.2.1.tgz#020fc53f275a7e719d62521bef4300fbb6fde5ab"
   integrity sha512-OjJ+fV15FXO2uQXQagLD4C0abYErBjyjE0I0FHpOEIB8upw0hg1ldFP6cqHTJBH1cZqy96OeR3u1dJ+Ez2D4Bg==
 
-next-sanity@^0.1.8:
-  version "0.1.8"
-  resolved "https://registry.yarnpkg.com/next-sanity/-/next-sanity-0.1.8.tgz#aa5a32d6452fca835d72d16fbf587e4d5fec5d5d"
-  integrity sha512-AmNNyNVl8WVSj270OOrXr8X3KNMTSVh+FB8Aelkx/ICGZbXV3jr1qVwNjNlYWsd4JwUrd/Itrec9JirhknOYjg==
-  dependencies:
-    "@sanity/block-content-to-react" "^2.0.7"
-    "@sanity/groq-store" "^0.1.3"
-    "@sanity/image-url" "0.140.19"
-    groq "^2.0.9"
-    picosanity "^2.1.2"
-    use-deep-compare-effect "^1.4.0"
-
 next-tick@1, next-tick@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.1.0.tgz#1836ee30ad56d67ef281b22bd199f709449b35eb"
@@ -11356,7 +11319,7 @@ node-addon-api@^3.0.2:
   resolved "https://registry.yarnpkg.com/node-addon-api/-/node-addon-api-3.1.0.tgz#98b21931557466c6729e51cb77cd39c965f42239"
   integrity sha512-flmrDNB06LIl5lywUz7YlNGZH/5p0M7W28k8hzd9Lshtdh1wshD2Y+U4h9LD6KObOy1f+fEVdgprPrEymjM5uw==
 
-node-fetch@2.6.1, node-fetch@^2.6.0:
+node-fetch@2.6.1:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.1.tgz#045bd323631f76ed2e2b55573394416b639a0052"
   integrity sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==
@@ -12208,13 +12171,6 @@ picomatch@^2.0.4, picomatch@^2.0.5, picomatch@^2.2.1:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/picomatch/-/picomatch-2.2.2.tgz#21f333e9b6b8eaff02468f5146ea406d345f4dad"
   integrity sha512-q0M/9eZHzmr0AulXyPwNfZjtwZ/RBZlbN3K3CErVrk50T2ASYI7Bye0EvekFY3IP1Nt2DHu0re+V2ZHIpMkuWg==
-
-picosanity@^2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/picosanity/-/picosanity-2.1.2.tgz#1dcd25469caee5e47b9b5e72ac7594eeaf3690eb"
-  integrity sha512-YPDFJpAdhYBwHY/QoHZGP+iYWwl5zdLoyVGBDS/J9kTqo7iuvIwkmQEEAAbsxr8br2NLYcr+VlVeGLu1jGmr6g==
-  dependencies:
-    node-fetch "^2.6.0"
 
 pify@^2.0.0, pify@^2.2.0, pify@^2.3.0:
   version "2.3.0"
@@ -15979,11 +15935,6 @@ throat@^5.0.0:
   resolved "https://registry.yarnpkg.com/throat/-/throat-5.0.0.tgz#c5199235803aad18754a667d659b5e72ce16764b"
   integrity sha512-fcwX4mndzpLQKBS1DVYhGAcYaYt7vsHNIvQV+WXMvnow5cgjPphq5CaayLaGsjRdSCKZFNGt7/GYAuXaNOiYCA==
 
-throttle-debounce@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/throttle-debounce/-/throttle-debounce-3.0.1.tgz#32f94d84dfa894f786c9a1f290e7a645b6a19abb"
-  integrity sha512-dTEWWNu6JmeVXY0ZYoPuH5cRIwc0MeGbJwah9KUNYSJwommQpCzTySTpEe8Gs1J23aeWEuAobe4Ag7EHVt/LOg==
-
 throttleit@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/throttleit/-/throttleit-1.0.0.tgz#9e785836daf46743145a5984b6268d828528ac6c"
@@ -16679,15 +16630,6 @@ url@^0.11.0:
   dependencies:
     punycode "1.3.2"
     querystring "0.2.0"
-
-use-deep-compare-effect@^1.4.0:
-  version "1.6.1"
-  resolved "https://registry.yarnpkg.com/use-deep-compare-effect/-/use-deep-compare-effect-1.6.1.tgz#061a0ac5400aa0461e33dddfaa2a98bca873182a"
-  integrity sha512-VB3b+7tFI81dHm8buGyrpxi8yBhzYZdyMX9iBJra7SMFMZ4ci4FJ1vFc1nvChiB1iLv4GfjqaYfvbNEpTT1rFQ==
-  dependencies:
-    "@babel/runtime" "^7.12.5"
-    "@types/react" "^17.0.0"
-    dequal "^2.0.2"
 
 use-isomorphic-layout-effect@^1.0.0:
   version "1.1.1"
