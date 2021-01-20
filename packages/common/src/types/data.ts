@@ -127,7 +127,7 @@ export interface National {
   deceased_rivm_per_age_group: NlDeceasedRivmPerAgeGroup;
   deceased_cbs: NationalDeceasedCbs;
   elderly_at_home: NationalElderlyAtHome;
-  vaccine_availability: NlVaccineAvailability;
+  vaccination: NlVaccination;
 }
 export interface NationalDifference {
   tested_overall__infected_per_100k: DifferenceDecimal;
@@ -434,19 +434,15 @@ export interface NationalElderlyAtHomeValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlVaccineAvailability {
-  values: NlVaccineAvailabilityValue[];
-  last_value: NlVaccineAvailabilityValue;
+export interface NlVaccination {
+  values: NlBehaviorValue[];
+  last_value: NlBehaviorValue;
 }
-export interface NlVaccineAvailabilityValue {
-  pfizer: number;
-  moderna: number;
-  astra_zeneca: number;
-  cure_vac: number;
-  janssen: number;
-  sanofi: number;
+export interface NlBehaviorValue {
+  support_percentage?: number;
+  date_start_unix: number;
+  date_end_unix: number;
   date_of_insertion_unix: number;
-  date_unix: number;
 }
 
 export interface Regionaal {
