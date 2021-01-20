@@ -2062,11 +2062,11 @@
     },
     "graph": {
       "accessibility_description": "Graph with percentages for the distribution of the population and the distribution of age groups tested positively.",
-      "clipped_value_message": "This value is greater than shown in the graph",
+      "clipped_value_message": "This value is larger than shown in the graph",
       "age_group_percentage_title": "Age distribution in The Netherlands",
       "age_group_percentage_tooltip": "of the population is {{ageGroupRange}} years old",
       "value_percentage_title": "Deaths by age",
-      "value_percentage_tooltip": "",
+      "value_percentage_tooltip": "of the number of deceased persons is {{ageGroupRange}} years old",
       "age_group_range_tooltip": "{{ageGroupRange}} years old"
     }
   }
