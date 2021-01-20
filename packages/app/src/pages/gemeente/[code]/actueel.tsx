@@ -88,20 +88,22 @@ const MunicipalityActueel: FCWithLayout<typeof getStaticProps> = (props) => {
 
             <Search initialValue={municipalityName} />
 
-            <Heading level={1} fontWeight="normal" fontSize="1.75rem">
-              {replaceComponentsInText(text.title, {
-                municipalityName: <strong>{municipalityName}</strong>,
-              })}
-            </Heading>
+            <div>
+              <Heading level={1} fontWeight="normal" fontSize="1.75rem" mb={1}>
+                {replaceComponentsInText(text.title, {
+                  municipalityName: <strong>{municipalityName}</strong>,
+                })}
+              </Heading>
 
-            <Text mt={0}>
-              {siteText.common.veiligheidsregio_label}{' '}
-              <Link
-                href={`/veiligheidsregio/${safetyRegionForMunicipality?.code}/actueel`}
-              >
-                <a>{safetyRegionForMunicipality?.name}</a>
-              </Link>
-            </Text>
+              <Text mt={0}>
+                {siteText.common.veiligheidsregio_label}{' '}
+                <Link
+                  href={`/veiligheidsregio/${safetyRegionForMunicipality?.code}/actueel`}
+                >
+                  <a>{safetyRegionForMunicipality?.name}</a>
+                </Link>
+              </Text>
+            </div>
 
             <MiniTrendTileLayout>
               <MiniTrendTile

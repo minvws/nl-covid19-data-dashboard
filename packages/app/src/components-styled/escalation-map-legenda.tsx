@@ -61,7 +61,12 @@ export function EscalationMapLegenda<K extends RegionsMetricName>(
   }, [getFillColor, hasData]);
 
   return (
-    <div className={styles.legenda} aria-label="legend">
+    <Box
+      className={styles.legenda}
+      aria-label="legend"
+      maxWidth={{ _: '100%', lg: 700 }}
+      width="100%"
+    >
       <h3>{text.escalatie_niveau.legenda.titel}</h3>
       {sortedEscalationArray.map((info) => (
         <div
@@ -83,7 +88,7 @@ export function EscalationMapLegenda<K extends RegionsMetricName>(
           />
         </div>
       ))}
-    </div>
+    </Box>
   );
 }
 
