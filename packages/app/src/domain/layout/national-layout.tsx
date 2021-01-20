@@ -119,12 +119,12 @@ function NationalLayout(props: NationalLayoutProps) {
                 />
               </CategoryMenu>
               <CategoryMenu
-                title={siteText.nationaal_layout.headings.besmettingen}
+                title={siteText.nationaal_layout.headings.vaccinaties}
               >
                 <MetricMenuItemLink
                   href="/landelijk/vaccinaties"
                   icon={<VaccinatieIcon />}
-                  title={siteText.vaccinaties.titel_sidebar}
+                  title="Toegediende vaccins"
                 >
                   <SidebarMetric
                     data={siteText.vaccinaties.data}
@@ -134,6 +134,10 @@ function NationalLayout(props: NationalLayoutProps) {
                     localeTextKey="vaccinaties"
                   />
                 </MetricMenuItemLink>
+              </CategoryMenu>
+              <CategoryMenu
+                title={siteText.nationaal_layout.headings.besmettingen}
+              >
                 <MetricMenuItemLink
                   href="/landelijk/positief-geteste-mensen"
                   icon={<GetestIcon />}
