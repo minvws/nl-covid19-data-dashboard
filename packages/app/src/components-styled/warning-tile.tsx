@@ -7,10 +7,10 @@ import { asResponsiveArray } from '~/style/utils';
 interface WarningMessageProps {
   message: React.ReactNode;
 }
-
-export function WarningMessage({ message }: WarningMessageProps) {
+// WarningMessage
+export function WarningTile({ message }: WarningMessageProps) {
   return (
-    <WarningTile>
+    <StyledTile>
       <WarningBox>
         <StyledWarning />
       </WarningBox>
@@ -18,14 +18,16 @@ export function WarningMessage({ message }: WarningMessageProps) {
         {typeof message === 'string' ? (
           <Children dangerouslySetInnerHTML={{ __html: message }} />
         ) : (
-          <Children>{message}</Children>
+          <Box spacing={3} fontSize={3} fontWeight="bold">
+            {message}
+          </Box>
         )}
       </WarningMessageBox>
-    </WarningTile>
+    </StyledTile>
   );
 }
 
-const WarningTile = styled(Tile)(
+const StyledTile = styled(Tile)(
   css({
     flexDirection: 'row',
     padding: 0,

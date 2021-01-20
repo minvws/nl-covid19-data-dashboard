@@ -9,7 +9,7 @@ import { Box } from '~/components-styled/base';
 import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
 import { MaxWidth } from '~/components-styled/max-width';
-import { WarningMessage } from '~/components-styled/warning-message';
+import { WarningTile } from '~/components-styled/warning-tile';
 import { NewsMessage } from '~/components-styled/news-message';
 import { QuickLinks } from '~/components-styled/quick-links';
 import { TileList } from '~/components-styled/tile-list';
@@ -88,7 +88,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
       <Box bg="white" pb={4}>
         <MaxWidth>
           <TileList>
-            <WarningMessage
+            <WarningTile
               message={siteText.regionaal_index.belangrijk_bericht}
             />
 
