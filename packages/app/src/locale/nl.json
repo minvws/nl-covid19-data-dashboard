@@ -18,7 +18,7 @@
     "bericht": "We zien een gematigd positief beeld in de week van 13 tot en met 19 januari, een effect van de lockdown die op 15 december inging. Het aantal meldingen van mensen met een positieve coronatestuitslag is in die week, in vergelijking met de week ervoor, met 21,5% gedaald naar 38.776 meldingen. Dit actuele beeld wordt overschaduwd door de snelle opmars van de coronavariant die in het Verenigd Koninkrijk en Ierland tot een zeer hoge toestroom aan patiënten in de ziekenhuizen heeft geleid. Geschat wordt dat van de mensen die afgelopen week besmet werden in Nederland, er ongeveer 10% de meer besmettelijke Britse variant heeft. Dat is een verdubbeling ten opzichte van de week ervoor. We hebben te maken met twee virusvarianten die zich met verschillende snelheden lijken te verspreiden in Nederland. Daardoor zijn er eigenlijk twee aparte corona-epidemieën. Een epidemie met de ‘oude’ variant, waarin het aantal infecties daalt, en een epidemie met de Britse variant waarin het aantal infecties juist toeneemt. ",
     "link": {
       "text": "Bekijk de toelichting van het RIVM",
-      "href": "https://www.rivm.nl/coronavirus-covid-19/actueel"
+      "href": "https://www.rivm.nl/nieuws/opmars-nieuwe-coronavarianten-overschaduwt-positiever-beeld"
     },
     "subtitel": "Wekelijkse landelijke toelichting",
     "datum": "12 december 2020"
@@ -202,7 +202,9 @@
     },
     "tijdelijk_onbeschikbaar_titel": "",
     "tijdelijk_onbeschikbaar": "",
-    "kpi_titel": "Het aantal ziekenhuisopnames dat op één dag gemeld is."
+    "kpi_titel": "Het aantal ziekenhuisopnames dat op één dag gemeld is.",
+    "linechart_legend_titel": "Ziekenhuisopnames",
+    "linechart_legend_underreported_titel": "Laatste dagen zijn altijd onvolledig omdat meldingen vertraagd binnenkomen"
   },
   "positief_geteste_personen": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -733,6 +735,7 @@
     },
     "niveau": "niveau",
     "clear_select_input": "Leegmaken",
+    "incomplete": "onvolledig",
     "gisteren": "Gisteren",
     "vandaag": "Vandaag",
     "read_more": "Lees meer"
@@ -819,7 +822,9 @@
     },
     "tijdelijk_onbeschikbaar_titel": "",
     "tijdelijk_onbeschikbaar": "",
-    "kpi_titel": "Het aantal ziekenhuisopnames dat op één dag gemeld is. "
+    "kpi_titel": "Het aantal ziekenhuisopnames dat op één dag gemeld is. ",
+    "linechart_legend_titel": "Ziekenhuisopnames",
+    "linechart_legend_underreported_titel": "Laatste dagen zijn altijd onvolledig omdat meldingen vertraagd binnenkomen"
   },
   "veiligheidsregio_positief_geteste_personen": {
     "titel_sidebar": "Positief geteste mensen",
@@ -955,7 +960,9 @@
     },
     "tijdelijk_onbeschikbaar_titel": "",
     "tijdelijk_onbeschikbaar": "",
-    "kpi_titel": "Het aantal ziekenhuisopnames dat op één dag gemeld is."
+    "kpi_titel": "Het aantal ziekenhuisopnames dat op één dag gemeld is.",
+    "linechart_legend_titel": "Ziekenhuisopnames",
+    "linechart_legend_underreported_titel": "Laatste dagen zijn altijd onvolledig omdat meldingen vertraagd binnenkomen"
   },
   "gemeente_positief_geteste_personen": {
     "titel_sidebar": "Positief geteste mensen",
@@ -1875,9 +1882,9 @@
     },
     "deceased_monitor_chart_title": "Totaal aantal overledenen per week",
     "deceased_monitor_chart_description": "Deze grafiek laat zien hoeveel mensen er in totaal wekelijks overleden zijn in Nederland. Het aantal daadwerkelijk overleden mensen wordt vergeleken met het aantal overlijdens dat wordt verwacht op basis van voorgaande jaren. De lichtblauwe lijn en omliggende marge tonen de sterfte die op dat moment in het jaar wordt verwacht, de donkerblauwe lijn toont de sterfte zoals deze heeft plaatsgevonden.",
-    "deceased_monitor_chart_legenda_registered": "Daadwerkelijk aantal overledenen",
-    "deceased_monitor_chart_legenda_expected": "Verwacht aantal overledenen",
-    "deceased_monitor_chart_legenda_expected_margin": "Boven en ondergrens van verwacht aantal overledenen"
+    "deceased_monitor_chart_legenda_registered": "Daadwerkelijke aantal overledenen",
+    "deceased_monitor_chart_legenda_expected": "Verwachte aantal overledenen",
+    "deceased_monitor_chart_legenda_expected_margin": "Boven- en ondergrens van verwachte aantal overledenen"
   },
   "maatregelen": {
     "categories": {
@@ -2296,8 +2303,8 @@
     }
   },
   "deceased_age_groups": {
-    "title": "Verdeling naar leeftijd",
-    "description": "De blauwe rechterbalken in deze grafiek laten zien tot welke leeftijdsgroep de aan COVID-19 overleden personen behoren. De grijze linkerbalken tonen hoe groot elke leeftijdsgroep is ten opzichte van de hele Nederlandse bevolking. De blauwe en grijze balken laten samen zien of leeftijdsgroepen naar verhouding meer of minder aan COVID-19 overleden personen hebben. Stel dat de grijze balk toont dat 12% van alle Nederlanders een zestiger is, en de blauwe balk geeft bijvoorbeeld aan dat 10% van alle aan COVID-19 overleden personen een zestiger is, dan heeft deze leeftijdsgroep naar verhouding minder aan COVID-19 overleden personen. De grafiek wordt dagelijks bijgewerkt en gaat over sterftegevallen sinds de uitbraak van het virus.  Let op dat iedereen onder de vijftig in één leeftijdsgroep is geplaatst door het RIVM.",
+    "title": "COVID-19 sterfte: verdeling naar leeftijd",
+    "description": "De blauwe rechterbalken in deze grafiek laten zien tot welke leeftijdsgroep de aan COVID-19 overleden personen behoren. De grijze linkerbalken tonen hoe groot elke leeftijdsgroep is ten opzichte van de hele Nederlandse bevolking. De blauwe en grijze balken laten samen zien of leeftijdsgroepen naar verhouding meer of minder aan COVID-19 overleden personen hebben. Stel dat de grijze balk toont dat 12% van alle Nederlanders een zestiger is, en de blauwe balk geeft bijvoorbeeld aan dat 10% van alle aan COVID-19 overleden personen een zestiger is, dan heeft deze leeftijdsgroep naar verhouding minder aan COVID-19 overleden personen. De grafiek wordt dagelijks bijgewerkt en gaat over sterftegevallen sinds de uitbraak van het virus. Let op dat iedereen onder de vijftig in één leeftijdsgroep is geplaatst door het RIVM, omdat die gegevens vanwege de kleine aantallen anders herleidbaar zouden zijn tot individuen.",
     "bronnen": {
       "rivm": {
         "text": "RIVM",
