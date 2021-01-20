@@ -28,7 +28,8 @@
     "tested_ggd_average",
     "tested_overall",
     "tested_per_age_group",
-    "vaccination"
+    "vaccine_availability",
+    "vaccine_support"
   ],
   "additionalProperties": false,
   "properties": {
@@ -110,8 +111,11 @@
     "elderly_at_home": {
       "$ref": "elderly_at_home.json"
     },
-    "vaccination": {
-      "$ref": "vaccination.json"
+    "vaccine_availability": {
+      "$ref": "vaccine_availability.json"
+    },
+    "vaccine_support": {
+      "$ref": "vaccine_support.json"
     }
   }
 }
