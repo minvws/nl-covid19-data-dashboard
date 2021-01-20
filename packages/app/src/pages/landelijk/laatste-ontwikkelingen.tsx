@@ -8,7 +8,7 @@ import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { CategoryHeading } from '~/components-styled/content-header';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
 import { HeadingWithIcon } from '~/components-styled/heading-with-icon';
-import { MessageTile } from '~/components-styled/message-tile';
+import { WarningMessage } from '~/components-styled/warning-message';
 import { TileList } from '~/components-styled/tile-list';
 import { Text } from '~/components-styled/typography';
 import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
@@ -99,7 +99,7 @@ const LatestDevelopments: FCWithLayout<typeof getStaticProps> = (props) => {
       {text.regionaal_index.belangrijk_bericht && (
         <>
           <Spacer mt={4} />
-          <MessageTile message={text.regionaal_index.belangrijk_bericht} />
+          <WarningMessage message={text.regionaal_index.belangrijk_bericht} />
         </>
       )}
 

@@ -2,11 +2,10 @@ import { useRouter } from 'next/router';
 import GetestIcon from '~/assets/test.svg';
 import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
 import { Box } from '~/components-styled/base';
-import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
 import { MaxWidth } from '~/components-styled/max-width';
-import { MessageTile } from '~/components-styled/message-tile';
+import { WarningMessage } from '~/components-styled/warning-message';
 import { QuickLinks } from '~/components-styled/quick-links';
 import { TileList } from '~/components-styled/tile-list';
 import { Heading } from '~/components-styled/typography';
@@ -70,7 +69,7 @@ const MunicipalityActueel: FCWithLayout<typeof getStaticProps> = (props) => {
       <Box bg="white" pb={4}>
         <MaxWidth>
           <TileList>
-            <MessageTile
+            <WarningMessage
               message={siteText.regionaal_index.belangrijk_bericht}
             />
 

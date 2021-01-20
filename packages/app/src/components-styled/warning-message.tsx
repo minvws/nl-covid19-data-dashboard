@@ -4,40 +4,40 @@ import Warning from '~/assets/warning.svg';
 import { Box } from './base';
 import { Tile } from '~/components-styled/tile';
 import { asResponsiveArray } from '~/style/utils';
-interface MessageTileProps {
+interface WarningMessageProps {
   message: React.ReactNode;
 }
 
-export function MessageTile({ message }: MessageTileProps) {
+export function WarningMessage({ message }: WarningMessageProps) {
   return (
-    <StyledTile>
-      <StyledWarningBox>
+    <WarningTile>
+      <WarningBox>
         <StyledWarning />
-      </StyledWarningBox>
-      <StyledMessageBox>
+      </WarningBox>
+      <WarningMessageBox>
         {typeof message === 'string' ? (
           <Children dangerouslySetInnerHTML={{ __html: message }} />
         ) : (
           <Children>{message}</Children>
         )}
-      </StyledMessageBox>
-    </StyledTile>
+      </WarningMessageBox>
+    </WarningTile>
   );
 }
 
-const StyledTile = styled(Tile)(
+const WarningTile = styled(Tile)(
   css({
     flexDirection: 'row',
     padding: 0,
   })
 );
 
-const StyledWarningBox = styled(Box)(
+const WarningBox = styled(Box)(
   css({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    flexShrink: 0,
+    flex: '0 0 auto',
     backgroundColor: '#F9DD68',
     borderBottomLeftRadius: 1,
     borderTopLeftRadius: 1,
@@ -54,12 +54,12 @@ const StyledWarning = styled(Warning)(
   })
 );
 
-const StyledMessageBox = styled(Box)(
+const WarningMessageBox = styled(Box)(
   css({
     display: 'flex',
     alignItems: 'center',
-    flexGrow: 1,
-    py: 2 * 1.5,
+    flex: '1 1 auto',
+    py: 3,
     pl: 3,
     backgroundColor: '#FAE87A',
   })

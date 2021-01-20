@@ -5,11 +5,11 @@ import ArtsIcon from '~/assets/arts.svg';
 import GetestIcon from '~/assets/test.svg';
 import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
 import { ArticleSummary } from '~/components-styled/article-teaser';
-import { Box, Spacer } from '~/components-styled/base';
+import { Box } from '~/components-styled/base';
 import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
 import { MaxWidth } from '~/components-styled/max-width';
-import { MessageTile } from '~/components-styled/message-tile';
+import { WarningMessage } from '~/components-styled/warning-message';
 import { NewsMessage } from '~/components-styled/news-message';
 import { QuickLinks } from '~/components-styled/quick-links';
 import { TileList } from '~/components-styled/tile-list';
@@ -88,7 +88,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
       <Box bg="white" pb={4}>
         <MaxWidth>
           <TileList>
-            <MessageTile
+            <WarningMessage
               message={siteText.regionaal_index.belangrijk_bericht}
             />
 
