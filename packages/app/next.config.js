@@ -6,6 +6,9 @@ const withTM = require('next-transpile-modules')([
   '@visx/scale',
   '@visx/event',
   '@corona-dashboard/common',
+  "dequal",
+  "next-sanity",
+  "picosanity"
 ]);
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
