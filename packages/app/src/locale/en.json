@@ -2034,21 +2034,21 @@
   },
   "accessibility": {
     "grafieken": {
-      "reproductiegetal_verloop": "This figure shows the progression over time of the reproduction number.",
-      "ziekenhuisopnames": "This figure shows the progression in hospital admissions over time.",
-      "intensive_care_opnames": "This figure shows the progression over time of intensive care admissions.",
-      "verpleeghuiszorg_positief_getest": "This figure shows the number of confirmed cases amongst nursing home residents.",
-      "verpleeghuiszorg_besmette_locaties": "This figure shows the progression of the number of infected nursing home locations over time.",
-      "verpleeghuiszorg_overleden_getest": "This figure shows the number of deceased confirmed cases amongst nursing home residents.",
-      "gehandicaptenzorg_positief_getest": "This figure shows the number of confirmed cases amongst disability care homes.",
-      "gehandicaptenzorg_besmette_locaties": "This figure shows the progression of the number of infected disability care home locations over time.",
-      "gehandicaptenzorg_overleden": "This figure shows the progression in the number of deceased disability care home residents over time.",
-      "thuiswonende_ouderen_besmettingen": "This figure shows the progression over time in daily confirmed cases among over-70s living at home.",
-      "thuiswonende_ouderen_overleden": "This figure shows the progression over time in the number of COVID-19 deaths among over-70s living at home.",
-      "rioolwater_virusdeeltjes": "This figure shows the progression over time in the average amount of virus particles in waste water, per 100.000 residents.",
-      "verdenkingen_huisartsen": "This figure shows the progression over time in the estimated number of patients with symptoms that could indicate COVID-19.",
-      "ziekenhuis_opnames": "This figure shows the progression in hospital admissions over time.",
-      "rioolwater_meetwaarde": "This figure shows the most recent measured values of the average amount of virus particles per 100.000 residents per sewage processing facility."
+      "reproductiegetal_verloop": "This graph shows the progression of the reproduction number over time.",
+      "ziekenhuisopnames": "This graph shows the progression in hospital admissions over time.",
+      "intensive_care_opnames": "This graph shows the progression of intensive care admissions over time.",
+      "verpleeghuiszorg_positief_getest": "This graph shows the number of confirmed cases among nursing home residents.",
+      "verpleeghuiszorg_besmette_locaties": "This graph shows the progression of the number of infected nursing home locations over time.",
+      "verpleeghuiszorg_overleden_getest": "This graph shows the number of deceased confirmed cases among nursing home residents.",
+      "gehandicaptenzorg_positief_getest": "This graph shows the number of confirmed cases in disability care homes.",
+      "gehandicaptenzorg_besmette_locaties": "This graph shows the progression of the number of infected disability care homes over time.",
+      "gehandicaptenzorg_overleden": "This graph shows the progression of the number of deceased disability care home residents over time.",
+      "thuiswonende_ouderen_besmettingen": "This graph shows the progression over time in daily confirmed cases among over-70s living at home.",
+      "thuiswonende_ouderen_overleden": "This graph shows the progression over time in the number of COVID-19 deaths among over-70s living at home.",
+      "rioolwater_virusdeeltjes": "This graph shows the progression over time in the average amount of virus particles in waste water, per 100.000 residents.",
+      "verdenkingen_huisartsen": "This graph shows the progression over time in the estimated number of patients who contacted the general practitioner for the first time due to COVID-19 like symptoms.",
+      "ziekenhuis_opnames": "This graph shows the progression in hospital admissions over time.",
+      "rioolwater_meetwaarde": "This graph shows the most recent measured value of the average amount of virus particles per 100.000 residents, per sewage processing facility."
     }
   },
   "deceased_age_groups": {
