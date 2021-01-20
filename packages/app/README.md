@@ -65,9 +65,3 @@ Generates the `src/types/data.d.ts` file based on the JSON schemas.
 
 `yarn test`
 Runs the unit test suite.
-
-`yarn e2e`
-Runs the Cypress tests against a development build
-
-`yarn e2e:release`
-Runs the Cypress tests against a production build

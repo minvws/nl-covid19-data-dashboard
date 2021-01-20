@@ -14,9 +14,10 @@ import { getNationalLayout } from '~/domain/layout/national-layout';
 import siteText from '~/locale/index';
 import { getNlData, getLastGeneratedDate } from '~/static-props/get-data';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
-import { getLastFilledValue } from '~/utils/get-last-filled-value';
+import { getLastFilledValue } from '@corona-dashboard/common';
 
 const text = siteText.reproductiegetal;
+const graphDescriptions = siteText.accessibility.grafieken;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -80,6 +81,7 @@ const ReproductionIndex: FCWithLayout<typeof getStaticProps> = (props) => {
             metadata={{ source: text.bronnen.rivm }}
             title={text.linechart_titel}
             values={data.reproduction.values}
+            ariaDescription={graphDescriptions.reproductiegetal_verloop}
             linesConfig={[
               {
                 metricProperty: 'index_average',

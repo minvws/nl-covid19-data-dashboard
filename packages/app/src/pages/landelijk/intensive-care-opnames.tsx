@@ -15,6 +15,7 @@ import { getNlData, getLastGeneratedDate } from '~/static-props/get-data';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 
 const text = siteText.ic_opnames_per_dag;
+const graphDescriptions = siteText.accessibility.grafieken;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -91,6 +92,7 @@ const IntakeIntensiveCare: FCWithLayout<typeof getStaticProps> = (props) => {
         <LineChartTile
           title={text.linechart_titel}
           values={dataIntake.values}
+          ariaDescription={graphDescriptions.intensive_care_opnames}
           linesConfig={[
             {
               metricProperty: 'admissions_moving_average',

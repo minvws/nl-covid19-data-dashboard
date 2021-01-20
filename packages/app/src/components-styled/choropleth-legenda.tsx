@@ -1,6 +1,6 @@
 import { css } from '@styled-system/css';
 import styled from 'styled-components';
-import { ChoroplethThresholdsValue } from '~/components/choropleth/shared';
+import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
 import { Box } from './base';
 
 interface ChoroplethLegendaProps {
