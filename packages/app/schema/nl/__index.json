@@ -27,7 +27,8 @@
     "tested_ggd_daily",
     "tested_ggd_average",
     "tested_overall",
-    "tested_per_age_group"
+    "tested_per_age_group",
+    "vaccination"
   ],
   "additionalProperties": false,
   "properties": {
@@ -108,6 +109,9 @@
     },
     "elderly_at_home": {
       "$ref": "elderly_at_home.json"
+    },
+    "vaccination": {
+      "$ref": "vaccination.json"
     }
   }
 }
