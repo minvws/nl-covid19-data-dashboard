@@ -1,3 +1,9 @@
+import {
+  DifferenceDecimal,
+  DifferenceInteger,
+  formatNumber,
+  formatPercentage,
+} from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import {
@@ -13,8 +19,6 @@ import IconGelijk from '~/assets/gelijk.svg';
 import IconUp from '~/assets/pijl-omhoog.svg';
 import IconDown from '~/assets/pijl-omlaag.svg';
 import siteText from '~/locale/index';
-import { DifferenceDecimal, DifferenceInteger } from '~/types/data';
-import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 
 const text = siteText.toe_en_afname;
 

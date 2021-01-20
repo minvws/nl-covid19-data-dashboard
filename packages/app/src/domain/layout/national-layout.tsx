@@ -24,7 +24,7 @@ import { AppContent } from '~/components-styled/layout/app-content';
 import siteText from '~/locale/index';
 import theme from '~/style/theme';
 import { useBreakpoints } from '~/utils/useBreakpoints';
-import { National } from '~/types/data';
+import { National } from '@corona-dashboard/common';
 
 interface NationalLayoutProps {
   lastGenerated: string;

@@ -1,4 +1,3 @@
-import { groq } from 'next-sanity';
 import Head from 'next/head';
 import { MaxWidth } from '~/components-styled/max-width';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
@@ -16,11 +15,13 @@ interface OverData {
   description: unknown[] | null;
 }
 
+const query = `
+*[_type == 'overDitDashboard'][0]
+`;
+
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  createGetContent<OverData>(groq`
-    *[_type == 'overDitDashboard'][0]
-  `)
+  createGetContent<OverData>(query)
 );
 
 const Over: FCWithLayout<typeof getStaticProps> = (props) => {

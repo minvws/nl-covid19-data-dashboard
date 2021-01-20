@@ -7,6 +7,7 @@
     "code",
     "deceased_cbs",
     "deceased_rivm",
+    "deceased_rivm_per_age_group",
     "difference",
     "disability_care",
     "doctor",
@@ -98,6 +99,9 @@
     },
     "deceased_rivm": {
       "$ref": "deceased_rivm.json"
+    },
+    "deceased_rivm_per_age_group": {
+      "$ref": "deceased_rivm_per_age_group.json"
     },
     "deceased_cbs": {
       "$ref": "deceased_cbs.json"

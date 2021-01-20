@@ -10,7 +10,7 @@
   },
   "notificatie": {
     "titel": "Opmars nieuwe coronavarianten overschaduwt positiever beeld",
-    "bericht": "We zien een gematigd positief beeld in de week van 13 tot en met 19 januari, een effect van de lockdown die op 15 december inging. Het aantal meldingen van mensen met een positieve coronatestuitslag is in die week, in vergelijking met de week ervoor, met 21,5% gedaald naar 38.776 meldingen. Dit actuele beeld wordt overschaduwd door de snelle opmars van de coronavariant die in het Verenigd Koninkrijk en Ierland tot een zeer hoge toestroom aan patiënten in de ziekenhuizen heeft geleid. Geschat wordt dat van de mensen die afgelopen week besmet werden in Nederland, er ongeveer 10% de meer besmettelijke Britse variant heeft. Dat is een verdubbeling ten opzichte van de week ervoor. We hebben te maken met twee virusvarianten die zich met verschillende snelheden lijken te verspreiden in Nederland. Daardoor zijn er eigenlijk twee aparte corona-epidemieën. Een epidemie met de ‘oude’ variant, waarin het aantal infecties daalt, en een epidemie met de Britse variant waarin het aantal infecties juist toeneemt.",
+    "bericht": "We zien een gematigd positief beeld in de week van 13 tot en met 19 januari, een effect van de lockdown die op 15 december inging. Het aantal meldingen van mensen met een positieve coronatestuitslag is in die week, in vergelijking met de week ervoor, met 21,5% gedaald naar 38.776 meldingen. Dit actuele beeld wordt overschaduwd door de snelle opmars van de coronavariant die in het Verenigd Koninkrijk en Ierland tot een zeer hoge toestroom aan patiënten in de ziekenhuizen heeft geleid. Geschat wordt dat van de mensen die afgelopen week besmet werden in Nederland, er ongeveer 10% de meer besmettelijke Britse variant heeft. Dat is een verdubbeling ten opzichte van de week ervoor. We hebben te maken met twee virusvarianten die zich met verschillende snelheden lijken te verspreiden in Nederland. Daardoor zijn er eigenlijk twee aparte corona-epidemieën. Een epidemie met de ‘oude’ variant, waarin het aantal infecties daalt, en een epidemie met de Britse variant waarin het aantal infecties juist toeneemt. ",
     "link": {
       "text": "Bekijk de toelichting van het RIVM",
       "href": "https://www.rivm.nl/nieuws/opmars-nieuwe-coronavarianten-overschaduwt-positiever-beeld"
@@ -63,7 +63,7 @@
     "pagina_toelichting": "Aantal mensen met COVID-19 dat per dag op de intensive care is opgenomen.",
     "barscale_titel": "Intensive care-opnames per dag",
     "barscale_screenreader_text": "{{value}} intensive care-opnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
-    "extra_uitleg": "Aantal mensen met bevestigd COVID-19 dat per dag op een intensive care-afdeling van een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de afgelopen drie dagen.\n\nLet op: Hoewel ziekenhuizen proberen om COVID-19 patiënten snel te registreren, is het aannemelijk dat de registratie achter loopt. Om deze reden zijn de aantallen van de afgelopen dagen meestal nog onvolledig.",
+    "extra_uitleg": "Aantal mensen met bevestigd COVID-19 dat per dag op een intensive care-afdeling van een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de afgelopen drie dagen.\n\nLet op: Hoewel ziekenhuizen proberen om COVID-19 patiënten snel te registreren, is het aannemelijk dat de registratie achter loopt. Om deze reden zijn de aantallen van de afgelopen dagen meestal nog niet compleet.",
     "linechart_titel": "Intensive care-opnames over tijd",
     "bronnen": {
       "nice": {
@@ -192,7 +192,9 @@
     },
     "tijdelijk_onbeschikbaar_titel": "",
     "tijdelijk_onbeschikbaar": "",
-    "kpi_titel": "Het aantal ziekenhuisopnames dat op één dag gemeld is."
+    "kpi_titel": "Het aantal ziekenhuisopnames dat op één dag gemeld is.",
+    "linechart_legend_titel": "Ziekenhuisopnames",
+    "linechart_legend_underreported_titel": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
   },
   "positief_geteste_personen": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -275,7 +277,7 @@
     "lineLegendLabel": "Besmettelijke mensen",
     "geen_signaalwaarde_beschikbaar": "Vanwege een storing is deze informatie op dit moment helaas niet compleet. Aan een oplossing wordt gewerkt.",
     "geen_signaalwaarde_beschikbaar_lees_waarom": "Lees hier waarom",
-    "toelichting_pagina": "Als iemand het coronavirus oploopt, dan is deze persoon een tijd lang besmettelijk voor anderen. Hoe lang dit duurt verschilt van persoon tot persoon. Het aantal besmettelijke mensen is een schatting op basis van een aantal gegevensbronnen. Het exacte aantal is onbekend, maar we kunnen wel aangeven of het gaat om tientallen, honderden, duizenden of meer.",
+    "toelichting_pagina": "Als iemand het coronavirus oploopt, dan is deze persoon een tijd lang besmettelijk voor anderen. Hoe lang dit duurt verschilt van persoon tot persoon. Het aantal besmettelijke mensen is een schatting op basis van een aantal gegevensbronnen. Het exacte aantal is onbekend, maar we kunnen wel aangeven of het gaat om tientallen, honderden, duizenden of meer. ",
     "barscale_titel": "Gemiddeld aantal besmettelijke mensen per 100.000 inwoners",
     "barscale_screenreader_text": "{{value}} besmettelijke mensen",
     "cijfer_titel": "Geschat aantal besmettelijke mensen in Nederland:",
@@ -526,7 +528,7 @@
     "map_tooltip_value": "{{value}} x100 miljard",
     "reference": {
       "href": "/verantwoording#rioolwater",
-      "text": "Lees meer in de cijferverantwoording."
+      "text": "Lees meer over het onderzoek naar het coronavirus in rioolwater in de cijferverantwoording."
     },
     "bronnen": {
       "rivm": {
@@ -636,7 +638,8 @@
       "positive_tested_value": "{{totalPositiveValue}} per 100.000"
     },
     "niveau": "niveau",
-    "clear_select_input": "Leegmaken"
+    "clear_select_input": "Leegmaken",
+    "incomplete": "niet compleet"
   },
   "seoHead": {
     "default_description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
@@ -692,7 +695,7 @@
     "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
     "screen_reader_graph_content": "{{value}} opnames.",
     "barscale_titel": "Gemeld aantal ziekenhuisopnames per dag",
-    "extra_uitleg": "Aantal mensen uit deze veiligheidsregio met COVID-19 dat per dag in een ziekenhuis (exclusief IC) is opgenomen. Dit cijfer is het aantal ziekenhuisopnames dat op één dag gemeld zijn. Dit kunnen ook meldingen zijn van opnamen van eerdere dagen. Patiënten kunnen in ziekenhuizen in andere regio's zijn opgenomen.",
+    "extra_uitleg": "Aantal mensen uit deze veiligheidsregio met COVID-19 dat per dag in een ziekenhuis (exclusief IC) is opgenomen. Dit cijfer is het aantal ziekenhuisopnames dat op één dag gemeld zijn. Dit kunnen ook meldingen zijn van opnamen van eerdere dagen. Patiënten kunnen in een ziekenhuis elders in Nederland zijn opgenomen",
     "map_titel": "Verdeling ziekenhuisopnames in {{safetyRegion}}",
     "map_toelichting": "Deze kaart laat zien in welke gemeenten of veiligheidsregio’s patiënten wonen die met COVID-19 op de verpleegafdeling van het ziekenhuis worden opgenomen. Let op: patiënten kunnen ook in een ander deel van Nederland worden opgenomen. De kaart laat dus niet zien hoeveel patiënten per ziekenhuis worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE. Tergooi, Ziekenhuis Amstelland en het Flevoziekenhuis delen hun COVID-19 ziekenhuisopnames op dit moment niet met Stichting NICE. Daardoor zijn de cijfers van sommige veiligheidsregio’s en gemeenten op de kaart lager dan eigenlijk het geval is.",
     "linechart_titel": "Ziekenhuisopnames over tijd",
@@ -720,7 +723,9 @@
     },
     "tijdelijk_onbeschikbaar_titel": "",
     "tijdelijk_onbeschikbaar": "",
-    "kpi_titel": "Het aantal ziekenhuisopnames dat op één dag gemeld is. "
+    "kpi_titel": "Het aantal ziekenhuisopnames dat op één dag gemeld is. ",
+    "linechart_legend_titel": "Ziekenhuisopnames",
+    "linechart_legend_underreported_titel": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
   },
   "veiligheidsregio_positief_geteste_personen": {
     "titel_sidebar": "Positief geteste mensen",
@@ -862,7 +867,9 @@
     },
     "tijdelijk_onbeschikbaar_titel": "",
     "tijdelijk_onbeschikbaar": "",
-    "kpi_titel": "Het aantal ziekenhuisopnames dat op één dag gemeld is."
+    "kpi_titel": "Het aantal ziekenhuisopnames dat op één dag gemeld is.",
+    "linechart_legend_titel": "Ziekenhuisopnames",
+    "linechart_legend_underreported_titel": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
   },
   "gemeente_positief_geteste_personen": {
     "titel_sidebar": "Positief geteste mensen",
@@ -984,7 +991,7 @@
     "types": {
       "1": {
         "titel": "Waakzaam",
-        "toelichting": "Caution"
+        "toelichting": ""
       },
       "2": {
         "titel": "Zorgelijk",
@@ -1392,15 +1399,18 @@
   "infected_age_groups": {
     "title": "Verdeling naar leeftijd",
     "description": "De blauwe rechterbalken in deze grafiek laten zien tot welke leeftijdsgroep positief geteste personen behoren. De grijze linkerbalken tonen hoe groot elke leeftijdsgroep is ten opzichte van de hele Nederlandse bevolking. De blauwe en grijze balken laten samen zien of leeftijdsgroepen naar verhouding meer of minder positief geteste personen hebben. Bijvoorbeeld: van alle positief geteste personen is 10% een dertiger (blauwe balk) en van alle Nederlanders is 14% een dertiger (grijze balk). De leeftijdsgroep dertigers heeft in dit voorbeeld naar verhouding minder positief geteste personen. De grafiek wordt dagelijks bijgewerkt en gaat alleen over de meest recent gemelde gevallen.",
+    "example": "Bijvoorbeeld: Van alle positief geteste mensen is {{infectedPercentage}} tussen de {{ageGroupRange}} jaar. Van alle Nederlanders is {{ageGroupPercentage}} tussen de {{ageGroupRange}} jaar.",
     "graph": {
       "age_group_percentage_title": "Verdeling leeftijdsgroepen in Nederland",
       "age_group_percentage_tooltip": "van de bevolking is {{ageGroupRange}} jaar",
       "infected_percentage_title": "Positieve testen per leeftijdsgroep",
       "infected_percentage_tooltip": "van het aantal positief geteste mensen is {{ageGroupRange}} jaar",
       "age_group_range_tooltip": "{{ageGroupRange}} jaar",
-      "accessibility_description": "Grafiek met percentages voor de verdeling van de bevolking en de verdeling van positief geteste leeftijdsgroepen."
-    },
-    "example": "Bijvoorbeeld: Van alle positief geteste mensen is {{infectedPercentage}} tussen de {{ageGroupRange}} jaar. Van alle Nederlanders is {{ageGroupPercentage}} tussen de {{ageGroupRange}} jaar."
+      "accessibility_description": "Grafiek met percentages voor de verdeling van de bevolking en de verdeling van positief geteste leeftijdsgroepen.",
+      "clipped_value_message": "Deze waarde is groter dan in de grafiek is weergegeven",
+      "value_percentage_title": "Positieve testen per leeftijdsgroep",
+      "value_percentage_tooltip": "van het aantal positief geteste mensen is {{ageGroupRange}} jaar"
+    }
   },
   "gehandicaptenzorg_besmette_locaties": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -1775,9 +1785,9 @@
     },
     "deceased_monitor_chart_title": "Totaal aantal overledenen per week",
     "deceased_monitor_chart_description": "Deze grafiek laat zien hoeveel mensen er in totaal wekelijks overleden zijn in Nederland. Het aantal daadwerkelijk overleden mensen wordt vergeleken met het aantal overlijdens dat wordt verwacht op basis van voorgaande jaren. De lichtblauwe lijn en omliggende marge tonen de sterfte die op dat moment in het jaar wordt verwacht, de donkerblauwe lijn toont de sterfte zoals deze heeft plaatsgevonden.",
-    "deceased_monitor_chart_legenda_registered": "Daadwerkelijk aantal overledenen",
-    "deceased_monitor_chart_legenda_expected": "Verwacht aantal overledenen",
-    "deceased_monitor_chart_legenda_expected_margin": "Boven en ondergrens van verwacht aantal overledenen"
+    "deceased_monitor_chart_legenda_registered": "Daadwerkelijke aantal overledenen",
+    "deceased_monitor_chart_legenda_expected": "Verwachte aantal overledenen",
+    "deceased_monitor_chart_legenda_expected_margin": "Boven- en ondergrens van verwachte aantal overledenen"
   },
   "maatregelen": {
     "categories": {
@@ -2020,6 +2030,44 @@
         "sentence": "{{count}} {{area}} tussen de {{rangeLow}} en {{rangeHigh}} procent draagvlak {{verb}} voor de maatregel '{{restriction}}'",
         "last_sentence": "{{count}} {{area}} meer dan {{rangeLow}} procent draagvlak {{verb}} voor de maatregel '{{restriction}}'"
       }
+    }
+  },
+  "accessibility": {
+    "grafieken": {
+      "reproductiegetal_verloop": "Deze grafiek geeft het reproductiegetal over tijd weer.",
+      "ziekenhuisopnames": "Deze grafiek toont het aantal ziekenhuisopnames over tijd.",
+      "intensive_care_opnames": "Deze grafiek geeft de intensive care opnames over tijd weer.",
+      "verpleeghuiszorg_positief_getest": "Deze grafiek toont het aantal bewoners van verpleeghuislocaties waarvan gemeld is dat ze positief getest zijn op COVID-19.",
+      "verpleeghuiszorg_besmette_locaties": "Deze grafiek toont het aantal besmette verpleeghuislocaties over tijd.",
+      "verpleeghuiszorg_overleden_getest": "Deze grafiek toont het aantal overleden bewoners van verpleeghuislocaties waarvan gemeld is dat ze positief getest zijn op COVID-19.",
+      "gehandicaptenzorg_positief_getest": "Deze grafiek toont het aantal bewoners van instellingen voor gehandicaptenzorg waarvan gemeld is dat ze positief getest zijn op COVID-19.",
+      "gehandicaptenzorg_besmette_locaties": "Deze grafiek toont het totaal aantal besmette gehandicaptenzorglocaties over tijd.",
+      "gehandicaptenzorg_overleden": "Deze grafiek toont het aantal overleden bewoners van instellingen voor gehandicaptenzorg over tijd.",
+      "thuiswonende_ouderen_besmettingen": "Deze grafiek toont het aantal besmettingen onder thuiswonende ouderen over tijd.",
+      "thuiswonende_ouderen_overleden": "Deze grafiek toont het aantal thuiswonende ouderen dat is overleden aan COVID-19 over tijd.",
+      "rioolwater_virusdeeltjes": "Deze grafiek toont het gemiddeld aantal virusdeeltjes per 100.000 inwoners over tijd.",
+      "verdenkingen_huisartsen": "Deze grafiek toont het geschatte aantal patiënten dat voor het eerst met COVID-19-achtige klachten contact opnam met de huisarts over tijd.",
+      "ziekenhuis_opnames": "Deze grafiek toont het aantal ziekenhuisopnames over tijd.",
+      "rioolwater_meetwaarde": "Deze grafiek toont de meest recente meetwaarde van het gemiddeld aantal virusdeeltjes per 100.000 inwoners, per rioolwaterzuiveringslocatie."
+    }
+  },
+  "deceased_age_groups": {
+    "title": "COVID-19 sterfte: verdeling naar leeftijd",
+    "description": "De blauwe rechterbalken in deze grafiek laten zien tot welke leeftijdsgroep de aan COVID-19 overleden personen behoren. De grijze linkerbalken tonen hoe groot elke leeftijdsgroep is ten opzichte van de hele Nederlandse bevolking. De blauwe en grijze balken laten samen zien of leeftijdsgroepen naar verhouding meer of minder aan COVID-19 overleden personen hebben. Stel dat de grijze balk toont dat 12% van alle Nederlanders een zestiger is, en de blauwe balk geeft bijvoorbeeld aan dat 10% van alle aan COVID-19 overleden personen een zestiger is, dan heeft deze leeftijdsgroep naar verhouding minder aan COVID-19 overleden personen. De grafiek wordt dagelijks bijgewerkt en gaat over sterftegevallen sinds de uitbraak van het virus. Let op dat iedereen onder de vijftig in één leeftijdsgroep is geplaatst door het RIVM, omdat die gegevens vanwege de kleine aantallen anders herleidbaar zouden zijn tot individuen.",
+    "bronnen": {
+      "rivm": {
+        "text": "RIVM",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_casus_landelijk.html"
+      }
+    },
+    "graph": {
+      "accessibility_description": "Grafiek met percentages voor de verdeling van de bevolking en de verdeling van positief geteste leeftijdsgroepen.",
+      "clipped_value_message": "Deze waarde is groter dan in de grafiek is weergegeven",
+      "age_group_percentage_title": "Verdeling leeftijdsgroepen in Nederland",
+      "age_group_percentage_tooltip": "van de bevolking is {{ageGroupRange}} jaar",
+      "value_percentage_title": "Overledenen per leeftijdsgroep",
+      "value_percentage_tooltip": "van het aantal overleden personen is {{ageGroupRange}} jaar",
+      "age_group_range_tooltip": "{{ageGroupRange}} jaar"
     }
   }
 }

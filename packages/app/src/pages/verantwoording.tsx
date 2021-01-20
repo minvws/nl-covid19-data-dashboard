@@ -1,4 +1,3 @@
-import { groq } from 'next-sanity';
 import Head from 'next/head';
 import { Collapsible } from '~/components-styled/collapsible';
 import { MaxWidth } from '~/components-styled/max-width';
@@ -20,11 +19,13 @@ interface VerantwoordingData {
   collapsibleList: CollapsibleList[];
 }
 
+const query = `
+*[_type == 'cijferVerantwoording'][0]
+`;
+
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  createGetContent<VerantwoordingData>(groq`
-    *[_type == 'cijferVerantwoording'][0]
-  `)
+  createGetContent<VerantwoordingData>(query)
 );
 
 const Verantwoording: FCWithLayout<typeof getStaticProps> = (props) => {

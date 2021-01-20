@@ -15,7 +15,6 @@ export type TooltipProps = {
   children: ReactNode;
   x: number;
   y: number;
-  primaryColor?: string;
   borderColor?: string;
   bounds: Bounds;
 };
