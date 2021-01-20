@@ -2052,7 +2052,7 @@
     }
   },
   "deceased_age_groups": {
-    "title": "Covid-19 sterfte: verdeling naar leeftijd",
+    "title": "COVID-19 sterfte: verdeling naar leeftijd",
     "description": "De blauwe rechterbalken in deze grafiek laten zien tot welke leeftijdsgroep de aan COVID-19 overleden personen behoren. De grijze linkerbalken tonen hoe groot elke leeftijdsgroep is ten opzichte van de hele Nederlandse bevolking. De blauwe en grijze balken laten samen zien of leeftijdsgroepen naar verhouding meer of minder aan COVID-19 overleden personen hebben. Stel dat de grijze balk toont dat 12% van alle Nederlanders een zestiger is, en de blauwe balk geeft bijvoorbeeld aan dat 10% van alle aan COVID-19 overleden personen een zestiger is, dan heeft deze leeftijdsgroep naar verhouding minder aan COVID-19 overleden personen. De grafiek wordt dagelijks bijgewerkt en gaat over sterftegevallen sinds de uitbraak van het virus. Let op dat iedereen onder de vijftig in één leeftijdsgroep is geplaatst door het RIVM, omdat die gegevens vanwege de kleine aantallen anders herleidbaar zouden zijn tot individuen.",
     "bronnen": {
       "rivm": {
