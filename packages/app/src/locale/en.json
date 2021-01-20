@@ -145,8 +145,6 @@
     "map_titel": "Residence of patients admitted to hospital",
     "map_toelichting": "This map shows the distribution of hospital admissions in the Netherlands. It reflects the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE). Tergooi hospitals, Ziekenhuis Amsterlland and Flevoziekenhuis do not currently share their COVID-19 hospital admission data with Stichting NICE. As a result, the actual figures in some safety regions and municipalities will be higher than they appear on the map.",
     "linechart_titel": "Progression in hospital admissions over time",
-    "linechart_legend_titel": "hospital admissions",
-    "linechart_legend_underreported_titel": "Under reported while data is delayed",
     "barscale_screenreader_text": "{{value}} hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
     "chloropleth_legenda": {
       "titel": "Hospital admissions",
@@ -194,7 +192,9 @@
     },
     "tijdelijk_onbeschikbaar_titel": "",
     "tijdelijk_onbeschikbaar": "",
-    "kpi_titel": "Number of hospital admissions reported on one day. "
+    "kpi_titel": "Number of hospital admissions reported on one day. ",
+    "linechart_legend_titel": "",
+    "linechart_legend_underreported_titel": ""
   },
   "positief_geteste_personen": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -639,7 +639,7 @@
     },
     "niveau": "level",
     "clear_select_input": "Empty",
-    "incomplete": "incomplete"
+    "incomplete": ""
   },
   "seoHead": {
     "default_description": "Information on the development of the coronavirus in The Netherlands.",
@@ -699,8 +699,6 @@
     "map_titel": "Distribution of hospital admissions in {{safetyRegion}}",
     "map_toelichting": "This map shows the distribution of hospital admissions in the Netherlands. It reflects the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE). Tergooi hospitals, Ziekenhuis Amsterlland and Flevoziekenhuis do not currently share their COVID-19 hospital admission data with Stichting NICE. As a result, the actual figures in some safety regions and municipalities will be higher than they appear on the map.",
     "linechart_titel": "Progression in hospital admissions over time",
-    "linechart_legend_titel": "",
-    "linechart_legend_underreported_titel": "",
     "barscale_screenreader_text": "{{value}} hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
     "bron": {
       "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
@@ -725,7 +723,9 @@
     },
     "tijdelijk_onbeschikbaar_titel": "",
     "tijdelijk_onbeschikbaar": "",
-    "kpi_titel": "Number of hospital admissions reported daily."
+    "kpi_titel": "Number of hospital admissions reported daily.",
+    "linechart_legend_titel": "",
+    "linechart_legend_underreported_titel": ""
   },
   "veiligheidsregio_positief_geteste_personen": {
     "titel_sidebar": "Confirmed cases",
@@ -745,7 +745,13 @@
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -837,8 +843,6 @@
     "map_titel": "Distribution of hospital admissions in safety region of {{municipality}}",
     "map_toelichting": "This map shows the distribution of hospital admissions in the Netherlands. It reflects the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE). Tergooi hospitals, Ziekenhuis Amstelland and Flevoziekenhuis do not currently share their COVID-19 hospital admission data with Stichting NICE. As a result, the actual figures in some safety regions and municipalities will be higher than they appear on the map.",
     "linechart_titel": "Progression in hospital admissions over time",
-    "linechart_legend_titel": "",
-    "linechart_legend_underreported_titel": "",
     "barscale_screenreader_text": "{{value}} hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
     "bron": {
       "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
@@ -863,7 +867,9 @@
     },
     "tijdelijk_onbeschikbaar_titel": "",
     "tijdelijk_onbeschikbaar": "",
-    "kpi_titel": "Number of hospital admissions reported on one day. "
+    "kpi_titel": "Number of hospital admissions reported on one day. ",
+    "linechart_legend_titel": "",
+    "linechart_legend_underreported_titel": ""
   },
   "gemeente_positief_geteste_personen": {
     "titel_sidebar": "Confirmed cases",
@@ -2046,22 +2052,22 @@
     }
   },
   "deceased_age_groups": {
-    "title": "",
-    "description": "",
+    "title": "COVID-19 deaths by age",
+    "description": "The blue bars on the right of this graph show the age distribution of people who have died from COVID 19. The grey bars on the left show how large each age group is in relation to the entire Dutch population. Taken together, the blue and grey bars show whether there are proportionately more or fewer COVID-19 deaths in each age group. If, for example, the graph shows that people in their sixties represent 12% of the Dutch population (grey bar) and that this same group represents 10% of the people in the Netherlands who have died from COVID-19 (blue bar), that means there are proportionately fewer deaths from COVID-19 among people in their sixties. The graph is updated daily and includes all deaths since the start of the COVID-19 pandemic. Please note that RIVM groups COVID-19 deaths among people younger than 50 together; the low numbers could otherwise be traceable back to individual people.",
     "bronnen": {
       "rivm": {
-        "text": "",
-        "href": ""
+        "text": "RIVM",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_casus_landelijk.html"
       }
     },
     "graph": {
-      "accessibility_description": "",
-      "clipped_value_message": "",
-      "age_group_percentage_title": "",
-      "age_group_percentage_tooltip": "",
-      "value_percentage_title": "",
+      "accessibility_description": "Graph with percentages for the distribution of the population and the distribution of age groups tested positively.",
+      "clipped_value_message": "This value is greater than shown in the graph",
+      "age_group_percentage_title": "Age distribution in The Netherlands",
+      "age_group_percentage_tooltip": "of the population is {{ageGroupRange}} years old",
+      "value_percentage_title": "Deaths by age",
       "value_percentage_tooltip": "",
-      "age_group_range_tooltip": ""
+      "age_group_range_tooltip": "{{ageGroupRange}} years old"
     }
   }
 }
