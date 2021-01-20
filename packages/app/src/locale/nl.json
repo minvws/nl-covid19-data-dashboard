@@ -725,7 +725,7 @@
     "tijdelijk_onbeschikbaar": "",
     "kpi_titel": "Het aantal ziekenhuisopnames dat op één dag gemeld is. ",
     "linechart_legend_titel": "Ziekenhuisopnames",
-    "linechart_legend_underreported_titel": "Onvolledig doordat meldingen vertraagd binnenkomen"
+    "linechart_legend_underreported_titel": "Laatste dagen zijn altijd onvolledig omdat meldingen vertraagd binnenkomen"
   },
   "veiligheidsregio_positief_geteste_personen": {
     "titel_sidebar": "Positief geteste mensen",
@@ -869,7 +869,7 @@
     "tijdelijk_onbeschikbaar": "",
     "kpi_titel": "Het aantal ziekenhuisopnames dat op één dag gemeld is.",
     "linechart_legend_titel": "Ziekenhuisopnames",
-    "linechart_legend_underreported_titel": "Onvolledig doordat meldingen vertraagd binnenkomen"
+    "linechart_legend_underreported_titel": "Laatste dagen zijn altijd onvolledig omdat meldingen vertraagd binnenkomen"
   },
   "gemeente_positief_geteste_personen": {
     "titel_sidebar": "Positief geteste mensen",
