@@ -123,8 +123,6 @@
   },
   "browserslist": [
     "defaults",
-    "> 1%",
-    "IE 11",
     "not ie < 11"
   ]
 }
