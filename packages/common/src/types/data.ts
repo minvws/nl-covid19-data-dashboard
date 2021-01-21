@@ -121,7 +121,6 @@ export interface National {
   tested_ggd_average: NationalTestedGgdAverage;
   nursing_home: NationalNursingHome;
   disability_care: NationalDisabilityCare;
-  restrictions: NationalRestrictions;
   behavior: NationalBehavior;
   deceased_rivm: NationalDeceasedRivm;
   deceased_rivm_per_age_group: NlDeceasedRivmPerAgeGroup;
@@ -312,34 +311,6 @@ export interface NationalDisabilityCareValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NationalRestrictions {
-  values: NationalRestrictionValue[];
-}
-export interface NationalRestrictionValue {
-  restriction_id: string;
-  target_region: string;
-  escalation_level: 0 | 1 | 2 | 3 | 4 | 41 | 401;
-  category_id:
-    | "er_op_uit"
-    | "bezoek"
-    | "samenkomst"
-    | "huwelijk"
-    | "verpleeghuis"
-    | "horeca"
-    | "sport"
-    | "reizen_binnenland"
-    | "reizen_buitenland"
-    | "ov"
-    | "uitvaart"
-    | "onderwijs"
-    | "werk"
-    | "winkels"
-    | "alcohol"
-    | "algemeen"
-    | "contactberoep";
-  restriction_order: number;
-  valid_from_unix: number;
-}
 export interface NationalBehavior {
   values: NationalBehaviorValue[];
   last_value: NationalBehaviorValue;
@@ -448,7 +419,6 @@ export interface Regionaal {
   tested_ggd_average: RegionalTestedGgdAverage;
   nursing_home: RegionalNursingHome;
   disability_care: RegionalDisabilityCare;
-  restrictions: RegionalRestrictions;
   behavior: RegionalBehavior;
   deceased_rivm: RegionalDeceasedRivm;
   deceased_cbs: RegionalDeceasedCbs;
@@ -574,35 +544,6 @@ export interface RegionalDisabilityCareValue {
   deceased_daily: number;
   date_unix: number;
   date_of_insertion_unix: number;
-  vrcode: string;
-}
-export interface RegionalRestrictions {
-  values: RegionalRestrictionValue[];
-}
-export interface RegionalRestrictionValue {
-  restriction_id: string;
-  target_region: "nl" | "vr";
-  escalation_level: 0 | 1 | 2 | 3 | 4 | 41 | 401 | 402;
-  category_id:
-    | "er_op_uit"
-    | "bezoek"
-    | "samenkomst"
-    | "huwelijk"
-    | "verpleeghuis"
-    | "horeca"
-    | "sport"
-    | "reizen_binnenland"
-    | "reizen_buitenland"
-    | "ov"
-    | "uitvaart"
-    | "onderwijs"
-    | "werk"
-    | "winkels"
-    | "alcohol"
-    | "algemeen"
-    | "contactberoep";
-  restriction_order: number;
-  valid_from_unix: number;
   vrcode: string;
 }
 export interface RegionalBehavior {
