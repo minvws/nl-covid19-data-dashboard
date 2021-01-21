@@ -19,7 +19,6 @@ import {
 } from '~/static-props/get-data';
 // import { useEscalationLevel } from '~/utils/use-escalation-level';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
-import { groq } from 'next-sanity';
 import { LockdownData, RoadmapData } from '~/types/cms';
 import theme from '~/style/theme';
 
@@ -28,15 +27,17 @@ type MaatregelenData = {
   roadmap?: RoadmapData;
 };
 
+const query = `
+{
+  'lockdown': *[_type == 'lockdown'][0],
+  // We will need the roadmap when lockdown is disabled in the CMS.
+  // 'roadmap': *[_type == 'roadmap'][0]
+}`;
+
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   getNlData,
-  createGetContent<MaatregelenData>(groq`
-    {
-      'lockdown': *[_type == 'lockdown'][0],
-      // We will need the roadmap when lockdown is disabled in the CMS.
-      // 'roadmap': *[_type == 'roadmap'][0]
-    }`)
+  createGetContent<MaatregelenData>(query)
 );
 
 const NationalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {

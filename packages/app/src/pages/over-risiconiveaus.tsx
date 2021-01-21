@@ -1,4 +1,3 @@
-import { groq } from 'next-sanity';
 import Head from 'next/head';
 import { Collapsible } from '~/components-styled/collapsible';
 import { MaxWidth } from '~/components-styled/max-width';
@@ -20,11 +19,13 @@ interface OverRisiconiveausData {
   collapsibleList: CollapsibleList[];
 }
 
+const query = `
+*[_type == 'overRisicoNiveaus'][0]
+`;
+
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  createGetContent<OverRisiconiveausData>(groq`
-    *[_type == 'overRisicoNiveaus'][0]
-  `)
+  createGetContent<OverRisiconiveausData>(query)
 );
 
 const OverRisicoNiveaus: FCWithLayout<typeof getStaticProps> = (props) => {

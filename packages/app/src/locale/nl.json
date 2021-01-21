@@ -63,7 +63,7 @@
     "pagina_toelichting": "Aantal mensen met COVID-19 dat per dag op de intensive care is opgenomen.",
     "barscale_titel": "Intensive care-opnames per dag",
     "barscale_screenreader_text": "{{value}} intensive care-opnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
-    "extra_uitleg": "Aantal mensen met bevestigd COVID-19 dat per dag op een intensive care-afdeling van een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de afgelopen drie dagen.\n\nLet op: Hoewel ziekenhuizen proberen om COVID-19 patiënten snel te registreren, is het aannemelijk dat de registratie achter loopt. Om deze reden zijn de aantallen van de afgelopen dagen meestal nog onvolledig.",
+    "extra_uitleg": "Aantal mensen met bevestigd COVID-19 dat per dag op een intensive care-afdeling van een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de afgelopen drie dagen.\n\nLet op: Hoewel ziekenhuizen proberen om COVID-19 patiënten snel te registreren, is het aannemelijk dat de registratie achter loopt. Om deze reden zijn de aantallen van de afgelopen dagen meestal nog niet compleet.",
     "linechart_titel": "Intensive care-opnames over tijd",
     "bronnen": {
       "nice": {
@@ -194,7 +194,7 @@
     "tijdelijk_onbeschikbaar": "",
     "kpi_titel": "Het aantal ziekenhuisopnames dat op één dag gemeld is.",
     "linechart_legend_titel": "Ziekenhuisopnames",
-    "linechart_legend_underreported_titel": "Laatste dagen zijn altijd onvolledig omdat meldingen vertraagd binnenkomen"
+    "linechart_legend_underreported_titel": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
   },
   "positief_geteste_personen": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -639,7 +639,7 @@
     },
     "niveau": "niveau",
     "clear_select_input": "Leegmaken",
-    "incomplete": "onvolledig"
+    "incomplete": "niet compleet"
   },
   "seoHead": {
     "default_description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
@@ -725,7 +725,7 @@
     "tijdelijk_onbeschikbaar": "",
     "kpi_titel": "Het aantal ziekenhuisopnames dat op één dag gemeld is. ",
     "linechart_legend_titel": "Ziekenhuisopnames",
-    "linechart_legend_underreported_titel": "Laatste dagen zijn altijd onvolledig omdat meldingen vertraagd binnenkomen"
+    "linechart_legend_underreported_titel": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
   },
   "veiligheidsregio_positief_geteste_personen": {
     "titel_sidebar": "Positief geteste mensen",
@@ -869,7 +869,7 @@
     "tijdelijk_onbeschikbaar": "",
     "kpi_titel": "Het aantal ziekenhuisopnames dat op één dag gemeld is.",
     "linechart_legend_titel": "Ziekenhuisopnames",
-    "linechart_legend_underreported_titel": "Laatste dagen zijn altijd onvolledig omdat meldingen vertraagd binnenkomen"
+    "linechart_legend_underreported_titel": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
   },
   "gemeente_positief_geteste_personen": {
     "titel_sidebar": "Positief geteste mensen",
