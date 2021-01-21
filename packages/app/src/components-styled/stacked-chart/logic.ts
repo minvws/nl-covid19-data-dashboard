@@ -1,7 +1,7 @@
-import { isDefined, isPresent } from 'ts-is-present';
+import { pick } from 'lodash';
+import { isDefined } from 'ts-is-present';
 import { assert } from '~/utils/assert';
 import { getDaysForTimeframe, TimeframeOption } from '~/utils/timeframe';
-import { pick, zip } from 'lodash';
 
 // export type Value = DailyValue | WeeklyValue;
 export type Value = DateValue | DateSpanValue;
@@ -51,9 +51,7 @@ export function isDateSeries(series: Value[]): series is DateValue[] {
   return firstValue.date_unix !== undefined;
 }
 
-export function isDateSpanSeries(
-  series: Value[]
-): series is DateSpanValue[] {
+export function isDateSpanSeries(series: Value[]): series is DateSpanValue[] {
   const firstValue = (series as DateSpanValue[])[0];
 
   assert(
@@ -68,22 +66,18 @@ export function isDateSpanSeries(
 }
 
 /**
- * Stack all values by zipping each position for every trend then summing
- * the together like the bar stack and finding the position with the highest
- * sum.
+ * A SeriesPoint contains a __value property which has an object with all the
+ * different trends in key/value pairs. This function sums all values together
+ * for each point and then returns the highest sum for all points.
  */
-export function calculateYMaxStacked(series: TrendPoints[]) {
+export function calculateYMaxStacked(series: SeriesPoint[]) {
+  function sumTrendPointValue(point: SeriesPoint) {
+    return Object.values(point.__value).reduce((sum, v) => sum + v, 0);
+  }
 
-  function sumTrendValues
+  const stackedSumValues = series.map(sumTrendPointValue);
 
-  const stackedValues = series.map((x) =>
-    sumValues(x
-
-      .map((x) => x.__value)
-      .reduce((acc, value) => acc + value, 0)
-  );
-
-  return Math.max(...stackedValues);
+  return Math.max(...stackedSumValues);
 }
 
 /**
@@ -125,7 +119,7 @@ function getTimeframeBoundaryUnix(timeframe: TimeframeOption) {
 //   __value: number;
 // };
 
-export type TrendPoints = {
+export type SeriesPoint = {
   __date: Date;
   // __value: number;
   __value: { [key: string]: number };
@@ -137,13 +131,13 @@ export function getTrendData<T extends Value>(
   values: Value[],
   // valueKeys: NumberProperty<T>[]
   valueKeys: (keyof T)[]
-): TrendPoints[] {
+): SeriesPoint[] {
   return values.map(
     (x) =>
       ({
         __value: pick(x, valueKeys),
         __date: getDateFromValue(x),
-      } as TrendPoints)
+      } as SeriesPoint)
   );
 }
 

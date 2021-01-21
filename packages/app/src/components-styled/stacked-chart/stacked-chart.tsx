@@ -29,7 +29,7 @@ import {
   getValuesInTimeframe,
   isDateSpanValue,
   isDateValue,
-  TrendValue,
+  SeriesPoint,
   Value,
 } from './logic';
 
@@ -93,7 +93,7 @@ export function StackedChart<T extends Value>({
     tooltipTop = 0,
     showTooltip,
     hideTooltip,
-  } = useTooltip<T & TrendValue>();
+  } = useTooltip<T & SeriesPoint>();
 
   const metricProperties = useMemo(() => config.map((x) => x.metricProperty), [
     config,
@@ -106,14 +106,14 @@ export function StackedChart<T extends Value>({
     [values, timeframe]
   );
 
-  const trendData = useMemo(
+  const series = useMemo(
     () => getTrendData(valuesInTimeframe, metricProperties),
     [valuesInTimeframe, metricProperties]
   );
 
-  console.log('trendData', trendData);
+  console.log('trendData', series);
 
-  const yMax = useMemo(() => calculateYMaxStacked(trendData), [trendData]);
+  const yMax = useMemo(() => calculateYMaxStacked(series), [series]);
 
   console.log('yMax', yMax);
 
@@ -123,12 +123,19 @@ export function StackedChart<T extends Value>({
   /**
    * @TODO return date as Q1 Q2 etc
    */
-  function getDate(x: DateValue | DateSpanValue) {
-    return isDateValue(x)
-      ? String(x.date_unix)
-      : isDateSpanValue(x)
-      ? String(x.date_start_unix)
-      : '';
+  // function getDate(x: DateValue | DateSpanValue) {
+  //   return isDateValue(x)
+  //     ? String(x.date_unix)
+  //     : isDateSpanValue(x)
+  //     ? String(x.date_start_unix)
+  //     : '';
+  // }
+
+  function getDateString(x: SeriesPoint) {
+    /**
+     * @TODO return date as Q1 Q2 etc
+     */
+    return x.__date.toLocaleString();
   }
 
   const colorScale = scaleOrdinal<string, string>({
@@ -137,7 +144,7 @@ export function StackedChart<T extends Value>({
   });
 
   const xScale = scaleBand<string>({
-    domain: valuesInTimeframe.map(getDate),
+    domain: series.map(getDateString),
     padding: 0.2,
   });
 
@@ -265,7 +272,7 @@ export function StackedChart<T extends Value>({
             <AxisBottom
               scale={xScale}
               tickValues={xScale.domain()}
-              tickFormat={formatXAxis as AnyTickFormatter}
+              // tickFormat={formatXAxis as AnyTickFormatter}
               top={bounds.height}
               stroke={defaultColors.axis}
               tickLabelProps={() => ({
@@ -290,10 +297,10 @@ export function StackedChart<T extends Value>({
                 verticalAnchor: 'middle',
               })}
             />
-            <BarStack<T, string>
-              data={values}
+            <BarStack<SeriesPoint, string>
+              data={series}
               keys={keys}
-              x={getDate}
+              x={getDateString}
               xScale={xScale}
               yScale={yScale}
               color={colorScale}
@@ -324,6 +331,7 @@ export function StackedChart<T extends Value>({
                         // to in this example.
 
                         console.log('bar', bar);
+                        // console.log('series point', series[bar.index]);
                         // const eventSvgCoords = localPoint(event);
                         // const left = bar.x + bar.width / 2;
                         // showTooltip({
@@ -367,7 +375,7 @@ export function StackedChart<T extends Value>({
 }
 
 type TooltipData<T> = {
-  trendValue: TrendValue;
+  trendValue: SeriesPoint;
   dataValue: T;
   metricProperty: keyof T;
 };
