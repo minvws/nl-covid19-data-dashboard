@@ -6,7 +6,6 @@ import { createDate } from '~/utils/createDate';
 import { formatDateFromMilliseconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
-import { colors } from '~/style/theme';
 
 type TRange = [Date, number | null, number | null];
 type TLine = [Date, number | null];
