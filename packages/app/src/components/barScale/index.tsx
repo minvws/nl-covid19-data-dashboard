@@ -38,7 +38,7 @@ export function BarScale({
 
   const text = siteText.common.barScale;
 
-  const [xMin, xMax] = scale.domain();
+  const [xMin] = scale.domain();
 
   const textAlign = scaleThreshold<number, 'start' | 'middle' | 'end'>()
     .domain([20, 80])
