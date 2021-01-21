@@ -44,7 +44,7 @@ import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { formatDateFromMilliseconds } from '~/utils/formatDate';
 import { Tile } from '~/components-styled/tile';
-import { StackedChart } from '~/components-styled/stacked-chart';
+import { StackedChart } from '~/components-styled/stacked-chart/stacked-chart';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,

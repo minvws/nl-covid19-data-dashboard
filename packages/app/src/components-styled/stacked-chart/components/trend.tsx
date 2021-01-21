@@ -1,7 +1,7 @@
 import { AreaClosed, LinePath } from '@visx/shape';
 import { MouseEvent, TouchEvent, useState } from 'react';
 import { colors } from '~/style/theme';
-import { TrendValue } from '../helpers';
+import { TrendValue } from '../logic';
 import { ChartScales } from './chart-axes';
 
 export type TrendType = 'line' | 'area';

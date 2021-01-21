@@ -3,7 +3,7 @@ import { Text } from '~/components-styled/typography';
 import { colors } from '~/style/theme';
 import { formatDateFromMilliseconds } from '~/utils/formatDate';
 import { ChartPadding } from '.';
-import { TrendValue, Value } from '../helpers';
+import { TrendValue, Value } from '../logic';
 
 export const MARKER_MIN_WIDTH = 26;
 
