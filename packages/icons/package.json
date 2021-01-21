@@ -1,0 +1,23 @@
+{
+  "name": "@corona-dashboard/icons",
+  "version": "2.11.1",
+  "private": true,
+  "license": "EUROPEAN UNION PUBLIC LICENCE v. 1.2",
+  "source": "src/index.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.module.js",
+  "unpkg": "dist/index.umd.js",
+  "scripts": {
+    "convert": "node scripts/generate-icons.js",
+    "build": "microbundle",
+    "dev": "microbundle watch"
+  },
+  "devDependencies": {
+    "@svgr/core": "^5.5.0",
+    "@svgr/plugin-prettier": "^5.5.0",
+    "@svgr/plugin-svgo": "^5.5.0",
+    "babel-plugin-inline-react-svg": "^1.1.2",
+    "glob": "^7.1.6",
+    "microbundle": "^0.13.0"
+  }
+}
