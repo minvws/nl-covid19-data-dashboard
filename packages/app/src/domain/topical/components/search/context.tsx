@@ -89,6 +89,11 @@ function useSearchContextValue<T extends Element>(
    */
   const { hits, vrHits, gmHits } = useSearchResults(term);
 
+  const showResults =
+    hasHadInputFocus &&
+    !!term &&
+    (hasInputFocus || hasHitFocus || !breakpoints.md);
+
   const { focusRef, focusIndex, setFocusIndex } = useHitSelection({
     numberOfHits: hits.length,
     onSelectHit: (index, openInNewWindow) => {
@@ -99,6 +104,10 @@ function useSearchContextValue<T extends Element>(
         ? window.open(option.data.link, '_blank')
         : router.push(option.data.link);
     },
+    /**
+     * Only enable keyboard navigation when we show results
+     */
+    isEnabled: showResults,
   });
 
   useEffect(() => {
@@ -118,11 +127,6 @@ function useSearchContextValue<T extends Element>(
    */
   const getOptionId = (index: number) => `${id}-result-${index}`;
 
-  const showResults =
-    hasHadInputFocus &&
-    !!term &&
-    (hasInputFocus || hasHitFocus || !breakpoints.md);
-
   useOnClickOutside([containerRef], () => setHasHitFocus(false));
 
   return {
@@ -140,7 +144,15 @@ function useSearchContextValue<T extends Element>(
       onChange: (evt: ChangeEvent<HTMLInputElement>) =>
         setTerm(evt.target.value),
       onFocus: () => setHasInputFocus(true),
-      onBlur: () => setHasInputFocus(false),
+      /**
+       * Usually search-results will disappear when the input loses focus,
+       * but this doesn't allow the user to set focus on a search-result using
+       * the "tab"-key.
+       * The following timeout will handle the blur-event after a small delay.
+       * This allows the browser to fire a focusEvent for one of the results,
+       * which in turn will keep the search-results alive.
+       */
+      onBlur: () => setTimeout(() => setHasInputFocus(false), 60),
       'aria-autocomplete': 'list',
       'aria-controls': id,
       'aria-activedescendant': getOptionId(focusIndex),

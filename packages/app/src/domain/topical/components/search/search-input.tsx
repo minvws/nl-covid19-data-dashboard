@@ -1,5 +1,5 @@
 import css from '@styled-system/css';
-import { useRef } from 'react';
+import { MouseEvent, useRef } from 'react';
 import styled from 'styled-components';
 import CloseIcon from '~/assets/close.svg';
 import SearchIcon from '~/assets/search-icon.svg';
@@ -25,7 +25,8 @@ export function SearchInput() {
         <IconContainer
           as="button"
           align="right"
-          onClick={() => {
+          onClick={(evt: MouseEvent<HTMLButtonElement>) => {
+            evt.stopPropagation();
             inputRef.current?.focus();
             setTerm('');
           }}
