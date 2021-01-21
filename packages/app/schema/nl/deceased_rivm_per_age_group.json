@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "nl_deceased_rivm_per_age_group",
+  "type": "object",
+  "required": ["values"],
+  "additionalProperties": false,
+  "properties": {
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/value"
+      }
+    }
+  },
+  "definitions": {
+    "value": {
+      "title": "nl_deceased_rivm_per_age_group_value",
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "age_group_range",
+        "age_group_percentage",
+        "covid_percentage",
+        "date_of_insertion_unix"
+      ],
+      "properties": {
+        "age_group_range": {
+          "type": "string"
+        },
+        "age_group_percentage": {
+          "type": "number"
+        },
+        "covid_percentage": {
+          "type": "number"
+        },
+        "date_of_insertion_unix": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}

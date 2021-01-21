@@ -1,8 +1,13 @@
+import { NationalTestedPerAgeGroup } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Afname from '~/assets/afname.svg';
 import Getest from '~/assets/test.svg';
+import {
+  AgeDemographic,
+  formatAgeGroupRange,
+} from '~/components-styled/age-demographic';
 import { Anchor } from '~/components-styled/anchor';
 import { Box } from '~/components-styled/base';
 import { RegionControlOption } from '~/components-styled/chart-region-controls';
@@ -13,6 +18,8 @@ import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { PageBarScale } from '~/components-styled/page-barscale';
+import { StackedChart } from '~/components-styled/stacked-chart/stacked-chart';
+import { Tile } from '~/components-styled/tile';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
@@ -24,27 +31,24 @@ import { createSelectRegionHandler } from '~/components/choropleth/select-handle
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
 import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/create-positive-tested-people-regional-tooltip';
 import { SEOHead } from '~/components/seoHead';
-import { AgeDemographic } from '~/domain/infected-people/age-demographic/age-demographic';
-import { formatAgeGroupRange } from '~/domain/infected-people/age-demographic/age-demographic-chart';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
-  getNlData,
   getLastGeneratedDate,
+  getNlData,
   getText,
 } from '~/static-props/get-data';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import { colors } from '~/style/theme';
-import { NationalTestedPerAgeGroup } from '@corona-dashboard/common';
 import { assert } from '~/utils/assert';
-import { formatDateFromSeconds } from '~/utils/formatDate';
+import {
+  formatDateFromMilliseconds,
+  formatDateFromSeconds,
+} from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { formatDateFromMilliseconds } from '~/utils/formatDate';
-import { Tile } from '~/components-styled/tile';
-import { StackedChart } from '~/components-styled/stacked-chart/stacked-chart';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -340,7 +344,11 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
             source: text.bronnen.rivm,
           }}
         >
-          <AgeDemographic data={data.tested_per_age_group} />
+          <AgeDemographic
+            data={data.tested_per_age_group}
+            metricProperty="infected_percentage"
+            text={siteText.infected_age_groups.graph}
+          />
         </ChartTile>
 
         <ContentHeader

@@ -1,17 +1,17 @@
-import React from "react";
-import SanityMobilePreview from "sanity-mobile-preview";
-import "sanity-mobile-preview/dist/index.css?raw";
+import React from 'react';
+import SanityMobilePreview from 'sanity-mobile-preview';
+import 'sanity-mobile-preview/dist/index.css?raw';
 
-import S from "@sanity/desk-tool/structure-builder";
-import { GoSettings } from "react-icons/go";
+import S from '@sanity/desk-tool/structure-builder';
+import { GoSettings } from 'react-icons/go';
 
-import { MdQuestionAnswer } from "react-icons/md";
+import { MdQuestionAnswer } from 'react-icons/md';
 
-import { BsCardChecklist, BsMap } from "react-icons/bs";
-import { GrCircleInformation } from "react-icons/gr";
+import { BsCardChecklist, BsMap, BsTable, BsLockFill } from 'react-icons/bs';
+import { GrCircleInformation } from 'react-icons/gr';
 
-import ColorblindPreview from "./previews/colorblind-filter/ColorblindPreview";
-import { assemblePreviewUrl } from "./previews/assemblePreviewUrl";
+import ColorblindPreview from './previews/colorblind-filter/ColorblindPreview';
+import { assemblePreviewUrl } from './previews/assemblePreviewUrl';
 
 // Build up the root of the preview URL
 // const remoteURL = process.env.SANITY_STUDIO_PREVIEW_SERVER;
@@ -54,20 +54,22 @@ const hiddenDocTypes = (listItem) =>
     // "route",
     // "navigationMenu",
     // "post",
-    "siteSettings",
+    'siteSettings',
     // "author",
     // "category",
     // "laatsteOntwikkelingen",
     // "tile",
-    "veelgesteldeVragen",
-    "cijferVerantwoording",
-    "overDitDashboard",
-    "overRisicoNiveaus",
+    'veelgesteldeVragen',
+    'cijferVerantwoording',
+    'overDitDashboard',
+    'overRisicoNiveaus',
+    'roadmap',
+    'lockdown',
   ].includes(listItem.getId());
 
 export default () =>
   S.list()
-    .title("Content")
+    .title('Content')
     .items([
       // S.listItem()
       //   .title("Instellingen")
@@ -81,14 +83,44 @@ export default () =>
       //   ),
 
       S.listItem()
-        .title("Over dit dashboard")
-        .schemaType("overDitDashboard")
+        .title('Lockdown en Routekaart')
+        .icon(BsTable)
+        .child(
+          S.list()
+            .title('Lockdown en Routekaart')
+            .items([
+              S.listItem()
+                .title('Lockdown')
+                .schemaType('lockdown')
+                .icon(BsLockFill)
+                .child(
+                  S.editor()
+                    .schemaType('lockdown')
+                    .title('Lockdown')
+                    .documentId('lockdown')
+                ),
+              S.listItem()
+                .title('Routekaart')
+                .schemaType('roadmap')
+                .icon(BsTable)
+                .child(
+                  S.editor()
+                    .schemaType('roadmap')
+                    .title('Routekaart')
+                    .documentId('roadmap')
+                ),
+            ])
+        ),
+
+      S.listItem()
+        .title('Over dit dashboard')
+        .schemaType('overDitDashboard')
         .icon(GrCircleInformation)
         .child(
           S.editor()
-            .title("Over dit dashboard")
-            .schemaType("overDitDashboard")
-            .documentId("overDitDashboard")
+            .title('Over dit dashboard')
+            .schemaType('overDitDashboard')
+            .documentId('overDitDashboard')
             .views([
               S.view.form(),
               // S.view
@@ -107,14 +139,14 @@ export default () =>
         ),
 
       S.listItem()
-        .title("Over de risiconiveaus")
-        .schemaType("overRisicoNiveaus")
+        .title('Over de risiconiveaus')
+        .schemaType('overRisicoNiveaus')
         .icon(BsMap)
         .child(
           S.editor()
-            .title("Over de risiconiveaus")
-            .schemaType("overRisicoNiveaus")
-            .documentId("overRisicoNiveaus")
+            .title('Over de risiconiveaus')
+            .schemaType('overRisicoNiveaus')
+            .documentId('overRisicoNiveaus')
             .views([
               S.view.form(),
               // S.view
@@ -133,14 +165,14 @@ export default () =>
         ),
 
       S.listItem()
-        .title("Veelgestelde vragen")
-        .schemaType("veelgesteldeVragen")
+        .title('Veelgestelde vragen')
+        .schemaType('veelgesteldeVragen')
         .icon(MdQuestionAnswer)
         .child(
           S.editor()
-            .title("Veelgestelde vragen")
-            .schemaType("veelgesteldeVragen")
-            .documentId("veelgesteldeVragen")
+            .title('Veelgestelde vragen')
+            .schemaType('veelgesteldeVragen')
+            .documentId('veelgesteldeVragen')
             .views([
               S.view.form(),
               // S.view
@@ -159,14 +191,14 @@ export default () =>
         ),
 
       S.listItem()
-        .title("Cijferverantwoording")
-        .schemaType("cijferVerantwoording")
+        .title('Cijferverantwoording')
+        .schemaType('cijferVerantwoording')
         .icon(BsCardChecklist)
         .child(
           S.editor()
-            .title("Cijferverantwoording")
-            .schemaType("cijferVerantwoording")
-            .documentId("cijferVerantwoording")
+            .title('Cijferverantwoording')
+            .schemaType('cijferVerantwoording')
+            .documentId('cijferVerantwoording')
             .views([
               S.view.form(),
               // S.view
