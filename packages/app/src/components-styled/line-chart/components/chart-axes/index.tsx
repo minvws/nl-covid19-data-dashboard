@@ -6,8 +6,8 @@ import { Bar, Line } from '@visx/shape';
 import { Text } from '@visx/text';
 import { ScaleLinear, ScaleTime } from 'd3-scale';
 import { ComponentProps, memo, MouseEvent, ReactNode, TouchEvent } from 'react';
-import { MARKER_MIN_WIDTH } from './marker';
 import { colors } from '~/style/theme';
+import { MARKER_MIN_WIDTH } from '../marker';
 
 const NUM_TICKS = 3;
 
@@ -65,6 +65,8 @@ type ChartAxesProps = {
 
 type AnyTickFormatter = (value: any) => string;
 
+export type ChartBounds = { width: number; height: number };
+
 export const ChartAxes = memo(function ChartAxes({
   width,
   height,
@@ -79,7 +81,7 @@ export const ChartAxes = memo(function ChartAxes({
   componentCallback = () => undefined,
   uniqueId,
 }: ChartAxesProps) {
-  const bounds = {
+  const bounds: ChartBounds = {
     width: width - padding.left - padding.right,
     height: height - padding.top - padding.bottom,
   };
@@ -105,6 +107,17 @@ export const ChartAxes = memo(function ChartAxes({
   return (
     <svg width={width} height={height} role="img" aria-labelledby={uniqueId}>
       <Group left={padding.left} top={padding.top}>
+        {createComponent(
+          {
+            type: 'CustomBackground',
+            props: {
+              xScale,
+              yScale,
+              bounds,
+            },
+          },
+          componentCallback
+        )}
         {createComponent(
           {
             type: 'GridRows',
@@ -161,16 +174,7 @@ export const ChartAxes = memo(function ChartAxes({
         {benchmark && (
           <Group top={yScale(benchmark.value)}>
             <Text fontSize="14px" dy={-8} fill={defaultColors.benchmark}>
-              {benchmark.value}
-            </Text>
-            <Text
-              fontSize="14px"
-              dy={-8}
-              dx={bounds.width}
-              textAnchor="end"
-              fill={defaultColors.benchmark}
-            >
-              {benchmark.label}
+              {`${benchmark.label}: ${benchmark.value}`}
             </Text>
             <Line
               stroke={defaultColors.benchmark}
@@ -224,6 +228,8 @@ function createComponent(
       ) : (
         <AxisLeft {...callbackInfo.props} />
       );
+    default:
+      return result !== undefined ? result : null;
   }
 }
 
@@ -239,4 +245,12 @@ export type ComponentCallbackInfo =
   | {
       type: 'AxisLeft';
       props: ComponentProps<typeof AxisLeft>;
+    }
+  | {
+      type: 'CustomBackground';
+      props: CustomBackgroundProps;
     };
+
+export type CustomBackgroundProps = {
+  bounds: ChartBounds;
+} & ChartScales;

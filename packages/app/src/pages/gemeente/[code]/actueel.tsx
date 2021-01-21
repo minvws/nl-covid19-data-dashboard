@@ -1,3 +1,4 @@
+import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import GetestIcon from '~/assets/test.svg';
 import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
@@ -13,12 +14,16 @@ import { Heading } from '~/components-styled/typography';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
+import { RiskLevelIndicator } from '~/components-styled/risk-level-indicator';
+import { SEOHead } from '~/components/seoHead';
 import { FCWithLayout, getDefaultLayout } from '~/domain/layout/layout';
 import { Search } from '~/domain/topical/components/search';
 import { DataSitemap } from '~/domain/topical/data-sitemap';
 import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
+import { TopicalChoroplethContainer } from '~/domain/topical/topical-choropleth-container';
+import { TopicalTile } from '~/domain/topical/topical-tile';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
@@ -27,13 +32,8 @@ import {
   getText,
 } from '~/static-props/get-data';
 import { getSafetyRegionForMunicipalityCode } from '~/utils/getSafetyRegionForMunicipalityCode';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { SEOHead } from '~/components/seoHead';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { TopicalChoroplethContainer } from '~/domain/topical/topical-choropleth-container';
-import { TopicalTile } from '~/domain/topical/topical-tile';
-import css from '@styled-system/css';
-import { RiskLevelIndicator } from '~/components-styled/risk-level-indicator';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 export { getStaticPaths } from '~/static-paths/gm';
 import { assert } from '~/utils/assert';
 import { Text } from '~/components-styled/typography';

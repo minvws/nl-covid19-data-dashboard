@@ -1,3 +1,4 @@
+import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import GetestIcon from '~/assets/test.svg';
 import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
@@ -7,6 +8,7 @@ import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda
 import { MaxWidth } from '~/components-styled/max-width';
 import { MessageTile } from '~/components-styled/message-tile';
 import { QuickLinks } from '~/components-styled/quick-links';
+import { RiskLevelIndicator } from '~/components-styled/risk-level-indicator';
 import { TileList } from '~/components-styled/tile-list';
 import { Heading } from '~/components-styled/typography';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
@@ -19,6 +21,8 @@ import { DataSitemap } from '~/domain/topical/data-sitemap';
 import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
+import { TopicalChoroplethContainer } from '~/domain/topical/topical-choropleth-container';
+import { TopicalTile } from '~/domain/topical/topical-tile';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
@@ -26,16 +30,11 @@ import {
   getText,
   getVrData,
 } from '~/static-props/get-data';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-
-export { getStaticPaths } from '~/static-paths/vr';
-import { RiskLevelIndicator } from '~/components-styled/risk-level-indicator';
 import { assert } from '~/utils/assert';
-import { TopicalChoroplethContainer } from '~/domain/topical/topical-choropleth-container';
-import { TopicalTile } from '~/domain/topical/topical-tile';
-import css from '@styled-system/css';
+import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { colors } from '~/style/theme';
+export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
