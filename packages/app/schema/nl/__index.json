@@ -22,6 +22,7 @@
     "nursing_home",
     "proto_name",
     "reproduction",
+    "restrictions",
     "sewer",
     "tested_ggd_daily",
     "tested_ggd_average",
@@ -89,6 +90,9 @@
     },
     "disability_care": {
       "$ref": "disability_care.json"
+    },
+    "restrictions": {
+      "$ref": "restrictions.json"
     },
     "behavior": {
       "$ref": "behavior.json"
