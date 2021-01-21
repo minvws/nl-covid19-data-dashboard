@@ -6,6 +6,7 @@ import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
 import { MaxWidth } from '~/components-styled/max-width';
 import { MessageTile } from '~/components-styled/message-tile';
+import { colors } from '~/style/theme';
 import { QuickLinks } from '~/components-styled/quick-links';
 import { TileList } from '~/components-styled/tile-list';
 import { Heading } from '~/components-styled/typography';
@@ -219,7 +220,7 @@ const MunicipalityActueel: FCWithLayout<typeof getStaticProps> = (props) => {
                 <Box
                   borderTopWidth="1px"
                   borderTopStyle="solid"
-                  borderTopColor="#C4C4C4"
+                  borderTopColor={colors.silver}
                   mt={3}
                   mx={-4}
                 >

@@ -35,6 +35,7 @@ import { assert } from '~/utils/assert';
 import { TopicalChoroplethContainer } from '~/domain/topical/topical-choropleth-container';
 import { TopicalTile } from '~/domain/topical/topical-tile';
 import css from '@styled-system/css';
+import { colors } from '~/style/theme';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -191,7 +192,7 @@ const SafetyRegionActueel: FCWithLayout<typeof getStaticProps> = (props) => {
                 <Box
                   borderTopWidth="1px"
                   borderTopStyle="solid"
-                  borderTopColor="#C4C4C4"
+                  borderTopColor={colors.silver}
                   mt={3}
                   mx={-4}
                 >

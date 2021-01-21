@@ -67,8 +67,7 @@ export function RiskLevelIndicator(props: RiskLevelIndicatorProps) {
       </Box>
 
       <Text>
-        {`${description} `}
-        {`${escalationLevel}: `}
+        {`${description} ${escalationLevel}: `}
         <EscalationLevelTitle>
           {escalationTypes[escalationLevel].titel.toLowerCase()}
         </EscalationLevelTitle>

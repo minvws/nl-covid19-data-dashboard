@@ -7,6 +7,7 @@ import { Text } from '@visx/text';
 import { ScaleLinear, ScaleTime } from 'd3-scale';
 import { ComponentProps, memo, MouseEvent, ReactNode, TouchEvent } from 'react';
 import { MARKER_MIN_WIDTH } from './marker';
+import { colors } from '~/style/theme';
 
 const NUM_TICKS = 3;
 
@@ -25,7 +26,7 @@ export const defaultPadding: ChartPadding = {
 };
 
 const defaultColors = {
-  axis: '#C4C4C4',
+  axis: colors.silver,
   axisLabels: '#666666',
   benchmark: '#4f5458',
 };

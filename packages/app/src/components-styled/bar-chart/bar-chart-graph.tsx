@@ -75,7 +75,7 @@ export function BarChartGraph({
         left={spacing.left}
         top={spacing.top}
         numTicks={numTicks}
-        stroke={colors.border}
+        stroke={colors.silver}
       />
 
       {/* Axis line, match up with the vertical lines */}

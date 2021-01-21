@@ -9,6 +9,7 @@ import { Box } from '~/components-styled/base';
 import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
 import { MaxWidth } from '~/components-styled/max-width';
+import { colors } from '~/style/theme';
 import { MessageTile } from '~/components-styled/message-tile';
 import { NewsMessage } from '~/components-styled/news-message';
 import { QuickLinks } from '~/components-styled/quick-links';
@@ -217,7 +218,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                 <Box
                   borderTopWidth="1px"
                   borderTopStyle="solid"
-                  borderTopColor="#C4C4C4"
+                  borderTopColor={colors.silver}
                   mt={3}
                   mx={-4}
                 >
