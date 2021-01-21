@@ -27,7 +27,7 @@ export function useDynamicScale(
   const scale: ScaleLinear<number, number> = scaleLinear()
     .domain([scaleMin, scaleMax])
     .range([0, 100])
-    .nice(2);
+    .nice(10);
 
   return scale;
 }
