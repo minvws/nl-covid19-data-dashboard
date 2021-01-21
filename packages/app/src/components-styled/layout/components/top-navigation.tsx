@@ -79,7 +79,7 @@ function NavItem({
   isActive,
 }: {
   href: string;
-  children: React.ReactNode;
+  children: string;
   isActive?: boolean;
 }) {
   const { pathname } = useRouter();
@@ -87,7 +87,7 @@ function NavItem({
     <StyledListItem>
       <Link passHref href={href}>
         <NavLink isActive={isActive ?? pathname.startsWith(href)}>
-          <NavLinkSpan data-text={children?.toString()}>{children}</NavLinkSpan>
+          <NavLinkSpan data-text={children}>{children}</NavLinkSpan>
         </NavLink>
       </Link>
     </StyledListItem>
