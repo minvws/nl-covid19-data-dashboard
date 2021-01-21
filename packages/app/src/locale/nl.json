@@ -695,7 +695,7 @@
     "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
     "screen_reader_graph_content": "{{value}} opnames.",
     "barscale_titel": "Gemeld aantal ziekenhuisopnames per dag",
-    "extra_uitleg": "Aantal mensen uit deze veiligheidsregio met COVID-19 dat per dag in een ziekenhuis (exclusief IC) is opgenomen. Dit cijfer is het aantal ziekenhuisopnames dat op één dag gemeld zijn. Dit kunnen ook meldingen zijn van opnamen van eerdere dagen. Patiënten kunnen in een ziekenhuis elders in Nederland zijn opgenomen",
+    "extra_uitleg": "Aantal mensen uit deze veiligheidsregio met COVID-19 dat per dag in een ziekenhuis (exclusief IC) is opgenomen. Dit cijfer is het aantal ziekenhuisopnames dat op één dag gemeld is. Dit kunnen ook meldingen zijn van opnamen van eerdere dagen. Patiënten kunnen in een ziekenhuis elders in Nederland zijn opgenomen.",
     "map_titel": "Verdeling ziekenhuisopnames in {{safetyRegion}}",
     "map_toelichting": "Deze kaart laat zien in welke gemeenten of veiligheidsregio’s patiënten wonen die met COVID-19 op de verpleegafdeling van het ziekenhuis worden opgenomen. Let op: patiënten kunnen ook in een ander deel van Nederland worden opgenomen. De kaart laat dus niet zien hoeveel patiënten per ziekenhuis worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE. Tergooi, Ziekenhuis Amstelland en het Flevoziekenhuis delen hun COVID-19 ziekenhuisopnames op dit moment niet met Stichting NICE. Daardoor zijn de cijfers van sommige veiligheidsregio’s en gemeenten op de kaart lager dan eigenlijk het geval is.",
     "linechart_titel": "Ziekenhuisopnames over tijd",
@@ -1399,7 +1399,6 @@
   "infected_age_groups": {
     "title": "Verdeling naar leeftijd",
     "description": "De blauwe rechterbalken in deze grafiek laten zien tot welke leeftijdsgroep positief geteste personen behoren. De grijze linkerbalken tonen hoe groot elke leeftijdsgroep is ten opzichte van de hele Nederlandse bevolking. De blauwe en grijze balken laten samen zien of leeftijdsgroepen naar verhouding meer of minder positief geteste personen hebben. Bijvoorbeeld: van alle positief geteste personen is 10% een dertiger (blauwe balk) en van alle Nederlanders is 14% een dertiger (grijze balk). De leeftijdsgroep dertigers heeft in dit voorbeeld naar verhouding minder positief geteste personen. De grafiek wordt dagelijks bijgewerkt en gaat alleen over de meest recent gemelde gevallen.",
-    "example": "Bijvoorbeeld: Van alle positief geteste mensen is {{infectedPercentage}} tussen de {{ageGroupRange}} jaar. Van alle Nederlanders is {{ageGroupPercentage}} tussen de {{ageGroupRange}} jaar.",
     "graph": {
       "age_group_percentage_title": "Verdeling leeftijdsgroepen in Nederland",
       "age_group_percentage_tooltip": "van de bevolking is {{ageGroupRange}} jaar",
@@ -1410,7 +1409,8 @@
       "clipped_value_message": "Deze waarde is groter dan in de grafiek is weergegeven",
       "value_percentage_title": "Positieve testen per leeftijdsgroep",
       "value_percentage_tooltip": "van het aantal positief geteste mensen is {{ageGroupRange}} jaar"
-    }
+    },
+    "example": "Bijvoorbeeld: Van alle positief geteste mensen is {{infectedPercentage}} tussen de {{ageGroupRange}} jaar. Van alle Nederlanders is {{ageGroupPercentage}} tussen de {{ageGroupRange}} jaar."
   },
   "gehandicaptenzorg_besmette_locaties": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
