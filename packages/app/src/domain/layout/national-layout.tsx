@@ -68,7 +68,7 @@ function NationalLayout(props: NationalLayoutProps) {
   const breakpoints = useBreakpoints();
 
   const isMenuOpen =
-    (router.pathname === '/' && !('menu' in router.query)) ||
+    (router.pathname === '/landelijk' && !('menu' in router.query)) ||
     router.query.menu === '1';
 
   return (
