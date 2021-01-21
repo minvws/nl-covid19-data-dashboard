@@ -15,14 +15,18 @@ const iconComponentTemplate = (
   template.smart({ plugins: ['typescript'] }).ast`
         ${imports}
         ${'\n'}
-        export const ${componentName} = (props: React.SVGProps<SVGSVGElement>) => ${jsx};
+        function ${componentName} (props: React.SVGProps<SVGSVGElement>) {${jsx}};
+        export default ${componentName};
     `;
 
-const icons = glob.sync(`${ICONS_SOURCE_DIR}/**.svg`);
+const icons = glob.sync(`${ICONS_SOURCE_DIR}/**/*.svg`);
 
 for (const icon of icons) {
   const svg = fs.readFileSync(icon, 'utf8');
   const componentName = path.parse(icon).name;
+
+  console.log(componentName);
+
   const componentCode = svgr.sync(
     svg,
     {

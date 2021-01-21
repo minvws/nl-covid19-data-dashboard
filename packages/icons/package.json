@@ -9,8 +9,8 @@
   "unpkg": "dist/index.umd.js",
   "scripts": {
     "convert": "node scripts/generate-icons.js",
-    "build": "microbundle",
-    "dev": "microbundle watch"
+    "build": "node scripts/generate-icons.js && microbundle --jsx 'React.createElement'",
+    "dev": "microbundle watch --jsx 'React.createElement'"
   },
   "devDependencies": {
     "@svgr/core": "^5.5.0",

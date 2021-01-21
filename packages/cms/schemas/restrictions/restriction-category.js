@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Icon } from '../../components/icons/icon';
-import { restrictionIcons } from '../../components/icons/icons';
+import Icons from '@corona-dashboard/icons';
 
 export default {
   title: 'Restrictie Categorie',

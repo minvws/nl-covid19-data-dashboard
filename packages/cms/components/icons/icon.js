@@ -17,7 +17,7 @@ import {
 
 import PatchEvent, { set, unset } from 'part:@sanity/form-builder/patch-event';
 
-import { restrictionIcons } from './icons';
+import Icons from '@corona-dashboard/icons';
 
 const createPatchFrom = (value) =>
   PatchEvent.from(value === '' ? unset() : set(String(value)));
@@ -29,8 +29,14 @@ export function Icon(props) {
 
   const { type, value, onChange } = props;
 
+  // console.log({ value });
+
   // hide empty icons
-  var allIcons = Object.entries(restrictionIcons).filter((entry) => entry[1]);
+  var allIcons = Object.entries(Icons);
+
+  // console.log(Icons);
+
+  const TheIcon = Icons[value];
 
   return (
     <ThemeProvider theme={studioTheme}>
@@ -38,11 +44,13 @@ export function Icon(props) {
         <Heading as="div" size={0}>
           {type.title}
         </Heading>
-        {value === undefined ? <Text>Er is geen icoon geselecteerd</Text> :
+        {value === undefined ? (
+          <Text>Er is geen icoon geselecteerd</Text>
+        ) : (
           <Box>
-            <img src={restrictionIcons[value]} width="36" height="36" />
+            <TheIcon />
           </Box>
-        }
+        )}
 
         <Box>
           <Button onClick={onOpen} text="Verander icoon" />
@@ -57,17 +65,24 @@ export function Icon(props) {
         >
           <Box padding={4}>
             <Grid columns={[4, 6]} gap={[1, 1, 2, 3]}>
-              {allIcons.map((icon) => (
-                <Flex
-                  key={icon[0]}
-                  direction="column"
-                  align="center"
-                  onClick={(event) => onChange(createPatchFrom(icon[0]))}
-                >
-                  <img src={icon[1]} width="36" height="36" />
-                  <Radio checked={value === icon[0]} readOnly />
-                </Flex>
-              ))}
+              {allIcons.map((icon) => {
+                console.log(icon);
+                const Icon = Icons[icon[0]];
+                console.log(Icon);
+
+                return null;
+                return (
+                  <Flex
+                    key={icon[0]}
+                    direction="column"
+                    align="center"
+                    onClick={(event) => onChange(createPatchFrom(icon[0]))}
+                  >
+                    <Icon />
+                    <Radio checked={value === icon[0]} readOnly />
+                  </Flex>
+                );
+              })}
 
               <Flex
                 direction="column"

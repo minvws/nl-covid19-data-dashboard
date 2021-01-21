@@ -1,7 +1,7 @@
 import React from 'react';
 import Tabs from 'sanity-plugin-tabs';
 import { Icon } from '../../components/icons/icon';
-import { restrictionIcons } from '../../components/icons/icons';
+import Icons from '@corona-dashboard/icons';
 
 export default {
   title: 'Maatregel groep',

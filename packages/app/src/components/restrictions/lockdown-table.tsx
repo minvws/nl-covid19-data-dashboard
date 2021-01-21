@@ -4,7 +4,7 @@ import { Cell, Row, Table, TableBody } from '~/components-styled/table';
 import { InlineText } from '~/components-styled/typography';
 import { useEscalationColor } from '~/utils/use-escalation-color';
 import { useBreakpoints } from '~/utils/useBreakpoints';
-import { restrictionIcons } from './restriction-icons';
+import Icons from '@corona-dashboard/icons';
 import { LockdownData } from '~/types/cms';
 import { css } from '@styled-system/css';
 
