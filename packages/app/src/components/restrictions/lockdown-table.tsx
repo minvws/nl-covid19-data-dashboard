@@ -60,11 +60,13 @@ function MobileLockdownTable(props: LockdownTableData) {
                           key={restriction._key}
                           display="flex"
                           flexDirection="row"
-                          alignItems="center"
+                          alignItems="flex-start"
+                          mb="1"
                         >
                           <Box
                             as="span"
                             flexShrink={0}
+                            mr="2"
                             css={css({
                               svg: {
                                 display: 'block',
@@ -77,7 +79,7 @@ function MobileLockdownTable(props: LockdownTableData) {
                               <Box size={36} />
                             )}
                           </Box>
-                          <Box>{restriction.text}</Box>
+                          <Box mt="2">{restriction.text}</Box>
                         </Box>
                       );
                     })}
@@ -126,11 +128,13 @@ function DesktopLockdownTable(props: LockdownTableData) {
                         key={restriction._key}
                         display="flex"
                         flexDirection="row"
-                        alignItems="center"
+                        alignItems="flex-start"
+                        mb="1"
                       >
                         <Box
                           as="span"
                           flexShrink={0}
+                          mr="2"
                           css={css({
                             svg: {
                               display: 'block',
@@ -143,7 +147,7 @@ function DesktopLockdownTable(props: LockdownTableData) {
                             <Box size={36} />
                           )}
                         </Box>
-                        <Box as="span" ml={1}>
+                        <Box as="span" ml={1} mt={2}>
                           {restriction.text}
                         </Box>
                       </Box>

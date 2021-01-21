@@ -1,7 +1,7 @@
 import { GetStaticPropsContext } from 'next';
 import safetyRegions from '~/data/index';
 import municipalities from '~/data/municipalSearchData';
-import { getClient, localize } from '~/lib/sanity';
+import { client, localize } from '~/lib/sanity';
 import { targetLanguage } from '~/locale/index';
 import {
   Municipal,
@@ -48,7 +48,7 @@ export function createGetContent<T>(
       typeof queryOrQueryGetter === 'function'
         ? queryOrQueryGetter(context)
         : queryOrQueryGetter;
-    const rawContent = await getClient().fetch<T>(query);
+    const rawContent = await client.fetch<T>(query);
     const content = localize(rawContent, [targetLanguage, 'nl']);
 
     return { content };

@@ -14,7 +14,6 @@
     "nursing_home",
     "sewer",
     "sewer_per_installation",
-    "restrictions",
     "difference",
     "deceased_rivm",
     "deceased_cbs",
@@ -65,9 +64,6 @@
     },
     "disability_care": {
       "$ref": "disability_care.json"
-    },
-    "restrictions": {
-      "$ref": "restrictions.json"
     },
     "behavior": {
       "$ref": "behavior.json"

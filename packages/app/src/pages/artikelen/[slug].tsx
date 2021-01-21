@@ -1,8 +1,7 @@
-import { groq } from 'next-sanity';
 import { ArticleDetail } from '~/components-styled/article-detail';
 import { Box } from '~/components-styled/base';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
-import { getClient, localize, urlFor } from '~/lib/sanity';
+import { client, localize, urlFor } from '~/lib/sanity';
 import { targetLanguage } from '~/locale/index';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
@@ -12,12 +11,10 @@ import {
 import { Article, Block } from '~/types/cms';
 import { assert } from '~/utils/assert';
 
-const articlesQuery = groq`
-*[_type == 'article']
-`;
+const articlesQuery = `*[_type == 'article']`;
 
 export async function getStaticPaths() {
-  const articlesData = await getClient().fetch(articlesQuery);
+  const articlesData = await client.fetch(articlesQuery);
   const articles = localize<Article[]>(articlesData, [targetLanguage, 'nl']);
 
   const paths = articles.map((article) => ({
@@ -32,9 +29,7 @@ export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   createGetContent<Article>((context) => {
     assert(context?.params?.slug, 'Slug required to retrieve article');
-    return groq`
-  *[_type == 'article' && slug.current == '${context.params.slug}'][0]
-  `;
+    return `*[_type == 'article' && slug.current == '${context.params.slug}'][0]`;
   })
 );
 

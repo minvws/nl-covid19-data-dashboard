@@ -1,3 +1,4 @@
+import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import Maatregelen from '~/assets/maatregelen.svg';
 import { AnchorTile } from '~/components-styled/anchor-tile';
@@ -9,11 +10,11 @@ import { TileList } from '~/components-styled/tile-list';
 import { Heading } from '~/components-styled/typography';
 // import { EscalationLevel } from '~/components/restrictions/type';
 import { SEOHead } from '~/components/seoHead';
+import { Box } from '~/components-styled/base/box';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import siteText from '~/locale/index';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
-import { groq } from 'next-sanity';
 import { LockdownData, RoadmapData } from '~/types/cms';
 
 import {
@@ -32,15 +33,17 @@ type MaatregelenData = {
   roadmap?: RoadmapData;
 };
 
+const query = `
+{
+  'lockdown': *[_type == 'lockdown'][0],
+  // We will need the roadmap when lockdown is disabled in the CMS.
+  // 'roadmap': *[_type == 'roadmap'][0]
+}`;
+
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   getVrData,
-  createGetContent<MaatregelenData>(groq`
-  {
-    'lockdown': *[_type == 'lockdown'][0],
-    // We will need the roadmap when lockdown is disabled in the CMS.
-    // 'roadmap': *[_type == 'roadmap'][0]
-  }`)
+  createGetContent<MaatregelenData>(query)
 );
 
 const text = siteText.veiligheidsregio_maatregelen;
@@ -91,10 +94,18 @@ const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
 
         {showLockdown && (
           <KpiSection flexDirection="column">
-            <>
+            <Box
+              css={css({
+                'p:last-child': {
+                  margin: '0',
+                },
+              })}
+            >
               <Heading level={3}>{lockdown.message.title}</Heading>
-              <PortableText blocks={lockdown.message.description} />
-            </>
+              {lockdown.message.description ? (
+                <PortableText blocks={lockdown.message.description} />
+              ) : null}
+            </Box>
           </KpiSection>
         )}
 

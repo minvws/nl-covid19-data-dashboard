@@ -1,10 +1,7 @@
+import { PortableTextEntry } from '@sanity/block-content-to-react';
+
 export type CollapsibleList = {
-  content: {
-    _key: string;
-    _type: string;
-    content: unknown[] | null;
-    title: string | null;
-  };
+  content: PortableTextEntry | null;
   title: string;
 };
 
@@ -56,7 +53,7 @@ type RichContentBlock =
 interface Block {
   _key: string;
   _type: string;
-  children: unknown[];
+  children: PortableTextEntry[];
 }
 
 // @TODO more properties are needed
@@ -108,7 +105,7 @@ export type LockdownData = {
   showLockdown: boolean;
   message: {
     title: string;
-    description: unknown[] | null;
+    description: PortableTextEntry[] | null;
   };
   title: string;
 };
