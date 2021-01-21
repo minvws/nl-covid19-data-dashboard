@@ -1,5 +1,6 @@
 import { ChoroplethLegenda } from '~/components-styled/choropleth-legenda';
-import { ChoroplethThresholdsValue } from '~/components/choropleth/shared';
+import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
+import { DataProps } from '~/types/attributes';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { Box } from './base';
 import {
@@ -9,16 +10,6 @@ import {
 import { ChartTileContainer } from './chart-tile-container';
 import { MetadataProps } from './metadata';
 import { Heading, Text } from './typography';
-
-/**
- * We could use strong typing here for the values and also enforce the data
- * prop to be set. Might be a good idea.
- *
- * @TODO move to a shared location
- */
-interface DataProps {
-  'data-cy'?: string;
-}
 
 interface ChoroplethTileProps extends DataProps {
   title: string;
@@ -41,6 +32,7 @@ export function ChoroplethTile({
   legend,
   children,
   metadata,
+  ...dataProps
 }: ChoroplethTileProps) {
   const breakpoints = useBreakpoints();
   const legendaComponent = legend && (
@@ -54,6 +46,7 @@ export function ChoroplethTile({
         flexDirection={{ _: 'column', lg: 'row' }}
         m={0}
         as="figure"
+        {...dataProps}
       >
         <Box mb={3} flex={{ lg: 1 }} as="figcaption">
           <Box mb={[0, 2]}>

@@ -11,17 +11,17 @@
   "scripts": {
     "test": "yarn workspaces run test",
     "test:ci": "yarn workspaces run test:ci",
-    "clean": "rimraf .build-cache",
-    "build": "yarn workspaces run build",
-    "compile": "yarn workspaces run compile",
+    "clean": "rimraf .build-cache && yarn workspace @corona-dashboard/common clean",
+    "compile": "yarn workspace @corona-dashboard/common build && yarn workspaces run compile",
     "lint": "yarn workspaces run lint",
     "format": "yarn workspaces run format",
-    "dev": "yarn workspace @corona-dashboard/app dev",
+    "dev": "yarn workspace @corona-dashboard/common build && yarn workspace @corona-dashboard/app dev",
     "download": "yarn workspace @corona-dashboard/app download",
     "start": "yarn workspace @corona-dashboard/app start",
     "validate-json": "yarn workspace @corona-dashboard/cli validate-json",
     "validate-single": "yarn workspace @corona-dashboard/cli validate-single",
-    "e2e": "yarn workspace @corona-dashboard/app e2e"
+    "e2e": "yarn workspace @corona-dashboard/e2e e2e",
+    "e2e:ci": "yarn workspace @corona-dashboard/e2e e2e:ci"
   },
   "workspaces": {
     "packages": [

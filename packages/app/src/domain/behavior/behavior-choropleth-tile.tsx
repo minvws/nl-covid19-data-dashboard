@@ -5,10 +5,10 @@ import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { Select } from '~/components-styled/select';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
-import { SafetyRegionProperties } from '~/components/choropleth/shared';
+import { SafetyRegionProperties } from '@corona-dashboard/common';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
 import siteText from '~/locale/index';
-import { RegionsBehavior } from '~/types/data';
+import { RegionsBehavior } from '@corona-dashboard/common';
 import {
   BehaviorIdentifier,
   behaviorIdentifiers,
@@ -24,7 +24,11 @@ const unusedRules = [
   'wear_mask_public_transport',
 ];
 
-export function BehaviorChoroplethTile() {
+export function BehaviorChoroplethTile({
+  data,
+}: {
+  data: { behavior: RegionsBehavior[] };
+}) {
   const [type, setType] = useState<BehaviorType>('compliance');
   const [currentId, setCurrentId] = useState<BehaviorIdentifier>('wash_hands');
   const router = useRouter();
@@ -62,6 +66,7 @@ export function BehaviorChoroplethTile() {
       }}
     >
       <SafetyRegionChoropleth
+        data={data}
         metricName="behavior"
         metricProperty={metricValueName}
         tooltipContent={(context: RegionsBehavior & SafetyRegionProperties) => {

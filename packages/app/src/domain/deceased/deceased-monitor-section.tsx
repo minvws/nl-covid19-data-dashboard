@@ -7,7 +7,10 @@ import { ContentHeader } from '~/components-styled/content-header';
 import { Legenda } from '~/components-styled/legenda';
 import DeceasedMonitor from '~/domain/deceased/components/deceased-monitor-chart';
 import siteText from '~/locale/index';
-import { NationalDeceasedCbs, RegionalDeceasedCbs } from '~/types/data';
+import {
+  NationalDeceasedCbs,
+  RegionalDeceasedCbs,
+} from '@corona-dashboard/common';
 
 const text = siteText.section_sterftemonitor;
 
@@ -68,26 +71,26 @@ export function DeceasedMonitorSection({
           }}
         />
 
-      <Box pl='56px'>
-        <Legenda
-          items={[
-            {
-              label: text.deceased_monitor_chart_legenda_registered,
-              color: theme.colors.data.primary,
-              shape: 'line',
-            },
-            {
-              label: text.deceased_monitor_chart_legenda_expected,
-              color: '#5BADDB',
-              shape: 'line',
-            },
-            {
-              label: text.deceased_monitor_chart_legenda_expected_margin,
-              color: '#D0EDFF',
-              shape: 'square',
-            },
-          ]}
-        />
+        <Box pl="56px">
+          <Legenda
+            items={[
+              {
+                label: text.deceased_monitor_chart_legenda_registered,
+                color: theme.colors.data.primary,
+                shape: 'line',
+              },
+              {
+                label: text.deceased_monitor_chart_legenda_expected,
+                color: '#5BADDB',
+                shape: 'line',
+              },
+              {
+                label: text.deceased_monitor_chart_legenda_expected_margin,
+                color: '#D0EDFF',
+                shape: 'square',
+              },
+            ]}
+          />
         </Box>
       </ChartTile>
     </>

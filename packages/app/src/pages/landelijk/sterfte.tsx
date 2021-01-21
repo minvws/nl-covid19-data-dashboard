@@ -1,4 +1,6 @@
 import CoronaVirusIcon from '~/assets/coronavirus.svg';
+import { AgeDemographic } from '~/components-styled/age-demographic';
+import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
@@ -6,25 +8,28 @@ import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
-import { FCWithLayout } from '~/domain/layout/layout';
-import { getNationalLayout } from '~/domain/layout/national-layout';
 import { SEOHead } from '~/components/seoHead';
 import { DeceasedMonitorSection } from '~/domain/deceased/deceased-monitor-section';
+import { FCWithLayout } from '~/domain/layout/layout';
+import { getNationalLayout } from '~/domain/layout/national-layout';
 import siteText from '~/locale/index';
-import {
-  getNationalStaticProps,
-  NationalPageProps,
-} from '~/static-props/nl-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import { getLastGeneratedDate, getNlData } from '~/static-props/get-data';
 
 const text = siteText.sterfte;
 
-const DeceasedNationalPage: FCWithLayout<NationalPageProps> = (props) => {
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getNlData
+);
+
+const DeceasedNationalPage: FCWithLayout<typeof getStaticProps> = (props) => {
   const dataCbs = props.data.deceased_cbs;
   const dataRivm = props.data.deceased_rivm;
+  const dataDeceasedPerAgeGroup = props.data.deceased_rivm_per_age_group;
 
   return (
     <>
-      {' '}
       <SEOHead
         title={text.metadata.title}
         description={text.metadata.description}
@@ -80,7 +85,6 @@ const DeceasedNationalPage: FCWithLayout<NationalPageProps> = (props) => {
 
         <LineChartTile
           timeframeOptions={['all', '5weeks']}
-          timeframeInitialValue="all"
           title={text.section_deceased_rivm.line_chart_covid_daily_title}
           description={
             text.section_deceased_rivm.line_chart_covid_daily_description
@@ -94,6 +98,22 @@ const DeceasedNationalPage: FCWithLayout<NationalPageProps> = (props) => {
           metadata={{ source: text.section_deceased_rivm.bronnen.rivm }}
         />
 
+        <ChartTile
+          title={siteText.deceased_age_groups.title}
+          description={siteText.deceased_age_groups.description}
+          metadata={{
+            date: dataRivm.last_value.date_unix,
+            source: siteText.deceased_age_groups.bronnen.rivm,
+          }}
+        >
+          <AgeDemographic
+            data={dataDeceasedPerAgeGroup}
+            metricProperty="covid_percentage"
+            displayMaxPercentage={45}
+            text={siteText.deceased_age_groups.graph}
+          />
+        </ChartTile>
+
         <DeceasedMonitorSection data={dataCbs} />
       </TileList>
     </>
@@ -101,7 +121,5 @@ const DeceasedNationalPage: FCWithLayout<NationalPageProps> = (props) => {
 };
 
 DeceasedNationalPage.getLayout = getNationalLayout;
-
-export const getStaticProps = getNationalStaticProps;
 
 export default DeceasedNationalPage;

@@ -2,6 +2,7 @@ import BasisregelsAfstand from '~/assets/restrictions/basisregels_afstand.svg';
 import BasisregelsThuisBlijven from '~/assets/restrictions/basisregels_blijf-thuis.svg';
 import BasisregelsDrukte from '~/assets/restrictions/basisregels_drukte.svg';
 import BasisregelsElleboog from '~/assets/restrictions/basisregels_elleboog.svg';
+import BasisregelsGeenBezoek from '~/assets/restrictions/basisregels_geen-bezoek.svg';
 import BasisregelsHandenWassen from '~/assets/restrictions/basisregels_handenwassen.svg';
 import BasisregelsMondkapje from '~/assets/restrictions/basisregels_mondkapje.svg';
 import BasisregelsTesten from '~/assets/restrictions/basisregels_testen.svg';
@@ -20,8 +21,13 @@ import SportWedstrijden from '~/assets/restrictions/sport_wedstrijden.svg';
 import Thuis from '~/assets/restrictions/thuis.svg';
 import VervoerReizenBlijfThuis from '~/assets/restrictions/vervoer-en-reizen_blijfthuis.svg';
 import VervoerReizenBuitenland from '~/assets/restrictions/vervoer-en-reizen_buitenland.svg';
+import VervoerReizenOV from '~/assets/restrictions/vervoer-en-reizen_ov.svg';
 import WinkelsAlcohol from '~/assets/restrictions/winkelen-en-boodschappen_alcohol.svg';
 import WinkelsBoodschappen from '~/assets/restrictions/winkelen-en-boodschappen_open.svg';
+
+import Avondklok from '~/assets/restrictions/avondklok.svg';
+import Lopend from '~/assets/restrictions/lopend.svg';
+import Bezoek from '~/assets/restrictions/bezoek.svg';
 
 export const restrictionIcons: Record<string, any> = {
   '41_er_op_uit_1': null,
@@ -49,6 +55,7 @@ export const restrictionIcons: Record<string, any> = {
   '0_algemeen_23': BasisregelsMondkapje,
   '0_algemeen_42': BasisregelsThuisBlijven,
   '0_algemeen_43': BasisregelsTesten,
+  '0_algemeen_44': BasisregelsGeenBezoek,
   '41_bezoek_24': Thuis,
   '41_er_op_uit_25': Groepen,
   '41_samenkomst_26': PubliekeLocaties,
@@ -64,7 +71,11 @@ export const restrictionIcons: Record<string, any> = {
   '41_sport_36': SportWedstrijden,
   '41_ov_37': VervoerReizenBlijfThuis,
   '41_ov_38': VervoerReizenBuitenland,
+  '41_ov_45': VervoerReizenOV,
   '41_onderwijs_39': OnderwijsOpAfstand,
   '41_onderwijs_40': OnderwijsKinderopvang,
   '41_onderwijs_41': OnderwijsNoodopvang,
+  avondklok: Avondklok,
+  bezoek: Bezoek,
+  lopend: Lopend,
 };

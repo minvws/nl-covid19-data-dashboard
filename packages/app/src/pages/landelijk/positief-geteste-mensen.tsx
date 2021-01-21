@@ -3,6 +3,10 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Afname from '~/assets/afname.svg';
 import Getest from '~/assets/test.svg';
+import {
+  AgeDemographic,
+  formatAgeGroupRange,
+} from '~/components-styled/age-demographic';
 import { Anchor } from '~/components-styled/anchor';
 import { Box } from '~/components-styled/base';
 import { RegionControlOption } from '~/components-styled/chart-region-controls';
@@ -24,44 +28,39 @@ import { createSelectRegionHandler } from '~/components/choropleth/select-handle
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
 import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/create-positive-tested-people-regional-tooltip';
 import { SEOHead } from '~/components/seoHead';
-import { AgeDemographic } from '~/domain/infected-people/age-demographic/age-demographic';
-import { formatAgeGroupRange } from '~/domain/infected-people/age-demographic/age-demographic-chart';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
-  getNationalStaticProps,
-  NationalPageProps,
-} from '~/static-props/nl-data';
+  createGetChoroplethData,
+  getLastGeneratedDate,
+  getNlData,
+  getText,
+} from '~/static-props/get-data';
 import { colors } from '~/style/theme';
-import { NationalTestedPerAgeGroup } from '~/types/data.d';
+import { NationalTestedPerAgeGroup } from '@corona-dashboard/common';
 import { assert } from '~/utils/assert';
-import { formatDateFromSeconds } from '~/utils/formatDate';
+import {
+  formatDateFromMilliseconds,
+  formatDateFromSeconds,
+} from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { formatDateFromMilliseconds } from '~/utils/formatDate';
 
-/* Retrieves certain age demographic data to be used in the example text. */
-function getAgeDemographicExampleData(data: NationalTestedPerAgeGroup) {
-  const ageGroupRange = '20-29';
-  const value = data.values.find((x) => x.age_group_range === ageGroupRange);
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getText,
+  getNlData,
+  createGetChoroplethData({
+    gm: ({ tested_overall }) => ({ tested_overall }),
+    vr: ({ tested_overall }) => ({ tested_overall }),
+  })
+);
 
-  assert(
-    value,
-    `NationalTestedPerAgeGroup should contain a value for age group ${ageGroupRange}`
-  );
-
-  return {
-    ageGroupRange: formatAgeGroupRange(ageGroupRange),
-    ageGroupPercentage: `${formatPercentage(
-      value.age_group_percentage * 100
-    )}%`,
-    infectedPercentage: `${formatPercentage(value.infected_percentage * 100)}%`,
-  };
-}
-
-const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
+const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
   data,
+  choropleth,
   text: siteText,
 }) => {
   const text = siteText.positief_geteste_personen;
@@ -165,7 +164,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
         </TwoKpiSection>
 
         <ChoroplethTile
-          data-cy="chloropleths"
+          data-cy="choropleths"
           title={text.map_titel}
           metadata={{
             date: dataInfectedDelta.last_value.date_unix,
@@ -192,6 +191,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
            */}
           {selectedMap === 'municipal' && (
             <MunicipalityChoropleth
+              data={choropleth.gm}
               metricName="tested_overall"
               metricProperty="infected_per_100k"
               tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
@@ -202,6 +202,7 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
           )}
           {selectedMap === 'region' && (
             <SafetyRegionChoropleth
+              data={choropleth.vr}
               metricName="tested_overall"
               metricProperty="infected_per_100k"
               tooltipContent={createPositiveTestedPeopleRegionalTooltip(
@@ -272,7 +273,11 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
             source: text.bronnen.rivm,
           }}
         >
-          <AgeDemographic data={data.tested_per_age_group} />
+          <AgeDemographic
+            data={data.tested_per_age_group}
+            metricProperty="infected_percentage"
+            text={siteText.infected_age_groups.graph}
+          />
         </ChartTile>
 
         <ContentHeader
@@ -308,9 +313,6 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
               data-cy="ggd_tested_total"
               absolute={dataGgdAverageLastValue.tested_total}
               difference={data.difference.tested_ggd_average__tested_total}
-              differenceStaticTimespan={
-                siteText.toe_en_afname.tijdverloop.hiervoor
-              }
             />
             <Text>{ggdText.totaal_getest_week_uitleg}</Text>
           </KpiTile>
@@ -329,9 +331,6 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
               percentage={dataGgdAverageLastValue.infected_percentage}
               difference={
                 data.difference.tested_ggd_average__infected_percentage
-              }
-              differenceStaticTimespan={
-                siteText.toe_en_afname.tijdverloop.hiervoor
               }
             />
             <Text>{ggdText.positief_getest_week_uitleg}</Text>
@@ -436,6 +435,23 @@ const PositivelyTestedPeople: FCWithLayout<NationalPageProps> = ({
 
 PositivelyTestedPeople.getLayout = getNationalLayout;
 
-export const getStaticProps = getNationalStaticProps;
-
 export default PositivelyTestedPeople;
+
+/* Retrieves certain age demographic data to be used in the example text. */
+function getAgeDemographicExampleData(data: NationalTestedPerAgeGroup) {
+  const ageGroupRange = '20-29';
+  const value = data.values.find((x) => x.age_group_range === ageGroupRange);
+
+  assert(
+    value,
+    `NationalTestedPerAgeGroup should contain a value for age group ${ageGroupRange}`
+  );
+
+  return {
+    ageGroupRange: formatAgeGroupRange(ageGroupRange),
+    ageGroupPercentage: `${formatPercentage(
+      value.age_group_percentage * 100
+    )}%`,
+    infectedPercentage: `${formatPercentage(value.infected_percentage * 100)}%`,
+  };
+}

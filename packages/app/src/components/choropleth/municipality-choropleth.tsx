@@ -2,6 +2,8 @@ import css from '@styled-system/css';
 import { Feature, MultiPolygon } from 'geojson';
 import { ReactNode, useCallback } from 'react';
 import { AspectRatio } from '~/components-styled/aspect-ratio';
+import { DataProps } from '~/types/attributes';
+import { Municipalities } from '@corona-dashboard/common';
 import { Choropleth } from './choropleth';
 import {
   useChartDimensions,
@@ -14,17 +16,21 @@ import { useChoroplethDataDescription } from './hooks/use-choropleth-data-descri
 import { getDataThresholds } from './legenda/utils';
 import { municipalThresholds } from './municipal-thresholds';
 import { Path } from './path';
-import { MunicipalitiesMetricName, MunicipalityProperties } from './shared';
+import {
+  MunicipalitiesMetricName,
+  MunicipalityProperties,
+} from '@corona-dashboard/common';
 import { countryGeo, municipalGeo, regionGeo } from './topology';
 
-type MunicipalityChoroplethProps<T> = {
-  metricName: MunicipalitiesMetricName;
+type MunicipalityChoroplethProps<T, K extends MunicipalitiesMetricName> = {
+  data: Pick<Municipalities, K>;
+  metricName: K;
   metricProperty: string;
   selected?: string;
   highlightSelection?: boolean;
   onSelect?: (context: MunicipalityProperties) => void;
   tooltipContent?: (context: MunicipalityProperties & T) => ReactNode;
-};
+} & DataProps;
 
 /**
  * This component renders a map of the Netherlands with the outlines of all the municipalities which
@@ -39,10 +45,11 @@ type MunicipalityChoroplethProps<T> = {
  *
  * @param props
  */
-export function MunicipalityChoropleth<T>(
-  props: MunicipalityChoroplethProps<T>
+export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
+  props: MunicipalityChoroplethProps<T, K>
 ) {
   const {
+    data,
     selected,
     metricName,
     metricProperty,
@@ -59,7 +66,8 @@ export function MunicipalityChoropleth<T>(
   const { getChoroplethValue, hasData, values } = useMunicipalityData(
     municipalGeo,
     metricName,
-    metricProperty
+    metricProperty,
+    data
   );
 
   const safetyRegionMunicipalCodes = useRegionMunicipalities(selected);
@@ -98,7 +106,6 @@ export function MunicipalityChoropleth<T>(
       return (
         <Path
           key={gemcode}
-          id={gemcode}
           d={path}
           fill={hasData && fill ? fill : '#fff'}
           stroke={

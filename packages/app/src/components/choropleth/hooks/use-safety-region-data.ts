@@ -1,14 +1,13 @@
 import { set } from 'lodash';
 import { useMemo } from 'react';
-import useSWR from 'swr';
-import { Regions } from '~/types/data';
+import { Regions } from '@corona-dashboard/common';
 import { assert } from '~/utils/assert';
 import {
   Dictionary,
   RegionGeoJSON,
   RegionsMetricName,
   SafetyRegionProperties,
-} from '../shared';
+} from '@corona-dashboard/common';
 import { DataValue } from './use-municipality-data';
 
 interface RegionMetricValue extends SafetyRegionProperties {
@@ -43,13 +42,12 @@ type UseRegionDataReturnValue = {
  * @param metricProperty
  */
 
-export function useSafetyRegionData(
+export function useSafetyRegionData<K extends RegionsMetricName>(
   featureCollection: RegionGeoJSON,
-  metricName: RegionsMetricName,
-  metricProperty: string
+  metricName: K,
+  metricProperty: string,
+  data: Pick<Regions, K>
 ): UseRegionDataReturnValue {
-  const { data } = useSWR<Regions>('/json/VR_COLLECTION.json');
-
   return useMemo(() => {
     if (!data) {
       return {

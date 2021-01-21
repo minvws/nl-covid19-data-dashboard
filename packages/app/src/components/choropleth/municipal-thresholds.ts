@@ -1,5 +1,5 @@
 import { colors } from '~/style/theme';
-import { ChoroplethThresholdsValue } from './shared';
+import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
 
 const positiveTestedThresholds: ChoroplethThresholdsValue[] = [
   {
@@ -86,6 +86,8 @@ export const municipalThresholds = {
   tested_overall: {
     infected_per_100k: positiveTestedThresholds,
   },
-  hospital_nice: { admissions_moving_average: hospitalAdmissionsThresholds },
+  hospital_nice: {
+    admissions_on_date_of_reporting: hospitalAdmissionsThresholds,
+  },
   elderly_at_home: elderlyAtHomeThresholds,
 } as const;

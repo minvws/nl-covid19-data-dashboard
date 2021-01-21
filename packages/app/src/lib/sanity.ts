@@ -1,11 +1,8 @@
 // lib/sanity.ts
-import {
-  createClient,
-  createImageUrlBuilder,
-  createPortableTextComponent,
-  createPreviewSubscriptionHook,
-  createCurrentUserHook,
-} from 'next-sanity';
+import sanityClient from '@sanity/client';
+import BlockContent from '@sanity/block-content-to-react';
+
+import { TLanguageKey } from '~/locale';
 
 const config = {
   /**
@@ -25,57 +22,33 @@ const config = {
    **/
 };
 
-/**
- * Set up a helper function for generating Image URLs with only the asset reference data in your documents.
- * Read more: https://www.sanity.io/docs/image-url
- **/
-export const urlFor = (source: any) =>
-  createImageUrlBuilder(config).image(source);
-
-// Set up the live preview subsscription hook
-export const usePreviewSubscription = createPreviewSubscriptionHook(config);
-
 // Set up Portable Text serialization
-export const PortableText = createPortableTextComponent({
-  ...config,
-  // Serializers passed to @sanity/block-content-to-react
-  // (https://github.com/sanity-io/block-content-to-react)
-  serializers: {},
-});
+export const PortableText = BlockContent;
 
 // Set up the client for fetching data in the getProps page functions
-export const sanityClient = createClient(config);
-// Set up a preview client with serverless authentication for drafts
-export const previewClient = createClient({
-  ...config,
-  useCdn: false,
-  token: process.env.SANITY_API_TOKEN,
-});
+export const client = sanityClient(config);
 
-// Helper function for easily switching between normal client and preview client
-export const getClient = (usePreview: boolean) =>
-  usePreview ? previewClient : sanityClient;
+export function localize<T>(value: T, languages: TLanguageKey[]): T {
+  const anyValue = value as any;
 
-// Helper function for using the current logged in user account
-export const useCurrentUser = createCurrentUserHook(config);
-
-export function localize(value: any, languages: any): any {
   if (Array.isArray(value)) {
-    return value.map((v) => localize(v, languages));
-  } else if (typeof value == 'object') {
-    if (/^locale[A-Z]/.test(value._type)) {
-      const language = languages.find((lang: string) => value[lang]);
+    return (value.map((v) => localize(v, languages)) as unknown) as T;
+  }
 
-      // React will trip if you return undefined, which could happen
-      // if you don't fill in anything in the CMS
-      return value[language] === undefined ? null : value[language];
+  if (typeof value == 'object' && value !== null) {
+    if (/^locale[A-Z]/.test(anyValue._type)) {
+      const language = languages.find((lang: string) => (value as any)[lang]);
+
+      return (language && anyValue[language]) ?? null;
     }
 
-    return Object.keys(value).reduce((result, key) => {
-      // @ts-ignore
-      result[key] = localize(value[key], languages);
-      return result;
-    }, {});
+    return Object.keys(anyValue).reduce(
+      (result, key) => ({
+        ...result,
+        [key]: localize(anyValue[key], languages),
+      }),
+      {} as T
+    );
   }
   return value;
 }

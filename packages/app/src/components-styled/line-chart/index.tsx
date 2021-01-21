@@ -6,6 +6,13 @@ import { ScaleTime } from 'd3-scale';
 import { useCallback, useMemo, useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
+import {
+  ChartAxes,
+  ChartPadding,
+  ChartScales,
+  ComponentCallbackFunction,
+  defaultPadding,
+} from '~/components-styled/line-chart/components';
 import { Text } from '~/components-styled/typography';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
 import text from '~/locale/index';
@@ -16,17 +23,8 @@ import {
 } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { TimeframeOption } from '~/utils/timeframe';
-import { Legenda } from '../legenda';
-import {
-  ChartAxes,
-  ChartPadding,
-  ChartScales,
-  defaultPadding,
-  HoverPoint,
-  Marker,
-  Tooltip,
-  Trend,
-} from './components';
+import { Legenda, LegendItem, LegendShape } from '../legenda';
+import { HoverPoint, Marker, Tooltip, Trend } from './components';
 import {
   calculateYMax,
   getTrendData,
@@ -49,6 +47,7 @@ export type LineConfig<T extends Value> = {
   color?: string;
   style?: 'solid' | 'dashed';
   legendLabel?: string;
+  legendShape?: LegendShape;
 };
 
 export type LineChartProps<T extends Value> = {
@@ -68,6 +67,9 @@ export type LineChartProps<T extends Value> = {
   formatMarkerLabel?: (value: T) => string;
   padding?: Partial<ChartPadding>;
   showLegend?: boolean;
+  legendItems?: LegendItem[];
+  componentCallback?: ComponentCallbackFunction;
+  uniqueId?: string;
 };
 
 export function LineChart<T extends Value>({
@@ -86,6 +88,15 @@ export function LineChart<T extends Value>({
   formatMarkerLabel,
   padding: overridePadding,
   showLegend = false,
+  legendItems = showLegend
+    ? linesConfig.map((x) => ({
+        color: x.color ?? colors.data.primary,
+        label: x.legendLabel ?? '',
+        shape: x.legendShape ?? 'line',
+      }))
+    : undefined,
+  componentCallback,
+  uniqueId,
 }: LineChartProps<T>) {
   const {
     tooltipData,
@@ -259,18 +270,16 @@ export function LineChart<T extends Value>({
     (x: ChartScales) => (
       <>
         {trendsList.map((trend, index) => (
-          <>
-            <Trend
-              key={index}
-              trend={trend}
-              type={hideFill ? 'line' : 'area'}
-              style={linesConfig[index].style}
-              xScale={x.xScale}
-              yScale={x.yScale}
-              color={linesConfig[index].color}
-              onHover={handleHover}
-            />
-          </>
+          <Trend
+            key={index}
+            trend={trend}
+            type={hideFill ? 'line' : 'area'}
+            style={linesConfig[index].style}
+            xScale={x.xScale}
+            yScale={x.yScale}
+            color={linesConfig[index].color}
+            onHover={handleHover}
+          />
         ))}
       </>
     ),
@@ -304,6 +313,8 @@ export function LineChart<T extends Value>({
           formatXAxis={formatXAxis}
           onHover={handleHover}
           benchmark={benchmark}
+          componentCallback={componentCallback}
+          uniqueId={uniqueId}
         >
           {renderAxes}
         </ChartAxes>
@@ -328,15 +339,9 @@ export function LineChart<T extends Value>({
           />
         )}
 
-        {showLegend && (
+        {showLegend && legendItems && (
           <Box pl={`${padding.left}px`}>
-            <Legenda
-              items={linesConfig.map((x) => ({
-                color: x.color ?? colors.data.primary,
-                label: x.legendLabel ?? '',
-                shape: 'line',
-              }))}
-            />
+            <Legenda items={legendItems} />
           </Box>
         )}
       </Box>
@@ -357,7 +362,7 @@ function formatDefaultTooltip<T extends Value>(
     return (
       <>
         <Text as="span" fontWeight="bold">
-          {`${formatDateFromMilliseconds(value.__date.getTime())}: `}
+          {formatDateFromMilliseconds(value.__date.getTime()) + ': '}
         </Text>
         {isPercentage
           ? `${formatPercentage(value.__value)}%`
