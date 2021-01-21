@@ -1,10 +1,10 @@
 import css from '@styled-system/css';
 import React from 'react';
+import styled from 'styled-components';
 import { Box } from '~/components-styled/base';
 import { MaxWidth } from '~/components-styled/max-width';
 import text from '~/locale/index';
 import { Link } from '~/utils/link';
-import { Text } from '../typography';
 import { LanguageSwitcher } from './components/language-switcher';
 import { Logo } from './components/logo';
 import { TopNavigation } from './components/top-navigation';
@@ -28,14 +28,7 @@ export function AppHeader() {
         >
           <Box py={[2, 2, 2, 3]} lineHeight={'1em'} fontWeight="bold">
             <Link href="/" passHref>
-              <Text
-                as="a"
-                color="inherit"
-                fontSize={3}
-                css={css({ textDecoration: 'none' })}
-              >
-                {text.header.title}
-              </Text>
+              <TextLogoLink>{text.header.title}</TextLogoLink>
             </Link>
           </Box>
 
@@ -45,3 +38,12 @@ export function AppHeader() {
     </Box>
   );
 }
+
+const TextLogoLink = styled.a(
+  css({
+    color: 'white',
+    fontSize: 3,
+    textDecoration: 'none',
+    lineHeight: 2,
+  })
+);
