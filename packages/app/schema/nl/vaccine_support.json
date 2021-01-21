@@ -20,7 +20,10 @@
       "title": "nl_vaccine_support_value",
       "type": "object",
       "properties": {
-        "percentage": {
+        "percentage_in_favor": {
+          "type": "number"
+        },
+        "percentage_already_vaccinated": {
           "type": "number"
         },
         "date_start_unix": {
@@ -34,7 +37,8 @@
         }
       },
       "required": [
-        "percentage",
+        "percentage_in_favor",
+        "percentage_already_vaccinated",
         "date_start_unix",
         "date_end_unix",
         "date_of_insertion_unix"
