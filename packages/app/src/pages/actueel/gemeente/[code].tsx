@@ -9,18 +9,17 @@ import { MaxWidth } from '~/components-styled/max-width';
 import { MessageTile } from '~/components-styled/message-tile';
 import { QuickLinks } from '~/components-styled/quick-links';
 import { TileList } from '~/components-styled/tile-list';
-import { Heading } from '~/components-styled/typography';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
 import { SEOHead } from '~/components/seoHead';
 import { FCWithLayout, getDefaultLayout } from '~/domain/layout/layout';
-import { Search } from '~/domain/topical/components/search';
 import { DataSitemap } from '~/domain/topical/data-sitemap';
 import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
 import { TopicalChoroplethContainer } from '~/domain/topical/topical-choropleth-container';
+import { TopicalPageHeader } from '~/domain/topical/topical-page-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
@@ -73,13 +72,12 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
               message={siteText.regionaal_index.belangrijk_bericht}
             />
 
-            <Search initialValue={municipalityName} />
-
-            <Heading level={1} fontWeight="normal">
-              {replaceComponentsInText(text.title, {
+            <TopicalPageHeader
+              lastGenerated={Number(props.lastGenerated)}
+              title={replaceComponentsInText(text.title, {
                 municipalityName: <strong>{municipalityName}</strong>,
               })}
-            </Heading>
+            />
 
             <MiniTrendTileLayout>
               <MiniTrendTile

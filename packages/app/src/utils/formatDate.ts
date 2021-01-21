@@ -40,6 +40,7 @@ interface DateTimeFormatOptions extends Intl.DateTimeFormatOptions {
 }
 
 type formatStyle =
+  | 'time'
   | 'long'
   | 'medium'
   | 'short'
@@ -47,6 +48,11 @@ type formatStyle =
   | 'iso'
   | 'axis'
   | 'weekday-medium';
+
+const Time = new Intl.DateTimeFormat(locale, {
+  timeStyle: 'short',
+  timeZone: 'Europe/Amsterdam',
+} as DateTimeFormatOptions);
 
 const Long = new Intl.DateTimeFormat(locale, {
   dateStyle: 'long',
@@ -105,7 +111,7 @@ export function formatDateFromMilliseconds(
   style?: formatStyle
 ): string {
   assert(!isNaN(milliseconds), 'milliseconds is NaN');
-
+  if (style === 'time') return Time.format(milliseconds); // '09:24'
   if (style === 'iso') return new Date(milliseconds).toISOString(); // '2020-07-23T10:01:16.000Z'
   if (style === 'long') return Long.format(milliseconds); // '23 juli 2020 om 12:01'
   if (style === 'medium') return Medium.format(milliseconds); // '23 juli 2020'
