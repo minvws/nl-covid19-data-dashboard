@@ -50,7 +50,13 @@ export function TopNavigation() {
         >
           <MaxWidth>
             <NavList>
-              <NavItem href="/" isActive={router.pathname === '/'}>
+              <NavItem
+                href="/"
+                isActive={
+                  router.pathname === '/' ||
+                  router.pathname.startsWith('/actueel')
+                }
+              >
                 {text.nav.links.actueel}
               </NavItem>
               <NavItem
