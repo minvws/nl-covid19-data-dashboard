@@ -620,6 +620,10 @@
     "date_yesterday": "yesterday",
     "date_day_before_yesterday": "the day before yesterday"
   },
+  "common_actueel": {
+    "terug_naar_landelijk": "Terug naar landelijke situtatie",
+    "laatst_bijgewerkt": "Laatst bijgewerkt: {{date}} om {{time}}"
+  },
   "nationaal_actueel": {
     "title": "Actuele situatie in {{the_netherlands}}",
     "the_netherlands": "The Netherlands",
