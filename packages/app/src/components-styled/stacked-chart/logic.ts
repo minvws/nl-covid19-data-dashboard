@@ -1,4 +1,4 @@
-import { pick } from 'lodash';
+import { omit, pick } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { assert } from '~/utils/assert';
 import { getDaysForTimeframe, TimeframeOption } from '~/utils/timeframe';
@@ -6,8 +6,8 @@ import { getDaysForTimeframe, TimeframeOption } from '~/utils/timeframe';
 // export type Value = DailyValue | WeeklyValue;
 export type Value = DateValue | DateSpanValue;
 
-// This type limits the allowed property names to those with a number type,
-// so its like keyof T, but filtered down to only the appropriate properties.
+// This type limits the allowed property names to those with a number type, so
+// its like keyof T, but filtered down to only the appropriate properties.
 export type NumberProperty<T extends Value> = {
   [K in keyof T]: T[K] extends number | null ? K : never;
 }[keyof T];
@@ -70,9 +70,12 @@ export function isDateSpanSeries(series: Value[]): series is DateSpanValue[] {
  * different trends in key/value pairs. This function sums all values together
  * for each point and then returns the highest sum for all points.
  */
-export function calculateYMaxStacked(series: SeriesPoint[]) {
-  function sumTrendPointValue(point: SeriesPoint) {
-    return Object.values(point.__value).reduce((sum, v) => sum + v, 0);
+export function calculateSeriesMaximum(series: SeriesValue[]) {
+  function sumTrendPointValue(point: SeriesValue) {
+    return Object.values(omit(point, ['__date'])).reduce(
+      (sum, v) => sum + v,
+      0
+    );
   }
 
   const stackedSumValues = series.map(sumTrendPointValue);
@@ -114,30 +117,34 @@ function getTimeframeBoundaryUnix(timeframe: TimeframeOption) {
   return Date.now() / 1000 - days * oneDayInSeconds;
 }
 
-// export type TrendValue = {
-//   __date: Date;
-//   __value: number;
-// };
-
-export type SeriesPoint = {
+/**
+ * The SeriesValue is a generic container for the chart data. The original data
+ * that is passed in gets converted into this object for each position in the
+ * time series. The passed in config propertyName keys are used to pick the data
+ * that appears here.
+ *
+ * A special __date property is reserved for whatever timestamp is found in the
+ * data. This can be a daily timestamp or date span.
+ */
+export type SeriesValue = {
   __date: Date;
-  // __value: number;
-  __value: { [key: string]: number };
-};
+} & { [key: string]: number };
 
 const timestampToDate = (d: number) => new Date(d * 1000);
 
-export function getTrendData<T extends Value>(
-  values: Value[],
-  // valueKeys: NumberProperty<T>[]
-  valueKeys: (keyof T)[]
-): SeriesPoint[] {
-  return values.map(
+/**
+ * This function converts the passed in data to the generic SeriesValue container.
+ */
+export function getSeriesData<T extends Value>(
+  metricValues: Value[],
+  metricProperties: (keyof T)[]
+): SeriesValue[] {
+  return metricValues.map(
     (x) =>
       ({
-        __value: pick(x, valueKeys),
+        ...pick(x, metricProperties),
         __date: getDateFromValue(x),
-      } as SeriesPoint)
+      } as SeriesValue)
   );
 }
 
@@ -152,38 +159,3 @@ function getDateFromValue<T extends Value>(value: T) {
 
   throw new Error(`Incompatible timestamps are used in value ${value}`);
 }
-
-// export function getSingleTrendData<T extends Value>(
-//   values: Value[],
-//   valueKey: keyof T
-// ): TrendValue[] {
-//   if (isDateSeries(values)) {
-//     return values
-//       .map((x: DateValue) => ({
-//         // ...x,
-//         /**
-//          * Not sure why we need to cast to number if isPresent is used to filter
-//          * out the null values.
-//          */
-//         __value: x[valueKey as keyof DateValue],
-//         __date: timestampToDate(x.date_unix),
-//       }))
-//       .filter((x) => isPresent(x.__value));
-//   }
-
-//   if (isDateSpanSeries(values)) {
-//     return values
-//       .map((x: DateSpanValue) => ({
-//         // ...x,
-//         /**
-//          * Not sure why we need to cast to number if isPresent is used to filter
-//          * out the null values.
-//          */
-//         __value: x[valueKey as keyof DateSpanValue],
-//         __date: timestampToDate(x.date_start_unix),
-//       }))
-//       .filter((x) => isPresent(x.__value));
-//   }
-
-//   throw new Error(`Incompatible timestamps are used in value ${values[0]}`);
-// }

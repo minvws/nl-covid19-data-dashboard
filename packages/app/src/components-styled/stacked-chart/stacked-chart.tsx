@@ -8,40 +8,41 @@ import { GridRows } from '@visx/grid';
 import { Group } from '@visx/group';
 import { scaleBand, scaleLinear, scaleOrdinal } from '@visx/scale';
 import { BarStack } from '@visx/shape';
+import { SeriesPoint } from '@visx/shape/lib/types';
 import { isEmpty } from 'lodash';
 import { useCallback, useMemo, useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
 import { colors } from '~/style/theme';
-import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { Legenda } from '../legenda';
+import { Tooltip } from './components';
 import {
-  // Marker,
-  Tooltip,
-} from './components';
-import {
-  calculateYMaxStacked,
-  DateSpanValue,
-  DateValue,
-  getTrendData,
+  calculateSeriesMaximum,
+  SeriesValue,
+  getSeriesData,
   getValuesInTimeframe,
-  isDateSpanValue,
-  isDateValue,
-  SeriesPoint,
   Value,
 } from './logic';
 
-const dateToValue = (d: Date) => d.valueOf() / 1000;
-const formatXAxis = (date: Date) =>
-  formatDateFromSeconds(dateToValue(date), 'axis');
 const formatYAxisFn = (y: number) => formatNumber(y);
 const formatYAxisPercentageFn = (y: number) => `${formatPercentage(y)}%`;
 
 const NUM_TICKS = 3;
 
 type AnyTickFormatter = (value: any) => string;
+
+type TooltipData = {
+  bar: SeriesPoint<SeriesValue>;
+  key: string;
+  index: number;
+  height: number;
+  width: number;
+  x: number;
+  y: number;
+  color: string;
+};
 
 export const defaultPadding = {
   top: 10,
@@ -72,8 +73,6 @@ export type StackedChartProps<T extends Value> = {
   width?: number;
   height?: number;
   formatTooltip?: typeof formatDefaultTooltip;
-  // formatXAxis?: TickFormatter<Date>;
-  // formatYAxis?: TickFormatter<number>;
   isPercentage?: boolean;
 };
 
@@ -93,7 +92,7 @@ export function StackedChart<T extends Value>({
     tooltipTop = 0,
     showTooltip,
     hideTooltip,
-  } = useTooltip<T & SeriesPoint>();
+  } = useTooltip<T & SeriesValue>();
 
   const metricProperties = useMemo(() => config.map((x) => x.metricProperty), [
     config,
@@ -107,17 +106,15 @@ export function StackedChart<T extends Value>({
   );
 
   const series = useMemo(
-    () => getTrendData(valuesInTimeframe, metricProperties),
+    () => getSeriesData(valuesInTimeframe, metricProperties),
     [valuesInTimeframe, metricProperties]
   );
 
-  console.log('trendData', series);
+  // console.log('trendData', series);
 
-  const yMax = useMemo(() => calculateYMaxStacked(series), [series]);
+  const seriesMax = useMemo(() => calculateSeriesMaximum(series), [series]);
 
-  console.log('yMax', yMax);
-
-  const keys = config.map((x) => x.legendLabel);
+  // const keys = metricProperties as string[];
   const barColors = config.map((x) => x.color);
 
   /**
@@ -131,33 +128,38 @@ export function StackedChart<T extends Value>({
   //     : '';
   // }
 
-  function getDateString(x: SeriesPoint) {
+  if (isEmpty(series)) {
+    return null;
+  }
+
+  function getDateString(x: SeriesValue) {
     /**
      * @TODO return date as Q1 Q2 etc
      */
-    return x.__date.toLocaleString();
+    return x.__date.toLocaleDateString();
   }
 
   const colorScale = scaleOrdinal<string, string>({
-    domain: keys,
+    domain: metricProperties as string[],
     range: barColors,
   });
 
-  const xScale = scaleBand<string>({
-    domain: series.map(getDateString),
-    padding: 0.2,
-  });
-
-  const yScale = scaleLinear<number>({
-    domain: [0, yMax],
-    nice: true,
-  });
   const padding = defaultPadding;
 
   const bounds = {
     width: width - padding.left - padding.right,
     height: height - padding.top - padding.bottom,
   };
+
+  const xScale = scaleBand<string>({
+    domain: series.map(getDateString),
+    padding: 0.2,
+  }).rangeRound([0, bounds.width]);
+
+  const yScale = scaleLinear<number>({
+    domain: [0, seriesMax],
+    nice: true,
+  }).range([bounds.height, 0]);
 
   const formatYAxis = isPercentage ? formatYAxisPercentageFn : formatYAxisFn;
 
@@ -250,10 +252,6 @@ export function StackedChart<T extends Value>({
   //   [bisect, trendsList, config, toggleHoverElements]
   // );
 
-  if (isEmpty(valuesInTimeframe)) {
-    return null;
-  }
-
   return (
     <Box>
       {valueAnnotation && (
@@ -297,9 +295,9 @@ export function StackedChart<T extends Value>({
                 verticalAnchor: 'middle',
               })}
             />
-            <BarStack<SeriesPoint, string>
+            <BarStack<SeriesValue, string>
               data={series}
-              keys={keys}
+              keys={metricProperties as string[]}
               x={getDateString}
               xScale={xScale}
               yScale={yScale}
@@ -330,15 +328,21 @@ export function StackedChart<T extends Value>({
                         // to the nearest SVG, which is what containerRef is set
                         // to in this example.
 
-                        console.log('bar', bar);
-                        // console.log('series point', series[bar.index]);
-                        // const eventSvgCoords = localPoint(event);
-                        // const left = bar.x + bar.width / 2;
-                        // showTooltip({
-                        //   tooltipData: bar,
-                        //   tooltipTop: eventSvgCoords?.y,
-                        //   tooltipLeft: left,
-                        // });
+                        /**
+                         * Every instantiated bar gets its own mouse handler,
+                         * which is tied to the bar variable via closure. It
+                         * also contains a "bar" property that contains the
+                         * original ChartValue data, but the name is confusing.
+                         */
+                        // console.log('bar', bar);
+
+                        const eventSvgCoords = localPoint(event);
+                        const left = bar.x + bar.width / 2;
+                        showTooltip({
+                          tooltipData: bar,
+                          tooltipTop: eventSvgCoords?.y || 0,
+                          tooltipLeft: left,
+                        });
                       }}
                     />
                   ))
@@ -374,20 +378,20 @@ export function StackedChart<T extends Value>({
   );
 }
 
-type TooltipData<T> = {
-  trendValue: SeriesPoint;
-  dataValue: T;
-  metricProperty: keyof T;
-};
+// type TooltipData<T> = {
+//   trendValue: ChartValue;
+//   dataValue: T;
+//   metricProperty: keyof T;
+// };
 
 function useTooltip<T extends Value>() {
-  const [tooltipData, setTooltipData] = useState<TooltipData<T>>();
+  const [tooltipData, setTooltipData] = useState<TooltipData>();
   const [tooltipLeft, setTooltipLeft] = useState<number>();
   const [tooltipTop, setTooltipTop] = useState<number>();
 
   const showTooltip = useCallback(
     (x: {
-      tooltipData: TooltipData<T>;
+      tooltipData: TooltipData;
       tooltipLeft: number;
       tooltipTop: number;
     }) => {
@@ -422,9 +426,15 @@ function useTooltip<T extends Value>() {
  * By passing in the original value plus the metric property that the tooltip is
  * showing for, we should have all data to render any type of tooltip.
  */
-function formatDefaultTooltip<T extends Value>(
-  context: TooltipData<T>,
-  _isPercentage?: boolean
-) {
-  return <div> {context.trendValue.__value} </div>;
+// function formatDefaultTooltip<T extends Value>(
+//   context: TooltipData<T>,
+//   _isPercentage?: boolean
+// ) {
+//   return <div> {context.trendValue.__value} </div>;
+// }
+
+function formatDefaultTooltip(data: TooltipData, _isPercentage?: boolean) {
+  // console.log('tooltip data', data);
+
+  return <div>{`${data.key}: ${data.bar.data[data.key]}`} </div>;
 }
