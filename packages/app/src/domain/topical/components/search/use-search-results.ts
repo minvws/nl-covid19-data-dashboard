@@ -78,13 +78,13 @@ const ALL_HITS: Option[] = [
     code: x.gemcode,
     name: x.displayName || x.name,
     searchTerms: [x.name, x.displayName].filter(isPresent),
-    link: `/gemeente/${x.gemcode}/actueel`,
+    link: `/actueel/gemeente/${x.gemcode}`,
   })),
   ...safetyRegions.map((x) => ({
     type: 'vr' as const,
     code: x.code,
     name: x.name,
     searchTerms: [x.name, ...(x.searchTerms || [])].filter(isPresent),
-    link: `/veiligheidsregio/${x.code}/actueel`,
+    link: `/actueel/veiligheidsregio/${x.code}`,
   })),
 ].sort((a, b) => a.name.localeCompare(b.name));

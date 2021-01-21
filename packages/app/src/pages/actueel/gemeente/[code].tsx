@@ -8,7 +8,6 @@ import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda
 import { MaxWidth } from '~/components-styled/max-width';
 import { MessageTile } from '~/components-styled/message-tile';
 import { QuickLinks } from '~/components-styled/quick-links';
-import { RiskLevelIndicator } from '~/components-styled/risk-level-indicator';
 import { TileList } from '~/components-styled/tile-list';
 import { Heading } from '~/components-styled/typography';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
@@ -26,41 +25,33 @@ import { TopicalTile } from '~/domain/topical/topical-tile';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
+  getGmData,
   getLastGeneratedDate,
   getText,
-  getVrData,
 } from '~/static-props/get-data';
-import { assert } from '~/utils/assert';
+import { getSafetyRegionForMunicipalityCode } from '~/utils/getSafetyRegionForMunicipalityCode';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
-export { getStaticPaths } from '~/static-paths/vr';
+export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   getText,
-  getVrData,
+  getGmData,
   createGetChoroplethData({
     vr: ({ escalation_levels }) => ({ escalation_levels }),
   })
 );
 
-const SafetyRegionActueel: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { text: siteText, choropleth, data } = props;
+const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
+  const { text: siteText, municipalityName, choropleth, data } = props;
   const router = useRouter();
-  const text = siteText.veiligheidsregio_actueel;
-  const escalationText = siteText.escalatie_niveau;
-
-  const regionCode = router.query.code;
-
-  const filteredRegion = props.choropleth.vr.escalation_levels.find(
-    (item) => item.vrcode === regionCode
-  );
-
-  assert(
-    filteredRegion,
-    `Could not find a "vrcode" to match with the region: ${regionCode} to get the the current "escalation_level" of it.`
-  );
+  const text = siteText.gemeente_actueel;
+  const safetyRegionForMunicipality =
+    typeof router.query.code === 'string'
+      ? getSafetyRegionForMunicipalityCode(router.query.code)
+      : undefined;
 
   const dataInfectedTotal = data.tested_overall;
   const dataHospitalIntake = data.hospital_nice;
@@ -69,10 +60,10 @@ const SafetyRegionActueel: FCWithLayout<typeof getStaticProps> = (props) => {
     <>
       <SEOHead
         title={replaceVariablesInText(text.metadata.title, {
-          safetyRegionName: props.safetyRegionName,
+          municipalityName,
         })}
         description={replaceVariablesInText(text.metadata.description, {
-          safetyRegionName: props.safetyRegionName,
+          municipalityName,
         })}
       />
       <Box bg="white" pb={4}>
@@ -82,11 +73,11 @@ const SafetyRegionActueel: FCWithLayout<typeof getStaticProps> = (props) => {
               message={siteText.regionaal_index.belangrijk_bericht}
             />
 
-            <Search initialValue={props.safetyRegionName} />
+            <Search initialValue={municipalityName} />
 
             <Heading level={1} fontWeight="normal">
               {replaceComponentsInText(text.title, {
-                safetyRegionName: <strong>{props.safetyRegionName}</strong>,
+                municipalityName: <strong>{municipalityName}</strong>,
               })}
             </Heading>
 
@@ -132,30 +123,31 @@ const SafetyRegionActueel: FCWithLayout<typeof getStaticProps> = (props) => {
               />
             </MiniTrendTileLayout>
 
-            <RiskLevelIndicator
-              title={text.risoconiveau_maatregelen.title}
-              description={text.risoconiveau_maatregelen.description}
-              link={{
-                title: text.risoconiveau_maatregelen.bekijk_href,
-                href: `/veiligheidsregio/${regionCode}/maatregelen`,
-              }}
-              escalationLevel={filteredRegion.escalation_level}
-              code={filteredRegion.vrcode}
-              escalationTypes={escalationText.types}
-            />
-
             <QuickLinks
               header={text.quick_links.header}
               links={[
                 { href: '/landelijk', text: text.quick_links.links.nationaal },
+                safetyRegionForMunicipality
+                  ? {
+                      href: `/veiligheidsregio/${safetyRegionForMunicipality.code}/positief-geteste-mensen`,
+                      text: replaceVariablesInText(
+                        text.quick_links.links.veiligheidsregio,
+                        { safetyRegionName: safetyRegionForMunicipality.name }
+                      ),
+                    }
+                  : {
+                      href: '/veiligheidsregio',
+                      text: text.quick_links.links.veiligheidsregio_fallback,
+                    },
                 {
-                  href: `/veiligheidsregio/${router.query.code}/positief-geteste-mensen`,
+                  href: '/gemeentes',
                   text: replaceVariablesInText(
-                    text.quick_links.links.veiligheidsregio,
-                    { safetyRegionName: props.safetyRegionName }
+                    text.quick_links.links.gemeente,
+                    {
+                      municipalityName: municipalityName,
+                    }
                   ),
                 },
-                { href: '/gemeentes', text: text.quick_links.links.gemeente },
               ]}
             />
 
@@ -210,6 +202,6 @@ const SafetyRegionActueel: FCWithLayout<typeof getStaticProps> = (props) => {
   );
 };
 
-SafetyRegionActueel.getLayout = getDefaultLayout();
+TopicalMunicipality.getLayout = getDefaultLayout();
 
-export default SafetyRegionActueel;
+export default TopicalMunicipality;
