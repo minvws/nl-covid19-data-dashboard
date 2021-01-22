@@ -8,8 +8,8 @@ import { Box } from '~/components-styled/base';
 import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
 import { MaxWidth } from '~/components-styled/max-width';
+import { WarningTile } from '~/components-styled/warning-tile';
 import { colors } from '~/style/theme';
-import { MessageTile } from '~/components-styled/message-tile';
 import { NewsMessage } from '~/components-styled/news-message';
 import { QuickLinks } from '~/components-styled/quick-links';
 import { TileList } from '~/components-styled/tile-list';
@@ -88,7 +88,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
       <Box bg="white" pb={4}>
         <MaxWidth px={{ _: 3, sm: 0 }}>
           <TileList>
-            <MessageTile
+            <WarningTile
               message={siteText.regionaal_index.belangrijk_bericht}
             />
 

@@ -6,7 +6,7 @@ import { Box } from '~/components-styled/base';
 import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
 import { MaxWidth } from '~/components-styled/max-width';
-import { MessageTile } from '~/components-styled/message-tile';
+import { WarningTile } from '~/components-styled/warning-tile';
 import { QuickLinks } from '~/components-styled/quick-links';
 import { RiskLevelIndicator } from '~/components-styled/risk-level-indicator';
 import { TileList } from '~/components-styled/tile-list';
@@ -77,7 +77,7 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
       <Box bg="white" pb={4}>
         <MaxWidth px={{ _: 3, sm: 0 }}>
           <TileList>
-            <MessageTile
+            <WarningTile
               message={siteText.regionaal_index.belangrijk_bericht}
             />
 
