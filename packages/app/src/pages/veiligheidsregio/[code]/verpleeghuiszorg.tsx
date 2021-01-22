@@ -50,6 +50,9 @@ const NursingHomeCare: FCWithLayout<typeof getStaticProps> = (props) => {
       <TileList>
         <ContentHeader
           category={siteText.veiligheidsregio_layout.headings.kwetsbare_groepen}
+          screenReaderCategory={
+            siteText.verpleeghuis_besmette_locaties.titel_sidebar
+          }
           title={replaceVariablesInText(positiveTestPeopleText.titel, {
             safetyRegion: safetyRegionName,
           })}

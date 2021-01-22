@@ -1,3 +1,4 @@
+import css from '@styled-system/css';
 import { ContentHeader } from '~/components-styled/content-header';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
@@ -6,8 +7,10 @@ import { KpiSection } from '~/components-styled/kpi-section';
 import { LockdownTable } from '~/components/restrictions/lockdown-table';
 import { PortableText } from '~/lib/sanity';
 import { SEOHead } from '~/components/seoHead';
+import { Box } from '~/components-styled/base/box';
 import { TileList } from '~/components-styled/tile-list';
 import Maatregelen from '~/assets/maatregelen.svg';
+
 import text from '~/locale';
 import {
   getNlData,
@@ -16,7 +19,6 @@ import {
 } from '~/static-props/get-data';
 // import { useEscalationLevel } from '~/utils/use-escalation-level';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
-import { groq } from 'next-sanity';
 import { LockdownData, RoadmapData } from '~/types/cms';
 import theme from '~/style/theme';
 
@@ -25,15 +27,17 @@ type MaatregelenData = {
   roadmap?: RoadmapData;
 };
 
+const query = `
+{
+  'lockdown': *[_type == 'lockdown'][0],
+  // We will need the roadmap when lockdown is disabled in the CMS.
+  // 'roadmap': *[_type == 'roadmap'][0]
+}`;
+
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   getNlData,
-  createGetContent<MaatregelenData>(groq`
-    {
-      'lockdown': *[_type == 'lockdown'][0],
-      // We will need the roadmap when lockdown is disabled in the CMS.
-      // 'roadmap': *[_type == 'roadmap'][0]
-    }`)
+  createGetContent<MaatregelenData>(query)
 );
 
 const NationalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
@@ -64,10 +68,18 @@ const NationalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
 
         {showLockdown && (
           <KpiSection flexDirection="column">
-            <>
+            <Box
+              css={css({
+                'p:last-child': {
+                  margin: '0',
+                },
+              })}
+            >
               <Heading level={3}>{lockdown.message.title}</Heading>
-              <PortableText blocks={lockdown.message.description} />
-            </>
+              {lockdown.message.description ? (
+                <PortableText blocks={lockdown.message.description} />
+              ) : null}
+            </Box>
           </KpiSection>
         )}
 

@@ -10,19 +10,18 @@ import { MessageTile } from '~/components-styled/message-tile';
 import { colors } from '~/style/theme';
 import { QuickLinks } from '~/components-styled/quick-links';
 import { TileList } from '~/components-styled/tile-list';
-import { Heading } from '~/components-styled/typography';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
 import { RiskLevelIndicator } from '~/components-styled/risk-level-indicator';
 import { SEOHead } from '~/components/seoHead';
 import { FCWithLayout, getDefaultLayout } from '~/domain/layout/layout';
-import { Search } from '~/domain/topical/components/search';
 import { DataSitemap } from '~/domain/topical/data-sitemap';
 import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
 import { TopicalChoroplethContainer } from '~/domain/topical/topical-choropleth-container';
+import { TopicalPageHeader } from '~/domain/topical/topical-page-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
@@ -36,8 +35,6 @@ import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 export { getStaticPaths } from '~/static-paths/gm';
 import { assert } from '~/utils/assert';
-import { Text } from '~/components-styled/typography';
-import { Link } from '~/utils/link';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -48,7 +45,7 @@ export const getStaticProps = createGetStaticProps(
   })
 );
 
-const MunicipalityActueel: FCWithLayout<typeof getStaticProps> = (props) => {
+const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
   const { text: siteText, municipalityName, choropleth, data } = props;
   const router = useRouter();
   const text = siteText.gemeente_actueel;
@@ -87,24 +84,12 @@ const MunicipalityActueel: FCWithLayout<typeof getStaticProps> = (props) => {
               message={siteText.regionaal_index.belangrijk_bericht}
             />
 
-            <Search initialValue={municipalityName} />
-
-            <div>
-              <Heading level={1} fontWeight="normal" fontSize="1.75rem" mb={1}>
-                {replaceComponentsInText(text.title, {
-                  municipalityName: <strong>{municipalityName}</strong>,
-                })}
-              </Heading>
-
-              <Text mt={0}>
-                {siteText.common.veiligheidsregio_label}{' '}
-                <Link
-                  href={`/veiligheidsregio/${safetyRegionForMunicipality?.code}/actueel`}
-                >
-                  <a>{safetyRegionForMunicipality?.name}</a>
-                </Link>
-              </Text>
-            </div>
+            <TopicalPageHeader
+              lastGenerated={Number(props.lastGenerated)}
+              title={replaceComponentsInText(text.title, {
+                municipalityName: <strong>{municipalityName}</strong>,
+              })}
+            />
 
             <MiniTrendTileLayout>
               <MiniTrendTile
@@ -239,6 +224,6 @@ const MunicipalityActueel: FCWithLayout<typeof getStaticProps> = (props) => {
   );
 };
 
-MunicipalityActueel.getLayout = getDefaultLayout();
+TopicalMunicipality.getLayout = getDefaultLayout();
 
-export default MunicipalityActueel;
+export default TopicalMunicipality;

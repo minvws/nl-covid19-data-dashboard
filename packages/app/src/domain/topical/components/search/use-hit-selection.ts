@@ -2,12 +2,25 @@ import { useRef, useState } from 'react';
 import scrollIntoView from 'scroll-into-view-if-needed';
 import { useHotkey } from '~/utils/hotkey/use-hotkey';
 
+/**
+ * This hook controls the currently selected search result index.
+ * It allows the index to be controlled by the keyboard using arrow-navigation.
+ *
+ * Additionally:
+ * - it will set focus on the corresponding DOM element while navigating with
+ *   the arrow-keys.
+ * - it will capture "selection"-events triggered with the return-key. These
+ *   events can be triggered in combination with a command/control-modifier key
+ *   which means the user would like to open the result in a new window.
+ */
 export function useHitSelection({
   numberOfHits,
   onSelectHit,
+  isEnabled = false,
 }: {
   numberOfHits: number;
   onSelectHit: (index: number, openInNewWindow: boolean) => void;
+  isEnabled: boolean;
 }) {
   const [focusIndex, setFocusIndex] = useState(0);
   const focusRef = useRef<HTMLAnchorElement>(null);
@@ -19,7 +32,7 @@ export function useHitSelection({
       setFocusIndex(nextIndex);
       maybeScrollIntoView(focusRef.current);
     },
-    { allowRepeat: true }
+    { allowRepeat: true, disabled: !isEnabled }
   );
 
   useHotkey(
@@ -30,7 +43,7 @@ export function useHitSelection({
       setFocusIndex(nextIndex);
       maybeScrollIntoView(focusRef.current);
     },
-    { allowRepeat: true }
+    { allowRepeat: true, disabled: !isEnabled }
   );
 
   useHotkey(
@@ -38,7 +51,7 @@ export function useHitSelection({
     () => {
       focusRef.current && onSelectHit(focusIndex, false);
     },
-    { allowRepeat: true }
+    { allowRepeat: true, disabled: !isEnabled }
   );
 
   useHotkey(
@@ -46,7 +59,7 @@ export function useHitSelection({
     () => {
       focusRef.current && onSelectHit(focusIndex, true);
     },
-    { allowRepeat: true }
+    { allowRepeat: true, disabled: !isEnabled }
   );
 
   useHotkey(
@@ -54,7 +67,7 @@ export function useHitSelection({
     () => {
       focusRef.current && onSelectHit(focusIndex, true);
     },
-    { allowRepeat: true }
+    { allowRepeat: true, disabled: !isEnabled }
   );
 
   return { focusIndex, setFocusIndex, focusRef };

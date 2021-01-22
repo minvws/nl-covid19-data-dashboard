@@ -1,5 +1,4 @@
 import css from '@styled-system/css';
-import { groq } from 'next-sanity';
 import { useRouter } from 'next/router';
 import ArtsIcon from '~/assets/arts.svg';
 import GetestIcon from '~/assets/test.svg';
@@ -49,7 +48,7 @@ export const getStaticProps = createGetStaticProps(
     gm: ({ tested_overall }) => ({ tested_overall }),
   }),
   createGetContent<ArticleSummary[]>(
-    groq`*[_type == 'article'] | order(publicationDate) {title, slug, summary, cover}[0..2]`
+    `*[_type == 'article'] | order(publicationDate) {title, slug, summary, cover}[0..2]`
   ),
   () => {
     const data = getNlData();

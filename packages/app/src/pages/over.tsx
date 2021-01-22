@@ -1,4 +1,3 @@
-import { groq } from 'next-sanity';
 import Head from 'next/head';
 import { MaxWidth } from '~/components-styled/max-width';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
@@ -10,17 +9,20 @@ import {
 } from '~/static-props/get-data';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import styles from './over.module.scss';
+import { PortableTextEntry } from '@sanity/block-content-to-react';
 
 interface OverData {
   title: string | null;
-  description: unknown[] | null;
+  description: PortableTextEntry[] | null;
 }
+
+const query = `
+*[_type == 'overDitDashboard'][0]
+`;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  createGetContent<OverData>(groq`
-    *[_type == 'overDitDashboard'][0]
-  `)
+  createGetContent<OverData>(query)
 );
 
 const Over: FCWithLayout<typeof getStaticProps> = (props) => {

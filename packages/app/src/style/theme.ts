@@ -85,6 +85,7 @@ const mediaQueries = {
 
 export const colors = {
   body: '#000000',
+  bodyLight: '#555555',
   page: '#f3f3f3',
   blue: '#01689b',
   icon: '#01689b',

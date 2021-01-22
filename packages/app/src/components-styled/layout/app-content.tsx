@@ -32,7 +32,7 @@ export function AppContent({
    * but it's good enough for now I guess
    */
   const isMenuOpen =
-    (router.pathname === '/' && !('menu' in router.query)) ||
+    (router.pathname === '/landelijk' && !('menu' in router.query)) ||
     router.query.menu === '1';
 
   return (
@@ -49,7 +49,7 @@ export function AppContent({
             })}
           >
             <LinkWithIcon icon={<ArrowIcon />} href={menuOpenUrl}>
-              {router.pathname === '/'
+              {router.pathname === '/landelijk'
                 ? siteText.nav.terug_naar_alle_cijfers_homepage
                 : siteText.nav.terug_naar_alle_cijfers}
             </LinkWithIcon>
@@ -73,7 +73,7 @@ export function AppContent({
             </ResponsiveVisible>
             <MenuLinkContainer isVisible={!isMenuOpen}>
               <LinkWithIcon icon={<ArrowIcon />} href={menuOpenUrl}>
-                {router.pathname === '/'
+                {router.pathname === '/landelijk'
                   ? siteText.nav.terug_naar_alle_cijfers_homepage
                   : siteText.nav.terug_naar_alle_cijfers}
               </LinkWithIcon>
