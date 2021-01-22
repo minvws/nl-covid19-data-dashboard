@@ -42,7 +42,14 @@ export function RiskLevelIndicator(props: RiskLevelIndicatorProps) {
 
   return (
     <Box position="relative" pb={3}>
-      <Box width="4rem" height="4rem" position="absolute" left={0} mr={1}>
+      <Box
+        width="4rem"
+        height="4rem"
+        position="absolute"
+        left={0}
+        mr={1}
+        mb={2}
+      >
         <Stopwatch />
       </Box>
       <Heading level={3} as="h2" py={2} pl={{ _: '3.5rem' }}>

@@ -25,6 +25,7 @@ export function LinkWithIcon({
           display: 'inline-block',
           fontWeight,
           textDecoration: 'none',
+          marginBottom: '0.5rem',
           '&:hover,&:focus': {
             textDecoration: 'underline',
           },

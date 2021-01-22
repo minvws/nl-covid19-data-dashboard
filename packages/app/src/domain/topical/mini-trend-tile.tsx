@@ -24,14 +24,14 @@ export function MiniTrendTile<T extends Value>(props: MiniTrendTileProps<T>) {
   const value = trendData[trendData.length - 1][metricProperty];
 
   return (
-    <Box position="relative" pb={3}>
+    <Box position="relative" pb={{ _: 3, md: 0 }}>
       <Box width="4rem" height="4rem" position="absolute" left={0} mr={1}>
         {icon}
       </Box>
-      <Heading level={3} as="h2" py={2} pl={{ _: '3.5rem' }}>
+      <Heading level={3} as="h2" py={2} pl={{ _: '3.5rem' }} mb={2}>
         {title}
       </Heading>
-      <Text fontSize="2.75rem" fontWeight="bold" my={0}>
+      <Text fontSize="2.75rem" fontWeight="bold" my={0} lineHeight={0}>
         {formatNumber((value as unknown) as number)}
       </Text>
       {text}

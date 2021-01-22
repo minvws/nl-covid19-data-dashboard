@@ -46,16 +46,18 @@ export function TopicalChoroplethContainer({
         <Box mb={[0, '3rem']}>
           <Heading
             level={2}
-            fontSize={{ _: '2.5em', lg: '3em' }}
+            fontSize={{ _: '2.5em', lg: '2.75em' }}
             lineHeight="1em"
           >
             {title}
           </Heading>
-          {typeof description === 'string' ? (
-            <Text>{description}</Text>
-          ) : (
-            description
-          )}
+          <Box maxWidth={{ md: '600px' }}>
+            {typeof description === 'string' ? (
+              <Text>{description}</Text>
+            ) : (
+              description
+            )}
+          </Box>
         </Box>
 
         {legendaComponent && breakpoints.lg && <div>{legendaComponent}</div>}
@@ -65,7 +67,11 @@ export function TopicalChoroplethContainer({
         <div>{children}</div>
 
         {legendaComponent && !breakpoints.lg && (
-          <Box display="flex" justifyContent="center">
+          <Box
+            display="flex"
+            justifyContent="center"
+            maxWidth={{ _: '100%', md: '600px' }}
+          >
             {legendaComponent}
           </Box>
         )}

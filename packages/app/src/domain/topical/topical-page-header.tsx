@@ -32,7 +32,7 @@ export function TopicalPageHeader({
       </Box>
 
       <Box>
-        <Heading level={1} fontWeight="normal" m={0}>
+        <Heading level={1} fontWeight="normal" m={0} lineHeight={0} mb={2}>
           {title}
         </Heading>
         <InlineText color="bodyLight">

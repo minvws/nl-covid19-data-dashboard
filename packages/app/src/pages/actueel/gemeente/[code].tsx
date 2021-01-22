@@ -173,7 +173,7 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
               ]}
             />
 
-            <TopicalTile>
+            <TopicalTile css={css({ pb: 0 })}>
               <>
                 <TopicalChoroplethContainer
                   title={text.risiconiveaus.selecteer_titel}
@@ -209,7 +209,7 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
                   mt={3}
                   mx={-4}
                 >
-                  <TopicalTile css={css({ mb: 0, pb: 0 })}>
+                  <TopicalTile css={css({ mb: 0, p: 2 })}>
                     <EscalationLevelExplanations />
                   </TopicalTile>
                 </Box>

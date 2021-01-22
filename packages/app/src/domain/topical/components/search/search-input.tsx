@@ -7,6 +7,7 @@ import { Box } from '~/components-styled/base';
 import { Text } from '~/components-styled/typography';
 import { VisuallyHidden } from '~/components-styled/visually-hidden';
 import { default as siteText, default as text } from '~/locale';
+import { colors } from '~/style/theme';
 import { useSearchContext } from './context';
 
 const ICON_SPACE = 50;
@@ -66,7 +67,7 @@ const StyledSearchInput = styled.input(
     display: 'block',
     width: '100%',
     borderRadius: 1,
-    border: 0,
+    border: `1px solid ${colors.lightGray}`,
     fontSize: ['1rem', null, null, '1.125rem'],
     m: 0,
     '&::-webkit-search-cancel-button': {

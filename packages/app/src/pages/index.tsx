@@ -94,7 +94,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
 
             <Search />
 
-            <Heading level={1} fontWeight="normal">
+            <Heading level={1} fontWeight="normal" lineHeight={0} mb={2}>
               {replaceComponentsInText(text.title, {
                 the_netherlands: <strong>{text.the_netherlands}</strong>,
               })}
@@ -185,7 +185,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
               title={notificatie.titel}
             />
 
-            <TopicalTile>
+            <TopicalTile css={css({ pb: 0, mb: '2rem' })}>
               <>
                 <TopicalChoroplethContainer
                   title={text.risiconiveaus.selecteer_titel}
@@ -214,6 +214,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                     )}
                   />
                 </TopicalChoroplethContainer>
+
                 <Box
                   borderTopWidth="1px"
                   borderTopStyle="solid"
@@ -221,7 +222,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                   mt={3}
                   mx={-4}
                 >
-                  <TopicalTile css={css({ mb: 0, pb: 0 })}>
+                  <TopicalTile css={css({ mb: 0, p: 2 })}>
                     <EscalationLevelExplanations />
                   </TopicalTile>
                 </Box>
