@@ -8,6 +8,7 @@ interface PathProps {
   strokeWidth?: number;
   id?: string;
   hoverable?: boolean;
+  notClickable?: boolean;
 }
 
 export function Path({
@@ -17,6 +18,7 @@ export function Path({
   stroke,
   strokeWidth,
   hoverable,
+  notClickable,
 }: PathProps) {
   return (
     <StyledPath
@@ -24,6 +26,7 @@ export function Path({
       shapeRendering="optimizeQuality"
       data-id={id}
       hoverable={hoverable}
+      notClickable={notClickable}
       fill={fill}
       stroke={stroke}
       strokeWidth={strokeWidth}
@@ -31,7 +34,7 @@ export function Path({
   );
 }
 
-const StyledPath = styled.path<{ hoverable?: boolean }>(
+const StyledPath = styled.path<{ hoverable?: boolean; notClickable?: boolean }>(
   (x) =>
     css({
       fill: x.fill || 'transparent',
@@ -46,7 +49,7 @@ const StyledPath = styled.path<{ hoverable?: boolean }>(
   (x) =>
     x.hoverable &&
     css({
-      cursor: 'pointer',
+      cursor: x.notClickable ? 'default' : 'pointer',
       fill: 'transparent',
       stroke: x.stroke ?? 'transparent',
       strokeWidth: x.strokeWidth ?? 0,
