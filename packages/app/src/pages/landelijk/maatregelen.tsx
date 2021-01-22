@@ -6,7 +6,7 @@ import { Heading } from '~/components-styled/typography';
 import { KpiSection } from '~/components-styled/kpi-section';
 import { LockdownTable } from '~/components/restrictions/lockdown-table';
 import { PortableText } from '~/lib/sanity';
-import { SEOHead } from '~/components/seoHead';
+import { SEOHead } from '~/components-styled/seo-head';
 import { Box } from '~/components-styled/base/box';
 import { TileList } from '~/components-styled/tile-list';
 import Maatregelen from '~/assets/maatregelen.svg';
