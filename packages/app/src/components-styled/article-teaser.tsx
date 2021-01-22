@@ -28,7 +28,7 @@ export function ArticleTeaser(props: ArticleLinkProps) {
     <Box
       border="solid"
       borderWidth={1}
-      borderColor="#dcdcdc"
+      borderColor="lightGray"
       borderRadius={4}
       minHeight={'26rem'}
       maxHeight={'26rem'}

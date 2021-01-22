@@ -27,8 +27,8 @@ export const defaultPadding: ChartPadding = {
 
 const defaultColors = {
   axis: colors.silver,
-  axisLabels: '#666666',
-  benchmark: '#4f5458',
+  axisLabels: colors.data.axisLabels,
+  benchmark: colors.data.benchmark,
 };
 
 type Benchmark = {

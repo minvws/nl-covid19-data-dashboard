@@ -12,6 +12,7 @@ import styles from '~/components/choropleth/tooltips/tooltip.module.scss';
 import { regionGeo } from '~/components/choropleth/topology';
 import text from '~/locale';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { Text } from './typography';
 
 const escalationThresholds =
   regionThresholds.escalation_levels.escalation_level;
@@ -64,10 +65,10 @@ export function EscalationMapLegenda<K extends RegionsMetricName>(
     <Box
       className={styles.legenda}
       aria-label="legend"
-      maxWidth={{ _: '100%', lg: 700 }}
+      maxWidth={{ _: '100%', lg: 600 }}
       width="100%"
     >
-      <h3>{text.escalatie_niveau.legenda.titel}</h3>
+      <Text as="h3">{text.escalatie_niveau.legenda.titel}</Text>
       {sortedEscalationArray.map((info) => (
         <div
           className={styles.escalationInfoLegenda}
