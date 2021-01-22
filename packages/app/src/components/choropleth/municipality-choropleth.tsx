@@ -142,8 +142,8 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
 
       return (
         <Path
-          hoverable
-          notClickable={!hasSelectHander}
+          isHoverable
+          isClickable={hasSelectHander}
           id={gemcode}
           key={gemcode}
           d={path}

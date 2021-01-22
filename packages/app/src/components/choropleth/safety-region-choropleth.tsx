@@ -121,8 +121,8 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
 
       return (
         <Path
-          hoverable
-          notClickable={!hasSelectHander}
+          isHoverable
+          isClickable={hasSelectHander}
           id={vrcode}
           key={vrcode}
           d={path}
