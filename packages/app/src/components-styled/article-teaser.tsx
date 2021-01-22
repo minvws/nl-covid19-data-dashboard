@@ -106,6 +106,7 @@ function CoverImage({ height, image }: CoverImageProps) {
         backgroundPosition={bgPosition}
         backgroundRepeat="no-repeat"
         backgroundSize="cover"
+        aria-label={image.alt}
       />
     </Box>
   );
