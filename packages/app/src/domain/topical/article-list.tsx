@@ -59,7 +59,13 @@ export function ArticleList({ articleSummaries, hideLink }: ArticleListProps) {
           )}
         </Box>
       </Box>
-      <Box display="block" margin={0} maxWidth="100%" mt={3}>
+      <Box
+        display={{ _: 'block', md: 'flex' }}
+        alignItems="stretch"
+        margin={0}
+        maxWidth="100%"
+        mt={3}
+      >
         {articleSummaries.map((summary) => (
           <ArticleBox key={summary.slug.current}>
             <ArticleTeaser
@@ -90,6 +96,9 @@ const ArticleBox = styled.div(
     },
     '&:nth-child(3n+2)': {
       mx: asResponsiveArray({ md: '48px', lg: '48px' }),
+    },
+    '& > *': {
+      height: '100%',
     },
   })
 );

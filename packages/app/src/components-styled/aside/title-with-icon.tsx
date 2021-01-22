@@ -31,12 +31,12 @@ export function TitleWithIcon(props: TitleWithIconProps) {
 
       <Box>
         <Heading
+          as="div"
           level={level}
           mb={0}
           mr={3}
           fontWeight="bold"
           {...headingProps}
-          as="div"
         >
           {title}
         </Heading>

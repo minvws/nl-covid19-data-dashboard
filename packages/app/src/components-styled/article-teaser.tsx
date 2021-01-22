@@ -1,13 +1,14 @@
 import css from '@styled-system/css';
+import styled from 'styled-components';
 import ArrowIcon from '~/assets/arrow.svg';
-import { LinkWithIcon } from '~/components-styled/link-with-icon';
 import { urlFor } from '~/lib/sanity';
 import siteText from '~/locale';
 import { Article, Block, ImageBlock } from '~/types/cms';
 import { assert } from '~/utils/assert';
+import { Link } from '~/utils/link';
 import { BackgroundImage } from './background-image';
 import { Box } from './base';
-import { Heading, Text } from './typography';
+import { Heading, InlineText, Text } from './typography';
 
 export type ArticleSummary = Pick<
   Article,
@@ -25,37 +26,66 @@ export function ArticleTeaser(props: ArticleLinkProps) {
   const { title, slug, summary, cover } = props;
 
   return (
-    <Box
-      border="solid"
-      borderWidth={1}
-      borderColor="lightGray"
-      borderRadius={4}
-      minHeight={'26rem'}
-      maxHeight={'26rem'}
-      overflow="hidden"
-    >
-      {<CoverImage image={cover} />}
-      <Box padding={3}>
-        <Heading level={3}>{title}</Heading>
-        <Text>{summary}</Text>
-        <LinkWithIcon
-          href={`/artikelen/${slug}`}
-          icon={<ArrowIcon css={css({ transform: 'rotate(-90deg)' })} />}
-          iconPlacement="right"
-          fontWeight="bold"
-        >
-          {siteText.common.read_more}
-        </LinkWithIcon>
-      </Box>
-    </Box>
+    <Link passHref href={`/artikelen/${slug}`}>
+      <StyledArticleTeaser>
+        <CoverImage height={200} image={cover} />
+        <Box padding={3}>
+          <Heading level={3}>{title}</Heading>
+          <Text>{summary}</Text>
+
+          <InlineText aria-hidden="true" fontWeight="bold" color="link">
+            {siteText.common.read_more}
+            <Arrow />
+          </InlineText>
+        </Box>
+      </StyledArticleTeaser>
+    </Link>
+  );
+}
+
+const StyledArticleTeaser = styled.a(
+  css({
+    display: 'block',
+    border: 'solid',
+    borderWidth: 1,
+    borderColor: 'lightGray',
+    borderRadius: 4,
+    minHeight: '26rem',
+    overflow: 'hidden',
+    textDecoration: 'none',
+    color: 'body',
+
+    [`${BackgroundImage}, ${Heading}`]: {
+      transitionProperty: 'transform, color',
+      transitionDuration: '500ms, 250ms',
+      transitionTimingFunction: 'ease-out',
+      willChange: 'transform',
+    },
+
+    '&:hover, &:focus': {
+      [BackgroundImage]: {
+        transitionTimingFunction: 'ease-in-out',
+        transform: 'scale(1.04)',
+      },
+      [Heading]: { color: 'link' },
+    },
+  })
+);
+
+function Arrow() {
+  return (
+    <span css={css({ svg: { height: '11px', width: '13px', mx: '3px' } })}>
+      <ArrowIcon css={css({ transform: 'rotate(-90deg)' })} />
+    </span>
   );
 }
 
 type CoverImageProps = {
   image: ImageBlock;
+  height: number;
 };
 
-function CoverImage({ image }: CoverImageProps) {
+function CoverImage({ height, image }: CoverImageProps) {
   const url = urlFor(image).url();
   assert(
     url !== null,
@@ -69,14 +99,15 @@ function CoverImage({ image }: CoverImageProps) {
     : undefined;
 
   return (
-    <BackgroundImage
-      style={{ height: '200px', width: '100%' }}
-      backgroundImage={`url(${url})`}
-      backgroundPosition={bgPosition}
-      backgroundRepeat="no-repeat"
-      backgroundSize="cover"
-      aria-label={image.alt}
-      role="img"
-    />
+    <Box height={height} overflow="hidden">
+      <BackgroundImage
+        height={height}
+        backgroundImage={`url(${url})`}
+        backgroundPosition={bgPosition}
+        backgroundRepeat="no-repeat"
+        backgroundSize="cover"
+        aria-label={image.alt}
+      />
+    </Box>
   );
 }
