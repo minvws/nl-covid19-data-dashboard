@@ -14,7 +14,7 @@ export function AppHeader() {
     <Box as="header" zIndex={4} position="relative" bg="white">
       <MaxWidth px={{ _: 3, sm: 4, md: 3, lg: 4 }}>
         <Logo />
-        <Box px={3}>
+        <Box px={3} zIndex={1} position="relative">
           <LanguageSwitcher />
         </Box>
       </MaxWidth>
