@@ -1,7 +1,7 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { EscalationLevel } from '~/components/restrictions/type';
+import { EscalationLevel } from '~/domain/restrictions/type';
 import text from '~/locale/index';
 
 const escalationThresholds =

@@ -1,10 +1,11 @@
+import css from '@styled-system/css';
 import { scaleQuantile, scaleThreshold } from 'd3-scale';
-import { ScreenReaderOnly } from '~/components/screenReaderOnly';
+import { Box } from '~/components-styled/base';
 import siteText from '~/locale/index';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { useDynamicScale } from '~/utils/useDynamicScale';
-import styles from './styles.module.scss';
+import { VisuallyHidden } from './visually-hidden';
 
 type GradientStop = {
   color: string;
@@ -50,15 +51,23 @@ export function BarScale({
 
   return (
     <>
-      <ScreenReaderOnly>
+      <VisuallyHidden>
         {replaceVariablesInText(screenReaderText, {
           value: String(value),
           signaalwaarde: String(signaalwaarde),
         })}
-      </ScreenReaderOnly>
+      </VisuallyHidden>
 
-      <div className={styles.root} aria-hidden="true">
-        <svg xmlns="http://www.w3.org/2000/svg">
+      <Box height="5rem" aria-hidden="true">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          css={css({
+            width: '100%',
+            height: '100%',
+            overflow: 'visible',
+            shapeRendering: 'crispEdges',
+          })}
+        >
           <defs>
             <clipPath id={`${id}-cut-off`}>
               <rect
@@ -119,10 +128,14 @@ export function BarScale({
 
             {showValue && (
               <text
-                className={styles.value}
                 x={`${scale(value)}%`}
                 y={16}
                 textAnchor={textAlign(scale(value) ?? 0)}
+                css={css({
+                  fontSize: '1.25rem',
+                  fontWeight: 'bold',
+                  fill: 'body',
+                })}
               >
                 {`${formatNumber(value)}`}
               </text>
@@ -140,10 +153,10 @@ export function BarScale({
                 stroke="#595959"
               />
               <text
-                className={styles.criticalValue}
                 x={`${scale(signaalwaarde)}%`}
                 y={72}
                 textAnchor={textAlign(scale(signaalwaarde) ?? 0)}
+                css={css({ fill: 'annotation' })}
               >
                 {text.signaalwaarde}: {`${formatNumber(signaalwaarde)}`}
               </text>
@@ -152,13 +165,17 @@ export function BarScale({
 
           {showAxis && (
             <g>
-              <text x={`${scale(xMin)}%`} y={64} className={styles.tick}>
+              <text
+                x={`${scale(xMin)}%`}
+                y={64}
+                css={css({ fill: 'annotation' })}
+              >
                 {`${formatNumber(xMin)}`}
               </text>
             </g>
           )}
         </svg>
-      </div>
+      </Box>
     </>
   );
 }
