@@ -5,8 +5,8 @@ import { Collapsible } from '~/components-styled/collapsible';
 import { EscalationLevelInfoLabel } from '~/components-styled/escalation-level';
 import { LinkWithIcon } from '~/components-styled/link-with-icon';
 import { Text } from '~/components-styled/typography';
-import { EscalationLevel } from '~/components/restrictions/type';
 import siteText from '~/locale';
+import { EscalationLevel } from '../restrictions/type';
 
 type EscalationLevelExplanationProps = {
   level: EscalationLevel;

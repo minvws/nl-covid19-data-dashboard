@@ -5,7 +5,7 @@ import Stopwatch from '~/assets/stopwatch.svg';
 import { Box } from '~/components-styled/base';
 import { Heading, Text } from '~/components-styled/typography';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { EscalationLevel } from '~/components/restrictions/type';
+import { EscalationLevel } from '~/domain/restrictions/type';
 import { assert } from '~/utils/assert';
 
 const escalationThresholds =
