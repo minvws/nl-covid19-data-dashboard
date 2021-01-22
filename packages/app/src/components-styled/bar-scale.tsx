@@ -1,11 +1,11 @@
 import css from '@styled-system/css';
 import { scaleQuantile, scaleThreshold } from 'd3-scale';
 import { Box } from '~/components-styled/base';
-import { ScreenReaderOnly } from '~/components/screenReaderOnly';
 import siteText from '~/locale/index';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { useDynamicScale } from '~/utils/useDynamicScale';
+import { VisuallyHidden } from './visually-hidden';
 
 type GradientStop = {
   color: string;
@@ -51,12 +51,12 @@ export function BarScale({
 
   return (
     <>
-      <ScreenReaderOnly>
+      <VisuallyHidden>
         {replaceVariablesInText(screenReaderText, {
           value: String(value),
           signaalwaarde: String(signaalwaarde),
         })}
-      </ScreenReaderOnly>
+      </VisuallyHidden>
 
       <Box height="5rem" aria-hidden="true">
         <svg
