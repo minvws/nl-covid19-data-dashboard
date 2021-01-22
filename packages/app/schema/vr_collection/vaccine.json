@@ -6,7 +6,7 @@
   "required": [
     "date_unix",
     "vrcode",
-    "vaccination_coverage_percentage",
+    "coverage_percentage",
     "date_of_insertion_unix"
   ],
   "properties": {
@@ -17,7 +17,7 @@
       "type": "string",
       "pattern": "^VR[0-9]+$"
     },
-    "vaccination_coverage_percentage": {
+    "coverage_percentage": {
       "type": "number"
     },
     "date_of_insertion_unix": {

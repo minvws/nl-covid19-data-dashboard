@@ -806,6 +806,6 @@ export interface RegionsElderlyAtHome {
 export interface RegionsVaccine {
   date_unix: number;
   vrcode: string;
-  vaccination_coverage_percentage: number;
+  coverage_percentage: number;
   date_of_insertion_unix: number;
 }
