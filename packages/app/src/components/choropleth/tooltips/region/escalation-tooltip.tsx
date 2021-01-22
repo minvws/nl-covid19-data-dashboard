@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { EscalationLevelIcon } from '~/components-styled/escalation-level-icon';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
-import { EscalationLevel } from '~/components/restrictions/type';
+import { EscalationLevel } from '~/domain/restrictions/type';
 import text from '~/locale/index';
 import { EscalationLevels } from '@corona-dashboard/common';
 import { formatDateFromSeconds } from '~/utils/formatDate';

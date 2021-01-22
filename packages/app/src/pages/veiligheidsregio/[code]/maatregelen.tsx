@@ -4,7 +4,7 @@ import Maatregelen from '~/assets/maatregelen.svg';
 import { AnchorTile } from '~/components-styled/anchor-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiSection } from '~/components-styled/kpi-section';
-import { LockdownTable } from '~/components/restrictions/lockdown-table';
+import { LockdownTable } from '~/domain/restrictions/lockdown-table';
 import { PortableText } from '~/lib/sanity';
 import { TileList } from '~/components-styled/tile-list';
 import { Heading } from '~/components-styled/typography';

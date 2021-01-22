@@ -4,7 +4,7 @@ import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import { Heading } from '~/components-styled/typography';
 import { KpiSection } from '~/components-styled/kpi-section';
-import { LockdownTable } from '~/components/restrictions/lockdown-table';
+import { LockdownTable } from '~/domain/restrictions/lockdown-table';
 import { PortableText } from '~/lib/sanity';
 import { SEOHead } from '~/components-styled/seo-head';
 import { Box } from '~/components-styled/base/box';
