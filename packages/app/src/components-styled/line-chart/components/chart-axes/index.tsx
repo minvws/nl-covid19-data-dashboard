@@ -6,6 +6,7 @@ import { Bar, Line } from '@visx/shape';
 import { Text } from '@visx/text';
 import { ScaleLinear, ScaleTime } from 'd3-scale';
 import { ComponentProps, memo, MouseEvent, ReactNode, TouchEvent } from 'react';
+import { colors } from '~/style/theme';
 import { MARKER_MIN_WIDTH } from '../marker';
 
 const NUM_TICKS = 3;
@@ -25,9 +26,9 @@ export const defaultPadding: ChartPadding = {
 };
 
 const defaultColors = {
-  axis: '#C4C4C4',
-  axisLabels: '#666666',
-  benchmark: '#4f5458',
+  axis: colors.silver,
+  axisLabels: colors.data.axisLabels,
+  benchmark: colors.data.benchmark,
 };
 
 type Benchmark = {

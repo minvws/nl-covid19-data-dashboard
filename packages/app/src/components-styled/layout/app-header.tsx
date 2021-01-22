@@ -1,7 +1,10 @@
+import css from '@styled-system/css';
 import React from 'react';
+import styled from 'styled-components';
 import { Box } from '~/components-styled/base';
 import { MaxWidth } from '~/components-styled/max-width';
 import text from '~/locale/index';
+import { Link } from '~/utils/link';
 import { LanguageSwitcher } from './components/language-switcher';
 import { Logo } from './components/logo';
 import { TopNavigation } from './components/top-navigation';
@@ -23,13 +26,10 @@ export function AppHeader() {
           justifyContent="space-between"
           px={{ _: 3, sm: 4, md: 3, lg: 4 }}
         >
-          <Box
-            fontSize={3}
-            py={[2, 2, 2, 3]}
-            lineHeight={'1em'}
-            fontWeight="bold"
-          >
-            {text.header.title}
+          <Box py={[2, 2, 2, 3]} lineHeight={'1em'} fontWeight="bold">
+            <Link href="/" passHref>
+              <TextLogoLink>{text.header.title}</TextLogoLink>
+            </Link>
           </Box>
 
           <TopNavigation />
@@ -38,3 +38,12 @@ export function AppHeader() {
     </Box>
   );
 }
+
+const TextLogoLink = styled.a(
+  css({
+    color: 'white',
+    fontSize: 3,
+    textDecoration: 'none',
+    lineHeight: 2,
+  })
+);

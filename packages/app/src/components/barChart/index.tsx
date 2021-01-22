@@ -48,7 +48,7 @@ export default function BarChart(props: IProps) {
         min: 0,
         max,
         allowDecimals: false,
-        gridLineColor: '#c4c4c4',
+        gridLineColor: colors.silver,
         title: {
           text: axisTitle,
         },

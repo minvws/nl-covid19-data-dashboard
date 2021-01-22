@@ -8,7 +8,8 @@ import { Box } from '~/components-styled/base';
 import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
 import { MaxWidth } from '~/components-styled/max-width';
-import { MessageTile } from '~/components-styled/message-tile';
+import { WarningTile } from '~/components-styled/warning-tile';
+import { colors } from '~/style/theme';
 import { NewsMessage } from '~/components-styled/news-message';
 import { QuickLinks } from '~/components-styled/quick-links';
 import { TileList } from '~/components-styled/tile-list';
@@ -85,9 +86,9 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
         description={text.metadata.description}
       />
       <Box bg="white" pb={4}>
-        <MaxWidth>
+        <MaxWidth px={{ _: 3, sm: 0 }}>
           <TileList>
-            <MessageTile
+            <WarningTile
               message={siteText.regionaal_index.belangrijk_bericht}
             />
 
@@ -170,7 +171,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                   href: '/veiligheidsregio',
                   text: text.quick_links.links.veiligheidsregio,
                 },
-                { href: '/gemeentes', text: text.quick_links.links.gemeente },
+                { href: '/gemeente', text: text.quick_links.links.gemeente },
               ]}
             />
 
@@ -216,7 +217,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                 <Box
                   borderTopWidth="1px"
                   borderTopStyle="solid"
-                  borderTopColor="gray"
+                  borderTopColor={colors.silver}
                   mt={3}
                   mx={-4}
                 >

@@ -31,7 +31,7 @@ export function MiniTrendTile<T extends Value>(props: MiniTrendTileProps<T>) {
       <Heading level={3} as="h2" py={2} pl={{ _: '3.5rem' }}>
         {title}
       </Heading>
-      <Text fontSize="3rem" fontWeight="bold" my={0}>
+      <Text fontSize="2.75rem" fontWeight="bold" my={0}>
         {formatNumber((value as unknown) as number)}
       </Text>
       {text}
@@ -41,6 +41,7 @@ export function MiniTrendTile<T extends Value>(props: MiniTrendTileProps<T>) {
             width={parent.width}
             timeframe="5weeks"
             values={trendData}
+            height={140}
             linesConfig={[{ metricProperty }]}
             componentCallback={componentCallback}
             showMarkerLine

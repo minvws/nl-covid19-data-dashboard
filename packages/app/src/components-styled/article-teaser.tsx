@@ -48,7 +48,7 @@ const StyledArticleTeaser = styled.a(
     display: 'block',
     border: 'solid',
     borderWidth: 1,
-    borderColor: 'border',
+    borderColor: 'lightGray',
     borderRadius: 4,
     minHeight: '26rem',
     overflow: 'hidden',

@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { Box } from '~/components-styled/base';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
-import { MessageTile } from '~/components-styled/message-tile';
+import { WarningTile } from '~/components-styled/warning-tile';
 import { TileList } from '~/components-styled/tile-list';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
@@ -48,7 +48,7 @@ const SafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
 
       <TileList>
         {text.regionaal_index.belangrijk_bericht && (
-          <MessageTile message={text.regionaal_index.belangrijk_bericht} />
+          <WarningTile message={text.regionaal_index.belangrijk_bericht} />
         )}
 
         <ChoroplethTile
