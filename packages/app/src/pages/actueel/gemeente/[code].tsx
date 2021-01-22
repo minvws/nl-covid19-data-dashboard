@@ -85,6 +85,7 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
             />
 
             <TopicalPageHeader
+              showBackLink
               lastGenerated={Number(props.lastGenerated)}
               title={replaceComponentsInText(text.title, {
                 municipalityName: <strong>{municipalityName}</strong>,

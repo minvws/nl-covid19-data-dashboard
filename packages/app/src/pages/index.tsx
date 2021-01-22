@@ -8,12 +8,10 @@ import { Box } from '~/components-styled/base';
 import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
 import { MaxWidth } from '~/components-styled/max-width';
-import { WarningTile } from '~/components-styled/warning-tile';
-import { colors } from '~/style/theme';
 import { NewsMessage } from '~/components-styled/news-message';
 import { QuickLinks } from '~/components-styled/quick-links';
 import { TileList } from '~/components-styled/tile-list';
-import { Heading } from '~/components-styled/typography';
+import { WarningTile } from '~/components-styled/warning-tile';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
@@ -26,6 +24,7 @@ import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-e
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
 import { TopicalChoroplethContainer } from '~/domain/topical/topical-choropleth-container';
+import { TopicalPageHeader } from '~/domain/topical/topical-page-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
@@ -35,6 +34,7 @@ import {
   getNlData,
   getText,
 } from '~/static-props/get-data';
+import { colors } from '~/style/theme';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 
 export const getStaticProps = createGetStaticProps(
@@ -70,7 +70,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const Home: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { text: siteText, data, choropleth, content } = props;
+  const { text: siteText, data, choropleth, content, lastGenerated } = props;
   const router = useRouter();
   const notificatie = siteText.notificatie;
   const text = siteText.nationaal_actueel;
@@ -94,11 +94,12 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
 
             <Search />
 
-            <Heading level={1} fontWeight="normal">
-              {replaceComponentsInText(text.title, {
+            <TopicalPageHeader
+              lastGenerated={Number(lastGenerated)}
+              title={replaceComponentsInText(text.title, {
                 the_netherlands: <strong>{text.the_netherlands}</strong>,
               })}
-            </Heading>
+            />
 
             <MiniTrendTileLayout>
               <MiniTrendTile

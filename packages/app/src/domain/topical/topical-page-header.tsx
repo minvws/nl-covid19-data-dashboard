@@ -13,23 +13,27 @@ import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 interface TopicalPageHeaderProps {
   title: ReactNode;
   lastGenerated: number;
+  showBackLink?: boolean;
 }
 
 export function TopicalPageHeader({
   title,
   lastGenerated,
+  showBackLink,
 }: TopicalPageHeaderProps) {
   return (
     <Box spacing={3}>
-      <Box fontSize="1.125rem">
-        <LinkWithIcon
-          href="/"
-          fontWeight="bold"
-          icon={<ArrowIcon css={css({ transform: 'rotate(90deg)' })} />}
-        >
-          {text.common_actueel.terug_naar_landelijk}
-        </LinkWithIcon>
-      </Box>
+      {showBackLink && (
+        <Box fontSize="1.125rem">
+          <LinkWithIcon
+            href="/"
+            fontWeight="bold"
+            icon={<ArrowIcon css={css({ transform: 'rotate(90deg)' })} />}
+          >
+            {text.common_actueel.terug_naar_landelijk}
+          </LinkWithIcon>
+        </Box>
+      )}
 
       <Box>
         <Heading level={1} fontWeight="normal" m={0}>
