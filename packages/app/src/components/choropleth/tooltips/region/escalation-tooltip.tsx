@@ -1,14 +1,17 @@
+import {
+  EscalationLevels,
+  SafetyRegionProperties,
+} from '@corona-dashboard/common';
 import { ReactNode } from 'react';
+import { Box } from '~/components-styled/base';
 import { EscalationLevelIcon } from '~/components-styled/escalation-level-icon';
+import { Text } from '~/components-styled/typography';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
 import { EscalationLevel } from '~/components/restrictions/type';
 import text from '~/locale/index';
-import { EscalationLevels } from '@corona-dashboard/common';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { RegionSelectionHandler } from '../../select-handlers/create-select-region-handler';
-import { SafetyRegionProperties } from '@corona-dashboard/common';
-import styles from '../tooltip.module.scss';
 
 export const escalationTooltip = (selectHandler: RegionSelectionHandler) => {
   return (context: SafetyRegionProperties & EscalationLevels): ReactNode => {
@@ -33,16 +36,20 @@ export const escalationTooltip = (selectHandler: RegionSelectionHandler) => {
 
     return (
       <TooltipContent title={context.vrname} onSelect={onSelect}>
-        <div className={styles.escalationInfo}>
-          <div className={styles.bubble}>
-            <EscalationLevelIcon level={level} />
-          </div>
+        <Box
+          display="flex"
+          alignItems="flex-start"
+          spacing={2}
+          spacingHorizontal
+        >
+          <EscalationLevelIcon level={level} />
           <div>
-            <strong>{escalationText.titel}</strong>
-            <br />
-            {validFromText}
+            <Text m={0} fontWeight="bold">
+              {escalationText.titel}
+            </Text>
+            <Text m={0}>{validFromText}</Text>
           </div>
-        </div>
+        </Box>
       </TooltipContent>
     );
   };
