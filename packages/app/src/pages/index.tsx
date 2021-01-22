@@ -1,3 +1,4 @@
+import { EscalationLevels } from '@corona-dashboard/common';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Notification from '~/assets/notification.svg';
@@ -18,6 +19,7 @@ import { createSelectMunicipalHandler } from '~/components/choropleth/select-han
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
 import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/create-positive-tested-people-regional-tooltip';
+import { createVaccinationCoverageRegionalTooltip } from '~/components/choropleth/tooltips/region/create-vaccination-coverage-regional-tooltip';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
@@ -29,7 +31,6 @@ import {
   getText,
 } from '~/static-props/get-data';
 import theme from '~/style/theme';
-import { EscalationLevels } from '@corona-dashboard/common';
 import { assert } from '~/utils/assert';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
@@ -37,9 +38,10 @@ export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   getText,
   createGetChoroplethData({
-    vr: ({ escalation_levels, tested_overall }) => ({
+    vr: ({ escalation_levels, tested_overall, vaccine }) => ({
       escalation_levels,
       tested_overall,
+      vaccine,
     }),
     gm: ({ tested_overall }) => ({ tested_overall }),
   }),
@@ -127,6 +129,31 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
           )}
         />
       </ChoroplethTile>
+
+      {/*
+        @TODO Move this to the vaccination page
+
+      <ChoroplethTile
+        title={text.vaccine.coverage_choropleth.title}
+        metadata={{
+          date: data.tested_overall.last_value.date_unix,
+          source: text.vaccine.coverage_choropleth.bronnen.rivm,
+        }}
+        description={text.vaccine.coverage_choropleth.description}
+        onChartRegionChange={setSelectedMap}
+        chartRegion={selectedMap}
+        legend={{
+          thresholds: regionThresholds.vaccine.vaccination_coverage_percentage,
+          title: text.vaccine.coverage_choropleth.legend_title,
+        }}
+      >
+        <SafetyRegionChoropleth
+          data={choropleth.vr}
+          metricName="vaccine"
+          metricProperty="vaccination_coverage_percentage"
+          tooltipContent={createVaccinationCoverageRegionalTooltip()}
+        />
+      </ChoroplethTile> */}
 
       <ChoroplethTile
         title={text.positief_geteste_personen.map_titel}
