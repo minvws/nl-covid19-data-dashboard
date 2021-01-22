@@ -82,6 +82,7 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
             />
 
             <TopicalPageHeader
+              showBackLink
               lastGenerated={Number(props.lastGenerated)}
               title={replaceComponentsInText(text.title, {
                 safetyRegionName: <strong>{props.safetyRegionName}</strong>,
