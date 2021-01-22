@@ -14,8 +14,8 @@ export interface Article {
   };
   cover: ImageBlock;
   summary: Block;
-  intro: Block | null;
-  content: RichContentBlock[] | null;
+  intro: Block;
+  content: RichContentBlock[];
   metaDescription: string;
   publicationDate: string;
   isHighlighted: boolean;

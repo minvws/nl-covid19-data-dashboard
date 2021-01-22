@@ -8,12 +8,11 @@ import { Box } from '~/components-styled/base';
 import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
 import { MaxWidth } from '~/components-styled/max-width';
-import { WarningTile } from '~/components-styled/warning-tile';
-import { colors } from '~/style/theme';
 import { NewsMessage } from '~/components-styled/news-message';
 import { QuickLinks } from '~/components-styled/quick-links';
 import { TileList } from '~/components-styled/tile-list';
 import { Heading } from '~/components-styled/typography';
+import { WarningTile } from '~/components-styled/warning-tile';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
@@ -27,6 +26,7 @@ import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
 import { TopicalChoroplethContainer } from '~/domain/topical/topical-choropleth-container';
 import { TopicalTile } from '~/domain/topical/topical-tile';
+import { targetLanguage } from '~/locale';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
@@ -35,6 +35,7 @@ import {
   getNlData,
   getText,
 } from '~/static-props/get-data';
+import { colors } from '~/style/theme';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 
 export const getStaticProps = createGetStaticProps(
@@ -47,8 +48,14 @@ export const getStaticProps = createGetStaticProps(
     }),
     gm: ({ tested_overall }) => ({ tested_overall }),
   }),
-  createGetContent<ArticleSummary[]>(
-    `*[_type == 'article'] | order(publicationDate) {title, slug, summary, cover}[0..2]`
+  createGetContent<{
+    articles: ArticleSummary[];
+    highlightedArticle: ArticleSummary;
+  }>(
+    `{
+    'articles': *[_type == 'article'] | order(publicationDate) {"title":title.${targetLanguage}, "slug":slug.${targetLanguage}, "summary":summary.${targetLanguage}, cover}[0..2],
+    'highlightedArticle': *[_type == 'topicalPage']{highlightedArticle->{"title":title.${targetLanguage}, "slug":slug.${targetLanguage}, "summary":summary.${targetLanguage}, cover}}[0],
+    }`
   ),
   () => {
     const data = getNlData();
@@ -230,7 +237,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
 
             <DataSitemap />
 
-            <ArticleList articleSummaries={content} />
+            <ArticleList articleSummaries={content.articles} />
           </TileList>
         </MaxWidth>
       </Box>
