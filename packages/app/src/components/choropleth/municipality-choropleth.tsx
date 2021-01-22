@@ -21,6 +21,7 @@ import {
   MunicipalityProperties,
 } from '@corona-dashboard/common';
 import { countryGeo, municipalGeo, regionGeo } from './topology';
+import { colors } from '~/style/theme';
 
 type MunicipalityChoroplethProps<T, K extends MunicipalitiesMetricName> = {
   data: Pick<Municipalities, K>;
@@ -117,7 +118,7 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
                  */
                 isInSameRegion
                 ? '#fff'
-                : '#c4c4c4'
+                : colors.silver
               : '#fff'
           }
           strokeWidth={0.5}

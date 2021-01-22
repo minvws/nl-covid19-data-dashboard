@@ -85,6 +85,7 @@ const mediaQueries = {
 
 export const colors = {
   body: '#000000',
+  bodyLight: '#555555',
   page: '#f3f3f3',
   blue: '#01689b',
   icon: '#01689b',
@@ -92,6 +93,7 @@ export const colors = {
   link: '#01689b',
   shadow: '#e5e5e5',
   gray: '#808080',
+  silver: '#c4c4c4',
   lightGray: '#dfdfdf',
   tileGray: '#f8f8f8',
   annotation: '#595959',
@@ -100,7 +102,6 @@ export const colors = {
   red: '#F35363',
   sidebarLinkBorder: '#cd005a',
   category: '#6b6b6b',
-  border: '#c4c4c4',
   lightBlue: '#E0EEF6',
   restrictions: '#CD0059',
   contextualContent: '#e5eff8',
@@ -109,6 +110,9 @@ export const colors = {
     primary: '#007BC7',
     secondary: '#154273',
     neutral: '#C6C8CA',
+    underReported: '#E6E6E6',
+    axisLabels: '#666666',
+    benchmark: '#4f5458',
     fill: 'rgba(0, 123, 199, .05)',
     scale: {
       blue: ['#8FCAE7', '#5BADDB', '#248FCF', '#0070BB', '#00529D', '#003580'],

@@ -40,7 +40,7 @@ const WarningBox = styled(Box)(
     alignItems: 'center',
     justifyContent: 'center',
     flex: '0 0 auto',
-    backgroundColor: '#F9DD68',
+    backgroundColor: '#FFE060',
     borderBottomLeftRadius: 1,
     borderTopLeftRadius: 1,
   })
@@ -63,7 +63,7 @@ const WarningMessageBox = styled(Box)(
     flex: '1 1 auto',
     py: 3,
     pl: 3,
-    backgroundColor: '#FAE87A',
+    backgroundColor: '#FFEE87',
   })
 );
 

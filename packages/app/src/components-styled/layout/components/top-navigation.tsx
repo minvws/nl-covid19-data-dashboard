@@ -2,15 +2,15 @@ import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import Close from '~/assets/close.svg';
+import Menu from '~/assets/menu.svg';
+import { MaxWidth } from '~/components-styled/max-width';
+import { VisuallyHidden } from '~/components-styled/visually-hidden';
 import text from '~/locale/index';
+import theme from '~/style/theme';
+import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { useBreakpoints } from '~/utils/useBreakpoints';
-import Menu from '~/assets/menu.svg';
-import Close from '~/assets/close.svg';
-import theme from '~/style/theme';
-import { VisuallyHidden } from '~/components-styled/visually-hidden';
-import { asResponsiveArray } from '~/style/utils';
-import { MaxWidth } from '~/components-styled/max-width';
 
 export function TopNavigation() {
   const router = useRouter();
@@ -50,11 +50,17 @@ export function TopNavigation() {
         >
           <MaxWidth>
             <NavList>
-              <NavItem href="/" isActive={router.pathname === '/'}>
+              <NavItem
+                href="/"
+                isActive={
+                  router.pathname === '/' ||
+                  router.pathname.startsWith('/actueel')
+                }
+              >
                 {text.nav.links.actueel}
               </NavItem>
               <NavItem
-                href="/landelijk"
+                href="/landelijk/positief-geteste-mensen"
                 isActive={router.pathname.startsWith('/landelijk')}
               >
                 {text.nav.links.index}
@@ -79,7 +85,7 @@ function NavItem({
   isActive,
 }: {
   href: string;
-  children: React.ReactNode;
+  children: string;
   isActive?: boolean;
 }) {
   const { pathname } = useRouter();
@@ -87,7 +93,7 @@ function NavItem({
     <StyledListItem>
       <Link passHref href={href}>
         <NavLink isActive={isActive ?? pathname.startsWith(href)}>
-          <NavLinkSpan>{children}</NavLinkSpan>
+          <NavLinkSpan data-text={children}>{children}</NavLinkSpan>
         </NavLink>
       </Link>
     </StyledListItem>
@@ -157,14 +163,14 @@ const NavLink = styled.a<{ isActive: boolean }>((x) =>
     // The span is a narrower element to position the underline to
     [NavLinkSpan]: {
       // Styled underline
-      '&::before': {
+      '&::after': {
         content: x.isActive ? '""' : undefined,
       },
     },
 
     // Show the underline
     '&:hover, &:focus': {
-      [`${NavLinkSpan}::before`]: {
+      [`${NavLinkSpan}::after`]: {
         content: '""',
       },
     },
@@ -188,8 +194,17 @@ const NavLinkSpan = styled.span(
     py: '0.7rem',
     position: 'relative',
 
-    // Styled underline
     '&::before': {
+      display: 'block',
+      content: 'attr(data-text)',
+      fontWeight: 'bold',
+      overflow: 'hidden',
+      visibility: 'hidden',
+      height: 0,
+    },
+
+    // Styled underline
+    '&::after': {
       bg: 'white',
       right: 3,
       left: 3,

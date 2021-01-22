@@ -1,4 +1,3 @@
-import { groq } from 'next-sanity';
 import { ArticleSummary } from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
 import { MaxWidth } from '~/components-styled/max-width';
@@ -14,7 +13,7 @@ import {
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   createGetContent<ArticleSummary[]>(
-    groq`*[_type == 'article'] | order(publicationDate) {title, slug, summary, cover}`
+    `*[_type == 'article'] | order(publicationDate) {title, slug, summary, cover}`
   )
 );
 

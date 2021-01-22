@@ -1,4 +1,3 @@
-import { groq } from 'next-sanity';
 import Head from 'next/head';
 import { Collapsible } from '~/components-styled/collapsible';
 import { MaxWidth } from '~/components-styled/max-width';
@@ -13,18 +12,21 @@ import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import { CollapsibleList } from '~/types/cms';
 import { getSkipLinkId } from '~/utils/skipLinks';
 import styles from './over.module.scss';
+import { PortableTextEntry } from '@sanity/block-content-to-react';
 
 interface VeelgesteldeVragenData {
   title: string | null;
-  description: unknown[] | null;
+  description: PortableTextEntry[] | null;
   questions: CollapsibleList[];
 }
 
+const query = `
+*[_type == 'veelgesteldeVragen'][0]
+`;
+
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  createGetContent<VeelgesteldeVragenData>(groq`
-    *[_type == 'veelgesteldeVragen'][0]
-  `)
+  createGetContent<VeelgesteldeVragenData>(query)
 );
 
 const Verantwoording: FCWithLayout<typeof getStaticProps> = (props) => {

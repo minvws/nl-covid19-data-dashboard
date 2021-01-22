@@ -4,6 +4,7 @@ import { Box } from '~/components-styled/base';
 import { ContentBlock } from '~/components-styled/cms/content-block';
 import { Image } from '~/components-styled/cms/image';
 import { Heading } from '~/components-styled/typography';
+import { PortableText } from '~/lib/sanity';
 import siteText from '~/locale';
 import { Article } from '~/types/cms';
 import { formatDateFromMilliseconds } from '~/utils/formatDate';
@@ -44,7 +45,7 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
 
         {article.intro && (
           <Box fontWeight="bold">
-            <RichContent blocks={article.intro} />
+            <PortableText blocks={article.intro} />
           </Box>
         )}
 

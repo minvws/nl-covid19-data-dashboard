@@ -41,13 +41,13 @@ export function RiskLevelIndicator(props: RiskLevelIndicatorProps) {
   assert(filteredEscalationLevel, 'Could not find an escalation level');
 
   return (
-    <>
-      <Box display="flex" alignItems="center" mb={3}>
+    <Box position="relative" pb={3}>
+      <Box width="4rem" height="4rem" position="absolute" left={0} mr={1}>
         <Stopwatch />
-        <Heading level={4} as="h2" mb="0" pl={3}>
-          {title}
-        </Heading>
       </Box>
+      <Heading level={3} as="h2" py={2} pl={{ _: '3.5rem' }}>
+        {title}
+      </Heading>
       <Box>
         <Box
           backgroundColor={filteredEscalationLevel.color}
@@ -59,13 +59,15 @@ export function RiskLevelIndicator(props: RiskLevelIndicatorProps) {
           color="#fff"
           fontWeight="bold"
         >
-          {`${escalationLevel} ${escalationTypes[escalationLevel].titel}`}
+          <Box as="span" pr={1}>
+            {escalationLevel}
+          </Box>
+          {escalationTypes[escalationLevel].titel}
         </Box>
       </Box>
 
-      <Text mb="0">{description}</Text>
-      <Text mt="0">
-        {`${escalationLevel}: `}
+      <Text>
+        {`${description} ${escalationLevel}: `}
         <EscalationLevelTitle>
           {escalationTypes[escalationLevel].titel.toLowerCase()}
         </EscalationLevelTitle>
@@ -75,7 +77,7 @@ export function RiskLevelIndicator(props: RiskLevelIndicatorProps) {
           {link.title}
         </Text>
       </Link>
-    </>
+    </Box>
   );
 }
 

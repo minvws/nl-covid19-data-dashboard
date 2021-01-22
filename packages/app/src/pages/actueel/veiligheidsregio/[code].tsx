@@ -1,3 +1,4 @@
+import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import GetestIcon from '~/assets/test.svg';
 import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
@@ -7,18 +8,20 @@ import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda
 import { MaxWidth } from '~/components-styled/max-width';
 import { WarningTile } from '~/components-styled/warning-tile';
 import { QuickLinks } from '~/components-styled/quick-links';
+import { RiskLevelIndicator } from '~/components-styled/risk-level-indicator';
 import { TileList } from '~/components-styled/tile-list';
-import { Heading } from '~/components-styled/typography';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
 import { SEOHead } from '~/components/seoHead';
 import { FCWithLayout, getDefaultLayout } from '~/domain/layout/layout';
-import { Search } from '~/domain/topical/components/search';
 import { DataSitemap } from '~/domain/topical/data-sitemap';
 import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
+import { TopicalChoroplethContainer } from '~/domain/topical/topical-choropleth-container';
+import { TopicalPageHeader } from '~/domain/topical/topical-page-header';
+import { TopicalTile } from '~/domain/topical/topical-tile';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
@@ -26,15 +29,11 @@ import {
   getText,
   getVrData,
 } from '~/static-props/get-data';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-
-export { getStaticPaths } from '~/static-paths/vr';
-import { RiskLevelIndicator } from '~/components-styled/risk-level-indicator';
 import { assert } from '~/utils/assert';
-import { TopicalChoroplethContainer } from '~/domain/topical/topical-choropleth-container';
-import { TopicalTile } from '~/domain/topical/topical-tile';
-import css from '@styled-system/css';
+import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { colors } from '~/style/theme';
+export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -45,7 +44,7 @@ export const getStaticProps = createGetStaticProps(
   })
 );
 
-const SafetyRegionActueel: FCWithLayout<typeof getStaticProps> = (props) => {
+const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
   const { text: siteText, choropleth, data } = props;
   const router = useRouter();
   const text = siteText.veiligheidsregio_actueel;
@@ -76,19 +75,18 @@ const SafetyRegionActueel: FCWithLayout<typeof getStaticProps> = (props) => {
         })}
       />
       <Box bg="white" pb={4}>
-        <MaxWidth>
+        <MaxWidth px={{ _: 3, sm: 0 }}>
           <TileList>
             <WarningTile
               message={siteText.regionaal_index.belangrijk_bericht}
             />
 
-            <Search initialValue={props.safetyRegionName} />
-
-            <Heading level={1} fontWeight="normal">
-              {replaceComponentsInText(text.title, {
+            <TopicalPageHeader
+              lastGenerated={Number(props.lastGenerated)}
+              title={replaceComponentsInText(text.title, {
                 safetyRegionName: <strong>{props.safetyRegionName}</strong>,
               })}
-            </Heading>
+            />
 
             <MiniTrendTileLayout>
               <MiniTrendTile
@@ -130,19 +128,19 @@ const SafetyRegionActueel: FCWithLayout<typeof getStaticProps> = (props) => {
                 trendData={dataHospitalIntake.values}
                 metricProperty="admissions_on_date_of_reporting"
               />
-            </MiniTrendTileLayout>
 
-            <RiskLevelIndicator
-              title={text.risoconiveau_maatregelen.title}
-              description={text.risoconiveau_maatregelen.description}
-              link={{
-                title: text.risoconiveau_maatregelen.bekijk_href,
-                href: `/veiligheidsregio/${regionCode}/maatregelen`,
-              }}
-              escalationLevel={filteredRegion.escalation_level}
-              code={filteredRegion.vrcode}
-              escalationTypes={escalationText.types}
-            />
+              <RiskLevelIndicator
+                title={text.risoconiveau_maatregelen.title}
+                description={text.risoconiveau_maatregelen.description}
+                link={{
+                  title: text.risoconiveau_maatregelen.bekijk_href,
+                  href: `/veiligheidsregio/${regionCode}/maatregelen`,
+                }}
+                escalationLevel={filteredRegion.escalation_level}
+                code={filteredRegion.vrcode}
+                escalationTypes={escalationText.types}
+              />
+            </MiniTrendTileLayout>
 
             <QuickLinks
               header={text.quick_links.header}
@@ -155,7 +153,7 @@ const SafetyRegionActueel: FCWithLayout<typeof getStaticProps> = (props) => {
                     { safetyRegionName: props.safetyRegionName }
                   ),
                 },
-                { href: '/gemeentes', text: text.quick_links.links.gemeente },
+                { href: '/gemeente', text: text.quick_links.links.gemeente },
               ]}
             />
 
@@ -191,7 +189,7 @@ const SafetyRegionActueel: FCWithLayout<typeof getStaticProps> = (props) => {
                 <Box
                   borderTopWidth="1px"
                   borderTopStyle="solid"
-                  borderTopColor="gray"
+                  borderTopColor={colors.silver}
                   mt={3}
                   mx={-4}
                 >
@@ -210,6 +208,6 @@ const SafetyRegionActueel: FCWithLayout<typeof getStaticProps> = (props) => {
   );
 };
 
-SafetyRegionActueel.getLayout = getDefaultLayout();
+TopicalSafetyRegion.getLayout = getDefaultLayout();
 
-export default SafetyRegionActueel;
+export default TopicalSafetyRegion;

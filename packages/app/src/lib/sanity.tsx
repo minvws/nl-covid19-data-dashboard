@@ -1,12 +1,10 @@
-// lib/sanity.tsx
-import {
-  createClient,
-  createImageUrlBuilder,
-  createPortableTextComponent,
-  createPreviewSubscriptionHook,
-  createCurrentUserHook,
-} from 'next-sanity';
+// lib/sanity.ts
+import sanityClient from '@sanity/client';
+import BlockContent from '@sanity/block-content-to-react';
 import { SanityImageSource } from '@sanity/image-url/lib/types/types';
+
+import imageUrlBuilder from '@sanity/image-url';
+
 import { TLanguageKey } from '~/locale';
 
 const config = {
@@ -27,39 +25,19 @@ const config = {
    **/
 };
 
+// Set up Portable Text serialization
+export const PortableText = BlockContent;
+
+// Set up the client for fetching data in the getProps page functions
+export const client = sanityClient(config);
+
+const builder = imageUrlBuilder(client);
+
 /**
  * Set up a helper function for generating Image URLs with only the asset reference data in your documents.
  * Read more: https://www.sanity.io/docs/image-url
  **/
-export const urlFor = (source: SanityImageSource) =>
-  createImageUrlBuilder(config).image(source);
-
-// Set up the live preview subsscription hook
-export const usePreviewSubscription = createPreviewSubscriptionHook(config);
-
-// Set up Portable Text serialization
-export const PortableText = createPortableTextComponent({
-  ...config,
-  // Serializers passed to @sanity/block-content-to-react
-  // (https://github.com/sanity-io/block-content-to-react)
-  serializers: {},
-});
-
-// Set up the client for fetching data in the getProps page functions
-export const sanityClient = createClient(config);
-// Set up a preview client with serverless authentication for drafts
-export const previewClient = createClient({
-  ...config,
-  useCdn: false,
-  token: process.env.SANITY_API_TOKEN,
-});
-
-// Helper functions for getting normal client and preview client
-export const getClient = () => sanityClient;
-export const getPreviewClient = () => previewClient;
-
-// Helper function for using the current logged in user account
-export const useCurrentUser = createCurrentUserHook(config);
+export const urlFor = (source: SanityImageSource) => builder.image(source);
 
 export function localize<T>(value: T, languages: TLanguageKey[]): T {
   const anyValue = value as any;

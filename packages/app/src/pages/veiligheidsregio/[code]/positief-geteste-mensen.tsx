@@ -29,11 +29,13 @@ import {
   getVrData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
-import { formatDateFromSeconds } from '~/utils/formatDate';
+import {
+  formatDateFromMilliseconds,
+  formatDateFromSeconds,
+} from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { formatDateFromMilliseconds } from '~/utils/formatDate';
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
@@ -74,6 +76,9 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
       <TileList>
         <ContentHeader
           category={siteText.veiligheidsregio_layout.headings.besmettingen}
+          screenReaderCategory={
+            siteText.positief_geteste_personen.titel_sidebar
+          }
           title={replaceVariablesInText(text.titel, {
             safetyRegion: safetyRegionName,
           })}

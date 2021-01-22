@@ -11,7 +11,6 @@ import article from './documents/article';
 import cijferVerantwoording from './documents/cijfer-verantwoording';
 import laatsteOntwikkelingen from './documents/laatste-ontwikkelingen';
 import veelgesteldeVragen from './documents/veelgestelde-vragen';
-import cijferVerantwoording from './documents/cijfer-verantwoording';
 import overRisicoNiveaus from './documents/over-risico-niveaus';
 import overDitDashboard from './documents/over-dit-dashboard';
 
@@ -32,6 +31,8 @@ import lineChart from './objects/line-chart';
 // so it's easier to scan over the different imports and recognize patterns
 import localeString from './locale/locale-string';
 import localeBlock from './locale/locale-block';
+import localeRichContentBlock from './locale/locale-rich-content-block';
+import localeText from './locale/locale-text';
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
