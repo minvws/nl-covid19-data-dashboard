@@ -1953,7 +1953,7 @@
   },
 
   "veiligheidsregio_actueel": {
-    "title": "De actuele situatie in {{safetyRegionName}}",
+    "title": "De actuele situatie in veiligheidsregio {{safetyRegionName}}",
     "metadata": {
       "title": "Actuele situatie in {{safetyRegionName}}",
       "description": "Actuele situatie in {{safetyRegionName}}"
@@ -2026,7 +2026,7 @@
     }
   },
   "gemeente_actueel": {
-    "title": "Actuele situatie in {{municipalityName}}",
+    "title": "Actuele situatie in gemeente {{municipalityName}}",
     "metadata": {
       "title": "Actuele situatie in {{municipalityName}}",
       "description": "Actuele situatie in {{municipalityName}}"

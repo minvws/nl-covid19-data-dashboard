@@ -7,11 +7,13 @@ import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
 import { MaxWidth } from '~/components-styled/max-width';
 import { MessageTile } from '~/components-styled/message-tile';
+import { colors } from '~/style/theme';
 import { QuickLinks } from '~/components-styled/quick-links';
 import { TileList } from '~/components-styled/tile-list';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
+import { RiskLevelIndicator } from '~/components-styled/risk-level-indicator';
 import { SEOHead } from '~/components/seoHead';
 import { FCWithLayout, getDefaultLayout } from '~/domain/layout/layout';
 import { DataSitemap } from '~/domain/topical/data-sitemap';
@@ -31,8 +33,8 @@ import {
 import { getSafetyRegionForMunicipalityCode } from '~/utils/getSafetyRegionForMunicipalityCode';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-
 export { getStaticPaths } from '~/static-paths/gm';
+import { assert } from '~/utils/assert';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -54,6 +56,16 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
 
   const dataInfectedTotal = data.tested_overall;
   const dataHospitalIntake = data.hospital_nice;
+  const escalationText = siteText.escalatie_niveau;
+
+  const filteredRegion = props.choropleth.vr.escalation_levels.find(
+    (item) => item.vrcode === safetyRegionForMunicipality?.code
+  );
+
+  assert(
+    filteredRegion,
+    `Could not find a "vrcode" to match with the region: ${safetyRegionForMunicipality?.code} to get the the current "escalation_level" of it.`
+  );
 
   return (
     <>
@@ -66,7 +78,7 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
         })}
       />
       <Box bg="white" pb={4}>
-        <MaxWidth>
+        <MaxWidth px={{ _: 3, sm: 0 }}>
           <TileList>
             <MessageTile
               message={siteText.regionaal_index.belangrijk_bericht}
@@ -119,6 +131,18 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
                 trendData={dataHospitalIntake.values}
                 metricProperty="admissions_on_date_of_reporting"
               />
+
+              <RiskLevelIndicator
+                title={text.risoconiveau_maatregelen.title}
+                description={text.risoconiveau_maatregelen.description}
+                link={{
+                  title: text.risoconiveau_maatregelen.bekijk_href,
+                  href: `/veiligheidsregio/${safetyRegionForMunicipality?.code}/maatregelen`,
+                }}
+                escalationLevel={filteredRegion.escalation_level}
+                code={filteredRegion.vrcode}
+                escalationTypes={escalationText.types}
+              />
             </MiniTrendTileLayout>
 
             <QuickLinks
@@ -138,7 +162,7 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
                       text: text.quick_links.links.veiligheidsregio_fallback,
                     },
                 {
-                  href: '/gemeentes',
+                  href: `/gemeente/${router.query.code}/positief-geteste-mensen`,
                   text: replaceVariablesInText(
                     text.quick_links.links.gemeente,
                     {
@@ -181,7 +205,7 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
                 <Box
                   borderTopWidth="1px"
                   borderTopStyle="solid"
-                  borderTopColor="gray"
+                  borderTopColor={colors.silver}
                   mt={3}
                   mx={-4}
                 >

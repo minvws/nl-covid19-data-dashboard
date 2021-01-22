@@ -32,7 +32,7 @@ import {
 import { assert } from '~/utils/assert';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-
+import { colors } from '~/style/theme';
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
@@ -75,7 +75,7 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
         })}
       />
       <Box bg="white" pb={4}>
-        <MaxWidth>
+        <MaxWidth px={{ _: 3, sm: 0 }}>
           <TileList>
             <MessageTile
               message={siteText.regionaal_index.belangrijk_bericht}
@@ -128,19 +128,19 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
                 trendData={dataHospitalIntake.values}
                 metricProperty="admissions_on_date_of_reporting"
               />
-            </MiniTrendTileLayout>
 
-            <RiskLevelIndicator
-              title={text.risoconiveau_maatregelen.title}
-              description={text.risoconiveau_maatregelen.description}
-              link={{
-                title: text.risoconiveau_maatregelen.bekijk_href,
-                href: `/veiligheidsregio/${regionCode}/maatregelen`,
-              }}
-              escalationLevel={filteredRegion.escalation_level}
-              code={filteredRegion.vrcode}
-              escalationTypes={escalationText.types}
-            />
+              <RiskLevelIndicator
+                title={text.risoconiveau_maatregelen.title}
+                description={text.risoconiveau_maatregelen.description}
+                link={{
+                  title: text.risoconiveau_maatregelen.bekijk_href,
+                  href: `/veiligheidsregio/${regionCode}/maatregelen`,
+                }}
+                escalationLevel={filteredRegion.escalation_level}
+                code={filteredRegion.vrcode}
+                escalationTypes={escalationText.types}
+              />
+            </MiniTrendTileLayout>
 
             <QuickLinks
               header={text.quick_links.header}
@@ -153,7 +153,7 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
                     { safetyRegionName: props.safetyRegionName }
                   ),
                 },
-                { href: '/gemeentes', text: text.quick_links.links.gemeente },
+                { href: '/gemeente', text: text.quick_links.links.gemeente },
               ]}
             />
 
@@ -189,7 +189,7 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
                 <Box
                   borderTopWidth="1px"
                   borderTopStyle="solid"
-                  borderTopColor="gray"
+                  borderTopColor={colors.silver}
                   mt={3}
                   mx={-4}
                 >

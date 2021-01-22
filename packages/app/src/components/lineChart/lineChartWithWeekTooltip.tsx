@@ -102,7 +102,7 @@ function getOptions(
       enabled: false,
     },
     xAxis: {
-      lineColor: '#C4C4C4',
+      lineColor: colors.silver,
       gridLineColor: '#ca005d',
       type: 'datetime',
       accessibility: {
@@ -148,8 +148,8 @@ function getOptions(
       min: 0,
       minRange: 0.1,
       allowDecimals: false,
-      lineColor: '#C4C4C4',
-      gridLineColor: '#C4C4C4',
+      lineColor: colors.silver,
+      gridLineColor: colors.silver,
       title: {
         text: null,
       },
