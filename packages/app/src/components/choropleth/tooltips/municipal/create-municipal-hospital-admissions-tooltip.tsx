@@ -1,8 +1,11 @@
+import {
+  MunicipalHospitalNiceValue,
+  MunicipalityProperties,
+} from '@corona-dashboard/common';
 import { ReactNode } from 'react';
+import { Text } from '~/components-styled/typography';
 import { MunicipalitySelectionHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
-import { MunicipalityProperties } from '@corona-dashboard/common';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
-import { MunicipalHospitalNiceValue } from '@corona-dashboard/common';
 
 export const createMunicipalHospitalAdmissionsTooltip = (
   selectHandler: MunicipalitySelectionHandler
@@ -16,7 +19,9 @@ export const createMunicipalHospitalAdmissionsTooltip = (
 
   return (
     <TooltipContent title={context.gemnaam} onSelect={onSelect}>
-      <strong>{context.admissions_on_date_of_reporting}</strong>
+      <Text m={0} fontWeight="bold">
+        {context.admissions_on_date_of_reporting}
+      </Text>
     </TooltipContent>
   );
 };

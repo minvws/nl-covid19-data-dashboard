@@ -1,8 +1,11 @@
+import {
+  RegionalHospitalNiceValue,
+  SafetyRegionProperties,
+} from '@corona-dashboard/common';
 import { ReactNode } from 'react';
+import { Text } from '~/components-styled/typography';
 import { RegionSelectionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
-import { SafetyRegionProperties } from '@corona-dashboard/common';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
-import { RegionalHospitalNiceValue } from '@corona-dashboard/common';
 import { formatNumber } from '~/utils/formatNumber';
 
 export const createRegionHospitalAdmissionsTooltip = (
@@ -18,7 +21,9 @@ export const createRegionHospitalAdmissionsTooltip = (
   return (
     context && (
       <TooltipContent title={context.vrname} onSelect={onSelect}>
-        <strong>{formatNumber(context.admissions_on_date_of_reporting)}</strong>
+        <Text m={0} fontWeight="bold">
+          {formatNumber(context.admissions_on_date_of_reporting)}
+        </Text>
       </TooltipContent>
     )
   );
