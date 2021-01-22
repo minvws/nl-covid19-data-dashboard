@@ -6,14 +6,13 @@ import { Box } from '~/components-styled/base';
 import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
 import { MaxWidth } from '~/components-styled/max-width';
-import { WarningTile } from '~/components-styled/warning-tile';
-import { colors } from '~/style/theme';
 import { QuickLinks } from '~/components-styled/quick-links';
+import { RiskLevelIndicator } from '~/components-styled/risk-level-indicator';
 import { TileList } from '~/components-styled/tile-list';
+import { WarningTile } from '~/components-styled/warning-tile';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
-import { RiskLevelIndicator } from '~/components-styled/risk-level-indicator';
 import { SEOHead } from '~/components/seoHead';
 import { FCWithLayout, getDefaultLayout } from '~/domain/layout/layout';
 import { DataSitemap } from '~/domain/topical/data-sitemap';
@@ -30,11 +29,14 @@ import {
   getLastGeneratedDate,
   getText,
 } from '~/static-props/get-data';
+import { colors } from '~/style/theme';
+import { assert } from '~/utils/assert';
 import { getSafetyRegionForMunicipalityCode } from '~/utils/getSafetyRegionForMunicipalityCode';
+import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+
 export { getStaticPaths } from '~/static-paths/gm';
-import { assert } from '~/utils/assert';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -135,14 +137,22 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
               <RiskLevelIndicator
                 title={text.risoconiveau_maatregelen.title}
                 description={text.risoconiveau_maatregelen.description}
-                link={{
-                  title: text.risoconiveau_maatregelen.bekijk_href,
-                  href: `/veiligheidsregio/${safetyRegionForMunicipality?.code}/maatregelen`,
-                }}
                 escalationLevel={filteredRegion.escalation_level}
                 code={filteredRegion.vrcode}
                 escalationTypes={escalationText.types}
-              />
+              >
+                {safetyRegionForMunicipality && (
+                  <>
+                    {siteText.common.vr_singular}:
+                    <br />
+                    <Link
+                      href={`/actueel/veiligheidsregio/${safetyRegionForMunicipality.code}`}
+                    >
+                      <a>{safetyRegionForMunicipality.name}</a>
+                    </Link>
+                  </>
+                )}
+              </RiskLevelIndicator>
             </MiniTrendTileLayout>
 
             <QuickLinks
