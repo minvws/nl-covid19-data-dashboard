@@ -3,7 +3,7 @@ import styles from '~/components/choropleth/tooltips/tooltip.module.scss';
 
 interface IProps {
   title: string;
-  onSelect: (event: React.MouseEvent<HTMLElement>) => void;
+  onSelect?: (event: React.MouseEvent<HTMLElement>) => void;
   children?: ReactNode;
 }
 

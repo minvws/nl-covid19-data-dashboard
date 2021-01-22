@@ -1,3 +1,4 @@
+import { EscalationLevels } from '@corona-dashboard/common';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Notification from '~/assets/notification.svg';
@@ -29,7 +30,6 @@ import {
   getText,
 } from '~/static-props/get-data';
 import theme from '~/style/theme';
-import { EscalationLevels } from '@corona-dashboard/common';
 import { assert } from '~/utils/assert';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
@@ -37,9 +37,10 @@ export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   getText,
   createGetChoroplethData({
-    vr: ({ escalation_levels, tested_overall }) => ({
+    vr: ({ escalation_levels, tested_overall, vaccine }) => ({
       escalation_levels,
       tested_overall,
+      vaccine,
     }),
     gm: ({ tested_overall }) => ({ tested_overall }),
   }),
