@@ -3,7 +3,7 @@ import { Box } from '~/components-styled/base';
 import { MaxWidth } from '~/components-styled/max-width';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
-import siteText from '~/locale';
+import siteText, { targetLanguage } from '~/locale';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
@@ -13,7 +13,7 @@ import {
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   createGetContent<ArticleSummary[]>(
-    `*[_type == 'article'] | order(publicationDate) {title, slug, summary, cover}`
+    `*[_type == 'article'] | order(publicationDate) {"title":title.${targetLanguage}, slug, "summary":summary.${targetLanguage}, cover}`
   )
 );
 

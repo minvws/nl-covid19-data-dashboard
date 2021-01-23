@@ -53,7 +53,7 @@ export const getStaticProps = createGetStaticProps(
     highlightedArticle: ArticleSummary;
   }>(
     `{
-    'articles': *[_type == 'article' && !(_id == *[_type == 'topicalPage']{"i":highlightedArticle->{_id}}[0].i._id)] | order(publicationDate) {"title":title.${targetLanguage}, "slug":slug.current, "summary":summary.${targetLanguage}, cover}[0..2],
+    'articles': *[_type == 'article' && !(_id == *[_type == 'topicalPage']{"i":highlightedArticle->{_id}}[0].i._id)] | order(publicationDate) {"title":title.${targetLanguage}, slug, "summary":summary.${targetLanguage}, cover}[0..2],
     'highlightedArticle': *[_type == 'topicalPage']{highlightedArticle->{"title":title.${targetLanguage}, "slug":slug.current, "summary":summary.${targetLanguage}, cover}}[0],
     }`
   ),
