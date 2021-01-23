@@ -53,8 +53,8 @@ export const getStaticProps = createGetStaticProps(
     highlightedArticle: ArticleSummary;
   }>(
     `{
-    'articles': *[_type == 'article'] | order(publicationDate) {"title":title.${targetLanguage}, "slug":slug.${targetLanguage}, "summary":summary.${targetLanguage}, cover}[0..2],
-    'highlightedArticle': *[_type == 'topicalPage']{highlightedArticle->{"title":title.${targetLanguage}, "slug":slug.${targetLanguage}, "summary":summary.${targetLanguage}, cover}}[0],
+    'articles': *[_type == 'article' && !(_id == *[_type == 'topicalPage']{"i":highlightedArticle->{_id}}[0].i._id)] | order(publicationDate) {"title":title.${targetLanguage}, "slug":slug.current, "summary":summary.${targetLanguage}, cover}[0..2],
+    'highlightedArticle': *[_type == 'topicalPage']{highlightedArticle->{"title":title.${targetLanguage}, "slug":slug.current, "summary":summary.${targetLanguage}, cover}}[0],
     }`
   ),
   () => {

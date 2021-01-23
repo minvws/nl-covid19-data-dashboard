@@ -67,10 +67,10 @@ export function ArticleList({ articleSummaries, hideLink }: ArticleListProps) {
         mt={3}
       >
         {articleSummaries.map((summary) => (
-          <ArticleBox key={summary.slug.current}>
+          <ArticleBox key={summary.slug}>
             <ArticleTeaser
               title={summary.title}
-              slug={summary.slug.current}
+              slug={summary.slug}
               summary={summary.summary}
               cover={summary.cover}
             />

@@ -7,11 +7,7 @@ export type CollapsibleList = {
 
 export interface Article {
   title: string;
-  slug: {
-    _key: string;
-    _type: 'slug';
-    current: string;
-  };
+  slug: string;
   cover: ImageBlock;
   summary: Block;
   intro: Block;
