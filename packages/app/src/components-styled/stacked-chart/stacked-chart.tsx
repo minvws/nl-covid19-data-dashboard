@@ -1,5 +1,5 @@
 /**
- * Code loosely based on LineChart + inspired by
+ * Code loosely based on
  * https://codesandbox.io/s/github/airbnb/visx/tree/master/packages/visx-demo/src/sandboxes/visx-barstack
  */
 import { AxisBottom, AxisLeft } from '@visx/axis';
@@ -10,7 +10,7 @@ import { scaleBand, scaleLinear, scaleOrdinal } from '@visx/scale';
 import { BarStack } from '@visx/shape';
 import { SeriesPoint } from '@visx/shape/lib/types';
 import { isEmpty } from 'lodash';
-import { useCallback, useMemo, useState } from 'react';
+import { useMemo, useState, MouseEvent, TouchEvent } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
@@ -24,14 +24,15 @@ import {
   getSeriesData,
   getValuesInTimeframe,
   Value,
+  useTooltip,
 } from './logic';
-
-const formatYAxisFn = (y: number) => formatNumber(y);
-const formatYAxisPercentageFn = (y: number) => `${formatPercentage(y)}%`;
+import { desaturate } from 'polished';
 
 const NUM_TICKS = 3;
-
 type AnyTickFormatter = (value: any) => string;
+const tickFormatNumber: AnyTickFormatter = (v: number) => formatNumber(v);
+const tickFormatPercentage: AnyTickFormatter = (v: number) =>
+  `${formatPercentage(v)}%`;
 
 type TooltipData = {
   bar: SeriesPoint<SeriesValue>;
@@ -44,6 +45,11 @@ type TooltipData = {
   color: string;
 };
 
+type HoverEvent = TouchEvent<SVGElement> | MouseEvent<SVGElement>;
+
+/**
+ * @TODO move to common chart config
+ */
 export const defaultPadding = {
   top: 10,
   right: 20,
@@ -83,7 +89,6 @@ export function StackedChart<T extends Value>({
   height = 250,
   valueAnnotation,
   formatTooltip,
-  // formatYAxis,
   isPercentage,
 }: StackedChartProps<T>) {
   const {
@@ -92,7 +97,7 @@ export function StackedChart<T extends Value>({
     tooltipTop = 0,
     showTooltip,
     hideTooltip,
-  } = useTooltip<T & SeriesValue>();
+  } = useTooltip<TooltipData>();
 
   const metricProperties = useMemo(() => config.map((x) => x.metricProperty), [
     config,
@@ -110,23 +115,49 @@ export function StackedChart<T extends Value>({
     [valuesInTimeframe, metricProperties]
   );
 
-  // console.log('trendData', series);
-
   const seriesMax = useMemo(() => calculateSeriesMaximum(series), [series]);
 
-  // const keys = metricProperties as string[];
-  const barColors = config.map((x) => x.color);
+  const [isHovered, setIsHovered] = useState(false);
 
   /**
-   * @TODO return date as Q1 Q2 etc
+   * ========== hooks end ==========
    */
-  // function getDate(x: DateValue | DateSpanValue) {
-  //   return isDateValue(x)
-  //     ? String(x.date_unix)
-  //     : isDateSpanValue(x)
-  //     ? String(x.date_start_unix)
-  //     : '';
-  // }
+
+  /**
+   * The hover function gets passed the full bar data as tooltipData. It
+   * contains the bar position properties as well as the original data used to
+   * render that bar.
+   */
+  function handleHover(event: HoverEvent, tooltipData: TooltipData) {
+    const isLeave = event.type === 'mouseleave';
+    setIsHovered(!isLeave);
+
+    if (isLeave) {
+      hideTooltip();
+      return;
+    }
+
+    /**
+     * TooltipInPortal expects coordinates to be relative to containerRef
+     * localPoint returns coordinates relative to the nearest SVG, which is what
+     * containerRef is set to in this example.
+     */
+
+    /**
+     * Every instantiated bar gets its own mouse handler, which is tied to the
+     * bar variable via closure. Bar also contains a "bar" property that contains
+     * the original ChartValue data, so the name is confusing.
+     */
+    const eventSvgCoords = localPoint(event);
+    const left = tooltipData.x + tooltipData.width / 2;
+    showTooltip({
+      tooltipData: tooltipData,
+      tooltipTop: eventSvgCoords?.y || 0,
+      tooltipLeft: left,
+    });
+  }
+
+  const barColors = config.map((x) => x.color);
 
   if (isEmpty(series)) {
     return null;
@@ -142,6 +173,24 @@ export function StackedChart<T extends Value>({
   const colorScale = scaleOrdinal<string, string>({
     domain: metricProperties as string[],
     range: barColors,
+  });
+
+  // const colorScaleReversed = scaleOrdinal<string, string>({
+  //   domain: metricProperties as string[],
+  //   range: [barColors.map(',
+  // });
+
+  const curriedDesaturate = desaturate(0.5);
+
+  const hoverColorScales = barColors.map((_, targetIndex) => {
+    const scaleColors = barColors.map((color, index) =>
+      index === targetIndex ? color : curriedDesaturate(color)
+    );
+
+    return scaleOrdinal<string, string>({
+      domain: metricProperties as string[],
+      range: scaleColors,
+    });
   });
 
   const padding = defaultPadding;
@@ -160,97 +209,6 @@ export function StackedChart<T extends Value>({
     domain: [0, seriesMax],
     nice: true,
   }).range([bounds.height, 0]);
-
-  const formatYAxis = isPercentage ? formatYAxisPercentageFn : formatYAxisFn;
-
-  // const bisect = useCallback(
-  //   (
-  //     trend: (TrendValue & Value)[],
-  //     xPosition: number,
-  //     xScale: ScaleTime<number, number>
-  //   ) => {
-  //     if (!trend.length) return;
-  //     if (trend.length === 1) return trend[0];
-
-  //     const date = xScale.invert(xPosition - padding.left);
-
-  //     const index = bisectLeft(trend.map((x) => x.__date), date, 1
-  //     );
-
-  //     const d0 = trend[index - 1]; const d1 = trend[index];
-
-  //     if (!d1) return d0;
-
-  //     return +date - +d0.__date > +d1.__date - +date ? d1 : d0;
-  //   },
-  //   [padding]
-  // );
-
-  // const toggleHoverElements = useCallback(
-  //   (
-  //     hide: boolean,
-  //     hoverPoints?: HoverPoint<T>[],
-  //     nearestPoint?: HoverPoint<T>
-  //   ) => {
-  //     if (hide) {
-  //       hideTooltip();
-  //       // setMarkerProps(undefined);
-  //     } else if (hoverPoints?.length && nearestPoint) {
-  //       showTooltip({
-  //         tooltipData: hoverPoints.map((x) => x.data),
-  //         tooltipLeft: nearestPoint.x,
-  //         tooltipTop: nearestPoint.y,
-  //       });
-  //       // setMarkerProps({
-  //       //   data: hoverPoints,
-  //       //   height,
-  //       //   padding: padding,
-  //       // });
-  //     }
-  //   },
-  //   [showTooltip, hideTooltip /* height, padding */]
-  // );
-
-  // const handleHover = useCallback(
-  //   (
-  //     event: React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>,
-  //     scales: ChartScales
-  //   ) => {
-  //     if (!trendsList.length || event.type === 'mouseleave') {
-  //       toggleHoverElements(true);
-  //       return;
-  //     }
-
-  //     const { xScale, yScale } = scales;
-
-  //     const point = localPoint(event);
-
-  //     if (!point) {return;
-  //     }
-
-  //     const sortByNearest = (left: HoverPoint<T>, right: HoverPoint<T>) =>
-  //       distance(left, point) - distance(right, point);
-
-  //     const hoverPoints = trendsList .map((trends, index) => {const
-  //       trendValue = bisect(trends, point.x, xScale); return trendValue
-  //           ? {
-  //               data: trendValue,
-  //               color: config[index].color,
-  //             }
-  //           : undefined;
-  //       })
-  //       .filter(isDefined) .map<HoverPoint<T>>(({ data, color }: { data: any;
-  //       color?: string }) => {return {data, color, x: xScale(data.__date) ??
-  //       0, y: yScale(data.__value) ?? 0,
-  //           };
-  //         }
-  //       );
-  //     const nearest = hoverPoints.slice().sort(sortByNearest);
-
-  //     toggleHoverElements(false, hoverPoints, nearest[0]);
-  //   },
-  //   [bisect, trendsList, config, toggleHoverElements]
-  // );
 
   return (
     <Box>
@@ -286,7 +244,9 @@ export function StackedChart<T extends Value>({
               hideTicks
               hideAxisLine
               stroke={defaultColors.axis}
-              tickFormat={formatYAxis as AnyTickFormatter}
+              tickFormat={
+                isPercentage ? tickFormatPercentage : tickFormatNumber
+              }
               tickLabelProps={() => ({
                 fill: defaultColors.axisLabels,
                 fontSize: 12,
@@ -301,51 +261,35 @@ export function StackedChart<T extends Value>({
               x={getDateString}
               xScale={xScale}
               yScale={yScale}
-              color={colorScale}
+              color={isHovered ? hoverColorScales[0] : colorScale}
             >
               {(barStacks) =>
                 barStacks.map((barStack) =>
-                  barStack.bars.map((bar) => (
-                    <rect
-                      key={`bar-stack-${barStack.index}-${bar.index}`}
-                      x={bar.x}
-                      y={bar.y}
-                      height={bar.height}
-                      width={bar.width}
-                      fill={bar.color}
-                      onClick={(event) => {
-                        if (event) alert(`clicked: ${JSON.stringify(bar)}`);
-                      }}
-                      onMouseLeave={() => {
-                        // tooltipTimeout = window.setTimeout(() => {
-                        hideTooltip();
-                        // }, 300);
-                      }}
-                      onMouseMove={(event) => {
-                        // if (tooltipTimeout) clearTimeout(tooltipTimeout);
-                        // TooltipInPortal expects coordinates to be relative to
-                        // containerRef localPoint returns coordinates relative
-                        // to the nearest SVG, which is what containerRef is set
-                        // to in this example.
+                  barStack.bars.map((bar, index) => {
+                    /**
+                     * Capture the bar data for the hover
+                     * handler using a closure for each bar.
+                     */
+                    const handleHoverWithBar = (event: HoverEvent) =>
+                      handleHover(event, bar);
 
-                        /**
-                         * Every instantiated bar gets its own mouse handler,
-                         * which is tied to the bar variable via closure. It
-                         * also contains a "bar" property that contains the
-                         * original ChartValue data, but the name is confusing.
-                         */
-                        // console.log('bar', bar);
-
-                        const eventSvgCoords = localPoint(event);
-                        const left = bar.x + bar.width / 2;
-                        showTooltip({
-                          tooltipData: bar,
-                          tooltipTop: eventSvgCoords?.y || 0,
-                          tooltipLeft: left,
-                        });
-                      }}
-                    />
-                  ))
+                    return (
+                      <rect
+                        key={`bar-stack-${barStack.index}-${bar.index}`}
+                        x={bar.x}
+                        y={bar.y}
+                        height={bar.height}
+                        width={bar.width}
+                        fill={bar.color}
+                        onClick={(event) => {
+                          if (event) alert(`clicked: ${JSON.stringify(bar)}`);
+                        }}
+                        onMouseLeave={handleHoverWithBar}
+                        onMouseMove={handleHoverWithBar}
+                        onTouchStart={handleHoverWithBar}
+                      />
+                    );
+                  })
                 )
               }
             </BarStack>
@@ -377,61 +321,6 @@ export function StackedChart<T extends Value>({
     </Box>
   );
 }
-
-// type TooltipData<T> = {
-//   trendValue: ChartValue;
-//   dataValue: T;
-//   metricProperty: keyof T;
-// };
-
-function useTooltip<T extends Value>() {
-  const [tooltipData, setTooltipData] = useState<TooltipData>();
-  const [tooltipLeft, setTooltipLeft] = useState<number>();
-  const [tooltipTop, setTooltipTop] = useState<number>();
-
-  const showTooltip = useCallback(
-    (x: {
-      tooltipData: TooltipData;
-      tooltipLeft: number;
-      tooltipTop: number;
-    }) => {
-      setTooltipData(x.tooltipData);
-      setTooltipLeft(x.tooltipLeft);
-      setTooltipTop(x.tooltipTop);
-    },
-    []
-  );
-
-  const hideTooltip = useCallback(() => {
-    setTooltipData(undefined);
-    setTooltipLeft(undefined);
-    setTooltipTop(undefined);
-  }, []);
-
-  return {
-    tooltipData,
-    tooltipLeft,
-    tooltipTop,
-    showTooltip,
-    hideTooltip,
-  };
-}
-
-// function distance(point1: HoverPoint<Value>, point2: Point) {const x =
-//   point2.x - point1.x; const y = point2.y - point1.y; return Math.sqrt(x * x
-//   + y * y);
-//     }
-
-/**
- * By passing in the original value plus the metric property that the tooltip is
- * showing for, we should have all data to render any type of tooltip.
- */
-// function formatDefaultTooltip<T extends Value>(
-//   context: TooltipData<T>,
-//   _isPercentage?: boolean
-// ) {
-//   return <div> {context.trendValue.__value} </div>;
-// }
 
 function formatDefaultTooltip(data: TooltipData, _isPercentage?: boolean) {
   // console.log('tooltip data', data);
