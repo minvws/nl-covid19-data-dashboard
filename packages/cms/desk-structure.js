@@ -131,7 +131,7 @@ export default () =>
         ),
 
       S.listItem()
-        .title('Actueel pagina')
+        .title('Actueel')
         .schemaType('topicalPage')
         .icon(GrDashboard)
         .child(

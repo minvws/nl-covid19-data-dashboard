@@ -15,14 +15,14 @@ export type ArticleSummary = Pick<
   'title' | 'slug' | 'summary' | 'cover'
 >;
 
-type ArticleLinkProps = {
+type ArticleTeaserProps = {
   title: string;
   slug: string;
   summary: Block;
   cover: ImageBlock;
 };
 
-export function ArticleTeaser(props: ArticleLinkProps) {
+export function ArticleTeaser(props: ArticleTeaserProps) {
   const { title, slug, summary, cover } = props;
 
   return (

@@ -5,6 +5,8 @@ export type CollapsibleList = {
   title: string;
 };
 
+export type Editorial = Record<string, never> & Article;
+
 export interface Article {
   title: string;
   slug: {
