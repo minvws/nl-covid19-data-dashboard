@@ -19,7 +19,6 @@ import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { PageBarScale } from '~/components-styled/page-barscale';
 import { StackedChart } from '~/components-styled/stacked-chart/stacked-chart';
-import { Tile } from '~/components-styled/tile';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
@@ -105,7 +104,15 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
           reference={text.reference}
         />
 
-        <Tile>
+        <ChartTile
+          title="Indicatief leveringsoverzicht @TODO localize"
+          description="Iets van een omschrijving @TODO localize"
+          ariaDescription="@TODO"
+          metadata={{
+            // @TODO date from data
+            date: 123413212,
+          }}
+        >
           <StackedChart
             values={[
               {
@@ -179,7 +186,7 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
               },
             ]}
           />
-        </Tile>
+        </ChartTile>
 
         <TwoKpiSection>
           <KpiTile
