@@ -141,33 +141,40 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
             ]}
             config={[
               {
-                metricProperty: 'pfizer',
-                color: '#333',
-                legendLabel: 'Pfizer',
-              },
-              {
-                metricProperty: 'moderna',
-                color: '#555',
-                legendLabel: 'Moderna',
-              },
-              {
                 metricProperty: 'astra_zeneca',
-                color: '#ccc',
+                color: '#E580E5',
+                fadedColor: '#aaa',
                 legendLabel: 'Astra Zeneca',
+              },
+
+              {
+                metricProperty: 'pfizer',
+                color: '#6BB7F5',
+                fadedColor: '#aaa',
+                legendLabel: 'BioTech Pfizer',
               },
               {
                 metricProperty: 'cure_vac',
-                color: '#aaa',
-                legendLabel: 'Cure Vac',
+                color: '#8E6DEA',
+                fadedColor: '#aaa',
+                legendLabel: 'Curevac',
               },
               {
                 metricProperty: 'janssen',
-                color: '#444',
+                color: '#BAB2FB',
+                fadedColor: '#aaa',
                 legendLabel: 'Janssen',
               },
               {
+                metricProperty: 'moderna',
+                color: '#20BAB4',
+                fadedColor: '#aaa',
+                legendLabel: 'Moderna',
+              },
+              {
                 metricProperty: 'sanofi',
-                color: '#888',
+                color: '#99E4E3',
+                fadedColor: '#aaa',
                 legendLabel: 'Sanofi',
               },
             ]}

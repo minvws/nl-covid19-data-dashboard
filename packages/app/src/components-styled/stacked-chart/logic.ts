@@ -1,8 +1,8 @@
 import { omit, pick } from 'lodash';
+import { useCallback, useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { assert } from '~/utils/assert';
 import { getDaysForTimeframe, TimeframeOption } from '~/utils/timeframe';
-import { MouseEvent, TouchEvent, useCallback, useState } from 'react';
 // export type Value = DailyValue | WeeklyValue;
 export type Value = DateValue | DateSpanValue;
 

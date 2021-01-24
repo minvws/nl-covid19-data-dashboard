@@ -10,29 +10,37 @@ import { scaleBand, scaleLinear, scaleOrdinal } from '@visx/scale';
 import { BarStack } from '@visx/shape';
 import { SeriesPoint } from '@visx/shape/lib/types';
 import { isEmpty } from 'lodash';
-import { useMemo, useState, MouseEvent, TouchEvent } from 'react';
+import { MouseEvent, TouchEvent, useMemo, useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
-import { colors } from '~/style/theme';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
-import { Legenda } from '../legenda';
+import { Legenda, LegendItem } from '../legenda';
 import { Tooltip } from './components';
 import {
   calculateSeriesMaximum,
-  SeriesValue,
   getSeriesData,
   getValuesInTimeframe,
-  Value,
+  SeriesValue,
   useTooltip,
+  Value,
 } from './logic';
-import { desaturate } from 'polished';
 
 const NUM_TICKS = 3;
+const NO_HOVER_INDEX = -1;
+
 type AnyTickFormatter = (value: any) => string;
 const tickFormatNumber: AnyTickFormatter = (v: number) => formatNumber(v);
 const tickFormatPercentage: AnyTickFormatter = (v: number) =>
   `${formatPercentage(v)}%`;
+
+/**
+ * A timeout prevents the tooltip from closing directly when you move out of the
+ * bar. This is needed because there is padding between the bars and the hover
+ * state becomes very jittery without it.
+ */
+let tooltipTimeout: number;
+let hoverTimeout: number;
 
 type TooltipData = {
   bar: SeriesPoint<SeriesValue>;
@@ -69,6 +77,7 @@ const defaultColors = {
 export type Config<T extends Value> = {
   metricProperty: keyof T;
   color: string;
+  fadedColor: string;
   legendLabel: string;
 };
 
@@ -78,7 +87,8 @@ export type StackedChartProps<T extends Value> = {
   valueAnnotation?: string;
   width?: number;
   height?: number;
-  formatTooltip?: typeof formatDefaultTooltip;
+  formatDate?: typeof defaultFormatDate;
+  formatTooltip?: typeof defaultFormatTooltip;
   isPercentage?: boolean;
 };
 
@@ -89,6 +99,7 @@ export function StackedChart<T extends Value>({
   height = 250,
   valueAnnotation,
   formatTooltip,
+  formatDate,
   isPercentage,
 }: StackedChartProps<T>) {
   const {
@@ -117,7 +128,52 @@ export function StackedChart<T extends Value>({
 
   const seriesMax = useMemo(() => calculateSeriesMaximum(series), [series]);
 
-  const [isHovered, setIsHovered] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState(NO_HOVER_INDEX);
+
+  const colorScale = useMemo(() => {
+    return scaleOrdinal<string, string>({
+      domain: metricProperties as string[],
+      range: config.map((x) => x.color),
+    });
+  }, [config, metricProperties]);
+
+  /**
+   * Create a color scale for each possible hover state of the elements. This
+   * maps over config twice, because for every item/color a new scale is
+   * generate which contains the full range of colors but with adjustments.
+   */
+  const hoverColorScales = useMemo(
+    () =>
+      config.map((_, targetIndex) => {
+        const scaleColors = config.map((x, index) =>
+          index === targetIndex ? x.color : x.fadedColor
+        );
+
+        return scaleOrdinal<string, string>({
+          domain: metricProperties as string[],
+          range: scaleColors,
+        });
+      }),
+    [config, metricProperties]
+  );
+
+  const legendaItems = useMemo(
+    () =>
+      config.map(
+        (x, index) =>
+          ({
+            color:
+              hoveredIndex === NO_HOVER_INDEX
+                ? x.color
+                : hoveredIndex === index
+                ? x.color
+                : x.fadedColor,
+            label: x.legendLabel,
+            shape: 'square',
+          } as LegendItem)
+      ),
+    [config, hoveredIndex]
+  );
 
   /**
    * ========== hooks end ==========
@@ -128,14 +184,30 @@ export function StackedChart<T extends Value>({
    * contains the bar position properties as well as the original data used to
    * render that bar.
    */
-  function handleHover(event: HoverEvent, tooltipData: TooltipData) {
+  function handleHover(
+    event: HoverEvent,
+    tooltipData: TooltipData,
+    hoverIndex: number
+  ) {
     const isLeave = event.type === 'mouseleave';
-    setIsHovered(!isLeave);
+
+    // console.log(tooltipData.index);
 
     if (isLeave) {
-      hideTooltip();
+      tooltipTimeout = window.setTimeout(() => {
+        hideTooltip();
+      }, 300);
+
+      hoverTimeout = window.setTimeout(() => {
+        setHoveredIndex(NO_HOVER_INDEX);
+      }, 300);
       return;
     }
+
+    if (tooltipTimeout) clearTimeout(tooltipTimeout);
+    if (hoverTimeout) clearTimeout(hoverTimeout);
+
+    setHoveredIndex(hoverIndex);
 
     /**
      * TooltipInPortal expects coordinates to be relative to containerRef
@@ -145,8 +217,8 @@ export function StackedChart<T extends Value>({
 
     /**
      * Every instantiated bar gets its own mouse handler, which is tied to the
-     * bar variable via closure. Bar also contains a "bar" property that contains
-     * the original ChartValue data, so the name is confusing.
+     * bar variable via closure. Bar also contains a "bar" property that
+     * contains the original ChartValue data, so the name is confusing.
      */
     const eventSvgCoords = localPoint(event);
     const left = tooltipData.x + tooltipData.width / 2;
@@ -157,41 +229,9 @@ export function StackedChart<T extends Value>({
     });
   }
 
-  const barColors = config.map((x) => x.color);
-
   if (isEmpty(series)) {
     return null;
   }
-
-  function getDateString(x: SeriesValue) {
-    /**
-     * @TODO return date as Q1 Q2 etc
-     */
-    return x.__date.toLocaleDateString();
-  }
-
-  const colorScale = scaleOrdinal<string, string>({
-    domain: metricProperties as string[],
-    range: barColors,
-  });
-
-  // const colorScaleReversed = scaleOrdinal<string, string>({
-  //   domain: metricProperties as string[],
-  //   range: [barColors.map(',
-  // });
-
-  const curriedDesaturate = desaturate(0.5);
-
-  const hoverColorScales = barColors.map((_, targetIndex) => {
-    const scaleColors = barColors.map((color, index) =>
-      index === targetIndex ? color : curriedDesaturate(color)
-    );
-
-    return scaleOrdinal<string, string>({
-      domain: metricProperties as string[],
-      range: scaleColors,
-    });
-  });
 
   const padding = defaultPadding;
 
@@ -201,7 +241,7 @@ export function StackedChart<T extends Value>({
   };
 
   const xScale = scaleBand<string>({
-    domain: series.map(getDateString),
+    domain: series.map(formatDate || defaultFormatDate),
     padding: 0.2,
   }).rangeRound([0, bounds.width]);
 
@@ -258,20 +298,24 @@ export function StackedChart<T extends Value>({
             <BarStack<SeriesValue, string>
               data={series}
               keys={metricProperties as string[]}
-              x={getDateString}
+              x={formatDate || defaultFormatDate}
               xScale={xScale}
               yScale={yScale}
-              color={isHovered ? hoverColorScales[0] : colorScale}
+              color={
+                hoveredIndex == NO_HOVER_INDEX
+                  ? colorScale
+                  : hoverColorScales[hoveredIndex]
+              }
             >
               {(barStacks) =>
                 barStacks.map((barStack) =>
-                  barStack.bars.map((bar, index) => {
+                  barStack.bars.map((bar) => {
                     /**
-                     * Capture the bar data for the hover
-                     * handler using a closure for each bar.
+                     * Capture the bar data for the hover handler using a
+                     * closure for each bar.
                      */
                     const handleHoverWithBar = (event: HoverEvent) =>
-                      handleHover(event, bar);
+                      handleHover(event, bar, barStack.index);
 
                     return (
                       <rect
@@ -304,25 +348,27 @@ export function StackedChart<T extends Value>({
           >
             {formatTooltip
               ? formatTooltip(tooltipData, isPercentage)
-              : formatDefaultTooltip(tooltipData, isPercentage)}
+              : defaultFormatTooltip(tooltipData, isPercentage)}
           </Tooltip>
         )}
 
         <Box pl={`${padding.left}px`}>
-          <Legenda
-            items={config.map((x) => ({
-              color: x.color ?? colors.data.primary,
-              label: x.legendLabel ?? '',
-              shape: 'line',
-            }))}
-          />
+          <Legenda items={legendaItems} />
         </Box>
       </Box>
     </Box>
   );
 }
 
-function formatDefaultTooltip(data: TooltipData, _isPercentage?: boolean) {
+function defaultFormatDate(x: SeriesValue) {
+  const year = x.__date.getFullYear();
+  const month = x.__date.getMonth();
+  const quarter = Math.floor(month / 4) + 1;
+
+  return `Q${quarter} ${year}`;
+}
+
+function defaultFormatTooltip(data: TooltipData, _isPercentage?: boolean) {
   // console.log('tooltip data', data);
 
   return <div>{`${data.key}: ${data.bar.data[data.key]}`} </div>;
