@@ -1,13 +1,12 @@
-import styled from 'styled-components';
 import css from '@styled-system/css';
-import { Link } from '~/utils/link';
-import { Text } from '~/components-styled/typography';
-import { Box } from '~/components-styled/base';
+import { ReactNode } from 'react';
+import styled from 'styled-components';
 import Stopwatch from '~/assets/stopwatch.svg';
-import { Heading } from '~/components-styled/typography';
-import { assert } from '~/utils/assert';
-import { EscalationLevel } from '~/components/restrictions/type';
+import { Box } from '~/components-styled/base';
+import { Heading, Text } from '~/components-styled/typography';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
+import { EscalationLevel } from '~/domain/restrictions/type';
+import { assert } from '~/utils/assert';
 
 const escalationThresholds =
   regionThresholds.escalation_levels.escalation_level;
@@ -23,16 +22,19 @@ interface RiskLevelIndicatorProps {
   title: string;
   description: string;
   code: string;
-  link: {
-    title: string;
-    href: string;
-  };
   escalationTypes: Record<escalationRecord, escalationTypesType>;
   escalationLevel: EscalationLevel | number;
+  children?: ReactNode;
 }
 
 export function RiskLevelIndicator(props: RiskLevelIndicatorProps) {
-  const { title, description, link, escalationTypes, escalationLevel } = props;
+  const {
+    title,
+    description,
+    children,
+    escalationTypes,
+    escalationLevel,
+  } = props;
 
   const filteredEscalationLevel = escalationThresholds.find(
     (item) => item.threshold === escalationLevel
@@ -58,25 +60,23 @@ export function RiskLevelIndicator(props: RiskLevelIndicatorProps) {
           display="inline-block"
           color="#fff"
           fontWeight="bold"
+          fontSize={19}
+          spacing={3}
+          spacingHorizontal
         >
-          <Box as="span" pr={1}>
-            {escalationLevel}
-          </Box>
-          {escalationTypes[escalationLevel].titel}
+          <span>{escalationLevel}</span>
+          <span>{escalationTypes[escalationLevel].titel}</span>
         </Box>
       </Box>
 
       <Text>
-        {`${description} ${escalationLevel}: `}
+        {description} {escalationLevel}:{' '}
         <EscalationLevelTitle>
           {escalationTypes[escalationLevel].titel.toLowerCase()}
         </EscalationLevelTitle>
       </Text>
-      <Link href={link.href}>
-        <Text as="a" href={link.href}>
-          {link.title}
-        </Text>
-      </Link>
+
+      {children}
     </Box>
   );
 }

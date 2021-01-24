@@ -12,7 +12,7 @@ import { municipalThresholds } from '~/components/choropleth/municipal-threshold
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
-import { SEOHead } from '~/components/seoHead';
+import { SEOHead } from '~/components-styled/seo-head';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getMunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';

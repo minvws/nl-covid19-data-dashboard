@@ -25,6 +25,10 @@ import VervoerReizenOV from '~/assets/restrictions/vervoer-en-reizen_ov.svg';
 import WinkelsAlcohol from '~/assets/restrictions/winkelen-en-boodschappen_alcohol.svg';
 import WinkelsBoodschappen from '~/assets/restrictions/winkelen-en-boodschappen_open.svg';
 
+import Avondklok from '~/assets/restrictions/avondklok.svg';
+import Lopend from '~/assets/restrictions/lopend.svg';
+import Bezoek from '~/assets/restrictions/bezoek.svg';
+
 export const restrictionIcons: Record<string, any> = {
   '41_er_op_uit_1': null,
   '41_er_op_uit_2': null,
@@ -71,4 +75,7 @@ export const restrictionIcons: Record<string, any> = {
   '41_onderwijs_39': OnderwijsOpAfstand,
   '41_onderwijs_40': OnderwijsKinderopvang,
   '41_onderwijs_41': OnderwijsNoodopvang,
+  avondklok: Avondklok,
+  bezoek: Bezoek,
+  lopend: Lopend,
 };
