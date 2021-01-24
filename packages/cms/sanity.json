@@ -38,7 +38,7 @@
     },
     {
       "implements": "part:@sanity/base/document-actions/resolver",
-      "path": "resolveDocumentActions.js"
+      "path": "resolve-document-actions.js"
     }
   ]
 }
