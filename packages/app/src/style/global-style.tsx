@@ -111,4 +111,5 @@ button::-moz-focus-inner {
 .inline-kpi {
   font-variant-numeric: tabular-nums;
 }
+
 `;

@@ -24,7 +24,7 @@ type TooltipContainerProps = {
   borderColor: string;
 };
 
-const TooltipContainer = styled.div<TooltipContainerProps>`
+export const TooltipContainer = styled.div<TooltipContainerProps>`
   pointer-events: none;
   position: absolute;
   min-width: 72;

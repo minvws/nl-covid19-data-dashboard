@@ -9,20 +9,36 @@ import { Group } from '@visx/group';
 import { scaleBand, scaleLinear, scaleOrdinal } from '@visx/scale';
 import { BarStack } from '@visx/shape';
 import { SeriesPoint } from '@visx/shape/lib/types';
-import { isEmpty } from 'lodash';
-import { MouseEvent, TouchEvent, useMemo, useState } from 'react';
-import { isDefined } from 'ts-is-present';
+import { isEmpty, set } from 'lodash';
+import { MouseEvent, TouchEvent, useCallback, useMemo, useState } from 'react';
 import { Box } from '~/components-styled/base';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { Legenda, LegendItem } from '../legenda';
-import { Tooltip } from './components';
+import { TooltipContainer } from './components/tooltip';
+import ResizeObserver from 'resize-observer-polyfill';
+
+import {
+  useTooltip,
+  useTooltipInPortal,
+  defaultStyles,
+  Portal,
+  Tooltip,
+} from '@visx/tooltip';
+
+const tooltipStyles = {
+  ...defaultStyles,
+  padding: 0,
+  margin: 10,
+  zIndex: 100,
+};
+
 import {
   calculateSeriesMaximum,
   getSeriesData,
   getValuesInTimeframe,
   SeriesValue,
-  useTooltip,
+  // useTooltip,
   Value,
 } from './logic';
 
@@ -88,7 +104,10 @@ export type StackedChartProps<T extends Value> = {
   width?: number;
   height?: number;
   formatDate?: typeof defaultFormatDate;
-  formatTooltip?: typeof defaultFormatTooltip;
+  /**
+   * @TODO type any
+   */
+  formatTooltip?: (data: any) => JSX.Element;
   isPercentage?: boolean;
 };
 
@@ -108,6 +127,7 @@ export function StackedChart<T extends Value>({
     tooltipTop = 0,
     showTooltip,
     hideTooltip,
+    tooltipOpen,
   } = useTooltip<TooltipData>();
 
   const metricProperties = useMemo(() => config.map((x) => x.metricProperty), [
@@ -175,6 +195,46 @@ export function StackedChart<T extends Value>({
     [config, hoveredIndex]
   );
 
+  const labelByKey = useMemo(
+    () =>
+      config.reduce(
+        (acc, x) => set(acc, x.metricProperty, x.legendLabel),
+        {} as Record<string, string>
+      ),
+    [config]
+  );
+
+  const { containerRef, TooltipInPortal } = useTooltipInPortal({
+    // TooltipInPortal is rendered in a separate child of <body /> and positioned
+    // with page coordinates which should be updated on scroll. consider using
+    // Tooltip or TooltipWithBounds if you don't need to render inside a Portal
+    scroll: true,
+    polyfill: ResizeObserver,
+  });
+
+  const defaultFormatTooltip = useCallback(
+    (data: TooltipData) => {
+      const seriesValue = data.bar.data;
+      const dateString = defaultFormatDate(seriesValue);
+
+      return (
+        <div>
+          <div>
+            <strong>{labelByKey[data.key]}</strong>
+            {`: ${data.bar.data[data.key]}`}
+          </div>
+
+          <div>
+            <strong>{dateString}</strong>
+            {/* @TODO move mln to lokalize */}
+            {`: ${data.bar.data[data.key]} mln`}
+          </div>
+        </div>
+      );
+    },
+    [labelByKey]
+  );
+
   /**
    * ========== hooks end ==========
    */
@@ -220,12 +280,12 @@ export function StackedChart<T extends Value>({
      * bar variable via closure. Bar also contains a "bar" property that
      * contains the original ChartValue data, so the name is confusing.
      */
-    const eventSvgCoords = localPoint(event);
+    const coords = localPoint(event);
     const left = tooltipData.x + tooltipData.width / 2;
     showTooltip({
       tooltipData: tooltipData,
-      tooltipTop: eventSvgCoords?.y || 0,
-      tooltipLeft: left,
+      tooltipTop: coords?.y || 0,
+      tooltipLeft: Math.max(coords?.x - 20 || 0, left),
     });
   }
 
@@ -235,6 +295,11 @@ export function StackedChart<T extends Value>({
 
   const padding = defaultPadding;
 
+  if (width < 10) return null;
+  // bounds
+  const xMax = width - padding.left - padding.right;
+  const yMax = height - padding.top - padding.bottom;
+
   const bounds = {
     width: width - padding.left - padding.right,
     height: height - padding.top - padding.bottom,
@@ -243,12 +308,12 @@ export function StackedChart<T extends Value>({
   const xScale = scaleBand<string>({
     domain: series.map(formatDate || defaultFormatDate),
     padding: 0.2,
-  }).rangeRound([0, bounds.width]);
+  }).rangeRound([0, xMax]);
 
   const yScale = scaleLinear<number>({
     domain: [0, seriesMax],
     nice: true,
-  }).range([bounds.height, 0]);
+  }).range([yMax, 0]);
 
   return (
     <Box>
@@ -257,7 +322,10 @@ export function StackedChart<T extends Value>({
       )}
 
       <Box position="relative">
-        <svg width={width} height={height} role="img">
+        <Portal>
+          <Tooltip style={tooltipStyles}>WUT</Tooltip>
+        </Portal>
+        <svg ref={containerRef} width={width} height={height} role="img">
           <Group left={padding.left} top={padding.top}>
             <GridRows
               scale={yScale}
@@ -268,7 +336,6 @@ export function StackedChart<T extends Value>({
             <AxisBottom
               scale={xScale}
               tickValues={xScale.domain()}
-              // tickFormat={formatXAxis as AnyTickFormatter}
               top={bounds.height}
               stroke={defaultColors.axis}
               tickLabelProps={() => ({
@@ -319,6 +386,7 @@ export function StackedChart<T extends Value>({
 
                     return (
                       <rect
+                        id={`bar-stack-${barStack.index}-${bar.index}`}
                         key={`bar-stack-${barStack.index}-${bar.index}`}
                         x={bar.x}
                         y={bar.y}
@@ -340,16 +408,18 @@ export function StackedChart<T extends Value>({
           </Group>
         </svg>
 
-        {isDefined(tooltipData) && (
-          <Tooltip
-            bounds={{ right: width, left: 0, top: 0, bottom: height }}
-            x={tooltipLeft + padding.left}
-            y={tooltipTop + padding.top}
+        {tooltipOpen && tooltipData && (
+          <TooltipInPortal
+            top={tooltipTop}
+            left={tooltipLeft}
+            style={tooltipStyles}
           >
-            {formatTooltip
-              ? formatTooltip(tooltipData, isPercentage)
-              : defaultFormatTooltip(tooltipData, isPercentage)}
-          </Tooltip>
+            <TooltipContainer borderColor="#01689B">
+              {formatTooltip
+                ? formatTooltip(tooltipData)
+                : defaultFormatTooltip(tooltipData)}
+            </TooltipContainer>
+          </TooltipInPortal>
         )}
 
         <Box pl={`${padding.left}px`}>
@@ -366,10 +436,4 @@ function defaultFormatDate(x: SeriesValue) {
   const quarter = Math.floor(month / 4) + 1;
 
   return `Q${quarter} ${year}`;
-}
-
-function defaultFormatTooltip(data: TooltipData, _isPercentage?: boolean) {
-  // console.log('tooltip data', data);
-
-  return <div>{`${data.key}: ${data.bar.data[data.key]}`} </div>;
 }

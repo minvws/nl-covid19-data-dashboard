@@ -3,14 +3,15 @@ import { useCallback, useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { assert } from '~/utils/assert';
 import { getDaysForTimeframe, TimeframeOption } from '~/utils/timeframe';
-// export type Value = DailyValue | WeeklyValue;
-export type Value = DateValue | DateSpanValue;
 
-// This type limits the allowed property names to those with a number type, so
-// its like keyof T, but filtered down to only the appropriate properties.
-export type NumberProperty<T extends Value> = {
-  [K in keyof T]: T[K] extends number | null ? K : never;
-}[keyof T];
+/**
+ * @TODO the logic about DateValue and DateSpanValue needs to be moved to a
+ * common location.
+ *
+ * I have used different names from the previously used WeeklyValue because we
+ * are not limited to weeks anymore.
+ */
+export type Value = DateValue | DateSpanValue;
 
 export interface DateValue {
   date_unix: number;
@@ -20,14 +21,6 @@ export type DateSpanValue = {
   date_start_unix: number;
   date_end_unix: number;
 };
-
-/**
- * To read an arbitrary value property from the passed in data, we need to cast
- * the type to a dictionary internally, otherwise TS will complain the index
- * signature is missing on the passed in value type T.
- */
-export type AnyValue = Record<string, number | null>;
-export type AnyFilteredValue = Record<string, number>;
 
 export function isDateValue(value: Value): value is DateValue {
   return (value as DateValue).date_unix !== undefined;
@@ -66,9 +59,10 @@ export function isDateSpanSeries(series: Value[]): series is DateSpanValue[] {
 }
 
 /**
- * A SeriesPoint contains a __value property which has an object with all the
- * different trends in key/value pairs. This function sums all values together
- * for each point and then returns the highest sum for all points.
+ * A SeriesValue contains the properties for all trend values in key/value
+ * pairs. This function sums all property values together and then returns the
+ * highest sum for all. The __date property is a special case which needs to be
+ * omitted.
  */
 export function calculateSeriesMaximum(series: SeriesValue[]) {
   function sumTrendPointValue(point: SeriesValue) {
@@ -133,7 +127,8 @@ export type SeriesValue = {
 const timestampToDate = (d: number) => new Date(d * 1000);
 
 /**
- * This function converts the passed in data to the generic SeriesValue container.
+ * This function converts the passed in data to the generic SeriesValue
+ * container.
  */
 export function getSeriesData<T extends Value>(
   metricValues: Value[],
@@ -160,49 +155,35 @@ function getDateFromValue<T extends Value>(value: T) {
   throw new Error(`Incompatible timestamps are used in value ${value}`);
 }
 
-// type HoverEvent = TouchEvent<SVGElement> | MouseEvent<SVGElement>;
-
-// export function useHoverState(onHover: (event: HoverEvent) => void) {
-//   const [isHovered, setIsHovered] = useState(false);
-
-//   const handleHover = (event: HoverEvent) => {
-//     const isLeave = event.type === 'mouseleave';
-//     setIsHovered(!isLeave);
-//     onHover(event);
-//   };
-
-//   return [isHovered];
-// }
-
 /**
  * @TODO There is nothing stacked-chart specific about this hook, so it could be
  * moved to a shared location
  */
-export function useTooltip<T>() {
-  const [tooltipData, setTooltipData] = useState<T>();
-  const [tooltipLeft, setTooltipLeft] = useState<number>();
-  const [tooltipTop, setTooltipTop] = useState<number>();
+// export function useTooltip<T>() {
+//   const [tooltipData, setTooltipData] = useState<T>();
+//   const [tooltipLeft, setTooltipLeft] = useState<number>();
+//   const [tooltipTop, setTooltipTop] = useState<number>();
 
-  const showTooltip = useCallback(
-    (x: { tooltipData: T; tooltipLeft: number; tooltipTop: number }) => {
-      setTooltipData(x.tooltipData);
-      setTooltipLeft(x.tooltipLeft);
-      setTooltipTop(x.tooltipTop);
-    },
-    []
-  );
+//   const showTooltip = useCallback(
+//     (x: { tooltipData: T; tooltipLeft: number; tooltipTop: number }) => {
+//       setTooltipData(x.tooltipData);
+//       setTooltipLeft(x.tooltipLeft);
+//       setTooltipTop(x.tooltipTop);
+//     },
+//     []
+//   );
 
-  const hideTooltip = useCallback(() => {
-    setTooltipData(undefined);
-    setTooltipLeft(undefined);
-    setTooltipTop(undefined);
-  }, []);
+//   const hideTooltip = useCallback(() => {
+//     setTooltipData(undefined);
+//     setTooltipLeft(undefined);
+//     setTooltipTop(undefined);
+//   }, []);
 
-  return {
-    tooltipData,
-    tooltipLeft,
-    tooltipTop,
-    showTooltip,
-    hideTooltip,
-  };
-}
+//   return {
+//     tooltipData,
+//     tooltipLeft,
+//     tooltipTop,
+//     showTooltip,
+//     hideTooltip,
+//   };
+// }
