@@ -136,7 +136,7 @@ export function formatDateFromMilliseconds(
   return DayMonth.format(milliseconds);
 }
 
-export function formatSanityDate(
+export function formatDateFromString(
   sanityDate: string,
   style?: formatStyle
 ): string {

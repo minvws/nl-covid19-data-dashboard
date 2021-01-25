@@ -1,5 +1,5 @@
 import css from '@styled-system/css';
-import { formatSanityDate } from '~/utils/formatDate';
+import { formatDateFromString } from '~/utils/formatDate';
 
 type PublicationDateProps = {
   date: string;
@@ -8,7 +8,7 @@ type PublicationDateProps = {
 export function PublicationDate({ date }: PublicationDateProps) {
   return (
     <time css={css({ color: 'gray' })} dateTime={date}>
-      {formatSanityDate(date, 'medium')}
+      {formatDateFromString(date, 'medium')}
     </time>
   );
 }
