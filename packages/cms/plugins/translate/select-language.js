@@ -12,21 +12,28 @@ import {
 import React from 'react';
 import { MdErrorOutline } from 'react-icons/md';
 import Flag from 'react-world-flags';
+import schema from '../../schemas/schema';
 
 export default function SelectLanguage(props) {
   const { languages, selected, onChange, document } = props;
 
-  const validation = useValidationStatus(document?.id, document?.type);
+  const validation = useValidationStatus(document.id, document.type);
 
   const validationErrors = extractValidationErrorsPerLanguage(
     validation.markers,
     languages
   );
 
+  const hasLocaleFields = findLocaleFields(document.id, schema);
+
+  if (!hasLocaleFields) {
+    return null;
+  }
+
   return (
     <ThemeProvider theme={studioTheme}>
       <Inline space={[3]}>
-        <Label size={2}>Select a language:</Label>
+        <Label size={2}>Kies een taal:</Label>
 
         <TabList space={1}>
           {languages.map((lang) => (
@@ -70,4 +77,14 @@ function extractValidationErrorsPerLanguage(markers, languages) {
 
 function checkForLanguage(languageId) {
   return (marker) => marker.path.length === 2 && marker.path[1] === languageId;
+}
+
+function findLocaleFields(documentId, schema) {
+  const docSchema = schema._original.types.find(
+    (doc) => doc.name === documentId
+  );
+  if (!docSchema) {
+    return true;
+  }
+  return docSchema.fields.some((field) => field.type.startsWith('locale'));
 }
