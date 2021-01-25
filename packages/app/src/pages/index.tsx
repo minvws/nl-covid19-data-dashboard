@@ -20,12 +20,15 @@ import { FCWithLayout, getDefaultLayout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import { Search } from '~/domain/topical/components/search';
 import { DataSitemap } from '~/domain/topical/data-sitemap';
+import { EditorialSummary } from '~/domain/topical/editorial-teaser';
+import { EditorialTile } from '~/domain/topical/editorial-tile';
 import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
 import { TopicalChoroplethContainer } from '~/domain/topical/topical-choropleth-container';
 import { TopicalPageHeader } from '~/domain/topical/topical-page-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
+import { targetLanguage } from '~/locale';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
@@ -47,8 +50,17 @@ export const getStaticProps = createGetStaticProps(
     }),
     gm: ({ tested_overall }) => ({ tested_overall }),
   }),
-  createGetContent<ArticleSummary[]>(
-    `*[_type == 'article'] | order(publicationDate) {title, slug, summary, cover}[0..2]`
+  createGetContent<{
+    articles: ArticleSummary[];
+    editorial: EditorialSummary;
+    highlight: { article: ArticleSummary };
+  }>(
+    `{
+    // Retrieve the latest 3 articles with the highlighted article filtered out:
+    'articles': *[_type == 'article' && !(_id == *[_type == 'topicalPage']{"i":highlightedArticle->{_id}}[0].i._id)] | order(publicationDate) {"title":title.${targetLanguage}, slug, "summary":summary.${targetLanguage}, cover}[0..2],
+    'editorial': *[_type == 'editorial'] | order(publicationDate) {"title":title.${targetLanguage}, slug, "summary":summary.${targetLanguage}, cover}[0],
+    'highlight': *[_type == 'topicalPage']{"article":highlightedArticle->{"title":title.${targetLanguage}, slug, "summary":summary.${targetLanguage}, cover}}[0],
+    }`
   ),
   () => {
     const data = getNlData();
@@ -186,6 +198,11 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
               title={notificatie.titel}
             />
 
+            <EditorialTile
+              editorial={content.editorial}
+              highlightedArticle={content.highlight.article}
+            />
+
             <TopicalTile>
               <>
                 <TopicalChoroplethContainer
@@ -231,7 +248,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
 
             <DataSitemap />
 
-            <ArticleList articleSummaries={content} />
+            <ArticleList articleSummaries={content.articles} />
           </TileList>
         </MaxWidth>
       </Box>

@@ -17,6 +17,10 @@ type ArticleListProps = {
 };
 
 export function ArticleList({ articleSummaries, hideLink }: ArticleListProps) {
+  if (articleSummaries.length === 0) {
+    return null;
+  }
+
   return (
     <Box
       css={css({

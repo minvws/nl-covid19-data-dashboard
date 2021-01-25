@@ -135,3 +135,10 @@ export function formatDateFromMilliseconds(
 
   return DayMonth.format(milliseconds);
 }
+
+export function formatDateFromString(
+  sanityDate: string,
+  style?: formatStyle
+): string {
+  return formatDateFromMilliseconds(new Date(sanityDate).getTime(), style);
+}

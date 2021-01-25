@@ -1,10 +1,8 @@
 // lib/sanity.ts
-import sanityClient from '@sanity/client';
 import BlockContent from '@sanity/block-content-to-react';
-import { SanityImageSource } from '@sanity/image-url/lib/types/types';
-
+import sanityClient from '@sanity/client';
 import imageUrlBuilder from '@sanity/image-url';
-
+import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 import { TLanguageKey } from '~/locale';
 
 const config = {
@@ -39,7 +37,7 @@ const builder = imageUrlBuilder(client);
  **/
 export const urlFor = (source: SanityImageSource) => builder.image(source);
 
-export function localize<T>(value: T, languages: TLanguageKey[]): T {
+export function localize<T>(value: T | T[], languages: TLanguageKey[]): T {
   const anyValue = value as any;
 
   if (Array.isArray(value)) {

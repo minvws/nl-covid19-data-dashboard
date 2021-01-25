@@ -5,6 +5,8 @@ export type CollapsibleList = {
   title: string;
 };
 
+export type Editorial = Record<string, never> & Article;
+
 export interface Article {
   title: string;
   slug: {
@@ -14,8 +16,8 @@ export interface Article {
   };
   cover: ImageBlock;
   summary: Block;
-  intro: Block | null;
-  content: RichContentBlock[] | null;
+  intro: Block;
+  content: RichContentBlock[];
   metaDescription: string;
   publicationDate: string;
   isHighlighted: boolean;

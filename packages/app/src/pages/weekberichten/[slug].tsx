@@ -1,5 +1,5 @@
-import { ArticleDetail } from '~/components-styled/article-detail';
 import { Box } from '~/components-styled/base';
+import { EditorialDetail } from '~/components-styled/editorial-detail';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import { client, localize, urlFor } from '~/lib/sanity';
 import { targetLanguage } from '~/locale/index';
@@ -8,20 +8,20 @@ import {
   createGetContent,
   getLastGeneratedDate,
 } from '~/static-props/get-data';
-import { Article, Block } from '~/types/cms';
+import { Block, Editorial } from '~/types/cms';
 import { assert } from '~/utils/assert';
 
-const articlesQuery = `*[_type == 'article'] {"slug":slug.current}`;
+const editorialsQuery = `*[_type == 'editorial'] {"slug":slug.current}`;
 
 export async function getStaticPaths() {
-  const articlesData = await client.fetch(articlesQuery);
-  const articles = localize<{ slug: string }[]>(articlesData, [
+  const editorialData = await client.fetch(editorialsQuery);
+  const editorials = localize<{ slug: string }[]>(editorialData, [
     targetLanguage,
     'nl',
   ]);
 
-  const paths = articles.map((article) => ({
-    params: { slug: article.slug },
+  const paths = editorials.map((editorial) => ({
+    params: { slug: editorial.slug },
   }));
 
   // { fallback: false } means other routes should 404.
@@ -30,18 +30,18 @@ export async function getStaticPaths() {
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  createGetContent<Article>((context) => {
+  createGetContent<Editorial>((context) => {
     assert(context?.params?.slug, 'Slug required to retrieve article');
-    return `*[_type == 'article' && slug.current == '${context.params.slug}'][0]`;
+    return `*[_type == 'editorial' && slug.current == '${context.params.slug}'][0]`;
   })
 );
 
-const ArticleDetailPage: FCWithLayout<typeof getStaticProps> = (props) => {
+const EditorialDetailPage: FCWithLayout<typeof getStaticProps> = (props) => {
   const { content } = props;
 
   return (
     <Box backgroundColor="white">
-      <ArticleDetail article={content} />
+      <EditorialDetail editorial={content} />
     </Box>
   );
 };
@@ -50,7 +50,7 @@ const ArticleDetailPage: FCWithLayout<typeof getStaticProps> = (props) => {
  *  @TODO this implementation below is not very sexy yet, its hacked together
  * to simply have _something_
  */
-ArticleDetailPage.getLayout = (page, props) => {
+EditorialDetailPage.getLayout = (page, props) => {
   return getLayoutWithMetadata({
     title: getTitle(props.content.title),
     description: toPlainText(props.content.intro),
@@ -59,7 +59,7 @@ ArticleDetailPage.getLayout = (page, props) => {
   })(page, props);
 };
 
-export default ArticleDetailPage;
+export default EditorialDetailPage;
 
 function getTitle(title: string) {
   const suffix =

@@ -1,8 +1,8 @@
 import { ARTICLE_FIELDS } from './fields/article-fields';
 
 export default {
-  title: 'Artikel',
-  name: 'article',
+  title: 'Weekbericht',
+  name: 'editorial',
   type: 'document',
   fieldsets: [
     {
