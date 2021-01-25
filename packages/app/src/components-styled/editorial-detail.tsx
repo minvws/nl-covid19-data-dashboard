@@ -7,9 +7,9 @@ import { Heading } from '~/components-styled/typography';
 import { PortableText } from '~/lib/sanity';
 import siteText from '~/locale';
 import { Editorial } from '~/types/cms';
-import { formatDateFromMilliseconds } from '~/utils/formatDate';
 import { RichContent } from './cms/rich-content';
 import { LinkWithIcon } from './link-with-icon';
+import { PublicationDate } from './publication-date';
 
 interface EditorialDetailProps {
   editorial: Editorial;
@@ -20,7 +20,7 @@ export function EditorialDetail({ editorial }: EditorialDetailProps) {
     <Box bg="white" py={{ _: 4, md: 5 }}>
       <ContentBlock spacing={3}>
         <LinkWithIcon
-          href="/weekberichten"
+          href="/"
           icon={<ArrowIcon css={css({ transform: 'rotate(90deg)' })} />}
         >
           {siteText.editorial_detail.back_link.text}
@@ -30,26 +30,14 @@ export function EditorialDetail({ editorial }: EditorialDetailProps) {
           <Heading level={1} mb={0}>
             {editorial.title}
           </Heading>
-          {editorial.publicationDate && (
-            <time
-              css={css({ color: 'gray' })}
-              dateTime={editorial.publicationDate}
-            >
-              {formatDateFromMilliseconds(
-                new Date(editorial.publicationDate).getTime(),
-                'medium'
-              )}
-            </time>
-          )}
+          <PublicationDate date={editorial.publicationDate} />
         </Box>
 
-        {editorial.intro && (
-          <Box fontWeight="bold">
-            <PortableText blocks={editorial.intro} />
-          </Box>
-        )}
+        <Box fontWeight="bold">
+          <PortableText blocks={editorial.intro} />
+        </Box>
 
-        {editorial.cover && <Image node={editorial.cover} />}
+        <Image node={editorial.cover} />
       </ContentBlock>
 
       {!!editorial.content?.length && (

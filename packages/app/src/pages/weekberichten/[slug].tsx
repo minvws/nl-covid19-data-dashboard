@@ -11,17 +11,17 @@ import {
 import { Block, Editorial } from '~/types/cms';
 import { assert } from '~/utils/assert';
 
-const editorialsQuery = `*[_type == 'editorial']`;
+const editorialsQuery = `*[_type == 'editorial'] {"slug":slug.current}`;
 
 export async function getStaticPaths() {
   const editorialData = await client.fetch(editorialsQuery);
-  const editorials = localize<Editorial[]>(editorialData, [
+  const editorials = localize<{ slug: string }[]>(editorialData, [
     targetLanguage,
     'nl',
   ]);
 
-  const paths = editorials.map((article) => ({
-    params: { slug: article.slug.current },
+  const paths = editorials.map((editorial) => ({
+    params: { slug: editorial.slug },
   }));
 
   // { fallback: false } means other routes should 404.

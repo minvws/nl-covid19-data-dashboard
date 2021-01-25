@@ -1,4 +1,4 @@
-import { ARTICLE_FIELDS } from './fields/ARTICLE_FIELDS';
+import { ARTICLE_FIELDS } from './fields/article-fields';
 
 export default {
   title: 'Weekbericht',

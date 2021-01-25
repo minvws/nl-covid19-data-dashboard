@@ -19,7 +19,6 @@ import localeRichContentBlock from './locale/locale-rich-content-block';
 import localeString from './locale/locale-string';
 import localeText from './locale/locale-text';
 //objects are building blocks, but not queryable in itself
-// import openGraph from "./objects/open-graph";
 import collapsible from './objects/collapsible';
 import lineChart from './objects/line-chart';
 import lockdown from './restrictions/lockdown.js';
@@ -38,7 +37,6 @@ export default createSchema({
   // to the ones provided by any plugins that are installed
   types: schemaTypes.concat([
     /* DOCUMENTS */
-    // siteSettings,
     article,
     editorial,
     veelgesteldeVragen,
@@ -54,7 +52,6 @@ export default createSchema({
     lockdown,
     restriction,
     /* OBJECTS */
-    // openGraph,
     lineChart,
     collapsible,
     /* LOCALE HELPERS */
