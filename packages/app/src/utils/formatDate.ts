@@ -4,10 +4,10 @@
  * datetimeformat needs to be second
  * datetimeformat locale's last
  */
+import '@formatjs/intl-getcanonicallocales/polyfill';
+import '@formatjs/intl-datetimeformat/polyfill';
 import '@formatjs/intl-datetimeformat/locale-data/en';
 import '@formatjs/intl-datetimeformat/locale-data/nl';
-import '@formatjs/intl-datetimeformat/polyfill';
-import '@formatjs/intl-getcanonicallocales/polyfill';
 import { isSameDay, isToday, isYesterday, subDays } from 'date-fns';
 import siteText from '~/locale/index';
 import { getLocale } from '~/utils/getLocale';
