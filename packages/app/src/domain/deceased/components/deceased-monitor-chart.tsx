@@ -6,6 +6,7 @@ import {
 import { createDate } from '~/utils/createDate';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
+import { colors } from '~/style/theme';
 
 type CbsValue = NationalDeceasedCbsValue | RegionalDeceasedCbsValue;
 
@@ -60,7 +61,7 @@ function useHighchartOptions(values: CbsValue[], config: SeriesConfig) {
       text: undefined,
     },
     xAxis: {
-      lineColor: '#C4C4C4',
+      lineColor: colors.silver,
       gridLineColor: '#ca005d',
       type: 'datetime',
       categories: values.map((x) => x.date_start_unix.toString()),
@@ -98,8 +99,8 @@ function useHighchartOptions(values: CbsValue[], config: SeriesConfig) {
     yAxis: {
       min: yMin,
       max: yMax,
-      lineColor: '#C4C4C4',
-      gridLineColor: '#C4C4C4',
+      lineColor: colors.silver,
+      gridLineColor: colors.silver,
 
       tickAmount: 3,
       title: {

@@ -102,7 +102,9 @@ const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
               })}
             >
               <Heading level={3}>{lockdown.message.title}</Heading>
-              <PortableText blocks={lockdown.message.description} />
+              {lockdown.message.description ? (
+                <PortableText blocks={lockdown.message.description} />
+              ) : null}
             </Box>
           </KpiSection>
         )}

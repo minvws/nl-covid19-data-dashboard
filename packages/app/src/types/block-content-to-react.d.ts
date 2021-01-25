@@ -1,6 +1,8 @@
 declare module '@sanity/block-content-to-react' {
   import * as React from 'react';
-
+  export interface PortableTextEntry {
+    _type: string;
+  }
   export interface BlockContentProps {
     /**
      * Pass in either an array or a single object of [Portable Text](https://github.com/portabletext/portabletext)
@@ -22,87 +24,7 @@ declare module '@sanity/block-content-to-react' {
      *  Define custom serializers
      *
      */
-    serializers?: {
-      /**
-       * Serializers for block types
-       * @example
-       * ```jsx
-       * const input = [{
-       *   _type: 'block',
-       *   children: [{
-       *     _key: 'a1ph4',
-       *     _type: 'span',
-       *     marks: ['s0m3k3y'],
-       *     text: 'Sanity'
-       *   }],
-       *   markDefs: [{
-       *     _key: 's0m3k3y',
-       *     _type: 'highlight',
-       *     color: '#E4FC5B'
-       *   }]
-       * }]
-       *
-       * const highlight = props => {
-       *   return (
-       *     <span style={{backgroundColor: props.mark.color}}>
-       *       {props.children}
-       *     </span>
-       *   )
-       * }
-       *
-       * <BlockContent
-       *   blocks={input}
-       *   serializers={{marks: {highlight}}}
-       * />
-       * ```
-       */
-      types?: Record<string, (props: any) => JSX.Element | null>;
-      /**
-       * Serializers for marks - data that annotates a text child of a block.
-       * @example
-       * ```jsx
-       * const input = [{
-       *   _type: 'block',
-       *   children: [{
-       *     _key: 'a1ph4',
-       *     _type: 'span',
-       *     marks: ['s0m3k3y'],
-       *     text: 'Sanity'
-       *   }],
-       *   markDefs: [{
-       *     _key: 's0m3k3y',
-       *     _type: 'highlight',
-       *     color: '#E4FC5B'
-       *   }]
-       * }]
-       *
-       * const highlight = props => {
-       *   return (
-       *     <span style={{backgroundColor: props.mark.color}}>
-       *       {props.children}
-       *     </span>
-       *   )
-       * }
-       *
-       * <BlockContent
-       *   blocks={input}
-       *   serializers={{marks: {highlight}}}
-       * />
-       * ```
-       */
-      marks?: Record<string, (props: any) => JSX.Element | null>;
-      /** React component to use when rendering a list node */
-      list?: React.Component;
-      /** React component to use when rendering a list item node */
-      listItem?: React.Component;
-      /**
-       * React component to use when transforming newline characters
-       * to a hard break (<br/> by default, pass false to render newline character)
-       */
-      hardBreak?: React.Component;
-      /** Serializer for the container wrapping the blocks */
-      container?: React.Component;
-    };
+    serializers?: BlockContentSerializers;
     /**
      * When encountering image blocks,
      * this defines which query parameters to apply in order to control size/crop mode etc.
@@ -114,6 +36,92 @@ declare module '@sanity/block-content-to-react' {
     dataset?: string;
   }
 
+  export interface BlockContentSerializers {
+    /**
+     * Serializers for block types
+     * @example
+     * ```jsx
+     * const input = [{
+     *   _type: 'block',
+     *   children: [{
+     *     _key: 'a1ph4',
+     *     _type: 'span',
+     *     marks: ['s0m3k3y'],
+     *     text: 'Sanity'
+     *   }],
+     *   markDefs: [{
+     *     _key: 's0m3k3y',
+     *     _type: 'highlight',
+     *     color: '#E4FC5B'
+     *   }]
+     * }]
+     *
+     * const highlight = props => {
+     *   return (
+     *     <span style={{backgroundColor: props.mark.color}}>
+     *       {props.children}
+     *     </span>
+     *   )
+     * }
+     *
+     * <BlockContent
+     *   blocks={input}
+     *   serializers={{marks: {highlight}}}
+     * />
+     * ```
+     */
+    types?: Record<string, (props: any) => JSX.Element | null>;
+    /**
+     * Serializers for marks - data that annotates a text child of a block.
+     * @example
+     * ```jsx
+     * const input = [{
+     *   _type: 'block',
+     *   children: [{
+     *     _key: 'a1ph4',
+     *     _type: 'span',
+     *     marks: ['s0m3k3y'],
+     *     text: 'Sanity'
+     *   }],
+     *   markDefs: [{
+     *     _key: 's0m3k3y',
+     *     _type: 'highlight',
+     *     color: '#E4FC5B'
+     *   }]
+     * }]
+     *
+     * const highlight = props => {
+     *   return (
+     *     <span style={{backgroundColor: props.mark.color}}>
+     *       {props.children}
+     *     </span>
+     *   )
+     * }
+     *
+     * <BlockContent
+     *   blocks={input}
+     *   serializers={{marks: {highlight}}}
+     * />
+     * ```
+     */
+    marks?: Record<string, (props: any) => JSX.Element | null>;
+    /** React component to use when rendering a list node */
+    list?: React.Component;
+    /** React component to use when rendering a list item node */
+    listItem?: React.Component;
+    /**
+     * React component to use when transforming newline characters
+     * to a hard break (<br/> by default, pass false to render newline character)
+     */
+    hardBreak?: React.Component;
+    /** Serializer for the container wrapping the blocks */
+    container?: React.Component;
+  }
+
   /** React component for transforming Sanity block content to React components */
-  export default function BlockContent(props: BlockContentProps): JSX.Element;
+  const BlockContent: {
+    (props: BlockContentProps): JSX.Element;
+    defaultSerializers: BlockContentSerializers;
+  };
+  export default BlockContent;
 }

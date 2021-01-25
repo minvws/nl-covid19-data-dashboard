@@ -1,31 +1,27 @@
-import Head from 'next/head';
-import { MaxWidth } from '~/components-styled/max-width';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
+import { MaxWidth } from '~/components-styled/max-width';
 import { PortableText } from '~/lib/sanity';
+import Head from 'next/head';
 import siteText from '~/locale/index';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
 } from '~/static-props/get-data';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
-import styles from './over.module.scss';
 import { Image } from '~/components-styled/image';
-
-import {SanityImageProps} from '~/types/cms.d.ts'
-
+import { PortableTextEntry } from '@sanity/block-content-to-react';
+import { SanityImageProps } from '~/types/cms.d.ts';
+import styles from './over.module.scss';
 
 interface OverData {
   over: {
     title: string | null;
-    description: unknown[] | null;
-  },
-  imageContent: ImageData
+    description: PortableTextEntry[] | null;
+  };
+  imageContent: {
+    coverImage: SanityImageProps;
+  };
 }
-
-interface ImageData {
-  coverImage: SanityImageProps;
-}
-
 
 const query = `
 "over": *[_type == 'overDitDashboard'][0],
@@ -40,12 +36,9 @@ export const getStaticProps = createGetStaticProps(
   createGetContent<OverData>(query)
 );
 
-
-
-
 const Over: FCWithLayout<typeof getStaticProps> = (props) => {
   const { content } = props;
-  const { over, imageContent} = content
+  const { over, imageContent } = content;
   const { coverImage } = imageContent;
 
   return (
@@ -75,9 +68,7 @@ const Over: FCWithLayout<typeof getStaticProps> = (props) => {
               height={630 / coverImage.metadata.dimensions.aspectRatio}
             />
 
-            {over.description && (
-              <PortableText blocks={over.description} />
-            )}
+            {over.description && <PortableText blocks={over.description} />}
           </div>
         </MaxWidth>
       </div>

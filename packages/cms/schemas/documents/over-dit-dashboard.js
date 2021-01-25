@@ -1,24 +1,23 @@
 export default {
-  name: "overDitDashboard",
-  type: "document",
-  title: "Over dit dashboard",
-  __experimental_actions: ["update", /* 'create', 'delete', */ "publish"],
+  name: 'overDitDashboard',
+  type: 'document',
+  title: 'Over dit dashboard',
   fields: [
     {
-      name: "title",
-      type: "localeString",
-      title: "Titel",
+      name: 'title',
+      type: 'localeString',
+      title: 'Titel',
     },
     {
-      name: "description",
-      type: "localeBlock",
-      title: "Beschrijving",
+      name: 'description',
+      type: 'localeBlock',
+      title: 'Beschrijving',
     },
   ],
   preview: {
     select: {
-      title: "title.nl",
-      subtitle: "description.nl",
+      title: 'title.nl',
+      subtitle: 'description.nl',
     },
   },
 };

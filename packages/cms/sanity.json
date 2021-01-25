@@ -35,6 +35,10 @@
     {
       "implements": "part:@sanity/base/theme/variables/override-style",
       "path": "variable-overrides.css"
+    },
+    {
+      "implements": "part:@sanity/base/document-actions/resolver",
+      "path": "resolve-document-actions.js"
     }
   ]
 }
