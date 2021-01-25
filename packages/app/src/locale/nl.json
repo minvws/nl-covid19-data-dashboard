@@ -1963,19 +1963,19 @@
   },
   "vaccinaties": {
     "titel_sidebar": "Vaccinaties",
-    "titel_kpi": "Totaal aantal toegediende eerste vaccins",
+    "titel_kpi": "Totaal aantal vaccinaties toegediend",
     "metadata": {
       "title": "Vaccinaties | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "#"
     },
     "title": "COVID-19-vaccinaties",
-    "description": "Vaccineren is de belangrijkste stap naar een leven zonder coronaregels. Op 6 januari 2021 is Nederland begonnen met vaccineren. Kwetsbare mensen, hun zorgmedewerkers en medewerkers in de acute zorg mogen als eerste een vaccinatie halen. Uiteindelijk komt iedereen van 18 jaar of ouder aan de beurt. De cijfers op deze pagina laten zie hoeveel vaccins zijn toegediend en hoeveel vaccins er beschikbaar komen.",
+    "description": "Vaccineren is de belangrijkste stap naar een samenleving zonder coronaregels. Op 6 januari 2021 is Nederland begonnen met vaccineren. Kwetsbare mensen, hun zorgmedewerkers en medewerkers in de acute zorg mogen als eerste een vaccinatie halen. Uiteindelijk komt iedereen van 18 jaar of ouder aan de beurt. De cijfers op deze pagina laten zie hoeveel vaccins zijn toegediend en hoeveel vaccins er beschikbaar zijn en komen.",
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "date_unix": "1611058309",
     "date_of_insertion_unix": "1611058309",
     "reference": {
       "href": "/verantwoording#vaccinaties",
-      "text": "Lees meer over de herkomst en betekenis van de vaccinatiecijfers in de cijferverantwoording."
+      "text": "Lees meer over de bron en betekenis van de vaccinatiecijfers in de cijferverantwoording."
     },
     "bronnen": {
       "rivm": {
@@ -1988,25 +1988,29 @@
       "difference": "Do not remove this key. It is required as a temporary workaround",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "77000",
+          "total_vaccinated": "160538",
           "date_unix": "1611058309",
           "date_of_insertion_unix": "1611058309"
         }
       },
       "kpi_total": {
         "title": "Aantal toegediende vaccins",
-        "value": "77000",
-        "description": "Dit getal laat zien hoeveel vaccins in totaal zijn toegediend. Het kan een paar dagen duren voordat een prik wordt gemeld. Het daadwerkelijke aantal gezette prikken ligt daarom hoger. Mensen hebben twee prikken nodig voor een volledige vaccinatie.\n\nOp dit moment zijn alleen data beschikbaar over het aantal toegediende vaccins aan medewerkers in de acute zorg en de verpleeghuiszorg. We tonen zo snel mogelijk ook gegevens over de andere groepen, zoals bewoners van instellingen.",
+        "value": "160538",
+        "description": "Dit getal laat zien hoeveel vaccins in totaal zijn toegediend. Het kan een paar dagen duren voordat een prik wordt gemeld. Het daadwerkelijke aantal gezette prikken ligt daarom hoger. Mensen hebben twee prikken nodig voor een volledige vaccinatie.",
         "date_of_report_unix": "1611058309",
         "date_of_insertion_unix": "1611058309",
         "administered": [
           {
-            "value": "37000",
-            "description": "toegediend aan medewerkers verpleeghuizen en kleinschalige woonvormen"
+            "value": "106886",
+            "description": "toegediend door GGD'en"
           },
           {
-            "value": "40000",
-            "description": "toegediend aan ziekenhuismedewerkers acute zorg"
+            "value": "40216",
+            "description": "toegediend door ziekenhuizen"
+          },
+          {
+            "value": "13436",
+            "description": "toegediend door langdurige zorginstellingen*"
           }
         ]
       },
