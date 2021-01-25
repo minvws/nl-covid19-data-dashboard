@@ -30,14 +30,16 @@ export function ArticleTeaser(props: ArticleLinkProps) {
       borderWidth={1}
       borderColor="lightGray"
       borderRadius={4}
-      minHeight={'26rem'}
+      minHeight={{ _: 'initial', sm: '26rem' }}
       maxHeight={'26rem'}
       overflow="hidden"
     >
       {<CoverImage image={cover} />}
       <Box padding={3}>
-        <Heading level={3}>{title}</Heading>
-        <Text>{summary}</Text>
+        <Heading level={3} mb={{ _: 1, sm: 3 }} lineHeight={{ _: 0, sm: 2 }}>
+          {title}
+        </Heading>
+        <Text mt={{ _: '0', sm: 3 }}>{summary}</Text>
         <LinkWithIcon
           href={`/artikelen/${slug}`}
           icon={<ArrowIcon css={css({ transform: 'rotate(-90deg)' })} />}
