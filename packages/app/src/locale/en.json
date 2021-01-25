@@ -1972,8 +1972,8 @@
     "title": "COVID-19 vaccinations",
     "description": "Vaccination is the most important step towards getting life back to normal. The Netherlands began vaccinating people against COVID-19 on 6 January 2021. The first people to be offered the vaccine are those in residential care, their professional carers and those working in acute care. Eventually, the vaccine will be offered to everyone aged 18 and over. This page shows how many doses of vaccine have been administered and how many doses are on their way.",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "date_unix": "1611058309",
-    "date_of_insertion_unix": "1611058309",
+    "date_unix": "1611600708",
+    "date_of_insertion_unix": "1611600708",
     "reference": {
       "href": "/verantwoording#vaccinaties",
       "text": "Read more about the source of the data on vaccination in the explanation of the presented data."
@@ -2010,16 +2010,16 @@
       "sidebar": {
         "last_value": {
           "total_vaccinated": "160538",
-          "date_unix": "1611058309",
-          "date_of_insertion_unix": "1611058309"
+          "date_unix": "1611600708",
+          "date_of_insertion_unix": "1611600708"
         }
       },
       "kpi_total": {
         "title": "Number of doses administered",
         "value": "160538",
         "description": "This figure reflects the total number of vaccination doses that have been administered. Because vaccination figures are sometimes reported a few days after doses are administered, the actual number of vaccination doses administered is higher. People need two separately administered doses for the vaccine to be maximally effective.",
-        "date_of_report_unix": "1611058309",
-        "date_of_insertion_unix": "1611058309",
+        "date_of_report_unix": "1611600708",
+        "date_of_insertion_unix": "1611600708",
         "administered": [
           {
             "value": "106886",
@@ -2049,8 +2049,8 @@
         "title": "Doses to be delivered",
         "value": "1974750",
         "description": "This is the number of vaccine doses the Netherlands expects to receive over the next six weeks. The Netherlands will receive a new delivery each week. People need two separately administered doses for the vaccine to be maximally effective. The delivery of AstraZeneca vaccines depends on the approval of the vaccine by the EU.",
-        "date_of_report_unix": "1611058309",
-        "date_of_insertion_unix": "1611058309"
+        "date_of_report_unix": "1611600708",
+        "date_of_insertion_unix": "1611600708"
       },
       "kpi_stock": {
         "title": "",
