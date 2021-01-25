@@ -1724,62 +1724,71 @@
     "kpi_titel": "Daily reported deaths from COVID-19"
   },
   "vaccinaties": {
-    "titel_sidebar": "Vaccinaties",
-    "titel_kpi": "Totaal aantal toegediende eerste vaccins",
+    "titel_sidebar": "Vaccinations",
+    "titel_kpi": "Vaccine doses administered",
     "metadata": {
-      "title": "Vaccinaties | Dashboard Coronavirus | Rijksoverheid.nl",
-      "description": "#"
+      "title": "",
+      "description": ""
     },
-    "title": "COVID-19-vaccinaties",
-    "description": "Vaccineren is de belangrijkste stap naar een leven zonder coronaregels. Op 6 januari 2021 is Nederland begonnen met vaccineren. Kwetsbare mensen, hun zorgmedewerkers en medewerkers in de acute zorg mogen als eerste een vaccinatie halen. Uiteindelijk komt iedereen van 18 jaar of ouder aan de beurt. De cijfers op deze pagina laten zie hoeveel vaccins zijn toegediend en hoeveel vaccins er beschikbaar komen.",
-    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "date_unix": "1611058309",
-    "date_of_insertion_unix": "1611058309",
+    "title": "COVID-19 vaccinations",
+    "description": "Vaccination is the most important step towards getting life back to normal. The Netherlands began vaccinating people against COVID-19 on 6 January 2021. The first people to be offered the vaccine are those in residential care, their professional carers and those working in acute care. Eventually, the vaccine will be offered to everyone aged 18 and over. This page shows how many doses of vaccine have been administered, how many doses are currently in stock and how many doses are on their way. ",
+    "datums": "",
+    "date_unix": "",
+    "date_of_insertion_unix": "",
     "reference": {
-      "href": "/verantwoording#vaccinaties",
-      "text": "Lees meer over de herkomst en betekenis van de vaccinatiecijfers in de cijferverantwoording."
+      "href": "",
+      "text": "Read more in the explanation of the presented data."
     },
     "bronnen": {
       "rivm": {
-        "href": "#",
-        "text": "RIVM",
+        "href": "",
+        "text": "",
         "download": ""
       }
     },
     "data": {
-      "difference": "Do not remove this key. It is required as a temporary workaround",
+      "difference": "",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "77000",
-          "date_unix": "1611058309",
-          "date_of_insertion_unix": "1611058309"
+          "total_vaccinated": "160538",
+          "date_unix": "",
+          "date_of_insertion_unix": ""
         }
       },
       "kpi_total": {
-        "title": "Aantal toegediende vaccins",
-        "value": "77000",
-        "description": "Dit getal laat zien hoeveel vaccins in totaal zijn toegediend. Het kan een paar dagen duren voordat een prik wordt gemeld. Het daadwerkelijke aantal gezette prikken ligt daarom hoger. Mensen hebben twee prikken nodig voor een volledige vaccinatie.\n\nOp dit moment zijn alleen data beschikbaar over het aantal toegediende vaccins aan medewerkers in de acute zorg en de verpleeghuiszorg. We tonen zo snel mogelijk ook gegevens over de andere groepen, zoals bewoners van instellingen.",
-        "date_of_report_unix": "1611058309",
-        "date_of_insertion_unix": "1611058309",
+        "title": "Number of doses administered",
+        "value": "160538",
+        "description": "This figure reflects the total number of vaccination doses that have been administered. Because vaccination figures are sometimes reported a few days after doses are administered, the actual number of vaccination doses administered is higher. People need two separately administered doses for the vaccine to be maximally effective.",
+        "date_of_report_unix": "",
+        "date_of_insertion_unix": "",
         "administered": [
           {
-            "value": "37000",
-            "description": "toegediend aan medewerkers verpleeghuizen en kleinschalige woonvormen"
+            "value": "106886",
+            "description": "administered by municipal health services (GGDs)"
           },
           {
-            "value": "40000",
-            "description": "toegediend aan ziekenhuismedewerkers acute zorg"
+            "value": "40216",
+            "description": "administered by hospitals"
+          },
+          {
+            "value": "13436",
+            "description": "administered by long-term care institutions*"
           }
         ]
       },
       "kpi_expected_delivery": {
-        "title": "Verwachte levering vaccins",
-        "value": "2.154.510",
-        "description": "Aantal vaccins dat Nederland de komende tien weken verwacht te krijgen. Elke week ontvangt Nederland een deel van de vaccins. Mensen hebben twee prikken nodig voor een volledige vaccinatie.",
-        "date_of_report_unix": "1611058309",
-        "date_of_insertion_unix": "1611058309"
+        "title": "Doses to be delivered",
+        "value": "1974750",
+        "description": "This is the number of vaccine doses the Netherlands expects to receive over the next six weeks. The Netherlands will receive a new delivery each week. People need two separately administered doses for the vaccine to be maximally effective.",
+        "date_of_report_unix": "",
+        "date_of_insertion_unix": ""
       }
     },
+    "section_vaccinations_more_information": {
+      "title": "Expected data on vaccinations",
+      "description": "More data on vaccinations will be added in the near future, including:\n- Willingness to be vaccinated\n- Vaccination coverage"
+    }
+  },
   "veiligheidsregio_sterfte": {
     "titel_sidebar": "Deaths",
     "titel_kpi": "Gemeld aantal patiënten overleden aan COVID-19 per dag",
