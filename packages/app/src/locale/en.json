@@ -747,7 +747,8 @@
     "incomplete": "incomplete",
     "gisteren": "Yesterday",
     "vandaag": "Today",
-    "read_more": "Read more"
+    "read_more": "Read more",
+    "absolute_date_template": "on {{date}}"
   },
   "seoHead": {
     "default_description": "Information on the development of the coronavirus in The Netherlands.",

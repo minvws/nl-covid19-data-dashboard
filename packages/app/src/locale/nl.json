@@ -657,8 +657,8 @@
       "infected_people_total": {
         "value": {
           "zero": "{{newDate}} zijn er geen nieuwe positieve tests gemeld.",
-          "singular": "{{newDate}} is {{propertyValue}} nieuwe positieve test gemeld.",
-          "plural": "{{newDate}} zijn {{propertyValue}} nieuwe positieve tests gemeld."
+          "singular": "{{newDate}} is er {{propertyValue}} nieuwe positieve test gemeld.",
+          "plural": "{{newDate}} zijn er {{propertyValue}} nieuwe positieve tests gemeld."
         },
         "difference": {
           "zero": "Dat is gelijk aan {{oldDate}}",
@@ -669,8 +669,8 @@
       "intake_hospital_ma": {
         "value": {
           "zero": "{{newDate}} zijn er geen nieuwe ziekenhuisopnames gemeld.",
-          "singular": "{{newDate}} is {{propertyValue}} nieuwe ziekenhuisopname gemeld.",
-          "plural": "{{newDate}} zijn {{propertyValue}} nieuwe ziekenhuisopnames gemeld."
+          "singular": "{{newDate}} is er {{propertyValue}} nieuwe ziekenhuisopname gemeld.",
+          "plural": "{{newDate}} zijn er {{propertyValue}} nieuwe ziekenhuisopnames gemeld."
         },
         "difference": {
           "zero": "Dat is gelijk aan {{oldDate}}",
@@ -681,8 +681,8 @@
       "intake_intensivecare_ma": {
         "value": {
           "zero": "{{newDate}} zijn er geen nieuwe ic opnames gemeld.",
-          "singular": "{{newDate}} is {{propertyValue}} nieuwe ic opname gemeld.",
-          "plural": "{{newDate}} zijn {{propertyValue}} nieuwe ic opnames gemeld."
+          "singular": "{{newDate}} is er {{propertyValue}} nieuwe ic opname gemeld.",
+          "plural": "{{newDate}} zijn er {{propertyValue}} nieuwe ic opnames gemeld."
         },
         "difference": {
           "zero": "Dat is gelijk aan {{oldDate}}",
@@ -747,7 +747,8 @@
     "incomplete": "niet compleet",
     "gisteren": "Gisteren",
     "vandaag": "Vandaag",
-    "read_more": "Lees meer"
+    "read_more": "Lees meer",
+    "absolute_date_template": "op {{date}}"
   },
   "seoHead": {
     "default_description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
@@ -1980,38 +1981,38 @@
     "data_driven_texts": {
       "infected_people_total": {
         "value": {
-          "zero": "{{newDate}} there were no newly reported infected people.",
-          "singular": "{{newDate}} there was {{propertyValue}} newly reported infected person.",
-          "plural": "{{newDate}} there were {{propertyValue}} newly reported infected people."
+          "zero": "{{newDate}} zijn er geen nieuwe positieve tests gemeld.",
+          "singular": "{{newDate}} is er {{propertyValue}} nieuwe positieve test gemeld.",
+          "plural": "{{newDate}} zijn er {{propertyValue}} nieuwe positieve tests gemeld."
         },
         "difference": {
-          "zero": "This is the same as {{oldDate}}",
-          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+          "zero": "Dat is gelijk aan {{oldDate}}",
+          "singular": "Dat is er {{differenceIndicator}} dan {{oldDate}}.",
+          "plural": "Dat zijn er {{differenceIndicator}} dan {{oldDate}}."
         }
       },
       "intake_hospital_ma": {
         "value": {
-          "zero": "{{newDate}} there were no newly reported hospital intakes.",
-          "singular": "{{newDate}} there was {{propertyValue}} newly reported hospital intake.",
-          "plural": "{{newDate}} there were {{propertyValue}} newly reported hospital intakes."
+          "zero": "{{newDate}} zijn er geen nieuwe ziekenhuisopnames gemeld.",
+          "singular": "{{newDate}} is er {{propertyValue}} nieuwe ziekenhuisopname gemeld.",
+          "plural": "{{newDate}} zijn er {{propertyValue}} nieuwe ziekenhuisopnames gemeld."
         },
         "difference": {
-          "zero": "This is the same as {{oldDate}}",
-          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+          "zero": "Dat is gelijk aan {{oldDate}}",
+          "singular": "Dat is er {{differenceIndicator}} dan {{oldDate}}.",
+          "plural": "Dat zijn er {{differenceIndicator}} dan {{oldDate}}."
         }
       },
       "intake_intensivecare_ma": {
         "value": {
-          "zero": "{{newDate}} there were no newly reported intensive care admissions.",
-          "singular": "{{newDate}} there was {{propertyValue}} newly reported intensive care admission.",
-          "plural": "{{newDate}} there were {{propertyValue}} newly reported intensive care admissions."
+          "zero": "{{newDate}} zijn er geen nieuwe ic opnames gemeld.",
+          "singular": "{{newDate}} is er {{propertyValue}} nieuwe ic opname gemeld.",
+          "plural": "{{newDate}} zijn er {{propertyValue}} nieuwe ic opnames gemeld."
         },
         "difference": {
-          "zero": "This is the same as {{oldDate}}",
-          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+          "zero": "Dat is gelijk aan {{oldDate}}",
+          "singular": "Dat is er {{differenceIndicator}} dan {{oldDate}}.",
+          "plural": "Dat zijn er {{differenceIndicator}} dan {{oldDate}}."
         }
       }
     },
@@ -2053,38 +2054,38 @@
     "data_driven_texts": {
       "infected_people_total": {
         "value": {
-          "zero": "{{newDate}} there were no newly reported infected people.",
-          "singular": "{{newDate}} there was {{propertyValue}} newly reported infected person.",
-          "plural": "{{newDate}} there were {{propertyValue}} newly reported infected people."
+          "zero": "{{newDate}} zijn er geen nieuwe positieve tests gemeld.",
+          "singular": "{{newDate}} is er {{propertyValue}} nieuwe positieve test gemeld.",
+          "plural": "{{newDate}} zijn er {{propertyValue}} nieuwe positieve tests gemeld."
         },
         "difference": {
-          "zero": "This is the same as {{oldDate}}",
-          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+          "zero": "Dat is gelijk aan {{oldDate}}",
+          "singular": "Dat is er {{differenceIndicator}} dan {{oldDate}}.",
+          "plural": "Dat zijn er {{differenceIndicator}} dan {{oldDate}}."
         }
       },
       "intake_hospital_ma": {
         "value": {
-          "zero": "{{newDate}} there were no newly reported hospital intakes.",
-          "singular": "{{newDate}} there was {{propertyValue}} newly reported hospital intake.",
-          "plural": "{{newDate}} there were {{propertyValue}} newly reported hospital intakes."
+          "zero": "{{newDate}} zijn er geen nieuwe ziekenhuisopnames gemeld.",
+          "singular": "{{newDate}} is er {{propertyValue}} nieuwe ziekenhuisopname gemeld.",
+          "plural": "{{newDate}} zijn er {{propertyValue}} nieuwe ziekenhuisopnames gemeld."
         },
         "difference": {
-          "zero": "This is the same as {{oldDate}}",
-          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+          "zero": "Dat is gelijk aan {{oldDate}}",
+          "singular": "Dat is er {{differenceIndicator}} dan {{oldDate}}.",
+          "plural": "Dat zijn er {{differenceIndicator}} dan {{oldDate}}."
         }
       },
       "intake_intensivecare_ma": {
         "value": {
-          "zero": "{{newDate}} there were no newly reported intensive care admissions.",
-          "singular": "{{newDate}} there was {{propertyValue}} newly reported intensive care admission.",
-          "plural": "{{newDate}} there were {{propertyValue}} newly reported intensive care admissions."
+          "zero": "{{newDate}} zijn er geen nieuwe ic opnames gemeld.",
+          "singular": "{{newDate}} is er {{propertyValue}} nieuwe ic opname gemeld.",
+          "plural": "{{newDate}} zijn er {{propertyValue}} nieuwe ic opnames gemeld."
         },
         "difference": {
-          "zero": "This is the same as {{oldDate}}",
-          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+          "zero": "Dat is gelijk aan {{oldDate}}",
+          "singular": "Dat is er {{differenceIndicator}} dan {{oldDate}}.",
+          "plural": "Dat zijn er {{differenceIndicator}} dan {{oldDate}}."
         }
       }
     },
