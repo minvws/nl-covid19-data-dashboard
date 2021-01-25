@@ -709,7 +709,7 @@ export interface Regions {
   behavior: RegionsBehavior[];
   disability_care: RegionsDisabilityCare[];
   elderly_at_home: RegionsElderlyAtHome[];
-  vaccine: RegionsVaccine[];
+  vaccine_coverage: VrCollectionVaccineCoverage[];
 }
 export interface RegionsHospitalNice {
   date_unix: number;
@@ -803,9 +803,9 @@ export interface RegionsElderlyAtHome {
   date_of_insertion_unix: number;
   vrcode: string;
 }
-export interface RegionsVaccine {
+export interface VrCollectionVaccineCoverage {
   date_unix: number;
   vrcode: string;
-  coverage_percentage: number;
+  percentage: number;
   date_of_insertion_unix: number;
 }

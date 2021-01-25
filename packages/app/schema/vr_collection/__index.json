@@ -16,7 +16,7 @@
     "elderly_at_home",
     "disability_care",
     "sewer",
-    "vaccine"
+    "vaccine_coverage"
   ],
   "properties": {
     "last_generated": {
@@ -97,12 +97,12 @@
         "$ref": "elderly_at_home.json"
       }
     },
-    "vaccine": {
+    "vaccine_coverage": {
       "type": "array",
       "minItems": 25,
       "maxItems": 25,
       "items": {
-        "$ref": "vaccine.json"
+        "$ref": "vaccine_coverage.json"
       }
     }
   }
