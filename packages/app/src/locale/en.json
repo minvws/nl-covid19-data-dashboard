@@ -663,7 +663,7 @@
       "gedrag": "Behaviour",
       "kwetsbare_groepen": "Vulnerable groups",
       "maatregelen": "Measures",
-      "vaccinaties": ""
+      "vaccinaties": "Vaccinations"
     }
   },
   "veiligheidsregio_layout": {
@@ -1724,20 +1724,20 @@
     "kpi_titel": "Daily reported deaths from COVID-19"
   },
   "vaccinaties": {
-    "titel_sidebar": "",
-    "titel_kpi": "",
+    "titel_sidebar": "Vaccinations",
+    "titel_kpi": "Vaccine doses administered",
     "metadata": {
       "title": "",
       "description": ""
     },
-    "title": "",
-    "description": "",
+    "title": "COVID-19 vaccinations",
+    "description": "Vaccination is the most important step towards getting life back to normal. The Netherlands began vaccinating people against COVID-19 on 6 January 2021. The first people to be offered the vaccine are those in residential care, their professional carers and those working in acute care. Eventually, the vaccine will be offered to everyone aged 18 and over. This page shows how many doses of vaccine have been administered, how many doses are currently in stock and how many doses are on their way. ",
     "datums": "",
-    "date_unix": "",
-    "date_of_insertion_unix": "",
+    "date_unix": "0",
+    "date_of_insertion_unix": "0",
     "reference": {
       "href": "",
-      "text": ""
+      "text": "Read more in the explanation of the presented data."
     },
     "bronnen": {
       "rivm": {
@@ -1750,25 +1750,25 @@
       "difference": "",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "",
-          "date_unix": "",
-          "date_of_insertion_unix": ""
+          "total_vaccinated": "160538",
+          "date_unix": "0",
+          "date_of_insertion_unix": "0"
         }
       },
       "kpi_total": {
-        "title": "",
-        "value": "",
-        "description_first": "",
-        "date_of_report_unix": "",
-        "date_of_insertion_unix": "",
+        "title": "Number of doses administered",
+        "value": "160538",
+        "description_first": "This figure reflects the total number of vaccination doses that have been administered. Because vaccination figures are sometimes reported a few days after doses are administered, the actual number of vaccination doses administered is higher. People need two separately administered doses for the vaccine to be maximally effective.",
+        "date_of_report_unix": "0",
+        "date_of_insertion_unix": "0",
         "administered": [
           {
-            "value": "",
-            "description": ""
+            "value": "106886",
+            "description": "administered by municipal health services (GGDs)"
           },
           {
-            "value": "",
-            "description": ""
+            "value": "40216",
+            "description": "administered by hospitals"
           },
           {
             "value": "",
@@ -1783,14 +1783,14 @@
             "description": ""
           }
         ],
-        "description_second": ""
+        "description_second": "administered by long-term care institutions*"
       },
       "kpi_expected_delivery": {
-        "title": "",
-        "value": "",
-        "description": "",
-        "date_of_report_unix": "",
-        "date_of_insertion_unix": ""
+      "title": "Doses to be delivered",
+      "value": "1974750",
+      "description": "This is the number of vaccine doses the Netherlands expects to receive over the next six weeks. The Netherlands will receive a new delivery each week. People need two separately administered doses for the vaccine to be maximally effective.",
+      "date_of_report_unix": "0",
+      "date_of_insertion_unix": "0"
       },
       "kpi_stock": {
         "title": "",
@@ -1824,8 +1824,8 @@
       }
     },
     "section_vaccinations_more_information": {
-      "title": "",
-      "description": ""
+      "title": "Expected data on vaccinations",
+      "description": "More data on vaccinations will be added in the near future, including:\n- Willingness to be vaccinated\n- Vaccination coverage"
     }
   },
   "veiligheidsregio_sterfte": {
