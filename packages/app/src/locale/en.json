@@ -1832,7 +1832,8 @@
     "section_vaccinations_more_information": {
       "title": "Expected data on vaccinations",
       "description": "More data on vaccinations will be added in the near future, including:\n- Willingness to be vaccinated\n- Vaccination coverage"
-    }
+    },
+    "title_chart": "test"
   },
   "veiligheidsregio_sterfte": {
     "titel_sidebar": "Deaths",

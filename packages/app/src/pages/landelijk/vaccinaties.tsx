@@ -12,6 +12,7 @@ import { SEOHead } from '~/components-styled/seo-head';
 import { css } from '@styled-system/css';
 import { formatNumber } from '~/utils/formatNumber';
 import styled from 'styled-components';
+import VaccinatieBarChart from '~/assets/vaccinate_bar_chart.svg';
 
 import {
   getNlData,
@@ -118,6 +119,10 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             />
           </KpiTile>
         </TwoKpiSection>
+
+        <KpiTile title={text.title_chart} metadata={{}}>
+          <VaccinatieBarChart />
+        </KpiTile>
       </TileList>
     </>
   );

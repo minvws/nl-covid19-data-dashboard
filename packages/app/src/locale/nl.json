@@ -1832,7 +1832,8 @@
     "section_vaccinations_more_information": {
       "title": "Verwachte data over vaccinaties",
       "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer:\n- Vaccinatiebereidheid\n- Vaccinatiegraad\n- Leveringsoverzicht vaccins"
-    }
+    },
+    "title_chart": "test"
   },
   "veiligheidsregio_sterfte": {
     "titel_sidebar": "Sterfte",
