@@ -1748,7 +1748,27 @@
     "bronnen": {
       "rivm": {
         "href": "",
-        "text": "",
+        "text": "RIVM",
+        "download": ""
+      },
+      "ggd": {
+        "href": "",
+        "text": "GGD",
+        "download": ""
+      },
+      "lnaz": {
+        "href": "",
+        "text": "LNAZ",
+        "download": ""
+      },
+      "all_left": {
+        "href": "",
+        "text": "RIVM & GGD & LNAZ",
+        "download": ""
+      },
+      "all_right": {
+        "href": "",
+        "text": "RIVM & GGD",
         "download": ""
       }
     },

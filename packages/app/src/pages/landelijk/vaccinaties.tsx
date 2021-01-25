@@ -49,7 +49,11 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             datumsText: text.datums,
             dateOrRange: parseFloat(text.date_of_insertion_unix),
             dateOfInsertionUnix: parseFloat(text.date_of_insertion_unix),
-            dataSources: [text.bronnen.rivm],
+            dataSources: [
+              text.bronnen.rivm,
+              text.bronnen.ggd,
+              text.bronnen.lnaz,
+            ],
           }}
         />
         <TwoKpiSection>
@@ -57,7 +61,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             title={text.data.kpi_total.title}
             metadata={{
               date: parseFloat(text.data.kpi_total.date_of_report_unix),
-              source: text.bronnen.rivm,
+              source: text.bronnen.all_left,
             }}
           >
             <KpiValue absolute={parseFloat(text.data.kpi_total.value)} />
@@ -83,7 +87,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
               date: parseFloat(
                 text.data.kpi_expected_delivery.date_of_report_unix
               ),
-              source: text.bronnen.rivm,
+              source: text.bronnen.all_right,
             }}
           >
             <KpiValue
