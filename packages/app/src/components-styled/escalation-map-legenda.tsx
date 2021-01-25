@@ -69,12 +69,12 @@ export function EscalationMapLegenda<K extends RegionsMetricName>(
           <Box
             display="flex"
             alignItems="center"
-            spacing={3}
+            spacing={{ _: 2, sm: 3 }}
             spacingHorizontal
-            width="10rem"
+            width={{ _: '8rem', md: '10rem' }}
           >
             <EscalationLevelIcon level={info.threshold} />
-            <InlineText fontSize="1.2rem">
+            <InlineText fontSize={{ _: 2, sm: '1.2rem' }}>
               {siteText.escalatie_niveau.types[info.threshold].titel}
             </InlineText>
           </Box>
