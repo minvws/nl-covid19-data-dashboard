@@ -1733,8 +1733,8 @@
     "title": "COVID-19 vaccinations",
     "description": "Vaccination is the most important step towards getting life back to normal. The Netherlands began vaccinating people against COVID-19 on 6 January 2021. The first people to be offered the vaccine are those in residential care, their professional carers and those working in acute care. Eventually, the vaccine will be offered to everyone aged 18 and over. This page shows how many doses of vaccine have been administered, how many doses are currently in stock and how many doses are on their way. ",
     "datums": "",
-    "date_unix": "",
-    "date_of_insertion_unix": "",
+    "date_unix": "0",
+    "date_of_insertion_unix": "0",
     "reference": {
       "href": "",
       "text": "Read more in the explanation of the presented data."
