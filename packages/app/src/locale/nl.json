@@ -2046,9 +2046,9 @@
         "description_second": "* Dit cijfer is aan de telefoon doorgegeven door de instellingen zelf op 22 en 25 januari. Het is nog niet bekend wanneer dit cijfer wordt bijgewerkt. Overige aantallen toegediende vaccins worden dagelijks bijgewerkt."
       },
       "kpi_expected_delivery": {
-        "title": "Verwachte levering vaccins",
+        "title": "Verwachte levering goedgekeurde vaccins",
         "value": "1974750",
-        "description": "Aantal vaccins dat Nederland de komende zes weken verwacht te krijgen. Elke week ontvangt Nederland een deel van de vaccins. Mensen hebben twee prikken nodig voor een volledige vaccinatie. De levering van AstraZeneca-vaccins hangt af van goedkeuring van het vaccin door de EU.",
+        "description": "Aantal vaccins dat Nederland de komende zes weken verwacht te krijgen. Elke week ontvangt Nederland een deel van de vaccins. Mensen hebben twee prikken nodig voor een volledige vaccinatie.",
         "date_of_report_unix": "1611600708",
         "date_of_insertion_unix": "1611600708"
       },
