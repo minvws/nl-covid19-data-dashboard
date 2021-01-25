@@ -1,32 +1,42 @@
 export default {
-  name: "cijferVerantwoording",
-  type: "document",
-  title: "Cijferverantwoording",
-  __experimental_actions: ["update", /* 'create', 'delete', */ "publish"],
+  name: 'cijferVerantwoording',
+  type: 'document',
+  title: 'Cijferverantwoording',
+  __experimental_actions: ['update', /* 'create', 'delete', */ 'publish'],
   fields: [
     {
-      name: "title",
-      type: "localeString",
-      title: "Titel",
+      name: 'title',
+      type: 'localeString',
+      title: 'Titel',
+      validation: (Rule) =>
+        Rule.fields({
+          nl: (fieldRule) => fieldRule.reset().required(),
+          en: (fieldRule) => fieldRule.reset().required(),
+        }),
     },
     {
-      name: "description",
-      type: "localeBlock",
-      title: "Beschrijving",
+      name: 'description',
+      type: 'localeBlock',
+      title: 'Beschrijving',
+      validation: (Rule) =>
+        Rule.fields({
+          nl: (fieldRule) => fieldRule.reset().required(),
+          en: (fieldRule) => fieldRule.reset().required(),
+        }),
     },
     {
-      name: "collapsibleList",
-      type: "array",
-      title: "Verantwoordingen",
+      name: 'collapsibleList',
+      type: 'array',
+      title: 'Verantwoordingen',
       description:
-        "Je kan verantwoordingen toevoegen, de volgorde veranderen, de teksten bijwerken of verwijderen",
-      of: [{ type: "collapsible" }],
+        'Je kan verantwoordingen toevoegen, de volgorde veranderen, de teksten bijwerken of verwijderen',
+      of: [{ type: 'collapsible' }],
     },
   ],
   preview: {
     select: {
-      title: "title.nl",
-      subtitle: "description.nl",
+      title: 'title.nl',
+      subtitle: 'description.nl',
     },
   },
 };

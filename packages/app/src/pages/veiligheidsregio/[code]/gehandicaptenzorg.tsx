@@ -8,7 +8,7 @@ import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
-import { SEOHead } from '~/components/seoHead';
+import { SEOHead } from '~/components-styled/seo-head';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import siteText from '~/locale/index';
@@ -28,6 +28,7 @@ const locationsText =
 const positiveTestPeopleText =
   siteText.veiligheidsregio_gehandicaptenzorg_positief_geteste_personen;
 const mortalityText = siteText.veiligheidsregio_gehandicaptenzorg_oversterfte;
+const graphDescriptions = siteText.accessibility.grafieken;
 
 const DisabilityCare: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data, safetyRegionName } = props;
@@ -51,6 +52,9 @@ const DisabilityCare: FCWithLayout<typeof getStaticProps> = (props) => {
       <TileList>
         <ContentHeader
           category={siteText.veiligheidsregio_layout.headings.kwetsbare_groepen}
+          screenReaderCategory={
+            siteText.verpleeghuis_besmette_locaties.titel_sidebar
+          }
           title={replaceVariablesInText(positiveTestPeopleText.titel, {
             safetyRegion: safetyRegionName,
           })}
@@ -89,6 +93,7 @@ const DisabilityCare: FCWithLayout<typeof getStaticProps> = (props) => {
         <LineChartTile
           metadata={{ source: positiveTestPeopleText.bronnen.rivm }}
           title={positiveTestPeopleText.linechart_titel}
+          ariaDescription={graphDescriptions.gehandicaptenzorg_positief_getest}
           values={values}
           linesConfig={[
             {
@@ -148,6 +153,9 @@ const DisabilityCare: FCWithLayout<typeof getStaticProps> = (props) => {
           <LineChartTile
             title={locationsText.linechart_titel}
             values={values}
+            ariaDescription={
+              graphDescriptions.gehandicaptenzorg_besmette_locaties
+            }
             linesConfig={[
               {
                 metricProperty: 'infected_locations_total',
@@ -196,6 +204,7 @@ const DisabilityCare: FCWithLayout<typeof getStaticProps> = (props) => {
           metadata={{ source: mortalityText.bronnen.rivm }}
           title={mortalityText.linechart_titel}
           values={values}
+          ariaDescription={graphDescriptions.gehandicaptenzorg_overleden}
           linesConfig={[
             {
               metricProperty: 'deceased_daily',

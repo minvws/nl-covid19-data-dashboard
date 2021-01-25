@@ -8,7 +8,7 @@ import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
-import { SEOHead } from '~/components/seoHead';
+import { SEOHead } from '~/components-styled/seo-head';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import siteText from '~/locale/index';
@@ -27,6 +27,7 @@ const locationsText = siteText.veiligheidsregio_verpleeghuis_besmette_locaties;
 const positiveTestPeopleText =
   siteText.veiligheidsregio_verpleeghuis_positief_geteste_personen;
 const mortalityText = siteText.veiligheidsregio_verpleeghuis_oversterfte;
+const graphDescriptions = siteText.accessibility.grafieken;
 
 const NursingHomeCare: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data, safetyRegionName } = props;
@@ -49,6 +50,9 @@ const NursingHomeCare: FCWithLayout<typeof getStaticProps> = (props) => {
       <TileList>
         <ContentHeader
           category={siteText.veiligheidsregio_layout.headings.kwetsbare_groepen}
+          screenReaderCategory={
+            siteText.verpleeghuis_besmette_locaties.titel_sidebar
+          }
           title={replaceVariablesInText(positiveTestPeopleText.titel, {
             safetyRegion: safetyRegionName,
           })}
@@ -88,6 +92,7 @@ const NursingHomeCare: FCWithLayout<typeof getStaticProps> = (props) => {
         <LineChartTile
           metadata={{ source: positiveTestPeopleText.bronnen.rivm }}
           title={positiveTestPeopleText.linechart_titel}
+          ariaDescription={graphDescriptions.verpleeghuiszorg_positief_getest}
           values={data.nursing_home.values}
           linesConfig={[
             {
@@ -149,6 +154,9 @@ const NursingHomeCare: FCWithLayout<typeof getStaticProps> = (props) => {
         {nursinghomeLastValue.infected_locations_total !== undefined && (
           <LineChartTile
             title={locationsText.linechart_titel}
+            ariaDescription={
+              graphDescriptions.verpleeghuiszorg_besmette_locaties
+            }
             values={data.nursing_home.values}
             linesConfig={[
               {
@@ -200,6 +208,9 @@ const NursingHomeCare: FCWithLayout<typeof getStaticProps> = (props) => {
             metadata={{ source: mortalityText.bronnen.rivm }}
             title={mortalityText.linechart_titel}
             values={data.nursing_home.values}
+            ariaDescription={
+              graphDescriptions.verpleeghuiszorg_overleden_getest
+            }
             linesConfig={[
               {
                 metricProperty: 'deceased_daily',

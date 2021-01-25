@@ -7,9 +7,9 @@ import {
   createSelectMunicipalHandler,
   MunicipalitySelectionHandler,
 } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
-import { MunicipalityProperties } from '~/components/choropleth/shared';
+import { MunicipalityProperties } from '@corona-dashboard/common';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
-import { SEOHead } from '~/components/seoHead';
+import { SEOHead } from '~/components-styled/seo-head';
 import { MunicipalityComboBox } from '~/domain/layout/components/municipality-combo-box';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getMunicipalityLayout } from '~/domain/layout/municipality-layout';

@@ -4,7 +4,8 @@ import { Value } from '~/components-styled/line-chart/helpers';
 import { TimeframeOption } from '~/utils/timeframe';
 import { ChartTileWithTimeframe } from './chart-tile';
 import { MetadataProps } from './metadata';
-
+import { useUniqueId } from '~/utils/useUniqueId';
+import { assert } from '~/utils/assert';
 interface LineChartTileProps<T extends Value> extends LineChartProps<T> {
   title: string;
   metadata: MetadataProps;
@@ -12,6 +13,7 @@ interface LineChartTileProps<T extends Value> extends LineChartProps<T> {
   timeframeOptions?: TimeframeOption[];
   timeframeInitialValue?: TimeframeOption;
   footer?: React.ReactNode;
+  ariaDescription?: string;
 }
 
 export function LineChartTile<T extends Value>({
@@ -21,8 +23,15 @@ export function LineChartTile<T extends Value>({
   timeframeOptions = ['all', '5weeks', 'week'],
   timeframeInitialValue = 'all',
   footer,
+  ariaDescription,
   ...chartProps
 }: LineChartTileProps<T>) {
+  assert(
+    description || ariaDescription,
+    `This graph doesn't include a valid description nor an ariaDescription, please add one of them.`
+  );
+  const uniqueId = useUniqueId();
+
   return (
     <ChartTileWithTimeframe
       title={title}
@@ -30,6 +39,8 @@ export function LineChartTile<T extends Value>({
       metadata={metadata}
       timeframeOptions={timeframeOptions}
       timeframeInitialValue={timeframeInitialValue}
+      uniqueId={uniqueId}
+      ariaDescription={ariaDescription}
     >
       {(timeframe) => (
         <>
@@ -39,6 +50,7 @@ export function LineChartTile<T extends Value>({
                 {...chartProps}
                 width={parent.width}
                 timeframe={timeframe}
+                uniqueId={uniqueId}
               />
             )}
           </ParentSize>

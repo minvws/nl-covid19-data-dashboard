@@ -1,28 +1,47 @@
-import React from "react";
-import { selectedLanguages$, setLangs } from "./datastore";
-import SelectLanguage from "./select-language";
-import config from "./config.js";
+import React, { useEffect, useRef, useState } from 'react';
+import config from './config.js';
+import { selectedLanguages$, setLangs } from './datastore';
+import { onDocument$ } from './document-subject';
+import SelectLanguage from './select-language';
 
-export default class SelectLanguageProvider extends React.Component {
-  state = { selected: ["nl"] };
+function checkFields(document) {
+  console.dir(document);
+  return true;
+}
 
-  componentDidMount(props) {
-    this.subscription = selectedLanguages$.subscribe((selected) => {
-      this.setState({ selected: selected });
+export default function SelectLanguageProvider() {
+  const [selected, setSelected] = useState('nl');
+  const [visible, setVisible] = useState(false);
+  const [documentInfo, setDocumentInfo] = useState();
+
+  const langSubscription = useRef();
+  const docSubscription = useRef();
+
+  useEffect(() => {
+    langSubscription.current = selectedLanguages$.subscribe((selected) => {
+      setSelected(selected);
     });
-  }
-  componentWillUnmount(props) {
-    this.subscription.unsubscribe();
-  }
+    docSubscription.current = onDocument$.subscribe((document) => {
+      setVisible(checkFields(document));
+      setDocumentInfo(document);
+    });
+    return () => {
+      langSubscription.current.unsubscribe();
+      docSubscription.current.unsubscribe();
+    };
+  }, []);
 
-  render() {
-    const { selected } = this.state;
-    return (
-      <SelectLanguage
-        languages={config.supportedLanguages}
-        selected={selected}
-        onChange={setLangs}
-      />
-    );
-  }
+  return (
+    <>
+      {visible && document && (
+        <SelectLanguage
+          languages={config.supportedLanguages}
+          selected={selected}
+          onChange={setLangs}
+          document={documentInfo}
+        />
+      )}
+      {!visible || (!document && <div></div>)}
+    </>
+  );
 }

@@ -13,7 +13,7 @@ import { Select } from '~/components-styled/select';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { SewerWaterChart } from '~/components/lineChart/sewer-water-chart';
-import { SEOHead } from '~/components/seoHead';
+import { SEOHead } from '~/components-styled/seo-head';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getMunicipalityLayout } from '~/domain/layout/municipality-layout';
 import siteText from '~/locale/index';
@@ -35,6 +35,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const text = siteText.gemeente_rioolwater_metingen;
+const graphDescriptions = siteText.accessibility.grafieken;
 
 const SewerWater: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data, municipalityName } = props;
@@ -191,6 +192,7 @@ const SewerWater: FCWithLayout<typeof getStaticProps> = (props) => {
             title={replaceVariablesInText(text.bar_chart_title, {
               municipality: municipalityName,
             })}
+            ariaDescription={graphDescriptions.rioolwater_meetwaarde}
             metadata={{
               date: [
                 sewerAverages.last_value.date_start_unix,

@@ -1,70 +1,73 @@
 /* eslint-disable complexity */
 
-import React from "react";
-import PropTypes from "prop-types";
-
+import { useValidationStatus } from '@sanity/react-hooks';
 import {
-  studioTheme,
-  ThemeProvider,
   Inline,
   Label,
-  TabList,
+  studioTheme,
   Tab,
-} from "@sanity/ui";
-import Flag from "react-world-flags";
+  TabList,
+  ThemeProvider,
+} from '@sanity/ui';
+import React from 'react';
+import { MdErrorOutline } from 'react-icons/md';
+import Flag from 'react-world-flags';
 
-const LanguagePropType = PropTypes.shape({
-  id: PropTypes.string,
-  title: PropTypes.string,
-});
-export default class SelectLanguage extends React.Component {
-  static propTypes = {
-    languages: PropTypes.arrayOf(LanguagePropType),
-    selected: PropTypes.arrayOf(LanguagePropType),
-    onChange: PropTypes.func,
-  };
+export default function SelectLanguage(props) {
+  const { languages, selected, onChange, document } = props;
 
-  state = { isOpen: false };
-  refElement = React.createRef();
+  const validation = useValidationStatus(document?.id, document?.type);
 
-  handleLangCheckboxChange = (event) => {
-    const id = event.target.getAttribute("data-lang-id");
-    this.props.onChange([id]);
-  };
+  const validationErrors = extractValidationErrorsPerLanguage(
+    validation.markers,
+    languages
+  );
 
-  render() {
-    const { isOpen } = this.state;
-    const { languages, selected } = this.props;
-    const allIsSelected = languages.length === selected.length;
-    const refElement =
-      this.refElement &&
-      this.refElement.current &&
-      this.refElement.current._element;
+  return (
+    <ThemeProvider theme={studioTheme}>
+      <Inline space={[3]}>
+        <Label size={2}>Select a language:</Label>
 
-    return (
-      <ThemeProvider theme={studioTheme}>
-        <Inline space={[3]}>
-          <Label size={2}>Select a language:</Label>
-
-          <TabList space={1}>
-            {languages.map((lang) => (
-              <Tab
-                icon={
+        <TabList space={1}>
+          {languages.map((lang) => (
+            <Tab
+              style={{
+                border: validationErrors[lang.id] ? '1px solid red' : undefined,
+              }}
+              key={lang.id}
+              icon={
+                <>
                   <Flag
-                    code={lang.id === "en" ? "gb" : lang.id}
+                    code={lang.id === 'en' ? 'gb' : lang.id}
                     width="24"
                     height="12"
                   />
-                }
-                label={lang.title}
-                onClick={() => this.props.onChange([lang.id])}
-                selected={selected.includes(lang.id)}
-                space={2}
-              />
-            ))}
-          </TabList>
-        </Inline>
-      </ThemeProvider>
-    );
-  }
+                  {validationErrors[lang.id] ? (
+                    <MdErrorOutline
+                      color={validationErrors[lang.id] ? 'red' : undefined}
+                    />
+                  ) : null}
+                </>
+              }
+              label={lang.title}
+              onClick={() => onChange([lang.id])}
+              selected={selected.includes(lang.id)}
+              space={2}
+            />
+          ))}
+        </TabList>
+      </Inline>
+    </ThemeProvider>
+  );
+}
+
+function extractValidationErrorsPerLanguage(markers, languages) {
+  return languages.reduce((aggr, lang) => {
+    aggr[lang.id] = markers.some(checkForLanguage(lang.id));
+    return aggr;
+  }, {});
+}
+
+function checkForLanguage(languageId) {
+  return (marker) => marker.path.length === 2 && marker.path[1] === languageId;
 }

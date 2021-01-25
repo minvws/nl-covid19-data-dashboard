@@ -1,8 +1,11 @@
+import {
+  RegionsElderlyAtHome,
+  SafetyRegionProperties,
+} from '@corona-dashboard/common';
 import { ReactNode } from 'react';
+import { Text } from '~/components-styled/typography';
 import { RegionSelectionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
-import { SafetyRegionProperties } from '~/components/choropleth/shared';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
-import { RegionsElderlyAtHome } from '~/types/data';
 import { formatNumber } from '~/utils/formatNumber';
 
 export const createRegionElderlyAtHomeTooltip = (
@@ -15,10 +18,10 @@ export const createRegionElderlyAtHomeTooltip = (
 
   return (
     <TooltipContent title={context.vrname} onSelect={onSelect}>
-      <strong>
+      <Text m={0} fontWeight="bold">
         {formatNumber(context.positive_tested_daily_per_100k)} per{' '}
         {formatNumber(100_000)}
-      </strong>
+      </Text>
     </TooltipContent>
   );
 };

@@ -11,7 +11,7 @@ import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createSewerRegionalTooltip } from '~/components/choropleth/tooltips/region/create-sewer-regional-tooltip';
-import { SEOHead } from '~/components/seoHead';
+import { SEOHead } from '~/components-styled/seo-head';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import siteText from '~/locale/index';
@@ -23,6 +23,7 @@ import {
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 
 const text = siteText.rioolwater_metingen;
+const graphDescriptions = siteText.accessibility.grafieken;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -108,6 +109,7 @@ const SewerWater: FCWithLayout<typeof getStaticProps> = ({
         <LineChartTile
           title={text.linechart_titel}
           timeframeOptions={['all', '5weeks']}
+          ariaDescription={graphDescriptions.rioolwater_virusdeeltjes}
           values={sewerAverages.values}
           linesConfig={[
             {

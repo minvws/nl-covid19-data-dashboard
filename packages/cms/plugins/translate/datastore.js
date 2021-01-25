@@ -1,7 +1,7 @@
-import { Subject } from "rxjs";
-import { map, publishReplay, refCount, startWith, tap } from "rxjs/operators";
-import config from "./config.js";
-import { intersection } from "lodash";
+import { intersection } from 'lodash';
+import { Subject } from 'rxjs';
+import { map, publishReplay, refCount, startWith, tap } from 'rxjs/operators';
+import config from './config.js';
 
 const onSelect$ = new Subject();
 
@@ -29,11 +29,11 @@ export const selectedLanguages$ = onSelect$.pipe(
   map((selectedLangs) => intersection(selectedLangs, SUPPORTED_LANG_IDS)),
   publishReplay(1),
   refCount(),
-  persistOn("language-filter/selected-languages", SUPPORTED_LANG_IDS)
+  persistOn('language-filter/selected-languages', SUPPORTED_LANG_IDS)
 );
 
 const defaultFilterField = (enclosingType, field, selectedLanguages) =>
-  !enclosingType.name.startsWith("locale") ||
+  !enclosingType.name.startsWith('locale') ||
   selectedLanguages.includes(field.name);
 
 const filterField = config.filterField || defaultFilterField;

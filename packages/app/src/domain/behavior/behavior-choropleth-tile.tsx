@@ -5,10 +5,10 @@ import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { Select } from '~/components-styled/select';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
-import { SafetyRegionProperties } from '~/components/choropleth/shared';
+import { SafetyRegionProperties } from '@corona-dashboard/common';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
 import siteText from '~/locale/index';
-import { RegionsBehavior } from '~/types/data';
+import { RegionsBehavior } from '@corona-dashboard/common';
 import {
   BehaviorIdentifier,
   behaviorIdentifiers,

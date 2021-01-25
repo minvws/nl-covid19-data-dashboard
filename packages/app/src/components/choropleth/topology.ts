@@ -3,7 +3,7 @@ import * as topojson from 'topojson-client';
 
 // Load all the geographical data including the data entries (regions and municipalities)
 import topology from './geography-simplified.topo.json';
-import { MunicipalGeoJSON, RegionGeoJSON } from './shared';
+import { MunicipalGeoJSON, RegionGeoJSON } from '@corona-dashboard/common';
 
 export const countryGeo = topojson.feature(
   topology,

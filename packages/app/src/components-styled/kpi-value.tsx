@@ -3,7 +3,7 @@ import { color } from 'styled-system';
 import { isDefined } from 'ts-is-present';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
-import { DifferenceDecimal, DifferenceInteger } from '~/types/data';
+import { DifferenceDecimal, DifferenceInteger } from '@corona-dashboard/common';
 import { DifferenceIndicator } from '~/components-styled/difference-indicator';
 
 interface KpiValueProps {
@@ -12,6 +12,7 @@ interface KpiValueProps {
   valueAnnotation?: string;
   difference?: DifferenceDecimal | DifferenceInteger;
   differenceStaticTimespan?: string;
+  text?: string;
 }
 
 /**
@@ -42,6 +43,7 @@ export function KpiValue({
   valueAnnotation,
   difference,
   differenceStaticTimespan,
+  text,
   ...otherProps
 }: KpiValueProps) {
   return (
@@ -53,6 +55,10 @@ export function KpiValue({
       ) : isDefined(percentage) ? (
         <StyledValue color="data.primary" {...otherProps}>
           {`${formatPercentage(percentage)}%`}
+        </StyledValue>
+      ) : isDefined(text) ? (
+        <StyledValue color="data.primary" {...otherProps}>
+          {text}
         </StyledValue>
       ) : (
         <StyledValue color="data.primary" {...otherProps}>
