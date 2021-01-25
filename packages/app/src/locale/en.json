@@ -2046,9 +2046,9 @@
         "description_second": "* This number was reported by phone by long-term care institutions themselves on 22 and 25 January. It is not yet known when this number will be updated. Other numbers of doses administered are updated daily."
       },
       "kpi_expected_delivery": {
-        "title": "Doses to be delivered",
+        "title": "Approved vaccines to be delivered",
         "value": "1974750",
-        "description": "This is the number of vaccine doses the Netherlands expects to receive over the next six weeks. The Netherlands will receive a new delivery each week. People need two separately administered doses for the vaccine to be maximally effective. The delivery of AstraZeneca vaccines depends on the approval of the vaccine by the EU.",
+        "description": "This is the number of vaccine doses the Netherlands expects to receive over the next six weeks. The Netherlands will receive a new delivery each week. People need two separately administered doses for the vaccine to be maximally effective.",
         "date_of_report_unix": "1611600708",
         "date_of_insertion_unix": "1611600708"
       },
@@ -2089,7 +2089,7 @@
     },
     "grafiek": {
       "titel": "Expected weekly deliveries",
-      "omschrijving": "This graph shows the number of vaccine doses the Netherlands expects to receive over the next six weeks."
+      "omschrijving": "This graph shows the number of vaccine doses the Netherlands expects to receive over the next six weeks. "
     }
   }
 }
