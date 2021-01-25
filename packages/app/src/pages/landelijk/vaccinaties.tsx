@@ -48,11 +48,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             datumsText: text.datums,
             dateOrRange: parseFloat(text.date_of_insertion_unix),
             dateOfInsertionUnix: parseFloat(text.date_of_insertion_unix),
-            dataSources: [
-              text.bronnen.rivm,
-              text.bronnen.ggd,
-              text.bronnen.lnaz,
-            ],
+            dataSources: [],
           }}
         />
         <TwoKpiSection>
