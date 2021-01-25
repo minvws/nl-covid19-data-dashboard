@@ -5,7 +5,7 @@
     "message": "Data that could give insight in the spread of the virus."
   },
   "laatst_bijgewerkt": {
-    "message": "The dashboard last received new data on {{dateOfInsertion}}.",
+    "message": "The dashboard receives new data each day, around 15:20.",
     "title": "Last updated"
   },
   "notificatie": {
@@ -663,7 +663,7 @@
       "gedrag": "Behaviour",
       "kwetsbare_groepen": "Vulnerable groups",
       "maatregelen": "Measures",
-      "vaccinaties": "Vaccinations"
+      "vaccinaties": ""
     }
   },
   "veiligheidsregio_layout": {
@@ -746,7 +746,13 @@
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -1723,72 +1729,6 @@
     },
     "kpi_titel": "Daily reported deaths from COVID-19"
   },
-  "vaccinaties": {
-    "titel_sidebar": "Vaccinations",
-    "titel_kpi": "Vaccine doses administered",
-    "metadata": {
-      "title": "",
-      "description": ""
-    },
-    "title": "COVID-19 vaccinations",
-    "description": "Vaccination is the most important step towards getting life back to normal. The Netherlands began vaccinating people against COVID-19 on 6 January 2021. The first people to be offered the vaccine are those in residential care, their professional carers and those working in acute care. Eventually, the vaccine will be offered to everyone aged 18 and over. This page shows how many doses of vaccine have been administered, how many doses are currently in stock and how many doses are on their way. ",
-    "datums": "",
-    "date_unix": "0",
-    "date_of_insertion_unix": "0",
-    "reference": {
-      "href": "",
-      "text": "Read more in the explanation of the presented data."
-    },
-    "bronnen": {
-      "rivm": {
-        "href": "",
-        "text": "",
-        "download": ""
-      }
-    },
-    "data": {
-      "difference": "",
-      "sidebar": {
-        "last_value": {
-          "total_vaccinated": "160538",
-          "date_unix": "0",
-          "date_of_insertion_unix": "0"
-        }
-      },
-      "kpi_total": {
-        "title": "Number of doses administered",
-        "value": "160538",
-        "description": "This figure reflects the total number of vaccination doses that have been administered. Because vaccination figures are sometimes reported a few days after doses are administered, the actual number of vaccination doses administered is higher. People need two separately administered doses for the vaccine to be maximally effective.",
-        "date_of_report_unix": "0",
-        "date_of_insertion_unix": "0",
-        "administered": [
-          {
-            "value": "106886",
-            "description": "administered by municipal health services (GGDs)"
-          },
-          {
-            "value": "40216",
-            "description": "administered by hospitals"
-          },
-          {
-            "value": "13436",
-            "description": "administered by long-term care institutions*"
-          }
-        ]
-      },
-      "kpi_expected_delivery": {
-        "title": "Doses to be delivered",
-        "value": "1974750",
-        "description": "This is the number of vaccine doses the Netherlands expects to receive over the next six weeks. The Netherlands will receive a new delivery each week. People need two separately administered doses for the vaccine to be maximally effective.",
-        "date_of_report_unix": "0",
-        "date_of_insertion_unix": "0"
-      }
-    },
-    "section_vaccinations_more_information": {
-      "title": "Expected data on vaccinations",
-      "description": "More data on vaccinations will be added in the near future, including:\n- Willingness to be vaccinated\n- Vaccination coverage"
-    }
-  },
   "veiligheidsregio_sterfte": {
     "titel_sidebar": "Deaths",
     "titel_kpi": "Gemeld aantal patiënten overleden aan COVID-19 per dag",
@@ -2019,6 +1959,68 @@
       "value_percentage_title": "Deaths by age",
       "value_percentage_tooltip": "of the number of deceased persons is {{ageGroupRange}} years old",
       "age_group_range_tooltip": "{{ageGroupRange}} years old"
+    }
+  },
+  "vaccinaties": {
+    "titel_sidebar": "",
+    "titel_kpi": "",
+    "metadata": {
+      "title": "",
+      "description": ""
+    },
+    "title": "",
+    "description": "",
+    "datums": "",
+    "date_unix": "",
+    "date_of_insertion_unix": "",
+    "reference": {
+      "href": "",
+      "text": ""
+    },
+    "bronnen": {
+      "rivm": {
+        "href": "",
+        "text": "",
+        "download": ""
+      }
+    },
+    "data": {
+      "difference": "",
+      "sidebar": {
+        "last_value": {
+          "total_vaccinated": "",
+          "date_unix": "",
+          "date_of_insertion_unix": ""
+        }
+      },
+      "kpi_total": {
+        "title": "",
+        "value": "",
+        "description": "",
+        "date_of_report_unix": "",
+        "date_of_insertion_unix": "",
+        "administered": [
+          {
+            "value": "",
+            "description": ""
+          },
+          {
+            "value": "",
+            "description": ""
+          }
+        ]
+      },
+      "kpi_expected_delivery": {
+        "title": "Doses to be delivered",
+        "value": "1974750",
+        "description": "This is the number of vaccine doses the Netherlands expects to receive over the next six weeks. The Netherlands will receive a new delivery each week. People need two separately administered doses for the vaccine to be maximally effective.",
+        "date_of_report_unix": "",
+        "date_of_insertion_unix": ""
+      }
+    },
+    "section_vaccinations_more_information": {
+      "title": "Expected data on vaccinations",
+      "description": "More data on vaccinations will be added in the near future, including:\n- Willingness to be vaccinated\n- Vaccination coverage"
     }
   }
 }
