@@ -2,7 +2,7 @@
 set -e
 
 # Start with a clean slate
-rm *.tar.gz
+[ -e *.tar.gz ] && rm *.tar.gz
 rm -rf export development-export-*
 rm -rf ../app/public/cms
 
