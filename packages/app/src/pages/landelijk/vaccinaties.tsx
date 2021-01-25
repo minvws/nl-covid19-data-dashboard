@@ -1,24 +1,24 @@
+import { css } from '@styled-system/css';
+import styled from 'styled-components';
+import VaccinatieBarChart from '~/assets/vaccinate_bar_chart.svg';
 import VaccinatieIcon from '~/assets/vaccinaties.svg';
+import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
+import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
-import { Heading } from '~/components-styled/typography';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { Text } from '~/components-styled/typography';
+import { Heading, Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
-import { SEOHead } from '~/components-styled/seo-head';
-import { css } from '@styled-system/css';
-import { formatNumber } from '~/utils/formatNumber';
-import styled from 'styled-components';
-
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
-  getNlData,
   getLastGeneratedDate,
+  getNlData,
   getText,
 } from '~/static-props/get-data';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import { formatNumber } from '~/utils/formatNumber';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -48,7 +48,11 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             datumsText: text.datums,
             dateOrRange: parseFloat(text.date_of_insertion_unix),
             dateOfInsertionUnix: parseFloat(text.date_of_insertion_unix),
-            dataSources: [text.bronnen.rivm],
+            dataSources: [
+              text.bronnen.rivm,
+              text.bronnen.ggd,
+              text.bronnen.lnaz,
+            ],
           }}
         />
         <TwoKpiSection>
@@ -56,21 +60,24 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             title={text.data.kpi_total.title}
             metadata={{
               date: parseFloat(text.data.kpi_total.date_of_report_unix),
-              source: text.bronnen.rivm,
+              source: text.bronnen.all_left,
             }}
           >
             <KpiValue absolute={parseFloat(text.data.kpi_total.value)} />
-            <Text mb={3}>{text.data.kpi_total.description}</Text>
+            <Text mb={3}>{text.data.kpi_total.description_first}</Text>
             {text.data.kpi_total.administered.map((item) => (
               <>
-                <Heading level={4} fontSize={'1.1em'} mt={3} mb={0}>
-                  <span css={css({ color: 'data.primary' })}>
-                    {formatNumber(parseFloat(item.value))}
-                  </span>
-                  {` ${item.description}`}
-                </Heading>
+                {item.value && item.description && (
+                  <Heading level={4} fontSize={'1.1em'} mt={3} mb={0}>
+                    <span css={css({ color: 'data.primary' })}>
+                      {formatNumber(parseFloat(item.value))}
+                    </span>
+                    {` ${item.description}`}
+                  </Heading>
+                )}
               </>
             ))}
+            <Text mb={3}>{text.data.kpi_total.description_second}</Text>
           </KpiTile>
 
           <KpiTile
@@ -79,12 +86,31 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
               date: parseFloat(
                 text.data.kpi_expected_delivery.date_of_report_unix
               ),
-              source: text.bronnen.rivm,
+              source: text.bronnen.all_right,
             }}
           >
-            <KpiValue text={text.data.kpi_expected_delivery.value} />
+            <KpiValue
+              absolute={parseFloat(text.data.kpi_expected_delivery.value)}
+            />
             <Text mb={4}>{text.data.kpi_expected_delivery.description}</Text>
-            <Heading level={3}>
+
+            <Heading level={3}>{text.data.kpi_stock.title}</Heading>
+
+            <KpiValue absolute={parseFloat(text.data.kpi_stock.value)} />
+            {text.data.kpi_stock.amount.map((item) => (
+              <>
+                {item.value && item.description && (
+                  <Heading level={4} fontSize={'1.1em'} mt={3} mb={0}>
+                    <span css={css({ color: 'data.primary' })}>
+                      {formatNumber(parseFloat(item.value))}
+                    </span>
+                    {` ${item.description}`}
+                  </Heading>
+                )}
+              </>
+            ))}
+
+            <Heading level={3} mt={4}>
               {text.section_vaccinations_more_information.title}
             </Heading>
             <Text
@@ -96,6 +122,20 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             />
           </KpiTile>
         </TwoKpiSection>
+
+        <ChartTile
+          title={text.grafiek.titel}
+          description={text.grafiek.omschrijving}
+          ariaDescription={
+            siteText.accessibility.grafieken.verwachte_leveringen
+          }
+          metadata={{
+            date: 1611593522,
+            source: text.bronnen.rivm,
+          }}
+        >
+          <VaccinatieBarChart />
+        </ChartTile>
       </TileList>
     </>
   );
