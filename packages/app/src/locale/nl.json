@@ -1972,8 +1972,8 @@
     "title": "COVID-19-vaccinaties",
     "description": "Vaccineren is de belangrijkste stap naar een samenleving zonder coronaregels. Op 6 januari 2021 is Nederland begonnen met vaccineren. Kwetsbare mensen, hun zorgmedewerkers en medewerkers in de acute zorg mogen als eerste een vaccinatie halen. Uiteindelijk komt iedereen van 18 jaar of ouder aan de beurt. De cijfers op deze pagina laten zie hoeveel vaccins zijn toegediend en hoeveel vaccins er beschikbaar komen.",
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "date_unix": "1611058309",
-    "date_of_insertion_unix": "1611058309",
+    "date_unix": "1611600708",
+    "date_of_insertion_unix": "1611600708",
     "reference": {
       "href": "/verantwoording#vaccinaties",
       "text": "Lees meer over de bron van de vaccinatiecijfers in de cijferverantwoording."
@@ -2010,16 +2010,16 @@
       "sidebar": {
         "last_value": {
           "total_vaccinated": "160538",
-          "date_unix": "1611058309",
-          "date_of_insertion_unix": "1611058309"
+          "date_unix": "1611600708",
+          "date_of_insertion_unix": "1611600708"
         }
       },
       "kpi_total": {
         "title": "Aantal toegediende vaccins",
         "value": "160538",
         "description": "Dit getal laat zien hoeveel vaccins in totaal zijn toegediend. Het kan een paar dagen duren voordat een prik wordt gemeld. Het daadwerkelijke aantal gezette prikken ligt daarom hoger. Mensen hebben twee prikken nodig voor een volledige vaccinatie.",
-        "date_of_report_unix": "1611058309",
-        "date_of_insertion_unix": "1611058309",
+        "date_of_report_unix": "1611600708",
+        "date_of_insertion_unix": "1611600708",
         "administered": [
           {
             "value": "106886",
@@ -2049,8 +2049,8 @@
         "title": "Verwachte levering vaccins",
         "value": "1974750",
         "description": "Aantal vaccins dat Nederland de komende zes weken verwacht te krijgen. Elke week ontvangt Nederland een deel van de vaccins. Mensen hebben twee prikken nodig voor een volledige vaccinatie. De levering van AstraZeneca-vaccins hangt af van goedkeuring van het vaccin door de EU.",
-        "date_of_report_unix": "1611058309",
-        "date_of_insertion_unix": "1611058309"
+        "date_of_report_unix": "1611600708",
+        "date_of_insertion_unix": "1611600708"
       },
       "kpi_stock": {
         "title": "",
