@@ -2,10 +2,11 @@ import css from '@styled-system/css';
 import * as React from 'react';
 import styled from 'styled-components';
 
-type Shape = 'line' | 'square';
+export type LegendShape = 'line' | 'square';
 
+export type LegendItem = { color: string; label: string; shape: LegendShape };
 interface LegendProps {
-  items: Array<{ color: string; label: string; shape: Shape }>;
+  items: LegendItem[];
 }
 
 export function Legenda({ items }: LegendProps) {

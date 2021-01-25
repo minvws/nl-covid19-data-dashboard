@@ -105,6 +105,7 @@ export const colors = {
     primary: '#007BC7',
     secondary: '#154273',
     neutral: '#C6C8CA',
+    underReported: '#E6E6E6',
     fill: 'rgba(0, 123, 199, .05)',
     scale: {
       blue: ['#8FCAE7', '#5BADDB', '#248FCF', '#0070BB', '#00529D', '#003580'],

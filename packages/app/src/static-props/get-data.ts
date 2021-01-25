@@ -2,7 +2,7 @@ import { GetStaticPropsContext } from 'next';
 import path from 'path';
 import safetyRegions from '~/data/index';
 import municipalities from '~/data/municipalSearchData';
-import { getClient, localize } from '~/lib/sanity';
+import { client, localize } from '~/lib/sanity';
 import { targetLanguage } from '~/locale/index';
 import {
   Municipal,
@@ -49,7 +49,7 @@ export function getLastGeneratedDate() {
 
 export function createGetContent<T>(query: string) {
   return async () => {
-    const rawContent = await getClient().fetch<T>(query);
+    const rawContent = await client.fetch<T>(query);
     const content = localize(rawContent, [targetLanguage, 'nl']);
 
     return { content };
