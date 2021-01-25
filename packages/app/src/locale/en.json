@@ -1766,6 +1766,10 @@
         "download": ""
       }
     },
+    "grafiek": {
+      "titel": "Verwachte leveringen",
+      "omschrijving": "Omschrijving van de grafiek"
+    },
     "data": {
       "difference": "",
       "sidebar": {
@@ -1846,8 +1850,7 @@
     "section_vaccinations_more_information": {
       "title": "Expected data on vaccinations",
       "description": "More data on vaccinations will be added in the near future, including:\n- Willingness to be vaccinated\n- Vaccination coverage"
-    },
-    "title_chart": "test"
+    }
   },
   "veiligheidsregio_sterfte": {
     "titel_sidebar": "Deaths",
@@ -2059,7 +2062,8 @@
       "rioolwater_virusdeeltjes": "This graph shows the progression over time in the average amount of virus particles in waste water, per 100.000 residents.",
       "verdenkingen_huisartsen": "This graph shows the progression over time in the estimated number of patients who contacted the general practitioner for the first time due to COVID-19 like symptoms.",
       "ziekenhuis_opnames": "This graph shows the progression in hospital admissions over time.",
-      "rioolwater_meetwaarde": "This graph shows the most recent measured value of the average amount of virus particles per 100.000 residents, per sewage processing facility."
+      "rioolwater_meetwaarde": "This graph shows the most recent measured value of the average amount of virus particles per 100.000 residents, per sewage processing facility.",
+      "verwachte_leveringen": "Deze grafiek toont de verwachte vaccin leveringen over de komende 6 weken"
     }
   },
   "deceased_age_groups": {

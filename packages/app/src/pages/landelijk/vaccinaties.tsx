@@ -1,25 +1,24 @@
+import { css } from '@styled-system/css';
+import styled from 'styled-components';
+import VaccinatieBarChart from '~/assets/vaccinate_bar_chart.svg';
 import VaccinatieIcon from '~/assets/vaccinaties.svg';
+import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
+import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
-import { Heading } from '~/components-styled/typography';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { Text } from '~/components-styled/typography';
+import { Heading, Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
-import { SEOHead } from '~/components-styled/seo-head';
-import { css } from '@styled-system/css';
-import { formatNumber } from '~/utils/formatNumber';
-import styled from 'styled-components';
-import VaccinatieBarChart from '~/assets/vaccinate_bar_chart.svg';
-
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
-  getNlData,
   getLastGeneratedDate,
+  getNlData,
   getText,
 } from '~/static-props/get-data';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import { formatNumber } from '~/utils/formatNumber';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -124,9 +123,19 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
           </KpiTile>
         </TwoKpiSection>
 
-        <KpiTile title={text.title_chart} metadata={{}}>
+        <ChartTile
+          title={text.grafiek.titel}
+          description={text.grafiek.omschrijving}
+          ariaDescription={
+            siteText.accessibility.grafieken.verwachte_leveringen
+          }
+          metadata={{
+            date: 1611593522,
+            source: text.bronnen.rivm,
+          }}
+        >
           <VaccinatieBarChart />
-        </KpiTile>
+        </ChartTile>
       </TileList>
     </>
   );
