@@ -1,13 +1,12 @@
-const sharp = require("sharp");
-const fs = require("fs");
-const path = require("path");
-const config = require("../../app/src/config.js");
+const sharp = require('sharp');
+const fs = require('fs');
+const path = require('path');
 
-const walkPath = "../app/public/cms";
+import { sizes } from '@corona-dashboard/common/src/config';
+
+const walkPath = '../app/public/cms';
 
 // These are the sizes we want to resize our original images to
-
-const { sizes } = config;
 
 function walk(dir, done) {
   fs.readdir(dir, function (error, list) {
@@ -24,7 +23,7 @@ function walk(dir, done) {
         return done(null);
       }
 
-      file = dir + "/" + file;
+      file = dir + '/' + file;
 
       fs.stat(file, function (error, stat) {
         if (stat && stat.isDirectory()) {
@@ -37,9 +36,9 @@ function walk(dir, done) {
           const ext = path.extname(file);
           const filename = path
             .basename(file)
-            .split(".")
+            .split('.')
             .slice(0, -1)
-            .join(".");
+            .join('.');
           console.log(`Now resizing: ${file}`);
 
           sizes.forEach((size) => {
@@ -56,9 +55,9 @@ function walk(dir, done) {
   });
 }
 
-console.log("-------------------------------------------------------------");
+console.log('-------------------------------------------------------------');
 console.log(`We're going to resize images in ${walkPath}...`);
-console.log("-------------------------------------------------------------");
+console.log('-------------------------------------------------------------');
 
 // Walk through the sanity image directory and report
 // that we're done or throw an error
@@ -67,11 +66,11 @@ walk(walkPath, function (error) {
     throw error;
   } else {
     console.log(
-      "-------------------------------------------------------------"
+      '-------------------------------------------------------------'
     );
-    console.log("All done!");
+    console.log('All done!');
     console.log(
-      "-------------------------------------------------------------"
+      '-------------------------------------------------------------'
     );
   }
 });

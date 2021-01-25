@@ -1,4 +1,4 @@
-import { sizes } from '~/config';
+import { sizes } from '@corona-dashboard/common';
 
 // find closest resized element
 export function findClosestSize(width: number) {

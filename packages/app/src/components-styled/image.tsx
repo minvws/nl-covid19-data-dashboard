@@ -1,6 +1,6 @@
 import { findClosestSize } from '~/utils/findClosestSize';
 import styled from 'styled-components/';
-const config = require('~/config.js');
+import { sizes } from '@corona-dashboard/common';
 
 type ImageProps = {
   src: string;
@@ -25,7 +25,7 @@ export function Image(props: ImageProps) {
   const filename = src.split('.')[0];
   const extension = src.split('.')[1];
 
-  const srcSet = config.sizes
+  const srcSet = sizes
     .map((size: number) => {
       return `/cms${filename}-${size}.${extension} ${size}w`;
     })
