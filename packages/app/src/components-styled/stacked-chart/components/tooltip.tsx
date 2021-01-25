@@ -1,24 +1,24 @@
 import css from '@styled-system/css';
-import { ReactNode } from 'react';
 import styled from 'styled-components';
+// import { ReactNode } from 'react';
 
-const BOUND_OFFSET = 70;
+// const BOUND_OFFSET = 70;
 
-type Bounds = {
-  left: number;
-  right: number;
-  top: number;
-  bottom: number;
-};
+// type Bounds = {
+//   left: number;
+//   right: number;
+//   top: number;
+//   bottom: number;
+// };
 
-export type TooltipProps = {
-  children: ReactNode;
-  x: number;
-  y: number;
-  primaryColor?: string;
-  borderColor?: string;
-  bounds: Bounds;
-};
+// export type TooltipProps = {
+//   children: ReactNode;
+//   x: number;
+//   y: number;
+//   primaryColor?: string;
+//   borderColor?: string;
+//   bounds: Bounds;
+// };
 
 type TooltipContainerProps = {
   borderColor: string;
@@ -39,37 +39,37 @@ export const TooltipContainer = styled.div<TooltipContainerProps>`
   z-index: 100;
 `;
 
-/**
- * @TODO improve how bounds are used to keep tooltips within the chart
- */
-export function Tooltip({
-  children,
-  x,
-  y,
-  borderColor = '#01689B',
-  bounds,
-}: TooltipProps) {
-  const yTransform = 'calc(-100% - 10px)';
+// /**
+//  * @TODO improve how bounds are used to keep tooltips within the chart
+//  */
+// export function Tooltip({
+//   children,
+//   x,
+//   y,
+//   borderColor = '#01689B',
+//   bounds,
+// }: TooltipProps) {
+//   const yTransform = 'calc(-100% - 10px)';
 
-  let xTransform = '-50%';
-  if (x > bounds.right - BOUND_OFFSET) {
-    xTransform = `calc(-100% + ${bounds.right - x}px)`;
-  }
-  if (x < bounds.left + BOUND_OFFSET) {
-    xTransform = `calc(-50% + ${BOUND_OFFSET - x}px)`;
-  }
+//   let xTransform = '-50%';
+//   if (x > bounds.right - BOUND_OFFSET) {
+//     xTransform = `calc(-100% + ${bounds.right - x}px)`;
+//   }
+//   if (x < bounds.left + BOUND_OFFSET) {
+//     xTransform = `calc(-50% + ${BOUND_OFFSET - x}px)`;
+//   }
 
-  return (
-    <TooltipContainer
-      style={{
-        top: y,
-        left: x,
-        transform: `translate(${xTransform},${yTransform})`,
-        transition: 'left 0.075s, top 0.075s',
-      }}
-      borderColor={borderColor}
-    >
-      {children}
-    </TooltipContainer>
-  );
-}
+//   return (
+//     <TooltipContainer
+//       style={{
+//         top: y,
+//         left: x,
+//         transform: `translate(${xTransform},${yTransform})`,
+//         transition: 'left 0.075s, top 0.075s',
+//       }}
+//       borderColor={borderColor}
+//     >
+//       {children}
+//     </TooltipContainer>
+//   );
+// }

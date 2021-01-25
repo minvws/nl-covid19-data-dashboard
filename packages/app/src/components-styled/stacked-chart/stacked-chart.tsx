@@ -36,9 +36,9 @@ const tooltipStyles = {
 import {
   calculateSeriesMaximum,
   getSeriesData,
+  getTotalSumForMetricProperty,
   getValuesInTimeframe,
   SeriesValue,
-  // useTooltip,
   Value,
 } from './logic';
 
@@ -58,6 +58,12 @@ const tickFormatPercentage: AnyTickFormatter = (v: number) =>
 let tooltipTimeout: number;
 let hoverTimeout: number;
 
+/**
+ * The TooltipData is used by the hover handler to show and position the
+ * Tooltip. A subsection of this data is then passed on to the ToolTipFormatter,
+ * since that function only requires information to render its contents which
+ * isn't position dependent.
+ */
 type TooltipData = {
   bar: SeriesPoint<SeriesValue>;
   key: string;
@@ -68,6 +74,16 @@ type TooltipData = {
   y: number;
   color: string;
 };
+
+/**
+ * The TooltipFormatter returns the content for the tooltip.
+ *
+ * By passing the SeriesValue (which is an object with all trend values that are
+ * showing in the chart with the date), plus the key for which the hover is
+ * showing data, the formatter has all the information it needs to render any
+ * kind of tooltip
+ */
+type TooltipFormatter = (value: SeriesValue, key: string) => JSX.Element;
 
 type HoverEvent = TouchEvent<SVGElement> | MouseEvent<SVGElement>;
 
@@ -104,10 +120,7 @@ export type StackedChartProps<T extends Value> = {
   width?: number;
   height?: number;
   formatDate?: typeof defaultFormatDate;
-  /**
-   * @TODO type any
-   */
-  formatTooltip?: (data: any) => JSX.Element;
+  formatTooltip?: TooltipFormatter;
   isPercentage?: boolean;
 };
 
@@ -179,20 +192,21 @@ export function StackedChart<T extends Value>({
 
   const legendaItems = useMemo(
     () =>
-      config.map(
-        (x, index) =>
+      config.reverse().map(
+        (x) =>
           ({
             color:
               hoveredIndex === NO_HOVER_INDEX
                 ? x.color
-                : hoveredIndex === index
+                : hoveredIndex ===
+                  metricProperties.findIndex((v) => v === x.metricProperty)
                 ? x.color
                 : x.fadedColor,
             label: x.legendLabel,
             shape: 'square',
           } as LegendItem)
       ),
-    [config, hoveredIndex]
+    [config, hoveredIndex, metricProperties]
   );
 
   const labelByKey = useMemo(
@@ -204,35 +218,56 @@ export function StackedChart<T extends Value>({
     [config]
   );
 
+  /**
+   * Calculate the sum of very property over the whole x-axis range.
+   *
+   * @TODO this logic is probably very specific to the vaccine availability
+   * chart so it should probably be moved outside once we start re-using this
+   * stacked chart for other things.
+   */
+  const sumByKey = useMemo(
+    () =>
+      config.reduce(
+        (acc, x) =>
+          set(
+            acc,
+            x.metricProperty,
+            getTotalSumForMetricProperty(
+              (values as unknown) as Record<string, number>[],
+              x.metricProperty as string
+            )
+          ),
+        {} as Record<string, number>
+      ),
+    [config, values]
+  );
+
   const { containerRef, TooltipInPortal } = useTooltipInPortal({
-    // TooltipInPortal is rendered in a separate child of <body /> and positioned
-    // with page coordinates which should be updated on scroll. consider using
-    // Tooltip or TooltipWithBounds if you don't need to render inside a Portal
     scroll: true,
     polyfill: ResizeObserver,
   });
 
   const defaultFormatTooltip = useCallback(
-    (data: TooltipData) => {
-      const seriesValue = data.bar.data;
-      const dateString = defaultFormatDate(seriesValue);
+    (data: SeriesValue, key: string) => {
+      const dateString = defaultFormatDate(data);
 
       return (
         <div>
           <div>
-            <strong>{labelByKey[data.key]}</strong>
-            {`: ${data.bar.data[data.key]}`}
+            <strong>{labelByKey[key]}:</strong>
+            {/* @TODO move mln to lokalize */}
+            {` ${formatPercentage(sumByKey[key])} mln totaal`}
           </div>
 
           <div>
-            <strong>{dateString}</strong>
+            <strong>{dateString}:</strong>
             {/* @TODO move mln to lokalize */}
-            {`: ${data.bar.data[data.key]} mln`}
+            {` ${formatPercentage(data[key])} mln`}
           </div>
         </div>
       );
     },
-    [labelByKey]
+    [labelByKey, sumByKey]
   );
 
   /**
@@ -240,9 +275,11 @@ export function StackedChart<T extends Value>({
    */
 
   /**
-   * The hover function gets passed the full bar data as tooltipData. It
-   * contains the bar position properties as well as the original data used to
-   * render that bar.
+   * Every chart stack/column gets its own mouse handler, which is then tied to
+   * the bar variable via closure. This bar data contains also the original
+   * SeriesValue, which can be passed to the tooltip.
+   *
+   * @TODO wrap in useCallback?
    */
   function handleHover(
     event: HoverEvent,
@@ -250,8 +287,6 @@ export function StackedChart<T extends Value>({
     hoverIndex: number
   ) {
     const isLeave = event.type === 'mouseleave';
-
-    // console.log(tooltipData.index);
 
     if (isLeave) {
       tooltipTimeout = window.setTimeout(() => {
@@ -275,17 +310,12 @@ export function StackedChart<T extends Value>({
      * containerRef is set to in this example.
      */
 
-    /**
-     * Every instantiated bar gets its own mouse handler, which is tied to the
-     * bar variable via closure. Bar also contains a "bar" property that
-     * contains the original ChartValue data, so the name is confusing.
-     */
     const coords = localPoint(event);
     const left = tooltipData.x + tooltipData.width / 2;
     showTooltip({
       tooltipData: tooltipData,
       tooltipTop: coords?.y || 0,
-      tooltipLeft: Math.max(coords?.x - 20 || 0, left),
+      tooltipLeft: Math.max(coords?.x || 0 - 20, left),
     });
   }
 
@@ -416,8 +446,8 @@ export function StackedChart<T extends Value>({
           >
             <TooltipContainer borderColor="#01689B">
               {formatTooltip
-                ? formatTooltip(tooltipData)
-                : defaultFormatTooltip(tooltipData)}
+                ? formatTooltip(tooltipData.bar.data, tooltipData.key)
+                : defaultFormatTooltip(tooltipData.bar.data, tooltipData.key)}
             </TooltipContainer>
           </TooltipInPortal>
         )}

@@ -1,4 +1,4 @@
-import { omit, pick } from 'lodash';
+import { omit, pick, set } from 'lodash';
 import { useCallback, useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { assert } from '~/utils/assert';
@@ -153,6 +153,13 @@ function getDateFromValue<T extends Value>(value: T) {
   }
 
   throw new Error(`Incompatible timestamps are used in value ${value}`);
+}
+
+export function getTotalSumForMetricProperty(
+  values: Record<string, number>[],
+  metricProperty: string
+) {
+  return values.reduce((acc, v) => acc + v[metricProperty] || 0, 0);
 }
 
 /**
