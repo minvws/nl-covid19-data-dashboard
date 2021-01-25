@@ -662,7 +662,8 @@
       "vroege_signalen": "Early indicators",
       "gedrag": "Behaviour",
       "kwetsbare_groepen": "Vulnerable groups",
-      "maatregelen": "Measures"
+      "maatregelen": "Measures",
+      "vaccinaties": ""
     }
   },
   "veiligheidsregio_layout": {
@@ -745,13 +746,7 @@
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": [
-      "0 to 20",
-      "20 to 40",
-      "40 to 60",
-      "60 to 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -1727,6 +1722,72 @@
       "line_chart_covid_daily_description": "This graph shows the number of reported deaths from COVID-19, in the selected period of time."
     },
     "kpi_titel": "Daily reported deaths from COVID-19"
+  },
+  "vaccinaties": {
+    "titel_sidebar": "",
+    "titel_kpi": "",
+    "metadata": {
+      "title": "",
+      "description": ""
+    },
+    "title": "",
+    "description": "",
+    "datums": "",
+    "date_unix": "",
+    "date_of_insertion_unix": "",
+    "reference": {
+      "href": "",
+      "text": ""
+    },
+    "bronnen": {
+      "rivm": {
+        "href": "",
+        "text": "",
+        "download": ""
+      }
+    },
+    "data": {
+      "difference": "",
+      "sidebar": {
+        "last_value": {
+          "total_vaccinated": "",
+          "date_unix": "",
+          "date_of_insertion_unix": ""
+        }
+      },
+      "kpi_total": {
+        "title": "",
+        "value": "",
+        "description": "",
+        "date_of_report_unix": "",
+        "date_of_insertion_unix": "",
+        "administered": [
+          {
+            "value": "",
+            "description": ""
+          },
+          {
+            "value": "",
+            "description": ""
+          },
+          {
+            "value": "",
+            "description": ""
+          }
+        ]
+      },
+      "kpi_expected_delivery": {
+        "title": "",
+        "value": "",
+        "description": "",
+        "date_of_report_unix": "",
+        "date_of_insertion_unix": ""
+      }
+    },
+    "section_vaccinations_more_information": {
+      "title": "",
+      "description": ""
+    }
   },
   "veiligheidsregio_sterfte": {
     "titel_sidebar": "Deaths",
