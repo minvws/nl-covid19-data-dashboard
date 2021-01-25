@@ -2,6 +2,7 @@ import { css } from '@styled-system/css';
 import styled from 'styled-components';
 import VaccinatieBarChart from '~/assets/vaccinate_bar_chart.svg';
 import VaccinatieIcon from '~/assets/vaccinaties.svg';
+import { Box } from '~/components-styled/base';
 import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
@@ -39,7 +40,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
       />
       <TileList>
         <ContentHeader
-          category={siteText.nationaal_layout.headings.besmettingen}
+          category={siteText.nationaal_layout.headings.vaccinaties}
           title={text.title}
           icon={<VaccinatieIcon />}
           subtitle={text.description}
@@ -90,22 +91,6 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             />
             <Text mb={4}>{text.data.kpi_expected_delivery.description}</Text>
 
-            <Heading level={3}>{text.data.kpi_stock.title}</Heading>
-
-            <KpiValue absolute={parseFloat(text.data.kpi_stock.value)} />
-            {text.data.kpi_stock.amount.map((item) => (
-              <>
-                {item.value && item.description && (
-                  <Heading level={4} fontSize={'1.1em'} mt={3} mb={0}>
-                    <span css={css({ color: 'data.primary' })}>
-                      {formatNumber(parseFloat(item.value))}
-                    </span>
-                    {` ${item.description}`}
-                  </Heading>
-                )}
-              </>
-            ))}
-
             <Heading level={3} mt={4}>
               {text.section_vaccinations_more_information.title}
             </Heading>
@@ -130,7 +115,9 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             source: text.bronnen.rivm,
           }}
         >
-          <VaccinatieBarChart />
+          <Box pt={1}>
+            <VaccinatieBarChart />
+          </Box>
         </ChartTile>
       </TileList>
     </>
