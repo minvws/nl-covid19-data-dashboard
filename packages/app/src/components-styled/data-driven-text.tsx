@@ -66,7 +66,7 @@ export function DataDrivenText({
   );
 
   return (
-    <Text mt={2}>
+    <Text>
       {replaceComponentsInText(baseText, {
         newDate: (
           <RelativeDate

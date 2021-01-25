@@ -107,7 +107,6 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
 
             <Search />
 
-            {/* <Heading level={1} fontWeight="normal" lineHeight={0} mb={2}> */}
             <TopicalPageHeader
               lastGenerated={Number(lastGenerated)}
               title={replaceComponentsInText(text.title, {

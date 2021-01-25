@@ -25,7 +25,7 @@ export function DataSitemap() {
         icon={<NederlandIcon />}
       />
       <Box>
-        <Box maxWidth={{ md: '600px' }} mb={4}>
+        <Box maxWidth={{ md: 'maxWidthText' }} mb={4}>
           <Text>{siteText.nationaal_actueel.data_sitemap_toelichting}</Text>
         </Box>
         <Box display="flex" flexDirection="row" justifyContent="space-between">
@@ -158,5 +158,9 @@ const List = styled.ul(
 const Item = styled.li(
   css({
     listStyle: 'none',
+    marginBottom: 2,
+    ':last-of-type': {
+      marginBottom: 0,
+    },
   })
 );

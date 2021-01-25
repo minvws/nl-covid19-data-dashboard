@@ -51,7 +51,7 @@ export function TopicalChoroplethContainer({
           >
             {title}
           </Heading>
-          <Box maxWidth={{ md: '600px' }}>
+          <Box maxWidth={{ md: 'maxWidthText' }}>
             {typeof description === 'string' ? (
               <Text>{description}</Text>
             ) : (
@@ -70,7 +70,7 @@ export function TopicalChoroplethContainer({
           <Box
             display="flex"
             justifyContent="center"
-            maxWidth={{ _: '100%', md: '600px' }}
+            maxWidth={{ _: '100%', md: 'maxWidthText' }}
           >
             {legendaComponent}
           </Box>

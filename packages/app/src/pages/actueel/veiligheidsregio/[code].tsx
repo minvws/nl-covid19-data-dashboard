@@ -29,7 +29,6 @@ import {
   getText,
   getVrData,
 } from '~/static-props/get-data';
-import { colors } from '~/style/theme';
 import { assert } from '~/utils/assert';
 import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
@@ -203,7 +202,7 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
                   <Box
                     borderTopWidth="1px"
                     borderTopStyle="solid"
-                    borderTopColor={colors.silver}
+                    borderTopColor="silver"
                     mt={3}
                     mx={-4}
                   >
