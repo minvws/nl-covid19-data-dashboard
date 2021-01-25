@@ -62,10 +62,16 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
           >
             <KpiValue absolute={parseFloat(text.data.kpi_total.value)} />
             <Text mb={3}>{text.data.kpi_total.description_first}</Text>
-            {text.data.kpi_total.administered.map((item) => (
+            {text.data.kpi_total.administered.map((item, index) => (
               <>
                 {item.value && item.description && (
-                  <Heading level={4} fontSize={'1.1em'} mt={3} mb={0}>
+                  <Heading
+                    key={index}
+                    level={4}
+                    fontSize={'1.1em'}
+                    mt={3}
+                    mb={0}
+                  >
                     <span css={css({ color: 'data.primary' })}>
                       {formatNumber(parseFloat(item.value))}
                     </span>
