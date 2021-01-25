@@ -1758,7 +1758,7 @@
       "kpi_total": {
         "title": "",
         "value": "",
-        "description": "",
+        "description_first": "",
         "date_of_report_unix": "",
         "date_of_insertion_unix": "",
         "administered": [
@@ -1773,8 +1773,17 @@
           {
             "value": "",
             "description": ""
+          },
+          {
+            "value": "",
+            "description": ""
+          },
+          {
+            "value": "",
+            "description": ""
           }
-        ]
+        ],
+        "description_second": ""
       },
       "kpi_expected_delivery": {
         "title": "",
@@ -1782,6 +1791,36 @@
         "description": "",
         "date_of_report_unix": "",
         "date_of_insertion_unix": ""
+      },
+      "kpi_stock": {
+        "title": "",
+        "value": "",
+        "amount": [
+          {
+            "value": "",
+            "description": ""
+          },
+          {
+            "value": "",
+            "description": ""
+          },
+          {
+            "value": "",
+            "description": ""
+          },
+          {
+            "value": "",
+            "description": ""
+          },
+          {
+            "value": "",
+            "description": ""
+          },
+          {
+            "value": "",
+            "description": ""
+          }
+        ]
       }
     },
     "section_vaccinations_more_information": {

@@ -60,17 +60,20 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             }}
           >
             <KpiValue absolute={parseFloat(text.data.kpi_total.value)} />
-            <Text mb={3}>{text.data.kpi_total.description}</Text>
+            <Text mb={3}>{text.data.kpi_total.description_first}</Text>
             {text.data.kpi_total.administered.map((item) => (
               <>
-                <Heading level={4} fontSize={'1.1em'} mt={3} mb={0}>
-                  <span css={css({ color: 'data.primary' })}>
-                    {formatNumber(parseFloat(item.value))}
-                  </span>
-                  {` ${item.description}`}
-                </Heading>
+                {item.value && item.description && (
+                  <Heading level={4} fontSize={'1.1em'} mt={3} mb={0}>
+                    <span css={css({ color: 'data.primary' })}>
+                      {formatNumber(parseFloat(item.value))}
+                    </span>
+                    {` ${item.description}`}
+                  </Heading>
+                )}
               </>
             ))}
+            <Text mb={3}>{text.data.kpi_total.description_second}</Text>
           </KpiTile>
 
           <KpiTile
@@ -82,9 +85,28 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
               source: text.bronnen.rivm,
             }}
           >
-            <KpiValue text={text.data.kpi_expected_delivery.value} />
+            <KpiValue
+              absolute={parseFloat(text.data.kpi_expected_delivery.value)}
+            />
             <Text mb={4}>{text.data.kpi_expected_delivery.description}</Text>
-            <Heading level={3}>
+
+            <Heading level={3}>{text.data.kpi_stock.title}</Heading>
+
+            <KpiValue absolute={parseFloat(text.data.kpi_stock.value)} />
+            {text.data.kpi_stock.amount.map((item) => (
+              <>
+                {item.value && item.description && (
+                  <Heading level={4} fontSize={'1.1em'} mt={3} mb={0}>
+                    <span css={css({ color: 'data.primary' })}>
+                      {formatNumber(parseFloat(item.value))}
+                    </span>
+                    {` ${item.description}`}
+                  </Heading>
+                )}
+              </>
+            ))}
+
+            <Heading level={3} mt={4}>
               {text.section_vaccinations_more_information.title}
             </Heading>
             <Text

@@ -1764,7 +1764,7 @@
       "kpi_total": {
         "title": "Aantal toegediende vaccins",
         "value": "77000",
-        "description": "Dit getal laat zien hoeveel vaccins in totaal zijn toegediend. Het kan een paar dagen duren voordat een prik wordt gemeld. Het daadwerkelijke aantal gezette prikken ligt daarom hoger. Mensen hebben twee prikken nodig voor een volledige vaccinatie.\n\nOp dit moment zijn alleen data beschikbaar over het aantal toegediende vaccins aan medewerkers in de acute zorg en de verpleeghuiszorg. We tonen zo snel mogelijk ook gegevens over de andere groepen, zoals bewoners van instellingen.",
+        "description_first": "Dit getal laat zien hoeveel vaccins in totaal zijn toegediend. Het kan een paar dagen duren voordat een prik wordt gemeld. Het daadwerkelijke aantal gezette prikken ligt daarom hoger. Mensen hebben twee prikken nodig voor een volledige vaccinatie.\n\nOp dit moment zijn alleen data beschikbaar over het aantal toegediende vaccins aan medewerkers in de acute zorg en de verpleeghuiszorg. We tonen zo snel mogelijk ook gegevens over de andere groepen, zoals bewoners van instellingen.",
         "date_of_report_unix": "1611058309",
         "date_of_insertion_unix": "1611058309",
         "administered": [
@@ -1775,15 +1775,58 @@
           {
             "value": "40000",
             "description": "toegediend aan ziekenhuismedewerkers acute zorg"
+          },
+          {
+            "value": "",
+            "description": ""
+          },
+          {
+            "value": "",
+            "description": ""
+          },
+          {
+            "value": "",
+            "description": ""
           }
-        ]
+        ],
+        "description_second": "* Hier kan iets onder in de tekst staan."
       },
       "kpi_expected_delivery": {
         "title": "Verwachte levering vaccins",
-        "value": "2.154.510",
+        "value": "2154510",
         "description": "Aantal vaccins dat Nederland de komende tien weken verwacht te krijgen. Elke week ontvangt Nederland een deel van de vaccins. Mensen hebben twee prikken nodig voor een volledige vaccinatie.",
         "date_of_report_unix": "1611058309",
         "date_of_insertion_unix": "1611058309"
+      },
+      "kpi_stock": {
+        "title": "Vaccins op vooraad",
+        "value": "54510",
+        "amount": [
+          {
+            "value": "37000",
+            "description": "Pfizer"
+          },
+          {
+            "value": "5349",
+            "description": "AstraZeneca"
+          },
+          {
+            "value": "4000",
+            "description": "Pfizer"
+          },
+          {
+            "value": "",
+            "description": ""
+          },
+          {
+            "value": "",
+            "description": ""
+          },
+          {
+            "value": "",
+            "description": ""
+          }
+        ]
       }
     },
     "section_vaccinations_more_information": {
