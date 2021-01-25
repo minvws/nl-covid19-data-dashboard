@@ -30,7 +30,9 @@ export function ArticleTeaser(props: ArticleTeaserProps) {
       <StyledArticleTeaser>
         <CoverImage height={200} image={cover} />
         <Box padding={3}>
-          <Heading level={3}>{title}</Heading>
+          <Heading level={3} mb={{ _: 1, sm: 3 }} lineHeight={{ _: 0, sm: 2 }}>
+            {title}
+          </Heading>
           <Text>{summary}</Text>
 
           <InlineText aria-hidden="true" fontWeight="bold" color="link">

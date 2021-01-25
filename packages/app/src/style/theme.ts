@@ -136,6 +136,7 @@ const shadows = {
 const sizes = {
   maxWidth: 1400,
   contentWidth: 700,
+  maxWidthText: 600,
 };
 
 const theme = {
