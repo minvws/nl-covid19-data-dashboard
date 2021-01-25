@@ -39,6 +39,7 @@ import {
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { asResponsiveArray } from '~/style/utils';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -203,49 +204,59 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
               highlightedArticle={content.highlight.article}
             />
 
-            <TopicalTile>
-              <>
-                <TopicalChoroplethContainer
-                  title={text.risiconiveaus.selecteer_titel}
-                  description={
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: text.risiconiveaus.selecteer_toelichting,
-                      }}
-                    />
-                  }
-                  legendComponent={
-                    <EscalationMapLegenda
+            <Box>
+              <TopicalTile
+                css={css({
+                  pb: 0,
+                  mb: asResponsiveArray({ _: '2rem', md: '4rem' }),
+                  px: asResponsiveArray({ _: 3, md: 4 }),
+                })}
+              >
+                <>
+                  <TopicalChoroplethContainer
+                    title={text.risiconiveaus.selecteer_titel}
+                    description={
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: text.risiconiveaus.selecteer_toelichting,
+                        }}
+                      />
+                    }
+                    legendComponent={
+                      <EscalationMapLegenda
+                        data={choropleth.vr}
+                        metricName="escalation_levels"
+                        metricProperty="escalation_level"
+                      />
+                    }
+                  >
+                    <SafetyRegionChoropleth
                       data={choropleth.vr}
                       metricName="escalation_levels"
                       metricProperty="escalation_level"
+                      onSelect={createSelectRegionHandler(
+                        router,
+                        'maatregelen'
+                      )}
+                      tooltipContent={escalationTooltip(
+                        createSelectRegionHandler(router, 'maatregelen')
+                      )}
                     />
-                  }
-                >
-                  <SafetyRegionChoropleth
-                    data={choropleth.vr}
-                    metricName="escalation_levels"
-                    metricProperty="escalation_level"
-                    onSelect={createSelectRegionHandler(router, 'maatregelen')}
-                    tooltipContent={escalationTooltip(
-                      createSelectRegionHandler(router, 'maatregelen')
-                    )}
-                  />
-                </TopicalChoroplethContainer>
-                <Box
-                  borderTopWidth="1px"
-                  borderTopStyle="solid"
-                  borderTopColor={colors.silver}
-                  mt={3}
-                  mx={-4}
-                >
-                  <TopicalTile css={css({ mb: 0, pb: 0 })}>
-                    <EscalationLevelExplanations />
-                  </TopicalTile>
-                </Box>
-              </>
-            </TopicalTile>
-
+                  </TopicalChoroplethContainer>
+                  <Box
+                    borderTopWidth="1px"
+                    borderTopStyle="solid"
+                    borderTopColor={colors.silver}
+                    mt={3}
+                    mx={-4}
+                  >
+                    <TopicalTile css={css({ mb: 0, p: 2 })}>
+                      <EscalationLevelExplanations />
+                    </TopicalTile>
+                  </Box>
+                </>
+              </TopicalTile>
+            </Box>
             <DataSitemap />
 
             <ArticleList articleSummaries={content.articles} />

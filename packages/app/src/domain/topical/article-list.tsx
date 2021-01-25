@@ -28,8 +28,12 @@ export function ArticleList({ articleSummaries, hideLink }: ArticleListProps) {
         flexDirection: 'column',
       })}
     >
-      <Box px={{ _: 4, md: 0 }}>
-        <Heading level={2}>
+      <Box>
+        <Heading
+          level={2}
+          fontSize={{ _: '2rem', lg: '2.75em' }}
+          lineHeight="1em"
+        >
           {siteText.nationaal_actueel.latest_articles.title}
         </Heading>
       </Box>
@@ -37,7 +41,6 @@ export function ArticleList({ articleSummaries, hideLink }: ArticleListProps) {
         display="flex"
         alignItems={{ lg: 'flex-end' }}
         flexDirection={{ _: 'column', lg: 'row' }}
-        px={{ _: 4, md: 0 }}
       >
         <Box flex={{ lg: '0 0 33%' }}>
           <Text m={0}>
