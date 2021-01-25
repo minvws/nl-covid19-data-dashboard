@@ -7,13 +7,13 @@ import { Legenda } from '~/components-styled/legenda';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { AreaChart } from '~/components/charts/index';
-import { SEOHead } from '~/components/seoHead';
+import { SEOHead } from '~/components-styled/seo-head';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import siteText from '~/locale/index';
 import { getNlData, getLastGeneratedDate } from '~/static-props/get-data';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
-import { getLastFilledValue } from '~/utils/get-last-filled-value';
+import { getLastFilledValue } from '@corona-dashboard/common';
 
 const text = siteText.besmettelijke_personen;
 
@@ -75,7 +75,6 @@ const InfectiousPeople: FCWithLayout<typeof getStaticProps> = (props) => {
           metadata={{ source: text.bronnen.rivm }}
           title={text.linechart_titel}
           timeframeOptions={['all', '5weeks']}
-          timeframeInitialValue="5weeks"
         >
           {(timeframe) => (
             <>

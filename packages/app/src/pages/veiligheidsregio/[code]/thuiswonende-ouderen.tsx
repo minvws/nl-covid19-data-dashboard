@@ -6,7 +6,7 @@ import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
-import { SEOHead } from '~/components/seoHead';
+import { SEOHead } from '~/components-styled/seo-head';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import siteText from '~/locale/index';
@@ -22,6 +22,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const text = siteText.veiligheidsregio_thuiswonende_ouderen;
+const graphDescriptions = siteText.accessibility.grafieken;
 
 const ElderlyAtHomeRegionalPage: FCWithLayout<typeof getStaticProps> = (
   props
@@ -100,6 +101,7 @@ const ElderlyAtHomeRegionalPage: FCWithLayout<typeof getStaticProps> = (
           timeframeOptions={['all', '5weeks']}
           title={text.section_positive_tested.line_chart_daily_title}
           values={elderlyAtHomeData.values}
+          ariaDescription={graphDescriptions.thuiswonende_ouderen_besmettingen}
           linesConfig={[
             {
               metricProperty: 'positive_tested_daily',
@@ -145,6 +147,7 @@ const ElderlyAtHomeRegionalPage: FCWithLayout<typeof getStaticProps> = (
         <LineChartTile
           timeframeOptions={['all', '5weeks']}
           title={text.section_deceased.line_chart_daily_title}
+          ariaDescription={graphDescriptions.thuiswonende_ouderen_overleden}
           values={elderlyAtHomeData.values}
           linesConfig={[
             {

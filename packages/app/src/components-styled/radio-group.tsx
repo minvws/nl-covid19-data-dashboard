@@ -1,8 +1,9 @@
-import { Fragment, useRef, useState } from 'react';
-import { Box } from './base';
 import { css } from '@styled-system/css';
+import { Fragment, useState } from 'react';
 import styled from 'styled-components';
-
+import { asResponsiveArray } from '~/style/utils';
+import { useUniqueId } from '~/utils/useUniqueId';
+import { Box } from './base';
 interface RadioGroupItem<T extends string> {
   label: string;
   value: T;
@@ -26,14 +27,13 @@ const StyledLabel = styled.label(
   css({
     flex: '0 1 auto',
     color: 'button',
-    fontSize: 1,
+    fontSize: asResponsiveArray({ _: 1, sm: 2 }),
     textAlign: 'center',
-    p: '0.2em 1.5em',
+    p: asResponsiveArray({ _: '0.25em 0.5em', xs: '0.2em 1.5em' }),
     borderStyle: 'solid',
     borderColor: 'button',
     borderWidth: '1px 0 1px 1px',
     whiteSpace: 'nowrap',
-
     cursor: 'pointer',
 
     '&:last-child': {
@@ -42,10 +42,6 @@ const StyledLabel = styled.label(
 
     '&:hover, &:focus': {
       bg: '#cae1ed',
-    },
-
-    '@media (min-width: 768px)': {
-      fontSize: 2,
     },
   })
 );
@@ -66,7 +62,7 @@ export function RadioGroup<T extends string>(props: RadioGroupProps<T>) {
     value ?? items[0].value
   );
 
-  const id = useComponentId();
+  const id = useUniqueId();
 
   const onLocalChange = (value: T): void => {
     if (value !== selectedValue) {
@@ -76,7 +72,7 @@ export function RadioGroup<T extends string>(props: RadioGroupProps<T>) {
   };
 
   return (
-    <Box bg="white" display="flex" justifyContent="center">
+    <Box bg="white" display="flex" justifyContent="center" data-cy="radiogroup">
       {items.map((item, index) => (
         <Fragment key={`radiogroup-${id}-input-${index}`}>
           <StyledInput
@@ -94,25 +90,4 @@ export function RadioGroup<T extends string>(props: RadioGroupProps<T>) {
       ))}
     </Box>
   );
-}
-
-/**
- * Generic hook for using a unique component id
- * See https://gist.github.com/sqren/fc897c1629979e669714893df966b1b7#gistcomment-3189166
- *
- * Currently only used here, so it's kept local, but if we start using it
- * elsewhere it should be moved of course.
- */
-let uniqueId = 0;
-const getUniqueId = () => String(uniqueId++);
-
-// This was the previous uid generator
-// const getUniqueId = () => Math.random().toString(36).substr(2);
-
-function useComponentId() {
-  const idRef = useRef<string>();
-  if (idRef.current === undefined) {
-    idRef.current = getUniqueId();
-  }
-  return idRef.current;
 }

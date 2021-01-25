@@ -1,45 +1,51 @@
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
-import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
-import { getContent, getLastGeneratedDate } from '~/static-props/get-data';
-import { groq } from 'next-sanity';
-import { Image } from '~/components-styled/image';
-import { MaxWidth } from '~/components-styled/max-width';
-import { PortableText } from '~/lib/sanity';
-import { SanityImageProps } from '~/types/cms';
 import Head from 'next/head';
+import { MaxWidth } from '~/components-styled/max-width';
+import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
+import { PortableText } from '~/lib/sanity';
 import siteText from '~/locale/index';
+import {
+  createGetContent,
+  getLastGeneratedDate,
+} from '~/static-props/get-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import styles from './over.module.scss';
+import { Image } from '~/components-styled/image';
+
+import {SanityImageProps} from '~/types/cms.d.ts'
+
 
 interface OverData {
-  title: string | null;
-  description: unknown[] | null;
+  over: {
+    title: string | null;
+    description: unknown[] | null;
+  },
+  imageContent: ImageData
 }
 
 interface ImageData {
   coverImage: SanityImageProps;
 }
 
+
+const query = `
+"over": *[_type == 'overDitDashboard'][0],
+"imageContent": *[_type == 'imagePipelineTest'][0]{
+  ...,
+  "coverImage": coverImage.asset->
+}
+`;
+
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-
-  async () => ({
-    content: await getContent<OverData>(groq`
-      *[_type == 'overDitDashboard'][0]
-    `),
-  }),
-
-  async () => ({
-    imageContent: await getContent<ImageData>(groq`
-      *[_type == 'imagePipelineTest'][0]{
-      ...,
-      "coverImage": coverImage.asset->
-    }
-    `),
-  })
+  createGetContent<OverData>(query)
 );
 
+
+
+
 const Over: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { content, imageContent } = props;
+  const { content } = props;
+  const { over, imageContent} = content
   const { coverImage } = imageContent;
 
   return (
@@ -61,7 +67,7 @@ const Over: FCWithLayout<typeof getStaticProps> = (props) => {
       <div className={styles.container}>
         <MaxWidth>
           <div className={styles.maxwidth}>
-            {content.title && <h2>{content.title}</h2>}
+            {over.title && <h2>{over.title}</h2>}
 
             <Image
               src={`/${coverImage.assetId}.${coverImage.extension}`}
@@ -69,8 +75,8 @@ const Over: FCWithLayout<typeof getStaticProps> = (props) => {
               height={630 / coverImage.metadata.dimensions.aspectRatio}
             />
 
-            {content.description && (
-              <PortableText blocks={content.description} />
+            {over.description && (
+              <PortableText blocks={over.description} />
             )}
           </div>
         </MaxWidth>

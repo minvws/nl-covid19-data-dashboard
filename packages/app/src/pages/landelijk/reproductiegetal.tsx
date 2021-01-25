@@ -8,15 +8,16 @@ import { PageBarScale } from '~/components-styled/page-barscale';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
-import { SEOHead } from '~/components/seoHead';
+import { SEOHead } from '~/components-styled/seo-head';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import siteText from '~/locale/index';
 import { getNlData, getLastGeneratedDate } from '~/static-props/get-data';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
-import { getLastFilledValue } from '~/utils/get-last-filled-value';
+import { getLastFilledValue } from '@corona-dashboard/common';
 
 const text = siteText.reproductiegetal;
+const graphDescriptions = siteText.accessibility.grafieken;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -70,9 +71,6 @@ const ReproductionIndex: FCWithLayout<typeof getStaticProps> = (props) => {
               metricProperty="index_average"
               localeTextKey="reproductiegetal"
               differenceKey="reproduction__index_average"
-              differenceStaticTimespan={
-                siteText.toe_en_afname.tijdverloop.hiervoor
-              }
             />
             <Text>{text.barscale_toelichting}</Text>
           </KpiWithIllustrationTile>
@@ -83,6 +81,7 @@ const ReproductionIndex: FCWithLayout<typeof getStaticProps> = (props) => {
             metadata={{ source: text.bronnen.rivm }}
             title={text.linechart_titel}
             values={data.reproduction.values}
+            ariaDescription={graphDescriptions.reproductiegetal_verloop}
             linesConfig={[
               {
                 metricProperty: 'index_average',

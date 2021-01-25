@@ -7,7 +7,7 @@ import { TileList } from '~/components-styled/tile-list';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
-import { SEOHead } from '~/components/seoHead';
+import { SEOHead } from '~/components-styled/seo-head';
 import { SafetyRegionComboBox } from '~/domain/layout/components/safety-region-combo-box';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';

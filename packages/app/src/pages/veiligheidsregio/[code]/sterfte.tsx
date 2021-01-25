@@ -6,7 +6,7 @@ import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
-import { SEOHead } from '~/components/seoHead';
+import { SEOHead } from '~/components-styled/seo-head';
 import { DeceasedMonitorSection } from '~/domain/deceased/deceased-monitor-section';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
@@ -91,7 +91,6 @@ const DeceasedRegionalPage: FCWithLayout<typeof getStaticProps> = (props) => {
 
         <LineChartTile
           timeframeOptions={['all', '5weeks']}
-          timeframeInitialValue="all"
           title={text.section_deceased_rivm.line_chart_covid_daily_title}
           description={
             text.section_deceased_rivm.line_chart_covid_daily_description

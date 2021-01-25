@@ -13,7 +13,7 @@ import { Select } from '~/components-styled/select';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { SewerWaterChart } from '~/components/lineChart/sewer-water-chart';
-import { SEOHead } from '~/components/seoHead';
+import { SEOHead } from '~/components-styled/seo-head';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import siteText from '~/locale/index';
@@ -35,6 +35,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const text = siteText.veiligheidsregio_rioolwater_metingen;
+const graphDescriptions = siteText.accessibility.grafieken;
 
 const SewerWater: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data, safetyRegionName } = props;
@@ -57,7 +58,7 @@ const SewerWater: FCWithLayout<typeof getStaticProps> = (props) => {
 
   const [selectedInstallation, setSelectedInstallation] = useState<
     string | undefined
-  >();
+  >(sewerStationNames.length === 1 ? sewerStationNames[0] : undefined);
 
   return (
     <>
@@ -133,9 +134,9 @@ const SewerWater: FCWithLayout<typeof getStaticProps> = (props) => {
         {lineChartData && (
           <ChartTileWithTimeframe
             title={text.linechart_titel}
+            ariaDescription={graphDescriptions.rioolwater_meetwaarde}
             metadata={{ source: text.bronnen.rivm }}
             timeframeOptions={['all', '5weeks']}
-            timeframeInitialValue="all"
           >
             {(timeframe) => (
               <>
@@ -176,6 +177,7 @@ const SewerWater: FCWithLayout<typeof getStaticProps> = (props) => {
             title={replaceVariablesInText(text.bar_chart_title, {
               safetyRegion: safetyRegionName,
             })}
+            ariaDescription={graphDescriptions.rioolwater_meetwaarde}
             metadata={{
               date: [
                 sewerAverages.last_value.date_start_unix,

@@ -7,7 +7,7 @@ import { PageBarScale } from '~/components-styled/page-barscale';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
-import { SEOHead } from '~/components/seoHead';
+import { SEOHead } from '~/components-styled/seo-head';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import siteText from '~/locale/index';
@@ -15,6 +15,7 @@ import { getNlData, getLastGeneratedDate } from '~/static-props/get-data';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 
 const text = siteText.ic_opnames_per_dag;
+const graphDescriptions = siteText.accessibility.grafieken;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -91,6 +92,7 @@ const IntakeIntensiveCare: FCWithLayout<typeof getStaticProps> = (props) => {
         <LineChartTile
           title={text.linechart_titel}
           values={dataIntake.values}
+          ariaDescription={graphDescriptions.intensive_care_opnames}
           linesConfig={[
             {
               metricProperty: 'admissions_moving_average',

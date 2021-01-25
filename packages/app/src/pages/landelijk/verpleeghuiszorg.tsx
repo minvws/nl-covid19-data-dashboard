@@ -14,7 +14,7 @@ import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createInfectedLocationsRegionalTooltip } from '~/components/choropleth/tooltips/region/create-infected-locations-regional-tooltip';
-import { SEOHead } from '~/components/seoHead';
+import { SEOHead } from '~/components-styled/seo-head';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import siteText from '~/locale/index';
@@ -29,6 +29,7 @@ const infectedLocationsText = siteText.verpleeghuis_besmette_locaties;
 const positiveTestedPeopleText =
   siteText.verpleeghuis_positief_geteste_personen;
 const locationDeaths = siteText.verpleeghuis_oversterfte;
+const graphDescriptions = siteText.accessibility.grafieken;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -92,6 +93,7 @@ const NursingHomeCare: FCWithLayout<typeof getStaticProps> = ({
           metadata={{ source: positiveTestedPeopleText.bronnen.rivm }}
           title={positiveTestedPeopleText.linechart_titel}
           values={nursinghomeData.values}
+          ariaDescription={graphDescriptions.verpleeghuiszorg_positief_getest}
           linesConfig={[
             {
               metricProperty: 'newly_infected_people',
@@ -179,6 +181,7 @@ const NursingHomeCare: FCWithLayout<typeof getStaticProps> = ({
           metadata={{ source: infectedLocationsText.bronnen.rivm }}
           title={infectedLocationsText.linechart_titel}
           values={nursinghomeData.values}
+          ariaDescription={graphDescriptions.verpleeghuiszorg_besmette_locaties}
           linesConfig={[
             {
               metricProperty: 'infected_locations_total',
@@ -222,6 +225,7 @@ const NursingHomeCare: FCWithLayout<typeof getStaticProps> = ({
           metadata={{ source: locationDeaths.bronnen.rivm }}
           title={locationDeaths.linechart_titel}
           values={nursinghomeData.values}
+          ariaDescription={graphDescriptions.verpleeghuiszorg_besmette_locaties}
           linesConfig={[
             {
               metricProperty: 'deceased_daily',

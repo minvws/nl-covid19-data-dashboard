@@ -2,7 +2,7 @@ import { GetStaticPropsContext } from 'next';
 import path from 'path';
 import safetyRegions from '~/data/index';
 import municipalities from '~/data/municipalSearchData';
-import { getClient, localize } from '~/lib/sanity';
+import { client, localize } from '~/lib/sanity';
 import { targetLanguage } from '~/locale/index';
 import {
   Municipal,
@@ -10,14 +10,13 @@ import {
   National,
   Regionaal,
   Regions,
-} from '~/types/data';
-import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
-import {
   sortMunicipalTimeSeriesInDataInPlace,
   sortNationalTimeSeriesInDataInPlace,
   sortRegionalTimeSeriesInDataInPlace,
-} from './sort-data';
+} from '@corona-dashboard/common';
+import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
 import { loadJsonFromFile } from './utils/load-json-from-file';
+
 
 /**
  * Usage:
@@ -49,13 +48,13 @@ export function getLastGeneratedDate() {
   };
 }
 
-export async function getContent<T>(query: string) {
-  const rawContent = await getClient().fetch<T>(query);
-  return localize(rawContent, [targetLanguage, 'nl']);
-}
-
 export function createGetContent<T>(query: string) {
-  return async () => ({ content: await getContent<T>(query) });
+  return async () => {
+    const rawContent = await client.fetch<T>(query);
+    const content = localize(rawContent, [targetLanguage, 'nl']);
+
+    return { content };
+  };
 }
 
 export async function getText() {

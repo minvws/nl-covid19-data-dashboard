@@ -19,6 +19,7 @@ RUN yarn workspace @corona-dashboard/cli validate-json
 RUN yarn workspace @corona-dashboard/cli generate-typescript
 
 # Stage 2 - Build EN application
+RUN yarn workspace @corona-dashboard/common build
 RUN yarn workspace @corona-dashboard/app build
 
 #FROM node:14-alpine

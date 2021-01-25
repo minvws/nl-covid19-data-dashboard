@@ -1,4 +1,4 @@
-import { ChoroplethThresholdsValue } from '../shared';
+import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
 import { get } from 'lodash';
 import { assert } from '~/utils/assert';
 import { isDefined } from 'ts-is-present';
