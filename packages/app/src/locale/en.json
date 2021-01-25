@@ -2043,7 +2043,7 @@
           }
         ],
         "description_first": "This is the number of vaccine doses that have been administered. Because vaccination figures are sometimes reported a few days after doses are administered, the actual number of vaccination doses administered is higher. People need two separately administered doses for the vaccine to be maximally effective.",
-        "description_second": "* These numbers are reported by phone on weekdays by long-term care institutions themselves."
+        "description_second": "* This number was reported by phone by long-term care institutions themselves on 22 and 25 January. It is not yet known when this number will be updated. Other numbers of doses administered are updated daily."
       },
       "kpi_expected_delivery": {
         "title": "Doses to be delivered",
