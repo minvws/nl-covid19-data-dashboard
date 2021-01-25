@@ -235,7 +235,7 @@ export const regionThresholds = {
   elderly_at_home: {
     positive_tested_daily_per_100k: elderlyAtHomeThresholds,
   },
-  vaccine: {
-    coverage_percentage: vaccineCoverageThresholds,
+  vaccine_coverage: {
+    percentage: vaccineCoverageThresholds,
   },
 } as const;
