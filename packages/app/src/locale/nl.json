@@ -746,13 +746,7 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": [
-      "0 tot 20",
-      "20 tot 40",
-      "40 tot 60",
-      "60 tot 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -1739,8 +1733,8 @@
     "title": "COVID-19-vaccinaties",
     "description": "Vaccineren is de belangrijkste stap naar een leven zonder coronaregels. Op 6 januari 2021 is Nederland begonnen met vaccineren. Kwetsbare mensen, hun zorgmedewerkers en medewerkers in de acute zorg mogen als eerste een vaccinatie halen. Uiteindelijk komt iedereen van 18 jaar of ouder aan de beurt. De cijfers op deze pagina laten zie hoeveel vaccins zijn toegediend en hoeveel vaccins er beschikbaar komen.",
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "date_unix": "1611058309",
-    "date_of_insertion_unix": "1611058309",
+    "date_unix": "1611593522",
+    "date_of_insertion_unix": "1611593522",
     "reference": {
       "href": "/verantwoording#vaccinaties",
       "text": "Lees meer over de herkomst en betekenis van de vaccinatiecijfers in de cijferverantwoording."
@@ -1777,16 +1771,16 @@
       "sidebar": {
         "last_value": {
           "total_vaccinated": "77000",
-          "date_unix": "1611058309",
-          "date_of_insertion_unix": "1611058309"
+          "date_unix": "1611593522",
+          "date_of_insertion_unix": "1611593522"
         }
       },
       "kpi_total": {
         "title": "Aantal toegediende vaccins",
         "value": "77000",
         "description_first": "Dit getal laat zien hoeveel vaccins in totaal zijn toegediend. Het kan een paar dagen duren voordat een prik wordt gemeld. Het daadwerkelijke aantal gezette prikken ligt daarom hoger. Mensen hebben twee prikken nodig voor een volledige vaccinatie.\n\nOp dit moment zijn alleen data beschikbaar over het aantal toegediende vaccins aan medewerkers in de acute zorg en de verpleeghuiszorg. We tonen zo snel mogelijk ook gegevens over de andere groepen, zoals bewoners van instellingen.",
-        "date_of_report_unix": "1611058309",
-        "date_of_insertion_unix": "1611058309",
+        "date_of_report_unix": "1611593522",
+        "date_of_insertion_unix": "1611593522",
         "administered": [
           {
             "value": "37000",
@@ -1815,8 +1809,8 @@
         "title": "Verwachte levering vaccins",
         "value": "2154510",
         "description": "Aantal vaccins dat Nederland de komende tien weken verwacht te krijgen. Elke week ontvangt Nederland een deel van de vaccins. Mensen hebben twee prikken nodig voor een volledige vaccinatie.",
-        "date_of_report_unix": "1611058309",
-        "date_of_insertion_unix": "1611058309"
+        "date_of_report_unix": "1611593522",
+        "date_of_insertion_unix": "1611593522"
       },
       "kpi_stock": {
         "title": "Vaccins op vooraad",
