@@ -8,14 +8,14 @@ import {
 } from '~/components/choropleth/hooks';
 import { getDataThresholds } from '~/components/choropleth/legenda/utils';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import styles from '~/components/choropleth/tooltips/tooltip.module.scss';
 import { regionGeo } from '~/components/choropleth/topology';
-import text from '~/locale';
+import { default as siteText, default as text } from '~/locale';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { Text } from './typography';
+import { InlineText } from './typography';
 
 const escalationThresholds =
   regionThresholds.escalation_levels.escalation_level;
+
 interface EscalationMapLegendaProps<K extends RegionsMetricName> {
   metricName: K;
   metricProperty: string;
@@ -54,7 +54,7 @@ export function EscalationMapLegenda<K extends RegionsMetricName>(
     const sortedEscalationArray = escalationThresholds.map((item) => ({
       ...item,
       amount: regionGeo.features.filter(
-        (i) => item.color === getFillColor(i.properties.vrcode)
+        (x) => item.color === getFillColor(x.properties.vrcode)
       ).length,
     }));
 
@@ -62,32 +62,28 @@ export function EscalationMapLegenda<K extends RegionsMetricName>(
   }, [getFillColor, hasData]);
 
   return (
-    <Box
-      className={styles.legenda}
-      aria-label="legend"
-      maxWidth={{ _: '100%', lg: 600 }}
-      width="100%"
-    >
-      <Text as="h3">{text.escalatie_niveau.legenda.titel}</Text>
+    <Box spacing={3} aria-label="legend" width="100%">
+      <h3>{siteText.escalatie_niveau.legenda.titel}</h3>
       {sortedEscalationArray.map((info) => (
-        <div
-          className={styles.escalationInfoLegenda}
-          key={`legenda-item-${info?.threshold}`}
-        >
-          <Box display="flex" alignItems="center" width="10rem">
-            <div className={styles.bubbleLegenda}>
-              <EscalationLevelIcon level={info.threshold} />
-            </div>
-            <Box alignItems={'center'}>
-              {text.escalatie_niveau.types[info.threshold].titel}
-            </Box>
+        <Box key={info.threshold} display="flex" alignItems="center">
+          <Box
+            display="flex"
+            alignItems="center"
+            spacing={3}
+            spacingHorizontal
+            width="10rem"
+          >
+            <EscalationLevelIcon level={info.threshold} />
+            <InlineText fontSize="1.2rem">
+              {siteText.escalatie_niveau.types[info.threshold].titel}
+            </InlineText>
           </Box>
           <EscalationBarLegenda
             info={info}
             totalItems={totalItems}
             label={text.escalatie_niveau.legenda}
           />
-        </div>
+        </Box>
       ))}
     </Box>
   );
@@ -114,12 +110,7 @@ function EscalationBarLegenda(props: EscalationBarLegendaProps) {
 
   return (
     <Box flexGrow={1} paddingY={1} display="flex">
-      <Box
-        flexGrow={barWidth}
-        backgroundColor={info.color}
-        height={'100%'}
-        paddingRight={1}
-      />
+      <Box flexGrow={barWidth} backgroundColor={info.color} paddingRight={1} />
       <Box paddingLeft={2}>
         {info.amount
           ? replaceVariablesInText(label.regios, { amount: info.amount })

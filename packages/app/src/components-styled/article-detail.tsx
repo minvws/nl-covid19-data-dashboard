@@ -7,9 +7,9 @@ import { Heading } from '~/components-styled/typography';
 import { PortableText } from '~/lib/sanity';
 import siteText from '~/locale';
 import { Article } from '~/types/cms';
-import { formatDateFromMilliseconds } from '~/utils/formatDate';
 import { RichContent } from './cms/rich-content';
 import { LinkWithIcon } from './link-with-icon';
+import { PublicationDate } from './publication-date';
 
 interface ArticleDetailProps {
   article: Article;
@@ -30,26 +30,14 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
           <Heading level={1} mb={0}>
             {article.title}
           </Heading>
-          {article.publicationDate && (
-            <time
-              css={css({ color: 'gray' })}
-              dateTime={article.publicationDate}
-            >
-              {formatDateFromMilliseconds(
-                new Date(article.publicationDate).getTime(),
-                'medium'
-              )}
-            </time>
-          )}
+          <PublicationDate date={article.publicationDate} />
         </Box>
 
-        {article.intro && (
-          <Box fontWeight="bold">
-            <PortableText blocks={article.intro} />
-          </Box>
-        )}
+        <Box fontWeight="bold">
+          <PortableText blocks={article.intro} />
+        </Box>
 
-        {article.cover && <Image node={article.cover} />}
+        <Image node={article.cover} />
       </ContentBlock>
 
       {!!article.content?.length && <RichContent blocks={article.content} />}

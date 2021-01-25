@@ -1,4 +1,9 @@
 {
+  "editorial_detail": {
+    "back_link": {
+      "text": "Terug naar actueel"
+    }
+  },
   "article_detail": {
     "back_link": {
       "text": "Terug naar alle artikelen"
@@ -848,13 +853,7 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": [
-      "0 tot 20",
-      "20 tot 40",
-      "40 tot 60",
-      "60 tot 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -1882,11 +1881,11 @@
       "text": "Lees meer in de cijferverantwoording."
     },
     "cbs_message": {
-      "title": "Bijna 4 duizend mensen overleden in eerste week van 2021",
+      "title": "Sterfte iets afgenomen in week 2, maar nog steeds hoog",
       "published_text": "Publicatiedatum: vrijdag 4 december",
-      "message": "In de eerste week van 2021 (4 tot en met 10 januari) overleden naar schatting bijna 4 duizend mensen. Dat zijn 650 meer sterfgevallen dan verwacht voor deze periode. In de laatste week van 2020 (28 december 2020 tot en met 3 januari 2021) stierven ruim 4 duizend mensen, bijna 800 meer dan verwacht. In heel 2020 overleden bijna 169 duizend mensen, ruim 15 duizend meer dan verwacht. Dat meldt het CBS op basis van de voorlopige sterftecijfers per week.",
+      "message": "In week 2 (11 tot en met 17 januari 2021) overleden naar schatting 3 850 mensen. Dat zijn 500 meer sterfgevallen dan verwacht voor deze periode. In de eerste week van 2021 overleden 4 099 mensen. Dat meldt het CBS op basis van de voorlopige sterftecijfers per week. Sinds week 39 van 2020 is de wekelijkse sterfte hoger dan verwacht. In de tweede golf van de corona-epidemie overleden tot en met week 2 van 2021 iets meer dan 60 duizend mensen, bijna 9 duizend meer dan je in deze periode zou verwachten.",
       "link": {
-        "href": "https://www.cbs.nl/nl-nl/nieuws/2021/02/bijna-4-duizend-mensen-overleden-in-eerste-week-van-2021",
+        "href": "https://www.cbs.nl/nl-nl/nieuws/2021/03/sterfte-iets-afgenomen-in-week-2-maar-nog-steeds-hoog",
         "text": "Website CBS"
       }
     },

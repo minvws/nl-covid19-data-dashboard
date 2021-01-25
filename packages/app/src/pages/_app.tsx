@@ -3,7 +3,7 @@ import { AppProps } from 'next/app';
 import Router from 'next/router';
 import { useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
-import '~/components/comboBox/comboBox.scss';
+import '~/components-styled/combo-box/combo-box.scss';
 import { FCWithLayout } from '~/domain/layout/layout';
 import * as piwik from '~/lib/piwik';
 import { GlobalStyle } from '~/style/global-style';

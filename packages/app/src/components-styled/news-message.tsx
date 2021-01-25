@@ -32,6 +32,7 @@ export function NewsMessage(props: NewsMessageProps) {
       css={css({
         bg: 'contextualContent',
         flexDirection: asResponsiveArray({ lg: 'row' }),
+        p: asResponsiveArray({ _: 3, lg: 4 }),
       })}
     >
       <Box flex={{ lg: '1 1 25%' }}>
@@ -43,7 +44,9 @@ export function NewsMessage(props: NewsMessageProps) {
           {' • '}
           {publishedAt}
         </Text>
-        <Heading level={2}>{title}</Heading>
+        <Heading level={2} lineHeight={0}>
+          {title}
+        </Heading>
         <Text>{message}</Text>
         <Box display="flex" flexDirection="row">
           <IconContainer>

@@ -27,7 +27,7 @@ import { createSelectMunicipalHandler } from '~/components/choropleth/select-han
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
 import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/create-positive-tested-people-regional-tooltip';
-import { SEOHead } from '~/components/seoHead';
+import { SEOHead } from '~/components-styled/seo-head';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';

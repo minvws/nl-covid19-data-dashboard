@@ -102,6 +102,7 @@ export const colors = {
   red: '#F35363',
   sidebarLinkBorder: '#cd005a',
   category: '#6b6b6b',
+  border: '#c4c4c4',
   lightBlue: '#E0EEF6',
   restrictions: '#CD0059',
   contextualContent: '#e5eff8',

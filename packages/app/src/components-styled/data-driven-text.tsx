@@ -7,6 +7,7 @@ import {
 } from '@corona-dashboard/common';
 import { get } from 'lodash';
 import { isDefined } from 'ts-is-present';
+import siteText from '~/locale';
 import { assert } from '~/utils/assert';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
@@ -77,7 +78,11 @@ export function DataDrivenText({
       })}{' '}
       {replaceComponentsInText(additionalText, {
         differenceIndicator: (
-          <DifferenceIndicator value={differenceValue} context="inline" />
+          <DifferenceIndicator
+            value={differenceValue}
+            context="inline"
+            staticTimespan={siteText.toe_en_afname.vorige_waarde}
+          />
         ),
         oldDate: <RelativeDate dateInSeconds={differenceValue.old_date_unix} />,
       })}

@@ -7,7 +7,7 @@ import { PageBarScale } from '~/components-styled/page-barscale';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
-import { SEOHead } from '~/components/seoHead';
+import { SEOHead } from '~/components-styled/seo-head';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import siteText from '~/locale/index';
