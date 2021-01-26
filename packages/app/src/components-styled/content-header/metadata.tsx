@@ -105,7 +105,7 @@ function MetadataItem(props: MetadataItemProps) {
               <ExternalLink href={item.href}>{item.text}</ExternalLink>
             )}
             {!item.href && (
-              <Text css={css({ display: 'inline-block', my: '0' })}>
+              <Text css={css({ display: 'inline-block', my: '0', fontSize: 'inherit' })}>
                 {item.text}
               </Text>
             )}
