@@ -30,6 +30,7 @@ export function Image(props: ImageProps) {
     })
     .join(', ');
 
+  // filename contains a leading slash.
   const url = `/cms${filename}-${findClosestSize(width)}.${extension}`;
 
   return (
