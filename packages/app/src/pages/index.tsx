@@ -38,8 +38,8 @@ import {
   getText,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
-import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { asResponsiveArray } from '~/style/utils';
+import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -199,10 +199,12 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
               title={notificatie.titel}
             />
 
-            <EditorialTile
-              editorial={content.editorial}
-              highlightedArticle={content.highlight.article}
-            />
+            {content.editorial && content.highlight?.article && (
+              <EditorialTile
+                editorial={content.editorial}
+                highlightedArticle={content.highlight.article}
+              />
+            )}
 
             <Box>
               <TopicalTile
