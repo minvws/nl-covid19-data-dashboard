@@ -9,7 +9,7 @@ import {
   TabList,
   ThemeProvider,
 } from '@sanity/ui';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { MdErrorOutline } from 'react-icons/md';
 import Flag from 'react-world-flags';
 import schema from '../../schemas/schema';
@@ -24,7 +24,9 @@ export default function SelectLanguage(props) {
     languages
   );
 
-  const hasLocaleFields = findLocaleFields(document.id, schema);
+  const hasLocaleFields = useMemo(() => {
+    return findLocaleFields(document.id, schema);
+  }, [document.id, schema]);
 
   if (!hasLocaleFields) {
     return null;
