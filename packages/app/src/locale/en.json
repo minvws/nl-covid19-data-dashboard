@@ -60,7 +60,7 @@
       "text": "Stichting NICE"
     },
     "titel": "Intensive care admissions by day",
-    "pagina_toelichting": "Number of confirmed COVID-19 cases who are admitted to a hospital intensive care unit (ICU) per day.",
+    "pagina_toelichting": "Daily number of COVID-19 patients admitted to a hospital intensive care unit (ICU), directly or from a regular hospital ward. To avoid doubles only the first IC admission of a patient counts. This number gives information about the severity of the disease en helps track the development of the epidemic.",
     "barscale_titel": "Intensive care admissions per day",
     "barscale_screenreader_text": "{{value}} intensive care-admissions by day. Alert value: {{signaalwaarde}} admissions per day.",
     "extra_uitleg": "Number of confirmed COVID-19 cases who are admitted to a hospital intensive care unit (ICU) per day. This figure is an average for the daily admissions over the past three days.\n\nNote: Although hospitals try to register COVID-19 patients promptly, it is likely that the numbers of the last days are yet incomplete.",
@@ -1972,8 +1972,8 @@
     "title": "COVID-19 vaccinations",
     "description": "Vaccination is the most important step towards getting life back to normal. The Netherlands began vaccinating people against COVID-19 on 6 January 2021. Eventually, the vaccine will be offered to everyone aged 18 and over. This page shows how many doses of vaccine have been administered and how many doses are on their way.",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "date_unix": "1611600708",
-    "date_of_insertion_unix": "1611600708",
+    "date_unix": "1611666164",
+    "date_of_insertion_unix": "1611666164",
     "reference": {
       "href": "/verantwoording#vaccination",
       "text": "Read more about the source of the data on vaccination in the explanation of the presented data."
@@ -2010,16 +2010,16 @@
       "sidebar": {
         "last_value": {
           "total_vaccinated": "173638",
-          "date_unix": "1611600708",
-          "date_of_insertion_unix": "1611600708"
+          "date_unix": "1611666164",
+          "date_of_insertion_unix": "1611666164"
         }
       },
       "kpi_total": {
         "title": "Number of doses administered",
         "value": "173638",
         "description": "This figure reflects the total number of vaccination doses that have been administered. Because vaccination figures are sometimes reported a few days after doses are administered, the actual number of vaccination doses administered is higher. People need two separately administered doses for the vaccine to be maximally effective.",
-        "date_of_report_unix": "1611600708",
-        "date_of_insertion_unix": "1611600708",
+        "date_of_report_unix": "1611666164",
+        "date_of_insertion_unix": "1611666164",
         "administered": [
           {
             "value": "116593",

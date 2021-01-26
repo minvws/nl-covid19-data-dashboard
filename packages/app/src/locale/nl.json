@@ -60,7 +60,7 @@
       "text": "Stichting NICE"
     },
     "titel": "Intensive care-opnames per dag",
-    "pagina_toelichting": "Aantal mensen met COVID-19 dat per dag op de intensive care is opgenomen.",
+    "pagina_toelichting": "Aantal mensen met COVID-19 dat per dag op de intensive care (IC) is opgenomen, direct of vanaf de verpleegafdeling in een ziekenhuis. Om dubbel tellen te voorkomen wordt alleen de eerste IC-opname van een patiënt meegeteld. Een opname op de IC zegt iets over de ernst van het ziektebeloop en is daarom belangrijk om de ontwikkeling van de epidemie goed te monitoren.",
     "barscale_titel": "Intensive care-opnames per dag",
     "barscale_screenreader_text": "{{value}} intensive care-opnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "extra_uitleg": "Aantal mensen met bevestigd COVID-19 dat per dag op een intensive care-afdeling van een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de afgelopen drie dagen.\n\nLet op: Hoewel ziekenhuizen proberen om COVID-19 patiënten snel te registreren, is het aannemelijk dat de registratie achter loopt. Om deze reden zijn de aantallen van de afgelopen dagen meestal nog niet compleet.",
@@ -1972,8 +1972,8 @@
     "title": "COVID-19-vaccinaties",
     "description": "Vaccineren is de belangrijkste stap naar een samenleving zonder coronaregels. Op 6 januari 2021 is Nederland begonnen met vaccineren. Uiteindelijk komt iedereen van 18 jaar of ouder aan de beurt. De cijfers op deze pagina laten zien hoeveel vaccins zijn toegediend en hoeveel vaccins er beschikbaar komen.",
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "date_unix": "1611600708",
-    "date_of_insertion_unix": "1611600708",
+    "date_unix": "1611666164",
+    "date_of_insertion_unix": "1611666164",
     "reference": {
       "href": "/verantwoording#vaccinatie",
       "text": "Lees meer over de bron van de vaccinatiecijfers in de cijferverantwoording."
@@ -2010,16 +2010,16 @@
       "sidebar": {
         "last_value": {
           "total_vaccinated": "173638",
-          "date_unix": "1611600708",
-          "date_of_insertion_unix": "1611600708"
+          "date_unix": "1611666164",
+          "date_of_insertion_unix": "1611666164"
         }
       },
       "kpi_total": {
         "title": "Aantal toegediende vaccins",
         "value": "173638",
         "description": "Dit getal laat zien hoeveel vaccins in totaal zijn toegediend. Het kan een paar dagen duren voordat een prik wordt gemeld. Het daadwerkelijke aantal gezette prikken ligt daarom hoger. Mensen hebben twee prikken nodig voor een volledige vaccinatie.",
-        "date_of_report_unix": "1611600708",
-        "date_of_insertion_unix": "1611600708",
+        "date_of_report_unix": "1611666164",
+        "date_of_insertion_unix": "1611666164",
         "administered": [
           {
             "value": "116593",
