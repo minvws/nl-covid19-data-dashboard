@@ -13,7 +13,9 @@
     "@sanity/default-layout",
     "@sanity/default-login",
     "@sanity/desk-tool",
-    "tabs"
+    "@sanity/production-preview",
+    "tabs",
+    "translate"
   ],
   "env": {
     "development": {
@@ -31,6 +33,10 @@
     {
       "name": "part:@sanity/desk-tool/structure",
       "path": "./desk-structure.js"
+    },
+    {
+      "implements": "part:@sanity/production-preview/resolve-production-url",
+      "path": "./previews/resolve-production-url.js"
     },
     {
       "implements": "part:@sanity/base/theme/variables/override-style",

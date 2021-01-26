@@ -197,10 +197,12 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
               title={notificatie.titel}
             />
 
-            <EditorialTile
-              editorial={content.editorial}
-              highlightedArticle={content.highlight.article}
-            />
+            {content.editorial && content.highlight?.article && (
+              <EditorialTile
+                editorial={content.editorial}
+                highlightedArticle={content.highlight.article}
+              />
+            )}
 
             <Box>
               <TopicalTile>
