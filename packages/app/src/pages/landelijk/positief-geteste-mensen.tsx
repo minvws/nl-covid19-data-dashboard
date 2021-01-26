@@ -219,6 +219,7 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
         <LineChartTile
           title={text.linechart_titel}
           description={text.linechart_toelichting}
+          ariaDescription={text.linechart_toelichting}
           signaalwaarde={7}
           values={dataInfectedDelta.values}
           linesConfig={[{ metricProperty: 'infected_per_100k' }]}
@@ -265,6 +266,10 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
         <ChartTile
           title={siteText.infected_age_groups.title}
           description={replaceVariablesInText(
+            siteText.infected_age_groups.description,
+            ageDemographicExampleData
+          )}
+          ariaDescription={replaceVariablesInText(
             siteText.infected_age_groups.description,
             ageDemographicExampleData
           )}
@@ -363,6 +368,7 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
           timeframeOptions={['all', '5weeks']}
           title={ggdText.linechart_percentage_titel}
           description={ggdText.linechart_percentage_toelichting}
+          ariaDescription={ggdText.linechart_percentage_toelichting}
           values={dataGgdDailyValues}
           linesConfig={[{ metricProperty: 'infected_percentage' }]}
           isPercentage
@@ -375,6 +381,7 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
           timeframeOptions={['all', '5weeks']}
           title={ggdText.linechart_totaltests_titel}
           description={ggdText.linechart_totaltests_toelichting}
+          ariaDescription={ggdText.linechart_totaltests_toelichting}
           hideFill={true}
           showLegend
           padding={{
