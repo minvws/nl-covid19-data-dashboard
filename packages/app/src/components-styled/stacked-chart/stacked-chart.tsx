@@ -219,13 +219,13 @@ export function StackedChart<T extends Value>({
   );
 
   /**
-   * Calculate the sum of very property over the whole x-axis range.
+   * Calculate the sum of every property over the whole x-axis range.
    *
    * @TODO this logic is probably very specific to the vaccine availability
    * chart so it should probably be moved outside once we start re-using this
    * stacked chart for other things.
    */
-  const sumByKey = useMemo(
+  const seriesSumByKey = useMemo(
     () =>
       config.reduce(
         (acc, x) =>
@@ -256,7 +256,7 @@ export function StackedChart<T extends Value>({
           <div>
             <strong>{labelByKey[key]}:</strong>
             {/* @TODO move mln to lokalize */}
-            {` ${formatPercentage(sumByKey[key])} mln totaal`}
+            {` ${formatPercentage(seriesSumByKey[key])} mln totaal`}
           </div>
 
           <div>
@@ -267,7 +267,7 @@ export function StackedChart<T extends Value>({
         </div>
       );
     },
-    [labelByKey, sumByKey]
+    [labelByKey, seriesSumByKey]
   );
 
   /**
@@ -325,7 +325,7 @@ export function StackedChart<T extends Value>({
 
   const padding = defaultPadding;
 
-  if (width < 10) return null;
+  // if (width < 10) return null;
   // bounds
   const xMax = width - padding.left - padding.right;
   const yMax = height - padding.top - padding.bottom;
@@ -336,7 +336,7 @@ export function StackedChart<T extends Value>({
   };
 
   const xScale = scaleBand<string>({
-    domain: series.map(formatDate || defaultFormatDate),
+    domain: series.map(getDate),
     padding: 0.2,
   }).rangeRound([0, xMax]);
 
@@ -352,9 +352,6 @@ export function StackedChart<T extends Value>({
       )}
 
       <Box position="relative">
-        <Portal>
-          <Tooltip style={tooltipStyles}>WUT</Tooltip>
-        </Portal>
         <svg ref={containerRef} width={width} height={height} role="img">
           <Group left={padding.left} top={padding.top}>
             <GridRows
@@ -395,7 +392,7 @@ export function StackedChart<T extends Value>({
             <BarStack<SeriesValue, string>
               data={series}
               keys={metricProperties as string[]}
-              x={formatDate || defaultFormatDate}
+              x={getDate}
               xScale={xScale}
               yScale={yScale}
               color={
@@ -414,17 +411,20 @@ export function StackedChart<T extends Value>({
                     const handleHoverWithBar = (event: HoverEvent) =>
                       handleHover(event, bar, barStack.index);
 
+                    const barId = `bar-stack-${barStack.index}-${bar.index}`;
+                    // console.log('barId', barId, bar.x, bar.y);
+
                     return (
                       <rect
-                        id={`bar-stack-${barStack.index}-${bar.index}`}
-                        key={`bar-stack-${barStack.index}-${bar.index}`}
+                        id={barId}
+                        key={barId}
                         x={bar.x}
                         y={bar.y}
                         height={bar.height}
                         width={bar.width}
                         fill={bar.color}
-                        onClick={(event) => {
-                          if (event) alert(`clicked: ${JSON.stringify(bar)}`);
+                        onClick={() => {
+                          console.log('click', JSON.stringify(bar));
                         }}
                         onMouseLeave={handleHoverWithBar}
                         onMouseMove={handleHoverWithBar}
@@ -458,6 +458,15 @@ export function StackedChart<T extends Value>({
       </Box>
     </Box>
   );
+}
+
+/**
+ * The getDate value is used to extra a date from the SeriesValue, for example
+ * to determine the x-axis position. It should not return the x-axis label since
+ * that one is not necessarily in alphabetically sorted order.
+ */
+function getDate(x: SeriesValue) {
+  return x.__date;
 }
 
 function defaultFormatDate(x: SeriesValue) {

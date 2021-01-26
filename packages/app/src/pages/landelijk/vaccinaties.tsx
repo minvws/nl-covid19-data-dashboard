@@ -123,6 +123,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
           }}
         >
           <StackedChart
+            width={700}
             values={[
               {
                 pfizer: 10.2,
