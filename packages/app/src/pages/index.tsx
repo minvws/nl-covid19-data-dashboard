@@ -176,7 +176,10 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
             <QuickLinks
               header={text.quick_links.header}
               links={[
-                { href: '/landelijk', text: text.quick_links.links.nationaal },
+                {
+                  href: '/landelijk/vaccinaties',
+                  text: text.quick_links.links.nationaal,
+                },
                 {
                   href: '/veiligheidsregio',
                   text: text.quick_links.links.veiligheidsregio,
