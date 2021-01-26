@@ -621,7 +621,7 @@
     "select_region_municipality_legend": "Select a municipality:",
     "select_region_type_legend": "Show numbers from:",
     "your_municipality": "Municipality",
-    "belangrijk_bericht": "There is a [national lockdown](/landelijk/maatregelen) until at least 9 February."
+    "belangrijk_bericht": "There is a [national lockdown](https://coronadashboard.government.nl/landelijk/maatregelen) until at least 9 February."
   },
   "common": {
     "metadata": {
@@ -655,7 +655,7 @@
     "gisteren": "",
     "vandaag": "",
     "read_more": "",
-    "absolute_date_template": "on {{date}}"
+    "absolute_date_template": ""
   },
   "seoHead": {
     "default_description": "Information on the development of the coronavirus in The Netherlands.",
@@ -2114,7 +2114,7 @@
   },
   "editorial_detail": {
     "back_link": {
-      "text": ""
+      "text": "Back"
     }
   },
   "article_detail": {
@@ -2128,8 +2128,8 @@
     "url": ""
   },
   "common_actueel": {
-    "terug_naar_landelijk": "",
-    "laatst_bijgewerkt": ""
+    "terug_naar_landelijk": "Back",
+    "laatst_bijgewerkt": "The dashboard receives new data each day, around 15:20."
   },
   "nationaal_actueel": {
     "title": "",
@@ -2158,38 +2158,38 @@
     "data_driven_texts": {
       "infected_people_total": {
         "value": {
-          "zero": "{{newDate}} there were no newly reported infected people.",
-          "singular": "{{newDate}} there was {{propertyValue}} newly reported infected person.",
-          "plural": "{{newDate}} there were {{propertyValue}} newly reported infected people."
+          "zero": "",
+          "singular": "",
+          "plural": ""
         },
         "difference": {
-          "zero": "This is the same as {{oldDate}}",
-          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+          "zero": "",
+          "singular": "",
+          "plural": ""
         }
       },
       "intake_hospital_ma": {
         "value": {
-          "zero": "{{newDate}} there were no newly reported hospital intakes.",
-          "singular": "{{newDate}} there was {{propertyValue}} newly reported hospital intake.",
-          "plural": "{{newDate}} there were {{propertyValue}} newly reported hospital intakes."
+          "zero": "",
+          "singular": "",
+          "plural": ""
         },
         "difference": {
-          "zero": "This is the same as {{oldDate}}",
-          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+          "zero": "",
+          "singular": "",
+          "plural": ""
         }
       },
       "intake_intensivecare_ma": {
         "value": {
-          "zero": "{{newDate}} there were no newly reported intensive care admissions.",
-          "singular": "{{newDate}} there was {{propertyValue}} newly reported intensive care admission.",
-          "plural": "{{newDate}} there were {{propertyValue}} newly reported intensive care admissions."
+          "zero": "",
+          "singular": "",
+          "plural": ""
         },
         "difference": {
-          "zero": "This is the same as {{oldDate}}",
-          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+          "zero": "",
+          "singular": "",
+          "plural": ""
         }
       }
     },
@@ -2242,38 +2242,38 @@
     "data_driven_texts": {
       "infected_people_total": {
         "value": {
-          "zero": "{{newDate}} there were no newly reported infected people.",
-          "singular": "{{newDate}} there was {{propertyValue}} newly reported infected person.",
-          "plural": "{{newDate}} there were {{propertyValue}} newly reported infected people."
+          "zero": "",
+          "singular": "",
+          "plural": ""
         },
         "difference": {
-          "zero": "This is the same as {{oldDate}}",
-          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+          "zero": "",
+          "singular": "",
+          "plural": ""
         }
       },
       "intake_hospital_ma": {
         "value": {
-          "zero": "{{newDate}} there were no newly reported hospital intakes.",
-          "singular": "{{newDate}} there was {{propertyValue}} newly reported hospital intake.",
-          "plural": "{{newDate}} there were {{propertyValue}} newly reported hospital intakes."
+          "zero": "",
+          "singular": "",
+          "plural": ""
         },
         "difference": {
-          "zero": "This is the same as {{oldDate}}",
-          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+          "zero": "",
+          "singular": "",
+          "plural": ""
         }
       },
       "intake_intensivecare_ma": {
         "value": {
-          "zero": "{{newDate}} there were no newly reported intensive care admissions.",
-          "singular": "{{newDate}} there was {{propertyValue}} newly reported intensive care admission.",
-          "plural": "{{newDate}} there were {{propertyValue}} newly reported intensive care admissions."
+          "zero": "",
+          "singular": "",
+          "plural": ""
         },
         "difference": {
-          "zero": "This is the same as {{oldDate}}",
-          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+          "zero": "",
+          "singular": "",
+          "plural": ""
         }
       }
     },
@@ -2315,38 +2315,38 @@
     "data_driven_texts": {
       "infected_people_total": {
         "value": {
-          "zero": "{{newDate}} there were no newly reported infected people.",
-          "singular": "{{newDate}} there was {{propertyValue}} newly reported infected person.",
-          "plural": "{{newDate}} there were {{propertyValue}} newly reported infected people."
+          "zero": "On {{newDate}} there were no newly reported infected people.",
+          "singular": "On {{newDate}} there was {{propertyValue}} newly reported infected person.",
+          "plural": "On {{newDate}} there were {{propertyValue}} newly reported infected people."
         },
         "difference": {
-          "zero": "This is the same as {{oldDate}}",
+          "zero": "This is the same value as on {{oldDate}}.",
           "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
           "plural": "This is {{differenceIndicator}} than {{oldDate}}."
         }
       },
       "intake_hospital_ma": {
         "value": {
-          "zero": "{{newDate}} there were no newly reported hospital intakes.",
-          "singular": "{{newDate}} there was {{propertyValue}} newly reported hospital intake.",
-          "plural": "{{newDate}} there were {{propertyValue}} newly reported hospital intakes."
+          "zero": "",
+          "singular": "",
+          "plural": "On {{newDate}} there were {{propertyValue}} newly reported hospital admissions."
         },
         "difference": {
-          "zero": "This is the same as {{oldDate}}",
-          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+          "zero": "This is the same value as on {{oldDate}}.",
+          "singular": "This is {{differenceIndicator}} than on {{oldDate}}.",
+          "plural": "This is {{differenceIndicator}} than on {{oldDate}}."
         }
       },
       "intake_intensivecare_ma": {
         "value": {
-          "zero": "{{newDate}} there were no newly reported intensive care admissions.",
-          "singular": "{{newDate}} there was {{propertyValue}} newly reported intensive care admission.",
-          "plural": "{{newDate}} there were {{propertyValue}} newly reported intensive care admissions."
+          "zero": "",
+          "singular": "",
+          "plural": ""
         },
         "difference": {
-          "zero": "This is the same as {{oldDate}}",
-          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+          "zero": "",
+          "singular": "",
+          "plural": ""
         }
       }
     },
