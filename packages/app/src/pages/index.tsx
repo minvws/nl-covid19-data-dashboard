@@ -37,10 +37,9 @@ export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   getText,
   createGetChoroplethData({
-    vr: ({ escalation_levels, tested_overall, vaccine }) => ({
+    vr: ({ escalation_levels, tested_overall }) => ({
       escalation_levels,
       tested_overall,
-      vaccine,
     }),
     gm: ({ tested_overall }) => ({ tested_overall }),
   }),
