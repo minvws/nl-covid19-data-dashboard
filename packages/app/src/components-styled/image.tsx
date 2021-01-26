@@ -16,7 +16,7 @@ const Img = styled.img`
 
 /**
  *
- * This is our Image component. It returns a set of rezided images
+ * This is our Image component. It returns a set of resized images
  * in a srcSet. Ideally we'll use next/image as soon as it's
  * compatible with next export.
  */
