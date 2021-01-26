@@ -2158,38 +2158,38 @@
     "data_driven_texts": {
       "infected_people_total": {
         "value": {
-          "zero": "",
-          "singular": "",
-          "plural": ""
+          "zero": "{{newDate}} there were no newly reported infected people.",
+          "singular": "{{newDate}} there was {{propertyValue}} newly reported infected person.",
+          "plural": "{{newDate}} there were {{propertyValue}} newly reported infected people."
         },
         "difference": {
-          "zero": "",
-          "singular": "",
-          "plural": ""
+          "zero": "This is the same as {{oldDate}}",
+          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
+          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
         }
       },
       "intake_hospital_ma": {
         "value": {
-          "zero": "",
-          "singular": "",
-          "plural": ""
+          "zero": "{{newDate}} there were no newly reported hospital intakes.",
+          "singular": "{{newDate}} there was {{propertyValue}} newly reported hospital intake.",
+          "plural": "{{newDate}} there were {{propertyValue}} newly reported hospital intakes."
         },
         "difference": {
-          "zero": "",
-          "singular": "",
-          "plural": ""
+          "zero": "This is the same as {{oldDate}}",
+          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
+          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
         }
       },
       "intake_intensivecare_ma": {
         "value": {
-          "zero": "",
-          "singular": "",
-          "plural": ""
+          "zero": "{{newDate}} there were no newly reported intensive care admissions.",
+          "singular": "{{newDate}} there was {{propertyValue}} newly reported intensive care admission.",
+          "plural": "{{newDate}} there were {{propertyValue}} newly reported intensive care admissions."
         },
         "difference": {
-          "zero": "",
-          "singular": "",
-          "plural": ""
+          "zero": "This is the same as {{oldDate}}",
+          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
+          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
         }
       }
     },
@@ -2242,38 +2242,38 @@
     "data_driven_texts": {
       "infected_people_total": {
         "value": {
-          "zero": "",
-          "singular": "",
-          "plural": ""
+          "zero": "{{newDate}} there were no newly reported infected people.",
+          "singular": "{{newDate}} there was {{propertyValue}} newly reported infected person.",
+          "plural": "{{newDate}} there were {{propertyValue}} newly reported infected people."
         },
         "difference": {
-          "zero": "",
-          "singular": "",
-          "plural": ""
+          "zero": "This is the same as {{oldDate}}",
+          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
+          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
         }
       },
       "intake_hospital_ma": {
         "value": {
-          "zero": "",
-          "singular": "",
-          "plural": ""
+          "zero": "{{newDate}} there were no newly reported hospital intakes.",
+          "singular": "{{newDate}} there was {{propertyValue}} newly reported hospital intake.",
+          "plural": "{{newDate}} there were {{propertyValue}} newly reported hospital intakes."
         },
         "difference": {
-          "zero": "",
-          "singular": "",
-          "plural": ""
+          "zero": "This is the same as {{oldDate}}",
+          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
+          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
         }
       },
       "intake_intensivecare_ma": {
         "value": {
-          "zero": "",
-          "singular": "",
-          "plural": ""
+          "zero": "{{newDate}} there were no newly reported intensive care admissions.",
+          "singular": "{{newDate}} there was {{propertyValue}} newly reported intensive care admission.",
+          "plural": "{{newDate}} there were {{propertyValue}} newly reported intensive care admissions."
         },
         "difference": {
-          "zero": "",
-          "singular": "",
-          "plural": ""
+          "zero": "This is the same as {{oldDate}}",
+          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
+          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
         }
       }
     },
@@ -2315,38 +2315,38 @@
     "data_driven_texts": {
       "infected_people_total": {
         "value": {
-          "zero": "",
-          "singular": "",
-          "plural": ""
+          "zero": "{{newDate}} there were no newly reported infected people.",
+          "singular": "{{newDate}} there was {{propertyValue}} newly reported infected person.",
+          "plural": "{{newDate}} there were {{propertyValue}} newly reported infected people."
         },
         "difference": {
-          "zero": "",
-          "singular": "",
-          "plural": ""
+          "zero": "This is the same as {{oldDate}}",
+          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
+          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
         }
       },
       "intake_hospital_ma": {
         "value": {
-          "zero": "",
-          "singular": "",
-          "plural": ""
+          "zero": "{{newDate}} there were no newly reported hospital intakes.",
+          "singular": "{{newDate}} there was {{propertyValue}} newly reported hospital intake.",
+          "plural": "{{newDate}} there were {{propertyValue}} newly reported hospital intakes."
         },
         "difference": {
-          "zero": "",
-          "singular": "",
-          "plural": ""
+          "zero": "This is the same as {{oldDate}}",
+          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
+          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
         }
       },
       "intake_intensivecare_ma": {
         "value": {
-          "zero": "",
-          "singular": "",
-          "plural": ""
+          "zero": "{{newDate}} there were no newly reported intensive care admissions.",
+          "singular": "{{newDate}} there was {{propertyValue}} newly reported intensive care admission.",
+          "plural": "{{newDate}} there were {{propertyValue}} newly reported intensive care admissions."
         },
         "difference": {
-          "zero": "",
-          "singular": "",
-          "plural": ""
+          "zero": "This is the same as {{oldDate}}",
+          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
+          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
         }
       }
     },
