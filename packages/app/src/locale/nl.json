@@ -1964,7 +1964,7 @@
   },
   "vaccinaties": {
     "titel_sidebar": "Vaccinaties",
-    "titel_kpi": "Totaal aantal vaccinaties toegediend",
+    "titel_kpi": "Totaal aantal toegediende vaccins",
     "metadata": {
       "title": "Vaccinaties | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Op 6 januari 2021 is Nederland begonnen met vaccineren. De cijfers op het dashboard coronavirus laten zien hoeveel vaccins zijn toegediend en hoeveel vaccins er beschikbaar komen."
