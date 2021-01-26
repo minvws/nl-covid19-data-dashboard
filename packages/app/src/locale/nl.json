@@ -2085,7 +2085,7 @@
     },
     "section_vaccinations_more_information": {
       "title": "Verwachte data over vaccinaties",
-      "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer:\n- vaccinatiebereidheid\n- vaccinatiegraad"
+      "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer:\n- vaccinatiebereidheid\n- vaccinatiegraad\n- vaccins op voorraad"
     },
     "grafiek": {
       "titel": "Verwachte leveringen per week",
