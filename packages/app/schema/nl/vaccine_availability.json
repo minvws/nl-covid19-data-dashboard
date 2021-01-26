@@ -11,7 +11,8 @@
         "janssen",
         "sanofi",
         "date_of_insertion_unix",
-        "date_unix"
+        "date_start_unix",
+        "date_end_unix"
       ],
       "additionalProperties": false,
       "properties": {
