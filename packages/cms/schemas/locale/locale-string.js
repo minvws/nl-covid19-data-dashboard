@@ -1,9 +1,9 @@
-import { supportedLanguages } from "./supported-languages";
+import { supportedLanguages } from '../../language/supported-languages';
 
 export default {
-  name: "localeString",
-  type: "object",
-  title: "Locale String Content",
+  name: 'localeString',
+  type: 'object',
+  title: 'Locale String Content',
   // fieldsets: [
   //   {
   //     title: "Vertalingen",
@@ -14,7 +14,7 @@ export default {
   fields: supportedLanguages.map((lang) => ({
     title: lang.title,
     name: lang.id,
-    type: "string",
+    type: 'string',
     // fieldset: lang.isDefault ? null : "translations",
   })),
 };
