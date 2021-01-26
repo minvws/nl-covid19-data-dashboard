@@ -1,4 +1,3 @@
-import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import ArtsIcon from '~/assets/arts.svg';
 import GetestIcon from '~/assets/test.svg';
@@ -39,7 +38,6 @@ import {
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { asResponsiveArray } from '~/style/utils';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -205,13 +203,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
             />
 
             <Box>
-              <TopicalTile
-                css={css({
-                  pb: 0,
-                  mb: asResponsiveArray({ _: '2rem', md: '4rem' }),
-                  px: asResponsiveArray({ _: 3, md: 4 }),
-                })}
-              >
+              <TopicalTile>
                 <>
                   <TopicalChoroplethContainer
                     title={text.risiconiveaus.selecteer_titel}
@@ -243,18 +235,18 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                       )}
                     />
                   </TopicalChoroplethContainer>
-                  <Box
-                    borderTopWidth="1px"
-                    borderTopStyle="solid"
-                    borderTopColor={colors.silver}
-                    mt={3}
-                    mx={-4}
-                  >
-                    <TopicalTile css={css({ mb: 0, p: 2 })}>
-                      <EscalationLevelExplanations />
-                    </TopicalTile>
-                  </Box>
                 </>
+              </TopicalTile>
+              <Box
+                borderTopWidth="1px"
+                borderTopStyle="solid"
+                borderTopColor={colors.silver}
+                mx={{ _: -3, md: 0 }}
+              />
+              <TopicalTile>
+                <Box mx={-3}>
+                  <EscalationLevelExplanations />
+                </Box>
               </TopicalTile>
             </Box>
             <DataSitemap />

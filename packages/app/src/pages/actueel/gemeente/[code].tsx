@@ -1,4 +1,3 @@
-import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import GetestIcon from '~/assets/test.svg';
 import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
@@ -36,7 +35,6 @@ import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 export { getStaticPaths } from '~/static-paths/gm';
-import { asResponsiveArray } from '~/style/utils';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -185,13 +183,7 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
             />
 
             <Box>
-              <TopicalTile
-                css={css({
-                  pb: 0,
-                  mb: asResponsiveArray({ _: '2rem', md: '4rem' }),
-                  px: asResponsiveArray({ _: 3, md: 4 }),
-                })}
-              >
+              <TopicalTile>
                 <>
                   <TopicalChoroplethContainer
                     title={text.risiconiveaus.selecteer_titel}
@@ -223,18 +215,18 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
                       )}
                     />
                   </TopicalChoroplethContainer>
-                  <Box
-                    borderTopWidth="1px"
-                    borderTopStyle="solid"
-                    borderTopColor={colors.silver}
-                    mt={3}
-                    mx={-4}
-                  >
-                    <TopicalTile css={css({ mb: 0, p: 2 })}>
-                      <EscalationLevelExplanations />
-                    </TopicalTile>
-                  </Box>
                 </>
+              </TopicalTile>
+              <Box
+                borderTopWidth="1px"
+                borderTopStyle="solid"
+                borderTopColor={colors.silver}
+                mx={{ _: -3, md: 0 }}
+              />
+              <TopicalTile>
+                <Box mx={-3}>
+                  <EscalationLevelExplanations />
+                </Box>
               </TopicalTile>
             </Box>
 

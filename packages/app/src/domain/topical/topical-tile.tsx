@@ -10,6 +10,7 @@ export const TopicalTile = styled(Box).attrs({ as: 'article' })(
     bg: 'tileGray',
     p: 4,
     mx: asResponsiveArray({ _: -3, md: 0 }),
+    mb: 0,
     borderRadius: 1,
   })
 );
