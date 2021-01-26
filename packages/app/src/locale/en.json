@@ -5,7 +5,7 @@
     "message": "Data that could give insight in the spread of the virus."
   },
   "laatst_bijgewerkt": {
-    "message": "The dashboard last received new data on {{dateOfInsertion}}.",
+    "message": "The dashboard receives new data each day, around 15:20.",
     "title": "Last updated"
   },
   "notificatie": {
@@ -662,7 +662,8 @@
       "vroege_signalen": "Early indicators",
       "gedrag": "Behaviour",
       "kwetsbare_groepen": "Vulnerable groups",
-      "maatregelen": "Measures"
+      "maatregelen": "Measures",
+      "vaccinaties": "Vaccinations"
     }
   },
   "veiligheidsregio_layout": {
@@ -1769,11 +1770,11 @@
       "text": "Read more in 'explanation of the data presented'"
     },
     "cbs_message": {
-      "title": "Almost 4 thousand deaths in first week of 2021",
+      "title": "Mortality slightly down in week 2, remains high",
       "published_text": "Date of publication: Friday 4 December",
-      "message": "Estimated mortality in week 2021 (4 to 10 January 2021 inclusive) stood at almost 4 thousand. This is 650 deaths in excess of the expected number for this period. Mortality in the last week of 2020 (28 December 2020 to 3 January 2021 inclusive) stood at over 4 thousand; this was 800 more than expected mortality. In 2020, the total number of deaths stood at almost 169 thousand, which is more than 15 thousand excess deaths. Statistics Netherlands (CBS) reports this based on the provisional weekly figures on mortality.",
+      "message": "Estimated mortality in week 2 of 2021 (11 to 17 January inclusive) stands at 3,850. This is 500 deaths in excess of the expected number for this period. The number of deaths in week 1 stood at 4,099. Statistics Netherlands (CBS) reports this based on the latest provisional weekly mortality figures. As of week 39 of 2020, weekly mortality has been higher than expected. During the current second epidemic wave, slightly over 60 thousand people have died up to the second week of 2021 inclusive. This is nearly 9 thousand more deaths than would normally be expected in this period.",
       "link": {
-        "href": "https://www.cbs.nl/en-gb/news/2021/02/almost-4-thousand-deaths-in-first-week-of-2021",
+        "href": "https://www.cbs.nl/en-gb/news/2021/03/mortality-slightly-down-in-week-2-remains-high",
         "text": "Website CBS"
       }
     },
@@ -1932,7 +1933,8 @@
       "rioolwater_virusdeeltjes": "This graph shows the progression over time in the average amount of virus particles in waste water, per 100.000 residents.",
       "verdenkingen_huisartsen": "This graph shows the progression over time in the estimated number of patients who contacted the general practitioner for the first time due to COVID-19 like symptoms.",
       "ziekenhuis_opnames": "This graph shows the progression in hospital admissions over time.",
-      "rioolwater_meetwaarde": "This graph shows the most recent measured value of the average amount of virus particles per 100.000 residents, per sewage processing facility."
+      "rioolwater_meetwaarde": "This graph shows the most recent measured value of the average amount of virus particles per 100.000 residents, per sewage processing facility.",
+      "verwachte_leveringen": "This graph shows the number of vaccine doses the Netherlands expects to receive over the next six weeks."
     }
   },
   "deceased_age_groups": {
@@ -1952,6 +1954,136 @@
       "value_percentage_title": "Deaths by age",
       "value_percentage_tooltip": "of the number of deceased persons is {{ageGroupRange}} years old",
       "age_group_range_tooltip": "{{ageGroupRange}} years old"
+    }
+  },
+  "vaccinaties": {
+    "titel_sidebar": "Vaccinations",
+    "titel_kpi": "Vaccine doses administered",
+    "metadata": {
+      "title": "Vaccines | Dashboard Coronavirus | Government.nl",
+      "description": "The Netherlands began vaccinating people against COVID-19 on 6 January 2021. The coronavirus dashboard shows how many doses of vaccine have been administered and how many doses are on their way."
+    },
+    "title": "COVID-19 vaccinations",
+    "description": "Vaccination is the most important step towards getting life back to normal. The Netherlands began vaccinating people against COVID-19 on 6 January 2021. The first people to be offered the vaccine are those in residential care, their professional carers and those working in acute care. Eventually, the vaccine will be offered to everyone aged 18 and over. This page shows how many doses of vaccine have been administered and how many doses are on their way.",
+    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
+    "date_unix": "1611600708",
+    "date_of_insertion_unix": "1611600708",
+    "reference": {
+      "href": "/verantwoording#vaccinaties",
+      "text": "Read more about the source of the data on vaccination in the explanation of the presented data."
+    },
+    "bronnen": {
+      "rivm": {
+        "href": "",
+        "text": "Ministry of Health, Welfare and Sport",
+        "download": ""
+      },
+      "ggd": {
+        "href": "",
+        "text": "",
+        "download": ""
+      },
+      "lnaz": {
+        "href": "",
+        "text": "",
+        "download": ""
+      },
+      "all_left": {
+        "href": "",
+        "text": "GGDs, LNAZ & long-term care institutions",
+        "download": ""
+      },
+      "all_right": {
+        "href": "",
+        "text": "Ministry of Health, Welfare and Sport",
+        "download": ""
+      }
+    },
+    "data": {
+      "difference": "",
+      "sidebar": {
+        "last_value": {
+          "total_vaccinated": "160538",
+          "date_unix": "1611600708",
+          "date_of_insertion_unix": "1611600708"
+        }
+      },
+      "kpi_total": {
+        "title": "Number of doses administered",
+        "value": "160538",
+        "description": "This figure reflects the total number of vaccination doses that have been administered. Because vaccination figures are sometimes reported a few days after doses are administered, the actual number of vaccination doses administered is higher. People need two separately administered doses for the vaccine to be maximally effective.",
+        "date_of_report_unix": "1611600708",
+        "date_of_insertion_unix": "1611600708",
+        "administered": [
+          {
+            "value": "106886",
+            "description": "administered by municipal health services (GGDs)"
+          },
+          {
+            "value": "40216",
+            "description": "administered by hospitals"
+          },
+          {
+            "value": "13436",
+            "description": "administered by long-term care institutions*"
+          },
+          {
+            "value": "",
+            "description": ""
+          },
+          {
+            "value": "",
+            "description": ""
+          }
+        ],
+        "description_first": "This is the number of vaccine doses that have been administered. Because vaccination figures are sometimes reported a few days after doses are administered, the actual number of vaccination doses administered is higher. People need two separately administered doses for the vaccine to be maximally effective.",
+        "description_second": "* This number was reported by phone by long-term care institutions themselves on 22 and 25 January. It is not yet known when this number will be updated. Other numbers of doses administered are updated daily."
+      },
+      "kpi_expected_delivery": {
+        "title": "Approved vaccines to be delivered",
+        "value": "1974750",
+        "description": "This is the number of vaccine doses the Netherlands expects to receive over the next six weeks. The Netherlands will receive a new delivery each week. People need two separately administered doses for the vaccine to be maximally effective.",
+        "date_of_report_unix": "1611600708",
+        "date_of_insertion_unix": "1611600708"
+      },
+      "kpi_stock": {
+        "title": "",
+        "value": "",
+        "amount": [
+          {
+            "value": "",
+            "description": ""
+          },
+          {
+            "value": "",
+            "description": ""
+          },
+          {
+            "value": "",
+            "description": ""
+          },
+          {
+            "value": "",
+            "description": ""
+          },
+          {
+            "value": "",
+            "description": ""
+          },
+          {
+            "value": "",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "section_vaccinations_more_information": {
+      "title": "Expected data on vaccinations",
+      "description": "More data on vaccinations will be added in the near future, including:\n- willingness to be vaccinated\n- vaccination coverage"
+    },
+    "grafiek": {
+      "titel": "Expected weekly deliveries",
+      "omschrijving": "This graph shows the number of vaccine doses the Netherlands expects to receive over the next six weeks. "
     }
   }
 }
