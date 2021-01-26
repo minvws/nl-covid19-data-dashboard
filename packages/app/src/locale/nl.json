@@ -1,11 +1,21 @@
 {
+  "editorial_detail": {
+    "back_link": {
+      "text": "Terug naar actueel"
+    }
+  },
+  "article_detail": {
+    "back_link": {
+      "text": "Terug naar alle artikelen"
+    }
+  },
   "andere_gegevens": "Andere gegevens",
   "blok_andere_gegevens": {
     "title": "Andere gegevens",
     "message": "Cijfers die iets kunnen zeggen over de verspreiding van het virus."
   },
   "laatst_bijgewerkt": {
-    "message": "Het dashboard is op {{dateOfInsertion}} voor het laatst voorzien van nieuwe data.",
+    "message": "Het dashboard wordt dagelijks rond 15:20 voorzien van nieuwe data.",
     "title": "Laatst bijgewerkt"
   },
   "notificatie": {
@@ -14,7 +24,9 @@
     "link": {
       "text": "Bekijk de toelichting van het RIVM",
       "href": "https://www.rivm.nl/nieuws/opmars-nieuwe-coronavarianten-overschaduwt-positiever-beeld"
-    }
+    },
+    "subtitel": "Wekelijkse landelijke toelichting",
+    "datum": "12 december 2020"
   },
   "error_titel": {
     "text": "Er is iets misgegaan"
@@ -32,13 +44,12 @@
     "footer_nav": "Ga direct naar de footer navigatie"
   },
   "header": {
-    "title": "Dashboard coronavirus",
-    "text": "Het dashboard coronavirus geeft informatie over de ontwikkeling van het coronavirus in Nederland.",
-    "link": "Lees meer over dit dashboard",
+    "title": "Dashboard Coronavirus",
     "logo_alt": "Rijksoverheid"
   },
   "nav": {
     "links": {
+      "actueel": "Actueel",
       "index": "Landelijk",
       "over": "Over dit dashboard",
       "meer": "Meer informatie over het coronavirus",
@@ -51,7 +62,11 @@
     },
     "title": "Corona Dashboard",
     "terug_naar_alle_cijfers": "Terug naar alle cijfers",
-    "terug_naar_alle_cijfers_homepage": "Terug naar alle cijfers"
+    "terug_naar_alle_cijfers_homepage": "Terug naar alle cijfers",
+    "menu": {
+      "open_menu": "Open menu",
+      "close_menu": "Sluit menu"
+    }
   },
   "ic_opnames_per_dag": {
     "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
@@ -583,6 +598,11 @@
     "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
     "url": "https://coronadashboard.rijksoverheid.nl/verantwoording"
   },
+  "articles_metadata": {
+    "title": "Artikelen Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
+    "description": "",
+    "url": "https://coronadashboard.rijksoverheid.nl/artikelen"
+  },
   "metadata": {
     "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
     "titel": "COVID-19 Dashboard foutmelding | Rijksoverheid.nl",
@@ -602,7 +622,88 @@
   },
   "utils": {
     "date_today": "vandaag",
-    "date_yesterday": "gisteren"
+    "date_yesterday": "gisteren",
+    "date_day_before_yesterday": "eergisteren"
+  },
+  "common_actueel": {
+    "terug_naar_landelijk": "Terug naar landelijke situtatie",
+    "laatst_bijgewerkt": "Laatst bijgewerkt: {{date}} om {{time}}"
+  },
+  "nationaal_actueel": {
+    "title": "Actuele situatie in {{the_netherlands}}",
+    "the_netherlands": "Nederland",
+    "metadata": {
+      "title": "Actuele situatie in Nederland",
+      "description": "Actuele situatie in Nederland"
+    },
+    "risiconiveaus": {
+      "selecteer_titel": "De risicokaart van Nederland",
+      "selecteer_toelichting": "Iedere week wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. In welk risiconiveau een regio zit, wordt bepaald door te kijken naar de situatie van een regio, die van de omliggende regio's en de situatie in de rest van het land.\n\n**Er geldt een [landelijke lockdown](/landelijk/maatregelen) tot en met in ieder geval 9 februari.**"
+    },
+    "data_sitemap_titel": "Alle landelijke cijfers op dit dashboard",
+    "data_sitemap_toelichting": "Op het corona dashboard worden de cijfers van meerdere onderwerpen gepresenteerd. In verloop van tijd zullen er nieuwe onderwerpen worden toegevoegd of bestaande ondeerwerpen worden uitgebreid. Alle onderwerpen zijn onderverdeelt in categorieen. Dit is een overzicht van de categorieen en hun onderwerpen.",
+    "mini_trend_tiles": {
+      "positief_getest": {
+        "title": "Aantal positieve testen"
+      },
+      "ziekenhuis_opnames": {
+        "title": "Ziekenhuisopnames"
+      },
+      "ic_opnames": {
+        "title": "Intensive care-opnames"
+      }
+    },
+    "data_driven_texts": {
+      "infected_people_total": {
+        "value": {
+          "zero": "{{newDate}} zijn er geen nieuwe positieve tests gemeld.",
+          "singular": "{{newDate}} is {{propertyValue}} nieuwe positieve test gemeld.",
+          "plural": "{{newDate}} zijn {{propertyValue}} nieuwe positieve tests gemeld."
+        },
+        "difference": {
+          "zero": "Dat is gelijk aan {{oldDate}}",
+          "singular": "Dat is er {{differenceIndicator}} dan {{oldDate}}.",
+          "plural": "Dat zijn er {{differenceIndicator}} dan {{oldDate}}."
+        }
+      },
+      "intake_hospital_ma": {
+        "value": {
+          "zero": "{{newDate}} zijn er geen nieuwe ziekenhuisopnames gemeld.",
+          "singular": "{{newDate}} is {{propertyValue}} nieuwe ziekenhuisopname gemeld.",
+          "plural": "{{newDate}} zijn {{propertyValue}} nieuwe ziekenhuisopnames gemeld."
+        },
+        "difference": {
+          "zero": "Dat is gelijk aan {{oldDate}}",
+          "singular": "Dat is er {{differenceIndicator}} dan {{oldDate}}.",
+          "plural": "Dat zijn er {{differenceIndicator}} dan {{oldDate}}."
+        }
+      },
+      "intake_intensivecare_ma": {
+        "value": {
+          "zero": "{{newDate}} zijn er geen nieuwe ic opnames gemeld.",
+          "singular": "{{newDate}} is {{propertyValue}} nieuwe ic opname gemeld.",
+          "plural": "{{newDate}} zijn {{propertyValue}} nieuwe ic opnames gemeld."
+        },
+        "difference": {
+          "zero": "Dat is gelijk aan {{oldDate}}",
+          "singular": "Dat is er {{differenceIndicator}} dan {{oldDate}}.",
+          "plural": "Dat zijn er {{differenceIndicator}} dan {{oldDate}}."
+        }
+      }
+    },
+    "quick_links": {
+      "header": "Bekijk alle cijfers van het dashboard",
+      "links": {
+        "nationaal": "Cijfers van Nederland",
+        "veiligheidsregio": "Cijfers per veiligheidsregio",
+        "gemeente": "Cijfers per gemeente"
+      }
+    },
+    "latest_articles": {
+      "title": "Wekelijkse berichten",
+      "subtitle": "Elke week wordt hier een nieuw bericht geplaatst die een bepaald onderwerp rondom het corona virus uitlegt.",
+      "all_articles": "Bekijk alle artikelen"
+    }
   },
   "regionaal_index": {
     "your_safety_region": "Veiligheidsregio",
@@ -616,6 +717,10 @@
     "belangrijk_bericht": "Er geldt een [landelijke lockdown](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen) tot en met in ieder geval 9 februari."
   },
   "common": {
+    "gm_singular": "gemeente",
+    "gm_plural": "gemeentes",
+    "vr_singular": "veiligheidsregio",
+    "vr_plural": "veiligheidsregio's",
     "metadata": {
       "source": "Bron",
       "date": "Waarde van {{date}}",
@@ -639,7 +744,10 @@
     },
     "niveau": "niveau",
     "clear_select_input": "Leegmaken",
-    "incomplete": "niet compleet"
+    "incomplete": "niet compleet",
+    "gisteren": "Gisteren",
+    "vandaag": "Vandaag",
+    "read_more": "Lees meer"
   },
   "seoHead": {
     "default_description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
@@ -746,13 +854,7 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": [
-      "0 tot 20",
-      "20 tot 40",
-      "40 tot 60",
-      "60 tot 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -988,23 +1090,25 @@
   },
   "escalatie_niveau": {
     "titel": "Risiconiveaus",
+    "tile_title": "Wat betekenen de vier risiconiveau's?",
+    "lees_meer": "Meer informatie over risiconiveau's",
     "toelichting": "De kaart geeft het risiconiveau per veiligheidsregio weer.\n\n[Meer over de risiconiveaus](/over-risiconiveaus)",
     "types": {
       "1": {
         "titel": "Waakzaam",
-        "toelichting": ""
+        "toelichting": "De situatie is beheersbaar en het aantal nieuwe besmettingen is laag. Kwetsbare groepen dienen alert te zijn en er is voldoende zorgcapaciteit."
       },
       "2": {
         "titel": "Zorgelijk",
-        "toelichting": ""
+        "toelichting": "Het aantal nieuwe besmettingen en de druk op de zorgcapaciteit neemt toe. Aanvullende maatregelen zijn nodig om de verspreiding van het virus weer onder controle te krijgen."
       },
       "3": {
         "titel": "Ernstig",
-        "toelichting": ""
+        "toelichting": "Het aantal nieuwe besmettingen neemt snel toe en de zorgcapaciteit is onvoldoende. Hard ingrijpen is noodzakelijk om de kwetsbaren te beschermen."
       },
       "4": {
         "titel": "Zeer Ernstig",
-        "toelichting": ""
+        "toelichting": "Er zijn zeer veel mensen besmettelijk, het dagelijks aantal nieuwe besmettingen is hoog en de regionale zorgcapaciteit is onvoldoende. Strenge, landelijke maatregelen zijn noodzakelijk om verdere escalatie te voorkomen."
       },
       "5": {
         "titel": "Lockdown",
@@ -1012,7 +1116,9 @@
       }
     },
     "legenda": {
-      "titel": "Legenda"
+      "titel": "Verdeling van risiconiveau’s in Nederland",
+      "geen_regio": "geen regio's",
+      "regios": "{{amount}} regio's"
     },
     "valid_from": "Geldig vanaf {{validFrom}}",
     "sidebar_label": "Risiconiveau:"
@@ -1729,68 +1835,6 @@
     },
     "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
   },
-  "vaccinaties": {
-    "titel_sidebar": "Vaccinaties",
-    "titel_kpi": "Totaal aantal toegediende eerste vaccins",
-    "metadata": {
-      "title": "Vaccinaties | Dashboard Coronavirus | Rijksoverheid.nl",
-      "description": "#"
-    },
-    "title": "COVID-19-vaccinaties",
-    "description": "Vaccineren is de belangrijkste stap naar een leven zonder coronaregels. Op 6 januari 2021 is Nederland begonnen met vaccineren. Kwetsbare mensen, hun zorgmedewerkers en medewerkers in de acute zorg mogen als eerste een vaccinatie halen. Uiteindelijk komt iedereen van 18 jaar of ouder aan de beurt. De cijfers op deze pagina laten zie hoeveel vaccins zijn toegediend en hoeveel vaccins er beschikbaar komen.",
-    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "date_unix": "1611058309",
-    "date_of_insertion_unix": "1611058309",
-    "reference": {
-      "href": "/verantwoording#vaccinaties",
-      "text": "Lees meer over de herkomst en betekenis van de vaccinatiecijfers in de cijferverantwoording."
-    },
-    "bronnen": {
-      "rivm": {
-        "href": "#",
-        "text": "RIVM",
-        "download": ""
-      }
-    },
-    "data": {
-      "difference": "Do not remove this key. It is required as a temporary workaround",
-      "sidebar": {
-        "last_value": {
-          "total_vaccinated": "77000",
-          "date_unix": "1611058309",
-          "date_of_insertion_unix": "1611058309"
-        }
-      },
-      "kpi_total": {
-        "title": "Aantal toegediende vaccins",
-        "value": "77000",
-        "description": "Dit getal laat zien hoeveel vaccins in totaal zijn toegediend. Het kan een paar dagen duren voordat een prik wordt gemeld. Het daadwerkelijke aantal gezette prikken ligt daarom hoger. Mensen hebben twee prikken nodig voor een volledige vaccinatie.\n\nOp dit moment zijn alleen data beschikbaar over het aantal toegediende vaccins aan medewerkers in de acute zorg en de verpleeghuiszorg. We tonen zo snel mogelijk ook gegevens over de andere groepen, zoals bewoners van instellingen.",
-        "date_of_report_unix": "1611058309",
-        "date_of_insertion_unix": "1611058309",
-        "administered": [
-          {
-            "value": "37000",
-            "description": "toegediend aan medewerkers verpleeghuizen en kleinschalige woonvormen"
-          },
-          {
-            "value": "40000",
-            "description": "toegediend aan ziekenhuismedewerkers acute zorg"
-          }
-        ]
-      },
-      "kpi_expected_delivery": {
-        "title": "Verwachte levering vaccins",
-        "value": "2.154.510",
-        "description": "Aantal vaccins dat Nederland de komende tien weken verwacht te krijgen. Elke week ontvangt Nederland een deel van de vaccins. Mensen hebben twee prikken nodig voor een volledige vaccinatie.",
-        "date_of_report_unix": "1611058309",
-        "date_of_insertion_unix": "1611058309"
-      }
-    },
-    "section_vaccinations_more_information": {
-      "title": "Verwachte data over vaccinaties",
-      "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer:\n- Vaccinatiebereidheid\n- Vaccinatiegraad\n- Leveringsoverzicht vaccins"
-    }
-  },
   "veiligheidsregio_sterfte": {
     "titel_sidebar": "Sterfte",
     "titel_kpi": "Gemeld aantal patiënten overleden aan COVID-19 per dag",
@@ -1901,6 +1945,160 @@
     "VR24": "http://www.vrzuidlimburg.nl/",
     "VR25": "http://www.veiligheidsregioflevoland.nl/"
   },
+  "common.tooltip.positive_tested_value": "",
+  "search": {
+    "placeholder": "Zoek een gemeente of veiligheidsregio",
+    "clear": "Zoekopdracht wissen",
+    "no_hits": "Geen {{subject}} gevonden met “{{search}}”"
+  },
+
+  "veiligheidsregio_actueel": {
+    "title": "De actuele situatie in veiligheidsregio {{safetyRegionName}}",
+    "metadata": {
+      "title": "Actuele situatie in {{safetyRegionName}}",
+      "description": "Actuele situatie in {{safetyRegionName}}"
+    },
+    "risiconiveaus": {
+      "selecteer_titel": "De risicokaart van Nederland",
+      "selecteer_toelichting": "Iedere week wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. In welk risiconiveau een regio zit, wordt bepaald door te kijken naar de situatie van een regio, die van de omliggende regio's en de situatie in de rest van het land.\n\n**Er geldt een [landelijke lockdown](/landelijk/maatregelen) tot en met in ieder geval 9 februari.**"
+    },
+    "risoconiveau_maatregelen": {
+      "title": "Risiconiveau & maatregelen",
+      "description": "Voor de veiligheidsregio geldt het risiconiveau",
+      "bekijk_href": "Bekijk de maatregelen"
+    },
+    "mini_trend_tiles": {
+      "positief_getest": {
+        "title": "Aantal positieve testen"
+      },
+      "ziekenhuis_opnames": {
+        "title": "Ziekenhuisopnames"
+      },
+      "ic_opnames": {
+        "title": "Intensive care-opnames"
+      }
+    },
+    "data_driven_texts": {
+      "infected_people_total": {
+        "value": {
+          "zero": "{{newDate}} there were no newly reported infected people.",
+          "singular": "{{newDate}} there was {{propertyValue}} newly reported infected person.",
+          "plural": "{{newDate}} there were {{propertyValue}} newly reported infected people."
+        },
+        "difference": {
+          "zero": "This is the same as {{oldDate}}",
+          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
+          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+        }
+      },
+      "intake_hospital_ma": {
+        "value": {
+          "zero": "{{newDate}} there were no newly reported hospital intakes.",
+          "singular": "{{newDate}} there was {{propertyValue}} newly reported hospital intake.",
+          "plural": "{{newDate}} there were {{propertyValue}} newly reported hospital intakes."
+        },
+        "difference": {
+          "zero": "This is the same as {{oldDate}}",
+          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
+          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+        }
+      },
+      "intake_intensivecare_ma": {
+        "value": {
+          "zero": "{{newDate}} there were no newly reported intensive care admissions.",
+          "singular": "{{newDate}} there was {{propertyValue}} newly reported intensive care admission.",
+          "plural": "{{newDate}} there were {{propertyValue}} newly reported intensive care admissions."
+        },
+        "difference": {
+          "zero": "This is the same as {{oldDate}}",
+          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
+          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+        }
+      }
+    },
+    "quick_links": {
+      "header": "Bekijk alle cijfers van het dashboard",
+      "links": {
+        "nationaal": "Cijfers van Nederland",
+        "veiligheidsregio": "Cijfers van {{safetyRegionName}}",
+        "gemeente": "Cijfers per gemeente"
+      }
+    }
+  },
+  "gemeente_actueel": {
+    "title": "Actuele situatie in gemeente {{municipalityName}}",
+    "metadata": {
+      "title": "Actuele situatie in {{municipalityName}}",
+      "description": "Actuele situatie in {{municipalityName}}"
+    },
+    "risiconiveaus": {
+      "selecteer_titel": "De risicokaart van Nederland",
+      "selecteer_toelichting": "Iedere week wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. In welk risiconiveau een regio zit, wordt bepaald door te kijken naar de situatie van een regio, die van de omliggende regio's en de situatie in de rest van het land.\n\n**Er geldt een [landelijke lockdown](/landelijk/maatregelen) tot en met in ieder geval 9 februari.**"
+    },
+    "risoconiveau_maatregelen": {
+      "title": "Risiconiveau & maatregelen",
+      "description": "Voor de veiligheidsregio van deze gemeente geldt het risiconiveau",
+      "bekijk_href": "Bekijk de maatregelen"
+    },
+    "mini_trend_tiles": {
+      "positief_getest": {
+        "title": "Aantal positieve testen"
+      },
+      "ziekenhuis_opnames": {
+        "title": "Ziekenhuisopnames"
+      },
+      "ic_opnames": {
+        "title": "Intensive care-opnames"
+      }
+    },
+    "data_driven_texts": {
+      "infected_people_total": {
+        "value": {
+          "zero": "{{newDate}} there were no newly reported infected people.",
+          "singular": "{{newDate}} there was {{propertyValue}} newly reported infected person.",
+          "plural": "{{newDate}} there were {{propertyValue}} newly reported infected people."
+        },
+        "difference": {
+          "zero": "This is the same as {{oldDate}}",
+          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
+          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+        }
+      },
+      "intake_hospital_ma": {
+        "value": {
+          "zero": "{{newDate}} there were no newly reported hospital intakes.",
+          "singular": "{{newDate}} there was {{propertyValue}} newly reported hospital intake.",
+          "plural": "{{newDate}} there were {{propertyValue}} newly reported hospital intakes."
+        },
+        "difference": {
+          "zero": "This is the same as {{oldDate}}",
+          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
+          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+        }
+      },
+      "intake_intensivecare_ma": {
+        "value": {
+          "zero": "{{newDate}} there were no newly reported intensive care admissions.",
+          "singular": "{{newDate}} there was {{propertyValue}} newly reported intensive care admission.",
+          "plural": "{{newDate}} there were {{propertyValue}} newly reported intensive care admissions."
+        },
+        "difference": {
+          "zero": "This is the same as {{oldDate}}",
+          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
+          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+        }
+      }
+    },
+    "quick_links": {
+      "header": "Bekijk alle cijfers van het dashboard",
+      "links": {
+        "nationaal": "Cijfers van Nederland",
+        "veiligheidsregio": "Cijfers van veiligheidsregio {{safetyRegionName}}",
+        "veiligheidsregio_fallback": "Cijfers per veiligheidsregio",
+        "gemeente": "Cijfers van gemeente {{municipalityName}}"
+      }
+    }
+  },
   "choropleth": {
     "verb": {
       "singular": "heeft",
@@ -2001,7 +2199,8 @@
       "rioolwater_virusdeeltjes": "Deze grafiek toont het gemiddeld aantal virusdeeltjes per 100.000 inwoners over tijd.",
       "verdenkingen_huisartsen": "Deze grafiek toont het geschatte aantal patiënten dat voor het eerst met COVID-19-achtige klachten contact opnam met de huisarts over tijd.",
       "ziekenhuis_opnames": "Deze grafiek toont het aantal ziekenhuisopnames over tijd.",
-      "rioolwater_meetwaarde": "Deze grafiek toont de meest recente meetwaarde van het gemiddeld aantal virusdeeltjes per 100.000 inwoners, per rioolwaterzuiveringslocatie."
+      "rioolwater_meetwaarde": "Deze grafiek toont de meest recente meetwaarde van het gemiddeld aantal virusdeeltjes per 100.000 inwoners, per rioolwaterzuiveringslocatie.",
+      "verwachte_leveringen": "Deze grafiek toont het aantal vaccins dat Nederland de komende zes weken verwacht te krijgen."
     }
   },
   "deceased_age_groups": {
@@ -2021,6 +2220,136 @@
       "value_percentage_title": "Overledenen per leeftijdsgroep",
       "value_percentage_tooltip": "van het aantal overleden personen is {{ageGroupRange}} jaar",
       "age_group_range_tooltip": "{{ageGroupRange}} jaar"
+    }
+  },
+  "vaccinaties": {
+    "titel_sidebar": "Vaccinaties",
+    "titel_kpi": "Totaal aantal toegediende vaccins",
+    "metadata": {
+      "title": "Vaccinaties | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Op 6 januari 2021 is Nederland begonnen met vaccineren. De cijfers op het dashboard coronavirus laten zien hoeveel vaccins zijn toegediend en hoeveel vaccins er beschikbaar komen."
+    },
+    "title": "COVID-19-vaccinaties",
+    "description": "Vaccineren is de belangrijkste stap naar een samenleving zonder coronaregels. Op 6 januari 2021 is Nederland begonnen met vaccineren. Uiteindelijk komt iedereen van 18 jaar of ouder aan de beurt. De cijfers op deze pagina laten zien hoeveel vaccins zijn toegediend en hoeveel vaccins er beschikbaar komen.",
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "date_unix": "1611600708",
+    "date_of_insertion_unix": "1611600708",
+    "reference": {
+      "href": "/verantwoording#vaccinatie",
+      "text": "Lees meer over de bron van de vaccinatiecijfers in de cijferverantwoording."
+    },
+    "bronnen": {
+      "rivm": {
+        "href": "",
+        "text": "Ministerie van VWS",
+        "download": ""
+      },
+      "ggd": {
+        "href": "",
+        "text": "",
+        "download": ""
+      },
+      "lnaz": {
+        "href": "",
+        "text": "",
+        "download": ""
+      },
+      "all_left": {
+        "href": "",
+        "text": "GGD'en, LNAZ & langdurige zorginstellingen",
+        "download": ""
+      },
+      "all_right": {
+        "href": "",
+        "text": "Ministerie van VWS",
+        "download": ""
+      }
+    },
+    "data": {
+      "difference": "Do not remove this key. It is required as a temporary workaround",
+      "sidebar": {
+        "last_value": {
+          "total_vaccinated": "163931",
+          "date_unix": "1611600708",
+          "date_of_insertion_unix": "1611600708"
+        }
+      },
+      "kpi_total": {
+        "title": "Aantal toegediende vaccins",
+        "value": "163931",
+        "description": "Dit getal laat zien hoeveel vaccins in totaal zijn toegediend. Het kan een paar dagen duren voordat een prik wordt gemeld. Het daadwerkelijke aantal gezette prikken ligt daarom hoger. Mensen hebben twee prikken nodig voor een volledige vaccinatie.",
+        "date_of_report_unix": "1611600708",
+        "date_of_insertion_unix": "1611600708",
+        "administered": [
+          {
+            "value": "106886",
+            "description": "toegediend door GGD'en"
+          },
+          {
+            "value": "40216",
+            "description": "toegediend door ziekenhuizen"
+          },
+          {
+            "value": "16829",
+            "description": "toegediend door langdurige zorginstellingen*"
+          },
+          {
+            "value": "",
+            "description": ""
+          },
+          {
+            "value": "",
+            "description": ""
+          }
+        ],
+        "description_first": "Dit getal laat zien hoeveel vaccins in totaal zijn toegediend. Het kan een paar dagen duren voordat een prik wordt gemeld. Het daadwerkelijke aantal gezette prikken ligt daarom hoger. Mensen hebben twee prikken nodig voor een volledige vaccinatie.",
+        "description_second": "* Dit cijfer is aan de telefoon doorgegeven door de instellingen zelf op 22 en 25 januari. Het is nog niet bekend wanneer dit cijfer wordt bijgewerkt. Overige aantallen toegediende vaccins worden dagelijks bijgewerkt."
+      },
+      "kpi_expected_delivery": {
+        "title": "Verwachte levering goedgekeurde vaccins",
+        "value": "1302750",
+        "description": "Aantal goedgekeurde vaccins dat Nederland de komende zes weken verwacht te krijgen. Elke week ontvangt Nederland een deel van de vaccins. Mensen hebben twee prikken nodig voor een volledige vaccinatie.",
+        "date_of_report_unix": "1611600708",
+        "date_of_insertion_unix": "1611600708"
+      },
+      "kpi_stock": {
+        "title": "",
+        "value": "",
+        "amount": [
+          {
+            "value": "",
+            "description": ""
+          },
+          {
+            "value": "",
+            "description": ""
+          },
+          {
+            "value": "",
+            "description": ""
+          },
+          {
+            "value": "",
+            "description": ""
+          },
+          {
+            "value": "",
+            "description": ""
+          },
+          {
+            "value": "",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "section_vaccinations_more_information": {
+      "title": "Verwachte data over vaccinaties",
+      "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer:\n- vaccinatiebereidheid\n- vaccinatiegraad\n- vaccins op voorraad"
+    },
+    "grafiek": {
+      "titel": "Verwachte leveringen per week",
+      "omschrijving": "Deze grafiek toont het aantal vaccins dat Nederland de komende zes weken verwacht te krijgen."
     }
   }
 }

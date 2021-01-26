@@ -10,6 +10,7 @@ import { Path } from './path';
 import { Tooltip } from './tooltips/tooltipContainer';
 import { countryGeo } from './topology';
 import { useUniqueId } from '~/utils/useUniqueId';
+import { colors } from '~/style/theme';
 
 export type TooltipSettings = {
   left: number;
@@ -200,7 +201,7 @@ function Country({ fitSize }: { fitSize: FitSize }) {
       <MercatorGroup
         data={countryGeo.features}
         render={(_, path, index) => (
-          <Path key={index} d={path} stroke="#c4c4c4" strokeWidth={0.5} />
+          <Path key={index} d={path} stroke={colors.silver} strokeWidth={0.5} />
         )}
         fitSize={fitSize}
       />

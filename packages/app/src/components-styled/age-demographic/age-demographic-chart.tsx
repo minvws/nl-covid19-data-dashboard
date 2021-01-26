@@ -131,7 +131,7 @@ function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
           left={margin.left}
           top={margin.top}
           numTicks={numTicks}
-          stroke={colors.border}
+          stroke={colors.silver}
         />
         <GridColumns
           scale={infectedPercentageScale}
@@ -140,7 +140,7 @@ function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
           left={width / 2 + ageRangeAxisWidth / 2}
           top={margin.top}
           numTicks={numTicks}
-          stroke={colors.border}
+          stroke={colors.silver}
         />
 
         <PatternLines

@@ -1,17 +1,8 @@
-import React from 'react';
-import SanityMobilePreview from 'sanity-mobile-preview';
-import 'sanity-mobile-preview/dist/index.css?raw';
-
 import S from '@sanity/desk-tool/structure-builder';
-import { GoSettings } from 'react-icons/go';
-
+import { BsCardChecklist, BsLockFill, BsMap, BsTable } from 'react-icons/bs';
+import { GrCircleInformation, GrDashboard } from 'react-icons/gr';
 import { MdQuestionAnswer } from 'react-icons/md';
-
-import { BsCardChecklist, BsMap, BsTable, BsLockFill } from 'react-icons/bs';
-import { GrCircleInformation } from 'react-icons/gr';
-
-import ColorblindPreview from './previews/colorblind-filter/ColorblindPreview';
-import { assemblePreviewUrl } from './previews/assemblePreviewUrl';
+import 'sanity-mobile-preview/dist/index.css?raw';
 
 // Build up the root of the preview URL
 // const remoteURL = process.env.SANITY_STUDIO_PREVIEW_SERVER;
@@ -59,6 +50,7 @@ const hiddenDocTypes = (listItem) =>
     // "category",
     // "laatsteOntwikkelingen",
     // "tile",
+    'topicalPage',
     'veelgesteldeVragen',
     'cijferVerantwoording',
     'overDitDashboard',
@@ -121,6 +113,32 @@ export default () =>
             .title('Over dit dashboard')
             .schemaType('overDitDashboard')
             .documentId('overDitDashboard')
+            .views([
+              S.view.form(),
+              // S.view
+              //   .component(WebPreview)
+              //   .options({ previewURL: `${previewURL}/over` })
+              //   .title("Web"),
+              // S.view
+              //   .component(IFrameMobilePreview)
+              //   .options({ previewURL: `${previewURL}/over` })
+              //   .title("Mobile"),
+              // S.view
+              //   .component(ColorblindPreview)
+              //   .options({ previewURL: `${previewURL}/over` })
+              //   .title("Color Blindness"),
+            ])
+        ),
+
+      S.listItem()
+        .title('Actueel')
+        .schemaType('topicalPage')
+        .icon(GrDashboard)
+        .child(
+          S.editor()
+            .title('Actueel pagina')
+            .schemaType('topicalPage')
+            .documentId('topicalPage')
             .views([
               S.view.form(),
               // S.view

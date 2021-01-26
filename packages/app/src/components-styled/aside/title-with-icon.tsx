@@ -1,12 +1,13 @@
 import css from '@styled-system/css';
 import React, { ReactNode } from 'react';
 import { Box } from '../base';
-import { Heading, HeadingProps } from '../typography';
+import { Heading, HeadingLevel, HeadingProps } from '../typography';
 
 type TitleWithIconProps = {
   title: string;
   icon: ReactNode;
   subtitle?: string;
+  level?: HeadingLevel;
 } & Omit<HeadingProps, 'children' | 'level'>;
 
 /**
@@ -16,7 +17,7 @@ type TitleWithIconProps = {
  * @param props
  */
 export function TitleWithIcon(props: TitleWithIconProps) {
-  const { icon, title, subtitle, ...headingProps } = props;
+  const { icon, title, subtitle, level = 4, ...headingProps } = props;
 
   return (
     <Box
@@ -30,12 +31,12 @@ export function TitleWithIcon(props: TitleWithIconProps) {
 
       <Box>
         <Heading
-          level={4}
+          as="div"
+          level={level}
           mb={0}
           mr={3}
           fontWeight="bold"
           {...headingProps}
-          as="div"
         >
           {title}
         </Heading>

@@ -2,27 +2,16 @@ export default {
   name: 'cijferVerantwoording',
   type: 'document',
   title: 'Cijferverantwoording',
-  __experimental_actions: ['update', /* 'create', 'delete', */ 'publish'],
   fields: [
     {
       name: 'title',
       type: 'localeString',
       title: 'Titel',
-      validation: (Rule) =>
-        Rule.fields({
-          nl: (fieldRule) => fieldRule.reset().required(),
-          en: (fieldRule) => fieldRule.reset().required(),
-        }),
     },
     {
       name: 'description',
       type: 'localeBlock',
       title: 'Beschrijving',
-      validation: (Rule) =>
-        Rule.fields({
-          nl: (fieldRule) => fieldRule.reset().required(),
-          en: (fieldRule) => fieldRule.reset().required(),
-        }),
     },
     {
       name: 'collapsibleList',

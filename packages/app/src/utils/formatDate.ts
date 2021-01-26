@@ -1,8 +1,17 @@
+/**
+ * The order of including these polyfills is important:
+ * getcanonicallocales needs to be first
+ * datetimeformat needs to be second
+ * datetimeformat locale's last
+ */
 import '@formatjs/intl-getcanonicallocales/polyfill';
 import '@formatjs/intl-datetimeformat/polyfill';
 import '@formatjs/intl-datetimeformat/locale-data/en';
 import '@formatjs/intl-datetimeformat/locale-data/nl';
-import { assert } from '~/utils/assert';
+import { isSameDay, isToday, isYesterday, subDays } from 'date-fns';
+import siteText from '~/locale/index';
+import { getLocale } from '~/utils/getLocale';
+import { assert } from './assert';
 
 // Adding the Europe/Amsterdam time zone manually since its the only being used.
 // The data was pulled from the @formatjs/add-golden-ts.js file.
@@ -23,10 +32,9 @@ if ('__setDefaultTimeZone' in Intl.DateTimeFormat) {
   (Intl.DateTimeFormat as any).__setDefaultTimeZone('Europe/Amsterdam');
 }
 
-import { isToday, isYesterday } from 'date-fns';
-
-import siteText from '~/locale/index';
-import { getLocale } from '~/utils/getLocale';
+function isDayBeforeYesterday(date: number): boolean {
+  return isSameDay(date, subDays(Date.now(), 2));
+}
 
 const locale = getLocale();
 
@@ -38,6 +46,7 @@ interface DateTimeFormatOptions extends Intl.DateTimeFormatOptions {
 }
 
 type formatStyle =
+  | 'time'
   | 'long'
   | 'medium'
   | 'short'
@@ -45,6 +54,11 @@ type formatStyle =
   | 'iso'
   | 'axis'
   | 'weekday-medium';
+
+const Time = new Intl.DateTimeFormat(locale, {
+  timeStyle: 'short',
+  timeZone: 'Europe/Amsterdam',
+} as DateTimeFormatOptions);
 
 const Long = new Intl.DateTimeFormat(locale, {
   dateStyle: 'long',
@@ -103,7 +117,7 @@ export function formatDateFromMilliseconds(
   style?: formatStyle
 ): string {
   assert(!isNaN(milliseconds), 'milliseconds is NaN');
-
+  if (style === 'time') return Time.format(milliseconds); // '09:24'
   if (style === 'iso') return new Date(milliseconds).toISOString(); // '2020-07-23T10:01:16.000Z'
   if (style === 'long') return Long.format(milliseconds); // '23 juli 2020 om 12:01'
   if (style === 'medium') return Medium.format(milliseconds); // '23 juli 2020'
@@ -115,7 +129,16 @@ export function formatDateFromMilliseconds(
   if (style === 'relative' && typeof window !== 'undefined') {
     if (isToday(milliseconds)) return siteText.utils.date_today;
     if (isYesterday(milliseconds)) return siteText.utils.date_yesterday;
+    if (isDayBeforeYesterday(milliseconds))
+      return siteText.utils.date_day_before_yesterday;
   }
 
   return DayMonth.format(milliseconds);
+}
+
+export function formatDateFromString(
+  sanityDate: string,
+  style?: formatStyle
+): string {
+  return formatDateFromMilliseconds(new Date(sanityDate).getTime(), style);
 }
