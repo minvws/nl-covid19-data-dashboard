@@ -124,7 +124,7 @@ function NationalLayout(props: NationalLayoutProps) {
                 <MetricMenuItemLink
                   href="/landelijk/vaccinaties"
                   icon={<VaccinatieIcon />}
-                  title={siteText.vaccinaties.titel_kpi}
+                  title={siteText.vaccinaties.titel_sidebar}
                 >
                   <SidebarMetric
                     data={siteText.vaccinaties.data}
