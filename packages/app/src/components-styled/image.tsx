@@ -1,6 +1,6 @@
+import { imageResizeTargets } from '@corona-dashboard/common';
 import { findClosestSize } from '~/utils/findClosestSize';
 import styled from 'styled-components/';
-import { imageResizeTargets } from '@corona-dashboard/common';
 
 type ImageProps = {
   src: string;
@@ -31,7 +31,10 @@ export function Image(props: ImageProps) {
     .join(', ');
 
   // filename contains a leading slash.
-  const url = `/cms${filename}-${findClosestSize(width)}.${extension}`;
+  const url = `/cms${filename}-${findClosestSize(
+    width,
+    imageResizeTargets
+  )}.${extension}`;
 
   return (
     <Img

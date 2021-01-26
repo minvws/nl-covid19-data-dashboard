@@ -1,8 +1,6 @@
-import { imageResizeTargets } from '@corona-dashboard/common/src/config';
-
 // find closest resized element
-export function findClosestSize(width: number) {
-  return imageResizeTargets.reduce((a: number, b: number) => {
+export function findClosestSize(width: number, list: number[]) {
+  return list.reduce((a: number, b: number) => {
     const aDiff = Math.abs(a - width);
     const bDiff = Math.abs(b - width);
 
