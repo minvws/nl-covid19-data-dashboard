@@ -46,7 +46,7 @@ export function TopicalChoroplethContainer({
       flexDirection="column"
       css={css({ position: 'relative' })}
       pr={{ md: '50%' }}
-      minHeight={{ sm: '650px' }}
+      minHeight={{ md: '650px' }}
     >
       <Box mb={3}>
         <Heading
@@ -60,9 +60,9 @@ export function TopicalChoroplethContainer({
 
       <Box
         p={{ _: 0, lg: 4 }}
-        width={{ sm: '45%' }}
+        width={{ md: '45%' }}
         css={css({
-          position: asResponsiveArray({ sm: 'absolute' }),
+          position: asResponsiveArray({ md: 'absolute' }),
           top: 0,
           right: 4,
         })}
@@ -72,7 +72,7 @@ export function TopicalChoroplethContainer({
 
       <Box
         display="flex"
-        flexDirection={{ _: 'column', sm: 'column-reverse' }}
+        flexDirection={{ _: 'column', md: 'column-reverse' }}
         maxWidth={{ md: 'maxWidthText' }}
         spacing={4}
       >
