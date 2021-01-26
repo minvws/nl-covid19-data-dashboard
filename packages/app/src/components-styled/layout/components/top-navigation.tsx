@@ -60,7 +60,7 @@ export function TopNavigation() {
                 {text.nav.links.actueel}
               </NavItem>
               <NavItem
-                href="/landelijk/positief-geteste-mensen"
+                href="/landelijk/vaccinaties"
                 isActive={router.pathname.startsWith('/landelijk')}
               >
                 {text.nav.links.index}
