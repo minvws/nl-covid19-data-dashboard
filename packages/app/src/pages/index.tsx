@@ -7,7 +7,6 @@ import { Box } from '~/components-styled/base';
 import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
 import { MaxWidth } from '~/components-styled/max-width';
-import { NewsMessage } from '~/components-styled/news-message';
 import { QuickLinks } from '~/components-styled/quick-links';
 import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
@@ -83,7 +82,6 @@ export const getStaticProps = createGetStaticProps(
 const Home: FCWithLayout<typeof getStaticProps> = (props) => {
   const { text: siteText, data, choropleth, content, lastGenerated } = props;
   const router = useRouter();
-  const notificatie = siteText.notificatie;
   const text = siteText.nationaal_actueel;
 
   const dataInfectedTotal = data.tested_overall;
@@ -185,16 +183,6 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                 },
                 { href: '/gemeente', text: text.quick_links.links.gemeente },
               ]}
-            />
-
-            <NewsMessage
-              imageSrc="images/toelichting-afbeelding.png"
-              linkText={notificatie.link.text}
-              href={notificatie.link.href}
-              message={notificatie.bericht}
-              publishedAt={notificatie.datum}
-              subtitle={notificatie.subtitel}
-              title={notificatie.titel}
             />
 
             {content.editorial && content.highlight?.article && (
