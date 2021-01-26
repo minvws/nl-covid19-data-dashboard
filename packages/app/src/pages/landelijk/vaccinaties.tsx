@@ -189,38 +189,38 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             config={[
               {
                 metricProperty: 'astra_zeneca',
-                color: '#E580E5',
+                color: '#007AEA',
                 fadedColor: '#aaa',
                 legendLabel: 'Astra Zeneca',
               },
 
               {
                 metricProperty: 'pfizer',
-                color: '#6BB7F5',
+                color: '#6AB4F9',
                 fadedColor: '#aaa',
                 legendLabel: 'BioTech Pfizer',
               },
               {
                 metricProperty: 'cure_vac',
-                color: '#8E6DEA',
+                color: '#C263EF',
                 fadedColor: '#aaa',
                 legendLabel: 'Curevac',
               },
               {
                 metricProperty: 'janssen',
-                color: '#BAB2FB',
+                color: '#C8AEFF',
                 fadedColor: '#aaa',
                 legendLabel: 'Janssen',
               },
               {
                 metricProperty: 'moderna',
-                color: '#20BAB4',
+                color: '#00BBB5',
                 fadedColor: '#aaa',
                 legendLabel: 'Moderna',
               },
               {
                 metricProperty: 'sanofi',
-                color: '#99E4E3',
+                color: '#96E4E4',
                 fadedColor: '#aaa',
                 legendLabel: 'Sanofi',
               },

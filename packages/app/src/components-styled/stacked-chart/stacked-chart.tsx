@@ -9,30 +9,17 @@ import { Group } from '@visx/group';
 import { scaleBand, scaleLinear, scaleOrdinal } from '@visx/scale';
 import { BarStack } from '@visx/shape';
 import { SeriesPoint } from '@visx/shape/lib/types';
+import { defaultStyles, useTooltip, useTooltipInPortal } from '@visx/tooltip';
+import { NumberValue } from 'd3-scale';
 import { isEmpty, set } from 'lodash';
+import { transparentize } from 'polished';
 import { MouseEvent, TouchEvent, useCallback, useMemo, useState } from 'react';
+import ResizeObserver from 'resize-observer-polyfill';
 import { Box } from '~/components-styled/base';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { Legenda, LegendItem } from '../legenda';
 import { TooltipContainer } from './components/tooltip';
-import ResizeObserver from 'resize-observer-polyfill';
-
-import {
-  useTooltip,
-  useTooltipInPortal,
-  defaultStyles,
-  Portal,
-  Tooltip,
-} from '@visx/tooltip';
-
-const tooltipStyles = {
-  ...defaultStyles,
-  padding: 0,
-  margin: 10,
-  zIndex: 100,
-};
-
 import {
   calculateSeriesMaximum,
   getSeriesData,
@@ -42,13 +29,19 @@ import {
   Value,
 } from './logic';
 
+const tooltipStyles = {
+  ...defaultStyles,
+  padding: 0,
+  margin: 10,
+  zIndex: 100,
+};
+
 const NUM_TICKS = 3;
 const NO_HOVER_INDEX = -1;
 
-type AnyTickFormatter = (value: any) => string;
-const tickFormatNumber: AnyTickFormatter = (v: number) => formatNumber(v);
-const tickFormatPercentage: AnyTickFormatter = (v: number) =>
-  `${formatPercentage(v)}%`;
+const tickFormatNumber = (v: NumberValue) => formatNumber(v.valueOf());
+const tickFormatPercentage = (v: NumberValue) =>
+  `${formatPercentage(v.valueOf())}%`;
 
 /**
  * A timeout prevents the tooltip from closing directly when you move out of the
@@ -119,21 +112,25 @@ export type StackedChartProps<T extends Value> = {
   valueAnnotation?: string;
   width?: number;
   height?: number;
-  formatDate?: typeof defaultFormatDate;
+  formatDateString?: typeof formatDateString;
   formatTooltip?: TooltipFormatter;
   isPercentage?: boolean;
 };
 
-export function StackedChart<T extends Value>({
-  values,
-  config,
-  width = 500,
-  height = 250,
-  valueAnnotation,
-  formatTooltip,
-  formatDate,
-  isPercentage,
-}: StackedChartProps<T>) {
+export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
+  /**
+   * Destructuring here and not above, so we can easily switch between optional
+   * passed-in formatter functions or the defaults.
+   */
+  const {
+    values,
+    config,
+    width = 500,
+    height = 250,
+    valueAnnotation,
+    isPercentage,
+  } = props;
+
   const {
     tooltipData,
     tooltipLeft = 0,
@@ -170,43 +167,36 @@ export function StackedChart<T extends Value>({
     });
   }, [config, metricProperties]);
 
-  /**
-   * Create a color scale for each possible hover state of the elements. This
-   * maps over config twice, because for every item/color a new scale is
-   * generate which contains the full range of colors but with adjustments.
-   */
-  const hoverColorScales = useMemo(
-    () =>
-      config.map((_, targetIndex) => {
-        const scaleColors = config.map((x, index) =>
-          index === targetIndex ? x.color : x.fadedColor
-        );
-
-        return scaleOrdinal<string, string>({
-          domain: metricProperties as string[],
-          range: scaleColors,
-        });
-      }),
-    [config, metricProperties]
+  const hoverColors = useMemo(
+    () => config.map((x) => transparentize(0.8, x.color)),
+    [config]
   );
 
+  /**
+   * We generate new legend items based on hover state. This is probably not a
+   * very efficient way of handling this. Maybe we should break open the Legend
+   * abstraction for this so that we can set the colors directly on the DOM
+   * elements similar to how bars are rendered.
+   */
   const legendaItems = useMemo(
     () =>
-      config.reverse().map(
-        (x) =>
-          ({
-            color:
-              hoveredIndex === NO_HOVER_INDEX
-                ? x.color
-                : hoveredIndex ===
-                  metricProperties.findIndex((v) => v === x.metricProperty)
-                ? x.color
-                : x.fadedColor,
-            label: x.legendLabel,
-            shape: 'square',
-          } as LegendItem)
-      ),
-    [config, hoveredIndex, metricProperties]
+      config.reverse().map((x) => {
+        const itemIndex = metricProperties.findIndex(
+          (v) => v === x.metricProperty
+        );
+
+        return {
+          color:
+            hoveredIndex === NO_HOVER_INDEX
+              ? x.color
+              : hoveredIndex === itemIndex
+              ? x.color
+              : hoverColors[itemIndex],
+          label: x.legendLabel,
+          shape: 'square',
+        } as LegendItem;
+      }),
+    [config, hoveredIndex, metricProperties, hoverColors]
   );
 
   const labelByKey = useMemo(
@@ -247,9 +237,12 @@ export function StackedChart<T extends Value>({
     polyfill: ResizeObserver,
   });
 
-  const defaultFormatTooltip = useCallback(
+  const formatTooltip = useCallback(
     (data: SeriesValue, key: string) => {
-      const dateString = defaultFormatDate(data);
+      const date = getDate(data);
+      const dateString = props.formatDateString
+        ? props.formatDateString(date)
+        : formatDateString(date);
 
       return (
         <div>
@@ -267,7 +260,7 @@ export function StackedChart<T extends Value>({
         </div>
       );
     },
-    [labelByKey, seriesSumByKey]
+    [labelByKey, seriesSumByKey, props]
   );
 
   /**
@@ -325,8 +318,6 @@ export function StackedChart<T extends Value>({
 
   const padding = defaultPadding;
 
-  // if (width < 10) return null;
-  // bounds
   const xMax = width - padding.left - padding.right;
   const yMax = height - padding.top - padding.bottom;
 
@@ -335,7 +326,7 @@ export function StackedChart<T extends Value>({
     height: height - padding.top - padding.bottom,
   };
 
-  const xScale = scaleBand<string>({
+  const xScale = scaleBand<Date>({
     domain: series.map(getDate),
     padding: 0.2,
   }).rangeRound([0, xMax]);
@@ -365,8 +356,9 @@ export function StackedChart<T extends Value>({
               tickValues={xScale.domain()}
               top={bounds.height}
               stroke={defaultColors.axis}
+              tickFormat={formatDateString}
               tickLabelProps={() => ({
-                dx: -25,
+                textAnchor: 'middle',
                 fill: defaultColors.axisLabels,
                 fontSize: 12,
               })}
@@ -395,24 +387,25 @@ export function StackedChart<T extends Value>({
               x={getDate}
               xScale={xScale}
               yScale={yScale}
-              color={
-                hoveredIndex == NO_HOVER_INDEX
-                  ? colorScale
-                  : hoverColorScales[hoveredIndex]
-              }
+              color={colorScale}
             >
               {(barStacks) =>
                 barStacks.map((barStack) =>
                   barStack.bars.map((bar) => {
+                    const barId = `bar-stack-${barStack.index}-${bar.index}`;
+                    const fillColor =
+                      hoveredIndex === NO_HOVER_INDEX
+                        ? bar.color
+                        : barStack.index === hoveredIndex
+                        ? bar.color
+                        : hoverColors[barStack.index];
+
                     /**
                      * Capture the bar data for the hover handler using a
                      * closure for each bar.
                      */
                     const handleHoverWithBar = (event: HoverEvent) =>
                       handleHover(event, bar, barStack.index);
-
-                    const barId = `bar-stack-${barStack.index}-${bar.index}`;
-                    // console.log('barId', barId, bar.x, bar.y);
 
                     return (
                       <rect
@@ -422,9 +415,9 @@ export function StackedChart<T extends Value>({
                         y={bar.y}
                         height={bar.height}
                         width={bar.width}
-                        fill={bar.color}
+                        fill={fillColor}
                         onClick={() => {
-                          console.log('click', JSON.stringify(bar));
+                          // console.log('click', JSON.stringify(bar));
                         }}
                         onMouseLeave={handleHoverWithBar}
                         onMouseMove={handleHoverWithBar}
@@ -445,9 +438,9 @@ export function StackedChart<T extends Value>({
             style={tooltipStyles}
           >
             <TooltipContainer borderColor="#01689B">
-              {formatTooltip
-                ? formatTooltip(tooltipData.bar.data, tooltipData.key)
-                : defaultFormatTooltip(tooltipData.bar.data, tooltipData.key)}
+              {props.formatTooltip
+                ? props.formatTooltip(tooltipData.bar.data, tooltipData.key)
+                : formatTooltip(tooltipData.bar.data, tooltipData.key)}
             </TooltipContainer>
           </TooltipInPortal>
         )}
@@ -461,18 +454,52 @@ export function StackedChart<T extends Value>({
 }
 
 /**
- * The getDate value is used to extra a date from the SeriesValue, for example
- * to determine the x-axis position. It should not return the x-axis label since
- * that one is not necessarily in alphabetically sorted order.
+ * The getDate value is used to extract the Date from the SeriesValue, for
+ * example to determine the xScale domain. It should not return the x-axis
+ * visual label since that one is not necessarily in alphabetically sorted order
+ * and that would mess up the rendering of elements.
  */
 function getDate(x: SeriesValue) {
   return x.__date;
 }
 
-function defaultFormatDate(x: SeriesValue) {
-  const year = x.__date.getFullYear();
-  const month = x.__date.getMonth();
-  const quarter = Math.floor(month / 4) + 1;
+function formatDateString(date: Date) {
+  const [, weekNumber] = getWeekNumber(date);
 
-  return `Q${quarter} ${year}`;
+  return `Week ${weekNumber}`;
+}
+
+/**
+ * Code inspired by
+ * https://stackoverflow.com/questions/6117814/get-week-of-year-in-javascript-like-in-php
+ *
+ * For a given date, get the ISO week number
+ *
+ * Based on information at:
+ *
+ *    http://www.merlyn.demon.co.uk/weekcalc.htm#WNR
+ *
+ * Algorithm is to find nearest thursday, it's year is the year of the week
+ * number. Then get weeks between that date and the first day of that year.
+ *
+ * Note that dates in one year can be weeks of previous or next year, overlap is
+ * up to 3 days.
+ *
+ * e.g. 2014/12/29 is Monday in week  1 of 2015 2012/1/1   is Sunday in week 52
+ *      of 2011
+ */
+function getWeekNumber(d: Date) {
+  // Copy date so don't modify original
+  d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+  // Set to nearest Thursday: current date + 4 - current day number Make
+  // Sunday's day number 7
+  d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
+  // Get first day of year
+  const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+  // Calculate full weeks to nearest Thursday
+  const weekNo = Math.ceil(
+    ((d.getTime() - yearStart.getTime()) / 86400000 + 1) / 7
+  );
+  // Return array of year and week number
+  return [d.getUTCFullYear(), weekNo];
 }
