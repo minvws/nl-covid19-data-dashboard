@@ -417,7 +417,8 @@ export interface NlVaccineAvailabilityValue {
   janssen: number;
   sanofi: number;
   date_of_insertion_unix: number;
-  date_unix: number;
+  date_start_unix?: number;
+  date_end_unix?: number;
 }
 
 export interface Regionaal {
@@ -650,6 +651,7 @@ export interface Regions {
   behavior: RegionsBehavior[];
   disability_care: RegionsDisabilityCare[];
   elderly_at_home: RegionsElderlyAtHome[];
+  vaccine: RegionsVaccine[];
 }
 export interface RegionsHospitalNice {
   date_unix: number;
@@ -742,4 +744,10 @@ export interface RegionsElderlyAtHome {
   date_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;
+}
+export interface RegionsVaccine {
+  date_unix: number;
+  vrcode: string;
+  coverage_percentage: number;
+  date_of_insertion_unix: number;
 }

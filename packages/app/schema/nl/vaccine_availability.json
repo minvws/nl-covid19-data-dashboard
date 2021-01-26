@@ -36,7 +36,10 @@
         "date_of_insertion_unix": {
           "type": "integer"
         },
-        "date_unix": {
+        "date_start_unix": {
+          "type": "integer"
+        },
+        "date_end_unix": {
           "type": "integer"
         }
       }

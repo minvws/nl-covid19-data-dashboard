@@ -127,6 +127,8 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
     [getFillColor, hasData, safetyRegionMunicipalCodes, selected]
   );
 
+  const hasSelectHander = !!onSelect;
+
   const hoverCallback = useCallback(
     (feature: Feature<MultiPolygon, MunicipalityProperties>, path: string) => {
       const { gemcode } = feature.properties;
@@ -140,7 +142,8 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
 
       return (
         <Path
-          hoverable
+          isHoverable
+          isClickable={hasSelectHander}
           id={gemcode}
           key={gemcode}
           d={path}
@@ -149,7 +152,13 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
         />
       );
     },
-    [selected, highlightSelection, safetyRegionMunicipalCodes, hasData]
+    [
+      selected,
+      highlightSelection,
+      safetyRegionMunicipalCodes,
+      hasData,
+      hasSelectHander,
+    ]
   );
 
   const onClick = (id: string) => {

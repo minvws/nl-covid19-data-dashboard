@@ -1959,5 +1959,19 @@
       "value_percentage_tooltip": "of the number of deceased persons is {{ageGroupRange}} years old",
       "age_group_range_tooltip": "{{ageGroupRange}} years old"
     }
+  },
+
+  "vaccine": {
+    "coverage_choropleth": {
+      "title": "Vaccinatiegraad in Nederland",
+      "description": "Deze kaart geeft inzicht in het aantal gevaccineerden per veiligheidsregio door de vaccinatiegraad ten aanzien van de bevolking die in aanmerking komt voor een vaccinatie.",
+      "legend_title": "Vaccinatiegraad (%)",
+      "bronnen": {
+        "rivm": {
+          "text": "RIVM",
+          "href": "#"
+        }
+      }
+    }
   }
 }
