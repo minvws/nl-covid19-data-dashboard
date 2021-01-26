@@ -29,6 +29,17 @@ export function DataSitemap() {
           <Text>{siteText.nationaal_actueel.data_sitemap_toelichting}</Text>
         </Box>
         <Box display="flex" flexDirection="row" justifyContent="space-between">
+        <Box spacing={2}>
+            <StyledHeader>
+              {siteText.nationaal_layout.headings.vaccinaties}
+            </StyledHeader>
+            <List>
+              <SitemapItem
+                href="/landelijk/vaccinaties"
+                text={siteText.vaccinaties.titel_sidebar}
+              />
+            </List>
+          </Box>
           <Box spacing={2}>
             <StyledHeader>
               {siteText.nationaal_layout.headings.besmettingen}
