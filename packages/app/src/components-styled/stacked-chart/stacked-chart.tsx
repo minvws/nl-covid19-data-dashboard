@@ -19,7 +19,7 @@ import { Box } from '~/components-styled/base';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { Legenda, LegendItem } from '../legenda';
-import { TooltipContainer } from './components/tooltip';
+import { InlineText } from '../typography';
 import {
   calculateSeriesMaximum,
   getSeriesData,
@@ -28,11 +28,13 @@ import {
   SeriesValue,
   Value,
 } from './logic';
+import css from '@styled-system/css';
+import styled from 'styled-components';
 
 const tooltipStyles = {
   ...defaultStyles,
   padding: 0,
-  margin: 10,
+  // marginTop: 10,
   zIndex: 100,
 };
 
@@ -86,7 +88,7 @@ type HoverEvent = TouchEvent<SVGElement> | MouseEvent<SVGElement>;
 export const defaultPadding = {
   top: 10,
   right: 20,
-  bottom: 30,
+  bottom: 20,
   left: 30,
 } as const;
 
@@ -102,7 +104,6 @@ const defaultColors = {
 export type Config<T extends Value> = {
   metricProperty: keyof T;
   color: string;
-  fadedColor: string;
   legendLabel: string;
 };
 
@@ -237,30 +238,44 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
     polyfill: ResizeObserver,
   });
 
+  /**
+   * This format function should be moved outside of the chart if we want to
+   * this component reusable. But it depends on a lot of calculated data like
+   * seriesSum and labelByKey, so it would make the calling context quite messy
+   * if not done in a good way.
+   *
+   * I'm leaving that as an exercise for later.
+   */
   const formatTooltip = useCallback(
     (data: SeriesValue, key: string) => {
       const date = getDate(data);
-      const dateString = props.formatDateString
-        ? props.formatDateString(date)
-        : formatDateString(date);
+      // const dateString = props.formatDateString
+      //   ? props.formatDateString(date)
+      //   : formatDateString(date);
+
+      const [year, weekNumber] = getWeekNumber(date);
 
       return (
-        <div>
-          <div>
-            <strong>{labelByKey[key]}:</strong>
+        <Box p={2}>
+          <Box /* mb={3} */>
+            <InlineText fontWeight="bold" /* mb={2} */>
+              {labelByKey[key]}:
+            </InlineText>
             {/* @TODO move mln to lokalize */}
             {` ${formatPercentage(seriesSumByKey[key])} mln totaal`}
-          </div>
+          </Box>
 
           <div>
-            <strong>{dateString}:</strong>
+            <InlineText fontWeight="bold">
+              {`Week ${weekNumber} ${year}`}:
+            </InlineText>
             {/* @TODO move mln to lokalize */}
             {` ${formatPercentage(data[key])} mln`}
           </div>
-        </div>
+        </Box>
       );
     },
-    [labelByKey, seriesSumByKey, props]
+    [labelByKey, seriesSumByKey]
   );
 
   /**
@@ -416,9 +431,6 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
                         height={bar.height}
                         width={bar.width}
                         fill={fillColor}
-                        onClick={() => {
-                          // console.log('click', JSON.stringify(bar));
-                        }}
                         onMouseLeave={handleHoverWithBar}
                         onMouseMove={handleHoverWithBar}
                         onTouchStart={handleHoverWithBar}
@@ -437,7 +449,7 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
             left={tooltipLeft}
             style={tooltipStyles}
           >
-            <TooltipContainer borderColor="#01689B">
+            <TooltipContainer>
               {props.formatTooltip
                 ? props.formatTooltip(tooltipData.bar.data, tooltipData.key)
                 : formatTooltip(tooltipData.bar.data, tooltipData.key)}
@@ -503,3 +515,24 @@ function getWeekNumber(d: Date) {
   // Return array of year and week number
   return [d.getUTCFullYear(), weekNo];
 }
+
+/**
+ * TooltipContainer from LineChart did not seem to be very compatible with the
+ * design for this chart, so this is something to look at later.
+ */
+export const TooltipContainer = styled.div(
+  css({
+    pointerEvents: 'none',
+    whiteSpace: 'nowrap',
+    minWidth: 72,
+    color: 'body',
+    backgroundColor: 'white',
+    lineHeight: 2,
+    borderColor: 'border',
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    px: 2,
+    py: 1,
+    fontSize: 1,
+  })
+);

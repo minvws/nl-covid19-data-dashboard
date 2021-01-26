@@ -124,6 +124,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
         >
           <StackedChart
             width={700}
+            valueAnnotation={siteText.waarde_annotaties.x_miljoen}
             values={[
               {
                 pfizer: 10.2,
@@ -190,38 +191,32 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
               {
                 metricProperty: 'astra_zeneca',
                 color: '#007AEA',
-                fadedColor: '#aaa',
                 legendLabel: 'Astra Zeneca',
               },
 
               {
                 metricProperty: 'pfizer',
                 color: '#6AB4F9',
-                fadedColor: '#aaa',
                 legendLabel: 'BioTech Pfizer',
               },
               {
                 metricProperty: 'cure_vac',
                 color: '#C263EF',
-                fadedColor: '#aaa',
                 legendLabel: 'Curevac',
               },
               {
                 metricProperty: 'janssen',
                 color: '#C8AEFF',
-                fadedColor: '#aaa',
                 legendLabel: 'Janssen',
               },
               {
                 metricProperty: 'moderna',
                 color: '#00BBB5',
-                fadedColor: '#aaa',
                 legendLabel: 'Moderna',
               },
               {
                 metricProperty: 'sanofi',
                 color: '#96E4E4',
-                fadedColor: '#aaa',
                 legendLabel: 'Sanofi',
               },
             ]}

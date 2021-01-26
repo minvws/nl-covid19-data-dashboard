@@ -1196,7 +1196,8 @@
     "url": "https://coronadashboard.government.nl/veelgestelde-vragen"
   },
   "waarde_annotaties": {
-    "riool_normalized": "x100 miljard"
+    "riool_normalized": "x100 miljard",
+    "x_miljoen": "x miljoen"
   },
   "gedrag_onderwerpen": {
     "wash_hands": "Was vaak je handen",

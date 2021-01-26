@@ -123,6 +123,12 @@ const radii = [0, 5, 10];
 
 const shadows = {
   tile: `0 -1px 1px 0 ${colors.shadow}, 0 1px 1px 0 ${colors.shadow}, 0 2px 2px 0 ${colors.shadow}, 0 4px 4px 0 ${colors.shadow}, 0 6px 6px 0 ${colors.shadow}`,
+  /**
+   * @TODO define with transparent colors, otherwise it's not usable. But can we do
+   * that with IE11 in mind? Currently the stacked-bar-chart uses the Visx
+   * tooltip which has a subtle drop shadow built-in.
+   */
+  tooltip: `0 -1px 1px 0 ${colors.shadow}, 0 1px 1px 0 ${colors.shadow}, 0 2px 2px 0 ${colors.shadow}, 0 4px 4px 0 ${colors.shadow}, 0 6px 6px 0 ${colors.shadow}`,
 } as const;
 
 const theme = {
