@@ -621,7 +621,7 @@
     "select_region_municipality_legend": "Selecteer een gemeente:",
     "select_region_type_legend": "Toon cijfers van:",
     "your_municipality": "Gemeente",
-    "belangrijk_bericht": "Er geldt een [landelijke lockdown](/landelijk/maatregelen) tot en met in ieder geval 9 februari."
+    "belangrijk_bericht": "Er geldt een [landelijke lockdown](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen) tot en met in ieder geval 9 februari."
   },
   "common": {
     "metadata": {
@@ -2129,7 +2129,7 @@
   },
   "common_actueel": {
     "terug_naar_landelijk": "Terug naar landelijke situtatie",
-    "laatst_bijgewerkt": "Laatst bijgewerkt: {{date}} om {{time}}"
+    "laatst_bijgewerkt": "Het dashboard wordt dagelijks rond 15:20 voorzien van nieuwe data."
   },
   "nationaal_actueel": {
     "title": "Actuele situatie in {{the_netherlands}}",
@@ -2315,26 +2315,26 @@
     "data_driven_texts": {
       "infected_people_total": {
         "value": {
-          "zero": "{{newDate}} there were no newly reported infected people.",
-          "singular": "{{newDate}} there was {{propertyValue}} newly reported infected person.",
-          "plural": "{{newDate}} there were {{propertyValue}} newly reported infected people."
+          "zero": "Op {{newDate}} zijn er geen positief geteste personen gemeld.",
+          "singular": "Op {{newDate}} was er {{propertyValue}} positief getest persoon.",
+          "plural": "Op {{newDate}} waren er {{propertyValue}} positief geteste mensen."
         },
         "difference": {
-          "zero": "This is the same as {{oldDate}}",
-          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+          "zero": "Dit is dezelfde waarde als op {{oldDate}}.",
+          "singular": "Dit is {{differenceIndicator}} dan op {{oldDate}}.",
+          "plural": "Dit is {{differenceIndicator}} dan op {{oldDate}}."
         }
       },
       "intake_hospital_ma": {
         "value": {
           "zero": "{{newDate}} there were no newly reported hospital intakes.",
           "singular": "{{newDate}} there was {{propertyValue}} newly reported hospital intake.",
-          "plural": "{{newDate}} there were {{propertyValue}} newly reported hospital intakes."
+          "plural": "Op {{newDate}} zijn er {{propertyValue}} ziekenhuisopnames gemeldt."
         },
         "difference": {
-          "zero": "This is the same as {{oldDate}}",
-          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+          "zero": "Dit is dezelfde waarde als op {{oldDate}}.",
+          "singular": "Dit is {{differenceIndicator}} dan op {{oldDate}}.",
+          "plural": "Dit is {{differenceIndicator}} dan op {{oldDate}}."
         }
       },
       "intake_intensivecare_ma": {
