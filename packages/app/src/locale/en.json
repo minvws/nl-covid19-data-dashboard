@@ -9,8 +9,8 @@
     "title": "Last updated"
   },
   "notificatie": {
-    "titel": "New COVID-19 variant overshadows more positive developments",
-    "bericht": "A moderately positive overview can be observed in the week of 13 to 19 January, as an effect of the lockdown that started on 15 December. In that week, the reported number of people who tested positive for COVID-19 decreased by 21.5% compared to the week before, dropping to 38.776 newly reported COVID-19 infections. This overview is overshadowed by the rising number of cases involving the SARS-CoV-2 variant that resulted in a massive influx of patients in hospitals in the United Kingdom and Ireland. It is estimated that in the Netherlands about 10% of the people who became infected last week have the more contagious UK variant. That is twice as many compared to the week before that. \nWe are facing two variants of the virus that seem to be spreading in the Netherlands at different speeds. As a result, there are essentially two separate COVID-19 epidemics: one epidemic involving the ‘old’ variant, in which infections are decreasing, and another epidemic involving the UK variant, in which infections are increasing.",
+    "titel": "UK variant gains terrain in the Netherlands",
+    "bericht": "The number of newly tested COVID positives slightly decreased to 35.635 cases in the week of 20 to 26 January compared to the week before. This overview is overshadowed by the rising number of cases involving the SARS-CoV-2 variant that resulted in a massive influx of patients in hospitals in the United Kingdom and Ireland. It is estimated that the people that got infected with COVID-19 in the past week (20 to 26 January), more than a third is infected with the UK variant. We are facing two variants of the virus that seem to be spreading in the Netherlands at different speeds. As a result, there are essentially two separate COVID-19 epidemics: one epidemic involving the ‘old’ variant, in which infections are decreasing, and another epidemic involving the UK variant, in which infections are increasing.",
     "link": {
       "text": "View the full message from the RIVM",
       "href": "https://www.rivm.nl/en/news/rise-in-new-COVID-19-variants-overshadows-more-positive-developments"
@@ -67,7 +67,7 @@
       "text": "Stichting NICE"
     },
     "titel": "Intensive care admissions by day",
-    "pagina_toelichting": "Number of people with COVID-19 admitted to hospital daily. This figure shows how many hospital admissions are reported per day, including patients from outside the hospital admitted directly to the ICU. It may include hospital admissions that occurred in previous days.",
+    "pagina_toelichting": "Daily number of COVID-19 patients admitted to a hospital intensive care unit (ICU), directly or from a regular hospital ward. To avoid doubles only the first IC admission of a patient counts. This number gives information about the severity of the disease en helps track the development of the epidemic.",
     "barscale_titel": "Intensive care admissions per day",
     "barscale_screenreader_text": "{{value}} intensive care-admissions by day. Alert value: {{signaalwaarde}} admissions per day.",
     "extra_uitleg": "Number of confirmed COVID-19 cases who are admitted to a hospital intensive care unit (ICU) per day. This figure is an average for the daily admissions over the past three days.\n\nNote: Although hospitals try to register COVID-19 patients promptly, it is likely that the numbers of the last days are yet incomplete.",
@@ -997,7 +997,7 @@
   },
   "laatste_ontwikkelingen": {
     "title": "Latest developments",
-    "menu_subtitle": "Increase of new COVID-19 variant",
+    "menu_subtitle": "UK variant gains terrain in the Netherlands",
     "alle_cijfers_header": "Want to see all data?",
     "alle_cijfers_link": "View all"
   },
