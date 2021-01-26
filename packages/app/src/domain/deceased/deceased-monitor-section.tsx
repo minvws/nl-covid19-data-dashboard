@@ -52,6 +52,10 @@ export function DeceasedMonitorSection({
         metadata={{ source: text.bronnen.cbs }}
         title={text.deceased_monitor_chart_title}
         description={text.deceased_monitor_chart_description}
+        /**
+         * @TODO add real aria description in lokalize
+         */
+        ariaDescription={text.deceased_monitor_chart_description}
       >
         <DeceasedMonitor
           values={data.values}

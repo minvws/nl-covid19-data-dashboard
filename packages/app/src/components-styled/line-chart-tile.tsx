@@ -9,11 +9,11 @@ import { assert } from '~/utils/assert';
 interface LineChartTileProps<T extends Value> extends LineChartProps<T> {
   title: string;
   metadata: MetadataProps;
-  description?: string;
+  description: string;
   timeframeOptions?: TimeframeOption[];
   timeframeInitialValue?: TimeframeOption;
   footer?: React.ReactNode;
-  ariaDescription?: string;
+  ariaDescription: string;
 }
 
 export function LineChartTile<T extends Value>({

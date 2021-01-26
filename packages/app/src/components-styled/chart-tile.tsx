@@ -8,12 +8,13 @@ import { MetadataProps } from './metadata';
 import { Heading } from './typography';
 import { useUniqueId } from '~/utils/useUniqueId';
 import { assert } from '~/utils/assert';
+import { isEmpty } from 'lodash';
 interface ChartTileProps {
   children: React.ReactNode;
   metadata: MetadataProps;
   title: string;
-  description?: React.ReactNode;
-  ariaDescription?: string;
+  description: React.ReactNode;
+  ariaDescription: string;
   uniqueId?: string;
 }
 
@@ -21,7 +22,7 @@ interface ChartTileWithTimeframeProps extends Omit<ChartTileProps, 'children'> {
   children: (timeframe: TimeframeOption) => React.ReactNode;
   timeframeOptions?: TimeframeOption[];
   timeframeInitialValue?: TimeframeOption;
-  ariaDescription?: string;
+  ariaDescription: string;
   uniqueId?: string;
 }
 
@@ -32,9 +33,15 @@ export function ChartTile({
   children,
   ariaDescription,
 }: ChartTileProps) {
-  assert(description, `Chart ${title} requires a description.`);
-
-  assert(ariaDescription, `Chart ${title} requires an ariaDescription.`);
+  /**
+   * Description is now used as a fallback to ariaDescription. Maybe we do not
+   * want that, in which case we'll need another assert just for ariaDescription.
+   */
+  assert(!isEmpty(description), `Chart ${title} requires a description.`);
+  assert(
+    !isEmpty(ariaDescription),
+    `Chart ${title} requires an aria description.`
+  );
 
   const uniqueId = useUniqueId();
 
@@ -91,12 +98,12 @@ function ChartTileHeader({
   ariaDescription,
 }: {
   title: string;
-  description?: React.ReactNode;
+  description: React.ReactNode;
   timeframe?: TimeframeOption;
   timeframeOptions?: TimeframeOption[];
   onTimeframeChange?: (timeframe: TimeframeOption) => void;
   uniqueId?: string;
-  ariaDescription?: string;
+  ariaDescription: string;
 }) {
   return (
     <Box
