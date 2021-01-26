@@ -11,6 +11,8 @@ import text from '~/locale';
 import { formatNumber } from '~/utils/formatNumber';
 import styled from 'styled-components';
 import css from '@styled-system/css';
+import { LinkWithIcon } from '~/components-styled/link-with-icon';
+import ArrowIcon from '~/assets/arrow.svg';
 
 type MiniTrendTileProps<T extends Value> = {
   icon: JSX.Element;
@@ -18,10 +20,11 @@ type MiniTrendTileProps<T extends Value> = {
   text: ReactNode;
   trendData: T[];
   metricProperty: NumberProperty<T>;
+  href: string;
 };
 
 export function MiniTrendTile<T extends Value>(props: MiniTrendTileProps<T>) {
-  const { icon, title, text, trendData, metricProperty } = props;
+  const { icon, title, text, trendData, metricProperty, href } = props;
 
   const value = trendData[trendData.length - 1][metricProperty];
 
@@ -38,7 +41,15 @@ export function MiniTrendTile<T extends Value>(props: MiniTrendTileProps<T>) {
         mb={2}
         lineHeight={{ md: 0, lg: 2 }}
       >
-        {title}
+        <LinkWithIcon
+          href={href}
+          icon={<ArrowIcon css={css({ transform: 'rotate(-90deg)' })} />}
+          iconPlacement="right"
+          fontWeight="bold"
+          headingLink
+          >
+              {title}
+          </LinkWithIcon>
       </Heading>
       <Text fontSize="2.75rem" fontWeight="bold" my={0} lineHeight={0} mb={2}>
         {formatNumber((value as unknown) as number)}
