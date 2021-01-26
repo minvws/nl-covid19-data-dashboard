@@ -41,7 +41,7 @@ export function Metadata({ date, source }: MetadataProps) {
               <ExternalLink href={source.href}>{source.text}</ExternalLink>
             )}
             {!source.href && (
-              <Text css={css({ display: 'inline-block', my: '0' })}>
+              <Text css={css({ display: 'inline-block', my: '0', fontSize: 'inherit' })}>
                 {source.text}
               </Text>
             )}
