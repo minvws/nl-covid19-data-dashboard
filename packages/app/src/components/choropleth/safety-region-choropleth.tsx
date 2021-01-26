@@ -19,6 +19,7 @@ import {
   SafetyRegionProperties,
 } from '@corona-dashboard/common';
 import { countryGeo, regionGeo } from './topology';
+import { colors } from '~/style/theme';
 
 type SafetyRegionChoroplethProps<T, K extends RegionsMetricName> = {
   data: Pick<Regions, K>;
@@ -104,7 +105,7 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
           key={vrcode}
           d={path}
           fill={fill}
-          stroke={isWhiteFill ? '#c4c4c4' : '#fff'}
+          stroke={isWhiteFill ? colors.silver : '#fff'}
           strokeWidth={1}
         />
       );

@@ -21,7 +21,7 @@ import { Box } from '../base';
   This fixes odd skip-link behavior in IE11
 
   Since this hack makes the part of the sidebar unclickable because the padding is overlapping it.
-  This is fixed by first setting a pointer even none to the HeaderBox element if there is a skip-link and create 
+  This is fixed by first setting a pointer even none to the HeaderBox element if there is a skip-link and create
   a new child element with the PointerEventBox that resets the pointer-events again so it works as expected.
 */
 const HeaderBox = styled.header<{

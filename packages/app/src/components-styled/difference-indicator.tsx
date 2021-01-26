@@ -24,17 +24,23 @@ const text = siteText.toe_en_afname;
 
 interface DifferenceIndicatorProps {
   value: DifferenceDecimal | DifferenceInteger;
-  isContextSidebar?: boolean;
   isDecimal?: boolean;
+  context?: 'sidebar' | 'tile' | 'inline';
   staticTimespan?: string;
 }
 
 export function DifferenceIndicator(props: DifferenceIndicatorProps) {
-  const { isContextSidebar, value, isDecimal, staticTimespan } = props;
+  const { value, isDecimal, context, staticTimespan } = props;
 
-  return isContextSidebar
-    ? renderSidebarIndicator(value)
-    : renderTileIndicator(value, isDecimal, staticTimespan);
+  if (context === 'sidebar') {
+    return renderSidebarIndicator(value);
+  }
+
+  if (context === 'inline') {
+    return renderInlineIndicator(value, isDecimal);
+  }
+
+  return renderTileIndicator(value, isDecimal, staticTimespan);
 }
 
 function renderSidebarIndicator(value: DifferenceDecimal | DifferenceInteger) {
@@ -65,6 +71,54 @@ function renderSidebarIndicator(value: DifferenceDecimal | DifferenceInteger) {
       <IconContainer color="lightGray">
         <IconGelijk />
       </IconContainer>
+    </Container>
+  );
+}
+
+function renderInlineIndicator(
+  value: DifferenceDecimal | DifferenceInteger,
+  isDecimal?: boolean
+) {
+  const { difference } = value;
+
+  const differenceFormattedString = isDecimal
+    ? formatPercentage(Math.abs(difference))
+    : formatNumber(Math.abs(difference));
+
+  if (difference > 0) {
+    const splitText = text.toename.split(' ');
+
+    return (
+      <Container>
+        <Span fontWeight="bold">{differenceFormattedString}</Span>
+        <IconContainer color="red">
+          <IconUp />
+        </IconContainer>
+        <Span>{splitText[0]}</Span>
+      </Container>
+    );
+  }
+
+  if (difference < 0) {
+    const splitText = text.afname.split(' ');
+
+    return (
+      <Container>
+        <Span fontWeight="bold">{differenceFormattedString}</Span>
+        <IconContainer color="data.primary">
+          <IconDown />
+        </IconContainer>
+        <Span>{splitText[0]}</Span>
+      </Container>
+    );
+  }
+
+  return (
+    <Container>
+      <IconContainer color="lightGray">
+        <IconGelijk />
+      </IconContainer>
+      <Span>{text.gelijk}</Span>
     </Container>
   );
 }
@@ -144,7 +198,7 @@ const IconContainer = styled(Span)(
   })
 );
 
-const Container = styled.div(
+const Container = styled.span(
   css({
     whiteSpace: 'nowrap',
     display: 'inline-block',

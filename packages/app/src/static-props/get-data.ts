@@ -1,5 +1,4 @@
 import { GetStaticPropsContext } from 'next';
-import path from 'path';
 import safetyRegions from '~/data/index';
 import municipalities from '~/data/municipalSearchData';
 import { client, localize } from '~/lib/sanity';
@@ -14,8 +13,8 @@ import {
   sortNationalTimeSeriesInDataInPlace,
   sortRegionalTimeSeriesInDataInPlace,
 } from '@corona-dashboard/common';
+import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
 import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
-import { loadJsonFromFile } from './utils/load-json-from-file';
 
 /**
  * Usage:
@@ -30,15 +29,9 @@ import { loadJsonFromFile } from './utils/load-json-from-file';
  */
 
 const json = {
-  nl: loadJsonFromFile<National>(
-    path.join(process.cwd(), 'public', 'json', 'NL.json')
-  ),
-  vrCollection: loadJsonFromFile<Regions>(
-    path.join(process.cwd(), 'public', 'json', 'VR_COLLECTION.json')
-  ),
-  gmCollection: loadJsonFromFile<Municipalities>(
-    path.join(process.cwd(), 'public', 'json', 'GM_COLLECTION.json')
-  ),
+  nl: loadJsonFromDataFile<National>('NL.json'),
+  vrCollection: loadJsonFromDataFile<Regions>('VR_COLLECTION.json'),
+  gmCollection: loadJsonFromDataFile<Municipalities>('GM_COLLECTION.json'),
 };
 
 export function getLastGeneratedDate() {
@@ -47,8 +40,14 @@ export function getLastGeneratedDate() {
   };
 }
 
-export function createGetContent<T>(query: string) {
-  return async () => {
+export function createGetContent<T>(
+  queryOrQueryGetter: string | ((context: GetStaticPropsContext) => string)
+) {
+  return async (context: GetStaticPropsContext) => {
+    const query =
+      typeof queryOrQueryGetter === 'function'
+        ? queryOrQueryGetter(context)
+        : queryOrQueryGetter;
     const rawContent = await client.fetch<T>(query);
     const content = localize(rawContent, [targetLanguage, 'nl']);
 
@@ -76,9 +75,7 @@ export function getVrData(context: GetStaticPropsContext) {
 
   if (!code) return null;
 
-  const data = loadJsonFromFile<Regionaal>(
-    path.join(process.cwd(), 'public', 'json', `${code}.json`)
-  );
+  const data = loadJsonFromDataFile<Regionaal>(`${code}.json`);
 
   sortRegionalTimeSeriesInDataInPlace(data);
 
@@ -92,9 +89,7 @@ export function getGmData(context: GetStaticPropsContext) {
 
   if (!code) return null;
 
-  const data = loadJsonFromFile<Municipal>(
-    path.join(process.cwd(), 'public', 'json', `${code}.json`)
-  );
+  const data = loadJsonFromDataFile<Municipal>(`${code}.json`);
 
   const municipalityName =
     municipalities.find((r) => r.gemcode === code)?.name || '';

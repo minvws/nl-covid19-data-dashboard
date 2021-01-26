@@ -1,12 +1,76 @@
+import { PortableTextEntry } from '@sanity/block-content-to-react';
+
 export type CollapsibleList = {
-  content: {
-    _key: string;
-    _type: string;
-    content: unknown[] | null;
-    title: string | null;
-  };
+  content: PortableTextEntry | null;
   title: string;
 };
+
+export type Editorial = Record<string, never> & Article;
+
+export interface Article {
+  title: string;
+  slug: {
+    _key: string;
+    _type: 'slug';
+    current: string;
+  };
+  cover: ImageBlock;
+  summary: Block;
+  intro: Block;
+  content: RichContentBlock[];
+  metaDescription: string;
+  publicationDate: string;
+  isHighlighted: boolean;
+}
+
+interface ImageBlock {
+  _type: 'image';
+  asset: {
+    _ref: string;
+    _type: 'reference';
+  };
+  alt: string;
+  crop?: {
+    _type: 'sanity.imageCrop';
+    top: string;
+    right: string;
+    bottom: string;
+    left: string;
+  };
+  hotspot?: {
+    _type: 'sanity.imageHotspot';
+    height: number;
+    width: number;
+    x: number;
+    y: number;
+  };
+}
+
+type RichContentBlock =
+  | Block
+  | RichContentImageBlock
+  | RichContentLineChartBlock;
+
+// @TODO more properties are needed
+interface Block {
+  _key: string;
+  _type: string;
+  children: PortableTextEntry[];
+}
+
+// @TODO more properties are needed
+interface RichContentImageBlock extends ImageBlock {
+  isFullWidth?: boolean;
+  caption?: string;
+}
+
+// @TODO more properties are needed
+interface RichContentLineChartBlock {
+  _key: string;
+  _type: 'lineChart';
+  metricName: string;
+  metricProperty: string;
+}
 
 export type RoadmapData = {
   _createdAt: string;
@@ -43,7 +107,7 @@ export type LockdownData = {
   showLockdown: boolean;
   message: {
     title: string;
-    description: unknown[] | null;
+    description: PortableTextEntry[] | null;
   };
   title: string;
 };

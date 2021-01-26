@@ -6,7 +6,7 @@ export type RegionSelectionHandler = (context: SafetyRegionProperties) => void;
 
 export function createSelectRegionHandler(
   router: NextRouter,
-  pageName: RegioPageName
+  pageName: RegioPageName = 'actueel'
 ): RegionSelectionHandler {
   return (context: SafetyRegionProperties) => {
     router.push(`/veiligheidsregio/${context.vrcode}/${pageName}`);

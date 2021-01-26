@@ -139,17 +139,11 @@ export function LineChart<T extends Value>({
   const yDomain = useMemo(() => [0, yMax], [yMax]);
 
   const padding: ChartPadding = useMemo(() => {
-    const { top, right, bottom, left } = {
-      ...defaultPadding,
-      ...overridePadding,
-    };
-
     return {
-      top,
-      right,
-      bottom,
+      ...defaultPadding,
       // Increase space for larger labels
-      left: Math.max(yMax.toFixed(0).length * 10, left),
+      left: Math.max(yMax.toFixed(0).length * 10, defaultPadding.left),
+      ...overridePadding,
     };
   }, [overridePadding, yMax]);
 

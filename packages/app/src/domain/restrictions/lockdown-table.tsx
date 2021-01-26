@@ -141,7 +141,8 @@ function DesktopLockdownTable(props: LockdownTableData) {
                             },
                           })}
                         >
-                          {restriction.icon ? (
+                          {restriction.icon &&
+                          restrictionIcons[restriction.icon] ? (
                             getIcon(restrictionIcons[restriction.icon], color)
                           ) : (
                             <Box size={36} />
@@ -163,6 +164,6 @@ function DesktopLockdownTable(props: LockdownTableData) {
   );
 }
 
-function getIcon(IconComponent: any | undefined, color: string) {
+function getIcon(IconComponent: any, color: string) {
   return <IconComponent color={color} />;
 }
