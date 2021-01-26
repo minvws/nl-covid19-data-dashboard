@@ -654,7 +654,8 @@
     "vr_plural": "",
     "gisteren": "",
     "vandaag": "",
-    "read_more": ""
+    "read_more": "",
+    "absolute_date_template": "on {{date}}"
   },
   "seoHead": {
     "default_description": "Information on the development of the coronavirus in The Netherlands.",
