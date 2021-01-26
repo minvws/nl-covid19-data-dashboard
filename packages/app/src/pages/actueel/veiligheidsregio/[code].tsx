@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import GetestIcon from '~/assets/test.svg';
 import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
+import { ArticleSummary } from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
 import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
@@ -15,15 +16,19 @@ import { createSelectRegionHandler } from '~/components/choropleth/select-handle
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
 import { FCWithLayout, getDefaultLayout } from '~/domain/layout/layout';
 import { DataSitemap } from '~/domain/topical/data-sitemap';
+import { EditorialSummary } from '~/domain/topical/editorial-teaser';
+import { EditorialTile } from '~/domain/topical/editorial-tile';
 import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
 import { TopicalChoroplethContainer } from '~/domain/topical/topical-choropleth-container';
 import { TopicalPageHeader } from '~/domain/topical/topical-page-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
+import { targetLanguage } from '~/locale';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
+  createGetContent,
   getLastGeneratedDate,
   getText,
   getVrData,
@@ -41,11 +46,21 @@ export const getStaticProps = createGetStaticProps(
   getVrData,
   createGetChoroplethData({
     vr: ({ escalation_levels }) => ({ escalation_levels }),
-  })
+  }),
+  createGetContent<{
+    editorial: EditorialSummary;
+    highlight: { article: ArticleSummary };
+  }>(
+    `{
+    // Retrieve the latest 3 articles with the highlighted article filtered out:
+    'editorial': *[_type == 'editorial'] | order(publicationDate) {"title":title.${targetLanguage}, slug, "summary":summary.${targetLanguage}, cover}[0],
+    'highlight': *[_type == 'topicalPage']{"article":highlightedArticle->{"title":title.${targetLanguage}, slug, "summary":summary.${targetLanguage}, cover}}[0],
+    }`
+  )
 );
 
 const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { text: siteText, choropleth, data } = props;
+  const { text: siteText, choropleth, data, content } = props;
   const router = useRouter();
   const text = siteText.veiligheidsregio_actueel;
   const escalationText = siteText.escalatie_niveau;
@@ -157,6 +172,13 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
                 { href: '/gemeente', text: text.quick_links.links.gemeente },
               ]}
             />
+
+            {content.editorial && content.highlight?.article && (
+              <EditorialTile
+                editorial={content.editorial}
+                highlightedArticle={content.highlight.article}
+              />
+            )}
 
             <Box>
               <TopicalTile>
