@@ -17,7 +17,7 @@ export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   getText,
   createGetChoroplethData({
-    vr: ({ vaccine }) => ({ vaccine }),
+    vr: ({ vaccine_coverage }) => ({ vaccine_coverage }),
   }),
   () => {
     const data = getNlData();
@@ -45,21 +45,21 @@ const TempVaccinePage: FCWithLayout<typeof getStaticProps> = (props) => {
   return (
     <TileList>
       <ChoroplethTile
-        title={text.vaccine.coverage_choropleth.title}
+        title={text.vaccine_coverage.choropleth.title}
         metadata={{
           date: data.tested_overall.last_value.date_unix,
-          source: text.vaccine.coverage_choropleth.bronnen.rivm,
+          source: text.vaccine_coverage.choropleth.bronnen.rivm,
         }}
-        description={text.vaccine.coverage_choropleth.description}
+        description={text.vaccine_coverage.choropleth.description}
         legend={{
-          thresholds: regionThresholds.vaccine.coverage_percentage,
-          title: text.vaccine.coverage_choropleth.legend_title,
+          thresholds: regionThresholds.vaccine_coverage.percentage,
+          title: text.vaccine_coverage.choropleth.legend_title,
         }}
       >
         <SafetyRegionChoropleth
           data={choropleth.vr}
-          metricName="vaccine"
-          metricProperty="coverage_percentage"
+          metricName="vaccine_coverage"
+          metricProperty="percentage"
           tooltipContent={createVaccineCoverageRegionalTooltip()}
         />
       </ChoroplethTile>
