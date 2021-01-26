@@ -836,7 +836,7 @@
   "gemeente_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Ziekenhuisopnames",
     "titel": "Gemeld aantal ziekenhuisopnames per dag van inwoners {{municipality}}",
-    "pagina_toelichting": "Groei van het aantal opgenomen patiënten met COVID-19 kan ervoor zorgen dat ziekenhuizen het te druk krijgen. Daarnaast geeft dit cijfer een goed beeld van hoe de epidemie zich ontwikkelt. We houden hier het aantal patiënten bij dat met COVID-19 wordt opgenomen in ziekenhuizen en het aantal bedden op reguliere ziekenhuisafdelingen die door patiënten met COVID-19 wordt bezet. We houden dit zowel landelijk als regionaal bij en dat doen we op basis van verschillende bronnen.",
+    "pagina_toelichting": "Groei van het aantal opgenomen patiënten met COVID-19 kan ervoor zorgen dat ziekenhuizen het te druk krijgen. Daarnaast geeft dit cijfer een goed beeld van hoe de epidemie zich ontwikkelt. We houden hier het aantal patiënten bij dat met COVID-19 wordt opgenomen in ziekenhuizen en het aantal bedden op gewone ziekenhuisafdelingen die door patiënten met COVID-19 wordt bezet. We houden dit zowel landelijk als regionaal bij en dat doen we op basis van verschillende bronnen.",
     "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
     "screen_reader_graph_content": "{{value}} opnames.",
     "barscale_titel": "Gemeld aantal ziekenhuisopnames per dag",
