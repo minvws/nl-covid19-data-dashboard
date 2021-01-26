@@ -18,7 +18,7 @@ import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { PageBarScale } from '~/components-styled/page-barscale';
-import { StackedChart } from '~/components-styled/stacked-chart/stacked-chart';
+import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
@@ -29,7 +29,6 @@ import { createSelectMunicipalHandler } from '~/components/choropleth/select-han
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
 import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/create-positive-tested-people-regional-tooltip';
-import { SEOHead } from '~/components-styled/seo-head';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
@@ -103,90 +102,6 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
           }}
           reference={text.reference}
         />
-
-        <ChartTile
-          title="Indicatief leveringsoverzicht @TODO localize"
-          description="Iets van een omschrijving @TODO localize"
-          ariaDescription="@TODO"
-          metadata={{
-            // @TODO date from data
-            date: 123413212,
-          }}
-        >
-          <StackedChart
-            values={[
-              {
-                pfizer: 10.2,
-                moderna: 20.5,
-                astra_zeneca: 3.6,
-                cure_vac: 0,
-                janssen: 0,
-                sanofi: 15.2,
-                date_of_insertion_unix: 0,
-                date_unix: Date.parse('01 January 2021 00:00 UTC') / 1000,
-              },
-              {
-                pfizer: 2.2,
-                moderna: 10.7,
-                astra_zeneca: 4.6,
-                cure_vac: 0,
-                janssen: 20.2,
-                sanofi: 5.1,
-                date_of_insertion_unix: 0,
-                date_unix: Date.parse('01 April 2021 00:00 UTC') / 1000,
-              },
-              {
-                pfizer: 13.5,
-                moderna: 4.1,
-                astra_zeneca: 15.8,
-                cure_vac: 3.7,
-                janssen: 1.9,
-                sanofi: 0.2,
-                date_of_insertion_unix: 0,
-                date_unix: Date.parse('01 July 2021 00:00 UTC') / 1000,
-              },
-            ]}
-            config={[
-              {
-                metricProperty: 'astra_zeneca',
-                color: '#E580E5',
-                fadedColor: '#aaa',
-                legendLabel: 'Astra Zeneca',
-              },
-
-              {
-                metricProperty: 'pfizer',
-                color: '#6BB7F5',
-                fadedColor: '#aaa',
-                legendLabel: 'BioTech Pfizer',
-              },
-              {
-                metricProperty: 'cure_vac',
-                color: '#8E6DEA',
-                fadedColor: '#aaa',
-                legendLabel: 'Curevac',
-              },
-              {
-                metricProperty: 'janssen',
-                color: '#BAB2FB',
-                fadedColor: '#aaa',
-                legendLabel: 'Janssen',
-              },
-              {
-                metricProperty: 'moderna',
-                color: '#20BAB4',
-                fadedColor: '#aaa',
-                legendLabel: 'Moderna',
-              },
-              {
-                metricProperty: 'sanofi',
-                color: '#99E4E3',
-                fadedColor: '#aaa',
-                legendLabel: 'Sanofi',
-              },
-            ]}
-          />
-        </ChartTile>
 
         <TwoKpiSection>
           <KpiTile

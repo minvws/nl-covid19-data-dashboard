@@ -8,6 +8,7 @@ import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { SEOHead } from '~/components-styled/seo-head';
+import { StackedChart } from '~/components-styled/stacked-chart';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
@@ -109,6 +110,122 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             />
           </KpiTile>
         </TwoKpiSection>
+
+        <ChartTile
+          title={text.grafiek.titel}
+          description={text.grafiek.omschrijving}
+          ariaDescription={
+            siteText.accessibility.grafieken.verwachte_leveringen
+          }
+          metadata={{
+            date: 1611593522,
+            source: text.bronnen.rivm,
+          }}
+        >
+          <StackedChart
+            values={[
+              {
+                pfizer: 10.2,
+                moderna: 20.5,
+                astra_zeneca: 3.6,
+                cure_vac: 0,
+                janssen: 0,
+                sanofi: 15.2,
+                date_of_insertion_unix: 0,
+                date_unix: Date.parse('25 January 2021 00:00 UTC') / 1000,
+              },
+              {
+                pfizer: 2.2,
+                moderna: 10.7,
+                astra_zeneca: 4.6,
+                cure_vac: 0,
+                janssen: 20.2,
+                sanofi: 5.1,
+                date_of_insertion_unix: 0,
+                date_unix: Date.parse('01 February 2021 00:00 UTC') / 1000,
+              },
+              {
+                pfizer: 13.5,
+                moderna: 4.1,
+                astra_zeneca: 15.8,
+                cure_vac: 3.7,
+                janssen: 1.9,
+                sanofi: 0.2,
+                date_of_insertion_unix: 0,
+                date_unix: Date.parse('08 February 2021 00:00 UTC') / 1000,
+              },
+              {
+                pfizer: 10.2,
+                moderna: 20.5,
+                astra_zeneca: 3.6,
+                cure_vac: 0,
+                janssen: 0,
+                sanofi: 15.2,
+                date_of_insertion_unix: 0,
+                date_unix: Date.parse('15 February 2021 00:00 UTC') / 1000,
+              },
+              {
+                pfizer: 2.2,
+                moderna: 10.7,
+                astra_zeneca: 4.6,
+                cure_vac: 0,
+                janssen: 20.2,
+                sanofi: 5.1,
+                date_of_insertion_unix: 0,
+                date_unix: Date.parse('22 February 2021 00:00 UTC') / 1000,
+              },
+              {
+                pfizer: 13.5,
+                moderna: 4.1,
+                astra_zeneca: 15.8,
+                cure_vac: 3.7,
+                janssen: 1.9,
+                sanofi: 0.2,
+                date_of_insertion_unix: 0,
+                date_unix: Date.parse('01 March 2021 00:00 UTC') / 1000,
+              },
+            ]}
+            config={[
+              {
+                metricProperty: 'astra_zeneca',
+                color: '#E580E5',
+                fadedColor: '#aaa',
+                legendLabel: 'Astra Zeneca',
+              },
+
+              {
+                metricProperty: 'pfizer',
+                color: '#6BB7F5',
+                fadedColor: '#aaa',
+                legendLabel: 'BioTech Pfizer',
+              },
+              {
+                metricProperty: 'cure_vac',
+                color: '#8E6DEA',
+                fadedColor: '#aaa',
+                legendLabel: 'Curevac',
+              },
+              {
+                metricProperty: 'janssen',
+                color: '#BAB2FB',
+                fadedColor: '#aaa',
+                legendLabel: 'Janssen',
+              },
+              {
+                metricProperty: 'moderna',
+                color: '#20BAB4',
+                fadedColor: '#aaa',
+                legendLabel: 'Moderna',
+              },
+              {
+                metricProperty: 'sanofi',
+                color: '#99E4E3',
+                fadedColor: '#aaa',
+                legendLabel: 'Sanofi',
+              },
+            ]}
+          />
+        </ChartTile>
 
         <ChartTile
           title={text.grafiek.titel}
