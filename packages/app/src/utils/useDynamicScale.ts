@@ -27,7 +27,12 @@ export function useDynamicScale(
   const scale: ScaleLinear<number, number> = scaleLinear()
     .domain([scaleMin, scaleMax])
     .range([0, 100])
-    .nice(10);
+    /**
+     * A very high tick count makes the rounding so that all bars have about the
+     * same margin on the right side. For example Ziekenhuis opnames (200 range)
+     * and IC opnames (30 range)
+     */
+    .nice(10000);
 
   return scale;
 }
