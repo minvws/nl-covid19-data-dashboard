@@ -1,31 +1,30 @@
-import css from '@styled-system/css';
 import { EscalationLevelIcon } from '~/components-styled/escalation-level-icon';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import styles from '~/components/choropleth/tooltips/tooltip.module.scss';
 import siteText from '~/locale';
+import { Box } from './base';
+import { InlineText } from './typography';
 
 const escalationThresholds =
   regionThresholds.escalation_levels.escalation_level;
 
 export const EscalationMapLegenda = () => {
   return (
-    <div className={styles.legenda} aria-label="legend">
-      <h3 css={css({ maxWidth: '20em' })}>
-        {siteText.escalatie_niveau.legenda.titel}
-      </h3>
+    <Box spacing={3} aria-label="legend">
+      <h3>{siteText.escalatie_niveau.legenda.titel}</h3>
       {escalationThresholds.map((info) => (
-        <div
-          className={styles.escalationInfoLegenda}
-          key={`legenda-item-${info?.threshold}`}
+        <Box
+          key={info.threshold}
+          display="flex"
+          alignItems="center"
+          spacing={3}
+          spacingHorizontal
         >
-          <div className={styles.bubbleLegenda}>
-            <EscalationLevelIcon level={info.threshold} />
-          </div>
-          <div className={styles.escalationTextLegenda}>
+          <EscalationLevelIcon level={info.threshold} />
+          <InlineText fontSize="1.2rem">
             {siteText.escalatie_niveau.types[info.threshold].titel}
-          </div>
-        </div>
+          </InlineText>
+        </Box>
       ))}
-    </div>
+    </Box>
   );
 };

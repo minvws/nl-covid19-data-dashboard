@@ -11,6 +11,7 @@ import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
 import VirusIcon from '~/assets/virus.svg';
+import VaccinatieIcon from '~/assets/vaccinaties.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import Ziektegolf from '~/assets/ziektegolf.svg';
 import {
@@ -45,7 +46,6 @@ export function getNationalLayout(
     </Layout>
   );
 }
-
 /**
  * NationalLayout is a composition of persistent layouts.
  *
@@ -117,6 +117,23 @@ function NationalLayout(props: NationalLayoutProps) {
                   title={siteText.nationaal_maatregelen.titel_sidebar}
                   subtitle={siteText.nationaal_maatregelen.subtitel_sidebar}
                 />
+              </CategoryMenu>
+              <CategoryMenu
+                title={siteText.nationaal_layout.headings.vaccinaties}
+              >
+                <MetricMenuItemLink
+                  href="/landelijk/vaccinaties"
+                  icon={<VaccinatieIcon />}
+                  title={siteText.vaccinaties.titel_sidebar}
+                >
+                  <SidebarMetric
+                    data={siteText.vaccinaties.data}
+                    scope="nl"
+                    metricName="sidebar"
+                    metricProperty="total_vaccinated"
+                    localeTextKey="vaccinaties"
+                  />
+                </MetricMenuItemLink>
               </CategoryMenu>
               <CategoryMenu
                 title={siteText.nationaal_layout.headings.besmettingen}

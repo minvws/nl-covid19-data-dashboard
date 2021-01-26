@@ -1,11 +1,14 @@
+import {
+  RegionalSewerValue,
+  SafetyRegionProperties,
+} from '@corona-dashboard/common';
 import { ReactNode } from 'react';
+import { Text } from '~/components-styled/typography';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
 import siteText from '~/locale/index';
-import { RegionalSewerValue } from '@corona-dashboard/common';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { RegionSelectionHandler } from '../../select-handlers/create-select-region-handler';
-import { SafetyRegionProperties } from '@corona-dashboard/common';
 const text = siteText.rioolwater_metingen;
 
 export const createSewerRegionalTooltip = (
@@ -19,12 +22,12 @@ export const createSewerRegionalTooltip = (
   return (
     context && (
       <TooltipContent title={context.vrname} onSelect={onSelect}>
-        <p className="info-value">
+        <Text m={0} fontWeight="bold">
           {`${replaceVariablesInText(text.map_tooltip_value, {
             value: formatNumber(context.average),
           })}`}
-        </p>
-        <p className="info-total">{text.map_tooltip}</p>
+        </Text>
+        <Text m={0}>{text.map_tooltip}</Text>
       </TooltipContent>
     )
   );

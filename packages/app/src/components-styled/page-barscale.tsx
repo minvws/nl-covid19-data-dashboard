@@ -5,7 +5,7 @@ import {
 } from '@corona-dashboard/common';
 import { get } from 'lodash';
 import { isDefined } from 'ts-is-present';
-import { BarScale } from '~/components/barScale';
+import { BarScale } from '~/components-styled/bar-scale';
 import siteText, { TALLLanguages } from '~/locale/index';
 import { assert } from '~/utils/assert';
 import {

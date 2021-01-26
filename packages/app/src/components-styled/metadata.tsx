@@ -4,7 +4,7 @@ import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { Box } from './base';
 import { ExternalLink } from './external-link';
 import { Text } from './typography';
-
+import css from '@styled-system/css';
 export interface MetadataProps {
   date?: number | [number, number];
   source?: {
@@ -36,7 +36,15 @@ export function Metadata({ date, source }: MetadataProps) {
         {source ? (
           <>
             {locale.common.metadata.source}
-            {': '} <ExternalLink href={source.href}>{source.text}</ExternalLink>
+            {': '}
+            {source.href && (
+              <ExternalLink href={source.href}>{source.text}</ExternalLink>
+            )}
+            {!source.href && (
+              <Text css={css({ display: 'inline-block', my: '0', fontSize: 'inherit' })}>
+                {source.text}
+              </Text>
+            )}
           </>
         ) : null}
       </Text>

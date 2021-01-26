@@ -1,6 +1,6 @@
 import { get } from 'lodash';
 import { isDefined } from 'ts-is-present';
-import { BarScale } from '~/components/barScale';
+import { BarScale } from '~/components-styled/bar-scale';
 import { Metric, MetricKeys } from '@corona-dashboard/common';
 import siteText, { TALLLanguages } from '~/locale/index';
 import { assert } from '~/utils/assert';

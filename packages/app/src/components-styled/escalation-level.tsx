@@ -1,7 +1,7 @@
 import { Box } from '~/components-styled/base';
 import { EscalationLevelIcon } from '~/components-styled/escalation-level-icon';
 import { Text } from '~/components-styled/typography';
-import { EscalationLevel } from '~/components/restrictions/type';
+import { EscalationLevel } from '~/domain/restrictions/type';
 import siteText from '~/locale/index';
 import { useEscalationColor } from '~/utils/use-escalation-color';
 

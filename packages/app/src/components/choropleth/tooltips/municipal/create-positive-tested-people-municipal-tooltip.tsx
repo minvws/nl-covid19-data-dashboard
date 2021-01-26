@@ -1,11 +1,14 @@
+import {
+  MunicipalitiesTestedOverall,
+  MunicipalityProperties,
+} from '@corona-dashboard/common';
 import { ReactNode } from 'react';
+import { Text } from '~/components-styled/typography';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
 import siteText from '~/locale/index';
-import { MunicipalitiesTestedOverall } from '@corona-dashboard/common';
 import { formatPercentage } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { MunicipalitySelectionHandler } from '../../select-handlers/create-select-municipal-handler';
-import { MunicipalityProperties } from '@corona-dashboard/common';
 const text = siteText.common.tooltip;
 
 export const createPositiveTestedPeopleMunicipalTooltip = (
@@ -24,14 +27,14 @@ export const createPositiveTestedPeopleMunicipalTooltip = (
 
   return (
     <TooltipContent title={gemnaam} onSelect={onSelect}>
-      <p className="info-value">
+      <Text m={0} fontWeight="bold">
         {formatPercentage(infected_per_100k)} per 100.000
-      </p>
-      <p className="info-total">
+      </Text>
+      <Text m={0}>
         {replaceVariablesInText(text.positive_tested_people, {
           totalPositiveTestedPeople: `${infected}`,
         })}
-      </p>
+      </Text>
     </TooltipContent>
   );
 };

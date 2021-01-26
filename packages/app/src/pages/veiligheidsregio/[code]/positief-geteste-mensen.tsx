@@ -17,7 +17,7 @@ import { MunicipalityChoropleth } from '~/components/choropleth/municipality-cho
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
-import { SEOHead } from '~/components/seoHead';
+import { SEOHead } from '~/components-styled/seo-head';
 import regionCodeToMunicipalCodeLookup from '~/data/regionCodeToMunicipalCodeLookup';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
@@ -29,11 +29,13 @@ import {
   getVrData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
-import { formatDateFromSeconds } from '~/utils/formatDate';
+import {
+  formatDateFromMilliseconds,
+  formatDateFromSeconds,
+} from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { formatDateFromMilliseconds } from '~/utils/formatDate';
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
@@ -74,6 +76,9 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
       <TileList>
         <ContentHeader
           category={siteText.veiligheidsregio_layout.headings.besmettingen}
+          screenReaderCategory={
+            siteText.positief_geteste_personen.titel_sidebar
+          }
           title={replaceVariablesInText(text.titel, {
             safetyRegion: safetyRegionName,
           })}
