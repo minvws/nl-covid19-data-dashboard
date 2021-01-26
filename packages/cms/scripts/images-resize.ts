@@ -4,9 +4,15 @@ const path = require('path');
 
 import { imageResizeTargets } from '@corona-dashboard/common/src/config';
 
-const walkPath = '../app/public/cms';
+/**
+ * The following code is taken from https://gist.github.com/adamwdraper/4212319
+ * In short, we're looping over files in the walkpath and run them all through
+ * Sharp to resize them. This code is unoptimized and serves as a starting point to
+ * get resized images in our static builds.
+ *
+ */
 
-// These are the sizes we want to resize our original images to
+const walkPath = '../app/public/cms';
 
 function walk(dir, done) {
   fs.readdir(dir, function (error, list) {
@@ -31,8 +37,6 @@ function walk(dir, done) {
             next();
           });
         } else {
-          // do stuff to file here
-
           const ext = path.extname(file);
           const filename = path
             .basename(file)
