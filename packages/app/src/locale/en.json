@@ -2009,14 +2009,14 @@
       "difference": "",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "160538",
+          "total_vaccinated": "169931",
           "date_unix": "1611600708",
           "date_of_insertion_unix": "1611600708"
         }
       },
       "kpi_total": {
         "title": "Number of doses administered",
-        "value": "160538",
+        "value": "169931",
         "description": "This figure reflects the total number of vaccination doses that have been administered. Because vaccination figures are sometimes reported a few days after doses are administered, the actual number of vaccination doses administered is higher. People need two separately administered doses for the vaccine to be maximally effective.",
         "date_of_report_unix": "1611600708",
         "date_of_insertion_unix": "1611600708",
@@ -2026,11 +2026,11 @@
             "description": "administered by municipal health services (GGDs)"
           },
           {
-            "value": "40216",
+            "value": "46216",
             "description": "administered by hospitals"
           },
           {
-            "value": "13436",
+            "value": "16829",
             "description": "administered by long-term care institutions*"
           },
           {
@@ -2047,7 +2047,7 @@
       },
       "kpi_expected_delivery": {
         "title": "Approved vaccines to be delivered",
-        "value": "1974750",
+        "value": "1302750",
         "description": "This is the number of vaccine doses the Netherlands expects to receive over the next six weeks. The Netherlands will receive a new delivery each week. People need two separately administered doses for the vaccine to be maximally effective.",
         "date_of_report_unix": "1611600708",
         "date_of_insertion_unix": "1611600708"
