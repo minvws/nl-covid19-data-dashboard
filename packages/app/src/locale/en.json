@@ -1,14 +1,4 @@
 {
-  "editorial_detail": {
-    "back_link": {
-      "text": "Back to topical"
-    }
-  },
-  "article_detail": {
-    "back_link": {
-      "text": "Back to all articles"
-    }
-  },
   "andere_gegevens": "Other data",
   "blok_andere_gegevens": {
     "title": "Other data",
@@ -44,12 +34,13 @@
     "footer_nav": "Go to footer"
   },
   "header": {
-    "title": "Dashboard Coronavirus",
+    "title": "Coronavirus dashboard",
+    "text": "The coronavirus dashboard provides information on the development of the coronavirus in the Netherlands.",
+    "link": "Read more about this dashboard",
     "logo_alt": "Government of The Netherlands"
   },
   "nav": {
     "links": {
-      "actueel": "Actueel",
       "index": "National",
       "over": "About this dashboard",
       "meer": "More information on the coronavirus",
@@ -58,14 +49,15 @@
       "veiligheidsregio": "Safety regions",
       "gemeente": "Municipalities",
       "over_risiconiveaus": "About the risk levels",
-      "veelgestelde_vragen": "Frequently asked questions"
+      "veelgestelde_vragen": "Frequently asked questions",
+      "actueel": ""
     },
     "title": "Corona Dashboard",
     "terug_naar_alle_cijfers": "Overview",
     "terug_naar_alle_cijfers_homepage": "Overview",
     "menu": {
-      "open_menu": "Open menu",
-      "close_menu": "Close menu"
+      "open_menu": "",
+      "close_menu": ""
     }
   },
   "ic_opnames_per_dag": {
@@ -75,7 +67,7 @@
       "text": "Stichting NICE"
     },
     "titel": "Intensive care admissions by day",
-    "pagina_toelichting": "Number of confirmed COVID-19 cases who are admitted to a hospital intensive care unit (ICU) per day.",
+    "pagina_toelichting": "Number of people with COVID-19 admitted to hospital daily. This figure shows how many hospital admissions are reported per day, including patients from outside the hospital admitted directly to the ICU. It may include hospital admissions that occurred in previous days.",
     "barscale_titel": "Intensive care admissions per day",
     "barscale_screenreader_text": "{{value}} intensive care-admissions by day. Alert value: {{signaalwaarde}} admissions per day.",
     "extra_uitleg": "Number of confirmed COVID-19 cases who are admitted to a hospital intensive care unit (ICU) per day. This figure is an average for the daily admissions over the past three days.\n\nNote: Although hospitals try to register COVID-19 patients promptly, it is likely that the numbers of the last days are yet incomplete.",
@@ -154,11 +146,11 @@
       "text": "NICE via RIVM"
     },
     "titel": "Hospital admissions per day",
-    "pagina_toelichting": "A rise in the number of patients with COVID-19 could overburden hospitals. This section of the dashboard shows the number regular hospital beds occupied by patients with COVID-19 and the number of patients with COVID-19 admitted to hospital each day. The dashboard provides national and regional figures drawn from various sources. Please note: as of 14 January 2021 the dashboard shows the number of hospital admissions reported daily. We no longer show a three-day average.",
+    "pagina_toelichting": "A rise in the number of patients with COVID-19 could overburden hospitals. This number is also a valid indicator for epidemic growth. This section of the dashboard shows the number of patients with COVID-19 admitted to hospital each day and the number of regular hospital beds occupied by patients with COVID-19. The dashboard provides national and regional figures drawn from various sources.",
     "barscale_titel": "Hospital admissions reported per day",
-    "extra_uitleg": "Number of people with COVID-19 admitted to hospital daily (excluding ICU admissions). This figure shows how many hospital admissions are reported per day. It may include hospital admissions that occurred in previous days because reporting delays are common.",
+    "extra_uitleg": "Number of people with COVID-19 admitted to hospital daily. This figure shows how many hospital admissions are reported per day, including patients from outside the hospital admitted directly to the ICU. It may include hospital admissions that occurred in previous days.",
     "map_titel": "Residence of patients admitted to hospital",
-    "map_toelichting": "This map shows, by municipality or safety region, where people live who have been admitted to hospital (non-ICU admissions) with COVID-19. Please note that people may have been admitted to hospital somewhere else in the Netherlands; the map therefore does not show admission numbers per hospital. The figures here reflect the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE). Tergooi hospitals, Amstelland Hospital and Flevoziekenhuis do not currently share their COVID-19 hospital admission data with Stichting NICE. As a result, the actual figures in some municipalities and safety regions are higher than they appear on the map.",
+    "map_toelichting": "This map shows, by municipality or safety region, where people live who have been admitted to hospital with COVID-19. Please note that people may have been admitted to a hospital located somewhere else in the Netherlands; the map therefore does not show admission numbers per hospital. The figures here reflect the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE). Tergooi hospitals, Amstelland Hospital and Flevoziekenhuis do not currently share their data on COVID-19 admission to clinic wards with Stichting NICE. As a result, the actual figures in some municipalities and safety regions may be higher than they appear on the map.",
     "linechart_titel": "Progression in hospital admissions over time",
     "barscale_screenreader_text": "{{value}} hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
     "chloropleth_legenda": {
@@ -187,14 +179,14 @@
       }
     },
     "kpi_bedbezetting": {
-      "title": "Hospital beds occupied by COVID-19 patients",
+      "title": "Regular hospital beds occupied by COVID-19 patients",
       "description": "This number shows how many non-ICU hospital beds are occupied by COVID-19 patients."
     },
     "chart_bedbezetting": {
-      "title": "Hospital bed occupancy over time",
+      "title": "Hospital bed occupancy over time (non ICU)",
       "description": "This graph shows the progression of the number of non-ICU hospital beds occupied by COVID-19 patients."
     },
-    "linechart_description": "This graph shows hospital admissions. The figure for each day indicates the number of people actually admitted on that day, not the number of admissions reported on that day. This gives a clear picture of the development of coronavirus in the Netherlands. There are often reporting delays of a few days for hospital admissions; data for the most recent days is therefore incomplete.",
+    "linechart_description": "This graph shows hospital admissions, including admissions directely to ICU. The figure for each day indicates the number of people actually admitted on that day, not the number of admissions reported on that day. This gives a clear picture of the development of coronavirus in the Netherlands. There are often reporting delays of a few days for hospital admissions; data for the most recent days is therefore incomplete.",
     "metadata": {
       "title": "Hospital admissions | Dashboard Coronavirus | Government.nl",
       "description": "Number of confirmed COVID-19 cases who are admitted to a hospital in the Netherlands."
@@ -598,11 +590,6 @@
     "description": "Information on the development of the coronavirus in the Netherlands.",
     "url": "https://coronadashboard.government.nl/verantwoording"
   },
-  "articles_metadata": {
-    "title": "Articles Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
-    "description": "",
-    "url": "https://coronadashboard.rijksoverheid.nl/artikelen"
-  },
   "metadata": {
     "description": "Information on the development of the coronavirus in the Netherlands.",
     "titel": "COVID-19 Dashboard error message | Government.nl",
@@ -623,87 +610,7 @@
   "utils": {
     "date_today": "today",
     "date_yesterday": "yesterday",
-    "date_day_before_yesterday": "the day before yesterday"
-  },
-  "common_actueel": {
-    "terug_naar_landelijk": "Terug naar landelijke situtatie",
-    "laatst_bijgewerkt": "Laatst bijgewerkt: {{date}} om {{time}}"
-  },
-  "nationaal_actueel": {
-    "title": "Actuele situatie in {{the_netherlands}}",
-    "the_netherlands": "The Netherlands",
-    "metadata": {
-      "title": "Actuele situatie in Nederland",
-      "description": "Actuele situatie in Nederland"
-    },
-    "risiconiveaus": {
-      "selecteer_titel": "",
-      "selecteer_toelichting": ""
-    },
-    "data_sitemap_titel": "",
-    "data_sitemap_toelichting": "",
-    "mini_trend_tiles": {
-      "positief_getest": {
-        "title": ""
-      },
-      "ziekenhuis_opnames": {
-        "title": ""
-      },
-      "ic_opnames": {
-        "title": ""
-      }
-    },
-    "data_driven_texts": {
-      "infected_people_total": {
-        "value": {
-          "zero": "{{newDate}} there were no newly reported infected people.",
-          "singular": "{{newDate}} there was {{propertyValue}} newly reported infected person.",
-          "plural": "{{newDate}} there were {{propertyValue}} newly reported infected people."
-        },
-        "difference": {
-          "zero": "This is the same as {{oldDate}}",
-          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
-        }
-      },
-      "intake_hospital_ma": {
-        "value": {
-          "zero": "{{newDate}} there were no newly reported hospital intakes.",
-          "singular": "{{newDate}} there was {{propertyValue}} newly reported hospital intake.",
-          "plural": "{{newDate}} there were {{propertyValue}} newly reported hospital intakes."
-        },
-        "difference": {
-          "zero": "This is the same as {{oldDate}}",
-          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
-        }
-      },
-      "intake_intensivecare_ma": {
-        "value": {
-          "zero": "{{newDate}} there were no newly reported intensive care admissions.",
-          "singular": "{{newDate}} there was {{propertyValue}} newly reported intensive care admission.",
-          "plural": "{{newDate}} there were {{propertyValue}} newly reported intensive care admissions."
-        },
-        "difference": {
-          "zero": "This is the same as {{oldDate}}",
-          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
-        }
-      }
-    },
-    "quick_links": {
-      "header": "Bekijk alle cijfers van het dashboard",
-      "links": {
-        "nationaal": "Cijfers van Nederland",
-        "veiligheidsregio": "Cijfers per veiligheidsregio",
-        "gemeente": "Cijfers per gemeente"
-      }
-    },
-    "latest_articles": {
-      "title": "",
-      "subtitle": "",
-      "all_articles": ""
-    }
+    "date_day_before_yesterday": ""
   },
   "regionaal_index": {
     "your_safety_region": "Safety region",
@@ -717,10 +624,6 @@
     "belangrijk_bericht": "There is a [national lockdown](https://coronadashboard.government.nl/landelijk/maatregelen) until at least 9 February."
   },
   "common": {
-    "gm_singular": "municipality",
-    "gm_plural": "municipalities",
-    "vr_singular": "safety region",
-    "vr_plural": "safety regions",
     "metadata": {
       "source": "Source",
       "date": "Value of {{date}}",
@@ -745,9 +648,13 @@
     "niveau": "level",
     "clear_select_input": "Empty",
     "incomplete": "incomplete",
-    "gisteren": "Yesterday",
-    "vandaag": "Today",
-    "read_more": "Read more"
+    "gm_singular": "",
+    "gm_plural": "",
+    "vr_singular": "",
+    "vr_plural": "",
+    "gisteren": "",
+    "vandaag": "",
+    "read_more": ""
   },
   "seoHead": {
     "default_description": "Information on the development of the coronavirus in The Netherlands.",
@@ -800,20 +707,20 @@
   "veiligheidsregio_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Hospital admissions",
     "titel": "Reported hospital admissions per day of residents in {{safetyRegion}}",
-    "pagina_toelichting": "A rise in the number of patients with COVID-19 could overburden hospitals. This section of the dashboard shows the number regular hospital beds occupied by patients with COVID-19 and the number of patients with COVID-19 admitted to hospital each day. The dashboard provides national and regional figures drawn from various sources. Please note: as of 14 January 2021 the dashboard shows the number of hospital admissions reported daily. We no longer show a three-day average.",
+    "pagina_toelichting": "A rise in the number of patients with COVID-19 could overburden hospitals. This number is also a valid indicator for epidemic growth. This section of the dashboard shows the number of patients with COVID-19 admitted to hospital each day and the number of regular hospital beds occupied by patients with COVID-19. The dashboard provides national and regional figures drawn from various sources.",
     "datums": "Calculated: {{dateOfReport}}. Updated daily.",
     "screen_reader_graph_content": "{{value}} admissions.",
     "barscale_titel": "Hospital admissions reported per day",
     "extra_uitleg": "Number of people from this safety region with COVID-19 admitted to hospital (excl. ICU) on a daily basis. This number entails the amount of hospital admissions reported on one day and can include admissions from previous days. Patients can be admitted to hospitals in other regions.",
     "map_titel": "Distribution of hospital admissions in {{safetyRegion}}",
-    "map_toelichting": "This map shows, by municipality or safety region, where people live who have been admitted to hospital (non-ICU admissions) with COVID-19. Please note that people may have been admitted to hospital somewhere else in the Netherlands; the map therefore does not show admission numbers per hospital. The figures here reflect the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE). Tergooi hospitals, Amstelland Hospital and Flevoziekenhuis do not currently share their COVID-19 hospital admission data with Stichting NICE. As a result, the actual figures in some municipalities and safety regions are higher than they appear on the map.",
+    "map_toelichting": "This map shows, by municipality or safety region, where people live who have been admitted to hospital with COVID-19. Please note that people may have been admitted to a hospital located somewhere else in the Netherlands; the map therefore does not show admission numbers per hospital. The figures here reflect the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE). Tergooi hospitals, Amstelland Hospital and Flevoziekenhuis do not currently share their data on COVID-19 admission to clinic wards with Stichting NICE. As a result, the actual figures in some municipalities and safety regions may be higher than they appear on the map.",
     "linechart_titel": "Progression in hospital admissions over time",
     "barscale_screenreader_text": "{{value}} hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
     "bron": {
       "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
       "text": "NICE via RIVM"
     },
-    "linechart_description": "This graph shows hospital admissions. The figure for each day indicates the number of people actually admitted on that day, not the number of admissions reported on that day. This gives a clear picture of the development of coronavirus in the Netherlands. There are often reporting delays of a few days for hospital admissions; data for the most recent days is therefore incomplete. ",
+    "linechart_description": "This graph shows hospital admissions, including admissions directely to ICU. The figure for each day indicates the number of people actually admitted on that day, not the number of admissions reported on that day. This gives a clear picture of the development of coronavirus in the Netherlands. There are often reporting delays of a few days for hospital admissions; data for the most recent days is therefore incomplete.",
     "metadata": {
       "title": "Hospital admissions residents {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
       "description": "Confirmed cases of COVID-19 in safety region {{safetyRegionName}} who are admitted to a hospital."
@@ -854,7 +761,13 @@
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -938,20 +851,20 @@
   "gemeente_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Hospital admissions",
     "titel": "Reported hospital admissions per day of residents in {{municipality}}",
-    "pagina_toelichting": "A rise in the number of patients with COVID-19 could overburden hospitals. This section of the dashboard shows the number regular hospital beds occupied by patients with COVID-19 and the number of patients with COVID-19 admitted to hospital each day. The dashboard provides national and regional figures drawn from various sources. Please note: as of 14 January 2021 the dashboard shows the number of hospital admissions reported daily. We no longer show a three-day average.",
+    "pagina_toelichting": "A rise in the number of patients with COVID-19 could overburden hospitals. This number is also a valid indicator for epidemic growth. This section of the dashboard shows the number of patients with COVID-19 admitted to hospital each day and the number of regular hospital beds occupied by patients with COVID-19. The dashboard provides national and regional figures drawn from various sources.",
     "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
     "screen_reader_graph_content": "{{value}} admissions.",
     "barscale_titel": "Hospital admissions reported per day",
     "extra_uitleg": "Number of people from this municipality with COVID-19 admitted to hospital (excl. ICU) on a daily basis. This number entails the amount of hospital admissions reported on one day. These could include admissions from previous days. Patients can be admitted to hospitals in other regions.",
     "map_titel": "Distribution of hospital admissions in safety region of {{municipality}}",
-    "map_toelichting": "This map shows, by municipality or safety region, where people live who have been admitted to hospital (non-ICU admissions) with COVID-19. Please note that people may have been admitted to hospital somewhere else in the Netherlands; the map therefore does not show admission numbers per hospital. The figures here reflect the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE). Tergooi hospitals, Amstelland Hospital and Flevoziekenhuis do not currently share their COVID-19 hospital admission data with Stichting NICE. As a result, the actual figures in some municipalities and safety regions are higher than they appear on the map.",
+    "map_toelichting": "This map shows, by municipality or safety region, where people live who have been admitted to hospital with COVID-19. Please note that people may have been admitted to a hospital located somewhere else in the Netherlands; the map therefore does not show admission numbers per hospital. The figures here reflect the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE). Tergooi hospitals, Amstelland Hospital and Flevoziekenhuis do not currently share their data on COVID-19 admission to clinic wards with Stichting NICE. As a result, the actual figures in some municipalities and safety regions may be higher than they appear on the map.",
     "linechart_titel": "Progression in hospital admissions over time",
     "barscale_screenreader_text": "{{value}} hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
     "bron": {
       "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
       "text": "NICE via RIVM"
     },
-    "linechart_description": "This graph shows hospital admissions. The figure for each day indicates the number of people actually admitted on that day, not the number of admissions reported on that day. This gives a clear picture of the development of coronavirus in the Netherlands. There are often reporting delays of a few days for hospital admissions; data for the most recent days is therefore incomplete. ",
+    "linechart_description": "This graph shows hospital admissions, including admissions directely to ICU. The figure for each day indicates the number of people actually admitted on that day, not the number of admissions reported on that day. This gives a clear picture of the development of coronavirus in the Netherlands. There are often reporting delays of a few days for hospital admissions; data for the most recent days is therefore incomplete.",
     "metadata": {
       "title": "Hospital admissions {{municipalityName}} | Dashboard Coronavirus | Government.nl",
       "description": "Overview of the number of confirmed COVID-19 cases in {{municipalityName}} who are admitted to a hospital per day."
@@ -1090,8 +1003,6 @@
   },
   "escalatie_niveau": {
     "titel": "Level of risk",
-    "tile_title": "",
-    "lees_meer": "",
     "toelichting": "The map indicates the level of risk per safety region.\n\n[More about risk levels](/over-risiconiveaus)",
     "types": {
       "1": {
@@ -1116,12 +1027,14 @@
       }
     },
     "legenda": {
-      "titel": "Distribution of risk levels in the Netherlands",
-      "geen_regio": "geen regio's",
-      "regios": "{{amount}} regio's"
+      "titel": "Legend",
+      "geen_regio": "",
+      "regios": ""
     },
     "valid_from": "Valid from {{validFrom}}",
-    "sidebar_label": "Level of risk:"
+    "sidebar_label": "Level of risk:",
+    "tile_title": "",
+    "lees_meer": ""
   },
   "gemeente_layout": {
     "headings": {
@@ -1945,160 +1858,6 @@
     "VR24": "http://www.vrzuidlimburg.nl/",
     "VR25": "http://www.veiligheidsregioflevoland.nl/"
   },
-  "common.tooltip.positive_tested_value": "",
-  "search": {
-    "placeholder": "Find a municipality or safery region",
-    "clear": "Clear search",
-    "no_hits": "No {{subject}} found with “{{search}}”"
-  },
-
-  "veiligheidsregio_actueel": {
-    "title": "De actuele situatie in veiligheidsregio {{safetyRegionName}}",
-    "metadata": {
-      "title": "Actuele situatie in {{safetyRegionName}}",
-      "description": "Actuele situatie in {{safetyRegionName}}"
-    },
-    "risiconiveaus": {
-      "selecteer_titel": "Risiconiveaus",
-      "selecteer_toelichting": "De kaart geeft het risiconiveau per veiligheidsregio weer.\n\n[Meer over de risiconiveaus](/over-risiconiveaus)"
-    },
-    "risoconiveau_maatregelen": {
-      "title": "Risiconiveau & maatregelen",
-      "description": "Voor de veiligheidsregio geldt het risiconiveau",
-      "bekijk_href": "Bekijk de maatregelen"
-    },
-    "mini_trend_tiles": {
-      "positief_getest": {
-        "title": "Aantal positieve testen"
-      },
-      "ziekenhuis_opnames": {
-        "title": "Ziekenhuisopnames"
-      },
-      "ic_opnames": {
-        "title": "Intensive care-opnames"
-      }
-    },
-    "data_driven_texts": {
-      "infected_people_total": {
-        "value": {
-          "zero": "{{newDate}} there were no newly reported infected people.",
-          "singular": "{{newDate}} there was {{propertyValue}} newly reported infected person.",
-          "plural": "{{newDate}} there were {{propertyValue}} newly reported infected people."
-        },
-        "difference": {
-          "zero": "This is the same as {{oldDate}}",
-          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
-        }
-      },
-      "intake_hospital_ma": {
-        "value": {
-          "zero": "{{newDate}} there were no newly reported hospital intakes.",
-          "singular": "{{newDate}} there was {{propertyValue}} newly reported hospital intake.",
-          "plural": "{{newDate}} there were {{propertyValue}} newly reported hospital intakes."
-        },
-        "difference": {
-          "zero": "This is the same as {{oldDate}}",
-          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
-        }
-      },
-      "intake_intensivecare_ma": {
-        "value": {
-          "zero": "{{newDate}} there were no newly reported intensive care admissions.",
-          "singular": "{{newDate}} there was {{propertyValue}} newly reported intensive care admission.",
-          "plural": "{{newDate}} there were {{propertyValue}} newly reported intensive care admissions."
-        },
-        "difference": {
-          "zero": "This is the same as {{oldDate}}",
-          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
-        }
-      }
-    },
-    "quick_links": {
-      "header": "Bekijk alle cijfers van het dashboard",
-      "links": {
-        "nationaal": "Cijfers van Nederland",
-        "veiligheidsregio": "Cijfers van {{safetyRegionName}}",
-        "gemeente": "Cijfers per gemeente"
-      }
-    }
-  },
-  "gemeente_actueel": {
-    "title": "Actuele situatie in gemeente {{municipalityName}}",
-    "metadata": {
-      "title": "Actuele situatie in {{municipalityName}}",
-      "description": "Actuele situatie in {{municipalityName}}"
-    },
-    "risiconiveaus": {
-      "selecteer_titel": "Risiconiveaus",
-      "selecteer_toelichting": "De kaart geeft het risiconiveau per veiligheidsregio weer.\n\n[Meer over de risiconiveaus](/over-risiconiveaus)"
-    },
-    "risoconiveau_maatregelen": {
-      "title": "Risiconiveau & maatregelen",
-      "description": "Voor de veiligheidsregio van deze gemeente geldt het risiconiveau",
-      "bekijk_href": "Bekijk de maatregelen"
-    },
-    "mini_trend_tiles": {
-      "positief_getest": {
-        "title": "Aantal positieve testen"
-      },
-      "ziekenhuis_opnames": {
-        "title": "Ziekenhuisopnames"
-      },
-      "ic_opnames": {
-        "title": "Intensive care-opnames"
-      }
-    },
-    "data_driven_texts": {
-      "infected_people_total": {
-        "value": {
-          "zero": "{{newDate}} there were no newly reported infected people.",
-          "singular": "{{newDate}} there was {{propertyValue}} newly reported infected person.",
-          "plural": "{{newDate}} there were {{propertyValue}} newly reported infected people."
-        },
-        "difference": {
-          "zero": "This is the same as {{oldDate}}",
-          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
-        }
-      },
-      "intake_hospital_ma": {
-        "value": {
-          "zero": "{{newDate}} there were no newly reported hospital intakes.",
-          "singular": "{{newDate}} there was {{propertyValue}} newly reported hospital intake.",
-          "plural": "{{newDate}} there were {{propertyValue}} newly reported hospital intakes."
-        },
-        "difference": {
-          "zero": "This is the same as {{oldDate}}",
-          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
-        }
-      },
-      "intake_intensivecare_ma": {
-        "value": {
-          "zero": "{{newDate}} there were no newly reported intensive care admissions.",
-          "singular": "{{newDate}} there was {{propertyValue}} newly reported intensive care admission.",
-          "plural": "{{newDate}} there were {{propertyValue}} newly reported intensive care admissions."
-        },
-        "difference": {
-          "zero": "This is the same as {{oldDate}}",
-          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
-        }
-      }
-    },
-    "quick_links": {
-      "header": "Bekijk alle cijfers van het dashboard",
-      "links": {
-        "nationaal": "Cijfers van Nederland",
-        "veiligheidsregio": "Cijfers van {{safetyRegionName}}",
-        "veiligheidsregio_fallback": "Cijfers per veiligheidsregio",
-        "gemeente": "Cijfers van {{municipalityName}}"
-      }
-    }
-  },
   "choropleth": {
     "verb": {
       "singular": "has",
@@ -2349,7 +2108,255 @@
     },
     "grafiek": {
       "titel": "Expected weekly deliveries",
-      "omschrijving": "This graph shows the number of vaccine doses the Netherlands expects to receive over the next six weeks. "
+      "omschrijving": "This graph shows the number of approved vaccine doses the Netherlands expects to receive over the next six weeks."
+    }
+  },
+  "editorial_detail": {
+    "back_link": {
+      "text": ""
+    }
+  },
+  "article_detail": {
+    "back_link": {
+      "text": ""
+    }
+  },
+  "articles_metadata": {
+    "title": "",
+    "description": "",
+    "url": ""
+  },
+  "common_actueel": {
+    "terug_naar_landelijk": "",
+    "laatst_bijgewerkt": ""
+  },
+  "nationaal_actueel": {
+    "title": "",
+    "the_netherlands": "",
+    "metadata": {
+      "title": "",
+      "description": ""
+    },
+    "risiconiveaus": {
+      "selecteer_titel": "",
+      "selecteer_toelichting": ""
+    },
+    "data_sitemap_titel": "",
+    "data_sitemap_toelichting": "",
+    "mini_trend_tiles": {
+      "positief_getest": {
+        "title": ""
+      },
+      "ziekenhuis_opnames": {
+        "title": ""
+      },
+      "ic_opnames": {
+        "title": ""
+      }
+    },
+    "data_driven_texts": {
+      "infected_people_total": {
+        "value": {
+          "zero": "",
+          "singular": "",
+          "plural": ""
+        },
+        "difference": {
+          "zero": "",
+          "singular": "",
+          "plural": ""
+        }
+      },
+      "intake_hospital_ma": {
+        "value": {
+          "zero": "",
+          "singular": "",
+          "plural": ""
+        },
+        "difference": {
+          "zero": "",
+          "singular": "",
+          "plural": ""
+        }
+      },
+      "intake_intensivecare_ma": {
+        "value": {
+          "zero": "",
+          "singular": "",
+          "plural": ""
+        },
+        "difference": {
+          "zero": "",
+          "singular": "",
+          "plural": ""
+        }
+      }
+    },
+    "quick_links": {
+      "header": "",
+      "links": {
+        "nationaal": "",
+        "veiligheidsregio": "",
+        "gemeente": ""
+      }
+    },
+    "latest_articles": {
+      "title": "",
+      "subtitle": "",
+      "all_articles": ""
+    }
+  },
+  "common.tooltip.positive_tested_value": "",
+  "search": {
+    "placeholder": "",
+    "clear": "",
+    "no_hits": ""
+  },
+  "veiligheidsregio_actueel": {
+    "title": "",
+    "metadata": {
+      "title": "",
+      "description": ""
+    },
+    "risiconiveaus": {
+      "selecteer_titel": "",
+      "selecteer_toelichting": ""
+    },
+    "risoconiveau_maatregelen": {
+      "title": "",
+      "description": "",
+      "bekijk_href": ""
+    },
+    "mini_trend_tiles": {
+      "positief_getest": {
+        "title": ""
+      },
+      "ziekenhuis_opnames": {
+        "title": ""
+      },
+      "ic_opnames": {
+        "title": ""
+      }
+    },
+    "data_driven_texts": {
+      "infected_people_total": {
+        "value": {
+          "zero": "",
+          "singular": "",
+          "plural": ""
+        },
+        "difference": {
+          "zero": "",
+          "singular": "",
+          "plural": ""
+        }
+      },
+      "intake_hospital_ma": {
+        "value": {
+          "zero": "",
+          "singular": "",
+          "plural": ""
+        },
+        "difference": {
+          "zero": "",
+          "singular": "",
+          "plural": ""
+        }
+      },
+      "intake_intensivecare_ma": {
+        "value": {
+          "zero": "",
+          "singular": "",
+          "plural": ""
+        },
+        "difference": {
+          "zero": "",
+          "singular": "",
+          "plural": ""
+        }
+      }
+    },
+    "quick_links": {
+      "header": "",
+      "links": {
+        "nationaal": "",
+        "veiligheidsregio": "",
+        "gemeente": ""
+      }
+    }
+  },
+  "gemeente_actueel": {
+    "title": "",
+    "metadata": {
+      "title": "",
+      "description": ""
+    },
+    "risiconiveaus": {
+      "selecteer_titel": "",
+      "selecteer_toelichting": ""
+    },
+    "risoconiveau_maatregelen": {
+      "title": "",
+      "description": "",
+      "bekijk_href": ""
+    },
+    "mini_trend_tiles": {
+      "positief_getest": {
+        "title": ""
+      },
+      "ziekenhuis_opnames": {
+        "title": ""
+      },
+      "ic_opnames": {
+        "title": ""
+      }
+    },
+    "data_driven_texts": {
+      "infected_people_total": {
+        "value": {
+          "zero": "",
+          "singular": "",
+          "plural": ""
+        },
+        "difference": {
+          "zero": "",
+          "singular": "",
+          "plural": ""
+        }
+      },
+      "intake_hospital_ma": {
+        "value": {
+          "zero": "",
+          "singular": "",
+          "plural": ""
+        },
+        "difference": {
+          "zero": "",
+          "singular": "",
+          "plural": ""
+        }
+      },
+      "intake_intensivecare_ma": {
+        "value": {
+          "zero": "",
+          "singular": "",
+          "plural": ""
+        },
+        "difference": {
+          "zero": "",
+          "singular": "",
+          "plural": ""
+        }
+      }
+    },
+    "quick_links": {
+      "header": "",
+      "links": {
+        "nationaal": "",
+        "veiligheidsregio": "",
+        "veiligheidsregio_fallback": "",
+        "gemeente": ""
+      }
     }
   }
 }
