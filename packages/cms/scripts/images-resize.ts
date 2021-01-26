@@ -2,7 +2,7 @@ const sharp = require('sharp');
 const fs = require('fs');
 const path = require('path');
 
-import { sizes } from '@corona-dashboard/common/src/config';
+import { imageResizeTargets } from '@corona-dashboard/common/src/config';
 
 const walkPath = '../app/public/cms';
 
@@ -41,7 +41,7 @@ function walk(dir, done) {
             .join('.');
           console.log(`Now resizing: ${file}`);
 
-          sizes.forEach((size) => {
+          imageResizeTargets.forEach((size) => {
             const output = `../app/public/cms/${filename}-${size}${ext}`;
             sharp(file)
               .resize({ width: size, withoutEnlargement: true })
