@@ -32,10 +32,9 @@ export function ChartTile({
   children,
   ariaDescription,
 }: ChartTileProps) {
-  assert(
-    !(!description && !ariaDescription),
-    `This graph doesn't include a valid description nor an ariaDescription, please add one of them.`
-  );
+  assert(description, `Chart ${title} requires a description.`);
+
+  assert(ariaDescription, `Chart ${title} requires an ariaDescription.`);
 
   const uniqueId = useUniqueId();
 
