@@ -22,8 +22,7 @@ const Img = styled.img`
  */
 export function Image(props: ImageProps) {
   const { src, width, height, alt } = props;
-  const filename = src.split('.')[0];
-  const extension = src.split('.')[1];
+  const [filename, extension] = src.split('.');
 
   const srcSet = imageResizeTargets
     .map((size: number) => {
