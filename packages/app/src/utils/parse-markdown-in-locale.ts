@@ -7,6 +7,7 @@ import { MDToHTMLString } from './MDToHTMLString';
  */
 const MARKDOWN_KEYS = [
   'regionaal_index.belangrijk_bericht',
+  'vaccinaties.section_vaccinations_more_information.description',
   'veiligheidsregio_index.selecteer_toelichting',
   'veiligheidsregio_index.belangrijk_bericht',
   'over_risiconiveaus.paragraaf',

@@ -32,7 +32,11 @@ export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   createGetContent<Article>((context) => {
     assert(context?.params?.slug, 'Slug required to retrieve article');
-    return `*[_type == 'article' && slug.current == '${context.params.slug}'][0]`;
+    return `*[_type == 'article' && slug.current == '${context.params.slug}']{
+      ...,
+      "slug": slug.current,
+      "coverAsset": cover.asset ->
+    }[0]`;
   })
 );
 

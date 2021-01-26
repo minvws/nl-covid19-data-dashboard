@@ -25,6 +25,7 @@ export interface Article {
     current: string;
   };
   cover: ImageBlock;
+  coverAsset: SanityImageProps;
   summary: Block;
   intro: Block;
   content: RichContentBlock[];

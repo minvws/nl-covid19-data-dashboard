@@ -9,6 +9,7 @@ import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { Box } from '../base';
 import { ExternalLink } from '../external-link';
 import { Text } from '../typography';
+import css from '@styled-system/css';
 
 interface Datasource {
   href: string;
@@ -100,7 +101,14 @@ function MetadataItem(props: MetadataItemProps) {
         {items.map((item, index) => (
           <Fragment key={index + item.href}>
             {index > 0 && ' & '}
-            <ExternalLink href={item.href}>{item.text}</ExternalLink>
+            {item.href && (
+              <ExternalLink href={item.href}>{item.text}</ExternalLink>
+            )}
+            {!item.href && (
+              <Text css={css({ display: 'inline-block', my: '0', fontSize: 'inherit' })}>
+                {item.text}
+              </Text>
+            )}
           </Fragment>
         ))}
       </Text>

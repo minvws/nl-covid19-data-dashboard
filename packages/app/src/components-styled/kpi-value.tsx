@@ -12,6 +12,7 @@ interface KpiValueProps {
   valueAnnotation?: string;
   difference?: DifferenceDecimal | DifferenceInteger;
   differenceStaticTimespan?: string;
+  text?: string;
 }
 
 /**
@@ -42,6 +43,7 @@ export function KpiValue({
   valueAnnotation,
   difference,
   differenceStaticTimespan,
+  text,
   ...otherProps
 }: KpiValueProps) {
   return (
@@ -53,6 +55,10 @@ export function KpiValue({
       ) : isDefined(percentage) ? (
         <StyledValue color="data.primary" {...otherProps}>
           {`${formatPercentage(percentage)}%`}
+        </StyledValue>
+      ) : isDefined(text) ? (
+        <StyledValue color="data.primary" {...otherProps}>
+          {text}
         </StyledValue>
       ) : (
         <StyledValue color="data.primary" {...otherProps}>

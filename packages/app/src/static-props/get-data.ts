@@ -16,7 +16,6 @@ import {
 import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
 import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
 
-
 /**
  * Usage:
  *

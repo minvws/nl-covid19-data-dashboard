@@ -1,34 +1,23 @@
-import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
-import { MaxWidth } from '~/components-styled/max-width';
-import { PortableText } from '~/lib/sanity';
 import Head from 'next/head';
+import { MaxWidth } from '~/components-styled/max-width';
+import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
+import { PortableText } from '~/lib/sanity';
 import siteText from '~/locale/index';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
 } from '~/static-props/get-data';
-import { Image } from '~/components-styled/image';
-import { PortableTextEntry } from '@sanity/block-content-to-react';
-import { SanityImageProps } from '~/types/cms.d.ts';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import styles from './over.module.scss';
+import { PortableTextEntry } from '@sanity/block-content-to-react';
 
 interface OverData {
-  over: {
-    title: string | null;
-    description: PortableTextEntry[] | null;
-  };
-  imageContent: {
-    coverImage: SanityImageProps;
-  };
+  title: string | null;
+  description: PortableTextEntry[] | null;
 }
 
 const query = `
-"over": *[_type == 'overDitDashboard'][0],
-"imageContent": *[_type == 'imagePipelineTest'][0]{
-  ...,
-  "coverImage": coverImage.asset->
-}
+*[_type == 'overDitDashboard'][0]
 `;
 
 export const getStaticProps = createGetStaticProps(
@@ -38,8 +27,6 @@ export const getStaticProps = createGetStaticProps(
 
 const Over: FCWithLayout<typeof getStaticProps> = (props) => {
   const { content } = props;
-  const { over, imageContent } = content;
-  const { coverImage } = imageContent;
 
   return (
     <>
@@ -60,15 +47,10 @@ const Over: FCWithLayout<typeof getStaticProps> = (props) => {
       <div className={styles.container}>
         <MaxWidth>
           <div className={styles.maxwidth}>
-            {over.title && <h2>{over.title}</h2>}
-
-            <Image
-              src={`/${coverImage.assetId}.${coverImage.extension}`}
-              width={630}
-              height={630 / coverImage.metadata.dimensions.aspectRatio}
-            />
-
-            {over.description && <PortableText blocks={over.description} />}
+            {content.title && <h2>{content.title}</h2>}
+            {content.description && (
+              <PortableText blocks={content.description} />
+            )}
           </div>
         </MaxWidth>
       </div>

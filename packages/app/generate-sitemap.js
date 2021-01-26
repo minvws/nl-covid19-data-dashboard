@@ -3,6 +3,26 @@ const fs = require('fs');
 const globby = require('globby');
 const prettier = require('prettier');
 const gemeenteCodes = require('./gemeentecodes.json');
+const sanityClient = require('@sanity/client');
+
+const config = {
+  /**
+   * Find your project ID and dataset in `sanity.json` in your studio project.
+   * These are considered “public”, but you can use environment variables
+   * if you want differ between local dev and production.
+   *
+   * https://nextjs.org/docs/basic-features/environment-variables
+   **/
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || '',
+  useCdn: process.env.NODE_ENV === 'production',
+  /**
+   * Set useCdn to `false` if your application require the freshest possible
+   * data always (potentially slightly slower and a bit more expensive).
+   * Authenticated request (like preview) will always bypass the CDN
+   **/
+};
+const client = sanityClient(config);
 
 // regioData being generated as we can't import an ES export into CommonJS
 const regioData = [...Array(25).keys()].map(
@@ -17,6 +37,13 @@ const regioData = [...Array(25).keys()].map(
 const generateSitemap = async function (locale) {
   console.log(`Generating sitemap '${locale || 'nl'}'`);
   const prettierConfig = await prettier.resolveConfig('./.prettierrc.js');
+
+  const slugsQuery = `{
+    'articles': *[_type == 'article'] {"slug":slug.current},
+    'editorials': *[_type == 'editorial'] {"slug":slug.current},
+  }`;
+
+  const slugsData = await client.fetch(slugsQuery);
 
   const domain = `${
     process.env.NEXT_PUBLIC_LOCALE === 'en' ? 'government' : 'rijksoverheid'
@@ -56,15 +83,40 @@ const generateSitemap = async function (locale) {
     };
   });
 
+  const parameterizedPaths = ['code', 'slug'];
+
+  const isParameterizedPath = (path) =>
+    parameterizedPaths.some((pathFragement) => path.includes(pathFragement));
+
   const allPathsWithPriorities = pathsWithPriorities.filter(
-    (p) => !p.path.includes('code') && p.path !== ''
+    (p) => p.path !== '' && !isParameterizedPath(p.path)
   );
   const regioPaths = pathsWithPriorities.filter(
-    (p) => p.path.includes('code') && p.path.includes('veiligheidsregio')
+    (p) => isParameterizedPath(p.path) && p.path.includes('veiligheidsregio')
   );
   const gemeentePaths = pathsWithPriorities.filter(
-    (p) => p.path.includes('code') && p.path.includes('gemeente')
+    (p) => isParameterizedPath(p.path) && p.path.includes('gemeente')
   );
+  const articlePaths = pathsWithPriorities.filter(
+    (p) => isParameterizedPath(p.path) && p.path.includes('artikelen')
+  );
+  const editorialPaths = pathsWithPriorities.filter(
+    (p) => isParameterizedPath(p.path) && p.path.includes('weekberichten')
+  );
+
+  articlePaths.forEach((p) => {
+    slugsData.articles.forEach((article) => {
+      const pathWithCode = p.path.replace('[slug]', article.slug);
+      allPathsWithPriorities.push({ path: pathWithCode, priority: p.priority });
+    });
+  });
+
+  editorialPaths.forEach((p) => {
+    slugsData.editorials.forEach((editorial) => {
+      const pathWithCode = p.path.replace('[slug]', editorial.slug);
+      allPathsWithPriorities.push({ path: pathWithCode, priority: p.priority });
+    });
+  });
 
   regioPaths.forEach((p) => {
     regioData.forEach((regioCode) => {
