@@ -59,15 +59,15 @@ export function RiskLevelIndicator(props: RiskLevelIndicatorProps) {
         <Stopwatch />
       </Box>
       <Heading level={3} as="h2" py={2} pl={{ _: '3.5rem' }}>
-      <LinkWithIcon
+        <LinkWithIcon
           href={href}
           icon={<ArrowIcon css={css({ transform: 'rotate(-90deg)' })} />}
           iconPlacement="right"
           fontWeight="bold"
           headingLink
-          >
-              {title}
-          </LinkWithIcon>
+        >
+          {title}
+        </LinkWithIcon>
       </Heading>
       <Box>
         <Box
