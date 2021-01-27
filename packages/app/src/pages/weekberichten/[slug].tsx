@@ -10,6 +10,8 @@ import {
 } from '~/static-props/get-data';
 import { Block, Editorial } from '~/types/cms';
 import { assert } from '~/utils/assert';
+import { imageResizeTargets } from '@corona-dashboard/common';
+import { findClosestSize } from '~/utils/findClosestSize';
 
 const editorialsQuery = `*[_type == 'editorial'] {"slug":slug.current}`;
 
@@ -76,11 +78,18 @@ const EditorialDetailPage: FCWithLayout<typeof getStaticProps> = (props) => {
  * to simply have _something_
  */
 EditorialDetailPage.getLayout = (page, props) => {
+  const { cover } = props.content;
+  const { asset } = cover;
+
+  const url = `https://coronadashboard.rijksoverheid.nl/cms/${
+    asset.assetId
+  }-${findClosestSize(1200, imageResizeTargets)}.${asset.extension}`;
+
   return getLayoutWithMetadata({
     title: getTitle(props.content.title),
     description: toPlainText(props.content.intro),
-    openGraphImage: urlFor(props.content.cover).toString() || undefined,
-    twitterImage: urlFor(props.content.cover).toString() || undefined,
+    openGraphImage: url || undefined,
+    twitterImage: url || undefined,
   })(page, props);
 };
 

@@ -18,7 +18,6 @@ interface ArticleDetailProps {
 
 export function ArticleDetail({ article }: ArticleDetailProps) {
   const { asset } = article.cover;
-  console.log(article);
 
   return (
     <Box bg="white" py={{ _: 4, md: 5 }}>

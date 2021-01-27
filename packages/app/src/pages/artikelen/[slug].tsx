@@ -10,6 +10,8 @@ import {
 } from '~/static-props/get-data';
 import { Article, Block } from '~/types/cms';
 import { assert } from '~/utils/assert';
+import { imageResizeTargets } from '@corona-dashboard/common';
+import { findClosestSize } from '~/utils/findClosestSize';
 
 const articlesQuery = `*[_type == 'article'] {"slug":slug.current}`;
 
@@ -77,13 +79,16 @@ const ArticleDetailPage: FCWithLayout<typeof getStaticProps> = (props) => {
 ArticleDetailPage.getLayout = (page, props) => {
   const { cover } = props.content;
   const { asset } = cover;
-  const url = `https://coronadashboard.rijksoverheid.nl/cms/${asset.assetId}.${asset.extension}`;
+
+  const url = `https://coronadashboard.rijksoverheid.nl/cms/${
+    asset.assetId
+  }-${findClosestSize(1200, imageResizeTargets)}.${asset.extension}`;
 
   return getLayoutWithMetadata({
     title: getTitle(props.content.title),
     description: toPlainText(props.content.intro),
-    openGraphImage: url || undefined,
-    twitterImage: url || undefined,
+    openGraphImage: url,
+    twitterImage: url,
   })(page, props);
 };
 

@@ -123,8 +123,6 @@ function CoverImage({ image, children }: CoverImageProps) {
     imageResizeTargets
   )}.${asset.extension}`;
 
-  console.log(url);
-
   return (
     <BackgroundImage
       height="100%"
