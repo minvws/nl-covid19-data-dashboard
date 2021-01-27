@@ -1,17 +1,11 @@
 import { Box } from '~/components-styled/base';
 import { ContentBlock } from '~/components-styled/cms/content-block';
 import { MaxWidth } from '~/components-styled/max-width';
-import { urlFor } from '~/lib/sanity';
 import { ImageBlock, RichContentImageBlock } from '~/types/cms';
-import { assert } from '~/utils/assert';
+
+import { Image as SrcSetImage } from '~/components-styled/image';
 
 export function Image({ node }: { node: ImageBlock | RichContentImageBlock }) {
-  const url = urlFor(node).toString();
-  assert(
-    url !== null,
-    `could not get url for node: ${JSON.stringify(node, null, 2)}`
-  );
-
   const caption = 'caption' in node && node.caption && (
     <figcaption>{node.caption}</figcaption>
   );
@@ -20,14 +14,15 @@ export function Image({ node }: { node: ImageBlock | RichContentImageBlock }) {
     <Box bg="page">
       <MaxWidth py={4} px={4}>
         <Box as="figure" role="group" spacing={3}>
-          <Box
-            as="img"
-            display="block"
+          <SrcSetImage
+            src={`/${node.asset.assetId}.${node.asset.extension}`}
+            width={node.asset.metadata.dimensions.width}
+            height={node.asset.metadata.dimensions.height}
+            alt={node.alt}
             borderRadius={1}
             boxShadow="tile"
-            src={url}
-            alt={node.alt}
           />
+
           {caption}
         </Box>
       </MaxWidth>
@@ -35,7 +30,12 @@ export function Image({ node }: { node: ImageBlock | RichContentImageBlock }) {
   ) : (
     <ContentBlock>
       <Box as="figure" role="group" spacing={3} textAlign="center">
-        <Box as="img" display="block" src={url} alt={node.alt} />
+        <SrcSetImage
+          src={`/${node.asset.assetId}.${node.asset.extension}`}
+          width={node.asset.metadata.dimensions.width}
+          height={node.asset.metadata.dimensions.height}
+          alt={node.alt}
+        />
         {caption}
       </Box>
     </ContentBlock>
