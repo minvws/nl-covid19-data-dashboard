@@ -124,10 +124,12 @@ function CoverImage({ image, children }: CoverImageProps) {
     ? `${hotspot.x * 100}% ${hotspot.y * 100}%`
     : undefined;
 
+  //linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.73)),
+
   return (
     <BackgroundImage
       height="100%"
-      backgroundImage={`url(${url})`}
+      backgroundImage={`linear-gradient(to left, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.75)), url(${url})`}
       backgroundPosition={bgPosition}
       backgroundRepeat="no-repeat"
       backgroundSize="cover"

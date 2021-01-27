@@ -67,7 +67,6 @@ const StyledSearchContainer = styled.div<{ isFloating: boolean }>((x) =>
     position: x.isFloating ? 'absolute' : 'relative',
     width: '100%',
     borderRadius: 1,
-    boxShadow: 'tile',
     zIndex: 10,
     background: 'white',
   })
