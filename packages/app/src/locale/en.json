@@ -2146,7 +2146,7 @@
     "data_sitemap_toelichting": "Go directly to the following topics:",
     "mini_trend_tiles": {
       "positief_getest": {
-        "title": "Number of positive test results"
+        "title": "Number of confirmed cases"
       },
       "ziekenhuis_opnames": {
         "title": "Hospital admissions"
@@ -2230,7 +2230,7 @@
     },
     "mini_trend_tiles": {
       "positief_getest": {
-        "title": "Number of positive test results"
+        "title": "Number of confirmed cases"
       },
       "ziekenhuis_opnames": {
         "title": "Hospital admissions"
@@ -2303,7 +2303,7 @@
     },
     "mini_trend_tiles": {
       "positief_getest": {
-        "title": "Number of positive test results"
+        "title": "Number of confirmed cases"
       },
       "ziekenhuis_opnames": {
         "title": "Hospital admissions"
