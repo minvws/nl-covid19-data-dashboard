@@ -40,8 +40,6 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
           <PortableText blocks={article.intro} />
         </Box>
 
-        {/* <Image node={article.cover} /> */}
-
         <Image
           src={`/${coverAsset.assetId}.${coverAsset.extension}`}
           width={630}

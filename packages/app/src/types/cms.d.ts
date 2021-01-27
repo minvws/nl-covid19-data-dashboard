@@ -11,6 +11,8 @@ export interface SanityImageProps {
   metadata: {
     dimensions: {
       aspectRatio: number;
+      width: number;
+      height: number;
     };
   };
 }
@@ -36,10 +38,7 @@ export interface Article {
 
 interface ImageBlock {
   _type: 'image';
-  asset: {
-    _ref: string;
-    _type: 'reference';
-  };
+  asset: SanityImageProps;
   alt: string;
   crop?: {
     _type: 'sanity.imageCrop';
