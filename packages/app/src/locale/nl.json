@@ -2142,7 +2142,7 @@
       "selecteer_titel": "De risicokaart van Nederland",
       "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. \n\n**Er geldt een [landelijke lockdown](/landelijk/maatregelen) tot en met in ieder geval 9 februari.**"
     },
-    "data_sitemap_titel": "Alle landelijke cijfers op dit dashboard",
+    "data_sitemap_titel": "Onderwerpen op dit dashboard",
     "data_sitemap_toelichting": "Ga direct naar de volgende onderwerpen:",
     "mini_trend_tiles": {
       "positief_getest": {
@@ -2321,8 +2321,8 @@
         },
         "difference": {
           "zero": "Dit is dezelfde waarde als {{oldDate}}.",
-          "singular": "Dit is {{differenceIndicator}} dan op {{oldDate}}.",
-          "plural": "Dit is {{differenceIndicator}} dan op {{oldDate}}."
+          "singular": "Dit is {{differenceIndicator}} dan {{oldDate}}.",
+          "plural": "Dit is {{differenceIndicator}} dan {{oldDate}}."
         }
       },
       "intake_hospital_ma": {
