@@ -14,21 +14,33 @@ import { Heading, Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import { targetLanguage } from '~/locale';
 import {
   getLastGeneratedDate,
   getNlData,
   getText,
+  createGetContent,
 } from '~/static-props/get-data';
 import { formatNumber } from '~/utils/formatNumber';
+import { ArticleStrip } from '~/components-styled/article-strip'
+import { ArticleSummary } from '~/components-styled/article-teaser';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   getNlData,
-  getText
+  getText,
+  createGetContent<{
+    articles: ArticleSummary[];
+  }>(
+    `{
+    'articles': *[_type == "article"] | order(publicationDate) {"title":title.${targetLanguage}, slug, cover}[0..2]
+    }`
+  )  
 );
 
 const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
   text: siteText,
+  content,
 }) => {
   const text = siteText.vaccinaties;
 
@@ -52,6 +64,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             dataSources: [],
           }}
         />
+        <ArticleStrip articleSummaries={content.articles}/>
         <TwoKpiSection>
           <KpiTile
             title={text.data.kpi_total.title}
