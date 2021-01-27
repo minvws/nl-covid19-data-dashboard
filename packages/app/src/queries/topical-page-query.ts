@@ -11,7 +11,7 @@ export const topicalPageQuery = `{
         "asset": cover.asset->
       }
     }[0..2],
-    'editorial': *[_type == 'editorial'] | order(publicationDate) {
+    'editorial': *[_type == 'editorial'] | order(publicationDate desc) {
       "title":title.${targetLanguage},
       slug,
       "summary":summary.${targetLanguage},
