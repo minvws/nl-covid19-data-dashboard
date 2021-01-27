@@ -71,7 +71,7 @@ export function DataDrivenText({
         newDate: (
           <RelativeDate
             dateInSeconds={differenceValue.new_date_unix}
-            isCapitalized
+            isCapitalized={baseText.indexOf('{{newDate}}') === 0}
             absoluteDateTemplate={siteText.common.absolute_date_template}
           />
         ),
