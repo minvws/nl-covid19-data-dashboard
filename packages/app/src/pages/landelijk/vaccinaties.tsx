@@ -28,6 +28,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
+  data,
   text: siteText,
 }) => {
   const text = siteText.vaccinaties;
@@ -126,7 +127,10 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
               <StackedChart
                 width={width}
                 valueAnnotation={siteText.waarde_annotaties.x_miljoen}
-                values={[
+                values={
+                  data.vaccine_delivery.values
+
+                  /* [
                   {
                     pfizer: 0.2,
                     moderna: 0.05,
@@ -187,7 +191,8 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                     date_of_insertion_unix: 0,
                     date_unix: Date.parse('01 March 2021 00:00 UTC') / 1000,
                   },
-                ]}
+                ] */
+                }
                 config={[
                   {
                     metricProperty: 'pfizer',
