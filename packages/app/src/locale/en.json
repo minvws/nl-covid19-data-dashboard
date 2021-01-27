@@ -2298,7 +2298,7 @@
     },
     "risoconiveau_maatregelen": {
       "title": "Risk level & measures",
-      "description": "The risk level for the safety region of this municipality is",
+      "description": "The safety region of this municipality is at risk level",
       "bekijk_href": "View the measures"
     },
     "mini_trend_tiles": {
