@@ -88,8 +88,8 @@ EditorialDetailPage.getLayout = (page, props) => {
   return getLayoutWithMetadata({
     title: getTitle(props.content.title),
     description: toPlainText(props.content.intro),
-    openGraphImage: url || undefined,
-    twitterImage: url || undefined,
+    openGraphImage: url,
+    twitterImage: url,
   })(page, props);
 };
 
