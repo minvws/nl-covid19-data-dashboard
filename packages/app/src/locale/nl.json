@@ -279,7 +279,7 @@
       "text": "RIVM"
     },
     "legenda_line": "Het aantal besmettelijke mensen in Nederland.",
-    "legenda_marge": "De onzekerheidsmarge toont tussen welke waarden het aantal besmettelijke mensen zich bevindt.",
+    "legenda_marge": "Het aantal besmettelijke mensen is een schatting. De onzekerheidsmarge geeft aan hoeveel hoger of lager het precieze aantal kan zijn.",
     "rangeLegendLabel": "Onzekerheidsmarge",
     "lineLegendLabel": "Besmettelijke mensen",
     "geen_signaalwaarde_beschikbaar": "Vanwege een storing is deze informatie op dit moment helaas niet compleet. Aan een oplossing wordt gewerkt.",

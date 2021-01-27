@@ -279,7 +279,7 @@
       "text": "RIVM"
     },
     "legenda_line": "The number of infectious people in the Netherlands.",
-    "legenda_marge": "The confidence interval shows the range between which the number of infectious people falls.",
+    "legenda_marge": "The number of infectious people is an estimate. The uncertainty margin indicates how much higher or lower the actual number may be.",
     "rangeLegendLabel": "Confidence interval",
     "lineLegendLabel": "Infectious people",
     "geen_signaalwaarde_beschikbaar": "Due to a technical problem the data is currently not showing as intended. This is being investigated.",
@@ -2155,10 +2155,10 @@
         "title": "Intensive care admissions"
       },
       "toegediende_vaccins": {
-        "title": "Toegediende vaccins",
-        "sub_title": "Voorraad & Levering",
-        "administered_tests": "Tot nu toe zijn er circa {{administeredVaccines}} vaccinaties toegediend. Dit cijfer omvat zowel eerste als tweede prikken.",
-        "supply": "Er worden circa {{expectedDelivery}} vaccins verwacht als levering op korte termijn."
+        "title": "",
+        "sub_title": "",
+        "administered_tests": "",
+        "supply": ""
       }
     },
     "data_driven_texts": {
