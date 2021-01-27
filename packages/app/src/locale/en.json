@@ -13,7 +13,7 @@
     "bericht": "The number of newly tested COVID positives slightly decreased to 35.635 cases in the week of 20 to 26 January compared to the week before. This overview is overshadowed by the rising number of cases involving the SARS-CoV-2 variant that resulted in a massive influx of patients in hospitals in the United Kingdom and Ireland. It is estimated that the people that got infected with COVID-19 in the past week (20 to 26 January), more than a third is infected with the UK variant. We are facing two variants of the virus that seem to be spreading in the Netherlands at different speeds. As a result, there are essentially two separate COVID-19 epidemics: one epidemic involving the ‘old’ variant, in which infections are decreasing, and another epidemic involving the UK variant, in which infections are increasing.",
     "link": {
       "text": "View the full message from the RIVM",
-      "href": "https://www.rivm.nl/en/news/rise-in-new-COVID-19-variants-overshadows-more-positive-developments"
+      "href": "https://www.rivm.nl/en/news/uk-variant-gains-ground-in-the-netherlands"
     },
     "subtitel": "",
     "datum": ""
@@ -1034,7 +1034,7 @@
     },
     "valid_from": "Valid from {{validFrom}}",
     "sidebar_label": "Level of risk:",
-    "tile_title": "What do the risk levels mean?",
+    "tile_title": "What do the four risk levels mean?",
     "lees_meer": "Click here for more information about the risk levels"
   },
   "gemeente_layout": {
@@ -2146,7 +2146,7 @@
     "data_sitemap_toelichting": "Go directly to the following topics:",
     "mini_trend_tiles": {
       "positief_getest": {
-        "title": "Number of positive test results"
+        "title": "Number of confirmed cases"
       },
       "ziekenhuis_opnames": {
         "title": "Hospital admissions"
@@ -2202,7 +2202,7 @@
       }
     },
     "latest_articles": {
-      "title": "More information about coronavirus",
+      "title": "More information about the coronavirus",
       "subtitle": "New information about a range of topics concerning coronavirus data is posted here regularly.",
       "all_articles": "View all articles"
     }
@@ -2230,7 +2230,7 @@
     },
     "mini_trend_tiles": {
       "positief_getest": {
-        "title": "Number of positive test results"
+        "title": "Number of confirmed cases"
       },
       "ziekenhuis_opnames": {
         "title": "Hospital admissions"
@@ -2303,7 +2303,7 @@
     },
     "mini_trend_tiles": {
       "positief_getest": {
-        "title": "Number of positive test results"
+        "title": "Number of confirmed cases"
       },
       "ziekenhuis_opnames": {
         "title": "Hospital admissions"
