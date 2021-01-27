@@ -1,7 +1,7 @@
-import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import GetestIcon from '~/assets/test.svg';
 import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
+import { ArticleSummary } from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
 import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
@@ -16,15 +16,19 @@ import { createSelectRegionHandler } from '~/components/choropleth/select-handle
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
 import { FCWithLayout, getDefaultLayout } from '~/domain/layout/layout';
 import { DataSitemap } from '~/domain/topical/data-sitemap';
+import { EditorialSummary } from '~/domain/topical/editorial-teaser';
+import { EditorialTile } from '~/domain/topical/editorial-tile';
 import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
 import { TopicalChoroplethContainer } from '~/domain/topical/topical-choropleth-container';
 import { TopicalPageHeader } from '~/domain/topical/topical-page-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
+import { targetLanguage } from '~/locale';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
+  createGetContent,
   getGmData,
   getLastGeneratedDate,
   getText,
@@ -36,7 +40,6 @@ import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 export { getStaticPaths } from '~/static-paths/gm';
-import { asResponsiveArray } from '~/style/utils';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -44,11 +47,21 @@ export const getStaticProps = createGetStaticProps(
   getGmData,
   createGetChoroplethData({
     vr: ({ escalation_levels }) => ({ escalation_levels }),
-  })
+  }),
+  createGetContent<{
+    editorial: EditorialSummary;
+    highlight: { article: ArticleSummary };
+  }>(
+    `{
+    // Retrieve the latest 3 articles with the highlighted article filtered out:
+    'editorial': *[_type == 'editorial'] | order(publicationDate) {"title":title.${targetLanguage}, slug, "summary":summary.${targetLanguage}, cover}[0],
+    'highlight': *[_type == 'topicalPage']{"article":highlightedArticle->{"title":title.${targetLanguage}, slug, "summary":summary.${targetLanguage}, cover}}[0],
+    }`
+  )
 );
 
 const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { text: siteText, municipalityName, choropleth, data } = props;
+  const { text: siteText, municipalityName, choropleth, data, content } = props;
   const router = useRouter();
   const text = siteText.gemeente_actueel;
   const safetyRegionForMunicipality =
@@ -114,6 +127,7 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
                 icon={<GetestIcon />}
                 trendData={dataInfectedTotal.values}
                 metricProperty="infected"
+                href={`/gemeente/${router.query.code}/positief-geteste-mensen`}
               />
 
               <MiniTrendTile
@@ -133,6 +147,7 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
                 icon={<ZiekenhuisIcon />}
                 trendData={dataHospitalIntake.values}
                 metricProperty="admissions_on_date_of_reporting"
+                href={`/gemeente/${router.query.code}/ziekenhuis-opnames`}
               />
 
               <RiskLevelIndicator
@@ -141,6 +156,7 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
                 escalationLevel={filteredRegion.escalation_level}
                 code={filteredRegion.vrcode}
                 escalationTypes={escalationText.types}
+                href={`/veiligheidsregio/${safetyRegionForMunicipality?.code}/maatregelen`}
               >
                 {safetyRegionForMunicipality && (
                   <>
@@ -159,7 +175,10 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
             <QuickLinks
               header={text.quick_links.header}
               links={[
-                { href: '/landelijk', text: text.quick_links.links.nationaal },
+                {
+                  href: '/landelijk/vaccinaties',
+                  text: text.quick_links.links.nationaal,
+                },
                 safetyRegionForMunicipality
                   ? {
                       href: `/veiligheidsregio/${safetyRegionForMunicipality.code}/positief-geteste-mensen`,
@@ -184,14 +203,15 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
               ]}
             />
 
+            {content.editorial && content.highlight?.article && (
+              <EditorialTile
+                editorial={content.editorial}
+                highlightedArticle={content.highlight.article}
+              />
+            )}
+
             <Box>
-              <TopicalTile
-                css={css({
-                  pb: 0,
-                  mb: asResponsiveArray({ _: '2rem', md: '4rem' }),
-                  px: asResponsiveArray({ _: 3, md: 4 }),
-                })}
-              >
+              <TopicalTile>
                 <>
                   <TopicalChoroplethContainer
                     title={text.risiconiveaus.selecteer_titel}
@@ -214,27 +234,24 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
                       data={choropleth.vr}
                       metricName="escalation_levels"
                       metricProperty="escalation_level"
-                      onSelect={createSelectRegionHandler(
-                        router,
-                        'maatregelen'
-                      )}
+                      onSelect={createSelectRegionHandler(router, 'actueel')}
                       tooltipContent={escalationTooltip(
-                        createSelectRegionHandler(router, 'maatregelen')
+                        createSelectRegionHandler(router, 'actueel')
                       )}
                     />
                   </TopicalChoroplethContainer>
-                  <Box
-                    borderTopWidth="1px"
-                    borderTopStyle="solid"
-                    borderTopColor={colors.silver}
-                    mt={3}
-                    mx={-4}
-                  >
-                    <TopicalTile css={css({ mb: 0, p: 2 })}>
-                      <EscalationLevelExplanations />
-                    </TopicalTile>
-                  </Box>
                 </>
+              </TopicalTile>
+              <Box
+                borderTopWidth="1px"
+                borderTopStyle="solid"
+                borderTopColor={colors.silver}
+                mx={{ _: -3, md: 0 }}
+              />
+              <TopicalTile>
+                <Box mx={-3}>
+                  <EscalationLevelExplanations />
+                </Box>
               </TopicalTile>
             </Box>
 

@@ -1,4 +1,3 @@
-import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import ArtsIcon from '~/assets/arts.svg';
 import GetestIcon from '~/assets/test.svg';
@@ -8,7 +7,6 @@ import { Box } from '~/components-styled/base';
 import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
 import { MaxWidth } from '~/components-styled/max-width';
-import { NewsMessage } from '~/components-styled/news-message';
 import { QuickLinks } from '~/components-styled/quick-links';
 import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
@@ -39,7 +37,6 @@ import {
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { asResponsiveArray } from '~/style/utils';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -85,7 +82,6 @@ export const getStaticProps = createGetStaticProps(
 const Home: FCWithLayout<typeof getStaticProps> = (props) => {
   const { text: siteText, data, choropleth, content, lastGenerated } = props;
   const router = useRouter();
-  const notificatie = siteText.notificatie;
   const text = siteText.nationaal_actueel;
 
   const dataInfectedTotal = data.tested_overall;
@@ -134,6 +130,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                 icon={<GetestIcon />}
                 trendData={dataInfectedTotal.values}
                 metricProperty="infected"
+                href="/landelijk/positief-geteste-mensen"
               />
 
               <MiniTrendTile
@@ -153,6 +150,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                 icon={<ZiekenhuisIcon />}
                 trendData={dataHospitalIntake.values}
                 metricProperty="admissions_on_date_of_reporting"
+                href="/landelijk/ziekenhuis-opnames"
               />
 
               <MiniTrendTile
@@ -174,13 +172,17 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                 icon={<ArtsIcon />}
                 trendData={dataIntake.values}
                 metricProperty="admissions_moving_average"
+                href="/landelijk/intensive-care-opnames"
               />
             </MiniTrendTileLayout>
 
             <QuickLinks
               header={text.quick_links.header}
               links={[
-                { href: '/landelijk', text: text.quick_links.links.nationaal },
+                {
+                  href: '/landelijk/vaccinaties',
+                  text: text.quick_links.links.nationaal,
+                },
                 {
                   href: '/veiligheidsregio',
                   text: text.quick_links.links.veiligheidsregio,
@@ -189,29 +191,15 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
               ]}
             />
 
-            <NewsMessage
-              imageSrc="images/toelichting-afbeelding.png"
-              linkText={notificatie.link.text}
-              href={notificatie.link.href}
-              message={notificatie.bericht}
-              publishedAt={notificatie.datum}
-              subtitle={notificatie.subtitel}
-              title={notificatie.titel}
-            />
-
-            <EditorialTile
-              editorial={content.editorial}
-              highlightedArticle={content.highlight.article}
-            />
+            {content.editorial && content.highlight?.article && (
+              <EditorialTile
+                editorial={content.editorial}
+                highlightedArticle={content.highlight.article}
+              />
+            )}
 
             <Box>
-              <TopicalTile
-                css={css({
-                  pb: 0,
-                  mb: asResponsiveArray({ _: '2rem', md: '4rem' }),
-                  px: asResponsiveArray({ _: 3, md: 4 }),
-                })}
-              >
+              <TopicalTile>
                 <>
                   <TopicalChoroplethContainer
                     title={text.risiconiveaus.selecteer_titel}
@@ -234,27 +222,24 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                       data={choropleth.vr}
                       metricName="escalation_levels"
                       metricProperty="escalation_level"
-                      onSelect={createSelectRegionHandler(
-                        router,
-                        'maatregelen'
-                      )}
+                      onSelect={createSelectRegionHandler(router, 'actueel')}
                       tooltipContent={escalationTooltip(
-                        createSelectRegionHandler(router, 'maatregelen')
+                        createSelectRegionHandler(router, 'actueel')
                       )}
                     />
                   </TopicalChoroplethContainer>
-                  <Box
-                    borderTopWidth="1px"
-                    borderTopStyle="solid"
-                    borderTopColor={colors.silver}
-                    mt={3}
-                    mx={-4}
-                  >
-                    <TopicalTile css={css({ mb: 0, p: 2 })}>
-                      <EscalationLevelExplanations />
-                    </TopicalTile>
-                  </Box>
                 </>
+              </TopicalTile>
+              <Box
+                borderTopWidth="1px"
+                borderTopStyle="solid"
+                borderTopColor={colors.silver}
+                mx={{ _: -3, md: 0 }}
+              />
+              <TopicalTile>
+                <Box mx={-3}>
+                  <EscalationLevelExplanations />
+                </Box>
               </TopicalTile>
             </Box>
             <DataSitemap />

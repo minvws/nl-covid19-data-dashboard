@@ -6,15 +6,15 @@ import { ChartTileContainer } from './chart-tile-container';
 import { ChartTimeControls } from './chart-time-controls';
 import { MetadataProps } from './metadata';
 import { Heading } from './typography';
-import { useUniqueId } from '~/utils/useUniqueId';
 import { assert } from '~/utils/assert';
+import slugify from 'slugify';
 interface ChartTileProps {
   children: React.ReactNode;
   metadata: MetadataProps;
   title: string;
   description?: React.ReactNode;
   ariaDescription?: string;
-  uniqueId?: string;
+  ariaLabelledBy?: string;
 }
 
 interface ChartTileWithTimeframeProps extends Omit<ChartTileProps, 'children'> {
@@ -22,7 +22,7 @@ interface ChartTileWithTimeframeProps extends Omit<ChartTileProps, 'children'> {
   timeframeOptions?: TimeframeOption[];
   timeframeInitialValue?: TimeframeOption;
   ariaDescription?: string;
-  uniqueId?: string;
+  ariaLabelledBy?: string;
 }
 
 export function ChartTile({
@@ -37,7 +37,12 @@ export function ChartTile({
     `This graph doesn't include a valid description nor an ariaDescription, please add one of them.`
   );
 
-  const uniqueId = useUniqueId();
+  /**
+   * Chart title should be unique on a page. If we instead use useUniqueId here
+   * the SSR markup doesn't match the client-side rendered id, which generates a
+   * warning and is probably problematic for screen readers.
+   */
+  const ariaLabelledBy = slugify(title);
 
   return (
     <ChartTileContainer metadata={metadata}>
@@ -45,7 +50,7 @@ export function ChartTile({
         title={title}
         description={description}
         ariaDescription={ariaDescription}
-        uniqueId={uniqueId}
+        ariaLabelledBy={ariaLabelledBy}
       />
       {children}
     </ChartTileContainer>
@@ -59,7 +64,7 @@ export function ChartTileWithTimeframe({
   timeframeOptions = ['all', '5weeks', 'week'],
   timeframeInitialValue = 'all',
   children,
-  uniqueId,
+  ariaLabelledBy,
   ariaDescription,
 }: ChartTileWithTimeframeProps) {
   const [timeframe, setTimeframe] = useState<TimeframeOption>(
@@ -74,7 +79,7 @@ export function ChartTileWithTimeframe({
         timeframe={timeframe}
         timeframeOptions={timeframeOptions}
         onTimeframeChange={setTimeframe}
-        uniqueId={uniqueId}
+        ariaLabelledBy={ariaLabelledBy}
         ariaDescription={ariaDescription}
       />
       {children(timeframe)}
@@ -88,7 +93,7 @@ function ChartTileHeader({
   timeframe,
   timeframeOptions,
   onTimeframeChange,
-  uniqueId,
+  ariaLabelledBy,
   ariaDescription,
 }: {
   title: string;
@@ -96,7 +101,7 @@ function ChartTileHeader({
   timeframe?: TimeframeOption;
   timeframeOptions?: TimeframeOption[];
   onTimeframeChange?: (timeframe: TimeframeOption) => void;
-  uniqueId?: string;
+  ariaLabelledBy?: string;
   ariaDescription?: string;
 }) {
   return (
@@ -109,17 +114,17 @@ function ChartTileHeader({
       <div css={css({ mb: [3, null, null, null, 0], mr: [0, 0, 2] })}>
         <Heading level={3}>{title}</Heading>
         {!description && (
-          <div css={css({ display: 'none' })} aria-labelledby={uniqueId}>
+          <div css={css({ display: 'none' })} aria-labelledby={ariaLabelledBy}>
             {ariaDescription}
           </div>
         )}
         {description &&
           (typeof description === 'string' ? (
-            <p aria-labelledby={uniqueId} css={css({ m: 0 })}>
+            <p aria-labelledby={ariaLabelledBy} css={css({ m: 0 })}>
               {description}
             </p>
           ) : (
-            <div aria-labelledby={uniqueId}>{description}</div>
+            <div aria-labelledby={ariaLabelledBy}>{description}</div>
           ))}
       </div>
       {timeframe && onTimeframeChange && (

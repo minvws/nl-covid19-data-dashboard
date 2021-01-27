@@ -71,7 +71,8 @@ export function DataDrivenText({
         newDate: (
           <RelativeDate
             dateInSeconds={differenceValue.new_date_unix}
-            isCapitalized
+            isCapitalized={baseText.indexOf('{{newDate}}') === 0}
+            absoluteDateTemplate={siteText.common.absolute_date_template}
           />
         ),
         propertyValue: <strong>{formatNumber(propertyValue)}</strong>,
@@ -84,7 +85,12 @@ export function DataDrivenText({
             staticTimespan={siteText.toe_en_afname.vorige_waarde}
           />
         ),
-        oldDate: <RelativeDate dateInSeconds={differenceValue.old_date_unix} />,
+        oldDate: (
+          <RelativeDate
+            dateInSeconds={differenceValue.old_date_unix}
+            absoluteDateTemplate={siteText.common.absolute_date_template}
+          />
+        ),
       })}
     </Text>
   );

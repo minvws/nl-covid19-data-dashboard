@@ -36,6 +36,7 @@
     "remark-external-links": "^7.0.0",
     "remark-parse": "^8.0.3",
     "remark-rehype": "^7.0.0",
+    "slugify": "^1.4.6",
     "styled-components": "^5.2.0",
     "styled-system": "^5.1.5",
     "swr": "^0.3.4",
