@@ -260,7 +260,7 @@ export function LineChart<T extends Value>({
     [bisect, trendsList, linesConfig, toggleHoverElements]
   );
 
-  const renderAxes = useCallback(
+  const renderTrendLines = useCallback(
     (x: ChartScales) => (
       <>
         {trendsList.map((trend, index) => (
@@ -310,7 +310,7 @@ export function LineChart<T extends Value>({
           componentCallback={componentCallback}
           ariaLabelledBy={ariaLabelledBy}
         >
-          {renderAxes}
+          {renderTrendLines}
         </ChartAxes>
 
         {isDefined(tooltipData) && (

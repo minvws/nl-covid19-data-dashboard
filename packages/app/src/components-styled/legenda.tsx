@@ -32,7 +32,7 @@ const List = styled.ul(
 
 const Item = styled.li(
   css({
-    my: 2,
+    my: 1,
     mr: 3,
     position: 'relative',
     display: 'inline-block',

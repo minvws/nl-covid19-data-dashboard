@@ -112,6 +112,7 @@ export const colors = {
     secondary: '#154273',
     neutral: '#C6C8CA',
     underReported: '#E6E6E6',
+    axis: '#C4C4C4',
     axisLabels: '#666666',
     benchmark: '#4f5458',
     fill: 'rgba(0, 123, 199, .05)',
