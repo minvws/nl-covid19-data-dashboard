@@ -79,11 +79,9 @@ export function BehaviorChoroplethTile({
 
           return (
             <TooltipContent title={context.vrname} onSelect={onSelect}>
-              <Text m={0}>
-                <span css={css({ fontWeight: 'bold' })}>
-                  {siteText.gedrag_common[type]}:{' '}
-                  {value ? `${value}%` : text.verdeling_in_nederland.onbekend}
-                </span>
+              <Text m={0} css={css({ fontWeight: 'bold' })}>
+                {siteText.gedrag_common[type]}:{' '}
+                {value ? `${value}%` : text.verdeling_in_nederland.onbekend}
               </Text>
               <Text m={0}>{siteText.gedrag_onderwerpen[currentId]}</Text>
             </TooltipContent>
