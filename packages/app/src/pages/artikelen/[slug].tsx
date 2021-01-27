@@ -35,7 +35,10 @@ export const getStaticProps = createGetStaticProps(
     return `*[_type == 'article' && slug.current == '${context.params.slug}']{
       ...,
       "slug": slug.current,
-      "coverAsset": cover.asset ->,
+      "cover": {
+        ...cover,
+        "asset": cover.asset->
+      },
       "content": {
         "_type": content._type,
   	    "nl": [

@@ -32,7 +32,32 @@ export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   createGetContent<Editorial>((context) => {
     assert(context?.params?.slug, 'Slug required to retrieve article');
-    return `*[_type == 'editorial' && slug.current == '${context.params.slug}'][0]`;
+    return `
+      *[_type == 'editorial' && slug.current == '${context.params.slug}'][0]{
+        ...,
+        "cover": {
+          ...cover,
+          "asset": cover.asset->
+        },
+        "content": {
+          "_type": content._type,
+          "nl": [
+            ...content.nl[]
+            {
+              ...,
+              "asset": asset->
+            },
+          ],
+          "en": [
+            ...content.en[]
+            {
+              ...,
+              "asset": asset->
+            },
+          ],
+        }
+      }
+    `;
   })
 );
 
