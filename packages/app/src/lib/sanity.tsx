@@ -1,8 +1,6 @@
 // lib/sanity.ts
 import BlockContent from '@sanity/block-content-to-react';
 import sanityClient from '@sanity/client';
-import imageUrlBuilder from '@sanity/image-url';
-import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 import { TLanguageKey } from '~/locale';
 
 const config = {
@@ -30,7 +28,6 @@ export const PortableText = BlockContent;
 export const client = sanityClient(config);
 
 // const builder = imageUrlBuilder(client);
-
 /**
  * Set up a helper function for generating Image URLs with only the asset reference data in your documents.
  * Read more: https://www.sanity.io/docs/image-url
