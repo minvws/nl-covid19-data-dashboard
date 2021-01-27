@@ -15,17 +15,17 @@ import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-ch
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
 import { FCWithLayout, getDefaultLayout } from '~/domain/layout/layout';
+import { ArticleList } from '~/domain/topical/article-list';
 import { DataSitemap } from '~/domain/topical/data-sitemap';
 import { EditorialSummary } from '~/domain/topical/editorial-teaser';
 import { EditorialTile } from '~/domain/topical/editorial-tile';
-import { ArticleList } from '~/domain/topical/article-list';
 import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
 import { TopicalChoroplethContainer } from '~/domain/topical/topical-choropleth-container';
 import { TopicalPageHeader } from '~/domain/topical/topical-page-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
-import { targetLanguage } from '~/locale';
+import { topicalPageQuery } from '~/queries/topical-page-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
@@ -52,38 +52,7 @@ export const getStaticProps = createGetStaticProps(
     articles: ArticleSummary[];
     editorial: EditorialSummary;
     highlight: { article: ArticleSummary };
-  }>(
-    `{
-      // Retrieve the latest 3 articles with the highlighted article filtered out:
-      'articles': *[_type == 'article' && !(_id == *[_type == 'topicalPage']{"i":highlightedArticle->{_id}}[0].i._id)] | order(publicationDate) {
-        "title":title.${targetLanguage},
-        slug, "summary":summary.${targetLanguage},
-        "cover": {
-          ...cover,
-          "asset": cover.asset->
-        }
-      }[0..2],
-      'editorial': *[_type == 'editorial'] | order(publicationDate) {
-        "title":title.${targetLanguage},
-        slug, "summary":summary.${targetLanguage},
-        "cover": {
-          ...cover,
-          "asset": cover.asset->
-        }
-      }[0],
-      'highlight': *[_type == 'topicalPage']{
-        "article":highlightedArticle->{
-          "title":title.${targetLanguage},
-          slug,
-          "summary":summary.${targetLanguage},
-          "cover": {
-            ...cover,
-            "asset": cover.asset->
-          }
-        }
-      }[0],
-    }`
-  )
+  }>(topicalPageQuery)
 );
 
 const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
@@ -151,7 +120,7 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
                 icon={<GetestIcon />}
                 trendData={dataInfectedTotal.values}
                 metricProperty="infected"
-                href={`/veiligheidsregio/${router.query.code}/positief-geteste-mensen`}
+                href={`/gemeente/${router.query.code}/positief-geteste-mensen`}
               />
 
               <MiniTrendTile
@@ -171,7 +140,7 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
                 icon={<ZiekenhuisIcon />}
                 trendData={dataHospitalIntake.values}
                 metricProperty="admissions_on_date_of_reporting"
-                href={`/veiligheidsregio/${router.query.code}/ziekenhuis-opnames`}
+                href={`/gemeente/${router.query.code}/ziekenhuis-opnames`}
               />
 
               <RiskLevelIndicator
