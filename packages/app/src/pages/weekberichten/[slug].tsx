@@ -1,7 +1,7 @@
 import { Box } from '~/components-styled/base';
 import { EditorialDetail } from '~/components-styled/editorial-detail';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
-import { client, localize, urlFor } from '~/lib/sanity';
+import { client, localize } from '~/lib/sanity';
 import { targetLanguage } from '~/locale/index';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
