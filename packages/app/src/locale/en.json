@@ -1035,7 +1035,7 @@
     "valid_from": "Valid from {{validFrom}}",
     "sidebar_label": "Level of risk:",
     "tile_title": "",
-    "lees_meer": ""
+    "lees_meer": "Click here for more information about the risk levels"
   },
   "gemeente_layout": {
     "headings": {
@@ -2164,8 +2164,8 @@
         },
         "difference": {
           "zero": "That equals {{oldDate}}.",
-          "singular": "That is {{differenceIndicator}} more than {{oldDate}}.",
-          "plural": "That is {{differenceIndicator}} more than {{oldDate}}."
+          "singular": "That is {{differenceIndicator}} than {{oldDate}}.",
+          "plural": "That is {{differenceIndicator}} than {{oldDate}}."
         }
       },
       "intake_hospital_ma": {
@@ -2176,8 +2176,8 @@
         },
         "difference": {
           "zero": "That equals {{oldDate}}.",
-          "singular": "That is {{differenceIndicator}} more than {{oldDate}}.",
-          "plural": "That is {{differenceIndicator}} more than {{oldDate}}."
+          "singular": "That is {{differenceIndicator}} than {{oldDate}}.",
+          "plural": "That is {{differenceIndicator}} than {{oldDate}}."
         }
       },
       "intake_intensivecare_ma": {
