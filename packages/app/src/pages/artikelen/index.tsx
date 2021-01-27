@@ -20,7 +20,7 @@ export const getStaticProps = createGetStaticProps(
       "cover": {
         ...cover,
         "asset": cover.asset->
-      }    
+      }
     }`
   )
 );
