@@ -1218,7 +1218,7 @@
   "data_warning_text": "",
   "veelgestelde_vragen_metadata": {
     "title": "Frequently asked questions | Dashboard Coronavirus COVID-19 | Government.nl",
-    "description": "",
+    "description": "Information on the development of the coronavirus in the Netherlands.",
     "url": "https://coronadashboard.government.nl/veelgestelde-vragen"
   },
   "waarde_annotaties": {
@@ -2135,8 +2135,8 @@
     "title": "The current situation in {{the_netherlands}}",
     "the_netherlands": "The Netherlands",
     "metadata": {
-      "title": "The current situation in The Netherlands",
-      "description": "The current situation in The Netherlands"
+      "title": "Dashboard Coronavirus COVID-19 | Government.nl",
+      "description": "Information on the development of the coronavirus in the Netherlands."
     },
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of the Netherlands",
@@ -2155,10 +2155,10 @@
         "title": "Intensive care admissions"
       },
       "toegediende_vaccins": {
-        "title": "",
-        "sub_title": "",
-        "administered_tests": "",
-        "supply": ""
+        "title": "Number of doses administered",
+        "sub_title": "Approved vaccines to be delivered",
+        "administered_tests": "Around {{administeredVaccines}} vaccine doses have been administered so far. This number includes both first and second doses.",
+        "supply": "The Netherlands expects tot receive {{expectedDelivery}} approved vaccine doses over the next six weeks."
       }
     },
     "data_driven_texts": {

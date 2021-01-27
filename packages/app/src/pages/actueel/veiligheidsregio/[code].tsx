@@ -18,6 +18,7 @@ import { FCWithLayout, getDefaultLayout } from '~/domain/layout/layout';
 import { DataSitemap } from '~/domain/topical/data-sitemap';
 import { EditorialSummary } from '~/domain/topical/editorial-teaser';
 import { EditorialTile } from '~/domain/topical/editorial-tile';
+import { ArticleList } from '~/domain/topical/article-list';
 import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
@@ -48,11 +49,13 @@ export const getStaticProps = createGetStaticProps(
     vr: ({ escalation_levels }) => ({ escalation_levels }),
   }),
   createGetContent<{
+    articles: ArticleSummary[];
     editorial: EditorialSummary;
     highlight: { article: ArticleSummary };
   }>(
     `{
     // Retrieve the latest 3 articles with the highlighted article filtered out:
+    'articles': *[_type == 'article' && !(_id == *[_type == 'topicalPage']{"i":highlightedArticle->{_id}}[0].i._id)] | order(publicationDate) {"title":title.${targetLanguage}, slug, "summary":summary.${targetLanguage}, cover}[0..2],
     'editorial': *[_type == 'editorial'] | order(publicationDate) {"title":title.${targetLanguage}, slug, "summary":summary.${targetLanguage}, cover}[0],
     'highlight': *[_type == 'topicalPage']{"article":highlightedArticle->{"title":title.${targetLanguage}, slug, "summary":summary.${targetLanguage}, cover}}[0],
     }`
@@ -232,6 +235,8 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
             </Box>
 
             <DataSitemap />
+
+            <ArticleList articleSummaries={content.articles} />
           </TileList>
         </MaxWidth>
       </Box>
