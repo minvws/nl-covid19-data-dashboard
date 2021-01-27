@@ -44,8 +44,12 @@ const tooltipStyles = {
 
 const NUM_TICKS = 3;
 const NO_HOVER_INDEX = -1;
+const NUM_1K = 1000;
+const NUM_100K = 100000;
+const NUM_1M = 1000000;
 
-const tickFormatNumber = (v: NumberValue) => formatNumber(v.valueOf());
+const tickFormatNumber = (v: NumberValue) =>
+  formatNumber(v.valueOf() / NUM_100K);
 const tickFormatPercentage = (v: NumberValue) =>
   `${formatPercentage(v.valueOf())}%`;
 
@@ -253,29 +257,33 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
     (data: SeriesValue, key: string) => {
       const date = getDate(data);
 
-      const [year, weekNumber, weekStartDate, weekEndDate] = getWeekNumber(
-        date
-      );
+      const isMillion = (v: number) => v / NUM_1M > 1;
+
+      const [, , weekStartDate, weekEndDate] = getWeekNumber(date);
+
+      const isTotalMillion = isMillion(seriesSumByKey[key]);
+      const isWeekMillion = isMillion(data[key]);
 
       return (
         <Box p={2}>
           <Box mb={2}>
-            <InlineText fontWeight="bold">{labelByKey[key]}:</InlineText>
-            {` ${formatPercentage(seriesSumByKey[key])} mln ${
-              siteText.waarde_annotaties.totaal
-            } `}
+            <InlineText fontWeight="bold">
+              {`${formatDayMonth(weekStartDate)} - ${formatDayMonth(
+                weekEndDate
+              )}`}
+              :
+            </InlineText>
+            {isWeekMillion
+              ? ` ${formatPercentage(data[key] / NUM_1M)} mln`
+              : ` ${formatNumber(Math.round(data[key] / NUM_1K))} k`}
           </Box>
 
           <Box mb={2}>
-            <InlineText fontWeight="bold">
-              {`Week ${weekNumber} ${year}`}:
-            </InlineText>
-            {` ${formatPercentage(data[key])} mln`}
-          </Box>
-          <Box>
-            {`${formatDayMonth(weekStartDate)} - ${formatDayMonth(
-              weekEndDate
-            )}`}
+            <InlineText fontWeight="bold">{labelByKey[key]}:</InlineText>
+            {isTotalMillion
+              ? ` ${formatPercentage(seriesSumByKey[key] / NUM_1M)} mln `
+              : ` ${formatNumber(Math.round(seriesSumByKey[key] / NUM_1K))} k `}
+            {siteText.waarde_annotaties.totaal}
           </Box>
         </Box>
       );

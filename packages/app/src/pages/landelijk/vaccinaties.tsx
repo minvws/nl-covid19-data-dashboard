@@ -126,17 +126,19 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             {({ width }) => (
               <StackedChart
                 width={width}
-                valueAnnotation={siteText.waarde_annotaties.x_miljoen}
+                valueAnnotation={siteText.waarde_annotaties.x_100k}
                 values={data.vaccine_delivery.values}
                 config={[
                   {
                     metricProperty: 'pfizer',
-                    color: '#007AEA',
+                    // color: '#007AEA',
+                    color: '#00BBB5',
                     legendLabel: 'BioNTech/Pfizer',
                   },
                   {
                     metricProperty: 'moderna',
-                    color: '#6AB4F9',
+                    // color: '#6AB4F9',
+                    color: '#C263EF',
                     legendLabel: 'Moderna',
                   },
                   /*  {
