@@ -2320,7 +2320,7 @@
           "plural": "{{newDate}} {{propertyValue}} new confirmed cases were reported"
         },
         "difference": {
-          "zero": "This is the same value as {{oldDate}}.",
+          "zero": "This is the same figure as {{oldDate}}.",
           "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
           "plural": "This is {{differenceIndicator}} than {{oldDate}}."
         }
@@ -2332,7 +2332,7 @@
           "plural": "{{newDate}} {{propertyValue}} new hospital admissions were reported."
         },
         "difference": {
-          "zero": "This is the same value as {{oldDate}}.",
+          "zero": "This is the same figure as {{oldDate}}.",
           "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
           "plural": "This is {{differenceIndicator}} than {{oldDate}}."
         }
