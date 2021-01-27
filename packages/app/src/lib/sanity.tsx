@@ -41,7 +41,7 @@ export function localize<T>(value: T | T[], languages: TLanguageKey[]): T {
   const anyValue = value as any;
 
   if (Array.isArray(value)) {
-    return (value.map((v) => localize(v, languages)) as unknown) as T;
+    return (value.map((v: unknown) => localize(v, languages)) as unknown) as T;
   }
 
   if (typeof value == 'object' && value !== null) {

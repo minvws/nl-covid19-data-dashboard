@@ -25,7 +25,7 @@ import { Layout } from '~/domain/layout/layout';
 import siteText from '~/locale/index';
 import theme from '~/style/theme';
 import { useBreakpoints } from '~/utils/useBreakpoints';
-
+import { Box } from '~/components-styled/base';
 interface NationalLayoutProps {
   lastGenerated: string;
   data: National;
@@ -96,7 +96,7 @@ function NationalLayout(props: NationalLayoutProps) {
             role="navigation"
           >
             <Menu>
-              <CategoryMenu title={siteText.nationaal_layout.headings.algemeen}>
+              <Box spacing={3} pt={4}>
                 <MetricMenuItemLink
                   href={{
                     pathname: '/landelijk/maatregelen',
@@ -110,7 +110,7 @@ function NationalLayout(props: NationalLayoutProps) {
                   title={siteText.nationaal_maatregelen.titel_sidebar}
                   subtitle={siteText.nationaal_maatregelen.subtitel_sidebar}
                 />
-              </CategoryMenu>
+              </Box>
               <CategoryMenu
                 title={siteText.nationaal_layout.headings.vaccinaties}
               >

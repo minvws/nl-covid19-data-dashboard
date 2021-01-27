@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-import ArtsIcon from '~/assets/arts.svg';
 import GetestIcon from '~/assets/test.svg';
 import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
 import { ArticleSummary } from '~/components-styled/article-teaser';
@@ -26,6 +25,7 @@ import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
 import { TopicalChoroplethContainer } from '~/domain/topical/topical-choropleth-container';
 import { TopicalPageHeader } from '~/domain/topical/topical-page-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
+import { TopicalVaccineTile } from '~/domain/topical/topical-vaccine-tile';
 import { targetLanguage } from '~/locale';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
@@ -86,7 +86,6 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
 
   const dataInfectedTotal = data.tested_overall;
   const dataHospitalIntake = data.hospital_nice;
-  const dataIntake = data.intensive_care_nice;
 
   return (
     <>
@@ -153,27 +152,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                 href="/landelijk/ziekenhuis-opnames"
               />
 
-              <MiniTrendTile
-                title={text.mini_trend_tiles.ic_opnames.title}
-                text={
-                  <DataDrivenText
-                    data={data}
-                    metricName="intensive_care_nice"
-                    metricProperty="admissions_moving_average"
-                    differenceKey="intensive_care_nice__admissions_moving_average"
-                    valueTexts={
-                      text.data_driven_texts.intake_intensivecare_ma.value
-                    }
-                    differenceTexts={
-                      text.data_driven_texts.intake_intensivecare_ma.difference
-                    }
-                  />
-                }
-                icon={<ArtsIcon />}
-                trendData={dataIntake.values}
-                metricProperty="admissions_moving_average"
-                href="/landelijk/intensive-care-opnames"
-              />
+              <TopicalVaccineTile />
             </MiniTrendTileLayout>
 
             <QuickLinks

@@ -68,12 +68,17 @@ const StyledSearchInput = styled.input(
     borderWidth: '1px',
     borderColor: 'lightGray',
     fontSize: ['1rem', null, null, '1.125rem'],
+    appearance: 'textfield',
     m: 0,
     '&::-webkit-search-cancel-button': {
       display: 'none',
     },
     '&::-ms-clear': {
       display: 'none',
+    },
+    '&:placeholder-shown': {
+      pr: 2,
+      boxShadow: 'tile',
     },
   })
 );

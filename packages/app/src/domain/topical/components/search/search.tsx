@@ -31,7 +31,11 @@ export function Search({ initialValue }: { initialValue?: string }) {
             <Box position="relative" ref={heightRef}>
               <SearchInput />
             </Box>
-            {context.showResults && <SearchResults />}
+            {context.showResults && (
+              <Box boxShadow="tile">
+                <SearchResults />
+              </Box>
+            )}
           </Box>
         </SearchForm>
       )}
@@ -67,7 +71,6 @@ const StyledSearchContainer = styled.div<{ isFloating: boolean }>((x) =>
     position: x.isFloating ? 'absolute' : 'relative',
     width: '100%',
     borderRadius: 1,
-    boxShadow: 'tile',
     zIndex: 10,
     background: 'white',
   })

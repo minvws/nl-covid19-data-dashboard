@@ -71,7 +71,7 @@ export type LineChartProps<T extends Value> = {
   showLegend?: boolean;
   legendItems?: LegendItem[];
   componentCallback?: ComponentCallbackFunction;
-  uniqueId?: string;
+  ariaLabelledBy?: string;
 };
 
 export function LineChart<T extends Value>({
@@ -98,7 +98,7 @@ export function LineChart<T extends Value>({
       }))
     : undefined,
   componentCallback,
-  uniqueId,
+  ariaLabelledBy,
 }: LineChartProps<T>) {
   const {
     tooltipData,
@@ -312,7 +312,7 @@ export function LineChart<T extends Value>({
           onHover={handleHover}
           benchmark={benchmark}
           componentCallback={componentCallback}
-          uniqueId={uniqueId}
+          ariaLabelledBy={ariaLabelledBy}
         >
           {renderTrends}
         </ChartAxes>

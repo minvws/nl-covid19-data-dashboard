@@ -195,9 +195,12 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
               metricName="tested_overall"
               metricProperty="infected_per_100k"
               tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
-                createSelectMunicipalHandler(router)
+                createSelectMunicipalHandler(router, 'positief-geteste-mensen')
               )}
-              onSelect={createSelectMunicipalHandler(router)}
+              onSelect={createSelectMunicipalHandler(
+                router,
+                'positief-geteste-mensen'
+              )}
             />
           )}
           {selectedMap === 'region' && (

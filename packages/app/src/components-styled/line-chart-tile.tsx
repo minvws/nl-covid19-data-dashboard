@@ -4,8 +4,8 @@ import { Value } from '~/components-styled/line-chart/helpers';
 import { TimeframeOption } from '~/utils/timeframe';
 import { ChartTileWithTimeframe } from './chart-tile';
 import { MetadataProps } from './metadata';
-import { useUniqueId } from '~/utils/useUniqueId';
 import { assert } from '~/utils/assert';
+import slugify from 'slugify';
 interface LineChartTileProps<T extends Value> extends LineChartProps<T> {
   title: string;
   metadata: MetadataProps;
@@ -30,7 +30,7 @@ export function LineChartTile<T extends Value>({
     description || ariaDescription,
     `This graph doesn't include a valid description nor an ariaDescription, please add one of them.`
   );
-  const uniqueId = useUniqueId();
+  const ariaLabelledBy = slugify(title);
 
   return (
     <ChartTileWithTimeframe
@@ -39,7 +39,7 @@ export function LineChartTile<T extends Value>({
       metadata={metadata}
       timeframeOptions={timeframeOptions}
       timeframeInitialValue={timeframeInitialValue}
-      uniqueId={uniqueId}
+      ariaLabelledBy={ariaLabelledBy}
       ariaDescription={ariaDescription}
     >
       {(timeframe) => (
@@ -50,7 +50,7 @@ export function LineChartTile<T extends Value>({
                 {...chartProps}
                 width={parent.width}
                 timeframe={timeframe}
-                uniqueId={uniqueId}
+                ariaLabelledBy={ariaLabelledBy}
               />
             )}
           </ParentSize>
