@@ -6,8 +6,6 @@ import { ImageBlock, RichContentImageBlock } from '~/types/cms';
 import { Image as SrcSetImage } from '~/components-styled/image';
 
 export function Image({ node }: { node: ImageBlock | RichContentImageBlock }) {
-  console.log({ node });
-
   const caption = 'caption' in node && node.caption && (
     <figcaption>{node.caption}</figcaption>
   );
@@ -16,14 +14,15 @@ export function Image({ node }: { node: ImageBlock | RichContentImageBlock }) {
     <Box bg="page">
       <MaxWidth py={4} px={4}>
         <Box as="figure" role="group" spacing={3}>
-          <Box
-            as="img"
-            display="block"
+          <SrcSetImage
+            src={`/${node.asset.assetId}.${node.asset.extension}`}
+            width={node.asset.metadata.dimensions.width}
+            height={node.asset.metadata.dimensions.height}
+            alt={node.alt}
             borderRadius={1}
             boxShadow="tile"
-            src={node.asset.assetId}
-            alt={node.alt}
           />
+
           {caption}
         </Box>
       </MaxWidth>
