@@ -30,11 +30,11 @@ import {
 } from './logic';
 import css from '@styled-system/css';
 import styled from 'styled-components';
+import { useBreakpoints } from '~/utils/useBreakpoints';
 
 const tooltipStyles = {
   ...defaultStyles,
   padding: 0,
-  // marginTop: 10,
   zIndex: 100,
 };
 
@@ -83,16 +83,6 @@ type TooltipFormatter = (value: SeriesValue, key: string) => JSX.Element;
 type HoverEvent = TouchEvent<SVGElement> | MouseEvent<SVGElement>;
 
 /**
- * @TODO move to common chart config
- */
-export const defaultPadding = {
-  top: 10,
-  right: 20,
-  bottom: 20,
-  left: 30,
-} as const;
-
-/**
  * @TODO move to theme
  */
 const defaultColors = {
@@ -121,7 +111,8 @@ export type StackedChartProps<T extends Value> = {
 export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
   /**
    * Destructuring here and not above, so we can easily switch between optional
-   * passed-in formatter functions or the defaults.
+   * passed-in formatter functions or their default counterparts that have the
+   * same name.
    */
   const {
     values,
@@ -140,6 +131,20 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
     hideTooltip,
     tooltipOpen,
   } = useTooltip<TooltipData>();
+
+  const breakpoints = useBreakpoints();
+  const isTinyScreen = !breakpoints.sm;
+
+  const padding = useMemo(
+    () =>
+      ({
+        top: 10,
+        right: isTinyScreen ? 0 : 20,
+        bottom: 20,
+        left: isTinyScreen ? 0 : 30,
+      } as const),
+    [isTinyScreen]
+  );
 
   const metricProperties = useMemo(() => config.map((x) => x.metricProperty), [
     config,
@@ -181,22 +186,23 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
    */
   const legendaItems = useMemo(
     () =>
-      config.reverse().map((x) => {
-        const itemIndex = metricProperties.findIndex(
-          (v) => v === x.metricProperty
-        );
+      config /* .reverse() */
+        .map((x) => {
+          const itemIndex = metricProperties.findIndex(
+            (v) => v === x.metricProperty
+          );
 
-        return {
-          color:
-            hoveredIndex === NO_HOVER_INDEX
-              ? x.color
-              : hoveredIndex === itemIndex
-              ? x.color
-              : hoverColors[itemIndex],
-          label: x.legendLabel,
-          shape: 'square',
-        } as LegendItem;
-      }),
+          return {
+            color:
+              hoveredIndex === NO_HOVER_INDEX
+                ? x.color
+                : hoveredIndex === itemIndex
+                ? x.color
+                : hoverColors[itemIndex],
+            label: x.legendLabel,
+            shape: 'square',
+          } as LegendItem;
+        }),
     [config, hoveredIndex, metricProperties, hoverColors]
   );
 
@@ -249,8 +255,7 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
   const formatTooltip = useCallback(
     (data: SeriesValue, key: string) => {
       const date = getDate(data);
-      // const dateString = props.formatDateString
-      //   ? props.formatDateString(date)
+      // const dateString = props.formatDateString? props.formatDateString(date)
       //   : formatDateString(date);
 
       const [year, weekNumber] = getWeekNumber(date);
@@ -330,8 +335,6 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
   if (isEmpty(series)) {
     return null;
   }
-
-  const padding = defaultPadding;
 
   const xMax = width - padding.left - padding.right;
   const yMax = height - padding.top - padding.bottom;

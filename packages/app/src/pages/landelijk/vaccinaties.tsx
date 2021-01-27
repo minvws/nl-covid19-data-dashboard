@@ -1,8 +1,7 @@
 import { css } from '@styled-system/css';
+import { ParentSize } from '@visx/responsive';
 import styled from 'styled-components';
-import VaccinatieBarChart from '~/assets/vaccinate_bar_chart.svg';
 import VaccinatieIcon from '~/assets/vaccinaties.svg';
-import { Box } from '~/components-styled/base';
 import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
@@ -122,121 +121,110 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             source: text.bronnen.rivm,
           }}
         >
-          <StackedChart
-            width={700}
-            valueAnnotation={siteText.waarde_annotaties.x_miljoen}
-            values={[
-              {
-                pfizer: 10.2,
-                moderna: 20.5,
-                astra_zeneca: 3.6,
-                cure_vac: 0,
-                janssen: 0,
-                sanofi: 15.2,
-                date_of_insertion_unix: 0,
-                date_unix: Date.parse('25 January 2021 00:00 UTC') / 1000,
-              },
-              {
-                pfizer: 2.2,
-                moderna: 10.7,
-                astra_zeneca: 4.6,
-                cure_vac: 0,
-                janssen: 20.2,
-                sanofi: 5.1,
-                date_of_insertion_unix: 0,
-                date_unix: Date.parse('01 February 2021 00:00 UTC') / 1000,
-              },
-              {
-                pfizer: 13.5,
-                moderna: 4.1,
-                astra_zeneca: 15.8,
-                cure_vac: 3.7,
-                janssen: 1.9,
-                sanofi: 0.2,
-                date_of_insertion_unix: 0,
-                date_unix: Date.parse('08 February 2021 00:00 UTC') / 1000,
-              },
-              {
-                pfizer: 10.2,
-                moderna: 20.5,
-                astra_zeneca: 3.6,
-                cure_vac: 0,
-                janssen: 0,
-                sanofi: 15.2,
-                date_of_insertion_unix: 0,
-                date_unix: Date.parse('15 February 2021 00:00 UTC') / 1000,
-              },
-              {
-                pfizer: 2.2,
-                moderna: 10.7,
-                astra_zeneca: 4.6,
-                cure_vac: 0,
-                janssen: 20.2,
-                sanofi: 5.1,
-                date_of_insertion_unix: 0,
-                date_unix: Date.parse('22 February 2021 00:00 UTC') / 1000,
-              },
-              {
-                pfizer: 13.5,
-                moderna: 4.1,
-                astra_zeneca: 15.8,
-                cure_vac: 3.7,
-                janssen: 1.9,
-                sanofi: 0.2,
-                date_of_insertion_unix: 0,
-                date_unix: Date.parse('01 March 2021 00:00 UTC') / 1000,
-              },
-            ]}
-            config={[
-              {
-                metricProperty: 'astra_zeneca',
-                color: '#007AEA',
-                legendLabel: 'Astra Zeneca',
-              },
+          <ParentSize>
+            {({ width }) => (
+              <StackedChart
+                width={width}
+                height={400}
+                valueAnnotation={siteText.waarde_annotaties.x_miljoen}
+                values={[
+                  {
+                    pfizer: 0.2,
+                    moderna: 0.05,
+                    astra_zeneca: 0,
+                    cure_vac: 0,
+                    janssen: 0,
+                    sanofi: 0,
+                    date_of_insertion_unix: 0,
+                    date_unix: Date.parse('25 January 2021 00:00 UTC') / 1000,
+                  },
+                  {
+                    pfizer: 0.2,
+                    moderna: 0,
+                    astra_zeneca: 0,
+                    cure_vac: 0,
+                    janssen: 0,
+                    sanofi: 0,
+                    date_of_insertion_unix: 0,
+                    date_unix: Date.parse('01 February 2021 00:00 UTC') / 1000,
+                  },
+                  {
+                    pfizer: 0.5,
+                    moderna: 0.2,
+                    astra_zeneca: 0,
+                    cure_vac: 0,
+                    janssen: 0,
+                    sanofi: 0,
+                    date_of_insertion_unix: 0,
+                    date_unix: Date.parse('08 February 2021 00:00 UTC') / 1000,
+                  },
+                  {
+                    pfizer: 0.2,
+                    moderna: 0,
+                    astra_zeneca: 0.2,
+                    cure_vac: 0,
+                    janssen: 0,
+                    sanofi: 0,
+                    date_of_insertion_unix: 0,
+                    date_unix: Date.parse('15 February 2021 00:00 UTC') / 1000,
+                  },
+                  {
+                    pfizer: 0.2,
+                    moderna: 0.15,
+                    astra_zeneca: 0.4,
+                    cure_vac: 0,
+                    janssen: 0,
+                    sanofi: 0,
+                    date_of_insertion_unix: 0,
+                    date_unix: Date.parse('22 February 2021 00:00 UTC') / 1000,
+                  },
+                  {
+                    pfizer: 0.2,
+                    moderna: 0,
+                    astra_zeneca: 0,
+                    cure_vac: 0,
+                    janssen: 0,
+                    sanofi: 0,
+                    date_of_insertion_unix: 0,
+                    date_unix: Date.parse('01 March 2021 00:00 UTC') / 1000,
+                  },
+                ]}
+                config={[
+                  {
+                    metricProperty: 'pfizer',
+                    color: '#007AEA',
+                    legendLabel: 'BioTech Pfizer',
+                  },
+                  {
+                    metricProperty: 'moderna',
+                    color: '#6AB4F9',
+                    legendLabel: 'Moderna',
+                  },
+                  {
+                    metricProperty: 'astra_zeneca',
+                    color: '#00BBB5',
+                    legendLabel: 'Astra Zeneca',
+                  },
+                  {
+                    metricProperty: 'cure_vac',
+                    color: '#C263EF',
+                    legendLabel: 'Curevac',
+                  },
+                  {
+                    metricProperty: 'janssen',
+                    color: '#C8AEFF',
+                    legendLabel: 'Janssen',
+                  },
 
-              {
-                metricProperty: 'pfizer',
-                color: '#6AB4F9',
-                legendLabel: 'BioTech Pfizer',
-              },
-              {
-                metricProperty: 'cure_vac',
-                color: '#C263EF',
-                legendLabel: 'Curevac',
-              },
-              {
-                metricProperty: 'janssen',
-                color: '#C8AEFF',
-                legendLabel: 'Janssen',
-              },
-              {
-                metricProperty: 'moderna',
-                color: '#00BBB5',
-                legendLabel: 'Moderna',
-              },
-              {
-                metricProperty: 'sanofi',
-                color: '#96E4E4',
-                legendLabel: 'Sanofi',
-              },
-            ]}
-          />
-        </ChartTile>
-
-        <ChartTile
-          title={text.grafiek.titel}
-          description={text.grafiek.omschrijving}
-          ariaDescription={
-            siteText.accessibility.grafieken.verwachte_leveringen
-          }
-          metadata={{
-            date: 1611593522,
-            source: text.bronnen.rivm,
-          }}
-        >
-          <Box pt={1}>
-            <VaccinatieBarChart />
-          </Box>
+                  {
+                    metricProperty: 'sanofi',
+                    color: '#96E4E4',
+                    legendLabel: 'Sanofi',
+                  },
+                ]}
+              />
+            )}
+          </ParentSize>
         </ChartTile>
       </TileList>
     </>
