@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import CloseIcon from '~/assets/close.svg';
 import SearchIcon from '~/assets/search-icon.svg';
 import { Box } from '~/components-styled/base';
-import { Text } from '~/components-styled/typography';
 import { VisuallyHidden } from '~/components-styled/visually-hidden';
 import { default as siteText, default as text } from '~/locale';
 import { useSearchContext } from './context';
@@ -38,9 +37,7 @@ export function SearchInput() {
       )}
 
       <VisuallyHidden>
-        <label htmlFor={`${id}-input`}>
-          <Text>{siteText.search.placeholder}</Text>
-        </label>
+        <label htmlFor={`${id}-input`}>{siteText.search.placeholder}</label>
       </VisuallyHidden>
 
       <StyledSearchInput
@@ -63,14 +60,15 @@ export const paddedStyle = css({
 const StyledSearchInput = styled.input(
   paddedStyle,
   css({
+    fontFamily: 'body',
     display: 'block',
     width: '100%',
     borderRadius: 1,
-    boxShadow: 'tile',
     border: `solid`,
     borderWidth: '1px',
     borderColor: 'lightGray',
     fontSize: ['1rem', null, null, '1.125rem'],
+    appearance: 'textfield',
     m: 0,
     '&::-webkit-search-cancel-button': {
       display: 'none',
@@ -80,6 +78,7 @@ const StyledSearchInput = styled.input(
     },
     '&:placeholder-shown': {
       pr: 2,
+      boxShadow: 'tile',
     },
   })
 );

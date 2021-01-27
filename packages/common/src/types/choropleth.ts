@@ -37,6 +37,7 @@ export type RegionGeoJSON = FeatureCollection<
 export type ChoroplethThresholdsValue<T extends number = number> = {
   color: string;
   threshold: T;
+  label?: string;
 };
 
 export type Dictionary<T> = Partial<Record<string, T>>;

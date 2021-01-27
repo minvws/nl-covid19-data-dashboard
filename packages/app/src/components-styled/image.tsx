@@ -1,5 +1,7 @@
 import { imageResizeTargets } from '@corona-dashboard/common';
 import { findClosestSize } from '~/utils/findClosestSize';
+import { Box } from '~/components-styled/base';
+
 import styled from 'styled-components/';
 
 type ImageProps = {
@@ -7,9 +9,16 @@ type ImageProps = {
   width: number;
   height: number;
   alt?: string;
+  borderRadius?: number;
+  boxShadow?: string;
 };
 
-const Img = styled.img`
+const Img = styled(Box).attrs({ as: 'img' })<
+  ImageProps & {
+    srcSet: string;
+    loading: string;
+  }
+>`
   max-width: 100%;
   height: auto;
 `;
@@ -21,7 +30,7 @@ const Img = styled.img`
  * compatible with next export.
  */
 export function Image(props: ImageProps) {
-  const { src, width, height, alt } = props;
+  const { src, width, height, alt, ...imageProps } = props;
   const [filename, extension] = src.split('.');
 
   const srcSet = imageResizeTargets
@@ -44,6 +53,7 @@ export function Image(props: ImageProps) {
       width={width}
       height={Math.floor(height)}
       loading="lazy"
+      {...imageProps}
     />
   );
 }

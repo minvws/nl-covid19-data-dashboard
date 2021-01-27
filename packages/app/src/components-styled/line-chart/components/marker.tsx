@@ -21,6 +21,8 @@ type ColorProps = {
 const Label = styled.div`
   pointer-events: none;
   background-color: white;
+  min-width: 4em;
+  text-align: center;
 `;
 
 const DottedLine = styled.div<ColorProps>`

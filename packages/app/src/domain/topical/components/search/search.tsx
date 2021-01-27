@@ -31,7 +31,11 @@ export function Search({ initialValue }: { initialValue?: string }) {
             <Box position="relative" ref={heightRef}>
               <SearchInput />
             </Box>
-            {context.showResults && <SearchResults />}
+            {context.showResults && (
+              <Box boxShadow="tile">
+                <SearchResults />
+              </Box>
+            )}
           </Box>
         </SearchForm>
       )}

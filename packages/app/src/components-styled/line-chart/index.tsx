@@ -46,6 +46,8 @@ export type LineConfig<T extends Value> = {
   metricProperty: NumberProperty<T>;
   color?: string;
   style?: 'solid' | 'dashed';
+  areaFillOpacity?: number;
+  strokeWidth?: number;
   legendLabel?: string;
   legendShape?: LegendShape;
 };
@@ -260,7 +262,7 @@ export function LineChart<T extends Value>({
     [bisect, trendsList, linesConfig, toggleHoverElements]
   );
 
-  const renderAxes = useCallback(
+  const renderTrendLines = useCallback(
     (x: ChartScales) => (
       <>
         {trendsList.map((trend, index) => (
@@ -268,6 +270,8 @@ export function LineChart<T extends Value>({
             key={index}
             trend={trend}
             type={hideFill ? 'line' : 'area'}
+            areaFillOpacity={linesConfig[index].areaFillOpacity}
+            strokeWidth={linesConfig[index].strokeWidth}
             style={linesConfig[index].style}
             xScale={x.xScale}
             yScale={x.yScale}
@@ -310,7 +314,7 @@ export function LineChart<T extends Value>({
           componentCallback={componentCallback}
           ariaLabelledBy={ariaLabelledBy}
         >
-          {renderAxes}
+          {renderTrendLines}
         </ChartAxes>
 
         {isDefined(tooltipData) && (
