@@ -1972,8 +1972,8 @@
     "title": "COVID-19 vaccinations",
     "description": "Vaccination is the most important step towards getting life back to normal. The Netherlands began vaccinating people against COVID-19 on 6 January 2021. Eventually, the vaccine will be offered to everyone aged 18 and over. This page shows how many doses of vaccine have been administered and how many doses are on their way.",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "date_unix": "1611666164",
-    "date_of_insertion_unix": "1611666164",
+    "date_unix": "1611750085",
+    "date_of_insertion_unix": "1611750085",
     "reference": {
       "href": "/verantwoording#vaccination",
       "text": "Read more about the source of the data on vaccination in the explanation of the presented data."
@@ -2009,20 +2009,20 @@
       "difference": "",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "173638",
-          "date_unix": "1611666164",
-          "date_of_insertion_unix": "1611666164"
+          "total_vaccinated": "185356",
+          "date_unix": "1611750085",
+          "date_of_insertion_unix": "1611750085"
         }
       },
       "kpi_total": {
         "title": "Number of doses administered",
-        "value": "173638",
+        "value": "185356",
         "description": "This figure reflects the total number of vaccination doses that have been administered. Because vaccination figures are sometimes reported a few days after doses are administered, the actual number of vaccination doses administered is higher. People need two separately administered doses for the vaccine to be maximally effective.",
-        "date_of_report_unix": "1611666164",
-        "date_of_insertion_unix": "1611666164",
+        "date_of_report_unix": "1611750085",
+        "date_of_insertion_unix": "1611750085",
         "administered": [
           {
-            "value": "116593",
+            "value": "128311",
             "description": "administered by municipal health services (GGDs)"
           },
           {
