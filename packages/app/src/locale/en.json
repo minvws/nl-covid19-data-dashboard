@@ -1034,7 +1034,7 @@
     },
     "valid_from": "Valid from {{validFrom}}",
     "sidebar_label": "Level of risk:",
-    "tile_title": "What do the risk levels mean?",
+    "tile_title": "What do the four risk levels mean?",
     "lees_meer": "Click here for more information about the risk levels"
   },
   "gemeente_layout": {
