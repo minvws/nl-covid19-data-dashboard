@@ -66,7 +66,6 @@ const StyledSearchInput = styled.input(
     display: 'block',
     width: '100%',
     borderRadius: 1,
-    boxShadow: 'tile',
     border: `solid`,
     borderWidth: '1px',
     borderColor: 'lightGray',
@@ -80,6 +79,7 @@ const StyledSearchInput = styled.input(
     },
     '&:placeholder-shown': {
       pr: 2,
+      boxShadow: 'tile',
     },
   })
 );
