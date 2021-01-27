@@ -1008,19 +1008,19 @@
     "types": {
       "1": {
         "titel": "Caution",
-        "toelichting": ""
+        "toelichting": "The situation is manageable. The number of new infections is low. Vulnerable groups must remain alert. There is sufficient healthcare capacity."
       },
       "2": {
         "titel": "Concern",
-        "toelichting": ""
+        "toelichting": "The number of new infections is increasing. Pressure on healthcare capacity is increasing. The existing approach needs to be strengthened through additional measures to get the virus under control again and return to a manageable situation."
       },
       "3": {
         "titel": "Serious",
-        "toelichting": ""
+        "toelichting": "The number of new infections is increasing rapidly. An intensive tailored approach is needed to protect vulnerable groups. Severe measures are needed to prevent further escalation and return to a manageable situation."
       },
       "4": {
         "titel": "Severe",
-        "toelichting": ""
+        "toelichting": "A very large number of people are infectious and the number of new infections is high. Regional healthcare capacity is insufficient and some kinds of regular healthcare have already been scaled down. Measures to be taken are designed to prevent national and regional healthcare from becoming overburdened and to regain maximum control of the virus."
       },
       "5": {
         "titel": "Lockdown",
@@ -1029,12 +1029,12 @@
     },
     "legenda": {
       "titel": "Legend",
-      "geen_regio": "",
-      "regios": ""
+      "geen_regio": "no regions",
+      "regios": "{{amount}} regions"
     },
     "valid_from": "Valid from {{validFrom}}",
     "sidebar_label": "Level of risk:",
-    "tile_title": "",
+    "tile_title": "What do the risk levels mean?",
     "lees_meer": "Click here for more information about the risk levels"
   },
   "gemeente_layout": {
