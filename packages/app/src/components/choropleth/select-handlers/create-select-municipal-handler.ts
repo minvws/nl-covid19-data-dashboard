@@ -8,7 +8,7 @@ export type MunicipalitySelectionHandler = (
 
 export function createSelectMunicipalHandler(
   router: NextRouter,
-  pageName: PageName = 'positief-geteste-mensen',
+  pageName: PageName = 'actueel',
   openMenu?: boolean
 ): MunicipalitySelectionHandler {
   return (context: MunicipalityProperties) => {

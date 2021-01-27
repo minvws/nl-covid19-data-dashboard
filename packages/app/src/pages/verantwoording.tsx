@@ -12,10 +12,11 @@ import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import { CollapsibleList } from '~/types/cms';
 import { getSkipLinkId } from '~/utils/skipLinks';
 import styles from './over.module.scss';
+import { PortableTextEntry } from '@sanity/block-content-to-react';
 
 interface VerantwoordingData {
   title: string | null;
-  description: unknown[] | null;
+  description: PortableTextEntry[] | null;
   collapsibleList: CollapsibleList[];
 }
 
@@ -55,14 +56,14 @@ const Verantwoording: FCWithLayout<typeof getStaticProps> = (props) => {
               <PortableText blocks={content.description} />
             )}
             {content.collapsibleList && (
-              <article className={styles.faqList}>
+              <article>
                 {content.collapsibleList.map((item) => {
                   const id = getSkipLinkId(item.title);
-                  return (
+                  return item.content ? (
                     <Collapsible key={id} id={id} summary={item.title}>
                       <PortableText blocks={item.content} />
                     </Collapsible>
-                  );
+                  ) : null;
                 })}
               </article>
             )}

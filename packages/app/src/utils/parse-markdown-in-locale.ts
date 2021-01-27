@@ -18,6 +18,9 @@ const MARKDOWN_KEYS = [
   'positief_geteste_personen.kpi_toelichting',
   'veiligheidsregio_positief_geteste_personen.kpi_toelichting',
   'gemeente_positief_geteste_personen.kpi_toelichting',
+  'nationaal_actueel.risiconiveaus.selecteer_toelichting',
+  'veiligheidsregio_actueel.risiconiveaus.selecteer_toelichting',
+  'gemeente_actueel.risiconiveaus.selecteer_toelichting',
 ];
 
 export function parseMarkdownInLocale(text: TALLLanguages) {

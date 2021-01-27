@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { Box } from '~/components-styled/base';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
-import { MessageTile } from '~/components-styled/message-tile';
+import { WarningTile } from '~/components-styled/warning-tile';
 import { TileList } from '~/components-styled/tile-list';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
@@ -11,12 +11,12 @@ import { SEOHead } from '~/components-styled/seo-head';
 import { SafetyRegionComboBox } from '~/domain/layout/components/safety-region-combo-box';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   getLastGeneratedDate,
   getText,
 } from '~/static-props/get-data';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 
 export const getStaticProps = createGetStaticProps(
@@ -27,12 +27,11 @@ export const getStaticProps = createGetStaticProps(
   })
 );
 
-const SafetyRegion: FCWithLayout<typeof getStaticProps> = ({
-  text,
-  choropleth,
-}) => {
+const SafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
   const router = useRouter();
   const breakpoints = useBreakpoints();
+
+  const { text, choropleth } = props;
 
   return (
     <>
@@ -49,7 +48,7 @@ const SafetyRegion: FCWithLayout<typeof getStaticProps> = ({
 
       <TileList>
         {text.regionaal_index.belangrijk_bericht && (
-          <MessageTile message={text.regionaal_index.belangrijk_bericht} />
+          <WarningTile message={text.regionaal_index.belangrijk_bericht} />
         )}
 
         <ChoroplethTile
@@ -61,7 +60,11 @@ const SafetyRegion: FCWithLayout<typeof getStaticProps> = ({
                   __html: text.veiligheidsregio_index.selecteer_toelichting,
                 }}
               />
-              <EscalationMapLegenda />
+              <EscalationMapLegenda
+                data={choropleth.vr}
+                metricName="escalation_levels"
+                metricProperty="escalation_level"
+              />
             </>
           }
         >

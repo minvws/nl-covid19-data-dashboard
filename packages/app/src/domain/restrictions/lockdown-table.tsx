@@ -164,6 +164,6 @@ function DesktopLockdownTable(props: LockdownTableData) {
   );
 }
 
-function getIcon(IconComponent: any | undefined, color: string) {
+function getIcon(IconComponent: any, color: string) {
   return <IconComponent color={color} />;
 }

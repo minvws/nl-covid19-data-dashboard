@@ -112,4 +112,7 @@ button::-moz-focus-inner {
   font-variant-numeric: tabular-nums;
 }
 
+figure {
+  margin: 0
+}
 `;
