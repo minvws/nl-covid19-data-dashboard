@@ -70,7 +70,7 @@ const StyledSearchInput = styled.input(
     borderWidth: '1px',
     borderColor: 'lightGray',
     fontSize: ['1rem', null, null, '1.125rem'],
-    appearance: 'textfield',
+    appearance: 'none',
     m: 0,
     '&::-webkit-search-cancel-button': {
       display: 'none',
