@@ -4,6 +4,9 @@
 /.next
 /out
 
+# Images that are processed by Sanity/Resizing
+public/cms
+
 # dependencies
 node_modules
 

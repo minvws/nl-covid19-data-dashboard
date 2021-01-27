@@ -13,7 +13,7 @@
     "bericht": "The number of newly tested COVID positives slightly decreased to 35.635 cases in the week of 20 to 26 January compared to the week before. This overview is overshadowed by the rising number of cases involving the SARS-CoV-2 variant that resulted in a massive influx of patients in hospitals in the United Kingdom and Ireland. It is estimated that the people that got infected with COVID-19 in the past week (20 to 26 January), more than a third is infected with the UK variant. We are facing two variants of the virus that seem to be spreading in the Netherlands at different speeds. As a result, there are essentially two separate COVID-19 epidemics: one epidemic involving the ‘old’ variant, in which infections are decreasing, and another epidemic involving the UK variant, in which infections are increasing.",
     "link": {
       "text": "View the full message from the RIVM",
-      "href": "https://www.rivm.nl/en/news/rise-in-new-COVID-19-variants-overshadows-more-positive-developments"
+      "href": "https://www.rivm.nl/en/news/uk-variant-gains-ground-in-the-netherlands"
     },
     "subtitel": "",
     "datum": ""
@@ -186,7 +186,7 @@
       "title": "Hospital bed occupancy over time (non ICU)",
       "description": "This graph shows the progression of the number of non-ICU hospital beds occupied by COVID-19 patients."
     },
-    "linechart_description": "This graph shows hospital admissions, including admissions directely to ICU. The figure for each day indicates the number of people actually admitted on that day, not the number of admissions reported on that day. This gives a clear picture of the development of coronavirus in the Netherlands. There are often reporting delays of a few days for hospital admissions; data for the most recent days is therefore incomplete.",
+    "linechart_description": "This graph shows hospital admissions, including admissions directly to ICU. The figure for each day indicates the number of people actually admitted on that day, not the number of admissions reported on that day. This gives a clear picture of the development of coronavirus in the Netherlands. There are often reporting delays of a few days for hospital admissions; data for the most recent days is therefore incomplete.",
     "metadata": {
       "title": "Hospital admissions | Dashboard Coronavirus | Government.nl",
       "description": "Number of confirmed COVID-19 cases who are admitted to a hospital in the Netherlands."
@@ -200,7 +200,7 @@
     "tijdelijk_onbeschikbaar_titel": "",
     "tijdelijk_onbeschikbaar": "",
     "kpi_titel": "Number of hospital admissions reported on one day. ",
-    "linechart_legend_titel": "",
+    "linechart_legend_titel": "Hospital admissions",
     "linechart_legend_underreported_titel": "Data for recent days is incomplete due to reporting delays"
   },
   "positief_geteste_personen": {
@@ -648,14 +648,14 @@
     "niveau": "level",
     "clear_select_input": "Empty",
     "incomplete": "incomplete",
-    "gm_singular": "",
-    "gm_plural": "",
-    "vr_singular": "",
-    "vr_plural": "",
-    "gisteren": "",
-    "vandaag": "",
-    "read_more": "",
-    "absolute_date_template": ""
+    "gm_singular": "municipality",
+    "gm_plural": "municipalities",
+    "vr_singular": "Safety region",
+    "vr_plural": "Safety region's",
+    "gisteren": "Yesterday",
+    "vandaag": "Today",
+    "read_more": "Read more",
+    "absolute_date_template": "on {{date}}"
   },
   "seoHead": {
     "default_description": "Information on the development of the coronavirus in The Netherlands.",
@@ -721,7 +721,7 @@
       "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
       "text": "NICE via RIVM"
     },
-    "linechart_description": "This graph shows hospital admissions, including admissions directely to ICU. The figure for each day indicates the number of people actually admitted on that day, not the number of admissions reported on that day. This gives a clear picture of the development of coronavirus in the Netherlands. There are often reporting delays of a few days for hospital admissions; data for the most recent days is therefore incomplete.",
+    "linechart_description": "This graph shows hospital admissions, including admissions directly to ICU. The figure for each day indicates the number of people actually admitted on that day, not the number of admissions reported on that day. This gives a clear picture of the development of coronavirus in the Netherlands. There are often reporting delays of a few days for hospital admissions; data for the most recent days is therefore incomplete.",
     "metadata": {
       "title": "Hospital admissions residents {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
       "description": "Confirmed cases of COVID-19 in safety region {{safetyRegionName}} who are admitted to a hospital."
@@ -741,7 +741,7 @@
     "tijdelijk_onbeschikbaar_titel": "",
     "tijdelijk_onbeschikbaar": "",
     "kpi_titel": "Number of hospital admissions reported daily.",
-    "linechart_legend_titel": "",
+    "linechart_legend_titel": "Hospital admissions",
     "linechart_legend_underreported_titel": "Data for recent days is incomplete due to reporting delays"
   },
   "veiligheidsregio_positief_geteste_personen": {
@@ -865,7 +865,7 @@
       "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
       "text": "NICE via RIVM"
     },
-    "linechart_description": "This graph shows hospital admissions, including admissions directely to ICU. The figure for each day indicates the number of people actually admitted on that day, not the number of admissions reported on that day. This gives a clear picture of the development of coronavirus in the Netherlands. There are often reporting delays of a few days for hospital admissions; data for the most recent days is therefore incomplete.",
+    "linechart_description": "This graph shows hospital admissions, including admissions directly to ICU. The figure for each day indicates the number of people actually admitted on that day, not the number of admissions reported on that day. This gives a clear picture of the development of coronavirus in the Netherlands. There are often reporting delays of a few days for hospital admissions; data for the most recent days is therefore incomplete.",
     "metadata": {
       "title": "Hospital admissions {{municipalityName}} | Dashboard Coronavirus | Government.nl",
       "description": "Overview of the number of confirmed COVID-19 cases in {{municipalityName}} who are admitted to a hospital per day."
@@ -885,7 +885,7 @@
     "tijdelijk_onbeschikbaar_titel": "",
     "tijdelijk_onbeschikbaar": "",
     "kpi_titel": "Number of hospital admissions reported on one day. ",
-    "linechart_legend_titel": "",
+    "linechart_legend_titel": "Hospital admissions",
     "linechart_legend_underreported_titel": "Data for recent days is incomplete due to reporting delays"
   },
   "gemeente_positief_geteste_personen": {
@@ -1000,7 +1000,7 @@
     "title": "Latest developments",
     "menu_subtitle": "UK variant gains terrain in the Netherlands",
     "alle_cijfers_header": "Want to see all data?",
-    "alle_cijfers_link": "View all"
+    "alle_cijfers_link": "View all data"
   },
   "escalatie_niveau": {
     "titel": "Level of risk",
@@ -1008,19 +1008,19 @@
     "types": {
       "1": {
         "titel": "Caution",
-        "toelichting": ""
+        "toelichting": "The situation is manageable. The number of new infections is low. Vulnerable groups must remain alert. There is sufficient healthcare capacity."
       },
       "2": {
         "titel": "Concern",
-        "toelichting": ""
+        "toelichting": "The number of new infections is increasing. Pressure on healthcare capacity is increasing. The existing approach needs to be strengthened through additional measures to get the virus under control again and return to a manageable situation."
       },
       "3": {
         "titel": "Serious",
-        "toelichting": ""
+        "toelichting": "The number of new infections is increasing rapidly. An intensive tailored approach is needed to protect vulnerable groups. Severe measures are needed to prevent further escalation and return to a manageable situation."
       },
       "4": {
         "titel": "Severe",
-        "toelichting": ""
+        "toelichting": "A very large number of people are infectious and the number of new infections is high. Regional healthcare capacity is insufficient and some kinds of regular healthcare have already been scaled down. Measures to be taken are designed to prevent national and regional healthcare from becoming overburdened and to regain maximum control of the virus."
       },
       "5": {
         "titel": "Lockdown",
@@ -1029,13 +1029,13 @@
     },
     "legenda": {
       "titel": "Legend",
-      "geen_regio": "",
-      "regios": ""
+      "geen_regio": "no regions",
+      "regios": "{{amount}} regions"
     },
     "valid_from": "Valid from {{validFrom}}",
     "sidebar_label": "Level of risk:",
-    "tile_title": "",
-    "lees_meer": ""
+    "tile_title": "What do the four risk levels mean?",
+    "lees_meer": "Click here for more information about the risk levels"
   },
   "gemeente_layout": {
     "headings": {
@@ -2142,11 +2142,11 @@
       "selecteer_titel": "Risk level map of the Netherlands",
       "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions.  \n\n**There is a [national lockdown](/landelijk/maatregelen) until at least 9 February.**"
     },
-    "data_sitemap_titel": "All national data on this dashboard",
-    "data_sitemap_toelichting": "",
+    "data_sitemap_titel": "Topics on this dashboard",
+    "data_sitemap_toelichting": "Go directly to the following topics:",
     "mini_trend_tiles": {
       "positief_getest": {
-        "title": "Number of positive test results"
+        "title": "Number of confirmed cases"
       },
       "ziekenhuis_opnames": {
         "title": "Hospital admissions"
@@ -2164,8 +2164,8 @@
         },
         "difference": {
           "zero": "That equals {{oldDate}}.",
-          "singular": "That is {{differenceIndicator}} more than {{oldDate}}.",
-          "plural": "That is {{differenceIndicator}} more than {{oldDate}}."
+          "singular": "That is {{differenceIndicator}} than {{oldDate}}.",
+          "plural": "That is {{differenceIndicator}} than {{oldDate}}."
         }
       },
       "intake_hospital_ma": {
@@ -2176,8 +2176,8 @@
         },
         "difference": {
           "zero": "That equals {{oldDate}}.",
-          "singular": "That is {{differenceIndicator}} more than {{oldDate}}.",
-          "plural": "That is {{differenceIndicator}} more than {{oldDate}}."
+          "singular": "That is {{differenceIndicator}} than {{oldDate}}.",
+          "plural": "That is {{differenceIndicator}} than {{oldDate}}."
         }
       },
       "intake_intensivecare_ma": {
@@ -2187,7 +2187,7 @@
           "plural": "{{newDate}} there were {{propertyValue}} new intensive care admissions reported."
         },
         "difference": {
-          "zero": "This equals {{oldDate}}.",
+          "zero": "This is the same as {{oldDate}}.",
           "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
           "plural": "This is {{differenceIndicator}} than {{oldDate}}."
         }
@@ -2202,14 +2202,14 @@
       }
     },
     "latest_articles": {
-      "title": "More information about coronavirus",
+      "title": "More information about the coronavirus",
       "subtitle": "New information about a range of topics concerning coronavirus data is posted here regularly.",
       "all_articles": "View all articles"
     }
   },
   "common.tooltip.positive_tested_value": "",
   "search": {
-    "placeholder": "",
+    "placeholder": "Search for a municipality of safety region",
     "clear": "",
     "no_hits": ""
   },
@@ -2221,16 +2221,16 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of The Netherlands",
-      "selecteer_toelichting": ""
+      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions.  \n\n**There is a [national lockdown](/landelijk/maatregelen) until at least 9 February.**"
     },
     "risoconiveau_maatregelen": {
       "title": "Risk level & measures",
-      "description": "The risk level for this safety region is",
+      "description": "This safety region is at risk level",
       "bekijk_href": "View measures"
     },
     "mini_trend_tiles": {
       "positief_getest": {
-        "title": "Number of positive test results"
+        "title": "Number of confirmed cases"
       },
       "ziekenhuis_opnames": {
         "title": "Hospital admissions"
@@ -2247,7 +2247,7 @@
           "plural": "{{newDate}} there were {{propertyValue}} newly reported infected people."
         },
         "difference": {
-          "zero": "This equals {{oldDate}}.",
+          "zero": "This is the same as {{oldDate}}.",
           "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
           "plural": "This is {{differenceIndicator}} than {{oldDate}}."
         }
@@ -2259,7 +2259,7 @@
           "plural": "{{newDate}} there were {{propertyValue}} newly reported hospital admissions."
         },
         "difference": {
-          "zero": "This equals {{oldDate}}.",
+          "zero": "This is the same as {{oldDate}}.",
           "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
           "plural": "This is {{differenceIndicator}} than {{oldDate}}."
         }
@@ -2298,12 +2298,12 @@
     },
     "risoconiveau_maatregelen": {
       "title": "Risk level & measures",
-      "description": "The risk level for the safety region of this municipality is",
+      "description": "The safety region of this municipality is at risk level",
       "bekijk_href": "View the measures"
     },
     "mini_trend_tiles": {
       "positief_getest": {
-        "title": "Number of positive test results"
+        "title": "Number of confirmed cases"
       },
       "ziekenhuis_opnames": {
         "title": "Hospital admissions"

@@ -2,7 +2,8 @@ import css from '@styled-system/css';
 import ArrowIcon from '~/assets/arrow.svg';
 import { Box } from '~/components-styled/base';
 import { ContentBlock } from '~/components-styled/cms/content-block';
-import { Image } from '~/components-styled/cms/image';
+import { Image } from '~/components-styled/image';
+
 import { Heading } from '~/components-styled/typography';
 import { PortableText } from '~/lib/sanity';
 import siteText from '~/locale';
@@ -16,6 +17,8 @@ interface ArticleDetailProps {
 }
 
 export function ArticleDetail({ article }: ArticleDetailProps) {
+  const { coverAsset } = article;
+
   return (
     <Box bg="white" py={{ _: 4, md: 5 }}>
       <ContentBlock spacing={3}>
@@ -37,7 +40,13 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
           <PortableText blocks={article.intro} />
         </Box>
 
-        <Image node={article.cover} />
+        {/* <Image node={article.cover} /> */}
+
+        <Image
+          src={`/${coverAsset.assetId}.${coverAsset.extension}`}
+          width={630}
+          height={630 / coverAsset.metadata.dimensions.aspectRatio}
+        />
       </ContentBlock>
 
       {!!article.content?.length && <RichContent blocks={article.content} />}

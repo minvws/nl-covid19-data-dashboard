@@ -47,9 +47,9 @@ export function MiniTrendTile<T extends Value>(props: MiniTrendTileProps<T>) {
           iconPlacement="right"
           fontWeight="bold"
           headingLink
-          >
-              {title}
-          </LinkWithIcon>
+        >
+          {title}
+        </LinkWithIcon>
       </Heading>
       <Text fontSize="2.75rem" fontWeight="bold" my={0} lineHeight={0} mb={2}>
         {formatNumber((value as unknown) as number)}

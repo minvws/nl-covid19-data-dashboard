@@ -29,7 +29,7 @@
     "highcharts-react-official": "^3.0.0",
     "lodash": "^4.17.20",
     "match-sorter": "^4.2.0",
-    "next": "^10.0.2",
+    "next": "^10.0.5",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "rehype-stringify": "^8.0.0",

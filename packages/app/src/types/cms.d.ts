@@ -5,6 +5,16 @@ export type CollapsibleList = {
   title: string;
 };
 
+export interface SanityImageProps {
+  assetId: string;
+  extension: string;
+  metadata: {
+    dimensions: {
+      aspectRatio: number;
+    };
+  };
+}
+
 export type Editorial = Record<string, never> & Article;
 
 export interface Article {
@@ -15,6 +25,7 @@ export interface Article {
     current: string;
   };
   cover: ImageBlock;
+  coverAsset: SanityImageProps;
   summary: Block;
   intro: Block;
   content: RichContentBlock[];

@@ -650,8 +650,8 @@
     "incomplete": "niet compleet",
     "gm_singular": "gemeente",
     "gm_plural": "gemeentes",
-    "vr_singular": "veiligheidsregio",
-    "vr_plural": "veiligheidsregio's",
+    "vr_singular": "Veiligheidsregio",
+    "vr_plural": "Veiligheidsregio's",
     "gisteren": "Gisteren",
     "vandaag": "Vandaag",
     "read_more": "Lees meer",
@@ -1035,7 +1035,7 @@
     "valid_from": "Geldig vanaf {{validFrom}}",
     "sidebar_label": "Risiconiveau:",
     "tile_title": "Wat betekenen de vier risiconiveau's?",
-    "lees_meer": "Meer informatie over risiconiveau's"
+    "lees_meer": "Meer informatie over de risiconiveaus"
   },
   "gemeente_layout": {
     "headings": {
@@ -2142,8 +2142,8 @@
       "selecteer_titel": "De risicokaart van Nederland",
       "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. \n\n**Er geldt een [landelijke lockdown](/landelijk/maatregelen) tot en met in ieder geval 9 februari.**"
     },
-    "data_sitemap_titel": "Alle landelijke cijfers op dit dashboard",
-    "data_sitemap_toelichting": "Op het corona dashboard worden de cijfers van meerdere onderwerpen gepresenteerd. In verloop van tijd zullen er nieuwe onderwerpen worden toegevoegd of bestaande ondeerwerpen worden uitgebreid. Alle onderwerpen zijn onderverdeelt in categorieen. Dit is een overzicht van de categorieen en hun onderwerpen.",
+    "data_sitemap_titel": "Onderwerpen op dit dashboard",
+    "data_sitemap_toelichting": "Ga direct naar de volgende onderwerpen:",
     "mini_trend_tiles": {
       "positief_getest": {
         "title": "Aantal positieve testen"
@@ -2221,7 +2221,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "De risicokaart van Nederland",
-      "selecteer_toelichting": "Iedere week wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. In welk risiconiveau een regio zit, wordt bepaald door te kijken naar de situatie van een regio, die van de omliggende regio's en de situatie in de rest van het land.\n\n**Er geldt een [landelijke lockdown](/landelijk/maatregelen) tot en met in ieder geval 9 februari.**"
+      "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. \n\n**Er geldt een [landelijke lockdown](/landelijk/maatregelen) tot en met in ieder geval 9 februari.**"
     },
     "risoconiveau_maatregelen": {
       "title": "Risiconiveau & maatregelen",
@@ -2321,8 +2321,8 @@
         },
         "difference": {
           "zero": "Dit is dezelfde waarde als {{oldDate}}.",
-          "singular": "Dit is {{differenceIndicator}} dan op {{oldDate}}.",
-          "plural": "Dit is {{differenceIndicator}} dan op {{oldDate}}."
+          "singular": "Dit is {{differenceIndicator}} dan {{oldDate}}.",
+          "plural": "Dit is {{differenceIndicator}} dan {{oldDate}}."
         }
       },
       "intake_hospital_ma": {
