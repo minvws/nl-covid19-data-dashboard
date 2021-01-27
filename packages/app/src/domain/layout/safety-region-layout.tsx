@@ -100,11 +100,11 @@ function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
                 aria-label={siteText.aria_labels.metriek_navigatie}
                 role="navigation"
               >
-                <Text fontSize={3} fontWeight="bold" px={3} m={0} mb={-3}>
+                <Text fontSize={3} fontWeight="bold" px={3} m={0}>
                   {safetyRegionName}
                 </Text>
                 <Menu>
-                  <Box spacing={3} pt={5}>
+                  <Box spacing={3} pt={3}>
                     <MetricMenuItemLink
                       href={`/veiligheidsregio/${code}/maatregelen`}
                       icon={<Maatregelen fill={colors.restrictions} />}
