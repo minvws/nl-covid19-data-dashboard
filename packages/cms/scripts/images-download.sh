@@ -3,11 +3,11 @@ set -e
 
 # Start with a clean slate
 [ -e *.tar.gz ] && rm *.tar.gz
-rm -rf export development-export-*
+rm -rf export production-export-*
 rm -rf ../app/public/cms
 
 # Download the data and unzip it in a predictable folder
-sanity dataset export development development.tar.gz --overwrite
+sanity dataset export production production.tar.gz --overwrite
 tar -xzf *.gz 
 mv *-export* export
 
