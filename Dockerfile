@@ -7,6 +7,7 @@ RUN yarn
 # Validation stage
 RUN yarn workspace @corona-dashboard/cli validate-json
 RUN yarn workspace @corona-dashboard/cli generate-typescript
+RUN yarn workspace @corona-dashboard/cms images
 
 # Stage 1 - Build NL application
 FROM node:14 as react-build-nl
@@ -19,7 +20,6 @@ COPY --from=react-build-base /app/node_modules /app/node_modules
 COPY --from=react-build-base /app/packages/app/ /app/packages/app/node_modules
 COPY . .
 RUN yarn workspace @corona-dashboard/common build
-RUN yarn workspace @corona-dashboard/cms images
 RUN yarn workspace @corona-dashboard/app build
 RUN yarn workspace @corona-dashboard/app export
 
@@ -34,7 +34,6 @@ COPY --from=react-build-base /app/node_modules /app/node_modules
 COPY --from=react-build-base /app/packages/app/ /app/packages/app/node_modules
 COPY . .
 RUN yarn workspace @corona-dashboard/common build
-RUN yarn workspace @corona-dashboard/cms images
 RUN yarn workspace @corona-dashboard/app build
 RUN yarn workspace @corona-dashboard/app export
 
