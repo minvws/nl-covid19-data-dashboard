@@ -120,7 +120,7 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
                 icon={<GetestIcon />}
                 trendData={dataInfectedTotal.values}
                 metricProperty="infected"
-                href={`/gemeente/${router.query.code}/positief-geteste-mensen`}
+                href={`/veiligheidsregio/${router.query.code}/positief-geteste-mensen`}
               />
 
               <MiniTrendTile
@@ -140,7 +140,7 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
                 icon={<ZiekenhuisIcon />}
                 trendData={dataHospitalIntake.values}
                 metricProperty="admissions_on_date_of_reporting"
-                href={`/gemeente/${router.query.code}/ziekenhuis-opnames`}
+                href={`/veiligheidsregio/${router.query.code}/ziekenhuis-opnames`}
               />
 
               <RiskLevelIndicator
