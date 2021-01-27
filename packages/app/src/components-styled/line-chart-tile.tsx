@@ -30,7 +30,7 @@ export function LineChartTile<T extends Value>({
     description || ariaDescription,
     `This graph doesn't include a valid description nor an ariaDescription, please add one of them.`
   );
-  const ariaId = slugify(title);
+  const ariaLabelledBy = slugify(title);
 
   return (
     <ChartTileWithTimeframe
@@ -39,7 +39,7 @@ export function LineChartTile<T extends Value>({
       metadata={metadata}
       timeframeOptions={timeframeOptions}
       timeframeInitialValue={timeframeInitialValue}
-      ariaId={ariaId}
+      ariaLabelledBy={ariaLabelledBy}
       ariaDescription={ariaDescription}
     >
       {(timeframe) => (
@@ -50,7 +50,7 @@ export function LineChartTile<T extends Value>({
                 {...chartProps}
                 width={parent.width}
                 timeframe={timeframe}
-                uniqueId={ariaId}
+                ariaLabelledBy={ariaLabelledBy}
               />
             )}
           </ParentSize>
