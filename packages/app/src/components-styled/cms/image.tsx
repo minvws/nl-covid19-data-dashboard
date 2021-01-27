@@ -1,3 +1,5 @@
+import css from '@styled-system/css';
+import styled from 'styled-components';
 import { Box } from '~/components-styled/base';
 import { ContentBlock } from '~/components-styled/cms/content-block';
 import { MaxWidth } from '~/components-styled/max-width';
@@ -7,13 +9,13 @@ import { Image as SrcSetImage } from '~/components-styled/image';
 
 export function Image({ node }: { node: ImageBlock | RichContentImageBlock }) {
   const caption = 'caption' in node && node.caption && (
-    <figcaption>{node.caption}</figcaption>
+    <Caption>{node.caption}</Caption>
   );
 
   return 'isFullWidth' in node && node.isFullWidth ? (
-    <Box bg="page">
-      <MaxWidth py={4} px={4}>
-        <Box as="figure" role="group" spacing={3}>
+    <Box bg="page" p={4}>
+      <MaxWidth textAlign="center">
+        <Box as="figure" role="group" spacing={3} display="inline-block">
           <SrcSetImage
             src={`/${node.asset.assetId}.${node.asset.extension}`}
             width={node.asset.metadata.dimensions.width}
@@ -22,7 +24,6 @@ export function Image({ node }: { node: ImageBlock | RichContentImageBlock }) {
             borderRadius={1}
             boxShadow="tile"
           />
-
           {caption}
         </Box>
       </MaxWidth>
@@ -41,3 +42,10 @@ export function Image({ node }: { node: ImageBlock | RichContentImageBlock }) {
     </ContentBlock>
   );
 }
+
+const Caption = styled.figcaption(
+  css({
+    textAlign: 'left',
+    fontSize: 2,
+  })
+);
