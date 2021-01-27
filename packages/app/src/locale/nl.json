@@ -2184,7 +2184,7 @@
         "value": {
           "zero": "{{newDate}} zijn er geen nieuwe ic opnames gemeld.",
           "singular": "{{newDate}} is {{propertyValue}} nieuwe ic opname gemeld.",
-          "plural": "{{newDate}} zijn {{propertyValue}} nieuwe ic opnames gemeld."
+          "plural": "{{newDate}} zijn {{propertyValue}} nieuwe intensive care-opnames gemeld."
         },
         "difference": {
           "zero": "Dat is gelijk aan {{oldDate}}",
@@ -2341,7 +2341,7 @@
         "value": {
           "zero": "{{newDate}} waren er geen nieuw gemelde intensive care-opnames.",
           "singular": "{{newDate}} waren er {{propertyValue}} nieuw gemelde intensive care-opnames.",
-          "plural": "{{newDate}} waren er {{propertyValue}} nieuw gemelde ziekenhuisopnames."
+          "plural": "{{newDate}} waren er {{propertyValue}} nieuwe gemelde intensive care-opnames."
         },
         "difference": {
           "zero": "Dit is hetzelfde als {{oldDate}}.",
