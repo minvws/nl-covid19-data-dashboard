@@ -7,6 +7,8 @@ import { Heading, Text } from '~/components-styled/typography';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { EscalationLevel } from '~/domain/restrictions/type';
 import { assert } from '~/utils/assert';
+import { LinkWithIcon } from '~/components-styled/link-with-icon';
+import ArrowIcon from '~/assets/arrow.svg';
 
 const escalationThresholds =
   regionThresholds.escalation_levels.escalation_level;
@@ -25,6 +27,7 @@ interface RiskLevelIndicatorProps {
   escalationTypes: Record<escalationRecord, escalationTypesType>;
   escalationLevel: EscalationLevel | number;
   children?: ReactNode;
+  href: string;
 }
 
 export function RiskLevelIndicator(props: RiskLevelIndicatorProps) {
@@ -34,6 +37,7 @@ export function RiskLevelIndicator(props: RiskLevelIndicatorProps) {
     children,
     escalationTypes,
     escalationLevel,
+    href,
   } = props;
 
   const filteredEscalationLevel = escalationThresholds.find(
@@ -55,7 +59,15 @@ export function RiskLevelIndicator(props: RiskLevelIndicatorProps) {
         <Stopwatch />
       </Box>
       <Heading level={3} as="h2" py={2} pl={{ _: '3.5rem' }}>
-        {title}
+        <LinkWithIcon
+          href={href}
+          icon={<ArrowIcon css={css({ transform: 'rotate(-90deg)' })} />}
+          iconPlacement="right"
+          fontWeight="bold"
+          headingLink
+        >
+          {title}
+        </LinkWithIcon>
       </Heading>
       <Box>
         <Box

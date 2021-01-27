@@ -127,6 +127,7 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
                 icon={<GetestIcon />}
                 trendData={dataInfectedTotal.values}
                 metricProperty="infected"
+                href={`/gemeente/${router.query.code}/positief-geteste-mensen`}
               />
 
               <MiniTrendTile
@@ -146,6 +147,7 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
                 icon={<ZiekenhuisIcon />}
                 trendData={dataHospitalIntake.values}
                 metricProperty="admissions_on_date_of_reporting"
+                href={`/gemeente/${router.query.code}/ziekenhuis-opnames`}
               />
 
               <RiskLevelIndicator
@@ -154,6 +156,7 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
                 escalationLevel={filteredRegion.escalation_level}
                 code={filteredRegion.vrcode}
                 escalationTypes={escalationText.types}
+                href={`/veiligheidsregio/${safetyRegionForMunicipality?.code}/maatregelen`}
               >
                 {safetyRegionForMunicipality && (
                   <>
