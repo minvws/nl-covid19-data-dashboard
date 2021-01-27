@@ -18,6 +18,7 @@ ARG NEXT_PUBLIC_SANITY_PROJECT_ID
 WORKDIR /app
 COPY --from=react-build-base /app/node_modules /app/node_modules
 COPY --from=react-build-base /app/packages/app/ /app/packages/app/node_modules
+COPY --from=react-build-base /app/packages/app/public/ /app/packages/app/public/
 COPY . .
 RUN yarn workspace @corona-dashboard/common build
 RUN yarn workspace @corona-dashboard/app build
@@ -31,6 +32,7 @@ ARG NEXT_PUBLIC_SANITY_PROJECT_ID
 WORKDIR /app
 COPY --from=react-build-base /app/node_modules /app/node_modules
 COPY --from=react-build-base /app/packages/app/ /app/packages/app/node_modules
+COPY --from=react-build-base /app/packages/app/public/ /app/packages/app/public/
 COPY . .
 RUN yarn workspace @corona-dashboard/common build
 RUN yarn workspace @corona-dashboard/app build
