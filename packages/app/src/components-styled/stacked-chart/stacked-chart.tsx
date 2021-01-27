@@ -133,15 +133,17 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
   } = useTooltip<TooltipData>();
 
   const breakpoints = useBreakpoints();
-  const isTinyScreen = !breakpoints.sm;
+  // const isTinyScreen = !breakpoints.sm;
+  const isTinyScreen = false;
 
+  console.log('!breakpoints.sm', !breakpoints.sm);
   const padding = useMemo(
     () =>
       ({
         top: 10,
-        right: isTinyScreen ? 0 : 20,
+        right: isTinyScreen ? 0 : 30,
         bottom: 20,
-        left: isTinyScreen ? 0 : 30,
+        left: isTinyScreen ? 0 : 20,
       } as const),
     [isTinyScreen]
   );
