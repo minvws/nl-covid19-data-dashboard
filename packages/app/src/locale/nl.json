@@ -2153,6 +2153,12 @@
       },
       "ic_opnames": {
         "title": "Intensive care-opnames"
+      },
+      "toegediende_vaccins": {
+        "title": "Toegediende vaccins",
+        "sub_title": "Voorraad & Levering",
+        "administered_tests": "Tot nu toe zijn er circa {{administeredVaccines}} vaccinaties toegediend. Dit cijfer omvat zowel eerste als tweede prikken.",
+        "supply": "Er worden circa {{expectedDelivery}} vaccins verwacht als levering op korte termijn."
       }
     },
     "data_driven_texts": {
