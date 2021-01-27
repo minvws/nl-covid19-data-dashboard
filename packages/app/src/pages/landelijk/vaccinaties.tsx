@@ -127,72 +127,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
               <StackedChart
                 width={width}
                 valueAnnotation={siteText.waarde_annotaties.x_miljoen}
-                values={
-                  data.vaccine_delivery.values
-
-                  /* [
-                  {
-                    pfizer: 0.2,
-                    moderna: 0.05,
-                    astra_zeneca: 0,
-                    cure_vac: 0,
-                    janssen: 0,
-                    sanofi: 0,
-                    date_of_insertion_unix: 0,
-                    date_unix: Date.parse('25 January 2021 00:00 UTC') / 1000,
-                  },
-                  {
-                    pfizer: 0.2,
-                    moderna: 0,
-                    astra_zeneca: 0,
-                    cure_vac: 0,
-                    janssen: 0,
-                    sanofi: 0,
-                    date_of_insertion_unix: 0,
-                    date_unix: Date.parse('01 February 2021 00:00 UTC') / 1000,
-                  },
-                  {
-                    pfizer: 0.5,
-                    moderna: 0.2,
-                    astra_zeneca: 0,
-                    cure_vac: 0,
-                    janssen: 0,
-                    sanofi: 0,
-                    date_of_insertion_unix: 0,
-                    date_unix: Date.parse('08 February 2021 00:00 UTC') / 1000,
-                  },
-                  {
-                    pfizer: 0.2,
-                    moderna: 0,
-                    astra_zeneca: 0.2,
-                    cure_vac: 0,
-                    janssen: 0,
-                    sanofi: 0,
-                    date_of_insertion_unix: 0,
-                    date_unix: Date.parse('15 February 2021 00:00 UTC') / 1000,
-                  },
-                  {
-                    pfizer: 0.2,
-                    moderna: 0.15,
-                    astra_zeneca: 0.4,
-                    cure_vac: 0,
-                    janssen: 0,
-                    sanofi: 0,
-                    date_of_insertion_unix: 0,
-                    date_unix: Date.parse('22 February 2021 00:00 UTC') / 1000,
-                  },
-                  {
-                    pfizer: 0.2,
-                    moderna: 0,
-                    astra_zeneca: 0,
-                    cure_vac: 0,
-                    janssen: 0,
-                    sanofi: 0,
-                    date_of_insertion_unix: 0,
-                    date_unix: Date.parse('01 March 2021 00:00 UTC') / 1000,
-                  },
-                ] */
-                }
+                values={data.vaccine_delivery.values}
                 config={[
                   {
                     metricProperty: 'pfizer',
@@ -204,7 +139,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                     color: '#6AB4F9',
                     legendLabel: 'Moderna',
                   },
-                  {
+                  /*  {
                     metricProperty: 'astra_zeneca',
                     color: '#00BBB5',
                     legendLabel: 'AstraZeneca',
@@ -224,7 +159,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                     metricProperty: 'sanofi',
                     color: '#96E4E4',
                     legendLabel: 'Sanofi',
-                  },
+                  }, */
                 ]}
               />
             )}
