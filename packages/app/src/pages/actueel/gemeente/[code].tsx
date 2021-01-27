@@ -228,12 +228,9 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
                       data={choropleth.vr}
                       metricName="escalation_levels"
                       metricProperty="escalation_level"
-                      onSelect={createSelectRegionHandler(
-                        router,
-                        'maatregelen'
-                      )}
+                      onSelect={createSelectRegionHandler(router, 'actueel')}
                       tooltipContent={escalationTooltip(
-                        createSelectRegionHandler(router, 'maatregelen')
+                        createSelectRegionHandler(router, 'actueel')
                       )}
                     />
                   </TopicalChoroplethContainer>
