@@ -27,7 +27,7 @@
     "tested_ggd_average",
     "tested_overall",
     "tested_per_age_group",
-    "nl_vaccine_delivery"
+    "vaccine_delivery"
   ],
   "additionalProperties": false,
   "properties": {
