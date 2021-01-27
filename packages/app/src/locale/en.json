@@ -2142,7 +2142,7 @@
       "selecteer_titel": "Risk level map of the Netherlands",
       "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions.  \n\n**There is a [national lockdown](/landelijk/maatregelen) until at least 9 February.**"
     },
-    "data_sitemap_titel": "All national data on this dashboard",
+    "data_sitemap_titel": "Topics on this dashboard",
     "data_sitemap_toelichting": "Go directly to the following topics:",
     "mini_trend_tiles": {
       "positief_getest": {
