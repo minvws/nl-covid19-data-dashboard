@@ -94,8 +94,8 @@ export type StackedChartProps<T extends Value> = {
   config: Config<T>[];
   valueAnnotation?: string;
   width: number;
-  height?: number;
-  formatDateString?: typeof formatDateString;
+  // height?: number;
+  // formatDateString?: typeof formatDateString;
   formatTooltip?: TooltipFormatter;
   isPercentage?: boolean;
 };
@@ -110,7 +110,7 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
     values,
     config,
     width,
-    height = 400,
+    // height = 400,
     valueAnnotation,
     isPercentage,
   } = props;
@@ -125,20 +125,23 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
   } = useTooltip<TooltipData>();
 
   const breakpoints = useBreakpoints();
+  const isSmallScreen = !breakpoints.sm;
   const isTinyScreen = !breakpoints.xs;
 
-  console.log('isTinyScreen', isTinyScreen);
+  // console.log('isTinyScreen', isSmallScreen);
 
   const padding = useMemo(
     () =>
       ({
         top: 10,
-        right: isTinyScreen ? 0 : 30,
+        right: isSmallScreen ? 0 : 30,
         bottom: 20,
-        left: isTinyScreen ? 0 : 20,
+        left: 24,
       } as const),
-    [isTinyScreen]
+    [isSmallScreen]
   );
+
+  const height = isSmallScreen ? 200 : 400;
 
   const metricProperties = useMemo(() => config.map((x) => x.metricProperty), [
     config,
@@ -206,6 +209,15 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
         {} as Record<string, string>
       ),
     [config]
+  );
+
+  const formatDateString = useCallback(
+    (date: Date) => {
+      const [, weekNumber] = getWeekNumber(date);
+
+      return isTinyScreen ? `Wk ${weekNumber}` : `Week ${weekNumber}`;
+    },
+    [isTinyScreen]
   );
 
   /**
@@ -294,7 +306,6 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
       tooltipTimeout = window.setTimeout(() => {
         hideTooltip();
       }, 300);
-
       hoverTimeout = window.setTimeout(() => {
         setHoveredIndex(NO_HOVER_INDEX);
       }, 300);
@@ -335,7 +346,7 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
 
   const xScale = scaleBand<Date>({
     domain: series.map(getDate),
-    padding: 0.2,
+    padding: isSmallScreen ? 0.4 : 0.2,
   }).rangeRound([0, xMax]);
 
   const yScale = scaleLinear<number>({
@@ -465,12 +476,6 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
  */
 function getDate(x: SeriesValue) {
   return x.__date;
-}
-
-function formatDateString(date: Date) {
-  const [, weekNumber] = getWeekNumber(date);
-
-  return `Week ${weekNumber}`;
 }
 
 /**
