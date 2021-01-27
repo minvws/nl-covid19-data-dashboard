@@ -885,7 +885,7 @@
     "tijdelijk_onbeschikbaar_titel": "",
     "tijdelijk_onbeschikbaar": "",
     "kpi_titel": "Number of hospital admissions reported on one day. ",
-    "linechart_legend_titel": "",
+    "linechart_legend_titel": "Hospital admissions",
     "linechart_legend_underreported_titel": "Data for recent days is incomplete due to reporting delays"
   },
   "gemeente_positief_geteste_personen": {
