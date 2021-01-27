@@ -2320,9 +2320,9 @@
           "plural": "{{newDate}} waren er {{propertyValue}} positief geteste mensen."
         },
         "difference": {
-          "zero": "Dit is dezelfde waarde als {{oldDate}}.",
-          "singular": "Dit is {{differenceIndicator}} dan {{oldDate}}.",
-          "plural": "Dit is {{differenceIndicator}} dan {{oldDate}}."
+          "zero": "Dit is hetzelfde als {{oldDate}}.",
+          "singular": "Dit is {{differenceIndicator}} dan de vorige waarde.",
+          "plural": "Dit is {{differenceIndicator}} dan de vorige waarde."
         }
       },
       "intake_hospital_ma": {
@@ -2332,9 +2332,9 @@
           "plural": "{{newDate}} zijn er {{propertyValue}} ziekenhuisopnames gemeld."
         },
         "difference": {
-          "zero": "Dit is dezelfde waarde als {{oldDate}}.",
-          "singular": "Dit is {{differenceIndicator}} dan {{oldDate}}.",
-          "plural": "Dit is {{differenceIndicator}} dan {{oldDate}}."
+          "zero": "Dit is hetzelfde als {{oldDate}}.",
+          "singular": "Dit is {{differenceIndicator}} dan de vorige waarde.",
+          "plural": "Dit is {{differenceIndicator}} dan de vorige waarde."
         }
       },
       "intake_intensivecare_ma": {

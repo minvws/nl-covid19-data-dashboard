@@ -2321,8 +2321,8 @@
         },
         "difference": {
           "zero": "This is the same figure as {{oldDate}}.",
-          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+          "singular": "This is {{differenceIndicator}} than the previous figure.",
+          "plural": "This is {{differenceIndicator}} than the previous figure."
         }
       },
       "intake_hospital_ma": {
@@ -2333,8 +2333,8 @@
         },
         "difference": {
           "zero": "This is the same figure as {{oldDate}}.",
-          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+          "singular": "This is {{differenceIndicator}} than the previous figure.",
+          "plural": "This is {{differenceIndicator}} than the previous figure."
         }
       },
       "intake_intensivecare_ma": {
