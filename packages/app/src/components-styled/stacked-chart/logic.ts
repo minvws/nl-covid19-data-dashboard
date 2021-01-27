@@ -136,7 +136,7 @@ export function getSeriesData<T extends Value>(
   return metricValues.map(
     (x) =>
       ({
-        ...mapValues(pick(x, metricProperties), (v) => v / 1000000),
+        ...mapValues(pick(x, metricProperties), (v) => v),
         __date: getDateFromValue(x),
       } as SeriesValue)
   );
