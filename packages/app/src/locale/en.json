@@ -2154,7 +2154,7 @@
       "ic_opnames": {
         "title": "Intensive care admissions"
       },
-      "vaccinaties": {
+      "toegediende_vaccins": {
         "title": "Toegediende vaccins",
         "sub_title": "Voorraad & Levering",
         "administered_tests": "Tot nu toe zijn er circa {{administeredVaccines}} vaccinaties toegediend. Dit cijfer omvat zowel eerste als tweede prikken.",
