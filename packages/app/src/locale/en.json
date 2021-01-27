@@ -30,7 +30,7 @@
   "skiplinks": {
     "inhoud": "Go directly to the content",
     "nav": "Go directly to the navigation",
-    "metric_nav": "",
+    "metric_nav": "Jump to the menu for data points",
     "footer_nav": "Go to footer"
   },
   "header": {
@@ -56,8 +56,8 @@
     "terug_naar_alle_cijfers": "Overview",
     "terug_naar_alle_cijfers_homepage": "Overview",
     "menu": {
-      "open_menu": "",
-      "close_menu": ""
+      "open_menu": "Open menu",
+      "close_menu": "Close menu"
     }
   },
   "ic_opnames_per_dag": {
@@ -610,7 +610,7 @@
   "utils": {
     "date_today": "today",
     "date_yesterday": "yesterday",
-    "date_day_before_yesterday": ""
+    "date_day_before_yesterday": "the day before yesterday"
   },
   "regionaal_index": {
     "your_safety_region": "Safety region",
@@ -694,7 +694,7 @@
       "gedrag": "Behaviour",
       "kwetsbare_groepen": "Vulnerable groups",
       "maatregelen": "Measures",
-      "algemeen": ""
+      "algemeen": "General"
     }
   },
   "veiligheidsregio_metadata": {
@@ -961,10 +961,10 @@
     "nodata_sidebar": "This information is not available for this municipality.",
     "total_installation_count_titel": "Number of measurement locations",
     "total_installation_count_description": "Weekly number of sewage water treatment plants that have reported at least one measurement. The weekly average is calculated by taking the average of all measurements at these locations. This number can vary each week because not all measurements are successful.",
-    "rwzi_abbrev": "",
-    "graph_daily_label_text_rwzi": "",
-    "graph_selected_rwzi_placeholder": "",
-    "graph_range_description": "",
+    "rwzi_abbrev": "Sewage water treatment plant",
+    "graph_daily_label_text_rwzi": "Measurements for location ({{name}})",
+    "graph_selected_rwzi_placeholder": "Select location",
+    "graph_range_description": "Progression overt time in the average number of virus particles per 100.000 residents.",
     "reference": {
       "href": "/verantwoording#sewage-water",
       "text": "Find out more about testing wastewater for coronavirus in the explanation of data presented."
@@ -1405,10 +1405,10 @@
         "meervoud": "weeks"
       },
       "hiervoor": "before",
-      "vorige_week": "",
-      "ervoor": ""
+      "vorige_week": "last week",
+      "ervoor": "before"
     },
-    "ervoor": "",
+    "ervoor": "before",
     "vorige_waarde": "the previous value"
   },
   "aria_labels": {
@@ -1428,9 +1428,9 @@
       "infected_percentage_tooltip": "of the total amount of positive tested persons is {{ageGroupRange}} years old. ",
       "age_group_range_tooltip": "{{ageGroupRange}} years old. ",
       "accessibility_description": "Graph with percentages for the distribution of the population and the distribution of positive tested age groups.",
-      "clipped_value_message": "",
-      "value_percentage_title": "",
-      "value_percentage_tooltip": ""
+      "clipped_value_message": "This value is higher than displayed in the figure.",
+      "value_percentage_title": "Confirmed cases by agegroup",
+      "value_percentage_tooltip": "of the confirmed cases are {{ageGroupRange}} years old"
     }
   },
   "gehandicaptenzorg_besmette_locaties": {
@@ -1442,7 +1442,7 @@
     "kpi_titel": "Total no. of new infected locations",
     "kpi_toelichting": "This figure shows the total number of disability care homes that have reported at least one confirmed COVID-19 case among residents, based on a positive test, in the last 28 days. The percentage expresses the share of all disability care homes in the Netherlands with confirmed COVID-19 cases.",
     "linechart_titel": "Total no. of infected locations – progression over time",
-    "barscale_screenreader_text": "",
+    "barscale_screenreader_text": "{{value}} new reported locations with at least one confirmed case amongst residents per day.",
     "chloropleth_legenda": {
       "titel": "Percentage of infected locations",
       "geen_meldingen": "No newly confirmed cases"
@@ -1476,8 +1476,8 @@
     "linechart_titel": "Progression over time",
     "barscale_screenreader_text": "{{value}} confirmed cases (residents)",
     "chloropleth_legenda": {
-      "titel": "",
-      "geen_meldingen": ""
+      "titel": "Number per 100.000 residents",
+      "geen_meldingen": "No reports"
     },
     "map_titel": "Distribution of infected locations in the Netherlands",
     "map_toelichting": "These maps show how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
@@ -1508,7 +1508,7 @@
     "extra_uitleg": "This is an estimate of the number of disability care home residents in the Netherlands who have died from COVID-19 per day.",
     "linechart_titel": "Progression over time",
     "map_titel": "Disability care homes – deaths",
-    "map_toelichting": "",
+    "map_toelichting": "The maps show the exces mortality amongst disability care homes in the Netherlands, per day.",
     "metadata": {
       "title": "Deceased residents of disability care homes | Dashboard Coronavirus | Government.nl",
       "description": "Total number of confirmed cases in disability care homes in the Netherlands that died from COVID-19"
@@ -1930,16 +1930,16 @@
     },
     "behavior": {
       "compliance": {
-        "full_sentence": "",
-        "full_sentence_single": "",
-        "sentence": "",
-        "last_sentence": ""
+        "full_sentence": "This map shows that {{first}} and {{last}}.",
+        "full_sentence_single": "This map shows that {{first}}.",
+        "sentence": "{{count}} {{area}} between {{rangeLow}} and {{rangeHigh}} procent of the participants {{verb}} comply with the measure '{{restriction}}'.",
+        "last_sentence": "{{count}} {{area}} more than {{rangeLow}} procent of the participants {{verb}} comply with the measure '{{restriction}}'."
       },
       "support": {
-        "full_sentence": "",
-        "full_sentence_single": "",
-        "sentence": "",
-        "last_sentence": ""
+        "full_sentence": "This map shows that {{first}} and {{last}}.",
+        "full_sentence_single": "This map shows that{{first}}.",
+        "sentence": "{{count}} {{area}} between {{rangeLow}} and {{rangeHigh}} percent support {{verb}} for the measure '{{restriction}}'",
+        "last_sentence": "{{count}} {{area}} more than {{rangeLow}} percent support {{verb}} for the measure '{{restriction}}'"
       }
     }
   },
@@ -2119,13 +2119,13 @@
   },
   "article_detail": {
     "back_link": {
-      "text": ""
+      "text": "Back to article overview"
     }
   },
   "articles_metadata": {
-    "title": "",
+    "title": "Articles | Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
     "description": "",
-    "url": ""
+    "url": "https://coronadashboard.government.nl/artikelen"
   },
   "common_actueel": {
     "terug_naar_landelijk": "Back to national situation",
@@ -2328,7 +2328,7 @@
       "intake_hospital_ma": {
         "value": {
           "zero": "{{newDate}} there were no newly reported hospital intakes.",
-          "singular": "{{newDate}} there was {{propertyValue}} newly reported hospital intake.",
+          "singular": "{{newDate}} there was {{propertyValue}} newly reported hospital admissions.",
           "plural": "{{newDate}} there were {{propertyValue}} newly reported hospital admissions."
         },
         "difference": {
