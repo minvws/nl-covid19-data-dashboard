@@ -2159,8 +2159,8 @@
       "infected_people_total": {
         "value": {
           "zero": "{{newDate}} there were no newly reported confirmed cases.",
-          "singular": "{{newDate}} there were {{propertyValue}}newly reported cases.",
-          "plural": "{{newDate}} there were {{propertyValue}} newly reported confirmed cases."
+          "singular": "{{newDate}} {{propertyValue}}new confirmed case was reported.",
+          "plural": "{{newDate}} {{propertyValue}} new confirmed cases were reported."
         },
         "difference": {
           "zero": "That equals {{oldDate}}.",
@@ -2171,8 +2171,8 @@
       "intake_hospital_ma": {
         "value": {
           "zero": "{{newDate}} there were no newly reported hospital admissions.",
-          "singular": "{{newDate}} there were {{propertyValue}} newly reported cases.",
-          "plural": "{{newDate}} there were {{propertyValue}} newly reported cases."
+          "singular": "{{newDate}} {{propertyValue}} new hospital admission was reported.",
+          "plural": "{{newDate}} {{propertyValue}} new hospital admissions were reported."
         },
         "difference": {
           "zero": "That equals {{oldDate}}.",
@@ -2183,8 +2183,8 @@
       "intake_intensivecare_ma": {
         "value": {
           "zero": "{{newDate}} there were no new intensive care admissions reported.",
-          "singular": "{{newDate}} there was {{propertyValue}} new intensive care admissions reported.",
-          "plural": "{{newDate}} there were {{propertyValue}} new intensive care admissions reported."
+          "singular": "{{newDate}} {{propertyValue}} new intensive care admission was reported.",
+          "plural": "{{newDate}} {{propertyValue}} new intensive care admissions were reported."
         },
         "difference": {
           "zero": "This is the same as {{oldDate}}.",
@@ -2243,8 +2243,8 @@
       "infected_people_total": {
         "value": {
           "zero": "{{newDate}} there were no newly reported infected people.",
-          "singular": "{{newDate}} there was {{propertyValue}} confirmed case reported.",
-          "plural": "{{newDate}} there were {{propertyValue}} newly reported infected people."
+          "singular": "{{newDate}} {{propertyValue}} new confirmed case were reported.",
+          "plural": "{{newDate}} {{propertyValue}} new confirmed cases were reported."
         },
         "difference": {
           "zero": "This is the same as {{oldDate}}.",
@@ -2255,8 +2255,8 @@
       "intake_hospital_ma": {
         "value": {
           "zero": "{{newDate}} there were no newly reported hospital admissions.",
-          "singular": "{{newDate}} there was {{propertyValue}} newly reported hospital admission.",
-          "plural": "{{newDate}} there were {{propertyValue}} newly reported hospital admissions."
+          "singular": "{{newDate}} {{propertyValue}} new hospital admission was reported.",
+          "plural": "{{newDate}} {{propertyValue}} new hospital admissions were reported."
         },
         "difference": {
           "zero": "This is the same as {{oldDate}}.",
@@ -2267,8 +2267,8 @@
       "intake_intensivecare_ma": {
         "value": {
           "zero": "{{newDate}} there were no newly reported intensive care admissions.",
-          "singular": "{{newDate}} there was {{propertyValue}} newly reported intensive care admission.",
-          "plural": "{{newDate}} there were {{propertyValue}} newly reported intensive care admissions."
+          "singular": "{{newDate}} {{propertyValue}} new intensive care admission was reported.",
+          "plural": "{{newDate}} {{propertyValue}} new intensive care admissions were reported."
         },
         "difference": {
           "zero": "This is the same as {{oldDate}}.",
@@ -2316,8 +2316,8 @@
       "infected_people_total": {
         "value": {
           "zero": "{{newDate}} there were no newly reported infected people.",
-          "singular": "{{newDate}} {{propertyValue}} newly reported infected person.",
-          "plural": "{{newDate}} there were {{propertyValue}} newly reported infected people."
+          "singular": "{{newDate}} {{propertyValue}} new confirmed case was reported.",
+          "plural": "{{newDate}} {{propertyValue}} new confirmed cases were reported"
         },
         "difference": {
           "zero": "This is the same value as {{oldDate}}.",
@@ -2328,8 +2328,8 @@
       "intake_hospital_ma": {
         "value": {
           "zero": "{{newDate}} there were no newly reported hospital intakes.",
-          "singular": "{{newDate}} there was {{propertyValue}} newly reported hospital admissions.",
-          "plural": "{{newDate}} there were {{propertyValue}} newly reported hospital admissions."
+          "singular": "{{newDate}} {{propertyValue}} new hospital admission was reported.",
+          "plural": "{{newDate}} {{propertyValue}} new hospital admissions were reported."
         },
         "difference": {
           "zero": "This is the same value as {{oldDate}}.",
@@ -2340,8 +2340,8 @@
       "intake_intensivecare_ma": {
         "value": {
           "zero": "{{newDate}} there were no newly reported intensive care admissions.",
-          "singular": "{{newDate}} there was {{propertyValue}} newly reported intensive care admission.",
-          "plural": "{{newDate}}  there were {{propertyValue}} newly reported intensive care admissions."
+          "singular": "{{newDate}} {{propertyValue}} new intensive care admission was reported.",
+          "plural": "{{newDate}} {{propertyValue}} new intensive care admissions were reported."
         },
         "difference": {
           "zero": "This is the same as {{oldDate}}.",
