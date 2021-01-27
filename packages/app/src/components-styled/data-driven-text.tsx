@@ -82,6 +82,13 @@ export function DataDrivenText({
           <DifferenceIndicator value={differenceValue} context="inline" />
         ),
         oldDate: siteText.toe_en_afname.vorige_waarde,
+        relativeOldDate: (
+          <RelativeDate
+            dateInSeconds={differenceValue.old_date_unix}
+            isCapitalized={additionalText.indexOf('{{relativeOldDate}}') === 0}
+            absoluteDateTemplate={siteText.common.absolute_date_template}
+          />
+        ),
       })}
     </Text>
   );
