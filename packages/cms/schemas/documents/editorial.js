@@ -15,6 +15,13 @@ export default {
     },
   ],
   fields: [].concat(ARTICLE_FIELDS),
+  orderings: [
+    {
+      title: 'publication date order',
+      name: 'publicationDateOrder',
+      by: [{ field: 'publicationDate' }],
+    },
+  ],
   preview: {
     select: {
       title: 'title.nl',
