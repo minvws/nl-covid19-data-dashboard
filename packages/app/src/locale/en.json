@@ -2114,7 +2114,7 @@
   },
   "editorial_detail": {
     "back_link": {
-      "text": "Back"
+      "text": "Back to lastest developments"
     }
   },
   "article_detail": {
@@ -2128,7 +2128,7 @@
     "url": ""
   },
   "common_actueel": {
-    "terug_naar_landelijk": "Back",
+    "terug_naar_landelijk": "Back to national situation",
     "laatst_bijgewerkt": "The dashboard receives new data each day, around 15:20."
   },
   "nationaal_actueel": {
@@ -2158,33 +2158,33 @@
     "data_driven_texts": {
       "infected_people_total": {
         "value": {
-          "zero": "No new confirmed cases were reported {{newDate}}.",
-          "singular": "{{propertyValue}} new confirmed case was reported {{newDate}}.",
-          "plural": "{{propertyValue}} new confirmed cases were reported {{newDate}}."
+          "zero": "On {{newDate}} there were no newly reported confirmed cases.",
+          "singular": "On {{newDate}} there were {{propertyValue}}newly reported cases.",
+          "plural": "On {{newDate}} there were {{propertyValue}} newly reported confirmed cases."
         },
         "difference": {
-          "zero": "",
-          "singular": "",
-          "plural": ""
+          "zero": "That equals {{oldDate}}.",
+          "singular": "That is {{differenceIndicator}} more than on {{oldDate}}.",
+          "plural": "That is {{differenceIndicator}} more than on {{oldDate}}."
         }
       },
       "intake_hospital_ma": {
         "value": {
-          "zero": "No new reported hospital intakes were reported {{newDate}}.",
-          "singular": "{{propertyValue}} new reported hospital intake was reported {{newDate}}.",
-          "plural": "{{propertyValue}} new reported hospital intakes were reported {{newDate}}."
+          "zero": "",
+          "singular": "On {{newDate}} there were {{propertyValue}} newly reported cases.",
+          "plural": "On {{newDate}} there were {{propertyValue}} newly reported cases."
         },
         "difference": {
-          "zero": "",
-          "singular": "",
-          "plural": ""
+          "zero": "That equals {{oldDate}}",
+          "singular": "That is {{differenceIndicator}} more than on {{oldDate}}.",
+          "plural": "That is {{differenceIndicator}} more than on {{oldDate}}."
         }
       },
       "intake_intensivecare_ma": {
         "value": {
-          "zero": "No newly reported intensive care admissions were reported {{newDate}}.",
-          "singular": "{{propertyValue}} newly reported intensive care admission was reported {{newDate}}.",
-          "plural": "{{propertyValue}} newly reported intensive care admissions were reported {{newDate}}."
+          "zero": "",
+          "singular": "",
+          "plural": ""
         },
         "difference": {
           "zero": "",
@@ -2242,9 +2242,9 @@
     "data_driven_texts": {
       "infected_people_total": {
         "value": {
-          "zero": "No new confirmed cases were reported {{newDate}}.",
-          "singular": "{{propertyValue}} new confirmed case was reported {{newDate}}.",
-          "plural": "{{propertyValue}} new confirmed cases were reported {{newDate}}."
+          "zero": "",
+          "singular": "",
+          "plural": ""
         },
         "difference": {
           "zero": "",
@@ -2254,9 +2254,9 @@
       },
       "intake_hospital_ma": {
         "value": {
-          "zero": "No new reported hospital intakes were reported {{newDate}}.",
-          "singular": "{{propertyValue}} new reported hospital intake was reported {{newDate}}.",
-          "plural": "{{propertyValue}} new reported hospital intakes were reported {{newDate}}."
+          "zero": "",
+          "singular": "",
+          "plural": ""
         },
         "difference": {
           "zero": "",
@@ -2266,9 +2266,9 @@
       },
       "intake_intensivecare_ma": {
         "value": {
-          "zero": "No newly reported intensive care admissions were reported {{newDate}}.",
-          "singular": "{{propertyValue}} newly reported intensive care admission was reported {{newDate}}.",
-          "plural": "{{propertyValue}} newly reported intensive care admissions were reported {{newDate}}."
+          "zero": "",
+          "singular": "",
+          "plural": ""
         },
         "difference": {
           "zero": "",
@@ -2287,37 +2287,37 @@
     }
   },
   "gemeente_actueel": {
-    "title": "",
+    "title": "Current situation in municipality {{municipalityName}}",
     "metadata": {
-      "title": "",
-      "description": ""
+      "title": "Current situation in {{municipalityName}}",
+      "description": "The current situation in {{municipalityName}}."
     },
     "risiconiveaus": {
-      "selecteer_titel": "",
-      "selecteer_toelichting": ""
+      "selecteer_titel": "Risk level map of the Netherlands",
+      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions.  \n\n**There is a [national lockdown](/landelijk/maatregelen) until at least 9 February.**"
     },
     "risoconiveau_maatregelen": {
-      "title": "",
-      "description": "",
-      "bekijk_href": ""
+      "title": "Risk level & measures",
+      "description": "The risk level for the safety region of this municipality is",
+      "bekijk_href": "View the measures"
     },
     "mini_trend_tiles": {
       "positief_getest": {
-        "title": ""
+        "title": "Number of positive test results"
       },
       "ziekenhuis_opnames": {
-        "title": ""
+        "title": "Hospital admissions"
       },
       "ic_opnames": {
-        "title": ""
+        "title": "Intensive care admissions"
       }
     },
     "data_driven_texts": {
       "infected_people_total": {
         "value": {
-          "zero": "No new confirmed cases were reported {{newDate}}.",
-          "singular": "{{propertyValue}} new confirmed case was reported {{newDate}}.",
-          "plural": "{{propertyValue}} new confirmed cases were reported {{newDate}}."
+          "zero": "On {{newDate}} there were no newly reported infected people.",
+          "singular": "On {{newDate}} there was {{propertyValue}} newly reported infected person.",
+          "plural": "On {{newDate}} there were {{propertyValue}} newly reported infected people."
         },
         "difference": {
           "zero": "This is the same value as on {{oldDate}}.",
@@ -2327,9 +2327,9 @@
       },
       "intake_hospital_ma": {
         "value": {
-          "zero": "No new reported hospital intakes were reported {{newDate}}.",
-          "singular": "{{propertyValue}} new reported hospital intake was reported {{newDate}}.",
-          "plural": "{{propertyValue}} new reported hospital intakes were reported {{newDate}}."
+          "zero": "On {{newDate}} there were no newly reported hospital intakes.",
+          "singular": "On {{newDate}} there was {{propertyValue}} newly reported hospital intake.",
+          "plural": "On {{newDate}} there were {{propertyValue}} newly reported hospital admissions."
         },
         "difference": {
           "zero": "This is the same value as on {{oldDate}}.",
@@ -2339,24 +2339,24 @@
       },
       "intake_intensivecare_ma": {
         "value": {
-          "zero": "No newly reported intensive care admissions were reported {{newDate}}.",
-          "singular": "{{propertyValue}} newly reported intensive care admission was reported {{newDate}}.",
-          "plural": "{{propertyValue}} newly reported intensive care admissions were reported {{newDate}}."
+          "zero": "On {{newDate}} there were no newly reported intensive care admissions.",
+          "singular": "On {{newDate}} there was {{propertyValue}} newly reported intensive care admission.",
+          "plural": "On {{newDate}} there were {{propertyValue}} newly reported intensive care admissions."
         },
         "difference": {
-          "zero": "",
-          "singular": "",
-          "plural": ""
+          "zero": "This is the same as on {{oldDate}}.",
+          "singular": "This is {{differenceIndicator}} than on {{oldDate}}.",
+          "plural": "This is {{differenceIndicator}} than on {{oldDate}}."
         }
       }
     },
     "quick_links": {
-      "header": "",
+      "header": "View all data on the dashboard",
       "links": {
-        "nationaal": "",
-        "veiligheidsregio": "",
-        "veiligheidsregio_fallback": "",
-        "gemeente": ""
+        "nationaal": "Data for The Netherlands",
+        "veiligheidsregio": "Data for the safety region {{safetyRegionName}}",
+        "veiligheidsregio_fallback": "Data by safety region",
+        "gemeente": "Data for the municipality {{municipalityName}} "
       }
     }
   }

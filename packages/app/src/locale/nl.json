@@ -2158,26 +2158,26 @@
     "data_driven_texts": {
       "infected_people_total": {
         "value": {
-          "zero": "{{newDate}} zijn er geen nieuwe positieve tests gemeld.",
-          "singular": "{{newDate}} is {{propertyValue}} nieuwe positieve test gemeld.",
-          "plural": "{{newDate}} zijn {{propertyValue}} nieuwe positieve tests gemeld."
+          "zero": "Op {{newDate}} zijn er geen nieuwe positieve tests gemeld.",
+          "singular": "Op {{newDate}} is {{propertyValue}} nieuwe positieve test gemeld.",
+          "plural": "Op {{newDate}} zijn er {{propertyValue}} nieuwe positieve tests gemeld."
         },
         "difference": {
-          "zero": "Dat is gelijk aan {{oldDate}}",
-          "singular": "Dat is er {{differenceIndicator}} dan {{oldDate}}.",
-          "plural": "Dat zijn er {{differenceIndicator}} dan {{oldDate}}."
+          "zero": "Dat is gelijk aan {{oldDate}}.",
+          "singular": "Dat is er {{differenceIndicator}} dan op {{oldDate}}.",
+          "plural": "Dat zijn er {{differenceIndicator}} dan op {{oldDate}}."
         }
       },
       "intake_hospital_ma": {
         "value": {
           "zero": "{{newDate}} zijn er geen nieuwe ziekenhuisopnames gemeld.",
           "singular": "{{newDate}} is {{propertyValue}} nieuwe ziekenhuisopname gemeld.",
-          "plural": "{{newDate}} zijn {{propertyValue}} nieuwe ziekenhuisopnames gemeld."
+          "plural": "Op {{newDate}} zijn {{propertyValue}} nieuwe ziekenhuisopnames gemeld."
         },
         "difference": {
           "zero": "Dat is gelijk aan {{oldDate}}",
-          "singular": "Dat is er {{differenceIndicator}} dan {{oldDate}}.",
-          "plural": "Dat zijn er {{differenceIndicator}} dan {{oldDate}}."
+          "singular": "Dat is er {{differenceIndicator}} dan op {{oldDate}}.",
+          "plural": "Dat zijn er {{differenceIndicator}} dan op {{oldDate}}."
         }
       },
       "intake_intensivecare_ma": {
@@ -2294,7 +2294,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "De risicokaart van Nederland",
-      "selecteer_toelichting": "Iedere week wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. In welk risiconiveau een regio zit, wordt bepaald door te kijken naar de situatie van een regio, die van de omliggende regio's en de situatie in de rest van het land.\n\n**Er geldt een [landelijke lockdown](/landelijk/maatregelen) tot en met in ieder geval 9 februari.**"
+      "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. \n\n**Er geldt een [landelijke lockdown](/landelijk/maatregelen) tot en met in ieder geval 9 februari.**"
     },
     "risoconiveau_maatregelen": {
       "title": "Risiconiveau & maatregelen",
@@ -2327,9 +2327,9 @@
       },
       "intake_hospital_ma": {
         "value": {
-          "zero": "{{newDate}} there were no newly reported hospital intakes.",
-          "singular": "{{newDate}} there was {{propertyValue}} newly reported hospital intake.",
-          "plural": "Op {{newDate}} zijn er {{propertyValue}} ziekenhuisopnames gemeldt."
+          "zero": "Op {{newDate}} waren er geen nieuw gemelde ziekenhuisopnames.",
+          "singular": "Op {{newDate}} waren er {{propertyValue}} nieuw gemelde ziekenhuisopnames.",
+          "plural": "Op {{newDate}} zijn er {{propertyValue}} ziekenhuisopnames gemeld."
         },
         "difference": {
           "zero": "Dit is dezelfde waarde als op {{oldDate}}.",
@@ -2339,14 +2339,14 @@
       },
       "intake_intensivecare_ma": {
         "value": {
-          "zero": "{{newDate}} there were no newly reported intensive care admissions.",
-          "singular": "{{newDate}} there was {{propertyValue}} newly reported intensive care admission.",
-          "plural": "{{newDate}} there were {{propertyValue}} newly reported intensive care admissions."
+          "zero": "Op {{newDate}} waren er geen nieuw gemelde intensive care-opnames.",
+          "singular": "Op {{newDate}} waren er {{propertyValue}} nieuw gemelde intensive care-opnames.",
+          "plural": "Op {{newDate}} waren er {{propertyValue}} nieuw gemelde ziekenhuisopnames."
         },
         "difference": {
-          "zero": "This is the same as {{oldDate}}",
-          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+          "zero": "Dit is hetzelfde als op {{oldDate}}.",
+          "singular": "Dit is {{differenceIndicator}} dan op {{oldDate}}.",
+          "plural": "Dit is {{differenceIndicator}} dan op {{oldDate}}."
         }
       }
     },
