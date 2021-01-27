@@ -10,6 +10,8 @@ export type LineStyle = 'solid' | 'dashed';
 export type TrendProps = {
   trend: TrendValue[];
   type?: TrendType;
+  areaFillOpacity?: number;
+  strokeWidth?: number;
   style?: LineStyle;
   /**
    * I would like to type these as follows:
@@ -32,6 +34,8 @@ export type TrendProps = {
 export function Trend({
   trend,
   type = 'line',
+  areaFillOpacity = 0.05,
+  strokeWidth = 2,
   style = 'solid',
   color = colors.data.primary,
   xScale,
@@ -61,7 +65,7 @@ export function Trend({
           x={(d) => xScale(d.__date)}
           y={(d) => yScale(d.__value)}
           fill={color}
-          fillOpacity={0.05}
+          fillOpacity={areaFillOpacity}
           yScale={yScale}
           onTouchStart={handleHover}
           onMouseLeave={handleHover}
@@ -75,7 +79,7 @@ export function Trend({
         x={(d) => xScale(d.__date)}
         y={(d) => yScale(d.__value)}
         stroke={color}
-        strokeWidth={isHovered ? 3 : 2}
+        strokeWidth={isHovered ? strokeWidth + 1 : strokeWidth}
         strokeDasharray={dashes}
         onTouchStart={handleHover}
         onMouseLeave={handleHover}

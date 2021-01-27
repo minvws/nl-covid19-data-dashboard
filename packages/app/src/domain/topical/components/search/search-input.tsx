@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import CloseIcon from '~/assets/close.svg';
 import SearchIcon from '~/assets/search-icon.svg';
 import { Box } from '~/components-styled/base';
-import { Text } from '~/components-styled/typography';
 import { VisuallyHidden } from '~/components-styled/visually-hidden';
 import { default as siteText, default as text } from '~/locale';
 import { useSearchContext } from './context';
@@ -38,9 +37,7 @@ export function SearchInput() {
       )}
 
       <VisuallyHidden>
-        <label htmlFor={`${id}-input`}>
-          <Text>{siteText.search.placeholder}</Text>
-        </label>
+        <label htmlFor={`${id}-input`}>{siteText.search.placeholder}</label>
       </VisuallyHidden>
 
       <StyledSearchInput
@@ -63,6 +60,7 @@ export const paddedStyle = css({
 const StyledSearchInput = styled.input(
   paddedStyle,
   css({
+    fontFamily: 'body',
     display: 'block',
     width: '100%',
     borderRadius: 1,
