@@ -2187,7 +2187,7 @@
           "plural": "{{newDate}} there were {{propertyValue}} new intensive care admissions reported."
         },
         "difference": {
-          "zero": "This equals {{oldDate}}.",
+          "zero": "This is the same as {{oldDate}}.",
           "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
           "plural": "This is {{differenceIndicator}} than {{oldDate}}."
         }
@@ -2247,7 +2247,7 @@
           "plural": "{{newDate}} there were {{propertyValue}} newly reported infected people."
         },
         "difference": {
-          "zero": "This equals {{oldDate}}.",
+          "zero": "This is the same as {{oldDate}}.",
           "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
           "plural": "This is {{differenceIndicator}} than {{oldDate}}."
         }
@@ -2259,7 +2259,7 @@
           "plural": "{{newDate}} there were {{propertyValue}} newly reported hospital admissions."
         },
         "difference": {
-          "zero": "This equals {{oldDate}}.",
+          "zero": "This is the same as {{oldDate}}.",
           "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
           "plural": "This is {{differenceIndicator}} than {{oldDate}}."
         }
