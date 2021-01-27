@@ -2163,9 +2163,9 @@
           "plural": "{{newDate}} {{propertyValue}} new confirmed cases were reported."
         },
         "difference": {
-          "zero": "That equals {{oldDate}}.",
-          "singular": "That is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "That is {{differenceIndicator}} than {{oldDate}}."
+          "zero": "That is the same as {{relativeOldDate}}.",
+          "singular": "That is {{differenceIndicator}} than the previous figure.",
+          "plural": "That is {{differenceIndicator}} than the previous figure."
         }
       },
       "intake_hospital_ma": {
@@ -2175,9 +2175,9 @@
           "plural": "{{newDate}} {{propertyValue}} new hospital admissions were reported."
         },
         "difference": {
-          "zero": "That equals {{oldDate}}.",
-          "singular": "That is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "That is {{differenceIndicator}} than {{oldDate}}."
+          "zero": "This is the same as {{relativeOldDate}}.",
+          "singular": "That is {{differenceIndicator}} than the previous figure.",
+          "plural": "That is {{differenceIndicator}} than the previous figure."
         }
       },
       "intake_intensivecare_ma": {
@@ -2187,9 +2187,9 @@
           "plural": "{{newDate}} {{propertyValue}} new intensive care admissions were reported."
         },
         "difference": {
-          "zero": "This is the same as {{oldDate}}.",
-          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+          "zero": "This is the same as {{relativeOldDate}}.",
+          "singular": "This is {{differenceIndicator}} than the previous value.",
+          "plural": "This is {{differenceIndicator}} than the previous value."
         }
       }
     },
@@ -2247,9 +2247,9 @@
           "plural": "{{newDate}} {{propertyValue}} new confirmed cases were reported."
         },
         "difference": {
-          "zero": "This is the same as {{oldDate}}.",
-          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+          "zero": "This is the same as {{relativeOldDate}}.",
+          "singular": "This is {{differenceIndicator}} than the previous figure.",
+          "plural": "This is {{differenceIndicator}} than the previous figure."
         }
       },
       "intake_hospital_ma": {
@@ -2259,9 +2259,9 @@
           "plural": "{{newDate}} {{propertyValue}} new hospital admissions were reported."
         },
         "difference": {
-          "zero": "This is the same as {{oldDate}}.",
-          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+          "zero": "This is the same as {{relativeOldDate}}.",
+          "singular": "This is {{differenceIndicator}} than the previous figure.",
+          "plural": "This is {{differenceIndicator}} than the previous figure."
         }
       },
       "intake_intensivecare_ma": {
@@ -2271,9 +2271,9 @@
           "plural": "{{newDate}} {{propertyValue}} new intensive care admissions were reported."
         },
         "difference": {
-          "zero": "This is the same as {{oldDate}}.",
-          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+          "zero": "This is the same as {{relativeOldDate}}.",
+          "singular": "This is {{differenceIndicator}} than the previous figure.",
+          "plural": "This is {{differenceIndicator}} than the previous figure."
         }
       }
     },
@@ -2320,7 +2320,7 @@
           "plural": "{{newDate}} {{propertyValue}} new confirmed cases were reported"
         },
         "difference": {
-          "zero": "This is the same figure as {{oldDate}}.",
+          "zero": "This is the same as {{relativeOldDate}}.",
           "singular": "This is {{differenceIndicator}} than the previous figure.",
           "plural": "This is {{differenceIndicator}} than the previous figure."
         }
@@ -2332,7 +2332,7 @@
           "plural": "{{newDate}} {{propertyValue}} new hospital admissions were reported."
         },
         "difference": {
-          "zero": "This is the same figure as {{oldDate}}.",
+          "zero": "This is the same as {{relativeOldDate}}.",
           "singular": "This is {{differenceIndicator}} than the previous figure.",
           "plural": "This is {{differenceIndicator}} than the previous figure."
         }
@@ -2344,9 +2344,9 @@
           "plural": "{{newDate}} {{propertyValue}} new intensive care admissions were reported."
         },
         "difference": {
-          "zero": "This is the same as {{oldDate}}.",
-          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+          "zero": "This is the same as {{relativeOldDate}}.",
+          "singular": "This is {{differenceIndicator}} than the previous figure.",
+          "plural": "This is {{differenceIndicator}} than the previous figure."
         }
       }
     },
