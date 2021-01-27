@@ -259,9 +259,7 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
 
       const isMillion = (v: number) => v / NUM_1M > 1;
 
-      const [year, weekNumber, weekStartDate, weekEndDate] = getWeekNumber(
-        date
-      );
+      const [, , weekStartDate, weekEndDate] = getWeekNumber(date);
 
       const isTotalMillion = isMillion(seriesSumByKey[key]);
       const isWeekMillion = isMillion(data[key]);
