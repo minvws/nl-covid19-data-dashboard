@@ -32,6 +32,7 @@ import {
   SeriesValue,
   Value,
 } from './logic';
+import siteText from '~/locale';
 
 const tooltipStyles = {
   ...defaultStyles,
@@ -258,15 +259,15 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
         <Box p={2}>
           <Box mb={2}>
             <InlineText fontWeight="bold">{labelByKey[key]}:</InlineText>
-            {/* @TODO move mln to lokalize */}
-            {` ${formatPercentage(seriesSumByKey[key])} mln totaal`}
+            {` ${formatPercentage(seriesSumByKey[key])} mln ${
+              siteText.waarde_annotaties.totaal
+            } `}
           </Box>
 
           <Box mb={2}>
             <InlineText fontWeight="bold">
               {`Week ${weekNumber} ${year}`}:
             </InlineText>
-            {/* @TODO move mln to lokalize */}
             {` ${formatPercentage(data[key])} mln`}
           </Box>
           <Box>
