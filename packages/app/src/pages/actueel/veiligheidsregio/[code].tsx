@@ -61,7 +61,7 @@ export const getStaticProps = createGetStaticProps(
         "cover": {
           ...cover,
           "asset": cover.asset->
-        }  
+        }
       }[0..2],
       'editorial': *[_type == 'editorial'] | order(publicationDate) {
         "title":title.${targetLanguage},
