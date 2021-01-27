@@ -2135,8 +2135,8 @@
     "title": "De actuele situatie in {{the_netherlands}}",
     "the_netherlands": "Nederland",
     "metadata": {
-      "title": "De actuele situatie in Nederland",
-      "description": "De actuele situatie in Nederland"
+      "title": "Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
+      "description": "Informatie over de ontwikkeling van het coronavirus in Nederland."
     },
     "risiconiveaus": {
       "selecteer_titel": "De risicokaart van Nederland",
@@ -2156,9 +2156,9 @@
       },
       "toegediende_vaccins": {
         "title": "Toegediende vaccins",
-        "sub_title": "Voorraad & Levering",
-        "administered_tests": "Tot nu toe zijn er circa {{administeredVaccines}} vaccinaties toegediend. Dit cijfer omvat zowel eerste als tweede prikken.",
-        "supply": "Er worden circa {{expectedDelivery}} vaccins verwacht als levering op korte termijn."
+        "sub_title": "Verwachte levering goedgekeurde vaccins",
+        "administered_tests": "Tot nu toe zijn er {{administeredVaccines}} vaccins toegediend. Dit cijfer omvat zowel eerste als tweede prikken.",
+        "supply": "Nederland verwacht de komende zes weken {{expectedDelivery}} goedgekeurde vaccins te krijgen."
       }
     },
     "data_driven_texts": {
