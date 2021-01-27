@@ -2,7 +2,7 @@ import { targetLanguage } from '~/locale';
 
 export const topicalPageQuery = `{
     // Retrieve the latest 3 articles with the highlighted article filtered out:
-    'articles': *[_type == 'article' && !(_id == *[_type == 'topicalPage']{"i":highlightedArticle->{_id}}[0].i._id)] | order(publicationDate) {
+    'articles': *[_type == 'article' && !(_id == *[_type == 'topicalPage']{"i":highlightedArticle->{_id}}[0].i._id)] | order(publicationDate desc) {
       "title":title.${targetLanguage},
       slug,
       "summary":summary.${targetLanguage},
