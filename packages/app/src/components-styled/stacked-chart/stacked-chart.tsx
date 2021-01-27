@@ -31,6 +31,7 @@ import {
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { useBreakpoints } from '~/utils/useBreakpoints';
+import { colors } from '~/style/theme';
 
 const tooltipStyles = {
   ...defaultStyles,
@@ -82,15 +83,6 @@ type TooltipFormatter = (value: SeriesValue, key: string) => JSX.Element;
 
 type HoverEvent = TouchEvent<SVGElement> | MouseEvent<SVGElement>;
 
-/**
- * @TODO move to theme
- */
-const defaultColors = {
-  axis: '#C4C4C4',
-  axisLabels: '#666666',
-  benchmark: '#4f5458',
-} as const;
-
 export type Config<T extends Value> = {
   metricProperty: keyof T;
   color: string;
@@ -101,7 +93,7 @@ export type StackedChartProps<T extends Value> = {
   values: T[];
   config: Config<T>[];
   valueAnnotation?: string;
-  width?: number;
+  width: number;
   height?: number;
   formatDateString?: typeof formatDateString;
   formatTooltip?: TooltipFormatter;
@@ -117,8 +109,8 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
   const {
     values,
     config,
-    width = 500,
-    height = 250,
+    width,
+    height = 400,
     valueAnnotation,
     isPercentage,
   } = props;
@@ -133,10 +125,10 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
   } = useTooltip<TooltipData>();
 
   const breakpoints = useBreakpoints();
-  // const isTinyScreen = !breakpoints.sm;
-  const isTinyScreen = false;
+  const isTinyScreen = !breakpoints.xs;
 
-  console.log('!breakpoints.sm', !breakpoints.sm);
+  console.log('isTinyScreen', isTinyScreen);
+
   const padding = useMemo(
     () =>
       ({
@@ -188,23 +180,22 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
    */
   const legendaItems = useMemo(
     () =>
-      config /* .reverse() */
-        .map((x) => {
-          const itemIndex = metricProperties.findIndex(
-            (v) => v === x.metricProperty
-          );
+      config.map((x) => {
+        const itemIndex = metricProperties.findIndex(
+          (v) => v === x.metricProperty
+        );
 
-          return {
-            color:
-              hoveredIndex === NO_HOVER_INDEX
-                ? x.color
-                : hoveredIndex === itemIndex
-                ? x.color
-                : hoverColors[itemIndex],
-            label: x.legendLabel,
-            shape: 'square',
-          } as LegendItem;
-        }),
+        return {
+          color:
+            hoveredIndex === NO_HOVER_INDEX
+              ? x.color
+              : hoveredIndex === itemIndex
+              ? x.color
+              : hoverColors[itemIndex],
+          label: x.legendLabel,
+          shape: 'square',
+        } as LegendItem;
+      }),
     [config, hoveredIndex, metricProperties, hoverColors]
   );
 
@@ -257,17 +248,13 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
   const formatTooltip = useCallback(
     (data: SeriesValue, key: string) => {
       const date = getDate(data);
-      // const dateString = props.formatDateString? props.formatDateString(date)
-      //   : formatDateString(date);
 
       const [year, weekNumber] = getWeekNumber(date);
 
       return (
         <Box p={2}>
-          <Box /* mb={3} */>
-            <InlineText fontWeight="bold" /* mb={2} */>
-              {labelByKey[key]}:
-            </InlineText>
+          <Box mb={2}>
+            <InlineText fontWeight="bold">{labelByKey[key]}:</InlineText>
             {/* @TODO move mln to lokalize */}
             {` ${formatPercentage(seriesSumByKey[key])} mln totaal`}
           </Box>
@@ -369,17 +356,17 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
               scale={yScale}
               width={bounds.width}
               numTicks={NUM_TICKS}
-              stroke={defaultColors.axis}
+              stroke={colors.data.axis}
             />
             <AxisBottom
               scale={xScale}
               tickValues={xScale.domain()}
               top={bounds.height}
-              stroke={defaultColors.axis}
+              stroke={colors.data.axis}
               tickFormat={formatDateString}
               tickLabelProps={() => ({
                 textAnchor: 'middle',
-                fill: defaultColors.axisLabels,
+                fill: colors.data.axisLabels,
                 fontSize: 12,
               })}
               hideTicks
@@ -389,12 +376,12 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
               numTicks={4}
               hideTicks
               hideAxisLine
-              stroke={defaultColors.axis}
+              stroke={colors.data.axis}
               tickFormat={
                 isPercentage ? tickFormatPercentage : tickFormatNumber
               }
               tickLabelProps={() => ({
-                fill: defaultColors.axisLabels,
+                fill: colors.data.axisLabels,
                 fontSize: 12,
                 dx: 0,
                 textAnchor: 'end',

@@ -125,7 +125,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             {({ width }) => (
               <StackedChart
                 width={width}
-                height={400}
+                // height={400}
                 valueAnnotation={siteText.waarde_annotaties.x_miljoen}
                 values={[
                   {
