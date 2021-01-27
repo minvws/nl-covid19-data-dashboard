@@ -60,7 +60,7 @@ type ChartAxesProps = {
   formatYAxis: TickFormatter<number>;
   children: (props: ChartScales) => ReactNode;
   componentCallback?: ComponentCallbackFunction;
-  uniqueId?: string;
+  ariaLabelledBy?: string;
 };
 
 type AnyTickFormatter = (value: any) => string;
@@ -79,7 +79,7 @@ export const ChartAxes = memo(function ChartAxes({
   formatYAxis,
   children,
   componentCallback = () => undefined,
-  uniqueId,
+  ariaLabelledBy,
 }: ChartAxesProps) {
   const bounds: ChartBounds = {
     width: width - padding.left - padding.right,
@@ -105,7 +105,12 @@ export const ChartAxes = memo(function ChartAxes({
   ) => onHover(event, scales);
 
   return (
-    <svg width={width} height={height} role="img" aria-labelledby={uniqueId}>
+    <svg
+      width={width}
+      height={height}
+      role="img"
+      aria-labelledby={ariaLabelledBy}
+    >
       <Group left={padding.left} top={padding.top}>
         {createComponent(
           {
