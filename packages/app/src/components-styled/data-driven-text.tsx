@@ -79,18 +79,9 @@ export function DataDrivenText({
       })}{' '}
       {replaceComponentsInText(additionalText, {
         differenceIndicator: (
-          <DifferenceIndicator
-            value={differenceValue}
-            context="inline"
-            staticTimespan={siteText.toe_en_afname.vorige_waarde}
-          />
+          <DifferenceIndicator value={differenceValue} context="inline" />
         ),
-        oldDate: (
-          <RelativeDate
-            dateInSeconds={differenceValue.old_date_unix}
-            absoluteDateTemplate={siteText.common.absolute_date_template}
-          />
-        ),
+        oldDate: siteText.toe_en_afname.vorige_waarde,
       })}
     </Text>
   );
