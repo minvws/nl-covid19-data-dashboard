@@ -75,11 +75,15 @@ const ArticleDetailPage: FCWithLayout<typeof getStaticProps> = (props) => {
  * to simply have _something_
  */
 ArticleDetailPage.getLayout = (page, props) => {
+  const { cover } = props.content;
+  const { asset } = cover;
+  const url = `https://coronadashboard.rijksoverheid.nl/cms/${asset.assetId}.${asset.extension}`;
+
   return getLayoutWithMetadata({
     title: getTitle(props.content.title),
     description: toPlainText(props.content.intro),
-    openGraphImage: urlFor(props.content.cover).toString() || undefined,
-    twitterImage: urlFor(props.content.cover).toString() || undefined,
+    openGraphImage: url || undefined,
+    twitterImage: url || undefined,
   })(page, props);
 };
 
