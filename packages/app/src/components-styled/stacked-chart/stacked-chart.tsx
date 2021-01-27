@@ -2,6 +2,7 @@
  * Code loosely based on
  * https://codesandbox.io/s/github/airbnb/visx/tree/master/packages/visx-demo/src/sandboxes/visx-barstack
  */
+import css from '@styled-system/css';
 import { AxisBottom, AxisLeft } from '@visx/axis';
 import { localPoint } from '@visx/event';
 import { GridRows } from '@visx/grid';
@@ -15,9 +16,12 @@ import { isEmpty, set } from 'lodash';
 import { transparentize } from 'polished';
 import { MouseEvent, TouchEvent, useCallback, useMemo, useState } from 'react';
 import ResizeObserver from 'resize-observer-polyfill';
+import styled from 'styled-components';
 import { Box } from '~/components-styled/base';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
+import { colors } from '~/style/theme';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
+import { useBreakpoints } from '~/utils/useBreakpoints';
 import { Legenda, LegendItem } from '../legenda';
 import { InlineText } from '../typography';
 import {
@@ -28,10 +32,6 @@ import {
   SeriesValue,
   Value,
 } from './logic';
-import css from '@styled-system/css';
-import styled from 'styled-components';
-import { useBreakpoints } from '~/utils/useBreakpoints';
-import { colors } from '~/style/theme';
 
 const tooltipStyles = {
   ...defaultStyles,
@@ -94,8 +94,6 @@ export type StackedChartProps<T extends Value> = {
   config: Config<T>[];
   valueAnnotation?: string;
   width: number;
-  // height?: number;
-  // formatDateString?: typeof formatDateString;
   formatTooltip?: TooltipFormatter;
   isPercentage?: boolean;
 };
@@ -106,14 +104,7 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
    * passed-in formatter functions or their default counterparts that have the
    * same name.
    */
-  const {
-    values,
-    config,
-    width,
-    // height = 400,
-    valueAnnotation,
-    isPercentage,
-  } = props;
+  const { values, config, width, valueAnnotation, isPercentage } = props;
 
   const {
     tooltipData,
@@ -125,23 +116,21 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
   } = useTooltip<TooltipData>();
 
   const breakpoints = useBreakpoints();
-  const isSmallScreen = !breakpoints.sm;
+  const isExtraSmallScreen = !breakpoints.sm;
   const isTinyScreen = !breakpoints.xs;
-
-  // console.log('isTinyScreen', isSmallScreen);
 
   const padding = useMemo(
     () =>
       ({
         top: 10,
-        right: isSmallScreen ? 0 : 30,
+        right: isExtraSmallScreen ? 0 : 30,
         bottom: 20,
         left: 24,
       } as const),
-    [isSmallScreen]
+    [isExtraSmallScreen]
   );
 
-  const height = isSmallScreen ? 200 : 400;
+  const height = isExtraSmallScreen ? 200 : 400;
 
   const metricProperties = useMemo(() => config.map((x) => x.metricProperty), [
     config,
@@ -261,7 +250,9 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
     (data: SeriesValue, key: string) => {
       const date = getDate(data);
 
-      const [year, weekNumber] = getWeekNumber(date);
+      const [year, weekNumber, weekStartDate, weekEndDate] = getWeekNumber(
+        date
+      );
 
       return (
         <Box p={2}>
@@ -271,13 +262,18 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
             {` ${formatPercentage(seriesSumByKey[key])} mln totaal`}
           </Box>
 
-          <div>
+          <Box mb={2}>
             <InlineText fontWeight="bold">
               {`Week ${weekNumber} ${year}`}:
             </InlineText>
             {/* @TODO move mln to lokalize */}
             {` ${formatPercentage(data[key])} mln`}
-          </div>
+          </Box>
+          <Box>
+            {`${formatDayMonth(weekStartDate)} - ${formatDayMonth(
+              weekEndDate
+            )}`}
+          </Box>
         </Box>
       );
     },
@@ -346,7 +342,7 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
 
   const xScale = scaleBand<Date>({
     domain: series.map(getDate),
-    padding: isSmallScreen ? 0.4 : 0.2,
+    padding: isExtraSmallScreen ? 0.4 : 0.2,
   }).rangeRound([0, xMax]);
 
   const yScale = scaleLinear<number>({
@@ -375,11 +371,13 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
               top={bounds.height}
               stroke={colors.data.axis}
               tickFormat={formatDateString}
-              tickLabelProps={() => ({
-                textAnchor: 'middle',
-                fill: colors.data.axisLabels,
-                fontSize: 12,
-              })}
+              tickLabelProps={() => {
+                return {
+                  textAnchor: 'middle',
+                  fill: colors.data.axisLabels,
+                  fontSize: 12,
+                };
+              }}
               hideTicks
             />
             <AxisLeft
@@ -497,6 +495,7 @@ function getDate(x: SeriesValue) {
  * e.g. 2014/12/29 is Monday in week  1 of 2015 2012/1/1   is Sunday in week 52
  *      of 2011
  */
+
 function getWeekNumber(d: Date) {
   // Copy date so don't modify original
   d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
@@ -509,8 +508,14 @@ function getWeekNumber(d: Date) {
   const weekNo = Math.ceil(
     ((d.getTime() - yearStart.getTime()) / 86400000 + 1) / 7
   );
-  // Return array of year and week number
-  return [d.getUTCFullYear(), weekNo];
+
+  const weekStartDate = new Date(d.getTime());
+  weekStartDate.setUTCDate(weekStartDate.getUTCDate() - 3);
+
+  const weekEndDate = new Date(d.getTime());
+  weekEndDate.setUTCDate(weekEndDate.getUTCDate() + 3);
+
+  return [d.getUTCFullYear(), weekNo, weekStartDate, weekEndDate] as const;
 }
 
 /**
@@ -533,3 +538,9 @@ export const TooltipContainer = styled.div(
     fontSize: 1,
   })
 );
+
+function formatDayMonth(date: Date) {
+  const mo = new Intl.DateTimeFormat('en', { month: 'short' }).format(date);
+  const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(date);
+  return `${da} ${mo}`;
+}
