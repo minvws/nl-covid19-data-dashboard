@@ -5,8 +5,10 @@
 /.pnp
 .pnp.js
 
-# build
+# build and data exports
 dist
+export
+*.tar.gz
 
 # misc
 .DS_Store
