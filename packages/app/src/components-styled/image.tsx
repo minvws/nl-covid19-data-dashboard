@@ -1,4 +1,4 @@
-import { imageResizeTargets } from '@corona-dashboard/common/src/config';
+import { imageResizeTargets } from '@corona-dashboard/common';
 import { findClosestSize } from '~/utils/findClosestSize';
 import styled from 'styled-components/';
 

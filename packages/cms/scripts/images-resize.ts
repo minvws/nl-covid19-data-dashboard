@@ -2,7 +2,7 @@ const sharp = require('sharp');
 const fs = require('fs');
 const path = require('path');
 
-import { imageResizeTargets } from '@corona-dashboard/common/src/config';
+import { imageResizeTargets } from '@corona-dashboard/common';
 
 /**
  * The following code is taken from https://gist.github.com/adamwdraper/4212319
