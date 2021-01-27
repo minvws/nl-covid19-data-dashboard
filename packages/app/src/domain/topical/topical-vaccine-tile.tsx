@@ -1,8 +1,11 @@
-import { Box } from '~/components-styled/base';
-import siteText from '~/locale';
-import Vaccinaties from '~/assets/vaccinaties.svg';
-import { Heading, Text } from '~/components-styled/typography';
 import { formatNumber } from '@corona-dashboard/common';
+import css from '@styled-system/css';
+import ArrowIcon from '~/assets/arrow.svg';
+import Vaccinaties from '~/assets/vaccinaties.svg';
+import { Box } from '~/components-styled/base';
+import { LinkWithIcon } from '~/components-styled/link-with-icon';
+import { Heading, Text } from '~/components-styled/typography';
+import siteText from '~/locale';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 
 export function TopicalVaccineTile() {
@@ -28,7 +31,15 @@ export function TopicalVaccineTile() {
         mb={2}
         lineHeight={{ md: 0, lg: 2 }}
       >
-        {text.title}
+        <LinkWithIcon
+          href={'/landelijk/vaccinaties'}
+          icon={<ArrowIcon css={css({ transform: 'rotate(-90deg)' })} />}
+          iconPlacement="right"
+          fontWeight="bold"
+          headingLink
+        >
+          {text.title}
+        </LinkWithIcon>
       </Heading>
 
       <Text fontSize="2.75rem" fontWeight="bold" my={0} lineHeight={0} mb={2}>

@@ -1,18 +1,18 @@
+import css from '@styled-system/css';
 import { AxisBottom, AxisLeft, TickFormatter } from '@visx/axis';
 import { GridRows } from '@visx/grid';
 import { ParentSize } from '@visx/responsive';
 import { ReactNode } from 'react';
+import styled from 'styled-components';
+import ArrowIcon from '~/assets/arrow.svg';
 import { Box } from '~/components-styled/base';
 import { LineChart } from '~/components-styled/line-chart';
 import { ComponentCallbackInfo } from '~/components-styled/line-chart/components';
 import { NumberProperty, Value } from '~/components-styled/line-chart/helpers';
+import { LinkWithIcon } from '~/components-styled/link-with-icon';
 import { Heading, Text } from '~/components-styled/typography';
 import text from '~/locale';
 import { formatNumber } from '~/utils/formatNumber';
-import styled from 'styled-components';
-import css from '@styled-system/css';
-import { LinkWithIcon } from '~/components-styled/link-with-icon';
-import ArrowIcon from '~/assets/arrow.svg';
 
 type MiniTrendTileProps<T extends Value> = {
   icon: JSX.Element;
