@@ -1008,19 +1008,19 @@
     "types": {
       "1": {
         "titel": "Waakzaam",
-        "toelichting": "De situatie is beheersbaar en het aantal nieuwe besmettingen is laag. Kwetsbare groepen dienen alert te zijn en er is voldoende zorgcapaciteit."
+        "toelichting": "De situatie is onder controle te houden. Het aantal nieuwe besmettingen is laag: per week minder dan 35 mensen per 100.000 inwoners. De druk op de zorg valt mee."
       },
       "2": {
         "titel": "Zorgelijk",
-        "toelichting": "Het aantal nieuwe besmettingen en de druk op de zorgcapaciteit neemt toe. Aanvullende maatregelen zijn nodig om de verspreiding van het virus weer onder controle te krijgen."
+        "toelichting": "De situatie is lastig onder controle te houden. Er zijn veel nieuwe besmettingen: per week tussen de 35 en 150 mensen per 100.000 inwoners. De druk op de zorg is groot."
       },
       "3": {
         "titel": "Ernstig",
-        "toelichting": "Het aantal nieuwe besmettingen neemt snel toe en de zorgcapaciteit is onvoldoende. Hard ingrijpen is noodzakelijk om de kwetsbaren te beschermen."
+        "toelichting": "De situatie is slecht. Er is een groot aantal nieuwe besmettingen: per week tussen de 150 en 250 mensen per 100.000 inwoners. De druk op de zorg is erg groot."
       },
       "4": {
         "titel": "Zeer Ernstig",
-        "toelichting": "Er zijn zeer veel mensen besmettelijk, het dagelijks aantal nieuwe besmettingen is hoog en de regionale zorgcapaciteit is onvoldoende. Strenge, landelijke maatregelen zijn noodzakelijk om verdere escalatie te voorkomen."
+        "toelichting": "De situatie is erg slecht. Er zijn extreem veel nieuwe besmettingen: per week boven de 250 mensen per 100.000 inwoners. De druk op de zorg is extreem groot."
       },
       "5": {
         "titel": "Lockdown",
@@ -1034,7 +1034,7 @@
     },
     "valid_from": "Geldig vanaf {{validFrom}}",
     "sidebar_label": "Risiconiveau:",
-    "tile_title": "Wat betekenen de vier risiconiveau's?",
+    "tile_title": "Wat betekenen de vier risiconiveaus?",
     "lees_meer": "Meer informatie over de risiconiveaus"
   },
   "gemeente_layout": {
@@ -2294,7 +2294,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "De risicokaart van Nederland",
-      "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. \n\n**Er geldt een [landelijke lockdown](/landelijk/maatregelen) tot en met in ieder geval 9 februari.**"
+      "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. \n\n**Bij elk risiconiveau horen bepaalde maatregelen. Die maatregelen staan in de routekaart die het kabinet heeft gemaakt. Er geldt een landelijke lockdown tot en met in ieder geval 9 februari. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**"
     },
     "risoconiveau_maatregelen": {
       "title": "Risiconiveau & maatregelen",
