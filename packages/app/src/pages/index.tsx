@@ -130,6 +130,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                 icon={<GetestIcon />}
                 trendData={dataInfectedTotal.values}
                 metricProperty="infected"
+                href="/landelijk/positief-geteste-mensen"
               />
 
               <MiniTrendTile
@@ -149,6 +150,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                 icon={<ZiekenhuisIcon />}
                 trendData={dataHospitalIntake.values}
                 metricProperty="admissions_on_date_of_reporting"
+                href="/landelijk/ziekenhuis-opnames"
               />
 
               <MiniTrendTile
@@ -170,6 +172,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                 icon={<ArtsIcon />}
                 trendData={dataIntake.values}
                 metricProperty="admissions_moving_average"
+                href="/landelijk/intensive-care-opnames"
               />
             </MiniTrendTileLayout>
 
