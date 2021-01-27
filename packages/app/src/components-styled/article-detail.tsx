@@ -17,7 +17,7 @@ interface ArticleDetailProps {
 }
 
 export function ArticleDetail({ article }: ArticleDetailProps) {
-  const { coverAsset } = article;
+  const { asset } = article.cover;
 
   return (
     <Box bg="white" py={{ _: 4, md: 5 }}>
@@ -40,12 +40,10 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
           <PortableText blocks={article.intro} />
         </Box>
 
-        {/* <Image node={article.cover} /> */}
-
         <Image
-          src={`/${coverAsset.assetId}.${coverAsset.extension}`}
+          src={`/${asset.assetId}.${asset.extension}`}
           width={630}
-          height={630 / coverAsset.metadata.dimensions.aspectRatio}
+          height={630 / asset.metadata.dimensions.aspectRatio}
         />
       </ContentBlock>
 

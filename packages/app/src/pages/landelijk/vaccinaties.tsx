@@ -1,13 +1,13 @@
 import { css } from '@styled-system/css';
+import { ParentSize } from '@visx/responsive';
 import styled from 'styled-components';
-import VaccinatieBarChart from '~/assets/vaccinate_bar_chart.svg';
 import VaccinatieIcon from '~/assets/vaccinaties.svg';
-import { Box } from '~/components-styled/base';
 import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { SEOHead } from '~/components-styled/seo-head';
+import { StackedChart } from '~/components-styled/stacked-chart';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
@@ -28,6 +28,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
+  data,
   text: siteText,
 }) => {
   const text = siteText.vaccinaties;
@@ -121,9 +122,48 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             source: text.bronnen.rivm,
           }}
         >
-          <Box pt={1}>
-            <VaccinatieBarChart />
-          </Box>
+          <ParentSize>
+            {({ width }) => (
+              <StackedChart
+                width={width}
+                valueAnnotation={siteText.waarde_annotaties.x_miljoen}
+                values={data.vaccine_delivery.values}
+                config={[
+                  {
+                    metricProperty: 'pfizer',
+                    color: '#007AEA',
+                    legendLabel: 'BioNTech/Pfizer',
+                  },
+                  {
+                    metricProperty: 'moderna',
+                    color: '#6AB4F9',
+                    legendLabel: 'Moderna',
+                  },
+                  /*  {
+                    metricProperty: 'astra_zeneca',
+                    color: '#00BBB5',
+                    legendLabel: 'AstraZeneca',
+                  },
+                  {
+                    metricProperty: 'cure_vac',
+                    color: '#C263EF',
+                    legendLabel: 'Curevac',
+                  },
+                  {
+                    metricProperty: 'janssen',
+                    color: '#C8AEFF',
+                    legendLabel: 'Janssen',
+                  },
+
+                  {
+                    metricProperty: 'sanofi',
+                    color: '#96E4E4',
+                    legendLabel: 'Sanofi',
+                  }, */
+                ]}
+              />
+            )}
+          </ParentSize>
         </ChartTile>
       </TileList>
     </>

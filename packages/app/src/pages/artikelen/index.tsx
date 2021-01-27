@@ -13,7 +13,15 @@ import {
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   createGetContent<ArticleSummary[]>(
-    `*[_type == 'article'] | order(publicationDate) {"title":title.${targetLanguage}, slug, "summary":summary.${targetLanguage}, cover}`
+    `*[_type == 'article'] | order(publicationDate) {
+      "title":title.${targetLanguage},
+      slug,
+      "summary":summary.${targetLanguage},
+      "cover": {
+        ...cover,
+        "asset": cover.asset->
+      }    
+    }`
   )
 );
 

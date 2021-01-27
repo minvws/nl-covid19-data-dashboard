@@ -1,7 +1,7 @@
 import { Box } from '~/components-styled/base';
 import { EditorialDetail } from '~/components-styled/editorial-detail';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
-import { client, localize, urlFor } from '~/lib/sanity';
+import { client, localize } from '~/lib/sanity';
 import { targetLanguage } from '~/locale/index';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
@@ -10,6 +10,8 @@ import {
 } from '~/static-props/get-data';
 import { Block, Editorial } from '~/types/cms';
 import { assert } from '~/utils/assert';
+import { imageResizeTargets } from '@corona-dashboard/common';
+import { findClosestSize } from '~/utils/findClosestSize';
 
 const editorialsQuery = `*[_type == 'editorial'] {"slug":slug.current}`;
 
@@ -32,7 +34,32 @@ export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   createGetContent<Editorial>((context) => {
     assert(context?.params?.slug, 'Slug required to retrieve article');
-    return `*[_type == 'editorial' && slug.current == '${context.params.slug}'][0]`;
+    return `
+      *[_type == 'editorial' && slug.current == '${context.params.slug}'][0]{
+        ...,
+        "cover": {
+          ...cover,
+          "asset": cover.asset->
+        },
+        "content": {
+          "_type": content._type,
+          "nl": [
+            ...content.nl[]
+            {
+              ...,
+              "asset": asset->
+            },
+          ],
+          "en": [
+            ...content.en[]
+            {
+              ...,
+              "asset": asset->
+            },
+          ],
+        }
+      }
+    `;
   })
 );
 
@@ -51,11 +78,18 @@ const EditorialDetailPage: FCWithLayout<typeof getStaticProps> = (props) => {
  * to simply have _something_
  */
 EditorialDetailPage.getLayout = (page, props) => {
+  const { cover } = props.content;
+  const { asset } = cover;
+
+  const url = `https://coronadashboard.rijksoverheid.nl/cms/${
+    asset.assetId
+  }-${findClosestSize(1200, imageResizeTargets)}.${asset.extension}`;
+
   return getLayoutWithMetadata({
     title: getTitle(props.content.title),
     description: toPlainText(props.content.intro),
-    openGraphImage: urlFor(props.content.cover).toString() || undefined,
-    twitterImage: urlFor(props.content.cover).toString() || undefined,
+    openGraphImage: url,
+    twitterImage: url,
   })(page, props);
 };
 
