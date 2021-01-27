@@ -1003,24 +1003,24 @@
     "alle_cijfers_link": "View all data"
   },
   "escalatie_niveau": {
-    "titel": "Level of risk",
+    "titel": "Risk levels",
     "toelichting": "The map indicates the level of risk per safety region.\n\n[More about risk levels](/over-risiconiveaus)",
     "types": {
       "1": {
         "titel": "Caution",
-        "toelichting": "The situation is manageable. The number of new infections is low. Vulnerable groups must remain alert. There is sufficient healthcare capacity."
+        "toelichting": "The situation is manageable. The number of new infections is fewer than 35 per 100,000 inhabitants per week. There is sufficient healthcare capacity"
       },
       "2": {
         "titel": "Concern",
-        "toelichting": "The number of new infections is increasing. Pressure on healthcare capacity is increasing. The existing approach needs to be strengthened through additional measures to get the virus under control again and return to a manageable situation."
+        "toelichting": "The situation is becoming difficult to manage. The number of new infections is between 35 and 150 per 100,000 inhabitants per week. Pressure on healthcare capacity is increasing."
       },
       "3": {
         "titel": "Serious",
-        "toelichting": "The number of new infections is increasing rapidly. An intensive tailored approach is needed to protect vulnerable groups. Severe measures are needed to prevent further escalation and return to a manageable situation."
+        "toelichting": "The situation is serious. The number of new infections is between 150 and 250 per 100,000 inhabitants per week. Pressure on healthcare capacity is very high."
       },
       "4": {
         "titel": "Severe",
-        "toelichting": "A very large number of people are infectious and the number of new infections is high. Regional healthcare capacity is insufficient and some kinds of regular healthcare have already been scaled down. Measures to be taken are designed to prevent national and regional healthcare from becoming overburdened and to regain maximum control of the virus."
+        "toelichting": "The situation is severe. The number of new infections is higher than 250 per 100,000 inhabitants per week. Pressure on healthcare capacity is extreme."
       },
       "5": {
         "titel": "Lockdown",
@@ -1033,7 +1033,7 @@
       "regios": "{{amount}} regions"
     },
     "valid_from": "Valid from {{validFrom}}",
-    "sidebar_label": "Level of risk:",
+    "sidebar_label": "Risk level:",
     "tile_title": "What do the four risk levels mean?",
     "lees_meer": "Click here for more information about the risk levels"
   },
@@ -2294,7 +2294,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of the Netherlands",
-      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions.  \n\n**There is a [national lockdown](/landelijk/maatregelen) until at least 9 February.**"
+      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions.  \n\n**There are specific measures for each risk level. These are explained in the road map drafted by the government. There is a national lockdown until at least 9 February. [Click here to view the lockdown measures](landelijk/maatregelen).**"
     },
     "risoconiveau_maatregelen": {
       "title": "Risk level & measures",
@@ -2316,7 +2316,7 @@
       "infected_people_total": {
         "value": {
           "zero": "{{newDate}} there were no newly reported infected people.",
-          "singular": "{{newDate}} there was {{propertyValue}} newly reported infected person.",
+          "singular": "{{newDate}} {{propertyValue}} newly reported infected person.",
           "plural": "{{newDate}} there were {{propertyValue}} newly reported infected people."
         },
         "difference": {
