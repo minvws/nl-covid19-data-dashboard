@@ -621,7 +621,7 @@
     "select_region_municipality_legend": "Select a municipality:",
     "select_region_type_legend": "Show numbers from:",
     "your_municipality": "Municipality",
-    "belangrijk_bericht": "There is a [national lockdown](/landelijk/maatregelen) until at least 9 February."
+    "belangrijk_bericht": "There is a [national lockdown](https://coronadashboard.government.nl/landelijk/maatregelen) until at least 9 February."
   },
   "common": {
     "metadata": {
@@ -655,7 +655,7 @@
     "gisteren": "",
     "vandaag": "",
     "read_more": "",
-    "absolute_date_template": "on {{date}}"
+    "absolute_date_template": ""
   },
   "seoHead": {
     "default_description": "Information on the development of the coronavirus in The Netherlands.",
@@ -2114,7 +2114,7 @@
   },
   "editorial_detail": {
     "back_link": {
-      "text": ""
+      "text": "Back"
     }
   },
   "article_detail": {
@@ -2128,8 +2128,8 @@
     "url": ""
   },
   "common_actueel": {
-    "terug_naar_landelijk": "",
-    "laatst_bijgewerkt": ""
+    "terug_naar_landelijk": "Back",
+    "laatst_bijgewerkt": "The dashboard receives new data each day, around 15:20."
   },
   "nationaal_actueel": {
     "title": "",
@@ -2163,9 +2163,9 @@
           "plural": "{{propertyValue}} new confirmed cases were reported {{newDate}}."
         },
         "difference": {
-          "zero": "This is the same as {{oldDate}}",
-          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+          "zero": "",
+          "singular": "",
+          "plural": ""
         }
       },
       "intake_hospital_ma": {
@@ -2175,9 +2175,9 @@
           "plural": "{{propertyValue}} new reported hospital intakes were reported {{newDate}}."
         },
         "difference": {
-          "zero": "This is the same as {{oldDate}}",
-          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+          "zero": "",
+          "singular": "",
+          "plural": ""
         }
       },
       "intake_intensivecare_ma": {
@@ -2187,9 +2187,9 @@
           "plural": "{{propertyValue}} newly reported intensive care admissions were reported {{newDate}}."
         },
         "difference": {
-          "zero": "This is the same as {{oldDate}}",
-          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+          "zero": "",
+          "singular": "",
+          "plural": ""
         }
       }
     },
@@ -2247,9 +2247,9 @@
           "plural": "{{propertyValue}} new confirmed cases were reported {{newDate}}."
         },
         "difference": {
-          "zero": "This is the same as {{oldDate}}",
-          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+          "zero": "",
+          "singular": "",
+          "plural": ""
         }
       },
       "intake_hospital_ma": {
@@ -2259,9 +2259,9 @@
           "plural": "{{propertyValue}} new reported hospital intakes were reported {{newDate}}."
         },
         "difference": {
-          "zero": "This is the same as {{oldDate}}",
-          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+          "zero": "",
+          "singular": "",
+          "plural": ""
         }
       },
       "intake_intensivecare_ma": {
@@ -2271,9 +2271,9 @@
           "plural": "{{propertyValue}} newly reported intensive care admissions were reported {{newDate}}."
         },
         "difference": {
-          "zero": "This is the same as {{oldDate}}",
-          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+          "zero": "",
+          "singular": "",
+          "plural": ""
         }
       }
     },
@@ -2320,7 +2320,7 @@
           "plural": "{{propertyValue}} new confirmed cases were reported {{newDate}}."
         },
         "difference": {
-          "zero": "This is the same as {{oldDate}}",
+          "zero": "This is the same value as on {{oldDate}}.",
           "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
           "plural": "This is {{differenceIndicator}} than {{oldDate}}."
         }
@@ -2332,9 +2332,9 @@
           "plural": "{{propertyValue}} new reported hospital intakes were reported {{newDate}}."
         },
         "difference": {
-          "zero": "This is the same as {{oldDate}}",
-          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+          "zero": "This is the same value as on {{oldDate}}.",
+          "singular": "This is {{differenceIndicator}} than on {{oldDate}}.",
+          "plural": "This is {{differenceIndicator}} than on {{oldDate}}."
         }
       },
       "intake_intensivecare_ma": {
@@ -2344,9 +2344,9 @@
           "plural": "{{propertyValue}} newly reported intensive care admissions were reported {{newDate}}."
         },
         "difference": {
-          "zero": "This is the same as {{oldDate}}",
-          "singular": "This is {{differenceIndicator}} than {{oldDate}}.",
-          "plural": "This is {{differenceIndicator}} than {{oldDate}}."
+          "zero": "",
+          "singular": "",
+          "plural": ""
         }
       }
     },

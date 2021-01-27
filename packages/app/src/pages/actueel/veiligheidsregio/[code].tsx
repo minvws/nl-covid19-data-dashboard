@@ -161,7 +161,10 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
             <QuickLinks
               header={text.quick_links.header}
               links={[
-                { href: '/landelijk', text: text.quick_links.links.nationaal },
+                {
+                  href: '/landelijk/vaccinaties',
+                  text: text.quick_links.links.nationaal,
+                },
                 {
                   href: `/veiligheidsregio/${router.query.code}/positief-geteste-mensen`,
                   text: replaceVariablesInText(
@@ -204,12 +207,9 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
                       data={choropleth.vr}
                       metricName="escalation_levels"
                       metricProperty="escalation_level"
-                      onSelect={createSelectRegionHandler(
-                        router,
-                        'maatregelen'
-                      )}
+                      onSelect={createSelectRegionHandler(router, 'actueel')}
                       tooltipContent={escalationTooltip(
-                        createSelectRegionHandler(router, 'maatregelen')
+                        createSelectRegionHandler(router, 'actueel')
                       )}
                     />
                   </TopicalChoroplethContainer>
