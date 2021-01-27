@@ -1,4 +1,4 @@
-import { omit, pick } from 'lodash';
+import { omit, pick, mapValues } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { assert } from '~/utils/assert';
 import { getDaysForTimeframe, TimeframeOption } from '~/utils/timeframe';
@@ -136,7 +136,7 @@ export function getSeriesData<T extends Value>(
   return metricValues.map(
     (x) =>
       ({
-        ...pick(x, metricProperties),
+        ...mapValues(pick(x, metricProperties), (v) => v / 1000000),
         __date: getDateFromValue(x),
       } as SeriesValue)
   );

@@ -227,13 +227,13 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
             acc,
             x.metricProperty,
             getTotalSumForMetricProperty(
-              (values as unknown) as Record<string, number>[],
+              (series as unknown) as Record<string, number>[],
               x.metricProperty as string
             )
           ),
         {} as Record<string, number>
       ),
-    [config, values]
+    [config, series]
   );
 
   const { containerRef, TooltipInPortal } = useTooltipInPortal({
