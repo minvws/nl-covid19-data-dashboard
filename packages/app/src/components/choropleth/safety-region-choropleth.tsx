@@ -113,6 +113,8 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
     [getFillColor, hasData]
   );
 
+  const hasSelectHander = !!onSelect;
+
   const hoverCallback = useCallback(
     (feature: Feature<MultiPolygon, SafetyRegionProperties>, path: string) => {
       const { vrcode } = feature.properties;
@@ -120,7 +122,8 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
 
       return (
         <Path
-          hoverable
+          isHoverable
+          isClickable={hasSelectHander}
           id={vrcode}
           key={vrcode}
           d={path}
@@ -129,7 +132,7 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
         />
       );
     },
-    [selected, highlightSelection]
+    [selected, highlightSelection, hasSelectHander]
   );
 
   const onClick = (id: string) => {
