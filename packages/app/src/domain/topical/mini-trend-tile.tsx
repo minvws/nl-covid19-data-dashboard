@@ -13,6 +13,7 @@ import { LinkWithIcon } from '~/components-styled/link-with-icon';
 import { Heading, Text } from '~/components-styled/typography';
 import text from '~/locale';
 import { formatNumber } from '~/utils/formatNumber';
+import { useBreakpoints } from '~/utils/useBreakpoints';
 
 type MiniTrendTileProps<T extends Value> = {
   icon: JSX.Element;
@@ -27,6 +28,8 @@ export function MiniTrendTile<T extends Value>(props: MiniTrendTileProps<T>) {
   const { icon, title, text, trendData, metricProperty, href } = props;
 
   const value = trendData[trendData.length - 1][metricProperty];
+
+  const { sm } = useBreakpoints();
 
   return (
     <Box position="relative" pb={{ _: '1.5rem', md: 0 }}>
@@ -63,13 +66,17 @@ export function MiniTrendTile<T extends Value>(props: MiniTrendTileProps<T>) {
             width={parent.width}
             timeframe="5weeks"
             values={trendData}
-            height={140}
-            linesConfig={[{ metricProperty }]}
+            height={sm ? 180 : 140}
+            linesConfig={[
+              { metricProperty, areaFillOpacity: 0.25, strokeWidth: 3 },
+            ]}
             componentCallback={componentCallback}
             showMarkerLine
             formatTooltip={(values) => formatNumber(values[0].__value)}
             padding={{
+              top: 13,
               left: 0,
+              right: 0,
             }}
           />
         )}
@@ -106,6 +113,7 @@ function componentCallback(callbackInfo: ComponentCallbackInfo) {
           : {};
         labelProps.textAnchor = value === domain[0] ? 'start' : 'end';
         labelProps.dx = 0;
+        labelProps.dy = -4;
         return labelProps;
       };
 
@@ -128,7 +136,7 @@ function componentCallback(callbackInfo: ComponentCallbackInfo) {
           : {};
         labelProps.textAnchor = 'start';
         labelProps.dx = 10;
-        labelProps.dy = -6;
+        labelProps.dy = -9;
         return labelProps;
       };
 

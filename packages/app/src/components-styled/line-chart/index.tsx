@@ -46,6 +46,8 @@ export type LineConfig<T extends Value> = {
   metricProperty: NumberProperty<T>;
   color?: string;
   style?: 'solid' | 'dashed';
+  areaFillOpacity?: number;
+  strokeWidth?: number;
   legendLabel?: string;
   legendShape?: LegendShape;
 };
@@ -268,6 +270,8 @@ export function LineChart<T extends Value>({
             key={index}
             trend={trend}
             type={hideFill ? 'line' : 'area'}
+            areaFillOpacity={linesConfig[index].areaFillOpacity}
+            strokeWidth={linesConfig[index].strokeWidth}
             style={linesConfig[index].style}
             xScale={x.xScale}
             yScale={x.yScale}
