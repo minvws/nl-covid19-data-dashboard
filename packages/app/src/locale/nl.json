@@ -53,8 +53,8 @@
       "actueel": "Actueel"
     },
     "title": "Corona Dashboard",
-    "terug_naar_alle_cijfers": "Terug naar alle cijfers",
-    "terug_naar_alle_cijfers_homepage": "Terug naar alle cijfers",
+    "terug_naar_alle_cijfers": "Alle cijfers voor dit gebied",
+    "terug_naar_alle_cijfers_homepage": "Alle cijfers voor dit gebied",
     "menu": {
       "open_menu": "Open menu",
       "close_menu": "Sluit menu"
@@ -762,7 +762,13 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
+    "barscale_keys": [
+      "0 tot 20",
+      "20 tot 40",
+      "40 tot 60",
+      "60 tot 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -1217,8 +1223,9 @@
   },
   "waarde_annotaties": {
     "riool_normalized": "x100 miljard",
-    "x_100k": "x 100.000",
-    "totaal": "totaal"
+    "x_miljoen": "x miljoen",
+    "totaal": "totaal",
+    "x_100k": "x 100.000"
   },
   "gedrag_onderwerpen": {
     "wash_hands": "Was vaak je handen",
