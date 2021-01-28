@@ -344,17 +344,12 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
 
     setHoveredIndex(hoverIndex);
 
-    /**
-     * TooltipInPortal expects coordinates to be relative to containerRef
-     * localPoint returns coordinates relative to the nearest SVG, which is what
-     * containerRef is set to in this example.
-     */
-    const coords = localPoint(event);
-    const left = tooltipData.x + tooltipData.width / 2;
+    // @ts-expect-error
+    const coords = localPoint(event.target.ownerSVGElement, event);
     showTooltip({
-      tooltipData: tooltipData,
+      tooltipLeft: coords?.x || 0,
       tooltipTop: coords?.y || 0,
-      tooltipLeft: Math.max(coords?.x || 0 - 20, left),
+      tooltipData,
     });
   }
 
