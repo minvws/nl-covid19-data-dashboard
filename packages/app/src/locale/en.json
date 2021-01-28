@@ -2117,7 +2117,7 @@
       "omschrijving": "This graph shows the number of approved vaccine doses the Netherlands expects to receive over the next six weeks."
     },
     "verwachte_leveringen": {
-      "van_week_tot_week": ""
+      "van_week_tot_week": "Week {{weekNumberFrom}} to week {{weekNumberTo}}"
     }
   },
   "editorial_detail": {
