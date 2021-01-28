@@ -712,7 +712,7 @@
     "datums": "Calculated: {{dateOfReport}}. Updated daily.",
     "screen_reader_graph_content": "{{value}} admissions.",
     "barscale_titel": "Hospital admissions reported per day",
-    "extra_uitleg": "Number of people from this safety region with COVID-19 admitted to hospital (excl. ICU) on a daily basis. This number entails the amount of hospital admissions reported on one day and can include admissions from previous days. Patients can be admitted to hospitals in other regions.",
+    "extra_uitleg": "Number of people from this safety region with COVID-19 admitted to hospital on a daily basis. This figure shows how many hospital admissions are reported per day, including patients from outside the hosptial admitted directly to the ICU. Patients can be admitted to hospitals in other regions.",
     "map_titel": "Distribution of hospital admissions in {{safetyRegion}}",
     "map_toelichting": "This map shows, by municipality or safety region, where people live who have been admitted to hospital with COVID-19. Please note that people may have been admitted to a hospital located somewhere else in the Netherlands; the map therefore does not show admission numbers per hospital. The figures here reflect the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE). Tergooi hospitals, Amstelland Hospital and Flevoziekenhuis do not currently share their data on COVID-19 admission to clinic wards with Stichting NICE. As a result, the actual figures in some municipalities and safety regions may be higher than they appear on the map.",
     "linechart_titel": "Progression in hospital admissions over time",
