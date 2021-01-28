@@ -15,7 +15,7 @@ interface LinkWithIconProps {
 
 interface IconProps {
   icon: ReactNode;
-  singleWord?: boolean;
+  isSingleWord?: boolean;
 }
 
 export function LinkWithIcon({
@@ -26,9 +26,9 @@ export function LinkWithIcon({
   fontWeight = 'normal',
   headingLink,
 }: LinkWithIconProps) {
-  const splittedString = children.split(' ');
-  const firstWords = `${splittedString.slice(0, -1).join(' ')} `;
-  const singleWord = splittedString.length === 1;
+  const words = children.split(' ');
+  const firstWords = `${words.slice(0, -1).join(' ')} `;
+  const isSingleWord = words.length === 1;
 
   return (
     <Link href={href} passHref>
@@ -45,27 +45,27 @@ export function LinkWithIcon({
           },
         })}
       >
-        {iconPlacement == 'right' && !headingLink && (
+        {iconPlacement === 'right' && !headingLink && (
           <>
-            {!splittedString.length ? children : firstWords}
+            {!words.length ? children : firstWords}
             <Box as="span" display="inline-block">
-              {splittedString[splittedString.length - 1]}
+              {words[words.length - 1]}
               <IconSmall icon={icon} />
             </Box>
           </>
         )}
-        {iconPlacement == 'left' && !headingLink && (
+        {iconPlacement === 'left' && !headingLink && (
           <Box as="span">
             <IconSmall icon={icon} />
             {children}
           </Box>
         )}
         {headingLink && (
-          <Box paddingRight={singleWord ? `calc(0.5rem + 18px)` : ''}>
-            {!splittedString.length ? children : firstWords}
+          <Box paddingRight={isSingleWord ? `calc(0.5rem + 18px)` : ''}>
+            {!words.length ? children : firstWords}
             <span css={css({ display: 'inline-block' })}>
-              {splittedString[splittedString.length - 1]}
-              <IconLarge icon={icon} singleWord={singleWord} />
+              {words[words.length - 1]}
+              <IconLarge icon={icon} isSingleWord={isSingleWord} />
             </span>
           </Box>
         )}
@@ -81,7 +81,7 @@ export function LinkWithIcon({
     );
   }
 
-  function IconLarge({ icon, singleWord }: IconProps) {
+  function IconLarge({ icon, isSingleWord }: IconProps) {
     return (
       <span
         css={css({
@@ -89,7 +89,7 @@ export function LinkWithIcon({
             height: '16px',
             width: '18px',
             marginLeft: 2,
-            position: singleWord ? 'absolute' : 'relative',
+            position: isSingleWord ? 'absolute' : 'relative',
             minHeight: '100%',
             right: 0,
             top: 0,
