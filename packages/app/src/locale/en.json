@@ -55,12 +55,12 @@
     "title": "Corona Dashboard",
     "terug_naar_alle_cijfers": "Overview",
     "terug_naar_alle_cijfers_homepage": "Overview",
-    "terug_naar_alle_cijfers_veiligheidsregio": "Overview",
-    "terug_naar_alle_cijfers_gemeente": "Overview",
     "menu": {
       "open_menu": "Open menu",
       "close_menu": "Close menu"
-    }
+    },
+    "terug_naar_alle_cijfers_veiligheidsregio": "All data for this safety region",
+    "terug_naar_alle_cijfers_gemeente": "All data for this municipality"
   },
   "ic_opnames_per_dag": {
     "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
@@ -764,7 +764,13 @@
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -2111,7 +2117,7 @@
       "omschrijving": "This graph shows the number of approved vaccine doses the Netherlands expects to receive over the next six weeks."
     },
     "verwachte_leveringen": {
-      "van_week_tot_week": "Week {{weekNumberFrom}} to week {{weekNumberTo}}"
+      "van_week_tot_week": ""
     }
   },
   "editorial_detail": {
