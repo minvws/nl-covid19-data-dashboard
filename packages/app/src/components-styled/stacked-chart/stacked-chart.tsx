@@ -10,12 +10,15 @@ import { Group } from '@visx/group';
 import { scaleBand, scaleLinear, scaleOrdinal } from '@visx/scale';
 import { BarStack } from '@visx/shape';
 import { SeriesPoint } from '@visx/shape/lib/types';
-import { defaultStyles, useTooltip, useTooltipInPortal } from '@visx/tooltip';
+/**
+ * useTooltipInPortal will not work for IE11 at the moment. See this issue
+ * https://github.com/airbnb/visx/issues/904
+ */
+import { defaultStyles, TooltipWithBounds, useTooltip } from '@visx/tooltip';
 import { NumberValue } from 'd3-scale';
 import { isEmpty, set } from 'lodash';
 import { transparentize } from 'polished';
 import { MouseEvent, TouchEvent, useCallback, useMemo, useState } from 'react';
-import ResizeObserver from 'resize-observer-polyfill';
 import styled from 'styled-components';
 import { Box } from '~/components-styled/base';
 import { Legenda, LegendItem } from '~/components-styled/legenda';
@@ -245,16 +248,11 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
     [config, series]
   );
 
-  const { containerRef, TooltipInPortal } = useTooltipInPortal({
-    scroll: true,
-    polyfill: ResizeObserver,
-  });
-
   /**
-   * This format function should be moved outside of the chart if we want to make
-   * this component reusable. But it depends on a lot of calculated data like
-   * seriesSum and labelByKey, so it would make the calling context quite messy
-   * if not done in a good way.
+   * This format function should be moved outside of the chart if we want to
+   * make this component reusable. But it depends on a lot of calculated data
+   * like seriesSum and labelByKey, so it would make the calling context quite
+   * messy if not done in a good way.
    *
    * I'm leaving that as an exercise for later.
    */
@@ -351,7 +349,6 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
      * localPoint returns coordinates relative to the nearest SVG, which is what
      * containerRef is set to in this example.
      */
-
     const coords = localPoint(event);
     const left = tooltipData.x + tooltipData.width / 2;
     showTooltip({
@@ -390,7 +387,7 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
       )}
 
       <Box position="relative">
-        <svg ref={containerRef} width={width} height={height} role="img">
+        <svg width={width} height={height} role="img">
           <Group left={padding.left} top={padding.top}>
             <GridRows
               scale={yScale}
@@ -478,9 +475,9 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
         </svg>
 
         {tooltipOpen && tooltipData && (
-          <TooltipInPortal
-            top={tooltipTop}
+          <TooltipWithBounds
             left={tooltipLeft}
+            top={tooltipTop}
             style={tooltipStyles}
           >
             <TooltipContainer>
@@ -496,7 +493,7 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
                     tooltipData.color
                   )}
             </TooltipContainer>
-          </TooltipInPortal>
+          </TooltipWithBounds>
         )}
 
         <Box pl={`${padding.left}px`}>
