@@ -2028,6 +2028,9 @@
         "download": ""
       }
     },
+    "verwachte_leveringen": {
+      "van_week_tot_week": "Week {{weekNumberFrom}} to week {{weekNumberTo}}"
+    },
     "data": {
       "difference": "",
       "sidebar": {

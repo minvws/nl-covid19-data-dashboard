@@ -2028,6 +2028,9 @@
         "download": ""
       }
     },
+    "verwachte_leveringen": {
+      "van_week_tot_week": "Week {{weekNumberFrom}} tot week {{weekNumberTo}}"
+    },
     "data": {
       "difference": "Do not remove this key. It is required as a temporary workaround",
       "sidebar": {

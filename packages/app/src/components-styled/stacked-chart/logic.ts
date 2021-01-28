@@ -181,7 +181,7 @@ export function getTotalSumForMetricProperty(
  *      of 2011
  */
 
-export function getWeekNumber(d: Date) {
+export function getWeekInfo(d: Date) {
   // Copy date so don't modify original
   d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
   // Set to nearest Thursday: current date + 4 - current day number Make
@@ -190,7 +190,7 @@ export function getWeekNumber(d: Date) {
   // Get first day of year
   const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
   // Calculate full weeks to nearest Thursday
-  const weekNo = Math.ceil(
+  const weekNumber = Math.ceil(
     ((d.getTime() - yearStart.getTime()) / 86400000 + 1) / 7
   );
 
@@ -200,7 +200,12 @@ export function getWeekNumber(d: Date) {
   const weekEndDate = new Date(d.getTime());
   weekEndDate.setUTCDate(weekEndDate.getUTCDate() + 3);
 
-  return [d.getUTCFullYear(), weekNo, weekStartDate, weekEndDate] as const;
+  return {
+    year: d.getUTCFullYear(),
+    weekNumber,
+    weekStartDate,
+    weekEndDate,
+  } as const;
 }
 
 export function formatDayMonth(date: Date) {
