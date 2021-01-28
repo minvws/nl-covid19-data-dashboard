@@ -184,12 +184,9 @@ const Item = styled.li(
 
 const LinkBox = styled(Box)(
   css({
-    width: asResponsiveArray({ md: 'calc(33% - 32px)', lg: 'auto' }),
-    '&:nth-child(3n+2)': {
-      mx: asResponsiveArray({ md: '48px', lg: 0 }),
-    },
-    marginTop: asResponsiveArray({ md: 3, lg: 0 }),
-    ':nth-child(-n+3)': {
+    width: asResponsiveArray({ md: '25%', lg: 'auto' }),
+    marginTop: asResponsiveArray({ md: 4, lg: 0 }),
+    ':nth-child(-n+4)': {
       marginTop: 0,
     },
   })

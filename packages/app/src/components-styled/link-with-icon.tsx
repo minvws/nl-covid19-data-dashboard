@@ -28,6 +28,7 @@ export function LinkWithIcon({
 }: LinkWithIconProps) {
   const splittedString = children.split(' ');
   const firstWords = `${splittedString.slice(0, -1).join(' ')} `;
+  const singleWord = splittedString.length === 1;
 
   return (
     <Link href={href} passHref>
@@ -60,13 +61,13 @@ export function LinkWithIcon({
           </Box>
         )}
         {headingLink && (
-          <>
+          <Box paddingRight={singleWord ? `calc(0.5rem + 18px)` : ''}>
             {!splittedString.length ? children : firstWords}
             <span css={css({ display: 'inline-block' })}>
               {splittedString[splittedString.length - 1]}
-              <IconLarge icon={icon} singleWord={splittedString.length === 1} />
+              <IconLarge icon={icon} singleWord={singleWord} />
             </span>
-          </>
+          </Box>
         )}
       </a>
     </Link>
@@ -90,6 +91,8 @@ export function LinkWithIcon({
             marginLeft: 2,
             position: singleWord ? 'absolute' : 'relative',
             minHeight: '100%',
+            right: 0,
+            top: 0,
           },
         })}
       >
