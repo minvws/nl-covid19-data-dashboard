@@ -2,7 +2,8 @@ export type PageName =
   | 'positief-geteste-mensen'
   | 'ziekenhuis-opnames'
   | 'rioolwater'
-  | 'gehandicaptenzorg';
+  | 'gehandicaptenzorg'
+  | 'actueel';
 
 export type RegioPageName =
   | PageName

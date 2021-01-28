@@ -1,3 +1,4 @@
+import { National } from '@corona-dashboard/common';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Arts from '~/assets/arts.svg';
@@ -5,7 +6,6 @@ import ElderlyIcon from '~/assets/elderly.svg';
 import Gedrag from '~/assets/gedrag.svg';
 import Gehandicaptenzorg from '~/assets/gehandicapte-zorg.svg';
 import Maatregelen from '~/assets/maatregelen.svg';
-import Notification from '~/assets/notification.svg';
 import ReproIcon from '~/assets/reproductiegetal.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
@@ -19,14 +19,13 @@ import {
   Menu,
   MetricMenuItemLink,
 } from '~/components-styled/aside/menu';
+import { AppContent } from '~/components-styled/layout/app-content';
 import { SidebarMetric } from '~/components-styled/sidebar-metric';
 import { Layout } from '~/domain/layout/layout';
-import { AppContent } from '~/components-styled/layout/app-content';
 import siteText from '~/locale/index';
 import theme from '~/style/theme';
 import { useBreakpoints } from '~/utils/useBreakpoints';
-import { National } from '@corona-dashboard/common';
-
+import { Box } from '~/components-styled/base';
 interface NationalLayoutProps {
   lastGenerated: string;
   data: National;
@@ -68,7 +67,7 @@ function NationalLayout(props: NationalLayoutProps) {
   const breakpoints = useBreakpoints();
 
   const isMenuOpen =
-    (router.pathname === '/' && !('menu' in router.query)) ||
+    (router.pathname === '/landelijk' && !('menu' in router.query)) ||
     router.query.menu === '1';
 
   return (
@@ -97,27 +96,21 @@ function NationalLayout(props: NationalLayoutProps) {
             role="navigation"
           >
             <Menu>
-              <CategoryMenu title={siteText.nationaal_layout.headings.algemeen}>
+              <Box spacing={3} pt={4}>
                 <MetricMenuItemLink
                   href={{
-                    pathname: '/',
+                    pathname: '/landelijk/maatregelen',
                     query: breakpoints.md
                       ? {} // only add menu flags on narrow devices
                       : isMenuOpen
                       ? { menu: '0' }
                       : { menu: '1' },
                   }}
-                  icon={<Notification color={theme.colors.notification} />}
-                  title={siteText.laatste_ontwikkelingen.title}
-                  subtitle={siteText.laatste_ontwikkelingen.menu_subtitle}
-                />
-                <MetricMenuItemLink
-                  href="/landelijk/maatregelen"
                   icon={<Maatregelen fill={theme.colors.restrictions} />}
                   title={siteText.nationaal_maatregelen.titel_sidebar}
                   subtitle={siteText.nationaal_maatregelen.subtitel_sidebar}
                 />
-              </CategoryMenu>
+              </Box>
               <CategoryMenu
                 title={siteText.nationaal_layout.headings.vaccinaties}
               >

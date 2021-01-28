@@ -18,7 +18,7 @@ export function AppFooter({ lastGenerated }: { lastGenerated: string }) {
           flexDirection={['column', null, 'row']}
           spacing={4}
           spacingHorizontal
-          px={3}
+          px={{ _: 3, sm: 4, md: 3, lg: 4 }}
         >
           <Box>
             <Box fontSize={3} fontWeight="bold">
@@ -30,7 +30,9 @@ export function AppFooter({ lastGenerated }: { lastGenerated: string }) {
               id="footer-navigation"
             >
               <FooterList>
-                <Item href="/">{text.nav.links.index}</Item>
+                <Item href="/landelijk/vaccinaties">
+                  {text.nav.links.index}
+                </Item>
                 <Item href="/veiligheidsregio">
                   {text.nav.links.veiligheidsregio}
                 </Item>

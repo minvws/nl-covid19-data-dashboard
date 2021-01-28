@@ -5,6 +5,7 @@ import { SEOHead } from '~/components-styled/seo-head';
 import { AppFooter } from '~/components-styled/layout/app-footer';
 import { AppHeader } from '~/components-styled/layout/app-header';
 import { SkipLinkMenu } from '~/components-styled/skip-link-menu';
+import siteText from '~/locale/index';
 
 interface LayoutProps {
   title: string;
@@ -33,6 +34,16 @@ export function getLayoutWithMetadata(metadata: LayoutProps) {
   return function (page: React.ReactNode, pageProps: any) {
     const lastGenerated = pageProps.lastGenerated;
     return getLayout(metadata, lastGenerated)(<>{page}</>);
+  };
+}
+
+export function getDefaultLayout() {
+  return function <T extends { lastGenerated: string }>(
+    page: React.ReactNode,
+    pageProps: T
+  ) {
+    const lastGenerated = pageProps.lastGenerated;
+    return getLayout(siteText.metadata, lastGenerated)(<>{page}</>);
   };
 }
 

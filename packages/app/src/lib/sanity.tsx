@@ -1,7 +1,6 @@
 // lib/sanity.ts
-import sanityClient from '@sanity/client';
 import BlockContent from '@sanity/block-content-to-react';
-
+import sanityClient from '@sanity/client';
 import { TLanguageKey } from '~/locale';
 
 const config = {
@@ -28,11 +27,20 @@ export const PortableText = BlockContent;
 // Set up the client for fetching data in the getProps page functions
 export const client = sanityClient(config);
 
-export function localize<T>(value: T, languages: TLanguageKey[]): T {
+// const builder = imageUrlBuilder(client);
+/**
+ * Set up a helper function for generating Image URLs with only the asset reference data in your documents.
+ * Read more: https://www.sanity.io/docs/image-url
+ * CAUTION: This is commented out because we should be talking to our images on our own filesystem!
+ * Chances are high this helper will be removed completely!
+ **/
+// export const urlFor = (source: SanityImageSource) => builder.image(source);
+
+export function localize<T>(value: T | T[], languages: TLanguageKey[]): T {
   const anyValue = value as any;
 
   if (Array.isArray(value)) {
-    return (value.map((v) => localize(v, languages)) as unknown) as T;
+    return (value.map((v: unknown) => localize(v, languages)) as unknown) as T;
   }
 
   if (typeof value == 'object' && value !== null) {

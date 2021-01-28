@@ -3,7 +3,6 @@ import { EscalationLevelIcon } from '~/components-styled/escalation-level-icon';
 import { Text } from '~/components-styled/typography';
 import { EscalationLevel } from '~/domain/restrictions/type';
 import siteText from '~/locale/index';
-import { useEscalationColor } from '~/utils/use-escalation-color';
 
 export type EscalationLevelProps = {
   escalationLevel: EscalationLevel;
@@ -12,15 +11,13 @@ export type EscalationLevelProps = {
 export function EscalationLevelInfoLabel(props: EscalationLevelProps) {
   const { escalationLevel } = props;
 
-  const color = useEscalationColor(escalationLevel);
-
   return (
-    <>
+    <Box display="flex" alignItems="center" justifyContent="flex-start">
       <EscalationLevelIcon level={escalationLevel} />
-      <Text as="span" marginLeft=".5em" color={color} fontWeight="bold">
+      <Text as="span" ml={2} fontWeight="bold">
         {siteText.escalatie_niveau.types[escalationLevel].titel}
       </Text>
-    </>
+    </Box>
   );
 }
 

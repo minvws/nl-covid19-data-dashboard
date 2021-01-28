@@ -1,3 +1,4 @@
+import { NationalTestedPerAgeGroup } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -17,6 +18,7 @@ import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { PageBarScale } from '~/components-styled/page-barscale';
+import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
@@ -27,7 +29,6 @@ import { createSelectMunicipalHandler } from '~/components/choropleth/select-han
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
 import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/create-positive-tested-people-regional-tooltip';
-import { SEOHead } from '~/components-styled/seo-head';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
@@ -38,7 +39,6 @@ import {
   getText,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
-import { NationalTestedPerAgeGroup } from '@corona-dashboard/common';
 import { assert } from '~/utils/assert';
 import {
   formatDateFromMilliseconds,
@@ -195,9 +195,12 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
               metricName="tested_overall"
               metricProperty="infected_per_100k"
               tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
-                createSelectMunicipalHandler(router)
+                createSelectMunicipalHandler(router, 'positief-geteste-mensen')
               )}
-              onSelect={createSelectMunicipalHandler(router)}
+              onSelect={createSelectMunicipalHandler(
+                router,
+                'positief-geteste-mensen'
+              )}
             />
           )}
           {selectedMap === 'region' && (
