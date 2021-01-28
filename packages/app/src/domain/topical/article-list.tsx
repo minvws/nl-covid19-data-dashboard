@@ -67,10 +67,11 @@ export function ArticleList({ articleSummaries, hideLink }: ArticleListProps) {
         </Box>
       </Box>
       <Box
-        display="block"
+        display="flex"
         alignItems="stretch"
         margin={0}
         maxWidth="100%"
+        flexWrap="wrap"
         mt={3}
       >
         {articleSummaries.map((summary) => (

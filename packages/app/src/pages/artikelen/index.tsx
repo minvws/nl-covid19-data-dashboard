@@ -30,7 +30,7 @@ const ArticlesOverview: FCWithLayout<typeof getStaticProps> = (props) => {
 
   return (
     <Box backgroundColor="white" py={{ _: 4, md: 5 }}>
-      <MaxWidth>
+      <MaxWidth px={{ _: 3, lg: 4 }}>
         <ArticleList articleSummaries={content} hideLink={true} />
       </MaxWidth>
     </Box>
