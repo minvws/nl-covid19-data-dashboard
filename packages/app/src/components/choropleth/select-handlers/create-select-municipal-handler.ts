@@ -8,7 +8,7 @@ export type MunicipalitySelectionHandler = (
 
 export function createSelectMunicipalHandler(
   router: NextRouter,
-  pageName: PageName = 'actueel',
+  pageName: PageName,
   openMenu?: boolean
 ): MunicipalitySelectionHandler {
   return (context: MunicipalityProperties) => {
@@ -16,6 +16,12 @@ export function createSelectMunicipalHandler(
       return;
     }
 
+    if (pageName === 'actueel') {
+      router.push(
+        `/actueel/gemeente/${context.gemcode}` + (openMenu ? '?menu=1' : '')
+      );
+      return;
+    }
     router.push(
       `/gemeente/${context.gemcode}/${pageName}` + (openMenu ? '?menu=1' : '')
     );
