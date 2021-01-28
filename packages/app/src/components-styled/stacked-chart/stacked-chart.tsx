@@ -349,7 +349,7 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
     showTooltip({
       tooltipLeft: coords?.x || 0,
       tooltipTop: coords?.y || 0,
-      tooltipData: tooltipData,
+      tooltipData,
     });
   }
 
