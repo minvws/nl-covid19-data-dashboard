@@ -26,7 +26,7 @@ import { TopicalChoroplethContainer } from '~/domain/topical/topical-choropleth-
 import { TopicalPageHeader } from '~/domain/topical/topical-page-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
 import { TopicalVaccineTile } from '~/domain/topical/topical-vaccine-tile';
-import { targetLanguage } from '~/locale';
+import { topicalPageQuery } from '~/queries/topical-page-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
@@ -52,40 +52,7 @@ export const getStaticProps = createGetStaticProps(
     articles: ArticleSummary[];
     editorial: EditorialSummary;
     highlight: { article: ArticleSummary };
-  }>(
-    `{
-    // Retrieve the latest 3 articles with the highlighted article filtered out:
-    'articles': *[_type == 'article' && !(_id == *[_type == 'topicalPage']{"i":highlightedArticle->{_id}}[0].i._id)] | order(publicationDate) {
-      "title":title.${targetLanguage},
-      slug,
-      "summary":summary.${targetLanguage},
-  		"cover": {
-        ...cover,
-        "asset": cover.asset->
-      }
-    }[0..2],
-    'editorial': *[_type == 'editorial'] | order(publicationDate) {
-      "title":title.${targetLanguage},
-      slug,
-      "summary":summary.${targetLanguage},
-  		"cover": {
-        ...cover,
-        "asset": cover.asset->
-      }
-    }[0],
-    'highlight': *[_type == 'topicalPage']{
-      "article":highlightedArticle->{
-        "title":title.${targetLanguage},
-        slug,
-        "summary":summary.${targetLanguage},
-        "cover": {
-          ...cover,
-          "asset": cover.asset->
-        }
-      }
-    }[0],
-    }`
-  ),
+  }>(topicalPageQuery),
   () => {
     const data = getNlData();
 

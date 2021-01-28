@@ -762,13 +762,7 @@
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": [
-      "0 to 20",
-      "20 to 40",
-      "40 to 60",
-      "60 to 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -1222,9 +1216,9 @@
     "url": "https://coronadashboard.government.nl/veelgestelde-vragen"
   },
   "waarde_annotaties": {
-    "riool_normalized": "x100 billion",
-    "x_miljoen": "",
-    "totaal": ""
+    "riool_normalized": "x 100 billion",
+    "x_100k": "x 100.000",
+    "totaal": "total"
   },
   "gedrag_onderwerpen": {
     "wash_hands": "Wash your hands often",
@@ -1962,7 +1956,7 @@
       "verdenkingen_huisartsen": "This graph shows the progression over time in the estimated number of patients who contacted the general practitioner for the first time due to COVID-19 like symptoms.",
       "ziekenhuis_opnames": "This graph shows the progression in hospital admissions over time.",
       "rioolwater_meetwaarde": "This graph shows the most recent measured value of the average amount of virus particles per 100.000 residents, per sewage processing facility.",
-      "verwachte_leveringen": "This graph shows the number of vaccine doses the Netherlands expects to receive over the next six weeks."
+      "verwachte_leveringen": "This graph shows the number of approved vaccine doses the Netherlands expects to receive over the next six weeks."
     }
   },
   "deceased_age_groups": {
@@ -2142,7 +2136,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of the Netherlands",
-      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions.  \n\n**There is a [national lockdown](/landelijk/maatregelen) until at least 9 February.**"
+      "selecteer_toelichting": "The map indicates the level of risk per safety region.\n\n**There are specific measures for each risk level. These are explained in the road map drafted by the government. There is a national lockdown until at least 9 February. [Click here to view the lockdown measures](landelijk/maatregelen).**"
     },
     "data_sitemap_titel": "Topics on this dashboard",
     "data_sitemap_toelichting": "Go directly to the following topics:",
@@ -2229,7 +2223,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of The Netherlands",
-      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions.  \n\n**There is a [national lockdown](/landelijk/maatregelen) until at least 9 February.**"
+      "selecteer_toelichting": "The map indicates the level of risk per safety region.\n\n**There are specific measures for each risk level. These are explained in the road map drafted by the government. There is a national lockdown until at least 9 February. [Click here to view the lockdown measures](landelijk/maatregelen).**"
     },
     "risoconiveau_maatregelen": {
       "title": "Risk level & measures",
@@ -2302,7 +2296,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of the Netherlands",
-      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions.  \n\n**There are specific measures for each risk level. These are explained in the road map drafted by the government. There is a national lockdown until at least 9 February. [Click here to view the lockdown measures](landelijk/maatregelen).**"
+      "selecteer_toelichting": "The map indicates the level of risk per safety region.\n\n**There are specific measures for each risk level. These are explained in the road map drafted by the government. There is a national lockdown until at least 9 February. [Click here to view the lockdown measures](landelijk/maatregelen).**"
     },
     "risoconiveau_maatregelen": {
       "title": "Risk level & measures",
