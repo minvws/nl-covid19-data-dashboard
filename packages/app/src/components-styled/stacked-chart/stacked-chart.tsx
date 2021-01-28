@@ -24,6 +24,7 @@ import { ValueAnnotation } from '~/components-styled/value-annotation';
 import siteText from '~/locale';
 import { colors } from '~/style/theme';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import {
   calculateSeriesMaximum,
@@ -287,21 +288,23 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
             <InlineText fontWeight="bold">
               {`${formatDayMonth(weekStartDate)} - ${formatDayMonth(
                 weekEndDate
-              )}`}
-              :
+              )}: `}
             </InlineText>
             {isWeekMillion
-              ? ` ${formatPercentage(data[key] / NUM_1M)} mln`
-              : ` ${formatNumber(Math.round(data[key] / NUM_1K))} k`}
+              ? `${formatPercentage(data[key] / NUM_1M)} mln`
+              : `${formatNumber(Math.round(data[key] / NUM_1K))} k`}
           </Box>
 
           <Box mb={2}>
             <InlineText fontWeight="bold">
-              {`Week ${weekNumberFrom} ${siteText.waarde_annotaties.tot} Week ${weekNumberTo}: `}
+              {`${replaceVariablesInText(
+                siteText.vaccinaties.verwachte_leveringen.van_week_tot_week,
+                { weekNumberFrom, weekNumberTo }
+              )}: `}
             </InlineText>
             {isTotalMillion
-              ? ` ${formatPercentage(seriesSumByKey[key] / NUM_1M)} mln `
-              : ` ${formatNumber(Math.round(seriesSumByKey[key] / NUM_1K))} k `}
+              ? `${formatPercentage(seriesSumByKey[key] / NUM_1M)} mln `
+              : `${formatNumber(Math.round(seriesSumByKey[key] / NUM_1K))} k `}
             {siteText.waarde_annotaties.totaal}
           </Box>
         </Box>

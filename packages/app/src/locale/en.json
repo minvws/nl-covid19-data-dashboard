@@ -1218,8 +1218,7 @@
   "waarde_annotaties": {
     "riool_normalized": "x 100 billion",
     "x_100k": "x 100.000",
-    "totaal": "total",
-    "tot": "to"
+    "totaal": "total"
   },
   "gedrag_onderwerpen": {
     "wash_hands": "Wash your hands often",
@@ -2021,6 +2020,9 @@
         "text": "Ministry of Health, Welfare and Sport",
         "download": ""
       }
+    },
+    "verwachte_leveringen": {
+      "van_week_tot_week": "Week {{weekNumberFrom}} to week {{weekNumberTo}}"
     },
     "data": {
       "difference": "",

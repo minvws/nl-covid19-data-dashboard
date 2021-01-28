@@ -1218,8 +1218,7 @@
   "waarde_annotaties": {
     "riool_normalized": "x100 miljard",
     "x_100k": "x 100.000",
-    "totaal": "totaal",
-    "tot": "tot"
+    "totaal": "totaal"
   },
   "gedrag_onderwerpen": {
     "wash_hands": "Was vaak je handen",
@@ -2021,6 +2020,9 @@
         "text": "Ministerie van VWS",
         "download": ""
       }
+    },
+    "verwachte_leveringen": {
+      "van_week_tot_week": "Week {{weekNumberFrom}} tot week {{weekNumberTo}}"
     },
     "data": {
       "difference": "Do not remove this key. It is required as a temporary workaround",
