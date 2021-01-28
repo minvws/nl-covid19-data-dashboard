@@ -537,10 +537,7 @@ export const TooltipContainer = styled.div(
 
 const Square = styled.span<{ color: string }>((x) =>
   css({
-    // content: '',
     display: 'inline-block',
-    // position: 'absolute',
-    // left: 0,
     backgroundColor: x.color,
     width: 15,
     height: 15,
