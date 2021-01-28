@@ -67,10 +67,11 @@ export function ArticleList({ articleSummaries, hideLink }: ArticleListProps) {
         </Box>
       </Box>
       <Box
-        display="block"
+        display="flex"
         alignItems="stretch"
         margin={0}
         maxWidth="100%"
+        flexWrap="wrap"
         mt={3}
       >
         {articleSummaries.map((summary) => (
@@ -90,7 +91,6 @@ export function ArticleList({ articleSummaries, hideLink }: ArticleListProps) {
 
 const ArticleBox = styled.div(
   css({
-    display: 'inline-block',
     marginBottom: 4,
     width: asResponsiveArray({
       _: '100%',

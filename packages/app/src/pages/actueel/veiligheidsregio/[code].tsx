@@ -38,7 +38,7 @@ import { assert } from '~/utils/assert';
 import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-
+import css from '@styled-system/css';
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
@@ -182,7 +182,7 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
               />
             )}
 
-            <Box>
+            <Box pb={4}>
               <TopicalTile>
                 <>
                   <TopicalChoroplethContainer
@@ -220,7 +220,7 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
                 borderTopColor="silver"
                 mx={{ _: -3, md: 0 }}
               />
-              <TopicalTile>
+              <TopicalTile css={css({ py: '0' })}>
                 <Box mx={-3}>
                   <EscalationLevelExplanations />
                 </Box>
