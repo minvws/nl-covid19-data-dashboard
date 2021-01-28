@@ -10,11 +10,13 @@
   },
   "notificatie": {
     "titel": "UK variant gains terrain in the Netherlands",
-    "bericht": "The number of newly tested COVID positives slightly decreased to 35.635 cases in the week of 20 to 26 January compared to the week before. This overview is overshadowed by the rising number of cases involving the SARS-CoV-2 variant that resulted in a massive influx of patients in hospitals in the United Kingdom and Ireland. It is estimated that the people that got infected with COVID-19 in the past week (20 to 26 January), more than a third is infected with the UK variant. We are facing two variants of the virus that seem to be spreading in the Netherlands at different speeds. As a result, there are essentially two separate COVID-19 epidemics: one epidemic involving the ‘old’ variant, in which infections are decreasing, and another epidemic involving the UK variant, in which infections are increasing.We are facing two variants of the virus that seem to be spreading in the Netherlands at different speeds. As a result, there are essentially two separate COVID-19 epidemics: one epidemic involving the ‘old’ variant, in which infections are decreasing, and another epidemic involving the UK variant, in which infections are increasing.",
+    "bericht": "The number of newly tested COVID positives slightly decreased to 35.635 cases in the week of 20 to 26 January compared to the week before. This overview is overshadowed by the rising number of cases involving the SARS-CoV-2 variant that resulted in a massive influx of patients in hospitals in the United Kingdom and Ireland. It is estimated that the people that got infected with COVID-19 in the past week (20 to 26 January), more than a third is infected with the UK variant. We are facing two variants of the virus that seem to be spreading in the Netherlands at different speeds. As a result, there are essentially two separate COVID-19 epidemics: one epidemic involving the ‘old’ variant, in which infections are decreasing, and another epidemic involving the UK variant, in which infections are increasing.",
     "link": {
       "text": "View the full message from the RIVM",
       "href": "https://www.rivm.nl/en/news/uk-variant-gains-ground-in-the-netherlands"
-    }
+    },
+    "subtitel": "",
+    "datum": ""
   },
   "error_titel": {
     "text": "Something went wrong"
@@ -28,7 +30,7 @@
   "skiplinks": {
     "inhoud": "Go directly to the content",
     "nav": "Go directly to the navigation",
-    "metric_nav": "",
+    "metric_nav": "Jump to the menu for data points",
     "footer_nav": "Go to footer"
   },
   "header": {
@@ -47,11 +49,16 @@
       "veiligheidsregio": "Safety regions",
       "gemeente": "Municipalities",
       "over_risiconiveaus": "About the risk levels",
-      "veelgestelde_vragen": "Frequently asked questions"
+      "veelgestelde_vragen": "Frequently asked questions",
+      "actueel": "Latest developments"
     },
     "title": "Corona Dashboard",
     "terug_naar_alle_cijfers": "Overview",
-    "terug_naar_alle_cijfers_homepage": "Overview"
+    "terug_naar_alle_cijfers_homepage": "Overview",
+    "menu": {
+      "open_menu": "Open menu",
+      "close_menu": "Close menu"
+    }
   },
   "ic_opnames_per_dag": {
     "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
@@ -272,7 +279,7 @@
       "text": "RIVM"
     },
     "legenda_line": "The number of infectious people in the Netherlands.",
-    "legenda_marge": "The confidence interval shows the range between which the number of infectious people falls.",
+    "legenda_marge": "The number of infectious people is an estimate. The uncertainty margin indicates how much higher or lower the actual number may be.",
     "rangeLegendLabel": "Confidence interval",
     "lineLegendLabel": "Infectious people",
     "geen_signaalwaarde_beschikbaar": "Due to a technical problem the data is currently not showing as intended. This is being investigated.",
@@ -602,7 +609,8 @@
   },
   "utils": {
     "date_today": "today",
-    "date_yesterday": "yesterday"
+    "date_yesterday": "yesterday",
+    "date_day_before_yesterday": "the day before yesterday"
   },
   "regionaal_index": {
     "your_safety_region": "Safety region",
@@ -639,7 +647,15 @@
     },
     "niveau": "level",
     "clear_select_input": "Empty",
-    "incomplete": "incomplete"
+    "incomplete": "incomplete",
+    "gm_singular": "municipality",
+    "gm_plural": "municipalities",
+    "vr_singular": "Safety region",
+    "vr_plural": "Safety region's",
+    "gisteren": "Yesterday",
+    "vandaag": "Today",
+    "read_more": "Read more",
+    "absolute_date_template": "on {{date}}"
   },
   "seoHead": {
     "default_description": "Information on the development of the coronavirus in The Netherlands.",
@@ -678,7 +694,7 @@
       "gedrag": "Behaviour",
       "kwetsbare_groepen": "Vulnerable groups",
       "maatregelen": "Measures",
-      "algemeen": ""
+      "algemeen": "General"
     }
   },
   "veiligheidsregio_metadata": {
@@ -849,7 +865,7 @@
       "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
       "text": "NICE via RIVM"
     },
-    "linechart_description": "This graph shows hospital admissions, including admissions directly to ICU. The figure for each day indicates the number of people actually admitted on that day, not the number of admissions reported on that day. This gives a clear picture of the development of coronavirus in the Netherlands. There are often reporting delays of a few days for hospital admissions; data for the most recent days is therefore incomplete. ",
+    "linechart_description": "This graph shows hospital admissions, including admissions directly to ICU. The figure for each day indicates the number of people actually admitted on that day, not the number of admissions reported on that day. This gives a clear picture of the development of coronavirus in the Netherlands. There are often reporting delays of a few days for hospital admissions; data for the most recent days is therefore incomplete.",
     "metadata": {
       "title": "Hospital admissions {{municipalityName}} | Dashboard Coronavirus | Government.nl",
       "description": "Overview of the number of confirmed COVID-19 cases in {{municipalityName}} who are admitted to a hospital per day."
@@ -945,10 +961,10 @@
     "nodata_sidebar": "This information is not available for this municipality.",
     "total_installation_count_titel": "Number of measurement locations",
     "total_installation_count_description": "Weekly number of sewage water treatment plants that have reported at least one measurement. The weekly average is calculated by taking the average of all measurements at these locations. This number can vary each week because not all measurements are successful.",
-    "rwzi_abbrev": "",
-    "graph_daily_label_text_rwzi": "",
-    "graph_selected_rwzi_placeholder": "",
-    "graph_range_description": "",
+    "rwzi_abbrev": "Sewage water treatment plant",
+    "graph_daily_label_text_rwzi": "Measurements for location ({{name}})",
+    "graph_selected_rwzi_placeholder": "Select location",
+    "graph_range_description": "Progression overt time in the average number of virus particles per 100.000 residents.",
     "reference": {
       "href": "/verantwoording#sewage-water",
       "text": "Find out more about testing wastewater for coronavirus in the explanation of data presented."
@@ -984,27 +1000,27 @@
     "title": "Latest developments",
     "menu_subtitle": "UK variant gains terrain in the Netherlands",
     "alle_cijfers_header": "Want to see all data?",
-    "alle_cijfers_link": "View all"
+    "alle_cijfers_link": "View all data"
   },
   "escalatie_niveau": {
-    "titel": "Level of risk",
+    "titel": "Risk levels",
     "toelichting": "The map indicates the level of risk per safety region.\n\n[More about risk levels](/over-risiconiveaus)",
     "types": {
       "1": {
         "titel": "Caution",
-        "toelichting": ""
+        "toelichting": "The situation is manageable. The number of new infections is fewer than 35 per 100,000 inhabitants per week. There is sufficient healthcare capacity"
       },
       "2": {
         "titel": "Concern",
-        "toelichting": ""
+        "toelichting": "The situation is becoming difficult to manage. The number of new infections is between 35 and 150 per 100,000 inhabitants per week. Pressure on healthcare capacity is increasing."
       },
       "3": {
         "titel": "Serious",
-        "toelichting": ""
+        "toelichting": "The situation is serious. The number of new infections is between 150 and 250 per 100,000 inhabitants per week. Pressure on healthcare capacity is very high."
       },
       "4": {
         "titel": "Severe",
-        "toelichting": ""
+        "toelichting": "The situation is severe. The number of new infections is higher than 250 per 100,000 inhabitants per week. Pressure on healthcare capacity is extreme."
       },
       "5": {
         "titel": "Lockdown",
@@ -1012,10 +1028,14 @@
       }
     },
     "legenda": {
-      "titel": "Legend"
+      "titel": "Legend",
+      "geen_regio": "no regions",
+      "regios": "{{amount}} regions"
     },
     "valid_from": "Valid from {{validFrom}}",
-    "sidebar_label": "Level of risk:"
+    "sidebar_label": "Risk level:",
+    "tile_title": "What do the four risk levels mean?",
+    "lees_meer": "Click here for more information about the risk levels"
   },
   "gemeente_layout": {
     "headings": {
@@ -1198,11 +1218,14 @@
   "data_warning_text": "",
   "veelgestelde_vragen_metadata": {
     "title": "Frequently asked questions | Dashboard Coronavirus COVID-19 | Government.nl",
-    "description": "",
+    "description": "Information on the development of the coronavirus in the Netherlands.",
     "url": "https://coronadashboard.government.nl/veelgestelde-vragen"
   },
   "waarde_annotaties": {
-    "riool_normalized": "x100 billion"
+    "riool_normalized": "x100 billion",
+    "x_miljoen": "",
+    "totaal": "",
+    "x_100k": ""
   },
   "gedrag_onderwerpen": {
     "wash_hands": "Wash your hands often",
@@ -1385,10 +1408,10 @@
         "meervoud": "weeks"
       },
       "hiervoor": "before",
-      "vorige_week": "",
-      "ervoor": ""
+      "vorige_week": "last week",
+      "ervoor": "before"
     },
-    "ervoor": "",
+    "ervoor": "before",
     "vorige_waarde": "the previous value"
   },
   "aria_labels": {
@@ -1407,9 +1430,9 @@
       "infected_percentage_tooltip": "of the total amount of positive tested persons is {{ageGroupRange}} years old. ",
       "age_group_range_tooltip": "{{ageGroupRange}} years old. ",
       "accessibility_description": "Graph with percentages for the distribution of the population and the distribution of positive tested age groups.",
-      "clipped_value_message": "",
-      "value_percentage_title": "",
-      "value_percentage_tooltip": ""
+      "clipped_value_message": "This value is higher than displayed in the figure.",
+      "value_percentage_title": "Confirmed cases by agegroup",
+      "value_percentage_tooltip": "of the confirmed cases are {{ageGroupRange}} years old"
     },
     "example": "For example: of all positive tested people is {{infectedPercentage}} between {{ageGroupRange}} years old. Of all Dutch people is {{ageGroupPercentage}} between {{ageGroupRange}} years old. "
   },
@@ -1422,7 +1445,7 @@
     "kpi_titel": "Total no. of new infected locations",
     "kpi_toelichting": "This figure shows the total number of disability care homes that have reported at least one confirmed COVID-19 case among residents, based on a positive test, in the last 28 days. The percentage expresses the share of all disability care homes in the Netherlands with confirmed COVID-19 cases.",
     "linechart_titel": "Total no. of infected locations – progression over time",
-    "barscale_screenreader_text": "",
+    "barscale_screenreader_text": "{{value}} new reported locations with at least one confirmed case amongst residents per day.",
     "chloropleth_legenda": {
       "titel": "Percentage of infected locations",
       "geen_meldingen": "No newly confirmed cases"
@@ -1456,8 +1479,8 @@
     "linechart_titel": "Progression over time",
     "barscale_screenreader_text": "{{value}} confirmed cases (residents)",
     "chloropleth_legenda": {
-      "titel": "",
-      "geen_meldingen": ""
+      "titel": "Number per 100.000 residents",
+      "geen_meldingen": "No reports"
     },
     "map_titel": "Distribution of infected locations in the Netherlands",
     "map_toelichting": "These maps show how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
@@ -1488,7 +1511,7 @@
     "extra_uitleg": "This is an estimate of the number of disability care home residents in the Netherlands who have died from COVID-19 per day.",
     "linechart_titel": "Progression over time",
     "map_titel": "Disability care homes – deaths",
-    "map_toelichting": "",
+    "map_toelichting": "The maps show the exces mortality amongst disability care homes in the Netherlands, per day.",
     "metadata": {
       "title": "Deceased residents of disability care homes | Dashboard Coronavirus | Government.nl",
       "description": "Total number of confirmed cases in disability care homes in the Netherlands that died from COVID-19"
@@ -1910,16 +1933,16 @@
     },
     "behavior": {
       "compliance": {
-        "full_sentence": "",
-        "full_sentence_single": "",
-        "sentence": "",
-        "last_sentence": ""
+        "full_sentence": "This map shows that {{first}} and {{last}}.",
+        "full_sentence_single": "This map shows that {{first}}.",
+        "sentence": "{{count}} {{area}} between {{rangeLow}} and {{rangeHigh}} procent of the participants {{verb}} comply with the measure '{{restriction}}'.",
+        "last_sentence": "{{count}} {{area}} more than {{rangeLow}} procent of the participants {{verb}} comply with the measure '{{restriction}}'."
       },
       "support": {
-        "full_sentence": "",
-        "full_sentence_single": "",
-        "sentence": "",
-        "last_sentence": ""
+        "full_sentence": "This map shows that {{first}} and {{last}}.",
+        "full_sentence_single": "This map shows that{{first}}.",
+        "sentence": "{{count}} {{area}} between {{rangeLow}} and {{rangeHigh}} percent support {{verb}} for the measure '{{restriction}}'",
+        "last_sentence": "{{count}} {{area}} more than {{rangeLow}} percent support {{verb}} for the measure '{{restriction}}'"
       }
     }
   },
@@ -1972,8 +1995,8 @@
     "title": "COVID-19 vaccinations",
     "description": "Vaccination is the most important step towards getting life back to normal. The Netherlands began vaccinating people against COVID-19 on 6 January 2021. Eventually, the vaccine will be offered to everyone aged 18 and over. This page shows how many doses of vaccine have been administered and how many doses are on their way.",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "date_unix": "1611750085",
-    "date_of_insertion_unix": "1611750085",
+    "date_unix": "1611838697",
+    "date_of_insertion_unix": "1611838697",
     "reference": {
       "href": "/verantwoording#vaccination",
       "text": "Read more about the source of the data on vaccination in the explanation of the presented data."
@@ -2009,24 +2032,24 @@
       "difference": "",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "185356",
-          "date_unix": "1611750085",
-          "date_of_insertion_unix": "1611750085"
+          "total_vaccinated": "203450",
+          "date_unix": "1611838697",
+          "date_of_insertion_unix": "1611838697"
         }
       },
       "kpi_total": {
         "title": "Number of doses administered",
-        "value": "185356",
+        "value": "203450",
         "description": "This figure reflects the total number of vaccination doses that have been administered. Because vaccination figures are sometimes reported a few days after doses are administered, the actual number of vaccination doses administered is higher. People need two separately administered doses for the vaccine to be maximally effective.",
-        "date_of_report_unix": "1611750085",
-        "date_of_insertion_unix": "1611750085",
+        "date_of_report_unix": "1611838697",
+        "date_of_insertion_unix": "1611838697",
         "administered": [
           {
-            "value": "128311",
+            "value": "140205",
             "description": "administered by municipal health services (GGDs)"
           },
           {
-            "value": "40216",
+            "value": "46416",
             "description": "administered by hospitals"
           },
           {
@@ -2089,7 +2112,264 @@
     },
     "grafiek": {
       "titel": "Expected weekly deliveries",
-      "omschrijving": "This graph shows the number of approved vaccine doses the Netherlands expects to receive over the next six weeks. "
+      "omschrijving": "This graph shows the number of approved vaccine doses the Netherlands expects to receive over the next six weeks."
+    },
+    "verwachte_leveringen": {
+      "van_week_tot_week": ""
+    }
+  },
+  "editorial_detail": {
+    "back_link": {
+      "text": "Back to latest developments"
+    }
+  },
+  "article_detail": {
+    "back_link": {
+      "text": "Back to article overview"
+    }
+  },
+  "articles_metadata": {
+    "title": "Articles | Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
+    "description": "",
+    "url": "https://coronadashboard.government.nl/artikelen"
+  },
+  "common_actueel": {
+    "terug_naar_landelijk": "Back to national situation",
+    "laatst_bijgewerkt": "The dashboard receives new data each day, around 15:20."
+  },
+  "nationaal_actueel": {
+    "title": "The current situation in {{the_netherlands}}",
+    "the_netherlands": "The Netherlands",
+    "metadata": {
+      "title": "Dashboard Coronavirus COVID-19 | Government.nl",
+      "description": "Information on the development of the coronavirus in the Netherlands."
+    },
+    "risiconiveaus": {
+      "selecteer_titel": "Risk level map of the Netherlands",
+      "selecteer_toelichting": "The map indicates the level of risk per safety region.\n\n**There are specific measures for each risk level. These are explained in the road map drafted by the government. There is a national lockdown until at least 9 February. [Click here to view the lockdown measures](landelijk/maatregelen).**"
+    },
+    "data_sitemap_titel": "Topics on this dashboard",
+    "data_sitemap_toelichting": "Go directly to the following topics:",
+    "mini_trend_tiles": {
+      "positief_getest": {
+        "title": "Number of confirmed cases"
+      },
+      "ziekenhuis_opnames": {
+        "title": "Hospital admissions"
+      },
+      "ic_opnames": {
+        "title": "Intensive care admissions"
+      },
+      "toegediende_vaccins": {
+        "title": "Number of doses administered",
+        "sub_title": "Vaccines to be delivered",
+        "administered_tests": "{{administeredVaccines}} vaccine doses have been administered so far. This number includes both first and second doses.",
+        "supply": "The Netherlands expects tot receive {{expectedDelivery}} approved vaccine doses over the next six weeks."
+      }
+    },
+    "data_driven_texts": {
+      "infected_people_total": {
+        "value": {
+          "zero": "{{newDate}} there were no newly reported confirmed cases.",
+          "singular": "{{newDate}} {{propertyValue}}new confirmed case was reported.",
+          "plural": "{{newDate}} {{propertyValue}} new confirmed cases were reported."
+        },
+        "difference": {
+          "zero": "That is the same as {{relativeOldDate}}.",
+          "singular": "That is {{differenceIndicator}} than the previous figure.",
+          "plural": "That is {{differenceIndicator}} than the previous figure."
+        }
+      },
+      "intake_hospital_ma": {
+        "value": {
+          "zero": "{{newDate}} there were no newly reported hospital admissions.",
+          "singular": "{{newDate}} {{propertyValue}} new hospital admission was reported.",
+          "plural": "{{newDate}} {{propertyValue}} new hospital admissions were reported."
+        },
+        "difference": {
+          "zero": "This is the same as {{relativeOldDate}}.",
+          "singular": "That is {{differenceIndicator}} than the previous figure.",
+          "plural": "That is {{differenceIndicator}} than the previous figure."
+        }
+      },
+      "intake_intensivecare_ma": {
+        "value": {
+          "zero": "{{newDate}} there were no new intensive care admissions reported.",
+          "singular": "{{newDate}} {{propertyValue}} new intensive care admission was reported.",
+          "plural": "{{newDate}} {{propertyValue}} new intensive care admissions were reported."
+        },
+        "difference": {
+          "zero": "This is the same as {{relativeOldDate}}.",
+          "singular": "This is {{differenceIndicator}} than the previous value.",
+          "plural": "This is {{differenceIndicator}} than the previous value."
+        }
+      }
+    },
+    "quick_links": {
+      "header": "View all data on the dashboard",
+      "links": {
+        "nationaal": "Data for the Netherlands",
+        "veiligheidsregio": "Data by safety region",
+        "gemeente": "Data by municipality"
+      }
+    },
+    "latest_articles": {
+      "title": "More information about the coronavirus",
+      "subtitle": "New information about a range of topics concerning coronavirus data is posted here regularly.",
+      "all_articles": "View all articles"
+    }
+  },
+  "common.tooltip.positive_tested_value": "",
+  "search": {
+    "placeholder": "Search for a municipality of safety region",
+    "clear": "",
+    "no_hits": "No {{subject}} found with “{{search}}”"
+  },
+  "veiligheidsregio_actueel": {
+    "title": "Current situation in safety region {{safetyRegionName}}",
+    "metadata": {
+      "title": "Current situation in safety region {{safetyRegionName}}",
+      "description": "Current situation in safety region {{safetyRegionName}}"
+    },
+    "risiconiveaus": {
+      "selecteer_titel": "Risk level map of The Netherlands",
+      "selecteer_toelichting": "The map indicates the level of risk per safety region.\n\n**There are specific measures for each risk level. These are explained in the road map drafted by the government. There is a national lockdown until at least 9 February. [Click here to view the lockdown measures](landelijk/maatregelen).**"
+    },
+    "risoconiveau_maatregelen": {
+      "title": "Risk level & measures",
+      "description": "This safety region is at risk level",
+      "bekijk_href": "View measures"
+    },
+    "mini_trend_tiles": {
+      "positief_getest": {
+        "title": "Number of confirmed cases"
+      },
+      "ziekenhuis_opnames": {
+        "title": "Hospital admissions"
+      },
+      "ic_opnames": {
+        "title": "Intensive care admissions"
+      }
+    },
+    "data_driven_texts": {
+      "infected_people_total": {
+        "value": {
+          "zero": "{{newDate}} there were no newly reported infected people.",
+          "singular": "{{newDate}} {{propertyValue}} new confirmed case were reported.",
+          "plural": "{{newDate}} {{propertyValue}} new confirmed cases were reported."
+        },
+        "difference": {
+          "zero": "This is the same as {{relativeOldDate}}.",
+          "singular": "This is {{differenceIndicator}} than the previous figure.",
+          "plural": "This is {{differenceIndicator}} than the previous figure."
+        }
+      },
+      "intake_hospital_ma": {
+        "value": {
+          "zero": "{{newDate}} there were no newly reported hospital admissions.",
+          "singular": "{{newDate}} {{propertyValue}} new hospital admission was reported.",
+          "plural": "{{newDate}} {{propertyValue}} new hospital admissions were reported."
+        },
+        "difference": {
+          "zero": "This is the same as {{relativeOldDate}}.",
+          "singular": "This is {{differenceIndicator}} than the previous figure.",
+          "plural": "This is {{differenceIndicator}} than the previous figure."
+        }
+      },
+      "intake_intensivecare_ma": {
+        "value": {
+          "zero": "{{newDate}} there were no newly reported intensive care admissions.",
+          "singular": "{{newDate}} {{propertyValue}} new intensive care admission was reported.",
+          "plural": "{{newDate}} {{propertyValue}} new intensive care admissions were reported."
+        },
+        "difference": {
+          "zero": "This is the same as {{relativeOldDate}}.",
+          "singular": "This is {{differenceIndicator}} than the previous figure.",
+          "plural": "This is {{differenceIndicator}} than the previous figure."
+        }
+      }
+    },
+    "quick_links": {
+      "header": "View all data on the dashboard",
+      "links": {
+        "nationaal": "Data for The Netherlands",
+        "veiligheidsregio": "Data for safety region {{safetyRegionName}}",
+        "gemeente": "Data by municipality"
+      }
+    }
+  },
+  "gemeente_actueel": {
+    "title": "Current situation in municipality {{municipalityName}}",
+    "metadata": {
+      "title": "Current situation in {{municipalityName}}",
+      "description": "The current situation in {{municipalityName}}"
+    },
+    "risiconiveaus": {
+      "selecteer_titel": "Risk level map of the Netherlands",
+      "selecteer_toelichting": "The map indicates the level of risk per safety region.\n\n**There are specific measures for each risk level. These are explained in the road map drafted by the government. There is a national lockdown until at least 9 February. [Click here to view the lockdown measures](landelijk/maatregelen).**"
+    },
+    "risoconiveau_maatregelen": {
+      "title": "Risk level & measures",
+      "description": "The safety region of this municipality is at risk level",
+      "bekijk_href": "View the measures"
+    },
+    "mini_trend_tiles": {
+      "positief_getest": {
+        "title": "Number of confirmed cases"
+      },
+      "ziekenhuis_opnames": {
+        "title": "Hospital admissions"
+      },
+      "ic_opnames": {
+        "title": "Intensive care admissions"
+      }
+    },
+    "data_driven_texts": {
+      "infected_people_total": {
+        "value": {
+          "zero": "{{newDate}} there were no newly reported infected people.",
+          "singular": "{{newDate}} {{propertyValue}} new confirmed case was reported.",
+          "plural": "{{newDate}} {{propertyValue}} new confirmed cases were reported"
+        },
+        "difference": {
+          "zero": "This is the same as {{relativeOldDate}}.",
+          "singular": "This is {{differenceIndicator}} than the previous figure.",
+          "plural": "This is {{differenceIndicator}} than the previous figure."
+        }
+      },
+      "intake_hospital_ma": {
+        "value": {
+          "zero": "{{newDate}} there were no newly reported hospital intakes.",
+          "singular": "{{newDate}} {{propertyValue}} new hospital admission was reported.",
+          "plural": "{{newDate}} {{propertyValue}} new hospital admissions were reported."
+        },
+        "difference": {
+          "zero": "This is the same as {{relativeOldDate}}.",
+          "singular": "This is {{differenceIndicator}} than the previous figure.",
+          "plural": "This is {{differenceIndicator}} than the previous figure."
+        }
+      },
+      "intake_intensivecare_ma": {
+        "value": {
+          "zero": "{{newDate}} there were no newly reported intensive care admissions.",
+          "singular": "{{newDate}} {{propertyValue}} new intensive care admission was reported.",
+          "plural": "{{newDate}} {{propertyValue}} new intensive care admissions were reported."
+        },
+        "difference": {
+          "zero": "This is the same as {{relativeOldDate}}.",
+          "singular": "This is {{differenceIndicator}} than the previous figure.",
+          "plural": "This is {{differenceIndicator}} than the previous figure."
+        }
+      }
+    },
+    "quick_links": {
+      "header": "View all data on the dashboard",
+      "links": {
+        "nationaal": "Data for The Netherlands",
+        "veiligheidsregio": "Data for the safety region {{safetyRegionName}}",
+        "veiligheidsregio_fallback": "Data by safety region",
+        "gemeente": "Data for the municipality {{municipalityName}}"
+      }
     }
   }
 }
