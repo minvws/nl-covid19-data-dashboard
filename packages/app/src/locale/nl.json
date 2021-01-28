@@ -58,7 +58,9 @@
     "menu": {
       "open_menu": "Open menu",
       "close_menu": "Sluit menu"
-    }
+    },
+    "terug_naar_alle_cijfers_veiligheidsregio": "Alle cijfers van deze veiligheidsregio",
+    "terug_naar_alle_cijfers_gemeente": "Alle cijfers van deze gemeente"
   },
   "ic_opnames_per_dag": {
     "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",

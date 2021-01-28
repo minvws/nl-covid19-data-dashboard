@@ -30,6 +30,7 @@ export function AppFooter({ lastGenerated }: { lastGenerated: string }) {
               id="footer-navigation"
             >
               <FooterList>
+                <Item href="/">{text.nav.links.actueel}</Item>
                 <Item href="/landelijk/vaccinaties">
                   {text.nav.links.index}
                 </Item>

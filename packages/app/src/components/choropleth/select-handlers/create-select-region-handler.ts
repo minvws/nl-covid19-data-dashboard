@@ -6,7 +6,7 @@ export type RegionSelectionHandler = (context: SafetyRegionProperties) => void;
 
 export function createSelectRegionHandler(
   router: NextRouter,
-  pageName: RegioPageName = 'actueel'
+  pageName: RegioPageName
 ): RegionSelectionHandler {
   return (context: SafetyRegionProperties) => {
     if (pageName === 'actueel') {
