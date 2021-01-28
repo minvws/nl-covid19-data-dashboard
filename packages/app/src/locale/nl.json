@@ -14,9 +14,7 @@
     "link": {
       "text": "Bekijk de toelichting van het RIVM",
       "href": "https://www.rivm.nl/nieuws/Britse-variant-wint-terrein-in-Nederland"
-    },
-    "subtitel": "Wekelijkse landelijke toelichting",
-    "datum": "12 december 2020"
+    }
   },
   "error_titel": {
     "text": "Er is iets misgegaan"
@@ -49,16 +47,11 @@
       "veiligheidsregio": "Veiligheidsregio's",
       "gemeente": "Gemeentes",
       "over_risiconiveaus": "Over de risiconiveaus",
-      "veelgestelde_vragen": "Veelgestelde vragen",
-      "actueel": "Actueel"
+      "veelgestelde_vragen": "Veelgestelde vragen"
     },
     "title": "Corona Dashboard",
-    "terug_naar_alle_cijfers": "Alle cijfers voor dit gebied",
-    "terug_naar_alle_cijfers_homepage": "Alle cijfers voor dit gebied",
-    "menu": {
-      "open_menu": "Open menu",
-      "close_menu": "Sluit menu"
-    }
+    "terug_naar_alle_cijfers": "Terug naar alle cijfers",
+    "terug_naar_alle_cijfers_homepage": "Terug naar alle cijfers"
   },
   "ic_opnames_per_dag": {
     "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
@@ -67,7 +60,7 @@
       "text": "Stichting NICE"
     },
     "titel": "Intensive care-opnames per dag",
-    "pagina_toelichting": "Aantal mensen met COVID-19 dat per dag op de intensive care (IC) is opgenomen, direct of vanaf de verpleegafdeling in een ziekenhuis. Om dubbel tellen te voorkomen wordt alleen de eerste IC opname van een patient meegeteld. Een opname op de IC zegt iets over de ernst van het ziektebeloop en is daarom belangrijk om de ontwikkeling van de epidemie goed te monitoren.",
+    "pagina_toelichting": "Aantal mensen met COVID-19 dat per dag op de intensive care (IC) is opgenomen, direct of vanaf de verpleegafdeling in een ziekenhuis. Om dubbel tellen te voorkomen wordt alleen de eerste IC-opname van een patiënt meegeteld. Een opname op de IC zegt iets over de ernst van het ziektebeloop en is daarom belangrijk om de ontwikkeling van de epidemie goed te monitoren.",
     "barscale_titel": "Intensive care-opnames per dag",
     "barscale_screenreader_text": "{{value}} intensive care-opnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "extra_uitleg": "Aantal mensen met bevestigd COVID-19 dat per dag op een intensive care-afdeling van een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de afgelopen drie dagen.\n\nLet op: Hoewel ziekenhuizen proberen om COVID-19 patiënten snel te registreren, is het aannemelijk dat de registratie achter loopt. Om deze reden zijn de aantallen van de afgelopen dagen meestal nog niet compleet.",
@@ -279,7 +272,7 @@
       "text": "RIVM"
     },
     "legenda_line": "Het aantal besmettelijke mensen in Nederland.",
-    "legenda_marge": "Het aantal besmettelijke mensen is een schatting. De onzekerheidsmarge geeft aan hoeveel hoger of lager het precieze aantal kan zijn.",
+    "legenda_marge": "De onzekerheidsmarge toont tussen welke waarden het aantal besmettelijke mensen zich bevindt.",
     "rangeLegendLabel": "Onzekerheidsmarge",
     "lineLegendLabel": "Besmettelijke mensen",
     "geen_signaalwaarde_beschikbaar": "Vanwege een storing is deze informatie op dit moment helaas niet compleet. Aan een oplossing wordt gewerkt.",
@@ -609,8 +602,7 @@
   },
   "utils": {
     "date_today": "vandaag",
-    "date_yesterday": "gisteren",
-    "date_day_before_yesterday": "eergisteren"
+    "date_yesterday": "gisteren"
   },
   "regionaal_index": {
     "your_safety_region": "Veiligheidsregio",
@@ -647,15 +639,7 @@
     },
     "niveau": "niveau",
     "clear_select_input": "Leegmaken",
-    "incomplete": "niet compleet",
-    "gm_singular": "gemeente",
-    "gm_plural": "gemeentes",
-    "vr_singular": "Veiligheidsregio",
-    "vr_plural": "Veiligheidsregio's",
-    "gisteren": "Gisteren",
-    "vandaag": "Vandaag",
-    "read_more": "Lees meer",
-    "absolute_date_template": "op {{date}}"
+    "incomplete": "niet compleet"
   },
   "seoHead": {
     "default_description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
@@ -856,7 +840,7 @@
     "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
     "screen_reader_graph_content": "{{value}} opnames.",
     "barscale_titel": "Gemeld aantal ziekenhuisopnames per dag",
-    "extra_uitleg": "Aantal mensen uit deze gemeente met COVID-19 dat per dag in een ziekenhuis (exclusief IC) is opgenomen. Dit cijfer is het aantal ziekenhuisopnames dat op één dag gemeld zijn. Dit kunnen ook meldingen zijn van opnamen van eerdere dagen. Patiënten kunnen in een ziekenhuis elders in Nederland zijn opgenomen.",
+    "extra_uitleg": "Aantal mensen uit deze gemeente met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer laat het aantal ziekenhuisopnames - inclusief directe IC opnames - zien dat op één dag gemeld is. Dit kunnen ook meldingen zijn van opnames van eerdere dagen. Patiënten kunnen in een ziekenhuis elders in Nederland zijn opgenomen.",
     "map_titel": "Verdeling ziekenhuisopnames in veiligheidsregio van {{municipality}}",
     "map_toelichting": "Deze kaart laat zien in welke gemeenten of veiligheidsregio’s patiënten wonen die met COVID-19 in het ziekenhuis zijn opgenomen. Let op: patiënten kunnen ook in een ziekenhuis in een ander deel van Nederland worden opgenomen. De kaart laat dus niet zien hoeveel patiënten per ziekenhuis worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE. Tergooi, Ziekenhuis Amstelland en het Flevoziekenhuis delen hun COVID-19 opnames op reguliere afdelingen op dit moment niet met Stichting NICE. Daardoor zijn de cijfers van sommige veiligheidsregio’s en gemeenten op de kaart mogelijk lager dan in werkelijkheid het geval is.",
     "linechart_titel": "Ziekenhuisopnames over tijd",
@@ -961,7 +945,7 @@
     "nodata_sidebar": "Deze informatie is niet beschikbaar voor deze gemeente.",
     "total_installation_count_titel": "Aantal meetlocaties",
     "total_installation_count_description": "Wekelijks aantal rioolwaterzuiveringsinstallaties die minimaal één keer een meting hebben gerapporteerd. Het weekgemiddelde wordt berekend door het gemiddelde te nemen van alle metingen op deze locaties. Per week kan dit aantal variëren omdat niet alle metingen altijd lukken.",
-    "rwzi_abbrev": "Rioolwaterzuiveringsinstallatie",
+    "rwzi_abbrev": "",
     "graph_daily_label_text_rwzi": "Meetwaarden locatie ({{name}})",
     "graph_selected_rwzi_placeholder": "Selecteer locatie",
     "graph_range_description": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners over tijd",
@@ -1008,19 +992,19 @@
     "types": {
       "1": {
         "titel": "Waakzaam",
-        "toelichting": "De situatie is onder controle te houden. Het aantal nieuwe besmettingen is laag: per week minder dan 35 mensen per 100.000 inwoners. De druk op de zorg valt mee."
+        "toelichting": ""
       },
       "2": {
         "titel": "Zorgelijk",
-        "toelichting": "De situatie is lastig onder controle te houden. Er zijn veel nieuwe besmettingen: per week tussen de 35 en 150 mensen per 100.000 inwoners. De druk op de zorg is groot."
+        "toelichting": ""
       },
       "3": {
         "titel": "Ernstig",
-        "toelichting": "De situatie is slecht. Er is een groot aantal nieuwe besmettingen: per week tussen de 150 en 250 mensen per 100.000 inwoners. De druk op de zorg is erg groot."
+        "toelichting": ""
       },
       "4": {
         "titel": "Zeer Ernstig",
-        "toelichting": "De situatie is erg slecht. Er zijn extreem veel nieuwe besmettingen: per week boven de 250 mensen per 100.000 inwoners. De druk op de zorg is extreem groot."
+        "toelichting": ""
       },
       "5": {
         "titel": "Lockdown",
@@ -1028,14 +1012,10 @@
       }
     },
     "legenda": {
-      "titel": "Legenda",
-      "geen_regio": "geen regio's",
-      "regios": "{{amount}} regio's"
+      "titel": "Legenda"
     },
     "valid_from": "Geldig vanaf {{validFrom}}",
-    "sidebar_label": "Risiconiveau:",
-    "tile_title": "Wat betekenen de vier risiconiveaus?",
-    "lees_meer": "Meer informatie over de risiconiveaus"
+    "sidebar_label": "Risiconiveau:"
   },
   "gemeente_layout": {
     "headings": {
@@ -1222,10 +1202,7 @@
     "url": "https://coronadashboard.government.nl/veelgestelde-vragen"
   },
   "waarde_annotaties": {
-    "riool_normalized": "x100 miljard",
-    "x_miljoen": "x miljoen",
-    "totaal": "totaal",
-    "x_100k": "x 100.000"
+    "riool_normalized": "x100 miljard"
   },
   "gedrag_onderwerpen": {
     "wash_hands": "Was vaak je handen",
@@ -1423,7 +1400,6 @@
   "infected_age_groups": {
     "title": "Verdeling naar leeftijd",
     "description": "De blauwe rechterbalken in deze grafiek laten zien tot welke leeftijdsgroep positief geteste personen behoren. De grijze linkerbalken tonen hoe groot elke leeftijdsgroep is ten opzichte van de hele Nederlandse bevolking. De blauwe en grijze balken laten samen zien of leeftijdsgroepen naar verhouding meer of minder positief geteste personen hebben. Bijvoorbeeld: van alle positief geteste personen is 10% een dertiger (blauwe balk) en van alle Nederlanders is 14% een dertiger (grijze balk). De leeftijdsgroep dertigers heeft in dit voorbeeld naar verhouding minder positief geteste personen. De grafiek wordt dagelijks bijgewerkt en gaat alleen over de meest recent gemelde gevallen.",
-    "example": "Bijvoorbeeld: Van alle positief geteste mensen is {{infectedPercentage}} tussen de {{ageGroupRange}} jaar. Van alle Nederlanders is {{ageGroupPercentage}} tussen de {{ageGroupRange}} jaar.",
     "graph": {
       "age_group_percentage_title": "Verdeling leeftijdsgroepen in Nederland",
       "age_group_percentage_tooltip": "van de bevolking is {{ageGroupRange}} jaar",
@@ -1434,7 +1410,8 @@
       "clipped_value_message": "Deze waarde is groter dan in de grafiek is weergegeven",
       "value_percentage_title": "Positieve testen per leeftijdsgroep",
       "value_percentage_tooltip": "van het aantal positief geteste mensen is {{ageGroupRange}} jaar"
-    }
+    },
+    "example": "Bijvoorbeeld: Van alle positief geteste mensen is {{infectedPercentage}} tussen de {{ageGroupRange}} jaar. Van alle Nederlanders is {{ageGroupPercentage}} tussen de {{ageGroupRange}} jaar."
   },
   "gehandicaptenzorg_besmette_locaties": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -2028,9 +2005,6 @@
         "download": ""
       }
     },
-    "verwachte_leveringen": {
-      "van_week_tot_week": "Week {{weekNumberFrom}} tot week {{weekNumberTo}}"
-    },
     "data": {
       "difference": "Do not remove this key. It is required as a temporary workaround",
       "sidebar": {
@@ -2116,260 +2090,6 @@
     "grafiek": {
       "titel": "Verwachte leveringen per week",
       "omschrijving": "Deze grafiek toont het aantal goedgekeurde vaccins dat Nederland de komende zes weken verwacht te krijgen."
-    }
-  },
-  "editorial_detail": {
-    "back_link": {
-      "text": "Terug naar actueel"
-    }
-  },
-  "article_detail": {
-    "back_link": {
-      "text": "Terug naar alle artikelen"
-    }
-  },
-  "articles_metadata": {
-    "title": "Artikelen | Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
-    "description": "",
-    "url": "https://coronadashboard.rijksoverheid.nl/artikelen"
-  },
-  "common_actueel": {
-    "terug_naar_landelijk": "Terug naar landelijke situatie",
-    "laatst_bijgewerkt": "Het dashboard wordt dagelijks rond 15:20 voorzien van nieuwe data."
-  },
-  "nationaal_actueel": {
-    "title": "De actuele situatie in {{the_netherlands}}",
-    "the_netherlands": "Nederland",
-    "metadata": {
-      "title": "Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
-      "description": "Informatie over de ontwikkeling van het coronavirus in Nederland."
-    },
-    "risiconiveaus": {
-      "selecteer_titel": "De risicokaart van Nederland",
-      "selecteer_toelichting": "De kaart geeft het risiconiveau per veiligheidsregio weer.\n\n**Bij elk risiconiveau horen bepaalde maatregelen. Die maatregelen staan in de routekaart die het kabinet heeft gemaakt. Er geldt een landelijke lockdown tot en met in ieder geval 9 februari. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**"
-    },
-    "data_sitemap_titel": "Onderwerpen op dit dashboard",
-    "data_sitemap_toelichting": "Ga direct naar de volgende onderwerpen:",
-    "mini_trend_tiles": {
-      "positief_getest": {
-        "title": "Aantal positieve testen"
-      },
-      "ziekenhuis_opnames": {
-        "title": "Ziekenhuisopnames"
-      },
-      "ic_opnames": {
-        "title": "Intensive care-opnames"
-      },
-      "toegediende_vaccins": {
-        "title": "Toegediende vaccins",
-        "sub_title": "Verwachte levering",
-        "administered_tests": "Tot nu toe zijn er {{administeredVaccines}} vaccins toegediend. Dit cijfer omvat zowel eerste als tweede prikken.",
-        "supply": "Nederland verwacht de komende zes weken {{expectedDelivery}} goedgekeurde vaccins te krijgen."
-      }
-    },
-    "data_driven_texts": {
-      "infected_people_total": {
-        "value": {
-          "zero": "{{newDate}} zijn er geen nieuwe positieve tests gemeld.",
-          "singular": "{{newDate}} is {{propertyValue}} nieuwe positieve test gemeld.",
-          "plural": "{{newDate}} zijn er {{propertyValue}} nieuwe positieve tests gemeld."
-        },
-        "difference": {
-          "zero": "Dat is hetzelfde als {{relativeOldDate}}.",
-          "singular": "Dat is er {{differenceIndicator}} dan de vorige waarde.",
-          "plural": "Dat zijn er {{differenceIndicator}} dan de vorige waarde."
-        }
-      },
-      "intake_hospital_ma": {
-        "value": {
-          "zero": "{{newDate}} zijn er geen nieuwe ziekenhuisopnames gemeld.",
-          "singular": "{{newDate}} is {{propertyValue}} nieuwe ziekenhuisopname gemeld.",
-          "plural": "{{newDate}} zijn {{propertyValue}} nieuwe ziekenhuisopnames gemeld."
-        },
-        "difference": {
-          "zero": "Dit is hetzelfde als {{relativeOldDate}}.",
-          "singular": "Dat is er {{differenceIndicator}} dan de vorige waarde.",
-          "plural": "Dat zijn er {{differenceIndicator}} dan de vorige waarde."
-        }
-      },
-      "intake_intensivecare_ma": {
-        "value": {
-          "zero": "{{newDate}} zijn er geen nieuwe ic opnames gemeld.",
-          "singular": "{{newDate}} is {{propertyValue}} nieuwe ic opname gemeld.",
-          "plural": "{{newDate}} zijn {{propertyValue}} nieuwe intensive care-opnames gemeld."
-        },
-        "difference": {
-          "zero": "Dit is hetzelfde als {{relativeOldDate}}.",
-          "singular": "Dat is er {{differenceIndicator}} dan de vorige waarde.",
-          "plural": "Dat zijn er {{differenceIndicator}} dan de vorige waarde."
-        }
-      }
-    },
-    "quick_links": {
-      "header": "Bekijk alle cijfers van het dashboard",
-      "links": {
-        "nationaal": "Cijfers van Nederland",
-        "veiligheidsregio": "Cijfers per veiligheidsregio",
-        "gemeente": "Cijfers per gemeente"
-      }
-    },
-    "latest_articles": {
-      "title": "Meer lezen over het coronavirus",
-      "subtitle": "Hier vindt u geregeld nieuwe berichten die allerlei zaken rondom de coronacijfers uitleggen.",
-      "all_articles": "Bekijk alle artikelen"
-    }
-  },
-  "common.tooltip.positive_tested_value": "",
-  "search": {
-    "placeholder": "Zoek een gemeente of veiligheidsregio",
-    "clear": "Zoekopdracht wissen",
-    "no_hits": "Geen {{subject}} gevonden met “{{search}}”"
-  },
-  "veiligheidsregio_actueel": {
-    "title": "De actuele situatie in veiligheidsregio {{safetyRegionName}}",
-    "metadata": {
-      "title": "Actuele situatie in de veiligheidsregio {{safetyRegionName}}",
-      "description": "Actuele situatie in de veiligheidsregio {{safetyRegionName}}"
-    },
-    "risiconiveaus": {
-      "selecteer_titel": "De risicokaart van Nederland",
-      "selecteer_toelichting": "De kaart geeft het risiconiveau per veiligheidsregio weer.\n\n**Bij elk risiconiveau horen bepaalde maatregelen. Die maatregelen staan in de routekaart die het kabinet heeft gemaakt. Er geldt een landelijke lockdown tot en met in ieder geval 9 februari. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**"
-    },
-    "risoconiveau_maatregelen": {
-      "title": "Risiconiveau & maatregelen",
-      "description": "Voor de veiligheidsregio geldt het risiconiveau",
-      "bekijk_href": "Bekijk de maatregelen"
-    },
-    "mini_trend_tiles": {
-      "positief_getest": {
-        "title": "Aantal positieve testen"
-      },
-      "ziekenhuis_opnames": {
-        "title": "Ziekenhuisopnames"
-      },
-      "ic_opnames": {
-        "title": "Intensive care-opnames"
-      }
-    },
-    "data_driven_texts": {
-      "infected_people_total": {
-        "value": {
-          "zero": "{{newDate}} zijn er geen positieve tests gemeld.",
-          "singular": "{{newDate}} was er {{propertyValue}} gemelde positieve test.",
-          "plural": "{{newDate}} waren er {{propertyValue}} gemelde positieve tests."
-        },
-        "difference": {
-          "zero": "Dit is hetzelfde als {{relativeOldDate}}.",
-          "singular": "Dit is {{differenceIndicator}} dan de vorige waarde.",
-          "plural": "Dit is {{differenceIndicator}} dan de vorige waarde."
-        }
-      },
-      "intake_hospital_ma": {
-        "value": {
-          "zero": "{{newDate}} zijn er geen ziekenhuisopnames gemeld.",
-          "singular": "{{newDate}} is er {{propertyValue}} ziekenhuisopname gemeld.",
-          "plural": "{{newDate}} zijn er {{propertyValue}} ziekenhuisopnames gemeld."
-        },
-        "difference": {
-          "zero": "Dit is hetzelfde als {{relativeOldDate}}.",
-          "singular": "Dit is {{differenceIndicator}} dan de vorige waarde.",
-          "plural": "Dit is {{differenceIndicator}} dan de vorige waarde."
-        }
-      },
-      "intake_intensivecare_ma": {
-        "value": {
-          "zero": "{{newDate}} zijn er geen intensive care opnames gemeld.",
-          "singular": "{{newDate}} is er {{propertyValue}} intensive care opname gemeld.",
-          "plural": "{{newDate}} zijn er {{propertyValue}} intensive care opnames gemeld."
-        },
-        "difference": {
-          "zero": "Dit is hetzelfde als {{relativeOldDate}}.",
-          "singular": "Dit is {{differenceIndicator}} dan de vorige waarde.",
-          "plural": "Dit is {{differenceIndicator}} dan de vorige waarde."
-        }
-      }
-    },
-    "quick_links": {
-      "header": "Bekijk alle cijfers van het dashboard",
-      "links": {
-        "nationaal": "Cijfers van Nederland",
-        "veiligheidsregio": "Cijfers van veiligheidsregio {{safetyRegionName}}",
-        "gemeente": "Cijfers per gemeente"
-      }
-    }
-  },
-  "gemeente_actueel": {
-    "title": "Actuele situatie in de gemeente {{municipalityName}}",
-    "metadata": {
-      "title": "Actuele situatie in {{municipalityName}}",
-      "description": "Actuele situatie in {{municipalityName}}"
-    },
-    "risiconiveaus": {
-      "selecteer_titel": "De risicokaart van Nederland",
-      "selecteer_toelichting": "De kaart geeft het risiconiveau per veiligheidsregio weer.\n\n**Bij elk risiconiveau horen bepaalde maatregelen. Die maatregelen staan in de routekaart die het kabinet heeft gemaakt. Er geldt een landelijke lockdown tot en met in ieder geval 9 februari. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**"
-    },
-    "risoconiveau_maatregelen": {
-      "title": "Risiconiveau & maatregelen",
-      "description": "Voor de veiligheidsregio van deze gemeente geldt het risiconiveau",
-      "bekijk_href": "Bekijk de maatregelen"
-    },
-    "mini_trend_tiles": {
-      "positief_getest": {
-        "title": "Aantal positieve testen"
-      },
-      "ziekenhuis_opnames": {
-        "title": "Ziekenhuisopnames"
-      },
-      "ic_opnames": {
-        "title": "Intensive care-opnames"
-      }
-    },
-    "data_driven_texts": {
-      "infected_people_total": {
-        "value": {
-          "zero": "{{newDate}} zijn er geen positief geteste personen gemeld.",
-          "singular": "{{newDate}} was er {{propertyValue}} positief getest persoon.",
-          "plural": "{{newDate}} waren er {{propertyValue}} positief geteste mensen."
-        },
-        "difference": {
-          "zero": "Dit is hetzelfde als {{relativeOldDate}}.",
-          "singular": "Dit is {{differenceIndicator}} dan de vorige waarde.",
-          "plural": "Dit is {{differenceIndicator}} dan de vorige waarde."
-        }
-      },
-      "intake_hospital_ma": {
-        "value": {
-          "zero": "{{newDate}} waren er geen nieuw gemelde ziekenhuisopnames.",
-          "singular": "{{newDate}} waren er {{propertyValue}} nieuw gemelde ziekenhuisopnames.",
-          "plural": "{{newDate}} zijn er {{propertyValue}} ziekenhuisopnames gemeld."
-        },
-        "difference": {
-          "zero": "Dit is hetzelfde als {{relativeOldDate}}.",
-          "singular": "Dit is {{differenceIndicator}} dan de vorige waarde.",
-          "plural": "Dit is {{differenceIndicator}} dan de vorige waarde."
-        }
-      },
-      "intake_intensivecare_ma": {
-        "value": {
-          "zero": "{{newDate}} waren er geen nieuw gemelde intensive care-opnames.",
-          "singular": "{{newDate}} waren er {{propertyValue}} nieuw gemelde intensive care-opnames.",
-          "plural": "{{newDate}} waren er {{propertyValue}} nieuwe gemelde intensive care-opnames."
-        },
-        "difference": {
-          "zero": "Dit is hetzelfde als {{relativeOldDate}}.",
-          "singular": "Dit is {{differenceIndicator}} dan de vorige waarde.",
-          "plural": "Dit is {{differenceIndicator}} dan de vorige waarde."
-        }
-      }
-    },
-    "quick_links": {
-      "header": "Bekijk alle cijfers van het dashboard",
-      "links": {
-        "nationaal": "Cijfers van Nederland",
-        "veiligheidsregio": "Cijfers van veiligheidsregio {{safetyRegionName}}",
-        "veiligheidsregio_fallback": "Cijfers per veiligheidsregio",
-        "gemeente": "Cijfers van gemeente {{municipalityName}}"
-      }
     }
   }
 }
