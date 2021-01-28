@@ -1218,7 +1218,8 @@
   "waarde_annotaties": {
     "riool_normalized": "x 100 billion",
     "x_100k": "x 100.000",
-    "totaal": "total"
+    "totaal": "total",
+    "tot": "to"
   },
   "gedrag_onderwerpen": {
     "wash_hands": "Wash your hands often",
