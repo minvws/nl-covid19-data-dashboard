@@ -1,5 +1,6 @@
 import { css } from '@styled-system/css';
 import { ParentSize } from '@visx/responsive';
+import { Fragment } from 'react';
 import styled from 'styled-components';
 import VaccinatieIcon from '~/assets/vaccinaties.svg';
 import { ChartTile } from '~/components-styled/chart-tile';
@@ -64,22 +65,16 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             <KpiValue absolute={parseFloat(text.data.kpi_total.value)} />
             <Text mb={3}>{text.data.kpi_total.description_first}</Text>
             {text.data.kpi_total.administered.map((item, index) => (
-              <>
+              <Fragment key={index}>
                 {item.value && item.description && (
-                  <Heading
-                    key={index}
-                    level={4}
-                    fontSize={'1.1em'}
-                    mt={3}
-                    mb={0}
-                  >
+                  <Heading level={4} fontSize={'1.1em'} mt={3} mb={0}>
                     <span css={css({ color: 'data.primary' })}>
                       {formatNumber(parseFloat(item.value))}
                     </span>
                     {` ${item.description}`}
                   </Heading>
                 )}
-              </>
+              </Fragment>
             ))}
             <Text mb={3}>{text.data.kpi_total.description_second}</Text>
           </KpiTile>
