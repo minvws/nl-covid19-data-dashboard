@@ -349,9 +349,8 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
 
     // @ts-expect-error
     const coords = localPoint(event.target.ownerSVGElement, event);
-    const left = tooltipData.x - tooltipData.width / 2;
     showTooltip({
-      tooltipLeft: Math.max(coords?.x || 0, left),
+      tooltipLeft: coords?.x || 0,
       tooltipTop: coords?.y || 0,
       tooltipData,
     });
