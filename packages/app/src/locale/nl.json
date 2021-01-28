@@ -55,6 +55,8 @@
     "title": "Corona Dashboard",
     "terug_naar_alle_cijfers": "Alle cijfers voor dit gebied",
     "terug_naar_alle_cijfers_homepage": "Alle cijfers voor dit gebied",
+    "terug_naar_alle_cijfers_veiligheidsregio": "Alle cijfers van deze veiligheidsregio",
+    "terug_naar_alle_cijfers_gemeente": "Alle cijfers van deze gemeente",
     "menu": {
       "open_menu": "Open menu",
       "close_menu": "Sluit menu"
