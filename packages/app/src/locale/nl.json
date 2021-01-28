@@ -1995,8 +1995,8 @@
     "title": "COVID-19-vaccinaties",
     "description": "Vaccineren is de belangrijkste stap naar een samenleving zonder coronaregels. Op 6 januari 2021 is Nederland begonnen met vaccineren. Uiteindelijk komt iedereen van 18 jaar of ouder aan de beurt. De cijfers op deze pagina laten zien hoeveel vaccins zijn toegediend en hoeveel vaccins er beschikbaar komen.",
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "date_unix": "1611750085",
-    "date_of_insertion_unix": "1611750085",
+    "date_unix": "1611838697",
+    "date_of_insertion_unix": "1611838697",
     "reference": {
       "href": "/verantwoording#vaccinatie",
       "text": "Lees meer over de bron van de vaccinatiecijfers in de cijferverantwoording."
@@ -2032,24 +2032,24 @@
       "difference": "Do not remove this key. It is required as a temporary workaround",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "185356",
-          "date_unix": "1611750085",
-          "date_of_insertion_unix": "1611750085"
+          "total_vaccinated": "203450",
+          "date_unix": "1611838697",
+          "date_of_insertion_unix": "1611838697"
         }
       },
       "kpi_total": {
         "title": "Aantal toegediende vaccins",
-        "value": "185356",
+        "value": "203450",
         "description": "Dit getal laat zien hoeveel vaccins in totaal zijn toegediend. Het kan een paar dagen duren voordat een prik wordt gemeld. Het daadwerkelijke aantal gezette prikken ligt daarom hoger. Mensen hebben twee prikken nodig voor een volledige vaccinatie.",
-        "date_of_report_unix": "1611750085",
-        "date_of_insertion_unix": "1611750085",
+        "date_of_report_unix": "1611838697",
+        "date_of_insertion_unix": "1611838697",
         "administered": [
           {
-            "value": "128311",
+            "value": "140205",
             "description": "toegediend door GGD'en"
           },
           {
-            "value": "40216",
+            "value": "46416",
             "description": "toegediend door ziekenhuizen"
           },
           {
