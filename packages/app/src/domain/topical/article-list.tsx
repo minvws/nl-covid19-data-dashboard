@@ -91,7 +91,6 @@ export function ArticleList({ articleSummaries, hideLink }: ArticleListProps) {
 
 const ArticleBox = styled.div(
   css({
-    display: 'inline-block',
     marginBottom: 4,
     width: asResponsiveArray({
       _: '100%',
