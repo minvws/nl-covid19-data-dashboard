@@ -14,6 +14,19 @@ interface AppContentProps {
   hideMenuButton?: boolean;
 }
 
+function getMenuOpenText(pathname: string) {
+  if (pathname.startsWith('/landelijk')) {
+    return siteText.nav.terug_naar_alle_cijfers_homepage;
+  }
+  if (pathname.startsWith('/veiligheidsregio')) {
+    return siteText.nav.terug_naar_alle_cijfers_veiligheidsregio;
+  }
+  if (pathname.startsWith('/gemeente')) {
+    return siteText.nav.terug_naar_alle_cijfers_gemeente;
+  }
+  return siteText.nav.terug_naar_alle_cijfers;
+}
+
 export function AppContent({
   children,
   sidebarComponent,
@@ -32,8 +45,9 @@ export function AppContent({
    * but it's good enough for now I guess
    */
   const isMenuOpen =
-    (router.pathname === '/landelijk' && !('menu' in router.query)) ||
-    router.query.menu === '1';
+    router.pathname == '/landelijk' || router.query.menu === '1';
+
+  const menuOpenText = getMenuOpenText(router.pathname);
 
   return (
     <MaxWidth px={[0, 0, 0, 0, 3]}>
@@ -48,10 +62,11 @@ export function AppContent({
               position: 'relative',
             })}
           >
-            <LinkWithIcon icon={<ArrowIcon />} href={menuOpenUrl}>
-              {router.pathname === '/landelijk'
-                ? siteText.nav.terug_naar_alle_cijfers_homepage
-                : siteText.nav.terug_naar_alle_cijfers}
+            <LinkWithIcon
+              icon={<ArrowIcon css={css({ transform: 'rotate(90deg)' })} />}
+              href={menuOpenUrl}
+            >
+              {menuOpenText}
             </LinkWithIcon>
           </MenuLinkContainer>
         )}
@@ -71,11 +86,12 @@ export function AppContent({
             <ResponsiveVisible isVisible={!isMenuOpen}>
               {children}
             </ResponsiveVisible>
-            <MenuLinkContainer isVisible={!isMenuOpen}>
-              <LinkWithIcon icon={<ArrowIcon />} href={menuOpenUrl}>
-                {router.pathname === '/landelijk'
-                  ? siteText.nav.terug_naar_alle_cijfers_homepage
-                  : siteText.nav.terug_naar_alle_cijfers}
+            <MenuLinkContainer isVisible={!isMenuOpen && !hideMenuButton}>
+              <LinkWithIcon
+                icon={<ArrowIcon css={css({ transform: 'rotate(90deg)' })} />}
+                href={menuOpenUrl}
+              >
+                {menuOpenText}
               </LinkWithIcon>
             </MenuLinkContainer>
           </Box>
