@@ -2028,9 +2028,6 @@
         "download": ""
       }
     },
-    "verwachte_leveringen": {
-      "van_week_tot_week": "Week {{weekNumberFrom}} tot week {{weekNumberTo}}"
-    },
     "data": {
       "difference": "Do not remove this key. It is required as a temporary workaround",
       "sidebar": {
@@ -2116,6 +2113,9 @@
     "grafiek": {
       "titel": "Verwachte leveringen per week",
       "omschrijving": "Deze grafiek toont het aantal goedgekeurde vaccins dat Nederland de komende zes weken verwacht te krijgen."
+    },
+    "verwachte_leveringen": {
+      "van_week_tot_week": "Week {{weekNumberFrom}} tot week {{weekNumberTo}}"
     }
   },
   "editorial_detail": {
