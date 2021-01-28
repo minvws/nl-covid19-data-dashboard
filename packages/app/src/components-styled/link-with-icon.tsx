@@ -15,6 +15,7 @@ interface LinkWithIconProps {
 
 interface IconProps {
   icon: ReactNode;
+  singleWord?: boolean;
 }
 
 export function LinkWithIcon({
@@ -63,7 +64,7 @@ export function LinkWithIcon({
             {!splittedString.length ? children : firstWords}
             <span css={css({ display: 'inline-block' })}>
               {splittedString[splittedString.length - 1]}
-              <IconLarge icon={icon} />
+              <IconLarge icon={icon} singleWord={splittedString.length === 1} />
             </span>
           </>
         )}
@@ -79,64 +80,21 @@ export function LinkWithIcon({
     );
   }
 
-  function IconLarge({ icon }: IconProps) {
+  function IconLarge({ icon, singleWord }: IconProps) {
     return (
       <span
-        css={css({ svg: { height: '16px', width: '18px', marginLeft: 2 } })}
+        css={css({
+          svg: {
+            height: '16px',
+            width: '18px',
+            marginLeft: 2,
+            position: singleWord ? 'absolute' : 'relative',
+            minHeight: '100%',
+          },
+        })}
       >
         {icon}
       </span>
     );
   }
-
-  return (
-    <Link href={href} passHref>
-      <a
-        css={css({
-          display: 'inline-block',
-          fontWeight,
-          position: 'relative',
-          textDecoration: 'none',
-          color: headingLink ? 'body' : '',
-          '&:hover,&:focus': {
-            color: headingLink ? 'blue' : '',
-            textDecoration: headingLink ? '' : 'underline',
-          },
-        })}
-      >
-        {iconPlacement == 'right' && !headingLink && children}
-        {!headingLink && (
-          <span
-            css={css({
-              svg: {
-                height: '11px',
-                width: '13px',
-                mx: '3px',
-              },
-            })}
-          >
-            {icon}
-          </span>
-        )}
-        {iconPlacement == 'left' && !headingLink && children}
-        {headingLink && (
-          <>
-            {!splittedString.length
-              ? children
-              : `${splittedString.slice(0, -1).join(' ')} `}
-            <span css={css({ display: 'inline-block' })}>
-              {splittedString[splittedString.length - 1]}
-              <span
-                css={css({
-                  svg: { height: '16px', width: '18px', marginLeft: 2 },
-                })}
-              >
-                {icon}
-              </span>
-            </span>
-          </>
-        )}
-      </a>
-    </Link>
-  );
 }
