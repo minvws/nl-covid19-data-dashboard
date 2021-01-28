@@ -18,23 +18,24 @@ import { MouseEvent, TouchEvent, useCallback, useMemo, useState } from 'react';
 import ResizeObserver from 'resize-observer-polyfill';
 import styled from 'styled-components';
 import { Box } from '~/components-styled/base';
+import { Legenda, LegendItem } from '~/components-styled/legenda';
+import { InlineText } from '~/components-styled/typography';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
+import siteText from '~/locale';
 import { colors } from '~/style/theme';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { useBreakpoints } from '~/utils/useBreakpoints';
-import { Legenda, LegendItem } from '../legenda';
-import { InlineText } from '../typography';
 import {
   calculateSeriesMaximum,
+  formatDayMonth,
   getSeriesData,
   getTotalSumForMetricProperty,
   getValuesInTimeframe,
+  getWeekInfo,
   SeriesValue,
   Value,
-  getWeekNumber,
-  formatDayMonth,
 } from './logic';
-import siteText from '~/locale';
 
 const tooltipStyles = {
   ...defaultStyles,
@@ -86,7 +87,11 @@ type TooltipData = {
  * showing data, the formatter has all the information it needs to render any
  * kind of tooltip
  */
-type TooltipFormatter = (value: SeriesValue, key: string) => JSX.Element;
+type TooltipFormatter = (
+  value: SeriesValue,
+  key: string,
+  color?: string
+) => JSX.Element;
 
 type HoverEvent = TouchEvent<SVGElement> | MouseEvent<SVGElement>;
 
@@ -209,7 +214,7 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
 
   const formatDateString = useCallback(
     (date: Date) => {
-      const [, weekNumber] = getWeekNumber(date);
+      const { weekNumber } = getWeekInfo(date);
 
       return isTinyScreen ? `Wk ${weekNumber}` : `Week ${weekNumber}`;
     },
@@ -246,7 +251,7 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
   });
 
   /**
-   * This format function should be moved outside of the chart if we want to
+   * This format function should be moved outside of the chart if we want to make
    * this component reusable. But it depends on a lot of calculated data like
    * seriesSum and labelByKey, so it would make the calling context quite messy
    * if not done in a good way.
@@ -254,41 +259,58 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
    * I'm leaving that as an exercise for later.
    */
   const formatTooltip = useCallback(
-    (data: SeriesValue, key: string) => {
+    (data: SeriesValue, key: string, color: string) => {
       const date = getDate(data);
 
       const isMillion = (v: number) => v / NUM_1M > 1;
 
-      const [, , weekStartDate, weekEndDate] = getWeekNumber(date);
+      const { weekStartDate, weekEndDate } = getWeekInfo(date);
 
       const isTotalMillion = isMillion(seriesSumByKey[key]);
       const isWeekMillion = isMillion(data[key]);
 
+      const allDates = series.map(getDate);
+
+      const { weekNumber: weekNumberFrom } = getWeekInfo(allDates[0]);
+      const { weekNumber: weekNumberTo } = getWeekInfo(
+        allDates[allDates.length - 1]
+      );
+
       return (
-        <Box p={2}>
+        <Box p={2} as="section" position="relative">
+          <Box display="flex" alignItems="center" mb={2}>
+            <Square color={color} />
+            <InlineText ml={2} fontWeight="bold">
+              {labelByKey[key]}
+            </InlineText>
+          </Box>
           <Box mb={2}>
             <InlineText fontWeight="bold">
               {`${formatDayMonth(weekStartDate)} - ${formatDayMonth(
                 weekEndDate
-              )}`}
-              :
+              )}: `}
             </InlineText>
             {isWeekMillion
-              ? ` ${formatPercentage(data[key] / NUM_1M)} mln`
-              : ` ${formatNumber(Math.round(data[key] / NUM_1K))} k`}
+              ? `${formatPercentage(data[key] / NUM_1M)} mln`
+              : `${formatNumber(Math.round(data[key] / NUM_1K))} k`}
           </Box>
 
           <Box mb={2}>
-            <InlineText fontWeight="bold">{labelByKey[key]}:</InlineText>
+            <InlineText fontWeight="bold">
+              {`${replaceVariablesInText(
+                siteText.vaccinaties.verwachte_leveringen.van_week_tot_week,
+                { weekNumberFrom, weekNumberTo }
+              )}: `}
+            </InlineText>
             {isTotalMillion
-              ? ` ${formatPercentage(seriesSumByKey[key] / NUM_1M)} mln `
-              : ` ${formatNumber(Math.round(seriesSumByKey[key] / NUM_1K))} k `}
+              ? `${formatPercentage(seriesSumByKey[key] / NUM_1M)} mln `
+              : `${formatNumber(Math.round(seriesSumByKey[key] / NUM_1K))} k `}
             {siteText.waarde_annotaties.totaal}
           </Box>
         </Box>
       );
     },
-    [labelByKey, seriesSumByKey]
+    [labelByKey, seriesSumByKey, series]
   );
 
   /**
@@ -463,8 +485,16 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
           >
             <TooltipContainer>
               {props.formatTooltip
-                ? props.formatTooltip(tooltipData.bar.data, tooltipData.key)
-                : formatTooltip(tooltipData.bar.data, tooltipData.key)}
+                ? props.formatTooltip(
+                    tooltipData.bar.data,
+                    tooltipData.key,
+                    tooltipData.color
+                  )
+                : formatTooltip(
+                    tooltipData.bar.data,
+                    tooltipData.key,
+                    tooltipData.color
+                  )}
             </TooltipContainer>
           </TooltipInPortal>
         )}
@@ -505,5 +535,14 @@ export const TooltipContainer = styled.div(
     px: 2,
     py: 1,
     fontSize: 1,
+  })
+);
+
+const Square = styled.span<{ color: string }>((x) =>
+  css({
+    display: 'inline-block',
+    backgroundColor: x.color,
+    width: 15,
+    height: 15,
   })
 );

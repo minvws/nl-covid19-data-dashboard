@@ -712,7 +712,7 @@
     "datums": "Calculated: {{dateOfReport}}. Updated daily.",
     "screen_reader_graph_content": "{{value}} admissions.",
     "barscale_titel": "Hospital admissions reported per day",
-    "extra_uitleg": "Number of people from this safety region with COVID-19 admitted to hospital (excl. ICU) on a daily basis. This number entails the amount of hospital admissions reported on one day and can include admissions from previous days. Patients can be admitted to hospitals in other regions.",
+    "extra_uitleg": "Number of people from this safety region with COVID-19 admitted to hospital on a daily basis. This figure shows how many hospital admissions are reported per day, including patients from outside the hosptial admitted directly to the ICU. Patients can be admitted to hospitals in other regions.",
     "map_titel": "Distribution of hospital admissions in {{safetyRegion}}",
     "map_toelichting": "This map shows, by municipality or safety region, where people live who have been admitted to hospital with COVID-19. Please note that people may have been admitted to a hospital located somewhere else in the Netherlands; the map therefore does not show admission numbers per hospital. The figures here reflect the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE). Tergooi hospitals, Amstelland Hospital and Flevoziekenhuis do not currently share their data on COVID-19 admission to clinic wards with Stichting NICE. As a result, the actual figures in some municipalities and safety regions may be higher than they appear on the map.",
     "linechart_titel": "Progression in hospital admissions over time",
@@ -762,7 +762,13 @@
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -850,7 +856,7 @@
     "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
     "screen_reader_graph_content": "{{value}} admissions.",
     "barscale_titel": "Hospital admissions reported per day",
-    "extra_uitleg": "Number of people from this municipality with COVID-19 admitted to hospital (excl. ICU) on a daily basis. This number entails the amount of hospital admissions reported on one day. These could include admissions from previous days. Patients can be admitted to hospitals in other regions.",
+    "extra_uitleg": "Number of people from this municipality with COVID-19 admitted to hospital on a daily basis. This figure shows how many hospital admissions are reported per day, including patients from outside the hosptial admitted directly to the ICU. Patients can be admitted to hospitals in other regions.",
     "map_titel": "Distribution of hospital admissions in safety region of {{municipality}}",
     "map_toelichting": "This map shows, by municipality or safety region, where people live who have been admitted to hospital with COVID-19. Please note that people may have been admitted to a hospital located somewhere else in the Netherlands; the map therefore does not show admission numbers per hospital. The figures here reflect the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE). Tergooi hospitals, Amstelland Hospital and Flevoziekenhuis do not currently share their data on COVID-19 admission to clinic wards with Stichting NICE. As a result, the actual figures in some municipalities and safety regions may be higher than they appear on the map.",
     "linechart_titel": "Progression in hospital admissions over time",
@@ -1216,9 +1222,10 @@
     "url": "https://coronadashboard.government.nl/veelgestelde-vragen"
   },
   "waarde_annotaties": {
-    "riool_normalized": "x 100 billion",
-    "x_100k": "x 100.000",
-    "totaal": "total"
+    "riool_normalized": "x100 billion",
+    "x_miljoen": "",
+    "totaal": "",
+    "x_100k": ""
   },
   "gedrag_onderwerpen": {
     "wash_hands": "Wash your hands often",
@@ -1988,8 +1995,8 @@
     "title": "COVID-19 vaccinations",
     "description": "Vaccination is the most important step towards getting life back to normal. The Netherlands began vaccinating people against COVID-19 on 6 January 2021. Eventually, the vaccine will be offered to everyone aged 18 and over. This page shows how many doses of vaccine have been administered and how many doses are on their way.",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "date_unix": "1611750085",
-    "date_of_insertion_unix": "1611750085",
+    "date_unix": "1611838697",
+    "date_of_insertion_unix": "1611838697",
     "reference": {
       "href": "/verantwoording#vaccination",
       "text": "Read more about the source of the data on vaccination in the explanation of the presented data."
@@ -2025,24 +2032,24 @@
       "difference": "",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "185356",
-          "date_unix": "1611750085",
-          "date_of_insertion_unix": "1611750085"
+          "total_vaccinated": "203450",
+          "date_unix": "1611838697",
+          "date_of_insertion_unix": "1611838697"
         }
       },
       "kpi_total": {
         "title": "Number of doses administered",
-        "value": "185356",
+        "value": "203450",
         "description": "This figure reflects the total number of vaccination doses that have been administered. Because vaccination figures are sometimes reported a few days after doses are administered, the actual number of vaccination doses administered is higher. People need two separately administered doses for the vaccine to be maximally effective.",
-        "date_of_report_unix": "1611750085",
-        "date_of_insertion_unix": "1611750085",
+        "date_of_report_unix": "1611838697",
+        "date_of_insertion_unix": "1611838697",
         "administered": [
           {
-            "value": "128311",
+            "value": "140205",
             "description": "administered by municipal health services (GGDs)"
           },
           {
-            "value": "40216",
+            "value": "46416",
             "description": "administered by hospitals"
           },
           {
@@ -2106,6 +2113,9 @@
     "grafiek": {
       "titel": "Expected weekly deliveries",
       "omschrijving": "This graph shows the number of approved vaccine doses the Netherlands expects to receive over the next six weeks."
+    },
+    "verwachte_leveringen": {
+      "van_week_tot_week": ""
     }
   },
   "editorial_detail": {
@@ -2213,7 +2223,7 @@
   "search": {
     "placeholder": "Search for a municipality of safety region",
     "clear": "",
-    "no_hits": ""
+    "no_hits": "No {{subject}} found with “{{search}}”"
   },
   "veiligheidsregio_actueel": {
     "title": "Current situation in safety region {{safetyRegionName}}",
