@@ -2028,9 +2028,6 @@
         "download": ""
       }
     },
-    "verwachte_leveringen": {
-      "van_week_tot_week": "Week {{weekNumberFrom}} to week {{weekNumberTo}}"
-    },
     "data": {
       "difference": "",
       "sidebar": {
@@ -2116,6 +2113,9 @@
     "grafiek": {
       "titel": "Expected weekly deliveries",
       "omschrijving": "This graph shows the number of approved vaccine doses the Netherlands expects to receive over the next six weeks."
+    },
+    "verwachte_leveringen": {
+      "van_week_tot_week": ""
     }
   },
   "editorial_detail": {
@@ -2223,7 +2223,7 @@
   "search": {
     "placeholder": "Search for a municipality of safety region",
     "clear": "",
-    "no_hits": ""
+    "no_hits": "No {{subject}} found with “{{search}}”"
   },
   "veiligheidsregio_actueel": {
     "title": "Current situation in safety region {{safetyRegionName}}",
