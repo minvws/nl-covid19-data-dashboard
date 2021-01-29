@@ -32,7 +32,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn workspace @corona-dashboard/app lint-staged",
+      "pre-commit": "yarn workspace @corona-dashboard/app lint-staged && yarn workspace @corona-dashboard/cli validate-locales",
       "pre-push": "yarn workspace @corona-dashboard/app run type-check"
     }
   }
