@@ -2042,7 +2042,7 @@
       "kpi_total": {
         "title": "Number of doses administered",
         "value": "215498",
-        "description": "This figure reflects the total number of vaccination doses that have been administered. The actual number of vaccination doses administered is higher. People need two separately administered doses for the vaccine to be maximally effective.",
+        "description": "This is the number of vaccine doses that have been administered. Because vaccination figures are sometimes reported later, the actual number of vaccination doses administered is higher. People need two separately administered doses for the vaccine to be maximally effective.",
         "date_of_report_unix": "1611920224",
         "date_of_insertion_unix": "1611920224",
         "administered": [
@@ -2067,7 +2067,7 @@
             "description": ""
           }
         ],
-        "description_first": "This is the number of vaccine doses that have been administered. The actual number of vaccination doses administered is higher. People need two separately administered doses for the vaccine to be maximally effective.",
+        "description_first": "This is the number of vaccine doses that have been administered. Because vaccination figures are sometimes reported later, the actual number of vaccination doses administered is higher. People need two separately administered doses for the vaccine to be maximally effective.",
         "description_second": "* These numbers are reported by phone. The actual number of vaccination doses administered is therefore higher than reported here."
       },
       "kpi_expected_delivery": {
