@@ -2,10 +2,16 @@ import chalk from 'chalk';
 import fs from 'fs';
 import meow from 'meow';
 import path from 'path';
+
+import jsonDiff from 'json-diff';
+
 import { schemaDirectory } from './config';
 import { createValidateFunction } from './create-validate-function';
 import { executeValidations } from './execute-validations';
 import { getSchemaInfo, SchemaItemInfo } from './schema-information';
+
+import nl from '../../../app/src/locale/nl.json';
+import en from '../../../app/src/locale/en.json';
 
 const cli = meow(
   `
@@ -47,10 +53,49 @@ if (!customJsonPathArg) {
   }
 }
 
+function objectsHaveSameKeys(
+  obj1: Record<string, unknown>,
+  obj2: Record<string, unknown>
+) {
+  const objects = [obj1, obj2];
+  const allKeys: string[] = objects.reduce(
+    (keys: string[], object) => keys.concat(Object.keys(object)),
+    []
+  );
+
+  const union = new Set(allKeys);
+  return objects.every((object) => union.size === Object.keys(object).length);
+}
+
+const checkLanguageKeysEquality = new Promise<boolean[]>((resolve, reject) => {
+  if (objectsHaveSameKeys(nl, en)) {
+    console.log(chalk.green.bold(`Locale files have the same keys`));
+    resolve([true]);
+  } else {
+    console.group();
+    console.error(chalk.bgRed.bold(`  Locale files have different keys  \n`));
+    console.log(
+      jsonDiff.diffString(
+        nl,
+        en,
+        {},
+        // @ts-ignore
+        {
+          keysOnly: true,
+        }
+      )
+    );
+    console.groupEnd();
+    reject([false]);
+  }
+});
+
 // The validations are asynchronous so this reducer gathers all the Promises in one array.
 const promisedValidations = Object.keys(schemaInfo).map((schemaName) =>
   validate(schemaName, schemaInfo[schemaName])
 );
+
+promisedValidations.push(checkLanguageKeysEquality);
 
 // Here the script waits for all the validations to finish, the result of each run is simply
 // a true or false. So if the result array contains one or more false values, we

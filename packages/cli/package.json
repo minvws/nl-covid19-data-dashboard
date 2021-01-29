@@ -19,6 +19,8 @@
     "generate-typescript": "ts-node src/generate-typescript.ts"
   },
   "devDependencies": {
-    "@types/meow": "^5.0.0"
+    "@types/json-diff": "^0.5.1",
+    "@types/meow": "^5.0.0",
+    "json-diff": "^0.5.4"
   }
 }
