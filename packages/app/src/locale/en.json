@@ -764,7 +764,13 @@
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -2112,7 +2118,7 @@
     },
     "verwachte_leveringen": {
       "van_week_tot_week": "Week {{weekNumberFrom}} to week {{weekNumberTo}}",
-      "van_week_tot_week_klein_scherm": "Week {{weekNumberFrom}} to {{weekNumberTo}}"
+      "van_week_tot_week_klein_scherm": ""
     }
   },
   "editorial_detail": {
@@ -2126,13 +2132,13 @@
     }
   },
   "articles_metadata": {
-    "title": "Articles | Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
+    "title": "Articles | Coronavirus COVID-19 Dashboard | Government.nl",
     "description": "",
     "url": "https://coronadashboard.government.nl/artikelen"
   },
   "common_actueel": {
     "terug_naar_landelijk": "Back to national situation",
-    "laatst_bijgewerkt": "The dashboard receives new data each day, around 15:20."
+    "laatst_bijgewerkt": "Last update: {{date}} at {{time}}"
   },
   "nationaal_actueel": {
     "title": "The current situation in {{the_netherlands}}",

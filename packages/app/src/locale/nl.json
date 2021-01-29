@@ -764,7 +764,13 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
+    "barscale_keys": [
+      "0 tot 20",
+      "20 tot 40",
+      "40 tot 60",
+      "60 tot 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -2132,7 +2138,7 @@
   },
   "common_actueel": {
     "terug_naar_landelijk": "Terug naar landelijke situatie",
-    "laatst_bijgewerkt": "Het dashboard wordt dagelijks rond 15:20 voorzien van nieuwe data."
+    "laatst_bijgewerkt": "Laatst bijgewerkt: {{date}} om {{time}}"
   },
   "nationaal_actueel": {
     "title": "De actuele situatie in {{the_netherlands}}",
