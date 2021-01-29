@@ -136,6 +136,7 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
         <LineChartTile
           metadata={{ source: text.bronnen.rivm }}
           title={text.linechart_titel}
+          description={text.linechart_description}
           ariaDescription={graphDescriptions.ziekenhuis_opnames}
           values={data.hospital_nice.values}
           formatTooltip={(values) => {
