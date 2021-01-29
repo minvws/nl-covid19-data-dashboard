@@ -2068,7 +2068,7 @@
           }
         ],
         "description_first": "This is the number of vaccine doses that have been administered. Because vaccination figures are sometimes reported later, the actual number of vaccination doses administered is higher.",
-        "description_second": "* These numbers are reported by phone. The actual number of vaccination doses administered is therefore higher than reported here."
+        "description_second": "* These numbers are reported by phone. Please note: the actual number of vaccination doses administered is therefore higher than reported here."
       },
       "kpi_expected_delivery": {
         "title": "Approved vaccines to be delivered",
