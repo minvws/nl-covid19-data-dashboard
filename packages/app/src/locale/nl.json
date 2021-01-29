@@ -2067,7 +2067,7 @@
             "description": ""
           }
         ],
-        "description_first": "Dit getal laat zien hoeveel vaccins in totaal zijn toegediend. Het kan een tijd duren voordat een prik wordt gemeld. Het daadwerkelijke aantal gezette prikken ligt daarom hoger. Mensen hebben twee prikken nodig voor een volledige vaccinatie.",
+        "description_first": "Dit getal laat zien hoeveel vaccins in totaal zijn toegediend. Het kan een tijd duren voordat een prik wordt gemeld. Het daadwerkelijke aantal gezette prikken ligt daarom hoger.",
         "description_second": "* Deze cijfers worden telefonisch doorgegeven. Let op: Het daadwerkelijke aantal gezette prikken ligt daarom hoger dan hier vermeld."
       },
       "kpi_expected_delivery": {
