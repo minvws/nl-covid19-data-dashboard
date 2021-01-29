@@ -55,7 +55,7 @@ const tickFormatNumber = (v: NumberValue) => {
   const value1M = v.valueOf() / NUM_1M;
   const value100K = v.valueOf() / NUM_100K;
 
-  return value1M > 0
+  return value1M > 1
     ? `${value1M}mln`
     : value100K > 0
     ? `${value100K}00k`
