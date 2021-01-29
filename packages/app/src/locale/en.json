@@ -2117,8 +2117,7 @@
       "omschrijving": "This graph shows the number of approved vaccine doses the Netherlands expects to receive over the next six weeks."
     },
     "verwachte_leveringen": {
-      "van_week_tot_week": "Week {{weekNumberFrom}} to week {{weekNumberTo}}",
-      "van_week_tot_week_klein_scherm": ""
+      "van_week_tot_week": "Week {{weekNumberFrom}} to week {{weekNumberTo}}"
     }
   },
   "editorial_detail": {
@@ -2132,13 +2131,13 @@
     }
   },
   "articles_metadata": {
-    "title": "Articles | Coronavirus COVID-19 Dashboard | Government.nl",
+    "title": "Articles | Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
     "description": "",
     "url": "https://coronadashboard.government.nl/artikelen"
   },
   "common_actueel": {
     "terug_naar_landelijk": "Back to national situation",
-    "laatst_bijgewerkt": "Last update: {{date}} at {{time}}"
+    "laatst_bijgewerkt": "Last update: {{date}}"
   },
   "nationaal_actueel": {
     "title": "The current situation in {{the_netherlands}}",
