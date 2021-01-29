@@ -3,6 +3,8 @@ import { ParentSize } from '@visx/responsive';
 import { Fragment } from 'react';
 import styled from 'styled-components';
 import VaccinatieIcon from '~/assets/vaccinaties.svg';
+import { ArticleStrip } from '~/components-styled/article-strip';
+import { ArticleSummary } from '~/components-styled/article-teaser';
 import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
@@ -14,17 +16,15 @@ import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
+import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
-import { targetLanguage } from '~/locale';
 import {
+  createGetContent,
   getLastGeneratedDate,
   getNlData,
   getText,
-  createGetContent,
 } from '~/static-props/get-data';
 import { formatNumber } from '~/utils/formatNumber';
-import { ArticleStrip } from '~/components-styled/article-strip';
-import { ArticleSummary } from '~/components-styled/article-teaser';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -32,18 +32,7 @@ export const getStaticProps = createGetStaticProps(
   getText,
   createGetContent<{
     articles: ArticleSummary[];
-  }>(
-    `{
-    'articles': *[_type == "article"] | order(publicationDate) {
-        "title":title.${targetLanguage},
-        slug,
-        "cover": {
-          ...cover,
-          "asset": cover.asset->
-        }
-      }[0..1]
-    }`
-  )
+  }>(createPageArticlesQuery('vaccinationsPage'))
 );
 
 const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({

@@ -118,6 +118,12 @@ export default () =>
         'reproductionPage'
       ),
       addListItem(StructureBuilder, BsCardChecklist, 'Rioolwater', 'sewerPage'),
+      addListItem(
+        StructureBuilder,
+        BsCardChecklist,
+        'Vaccinaties',
+        'vaccinationsPage'
+      ),
 
       // Add a visual divider (optional)
       StructureBuilder.divider(),

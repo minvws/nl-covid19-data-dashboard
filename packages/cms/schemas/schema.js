@@ -18,6 +18,7 @@ import positiveTestsPage from './documents/pages/positive-tests-page';
 import reproductionPage from './documents/pages/reproduction-page';
 import sewerPage from './documents/pages/sewer-page';
 import topicalPage from './documents/pages/topical-page';
+import vaccinationsPage from './documents/pages/vaccinations-page';
 import veelgesteldeVragen from './documents/pages/veelgestelde-vragen-page';
 import localeBlock from './locale/locale-block';
 import localeRichContentBlock from './locale/locale-rich-content-block';
@@ -58,6 +59,7 @@ export default createSchema({
     positiveTestsPage,
     reproductionPage,
     sewerPage,
+    vaccinationsPage,
 
     /** RESTRICTIONS */
     restrictionGroup,
