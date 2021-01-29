@@ -47,19 +47,11 @@ export function LinkWithIcon({
       >
         {iconPlacement === 'right' && !headingLink && (
           <>
-            {!words.length ? children : firstWords}
-            <Box as="span" display="inline-block">
-              {words[words.length - 1]}
-              <IconSmall icon={icon} />
-            </Box>
+            {children}
+            <IconSmall icon={icon} />
           </>
         )}
-        {iconPlacement === 'left' && !headingLink && (
-          <Box as="span">
-            <IconSmall icon={icon} />
-            {children}
-          </Box>
-        )}
+        {iconPlacement === 'left' && !headingLink && children}
         {headingLink && (
           <Box paddingRight={isSingleWord ? `calc(0.5rem + 18px)` : ''}>
             {!words.length ? children : firstWords}
