@@ -2118,7 +2118,7 @@
     },
     "verwachte_leveringen": {
       "van_week_tot_week": "Week {{weekNumberFrom}} to week {{weekNumberTo}}",
-      "van_week_tot_week_klein_scherm": ""
+      "van_week_tot_week_klein_scherm": "Week {{weekNumberFrom}} to week {{weekNumberTo}}"
     }
   },
   "editorial_detail": {
@@ -2138,7 +2138,7 @@
   },
   "common_actueel": {
     "terug_naar_landelijk": "Back to national situation",
-    "laatst_bijgewerkt": "Last update: {{date}} at {{time}}"
+    "laatst_bijgewerkt": "Last update: {{date}}"
   },
   "nationaal_actueel": {
     "title": "The current situation in {{the_netherlands}}",
