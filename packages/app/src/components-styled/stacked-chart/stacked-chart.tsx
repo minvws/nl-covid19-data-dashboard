@@ -175,7 +175,7 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
   }, [config, metricProperties]);
 
   const hoverColors = useMemo(
-    () => config.map((x) => transparentize(0.8, x.color)),
+    () => config.map((x) => transparentize(0.6, x.color)),
     [config]
   );
 
@@ -457,7 +457,10 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
                         key={barId}
                         x={bar.x}
                         y={bar.y}
-                        height={bar.height}
+                        /**
+                         * Create a little gap between the stacked bars
+                         */
+                        height={bar.height - (isTinyScreen ? 2 : 3)}
                         width={bar.width}
                         fill={fillColor}
                         onMouseLeave={handleHoverWithBar}
