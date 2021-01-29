@@ -1989,13 +1989,13 @@
   },
   "vaccinaties": {
     "titel_sidebar": "Vaccinaties",
-    "titel_kpi": "Totaal aantal toegediende vaccins",
+    "titel_kpi": "Aantal gemelde prikken",
     "metadata": {
       "title": "Vaccinaties | Dashboard Coronavirus | Rijksoverheid.nl",
-      "description": "Op 6 januari 2021 is Nederland begonnen met vaccineren. De cijfers op het dashboard coronavirus laten zien hoeveel vaccins zijn toegediend en hoeveel vaccins er beschikbaar komen."
+      "description": "Op 6 januari 2021 is Nederland begonnen met vaccineren. De cijfers op het dashboard coronavirus laten zien hoeveel prikken zijn gezet en hoeveel vaccins er beschikbaar komen."
     },
     "title": "COVID-19-vaccinaties",
-    "description": "Vaccineren is de belangrijkste stap naar een samenleving zonder coronaregels. Op 6 januari 2021 is Nederland begonnen met vaccineren. Uiteindelijk komt iedereen van 18 jaar of ouder aan de beurt. De cijfers op deze pagina laten zien hoeveel vaccins zijn toegediend en hoeveel vaccins er beschikbaar komen.",
+    "description": "Vaccineren is de belangrijkste stap naar een samenleving zonder coronaregels. Op 6 januari 2021 is Nederland begonnen met vaccineren. Uiteindelijk komt iedereen van 18 jaar of ouder aan de beurt. De cijfers op deze pagina laten zien hoeveel prikken zijn gezet en hoeveel vaccins er beschikbaar komen.",
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "date_unix": "1611920224",
     "date_of_insertion_unix": "1611920224",
@@ -2165,9 +2165,9 @@
         "title": "Intensive care-opnames"
       },
       "toegediende_vaccins": {
-        "title": "Toegediende vaccins",
+        "title": "Aantal gemelde prikken",
         "sub_title": "Verwachte levering",
-        "administered_tests": "Tot nu toe zijn er {{administeredVaccines}} vaccins toegediend. Dit cijfer omvat zowel eerste als tweede prikken.",
+        "administered_tests": "Tot nu toe zijn er {{administeredVaccines}} prikken gezet. Dit cijfer omvat zowel eerste als tweede prikken.",
         "supply": "Nederland verwacht de komende zes weken {{expectedDelivery}} goedgekeurde vaccins te krijgen."
       }
     },
