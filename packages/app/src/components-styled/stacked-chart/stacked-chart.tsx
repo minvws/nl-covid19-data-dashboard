@@ -296,19 +296,22 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
           <Box mb={2}>
             <InlineText fontWeight="bold">
               {`${replaceVariablesInText(
-                siteText.vaccinaties.verwachte_leveringen.van_week_tot_week,
+                isTinyScreen
+                  ? siteText.vaccinaties.verwachte_leveringen
+                      .van_week_tot_week_klein_scherm
+                  : siteText.vaccinaties.verwachte_leveringen.van_week_tot_week,
                 { weekNumberFrom, weekNumberTo }
               )}: `}
             </InlineText>
             {isTotalMillion
               ? `${formatPercentage(seriesSumByKey[key] / NUM_1M)} mln `
               : `${formatNumber(Math.round(seriesSumByKey[key] / NUM_1K))} k `}
-            {siteText.waarde_annotaties.totaal}
+            {!isTinyScreen && siteText.waarde_annotaties.totaal}
           </Box>
         </Box>
       );
     },
-    [labelByKey, seriesSumByKey, series]
+    [labelByKey, seriesSumByKey, series, isTinyScreen]
   );
 
   /**
@@ -346,9 +349,8 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
 
     // @ts-expect-error
     const coords = localPoint(event.target.ownerSVGElement, event);
-    const left = tooltipData.x + tooltipData.width / 2;
     showTooltip({
-      tooltipLeft: Math.max(coords?.x || 0 - 20, left),
+      tooltipLeft: coords?.x || 0,
       tooltipTop: coords?.y || 0,
       tooltipData,
     });
@@ -475,6 +477,7 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
             left={tooltipLeft}
             top={tooltipTop}
             style={tooltipStyles}
+            offsetLeft={isTinyScreen ? 0 : 10}
           >
             <TooltipContainer>
               {props.formatTooltip
