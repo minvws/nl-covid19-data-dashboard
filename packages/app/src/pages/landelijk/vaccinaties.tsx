@@ -23,7 +23,7 @@ import {
   createGetContent,
 } from '~/static-props/get-data';
 import { formatNumber } from '~/utils/formatNumber';
-import { ArticleStrip } from '~/components-styled/article-strip'
+import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
 
 export const getStaticProps = createGetStaticProps(
@@ -34,9 +34,16 @@ export const getStaticProps = createGetStaticProps(
     articles: ArticleSummary[];
   }>(
     `{
-    'articles': *[_type == "article"] | order(publicationDate) {"title":title.${targetLanguage}, slug, cover}[0..2]
+    'articles': *[_type == "article"] | order(publicationDate) {
+        "title":title.${targetLanguage},
+        slug,
+        "cover": {
+          ...cover,
+          "asset": cover.asset->
+        }
+      }[0..1]
     }`
-  )  
+  )
 );
 
 const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
@@ -66,7 +73,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             dataSources: [],
           }}
         />
-        <ArticleStrip articleSummaries={content.articles}/>
+        <ArticleStrip ArticleTeasers={content.articles} />
         <TwoKpiSection>
           <KpiTile
             title={text.data.kpi_total.title}
