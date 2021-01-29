@@ -75,6 +75,8 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
               borderBottomStyle="solid"
               borderBottomWidth="1px"
               borderBottomColor="grey"
+              pb={3}
+              mb={4}
             >
               <Text mb={3}>{text.data.kpi_total.description_first}</Text>
             </Box>
@@ -90,7 +92,9 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                 )}
               </Fragment>
             ))}
-            <Text mb={3}>{text.data.kpi_total.description_second}</Text>
+            <Text mb={3}>
+              <em>{text.data.kpi_total.description_second}</em>
+            </Text>
           </KpiTile>
 
           <KpiTile
