@@ -13,7 +13,15 @@ import {
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   createGetContent<ArticleSummary[]>(
-    `*[_type == 'article'] | order(publicationDate) {"title":title.${targetLanguage}, slug, "summary":summary.${targetLanguage}, cover}`
+    `*[_type == 'article'] | order(publicationDate desc) {
+      "title":title.${targetLanguage},
+      slug,
+      "summary":summary.${targetLanguage},
+      "cover": {
+        ...cover,
+        "asset": cover.asset->
+      }
+    }`
   )
 );
 
@@ -22,7 +30,7 @@ const ArticlesOverview: FCWithLayout<typeof getStaticProps> = (props) => {
 
   return (
     <Box backgroundColor="white" py={{ _: 4, md: 5 }}>
-      <MaxWidth>
+      <MaxWidth px={{ _: 3, lg: 4 }}>
         <ArticleList articleSummaries={content} hideLink={true} />
       </MaxWidth>
     </Box>

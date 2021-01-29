@@ -1,13 +1,14 @@
 import { css } from '@styled-system/css';
+import { ParentSize } from '@visx/responsive';
+import { Fragment } from 'react';
 import styled from 'styled-components';
-import VaccinatieBarChart from '~/assets/vaccinate_bar_chart.svg';
 import VaccinatieIcon from '~/assets/vaccinaties.svg';
-import { Box } from '~/components-styled/base';
 import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { SEOHead } from '~/components-styled/seo-head';
+import { StackedChart } from '~/components-styled/stacked-chart';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
@@ -28,6 +29,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
+  data,
   text: siteText,
 }) => {
   const text = siteText.vaccinaties;
@@ -63,22 +65,16 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             <KpiValue absolute={parseFloat(text.data.kpi_total.value)} />
             <Text mb={3}>{text.data.kpi_total.description_first}</Text>
             {text.data.kpi_total.administered.map((item, index) => (
-              <>
+              <Fragment key={index}>
                 {item.value && item.description && (
-                  <Heading
-                    key={index}
-                    level={4}
-                    fontSize={'1.1em'}
-                    mt={3}
-                    mb={0}
-                  >
+                  <Heading level={4} fontSize={'1.1em'} mt={3} mb={0}>
                     <span css={css({ color: 'data.primary' })}>
                       {formatNumber(parseFloat(item.value))}
                     </span>
                     {` ${item.description}`}
                   </Heading>
                 )}
-              </>
+              </Fragment>
             ))}
             <Text mb={3}>{text.data.kpi_total.description_second}</Text>
           </KpiTile>
@@ -121,9 +117,50 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             source: text.bronnen.rivm,
           }}
         >
-          <Box pt={1}>
-            <VaccinatieBarChart />
-          </Box>
+          <ParentSize>
+            {({ width }) => (
+              <StackedChart
+                width={width}
+                valueAnnotation={siteText.waarde_annotaties.x_100k}
+                values={data.vaccine_delivery.values}
+                config={[
+                  {
+                    metricProperty: 'pfizer',
+                    // color: '#007AEA',
+                    color: '#00BBB5',
+                    legendLabel: 'BioNTech/Pfizer',
+                  },
+                  {
+                    metricProperty: 'moderna',
+                    // color: '#6AB4F9',
+                    color: '#C263EF',
+                    legendLabel: 'Moderna',
+                  },
+                  /*  {
+                    metricProperty: 'astra_zeneca',
+                    color: '#00BBB5',
+                    legendLabel: 'AstraZeneca',
+                  },
+                  {
+                    metricProperty: 'cure_vac',
+                    color: '#C263EF',
+                    legendLabel: 'Curevac',
+                  },
+                  {
+                    metricProperty: 'janssen',
+                    color: '#C8AEFF',
+                    legendLabel: 'Janssen',
+                  },
+
+                  {
+                    metricProperty: 'sanofi',
+                    color: '#96E4E4',
+                    legendLabel: 'Sanofi',
+                  }, */
+                ]}
+              />
+            )}
+          </ParentSize>
         </ChartTile>
       </TileList>
     </>

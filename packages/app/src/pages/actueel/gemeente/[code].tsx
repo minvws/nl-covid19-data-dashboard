@@ -15,6 +15,7 @@ import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-ch
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
 import { FCWithLayout, getDefaultLayout } from '~/domain/layout/layout';
+import { ArticleList } from '~/domain/topical/article-list';
 import { DataSitemap } from '~/domain/topical/data-sitemap';
 import { EditorialSummary } from '~/domain/topical/editorial-teaser';
 import { EditorialTile } from '~/domain/topical/editorial-tile';
@@ -24,7 +25,7 @@ import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
 import { TopicalChoroplethContainer } from '~/domain/topical/topical-choropleth-container';
 import { TopicalPageHeader } from '~/domain/topical/topical-page-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
-import { targetLanguage } from '~/locale';
+import { topicalPageQuery } from '~/queries/topical-page-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
@@ -49,15 +50,10 @@ export const getStaticProps = createGetStaticProps(
     vr: ({ escalation_levels }) => ({ escalation_levels }),
   }),
   createGetContent<{
+    articles: ArticleSummary[];
     editorial: EditorialSummary;
     highlight: { article: ArticleSummary };
-  }>(
-    `{
-    // Retrieve the latest 3 articles with the highlighted article filtered out:
-    'editorial': *[_type == 'editorial'] | order(publicationDate) {"title":title.${targetLanguage}, slug, "summary":summary.${targetLanguage}, cover}[0],
-    'highlight': *[_type == 'topicalPage']{"article":highlightedArticle->{"title":title.${targetLanguage}, slug, "summary":summary.${targetLanguage}, cover}}[0],
-    }`
-  )
+  }>(topicalPageQuery)
 );
 
 const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
@@ -210,7 +206,7 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
               />
             )}
 
-            <Box>
+            <Box pb={4}>
               <TopicalTile>
                 <>
                   <TopicalChoroplethContainer
@@ -248,7 +244,7 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
                 borderTopColor={colors.silver}
                 mx={{ _: -3, md: 0 }}
               />
-              <TopicalTile>
+              <TopicalTile py={0}>
                 <Box mx={-3}>
                   <EscalationLevelExplanations />
                 </Box>
@@ -256,6 +252,8 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
             </Box>
 
             <DataSitemap />
+
+            <ArticleList articleSummaries={content.articles} />
           </TileList>
         </MaxWidth>
       </Box>

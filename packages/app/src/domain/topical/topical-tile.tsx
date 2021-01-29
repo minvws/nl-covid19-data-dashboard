@@ -1,9 +1,11 @@
 import { css } from '@styled-system/css';
 import styled from 'styled-components';
-import { Box } from '~/components-styled/base';
 import { asResponsiveArray } from '~/style/utils';
+import { space, SpaceProps } from 'styled-system';
 
-export const TopicalTile = styled(Box).attrs({ as: 'article' })(
+type TopicalTileProps = SpaceProps;
+
+export const TopicalTile = styled.article<TopicalTileProps>(
   css({
     display: 'flex',
     flexDirection: 'column',
@@ -12,5 +14,6 @@ export const TopicalTile = styled(Box).attrs({ as: 'article' })(
     mx: asResponsiveArray({ _: -3, md: 0 }),
     mb: 0,
     borderRadius: 1,
-  })
+  }),
+  space
 );

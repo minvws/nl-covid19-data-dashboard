@@ -183,6 +183,35 @@ const elderlyAtHomeThresholds: ChoroplethThresholdsValue[] = [
   },
 ];
 
+const vaccineCoverageThresholds: ChoroplethThresholdsValue[] = [
+  {
+    color: colors.data.scale.blue[0],
+    threshold: 0,
+    label: '',
+  },
+  {
+    color: colors.data.scale.blue[1],
+    threshold: 10,
+  },
+  {
+    color: colors.data.scale.blue[2],
+    threshold: 30,
+  },
+  {
+    color: colors.data.scale.blue[3],
+    threshold: 40,
+  },
+  {
+    color: colors.data.scale.blue[4],
+    threshold: 50,
+  },
+  {
+    color: colors.data.scale.blue[5],
+    threshold: 70,
+    label: '70+',
+  },
+];
+
 export const regionThresholds = {
   tested_overall: {
     infected_per_100k: positiveTestedThresholds,
@@ -205,5 +234,8 @@ export const regionThresholds = {
   behavior: behaviorThresholds,
   elderly_at_home: {
     positive_tested_daily_per_100k: elderlyAtHomeThresholds,
+  },
+  vaccine: {
+    coverage_percentage: vaccineCoverageThresholds,
   },
 } as const;

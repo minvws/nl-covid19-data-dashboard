@@ -1,14 +1,14 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import ArrowIcon from '~/assets/arrow.svg';
-import { urlFor } from '~/lib/sanity';
 import siteText from '~/locale';
 import { Article, Block, ImageBlock } from '~/types/cms';
-import { assert } from '~/utils/assert';
 import { Link } from '~/utils/link';
 import { BackgroundImage } from './background-image';
 import { Box } from './base';
 import { Heading, InlineText, Text } from './typography';
+import { imageResizeTargets } from '@corona-dashboard/common';
+import { findClosestSize } from '~/utils/findClosestSize';
 
 export type ArticleSummary = Pick<
   Article,
@@ -88,17 +88,16 @@ type CoverImageProps = {
 };
 
 function CoverImage({ height, image }: CoverImageProps) {
-  const url = urlFor(image).url();
-  assert(
-    url !== null,
-    `Could not get url for node: ${JSON.stringify(image, null, 2)}`
-  );
-
-  const { hotspot } = image;
+  const { hotspot, asset } = image;
 
   const bgPosition = hotspot
     ? `${hotspot.x * 100}% ${hotspot.y * 100}%`
     : undefined;
+
+  const url = `/cms/${asset.assetId}-${findClosestSize(
+    700,
+    imageResizeTargets
+  )}.${asset.extension}`;
 
   return (
     <Box height={height} overflow="hidden">

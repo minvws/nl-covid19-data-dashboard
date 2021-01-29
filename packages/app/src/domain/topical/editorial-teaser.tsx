@@ -5,11 +5,11 @@ import ArrowIcon from '~/assets/arrow.svg';
 import { BackgroundImage } from '~/components-styled/background-image';
 import { Box } from '~/components-styled/base';
 import { Heading, InlineText, Text } from '~/components-styled/typography';
-import { urlFor } from '~/lib/sanity';
 import siteText from '~/locale';
 import { Block, Editorial, ImageBlock } from '~/types/cms';
-import { assert } from '~/utils/assert';
 import { Link } from '~/utils/link';
+import { imageResizeTargets } from '@corona-dashboard/common';
+import { findClosestSize } from '~/utils/findClosestSize';
 
 export type EditorialSummary = Pick<
   Editorial,
@@ -112,17 +112,16 @@ type CoverImageProps = {
 };
 
 function CoverImage({ image, children }: CoverImageProps) {
-  const url = urlFor(image).url();
-  assert(
-    url !== null,
-    `Could not get url for node: ${JSON.stringify(image, null, 2)}`
-  );
-
-  const { hotspot } = image;
+  const { hotspot, asset } = image;
 
   const bgPosition = hotspot
     ? `${hotspot.x * 100}% ${hotspot.y * 100}%`
     : undefined;
+
+  const url = `/cms/${asset.assetId}-${findClosestSize(
+    700,
+    imageResizeTargets
+  )}.${asset.extension}`;
 
   return (
     <BackgroundImage
