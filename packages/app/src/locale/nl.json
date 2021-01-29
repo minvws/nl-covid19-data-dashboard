@@ -2137,7 +2137,7 @@
   },
   "common_actueel": {
     "terug_naar_landelijk": "Terug naar landelijke situatie",
-    "laatst_bijgewerkt": "Het dashboard wordt dagelijks rond 15:20 voorzien van nieuwe data."
+    "laatst_bijgewerkt": "Laatst bijgewerkt: {{date}} om {{time}}"
   },
   "nationaal_actueel": {
     "title": "De actuele situatie in {{the_netherlands}}",
