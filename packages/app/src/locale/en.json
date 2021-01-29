@@ -764,13 +764,7 @@
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": [
-      "0 to 20",
-      "20 to 40",
-      "40 to 60",
-      "60 to 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -2042,6 +2036,7 @@
       "kpi_total": {
         "title": "Number of doses administered",
         "value": "215498",
+        "warning": "Please note: the actual number of vaccination doses administered is higher than reported here.",
         "description": "This is the number of vaccine doses that have been administered. Because vaccination figures are sometimes reported later, the actual number of vaccination doses administered is higher.",
         "date_of_report_unix": "1611920224",
         "date_of_insertion_unix": "1611920224",
