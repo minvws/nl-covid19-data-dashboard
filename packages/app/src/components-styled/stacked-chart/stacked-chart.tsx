@@ -459,7 +459,7 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
                         id={barId}
                         key={barId}
                         x={bar.x}
-                        y={bar.y}
+                        y={bar.y + (isTinyScreen ? 1 : 2)}
                         /**
                          * Create a little gap between the stacked bars
                          */
