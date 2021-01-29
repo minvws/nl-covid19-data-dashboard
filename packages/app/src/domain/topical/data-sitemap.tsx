@@ -8,7 +8,6 @@ import { LinkWithIcon } from '~/components-styled/link-with-icon';
 import { InlineText, Text } from '~/components-styled/typography';
 import siteText from '~/locale/index';
 import { useBreakpoints } from '~/utils/useBreakpoints';
-import { asResponsiveArray } from '~/style/utils';
 
 export function DataSitemap() {
   const breakpoints = useBreakpoints(true);
@@ -31,11 +30,10 @@ export function DataSitemap() {
         </Box>
         <Box
           display="flex"
-          flexDirection="row"
           justifyContent={{ lg: 'space-between' }}
           flexWrap={{ md: 'wrap', lg: 'nowrap' }}
         >
-          <LinkBox>
+          <Box width={{ md: '25%', lg: 'auto' }}>
             <StyledHeader>
               {siteText.nationaal_layout.headings.vaccinaties}
             </StyledHeader>
@@ -45,8 +43,8 @@ export function DataSitemap() {
                 text={siteText.vaccinaties.titel_sidebar}
               />
             </List>
-          </LinkBox>
-          <LinkBox>
+          </Box>
+          <Box width={{ md: '25%', lg: 'auto' }}>
             <StyledHeader>
               {siteText.nationaal_layout.headings.besmettingen}
             </StyledHeader>
@@ -68,8 +66,8 @@ export function DataSitemap() {
                 text={siteText.sterfte.titel_sidebar}
               />
             </List>
-          </LinkBox>
-          <LinkBox>
+          </Box>
+          <Box width={{ md: '25%', lg: 'auto' }}>
             <StyledHeader>
               {siteText.nationaal_layout.headings.ziekenhuizen}
             </StyledHeader>
@@ -83,8 +81,8 @@ export function DataSitemap() {
                 text={siteText.ic_opnames_per_dag.titel_sidebar}
               />
             </List>
-          </LinkBox>
-          <LinkBox>
+          </Box>
+          <Box width={{ md: '25%', lg: 'auto' }}>
             <StyledHeader>
               {siteText.nationaal_layout.headings.kwetsbare_groepen}
             </StyledHeader>
@@ -104,8 +102,8 @@ export function DataSitemap() {
                 text={siteText.thuiswonende_ouderen.titel_sidebar}
               />
             </List>
-          </LinkBox>
-          <LinkBox>
+          </Box>
+          <Box width={{ md: '25%', lg: 'auto' }} marginTop={{ md: 4, lg: 0 }}>
             <StyledHeader>
               {siteText.nationaal_layout.headings.vroege_signalen}
             </StyledHeader>
@@ -119,8 +117,8 @@ export function DataSitemap() {
                 text={siteText.verdenkingen_huisartsen.titel_sidebar}
               />
             </List>
-          </LinkBox>
-          <LinkBox>
+          </Box>
+          <Box width={{ md: '25%', lg: 'auto' }} marginTop={{ md: 4, lg: 0 }}>
             <StyledHeader>
               {siteText.nationaal_layout.headings.gedrag}
             </StyledHeader>
@@ -130,7 +128,7 @@ export function DataSitemap() {
                 text={siteText.nl_gedrag.sidebar.titel}
               />
             </List>
-          </LinkBox>
+          </Box>
         </Box>
       </Box>
     </Box>
@@ -178,16 +176,6 @@ const Item = styled.li(
     marginBottom: 2,
     ':last-of-type': {
       marginBottom: 0,
-    },
-  })
-);
-
-const LinkBox = styled(Box)(
-  css({
-    width: asResponsiveArray({ md: '25%', lg: 'auto' }),
-    marginTop: asResponsiveArray({ md: 4, lg: 0 }),
-    ':nth-child(-n+4)': {
-      marginTop: 0,
     },
   })
 );

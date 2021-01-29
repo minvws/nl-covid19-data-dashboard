@@ -16,6 +16,8 @@ interface LinkWithIconProps {
 interface IconProps {
   icon: ReactNode;
   isSingleWord?: boolean;
+  width: number;
+  height: number;
 }
 
 export function LinkWithIcon({
@@ -50,13 +52,13 @@ export function LinkWithIcon({
             {!words.length ? children : firstWords}
             <Box as="span" display="inline-block">
               {words[words.length - 1]}
-              <IconSmall icon={icon} />
+              <IconSmall icon={icon} width={11} height={13} />
             </Box>
           </>
         )}
         {iconPlacement === 'left' && !headingLink && (
           <Box as="span">
-            <IconSmall icon={icon} />
+            <IconSmall icon={icon} width={11} height={13} />
             {children}
           </Box>
         )}
@@ -65,7 +67,12 @@ export function LinkWithIcon({
             {!words.length ? children : firstWords}
             <span css={css({ display: 'inline-block' })}>
               {words[words.length - 1]}
-              <IconLarge icon={icon} isSingleWord={isSingleWord} />
+              <IconLarge
+                icon={icon}
+                isSingleWord={isSingleWord}
+                width={16}
+                height={18}
+              />
             </span>
           </Box>
         )}
@@ -73,21 +80,17 @@ export function LinkWithIcon({
     </Link>
   );
 
-  function IconSmall({ icon }: IconProps) {
-    return (
-      <span css={css({ svg: { height: '11px', width: '13px', mx: '3px' } })}>
-        {icon}
-      </span>
-    );
+  function IconSmall({ icon, width, height }: IconProps) {
+    return <span css={css({ svg: { height, width, mx: '3px' } })}>{icon}</span>;
   }
 
-  function IconLarge({ icon, isSingleWord }: IconProps) {
+  function IconLarge({ icon, isSingleWord, width, height }: IconProps) {
     return (
       <span
         css={css({
           svg: {
-            height: '16px',
-            width: '18px',
+            width,
+            height,
             marginLeft: 2,
             position: isSingleWord ? 'absolute' : 'relative',
             minHeight: '100%',
