@@ -2040,23 +2040,23 @@
         }
       },
       "kpi_total": {
-        "title": "Aantal toegediende vaccins",
+        "title": "Aantal gemelde prikken",
         "value": "215498",
-        "description": "Dit getal laat zien hoeveel vaccins in totaal zijn toegediend. Het kan een tijd duren voordat een prik wordt gemeld. Het daadwerkelijke aantal gezette prikken ligt daarom hoger.",
+        "description": "Dit getal laat zien hoeveel prikken er in totaal zijn gezet. Het kan een tijd duren voordat een prik wordt gemeld. Het daadwerkelijke aantal gezette prikken ligt daarom hoger.",
         "date_of_report_unix": "1611920224",
         "date_of_insertion_unix": "1611920224",
         "administered": [
           {
             "value": "152253",
-            "description": "toegediend door GGD'en"
+            "description": "gezet door GGD'en"
           },
           {
             "value": "46416",
-            "description": "toegediend door ziekenhuizen*"
+            "description": "gezet door ziekenhuizen*"
           },
           {
             "value": "16829",
-            "description": "toegediend door langdurige zorginstellingen*"
+            "description": "gezet door langdurige zorginstellingen*"
           },
           {
             "value": "",
@@ -2067,7 +2067,7 @@
             "description": ""
           }
         ],
-        "description_first": "Dit getal laat zien hoeveel vaccins in totaal zijn toegediend. Het kan een tijd duren voordat een prik wordt gemeld. Het daadwerkelijke aantal gezette prikken ligt daarom hoger.",
+        "description_first": "Dit getal laat zien hoeveel prikken er in totaal zijn gezet. Het kan een tijd duren voordat een prik wordt gemeld. Het daadwerkelijke aantal gezette prikken ligt daarom hoger.",
         "description_second": "* Deze cijfers worden telefonisch doorgegeven. Let op: het daadwerkelijke aantal gezette prikken ligt daarom hoger dan hier vermeld.",
         "warning": "Let op: het daadwerkelijk aantal gezette prikken ligt hoger."
       },
