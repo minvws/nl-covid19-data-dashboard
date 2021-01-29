@@ -46,7 +46,7 @@ export function TopicalVaccineTile() {
         {formatNumber(data.administeredVaccines)}
       </Text>
 
-      <Text>
+      <Text mt={0}>
         {replaceComponentsInText(text.administered_tests, {
           administeredVaccines: (
             <strong>{formatNumber(data.administeredVaccines)}</strong>

@@ -206,7 +206,7 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
               />
             )}
 
-            <Box>
+            <Box pb={4}>
               <TopicalTile>
                 <>
                   <TopicalChoroplethContainer
@@ -244,7 +244,7 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
                 borderTopColor={colors.silver}
                 mx={{ _: -3, md: 0 }}
               />
-              <TopicalTile>
+              <TopicalTile py={0}>
                 <Box mx={-3}>
                   <EscalationLevelExplanations />
                 </Box>

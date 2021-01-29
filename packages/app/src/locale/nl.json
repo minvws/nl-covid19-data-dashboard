@@ -53,12 +53,14 @@
       "actueel": "Actueel"
     },
     "title": "Corona Dashboard",
-    "terug_naar_alle_cijfers": "Terug naar alle cijfers",
-    "terug_naar_alle_cijfers_homepage": "Terug naar alle cijfers",
+    "terug_naar_alle_cijfers": "Alle cijfers voor dit gebied",
+    "terug_naar_alle_cijfers_homepage": "Alle cijfers voor dit gebied",
     "menu": {
       "open_menu": "Open menu",
       "close_menu": "Sluit menu"
-    }
+    },
+    "terug_naar_alle_cijfers_veiligheidsregio": "Alle cijfers van deze veiligheidsregio",
+    "terug_naar_alle_cijfers_gemeente": "Alle cijfers van deze gemeente"
   },
   "ic_opnames_per_dag": {
     "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
@@ -712,7 +714,7 @@
     "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
     "screen_reader_graph_content": "{{value}} opnames.",
     "barscale_titel": "Gemeld aantal ziekenhuisopnames per dag",
-    "extra_uitleg": "Aantal mensen uit deze veiligheidsregio met COVID-19 dat per dag in een ziekenhuis (exclusief IC) is opgenomen. Dit cijfer is het aantal ziekenhuisopnames dat op één dag gemeld is. Dit kunnen ook meldingen zijn van opnamen van eerdere dagen. Patiënten kunnen in een ziekenhuis elders in Nederland zijn opgenomen.",
+    "extra_uitleg": "Aantal mensen uit deze veiligheidsregio met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer laat het aantal ziekenhuisopnames - inclusief directe IC opnames - zien dat op één dag gemeld is. Dit kunnen ook meldingen zijn van opnames van eerdere dagen. Patiënten kunnen in een ziekenhuis elders in Nederland zijn opgenomen.",
     "map_titel": "Verdeling ziekenhuisopnames in {{safetyRegion}}",
     "map_toelichting": "Deze kaart laat zien in welke gemeenten of veiligheidsregio’s patiënten wonen die met COVID-19 in het ziekenhuis zijn opgenomen. Let op: patiënten kunnen ook in een ziekenhuis in een ander deel van Nederland worden opgenomen. De kaart laat dus niet zien hoeveel patiënten per ziekenhuis worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE. Tergooi, Ziekenhuis Amstelland en het Flevoziekenhuis delen hun COVID-19 opnames op reguliere afdelingen op dit moment niet met Stichting NICE. Daardoor zijn de cijfers van sommige veiligheidsregio’s en gemeenten op de kaart mogelijk lager dan in werkelijkheid het geval is.",
     "linechart_titel": "Ziekenhuisopnames over tijd",
@@ -850,7 +852,7 @@
     "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
     "screen_reader_graph_content": "{{value}} opnames.",
     "barscale_titel": "Gemeld aantal ziekenhuisopnames per dag",
-    "extra_uitleg": "Aantal mensen uit deze gemeente met COVID-19 dat per dag in een ziekenhuis (exclusief IC) is opgenomen. Dit cijfer is het aantal ziekenhuisopnames dat op één dag gemeld zijn. Dit kunnen ook meldingen zijn van opnamen van eerdere dagen. Patiënten kunnen in een ziekenhuis elders in Nederland zijn opgenomen.",
+    "extra_uitleg": "Aantal mensen uit deze gemeente met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer laat het aantal ziekenhuisopnames - inclusief directe IC opnames - zien dat op één dag gemeld is. Dit kunnen ook meldingen zijn van opnames van eerdere dagen. Patiënten kunnen in een ziekenhuis elders in Nederland zijn opgenomen.",
     "map_titel": "Verdeling ziekenhuisopnames in veiligheidsregio van {{municipality}}",
     "map_toelichting": "Deze kaart laat zien in welke gemeenten of veiligheidsregio’s patiënten wonen die met COVID-19 in het ziekenhuis zijn opgenomen. Let op: patiënten kunnen ook in een ziekenhuis in een ander deel van Nederland worden opgenomen. De kaart laat dus niet zien hoeveel patiënten per ziekenhuis worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE. Tergooi, Ziekenhuis Amstelland en het Flevoziekenhuis delen hun COVID-19 opnames op reguliere afdelingen op dit moment niet met Stichting NICE. Daardoor zijn de cijfers van sommige veiligheidsregio’s en gemeenten op de kaart mogelijk lager dan in werkelijkheid het geval is.",
     "linechart_titel": "Ziekenhuisopnames over tijd",
@@ -1217,8 +1219,9 @@
   },
   "waarde_annotaties": {
     "riool_normalized": "x100 miljard",
-    "x_100k": "x 100.000",
-    "totaal": "totaal"
+    "x_miljoen": "x miljoen",
+    "totaal": "totaal",
+    "x_100k": "x 100.000"
   },
   "gedrag_onderwerpen": {
     "wash_hands": "Was vaak je handen",
@@ -1792,11 +1795,11 @@
       "text": "Lees meer in de cijferverantwoording."
     },
     "cbs_message": {
-      "title": "Sterfte iets afgenomen in week 2, maar nog steeds hoog",
+      "title": "Sterfte blijft verhoogd met 3 800 overledenen in week 3",
       "published_text": "Publicatiedatum: vrijdag 4 december",
-      "message": "In week 2 (11 tot en met 17 januari 2021) overleden naar schatting 3 850 mensen. Dat zijn 500 meer sterfgevallen dan verwacht voor deze periode. In de eerste week van 2021 overleden 4 099 mensen. Dat meldt het CBS op basis van de voorlopige sterftecijfers per week. Sinds week 39 van 2020 is de wekelijkse sterfte hoger dan verwacht. In de tweede golf van de corona-epidemie overleden tot en met week 2 van 2021 iets meer dan 60 duizend mensen, bijna 9 duizend meer dan je in deze periode zou verwachten.",
+      "message": "In week 3 (18 tot en met 24 januari 2021) overleden naar schatting 3 800 mensen. Dat zijn 450 meer sterfgevallen dan verwacht voor deze periode. In week 2 overleden 3 810 mensen. Dat meldt het CBS op basis van de voorlopige sterftecijfers per week. Sinds week 39 van 2020 is de wekelijkse sterfte hoger dan verwacht. In de tweede golf van de corona-epidemie overleden tot en met week 3 van 2021 bijna 64 duizend mensen, 9,3 duizend meer dan je in deze periode zou verwachten. Dit is inmiddels meer dan de oversterfte tijdens de eerste golf van de corona-epidemie.",
       "link": {
-        "href": "https://www.cbs.nl/nl-nl/nieuws/2021/03/sterfte-iets-afgenomen-in-week-2-maar-nog-steeds-hoog",
+        "href": "https://www.cbs.nl/nl-nl/nieuws/2021/04/sterfte-blijft-verhoogd-met-3-800-overledenen-in-week-3",
         "text": "Website CBS"
       }
     },
@@ -1988,8 +1991,8 @@
     "title": "COVID-19-vaccinaties",
     "description": "Vaccineren is de belangrijkste stap naar een samenleving zonder coronaregels. Op 6 januari 2021 is Nederland begonnen met vaccineren. Uiteindelijk komt iedereen van 18 jaar of ouder aan de beurt. De cijfers op deze pagina laten zien hoeveel vaccins zijn toegediend en hoeveel vaccins er beschikbaar komen.",
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "date_unix": "1611750085",
-    "date_of_insertion_unix": "1611750085",
+    "date_unix": "1611838697",
+    "date_of_insertion_unix": "1611838697",
     "reference": {
       "href": "/verantwoording#vaccinatie",
       "text": "Lees meer over de bron van de vaccinatiecijfers in de cijferverantwoording."
@@ -2025,24 +2028,24 @@
       "difference": "Do not remove this key. It is required as a temporary workaround",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "185356",
-          "date_unix": "1611750085",
-          "date_of_insertion_unix": "1611750085"
+          "total_vaccinated": "203450",
+          "date_unix": "1611838697",
+          "date_of_insertion_unix": "1611838697"
         }
       },
       "kpi_total": {
         "title": "Aantal toegediende vaccins",
-        "value": "185356",
+        "value": "203450",
         "description": "Dit getal laat zien hoeveel vaccins in totaal zijn toegediend. Het kan een paar dagen duren voordat een prik wordt gemeld. Het daadwerkelijke aantal gezette prikken ligt daarom hoger. Mensen hebben twee prikken nodig voor een volledige vaccinatie.",
-        "date_of_report_unix": "1611750085",
-        "date_of_insertion_unix": "1611750085",
+        "date_of_report_unix": "1611838697",
+        "date_of_insertion_unix": "1611838697",
         "administered": [
           {
-            "value": "128311",
+            "value": "140205",
             "description": "toegediend door GGD'en"
           },
           {
-            "value": "40216",
+            "value": "46416",
             "description": "toegediend door ziekenhuizen"
           },
           {
@@ -2106,6 +2109,10 @@
     "grafiek": {
       "titel": "Verwachte leveringen per week",
       "omschrijving": "Deze grafiek toont het aantal goedgekeurde vaccins dat Nederland de komende zes weken verwacht te krijgen."
+    },
+    "verwachte_leveringen": {
+      "van_week_tot_week": "Week {{weekNumberFrom}} tot week {{weekNumberTo}}",
+      "van_week_tot_week_klein_scherm": "Week {{weekNumberFrom}} tot {{weekNumberTo}}"
     }
   },
   "editorial_detail": {

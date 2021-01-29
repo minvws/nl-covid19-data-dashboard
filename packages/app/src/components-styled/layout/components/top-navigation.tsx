@@ -16,13 +16,17 @@ export function TopNavigation() {
   const router = useRouter();
 
   const [isMenuOpen, setIsMenuOpen] = useState(true);
+  const [needsMobileMenuLink, setNeedsMobileMenuLink] = useState(false);
   const breakpoints = useBreakpoints(true);
   const isSmallScreen = !breakpoints.md;
 
   useEffect(() => {
     // Menu is opened by default as fallback: JS opens it
     setIsMenuOpen(false);
-  }, []);
+
+    // Workaround to get the mobile menu opened when linking to a sub-page.
+    setNeedsMobileMenuLink(isSmallScreen);
+  }, [isSmallScreen]);
 
   function toggleMenu() {
     setIsMenuOpen(!isMenuOpen);
@@ -60,7 +64,9 @@ export function TopNavigation() {
                 {text.nav.links.actueel}
               </NavItem>
               <NavItem
-                href="/landelijk/vaccinaties"
+                href={`/landelijk/vaccinaties${
+                  needsMobileMenuLink ? '?menu=1' : ''
+                }`}
                 isActive={router.pathname.startsWith('/landelijk')}
               >
                 {text.nav.links.index}

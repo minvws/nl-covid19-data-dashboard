@@ -15,7 +15,13 @@ export function Image({ node }: { node: ImageBlock | RichContentImageBlock }) {
   return 'isFullWidth' in node && node.isFullWidth ? (
     <Box bg="page" p={4}>
       <MaxWidth textAlign="center">
-        <Box as="figure" role="group" spacing={3} display="inline-block">
+        <Box
+          as="figure"
+          role="group"
+          spacing={3}
+          display="inline-block"
+          maxWidth={980}
+        >
           <SrcSetImage
             src={`/${node.asset.assetId}.${node.asset.extension}`}
             width={node.asset.metadata.dimensions.width}
