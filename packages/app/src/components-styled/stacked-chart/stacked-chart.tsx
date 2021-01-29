@@ -144,7 +144,7 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
   const padding = useMemo(
     () =>
       ({
-        top: 10,
+        top: 0,
         right: isExtraSmallScreen ? 0 : 30,
         bottom: 20,
         left: 32,
