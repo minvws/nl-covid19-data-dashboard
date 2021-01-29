@@ -37,6 +37,7 @@ const nextConfig = {
     // process.env.NEXT_PUBLIC_LOCALE
     // e.g. ~/src/locale/APP_TARGET.json becomes ~/src/locale/nl.json
     var appTarget = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+
     config.plugins.push(
       new webpack.NormalModuleReplacementPlugin(
         /(.*)APP_TARGET(\.*)/,
