@@ -1801,11 +1801,11 @@
       "text": "Read more in 'explanation of the data presented'"
     },
     "cbs_message": {
-      "title": "Mortality slightly down in week 2, remains high",
+      "title": "Mortality still elevated: 3,800 deaths in week 3",
       "published_text": "Date of publication: Friday 4 December",
-      "message": "Estimated mortality in week 2 of 2021 (11 to 17 January inclusive) stands at 3,850. This is 500 deaths in excess of the expected number for this period. The number of deaths in week 1 stood at 4,099. Statistics Netherlands (CBS) reports this based on the latest provisional weekly mortality figures. As of week 39 of 2020, weekly mortality has been higher than expected. During the current second epidemic wave, slightly over 60 thousand people have died up to the second week of 2021 inclusive. This is nearly 9 thousand more deaths than would normally be expected in this period.",
+      "message": "In week 3 (18 to 24 January 2021 inclusive), estimated mortality stood at 3,800. This is 450 deaths in excess of the expected number for this period. The number of deaths in week 2 stood at 3,810. Statistics Netherlands (CBS) reports this based on the provisional weekly figures on mortality. Since week 39 of 2020, weekly mortality has been higher than expected. During the second epidemic wave up to week 3 of 2021 inclusive, altogether nearly 64 thousand deaths were recorded. This is 9.3 thousand more than expected mortality in this period. The excess mortality is now higher than during the first wave of the coronavirus epidemic.",
       "link": {
-        "href": "https://www.cbs.nl/en-gb/news/2021/03/mortality-slightly-down-in-week-2-remains-high",
+        "href": "https://www.cbs.nl/en-gb/news/2021/04/mortality-still-elevated-3-800-deaths-in-week-3",
         "text": "Website CBS"
       }
     },
@@ -1997,8 +1997,8 @@
     "title": "COVID-19 vaccinations",
     "description": "Vaccination is the most important step towards getting life back to normal. The Netherlands began vaccinating people against COVID-19 on 6 January 2021. Eventually, the vaccine will be offered to everyone aged 18 and over. This page shows how many doses of vaccine have been administered and how many doses are on their way.",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "date_unix": "1611838697",
-    "date_of_insertion_unix": "1611838697",
+    "date_unix": "1611920224",
+    "date_of_insertion_unix": "1611920224",
     "reference": {
       "href": "/verantwoording#vaccination",
       "text": "Read more about the source of the data on vaccination in the explanation of the presented data."
@@ -2034,20 +2034,20 @@
       "difference": "",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "203450",
-          "date_unix": "1611838697",
-          "date_of_insertion_unix": "1611838697"
+          "total_vaccinated": "215498",
+          "date_unix": "1611920224",
+          "date_of_insertion_unix": "1611920224"
         }
       },
       "kpi_total": {
         "title": "Number of doses administered",
-        "value": "203450",
+        "value": "215498",
         "description": "This figure reflects the total number of vaccination doses that have been administered. Because vaccination figures are sometimes reported a few days after doses are administered, the actual number of vaccination doses administered is higher. People need two separately administered doses for the vaccine to be maximally effective.",
-        "date_of_report_unix": "1611838697",
-        "date_of_insertion_unix": "1611838697",
+        "date_of_report_unix": "1611920224",
+        "date_of_insertion_unix": "1611920224",
         "administered": [
           {
-            "value": "140205",
+            "value": "152253",
             "description": "administered by municipal health services (GGDs)"
           },
           {
