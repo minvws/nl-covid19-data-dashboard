@@ -2138,7 +2138,7 @@
   },
   "common_actueel": {
     "terug_naar_landelijk": "Terug naar landelijke situatie",
-    "laatst_bijgewerkt": "Laatst bijgewerkt: {{date}} om {{time}}"
+    "laatst_bijgewerkt": "Laatst bijgewerkt: {{date}}"
   },
   "nationaal_actueel": {
     "title": "De actuele situatie in {{the_netherlands}}",
