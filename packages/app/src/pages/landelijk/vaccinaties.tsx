@@ -3,6 +3,8 @@ import { ParentSize } from '@visx/responsive';
 import { Fragment } from 'react';
 import styled from 'styled-components';
 import VaccinatieIcon from '~/assets/vaccinaties.svg';
+import WarningIcon from '~/assets/warning.svg';
+import { Box } from '~/components-styled/base';
 import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
@@ -63,20 +65,36 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             }}
           >
             <KpiValue absolute={parseFloat(text.data.kpi_total.value)} />
-            <Text mb={3}>{text.data.kpi_total.description_first}</Text>
+            <Box display="flex" alignItems="center">
+              <WarningIcon height="3em" width="3em" fill="#000" />
+              <Text fontWeight="600" ml={3}>
+                {text.data.kpi_total.warning}
+              </Text>
+            </Box>
+            <Box
+              borderBottomStyle="solid"
+              borderBottomWidth="1px"
+              borderBottomColor="grey"
+              pb={3}
+              mb={4}
+            >
+              <Text mb={3}>{text.data.kpi_total.description_first}</Text>
+            </Box>
             {text.data.kpi_total.administered.map((item, index) => (
               <Fragment key={index}>
                 {item.value && item.description && (
-                  <Heading level={4} fontSize={'1.1em'} mt={3} mb={0}>
+                  <Text>
                     <span css={css({ color: 'data.primary' })}>
                       {formatNumber(parseFloat(item.value))}
                     </span>
                     {` ${item.description}`}
-                  </Heading>
+                  </Text>
                 )}
               </Fragment>
             ))}
-            <Text mb={3}>{text.data.kpi_total.description_second}</Text>
+            <Text mb={3}>
+              <em>{text.data.kpi_total.description_second}</em>
+            </Text>
           </KpiTile>
 
           <KpiTile
