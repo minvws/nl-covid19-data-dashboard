@@ -459,11 +459,16 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
                         id={barId}
                         key={barId}
                         x={bar.x}
-                        y={bar.y + (isTinyScreen ? 1 : 2)}
                         /**
-                         * Create a little gap between the stacked bars
+                         * Create a little gap between the stacked bars. Bars
+                         * can be 0 height so we need to clip it on 0 since
+                         * negative height is not allowed.
                          */
-                        height={bar.height - (isTinyScreen ? 1 : 2)}
+                        y={bar.y + (isTinyScreen ? 1 : 2)}
+                        height={Math.max(
+                          0,
+                          bar.height - (isTinyScreen ? 1 : 2)
+                        )}
                         width={bar.width}
                         fill={fillColor}
                         onMouseLeave={handleHoverWithBar}
