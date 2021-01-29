@@ -14,6 +14,7 @@
     "lint": "echo 'No linter configured for @corona-dashboard/cli'",
     "type-check": "echo 'No type-check configured for @corona-dashboard/cli'",
     "compile": "echo 'No compiler configured for @corona-dashboard/cli'",
+    "validate-locales": "ts-node src/validator/validate-locales.ts",
     "validate-json": "ts-node src/validator/validate-all.ts",
     "validate-single": "ts-node src/validator/validate-single.ts",
     "generate-typescript": "ts-node src/generate-typescript.ts"
