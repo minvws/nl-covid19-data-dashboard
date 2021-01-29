@@ -764,7 +764,13 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
+    "barscale_keys": [
+      "0 tot 20",
+      "20 tot 40",
+      "40 tot 60",
+      "60 tot 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -1983,13 +1989,13 @@
   },
   "vaccinaties": {
     "titel_sidebar": "Vaccinaties",
-    "titel_kpi": "Totaal aantal toegediende vaccins",
+    "titel_kpi": "Aantal gemelde prikken",
     "metadata": {
       "title": "Vaccinaties | Dashboard Coronavirus | Rijksoverheid.nl",
-      "description": "Op 6 januari 2021 is Nederland begonnen met vaccineren. De cijfers op het dashboard coronavirus laten zien hoeveel vaccins zijn toegediend en hoeveel vaccins er beschikbaar komen."
+      "description": "Op 6 januari 2021 is Nederland begonnen met vaccineren. De cijfers op het dashboard coronavirus laten zien hoeveel prikken zijn gezet en hoeveel vaccins er beschikbaar komen."
     },
     "title": "COVID-19-vaccinaties",
-    "description": "Vaccineren is de belangrijkste stap naar een samenleving zonder coronaregels. Op 6 januari 2021 is Nederland begonnen met vaccineren. Uiteindelijk komt iedereen van 18 jaar of ouder aan de beurt. De cijfers op deze pagina laten zien hoeveel vaccins zijn toegediend en hoeveel vaccins er beschikbaar komen.",
+    "description": "Vaccineren is de belangrijkste stap naar een samenleving zonder coronaregels. Op 6 januari 2021 is Nederland begonnen met vaccineren. Uiteindelijk komt iedereen van 18 jaar of ouder aan de beurt. De cijfers op deze pagina laten zien hoeveel prikken zijn gezet en hoeveel vaccins er beschikbaar komen.",
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "date_unix": "1611920224",
     "date_of_insertion_unix": "1611920224",
@@ -2034,24 +2040,23 @@
         }
       },
       "kpi_total": {
-        "title": "Aantal toegediende vaccins",
+        "title": "Aantal gemelde prikken",
         "value": "215498",
-        "description": "Dit getal laat zien hoeveel vaccins in totaal zijn toegediend. Het kan een tijd duren voordat een prik wordt gemeld. Het daadwerkelijke aantal gezette prikken ligt daarom hoger.",
-        "warning": "Let op: het daadwerkelijk aantal gezette prikken ligt hoger.",
+        "description": "Dit getal laat zien hoeveel prikken in totaal zijn gezet. Het kan een tijd duren voordat een prik wordt gemeld. Het daadwerkelijke aantal gezette prikken ligt daarom hoger.",
         "date_of_report_unix": "1611920224",
         "date_of_insertion_unix": "1611920224",
         "administered": [
           {
             "value": "152253",
-            "description": "toegediend door GGD'en"
+            "description": "gezet door GGD'en"
           },
           {
             "value": "46416",
-            "description": "toegediend door ziekenhuizen*"
+            "description": "gezet door ziekenhuizen*"
           },
           {
             "value": "16829",
-            "description": "toegediend door langdurige zorginstellingen*"
+            "description": "gezet door langdurige zorginstellingen*"
           },
           {
             "value": "",
@@ -2062,8 +2067,9 @@
             "description": ""
           }
         ],
-        "description_first": "Dit getal laat zien hoeveel vaccins in totaal zijn toegediend. Het kan een tijd duren voordat een prik wordt gemeld. Het daadwerkelijke aantal gezette prikken ligt daarom hoger.",
-        "description_second": "* Deze cijfers worden telefonisch doorgegeven. Let op: het daadwerkelijke aantal gezette prikken ligt daarom hoger dan hier vermeld."
+        "description_first": "Dit getal laat zien hoeveel prikken in totaal zijn gezet. Het kan een tijd duren voordat een prik wordt gemeld. Het daadwerkelijke aantal gezette prikken ligt daarom hoger.",
+        "description_second": "* Deze cijfers worden telefonisch doorgegeven. Let op: het daadwerkelijke aantal gezette prikken ligt daarom hoger dan hier vermeld.",
+        "warning": "Let op: het daadwerkelijk aantal gezette prikken ligt hoger."
       },
       "kpi_expected_delivery": {
         "title": "Verwachte levering goedgekeurde vaccins",
@@ -2159,9 +2165,9 @@
         "title": "Intensive care-opnames"
       },
       "toegediende_vaccins": {
-        "title": "Toegediende vaccins",
+        "title": "Aantal gemelde prikken",
         "sub_title": "Verwachte levering",
-        "administered_tests": "Tot nu toe zijn er {{administeredVaccines}} vaccins toegediend. Dit cijfer omvat zowel eerste als tweede prikken.",
+        "administered_tests": "Tot nu toe zijn er {{administeredVaccines}} prikken gezet. Dit cijfer omvat zowel eerste als tweede prikken.",
         "supply": "Nederland verwacht de komende zes weken {{expectedDelivery}} goedgekeurde vaccins te krijgen."
       }
     },
