@@ -2042,7 +2042,7 @@
       "kpi_total": {
         "title": "Aantal toegediende vaccins",
         "value": "215498",
-        "description": "Dit getal laat zien hoeveel vaccins in totaal zijn toegediend. Het kan een paar dagen duren voordat een prik wordt gemeld. Het daadwerkelijke aantal gezette prikken ligt daarom hoger. Mensen hebben twee prikken nodig voor een volledige vaccinatie.",
+        "description": "Dit getal laat zien hoeveel vaccins in totaal zijn toegediend. Het kan een tijd duren voordat een prik wordt gemeld. Het daadwerkelijke aantal gezette prikken ligt daarom hoger. Mensen hebben twee prikken nodig voor een volledige vaccinatie.",
         "date_of_report_unix": "1611920224",
         "date_of_insertion_unix": "1611920224",
         "administered": [
@@ -2052,7 +2052,7 @@
           },
           {
             "value": "46416",
-            "description": "toegediend door ziekenhuizen"
+            "description": "toegediend door ziekenhuizen*"
           },
           {
             "value": "16829",
@@ -2067,8 +2067,8 @@
             "description": ""
           }
         ],
-        "description_first": "Dit getal laat zien hoeveel vaccins in totaal zijn toegediend. Het kan een paar dagen duren voordat een prik wordt gemeld. Het daadwerkelijke aantal gezette prikken ligt daarom hoger. Mensen hebben twee prikken nodig voor een volledige vaccinatie.",
-        "description_second": "* Dit cijfer is aan de telefoon doorgegeven door de instellingen zelf op 22 en 25 januari. Het is nog niet bekend wanneer dit cijfer wordt bijgewerkt. Overige aantallen toegediende vaccins worden dagelijks bijgewerkt."
+        "description_first": "Dit getal laat zien hoeveel vaccins in totaal zijn toegediend. Het kan een tijd duren voordat een prik wordt gemeld. Het daadwerkelijke aantal gezette prikken ligt daarom hoger. Mensen hebben twee prikken nodig voor een volledige vaccinatie.",
+        "description_second": "* Deze cijfers worden telefonisch doorgegeven. Let op: Het daadwerkelijke aantal gezette prikken ligt daarom hoger dan hier vermeld."
       },
       "kpi_expected_delivery": {
         "title": "Verwachte levering goedgekeurde vaccins",
