@@ -1997,8 +1997,8 @@
     "title": "COVID-19-vaccinaties",
     "description": "Vaccineren is de belangrijkste stap naar een samenleving zonder coronaregels. Op 6 januari 2021 is Nederland begonnen met vaccineren. Uiteindelijk komt iedereen van 18 jaar of ouder aan de beurt. De cijfers op deze pagina laten zien hoeveel prikken zijn gezet en hoeveel vaccins er beschikbaar komen.",
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "date_unix": "1611920224",
-    "date_of_insertion_unix": "1611920224",
+    "date_unix": "1612006032",
+    "date_of_insertion_unix": "1612006032",
     "reference": {
       "href": "/verantwoording#vaccinatie",
       "text": "Lees meer over de bron van de vaccinatiecijfers in de cijferverantwoording."
@@ -2034,24 +2034,24 @@
       "difference": "Do not remove this key. It is required as a temporary workaround",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "215498",
-          "date_unix": "1611920224",
-          "date_of_insertion_unix": "1611920224"
+          "total_vaccinated": "226298",
+          "date_unix": "1612006032",
+          "date_of_insertion_unix": "1612006032"
         }
       },
       "kpi_total": {
         "title": "Aantal gemelde prikken",
-        "value": "215498",
+        "value": "226298",
         "description": "Dit getal laat zien hoeveel prikken er in totaal zijn gezet. Het kan een tijd duren voordat een prik wordt gemeld. Het daadwerkelijke aantal gezette prikken ligt daarom hoger.",
-        "date_of_report_unix": "1611920224",
-        "date_of_insertion_unix": "1611920224",
+        "date_of_report_unix": "1612006032",
+        "date_of_insertion_unix": "1612006032",
         "administered": [
           {
             "value": "152253",
             "description": "gezet door GGD'en"
           },
           {
-            "value": "46416",
+            "value": "57216",
             "description": "gezet door ziekenhuizen*"
           },
           {
@@ -2068,7 +2068,7 @@
           }
         ],
         "description_first": "Dit getal laat zien hoeveel prikken er in totaal zijn gezet. Het kan een tijd duren voordat een prik wordt gemeld. Het daadwerkelijke aantal gezette prikken ligt daarom hoger.",
-        "description_second": "* Deze cijfers worden telefonisch doorgegeven. Let op: het daadwerkelijke aantal gezette prikken ligt daarom hoger dan hier vermeld.",
+        "description_second": "* Deze cijfers worden aan de telefoon doorgegeven. Let op: het daadwerkelijke aantal gezette prikken ligt daarom hoger dan hier vermeld.",
         "warning": "Let op: het daadwerkelijk aantal gezette prikken ligt hoger."
       },
       "kpi_expected_delivery": {
