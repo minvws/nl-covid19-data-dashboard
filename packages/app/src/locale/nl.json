@@ -2049,7 +2049,7 @@
           {
             "value": "176286",
             "description": "geregistreerd in het GGD-systeem",
-            "report_date": "Gemeld aantal t/m 31 januari"
+            "report_date": "Gemeld aantal t/m 30 januari"
           },
           {
             "value": "",
@@ -2086,17 +2086,17 @@
             {
               "value": "176286",
               "description": "gezet door GGD'en",
-              "report_date": "Gemeld aantal t/m 31 januari"
+              "report_date": "Gemeld aantal t/m 30 januari"
             },
             {
               "value": "81088",
               "description": "gezet door ziekenhuizen",
-              "report_date": "Berekend aantal t/m 31 januari"
+              "report_date": "Berekend aantal t/m 30 januari"
             },
             {
               "value": "89416",
               "description": "gezet door langdurige zorginstellingen",
-              "report_date": "Berekend aantal t/m 31 januari"
+              "report_date": "Berekend aantal t/m 30 januari"
             },
             {
               "value": "",
