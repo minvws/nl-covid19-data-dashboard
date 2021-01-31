@@ -1989,7 +1989,7 @@
   },
   "vaccinaties": {
     "titel_sidebar": "Vaccinaties",
-    "titel_kpi": "Aantal gemelde prikken",
+    "titel_kpi": "Aantal gezette prikken",
     "metadata": {
       "title": "Vaccinaties | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Op 6 januari 2021 is Nederland begonnen met vaccineren. De cijfers op het dashboard coronavirus laten zien hoeveel prikken zijn gezet en hoeveel vaccins er beschikbaar komen."
@@ -2041,7 +2041,7 @@
       },
       "kpi_total": {
         "title": "Aantal gezette prikken",
-        "value": "346790",
+        "value": "176286",
         "description": "",
         "date_of_report_unix": "1612112178",
         "date_of_insertion_unix": "1612112178",

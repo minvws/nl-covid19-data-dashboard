@@ -2041,7 +2041,7 @@
       },
       "kpi_total": {
         "title": "Number of doses administered",
-        "value": "346790",
+        "value": "176286",
         "description": "",
         "date_of_report_unix": "1612112178",
         "date_of_insertion_unix": "1612112178",
