@@ -2049,7 +2049,7 @@
           {
             "value": "176286",
             "description": "administered by municipal health services (GGDs)",
-            "report_date": "Reported number till 31 January"
+            "report_date": "Reported number till 30 January"
           },
           {
             "value": "",
@@ -2086,17 +2086,17 @@
             {
               "value": "176286",
               "description": "gezet door GGD'en",
-              "report_date": "Reported number till 31 January"
+              "report_date": "Reported number till 30 January"
             },
             {
               "value": "81088",
               "description": "administered by hospitals",
-              "report_date": "Calculated number till 31 January"
+              "report_date": "Calculated number till 30 January"
             },
             {
               "value": "89416",
               "description": "administered by long-term care institutions",
-              "report_date": "Calculated number till 31 January"
+              "report_date": "Calculated number till 30 January"
             },
             {
               "value": "",
