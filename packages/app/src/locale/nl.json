@@ -764,13 +764,7 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": [
-      "0 tot 20",
-      "20 tot 40",
-      "40 tot 60",
-      "60 tot 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -2040,36 +2034,78 @@
         }
       },
       "kpi_total": {
-        "title": "Aantal gemelde prikken",
+        "title": "Aantal gezette prikken",
         "value": "226298",
-        "description": "Dit getal laat zien hoeveel prikken er in totaal zijn gezet. Het kan een tijd duren voordat een prik wordt gemeld. Het daadwerkelijke aantal gezette prikken ligt daarom hoger.",
+        "description": "",
         "date_of_report_unix": "1612006032",
         "date_of_insertion_unix": "1612006032",
         "administered": [
           {
             "value": "152253",
-            "description": "gezet door GGD'en"
+            "description": "gezet door GGD'en",
+            "report_date": "Gemeld aantal t/m 28 jan"
           },
           {
             "value": "57216",
-            "description": "gezet door ziekenhuizen*"
+            "description": "gezet door ziekenhuizen",
+            "report_date": "Gemeld aantal t/m 28 jan"
           },
           {
             "value": "16829",
-            "description": "gezet door langdurige zorginstellingen*"
+            "description": "gezet door [langdurige zorginstellingen](/verantwoording#vaccinatie)",
+            "report_date": "Gemeld aantal t/m 28 jan"
           },
           {
             "value": "",
-            "description": ""
+            "description": "",
+            "report_date": ""
           },
           {
             "value": "",
-            "description": ""
+            "description": "",
+            "report_date": ""
           }
         ],
         "description_first": "Dit getal laat zien hoeveel prikken er in totaal zijn gezet. Het kan een tijd duren voordat een prik wordt gemeld. Het daadwerkelijke aantal gezette prikken ligt daarom hoger.",
-        "description_second": "* Deze cijfers worden aan de telefoon doorgegeven. Let op: het daadwerkelijke aantal gezette prikken ligt daarom hoger dan hier vermeld.",
-        "warning": "Let op: het daadwerkelijk aantal gezette prikken ligt hoger."
+        "description_second": "De meeste vaccins worden binnen een week na bezorging toegediend aan mensen. Mensen hebben twee prikken nodig voor een volledige vaccinatie.",
+        "warning": "",
+        "first_tab_title": "Geschatte aantallen",
+        "second_tab_title": "Gemelde aantallen",
+        "tab_total_estimated": {
+          "value": "226298",
+          "description": "",
+          "date_of_report_unix": "1612006032",
+          "date_of_insertion_unix": "1612006032",
+          "administered": [
+            {
+              "value": "152253",
+              "description": "gezet door GGD'en",
+              "report_date": "Gemeld aantal t/m 28 jan"
+            },
+            {
+              "value": "57216",
+              "description": "gezet door ziekenhuizen",
+              "report_date": "Gemeld aantal t/m 28 jan"
+            },
+            {
+              "value": "16829",
+              "description": "gezet door langdurige zorginstellingen",
+              "report_date": "Gemeld aantal t/m 28 jan"
+            },
+            {
+              "value": "",
+              "description": "",
+              "report_date": ""
+            },
+            {
+              "value": "",
+              "description": "",
+              "report_date": ""
+            }
+          ],
+          "description_first": "Dit getal is een schatting van hoeveel prikken er gezet zijn. We maken de schatting door te kijken naar hoeveel vaccins er zijn bezorgd bij priklocaties. [Lees hier meer over hoe deze schatting wordt berekend.](http://google.com)",
+          "description_second": "De meeste vaccins worden binnen een week na bezorging toegediend aan mensen. Mensen hebben twee prikken nodig voor een volledige vaccinatie. "
+        }
       },
       "kpi_expected_delivery": {
         "title": "Verwachte levering goedgekeurde vaccins",
@@ -2077,6 +2113,15 @@
         "description": "Aantal goedgekeurde vaccins dat Nederland de komende zes weken verwacht te krijgen. Elke week ontvangt Nederland een deel van de vaccins. Mensen hebben twee prikken nodig voor een volledige vaccinatie.",
         "date_of_report_unix": "1611600708",
         "date_of_insertion_unix": "1611600708"
+      },
+      "kpi_expected_page_additions": {
+        "title": "Verwachte toevoegingen aan deze pagina",
+        "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer:",
+        "additions": [
+          "Vaccinatiebereidheid",
+          "Vaccinatiegraad",
+          "Vaccins op voorraad"
+        ]
       },
       "kpi_stock": {
         "title": "",
