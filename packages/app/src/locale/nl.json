@@ -2075,7 +2075,7 @@
         "description_first": "Dit getal laat zien hoeveel prikken zijn gemeld in een registratiesysteem. [Lees meer over de registratie in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)",
         "description_second": "",
         "warning": "",
-        "first_tab_title": "Geschat aantal",
+        "first_tab_title": "Berekend aantal",
         "second_tab_title": "Gemeld aantal",
         "tab_total_estimated": {
           "value": "346790",
@@ -2091,12 +2091,12 @@
             {
               "value": "81088",
               "description": "gezet door ziekenhuizen",
-              "report_date": "Geschat aantal t/m 31 januari"
+              "report_date": "Berekend aantal t/m 31 januari"
             },
             {
               "value": "89416",
               "description": "gezet door langdurige zorginstellingen",
-              "report_date": "Geschat aantal t/m 31 januari"
+              "report_date": "Berekend aantal t/m 31 januari"
             },
             {
               "value": "",
@@ -2109,7 +2109,7 @@
               "report_date": ""
             }
           ],
-          "description_first": "Dit getal is een rekenkundige aanname van hoeveel prikken in totaal zijn gezet. De GGD-cijfers worden gemeld door de GGD-GHOR. Voor de ziekenhuizen en langdurige zorginstellingen maakt het RIVM een schatting door te kijken naar hoeveel vaccins er zijn bezorgd bij priklocaties. [Lees meer over de berekening in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)",
+          "description_first": "Dit getal is een rekenkundige aanname van hoeveel prikken in totaal zijn gezet. De GGD-cijfers worden gemeld door de GGD-GHOR. Voor de ziekenhuizen en langdurige zorginstellingen maakt het RIVM een berekening door te kijken naar hoeveel vaccins er zijn bezorgd bij priklocaties. [Lees meer over de berekening in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)",
           "description_second": ""
         }
       },
