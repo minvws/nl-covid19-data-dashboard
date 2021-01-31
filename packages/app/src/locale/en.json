@@ -764,7 +764,13 @@
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -1991,8 +1997,8 @@
     "title": "COVID-19 vaccinations",
     "description": "Vaccination is the most important step towards getting life back to normal. The Netherlands began vaccinating people against COVID-19 on 6 January 2021. Eventually, the vaccine will be offered to everyone aged 18 and over. This page shows how many doses of vaccine have been administered and how many doses are on their way.",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "date_unix": "1612006032",
-    "date_of_insertion_unix": "1612006032",
+    "date_unix": "1612112178",
+    "date_of_insertion_unix": "1612112178",
     "reference": {
       "href": "/verantwoording#vaccination",
       "text": "Read more about the source of the data on vaccination in the explanation of the presented data."
@@ -2015,7 +2021,7 @@
       },
       "all_left": {
         "href": "",
-        "text": "GGDs, LNAZ & long-term care institutions",
+        "text": "RIVM & GGD-GHOR",
         "download": ""
       },
       "all_right": {
@@ -2028,31 +2034,31 @@
       "difference": "",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "226298",
-          "date_unix": "1612006032",
-          "date_of_insertion_unix": "1612006032"
+          "total_vaccinated": "346790",
+          "date_unix": "1612112178",
+          "date_of_insertion_unix": "1612112178"
         }
       },
       "kpi_total": {
         "title": "Number of doses administered",
-        "value": "226298",
-        "description": "This is the number of vaccine doses that have been administered. Because vaccination figures are sometimes reported later, the actual number of vaccination doses administered is higher.",
-        "date_of_report_unix": "1612006032",
-        "date_of_insertion_unix": "1612006032",
+        "value": "346790",
+        "description": "",
+        "date_of_report_unix": "1612112178",
+        "date_of_insertion_unix": "1612112178",
         "administered": [
           {
-            "value": "152253",
+            "value": "176286",
             "description": "administered by municipal health services (GGDs)",
+            "report_date": "Reported number till 31 January"
+          },
+          {
+            "value": "",
+            "description": "",
             "report_date": ""
           },
           {
-            "value": "57216",
-            "description": "administered by hospitals*",
-            "report_date": ""
-          },
-          {
-            "value": "16829",
-            "description": "administered by long-term care institutions*",
+            "value": "",
+            "description": "",
             "report_date": ""
           },
           {
@@ -2066,31 +2072,31 @@
             "report_date": ""
           }
         ],
-        "description_first": "This is the number of vaccine doses that have been administered. Because vaccination figures are sometimes reported later, the actual number of vaccination doses administered is higher.",
-        "description_second": "* These numbers are reported by phone. Please note: the actual number of vaccination doses administered is therefore higher than reported here.",
+        "description_first": "This is the number of vaccine doses that have been administered and reported. [Read more in the explanation of the presented data.](https://coronadashboard.government.nl/verantwoording#vaccination)",
+        "description_second": "",
         "warning": "",
-        "first_tab_title": "Geschatte aantallen",
-        "second_tab_title": "Gemelde aantallen",
+        "first_tab_title": "Estimated number",
+        "second_tab_title": "Reported number",
         "tab_total_estimated": {
-          "value": "226298",
+          "value": "346790",
           "description": "",
-          "date_of_report_unix": "1612006032",
-          "date_of_insertion_unix": "1612006032",
+          "date_of_report_unix": "1612112178",
+          "date_of_insertion_unix": "1612112178",
           "administered": [
             {
-              "value": "152253",
+              "value": "176286",
               "description": "gezet door GGD'en",
-              "report_date": "Gemeld aantal t/m 28 jan"
+              "report_date": "Reported number till 31 January"
             },
             {
-              "value": "57216",
-              "description": "gezet door ziekenhuizen*",
-              "report_date": "Gemeld aantal t/m 28 jan"
+              "value": "81088",
+              "description": "administered by hospitals",
+              "report_date": "Estimated number till 31 January"
             },
             {
-              "value": "16829",
-              "description": "gezet door langdurige zorginstellingen",
-              "report_date": "Gemeld aantal t/m 28 jan"
+              "value": "89416",
+              "description": "administered by long-term care institutions",
+              "report_date": "Estimated number till 31 January"
             },
             {
               "value": "",
@@ -2103,21 +2109,16 @@
               "report_date": ""
             }
           ],
-          "description_first": "Dit getal is een schatting van hoeveel prikken er gezet zijn. We maken de schatting door te kijken naar hoeveel vaccins er zijn bezorgd bij priklocaties. Lees hier meer over hoe deze schatting wordt berekend",
-          "description_second": "De meeste vaccins worden binnen een week na bezorging toegediend aan mensen. Mensen hebben twee prikken nodig voor een volledige vaccinatie. "
+          "description_first": "This figure is an estimate of the total number of vaccine doses that have been administered. The estimate is based on the number of vaccine doses that have been delivered to the locations where injections are given. [Read more in the explanation of the presented data.](https://coronadashboard.government.nl/verantwoording#vaccination)",
+          "description_second": ""
         }
       },
       "kpi_expected_delivery": {
         "title": "Approved vaccines to be delivered",
         "value": "1302750",
         "description": "This is the number of approved vaccine doses the Netherlands expects to receive over the next six weeks. The Netherlands will receive a new delivery each week. People need two separately administered doses for the vaccine to be maximally effective.",
-        "date_of_report_unix": "1611600708",
-        "date_of_insertion_unix": "1611600708"
-      },
-      "kpi_expected_page_additions": {
-        "title": "",
-        "description": "",
-        "additions": ["", "", ""]
+        "date_of_report_unix": "1611561378",
+        "date_of_insertion_unix": "1611561378"
       },
       "kpi_stock": {
         "title": "",
@@ -2147,6 +2148,15 @@
             "value": "",
             "description": ""
           }
+        ]
+      },
+      "kpi_expected_page_additions": {
+        "title": "Expected data on vaccinations",
+        "description": "More data on vaccinations will be added in the near future, including:",
+        "additions": [
+          "Willingness to be vaccinated",
+          "Vaccination coverage",
+          "Vaccine doses in stock"
         ]
       }
     },
@@ -2208,7 +2218,7 @@
       "toegediende_vaccins": {
         "title": "Number of doses administered",
         "sub_title": "Vaccines to be delivered",
-        "administered_tests": "{{administeredVaccines}} vaccine doses have been administered so far. This number includes both first and second doses.",
+        "administered_tests": "{{administeredVaccines}} vaccine doses have been administered so far. This number is calculated and includes both first and second doses.",
         "supply": "The Netherlands expects tot receive {{expectedDelivery}} approved vaccine doses over the next six weeks."
       }
     },
