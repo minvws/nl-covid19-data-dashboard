@@ -764,13 +764,7 @@
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": [
-      "0 to 20",
-      "20 to 40",
-      "40 to 60",
-      "60 to 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -2048,28 +2042,70 @@
         "administered": [
           {
             "value": "152253",
-            "description": "administered by municipal health services (GGDs)"
+            "description": "administered by municipal health services (GGDs)",
+            "report_date": ""
           },
           {
             "value": "57216",
-            "description": "administered by hospitals*"
+            "description": "administered by hospitals*",
+            "report_date": ""
           },
           {
             "value": "16829",
-            "description": "administered by long-term care institutions*"
+            "description": "administered by long-term care institutions*",
+            "report_date": ""
           },
           {
             "value": "",
-            "description": ""
+            "description": "",
+            "report_date": ""
           },
           {
             "value": "",
-            "description": ""
+            "description": "",
+            "report_date": ""
           }
         ],
         "description_first": "This is the number of vaccine doses that have been administered. Because vaccination figures are sometimes reported later, the actual number of vaccination doses administered is higher.",
         "description_second": "* These numbers are reported by phone. Please note: the actual number of vaccine doses administered is therefore higher than reported here.",
-        "warning": "Please note: the actual number of vaccine doses administered is higher than reported here."
+        "warning": "",
+        "first_tab_title": "Geschatte aantallen",
+        "second_tab_title": "Gemelde aantallen",
+        "tab_total_estimated": {
+          "value": "226298",
+          "description": "",
+          "date_of_report_unix": "1612006032",
+          "date_of_insertion_unix": "1612006032",
+          "administered": [
+            {
+              "value": "152253",
+              "description": "gezet door GGD'en",
+              "report_date": "Gemeld aantal t/m 28 jan"
+            },
+            {
+              "value": "57216",
+              "description": "gezet door ziekenhuizen*",
+              "report_date": "Gemeld aantal t/m 28 jan"
+            },
+            {
+              "value": "16829",
+              "description": "gezet door langdurige zorginstellingen",
+              "report_date": "Gemeld aantal t/m 28 jan"
+            },
+            {
+              "value": "",
+              "description": "",
+              "report_date": ""
+            },
+            {
+              "value": "",
+              "description": "",
+              "report_date": ""
+            }
+          ],
+          "description_first": "Dit getal is een schatting van hoeveel prikken er gezet zijn. We maken de schatting door te kijken naar hoeveel vaccins er zijn bezorgd bij priklocaties. Lees hier meer over hoe deze schatting wordt berekend",
+          "description_second": "De meeste vaccins worden binnen een week na bezorging toegediend aan mensen. Mensen hebben twee prikken nodig voor een volledige vaccinatie. "
+        }
       },
       "kpi_expected_delivery": {
         "title": "Approved vaccines to be delivered",
@@ -2077,6 +2113,11 @@
         "description": "This is the number of approved vaccine doses the Netherlands expects to receive over the next six weeks. The Netherlands will receive a new delivery each week. People need two separately administered doses for the vaccine to be maximally effective.",
         "date_of_report_unix": "1611600708",
         "date_of_insertion_unix": "1611600708"
+      },
+      "kpi_expected_page_additions": {
+        "title": "",
+        "description": "",
+        "additions": ["", "", ""]
       },
       "kpi_stock": {
         "title": "",
