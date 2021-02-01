@@ -1997,8 +1997,8 @@
     "title": "COVID-19 vaccinations",
     "description": "Vaccination is the most important step towards getting life back to normal. The Netherlands began vaccinating people against COVID-19 on 6 January 2021. Eventually, the vaccine will be offered to everyone aged 18 and over. This page shows how many doses of vaccine have been administered and how many doses are on their way.",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "date_unix": "1612006032",
-    "date_of_insertion_unix": "1612006032",
+    "date_unix": "1612196735",
+    "date_of_insertion_unix": "1612196735",
     "reference": {
       "href": "/verantwoording#vaccination",
       "text": "Read more about the source of the data on vaccination in the explanation of the presented data."
@@ -2021,7 +2021,7 @@
       },
       "all_left": {
         "href": "",
-        "text": "GGDs, LNAZ & long-term care institutions",
+        "text": "RIVM, LNAZ & GGD-GHOR",
         "download": ""
       },
       "all_right": {
@@ -2034,31 +2034,31 @@
       "difference": "",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "226298",
-          "date_unix": "1612006032",
-          "date_of_insertion_unix": "1612006032"
+          "total_vaccinated": "343881",
+          "date_unix": "1612196735",
+          "date_of_insertion_unix": "1612196735"
         }
       },
       "kpi_total": {
         "title": "Number of doses administered",
-        "value": "226298",
-        "description": "This is the number of vaccine doses that have been administered. Because vaccination figures are sometimes reported later, the actual number of vaccination doses administered is higher.",
-        "date_of_report_unix": "1612006032",
-        "date_of_insertion_unix": "1612006032",
+        "value": "248055",
+        "description": "",
+        "date_of_report_unix": "1612196735",
+        "date_of_insertion_unix": "1612196735",
         "administered": [
           {
-            "value": "152253",
-            "description": "administered by municipal health services (GGDs)",
-            "report_date": ""
+            "value": "187339",
+            "description": "reported by GGD-GHOR",
+            "report_date": "Reported number till 31 January"
           },
           {
-            "value": "57216",
-            "description": "administered by hospitals*",
-            "report_date": ""
+            "value": "60716",
+            "description": "reported by LNAZ",
+            "report_date": "Reported number till 31 January"
           },
           {
-            "value": "16829",
-            "description": "administered by long-term care institutions*",
+            "value": "",
+            "description": "",
             "report_date": ""
           },
           {
