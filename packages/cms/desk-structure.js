@@ -54,6 +54,7 @@ const hiddenDocTypes = (listItem) =>
     'veelgesteldeVragen',
     'cijferVerantwoording',
     'overDitDashboard',
+    'toegankelijkheid',
     'overRisicoNiveaus',
     'roadmap',
     'lockdown',
@@ -113,6 +114,32 @@ export default () =>
             .title('Over dit dashboard')
             .schemaType('overDitDashboard')
             .documentId('overDitDashboard')
+            .views([
+              S.view.form(),
+              // S.view
+              //   .component(WebPreview)
+              //   .options({ previewURL: `${previewURL}/over` })
+              //   .title("Web"),
+              // S.view
+              //   .component(IFrameMobilePreview)
+              //   .options({ previewURL: `${previewURL}/over` })
+              //   .title("Mobile"),
+              // S.view
+              //   .component(ColorblindPreview)
+              //   .options({ previewURL: `${previewURL}/over` })
+              //   .title("Color Blindness"),
+            ])
+        ),
+
+      S.listItem()
+        .title('Toegankelijkheid')
+        .schemaType('toegankelijkheid')
+        .icon(GrCircleInformation)
+        .child(
+          S.editor()
+            .title('Toegankelijkheid')
+            .schemaType('toegankelijkheid')
+            .documentId('toegankelijkheid')
             .views([
               S.view.form(),
               // S.view
