@@ -2,6 +2,7 @@ import StructureBuilder from '@sanity/desk-tool/structure-builder';
 import { BsCardChecklist, BsLockFill, BsMap, BsTable } from 'react-icons/bs';
 import { GrCircleInformation, GrDashboard } from 'react-icons/gr';
 import { MdQuestionAnswer } from 'react-icons/md';
+import { RiPagesFill } from 'react-icons/ri';
 import 'sanity-mobile-preview/dist/index.css?raw';
 
 // Build up the root of the preview URL
@@ -102,41 +103,41 @@ export default () =>
         'Cijferverantwoording',
         'cijferVerantwoording'
       ),
-      addListItem(StructureBuilder, BsCardChecklist, 'Sterfte', 'deceasedPage'),
+      addListItem(StructureBuilder, RiPagesFill, 'Sterfte', 'deceasedPage'),
       addListItem(
         StructureBuilder,
-        BsCardChecklist,
+        RiPagesFill,
         'Gedrag en naleving',
         'behaviorPage'
       ),
       addListItem(
         StructureBuilder,
-        BsCardChecklist,
+        RiPagesFill,
         'Ziekenhuis opnames',
         'hospitalPage'
       ),
       addListItem(
         StructureBuilder,
-        BsCardChecklist,
+        RiPagesFill,
         'IC opnames',
         'intensiveCarePage'
       ),
       addListItem(
         StructureBuilder,
-        BsCardChecklist,
+        RiPagesFill,
         'Positieve testen',
         'positiveTestsPage'
       ),
       addListItem(
         StructureBuilder,
-        BsCardChecklist,
+        RiPagesFill,
         'Reproductiegetal',
         'reproductionPage'
       ),
-      addListItem(StructureBuilder, BsCardChecklist, 'Rioolwater', 'sewerPage'),
+      addListItem(StructureBuilder, RiPagesFill, 'Rioolwater', 'sewerPage'),
       addListItem(
         StructureBuilder,
-        BsCardChecklist,
+        RiPagesFill,
         'Vaccinaties',
         'vaccinationsPage'
       ),
