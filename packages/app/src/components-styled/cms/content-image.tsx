@@ -7,11 +7,11 @@ import { MaxWidth } from '~/components-styled/max-width';
 import { getImageProps } from '~/lib/sanity';
 import { ImageBlock, RichContentImageBlock } from '~/types/cms';
 
-export function ContentImage({
-  node,
-}: {
+interface ContentImageProps {
   node: ImageBlock | RichContentImageBlock;
-}) {
+}
+
+export function ContentImage({ node }: ContentImageProps) {
   const caption = 'caption' in node && node.caption && (
     <Caption>{node.caption}</Caption>
   );
