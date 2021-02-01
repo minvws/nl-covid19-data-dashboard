@@ -12,13 +12,13 @@ import { ArticleSummary } from './article-teaser';
 import { LinkWithIcon } from './link-with-icon';
 
 type ArticleStripProps = {
-  articles: ArticleSummary[];
+  articles?: ArticleSummary[];
 };
 
 export function ArticleStrip(props: ArticleStripProps) {
   const { articles } = props;
 
-  if (articles.length === 0) {
+  if (!articles?.length) {
     return null;
   }
 
@@ -36,7 +36,7 @@ export function ArticleStrip(props: ArticleStripProps) {
 
       {articles.map((article, index: number) => (
         <Box
-          key={index}
+          key={article.slug.current}
           width={{ _: '100%', lg: '50%' }}
           paddingRight={{ lg: index === 0 ? 0 : 3 }}
           marginBottom={{ _: index === 0 ? 3 : 0 }}

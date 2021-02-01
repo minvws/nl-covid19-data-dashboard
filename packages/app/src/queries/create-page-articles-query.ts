@@ -11,11 +11,13 @@ type ArticlePageSchema =
   | 'vaccinationsPage';
 
 export function createPageArticlesQuery(schemaName: ArticlePageSchema) {
-  return `*[_type == '${schemaName}']{"articles":[...articles[]->{"title":title.${targetLanguage},
+  const query = `*[_type == '${schemaName}']{"articles":[...articles[]->{"title":title.${targetLanguage},
   slug,
   "summary":summary.${targetLanguage},
   "cover": {
     ...cover,
     "asset": cover.asset->
   }}]}[0]`;
+
+  return query;
 }

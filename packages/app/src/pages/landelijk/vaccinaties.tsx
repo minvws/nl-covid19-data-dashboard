@@ -32,7 +32,7 @@ export const getStaticProps = createGetStaticProps(
   getNlData,
   getText,
   createGetContent<{
-    articles: ArticleSummary[];
+    articles?: ArticleSummary[];
   }>(createPageArticlesQuery('vaccinationsPage'))
 );
 
@@ -66,6 +66,9 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             dataSources: [],
           }}
         />
+
+        <ArticleStrip articles={content.articles} />
+
         <TwoKpiSection>
           <KpiTile
             title={text.data.kpi_total.title}
@@ -205,8 +208,6 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             )}
           </KpiTile>
         </TwoKpiSection>
-
-        <ArticleStrip articles={content.articles} />
 
         <ChartTile
           title={text.grafiek.titel}
