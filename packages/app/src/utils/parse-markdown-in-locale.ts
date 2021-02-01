@@ -21,6 +21,12 @@ const MARKDOWN_KEYS = [
   'nationaal_actueel.risiconiveaus.selecteer_toelichting',
   'veiligheidsregio_actueel.risiconiveaus.selecteer_toelichting',
   'gemeente_actueel.risiconiveaus.selecteer_toelichting',
+  'vaccinaties.data.kpi_total.tab_total_estimated.description_first',
+  'vaccinaties.data.kpi_total.tab_total_estimated.description_second',
+  'vaccinaties.data.kpi_total.description_first',
+  'vaccinaties.data.kpi_total.description_second',
+  'vaccinaties.data.kpi_total.administered[].description',
+  'vaccinaties.data.kpi_total.tab_total_estimated.administered[].description',
 ];
 
 export function parseMarkdownInLocale(text: TALLLanguages) {

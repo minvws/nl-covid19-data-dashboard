@@ -1,25 +1,22 @@
 import { css } from '@styled-system/css';
 import { ParentSize } from '@visx/responsive';
-import { Fragment } from 'react';
-import styled from 'styled-components';
+import { Fragment, useState } from 'react';
 import VaccinatieIcon from '~/assets/vaccinaties.svg';
-import { ArticleStrip } from '~/components-styled/article-strip';
-import { ArticleSummary } from '~/components-styled/article-teaser';
+import { Box } from '~/components-styled/base';
 import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
+import { RadioGroup } from '~/components-styled/radio-group';
 import { SEOHead } from '~/components-styled/seo-head';
 import { StackedChart } from '~/components-styled/stacked-chart';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { Heading, Text } from '~/components-styled/typography';
+import { InlineText, Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
-import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
-  createGetContent,
   getLastGeneratedDate,
   getNlData,
   getText,
@@ -38,9 +35,11 @@ export const getStaticProps = createGetStaticProps(
 const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
   data,
   text: siteText,
-  content,
 }) => {
   const text = siteText.vaccinaties;
+  const [selectedTab, setSelectedTab] = useState(
+    text.data.kpi_total.first_tab_title
+  );
 
   return (
     <>
@@ -62,7 +61,6 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             dataSources: [],
           }}
         />
-        <ArticleStrip ArticleTeasers={content.articles} />
         <TwoKpiSection>
           <KpiTile
             title={text.data.kpi_total.title}
@@ -71,47 +69,135 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
               source: text.bronnen.all_left,
             }}
           >
-            <KpiValue absolute={parseFloat(text.data.kpi_total.value)} />
-            <Text mb={3}>{text.data.kpi_total.description_first}</Text>
-            {text.data.kpi_total.administered.map((item, index) => (
-              <Fragment key={index}>
-                {item.value && item.description && (
-                  <Heading level={4} fontSize={'1.1em'} mt={3} mb={0}>
-                    <span css={css({ color: 'data.primary' })}>
-                      {formatNumber(parseFloat(item.value))}
-                    </span>
-                    {` ${item.description}`}
-                  </Heading>
-                )}
-              </Fragment>
-            ))}
-            <Text mb={3}>{text.data.kpi_total.description_second}</Text>
-          </KpiTile>
-
-          <KpiTile
-            title={text.data.kpi_expected_delivery.title}
-            metadata={{
-              date: parseFloat(
-                text.data.kpi_expected_delivery.date_of_report_unix
-              ),
-              source: text.bronnen.all_right,
-            }}
-          >
-            <KpiValue
-              absolute={parseFloat(text.data.kpi_expected_delivery.value)}
-            />
-            <Text mb={4}>{text.data.kpi_expected_delivery.description}</Text>
-
-            <Heading level={3} mt={4}>
-              {text.section_vaccinations_more_information.title}
-            </Heading>
-            <Text
-              mb={0}
-              as={StyledParagraph}
-              dangerouslySetInnerHTML={{
-                __html: text.section_vaccinations_more_information.description,
-              }}
-            />
+            <Box
+              css={css({ '& div': { justifyContent: 'flex-start' } })}
+              mb={3}
+            >
+              <RadioGroup
+                value={selectedTab}
+                onChange={(value) => setSelectedTab(value)}
+                items={[
+                  {
+                    label: text.data.kpi_total.first_tab_title,
+                    value: text.data.kpi_total.first_tab_title,
+                  },
+                  {
+                    label: text.data.kpi_total.second_tab_title,
+                    value: text.data.kpi_total.second_tab_title,
+                  },
+                ]}
+              />
+            </Box>
+            {selectedTab == text.data.kpi_total.first_tab_title && (
+              <>
+                <KpiValue
+                  absolute={parseFloat(
+                    text.data.kpi_total.tab_total_estimated.value
+                  )}
+                />
+                <Box display="flex" flexDirection={{ _: 'column', lg: 'row' }}>
+                  <Box flex={{ lg: '1 1 50%' }}>
+                    <Text
+                      mb={3}
+                      dangerouslySetInnerHTML={{
+                        __html:
+                          text.data.kpi_total.tab_total_estimated
+                            .description_first,
+                      }}
+                    />
+                    <Text
+                      mb={3}
+                      dangerouslySetInnerHTML={{
+                        __html:
+                          text.data.kpi_total.tab_total_estimated
+                            .description_second,
+                      }}
+                    />
+                  </Box>
+                  <Box flex={{ lg: '1 1 50%' }} ml={{ lg: 4 }}>
+                    {text.data.kpi_total.tab_total_estimated.administered.map(
+                      (item, index) => (
+                        <Fragment key={index}>
+                          {item.value && item.description && (
+                            <Text fontWeight="bold">
+                              <InlineText css={css({ color: 'data.primary' })}>
+                                {formatNumber(parseFloat(item.value))}
+                              </InlineText>{' '}
+                              <InlineText
+                                css={css({
+                                  '& p': { display: 'inline-block', m: 0 },
+                                })}
+                                dangerouslySetInnerHTML={{
+                                  __html: item.description,
+                                }}
+                              />
+                              <br />
+                              <InlineText
+                                fontWeight="normal"
+                                fontSize={1}
+                                color="annotation"
+                              >
+                                {item.report_date}
+                              </InlineText>
+                            </Text>
+                          )}
+                        </Fragment>
+                      )
+                    )}
+                  </Box>
+                </Box>
+              </>
+            )}
+            {selectedTab == text.data.kpi_total.second_tab_title && (
+              <>
+                <KpiValue absolute={parseFloat(text.data.kpi_total.value)} />
+                <Box display="flex" flexDirection={{ _: 'column', lg: 'row' }}>
+                  <Box flex={{ lg: '1 1 50%' }}>
+                    <Text
+                      mb={3}
+                      dangerouslySetInnerHTML={{
+                        __html: text.data.kpi_total.description_first,
+                      }}
+                    />
+                    <Text
+                      mb={3}
+                      dangerouslySetInnerHTML={{
+                        __html: text.data.kpi_total.description_second,
+                      }}
+                    />
+                  </Box>
+                  <Box flex={{ lg: '1 1 50%' }} ml={{ lg: 4 }}>
+                    {text.data.kpi_total.administered.map((item, index) => (
+                      <Fragment key={index}>
+                        {item.value && item.description && (
+                          <Text fontWeight="bold">
+                            <InlineText css={css({ color: 'data.primary' })}>
+                              {formatNumber(parseFloat(item.value))}
+                            </InlineText>{' '}
+                            <InlineText
+                              css={css({
+                                '& p': { display: 'inline-block', m: 0 },
+                              })}
+                              dangerouslySetInnerHTML={{
+                                __html: item.description,
+                              }}
+                            />
+                            <br />
+                            <InlineText
+                              fontWeight="normal"
+                              fontSize={1}
+                              color="annotation"
+                            >
+                              {item.report_date}
+                            </InlineText>
+                          </Text>
+                        )}
+                      </Fragment>
+                    ))}
+                  </Box>
+                </Box>
+              </>
+            )}
           </KpiTile>
         </TwoKpiSection>
 
@@ -148,22 +234,41 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             )}
           </ParentSize>
         </ChartTile>
+
+        <TwoKpiSection>
+          <KpiTile
+            title={text.data.kpi_expected_delivery.title}
+            metadata={{
+              date: parseFloat(
+                text.data.kpi_expected_delivery.date_of_report_unix
+              ),
+              source: text.bronnen.all_right,
+            }}
+          >
+            <KpiValue
+              absolute={parseFloat(text.data.kpi_expected_delivery.value)}
+            />
+            <Text mb={4}>{text.data.kpi_expected_delivery.description}</Text>
+          </KpiTile>
+          <KpiTile title={text.data.kpi_expected_page_additions.title}>
+            <Text mb={4}>
+              {text.data.kpi_expected_page_additions.description}
+            </Text>
+            <ul>
+              {text.data.kpi_expected_page_additions.additions
+                .filter((x) => x.length)
+                .map((addition) => (
+                  <li key={addition}>
+                    <InlineText>{addition}</InlineText>
+                  </li>
+                ))}
+            </ul>
+          </KpiTile>
+        </TwoKpiSection>
       </TileList>
     </>
   );
 };
-
-const StyledParagraph = styled.div(
-  css({
-    p: {
-      marginBottom: 0,
-    },
-    ul: {
-      marginTop: 0,
-      paddingLeft: '1.2rem',
-    },
-  })
-);
 
 VaccinationPage.getLayout = getNationalLayout;
 
