@@ -1997,8 +1997,8 @@
     "title": "COVID-19-vaccinaties",
     "description": "Vaccineren is de belangrijkste stap naar een samenleving zonder coronaregels. Op 6 januari 2021 is Nederland begonnen met vaccineren. Uiteindelijk komt iedereen van 18 jaar of ouder aan de beurt. De cijfers op deze pagina laten zien hoeveel prikken zijn gezet en hoeveel vaccins er beschikbaar komen.",
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "date_unix": "1612112178",
-    "date_of_insertion_unix": "1612112178",
+    "date_unix": "1612196735",
+    "date_of_insertion_unix": "1612196735",
     "reference": {
       "href": "/verantwoording#vaccinatie",
       "text": "Lees meer over de bron van de vaccinatiecijfers in de cijferverantwoording."
@@ -2021,7 +2021,7 @@
       },
       "all_left": {
         "href": "",
-        "text": "RIVM & GGD-GHOR",
+        "text": "RIVM, LNAZ & GGD-GHOR",
         "download": ""
       },
       "all_right": {
@@ -2034,27 +2034,27 @@
       "difference": "Do not remove this key. It is required as a temporary workaround",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "346790",
-          "date_unix": "1612112178",
-          "date_of_insertion_unix": "1612112178"
+          "total_vaccinated": "343881",
+          "date_unix": "1612196735",
+          "date_of_insertion_unix": "1612196735"
         }
       },
       "kpi_total": {
         "title": "Aantal gezette prikken",
-        "value": "176286",
+        "value": "248055",
         "description": "",
-        "date_of_report_unix": "1612112178",
-        "date_of_insertion_unix": "1612112178",
+        "date_of_report_unix": "1612196735",
+        "date_of_insertion_unix": "1612196735",
         "administered": [
           {
-            "value": "176286",
-            "description": "geregistreerd in het GGD-systeem",
-            "report_date": "Gemeld aantal t/m 30 januari"
+            "value": "187339",
+            "description": "gemeld door GGD-GHOR",
+            "report_date": "Gemeld aantal tot en met 31 januari"
           },
           {
-            "value": "",
-            "description": "",
-            "report_date": ""
+            "value": "60716",
+            "description": "gemeld door LNAZ",
+            "report_date": "Gemeld aantal tot en met 31 januari"
           },
           {
             "value": "",
@@ -2072,31 +2072,31 @@
             "report_date": ""
           }
         ],
-        "description_first": "Dit getal laat zien hoeveel prikken zijn gemeld in een registratiesysteem. [Lees meer over de registratie in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)",
+        "description_first": "Dit getal laat zien hoeveel prikken zijn gemeld door GGD-GHOR en LNAZ. [Lees meer over de registratie in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)",
         "description_second": "",
         "warning": "",
-        "first_tab_title": "Geschat aantal",
+        "first_tab_title": "Berekend aantal",
         "second_tab_title": "Gemeld aantal",
         "tab_total_estimated": {
-          "value": "346790",
+          "value": "343881",
           "description": "",
-          "date_of_report_unix": "1612112178",
-          "date_of_insertion_unix": "1612112178",
+          "date_of_report_unix": "1612196735",
+          "date_of_insertion_unix": "1612196735",
           "administered": [
             {
-              "value": "176286",
+              "value": "187339",
               "description": "gezet door GGD'en",
-              "report_date": "Gemeld aantal t/m 30 januari"
+              "report_date": "Gemeld aantal tot en met 31 januari"
             },
             {
-              "value": "81088",
-              "description": "gezet door ziekenhuizen",
-              "report_date": "Geschat aantal t/m 30 januari"
+              "value": "60716",
+              "description": "gezet in ziekenhuizen",
+              "report_date": "Gemeld aantal tot en met 31 januari"
             },
             {
-              "value": "89416",
-              "description": "gezet door langdurige zorginstellingen",
-              "report_date": "Geschat aantal t/m 30 januari"
+              "value": "95826",
+              "description": "gezet in langdurige zorginstellingen",
+              "report_date": "Berekend aantal tot en met 31 januari"
             },
             {
               "value": "",
@@ -2109,16 +2109,16 @@
               "report_date": ""
             }
           ],
-          "description_first": "Dit getal is een rekenkundige aanname van hoeveel prikken in totaal zijn gezet. De GGD-cijfers worden gemeld door de GGD-GHOR. Voor de ziekenhuizen en langdurige zorginstellingen maakt het RIVM een schatting door te kijken naar hoeveel vaccins er zijn bezorgd bij priklocaties. [Lees meer over de berekening in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)",
-          "description_second": ""
+          "description_first": "Dit getal is een rekenkundige aanname van hoeveel prikken in totaal zijn gezet. De GGD-cijfers worden gemeld door de GGD-GHOR en de ziekenhuiscijfers door het LNAZ. Voor de langdurige zorginstellingen maakt het RIVM een berekening door te kijken naar hoeveel vaccins er zijn bezorgd bij priklocaties. [Lees meer over de berekening in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)",
+          "description_second": "[Op 1 februari is een dubbeltelling rechtgezet.](https://www.rijksoverheid.nl/actueel/nieuws/2021/02/01/dubbeltelling-in-vaccinatiecijfers-rechtgezet)"
         }
       },
       "kpi_expected_delivery": {
         "title": "Verwachte levering goedgekeurde vaccins",
         "value": "1302750",
         "description": "Aantal goedgekeurde vaccins dat Nederland de komende zes weken verwacht te krijgen. Elke week ontvangt Nederland een deel van de vaccins. Mensen hebben twee prikken nodig voor een volledige vaccinatie.",
-        "date_of_report_unix": "1611561378",
-        "date_of_insertion_unix": "1611561378"
+        "date_of_report_unix": "1611600708",
+        "date_of_insertion_unix": "1611600708"
       },
       "kpi_stock": {
         "title": "",
