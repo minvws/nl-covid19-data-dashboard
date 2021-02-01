@@ -2072,31 +2072,31 @@
             "report_date": ""
           }
         ],
-        "description_first": "This is the number of vaccine doses administered reported by GGD-GHOR and LNAZ. [Read more in the explanation of the presented data.](https://coronadashboard.government.nl/verantwoording#vaccination)",
-        "description_second": "",
-        "warning": "",
-        "first_tab_title": "Calculated number",
-        "second_tab_title": "Reported number",
+        "description_first": "This is the number of vaccine doses that have been administered. Because vaccination figures are sometimes reported later, the actual number of vaccination doses administered is higher.",
+        "description_second": "* These numbers are reported by phone. Please note: the actual number of vaccine doses administered is therefore higher than reported here.",
+        "warning": "Please note: the actual number of vaccine doses administered is higher than reported here.",
+        "first_tab_title": "",
+        "second_tab_title": "",
         "tab_total_estimated": {
-          "value": "343881",
+          "value": "",
           "description": "",
-          "date_of_report_unix": "1612196735",
-          "date_of_insertion_unix": "1612196735",
+          "date_of_report_unix": "",
+          "date_of_insertion_unix": "",
           "administered": [
             {
-              "value": "187339",
-              "description": "administered by GGDs",
-              "report_date": "Reported number till 31 January"
+              "value": "",
+              "description": "",
+              "report_date": ""
             },
             {
-              "value": "60716",
-              "description": "administered in hospitals",
-              "report_date": "Reported number till 31 January"
+              "value": "",
+              "description": "",
+              "report_date": ""
             },
             {
-              "value": "95826",
-              "description": "administered in long-term care institutions",
-              "report_date": "Calculated number till 31 January"
+              "value": "",
+              "description": "",
+              "report_date": ""
             },
             {
               "value": "",
@@ -2109,8 +2109,8 @@
               "report_date": ""
             }
           ],
-          "description_first": "This figure is a calculation of the total number of vaccine doses that have been administered. The calculation is based on the number of vaccine doses that have been delivered to the locations where injections are given. [Read more about the calculation in the explanation of the presented data.](https://coronadashboard.government.nl/verantwoording#vaccination)",
-          "description_second": "[On 1 February some figures have been corrected.](https://www.rijksoverheid.nl/actueel/nieuws/2021/02/01/dubbeltelling-in-vaccinatiecijfers-rechtgezet)"
+          "description_first": "",
+          "description_second": ""
         }
       },
       "kpi_expected_delivery": {
@@ -2151,12 +2151,12 @@
         ]
       },
       "kpi_expected_page_additions": {
-        "title": "Expected data on vaccinations",
-        "description": "More data on vaccinations will be added in the near future, including:",
+        "title": "",
+        "description": "",
         "additions": [
-          "Willingness to be vaccinated",
-          "Vaccination coverage",
-          "Vaccine doses in stock"
+          "",
+          "",
+          ""
         ]
       }
     },
