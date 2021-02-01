@@ -10,7 +10,7 @@ export default {
     },
     {
       name: 'description',
-      type: 'localeBlock',
+      type: 'localeRichContentBlock',
       title: 'Beschrijving',
     },
   ],

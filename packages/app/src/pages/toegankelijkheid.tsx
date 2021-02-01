@@ -1,24 +1,55 @@
 import Head from 'next/head';
-import { MaxWidth } from '~/components-styled/max-width';
+import { Box } from '~/components-styled/base';
+import { ContentBlock } from '~/components-styled/cms/content-block';
+import { RichContent } from '~/components-styled/cms/rich-content';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
-import { PortableText } from '~/lib/sanity';
 import siteText from '~/locale/index';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
 } from '~/static-props/get-data';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
-import styles from './over.module.scss';
-import { PortableTextEntry } from '@sanity/block-content-to-react';
+import { RichContentBlock } from '~/types/cms';
 
 interface AccessibilityPageData {
   title: string | null;
-  description: PortableTextEntry[] | null;
+  description: RichContentBlock[] | null;
 }
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  createGetContent<AccessibilityPageData>(`*[_type == 'toegankelijkheid'][0]`)
+  createGetContent<AccessibilityPageData>(`
+  *[_type == 'toegankelijkheid']{
+    ...,
+    "description": {
+      ...,
+      "_type": description._type,
+      "nl": [
+        ...description.nl[]{
+          ...,
+          "asset": asset->,
+          markDefs[]{
+            ...,
+            "asset": asset->
+          }
+        }
+      ],
+      "en": [
+        ...description.en[]
+        {
+          ...,
+          "asset": asset->,
+          markDefs[]{
+            ...,
+            "asset": asset->
+          }
+        },
+      ],
+
+    }
+  }[0]
+
+  `)
 );
 
 const AccessibilityPage: FCWithLayout<typeof getStaticProps> = (props) => {
@@ -40,16 +71,12 @@ const AccessibilityPage: FCWithLayout<typeof getStaticProps> = (props) => {
         />
       </Head>
 
-      <div className={styles.container}>
-        <MaxWidth>
-          <div className={styles.maxwidth}>
-            {content.title && <h2>{content.title}</h2>}
-            {content.description && (
-              <PortableText blocks={content.description} />
-            )}
-          </div>
-        </MaxWidth>
-      </div>
+      <Box bg="white" py={{ _: 4, md: 5 }}>
+        <ContentBlock spacing={3}>
+          {content.title && <h2>{content.title}</h2>}
+          {content.description && <RichContent blocks={content.description} />}
+        </ContentBlock>
+      </Box>
     </>
   );
 };

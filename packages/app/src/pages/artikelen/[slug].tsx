@@ -1,7 +1,7 @@
 import { ArticleDetail } from '~/components-styled/article-detail';
 import { Box } from '~/components-styled/base';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
-import { client, localize } from '~/lib/sanity';
+import { client, getImageSrc, localize } from '~/lib/sanity';
 import { targetLanguage } from '~/locale/index';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
@@ -10,8 +10,6 @@ import {
 } from '~/static-props/get-data';
 import { Article, Block } from '~/types/cms';
 import { assert } from '~/utils/assert';
-import { imageResizeTargets } from '@corona-dashboard/common';
-import { findClosestSize } from '~/utils/findClosestSize';
 
 const articlesQuery = `*[_type == 'article'] {"slug":slug.current}`;
 
@@ -47,14 +45,22 @@ export const getStaticProps = createGetStaticProps(
   		    ...content.nl[]
 			    {
       	    ...,
-      	    "asset": asset->
+      	    "asset": asset->,
+            markDefs[]{
+              ...,
+              "asset": asset->
+            }
      	    },
 		    ],
   	    "en": [
   		    ...content.en[]
 			    {
       	    ...,
-      	    "asset": asset->
+      	    "asset": asset->,
+            markDefs[]{
+              ...,
+              "asset": asset->
+            }
      	    },
 		    ],
 	    }
@@ -80,9 +86,8 @@ ArticleDetailPage.getLayout = (page, props) => {
   const { cover } = props.content;
   const { asset } = cover;
 
-  const url = `https://coronadashboard.rijksoverheid.nl/cms/${
-    asset.assetId
-  }-${findClosestSize(1200, imageResizeTargets)}.${asset.extension}`;
+  const imgPath = getImageSrc(asset, 1200);
+  const url = `https://coronadashboard.rijksoverheid.nl${imgPath}`;
 
   return getLayoutWithMetadata({
     title: getTitle(props.content.title),

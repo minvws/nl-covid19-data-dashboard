@@ -3,7 +3,7 @@ import { imageResizeTargets } from '@corona-dashboard/common';
 import BlockContent from '@sanity/block-content-to-react';
 import sanityClient from '@sanity/client';
 import { TLanguageKey } from '~/locale';
-import { ImageBlock, SanityImageProps } from '~/types/cms';
+import { ImageBlock, SanityFileProps, SanityImageProps } from '~/types/cms';
 import { findClosestSize } from '~/utils/findClosestSize';
 
 const config = {
@@ -94,4 +94,8 @@ export function getImageSrc(
 ) {
   const size = findClosestSize(desiredWidth, imageResizeTargets);
   return `/cms/images/${asset.assetId}-${size}.${asset.extension}`;
+}
+
+export function getFileAssetSrc(asset: SanityFileProps) {
+  return `/cms/files/${asset.assetId}.${asset.extension}`;
 }
