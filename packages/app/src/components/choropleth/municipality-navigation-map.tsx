@@ -57,7 +57,8 @@ export function MunicipalityNavigationMap<T>(
 
     return (
       <Path
-        hoverable
+        isHoverable
+        isClickable
         id={gemcode}
         key={gemcode}
         d={path}

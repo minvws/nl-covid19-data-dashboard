@@ -1,13 +1,14 @@
+// prettier-ignore
 const space = [
-  0,
-  '0.25rem', // 1 -   4px at default zoom
-  '0.5rem', // 2 -   8px
-  '1rem', // 4 -  16px
-  '2rem', // 5 -  32px
-  '4rem', // 6 -  64px
-  '8rem', // 7 - 128px
-  '16rem', // 8 - 256px
-  '32rem', // 9 - 512px
+  0,          // 0 -   0px
+  '0.25rem',  // 1 -   4px at default zoom
+  '0.5rem',   // 2 -   8px
+  '1rem',     // 3 -  16px
+  '2rem',     // 4 -  32px
+  '4rem',     // 5 -  64px
+  '8rem',     // 6 - 128px
+  '16rem',    // 7 - 256px
+  '32rem',    // 8 - 512px
 ] as const;
 
 /**
@@ -25,13 +26,14 @@ const fonts = {
   code: "source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace",
 } as const;
 
+// prettier-ignore
 const fontSizes = [
-  '0.6875rem', // 11px, used in chart dates labels
-  '0.875rem', // 14px, made up to fill the gap.
-  '1rem',
-  '1.42383rem',
-  '2rem',
-  '2.02729rem',
+  '0.6875rem',  // 11px, used in chart dates labels
+  '0.875rem',   // 14px, made up to fill the gap.
+  '1rem',       // 16px
+  '1.42383rem', // 22.78128px
+  '2rem',       // 32px
+  '2.02729rem', // 32.43664px
 ] as const;
 
 const fontWeights = {
@@ -83,6 +85,7 @@ const mediaQueries = {
 
 export const colors = {
   body: '#000000',
+  bodyLight: '#555555',
   page: '#f3f3f3',
   blue: '#01689b',
   icon: '#01689b',
@@ -90,7 +93,9 @@ export const colors = {
   link: '#01689b',
   shadow: '#e5e5e5',
   gray: '#808080',
+  silver: '#c4c4c4',
   lightGray: '#dfdfdf',
+  tileGray: '#f8f8f8',
   annotation: '#595959',
   header: '#cd005a',
   notification: '#cd005a',
@@ -100,16 +105,20 @@ export const colors = {
   border: '#c4c4c4',
   lightBlue: '#E0EEF6',
   restrictions: '#CD0059',
+  contextualContent: '#e5eff8',
 
   data: {
     primary: '#007BC7',
     secondary: '#154273',
     neutral: '#C6C8CA',
     underReported: '#E6E6E6',
+    axis: '#C4C4C4',
+    axisLabels: '#666666',
+    benchmark: '#4f5458',
     fill: 'rgba(0, 123, 199, .05)',
     scale: {
       blue: ['#8FCAE7', '#5BADDB', '#248FCF', '#0070BB', '#00529D', '#003580'],
-      magenta: ['#F6B4D1', '#D3719C', '#9E3A66', '#64032D', '#000000'],
+      magenta: ['#F291BC', '#D95790', '#A11050', '#68032F', '#000000'],
     },
     gradient: {
       green: '#69c253',
@@ -122,8 +131,14 @@ export const colors = {
 const radii = [0, 5, 10];
 
 const shadows = {
-  tile: `0 -1px 1px 0 ${colors.shadow}, 0 1px 1px 0 ${colors.shadow}, 0 2px 2px 0 ${colors.shadow}, 0 4px 4px 0 ${colors.shadow}, 0 6px 6px 0 ${colors.shadow}`,
+  tile: '0px 4px 8px rgba(0, 0, 0, 0.1)',
 } as const;
+
+const sizes = {
+  maxWidth: 1400,
+  contentWidth: 700,
+  maxWidthText: 600,
+};
 
 const theme = {
   fonts,
@@ -136,6 +151,7 @@ const theme = {
   colors,
   radii,
   shadows,
+  sizes,
 } as const;
 
 type Theme = typeof theme;

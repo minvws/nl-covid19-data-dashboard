@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useEffect, useRef } from 'react';
+import { Box } from '~/components-styled/base';
 import { TooltipSettings } from '../choropleth';
-import styles from './tooltip.module.scss';
 
 type TTooltipProps = {
   left: number;
@@ -38,8 +38,16 @@ export function Tooltip(props: TTooltipProps) {
   }, [left, top, setTooltip]);
 
   return (
-    <div ref={ref} className={styles.tooltipContainer} style={{ left, top }}>
+    <Box
+      bg="white"
+      position="absolute"
+      ref={ref}
+      style={{ left, top }}
+      boxShadow="rgba(33, 33, 33, 0.2) 0px 1px 2px"
+      borderRadius={1}
+      zIndex={1000}
+    >
       {children}
-    </div>
+    </Box>
   );
 }

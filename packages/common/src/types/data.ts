@@ -121,14 +121,13 @@ export interface National {
   tested_ggd_average: NationalTestedGgdAverage;
   nursing_home: NationalNursingHome;
   disability_care: NationalDisabilityCare;
-  restrictions: NationalRestrictions;
   behavior: NationalBehavior;
   deceased_rivm: NationalDeceasedRivm;
   deceased_rivm_per_age_group: NlDeceasedRivmPerAgeGroup;
   deceased_cbs: NationalDeceasedCbs;
   elderly_at_home: NationalElderlyAtHome;
-  vaccine_availability: NlVaccineAvailability;
   vaccine_support: NlVaccineSupport;
+  vaccine_delivery: NlVaccineDelivery;
 }
 export interface NationalDifference {
   tested_overall__infected_per_100k: DifferenceDecimal;
@@ -314,34 +313,6 @@ export interface NationalDisabilityCareValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NationalRestrictions {
-  values: NationalRestrictionValue[];
-}
-export interface NationalRestrictionValue {
-  restriction_id: string;
-  target_region: string;
-  escalation_level: 0 | 1 | 2 | 3 | 4 | 41 | 401;
-  category_id:
-    | "er_op_uit"
-    | "bezoek"
-    | "samenkomst"
-    | "huwelijk"
-    | "verpleeghuis"
-    | "horeca"
-    | "sport"
-    | "reizen_binnenland"
-    | "reizen_buitenland"
-    | "ov"
-    | "uitvaart"
-    | "onderwijs"
-    | "werk"
-    | "winkels"
-    | "alcohol"
-    | "algemeen"
-    | "contactberoep";
-  restriction_order: number;
-  valid_from_unix: number;
-}
 export interface NationalBehavior {
   values: NationalBehaviorValue[];
   last_value: NationalBehaviorValue;
@@ -435,11 +406,22 @@ export interface NationalElderlyAtHomeValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlVaccineAvailability {
-  values: NlVaccineAvailabilityValue[];
-  last_value: NlVaccineAvailabilityValue;
+export interface NlVaccineSupport {
+  values: NlVaccineSupportValue[];
+  last_value: NlVaccineSupportValue;
 }
-export interface NlVaccineAvailabilityValue {
+export interface NlVaccineSupportValue {
+  percentage_in_favor: number;
+  percentage_already_vaccinated: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlVaccineDelivery {
+  values: NlVaccineDeliveryValue[];
+  last_value: NlVaccineDeliveryValue;
+}
+export interface NlVaccineDeliveryValue {
   pfizer: number;
   moderna: number;
   astra_zeneca: number;
@@ -447,17 +429,8 @@ export interface NlVaccineAvailabilityValue {
   janssen: number;
   sanofi: number;
   date_of_insertion_unix: number;
-  date_unix: number;
-}
-export interface NlVaccineSupport {
-  values: NlVaccineSupportValue[];
-  last_value: NlVaccineSupportValue;
-}
-export interface NlVaccineSupportValue {
-  percentage: number;
   date_start_unix: number;
   date_end_unix: number;
-  date_of_insertion_unix: number;
 }
 
 export interface Regionaal {
@@ -474,7 +447,6 @@ export interface Regionaal {
   tested_ggd_average: RegionalTestedGgdAverage;
   nursing_home: RegionalNursingHome;
   disability_care: RegionalDisabilityCare;
-  restrictions: RegionalRestrictions;
   behavior: RegionalBehavior;
   deceased_rivm: RegionalDeceasedRivm;
   deceased_cbs: RegionalDeceasedCbs;
@@ -600,35 +572,6 @@ export interface RegionalDisabilityCareValue {
   deceased_daily: number;
   date_unix: number;
   date_of_insertion_unix: number;
-  vrcode: string;
-}
-export interface RegionalRestrictions {
-  values: RegionalRestrictionValue[];
-}
-export interface RegionalRestrictionValue {
-  restriction_id: string;
-  target_region: "nl" | "vr";
-  escalation_level: 0 | 1 | 2 | 3 | 4 | 41 | 401 | 402;
-  category_id:
-    | "er_op_uit"
-    | "bezoek"
-    | "samenkomst"
-    | "huwelijk"
-    | "verpleeghuis"
-    | "horeca"
-    | "sport"
-    | "reizen_binnenland"
-    | "reizen_buitenland"
-    | "ov"
-    | "uitvaart"
-    | "onderwijs"
-    | "werk"
-    | "winkels"
-    | "alcohol"
-    | "algemeen"
-    | "contactberoep";
-  restriction_order: number;
-  valid_from_unix: number;
   vrcode: string;
 }
 export interface RegionalBehavior {

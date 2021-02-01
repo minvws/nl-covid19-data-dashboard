@@ -55,7 +55,7 @@ export function SidebarKpiValue(props: SidebarKpiValueProps) {
 
         {isDefined(difference) && (
           <Box fontSize={3} display="flex" alignItems="center" marginRight={1}>
-            <DifferenceIndicator value={difference} isContextSidebar={true} />
+            <DifferenceIndicator value={difference} context="sidebar" />
           </Box>
         )}
 

@@ -6,6 +6,7 @@ import { Bar, Line } from '@visx/shape';
 import { Text } from '@visx/text';
 import { ScaleLinear, ScaleTime } from 'd3-scale';
 import { ComponentProps, memo, MouseEvent, ReactNode, TouchEvent } from 'react';
+import { colors } from '~/style/theme';
 import { MARKER_MIN_WIDTH } from '../marker';
 
 const NUM_TICKS = 3;
@@ -25,9 +26,9 @@ export const defaultPadding: ChartPadding = {
 };
 
 const defaultColors = {
-  axis: '#C4C4C4',
-  axisLabels: '#666666',
-  benchmark: '#4f5458',
+  axis: colors.silver,
+  axisLabels: colors.data.axisLabels,
+  benchmark: colors.data.benchmark,
 };
 
 type Benchmark = {
@@ -59,7 +60,7 @@ type ChartAxesProps = {
   formatYAxis: TickFormatter<number>;
   children: (props: ChartScales) => ReactNode;
   componentCallback?: ComponentCallbackFunction;
-  uniqueId?: string;
+  ariaLabelledBy?: string;
 };
 
 type AnyTickFormatter = (value: any) => string;
@@ -78,7 +79,7 @@ export const ChartAxes = memo(function ChartAxes({
   formatYAxis,
   children,
   componentCallback = () => undefined,
-  uniqueId,
+  ariaLabelledBy,
 }: ChartAxesProps) {
   const bounds: ChartBounds = {
     width: width - padding.left - padding.right,
@@ -104,7 +105,12 @@ export const ChartAxes = memo(function ChartAxes({
   ) => onHover(event, scales);
 
   return (
-    <svg width={width} height={height} role="img" aria-labelledby={uniqueId}>
+    <svg
+      width={width}
+      height={height}
+      role="img"
+      aria-labelledby={ariaLabelledBy}
+    >
       <Group left={padding.left} top={padding.top}>
         {createComponent(
           {
