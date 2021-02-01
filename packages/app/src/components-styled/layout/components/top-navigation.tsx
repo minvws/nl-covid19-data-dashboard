@@ -19,7 +19,7 @@ export function TopNavigation() {
   const [needsMobileMenuLink, setNeedsMobileMenuLink] = useState(false);
   const breakpoints = useBreakpoints(true);
   const isSmallScreen = !breakpoints.md;
-  const navMenu = useRef(null);
+  const navMenu = useRef<HTMLDivElement>(null);
   const tempPanelHeight = useRef(0);
   const transistionRef = useRef('none');
   const [panelHeight, setPanelHeight] = useState(-1);
@@ -27,6 +27,8 @@ export function TopNavigation() {
   // const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
+    if (!navMenu.current) return;
+
     tempPanelHeight.current = navMenu.current.clientHeight;
 
     // Menu is opened by default as fallback: JS opens it
@@ -42,16 +44,13 @@ export function TopNavigation() {
   }, [isMenuOpen]);
 
   useEffect(() => {
-    if (panelHeight !== 0) return
-    transistionRef.current = 'max-height 0.4s ease-in-out, opacity 0.4s ease-in-out'
-  }, [panelHeight])
+    if (panelHeight !== 0) return;
+    transistionRef.current =
+      'max-height 0.4s ease-in-out, opacity 0.4s ease-in-out';
+  }, [panelHeight]);
 
   function toggleMenu() {
     setIsMenuOpen(!isMenuOpen);
-  }
-
-  function onTransitionEnd() {
-    console.log('end')
   }
 
   return (
@@ -74,11 +73,12 @@ export function TopNavigation() {
         role="navigation"
         aria-label={text.aria_labels.pagina_keuze}
         ref={navMenu}
-        onTransitionEnd={onTransitionEnd}
+        // onTransitionEnd={onTransitionEnd}
         style={{
-          maxHeight: (panelHeight === -1  || !isSmallScreen)? '100%' : `${panelHeight}px`,
-          opacity: (isMenuOpen || !isSmallScreen) ? 1 : 0,
-          transition: transistionRef.current
+          maxHeight:
+            panelHeight === -1 || !isSmallScreen ? '100%' : `${panelHeight}px`,
+          opacity: isMenuOpen || !isSmallScreen ? 1 : 0,
+          transition: transistionRef.current,
         }}
       >
         <MaxWidth>
@@ -172,12 +172,15 @@ const NavWrapper = styled.nav(
 
 const NavList = styled.ul(
   css({
-    borderTop: '1px solid rgba(255, 255, 255, 0.25)',
+    borderTop: asResponsiveArray({
+      _: '1px solid rgba(255, 255, 255, 0.25)',
+      md: 'none',
+    }),
     listStyle: 'none',
     padding: 0,
     margin: 0,
-    mt: 3,
-    pt: 1,
+    mt: asResponsiveArray({ _: 3, md: 0 }),
+    pt: asResponsiveArray({ _: 1, md: 0 }),
     display: asResponsiveArray({ _: 'block', md: 'flex' }),
   })
 );
