@@ -21,7 +21,9 @@ export function TopNavigation() {
   const isSmallScreen = !breakpoints.md;
   const navMenu = useRef(null);
   const tempPanelHeight = useRef(0);
+  const transistionRef = useRef('none');
   const [panelHeight, setPanelHeight] = useState(-1);
+
   // const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
@@ -39,8 +41,17 @@ export function TopNavigation() {
     setPanelHeight(isMenuOpen ? tempPanelHeight.current : 0);
   }, [isMenuOpen]);
 
+  useEffect(() => {
+    if (panelHeight !== 0) return
+    transistionRef.current = 'max-height 0.4s ease-in-out, opacity 0.4s ease-in-out'
+  }, [panelHeight])
+
   function toggleMenu() {
     setIsMenuOpen(!isMenuOpen);
+  }
+
+  function onTransitionEnd() {
+    console.log('end')
   }
 
   return (
@@ -63,15 +74,11 @@ export function TopNavigation() {
         role="navigation"
         aria-label={text.aria_labels.pagina_keuze}
         ref={navMenu}
-        // onTransitionEnd={testa}
+        onTransitionEnd={onTransitionEnd}
         style={{
-          maxHeight: panelHeight === -1 ? '100%' : `${panelHeight}px`,
-          opacity: isMenuOpen ? 1 : 0,
-          transition:
-            panelHeight === -1
-              ? 'none'
-              : 'max-height 0.4s ease-in-out, opacity 0.4s ease-in-out',
-          // visibility: isMenuOpen ? 'visible' : 'hidden',
+          maxHeight: (panelHeight === -1  || !isSmallScreen)? '100%' : `${panelHeight}px`,
+          opacity: (isMenuOpen || !isSmallScreen) ? 1 : 0,
+          transition: transistionRef.current
         }}
       >
         <MaxWidth>
@@ -144,7 +151,7 @@ const NavToggle = styled.button(
 
 const NavWrapper = styled.nav(
   css({
-    borderTop: '1px solid rgba(255, 255, 255, 0.25)',
+    // borderTop: '1px solid rgba(255, 255, 255, 0.25)',
     borderTopWidth: '1px',
     // mt: 3,
     // pt: 1,
@@ -165,9 +172,12 @@ const NavWrapper = styled.nav(
 
 const NavList = styled.ul(
   css({
+    borderTop: '1px solid rgba(255, 255, 255, 0.25)',
     listStyle: 'none',
     padding: 0,
     margin: 0,
+    mt: 3,
+    pt: 1,
     display: asResponsiveArray({ _: 'block', md: 'flex' }),
   })
 );
