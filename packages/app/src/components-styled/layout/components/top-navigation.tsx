@@ -1,6 +1,6 @@
 import css from '@styled-system/css';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState, useRef} from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import Close from '~/assets/close.svg';
 import Menu from '~/assets/menu.svg';
@@ -12,8 +12,6 @@ import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 
-let open = false
-
 export function TopNavigation() {
   const router = useRouter();
 
@@ -21,67 +19,28 @@ export function TopNavigation() {
   const [needsMobileMenuLink, setNeedsMobileMenuLink] = useState(false);
   const breakpoints = useBreakpoints(true);
   const isSmallScreen = !breakpoints.md;
-  
-  const { xs, sm } = breakpoints
-  const tempHeight = useRef(0)
-  
-  const navMenu = useRef(null)
-  const [panelHeight, setPanelHeight] = useState(null)
-  
-  const [isAnimating, setIsAnimating] = useState(false);
+  const navMenu = useRef(null);
+  const tempPanelHeight = useRef(0);
+  const [panelHeight, setPanelHeight] = useState(-1);
+  // const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
+    tempPanelHeight.current = navMenu.current.clientHeight;
+
     // Menu is opened by default as fallback: JS opens it
     setIsMenuOpen(false);
+    setPanelHeight(0);
 
     // Workaround to get the mobile menu opened when linking to a sub-page.
     setNeedsMobileMenuLink(isSmallScreen);
   }, [isSmallScreen]);
 
-  // useEffect(() => {
-  //   console.log('Current height is ' + navMenu.current.clientHeight)
-
-  //   tempHeight.current = navMenu.current.clientHeight
-  //   // setPanelHeight(0)
-  // }, [xs, sm])
-
-  // useEffect(() => {
-  //   console.log(tempHeight.current)
-  // }, [tempHeight.current ])
-
-  // useEffect(() => {
-  //   if (!navMenu.current && !tempHeight === null) return
-  //   if (!isSmallScreen) return
-
-  //   tempHeight = navMenu.current.clientHeight
-  //   setPanelHeight(0)
-  // }, [isSmallScreen])
-
-    /**
-   * Starts the panel animation by passing the proper from and to heights
-   */
-  const startAnimation = (opening: boolean) => {
-    // setIsAnimating(true);
-    open = true
-    const height = navMenu.current?.clientHeight ?? 0;
-    const from = opening ? 0 : height;
-    const to = opening ? height : 0;
-    animatePanelHeight(from, to);
-  };
-
-  const animatePanelHeight = (from: number, to: number) => {
-    setPanelHeight(from);
-    setTimeout(() => {
-      setPanelHeight(to);
-    }, 67);
-  };
-
+  useEffect(() => {
+    setPanelHeight(isMenuOpen ? tempPanelHeight.current : 0);
+  }, [isMenuOpen]);
 
   function toggleMenu() {
     setIsMenuOpen(!isMenuOpen);
-    startAnimation(!open);
-    // if (tempHeight === null) return
-    // setPanelHeight(panelHeight === 0 ? tempHeight.current : 0)
   }
 
   return (
@@ -99,48 +58,50 @@ export function TopNavigation() {
         </NavToggle>
       )}
       {/* {(!isSmallScreen || isMenuOpen) && ( */}
-        <NavWrapper
-          id="main-navigation"
-          role="navigation"
-          aria-label={text.aria_labels.pagina_keuze}
-          ref={navMenu}
-          onTransitionEnd={() => setIsAnimating(false)}
-          style={{
-            /* panel max height is only controlled when collapsed, or during animations */
-            maxHeight: !open || isAnimating ? `${panelHeight}px` : undefined,
-          }}
-          // style={{
-          //   maxHeight: (xs || sm) ? `${panelHeight}px` : 'auto',
-          // }}
-        >
-          <MaxWidth>
-            <NavList>
-              <NavItem
-                href="/"
-                isActive={
-                  router.pathname === '/' ||
-                  router.pathname.startsWith('/actueel')
-                }
-              >
-                {text.nav.links.actueel}
-              </NavItem>
-              <NavItem
-                href={`/landelijk/vaccinaties${
-                  needsMobileMenuLink ? '?menu=1' : ''
-                }`}
-                isActive={router.pathname.startsWith('/landelijk')}
-              >
-                {text.nav.links.index}
-              </NavItem>
-              <NavItem href="/veiligheidsregio">
-                {text.nav.links.veiligheidsregio}
-              </NavItem>
-              <NavItem href="/gemeente">{text.nav.links.gemeente}</NavItem>
+      <NavWrapper
+        id="main-navigation"
+        role="navigation"
+        aria-label={text.aria_labels.pagina_keuze}
+        ref={navMenu}
+        // onTransitionEnd={testa}
+        style={{
+          maxHeight: panelHeight === -1 ? '100%' : `${panelHeight}px`,
+          opacity: isMenuOpen ? 1 : 0,
+          transition:
+            panelHeight === -1
+              ? 'none'
+              : 'max-height 0.4s ease-in-out, opacity 0.4s ease-in-out',
+          // visibility: isMenuOpen ? 'visible' : 'hidden',
+        }}
+      >
+        <MaxWidth>
+          <NavList>
+            <NavItem
+              href="/"
+              isActive={
+                router.pathname === '/' ||
+                router.pathname.startsWith('/actueel')
+              }
+            >
+              {text.nav.links.actueel}
+            </NavItem>
+            <NavItem
+              href={`/landelijk/vaccinaties${
+                needsMobileMenuLink ? '?menu=1' : ''
+              }`}
+              isActive={router.pathname.startsWith('/landelijk')}
+            >
+              {text.nav.links.index}
+            </NavItem>
+            <NavItem href="/veiligheidsregio">
+              {text.nav.links.veiligheidsregio}
+            </NavItem>
+            <NavItem href="/gemeente">{text.nav.links.gemeente}</NavItem>
 
-              <NavItem href="/over">{text.nav.links.over}</NavItem>
-            </NavList>
-          </MaxWidth>
-        </NavWrapper>
+            <NavItem href="/over">{text.nav.links.over}</NavItem>
+          </NavList>
+        </MaxWidth>
+      </NavWrapper>
       {/* )} */}
     </>
   );
@@ -191,7 +152,7 @@ const NavWrapper = styled.nav(
     pb: 0,
     flex: '1 0 100%',
     width: 'auto',
-    transition: 'all 0.3s',
+    // transition: 'max-height 0.4s ease-in-out, opacity 0.4s ease-in-out',
     [`@media ${theme.mediaQueries.md}`]: {
       borderTopWidth: 0,
       ml: 'auto',
