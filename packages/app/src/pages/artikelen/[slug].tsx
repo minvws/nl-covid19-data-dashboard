@@ -41,29 +41,29 @@ export const getStaticProps = createGetStaticProps(
       },
       "content": {
         "_type": content._type,
-  	    "nl": [
-  		    ...content.nl[]
-			    {
-      	    ...,
-      	    "asset": asset->,
+        "nl": [
+          ...content.nl[]
+          {
+            ...,
+            "asset": asset->,
             markDefs[]{
               ...,
               "asset": asset->
             }
-     	    },
-		    ],
-  	    "en": [
-  		    ...content.en[]
-			    {
-      	    ...,
-      	    "asset": asset->,
+           },
+        ],
+        "en": [
+          ...content.en[]
+          {
+            ...,
+            "asset": asset->,
             markDefs[]{
               ...,
               "asset": asset->
             }
-     	    },
-		    ],
-	    }
+           },
+        ],
+      }
     }[0]`;
   })
 );
