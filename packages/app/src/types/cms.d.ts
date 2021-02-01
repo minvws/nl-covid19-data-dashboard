@@ -35,7 +35,7 @@ export interface Article {
   isHighlighted: boolean;
 }
 
-interface ImageBlock {
+export interface ImageBlock {
   _type: 'image';
   asset: SanityImageProps;
   alt: string;

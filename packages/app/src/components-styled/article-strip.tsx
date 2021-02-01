@@ -7,6 +7,7 @@ import { Tile } from '~/components-styled/tile';
 import { Heading, Text } from '~/components-styled/typography';
 import siteText from '~/locale';
 import { colors } from '~/style/theme';
+import { ImageBlock } from '~/types/cms';
 import { Link } from '~/utils/link';
 import { ArticleSummary } from './article-teaser';
 import { LinkWithIcon } from './link-with-icon';
@@ -26,55 +27,70 @@ export function ArticleStrip(props: ArticleStripProps) {
     <Tile
       css={css({
         background: colors.lightBlue,
-        flexDirection: 'row',
-        flexWrap: 'wrap',
+        flexDirection: 'column',
       })}
     >
-      <Heading level={4} fontWeight="bold" css={css({ width: '100%' })}>
+      <Heading level={4} as="h3">
         {siteText.article_strip_title}
       </Heading>
 
-      {articles.map((article, index: number) => (
-        <Box
-          key={article.slug.current}
-          width={{ _: '100%', lg: '50%' }}
-          paddingRight={{ lg: index === 0 ? 0 : 3 }}
-          marginBottom={{ _: index === 0 ? 3 : 0 }}
-          paddingLeft={{ lg: index === 1 ? 0 : 3 }}
-        >
-          <Link passHref href={`/artikelen/${article.slug.current}`}>
-            <StyledLink>
-              <Box width={122} display="inline-table">
-                <Image
-                  src={`/${article.cover.asset.assetId}.${article.cover.asset.extension}`}
-                  width={122}
-                  height={
-                    122 / article.cover.asset.metadata.dimensions.aspectRatio
-                  }
-                  alt={article.cover.alt}
-                />
-              </Box>
-              <Box paddingLeft={3}>
-                <Text mt={0} mb={2}>
-                  {article.title}
-                </Text>
-                <LinkWithIcon
-                  href={`/artikelen/${article.slug.current}`}
-                  icon={
-                    <ArrowIcon css={css({ transform: 'rotate(-90deg)' })} />
-                  }
-                  iconPlacement="right"
-                >
-                  {siteText.common.read_more}
-                </LinkWithIcon>
-              </Box>
-            </StyledLink>
-          </Link>
-        </Box>
-      ))}
+      <Box display="flex" flexWrap="wrap">
+        {articles.map((article, index: number) => (
+          <Box
+            key={article.slug.current}
+            width={{ _: '100%', lg: '50%' }}
+            paddingRight={{ lg: index % 2 === 0 ? 0 : 3 }}
+            paddingLeft={{ lg: index % 2 === 0 ? 0 : 3 }}
+            paddingBottom={{ _: 3, lg: 0 }}
+          >
+            <ArticleStripItem
+              title={article.title}
+              cover={article.cover}
+              slug={article.slug.current}
+            />
+          </Box>
+        ))}
+      </Box>
     </Tile>
   );
 }
+
+type ArticleStripItemProps = {
+  slug: string;
+  cover: ImageBlock;
+  title: string;
+};
+
+const ArticleStripItem = function (props: ArticleStripItemProps) {
+  const { slug, cover, title } = props;
+
+  return (
+    <Link passHref href={`/artikelen/${slug}`}>
+      <StyledLink>
+        <Box width={122} maxHeight={122} overflow="hidden">
+          <Image
+            src={`/${cover.asset.assetId}.${cover.asset.extension}`}
+            width={122}
+            height={122 / cover.asset.metadata.dimensions.aspectRatio}
+            alt={cover.alt}
+          />
+        </Box>
+        <Box paddingLeft={3}>
+          <Text mt={0} mb={2}>
+            {title}
+          </Text>
+          <LinkWithIcon
+            href={`/artikelen/${slug}`}
+            icon={<ArrowIcon css={css({ transform: 'rotate(-90deg)' })} />}
+            iconPlacement="right"
+          >
+            {siteText.common.read_more}
+          </LinkWithIcon>
+        </Box>
+      </StyledLink>
+    </Link>
+  );
+};
 
 const StyledLink = styled.a(
   css({
