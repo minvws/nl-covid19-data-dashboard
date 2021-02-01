@@ -1,32 +1,24 @@
-import { Box } from '~/components-styled/base';
-import { Text, Heading } from '~/components-styled/typography';
-import { LinkWithIcon } from './link-with-icon';
-import { Tile } from '~/components-styled/tile';
 import css from '@styled-system/css';
-import { colors } from '~/style/theme';
-import ArrowIcon from '~/assets/arrow.svg';
-import { Image } from '~/components-styled/image';
-import { ImageBlock } from '~/types/cms';
-import { Link } from '~/utils/link';
 import styled from 'styled-components';
+import ArrowIcon from '~/assets/arrow.svg';
+import { Box } from '~/components-styled/base';
+import { Image } from '~/components-styled/image';
+import { Tile } from '~/components-styled/tile';
+import { Heading, Text } from '~/components-styled/typography';
 import siteText from '~/locale';
+import { colors } from '~/style/theme';
+import { Link } from '~/utils/link';
+import { ArticleSummary } from './article-teaser';
+import { LinkWithIcon } from './link-with-icon';
 
-type testTing = {
-  title: string;
-  slug: {
-    current: string;
-  };
-  cover: ImageBlock;
+type ArticleStripProps = {
+  articles: ArticleSummary[];
 };
 
-type ArticleTeaserProps = {
-  ArticleTeasers: testTing[];
-};
+export function ArticleStrip(props: ArticleStripProps) {
+  const { articles } = props;
 
-export function ArticleStrip(props: ArticleTeaserProps) {
-  const { ArticleTeasers } = props;
-
-  if (ArticleTeasers.length === 0) {
+  if (articles.length === 0) {
     return null;
   }
 
@@ -42,7 +34,7 @@ export function ArticleStrip(props: ArticleTeaserProps) {
         {siteText.article_strip_title}
       </Heading>
 
-      {ArticleTeasers.map((article, index: number) => (
+      {articles.map((article, index: number) => (
         <Box
           key={index}
           width={{ _: '100%', lg: '50%' }}

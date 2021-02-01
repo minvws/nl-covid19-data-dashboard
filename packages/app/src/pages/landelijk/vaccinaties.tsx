@@ -2,6 +2,8 @@ import { css } from '@styled-system/css';
 import { ParentSize } from '@visx/responsive';
 import { Fragment, useState } from 'react';
 import VaccinatieIcon from '~/assets/vaccinaties.svg';
+import { ArticleStrip } from '~/components-styled/article-strip';
+import { ArticleSummary } from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
 import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
@@ -15,8 +17,10 @@ import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { InlineText, Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
+import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
+  createGetContent,
   getLastGeneratedDate,
   getNlData,
   getText,
@@ -35,6 +39,7 @@ export const getStaticProps = createGetStaticProps(
 const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
   data,
   text: siteText,
+  content,
 }) => {
   const text = siteText.vaccinaties;
   const [selectedTab, setSelectedTab] = useState(
@@ -200,6 +205,8 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             )}
           </KpiTile>
         </TwoKpiSection>
+
+        <ArticleStrip articles={content.articles} />
 
         <ChartTile
           title={text.grafiek.titel}
