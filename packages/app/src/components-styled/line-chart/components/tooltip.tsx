@@ -29,6 +29,7 @@ const TooltipContainer = styled.div<TooltipContainerProps>`
   min-width: 72;
   white-space: nowrap;
   background: white;
+  outline: 1px solid transparent;
   border: ${(props) => `1px solid ${props.borderColor || 'black'}`};
   ${css({
     px: 2,
