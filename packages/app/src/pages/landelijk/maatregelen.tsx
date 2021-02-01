@@ -4,9 +4,9 @@ import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import { Heading } from '~/components-styled/typography';
 import { KpiSection } from '~/components-styled/kpi-section';
-import { LockdownTable } from '~/components/restrictions/lockdown-table';
+import { LockdownTable } from '~/domain/restrictions/lockdown-table';
 import { PortableText } from '~/lib/sanity';
-import { SEOHead } from '~/components/seoHead';
+import { SEOHead } from '~/components-styled/seo-head';
 import { Box } from '~/components-styled/base/box';
 import { TileList } from '~/components-styled/tile-list';
 import Maatregelen from '~/assets/maatregelen.svg';
@@ -76,7 +76,9 @@ const NationalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
               })}
             >
               <Heading level={3}>{lockdown.message.title}</Heading>
-              <PortableText blocks={lockdown.message.description} />
+              {lockdown.message.description ? (
+                <PortableText blocks={lockdown.message.description} />
+              ) : null}
             </Box>
           </KpiSection>
         )}

@@ -22,7 +22,7 @@ import siteText from '~/locale/index';
 import { colors } from '~/style/theme';
 import { Regionaal } from '@corona-dashboard/common';
 import { SafetyRegionComboBox } from './components/safety-region-combo-box';
-
+import { Box } from '~/components-styled/base';
 interface SafetyRegionLayoutProps {
   lastGenerated: string;
   data?: Regionaal;
@@ -100,13 +100,11 @@ function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
                 aria-label={siteText.aria_labels.metriek_navigatie}
                 role="navigation"
               >
-                <Text fontSize={3} fontWeight="bold" px={3} m={0} mb={-3}>
+                <Text fontSize={3} fontWeight="bold" px={3} m={0}>
                   {safetyRegionName}
                 </Text>
                 <Menu>
-                  <CategoryMenu
-                    title={siteText.veiligheidsregio_layout.headings.algemeen}
-                  >
+                  <Box spacing={3} pt={3}>
                     <MetricMenuItemLink
                       href={`/veiligheidsregio/${code}/maatregelen`}
                       icon={<Maatregelen fill={colors.restrictions} />}
@@ -117,7 +115,7 @@ function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
                         siteText.veiligheidsregio_maatregelen.subtitel_sidebar
                       }
                     />
-                  </CategoryMenu>
+                  </Box>
 
                   <CategoryMenu
                     title={

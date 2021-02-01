@@ -125,7 +125,7 @@ function getChartOptions(props: IGetOptions): Highcharts.Options {
       text: undefined,
     },
     xAxis: {
-      lineColor: '#C4C4C4',
+      lineColor: colors.silver,
       gridLineColor: '#ca005d',
       type: 'datetime',
       categories: rangeData.map((el) => el[0].getTime() as any),
@@ -150,8 +150,8 @@ function getChartOptions(props: IGetOptions): Highcharts.Options {
     yAxis: {
       min: 0,
       max: yMax,
-      lineColor: '#C4C4C4',
-      gridLineColor: '#C4C4C4',
+      lineColor: colors.silver,
+      gridLineColor: colors.silver,
       title: {
         text: null,
       },

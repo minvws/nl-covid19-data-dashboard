@@ -1,13 +1,13 @@
-import { Box, Spacer } from './base';
-import { Heading } from './typography';
 import { Tile } from '~/components-styled/tile';
-import { MetadataProps, Metadata } from './metadata';
+import { Box, Spacer } from './base';
+import { Metadata, MetadataProps } from './metadata';
+import { Heading } from './typography';
 
 interface KpiTileProps {
   title: string;
   description?: string;
   children: React.ReactNode;
-  metadata: MetadataProps;
+  metadata?: MetadataProps;
 }
 
 /**
@@ -38,7 +38,7 @@ export function KpiTile({
       )}
       {/* Using a spacer to push the footer down */}
       <Spacer m="auto" />
-      <Metadata {...metadata} />
+      {metadata && <Metadata {...metadata} />}
     </Tile>
   );
 }

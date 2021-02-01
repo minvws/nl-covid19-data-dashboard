@@ -9,10 +9,11 @@ import {
 } from '~/static-props/get-data';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import styles from './over.module.scss';
+import { PortableTextEntry } from '@sanity/block-content-to-react';
 
 interface OverData {
   title: string | null;
-  description: unknown[] | null;
+  description: PortableTextEntry[] | null;
 }
 
 const query = `

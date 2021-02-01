@@ -19,6 +19,7 @@ import {
   SafetyRegionProperties,
 } from '@corona-dashboard/common';
 import { countryGeo, regionGeo } from './topology';
+import { colors } from '~/style/theme';
 
 type SafetyRegionChoroplethProps<T, K extends RegionsMetricName> = {
   data: Pick<Regions, K>;
@@ -104,13 +105,15 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
           key={vrcode}
           d={path}
           fill={fill}
-          stroke={isWhiteFill ? '#c4c4c4' : '#fff'}
+          stroke={isWhiteFill ? colors.silver : '#fff'}
           strokeWidth={1}
         />
       );
     },
     [getFillColor, hasData]
   );
+
+  const hasSelectHander = !!onSelect;
 
   const hoverCallback = useCallback(
     (feature: Feature<MultiPolygon, SafetyRegionProperties>, path: string) => {
@@ -119,7 +122,8 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
 
       return (
         <Path
-          hoverable
+          isHoverable
+          isClickable={hasSelectHander}
           id={vrcode}
           key={vrcode}
           d={path}
@@ -128,7 +132,7 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
         />
       );
     },
-    [selected, highlightSelection]
+    [selected, highlightSelection, hasSelectHander]
   );
 
   const onClick = (id: string) => {

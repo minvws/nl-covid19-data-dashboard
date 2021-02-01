@@ -68,7 +68,7 @@ function getChartOptions<T>(values: Value[][], linesConfig: LineConfig<T>[]) {
     },
     credits: { enabled: false },
     xAxis: {
-      lineColor: '#C4C4C4',
+      lineColor: colors.silver,
       gridLineColor: '#ca005d',
       type: 'datetime',
       title: {
@@ -121,8 +121,8 @@ function getChartOptions<T>(values: Value[][], linesConfig: LineConfig<T>[]) {
       min: 0,
       max: 100,
       allowDecimals: false,
-      lineColor: '#C4C4C4',
-      gridLineColor: '#C4C4C4',
+      lineColor: colors.silver,
+      gridLineColor: colors.silver,
       title: {
         text: null,
       },
