@@ -2075,7 +2075,7 @@
         "description_first": "This is the number of vaccine doses that have been administered and reported. [Read more in the explanation of the presented data.](https://coronadashboard.government.nl/verantwoording#vaccination)",
         "description_second": "",
         "warning": "",
-        "first_tab_title": "Calculated number",
+        "first_tab_title": "Estimated number",
         "second_tab_title": "Reported number",
         "tab_total_estimated": {
           "value": "346790",
@@ -2091,12 +2091,12 @@
             {
               "value": "81088",
               "description": "administered by hospitals",
-              "report_date": "Calculated number till 30 January"
+              "report_date": "Estimated number till 30 January"
             },
             {
               "value": "89416",
               "description": "administered by long-term care institutions",
-              "report_date": "Calculated number till 30 January"
+              "report_date": "Estimated number till 30 January"
             },
             {
               "value": "",
@@ -2109,7 +2109,7 @@
               "report_date": ""
             }
           ],
-          "description_first": "This figure is a calculation of the total number of vaccine doses that have been administered. The calculation is based on the number of vaccine doses that have been delivered to the locations where injections are given. [Read more in the explanation of the presented data.](https://coronadashboard.government.nl/verantwoording#vaccination)",
+          "description_first": "This figure is a calculation of the total number of vaccine doses that have been administered. The estimate is based on the number of vaccine doses that have been delivered to the locations where injections are given. [Read more in the explanation of the presented data.](https://coronadashboard.government.nl/verantwoording#vaccination)",
           "description_second": ""
         }
       },
