@@ -49,18 +49,15 @@ export function LinkWithIcon({
       >
         {iconPlacement === 'right' && !headingLink && (
           <>
-            {!words.length ? children : firstWords}
-            <Box as="span" display="inline-block">
-              {words[words.length - 1]}
-              <IconSmall icon={icon} width={11} height={13} />
-            </Box>
+            {children}
+            <IconSmall icon={icon} width={11} height={13} />
           </>
         )}
         {iconPlacement === 'left' && !headingLink && (
-          <Box as="span">
+          <>
             <IconSmall icon={icon} width={11} height={13} />
             {children}
-          </Box>
+          </>
         )}
         {headingLink && (
           <Box paddingRight={isSingleWord ? `calc(0.5rem + 18px)` : ''}>
