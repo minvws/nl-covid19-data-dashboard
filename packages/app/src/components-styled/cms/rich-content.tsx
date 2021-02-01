@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 import { Box } from '~/components-styled/base';
 import { ContentBlock } from '~/components-styled/cms/content-block';
 import { ContentImage } from '~/components-styled/cms/content-image';
-import { getFileAssetSrc, PortableText } from '~/lib/sanity';
+import { getFileSrc, PortableText } from '~/lib/sanity';
 import { InlineAttachment } from '~/types/cms';
 import { assert } from '~/utils/assert';
 
@@ -42,7 +42,7 @@ function inlineAttachment(props: {
   mark: InlineAttachment;
 }) {
   return (
-    <a download href={getFileAssetSrc(props.mark.asset)}>
+    <a download href={getFileSrc(props.mark.asset)}>
       {props.children}
     </a>
   );

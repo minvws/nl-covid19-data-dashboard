@@ -88,14 +88,14 @@ export function getImageProps<T extends ImageBlock>(
   };
 }
 
+export function getFileSrc(asset: SanityFileProps) {
+  return `/cms/files/${asset.assetId}.${asset.extension}`;
+}
+
 export function getImageSrc(
   asset: SanityImageProps,
   desiredWidth = asset.metadata.dimensions.width
 ) {
   const size = findClosestSize(desiredWidth, imageResizeTargets);
   return `/cms/images/${asset.assetId}-${size}.${asset.extension}`;
-}
-
-export function getFileAssetSrc(asset: SanityFileProps) {
-  return `/cms/files/${asset.assetId}.${asset.extension}`;
 }
