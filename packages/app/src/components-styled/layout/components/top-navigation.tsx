@@ -1,6 +1,6 @@
 import css from '@styled-system/css';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef} from 'react';
 import styled from 'styled-components';
 import Close from '~/assets/close.svg';
 import Menu from '~/assets/menu.svg';
@@ -12,6 +12,8 @@ import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 
+let open = false
+
 export function TopNavigation() {
   const router = useRouter();
 
@@ -19,6 +21,14 @@ export function TopNavigation() {
   const [needsMobileMenuLink, setNeedsMobileMenuLink] = useState(false);
   const breakpoints = useBreakpoints(true);
   const isSmallScreen = !breakpoints.md;
+  
+  const { xs, sm } = breakpoints
+  const tempHeight = useRef(0)
+  
+  const navMenu = useRef(null)
+  const [panelHeight, setPanelHeight] = useState(null)
+  
+  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
     // Menu is opened by default as fallback: JS opens it
@@ -28,8 +38,50 @@ export function TopNavigation() {
     setNeedsMobileMenuLink(isSmallScreen);
   }, [isSmallScreen]);
 
+  // useEffect(() => {
+  //   console.log('Current height is ' + navMenu.current.clientHeight)
+
+  //   tempHeight.current = navMenu.current.clientHeight
+  //   // setPanelHeight(0)
+  // }, [xs, sm])
+
+  // useEffect(() => {
+  //   console.log(tempHeight.current)
+  // }, [tempHeight.current ])
+
+  // useEffect(() => {
+  //   if (!navMenu.current && !tempHeight === null) return
+  //   if (!isSmallScreen) return
+
+  //   tempHeight = navMenu.current.clientHeight
+  //   setPanelHeight(0)
+  // }, [isSmallScreen])
+
+    /**
+   * Starts the panel animation by passing the proper from and to heights
+   */
+  const startAnimation = (opening: boolean) => {
+    // setIsAnimating(true);
+    open = true
+    const height = navMenu.current?.clientHeight ?? 0;
+    const from = opening ? 0 : height;
+    const to = opening ? height : 0;
+    animatePanelHeight(from, to);
+  };
+
+  const animatePanelHeight = (from: number, to: number) => {
+    setPanelHeight(from);
+    setTimeout(() => {
+      setPanelHeight(to);
+    }, 67);
+  };
+
+
   function toggleMenu() {
     setIsMenuOpen(!isMenuOpen);
+    startAnimation(!open);
+    // if (tempHeight === null) return
+    // setPanelHeight(panelHeight === 0 ? tempHeight.current : 0)
   }
 
   return (
@@ -46,11 +98,20 @@ export function TopNavigation() {
           </VisuallyHidden>
         </NavToggle>
       )}
-      {(!isSmallScreen || isMenuOpen) && (
+      {/* {(!isSmallScreen || isMenuOpen) && ( */}
         <NavWrapper
           id="main-navigation"
           role="navigation"
           aria-label={text.aria_labels.pagina_keuze}
+          ref={navMenu}
+          onTransitionEnd={() => setIsAnimating(false)}
+          style={{
+            /* panel max height is only controlled when collapsed, or during animations */
+            maxHeight: !open || isAnimating ? `${panelHeight}px` : undefined,
+          }}
+          // style={{
+          //   maxHeight: (xs || sm) ? `${panelHeight}px` : 'auto',
+          // }}
         >
           <MaxWidth>
             <NavList>
@@ -80,7 +141,7 @@ export function TopNavigation() {
             </NavList>
           </MaxWidth>
         </NavWrapper>
-      )}
+      {/* )} */}
     </>
   );
 }
@@ -124,11 +185,13 @@ const NavWrapper = styled.nav(
   css({
     borderTop: '1px solid rgba(255, 255, 255, 0.25)',
     borderTopWidth: '1px',
-    mt: 3,
-    pt: 1,
+    // mt: 3,
+    // pt: 1,
+    // maxHeight: 0,
     pb: 0,
     flex: '1 0 100%',
     width: 'auto',
+    transition: 'all 0.3s',
     [`@media ${theme.mediaQueries.md}`]: {
       borderTopWidth: 0,
       ml: 'auto',
