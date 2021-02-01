@@ -40,7 +40,24 @@ import 'sanity-mobile-preview/dist/index.css?raw';
 // hiddenDocTypes will filter out all of the content models
 // we expose through other sections in the CMStructureBuilder.
 // for example, we will show categories through a custom panel
-const hiddenDocTypes = [];
+const hiddenDocTypes = [
+  'siteSettings',
+  'topicalPage',
+  'veelgesteldeVragen',
+  'cijferVerantwoording',
+  'overDitDashboard',
+  'overRisicoNiveaus',
+  'roadmap',
+  'lockdown',
+  'behaviorPage',
+  'deceasedPage',
+  'hospitalPage',
+  'intensiveCarePage',
+  'positiveTestsPage',
+  'reproductionPage',
+  'sewerPage',
+  'vaccinationsPage',
+];
 
 const filterHiddenDocTypes = (listItem) =>
   !hiddenDocTypes.includes(listItem.getId());
@@ -85,7 +102,6 @@ export default () =>
         'Cijferverantwoording',
         'cijferVerantwoording'
       ),
-      ,
       addListItem(StructureBuilder, BsCardChecklist, 'Sterfte', 'deceasedPage'),
       addListItem(
         StructureBuilder,
@@ -136,8 +152,6 @@ export default () =>
 
 function addListItem(builder, icon, title, schemaType, documentId) {
   const docId = documentId ?? schemaType;
-
-  hiddenDocTypes.push(schemaType);
 
   return builder
     .listItem()
