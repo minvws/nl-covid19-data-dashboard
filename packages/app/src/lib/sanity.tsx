@@ -64,6 +64,21 @@ export function localize<T>(value: T | T[], languages: TLanguageKey[]): T {
   return value;
 }
 
+/**
+ * Utility to get an object which can be spread on an `<img />`-element.
+ * It will return the `src`, `srcSet` and `alt`-attributes together with the
+ * width and height.
+ * It's probably wise to set `height: auto` with css on the image-element itself
+ * for a correctly resizing responsive image.
+ *
+ * By default the `src` will resolve the to a size close to the original size.
+ * Optionally you can provide a second parameter to override this size.
+ *
+ * Usage:
+ *
+ *     <img {...getImageProps(node)} />
+ *     <img {...getImageProps(node, 450)} />
+ */
 export function getImageProps<T extends ImageBlock>(
   node: T,
   desiredWith = node.asset.metadata.dimensions.width
