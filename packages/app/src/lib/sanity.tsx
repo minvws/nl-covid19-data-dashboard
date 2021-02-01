@@ -1,7 +1,10 @@
 // lib/sanity.ts
+import { imageResizeTargets } from '@corona-dashboard/common';
 import BlockContent from '@sanity/block-content-to-react';
 import sanityClient from '@sanity/client';
 import { TLanguageKey } from '~/locale';
+import { ImageBlock, SanityImageProps } from '~/types/cms';
+import { findClosestSize } from '~/utils/findClosestSize';
 
 const config = {
   /**
@@ -59,4 +62,36 @@ export function localize<T>(value: T | T[], languages: TLanguageKey[]): T {
     );
   }
   return value;
+}
+
+export function getImageProps<T extends ImageBlock>(
+  node: T,
+  desiredWith = node.asset.metadata.dimensions.width
+) {
+  const { asset, alt } = node;
+  const { metadata } = asset;
+
+  const width = findClosestSize(desiredWith, imageResizeTargets);
+  const height = width / metadata.dimensions.aspectRatio;
+
+  const src = getImageSrc(node.asset, desiredWith);
+  const srcSet = imageResizeTargets
+    .map((size) => `${getImageSrc(asset, size)} ${size}w`)
+    .join(', ');
+
+  return {
+    src,
+    srcSet,
+    alt,
+    width,
+    height,
+  };
+}
+
+export function getImageSrc(
+  asset: SanityImageProps,
+  desiredWidth = asset.metadata.dimensions.width
+) {
+  const size = findClosestSize(desiredWidth, imageResizeTargets);
+  return `/cms/images/${asset.assetId}-${size}.${asset.extension}`;
 }

@@ -1,7 +1,7 @@
 import { PortableTextEntry } from '@sanity/block-content-to-react';
 import { Box } from '~/components-styled/base';
 import { ContentBlock } from '~/components-styled/cms/content-block';
-import { Image } from '~/components-styled/cms/image';
+import { ContentImage } from '~/components-styled/cms/image';
 import { PortableText } from '~/lib/sanity';
 import { assert } from '~/utils/assert';
 
@@ -26,6 +26,6 @@ const serializers = {
         </ContentBlock>
       );
     },
-    image: Image,
+    image: ContentImage,
   },
 };
