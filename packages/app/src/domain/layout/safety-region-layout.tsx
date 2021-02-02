@@ -156,7 +156,6 @@ function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
                         metricName="deceased_rivm"
                         metricProperty="covid_daily"
                         localeTextKey="veiligheidsregio_sterfte"
-                        differenceKey="deceased_rivm__covid_daily"
                       />
                     </MetricMenuItemLink>
                   </CategoryMenu>
@@ -221,7 +220,6 @@ function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
                         metricName="disability_care"
                         metricProperty="newly_infected_people"
                         localeTextKey="veiligheidsregio_gehandicaptenzorg_positief_geteste_personen"
-                        differenceKey="disability_care__newly_infected_people"
                       />
                     </MetricMenuItemLink>
 
@@ -239,7 +237,6 @@ function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
                         metricName="elderly_at_home"
                         metricProperty="positive_tested_daily"
                         localeTextKey="veiligheidsregio_thuiswonende_ouderen"
-                        differenceKey="elderly_at_home__positive_tested_daily"
                       />
                     </MetricMenuItemLink>
                   </CategoryMenu>

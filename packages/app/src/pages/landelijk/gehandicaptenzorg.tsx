@@ -82,9 +82,6 @@ const DisabilityCare: FCWithLayout<typeof getStaticProps> = (props) => {
             <KpiValue
               data-cy="newly_infected_people"
               absolute={lastValue.newly_infected_people}
-              difference={
-                data.difference.disability_care__newly_infected_people
-              }
             />
           </KpiTile>
         </TwoKpiSection>
@@ -128,9 +125,6 @@ const DisabilityCare: FCWithLayout<typeof getStaticProps> = (props) => {
               data-cy="infected_locations_total"
               absolute={lastValue.infected_locations_total}
               percentage={lastValue.infected_locations_percentage}
-              difference={
-                data.difference.disability_care__infected_locations_total
-              }
             />
             <Text>{infectedLocationsText.kpi_toelichting}</Text>
           </KpiTile>
