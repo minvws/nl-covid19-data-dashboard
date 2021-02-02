@@ -1,7 +1,10 @@
 // lib/sanity.ts
+import { imageResizeTargets } from '@corona-dashboard/common';
 import BlockContent from '@sanity/block-content-to-react';
 import sanityClient from '@sanity/client';
 import { TLanguageKey } from '~/locale';
+import { ImageBlock, SanityFileProps, SanityImageProps } from '~/types/cms';
+import { findClosestSize } from '~/utils/findClosestSize';
 
 const config = {
   /**
@@ -59,4 +62,61 @@ export function localize<T>(value: T | T[], languages: TLanguageKey[]): T {
     );
   }
   return value;
+}
+
+/**
+ * Utility to get an object which can be spread on an `<img />`-element.
+ * It will return the `src`, `srcSet` and `alt`-attributes together with the
+ * width and height.
+ * It's probably wise to set `height: auto` with css on the image-element itself
+ * for a correctly resizing responsive image.
+ *
+ * By default the `src` will resolve the to a size close to the original size.
+ * Optionally you can provide a second parameter to override this size.
+ *
+ * Usage:
+ *
+ *     <img {...getImageProps(node)} />
+ *     <img {...getImageProps(node, 450)} />
+ */
+export function getImageProps<T extends ImageBlock>(
+  node: T,
+  desiredWith = node.asset.metadata.dimensions.width
+) {
+  const { asset, alt } = node;
+  const { metadata } = asset;
+
+  const width = findClosestSize(desiredWith, imageResizeTargets);
+  const height = width / metadata.dimensions.aspectRatio;
+
+  const src = getImageSrc(node.asset, desiredWith);
+  const srcSet =
+    asset.extension === 'svg'
+      ? undefined
+      : imageResizeTargets
+          .map((size) => `${getImageSrc(asset, size)} ${size}w`)
+          .join(', ');
+
+  return {
+    src,
+    srcSet,
+    alt,
+    width,
+    height,
+  };
+}
+
+export function getFileSrc(asset: SanityFileProps) {
+  return `/cms/files/${asset.assetId}.${asset.extension}`;
+}
+
+export function getImageSrc(
+  asset: SanityImageProps,
+  desiredWidth = asset.metadata.dimensions.width
+) {
+  if (asset.extension === 'svg') {
+    return `/cms/images/${asset.assetId}.svg`;
+  }
+  const size = findClosestSize(desiredWidth, imageResizeTargets);
+  return `/cms/images/${asset.assetId}-${size}.${asset.extension}`;
 }

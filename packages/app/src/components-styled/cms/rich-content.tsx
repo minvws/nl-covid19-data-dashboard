@@ -1,9 +1,13 @@
 import { PortableTextEntry } from '@sanity/block-content-to-react';
-import { FunctionComponent, Fragment } from 'react';
-import { Image } from '~/components-styled/cms/image';
-import { PortableText } from '~/lib/sanity';
-import { ImageBlock, RichContentImageBlock } from '~/types/cms';
+import { Fragment, FunctionComponent, ReactNode } from 'react';
+import { getFileSrc, PortableText } from '~/lib/sanity';
+import {
+  ImageBlock,
+  InlineAttachment,
+  RichContentImageBlock,
+} from '~/types/cms';
 import { assert } from '~/utils/assert';
+import { ContentImage } from './content-image';
 
 interface RichContentProps {
   blocks: PortableTextEntry[];
@@ -26,10 +30,24 @@ export function RichContent({ contentWrapper, blocks }: RichContentProps) {
         );
       },
       image: (props: { node: ImageBlock | RichContentImageBlock }) => (
-        <Image contentWrapper={contentWrapper} {...props} />
+        <ContentImage contentWrapper={contentWrapper} {...props} />
       ),
+    },
+    marks: {
+      inlineAttachment,
     },
   };
 
   return <PortableText blocks={blocks} serializers={serializers} />;
+}
+
+function inlineAttachment(props: {
+  children: ReactNode;
+  mark: InlineAttachment;
+}) {
+  return (
+    <a download href={getFileSrc(props.mark.asset)}>
+      {props.children}
+    </a>
+  );
 }

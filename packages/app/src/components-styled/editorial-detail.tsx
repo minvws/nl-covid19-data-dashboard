@@ -2,7 +2,7 @@ import css from '@styled-system/css';
 import ArrowIcon from '~/assets/arrow.svg';
 import { Box } from '~/components-styled/base';
 import { ContentBlock } from '~/components-styled/cms/content-block';
-import { Image } from '~/components-styled/cms/image';
+import { ContentImage } from '~/components-styled/cms/content-image';
 import { Heading } from '~/components-styled/typography';
 import siteText from '~/locale';
 import { Editorial } from '~/types/cms';
@@ -36,7 +36,7 @@ export function EditorialDetail({ editorial }: EditorialDetailProps) {
           <RichContent blocks={editorial.intro} contentWrapper={ContentBlock} />
         </Box>
 
-        <Image node={editorial.cover} contentWrapper={ContentBlock} />
+        <ContentImage node={editorial.cover} contentWrapper={ContentBlock} />
       </ContentBlock>
 
       {!!editorial.content?.length && (

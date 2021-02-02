@@ -2,11 +2,10 @@ import css from '@styled-system/css';
 import ArrowIcon from '~/assets/arrow.svg';
 import { Box } from '~/components-styled/base';
 import { ContentBlock } from '~/components-styled/cms/content-block';
-import { Image } from '~/components-styled/image';
-
 import { Heading } from '~/components-styled/typography';
 import siteText from '~/locale';
 import { Article } from '~/types/cms';
+import { ContentImage } from './cms/content-image';
 import { RichContent } from './cms/rich-content';
 import { LinkWithIcon } from './link-with-icon';
 import { PublicationDate } from './publication-date';
@@ -16,8 +15,6 @@ interface ArticleDetailProps {
 }
 
 export function ArticleDetail({ article }: ArticleDetailProps) {
-  const { asset } = article.cover;
-
   return (
     <Box bg="white" py={{ _: 4, md: 5 }}>
       <ContentBlock spacing={3}>
@@ -39,13 +36,7 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
           <RichContent blocks={article.intro} contentWrapper={ContentBlock} />
         </Box>
 
-        <Image
-          src={`/${asset.assetId}.${asset.extension}`}
-          width={630}
-          height={630 / asset.metadata.dimensions.aspectRatio}
-          alt={article.cover.alt}
-          contentWrapper={ContentBlock}
-        />
+        <ContentImage node={article.cover} contentWrapper={ContentBlock} />
       </ContentBlock>
 
       {!!article.content?.length && (

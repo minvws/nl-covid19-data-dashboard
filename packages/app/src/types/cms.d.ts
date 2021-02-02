@@ -5,6 +5,11 @@ export type CollapsibleList = {
   title: string;
 };
 
+export interface SanityFileProps {
+  assetId: string;
+  extension: string;
+}
+
 export interface SanityImageProps {
   assetId: string;
   extension: string;
@@ -15,6 +20,11 @@ export interface SanityImageProps {
       height: number;
     };
   };
+}
+
+export interface InlineAttachment {
+  _type: 'inlineAttachment';
+  asset: SanityFileProps;
 }
 
 export type Editorial = Record<string, never> & Article;
