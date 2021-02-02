@@ -26,9 +26,7 @@ import {
   isWeeklyValue,
   NumberProperty,
   TrendValue,
-  Value,
-  WeeklyValue,
-} from './helpers';
+} from './logic';
 import { useBisect } from './hooks/use-bisect';
 import { useChartHover } from './hooks/use-chart-hover';
 import { useChartPadding } from './hooks/use-chart-padding';

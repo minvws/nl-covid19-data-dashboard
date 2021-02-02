@@ -7,6 +7,7 @@ import {
   Value,
 } from '~/components-styled/stacked-chart/logic';
 import { getDaysForTimeframe, TimeframeOption } from '~/utils/timeframe';
+export * from './background-rectangle';
 
 // This type limits the allowed property names to those with a number type,
 // so its like keyof T, but filtered down to only the appropriate properties.
