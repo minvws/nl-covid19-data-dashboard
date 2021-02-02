@@ -19,6 +19,7 @@ export function TopNavigation() {
   const [needsMobileMenuLink, setNeedsMobileMenuLink] = useState(false);
   const breakpoints = useBreakpoints(true);
   const isSmallScreen = !breakpoints.md;
+  const { xs, sm } = breakpoints;
   const navMenu = useRef<HTMLDivElement>(null);
   const tempPanelHeight = useRef(0);
   const transistionRef = useRef('none');
@@ -28,16 +29,15 @@ export function TopNavigation() {
 
   useEffect(() => {
     if (!navMenu.current) return;
-
     tempPanelHeight.current = navMenu.current.clientHeight;
-
     // Menu is opened by default as fallback: JS opens it
+    setIsMenuOpen(true);
     setIsMenuOpen(false);
     setPanelHeight(0);
 
     // Workaround to get the mobile menu opened when linking to a sub-page.
     setNeedsMobileMenuLink(isSmallScreen);
-  }, [isSmallScreen]);
+  }, [xs, sm]);
 
   useEffect(() => {
     setPanelHeight(isMenuOpen ? tempPanelHeight.current : 0);
@@ -80,6 +80,15 @@ export function TopNavigation() {
           opacity: isMenuOpen || !isSmallScreen ? 1 : 0,
           transition: transistionRef.current,
         }}
+        css={css({
+          transition: asResponsiveArray({
+            _:
+              panelHeight !== 0
+                ? 'none'
+                : 'max-height 0.4s ease-in-out, opacity 0.4s ease-in-out',
+            md: 'none',
+          }),
+        })}
       >
         <MaxWidth>
           <NavList>
