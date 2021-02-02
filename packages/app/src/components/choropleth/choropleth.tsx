@@ -37,6 +37,12 @@ type TProps<T1, T3> = {
     path: string,
     index: number
   ) => ReactNode;
+
+  highightCallback?: (
+    feature: Feature<MultiPolygon, T1>,
+    path: string,
+    index: number
+  ) => ReactNode;
   // This callback is invoked for each of the features in the hovers property.
   // This will usually return a <path/> element.
   hoverCallback: (
@@ -119,6 +125,7 @@ const ChoroplethMap: <T1, T3>(
     setTooltip,
     hoverRef,
     description,
+    highightCallback,
   } = props;
 
   const clipPathId = useUniqueId();
@@ -188,6 +195,14 @@ const ChoroplethMap: <T1, T3>(
                 fitSize={fitSize}
               />
             </g>
+          )}
+
+          {highightCallback && (
+            <MercatorGroup
+              data={featureCollection.features}
+              render={highightCallback}
+              fitSize={fitSize}
+            />
           )}
         </g>
       </svg>

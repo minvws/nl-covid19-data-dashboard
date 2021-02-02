@@ -234,6 +234,8 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
                       tooltipContent={escalationTooltip(
                         createSelectRegionHandler(router, 'actueel')
                       )}
+                      highlightCode={safetyRegionForMunicipality?.code}
+                      // highlight={''}
                     />
                   </TopicalChoroplethContainer>
                 </>

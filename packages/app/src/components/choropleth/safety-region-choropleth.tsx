@@ -30,6 +30,7 @@ type SafetyRegionChoroplethProps<T, K extends RegionsMetricName> = {
   onSelect?: (context: SafetyRegionProperties) => void;
   tooltipContent?: (context: SafetyRegionProperties & T) => ReactNode;
   isSelectorMap?: boolean;
+  highlightCode?: string;
 };
 
 /**
@@ -57,6 +58,7 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
     metricProperty,
     onSelect,
     tooltipContent,
+    highlightCode,
   } = props;
 
   const ratio = 1.2;
@@ -113,6 +115,32 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
     [getFillColor, hasData]
   );
 
+  const highightCallback = useCallback(
+    (feature: Feature<MultiPolygon, SafetyRegionProperties>, path: string) => {
+      const { vrcode } = feature.properties;
+
+      if (highlightCode !== vrcode) return;
+
+      return (
+        <>
+          <Path
+            key={`${vrcode}-outside-border`}
+            d={path}
+            stroke="#fff"
+            strokeWidth={8}
+          />
+          <Path
+            key={`${vrcode}-inside-border`}
+            d={path}
+            stroke="#000"
+            strokeWidth={2}
+          />
+        </>
+      );
+    },
+    [highlightCode]
+  );
+
   const hasSelectHander = !!onSelect;
 
   const hoverCallback = useCallback(
@@ -163,6 +191,7 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
           hoverCallback={hoverCallback}
           onPathClick={onClick}
           getTooltipContent={getTooltipContent}
+          highightCallback={highightCallback}
         />
       </AspectRatio>
     </div>
