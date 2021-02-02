@@ -12,9 +12,9 @@
     "test:ci": "yarn run test",
     "compile": "echo 'Placeholder to support yarn compile in repo root, until we use TS'",
     "lint": "echo '@TODO add eslint'",
-    "images": "run-s images:download images:resize",
-    "images:download": "bash scripts/images-download.sh",
-    "images:resize": "ts-node scripts/images-resize.ts"
+    "assets": "run-s assets:download assets:image-resize",
+    "assets:download": "bash scripts/assets-download.sh",
+    "assets:image-resize": "ts-node scripts/images-resize.ts"
   },
   "keywords": [
     "sanity"

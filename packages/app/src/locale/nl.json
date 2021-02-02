@@ -53,8 +53,8 @@
       "actueel": "Actueel"
     },
     "title": "Corona Dashboard",
-    "terug_naar_alle_cijfers": "Alle cijfers voor dit gebied",
-    "terug_naar_alle_cijfers_homepage": "Alle cijfers voor dit gebied",
+    "terug_naar_alle_cijfers": "Alle landelijke cijfers",
+    "terug_naar_alle_cijfers_homepage": "Alle landelijke cijfers",
     "menu": {
       "open_menu": "Open menu",
       "close_menu": "Sluit menu"
@@ -1989,16 +1989,16 @@
   },
   "vaccinaties": {
     "titel_sidebar": "Vaccinaties",
-    "titel_kpi": "Totaal aantal toegediende vaccins",
+    "titel_kpi": "Aantal gezette prikken",
     "metadata": {
       "title": "Vaccinaties | Dashboard Coronavirus | Rijksoverheid.nl",
-      "description": "Op 6 januari 2021 is Nederland begonnen met vaccineren. De cijfers op het dashboard coronavirus laten zien hoeveel vaccins zijn toegediend en hoeveel vaccins er beschikbaar komen."
+      "description": "Op 6 januari 2021 is Nederland begonnen met vaccineren. De cijfers op het dashboard coronavirus laten zien hoeveel prikken zijn gezet en hoeveel vaccins er beschikbaar komen."
     },
     "title": "COVID-19-vaccinaties",
-    "description": "Vaccineren is de belangrijkste stap naar een samenleving zonder coronaregels. Op 6 januari 2021 is Nederland begonnen met vaccineren. Uiteindelijk komt iedereen van 18 jaar of ouder aan de beurt. De cijfers op deze pagina laten zien hoeveel vaccins zijn toegediend en hoeveel vaccins er beschikbaar komen.",
+    "description": "Vaccineren is de belangrijkste stap naar een samenleving zonder coronaregels. Op 6 januari 2021 is Nederland begonnen met vaccineren. Uiteindelijk komt iedereen van 18 jaar of ouder aan de beurt. De cijfers op deze pagina laten zien hoeveel prikken zijn gezet en hoeveel vaccins er beschikbaar komen.",
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "date_unix": "1611920224",
-    "date_of_insertion_unix": "1611920224",
+    "date_unix": "1612263890",
+    "date_of_insertion_unix": "1612263890",
     "reference": {
       "href": "/verantwoording#vaccinatie",
       "text": "Lees meer over de bron van de vaccinatiecijfers in de cijferverantwoording."
@@ -2021,7 +2021,7 @@
       },
       "all_left": {
         "href": "",
-        "text": "GGD'en, LNAZ & langdurige zorginstellingen",
+        "text": "RIVM, LNAZ & GGD-GHOR",
         "download": ""
       },
       "all_right": {
@@ -2034,41 +2034,84 @@
       "difference": "Do not remove this key. It is required as a temporary workaround",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "215498",
-          "date_unix": "1611920224",
-          "date_of_insertion_unix": "1611920224"
+          "total_vaccinated": "375908",
+          "date_unix": "1612263890",
+          "date_of_insertion_unix": "1612263890"
         }
       },
       "kpi_total": {
-        "title": "Aantal toegediende vaccins",
-        "value": "215498",
-        "description": "Dit getal laat zien hoeveel vaccins in totaal zijn toegediend. Het kan een paar dagen duren voordat een prik wordt gemeld. Het daadwerkelijke aantal gezette prikken ligt daarom hoger. Mensen hebben twee prikken nodig voor een volledige vaccinatie.",
-        "date_of_report_unix": "1611920224",
-        "date_of_insertion_unix": "1611920224",
+        "title": "Aantal gezette prikken",
+        "value": "277275",
+        "description": "",
+        "date_of_report_unix": "1612263890",
+        "date_of_insertion_unix": "1612263890",
         "administered": [
           {
-            "value": "152253",
-            "description": "toegediend door GGD'en"
+            "value": "203559",
+            "description": "gemeld door GGD-GHOR",
+            "report_date": "Gemeld aantal tot en met 1 februari"
           },
           {
-            "value": "46416",
-            "description": "toegediend door ziekenhuizen"
-          },
-          {
-            "value": "16829",
-            "description": "toegediend door langdurige zorginstellingen*"
-          },
-          {
-            "value": "",
-            "description": ""
+            "value": "73716",
+            "description": "gemeld door LNAZ",
+            "report_date": "Gemeld aantal tot en met 1 februari"
           },
           {
             "value": "",
-            "description": ""
+            "description": "",
+            "report_date": ""
+          },
+          {
+            "value": "",
+            "description": "",
+            "report_date": ""
+          },
+          {
+            "value": "",
+            "description": "",
+            "report_date": ""
           }
         ],
-        "description_first": "Dit getal laat zien hoeveel vaccins in totaal zijn toegediend. Het kan een paar dagen duren voordat een prik wordt gemeld. Het daadwerkelijke aantal gezette prikken ligt daarom hoger. Mensen hebben twee prikken nodig voor een volledige vaccinatie.",
-        "description_second": "* Dit cijfer is aan de telefoon doorgegeven door de instellingen zelf op 22 en 25 januari. Het is nog niet bekend wanneer dit cijfer wordt bijgewerkt. Overige aantallen toegediende vaccins worden dagelijks bijgewerkt."
+        "description_first": "Dit getal laat zien hoeveel prikken zijn gemeld door GGD-GHOR en LNAZ. [Lees meer over de registratie in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)",
+        "description_second": "",
+        "warning": "",
+        "first_tab_title": "Berekend aantal",
+        "second_tab_title": "Gemeld aantal",
+        "tab_total_estimated": {
+          "value": "375908",
+          "description": "",
+          "date_of_report_unix": "1612263890",
+          "date_of_insertion_unix": "1612263890",
+          "administered": [
+            {
+              "value": "203559",
+              "description": "gezet door GGD'en",
+              "report_date": "Gemeld aantal tot en met 1 februari"
+            },
+            {
+              "value": "73716",
+              "description": "gezet in ziekenhuizen",
+              "report_date": "Gemeld aantal tot en met 1 februari"
+            },
+            {
+              "value": "98633",
+              "description": "gezet in langdurige zorginstellingen",
+              "report_date": "Berekend aantal tot en met 1 februari"
+            },
+            {
+              "value": "",
+              "description": "",
+              "report_date": ""
+            },
+            {
+              "value": "",
+              "description": "",
+              "report_date": ""
+            }
+          ],
+          "description_first": "Dit getal is een rekenkundige aanname van hoeveel prikken in totaal zijn gezet. De GGD-cijfers worden gemeld door de GGD-GHOR en de ziekenhuiscijfers door het LNAZ. Voor de langdurige zorginstellingen maakt het RIVM een berekening door te kijken naar hoeveel vaccins er zijn bezorgd bij priklocaties. [Lees meer over de berekening in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)",
+          "description_second": "[Op 1 februari is een dubbeltelling rechtgezet.](https://www.rijksoverheid.nl/actueel/nieuws/2021/02/01/dubbeltelling-in-vaccinatiecijfers-rechtgezet)"
+        }
       },
       "kpi_expected_delivery": {
         "title": "Verwachte levering goedgekeurde vaccins",
@@ -2106,6 +2149,15 @@
             "description": ""
           }
         ]
+      },
+      "kpi_expected_page_additions": {
+        "title": "Verwachte toevoegingen aan deze pagina",
+        "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer:",
+        "additions": [
+          "Vaccinatiebereidheid",
+          "Vaccinatiegraad",
+          "Vaccins op voorraad"
+        ]
       }
     },
     "section_vaccinations_more_information": {
@@ -2138,7 +2190,7 @@
   },
   "common_actueel": {
     "terug_naar_landelijk": "Terug naar landelijke situatie",
-    "laatst_bijgewerkt": "Laatst bijgewerkt: {{date}} om {{time}}"
+    "laatst_bijgewerkt": "Laatst bijgewerkt: {{date}}"
   },
   "nationaal_actueel": {
     "title": "De actuele situatie in {{the_netherlands}}",
@@ -2164,9 +2216,9 @@
         "title": "Intensive care-opnames"
       },
       "toegediende_vaccins": {
-        "title": "Toegediende vaccins",
+        "title": "Aantal gezette prikken",
         "sub_title": "Verwachte levering",
-        "administered_tests": "Tot nu toe zijn er {{administeredVaccines}} vaccins toegediend. Dit cijfer omvat zowel eerste als tweede prikken.",
+        "administered_tests": "Tot nu toe zijn er {{administeredVaccines}} prikken gezet. Dit cijfer omvat zowel eerste als tweede prikken.",
         "supply": "Nederland verwacht de komende zes weken {{expectedDelivery}} goedgekeurde vaccins te krijgen."
       }
     },
@@ -2374,5 +2426,10 @@
         "gemeente": "Cijfers van gemeente {{municipalityName}}"
       }
     }
+  },
+  "toegankelijkheid_metadata": {
+    "title": "Toegankelijkheid COVID-19 Dashboard | Rijksoverheid.nl",
+    "description": "Informatie over de toegankelijkheid van het COVID-19 Dashboard.",
+    "url": "https://coronadashboard.rijksoverheid.nl/verantwoording"
   }
 }

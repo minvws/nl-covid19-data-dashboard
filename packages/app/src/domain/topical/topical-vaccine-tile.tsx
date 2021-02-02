@@ -12,7 +12,9 @@ export function TopicalVaccineTile() {
   const text = siteText.nationaal_actueel.mini_trend_tiles.toegediende_vaccins;
 
   const data = {
-    administeredVaccines: parseFloat(siteText.vaccinaties.data.kpi_total.value),
+    administeredVaccines: parseFloat(
+      siteText.vaccinaties.data.kpi_total.tab_total_estimated.value
+    ),
     expectedDelivery: parseFloat(
       siteText.vaccinaties.data.kpi_expected_delivery.value
     ),
