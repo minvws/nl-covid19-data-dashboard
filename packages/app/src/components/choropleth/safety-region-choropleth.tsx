@@ -105,7 +105,7 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
       return (
         <Path
           key={vrcode}
-          d={path}
+          pathData={path}
           fill={fill}
           stroke={isWhiteFill ? colors.silver : '#fff'}
           strokeWidth={1}
@@ -115,7 +115,7 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
     [getFillColor, hasData]
   );
 
-  const highightCallback = useCallback(
+  const highlightCallback = useCallback(
     (feature: Feature<MultiPolygon, SafetyRegionProperties>, path: string) => {
       const { vrcode } = feature.properties;
 
@@ -125,13 +125,13 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
         <>
           <Path
             key={`${vrcode}-outside-border`}
-            d={path}
+            pathData={path}
             stroke="#fff"
             strokeWidth={8}
           />
           <Path
             key={`${vrcode}-inside-border`}
-            d={path}
+            pathData={path}
             stroke="#000"
             strokeWidth={2}
           />
@@ -152,7 +152,7 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
           isClickable={hasSelectHander}
           id={vrcode}
           key={vrcode}
-          d={path}
+          pathData={path}
           stroke={riskLevelStyling ? '#fff' : undefined}
           strokeWidth={riskLevelStyling ? 3 : undefined}
         />
@@ -189,7 +189,7 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
           hoverCallback={hoverCallback}
           onPathClick={onClick}
           getTooltipContent={getTooltipContent}
-          highightCallback={highightCallback}
+          highlightCallback={highlightCallback}
         />
       </AspectRatio>
     </div>

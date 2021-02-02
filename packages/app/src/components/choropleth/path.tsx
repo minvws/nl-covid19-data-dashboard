@@ -2,7 +2,7 @@ import css from '@styled-system/css';
 import styled from 'styled-components';
 
 interface PathProps {
-  d: string;
+  pathData: string;
   fill?: string;
   stroke?: string;
   strokeWidth?: number;
@@ -12,7 +12,7 @@ interface PathProps {
 
 export function Path({
   id,
-  d,
+  pathData,
   fill,
   stroke,
   strokeWidth,
@@ -20,7 +20,7 @@ export function Path({
 }: PathProps) {
   return (
     <StyledPath
-      d={d}
+      d={pathData}
       shapeRendering="optimizeQuality"
       data-id={id}
       isClickable={isClickable}
@@ -33,7 +33,7 @@ export function Path({
 
 export function HoverPath({
   id,
-  d,
+  pathData,
   fill,
   stroke,
   strokeWidth,
@@ -41,7 +41,7 @@ export function HoverPath({
 }: PathProps) {
   return (
     <StyledHoverPath
-      d={d}
+      d={pathData}
       shapeRendering="optimizeQuality"
       data-id={id}
       isClickable={isClickable}

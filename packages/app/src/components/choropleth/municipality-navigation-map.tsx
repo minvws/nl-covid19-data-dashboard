@@ -41,7 +41,7 @@ export function MunicipalityNavigationMap<T>(
       <Path
         key={gemcode}
         id={gemcode}
-        d={path}
+        pathData={path}
         fill={'#fff'}
         stroke={colors.blue}
         strokeWidth={0.5}
@@ -60,7 +60,7 @@ export function MunicipalityNavigationMap<T>(
         isClickable
         id={gemcode}
         key={gemcode}
-        d={path}
+        pathData={path}
         stroke={colors.blue}
         fill={colors.blue}
       />

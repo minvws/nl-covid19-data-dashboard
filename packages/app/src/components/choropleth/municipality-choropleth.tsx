@@ -107,7 +107,7 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
       return (
         <Path
           key={gemcode}
-          d={path}
+          pathData={path}
           fill={hasData && fill ? fill : '#fff'}
           stroke={
             selected
@@ -146,7 +146,7 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
           isClickable={hasSelectHander}
           id={gemcode}
           key={gemcode}
-          d={path}
+          pathData={path}
           stroke={isSelected ? '#000' : undefined}
           strokeWidth={isSelected ? 3 : undefined}
         />

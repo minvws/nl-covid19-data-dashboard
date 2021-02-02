@@ -38,7 +38,7 @@ type TProps<T1, T3> = {
     index: number
   ) => ReactNode;
 
-  highightCallback?: (
+  highlightCallback?: (
     feature: Feature<MultiPolygon, T1>,
     path: string,
     index: number
@@ -125,7 +125,7 @@ const ChoroplethMap: <T1, T3>(
     setTooltip,
     hoverRef,
     description,
-    highightCallback,
+    highlightCallback,
   } = props;
 
   const clipPathId = useUniqueId();
@@ -197,10 +197,10 @@ const ChoroplethMap: <T1, T3>(
             </g>
           )}
 
-          {highightCallback && (
+          {highlightCallback && (
             <MercatorGroup
               data={featureCollection.features}
-              render={highightCallback}
+              render={highlightCallback}
               fitSize={fitSize}
             />
           )}
@@ -216,7 +216,12 @@ function Country({ fitSize }: { fitSize: FitSize }) {
       <MercatorGroup
         data={countryGeo.features}
         render={(_, path, index) => (
-          <Path key={index} d={path} stroke={colors.silver} strokeWidth={0.5} />
+          <Path
+            key={index}
+            pathData={path}
+            stroke={colors.silver}
+            strokeWidth={0.5}
+          />
         )}
         fitSize={fitSize}
       />
