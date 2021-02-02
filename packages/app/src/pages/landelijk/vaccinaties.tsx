@@ -1,7 +1,4 @@
-import {
-  NlVaccineDelivery,
-  NlVaccineSupportValue,
-} from '@corona-dashboard/common';
+import { NlVaccineSupportValue } from '@corona-dashboard/common';
 import { css } from '@styled-system/css';
 import { ParentSize } from '@visx/responsive';
 import { Fragment, useState } from 'react';
@@ -11,8 +8,7 @@ import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
-import { LineChart } from '~/components-styled/line-chart';
-import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { LineChart } from '~/components-styled/line-chart/line-chart';
 import { RadioGroup } from '~/components-styled/radio-group';
 import { SEOHead } from '~/components-styled/seo-head';
 import { StackedChart } from '~/components-styled/stacked-chart';
@@ -27,10 +23,7 @@ import {
   getNlData,
   getText,
 } from '~/static-props/get-data';
-import {
-  formatDateFromMilliseconds,
-  formatDateFromSeconds,
-} from '~/utils/formatDate';
+import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 

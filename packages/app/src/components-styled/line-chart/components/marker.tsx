@@ -3,7 +3,8 @@ import { ChartPadding } from '~/components-styled/line-chart/components';
 import { Text } from '~/components-styled/typography';
 import { colors } from '~/style/theme';
 import { formatDateFromMilliseconds } from '~/utils/formatDate';
-import { TrendValue, Value } from '../helpers';
+import { TrendValue } from '../logic';
+import { Value } from '~/components-styled/stacked-chart/logic';
 
 export const MARKER_MIN_WIDTH = 26;
 

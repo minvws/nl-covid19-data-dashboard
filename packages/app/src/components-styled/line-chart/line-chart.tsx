@@ -35,7 +35,7 @@ import {
   getTrendData,
   NumberProperty,
   TrendValue,
-} from './helpers';
+} from './logic';
 
 const dateToValue = (d: Date) => d.valueOf() / 1000;
 const formatXAxis = (date: Date) =>
