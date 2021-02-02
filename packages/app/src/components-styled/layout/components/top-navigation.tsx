@@ -19,38 +19,33 @@ export function TopNavigation() {
   const [needsMobileMenuLink, setNeedsMobileMenuLink] = useState(false);
   const breakpoints = useBreakpoints(true);
   const isSmallScreen = !breakpoints.md;
-  const { xs, sm } = breakpoints;
   const navMenu = useRef<HTMLDivElement>(null);
-  const tempPanelHeight = useRef(0);
-  const transistionRef = useRef('none');
-  const [panelHeight, setPanelHeight] = useState(-1);
+  const [panelHeight, setPanelHeight] = useState(0);
 
-  // const [isAnimating, setIsAnimating] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
-    if (!navMenu.current) return;
-    tempPanelHeight.current = navMenu.current.clientHeight;
     // Menu is opened by default as fallback: JS opens it
-    setIsMenuOpen(true);
     setIsMenuOpen(false);
     setPanelHeight(0);
 
     // Workaround to get the mobile menu opened when linking to a sub-page.
     setNeedsMobileMenuLink(isSmallScreen);
-  }, [xs, sm]);
-
-  useEffect(() => {
-    setPanelHeight(isMenuOpen ? tempPanelHeight.current : 0);
-  }, [isMenuOpen]);
-
-  useEffect(() => {
-    if (panelHeight !== 0) return;
-    transistionRef.current =
-      'max-height 0.4s ease-in-out, opacity 0.4s ease-in-out';
-  }, [panelHeight]);
+  }, [isSmallScreen]);
 
   function toggleMenu() {
+    if (isAnimating) return;
+
+    setIsAnimating(!isAnimating);
     setIsMenuOpen(!isMenuOpen);
+  }
+
+  useEffect(() => {
+    setPanelHeight(isMenuOpen ? 1000 : 0);
+  }, [isMenuOpen]);
+
+  function onTransitionEnd() {
+    setIsAnimating(false);
   }
 
   return (
@@ -67,25 +62,21 @@ export function TopNavigation() {
           </VisuallyHidden>
         </NavToggle>
       )}
-      {/* {(!isSmallScreen || isMenuOpen) && ( */}
+
       <NavWrapper
         id="main-navigation"
         role="navigation"
         aria-label={text.aria_labels.pagina_keuze}
         ref={navMenu}
-        // onTransitionEnd={onTransitionEnd}
-        style={{
-          maxHeight:
-            panelHeight === -1 || !isSmallScreen ? '100%' : `${panelHeight}px`,
-          opacity: isMenuOpen || !isSmallScreen ? 1 : 0,
-          transition: transistionRef.current,
-        }}
+        onTransitionEnd={onTransitionEnd}
         css={css({
+          maxHeight: asResponsiveArray({ _: `${panelHeight}px`, md: '100%' }),
+          opacity: asResponsiveArray({ _: isMenuOpen ? 1 : 0, md: 1 }),
           transition: asResponsiveArray({
             _:
-              panelHeight !== 0
-                ? 'none'
-                : 'max-height 0.4s ease-in-out, opacity 0.4s ease-in-out',
+              isMenuOpen || isAnimating
+                ? 'max-height 0.4s ease-in-out, opacity 0.4s ease-in-out'
+                : 'none',
             md: 'none',
           }),
         })}
@@ -118,7 +109,6 @@ export function TopNavigation() {
           </NavList>
         </MaxWidth>
       </NavWrapper>
-      {/* )} */}
     </>
   );
 }
@@ -160,15 +150,12 @@ const NavToggle = styled.button(
 
 const NavWrapper = styled.nav(
   css({
-    // borderTop: '1px solid rgba(255, 255, 255, 0.25)',
     borderTopWidth: '1px',
-    // mt: 3,
-    // pt: 1,
-    // maxHeight: 0,
+    pt: 1,
     pb: 0,
+    m: 0,
     flex: '1 0 100%',
     width: 'auto',
-    // transition: 'max-height 0.4s ease-in-out, opacity 0.4s ease-in-out',
     [`@media ${theme.mediaQueries.md}`]: {
       borderTopWidth: 0,
       ml: 'auto',
@@ -189,7 +176,6 @@ const NavList = styled.ul(
     padding: 0,
     margin: 0,
     mt: asResponsiveArray({ _: 3, md: 0 }),
-    pt: asResponsiveArray({ _: 1, md: 0 }),
     display: asResponsiveArray({ _: 'block', md: 'flex' }),
   })
 );
