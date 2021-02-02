@@ -1,3 +1,7 @@
+import {
+  NlVaccineDelivery,
+  NlVaccineSupportValue,
+} from '@corona-dashboard/common';
 import { css } from '@styled-system/css';
 import { ParentSize } from '@visx/responsive';
 import { Fragment, useState } from 'react';
@@ -7,6 +11,8 @@ import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
+import { LineChart } from '~/components-styled/line-chart';
+import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { RadioGroup } from '~/components-styled/radio-group';
 import { SEOHead } from '~/components-styled/seo-head';
 import { StackedChart } from '~/components-styled/stacked-chart';
@@ -21,7 +27,12 @@ import {
   getNlData,
   getText,
 } from '~/static-props/get-data';
+import {
+  formatDateFromMilliseconds,
+  formatDateFromSeconds,
+} from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -227,6 +238,88 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                     legendLabel: 'Moderna',
                   },
                 ]}
+              />
+            )}
+          </ParentSize>
+        </ChartTile>
+
+        <ChartTile
+          title={text.grafiek_draagvlak.titel}
+          description={text.grafiek_draagvlak.omschrijving}
+          ariaDescription={
+            siteText.accessibility.grafieken.vaccinatie_draagvlak
+          }
+          metadata={{
+            date: 1611593522,
+            source: text.bronnen.rivm,
+          }}
+        >
+          <ParentSize>
+            {({ width }) => (
+              <LineChart
+                width={width}
+                ariaLabelledBy="chart_vaccine_support"
+                values={
+                  [
+                    {
+                      percentage_in_favor: 34,
+                      percentage_already_vaccinated: 12,
+                      date_start_unix:
+                        new Date('04 January 2021').getTime() / 1000,
+                      date_end_unix:
+                        new Date('10 January 2021').getTime() / 1000,
+                      date_of_insertion_unix: 0,
+                    },
+                    {
+                      percentage_in_favor: 23,
+                      percentage_already_vaccinated: 57,
+                      date_start_unix:
+                        new Date('11 January 2021').getTime() / 1000,
+                      date_end_unix:
+                        new Date('17 January 2021').getTime() / 1000,
+                      date_of_insertion_unix: 0,
+                    },
+                    {
+                      percentage_in_favor: 95,
+                      percentage_already_vaccinated: 84,
+                      date_start_unix:
+                        new Date('18 January 2021').getTime() / 1000,
+                      date_end_unix:
+                        new Date('24 January 2021').getTime() / 1000,
+                      date_of_insertion_unix: 0,
+                    },
+                    {
+                      percentage_in_favor: 34,
+                      percentage_already_vaccinated: 12,
+                      date_start_unix:
+                        new Date('25 January 2021').getTime() / 1000,
+                      date_end_unix:
+                        new Date('31 January 2021').getTime() / 1000,
+                      date_of_insertion_unix: 0,
+                    },
+                  ] as NlVaccineSupportValue[]
+                }
+                linesConfig={[{ metricProperty: 'percentage_in_favor' }]}
+                formatTooltip={(values) => {
+                  const value = values[0];
+
+                  return (
+                    <Text m={0}>
+                      <span style={{ fontWeight: 'bold' }}>
+                        {`${formatDateFromSeconds(value.date_start_unix)} -
+                        ${formatDateFromSeconds(value.date_end_unix)}`}
+                      </span>
+                      <br />
+
+                      {replaceVariablesInText(
+                        siteText.common.tooltip.vaccinatie_bereidheid,
+                        {
+                          percentageInFavor: value.__value,
+                        }
+                      )}
+                    </Text>
+                  );
+                }}
               />
             )}
           </ParentSize>
