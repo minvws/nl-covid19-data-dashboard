@@ -43,7 +43,7 @@ export function TopNavigation() {
     setIsMenuOpen(!isMenuOpen);
   }
 
-  function onTransitionEnd() {
+  function handleTransitionEnd() {
     setIsAnimating(false);
   }
 
@@ -67,7 +67,7 @@ export function TopNavigation() {
         role="navigation"
         aria-label={text.aria_labels.pagina_keuze}
         ref={navMenu}
-        onTransitionEnd={onTransitionEnd}
+        onTransitionEnd={handleTransitionEnd}
         css={css({
           maxHeight: asResponsiveArray({ _: `${panelHeight}px`, md: '100%' }),
           opacity: asResponsiveArray({ _: isMenuOpen ? 1 : 0, md: 1 }),
@@ -80,7 +80,7 @@ export function TopNavigation() {
           }),
         })}
       >
-        <MaxWidth>
+        <MaxWidth width={'100%'}>
           <NavList>
             <NavItem
               href="/"
@@ -149,10 +149,12 @@ const NavToggle = styled.button(
 
 const NavWrapper = styled.nav(
   css({
+    display: 'flex',
     width: '100%',
     borderTopWidth: '1px',
     p: 0,
     [`@media ${theme.mediaQueries.md}`]: {
+      display: 'inline',
       width: 'auto',
       borderTopWidth: 0,
       ml: 'auto',
