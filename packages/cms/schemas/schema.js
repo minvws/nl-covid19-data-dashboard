@@ -9,6 +9,7 @@ import article from './documents/article';
 import cijferVerantwoording from './documents/cijfer-verantwoording';
 import editorial from './documents/editorial';
 import overDitDashboard from './documents/over-dit-dashboard';
+import toegankelijkheid from './documents/toegankelijkheid';
 import overRisicoNiveaus from './documents/over-risico-niveaus';
 import topicalPage from './documents/topical-page';
 import veelgesteldeVragen from './documents/veelgestelde-vragen';
@@ -43,6 +44,7 @@ export default createSchema({
     cijferVerantwoording,
     overRisicoNiveaus,
     overDitDashboard,
+    toegankelijkheid,
     topicalPage,
     /** RESTRICTIONS */
     restrictionGroup,

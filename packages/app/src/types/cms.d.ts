@@ -1,9 +1,14 @@
 import { PortableTextEntry } from '@sanity/block-content-to-react';
 
 export type CollapsibleList = {
-  content: PortableTextEntry | null;
+  content: RichContentBlock[] | null;
   title: string;
 };
+
+export interface SanityFileProps {
+  assetId: string;
+  extension: string;
+}
 
 export interface SanityImageProps {
   assetId: string;
@@ -17,6 +22,11 @@ export interface SanityImageProps {
   };
 }
 
+export interface InlineAttachment {
+  _type: 'inlineAttachment';
+  asset: SanityFileProps;
+}
+
 export type Editorial = Record<string, never> & Article;
 
 export interface Article {
@@ -28,7 +38,7 @@ export interface Article {
   };
   cover: ImageBlock;
   summary: Block;
-  intro: Block;
+  intro: RichContentBlock[];
   content: RichContentBlock[];
   metaDescription: string;
   publicationDate: string;
@@ -116,7 +126,7 @@ export type LockdownData = {
   showLockdown: boolean;
   message: {
     title: string;
-    description: PortableTextEntry[] | null;
+    description: RichContentBlock[] | null;
   };
   title: string;
 };
