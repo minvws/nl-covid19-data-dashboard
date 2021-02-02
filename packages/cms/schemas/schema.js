@@ -20,6 +20,7 @@ import sewerPage from './documents/pages/sewer-page';
 import topicalPage from './documents/pages/topical-page';
 import vaccinationsPage from './documents/pages/vaccinations-page';
 import veelgesteldeVragen from './documents/pages/veelgestelde-vragen-page';
+import toegankelijkheid from './documents/toegankelijkheid';
 import localeBlock from './locale/locale-block';
 import localeRichContentBlock from './locale/locale-rich-content-block';
 // These 2 locale helpers are technically objects too, but we keep them grouped here
@@ -51,6 +52,7 @@ export default createSchema({
     cijferVerantwoording,
     overRisicoNiveaus,
     overDitDashboard,
+    toegankelijkheid,
     topicalPage,
     deceasedPage,
     behaviorPage,

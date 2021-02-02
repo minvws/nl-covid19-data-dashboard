@@ -2,12 +2,10 @@ import css from '@styled-system/css';
 import ArrowIcon from '~/assets/arrow.svg';
 import { Box } from '~/components-styled/base';
 import { ContentBlock } from '~/components-styled/cms/content-block';
-import { Image } from '~/components-styled/image';
-
 import { Heading } from '~/components-styled/typography';
-import { PortableText } from '~/lib/sanity';
 import siteText from '~/locale';
 import { Article } from '~/types/cms';
+import { ContentImage } from './cms/content-image';
 import { RichContent } from './cms/rich-content';
 import { LinkWithIcon } from './link-with-icon';
 import { PublicationDate } from './publication-date';
@@ -17,8 +15,6 @@ interface ArticleDetailProps {
 }
 
 export function ArticleDetail({ article }: ArticleDetailProps) {
-  const { asset } = article.cover;
-
   return (
     <Box bg="white" py={{ _: 4, md: 5 }}>
       <ContentBlock spacing={3}>
@@ -36,19 +32,18 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
           <PublicationDate date={article.publicationDate} />
         </Box>
 
-        <Box fontWeight="bold">
-          <PortableText blocks={article.intro} />
+        <Box fontWeight="bold" fontSize="1.25rem">
+          <RichContent blocks={article.intro} contentWrapper={ContentBlock} />
         </Box>
 
-        <Image
-          src={`/${asset.assetId}.${asset.extension}`}
-          width={630}
-          height={630 / asset.metadata.dimensions.aspectRatio}
-          alt={article.cover.alt}
-        />
+        <ContentImage node={article.cover} contentWrapper={ContentBlock} />
       </ContentBlock>
 
-      {!!article.content?.length && <RichContent blocks={article.content} />}
+      {!!article.content?.length && (
+        <Box fontSize="1.125rem">
+          <RichContent blocks={article.content} contentWrapper={ContentBlock} />
+        </Box>
+      )}
     </Box>
   );
 }

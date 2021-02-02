@@ -58,6 +58,7 @@ const hiddenDocTypes = [
   'reproductionPage',
   'sewerPage',
   'vaccinationsPage',
+  'toegankelijkheid',
 ];
 
 const filterHiddenDocTypes = (listItem) =>
@@ -140,6 +141,12 @@ export default () =>
         RiPagesFill,
         'Vaccinaties',
         'vaccinationsPage'
+      ),
+      addListItem(
+        StructureBuilder,
+        GrCircleInformation,
+        'Toegankelijkheid',
+        'toegankelijkheid'
       ),
 
       // Add a visual divider (optional)
