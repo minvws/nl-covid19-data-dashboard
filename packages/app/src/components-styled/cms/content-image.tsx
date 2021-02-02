@@ -1,7 +1,7 @@
 import css from '@styled-system/css';
+import { Fragment, FunctionComponent } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components-styled/base';
-import { ContentBlock } from '~/components-styled/cms/content-block';
 import { Image } from '~/components-styled/image';
 import { MaxWidth } from '~/components-styled/max-width';
 import { getImageProps } from '~/lib/sanity';
@@ -9,12 +9,15 @@ import { ImageBlock, RichContentImageBlock } from '~/types/cms';
 
 interface ContentImageProps {
   node: ImageBlock | RichContentImageBlock;
+  contentWrapper?: FunctionComponent;
 }
 
-export function ContentImage({ node }: ContentImageProps) {
+export function ContentImage({ node, contentWrapper }: ContentImageProps) {
   const caption = 'caption' in node && node.caption && (
     <Caption>{node.caption}</Caption>
   );
+
+  const ContentWrapper = contentWrapper ?? Fragment;
 
   return 'isFullWidth' in node && node.isFullWidth ? (
     <Box bg="page" p={4}>
@@ -32,12 +35,12 @@ export function ContentImage({ node }: ContentImageProps) {
       </MaxWidth>
     </Box>
   ) : (
-    <ContentBlock>
-      <Box as="figure" role="group" spacing={3} textAlign="center">
+    <ContentWrapper>
+      <Box as="figure" role="group" spacing={3} my={2} textAlign="center">
         <Image {...getImageProps(node)} />
         {caption}
       </Box>
-    </ContentBlock>
+    </ContentWrapper>
   );
 }
 
