@@ -1,23 +1,18 @@
-import { isDefined, isPresent } from 'ts-is-present';
-import { assert } from '~/utils/assert';
+import { isPresent } from 'ts-is-present';
+import {
+  DateSpanValue,
+  DateValue,
+  isDateSeries,
+  isDateSpanSeries,
+  Value,
+} from '~/components-styled/stacked-chart/logic';
 import { getDaysForTimeframe, TimeframeOption } from '~/utils/timeframe';
-
-export type Value = DailyValue | WeeklyValue;
 
 // This type limits the allowed property names to those with a number type,
 // so its like keyof T, but filtered down to only the appropriate properties.
 export type NumberProperty<T> = {
   [K in keyof T]: T[K] extends number | null ? K : never;
 }[keyof T];
-
-export type DailyValue = {
-  date_unix: number;
-};
-
-export type WeeklyValue = {
-  date_start_unix: number;
-  date_end_unix: number;
-};
 
 /**
  * To read an arbitrary value property from the passed in data, we need to cast
@@ -26,30 +21,6 @@ export type WeeklyValue = {
  */
 export type AnyValue = Record<string, number | null>;
 export type AnyFilteredValue = Record<string, number>;
-
-export function isDailyValue(timeSeries: Value[]): timeSeries is DailyValue[] {
-  const firstValue = (timeSeries as DailyValue[])[0];
-
-  assert(
-    isDefined(firstValue),
-    'Unable to determine timestamps if time series is empty'
-  );
-
-  return firstValue.date_unix !== undefined;
-}
-
-export function isWeeklyValue(
-  timeSeries: Value[]
-): timeSeries is WeeklyValue[] {
-  const firstValue = (timeSeries as WeeklyValue[])[0];
-
-  assert(
-    isDefined(firstValue),
-    'Unable to determine timestamps if time series is empty'
-  );
-
-  return firstValue.date_end_unix !== undefined;
-}
 
 /**
  * From all the defined values, extract the highest number so we know how to
@@ -90,11 +61,11 @@ export function getTimeframeValues(
 ) {
   const boundary = getTimeframeBoundaryUnix(timeframe);
 
-  if (isDailyValue(values)) {
+  if (isDateSeries(values)) {
     return values.filter((x) => x.date_unix >= boundary);
   }
 
-  if (isWeeklyValue(values)) {
+  if (isDateSpanSeries(values)) {
     return values.filter((x) => x.date_start_unix >= boundary);
   }
 
@@ -144,7 +115,7 @@ export function getSingleTrendData<T extends Value>(
     return [];
   }
 
-  if (isDailyValue(valuesInFrame)) {
+  if (isDateSeries(valuesInFrame)) {
     return valuesInFrame
       .map((x) => ({
         ...x,
@@ -152,13 +123,13 @@ export function getSingleTrendData<T extends Value>(
          * Not sure why we need to cast to number if isPresent is used to filter
          * out the null values.
          */
-        __value: x[valueKey as keyof DailyValue],
+        __value: x[valueKey as keyof DateValue],
         __date: timestampToDate(x.date_unix),
       }))
       .filter((x) => isPresent(x.__value));
   }
 
-  if (isWeeklyValue(valuesInFrame)) {
+  if (isDateSpanSeries(valuesInFrame)) {
     return valuesInFrame
       .map((x) => ({
         ...x,
@@ -166,7 +137,7 @@ export function getSingleTrendData<T extends Value>(
          * Not sure why we need to cast to number if isPresent is used to filter
          * out the null values.
          */
-        __value: x[valueKey as keyof WeeklyValue],
+        __value: x[valueKey as keyof DateSpanValue],
         __date: timestampToDate(x.date_start_unix),
       }))
       .filter((x) => isPresent(x.__value));
