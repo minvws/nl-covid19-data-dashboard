@@ -982,7 +982,7 @@
     "bar_chart_accessibility_description": ""
   },
   "veiligheidsregio_index": {
-    "selecteer_titel": "Risiconiveaus",
+    "selecteer_titel": "De risicokaart van Nederland",
     "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. [Meer informatie over de risiconiveaus](/over-risiconiveaus).\n\nBij elk risiconiveau horen bepaalde maatregelen. Die maatregelen staan in de routekaart die het kabinet heeft gemaakt. **Er geldt een landelijke lockdown. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**",
     "metadata": {
       "title": "Risiconiveaus per veiligheidsregio | Dashboard Coronavirus | Rijksoverheid.nl",
