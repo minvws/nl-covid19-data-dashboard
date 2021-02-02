@@ -90,9 +90,12 @@ export function getImageProps<T extends ImageBlock>(
   const height = width / metadata.dimensions.aspectRatio;
 
   const src = getImageSrc(node.asset, desiredWith);
-  const srcSet = imageResizeTargets
-    .map((size) => `${getImageSrc(asset, size)} ${size}w`)
-    .join(', ');
+  const srcSet =
+    asset.extension === 'svg'
+      ? undefined
+      : imageResizeTargets
+          .map((size) => `${getImageSrc(asset, size)} ${size}w`)
+          .join(', ');
 
   return {
     src,
@@ -111,6 +114,9 @@ export function getImageSrc(
   asset: SanityImageProps,
   desiredWidth = asset.metadata.dimensions.width
 ) {
+  if (asset.extension === 'svg') {
+    return `/cms/images/${asset.assetId}.svg`;
+  }
   const size = findClosestSize(desiredWidth, imageResizeTargets);
   return `/cms/images/${asset.assetId}-${size}.${asset.extension}`;
 }

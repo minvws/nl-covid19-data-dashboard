@@ -1,5 +1,4 @@
 import css from '@styled-system/css';
-import { ReactNode } from 'react';
 import styled from 'styled-components';
 import ArrowIcon from '~/assets/arrow.svg';
 import { BackgroundImage } from '~/components-styled/background-image';
@@ -28,20 +27,19 @@ export function EditorialTeaser(props: EditorialTeaserProps) {
   return (
     <Link passHref href={`/weekberichten/${slug}`}>
       <StyledEditorialTeaser>
-        <CoverImage image={cover}>
-          <StyledTextOverlay>
-            <Box width={{ lg: '60%' }}>
-              <Heading level={3} fontSize={5} lineHeight="1em">
-                {title}
-              </Heading>
-              <Text>{summary}</Text>
-              <InlineText aria-hidden="true" fontWeight="bold" color="white">
-                {siteText.common.read_more}
-                <Arrow />
-              </InlineText>
-            </Box>
-          </StyledTextOverlay>
-        </CoverImage>
+        <CoverImage image={cover} />
+        <StyledTextOverlay>
+          <Box width={{ lg: '60%' }} position="absolute" bottom={3} left={3}>
+            <Heading level={3} fontSize={5} lineHeight="1em">
+              {title}
+            </Heading>
+            <Text>{summary}</Text>
+            <InlineText aria-hidden="true" fontWeight="bold" color="white">
+              {siteText.common.read_more}
+              <Arrow />
+            </InlineText>
+          </Box>
+        </StyledTextOverlay>
       </StyledEditorialTeaser>
     </Link>
   );
@@ -49,27 +47,15 @@ export function EditorialTeaser(props: EditorialTeaserProps) {
 
 const StyledTextOverlay = styled.div(
   css({
-    padding: 3,
-    display: 'flex',
-    flexDirection: 'column',
-    justifyItems: 'flex-end',
+    width: '100%',
     minHeight: '26rem',
     height: '100%',
-    justifyContent: 'flex-end',
-    transitionProperty: 'transform, color',
-    transitionDuration: '500ms, 250ms',
-    transitionTimingFunction: 'ease-out',
-    willChange: 'transform',
-
-    '&:hover, &:focus': {
-      transitionTimingFunction: 'ease-in-out',
-      transform: 'scale(0.96)',
-    },
   })
 );
 
 const StyledEditorialTeaser = styled.a(
   css({
+    position: 'relative',
     display: 'block',
     border: 'solid',
     borderWidth: 1,
@@ -107,10 +93,9 @@ function Arrow() {
 
 type CoverImageProps = {
   image: ImageBlock;
-  children: ReactNode;
 };
 
-function CoverImage({ image, children }: CoverImageProps) {
+function CoverImage({ image }: CoverImageProps) {
   const bgPosition = image.hotspot
     ? `${image.hotspot.x * 100}% ${image.hotspot.y * 100}%`
     : undefined;
@@ -119,14 +104,16 @@ function CoverImage({ image, children }: CoverImageProps) {
 
   return (
     <BackgroundImage
+      position="absolute"
+      top={0}
+      left={0}
       height="100%"
+      width="100%"
       backgroundImage={`linear-gradient(to left, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.75)), url(${url})`}
       backgroundPosition={bgPosition}
       backgroundRepeat="no-repeat"
       backgroundSize="cover"
       aria-label={image.alt}
-    >
-      {children}
-    </BackgroundImage>
+    />
   );
 }
