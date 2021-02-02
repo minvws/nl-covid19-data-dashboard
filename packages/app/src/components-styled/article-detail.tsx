@@ -44,6 +44,7 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
           width={630}
           height={630 / asset.metadata.dimensions.aspectRatio}
           alt={article.cover.alt}
+          contentWrapper={ContentBlock}
         />
       </ContentBlock>
 

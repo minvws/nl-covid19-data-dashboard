@@ -2,6 +2,7 @@ import { PortableTextEntry } from '@sanity/block-content-to-react';
 import { FunctionComponent, Fragment } from 'react';
 import { Image } from '~/components-styled/cms/image';
 import { PortableText } from '~/lib/sanity';
+import { ImageBlock, RichContentImageBlock } from '~/types/cms';
 import { assert } from '~/utils/assert';
 
 interface RichContentProps {
@@ -24,7 +25,9 @@ export function RichContent({ contentWrapper, blocks }: RichContentProps) {
           </ContentWrapper>
         );
       },
-      image: Image,
+      image: (props: { node: ImageBlock | RichContentImageBlock }) => (
+        <Image contentWrapper={contentWrapper} {...props} />
+      ),
     },
   };
 

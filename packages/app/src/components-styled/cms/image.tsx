@@ -1,16 +1,22 @@
 import css from '@styled-system/css';
+import { Fragment, FunctionComponent } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components-styled/base';
-import { ContentBlock } from '~/components-styled/cms/content-block';
+import { Image as SrcSetImage } from '~/components-styled/image';
 import { MaxWidth } from '~/components-styled/max-width';
 import { ImageBlock, RichContentImageBlock } from '~/types/cms';
 
-import { Image as SrcSetImage } from '~/components-styled/image';
+interface ImageProps {
+  node: ImageBlock | RichContentImageBlock;
+  contentWrapper?: FunctionComponent;
+}
 
-export function Image({ node }: { node: ImageBlock | RichContentImageBlock }) {
+export function Image({ node, contentWrapper }: ImageProps) {
   const caption = 'caption' in node && node.caption && (
     <Caption>{node.caption}</Caption>
   );
+
+  const ContentWrapper = contentWrapper ?? Fragment;
 
   return 'isFullWidth' in node && node.isFullWidth ? (
     <Box bg="page" p={4}>
@@ -35,8 +41,8 @@ export function Image({ node }: { node: ImageBlock | RichContentImageBlock }) {
       </MaxWidth>
     </Box>
   ) : (
-    <ContentBlock>
-      <Box as="figure" role="group" spacing={3} textAlign="center">
+    <ContentWrapper>
+      <Box as="figure" role="group" spacing={3} my={2} textAlign="center">
         <SrcSetImage
           src={`/${node.asset.assetId}.${node.asset.extension}`}
           width={node.asset.metadata.dimensions.width}
@@ -45,7 +51,7 @@ export function Image({ node }: { node: ImageBlock | RichContentImageBlock }) {
         />
         {caption}
       </Box>
-    </ContentBlock>
+    </ContentWrapper>
   );
 }
 
