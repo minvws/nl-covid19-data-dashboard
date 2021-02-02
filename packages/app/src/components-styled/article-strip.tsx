@@ -2,8 +2,10 @@ import css from '@styled-system/css';
 import styled from 'styled-components';
 import ArrowIcon from '~/assets/arrow.svg';
 import { Box } from '~/components-styled/base';
+import { Image } from '~/components-styled/image';
 import { Tile } from '~/components-styled/tile';
 import { Heading, Text } from '~/components-styled/typography';
+import { getImageProps } from '~/lib/sanity';
 import siteText from '~/locale';
 import { ImageBlock } from '~/types/cms';
 import { Link } from '~/utils/link';
@@ -55,18 +57,17 @@ type ArticleStripItemProps = {
 };
 
 function ArticleStripItem(props: ArticleStripItemProps) {
-  const { slug, title } = props;
+  const { slug, cover, title } = props;
 
   return (
     <Link passHref href={`/artikelen/${slug}`}>
       <StyledLink>
         <Box width={122} maxHeight={122} overflow="hidden">
-          {/*<Image
-            src={`/${cover.asset.assetId}.${cover.asset.extension}`}
+          <Image
+            {...getImageProps(cover)}
             width={122}
             height={122 / cover.asset.metadata.dimensions.aspectRatio}
-            alt={cover.alt}
-          />*/}
+          />
         </Box>
         <Box paddingLeft={3}>
           <Text mt={0} mb={2}>
