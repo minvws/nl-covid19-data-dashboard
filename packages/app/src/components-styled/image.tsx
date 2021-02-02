@@ -15,8 +15,8 @@ type ImageProps = {
 
 const Img = styled(Box).attrs({ as: 'img' })<
   ImageProps & {
-    srcSet: string;
     loading: string;
+    srcSet?: string;
   }
 >`
   max-width: 100%;
@@ -32,6 +32,10 @@ const Img = styled(Box).attrs({ as: 'img' })<
 export function Image(props: ImageProps) {
   const { src, width, height, alt, ...imageProps } = props;
   const [filename, extension] = src.split('.');
+
+  if (extension === 'svg') {
+    return SVGImage(props);
+  }
 
   const srcSet = imageResizeTargets
     .map((size: number) => {
@@ -49,6 +53,24 @@ export function Image(props: ImageProps) {
     <Img
       src={url}
       srcSet={srcSet}
+      alt={alt}
+      width={width}
+      height={Math.floor(height)}
+      loading="lazy"
+      {...imageProps}
+    />
+  );
+}
+
+function SVGImage(props: ImageProps) {
+  const { src, width, height, alt, ...imageProps } = props;
+  const [filename] = src.split('.');
+
+  const url = `/cms${filename}.svg`;
+
+  return (
+    <Img
+      src={url}
       alt={alt}
       width={width}
       height={Math.floor(height)}

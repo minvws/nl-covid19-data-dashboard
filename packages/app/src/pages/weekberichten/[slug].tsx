@@ -43,7 +43,20 @@ export const getStaticProps = createGetStaticProps(
         },
         "intro": {
           ...intro,
-          "asset": intro.asset->
+          "nl": [
+            ...intro.nl[]
+            {
+              ...,
+              "asset": asset->
+             },
+          ],
+          "en": [
+            ...intro.en[]
+            {
+              ...,
+              "asset": asset->
+             },
+          ],
         },
         "content": {
           "_type": content._type,
@@ -124,7 +137,7 @@ function toPlainText(blocks: RichContentBlock[] | Block | Block[] | null) {
         // text strings
         return block.children.map((child) => (child as any).text).join('');
       })
-      // join the paragraphs leaving split by two linebreaks
+      // join the paragraphs leaving split by two line breaks
       .join('\n\n')
   );
 }
