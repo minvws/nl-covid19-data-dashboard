@@ -1,9 +1,14 @@
+import {
+  Regions,
+  RegionsMetricName,
+  SafetyRegionProperties,
+} from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { Feature, MultiPolygon } from 'geojson';
 import { ReactNode, useCallback } from 'react';
 import { AspectRatio } from '~/components-styled/aspect-ratio';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { Regions } from '@corona-dashboard/common';
+import { colors } from '~/style/theme';
 import { Choropleth } from './choropleth';
 import {
   useChartDimensions,
@@ -13,13 +18,8 @@ import {
 } from './hooks';
 import { useChoroplethDataDescription } from './hooks/use-choropleth-data-description';
 import { getDataThresholds } from './legenda/utils';
-import { Path } from './path';
-import {
-  RegionsMetricName,
-  SafetyRegionProperties,
-} from '@corona-dashboard/common';
+import { HoverPath, Path } from './path';
 import { countryGeo, regionGeo } from './topology';
-import { colors } from '~/style/theme';
 
 type SafetyRegionChoroplethProps<T, K extends RegionsMetricName> = {
   data: Pick<Regions, K>;
@@ -29,8 +29,8 @@ type SafetyRegionChoroplethProps<T, K extends RegionsMetricName> = {
   highlightSelection?: boolean;
   onSelect?: (context: SafetyRegionProperties) => void;
   tooltipContent?: (context: SafetyRegionProperties & T) => ReactNode;
-  isSelectorMap?: boolean;
   highlightCode?: string;
+  riskLevelStyling?: boolean;
 };
 
 /**
@@ -53,12 +53,12 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
   const {
     data,
     selected,
-    highlightSelection = true,
     metricName,
     metricProperty,
     onSelect,
     tooltipContent,
     highlightCode,
+    riskLevelStyling = false,
   } = props;
 
   const ratio = 1.2;
@@ -146,21 +146,19 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
   const hoverCallback = useCallback(
     (feature: Feature<MultiPolygon, SafetyRegionProperties>, path: string) => {
       const { vrcode } = feature.properties;
-      const isSelected = vrcode === selected && highlightSelection;
 
       return (
-        <Path
-          isHoverable
+        <HoverPath
           isClickable={hasSelectHander}
           id={vrcode}
           key={vrcode}
           d={path}
-          stroke={isSelected ? '#000' : undefined}
-          strokeWidth={isSelected ? 3 : undefined}
+          stroke={riskLevelStyling ? '#fff' : undefined}
+          strokeWidth={riskLevelStyling ? 3 : undefined}
         />
       );
     },
-    [selected, highlightSelection, hasSelectHander]
+    [hasSelectHander, riskLevelStyling]
   );
 
   const onClick = (id: string) => {

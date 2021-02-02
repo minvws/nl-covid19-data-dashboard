@@ -7,7 +7,6 @@ interface PathProps {
   stroke?: string;
   strokeWidth?: number;
   id?: string;
-  isHoverable?: boolean;
   isClickable?: boolean;
 }
 
@@ -17,7 +16,6 @@ export function Path({
   fill,
   stroke,
   strokeWidth,
-  isHoverable,
   isClickable,
 }: PathProps) {
   return (
@@ -25,7 +23,27 @@ export function Path({
       d={d}
       shapeRendering="optimizeQuality"
       data-id={id}
-      isHoverable={isHoverable}
+      isClickable={isClickable}
+      fill={fill}
+      stroke={stroke}
+      strokeWidth={strokeWidth}
+    />
+  );
+}
+
+export function HoverPath({
+  id,
+  d,
+  fill,
+  stroke,
+  strokeWidth,
+  isClickable,
+}: PathProps) {
+  return (
+    <StyledHoverPath
+      d={d}
+      shapeRendering="optimizeQuality"
+      data-id={id}
       isClickable={isClickable}
       fill={fill}
       stroke={stroke}
@@ -35,33 +53,37 @@ export function Path({
 }
 
 const StyledPath = styled.path<{
-  isHoverable?: boolean;
   isClickable?: boolean;
-}>(
-  (x) =>
-    css({
-      fill: x.fill || 'transparent',
-      stroke: x.stroke,
-      strokeWidth: x.strokeWidth || 0.5,
-      pointerEvents: 'none',
+}>((x) =>
+  css({
+    fill: x.fill || 'transparent',
+    stroke: 'x.stroke',
+    strokeWidth: x.strokeWidth || 0.5,
+    pointerEvents: 'none',
 
-      transitionProperty: 'fill, stroke, stroke-width',
-      transitionDuration: '120ms, 90ms',
-      transitionTimingFunction: 'ease-out',
-    }),
-  (x) =>
-    x.isHoverable &&
-    css({
-      cursor: x.isClickable ? 'pointer' : 'default',
-      fill: 'transparent',
-      stroke: x.stroke ?? 'transparent',
-      strokeWidth: x.strokeWidth ?? 0,
-      pointerEvents: 'all',
-      '&:hover': {
-        transitionDuration: '0ms',
-        fill: x.fill ?? 'none',
-        stroke: x.stroke ?? '#222',
-        strokeWidth: x.strokeWidth ?? 2,
-      },
-    })
+    transitionProperty: 'fill, stroke, stroke-width',
+    transitionDuration: '120ms, 90ms',
+    transitionTimingFunction: 'ease-out',
+  })
+);
+
+const StyledHoverPath = styled.path<{
+  isClickable?: boolean;
+}>((x) =>
+  css({
+    fill: 'transparent',
+    transitionProperty: 'fill, stroke, stroke-width',
+    transitionDuration: '120ms, 90ms',
+    transitionTimingFunction: 'ease-out',
+    cursor: x.isClickable ? 'pointer' : 'default',
+    stroke: 'transparent',
+    strokeWidth: 0,
+    pointerEvents: 'all',
+    '&:hover': {
+      transitionDuration: '0ms',
+      fill: x.fill ?? 'none',
+      stroke: x.stroke ?? '#000',
+      strokeWidth: x.strokeWidth ?? 2,
+    },
+  })
 );

@@ -1,9 +1,14 @@
+import {
+  Municipalities,
+  MunicipalitiesMetricName,
+  MunicipalityProperties,
+} from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { Feature, MultiPolygon } from 'geojson';
 import { ReactNode, useCallback } from 'react';
 import { AspectRatio } from '~/components-styled/aspect-ratio';
+import { colors } from '~/style/theme';
 import { DataProps } from '~/types/attributes';
-import { Municipalities } from '@corona-dashboard/common';
 import { Choropleth } from './choropleth';
 import {
   useChartDimensions,
@@ -15,13 +20,8 @@ import {
 import { useChoroplethDataDescription } from './hooks/use-choropleth-data-description';
 import { getDataThresholds } from './legenda/utils';
 import { municipalThresholds } from './municipal-thresholds';
-import { Path } from './path';
-import {
-  MunicipalitiesMetricName,
-  MunicipalityProperties,
-} from '@corona-dashboard/common';
+import { HoverPath, Path } from './path';
 import { countryGeo, municipalGeo, regionGeo } from './topology';
-import { colors } from '~/style/theme';
 
 type MunicipalityChoroplethProps<T, K extends MunicipalitiesMetricName> = {
   data: Pick<Municipalities, K>;
@@ -142,8 +142,7 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
       }
 
       return (
-        <Path
-          isHoverable
+        <HoverPath
           isClickable={hasSelectHander}
           id={gemcode}
           key={gemcode}

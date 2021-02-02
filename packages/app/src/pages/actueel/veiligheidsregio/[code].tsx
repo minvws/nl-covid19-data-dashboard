@@ -206,10 +206,11 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
                       metricName="escalation_levels"
                       metricProperty="escalation_level"
                       onSelect={createSelectRegionHandler(router, 'actueel')}
+                      highlightCode={`${regionCode}`}
                       tooltipContent={escalationTooltip(
                         createSelectRegionHandler(router, 'actueel')
                       )}
-                      highlightCode={router.query.code}
+                      riskLevelStyling={true}
                     />
                   </TopicalChoroplethContainer>
                 </>

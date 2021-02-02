@@ -1,11 +1,11 @@
+import { MunicipalityProperties } from '@corona-dashboard/common';
 import { Feature, MultiPolygon } from 'geojson';
 import { ReactNode } from 'react';
 import { AspectRatio } from '~/components-styled/aspect-ratio';
 import { colors } from '~/style/theme';
 import { Choropleth } from './choropleth';
 import { useChartDimensions, useMunicipalityNavigationData } from './hooks';
-import { Path } from './path';
-import { MunicipalityProperties } from '@corona-dashboard/common';
+import { HoverPath, Path } from './path';
 import { countryGeo, municipalGeo } from './topology';
 
 type MunicipalityNavigationMapProps<T> = {
@@ -56,8 +56,7 @@ export function MunicipalityNavigationMap<T>(
     const { gemcode } = feature.properties;
 
     return (
-      <Path
-        isHoverable
+      <HoverPath
         isClickable
         id={gemcode}
         key={gemcode}
