@@ -1,5 +1,4 @@
 import { css } from '@styled-system/css';
-import { ParentSize } from '@visx/responsive';
 import { Fragment, useState } from 'react';
 import VaccinatieIcon from '~/assets/vaccinaties.svg';
 import { Box } from '~/components-styled/base';
@@ -9,13 +8,14 @@ import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { RadioGroup } from '~/components-styled/radio-group';
 import { SEOHead } from '~/components-styled/seo-head';
-import { StackedChart } from '~/components-styled/stacked-chart';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { InlineText, Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import EstimateGraphNL from '~/assets/graph_estimated_nl.svg';
+import EstimateGraphEN from '~/assets/graph_estimated_en.svg';
 import {
   getLastGeneratedDate,
   getNlData,
@@ -28,9 +28,9 @@ export const getStaticProps = createGetStaticProps(
   getNlData,
   getText
 );
+import { targetLanguage } from '~/locale/index';
 
 const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
-  data,
   text: siteText,
 }) => {
   const text = siteText.vaccinaties;
@@ -201,35 +201,16 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
         <ChartTile
           title={text.grafiek.titel}
           description={text.grafiek.omschrijving}
-          ariaDescription={
-            siteText.accessibility.grafieken.verwachte_leveringen
-          }
+          ariaDescription={siteText.accessibility.grafieken.levering_en_prikken}
           metadata={{
             date: 1611593522,
             source: text.bronnen.rivm,
           }}
         >
-          <ParentSize>
-            {({ width }) => (
-              <StackedChart
-                width={width}
-                valueAnnotation={siteText.waarde_annotaties.x_100k}
-                values={data.vaccine_delivery.values}
-                config={[
-                  {
-                    metricProperty: 'pfizer',
-                    color: '#007BC7',
-                    legendLabel: 'BioNTech/Pfizer',
-                  },
-                  {
-                    metricProperty: 'moderna',
-                    color: '#00BBB5',
-                    legendLabel: 'Moderna',
-                  },
-                ]}
-              />
-            )}
-          </ParentSize>
+          <>
+            {targetLanguage === 'nl' && <EstimateGraphNL />}
+            {targetLanguage === 'en' && <EstimateGraphEN />}
+          </>
         </ChartTile>
 
         <TwoKpiSection>
