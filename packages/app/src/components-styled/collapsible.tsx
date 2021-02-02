@@ -10,21 +10,22 @@ import { Box, BoxProps } from './base';
 
 const Summary = styled(DisclosureButton)(
   css({
+    display: 'flex',
     alignItems: 'flex-start',
+    justifyContent: 'space-between',
+    overflow: 'visible',
+    width: '100%',
+    m: 0,
+    p: 3,
     bg: 'transparent',
     border: 'none',
     color: 'blue',
-    cursor: 'pointer',
-    display: 'flex',
-    fontSize: 3,
+    fontFamily: 'body',
     fontWeight: 'bold',
-    justifyContent: 'space-between',
-    m: 0,
-    p: 3,
+    fontSize: 3,
     textAlign: 'left',
-    width: '100%',
     position: 'relative',
-    overflow: 'visible',
+    cursor: 'pointer',
 
     '&:focus': {
       outlineWidth: '1px',

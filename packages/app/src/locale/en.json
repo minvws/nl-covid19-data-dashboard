@@ -2426,5 +2426,10 @@
         "gemeente": "Data for the municipality {{municipalityName}}"
       }
     }
+  },
+  "toegankelijkheid_metadata": {
+    "title": "Toegankelijkheid COVID-19 Dashboard | Government.nl",
+    "description": "Informatie on the accessibility of the COVID-19 Dashboard.",
+    "url": "https://coronadashboard.government.nl/verantwoording"
   }
 }

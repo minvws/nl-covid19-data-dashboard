@@ -6,14 +6,16 @@ RUN yarn
 
 # Validation stage
 ARG SANITY_AUTH_TOKEN
+ARG SANITY_DATASET
 RUN yarn workspace @corona-dashboard/cli validate-json
 RUN yarn workspace @corona-dashboard/cli generate-typescript
-RUN yarn workspace @corona-dashboard/cms images
+RUN yarn workspace @corona-dashboard/cms assets
 
 # Stage 1 - Build NL application
 FROM node:14 as react-build-nl
 ARG NEXT_PUBLIC_LOCALE=nl
 ARG NEXT_PUBLIC_SANITY_PROJECT_ID
+ARG NEXT_PUBLIC_SANITY_DATASET
 
 WORKDIR /app
 COPY --from=react-build-base /app/node_modules /app/node_modules
