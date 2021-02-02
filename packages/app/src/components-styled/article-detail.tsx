@@ -5,7 +5,6 @@ import { ContentBlock } from '~/components-styled/cms/content-block';
 import { Image } from '~/components-styled/image';
 
 import { Heading } from '~/components-styled/typography';
-import { PortableText } from '~/lib/sanity';
 import siteText from '~/locale';
 import { Article } from '~/types/cms';
 import { RichContent } from './cms/rich-content';
@@ -37,7 +36,7 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
         </Box>
 
         <Box fontWeight="bold">
-          <PortableText blocks={article.intro} />
+          <RichContent blocks={article.intro} contentWrapper={ContentBlock} />
         </Box>
 
         <Image
@@ -48,7 +47,11 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
         />
       </ContentBlock>
 
-      {!!article.content?.length && <RichContent blocks={article.content} />}
+      {!!article.content?.length && (
+        <Box fontSize="1.125rem">
+          <RichContent blocks={article.content} contentWrapper={ContentBlock} />
+        </Box>
+      )}
     </Box>
   );
 }

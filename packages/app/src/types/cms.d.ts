@@ -1,7 +1,7 @@
 import { PortableTextEntry } from '@sanity/block-content-to-react';
 
 export type CollapsibleList = {
-  content: PortableTextEntry | null;
+  content: RichContentBlock[] | null;
   title: string;
 };
 
@@ -28,7 +28,7 @@ export interface Article {
   };
   cover: ImageBlock;
   summary: Block;
-  intro: Block;
+  intro: RichContentBlock[];
   content: RichContentBlock[];
   metaDescription: string;
   publicationDate: string;
@@ -116,7 +116,7 @@ export type LockdownData = {
   showLockdown: boolean;
   message: {
     title: string;
-    description: PortableTextEntry[] | null;
+    description: RichContentBlock[] | null;
   };
   title: string;
 };

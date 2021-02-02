@@ -8,7 +8,7 @@ import {
   createGetContent,
   getLastGeneratedDate,
 } from '~/static-props/get-data';
-import { Article, Block } from '~/types/cms';
+import { Article, Block, RichContentBlock } from '~/types/cms';
 import { assert } from '~/utils/assert';
 import { imageResizeTargets } from '@corona-dashboard/common';
 import { findClosestSize } from '~/utils/findClosestSize';
@@ -40,6 +40,10 @@ export const getStaticProps = createGetStaticProps(
       "cover": {
         ...cover,
         "asset": cover.asset->
+      },
+      "intro": {
+        ...intro,
+        "asset": intro.asset->
       },
       "content": {
         "_type": content._type,
@@ -103,7 +107,7 @@ function getTitle(title: string) {
   return `${title} | ${suffix}`;
 }
 
-function toPlainText(blocks: Block | Block[] | null) {
+function toPlainText(blocks: RichContentBlock[] | Block | Block[] | null) {
   if (!blocks) return '';
 
   return (
