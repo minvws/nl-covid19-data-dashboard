@@ -15,6 +15,7 @@ RUN yarn workspace @corona-dashboard/cms assets
 FROM node:14 as react-build-nl
 ARG NEXT_PUBLIC_LOCALE=nl
 ARG NEXT_PUBLIC_SANITY_PROJECT_ID
+ARG NEXT_PUBLIC_SANITY_DATASET
 
 WORKDIR /app
 COPY --from=react-build-base /app/node_modules /app/node_modules
