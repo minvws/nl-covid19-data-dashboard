@@ -12,7 +12,7 @@ import { imageResizeTargets } from '@corona-dashboard/common/src/config';
  *
  */
 
-const walkPath = '../app/public/cms';
+const IMAGES_DIR = '../app/public/cms/images';
 
 function walk(dir, done) {
   fs.readdir(dir, function (error, list) {
@@ -46,7 +46,7 @@ function walk(dir, done) {
           console.log(`Now resizing: ${file}`);
 
           imageResizeTargets.forEach((size) => {
-            const output = `../app/public/cms/${filename}-${size}${ext}`;
+            const output = `${IMAGES_DIR}/${filename}-${size}${ext}`;
             sharp(file)
               .resize({ width: size, withoutEnlargement: true })
               .toFile(output);
@@ -60,12 +60,12 @@ function walk(dir, done) {
 }
 
 console.log('-------------------------------------------------------------');
-console.log(`We're going to resize images in ${walkPath}...`);
+console.log(`We're going to resize images in ${IMAGES_DIR}...`);
 console.log('-------------------------------------------------------------');
 
 // Walk through the sanity image directory and report
 // that we're done or throw an error
-walk(walkPath, function (error) {
+walk(IMAGES_DIR, function (error) {
   if (error) {
     throw error;
   } else {

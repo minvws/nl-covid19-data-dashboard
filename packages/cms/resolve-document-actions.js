@@ -19,6 +19,7 @@ const documentAllowedActions = {
   overDitDashboard: [DiscardChangesAction, PublishAction, UnpublishAction],
   veelgesteldeVragen: [DiscardChangesAction, PublishAction, UnpublishAction],
   cijferVerantwoording: [DiscardChangesAction, PublishAction, UnpublishAction],
+  toegankelijkheid: [DiscardChangesAction, PublishAction, UnpublishAction],
 };
 
 export default function resolveDocumentActions(props) {
