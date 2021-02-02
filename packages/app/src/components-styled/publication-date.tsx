@@ -7,7 +7,7 @@ type PublicationDateProps = {
 
 export function PublicationDate({ date }: PublicationDateProps) {
   return (
-    <time css={css({ color: 'gray' })} dateTime={date}>
+    <time css={css({ color: 'annotation' })} dateTime={date}>
       {formatDateFromString(date, 'medium')}
     </time>
   );

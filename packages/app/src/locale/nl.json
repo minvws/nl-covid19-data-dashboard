@@ -2426,5 +2426,10 @@
         "gemeente": "Cijfers van gemeente {{municipalityName}}"
       }
     }
+  },
+  "toegankelijkheid_metadata": {
+    "title": "Toegankelijkheid COVID-19 Dashboard | Rijksoverheid.nl",
+    "description": "Informatie over de toegankelijkheid van het COVID-19 Dashboard.",
+    "url": "https://coronadashboard.rijksoverheid.nl/verantwoording"
   }
 }

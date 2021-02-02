@@ -1,7 +1,12 @@
+import {
+  getLastFilledValue,
+  DifferenceKey,
+  Metric,
+  MetricKeys,
+} from '@corona-dashboard/common';
 import { get } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
-import { Metric, MetricKeys } from '@corona-dashboard/common';
 import siteText, { TALLLanguages } from '~/locale/index';
 import {
   DataScope,
@@ -10,7 +15,6 @@ import {
 } from '~/metric-config';
 import { assert } from '~/utils/assert';
 import { formatDateFromSeconds } from '~/utils/formatDate';
-import { getLastFilledValue } from '@corona-dashboard/common';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { SidebarBarScale } from './sidebar-barscale';
 import { SidebarKpiValue } from './sidebar-kpi-value';
@@ -25,7 +29,7 @@ interface SidebarMetricProps<T extends { difference: unknown }> {
    */
   metricProperty?: string;
   localeTextKey: keyof TALLLanguages;
-  differenceKey?: string;
+  differenceKey?: DifferenceKey;
   showBarScale?: boolean;
   annotationKey?: string;
 
@@ -126,7 +130,7 @@ export function SidebarMetric<T extends { difference: unknown }>({
      */
     assert(
       isDefined(differenceValue),
-      `Missing value for difference:${differenceKey}`
+      `Missing value for difference:${String(differenceKey)}`
     );
   }
 
