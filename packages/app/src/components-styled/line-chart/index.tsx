@@ -13,6 +13,11 @@ import {
   ComponentCallbackFunction,
   defaultPadding,
 } from '~/components-styled/line-chart/components';
+import {
+  isDateSeries,
+  isDateSpanSeries,
+  Value,
+} from '~/components-styled/stacked-chart/logic';
 import { Text } from '~/components-styled/typography';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
 import text from '~/locale/index';
@@ -23,17 +28,13 @@ import {
 } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { TimeframeOption } from '~/utils/timeframe';
-import { Legenda, LegendItem, LegendShape } from '../legenda';
+import { Legenda, LegendItem, LegendShape } from '~/components-styled/legenda';
 import { HoverPoint, Marker, Tooltip, Trend } from './components';
 import {
   calculateYMax,
   getTrendData,
-  isDailyValue,
-  isWeeklyValue,
   NumberProperty,
   TrendValue,
-  Value,
-  WeeklyValue,
 } from './helpers';
 
 const dateToValue = (d: Date) => d.valueOf() / 1000;
@@ -133,21 +134,21 @@ export function LineChart<T extends Value>({
     return isDefined(domain[0]) ? (domain as [Date, Date]) : undefined;
   }, [trendsList]);
 
-  const yMax = useMemo(() => calculateYMax(trendsList, signaalwaarde), [
+  const seriesMax = useMemo(() => calculateYMax(trendsList, signaalwaarde), [
     trendsList,
     signaalwaarde,
   ]);
 
-  const yDomain = useMemo(() => [0, yMax], [yMax]);
+  const yDomain = useMemo(() => [0, seriesMax], [seriesMax]);
 
   const padding: ChartPadding = useMemo(() => {
     return {
       ...defaultPadding,
       // Increase space for larger labels
-      left: Math.max(yMax.toFixed(0).length * 10, defaultPadding.left),
+      left: Math.max(seriesMax.toFixed(0).length * 10, defaultPadding.left),
       ...overridePadding,
     };
-  }, [overridePadding, yMax]);
+  }, [overridePadding, seriesMax]);
 
   const [markerProps, setMarkerProps] = useState<{
     height: number;
@@ -352,11 +353,9 @@ function formatDefaultTooltip<T extends Value>(
   isPercentage?: boolean
 ) {
   // default tooltip assumes one line is rendered:
-  const value = values[0];
-  const isDaily = isDailyValue(values);
-  const isWeekly = isWeeklyValue(values);
 
-  if (isDaily) {
+  if (isDateSeries(values)) {
+    const value = values[0];
     return (
       <>
         <Text as="span" fontWeight="bold">
@@ -367,20 +366,13 @@ function formatDefaultTooltip<T extends Value>(
           : formatNumber(value.__value)}
       </>
     );
-  } else if (isWeekly) {
+  } else if (isDateSpanSeries(values)) {
+    const value = values[0];
     return (
       <>
         <Text as="span" fontWeight="bold">
-          {formatDateFromSeconds(
-            ((value as unknown) as WeeklyValue).date_start_unix,
-            'short'
-          )}{' '}
-          -{' '}
-          {formatDateFromSeconds(
-            ((value as unknown) as WeeklyValue).date_end_unix,
-            'short'
-          )}
-          :
+          {formatDateFromSeconds(value.date_start_unix, 'short')} -{' '}
+          {formatDateFromSeconds(value.date_end_unix, 'short')}:
         </Text>{' '}
         {isPercentage
           ? `${formatPercentage(value.__value)}%`
