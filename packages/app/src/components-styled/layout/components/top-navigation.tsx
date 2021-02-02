@@ -149,10 +149,12 @@ const NavToggle = styled.button(
 
 const NavWrapper = styled.nav(
   css({
+    display: 'block',
     width: '100%',
     borderTopWidth: '1px',
     p: 0,
     [`@media ${theme.mediaQueries.md}`]: {
+      display: 'inline',
       width: 'auto',
       borderTopWidth: 0,
       ml: 'auto',
