@@ -592,11 +592,6 @@
     "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
     "url": "https://coronadashboard.rijksoverheid.nl/verantwoording"
   },
-  "toegankelijkheid_metadata": {
-    "title": "Toegankelijkheid COVID-19 Dashboard | Rijksoverheid.nl",
-    "description": "Informatie over de toegankelijkheid van het COVID-19 Dashboard.",
-    "url": "https://coronadashboard.rijksoverheid.nl/verantwoording"
-  },
   "metadata": {
     "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
     "titel": "COVID-19 Dashboard foutmelding | Rijksoverheid.nl",
@@ -1994,7 +1989,7 @@
   },
   "vaccinaties": {
     "titel_sidebar": "Vaccinaties",
-    "titel_kpi": "Aantal gemelde prikken",
+    "titel_kpi": "Aantal gezette prikken",
     "metadata": {
       "title": "Vaccinaties | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Op 6 januari 2021 is Nederland begonnen met vaccineren. De cijfers op het dashboard coronavirus laten zien hoeveel prikken zijn gezet en hoeveel vaccins er beschikbaar komen."
@@ -2002,8 +1997,8 @@
     "title": "COVID-19-vaccinaties",
     "description": "Vaccineren is de belangrijkste stap naar een samenleving zonder coronaregels. Op 6 januari 2021 is Nederland begonnen met vaccineren. Uiteindelijk komt iedereen van 18 jaar of ouder aan de beurt. De cijfers op deze pagina laten zien hoeveel prikken zijn gezet en hoeveel vaccins er beschikbaar komen.",
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "date_unix": "1612196735",
-    "date_of_insertion_unix": "1612196735",
+    "date_unix": "1612263890",
+    "date_of_insertion_unix": "1612263890",
     "reference": {
       "href": "/verantwoording#vaccinatie",
       "text": "Lees meer over de bron van de vaccinatiecijfers in de cijferverantwoording."
@@ -2039,32 +2034,32 @@
       "difference": "Do not remove this key. It is required as a temporary workaround",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "343881",
-          "date_unix": "1612196735",
-          "date_of_insertion_unix": "1612196735"
+          "total_vaccinated": "375908",
+          "date_unix": "1612263890",
+          "date_of_insertion_unix": "1612263890"
         }
       },
       "kpi_total": {
         "title": "Aantal gezette prikken",
-        "value": "248055",
-        "description": "Dit getal laat zien hoeveel prikken in totaal zijn gezet. Het kan een tijd duren voordat een prik wordt gemeld. Het daadwerkelijke aantal gezette prikken ligt daarom hoger.",
-        "date_of_report_unix": "1612196735",
-        "date_of_insertion_unix": "1612196735",
+        "value": "277275",
+        "description": "",
+        "date_of_report_unix": "1612263890",
+        "date_of_insertion_unix": "1612263890",
         "administered": [
           {
-            "value": "187339",
+            "value": "203559",
             "description": "gemeld door GGD-GHOR",
-            "report_date": "Gemeld aantal tot en met 31 januari"
+            "report_date": "Gemeld aantal tot en met 1 februari"
           },
           {
-            "value": "60716",
+            "value": "73716",
             "description": "gemeld door LNAZ",
-            "report_date": "Gemeld aantal tot en met 31 januari"
+            "report_date": "Gemeld aantal tot en met 1 februari"
           },
           {
-            "value": "16829",
-            "description": "gezet door langdurige zorginstellingen*",
-            "report_date": "Gemeld aantal t/m 28 jan"
+            "value": "",
+            "description": "",
+            "report_date": ""
           },
           {
             "value": "",
@@ -2078,30 +2073,30 @@
           }
         ],
         "description_first": "Dit getal laat zien hoeveel prikken zijn gemeld door GGD-GHOR en LNAZ. [Lees meer over de registratie in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)",
-        "description_second": "* Deze cijfers worden aan de telefoon doorgegeven. Let op: het daadwerkelijke aantal gezette prikken ligt daarom hoger dan hier vermeld.",
-        "warning": "Let op: het daadwerkelijk aantal gezette prikken ligt hoger.",
+        "description_second": "",
+        "warning": "",
         "first_tab_title": "Berekend aantal",
         "second_tab_title": "Gemeld aantal",
         "tab_total_estimated": {
-          "value": "343881",
+          "value": "375908",
           "description": "",
-          "date_of_report_unix": "1612196735",
-          "date_of_insertion_unix": "1612196735",
+          "date_of_report_unix": "1612263890",
+          "date_of_insertion_unix": "1612263890",
           "administered": [
             {
-              "value": "187339",
+              "value": "203559",
               "description": "gezet door GGD'en",
-              "report_date": "Gemeld aantal tot en met 31 januari"
+              "report_date": "Gemeld aantal tot en met 1 februari"
             },
             {
-              "value": "60716",
+              "value": "73716",
               "description": "gezet in ziekenhuizen",
-              "report_date": "Gemeld aantal tot en met 31 januari"
+              "report_date": "Gemeld aantal tot en met 1 februari"
             },
             {
-              "value": "95826",
+              "value": "98633",
               "description": "gezet in langdurige zorginstellingen",
-              "report_date": "Berekend aantal tot en met 31 januari"
+              "report_date": "Berekend aantal tot en met 1 februari"
             },
             {
               "value": "",
@@ -2431,5 +2426,10 @@
         "gemeente": "Cijfers van gemeente {{municipalityName}}"
       }
     }
+  },
+  "toegankelijkheid_metadata": {
+    "title": "Toegankelijkheid COVID-19 Dashboard | Rijksoverheid.nl",
+    "description": "Informatie over de toegankelijkheid van het COVID-19 Dashboard.",
+    "url": "https://coronadashboard.rijksoverheid.nl/verantwoording"
   }
 }
