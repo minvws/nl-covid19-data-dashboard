@@ -1,17 +1,15 @@
 import { Box } from '~/components-styled/base';
 import { EditorialDetail } from '~/components-styled/editorial-detail';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
-import { client, localize } from '~/lib/sanity';
+import { client, getImageSrc, localize } from '~/lib/sanity';
 import { targetLanguage } from '~/locale/index';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
 } from '~/static-props/get-data';
-import { Block, Editorial } from '~/types/cms';
+import { Block, Editorial, RichContentBlock } from '~/types/cms';
 import { assert } from '~/utils/assert';
-import { imageResizeTargets } from '@corona-dashboard/common';
-import { findClosestSize } from '~/utils/findClosestSize';
 
 const editorialsQuery = `*[_type == 'editorial'] {"slug":slug.current}`;
 
@@ -41,20 +39,45 @@ export const getStaticProps = createGetStaticProps(
           ...cover,
           "asset": cover.asset->
         },
+        "intro": {
+          ...intro,
+          "nl": [
+            ...intro.nl[]
+            {
+              ...,
+              "asset": asset->
+             },
+          ],
+          "en": [
+            ...intro.en[]
+            {
+              ...,
+              "asset": asset->
+             },
+          ],
+        },
         "content": {
           "_type": content._type,
           "nl": [
             ...content.nl[]
             {
               ...,
-              "asset": asset->
+              "asset": asset->,
+              markDefs[]{
+                ...,
+                "asset": asset->
+              }
             },
           ],
           "en": [
             ...content.en[]
             {
               ...,
-              "asset": asset->
+              "asset": asset->,
+              markDefs[]{
+                ...,
+                "asset": asset->
+              }
             },
           ],
         }
@@ -81,15 +104,13 @@ EditorialDetailPage.getLayout = (page, props) => {
   const { cover } = props.content;
   const { asset } = cover;
 
-  const url = `https://coronadashboard.rijksoverheid.nl/cms/${
-    asset.assetId
-  }-${findClosestSize(1200, imageResizeTargets)}.${asset.extension}`;
+  const imgPath = getImageSrc(asset, 1200);
 
   return getLayoutWithMetadata({
     title: getTitle(props.content.title),
     description: toPlainText(props.content.intro),
-    openGraphImage: url,
-    twitterImage: url,
+    openGraphImage: imgPath,
+    twitterImage: imgPath,
   })(page, props);
 };
 
@@ -104,7 +125,7 @@ function getTitle(title: string) {
   return `${title} | ${suffix}`;
 }
 
-function toPlainText(blocks: Block | Block[] | null) {
+function toPlainText(blocks: RichContentBlock[] | Block | Block[] | null) {
   if (!blocks) return '';
 
   return (
@@ -120,7 +141,7 @@ function toPlainText(blocks: Block | Block[] | null) {
         // text strings
         return block.children.map((child) => (child as any).text).join('');
       })
-      // join the paragraphs leaving split by two linebreaks
+      // join the paragraphs leaving split by two line breaks
       .join('\n\n')
   );
 }

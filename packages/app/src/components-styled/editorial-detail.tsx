@@ -2,9 +2,8 @@ import css from '@styled-system/css';
 import ArrowIcon from '~/assets/arrow.svg';
 import { Box } from '~/components-styled/base';
 import { ContentBlock } from '~/components-styled/cms/content-block';
-import { Image } from '~/components-styled/cms/image';
+import { ContentImage } from '~/components-styled/cms/content-image';
 import { Heading } from '~/components-styled/typography';
-import { PortableText } from '~/lib/sanity';
 import siteText from '~/locale';
 import { Editorial } from '~/types/cms';
 import { RichContent } from './cms/rich-content';
@@ -34,14 +33,14 @@ export function EditorialDetail({ editorial }: EditorialDetailProps) {
         </Box>
 
         <Box fontWeight="bold">
-          <PortableText blocks={editorial.intro} />
+          <RichContent blocks={editorial.intro} contentWrapper={ContentBlock} />
         </Box>
 
-        <Image node={editorial.cover} />
+        <ContentImage node={editorial.cover} contentWrapper={ContentBlock} />
       </ContentBlock>
 
       {!!editorial.content?.length && (
-        <RichContent blocks={editorial.content} />
+        <RichContent blocks={editorial.content} contentWrapper={ContentBlock} />
       )}
     </Box>
   );
