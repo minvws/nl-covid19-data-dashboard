@@ -32,7 +32,7 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
           <PublicationDate date={article.publicationDate} />
         </Box>
 
-        <Box fontWeight="bold">
+        <Box fontWeight="bold" fontSize="1.25rem">
           <RichContent blocks={article.intro} contentWrapper={ContentBlock} />
         </Box>
 
