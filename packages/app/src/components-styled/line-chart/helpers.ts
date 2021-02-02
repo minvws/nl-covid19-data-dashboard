@@ -6,7 +6,7 @@ export type Value = DailyValue | WeeklyValue;
 
 // This type limits the allowed property names to those with a number type,
 // so its like keyof T, but filtered down to only the appropriate properties.
-export type NumberProperty<T extends Value> = {
+export type NumberProperty<T> = {
   [K in keyof T]: T[K] extends number | null ? K : never;
 }[keyof T];
 
@@ -118,11 +118,13 @@ export type TrendValue = {
 
 const timestampToDate = (d: number) => new Date(d * 1000);
 
+export type TrendData = (TrendValue & Value)[][];
+
 export function getTrendData<T extends Value>(
   values: T[],
   valueKeys: NumberProperty<T>[],
   timeframe: TimeframeOption
-): (TrendValue & Value)[][] {
+): TrendData {
   return valueKeys.map((key) => getSingleTrendData(values, key, timeframe));
 }
 

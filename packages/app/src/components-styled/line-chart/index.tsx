@@ -1,8 +1,4 @@
 import { TickFormatter } from '@visx/axis';
-import { localPoint } from '@visx/event';
-import { Point } from '@visx/point';
-import { bisectLeft, extent } from 'd3-array';
-import { ScaleTime } from 'd3-scale';
 import { useCallback, useMemo, useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
@@ -26,8 +22,6 @@ import { TimeframeOption } from '~/utils/timeframe';
 import { Legenda, LegendItem, LegendShape } from '../legenda';
 import { HoverPoint, Marker, Tooltip, Trend } from './components';
 import {
-  calculateYMax,
-  getTrendData,
   isDailyValue,
   isWeeklyValue,
   NumberProperty,
@@ -35,6 +29,11 @@ import {
   Value,
   WeeklyValue,
 } from './helpers';
+import { useBisect } from './hooks/use-bisect';
+import { useChartHover } from './hooks/use-chart-hover';
+import { useChartPadding } from './hooks/use-chart-padding';
+import { useDomains } from './hooks/use-domains';
+import { useTrendValues } from './hooks/use-trend-values';
 
 const dateToValue = (d: Date) => d.valueOf() / 1000;
 const formatXAxis = (date: Date) =>
@@ -108,10 +107,11 @@ export function LineChart<T extends Value>({
     hideTooltip,
   } = useTooltip<T & TrendValue>();
 
-  const metricProperties = useMemo(
-    () => linesConfig.map((x) => x.metricProperty),
-    [linesConfig]
-  );
+  const [markerProps, setMarkerProps] = useState<{
+    height: number;
+    data: HoverPoint<T>[];
+    padding: ChartPadding;
+  }>();
 
   const benchmark = useMemo(
     () =>
@@ -121,72 +121,15 @@ export function LineChart<T extends Value>({
     [signaalwaarde]
   );
 
-  const trendsList = useMemo(
-    () => getTrendData(values, metricProperties, timeframe),
-    [values, metricProperties, timeframe]
+  const trendsList = useTrendValues(values, linesConfig, timeframe);
+
+  const [xDomain, yDomain, yMax] = useDomains(trendsList, signaalwaarde);
+
+  const padding = useChartPadding(
+    yMax.toFixed(0).length * 10,
+    defaultPadding,
+    overridePadding
   );
-
-  const xDomain = useMemo(() => {
-    const allData = trendsList.flat();
-    const domain = extent(allData.map((d) => d.__date));
-
-    return isDefined(domain[0]) ? (domain as [Date, Date]) : undefined;
-  }, [trendsList]);
-
-  const yMax = useMemo(() => calculateYMax(trendsList, signaalwaarde), [
-    trendsList,
-    signaalwaarde,
-  ]);
-
-  const yDomain = useMemo(() => [0, yMax], [yMax]);
-
-  const padding: ChartPadding = useMemo(() => {
-    return {
-      ...defaultPadding,
-      // Increase space for larger labels
-      left: Math.max(yMax.toFixed(0).length * 10, defaultPadding.left),
-      ...overridePadding,
-    };
-  }, [overridePadding, yMax]);
-
-  const [markerProps, setMarkerProps] = useState<{
-    height: number;
-    data: HoverPoint<T>[];
-    padding: ChartPadding;
-  }>();
-
-  const bisect = useCallback(
-    (
-      trend: (TrendValue & Value)[],
-      xPosition: number,
-      xScale: ScaleTime<number, number>
-    ) => {
-      if (!trend.length) return;
-      if (trend.length === 1) return trend[0];
-
-      const date = xScale.invert(xPosition - padding.left);
-
-      const index = bisectLeft(
-        trend.map((x) => x.__date),
-        date,
-        1
-      );
-
-      const d0 = trend[index - 1];
-      const d1 = trend[index];
-
-      if (!d1) return d0;
-
-      return +date - +d0.__date > +d1.__date - +date ? d1 : d0;
-    },
-    [padding]
-  );
-
-  const distance = (point1: HoverPoint<Value>, point2: Point) => {
-    const x = point2.x - point1.x;
-    const y = point2.y - point1.y;
-    return Math.sqrt(x * x + y * y);
-  };
 
   const toggleHoverElements = useCallback(
     (
@@ -213,53 +156,13 @@ export function LineChart<T extends Value>({
     [showTooltip, hideTooltip, height, padding]
   );
 
-  const handleHover = useCallback(
-    (
-      event: React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>,
-      scales: ChartScales
-    ) => {
-      if (!trendsList.length || event.type === 'mouseleave') {
-        toggleHoverElements(true);
-        return;
-      }
+  const bisect = useBisect(padding);
 
-      const { xScale, yScale } = scales;
-
-      const point = localPoint(event);
-
-      if (!point) {
-        return;
-      }
-
-      const sortByNearest = (left: HoverPoint<T>, right: HoverPoint<T>) =>
-        distance(left, point) - distance(right, point);
-
-      const hoverPoints = trendsList
-        .map((trends, index) => {
-          const trendValue = bisect(trends, point.x, xScale);
-          return trendValue
-            ? {
-                data: trendValue,
-                color: linesConfig[index].color,
-              }
-            : undefined;
-        })
-        .filter(isDefined)
-        .map<HoverPoint<T>>(
-          ({ data, color }: { data: any; color?: string }) => {
-            return {
-              data,
-              color,
-              x: xScale(data.__date) ?? 0,
-              y: yScale(data.__value) ?? 0,
-            };
-          }
-        );
-      const nearest = hoverPoints.slice().sort(sortByNearest);
-
-      toggleHoverElements(false, hoverPoints, nearest[0]);
-    },
-    [bisect, trendsList, linesConfig, toggleHoverElements]
+  const handleHover = useChartHover(
+    toggleHoverElements,
+    trendsList,
+    linesConfig,
+    bisect
   );
 
   const renderTrendLines = useCallback(
