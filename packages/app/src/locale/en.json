@@ -1014,11 +1014,11 @@
       },
       "2": {
         "titel": "Concern",
-        "toelichting": "The situation is becoming difficult to manage. The number of new infections is between 35 and 150 per 100,000 inhabitants per week. Pressure on healthcare capacity is increasing."
+        "toelichting": "The situation is becoming difficult to manage. The number of new infections is between 35 and 100 per 100,000 inhabitants per week. Pressure on healthcare capacity is increasing."
       },
       "3": {
         "titel": "Serious",
-        "toelichting": "The situation is serious. The number of new infections is between 150 and 250 per 100,000 inhabitants per week. Pressure on healthcare capacity is very high."
+        "toelichting": "The situation is serious. The number of new infections is between 100 and 250 per 100,000 inhabitants per week. Pressure on healthcare capacity is very high."
       },
       "4": {
         "titel": "Severe",
