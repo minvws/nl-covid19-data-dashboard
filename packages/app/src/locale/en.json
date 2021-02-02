@@ -592,11 +592,6 @@
     "description": "Information on the development of the coronavirus in the Netherlands.",
     "url": "https://coronadashboard.government.nl/verantwoording"
   },
-  "toegankelijkheid_metadata": {
-    "title": "Toegankelijkheid COVID-19 Dashboard | Rijksoverheid.nl",
-    "description": "Informatie over de toegankelijkheid van het COVID-19 Dashboard.",
-    "url": "https://coronadashboard.rijksoverheid.nl/verantwoording"
-  },
   "metadata": {
     "description": "Information on the development of the coronavirus in the Netherlands.",
     "titel": "COVID-19 Dashboard error message | Government.nl",
@@ -667,7 +662,7 @@
   "seoHead": {
     "default_description": "Information on the development of the coronavirus in The Netherlands.",
     "default_title": "Dashboard Coronavirus COVID-19 | Government.nl",
-    "default_url": "https://coronadashboard.rijksoverheid.nl/veelgestelde-vragen"
+    "default_url": "https://coronadashboard.government.nl/veelgestelde-vragen"
   },
   "no_data_for_this_municipality": {
     "text": "This information is not available for this municipality."
@@ -707,7 +702,7 @@
   "veiligheidsregio_metadata": {
     "title": "Regional Dashboard Coronavirus COVID-19 | Government.nl",
     "description": "Information on the development of the coronavirus in the Netherlands.",
-    "url": "https://coronadashboard.rijksoverheid.nl/regio"
+    "url": "https://coronadashboard.government.nl/regio"
   },
   "gemeente_metadata": {
     "title": "Municipality"
@@ -1732,7 +1727,7 @@
     "titel_sidebar": "Deaths",
     "titel_kpi": "Daily reported deaths from COVID-19",
     "metadata": {
-      "title": "Deaths | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Deaths | Dashboard Coronavirus | Government.nl",
       "description": "Number of deceased per day"
     },
     "section_deceased_rivm": {
@@ -1763,7 +1758,7 @@
     "titel_sidebar": "Deaths",
     "titel_kpi": "Gemeld aantal patiënten overleden aan COVID-19 per dag",
     "metadata": {
-      "title": "Deaths in {{safetyRegion}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Deaths in {{safetyRegion}} | Dashboard Coronavirus | Government.nl",
       "description": "Number of deceased per day in {{safetyRegion}}"
     },
     "section_deceased_rivm": {
@@ -2002,8 +1997,8 @@
     "title": "COVID-19 vaccinations",
     "description": "Vaccination is the most important step towards getting life back to normal. The Netherlands began vaccinating people against COVID-19 on 6 January 2021. Eventually, the vaccine will be offered to everyone aged 18 and over. This page shows how many doses of vaccine have been administered and how many doses are on their way.",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "date_unix": "1612196735",
-    "date_of_insertion_unix": "1612196735",
+    "date_unix": "1612263890",
+    "date_of_insertion_unix": "1612263890",
     "reference": {
       "href": "/verantwoording#vaccination",
       "text": "Read more about the source of the data on vaccination in the explanation of the presented data."
@@ -2039,27 +2034,27 @@
       "difference": "",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "343881",
-          "date_unix": "1612196735",
-          "date_of_insertion_unix": "1612196735"
+          "total_vaccinated": "375908",
+          "date_unix": "1612263890",
+          "date_of_insertion_unix": "1612263890"
         }
       },
       "kpi_total": {
         "title": "Number of doses administered",
-        "value": "248055",
+        "value": "277275",
         "description": "",
-        "date_of_report_unix": "1612196735",
-        "date_of_insertion_unix": "1612196735",
+        "date_of_report_unix": "1612263890",
+        "date_of_insertion_unix": "1612263890",
         "administered": [
           {
-            "value": "187339",
+            "value": "203559",
             "description": "reported by GGD-GHOR",
-            "report_date": "Reported number till 31 January"
+            "report_date": "Reported number till 1 February"
           },
           {
-            "value": "60716",
+            "value": "73716",
             "description": "reported by LNAZ",
-            "report_date": "Reported number till 31 January"
+            "report_date": "Reported number till 1 February"
           },
           {
             "value": "",
@@ -2083,25 +2078,25 @@
         "first_tab_title": "Calculated number",
         "second_tab_title": "Reported number",
         "tab_total_estimated": {
-          "value": "343881",
+          "value": "375908",
           "description": "",
-          "date_of_report_unix": "1612196735",
-          "date_of_insertion_unix": "1612196735",
+          "date_of_report_unix": "1612263890",
+          "date_of_insertion_unix": "1612263890",
           "administered": [
             {
-              "value": "187339",
+              "value": "203559",
               "description": "administered by GGDs",
-              "report_date": "Reported number till 31 January"
+              "report_date": "Reported number till 1 February"
             },
             {
-              "value": "60716",
+              "value": "73716",
               "description": "administered in hospitals",
-              "report_date": "Reported number till 31 January"
+              "report_date": "Reported number till 1 February"
             },
             {
-              "value": "95826",
+              "value": "98633",
               "description": "administered in long-term care institutions",
-              "report_date": "Calculated number till 31 January"
+              "report_date": "Calculated number 1 February"
             },
             {
               "value": "",
@@ -2431,5 +2426,10 @@
         "gemeente": "Data for the municipality {{municipalityName}}"
       }
     }
+  },
+  "toegankelijkheid_metadata": {
+    "title": "Toegankelijkheid COVID-19 Dashboard | Government.nl",
+    "description": "Informatie on the accessibility of the COVID-19 Dashboard.",
+    "url": "https://coronadashboard.government.nl/verantwoording"
   }
 }
