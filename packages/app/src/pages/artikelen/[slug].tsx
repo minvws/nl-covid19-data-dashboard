@@ -41,20 +41,20 @@ export const getStaticProps = createGetStaticProps(
       },
       "intro": {
         ...intro,
-  	    "nl": [
-  		    ...intro.nl[]
-			    {
-      	    ...,
-      	    "asset": asset->
-     	    },
-		    ],
-  	    "en": [
-  		    ...intro.en[]
-			    {
-      	    ...,
-      	    "asset": asset->
-     	    },
-		    ],
+        "nl": [
+          ...intro.nl[]
+          {
+            ...,
+            "asset": asset->
+           },
+        ],
+        "en": [
+          ...intro.en[]
+          {
+            ...,
+            "asset": asset->
+           },
+        ],
       },
       "content": {
         "_type": content._type,

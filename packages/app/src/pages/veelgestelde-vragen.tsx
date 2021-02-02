@@ -58,7 +58,7 @@ const query = `*[_type == 'veelgesteldeVragen']{
            },
         ],
       }
-	}]
+  }]
   
 }[0]
 `;
