@@ -80,7 +80,7 @@ export function TopNavigation() {
           }),
         })}
       >
-        <MaxWidth width={'100%'}>
+        <MaxWidth>
           <NavList>
             <NavItem
               href="/"
