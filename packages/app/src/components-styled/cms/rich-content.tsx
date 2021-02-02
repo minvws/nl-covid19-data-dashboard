@@ -34,14 +34,17 @@ export function RichContent({ contentWrapper, blocks }: RichContentProps) {
       ),
     },
     marks: {
-      inlineAttachment: DownloadLink,
+      inlineAttachment: InlineAttachmentMark,
     },
   };
 
   return <PortableText blocks={blocks} serializers={serializers} />;
 }
 
-function DownloadLink(props: { children: ReactNode; mark: InlineAttachment }) {
+function InlineAttachmentMark(props: {
+  children: ReactNode;
+  mark: InlineAttachment;
+}) {
   return (
     <a download href={getFileSrc(props.mark.asset)}>
       {props.children}
