@@ -6,7 +6,6 @@ import { Image } from '~/components-styled/image';
 import { Tile } from '~/components-styled/tile';
 import { Heading, Text } from '~/components-styled/typography';
 import siteText from '~/locale';
-import { colors } from '~/style/theme';
 import { ImageBlock } from '~/types/cms';
 import { Link } from '~/utils/link';
 import { ArticleSummary } from './article-teaser';
@@ -24,18 +23,13 @@ export function ArticleStrip(props: ArticleStripProps) {
   }
 
   return (
-    <Tile
-      css={css({
-        background: colors.lightBlue,
-        flexDirection: 'column',
-      })}
-    >
+    <Tile css={css({ bg: 'lightBlue' })}>
       <Heading level={4} as="h3">
         {siteText.article_strip_title}
       </Heading>
 
       <Box display="flex" flexWrap="wrap">
-        {articles.map((article, index: number) => (
+        {articles.map((article, index) => (
           <Box
             key={article.slug.current}
             width={{ _: '100%', lg: '50%' }}
@@ -61,7 +55,7 @@ type ArticleStripItemProps = {
   title: string;
 };
 
-const ArticleStripItem = function (props: ArticleStripItemProps) {
+function ArticleStripItem(props: ArticleStripItemProps) {
   const { slug, cover, title } = props;
 
   return (
@@ -90,7 +84,7 @@ const ArticleStripItem = function (props: ArticleStripItemProps) {
       </StyledLink>
     </Link>
   );
-};
+}
 
 const StyledLink = styled.a(
   css({
