@@ -88,13 +88,12 @@ EditorialDetailPage.getLayout = (page, props) => {
   const { asset } = cover;
 
   const imgPath = getImageSrc(asset, 1200);
-  const url = `https://coronadashboard.rijksoverheid.nl${imgPath}`;
 
   return getLayoutWithMetadata({
     title: getTitle(props.content.title),
     description: toPlainText(props.content.intro),
-    openGraphImage: url,
-    twitterImage: url,
+    openGraphImage: imgPath,
+    twitterImage: imgPath,
   })(page, props);
 };
 
