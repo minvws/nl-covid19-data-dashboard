@@ -225,7 +225,7 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
           }}
         >
           <MunicipalityChoropleth
-            selected={selectedMunicipalCode}
+            selectedCode={selectedMunicipalCode}
             highlightSelection={false}
             data={choropleth.gm}
             metricName="tested_overall"
