@@ -39,7 +39,7 @@ import 'sanity-mobile-preview/dist/index.css?raw';
 // };
 
 // hiddenDocTypes will filter out all of the content models
-// we expose through other sections in the CMStructureBuilder.
+// we expose through other sections in the CMS.
 // for example, we will show categories through a custom panel
 const hiddenDocTypes = [
   'siteSettings',

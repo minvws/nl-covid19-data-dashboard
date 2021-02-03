@@ -63,11 +63,7 @@ function ArticleStripItem(props: ArticleStripItemProps) {
     <Link passHref href={`/artikelen/${slug}`}>
       <StyledLink>
         <Box width={122} maxHeight={122} overflow="hidden">
-          <Image
-            {...getImageProps(cover)}
-            width={122}
-            height={122 / cover.asset.metadata.dimensions.aspectRatio}
-          />
+          <Image {...getImageProps(cover, 122)} />
         </Box>
         <Box paddingLeft={3}>
           <Text mt={0} mb={2}>
