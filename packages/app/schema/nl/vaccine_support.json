@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "nl_vaccine_support",
+  "type": "object",
+  "properties": {
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/value"
+      }
+    },
+    "last_value": {
+      "$ref": "#/definitions/value"
+    }
+  },
+  "required": ["values", "last_value"],
+  "additionalProperties": false,
+  "definitions": {
+    "value": {
+      "title": "nl_vaccine_support_value",
+      "type": "object",
+      "properties": {
+        "percentage_in_favor": {
+          "type": "number"
+        },
+        "percentage_already_vaccinated": {
+          "type": "number"
+        },
+        "date_start_unix": {
+          "type": "integer"
+        },
+        "date_end_unix": {
+          "type": "integer"
+        },
+        "date_of_insertion_unix": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "percentage_in_favor",
+        "percentage_already_vaccinated",
+        "date_start_unix",
+        "date_end_unix",
+        "date_of_insertion_unix"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
