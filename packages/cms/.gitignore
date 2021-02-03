@@ -7,7 +7,6 @@
 
 # build and data exports
 dist
-export
 
 # misc
 .DS_Store
