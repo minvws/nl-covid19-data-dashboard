@@ -1967,7 +1967,7 @@
       "ziekenhuis_opnames": "This graph shows the progression in hospital admissions over time.",
       "rioolwater_meetwaarde": "This graph shows the most recent measured value of the average amount of virus particles per 100.000 residents, per sewage processing facility.",
       "verwachte_leveringen": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks.",
-      "vaccin_levering_en_prikken": ""
+      "vaccin_levering_en_prikken": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks."
     }
   },
   "deceased_age_groups": {
@@ -2117,10 +2117,10 @@
       },
       "kpi_expected_delivery": {
         "title": "Approved vaccines to be delivered",
-        "value": "1302750",
+        "value": "2473700",
         "description": "This is the number of approved vaccine doses the Netherlands expects to receive over the next six weeks. The Netherlands will receive a new delivery each week. People need two separately administered doses for the vaccine to be maximally effective.",
-        "date_of_report_unix": "1611600708",
-        "date_of_insertion_unix": "1611600708"
+        "date_of_report_unix": "1612384276",
+        "date_of_insertion_unix": "1612384276"
       },
       "kpi_stock": {
         "title": "",
