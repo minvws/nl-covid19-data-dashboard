@@ -5,7 +5,6 @@ import { getNationalLayout } from '~/domain/layout/national-layout';
 import { Heading } from '~/components-styled/typography';
 import { KpiSection } from '~/components-styled/kpi-section';
 import { LockdownTable } from '~/domain/restrictions/lockdown-table';
-import { PortableText } from '~/lib/sanity';
 import { SEOHead } from '~/components-styled/seo-head';
 import { Box } from '~/components-styled/base/box';
 import { TileList } from '~/components-styled/tile-list';
@@ -21,6 +20,7 @@ import {
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import { LockdownData, RoadmapData } from '~/types/cms';
 import theme from '~/style/theme';
+import { RichContent } from '~/components-styled/cms/rich-content';
 
 type MaatregelenData = {
   lockdown: LockdownData;
@@ -29,7 +29,29 @@ type MaatregelenData = {
 
 const query = `
 {
-  'lockdown': *[_type == 'lockdown'][0],
+  'lockdown': *[_type == 'lockdown']{
+    ...,
+    "message": {
+      ...message,
+      "description": {
+        ...message.description,
+        "nl": [
+          ...message.description.nl[]
+          {
+            ...,
+            "asset": asset->
+          },
+        ],
+        "en": [
+          ...message.description.en[]
+          {
+            ...,
+            "asset": asset->
+          },
+        ],
+      },
+    }
+  }[0],
   // We will need the roadmap when lockdown is disabled in the CMS.
   // 'roadmap': *[_type == 'roadmap'][0]
 }`;
@@ -77,7 +99,7 @@ const NationalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
             >
               <Heading level={3}>{lockdown.message.title}</Heading>
               {lockdown.message.description ? (
-                <PortableText blocks={lockdown.message.description} />
+                <RichContent blocks={lockdown.message.description} />
               ) : null}
             </Box>
           </KpiSection>

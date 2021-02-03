@@ -623,7 +623,7 @@
     "select_region_municipality_legend": "Select a municipality:",
     "select_region_type_legend": "Show numbers from:",
     "your_municipality": "Municipality",
-    "belangrijk_bericht": "There is a [national lockdown](https://coronadashboard.government.nl/landelijk/maatregelen) until at least 9 February."
+    "belangrijk_bericht": "There is a [national lockdown](https://coronadashboard.government.nl/landelijk/maatregelen)."
   },
   "common": {
     "metadata": {
@@ -662,7 +662,7 @@
   "seoHead": {
     "default_description": "Information on the development of the coronavirus in The Netherlands.",
     "default_title": "Dashboard Coronavirus COVID-19 | Government.nl",
-    "default_url": "https://coronadashboard.rijksoverheid.nl/veelgestelde-vragen"
+    "default_url": "https://coronadashboard.government.nl/veelgestelde-vragen"
   },
   "no_data_for_this_municipality": {
     "text": "This information is not available for this municipality."
@@ -702,7 +702,7 @@
   "veiligheidsregio_metadata": {
     "title": "Regional Dashboard Coronavirus COVID-19 | Government.nl",
     "description": "Information on the development of the coronavirus in the Netherlands.",
-    "url": "https://coronadashboard.rijksoverheid.nl/regio"
+    "url": "https://coronadashboard.government.nl/regio"
   },
   "gemeente_metadata": {
     "title": "Municipality"
@@ -982,13 +982,13 @@
     "bar_chart_accessibility_description": ""
   },
   "veiligheidsregio_index": {
-    "selecteer_titel": "Level of risk",
-    "selecteer_toelichting": "The map indicates the level of risk per safety region.\n\n[More about risk levels](/over-risiconiveaus)",
+    "selecteer_titel": "Risk level map of the Netherlands",
+    "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\nThere are specific measures for each risk level. These are explained in the road map drafted by the government. **There is a national lockdown. [Click here to view the lockdown measures](/landelijk/maatregelen).**",
     "metadata": {
       "title": "Level of risk per safety region | Dashboard Coronavirus | Government.nl",
       "description": "Overview of the level of risk per safety region in the Netherlands."
     },
-    "belangrijk_bericht": "There is a [national lockdown](https://coronadashboard.government.nl/landelijk/maatregelen) until at least 9 February."
+    "belangrijk_bericht": "There is a [national lockdown](https://coronadashboard.government.nl/landelijk/maatregelen)."
   },
   "gemeente_index": {
     "selecteer_titel": "Select your municipality",
@@ -1006,7 +1006,7 @@
   },
   "escalatie_niveau": {
     "titel": "Risk levels",
-    "toelichting": "The map indicates the level of risk per safety region.\n\n[More about risk levels](/over-risiconiveaus)",
+    "toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\nThere are specific measures for each risk level. These are explained in the road map drafted by the government. **There is a national lockdown. [Click here to view the lockdown measures](/landelijk/maatregelen).**",
     "types": {
       "1": {
         "titel": "Caution",
@@ -1014,11 +1014,11 @@
       },
       "2": {
         "titel": "Concern",
-        "toelichting": "The situation is becoming difficult to manage. The number of new infections is between 35 and 150 per 100,000 inhabitants per week. Pressure on healthcare capacity is increasing."
+        "toelichting": "The situation is becoming difficult to manage. The number of new infections is between 35 and 100 per 100,000 inhabitants per week. Pressure on healthcare capacity is increasing."
       },
       "3": {
         "titel": "Serious",
-        "toelichting": "The situation is serious. The number of new infections is between 150 and 250 per 100,000 inhabitants per week. Pressure on healthcare capacity is very high."
+        "toelichting": "The situation is serious. The number of new infections is between 100 and 250 per 100,000 inhabitants per week. Pressure on healthcare capacity is very high."
       },
       "4": {
         "titel": "Severe",
@@ -1727,7 +1727,7 @@
     "titel_sidebar": "Deaths",
     "titel_kpi": "Daily reported deaths from COVID-19",
     "metadata": {
-      "title": "Deaths | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Deaths | Dashboard Coronavirus | Government.nl",
       "description": "Number of deceased per day"
     },
     "section_deceased_rivm": {
@@ -1758,7 +1758,7 @@
     "titel_sidebar": "Deaths",
     "titel_kpi": "Gemeld aantal patiënten overleden aan COVID-19 per dag",
     "metadata": {
-      "title": "Deaths in {{safetyRegion}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Deaths in {{safetyRegion}} | Dashboard Coronavirus | Government.nl",
       "description": "Number of deceased per day in {{safetyRegion}}"
     },
     "section_deceased_rivm": {
@@ -1997,8 +1997,8 @@
     "title": "COVID-19 vaccinations",
     "description": "Vaccination is the most important step towards getting life back to normal. The Netherlands began vaccinating people against COVID-19 on 6 January 2021. Eventually, the vaccine will be offered to everyone aged 18 and over. This page shows how many doses of vaccine have been administered and how many doses are on their way.",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "date_unix": "1612196735",
-    "date_of_insertion_unix": "1612196735",
+    "date_unix": "1612354200",
+    "date_of_insertion_unix": "1612354200",
     "reference": {
       "href": "/verantwoording#vaccination",
       "text": "Read more about the source of the data on vaccination in the explanation of the presented data."
@@ -2034,27 +2034,27 @@
       "difference": "",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "343881",
-          "date_unix": "1612196735",
-          "date_of_insertion_unix": "1612196735"
+          "total_vaccinated": "416093",
+          "date_unix": "1612354200",
+          "date_of_insertion_unix": "1612354200"
         }
       },
       "kpi_total": {
         "title": "Number of doses administered",
-        "value": "248055",
+        "value": "303702",
         "description": "",
-        "date_of_report_unix": "1612196735",
-        "date_of_insertion_unix": "1612196735",
+        "date_of_report_unix": "1612263890",
+        "date_of_insertion_unix": "1612263890",
         "administered": [
           {
-            "value": "187339",
+            "value": "222486",
             "description": "reported by GGD-GHOR",
-            "report_date": "Reported number till 31 January"
+            "report_date": "Reported number till 2 February"
           },
           {
-            "value": "60716",
+            "value": "81216",
             "description": "reported by LNAZ",
-            "report_date": "Reported number till 31 January"
+            "report_date": "Reported number till 2 February"
           },
           {
             "value": "",
@@ -2078,25 +2078,25 @@
         "first_tab_title": "Calculated number",
         "second_tab_title": "Reported number",
         "tab_total_estimated": {
-          "value": "343881",
+          "value": "416093",
           "description": "",
-          "date_of_report_unix": "1612196735",
-          "date_of_insertion_unix": "1612196735",
+          "date_of_report_unix": "1612354200",
+          "date_of_insertion_unix": "1612354200",
           "administered": [
             {
-              "value": "187339",
+              "value": "222486",
               "description": "administered by GGDs",
-              "report_date": "Reported number till 31 January"
+              "report_date": "Reported number till 2 February"
             },
             {
-              "value": "60716",
+              "value": "81216",
               "description": "administered in hospitals",
-              "report_date": "Reported number till 31 January"
+              "report_date": "Reported number till 2 February"
             },
             {
-              "value": "95826",
+              "value": "112391",
               "description": "administered in long-term care institutions",
-              "report_date": "Calculated number till 31 January"
+              "report_date": "Calculated number till 2 February"
             },
             {
               "value": "",
@@ -2201,7 +2201,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of the Netherlands",
-      "selecteer_toelichting": "The map indicates the level of risk per safety region.\n\n**There are specific measures for each risk level. These are explained in the road map drafted by the government. There is a national lockdown until at least 9 February. [Click here to view the lockdown measures](landelijk/maatregelen).**"
+      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions.  \n\n**There are specific measures for each risk level. These are explained in the road map drafted by the government. There is a national lockdown. [Click here to view the lockdown measures](landelijk/maatregelen).**"
     },
     "data_sitemap_titel": "Topics on this dashboard",
     "data_sitemap_toelichting": "Go directly to the following topics:",
@@ -2288,7 +2288,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of The Netherlands",
-      "selecteer_toelichting": "The map indicates the level of risk per safety region.\n\n**There are specific measures for each risk level. These are explained in the road map drafted by the government. There is a national lockdown until at least 9 February. [Click here to view the lockdown measures](landelijk/maatregelen).**"
+      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions.  \n\n**There are specific measures for each risk level. These are explained in the road map drafted by the government. There is a national lockdown. [Click here to view the lockdown measures](landelijk/maatregelen).**"
     },
     "risoconiveau_maatregelen": {
       "title": "Risk level & measures",
@@ -2361,7 +2361,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of the Netherlands",
-      "selecteer_toelichting": "The map indicates the level of risk per safety region.\n\n**There are specific measures for each risk level. These are explained in the road map drafted by the government. There is a national lockdown until at least 9 February. [Click here to view the lockdown measures](landelijk/maatregelen).**"
+      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions.  \n\n**There are specific measures for each risk level. These are explained in the road map drafted by the government. There is a national lockdown. [Click here to view the lockdown measures](landelijk/maatregelen).**"
     },
     "risoconiveau_maatregelen": {
       "title": "Risk level & measures",
@@ -2426,5 +2426,11 @@
         "gemeente": "Data for the municipality {{municipalityName}}"
       }
     }
-  }
+  },
+  "toegankelijkheid_metadata": {
+    "title": "Toegankelijkheid COVID-19 Dashboard | Government.nl",
+    "description": "Informatie on the accessibility of the COVID-19 Dashboard.",
+    "url": "https://coronadashboard.government.nl/verantwoording"
+  },
+  "article_strip_title": ""
 }

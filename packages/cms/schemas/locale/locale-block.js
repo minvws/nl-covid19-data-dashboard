@@ -12,6 +12,25 @@ export default {
       {
         type: 'block',
       },
+      {
+        type: 'image',
+        fields: [
+          {
+            name: 'alt',
+            title: 'Alternatieve tekst (toegankelijkheid)',
+            type: 'string',
+            validation: (Rule) => Rule.required(),
+            options: {
+              isHighlighted: true,
+            },
+          },
+          {
+            name: 'caption',
+            title: 'Onderschrift',
+            type: 'text',
+          },
+        ],
+      },
     ],
   })),
 };

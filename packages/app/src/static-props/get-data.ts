@@ -1,8 +1,3 @@
-import { GetStaticPropsContext } from 'next';
-import safetyRegions from '~/data/index';
-import municipalities from '~/data/municipalSearchData';
-import { client, localize } from '~/lib/sanity';
-import { targetLanguage } from '~/locale/index';
 import {
   Municipal,
   Municipalities,
@@ -13,8 +8,13 @@ import {
   sortNationalTimeSeriesInDataInPlace,
   sortRegionalTimeSeriesInDataInPlace,
 } from '@corona-dashboard/common';
-import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
+import { GetStaticPropsContext } from 'next';
+import safetyRegions from '~/data/index';
+import municipalities from '~/data/municipalSearchData';
+import { client, localize } from '~/lib/sanity';
+import { targetLanguage } from '~/locale/index';
 import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
+import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
 
 /**
  * Usage:
@@ -49,7 +49,8 @@ export function createGetContent<T>(
         ? queryOrQueryGetter(context)
         : queryOrQueryGetter;
     const rawContent = await client.fetch<T>(query);
-    const content = localize(rawContent, [targetLanguage, 'nl']);
+
+    const content = localize(rawContent ?? {}, [targetLanguage, 'nl']) as T;
 
     return { content };
   };

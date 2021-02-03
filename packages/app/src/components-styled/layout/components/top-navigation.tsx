@@ -1,6 +1,6 @@
 import css from '@styled-system/css';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import Close from '~/assets/close.svg';
 import Menu from '~/assets/menu.svg';
@@ -19,17 +19,32 @@ export function TopNavigation() {
   const [needsMobileMenuLink, setNeedsMobileMenuLink] = useState(false);
   const breakpoints = useBreakpoints(true);
   const isSmallScreen = !breakpoints.md;
+  const [panelHeight, setPanelHeight] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const navMenu = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Menu is opened by default as fallback: JS opens it
     setIsMenuOpen(false);
+    setPanelHeight(0);
 
     // Workaround to get the mobile menu opened when linking to a sub-page.
     setNeedsMobileMenuLink(isSmallScreen);
   }, [isSmallScreen]);
 
+  useEffect(() => {
+    setPanelHeight(isMenuOpen ? 1000 : 0);
+  }, [isMenuOpen]);
+
   function toggleMenu() {
+    if (isAnimating) return;
+
+    setIsAnimating(!isAnimating);
     setIsMenuOpen(!isMenuOpen);
+  }
+
+  function handleTransitionEnd() {
+    setIsAnimating(false);
   }
 
   return (
@@ -46,41 +61,57 @@ export function TopNavigation() {
           </VisuallyHidden>
         </NavToggle>
       )}
-      {(!isSmallScreen || isMenuOpen) && (
-        <NavWrapper
-          id="main-navigation"
-          role="navigation"
-          aria-label={text.aria_labels.pagina_keuze}
-        >
-          <MaxWidth>
-            <NavList>
-              <NavItem
-                href="/"
-                isActive={
-                  router.pathname === '/' ||
-                  router.pathname.startsWith('/actueel')
-                }
-              >
-                {text.nav.links.actueel}
-              </NavItem>
-              <NavItem
-                href={`/landelijk/vaccinaties${
-                  needsMobileMenuLink ? '?menu=1' : ''
-                }`}
-                isActive={router.pathname.startsWith('/landelijk')}
-              >
-                {text.nav.links.index}
-              </NavItem>
-              <NavItem href="/veiligheidsregio">
-                {text.nav.links.veiligheidsregio}
-              </NavItem>
-              <NavItem href="/gemeente">{text.nav.links.gemeente}</NavItem>
 
-              <NavItem href="/over">{text.nav.links.over}</NavItem>
-            </NavList>
-          </MaxWidth>
-        </NavWrapper>
-      )}
+      <NavWrapper
+        id="main-navigation"
+        role="navigation"
+        aria-label={text.aria_labels.pagina_keuze}
+        ref={navMenu}
+        onTransitionEnd={handleTransitionEnd}
+        css={css({
+          maxHeight: asResponsiveArray({ _: `${panelHeight}px`, md: '100%' }),
+          opacity: asResponsiveArray({ _: isMenuOpen ? 1 : 0, md: 1 }),
+          pointerEvents: asResponsiveArray({
+            _: isMenuOpen ? 'auto' : 'none',
+            md: 'auto',
+          }),
+          transition: asResponsiveArray({
+            _:
+              isMenuOpen || isAnimating
+                ? 'max-height 0.4s ease-in-out, opacity 0.4s ease-in-out'
+                : 'none',
+            md: 'none',
+          }),
+        })}
+      >
+        <MaxWidth>
+          <NavList>
+            <NavItem
+              href="/"
+              isActive={
+                router.pathname === '/' ||
+                router.pathname.startsWith('/actueel')
+              }
+            >
+              {text.nav.links.actueel}
+            </NavItem>
+            <NavItem
+              href={`/landelijk/vaccinaties${
+                needsMobileMenuLink ? '?menu=1' : ''
+              }`}
+              isActive={router.pathname.startsWith('/landelijk')}
+            >
+              {text.nav.links.index}
+            </NavItem>
+            <NavItem href="/veiligheidsregio">
+              {text.nav.links.veiligheidsregio}
+            </NavItem>
+            <NavItem href="/gemeente">{text.nav.links.gemeente}</NavItem>
+
+            <NavItem href="/over">{text.nav.links.over}</NavItem>
+          </NavList>
+        </MaxWidth>
+      </NavWrapper>
     </>
   );
 }
@@ -122,18 +153,17 @@ const NavToggle = styled.button(
 
 const NavWrapper = styled.nav(
   css({
-    borderTop: '1px solid rgba(255, 255, 255, 0.25)',
+    display: 'block',
+    width: '100%',
     borderTopWidth: '1px',
-    mt: 3,
-    pt: 1,
-    pb: 0,
-    flex: '1 0 100%',
-    width: 'auto',
+    p: 0,
     [`@media ${theme.mediaQueries.md}`]: {
+      display: 'inline',
+      width: 'auto',
       borderTopWidth: 0,
       ml: 'auto',
       mt: 0,
-      pb: 1,
+      py: 1,
       flex: '0 0 auto',
     },
   })
@@ -141,9 +171,14 @@ const NavWrapper = styled.nav(
 
 const NavList = styled.ul(
   css({
+    borderTop: asResponsiveArray({
+      _: '1px solid rgba(255, 255, 255, 0.25)',
+      md: 'none',
+    }),
     listStyle: 'none',
     padding: 0,
     margin: 0,
+    mt: asResponsiveArray({ _: '1.25rem', md: 0 }),
     display: asResponsiveArray({ _: 'block', md: 'flex' }),
   })
 );

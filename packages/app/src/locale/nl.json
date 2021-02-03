@@ -623,7 +623,7 @@
     "select_region_municipality_legend": "Selecteer een gemeente:",
     "select_region_type_legend": "Toon cijfers van:",
     "your_municipality": "Gemeente",
-    "belangrijk_bericht": "Er geldt een [landelijke lockdown](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen) tot en met in ieder geval 9 februari."
+    "belangrijk_bericht": "Er geldt een [landelijke lockdown](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen)."
   },
   "common": {
     "metadata": {
@@ -982,13 +982,13 @@
     "bar_chart_accessibility_description": ""
   },
   "veiligheidsregio_index": {
-    "selecteer_titel": "Risiconiveaus",
-    "selecteer_toelichting": "De kaart geeft het risiconiveau per veiligheidsregio weer.\n\n[Meer over de risiconiveaus](/over-risiconiveaus)",
+    "selecteer_titel": "De risicokaart van Nederland",
+    "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. [Meer informatie over de risiconiveaus](/over-risiconiveaus).\n\nBij elk risiconiveau horen bepaalde maatregelen. Die maatregelen staan in de routekaart die het kabinet heeft gemaakt. **Er geldt een landelijke lockdown. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**",
     "metadata": {
       "title": "Risiconiveaus per veiligheidsregio | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Overzicht van het huidige risiconiveau per veiligheidsregio in Nederland."
     },
-    "belangrijk_bericht": "Er geldt een [landelijke lockdown](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen) tot en met in ieder geval 9 februari."
+    "belangrijk_bericht": "Er geldt een [landelijke lockdown](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen)."
   },
   "gemeente_index": {
     "selecteer_titel": "Selecteer een gemeente",
@@ -1006,7 +1006,7 @@
   },
   "escalatie_niveau": {
     "titel": "Risiconiveaus",
-    "toelichting": "De kaart geeft het risiconiveau per veiligheidsregio weer.\n\n[Meer over de risiconiveaus](/over-risiconiveaus)",
+    "toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. [Meer informatie over de risiconiveaus](/over-risiconiveaus).\n\nBij elk risiconiveau horen bepaalde maatregelen. Die maatregelen staan in de routekaart die het kabinet heeft gemaakt. **Er geldt een landelijke lockdown. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**",
     "types": {
       "1": {
         "titel": "Waakzaam",
@@ -1014,11 +1014,11 @@
       },
       "2": {
         "titel": "Zorgelijk",
-        "toelichting": "De situatie is lastig onder controle te houden. Er zijn veel nieuwe besmettingen: per week tussen de 35 en 150 mensen per 100.000 inwoners. De druk op de zorg is groot."
+        "toelichting": "De situatie is lastig onder controle te houden. Er zijn veel nieuwe besmettingen: per week tussen de 35 en 100 mensen per 100.000 inwoners. De druk op de zorg is groot."
       },
       "3": {
         "titel": "Ernstig",
-        "toelichting": "De situatie is slecht. Er is een groot aantal nieuwe besmettingen: per week tussen de 150 en 250 mensen per 100.000 inwoners. De druk op de zorg is erg groot."
+        "toelichting": "De situatie is slecht. Er is een groot aantal nieuwe besmettingen: per week tussen de 100 en 250 mensen per 100.000 inwoners. De druk op de zorg is erg groot."
       },
       "4": {
         "titel": "Zeer Ernstig",
@@ -1989,7 +1989,7 @@
   },
   "vaccinaties": {
     "titel_sidebar": "Vaccinaties",
-    "titel_kpi": "Aantal gemelde prikken",
+    "titel_kpi": "Aantal gezette prikken",
     "metadata": {
       "title": "Vaccinaties | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Op 6 januari 2021 is Nederland begonnen met vaccineren. De cijfers op het dashboard coronavirus laten zien hoeveel prikken zijn gezet en hoeveel vaccins er beschikbaar komen."
@@ -1997,8 +1997,8 @@
     "title": "COVID-19-vaccinaties",
     "description": "Vaccineren is de belangrijkste stap naar een samenleving zonder coronaregels. Op 6 januari 2021 is Nederland begonnen met vaccineren. Uiteindelijk komt iedereen van 18 jaar of ouder aan de beurt. De cijfers op deze pagina laten zien hoeveel prikken zijn gezet en hoeveel vaccins er beschikbaar komen.",
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "date_unix": "1612196735",
-    "date_of_insertion_unix": "1612196735",
+    "date_unix": "1612354200",
+    "date_of_insertion_unix": "1612354200",
     "reference": {
       "href": "/verantwoording#vaccinatie",
       "text": "Lees meer over de bron van de vaccinatiecijfers in de cijferverantwoording."
@@ -2034,32 +2034,32 @@
       "difference": "Do not remove this key. It is required as a temporary workaround",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "343881",
-          "date_unix": "1612196735",
-          "date_of_insertion_unix": "1612196735"
+          "total_vaccinated": "416093",
+          "date_unix": "1612354200",
+          "date_of_insertion_unix": "1612354200"
         }
       },
       "kpi_total": {
         "title": "Aantal gezette prikken",
-        "value": "248055",
-        "description": "Dit getal laat zien hoeveel prikken in totaal zijn gezet. Het kan een tijd duren voordat een prik wordt gemeld. Het daadwerkelijke aantal gezette prikken ligt daarom hoger.",
-        "date_of_report_unix": "1612196735",
-        "date_of_insertion_unix": "1612196735",
+        "value": "303702",
+        "description": "",
+        "date_of_report_unix": "1612263890",
+        "date_of_insertion_unix": "1612263890",
         "administered": [
           {
-            "value": "187339",
+            "value": "222486",
             "description": "gemeld door GGD-GHOR",
-            "report_date": "Gemeld aantal tot en met 31 januari"
+            "report_date": "Gemeld aantal tot en met 2 februari"
           },
           {
-            "value": "60716",
+            "value": "81216",
             "description": "gemeld door LNAZ",
-            "report_date": "Gemeld aantal tot en met 31 januari"
+            "report_date": "Gemeld aantal tot en met 2 februari"
           },
           {
-            "value": "16829",
-            "description": "gezet door langdurige zorginstellingen*",
-            "report_date": "Gemeld aantal t/m 28 jan"
+            "value": "",
+            "description": "",
+            "report_date": ""
           },
           {
             "value": "",
@@ -2073,30 +2073,30 @@
           }
         ],
         "description_first": "Dit getal laat zien hoeveel prikken zijn gemeld door GGD-GHOR en LNAZ. [Lees meer over de registratie in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)",
-        "description_second": "* Deze cijfers worden aan de telefoon doorgegeven. Let op: het daadwerkelijke aantal gezette prikken ligt daarom hoger dan hier vermeld.",
-        "warning": "Let op: het daadwerkelijk aantal gezette prikken ligt hoger.",
+        "description_second": "",
+        "warning": "",
         "first_tab_title": "Berekend aantal",
         "second_tab_title": "Gemeld aantal",
         "tab_total_estimated": {
-          "value": "343881",
+          "value": "416093",
           "description": "",
-          "date_of_report_unix": "1612196735",
-          "date_of_insertion_unix": "1612196735",
+          "date_of_report_unix": "1612354200",
+          "date_of_insertion_unix": "1612354200",
           "administered": [
             {
-              "value": "187339",
+              "value": "222486",
               "description": "gezet door GGD'en",
-              "report_date": "Gemeld aantal tot en met 31 januari"
+              "report_date": "Gemeld aantal tot en met 2 februari"
             },
             {
-              "value": "60716",
+              "value": "81216",
               "description": "gezet in ziekenhuizen",
-              "report_date": "Gemeld aantal tot en met 31 januari"
+              "report_date": "Gemeld aantal tot en met 2 februari"
             },
             {
-              "value": "95826",
+              "value": "112391",
               "description": "gezet in langdurige zorginstellingen",
-              "report_date": "Berekend aantal tot en met 31 januari"
+              "report_date": "Berekend aantal tot en met 2 februari"
             },
             {
               "value": "",
@@ -2201,7 +2201,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "De risicokaart van Nederland",
-      "selecteer_toelichting": "De kaart geeft het risiconiveau per veiligheidsregio weer.\n\n**Bij elk risiconiveau horen bepaalde maatregelen. Die maatregelen staan in de routekaart die het kabinet heeft gemaakt. Er geldt een landelijke lockdown tot en met in ieder geval 9 februari. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**"
+      "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. \n\n**Bij elk risiconiveau horen bepaalde maatregelen. Die maatregelen staan in de routekaart die het kabinet heeft gemaakt. Er geldt een landelijke lockdown. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**"
     },
     "data_sitemap_titel": "Onderwerpen op dit dashboard",
     "data_sitemap_toelichting": "Ga direct naar de volgende onderwerpen:",
@@ -2288,7 +2288,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "De risicokaart van Nederland",
-      "selecteer_toelichting": "De kaart geeft het risiconiveau per veiligheidsregio weer.\n\n**Bij elk risiconiveau horen bepaalde maatregelen. Die maatregelen staan in de routekaart die het kabinet heeft gemaakt. Er geldt een landelijke lockdown tot en met in ieder geval 9 februari. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**"
+      "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. \n\n**Bij elk risiconiveau horen bepaalde maatregelen. Die maatregelen staan in de routekaart die het kabinet heeft gemaakt. Er geldt een landelijke lockdown. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**"
     },
     "risoconiveau_maatregelen": {
       "title": "Risiconiveau & maatregelen",
@@ -2361,7 +2361,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "De risicokaart van Nederland",
-      "selecteer_toelichting": "De kaart geeft het risiconiveau per veiligheidsregio weer.\n\n**Bij elk risiconiveau horen bepaalde maatregelen. Die maatregelen staan in de routekaart die het kabinet heeft gemaakt. Er geldt een landelijke lockdown tot en met in ieder geval 9 februari. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**"
+      "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. \n\n**Bij elk risiconiveau horen bepaalde maatregelen. Die maatregelen staan in de routekaart die het kabinet heeft gemaakt. Er geldt een landelijke lockdown. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**"
     },
     "risoconiveau_maatregelen": {
       "title": "Risiconiveau & maatregelen",
@@ -2426,5 +2426,11 @@
         "gemeente": "Cijfers van gemeente {{municipalityName}}"
       }
     }
-  }
+  },
+  "toegankelijkheid_metadata": {
+    "title": "Toegankelijkheid COVID-19 Dashboard | Rijksoverheid.nl",
+    "description": "Informatie over de toegankelijkheid van het COVID-19 Dashboard.",
+    "url": "https://coronadashboard.rijksoverheid.nl/verantwoording"
+  },
+  "article_strip_title": "Meer informatie over dit onderwerp"
 }
