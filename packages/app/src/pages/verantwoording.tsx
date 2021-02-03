@@ -1,30 +1,71 @@
-import { groq } from 'next-sanity';
 import Head from 'next/head';
+import { RichContent } from '~/components-styled/cms/rich-content';
 import { Collapsible } from '~/components-styled/collapsible';
 import { MaxWidth } from '~/components-styled/max-width';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
-import { PortableText } from '~/lib/sanity';
 import siteText from '~/locale/index';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
 } from '~/static-props/get-data';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
-import { CollapsibleList } from '~/types/cms';
+import { CollapsibleList, RichContentBlock } from '~/types/cms';
 import { getSkipLinkId } from '~/utils/skipLinks';
 import styles from './over.module.scss';
 
 interface VerantwoordingData {
   title: string | null;
-  description: unknown[] | null;
+  description: RichContentBlock[] | null;
   collapsibleList: CollapsibleList[];
 }
 
+const query = `
+*[_type == 'cijferVerantwoording']{
+  ...,
+  "description": {
+    "_type": description._type,
+    "nl": [
+      ...description.nl[]
+      {
+        ...,
+        "asset": asset->
+       },
+    ],
+    "en": [
+      ...description.en[]
+      {
+        ...,
+        "asset": asset->
+       },
+    ],
+  },
+  "collapsibleList": [...collapsibleList[]
+    {
+      ...,
+                
+      "content": {
+        ...content,
+        "nl": [...content.nl[]
+          {
+            ...,
+            "asset": asset->
+           },
+        ],
+        "en": [...content.en[]
+          
+          {
+            ...,
+            "asset": asset->
+           },
+        ],
+      }
+  }]
+}[0]
+`;
+
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  createGetContent<VerantwoordingData>(groq`
-    *[_type == 'cijferVerantwoording'][0]
-  `)
+  createGetContent<VerantwoordingData>(query)
 );
 
 const Verantwoording: FCWithLayout<typeof getStaticProps> = (props) => {
@@ -51,17 +92,17 @@ const Verantwoording: FCWithLayout<typeof getStaticProps> = (props) => {
           <div className={styles.maxwidth}>
             {content.title && <h2>{content.title}</h2>}
             {content.description && (
-              <PortableText blocks={content.description} />
+              <RichContent blocks={content.description} />
             )}
             {content.collapsibleList && (
-              <article className={styles.faqList}>
+              <article>
                 {content.collapsibleList.map((item) => {
                   const id = getSkipLinkId(item.title);
-                  return (
+                  return item.content ? (
                     <Collapsible key={id} id={id} summary={item.title}>
-                      <PortableText blocks={item.content} />
+                      {item.content && <RichContent blocks={item.content} />}
                     </Collapsible>
-                  );
+                  ) : null;
                 })}
               </article>
             )}

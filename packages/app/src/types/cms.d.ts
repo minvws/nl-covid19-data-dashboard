@@ -1,12 +1,95 @@
+import { PortableTextEntry } from '@sanity/block-content-to-react';
+
 export type CollapsibleList = {
-  content: {
-    _key: string;
-    _type: string;
-    content: unknown[] | null;
-    title: string | null;
-  };
+  content: RichContentBlock[] | null;
   title: string;
 };
+
+export interface SanityFileProps {
+  assetId: string;
+  extension: string;
+}
+
+export interface SanityImageProps {
+  assetId: string;
+  extension: string;
+  metadata: {
+    dimensions: {
+      aspectRatio: number;
+      width: number;
+      height: number;
+    };
+  };
+}
+
+export interface InlineAttachment {
+  _type: 'inlineAttachment';
+  asset: SanityFileProps;
+}
+
+export type Editorial = Record<string, never> & Article;
+
+export interface Article {
+  title: string;
+  slug: {
+    _key: string;
+    _type: 'slug';
+    current: string;
+  };
+  cover: ImageBlock;
+  summary: Block;
+  intro: RichContentBlock[];
+  content: RichContentBlock[];
+  metaDescription: string;
+  publicationDate: string;
+  isHighlighted: boolean;
+}
+
+export interface ImageBlock {
+  _type: 'image';
+  asset: SanityImageProps;
+  alt: string;
+  crop?: {
+    _type: 'sanity.imageCrop';
+    top: string;
+    right: string;
+    bottom: string;
+    left: string;
+  };
+  hotspot?: {
+    _type: 'sanity.imageHotspot';
+    height: number;
+    width: number;
+    x: number;
+    y: number;
+  };
+}
+
+type RichContentBlock =
+  | Block
+  | RichContentImageBlock
+  | RichContentLineChartBlock;
+
+// @TODO more properties are needed
+interface Block {
+  _key: string;
+  _type: string;
+  children: PortableTextEntry[];
+}
+
+// @TODO more properties are needed
+interface RichContentImageBlock extends ImageBlock {
+  isFullWidth?: boolean;
+  caption?: string;
+}
+
+// @TODO more properties are needed
+interface RichContentLineChartBlock {
+  _key: string;
+  _type: 'lineChart';
+  metricName: string;
+  metricProperty: string;
+}
 
 export type RoadmapData = {
   _createdAt: string;
@@ -43,7 +126,7 @@ export type LockdownData = {
   showLockdown: boolean;
   message: {
     title: string;
-    description: unknown[] | null;
+    description: RichContentBlock[] | null;
   };
   title: string;
 };

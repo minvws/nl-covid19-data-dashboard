@@ -1,10 +1,7 @@
 import { Municipal, National, Regionaal } from '~/types';
 
 export function sortNationalTimeSeriesInDataInPlace(data: National) {
-  const timeSeriesPropertyNames = getTimeSeriesPropertyNames(data).filter(
-    // restrictions doesn't have any timeseries so needs to be removed from this list
-    (propertyName) => propertyName !== 'restrictions'
-  );
+  const timeSeriesPropertyNames = getTimeSeriesPropertyNames(data);
 
   for (const propertyName of timeSeriesPropertyNames) {
     if (isWhitelistedProperty(propertyName)) {
@@ -17,10 +14,7 @@ export function sortNationalTimeSeriesInDataInPlace(data: National) {
 }
 
 export function sortRegionalTimeSeriesInDataInPlace(data: Regionaal) {
-  const timeSeriesPropertyNames = getTimeSeriesPropertyNames(data).filter(
-    // restrictions doesn't have any timeseries so needs to be removed from this list
-    (propertyName) => propertyName !== 'restrictions'
-  );
+  const timeSeriesPropertyNames = getTimeSeriesPropertyNames(data);
 
   for (const propertyName of timeSeriesPropertyNames) {
     if (isWhitelistedProperty(propertyName)) {
@@ -152,5 +146,5 @@ function isWeekTimestamped(
 }
 
 function isWhitelistedProperty(propertyName: string) {
-  return ['restrictions', 'deceased_rivm_per_age_group'].includes(propertyName);
+  return ['deceased_rivm_per_age_group'].includes(propertyName);
 }

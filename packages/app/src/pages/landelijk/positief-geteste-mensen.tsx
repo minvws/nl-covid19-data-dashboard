@@ -1,3 +1,4 @@
+import { NationalTestedPerAgeGroup } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -8,6 +9,8 @@ import {
   formatAgeGroupRange,
 } from '~/components-styled/age-demographic';
 import { Anchor } from '~/components-styled/anchor';
+import { ArticleStrip } from '~/components-styled/article-strip';
+import { ArticleSummary } from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
 import { RegionControlOption } from '~/components-styled/chart-region-controls';
 import { ChartTile } from '~/components-styled/chart-tile';
@@ -17,6 +20,7 @@ import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { PageBarScale } from '~/components-styled/page-barscale';
+import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
@@ -27,18 +31,18 @@ import { createSelectMunicipalHandler } from '~/components/choropleth/select-han
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
 import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/create-positive-tested-people-regional-tooltip';
-import { SEOHead } from '~/components/seoHead';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
+import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
+  createGetContent,
   getLastGeneratedDate,
   getNlData,
   getText,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
-import { NationalTestedPerAgeGroup } from '@corona-dashboard/common';
 import { assert } from '~/utils/assert';
 import {
   formatDateFromMilliseconds,
@@ -55,13 +59,17 @@ export const getStaticProps = createGetStaticProps(
   createGetChoroplethData({
     gm: ({ tested_overall }) => ({ tested_overall }),
     vr: ({ tested_overall }) => ({ tested_overall }),
-  })
+  }),
+  createGetContent<{
+    articles?: ArticleSummary[];
+  }>(createPageArticlesQuery('positiveTestsPage'))
 );
 
 const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
   data,
   choropleth,
   text: siteText,
+  content,
 }) => {
   const text = siteText.positief_geteste_personen;
   const ggdText = siteText.positief_geteste_personen_ggd;
@@ -102,6 +110,8 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
           }}
           reference={text.reference}
         />
+
+        <ArticleStrip articles={content.articles} />
 
         <TwoKpiSection>
           <KpiTile
@@ -195,9 +205,12 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
               metricName="tested_overall"
               metricProperty="infected_per_100k"
               tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
-                createSelectMunicipalHandler(router)
+                createSelectMunicipalHandler(router, 'positief-geteste-mensen')
               )}
-              onSelect={createSelectMunicipalHandler(router)}
+              onSelect={createSelectMunicipalHandler(
+                router,
+                'positief-geteste-mensen'
+              )}
             />
           )}
           {selectedMap === 'region' && (

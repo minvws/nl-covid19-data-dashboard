@@ -4,9 +4,8 @@ import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import { Heading } from '~/components-styled/typography';
 import { KpiSection } from '~/components-styled/kpi-section';
-import { LockdownTable } from '~/components/restrictions/lockdown-table';
-import { PortableText } from '~/lib/sanity';
-import { SEOHead } from '~/components/seoHead';
+import { LockdownTable } from '~/domain/restrictions/lockdown-table';
+import { SEOHead } from '~/components-styled/seo-head';
 import { Box } from '~/components-styled/base/box';
 import { TileList } from '~/components-styled/tile-list';
 import Maatregelen from '~/assets/maatregelen.svg';
@@ -19,24 +18,48 @@ import {
 } from '~/static-props/get-data';
 // import { useEscalationLevel } from '~/utils/use-escalation-level';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
-import { groq } from 'next-sanity';
 import { LockdownData, RoadmapData } from '~/types/cms';
 import theme from '~/style/theme';
+import { RichContent } from '~/components-styled/cms/rich-content';
 
 type MaatregelenData = {
   lockdown: LockdownData;
   roadmap?: RoadmapData;
 };
 
+const query = `
+{
+  'lockdown': *[_type == 'lockdown']{
+    ...,
+    "message": {
+      ...message,
+      "description": {
+        ...message.description,
+        "nl": [
+          ...message.description.nl[]
+          {
+            ...,
+            "asset": asset->
+          },
+        ],
+        "en": [
+          ...message.description.en[]
+          {
+            ...,
+            "asset": asset->
+          },
+        ],
+      },
+    }
+  }[0],
+  // We will need the roadmap when lockdown is disabled in the CMS.
+  // 'roadmap': *[_type == 'roadmap'][0]
+}`;
+
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   getNlData,
-  createGetContent<MaatregelenData>(groq`
-    {
-      'lockdown': *[_type == 'lockdown'][0],
-      // We will need the roadmap when lockdown is disabled in the CMS.
-      // 'roadmap': *[_type == 'roadmap'][0]
-    }`)
+  createGetContent<MaatregelenData>(query)
 );
 
 const NationalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
@@ -75,7 +98,9 @@ const NationalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
               })}
             >
               <Heading level={3}>{lockdown.message.title}</Heading>
-              <PortableText blocks={lockdown.message.description} />
+              {lockdown.message.description ? (
+                <RichContent blocks={lockdown.message.description} />
+              ) : null}
             </Box>
           </KpiSection>
         )}

@@ -25,12 +25,6 @@ export function AgeDemographicTooltipContent<
         })}
       </Text>
       <Legend>
-        <LegendItem color="data.neutral">
-          <b>{formatPercentage(value.age_group_percentage * 100)}%</b>{' '}
-          {replaceVariablesInText(text.age_group_percentage_tooltip, {
-            ageGroupRange: formatAgeGroupRange(value.age_group_range),
-          })}
-        </LegendItem>
         <LegendItem color="data.primary">
           <b>
             {formatPercentage(
@@ -39,6 +33,12 @@ export function AgeDemographicTooltipContent<
             %
           </b>{' '}
           {replaceVariablesInText(text.value_percentage_tooltip, {
+            ageGroupRange: formatAgeGroupRange(value.age_group_range),
+          })}
+        </LegendItem>
+        <LegendItem color="data.neutral">
+          <b>{formatPercentage(value.age_group_percentage * 100)}%</b>{' '}
+          {replaceVariablesInText(text.age_group_percentage_tooltip, {
             ageGroupRange: formatAgeGroupRange(value.age_group_range),
           })}
         </LegendItem>

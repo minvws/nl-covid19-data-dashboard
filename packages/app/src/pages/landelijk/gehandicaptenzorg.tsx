@@ -14,7 +14,7 @@ import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createDisablityInfectedLocationsRegionalTooltip } from '~/components/choropleth/tooltips/region/create-disability-infected-locations-regional-tooltip';
-import { SEOHead } from '~/components/seoHead';
+import { SEOHead } from '~/components-styled/seo-head';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import siteText from '~/locale/index';
@@ -82,6 +82,9 @@ const DisabilityCare: FCWithLayout<typeof getStaticProps> = (props) => {
             <KpiValue
               data-cy="newly_infected_people"
               absolute={lastValue.newly_infected_people}
+              difference={
+                data.difference.disability_care__newly_infected_people
+              }
             />
           </KpiTile>
         </TwoKpiSection>
@@ -125,6 +128,9 @@ const DisabilityCare: FCWithLayout<typeof getStaticProps> = (props) => {
               data-cy="infected_locations_total"
               absolute={lastValue.infected_locations_total}
               percentage={lastValue.infected_locations_percentage}
+              difference={
+                data.difference.disability_care__infected_locations_total
+              }
             />
             <Text>{infectedLocationsText.kpi_toelichting}</Text>
           </KpiTile>

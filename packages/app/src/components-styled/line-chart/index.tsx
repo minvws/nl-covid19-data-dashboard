@@ -46,6 +46,8 @@ export type LineConfig<T extends Value> = {
   metricProperty: NumberProperty<T>;
   color?: string;
   style?: 'solid' | 'dashed';
+  areaFillOpacity?: number;
+  strokeWidth?: number;
   legendLabel?: string;
   legendShape?: LegendShape;
 };
@@ -69,7 +71,7 @@ export type LineChartProps<T extends Value> = {
   showLegend?: boolean;
   legendItems?: LegendItem[];
   componentCallback?: ComponentCallbackFunction;
-  uniqueId?: string;
+  ariaLabelledBy?: string;
 };
 
 export function LineChart<T extends Value>({
@@ -96,7 +98,7 @@ export function LineChart<T extends Value>({
       }))
     : undefined,
   componentCallback,
-  uniqueId,
+  ariaLabelledBy,
 }: LineChartProps<T>) {
   const {
     tooltipData,
@@ -139,17 +141,11 @@ export function LineChart<T extends Value>({
   const yDomain = useMemo(() => [0, yMax], [yMax]);
 
   const padding: ChartPadding = useMemo(() => {
-    const { top, right, bottom, left } = {
-      ...defaultPadding,
-      ...overridePadding,
-    };
-
     return {
-      top,
-      right,
-      bottom,
+      ...defaultPadding,
       // Increase space for larger labels
-      left: Math.max(yMax.toFixed(0).length * 10, left),
+      left: Math.max(yMax.toFixed(0).length * 10, defaultPadding.left),
+      ...overridePadding,
     };
   }, [overridePadding, yMax]);
 
@@ -266,7 +262,7 @@ export function LineChart<T extends Value>({
     [bisect, trendsList, linesConfig, toggleHoverElements]
   );
 
-  const renderAxes = useCallback(
+  const renderTrendLines = useCallback(
     (x: ChartScales) => (
       <>
         {trendsList.map((trend, index) => (
@@ -274,6 +270,8 @@ export function LineChart<T extends Value>({
             key={index}
             trend={trend}
             type={hideFill ? 'line' : 'area'}
+            areaFillOpacity={linesConfig[index].areaFillOpacity}
+            strokeWidth={linesConfig[index].strokeWidth}
             style={linesConfig[index].style}
             xScale={x.xScale}
             yScale={x.yScale}
@@ -314,9 +312,9 @@ export function LineChart<T extends Value>({
           onHover={handleHover}
           benchmark={benchmark}
           componentCallback={componentCallback}
-          uniqueId={uniqueId}
+          ariaLabelledBy={ariaLabelledBy}
         >
-          {renderAxes}
+          {renderTrendLines}
         </ChartAxes>
 
         {isDefined(tooltipData) && (

@@ -1,18 +1,30 @@
 import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
-import { UrlObject } from 'url';
 import ArrowIcon from '~/assets/arrow.svg';
 import { Box } from '~/components-styled/base';
 import { MaxWidth } from '~/components-styled/max-width';
 import siteText from '~/locale/index';
-import { Link } from '~/utils/link';
+import { LinkWithIcon } from '../link-with-icon';
 
 interface AppContentProps {
   children: React.ReactNode;
   sidebarComponent: React.ReactNode;
   searchComponent?: React.ReactNode;
   hideMenuButton?: boolean;
+}
+
+function getMenuOpenText(pathname: string) {
+  if (pathname.startsWith('/landelijk')) {
+    return siteText.nav.terug_naar_alle_cijfers_homepage;
+  }
+  if (pathname.startsWith('/veiligheidsregio')) {
+    return siteText.nav.terug_naar_alle_cijfers_veiligheidsregio;
+  }
+  if (pathname.startsWith('/gemeente')) {
+    return siteText.nav.terug_naar_alle_cijfers_gemeente;
+  }
+  return siteText.nav.terug_naar_alle_cijfers;
 }
 
 export function AppContent({
@@ -33,14 +45,30 @@ export function AppContent({
    * but it's good enough for now I guess
    */
   const isMenuOpen =
-    (router.pathname === '/' && !('menu' in router.query)) ||
-    router.query.menu === '1';
+    router.pathname == '/landelijk' || router.query.menu === '1';
+
+  const menuOpenText = getMenuOpenText(router.pathname);
 
   return (
     <MaxWidth px={[0, 0, 0, 0, 3]}>
       <AppContentContainer>
         {!hideMenuButton && (
-          <MenuButton href={menuOpenUrl} isVisible={!isMenuOpen} />
+          <MenuLinkContainer
+            isVisible={!isMenuOpen}
+            css={css({
+              background: 'white',
+              padding: '1em',
+              boxShadow: 'tile',
+              position: 'relative',
+            })}
+          >
+            <LinkWithIcon
+              icon={<ArrowIcon css={css({ transform: 'rotate(90deg)' })} />}
+              href={menuOpenUrl}
+            >
+              {menuOpenText}
+            </LinkWithIcon>
+          </MenuLinkContainer>
         )}
 
         <StyledSidebar>
@@ -58,13 +86,27 @@ export function AppContent({
             <ResponsiveVisible isVisible={!isMenuOpen}>
               {children}
             </ResponsiveVisible>
-            <MenuLink href={menuOpenUrl} isVisible={!isMenuOpen} />
+            <MenuLinkContainer isVisible={!isMenuOpen && !hideMenuButton}>
+              <LinkWithIcon
+                icon={<ArrowIcon css={css({ transform: 'rotate(90deg)' })} />}
+                href={menuOpenUrl}
+              >
+                {menuOpenText}
+              </LinkWithIcon>
+            </MenuLinkContainer>
           </Box>
         </StyledAppContent>
       </AppContentContainer>
     </MaxWidth>
   );
 }
+
+const MenuLinkContainer = styled(Box)<{ isVisible: boolean }>((x) =>
+  css({
+    px: [3, null, 0],
+    display: [x.isVisible ? 'block' : 'none', null, null, 'none'],
+  })
+);
 
 const AppContentContainer = styled.div(
   css({
@@ -108,94 +150,3 @@ const ResponsiveVisible = styled.div<{ isVisible: boolean }>((x) =>
     },
   })
 );
-
-function MenuButton({
-  href,
-  className,
-  isVisible,
-}: {
-  className?: string;
-  href: UrlObject | string;
-  isVisible: boolean;
-}) {
-  const router = useRouter();
-  return (
-    <Link href={href} passHref>
-      <StyledMenuButton className={className} isVisible={isVisible}>
-        <Arrow />
-        {router.pathname === '/'
-          ? siteText.nav.terug_naar_alle_cijfers_homepage
-          : siteText.nav.terug_naar_alle_cijfers}
-      </StyledMenuButton>
-    </Link>
-  );
-}
-
-function MenuLink({
-  href,
-  isVisible,
-}: {
-  href: UrlObject | string;
-  isVisible: boolean;
-}) {
-  const router = useRouter();
-  return (
-    <Link href={href} passHref>
-      <a
-        css={css({
-          px: [2, null, 0],
-          display: [isVisible ? 'block' : 'none', null, null, 'none'],
-        })}
-      >
-        <Arrow />
-        {router.pathname === '/'
-          ? siteText.nav.terug_naar_alle_cijfers_homepage
-          : siteText.nav.terug_naar_alle_cijfers}
-      </a>
-    </Link>
-  );
-}
-
-const StyledMenuButton = styled.a<{ isVisible: boolean }>((x) =>
-  css({
-    background: 'white',
-    width: '100%',
-    padding: '1em',
-    boxShadow: 'tile',
-    position: 'relative',
-    zIndex: '4',
-    textDecoration: 'none',
-
-    '&.backButtonFooter': {
-      background: 'none',
-      boxShadow: 'none',
-    },
-
-    '&:hover, &:focus': {
-      textDecoration: 'underline',
-    },
-
-    display: [x.isVisible ? 'block' : 'none', null, null, 'none'],
-
-    '.has-no-js &': {
-      display: 'none',
-    },
-  })
-);
-
-function Arrow() {
-  return (
-    <span
-      css={css({
-        svg: {
-          height: '10px',
-          width: '16px',
-          transform: 'rotate(90deg)',
-          marginRight: '0.7em',
-        },
-      })}
-    >
-      <ArrowIcon />
-    </span>
-  );
-}

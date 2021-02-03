@@ -5,7 +5,7 @@ import { Tile } from '~/components-styled/tile';
 import { Heading } from '~/components-styled/typography';
 import { Link } from '~/utils/link';
 import { ExternalLink } from './external-link';
-
+import { colors } from '~/style/theme';
 interface AnchorTileProps {
   title: string;
   href: string;
@@ -91,9 +91,9 @@ const LinkContainer = styled.div(
     alignItems: 'center',
     justifyContent: ['center', 'center', null],
     border: 0,
-    borderTop: ['1px solid #c4c4c4', null, null, null, 'none'],
+    borderTop: [`1px solid ${colors.silver}`, null, null, null, 'none'],
     borderLeft: [null, null, null, null, '1px solid'],
-    borderLeftColor: [null, null, null, null, '#c4c4c4'],
+    borderLeftColor: [null, null, null, null, colors.silver],
     pt: [3, 3, 3, 3, null],
     pl: [null, null, null, null, 4],
     ml: [null, null, null, null, 4],

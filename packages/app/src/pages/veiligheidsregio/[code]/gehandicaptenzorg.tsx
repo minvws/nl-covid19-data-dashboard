@@ -8,7 +8,7 @@ import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
-import { SEOHead } from '~/components/seoHead';
+import { SEOHead } from '~/components-styled/seo-head';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import siteText from '~/locale/index';
@@ -52,6 +52,9 @@ const DisabilityCare: FCWithLayout<typeof getStaticProps> = (props) => {
       <TileList>
         <ContentHeader
           category={siteText.veiligheidsregio_layout.headings.kwetsbare_groepen}
+          screenReaderCategory={
+            siteText.verpleeghuis_besmette_locaties.titel_sidebar
+          }
           title={replaceVariablesInText(positiveTestPeopleText.titel, {
             safetyRegion: safetyRegionName,
           })}
@@ -83,6 +86,9 @@ const DisabilityCare: FCWithLayout<typeof getStaticProps> = (props) => {
             <KpiValue
               data-cy="newly_infected_people"
               absolute={lastValue.newly_infected_people}
+              difference={
+                data.difference.disability_care__newly_infected_people
+              }
             />
           </KpiTile>
         </TwoKpiSection>
@@ -128,6 +134,9 @@ const DisabilityCare: FCWithLayout<typeof getStaticProps> = (props) => {
               data-cy="infected_locations_total"
               absolute={lastValue.infected_locations_total}
               percentage={lastValue.infected_locations_percentage}
+              difference={
+                data.difference.disability_care__infected_locations_total
+              }
             />
             <Text>{locationsText.kpi_toelichting}</Text>
           </KpiTile>

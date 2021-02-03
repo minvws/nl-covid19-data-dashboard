@@ -4,18 +4,16 @@ import Maatregelen from '~/assets/maatregelen.svg';
 import { AnchorTile } from '~/components-styled/anchor-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiSection } from '~/components-styled/kpi-section';
-import { LockdownTable } from '~/components/restrictions/lockdown-table';
-import { PortableText } from '~/lib/sanity';
+import { LockdownTable } from '~/domain/restrictions/lockdown-table';
 import { TileList } from '~/components-styled/tile-list';
 import { Heading } from '~/components-styled/typography';
 // import { EscalationLevel } from '~/components/restrictions/type';
-import { SEOHead } from '~/components/seoHead';
+import { SEOHead } from '~/components-styled/seo-head';
 import { Box } from '~/components-styled/base/box';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import siteText from '~/locale/index';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
-import { groq } from 'next-sanity';
 import { LockdownData, RoadmapData } from '~/types/cms';
 
 import {
@@ -25,6 +23,7 @@ import {
 } from '~/static-props/get-data';
 import theme from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { RichContent } from '~/components-styled/cms/rich-content';
 // import { useEscalationLevel } from '~/utils/use-escalation-level';
 
 export { getStaticPaths } from '~/static-paths/vr';
@@ -34,15 +33,39 @@ type MaatregelenData = {
   roadmap?: RoadmapData;
 };
 
+const query = `
+{
+  'lockdown': *[_type == 'lockdown']{
+    ...,
+    "message": {
+      ...message,
+      "description": {
+        ...message.description,
+        "nl": [
+          ...message.description.nl[]
+          {
+            ...,
+            "asset": asset->
+          },
+        ],
+        "en": [
+          ...message.description.en[]
+          {
+            ...,
+            "asset": asset->
+          },
+        ],
+      },
+    }
+  }[0],
+  // We will need the roadmap when lockdown is disabled in the CMS.
+  // 'roadmap': *[_type == 'roadmap'][0]
+}`;
+
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   getVrData,
-  createGetContent<MaatregelenData>(groq`
-  {
-    'lockdown': *[_type == 'lockdown'][0],
-    // We will need the roadmap when lockdown is disabled in the CMS.
-    // 'roadmap': *[_type == 'roadmap'][0]
-  }`)
+  createGetContent<MaatregelenData>(query)
 );
 
 const text = siteText.veiligheidsregio_maatregelen;
@@ -101,7 +124,9 @@ const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
               })}
             >
               <Heading level={3}>{lockdown.message.title}</Heading>
-              <PortableText blocks={lockdown.message.description} />
+              {lockdown.message.description ? (
+                <RichContent blocks={lockdown.message.description} />
+              ) : null}
             </Box>
           </KpiSection>
         )}

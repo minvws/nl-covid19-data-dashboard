@@ -1,26 +1,47 @@
-import { groq } from 'next-sanity';
 import Head from 'next/head';
+import { RichContent } from '~/components-styled/cms/rich-content';
 import { MaxWidth } from '~/components-styled/max-width';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
-import { PortableText } from '~/lib/sanity';
 import siteText from '~/locale/index';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
 } from '~/static-props/get-data';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import { RichContentBlock } from '~/types/cms';
 import styles from './over.module.scss';
 
 interface OverData {
   title: string | null;
-  description: unknown[] | null;
+  description: RichContentBlock[] | null;
 }
+
+const query = `
+*[_type == 'overDitDashboard']{
+  ...,
+  "description": {
+    "_type": description._type,
+    "nl": [
+      ...description.nl[]
+      {
+        ...,
+        "asset": asset->
+       },
+    ],
+    "en": [
+      ...description.en[]
+      {
+        ...,
+        "asset": asset->
+       },
+    ],
+  }
+}[0]
+`;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  createGetContent<OverData>(groq`
-    *[_type == 'overDitDashboard'][0]
-  `)
+  createGetContent<OverData>(query)
 );
 
 const Over: FCWithLayout<typeof getStaticProps> = (props) => {
@@ -47,7 +68,7 @@ const Over: FCWithLayout<typeof getStaticProps> = (props) => {
           <div className={styles.maxwidth}>
             {content.title && <h2>{content.title}</h2>}
             {content.description && (
-              <PortableText blocks={content.description} />
+              <RichContent blocks={content.description} />
             )}
           </div>
         </MaxWidth>

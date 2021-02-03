@@ -21,6 +21,7 @@ import {
   MunicipalityProperties,
 } from '@corona-dashboard/common';
 import { countryGeo, municipalGeo, regionGeo } from './topology';
+import { colors } from '~/style/theme';
 
 type MunicipalityChoroplethProps<T, K extends MunicipalitiesMetricName> = {
   data: Pick<Municipalities, K>;
@@ -117,7 +118,7 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
                  */
                 isInSameRegion
                 ? '#fff'
-                : '#c4c4c4'
+                : colors.silver
               : '#fff'
           }
           strokeWidth={0.5}
@@ -126,6 +127,8 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
     },
     [getFillColor, hasData, safetyRegionMunicipalCodes, selected]
   );
+
+  const hasSelectHander = !!onSelect;
 
   const hoverCallback = useCallback(
     (feature: Feature<MultiPolygon, MunicipalityProperties>, path: string) => {
@@ -140,7 +143,8 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
 
       return (
         <Path
-          hoverable
+          isHoverable
+          isClickable={hasSelectHander}
           id={gemcode}
           key={gemcode}
           d={path}
@@ -149,7 +153,13 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
         />
       );
     },
-    [selected, highlightSelection, safetyRegionMunicipalCodes, hasData]
+    [
+      selected,
+      highlightSelection,
+      safetyRegionMunicipalCodes,
+      hasData,
+      hasSelectHander,
+    ]
   );
 
   const onClick = (id: string) => {
