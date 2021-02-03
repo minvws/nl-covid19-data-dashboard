@@ -1331,6 +1331,12 @@
         "text": "RIVM",
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/8a72d78a-fcf8-4882-b0ab-cd594961a267?tab=relations"
       }
+    },
+    "corona_app": {
+      "header": {
+        "title": "Gebruik CoronaMelder app",
+        "description": "Introductietekst die aangeeft........"
+      }
     }
   },
   "regionaal_gedrag": {

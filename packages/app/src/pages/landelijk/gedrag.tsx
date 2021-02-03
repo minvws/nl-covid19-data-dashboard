@@ -111,6 +111,23 @@ const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
         <BehaviorChoroplethTile data={choropleth.vr} />
 
         <MoreInformation />
+
+        <ContentHeader
+          category={siteText.nationaal_layout.headings.gedrag}
+          title={text.pagina.titel}
+          icon={<Gedrag />}
+          subtitle={text.pagina.toelichting}
+          metadata={{
+            datumsText: text.datums,
+            dateOrRange: {
+              start: behaviorData.last_value.date_start_unix,
+              end: behaviorData.last_value.date_end_unix,
+            },
+            dateOfInsertionUnix: behaviorData.last_value.date_of_insertion_unix,
+            dataSources: [text.bronnen.rivm],
+          }}
+          reference={text.reference}
+        />
       </TileList>
     </>
   );

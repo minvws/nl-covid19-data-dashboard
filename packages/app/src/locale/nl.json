@@ -1333,6 +1333,12 @@
       }
     }
   },
+  "corona_app": {
+    "header": {
+      "title": "Gebruik CoronaMelder app",
+      "description": "Introductietekst die aangeeft........"
+    }
+  },
   "regionaal_gedrag": {
     "metadata": {
       "title": "Naleving en Draagvlak | Dashboard Coronavirus | Rijksoverheid.nl",
