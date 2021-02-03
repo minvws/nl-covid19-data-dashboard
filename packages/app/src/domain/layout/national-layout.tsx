@@ -1,3 +1,4 @@
+import { National } from '@corona-dashboard/common';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Arts from '~/assets/arts.svg';
@@ -5,12 +6,12 @@ import ElderlyIcon from '~/assets/elderly.svg';
 import Gedrag from '~/assets/gedrag.svg';
 import Gehandicaptenzorg from '~/assets/gehandicapte-zorg.svg';
 import Maatregelen from '~/assets/maatregelen.svg';
-import Notification from '~/assets/notification.svg';
 import ReproIcon from '~/assets/reproductiegetal.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
 import VirusIcon from '~/assets/virus.svg';
+import VaccinatieIcon from '~/assets/vaccinaties.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import Ziektegolf from '~/assets/ziektegolf.svg';
 import {
@@ -18,17 +19,22 @@ import {
   Menu,
   MetricMenuItemLink,
 } from '~/components-styled/aside/menu';
+import { AppContent } from '~/components-styled/layout/app-content';
 import { SidebarMetric } from '~/components-styled/sidebar-metric';
 import { Layout } from '~/domain/layout/layout';
-import { AppContent } from '~/components-styled/layout/app-content';
 import siteText from '~/locale/index';
-import { NationalPageProps } from '~/static-props/nl-data';
 import theme from '~/style/theme';
 import { useBreakpoints } from '~/utils/useBreakpoints';
+import { Box } from '~/components-styled/base';
+interface NationalLayoutProps {
+  lastGenerated: string;
+  data: National;
+  children?: React.ReactNode;
+}
 
 export function getNationalLayout(
   page: React.ReactNode,
-  pageProps: NationalPageProps
+  pageProps: NationalLayoutProps
 ) {
   return (
     <Layout
@@ -39,11 +45,6 @@ export function getNationalLayout(
     </Layout>
   );
 }
-
-interface NationalLayoutProps extends NationalPageProps {
-  children: React.ReactNode;
-}
-
 /**
  * NationalLayout is a composition of persistent layouts.
  *
@@ -66,7 +67,7 @@ function NationalLayout(props: NationalLayoutProps) {
   const breakpoints = useBreakpoints();
 
   const isMenuOpen =
-    (router.pathname === '/' && !('menu' in router.query)) ||
+    (router.pathname === '/landelijk' && !('menu' in router.query)) ||
     router.query.menu === '1';
 
   return (
@@ -95,26 +96,37 @@ function NationalLayout(props: NationalLayoutProps) {
             role="navigation"
           >
             <Menu>
-              <CategoryMenu title={siteText.nationaal_layout.headings.algemeen}>
+              <Box spacing={3} pt={4}>
                 <MetricMenuItemLink
                   href={{
-                    pathname: '/',
+                    pathname: '/landelijk/maatregelen',
                     query: breakpoints.md
                       ? {} // only add menu flags on narrow devices
                       : isMenuOpen
                       ? { menu: '0' }
                       : { menu: '1' },
                   }}
-                  icon={<Notification color={theme.colors.notification} />}
-                  title={siteText.laatste_ontwikkelingen.title}
-                  subtitle={siteText.laatste_ontwikkelingen.menu_subtitle}
-                />
-                <MetricMenuItemLink
-                  href="/landelijk/maatregelen"
                   icon={<Maatregelen fill={theme.colors.restrictions} />}
                   title={siteText.nationaal_maatregelen.titel_sidebar}
                   subtitle={siteText.nationaal_maatregelen.subtitel_sidebar}
                 />
+              </Box>
+              <CategoryMenu
+                title={siteText.nationaal_layout.headings.vaccinaties}
+              >
+                <MetricMenuItemLink
+                  href="/landelijk/vaccinaties"
+                  icon={<VaccinatieIcon />}
+                  title={siteText.vaccinaties.titel_sidebar}
+                >
+                  <SidebarMetric
+                    data={siteText.vaccinaties.data}
+                    scope="nl"
+                    metricName="sidebar"
+                    metricProperty="total_vaccinated"
+                    localeTextKey="vaccinaties"
+                  />
+                </MetricMenuItemLink>
               </CategoryMenu>
               <CategoryMenu
                 title={siteText.nationaal_layout.headings.besmettingen}
@@ -181,6 +193,7 @@ function NationalLayout(props: NationalLayoutProps) {
                     metricName="deceased_rivm"
                     metricProperty="covid_daily"
                     localeTextKey="sterfte"
+                    differenceKey="deceased_rivm__covid_daily"
                   />
                 </MetricMenuItemLink>
               </CategoryMenu>
@@ -203,9 +216,9 @@ function NationalLayout(props: NationalLayoutProps) {
                     data={data}
                     scope="nl"
                     metricName="hospital_nice"
-                    metricProperty="admissions_moving_average"
+                    metricProperty="admissions_on_date_of_reporting"
                     localeTextKey="ziekenhuisopnames_per_dag"
-                    differenceKey="hospital_nice__admissions_moving_average"
+                    differenceKey="hospital_nice__admissions_on_date_of_reporting"
                     showBarScale={true}
                   />
                 </MetricMenuItemLink>
@@ -257,6 +270,7 @@ function NationalLayout(props: NationalLayoutProps) {
                     metricName="disability_care"
                     metricProperty="newly_infected_people"
                     localeTextKey="gehandicaptenzorg_positief_geteste_personen"
+                    differenceKey="disability_care__newly_infected_people"
                   />
                 </MetricMenuItemLink>
 
@@ -271,6 +285,7 @@ function NationalLayout(props: NationalLayoutProps) {
                     metricName="elderly_at_home"
                     metricProperty="positive_tested_daily"
                     localeTextKey="thuiswonende_ouderen"
+                    differenceKey="elderly_at_home__positive_tested_daily"
                   />
                 </MetricMenuItemLink>
               </CategoryMenu>

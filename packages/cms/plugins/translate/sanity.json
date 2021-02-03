@@ -1,0 +1,12 @@
+{
+  "parts": [
+    {
+      "implements": "part:@sanity/desk-tool/filter-fields-fn",
+      "path": "./filter-fields"
+    },
+    {
+      "implements": "part:@sanity/desk-tool/language-select-component",
+      "path": "./select-language-provider.js"
+    }
+  ]
+}

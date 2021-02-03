@@ -1,5 +1,7 @@
 import { useMemo, useState } from 'react';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
+import { ArticleStrip } from '~/components-styled/article-strip';
+import { ArticleSummary } from '~/components-styled/article-teaser';
 import { BarChart } from '~/components-styled/bar-chart/bar-chart';
 import { Box } from '~/components-styled/base';
 import {
@@ -10,18 +12,20 @@ import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { Select } from '~/components-styled/select';
+import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
+import { SewerWaterChart } from '~/components/lineChart/sewer-water-chart';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
-import { SewerWaterChart } from '~/components/lineChart/sewer-water-chart';
-import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
+import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
-  getSafetyRegionPaths,
-  getSafetyRegionStaticProps,
-  ISafetyRegionData,
-} from '~/static-props/safetyregion-data';
+  createGetContent,
+  getLastGeneratedDate,
+  getVrData,
+} from '~/static-props/get-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import {
   getInstallationNames,
@@ -30,10 +34,21 @@ import {
   getSewerWaterScatterPlotData,
 } from '~/utils/sewer-water/safety-region-sewer-water.util';
 
-const text = siteText.veiligheidsregio_rioolwater_metingen;
+export { getStaticPaths } from '~/static-paths/vr';
 
-const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
-  const { data, safetyRegionName } = props;
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getVrData,
+  createGetContent<{
+    articles?: ArticleSummary[];
+  }>(createPageArticlesQuery('sewerPage'))
+);
+
+const text = siteText.veiligheidsregio_rioolwater_metingen;
+const graphDescriptions = siteText.accessibility.grafieken;
+
+const SewerWater: FCWithLayout<typeof getStaticProps> = (props) => {
+  const { data, safetyRegionName, content } = props;
 
   const {
     lineChartData,
@@ -53,7 +68,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
 
   const [selectedInstallation, setSelectedInstallation] = useState<
     string | undefined
-  >();
+  >(sewerStationNames.length === 1 ? sewerStationNames[0] : undefined);
 
   return (
     <>
@@ -85,6 +100,8 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
           }}
           reference={text.reference}
         />
+
+        <ArticleStrip articles={content.articles} />
 
         <TwoKpiSection>
           <KpiTile
@@ -129,9 +146,9 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
         {lineChartData && (
           <ChartTileWithTimeframe
             title={text.linechart_titel}
+            ariaDescription={graphDescriptions.rioolwater_meetwaarde}
             metadata={{ source: text.bronnen.rivm }}
             timeframeOptions={['all', '5weeks']}
-            timeframeInitialValue="all"
           >
             {(timeframe) => (
               <>
@@ -172,6 +189,7 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
             title={replaceVariablesInText(text.bar_chart_title, {
               safetyRegion: safetyRegionName,
             })}
+            ariaDescription={graphDescriptions.rioolwater_meetwaarde}
             metadata={{
               date: [
                 sewerAverages.last_value.date_start_unix,
@@ -195,8 +213,5 @@ const SewerWater: FCWithLayout<ISafetyRegionData> = (props) => {
 };
 
 SewerWater.getLayout = getSafetyRegionLayout();
-
-export const getStaticProps = getSafetyRegionStaticProps;
-export const getStaticPaths = getSafetyRegionPaths();
 
 export default SewerWater;

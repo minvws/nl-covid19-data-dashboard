@@ -9,6 +9,8 @@ import { TCombinedChartDimensions } from './hooks/use-chart-dimensions';
 import { Path } from './path';
 import { Tooltip } from './tooltips/tooltipContainer';
 import { countryGeo } from './topology';
+import { useUniqueId } from '~/utils/useUniqueId';
+import { colors } from '~/style/theme';
 
 export type TooltipSettings = {
   left: number;
@@ -30,23 +32,29 @@ type TProps<T1, T3> = {
   dimensions: TCombinedChartDimensions;
   // This callback is invoked for each of the features in the featureCollection property.
   // This will usually return a <path/> element.
-  featureCallback: (
+  renderFeature: (
+    feature: Feature<MultiPolygon, T1>,
+    path: string,
+    index: number
+  ) => ReactNode;
+
+  renderHighlight?: (
     feature: Feature<MultiPolygon, T1>,
     path: string,
     index: number
   ) => ReactNode;
   // This callback is invoked for each of the features in the hovers property.
   // This will usually return a <path/> element.
-  hoverCallback: (
+  renderHover: (
     feature: Feature<MultiPolygon, T3>,
     path: string,
     index: number
   ) => ReactNode;
   // This callback is invoked after a click was received on one of the features in the featureCollection property.
-  // The id is the value that is assigned to the data-id attribute in the featureCallback.
+  // The id is the value that is assigned to the data-id attribute in the renderFeature.
   onPathClick: (id: string) => void;
   // This callback is invoked right before a tooltip is shown for one of the features in the featureCollection property.
-  // The id is the value that is assigned to the data-id attribute in the featureCallback.
+  // The id is the value that is assigned to the data-id attribute in the renderFeature.
   getTooltipContent: (id: string) => ReactNode;
   description?: string;
 };
@@ -111,18 +119,18 @@ const ChoroplethMap: <T1, T3>(
     hovers,
     boundingBox,
     dimensions,
-    featureCallback,
-    hoverCallback,
+    renderFeature,
+    renderHover,
     onPathClick,
     setTooltip,
     hoverRef,
     description,
+    renderHighlight,
   } = props;
 
-  const clipPathId = useRef(`_${Math.random().toString(36).substring(2, 15)}`);
-  const dataDescriptionId = useRef(
-    `_${Math.random().toString(36).substring(2, 15)}`
-  );
+  const clipPathId = useUniqueId();
+  const dataDescriptionId = useUniqueId();
+
   const timeout = useRef(-1);
   const isTouch = useIsTouchDevice();
 
@@ -139,7 +147,7 @@ const ChoroplethMap: <T1, T3>(
 
   return (
     <>
-      <span id={dataDescriptionId.current} style={{ display: 'none' }}>
+      <span id={dataDescriptionId} style={{ display: 'none' }}>
         {description}
       </span>
       <svg
@@ -151,9 +159,10 @@ const ChoroplethMap: <T1, T3>(
           isTouch ? undefined : createSvgMouseOutHandler(timeout, setTooltip)
         }
         onClick={createSvgClickHandler(onPathClick, setTooltip, isTouch)}
-        aria-labelledby={dataDescriptionId.current}
+        data-cy="choropleth-map"
+        aria-labelledby={dataDescriptionId}
       >
-        <clipPath id={clipPathId.current}>
+        <clipPath id={clipPathId}>
           <rect
             x={dimensions.marginLeft}
             y={0}
@@ -168,11 +177,11 @@ const ChoroplethMap: <T1, T3>(
         <rect x={0} y={0} width={width} height={height} fill={'none'} rx={14} />
         <g
           transform={`translate(${marginLeft},${marginTop})`}
-          clipPath={`url(#${clipPathId.current})`}
+          clipPath={`url(#${clipPathId})`}
         >
           <MercatorGroup
             data={featureCollection.features}
-            render={featureCallback}
+            render={renderFeature}
             fitSize={fitSize}
           />
 
@@ -182,10 +191,18 @@ const ChoroplethMap: <T1, T3>(
             <g ref={hoverRef}>
               <MercatorGroup
                 data={hovers.features}
-                render={hoverCallback}
+                render={renderHover}
                 fitSize={fitSize}
               />
             </g>
+          )}
+
+          {renderHighlight && (
+            <MercatorGroup
+              data={featureCollection.features}
+              render={renderHighlight}
+              fitSize={fitSize}
+            />
           )}
         </g>
       </svg>
@@ -199,7 +216,12 @@ function Country({ fitSize }: { fitSize: FitSize }) {
       <MercatorGroup
         data={countryGeo.features}
         render={(_, path, index) => (
-          <Path key={index} d={path} stroke="#c4c4c4" strokeWidth={0.5} />
+          <Path
+            key={index}
+            pathData={path}
+            stroke={colors.silver}
+            strokeWidth={0.5}
+          />
         )}
         fitSize={fitSize}
       />
@@ -223,7 +245,7 @@ function MercatorGroup<G extends Geometry, P>(props: MercatorGroupProps<G, P>) {
   return (
     <Mercator data={data} fitSize={fitSize}>
       {({ features }) => (
-        <g data-cy="choropleth-features">
+        <g>
           {features.map(
             ({ feature, path, index }) => path && render(feature, path, index)
           )}

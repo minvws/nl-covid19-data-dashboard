@@ -6,6 +6,13 @@ import { ScaleTime } from 'd3-scale';
 import { useCallback, useMemo, useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
+import {
+  ChartAxes,
+  ChartPadding,
+  ChartScales,
+  ComponentCallbackFunction,
+  defaultPadding,
+} from '~/components-styled/line-chart/components';
 import { Text } from '~/components-styled/typography';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
 import text from '~/locale/index';
@@ -16,17 +23,8 @@ import {
 } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { TimeframeOption } from '~/utils/timeframe';
-import { Legenda } from '../legenda';
-import {
-  ChartAxes,
-  ChartPadding,
-  ChartScales,
-  defaultPadding,
-  HoverPoint,
-  Marker,
-  Tooltip,
-  Trend,
-} from './components';
+import { Legenda, LegendItem, LegendShape } from '../legenda';
+import { HoverPoint, Marker, Tooltip, Trend } from './components';
 import {
   calculateYMax,
   getTrendData,
@@ -48,7 +46,10 @@ export type LineConfig<T extends Value> = {
   metricProperty: NumberProperty<T>;
   color?: string;
   style?: 'solid' | 'dashed';
+  areaFillOpacity?: number;
+  strokeWidth?: number;
   legendLabel?: string;
+  legendShape?: LegendShape;
 };
 
 export type LineChartProps<T extends Value> = {
@@ -68,6 +69,9 @@ export type LineChartProps<T extends Value> = {
   formatMarkerLabel?: (value: T) => string;
   padding?: Partial<ChartPadding>;
   showLegend?: boolean;
+  legendItems?: LegendItem[];
+  componentCallback?: ComponentCallbackFunction;
+  ariaLabelledBy?: string;
 };
 
 export function LineChart<T extends Value>({
@@ -86,6 +90,15 @@ export function LineChart<T extends Value>({
   formatMarkerLabel,
   padding: overridePadding,
   showLegend = false,
+  legendItems = showLegend
+    ? linesConfig.map((x) => ({
+        color: x.color ?? colors.data.primary,
+        label: x.legendLabel ?? '',
+        shape: x.legendShape ?? 'line',
+      }))
+    : undefined,
+  componentCallback,
+  ariaLabelledBy,
 }: LineChartProps<T>) {
   const {
     tooltipData,
@@ -128,17 +141,11 @@ export function LineChart<T extends Value>({
   const yDomain = useMemo(() => [0, yMax], [yMax]);
 
   const padding: ChartPadding = useMemo(() => {
-    const { top, right, bottom, left } = {
-      ...defaultPadding,
-      ...overridePadding,
-    };
-
     return {
-      top,
-      right,
-      bottom,
+      ...defaultPadding,
       // Increase space for larger labels
-      left: Math.max(yMax.toFixed(0).length * 10, left),
+      left: Math.max(yMax.toFixed(0).length * 10, defaultPadding.left),
+      ...overridePadding,
     };
   }, [overridePadding, yMax]);
 
@@ -255,22 +262,22 @@ export function LineChart<T extends Value>({
     [bisect, trendsList, linesConfig, toggleHoverElements]
   );
 
-  const renderAxes = useCallback(
+  const renderTrendLines = useCallback(
     (x: ChartScales) => (
       <>
         {trendsList.map((trend, index) => (
-          <>
-            <Trend
-              key={index}
-              trend={trend}
-              type={hideFill ? 'line' : 'area'}
-              style={linesConfig[index].style}
-              xScale={x.xScale}
-              yScale={x.yScale}
-              color={linesConfig[index].color}
-              onHover={handleHover}
-            />
-          </>
+          <Trend
+            key={index}
+            trend={trend}
+            type={hideFill ? 'line' : 'area'}
+            areaFillOpacity={linesConfig[index].areaFillOpacity}
+            strokeWidth={linesConfig[index].strokeWidth}
+            style={linesConfig[index].style}
+            xScale={x.xScale}
+            yScale={x.yScale}
+            color={linesConfig[index].color}
+            onHover={handleHover}
+          />
         ))}
       </>
     ),
@@ -304,8 +311,10 @@ export function LineChart<T extends Value>({
           formatXAxis={formatXAxis}
           onHover={handleHover}
           benchmark={benchmark}
+          componentCallback={componentCallback}
+          ariaLabelledBy={ariaLabelledBy}
         >
-          {renderAxes}
+          {renderTrendLines}
         </ChartAxes>
 
         {isDefined(tooltipData) && (
@@ -328,15 +337,9 @@ export function LineChart<T extends Value>({
           />
         )}
 
-        {showLegend && (
+        {showLegend && legendItems && (
           <Box pl={`${padding.left}px`}>
-            <Legenda
-              items={linesConfig.map((x) => ({
-                color: x.color ?? colors.data.primary,
-                label: x.legendLabel ?? '',
-                shape: 'line',
-              }))}
-            />
+            <Legenda items={legendItems} />
           </Box>
         )}
       </Box>
@@ -357,7 +360,7 @@ function formatDefaultTooltip<T extends Value>(
     return (
       <>
         <Text as="span" fontWeight="bold">
-          {`${formatDateFromMilliseconds(value.__date.getTime())}: `}
+          {formatDateFromMilliseconds(value.__date.getTime()) + ': '}
         </Text>
         {isPercentage
           ? `${formatPercentage(value.__value)}%`

@@ -19,7 +19,9 @@ export function LanguageSwitcher() {
       >
         NL
       </LanguageLink>
-      <span aria-hidden="true">|</span>
+
+      <Separator />
+
       <LanguageLink
         href={`https://coronadashboard.government.nl${router.asPath}`}
         lang="en-GB"
@@ -32,6 +34,12 @@ export function LanguageSwitcher() {
     </Box>
   );
 }
+const Separator = styled.span.attrs({ 'aria-hidden': 'true', children: '|' })(
+  css({
+    mx: 2,
+    display: 'inline-block',
+  })
+);
 
 const LanguageLink = styled.a<{ isActive: boolean }>((x) =>
   css({
@@ -39,10 +47,8 @@ const LanguageLink = styled.a<{ isActive: boolean }>((x) =>
     borderBottomColor: x.isActive ? 'button' : 'transparent',
     color: 'inherit',
     display: 'inline-block',
-    mx: 1,
     textAlign: 'center',
     textDecoration: 'none',
-    minWidth: 24,
 
     fontWeight: x.isActive ? 'heavy' : 'normal',
 

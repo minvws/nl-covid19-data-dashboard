@@ -1,21 +1,22 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { Box } from '~/components-styled/base';
+import { Text } from '~/components-styled/typography';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { Select } from '~/components-styled/select';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
-import { SafetyRegionProperties } from '~/components/choropleth/shared';
+import { SafetyRegionProperties } from '@corona-dashboard/common';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
 import siteText from '~/locale/index';
-import { RegionsBehavior } from '~/types/data';
+import { RegionsBehavior } from '@corona-dashboard/common';
 import {
   BehaviorIdentifier,
   behaviorIdentifiers,
   BehaviorType,
 } from './behavior-types';
 import { BehaviorTypeControl } from './components/behavior-type-control';
-
+import css from '@styled-system/css';
 const text = siteText.nl_gedrag;
 
 const unusedRules = [
@@ -24,7 +25,11 @@ const unusedRules = [
   'wear_mask_public_transport',
 ];
 
-export function BehaviorChoroplethTile() {
+export function BehaviorChoroplethTile({
+  data,
+}: {
+  data: { behavior: RegionsBehavior[] };
+}) {
   const [type, setType] = useState<BehaviorType>('compliance');
   const [currentId, setCurrentId] = useState<BehaviorIdentifier>('wash_hands');
   const router = useRouter();
@@ -62,6 +67,7 @@ export function BehaviorChoroplethTile() {
       }}
     >
       <SafetyRegionChoropleth
+        data={data}
         metricName="behavior"
         metricProperty={metricValueName}
         tooltipContent={(context: RegionsBehavior & SafetyRegionProperties) => {
@@ -73,13 +79,11 @@ export function BehaviorChoroplethTile() {
 
           return (
             <TooltipContent title={context.vrname} onSelect={onSelect}>
-              <p>
-                <strong>
-                  {siteText.gedrag_common[type]}:{' '}
-                  {value ? `${value}%` : text.verdeling_in_nederland.onbekend}
-                </strong>
-              </p>
-              <p>{siteText.gedrag_onderwerpen[currentId]}</p>
+              <Text m={0} css={css({ fontWeight: 'bold' })}>
+                {siteText.gedrag_common[type]}:{' '}
+                {value ? `${value}%` : text.verdeling_in_nederland.onbekend}
+              </Text>
+              <Text m={0}>{siteText.gedrag_onderwerpen[currentId]}</Text>
             </TooltipContent>
           );
         }}

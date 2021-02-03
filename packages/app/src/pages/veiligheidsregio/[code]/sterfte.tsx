@@ -1,29 +1,44 @@
 import CoronaVirusIcon from '~/assets/coronavirus.svg';
+import { ArticleStrip } from '~/components-styled/article-strip';
+import { ArticleSummary } from '~/components-styled/article-teaser';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
+import { DeceasedMonitorSection } from '~/domain/deceased/deceased-monitor-section';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
-import { SEOHead } from '~/components/seoHead';
-import { DeceasedMonitorSection } from '~/domain/deceased/deceased-monitor-section';
 import siteText from '~/locale/index';
+import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
-  getSafetyRegionPaths,
-  getSafetyRegionStaticProps,
-  ISafetyRegionData,
-} from '~/static-props/safetyregion-data';
+  createGetContent,
+  getLastGeneratedDate,
+  getVrData,
+} from '~/static-props/get-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+
+export { getStaticPaths } from '~/static-paths/vr';
+
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getVrData,
+  createGetContent<{
+    articles?: ArticleSummary[];
+  }>(createPageArticlesQuery('deceasedPage'))
+);
 
 const text = siteText.veiligheidsregio_sterfte;
 
-const DeceasedRegionalPage: FCWithLayout<ISafetyRegionData> = (props) => {
+const DeceasedRegionalPage: FCWithLayout<typeof getStaticProps> = (props) => {
   const {
     safetyRegionName: safetyRegion,
     data: { deceased_cbs: dataCbs, deceased_rivm: dataRivm },
+    content,
   } = props;
 
   return (
@@ -51,6 +66,8 @@ const DeceasedRegionalPage: FCWithLayout<ISafetyRegionData> = (props) => {
             dataSources: [text.section_deceased_rivm.bronnen.rivm],
           }}
         />
+
+        <ArticleStrip articles={content.articles} />
 
         <TwoKpiSection>
           <KpiTile
@@ -87,7 +104,6 @@ const DeceasedRegionalPage: FCWithLayout<ISafetyRegionData> = (props) => {
 
         <LineChartTile
           timeframeOptions={['all', '5weeks']}
-          timeframeInitialValue="all"
           title={text.section_deceased_rivm.line_chart_covid_daily_title}
           description={
             text.section_deceased_rivm.line_chart_covid_daily_description
@@ -108,9 +124,5 @@ const DeceasedRegionalPage: FCWithLayout<ISafetyRegionData> = (props) => {
 };
 
 DeceasedRegionalPage.getLayout = getSafetyRegionLayout();
-
-export const getStaticProps = getSafetyRegionStaticProps;
-
-export const getStaticPaths = getSafetyRegionPaths();
 
 export default DeceasedRegionalPage;

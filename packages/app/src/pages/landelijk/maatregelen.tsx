@@ -1,30 +1,79 @@
-import Maatregelen from '~/assets/maatregelen.svg';
-import { Box } from '~/components-styled/base';
+import css from '@styled-system/css';
 import { ContentHeader } from '~/components-styled/content-header';
-import { KpiSection } from '~/components-styled/kpi-section';
-import { TileList } from '~/components-styled/tile-list';
-import { Heading, Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
-import { RestrictionsTable } from '~/components/restrictions/restrictions-table';
-import { EscalationLevel } from '~/components/restrictions/type';
-import { SEOHead } from '~/components/seoHead';
+import { Heading } from '~/components-styled/typography';
+import { KpiSection } from '~/components-styled/kpi-section';
+import { LockdownTable } from '~/domain/restrictions/lockdown-table';
+import { SEOHead } from '~/components-styled/seo-head';
+import { Box } from '~/components-styled/base/box';
+import { TileList } from '~/components-styled/tile-list';
+import Maatregelen from '~/assets/maatregelen.svg';
+
 import text from '~/locale';
-import { NationalPageProps } from '~/static-props/nl-data';
+import {
+  getNlData,
+  createGetContent,
+  getLastGeneratedDate,
+} from '~/static-props/get-data';
+// import { useEscalationLevel } from '~/utils/use-escalation-level';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import { LockdownData, RoadmapData } from '~/types/cms';
 import theme from '~/style/theme';
-import { useEscalationLevel } from '~/utils/use-escalation-level';
-export { getStaticProps } from '~/pages';
+import { RichContent } from '~/components-styled/cms/rich-content';
 
-const NationalRestrictions: FCWithLayout<NationalPageProps> = (props) => {
-  const { data } = props;
+type MaatregelenData = {
+  lockdown: LockdownData;
+  roadmap?: RoadmapData;
+};
 
-  const escalationLevel = useEscalationLevel(data.restrictions.values);
+const query = `
+{
+  'lockdown': *[_type == 'lockdown']{
+    ...,
+    "message": {
+      ...message,
+      "description": {
+        ...message.description,
+        "nl": [
+          ...message.description.nl[]
+          {
+            ...,
+            "asset": asset->
+          },
+        ],
+        "en": [
+          ...message.description.en[]
+          {
+            ...,
+            "asset": asset->
+          },
+        ],
+      },
+    }
+  }[0],
+  // We will need the roadmap when lockdown is disabled in the CMS.
+  // 'roadmap': *[_type == 'roadmap'][0]
+}`;
 
-  // Colors etc are determined by the effective escalation level which is 1, 2, 3 or 4.
-  const effectiveEscalationLevel: EscalationLevel =
-    escalationLevel > 4 ? 4 : (escalationLevel as EscalationLevel);
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getNlData,
+  createGetContent<MaatregelenData>(query)
+);
 
-  const restrictionInfo = text.maatregelen.headings['landelijk'];
+const NationalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
+  const { content } = props;
+  const { lockdown } = content;
+
+  const { showLockdown } = lockdown;
+
+  // const escalationLevelData = useEscalationLevel(data.restrictions.values);
+
+  /**
+   * Colors etc are determined by the effective escalation level which is 1, 2, 3 or 4.
+   */
+  // const effectiveEscalationLevel: EscalationLevel = escalationLevel > 4 ? 4 : (escalationLevel as EscalationLevel);
 
   return (
     <>
@@ -39,20 +88,29 @@ const NationalRestrictions: FCWithLayout<NationalPageProps> = (props) => {
           title={text.nationaal_maatregelen.titel}
         />
 
-        <KpiSection flexDirection="column">
-          <Heading level={3}>{restrictionInfo.extratoelichting.titel}</Heading>
-          <Box>
-            <Text m={0}>{restrictionInfo.extratoelichting.toelichting}</Text>
-          </Box>
-        </KpiSection>
+        {showLockdown && (
+          <KpiSection flexDirection="column">
+            <Box
+              css={css({
+                'p:last-child': {
+                  margin: '0',
+                },
+              })}
+            >
+              <Heading level={3}>{lockdown.message.title}</Heading>
+              {lockdown.message.description ? (
+                <RichContent blocks={lockdown.message.description} />
+              ) : null}
+            </Box>
+          </KpiSection>
+        )}
 
-        <KpiSection display="flex" flexDirection="column">
-          <Heading level={3}>{text.nationaal_maatregelen.tabel_titel}</Heading>
-          <RestrictionsTable
-            data={data.restrictions.values}
-            escalationLevel={effectiveEscalationLevel}
-          />
-        </KpiSection>
+        {showLockdown && (
+          <KpiSection display="flex" flexDirection="column">
+            <Heading level={3}>{lockdown.title}</Heading>
+            <LockdownTable data={lockdown} />
+          </KpiSection>
+        )}
       </TileList>
     </>
   );

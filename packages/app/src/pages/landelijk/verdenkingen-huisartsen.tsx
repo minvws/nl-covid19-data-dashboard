@@ -1,24 +1,27 @@
 import Arts from '~/assets/arts.svg';
-import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
+import { SEOHead } from '~/components-styled/seo-head';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
-import { LineChartWithWeekTooltip } from '~/components/lineChart/lineChartWithWeekTooltip';
-import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
-import {
-  getNationalStaticProps,
-  NationalPageProps,
-} from '~/static-props/nl-data';
+import { getNlData, getLastGeneratedDate } from '~/static-props/get-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import { LineChartTile } from '~/components-styled/line-chart-tile';
 
 const text = siteText.verdenkingen_huisartsen;
+const graphDescriptions = siteText.accessibility.grafieken;
 
-const SuspectedPatients: FCWithLayout<NationalPageProps> = (props) => {
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getNlData
+);
+
+const SuspectedPatients: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data } = props;
   const lastValue = data.doctor.last_value;
 
@@ -75,32 +78,23 @@ const SuspectedPatients: FCWithLayout<NationalPageProps> = (props) => {
           </KpiTile>
         </TwoKpiSection>
 
-        <ChartTileWithTimeframe
-          title={text.linechart_titel}
-          metadata={{ source: text.bronnen.nivel }}
+        <LineChartTile
           timeframeOptions={['all', '5weeks']}
-        >
-          {(timeframe) => (
-            <LineChartWithWeekTooltip
-              timeframe={timeframe}
-              values={data.doctor.values.map((value) => ({
-                value: value.covid_symptoms_per_100k,
-                date: value.date_end_unix,
-                week: {
-                  start: value.date_start_unix,
-                  end: value.date_end_unix,
-                },
-              }))}
-            />
-          )}
-        </ChartTileWithTimeframe>
+          title={text.linechart_titel}
+          values={data.doctor.values}
+          ariaDescription={graphDescriptions.verdenkingen_huisartsen}
+          linesConfig={[
+            {
+              metricProperty: 'covid_symptoms_per_100k',
+            },
+          ]}
+          metadata={{ source: text.bronnen.nivel }}
+        />
       </TileList>
     </>
   );
 };
 
 SuspectedPatients.getLayout = getNationalLayout;
-
-export const getStaticProps = getNationalStaticProps;
 
 export default SuspectedPatients;

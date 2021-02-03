@@ -1,25 +1,39 @@
 import Arts from '~/assets/arts.svg';
+import { ArticleStrip } from '~/components-styled/article-strip';
+import { ArticleSummary } from '~/components-styled/article-teaser';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { PageBarScale } from '~/components-styled/page-barscale';
+import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
-import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
+import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
-  getNationalStaticProps,
-  NationalPageProps,
-} from '~/static-props/nl-data';
+  createGetContent,
+  getLastGeneratedDate,
+  getNlData,
+} from '~/static-props/get-data';
 
 const text = siteText.ic_opnames_per_dag;
+const graphDescriptions = siteText.accessibility.grafieken;
 
-const IntakeIntensiveCare: FCWithLayout<NationalPageProps> = (props) => {
-  const { data } = props;
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getNlData,
+  createGetContent<{
+    articles?: ArticleSummary[];
+  }>(createPageArticlesQuery('intensiveCarePage'))
+);
+
+const IntakeIntensiveCare: FCWithLayout<typeof getStaticProps> = (props) => {
+  const { data, content } = props;
 
   const dataIntake = data.intensive_care_nice;
 
@@ -46,6 +60,8 @@ const IntakeIntensiveCare: FCWithLayout<NationalPageProps> = (props) => {
           }}
           reference={text.reference}
         />
+
+        <ArticleStrip articles={content?.articles} />
 
         <TwoKpiSection>
           <KpiTile
@@ -88,6 +104,7 @@ const IntakeIntensiveCare: FCWithLayout<NationalPageProps> = (props) => {
         <LineChartTile
           title={text.linechart_titel}
           values={dataIntake.values}
+          ariaDescription={graphDescriptions.intensive_care_opnames}
           linesConfig={[
             {
               metricProperty: 'admissions_moving_average',
@@ -114,7 +131,5 @@ const IntakeIntensiveCare: FCWithLayout<NationalPageProps> = (props) => {
 };
 
 IntakeIntensiveCare.getLayout = getNationalLayout;
-
-export const getStaticProps = getNationalStaticProps;
 
 export default IntakeIntensiveCare;

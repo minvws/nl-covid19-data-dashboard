@@ -1,4 +1,4 @@
-import { SafetyRegionProperties } from '../shared';
+import { SafetyRegionProperties } from '@corona-dashboard/common';
 import { FeatureCollection, MultiPolygon } from 'geojson';
 import { useMemo } from 'react';
 

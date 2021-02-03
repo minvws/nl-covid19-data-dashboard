@@ -1,28 +1,49 @@
 import Gedrag from '~/assets/gedrag.svg';
+import { ArticleStrip } from '~/components-styled/article-strip';
+import { ArticleSummary } from '~/components-styled/article-teaser';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
+import { SEOHead } from '~/components-styled/seo-head';
 import { Tile } from '~/components-styled/tile';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
-import { FCWithLayout } from '~/domain/layout/layout';
-import { getNationalLayout } from '~/domain/layout/national-layout';
-import { SEOHead } from '~/components/seoHead';
 import { BehaviorChoroplethTile } from '~/domain/behavior/behavior-choropleth-tile';
 import { BehaviorLineChartTile } from '~/domain/behavior/behavior-line-chart-tile';
 import { BehaviorTableTile } from '~/domain/behavior/behavior-table-tile';
 import { MoreInformation } from '~/domain/behavior/components/more-information';
+import { FCWithLayout } from '~/domain/layout/layout';
+import { getNationalLayout } from '~/domain/layout/national-layout';
 import siteText from '~/locale/index';
+import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
-  getNationalStaticProps,
-  NationalPageProps,
-} from '~/static-props/nl-data';
+  createGetChoroplethData,
+  createGetContent,
+  getLastGeneratedDate,
+  getNlData,
+} from '~/static-props/get-data';
 
 const text = siteText.nl_gedrag;
 
-const BehaviorPage: FCWithLayout<NationalPageProps> = (props) => {
-  const behaviorData = props.data.behavior;
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getNlData,
+  createGetChoroplethData({
+    vr: ({ behavior }) => ({ behavior }),
+  }),
+  createGetContent<{
+    articles?: ArticleSummary[];
+  }>(createPageArticlesQuery('behaviorPage'))
+);
+
+const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
+  data,
+  choropleth,
+  content,
+}) => {
+  const behaviorData = data.behavior;
 
   return (
     <>
@@ -47,6 +68,8 @@ const BehaviorPage: FCWithLayout<NationalPageProps> = (props) => {
           }}
           reference={text.reference}
         />
+
+        <ArticleStrip articles={content.articles} />
 
         <TwoKpiSection>
           <Tile height="100%">
@@ -85,7 +108,7 @@ const BehaviorPage: FCWithLayout<NationalPageProps> = (props) => {
           introduction={text.basisregels_over_tijd.intro}
         />
 
-        <BehaviorChoroplethTile />
+        <BehaviorChoroplethTile data={choropleth.vr} />
 
         <MoreInformation />
       </TileList>
@@ -94,7 +117,5 @@ const BehaviorPage: FCWithLayout<NationalPageProps> = (props) => {
 };
 
 BehaviorPage.getLayout = getNationalLayout;
-
-export const getStaticProps = getNationalStaticProps;
 
 export default BehaviorPage;

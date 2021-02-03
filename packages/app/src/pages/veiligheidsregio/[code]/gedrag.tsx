@@ -1,27 +1,44 @@
 import Gedrag from '~/assets/gedrag.svg';
+import { ArticleStrip } from '~/components-styled/article-strip';
+import { ArticleSummary } from '~/components-styled/article-teaser';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
+import { SEOHead } from '~/components-styled/seo-head';
 import { Tile } from '~/components-styled/tile';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
-import { FCWithLayout } from '~/domain/layout/layout';
-import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
-import { SEOHead } from '~/components/seoHead';
 import { BehaviorLineChartTile } from '~/domain/behavior/behavior-line-chart-tile';
 import { BehaviorTableTile } from '~/domain/behavior/behavior-table-tile';
 import { MoreInformation } from '~/domain/behavior/components/more-information';
+import { FCWithLayout } from '~/domain/layout/layout';
+import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import siteText from '~/locale/index';
+import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
-  getSafetyRegionPaths,
-  getSafetyRegionStaticProps,
-  ISafetyRegionData,
-} from '~/static-props/safetyregion-data';
+  createGetContent,
+  getLastGeneratedDate,
+  getText,
+  getVrData,
+} from '~/static-props/get-data';
+
+export { getStaticPaths } from '~/static-paths/vr';
+
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getText,
+  getVrData,
+  createGetContent<{
+    articles?: ArticleSummary[];
+  }>(createPageArticlesQuery('behaviorPage'))
+);
 
 const text = siteText.regionaal_gedrag;
 
-const BehaviorPage: FCWithLayout<ISafetyRegionData> = (props) => {
+const BehaviorPage: FCWithLayout<typeof getStaticProps> = (props) => {
+  const content = props.content;
   const behaviorData = props.data.behavior;
 
   return (
@@ -47,6 +64,8 @@ const BehaviorPage: FCWithLayout<ISafetyRegionData> = (props) => {
           }}
           reference={text.reference}
         />
+
+        <ArticleStrip articles={content.articles} />
 
         <TwoKpiSection>
           <Tile height="100%">
@@ -92,8 +111,5 @@ const BehaviorPage: FCWithLayout<ISafetyRegionData> = (props) => {
 };
 
 BehaviorPage.getLayout = getSafetyRegionLayout();
-
-export const getStaticProps = getSafetyRegionStaticProps;
-export const getStaticPaths = getSafetyRegionPaths();
 
 export default BehaviorPage;

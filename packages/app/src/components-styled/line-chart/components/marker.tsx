@@ -1,8 +1,8 @@
 import styled from 'styled-components';
+import { ChartPadding } from '~/components-styled/line-chart/components';
 import { Text } from '~/components-styled/typography';
 import { colors } from '~/style/theme';
 import { formatDateFromMilliseconds } from '~/utils/formatDate';
-import { ChartPadding } from '.';
 import { TrendValue, Value } from '../helpers';
 
 export const MARKER_MIN_WIDTH = 26;
@@ -21,6 +21,8 @@ type ColorProps = {
 const Label = styled.div`
   pointer-events: none;
   background-color: white;
+  min-width: 4em;
+  text-align: center;
 `;
 
 const DottedLine = styled.div<ColorProps>`

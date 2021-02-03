@@ -1,21 +1,32 @@
 import text from '~/locale/index';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { SEOHead } from '~/components/seoHead';
+import { SEOHead } from '~/components-styled/seo-head';
 import { AppFooter } from '~/components-styled/layout/app-footer';
 import { AppHeader } from '~/components-styled/layout/app-header';
 import { SkipLinkMenu } from '~/components-styled/skip-link-menu';
-import { ILastGeneratedData } from '~/static-props/last-generated-data';
+import siteText from '~/locale/index';
 
 interface LayoutProps {
-  url?: string;
   title: string;
+  url?: string;
   description?: string;
   openGraphImage?: string;
   twitterImage?: string;
 }
 
-export type FCWithLayout<Props = void> = React.FC<Props> & {
+type StaticProps<T extends (...args: any) => any> = Await<
+  ReturnType<T>
+>['props'];
+
+export type FCWithLayout<
+  PropsOrGetStaticProps = void,
+  Props = PropsOrGetStaticProps extends (
+    ...args: any[]
+  ) => Promise<{ props: any }>
+    ? StaticProps<PropsOrGetStaticProps>
+    : PropsOrGetStaticProps
+> = React.FC<Props> & {
   getLayout: (page: React.ReactNode, pageProps: Props) => React.ReactNode;
 };
 
@@ -23,6 +34,16 @@ export function getLayoutWithMetadata(metadata: LayoutProps) {
   return function (page: React.ReactNode, pageProps: any) {
     const lastGenerated = pageProps.lastGenerated;
     return getLayout(metadata, lastGenerated)(<>{page}</>);
+  };
+}
+
+export function getDefaultLayout() {
+  return function <T extends { lastGenerated: string }>(
+    page: React.ReactNode,
+    pageProps: T
+  ) {
+    const lastGenerated = pageProps.lastGenerated;
+    return getLayout(siteText.metadata, lastGenerated)(<>{page}</>);
   };
 }
 
@@ -37,7 +58,7 @@ export function getLayout(layoutProps: LayoutProps, lastGenerated: string) {
 }
 
 export function Layout(
-  props: LayoutProps & ILastGeneratedData & { children: React.ReactNode }
+  props: LayoutProps & { lastGenerated: string; children: React.ReactNode }
 ) {
   const {
     children,

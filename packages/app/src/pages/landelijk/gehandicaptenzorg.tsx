@@ -14,22 +14,33 @@ import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createDisablityInfectedLocationsRegionalTooltip } from '~/components/choropleth/tooltips/region/create-disability-infected-locations-regional-tooltip';
+import { SEOHead } from '~/components-styled/seo-head';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
-import { SEOHead } from '~/components/seoHead';
 import siteText from '~/locale/index';
 import {
-  getNationalStaticProps,
-  NationalPageProps,
-} from '~/static-props/nl-data';
+  createGetChoroplethData,
+  getNlData,
+  getLastGeneratedDate,
+} from '~/static-props/get-data';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 
 const infectedLocationsText = siteText.gehandicaptenzorg_besmette_locaties;
 const positiveTestedPeopleText =
   siteText.gehandicaptenzorg_positief_geteste_personen;
 const locationDeaths = siteText.gehandicaptenzorg_oversterfte;
+const graphDescriptions = siteText.accessibility.grafieken;
 
-const DisabilityCare: FCWithLayout<NationalPageProps> = (props) => {
-  const { data } = props;
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getNlData,
+  createGetChoroplethData({
+    vr: ({ disability_care }) => ({ disability_care }),
+  })
+);
+
+const DisabilityCare: FCWithLayout<typeof getStaticProps> = (props) => {
+  const { data, choropleth } = props;
   const lastValue = data.disability_care.last_value;
   const values = data.disability_care.values;
 
@@ -71,6 +82,9 @@ const DisabilityCare: FCWithLayout<NationalPageProps> = (props) => {
             <KpiValue
               data-cy="newly_infected_people"
               absolute={lastValue.newly_infected_people}
+              difference={
+                data.difference.disability_care__newly_infected_people
+              }
             />
           </KpiTile>
         </TwoKpiSection>
@@ -78,6 +92,7 @@ const DisabilityCare: FCWithLayout<NationalPageProps> = (props) => {
         <LineChartTile
           metadata={{ source: positiveTestedPeopleText.bronnen.rivm }}
           title={positiveTestedPeopleText.linechart_titel}
+          ariaDescription={graphDescriptions.gehandicaptenzorg_positief_getest}
           values={values}
           linesConfig={[
             {
@@ -113,6 +128,9 @@ const DisabilityCare: FCWithLayout<NationalPageProps> = (props) => {
               data-cy="infected_locations_total"
               absolute={lastValue.infected_locations_total}
               percentage={lastValue.infected_locations_percentage}
+              difference={
+                data.difference.disability_care__infected_locations_total
+              }
             />
             <Text>{infectedLocationsText.kpi_toelichting}</Text>
           </KpiTile>
@@ -146,6 +164,7 @@ const DisabilityCare: FCWithLayout<NationalPageProps> = (props) => {
           }}
         >
           <SafetyRegionChoropleth
+            data={choropleth.vr}
             metricName="disability_care"
             metricProperty="infected_locations_percentage"
             tooltipContent={createDisablityInfectedLocationsRegionalTooltip(
@@ -159,6 +178,9 @@ const DisabilityCare: FCWithLayout<NationalPageProps> = (props) => {
           metadata={{ source: infectedLocationsText.bronnen.rivm }}
           title={infectedLocationsText.linechart_titel}
           values={values}
+          ariaDescription={
+            graphDescriptions.gehandicaptenzorg_besmette_locaties
+          }
           linesConfig={[
             {
               metricProperty: 'infected_locations_total',
@@ -200,6 +222,7 @@ const DisabilityCare: FCWithLayout<NationalPageProps> = (props) => {
         <LineChartTile
           metadata={{ source: locationDeaths.bronnen.rivm }}
           title={locationDeaths.linechart_titel}
+          ariaDescription={graphDescriptions.gehandicaptenzorg_overleden}
           values={values}
           linesConfig={[
             {
@@ -213,7 +236,5 @@ const DisabilityCare: FCWithLayout<NationalPageProps> = (props) => {
 };
 
 DisabilityCare.getLayout = getNationalLayout;
-
-export const getStaticProps = getNationalStaticProps;
 
 export default DisabilityCare;

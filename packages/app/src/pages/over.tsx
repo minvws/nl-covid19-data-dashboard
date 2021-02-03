@@ -1,41 +1,51 @@
-import fs from 'fs';
-import { groq } from 'next-sanity';
 import Head from 'next/head';
-import path from 'path';
+import { RichContent } from '~/components-styled/cms/rich-content';
 import { MaxWidth } from '~/components-styled/max-width';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
-import { getClient, localize, PortableText } from '~/lib/sanity';
-import siteText, { targetLanguage } from '~/locale/index';
+import siteText from '~/locale/index';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetContent,
+  getLastGeneratedDate,
+} from '~/static-props/get-data';
+import { RichContentBlock } from '~/types/cms';
 import styles from './over.module.scss';
 
-interface StaticProps {
-  props: OverProps;
+interface OverData {
+  title: string | null;
+  description: RichContentBlock[] | null;
 }
 
-interface OverProps {
-  data: {
-    title: string | null;
-    description: unknown[] | null;
-  };
-  lastGenerated: string;
-}
-
-export async function getStaticProps(): Promise<StaticProps> {
-  const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
-  const fileContents = fs.readFileSync(filePath, 'utf8');
-  const lastGenerated = JSON.parse(fileContents).last_generated;
-
-  const query = groq`
-  *[_type == 'overDitDashboard'][0]
+const query = `
+*[_type == 'overDitDashboard']{
+  ...,
+  "description": {
+    "_type": description._type,
+    "nl": [
+      ...description.nl[]
+      {
+        ...,
+        "asset": asset->
+       },
+    ],
+    "en": [
+      ...description.en[]
+      {
+        ...,
+        "asset": asset->
+       },
+    ],
+  }
+}[0]
 `;
-  const rawData = await getClient(false).fetch(query);
-  const data = localize(rawData, [targetLanguage, 'nl']);
 
-  return { props: { data, lastGenerated } };
-}
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  createGetContent<OverData>(query)
+);
 
-const Over: FCWithLayout<OverProps> = (props) => {
-  const { data } = props;
+const Over: FCWithLayout<typeof getStaticProps> = (props) => {
+  const { content } = props;
 
   return (
     <>
@@ -56,8 +66,10 @@ const Over: FCWithLayout<OverProps> = (props) => {
       <div className={styles.container}>
         <MaxWidth>
           <div className={styles.maxwidth}>
-            {data.title && <h2>{data.title}</h2>}
-            {data.description && <PortableText blocks={data.description} />}
+            {content.title && <h2>{content.title}</h2>}
+            {content.description && (
+              <RichContent blocks={content.description} />
+            )}
           </div>
         </MaxWidth>
       </div>

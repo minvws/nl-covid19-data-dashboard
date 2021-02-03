@@ -1,235 +1,229 @@
-import fs from 'fs';
 import { useRouter } from 'next/router';
-import path from 'path';
-import { useState } from 'react';
-import Notification from '~/assets/notification.svg';
-import { AnchorTile } from '~/components-styled/anchor-tile';
-import { Box, Spacer } from '~/components-styled/base';
-import { ChoroplethTile } from '~/components-styled/choropleth-tile';
-import { CategoryHeading } from '~/components-styled/content-header';
-import { HeadingWithIcon } from '~/components-styled/heading-with-icon';
-import { MessageTile } from '~/components-styled/message-tile';
+import GetestIcon from '~/assets/test.svg';
+import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
+import { ArticleSummary } from '~/components-styled/article-teaser';
+import { Box } from '~/components-styled/base';
+import { DataDrivenText } from '~/components-styled/data-driven-text';
+import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
+import { MaxWidth } from '~/components-styled/max-width';
+import { QuickLinks } from '~/components-styled/quick-links';
+import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
-import { Text } from '~/components-styled/typography';
-import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
-import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
+import { WarningTile } from '~/components-styled/warning-tile';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
-import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
-import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
-import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/create-positive-tested-people-regional-tooltip';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
-import { FCWithLayout } from '~/domain/layout/layout';
-import { getNationalLayout } from '~/domain/layout/national-layout';
-import { TALLLanguages } from '~/locale/index';
-import theme from '~/style/theme';
-import { EscalationLevels, National, Regions } from '~/types/data';
-import { assert } from '~/utils/assert';
-import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { EscalationMapLegenda } from './veiligheidsregio';
+import { FCWithLayout, getDefaultLayout } from '~/domain/layout/layout';
+import { ArticleList } from '~/domain/topical/article-list';
+import { Search } from '~/domain/topical/components/search';
+import { DataSitemap } from '~/domain/topical/data-sitemap';
+import { EditorialSummary } from '~/domain/topical/editorial-teaser';
+import { EditorialTile } from '~/domain/topical/editorial-tile';
+import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
+import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
+import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
+import { TopicalChoroplethContainer } from '~/domain/topical/topical-choropleth-container';
+import { TopicalPageHeader } from '~/domain/topical/topical-page-header';
+import { TopicalTile } from '~/domain/topical/topical-tile';
+import { TopicalVaccineTile } from '~/domain/topical/topical-vaccine-tile';
+import { topicalPageQuery } from '~/queries/topical-page-query';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetChoroplethData,
+  createGetContent,
+  getLastGeneratedDate,
+  getNlData,
+  getText,
+} from '~/static-props/get-data';
+import { colors } from '~/style/theme';
+import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 
-interface StaticProps {
-  props: INationalHomepageData;
-}
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getText,
+  createGetChoroplethData({
+    vr: ({ escalation_levels, tested_overall }) => ({
+      escalation_levels,
+      tested_overall,
+    }),
+    gm: ({ tested_overall }) => ({ tested_overall }),
+  }),
+  createGetContent<{
+    articles: ArticleSummary[];
+    editorial: EditorialSummary;
+    highlight: { article: ArticleSummary };
+  }>(topicalPageQuery),
+  () => {
+    const data = getNlData();
 
-interface INationalHomepageData {
-  data: National;
-  text: TALLLanguages;
-  lastGenerated: string;
-  escalationLevelCounts: EscalationLevelCounts;
-}
-
-/**
- * The keys in this object are used to find and replace values in the translation files.
- * Adjustments here need to be applied in Lokalize too.
- * This is also why the keys are a bit more verbose.
- */
-type EscalationLevelCounts = {
-  escalationLevel1: number;
-  escalationLevel2: number;
-  escalationLevel3: number;
-  escalationLevel4: number;
-  escalationLevel5: number;
-};
-
-const Home: FCWithLayout<INationalHomepageData> = (props) => {
-  const { data, text, escalationLevelCounts } = props;
-  const router = useRouter();
-  const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
-    'municipal'
-  );
-
-  return (
-    <TileList>
-      <Box>
-        <CategoryHeading level={1} hide={true}>
-          {text.nationaal_layout.headings.algemeen}
-        </CategoryHeading>
-        <HeadingWithIcon
-          icon={<Notification color={theme.colors.notification} />}
-          title={text.laatste_ontwikkelingen.title}
-          headingLevel={2}
-        />
-      </Box>
-
-      <AnchorTile
-        title={text.notificatie.titel}
-        href={text.notificatie.link.href}
-        label={text.notificatie.link.text}
-        external
-        shadow
-      >
-        <Text>
-          {replaceVariablesInText(
-            text.notificatie.bericht,
-            escalationLevelCounts
-          )}
-        </Text>
-      </AnchorTile>
-
-      {text.regionaal_index.belangrijk_bericht && (
-        <>
-          <Spacer mt={4} />
-          <MessageTile message={text.regionaal_index.belangrijk_bericht} />
-        </>
-      )}
-
-      <ChoroplethTile
-        title={text.veiligheidsregio_index.selecteer_titel}
-        description={
-          <>
-            <span
-              dangerouslySetInnerHTML={{
-                __html: text.veiligheidsregio_index.selecteer_toelichting,
-              }}
-            />
-            <EscalationMapLegenda text={text} />
-          </>
-        }
-      >
-        <SafetyRegionChoropleth
-          metricName="escalation_levels"
-          metricProperty="escalation_level"
-          onSelect={createSelectRegionHandler(router, 'maatregelen')}
-          tooltipContent={escalationTooltip(
-            createSelectRegionHandler(router, 'maatregelen')
-          )}
-        />
-      </ChoroplethTile>
-
-      <ChoroplethTile
-        title={text.positief_geteste_personen.map_titel}
-        metadata={{
-          date: data.tested_overall.last_value.date_unix,
-          source: text.positief_geteste_personen.bronnen.rivm,
-        }}
-        description={text.positief_geteste_personen.map_toelichting}
-        onChartRegionChange={setSelectedMap}
-        chartRegion={selectedMap}
-        legend={{
-          thresholds:
-            selectedMap === 'municipal'
-              ? municipalThresholds.tested_overall.infected_per_100k
-              : regionThresholds.tested_overall.infected_per_100k,
-          title: text.positief_geteste_personen.chloropleth_legenda.titel,
-        }}
-      >
-        {selectedMap === 'municipal' && (
-          <MunicipalityChoropleth
-            metricName="tested_overall"
-            metricProperty="infected_per_100k"
-            tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
-              createSelectMunicipalHandler(router)
-            )}
-            onSelect={createSelectMunicipalHandler(router)}
-          />
-        )}
-        {selectedMap === 'region' && (
-          <SafetyRegionChoropleth
-            metricName="tested_overall"
-            metricProperty="infected_per_100k"
-            tooltipContent={createPositiveTestedPeopleRegionalTooltip(
-              createSelectRegionHandler(router, 'positief-geteste-mensen')
-            )}
-            onSelect={createSelectRegionHandler(
-              router,
-              'positief-geteste-mensen'
-            )}
-          />
-        )}
-      </ChoroplethTile>
-    </TileList>
-  );
-};
-
-Home.getLayout = getNationalLayout;
-
-/**
- * Calculate the counts of regions with a certain escalation level
- */
-const getEscalationCounts = (
-  escalationLevels?: EscalationLevels[]
-): EscalationLevelCounts => {
-  const counts: EscalationLevelCounts = {
-    escalationLevel1: 0,
-    escalationLevel2: 0,
-    escalationLevel3: 0,
-    escalationLevel4: 0,
-    escalationLevel5: 0,
-  };
-
-  if (escalationLevels) {
-    escalationLevels.forEach((region) => {
-      assert(
-        [1, 2, 3, 4, 5].indexOf(region.escalation_level) !== -1,
-        'Escalation level not supported. Value needs to be 1-5.'
-      );
-      const key = `escalationLevel${region.escalation_level}` as keyof EscalationLevelCounts;
-      counts[key] += 1;
-    });
-  }
-
-  return counts;
-};
-
-export async function getStaticProps(): Promise<StaticProps> {
-  const text = parseMarkdownInLocale((await import('../locale/index')).default);
-
-  const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
-  const fileContents = fs.readFileSync(filePath, 'utf8');
-  const data = JSON.parse(fileContents) as National;
-
-  // Strip away unused data (values) from staticProps
-  // keep last_values because we use them!
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  for (const metric of Object.values(data)) {
-    if (typeof metric === 'object' && metric !== null) {
-      for (const [metricProperty, metricValue] of Object.entries(metric)) {
-        if (metricProperty === 'values') {
-          (metricValue as {
-            values: Array<unknown>;
-          }).values = [];
+    for (const metric of Object.values(data)) {
+      if (typeof metric === 'object' && metric !== null) {
+        for (const [metricProperty, metricValue] of Object.entries(metric)) {
+          if (metricProperty === 'values') {
+            (metricValue as {
+              values: Array<unknown>;
+            }).values = [];
+          }
         }
       }
     }
+
+    return data;
   }
+);
 
-  const lastGenerated = data.last_generated;
-  const regionsFilePath = path.join(
-    process.cwd(),
-    'public',
-    'json',
-    'VR_COLLECTION.json'
+const Home: FCWithLayout<typeof getStaticProps> = (props) => {
+  const { text: siteText, data, choropleth, content, lastGenerated } = props;
+  const router = useRouter();
+  const text = siteText.nationaal_actueel;
+
+  const dataInfectedTotal = data.tested_overall;
+  const dataHospitalIntake = data.hospital_nice;
+
+  return (
+    <>
+      <SEOHead
+        title={text.metadata.title}
+        description={text.metadata.description}
+      />
+      <Box bg="white" pb={4}>
+        <MaxWidth px={{ _: 3, sm: 0 }}>
+          <TileList>
+            <WarningTile
+              message={siteText.regionaal_index.belangrijk_bericht}
+            />
+
+            <Search />
+
+            <TopicalPageHeader
+              lastGenerated={Number(lastGenerated)}
+              title={replaceComponentsInText(text.title, {
+                the_netherlands: <strong>{text.the_netherlands}</strong>,
+              })}
+            />
+
+            <MiniTrendTileLayout>
+              <MiniTrendTile
+                title={text.mini_trend_tiles.positief_getest.title}
+                text={
+                  <DataDrivenText
+                    data={data}
+                    metricName="tested_overall"
+                    metricProperty="infected"
+                    differenceKey="tested_overall__infected"
+                    valueTexts={
+                      text.data_driven_texts.infected_people_total.value
+                    }
+                    differenceTexts={
+                      text.data_driven_texts.infected_people_total.difference
+                    }
+                  />
+                }
+                icon={<GetestIcon />}
+                trendData={dataInfectedTotal.values}
+                metricProperty="infected"
+                href="/landelijk/positief-geteste-mensen"
+              />
+
+              <MiniTrendTile
+                title={text.mini_trend_tiles.ziekenhuis_opnames.title}
+                text={
+                  <DataDrivenText
+                    data={data}
+                    metricName="hospital_nice"
+                    metricProperty="admissions_on_date_of_reporting"
+                    differenceKey="hospital_nice__admissions_on_date_of_reporting"
+                    valueTexts={text.data_driven_texts.intake_hospital_ma.value}
+                    differenceTexts={
+                      text.data_driven_texts.intake_hospital_ma.difference
+                    }
+                  />
+                }
+                icon={<ZiekenhuisIcon />}
+                trendData={dataHospitalIntake.values}
+                metricProperty="admissions_on_date_of_reporting"
+                href="/landelijk/ziekenhuis-opnames"
+              />
+
+              <TopicalVaccineTile />
+            </MiniTrendTileLayout>
+
+            <QuickLinks
+              header={text.quick_links.header}
+              links={[
+                {
+                  href: '/landelijk/vaccinaties',
+                  text: text.quick_links.links.nationaal,
+                },
+                {
+                  href: '/veiligheidsregio',
+                  text: text.quick_links.links.veiligheidsregio,
+                },
+                { href: '/gemeente', text: text.quick_links.links.gemeente },
+              ]}
+            />
+
+            {content.editorial && content.highlight?.article && (
+              <EditorialTile
+                editorial={content.editorial}
+                highlightedArticle={content.highlight.article}
+              />
+            )}
+
+            <Box pb={4}>
+              <TopicalTile>
+                <>
+                  <TopicalChoroplethContainer
+                    title={text.risiconiveaus.selecteer_titel}
+                    description={
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: text.risiconiveaus.selecteer_toelichting,
+                        }}
+                      />
+                    }
+                    legendComponent={
+                      <EscalationMapLegenda
+                        data={choropleth.vr}
+                        metricName="escalation_levels"
+                        metricProperty="escalation_level"
+                      />
+                    }
+                  >
+                    <SafetyRegionChoropleth
+                      data={choropleth.vr}
+                      metricName="escalation_levels"
+                      metricProperty="escalation_level"
+                      onSelect={createSelectRegionHandler(router, 'actueel')}
+                      tooltipContent={escalationTooltip(
+                        createSelectRegionHandler(router, 'actueel')
+                      )}
+                    />
+                  </TopicalChoroplethContainer>
+                </>
+              </TopicalTile>
+              <Box
+                borderTopWidth="1px"
+                borderTopStyle="solid"
+                borderTopColor={colors.silver}
+                mx={{ _: -3, md: 0 }}
+              />
+              <TopicalTile py={0}>
+                <Box mx={-3}>
+                  <EscalationLevelExplanations />
+                </Box>
+              </TopicalTile>
+            </Box>
+            <DataSitemap />
+
+            <ArticleList articleSummaries={content.articles} />
+          </TileList>
+        </MaxWidth>
+      </Box>
+    </>
   );
-  const regionsFileContents = fs.readFileSync(regionsFilePath, 'utf8');
-  const regionsData = JSON.parse(regionsFileContents) as Regions;
+};
 
-  const escalationLevels = regionsData.escalation_levels;
-  const escalationLevelCounts = getEscalationCounts(escalationLevels);
-
-  return { props: { data, escalationLevelCounts, text, lastGenerated } };
-}
+Home.getLayout = getDefaultLayout();
 
 export default Home;

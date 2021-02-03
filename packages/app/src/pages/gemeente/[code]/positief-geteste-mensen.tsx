@@ -1,10 +1,13 @@
 import { useRouter } from 'next/router';
 import Getest from '~/assets/test.svg';
+import { ArticleStrip } from '~/components-styled/article-strip';
+import { ArticleSummary } from '~/components-styled/article-teaser';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
@@ -12,18 +15,37 @@ import { municipalThresholds } from '~/components/choropleth/municipal-threshold
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
-import { SEOHead } from '~/components/seoHead';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getMunicipalityLayout } from '~/domain/layout/municipality-layout';
+import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
-  getMunicipalityData,
-  getMunicipalityPaths,
-  IMunicipalityData,
-} from '~/static-props/municipality-data';
+  createGetChoroplethData,
+  createGetContent,
+  getGmData,
+  getLastGeneratedDate,
+  getText,
+} from '~/static-props/get-data';
+import { colors } from '~/style/theme';
+import { formatDateFromMilliseconds } from '~/utils/formatDate';
+import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+export { getStaticPaths } from '~/static-paths/gm';
 
-const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
-  const { data, municipalityName, text: siteText } = props;
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getText,
+  getGmData,
+  createGetChoroplethData({
+    gm: ({ tested_overall }) => ({ tested_overall }),
+  }),
+  createGetContent<{
+    articles?: ArticleSummary[];
+  }>(createPageArticlesQuery('positiveTestsPage'))
+);
+
+const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
+  const { data, choropleth, municipalityName, text: siteText, content } = props;
 
   const text = siteText.gemeente_positief_geteste_personen;
   const lastValue = data.tested_overall.last_value;
@@ -56,6 +78,8 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
           }}
           reference={text.reference}
         />
+
+        <ArticleStrip articles={content.articles} />
 
         <TwoKpiSection>
           <KpiTile
@@ -104,6 +128,41 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
           metadata={{
             source: text.bronnen.rivm,
           }}
+          formatTooltip={(values) => {
+            const value = values[0];
+
+            return (
+              <Text textAlign="center" m={0}>
+                <span style={{ fontWeight: 'bold' }}>
+                  {formatDateFromMilliseconds(value.__date.getTime())}
+                </span>
+                <br />
+                <span
+                  style={{
+                    height: '0.5em',
+                    width: '0.5em',
+                    marginBottom: '0.5px',
+                    backgroundColor: colors.data.primary,
+                    borderRadius: '50%',
+                    display: 'inline-block',
+                  }}
+                />{' '}
+                {replaceVariablesInText(
+                  siteText.common.tooltip.positive_tested_value,
+                  {
+                    totalPositiveValue: formatNumber(value.__value),
+                  }
+                )}
+                <br />
+                {replaceVariablesInText(
+                  siteText.common.tooltip.positive_tested_people,
+                  {
+                    totalPositiveTestedPeople: formatNumber(value.infected),
+                  }
+                )}
+              </Text>
+            );
+          }}
         />
 
         <ChoroplethTile
@@ -121,13 +180,17 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
           }}
         >
           <MunicipalityChoropleth
-            selected={data.code}
+            selectedCode={data.code}
+            data={choropleth.gm}
             metricName="tested_overall"
             metricProperty="infected_per_100k"
             tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
-              createSelectMunicipalHandler(router)
+              createSelectMunicipalHandler(router, 'positief-geteste-mensen')
             )}
-            onSelect={createSelectMunicipalHandler(router)}
+            onSelect={createSelectMunicipalHandler(
+              router,
+              'positief-geteste-mensen'
+            )}
           />
         </ChoroplethTile>
       </TileList>
@@ -136,8 +199,5 @@ const PositivelyTestedPeople: FCWithLayout<IMunicipalityData> = (props) => {
 };
 
 PositivelyTestedPeople.getLayout = getMunicipalityLayout();
-
-export const getStaticProps = getMunicipalityData();
-export const getStaticPaths = getMunicipalityPaths();
 
 export default PositivelyTestedPeople;

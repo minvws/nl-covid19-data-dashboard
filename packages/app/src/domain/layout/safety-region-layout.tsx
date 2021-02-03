@@ -14,20 +14,24 @@ import {
   Menu,
   MetricMenuItemLink,
 } from '~/components-styled/aside/menu';
+import { AppContent } from '~/components-styled/layout/app-content';
 import { SidebarMetric } from '~/components-styled/sidebar-metric';
 import { Text } from '~/components-styled/typography';
 import { getLayout as getSiteLayout } from '~/domain/layout/layout';
-import { AppContent } from '~/components-styled/layout/app-content';
 import siteText from '~/locale/index';
-import { ISafetyRegionData } from '~/static-props/safetyregion-data';
 import { colors } from '~/style/theme';
+import { Regionaal } from '@corona-dashboard/common';
 import { SafetyRegionComboBox } from './components/safety-region-combo-box';
+import { Box } from '~/components-styled/base';
+interface SafetyRegionLayoutProps {
+  lastGenerated: string;
+  data?: Regionaal;
+  safetyRegionName?: string;
+  children?: React.ReactNode;
+}
 
 export function getSafetyRegionLayout() {
-  return function (
-    page: React.ReactNode,
-    pageProps: ISafetyRegionData
-  ): React.ReactNode {
+  return function (page: React.ReactNode, pageProps: SafetyRegionLayoutProps) {
     return getSiteLayout(
       siteText.veiligheidsregio_metadata,
       pageProps.lastGenerated
@@ -51,9 +55,7 @@ export function getSafetyRegionLayout() {
  * More info on persistent layouts:
  * https:adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
  */
-function SafetyRegionLayout(
-  props: ISafetyRegionData & { children: React.ReactNode }
-) {
+function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
   const { children, data, safetyRegionName } = props;
 
   const router = useRouter();
@@ -86,7 +88,11 @@ function SafetyRegionLayout(
         searchComponent={<SafetyRegionComboBox />}
         sidebarComponent={
           <>
-            {showMetricLinks && (
+            {/**
+             * data is only available on /veiligheidsregio/{VRxx} routes
+             * and therefore optional
+             */}
+            {data && showMetricLinks && (
               <nav
                 /** re-mount when route changes in order to blur anchors */
                 key={router.asPath}
@@ -94,13 +100,11 @@ function SafetyRegionLayout(
                 aria-label={siteText.aria_labels.metriek_navigatie}
                 role="navigation"
               >
-                <Text fontSize={3} fontWeight="bold" px={3} m={0} mb={-3}>
+                <Text fontSize={3} fontWeight="bold" px={3} m={0}>
                   {safetyRegionName}
                 </Text>
                 <Menu>
-                  <CategoryMenu
-                    title={siteText.veiligheidsregio_layout.headings.algemeen}
-                  >
+                  <Box spacing={3} pt={3}>
                     <MetricMenuItemLink
                       href={`/veiligheidsregio/${code}/maatregelen`}
                       icon={<Maatregelen fill={colors.restrictions} />}
@@ -111,7 +115,7 @@ function SafetyRegionLayout(
                         siteText.veiligheidsregio_maatregelen.subtitel_sidebar
                       }
                     />
-                  </CategoryMenu>
+                  </Box>
 
                   <CategoryMenu
                     title={
@@ -152,6 +156,7 @@ function SafetyRegionLayout(
                         metricName="deceased_rivm"
                         metricProperty="covid_daily"
                         localeTextKey="veiligheidsregio_sterfte"
+                        differenceKey="deceased_rivm__covid_daily"
                       />
                     </MetricMenuItemLink>
                   </CategoryMenu>
@@ -172,9 +177,9 @@ function SafetyRegionLayout(
                         data={data}
                         scope="vr"
                         metricName="hospital_nice"
-                        metricProperty="admissions_moving_average"
+                        metricProperty="admissions_on_date_of_reporting"
                         localeTextKey="veiligheidsregio_ziekenhuisopnames_per_dag"
-                        differenceKey="hospital_nice__admissions_moving_average"
+                        differenceKey="hospital_nice__admissions_on_date_of_reporting"
                       />
                     </MetricMenuItemLink>
                   </CategoryMenu>
@@ -216,6 +221,7 @@ function SafetyRegionLayout(
                         metricName="disability_care"
                         metricProperty="newly_infected_people"
                         localeTextKey="veiligheidsregio_gehandicaptenzorg_positief_geteste_personen"
+                        differenceKey="disability_care__newly_infected_people"
                       />
                     </MetricMenuItemLink>
 
@@ -233,6 +239,7 @@ function SafetyRegionLayout(
                         metricName="elderly_at_home"
                         metricProperty="positive_tested_daily"
                         localeTextKey="veiligheidsregio_thuiswonende_ouderen"
+                        differenceKey="elderly_at_home__positive_tested_daily"
                       />
                     </MetricMenuItemLink>
                   </CategoryMenu>

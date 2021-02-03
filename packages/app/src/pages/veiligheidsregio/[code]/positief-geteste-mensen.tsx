@@ -3,6 +3,8 @@ import { useRouter } from 'next/router';
 import Afname from '~/assets/afname.svg';
 import Getest from '~/assets/test.svg';
 import { Anchor } from '~/components-styled/anchor';
+import { ArticleStrip } from '~/components-styled/article-strip';
+import { ArticleSummary } from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { ContentHeader } from '~/components-styled/content-header';
@@ -10,6 +12,7 @@ import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { PageBarScale } from '~/components-styled/page-barscale';
+import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
@@ -17,23 +20,42 @@ import { MunicipalityChoropleth } from '~/components/choropleth/municipality-cho
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
-import { SEOHead } from '~/components/seoHead';
 import regionCodeToMunicipalCodeLookup from '~/data/regionCodeToMunicipalCodeLookup';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
+import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
-  getSafetyRegionPaths,
-  getSafetyRegionStaticProps,
-  ISafetyRegionData,
-} from '~/static-props/safetyregion-data';
+  createGetChoroplethData,
+  createGetContent,
+  getLastGeneratedDate,
+  getText,
+  getVrData,
+} from '~/static-props/get-data';
 import { colors } from '~/style/theme';
-import { formatDateFromSeconds } from '~/utils/formatDate';
+import {
+  formatDateFromMilliseconds,
+  formatDateFromSeconds,
+} from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+export { getStaticPaths } from '~/static-paths/vr';
 
-const PositivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
-  const { data, safetyRegionName, text: siteText } = props;
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getText,
+  getVrData,
+  createGetChoroplethData({
+    gm: ({ tested_overall }) => ({ tested_overall }),
+  }),
+  createGetContent<{
+    articles?: ArticleSummary[];
+  }>(createPageArticlesQuery('positiveTestsPage'))
+);
+
+const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
+  const { data, choropleth, safetyRegionName, text: siteText, content } = props;
 
   const text = siteText.veiligheidsregio_positief_geteste_personen;
   const ggdText = siteText.veiligheidsregio_positief_geteste_personen_ggd;
@@ -61,6 +83,9 @@ const PositivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
       <TileList>
         <ContentHeader
           category={siteText.veiligheidsregio_layout.headings.besmettingen}
+          screenReaderCategory={
+            siteText.positief_geteste_personen.titel_sidebar
+          }
           title={replaceVariablesInText(text.titel, {
             safetyRegion: safetyRegionName,
           })}
@@ -74,6 +99,8 @@ const PositivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           }}
           reference={text.reference}
         />
+
+        <ArticleStrip articles={content.articles} />
 
         <TwoKpiSection>
           <KpiTile
@@ -146,6 +173,41 @@ const PositivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
             },
           ]}
           metadata={{ source: text.bronnen.rivm }}
+          formatTooltip={(values) => {
+            const value = values[0];
+
+            return (
+              <Text textAlign="center" m={0}>
+                <span style={{ fontWeight: 'bold' }}>
+                  {formatDateFromMilliseconds(value.__date.getTime())}
+                </span>
+                <br />
+                <span
+                  style={{
+                    height: '0.5em',
+                    width: '0.5em',
+                    marginBottom: '0.5px',
+                    backgroundColor: colors.data.primary,
+                    borderRadius: '50%',
+                    display: 'inline-block',
+                  }}
+                />{' '}
+                {replaceVariablesInText(
+                  siteText.common.tooltip.positive_tested_value,
+                  {
+                    totalPositiveValue: formatNumber(value.__value),
+                  }
+                )}
+                <br />
+                {replaceVariablesInText(
+                  siteText.common.tooltip.positive_tested_people,
+                  {
+                    totalPositiveTestedPeople: formatNumber(value.infected),
+                  }
+                )}
+              </Text>
+            );
+          }}
         />
 
         <ChoroplethTile
@@ -163,14 +225,18 @@ const PositivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
           }}
         >
           <MunicipalityChoropleth
-            selected={selectedMunicipalCode}
+            selectedCode={selectedMunicipalCode}
             highlightSelection={false}
+            data={choropleth.gm}
             metricName="tested_overall"
             metricProperty="infected_per_100k"
             tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
-              createSelectMunicipalHandler(router)
+              createSelectMunicipalHandler(router, 'positief-geteste-mensen')
             )}
-            onSelect={createSelectMunicipalHandler(router)}
+            onSelect={createSelectMunicipalHandler(
+              router,
+              'positief-geteste-mensen'
+            )}
           />
         </ChoroplethTile>
 
@@ -324,8 +390,5 @@ const PositivelyTestedPeople: FCWithLayout<ISafetyRegionData> = (props) => {
 };
 
 PositivelyTestedPeople.getLayout = getSafetyRegionLayout();
-
-export const getStaticProps = getSafetyRegionStaticProps;
-export const getStaticPaths = getSafetyRegionPaths();
 
 export default PositivelyTestedPeople;

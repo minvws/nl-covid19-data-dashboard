@@ -3,29 +3,29 @@ import {
   DisclosureButton,
   DisclosurePanel,
 } from '@reach/disclosure';
-import { ReactNode, useState, useEffect, useCallback, useRef } from 'react';
-
-import { BoxProps, Box } from './base';
-import styled from 'styled-components';
 import { css } from '@styled-system/css';
+import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
+import styled from 'styled-components';
+import { Box, BoxProps } from './base';
 
 const Summary = styled(DisclosureButton)(
   css({
+    display: 'flex',
     alignItems: 'flex-start',
+    justifyContent: 'space-between',
+    overflow: 'visible',
+    width: '100%',
+    m: 0,
+    p: 3,
     bg: 'transparent',
     border: 'none',
     color: 'blue',
-    cursor: 'pointer',
-    display: 'flex',
-    fontSize: 3,
+    fontFamily: 'body',
     fontWeight: 'bold',
-    justifyContent: 'space-between',
-    m: 0,
-    p: 3,
+    fontSize: 3,
     textAlign: 'left',
-    width: '100%',
     position: 'relative',
-    overflow: 'visible',
+    cursor: 'pointer',
 
     '&:focus': {
       outlineWidth: '1px',
@@ -95,9 +95,15 @@ interface CollapsableProps extends BoxProps {
   summary: string;
   children: ReactNode;
   id?: string;
+  hideBorder?: boolean;
 }
 
-export const Collapsible = ({ summary, children, id }: CollapsableProps) => {
+export const Collapsible = ({
+  summary,
+  children,
+  id,
+  hideBorder,
+}: CollapsableProps) => {
   const [open, setOpen] = useState(false);
   const [panelHeight, setPanelHeight] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -169,13 +175,20 @@ export const Collapsible = ({ summary, children, id }: CollapsableProps) => {
   }, [checkLocationHash]);
 
   return (
-    <Box as="section" borderTop="1px solid" borderTopColor="lightGray" id={id}>
+    <Box
+      as="section"
+      borderTop={hideBorder ? undefined : '1px solid'}
+      borderTopColor={hideBorder ? undefined : 'lightGray'}
+      id={id}
+    >
       <Disclosure open={open} onChange={toggle}>
         <Summary>
           {summary}
-          <AnchorLink onClick={(e) => e.stopPropagation()} href={`#${id}`}>
-            #
-          </AnchorLink>
+          {id && (
+            <AnchorLink onClick={(e) => e.stopPropagation()} href={`#${id}`}>
+              #
+            </AnchorLink>
+          )}
         </Summary>
         <Panel
           ref={panelReference}

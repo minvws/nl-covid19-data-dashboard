@@ -13,8 +13,9 @@
     "@sanity/default-layout",
     "@sanity/default-login",
     "@sanity/desk-tool",
-    "@sanity/vision",
-    "@sanity/production-preview"
+    "@sanity/production-preview",
+    "tabs",
+    "translate"
   ],
   "env": {
     "development": {
@@ -35,11 +36,15 @@
     },
     {
       "implements": "part:@sanity/production-preview/resolve-production-url",
-      "path": "./previews/resolveProductionUrl.js"
+      "path": "./previews/resolve-production-url.js"
     },
     {
       "implements": "part:@sanity/base/theme/variables/override-style",
       "path": "variable-overrides.css"
+    },
+    {
+      "implements": "part:@sanity/base/document-actions/resolver",
+      "path": "resolve-document-actions.js"
     }
   ]
 }

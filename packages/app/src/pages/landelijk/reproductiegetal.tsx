@@ -1,27 +1,41 @@
+import { getLastFilledValue } from '@corona-dashboard/common';
 import Repro from '~/assets/reproductiegetal.svg';
+import { ArticleStrip } from '~/components-styled/article-strip';
+import { ArticleSummary } from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiWithIllustrationTile } from '~/components-styled/kpi-with-illustration-tile';
 import { Legenda } from '~/components-styled/legenda';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { PageBarScale } from '~/components-styled/page-barscale';
+import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
-import { SEOHead } from '~/components/seoHead';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import siteText from '~/locale/index';
+import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
-  getNationalStaticProps,
-  NationalPageProps,
-} from '~/static-props/nl-data';
-import { getLastFilledValue } from '~/utils/get-last-filled-value';
+  createGetContent,
+  getLastGeneratedDate,
+  getNlData,
+} from '~/static-props/get-data';
 
 const text = siteText.reproductiegetal;
+const graphDescriptions = siteText.accessibility.grafieken;
 
-const ReproductionIndex: FCWithLayout<NationalPageProps> = (props) => {
-  const { data } = props;
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getNlData,
+  createGetContent<{
+    articles?: ArticleSummary[];
+  }>(createPageArticlesQuery('reproductionPage'))
+);
+
+const ReproductionIndex: FCWithLayout<typeof getStaticProps> = (props) => {
+  const { data, content } = props;
 
   const lastFilledValue = getLastFilledValue(data.reproduction);
 
@@ -47,6 +61,8 @@ const ReproductionIndex: FCWithLayout<NationalPageProps> = (props) => {
           reference={text.reference}
         />
 
+        <ArticleStrip articles={content.articles} />
+
         <TwoKpiSection>
           <KpiWithIllustrationTile
             title={text.barscale_titel}
@@ -67,9 +83,6 @@ const ReproductionIndex: FCWithLayout<NationalPageProps> = (props) => {
               metricProperty="index_average"
               localeTextKey="reproductiegetal"
               differenceKey="reproduction__index_average"
-              differenceStaticTimespan={
-                siteText.toe_en_afname.tijdverloop.hiervoor
-              }
             />
             <Text>{text.barscale_toelichting}</Text>
           </KpiWithIllustrationTile>
@@ -80,6 +93,7 @@ const ReproductionIndex: FCWithLayout<NationalPageProps> = (props) => {
             metadata={{ source: text.bronnen.rivm }}
             title={text.linechart_titel}
             values={data.reproduction.values}
+            ariaDescription={graphDescriptions.reproductiegetal_verloop}
             linesConfig={[
               {
                 metricProperty: 'index_average',
@@ -109,7 +123,5 @@ const ReproductionIndex: FCWithLayout<NationalPageProps> = (props) => {
 };
 
 ReproductionIndex.getLayout = getNationalLayout;
-
-export const getStaticProps = getNationalStaticProps;
 
 export default ReproductionIndex;
