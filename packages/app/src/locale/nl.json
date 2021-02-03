@@ -2163,11 +2163,11 @@
     },
     "section_vaccinations_more_information": {
       "title": "Verwachte data over vaccinaties",
-      "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer:\n- vaccinatiebereidheid\n- vaccinatiegraad\n- vaccins op voorraad"
+      "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer:\n- vaccinatiebereidheid\n- vaccinatiegraad"
     },
     "grafiek": {
       "titel": "Beschikbare vaccins en gezette prikken in totaal",
-      "omschrijving": "Het linkerdeel van de grafiek laat zien hoeveel vaccins Nederland in totaal heeft gekregen en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal verwachten te krijgen en hoeveel prikken we verwachten te zetten."
+      "omschrijving": "Het linkerdeel van de grafiek laat zien hoeveel vaccins Nederland in totaal heeft gekregen en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal verwachten te krijgen en hoeveel prikken we verwachten te zetten.\n\n[In dit artikel leggen we uit waarom Nederland een deel van de vaccins op voorraad houdt.](https://coronadashboard.rijksoverheid.nl/artikelen/waarom-zijn-er-vaccins-op-voorraad)"
     },
     "verwachte_leveringen": {
       "van_week_tot_week": "Week {{weekNumberFrom}} tot week {{weekNumberTo}}",
