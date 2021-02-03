@@ -37,7 +37,7 @@ const text = siteText.veiligheidsregio_sterfte;
 const DeceasedRegionalPage: FCWithLayout<typeof getStaticProps> = (props) => {
   const {
     safetyRegionName: safetyRegion,
-    data: { deceased_cbs: dataCbs, deceased_rivm: dataRivm },
+    data: { deceased_cbs: dataCbs, deceased_rivm: dataRivm, difference },
     content,
   } = props;
 
@@ -80,6 +80,7 @@ const DeceasedRegionalPage: FCWithLayout<typeof getStaticProps> = (props) => {
             <KpiValue
               data-cy="covid_daily"
               absolute={dataRivm.last_value.covid_daily}
+              difference={difference.deceased_rivm__covid_daily}
             />
             <Text>
               {text.section_deceased_rivm.kpi_covid_daily_description}

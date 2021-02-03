@@ -659,7 +659,6 @@
     "read_more": "Read more",
     "absolute_date_template": "on {{date}}"
   },
-  "article_strip_title": "More information on this topic",
   "seoHead": {
     "default_description": "Information on the development of the coronavirus in The Netherlands.",
     "default_title": "Dashboard Coronavirus COVID-19 | Government.nl",
@@ -983,8 +982,8 @@
     "bar_chart_accessibility_description": ""
   },
   "veiligheidsregio_index": {
-    "selecteer_titel": "Level of risk",
-    "selecteer_toelichting": "The map indicates the level of risk per safety region.\n\n[More about risk levels](/over-risiconiveaus)",
+    "selecteer_titel": "Risk level map of the Netherlands",
+    "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\nThere are specific measures for each risk level. These are explained in the road map drafted by the government. **There is a national lockdown. [Click here to view the lockdown measures](/landelijk/maatregelen).**",
     "metadata": {
       "title": "Level of risk per safety region | Dashboard Coronavirus | Government.nl",
       "description": "Overview of the level of risk per safety region in the Netherlands."
@@ -1007,7 +1006,7 @@
   },
   "escalatie_niveau": {
     "titel": "Risk levels",
-    "toelichting": "The map indicates the level of risk per safety region.\n\n[More about risk levels](/over-risiconiveaus)",
+    "toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\nThere are specific measures for each risk level. These are explained in the road map drafted by the government. **There is a national lockdown. [Click here to view the lockdown measures](/landelijk/maatregelen).**",
     "types": {
       "1": {
         "titel": "Caution",
@@ -2004,8 +2003,8 @@
     "title": "COVID-19 vaccinations",
     "description": "Vaccination is the most important step towards getting life back to normal. The Netherlands began vaccinating people against COVID-19 on 6 January 2021. Eventually, the vaccine will be offered to everyone aged 18 and over. This page shows how many doses of vaccine have been administered and how many doses are on their way.",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "date_unix": "1612263890",
-    "date_of_insertion_unix": "1612263890",
+    "date_unix": "1612354200",
+    "date_of_insertion_unix": "1612354200",
     "reference": {
       "href": "/verantwoording#vaccination",
       "text": "Read more about the source of the data on vaccination in the explanation of the presented data."
@@ -2041,27 +2040,27 @@
       "difference": "",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "375908",
-          "date_unix": "1612263890",
-          "date_of_insertion_unix": "1612263890"
+          "total_vaccinated": "416093",
+          "date_unix": "1612354200",
+          "date_of_insertion_unix": "1612354200"
         }
       },
       "kpi_total": {
         "title": "Number of doses administered",
-        "value": "277275",
+        "value": "303702",
         "description": "",
         "date_of_report_unix": "1612263890",
         "date_of_insertion_unix": "1612263890",
         "administered": [
           {
-            "value": "203559",
+            "value": "222486",
             "description": "reported by GGD-GHOR",
-            "report_date": "Reported number till 1 February"
+            "report_date": "Reported number till 2 February"
           },
           {
-            "value": "73716",
+            "value": "81216",
             "description": "reported by LNAZ",
-            "report_date": "Reported number till 1 February"
+            "report_date": "Reported number till 2 February"
           },
           {
             "value": "",
@@ -2085,25 +2084,25 @@
         "first_tab_title": "Calculated number",
         "second_tab_title": "Reported number",
         "tab_total_estimated": {
-          "value": "375908",
+          "value": "416093",
           "description": "",
-          "date_of_report_unix": "1612263890",
-          "date_of_insertion_unix": "1612263890",
+          "date_of_report_unix": "1612354200",
+          "date_of_insertion_unix": "1612354200",
           "administered": [
             {
-              "value": "203559",
+              "value": "222486",
               "description": "administered by GGDs",
-              "report_date": "Reported number till 1 February"
+              "report_date": "Reported number till 2 February"
             },
             {
-              "value": "73716",
+              "value": "81216",
               "description": "administered in hospitals",
-              "report_date": "Reported number till 1 February"
+              "report_date": "Reported number till 2 February"
             },
             {
-              "value": "98633",
+              "value": "112391",
               "description": "administered in long-term care institutions",
-              "report_date": "Calculated number 1 February"
+              "report_date": "Calculated number till 2 February"
             },
             {
               "value": "",
@@ -2438,5 +2437,6 @@
     "title": "Toegankelijkheid COVID-19 Dashboard | Government.nl",
     "description": "Informatie on the accessibility of the COVID-19 Dashboard.",
     "url": "https://coronadashboard.government.nl/verantwoording"
-  }
+  },
+  "article_strip_title": ""
 }

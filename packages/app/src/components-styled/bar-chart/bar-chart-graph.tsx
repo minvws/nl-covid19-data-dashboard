@@ -134,6 +134,9 @@ export function BarChartGraph({
 // Visx only allows to style labels through a classname
 const StyledSvg = styled.svg(
   css({
+    '&:not(:root)': {
+      overflow: 'visible',
+    },
     '&:focus': {
       outline: 'none',
     },
