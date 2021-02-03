@@ -1,6 +1,6 @@
-const sharp = require('sharp');
-const fs = require('fs');
-const path = require('path');
+import sharp from 'sharp';
+import fs from 'fs';
+import path from 'path';
 
 import { imageResizeTargets } from '@corona-dashboard/common/src/config';
 
@@ -14,8 +14,11 @@ import { imageResizeTargets } from '@corona-dashboard/common/src/config';
 
 const IMAGES_DIR = '../app/public/cms/images';
 
-function walk(dir, done) {
-  fs.readdir(dir, function (error, list) {
+function walk(
+  dir: string,
+  done: (error: NodeJS.ErrnoException | null) => void
+) {
+  fs.readdir(dir, (error, list) => {
     if (error) {
       return done(error);
     }

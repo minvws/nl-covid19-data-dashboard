@@ -14,7 +14,8 @@
     "lint": "echo '@TODO add eslint'",
     "assets": "run-s assets:download assets:image-resize",
     "assets:download": "bash scripts/assets-download.sh",
-    "assets:image-resize": "ts-node scripts/images-resize.ts"
+    "assets:image-resize": "ts-node scripts/images-resize.ts",
+    "assets2": "ts-node scripts/assets.ts --resolveJsonModule"
   },
   "keywords": [
     "sanity"
@@ -33,13 +34,16 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-icons": "^4.1.0",
+    "react-world-flags": "^1.4.0",
     "sanity-mobile-preview": "^1.0.7",
-    "sanity-plugin-tabs": "^2.0.1",
-    "react-world-flags": "^1.4.0"
+    "sanity-plugin-tabs": "^2.0.1"
   },
   "devDependencies": {
     "sharp": "^0.27.0",
     "npm-run-all": "^4.1.5",
-    "@sanity/cli": "^2.2.6"
+    "@sanity/cli": "^2.2.6",
+    "@types/download": "^6.2.4",
+    "@types/sharp": "^0.27.1",
+    "download": "^8.0.0"
   }
 }
