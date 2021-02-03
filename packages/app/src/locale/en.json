@@ -623,7 +623,7 @@
     "select_region_municipality_legend": "Select a municipality:",
     "select_region_type_legend": "Show numbers from:",
     "your_municipality": "Municipality",
-    "belangrijk_bericht": "There is a [national lockdown](https://coronadashboard.government.nl/landelijk/maatregelen) until at least 9 February."
+    "belangrijk_bericht": "There is a [national lockdown](https://coronadashboard.government.nl/landelijk/maatregelen)."
   },
   "common": {
     "metadata": {
@@ -989,7 +989,7 @@
       "title": "Level of risk per safety region | Dashboard Coronavirus | Government.nl",
       "description": "Overview of the level of risk per safety region in the Netherlands."
     },
-    "belangrijk_bericht": "There is a [national lockdown](https://coronadashboard.government.nl/landelijk/maatregelen) until at least 9 February."
+    "belangrijk_bericht": "There is a [national lockdown](https://coronadashboard.government.nl/landelijk/maatregelen)."
   },
   "gemeente_index": {
     "selecteer_titel": "Select your municipality",
@@ -1015,11 +1015,11 @@
       },
       "2": {
         "titel": "Concern",
-        "toelichting": "The situation is becoming difficult to manage. The number of new infections is between 35 and 150 per 100,000 inhabitants per week. Pressure on healthcare capacity is increasing."
+        "toelichting": "The situation is becoming difficult to manage. The number of new infections is between 35 and 100 per 100,000 inhabitants per week. Pressure on healthcare capacity is increasing."
       },
       "3": {
         "titel": "Serious",
-        "toelichting": "The situation is serious. The number of new infections is between 150 and 250 per 100,000 inhabitants per week. Pressure on healthcare capacity is very high."
+        "toelichting": "The situation is serious. The number of new infections is between 100 and 250 per 100,000 inhabitants per week. Pressure on healthcare capacity is very high."
       },
       "4": {
         "titel": "Severe",
@@ -2202,7 +2202,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of the Netherlands",
-      "selecteer_toelichting": "The map indicates the level of risk per safety region.\n\n**There are specific measures for each risk level. These are explained in the road map drafted by the government. There is a national lockdown until at least 9 February. [Click here to view the lockdown measures](landelijk/maatregelen).**"
+      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions.  \n\n**There are specific measures for each risk level. These are explained in the road map drafted by the government. There is a national lockdown. [Click here to view the lockdown measures](landelijk/maatregelen).**"
     },
     "data_sitemap_titel": "Topics on this dashboard",
     "data_sitemap_toelichting": "Go directly to the following topics:",
@@ -2289,7 +2289,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of The Netherlands",
-      "selecteer_toelichting": "The map indicates the level of risk per safety region.\n\n**There are specific measures for each risk level. These are explained in the road map drafted by the government. There is a national lockdown until at least 9 February. [Click here to view the lockdown measures](landelijk/maatregelen).**"
+      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions.  \n\n**There are specific measures for each risk level. These are explained in the road map drafted by the government. There is a national lockdown. [Click here to view the lockdown measures](landelijk/maatregelen).**"
     },
     "risoconiveau_maatregelen": {
       "title": "Risk level & measures",
@@ -2362,7 +2362,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of the Netherlands",
-      "selecteer_toelichting": "The map indicates the level of risk per safety region.\n\n**There are specific measures for each risk level. These are explained in the road map drafted by the government. There is a national lockdown until at least 9 February. [Click here to view the lockdown measures](landelijk/maatregelen).**"
+      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions.  \n\n**There are specific measures for each risk level. These are explained in the road map drafted by the government. There is a national lockdown. [Click here to view the lockdown measures](landelijk/maatregelen).**"
     },
     "risoconiveau_maatregelen": {
       "title": "Risk level & measures",
