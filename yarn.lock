@@ -1459,9 +1459,9 @@
     shallow-equals "^1.0.0"
     styled-components "^5.2.1"
 
-"@sanity/base@2.3.0", "@sanity/base@^2.3.0":
-  version "2.3.0"
-  resolved "https://registry.npmjs.org/@sanity/base/-/base-2.3.0.tgz#f68af34cb8066741803d06eda75472e203b562e9"
+"@sanity/base@2.3.2", "@sanity/base@^2.3.2":
+  version "2.3.2"
+  resolved "https://registry.npmjs.org/@sanity/base/-/base-2.3.2.tgz#fc54b54c5f565f059c6fdc261b9ea1175be7807d"
   dependencies:
     "@popperjs/core" "^2.5.4"
     "@reach/auto-id" "^0.10.5"
@@ -1681,11 +1681,11 @@
     "@sanity/generate-help-url" "2.2.6"
     lodash "^4.17.15"
 
-"@sanity/default-layout@^2.3.0":
-  version "2.3.0"
-  resolved "https://registry.npmjs.org/@sanity/default-layout/-/default-layout-2.3.0.tgz#36f42a74292dc63e0f5b80ecb2f8dfc59cfd7ff8"
+"@sanity/default-layout@^2.3.2":
+  version "2.3.2"
+  resolved "https://registry.npmjs.org/@sanity/default-layout/-/default-layout-2.3.2.tgz#b5a0986d8c1dbb158b69d774a751ffc9219431a5"
   dependencies:
-    "@sanity/base" "2.3.0"
+    "@sanity/base" "2.3.2"
     "@sanity/generate-help-url" "2.2.6"
     "@sanity/ui" "^0.33.0"
     "@sanity/util" "2.2.6"
@@ -1705,17 +1705,17 @@
     prop-types "^15.6.0"
     rxjs "^6.5.3"
 
-"@sanity/desk-tool@^2.3.0":
-  version "2.3.0"
-  resolved "https://registry.npmjs.org/@sanity/desk-tool/-/desk-tool-2.3.0.tgz#9f16e901d97600b71a25ff141a2564193cc68605"
+"@sanity/desk-tool@^2.3.2":
+  version "2.3.2"
+  resolved "https://registry.npmjs.org/@sanity/desk-tool/-/desk-tool-2.3.2.tgz#b648361e76d7495592dd436c14a3172c08675957"
   dependencies:
     "@popperjs/core" "^2.5.4"
     "@reach/auto-id" "^0.10.5"
-    "@sanity/base" "2.3.0"
+    "@sanity/base" "2.3.2"
     "@sanity/data-aspects" "2.2.6"
     "@sanity/diff" "2.2.6"
-    "@sanity/field" "2.3.0"
-    "@sanity/form-builder" "2.3.0"
+    "@sanity/field" "2.3.2"
+    "@sanity/form-builder" "2.3.2"
     "@sanity/generate-help-url" "2.2.6"
     "@sanity/mutator" "2.2.6"
     "@sanity/react-hooks" "2.2.6"
@@ -1743,7 +1743,6 @@
     scroll-into-view-if-needed "^2.2.26"
     shallow-equals "^1.0.0"
     styled-components "^5.2.1"
-    use-onclickoutside "^0.3.1"
 
 "@sanity/diff@2.2.6":
   version "2.2.6"
@@ -1786,12 +1785,12 @@
     simple-get "^4.0.0"
     split2 "^3.2.2"
 
-"@sanity/field@2.3.0":
-  version "2.3.0"
-  resolved "https://registry.npmjs.org/@sanity/field/-/field-2.3.0.tgz#3f7ae7f8397779f0910fe7c41331259664b62086"
+"@sanity/field@2.3.2":
+  version "2.3.2"
+  resolved "https://registry.npmjs.org/@sanity/field/-/field-2.3.2.tgz#96fe0698b8f62e7614b189344ece997fb86de2e5"
   dependencies:
     "@sanity/asset-utils" "^1.1.2"
-    "@sanity/base" "2.3.0"
+    "@sanity/base" "2.3.2"
     "@sanity/diff" "2.2.6"
     "@sanity/react-hooks" "2.2.6"
     "@sanity/types" "2.2.6"
@@ -1801,11 +1800,11 @@
     sanity-diff-patch "^1.0.9"
     styled-components "^5.2.1"
 
-"@sanity/form-builder@2.3.0":
-  version "2.3.0"
-  resolved "https://registry.npmjs.org/@sanity/form-builder/-/form-builder-2.3.0.tgz#8e19fe80a1fbbd2dc94869875f6291a54436c5e2"
+"@sanity/form-builder@2.3.2":
+  version "2.3.2"
+  resolved "https://registry.npmjs.org/@sanity/form-builder/-/form-builder-2.3.2.tgz#64c8a194e74554774c918aeb94086e76e282371a"
   dependencies:
-    "@sanity/base" "2.3.0"
+    "@sanity/base" "2.3.2"
     "@sanity/block-tools" "2.2.6"
     "@sanity/generate-help-url" "2.2.6"
     "@sanity/icons" "^1.0.1"
@@ -3512,10 +3511,6 @@ archiver@^5.0.0:
     readdir-glob "^1.0.0"
     tar-stream "^2.1.4"
     zip-stream "^4.0.4"
-
-are-passive-events-supported@^1.1.0:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/are-passive-events-supported/-/are-passive-events-supported-1.1.1.tgz#3db180a1753a2186a2de50a32cded3ac0979f5dc"
 
 are-we-there-yet@~1.1.2:
   version "1.1.5"
@@ -14863,23 +14858,6 @@ url@^0.11.0:
   dependencies:
     punycode "1.3.2"
     querystring "0.2.0"
-
-use-isomorphic-layout-effect@^1.0.0:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/use-isomorphic-layout-effect/-/use-isomorphic-layout-effect-1.1.1.tgz#7bb6589170cd2987a152042f9084f9effb75c225"
-
-use-latest@^1.0.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/use-latest/-/use-latest-1.2.0.tgz#a44f6572b8288e0972ec411bdd0840ada366f232"
-  dependencies:
-    use-isomorphic-layout-effect "^1.0.0"
-
-use-onclickoutside@^0.3.1:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/use-onclickoutside/-/use-onclickoutside-0.3.1.tgz#fdd723a6a499046b6bc761e4a03af432eee5917b"
-  dependencies:
-    are-passive-events-supported "^1.1.0"
-    use-latest "^1.0.0"
 
 use-resize-observer@^6.1.0:
   version "6.1.0"
