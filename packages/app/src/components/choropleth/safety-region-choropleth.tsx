@@ -30,7 +30,6 @@ type SafetyRegionChoroplethProps<T, K extends RegionsMetricName> = {
   onSelect?: (context: SafetyRegionProperties) => void;
   tooltipContent?: (context: SafetyRegionProperties & T) => ReactNode;
   highlightCode?: string;
-  isRiskLevelStyling?: boolean;
 };
 
 /**
@@ -59,13 +58,14 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
     tooltipContent,
     highlightCode,
     highlightSelection,
-    isRiskLevelStyling = false,
   } = props;
 
   const ratio = 1.2;
   const [ref, dimensions] = useChartDimensions<HTMLDivElement>(ratio);
 
   const boundingBox = useSafetyRegionBoundingbox(regionGeo, selectedCode);
+
+  const isEscalationLevelTheme = metricName === 'escalation_levels';
 
   const { getChoroplethValue, hasData, values } = useSafetyRegionData(
     regionGeo,
@@ -146,13 +146,13 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
           id={vrcode}
           key={vrcode}
           pathData={path}
-          stroke={isRiskLevelStyling || isSelected ? '#fff' : undefined}
-          strokeWidth={isRiskLevelStyling || isSelected ? 3 : undefined}
+          stroke={isEscalationLevelTheme || isSelected ? '#fff' : undefined}
+          strokeWidth={isEscalationLevelTheme || isSelected ? 3 : undefined}
           isSelected={isSelected}
         />
       );
     },
-    [hasSelectHander, isRiskLevelStyling, selectedCode, highlightSelection]
+    [hasSelectHander, isEscalationLevelTheme, selectedCode, highlightSelection]
   );
 
   const onClick = (id: string) => {
