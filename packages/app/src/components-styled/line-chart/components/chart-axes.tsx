@@ -1,13 +1,27 @@
+/**
+ * @TODO This abstraction turns out to be hurting more than helping. We concluded that
+ * it needs to be broken up and placed at the root again. There are too many
+ * specific things here and the interaction to/from other layers in passing
+ * props and functions is cumbersome.
+ *
+ * For example TimespanMarker is rendered here because it needs to be part of
+ * the SVG, and can not be placed outside. The other visual components that
+ * render on top of the chart are using plain div elements but the
+ * TimespanMarker uses Visx components.
+ */
+
 import { AxisBottom, AxisLeft, TickFormatter } from '@visx/axis';
 import { GridRows } from '@visx/grid';
 import { Group } from '@visx/group';
 import { scaleLinear, scaleTime } from '@visx/scale';
-import { Bar, Line } from '@visx/shape';
+import { Line } from '@visx/shape';
 import { Text } from '@visx/text';
 import { ScaleLinear, ScaleTime } from 'd3-scale';
 import { ComponentProps, memo, MouseEvent, ReactNode, TouchEvent } from 'react';
 import { colors } from '~/style/theme';
+import { TrendValue } from '../logic';
 import { MARKER_MIN_WIDTH } from './marker';
+import { TimespanMarker } from './timespan-marker';
 
 const NUM_TICKS = 3;
 
@@ -49,18 +63,20 @@ type ChartAxesProps = {
   benchmark?: Benchmark;
   onHover: (
     event: React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>,
-    scales: ChartScales
+    scales: ChartScales,
+    seriesIndex: number
   ) => void;
   xDomain: [Date, Date];
   yDomain: number[];
   width: number;
   height: number;
-  padding?: ChartPadding;
+  padding: ChartPadding;
   formatXAxis: TickFormatter<Date>;
   formatYAxis: TickFormatter<number>;
   children: (props: ChartScales) => ReactNode;
   componentCallback?: ComponentCallbackFunction;
   ariaLabelledBy?: string;
+  timespanMarkerData: TrendValue[];
 };
 
 type AnyTickFormatter = (value: any) => string;
@@ -70,7 +86,7 @@ export type ChartBounds = { width: number; height: number };
 export const ChartAxes = memo(function ChartAxes({
   width,
   height,
-  padding = defaultPadding,
+  padding,
   xDomain,
   yDomain,
   onHover,
@@ -80,6 +96,7 @@ export const ChartAxes = memo(function ChartAxes({
   children,
   componentCallback = () => undefined,
   ariaLabelledBy,
+  timespanMarkerData,
 }: ChartAxesProps) {
   const bounds: ChartBounds = {
     width: width - padding.left - padding.right,
@@ -100,9 +117,10 @@ export const ChartAxes = memo(function ChartAxes({
 
   const scales = { xScale, yScale };
 
-  const handleMouse = (
-    event: TouchEvent<SVGElement> | MouseEvent<SVGElement>
-  ) => onHover(event, scales);
+  const handleHover = (
+    event: TouchEvent<SVGElement> | MouseEvent<SVGElement>,
+    seriesIndex: number
+  ) => onHover(event, scales, seriesIndex);
 
   return (
     <svg
@@ -190,16 +208,12 @@ export const ChartAxes = memo(function ChartAxes({
           </Group>
         )}
 
-        <Bar
-          x={0}
-          y={0}
+        <TimespanMarker
+          data={timespanMarkerData}
+          padding={padding}
           width={width}
           height={height}
-          fill="transparent"
-          onTouchStart={handleMouse}
-          onTouchMove={handleMouse}
-          onMouseMove={handleMouse}
-          onMouseLeave={handleMouse}
+          onHover={handleHover}
         />
 
         {children(scales)}

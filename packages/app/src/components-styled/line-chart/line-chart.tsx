@@ -6,6 +6,7 @@ import { ScaleTime } from 'd3-scale';
 import { useCallback, useMemo, useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
+import { Legenda, LegendItem, LegendShape } from '~/components-styled/legenda';
 import {
   ChartAxes,
   ChartPadding,
@@ -28,7 +29,6 @@ import {
 } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { TimeframeOption } from '~/utils/timeframe';
-import { Legenda, LegendItem, LegendShape } from '~/components-styled/legenda';
 import { HoverPoint, Marker, Tooltip, Trend } from './components';
 import {
   calculateYMax,
@@ -150,6 +150,8 @@ export function LineChart<T extends Value>({
     };
   }, [overridePadding, seriesMax]);
 
+  const timespanMarkerData = trendsList[0];
+
   const [markerProps, setMarkerProps] = useState<{
     height: number;
     data: HoverPoint<T>[];
@@ -219,6 +221,16 @@ export function LineChart<T extends Value>({
       event: React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>,
       scales: ChartScales
     ) => {
+      /**
+       * @TODO the hover handler is now passed the seriesIndex value (from
+       * TimeseriesMarker). I think we can use this to greatly simplify the
+       * logic below, since the index will tell us what slice of the trend
+       * values is being hovered.
+       *
+       * In the case of 1 trend this gives us the point, and in the case of
+       * multiple trends we only need to look at the y-position to find the
+       * closest point in that slice.
+       */
       if (!trendsList.length || event.type === 'mouseleave') {
         toggleHoverElements(true);
         return;
@@ -314,6 +326,7 @@ export function LineChart<T extends Value>({
           benchmark={benchmark}
           componentCallback={componentCallback}
           ariaLabelledBy={ariaLabelledBy}
+          timespanMarkerData={timespanMarkerData}
         >
           {renderTrendLines}
         </ChartAxes>
