@@ -14,14 +14,15 @@ import { InlineText, Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
-import EstimateGraphNL from '~/assets/graph_estimated_nl.svg';
-import EstimateGraphEN from '~/assets/graph_estimated_en.svg';
+import VaccinesAdministeredChartNl from '~/assets/vaccines_administered_chart_nl.svg';
+import VaccinesAdministeredChartEn from '~/assets/vaccines_administered_chart_en.svg';
 import {
   getLastGeneratedDate,
   getNlData,
   getText,
 } from '~/static-props/get-data';
 import { formatNumber } from '~/utils/formatNumber';
+import { AspectRatio } from '~/components-styled/aspect-ratio';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -201,16 +202,24 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
         <ChartTile
           title={text.grafiek.titel}
           description={text.grafiek.omschrijving}
-          ariaDescription={siteText.accessibility.grafieken.levering_en_prikken}
+          ariaDescription={
+            siteText.accessibility.grafieken.vaccin_levering_en_prikken
+          }
           metadata={{
-            date: 1611593522,
+            date: 1612375710,
             source: text.bronnen.rivm,
           }}
         >
-          <>
-            {targetLanguage === 'nl' && <EstimateGraphNL />}
-            {targetLanguage === 'en' && <EstimateGraphEN />}
-          </>
+          {/**
+           * Aspect ratio was determined by the original SVG width/height which is now set to be 100% each.
+           */}
+          <AspectRatio ratio={1.8325}>
+            {targetLanguage === 'nl' ? (
+              <VaccinesAdministeredChartNl />
+            ) : (
+              <VaccinesAdministeredChartEn />
+            )}
+          </AspectRatio>
         </ChartTile>
 
         <TwoKpiSection>
