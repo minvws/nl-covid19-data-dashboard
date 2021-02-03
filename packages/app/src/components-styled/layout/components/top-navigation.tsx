@@ -71,6 +71,10 @@ export function TopNavigation() {
         css={css({
           maxHeight: asResponsiveArray({ _: `${panelHeight}px`, md: '100%' }),
           opacity: asResponsiveArray({ _: isMenuOpen ? 1 : 0, md: 1 }),
+          pointerEvents: asResponsiveArray({
+            _: isMenuOpen ? 'auto' : 'none',
+            md: 'auto',
+          }),
           transition: asResponsiveArray({
             _:
               isMenuOpen || isAnimating
