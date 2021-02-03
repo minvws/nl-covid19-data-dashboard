@@ -1,4 +1,4 @@
-export const HIGHLIGHTED_ARTICLE = {
+export const HIGHLIGHTED_ARTICLES = {
   title: 'Uitgelichte artikelen',
   name: 'articles',
   type: 'array',

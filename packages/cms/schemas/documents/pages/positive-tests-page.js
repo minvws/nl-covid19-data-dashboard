@@ -1,8 +1,8 @@
-import { HIGHLIGHTED_ARTICLE } from '../fields/highlighted-article';
+import { HIGHLIGHTED_ARTICLES } from '../fields/highlighted-articles';
 
 export default {
   title: 'Positieve testen',
   name: 'positiveTestsPage',
   type: 'document',
-  fields: [HIGHLIGHTED_ARTICLE],
+  fields: [HIGHLIGHTED_ARTICLES],
 };
