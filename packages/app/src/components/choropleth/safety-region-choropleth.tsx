@@ -5,7 +5,7 @@ import {
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { Feature, MultiPolygon } from 'geojson';
-import { ReactNode, useCallback } from 'react';
+import { ReactNode, useCallback, Fragment } from 'react';
 import { AspectRatio } from '~/components-styled/aspect-ratio';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { colors } from '~/style/theme';
@@ -25,12 +25,12 @@ type SafetyRegionChoroplethProps<T, K extends RegionsMetricName> = {
   data: Pick<Regions, K>;
   metricName: K;
   metricProperty: string;
-  selected?: string;
+  selectedCode?: string;
   highlightSelection?: boolean;
   onSelect?: (context: SafetyRegionProperties) => void;
   tooltipContent?: (context: SafetyRegionProperties & T) => ReactNode;
   highlightCode?: string;
-  riskLevelStyling?: boolean;
+  isRiskLevelStyling?: boolean;
 };
 
 /**
@@ -52,19 +52,20 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
 ) {
   const {
     data,
-    selected,
+    selectedCode,
     metricName,
     metricProperty,
     onSelect,
     tooltipContent,
     highlightCode,
-    riskLevelStyling = false,
+    highlightSelection,
+    isRiskLevelStyling = false,
   } = props;
 
   const ratio = 1.2;
   const [ref, dimensions] = useChartDimensions<HTMLDivElement>(ratio);
 
-  const boundingBox = useSafetyRegionBoundingbox(regionGeo, selected);
+  const boundingBox = useSafetyRegionBoundingbox(regionGeo, selectedCode);
 
   const { getChoroplethValue, hasData, values } = useSafetyRegionData(
     regionGeo,
@@ -92,7 +93,7 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
     selectedThreshold
   );
 
-  const featureCallback = useCallback(
+  const renderFeature = useCallback(
     (feature: Feature<MultiPolygon, SafetyRegionProperties>, path: string) => {
       const { vrcode } = feature.properties;
       const fill = (hasData && getFillColor(vrcode)) || 'white';
@@ -115,27 +116,17 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
     [getFillColor, hasData]
   );
 
-  const highlightCallback = useCallback(
+  const renderHighlight = useCallback(
     (feature: Feature<MultiPolygon, SafetyRegionProperties>, path: string) => {
       const { vrcode } = feature.properties;
 
       if (highlightCode !== vrcode) return;
 
       return (
-        <>
-          <Path
-            key={`${vrcode}-outside-border`}
-            pathData={path}
-            stroke="#fff"
-            strokeWidth={8}
-          />
-          <Path
-            key={`${vrcode}-inside-border`}
-            pathData={path}
-            stroke="#000"
-            strokeWidth={2}
-          />
-        </>
+        <Fragment key={vrcode}>
+          <Path pathData={path} stroke="#fff" strokeWidth={8} />
+          <Path pathData={path} stroke="#000" strokeWidth={2} />
+        </Fragment>
       );
     },
     [highlightCode]
@@ -143,9 +134,11 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
 
   const hasSelectHander = !!onSelect;
 
-  const hoverCallback = useCallback(
+  const renderHover = useCallback(
     (feature: Feature<MultiPolygon, SafetyRegionProperties>, path: string) => {
       const { vrcode } = feature.properties;
+
+      const isSelected = vrcode === selectedCode && highlightSelection;
 
       return (
         <HoverPath
@@ -153,12 +146,13 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
           id={vrcode}
           key={vrcode}
           pathData={path}
-          stroke={riskLevelStyling ? '#fff' : undefined}
-          strokeWidth={riskLevelStyling ? 3 : undefined}
+          stroke={isRiskLevelStyling || isSelected ? '#fff' : undefined}
+          strokeWidth={isRiskLevelStyling || isSelected ? 3 : undefined}
+          isSelected={isSelected}
         />
       );
     },
-    [hasSelectHander, riskLevelStyling]
+    [hasSelectHander, isRiskLevelStyling, selectedCode, highlightSelection]
   );
 
   const onClick = (id: string) => {
@@ -185,11 +179,11 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
           hovers={hasData ? regionGeo : undefined}
           boundingBox={boundingBox || countryGeo}
           dimensions={dimensions}
-          featureCallback={featureCallback}
-          hoverCallback={hoverCallback}
+          renderFeature={renderFeature}
+          renderHover={renderHover}
           onPathClick={onClick}
           getTooltipContent={getTooltipContent}
-          highlightCallback={highlightCallback}
+          renderHighlight={renderHighlight}
         />
       </AspectRatio>
     </div>

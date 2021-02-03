@@ -235,7 +235,7 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
                         createSelectRegionHandler(router, 'actueel')
                       )}
                       highlightCode={safetyRegionForMunicipality?.code}
-                      riskLevelStyling={true}
+                      isRiskLevelStyling={true}
                     />
                   </TopicalChoroplethContainer>
                 </>

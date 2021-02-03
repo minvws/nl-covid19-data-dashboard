@@ -30,7 +30,7 @@ export function MunicipalityNavigationMap<T>(
 
   const { getChoroplethValue } = useMunicipalityNavigationData(municipalGeo);
 
-  const featureCallback = (
+  const renderFeature = (
     feature: Feature<MultiPolygon, MunicipalityProperties>,
     path: string,
     _index: number
@@ -49,7 +49,7 @@ export function MunicipalityNavigationMap<T>(
     );
   };
 
-  const hoverCallback = (
+  const renderHover = (
     feature: Feature<MultiPolygon, MunicipalityProperties>,
     path: string
   ) => {
@@ -89,8 +89,8 @@ export function MunicipalityNavigationMap<T>(
         hovers={municipalGeo}
         boundingBox={countryGeo}
         dimensions={dimensions}
-        featureCallback={featureCallback}
-        hoverCallback={hoverCallback}
+        renderFeature={renderFeature}
+        renderHover={renderHover}
         onPathClick={onClick}
         getTooltipContent={getTooltipContent}
       />

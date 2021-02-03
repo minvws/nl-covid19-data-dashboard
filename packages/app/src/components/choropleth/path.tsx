@@ -8,6 +8,7 @@ interface PathProps {
   strokeWidth?: number;
   id?: string;
   isClickable?: boolean;
+  isSelected?: boolean;
 }
 
 export function Path({
@@ -38,6 +39,7 @@ export function HoverPath({
   stroke,
   strokeWidth,
   isClickable,
+  isSelected,
 }: PathProps) {
   return (
     <StyledHoverPath
@@ -48,6 +50,7 @@ export function HoverPath({
       fill={fill}
       stroke={stroke}
       strokeWidth={strokeWidth}
+      isSelected={isSelected}
     />
   );
 }
@@ -57,18 +60,15 @@ const StyledPath = styled.path<{
 }>((x) =>
   css({
     fill: x.fill || 'transparent',
-    stroke: 'x.stroke',
+    stroke: x.stroke,
     strokeWidth: x.strokeWidth || 0.5,
     pointerEvents: 'none',
-
-    transitionProperty: 'fill, stroke, stroke-width',
-    transitionDuration: '120ms, 90ms',
-    transitionTimingFunction: 'ease-out',
   })
 );
 
 const StyledHoverPath = styled.path<{
   isClickable?: boolean;
+  isSelected?: boolean;
 }>((x) =>
   css({
     fill: 'transparent',
@@ -76,8 +76,8 @@ const StyledHoverPath = styled.path<{
     transitionDuration: '120ms, 90ms',
     transitionTimingFunction: 'ease-out',
     cursor: x.isClickable ? 'pointer' : 'default',
-    stroke: 'transparent',
-    strokeWidth: 0,
+    stroke: x.stroke ? '#000' : 'transparent',
+    strokeWidth: x.isSelected ? 3 : 0,
     pointerEvents: 'all',
     '&:hover': {
       transitionDuration: '0ms',

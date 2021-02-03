@@ -32,29 +32,29 @@ type TProps<T1, T3> = {
   dimensions: TCombinedChartDimensions;
   // This callback is invoked for each of the features in the featureCollection property.
   // This will usually return a <path/> element.
-  featureCallback: (
+  renderFeature: (
     feature: Feature<MultiPolygon, T1>,
     path: string,
     index: number
   ) => ReactNode;
 
-  highlightCallback?: (
+  renderHighlight?: (
     feature: Feature<MultiPolygon, T1>,
     path: string,
     index: number
   ) => ReactNode;
   // This callback is invoked for each of the features in the hovers property.
   // This will usually return a <path/> element.
-  hoverCallback: (
+  renderHover: (
     feature: Feature<MultiPolygon, T3>,
     path: string,
     index: number
   ) => ReactNode;
   // This callback is invoked after a click was received on one of the features in the featureCollection property.
-  // The id is the value that is assigned to the data-id attribute in the featureCallback.
+  // The id is the value that is assigned to the data-id attribute in the renderFeature.
   onPathClick: (id: string) => void;
   // This callback is invoked right before a tooltip is shown for one of the features in the featureCollection property.
-  // The id is the value that is assigned to the data-id attribute in the featureCallback.
+  // The id is the value that is assigned to the data-id attribute in the renderFeature.
   getTooltipContent: (id: string) => ReactNode;
   description?: string;
 };
@@ -119,13 +119,13 @@ const ChoroplethMap: <T1, T3>(
     hovers,
     boundingBox,
     dimensions,
-    featureCallback,
-    hoverCallback,
+    renderFeature,
+    renderHover,
     onPathClick,
     setTooltip,
     hoverRef,
     description,
-    highlightCallback,
+    renderHighlight,
   } = props;
 
   const clipPathId = useUniqueId();
@@ -181,7 +181,7 @@ const ChoroplethMap: <T1, T3>(
         >
           <MercatorGroup
             data={featureCollection.features}
-            render={featureCallback}
+            render={renderFeature}
             fitSize={fitSize}
           />
 
@@ -191,16 +191,16 @@ const ChoroplethMap: <T1, T3>(
             <g ref={hoverRef}>
               <MercatorGroup
                 data={hovers.features}
-                render={hoverCallback}
+                render={renderHover}
                 fitSize={fitSize}
               />
             </g>
           )}
 
-          {highlightCallback && (
+          {renderHighlight && (
             <MercatorGroup
               data={featureCollection.features}
-              render={highlightCallback}
+              render={renderHighlight}
               fitSize={fitSize}
             />
           )}

@@ -118,7 +118,7 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
           }}
         >
           <MunicipalityChoropleth
-            selected={selectedMunicipalCode}
+            selectedCode={selectedMunicipalCode}
             highlightSelection={false}
             data={choropleth.gm}
             metricName="hospital_nice"

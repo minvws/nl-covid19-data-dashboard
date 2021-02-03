@@ -76,7 +76,7 @@ const SafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
             tooltipContent={escalationTooltip(
               createSelectRegionHandler(router, 'maatregelen')
             )}
-            riskLevelStyling={true}
+            isRiskLevelStyling={true}
           />
         </ChoroplethTile>
       </TileList>
