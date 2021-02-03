@@ -764,13 +764,7 @@
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": [
-      "0 to 20",
-      "20 to 40",
-      "40 to 60",
-      "60 to 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -1965,7 +1959,8 @@
       "verdenkingen_huisartsen": "This graph shows the progression over time in the estimated number of patients who contacted the general practitioner for the first time due to COVID-19 like symptoms.",
       "ziekenhuis_opnames": "This graph shows the progression in hospital admissions over time.",
       "rioolwater_meetwaarde": "This graph shows the most recent measured value of the average amount of virus particles per 100.000 residents, per sewage processing facility.",
-      "verwachte_leveringen": "This graph shows the number of approved vaccine doses the Netherlands expects to receive over the next six weeks."
+      "verwachte_leveringen": "This graph shows the number of approved vaccine doses the Netherlands expects to receive over the next six weeks.",
+      "vaccin_levering_en_prikken": "This graph shows the number of vaccines delivered and how many injections per type have been taken."
     }
   },
   "deceased_age_groups": {
@@ -2006,7 +2001,7 @@
     "bronnen": {
       "rivm": {
         "href": "",
-        "text": "Ministry of Health, Welfare and Sport",
+        "text": "RIVM",
         "download": ""
       },
       "ggd": {

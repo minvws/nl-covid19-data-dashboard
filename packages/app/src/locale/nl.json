@@ -764,13 +764,7 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": [
-      "0 tot 20",
-      "20 tot 40",
-      "40 tot 60",
-      "60 tot 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -1965,7 +1959,7 @@
       "verdenkingen_huisartsen": "Deze grafiek toont het geschatte aantal patiënten dat voor het eerst met COVID-19-achtige klachten contact opnam met de huisarts over tijd.",
       "ziekenhuis_opnames": "Deze grafiek toont het aantal ziekenhuisopnames over tijd.",
       "rioolwater_meetwaarde": "Deze grafiek toont de meest recente meetwaarde van het gemiddeld aantal virusdeeltjes per 100.000 inwoners, per rioolwaterzuiveringslocatie.",
-      "verwachte_leveringen": "Deze grafiek toont het aantal goedgekeurde vaccins dat Nederland de komende zes weken verwacht te krijgen."
+      "vaccin_levering_en_prikken": "Deze grafiek toont het aantal geleverde vaccins en hoeveel prikken er per type gezet zijn."
     }
   },
   "deceased_age_groups": {
@@ -2006,7 +2000,7 @@
     "bronnen": {
       "rivm": {
         "href": "",
-        "text": "Ministerie van VWS",
+        "text": "RIVM",
         "download": ""
       },
       "ggd": {
@@ -2165,8 +2159,8 @@
       "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer:\n- vaccinatiebereidheid\n- vaccinatiegraad\n- vaccins op voorraad"
     },
     "grafiek": {
-      "titel": "Verwachte leveringen per week",
-      "omschrijving": "Deze grafiek toont het aantal goedgekeurde vaccins dat Nederland de komende zes weken verwacht te krijgen."
+      "titel": "Levering en prikken over tijd",
+      "omschrijving": "Deze grafiek toont het aantal geleverde vaccins en hoeveel prikken er per type gezet zijn. De cijfers na week 5 geven de verwachting weer."
     },
     "verwachte_leveringen": {
       "van_week_tot_week": "Week {{weekNumberFrom}} tot week {{weekNumberTo}}",
