@@ -25,6 +25,7 @@ const MARKDOWN_KEYS = [
   'vaccinaties.data.kpi_total.tab_total_estimated.description_second',
   'vaccinaties.data.kpi_total.description_first',
   'vaccinaties.data.kpi_total.description_second',
+  'vaccinaties.grafiek.omschrijving',
 ];
 
 export function parseMarkdownInLocale(text: TALLLanguages) {

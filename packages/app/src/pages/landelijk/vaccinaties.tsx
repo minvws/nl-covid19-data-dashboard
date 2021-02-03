@@ -201,7 +201,13 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
 
         <ChartTile
           title={text.grafiek.titel}
-          description={text.grafiek.omschrijving}
+          description={
+            <div
+              dangerouslySetInnerHTML={{
+                __html: text.grafiek.omschrijving,
+              }}
+            />
+          }
           ariaDescription={
             siteText.accessibility.grafieken.vaccin_levering_en_prikken
           }
