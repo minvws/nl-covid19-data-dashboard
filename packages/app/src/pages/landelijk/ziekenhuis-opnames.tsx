@@ -2,6 +2,8 @@ import { formatNumber } from '@corona-dashboard/common';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
+import { ArticleStrip } from '~/components-styled/article-strip';
+import { ArticleSummary } from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { ContentHeader } from '~/components-styled/content-header';
@@ -10,6 +12,7 @@ import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { addBackgroundRectangleCallback } from '~/components-styled/line-chart/components/chart-axes/component-callbacks/add-background-rectangle-callback';
 import { PageBarScale } from '~/components-styled/page-barscale';
+import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
@@ -21,13 +24,14 @@ import { createSelectMunicipalHandler } from '~/components/choropleth/select-han
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createMunicipalHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/municipal/create-municipal-hospital-admissions-tooltip';
 import { createRegionHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/region/create-region-hospital-admissions-tooltip';
-import { SEOHead } from '~/components-styled/seo-head';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import siteText from '~/locale/index';
+import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
+  createGetContent,
   getLastGeneratedDate,
   getNlData,
 } from '~/static-props/get-data';
@@ -44,11 +48,14 @@ export const getStaticProps = createGetStaticProps(
   createGetChoroplethData({
     vr: ({ hospital_nice }) => ({ hospital_nice }),
     gm: ({ hospital_nice }) => ({ hospital_nice }),
-  })
+  }),
+  createGetContent<{
+    articles?: ArticleSummary[];
+  }>(createPageArticlesQuery('hospitalPage'))
 );
 
 const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { data, choropleth } = props;
+  const { data, choropleth, content } = props;
   const router = useRouter();
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
     'region'
@@ -83,6 +90,8 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
           }}
           reference={text.reference}
         />
+
+        <ArticleStrip articles={content.articles} />
 
         <TwoKpiSection>
           <KpiTile

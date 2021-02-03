@@ -6,13 +6,21 @@ import createSchema from 'part:@sanity/base/schema-creator';
 // some of these are 'singletons' but that's not enforced by the API
 // import siteSettings from "./documents/siteSettings";
 import article from './documents/article';
-import cijferVerantwoording from './documents/cijfer-verantwoording';
 import editorial from './documents/editorial';
-import overDitDashboard from './documents/over-dit-dashboard';
+import behaviorPage from './documents/pages/behavior-page';
+import cijferVerantwoording from './documents/pages/cijfer-verantwoording-page';
+import deceasedPage from './documents/pages/deceased-page';
+import hospitalPage from './documents/pages/hospital-page';
+import intensiveCarePage from './documents/pages/intensive-care-page';
+import overDitDashboard from './documents/pages/over-dit-dashboard-page';
+import overRisicoNiveaus from './documents/pages/over-risico-niveaus-page';
+import positiveTestsPage from './documents/pages/positive-tests-page';
+import reproductionPage from './documents/pages/reproduction-page';
+import sewerPage from './documents/pages/sewer-page';
+import topicalPage from './documents/pages/topical-page';
+import vaccinationsPage from './documents/pages/vaccinations-page';
+import veelgesteldeVragen from './documents/pages/veelgestelde-vragen-page';
 import toegankelijkheid from './documents/toegankelijkheid';
-import overRisicoNiveaus from './documents/over-risico-niveaus';
-import topicalPage from './documents/topical-page';
-import veelgesteldeVragen from './documents/veelgestelde-vragen';
 import localeBlock from './locale/locale-block';
 import localeRichContentBlock from './locale/locale-rich-content-block';
 // These 2 locale helpers are technically objects too, but we keep them grouped here
@@ -22,13 +30,13 @@ import localeText from './locale/locale-text';
 //objects are building blocks, but not queryable in itself
 import collapsible from './objects/collapsible';
 import lineChart from './objects/line-chart';
-import lockdown from './restrictions/lockdown.js';
-import restrictionCategory from './restrictions/restriction-category.js';
-import restrictionGroupLockdown from './restrictions/restriction-group-lockdown.js';
+import lockdown from './restrictions/lockdown';
+import restriction from './restrictions/restriction';
+import restrictionCategory from './restrictions/restriction-category';
 // routekaart en maatregelen
-import restrictionGroup from './restrictions/restriction-group.js';
-import restriction from './restrictions/restriction.js';
-import roadmap from './restrictions/roadmap.js';
+import restrictionGroup from './restrictions/restriction-group';
+import restrictionGroupLockdown from './restrictions/restriction-group-lockdown';
+import roadmap from './restrictions/roadmap';
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -46,6 +54,15 @@ export default createSchema({
     overDitDashboard,
     toegankelijkheid,
     topicalPage,
+    deceasedPage,
+    behaviorPage,
+    hospitalPage,
+    intensiveCarePage,
+    positiveTestsPage,
+    reproductionPage,
+    sewerPage,
+    vaccinationsPage,
+
     /** RESTRICTIONS */
     restrictionGroup,
     restrictionGroupLockdown,

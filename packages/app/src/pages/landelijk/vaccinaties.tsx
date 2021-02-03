@@ -2,6 +2,8 @@ import { css } from '@styled-system/css';
 import { ParentSize } from '@visx/responsive';
 import { Fragment, useState } from 'react';
 import VaccinatieIcon from '~/assets/vaccinaties.svg';
+import { ArticleStrip } from '~/components-styled/article-strip';
+import { ArticleSummary } from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
 import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
@@ -15,8 +17,10 @@ import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { InlineText, Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
+import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
+  createGetContent,
   getLastGeneratedDate,
   getNlData,
   getText,
@@ -26,12 +30,16 @@ import { formatNumber } from '~/utils/formatNumber';
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   getNlData,
-  getText
+  getText,
+  createGetContent<{
+    articles?: ArticleSummary[];
+  }>(createPageArticlesQuery('vaccinationsPage'))
 );
 
 const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
   data,
   text: siteText,
+  content,
 }) => {
   const text = siteText.vaccinaties;
   const [selectedTab, setSelectedTab] = useState(
@@ -58,6 +66,9 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             dataSources: [],
           }}
         />
+
+        <ArticleStrip articles={content.articles} />
+
         <TwoKpiSection>
           <KpiTile
             title={text.data.kpi_total.title}

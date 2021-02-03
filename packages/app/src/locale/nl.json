@@ -659,6 +659,7 @@
     "read_more": "Lees meer",
     "absolute_date_template": "op {{date}}"
   },
+  "article_strip_title": "Meer informatie over dit onderwerp",
   "seoHead": {
     "default_description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
     "default_title": "Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",

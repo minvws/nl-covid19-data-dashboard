@@ -659,6 +659,7 @@
     "read_more": "Read more",
     "absolute_date_template": "on {{date}}"
   },
+  "article_strip_title": "More information on this topic",
   "seoHead": {
     "default_description": "Information on the development of the coronavirus in The Netherlands.",
     "default_title": "Dashboard Coronavirus COVID-19 | Government.nl",
