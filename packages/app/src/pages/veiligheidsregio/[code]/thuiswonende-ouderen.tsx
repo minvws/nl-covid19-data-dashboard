@@ -28,7 +28,7 @@ const ElderlyAtHomeRegionalPage: FCWithLayout<typeof getStaticProps> = (
   props
 ) => {
   const { safetyRegionName, data } = props;
-  const elderlyAtHomeData = data.elderly_at_home;
+  const { elderly_at_home, difference } = data;
 
   return (
     <>
@@ -56,9 +56,9 @@ const ElderlyAtHomeRegionalPage: FCWithLayout<typeof getStaticProps> = (
           )}
           metadata={{
             datumsText: text.section_positive_tested.datums,
-            dateOrRange: elderlyAtHomeData.last_value.date_unix,
+            dateOrRange: elderly_at_home.last_value.date_unix,
             dateOfInsertionUnix:
-              elderlyAtHomeData.last_value.date_of_insertion_unix,
+              elderly_at_home.last_value.date_of_insertion_unix,
             dataSources: [text.section_positive_tested.bronnen.rivm],
           }}
           reference={text.section_positive_tested.reference}
@@ -68,27 +68,28 @@ const ElderlyAtHomeRegionalPage: FCWithLayout<typeof getStaticProps> = (
           <KpiTile
             title={text.section_positive_tested.kpi_daily_title}
             metadata={{
-              date: elderlyAtHomeData.last_value.date_unix,
+              date: elderly_at_home.last_value.date_unix,
               source: text.section_positive_tested.bronnen.rivm,
             }}
           >
             <KpiValue
               data-cy="positive_tested_daily"
-              absolute={elderlyAtHomeData.last_value.positive_tested_daily}
+              absolute={elderly_at_home.last_value.positive_tested_daily}
+              difference={difference.elderly_at_home__positive_tested_daily}
             />
             <Text>{text.section_positive_tested.kpi_daily_description}</Text>
           </KpiTile>
           <KpiTile
             title={text.section_positive_tested.kpi_daily_per_100k_title}
             metadata={{
-              date: elderlyAtHomeData.last_value.date_unix,
+              date: elderly_at_home.last_value.date_unix,
               source: text.section_positive_tested.bronnen.rivm,
             }}
           >
             <KpiValue
               data-cy="positive_tested_daily_per_100k"
               absolute={
-                elderlyAtHomeData.last_value.positive_tested_daily_per_100k
+                elderly_at_home.last_value.positive_tested_daily_per_100k
               }
             />
             <Text>
@@ -100,7 +101,7 @@ const ElderlyAtHomeRegionalPage: FCWithLayout<typeof getStaticProps> = (
         <LineChartTile
           timeframeOptions={['all', '5weeks']}
           title={text.section_positive_tested.line_chart_daily_title}
-          values={elderlyAtHomeData.values}
+          values={elderly_at_home.values}
           ariaDescription={graphDescriptions.thuiswonende_ouderen_besmettingen}
           linesConfig={[
             {
@@ -120,9 +121,9 @@ const ElderlyAtHomeRegionalPage: FCWithLayout<typeof getStaticProps> = (
           })}
           metadata={{
             datumsText: text.section_deceased.datums,
-            dateOrRange: elderlyAtHomeData.last_value.date_unix,
+            dateOrRange: elderly_at_home.last_value.date_unix,
             dateOfInsertionUnix:
-              elderlyAtHomeData.last_value.date_of_insertion_unix,
+              elderly_at_home.last_value.date_of_insertion_unix,
             dataSources: [text.section_deceased.bronnen.rivm],
           }}
           reference={text.section_deceased.reference}
@@ -133,13 +134,13 @@ const ElderlyAtHomeRegionalPage: FCWithLayout<typeof getStaticProps> = (
             title={text.section_deceased.kpi_daily_title}
             description={text.section_deceased.kpi_daily_description}
             metadata={{
-              date: elderlyAtHomeData.last_value.date_unix,
+              date: elderly_at_home.last_value.date_unix,
               source: text.section_deceased.bronnen.rivm,
             }}
           >
             <KpiValue
               data-cy="deceased_daily"
-              absolute={elderlyAtHomeData.last_value.deceased_daily}
+              absolute={elderly_at_home.last_value.deceased_daily}
             />
           </KpiTile>
         </TwoKpiSection>
@@ -148,7 +149,7 @@ const ElderlyAtHomeRegionalPage: FCWithLayout<typeof getStaticProps> = (
           timeframeOptions={['all', '5weeks']}
           title={text.section_deceased.line_chart_daily_title}
           ariaDescription={graphDescriptions.thuiswonende_ouderen_overleden}
-          values={elderlyAtHomeData.values}
+          values={elderly_at_home.values}
           linesConfig={[
             {
               metricProperty: 'deceased_daily',
