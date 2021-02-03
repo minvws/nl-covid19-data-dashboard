@@ -2163,11 +2163,11 @@
     },
     "section_vaccinations_more_information": {
       "title": "Expected data on vaccinations",
-      "description": "More data on vaccinations will be added in the near future, including:\n- willingness to be vaccinated\n- vaccination coverage\n- doses in stock"
+      "description": "More data on vaccinations will be added in the near future, including:\n- willingness to be vaccinated\n- vaccination coverage"
     },
     "grafiek": {
       "titel": "Available vaccine doses and doses administered in total",
-      "omschrijving": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks."
+      "omschrijving": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks.\n\n[This article explains why not all vaccine doses are used immediately to vaccinate people.](https://coronadashboard.government.nl/artikelen/waarom-zijn-er-vaccins-op-voorraad)"
     },
     "verwachte_leveringen": {
       "van_week_tot_week": "Week {{weekNumberFrom}} to week {{weekNumberTo}}",
