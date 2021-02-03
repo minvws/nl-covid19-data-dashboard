@@ -2116,10 +2116,10 @@
       },
       "kpi_expected_delivery": {
         "title": "Verwachte levering goedgekeurde vaccins",
-        "value": "1302750",
+        "value": "2473700",
         "description": "Aantal goedgekeurde vaccins dat Nederland de komende zes weken verwacht te krijgen. Elke week ontvangt Nederland een deel van de vaccins. Mensen hebben twee prikken nodig voor een volledige vaccinatie.",
-        "date_of_report_unix": "1611600708",
-        "date_of_insertion_unix": "1611600708"
+        "date_of_report_unix": "1612384276",
+        "date_of_insertion_unix": "1612384276"
       },
       "kpi_stock": {
         "title": "",
