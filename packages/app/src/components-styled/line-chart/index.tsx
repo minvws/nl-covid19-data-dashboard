@@ -123,10 +123,10 @@ export function LineChart<T extends Value>({
 
   const trendsList = useTrendValues(values, linesConfig, timeframe);
 
-  const [xDomain, yDomain, yMax] = useDomains(trendsList, signaalwaarde);
+  const [xDomain, yDomain, seriesMax] = useDomains(trendsList, signaalwaarde);
 
   const padding = useChartPadding(
-    yMax.toFixed(0).length * 10,
+    seriesMax.toFixed(0).length * 10,
     defaultPadding,
     overridePadding
   );

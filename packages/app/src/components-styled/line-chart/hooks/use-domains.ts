@@ -14,12 +14,12 @@ export function useDomains(
     return isDefined(domain[0]) ? (domain as [Date, Date]) : undefined;
   }, [trendsList]);
 
-  const yMax = useMemo(() => calculateYMax(trendsList, signaalwaarde), [
+  const seriesMax = useMemo(() => calculateYMax(trendsList, signaalwaarde), [
     trendsList,
     signaalwaarde,
   ]);
 
-  const yDomain = useMemo(() => [0, yMax], [yMax]);
+  const yDomain = useMemo(() => [0, seriesMax], [seriesMax]);
 
-  return [xDomain, yDomain, yMax];
+  return [xDomain, yDomain, seriesMax];
 }

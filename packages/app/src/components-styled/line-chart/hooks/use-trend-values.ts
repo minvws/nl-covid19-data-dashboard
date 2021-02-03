@@ -2,8 +2,8 @@ import { useMemo } from 'react';
 import {
   getTrendData,
   NumberProperty,
-  Value,
 } from '~/components-styled/line-chart/helpers';
+import { Value } from '~/components-styled/stacked-chart/logic';
 import { TimeframeOption } from '~/utils/timeframe';
 
 export function useTrendValues<T extends Value>(
