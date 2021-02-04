@@ -135,14 +135,15 @@ export function LineChart<T extends Value>({
 
   const yDomain = useMemo(() => [0, seriesMax], [seriesMax]);
 
-  const padding: ChartPadding = useMemo(() => {
-    return {
+  const padding: ChartPadding = useMemo(
+    () => ({
       ...defaultPadding,
-      // Increase space for larger labels
+      // Increase space for larger numbers
       left: Math.max(seriesMax.toFixed(0).length * 10, defaultPadding.left),
       ...overridePadding,
-    };
-  }, [overridePadding, seriesMax]);
+    }),
+    [overridePadding, seriesMax]
+  );
 
   const timespanMarkerData = trendsList[0];
 
@@ -153,11 +154,12 @@ export function LineChart<T extends Value>({
     return x.__date;
   }
 
-  const datespanScale = useMemo(
+  const dateSpanScale = useMemo(
     () =>
       scaleBand<Date>({
         range: [0, xMax],
         round: true,
+        // domain: timespanMarkerData.map(getDate),
         domain: timespanMarkerData.map(getDate),
         padding: 0,
       }),
@@ -165,9 +167,7 @@ export function LineChart<T extends Value>({
   );
 
   const [markerProps, setMarkerProps] = useState<{
-    // height: number;
     data: HoverPoint<T>[];
-    // padding: ChartPadding;
   }>();
 
   const bisect = useCallback(
@@ -220,12 +220,10 @@ export function LineChart<T extends Value>({
         });
         setMarkerProps({
           data: hoverPoints,
-          // height,
-          // padding: padding,
         });
       }
     },
-    [showTooltip, hideTooltip, height, padding]
+    [showTooltip, hideTooltip]
   );
 
   const handleHover = useCallback(
@@ -350,10 +348,14 @@ export function LineChart<T extends Value>({
           </Tooltip>
         )}
 
+        {/**
+         * This is a clipping path for the date span marker because if we render
+         * day values, then the first and last days will span pas the borders
+         */}
         <Box
           height={yMax}
           width={xMax}
-          bg="rgba(1,0,0,0.1)"
+          // bg="rgba(1,0,0,0.1)"
           position="absolute"
           top={padding.top}
           left={padding.left}
@@ -367,7 +369,7 @@ export function LineChart<T extends Value>({
               {...markerProps}
               showLine={showMarkerLine}
               formatLabel={formatMarkerLabel}
-              width={datespanScale.bandwidth()}
+              dateSpanWidth={dateSpanScale.bandwidth()}
             />
           )}
         </Box>

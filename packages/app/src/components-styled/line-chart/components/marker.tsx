@@ -90,7 +90,7 @@ const LineContainer = styled.div`
 
 type MarkerProps<T extends Value> = {
   data: HoverPoint<T>[];
-  width: number;
+  dateSpanWidth: number;
   primaryColor?: string;
   showLine: boolean;
   formatLabel?: (data: T & TrendValue) => string;
@@ -102,7 +102,7 @@ export function Marker<T extends Value>(props: MarkerProps<T>) {
     data,
     showLine = false,
     formatLabel = defaultFormatLabel,
-    width,
+    dateSpanWidth,
   } = props;
 
   const topY = data.reduce((min, d) => {
@@ -138,7 +138,7 @@ export function Marker<T extends Value>(props: MarkerProps<T>) {
       )}
       <DateSpanMarker
         style={{
-          width,
+          width: dateSpanWidth,
           left: data[0].x,
         }}
       >
