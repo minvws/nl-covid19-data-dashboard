@@ -12,9 +12,7 @@
     "test:ci": "yarn run test",
     "compile": "echo 'Placeholder to support yarn compile in repo root, until we use TS'",
     "lint": "echo '@TODO add eslint'",
-    "assets": "run-s assets:download assets:image-resize",
-    "assets:download": "bash scripts/assets-download.sh",
-    "assets:image-resize": "ts-node scripts/images-resize.ts"
+    "sync-assets": "ts-node scripts/sync-assets.ts"
   },
   "keywords": [
     "sanity"
@@ -29,17 +27,21 @@
     "@sanity/production-preview": "^2.2.6",
     "@sanity/ui": "^0.33.0",
     "@sanity/vision": "^2.2.6",
+    "download": "^8.0.0",
+    "fs-extra": "^9.1.0",
+    "prompts": "^2.4.0",
     "prop-types": "^15.6",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-icons": "^4.1.0",
+    "react-world-flags": "^1.4.0",
     "sanity-mobile-preview": "^1.0.7",
-    "sanity-plugin-tabs": "^2.0.1",
-    "react-world-flags": "^1.4.0"
+    "sanity-plugin-tabs": "^2.0.1"
   },
   "devDependencies": {
-    "sharp": "^0.27.0",
-    "npm-run-all": "^4.1.5",
-    "@sanity/cli": "^2.2.6"
+    "@sanity/cli": "^2.2.6",
+    "@types/download": "^6.2.4",
+    "@types/fs-extra": "^9.0.6",
+    "@types/prompts": "^2.0.9"
   }
 }

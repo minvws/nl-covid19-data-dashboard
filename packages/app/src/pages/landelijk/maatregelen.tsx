@@ -9,6 +9,7 @@ import { SEOHead } from '~/components-styled/seo-head';
 import { Box } from '~/components-styled/base/box';
 import { TileList } from '~/components-styled/tile-list';
 import Maatregelen from '~/assets/maatregelen.svg';
+import { targetLanguage } from '~/locale/index';
 
 import text from '~/locale';
 import {
@@ -35,20 +36,13 @@ const query = `
       ...message,
       "description": {
         ...message.description,
-        "nl": [
-          ...message.description.nl[]
+        "${targetLanguage}": [
+          ...message.description.${targetLanguage}[]
           {
             ...,
             "asset": asset->
           },
-        ],
-        "en": [
-          ...message.description.en[]
-          {
-            ...,
-            "asset": asset->
-          },
-        ],
+        ]
       },
     }
   }[0],
