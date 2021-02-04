@@ -49,13 +49,16 @@ async function cacheAssets(assets: LocalAsset[], cacheDirectory: string) {
   console.log(`Ensuring ${assets.length} assets are part of local cache...`);
 
   let count = 0;
+
   for (const urls of chunk(assets, 20)) {
     const promisedDownloads = urls.map(async ({ url, filename }) => {
-      if (await fs.pathExists(`${cacheDirectory}/${filename}`)) return;
-      await download(url, cacheDirectory, { filename });
-      if (count === 0) console.log('');
-      console.log(`downloaded ${url}`);
-      count++;
+      const fileExists = await fs.pathExists(`${cacheDirectory}/${filename}`);
+
+      if (!fileExists) {
+        await download(url, cacheDirectory, { filename });
+        console.log(`downloaded ${url}`);
+        count++;
+      }
     });
 
     await Promise.all(promisedDownloads);
