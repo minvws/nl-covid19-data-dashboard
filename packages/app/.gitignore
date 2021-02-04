@@ -4,7 +4,7 @@
 /.next
 /out
 
-# Images that are processed by Sanity/Resizing
+# Assets that are processed by Sanity/Resizing
 public/cms
 
 # dependencies

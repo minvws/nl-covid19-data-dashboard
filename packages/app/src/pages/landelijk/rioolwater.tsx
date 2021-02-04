@@ -1,26 +1,30 @@
 import { useRouter } from 'next/router';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
+import { ArticleStrip } from '~/components-styled/article-strip';
+import { ArticleSummary } from '~/components-styled/article-teaser';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createSewerRegionalTooltip } from '~/components/choropleth/tooltips/region/create-sewer-regional-tooltip';
-import { SEOHead } from '~/components-styled/seo-head';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import siteText from '~/locale/index';
+import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
-  getNlData,
+  createGetContent,
   getLastGeneratedDate,
+  getNlData,
 } from '~/static-props/get-data';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
 
 const text = siteText.rioolwater_metingen;
 const graphDescriptions = siteText.accessibility.grafieken;
@@ -30,12 +34,16 @@ export const getStaticProps = createGetStaticProps(
   getNlData,
   createGetChoroplethData({
     vr: ({ sewer }) => ({ sewer }),
-  })
+  }),
+  createGetContent<{
+    articles?: ArticleSummary[];
+  }>(createPageArticlesQuery('sewerPage'))
 );
 
 const SewerWater: FCWithLayout<typeof getStaticProps> = ({
   data,
   choropleth,
+  content,
 }) => {
   const sewerAverages = data.sewer;
   const router = useRouter();
@@ -65,6 +73,8 @@ const SewerWater: FCWithLayout<typeof getStaticProps> = ({
           }}
           reference={text.reference}
         />
+
+        <ArticleStrip articles={content.articles} />
 
         <TwoKpiSection>
           <KpiTile

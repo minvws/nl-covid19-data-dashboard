@@ -1,8 +1,9 @@
 import { NlVaccineSupportValue } from '@corona-dashboard/common';
 import { css } from '@styled-system/css';
-import { ParentSize } from '@visx/responsive';
 import { Fragment, useState } from 'react';
 import VaccinatieIcon from '~/assets/vaccinaties.svg';
+import { ArticleStrip } from '~/components-styled/article-strip';
+import { ArticleSummary } from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
 import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
@@ -11,14 +12,17 @@ import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChart } from '~/components-styled/line-chart/line-chart';
 import { RadioGroup } from '~/components-styled/radio-group';
 import { SEOHead } from '~/components-styled/seo-head';
-import { StackedChart } from '~/components-styled/stacked-chart';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { InlineText, Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
+import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import VaccinesAdministeredChartNl from '~/assets/vaccines_administered_chart_nl.svg';
+import VaccinesAdministeredChartEn from '~/assets/vaccines_administered_chart_en.svg';
 import {
+  createGetContent,
   getLastGeneratedDate,
   getNlData,
   getText,
@@ -26,16 +30,22 @@ import {
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { AspectRatio } from '~/components-styled/aspect-ratio';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   getNlData,
-  getText
+  getText,
+  createGetContent<{
+    articles?: ArticleSummary[];
+  }>(createPageArticlesQuery('vaccinationsPage'))
 );
+import { targetLanguage } from '~/locale/index';
+import { ParentSize } from '@visx/responsive';
 
 const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
-  data,
   text: siteText,
+  content,
 }) => {
   const text = siteText.vaccinaties;
   const [selectedTab, setSelectedTab] = useState(
@@ -62,6 +72,9 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             dataSources: [],
           }}
         />
+
+        <ArticleStrip articles={content.articles} />
+
         <TwoKpiSection>
           <KpiTile
             title={text.data.kpi_total.title}
@@ -204,36 +217,31 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
 
         <ChartTile
           title={text.grafiek.titel}
-          description={text.grafiek.omschrijving}
+          description={
+            <div
+              dangerouslySetInnerHTML={{
+                __html: text.grafiek.omschrijving,
+              }}
+            />
+          }
           ariaDescription={
-            siteText.accessibility.grafieken.verwachte_leveringen
+            siteText.accessibility.grafieken.vaccin_levering_en_prikken
           }
           metadata={{
-            date: 1611593522,
+            date: 1612375710,
             source: text.bronnen.rivm,
           }}
         >
-          <ParentSize>
-            {({ width }) => (
-              <StackedChart
-                width={width}
-                valueAnnotation={siteText.waarde_annotaties.x_100k}
-                values={data.vaccine_delivery.values}
-                config={[
-                  {
-                    metricProperty: 'pfizer',
-                    color: '#007BC7',
-                    legendLabel: 'BioNTech/Pfizer',
-                  },
-                  {
-                    metricProperty: 'moderna',
-                    color: '#00BBB5',
-                    legendLabel: 'Moderna',
-                  },
-                ]}
-              />
+          {/**
+           * Aspect ratio was determined by the original SVG width/height which is now set to be 100% each.
+           */}
+          <AspectRatio ratio={1.8325}>
+            {targetLanguage === 'nl' ? (
+              <VaccinesAdministeredChartNl />
+            ) : (
+              <VaccinesAdministeredChartEn />
             )}
-          </ParentSize>
+          </AspectRatio>
         </ChartTile>
 
         <ChartTile
@@ -319,20 +327,6 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
         </ChartTile>
 
         <TwoKpiSection>
-          <KpiTile
-            title={text.data.kpi_expected_delivery.title}
-            metadata={{
-              date: parseFloat(
-                text.data.kpi_expected_delivery.date_of_report_unix
-              ),
-              source: text.bronnen.all_right,
-            }}
-          >
-            <KpiValue
-              absolute={parseFloat(text.data.kpi_expected_delivery.value)}
-            />
-            <Text mb={4}>{text.data.kpi_expected_delivery.description}</Text>
-          </KpiTile>
           <KpiTile title={text.data.kpi_expected_page_additions.title}>
             <Text mb={4}>
               {text.data.kpi_expected_page_additions.description}

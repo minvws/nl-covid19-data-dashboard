@@ -1,9 +1,14 @@
+import {
+  Regions,
+  RegionsMetricName,
+  SafetyRegionProperties,
+} from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { Feature, MultiPolygon } from 'geojson';
-import { ReactNode, useCallback } from 'react';
+import { ReactNode, useCallback, Fragment } from 'react';
 import { AspectRatio } from '~/components-styled/aspect-ratio';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { Regions } from '@corona-dashboard/common';
+import { colors } from '~/style/theme';
 import { Choropleth } from './choropleth';
 import {
   useChartDimensions,
@@ -13,23 +18,18 @@ import {
 } from './hooks';
 import { useChoroplethDataDescription } from './hooks/use-choropleth-data-description';
 import { getDataThresholds } from './legenda/utils';
-import { Path } from './path';
-import {
-  RegionsMetricName,
-  SafetyRegionProperties,
-} from '@corona-dashboard/common';
+import { HoverPath, Path } from './path';
 import { countryGeo, regionGeo } from './topology';
-import { colors } from '~/style/theme';
 
 type SafetyRegionChoroplethProps<T, K extends RegionsMetricName> = {
   data: Pick<Regions, K>;
   metricName: K;
   metricProperty: string;
-  selected?: string;
+  selectedCode?: string;
   highlightSelection?: boolean;
   onSelect?: (context: SafetyRegionProperties) => void;
   tooltipContent?: (context: SafetyRegionProperties & T) => ReactNode;
-  isSelectorMap?: boolean;
+  highlightCode?: string;
 };
 
 /**
@@ -51,18 +51,21 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
 ) {
   const {
     data,
-    selected,
-    highlightSelection = true,
+    selectedCode,
     metricName,
     metricProperty,
     onSelect,
     tooltipContent,
+    highlightCode,
+    highlightSelection,
   } = props;
 
   const ratio = 1.2;
   const [ref, dimensions] = useChartDimensions<HTMLDivElement>(ratio);
 
-  const boundingBox = useSafetyRegionBoundingbox(regionGeo, selected);
+  const boundingBox = useSafetyRegionBoundingbox(regionGeo, selectedCode);
+
+  const isEscalationLevelTheme = metricName === 'escalation_levels';
 
   const { getChoroplethValue, hasData, values } = useSafetyRegionData(
     regionGeo,
@@ -90,7 +93,7 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
     selectedThreshold
   );
 
-  const featureCallback = useCallback(
+  const renderFeature = useCallback(
     (feature: Feature<MultiPolygon, SafetyRegionProperties>, path: string) => {
       const { vrcode } = feature.properties;
       const fill = (hasData && getFillColor(vrcode)) || 'white';
@@ -103,7 +106,7 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
       return (
         <Path
           key={vrcode}
-          d={path}
+          pathData={path}
           fill={fill}
           stroke={isWhiteFill ? colors.silver : '#fff'}
           strokeWidth={1}
@@ -113,26 +116,43 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
     [getFillColor, hasData]
   );
 
-  const hasSelectHander = !!onSelect;
-
-  const hoverCallback = useCallback(
+  const renderHighlight = useCallback(
     (feature: Feature<MultiPolygon, SafetyRegionProperties>, path: string) => {
       const { vrcode } = feature.properties;
-      const isSelected = vrcode === selected && highlightSelection;
+
+      if (highlightCode !== vrcode) return;
 
       return (
-        <Path
-          isHoverable
+        <Fragment key={vrcode}>
+          <Path pathData={path} stroke="#fff" strokeWidth={8} />
+          <Path pathData={path} stroke="#000" strokeWidth={2} />
+        </Fragment>
+      );
+    },
+    [highlightCode]
+  );
+
+  const hasSelectHander = !!onSelect;
+
+  const renderHover = useCallback(
+    (feature: Feature<MultiPolygon, SafetyRegionProperties>, path: string) => {
+      const { vrcode } = feature.properties;
+
+      const isSelected = vrcode === selectedCode && highlightSelection;
+
+      return (
+        <HoverPath
           isClickable={hasSelectHander}
           id={vrcode}
           key={vrcode}
-          d={path}
-          stroke={isSelected ? '#000' : undefined}
-          strokeWidth={isSelected ? 3 : undefined}
+          pathData={path}
+          stroke={isEscalationLevelTheme || isSelected ? '#fff' : undefined}
+          strokeWidth={isEscalationLevelTheme || isSelected ? 3 : undefined}
+          isSelected={isSelected}
         />
       );
     },
-    [selected, highlightSelection, hasSelectHander]
+    [hasSelectHander, isEscalationLevelTheme, selectedCode, highlightSelection]
   );
 
   const onClick = (id: string) => {
@@ -159,10 +179,11 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
           hovers={hasData ? regionGeo : undefined}
           boundingBox={boundingBox || countryGeo}
           dimensions={dimensions}
-          featureCallback={featureCallback}
-          hoverCallback={hoverCallback}
+          renderFeature={renderFeature}
+          renderHover={renderHover}
           onPathClick={onClick}
           getTooltipContent={getTooltipContent}
+          renderHighlight={renderHighlight}
         />
       </AspectRatio>
     </div>

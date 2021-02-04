@@ -1,5 +1,11 @@
 import { FeatureCollection, MultiPolygon } from 'geojson';
-import { Municipalities, Regions } from './data';
+import {
+  MunicipalDifference,
+  Municipalities,
+  NationalDifference,
+  Regions,
+  RegionalDifference,
+} from './data';
 
 export type Metric<T> = {
   values: T[];
@@ -13,6 +19,11 @@ export type MetricKeys<T> = keyof Omit<
 
 export type MunicipalitiesMetricName = MetricKeys<Municipalities>;
 export type RegionsMetricName = MetricKeys<Regions>;
+
+export type DifferenceKey =
+  | keyof NationalDifference
+  | keyof RegionalDifference
+  | keyof MunicipalDifference;
 
 export interface SafetyRegionProperties {
   vrcode: string;

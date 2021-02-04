@@ -50,7 +50,8 @@
       "gemeente": "Municipalities",
       "over_risiconiveaus": "About the risk levels",
       "veelgestelde_vragen": "Frequently asked questions",
-      "actueel": "Latest developments"
+      "actueel": "Latest developments",
+      "toegankelijkheid": ""
     },
     "title": "Corona Dashboard",
     "terug_naar_alle_cijfers": "Overview",
@@ -152,7 +153,7 @@
     "barscale_titel": "Hospital admissions reported per day",
     "extra_uitleg": "Number of people with COVID-19 admitted to hospital daily. This figure shows how many hospital admissions are reported per day, including patients from outside the hospital admitted directly to the ICU. It may include hospital admissions that occurred in previous days.",
     "map_titel": "Residence of patients admitted to hospital",
-    "map_toelichting": "This map shows, by municipality or safety region, where people live who have been admitted to hospital with COVID-19. Please note that people may have been admitted to a hospital located somewhere else in the Netherlands; the map therefore does not show admission numbers per hospital. The figures here reflect the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE). Tergooi hospitals, Amstelland Hospital and Flevoziekenhuis do not currently share their data on COVID-19 admission to clinic wards with Stichting NICE. As a result, the actual figures in some municipalities and safety regions may be higher than they appear on the map.",
+    "map_toelichting": "This map shows, by municipality or safety region, where people live who have been admitted to hospital with COVID-19. Please note that people may have been admitted to a hospital located somewhere else in the Netherlands; the map therefore does not show admission numbers per hospital. The figures here reflect the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE). Flevoziekenhuis does not currently share its data on COVID-19 admission to clinic wards with Stichting NICE. As a result, the actual figures in some municipalities and safety regions may be higher than they appear on the map.",
     "linechart_titel": "Progression in hospital admissions over time",
     "barscale_screenreader_text": "{{value}} hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
     "chloropleth_legenda": {
@@ -623,7 +624,7 @@
     "select_region_municipality_legend": "Select a municipality:",
     "select_region_type_legend": "Show numbers from:",
     "your_municipality": "Municipality",
-    "belangrijk_bericht": "There is a [national lockdown](https://coronadashboard.government.nl/landelijk/maatregelen) until at least 9 February."
+    "belangrijk_bericht": "There is a [national lockdown](https://coronadashboard.government.nl/landelijk/maatregelen)."
   },
   "common": {
     "metadata": {
@@ -663,7 +664,7 @@
   "seoHead": {
     "default_description": "Information on the development of the coronavirus in The Netherlands.",
     "default_title": "Dashboard Coronavirus COVID-19 | Government.nl",
-    "default_url": "https://coronadashboard.rijksoverheid.nl/veelgestelde-vragen"
+    "default_url": "https://coronadashboard.government.nl/veelgestelde-vragen"
   },
   "no_data_for_this_municipality": {
     "text": "This information is not available for this municipality."
@@ -703,7 +704,7 @@
   "veiligheidsregio_metadata": {
     "title": "Regional Dashboard Coronavirus COVID-19 | Government.nl",
     "description": "Information on the development of the coronavirus in the Netherlands.",
-    "url": "https://coronadashboard.rijksoverheid.nl/regio"
+    "url": "https://coronadashboard.government.nl/regio"
   },
   "gemeente_metadata": {
     "title": "Municipality"
@@ -717,7 +718,7 @@
     "barscale_titel": "Hospital admissions reported per day",
     "extra_uitleg": "Number of people from this safety region with COVID-19 admitted to hospital on a daily basis. This figure shows how many hospital admissions are reported per day, including patients from outside the hosptial admitted directly to the ICU. Patients can be admitted to hospitals in other regions.",
     "map_titel": "Distribution of hospital admissions in {{safetyRegion}}",
-    "map_toelichting": "This map shows, by municipality or safety region, where people live who have been admitted to hospital with COVID-19. Please note that people may have been admitted to a hospital located somewhere else in the Netherlands; the map therefore does not show admission numbers per hospital. The figures here reflect the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE). Tergooi hospitals, Amstelland Hospital and Flevoziekenhuis do not currently share their data on COVID-19 admission to clinic wards with Stichting NICE. As a result, the actual figures in some municipalities and safety regions may be higher than they appear on the map.",
+    "map_toelichting": "This map shows, by municipality or safety region, where people live who have been admitted to hospital with COVID-19. Please note that people may have been admitted to a hospital located somewhere else in the Netherlands; the map therefore does not show admission numbers per hospital. The figures here reflect the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE). Flevoziekenhuis does not currently share its data on COVID-19 admission to clinic wards with Stichting NICE. As a result, the actual figures in some municipalities and safety regions may be higher than they appear on the map.",
     "linechart_titel": "Progression in hospital admissions over time",
     "barscale_screenreader_text": "{{value}} hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
     "bron": {
@@ -855,7 +856,7 @@
     "barscale_titel": "Hospital admissions reported per day",
     "extra_uitleg": "Number of people from this municipality with COVID-19 admitted to hospital on a daily basis. This figure shows how many hospital admissions are reported per day, including patients from outside the hosptial admitted directly to the ICU. Patients can be admitted to hospitals in other regions.",
     "map_titel": "Distribution of hospital admissions in safety region of {{municipality}}",
-    "map_toelichting": "This map shows, by municipality or safety region, where people live who have been admitted to hospital with COVID-19. Please note that people may have been admitted to a hospital located somewhere else in the Netherlands; the map therefore does not show admission numbers per hospital. The figures here reflect the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE). Tergooi hospitals, Amstelland Hospital and Flevoziekenhuis do not currently share their data on COVID-19 admission to clinic wards with Stichting NICE. As a result, the actual figures in some municipalities and safety regions may be higher than they appear on the map.",
+    "map_toelichting": "This map shows, by municipality or safety region, where people live who have been admitted to hospital with COVID-19. Please note that people may have been admitted to a hospital located somewhere else in the Netherlands; the map therefore does not show admission numbers per hospital. The figures here reflect the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE). Flevoziekenhuis does not currently share its data on COVID-19 admission to clinic wards with Stichting NICE. As a result, the actual figures in some municipalities and safety regions may be higher than they appear on the map.",
     "linechart_titel": "Progression in hospital admissions over time",
     "barscale_screenreader_text": "{{value}} hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
     "bron": {
@@ -977,13 +978,13 @@
     "bar_chart_accessibility_description": ""
   },
   "veiligheidsregio_index": {
-    "selecteer_titel": "Level of risk",
-    "selecteer_toelichting": "The map indicates the level of risk per safety region.\n\n[More about risk levels](/over-risiconiveaus)",
+    "selecteer_titel": "Risk level map of the Netherlands",
+    "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\nThere are specific measures for each risk level. These are explained in the road map drafted by the government. **There is a national lockdown. [Click here to view the lockdown measures](/landelijk/maatregelen).**",
     "metadata": {
       "title": "Level of risk per safety region | Dashboard Coronavirus | Government.nl",
       "description": "Overview of the level of risk per safety region in the Netherlands."
     },
-    "belangrijk_bericht": "There is a [national lockdown](https://coronadashboard.government.nl/landelijk/maatregelen) until at least 9 February."
+    "belangrijk_bericht": "There is a [national lockdown](https://coronadashboard.government.nl/landelijk/maatregelen)."
   },
   "gemeente_index": {
     "selecteer_titel": "Select your municipality",
@@ -1001,7 +1002,7 @@
   },
   "escalatie_niveau": {
     "titel": "Risk levels",
-    "toelichting": "The map indicates the level of risk per safety region.\n\n[More about risk levels](/over-risiconiveaus)",
+    "toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\nThere are specific measures for each risk level. These are explained in the road map drafted by the government. **There is a national lockdown. [Click here to view the lockdown measures](/landelijk/maatregelen).**",
     "types": {
       "1": {
         "titel": "Caution",
@@ -1009,11 +1010,11 @@
       },
       "2": {
         "titel": "Concern",
-        "toelichting": "The situation is becoming difficult to manage. The number of new infections is between 35 and 150 per 100,000 inhabitants per week. Pressure on healthcare capacity is increasing."
+        "toelichting": "The situation is becoming difficult to manage. The number of new infections is between 35 and 100 per 100,000 inhabitants per week. Pressure on healthcare capacity is increasing."
       },
       "3": {
         "titel": "Serious",
-        "toelichting": "The situation is serious. The number of new infections is between 150 and 250 per 100,000 inhabitants per week. Pressure on healthcare capacity is very high."
+        "toelichting": "The situation is serious. The number of new infections is between 100 and 250 per 100,000 inhabitants per week. Pressure on healthcare capacity is very high."
       },
       "4": {
         "titel": "Severe",
@@ -1722,7 +1723,7 @@
     "titel_sidebar": "Deaths",
     "titel_kpi": "Daily reported deaths from COVID-19",
     "metadata": {
-      "title": "Deaths | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Deaths | Dashboard Coronavirus | Government.nl",
       "description": "Number of deceased per day"
     },
     "section_deceased_rivm": {
@@ -1753,7 +1754,7 @@
     "titel_sidebar": "Deaths",
     "titel_kpi": "Gemeld aantal patiënten overleden aan COVID-19 per dag",
     "metadata": {
-      "title": "Deaths in {{safetyRegion}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Deaths in {{safetyRegion}} | Dashboard Coronavirus | Government.nl",
       "description": "Number of deceased per day in {{safetyRegion}}"
     },
     "section_deceased_rivm": {
@@ -1960,8 +1961,9 @@
       "verdenkingen_huisartsen": "This graph shows the progression over time in the estimated number of patients who contacted the general practitioner for the first time due to COVID-19 like symptoms.",
       "ziekenhuis_opnames": "This graph shows the progression in hospital admissions over time.",
       "rioolwater_meetwaarde": "This graph shows the most recent measured value of the average amount of virus particles per 100.000 residents, per sewage processing facility.",
-      "verwachte_leveringen": "This graph shows the number of approved vaccine doses the Netherlands expects to receive over the next six weeks.",
-      "vaccinatie_draagvlak": "Deze grafiek toont het draagvlak voor vaccinaties."
+      "vaccinatie_draagvlak": "Deze grafiek toont het draagvlak voor vaccinaties.",
+      "verwachte_leveringen": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks.",
+      "vaccin_levering_en_prikken": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks."
     }
   },
   "deceased_age_groups": {
@@ -1993,8 +1995,8 @@
     "title": "COVID-19 vaccinations",
     "description": "Vaccination is the most important step towards getting life back to normal. The Netherlands began vaccinating people against COVID-19 on 6 January 2021. Eventually, the vaccine will be offered to everyone aged 18 and over. This page shows how many doses of vaccine have been administered and how many doses are on their way.",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "date_unix": "1612006032",
-    "date_of_insertion_unix": "1612006032",
+    "date_unix": "1612354200",
+    "date_of_insertion_unix": "1612354200",
     "reference": {
       "href": "/verantwoording#vaccination",
       "text": "Read more about the source of the data on vaccination in the explanation of the presented data."
@@ -2002,7 +2004,7 @@
     "bronnen": {
       "rivm": {
         "href": "",
-        "text": "Ministry of Health, Welfare and Sport",
+        "text": "RIVM",
         "download": ""
       },
       "ggd": {
@@ -2017,7 +2019,7 @@
       },
       "all_left": {
         "href": "",
-        "text": "GGDs, LNAZ & long-term care institutions",
+        "text": "RIVM, LNAZ & GGD-GHOR",
         "download": ""
       },
       "all_right": {
@@ -2030,31 +2032,31 @@
       "difference": "",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "226298",
-          "date_unix": "1612006032",
-          "date_of_insertion_unix": "1612006032"
+          "total_vaccinated": "416093",
+          "date_unix": "1612354200",
+          "date_of_insertion_unix": "1612354200"
         }
       },
       "kpi_total": {
         "title": "Number of doses administered",
-        "value": "226298",
-        "description": "This is the number of vaccine doses that have been administered. Because vaccination figures are sometimes reported later, the actual number of vaccination doses administered is higher.",
-        "date_of_report_unix": "1612006032",
-        "date_of_insertion_unix": "1612006032",
+        "value": "303702",
+        "description": "",
+        "date_of_report_unix": "1612263890",
+        "date_of_insertion_unix": "1612263890",
         "administered": [
           {
-            "value": "152253",
-            "description": "administered by municipal health services (GGDs)",
-            "report_date": ""
+            "value": "222486",
+            "description": "reported by GGD-GHOR",
+            "report_date": "Reported number till 2 February"
           },
           {
-            "value": "57216",
-            "description": "administered by hospitals*",
-            "report_date": ""
+            "value": "81216",
+            "description": "reported by LNAZ",
+            "report_date": "Reported number till 2 February"
           },
           {
-            "value": "16829",
-            "description": "administered by long-term care institutions*",
+            "value": "",
+            "description": "",
             "report_date": ""
           },
           {
@@ -2068,31 +2070,31 @@
             "report_date": ""
           }
         ],
-        "description_first": "This is the number of vaccine doses that have been administered. Because vaccination figures are sometimes reported later, the actual number of vaccination doses administered is higher.",
-        "description_second": "* These numbers are reported by phone. Please note: the actual number of vaccine doses administered is therefore higher than reported here.",
+        "description_first": "This is the number of vaccine doses administered reported by GGD-GHOR and LNAZ. [Read more in the explanation of the presented data.](https://coronadashboard.government.nl/verantwoording#vaccination)",
+        "description_second": "",
         "warning": "",
-        "first_tab_title": "Geschatte aantallen",
-        "second_tab_title": "Gemelde aantallen",
+        "first_tab_title": "Calculated number",
+        "second_tab_title": "Reported number",
         "tab_total_estimated": {
-          "value": "226298",
+          "value": "416093",
           "description": "",
-          "date_of_report_unix": "1612006032",
-          "date_of_insertion_unix": "1612006032",
+          "date_of_report_unix": "1612354200",
+          "date_of_insertion_unix": "1612354200",
           "administered": [
             {
-              "value": "152253",
-              "description": "gezet door GGD'en",
-              "report_date": "Gemeld aantal t/m 28 jan"
+              "value": "222486",
+              "description": "administered by GGDs",
+              "report_date": "Reported number till 2 February"
             },
             {
-              "value": "57216",
-              "description": "gezet door ziekenhuizen*",
-              "report_date": "Gemeld aantal t/m 28 jan"
+              "value": "81216",
+              "description": "administered in hospitals",
+              "report_date": "Reported number till 2 February"
             },
             {
-              "value": "16829",
-              "description": "gezet door langdurige zorginstellingen",
-              "report_date": "Gemeld aantal t/m 28 jan"
+              "value": "112391",
+              "description": "administered in long-term care institutions",
+              "report_date": "Calculated number till 2 February"
             },
             {
               "value": "",
@@ -2105,21 +2107,16 @@
               "report_date": ""
             }
           ],
-          "description_first": "Dit getal is een schatting van hoeveel prikken er gezet zijn. We maken de schatting door te kijken naar hoeveel vaccins er zijn bezorgd bij priklocaties. Lees hier meer over hoe deze schatting wordt berekend",
-          "description_second": "De meeste vaccins worden binnen een week na bezorging toegediend aan mensen. Mensen hebben twee prikken nodig voor een volledige vaccinatie. "
+          "description_first": "This figure is a calculation of the total number of vaccine doses that have been administered. The calculation is based on the number of vaccine doses that have been delivered to the locations where injections are given. [Read more about the calculation in the explanation of the presented data.](https://coronadashboard.government.nl/verantwoording#vaccination)",
+          "description_second": "[On 1 February some figures have been corrected.](https://www.rijksoverheid.nl/actueel/nieuws/2021/02/01/dubbeltelling-in-vaccinatiecijfers-rechtgezet)"
         }
       },
       "kpi_expected_delivery": {
         "title": "Approved vaccines to be delivered",
-        "value": "1302750",
+        "value": "2473700",
         "description": "This is the number of approved vaccine doses the Netherlands expects to receive over the next six weeks. The Netherlands will receive a new delivery each week. People need two separately administered doses for the vaccine to be maximally effective.",
-        "date_of_report_unix": "1611600708",
-        "date_of_insertion_unix": "1611600708"
-      },
-      "kpi_expected_page_additions": {
-        "title": "",
-        "description": "",
-        "additions": ["", "", ""]
+        "date_of_report_unix": "1612384276",
+        "date_of_insertion_unix": "1612384276"
       },
       "kpi_stock": {
         "title": "",
@@ -2150,15 +2147,20 @@
             "description": ""
           }
         ]
+      },
+      "kpi_expected_page_additions": {
+        "title": "Expected data on vaccinations",
+        "description": "More data on vaccinations will be added in the near future, including:",
+        "additions": ["Willingness to be vaccinated", "Vaccination coverage"]
       }
     },
     "section_vaccinations_more_information": {
       "title": "Expected data on vaccinations",
-      "description": "More data on vaccinations will be added in the near future, including:\n- willingness to be vaccinated\n- vaccination coverage\n- doses in stock"
+      "description": "More data on vaccinations will be added in the near future, including:\n- willingness to be vaccinated\n- vaccination coverage"
     },
     "grafiek": {
-      "titel": "Expected weekly deliveries",
-      "omschrijving": "This graph shows the number of approved vaccine doses the Netherlands expects to receive over the next six weeks."
+      "titel": "Available vaccine doses and doses administered in total",
+      "omschrijving": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks.\n\n[This article explains why not all vaccine doses are used immediately to vaccinate people.](https://coronadashboard.government.nl/artikelen/waarom-zijn-er-vaccins-op-voorraad)"
     },
     "grafiek_draagvlak": {
       "titel": "Draagvlak",
@@ -2197,7 +2199,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of the Netherlands",
-      "selecteer_toelichting": "The map indicates the level of risk per safety region.\n\n**There are specific measures for each risk level. These are explained in the road map drafted by the government. There is a national lockdown until at least 9 February. [Click here to view the lockdown measures](landelijk/maatregelen).**"
+      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions.  \n\n**There are specific measures for each risk level. These are explained in the road map drafted by the government. There is a national lockdown. [Click here to view the lockdown measures](landelijk/maatregelen).**"
     },
     "data_sitemap_titel": "Topics on this dashboard",
     "data_sitemap_toelichting": "Go directly to the following topics:",
@@ -2284,7 +2286,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of The Netherlands",
-      "selecteer_toelichting": "The map indicates the level of risk per safety region.\n\n**There are specific measures for each risk level. These are explained in the road map drafted by the government. There is a national lockdown until at least 9 February. [Click here to view the lockdown measures](landelijk/maatregelen).**"
+      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions.  \n\n**There are specific measures for each risk level. These are explained in the road map drafted by the government. There is a national lockdown. [Click here to view the lockdown measures](landelijk/maatregelen).**"
     },
     "risoconiveau_maatregelen": {
       "title": "Risk level & measures",
@@ -2357,7 +2359,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of the Netherlands",
-      "selecteer_toelichting": "The map indicates the level of risk per safety region.\n\n**There are specific measures for each risk level. These are explained in the road map drafted by the government. There is a national lockdown until at least 9 February. [Click here to view the lockdown measures](landelijk/maatregelen).**"
+      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions.  \n\n**There are specific measures for each risk level. These are explained in the road map drafted by the government. There is a national lockdown. [Click here to view the lockdown measures](landelijk/maatregelen).**"
     },
     "risoconiveau_maatregelen": {
       "title": "Risk level & measures",
@@ -2422,5 +2424,11 @@
         "gemeente": "Data for the municipality {{municipalityName}}"
       }
     }
-  }
+  },
+  "toegankelijkheid_metadata": {
+    "title": "Toegankelijkheid COVID-19 Dashboard | Government.nl",
+    "description": "Informatie on the accessibility of the COVID-19 Dashboard.",
+    "url": "https://coronadashboard.government.nl/verantwoording"
+  },
+  "article_strip_title": ""
 }

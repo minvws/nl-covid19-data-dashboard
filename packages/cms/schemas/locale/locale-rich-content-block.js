@@ -1,3 +1,4 @@
+import { MdAttachFile } from 'react-icons/md';
 import { supportedLanguages } from '../../language/supported-languages';
 
 export default {
@@ -37,6 +38,12 @@ export default {
                   title: 'URL',
                 },
               ],
+            },
+            {
+              name: 'inlineAttachment',
+              type: 'file',
+              title: 'Bestand uploaden',
+              icon: MdAttachFile,
             },
           ],
         },
