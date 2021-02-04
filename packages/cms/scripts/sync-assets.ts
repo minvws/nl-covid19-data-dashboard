@@ -12,6 +12,8 @@ const CACHE_DIR =
 (async function run() {
   const { dataset, projectId } = await getConfig();
 
+  console.log('Sync assets with config', { dataset, projectId });
+
   const sanityAssets = await getSanityAssets({
     dataset,
     projectId,
