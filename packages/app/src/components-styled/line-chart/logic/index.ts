@@ -2,18 +2,13 @@ import { isPresent } from 'ts-is-present';
 import {
   DateSpanValue,
   DateValue,
+  getValuesInTimeframe,
   isDateSeries,
   isDateSpanSeries,
   Value,
 } from '~/components-styled/stacked-chart/logic';
 import { getDaysForTimeframe, TimeframeOption } from '~/utils/timeframe';
 export * from './background-rectangle';
-
-// This type limits the allowed property names to those with a number type,
-// so its like keyof T, but filtered down to only the appropriate properties.
-export type NumberProperty<T extends Value> = {
-  [K in keyof T]: T[K] extends number | null ? K : never;
-}[keyof T];
 
 /**
  * To read an arbitrary value property from the passed in data, we need to cast
@@ -90,22 +85,49 @@ export type TrendValue = {
 
 const timestampToDate = (d: number) => new Date(d * 1000);
 
+/**
+ * @TODO simplify these types and tooltip render callback similar to
+ * StackedChart so that it can become just TrendValue[][]
+ */
+type TrendData = (TrendValue & Value)[][];
+type Domain = [Date, Date];
+
 export function getTrendData<T extends Value>(
   values: T[],
-  valueKeys: NumberProperty<T>[],
+  metricProperties: string[],
   timeframe: TimeframeOption
-): (TrendValue & Value)[][] {
-  return valueKeys.map((key) => getSingleTrendData(values, key, timeframe));
+): [TrendData, Domain] {
+  const series = getValuesInTimeframe(values, timeframe);
+
+  const xDomainMin = isDateSeries(values)
+    ? values[0].date_unix
+    : isDateSpanSeries(values)
+    ? values[0].date_start_unix
+    : 0;
+
+  const xDomainMax = isDateSeries(values)
+    ? values[values.length - 1].date_unix
+    : isDateSpanSeries(values)
+    ? values[values.length - 1].date_end_unix
+    : 0;
+
+  const trendData = metricProperties.map(
+    (metricProperty) =>
+      (getSingleTrendData(series, metricProperty) as unknown) as (TrendValue &
+        Value)[]
+  );
+
+  return [
+    trendData,
+    [timestampToDate(xDomainMin), timestampToDate(xDomainMax)],
+  ];
 }
 
-export function getSingleTrendData<T extends Value>(
-  values: T[],
-  valueKey: NumberProperty<T>,
-  timeframe: TimeframeOption
-): (TrendValue & Value)[] {
-  const valuesInFrame = getTimeframeValues(values, timeframe);
-
-  if (valuesInFrame.length === 0) {
+export function getSingleTrendData(
+  values: DateValue[] | DateSpanValue[],
+  metricProperty: string
+): TrendValue[] {
+  if (values.length === 0) {
     /**
      * It could happen that you are using an old dataset and select last week as
      * a timeframe at which point the values will be empty. This would not
@@ -114,35 +136,39 @@ export function getSingleTrendData<T extends Value>(
     return [];
   }
 
-  if (isDateSeries(valuesInFrame)) {
-    return valuesInFrame
+  if (isDateSeries(values)) {
+    return values
       .map((x) => ({
         ...x,
         /**
          * Not sure why we need to cast to number if isPresent is used to filter
          * out the null values.
          */
-        __value: x[valueKey as keyof DateValue],
+        __value: x[metricProperty as keyof DateValue],
         __date: timestampToDate(x.date_unix),
       }))
       .filter((x) => isPresent(x.__value));
   }
 
-  if (isDateSpanSeries(valuesInFrame)) {
-    return valuesInFrame
+  if (isDateSpanSeries(values)) {
+    return values
       .map((x) => ({
         ...x,
         /**
          * Not sure why we need to cast to number if isPresent is used to filter
          * out the null values.
          */
-        __value: x[valueKey as keyof DateSpanValue],
-        __date: timestampToDate(x.date_start_unix),
+        __value: x[metricProperty as keyof DateSpanValue],
+        __date: timestampToDate(
+          /**
+           * Here we set the date to be in the middle of the timespan, so that
+           * the chart can render the points in the middle of each span.
+           */
+          x.date_start_unix + (x.date_end_unix - x.date_start_unix) / 2
+        ),
       }))
       .filter((x) => isPresent(x.__value));
   }
 
-  throw new Error(
-    `Incompatible timestamps are used in value ${valuesInFrame[0]}`
-  );
+  throw new Error(`Incompatible timestamps are used in value ${values[0]}`);
 }

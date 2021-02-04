@@ -30,12 +30,7 @@ import {
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { TimeframeOption } from '~/utils/timeframe';
 import { HoverPoint, Marker, Tooltip, Trend } from './components';
-import {
-  calculateYMax,
-  getTrendData,
-  NumberProperty,
-  TrendValue,
-} from './logic';
+import { calculateYMax, getTrendData, TrendValue } from './logic';
 
 const dateToValue = (d: Date) => d.valueOf() / 1000;
 const formatXAxis = (date: Date) =>
@@ -44,7 +39,7 @@ const formatYAxisFn = (y: number) => formatNumber(y);
 const formatYAxisPercentageFn = (y: number) => `${formatPercentage(y)}%`;
 
 export type LineConfig<T extends Value> = {
-  metricProperty: NumberProperty<T>;
+  metricProperty: keyof T;
   color?: string;
   style?: 'solid' | 'dashed';
   areaFillOpacity?: number;
@@ -122,17 +117,10 @@ export function LineChart<T extends Value>({
     [signaalwaarde]
   );
 
-  const trendsList = useMemo(
-    () => getTrendData(values, metricProperties, timeframe),
+  const [trendsList, xDomain] = useMemo(
+    () => getTrendData(values, metricProperties as string[], timeframe),
     [values, metricProperties, timeframe]
   );
-
-  const xDomain = useMemo(() => {
-    const allData = trendsList.flat();
-    const domain = extent(allData.map((d) => d.__date));
-
-    return isDefined(domain[0]) ? (domain as [Date, Date]) : undefined;
-  }, [trendsList]);
 
   const seriesMax = useMemo(() => calculateYMax(trendsList, signaalwaarde), [
     trendsList,
