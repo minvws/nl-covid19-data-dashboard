@@ -1,6 +1,5 @@
 import { formatNumber, formatPercentage } from '@corona-dashboard/common';
 import { scaleLinear, scaleTime } from '@visx/scale';
-import { NumberValue } from 'd3-scale';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
@@ -41,8 +40,8 @@ type AreaChartProps<T extends Value, K extends Value> = {
 const dateToValue = (d: { valueOf(): number }) => d.valueOf() / 1000;
 const formatXAxis = (date: Date | { valueOf(): number }) =>
   formatDateFromSeconds(dateToValue(date), 'axis');
-const formatYAxisFn = (y: NumberValue) => formatNumber(y);
-const formatYAxisPercentageFn = (y: NumberValue) => `${formatPercentage(y)}%`;
+const formatYAxisFn = (y: number) => formatNumber(y);
+const formatYAxisPercentageFn = (y: number) => `${formatPercentage(y)}%`;
 
 export function AreaChart<T extends Value, K extends Value>(
   props: AreaChartProps<T, K>

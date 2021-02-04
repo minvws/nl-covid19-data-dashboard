@@ -20,7 +20,12 @@ import {
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { TimeframeOption } from '~/utils/timeframe';
 import { Legenda, LegendItem, LegendShape } from '../legenda';
-import { isDateSeries, isDateSpanSeries, Value } from '../stacked-chart/logic';
+import {
+  DateSpanValue,
+  isDateSeries,
+  isDateSpanSeries,
+  Value,
+} from '../stacked-chart/logic';
 import { HoverPoint, Marker, Tooltip, Trend } from './components';
 import { useBisect } from './hooks/use-bisect';
 import { useChartHover } from './hooks/use-chart-hover';
@@ -269,12 +274,12 @@ function formatDefaultTooltip<T extends Value>(
       <>
         <Text as="span" fontWeight="bold">
           {formatDateFromSeconds(
-            ((value as unknown) as WeeklyValue).date_start_unix,
+            ((value as unknown) as DateSpanValue).date_start_unix,
             'short'
           )}{' '}
           -{' '}
           {formatDateFromSeconds(
-            ((value as unknown) as WeeklyValue).date_end_unix,
+            ((value as unknown) as DateSpanValue).date_end_unix,
             'short'
           )}
           :

@@ -1,8 +1,9 @@
 import { bisectLeft } from 'd3-array';
 import { ScaleTime } from 'd3-scale';
 import { useCallback } from 'react';
+import { Value } from '~/components-styled/stacked-chart/logic';
 import { ChartPadding } from '../components';
-import { TrendValue, Value } from '../helpers';
+import { TrendValue } from '../logic';
 
 export type BisectFunction = ReturnType<typeof useBisect>;
 

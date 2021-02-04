@@ -63,7 +63,7 @@ type ChartAxesProps = {
   ariaLabelledBy?: string;
 };
 
-type AnyTickFormatter = (value: any) => string;
+export type AnyTickFormatter = (value: any) => string;
 
 export type ChartBounds = { width: number; height: number };
 

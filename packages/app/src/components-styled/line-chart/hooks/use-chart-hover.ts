@@ -2,9 +2,10 @@ import { localPoint } from '@visx/event';
 import { Point } from '@visx/point';
 import { useCallback } from 'react';
 import { isDefined } from 'ts-is-present';
+import { Value } from '~/components-styled/stacked-chart/logic';
 import { LineConfig } from '..';
 import { ChartScales, HoverPoint } from '../components';
-import { TrendData, Value } from '../helpers';
+import { TrendData } from '../logic';
 import { BisectFunction } from './use-bisect';
 
 const calculateDistance = (point1: HoverPoint<Value>, point2: Point) => {
@@ -20,7 +21,7 @@ export function useChartHover<T extends Value>(
     nearestPoint?: HoverPoint<T>
   ) => void,
   trendsList: TrendData,
-  linesConfig: LineConfig<T>[],
+  linesConfig: LineConfig[],
   bisect: BisectFunction
 ) {
   return useCallback(

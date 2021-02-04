@@ -6,11 +6,10 @@ import { ReactNode } from 'react';
 import styled from 'styled-components';
 import ArrowIcon from '~/assets/arrow.svg';
 import { Box } from '~/components-styled/base';
-import { LineChart } from '~/components-styled/line-chart/line-chart';
 import { ComponentCallbackInfo } from '~/components-styled/line-chart/components';
-import { NumberProperty } from '~/components-styled/line-chart/logic';
-import { Value } from '~/components-styled/stacked-chart/logic';
+import { LineChart } from '~/components-styled/line-chart/line-chart';
 import { LinkWithIcon } from '~/components-styled/link-with-icon';
+import { Value } from '~/components-styled/stacked-chart/logic';
 import { Heading, Text } from '~/components-styled/typography';
 import text from '~/locale';
 import { formatNumber } from '~/utils/formatNumber';
@@ -21,14 +20,14 @@ type MiniTrendTileProps<T extends Value> = {
   title: string;
   text: ReactNode;
   trendData: T[];
-  metricProperty: NumberProperty<T>;
+  metricProperty: string;
   href: string;
 };
 
 export function MiniTrendTile<T extends Value>(props: MiniTrendTileProps<T>) {
   const { icon, title, text, trendData, metricProperty, href } = props;
 
-  const value = trendData[trendData.length - 1][metricProperty];
+  const value = (trendData[trendData.length - 1] as any)[metricProperty];
 
   const { sm } = useBreakpoints();
 

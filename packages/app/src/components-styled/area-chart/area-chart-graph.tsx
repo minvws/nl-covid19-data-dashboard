@@ -1,7 +1,6 @@
 import css from '@styled-system/css';
 import { AxisBottom, AxisLeft, TickFormatter } from '@visx/axis';
 import { GridRows } from '@visx/grid';
-import { ScaleInput } from '@visx/scale';
 import { AreaStack } from '@visx/shape';
 import { ScaleLinear, ScaleTime } from 'd3-scale';
 import styled from 'styled-components';
@@ -9,6 +8,7 @@ import { colors } from '~/style/theme';
 import { LegendShape } from '../legenda';
 import { LineConfig } from '../line-chart';
 import { ChartBounds, ChartPadding } from '../line-chart/components';
+import { AnyTickFormatter } from '../line-chart/components/chart-axes';
 import { SingleTrendData, TrendData } from '../line-chart/logic';
 
 export type AreaConfig = {
@@ -37,8 +37,8 @@ type AreaChartGraphProps = {
     yScale: ScaleLinear<number, number>;
   };
   numTicks: number;
-  formatXAxis: TickFormatter<ScaleInput<ScaleTime<number, number>>>;
-  formatYAxis: TickFormatter<ScaleInput<ScaleLinear<number, number>>>;
+  formatXAxis: TickFormatter<Date>;
+  formatYAxis: TickFormatter<number>;
 };
 
 export function AreaChartGraph(props: AreaChartGraphProps) {
@@ -72,7 +72,7 @@ export function AreaChartGraph(props: AreaChartGraphProps) {
       <AxisBottom
         scale={xScale}
         tickValues={xScale.domain()}
-        tickFormat={formatXAxis}
+        tickFormat={formatXAxis as AnyTickFormatter}
         top={bounds.height}
         stroke={defaultColors.axis}
         tickLabelProps={() => ({
@@ -89,7 +89,7 @@ export function AreaChartGraph(props: AreaChartGraphProps) {
         hideTicks={true}
         hideAxisLine={true}
         stroke={defaultColors.axis}
-        tickFormat={formatYAxis}
+        tickFormat={formatYAxis as AnyTickFormatter}
         tickLabelProps={() => ({
           fill: defaultColors.axisLabels,
           fontSize: 12,

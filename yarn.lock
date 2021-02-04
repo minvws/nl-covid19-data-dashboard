@@ -2615,6 +2615,7 @@
 "@types/d3-scale@^2", "@types/d3-scale@^2.2.0", "@types/d3-scale@^3.1.0":
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/@types/d3-scale/-/d3-scale-2.2.4.tgz#ca0d4b84d2f88fe058480f81354d14041a667b96"
+  integrity sha512-wkQXT+IfgfAnKB5rtS1qMJg3FS32r1rVFHvqtiqk8pX8o5aQR3VwX1P7ErHjzNIicTlkWsaMiUTrYB+E75HFeA==
   dependencies:
     "@types/d3-time" "^1"
 
@@ -5444,6 +5445,7 @@ cypress@^6.2.1:
 d3-array@1, d3-array@^1, d3-array@^1.2.0:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/d3-array/-/d3-array-1.2.4.tgz#635ce4d5eea759f6f605863dbcfc30edc737f71f"
+  integrity sha512-KHW6M86R+FUPYGb3R5XiYjXPq7VzwxZ22buHhAEVG5ztoEcZZMLov530mmccaqA1GghZArjQV46fuc8kUqhhHw==
 
 d3-collection@1:
   version "1.0.7"
