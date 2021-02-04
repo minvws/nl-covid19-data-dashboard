@@ -6,7 +6,7 @@ import { ReactNode } from 'react';
 import styled from 'styled-components';
 import ArrowIcon from '~/assets/arrow.svg';
 import { Box } from '~/components-styled/base';
-import { LineChart } from '~/components-styled/line-chart/line-chart';
+import { LineChart } from '~/components-styled/line-chart';
 import { ComponentCallbackInfo } from '~/components-styled/line-chart/components';
 import { NumberProperty } from '~/components-styled/line-chart/logic';
 import { Value } from '~/components-styled/stacked-chart/logic';

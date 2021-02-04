@@ -10,6 +10,12 @@ import {
 import { getDaysForTimeframe, TimeframeOption } from '~/utils/timeframe';
 export * from './background-rectangle';
 
+// This type limits the allowed property names to those with a number type,
+// so its like keyof T, but filtered down to only the appropriate properties.
+export type NumberProperty<T extends Value> = {
+  [K in keyof T]: T[K] extends number | null ? K : never;
+}[keyof T];
+
 /**
  * To read an arbitrary value property from the passed in data, we need to cast
  * the type to a dictionary internally, otherwise TS will complain the index
@@ -85,10 +91,6 @@ export type TrendValue = {
 
 const timestampToDate = (d: number) => new Date(d * 1000);
 
-/**
- * @TODO simplify these types and tooltip render callback similar to
- * StackedChart so that it can become just TrendValue[][]
- */
 type TrendData = (TrendValue & Value)[][];
 type Domain = [Date, Date];
 
