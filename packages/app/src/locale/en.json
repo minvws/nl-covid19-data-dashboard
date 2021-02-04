@@ -50,7 +50,8 @@
       "gemeente": "Municipalities",
       "over_risiconiveaus": "About the risk levels",
       "veelgestelde_vragen": "Frequently asked questions",
-      "actueel": "Latest developments"
+      "actueel": "Latest developments",
+      "toegankelijkheid": ""
     },
     "title": "Corona Dashboard",
     "terug_naar_alle_cijfers": "Overview",
@@ -152,7 +153,7 @@
     "barscale_titel": "Hospital admissions reported per day",
     "extra_uitleg": "Number of people with COVID-19 admitted to hospital daily. This figure shows how many hospital admissions are reported per day, including patients from outside the hospital admitted directly to the ICU. It may include hospital admissions that occurred in previous days.",
     "map_titel": "Residence of patients admitted to hospital",
-    "map_toelichting": "This map shows, by municipality or safety region, where people live who have been admitted to hospital with COVID-19. Please note that people may have been admitted to a hospital located somewhere else in the Netherlands; the map therefore does not show admission numbers per hospital. The figures here reflect the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE). Tergooi hospitals, Amstelland Hospital and Flevoziekenhuis do not currently share their data on COVID-19 admission to clinic wards with Stichting NICE. As a result, the actual figures in some municipalities and safety regions may be higher than they appear on the map.",
+    "map_toelichting": "This map shows, by municipality or safety region, where people live who have been admitted to hospital with COVID-19. Please note that people may have been admitted to a hospital located somewhere else in the Netherlands; the map therefore does not show admission numbers per hospital. The figures here reflect the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE). Flevoziekenhuis does not currently share its data on COVID-19 admission to clinic wards with Stichting NICE. As a result, the actual figures in some municipalities and safety regions may be higher than they appear on the map.",
     "linechart_titel": "Progression in hospital admissions over time",
     "barscale_screenreader_text": "{{value}} hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
     "chloropleth_legenda": {
@@ -716,7 +717,7 @@
     "barscale_titel": "Hospital admissions reported per day",
     "extra_uitleg": "Number of people from this safety region with COVID-19 admitted to hospital on a daily basis. This figure shows how many hospital admissions are reported per day, including patients from outside the hosptial admitted directly to the ICU. Patients can be admitted to hospitals in other regions.",
     "map_titel": "Distribution of hospital admissions in {{safetyRegion}}",
-    "map_toelichting": "This map shows, by municipality or safety region, where people live who have been admitted to hospital with COVID-19. Please note that people may have been admitted to a hospital located somewhere else in the Netherlands; the map therefore does not show admission numbers per hospital. The figures here reflect the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE). Tergooi hospitals, Amstelland Hospital and Flevoziekenhuis do not currently share their data on COVID-19 admission to clinic wards with Stichting NICE. As a result, the actual figures in some municipalities and safety regions may be higher than they appear on the map.",
+    "map_toelichting": "This map shows, by municipality or safety region, where people live who have been admitted to hospital with COVID-19. Please note that people may have been admitted to a hospital located somewhere else in the Netherlands; the map therefore does not show admission numbers per hospital. The figures here reflect the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE). Flevoziekenhuis does not currently share its data on COVID-19 admission to clinic wards with Stichting NICE. As a result, the actual figures in some municipalities and safety regions may be higher than they appear on the map.",
     "linechart_titel": "Progression in hospital admissions over time",
     "barscale_screenreader_text": "{{value}} hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
     "bron": {
@@ -860,7 +861,7 @@
     "barscale_titel": "Hospital admissions reported per day",
     "extra_uitleg": "Number of people from this municipality with COVID-19 admitted to hospital on a daily basis. This figure shows how many hospital admissions are reported per day, including patients from outside the hosptial admitted directly to the ICU. Patients can be admitted to hospitals in other regions.",
     "map_titel": "Distribution of hospital admissions in safety region of {{municipality}}",
-    "map_toelichting": "This map shows, by municipality or safety region, where people live who have been admitted to hospital with COVID-19. Please note that people may have been admitted to a hospital located somewhere else in the Netherlands; the map therefore does not show admission numbers per hospital. The figures here reflect the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE). Tergooi hospitals, Amstelland Hospital and Flevoziekenhuis do not currently share their data on COVID-19 admission to clinic wards with Stichting NICE. As a result, the actual figures in some municipalities and safety regions may be higher than they appear on the map.",
+    "map_toelichting": "This map shows, by municipality or safety region, where people live who have been admitted to hospital with COVID-19. Please note that people may have been admitted to a hospital located somewhere else in the Netherlands; the map therefore does not show admission numbers per hospital. The figures here reflect the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE). Flevoziekenhuis does not currently share its data on COVID-19 admission to clinic wards with Stichting NICE. As a result, the actual figures in some municipalities and safety regions may be higher than they appear on the map.",
     "linechart_titel": "Progression in hospital admissions over time",
     "barscale_screenreader_text": "{{value}} hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
     "bron": {
@@ -1971,7 +1972,8 @@
       "verdenkingen_huisartsen": "This graph shows the progression over time in the estimated number of patients who contacted the general practitioner for the first time due to COVID-19 like symptoms.",
       "ziekenhuis_opnames": "This graph shows the progression in hospital admissions over time.",
       "rioolwater_meetwaarde": "This graph shows the most recent measured value of the average amount of virus particles per 100.000 residents, per sewage processing facility.",
-      "verwachte_leveringen": "This graph shows the number of approved vaccine doses the Netherlands expects to receive over the next six weeks."
+      "verwachte_leveringen": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks.",
+      "vaccin_levering_en_prikken": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks."
     }
   },
   "deceased_age_groups": {
@@ -2012,7 +2014,7 @@
     "bronnen": {
       "rivm": {
         "href": "",
-        "text": "Ministry of Health, Welfare and Sport",
+        "text": "RIVM",
         "download": ""
       },
       "ggd": {
@@ -2121,10 +2123,10 @@
       },
       "kpi_expected_delivery": {
         "title": "Approved vaccines to be delivered",
-        "value": "1302750",
+        "value": "2473700",
         "description": "This is the number of approved vaccine doses the Netherlands expects to receive over the next six weeks. The Netherlands will receive a new delivery each week. People need two separately administered doses for the vaccine to be maximally effective.",
-        "date_of_report_unix": "1611600708",
-        "date_of_insertion_unix": "1611600708"
+        "date_of_report_unix": "1612384276",
+        "date_of_insertion_unix": "1612384276"
       },
       "kpi_stock": {
         "title": "",
@@ -2168,11 +2170,11 @@
     },
     "section_vaccinations_more_information": {
       "title": "Expected data on vaccinations",
-      "description": "More data on vaccinations will be added in the near future, including:\n- willingness to be vaccinated\n- vaccination coverage\n- doses in stock"
+      "description": "More data on vaccinations will be added in the near future, including:\n- willingness to be vaccinated\n- vaccination coverage"
     },
     "grafiek": {
-      "titel": "Expected weekly deliveries",
-      "omschrijving": "This graph shows the number of approved vaccine doses the Netherlands expects to receive over the next six weeks."
+      "titel": "Available vaccine doses and doses administered in total",
+      "omschrijving": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks.\n\n[This article explains why not all vaccine doses are used immediately to vaccinate people.](https://coronadashboard.government.nl/artikelen/waarom-zijn-er-vaccins-op-voorraad)"
     },
     "verwachte_leveringen": {
       "van_week_tot_week": "Week {{weekNumberFrom}} to week {{weekNumberTo}}",
