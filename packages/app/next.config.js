@@ -74,6 +74,16 @@ const nextConfig = {
 
     return config;
   },
+
+  async redirects() {
+    return [
+      {
+        source: '/landelijk',
+        destination: '/landelijk/vaccinaties',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 const plugins = [withTM, withBundleAnalyzer];
