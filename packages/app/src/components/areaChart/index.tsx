@@ -57,7 +57,6 @@ export default function AreaChart(props: AreaChartProps) {
         signaalwaarde,
         rangeLegendLabel,
         lineLegendLabel,
-        theme,
       });
 
     const filteredRange = getFilteredValues<TRange>(
