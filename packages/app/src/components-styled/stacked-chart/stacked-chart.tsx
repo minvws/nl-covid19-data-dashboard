@@ -332,36 +332,39 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
    *
    * @TODO wrap in useCallback?
    */
-  function handleHover(
-    event: HoverEvent,
-    tooltipData: TooltipData,
-    hoverIndex: number
-  ) {
-    const isLeave = event.type === 'mouseleave';
+  const handleHover = useCallback(
+    function handleHover(
+      event: HoverEvent,
+      tooltipData: TooltipData,
+      hoverIndex: number
+    ) {
+      const isLeave = event.type === 'mouseleave';
 
-    if (isLeave) {
-      tooltipTimeout = window.setTimeout(() => {
-        hideTooltip();
-      }, 300);
-      hoverTimeout = window.setTimeout(() => {
-        setHoveredIndex(NO_HOVER_INDEX);
-      }, 300);
-      return;
-    }
+      if (isLeave) {
+        tooltipTimeout = window.setTimeout(() => {
+          hideTooltip();
+        }, 300);
+        hoverTimeout = window.setTimeout(() => {
+          setHoveredIndex(NO_HOVER_INDEX);
+        }, 300);
+        return;
+      }
 
-    if (tooltipTimeout) clearTimeout(tooltipTimeout);
-    if (hoverTimeout) clearTimeout(hoverTimeout);
+      if (tooltipTimeout) clearTimeout(tooltipTimeout);
+      if (hoverTimeout) clearTimeout(hoverTimeout);
 
-    setHoveredIndex(hoverIndex);
+      setHoveredIndex(hoverIndex);
 
-    // @ts-expect-error
-    const coords = localPoint(event.target.ownerSVGElement, event);
-    showTooltip({
-      tooltipLeft: coords?.x || 0,
-      tooltipTop: coords?.y || 0,
-      tooltipData,
-    });
-  }
+      // @ts-expect-error
+      const coords = localPoint(event.target.ownerSVGElement, event);
+      showTooltip({
+        tooltipLeft: coords?.x || 0,
+        tooltipTop: coords?.y || 0,
+        tooltipData,
+      });
+    },
+    [hideTooltip, showTooltip]
+  );
 
   if (isEmpty(series)) {
     return null;

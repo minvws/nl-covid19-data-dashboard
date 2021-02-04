@@ -1,8 +1,8 @@
 /**
- * @TODO This abstraction turns out to be hurting more than helping. We concluded that
- * it needs to be broken up and placed at the root again. There are too many
- * specific things here and the interaction to/from other layers in passing
- * props and functions is cumbersome.
+ * @TODO This abstraction turns out to be hurting more than helping. We
+ * concluded that it needs to be broken up and placed at the root again. There
+ * are too many specific things here and the interaction to/from other layers in
+ * passing props and functions is cumbersome.
  *
  * For example TimespanMarker is rendered here because it needs to be part of
  * the SVG, and can not be placed outside. The other visual components that
@@ -208,6 +208,13 @@ export const ChartAxes = memo(function ChartAxes({
           </Group>
         )}
 
+        {children(scales)}
+
+        {/**
+         * Render the timespan marker after the children so it appears on top in
+         * the DOM structure. This is important because the marker is also
+         * handling the hover state.
+         */}
         <TimespanMarker
           data={timespanMarkerData}
           padding={padding}
@@ -215,8 +222,6 @@ export const ChartAxes = memo(function ChartAxes({
           height={height}
           onHover={handleHover}
         />
-
-        {children(scales)}
       </Group>
     </svg>
   );
