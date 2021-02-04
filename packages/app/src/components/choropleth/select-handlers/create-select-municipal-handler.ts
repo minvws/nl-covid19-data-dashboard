@@ -6,24 +6,24 @@ export type MunicipalitySelectionHandler = (
   context: MunicipalityProperties
 ) => void;
 
-export function createSelectMunicipalHandler(
+export function createSelectMunicipalHandler<T extends { gmcode: string }>(
   router: NextRouter,
   pageName: PageName,
   openMenu?: boolean
-): MunicipalitySelectionHandler {
-  return (context: MunicipalityProperties) => {
-    if (!context) {
+) {
+  return (value: T) => {
+    if (!value) {
       return;
     }
 
     if (pageName === 'actueel') {
       router.push(
-        `/actueel/gemeente/${context.gemcode}` + (openMenu ? '?menu=1' : '')
+        `/actueel/gemeente/${value.gmcode}` + (openMenu ? '?menu=1' : '')
       );
       return;
     }
     router.push(
-      `/gemeente/${context.gemcode}/${pageName}` + (openMenu ? '?menu=1' : '')
+      `/gemeente/${value.gmcode}/${pageName}` + (openMenu ? '?menu=1' : '')
     );
   };
 }

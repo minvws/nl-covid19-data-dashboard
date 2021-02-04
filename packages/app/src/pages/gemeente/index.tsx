@@ -52,7 +52,9 @@ const Municipality: FCWithLayout<typeof getStaticProps> = () => {
 
       {!breakpoints.md && (
         <Box bg="white">
-          <MunicipalityComboBox />
+          <MunicipalityComboBox
+            onSelect={(gmcode) => goToMunicipal({ gmcode })}
+          />
         </Box>
       )}
 
@@ -72,8 +74,10 @@ const Municipality: FCWithLayout<typeof getStaticProps> = () => {
           margin="0 auto"
         >
           <MunicipalityNavigationMap
-            tooltipContent={tooltipContent(goToMunicipal)}
-            onSelect={goToMunicipal}
+            tooltipContent={tooltipContent((x) =>
+              goToMunicipal({ gmcode: x.gemcode })
+            )}
+            onSelect={(x) => goToMunicipal({ gmcode: x.gemcode })}
           />
         </Box>
       </Box>

@@ -4,15 +4,22 @@ import { RegioPageName } from './types';
 
 export type RegionSelectionHandler = (context: SafetyRegionProperties) => void;
 
-export function createSelectRegionHandler(
+export function createSelectRegionHandler<T extends { vrcode: string }>(
   router: NextRouter,
-  pageName: RegioPageName
-): RegionSelectionHandler {
-  return (context: SafetyRegionProperties) => {
+  pageName: RegioPageName,
+  openMenu?: boolean
+) {
+  return (value: T) => {
     if (pageName === 'actueel') {
-      router.push(`/actueel/veiligheidsregio/${context.vrcode}`);
+      router.push(
+        `/actueel/veiligheidsregio/${value.vrcode}` +
+          (openMenu ? '?menu=1' : '')
+      );
       return;
     }
-    router.push(`/veiligheidsregio/${context.vrcode}/${pageName}`);
+    router.push(
+      `/veiligheidsregio/${value.vrcode}/${pageName}` +
+        (openMenu ? '?menu=1' : '')
+    );
   };
 }
