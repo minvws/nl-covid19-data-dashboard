@@ -159,7 +159,6 @@ export function LineChart<T extends Value>({
       scaleBand<Date>({
         range: [0, xMax],
         round: true,
-        // domain: timespanMarkerData.map(getDate),
         domain: timespanMarkerData.map(getDate),
         padding: 0,
       }),
@@ -231,16 +230,6 @@ export function LineChart<T extends Value>({
       event: React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>,
       scales: ChartScales
     ) => {
-      /**
-       * @TODO the hover handler is now passed the seriesIndex value (from
-       * TimeseriesMarker). I think we can use this to greatly simplify the
-       * logic below, since the index will tell us what slice of the trend
-       * values is being hovered.
-       *
-       * In the case of 1 trend this gives us the point, and in the case of
-       * multiple trends we only need to look at the y-position to find the
-       * closest point in that slice.
-       */
       if (!trendsList.length || event.type === 'mouseleave') {
         toggleHoverElements(true);
         return;
@@ -355,7 +344,6 @@ export function LineChart<T extends Value>({
         <Box
           height={yMax}
           width={xMax}
-          // bg="rgba(1,0,0,0.1)"
           position="absolute"
           top={padding.top}
           left={padding.left}
