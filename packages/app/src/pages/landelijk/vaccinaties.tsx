@@ -259,48 +259,10 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
           <ParentSize>
             {({ width }) => (
               <LineChart
+                timeframe="all"
                 width={width}
                 ariaLabelledBy="chart_vaccine_support"
                 values={data.vaccine_support.values}
-                // [
-                //   {
-                //     percentage_in_favor: 34,
-                //     percentage_already_vaccinated: 12,
-                //     date_start_unix:
-                //       new Date('04 January 2021').getTime() / 1000,
-                //     date_end_unix:
-                //       new Date('10 January 2021').getTime() / 1000,
-                //     date_of_insertion_unix: 0,
-                //   },
-                //   {
-                //     percentage_in_favor: 23,
-                //     percentage_already_vaccinated: 57,
-                //     date_start_unix:
-                //       new Date('11 January 2021').getTime() / 1000,
-                //     date_end_unix:
-                //       new Date('17 January 2021').getTime() / 1000,
-                //     date_of_insertion_unix: 0,
-                //   },
-                //   {
-                //     percentage_in_favor: 95,
-                //     percentage_already_vaccinated: 84,
-                //     date_start_unix:
-                //       new Date('18 January 2021').getTime() / 1000,
-                //     date_end_unix:
-                //       new Date('24 January 2021').getTime() / 1000,
-                //     date_of_insertion_unix: 0,
-                //   },
-                //   {
-                //     percentage_in_favor: 34,
-                //     percentage_already_vaccinated: 12,
-                //     date_start_unix:
-                //       new Date('25 January 2021').getTime() / 1000,
-                //     date_end_unix:
-                //       new Date('31 January 2021').getTime() / 1000,
-                //     date_of_insertion_unix: 0,
-                //   },
-                // ] as NlVaccineSupportValue[]
-                // }
                 linesConfig={[{ metricProperty: 'percentage_in_favor' }]}
                 formatTooltip={(values) => {
                   const value = values[0];
@@ -322,6 +284,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                     </Text>
                   );
                 }}
+                formatYAxis={(x) => `${x}%`}
               />
             )}
           </ParentSize>

@@ -76,6 +76,11 @@ export function LineChart<T extends Value>({
   linesConfig,
   width = 500,
   height = 250,
+  /**
+   * @TODO This is a weird default. The chart should show "all" by default
+   * because you might not have a timeframe toggle as part of the chart. I'm
+   * leaving this for later as I don't have time to break stuff now.
+   */
   timeframe = '5weeks',
   signaalwaarde,
   formatTooltip,
@@ -142,12 +147,13 @@ export function LineChart<T extends Value>({
   const timespanMarkerData = trendsList[0];
 
   const xMax = width - padding.left - padding.right;
+  const yMax = height - padding.top - padding.bottom;
 
   function getDate(x: TrendValue) {
     return x.__date;
   }
 
-  const xScale = useMemo(
+  const datespanScale = useMemo(
     () =>
       scaleBand<Date>({
         range: [0, xMax],
@@ -159,9 +165,9 @@ export function LineChart<T extends Value>({
   );
 
   const [markerProps, setMarkerProps] = useState<{
-    height: number;
+    // height: number;
     data: HoverPoint<T>[];
-    padding: ChartPadding;
+    // padding: ChartPadding;
   }>();
 
   const bisect = useCallback(
@@ -214,8 +220,8 @@ export function LineChart<T extends Value>({
         });
         setMarkerProps({
           data: hoverPoints,
-          height,
-          padding: padding,
+          // height,
+          // padding: padding,
         });
       }
     },
@@ -303,10 +309,6 @@ export function LineChart<T extends Value>({
     [handleHover, linesConfig, hideFill, trendsList]
   );
 
-  if (!xDomain) {
-    return null;
-  }
-
   return (
     <Box>
       {valueAnnotation && (
@@ -348,14 +350,27 @@ export function LineChart<T extends Value>({
           </Tooltip>
         )}
 
-        {markerProps && (
-          <Marker
-            {...markerProps}
-            showLine={showMarkerLine}
-            formatLabel={formatMarkerLabel}
-            width={xScale.bandwidth()}
-          />
-        )}
+        <Box
+          height={yMax}
+          width={xMax}
+          bg="rgba(1,0,0,0.1)"
+          position="absolute"
+          top={padding.top}
+          left={padding.left}
+          overflow="hidden"
+          style={{
+            pointerEvents: 'none',
+          }}
+        >
+          {markerProps && (
+            <Marker
+              {...markerProps}
+              showLine={showMarkerLine}
+              formatLabel={formatMarkerLabel}
+              width={datespanScale.bandwidth()}
+            />
+          )}
+        </Box>
 
         {showLegend && legendItems && (
           <Box pl={`${padding.left}px`}>

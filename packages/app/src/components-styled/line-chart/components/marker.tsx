@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { ChartPadding } from '~/components-styled/line-chart/components';
 import { Text } from '~/components-styled/typography';
 import { colors } from '~/style/theme';
 import { formatDateFromMilliseconds } from '~/utils/formatDate';
@@ -66,23 +65,23 @@ const Point = styled.div<ColorProps>`
   }
 `;
 
-const MarkerContainer = styled.div<{ width: number }>`
+const DateSpanMarker = styled.div`
   pointer-events: none;
   transform: translate(-50%, 0);
   position: absolute;
+  top: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   flex-grow: 0;
   flex-shrink: 0;
-  min-width: ${(props) => props.width}px;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.03);
 `;
 
-const LineContainer = styled.div<{ width: number }>`
+const LineContainer = styled.div`
   pointer-events: none;
   transform: translate(-50%, 0);
-  min-width: ${(props) => props.width}px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -92,9 +91,7 @@ const LineContainer = styled.div<{ width: number }>`
 type MarkerProps<T extends Value> = {
   data: HoverPoint<T>[];
   width: number;
-  height: number;
   primaryColor?: string;
-  padding: ChartPadding;
   showLine: boolean;
   formatLabel?: (data: T & TrendValue) => string;
 };
@@ -103,8 +100,6 @@ export function Marker<T extends Value>(props: MarkerProps<T>) {
   const {
     primaryColor = colors.data.primary,
     data,
-    height,
-    padding,
     showLine = false,
     formatLabel = defaultFormatLabel,
     width,
@@ -116,15 +111,22 @@ export function Marker<T extends Value>(props: MarkerProps<T>) {
 
   return (
     <>
+      {/**
+       * Inline styles here are use deliberately, because using styled components
+       * with dynamic props will inject classes into the css at runtime, which is
+       * not super efficient in case of hover events.
+       */}
       {showLine && (
         <LineContainer
-          width={width}
-          style={{ top: `${topY + 9}px`, left: data[0].x + padding.left }}
+          style={{
+            top: topY,
+            left: data[0].x,
+          }}
         >
           <DottedLine
             indicatorColor={primaryColor}
             style={{
-              height: `${height - topY - (padding.top + padding.bottom) + 9}px`,
+              height: `calc(100% - ${topY})px`,
             }}
           />
           <Label>
@@ -134,12 +136,10 @@ export function Marker<T extends Value>(props: MarkerProps<T>) {
           </Label>
         </LineContainer>
       )}
-      <MarkerContainer
-        width={width}
+      <DateSpanMarker
         style={{
-          top: padding.top,
-          left: data[0].x + padding.left,
-          height: height - (padding.top + padding.bottom),
+          width,
+          left: data[0].x,
         }}
       >
         {data.map((d, index) => (
@@ -149,7 +149,7 @@ export function Marker<T extends Value>(props: MarkerProps<T>) {
             key={d.y}
           />
         ))}
-      </MarkerContainer>
+      </DateSpanMarker>
     </>
   );
 }

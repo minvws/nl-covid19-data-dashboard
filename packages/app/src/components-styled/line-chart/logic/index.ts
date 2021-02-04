@@ -99,23 +99,27 @@ export function getTrendData<T extends Value>(
 ): [TrendData, Domain] {
   const series = getValuesInTimeframe(values, timeframe);
 
-  const xDomainMin = isDateSeries(values)
-    ? values[0].date_unix
-    : isDateSpanSeries(values)
-    ? values[0].date_start_unix
-    : 0;
-
-  const xDomainMax = isDateSeries(values)
-    ? values[values.length - 1].date_unix
-    : isDateSpanSeries(values)
-    ? values[values.length - 1].date_end_unix
-    : 0;
-
   const trendData = metricProperties.map(
     (metricProperty) =>
       (getSingleTrendData(series, metricProperty) as unknown) as (TrendValue &
         Value)[]
   );
+
+  if (series.length < 2) {
+    return [trendData, [new Date(0), new Date(0)]];
+  }
+
+  const xDomainMin = isDateSeries(series)
+    ? series[0].date_unix
+    : isDateSpanSeries(values)
+    ? series[0].date_start_unix
+    : 0;
+
+  const xDomainMax = isDateSeries(series)
+    ? series[series.length - 1].date_unix
+    : isDateSpanSeries(values)
+    ? series[series.length - 1].date_end_unix
+    : 0;
 
   return [
     trendData,
