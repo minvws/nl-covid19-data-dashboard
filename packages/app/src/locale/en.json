@@ -1999,8 +1999,8 @@
     "title": "COVID-19 vaccinations",
     "description": "Vaccination is the most important step towards getting life back to normal. The Netherlands began vaccinating people against COVID-19 on 6 January 2021. Eventually, the vaccine will be offered to everyone aged 18 and over. This page shows how many doses of vaccine have been administered and how many doses are on their way.",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "date_unix": "1612354200",
-    "date_of_insertion_unix": "1612354200",
+    "date_unix": "1612442100",
+    "date_of_insertion_unix": "1612442100",
     "reference": {
       "href": "/verantwoording#vaccination",
       "text": "Read more about the source of the data on vaccination in the explanation of the presented data."
@@ -2036,27 +2036,27 @@
       "difference": "",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "416093",
-          "date_unix": "1612354200",
-          "date_of_insertion_unix": "1612354200"
+          "total_vaccinated": "454998",
+          "date_unix": "1612442100",
+          "date_of_insertion_unix": "1612442100"
         }
       },
       "kpi_total": {
         "title": "Number of doses administered",
-        "value": "303702",
+        "value": "330494",
         "description": "",
         "date_of_report_unix": "1612263890",
         "date_of_insertion_unix": "1612263890",
         "administered": [
           {
-            "value": "222486",
+            "value": "245278",
             "description": "reported by GGD-GHOR",
-            "report_date": "Reported number till 2 February"
+            "report_date": "Reported number till 3 February"
           },
           {
-            "value": "81216",
+            "value": "85216",
             "description": "reported by LNAZ",
-            "report_date": "Reported number till 2 February"
+            "report_date": "Reported number till 3 February"
           },
           {
             "value": "",
@@ -2080,25 +2080,25 @@
         "first_tab_title": "Calculated number",
         "second_tab_title": "Reported number",
         "tab_total_estimated": {
-          "value": "416093",
+          "value": "454998",
           "description": "",
           "date_of_report_unix": "1612354200",
           "date_of_insertion_unix": "1612354200",
           "administered": [
             {
-              "value": "222486",
+              "value": "245278",
               "description": "administered by GGDs",
-              "report_date": "Reported number till 2 February"
+              "report_date": "Reported number till 3 February"
             },
             {
-              "value": "81216",
+              "value": "85216",
               "description": "administered in hospitals",
-              "report_date": "Reported number till 2 February"
+              "report_date": "Reported number till 3 February"
             },
             {
-              "value": "112391",
+              "value": "124504",
               "description": "administered in long-term care institutions",
-              "report_date": "Calculated number till 2 February"
+              "report_date": "Calculated number till 3 February"
             },
             {
               "value": "",
@@ -2157,7 +2157,8 @@
         "description": "More data on vaccinations will be added in the near future, including:",
         "additions": [
           "Willingness to be vaccinated",
-          "Vaccination coverage"
+          "Vaccination coverage",
+          ""
         ]
       }
     },
