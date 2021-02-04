@@ -383,7 +383,7 @@ function formatDefaultTooltip<T extends Value>(
     return (
       <>
         <Text as="span" fontWeight="bold">
-          {formatDateFromMilliseconds(value.__date.getTime()) + ': '}
+          {`${formatDateFromMilliseconds(value.__date.getTime())}: `}
         </Text>
         {isPercentage
           ? `${formatPercentage(value.__value)}%`
@@ -395,9 +395,9 @@ function formatDefaultTooltip<T extends Value>(
     return (
       <>
         <Text as="span" fontWeight="bold">
-          {formatDateFromSeconds(value.date_start_unix, 'short')} -{' '}
-          {formatDateFromSeconds(value.date_end_unix, 'short')}:
-        </Text>{' '}
+          {`${formatDateFromSeconds(value.date_start_unix, 'short')} -
+          ${formatDateFromSeconds(value.date_end_unix, 'short')}: `}
+        </Text>
         {isPercentage
           ? `${formatPercentage(value.__value)}%`
           : formatNumber(value.__value)}
