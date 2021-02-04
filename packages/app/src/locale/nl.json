@@ -2157,8 +2157,7 @@
         "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer:",
         "additions": [
           "Vaccinatiebereidheid",
-          "Vaccinatiegraad",
-          "Vaccins op voorraad"
+          "Vaccinatiegraad"
         ]
       }
     },
