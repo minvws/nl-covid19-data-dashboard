@@ -2156,8 +2156,7 @@
         "description": "More data on vaccinations will be added in the near future, including:",
         "additions": [
           "Willingness to be vaccinated",
-          "Vaccination coverage",
-          "Vaccine doses in stock"
+          "Vaccination coverage"
         ]
       }
     },
