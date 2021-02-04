@@ -74,9 +74,10 @@ async function copyCachedAssets(
   console.log(
     `Copying ${assets.length} assets from cache to target directory...\n`
   );
+
   await fs.emptyDir(TARGET_DIR);
   await Promise.all(
-    assets.map(async (x) =>
+    assets.map((x) =>
       fs.copy(
         `${cacheDir}/${x.filename}`,
         `${targetDir}/${x.directory}/${x.filename}`

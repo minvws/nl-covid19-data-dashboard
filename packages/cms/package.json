@@ -36,8 +36,7 @@
     "react-icons": "^4.1.0",
     "react-world-flags": "^1.4.0",
     "sanity-mobile-preview": "^1.0.7",
-    "sanity-plugin-tabs": "^2.0.1",
-    "ts-is-present": "^1.2.1"
+    "sanity-plugin-tabs": "^2.0.1"
   },
   "devDependencies": {
     "@sanity/cli": "^2.2.6",
