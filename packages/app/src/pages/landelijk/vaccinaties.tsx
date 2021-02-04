@@ -1,8 +1,8 @@
-import { NlVaccineSupportValue } from '@corona-dashboard/common';
 import { css } from '@styled-system/css';
 import { ParentSize } from '@visx/responsive';
 import { Fragment, useState } from 'react';
 import VaccinatieIcon from '~/assets/vaccinaties.svg';
+import { AreaChart } from '~/components-styled/area-chart';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
@@ -10,7 +10,6 @@ import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
-import { LineChart } from '~/components-styled/line-chart/line-chart';
 import { RadioGroup } from '~/components-styled/radio-group';
 import { SEOHead } from '~/components-styled/seo-head';
 import { StackedChart } from '~/components-styled/stacked-chart';
@@ -27,7 +26,7 @@ import {
   getNlData,
   getText,
 } from '~/static-props/get-data';
-import { formatDateFromSeconds } from '~/utils/formatDate';
+import { colors } from '~/style/theme';
 import { formatNumber } from '~/utils/formatNumber';
 
 export const getStaticProps = createGetStaticProps(
@@ -211,6 +210,31 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             )}
           </KpiTile>
         </TwoKpiSection>
+
+        <ChartTile
+          title="test"
+          description="toelichting"
+          metadata={{
+            date: 1611593522,
+            source: text.bronnen.rivm,
+          }}
+        >
+          <Box>
+            <ParentSize>
+              {({ width }) => (
+                <AreaChart
+                  width={width}
+                  timeframe="all"
+                  areaValues={data.vaccine_delivery.values}
+                  areaConfigs={['pfizer'].map((name) => ({
+                    metricProperty: name,
+                    color: (colors.data.vaccines as any)[name],
+                  }))}
+                />
+              )}
+            </ParentSize>
+          </Box>
+        </ChartTile>
 
         <ChartTile
           title={text.grafiek.titel}

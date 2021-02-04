@@ -20,18 +20,14 @@ import {
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { TimeframeOption } from '~/utils/timeframe';
 import { Legenda, LegendItem, LegendShape } from '../legenda';
+import { isDateSeries, isDateSpanSeries, Value } from '../stacked-chart/logic';
 import { HoverPoint, Marker, Tooltip, Trend } from './components';
-import {
-  isDailyValue,
-  isWeeklyValue,
-  NumberProperty,
-  TrendValue,
-} from './logic';
 import { useBisect } from './hooks/use-bisect';
 import { useChartHover } from './hooks/use-chart-hover';
 import { useChartPadding } from './hooks/use-chart-padding';
 import { useDomains } from './hooks/use-domains';
 import { useTrendValues } from './hooks/use-trend-values';
+import { TrendValue } from './logic';
 
 const dateToValue = (d: Date) => d.valueOf() / 1000;
 const formatXAxis = (date: Date) =>
@@ -39,8 +35,8 @@ const formatXAxis = (date: Date) =>
 const formatYAxisFn = (y: number) => formatNumber(y);
 const formatYAxisPercentageFn = (y: number) => `${formatPercentage(y)}%`;
 
-export type LineConfig<T extends Value> = {
-  metricProperty: NumberProperty<T>;
+export type LineConfig = {
+  metricProperty: string;
   color?: string;
   style?: 'solid' | 'dashed';
   areaFillOpacity?: number;
@@ -51,7 +47,7 @@ export type LineConfig<T extends Value> = {
 
 export type LineChartProps<T extends Value> = {
   values: T[];
-  linesConfig: LineConfig<T>[];
+  linesConfig: LineConfig[];
   width?: number;
   height?: number;
   timeframe?: TimeframeOption;
@@ -254,8 +250,8 @@ function formatDefaultTooltip<T extends Value>(
 ) {
   // default tooltip assumes one line is rendered:
   const value = values[0];
-  const isDaily = isDailyValue(values);
-  const isWeekly = isWeeklyValue(values);
+  const isDaily = isDateSeries(values);
+  const isWeekly = isDateSpanSeries(values);
 
   if (isDaily) {
     return (

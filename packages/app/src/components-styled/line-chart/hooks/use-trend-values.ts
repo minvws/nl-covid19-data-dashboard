@@ -1,16 +1,13 @@
 import { useMemo } from 'react';
-import {
-  getTrendData,
-  NumberProperty,
-} from '~/components-styled/line-chart/helpers';
+import { getTrendData, TrendData } from '~/components-styled/line-chart/logic';
 import { Value } from '~/components-styled/stacked-chart/logic';
 import { TimeframeOption } from '~/utils/timeframe';
 
 export function useTrendValues<T extends Value>(
   values: T[],
-  configs: { metricProperty: NumberProperty<T> }[],
+  configs: { metricProperty: string }[],
   timeframe: TimeframeOption
-) {
+): TrendData {
   const metricProperties = useMemo(() => configs.map((x) => x.metricProperty), [
     configs,
   ]);

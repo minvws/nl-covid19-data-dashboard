@@ -125,6 +125,14 @@ export const colors = {
       yellow: '#D3A500',
       red: '#f35065',
     },
+    vaccines: {
+      pfizer: '#00529D',
+      moderna: '#5BADDB',
+      astra_zeneca: '#003580',
+      cure_vac: '#0070BB',
+      janssen: '#248FCF',
+      sanofi: '#8FCAE7',
+    },
   },
 } as const;
 

@@ -1,7 +1,7 @@
 import { extent } from 'd3-array';
 import { useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
-import { calculateYMax, TrendData } from '../helpers';
+import { calculateYMax, TrendData } from '../logic';
 
 export function useDomains(
   trendsList: TrendData,

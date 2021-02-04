@@ -88,13 +88,14 @@ export type TrendValue = {
   __value: number;
 };
 
-const timestampToDate = (d: number) => new Date(d * 1000);
+export const timestampToDate = (d: number) => new Date(d * 1000);
 
-export type TrendData = (TrendValue & Value)[][];
+export type SingleTrendData = (TrendValue & Value)[];
+export type TrendData = SingleTrendData[];
 
 export function getTrendData<T extends Value>(
   values: T[],
-  valueKeys: NumberProperty<T>[],
+  valueKeys: string[],
   timeframe: TimeframeOption
 ): TrendData {
   return valueKeys.map((key) => getSingleTrendData(values, key, timeframe));
@@ -102,7 +103,7 @@ export function getTrendData<T extends Value>(
 
 export function getSingleTrendData<T extends Value>(
   values: T[],
-  valueKey: NumberProperty<T>,
+  valueKey: string,
   timeframe: TimeframeOption
 ): (TrendValue & Value)[] {
   const valuesInFrame = getTimeframeValues(values, timeframe);
