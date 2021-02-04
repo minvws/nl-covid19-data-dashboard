@@ -14,14 +14,11 @@ import { AxisBottom, AxisLeft, TickFormatter } from '@visx/axis';
 import { GridRows } from '@visx/grid';
 import { Group } from '@visx/group';
 import { scaleLinear, scaleTime } from '@visx/scale';
-import { Line } from '@visx/shape';
+import { Bar, Line } from '@visx/shape';
 import { Text } from '@visx/text';
 import { ScaleLinear, ScaleTime } from 'd3-scale';
 import { ComponentProps, memo, MouseEvent, ReactNode, TouchEvent } from 'react';
 import { colors } from '~/style/theme';
-import { TrendValue } from '../logic';
-import { MARKER_MIN_WIDTH } from './marker';
-import { TimespanMarker } from './timespan-marker';
 
 const NUM_TICKS = 3;
 
@@ -63,8 +60,7 @@ type ChartAxesProps = {
   benchmark?: Benchmark;
   onHover: (
     event: React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>,
-    scales: ChartScales,
-    seriesIndex: number
+    scales: ChartScales
   ) => void;
   xDomain: [Date, Date];
   yDomain: number[];
@@ -76,7 +72,6 @@ type ChartAxesProps = {
   children: (props: ChartScales) => ReactNode;
   componentCallback?: ComponentCallbackFunction;
   ariaLabelledBy?: string;
-  timespanMarkerData: TrendValue[];
 };
 
 type AnyTickFormatter = (value: any) => string;
@@ -96,17 +91,15 @@ export const ChartAxes = memo(function ChartAxes({
   children,
   componentCallback = () => undefined,
   ariaLabelledBy,
-  timespanMarkerData,
 }: ChartAxesProps) {
   const bounds: ChartBounds = {
     width: width - padding.left - padding.right,
     height: height - padding.top - padding.bottom,
   };
 
-  const markerPadding = MARKER_MIN_WIDTH / 2;
   const xScale = scaleTime({
     domain: xDomain,
-    range: [markerPadding, bounds.width - markerPadding],
+    range: [0, bounds.width],
   });
 
   const yScale = scaleLinear({
@@ -118,9 +111,8 @@ export const ChartAxes = memo(function ChartAxes({
   const scales = { xScale, yScale };
 
   const handleHover = (
-    event: TouchEvent<SVGElement> | MouseEvent<SVGElement>,
-    seriesIndex: number
-  ) => onHover(event, scales, seriesIndex);
+    event: TouchEvent<SVGElement> | MouseEvent<SVGElement>
+  ) => onHover(event, scales);
 
   return (
     <svg
@@ -211,16 +203,18 @@ export const ChartAxes = memo(function ChartAxes({
         {children(scales)}
 
         {/**
-         * Render the timespan marker after the children so it appears on top in
-         * the DOM structure. This is important because the marker is also
-         * handling the hover state.
+         * Render the bar on top of the trends because it captures mouse hover when you are above the trend line
          */}
-        <TimespanMarker
-          data={timespanMarkerData}
-          padding={padding}
+        <Bar
+          x={0}
+          y={0}
           width={width}
           height={height}
-          onHover={handleHover}
+          fill="transparent"
+          onTouchStart={handleHover}
+          onTouchMove={handleHover}
+          onMouseMove={handleHover}
+          onMouseLeave={handleHover}
         />
       </Group>
     </svg>

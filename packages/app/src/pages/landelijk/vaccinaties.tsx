@@ -1,4 +1,4 @@
-import { NlVaccineSupportValue } from '@corona-dashboard/common';
+// import { NlVaccineSupportValue } from '@corona-dashboard/common';
 import { css } from '@styled-system/css';
 import { Fragment, useState } from 'react';
 import VaccinatieIcon from '~/assets/vaccinaties.svg';
@@ -46,6 +46,7 @@ import { ParentSize } from '@visx/responsive';
 const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
   text: siteText,
   content,
+  data,
 }) => {
   const text = siteText.vaccinaties;
   const [selectedTab, setSelectedTab] = useState(
@@ -260,46 +261,46 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
               <LineChart
                 width={width}
                 ariaLabelledBy="chart_vaccine_support"
-                values={
-                  [
-                    {
-                      percentage_in_favor: 34,
-                      percentage_already_vaccinated: 12,
-                      date_start_unix:
-                        new Date('04 January 2021').getTime() / 1000,
-                      date_end_unix:
-                        new Date('10 January 2021').getTime() / 1000,
-                      date_of_insertion_unix: 0,
-                    },
-                    {
-                      percentage_in_favor: 23,
-                      percentage_already_vaccinated: 57,
-                      date_start_unix:
-                        new Date('11 January 2021').getTime() / 1000,
-                      date_end_unix:
-                        new Date('17 January 2021').getTime() / 1000,
-                      date_of_insertion_unix: 0,
-                    },
-                    {
-                      percentage_in_favor: 95,
-                      percentage_already_vaccinated: 84,
-                      date_start_unix:
-                        new Date('18 January 2021').getTime() / 1000,
-                      date_end_unix:
-                        new Date('24 January 2021').getTime() / 1000,
-                      date_of_insertion_unix: 0,
-                    },
-                    {
-                      percentage_in_favor: 34,
-                      percentage_already_vaccinated: 12,
-                      date_start_unix:
-                        new Date('25 January 2021').getTime() / 1000,
-                      date_end_unix:
-                        new Date('31 January 2021').getTime() / 1000,
-                      date_of_insertion_unix: 0,
-                    },
-                  ] as NlVaccineSupportValue[]
-                }
+                values={data.vaccine_support.values}
+                // [
+                //   {
+                //     percentage_in_favor: 34,
+                //     percentage_already_vaccinated: 12,
+                //     date_start_unix:
+                //       new Date('04 January 2021').getTime() / 1000,
+                //     date_end_unix:
+                //       new Date('10 January 2021').getTime() / 1000,
+                //     date_of_insertion_unix: 0,
+                //   },
+                //   {
+                //     percentage_in_favor: 23,
+                //     percentage_already_vaccinated: 57,
+                //     date_start_unix:
+                //       new Date('11 January 2021').getTime() / 1000,
+                //     date_end_unix:
+                //       new Date('17 January 2021').getTime() / 1000,
+                //     date_of_insertion_unix: 0,
+                //   },
+                //   {
+                //     percentage_in_favor: 95,
+                //     percentage_already_vaccinated: 84,
+                //     date_start_unix:
+                //       new Date('18 January 2021').getTime() / 1000,
+                //     date_end_unix:
+                //       new Date('24 January 2021').getTime() / 1000,
+                //     date_of_insertion_unix: 0,
+                //   },
+                //   {
+                //     percentage_in_favor: 34,
+                //     percentage_already_vaccinated: 12,
+                //     date_start_unix:
+                //       new Date('25 January 2021').getTime() / 1000,
+                //     date_end_unix:
+                //       new Date('31 January 2021').getTime() / 1000,
+                //     date_of_insertion_unix: 0,
+                //   },
+                // ] as NlVaccineSupportValue[]
+                // }
                 linesConfig={[{ metricProperty: 'percentage_in_favor' }]}
                 formatTooltip={(values) => {
                   const value = values[0];

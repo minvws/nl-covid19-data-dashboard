@@ -56,14 +56,17 @@ const Point = styled.div<ColorProps>`
     position: absolute;
     height: 18px;
     width: 18px;
-    transform: translate(0, -45%);
+    /*
+      Without the -5% the outer circle is a little off for some reason
+    */
+    transform: translate(-5%, -50%);
     border-radius: 50%;
     background: ${(props) => props.indicatorColor || 'black'};
     opacity: 0.2;
   }
 `;
 
-const MarkerContainer = styled.div`
+const MarkerContainer = styled.div<{ width: number }>`
   pointer-events: none;
   transform: translate(-50%, 0);
   position: absolute;
@@ -72,14 +75,14 @@ const MarkerContainer = styled.div`
   align-items: center;
   flex-grow: 0;
   flex-shrink: 0;
-  min-width: ${MARKER_MIN_WIDTH}px;
+  min-width: ${(props) => props.width}px;
   background-color: rgba(0, 0, 0, 0.03);
 `;
 
-const LineContainer = styled.div`
+const LineContainer = styled.div<{ width: number }>`
   pointer-events: none;
   transform: translate(-50%, 0);
-  min-width: ${MARKER_MIN_WIDTH}px;
+  min-width: ${(props) => props.width}px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -88,6 +91,7 @@ const LineContainer = styled.div`
 
 type MarkerProps<T extends Value> = {
   data: HoverPoint<T>[];
+  width: number;
   height: number;
   primaryColor?: string;
   padding: ChartPadding;
@@ -103,6 +107,7 @@ export function Marker<T extends Value>(props: MarkerProps<T>) {
     padding,
     showLine = false,
     formatLabel = defaultFormatLabel,
+    width,
   } = props;
 
   const topY = data.reduce((min, d) => {
@@ -111,23 +116,9 @@ export function Marker<T extends Value>(props: MarkerProps<T>) {
 
   return (
     <>
-      <MarkerContainer
-        style={{
-          top: padding.top,
-          left: data[0].x + padding.left,
-          height: height - (padding.top + padding.bottom),
-        }}
-      >
-        {data.map((d, index) => (
-          <Point
-            indicatorColor={d.color ?? colors.data.primary}
-            style={{ top: d.y - index * 18 }}
-            key={d.y}
-          />
-        ))}
-      </MarkerContainer>
       {showLine && (
         <LineContainer
+          width={width}
           style={{ top: `${topY + 9}px`, left: data[0].x + padding.left }}
         >
           <DottedLine
@@ -143,6 +134,22 @@ export function Marker<T extends Value>(props: MarkerProps<T>) {
           </Label>
         </LineContainer>
       )}
+      <MarkerContainer
+        width={width}
+        style={{
+          top: padding.top,
+          left: data[0].x + padding.left,
+          height: height - (padding.top + padding.bottom),
+        }}
+      >
+        {data.map((d, index) => (
+          <Point
+            indicatorColor={d.color ?? colors.data.primary}
+            style={{ top: d.y - index * 18 }}
+            key={d.y}
+          />
+        ))}
+      </MarkerContainer>
     </>
   );
 }

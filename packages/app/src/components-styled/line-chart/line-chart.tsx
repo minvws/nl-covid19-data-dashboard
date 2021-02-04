@@ -1,7 +1,8 @@
 import { TickFormatter } from '@visx/axis';
 import { localPoint } from '@visx/event';
 import { Point } from '@visx/point';
-import { bisectLeft, extent } from 'd3-array';
+import { scaleBand } from '@visx/scale';
+import { bisectLeft } from 'd3-array';
 import { ScaleTime } from 'd3-scale';
 import { useCallback, useMemo, useState } from 'react';
 import { isDefined } from 'ts-is-present';
@@ -139,6 +140,23 @@ export function LineChart<T extends Value>({
   }, [overridePadding, seriesMax]);
 
   const timespanMarkerData = trendsList[0];
+
+  const xMax = width - padding.left - padding.right;
+
+  function getDate(x: TrendValue) {
+    return x.__date;
+  }
+
+  const xScale = useMemo(
+    () =>
+      scaleBand<Date>({
+        range: [0, xMax],
+        round: true,
+        domain: timespanMarkerData.map(getDate),
+        padding: 0,
+      }),
+    [xMax, timespanMarkerData]
+  );
 
   const [markerProps, setMarkerProps] = useState<{
     height: number;
@@ -314,7 +332,6 @@ export function LineChart<T extends Value>({
           benchmark={benchmark}
           componentCallback={componentCallback}
           ariaLabelledBy={ariaLabelledBy}
-          timespanMarkerData={timespanMarkerData}
         >
           {renderTrendLines}
         </ChartAxes>
@@ -336,6 +353,7 @@ export function LineChart<T extends Value>({
             {...markerProps}
             showLine={showMarkerLine}
             formatLabel={formatMarkerLabel}
+            width={xScale.bandwidth()}
           />
         )}
 
