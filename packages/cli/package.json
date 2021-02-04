@@ -1,7 +1,6 @@
 {
   "name": "@corona-dashboard/cli",
   "private": true,
-  "version": "1.0.0",
   "dependencies": {
     "meow": "^8.0.0",
     "ts-node": "^9.1.1"

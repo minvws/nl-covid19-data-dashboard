@@ -1,9 +1,6 @@
 {
   "name": "@corona-dashboard/cms",
   "private": true,
-  "version": "2.9.0",
-  "description": "",
-  "license": "UNLICENSED",
   "scripts": {
     "start": "sanity start",
     "build": "sanity build",
@@ -16,9 +13,6 @@
     "assets:download": "bash scripts/assets-download.sh",
     "assets:image-resize": "ts-node scripts/images-resize.ts"
   },
-  "keywords": [
-    "sanity"
-  ],
   "dependencies": {
     "@sanity/base": "^2.3.2",
     "@sanity/components": "^2.2.6",
