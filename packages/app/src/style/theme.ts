@@ -116,6 +116,7 @@ export const colors = {
     axisLabels: '#666666',
     benchmark: '#4f5458',
     fill: 'rgba(0, 123, 199, .05)',
+    margin: '#D0EDFF',
     scale: {
       blue: ['#8FCAE7', '#5BADDB', '#248FCF', '#0070BB', '#00529D', '#003580'],
       magenta: ['#F291BC', '#D95790', '#A11050', '#68032F', '#000000'],

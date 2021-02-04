@@ -57,6 +57,7 @@ export default function AreaChart(props: AreaChartProps) {
         signaalwaarde,
         rangeLegendLabel,
         lineLegendLabel,
+        theme,
       });
 
     const filteredRange = getFilteredValues<TRange>(
@@ -233,7 +234,7 @@ function getChartOptions(props: IGetOptions): Highcharts.Options {
         name: rangeLegendLabel,
         data: rangeData,
         type: 'arearange',
-        color: '#D0EDFF',
+        color: colors.data.margin,
         marker: {
           enabled: false,
         },
