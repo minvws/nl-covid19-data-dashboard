@@ -9,7 +9,7 @@ ARG SANITY_AUTH_TOKEN
 ARG SANITY_DATASET
 RUN yarn workspace @corona-dashboard/cli validate-json
 RUN yarn workspace @corona-dashboard/cli generate-typescript
-RUN yarn workspace @corona-dashboard/cms download-assets
+RUN yarn workspace @corona-dashboard/cms sync-assets
 
 # Stage 1 - Build NL application
 FROM node:14 as react-build-nl

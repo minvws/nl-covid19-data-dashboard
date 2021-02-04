@@ -26,3 +26,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 /*.code-workspace
+
+# cache dir for sanity assets sync script
+.sanity-asset-cache
