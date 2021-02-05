@@ -252,7 +252,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             siteText.accessibility.grafieken.vaccinatie_draagvlak
           }
           metadata={{
-            date: 1611593522,
+            date: data.vaccine_support.last_value.date_of_insertion_unix,
             source: text.bronnen.rivm,
           }}
         >
