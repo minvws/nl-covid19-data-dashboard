@@ -1,6 +1,7 @@
 import Head from 'next/head';
+import { Box } from '~/components-styled/base';
+import { ContentBlock } from '~/components-styled/cms/content-block';
 import { RichContent } from '~/components-styled/cms/rich-content';
-import { MaxWidth } from '~/components-styled/max-width';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import siteText, { targetLanguage } from '~/locale/index';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
@@ -9,35 +10,37 @@ import {
   getLastGeneratedDate,
 } from '~/static-props/get-data';
 import { RichContentBlock } from '~/types/cms';
-import styles from './over.module.scss';
 
-interface OverData {
+interface AccessibilityPageData {
   title: string | null;
   description: RichContentBlock[] | null;
 }
 
-const query = `
-*[_type == 'overDitDashboard']{
-  ...,
-  "description": {
-    "_type": description._type,
-    "${targetLanguage}": [
-      ...description.${targetLanguage}[]
-      {
-        ...,
-        "asset": asset->
-       },
-    ]
-  }
-}[0]
-`;
-
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  createGetContent<OverData>(query)
+  createGetContent<AccessibilityPageData>(`
+  *[_type == 'toegankelijkheid']{
+    ...,
+    "description": {
+      ...,
+      "_type": description._type,
+      "${targetLanguage}": [
+        ...description.${targetLanguage}[]{
+          ...,
+          "asset": asset->,
+          markDefs[]{
+            ...,
+            "asset": asset->
+          }
+        }
+      ]
+    }
+  }[0]
+
+  `)
 );
 
-const Over: FCWithLayout<typeof getStaticProps> = (props) => {
+const AccessibilityPage: FCWithLayout<typeof getStaticProps> = (props) => {
   const { content } = props;
 
   return (
@@ -56,24 +59,20 @@ const Over: FCWithLayout<typeof getStaticProps> = (props) => {
         />
       </Head>
 
-      <div className={styles.container}>
-        <MaxWidth>
-          <div className={styles.maxwidth}>
-            {content.title && <h2>{content.title}</h2>}
-            {content.description && (
-              <RichContent blocks={content.description} />
-            )}
-          </div>
-        </MaxWidth>
-      </div>
+      <Box bg="white" py={{ _: 4, md: 5 }}>
+        <ContentBlock spacing={3}>
+          {content.title && <h2>{content.title}</h2>}
+          {content.description && <RichContent blocks={content.description} />}
+        </ContentBlock>
+      </Box>
     </>
   );
 };
 
 const metadata = {
-  ...siteText.over_metadata,
+  ...siteText.toegankelijkheid_metadata,
 };
 
-Over.getLayout = getLayoutWithMetadata(metadata);
+AccessibilityPage.getLayout = getLayoutWithMetadata(metadata);
 
-export default Over;
+export default AccessibilityPage;

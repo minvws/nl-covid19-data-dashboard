@@ -1,32 +1,43 @@
 import CoronaVirusIcon from '~/assets/coronavirus.svg';
 import { AgeDemographic } from '~/components-styled/age-demographic';
+import { ArticleStrip } from '~/components-styled/article-strip';
+import { ArticleSummary } from '~/components-styled/article-teaser';
 import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
-import { SEOHead } from '~/components-styled/seo-head';
 import { DeceasedMonitorSection } from '~/domain/deceased/deceased-monitor-section';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import siteText from '~/locale/index';
+import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
-import { getLastGeneratedDate, getNlData } from '~/static-props/get-data';
+import {
+  createGetContent,
+  getLastGeneratedDate,
+  getNlData,
+} from '~/static-props/get-data';
 
 const text = siteText.sterfte;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getNlData
+  getNlData,
+  createGetContent<{
+    articles?: ArticleSummary[];
+  }>(createPageArticlesQuery('deceasedPage'))
 );
 
 const DeceasedNationalPage: FCWithLayout<typeof getStaticProps> = (props) => {
   const dataCbs = props.data.deceased_cbs;
   const dataRivm = props.data.deceased_rivm;
   const dataDeceasedPerAgeGroup = props.data.deceased_rivm_per_age_group;
+  const content = props.content;
 
   return (
     <>
@@ -48,6 +59,8 @@ const DeceasedNationalPage: FCWithLayout<typeof getStaticProps> = (props) => {
             dataSources: [text.section_deceased_rivm.bronnen.rivm],
           }}
         />
+
+        <ArticleStrip articles={content.articles} />
 
         <TwoKpiSection>
           <KpiTile

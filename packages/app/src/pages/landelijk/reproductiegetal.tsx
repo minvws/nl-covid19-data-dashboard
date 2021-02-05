@@ -1,31 +1,41 @@
+import { getLastFilledValue } from '@corona-dashboard/common';
 import Repro from '~/assets/reproductiegetal.svg';
+import { ArticleStrip } from '~/components-styled/article-strip';
+import { ArticleSummary } from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiWithIllustrationTile } from '~/components-styled/kpi-with-illustration-tile';
 import { Legenda } from '~/components-styled/legenda';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { PageBarScale } from '~/components-styled/page-barscale';
+import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
-import { SEOHead } from '~/components-styled/seo-head';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import siteText from '~/locale/index';
-import { getNlData, getLastGeneratedDate } from '~/static-props/get-data';
+import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
-import { getLastFilledValue } from '@corona-dashboard/common';
+import {
+  createGetContent,
+  getLastGeneratedDate,
+  getNlData,
+} from '~/static-props/get-data';
 
 const text = siteText.reproductiegetal;
 const graphDescriptions = siteText.accessibility.grafieken;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getNlData
+  getNlData,
+  createGetContent<{
+    articles?: ArticleSummary[];
+  }>(createPageArticlesQuery('reproductionPage'))
 );
 
 const ReproductionIndex: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { data } = props;
+  const { data, content } = props;
 
   const lastFilledValue = getLastFilledValue(data.reproduction);
 
@@ -50,6 +60,8 @@ const ReproductionIndex: FCWithLayout<typeof getStaticProps> = (props) => {
           }}
           reference={text.reference}
         />
+
+        <ArticleStrip articles={content.articles} />
 
         <TwoKpiSection>
           <KpiWithIllustrationTile

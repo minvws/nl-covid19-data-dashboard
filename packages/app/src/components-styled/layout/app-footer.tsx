@@ -42,6 +42,9 @@ export function AppFooter({ lastGenerated }: { lastGenerated: string }) {
                 <Item href="/veelgestelde-vragen">
                   {text.nav.links.veelgestelde_vragen}
                 </Item>
+                <Item href="/toegankelijkheid">
+                  {text.nav.links.toegankelijkheid}
+                </Item>
                 <Item href="/over-risiconiveaus">
                   {text.nav.links.over_risiconiveaus}
                 </Item>

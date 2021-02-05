@@ -1,0 +1,61 @@
+{
+  "definitions": {
+    "value": {
+      "title": "nl_vaccine_availability_value",
+      "type": "object",
+      "required": [
+        "pfizer",
+        "moderna",
+        "astra_zeneca",
+        "cure_vac",
+        "janssen",
+        "sanofi",
+        "date_of_insertion_unix",
+        "date_unix"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "pfizer": {
+          "type": "number"
+        },
+        "moderna": {
+          "type": "number"
+        },
+        "astra_zeneca": {
+          "type": "number"
+        },
+        "cure_vac": {
+          "type": "number"
+        },
+        "janssen": {
+          "type": "number"
+        },
+        "sanofi": {
+          "type": "number"
+        },
+        "date_of_insertion_unix": {
+          "type": "integer"
+        },
+        "date_unix": {
+          "type": "integer"
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "nl_vaccine_availability",
+  "type": "object",
+  "required": ["values", "last_value"],
+  "additionalProperties": false,
+  "properties": {
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/value"
+      }
+    },
+    "last_value": {
+      "$ref": "#/definitions/value"
+    }
+  }
+}

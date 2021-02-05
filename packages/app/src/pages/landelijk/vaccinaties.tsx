@@ -1,6 +1,8 @@
 import { css } from '@styled-system/css';
 import { Fragment, useState } from 'react';
 import VaccinatieIcon from '~/assets/vaccinaties.svg';
+import { ArticleStrip } from '~/components-styled/article-strip';
+import { ArticleSummary } from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
 import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
@@ -13,10 +15,12 @@ import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { InlineText, Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
+import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import VaccinesAdministeredChartNl from '~/assets/vaccines_administered_chart_nl.svg';
 import VaccinesAdministeredChartEn from '~/assets/vaccines_administered_chart_en.svg';
 import {
+  createGetContent,
   getLastGeneratedDate,
   getNlData,
   getText,
@@ -27,12 +31,16 @@ import { AspectRatio } from '~/components-styled/aspect-ratio';
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   getNlData,
-  getText
+  getText,
+  createGetContent<{
+    articles?: ArticleSummary[];
+  }>(createPageArticlesQuery('vaccinationsPage'))
 );
 import { targetLanguage } from '~/locale/index';
 
 const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
   text: siteText,
+  content,
 }) => {
   const text = siteText.vaccinaties;
   const [selectedTab, setSelectedTab] = useState(
@@ -59,6 +67,9 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             dataSources: [],
           }}
         />
+
+        <ArticleStrip articles={content.articles} />
+
         <TwoKpiSection>
           <KpiTile
             title={text.data.kpi_total.title}

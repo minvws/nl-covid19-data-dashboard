@@ -50,7 +50,8 @@
       "gemeente": "Gemeentes",
       "over_risiconiveaus": "Over de risiconiveaus",
       "veelgestelde_vragen": "Veelgestelde vragen",
-      "actueel": "Actueel"
+      "actueel": "Actueel",
+      "toegankelijkheid": "Toegankelijkheid"
     },
     "title": "Corona Dashboard",
     "terug_naar_alle_cijfers": "Alle landelijke cijfers",
@@ -152,7 +153,7 @@
     "barscale_titel": "Gemeld aantal ziekenhuisopnames per dag",
     "extra_uitleg": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer laat het aantal ziekenhuisopnames - inclusief directe IC opnames - zien dat op één dag gemeld is. Dit kunnen ook meldingen zijn van opnames van eerdere dagen.",
     "map_titel": "Woonplaats opgenomen patiënten",
-    "map_toelichting": "Deze kaart laat zien in welke gemeenten of veiligheidsregio’s patiënten wonen die met COVID-19 in het ziekenhuis zijn opgenomen. Let op: patiënten kunnen ook in een ziekenhuis in een ander deel van Nederland worden opgenomen. De kaart laat dus niet zien hoeveel patiënten per ziekenhuis worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE. Het Flevoziekenhuis deelt zijn COVID-19 opnames op reguliere afdelingen op dit moment niet met Stichting NICE. Daardoor zijn de cijfers van sommige veiligheidsregio’s en gemeenten op de kaart mogelijk lager dan in werkelijkheid het geval is.",
+    "map_toelichting": "Deze kaart laat zien in welke gemeenten of veiligheidsregio’s patiënten wonen die met COVID-19 in het ziekenhuis zijn opgenomen. Patiënten kunnen ook in een ziekenhuis in een ander deel van Nederland worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE. Het Flevoziekenhuis deelt zijn COVID-19 opnames op reguliere afdelingen op dit moment niet met Stichting NICE. Daardoor zijn de cijfers van sommige veiligheidsregio’s en gemeenten op de kaart mogelijk lager dan in werkelijkheid het geval is. Let op: met ingang van 5 februari is de kleurschaal veranderd, zodat beter te zien is welke gemeenten en regio’s geen ziekenhuisopnames melden.",
     "linechart_titel": "Ziekenhuisopnames over tijd",
     "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "chloropleth_legenda": {
@@ -716,7 +717,7 @@
     "barscale_titel": "Gemeld aantal ziekenhuisopnames per dag",
     "extra_uitleg": "Aantal mensen uit deze veiligheidsregio met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer laat het aantal ziekenhuisopnames - inclusief directe IC opnames - zien dat op één dag gemeld is. Dit kunnen ook meldingen zijn van opnames van eerdere dagen. Patiënten kunnen in een ziekenhuis elders in Nederland zijn opgenomen.",
     "map_titel": "Verdeling ziekenhuisopnames in {{safetyRegion}}",
-    "map_toelichting": "Deze kaart laat zien in welke gemeenten of veiligheidsregio’s patiënten wonen die met COVID-19 in het ziekenhuis zijn opgenomen. Let op: patiënten kunnen ook in een ziekenhuis in een ander deel van Nederland worden opgenomen. De kaart laat dus niet zien hoeveel patiënten per ziekenhuis worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE. Het Flevoziekenhuis deelt zijn COVID-19 opnames op reguliere afdelingen op dit moment niet met Stichting NICE. Daardoor zijn de cijfers van sommige veiligheidsregio’s en gemeenten op de kaart mogelijk lager dan in werkelijkheid het geval is.",
+    "map_toelichting": "Deze kaart laat zien in welke gemeenten of veiligheidsregio’s patiënten wonen die met COVID-19 in het ziekenhuis zijn opgenomen. Patiënten kunnen ook in een ziekenhuis in een ander deel van Nederland worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE. Het Flevoziekenhuis deelt zijn COVID-19 opnames op reguliere afdelingen op dit moment niet met Stichting NICE. Daardoor zijn de cijfers van sommige veiligheidsregio’s en gemeenten op de kaart mogelijk lager dan in werkelijkheid het geval is. Let op: met ingang van 5 februari is de kleurschaal veranderd, zodat beter te zien is welke gemeenten en regio’s geen ziekenhuisopnames melden.",
     "linechart_titel": "Ziekenhuisopnames over tijd",
     "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "bron": {
@@ -860,7 +861,7 @@
     "barscale_titel": "Gemeld aantal ziekenhuisopnames per dag",
     "extra_uitleg": "Aantal mensen uit deze gemeente met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer laat het aantal ziekenhuisopnames - inclusief directe IC opnames - zien dat op één dag gemeld is. Dit kunnen ook meldingen zijn van opnames van eerdere dagen. Patiënten kunnen in een ziekenhuis elders in Nederland zijn opgenomen.",
     "map_titel": "Verdeling ziekenhuisopnames in veiligheidsregio van {{municipality}}",
-    "map_toelichting": "Deze kaart laat zien in welke gemeenten of veiligheidsregio’s patiënten wonen die met COVID-19 in het ziekenhuis zijn opgenomen. Let op: patiënten kunnen ook in een ziekenhuis in een ander deel van Nederland worden opgenomen. De kaart laat dus niet zien hoeveel patiënten per ziekenhuis worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE. Het Flevoziekenhuis deelt zijn COVID-19 opnames op reguliere afdelingen op dit moment niet met Stichting NICE. Daardoor zijn de cijfers van sommige veiligheidsregio’s en gemeenten op de kaart mogelijk lager dan in werkelijkheid het geval is.",
+    "map_toelichting": "Deze kaart laat zien in welke gemeenten of veiligheidsregio’s patiënten wonen die met COVID-19 in het ziekenhuis zijn opgenomen. Patiënten kunnen ook in een ziekenhuis in een ander deel van Nederland worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE. Het Flevoziekenhuis deelt zijn COVID-19 opnames op reguliere afdelingen op dit moment niet met Stichting NICE. Daardoor zijn de cijfers van sommige veiligheidsregio’s en gemeenten op de kaart mogelijk lager dan in werkelijkheid het geval is. Let op: met ingang van 5 februari is de kleurschaal veranderd, zodat beter te zien is welke gemeenten en regio’s geen ziekenhuisopnames melden.",
     "linechart_titel": "Ziekenhuisopnames over tijd",
     "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "bron": {
@@ -1425,6 +1426,7 @@
   "infected_age_groups": {
     "title": "Verdeling naar leeftijd",
     "description": "De blauwe rechterbalken in deze grafiek laten zien tot welke leeftijdsgroep positief geteste personen behoren. De grijze linkerbalken tonen hoe groot elke leeftijdsgroep is ten opzichte van de hele Nederlandse bevolking. De blauwe en grijze balken laten samen zien of leeftijdsgroepen naar verhouding meer of minder positief geteste personen hebben. Bijvoorbeeld: van alle positief geteste personen is 10% een dertiger (blauwe balk) en van alle Nederlanders is 14% een dertiger (grijze balk). De leeftijdsgroep dertigers heeft in dit voorbeeld naar verhouding minder positief geteste personen. De grafiek wordt dagelijks bijgewerkt en gaat alleen over de meest recent gemelde gevallen.",
+    "example": "Bijvoorbeeld: Van alle positief geteste mensen is {{infectedPercentage}} tussen de {{ageGroupRange}} jaar. Van alle Nederlanders is {{ageGroupPercentage}} tussen de {{ageGroupRange}} jaar.",
     "graph": {
       "age_group_percentage_title": "Verdeling leeftijdsgroepen in Nederland",
       "age_group_percentage_tooltip": "van de bevolking is {{ageGroupRange}} jaar",
@@ -1435,8 +1437,7 @@
       "clipped_value_message": "Deze waarde is groter dan in de grafiek is weergegeven",
       "value_percentage_title": "Positieve testen per leeftijdsgroep",
       "value_percentage_tooltip": "van het aantal positief geteste mensen is {{ageGroupRange}} jaar"
-    },
-    "example": "Bijvoorbeeld: Van alle positief geteste mensen is {{infectedPercentage}} tussen de {{ageGroupRange}} jaar. Van alle Nederlanders is {{ageGroupPercentage}} tussen de {{ageGroupRange}} jaar."
+    }
   },
   "gehandicaptenzorg_besmette_locaties": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -2044,8 +2045,8 @@
         "title": "Aantal gezette prikken",
         "value": "330494",
         "description": "",
-        "date_of_report_unix": "1612442100",
-        "date_of_insertion_unix": "1612442100",
+        "date_of_report_unix": "1612263890",
+        "date_of_insertion_unix": "1612263890",
         "administered": [
           {
             "value": "245278",
@@ -2073,7 +2074,7 @@
             "report_date": ""
           }
         ],
-        "description_first": "Dit getal laat zien hoeveel prikken zijn gemeld door GGD-GHOR en LNAZ. [Lees meer over de registratie in de cijferverantwoording.](/verantwoording#vaccinatie)",
+        "description_first": "Dit getal laat zien hoeveel prikken zijn gemeld door GGD-GHOR en LNAZ. [Lees meer over de registratie in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)",
         "description_second": "",
         "warning": "",
         "first_tab_title": "Berekend aantal",
@@ -2081,8 +2082,8 @@
         "tab_total_estimated": {
           "value": "454998",
           "description": "",
-          "date_of_report_unix": "1612442100",
-          "date_of_insertion_unix": "1612442100",
+          "date_of_report_unix": "1612354200",
+          "date_of_insertion_unix": "1612354200",
           "administered": [
             {
               "value": "245278",
@@ -2110,7 +2111,7 @@
               "report_date": ""
             }
           ],
-          "description_first": "Dit getal is een rekenkundige aanname van hoeveel prikken in totaal zijn gezet. De GGD-cijfers worden gemeld door de GGD-GHOR en de ziekenhuiscijfers door het LNAZ. Voor de langdurige zorginstellingen maakt het RIVM een berekening door te kijken naar hoeveel vaccins er zijn bezorgd bij priklocaties. [Lees meer over de berekening in de cijferverantwoording.](/verantwoording#vaccinatie)",
+          "description_first": "Dit getal is een rekenkundige aanname van hoeveel prikken in totaal zijn gezet. De GGD-cijfers worden gemeld door de GGD-GHOR en de ziekenhuiscijfers door het LNAZ. Voor de langdurige zorginstellingen maakt het RIVM een berekening door te kijken naar hoeveel vaccins er zijn bezorgd bij priklocaties. [Lees meer over de berekening in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)",
           "description_second": "[Op 1 februari is een dubbeltelling rechtgezet.](https://www.rijksoverheid.nl/actueel/nieuws/2021/02/01/dubbeltelling-in-vaccinatiecijfers-rechtgezet)"
         }
       },
@@ -2156,7 +2157,8 @@
         "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer:",
         "additions": [
           "Vaccinatiebereidheid",
-          "Vaccinatiegraad"
+          "Vaccinatiegraad",
+          ""
         ]
       }
     },
@@ -2166,7 +2168,7 @@
     },
     "grafiek": {
       "titel": "Beschikbare vaccins en gezette prikken in totaal",
-      "omschrijving": "Het linkerdeel van de grafiek laat zien hoeveel vaccins Nederland in totaal heeft gekregen en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal verwachten te krijgen en hoeveel prikken we verwachten te zetten.\n\n[In dit artikel leggen we uit waarom Nederland een deel van de vaccins op voorraad houdt.](/artikelen/waarom-zijn-er-vaccins-op-voorraad)"
+      "omschrijving": "Het linkerdeel van de grafiek laat zien hoeveel vaccins Nederland in totaal heeft gekregen en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal verwachten te krijgen en hoeveel prikken we verwachten te zetten.\n\n[In dit artikel leggen we uit waarom Nederland een deel van de vaccins op voorraad houdt.](https://coronadashboard.rijksoverheid.nl/artikelen/waarom-zijn-er-vaccins-op-voorraad)"
     },
     "verwachte_leveringen": {
       "van_week_tot_week": "Week {{weekNumberFrom}} tot week {{weekNumberTo}}",
@@ -2201,7 +2203,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "De risicokaart van Nederland",
-      "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. [Meer informatie over de risiconiveaus](/over-risiconiveaus).\n\nBij elk risiconiveau horen bepaalde maatregelen. Die maatregelen staan in de routekaart die het kabinet heeft gemaakt. **Er geldt een landelijke lockdown. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**"
+      "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. \n\n**Bij elk risiconiveau horen bepaalde maatregelen. Die maatregelen staan in de routekaart die het kabinet heeft gemaakt. Er geldt een landelijke lockdown. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**"
     },
     "data_sitemap_titel": "Onderwerpen op dit dashboard",
     "data_sitemap_toelichting": "Ga direct naar de volgende onderwerpen:",
@@ -2218,7 +2220,7 @@
       "toegediende_vaccins": {
         "title": "Aantal gezette prikken",
         "sub_title": "Verwachte levering",
-        "administered_tests": "Tot nu toe zijn er {{administeredVaccines}} prikken gezet. Dit cijfer is een berekening en omvat zowel eerste als tweede prikken.",
+        "administered_tests": "Tot nu toe zijn er {{administeredVaccines}} prikken gezet. Dit cijfer omvat zowel eerste als tweede prikken.",
         "supply": "Nederland verwacht de komende zes weken {{expectedDelivery}} goedgekeurde vaccins te krijgen."
       }
     },
@@ -2288,7 +2290,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "De risicokaart van Nederland",
-      "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. [Meer informatie over de risiconiveaus](/over-risiconiveaus).\n\nBij elk risiconiveau horen bepaalde maatregelen. Die maatregelen staan in de routekaart die het kabinet heeft gemaakt. **Er geldt een landelijke lockdown. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**"
+      "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. \n\n**Bij elk risiconiveau horen bepaalde maatregelen. Die maatregelen staan in de routekaart die het kabinet heeft gemaakt. Er geldt een landelijke lockdown. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**"
     },
     "risoconiveau_maatregelen": {
       "title": "Risiconiveau & maatregelen",
@@ -2361,7 +2363,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "De risicokaart van Nederland",
-      "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. [Meer informatie over de risiconiveaus](/over-risiconiveaus).\n\nBij elk risiconiveau horen bepaalde maatregelen. Die maatregelen staan in de routekaart die het kabinet heeft gemaakt. **Er geldt een landelijke lockdown. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**"
+      "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. \n\n**Bij elk risiconiveau horen bepaalde maatregelen. Die maatregelen staan in de routekaart die het kabinet heeft gemaakt. Er geldt een landelijke lockdown. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**"
     },
     "risoconiveau_maatregelen": {
       "title": "Risiconiveau & maatregelen",
@@ -2426,5 +2428,11 @@
         "gemeente": "Cijfers van gemeente {{municipalityName}}"
       }
     }
-  }
+  },
+  "toegankelijkheid_metadata": {
+    "title": "Toegankelijkheid COVID-19 Dashboard | Rijksoverheid.nl",
+    "description": "Informatie over de toegankelijkheid van het COVID-19 Dashboard.",
+    "url": "https://coronadashboard.rijksoverheid.nl/verantwoording"
+  },
+  "article_strip_title": "Meer informatie over dit onderwerp"
 }

@@ -124,7 +124,7 @@ export function DataSitemap() {
             </StyledHeader>
             <List>
               <SitemapItem
-                href="/landelijk/rioolwater"
+                href="/landelijk/gedrag"
                 text={siteText.nl_gedrag.sidebar.titel}
               />
             </List>

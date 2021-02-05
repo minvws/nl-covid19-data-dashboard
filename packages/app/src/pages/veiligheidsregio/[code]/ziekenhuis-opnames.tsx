@@ -1,6 +1,8 @@
 import { formatNumber } from '@corona-dashboard/common';
 import { useRouter } from 'next/router';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
+import { ArticleStrip } from '~/components-styled/article-strip';
+import { ArticleSummary } from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { ContentHeader } from '~/components-styled/content-header';
@@ -8,6 +10,7 @@ import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { addBackgroundRectangleCallback } from '~/components-styled/line-chart/components/chart-axes/component-callbacks/add-background-rectangle-callback';
+import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
@@ -15,14 +18,15 @@ import { municipalThresholds } from '~/components/choropleth/municipal-threshold
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createMunicipalHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/municipal/create-municipal-hospital-admissions-tooltip';
-import { SEOHead } from '~/components-styled/seo-head';
 import regionCodeToMunicipalCodeLookup from '~/data/regionCodeToMunicipalCodeLookup';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import siteText from '~/locale/index';
+import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
+  createGetContent,
   getLastGeneratedDate,
   getVrData,
 } from '~/static-props/get-data';
@@ -38,14 +42,17 @@ export const getStaticProps = createGetStaticProps(
   getVrData,
   createGetChoroplethData({
     gm: ({ hospital_nice }) => ({ hospital_nice }),
-  })
+  }),
+  createGetContent<{
+    articles?: ArticleSummary[];
+  }>(createPageArticlesQuery('hospitalPage'))
 );
 
 const text = siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
 const graphDescriptions = siteText.accessibility.grafieken;
 
 const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { data, safetyRegionName, choropleth } = props;
+  const { data, safetyRegionName, choropleth, content } = props;
   const router = useRouter();
 
   const lastValue = data.hospital_nice.last_value;
@@ -83,6 +90,8 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
           reference={text.reference}
         />
 
+        <ArticleStrip articles={content.articles} />
+
         <TwoKpiSection>
           <KpiTile
             title={text.barscale_titel}
@@ -118,7 +127,7 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
           }}
         >
           <MunicipalityChoropleth
-            selected={selectedMunicipalCode}
+            selectedCode={selectedMunicipalCode}
             highlightSelection={false}
             data={choropleth.gm}
             metricName="hospital_nice"

@@ -75,6 +75,9 @@ const ElderlyAtHomeNationalPage: FCWithLayout<typeof getStaticProps> = ({
             <KpiValue
               data-cy="positive_tested_daily"
               absolute={elderlyAtHomeData.last_value.positive_tested_daily}
+              difference={
+                data.difference.elderly_at_home__positive_tested_daily
+              }
             />
             <Text>{text.section_positive_tested.kpi_daily_description}</Text>
           </KpiTile>
