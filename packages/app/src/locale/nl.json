@@ -2036,20 +2036,20 @@
       "difference": "Do not remove this key. It is required as a temporary workaround",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "504951",
+          "total_vaccinated": "495535",
           "date_unix": "1612527321",
           "date_of_insertion_unix": "1612527321"
         }
       },
       "kpi_total": {
         "title": "Aantal gezette prikken",
-        "value": "365933",
+        "value": "356517",
         "description": "",
         "date_of_report_unix": "1612527321",
         "date_of_insertion_unix": "1612527321",
         "administered": [
           {
-            "value": "279217",
+            "value": "269801",
             "description": "gemeld door GGD-GHOR",
             "report_date": "Gemeld aantal tot en met 4 februari"
           },
@@ -2080,13 +2080,13 @@
         "first_tab_title": "Berekend aantal",
         "second_tab_title": "Gemeld aantal",
         "tab_total_estimated": {
-          "value": "504951",
+          "value": "495535",
           "description": "",
           "date_of_report_unix": "1612527321",
           "date_of_insertion_unix": "1612527321",
           "administered": [
             {
-              "value": "279217",
+              "value": "269801",
               "description": "gezet door GGD'en",
               "report_date": "Gemeld aantal tot en met 4 februari"
             },
