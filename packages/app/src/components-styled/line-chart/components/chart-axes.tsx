@@ -7,7 +7,6 @@ import { Text } from '@visx/text';
 import { ScaleLinear, ScaleTime } from 'd3-scale';
 import { ComponentProps, memo, MouseEvent, ReactNode, TouchEvent } from 'react';
 import { colors } from '~/style/theme';
-import { MARKER_MIN_WIDTH } from '../marker';
 
 const NUM_TICKS = 3;
 
@@ -55,12 +54,13 @@ type ChartAxesProps = {
   yDomain: number[];
   width: number;
   height: number;
-  padding?: ChartPadding;
+  padding: ChartPadding;
   formatXAxis: TickFormatter<Date>;
   formatYAxis: TickFormatter<number>;
   children: (props: ChartScales) => ReactNode;
   componentCallback?: ComponentCallbackFunction;
   ariaLabelledBy?: string;
+  dateSpanWidth: number;
 };
 
 type AnyTickFormatter = (value: any) => string;
@@ -70,7 +70,7 @@ export type ChartBounds = { width: number; height: number };
 export const ChartAxes = memo(function ChartAxes({
   width,
   height,
-  padding = defaultPadding,
+  padding,
   xDomain,
   yDomain,
   onHover,
@@ -80,13 +80,15 @@ export const ChartAxes = memo(function ChartAxes({
   children,
   componentCallback = () => undefined,
   ariaLabelledBy,
+  dateSpanWidth,
 }: ChartAxesProps) {
   const bounds: ChartBounds = {
     width: width - padding.left - padding.right,
     height: height - padding.top - padding.bottom,
   };
 
-  const markerPadding = MARKER_MIN_WIDTH / 2;
+  const markerPadding = dateSpanWidth / 2;
+
   const xScale = scaleTime({
     domain: xDomain,
     range: [markerPadding, bounds.width - markerPadding],
@@ -100,7 +102,7 @@ export const ChartAxes = memo(function ChartAxes({
 
   const scales = { xScale, yScale };
 
-  const handleMouse = (
+  const handleHover = (
     event: TouchEvent<SVGElement> | MouseEvent<SVGElement>
   ) => onHover(event, scales);
 
@@ -129,6 +131,7 @@ export const ChartAxes = memo(function ChartAxes({
             props: {
               scale: yScale,
               width: bounds.width,
+              // width: width,
               numTicks: NUM_TICKS,
               stroke: defaultColors.axis,
             },
@@ -190,19 +193,22 @@ export const ChartAxes = memo(function ChartAxes({
           </Group>
         )}
 
+        {children(scales)}
+
+        {/**
+         * Render the bar on top of the trends because it captures mouse hover when you are above the trend line
+         */}
         <Bar
           x={0}
           y={0}
           width={width}
           height={height}
           fill="transparent"
-          onTouchStart={handleMouse}
-          onTouchMove={handleMouse}
-          onMouseMove={handleMouse}
-          onMouseLeave={handleMouse}
+          onTouchStart={handleHover}
+          onTouchMove={handleHover}
+          onMouseMove={handleHover}
+          onMouseLeave={handleHover}
         />
-
-        {children(scales)}
       </Group>
     </svg>
   );

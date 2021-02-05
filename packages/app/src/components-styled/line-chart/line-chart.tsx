@@ -1,11 +1,13 @@
 import { TickFormatter } from '@visx/axis';
 import { localPoint } from '@visx/event';
 import { Point } from '@visx/point';
+import { scaleBand } from '@visx/scale';
 import { bisectLeft, extent } from 'd3-array';
 import { ScaleTime } from 'd3-scale';
 import { useCallback, useMemo, useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
+import { Legenda, LegendItem, LegendShape } from '~/components-styled/legenda';
 import {
   ChartAxes,
   ChartPadding,
@@ -13,6 +15,11 @@ import {
   ComponentCallbackFunction,
   defaultPadding,
 } from '~/components-styled/line-chart/components';
+import {
+  isDateSeries,
+  isDateSpanSeries,
+  Value,
+} from '~/components-styled/stacked-chart/logic';
 import { Text } from '~/components-styled/typography';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
 import text from '~/locale/index';
@@ -23,18 +30,8 @@ import {
 } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { TimeframeOption } from '~/utils/timeframe';
-import { Legenda, LegendItem, LegendShape } from '../legenda';
 import { HoverPoint, Marker, Tooltip, Trend } from './components';
-import {
-  calculateYMax,
-  getTrendData,
-  isDailyValue,
-  isWeeklyValue,
-  NumberProperty,
-  TrendValue,
-  Value,
-  WeeklyValue,
-} from './helpers';
+import { calculateYMax, getTrendData, TrendValue } from './logic';
 
 const dateToValue = (d: Date) => d.valueOf() / 1000;
 const formatXAxis = (date: Date) =>
@@ -43,7 +40,7 @@ const formatYAxisFn = (y: number) => formatNumber(y);
 const formatYAxisPercentageFn = (y: number) => `${formatPercentage(y)}%`;
 
 export type LineConfig<T extends Value> = {
-  metricProperty: NumberProperty<T>;
+  metricProperty: keyof T;
   color?: string;
   style?: 'solid' | 'dashed';
   areaFillOpacity?: number;
@@ -72,6 +69,7 @@ export type LineChartProps<T extends Value> = {
   legendItems?: LegendItem[];
   componentCallback?: ComponentCallbackFunction;
   ariaLabelledBy?: string;
+  seriesMax?: number;
 };
 
 export function LineChart<T extends Value>({
@@ -79,6 +77,11 @@ export function LineChart<T extends Value>({
   linesConfig,
   width = 500,
   height = 250,
+  /**
+   * @TODO This is a weird default. The chart should show "all" by default
+   * because you might not have a timeframe toggle as part of the chart. I'm
+   * leaving this for later as I don't have time to break stuff now.
+   */
   timeframe = '5weeks',
   signaalwaarde,
   formatTooltip,
@@ -99,6 +102,7 @@ export function LineChart<T extends Value>({
     : undefined,
   componentCallback,
   ariaLabelledBy,
+  seriesMax: overrideSeriesMax,
 }: LineChartProps<T>) {
   const {
     tooltipData,
@@ -122,37 +126,59 @@ export function LineChart<T extends Value>({
   );
 
   const trendsList = useMemo(
-    () => getTrendData(values, metricProperties, timeframe),
+    () => getTrendData(values, metricProperties as string[], timeframe),
     [values, metricProperties, timeframe]
   );
 
-  const xDomain = useMemo(() => {
-    const allData = trendsList.flat();
-    const domain = extent(allData.map((d) => d.__date));
+  const calculatedSeriesMax = useMemo(
+    () => calculateYMax(trendsList, signaalwaarde),
+    [trendsList, signaalwaarde]
+  );
 
-    return isDefined(domain[0]) ? (domain as [Date, Date]) : undefined;
+  const seriesMax = isDefined(overrideSeriesMax)
+    ? overrideSeriesMax
+    : calculatedSeriesMax;
+
+  const xDomain = useMemo(() => {
+    const domain = extent(trendsList.flat().map(getDate));
+
+    return isDefined(domain[0]) && isDefined(domain[1])
+      ? (domain as [Date, Date])
+      : undefined;
   }, [trendsList]);
 
-  const yMax = useMemo(() => calculateYMax(trendsList, signaalwaarde), [
-    trendsList,
-    signaalwaarde,
-  ]);
+  const yDomain = useMemo(() => [0, seriesMax], [seriesMax]);
 
-  const yDomain = useMemo(() => [0, yMax], [yMax]);
-
-  const padding: ChartPadding = useMemo(() => {
-    return {
+  const padding: ChartPadding = useMemo(
+    () => ({
       ...defaultPadding,
-      // Increase space for larger labels
-      left: Math.max(yMax.toFixed(0).length * 10, defaultPadding.left),
+      // Increase space for larger numbers
+      left: Math.max(seriesMax.toFixed(0).length * 10, defaultPadding.left),
       ...overridePadding,
-    };
-  }, [overridePadding, yMax]);
+    }),
+    [overridePadding, seriesMax]
+  );
+
+  const timespanMarkerData = trendsList[0];
+
+  const xMax = width - padding.left - padding.right;
+  const yMax = height - padding.top - padding.bottom;
+
+  function getDate(x: TrendValue) {
+    return x.__date;
+  }
+
+  const dateSpanScale = useMemo(
+    () =>
+      scaleBand<Date>({
+        range: [0, xMax],
+        domain: timespanMarkerData.map(getDate),
+      }),
+    [xMax, timespanMarkerData]
+  );
 
   const [markerProps, setMarkerProps] = useState<{
-    height: number;
     data: HoverPoint<T>[];
-    padding: ChartPadding;
   }>();
 
   const bisect = useCallback(
@@ -205,12 +231,10 @@ export function LineChart<T extends Value>({
         });
         setMarkerProps({
           data: hoverPoints,
-          height,
-          padding: padding,
         });
       }
     },
-    [showTooltip, hideTooltip, height, padding]
+    [showTooltip, hideTooltip]
   );
 
   const handleHover = useCallback(
@@ -313,6 +337,7 @@ export function LineChart<T extends Value>({
           benchmark={benchmark}
           componentCallback={componentCallback}
           ariaLabelledBy={ariaLabelledBy}
+          dateSpanWidth={dateSpanScale.bandwidth()}
         >
           {renderTrendLines}
         </ChartAxes>
@@ -329,13 +354,25 @@ export function LineChart<T extends Value>({
           </Tooltip>
         )}
 
-        {markerProps && (
-          <Marker
-            {...markerProps}
-            showLine={showMarkerLine}
-            formatLabel={formatMarkerLabel}
-          />
-        )}
+        <Box
+          height={yMax}
+          width={xMax}
+          position="absolute"
+          top={padding.top}
+          left={padding.left}
+          style={{
+            pointerEvents: 'none',
+          }}
+        >
+          {markerProps && (
+            <Marker
+              {...markerProps}
+              showLine={showMarkerLine}
+              formatLabel={formatMarkerLabel}
+              dateSpanWidth={dateSpanScale.bandwidth()}
+            />
+          )}
+        </Box>
 
         {showLegend && legendItems && (
           <Box pl={`${padding.left}px`}>
@@ -352,36 +389,32 @@ function formatDefaultTooltip<T extends Value>(
   isPercentage?: boolean
 ) {
   // default tooltip assumes one line is rendered:
-  const value = values[0];
-  const isDaily = isDailyValue(values);
-  const isWeekly = isWeeklyValue(values);
 
-  if (isDaily) {
+  if (isDateSeries(values)) {
+    const value = values[0];
     return (
       <>
         <Text as="span" fontWeight="bold">
-          {formatDateFromMilliseconds(value.__date.getTime()) + ': '}
+          {`${formatDateFromMilliseconds(value.__date.getTime())}: `}
         </Text>
         {isPercentage
           ? `${formatPercentage(value.__value)}%`
           : formatNumber(value.__value)}
       </>
     );
-  } else if (isWeekly) {
+  } else if (isDateSpanSeries(values)) {
+    const value = values[0];
+    const dateStartString = formatDateFromSeconds(
+      value.date_start_unix,
+      'short'
+    );
+    const dateEndString = formatDateFromSeconds(value.date_end_unix, 'short');
+
     return (
       <>
         <Text as="span" fontWeight="bold">
-          {formatDateFromSeconds(
-            ((value as unknown) as WeeklyValue).date_start_unix,
-            'short'
-          )}{' '}
-          -{' '}
-          {formatDateFromSeconds(
-            ((value as unknown) as WeeklyValue).date_end_unix,
-            'short'
-          )}
-          :
-        </Text>{' '}
+          {`${dateStartString} - ${dateEndString}: `}
+        </Text>
         {isPercentage
           ? `${formatPercentage(value.__value)}%`
           : formatNumber(value.__value)}
