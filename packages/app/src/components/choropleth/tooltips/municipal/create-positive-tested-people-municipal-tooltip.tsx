@@ -21,7 +21,7 @@ export const createPositiveTestedPeopleMunicipalTooltip = (
   const onSelect = (event: any) => {
     event.stopPropagation();
     if (selectHandler) {
-      selectHandler(context);
+      selectHandler(context.gmcode);
     }
   };
 

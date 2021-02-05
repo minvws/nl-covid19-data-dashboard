@@ -13,7 +13,7 @@ export const createInfectedLocationsRegionalTooltip = (
 ) => (context: SafetyRegionProperties & RegionsNursingHome): ReactNode => {
   const onSelect = (event: any) => {
     event.stopPropagation();
-    selectHandler(context);
+    selectHandler(context.vrcode);
   };
 
   return (

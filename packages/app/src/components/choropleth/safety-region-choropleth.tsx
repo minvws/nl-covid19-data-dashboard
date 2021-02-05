@@ -27,7 +27,7 @@ type SafetyRegionChoroplethProps<T, K extends RegionsMetricName> = {
   metricProperty: string;
   selectedCode?: string;
   highlightSelection?: boolean;
-  onSelect?: (context: SafetyRegionProperties) => void;
+  onSelect?: (vrcode: string) => void;
   tooltipContent?: (context: SafetyRegionProperties & T) => ReactNode;
   highlightCode?: string;
 };
@@ -158,7 +158,7 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
   const onClick = (id: string) => {
     if (onSelect) {
       const data = getChoroplethValue(id);
-      onSelect(data);
+      onSelect(data.vrcode);
     }
   };
 
