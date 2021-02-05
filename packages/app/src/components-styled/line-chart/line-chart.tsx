@@ -69,6 +69,7 @@ export type LineChartProps<T extends Value> = {
   legendItems?: LegendItem[];
   componentCallback?: ComponentCallbackFunction;
   ariaLabelledBy?: string;
+  seriesMax?: number;
 };
 
 export function LineChart<T extends Value>({
@@ -101,6 +102,7 @@ export function LineChart<T extends Value>({
     : undefined,
   componentCallback,
   ariaLabelledBy,
+  seriesMax: overrideSeriesMax,
 }: LineChartProps<T>) {
   const {
     tooltipData,
@@ -128,10 +130,14 @@ export function LineChart<T extends Value>({
     [values, metricProperties, timeframe]
   );
 
-  const seriesMax = useMemo(() => calculateYMax(trendsList, signaalwaarde), [
-    trendsList,
-    signaalwaarde,
-  ]);
+  const calculatedSeriesMax = useMemo(
+    () => calculateYMax(trendsList, signaalwaarde),
+    [trendsList, signaalwaarde]
+  );
+
+  const seriesMax = isDefined(overrideSeriesMax)
+    ? overrideSeriesMax
+    : calculatedSeriesMax;
 
   const xDomain = useMemo(() => {
     const domain = extent(trendsList.flat().map(getDate));
@@ -305,7 +311,7 @@ export function LineChart<T extends Value>({
   );
 
   if (!xDomain) {
-    return;
+    return null;
   }
 
   return (

@@ -285,6 +285,8 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                   );
                 }}
                 formatYAxis={(x) => `${x}%`}
+                seriesMax={100}
+                padding={{ left: 36 }}
               />
             )}
           </ParentSize>
