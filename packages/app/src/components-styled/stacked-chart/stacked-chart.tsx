@@ -27,6 +27,7 @@ import siteText from '~/locale';
 import { colors } from '~/style/theme';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { useIsMounted } from '~/utils/use-is-mounted';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import {
   calculateSeriesMaximum,
@@ -136,6 +137,8 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
     hideTooltip,
     tooltipOpen,
   } = useTooltip<TooltipData>();
+
+  const isMounted = useIsMounted();
 
   const breakpoints = useBreakpoints();
   const isExtraSmallScreen = !breakpoints.sm;
@@ -342,10 +345,10 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
 
       if (isLeave) {
         tooltipTimeout = window.setTimeout(() => {
-          hideTooltip();
+          if (isMounted) hideTooltip();
         }, 300);
         hoverTimeout = window.setTimeout(() => {
-          setHoveredIndex(NO_HOVER_INDEX);
+          if (isMounted) setHoveredIndex(NO_HOVER_INDEX);
         }, 300);
         return;
       }
@@ -363,7 +366,7 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
         tooltipData,
       });
     },
-    [hideTooltip, showTooltip]
+    [hideTooltip, showTooltip, isMounted]
   );
 
   if (isEmpty(series)) {
