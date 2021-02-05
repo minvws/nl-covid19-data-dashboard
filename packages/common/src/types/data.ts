@@ -127,6 +127,10 @@ export interface National {
   deceased_cbs: NationalDeceasedCbs;
   elderly_at_home: NationalElderlyAtHome;
   vaccine_delivery: NlVaccineDelivery;
+  vaccine_availability?: NlVaccineAvailability;
+  vaccine_availability_estimate?: NlVaccineAvailabilityEstimate;
+  vaccine_administered?: NlVaccineAdministered;
+  vaccine_administered_estimate?: NlVaccineAdministeredEstimate;
 }
 export interface NationalDifference {
   tested_overall__infected_per_100k: DifferenceDecimal;
@@ -423,6 +427,66 @@ export interface NlVaccineDeliveryValue {
   date_of_insertion_unix: number;
   date_start_unix: number;
   date_end_unix: number;
+}
+export interface NlVaccineAvailability {
+  values: NlVaccineAvailabilityValue[];
+  last_value: NlVaccineAvailabilityValue;
+}
+export interface NlVaccineAvailabilityValue {
+  pfizer: number;
+  moderna: number;
+  astra_zeneca: number;
+  cure_vac: number;
+  janssen: number;
+  sanofi: number;
+  total?: number;
+  date_of_insertion_unix: number;
+  date_unix: number;
+}
+export interface NlVaccineAvailabilityEstimate {
+  values: NlVaccineAvailabilityEstimateValue[];
+  last_value: NlVaccineAvailabilityEstimateValue;
+}
+export interface NlVaccineAvailabilityEstimateValue {
+  pfizer: number;
+  moderna: number;
+  astra_zeneca: number;
+  cure_vac: number;
+  janssen: number;
+  sanofi: number;
+  total?: number;
+  date_of_insertion_unix: number;
+  date_unix: number;
+}
+export interface NlVaccineAdministered {
+  values: NlVaccineAdministeredValue[];
+  last_value: NlVaccineAdministeredValue;
+}
+export interface NlVaccineAdministeredValue {
+  pfizer: number;
+  moderna: number;
+  astra_zeneca: number;
+  cure_vac: number;
+  janssen: number;
+  sanofi: number;
+  total?: number;
+  date_of_insertion_unix: number;
+  date_unix: number;
+}
+export interface NlVaccineAdministeredEstimate {
+  values: NlVaccineAdministeredEstimateValue[];
+  last_value: NlVaccineAdministeredEstimateValue;
+}
+export interface NlVaccineAdministeredEstimateValue {
+  pfizer: number;
+  moderna: number;
+  astra_zeneca: number;
+  cure_vac: number;
+  janssen: number;
+  sanofi: number;
+  total?: number;
+  date_of_insertion_unix: number;
+  date_unix: number;
 }
 
 export interface Regionaal {
