@@ -2,7 +2,7 @@ import { TickFormatter } from '@visx/axis';
 import { localPoint } from '@visx/event';
 import { Point } from '@visx/point';
 import { scaleBand } from '@visx/scale';
-import { bisectLeft } from 'd3-array';
+import { bisectLeft, extent } from 'd3-array';
 import { ScaleTime } from 'd3-scale';
 import { useCallback, useMemo, useState } from 'react';
 import { isDefined } from 'ts-is-present';
@@ -123,7 +123,7 @@ export function LineChart<T extends Value>({
     [signaalwaarde]
   );
 
-  const [trendsList, xDomain] = useMemo(
+  const trendsList = useMemo(
     () => getTrendData(values, metricProperties as string[], timeframe),
     [values, metricProperties, timeframe]
   );
@@ -132,6 +132,14 @@ export function LineChart<T extends Value>({
     trendsList,
     signaalwaarde,
   ]);
+
+  const xDomain = useMemo(() => {
+    const domain = extent(trendsList.flat().map(getDate));
+
+    return isDefined(domain[0]) && isDefined(domain[1])
+      ? (domain as [Date, Date])
+      : undefined;
+  }, [trendsList]);
 
   const yDomain = useMemo(() => [0, seriesMax], [seriesMax]);
 
@@ -295,6 +303,10 @@ export function LineChart<T extends Value>({
     ),
     [handleHover, linesConfig, hideFill, trendsList]
   );
+
+  if (!xDomain) {
+    return;
+  }
 
   return (
     <Box>

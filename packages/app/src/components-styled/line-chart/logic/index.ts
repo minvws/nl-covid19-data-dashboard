@@ -92,13 +92,12 @@ export type TrendValue = {
 const timestampToDate = (d: number) => new Date(d * 1000);
 
 type TrendData = (TrendValue & Value)[][];
-type Domain = [Date, Date];
 
 export function getTrendData<T extends Value>(
   values: T[],
   metricProperties: string[],
   timeframe: TimeframeOption
-): [TrendData, Domain] {
+): TrendData {
   const series = getValuesInTimeframe(values, timeframe);
 
   const trendData = metricProperties.map(
@@ -107,26 +106,7 @@ export function getTrendData<T extends Value>(
         Value)[]
   );
 
-  if (series.length < 2) {
-    return [trendData, [new Date(0), new Date(0)]];
-  }
-
-  const xDomainMin = isDateSeries(series)
-    ? series[0].date_unix
-    : isDateSpanSeries(values)
-    ? series[0].date_start_unix
-    : 0;
-
-  const xDomainMax = isDateSeries(series)
-    ? series[series.length - 1].date_unix
-    : isDateSpanSeries(values)
-    ? series[series.length - 1].date_end_unix
-    : 0;
-
-  return [
-    trendData,
-    [timestampToDate(xDomainMin), timestampToDate(xDomainMax)],
-  ];
+  return trendData;
 }
 
 export function getSingleTrendData(
