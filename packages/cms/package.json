@@ -42,6 +42,7 @@
     "@sanity/cli": "^2.2.6",
     "@types/download": "^6.2.4",
     "@types/fs-extra": "^9.0.6",
-    "@types/prompts": "^2.0.9"
+    "@types/prompts": "^2.0.9",
+    "@types/react-world-flags": "^1.4.1"
   }
 }
