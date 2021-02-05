@@ -2219,9 +2219,9 @@
       },
       "toegediende_vaccins": {
         "title": "Number of doses administered",
-        "sub_title": "Vaccines to be delivered",
+        "sub_title": "",
         "administered_tests": "{{administeredVaccines}} vaccine doses have been administered so far. This number includes both first and second doses.",
-        "supply": "The Netherlands expects tot receive {{expectedDelivery}} approved vaccine doses over the next six weeks."
+        "supply": ""
       }
     },
     "data_driven_texts": {
