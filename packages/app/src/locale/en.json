@@ -2112,7 +2112,7 @@
             }
           ],
           "description_first": "This figure is a calculation of the total number of vaccine doses that have been administered. The calculation is based on the number of vaccine doses that have been delivered to the locations where injections are given. [Read more about the calculation in the explanation of the presented data.](https://coronadashboard.government.nl/verantwoording#vaccination)",
-          "description_second": "[On 1 February some figures have been corrected.](https://www.rijksoverheid.nl/actueel/nieuws/2021/02/01/dubbeltelling-in-vaccinatiecijfers-rechtgezet)"
+          "description_second": ""
         }
       },
       "kpi_expected_delivery": {
