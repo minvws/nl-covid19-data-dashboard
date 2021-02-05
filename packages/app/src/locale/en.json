@@ -2036,14 +2036,14 @@
       "difference": "",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "454998",
+          "total_vaccinated": "504951",
           "date_unix": "1612527321",
           "date_of_insertion_unix": "1612527321"
         }
       },
       "kpi_total": {
         "title": "Number of doses administered",
-        "value": "330494",
+        "value": "365933",
         "description": "",
         "date_of_report_unix": "1612527321",
         "date_of_insertion_unix": "1612527321",
