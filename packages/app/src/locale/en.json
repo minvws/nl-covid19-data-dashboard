@@ -2049,12 +2049,12 @@
         "date_of_insertion_unix": "1612527321",
         "administered": [
           {
-            "value": "245278",
+            "value": "279217",
             "description": "reported by GGD-GHOR",
             "report_date": "Reported number till 4 February"
           },
           {
-            "value": "85216",
+            "value": "86716",
             "description": "reported by LNAZ",
             "report_date": "Reported number till 4 February"
           },
@@ -2080,23 +2080,23 @@
         "first_tab_title": "Calculated number",
         "second_tab_title": "Reported number",
         "tab_total_estimated": {
-          "value": "454998",
+          "value": "504951",
           "description": "",
           "date_of_report_unix": "1612527321",
           "date_of_insertion_unix": "1612527321",
           "administered": [
             {
-              "value": "245278",
+              "value": "279217",
               "description": "administered by GGDs",
               "report_date": "Reported number till 4 February"
             },
             {
-              "value": "85216",
+              "value": "86716",
               "description": "administered in hospitals",
               "report_date": "Reported number till 4 February"
             },
             {
-              "value": "124504",
+              "value": "139018",
               "description": "administered in long-term care institutions",
               "report_date": "Calculated number till 4 February"
             },
