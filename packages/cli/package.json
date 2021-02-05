@@ -1,7 +1,8 @@
 {
   "name": "@corona-dashboard/cli",
   "private": true,
-  "version": "1.0.0",
+  "version": "0.0.0",
+  "license": "EUROPEAN UNION PUBLIC LICENCE v. 1.2",
   "dependencies": {
     "meow": "^8.0.0",
     "ts-node": "^9.1.1"

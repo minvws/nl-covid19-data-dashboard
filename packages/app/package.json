@@ -1,7 +1,7 @@
 {
   "name": "@corona-dashboard/app",
-  "version": "2.14.3",
   "private": true,
+  "version": "0.0.0",
   "license": "EUROPEAN UNION PUBLIC LICENCE v. 1.2",
   "dependencies": {
     "@formatjs/intl-datetimeformat": "^2.6.7",

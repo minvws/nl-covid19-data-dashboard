@@ -1,6 +1,7 @@
 {
   "name": "corona-dashboard",
   "private": true,
+  "license": "EUROPEAN UNION PUBLIC LICENCE v. 1.2",
   "resolutions": {
     "//": "Visx internally uses d3-array@v2 but this isn't compatible with IE11",
     "d3-array": "^1",
