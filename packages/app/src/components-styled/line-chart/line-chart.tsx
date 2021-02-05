@@ -321,6 +321,7 @@ export function LineChart<T extends Value>({
           benchmark={benchmark}
           componentCallback={componentCallback}
           ariaLabelledBy={ariaLabelledBy}
+          dateSpanWidth={dateSpanScale.bandwidth()}
         >
           {renderTrendLines}
         </ChartAxes>
@@ -337,17 +338,12 @@ export function LineChart<T extends Value>({
           </Tooltip>
         )}
 
-        {/**
-         * This is a clipping path for the date span marker because if we render
-         * day values, then the first and last days will span pas the borders
-         */}
         <Box
           height={yMax}
           width={xMax}
           position="absolute"
           top={padding.top}
           left={padding.left}
-          overflow="hidden"
           style={{
             pointerEvents: 'none',
           }}

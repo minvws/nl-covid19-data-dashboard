@@ -60,6 +60,7 @@ type ChartAxesProps = {
   children: (props: ChartScales) => ReactNode;
   componentCallback?: ComponentCallbackFunction;
   ariaLabelledBy?: string;
+  dateSpanWidth: number;
 };
 
 type AnyTickFormatter = (value: any) => string;
@@ -79,15 +80,18 @@ export const ChartAxes = memo(function ChartAxes({
   children,
   componentCallback = () => undefined,
   ariaLabelledBy,
+  dateSpanWidth,
 }: ChartAxesProps) {
   const bounds: ChartBounds = {
     width: width - padding.left - padding.right,
     height: height - padding.top - padding.bottom,
   };
 
+  const markerPadding = dateSpanWidth / 2;
+
   const xScale = scaleTime({
     domain: xDomain,
-    range: [0, bounds.width],
+    range: [markerPadding, bounds.width - markerPadding],
   });
 
   const yScale = scaleLinear({
@@ -127,6 +131,7 @@ export const ChartAxes = memo(function ChartAxes({
             props: {
               scale: yScale,
               width: bounds.width,
+              // width: width,
               numTicks: NUM_TICKS,
               stroke: defaultColors.axis,
             },
