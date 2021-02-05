@@ -1,29 +1,24 @@
 import { NextRouter } from 'next/router';
-import { MunicipalityProperties } from '@corona-dashboard/common';
 import { PageName } from './types';
 
-export type MunicipalitySelectionHandler = (
-  context: MunicipalityProperties
-) => void;
+export type MunicipalitySelectionHandler = (gmcode: string) => void;
 
-export function createSelectMunicipalHandler<T extends { gmcode: string }>(
+export function createSelectMunicipalHandler(
   router: NextRouter,
   pageName: PageName,
   openMenu?: boolean
-) {
-  return (value: T) => {
-    if (!value) {
+): MunicipalitySelectionHandler {
+  return (gmcode) => {
+    if (!gmcode) {
       return;
     }
 
     if (pageName === 'actueel') {
-      router.push(
-        `/actueel/gemeente/${value.gmcode}` + (openMenu ? '?menu=1' : '')
-      );
+      router.push(`/actueel/gemeente/${gmcode}` + (openMenu ? '?menu=1' : ''));
       return;
     }
     router.push(
-      `/gemeente/${value.gmcode}/${pageName}` + (openMenu ? '?menu=1' : '')
+      `/gemeente/${gmcode}/${pageName}` + (openMenu ? '?menu=1' : '')
     );
   };
 }

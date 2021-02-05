@@ -1,25 +1,22 @@
 import { NextRouter } from 'next/router';
-import { SafetyRegionProperties } from '@corona-dashboard/common';
 import { RegioPageName } from './types';
 
-export type RegionSelectionHandler = (context: SafetyRegionProperties) => void;
+export type RegionSelectionHandler = (vrcode: string) => void;
 
-export function createSelectRegionHandler<T extends { vrcode: string }>(
+export function createSelectRegionHandler(
   router: NextRouter,
   pageName: RegioPageName,
   openMenu?: boolean
-) {
-  return (value: T) => {
+): RegionSelectionHandler {
+  return (vrcode) => {
     if (pageName === 'actueel') {
       router.push(
-        `/actueel/veiligheidsregio/${value.vrcode}` +
-          (openMenu ? '?menu=1' : '')
+        `/actueel/veiligheidsregio/${vrcode}` + (openMenu ? '?menu=1' : '')
       );
       return;
     }
     router.push(
-      `/veiligheidsregio/${value.vrcode}/${pageName}` +
-        (openMenu ? '?menu=1' : '')
+      `/veiligheidsregio/${vrcode}/${pageName}` + (openMenu ? '?menu=1' : '')
     );
   };
 }

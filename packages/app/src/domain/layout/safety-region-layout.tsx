@@ -23,6 +23,9 @@ import { colors } from '~/style/theme';
 import { Regionaal } from '@corona-dashboard/common';
 import { SafetyRegionComboBox } from './components/safety-region-combo-box';
 import { Box } from '~/components-styled/base';
+import { useBreakpoints } from '~/utils/useBreakpoints';
+import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
+
 interface SafetyRegionLayoutProps {
   lastGenerated: string;
   data?: Regionaal;
@@ -58,6 +61,8 @@ export function getSafetyRegionLayout() {
 function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
   const { children, data, safetyRegionName } = props;
 
+  const breakpoints = useBreakpoints();
+
   const router = useRouter();
   const { code } = router.query;
 
@@ -66,6 +71,12 @@ function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
     router.route === `/veiligheidsregio/[code]`;
 
   const showMetricLinks = router.route !== '/veiligheidsregio';
+
+  const goToSafetyRegion = createSelectRegionHandler(
+    router,
+    'maatregelen',
+    !breakpoints.md
+  );
 
   return (
     <>
@@ -85,7 +96,7 @@ function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
 
       <AppContent
         hideMenuButton={isMainRoute}
-        searchComponent={<SafetyRegionComboBox />}
+        searchComponent={<SafetyRegionComboBox onSelect={goToSafetyRegion} />}
         sidebarComponent={
           <>
             {/**

@@ -88,7 +88,7 @@ export function BehaviorChoroplethTile({
             </TooltipContent>
           );
         }}
-        onSelect={(x) => goToRegion(x.vrcode)}
+        onSelect={goToRegion}
       />
     </ChoroplethTile>
   );

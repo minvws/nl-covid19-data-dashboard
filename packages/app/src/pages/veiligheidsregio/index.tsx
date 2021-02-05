@@ -48,9 +48,7 @@ const SafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
 
       {!breakpoints.md && (
         <Box bg="white">
-          <SafetyRegionComboBox
-            onSelect={(vrcode) => goToSafetyRegion({ vrcode })}
-          />
+          <SafetyRegionComboBox onSelect={goToSafetyRegion} />
         </Box>
       )}
 
