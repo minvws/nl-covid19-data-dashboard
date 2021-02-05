@@ -226,10 +226,12 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                   width={width}
                   timeframe="all"
                   areaValues={data.vaccine_delivery.values}
-                  areaConfigs={['pfizer'].map((name) => ({
-                    metricProperty: name,
-                    color: (colors.data.vaccines as any)[name],
-                  }))}
+                  areaConfigs={Object.keys(colors.data.vaccines).map(
+                    (name) => ({
+                      metricProperty: name,
+                      color: (colors.data.vaccines as any)[name],
+                    })
+                  )}
                 />
               )}
             </ParentSize>

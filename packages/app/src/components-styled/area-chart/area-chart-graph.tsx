@@ -14,6 +14,7 @@ import { SingleTrendData, TrendData } from '../line-chart/logic';
 export type AreaConfig = {
   metricProperty: string;
   color?: string;
+  pattern?: 'hatched' | 'none';
   strokeWidth?: number;
   legendLabel?: string;
   legendShape?: LegendShape;
@@ -62,6 +63,31 @@ export function AreaChartGraph(props: AreaChartGraphProps) {
       width={bounds.width}
       height={bounds.height}
     >
+      <defs>
+        {areaKeys
+          .filter((key) => areaConfig[key].pattern === 'hatched')
+          .map((key) => {
+            const config = areaConfig[key];
+            return (
+              <pattern
+                id={`pattern-${key}`}
+                width="10"
+                height="10"
+                patternTransform="rotate(-45 0 0)"
+                patternUnits="userSpaceOnUse"
+              >
+                <rect x="0" y="0" width="10" height="10" fill={config.color} />
+                <line
+                  x1="0"
+                  y1="0"
+                  x2="0"
+                  y2="10"
+                  style={{ stroke: 'white', strokeWidth: 4 }}
+                />
+              </pattern>
+            );
+          })}
+      </defs>
       <GridRows
         scale={yScale}
         width={bounds.width}
@@ -113,8 +139,8 @@ export function AreaChartGraph(props: AreaChartGraphProps) {
             <path
               key={`area-chart-stack-${stack.key}`}
               d={path(stack) || ''}
-              stroke="black"
-              fill={areaConfig[stack.key].color}
+              stroke="transparent"
+              fill={getFill(areaConfig[stack.key], stack.key)}
               onClick={() => {
                 alert(stack.key);
               }}
@@ -124,6 +150,13 @@ export function AreaChartGraph(props: AreaChartGraphProps) {
       </AreaStack>
     </StyledSvg>
   );
+}
+
+function getFill(areaConfig: AreaConfig, areaKey: string) {
+  if (areaConfig.pattern === 'hatched') {
+    return `url(#pattern-${areaKey})`;
+  }
+  return areaConfig.color;
 }
 
 const StyledSvg = styled.svg(
