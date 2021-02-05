@@ -127,10 +127,10 @@ export interface National {
   deceased_cbs: NationalDeceasedCbs;
   elderly_at_home: NationalElderlyAtHome;
   vaccine_delivery: NlVaccineDelivery;
-  vaccine_availability?: NlVaccineAvailability;
-  vaccine_availability_estimate?: NlVaccineAvailabilityEstimate;
-  vaccine_administered?: NlVaccineAdministered;
-  vaccine_administered_estimate?: NlVaccineAdministeredEstimate;
+  vaccine_availability: NlVaccineAvailability;
+  vaccine_availability_estimate: NlVaccineAvailabilityEstimate;
+  vaccine_administered: NlVaccineAdministered;
+  vaccine_administered_estimate: NlVaccineAdministeredEstimate;
 }
 export interface NationalDifference {
   tested_overall__infected_per_100k: DifferenceDecimal;
@@ -439,9 +439,10 @@ export interface NlVaccineAvailabilityValue {
   cure_vac: number;
   janssen: number;
   sanofi: number;
-  total?: number;
+  total: number;
   date_of_insertion_unix: number;
-  date_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
 }
 export interface NlVaccineAvailabilityEstimate {
   values: NlVaccineAvailabilityEstimateValue[];
@@ -454,9 +455,10 @@ export interface NlVaccineAvailabilityEstimateValue {
   cure_vac: number;
   janssen: number;
   sanofi: number;
-  total?: number;
+  total: number;
   date_of_insertion_unix: number;
-  date_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
 }
 export interface NlVaccineAdministered {
   values: NlVaccineAdministeredValue[];
@@ -469,9 +471,10 @@ export interface NlVaccineAdministeredValue {
   cure_vac: number;
   janssen: number;
   sanofi: number;
-  total?: number;
+  total: number;
   date_of_insertion_unix: number;
-  date_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
 }
 export interface NlVaccineAdministeredEstimate {
   values: NlVaccineAdministeredEstimateValue[];
@@ -484,9 +487,10 @@ export interface NlVaccineAdministeredEstimateValue {
   cure_vac: number;
   janssen: number;
   sanofi: number;
-  total?: number;
+  total: number;
   date_of_insertion_unix: number;
-  date_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
 }
 
 export interface Regionaal {

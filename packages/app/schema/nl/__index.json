@@ -27,7 +27,11 @@
     "tested_ggd_average",
     "tested_overall",
     "tested_per_age_group",
-    "vaccine_delivery"
+    "vaccine_delivery",
+    "vaccine_availability",
+    "vaccine_availability_estimate",
+    "vaccine_administered",
+    "vaccine_administered_estimate"
   ],
   "additionalProperties": false,
   "properties": {
