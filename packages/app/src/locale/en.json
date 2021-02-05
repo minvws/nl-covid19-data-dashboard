@@ -1426,7 +1426,6 @@
   "infected_age_groups": {
     "title": "Distribution by age",
     "description": "The blue (right) bars in this graph show which age group positive tested persons belong to. The gray (left) bars show how large each age group is in relation to the entire Dutch population. The blue and gray bars together show whether age groups have relatively more or less positive tested persons. For example: 10% of all positive tested persons are in their thirties (blue bar) and 14% of all Dutch people are in their thirties (gray bar). In this example, the age group thirties has relatively fewer positive tested people. The chart is updated daily and covers only the most recently reported cases.",
-    "example": "For example: of all positive tested people is {{infectedPercentage}} between {{ageGroupRange}} years old. Of all Dutch people is {{ageGroupPercentage}} between {{ageGroupRange}} years old. ",
     "graph": {
       "age_group_percentage_title": "Distribution of age groups in the Netherlands",
       "age_group_percentage_tooltip": "of the population is {{ageGroupRange}} years old.",
@@ -1437,7 +1436,8 @@
       "clipped_value_message": "This value is higher than displayed in the figure.",
       "value_percentage_title": "Confirmed cases by agegroup",
       "value_percentage_tooltip": "of the confirmed cases are {{ageGroupRange}} years old"
-    }
+    },
+    "example": "For example: of all positive tested people is {{infectedPercentage}} between {{ageGroupRange}} years old. Of all Dutch people is {{ageGroupPercentage}} between {{ageGroupRange}} years old. "
   },
   "gehandicaptenzorg_besmette_locaties": {
     "datums": "Latest values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -2045,8 +2045,8 @@
         "title": "Number of doses administered",
         "value": "330494",
         "description": "",
-        "date_of_report_unix": "1612263890",
-        "date_of_insertion_unix": "1612263890",
+        "date_of_report_unix": "1612384276",
+        "date_of_insertion_unix": "1612384276",
         "administered": [
           {
             "value": "245278",
@@ -2430,8 +2430,8 @@
     }
   },
   "toegankelijkheid_metadata": {
-    "title": "Accessibility COVID-19 Dashboard | Government.nl",
-    "description": "Information on the accessibility of the COVID-19 Dashboard.",
+    "title": "Toegankelijkheid COVID-19 Dashboard | Government.nl",
+    "description": "Informatie on the accessibility of the COVID-19 Dashboard.",
     "url": "https://coronadashboard.government.nl/verantwoording"
   },
   "article_strip_title": ""
