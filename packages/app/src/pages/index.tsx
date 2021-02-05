@@ -80,6 +80,8 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
   const dataInfectedTotal = data.tested_overall;
   const dataHospitalIntake = data.hospital_nice;
 
+  console.log(content)
+
   return (
     <>
       <SEOHead
@@ -163,10 +165,10 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
               ]}
             />
 
-            {content.editorial && content.highlight?.article && (
+            {content.editorial && content.highlight && (
               <EditorialTile
                 editorial={content.editorial}
-                highlightedArticle={content.highlight.article}
+                highlightedContent={content.highlight}
               />
             )}
 

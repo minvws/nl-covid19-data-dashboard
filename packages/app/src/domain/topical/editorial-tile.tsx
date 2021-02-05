@@ -12,9 +12,13 @@ type EditorialTileProps = {
 };
 
 export function EditorialTile(props: EditorialTileProps) {
-  const { editorial, highlightedArticle } = props;
+  const { editorial, highlightedContent } = props;
   const breakpoints = useBreakpoints();
 
+  const content = highlightedContent.isArticle ? 
+    highlightedContent.article : 
+    highlightedContent.custom
+  
   return (
     <Box
       display="flex"
@@ -32,10 +36,10 @@ export function EditorialTile(props: EditorialTileProps) {
       </Box>
       <Box flex={{ lg: '1 1 33%' }}>
         <ArticleTeaser
-          cover={highlightedArticle.cover}
-          slug={highlightedArticle.slug.current}
-          summary={highlightedArticle.summary}
-          title={highlightedArticle.title}
+          cover={content.cover}
+          slug={highlightedContent.isArticle ? content.slug.current : content.href}
+          summary={content.summary}
+          title={content.title}
         />
       </Box>
     </Box>
