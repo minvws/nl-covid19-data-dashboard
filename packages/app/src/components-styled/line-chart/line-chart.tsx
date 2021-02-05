@@ -172,9 +172,7 @@ export function LineChart<T extends Value>({
     () =>
       scaleBand<Date>({
         range: [0, xMax],
-        round: true,
         domain: timespanMarkerData.map(getDate),
-        padding: 0,
       }),
     [xMax, timespanMarkerData]
   );
