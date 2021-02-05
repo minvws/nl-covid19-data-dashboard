@@ -1,7 +1,7 @@
 {
   "definitions": {
     "value": {
-      "title": "nl_vaccine_availability_value",
+      "title": "nl_vaccine_administered_estimate_value",
       "type": "object",
       "required": [
         "pfizer",
@@ -46,7 +46,7 @@
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_vaccine_availability",
+  "title": "nl_vaccine_administered_estimate",
   "type": "object",
   "required": ["values", "last_value"],
   "additionalProperties": false,

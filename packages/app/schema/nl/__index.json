@@ -108,6 +108,18 @@
     },
     "vaccine_delivery": {
       "$ref": "vaccine_delivery.json"
+    },
+    "vaccine_availability": {
+      "$ref": "vaccine_availability.json"
+    },
+    "vaccine_availability_estimate": {
+      "$ref": "vaccine_availability_estimate.json"
+    },
+    "vaccine_administered": {
+      "$ref": "vaccine_administered.json"
+    },
+    "vaccine_administered_estimate": {
+      "$ref": "vaccine_administered_estimate.json"
     }
   }
 }
