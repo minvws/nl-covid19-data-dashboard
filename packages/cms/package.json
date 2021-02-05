@@ -1,6 +1,8 @@
 {
   "name": "@corona-dashboard/cms",
   "private": true,
+  "version": "0.0.0",
+  "license": "EUROPEAN UNION PUBLIC LICENCE v. 1.2",
   "scripts": {
     "start": "sanity start",
     "build": "sanity build",
