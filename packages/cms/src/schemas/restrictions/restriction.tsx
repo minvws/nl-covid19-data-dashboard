@@ -1,6 +1,9 @@
 import React from 'react';
 import { Icon } from '../../components/icons/icon';
-import { restrictionIcons } from '../../components/icons/icons';
+import {
+  RestrictionIcon,
+  restrictionIcons,
+} from '../../components/icons/icons';
 
 export default {
   type: 'object',
@@ -26,14 +29,14 @@ export default {
       title: 'text.nl',
       icon: 'icon',
     },
-    prepare(selection) {
+    prepare(selection: { icon: RestrictionIcon; title: string }) {
       const { title, icon } = selection;
 
       return {
         title: title,
         media: (
           <img
-            src={restrictionIcons[icon]}
+            src={restrictionIcons[icon] || undefined}
             alt="Selection icon for restriction"
           />
         ),

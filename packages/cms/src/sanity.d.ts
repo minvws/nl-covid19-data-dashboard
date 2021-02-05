@@ -2,6 +2,15 @@ declare module 'part:@sanity/form-builder/patch-event' {
   export * from '@sanity/form-builder/lib/PatchEvent';
 }
 
+declare module 'all:part:@sanity/base/schema-type' {
+  let types: any[];
+  export default types;
+}
+
+declare module 'part:@sanity/base/schema-creator' {
+  export default function createSchema(schema: any): any;
+}
+
 // /* eslint-disable react/no-multi-comp, @typescript-eslint/no-empty-function*/
 // declare module 'part:@sanity/components/*' {
 //   class SanityInputComponent extends React.Component<any> {

@@ -19,7 +19,7 @@ export default {
             name: 'alt',
             title: 'Alternatieve tekst (toegankelijkheid)',
             type: 'string',
-            validation: (Rule) => Rule.required(),
+            validation: (Rule: any) => Rule.required(),
             options: {
               isHighlighted: true,
             },
