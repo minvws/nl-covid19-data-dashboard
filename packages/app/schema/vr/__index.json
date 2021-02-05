@@ -76,6 +76,15 @@
     },
     "elderly_at_home": {
       "$ref": "elderly_at_home.json"
+    },
+    "escalation_level": {
+      "$ref": "escalation_level.json"
+    },
+    "tested_escalation_level": {
+      "$ref": "tested_escalation_level.json"
+    },
+    "hospital_escalation_level": {
+      "$ref": "hospital_escalation_level.json"
     }
   }
 }
