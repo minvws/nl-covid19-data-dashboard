@@ -266,12 +266,16 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                 linesConfig={[{ metricProperty: 'percentage_in_favor' }]}
                 formatTooltip={(values) => {
                   const value = values[0];
-
+                  const dateStartString = formatDateFromSeconds(
+                    value.date_start_unix
+                  );
+                  const dateEndString = formatDateFromSeconds(
+                    value.date_end_unix
+                  );
                   return (
                     <Text m={0}>
                       <span style={{ fontWeight: 'bold' }}>
-                        {`${formatDateFromSeconds(value.date_start_unix)} -
-                        ${formatDateFromSeconds(value.date_end_unix)}`}
+                        {`${dateStartString} - ${dateEndString}`}
                       </span>
                       <br />
 

@@ -404,11 +404,16 @@ function formatDefaultTooltip<T extends Value>(
     );
   } else if (isDateSpanSeries(values)) {
     const value = values[0];
+    const dateStartString = formatDateFromSeconds(
+      value.date_start_unix,
+      'short'
+    );
+    const dateEndString = formatDateFromSeconds(value.date_end_unix, 'short');
+
     return (
       <>
         <Text as="span" fontWeight="bold">
-          {`${formatDateFromSeconds(value.date_start_unix, 'short')} -
-          ${formatDateFromSeconds(value.date_end_unix, 'short')}: `}
+          {`${dateStartString} - ${dateEndString}: `}
         </Text>
         {isPercentage
           ? `${formatPercentage(value.__value)}%`
