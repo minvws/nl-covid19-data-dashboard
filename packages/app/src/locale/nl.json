@@ -2219,9 +2219,9 @@
       },
       "toegediende_vaccins": {
         "title": "Aantal gezette prikken",
-        "sub_title": "Verwachte levering",
+        "sub_title": "",
         "administered_tests": "Tot nu toe zijn er {{administeredVaccines}} prikken gezet. Dit cijfer omvat zowel eerste als tweede prikken.",
-        "supply": "Nederland verwacht de komende zes weken {{expectedDelivery}} goedgekeurde vaccins te krijgen."
+        "supply": ""
       }
     },
     "data_driven_texts": {
