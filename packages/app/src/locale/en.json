@@ -2036,20 +2036,20 @@
       "difference": "",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "504951",
+          "total_vaccinated": "495535",
           "date_unix": "1612527321",
           "date_of_insertion_unix": "1612527321"
         }
       },
       "kpi_total": {
         "title": "Number of doses administered",
-        "value": "365933",
+        "value": "356517",
         "description": "",
         "date_of_report_unix": "1612527321",
         "date_of_insertion_unix": "1612527321",
         "administered": [
           {
-            "value": "279217",
+            "value": "269801",
             "description": "reported by GGD-GHOR",
             "report_date": "Reported number till 4 February"
           },
@@ -2080,13 +2080,13 @@
         "first_tab_title": "Calculated number",
         "second_tab_title": "Reported number",
         "tab_total_estimated": {
-          "value": "504951",
+          "value": "495535",
           "description": "",
           "date_of_report_unix": "1612527321",
           "date_of_insertion_unix": "1612527321",
           "administered": [
             {
-              "value": "279217",
+              "value": "269801",
               "description": "administered by GGDs",
               "report_date": "Reported number till 4 February"
             },
