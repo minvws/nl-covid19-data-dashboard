@@ -126,7 +126,6 @@ export interface National {
   deceased_rivm_per_age_group: NlDeceasedRivmPerAgeGroup;
   deceased_cbs: NationalDeceasedCbs;
   elderly_at_home: NationalElderlyAtHome;
-  vaccine_support: NlVaccineSupport;
   vaccine_delivery: NlVaccineDelivery;
 }
 export interface NationalDifference {
@@ -408,17 +407,6 @@ export interface NationalElderlyAtHomeValue {
   positive_tested_daily_per_100k: number;
   deceased_daily: number;
   date_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface NlVaccineSupport {
-  values: NlVaccineSupportValue[];
-  last_value: NlVaccineSupportValue;
-}
-export interface NlVaccineSupportValue {
-  percentage_in_favor: number;
-  percentage_already_vaccinated: number;
-  date_start_unix: number;
-  date_end_unix: number;
   date_of_insertion_unix: number;
 }
 export interface NlVaccineDelivery {

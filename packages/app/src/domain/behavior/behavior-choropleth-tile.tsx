@@ -17,13 +17,8 @@ import {
 } from './behavior-types';
 import { BehaviorTypeControl } from './components/behavior-type-control';
 import css from '@styled-system/css';
-const text = siteText.nl_gedrag;
 
-const unusedRules = [
-  'symptoms_stay_home',
-  'symptoms_get_tested',
-  'wear_mask_public_transport',
-];
+const text = siteText.nl_gedrag;
 
 export function BehaviorChoroplethTile({
   data,
@@ -53,7 +48,13 @@ export function BehaviorChoroplethTile({
             value={currentId}
             onChange={setCurrentId}
             options={behaviorIdentifiers
-              .filter((identifier) => unusedRules.indexOf(identifier) < 0)
+              .filter((id) =>
+                // filter the dropdown to only show behaviors with data
+                data.behavior.find((data) => {
+                  const key = `${id}_${type}` as keyof RegionsBehavior;
+                  return typeof data[key] === 'number';
+                })
+              )
               .map((id) => ({
                 value: id,
                 label: siteText.gedrag_onderwerpen[id],

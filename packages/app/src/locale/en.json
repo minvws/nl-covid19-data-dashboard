@@ -51,7 +51,7 @@
       "over_risiconiveaus": "About the risk levels",
       "veelgestelde_vragen": "Frequently asked questions",
       "actueel": "Latest developments",
-      "toegankelijkheid": ""
+      "toegankelijkheid": "Accessibility"
     },
     "title": "Corona Dashboard",
     "terug_naar_alle_cijfers": "Overview",
@@ -153,7 +153,7 @@
     "barscale_titel": "Hospital admissions reported per day",
     "extra_uitleg": "Number of people with COVID-19 admitted to hospital daily. This figure shows how many hospital admissions are reported per day, including patients from outside the hospital admitted directly to the ICU. It may include hospital admissions that occurred in previous days.",
     "map_titel": "Residence of patients admitted to hospital",
-    "map_toelichting": "This map shows, by municipality or safety region, where people live who have been admitted to hospital with COVID-19. Please note that people may have been admitted to a hospital located somewhere else in the Netherlands; the map therefore does not show admission numbers per hospital. The figures here reflect the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE). Flevoziekenhuis does not currently share its data on COVID-19 admission to clinic wards with Stichting NICE. As a result, the actual figures in some municipalities and safety regions may be higher than they appear on the map.",
+    "map_toelichting": "This map shows, by municipality or safety region, where people live who have been admitted to hospital with COVID-19. Please note that people may have been admitted to a hospital located somewhere else in the Netherlands; the map therefore does not show admission numbers per hospital. The figures here reflect the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE). Observe: from February 5 the color scale of the map has been changed to better show municipalities or regions that have not reported hospital admissions.",
     "linechart_titel": "Progression in hospital admissions over time",
     "barscale_screenreader_text": "{{value}} hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
     "chloropleth_legenda": {
@@ -717,7 +717,7 @@
     "barscale_titel": "Hospital admissions reported per day",
     "extra_uitleg": "Number of people from this safety region with COVID-19 admitted to hospital on a daily basis. This figure shows how many hospital admissions are reported per day, including patients from outside the hosptial admitted directly to the ICU. Patients can be admitted to hospitals in other regions.",
     "map_titel": "Distribution of hospital admissions in {{safetyRegion}}",
-    "map_toelichting": "This map shows, by municipality or safety region, where people live who have been admitted to hospital with COVID-19. Please note that people may have been admitted to a hospital located somewhere else in the Netherlands; the map therefore does not show admission numbers per hospital. The figures here reflect the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE). Flevoziekenhuis does not currently share its data on COVID-19 admission to clinic wards with Stichting NICE. As a result, the actual figures in some municipalities and safety regions may be higher than they appear on the map.",
+    "map_toelichting": "This map shows, by municipality or safety region, where people live who have been admitted to hospital with COVID-19. Please note that people may have been admitted to a hospital located somewhere else in the Netherlands; the map therefore does not show admission numbers per hospital. The figures here reflect the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE). Observe: from February 5 the color scale of the map has been changed to better show municipalities or regions that have not reported hospital admissions.",
     "linechart_titel": "Progression in hospital admissions over time",
     "barscale_screenreader_text": "{{value}} hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
     "bron": {
@@ -861,7 +861,7 @@
     "barscale_titel": "Hospital admissions reported per day",
     "extra_uitleg": "Number of people from this municipality with COVID-19 admitted to hospital on a daily basis. This figure shows how many hospital admissions are reported per day, including patients from outside the hosptial admitted directly to the ICU. Patients can be admitted to hospitals in other regions.",
     "map_titel": "Distribution of hospital admissions in safety region of {{municipality}}",
-    "map_toelichting": "This map shows, by municipality or safety region, where people live who have been admitted to hospital with COVID-19. Please note that people may have been admitted to a hospital located somewhere else in the Netherlands; the map therefore does not show admission numbers per hospital. The figures here reflect the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE). Flevoziekenhuis does not currently share its data on COVID-19 admission to clinic wards with Stichting NICE. As a result, the actual figures in some municipalities and safety regions may be higher than they appear on the map.",
+    "map_toelichting": "This map shows, by municipality or safety region, where people live who have been admitted to hospital with COVID-19. Please note that people may have been admitted to a hospital located somewhere else in the Netherlands; the map therefore does not show admission numbers per hospital. The figures here reflect the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE). Observe: from February 5 the color scale of the map has been changed to better show municipalities or regions that have not reported hospital admissions.",
     "linechart_titel": "Progression in hospital admissions over time",
     "barscale_screenreader_text": "{{value}} hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
     "bron": {
@@ -1999,8 +1999,8 @@
     "title": "COVID-19 vaccinations",
     "description": "Vaccination is the most important step towards getting life back to normal. The Netherlands began vaccinating people against COVID-19 on 6 January 2021. Eventually, the vaccine will be offered to everyone aged 18 and over. This page shows how many doses of vaccine have been administered and how many doses are on their way.",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "date_unix": "1612354200",
-    "date_of_insertion_unix": "1612354200",
+    "date_unix": "1612442100",
+    "date_of_insertion_unix": "1612442100",
     "reference": {
       "href": "/verantwoording#vaccination",
       "text": "Read more about the source of the data on vaccination in the explanation of the presented data."
@@ -2036,27 +2036,27 @@
       "difference": "",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "416093",
-          "date_unix": "1612354200",
-          "date_of_insertion_unix": "1612354200"
+          "total_vaccinated": "454998",
+          "date_unix": "1612442100",
+          "date_of_insertion_unix": "1612442100"
         }
       },
       "kpi_total": {
         "title": "Number of doses administered",
-        "value": "303702",
+        "value": "330494",
         "description": "",
         "date_of_report_unix": "1612263890",
         "date_of_insertion_unix": "1612263890",
         "administered": [
           {
-            "value": "222486",
+            "value": "245278",
             "description": "reported by GGD-GHOR",
-            "report_date": "Reported number till 2 February"
+            "report_date": "Reported number till 3 February"
           },
           {
-            "value": "81216",
+            "value": "85216",
             "description": "reported by LNAZ",
-            "report_date": "Reported number till 2 February"
+            "report_date": "Reported number till 3 February"
           },
           {
             "value": "",
@@ -2080,25 +2080,25 @@
         "first_tab_title": "Calculated number",
         "second_tab_title": "Reported number",
         "tab_total_estimated": {
-          "value": "416093",
+          "value": "454998",
           "description": "",
           "date_of_report_unix": "1612354200",
           "date_of_insertion_unix": "1612354200",
           "administered": [
             {
-              "value": "222486",
+              "value": "245278",
               "description": "administered by GGDs",
-              "report_date": "Reported number till 2 February"
+              "report_date": "Reported number till 3 February"
             },
             {
-              "value": "81216",
+              "value": "85216",
               "description": "administered in hospitals",
-              "report_date": "Reported number till 2 February"
+              "report_date": "Reported number till 3 February"
             },
             {
-              "value": "112391",
+              "value": "124504",
               "description": "administered in long-term care institutions",
-              "report_date": "Calculated number till 2 February"
+              "report_date": "Calculated number till 3 February"
             },
             {
               "value": "",
@@ -2157,7 +2157,8 @@
         "description": "More data on vaccinations will be added in the near future, including:",
         "additions": [
           "Willingness to be vaccinated",
-          "Vaccination coverage"
+          "Vaccination coverage",
+          ""
         ]
       }
     },
@@ -2429,8 +2430,8 @@
     }
   },
   "toegankelijkheid_metadata": {
-    "title": "Toegankelijkheid COVID-19 Dashboard | Government.nl",
-    "description": "Informatie on the accessibility of the COVID-19 Dashboard.",
+    "title": "Accessibility COVID-19 Dashboard | Government.nl",
+    "description": "Information on the accessibility of the COVID-19 Dashboard.",
     "url": "https://coronadashboard.government.nl/verantwoording"
   },
   "article_strip_title": ""
