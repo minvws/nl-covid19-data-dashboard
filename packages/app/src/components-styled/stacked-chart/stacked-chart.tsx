@@ -27,6 +27,7 @@ import siteText from '~/locale';
 import { colors } from '~/style/theme';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { useIsMounted } from '~/utils/use-is-mounted';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import {
   calculateSeriesMaximum,
@@ -136,6 +137,8 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
     hideTooltip,
     tooltipOpen,
   } = useTooltip<TooltipData>();
+
+  const isMounted = useIsMounted();
 
   const breakpoints = useBreakpoints();
   const isExtraSmallScreen = !breakpoints.sm;
@@ -332,36 +335,39 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
    *
    * @TODO wrap in useCallback?
    */
-  function handleHover(
-    event: HoverEvent,
-    tooltipData: TooltipData,
-    hoverIndex: number
-  ) {
-    const isLeave = event.type === 'mouseleave';
+  const handleHover = useCallback(
+    function handleHover(
+      event: HoverEvent,
+      tooltipData: TooltipData,
+      hoverIndex: number
+    ) {
+      const isLeave = event.type === 'mouseleave';
 
-    if (isLeave) {
-      tooltipTimeout = window.setTimeout(() => {
-        hideTooltip();
-      }, 300);
-      hoverTimeout = window.setTimeout(() => {
-        setHoveredIndex(NO_HOVER_INDEX);
-      }, 300);
-      return;
-    }
+      if (isLeave) {
+        tooltipTimeout = window.setTimeout(() => {
+          if (isMounted) hideTooltip();
+        }, 300);
+        hoverTimeout = window.setTimeout(() => {
+          if (isMounted) setHoveredIndex(NO_HOVER_INDEX);
+        }, 300);
+        return;
+      }
 
-    if (tooltipTimeout) clearTimeout(tooltipTimeout);
-    if (hoverTimeout) clearTimeout(hoverTimeout);
+      if (tooltipTimeout) clearTimeout(tooltipTimeout);
+      if (hoverTimeout) clearTimeout(hoverTimeout);
 
-    setHoveredIndex(hoverIndex);
+      setHoveredIndex(hoverIndex);
 
-    // @ts-expect-error
-    const coords = localPoint(event.target.ownerSVGElement, event);
-    showTooltip({
-      tooltipLeft: coords?.x || 0,
-      tooltipTop: coords?.y || 0,
-      tooltipData,
-    });
-  }
+      // @ts-expect-error
+      const coords = localPoint(event.target.ownerSVGElement, event);
+      showTooltip({
+        tooltipLeft: coords?.x || 0,
+        tooltipTop: coords?.y || 0,
+        tooltipData,
+      });
+    },
+    [hideTooltip, showTooltip, isMounted]
+  );
 
   if (isEmpty(series)) {
     return null;

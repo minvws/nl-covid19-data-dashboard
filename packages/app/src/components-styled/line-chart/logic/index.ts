@@ -1,23 +1,20 @@
-import { isDefined, isPresent } from 'ts-is-present';
-import { assert } from '~/utils/assert';
+import { isPresent } from 'ts-is-present';
+import {
+  DateSpanValue,
+  DateValue,
+  getValuesInTimeframe,
+  isDateSeries,
+  isDateSpanSeries,
+  Value,
+} from '~/components-styled/stacked-chart/logic';
 import { getDaysForTimeframe, TimeframeOption } from '~/utils/timeframe';
-
-export type Value = DailyValue | WeeklyValue;
+export * from './background-rectangle';
 
 // This type limits the allowed property names to those with a number type,
 // so its like keyof T, but filtered down to only the appropriate properties.
 export type NumberProperty<T extends Value> = {
   [K in keyof T]: T[K] extends number | null ? K : never;
 }[keyof T];
-
-export type DailyValue = {
-  date_unix: number;
-};
-
-export type WeeklyValue = {
-  date_start_unix: number;
-  date_end_unix: number;
-};
 
 /**
  * To read an arbitrary value property from the passed in data, we need to cast
@@ -26,30 +23,6 @@ export type WeeklyValue = {
  */
 export type AnyValue = Record<string, number | null>;
 export type AnyFilteredValue = Record<string, number>;
-
-export function isDailyValue(timeSeries: Value[]): timeSeries is DailyValue[] {
-  const firstValue = (timeSeries as DailyValue[])[0];
-
-  assert(
-    isDefined(firstValue),
-    'Unable to determine timestamps if time series is empty'
-  );
-
-  return firstValue.date_unix !== undefined;
-}
-
-export function isWeeklyValue(
-  timeSeries: Value[]
-): timeSeries is WeeklyValue[] {
-  const firstValue = (timeSeries as WeeklyValue[])[0];
-
-  assert(
-    isDefined(firstValue),
-    'Unable to determine timestamps if time series is empty'
-  );
-
-  return firstValue.date_end_unix !== undefined;
-}
 
 /**
  * From all the defined values, extract the highest number so we know how to
@@ -90,11 +63,11 @@ export function getTimeframeValues(
 ) {
   const boundary = getTimeframeBoundaryUnix(timeframe);
 
-  if (isDailyValue(values)) {
+  if (isDateSeries(values)) {
     return values.filter((x) => x.date_unix >= boundary);
   }
 
-  if (isWeeklyValue(values)) {
+  if (isDateSpanSeries(values)) {
     return values.filter((x) => x.date_start_unix >= boundary);
   }
 
@@ -118,22 +91,29 @@ export type TrendValue = {
 
 const timestampToDate = (d: number) => new Date(d * 1000);
 
+type TrendData = (TrendValue & Value)[][];
+
 export function getTrendData<T extends Value>(
   values: T[],
-  valueKeys: NumberProperty<T>[],
+  metricProperties: string[],
   timeframe: TimeframeOption
-): (TrendValue & Value)[][] {
-  return valueKeys.map((key) => getSingleTrendData(values, key, timeframe));
+): TrendData {
+  const series = getValuesInTimeframe(values, timeframe);
+
+  const trendData = metricProperties.map(
+    (metricProperty) =>
+      (getSingleTrendData(series, metricProperty) as unknown) as (TrendValue &
+        Value)[]
+  );
+
+  return trendData;
 }
 
-export function getSingleTrendData<T extends Value>(
-  values: T[],
-  valueKey: NumberProperty<T>,
-  timeframe: TimeframeOption
-): (TrendValue & Value)[] {
-  const valuesInFrame = getTimeframeValues(values, timeframe);
-
-  if (valuesInFrame.length === 0) {
+export function getSingleTrendData(
+  values: DateValue[] | DateSpanValue[],
+  metricProperty: string
+): TrendValue[] {
+  if (values.length === 0) {
     /**
      * It could happen that you are using an old dataset and select last week as
      * a timeframe at which point the values will be empty. This would not
@@ -142,35 +122,39 @@ export function getSingleTrendData<T extends Value>(
     return [];
   }
 
-  if (isDailyValue(valuesInFrame)) {
-    return valuesInFrame
+  if (isDateSeries(values)) {
+    return values
       .map((x) => ({
         ...x,
         /**
          * Not sure why we need to cast to number if isPresent is used to filter
          * out the null values.
          */
-        __value: x[valueKey as keyof DailyValue],
+        __value: x[metricProperty as keyof DateValue],
         __date: timestampToDate(x.date_unix),
       }))
       .filter((x) => isPresent(x.__value));
   }
 
-  if (isWeeklyValue(valuesInFrame)) {
-    return valuesInFrame
+  if (isDateSpanSeries(values)) {
+    return values
       .map((x) => ({
         ...x,
         /**
          * Not sure why we need to cast to number if isPresent is used to filter
          * out the null values.
          */
-        __value: x[valueKey as keyof WeeklyValue],
-        __date: timestampToDate(x.date_start_unix),
+        __value: x[metricProperty as keyof DateSpanValue],
+        __date: timestampToDate(
+          /**
+           * Here we set the date to be in the middle of the timespan, so that
+           * the chart can render the points in the middle of each span.
+           */
+          x.date_start_unix + (x.date_end_unix - x.date_start_unix) / 2
+        ),
       }))
       .filter((x) => isPresent(x.__value));
   }
 
-  throw new Error(
-    `Incompatible timestamps are used in value ${valuesInFrame[0]}`
-  );
+  throw new Error(`Incompatible timestamps are used in value ${values[0]}`);
 }

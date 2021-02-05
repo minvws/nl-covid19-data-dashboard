@@ -28,6 +28,7 @@
     "tested_overall",
     "tested_per_age_group",
     "vaccine_delivery",
+    "vaccine_support",
     "vaccine_availability",
     "vaccine_availability_estimate",
     "vaccine_administered",
@@ -109,6 +110,9 @@
     },
     "elderly_at_home": {
       "$ref": "elderly_at_home.json"
+    },
+    "vaccine_support": {
+      "$ref": "vaccine_support.json"
     },
     "vaccine_delivery": {
       "$ref": "vaccine_delivery.json"

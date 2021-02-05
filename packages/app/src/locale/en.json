@@ -646,7 +646,8 @@
     },
     "tooltip": {
       "positive_tested_people": "{{totalPositiveTestedPeople}} in total",
-      "positive_tested_value": "{{totalPositiveValue}} per 100.000"
+      "positive_tested_value": "{{totalPositiveValue}} per 100.000",
+      "vaccinatie_bereidheid": ""
     },
     "niveau": "level",
     "clear_select_input": "Empty",
@@ -765,13 +766,7 @@
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": [
-      "0 to 20",
-      "20 to 40",
-      "40 to 60",
-      "60 to 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -1802,11 +1797,11 @@
       "text": "Read more in 'explanation of the data presented'"
     },
     "cbs_message": {
-      "title": "Mortality still elevated: 3,800 deaths in week 3",
+      "title": "Mortality slightly lower in week 4",
       "published_text": "Date of publication: Friday 4 December",
-      "message": "In week 3 (18 to 24 January 2021 inclusive), estimated mortality stood at 3,800. This is 450 deaths in excess of the expected number for this period. The number of deaths in week 2 stood at 3,810. Statistics Netherlands (CBS) reports this based on the provisional weekly figures on mortality. Since week 39 of 2020, weekly mortality has been higher than expected. During the second epidemic wave up to week 3 of 2021 inclusive, altogether nearly 64 thousand deaths were recorded. This is 9.3 thousand more than expected mortality in this period. The excess mortality is now higher than during the first wave of the coronavirus epidemic.",
+      "message": "In week 4 (25 to 31 January 2021 inclusive), estimated mortality stood at 3,750. This is over 300 deaths in excess of the expected number for this period. The number of deaths in week 3 stood at 3,823. Statistics Netherlands (CBS) reports this based on the provisional weekly figures on mortality. Since week 39 of 2020, weekly mortality has been higher than expected. During the second epidemic wave up to week 4 of 2021 inclusive, nearly 68 thousand deaths were recorded. This is 9.6 thousand more than the expected mortality in this period. Estimated mortality for week 4 is just within the range of expected mortality.",
       "link": {
-        "href": "https://www.cbs.nl/en-gb/news/2021/04/mortality-still-elevated-3-800-deaths-in-week-3",
+        "href": "https://www.cbs.nl/en-gb/news/2021/05/mortality-slightly-lower-in-week-4",
         "text": "Website CBS"
       }
     },
@@ -1967,7 +1962,8 @@
       "ziekenhuis_opnames": "This graph shows the progression in hospital admissions over time.",
       "rioolwater_meetwaarde": "This graph shows the most recent measured value of the average amount of virus particles per 100.000 residents, per sewage processing facility.",
       "verwachte_leveringen": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks.",
-      "vaccin_levering_en_prikken": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks."
+      "vaccin_levering_en_prikken": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks.",
+      "vaccinatie_draagvlak": ""
     }
   },
   "deceased_age_groups": {
@@ -2036,20 +2032,20 @@
       "difference": "",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "504951",
+          "total_vaccinated": "495535",
           "date_unix": "1612527321",
           "date_of_insertion_unix": "1612527321"
         }
       },
       "kpi_total": {
         "title": "Number of doses administered",
-        "value": "365933",
+        "value": "356517",
         "description": "",
         "date_of_report_unix": "1612527321",
         "date_of_insertion_unix": "1612527321",
         "administered": [
           {
-            "value": "279217",
+            "value": "269801",
             "description": "reported by GGD-GHOR",
             "report_date": "Reported number till 4 February"
           },
@@ -2080,13 +2076,13 @@
         "first_tab_title": "Calculated number",
         "second_tab_title": "Reported number",
         "tab_total_estimated": {
-          "value": "504951",
+          "value": "495535",
           "description": "",
           "date_of_report_unix": "1612527321",
           "date_of_insertion_unix": "1612527321",
           "administered": [
             {
-              "value": "279217",
+              "value": "269801",
               "description": "administered by GGDs",
               "report_date": "Reported number till 4 February"
             },
@@ -2173,6 +2169,10 @@
     "verwachte_leveringen": {
       "van_week_tot_week": "Week {{weekNumberFrom}} to week {{weekNumberTo}}",
       "van_week_tot_week_klein_scherm": "Week {{weekNumberFrom}} to week {{weekNumberTo}}"
+    },
+    "grafiek_draagvlak": {
+      "titel": "Draagvlak",
+      "omschrijving": "Deze grafiek toont het draagvlak voor vaccinaties in Nederland."
     }
   },
   "editorial_detail": {
