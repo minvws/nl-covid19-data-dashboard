@@ -5,7 +5,7 @@ import { formatDateFromMilliseconds } from '~/utils/formatDate';
 import { TrendValue } from '../logic';
 import { Value } from '~/components-styled/stacked-chart/logic';
 
-export const MARKER_MIN_WIDTH = 26;
+const MARKER_POINT_SIZE = 18;
 
 export type HoverPoint<T extends Value> = {
   data: T & TrendValue;
@@ -145,7 +145,7 @@ export function Marker<T extends Value>(props: MarkerProps<T>) {
         {data.map((d, index) => (
           <Point
             indicatorColor={d.color ?? colors.data.primary}
-            style={{ top: d.y - index * 18 }}
+            style={{ top: d.y - index * MARKER_POINT_SIZE }}
             key={d.y}
           />
         ))}
