@@ -20,27 +20,30 @@ export const topicalPageQuery = `{
         "asset": cover.asset->
       }
     }[0],
-    "highlight":*[_type=='topicalPage']{
+    "highlight": *[_type=='topicalPage'] {
       isArticle,
       isArticle == true => {
-        "article":highlightedArticle->{
+        "item":highlightedArticle->{
           "title":title.${targetLanguage},
-           slug,
-           "summary":summary.nl,
-           "cover": {
-              ...cover,
+          slug,
+          "summary":summary.${targetLanguage},
+          "cover": {
+            ...cover,
             "asset": cover.asset->
           }
         }
       },
       isArticle == false => {
-        "custom": {
+        "item": {
           "title":title.${targetLanguage},
           "summary":summary.${targetLanguage},
+          "link": {
+            "label":label.${targetLanguage},
+            href
+          },
           "cover": {
             ...cover,
-          "asset": cover.asset->,
-          href  
+            "asset": cover.asset->  
           }
         }
       }

@@ -18,7 +18,10 @@ import { FCWithLayout, getDefaultLayout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import { DataSitemap } from '~/domain/topical/data-sitemap';
 import { EditorialSummary } from '~/domain/topical/editorial-teaser';
-import { EditorialTile } from '~/domain/topical/editorial-tile';
+import {
+  EditorialTile,
+  CustomContentProps,
+} from '~/domain/topical/editorial-tile';
 import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
@@ -50,7 +53,10 @@ export const getStaticProps = createGetStaticProps(
   createGetContent<{
     articles: ArticleSummary[];
     editorial: EditorialSummary;
-    highlight: { article: ArticleSummary };
+    highlight: {
+      isArticle: boolean;
+      item: ArticleSummary | CustomContentProps;
+    };
   }>(topicalPageQuery)
 );
 
@@ -174,10 +180,10 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
               ]}
             />
 
-            {content.editorial && content.highlight?.article && (
+            {content.editorial && content.highlight && (
               <EditorialTile
                 editorial={content.editorial}
-                highlightedArticle={content.highlight.article}
+                highlightedContent={content.highlight}
               />
             )}
 

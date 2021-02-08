@@ -18,7 +18,10 @@ import { ArticleList } from '~/domain/topical/article-list';
 import { Search } from '~/domain/topical/components/search';
 import { DataSitemap } from '~/domain/topical/data-sitemap';
 import { EditorialSummary } from '~/domain/topical/editorial-teaser';
-import { EditorialTile } from '~/domain/topical/editorial-tile';
+import {
+  EditorialTile,
+  CustomContentProps,
+} from '~/domain/topical/editorial-tile';
 import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
@@ -51,7 +54,10 @@ export const getStaticProps = createGetStaticProps(
   createGetContent<{
     articles: ArticleSummary[];
     editorial: EditorialSummary;
-    highlight: { article: ArticleSummary };
+    highlight: {
+      isArticle: boolean;
+      item: ArticleSummary | CustomContentProps;
+    };
   }>(topicalPageQuery),
   () => {
     const data = getNlData();
@@ -79,8 +85,6 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
 
   const dataInfectedTotal = data.tested_overall;
   const dataHospitalIntake = data.hospital_nice;
-
-  console.log(content)
 
   return (
     <>

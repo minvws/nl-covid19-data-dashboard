@@ -6,7 +6,10 @@ export default {
     {
       name: 'isArticle',
       title: 'Laat uitgelicht artikel zien.',
-      type: 'boolean'
+      type: 'boolean',
+      initialValue: {
+        featured: true
+      }
     },
     {
       title: 'Uitgelicht artikel',
@@ -27,9 +30,14 @@ export default {
       title: 'Samenvatting',
     },
     {
-      name: 'href',
+      name: 'label',
       type: 'localeString',
-      title: 'Link',
+      title: 'Tekst label link'
+    },
+    {
+      name: 'href',
+      type: 'string',
+      title: 'Link naar pagina'
     },
     {
       title: 'Afbeelding',

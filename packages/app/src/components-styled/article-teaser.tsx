@@ -14,18 +14,23 @@ export type ArticleSummary = Pick<
   'title' | 'slug' | 'summary' | 'cover'
 >;
 
+type slug = {
+  current: string;
+};
+
 type ArticleTeaserProps = {
   title: string;
-  slug: string;
+  slug: string | slug;
   summary: Block;
   cover: ImageBlock;
+  label?: string;
 };
 
 export function ArticleTeaser(props: ArticleTeaserProps) {
-  const { title, slug, summary, cover } = props;
+  const { title, slug, summary, cover, label } = props;
 
   return (
-    <Link passHref href={`/artikelen/${slug}`}>
+    <Link passHref href={label ? `${slug}` : `/artikelen/${slug}`}>
       <StyledArticleTeaser>
         <CoverImage height={200} image={cover} />
         <Box padding={3}>
@@ -35,7 +40,7 @@ export function ArticleTeaser(props: ArticleTeaserProps) {
           <Text>{summary}</Text>
 
           <InlineText aria-hidden="true" fontWeight="bold" color="link">
-            {siteText.common.read_more}
+            {label ? label : siteText.common.read_more}
             <Arrow />
           </InlineText>
         </Box>

@@ -4,21 +4,32 @@ import {
 } from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
 import { useBreakpoints } from '~/utils/useBreakpoints';
-import { EditorialSummary, EditorialTeaser } from './editorial-teaser';
+import { EditorialSummary } from './editorial-teaser';
+import { Block, ImageBlock } from '~/types/cms';
+import { EditorialTeaser } from './editorial-teaser';
 
 type EditorialTileProps = {
   editorial: EditorialSummary;
-  highlightedArticle: ArticleSummary;
+  highlightedContent: {
+    isArticle: boolean;
+    item: ArticleSummary | CustomContentProps;
+  };
+};
+
+export type CustomContentProps = {
+  title: string;
+  summary: Block;
+  cover: ImageBlock;
+  link: {
+    href: string;
+    label: string;
+  };
 };
 
 export function EditorialTile(props: EditorialTileProps) {
   const { editorial, highlightedContent } = props;
   const breakpoints = useBreakpoints();
 
-  const content = highlightedContent.isArticle ? 
-    highlightedContent.article : 
-    highlightedContent.custom
-  
   return (
     <Box
       display="flex"
@@ -36,10 +47,19 @@ export function EditorialTile(props: EditorialTileProps) {
       </Box>
       <Box flex={{ lg: '1 1 33%' }}>
         <ArticleTeaser
-          cover={content.cover}
-          slug={highlightedContent.isArticle ? content.slug.current : content.href}
-          summary={content.summary}
-          title={content.title}
+          cover={highlightedContent.item.cover}
+          slug={
+            highlightedContent.isArticle
+              ? highlightedContent.item.slug.current
+              : highlightedContent.item.link.href
+          }
+          summary={highlightedContent.item.summary}
+          title={highlightedContent.item.title}
+          label={
+            highlightedContent.isArticle
+              ? null
+              : highlightedContent.item.link.label
+          }
         />
       </Box>
     </Box>
