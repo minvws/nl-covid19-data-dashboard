@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { RichContent } from '~/components-styled/cms/rich-content';
 import { MaxWidth } from '~/components-styled/max-width';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
-import siteText from '~/locale/index';
+import siteText, { targetLanguage } from '~/locale/index';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
@@ -21,20 +21,13 @@ const query = `
   ...,
   "description": {
     "_type": description._type,
-    "nl": [
-      ...description.nl[]
+    "${targetLanguage}": [
+      ...description.${targetLanguage}[]
       {
         ...,
         "asset": asset->
        },
-    ],
-    "en": [
-      ...description.en[]
-      {
-        ...,
-        "asset": asset->
-       },
-    ],
+    ]
   }
 }[0]
 `;

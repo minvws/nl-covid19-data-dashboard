@@ -18,7 +18,7 @@ export const createPositiveTestedPeopleRegionalTooltip = (
 
   const onSelect = (event: any) => {
     event.stopPropagation();
-    selectHandler(context);
+    selectHandler(context.vrcode);
   };
 
   return (

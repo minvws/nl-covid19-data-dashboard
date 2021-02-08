@@ -3,7 +3,7 @@ import { Box } from '~/components-styled/base';
 import { ContentBlock } from '~/components-styled/cms/content-block';
 import { RichContent } from '~/components-styled/cms/rich-content';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
-import siteText from '~/locale/index';
+import siteText, { targetLanguage } from '~/locale/index';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
@@ -24,8 +24,8 @@ export const getStaticProps = createGetStaticProps(
     "description": {
       ...,
       "_type": description._type,
-      "nl": [
-        ...description.nl[]{
+      "${targetLanguage}": [
+        ...description.${targetLanguage}[]{
           ...,
           "asset": asset->,
           markDefs[]{
@@ -33,19 +33,7 @@ export const getStaticProps = createGetStaticProps(
             "asset": asset->
           }
         }
-      ],
-      "en": [
-        ...description.en[]
-        {
-          ...,
-          "asset": asset->,
-          markDefs[]{
-            ...,
-            "asset": asset->
-          }
-        },
-      ],
-
+      ]
     }
   }[0]
 

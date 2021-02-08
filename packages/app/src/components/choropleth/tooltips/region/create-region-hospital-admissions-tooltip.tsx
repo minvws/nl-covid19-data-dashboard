@@ -15,7 +15,7 @@ export const createRegionHospitalAdmissionsTooltip = (
 ): ReactNode => {
   const onSelect = (event: any) => {
     event.stopPropagation();
-    selectHandler(context);
+    selectHandler(context.vrcode);
   };
 
   return (

@@ -15,6 +15,7 @@ import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import siteText from '~/locale/index';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import { LockdownData, RoadmapData } from '~/types/cms';
+import { targetLanguage } from '~/locale/index';
 
 import {
   getLastGeneratedDate,
@@ -41,20 +42,13 @@ const query = `
       ...message,
       "description": {
         ...message.description,
-        "nl": [
-          ...message.description.nl[]
+        "${targetLanguage}": [
+          ...message.description.${targetLanguage}[]
           {
             ...,
             "asset": asset->
           },
-        ],
-        "en": [
-          ...message.description.en[]
-          {
-            ...,
-            "asset": asset->
-          },
-        ],
+        ]
       },
     }
   }[0],
