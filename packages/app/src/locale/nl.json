@@ -2039,27 +2039,27 @@
       "difference": "Do not remove this key. It is required as a temporary workaround",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "568863",
+          "total_vaccinated": "571361",
           "date_unix": "1612788233",
           "date_of_insertion_unix": "1612788233"
         }
       },
       "kpi_total": {
         "title": "Aantal gezette prikken",
-        "value": "414198",
+        "value": "414858",
         "description": "",
         "date_of_report_unix": "1612788233",
         "date_of_insertion_unix": "1612788233",
         "administered": [
           {
-            "value": "320982",
+            "value": "321042",
             "description": "gemeld door GGD-GHOR",
-            "report_date": "Gemeld aantal tot en met 6 februari"
+            "report_date": "Gemeld aantal tot en met 7 februari"
           },
           {
-            "value": "93216",
+            "value": "93816",
             "description": "gemeld door LNAZ",
-            "report_date": "Gemeld aantal tot en met 6 februari"
+            "report_date": "Gemeld aantal tot en met 7 februari"
           },
           {
             "value": "",
@@ -2083,25 +2083,25 @@
         "first_tab_title": "Berekend aantal",
         "second_tab_title": "Gemeld aantal",
         "tab_total_estimated": {
-          "value": "568863",
+          "value": "571361",
           "description": "",
           "date_of_report_unix": "1612788233",
           "date_of_insertion_unix": "1612788233",
           "administered": [
             {
-              "value": "320982",
+              "value": "321042",
               "description": "gezet door GGD'en",
-              "report_date": "Gemeld aantal tot en met 6 februari"
+              "report_date": "Gemeld aantal tot en met 7 februari"
             },
             {
-              "value": "93216",
+              "value": "93816",
               "description": "gezet in ziekenhuizen",
-              "report_date": "Gemeld aantal tot en met 6 februari"
+              "report_date": "Gemeld aantal tot en met 7 februari"
             },
             {
-              "value": "154665",
+              "value": "156503",
               "description": "gezet in langdurige zorginstellingen",
-              "report_date": "Berekend aantal tot en met 6 februari"
+              "report_date": "Berekend aantal tot en met 7 februari"
             },
             {
               "value": "",
