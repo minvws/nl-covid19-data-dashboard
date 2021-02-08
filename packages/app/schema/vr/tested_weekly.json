@@ -23,13 +23,13 @@
       "required": [
         "date_start_unix",
         "date_end_unix",
-        "infected_moving_average_per_100k",
+        "infected_per_100k",
         "date_of_insertion_unix"
       ],
       "properties": {
         "date_start_unix": { "type": "integer" },
         "date_end_unix": { "type": "integer" },
-        "infected_moving_average_per_100k": { "type": "number" },
+        "infected_per_100k": { "type": "number" },
         "date_of_insertion_unix": { "type": "integer" }
       }
     }

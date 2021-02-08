@@ -21,13 +21,13 @@
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "admissions_moving_average_per_1m",
+        "admissions_per_1m",
         "date_start_unix",
         "date_end_unix",
         "date_of_insertion_unix"
       ],
       "properties": {
-        "admissions_moving_average_per_1m": { "type": "integer" },
+        "admissions_per_1m": { "type": "integer" },
         "date_start_unix": { "type": "integer" },
         "date_end_unix": { "type": "integer" },
         "date_of_insertion_unix": { "type": "integer" }

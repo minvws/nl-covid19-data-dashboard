@@ -677,7 +677,7 @@ export interface VrTestedWeekly {
 export interface VrTestedWeeklyValue {
   date_start_unix: number;
   date_end_unix: number;
-  infected_moving_average_per_100k: number;
+  infected_per_100k: number;
   date_of_insertion_unix: number;
 }
 export interface VrHospitalWeekly {
@@ -685,7 +685,7 @@ export interface VrHospitalWeekly {
   last_value: VrHospitalWeeklyValue;
 }
 export interface VrHospitalWeeklyValue {
-  admissions_moving_average_per_1m: number;
+  admissions_per_1m: number;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
