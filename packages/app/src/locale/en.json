@@ -766,7 +766,13 @@
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -1963,7 +1969,7 @@
       "rioolwater_meetwaarde": "This graph shows the most recent measured value of the average amount of virus particles per 100.000 residents, per sewage processing facility.",
       "verwachte_leveringen": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks.",
       "vaccin_levering_en_prikken": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks.",
-      "vaccinatie_draagvlak": ""
+      "vaccinatie_draagvlak": "This graph shows the percentage of the population that wishes to be vaccinated against COVID-19."
     }
   },
   "deceased_age_groups": {
@@ -1995,8 +2001,8 @@
     "title": "COVID-19 vaccinations",
     "description": "Vaccination is the most important step towards getting life back to normal. The Netherlands began vaccinating people against COVID-19 on 6 January 2021. Eventually, the vaccine will be offered to everyone aged 18 and over. This page shows how many doses of vaccine have been administered and how many doses are on their way.",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "date_unix": "1612527321",
-    "date_of_insertion_unix": "1612527321",
+    "date_unix": "1612700202",
+    "date_of_insertion_unix": "1612700202",
     "reference": {
       "href": "/verantwoording#vaccination",
       "text": "Read more about the source of the data on vaccination in the explanation of the presented data."
@@ -2032,27 +2038,27 @@
       "difference": "",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "495535",
-          "date_unix": "1612527321",
-          "date_of_insertion_unix": "1612527321"
+          "total_vaccinated": "568863",
+          "date_unix": "1612700202",
+          "date_of_insertion_unix": "1612700202"
         }
       },
       "kpi_total": {
         "title": "Number of doses administered",
-        "value": "356517",
+        "value": "414198",
         "description": "",
-        "date_of_report_unix": "1612527321",
-        "date_of_insertion_unix": "1612527321",
+        "date_of_report_unix": "1612700202",
+        "date_of_insertion_unix": "1612700202",
         "administered": [
           {
-            "value": "269801",
+            "value": "320982",
             "description": "reported by GGD-GHOR",
-            "report_date": "Reported number till 4 February"
+            "report_date": "Reported number till 6 February"
           },
           {
-            "value": "86716",
+            "value": "93216",
             "description": "reported by LNAZ",
-            "report_date": "Reported number till 4 February"
+            "report_date": "Reported number till 6 February"
           },
           {
             "value": "",
@@ -2076,25 +2082,25 @@
         "first_tab_title": "Calculated number",
         "second_tab_title": "Reported number",
         "tab_total_estimated": {
-          "value": "495535",
+          "value": "568863",
           "description": "",
-          "date_of_report_unix": "1612527321",
-          "date_of_insertion_unix": "1612527321",
+          "date_of_report_unix": "1612700202",
+          "date_of_insertion_unix": "1612700202",
           "administered": [
             {
-              "value": "269801",
+              "value": "320982",
               "description": "administered by GGDs",
-              "report_date": "Reported number till 4 February"
+              "report_date": "Reported number till 6 February"
             },
             {
-              "value": "86716",
+              "value": "93216",
               "description": "administered in hospitals",
-              "report_date": "Reported number till 4 February"
+              "report_date": "Reported number till 6 February"
             },
             {
-              "value": "139018",
+              "value": "154665",
               "description": "administered in long-term care institutions",
-              "report_date": "Calculated number till 4 February"
+              "report_date": "Calculated number till 6 February"
             },
             {
               "value": "",
@@ -2171,8 +2177,8 @@
       "van_week_tot_week_klein_scherm": "Week {{weekNumberFrom}} to week {{weekNumberTo}}"
     },
     "grafiek_draagvlak": {
-      "titel": "Draagvlak",
-      "omschrijving": "Deze grafiek toont het draagvlak voor vaccinaties in Nederland."
+      "titel": "Willingness to be vaccinated",
+      "omschrijving": "This graph shows the percentage of the population that wishes to be vaccinated against COVID-19. The figure is taken from a survey where people are asked if they wish to be vaccinated. The survey is conducted every three weeks."
     }
   },
   "editorial_detail": {
@@ -2219,9 +2225,9 @@
       },
       "toegediende_vaccins": {
         "title": "Number of doses administered",
-        "sub_title": "Vaccines to be delivered",
+        "sub_title": "",
         "administered_tests": "{{administeredVaccines}} vaccine doses have been administered so far. This number includes both first and second doses.",
-        "supply": "The Netherlands expects tot receive {{expectedDelivery}} approved vaccine doses over the next six weeks."
+        "supply": ""
       }
     },
     "data_driven_texts": {

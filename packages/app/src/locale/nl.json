@@ -1969,7 +1969,7 @@
       "rioolwater_meetwaarde": "Deze grafiek toont de meest recente meetwaarde van het gemiddeld aantal virusdeeltjes per 100.000 inwoners, per rioolwaterzuiveringslocatie.",
       "verwachte_leveringen": "Het linkerdeel van de grafiek laat zien hoeveel vaccins Nederland in totaal heeft gekregen en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal verwachten te krijgen en hoeveel prikken we verwachten te zetten.",
       "vaccin_levering_en_prikken": "Het linkerdeel van de grafiek laat zien hoeveel vaccins Nederland in totaal heeft gekregen en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal verwachten te krijgen en hoeveel prikken we verwachten te zetten.",
-      "vaccinatie_draagvlak": "Deze grafiek toont het draagvlak voor vaccinaties."
+      "vaccinatie_draagvlak": "Deze grafiek toont hoeveel procent van de bevolking zelf een prik tegen corona wil hebben."
     }
   },
   "deceased_age_groups": {
@@ -2001,8 +2001,8 @@
     "title": "COVID-19-vaccinaties",
     "description": "Vaccineren is de belangrijkste stap naar een samenleving zonder coronaregels. Op 6 januari 2021 is Nederland begonnen met vaccineren. Uiteindelijk komt iedereen van 18 jaar of ouder aan de beurt. De cijfers op deze pagina laten zien hoeveel prikken zijn gezet en hoeveel vaccins er beschikbaar komen.",
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "date_unix": "1612527321",
-    "date_of_insertion_unix": "1612527321",
+    "date_unix": "1612700202",
+    "date_of_insertion_unix": "1612700202",
     "reference": {
       "href": "/verantwoording#vaccinatie",
       "text": "Lees meer over de bron van de vaccinatiecijfers in de cijferverantwoording."
@@ -2038,27 +2038,27 @@
       "difference": "Do not remove this key. It is required as a temporary workaround",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "495535",
-          "date_unix": "1612527321",
-          "date_of_insertion_unix": "1612527321"
+          "total_vaccinated": "568863",
+          "date_unix": "1612700202",
+          "date_of_insertion_unix": "1612700202"
         }
       },
       "kpi_total": {
         "title": "Aantal gezette prikken",
-        "value": "356517",
+        "value": "414198",
         "description": "",
-        "date_of_report_unix": "1612527321",
-        "date_of_insertion_unix": "1612527321",
+        "date_of_report_unix": "1612700202",
+        "date_of_insertion_unix": "1612700202",
         "administered": [
           {
-            "value": "269801",
+            "value": "320982",
             "description": "gemeld door GGD-GHOR",
-            "report_date": "Gemeld aantal tot en met 4 februari"
+            "report_date": "Gemeld aantal tot en met 6 februari"
           },
           {
-            "value": "86716",
+            "value": "93216",
             "description": "gemeld door LNAZ",
-            "report_date": "Gemeld aantal tot en met 4 februari"
+            "report_date": "Gemeld aantal tot en met 6 februari"
           },
           {
             "value": "",
@@ -2082,25 +2082,25 @@
         "first_tab_title": "Berekend aantal",
         "second_tab_title": "Gemeld aantal",
         "tab_total_estimated": {
-          "value": "495535",
+          "value": "568863",
           "description": "",
-          "date_of_report_unix": "1612527321",
-          "date_of_insertion_unix": "1612527321",
+          "date_of_report_unix": "1612700202",
+          "date_of_insertion_unix": "1612700202",
           "administered": [
             {
-              "value": "269801",
+              "value": "320982",
               "description": "gezet door GGD'en",
-              "report_date": "Gemeld aantal tot en met 4 februari"
+              "report_date": "Gemeld aantal tot en met 6 februari"
             },
             {
-              "value": "86716",
+              "value": "93216",
               "description": "gezet in ziekenhuizen",
-              "report_date": "Gemeld aantal tot en met 4 februari"
+              "report_date": "Gemeld aantal tot en met 6 februari"
             },
             {
-              "value": "139018",
+              "value": "154665",
               "description": "gezet in langdurige zorginstellingen",
-              "report_date": "Berekend aantal tot en met 4 februari"
+              "report_date": "Berekend aantal tot en met 6 februari"
             },
             {
               "value": "",
@@ -2177,8 +2177,8 @@
       "van_week_tot_week_klein_scherm": "Week {{weekNumberFrom}} tot {{weekNumberTo}}"
     },
     "grafiek_draagvlak": {
-      "titel": "Draagvlak",
-      "omschrijving": "Deze grafiek toont het draagvlak voor vaccinaties in Nederland."
+      "titel": "Vaccinatiebereidheid",
+      "omschrijving": "Deze grafiek toont hoeveel procent van de bevolking zelf een prik tegen corona wil hebben. Het cijfer komt voort uit onderzoek waarin wordt gevraagd of mensen een prik willen krijgen. Het onderzoek wordt elke drie weken herhaald."
     }
   },
   "editorial_detail": {
@@ -2225,9 +2225,9 @@
       },
       "toegediende_vaccins": {
         "title": "Aantal gezette prikken",
-        "sub_title": "Verwachte levering",
+        "sub_title": "",
         "administered_tests": "Tot nu toe zijn er {{administeredVaccines}} prikken gezet. Dit cijfer omvat zowel eerste als tweede prikken.",
-        "supply": "Nederland verwacht de komende zes weken {{expectedDelivery}} goedgekeurde vaccins te krijgen."
+        "supply": ""
       }
     },
     "data_driven_texts": {
