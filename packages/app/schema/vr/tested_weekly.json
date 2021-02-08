@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
-  "title": "vr_tested_escalation_level",
+  "title": "vr_tested_weekly",
   "required": ["values", "last_value"],
   "additionalProperties": false,
   "properties": {
@@ -17,7 +17,7 @@
   },
   "definitions": {
     "value": {
-      "title": "vr_tested_escalation_level_value",
+      "title": "vr_tested_weekly_value",
       "type": "object",
       "additionalProperties": false,
       "required": [

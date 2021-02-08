@@ -19,7 +19,10 @@
     "deceased_cbs",
     "elderly_at_home",
     "disability_care",
-    "behavior"
+    "behavior",
+    "escalation_level",
+    "tested_weekly",
+    "hospital_weekly"
   ],
   "additionalProperties": false,
   "properties": {
@@ -80,11 +83,11 @@
     "escalation_level": {
       "$ref": "escalation_level.json"
     },
-    "tested_escalation_level": {
-      "$ref": "tested_escalation_level.json"
+    "tested_weekly": {
+      "$ref": "tested_weekly.json"
     },
-    "hospital_escalation_level": {
-      "$ref": "hospital_escalation_level.json"
+    "hospital_weekly": {
+      "$ref": "hospital_weekly.json"
     }
   }
 }

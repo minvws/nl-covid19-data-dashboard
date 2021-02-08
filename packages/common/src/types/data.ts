@@ -455,9 +455,9 @@ export interface Regionaal {
   deceased_rivm: RegionalDeceasedRivm;
   deceased_cbs: RegionalDeceasedCbs;
   elderly_at_home: RegionalElderlyAtHome;
-  escalation_level?: VrEscalationLevel;
-  tested_escalation_level?: VrTestedEscalationLevel;
-  hospital_escalation_level?: VrHospitalEscalationLevel;
+  escalation_level: VrEscalationLevel;
+  tested_weekly: VrTestedWeekly;
+  hospital_weekly: VrHospitalWeekly;
 }
 export interface RegionalDifference {
   tested_overall__infected_per_100k: DifferenceDecimal;
@@ -670,21 +670,21 @@ export interface VrEscalationLevelValue {
   valid_from_unix: number;
   date_of_insertion_unix: number;
 }
-export interface VrTestedEscalationLevel {
-  values: VrTestedEscalationLevelValue[];
-  last_value: VrTestedEscalationLevelValue;
+export interface VrTestedWeekly {
+  values: VrTestedWeeklyValue[];
+  last_value: VrTestedWeeklyValue;
 }
-export interface VrTestedEscalationLevelValue {
+export interface VrTestedWeeklyValue {
   date_start_unix: number;
   date_end_unix: number;
   infected_moving_average_per_100k: number;
   date_of_insertion_unix: number;
 }
-export interface VrHospitalEscalationLevel {
-  values: VrHospitalEscalationLevelValue[];
-  last_value: VrHospitalEscalationLevelValue;
+export interface VrHospitalWeekly {
+  values: VrHospitalWeeklyValue[];
+  last_value: VrHospitalWeeklyValue;
 }
-export interface VrHospitalEscalationLevelValue {
+export interface VrHospitalWeeklyValue {
   admissions_moving_average_per_1m: number;
   date_start_unix: number;
   date_end_unix: number;
