@@ -1,7 +1,7 @@
 {
   "definitions": {
     "value": {
-      "title": "nl_vaccine_availability_estimate_value",
+      "title": "nl_vaccine_delivery_estimate_value",
       "type": "object",
       "required": [
         "pfizer",
@@ -10,7 +10,6 @@
         "cure_vac",
         "janssen",
         "sanofi",
-        "total",
         "date_of_insertion_unix",
         "date_start_unix",
         "date_end_unix"
@@ -35,9 +34,6 @@
         "sanofi": {
           "type": "number"
         },
-        "total": {
-          "type": "number"
-        },
         "date_of_insertion_unix": {
           "type": "integer"
         },
@@ -51,7 +47,7 @@
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_vaccine_availability_estimate",
+  "title": "nl_vaccine_estimate_delivery",
   "type": "object",
   "required": ["values", "last_value"],
   "additionalProperties": false,
