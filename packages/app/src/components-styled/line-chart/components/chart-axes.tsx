@@ -8,7 +8,7 @@ import { ScaleLinear, ScaleTime } from 'd3-scale';
 import { ComponentProps, memo, MouseEvent, ReactNode, TouchEvent } from 'react';
 import { colors } from '~/style/theme';
 
-const NUM_TICKS = 3;
+const NUM_TICKS = 4;
 
 export type ChartPadding = {
   top: number;
@@ -162,7 +162,7 @@ export const ChartAxes = memo(function ChartAxes({
             type: 'AxisLeft',
             props: {
               scale: yScale,
-              numTicks: 4,
+              numTicks: NUM_TICKS,
               hideTicks: true,
               hideAxisLine: true,
               stroke: defaultColors.axis,
