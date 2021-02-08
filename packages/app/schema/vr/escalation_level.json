@@ -4,14 +4,14 @@
   "title": "vr_escalation_level",
   "required": [
     "date_unix",
-    "escalation_level",
+    "level",
     "valid_from_unix",
     "date_of_insertion_unix"
   ],
   "additionalProperties": false,
   "properties": {
     "date_unix": { "type": "integer" },
-    "escalation_level": {
+    "level": {
       "type": "number",
       "minimum": 1,
       "maximum": 4

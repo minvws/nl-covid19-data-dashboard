@@ -662,7 +662,7 @@ export interface RegionalElderlyAtHomeValue {
 }
 export interface VrEscalationLevel {
   date_unix: number;
-  escalation_level: number;
+  level: number;
   valid_from_unix: number;
   date_of_insertion_unix: number;
 }
