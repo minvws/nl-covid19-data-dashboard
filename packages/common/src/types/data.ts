@@ -661,10 +661,6 @@ export interface RegionalElderlyAtHomeValue {
   vrcode: string;
 }
 export interface VrEscalationLevel {
-  values: VrEscalationLevelValue[];
-  last_value: VrEscalationLevelValue;
-}
-export interface VrEscalationLevelValue {
   date_unix: number;
   escalation_level: number;
   valid_from_unix: number;
