@@ -2039,27 +2039,27 @@
       "difference": "",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "568863",
+          "total_vaccinated": "571361",
           "date_unix": "1612788233",
           "date_of_insertion_unix": "1612788233"
         }
       },
       "kpi_total": {
         "title": "Number of doses administered",
-        "value": "414198",
+        "value": "414858",
         "description": "",
         "date_of_report_unix": "1612788233",
         "date_of_insertion_unix": "1612788233",
         "administered": [
           {
-            "value": "320982",
+            "value": "321042",
             "description": "reported by GGD-GHOR",
-            "report_date": "Reported number till 6 February"
+            "report_date": "Reported number till 7 February"
           },
           {
-            "value": "93216",
+            "value": "93816",
             "description": "reported by LNAZ",
-            "report_date": "Reported number till 6 February"
+            "report_date": "Reported number till 7 February"
           },
           {
             "value": "",
@@ -2083,25 +2083,25 @@
         "first_tab_title": "Calculated number",
         "second_tab_title": "Reported number",
         "tab_total_estimated": {
-          "value": "568863",
+          "value": "571361",
           "description": "",
           "date_of_report_unix": "1612788233",
           "date_of_insertion_unix": "1612788233",
           "administered": [
             {
-              "value": "320982",
+              "value": "321042",
               "description": "administered by GGDs",
-              "report_date": "Reported number till 6 February"
+              "report_date": "Reported number till 7 February"
             },
             {
-              "value": "93216",
+              "value": "93816",
               "description": "administered in hospitals",
-              "report_date": "Reported number till 6 February"
+              "report_date": "Reported number till 7 February"
             },
             {
-              "value": "154665",
+              "value": "156503",
               "description": "administered in long-term care institutions",
-              "report_date": "Calculated number till 6 February"
+              "report_date": "Calculated number till 7 February"
             },
             {
               "value": "",
