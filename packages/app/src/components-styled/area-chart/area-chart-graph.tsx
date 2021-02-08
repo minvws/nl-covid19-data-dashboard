@@ -10,9 +10,10 @@ import { LineConfig } from '../line-chart';
 import { ChartBounds, ChartPadding } from '../line-chart/components';
 import { AnyTickFormatter } from '../line-chart/components/chart-axes';
 import { SingleTrendData, TrendData } from '../line-chart/logic';
+import { Value } from '../stacked-chart/logic';
 
-export type AreaConfig = {
-  metricProperty: string;
+export type AreaConfig<T> = {
+  metricProperty: keyof T;
   color?: string;
   pattern?: 'hatched' | 'none';
   strokeWidth?: number;
@@ -26,11 +27,11 @@ const defaultColors = {
   benchmark: colors.data.benchmark,
 };
 
-type AreaChartGraphProps = {
+type AreaChartGraphProps<T extends Value> = {
   trendValues: TrendData;
-  lineConfigs: LineConfig[];
+  lineConfigs: LineConfig<T>[];
   areaValues: SingleTrendData;
-  areaConfig: Record<string, AreaConfig>;
+  areaConfig: Record<string, AreaConfig<T>>;
   bounds: ChartBounds;
   padding: ChartPadding;
   scales: {
@@ -42,7 +43,7 @@ type AreaChartGraphProps = {
   formatYAxis: TickFormatter<number>;
 };
 
-export function AreaChartGraph(props: AreaChartGraphProps) {
+export function AreaChartGraph<T extends Value>(props: AreaChartGraphProps<T>) {
   const {
     areaValues,
     areaConfig,

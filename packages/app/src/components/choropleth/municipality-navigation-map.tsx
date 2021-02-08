@@ -9,7 +9,7 @@ import { HoverPath, Path } from './path';
 import { countryGeo, municipalGeo } from './topology';
 
 type MunicipalityNavigationMapProps<T> = {
-  onSelect?: (context: MunicipalityProperties) => void;
+  onSelect?: (gmcode: string) => void;
   tooltipContent?: (
     context: MunicipalityProperties & { value: T }
   ) => ReactNode;
@@ -70,7 +70,7 @@ export function MunicipalityNavigationMap<T>(
   const onClick = (id: string) => {
     if (onSelect) {
       const data = getChoroplethValue(id);
-      onSelect(data as any);
+      onSelect(data.gmcode);
     }
   };
 

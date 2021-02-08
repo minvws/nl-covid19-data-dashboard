@@ -2,18 +2,22 @@ import { formatNumber, formatPercentage } from '@corona-dashboard/common';
 import { scaleLinear, scaleTime } from '@visx/scale';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
+import { LineConfig } from '~/components-styled/line-chart';
+import {
+  ChartBounds,
+  ChartPadding,
+} from '~/components-styled/line-chart/components';
+import { useChartPadding } from '~/components-styled/line-chart/hooks/use-chart-padding';
+import { useDomains } from '~/components-styled/line-chart/hooks/use-domains';
+import { Value } from '~/components-styled/stacked-chart/logic';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { TimeframeOption } from '~/utils/timeframe';
+import { isArrayOfArrays } from '~/utils/typeguards/is-array-of-arrays';
 import { useBreakpoints } from '~/utils/useBreakpoints';
-import { LineConfig } from '../line-chart';
-import { ChartBounds, ChartPadding } from '../line-chart/components';
-import { useChartPadding } from '../line-chart/hooks/use-chart-padding';
-import { useDomains } from '../line-chart/hooks/use-domains';
-import { useTrendValues } from '../line-chart/hooks/use-trend-values';
-import { Value } from '../stacked-chart/logic';
 import { AreaChartGraph, AreaConfig } from './area-chart-graph';
 import { useAreaValues } from './hooks/use-area-values';
+import { useTrendValues } from './hooks/use-trend-values';
 
 const NUM_TICKS = 3;
 
@@ -26,12 +30,12 @@ const defaultPadding: ChartPadding = {
 
 type AreaChartProps<T extends Value, K extends Value> = {
   width: number;
-  lineValues?: T[];
-  areaValues: K[];
-  areaConfigs: AreaConfig[];
-  lineConfigs?: LineConfig[];
+  trendValues?: T[] | T[][];
+  areaValues: K[] | K[][];
+  areaConfigs: AreaConfig<K>[] | AreaConfig<K>[][];
+  trendConfigs?: LineConfig<T>[] | LineConfig<T>[][];
   valueAnnotation?: string;
-  timeframe: TimeframeOption;
+  timeframe?: TimeframeOption;
   padding?: Partial<ChartPadding>;
   signaalwaarde?: number;
   isPercentage?: boolean;
@@ -49,31 +53,37 @@ export function AreaChart<T extends Value, K extends Value>(
   const {
     width,
     valueAnnotation,
-    lineValues = [],
+    trendValues = [],
     areaValues,
-    lineConfigs = [],
+    trendConfigs = [],
     areaConfigs,
-    timeframe,
+    timeframe = 'all',
     padding: overridePadding,
     signaalwaarde,
     isPercentage = false,
   } = props;
   const breakpoints = useBreakpoints();
-  const trendValues = useTrendValues(lineValues, lineConfigs, timeframe);
+  const filteredTrendValues = useTrendValues(
+    trendValues,
+    trendConfigs,
+    timeframe
+  );
   const filteredAreaValues = useAreaValues(areaValues, areaConfigs, timeframe);
 
   const isExtraSmallScreen = !breakpoints.sm;
   const height = isExtraSmallScreen ? 200 : 400;
 
-  const areaConfig = areaConfigs.reduce<Record<string, AreaConfig>>(
-    (aggr, item) => {
-      aggr[item.metricProperty] = item;
+  const listOfAreaConfigs = isArrayOfArrays(areaConfigs)
+    ? areaConfigs
+    : [areaConfigs];
+  const areaConfig = listOfAreaConfigs.map((x) =>
+    x.reduce<Record<string, AreaConfig<T>>>((aggr, item) => {
+      (aggr as any)[item.metricProperty] = item;
       return aggr;
-    },
-    {}
+    }, {})
   );
 
-  const allValues = [...trendValues, filteredAreaValues];
+  const allValues = [...filteredTrendValues.flat(), ...filteredAreaValues];
 
   const [xDomain, yDomain, seriesMax] = useDomains(allValues, signaalwaarde);
 
@@ -108,8 +118,8 @@ export function AreaChart<T extends Value, K extends Value>(
       )}
 
       <AreaChartGraph
-        trendValues={trendValues}
-        lineConfigs={lineConfigs}
+        trendValues={filteredTrendValues}
+        lineConfigs={trendConfigs}
         areaValues={filteredAreaValues}
         areaConfig={areaConfig}
         bounds={bounds}

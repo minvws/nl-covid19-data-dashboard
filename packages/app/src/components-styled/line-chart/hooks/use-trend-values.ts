@@ -5,7 +5,7 @@ import { TimeframeOption } from '~/utils/timeframe';
 
 export function useTrendValues<T extends Value>(
   values: T[],
-  configs: { metricProperty: string }[],
+  configs: { metricProperty: keyof T }[],
   timeframe: TimeframeOption
 ): TrendData {
   const metricProperties = useMemo(() => configs.map((x) => x.metricProperty), [

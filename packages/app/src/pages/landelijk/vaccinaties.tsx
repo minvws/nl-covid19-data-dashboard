@@ -1,23 +1,28 @@
+// import { NlVaccineSupportValue } from '@corona-dashboard/common';
 import { css } from '@styled-system/css';
 import { ParentSize } from '@visx/responsive';
 import { Fragment, useState } from 'react';
 import VaccinatieIcon from '~/assets/vaccinaties.svg';
+import VaccinesAdministeredChartEn from '~/assets/vaccines_administered_chart_en.svg';
+import VaccinesAdministeredChartNl from '~/assets/vaccines_administered_chart_nl.svg';
 import { AreaChart } from '~/components-styled/area-chart';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
+import { AspectRatio } from '~/components-styled/aspect-ratio';
 import { Box } from '~/components-styled/base';
 import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
+import { LineChart } from '~/components-styled/line-chart/line-chart';
 import { RadioGroup } from '~/components-styled/radio-group';
 import { SEOHead } from '~/components-styled/seo-head';
-import { StackedChart } from '~/components-styled/stacked-chart';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { InlineText, Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
+import { targetLanguage } from '~/locale/index';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
@@ -27,7 +32,9 @@ import {
   getText,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
+import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -39,9 +46,9 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
-  data,
   text: siteText,
   content,
+  data,
 }) => {
   const text = siteText.vaccinaties;
   const [selectedTab, setSelectedTab] = useState(
@@ -220,6 +227,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
           }}
         >
           <Box>
+            {' '}
             <ParentSize>
               {({ width }) => (
                 <AreaChart
@@ -240,53 +248,85 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
 
         <ChartTile
           title={text.grafiek.titel}
-          description={text.grafiek.omschrijving}
+          description={
+            <div
+              dangerouslySetInnerHTML={{
+                __html: text.grafiek.omschrijving,
+              }}
+            />
+          }
           ariaDescription={
-            siteText.accessibility.grafieken.verwachte_leveringen
+            siteText.accessibility.grafieken.vaccin_levering_en_prikken
           }
           metadata={{
-            date: 1611593522,
+            date: 1612375710,
+            source: text.bronnen.rivm,
+          }}
+        >
+          {/**
+           * Aspect ratio was determined by the original SVG width/height which is now set to be 100% each.
+           */}
+          <AspectRatio ratio={1.8325}>
+            {targetLanguage === 'nl' ? (
+              <VaccinesAdministeredChartNl />
+            ) : (
+              <VaccinesAdministeredChartEn />
+            )}
+          </AspectRatio>
+        </ChartTile>
+
+        <ChartTile
+          title={text.grafiek_draagvlak.titel}
+          description={text.grafiek_draagvlak.omschrijving}
+          ariaDescription={
+            siteText.accessibility.grafieken.vaccinatie_draagvlak
+          }
+          metadata={{
+            date: data.vaccine_support.last_value.date_of_insertion_unix,
             source: text.bronnen.rivm,
           }}
         >
           <ParentSize>
             {({ width }) => (
-              <StackedChart
+              <LineChart
+                timeframe="all"
                 width={width}
-                valueAnnotation={siteText.waarde_annotaties.x_100k}
-                values={data.vaccine_delivery.values}
-                config={[
-                  {
-                    metricProperty: 'pfizer',
-                    color: '#007BC7',
-                    legendLabel: 'BioNTech/Pfizer',
-                  },
-                  {
-                    metricProperty: 'moderna',
-                    color: '#00BBB5',
-                    legendLabel: 'Moderna',
-                  },
-                ]}
+                ariaLabelledBy="chart_vaccine_support"
+                values={data.vaccine_support.values}
+                linesConfig={[{ metricProperty: 'percentage_in_favor' }]}
+                formatTooltip={(values) => {
+                  const value = values[0];
+                  const dateStartString = formatDateFromSeconds(
+                    value.date_start_unix
+                  );
+                  const dateEndString = formatDateFromSeconds(
+                    value.date_end_unix
+                  );
+                  return (
+                    <Text m={0}>
+                      <span style={{ fontWeight: 'bold' }}>
+                        {`${dateStartString} - ${dateEndString}`}
+                      </span>
+                      <br />
+
+                      {replaceVariablesInText(
+                        siteText.common.tooltip.vaccinatie_bereidheid,
+                        {
+                          percentageInFavor: value.__value,
+                        }
+                      )}
+                    </Text>
+                  );
+                }}
+                formatYAxis={(x) => `${x}%`}
+                seriesMax={100}
+                padding={{ left: 36 }}
               />
             )}
           </ParentSize>
         </ChartTile>
 
         <TwoKpiSection>
-          <KpiTile
-            title={text.data.kpi_expected_delivery.title}
-            metadata={{
-              date: parseFloat(
-                text.data.kpi_expected_delivery.date_of_report_unix
-              ),
-              source: text.bronnen.all_right,
-            }}
-          >
-            <KpiValue
-              absolute={parseFloat(text.data.kpi_expected_delivery.value)}
-            />
-            <Text mb={4}>{text.data.kpi_expected_delivery.description}</Text>
-          </KpiTile>
           <KpiTile title={text.data.kpi_expected_page_additions.title}>
             <Text mb={4}>
               {text.data.kpi_expected_page_additions.description}

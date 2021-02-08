@@ -19,6 +19,8 @@ import { Municipal } from '@corona-dashboard/common';
 import { getSafetyRegionForMunicipalityCode } from '~/utils/getSafetyRegionForMunicipalityCode';
 import { Link } from '~/utils/link';
 import { MunicipalityComboBox } from './components/municipality-combo-box';
+import { useBreakpoints } from '~/utils/useBreakpoints';
+import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 
 interface MunicipalityLayoutProps {
   lastGenerated: string;
@@ -58,6 +60,9 @@ export function getMunicipalityLayout() {
  */
 function MunicipalityLayout(props: MunicipalityLayoutProps) {
   const { children, data, municipalityName } = props;
+
+  const breakpoints = useBreakpoints();
+
   const router = useRouter();
   const { code } = router.query;
 
@@ -67,6 +72,12 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
     router.route === '/gemeente' || router.route === `/gemeente/[code]`;
 
   const safetyRegion = getSafetyRegionForMunicipalityCode(code as string);
+
+  const goToMunicipal = createSelectMunicipalHandler(
+    router,
+    'positief-geteste-mensen',
+    !breakpoints.md
+  );
 
   return (
     <>
@@ -85,7 +96,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
       </Head>
       <AppContent
         hideMenuButton={isMainRoute}
-        searchComponent={<MunicipalityComboBox />}
+        searchComponent={<MunicipalityComboBox onSelect={goToMunicipal} />}
         sidebarComponent={
           <>
             {showMetricLinks && (

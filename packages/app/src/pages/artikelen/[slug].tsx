@@ -41,25 +41,18 @@ export const getStaticProps = createGetStaticProps(
       },
       "intro": {
         ...intro,
-        "nl": [
-          ...intro.nl[]
+        "${targetLanguage}": [
+          ...intro.${targetLanguage}[]
           {
             ...,
             "asset": asset->
            },
-        ],
-        "en": [
-          ...intro.en[]
-          {
-            ...,
-            "asset": asset->
-           },
-        ],
+        ]
       },
       "content": {
         "_type": content._type,
-        "nl": [
-          ...content.nl[]
+        "${targetLanguage}": [
+          ...content.${targetLanguage}[]
           {
             ...,
             "asset": asset->,
@@ -68,18 +61,7 @@ export const getStaticProps = createGetStaticProps(
               "asset": asset->
             }
            },
-        ],
-        "en": [
-          ...content.en[]
-          {
-            ...,
-            "asset": asset->,
-            markDefs[]{
-              ...,
-              "asset": asset->
-            }
-           },
-        ],
+        ]
       }
     }[0]`;
   })

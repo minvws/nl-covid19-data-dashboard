@@ -14,7 +14,7 @@ export const createMunicipalHospitalAdmissionsTooltip = (
 ): ReactNode => {
   const onSelect = (event: any) => {
     event.stopPropagation();
-    selectHandler(context);
+    selectHandler(context.gmcode);
   };
 
   return (

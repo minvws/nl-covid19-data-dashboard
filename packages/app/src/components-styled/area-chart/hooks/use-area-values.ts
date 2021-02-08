@@ -11,24 +11,34 @@ import {
   Value,
 } from '~/components-styled/stacked-chart/logic';
 import { TimeframeOption } from '~/utils/timeframe';
+import { isArrayOfArrays } from '~/utils/typeguards/is-array-of-arrays';
 import { AreaConfig } from '../area-chart-graph';
 
 export function useAreaValues<T extends Value>(
-  values: T[],
-  areaConfigs: AreaConfig[],
+  values: T[] | T[][],
+  areaConfigs: AreaConfig<T>[] | AreaConfig<T>[][],
   timeframe: TimeframeOption
-): (TrendValue & Value)[] {
+): (TrendValue & Value)[][] {
+  const configList = isArrayOfArrays(areaConfigs) ? areaConfigs : [areaConfigs];
   const metricProperties = useMemo(
-    () => areaConfigs.map((x) => x.metricProperty),
+    () => configList.map((x) => x.map((x) => x.metricProperty)),
     [areaConfigs]
   );
 
-  return getAreaData(values, metricProperties, timeframe);
+  const valuesList = isArrayOfArrays(values) ? values : [values];
+
+  const areaLists = useMemo(
+    () =>
+      valuesList.map((x, i) => getAreaData(x, metricProperties[i], timeframe)),
+    [values, metricProperties, timeframe]
+  );
+
+  return areaLists;
 }
 
 export function getAreaData<T extends Value>(
   values: T[],
-  metricProperties: string[],
+  metricProperties: (keyof T)[],
   timeframe: TimeframeOption
 ): (TrendValue & Value)[] {
   const valuesInFrame = getTimeframeValues(values, timeframe);
@@ -42,7 +52,7 @@ export function getAreaData<T extends Value>(
     return [];
   }
 
-  const sum = (obj: any, propertyNames: string[]) => {
+  const sum = (obj: any, propertyNames: (keyof T)[]) => {
     return propertyNames.reduce((total, name) => total + obj[name], 0);
   };
 

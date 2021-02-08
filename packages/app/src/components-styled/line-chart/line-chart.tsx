@@ -1,7 +1,9 @@
 import { TickFormatter } from '@visx/axis';
+import { scaleBand } from '@visx/scale';
 import { useCallback, useMemo, useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
+import { Legenda, LegendItem, LegendShape } from '~/components-styled/legenda';
 import {
   ChartAxes,
   ChartPadding,
@@ -19,13 +21,7 @@ import {
 } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { TimeframeOption } from '~/utils/timeframe';
-import { Legenda, LegendItem, LegendShape } from '../legenda';
-import {
-  DateSpanValue,
-  isDateSeries,
-  isDateSpanSeries,
-  Value,
-} from '../stacked-chart/logic';
+import { isDateSeries, isDateSpanSeries, Value } from '../stacked-chart/logic';
 import { HoverPoint, Marker, Tooltip, Trend } from './components';
 import { useBisect } from './hooks/use-bisect';
 import { useChartHover } from './hooks/use-chart-hover';
@@ -40,8 +36,8 @@ const formatXAxis = (date: Date) =>
 const formatYAxisFn = (y: number) => formatNumber(y);
 const formatYAxisPercentageFn = (y: number) => `${formatPercentage(y)}%`;
 
-export type LineConfig = {
-  metricProperty: string;
+export type LineConfig<T extends Value> = {
+  metricProperty: keyof T;
   color?: string;
   style?: 'solid' | 'dashed';
   areaFillOpacity?: number;
@@ -52,7 +48,7 @@ export type LineConfig = {
 
 export type LineChartProps<T extends Value> = {
   values: T[];
-  linesConfig: LineConfig[];
+  linesConfig: LineConfig<T>[];
   width?: number;
   height?: number;
   timeframe?: TimeframeOption;
@@ -70,6 +66,7 @@ export type LineChartProps<T extends Value> = {
   legendItems?: LegendItem[];
   componentCallback?: ComponentCallbackFunction;
   ariaLabelledBy?: string;
+  seriesMax?: number;
 };
 
 export function LineChart<T extends Value>({
@@ -77,6 +74,11 @@ export function LineChart<T extends Value>({
   linesConfig,
   width = 500,
   height = 250,
+  /**
+   * @TODO This is a weird default. The chart should show "all" by default
+   * because you might not have a timeframe toggle as part of the chart. I'm
+   * leaving this for later as I don't have time to break stuff now.
+   */
   timeframe = '5weeks',
   signaalwaarde,
   formatTooltip,
@@ -97,6 +99,7 @@ export function LineChart<T extends Value>({
     : undefined,
   componentCallback,
   ariaLabelledBy,
+  seriesMax: overrideSeriesMax,
 }: LineChartProps<T>) {
   const {
     tooltipData,
@@ -105,12 +108,6 @@ export function LineChart<T extends Value>({
     showTooltip,
     hideTooltip,
   } = useTooltip<T & TrendValue>();
-
-  const [markerProps, setMarkerProps] = useState<{
-    height: number;
-    data: HoverPoint<T>[];
-    padding: ChartPadding;
-  }>();
 
   const benchmark = useMemo(
     () =>
@@ -122,13 +119,39 @@ export function LineChart<T extends Value>({
 
   const trendsList = useTrendValues(values, linesConfig, timeframe);
 
-  const [xDomain, yDomain, seriesMax] = useDomains(trendsList, signaalwaarde);
+  const [xDomain, yDomain, seriesMax] = useDomains(
+    trendsList,
+    signaalwaarde,
+    overrideSeriesMax
+  );
 
   const padding = useChartPadding(
     seriesMax.toFixed(0).length * 10,
     defaultPadding,
     overridePadding
   );
+
+  const timespanMarkerData = trendsList[0];
+
+  const xMax = width - padding.left - padding.right;
+  const yMax = height - padding.top - padding.bottom;
+
+  function getDate(x: TrendValue) {
+    return x.__date;
+  }
+
+  const dateSpanScale = useMemo(
+    () =>
+      scaleBand<Date>({
+        range: [0, xMax],
+        domain: timespanMarkerData.map(getDate),
+      }),
+    [xMax, timespanMarkerData]
+  );
+
+  const [markerProps, setMarkerProps] = useState<{
+    data: HoverPoint<T>[];
+  }>();
 
   const toggleHoverElements = useCallback(
     (
@@ -147,12 +170,10 @@ export function LineChart<T extends Value>({
         });
         setMarkerProps({
           data: hoverPoints,
-          height,
-          padding: padding,
         });
       }
     },
-    [showTooltip, hideTooltip, height, padding]
+    [showTooltip, hideTooltip]
   );
 
   const bisect = useBisect(padding);
@@ -215,6 +236,7 @@ export function LineChart<T extends Value>({
           benchmark={benchmark}
           componentCallback={componentCallback}
           ariaLabelledBy={ariaLabelledBy}
+          dateSpanWidth={dateSpanScale.bandwidth()}
         >
           {renderTrendLines}
         </ChartAxes>
@@ -231,13 +253,25 @@ export function LineChart<T extends Value>({
           </Tooltip>
         )}
 
-        {markerProps && (
-          <Marker
-            {...markerProps}
-            showLine={showMarkerLine}
-            formatLabel={formatMarkerLabel}
-          />
-        )}
+        <Box
+          height={yMax}
+          width={xMax}
+          position="absolute"
+          top={padding.top}
+          left={padding.left}
+          style={{
+            pointerEvents: 'none',
+          }}
+        >
+          {markerProps && (
+            <Marker
+              {...markerProps}
+              showLine={showMarkerLine}
+              formatLabel={formatMarkerLabel}
+              dateSpanWidth={dateSpanScale.bandwidth()}
+            />
+          )}
+        </Box>
 
         {showLegend && legendItems && (
           <Box pl={`${padding.left}px`}>
@@ -258,32 +292,31 @@ function formatDefaultTooltip<T extends Value>(
   const isDaily = isDateSeries(values);
   const isWeekly = isDateSpanSeries(values);
 
-  if (isDaily) {
+  if (isDateSeries(values)) {
+    const value = values[0];
     return (
       <>
         <Text as="span" fontWeight="bold">
-          {formatDateFromMilliseconds(value.__date.getTime()) + ': '}
+          {`${formatDateFromMilliseconds(value.__date.getTime())}: `}
         </Text>
         {isPercentage
           ? `${formatPercentage(value.__value)}%`
           : formatNumber(value.__value)}
       </>
     );
-  } else if (isWeekly) {
+  } else if (isDateSpanSeries(values)) {
+    const value = values[0];
+    const dateStartString = formatDateFromSeconds(
+      value.date_start_unix,
+      'short'
+    );
+    const dateEndString = formatDateFromSeconds(value.date_end_unix, 'short');
+
     return (
       <>
         <Text as="span" fontWeight="bold">
-          {formatDateFromSeconds(
-            ((value as unknown) as DateSpanValue).date_start_unix,
-            'short'
-          )}{' '}
-          -{' '}
-          {formatDateFromSeconds(
-            ((value as unknown) as DateSpanValue).date_end_unix,
-            'short'
-          )}
-          :
-        </Text>{' '}
+          {`${dateStartString} - ${dateEndString}: `}
+        </Text>
         {isPercentage
           ? `${formatPercentage(value.__value)}%`
           : formatNumber(value.__value)}
