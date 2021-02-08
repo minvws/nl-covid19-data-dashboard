@@ -1232,7 +1232,6 @@
     "x_100k": "x 100.000"
   },
   "gedrag_onderwerpen": {
-    "curfew": "Avondklok",
     "wash_hands": "Was vaak je handen",
     "keep_distance": "Houd 1,5 meter afstand",
     "work_from_home": "Werk zoveel mogelijk thuis",
@@ -1242,7 +1241,8 @@
     "wear_mask_public_indoors": "Draag een mondkapje in publieke binnenruimtes",
     "wear_mask_public_transport": "Draag een mondkapje in het OV",
     "sneeze_cough_elbow": "Hoest en nies in je elleboog",
-    "max_visitors": "Ontvang het maximaal aantal personen thuis"
+    "max_visitors": "Ontvang het maximaal aantal personen thuis",
+    "curfew": "Avondklok"
   },
   "gedrag_common": {
     "compliance": "Naleving",

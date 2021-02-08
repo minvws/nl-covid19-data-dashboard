@@ -1232,7 +1232,6 @@
     "x_100k": "x 100.000"
   },
   "gedrag_onderwerpen": {
-    "curfew": "Curfew",
     "wash_hands": "Wash your hands often",
     "keep_distance": "Stay 1.5 metres away from other people",
     "work_from_home": "Work from home if possible",
@@ -1242,7 +1241,8 @@
     "wear_mask_public_indoors": "Wear a face mask in indoor public spaces",
     "wear_mask_public_transport": "Wear a face mask on public transport",
     "sneeze_cough_elbow": "Cough and sneeze into your elbow",
-    "max_visitors": "Do not exceed the maximum number of visitors at home "
+    "max_visitors": "Do not exceed the maximum number of visitors at home ",
+    "curfew": "Curfew"
   },
   "gedrag_common": {
     "compliance": "Compliance",
