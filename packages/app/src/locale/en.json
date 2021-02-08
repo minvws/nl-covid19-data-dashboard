@@ -1231,7 +1231,6 @@
     "x_100k": "x 100.000"
   },
   "gedrag_onderwerpen": {
-    "curfew": "Curfew",
     "wash_hands": "Wash your hands often",
     "keep_distance": "Stay 1.5 metres away from other people",
     "work_from_home": "Work from home if possible",
@@ -2436,5 +2435,5 @@
     "description": "Information on the accessibility of the COVID-19 Dashboard.",
     "url": "https://coronadashboard.government.nl/verantwoording"
   },
-  "article_strip_title": ""
+  "article_strip_title": "More about this topic"
 }
