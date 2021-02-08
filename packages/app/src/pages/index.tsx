@@ -18,10 +18,7 @@ import { ArticleList } from '~/domain/topical/article-list';
 import { Search } from '~/domain/topical/components/search';
 import { DataSitemap } from '~/domain/topical/data-sitemap';
 import { EditorialSummary } from '~/domain/topical/editorial-teaser';
-import {
-  EditorialTile,
-  CustomContentProps,
-} from '~/domain/topical/editorial-tile';
+import { EditorialTile } from '~/domain/topical/editorial-tile';
 import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
@@ -40,6 +37,7 @@ import {
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { CustomContentProps } from '~/components-styled/custom-content-teaser';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -56,7 +54,8 @@ export const getStaticProps = createGetStaticProps(
     editorial: EditorialSummary;
     highlight: {
       isArticle: boolean;
-      item: ArticleSummary | CustomContentProps;
+      article?: ArticleSummary;
+      customContent?: CustomContentProps;
     };
   }>(topicalPageQuery),
   () => {
@@ -172,7 +171,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
             {content.editorial && content.highlight && (
               <EditorialTile
                 editorial={content.editorial}
-                highlightedContent={content.highlight}
+                highlighted={content.highlight}
               />
             )}
 

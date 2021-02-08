@@ -15,43 +15,49 @@ export default {
       title: 'Uitgelicht artikel',
       name: 'highlightedArticle',
       type: 'reference',
-      to: [{ type: 'article' }],
-      validation: (Rule) => Rule.required(),
+      to: [{ type: 'article' }]
     },
     {
-      name: 'title',
-      type: 'localeString',
-      title: 'Titel'
-    },
-    {
-      name: 'summary',
-      description: 'Dit is te zien op de hoofdpagina van actueel',
-      type: 'localeText',
-      title: 'Samenvatting',
-    },
-    {
-      name: 'label',
-      type: 'localeString',
-      title: 'Tekst label link'
-    },
-    {
-      name: 'href',
-      type: 'string',
-      title: 'Link naar pagina'
-    },
-    {
-      title: 'Afbeelding',
-      name: 'cover',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
+      title: 'Teaser blok',
+      name: 'customContent',
+      type: 'document',
       fields: [
         {
-          title: 'Alternatieve tekst (toegankelijkheid)',
-          name: 'alt',
+          name: 'title',
           type: 'localeString',
+          title: 'Titel'
         },
+        {
+          name: 'summary',
+          description: 'Samenvatting',
+          type: 'localeText',
+          title: 'Samenvatting',
+        },
+        {
+          name: 'label',
+          type: 'localeString',
+          title: 'Tekst in de link'
+        },
+        {
+          name: 'href',
+          type: 'string',
+          title: 'Link naar pagina'
+        },
+        {
+          title: 'Afbeelding',
+          name: 'cover',
+          type: 'image',
+          options: {
+            hotspot: true,
+          },
+          fields: [
+            {
+              title: 'Alternatieve tekst (toegankelijkheid)',
+              name: 'alt',
+              type: 'localeString',
+            },
+          ]
+        }
       ]
     }
   ],

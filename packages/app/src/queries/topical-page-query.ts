@@ -21,9 +21,8 @@ export const topicalPageQuery = `{
       }
     }[0],
     "highlight": *[_type=='topicalPage'] {
-      isArticle,
       isArticle == true => {
-        "item":highlightedArticle->{
+        "article":highlightedArticle->{
           "title":title.${targetLanguage},
           slug,
           "summary":summary.${targetLanguage},
@@ -34,7 +33,7 @@ export const topicalPageQuery = `{
         }
       },
       isArticle == false => {
-        "item": {
+        "customContent": {
           "title":title.${targetLanguage},
           "summary":summary.${targetLanguage},
           "link": {

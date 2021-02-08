@@ -2,31 +2,28 @@ import css from '@styled-system/css';
 import styled from 'styled-components';
 import ArrowIcon from '~/assets/arrow.svg';
 import { getImageSrc } from '~/lib/sanity';
-import siteText from '~/locale';
-import { Article, Block, ImageBlock } from '~/types/cms';
+import { Block, ImageBlock } from '~/types/cms';
 import { Link } from '~/utils/link';
 import { BackgroundImage } from './background-image';
 import { Box } from './base';
 import { Heading, InlineText, Text } from './typography';
 
-export type ArticleSummary = Pick<
-  Article,
-  'title' | 'slug' | 'summary' | 'cover'
->;
-
-type ArticleTeaserProps = {
+export type CustomContentProps = {
   title: string;
-  slug: string;
   summary: Block;
   cover: ImageBlock;
+  link: {
+    href: string;
+    label: string;
+  };
 };
 
-export function ArticleTeaser(props: ArticleTeaserProps) {
-  const { title, slug, summary, cover } = props;
+export function CustomContentTeaser(props: CustomContentProps) {
+  const { title, link, summary, cover } = props;
 
   return (
-    <Link passHref href={`/artikelen/${slug}`}>
-      <StyledArticleTeaser>
+    <Link passHref href={link.href}>
+      <StyledCustomTeaser>
         <CoverImage height={200} image={cover} />
         <Box padding={3}>
           <Heading level={3} mb={{ _: 1, sm: 3 }} lineHeight={{ _: 0, sm: 2 }}>
@@ -35,16 +32,16 @@ export function ArticleTeaser(props: ArticleTeaserProps) {
           <Text>{summary}</Text>
 
           <InlineText aria-hidden="true" fontWeight="bold" color="link">
-            {siteText.common.read_more}
+            {link.label}
             <Arrow />
           </InlineText>
         </Box>
-      </StyledArticleTeaser>
+      </StyledCustomTeaser>
     </Link>
   );
 }
 
-const StyledArticleTeaser = styled.a(
+const StyledCustomTeaser = styled.a(
   css({
     display: 'block',
     border: 'solid',
