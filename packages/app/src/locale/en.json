@@ -2170,7 +2170,7 @@
       "description": "More data on vaccinations will be added in the near future, including:\n- willingness to be vaccinated\n- vaccination coverage"
     },
     "grafiek": {
-      "titel": "Available vaccine doses and doses administered in total",
+      "titel": "Deliveries and doses administered in total",
       "omschrijving": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks."
     },
     "verwachte_leveringen": {
@@ -2441,5 +2441,5 @@
     "description": "Information on the accessibility of the COVID-19 Dashboard.",
     "url": "https://coronadashboard.government.nl/verantwoording"
   },
-  "article_strip_title": ""
+  "article_strip_title": "More about this topic"
 }
