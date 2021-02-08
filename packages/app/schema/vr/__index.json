@@ -21,8 +21,8 @@
     "disability_care",
     "behavior",
     "escalation_level",
-    "tested_weekly",
-    "hospital_weekly"
+    "tested_sum",
+    "hospital_sum"
   ],
   "additionalProperties": false,
   "properties": {
@@ -83,11 +83,11 @@
     "escalation_level": {
       "$ref": "escalation_level.json"
     },
-    "tested_weekly": {
-      "$ref": "tested_weekly.json"
+    "tested_sum": {
+      "$ref": "tested_sum.json"
     },
-    "hospital_weekly": {
-      "$ref": "hospital_weekly.json"
+    "hospital_sum": {
+      "$ref": "hospital_sum.json"
     }
   }
 }
