@@ -59,7 +59,6 @@ const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
         description={nl_gedrag.metadata.description}
       />
       <TileList>
-        {/* CORONA MELDER */}
         <ContentHeader
           category={siteText.nationaal_layout.headings.gedrag}
           title={nl_gedrag.pagina.titel}
