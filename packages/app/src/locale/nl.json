@@ -2001,8 +2001,8 @@
     "title": "COVID-19-vaccinaties",
     "description": "Vaccineren is de belangrijkste stap naar een samenleving zonder coronaregels. Op 6 januari 2021 is Nederland begonnen met vaccineren. Uiteindelijk komt iedereen van 18 jaar of ouder aan de beurt. De cijfers op deze pagina laten zien hoeveel prikken zijn gezet en hoeveel vaccins er beschikbaar komen.",
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "date_unix": "1612700202",
-    "date_of_insertion_unix": "1612700202",
+    "date_unix": "1612788233",
+    "date_of_insertion_unix": "1612788233",
     "reference": {
       "href": "/verantwoording#vaccinatie",
       "text": "Lees meer over de bron van de vaccinatiecijfers in de cijferverantwoording."
@@ -2039,16 +2039,16 @@
       "sidebar": {
         "last_value": {
           "total_vaccinated": "568863",
-          "date_unix": "1612700202",
-          "date_of_insertion_unix": "1612700202"
+          "date_unix": "1612788233",
+          "date_of_insertion_unix": "1612788233"
         }
       },
       "kpi_total": {
         "title": "Aantal gezette prikken",
         "value": "414198",
         "description": "",
-        "date_of_report_unix": "1612700202",
-        "date_of_insertion_unix": "1612700202",
+        "date_of_report_unix": "1612788233",
+        "date_of_insertion_unix": "1612788233",
         "administered": [
           {
             "value": "320982",
@@ -2084,8 +2084,8 @@
         "tab_total_estimated": {
           "value": "568863",
           "description": "",
-          "date_of_report_unix": "1612700202",
-          "date_of_insertion_unix": "1612700202",
+          "date_of_report_unix": "1612788233",
+          "date_of_insertion_unix": "1612788233",
           "administered": [
             {
               "value": "320982",
