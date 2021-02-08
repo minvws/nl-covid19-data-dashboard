@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
-  "title": "vr_tested_sum",
+  "title": "vr_hospital_nice_sum",
   "required": ["values", "last_value"],
   "additionalProperties": false,
   "properties": {
@@ -17,19 +17,19 @@
   },
   "definitions": {
     "value": {
-      "title": "vr_tested_sum_value",
+      "title": "vr_hospital_nice_sum_value",
       "type": "object",
       "additionalProperties": false,
       "required": [
+        "admissions_per_1m",
         "date_start_unix",
         "date_end_unix",
-        "infected_per_100k",
         "date_of_insertion_unix"
       ],
       "properties": {
+        "admissions_per_1m": { "type": "integer" },
         "date_start_unix": { "type": "integer" },
         "date_end_unix": { "type": "integer" },
-        "infected_per_100k": { "type": "number" },
         "date_of_insertion_unix": { "type": "integer" }
       }
     }

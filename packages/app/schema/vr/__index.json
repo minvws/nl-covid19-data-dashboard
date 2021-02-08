@@ -21,8 +21,8 @@
     "disability_care",
     "behavior",
     "escalation_level",
-    "tested_sum",
-    "hospital_sum"
+    "tested_overall_sum",
+    "hospital_nice_sum"
   ],
   "additionalProperties": false,
   "properties": {
@@ -83,11 +83,11 @@
     "escalation_level": {
       "$ref": "escalation_level.json"
     },
-    "tested_sum": {
-      "$ref": "tested_sum.json"
+    "tested_overall_sum": {
+      "$ref": "tested_overall_sum.json"
     },
-    "hospital_sum": {
-      "$ref": "hospital_sum.json"
+    "hospital_nice_sum": {
+      "$ref": "hospital_nice_sum.json"
     }
   }
 }

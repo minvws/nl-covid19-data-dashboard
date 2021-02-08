@@ -456,8 +456,8 @@ export interface Regionaal {
   deceased_cbs: RegionalDeceasedCbs;
   elderly_at_home: RegionalElderlyAtHome;
   escalation_level: VrEscalationLevel;
-  tested_sum: VrTestedSum;
-  hospital_sum: VrHospitalSum;
+  tested_overall_sum: VrTestedOverallSum;
+  hospital_nice_sum: VrHospitalNiceSum;
 }
 export interface RegionalDifference {
   tested_overall__infected_per_100k: DifferenceDecimal;
@@ -666,21 +666,21 @@ export interface VrEscalationLevel {
   valid_from_unix: number;
   date_of_insertion_unix: number;
 }
-export interface VrTestedSum {
-  values: VrTestedSumValue[];
-  last_value: VrTestedSumValue;
+export interface VrTestedOverallSum {
+  values: VrTestedOverallSumValue[];
+  last_value: VrTestedOverallSumValue;
 }
-export interface VrTestedSumValue {
+export interface VrTestedOverallSumValue {
   date_start_unix: number;
   date_end_unix: number;
   infected_per_100k: number;
   date_of_insertion_unix: number;
 }
-export interface VrHospitalSum {
-  values: VrHospitalSumValue[];
-  last_value: VrHospitalSumValue;
+export interface VrHospitalNiceSum {
+  values: VrHospitalNiceSumValue[];
+  last_value: VrHospitalNiceSumValue;
 }
-export interface VrHospitalSumValue {
+export interface VrHospitalNiceSumValue {
   admissions_per_1m: number;
   date_start_unix: number;
   date_end_unix: number;
