@@ -3,19 +3,22 @@
  * the values array for that same metric.
  */
 import chalk from 'chalk';
-import fs from 'fs';
+import { isEmpty, pick } from 'lodash';
 import meow from 'meow';
 import path from 'path';
 import { jsonDirectory } from '../config';
 import { getFilesWithTimeSeries } from '../validate-schema/schema-information';
-import { chunk, pick, isEmpty } from 'lodash';
 import {
   getTimeSeriesMetricProperties,
   readJsonFile,
-  validateLastValue,
   TimeSeriesMetric,
   UnknownObject,
+  validateLastValue,
 } from './logic';
+
+const logSuccess = (...args: unknown[]) =>
+  console.log(chalk.greenBright(...args));
+const logError = (...args: unknown[]) => console.error(chalk.red(...args));
 
 const cli = meow(
   `
@@ -74,7 +77,7 @@ async function main() {
       );
 
       if (cli.flags.failEarly) {
-        console.error(
+        console.log(
           'Found failures with --fail-early enabled, so skipping the rest...'
         );
         break;
@@ -84,19 +87,19 @@ async function main() {
 
   if (!isEmpty(allFailures)) {
     console.error(allFailures);
-    console.error(
+    logError(
       `There were ${allFailures.length} instances that failed to validate their last_value data.`
     );
     process.exit(1);
   } else {
-    console.log('All last_value data was validated!');
+    logSuccess('All last_value data was validated!');
   }
 }
 
 main().then(
   () => process.exit(0),
   (err: Error) => {
-    console.error(err.message);
+    logError(err.message);
     process.exit(1);
   }
 );
