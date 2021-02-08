@@ -1231,6 +1231,7 @@
     "x_100k": "x 100.000"
   },
   "gedrag_onderwerpen": {
+    "curfew": "Curfew",
     "wash_hands": "Wash your hands often",
     "keep_distance": "Stay 1.5 metres away from other people",
     "work_from_home": "Work from home if possible",

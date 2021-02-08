@@ -1,3 +1,4 @@
+import curfew from '~/assets/gedrag/curfew.svg';
 import wash_hands from '~/assets/gedrag/wash_hands.svg';
 import keep_distance from '~/assets/gedrag/keep_distance.svg';
 import work_from_home from '~/assets/gedrag/work_from_home.svg';
@@ -10,7 +11,11 @@ import sneeze_cough_elbow from '~/assets/gedrag/sneeze_cough_elbow.svg';
 import max_visitors from '~/assets/gedrag/max_visitors.svg';
 import { BehaviorIdentifier } from '../behavior-types';
 
-const icons: Record<BehaviorIdentifier, React.FunctionComponent> = {
+const icons: Record<
+  BehaviorIdentifier,
+  React.FunctionComponent<{ width: number; height: number }>
+> = {
+  curfew,
   wash_hands,
   keep_distance,
   work_from_home,
@@ -29,5 +34,5 @@ interface BehaviorIconProps {
 
 export function BehaviorIcon({ name }: BehaviorIconProps) {
   const Icon = icons[name];
-  return <Icon />;
+  return <Icon width={32} height={32} />;
 }
