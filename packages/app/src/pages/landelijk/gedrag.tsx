@@ -142,8 +142,8 @@ const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
           >
             <KpiValue
               data-cy="infected"
-              absolute={data.tested_overall.last_value.infected}
-              difference={data.difference.tested_overall__infected}
+              absolute={data.corona_app.last_value.warned_daily}
+              difference={data.difference.corona_app__warned_daily}
             />
 
             <Text>{corona_app.waarschuwen.description}</Text>
@@ -155,8 +155,10 @@ const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
                 dangerouslySetInnerHTML={{
                   __html: replaceKpisInText(corona_app.waarschuwen.total, [
                     {
-                      name: 'totalDownnloads',
-                      value: formatNumber(9999999999999),
+                      name: 'totalDownloads',
+                      value: formatNumber(
+                        data.corona_app.last_value.downloaded_total
+                      ),
                     },
                   ]),
                 }}
@@ -172,8 +174,10 @@ const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
               <IconContainer>
                 <ExternalLinkIcon />
               </IconContainer>
-              <Link href={'#'} passHref>
-                <Anchor>{corona_app.rapport.link.text}</Anchor>
+              <Link href={corona_app.rapport.link.href} passHref>
+                <a target="_blank">
+                  <Anchor>{corona_app.rapport.link.text}</Anchor>
+                </a>
               </Link>
             </Box>
           </Tile>

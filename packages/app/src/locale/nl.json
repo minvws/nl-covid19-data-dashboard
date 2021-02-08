@@ -1355,7 +1355,7 @@
     "waarschuwen": {
       "title": "Aantal positieve tests gemeld via de CoronaMelder app:",
       "description": "Dit cijfer toont hoeveel (positief geteste) gebruikers van CoronaMelder afgelopen dagen andere app-gebruikers hebben gewaarschuwd.",
-      "total": "{{totalDownnloads}} mensen hebben de CoronaMelder app gedownload."
+      "total": "{{totalDownloads}} mensen hebben de CoronaMelder app gedownload."
     },
     "rapport": {
       "title": "Factsheet CoronaMelder",
