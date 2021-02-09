@@ -1,3 +1,4 @@
+// import { NlVaccineSupportValue } from '@corona-dashboard/common';
 import { css } from '@styled-system/css';
 import { Fragment, useState } from 'react';
 import VaccinatieIcon from '~/assets/vaccinaties.svg';
@@ -8,6 +9,7 @@ import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
+import { LineChart } from '~/components-styled/line-chart/line-chart';
 import { RadioGroup } from '~/components-styled/radio-group';
 import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
@@ -25,7 +27,9 @@ import {
   getNlData,
   getText,
 } from '~/static-props/get-data';
+import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { AspectRatio } from '~/components-styled/aspect-ratio';
 
 export const getStaticProps = createGetStaticProps(
@@ -37,10 +41,12 @@ export const getStaticProps = createGetStaticProps(
   }>(createPageArticlesQuery('vaccinationsPage'))
 );
 import { targetLanguage } from '~/locale/index';
+import { ParentSize } from '@visx/responsive';
 
 const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
   text: siteText,
   content,
+  data,
 }) => {
   const text = siteText.vaccinaties;
   const [selectedTab, setSelectedTab] = useState(
@@ -237,6 +243,57 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
               <VaccinesAdministeredChartEn />
             )}
           </AspectRatio>
+        </ChartTile>
+
+        <ChartTile
+          title={text.grafiek_draagvlak.titel}
+          description={text.grafiek_draagvlak.omschrijving}
+          ariaDescription={
+            siteText.accessibility.grafieken.vaccinatie_draagvlak
+          }
+          metadata={{
+            date: data.vaccine_support.last_value.date_of_insertion_unix,
+            source: text.bronnen.rivm,
+          }}
+        >
+          <ParentSize>
+            {({ width }) => (
+              <LineChart
+                timeframe="all"
+                width={width}
+                ariaLabelledBy="chart_vaccine_support"
+                values={data.vaccine_support.values}
+                linesConfig={[{ metricProperty: 'percentage_in_favor' }]}
+                formatTooltip={(values) => {
+                  const value = values[0];
+                  const dateStartString = formatDateFromSeconds(
+                    value.date_start_unix
+                  );
+                  const dateEndString = formatDateFromSeconds(
+                    value.date_end_unix
+                  );
+                  return (
+                    <Text m={0}>
+                      <span style={{ fontWeight: 'bold' }}>
+                        {`${dateStartString} - ${dateEndString}`}
+                      </span>
+                      <br />
+
+                      {replaceVariablesInText(
+                        siteText.common.tooltip.vaccinatie_bereidheid,
+                        {
+                          percentageInFavor: value.__value,
+                        }
+                      )}
+                    </Text>
+                  );
+                }}
+                formatYAxis={(x) => `${x}%`}
+                seriesMax={100}
+                padding={{ left: 36 }}
+              />
+            )}
+          </ParentSize>
         </ChartTile>
 
         <TwoKpiSection>

@@ -218,7 +218,7 @@
     "barscale_toelichting": "This figure shows how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
     "kpi_titel": "Number of confirmed cases",
-    "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.",
+    "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.\n\nPlease note: Due to the winter weather, few people were tested on 7 and 8 February. This affects the numbers for the following days.",
     "map_titel": "Distribution of confirmed cases in the Netherlands",
     "map_toelichting": "These maps show how many confirmed cases of COVID-19 were reported yesterday per 100,000 inhabitants.",
     "linechart_titel": "Progression over time",
@@ -624,7 +624,7 @@
     "select_region_municipality_legend": "Select a municipality:",
     "select_region_type_legend": "Show numbers from:",
     "your_municipality": "Municipality",
-    "belangrijk_bericht": "There is a [national lockdown](https://coronadashboard.government.nl/landelijk/maatregelen)."
+    "belangrijk_bericht": "There is a [national lockdown](https://coronadashboard.government.nl/landelijk/maatregelen) until at least March 2."
   },
   "common": {
     "metadata": {
@@ -646,7 +646,8 @@
     },
     "tooltip": {
       "positive_tested_people": "{{totalPositiveTestedPeople}} in total",
-      "positive_tested_value": "{{totalPositiveValue}} per 100.000"
+      "positive_tested_value": "{{totalPositiveValue}} per 100.000",
+      "vaccinatie_bereidheid": ""
     },
     "niveau": "level",
     "clear_select_input": "Empty",
@@ -757,7 +758,7 @@
     "barscale_toelichting": "This figure shows how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
     "kpi_titel": "Number of confirmed cases",
-    "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.",
+    "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.\n\nPlease note: Due to the winter weather, few people were tested on 7 and 8 February. This affects the numbers for the following days.",
     "map_titel": "Distribution of confirmed cases in {{safetyRegion}}",
     "map_toelichting": "This map shows how many confirmed cases of COVID-19 were reported yesterday in the municipalities of this safety region per 100,000 inhabitants.",
     "linechart_titel": "Progression over time",
@@ -901,7 +902,7 @@
     "barscale_toelichting": "This number shows how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
     "kpi_titel": "Number of confirmed cases",
-    "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.",
+    "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.\n\nPlease note: Due to the winter weather, few people were tested on 7 and 8 February. This affects the numbers for the following days.",
     "map_titel": "Distribution of confirmed cases in safety region of {{municipality}}",
     "map_toelichting": "This map shows how many confirmed cases of COVID-19 were reported yesterday in this municipality and other municipalities in the same safety region, per 100,000 inhabitants.",
     "linechart_titel": "Progression over time",
@@ -984,12 +985,12 @@
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Risk level map of the Netherlands",
-    "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\nThere are specific measures for each risk level. These are explained in the road map drafted by the government. **There is a national lockdown. [Click here to view the lockdown measures](/landelijk/maatregelen).**",
+    "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\nThere are specific measures for each risk level. These are explained in the road map drafted by the government. **There is a national lockdown until at least March 2. [Click here to view the lockdown measures](/landelijk/maatregelen).**",
     "metadata": {
       "title": "Level of risk per safety region | Dashboard Coronavirus | Government.nl",
       "description": "Overview of the level of risk per safety region in the Netherlands."
     },
-    "belangrijk_bericht": "There is a [national lockdown](https://coronadashboard.government.nl/landelijk/maatregelen)."
+    "belangrijk_bericht": "There is a [national lockdown](https://coronadashboard.government.nl/landelijk/maatregelen) until at least March 2."
   },
   "gemeente_index": {
     "selecteer_titel": "Select your municipality",
@@ -1007,7 +1008,7 @@
   },
   "escalatie_niveau": {
     "titel": "Risk levels",
-    "toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\nThere are specific measures for each risk level. These are explained in the road map drafted by the government. **There is a national lockdown. [Click here to view the lockdown measures](/landelijk/maatregelen).**",
+    "toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\nThere are specific measures for each risk level. These are explained in the road map drafted by the government. **There is a national lockdown until at least March 2. [Click here to view the lockdown measures](/landelijk/maatregelen).**",
     "types": {
       "1": {
         "titel": "Caution",
@@ -1240,7 +1241,8 @@
     "wear_mask_public_indoors": "Wear a face mask in indoor public spaces",
     "wear_mask_public_transport": "Wear a face mask on public transport",
     "sneeze_cough_elbow": "Cough and sneeze into your elbow",
-    "max_visitors": "Do not exceed the maximum number of visitors at home "
+    "max_visitors": "Do not exceed the maximum number of visitors at home ",
+    "curfew": "Curfew"
   },
   "gedrag_common": {
     "compliance": "Compliance",
@@ -1802,11 +1804,11 @@
       "text": "Read more in 'explanation of the data presented'"
     },
     "cbs_message": {
-      "title": "Mortality still elevated: 3,800 deaths in week 3",
+      "title": "Mortality slightly lower in week 4",
       "published_text": "Date of publication: Friday 4 December",
-      "message": "In week 3 (18 to 24 January 2021 inclusive), estimated mortality stood at 3,800. This is 450 deaths in excess of the expected number for this period. The number of deaths in week 2 stood at 3,810. Statistics Netherlands (CBS) reports this based on the provisional weekly figures on mortality. Since week 39 of 2020, weekly mortality has been higher than expected. During the second epidemic wave up to week 3 of 2021 inclusive, altogether nearly 64 thousand deaths were recorded. This is 9.3 thousand more than expected mortality in this period. The excess mortality is now higher than during the first wave of the coronavirus epidemic.",
+      "message": "In week 4 (25 to 31 January 2021 inclusive), estimated mortality stood at 3,750. This is over 300 deaths in excess of the expected number for this period. The number of deaths in week 3 stood at 3,823. Statistics Netherlands (CBS) reports this based on the provisional weekly figures on mortality. Since week 39 of 2020, weekly mortality has been higher than expected. During the second epidemic wave up to week 4 of 2021 inclusive, nearly 68 thousand deaths were recorded. This is 9.6 thousand more than the expected mortality in this period. Estimated mortality for week 4 is just within the range of expected mortality.",
       "link": {
-        "href": "https://www.cbs.nl/en-gb/news/2021/04/mortality-still-elevated-3-800-deaths-in-week-3",
+        "href": "https://www.cbs.nl/en-gb/news/2021/05/mortality-slightly-lower-in-week-4",
         "text": "Website CBS"
       }
     },
@@ -1967,7 +1969,8 @@
       "ziekenhuis_opnames": "This graph shows the progression in hospital admissions over time.",
       "rioolwater_meetwaarde": "This graph shows the most recent measured value of the average amount of virus particles per 100.000 residents, per sewage processing facility.",
       "verwachte_leveringen": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks.",
-      "vaccin_levering_en_prikken": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks."
+      "vaccin_levering_en_prikken": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks.",
+      "vaccinatie_draagvlak": "This graph shows the percentage of the population that wishes to be vaccinated against COVID-19."
     }
   },
   "deceased_age_groups": {
@@ -1999,8 +2002,8 @@
     "title": "COVID-19 vaccinations",
     "description": "Vaccination is the most important step towards getting life back to normal. The Netherlands began vaccinating people against COVID-19 on 6 January 2021. Eventually, the vaccine will be offered to everyone aged 18 and over. This page shows how many doses of vaccine have been administered and how many doses are on their way.",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "date_unix": "1612442100",
-    "date_of_insertion_unix": "1612442100",
+    "date_unix": "1612788233",
+    "date_of_insertion_unix": "1612788233",
     "reference": {
       "href": "/verantwoording#vaccination",
       "text": "Read more about the source of the data on vaccination in the explanation of the presented data."
@@ -2036,27 +2039,27 @@
       "difference": "",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "454998",
-          "date_unix": "1612442100",
-          "date_of_insertion_unix": "1612442100"
+          "total_vaccinated": "571361",
+          "date_unix": "1612788233",
+          "date_of_insertion_unix": "1612788233"
         }
       },
       "kpi_total": {
         "title": "Number of doses administered",
-        "value": "330494",
+        "value": "414858",
         "description": "",
-        "date_of_report_unix": "1612263890",
-        "date_of_insertion_unix": "1612263890",
+        "date_of_report_unix": "1612788233",
+        "date_of_insertion_unix": "1612788233",
         "administered": [
           {
-            "value": "245278",
+            "value": "321042",
             "description": "reported by GGD-GHOR",
-            "report_date": "Reported number till 3 February"
+            "report_date": "Reported number till 7 February"
           },
           {
-            "value": "85216",
+            "value": "93816",
             "description": "reported by LNAZ",
-            "report_date": "Reported number till 3 February"
+            "report_date": "Reported number till 7 February"
           },
           {
             "value": "",
@@ -2080,25 +2083,25 @@
         "first_tab_title": "Calculated number",
         "second_tab_title": "Reported number",
         "tab_total_estimated": {
-          "value": "454998",
+          "value": "571361",
           "description": "",
-          "date_of_report_unix": "1612354200",
-          "date_of_insertion_unix": "1612354200",
+          "date_of_report_unix": "1612788233",
+          "date_of_insertion_unix": "1612788233",
           "administered": [
             {
-              "value": "245278",
+              "value": "321042",
               "description": "administered by GGDs",
-              "report_date": "Reported number till 3 February"
+              "report_date": "Reported number till 7 February"
             },
             {
-              "value": "85216",
+              "value": "93816",
               "description": "administered in hospitals",
-              "report_date": "Reported number till 3 February"
+              "report_date": "Reported number till 7 February"
             },
             {
-              "value": "124504",
+              "value": "156503",
               "description": "administered in long-term care institutions",
-              "report_date": "Calculated number till 3 February"
+              "report_date": "Calculated number till 7 February"
             },
             {
               "value": "",
@@ -2112,15 +2115,15 @@
             }
           ],
           "description_first": "This figure is a calculation of the total number of vaccine doses that have been administered. The calculation is based on the number of vaccine doses that have been delivered to the locations where injections are given. [Read more about the calculation in the explanation of the presented data.](https://coronadashboard.government.nl/verantwoording#vaccination)",
-          "description_second": "[On 1 February some figures have been corrected.](https://www.rijksoverheid.nl/actueel/nieuws/2021/02/01/dubbeltelling-in-vaccinatiecijfers-rechtgezet)"
+          "description_second": ""
         }
       },
       "kpi_expected_delivery": {
         "title": "Approved vaccines to be delivered",
         "value": "2473700",
         "description": "This is the number of approved vaccine doses the Netherlands expects to receive over the next six weeks. The Netherlands will receive a new delivery each week. People need two separately administered doses for the vaccine to be maximally effective.",
-        "date_of_report_unix": "1612384276",
-        "date_of_insertion_unix": "1612384276"
+        "date_of_report_unix": "1612384200",
+        "date_of_insertion_unix": "1612384200"
       },
       "kpi_stock": {
         "title": "",
@@ -2167,12 +2170,16 @@
       "description": "More data on vaccinations will be added in the near future, including:\n- willingness to be vaccinated\n- vaccination coverage"
     },
     "grafiek": {
-      "titel": "Available vaccine doses and doses administered in total",
-      "omschrijving": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks.\n\n[This article explains why not all vaccine doses are used immediately to vaccinate people.](https://coronadashboard.government.nl/artikelen/waarom-zijn-er-vaccins-op-voorraad)"
+      "titel": "Deliveries and doses administered in total",
+      "omschrijving": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks."
     },
     "verwachte_leveringen": {
       "van_week_tot_week": "Week {{weekNumberFrom}} to week {{weekNumberTo}}",
       "van_week_tot_week_klein_scherm": "Week {{weekNumberFrom}} to week {{weekNumberTo}}"
+    },
+    "grafiek_draagvlak": {
+      "titel": "Willingness to be vaccinated",
+      "omschrijving": "This graph shows the percentage of the population that wishes to be vaccinated against COVID-19. The figure is taken from a survey where people are asked if they wish to be vaccinated. The survey is conducted every three weeks."
     }
   },
   "editorial_detail": {
@@ -2203,7 +2210,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of the Netherlands",
-      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions.  \n\n**There are specific measures for each risk level. These are explained in the road map drafted by the government. There is a national lockdown. [Click here to view the lockdown measures](landelijk/maatregelen).**"
+      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions.  \n\n**There are specific measures for each risk level. These are explained in the road map drafted by the government. There is a national lockdown until at least March 2. [Click here to view the lockdown measures](landelijk/maatregelen).**"
     },
     "data_sitemap_titel": "Topics on this dashboard",
     "data_sitemap_toelichting": "Go directly to the following topics:",
@@ -2219,9 +2226,9 @@
       },
       "toegediende_vaccins": {
         "title": "Number of doses administered",
-        "sub_title": "Vaccines to be delivered",
+        "sub_title": "",
         "administered_tests": "{{administeredVaccines}} vaccine doses have been administered so far. This number includes both first and second doses.",
-        "supply": "The Netherlands expects tot receive {{expectedDelivery}} approved vaccine doses over the next six weeks."
+        "supply": ""
       }
     },
     "data_driven_texts": {
@@ -2290,7 +2297,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of The Netherlands",
-      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions.  \n\n**There are specific measures for each risk level. These are explained in the road map drafted by the government. There is a national lockdown. [Click here to view the lockdown measures](landelijk/maatregelen).**"
+      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions.  \n\n**There are specific measures for each risk level. These are explained in the road map drafted by the government. There is a national lockdown until at least March 2. [Click here to view the lockdown measures](landelijk/maatregelen).**"
     },
     "risoconiveau_maatregelen": {
       "title": "Risk level & measures",
@@ -2363,7 +2370,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of the Netherlands",
-      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions.  \n\n**There are specific measures for each risk level. These are explained in the road map drafted by the government. There is a national lockdown. [Click here to view the lockdown measures](landelijk/maatregelen).**"
+      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions.  \n\n**There are specific measures for each risk level. These are explained in the road map drafted by the government. There is a national lockdown until at least March 2. [Click here to view the lockdown measures](landelijk/maatregelen).**"
     },
     "risoconiveau_maatregelen": {
       "title": "Risk level & measures",
@@ -2434,5 +2441,5 @@
     "description": "Information on the accessibility of the COVID-19 Dashboard.",
     "url": "https://coronadashboard.government.nl/verantwoording"
   },
-  "article_strip_title": ""
+  "article_strip_title": "More about this topic"
 }
