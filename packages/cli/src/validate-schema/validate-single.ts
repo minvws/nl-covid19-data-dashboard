@@ -5,7 +5,7 @@ import path from 'path';
 import { createValidateFunction } from './create-validate-function';
 import { executeValidations } from './execute-validations';
 import { schemaDirectory } from '../config';
-import { getSchemaInfo } from './schema-information';
+import { getSchemaInfo } from '../schema-information';
 
 const schemaInformation = getSchemaInfo();
 

@@ -5,6 +5,7 @@
   "license": "EUROPEAN UNION PUBLIC LICENCE v. 1.2",
   "dependencies": {
     "meow": "^8.0.0",
+    "ts-is-present": "^1.2.1",
     "ts-node": "^9.1.1"
   },
   "scripts": {

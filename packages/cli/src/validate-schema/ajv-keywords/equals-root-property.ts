@@ -25,7 +25,7 @@ export const equalsRootProperty = {
         (validateRootPropertyEquality as any).errors = [
           {
             keyword: 'equalsRootProperty',
-            message: `the property '${_dataPath}' value '${data}' must be equal to the root property '${schema}' value '${rootValue}'`,
+            message: `The property '${_dataPath}' value '${data}' must be equal to the root property '${schema}' value '${rootValue}'`,
             params: {
               keyword: 'equalsRootProperty',
               value: schema,

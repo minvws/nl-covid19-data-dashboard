@@ -1,6 +1,6 @@
 import fs from 'fs';
-import { jsonDirectory, localeDirectory } from '../config';
-import { validatePlaceholders } from './custom-validations/validate-placeholders';
+import { jsonDirectory, localeDirectory } from './config';
+import { validatePlaceholders } from './validate-schema/custom-validations/validate-placeholders';
 import { assert } from '@corona-dashboard/common';
 
 type CustomValidationFunction = (

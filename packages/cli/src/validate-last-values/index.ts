@@ -2,17 +2,21 @@
  * This script checks if all last_value values correspond to the actual last value in
  * the values array for that same metric.
  */
+import {
+  sortTimeSeriesInDataInPlace,
+  TimeSeriesMetric,
+  TimestampedValue,
+} from '@corona-dashboard/common';
 import chalk from 'chalk';
 import { isEmpty, pick } from 'lodash';
 import meow from 'meow';
 import path from 'path';
+import { isDefined } from 'ts-is-present';
 import { jsonDirectory } from '../config';
-import { getFilesWithTimeSeries } from '../validate-schema/schema-information';
+import { getFilesWithTimeSeries } from '../schema-information';
 import {
   getTimeSeriesMetricProperties,
   readJsonFile,
-  TimeSeriesMetric,
-  UnknownObject,
   validateLastValue,
 } from './logic';
 
@@ -26,6 +30,7 @@ const cli = meow(
       $ validate-last-values
 
     Options
+      --verbose, -v Enable verbose output
       --fail-early, -e Exit on first failure
 
     Examples
@@ -37,6 +42,10 @@ const cli = meow(
         type: 'boolean',
         alias: 'e',
       },
+      verbose: {
+        type: 'boolean',
+        alias: 'v',
+      },
     },
   }
 );
@@ -45,6 +54,7 @@ type Failure = { fileName: string; metricProperty: string };
 
 async function main() {
   const directory = jsonDirectory;
+  const isVerbose = cli.flags.verbose;
 
   console.log('Fail early?', cli.flags.failEarly);
 
@@ -54,11 +64,18 @@ async function main() {
 
   for (const file of files) {
     const data = readJsonFile(path.join(directory, file));
+
+    sortTimeSeriesInDataInPlace(data);
+
     const metricProperties = getTimeSeriesMetricProperties(data);
+
+    if (isVerbose) {
+      console.log('Checking', metricProperties);
+    }
 
     const timeSeriesData = pick(data, metricProperties) as Record<
       string,
-      TimeSeriesMetric<UnknownObject>
+      TimeSeriesMetric<TimestampedValue>
     >;
 
     const promisedOperations = metricProperties.map((property) =>
@@ -82,6 +99,14 @@ async function main() {
         );
         break;
       }
+    }
+
+    /**
+     * @TODO check sewer_per_installation data
+     */
+
+    if (isDefined(data.sewer_per_installation)) {
+      console.log(`@TODO check sewer_per_installation for ${file}`);
     }
   }
 

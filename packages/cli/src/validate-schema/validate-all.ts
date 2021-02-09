@@ -5,7 +5,7 @@ import path from 'path';
 import { schemaDirectory } from '../config';
 import { createValidateFunction } from './create-validate-function';
 import { executeValidations } from './execute-validations';
-import { getSchemaInfo, SchemaItemInfo } from './schema-information';
+import { getSchemaInfo, SchemaItemInfo } from '../schema-information';
 
 const cli = meow(
   `
