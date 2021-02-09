@@ -9,11 +9,22 @@ export interface Municipal {
   proto_name: string;
   name: string;
   code: string;
+  deceased_rivm: GmDeceasedRivm;
   difference: MunicipalDifference;
   hospital_nice: MunicipalHospitalNice;
   tested_overall: MunicipalTestedOverall;
   sewer?: MunicipalSewer;
   sewer_per_installation?: MunicipalSewerPerInstallation;
+}
+export interface GmDeceasedRivm {
+  values: GmDeceasedRivmValue[];
+  last_value: GmDeceasedRivmValue;
+}
+export interface GmDeceasedRivmValue {
+  covid_daily: number;
+  covid_total: number;
+  date_unix: number;
+  date_of_insertion_unix: number;
 }
 export interface MunicipalDifference {
   tested_overall__infected_per_100k: DifferenceDecimal;
