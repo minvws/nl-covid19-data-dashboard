@@ -126,6 +126,11 @@ function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
                         siteText.veiligheidsregio_maatregelen.subtitel_sidebar
                       }
                     />
+                    <MetricMenuItemLink
+                      href={`/veiligheidsregio/${code}/risiconiveau`}
+                      icon={<Maatregelen fill={colors.restrictions} />}
+                      title={'Risiconiveau'}
+                    />
                   </Box>
 
                   <CategoryMenu
