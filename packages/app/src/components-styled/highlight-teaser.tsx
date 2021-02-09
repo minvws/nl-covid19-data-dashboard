@@ -8,7 +8,7 @@ import { BackgroundImage } from './background-image';
 import { Box } from './base';
 import { Heading, InlineText, Text } from './typography';
 
-export type CustomContentProps = {
+export type HighlightTeaserProps = {
   title: string;
   summary: Block;
   cover: ImageBlock;
@@ -18,12 +18,12 @@ export type CustomContentProps = {
   };
 };
 
-export function CustomContentTeaser(props: CustomContentProps) {
+export function HighlightTeaser(props: HighlightTeaserProps) {
   const { title, link, summary, cover } = props;
 
   return (
     <Link passHref href={link.href}>
-      <StyledCustomTeaser>
+      <StyledHightlightTeaser>
         <CoverImage height={200} image={cover} />
         <Box padding={3}>
           <Heading level={3} mb={{ _: 1, sm: 3 }} lineHeight={{ _: 0, sm: 2 }}>
@@ -36,12 +36,12 @@ export function CustomContentTeaser(props: CustomContentProps) {
             <Arrow />
           </InlineText>
         </Box>
-      </StyledCustomTeaser>
+      </StyledHightlightTeaser>
     </Link>
   );
 }
 
-const StyledCustomTeaser = styled.a(
+const StyledHightlightTeaser = styled.a(
   css({
     display: 'block',
     border: 'solid',

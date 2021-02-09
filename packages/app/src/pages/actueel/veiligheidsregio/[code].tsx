@@ -39,7 +39,7 @@ import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 export { getStaticPaths } from '~/static-paths/vr';
-import { CustomContentProps } from '~/components-styled/custom-content-teaser';
+import { HighlightTeaserProps } from '~/components-styled/highlight-teaser';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -51,11 +51,7 @@ export const getStaticProps = createGetStaticProps(
   createGetContent<{
     articles: ArticleSummary[];
     editorial: EditorialSummary;
-    highlight: {
-      isArticle: boolean;
-      article?: ArticleSummary;
-      customContent?: CustomContentProps;
-    };
+    highlight: HighlightTeaserProps;
   }>(topicalPageQuery)
 );
 
@@ -182,7 +178,7 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
             {content.editorial && content.highlight && (
               <EditorialTile
                 editorial={content.editorial}
-                highlighted={content.highlight}
+                highlight={content.highlight}
               />
             )}
 
