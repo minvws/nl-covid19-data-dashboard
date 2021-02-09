@@ -49,7 +49,7 @@ const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
   content,
 }) => {
   const { behavior } = data;
-  const { nl_gedrag, corona_app } = siteText;
+  const { nl_gedrag, corona_melder_app } = siteText;
 
   return (
     <>
@@ -117,41 +117,43 @@ const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
         <MoreInformation />
 
         <ContentHeader
-          category={corona_app.header.category}
-          title={corona_app.header.title}
+          category={corona_melder_app.header.category}
+          title={corona_melder_app.header.title}
           icon={<Phone />}
-          subtitle={corona_app.header.description}
+          subtitle={corona_melder_app.header.description}
           metadata={{
-            datumsText: corona_app.header.datums,
+            datumsText: corona_melder_app.header.datums,
             dateOrRange: behavior.last_value.date_start_unix,
             dateOfInsertionUnix: behavior.last_value.date_of_insertion_unix,
-            dataSources: [corona_app.header.bronnen.rivm],
+            dataSources: [corona_melder_app.header.bronnen.rivm],
           }}
-          reference={corona_app.header.reference}
+          reference={corona_melder_app.header.reference}
         />
 
         <TwoKpiSection>
           <KpiTile
-            title={corona_app.waarschuwen.title}
+            title={corona_melder_app.waarschuwen.title}
             metadata={{
               date: behavior.last_value.date_start_unix,
-              source: corona_app.header.bronnen.rivm,
+              source: corona_melder_app.header.bronnen.rivm,
             }}
           >
             <KpiValue
               data-cy="infected"
-              absolute={data.corona_app.last_value.warned_daily}
-              difference={data.difference.corona_app__warned_daily}
+              absolute={data.corona_melder_app.last_value.warned_daily}
+              difference={data.difference.corona_melder_app__warned_daily}
             />
 
-            <Text>{corona_app.waarschuwen.description}</Text>
+            <Text>{corona_melder_app.waarschuwen.description}</Text>
             <Text>
-              {replaceComponentsInText(corona_app.waarschuwen.total, {
+              {replaceComponentsInText(corona_melder_app.waarschuwen.total, {
                 totalDownloads: (
                   <span
                     css={css({ color: 'data.primary', fontWeight: 'bold' })}
                   >
-                    {formatNumber(data.corona_app.last_value.downloaded_total)}
+                    {formatNumber(
+                      data.corona_melder_app.last_value.downloaded_total
+                    )}
                   </span>
                 ),
               })}
@@ -159,16 +161,16 @@ const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
           </KpiTile>
 
           <Tile>
-            <Heading level={3}>{corona_app.rapport.title}</Heading>
-            <Text>{corona_app.rapport.description}</Text>
+            <Heading level={3}>{corona_melder_app.rapport.title}</Heading>
+            <Text>{corona_melder_app.rapport.description}</Text>
 
-            <Link href={corona_app.rapport.link.href} passHref>
+            <Link href={corona_melder_app.rapport.link.href} passHref>
               <a target="_blank" css={css({ display: 'flex' })}>
                 <IconContainer>
                   <ExternalLinkIcon />
                 </IconContainer>
                 <span css={css({ maxWidth: 200 })}>
-                  {corona_app.rapport.link.text}
+                  {corona_melder_app.rapport.link.text}
                 </span>
               </a>
             </Link>
@@ -187,7 +189,7 @@ const IconContainer = styled.span(
   css({
     marginRight: 3,
     color: 'gray',
-    height: '25px',
-    width: '25px',
+    height: 25,
+    width: 25,
   })
 );

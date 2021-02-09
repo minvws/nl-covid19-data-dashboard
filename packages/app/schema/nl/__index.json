@@ -111,8 +111,8 @@
     "vaccine_support": {
       "$ref": "vaccine_support.json"
     },
-    "corona_app": {
-      "$ref": "corona_app.json"
+    "corona_melder_app": {
+      "$ref": "corona_melder_app.json"
     },
     "vaccine_delivery": {
       "$ref": "vaccine_delivery.json"
