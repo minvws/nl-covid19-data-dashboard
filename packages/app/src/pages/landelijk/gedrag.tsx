@@ -1,5 +1,6 @@
 import { css } from '@styled-system/css';
 import styled from 'styled-components';
+import ExternalLinkIcon from '~/assets/external-link.svg';
 import Gedrag from '~/assets/gedrag.svg';
 import Phone from '~/assets/phone.svg';
 import { ArticleStrip } from '~/components-styled/article-strip';
@@ -28,10 +29,8 @@ import {
   getNlData,
 } from '~/static-props/get-data';
 import { formatNumber } from '~/utils/formatNumber';
-import { replaceKpisInText } from '~/utils/replaceKpisInText';
-import ExternalLinkIcon from '~/assets/external-link.svg';
-import { Box } from '~/components-styled/base';
 import { Link } from '~/utils/link';
+import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -147,21 +146,15 @@ const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
 
             <Text>{corona_app.waarschuwen.description}</Text>
             <Text>
-              <span
-                css={css({
-                  '& > span': { color: 'data.primary', fontWeight: 'bold' },
-                })}
-                dangerouslySetInnerHTML={{
-                  __html: replaceKpisInText(corona_app.waarschuwen.total, [
-                    {
-                      name: 'totalDownloads',
-                      value: formatNumber(
-                        data.corona_app.last_value.downloaded_total
-                      ),
-                    },
-                  ]),
-                }}
-              />
+              {replaceComponentsInText(corona_app.waarschuwen.total, {
+                totalDownloads: (
+                  <span
+                    css={css({ color: 'data.primary', fontWeight: 'bold' })}
+                  >
+                    {formatNumber(data.corona_app.last_value.downloaded_total)}
+                  </span>
+                ),
+              })}
             </Text>
           </KpiTile>
 
@@ -169,16 +162,16 @@ const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
             <Heading level={3}>{corona_app.rapport.title}</Heading>
             <Text>{corona_app.rapport.description}</Text>
 
-            <Box display={'flex'}>
-              <IconContainer>
-                <ExternalLinkIcon />
-              </IconContainer>
-              <Link href={corona_app.rapport.link.href} passHref>
-                <a target="_blank">
-                  <Anchor>{corona_app.rapport.link.text}</Anchor>
-                </a>
-              </Link>
-            </Box>
+            <Link href={corona_app.rapport.link.href} passHref>
+              <a target="_blank" css={css({ display: 'flex' })}>
+                <IconContainer>
+                  <ExternalLinkIcon />
+                </IconContainer>
+                <span css={css({ maxWidth: 200 })}>
+                  {corona_app.rapport.link.text}
+                </span>
+              </a>
+            </Link>
           </Tile>
         </TwoKpiSection>
       </TileList>
@@ -190,16 +183,11 @@ BehaviorPage.getLayout = getNationalLayout;
 
 export default BehaviorPage;
 
-const Anchor = styled.a(
-  css({
-    maxWidth: 200,
-  })
-);
-
 const IconContainer = styled.span(
   css({
-    paddingTop: 1,
-    paddingRight: 3,
+    marginRight: 3,
     color: 'gray',
+    height: '25px',
+    width: '25px',
   })
 );
