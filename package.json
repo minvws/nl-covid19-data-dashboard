@@ -12,7 +12,7 @@
   "scripts": {
     "test": "yarn workspaces run test",
     "test:ci": "yarn workspaces run test:ci",
-    "clean": "rimraf .build-cache && yarn workspace @corona-dashboard/common clean",
+    "clean": "rimraf .build-cache && yarn workspace @corona-dashboard/common clean && yarn workspace @corona-dashboard/app clean",
     "compile": "yarn workspace @corona-dashboard/common build && yarn workspaces run compile",
     "lint": "yarn workspaces run lint",
     "format": "yarn workspaces run format",
