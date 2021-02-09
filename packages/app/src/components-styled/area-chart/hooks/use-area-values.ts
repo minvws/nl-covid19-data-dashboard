@@ -1,9 +1,8 @@
-import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
 import {
   getTimeframeValues,
   timestampToDate,
-  TrendValue,
+  TrendValueWithDates,
 } from '~/components-styled/line-chart/logic';
 import {
   isDateSeries,
@@ -11,36 +10,32 @@ import {
   Value,
 } from '~/components-styled/stacked-chart/logic';
 import { TimeframeOption } from '~/utils/timeframe';
-import { isArrayOfArrays } from '~/utils/typeguards/is-array-of-arrays';
+import { AreaDescriptor } from '../area-chart';
 import { AreaConfig } from '../area-chart-graph';
 
 export function useAreaValues<T extends Value>(
-  values: T[] | T[][],
-  areaConfigs: AreaConfig<T>[] | AreaConfig<T>[][],
+  areaDescriptors: AreaDescriptor<T>[],
   timeframe: TimeframeOption
-): (TrendValue & Value)[][] {
-  const configList = isArrayOfArrays(areaConfigs) ? areaConfigs : [areaConfigs];
-  const metricProperties = useMemo(
-    () => configList.map((x) => x.map((x) => x.metricProperty)),
-    [areaConfigs]
+): AreaConfig<T & TrendValueWithDates>[] {
+  const areaConfigs = areaDescriptors.map<AreaConfig<T & TrendValueWithDates>>(
+    (descriptor) => ({
+      values: getAreaData(
+        descriptor.values,
+        descriptor.displays.map((x) => x.metricProperty),
+        timeframe
+      ),
+      displays: [...descriptor.displays.map((x) => ({ ...x }))],
+    })
   );
 
-  const valuesList = isArrayOfArrays(values) ? values : [values];
-
-  const areaLists = useMemo(
-    () =>
-      valuesList.map((x, i) => getAreaData(x, metricProperties[i], timeframe)),
-    [values, metricProperties, timeframe]
-  );
-
-  return areaLists;
+  return areaConfigs;
 }
 
 export function getAreaData<T extends Value>(
   values: T[],
   metricProperties: (keyof T)[],
   timeframe: TimeframeOption
-): (TrendValue & Value)[] {
+): (T & TrendValueWithDates)[] {
   const valuesInFrame = getTimeframeValues(values, timeframe);
 
   if (valuesInFrame.length === 0) {
@@ -58,7 +53,7 @@ export function getAreaData<T extends Value>(
 
   if (isDateSeries(valuesInFrame)) {
     return valuesInFrame
-      .map((x) => ({
+      .map<T & TrendValueWithDates>((x: any) => ({
         ...x,
         __value: sum(x, metricProperties),
         __date: timestampToDate(x.date_unix),
@@ -68,7 +63,7 @@ export function getAreaData<T extends Value>(
 
   if (isDateSpanSeries(valuesInFrame)) {
     return valuesInFrame
-      .map((x) => ({
+      .map<T & TrendValueWithDates>((x: any) => ({
         ...x,
         __value: sum(x, metricProperties),
         __date: timestampToDate(x.date_start_unix),

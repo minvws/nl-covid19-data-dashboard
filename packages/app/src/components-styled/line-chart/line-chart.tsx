@@ -120,7 +120,7 @@ export function LineChart<T extends Value>({
   const trendsList = useTrendValues(values, linesConfig, timeframe);
 
   const [xDomain, yDomain, seriesMax] = useDomains(
-    trendsList,
+    trendsList.flat(),
     signaalwaarde,
     overrideSeriesMax
   );
@@ -287,11 +287,6 @@ function formatDefaultTooltip<T extends Value>(
   values: (T & TrendValue)[],
   isPercentage?: boolean
 ) {
-  // default tooltip assumes one line is rendered:
-  const value = values[0];
-  const isDaily = isDateSeries(values);
-  const isWeekly = isDateSpanSeries(values);
-
   if (isDateSeries(values)) {
     const value = values[0];
     return (

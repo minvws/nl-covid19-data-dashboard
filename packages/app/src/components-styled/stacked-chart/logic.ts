@@ -1,4 +1,4 @@
-import { omit, pick, mapValues } from 'lodash';
+import { mapValues, omit, pick } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { assert } from '~/utils/assert';
 import { getDaysForTimeframe, TimeframeOption } from '~/utils/timeframe';
@@ -37,7 +37,7 @@ export function isDateSeries(series: Value[]): series is DateValue[] {
 
   assert(
     isDefined(firstValue),
-    'Unable to determine timestamps if time series is empty'
+    'Unable to determine timestamps when time series is empty'
   );
 
   return firstValue.date_unix !== undefined;
@@ -48,7 +48,7 @@ export function isDateSpanSeries(series: Value[]): series is DateSpanValue[] {
 
   assert(
     isDefined(firstValue),
-    'Unable to determine timestamps if time series is empty'
+    'Unable to determine timestamps when time series is empty'
   );
 
   return (
@@ -86,15 +86,17 @@ export function calculateSeriesMaximum(series: SeriesValue[]) {
 export function getValuesInTimeframe<T extends Value>(
   values: T[],
   timeframe: TimeframeOption
-) {
+): T[] {
   const boundary = getTimeframeBoundaryUnix(timeframe);
 
   if (isDateSeries(values)) {
-    return values.filter((x: DateValue) => x.date_unix >= boundary);
+    return values.filter((x: DateValue) => x.date_unix >= boundary) as T[];
   }
 
   if (isDateSpanSeries(values)) {
-    return values.filter((x: DateSpanValue) => x.date_start_unix >= boundary);
+    return values.filter(
+      (x: DateSpanValue) => x.date_start_unix >= boundary
+    ) as T[];
   }
 
   throw new Error(`Incompatible timestamps are used in value ${values[0]}`);

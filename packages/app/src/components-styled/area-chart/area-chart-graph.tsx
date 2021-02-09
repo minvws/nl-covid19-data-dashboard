@@ -6,13 +6,23 @@ import { ScaleLinear, ScaleTime } from 'd3-scale';
 import styled from 'styled-components';
 import { colors } from '~/style/theme';
 import { LegendShape } from '../legenda';
-import { LineConfig } from '../line-chart';
-import { ChartBounds, ChartPadding } from '../line-chart/components';
+import { ChartBounds, ChartPadding, Trend } from '../line-chart/components';
 import { AnyTickFormatter } from '../line-chart/components/chart-axes';
-import { SingleTrendData, TrendData } from '../line-chart/logic';
-import { Value } from '../stacked-chart/logic';
+import { TrendValue } from '../line-chart/logic';
 
-export type AreaConfig<T> = {
+export type TrendConfig<T> = {
+  values: T[];
+  color?: string;
+  style?: 'solid' | 'dashed';
+  areaFill: boolean;
+  areaFillOpacity?: number;
+  strokeWidth?: number;
+  legendLabel?: string;
+  legendShape?: LegendShape;
+};
+
+export type AreaDisplay<T> = {
+  name: string;
   metricProperty: keyof T;
   color?: string;
   pattern?: 'hatched' | 'none';
@@ -21,17 +31,20 @@ export type AreaConfig<T> = {
   legendShape?: LegendShape;
 };
 
+export type AreaConfig<T> = {
+  values: T[];
+  displays: AreaDisplay<T>[];
+};
+
 const defaultColors = {
   axis: colors.silver,
   axisLabels: colors.data.axisLabels,
   benchmark: colors.data.benchmark,
 };
 
-type AreaChartGraphProps<T extends Value> = {
-  trendValues: TrendData;
-  lineConfigs: LineConfig<T>[];
-  areaValues: SingleTrendData;
-  areaConfig: Record<string, AreaConfig<T>>;
+type AreaChartGraphProps<T extends TrendValue, K extends TrendValue> = {
+  trends: TrendConfig<T>[];
+  areas: AreaConfig<K>[];
   bounds: ChartBounds;
   padding: ChartPadding;
   scales: {
@@ -43,10 +56,12 @@ type AreaChartGraphProps<T extends Value> = {
   formatYAxis: TickFormatter<number>;
 };
 
-export function AreaChartGraph<T extends Value>(props: AreaChartGraphProps<T>) {
+export function AreaChartGraph<T extends TrendValue, K extends TrendValue>(
+  props: AreaChartGraphProps<T, K>
+) {
   const {
-    areaValues,
-    areaConfig,
+    trends,
+    areas,
     bounds,
     scales,
     numTicks,
@@ -55,7 +70,6 @@ export function AreaChartGraph<T extends Value>(props: AreaChartGraphProps<T>) {
     padding,
   } = props;
   const { xScale, yScale } = scales;
-  const areaKeys = Object.keys(areaConfig);
 
   return (
     <StyledSvg
@@ -65,19 +79,21 @@ export function AreaChartGraph<T extends Value>(props: AreaChartGraphProps<T>) {
       height={bounds.height}
     >
       <defs>
-        {areaKeys
-          .filter((key) => areaConfig[key].pattern === 'hatched')
-          .map((key) => {
-            const config = areaConfig[key];
+        {areas
+          .map((x) => x.displays)
+          .flat()
+          .filter((display) => display.pattern === 'hatched')
+          .map((display) => {
             return (
               <pattern
-                id={`pattern-${key}`}
+                key={`pattern-${display.name}-${display.metricProperty}`}
+                id={`pattern-${display.name}-${display.metricProperty}`}
                 width="10"
                 height="10"
                 patternTransform="rotate(-45 0 0)"
                 patternUnits="userSpaceOnUse"
               >
-                <rect x="0" y="0" width="10" height="10" fill={config.color} />
+                <rect x="0" y="0" width="10" height="10" fill={display.color} />
                 <line
                   x1="0"
                   y1="0"
@@ -125,39 +141,59 @@ export function AreaChartGraph<T extends Value>(props: AreaChartGraphProps<T>) {
           verticalAnchor: 'middle',
         })}
       />
-
-      <AreaStack
-        top={padding.top}
-        left={padding.left}
-        keys={areaKeys}
-        data={areaValues}
-        x={(d) => xScale(d.data.__date) ?? 0}
-        y0={(d) => yScale(d[0]) ?? 0}
-        y1={(d) => yScale(d[1]) ?? 0}
-      >
-        {({ stacks, path }) =>
-          stacks.map((stack) => (
-            <path
-              key={`area-chart-stack-${stack.key}`}
-              d={path(stack) || ''}
-              stroke="transparent"
-              fill={getFill(areaConfig[stack.key], stack.key)}
-              onClick={() => {
-                alert(stack.key);
-              }}
+      {areas.map((area, index) => (
+        <AreaStack
+          key={index}
+          top={padding.top}
+          left={padding.left}
+          keys={area.displays.map((x) => x.metricProperty) as string[]}
+          data={area.values}
+          x={(d) => xScale(d.data.__date) ?? 0}
+          y0={(d) => yScale(d[0]) ?? 0}
+          y1={(d) => yScale(d[1]) ?? 0}
+        >
+          {({ stacks, path }) =>
+            stacks.map((stack) => (
+              <path
+                key={`area-chart-stack-${stack.key}`}
+                d={path(stack) || ''}
+                stroke="transparent"
+                fill={getFill(area.displays, stack.key)}
+                onClick={() => {
+                  alert(stack.key);
+                }}
+              />
+            ))
+          }
+        </AreaStack>
+      ))}
+      {trends.length > 0 && (
+        <g>
+          {trends.map((trendConfig, index) => (
+            <Trend
+              areaFillOpacity={trendConfig.areaFillOpacity}
+              key={index}
+              trend={trendConfig.values}
+              type={trendConfig.areaFill ? 'area' : 'line'}
+              strokeWidth={trendConfig.strokeWidth}
+              style={trendConfig.style}
+              xScale={xScale}
+              yScale={yScale}
+              color={trendConfig.color}
             />
-          ))
-        }
-      </AreaStack>
+          ))}
+        </g>
+      )}
     </StyledSvg>
   );
 }
 
-function getFill(areaConfig: AreaConfig, areaKey: string) {
-  if (areaConfig.pattern === 'hatched') {
-    return `url(#pattern-${areaKey})`;
+function getFill<T>(areaConfig: AreaDisplay<T>[], areaKey: string) {
+  const display = areaConfig.find((x) => x.metricProperty === areaKey);
+  if (display?.pattern === 'hatched') {
+    return `url(#pattern-${display.name}-${display.metricProperty})`;
   }
-  return areaConfig.color;
+  return display?.color ?? '#000';
 }
 
 const StyledSvg = styled.svg(

@@ -1,7 +1,5 @@
 import { isPresent } from 'ts-is-present';
 import {
-  DateSpanValue,
-  DateValue,
   getValuesInTimeframe,
   isDateSeries,
   isDateSpanSeries,
@@ -30,24 +28,17 @@ export type AnyFilteredValue = Record<string, number>;
  * render lines, so that the axis scales with whatever key contains the highest
  * values.
  */
-export function calculateYMax(
-  values: TrendValue[][],
-  signaalwaarde = -Infinity
-) {
-  const peakValues = values.map((list) =>
-    list
-      .map((x) => x.__value)
-      .filter(isPresent) // omit null values
-      .reduce((acc, value) => (value > acc ? value : acc), -Infinity)
-  );
-
-  const overallMaximum = Math.max(...peakValues);
+export function calculateYMax(values: TrendValue[], signaalwaarde = -Infinity) {
+  const peakValues = values
+    .map((x) => x.__value)
+    .filter(isPresent) // omit null values
+    .reduce((acc, value) => (value > acc ? value : acc), -Infinity);
 
   /**
    * Value cannot be 0, hence the 1 If the value is below signaalwaarde, make
    * sure the signaalwaarde floats in the middle
    */
-  return Math.max(overallMaximum, signaalwaarde * 2, 1);
+  return Math.max(peakValues, signaalwaarde * 2, 1);
 }
 
 /**
@@ -89,31 +80,28 @@ export type TrendValue = {
   __value: number;
 };
 
-export const timestampToDate = (d: number) => new Date(d * 1000);
+export type TrendValueWithDates = TrendValue & Value;
 
-export type SingleTrendData = (TrendValue & Value)[];
-export type TrendData = SingleTrendData[];
+export const timestampToDate = (d: number) => new Date(d * 1000);
 
 export function getTrendData<T extends Value>(
   values: T[],
   metricProperties: (keyof T)[],
   timeframe: TimeframeOption
-): TrendData {
-  const series = getValuesInTimeframe(values, timeframe);
+): (T & TrendValueWithDates)[][] {
+  const series = getValuesInTimeframe<T>(values, timeframe);
 
-  const trendData = metricProperties.map(
-    (metricProperty) =>
-      (getSingleTrendData(series, metricProperty) as unknown) as (TrendValue &
-        Value)[]
+  const trendData = metricProperties.map((metricProperty) =>
+    getSingleTrendData(series, metricProperty)
   );
 
   return trendData;
 }
 
 export function getSingleTrendData<T extends Value>(
-  values: DateValue[] | DateSpanValue[],
+  values: T[],
   metricProperty: keyof T
-): TrendValue[] {
+): (T & TrendValueWithDates)[] {
   if (values.length === 0) {
     /**
      * It could happen that you are using an old dataset and select last week as
@@ -125,27 +113,19 @@ export function getSingleTrendData<T extends Value>(
 
   if (isDateSeries(values)) {
     return values
-      .map((x) => ({
+      .map<T & TrendValueWithDates>((x: any) => ({
         ...x,
-        /**
-         * Not sure why we need to cast to number if isPresent is used to filter
-         * out the null values.
-         */
-        __value: x[metricProperty as keyof DateValue],
+        __value: x[metricProperty],
         __date: timestampToDate(x.date_unix),
       }))
-      .filter((x) => isPresent(x.__value));
+      .filter((x) => isPresent(x.__value)) as (T & TrendValueWithDates)[];
   }
 
   if (isDateSpanSeries(values)) {
     return values
-      .map((x) => ({
+      .map<T & TrendValueWithDates>((x: any) => ({
         ...x,
-        /**
-         * Not sure why we need to cast to number if isPresent is used to filter
-         * out the null values.
-         */
-        __value: x[metricProperty as keyof DateSpanValue],
+        __value: x[metricProperty],
         __date: timestampToDate(
           /**
            * Here we set the date to be in the middle of the timespan, so that

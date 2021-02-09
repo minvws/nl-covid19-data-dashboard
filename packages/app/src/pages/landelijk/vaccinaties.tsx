@@ -31,7 +31,6 @@ import {
   getNlData,
   getText,
 } from '~/static-props/get-data';
-import { colors } from '~/style/theme';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
@@ -233,13 +232,8 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                 <AreaChart
                   width={width}
                   timeframe="all"
-                  areaValues={data.vaccine_delivery.values}
-                  areaConfigs={Object.keys(colors.data.vaccines).map(
-                    (name) => ({
-                      metricProperty: name,
-                      color: (colors.data.vaccines as any)[name],
-                    })
-                  )}
+                  trends={[]}
+                  areas={[]}
                 />
               )}
             </ParentSize>

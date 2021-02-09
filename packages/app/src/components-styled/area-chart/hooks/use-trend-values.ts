@@ -1,27 +1,42 @@
 import { useMemo } from 'react';
-import { getTrendData, TrendData } from '~/components-styled/line-chart/logic';
-import { Value } from '~/components-styled/stacked-chart/logic';
+import {
+  getSingleTrendData,
+  TrendValueWithDates,
+} from '~/components-styled/line-chart/logic';
+import {
+  getValuesInTimeframe,
+  Value,
+} from '~/components-styled/stacked-chart/logic';
 import { TimeframeOption } from '~/utils/timeframe';
-import { isArrayOfArrays } from '~/utils/typeguards/is-array-of-arrays';
+import { TrendDescriptor } from '../area-chart';
+import { TrendConfig } from '../area-chart-graph';
 
 export function useTrendValues<T extends Value>(
-  values: T[] | T[][],
-  configs: { metricProperty: keyof T }[] | { metricProperty: keyof T }[][],
+  trendDescriptors: TrendDescriptor<T>[],
   timeframe: TimeframeOption
-): TrendData[] {
-  const configList = isArrayOfArrays(configs) ? configs : [configs];
-  const metricProperties = useMemo(
-    () => configList.map((x) => x.map((x) => x.metricProperty)),
-    [configs]
-  );
-
-  const valuesList = isArrayOfArrays(values) ? values : [values];
-
-  const trendsLists = useMemo(
+): TrendConfig<T & TrendValueWithDates>[] {
+  const trendConfigs = useMemo(
     () =>
-      valuesList.map((x, i) => getTrendData(x, metricProperties[i], timeframe)),
-    [values, metricProperties, timeframe]
+      trendDescriptors
+        .map((descriptor) => {
+          const series = getValuesInTimeframe(descriptor.values, timeframe);
+          return descriptor.displays.map<TrendConfig<T & TrendValueWithDates>>(
+            (displayConfig) => {
+              // eslint-disable-next-line @typescript-eslint/no-unused-vars
+              const { metricProperty, ...displayProps } = displayConfig;
+              return {
+                values: getSingleTrendData(
+                  series,
+                  displayConfig.metricProperty
+                ),
+                ...displayProps,
+              };
+            }
+          );
+        })
+        .flat(),
+    [trendDescriptors, timeframe]
   );
 
-  return trendsLists;
+  return trendConfigs;
 }
