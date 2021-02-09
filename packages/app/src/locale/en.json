@@ -1470,7 +1470,7 @@
     "bronnen": {
       "rivm": {
         "download": "https://data.rivm.nl/covid-19/COVID-19_gehandicaptenzorg.csv",
-        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_gehandicaptenzorg.html",
         "text": "RIVM"
       }
     }
@@ -1501,7 +1501,7 @@
     "bronnen": {
       "rivm": {
         "download": "https://data.rivm.nl/covid-19/COVID-19_gehandicaptenzorg.csv",
-        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_gehandicaptenzorg.html",
         "text": "RIVM"
       }
     },
@@ -1538,7 +1538,7 @@
   "veiligheidsregio_gehandicaptenzorg_oversterfte": {
     "datums": "Latest values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
-      "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
+      "href": "https://data.rivm.nl/covid-19/COVID-19_gehandicaptenzorg.html",
       "text": "RIVM"
     },
     "titel": "Disability care homes in {{safetyRegion}} – deaths",
