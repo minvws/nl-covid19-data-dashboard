@@ -3,7 +3,6 @@ const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const sitemap = require('./generate-sitemap.js');
 
 const withTM = require('next-transpile-modules')([
-  'd3-array',
   '@visx/scale',
   '@visx/event',
   '@visx/tooltip',
