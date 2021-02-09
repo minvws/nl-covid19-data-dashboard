@@ -128,6 +128,9 @@ export interface National {
   elderly_at_home: NationalElderlyAtHome;
   vaccine_support: NlVaccineSupport;
   vaccine_delivery: NlVaccineDelivery;
+  vaccine_delivery_estimate: NlVaccineEstimateDelivery;
+  vaccine_administered: NlVaccineAdministered;
+  vaccine_administered_estimate: NlVaccineAdministeredEstimate;
 }
 export interface NationalDifference {
   tested_overall__infected_per_100k: DifferenceDecimal;
@@ -432,6 +435,53 @@ export interface NlVaccineDeliveryValue {
   cure_vac: number;
   janssen: number;
   sanofi: number;
+  date_of_insertion_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
+}
+export interface NlVaccineEstimateDelivery {
+  values: NlVaccineDeliveryEstimateValue[];
+  last_value: NlVaccineDeliveryEstimateValue;
+}
+export interface NlVaccineDeliveryEstimateValue {
+  pfizer: number;
+  moderna: number;
+  astra_zeneca: number;
+  cure_vac: number;
+  janssen: number;
+  sanofi: number;
+  date_of_insertion_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
+}
+export interface NlVaccineAdministered {
+  values: NlVaccineAdministeredValue[];
+  last_value: NlVaccineAdministeredValue;
+}
+export interface NlVaccineAdministeredValue {
+  pfizer: number;
+  moderna: number;
+  astra_zeneca: number;
+  cure_vac: number;
+  janssen: number;
+  sanofi: number;
+  total: number;
+  date_of_insertion_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
+}
+export interface NlVaccineAdministeredEstimate {
+  values: NlVaccineAdministeredEstimateValue[];
+  last_value: NlVaccineAdministeredEstimateValue;
+}
+export interface NlVaccineAdministeredEstimateValue {
+  pfizer: number;
+  moderna: number;
+  astra_zeneca: number;
+  cure_vac: number;
+  janssen: number;
+  sanofi: number;
+  total: number;
   date_of_insertion_unix: number;
   date_start_unix: number;
   date_end_unix: number;
