@@ -31,7 +31,7 @@ export type TrendDisplay<T> = {
   metricProperty: keyof T;
   color?: string;
   style?: 'solid' | 'dashed';
-  areaFill: boolean;
+  areaFill?: boolean;
   areaFillOpacity?: number;
   strokeWidth?: number;
   legendLabel?: string;

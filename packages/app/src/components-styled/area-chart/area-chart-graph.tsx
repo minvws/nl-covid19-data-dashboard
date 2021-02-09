@@ -22,7 +22,7 @@ export type TrendConfig<T> = {
 };
 
 export type AreaDisplay<T> = {
-  name: string;
+  id?: string;
   metricProperty: keyof T;
   color?: string;
   pattern?: 'hatched' | 'none';
@@ -86,8 +86,8 @@ export function AreaChartGraph<T extends TrendValue, K extends TrendValue>(
           .map((display) => {
             return (
               <pattern
-                key={`pattern-${display.name}-${display.metricProperty}`}
-                id={`pattern-${display.name}-${display.metricProperty}`}
+                key={`pattern-${display.id}-${display.metricProperty}`}
+                id={`pattern-${display.id}-${display.metricProperty}`}
                 width="10"
                 height="10"
                 patternTransform="rotate(-45 0 0)"
@@ -191,7 +191,7 @@ export function AreaChartGraph<T extends TrendValue, K extends TrendValue>(
 function getFill<T>(areaConfig: AreaDisplay<T>[], areaKey: string) {
   const display = areaConfig.find((x) => x.metricProperty === areaKey);
   if (display?.pattern === 'hatched') {
-    return `url(#pattern-${display.name}-${display.metricProperty})`;
+    return `url(#pattern-${display.id}-${display.metricProperty})`;
   }
   return display?.color ?? '#000';
 }
