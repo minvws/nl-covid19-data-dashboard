@@ -1,0 +1,57 @@
+{
+  "definitions": {
+    "value": {
+      "title": "nl_vaccine_dose_value",
+      "type": "object",
+      "required": [
+        "calculated",
+        "calculated_ggd",
+        "calculated_hospitals",
+        "calculated_care_institutions",
+        "reported",
+        "reported_ggd_ghor",
+        "reported_lnaz"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "calculated": {
+          "type": "number"
+        },
+        "calculated_ggd": {
+          "type": "number"
+        },
+        "calculated_hospitals": {
+          "type": "number"
+        },
+        "calculated_care_institutions": {
+          "type": "number"
+        },
+        "reported": {
+          "type": "number"
+        },
+        "reported_ggd_ghor": {
+          "type": "number"
+        },
+        "reported_lnaz": {
+          "type": "number"
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "nl_vaccine_dose",
+  "type": "object",
+  "required": ["values", "last_value"],
+  "additionalProperties": false,
+  "properties": {
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/value"
+      }
+    },
+    "last_value": {
+      "$ref": "#/definitions/value"
+    }
+  }
+}

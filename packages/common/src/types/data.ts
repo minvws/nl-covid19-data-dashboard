@@ -128,6 +128,7 @@ export interface National {
   elderly_at_home: NationalElderlyAtHome;
   vaccine_support: NlVaccineSupport;
   vaccine_delivery: NlVaccineDelivery;
+  vaccine_dose: NlVaccineDose;
 }
 export interface NationalDifference {
   tested_overall__infected_per_100k: DifferenceDecimal;
@@ -439,6 +440,19 @@ export interface NlVaccineDeliveryValue {
   date_of_insertion_unix: number;
   date_start_unix: number;
   date_end_unix: number;
+}
+export interface NlVaccineDose {
+  values: NlVaccineDoseValue[];
+  last_value: NlVaccineDoseValue;
+}
+export interface NlVaccineDoseValue {
+  calculated: number;
+  calculated_ggd: number;
+  calculated_hospitals: number;
+  calculated_care_institutions: number;
+  reported: number;
+  reported_ggd_ghor: number;
+  reported_lnaz: number;
 }
 
 export interface Regionaal {
