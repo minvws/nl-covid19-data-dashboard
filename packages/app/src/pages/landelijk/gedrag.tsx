@@ -140,7 +140,7 @@ const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
           >
             <KpiValue
               data-cy="infected"
-              absolute={data.corona_melder_app.last_value.warned_daily}
+              absolute={data.corona_melder_app?.last_value.warned_daily}
               difference={data.difference.corona_melder_app__warned_daily}
             />
 
@@ -152,7 +152,7 @@ const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
                     css={css({ color: 'data.primary', fontWeight: 'bold' })}
                   >
                     {formatNumber(
-                      data.corona_melder_app.last_value.downloaded_total
+                      data.corona_melder_app?.last_value.downloaded_total
                     )}
                   </span>
                 ),
