@@ -126,6 +126,7 @@ export interface National {
   deceased_rivm_per_age_group: NlDeceasedRivmPerAgeGroup;
   deceased_cbs: NationalDeceasedCbs;
   elderly_at_home: NationalElderlyAtHome;
+  vaccine_support: NlVaccineSupport;
   vaccine_delivery: NlVaccineDelivery;
 }
 export interface NationalDifference {
@@ -322,6 +323,8 @@ export interface NationalBehavior {
 }
 export interface NationalBehaviorValue {
   number_of_participants: number;
+  curfew_compliance: number | null;
+  curfew_compliance_trend: ("up" | "down" | "equal") | null;
   wash_hands_compliance: number | null;
   wash_hands_compliance_trend: ("up" | "down" | "equal") | null;
   keep_distance_compliance: number | null;
@@ -342,6 +345,8 @@ export interface NationalBehaviorValue {
   sneeze_cough_elbow_compliance_trend: ("up" | "down" | "equal") | null;
   max_visitors_compliance: number | null;
   max_visitors_compliance_trend: ("up" | "down" | "equal") | null;
+  curfew_support: number | null;
+  curfew_support_trend: ("up" | "down" | "equal") | null;
   wash_hands_support: number | null;
   wash_hands_support_trend: ("up" | "down" | "equal") | null;
   keep_distance_support: number | null;
@@ -407,6 +412,17 @@ export interface NationalElderlyAtHomeValue {
   positive_tested_daily_per_100k: number;
   deceased_daily: number;
   date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlVaccineSupport {
+  values: NlVaccineSupportValue[];
+  last_value: NlVaccineSupportValue;
+}
+export interface NlVaccineSupportValue {
+  percentage_in_favor: number;
+  percentage_already_vaccinated: number;
+  date_start_unix: number;
+  date_end_unix: number;
   date_of_insertion_unix: number;
 }
 export interface NlVaccineDelivery {
@@ -576,6 +592,8 @@ export interface RegionalBehavior {
 }
 export interface RegionalBehaviorValue {
   number_of_participants: number;
+  curfew_compliance: number | null;
+  curfew_compliance_trend: ("up" | "down" | "equal") | null;
   wash_hands_compliance: number | null;
   wash_hands_compliance_trend: ("up" | "down" | "equal") | null;
   keep_distance_compliance: number | null;
@@ -590,6 +608,8 @@ export interface RegionalBehaviorValue {
   sneeze_cough_elbow_compliance_trend: ("up" | "down" | "equal") | null;
   max_visitors_compliance: number | null;
   max_visitors_compliance_trend: ("up" | "down" | "equal") | null;
+  curfew_support: number | null;
+  curfew_support_trend: ("up" | "down" | "equal") | null;
   wash_hands_support: number | null;
   wash_hands_support_trend: ("up" | "down" | "equal") | null;
   keep_distance_support: number | null;
@@ -702,6 +722,8 @@ export interface RegionsSewer {
 export interface RegionsBehavior {
   vrcode: string;
   number_of_participants: number;
+  curfew_compliance: number | null;
+  curfew_compliance_trend: ("up" | "down" | "equal") | null;
   wash_hands_compliance: number | null;
   wash_hands_compliance_trend: ("up" | "down" | "equal") | null;
   keep_distance_compliance: number | null;
@@ -716,6 +738,8 @@ export interface RegionsBehavior {
   sneeze_cough_elbow_compliance_trend: ("up" | "down" | "equal") | null;
   max_visitors_compliance: number | null;
   max_visitors_compliance_trend: ("up" | "down" | "equal") | null;
+  curfew_support: number | null;
+  curfew_support_trend: ("up" | "down" | "equal") | null;
   wash_hands_support: number | null;
   wash_hands_support_trend: ("up" | "down" | "equal") | null;
   keep_distance_support: number | null;

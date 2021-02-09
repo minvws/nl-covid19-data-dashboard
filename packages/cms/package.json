@@ -1,9 +1,8 @@
 {
   "name": "@corona-dashboard/cms",
   "private": true,
-  "version": "2.9.0",
-  "description": "",
-  "license": "UNLICENSED",
+  "version": "0.0.0",
+  "license": "EUROPEAN UNION PUBLIC LICENCE v. 1.2",
   "scripts": {
     "start": "sanity start",
     "build": "sanity build",
@@ -14,9 +13,6 @@
     "lint": "echo '@TODO add eslint'",
     "sync-assets": "ts-node scripts/sync-assets.ts"
   },
-  "keywords": [
-    "sanity"
-  ],
   "dependencies": {
     "@sanity/base": "^2.3.2",
     "@sanity/components": "^2.2.6",

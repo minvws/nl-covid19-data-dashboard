@@ -19,7 +19,7 @@ export const escalationTooltip = (selectHandler: RegionSelectionHandler) => {
 
     const onSelect = (event: React.MouseEvent<HTMLElement>) => {
       event.stopPropagation();
-      selectHandler(context);
+      selectHandler(context.vrcode);
     };
 
     const escalationText = ((text.escalatie_niveau.types as unknown) as Record<
