@@ -119,7 +119,7 @@ export function Marker<T extends Value>(props: MarkerProps<T>) {
       {showLine && (
         <LineContainer
           style={{
-            top: topY,
+            top: 'calc(100% + 5px)',
             left: data[0].x,
           }}
         >
