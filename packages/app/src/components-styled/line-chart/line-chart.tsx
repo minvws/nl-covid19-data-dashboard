@@ -18,8 +18,8 @@ import {
 import {
   isDateSeries,
   isDateSpanSeries,
-  Value,
-} from '~/components-styled/stacked-chart/logic';
+  TimestampedValue,
+} from '@corona-dashboard/common';
 import { Text } from '~/components-styled/typography';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
 import text from '~/locale/index';
@@ -39,7 +39,7 @@ const formatXAxis = (date: Date) =>
 const formatYAxisFn = (y: number) => formatNumber(y);
 const formatYAxisPercentageFn = (y: number) => `${formatPercentage(y)}%`;
 
-export type LineConfig<T extends Value> = {
+export type LineConfig<T extends TimestampedValue> = {
   metricProperty: keyof T;
   color?: string;
   style?: 'solid' | 'dashed';
@@ -49,7 +49,7 @@ export type LineConfig<T extends Value> = {
   legendShape?: LegendShape;
 };
 
-export type LineChartProps<T extends Value> = {
+export type LineChartProps<T extends TimestampedValue> = {
   values: T[];
   linesConfig: LineConfig<T>[];
   width?: number;
@@ -72,7 +72,7 @@ export type LineChartProps<T extends Value> = {
   seriesMax?: number;
 };
 
-export function LineChart<T extends Value>({
+export function LineChart<T extends TimestampedValue>({
   values,
   linesConfig,
   width = 500,
@@ -183,7 +183,7 @@ export function LineChart<T extends Value>({
 
   const bisect = useCallback(
     (
-      trend: (TrendValue & Value)[],
+      trend: (TrendValue & TimestampedValue)[],
       xPosition: number,
       xScale: ScaleTime<number, number>
     ) => {
@@ -208,7 +208,7 @@ export function LineChart<T extends Value>({
     [padding]
   );
 
-  const distance = (point1: HoverPoint<Value>, point2: Point) => {
+  const distance = (point1: HoverPoint<TimestampedValue>, point2: Point) => {
     const x = point2.x - point1.x;
     const y = point2.y - point1.y;
     return Math.sqrt(x * x + y * y);
@@ -384,7 +384,7 @@ export function LineChart<T extends Value>({
   );
 }
 
-function formatDefaultTooltip<T extends Value>(
+function formatDefaultTooltip<T extends TimestampedValue>(
   values: (T & TrendValue)[],
   isPercentage?: boolean
 ) {
@@ -427,7 +427,7 @@ function formatDefaultTooltip<T extends Value>(
   );
 }
 
-function useTooltip<T extends Value>() {
+function useTooltip<T extends TimestampedValue>() {
   const [tooltipData, setTooltipData] = useState<T[]>();
   const [tooltipLeft, setTooltipLeft] = useState<number>();
   const [tooltipTop, setTooltipTop] = useState<number>();

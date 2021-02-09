@@ -1,6 +1,5 @@
 import fs from 'fs';
 import { chain } from 'lodash';
-import { isDefined } from 'ts-is-present';
 import {
   UnknownObject,
   TimeSeriesMetric,
@@ -9,24 +8,6 @@ import {
   isDateSpanSeries,
   isTimeSeries,
 } from '@corona-dashboard/common';
-
-// const NON_TIME_SERIES_PROPERTIES: string[] = [
-//   'last_generated',
-//   'proto_name',
-//   'name',
-//   'code',
-//   'difference',
-//   /**
-//    * @TODO this looks like a mistake. deceased_rivm_per_age_group is now the only
-//    * schema where data doesn't have a date_unix timestamp, so I think we should
-//    * add it instead of creating an exception for it. I think we better strive to
-//    * keep data structures consistent.
-//    *
-//    * More so because we also have tested_per_age_group which is very similar
-//    * and has a timestamp.
-//    */
-//   'deceased_rivm_per_age_group',
-// ];
 
 export function getTimeSeriesMetricProperties(object: UnknownObject) {
   return Object.keys(object).filter(
@@ -59,50 +40,14 @@ export function validateLastValue(
 
   const success = chain(assumedLastValue)
     .entries()
-    .every(([key, value]) => actualLastValue[key] === value)
+    .every(
+      ([key, value]) =>
+        actualLastValue[key as keyof typeof actualLastValue] === value
+    )
     .value();
 
   return { success, metricProperty };
 }
-
-// /**
-//  * @TODO This logic was kind of copied from packages/app/data-sorting, maybe
-//  * move to common package later and share. Some charts use similar types too.
-//  */
-
-// export type TimestampedValue = DateValue | DateSpanValue;
-
-// interface DateValue extends UnknownObject {
-//   date_unix: number;
-// }
-
-// interface DateSpanValue extends UnknownObject {
-//   date_start_unix: number;
-//   date_end_unix: number;
-// }
-
-// function isDateSeries(
-//   timeSeries: TimestampedValue[]
-// ): timeSeries is DateValue[] {
-//   const firstValue = (timeSeries as DateValue[])[0];
-//   return isDefined(firstValue.date_unix);
-// }
-
-// function isDateSpanSeries(
-//   timeSeries: TimestampedValue[]
-// ): timeSeries is DateSpanValue[] {
-//   const firstValue = (timeSeries as DateSpanValue[])[0];
-//   return (
-//     isDefined(firstValue.date_end_unix) && isDefined(firstValue.date_start_unix)
-//   );
-// }
-
-// function isTimeSeries(
-//   value: unknown | TimeSeriesMetric<TimestampedValue>
-// ): value is TimeSeriesMetric<TimestampedValue> {
-//   const metric = value as TimeSeriesMetric<TimestampedValue>;
-//   return isDefined(metric.values) && isDefined(metric.last_value);
-// }
 
 export function sortTimeSeriesValues(values: TimestampedValue[]) {
   /**

@@ -1,33 +1,19 @@
 import { isDefined } from 'ts-is-present';
-// import { Municipal, National, Regionaal } from '~/types';
-
-// export function sortNationalTimeSeriesInDataInPlace(data: National) {
-//   const timeSeriesPropertyNames = getTimeSeriesPropertyNames(data);
-
-//   for (const propertyName of timeSeriesPropertyNames) {
-//     const timeSeries = data[propertyName] as TimeSeriesMetric<TimestampedValue>;
-//     timeSeries.values = sortTimeSeriesValues(timeSeries.values);
-//   }
-// }
 
 export type UnknownObject = Record<string, unknown>;
 
-export function sortTimeSeriesInDataInPlace(data: UnknownObject) {
+export function sortTimeSeriesInDataInPlace<T>(data: T) {
   const timeSeriesPropertyNames = getTimeSeriesPropertyNames(data);
 
   for (const propertyName of timeSeriesPropertyNames) {
-    // if (isWhitelistedProperty(propertyName)) {
-    //   continue;
-    // }
-
     /**
      * There is one property in the dataset that contains timeseries nested
      * inside values, so we need to process that separately.
      */
     if (propertyName === 'sewer_per_installation') {
-      const nestedSeries = data[
+      const nestedSeries = (data[
         propertyName
-      ] as SewerTimeSeriesData<TimestampedValue>;
+      ] as unknown) as SewerTimeSeriesData<TimestampedValue>;
 
       nestedSeries.values = nestedSeries.values.map((x) => {
         x.values = sortTimeSeriesValues(x.values);
@@ -38,40 +24,12 @@ export function sortTimeSeriesInDataInPlace(data: UnknownObject) {
       continue;
     }
 
-    const timeSeries = data[propertyName] as TimeSeriesMetric<TimestampedValue>;
+    const timeSeries = (data[
+      propertyName
+    ] as unknown) as TimeSeriesMetric<TimestampedValue>;
     timeSeries.values = sortTimeSeriesValues(timeSeries.values);
   }
 }
-
-// export function sortMunicipalTimeSeriesInDataInPlace(data: Municipal) {
-//   const timeSeriesPropertyNames = getTimeSeriesPropertyNames(data);
-
-//   for (const propertyName of timeSeriesPropertyNames) {
-//     // if (isWhitelistedProperty(propertyName)) {
-//     //   continue;
-//     // }
-//     /**
-//      * There is one property in the dataset that contains timeseries nested
-//      * inside values, so we need to process that separately.
-//      */
-//     if (propertyName === 'sewer_per_installation') {
-//       const nestedSeries = data[
-//         propertyName
-//       ] as SewerTimeSeriesData<TimestampedValue>;
-
-//       nestedSeries.values = nestedSeries.values.map((x) => {
-//         x.values = sortTimeSeriesValues(x.values);
-//         return x;
-//       });
-
-//       // Skip the remainder of this loop
-//       continue;
-//     }
-
-//     const timeSeries = data[propertyName] as TimeSeriesMetric<TimestampedValue>;
-//     timeSeries.values = sortTimeSeriesValues(timeSeries.values);
-//   }
-// }
 
 /**
  * From the data structure, retrieve all properties that hold a "values" field
@@ -107,11 +65,11 @@ export function sortTimeSeriesValues(values: TimestampedValue[]) {
 
 export type TimestampedValue = DateValue | DateSpanValue;
 
-export interface DateValue extends UnknownObject {
+export interface DateValue {
   date_unix: number;
 }
 
-export interface DateSpanValue extends UnknownObject {
+export interface DateSpanValue {
   date_start_unix: number;
   date_end_unix: number;
 }
@@ -129,6 +87,20 @@ interface SewerTimeSeriesData<T> {
  * Some type guards to figure out types based on runtime properties. See:
  * https://basarat.gitbook.io/typescript/type-system/typeguard#user-defined-type-guards
  */
+
+export function isDateValue(value: TimestampedValue): value is DateValue {
+  return isDefined((value as DateValue).date_unix);
+}
+
+export function isDateSpanValue(
+  value: TimestampedValue
+): value is DateSpanValue {
+  return (
+    isDefined((value as DateSpanValue).date_start_unix) &&
+    isDefined((value as DateSpanValue).date_end_unix)
+  );
+}
+
 export function isTimeSeries(
   value: unknown | TimeSeriesMetric<TimestampedValue>
 ): value is TimeSeriesMetric<TimestampedValue> {
@@ -151,16 +123,3 @@ export function isDateSpanSeries(
     isDefined(firstValue.date_end_unix) && isDefined(firstValue.date_start_unix)
   );
 }
-
-// /**
-//  * @TODO this looks like a mistake. deceased_rivm_per_age_group is now the only
-//  * schema where data doesn't have a date_unix timestamp, so I think we should
-//  * add it instead of creating an exception for it. I think we better strive to
-//  * keep data structures consistent.
-//  *
-//  * More so because we also have tested_per_age_group which is very similar
-//  * and has a timestamp.
-//  */
-// function isWhitelistedProperty(propertyName: string) {
-//   return ['deceased_rivm_per_age_group'].includes(propertyName);
-// }
