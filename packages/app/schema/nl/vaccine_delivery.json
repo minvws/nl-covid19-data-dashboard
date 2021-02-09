@@ -10,6 +10,7 @@
         "cure_vac",
         "janssen",
         "sanofi",
+        "total",
         "date_of_insertion_unix",
         "date_start_unix",
         "date_end_unix"
@@ -32,6 +33,9 @@
           "type": "number"
         },
         "sanofi": {
+          "type": "number"
+        },
+        "total": {
           "type": "number"
         },
         "date_of_insertion_unix": {
