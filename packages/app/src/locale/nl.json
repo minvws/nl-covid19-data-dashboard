@@ -2002,8 +2002,8 @@
     "title": "COVID-19-vaccinaties",
     "description": "Vaccineren is de belangrijkste stap naar een samenleving zonder coronaregels. Op 6 januari 2021 is Nederland begonnen met vaccineren. Uiteindelijk komt iedereen van 18 jaar of ouder aan de beurt. De cijfers op deze pagina laten zien hoeveel prikken zijn gezet en hoeveel vaccins er beschikbaar komen.",
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "date_unix": "1612788233",
-    "date_of_insertion_unix": "1612788233",
+    "date_unix": "1612874309",
+    "date_of_insertion_unix": "1612874309",
     "reference": {
       "href": "/verantwoording#vaccinatie",
       "text": "Lees meer over de bron van de vaccinatiecijfers in de cijferverantwoording."
@@ -2039,27 +2039,27 @@
       "difference": "Do not remove this key. It is required as a temporary workaround",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "571361",
-          "date_unix": "1612788233",
-          "date_of_insertion_unix": "1612788233"
+          "total_vaccinated": "595934",
+          "date_unix": "1612874309",
+          "date_of_insertion_unix": "1612874309"
         }
       },
       "kpi_total": {
         "title": "Aantal gezette prikken",
-        "value": "414858",
+        "value": "434417",
         "description": "",
-        "date_of_report_unix": "1612788233",
-        "date_of_insertion_unix": "1612788233",
+        "date_of_report_unix": "1612874309",
+        "date_of_insertion_unix": "1612874309",
         "administered": [
           {
-            "value": "321042",
+            "value": "340601",
             "description": "gemeld door GGD-GHOR",
-            "report_date": "Gemeld aantal tot en met 7 februari"
+            "report_date": "Gemeld aantal tot en met 8 februari"
           },
           {
             "value": "93816",
             "description": "gemeld door LNAZ",
-            "report_date": "Gemeld aantal tot en met 7 februari"
+            "report_date": "Gemeld aantal tot en met 8 februari"
           },
           {
             "value": "",
@@ -2083,25 +2083,25 @@
         "first_tab_title": "Berekend aantal",
         "second_tab_title": "Gemeld aantal",
         "tab_total_estimated": {
-          "value": "571361",
+          "value": "595934",
           "description": "",
-          "date_of_report_unix": "1612788233",
-          "date_of_insertion_unix": "1612788233",
+          "date_of_report_unix": "1612874309",
+          "date_of_insertion_unix": "1612874309",
           "administered": [
             {
-              "value": "321042",
+              "value": "340601",
               "description": "gezet door GGD'en",
-              "report_date": "Gemeld aantal tot en met 7 februari"
+              "report_date": "Gemeld aantal tot en met 8 februari"
             },
             {
               "value": "93816",
               "description": "gezet in ziekenhuizen",
-              "report_date": "Gemeld aantal tot en met 7 februari"
+              "report_date": "Gemeld aantal tot en met 8 februari"
             },
             {
-              "value": "156503",
+              "value": "161517",
               "description": "gezet in langdurige zorginstellingen",
-              "report_date": "Berekend aantal tot en met 7 februari"
+              "report_date": "Berekend aantal tot en met 8 februari"
             },
             {
               "value": "",
