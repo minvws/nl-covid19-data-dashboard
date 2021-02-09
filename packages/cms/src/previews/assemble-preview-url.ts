@@ -2,7 +2,6 @@
 export function assemblePreviewUrl({
   options,
 }: {
-  displayed: boolean;
   options: { previewURL: string };
 }) {
   const { previewURL } = options;
