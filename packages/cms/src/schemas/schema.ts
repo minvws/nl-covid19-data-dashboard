@@ -70,9 +70,11 @@ export default createSchema({
     roadmap,
     lockdown,
     restriction,
+
     /* OBJECTS */
     lineChart,
     collapsible,
+
     /* LOCALE HELPERS */
     localeString,
     localeBlock,
