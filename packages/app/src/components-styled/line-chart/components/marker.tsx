@@ -4,6 +4,7 @@ import { colors } from '~/style/theme';
 import { formatDateFromMilliseconds } from '~/utils/formatDate';
 import { TrendValue } from '../logic';
 import { Value } from '~/components-styled/stacked-chart/logic';
+import { ChartPadding } from '~/components-styled/line-chart/components';
 
 const MARKER_POINT_SIZE = 18;
 
@@ -26,6 +27,7 @@ const Label = styled.div`
 `;
 
 const DottedLine = styled.div<ColorProps>`
+  position: absolute;
   pointer-events: none;
   width: 1px;
   border-left-width: 1px;
@@ -94,6 +96,8 @@ type MarkerProps<T extends Value> = {
   primaryColor?: string;
   showLine: boolean;
   formatLabel?: (data: T & TrendValue) => string;
+  padding: ChartPadding;
+  height: number;
 };
 
 export function Marker<T extends Value>(props: MarkerProps<T>) {
@@ -103,6 +107,8 @@ export function Marker<T extends Value>(props: MarkerProps<T>) {
     showLine = false,
     formatLabel = defaultFormatLabel,
     dateSpanWidth,
+    height,
+    padding,
   } = props;
 
   const topY = data.reduce((min, d) => {
@@ -126,7 +132,8 @@ export function Marker<T extends Value>(props: MarkerProps<T>) {
           <DottedLine
             indicatorColor={primaryColor}
             style={{
-              height: `calc(100% - ${topY})px`,
+              bottom: padding.top,
+              height: `${height - topY - (padding.top + padding.bottom)}px`,
             }}
           />
           <Label>
