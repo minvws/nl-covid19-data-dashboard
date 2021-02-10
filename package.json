@@ -3,11 +3,6 @@
   "private": true,
   "license": "EUROPEAN UNION PUBLIC LICENCE v. 1.2",
   "resolutions": {
-    "//": "Visx internally uses d3-array@v2 but this isn't compatible with IE11",
-    "d3-array": "^1",
-    "//": "Visx internally uses version d3-scale@v3 but this isn't compatible with IE11",
-    "d3-scale": "^2",
-    "@types/d3-scale": "^2",
     "//": "next@10.0.6 is broken in IE11: https://github.com/vercel/next.js/issues/21041#issuecomment-775983001",
     "next": "10.0.5"
   },
