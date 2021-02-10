@@ -3,5 +3,5 @@ export const HIGHLIGHTED_ARTICLES = {
   name: 'articles',
   type: 'array',
   of: [{ type: 'reference', to: { type: 'article' } }],
-  validation: (Rule) => Rule.required().unique().max(2),
+  validation: (Rule: any) => Rule.required().unique().max(2),
 };

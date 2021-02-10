@@ -7,10 +7,10 @@ export default {
       title: 'Titel',
       name: 'title',
       type: 'localeString',
-      validation: (Rule) =>
+      validation: (Rule: any) =>
         Rule.fields({
-          nl: (fieldRule) => fieldRule.reset().required(),
-          en: (fieldRule) => fieldRule.reset().required(),
+          nl: (fieldRule: any) => fieldRule.reset().required(),
+          en: (fieldRule: any) => fieldRule.reset().required(),
         }),
     },
     {
@@ -19,27 +19,27 @@ export default {
         'Dit is een korte samenvatting van het teaser blok die getoond wordt op de actueel pagina.',
       name: 'summary',
       type: 'localeText',
-      validation: (Rule) =>
+      validation: (Rule: any) =>
         Rule.fields({
-          nl: (fieldRule) => fieldRule.reset().required().max(120),
-          en: (fieldRule) => fieldRule.reset().required().max(120),
+          nl: (fieldRule: any) => fieldRule.reset().required().max(120),
+          en: (fieldRule: any) => fieldRule.reset().required().max(120),
         }),
     },
     {
       name: 'label',
       type: 'localeString',
       title: 'Tekst in de link',
-      validation: (Rule) =>
+      validation: (Rule: any) =>
         Rule.fields({
-          nl: (fieldRule) => fieldRule.reset().required(),
-          en: (fieldRule) => fieldRule.reset().required(),
+          nl: (fieldRule: any) => fieldRule.reset().required(),
+          en: (fieldRule: any) => fieldRule.reset().required(),
         }),
     },
     {
       name: 'href',
       type: 'string',
       title: 'Link naar pagina',
-      validation: (Rule) => Rule.required(),
+      validation: (Rule: any) => Rule.required(),
     },
     {
       title: 'Afbeelding',
@@ -55,7 +55,7 @@ export default {
           type: 'localeString',
         },
       ],
-      validation: (Rule) => Rule.required(),
+      validation: (Rule: any) => Rule.required(),
     },
   ],
 };

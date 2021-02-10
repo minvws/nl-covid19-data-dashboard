@@ -6,7 +6,7 @@ import {
   ComboboxPopover,
 } from '@reach/combobox';
 import css from '@styled-system/css';
-import matchSorter from 'match-sorter';
+import { matchSorter } from 'match-sorter';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Box } from '~/components-styled/base';
@@ -46,7 +46,7 @@ export function ComboBox<Option extends TOption>(props: TProps<Option>) {
 
   const router = useRouter();
   const { code } = router.query;
-  const inputRef = useRef<HTMLInputElement>();
+  const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState<string>('');
   const results = useSearchedOptions<Option>(inputValue, options);
   const breakpoints = useBreakpoints();
