@@ -15,10 +15,10 @@
   "definitions": {
     "value": {
       "title": "nl_deceased_rivm_per_age_group_value",
-      "//1": "Set to false once BE added date_unix timestamp",
+      "$comment1": "Set to false once BE added date_unix timestamp",
       "additionalProperties": true,
       "type": "object",
-      "//2": "Add date_unix to required once BE added the property",
+      "$comment2": "Add date_unix to required once BE added the property",
       "required": [
         "age_group_range",
         "age_group_percentage",
