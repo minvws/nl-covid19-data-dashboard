@@ -14,7 +14,7 @@ export default {
       },
     },
   ],
-  fields: [].concat(ARTICLE_FIELDS),
+  fields: [...ARTICLE_FIELDS],
   orderings: [
     {
       title: 'publication date order',

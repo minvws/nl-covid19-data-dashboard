@@ -1,6 +1,9 @@
 import React from 'react';
 import { Icon } from '../../components/icons/icon';
-import { restrictionIcons } from '../../components/icons/icons';
+import {
+  restrictionIcons,
+  RestrictionIcon,
+} from '../../components/icons/icons';
 
 export default {
   title: 'Lockdown groep',
@@ -31,7 +34,7 @@ export default {
       title: 'title.nl',
       icon: 'icon',
     },
-    prepare(selection) {
+    prepare(selection: { icon: RestrictionIcon; title: string }) {
       const { title, icon } = selection;
       return {
         title: title,
@@ -42,7 +45,7 @@ export default {
           <img
             width="36"
             height="36"
-            src={restrictionIcons[icon]}
+            src={restrictionIcons[icon] || undefined}
             alt="Icoon"
           />
         ) : null,

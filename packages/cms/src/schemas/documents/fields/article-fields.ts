@@ -3,10 +3,10 @@ export const ARTICLE_FIELDS = [
     title: 'Titel',
     name: 'title',
     type: 'localeString',
-    validation: (Rule) =>
+    validation: (Rule: any) =>
       Rule.fields({
-        nl: (fieldRule) => fieldRule.reset().required(),
-        en: (fieldRule) => fieldRule.reset().required(),
+        nl: (fieldRule: any) => fieldRule.reset().required(),
+        en: (fieldRule: any) => fieldRule.reset().required(),
       }),
   },
   {
@@ -23,10 +23,10 @@ export const ARTICLE_FIELDS = [
     name: 'metaDescription',
     type: 'localeString',
     fieldset: 'metadata',
-    validation: (Rule) =>
+    validation: (Rule: any) =>
       Rule.fields({
-        nl: (fieldRule) => fieldRule.reset().required(),
-        en: (fieldRule) => fieldRule.reset().required(),
+        nl: (fieldRule: any) => fieldRule.reset().required(),
+        en: (fieldRule: any) => fieldRule.reset().required(),
       }),
   },
   {
@@ -40,7 +40,7 @@ export const ARTICLE_FIELDS = [
       calendarTodayLabel: 'Today',
     },
     fieldset: 'metadata',
-    validation: (Rule) => Rule.required(),
+    validation: (Rule: any) => Rule.required(),
   },
   {
     title: 'Samenvatting',
@@ -48,20 +48,20 @@ export const ARTICLE_FIELDS = [
       'Dit is een korte samenvatting van het artikel die getoond wordt in de artikelblokken op de overzichtspagina.',
     name: 'summary',
     type: 'localeText',
-    validation: (Rule) =>
+    validation: (Rule: any) =>
       Rule.fields({
-        nl: (fieldRule) => fieldRule.reset().required().max(120),
-        en: (fieldRule) => fieldRule.reset().required().max(120),
+        nl: (fieldRule: any) => fieldRule.reset().required().max(120),
+        en: (fieldRule: any) => fieldRule.reset().required().max(120),
       }),
   },
   {
     title: 'Intro',
     name: 'intro',
     type: 'localeBlock',
-    validation: (Rule) =>
+    validation: (Rule: any) =>
       Rule.fields({
-        nl: (fieldRule) => fieldRule.reset().required(),
-        en: (fieldRule) => fieldRule.reset().required(),
+        nl: (fieldRule: any) => fieldRule.reset().required(),
+        en: (fieldRule: any) => fieldRule.reset().required(),
       }),
   },
   {
@@ -78,16 +78,16 @@ export const ARTICLE_FIELDS = [
         type: 'localeString',
       },
     ],
-    validation: (Rule) => Rule.required(),
+    validation: (Rule: any) => Rule.required(),
   },
   {
     title: 'Content',
     name: 'content',
     type: 'localeRichContentBlock',
-    validation: (Rule) =>
+    validation: (Rule: any) =>
       Rule.fields({
-        nl: (fieldRule) => fieldRule.reset().required(),
-        en: (fieldRule) => fieldRule.reset().required(),
+        nl: (fieldRule: any) => fieldRule.reset().required(),
+        en: (fieldRule: any) => fieldRule.reset().required(),
       }),
   },
 ];

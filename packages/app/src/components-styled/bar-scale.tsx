@@ -43,7 +43,7 @@ export function BarScale({
 
   const textAlign = scaleThreshold<number, 'start' | 'middle' | 'end'>()
     .domain([20, 80])
-    .range(['start', 'middle', 'end']);
+    .range(['start', 'middle', 'end'] as const);
 
   const color = scaleQuantile<string>()
     .domain(gradient.map((el) => el.value))

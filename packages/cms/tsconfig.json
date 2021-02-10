@@ -1,11 +1,10 @@
 {
   "extends": "../../tsconfig.base.json",
   "include": [
-    "./node_modules/@sanity/base/types/**/*.ts",
-    "./**/*.ts",
-    "./**/*.tsx"
+    "src",
   ],
   "compilerOptions": {
     "jsx": "react",
+    "allowJs": true
   }
 }
