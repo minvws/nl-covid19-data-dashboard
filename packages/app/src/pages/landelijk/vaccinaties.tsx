@@ -239,6 +239,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                       displays: [
                         {
                           metricProperty: 'total',
+                          color: '#F8E435',
                         },
                       ],
                     },
@@ -247,6 +248,8 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                       displays: [
                         {
                           metricProperty: 'total',
+                          style: 'dashed',
+                          color: '#F8E435',
                         },
                       ],
                     },
@@ -260,9 +263,13 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                     },
                     {
                       values: data.vaccine_administered_estimate.values,
-                      displays: Object.keys(
-                        colors.data.vaccines
-                      ).map((key) => ({ metricProperty: key as any })),
+                      displays: Object.keys(colors.data.vaccines).map(
+                        (key) => ({
+                          metricProperty: key as any,
+                          pattern: 'hatched',
+                          color: (colors.data.vaccines as any)[key],
+                        })
+                      ),
                     },
                   ]}
                 />
