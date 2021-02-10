@@ -5,9 +5,11 @@ import { Metadata, MetadataProps } from './metadata';
 export function ChartTileContainer({
   children,
   metadata,
+  title,
 }: {
   children: React.ReactNode;
   metadata?: MetadataProps;
+  title: string;
 }) {
   return (
     <Tile>
@@ -16,7 +18,7 @@ export function ChartTileContainer({
       {metadata && (
         <>
           <Spacer m="auto" />
-          <Metadata {...metadata} />
+          <Metadata {...metadata} title={title} />
         </>
       )}
     </Tile>
