@@ -6,28 +6,24 @@ export function sortTimeSeriesInDataInPlace<T>(data: T) {
   const timeSeriesPropertyNames = getTimeSeriesPropertyNames(data);
 
   for (const propertyName of timeSeriesPropertyNames) {
-    /**
-     * There is one property in the dataset that contains timeseries nested
-     * inside values, so we need to process that separately.
-     */
-    if (propertyName === 'sewer_per_installation') {
-      const nestedSeries = (data[
-        propertyName
-      ] as unknown) as SewerTimeSeriesData<TimestampedValue>;
-
-      nestedSeries.values = nestedSeries.values.map((x) => {
-        x.values = sortTimeSeriesValues(x.values);
-        return x;
-      });
-
-      // Skip the remainder of this loop
-      continue;
-    }
-
     const timeSeries = (data[
       propertyName
     ] as unknown) as TimeSeriesMetric<TimestampedValue>;
     timeSeries.values = sortTimeSeriesValues(timeSeries.values);
+  }
+
+  /**
+   * There is one property in the dataset that contains timeseries nested
+   * inside values, so we need to process that separately.
+   */
+  if (isDefined((data as UnknownObject).sewer_per_installation)) {
+    const nestedSeries = (data as UnknownObject)
+      .sewer_per_installation as SewerTimeSeriesData<TimestampedValue>;
+
+    nestedSeries.values = nestedSeries.values.map((x) => {
+      x.values = sortTimeSeriesValues(x.values);
+      return x;
+    });
   }
 }
 

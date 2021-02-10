@@ -1,6 +1,6 @@
 /**
- * This script checks if all last_value values correspond to the actual last value in
- * the values array for that same metric.
+ * This script checks if all last_value values correspond to the actual last
+ * value in the values array for that same metric.
  */
 import {
   sortTimeSeriesInDataInPlace,
@@ -8,14 +8,14 @@ import {
   TimestampedValue,
 } from '@corona-dashboard/common';
 import chalk from 'chalk';
-import { isEmpty, pick } from 'lodash';
+import { isEmpty, pick, get } from 'lodash';
 import meow from 'meow';
 import path from 'path';
 import { isDefined } from 'ts-is-present';
 import { jsonDirectory } from '../config';
 import { getFilesWithTimeSeries } from '../schema-information';
 import {
-  getTimeSeriesMetricProperties,
+  getTimeSeriesMetricNames,
   readJsonFile,
   validateLastValue,
 } from './logic';
@@ -50,7 +50,7 @@ const cli = meow(
   }
 );
 
-type Failure = { fileName: string; metricProperty: string };
+type Failure = { fileName: string; metricName: string };
 
 async function main() {
   const directory = jsonDirectory;
@@ -67,46 +67,73 @@ async function main() {
 
     sortTimeSeriesInDataInPlace(data);
 
-    const metricProperties = getTimeSeriesMetricProperties(data);
+    const metricNames = getTimeSeriesMetricNames(data);
 
     if (isVerbose) {
-      console.log('Checking', metricProperties);
+      console.log('Checking', metricNames);
     }
 
-    const timeSeriesData = pick(data, metricProperties) as Record<
-      string,
-      TimeSeriesMetric<TimestampedValue>
-    >;
+    {
+      const timeSeriesData = pick(data, metricNames) as Record<
+        string,
+        TimeSeriesMetric<TimestampedValue>
+      >;
 
-    const promisedOperations = metricProperties.map((property) =>
-      validateLastValue(timeSeriesData, property)
-    );
+      const promisedOperations = metricNames.map((metricName) => {
+        const metricData = timeSeriesData[metricName];
+        const success = validateLastValue(metricData);
+        return { success, metricName };
+      });
 
-    const results = await Promise.all(promisedOperations);
+      const results = await Promise.all(promisedOperations);
 
-    const failedMetrics = results
-      .filter((x) => x.success === false)
-      .map((x) => x.metricProperty);
+      const failedMetrics = results
+        .filter((x) => x.success === false)
+        .map((x) => x.metricName);
 
-    if (!isEmpty(failedMetrics)) {
       allFailures.push(
-        ...failedMetrics.map((x) => ({ metricProperty: x, fileName: file }))
+        ...failedMetrics.map((x) => ({ metricName: x, fileName: file }))
       );
-
-      if (cli.flags.failEarly) {
-        console.log(
-          'Found failures with --fail-early enabled, so skipping the rest...'
-        );
-        break;
-      }
     }
 
     /**
-     * @TODO check sewer_per_installation data
+     * The sewer_per_installation schema differs in structure from all
+     * other time series data so we validate it separately.
      */
-
     if (isDefined(data.sewer_per_installation)) {
-      console.log(`@TODO check sewer_per_installation for ${file}`);
+      const timeSeriesDataArray = get(
+        data,
+        'sewer_per_installation.values'
+      ) as (TimeSeriesMetric<TimestampedValue> & {
+        rwzi_awzi_name: string;
+      })[];
+
+      const promisedOperations = timeSeriesDataArray.map((metricData) => {
+        const installationName = metricData.rwzi_awzi_name;
+
+        const success = validateLastValue(metricData);
+        return {
+          success,
+          metricName: `sewer_per_installation.${installationName}`,
+        };
+      });
+
+      const results = await Promise.all(promisedOperations);
+
+      const failedMetrics = results
+        .filter((x) => x.success === false)
+        .map((x) => x.metricName);
+
+      allFailures.push(
+        ...failedMetrics.map((x) => ({ metricName: x, fileName: file }))
+      );
+    }
+
+    if (cli.flags.failEarly && !isEmpty(allFailures)) {
+      console.log(
+        'Found failures with --fail-early enabled, so skipping the rest...'
+      );
+      break;
     }
   }
 

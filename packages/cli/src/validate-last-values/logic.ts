@@ -9,11 +9,8 @@ import {
   isTimeSeries,
 } from '@corona-dashboard/common';
 
-export function getTimeSeriesMetricProperties(object: UnknownObject) {
-  return Object.keys(object).filter(
-    // (x) => !NON_TIME_SERIES_PROPERTIES.includes(x)
-    (key) => isTimeSeries(object[key])
-  );
+export function getTimeSeriesMetricNames(object: UnknownObject) {
+  return Object.keys(object).filter((key) => isTimeSeries(object[key]));
 }
 
 export function readJsonFile(filePath: string): UnknownObject {
@@ -25,16 +22,9 @@ export function readJsonFile(filePath: string): UnknownObject {
   }
 }
 
-export type ValidationResult = {
-  success: boolean;
-  metricProperty: string;
-};
-
 export function validateLastValue(
-  data: Record<string, TimeSeriesMetric<TimestampedValue>>,
-  metricProperty: string
-): ValidationResult {
-  const metric = data[metricProperty];
+  metric: TimeSeriesMetric<TimestampedValue>
+): boolean {
   const assumedLastValue = metric.last_value;
   const actualLastValue = metric.values[metric.values.length - 1];
 
@@ -46,7 +36,7 @@ export function validateLastValue(
     )
     .value();
 
-  return { success, metricProperty };
+  return success;
 }
 
 export function sortTimeSeriesValues(values: TimestampedValue[]) {
