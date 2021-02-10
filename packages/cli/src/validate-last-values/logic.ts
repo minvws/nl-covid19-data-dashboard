@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { chain } from 'lodash';
+import { chain, isArray } from 'lodash';
 import {
   UnknownObject,
   TimeSeriesMetric,
@@ -13,10 +13,16 @@ export function getTimeSeriesMetricNames(object: UnknownObject) {
   return Object.keys(object).filter((key) => isTimeSeries(object[key]));
 }
 
-export function readJsonFile(filePath: string): UnknownObject {
+export function readObjectFromJsonFile(filePath: string): UnknownObject {
   try {
     const fileContents = fs.readFileSync(filePath, 'utf8');
-    return JSON.parse(fileContents);
+    const result = JSON.parse(fileContents);
+
+    if (isArray(result)) {
+      throw new Error(`Read data is an array instead of expected object`);
+    }
+
+    return result;
   } catch (err) {
     throw new Error(`Failed to read JSON file ${filePath}`);
   }

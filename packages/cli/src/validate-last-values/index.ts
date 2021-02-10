@@ -16,7 +16,7 @@ import { jsonDirectory } from '../config';
 import { getFilesWithTimeSeries } from '../schema-information';
 import {
   getTimeSeriesMetricNames,
-  readJsonFile,
+  readObjectFromJsonFile,
   validateLastValue,
 } from './logic';
 
@@ -63,7 +63,7 @@ async function main() {
   const allFailures: Failure[] = [];
 
   for (const file of files) {
-    const data = readJsonFile(path.join(directory, file));
+    const data = readObjectFromJsonFile(path.join(directory, file));
 
     sortTimeSeriesInDataInPlace(data);
 
