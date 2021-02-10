@@ -2,7 +2,6 @@ import path from 'path';
 
 const appBasePath = path.join(
   __dirname,
-  '..', // src
   '..', // cli
   '..', // packages
   'app'
