@@ -8,7 +8,7 @@ export default {
       name: 'highlightedArticle',
       type: 'reference',
       to: [{ type: 'article' }],
-      validation: (Rule) => Rule.required(),
+      validation: (Rule: any) => Rule.required(),
     },
   ],
 };

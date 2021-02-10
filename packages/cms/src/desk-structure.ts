@@ -1,4 +1,6 @@
-import StructureBuilder from '@sanity/desk-tool/structure-builder';
+import { StructureBuilder } from '@sanity/structure';
+import { ReactNode } from 'react';
+// import StructureBuilder from '@sanity/desk-tool/structure-builder';
 import { BsCardChecklist, BsLockFill, BsMap, BsTable } from 'react-icons/bs';
 import { GrCircleInformation, GrDashboard } from 'react-icons/gr';
 import { MdQuestionAnswer } from 'react-icons/md';
@@ -60,9 +62,6 @@ const hiddenDocTypes = [
   'vaccinationsPage',
   'toegankelijkheid',
 ];
-
-const filterHiddenDocTypes = (listItem) =>
-  !hiddenDocTypes.includes(listItem.getId());
 
 export default () =>
   StructureBuilder.list()
@@ -155,12 +154,18 @@ export default () =>
       // This returns an array of all the document types
       // defined in schema.jStructureBuilder. We filter out those that we have
       // defined the structure above
-      ...StructureBuilder.documentTypeListItems().filter(filterHiddenDocTypes),
+      ...StructureBuilder.documentTypeListItems().filter(
+        (item) => !hiddenDocTypes.includes(item.getId() || '')
+      ),
     ]);
 
-function addListItem(builder, icon, title, schemaType, documentId) {
-  const docId = documentId ?? schemaType;
-
+function addListItem(
+  builder: typeof StructureBuilder,
+  icon: React.FC,
+  title: string,
+  schemaType: string,
+  documentId = schemaType
+) {
   return builder
     .listItem()
     .title(title)
@@ -170,7 +175,7 @@ function addListItem(builder, icon, title, schemaType, documentId) {
       StructureBuilder.editor()
         .title(title)
         .schemaType(schemaType)
-        .documentId(docId)
+        .documentId(documentId)
         .views([builder.view.form()])
     );
 }

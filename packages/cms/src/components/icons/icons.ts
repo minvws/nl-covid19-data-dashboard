@@ -29,6 +29,8 @@ import Avondklok from './assets/restrictions/avondklok.svg';
 import Lopend from './assets/restrictions/lopend.svg';
 import Bezoek from './assets/restrictions/bezoek.svg';
 
+export type RestrictionIcon = keyof typeof restrictionIcons;
+
 export const restrictionIcons = {
   '41_er_op_uit_1': null,
   '41_er_op_uit_2': null,
@@ -78,4 +80,4 @@ export const restrictionIcons = {
   avondklok: Avondklok,
   bezoek: Bezoek,
   lopend: Lopend,
-};
+} as const;

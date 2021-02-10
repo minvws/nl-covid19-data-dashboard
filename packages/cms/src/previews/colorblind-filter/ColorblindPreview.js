@@ -5,7 +5,7 @@ import DefaultSelect from "part:@sanity/components/selects/default";
 import filters from "./filters.svg";
 import styles from "./ColorblindPreview.css";
 
-import { assemblePreviewUrl } from "../assemblePreviewUrl";
+import { assemblePreviewUrl } from "../assemble-preview-url";
 
 const FILTER_ITEMS = [
   { title: "Protanopia", value: "protanopia" },
