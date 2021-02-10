@@ -420,11 +420,11 @@ export interface NlVaccineSupport {
 }
 export interface NlVaccineSupportValue {
   percentage_total: number;
-  percentage_70_plus?: number;
-  percentage_55_69?: number;
-  percentage_40_54?: number;
-  percentage_25_39?: number;
-  percentage_16_24?: number;
+  percentage_70_plus: number;
+  percentage_55_69: number;
+  percentage_40_54: number;
+  percentage_25_39: number;
+  percentage_16_24: number;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;

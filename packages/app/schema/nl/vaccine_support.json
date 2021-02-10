@@ -50,6 +50,11 @@
       },
       "required": [
         "percentage_total",
+        "percentage_70_plus",
+        "percentage_55_69",
+        "percentage_40_54",
+        "percentage_25_39",
+        "percentage_16_24",
         "date_start_unix",
         "date_end_unix",
         "date_of_insertion_unix"
