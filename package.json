@@ -4,6 +4,9 @@
   "license": "EUROPEAN UNION PUBLIC LICENCE v. 1.2",
   "resolutions": {
     "//": "next@10.0.6 is broken in IE11: https://github.com/vercel/next.js/issues/21041#issuecomment-775983001",
+    "d3-array": "^1",
+    "d3-scale": "^2",
+    "@types/d3-scale": "^2",
     "next": "10.0.5"
   },
   "scripts": {
@@ -21,7 +24,9 @@
     "generate-typescript": "yarn workspace @corona-dashboard/cli generate-typescript",
     "e2e": "yarn workspace @corona-dashboard/e2e e2e",
     "e2e:ci": "yarn workspace @corona-dashboard/e2e e2e:ci",
-    "cms": "yarn workspace @corona-dashboard/cms start"
+    "cms": "yarn workspace @corona-dashboard/cms start",
+    "husky:pre-commit": "yarn workspace @corona-dashboard/app lint-staged",
+    "husky:pre-push": "yarn workspace @corona-dashboard/app run type-check"
   },
   "workspaces": {
     "packages": [
@@ -30,8 +35,11 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn workspace @corona-dashboard/app lint-staged",
-      "pre-push": "yarn workspace @corona-dashboard/app run type-check"
+      "pre-commit": "yarn run husky:pre-commit",
+      "pre-push": "yarn run husky:pre-push"
     }
+  },
+  "devDependencies": {
+    "husky": "^5.0.9"
   }
 }
