@@ -7,8 +7,12 @@
 export interface Municipal {
   last_generated: string;
   proto_name: string;
-  name: string;
-  code: string;
+  name: {
+    [k: string]: unknown;
+  };
+  code: {
+    [k: string]: unknown;
+  };
   difference: MunicipalDifference;
   hospital_nice: MunicipalHospitalNice;
   tested_overall: MunicipalTestedOverall;
@@ -81,8 +85,12 @@ export interface MunicipalSewerPerInstallationValue {
 export interface Municipalities {
   last_generated: string;
   proto_name: "GM_COLLECTION";
-  name: string;
-  code: string;
+  name: {
+    [k: string]: unknown;
+  };
+  code: {
+    [k: string]: unknown;
+  };
   hospital_nice: MunicipalitiesHospitalNice[];
   tested_overall: MunicipalitiesTestedOverall[];
 }
@@ -104,8 +112,12 @@ export interface MunicipalitiesTestedOverall {
 export interface National {
   last_generated: string;
   proto_name: "NL";
-  name: string;
-  code: string;
+  name: {
+    [k: string]: unknown;
+  };
+  code: {
+    [k: string]: unknown;
+  };
   difference: NationalDifference;
   doctor: NationalDoctor;
   infectious_people: NationalInfectiousPeople;
@@ -128,7 +140,7 @@ export interface National {
   elderly_at_home: NationalElderlyAtHome;
   vaccine_support: NlVaccineSupport;
   vaccine_delivery: NlVaccineDelivery;
-  vaccine_dose: NlVaccineDose;
+  vaccine_administered_per_authority: NlVaccineAdministeredPerAuthority;
 }
 export interface NationalDifference {
   tested_overall__infected_per_100k: DifferenceDecimal;
@@ -441,16 +453,16 @@ export interface NlVaccineDeliveryValue {
   date_start_unix: number;
   date_end_unix: number;
 }
-export interface NlVaccineDose {
-  values: NlVaccineDoseValue[];
-  last_value: NlVaccineDoseValue;
+export interface NlVaccineAdministeredPerAuthority {
+  values: NlVaccineAdministeredPerAuthorityValue[];
+  last_value: NlVaccineAdministeredPerAuthorityValue;
 }
-export interface NlVaccineDoseValue {
-  calculated: number;
-  calculated_ggd: number;
-  calculated_hospitals: number;
-  calculated_care_institutions: number;
-  reported: number;
+export interface NlVaccineAdministeredPerAuthorityValue {
+  estimate_total: number;
+  estimate_ggd: number;
+  estimate_hospitals: number;
+  estimate_care_institutions: number;
+  reported_total: number;
   reported_ggd_ghor: number;
   reported_lnaz: number;
 }
@@ -458,8 +470,12 @@ export interface NlVaccineDoseValue {
 export interface Regionaal {
   last_generated: string;
   proto_name: string;
-  name: string;
-  code: string;
+  name: {
+    [k: string]: unknown;
+  };
+  code: {
+    [k: string]: unknown;
+  };
   difference: RegionalDifference;
   sewer: RegionalSewer;
   sewer_per_installation: RegionalSewerPerInstallation;
@@ -683,8 +699,12 @@ export interface RegionalElderlyAtHomeValue {
 export interface Regions {
   last_generated: string;
   proto_name: "VR_COLLECTION";
-  name: string;
-  code: string;
+  name: {
+    [k: string]: unknown;
+  };
+  code: {
+    [k: string]: unknown;
+  };
   hospital_nice: RegionsHospitalNice[];
   tested_overall: RegionsTestedOverall[];
   escalation_levels: EscalationLevels[];
