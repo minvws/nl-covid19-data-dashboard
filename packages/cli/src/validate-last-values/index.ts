@@ -5,7 +5,7 @@
 import {
   sortTimeSeriesInDataInPlace,
   TimeSeriesMetric,
-  TimestampedValue,
+  SewerPerInstallationData,
 } from '@corona-dashboard/common';
 import chalk from 'chalk';
 import { isEmpty, pick, get } from 'lodash';
@@ -76,7 +76,7 @@ async function main() {
     {
       const timeSeriesData = pick(data, metricNames) as Record<
         string,
-        TimeSeriesMetric<TimestampedValue>
+        TimeSeriesMetric
       >;
 
       const promisedOperations = metricNames.map((metricName) => {
@@ -101,22 +101,25 @@ async function main() {
      * other time series data so we validate it separately.
      */
     if (isDefined(data.sewer_per_installation)) {
-      const timeSeriesDataArray = get(
-        data,
-        'sewer_per_installation.values'
-      ) as (TimeSeriesMetric<TimestampedValue> & {
-        rwzi_awzi_name: string;
-      })[];
+      const perInstallationData = data.sewer_per_installation as SewerPerInstallationData;
+      // const timeSeriesDataArray = get(
+      //   data,
+      //   'sewer_per_installation.values'
+      // ) as (TimeSeriesMetric & {
+      //   rwzi_awzi_name: string;
+      // })[];
 
-      const promisedOperations = timeSeriesDataArray.map((metricData) => {
-        const installationName = metricData.rwzi_awzi_name;
+      const promisedOperations = perInstallationData.values.map(
+        (metricData) => {
+          const installationName = metricData.rwzi_awzi_name;
 
-        const success = validateLastValue(metricData);
-        return {
-          success,
-          metricName: `sewer_per_installation.${installationName}`,
-        };
-      });
+          const success = validateLastValue(metricData);
+          return {
+            success,
+            metricName: `sewer_per_installation.${installationName}`,
+          };
+        }
+      );
 
       const results = await Promise.all(promisedOperations);
 

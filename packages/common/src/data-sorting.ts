@@ -6,9 +6,7 @@ export function sortTimeSeriesInDataInPlace<T>(data: T) {
   const timeSeriesPropertyNames = getTimeSeriesPropertyNames(data);
 
   for (const propertyName of timeSeriesPropertyNames) {
-    const timeSeries = (data[
-      propertyName
-    ] as unknown) as TimeSeriesMetric<TimestampedValue>;
+    const timeSeries = (data[propertyName] as unknown) as TimeSeriesMetric;
     timeSeries.values = sortTimeSeriesValues(timeSeries.values);
   }
 
@@ -18,7 +16,7 @@ export function sortTimeSeriesInDataInPlace<T>(data: T) {
    */
   if (isDefined((data as UnknownObject).sewer_per_installation)) {
     const nestedSeries = (data as UnknownObject)
-      .sewer_per_installation as SewerTimeSeriesData<TimestampedValue>;
+      .sewer_per_installation as SewerPerInstallationData;
 
     nestedSeries.values = nestedSeries.values.map((x) => {
       x.values = sortTimeSeriesValues(x.values);
@@ -70,13 +68,15 @@ export interface DateSpanValue {
   date_end_unix: number;
 }
 
-export interface TimeSeriesMetric<T> {
+export interface TimeSeriesMetric<T = TimestampedValue> {
   values: T[];
   last_value: T;
 }
 
-interface SewerTimeSeriesData<T> {
-  values: TimeSeriesMetric<T>[];
+export interface SewerPerInstallationData {
+  values: (TimeSeriesMetric & {
+    rwzi_awzi_name: string;
+  })[];
 }
 
 /**
@@ -98,9 +98,9 @@ export function isDateSpanValue(
 }
 
 export function isTimeSeries(
-  value: unknown | TimeSeriesMetric<TimestampedValue>
-): value is TimeSeriesMetric<TimestampedValue> {
-  const metric = value as TimeSeriesMetric<TimestampedValue>;
+  value: unknown | TimeSeriesMetric
+): value is TimeSeriesMetric {
+  const metric = value as TimeSeriesMetric;
   return isDefined(metric.values) && isDefined(metric.last_value);
 }
 

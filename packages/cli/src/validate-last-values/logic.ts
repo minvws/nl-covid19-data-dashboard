@@ -22,9 +22,7 @@ export function readJsonFile(filePath: string): UnknownObject {
   }
 }
 
-export function validateLastValue(
-  metric: TimeSeriesMetric<TimestampedValue>
-): boolean {
+export function validateLastValue(metric: TimeSeriesMetric): boolean {
   const assumedLastValue = metric.last_value;
   const actualLastValue = metric.values[metric.values.length - 1];
 
@@ -41,8 +39,8 @@ export function validateLastValue(
 
 export function sortTimeSeriesValues(values: TimestampedValue[]) {
   /**
-   * There are 3 ways in which time series data can be timestamped. We need
-   * to detect and handle each of them.
+   * There are 2 ways in which time series data can be timestamped. We need
+   * to detect and handle them separately.
    */
   if (isDateSeries(values)) {
     return values.sort((a, b) => a.date_unix - b.date_unix);
