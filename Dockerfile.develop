@@ -16,6 +16,7 @@ RUN yarn
 
 # Validation stage
 RUN yarn workspace @corona-dashboard/cli validate-json
+RUN yarn workspace @corona-dashboard/cli validate-last-values
 RUN yarn workspace @corona-dashboard/cli generate-typescript
 
 # Stage 2 - Build EN application
