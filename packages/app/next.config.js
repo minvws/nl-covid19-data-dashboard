@@ -50,7 +50,8 @@ const nextConfig = {
     });
 
     /**
-     * All d3-* packages needs to be transpiled to make them ie11 compatible
+     * All d3-* packages needs to be transpiled to make them ie11 compatible.
+     * For some reason `next-transpile-modules` doesn't pick them up properly.
      */
     config.module.rules.push({
       test: /\.js$/,
