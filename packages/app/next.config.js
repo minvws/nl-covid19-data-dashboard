@@ -3,7 +3,9 @@ const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const sitemap = require('./generate-sitemap.js');
 
 const withTM = require('next-transpile-modules')([
+  // `internmap` is a dependency of `d3-array`
   'internmap',
+  // `react-use-measure` is a dependency of `@visx/tooltip`
   'react-use-measure',
 ]);
 
