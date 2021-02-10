@@ -79,13 +79,11 @@ async function main() {
         TimeSeriesMetric
       >;
 
-      const promisedOperations = metricNames.map((metricName) => {
+      const results = metricNames.map((metricName) => {
         const metricData = timeSeriesData[metricName];
         const success = validateLastValue(metricData);
         return { success, metricName };
       });
-
-      const results = await Promise.all(promisedOperations);
 
       const failedMetrics = results
         .filter((x) => x.success === false)
@@ -102,26 +100,16 @@ async function main() {
      */
     if (isDefined(data.sewer_per_installation)) {
       const perInstallationData = data.sewer_per_installation as SewerPerInstallationData;
-      // const timeSeriesDataArray = get(
-      //   data,
-      //   'sewer_per_installation.values'
-      // ) as (TimeSeriesMetric & {
-      //   rwzi_awzi_name: string;
-      // })[];
 
-      const promisedOperations = perInstallationData.values.map(
-        (metricData) => {
-          const installationName = metricData.rwzi_awzi_name;
+      const results = perInstallationData.values.map((metricData) => {
+        const installationName = metricData.rwzi_awzi_name;
 
-          const success = validateLastValue(metricData);
-          return {
-            success,
-            metricName: `sewer_per_installation.${installationName}`,
-          };
-        }
-      );
-
-      const results = await Promise.all(promisedOperations);
+        const success = validateLastValue(metricData);
+        return {
+          success,
+          metricName: `sewer_per_installation.${installationName}`,
+        };
+      });
 
       const failedMetrics = results
         .filter((x) => x.success === false)
