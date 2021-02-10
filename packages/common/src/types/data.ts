@@ -7,8 +7,12 @@
 export interface Municipal {
   last_generated: string;
   proto_name: string;
-  name: string;
-  code: string;
+  name: {
+    [k: string]: unknown;
+  };
+  code: {
+    [k: string]: unknown;
+  };
   difference: MunicipalDifference;
   hospital_nice: MunicipalHospitalNice;
   tested_overall: MunicipalTestedOverall;
@@ -81,8 +85,12 @@ export interface MunicipalSewerPerInstallationValue {
 export interface Municipalities {
   last_generated: string;
   proto_name: "GM_COLLECTION";
-  name: string;
-  code: string;
+  name: {
+    [k: string]: unknown;
+  };
+  code: {
+    [k: string]: unknown;
+  };
   hospital_nice: MunicipalitiesHospitalNice[];
   tested_overall: MunicipalitiesTestedOverall[];
 }
@@ -104,8 +112,12 @@ export interface MunicipalitiesTestedOverall {
 export interface National {
   last_generated: string;
   proto_name: "NL";
-  name: string;
-  code: string;
+  name: {
+    [k: string]: unknown;
+  };
+  code: {
+    [k: string]: unknown;
+  };
   difference: NationalDifference;
   doctor: NationalDoctor;
   infectious_people: NationalInfectiousPeople;
@@ -388,7 +400,9 @@ export interface NlDeceasedRivmPerAgeGroupValue {
   age_group_range: string;
   age_group_percentage: number;
   covid_percentage: number;
+  date_unix?: number;
   date_of_insertion_unix: number;
+  [k: string]: unknown;
 }
 export interface NationalDeceasedCbs {
   values: NationalDeceasedCbsValue[];
@@ -444,8 +458,12 @@ export interface NlVaccineDeliveryValue {
 export interface Regionaal {
   last_generated: string;
   proto_name: string;
-  name: string;
-  code: string;
+  name: {
+    [k: string]: unknown;
+  };
+  code: {
+    [k: string]: unknown;
+  };
   difference: RegionalDifference;
   sewer: RegionalSewer;
   sewer_per_installation: RegionalSewerPerInstallation;
@@ -669,8 +687,12 @@ export interface RegionalElderlyAtHomeValue {
 export interface Regions {
   last_generated: string;
   proto_name: "VR_COLLECTION";
-  name: string;
-  code: string;
+  name: {
+    [k: string]: unknown;
+  };
+  code: {
+    [k: string]: unknown;
+  };
   hospital_nice: RegionsHospitalNice[];
   tested_overall: RegionsTestedOverall[];
   escalation_levels: EscalationLevels[];
