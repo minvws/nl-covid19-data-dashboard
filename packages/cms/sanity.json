@@ -32,11 +32,11 @@
     },
     {
       "name": "part:@sanity/desk-tool/structure",
-      "path": "./src/desk-structure.js"
+      "path": "./src/desk-structure"
     },
     {
       "implements": "part:@sanity/production-preview/resolve-production-url",
-      "path": "./src/previews/resolve-production-url.js"
+      "path": "./src/previews/resolve-production-url"
     },
     {
       "implements": "part:@sanity/base/theme/variables/override-style",
@@ -44,7 +44,7 @@
     },
     {
       "implements": "part:@sanity/base/document-actions/resolver",
-      "path": "./src/resolve-document-actions.js"
+      "path": "./src/resolve-document-actions"
     }
   ]
 }

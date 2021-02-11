@@ -1,5 +1,10 @@
 import { formatNumber, formatPercentage } from '@corona-dashboard/common';
+import { Group } from '@visx/group';
 import { scaleLinear, scaleTime } from '@visx/scale';
+import { Line } from '@visx/shape';
+import { Text } from '@visx/text';
+import { ScaleTime } from 'd3-scale';
+import { MouseEvent, TouchEvent } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
 import {
@@ -10,13 +15,15 @@ import { useChartPadding } from '~/components-styled/line-chart/hooks/use-chart-
 import { useDomains } from '~/components-styled/line-chart/hooks/use-domains';
 import { Value } from '~/components-styled/stacked-chart/logic';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
+import theme from '~/style/theme';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { TimeframeOption } from '~/utils/timeframe';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { LegendShape } from '../legenda';
-import { AreaChartGraph, AreaDisplay } from './area-chart-graph';
-import { useAreaValues } from './hooks/use-area-values';
-import { useTrendValues } from './hooks/use-trend-values';
+import { TrendValueWithDates } from '../line-chart/logic';
+import { AreaChartGraph, AreaConfig, AreaDisplay } from './area-chart-graph';
+import { useAreaConfigs } from './hooks/use-area-configs';
+import { useTrendConfigs } from './hooks/use-trend-configs';
 
 const NUM_TICKS = 3;
 
@@ -48,6 +55,12 @@ export type AreaDescriptor<T> = {
   displays: AreaDisplay<T>[];
 };
 
+export type DividerConfig = {
+  color: string;
+  leftLabel: string;
+  rightLabel: string;
+};
+
 type AreaChartProps<T extends Value, K extends Value> = {
   width: number;
   trends: TrendDescriptor<T>[];
@@ -57,6 +70,7 @@ type AreaChartProps<T extends Value, K extends Value> = {
   padding?: Partial<ChartPadding>;
   signaalwaarde?: number;
   isPercentage?: boolean;
+  divider?: DividerConfig;
 };
 
 const dateToValue = (d: { valueOf(): number }) => d.valueOf() / 1000;
@@ -77,17 +91,18 @@ export function AreaChart<T extends Value, K extends Value>(
     padding: overridePadding,
     signaalwaarde,
     isPercentage = false,
+    divider,
   } = props;
   const breakpoints = useBreakpoints();
-  const filteredTrendValues = useTrendValues(trends, timeframe);
-  const filteredAreaValues = useAreaValues(areas, timeframe);
+  const trendConfigs = useTrendConfigs(trends, timeframe);
+  const areaConfigs = useAreaConfigs(areas, timeframe);
 
   const isExtraSmallScreen = !breakpoints.sm;
   const height = isExtraSmallScreen ? 200 : 400;
 
   const allValues = [
-    ...filteredTrendValues.map((x) => x.values).flat(),
-    ...filteredAreaValues.map((x) => x.values).flat(),
+    ...trendConfigs.map((x) => x.values).flat(),
+    ...areaConfigs.map((x) => x.values).flat(),
   ];
 
   const [xDomain, yDomain, seriesMax] = useDomains(allValues, signaalwaarde);
@@ -116,6 +131,10 @@ export function AreaChart<T extends Value, K extends Value>(
 
   const scales = { xScale, yScale };
 
+  const handleHover = (
+    event: TouchEvent<SVGElement> | MouseEvent<SVGElement>
+  ) => console.dir(event);
+
   return (
     <Box position="relative">
       {isDefined(valueAnnotation) && (
@@ -123,15 +142,65 @@ export function AreaChart<T extends Value, K extends Value>(
       )}
 
       <AreaChartGraph
-        trends={filteredTrendValues}
-        areas={filteredAreaValues}
+        trends={trendConfigs}
+        areas={areaConfigs}
         bounds={bounds}
+        width={width}
+        height={height}
         padding={padding}
         scales={scales}
         formatXAxis={formatXAxis}
         formatYAxis={isPercentage ? formatYAxisPercentageFn : formatYAxisFn}
-        numTicks={3}
-      />
+        numTicks={6}
+        onHover={handleHover}
+      >
+        {divider &&
+          renderDivider(areaConfigs as any, divider, height, padding, xScale)}
+      </AreaChartGraph>
     </Box>
   );
+}
+
+function renderDivider(
+  areas: AreaConfig<TrendValueWithDates>[],
+  divider: DividerConfig,
+  height: number,
+  padding: ChartPadding,
+  xScale: ScaleTime<number, number>
+) {
+  const dates = areas.map((area) => area.values[0].__date);
+  dates.shift();
+
+  return dates.map((date) => {
+    const x = xScale(date);
+    return x !== undefined ? (
+      <Group>
+        <Text
+          fontSize={theme.fontSizes[1]}
+          x={x - 15}
+          y={padding.top * 2}
+          textAnchor="end"
+          fill={divider.color}
+        >
+          {divider.leftLabel}
+        </Text>
+        <Text
+          fontSize={theme.fontSizes[1]}
+          x={x + 15}
+          y={padding.top * 2}
+          textAnchor="start"
+          fill={divider.color}
+        >
+          {divider.rightLabel}
+        </Text>
+        <Line
+          x1={x}
+          y1={0}
+          x2={x}
+          y2={height - padding.bottom}
+          style={{ stroke: divider.color, strokeWidth: 1 }}
+        />
+      </Group>
+    ) : null;
+  });
 }

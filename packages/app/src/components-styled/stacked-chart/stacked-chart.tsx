@@ -37,8 +37,8 @@ import {
   getValuesInTimeframe,
   getWeekInfo,
   SeriesValue,
-  Value,
 } from './logic';
+import { TimestampedValue } from '@corona-dashboard/common';
 
 const tooltipStyles = {
   ...defaultStyles,
@@ -106,13 +106,13 @@ type TooltipFormatter = (
 
 type HoverEvent = TouchEvent<SVGElement> | MouseEvent<SVGElement>;
 
-export type Config<T extends Value> = {
+export type Config<T extends TimestampedValue> = {
   metricProperty: keyof T;
   color: string;
   legendLabel: string;
 };
 
-export type StackedChartProps<T extends Value> = {
+export type StackedChartProps<T extends TimestampedValue> = {
   values: T[];
   config: Config<T>[];
   valueAnnotation?: string;
@@ -121,7 +121,9 @@ export type StackedChartProps<T extends Value> = {
   isPercentage?: boolean;
 };
 
-export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
+export function StackedChart<T extends TimestampedValue>(
+  props: StackedChartProps<T>
+) {
   /**
    * Destructuring here and not above, so we can easily switch between optional
    * passed-in formatter functions or their default counterparts that have the

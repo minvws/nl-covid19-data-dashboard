@@ -1,13 +1,13 @@
 import fs from 'fs';
 import path from 'path';
 import { compile, JSONSchema } from 'json-schema-to-typescript';
-import { createValidateFunction } from './validator/create-validate-function';
-import { schemaDirectory } from './validator/config';
+import { createValidateFunction } from './validate-schema/create-validate-function';
+import { schemaDirectory } from './config';
 
 // The directory where the resulting data.d.ts file will be saved
-const outputPath = path.join(
+const outputDirectory = path.join(
   __dirname,
-  '..', // tools
+  '..', // cli
   '..', // packages
   'common',
   'src',
@@ -24,10 +24,11 @@ const schemaNames = schemaContent
   )
   .filter((name) => name !== 'locale');
 
-const promises = schemaNames.map(generateTypeScriptFromSchema);
+const promisedOperations = schemaNames.map(generateTypeScriptFromSchema);
 
-Promise.all(promises).then((result) => {
-  saveDefinitionsFile(result.join('\n'));
+Promise.all(promisedOperations).then(writeDefinitionsToFile, (err) => {
+  console.error(err.message);
+  process.exit(1);
 });
 
 /**
@@ -36,7 +37,7 @@ Promise.all(promises).then((result) => {
  * @param schemaName the given schema name
  * @returns A Promise that will resolve to the generated typescript
  */
-function generateTypeScriptFromSchema(schemaName: string) {
+async function generateTypeScriptFromSchema(schemaName: string) {
   // Sets the current working directory (cwd) to the schema directory, in order
   // for the typescript generator to properly resolve external references
   const generateOptions = {
@@ -45,26 +46,31 @@ function generateTypeScriptFromSchema(schemaName: string) {
     bannerComment: '',
   };
 
-  return createValidateFunction(
+  const validate = await createValidateFunction(
     path.join(schemaDirectory, schemaName, `__index.json`)
-  ).then((validate) => {
-    return compile(
-      validate.schema as JSONSchema,
-      schemaName,
-      generateOptions
-    ).then((typeDefinitions) => {
-      console.info(
-        `Generated typescript definitions for schema '${schemaName}'`
-      );
-      return typeDefinitions;
-    });
-  });
+  );
+
+  const typeDefinition = await compile(
+    validate.schema as JSONSchema,
+    schemaName,
+    generateOptions
+  );
+
+  console.info(`Generated typescript definitions for schema '${schemaName}'`);
+
+  return typeDefinition;
 }
 
-function saveDefinitionsFile(typeDefinitions: string) {
-  const outputFile = path.join(outputPath, 'data.ts');
-  fs.writeFileSync(outputFile, `${bannerComment}${typeDefinitions}`, {
-    encoding: 'utf8',
-  });
+function writeDefinitionsToFile(typeDefinitions: string[]) {
+  const outputFile = path.join(outputDirectory, 'data.ts');
+
+  fs.writeFileSync(
+    outputFile,
+    `${bannerComment}${typeDefinitions.join('\n')}`,
+    {
+      encoding: 'utf8',
+    }
+  );
+
   console.info(`Written typescript definitions output to file '${outputFile}'`);
 }

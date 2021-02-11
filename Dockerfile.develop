@@ -1,3 +1,8 @@
+# WARNING
+# This is not actually the Dockerfile used in the develop pipeline. It is the result of some sort of experiment. The develop pipeline uses the normal Dockerfile.
+# This file should probably be removed from the repository if it does not have a real function at the moment.
+
+
 # Stage 0 - Install dependancies
 FROM node:14 AS build-env
 
@@ -15,6 +20,8 @@ COPY . .
 RUN yarn
 
 # Validation stage
+# Note that last values are not guaranteed to be valid on develop so we skip
+# that validation stage.
 RUN yarn workspace @corona-dashboard/cli validate-json
 RUN yarn workspace @corona-dashboard/cli generate-typescript
 

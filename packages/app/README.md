@@ -54,14 +54,5 @@ This downloads the latest data files from the production server and places the d
 `yarn copy-fixtures`
 Copies the required json files from the `public/json` folder to the `src/pages-tests/fixtures` directory and prunes the necessary files of unneeded data.
 
-`yarn validate-json`
-This validates the date downloaded by the `yarn download` command against the JSON schemas in the `schema` directory.
-
-`yarn validate-single <schema-name> <json-file>`
-This validates a single JSON file from the `public/json` folder against the given schema.
-
-`yarn generate-typescript`
-Generates the `src/types/data.d.ts` file based on the JSON schemas.
-
 `yarn test`
 Runs the unit test suite.

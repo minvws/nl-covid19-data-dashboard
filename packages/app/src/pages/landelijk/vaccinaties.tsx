@@ -233,6 +233,11 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                 <AreaChart
                   width={width}
                   timeframe="all"
+                  divider={{
+                    color: colors.annotation,
+                    leftLabel: 'Berekend aantal',
+                    rightLabel: 'Verwacht aantal',
+                  }}
                   trends={[
                     {
                       values: data.vaccine_delivery.values,
@@ -257,9 +262,12 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                   areas={[
                     {
                       values: data.vaccine_administered.values,
-                      displays: Object.keys(
-                        colors.data.vaccines
-                      ).map((key) => ({ metricProperty: key as any })),
+                      displays: Object.keys(colors.data.vaccines).map(
+                        (key) => ({
+                          metricProperty: key as any,
+                          color: (colors.data.vaccines as any)[key],
+                        })
+                      ),
                     },
                     {
                       values: data.vaccine_administered_estimate.values,
