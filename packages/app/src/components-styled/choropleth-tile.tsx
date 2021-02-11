@@ -40,7 +40,7 @@ export function ChoroplethTile({
   );
 
   return (
-    <ChartTileContainer metadata={metadata} title={title}>
+    <ChartTileContainer metadata={metadata} accessibilitySubject={title}>
       <Box
         display="flex"
         flexDirection={{ _: 'column', lg: 'row' }}
