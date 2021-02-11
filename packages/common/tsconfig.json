@@ -1,9 +1,9 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "module": "CommonJS",
+    "module": "es2015",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "target": "es5",
+    "target": "es2020",
     "allowJs": false,
     "baseUrl": ".",
     "paths": {
@@ -11,10 +11,10 @@
     },
     "outDir": "./dist",
     "rootDir": "./src",
-    "composite": true,
     "declaration": true,
     "declarationMap": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "esModuleInterop": true
   },
   "include": ["src"]
 }
