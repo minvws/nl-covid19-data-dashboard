@@ -419,7 +419,7 @@ export interface NlVaccineSupport {
   last_value: NlVaccineSupportValue;
 }
 export interface NlVaccineSupportValue {
-  percentage_total: number;
+  percentage_average: number;
   percentage_70_plus: number;
   percentage_55_69: number;
   percentage_40_54: number;

@@ -20,7 +20,7 @@
       "title": "nl_vaccine_support_value",
       "type": "object",
       "properties": {
-        "percentage_total": {
+        "percentage_average": {
           "type": "number"
         },
         "percentage_70_plus": {
@@ -49,7 +49,7 @@
         }
       },
       "required": [
-        "percentage_total",
+        "percentage_average",
         "percentage_70_plus",
         "percentage_55_69",
         "percentage_40_54",
