@@ -9,14 +9,14 @@ import { Box } from '~/components-styled/base';
 import { LineChart } from '~/components-styled/line-chart';
 import { ComponentCallbackInfo } from '~/components-styled/line-chart/components';
 import { NumberProperty } from '~/components-styled/line-chart/logic';
-import { Value } from '~/components-styled/stacked-chart/logic';
+import { TimestampedValue } from '@corona-dashboard/common';
 import { LinkWithIcon } from '~/components-styled/link-with-icon';
 import { Heading, Text } from '~/components-styled/typography';
 import text from '~/locale';
 import { formatNumber } from '~/utils/formatNumber';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 
-type MiniTrendTileProps<T extends Value> = {
+type MiniTrendTileProps<T extends TimestampedValue> = {
   icon: JSX.Element;
   title: string;
   text: ReactNode;
@@ -25,7 +25,9 @@ type MiniTrendTileProps<T extends Value> = {
   href: string;
 };
 
-export function MiniTrendTile<T extends Value>(props: MiniTrendTileProps<T>) {
+export function MiniTrendTile<T extends TimestampedValue>(
+  props: MiniTrendTileProps<T>
+) {
   const { icon, title, text, trendData, metricProperty, href } = props;
 
   const value = trendData[trendData.length - 1][metricProperty];

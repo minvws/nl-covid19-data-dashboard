@@ -9,7 +9,7 @@
     "deploy": "sanity deploy",
     "test": "sanity check",
     "test:ci": "yarn run test",
-    "compile": "echo 'Placeholder to support yarn compile in repo root, until we use TS'",
+    "compile": "tsc --pretty --noEmit",
     "lint": "echo '@TODO add eslint'",
     "sync-assets": "ts-node scripts/sync-assets.ts"
   },
@@ -38,6 +38,7 @@
     "@sanity/cli": "^2.2.6",
     "@types/download": "^6.2.4",
     "@types/fs-extra": "^9.0.6",
-    "@types/prompts": "^2.0.9"
+    "@types/prompts": "^2.0.9",
+    "@types/react-world-flags": "^1.4.1"
   }
 }

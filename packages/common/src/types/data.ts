@@ -388,7 +388,9 @@ export interface NlDeceasedRivmPerAgeGroupValue {
   age_group_range: string;
   age_group_percentage: number;
   covid_percentage: number;
+  date_unix?: number;
   date_of_insertion_unix: number;
+  [k: string]: unknown;
 }
 export interface NationalDeceasedCbs {
   values: NationalDeceasedCbsValue[];

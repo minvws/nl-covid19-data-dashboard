@@ -1,61 +1,14 @@
 import { omit, pick, mapValues } from 'lodash';
-import { isDefined } from 'ts-is-present';
-import { assert } from '~/utils/assert';
 import { getDaysForTimeframe, TimeframeOption } from '~/utils/timeframe';
-
-/**
- * @TODO the logic about DateValue and DateSpanValue needs to be moved to a
- * common location.
- *
- * I have used different names from the previously used WeeklyValue because we
- * are not limited to weeks anymore.
- */
-export type Value = DateValue | DateSpanValue;
-
-export interface DateValue {
-  date_unix: number;
-}
-
-export type DateSpanValue = {
-  date_start_unix: number;
-  date_end_unix: number;
-};
-
-export function isDateValue(value: Value): value is DateValue {
-  return (value as DateValue).date_unix !== undefined;
-}
-
-export function isDateSpanValue(value: Value): value is DateSpanValue {
-  return (
-    (value as DateSpanValue).date_start_unix !== undefined &&
-    (value as DateSpanValue).date_end_unix !== undefined
-  );
-}
-
-export function isDateSeries(series: Value[]): series is DateValue[] {
-  const firstValue = (series as DateValue[])[0];
-
-  assert(
-    isDefined(firstValue),
-    'Unable to determine timestamps if time series is empty'
-  );
-
-  return firstValue.date_unix !== undefined;
-}
-
-export function isDateSpanSeries(series: Value[]): series is DateSpanValue[] {
-  const firstValue = (series as DateSpanValue[])[0];
-
-  assert(
-    isDefined(firstValue),
-    'Unable to determine timestamps if time series is empty'
-  );
-
-  return (
-    firstValue.date_start_unix !== undefined &&
-    firstValue.date_end_unix !== undefined
-  );
-}
+import {
+  DateValue,
+  DateSpanValue,
+  isDateSeries,
+  isDateSpanSeries,
+  isDateValue,
+  isDateSpanValue,
+  TimestampedValue,
+} from '@corona-dashboard/common';
 
 /**
  * A SeriesValue contains the properties for all trend values in key/value
@@ -83,7 +36,7 @@ export function calculateSeriesMaximum(series: SeriesValue[]) {
  * in as-is from the data, and we detect what type of timestamp we should filter
  * on.
  */
-export function getValuesInTimeframe<T extends Value>(
+export function getValuesInTimeframe<T extends TimestampedValue>(
   values: T[],
   timeframe: TimeframeOption
 ) {
@@ -129,8 +82,8 @@ const timestampToDate = (d: number) => new Date(d * 1000);
  * This function converts the passed in data to the generic SeriesValue
  * container.
  */
-export function getSeriesData<T extends Value>(
-  metricValues: Value[],
+export function getSeriesData<T extends TimestampedValue>(
+  metricValues: TimestampedValue[],
   metricProperties: (keyof T)[]
 ): SeriesValue[] {
   return metricValues.map(
@@ -142,7 +95,7 @@ export function getSeriesData<T extends Value>(
   );
 }
 
-function getDateFromValue<T extends Value>(value: T) {
+function getDateFromValue<T extends TimestampedValue>(value: T) {
   if (isDateValue(value)) {
     return timestampToDate(value.date_unix);
   }
