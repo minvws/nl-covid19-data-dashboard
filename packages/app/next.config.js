@@ -32,10 +32,11 @@ const nextConfig = {
       sitemap.generateSitemap(process.env.NEXT_PUBLIC_LOCALE);
     }
 
-    // To prevent importing two languages, we use the NormalModuleReplacementPlugin plugin
-    // We match any import that uses APP_TARGET and replace it with the value of
-    // process.env.NEXT_PUBLIC_LOCALE
-    // e.g. ~/src/locale/APP_TARGET.json becomes ~/src/locale/nl.json
+    /** To prevent importing two languages, we use the NormalModuleReplacementPlugin plugin
+     *  We match any import that uses APP_TARGET and replace it with the value of
+     *  process.env.NEXT_PUBLIC_LOCALE
+     *  e.g. ~/src/locale/APP_TARGET.json becomes ~/src/locale/nl.json
+     */
     var appTarget = process.env.NEXT_PUBLIC_LOCALE || 'nl';
 
     config.plugins.push(
