@@ -1,4 +1,4 @@
-import localefile from './APP_TARGET';
+import localefile from './APP_LOCALE';
 
 export type Locale = typeof localefile;
 
