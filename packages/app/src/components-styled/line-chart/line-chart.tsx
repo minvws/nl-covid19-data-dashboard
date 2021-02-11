@@ -370,6 +370,8 @@ export function LineChart<T extends TimestampedValue>({
               showLine={showMarkerLine}
               formatLabel={formatMarkerLabel}
               dateSpanWidth={dateSpanScale.bandwidth()}
+              height={height}
+              padding={padding}
             />
           )}
         </Box>
