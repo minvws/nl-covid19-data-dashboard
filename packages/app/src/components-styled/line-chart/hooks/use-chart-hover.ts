@@ -1,26 +1,29 @@
+import { TimestampedValue } from '@corona-dashboard/common';
 import { localPoint } from '@visx/event';
 import { Point } from '@visx/point';
 import { useCallback } from 'react';
 import { isDefined } from 'ts-is-present';
-import { Value } from '~/components-styled/stacked-chart/logic';
 import { LineConfig } from '..';
 import { ChartScales, HoverPoint } from '../components';
-import { TrendValueWithDates } from '../logic';
+import { TrendValueWithTimestamp } from '../logic';
 import { BisectFunction } from './use-bisect';
 
-const calculateDistance = (point1: HoverPoint<Value>, point2: Point) => {
+const calculateDistance = (
+  point1: HoverPoint<TimestampedValue>,
+  point2: Point
+) => {
   const x = point2.x - point1.x;
   const y = point2.y - point1.y;
   return Math.sqrt(x * x + y * y);
 };
 
-export function useChartHover<T extends Value>(
+export function useChartHover<T extends TimestampedValue>(
   toggleHoverElements: (
     hide: boolean,
     hoverPoints?: HoverPoint<T>[],
     nearestPoint?: HoverPoint<T>
   ) => void,
-  trendsList: (T & TrendValueWithDates)[][],
+  trendsList: (T & TrendValueWithTimestamp)[][],
   linesConfig: LineConfig<T>[],
   bisect: BisectFunction
 ) {

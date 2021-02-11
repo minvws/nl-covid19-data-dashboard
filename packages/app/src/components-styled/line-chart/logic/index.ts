@@ -1,10 +1,15 @@
 import {
+  DateSpanValue,
+  DateValue,
   isDateSeries,
   isDateSpanSeries,
   TimestampedValue,
 } from '@corona-dashboard/common';
 import { isPresent } from 'ts-is-present';
-import { getValuesInTimeframe } from '~/components-styled/stacked-chart/logic';
+import {
+  getValuesInTimeframe,
+  timestampToDate,
+} from '~/components-styled/stacked-chart/logic';
 import { getDaysForTimeframe, TimeframeOption } from '~/utils/timeframe';
 
 export * from './background-rectangle';
@@ -81,30 +86,28 @@ export type TrendValue = {
   __value: number;
 };
 
-export type TrendValueWithDates = TrendValue & Value;
-
-type TrendData = (TrendValue & TimestampedValue)[][];
+export type TrendValueWithTimestamp = TrendValue & TimestampedValue;
 
 export function getTrendData<T extends TimestampedValue>(
   values: T[],
   metricProperties: (keyof T)[],
   timeframe: TimeframeOption
-): (T & TrendValueWithDates)[][] {
-  const series = getValuesInTimeframe<T>(values, timeframe);
+): (T & TrendValueWithTimestamp)[][] {
+  const series = getValuesInTimeframe(values, timeframe);
 
   const trendData = metricProperties.map(
     (metricProperty) =>
-      (getSingleTrendData(series, metricProperty) as unknown) as (TrendValue &
-        TimestampedValue)[]
+      (getSingleTrendData(series, metricProperty as string) as unknown) as (T &
+        TrendValueWithTimestamp)[]
   );
 
   return trendData;
 }
 
-export function getSingleTrendData(
-  values: TimestampedValue[],
+export function getSingleTrendData<T extends TimestampedValue>(
+  values: T[],
   metricProperty: string
-): TrendValue[] {
+): (T & TrendValueWithTimestamp)[] {
   if (values.length === 0) {
     /**
      * It could happen that you are using an old dataset and select last week as
@@ -116,37 +119,46 @@ export function getSingleTrendData(
 
   if (isDateSeries(values)) {
     return values
-      .map<T & TrendValueWithDates>((x: any) => ({
-        ...x,
-        /**
-         * Assuming the config picks out a number property. We could make this
-         * stricter in the future with NumberProperty but I choose to strip it
-         * to minimize type complexity while figuring things out.
-         */
-        __value: x[metricProperty as keyof TimestampedValue] as number,
-        __date: timestampToDate(x.date_unix),
-      }))
-      .filter((x) => isPresent(x.__value)) as (T & TrendValueWithDates)[];
+      .map<T & TrendValueWithTimestamp>(
+        (x) =>
+          ({
+            ...x,
+            /**
+             * Assuming the config picks out a number property. We could make this
+             * stricter in the future with NumberProperty but I choose to strip it
+             * to minimize type complexity while figuring things out.
+             */
+            __value: x[metricProperty as keyof TimestampedValue] as number,
+            __date: timestampToDate((x as DateValue).date_unix),
+          } as T & TrendValueWithTimestamp)
+      )
+      .filter((x) => isPresent(x.__value));
   }
 
   if (isDateSpanSeries(values)) {
     return values
-      .map<T & TrendValueWithDates>((x: any) => ({
-        ...x,
-        /**
-         * Assuming the config picks out a number property. We could make this
-         * stricter in the future with NumberProperty but I choose to strip it
-         * to minimize type complexity while figuring things out.
-         */
-        __value: x[metricProperty as keyof TimestampedValue] as number,
-        __date: timestampToDate(
-          /**
-           * Here we set the date to be in the middle of the timespan, so that
-           * the chart can render the points in the middle of each span.
-           */
-          x.date_start_unix + (x.date_end_unix - x.date_start_unix) / 2
-        ),
-      }))
+      .map<T & TrendValueWithTimestamp>(
+        (x) =>
+          ({
+            ...x,
+            /**
+             * Assuming the config picks out a number property. We could make this
+             * stricter in the future with NumberProperty but I choose to strip it
+             * to minimize type complexity while figuring things out.
+             */
+            __value: x[metricProperty as keyof TimestampedValue] as number,
+            __date: timestampToDate(
+              /**
+               * Here we set the date to be in the middle of the timespan, so that
+               * the chart can render the points in the middle of each span.
+               */
+              (x as DateSpanValue).date_start_unix +
+                ((x as DateSpanValue).date_end_unix -
+                  (x as DateSpanValue).date_start_unix) /
+                  2
+            ),
+          } as T & TrendValueWithTimestamp)
+      )
       .filter((x) => isPresent(x.__value));
   }
 

@@ -1,4 +1,8 @@
-import { formatNumber, formatPercentage } from '@corona-dashboard/common';
+import {
+  formatNumber,
+  formatPercentage,
+  TimestampedValue,
+} from '@corona-dashboard/common';
 import { Group } from '@visx/group';
 import { scaleLinear, scaleTime } from '@visx/scale';
 import { Line } from '@visx/shape';
@@ -13,14 +17,13 @@ import {
 } from '~/components-styled/line-chart/components';
 import { useChartPadding } from '~/components-styled/line-chart/hooks/use-chart-padding';
 import { useDomains } from '~/components-styled/line-chart/hooks/use-domains';
-import { Value } from '~/components-styled/stacked-chart/logic';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
 import theme from '~/style/theme';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { TimeframeOption } from '~/utils/timeframe';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { LegendShape } from '../legenda';
-import { TrendValueWithDates } from '../line-chart/logic';
+import { TrendValueWithTimestamp } from '../line-chart/logic';
 import { AreaChartGraph, AreaConfig, AreaDisplay } from './area-chart-graph';
 import { useAreaConfigs } from './hooks/use-area-configs';
 import { useTrendConfigs } from './hooks/use-trend-configs';
@@ -61,7 +64,7 @@ export type DividerConfig = {
   rightLabel: string;
 };
 
-type AreaChartProps<T extends Value, K extends Value> = {
+type AreaChartProps<T extends TimestampedValue, K extends T> = {
   width: number;
   trends: TrendDescriptor<T>[];
   areas: AreaDescriptor<K>[];
@@ -79,7 +82,7 @@ const formatXAxis = (date: Date | { valueOf(): number }) =>
 const formatYAxisFn = (y: number) => formatNumber(y);
 const formatYAxisPercentageFn = (y: number) => `${formatPercentage(y)}%`;
 
-export function AreaChart<T extends Value, K extends Value>(
+export function AreaChart<T extends TimestampedValue, K extends T>(
   props: AreaChartProps<T, K>
 ) {
   const {
@@ -162,7 +165,7 @@ export function AreaChart<T extends Value, K extends Value>(
 }
 
 function renderDivider(
-  areas: AreaConfig<TrendValueWithDates>[],
+  areas: AreaConfig<TrendValueWithTimestamp>[],
   divider: DividerConfig,
   height: number,
   padding: ChartPadding,

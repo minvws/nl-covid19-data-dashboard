@@ -1,14 +1,14 @@
-import { mapValues, omit, pick } from 'lodash';
-import { getDaysForTimeframe, TimeframeOption } from '~/utils/timeframe';
 import {
-  DateValue,
   DateSpanValue,
+  DateValue,
   isDateSeries,
   isDateSpanSeries,
-  isDateValue,
   isDateSpanValue,
+  isDateValue,
   TimestampedValue,
 } from '@corona-dashboard/common';
+import { mapValues, omit, pick } from 'lodash';
+import { getDaysForTimeframe, TimeframeOption } from '~/utils/timeframe';
 
 /**
  * A SeriesValue contains the properties for all trend values in key/value
@@ -78,7 +78,7 @@ export type SeriesValue = {
   __date: Date;
 } & { [key: string]: number };
 
-const timestampToDate = (d: number) => new Date(d * 1000);
+export const timestampToDate = (d: number) => new Date(d * 1000);
 
 /**
  * This function converts the passed in data to the generic SeriesValue

@@ -1,3 +1,8 @@
+import {
+  isDateSeries,
+  isDateSpanSeries,
+  TimestampedValue,
+} from '@corona-dashboard/common';
 import { TickFormatter } from '@visx/axis';
 import { scaleBand } from '@visx/scale';
 import { useCallback, useMemo, useState } from 'react';
@@ -11,11 +16,6 @@ import {
   ComponentCallbackFunction,
   defaultPadding,
 } from '~/components-styled/line-chart/components';
-import {
-  isDateSeries,
-  isDateSpanSeries,
-  TimestampedValue,
-} from '@corona-dashboard/common';
 import { Text } from '~/components-styled/typography';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
 import text from '~/locale/index';
@@ -26,7 +26,6 @@ import {
 } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { TimeframeOption } from '~/utils/timeframe';
-import { isDateSeries, isDateSpanSeries, Value } from '../stacked-chart/logic';
 import { HoverPoint, Marker, Tooltip, Trend } from './components';
 import { useBisect } from './hooks/use-bisect';
 import { useChartHover } from './hooks/use-chart-hover';

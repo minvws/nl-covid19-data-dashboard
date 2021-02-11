@@ -1,16 +1,16 @@
+import { TimestampedValue } from '@corona-dashboard/common';
 import { useMemo } from 'react';
 import {
   getTrendData,
-  TrendValueWithDates,
+  TrendValueWithTimestamp,
 } from '~/components-styled/line-chart/logic';
-import { Value } from '~/components-styled/stacked-chart/logic';
 import { TimeframeOption } from '~/utils/timeframe';
 
-export function useTrendValues<T extends Value>(
+export function useTrendValues<T extends TimestampedValue>(
   values: T[],
   configs: { metricProperty: keyof T }[],
   timeframe: TimeframeOption
-): (T & TrendValueWithDates)[][] {
+): (T & TrendValueWithTimestamp)[][] {
   const metricProperties = useMemo(() => configs.map((x) => x.metricProperty), [
     configs,
   ]);
