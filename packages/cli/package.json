@@ -22,7 +22,7 @@
     "validate-json": "ts-node src/validate-schema/validate-all.ts",
     "validate-single": "ts-node src/validate-schema/validate-single.ts",
     "validate-last-values": "ts-node src/validate-last-values/index.ts",
-    "validate-locales": "ts-node src/validator/validate-locales.ts",
+    "validate-locales": "ts-node src/validate-schema/validate-locales.ts",
     "generate-typescript": "ts-node src/generate-typescript.ts"
   },
   "devDependencies": {
