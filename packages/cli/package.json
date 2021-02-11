@@ -4,7 +4,11 @@
   "version": "0.0.0",
   "license": "EUROPEAN UNION PUBLIC LICENCE v. 1.2",
   "dependencies": {
+    "ajv": "^6",
+    "chalk": "^4.1.0",
+    "json-schema-to-typescript": "^9",
     "meow": "^9.0.0",
+    "ts-is-present": "^1.2.1",
     "ts-node": "^9.1.1"
   },
   "scripts": {
@@ -14,9 +18,10 @@
     "format": "prettier --write src/**/*.{js,ts,tsx} *.{js,json,md,yml}",
     "lint": "echo 'No linter configured for @corona-dashboard/cli'",
     "type-check": "echo 'No type-check configured for @corona-dashboard/cli'",
-    "compile": "echo 'No compiler configured for @corona-dashboard/cli'",
-    "validate-json": "ts-node src/validator/validate-all.ts",
-    "validate-single": "ts-node src/validator/validate-single.ts",
+    "compile": "tsc --noEmit",
+    "validate-json": "ts-node src/validate-schema/validate-all.ts",
+    "validate-single": "ts-node src/validate-schema/validate-single.ts",
+    "validate-last-values": "ts-node src/validate-last-values/index.ts",
     "generate-typescript": "ts-node src/generate-typescript.ts"
   },
   "devDependencies": {

@@ -1,18 +1,17 @@
-import { isPresent } from 'ts-is-present';
 import {
-  DateSpanValue,
-  DateValue,
-  getValuesInTimeframe,
   isDateSeries,
   isDateSpanSeries,
-  Value,
-} from '~/components-styled/stacked-chart/logic';
+  TimestampedValue,
+} from '@corona-dashboard/common';
+import { isPresent } from 'ts-is-present';
+import { getValuesInTimeframe } from '~/components-styled/stacked-chart/logic';
 import { getDaysForTimeframe, TimeframeOption } from '~/utils/timeframe';
+
 export * from './background-rectangle';
 
 // This type limits the allowed property names to those with a number type,
 // so its like keyof T, but filtered down to only the appropriate properties.
-export type NumberProperty<T extends Value> = {
+export type NumberProperty<T extends TimestampedValue> = {
   [K in keyof T]: T[K] extends number | null ? K : never;
 }[keyof T];
 
@@ -58,7 +57,7 @@ export function calculateYMax(
  * on.
  */
 export function getTimeframeValues(
-  values: Value[],
+  values: TimestampedValue[],
   timeframe: TimeframeOption
 ) {
   const boundary = getTimeframeBoundaryUnix(timeframe);
@@ -91,9 +90,9 @@ export type TrendValue = {
 
 const timestampToDate = (d: number) => new Date(d * 1000);
 
-type TrendData = (TrendValue & Value)[][];
+type TrendData = (TrendValue & TimestampedValue)[][];
 
-export function getTrendData<T extends Value>(
+export function getTrendData<T extends TimestampedValue>(
   values: T[],
   metricProperties: string[],
   timeframe: TimeframeOption
@@ -103,14 +102,14 @@ export function getTrendData<T extends Value>(
   const trendData = metricProperties.map(
     (metricProperty) =>
       (getSingleTrendData(series, metricProperty) as unknown) as (TrendValue &
-        Value)[]
+        TimestampedValue)[]
   );
 
   return trendData;
 }
 
 export function getSingleTrendData(
-  values: DateValue[] | DateSpanValue[],
+  values: TimestampedValue[],
   metricProperty: string
 ): TrendValue[] {
   if (values.length === 0) {
@@ -127,10 +126,11 @@ export function getSingleTrendData(
       .map((x) => ({
         ...x,
         /**
-         * Not sure why we need to cast to number if isPresent is used to filter
-         * out the null values.
+         * Assuming the config picks out a number property. We could make this
+         * stricter in the future with NumberProperty but I choose to strip it
+         * to minimize type complexity while figuring things out.
          */
-        __value: x[metricProperty as keyof DateValue],
+        __value: x[metricProperty as keyof TimestampedValue] as number,
         __date: timestampToDate(x.date_unix),
       }))
       .filter((x) => isPresent(x.__value));
@@ -141,10 +141,11 @@ export function getSingleTrendData(
       .map((x) => ({
         ...x,
         /**
-         * Not sure why we need to cast to number if isPresent is used to filter
-         * out the null values.
+         * Assuming the config picks out a number property. We could make this
+         * stricter in the future with NumberProperty but I choose to strip it
+         * to minimize type complexity while figuring things out.
          */
-        __value: x[metricProperty as keyof DateSpanValue],
+        __value: x[metricProperty as keyof TimestampedValue] as number,
         __date: timestampToDate(
           /**
            * Here we set the date to be in the middle of the timespan, so that

@@ -3,11 +3,11 @@ import { Text } from '~/components-styled/typography';
 import { colors } from '~/style/theme';
 import { formatDateFromMilliseconds } from '~/utils/formatDate';
 import { TrendValue } from '../logic';
-import { Value } from '~/components-styled/stacked-chart/logic';
+import { TimestampedValue } from '@corona-dashboard/common';
 
 const MARKER_POINT_SIZE = 18;
 
-export type HoverPoint<T extends Value> = {
+export type HoverPoint<T extends TimestampedValue> = {
   data: T & TrendValue;
   color?: string;
   x: number;
@@ -88,7 +88,7 @@ const LineContainer = styled.div`
   position: absolute;
 `;
 
-type MarkerProps<T extends Value> = {
+type MarkerProps<T extends TimestampedValue> = {
   data: HoverPoint<T>[];
   dateSpanWidth: number;
   primaryColor?: string;
@@ -96,7 +96,7 @@ type MarkerProps<T extends Value> = {
   formatLabel?: (data: T & TrendValue) => string;
 };
 
-export function Marker<T extends Value>(props: MarkerProps<T>) {
+export function Marker<T extends TimestampedValue>(props: MarkerProps<T>) {
   const {
     primaryColor = colors.data.primary,
     data,
