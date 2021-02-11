@@ -3,8 +3,8 @@ import meow from 'meow';
 
 import jsonDiff from 'json-diff';
 
-import nl from '../../../app/src/locale/nl.json';
-import en from '../../../app/src/locale/en.json';
+import nl from '@corona-dashboard/app/src/locale/nl.json';
+import en from '@corona-dashboard/app/src/locale/en.json';
 
 function objectsHaveSameKeys(
   obj1: Record<string, unknown>,
