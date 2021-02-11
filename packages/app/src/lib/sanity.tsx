@@ -74,11 +74,17 @@ export function localize<T>(value: T | T[], languages: LanguageKey[]): T {
  * By default the `src` will resolve the to a size close to the original size.
  * Optionally you can provide a second parameter to override this size.
  *
+ * Currently, we are capping the resolution of images at 1024 when the
+ * screen resolution is higher. Since the images only get used on article
+ * detail pages there is no need to get higher resolution images since the
+ * container isn't going over 700 pixels.
+ *
  * Usage:
  *
  *     <img {...getImageProps(node)} />
  *     <img {...getImageProps(node, 450)} />
  */
+
 export function getImageProps<T extends ImageBlock>(
   node: T,
   desiredWith = node.asset.metadata.dimensions.width
@@ -94,7 +100,10 @@ export function getImageProps<T extends ImageBlock>(
     asset.extension === 'svg'
       ? undefined
       : imageResizeTargets
-          .map((size) => `${getImageSrc(asset, size)} ${size}w`)
+          .map(
+            (size) =>
+              `${getImageSrc(asset, size >= 1024 ? 1024 : size)} ${size}w`
+          )
           .join(', ');
 
   return {
