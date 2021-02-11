@@ -1,5 +1,4 @@
 import chalk from 'chalk';
-import meow from 'meow';
 
 import jsonDiff from 'json-diff';
 
