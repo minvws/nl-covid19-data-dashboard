@@ -1,18 +1,17 @@
 import localefile from './APP_TARGET';
 
-export type TLocale = typeof localefile;
+export type Locale = typeof localefile;
 
-export type TLanguages = {
-  nl: TLocale;
-  en: TLocale;
+export type Languages = {
+  nl: Locale;
+  en: Locale;
 };
 
-export type TALLLanguages = TLocale;
-export type TLanguageKey = keyof TLanguages;
+export type LanguageKey = keyof Languages;
 
-export const targetLanguage: TLanguageKey =
-  (process.env.NEXT_PUBLIC_LOCALE as TLanguageKey) || 'nl';
+export const targetLanguage: LanguageKey =
+  (process.env.NEXT_PUBLIC_LOCALE as LanguageKey) || 'nl';
 
-const dictionary: TLocale = localefile;
+const dictionary: Locale = localefile;
 
 export default dictionary;
