@@ -1,10 +1,13 @@
 import { useRouter } from 'next/router';
 import Getest from '~/assets/test.svg';
+import { ArticleStrip } from '~/components-styled/article-strip';
+import { ArticleSummary } from '~/components-styled/article-teaser';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
@@ -12,21 +15,22 @@ import { municipalThresholds } from '~/components/choropleth/municipal-threshold
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
-import { SEOHead } from '~/components-styled/seo-head';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getMunicipalityLayout } from '~/domain/layout/municipality-layout';
+import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
+  createGetContent,
   getGmData,
   getLastGeneratedDate,
   getText,
 } from '~/static-props/get-data';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { formatDateFromMilliseconds } from '~/utils/formatDate';
-export { getStaticPaths } from '~/static-paths/gm';
 import { colors } from '~/style/theme';
+import { formatDateFromMilliseconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -34,11 +38,14 @@ export const getStaticProps = createGetStaticProps(
   getGmData,
   createGetChoroplethData({
     gm: ({ tested_overall }) => ({ tested_overall }),
-  })
+  }),
+  createGetContent<{
+    articles?: ArticleSummary[];
+  }>(createPageArticlesQuery('positiveTestsPage'))
 );
 
 const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { data, choropleth, municipalityName, text: siteText } = props;
+  const { data, choropleth, municipalityName, text: siteText, content } = props;
 
   const text = siteText.gemeente_positief_geteste_personen;
   const lastValue = data.tested_overall.last_value;
@@ -71,6 +78,8 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
           }}
           reference={text.reference}
         />
+
+        <ArticleStrip articles={content.articles} />
 
         <TwoKpiSection>
           <KpiTile
@@ -171,7 +180,7 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
           }}
         >
           <MunicipalityChoropleth
-            selected={data.code}
+            selectedCode={data.code}
             data={choropleth.gm}
             metricName="tested_overall"
             metricProperty="infected_per_100k"

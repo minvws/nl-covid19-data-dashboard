@@ -58,15 +58,15 @@ export function DeceasedMonitorSection({
           config={{
             registered: {
               label: text.deceased_monitor_chart_legenda_registered,
-              color: theme.colors.data.primary,
+              color: theme.colors.data.secondary,
             },
             expected: {
               label: text.deceased_monitor_chart_legenda_expected,
-              color: '#5BADDB',
+              color: theme.colors.data.primary,
             },
             margin: {
               label: text.deceased_monitor_chart_legenda_expected_margin,
-              color: '#D0EDFF',
+              color: theme.colors.data.margin,
             },
           }}
         />
@@ -76,17 +76,17 @@ export function DeceasedMonitorSection({
             items={[
               {
                 label: text.deceased_monitor_chart_legenda_registered,
-                color: theme.colors.data.primary,
+                color: theme.colors.data.secondary,
                 shape: 'line',
               },
               {
                 label: text.deceased_monitor_chart_legenda_expected,
-                color: '#5BADDB',
+                color: theme.colors.data.primary,
                 shape: 'line',
               },
               {
                 label: text.deceased_monitor_chart_legenda_expected_margin,
-                color: '#D0EDFF',
+                color: theme.colors.data.margin,
                 shape: 'square',
               },
             ]}

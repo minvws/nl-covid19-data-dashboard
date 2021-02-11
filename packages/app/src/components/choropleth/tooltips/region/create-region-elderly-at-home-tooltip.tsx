@@ -13,7 +13,7 @@ export const createRegionElderlyAtHomeTooltip = (
 ) => (context: SafetyRegionProperties & RegionsElderlyAtHome): ReactNode => {
   const onSelect = (event: any) => {
     event.stopPropagation();
-    selectHandler(context);
+    selectHandler(context.vrcode);
   };
 
   return (

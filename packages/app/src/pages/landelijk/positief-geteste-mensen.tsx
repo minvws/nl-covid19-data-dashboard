@@ -9,6 +9,8 @@ import {
   formatAgeGroupRange,
 } from '~/components-styled/age-demographic';
 import { Anchor } from '~/components-styled/anchor';
+import { ArticleStrip } from '~/components-styled/article-strip';
+import { ArticleSummary } from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
 import { RegionControlOption } from '~/components-styled/chart-region-controls';
 import { ChartTile } from '~/components-styled/chart-tile';
@@ -31,9 +33,11 @@ import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropl
 import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/create-positive-tested-people-regional-tooltip';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
+import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
+  createGetContent,
   getLastGeneratedDate,
   getNlData,
   getText,
@@ -55,13 +59,17 @@ export const getStaticProps = createGetStaticProps(
   createGetChoroplethData({
     gm: ({ tested_overall }) => ({ tested_overall }),
     vr: ({ tested_overall }) => ({ tested_overall }),
-  })
+  }),
+  createGetContent<{
+    articles?: ArticleSummary[];
+  }>(createPageArticlesQuery('positiveTestsPage'))
 );
 
 const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
   data,
   choropleth,
   text: siteText,
+  content,
 }) => {
   const text = siteText.positief_geteste_personen;
   const ggdText = siteText.positief_geteste_personen_ggd;
@@ -102,6 +110,8 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
           }}
           reference={text.reference}
         />
+
+        <ArticleStrip articles={content.articles} />
 
         <TwoKpiSection>
           <KpiTile

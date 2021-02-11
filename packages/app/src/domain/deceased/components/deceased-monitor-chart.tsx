@@ -187,7 +187,7 @@ function useHighchartOptions(values: CbsValue[], config: SeriesConfig) {
         data: values.map((x) => [createDate(x.date_start_unix), x.registered]),
         name: config.registered.label,
         color: config.registered.color,
-        lineWidth: 2,
+        lineWidth: 4,
         marker: {
           enabled: false,
           symbol: 'circle',

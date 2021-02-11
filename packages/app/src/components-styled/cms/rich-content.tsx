@@ -1,31 +1,53 @@
 import { PortableTextEntry } from '@sanity/block-content-to-react';
-import { Box } from '~/components-styled/base';
-import { ContentBlock } from '~/components-styled/cms/content-block';
-import { Image } from '~/components-styled/cms/image';
-import { PortableText } from '~/lib/sanity';
+import { Fragment, FunctionComponent, ReactNode } from 'react';
+import { getFileSrc, PortableText } from '~/lib/sanity';
+import {
+  ImageBlock,
+  InlineAttachment,
+  RichContentImageBlock,
+} from '~/types/cms';
 import { assert } from '~/utils/assert';
+import { ContentImage } from './content-image';
 
-export function RichContent({ blocks }: { blocks: PortableTextEntry[] }) {
-  return (
-    <Box fontSize="1.125rem">
-      <PortableText blocks={blocks} serializers={serializers} />
-    </Box>
-  );
+interface RichContentProps {
+  blocks: PortableTextEntry[];
+  contentWrapper?: FunctionComponent;
 }
 
-const serializers = {
-  types: {
-    block: (props: unknown) => {
-      assert(
-        PortableText.defaultSerializers.types?.block,
-        'PortableText needs to provide a serializer for block content'
-      );
-      return (
-        <ContentBlock>
-          {PortableText.defaultSerializers.types.block(props)}
-        </ContentBlock>
-      );
+export function RichContent({ contentWrapper, blocks }: RichContentProps) {
+  const ContentWrapper = contentWrapper ?? Fragment;
+  const serializers = {
+    types: {
+      block: (props: unknown) => {
+        assert(
+          PortableText.defaultSerializers.types?.block,
+          'PortableText needs to provide a serializer for block content'
+        );
+        return (
+          <ContentWrapper>
+            {PortableText.defaultSerializers.types.block(props)}
+          </ContentWrapper>
+        );
+      },
+      image: (props: { node: ImageBlock | RichContentImageBlock }) => (
+        <ContentImage contentWrapper={contentWrapper} {...props} />
+      ),
     },
-    image: Image,
-  },
-};
+    marks: {
+      inlineAttachment: InlineAttachmentMark,
+    },
+  };
+
+  return <PortableText blocks={blocks} serializers={serializers} />;
+}
+
+function InlineAttachmentMark(props: {
+  children: ReactNode;
+  mark: InlineAttachment;
+}) {
+  return (
+    <a download href={getFileSrc(props.mark.asset)}>
+      {props.children}
+    </a>
+  );
+}

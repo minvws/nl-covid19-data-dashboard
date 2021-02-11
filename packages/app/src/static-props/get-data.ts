@@ -1,20 +1,18 @@
-import { GetStaticPropsContext } from 'next';
-import safetyRegions from '~/data/index';
-import municipalities from '~/data/municipalSearchData';
-import { client, localize } from '~/lib/sanity';
-import { targetLanguage } from '~/locale/index';
 import {
   Municipal,
   Municipalities,
   National,
   Regionaal,
   Regions,
-  sortMunicipalTimeSeriesInDataInPlace,
-  sortNationalTimeSeriesInDataInPlace,
-  sortRegionalTimeSeriesInDataInPlace,
+  sortTimeSeriesInDataInPlace,
 } from '@corona-dashboard/common';
-import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
+import { GetStaticPropsContext } from 'next';
+import safetyRegions from '~/data/index';
+import municipalities from '~/data/municipalSearchData';
+import { client, localize } from '~/lib/sanity';
+import { targetLanguage } from '~/locale/index';
 import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
+import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
 
 /**
  * Usage:
@@ -49,7 +47,8 @@ export function createGetContent<T>(
         ? queryOrQueryGetter(context)
         : queryOrQueryGetter;
     const rawContent = await client.fetch<T>(query);
-    const content = localize(rawContent, [targetLanguage, 'nl']);
+
+    const content = localize(rawContent ?? {}, [targetLanguage, 'nl']) as T;
 
     return { content };
   };
@@ -65,7 +64,7 @@ export function getNlData() {
   // clone data to prevent mutation of the original
   const data = JSON.parse(JSON.stringify(json.nl)) as National;
 
-  sortNationalTimeSeriesInDataInPlace(data);
+  sortTimeSeriesInDataInPlace(data);
 
   return { data };
 }
@@ -77,11 +76,14 @@ export function getVrData(context: GetStaticPropsContext) {
 
   const data = loadJsonFromDataFile<Regionaal>(`${code}.json`);
 
-  sortRegionalTimeSeriesInDataInPlace(data);
+  sortTimeSeriesInDataInPlace(data);
 
   const safetyRegion = safetyRegions.find((r) => r.code === code);
 
-  return { data, safetyRegionName: safetyRegion?.name || '' };
+  return {
+    data,
+    safetyRegionName: safetyRegion?.name || '',
+  };
 }
 
 export function getGmData(context: GetStaticPropsContext) {
@@ -94,7 +96,7 @@ export function getGmData(context: GetStaticPropsContext) {
   const municipalityName =
     municipalities.find((r) => r.gemcode === code)?.name || '';
 
-  sortMunicipalTimeSeriesInDataInPlace(data);
+  sortTimeSeriesInDataInPlace(data);
 
   return { data, municipalityName };
 }

@@ -233,9 +233,7 @@ function getChartOptions(props: IGetOptions): Highcharts.Options {
         name: rangeLegendLabel,
         data: rangeData,
         type: 'arearange',
-        color: colors.data.primary,
-        opacity: 0.05,
-        fillOpacity: 1,
+        color: colors.data.margin,
         marker: {
           enabled: false,
         },

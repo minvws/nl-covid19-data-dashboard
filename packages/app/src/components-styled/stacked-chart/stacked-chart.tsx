@@ -23,11 +23,11 @@ import styled from 'styled-components';
 import { Box } from '~/components-styled/base';
 import { Legenda, LegendItem } from '~/components-styled/legenda';
 import { InlineText } from '~/components-styled/typography';
-import { ValueAnnotation } from '~/components-styled/value-annotation';
 import siteText from '~/locale';
 import { colors } from '~/style/theme';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { useIsMounted } from '~/utils/use-is-mounted';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import {
   calculateSeriesMaximum,
@@ -37,8 +37,8 @@ import {
   getValuesInTimeframe,
   getWeekInfo,
   SeriesValue,
-  Value,
 } from './logic';
+import { TimestampedValue } from '@corona-dashboard/common';
 
 const tooltipStyles = {
   ...defaultStyles,
@@ -52,8 +52,16 @@ const NUM_1K = 1000;
 const NUM_100K = 100000;
 const NUM_1M = 1000000;
 
-const tickFormatNumber = (v: NumberValue) =>
-  formatNumber(v.valueOf() / NUM_100K);
+const tickFormatNumber = (v: NumberValue) => {
+  const value1M = v.valueOf() / NUM_1M;
+  const value100K = v.valueOf() / NUM_100K;
+
+  return value1M > 1
+    ? `${value1M}mln`
+    : value100K > 0
+    ? `${value100K}00k`
+    : '0';
+};
 const tickFormatPercentage = (v: NumberValue) =>
   `${formatPercentage(v.valueOf())}%`;
 
@@ -98,13 +106,13 @@ type TooltipFormatter = (
 
 type HoverEvent = TouchEvent<SVGElement> | MouseEvent<SVGElement>;
 
-export type Config<T extends Value> = {
+export type Config<T extends TimestampedValue> = {
   metricProperty: keyof T;
   color: string;
   legendLabel: string;
 };
 
-export type StackedChartProps<T extends Value> = {
+export type StackedChartProps<T extends TimestampedValue> = {
   values: T[];
   config: Config<T>[];
   valueAnnotation?: string;
@@ -113,13 +121,15 @@ export type StackedChartProps<T extends Value> = {
   isPercentage?: boolean;
 };
 
-export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
+export function StackedChart<T extends TimestampedValue>(
+  props: StackedChartProps<T>
+) {
   /**
    * Destructuring here and not above, so we can easily switch between optional
    * passed-in formatter functions or their default counterparts that have the
    * same name.
    */
-  const { values, config, width, valueAnnotation, isPercentage } = props;
+  const { values, config, width, isPercentage } = props;
 
   const {
     tooltipData,
@@ -130,6 +140,8 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
     tooltipOpen,
   } = useTooltip<TooltipData>();
 
+  const isMounted = useIsMounted();
+
   const breakpoints = useBreakpoints();
   const isExtraSmallScreen = !breakpoints.sm;
   const isTinyScreen = !breakpoints.xs;
@@ -137,10 +149,10 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
   const padding = useMemo(
     () =>
       ({
-        top: 10,
+        top: 0,
         right: isExtraSmallScreen ? 0 : 30,
         bottom: 20,
-        left: 24,
+        left: 32,
       } as const),
     [isExtraSmallScreen]
   );
@@ -175,7 +187,7 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
   }, [config, metricProperties]);
 
   const hoverColors = useMemo(
-    () => config.map((x) => transparentize(0.8, x.color)),
+    () => config.map((x) => transparentize(0.6, x.color)),
     [config]
   );
 
@@ -296,19 +308,22 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
           <Box mb={2}>
             <InlineText fontWeight="bold">
               {`${replaceVariablesInText(
-                siteText.vaccinaties.verwachte_leveringen.van_week_tot_week,
+                isTinyScreen
+                  ? siteText.vaccinaties.verwachte_leveringen
+                      .van_week_tot_week_klein_scherm
+                  : siteText.vaccinaties.verwachte_leveringen.van_week_tot_week,
                 { weekNumberFrom, weekNumberTo }
               )}: `}
             </InlineText>
             {isTotalMillion
               ? `${formatPercentage(seriesSumByKey[key] / NUM_1M)} mln `
               : `${formatNumber(Math.round(seriesSumByKey[key] / NUM_1K))} k `}
-            {siteText.waarde_annotaties.totaal}
+            {!isTinyScreen && siteText.waarde_annotaties.totaal}
           </Box>
         </Box>
       );
     },
-    [labelByKey, seriesSumByKey, series]
+    [labelByKey, seriesSumByKey, series, isTinyScreen]
   );
 
   /**
@@ -322,37 +337,39 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
    *
    * @TODO wrap in useCallback?
    */
-  function handleHover(
-    event: HoverEvent,
-    tooltipData: TooltipData,
-    hoverIndex: number
-  ) {
-    const isLeave = event.type === 'mouseleave';
+  const handleHover = useCallback(
+    function handleHover(
+      event: HoverEvent,
+      tooltipData: TooltipData,
+      hoverIndex: number
+    ) {
+      const isLeave = event.type === 'mouseleave';
 
-    if (isLeave) {
-      tooltipTimeout = window.setTimeout(() => {
-        hideTooltip();
-      }, 300);
-      hoverTimeout = window.setTimeout(() => {
-        setHoveredIndex(NO_HOVER_INDEX);
-      }, 300);
-      return;
-    }
+      if (isLeave) {
+        tooltipTimeout = window.setTimeout(() => {
+          if (isMounted) hideTooltip();
+        }, 300);
+        hoverTimeout = window.setTimeout(() => {
+          if (isMounted) setHoveredIndex(NO_HOVER_INDEX);
+        }, 300);
+        return;
+      }
 
-    if (tooltipTimeout) clearTimeout(tooltipTimeout);
-    if (hoverTimeout) clearTimeout(hoverTimeout);
+      if (tooltipTimeout) clearTimeout(tooltipTimeout);
+      if (hoverTimeout) clearTimeout(hoverTimeout);
 
-    setHoveredIndex(hoverIndex);
+      setHoveredIndex(hoverIndex);
 
-    // @ts-expect-error
-    const coords = localPoint(event.target.ownerSVGElement, event);
-    const left = tooltipData.x + tooltipData.width / 2;
-    showTooltip({
-      tooltipLeft: Math.max(coords?.x || 0 - 20, left),
-      tooltipTop: coords?.y || 0,
-      tooltipData,
-    });
-  }
+      // @ts-expect-error
+      const coords = localPoint(event.target.ownerSVGElement, event);
+      showTooltip({
+        tooltipLeft: coords?.x || 0,
+        tooltipTop: coords?.y || 0,
+        tooltipData,
+      });
+    },
+    [hideTooltip, showTooltip, isMounted]
+  );
 
   if (isEmpty(series)) {
     return null;
@@ -378,10 +395,6 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
 
   return (
     <Box>
-      {valueAnnotation && (
-        <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
-      )}
-
       <Box position="relative">
         <svg width={width} height={height} role="img">
           <Group left={padding.left} top={padding.top}>
@@ -454,8 +467,16 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
                         id={barId}
                         key={barId}
                         x={bar.x}
-                        y={bar.y}
-                        height={bar.height}
+                        /**
+                         * Create a little gap between the stacked bars. Bars
+                         * can be 0 height so we need to clip it on 0 since
+                         * negative height is not allowed.
+                         */
+                        y={bar.y + (isTinyScreen ? 1 : 2)}
+                        height={Math.max(
+                          0,
+                          bar.height - (isTinyScreen ? 1 : 2)
+                        )}
                         width={bar.width}
                         fill={fillColor}
                         onMouseLeave={handleHoverWithBar}
@@ -475,6 +496,7 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
             left={tooltipLeft}
             top={tooltipTop}
             style={tooltipStyles}
+            offsetLeft={isTinyScreen ? 0 : 10}
           >
             <TooltipContainer>
               {props.formatTooltip

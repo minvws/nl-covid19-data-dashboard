@@ -22,10 +22,12 @@ const curlyBracketRegex = /\{\{(.+?)\}\}/g;
 export function replaceVariablesInText(
   translation: string,
   variables: { [key: string]: string | number | undefined }
-): string {
+) {
   assert(
     isDefined(translation),
-    'translation placeholder text is not defined, perhaps a missing locale key?'
+    `Missing a locale text with placeholders for: ${Object.keys(variables).join(
+      ','
+    )}`
   );
 
   return translation.replace(curlyBracketRegex, (_string, variableName) => {
@@ -34,9 +36,9 @@ export function replaceVariablesInText(
       return (variables[trimmedName] ?? '').toString();
     }
     throw new Error(
-      `Placeholder name ${trimmedName} was not defined in the given variables: ${JSON.stringify(
+      `No value was supplied for placeholder ${trimmedName} in ${Object.keys(
         variables
-      )}, text: ${translation}`
+      ).join(',')}. Text: ${translation}`
     );
   });
 }
