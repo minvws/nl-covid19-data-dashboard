@@ -2,7 +2,7 @@
 import { imageResizeTargets } from '@corona-dashboard/common';
 import BlockContent from '@sanity/block-content-to-react';
 import sanityClient from '@sanity/client';
-import { TLanguageKey } from '~/locale';
+import { LanguageKey } from '~/locale';
 import { ImageBlock, SanityFileProps, SanityImageProps } from '~/types/cms';
 import { findClosestSize } from '~/utils/findClosestSize';
 
@@ -39,7 +39,7 @@ export const client = sanityClient(config);
  **/
 // export const urlFor = (source: SanityImageSource) => builder.image(source);
 
-export function localize<T>(value: T | T[], languages: TLanguageKey[]): T {
+export function localize<T>(value: T | T[], languages: LanguageKey[]): T {
   const anyValue = value as any;
 
   if (Array.isArray(value)) {

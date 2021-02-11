@@ -1,21 +1,17 @@
-import en from './en.json';
-import nl from './nl.json';
+import localefile from './APP_LOCALE';
 
-export type TNLLocale = typeof nl;
-export type TENLocale = typeof en;
+export type Locale = typeof localefile;
 
-export type TLanguages = {
-  nl: TNLLocale;
-  en: TENLocale;
+export type Languages = {
+  nl: Locale;
+  en: Locale;
 };
 
-export type TALLLanguages = TNLLocale | TENLocale;
-export type TLanguageKey = keyof TLanguages;
+export type LanguageKey = keyof Languages;
 
-const languages: TLanguages = { en, nl } as const;
+export const targetLanguage: LanguageKey =
+  (process.env.NEXT_PUBLIC_LOCALE as LanguageKey) || 'nl';
 
-export const targetLanguage: TLanguageKey =
-  (process.env.NEXT_PUBLIC_LOCALE as TLanguageKey) || 'nl';
-const dictionary: TALLLanguages = languages[targetLanguage];
+const dictionary: Locale = localefile;
 
 export default dictionary;
