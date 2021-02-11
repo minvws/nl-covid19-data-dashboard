@@ -167,7 +167,7 @@ export function ContentHeader(props: ContentHeaderProps) {
 
           {metadata && (
             <MetadataBox>
-              <Metadata {...metadata} title={title} />
+              <Metadata {...metadata} accessibilitySubject={title} />
             </MetadataBox>
           )}
         </Box>

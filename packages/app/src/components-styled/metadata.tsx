@@ -8,12 +8,12 @@ import css from '@styled-system/css';
 import siteText from '~/locale/index';
 import { VisuallyHidden } from './visually-hidden';
 export interface MetadataProps {
-  title?: string;
   date?: number | [number, number];
   source?: {
     text: string;
     href: string;
   };
+  accessibilitySubject?: string;
 }
 
 function formatMetadataDate(date: number | [number, number]): string {
@@ -29,7 +29,11 @@ function formatMetadataDate(date: number | [number, number]): string {
   });
 }
 
-export function Metadata({ date, source, title }: MetadataProps) {
+export function Metadata({
+  date,
+  source,
+  accessibilitySubject,
+}: MetadataProps) {
   const dateString = date ? formatMetadataDate(date) : null;
 
   return (
@@ -45,7 +49,8 @@ export function Metadata({ date, source, title }: MetadataProps) {
               <ExternalLink href={source.href}>
                 <VisuallyHidden>
                   {replaceVariablesInText(siteText.accessibility.link_source, {
-                    title,
+                    accessibilitySubject,
+                    source: source.text,
                   })}
                 </VisuallyHidden>
                 {source.text}

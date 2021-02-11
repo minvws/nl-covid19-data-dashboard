@@ -27,7 +27,7 @@ export interface MetadataProps {
   datumsText: string;
   dateOrRange: number | DateRange;
   dateOfInsertionUnix: number;
-  title?: string;
+  accessibilitySubject?: string;
 }
 
 const text = siteText.common.metadata;
@@ -38,7 +38,7 @@ export function Metadata(props: MetadataProps) {
     datumsText,
     dateOrRange,
     dateOfInsertionUnix,
-    title,
+    accessibilitySubject,
   } = props;
 
   const dateText = formateDateText(
@@ -66,7 +66,7 @@ export function Metadata(props: MetadataProps) {
         label={text.source}
         accessibilityText={replaceVariablesInText(
           siteText.accessibility.link_source,
-          { title }
+          { accessibilitySubject, source: 'test' }
         )}
       />
 
@@ -83,7 +83,7 @@ export function Metadata(props: MetadataProps) {
         label={text.download}
         accessibilityText={replaceVariablesInText(
           siteText.accessibility.link_download,
-          { title }
+          { accessibilitySubject, source: 'test' }
         )}
       />
     </Box>

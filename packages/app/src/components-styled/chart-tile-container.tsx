@@ -18,7 +18,7 @@ export function ChartTileContainer({
       {metadata && (
         <>
           <Spacer m="auto" />
-          <Metadata {...metadata} title={title} />
+          <Metadata {...metadata} accessibilitySubject={title} />
         </>
       )}
     </Tile>
