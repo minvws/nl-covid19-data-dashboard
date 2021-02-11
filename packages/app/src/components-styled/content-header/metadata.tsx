@@ -66,7 +66,7 @@ export function Metadata(props: MetadataProps) {
         label={text.source}
         accessibilityText={replaceVariablesInText(
           siteText.accessibility.link_source,
-          { accessibilitySubject, source: 'test' }
+          { subject: accessibilitySubject }
         )}
       />
 
@@ -83,7 +83,7 @@ export function Metadata(props: MetadataProps) {
         label={text.download}
         accessibilityText={replaceVariablesInText(
           siteText.accessibility.link_download,
-          { accessibilitySubject, source: 'test' }
+          { subject: accessibilitySubject }
         )}
       />
     </Box>

@@ -49,8 +49,7 @@ export function Metadata({
               <ExternalLink href={source.href}>
                 <VisuallyHidden>
                   {replaceVariablesInText(siteText.accessibility.link_source, {
-                    accessibilitySubject,
-                    source: source.text,
+                    subject: accessibilitySubject,
                   })}
                 </VisuallyHidden>
                 {source.text}
