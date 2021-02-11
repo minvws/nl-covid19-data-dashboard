@@ -263,7 +263,10 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                 width={width}
                 ariaLabelledBy="chart_vaccine_support"
                 values={data.vaccine_support.values}
-                linesConfig={[{ metricProperty: 'percentage_total' }]}
+                linesConfig={[
+                  { metricProperty: 'percentage_total' },
+                  { metricProperty: 'percentage_70_plus', color: 'hotpink' },
+                ]}
                 formatTooltip={(values) => {
                   const value = values[0];
                   const dateStartString = formatDateFromSeconds(
