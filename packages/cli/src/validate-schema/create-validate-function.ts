@@ -1,8 +1,7 @@
 import Ajv, { ValidateFunction } from 'ajv';
 import fs from 'fs';
 import path from 'path';
-import { equalsRootProperty } from './ajv-keywords/equalsRootProperty';
-import { validRestrictionId } from './ajv-keywords/validRestrictionId';
+import { equalsRootProperty, validRestrictionId } from './ajv-keywords';
 
 /**
  * Loads the given uri and parses its contents to JSON

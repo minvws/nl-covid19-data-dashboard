@@ -2,7 +2,7 @@ import {
   Municipal,
   National,
   Regionaal,
-  sortNationalTimeSeriesInDataInPlace,
+  sortTimeSeriesInDataInPlace,
 } from '@corona-dashboard/common';
 
 // Must be declared global to be detected by typescript (allows import/export)
@@ -93,7 +93,7 @@ Cypress.Commands.add('beforeNationalTests', (pageName: string) => {
 
   cy.fixture<National>('NL.json')
     .then((nationalData) => {
-      sortNationalTimeSeriesInDataInPlace(nationalData);
+      sortTimeSeriesInDataInPlace(nationalData);
     })
     .as('nationalData')
     .visit(`/landelijk/${pageName}`);
