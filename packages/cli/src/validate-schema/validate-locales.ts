@@ -10,14 +10,16 @@ function objectsHaveSameKeys(
   obj1: Record<string, unknown>,
   obj2: Record<string, unknown>
 ) {
-  const objects = [obj1, obj2];
-  const allKeys: string[] = objects.reduce(
-    (keys: string[], object) => keys.concat(Object.keys(object)),
-    []
-  );
+  // @ts-ignore
+  const diff = jsonDiff.diff(obj1, obj2, { keysOnly: true });
 
-  const union = new Set(allKeys);
-  return objects.every((object) => union.size === Object.keys(object).length);
+  // jsonDiff returns undefined if there are no differences
+  if (diff) {
+    // which means if diff is truthy, we found differences and should throw an error
+    return false;
+  }
+
+  return true;
 }
 
 if (objectsHaveSameKeys(nl, en)) {
