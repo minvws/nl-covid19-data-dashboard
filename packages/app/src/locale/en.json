@@ -2000,8 +2000,8 @@
     "title": "COVID-19 vaccinations",
     "description": "Vaccination is the most important step towards getting life back to normal. The Netherlands began vaccinating people against COVID-19 on 6 January 2021. Eventually, the vaccine will be offered to everyone aged 18 and over. This page shows how many doses of vaccine have been administered and how many doses are on their way.",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "date_unix": "1612959288",
-    "date_of_insertion_unix": "1612959288",
+    "date_unix": "1613045347",
+    "date_of_insertion_unix": "1613045347",
     "reference": {
       "href": "/verantwoording#vaccination",
       "text": "Read more about the source of the data on vaccination in the explanation of the presented data."
@@ -2037,27 +2037,27 @@
       "difference": "",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "626146",
-          "date_unix": "1612959288",
-          "date_of_insertion_unix": "1612959288"
+          "total_vaccinated": "660284",
+          "date_unix": "1613045347",
+          "date_of_insertion_unix": "1613045347"
         }
       },
       "kpi_total": {
         "title": "Number of doses administered",
-        "value": "460252",
+        "value": "489558",
         "description": "",
-        "date_of_report_unix": "1612959288",
-        "date_of_insertion_unix": "1612959288",
+        "date_of_report_unix": "1613045347",
+        "date_of_insertion_unix": "1613045347",
         "administered": [
           {
-            "value": "366436",
+            "value": "395742",
             "description": "reported by GGD-GHOR",
-            "report_date": "Reported number till 9 February"
+            "report_date": "Reported number till 10 February"
           },
           {
             "value": "93816",
             "description": "reported by LNAZ",
-            "report_date": "Reported number till 9 February"
+            "report_date": "Reported number till 10 February"
           },
           {
             "value": "",
@@ -2081,25 +2081,25 @@
         "first_tab_title": "Calculated number",
         "second_tab_title": "Reported number",
         "tab_total_estimated": {
-          "value": "626146",
+          "value": "660284",
           "description": "",
-          "date_of_report_unix": "1612959288",
-          "date_of_insertion_unix": "1612959288",
+          "date_of_report_unix": "1613045347",
+          "date_of_insertion_unix": "1613045347",
           "administered": [
             {
-              "value": "366436",
+              "value": "395742",
               "description": "administered by GGDs",
-              "report_date": "Reported number till 9 February"
+              "report_date": "Reported number till 10 February"
             },
             {
               "value": "93816",
               "description": "administered in hospitals",
-              "report_date": "Reported number till 9 February"
+              "report_date": "Reported number till 10 February"
             },
             {
-              "value": "165894",
+              "value": "170726",
               "description": "administered in long-term care institutions",
-              "report_date": "Calculated number till 9 February"
+              "report_date": "Calculated number till 10 February"
             },
             {
               "value": "",
