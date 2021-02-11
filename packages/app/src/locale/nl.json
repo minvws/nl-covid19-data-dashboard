@@ -1952,6 +1952,8 @@
     }
   },
   "accessibility": {
+    "link_source": "Bekijk de databron van \"{{subject}}\" op",
+    "link_download": "Download de databron van \"{{subject}}\" op",
     "grafieken": {
       "reproductiegetal_verloop": "Deze grafiek geeft het reproductiegetal over tijd weer.",
       "ziekenhuisopnames": "Deze grafiek toont het aantal ziekenhuisopnames over tijd.",
