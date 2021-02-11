@@ -276,19 +276,19 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                     value.date_end_unix
                   );
                   return (
-                    <Text m={0}>
-                      <span style={{ fontWeight: 'bold' }}>
+                    <section>
+                      <Text m={0} style={{ fontWeight: 'bold' }}>
                         {`${dateStartString} - ${dateEndString}`}
-                      </span>
-                      <br />
-
-                      {replaceVariablesInText(
-                        siteText.common.tooltip.vaccinatie_bereidheid,
-                        {
-                          percentageInFavor: value.__value,
-                        }
-                      )}
-                    </Text>
+                      </Text>
+                      <Text m={0}>
+                        {replaceVariablesInText(
+                          siteText.common.tooltip.vaccinatie_bereidheid,
+                          {
+                            percentageInFavor: value.__value,
+                          }
+                        ) || 'MISSING TEXT'}
+                      </Text>
+                    </section>
                   );
                 }}
                 formatYAxis={(x) => `${x}%`}
