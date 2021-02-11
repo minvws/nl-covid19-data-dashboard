@@ -1,4 +1,6 @@
+import css from '@styled-system/css';
 import { Box } from './base';
+import { InlineText } from './typography';
 
 interface CategoricalBarScaleProps {
   value: number;
@@ -6,32 +8,92 @@ interface CategoricalBarScaleProps {
 }
 
 interface CategoricalBarScaleCategory {
-  name: string;
-  from: number;
-  to: number;
-  color: string;
-  baseRatio?: number;
+  threshold: number;
+  name?: string;
+  color?: string;
 }
 
 export function CategoricalBarScale({
   value,
   categories,
 }: CategoricalBarScaleProps) {
-  const lastValue = categories[categories.length - 1];
-  let newRatio = 1;
-  if (value > lastValue.to) {
-    const width = lastValue.to - lastValue.from;
-    const difference = value - lastValue.to;
-    newRatio = (difference / width) * (lastValue.baseRatio ?? 1);
-  }
+  const maxValue = categories.reduce((maxValue, category) => {
+    return Math.max(category.threshold, maxValue);
+  }, value);
+
+  const barPieces = categories
+    .filter((x) => x.name !== undefined)
+    .map((category, index, array) => {
+      const isLast = array.length === index + 1;
+      const to = isLast ? maxValue : array[index + 1].threshold;
+      const width = to - category.threshold;
+      const isActive =
+        (category.threshold <= value && value < to) ||
+        (isLast && value === maxValue);
+      return { ...category, isLast, width, isActive };
+    });
 
   return (
-    <Box>
-      {categories.map((category) => (
-        <Box key={category.name}>
-          {category.from} - {category.to} {newRatio}
-        </Box>
-      ))}
-    </Box>
+    <>
+      <Box position="relative" width="100%" display="flex" my={4}>
+        {barPieces.map((category) => (
+          <Box
+            key={`bar-${category.name}`}
+            height={12}
+            bg={category.color}
+            width={`${(category.width / maxValue) * 100}%`}
+            position="relative"
+          >
+            <Box
+              position="absolute"
+              top="100%"
+              left="0"
+              fontSize={1}
+              color="annotation"
+              css={css({
+                transform: 'translateX(-50%)',
+              })}
+            >
+              {category.threshold}
+            </Box>
+          </Box>
+        ))}
+        <Box
+          position="absolute"
+          left={`${(value / maxValue) * 100}%`}
+          top={-14}
+          bg="black"
+          width={7}
+          height={26}
+          css={css({
+            transform: 'translateX(-50%)',
+            outline: '1px solid white',
+          })}
+        />
+      </Box>
+
+      <Box>
+        {barPieces.map((category) => (
+          <>
+            <Box
+              display="inline-block"
+              width="0.6rem"
+              height="0.6rem"
+              borderRadius="50%"
+              bg={category.color}
+            />
+            <InlineText
+              ml={1}
+              mr={3}
+              key={`legenda-${category.name}`}
+              fontWeight={category.isActive ? 'bold' : 'normal'}
+              fontSize={1}
+            >
+              {category.name}
+            </InlineText>
+          </>
+        ))}
+      </Box>
+    </>
   );
 }
