@@ -18,12 +18,12 @@ type SanityImageProps = {
 
 export function SanityImage(props: SanityImageProps) {
   const { src, srcSet, ...imageProps } = props;
+  const extension = src.split('.').pop();
 
-  if (!srcSet) {
+  if (!srcSet || !extension) {
     return <Image {...props} />;
   }
 
-  const extension = src.split('.')[1];
   return (
     <picture>
       <source srcSet={srcSet.split(extension).join('webp')} type="image/webp" />
