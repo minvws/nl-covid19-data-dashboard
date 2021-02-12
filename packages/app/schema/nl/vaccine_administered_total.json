@@ -1,45 +1,33 @@
 {
   "definitions": {
     "value": {
-      "title": "nl_vaccine_administered_per_authority_value",
+      "title": "nl_vaccine_administered_total_value",
       "type": "object",
       "required": [
-        "estimate_total",
-        "estimate_ggd",
-        "estimate_hospitals",
-        "estimate_care_institutions",
+        "estimated_total",
         "reported_total",
-        "reported_ggd_ghor",
-        "reported_lnaz"
+        "date_unix",
+        "date_of_insertion_unix"
       ],
       "additionalProperties": false,
       "properties": {
-        "estimate_total": {
-          "type": "number"
-        },
-        "estimate_ggd": {
-          "type": "number"
-        },
-        "estimate_hospitals": {
-          "type": "number"
-        },
-        "estimate_care_institutions": {
+        "estimated_total": {
           "type": "number"
         },
         "reported_total": {
           "type": "number"
         },
-        "reported_ggd_ghor": {
-          "type": "number"
+        "date_unix": {
+          "type": "integer"
         },
-        "reported_lnaz": {
-          "type": "number"
+        "date_of_insertion_unix": {
+          "type": "integer"
         }
       }
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_vaccine_administered_per_authority",
+  "title": "nl_vaccine_administered_total",
   "type": "object",
   "required": ["values", "last_value"],
   "additionalProperties": false,
