@@ -9,6 +9,29 @@ import * as piwik from '~/lib/piwik';
 import { GlobalStyle } from '~/style/global-style';
 import theme from '~/style/theme';
 
+import { shouldPolyfill } from '@formatjs/intl-locale/should-polyfill';
+async function polyfill() {
+  // This platform already supports Intl.Locale
+  if (shouldPolyfill()) {
+    await import('@formatjs/intl-locale/polyfill');
+    await import('@formatjs/intl-getcanonicallocales/polyfill');
+    await import('@formatjs/intl-datetimeformat/polyfill');
+    // @ts-ignore
+    await import('@formatjs/intl-datetimeformat/locale-data/en');
+    // @ts-ignore
+    await import('@formatjs/intl-datetimeformat/locale-data/nl');
+  }
+}
+
+if (process.env.NODE_ENV === 'development') {
+  /**
+   * this polyfill allows next.js to show runtime errors in IE11
+   */
+  require('@webcomponents/shadydom');
+}
+
+polyfill();
+
 type AppPropsWithLayout = AppProps & {
   Component: FCWithLayout;
 };
