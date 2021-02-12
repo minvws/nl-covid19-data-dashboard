@@ -435,12 +435,6 @@ export interface NlVaccineDelivery {
   last_value: NlVaccineDeliveryValue;
 }
 export interface NlVaccineDeliveryValue {
-  pfizer: number;
-  moderna: number;
-  astra_zeneca: number;
-  cure_vac: number;
-  janssen: number;
-  sanofi: number;
   total: number;
   date_of_insertion_unix: number;
   date_start_unix: number;
@@ -451,12 +445,6 @@ export interface NlVaccineEstimateDelivery {
   last_value: NlVaccineDeliveryEstimateValue;
 }
 export interface NlVaccineDeliveryEstimateValue {
-  pfizer: number;
-  moderna: number;
-  astra_zeneca: number;
-  cure_vac: number;
-  janssen: number;
-  sanofi: number;
   total: number;
   date_of_insertion_unix: number;
   date_start_unix: number;
@@ -473,7 +461,6 @@ export interface NlVaccineAdministeredValue {
   cure_vac: number;
   janssen: number;
   sanofi: number;
-  total: number;
   date_of_insertion_unix: number;
   date_start_unix: number;
   date_end_unix: number;
@@ -489,7 +476,6 @@ export interface NlVaccineAdministeredEstimateValue {
   cure_vac: number;
   janssen: number;
   sanofi: number;
-  total: number;
   date_of_insertion_unix: number;
   date_start_unix: number;
   date_end_unix: number;

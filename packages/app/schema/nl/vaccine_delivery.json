@@ -4,12 +4,6 @@
       "title": "nl_vaccine_delivery_value",
       "type": "object",
       "required": [
-        "pfizer",
-        "moderna",
-        "astra_zeneca",
-        "cure_vac",
-        "janssen",
-        "sanofi",
         "total",
         "date_of_insertion_unix",
         "date_start_unix",
@@ -17,24 +11,6 @@
       ],
       "additionalProperties": false,
       "properties": {
-        "pfizer": {
-          "type": "number"
-        },
-        "moderna": {
-          "type": "number"
-        },
-        "astra_zeneca": {
-          "type": "number"
-        },
-        "cure_vac": {
-          "type": "number"
-        },
-        "janssen": {
-          "type": "number"
-        },
-        "sanofi": {
-          "type": "number"
-        },
         "total": {
           "type": "number"
         },
