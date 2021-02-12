@@ -1,3 +1,11 @@
+/**
+ * This chart is an adaptation from LineChart. It could already render multiple
+ * lines, but the tooltip logic for vaccine support was different enough that I
+ * wanted to implement this as a fork using the Visx tooltip. Namely because
+ * here the tooltip needs to be rendered on one side of the marker (instead of
+ * centered) and flip to the other side once bounds are reached. The LineChart
+ * tooltip didn't have logic for this and Visx does this out of the box.
+ */
 import { TickFormatter } from '@visx/axis';
 import { localPoint } from '@visx/event';
 import { Point } from '@visx/point';
@@ -16,22 +24,38 @@ import {
   defaultPadding,
 } from '~/components-styled/line-chart/components';
 import {
-  isDateSeries,
-  isDateSpanSeries,
+  isDateSpanValue,
+  isDateValue,
   TimestampedValue,
 } from '@corona-dashboard/common';
 import { Text } from '~/components-styled/typography';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
 import text from '~/locale/index';
 import { colors } from '~/style/theme';
-import {
-  formatDateFromMilliseconds,
-  formatDateFromSeconds,
-} from '~/utils/formatDate';
+import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { TimeframeOption } from '~/utils/timeframe';
-import { HoverPoint, Marker, Tooltip, Trend } from './components';
+import { HoverPoint, Marker, Trend } from './components';
 import { calculateYMax, getTrendData, TrendValue } from './logic';
+import { defaultStyles, TooltipWithBounds, useTooltip } from '@visx/tooltip';
+import styled from 'styled-components';
+import css from '@styled-system/css';
+
+const tooltipStyles = {
+  ...defaultStyles,
+  padding: 0,
+  zIndex: 100,
+};
+
+// type SeriesValue<T> = T & TrendValue;
+
+// type SeriesValue = TimestampedValue & Record<string, number>;
+
+type TooltipData<T extends TimestampedValue> = {
+  value: T;
+  key: keyof T;
+  linesConfig: LineConfig<T>[];
+};
 
 const dateToValue = (d: Date) => d.valueOf() / 1000;
 const formatXAxis = (date: Date) =>
@@ -40,23 +64,36 @@ const formatYAxisFn = (y: number) => formatNumber(y);
 const formatYAxisPercentageFn = (y: number) => `${formatPercentage(y)}%`;
 
 export type LineConfig<T extends TimestampedValue> = {
+  /**
+   * For consistency and transparency it is probably a good idea to enforce
+   * property, label and color to be defined for all lines. Then this data can be
+   * easily passed to the tooltip function. The fallback to colors.data.primary
+   * can be made explicit at the consumer context.
+   *
+   * Since the label is likely to appear in both the tooltip and the legenda, it
+   * is named it label.
+   */
   metricProperty: keyof T;
-  color?: string;
+  label: string;
+  color: string;
   style?: 'solid' | 'dashed';
   areaFillOpacity?: number;
-  legendLabel?: string;
   strokeWidth?: number;
   legendShape?: LegendShape;
 };
 
-export type LineChartProps<T extends TimestampedValue> = {
+export type MultiLineChartProps<T extends TimestampedValue> = {
   values: T[];
   linesConfig: LineConfig<T>[];
-  width?: number;
+  width: number;
   height?: number;
   timeframe?: TimeframeOption;
   signaalwaarde?: number;
-  formatTooltip?: (value: (T & TrendValue)[]) => React.ReactNode;
+  formatTooltip?: (
+    value: T,
+    key: keyof T,
+    linesConfig: LineConfig<T>[]
+  ) => React.ReactNode;
   formatXAxis?: TickFormatter<Date>;
   formatYAxis?: TickFormatter<number>;
   hideFill?: boolean;
@@ -72,17 +109,12 @@ export type LineChartProps<T extends TimestampedValue> = {
   seriesMax?: number;
 };
 
-export function LineChart<T extends TimestampedValue>({
+export function MultiLineChart<T extends TimestampedValue>({
   values,
   linesConfig,
-  width = 500,
+  width,
   height = 250,
-  /**
-   * @TODO This is a weird default. The chart should show "all" by default
-   * because you might not have a timeframe toggle as part of the chart. I'm
-   * leaving this for later as I don't have time to break stuff now.
-   */
-  timeframe = '5weeks',
+  timeframe = 'all',
   signaalwaarde,
   formatTooltip,
   formatYAxis,
@@ -96,21 +128,30 @@ export function LineChart<T extends TimestampedValue>({
   legendItems = showLegend
     ? linesConfig.map((x) => ({
         color: x.color ?? colors.data.primary,
-        label: x.legendLabel || '',
+        label: x.label,
         shape: x.legendShape ?? 'line',
       }))
     : undefined,
   componentCallback,
   ariaLabelledBy,
   seriesMax: overrideSeriesMax,
-}: LineChartProps<T>) {
+}: MultiLineChartProps<T>) {
+  // const {
+  //   tooltipData,
+  //   tooltipLeft = 0,
+  //   tooltipTop = 0,
+  //   showTooltip,
+  //   hideTooltip,
+  // } = useTooltip<T & TrendValue>();
+
   const {
     tooltipData,
     tooltipLeft = 0,
     tooltipTop = 0,
     showTooltip,
     hideTooltip,
-  } = useTooltip<T & TrendValue>();
+    tooltipOpen,
+  } = useTooltip<TooltipData<T>>();
 
   const metricProperties = useMemo(
     () => linesConfig.map((x) => x.metricProperty),
@@ -225,7 +266,22 @@ export function LineChart<T extends TimestampedValue>({
         setMarkerProps(undefined);
       } else if (hoverPoints?.length && nearestPoint) {
         showTooltip({
-          tooltipData: hoverPoints.map((x) => x.data),
+          tooltipData: {
+            /**
+             * Ideally I think we would pass the original value + the key that
+             * this hover point belongs to. Similar to how the stacked-chart
+             * hover works. But in order to do so I think we need to use
+             * different hover logic, and possibly use mouse callbacks on the
+             * trends individually.
+             */
+            value: hoverPoints[0].data,
+            key: '__todo_figure_out_what_key_this_point_belongs_to' as keyof T,
+            /**
+             * I'm passing the full config here because the tooltip needs colors
+             * and labels. In the future this could be distilled maybe.
+             */
+            linesConfig: linesConfig,
+          },
           tooltipLeft: nearestPoint.x,
           tooltipTop: nearestPoint.y,
         });
@@ -234,18 +290,21 @@ export function LineChart<T extends TimestampedValue>({
         });
       }
     },
-    [showTooltip, hideTooltip]
+    [showTooltip, hideTooltip, linesConfig]
   );
 
   const handleHover = useCallback(
     (
       event: React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>,
-      scales: ChartScales
+      scales: ChartScales,
+      index: number
     ) => {
       if (!trendsList.length || event.type === 'mouseleave') {
         toggleHoverElements(true);
         return;
       }
+
+      // console.log('handleHover index', index);
 
       const { xScale, yScale } = scales;
 
@@ -300,7 +359,11 @@ export function LineChart<T extends TimestampedValue>({
             xScale={x.xScale}
             yScale={x.yScale}
             color={linesConfig[index].color}
-            onHover={handleHover}
+            /**
+             * Here we pass the index to handle hover. Not sure if that is
+             * enough to avoid having to search for the point
+             */
+            onHover={(event, scales) => handleHover(event, scales, index)}
           />
         ))}
       </>
@@ -333,7 +396,7 @@ export function LineChart<T extends TimestampedValue>({
               : formatYAxisFn
           }
           formatXAxis={formatXAxis}
-          onHover={handleHover}
+          onHover={(event, scales) => handleHover(event, scales, -1)}
           benchmark={benchmark}
           componentCallback={componentCallback}
           ariaLabelledBy={ariaLabelledBy}
@@ -342,16 +405,27 @@ export function LineChart<T extends TimestampedValue>({
           {renderTrendLines}
         </ChartAxes>
 
-        {isDefined(tooltipData) && (
-          <Tooltip
-            bounds={{ right: width, left: 0, top: 0, bottom: height }}
-            x={tooltipLeft + padding.left}
-            y={tooltipTop + padding.top}
+        {tooltipOpen && tooltipData && (
+          <TooltipWithBounds
+            left={tooltipLeft}
+            top={tooltipTop}
+            style={tooltipStyles}
+            // offsetLeft={isTinyScreen ? 0 : 10}
           >
-            {formatTooltip
-              ? formatTooltip(tooltipData)
-              : formatDefaultTooltip(tooltipData, isPercentage)}
-          </Tooltip>
+            <TooltipContainer>
+              {typeof formatTooltip === 'function'
+                ? formatTooltip(
+                    tooltipData.value,
+                    tooltipData.key,
+                    tooltipData.linesConfig
+                  )
+                : formatDefaultTooltip(
+                    tooltipData.value,
+                    tooltipData.key,
+                    tooltipData.linesConfig
+                  )}
+            </TooltipContainer>
+          </TooltipWithBounds>
         )}
 
         <Box
@@ -387,25 +461,27 @@ export function LineChart<T extends TimestampedValue>({
 }
 
 function formatDefaultTooltip<T extends TimestampedValue>(
-  values: (T & TrendValue)[],
+  value: T,
+  key: keyof T,
+  linesConfig: LineConfig<T>[],
   isPercentage?: boolean
 ) {
   // default tooltip assumes one line is rendered:
 
-  if (isDateSeries(values)) {
-    const value = values[0];
+  const numberValue = (value[key] as unknown) as number;
+
+  if (isDateValue(value)) {
     return (
       <>
         <Text as="span" fontWeight="bold">
-          {`${formatDateFromMilliseconds(value.__date.getTime())}: `}
+          {`${formatDateFromSeconds(value.date_unix)}: `}
         </Text>
         {isPercentage
-          ? `${formatPercentage(value.__value)}%`
-          : formatNumber(value.__value)}
+          ? `${formatPercentage(numberValue)}%`
+          : formatNumber(numberValue)}
       </>
     );
-  } else if (isDateSpanSeries(values)) {
-    const value = values[0];
+  } else if (isDateSpanValue(value)) {
     const dateStartString = formatDateFromSeconds(
       value.date_start_unix,
       'short'
@@ -418,42 +494,30 @@ function formatDefaultTooltip<T extends TimestampedValue>(
           {`${dateStartString} - ${dateEndString}: `}
         </Text>
         {isPercentage
-          ? `${formatPercentage(value.__value)}%`
-          : formatNumber(value.__value)}
+          ? `${formatPercentage(numberValue)}%`
+          : formatNumber(numberValue)}
       </>
     );
   }
 
   throw new Error(
-    `Invalid value passed to format tooltip function: ${JSON.stringify(values)}`
+    `Invalid value passed to format tooltip function: ${JSON.stringify(value)}`
   );
 }
 
-function useTooltip<T extends TimestampedValue>() {
-  const [tooltipData, setTooltipData] = useState<T[]>();
-  const [tooltipLeft, setTooltipLeft] = useState<number>();
-  const [tooltipTop, setTooltipTop] = useState<number>();
-
-  const showTooltip = useCallback(
-    (x: { tooltipData: T[]; tooltipLeft: number; tooltipTop: number }) => {
-      setTooltipData(x.tooltipData);
-      setTooltipLeft(x.tooltipLeft);
-      setTooltipTop(x.tooltipTop);
-    },
-    []
-  );
-
-  const hideTooltip = useCallback(() => {
-    setTooltipData(undefined);
-    setTooltipLeft(undefined);
-    setTooltipTop(undefined);
-  }, []);
-
-  return {
-    tooltipData,
-    tooltipLeft,
-    tooltipTop,
-    showTooltip,
-    hideTooltip,
-  };
-}
+export const TooltipContainer = styled.div(
+  css({
+    pointerEvents: 'none',
+    whiteSpace: 'nowrap',
+    minWidth: 72,
+    color: 'body',
+    backgroundColor: 'white',
+    lineHeight: 2,
+    borderColor: 'border',
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    px: 2,
+    py: 1,
+    fontSize: 1,
+  })
+);

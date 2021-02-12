@@ -2,7 +2,8 @@ import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 
-const BOUND_OFFSET = 70;
+// const BOUND_OFFSET = 70;
+const BOUND_OFFSET = 270;
 
 type Bounds = {
   left: number;

@@ -7,12 +7,6 @@ import { isPresent } from 'ts-is-present';
 import { getValuesInTimeframe } from '~/components-styled/stacked-chart/logic';
 import { getDaysForTimeframe, TimeframeOption } from '~/utils/timeframe';
 
-// This type limits the allowed property names to those with a number type,
-// so its like keyof T, but filtered down to only the appropriate properties.
-export type NumberProperty<T extends TimestampedValue> = {
-  [K in keyof T]: T[K] extends number | null ? K : never;
-}[keyof T];
-
 /**
  * To read an arbitrary value property from the passed in data, we need to cast
  * the type to a dictionary internally, otherwise TS will complain the index

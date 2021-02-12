@@ -1,15 +1,18 @@
-// import { NlVaccineSupportValue } from '@corona-dashboard/common';
 import { css } from '@styled-system/css';
+import { ParentSize } from '@visx/responsive';
 import { Fragment, useState } from 'react';
 import VaccinatieIcon from '~/assets/vaccinaties.svg';
+import VaccinesAdministeredChartEn from '~/assets/vaccines_administered_chart_en.svg';
+import VaccinesAdministeredChartNl from '~/assets/vaccines_administered_chart_nl.svg';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
+import { AspectRatio } from '~/components-styled/aspect-ratio';
 import { Box } from '~/components-styled/base';
 import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
-import { LineChart } from '~/components-styled/line-chart/line-chart';
+import { MultiLineChart } from '~/components-styled/multi-line-chart';
 import { RadioGroup } from '~/components-styled/radio-group';
 import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
@@ -17,20 +20,28 @@ import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { InlineText, Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
+import { targetLanguage } from '~/locale/index';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
-import VaccinesAdministeredChartNl from '~/assets/vaccines_administered_chart_nl.svg';
-import VaccinesAdministeredChartEn from '~/assets/vaccines_administered_chart_en.svg';
 import {
   createGetContent,
   getLastGeneratedDate,
   getNlData,
   getText,
 } from '~/static-props/get-data';
+import { colors } from '~/style/theme';
 import { formatDateFromSeconds } from '~/utils/formatDate';
-import { formatNumber } from '~/utils/formatNumber';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { AspectRatio } from '~/components-styled/aspect-ratio';
+import { formatNumber, formatPercentage } from '~/utils/formatNumber';
+
+// /**
+//  * @TODO this is put here because we need to extract things like colors for the
+//  * tooltip. I think a refactor should pass the colors to the tooltip as an extra
+//  * argument, but that refactor should tackle also data redundancy and type
+//  * simplification probably.
+//  */
+// const chartLinesConfig: LineConfig<NlVaccineSupportValue>[] =
+
+// const chartColors = chartLinesConfig.map((x) => x.color || colors.data.primary);
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -40,8 +51,6 @@ export const getStaticProps = createGetStaticProps(
     articles?: ArticleSummary[];
   }>(createPageArticlesQuery('vaccinationsPage'))
 );
-import { targetLanguage } from '~/locale/index';
-import { ParentSize } from '@visx/responsive';
 
 const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
   text: siteText,
@@ -258,36 +267,65 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
         >
           <ParentSize>
             {({ width }) => (
-              <LineChart
+              <MultiLineChart
                 timeframe="all"
                 width={width}
                 ariaLabelledBy="chart_vaccine_support"
                 values={data.vaccine_support.values}
                 linesConfig={[
-                  { metricProperty: 'percentage_average' },
-                  { metricProperty: 'percentage_70_plus', color: 'hotpink' },
+                  {
+                    metricProperty: 'percentage_70_plus',
+                    label: '70+',
+                    color: 'hotpink',
+                  },
+                  {
+                    metricProperty: 'percentage_average',
+                    label: 'gemiddelde',
+                    color: colors.data.primary,
+                  },
                 ]}
-                formatTooltip={(values) => {
-                  const value = values[0];
+                /**
+                 * This tooltip formatting is getting out of hand here. I think
+                 * we can refactor this into a set of selectable types of
+                 * tooltips. That probably means having to align a few charts
+                 * design wise, but I think that's a good thing. There is too
+                 * much variables and implementation details required to format
+                 * a good multi-line tooltip. It feels silly to expose that to
+                 * the calling context.
+                 */
+                formatTooltip={(value, _key, linesConfig) => {
+                  /**
+                   * To get to the original value T we only need one of the
+                   * values because all of them contain a copy of T at the
+                   * moment. @TODO refactor so that T is passed separately /
+                   * once.
+                   */
                   const dateStartString = formatDateFromSeconds(
                     value.date_start_unix
                   );
                   const dateEndString = formatDateFromSeconds(
                     value.date_end_unix
                   );
+
                   return (
                     <section>
                       <Text m={0} style={{ fontWeight: 'bold' }}>
                         {`${dateStartString} - ${dateEndString}`}
                       </Text>
-                      <Text m={0}>
-                        {replaceVariablesInText(
-                          siteText.common.tooltip.vaccinatie_bereidheid,
-                          {
-                            percentageInFavor: value.__value,
-                          }
-                        )}
-                      </Text>
+                      <ul
+                        style={{
+                          margin: 0,
+                          padding: 0,
+                          listStyle: 'none',
+                        }}
+                      >
+                        {linesConfig.map((x) => (
+                          <li key={x.metricProperty} color={x.color}>
+                            <strong>{x.label}:</strong>{' '}
+                            {formatPercentage(value[x.metricProperty])}%
+                          </li>
+                        ))}
+                      </ul>
                     </section>
                   );
                 }}

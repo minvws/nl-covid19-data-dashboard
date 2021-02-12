@@ -108,8 +108,8 @@ type HoverEvent = TouchEvent<SVGElement> | MouseEvent<SVGElement>;
 
 export type Config<T extends TimestampedValue> = {
   metricProperty: keyof T;
+  label: string;
   color: string;
-  legendLabel: string;
 };
 
 export type StackedChartProps<T extends TimestampedValue> = {
@@ -211,7 +211,7 @@ export function StackedChart<T extends TimestampedValue>(
               : hoveredIndex === itemIndex
               ? x.color
               : hoverColors[itemIndex],
-          label: x.legendLabel,
+          label: x.label,
           shape: 'square',
         } as LegendItem;
       }),
@@ -221,7 +221,7 @@ export function StackedChart<T extends TimestampedValue>(
   const labelByKey = useMemo(
     () =>
       config.reduce(
-        (acc, x) => set(acc, x.metricProperty, x.legendLabel),
+        (acc, x) => set(acc, x.metricProperty, x.label),
         {} as Record<string, string>
       ),
     [config]
