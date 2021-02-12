@@ -14,6 +14,12 @@ async function polyfill() {
   // This platform already supports Intl.Locale
   if (shouldPolyfill()) {
     await import('@formatjs/intl-locale/polyfill');
+    /**
+     * The order of including these polyfills is important:
+     * getcanonicallocales needs to be first
+     * datetimeformat needs to be second
+     * datetimeformat locale's last
+     */
     await import('@formatjs/intl-getcanonicallocales/polyfill');
     await import('@formatjs/intl-datetimeformat/polyfill');
     // @ts-ignore
