@@ -1234,7 +1234,7 @@
   "gedrag_onderwerpen": {
     "wash_hands": "Was vaak je handen",
     "keep_distance": "Houd 1,5 meter afstand",
-    "work_from_home": "Werk zoveel mogelijk thuis",
+    "work_from_home": "Werk volledig thuis als dat kan",
     "avoid_crowds": "Vermijd drukke plekken",
     "symptoms_stay_home": "Blijf thuis bij klachten",
     "symptoms_get_tested": "Laat je testen bij klachten",
@@ -1804,11 +1804,11 @@
       "text": "Lees meer in de cijferverantwoording."
     },
     "cbs_message": {
-      "title": "Sterfte iets gedaald in week 4",
-      "published_text": "Publicatiedatum: vrijdag 4 december",
-      "message": "In week 4 (25 tot en met 31 januari 2021) overleden naar schatting 3 750 mensen. Dat zijn ruim 300 meer sterfgevallen dan verwacht voor deze periode. In week 3 overleden 3 823 mensen. Dat meldt het CBS op basis van de voorlopige sterftecijfers per week. Sinds week 39 van 2020 is de wekelijkse sterfte hoger dan verwacht. In de tweede golf van de corona-epidemie overleden tot en met week 4 van 2021 bijna 68 duizend mensen, 9,6 duizend meer dan je in deze periode zou verwachten. De schatting van de sterfte in week 4 zit net binnen het interval van de verwachte sterfte.",
+      "title": "Sterfte verder gedaald in week 5",
+      "published_text": "Publicatiedatum: vrijdag 12 februari",
+      "message": "In week 5 (1 tot en met 7 februari 2021) overleden naar schatting 3 600 mensen. Dat zijn 150 meer sterfgevallen dan verwacht voor deze periode. In week 4 overleden 3 678 mensen. Dat meldt het CBS op basis van de voorlopige sterftecijfers per week. Sinds week 39 van 2020 is de wekelijkse sterfte hoger dan verwacht. In de tweede golf van de corona-epidemie overleden tot en met week 5 van 2021 ruim 71 duizend mensen, 9,7 duizend meer dan je in deze periode zou verwachten. De schatting van de sterfte in week 5 zit net boven de verwachte sterfte in deze periode.",
       "link": {
-        "href": "https://www.cbs.nl/nl-nl/nieuws/2021/05/sterfte-iets-gedaald-in-week-4",
+        "href": "https://www.cbs.nl/nl-nl/nieuws/2021/06/sterfte-verder-gedaald-in-week-5",
         "text": "Website CBS"
       }
     },
@@ -1952,8 +1952,6 @@
     }
   },
   "accessibility": {
-    "link_source": "Bekijk de databron van \"{{subject}}\" op",
-    "link_download": "Download de databron van \"{{subject}}\" op",
     "grafieken": {
       "reproductiegetal_verloop": "Deze grafiek geeft het reproductiegetal over tijd weer.",
       "ziekenhuisopnames": "Deze grafiek toont het aantal ziekenhuisopnames over tijd.",
@@ -1973,7 +1971,9 @@
       "verwachte_leveringen": "Het linkerdeel van de grafiek laat zien hoeveel vaccins Nederland in totaal heeft gekregen en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal verwachten te krijgen en hoeveel prikken we verwachten te zetten.",
       "vaccin_levering_en_prikken": "Het linkerdeel van de grafiek laat zien hoeveel vaccins Nederland in totaal heeft gekregen en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal verwachten te krijgen en hoeveel prikken we verwachten te zetten.",
       "vaccinatie_draagvlak": "Deze grafiek toont hoeveel procent van de bevolking zelf een prik tegen corona wil hebben."
-    }
+    },
+    "link_source": "Bekijk de databron van \"{{subject}}\" op",
+    "link_download": "Download de databron van \"{{subject}}\" op"
   },
   "deceased_age_groups": {
     "title": "COVID-19 sterfte: verdeling naar leeftijd",
@@ -2004,8 +2004,8 @@
     "title": "COVID-19-vaccinaties",
     "description": "Vaccineren is de belangrijkste stap naar een samenleving zonder coronaregels. Op 6 januari 2021 is Nederland begonnen met vaccineren. Uiteindelijk komt iedereen van 18 jaar of ouder aan de beurt. De cijfers op deze pagina laten zien hoeveel prikken zijn gezet en hoeveel vaccins er beschikbaar komen.",
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "date_unix": "1612959288",
-    "date_of_insertion_unix": "1612959288",
+    "date_unix": "1613128614",
+    "date_of_insertion_unix": "1613128614",
     "reference": {
       "href": "/verantwoording#vaccinatie",
       "text": "Lees meer over de bron van de vaccinatiecijfers in de cijferverantwoording."
@@ -2041,27 +2041,27 @@
       "difference": "Do not remove this key. It is required as a temporary workaround",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "626146",
-          "date_unix": "1612959288",
-          "date_of_insertion_unix": "1612959288"
+          "total_vaccinated": "694888",
+          "date_unix": "1613128614",
+          "date_of_insertion_unix": "1613128614"
         }
       },
       "kpi_total": {
         "title": "Aantal gezette prikken",
-        "value": "460252",
+        "value": "518710",
         "description": "",
-        "date_of_report_unix": "1612959288",
-        "date_of_insertion_unix": "1612959288",
+        "date_of_report_unix": "1613128614",
+        "date_of_insertion_unix": "1613128614",
         "administered": [
           {
-            "value": "366436",
+            "value": "424894",
             "description": "gemeld door GGD-GHOR",
-            "report_date": "Gemeld aantal tot en met 9 februari"
+            "report_date": "Gemeld aantal tot en met 11 februari"
           },
           {
             "value": "93816",
             "description": "gemeld door LNAZ",
-            "report_date": "Gemeld aantal tot en met 9 februari"
+            "report_date": "Gemeld aantal tot en met 11 februari"
           },
           {
             "value": "",
@@ -2085,25 +2085,25 @@
         "first_tab_title": "Berekend aantal",
         "second_tab_title": "Gemeld aantal",
         "tab_total_estimated": {
-          "value": "626146",
+          "value": "694888",
           "description": "",
-          "date_of_report_unix": "1612959288",
-          "date_of_insertion_unix": "1612959288",
+          "date_of_report_unix": "1613128614",
+          "date_of_insertion_unix": "1613128614",
           "administered": [
             {
-              "value": "366436",
+              "value": "424894",
               "description": "gezet door GGD'en",
-              "report_date": "Gemeld aantal tot en met 9 februari"
+              "report_date": "Gemeld aantal tot en met 11 februari"
             },
             {
               "value": "93816",
               "description": "gezet in ziekenhuizen",
-              "report_date": "Gemeld aantal tot en met 9 februari"
+              "report_date": "Gemeld aantal tot en met 11 februari"
             },
             {
-              "value": "165894",
+              "value": "176178",
               "description": "gezet in langdurige zorginstellingen",
-              "report_date": "Berekend aantal tot en met 9 februari"
+              "report_date": "Berekend aantal tot en met 11 februari"
             },
             {
               "value": "",
