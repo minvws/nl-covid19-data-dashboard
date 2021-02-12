@@ -2,18 +2,13 @@ import locale from '~/locale/index';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { Box } from './base';
-import { ExternalLink } from './external-link';
 import { Text } from './typography';
-import css from '@styled-system/css';
-import siteText from '~/locale/index';
-import { VisuallyHidden } from './visually-hidden';
 export interface MetadataProps {
   date?: number | [number, number];
   source?: {
     text: string;
     href: string;
   };
-  accessibilitySubject?: string;
 }
 
 function formatMetadataDate(date: number | [number, number]): string {
@@ -29,11 +24,7 @@ function formatMetadataDate(date: number | [number, number]): string {
   });
 }
 
-export function Metadata({
-  date,
-  source,
-  accessibilitySubject,
-}: MetadataProps) {
+export function Metadata({ date, source }: MetadataProps) {
   const dateString = date ? formatMetadataDate(date) : null;
 
   return (
@@ -42,31 +33,7 @@ export function Metadata({
         {dateString}
         {dateString && source ? ' · ' : null}
         {source ? (
-          <>
-            {locale.common.metadata.source}
-            {': '}
-            {source.href && (
-              <ExternalLink href={source.href}>
-                <VisuallyHidden>
-                  {replaceVariablesInText(siteText.accessibility.link_source, {
-                    subject: accessibilitySubject,
-                  })}
-                </VisuallyHidden>
-                {source.text}
-              </ExternalLink>
-            )}
-            {!source.href && (
-              <Text
-                css={css({
-                  display: 'inline-block',
-                  my: '0',
-                  fontSize: 'inherit',
-                })}
-              >
-                {source.text}
-              </Text>
-            )}
-          </>
+          <>{`${locale.common.metadata.source}: ${source.text}`}</>
         ) : null}
       </Text>
     </Box>
