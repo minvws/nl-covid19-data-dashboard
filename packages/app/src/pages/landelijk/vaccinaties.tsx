@@ -237,9 +237,17 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
            */}
           <AspectRatio ratio={1.8325}>
             {targetLanguage === 'nl' ? (
-              <Image src="/images/vaccines_administered_chart_nl.svg" />
+              <Image
+                src="/images/vaccines_administered_chart_nl.svg"
+                loading="lazy"
+                decoding="async"
+              />
             ) : (
-              <Image src="/images/vaccines_administered_chart_en.svg" />
+              <Image
+                src="/images/vaccines_administered_chart_en.svg"
+                loading="lazy"
+                decoding="async"
+              />
             )}
           </AspectRatio>
         </ChartTile>
