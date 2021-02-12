@@ -35,8 +35,20 @@ import { colors } from '~/style/theme';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { TimeframeOption } from '~/utils/timeframe';
-import { HoverPoint, Marker, Trend } from './components';
-import { calculateYMax, getTrendData, TrendValue } from './logic';
+/**
+ * Importing unchanged logic and components from line-chart since this is
+ * considered a fork.
+ */
+import {
+  HoverPoint,
+  Marker,
+  Trend,
+} from '~/components-styled/line-chart/components';
+import {
+  calculateYMax,
+  getTrendData,
+  TrendValue,
+} from '~/components-styled/line-chart/logic';
 import { defaultStyles, TooltipWithBounds, useTooltip } from '@visx/tooltip';
 import styled from 'styled-components';
 import css from '@styled-system/css';
@@ -66,9 +78,9 @@ const formatYAxisPercentageFn = (y: number) => `${formatPercentage(y)}%`;
 export type LineConfig<T extends TimestampedValue> = {
   /**
    * For consistency and transparency it is probably a good idea to enforce
-   * property, label and color to be defined for all lines. Then this data can be
-   * easily passed to the tooltip function. The fallback to colors.data.primary
-   * can be made explicit at the consumer context.
+   * property, label and color to be defined for all lines. Then this data can
+   * be easily passed to the tooltip function. The fallback to
+   * colors.data.primary can be made explicit at the consumer context.
    *
    * Since the label is likely to appear in both the tooltip and the legenda, it
    * is named it label.
@@ -136,13 +148,8 @@ export function MultiLineChart<T extends TimestampedValue>({
   ariaLabelledBy,
   seriesMax: overrideSeriesMax,
 }: MultiLineChartProps<T>) {
-  // const {
-  //   tooltipData,
-  //   tooltipLeft = 0,
-  //   tooltipTop = 0,
-  //   showTooltip,
-  //   hideTooltip,
-  // } = useTooltip<T & TrendValue>();
+  // const {tooltipData, tooltipLeft = 0, tooltipTop = 0, showTooltip,
+  //   hideTooltip,} = useTooltip<T & TrendValue>();
 
   const {
     tooltipData,
@@ -411,6 +418,7 @@ export function MultiLineChart<T extends TimestampedValue>({
             top={tooltipTop}
             style={tooltipStyles}
             // offsetLeft={isTinyScreen ? 0 : 10}
+            offsetLeft={50}
           >
             <TooltipContainer>
               {typeof formatTooltip === 'function'
