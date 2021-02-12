@@ -11,7 +11,7 @@ import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { SEOHead } from '~/components-styled/seo-head';
-import { SewerChart } from '~/components-styled/sewer-chart';
+import { SewerChart2 } from '~/components-styled/sewer-chart-2';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { FCWithLayout } from '~/domain/layout/layout';
@@ -131,7 +131,7 @@ const SewerWater: FCWithLayout<typeof getStaticProps> = (props) => {
           timeframeOptions={['all', '5weeks']}
         >
           {(timeframe) => (
-            <SewerChart
+            <SewerChart2
               data={data}
               timeframe={timeframe}
               valueAnnotation={siteText.waarde_annotaties.riool_normalized}
