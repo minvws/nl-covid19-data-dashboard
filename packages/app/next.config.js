@@ -6,7 +6,7 @@ const withTM = require('next-transpile-modules')([
   // `internmap` is a dependency of `d3-array`
   'internmap',
   // `react-use-measure` is a dependency of `@visx/tooltip`
-  'react-use-measure',
+  // 'react-use-measure',
 ]);
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
@@ -75,7 +75,7 @@ const nextConfig = {
     config.module.rules.push({
       test: /\.js$/,
       loader: defaultLoaders.babel,
-      include: /[\\/]node_modules[\\/](d3-.*)[\\/]/,
+      include: /[\\/]node_modules[\\/](d3-.*|react-use-measure)[\\/]/,
     });
 
     config.resolve.alias = {
@@ -85,12 +85,9 @@ const nextConfig = {
        * react-spring is a dependency of @visx/xychart and the default import
        * is not ie11-compatible. We'll use an alias to point the import to a
        * common js version of that library.
-       *
-       * @TODO currently disabled because we don't depend on @visx/xychart
-       * yet, but I'll leave it here for future reference.
        */
-      // 'react-spring$': 'react-spring/web.cjs',
-      // 'react-spring/renderprops$': 'react-spring/renderprops.cjs',
+      'react-spring$': 'react-spring/web.cjs',
+      'react-spring/renderprops$': 'react-spring/renderprops.cjs',
     };
 
     config.plugins.push(

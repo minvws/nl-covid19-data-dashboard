@@ -12,67 +12,67 @@ const text = siteText.veiligheidsregio_rioolwater_metingen;
  * All of this code seems duplicate now that the type names are unified.
  */
 
-interface SewerWaterLineChartValue {
-  date: number;
-  value: number;
-  date_start_unix: number;
-  date_end_unix: number;
-}
+// interface SewerWaterLineChartValue {
+//   date: number;
+//   value: number;
+//   date_start_unix: number;
+//   date_end_unix: number;
+// }
 
-interface SewerWaterLineChartData {
-  averageValues: SewerWaterLineChartValue[];
-  averageLabelText: string;
-}
+// interface SewerWaterLineChartData {
+//   averageValues: SewerWaterLineChartValue[];
+//   averageLabelText: string;
+// }
 
 export interface SewerWaterBarChartData {
   values: BarChartValue[];
 }
 
-export function getInstallationNames(data: Regionaal): string[] {
-  return data.sewer_per_installation.values
-    .map((value) => value.rwzi_awzi_name)
-    .sort((a, b) => a.localeCompare(b));
-}
+// export function getInstallationNames(data: Regionaal): string[] {
+//   return data.sewer_per_installation.values
+//     .map((value) => value.rwzi_awzi_name)
+//     .sort((a, b) => a.localeCompare(b));
+// }
 
-export function getSewerWaterScatterPlotData(data: Regionaal) {
-  /**
-   * @TODO we could improve on this. The values per installation are merged here
-   * into one big array, and because of this the chart needs to have the awzi
-   * name injected for every sample so that down the line it can separate values
-   * based on the selected installation. This creates overhead that should be
-   * unnecessary. The chart could be made to handle the incoming values
-   * organized in a per-installation manner.
-   */
-  const values = data.sewer_per_installation.values.flatMap((value) =>
-    value.values.map((x) => ({ ...x, rwzi_awzi_name: value.rwzi_awzi_name }))
-  );
-  /**
-   * All individual `value.values`-arrays are already sorted correctly, but due
-   * to merging them into one array the sort might be off.
-   */
-  values.sort((a, b) => a.date_unix - b.date_unix);
+// export function getSewerWaterScatterPlotData(data: Regionaal) {
+//   /**
+//    * @TODO we could improve on this. The values per installation are merged here
+//    * into one big array, and because of this the chart needs to have the awzi
+//    * name injected for every sample so that down the line it can separate values
+//    * based on the selected installation. This creates overhead that should be
+//    * unnecessary. The chart could be made to handle the incoming values
+//    * organized in a per-installation manner.
+//    */
+//   const values = data.sewer_per_installation.values.flatMap((value) =>
+//     value.values.map((x) => ({ ...x, rwzi_awzi_name: value.rwzi_awzi_name }))
+//   );
+//   /**
+//    * All individual `value.values`-arrays are already sorted correctly, but due
+//    * to merging them into one array the sort might be off.
+//    */
+//   values.sort((a, b) => a.date_unix - b.date_unix);
 
-  return values;
-}
+//   return values;
+// }
 
-export function getSewerWaterLineChartData(
-  data: Regionaal
-): SewerWaterLineChartData | undefined {
-  // More than one RWZI installation: Average line === the averages from
-  // `sewer_measurements` Grey lines are the RWZI locations
-  const averageValues = data.sewer.values;
+// export function getSewerWaterLineChartData(
+//   data: Regionaal
+// ): SewerWaterLineChartData | undefined {
+//   // More than one RWZI installation: Average line === the averages from
+//   // `sewer_measurements` Grey lines are the RWZI locations
+//   const averageValues = data.sewer.values;
 
-  return {
-    averageValues: averageValues.map((value) => {
-      return {
-        ...value,
-        value: value.average,
-        date: value.date_end_unix,
-      };
-    }),
-    averageLabelText: text.graph_average_label_text,
-  };
-}
+//   return {
+//     averageValues: averageValues.map((value) => {
+//       return {
+//         ...value,
+//         value: value.average,
+//         date: value.date_end_unix,
+//       };
+//     }),
+//     averageLabelText: text.graph_average_label_text,
+//   };
+// }
 
 export function getSewerWaterBarChartData(
   data: Regionaal

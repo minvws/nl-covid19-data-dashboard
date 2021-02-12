@@ -1,7 +1,7 @@
 import { Municipal } from '@corona-dashboard/common';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+// import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 import siteText from '~/locale/index';
 import { assert } from '../assert';
@@ -21,17 +21,17 @@ interface SewerWaterMetadata {
   oneInstallation: boolean;
 }
 
-interface SewerWaterLineChartValue {
-  date: number;
-  value: number;
-  date_start_unix: number;
-  date_end_unix: number;
-}
+// interface SewerWaterLineChartValue {
+//   date: number;
+//   value: number;
+//   date_start_unix: number;
+//   date_end_unix: number;
+// }
 
-interface SewerWaterLineChartData {
-  averageValues: SewerWaterLineChartValue[];
-  averageLabelText: string;
-}
+// interface SewerWaterLineChartData {
+//   averageValues: SewerWaterLineChartValue[];
+//   averageLabelText: string;
+// }
 
 export interface SewerWaterBarChartData {
   values: BarChartValue[];
@@ -64,63 +64,63 @@ function getSewerWaterMetadata(data: Municipal): SewerWaterMetadata {
  * The formatting differs based on the amount of RWZI locations
  * @param data
  */
-export function getSewerWaterLineChartData(
-  data: Municipal
-): SewerWaterLineChartData | undefined {
-  const { dataAvailable, oneInstallation } = getSewerWaterMetadata(data);
+// export function getSewerWaterLineChartData(
+//   data: Municipal
+// ): SewerWaterLineChartData | undefined {
+//   const { dataAvailable, oneInstallation } = getSewerWaterMetadata(data);
 
-  if (!dataAvailable) {
-    return;
-  }
+//   if (!dataAvailable) {
+//     return;
+//   }
 
-  if (oneInstallation) {
-    // One RWZI installation:
-    // Average line === the installations data
-    // No grey lines
-    assert(data.sewer_per_installation, 'Missing sewer per installation data');
-    const averageValues = data.sewer_per_installation.values[0].values;
+//   if (oneInstallation) {
+//     // One RWZI installation:
+//     // Average line === the installations data
+//     // No grey lines
+//     assert(data.sewer_per_installation, 'Missing sewer per installation data');
+//     const averageValues = data.sewer_per_installation.values[0].values;
 
-    return {
-      averageValues: averageValues.map((value) => {
-        return {
-          ...value,
-          value: value.rna_normalized,
-          date: value.date_unix,
-          /**
-           * This is hack because the line chart expects week range data but
-           * it doesn't actually show it. The original data doesn't contain
-           * these week start/end timestamps anymore.
-           */
-          date_end_unix: value.date_unix,
-          date_start_unix: value.date_unix,
-        };
-      }),
-      averageLabelText: replaceVariablesInText(
-        text.graph_average_label_text_rwzi,
-        {
-          name: data.sewer_per_installation.values[0].rwzi_awzi_name,
-        }
-      ),
-    };
-  }
+//     return {
+//       averageValues: averageValues.map((value) => {
+//         return {
+//           ...value,
+//           value: value.rna_normalized,
+//           date: value.date_unix,
+//           /**
+//            * This is hack because the line chart expects week range data but
+//            * it doesn't actually show it. The original data doesn't contain
+//            * these week start/end timestamps anymore.
+//            */
+//           date_end_unix: value.date_unix,
+//           date_start_unix: value.date_unix,
+//         };
+//       }),
+//       averageLabelText: replaceVariablesInText(
+//         text.graph_average_label_text_rwzi,
+//         {
+//           name: data.sewer_per_installation.values[0].rwzi_awzi_name,
+//         }
+//       ),
+//     };
+//   }
 
-  // More than one RWZI installation:
-  // Average line === the averages from `sewer`
-  // Grey lines are the RWZI locations
-  assert(data.sewer, 'Missing sewer data');
-  const averageValues = data.sewer.values;
+//   // More than one RWZI installation:
+//   // Average line === the averages from `sewer`
+//   // Grey lines are the RWZI locations
+//   assert(data.sewer, 'Missing sewer data');
+//   const averageValues = data.sewer.values;
 
-  return {
-    averageValues: averageValues.map((value) => {
-      return {
-        ...value,
-        value: value.average,
-        date: value.date_end_unix,
-      };
-    }),
-    averageLabelText: text.graph_average_label_text,
-  };
-}
+//   return {
+//     averageValues: averageValues.map((value) => {
+//       return {
+//         ...value,
+//         value: value.average,
+//         date: value.date_end_unix,
+//       };
+//     }),
+//     averageLabelText: text.graph_average_label_text,
+//   };
+// }
 
 /**
  * Formats data to be used for the bar chart component for sewer water
@@ -169,30 +169,32 @@ export function getSewerWaterBarChartData(
   };
 }
 
-export function getSewerWaterScatterPlotData(data: Municipal) {
-  /**
-   * @TODO we could improve on this. The values per installation are merged here
-   * into one big array, and because of this the chart needs to have the awzi
-   * name injected for every sample so that down the line it can separate values
-   * based on the selected installation. This creates overhead that should be
-   * unnecessary. The chart could be made to handle the incoming values
-   * organized in a per-installation manner.
-   */
-  const values = data.sewer_per_installation?.values.flatMap((value) =>
-    value.values.map((x) => ({ ...x, rwzi_awzi_name: value.rwzi_awzi_name }))
-  );
+// export function getSewerWaterScatterPlotData(data: Municipal) {
+//   assert(data.sewer_per_installation, 'Missing sewer_per_installation');
 
-  /**
-   * All individual `value.values`-arrays are already sorted correctly, but
-   * due to merging them into one array the sort might be off.
-   */
-  values?.sort((a, b) => a.date_unix - b.date_unix);
+//   /**
+//    * @TODO we could improve on this. The values per installation are merged here
+//    * into one big array, and because of this the chart needs to have the awzi
+//    * name injected for every sample so that down the line it can separate values
+//    * based on the selected installation. This creates overhead that should be
+//    * unnecessary. The chart could be made to handle the incoming values
+//    * organized in a per-installation manner.
+//    */
+//   const values = data.sewer_per_installation.values.flatMap((value) =>
+//     value.values.map((x) => ({ ...x, rwzi_awzi_name: value.rwzi_awzi_name }))
+//   );
 
-  return values;
-}
+//   /**
+//    * All individual `value.values`-arrays are already sorted correctly, but
+//    * due to merging them into one array the sort might be off.
+//    */
+//   values.sort((a, b) => a.date_unix - b.date_unix);
 
-export function getInstallationNames(data: Municipal): string[] {
-  return (data.sewer_per_installation?.values || [])
-    .map((value) => value.rwzi_awzi_name)
-    .sort((a, b) => a.localeCompare(b));
-}
+//   return values;
+// }
+
+// export function getInstallationNames(data: Municipal): string[] {
+//   return (data.sewer_per_installation?.values || [])
+//     .map((value) => value.rwzi_awzi_name)
+//     .sort((a, b) => a.localeCompare(b));
+// }

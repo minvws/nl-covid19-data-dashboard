@@ -22,7 +22,7 @@ if ('__setDefaultTimeZone' in Intl.DateTimeFormat) {
   (Intl.DateTimeFormat as any).__setDefaultTimeZone('Europe/Amsterdam');
 }
 
-function isDayBeforeYesterday(date: number): boolean {
+function isDayBeforeYesterday(date: number | Date): boolean {
   return isSameDay(date, subDays(Date.now(), 2));
 }
 
@@ -108,23 +108,26 @@ export function formatDateFromMilliseconds(
 ): string {
   assert(!isNaN(milliseconds), 'milliseconds is NaN');
 
-  if (style === 'time') return Time.format(milliseconds); // '09:24'
-  if (style === 'iso') return new Date(milliseconds).toISOString(); // '2020-07-23T10:01:16.000Z'
-  if (style === 'long') return Long.format(milliseconds); // '23 juli 2020 om 12:01'
-  if (style === 'medium') return Medium.format(milliseconds); // '23 juli 2020'
-  if (style === 'axis')
-    return `${Day.format(milliseconds)} ${MonthShort.format(milliseconds)}`; // '23 jul.'
-  if (style === 'weekday-medium') return WeekdayMedium.format(milliseconds);
+  return formatDate(new Date(milliseconds), style);
+}
+
+export function formatDate(date: Date, style?: formatStyle) {
+  if (style === 'time') return Time.format(date); // '09:24'
+  if (style === 'iso') return new Date(date).toISOString(); // '2020-07-23T10:01:16.000Z'
+  if (style === 'long') return Long.format(date); // '23 juli 2020 om 12:01'
+  if (style === 'medium') return Medium.format(date); // '23 juli 2020'
+  if (style === 'axis') return `${Day.format(date)} ${MonthShort.format(date)}`; // '23 jul.'
+  if (style === 'weekday-medium') return WeekdayMedium.format(date);
 
   /* Relative date formatting is disabled for server-side rendering */
   if (style === 'relative' && typeof window !== 'undefined') {
-    if (isToday(milliseconds)) return siteText.utils.date_today;
-    if (isYesterday(milliseconds)) return siteText.utils.date_yesterday;
-    if (isDayBeforeYesterday(milliseconds))
+    if (isToday(date)) return siteText.utils.date_today;
+    if (isYesterday(date)) return siteText.utils.date_yesterday;
+    if (isDayBeforeYesterday(date))
       return siteText.utils.date_day_before_yesterday;
   }
 
-  return DayMonth.format(milliseconds);
+  return DayMonth.format(date);
 }
 
 export function formatDateFromString(
