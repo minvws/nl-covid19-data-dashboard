@@ -55,7 +55,7 @@ export const validRestrictionId = {
         (validateRestrictionId as any).errors = [
           {
             keyword: 'validRestrictionId',
-            message: `the property '${_dataPath}' value '${data}' is not a correctly formatted restriction id. The correct format is <escalation-level>_<category-id>_<unique-number>`,
+            message: `The property '${_dataPath}' value '${data}' is not a correctly formatted restriction id. The correct format is <escalation-level>_<category-id>_<unique-number>`,
             params: {
               keyword: 'validRestrictionId',
               value: schema,

@@ -1952,6 +1952,8 @@
     }
   },
   "accessibility": {
+    "link_source": "View the data source of \"{{subject}}\" on",
+    "link_download": "Download the data source of \"{{subject}}\" on",
     "grafieken": {
       "reproductiegetal_verloop": "This graph shows the progression of the reproduction number over time.",
       "ziekenhuisopnames": "This graph shows the progression in hospital admissions over time.",

@@ -1,6 +1,6 @@
 import { ErrorObject, ValidateFunction } from 'ajv';
 import { isDefined } from 'ts-is-present';
-import { SchemaItemInfo } from './schema-information';
+import { SchemaItemInfo } from '../schema-information';
 
 type ValidationResult = {
   isValid: boolean;

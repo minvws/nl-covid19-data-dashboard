@@ -3,13 +3,14 @@ import {
   LineChart,
   LineChartProps,
 } from '~/components-styled/line-chart/line-chart';
-import { Value } from '~/components-styled/stacked-chart/logic';
+import { TimestampedValue } from '@corona-dashboard/common';
 import { TimeframeOption } from '~/utils/timeframe';
 import { ChartTileWithTimeframe } from './chart-tile';
 import { MetadataProps } from './metadata';
 import { assert } from '~/utils/assert';
 import slugify from 'slugify';
-interface LineChartTileProps<T extends Value> extends LineChartProps<T> {
+interface LineChartTileProps<T extends TimestampedValue>
+  extends LineChartProps<T> {
   title: string;
   metadata: MetadataProps;
   description?: string;
@@ -19,7 +20,7 @@ interface LineChartTileProps<T extends Value> extends LineChartProps<T> {
   ariaDescription?: string;
 }
 
-export function LineChartTile<T extends Value>({
+export function LineChartTile<T extends TimestampedValue>({
   metadata,
   title,
   description,
