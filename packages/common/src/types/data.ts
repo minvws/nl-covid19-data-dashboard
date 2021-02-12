@@ -498,8 +498,8 @@ export interface NlVaccineAdministeredTotal {
   last_value: NlVaccineAdministeredTotalValue;
 }
 export interface NlVaccineAdministeredTotalValue {
-  estimated_total: number;
-  reported_total: number;
+  estimated: number;
+  reported: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }

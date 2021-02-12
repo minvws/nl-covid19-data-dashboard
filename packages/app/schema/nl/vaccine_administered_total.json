@@ -4,17 +4,17 @@
       "title": "nl_vaccine_administered_total_value",
       "type": "object",
       "required": [
-        "estimated_total",
-        "reported_total",
+        "estimated",
+        "reported",
         "date_unix",
         "date_of_insertion_unix"
       ],
       "additionalProperties": false,
       "properties": {
-        "estimated_total": {
+        "estimated": {
           "type": "number"
         },
-        "reported_total": {
+        "reported": {
           "type": "number"
         },
         "date_unix": {
