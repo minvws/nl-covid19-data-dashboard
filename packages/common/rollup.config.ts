@@ -4,6 +4,7 @@ import commonjs from 'rollup-plugin-commonjs';
 import { typescriptPaths } from 'rollup-plugin-typescript-paths';
 import autoExternal from 'rollup-plugin-auto-external';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
+import visualizer from 'rollup-plugin-visualizer';
 import pkg from './package.json';
 
 export default {
@@ -21,6 +22,7 @@ export default {
     },
   ],
   plugins: [
+    visualizer(),
     autoExternal(),
     nodeResolve({ preferBuiltins: false }),
     commonjs({

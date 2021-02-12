@@ -1,4 +1,4 @@
 export * from './assert';
-export * from './formatNumber';
+export * from './format-number';
 export * from './get-last-filled-value';
-export * from './getLocale';
+export * from './get-locale';

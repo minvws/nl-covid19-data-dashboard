@@ -1,5 +1,5 @@
-import { FeatureCollection, MultiPolygon } from 'geojson';
-import {
+import type { FeatureCollection, MultiPolygon } from 'geojson';
+import type {
   MunicipalDifference,
   Municipalities,
   NationalDifference,
