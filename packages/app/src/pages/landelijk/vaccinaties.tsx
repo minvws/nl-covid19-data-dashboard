@@ -264,7 +264,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                 ariaLabelledBy="chart_vaccine_support"
                 values={data.vaccine_support.values}
                 linesConfig={[
-                  { metricProperty: 'percentage_total' },
+                  { metricProperty: 'percentage_average' },
                   { metricProperty: 'percentage_70_plus', color: 'hotpink' },
                 ]}
                 formatTooltip={(values) => {
@@ -286,7 +286,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                           {
                             percentageInFavor: value.__value,
                           }
-                        ) || 'MISSING TEXT'}
+                        )}
                       </Text>
                     </section>
                   );
