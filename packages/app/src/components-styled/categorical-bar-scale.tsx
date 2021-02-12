@@ -13,6 +13,14 @@ interface CategoricalBarScaleCategory {
   color?: string;
 }
 
+export function getMetricLevel(
+  categories: CategoricalBarScaleCategory[],
+  value: number
+) {
+  const level = categories.findIndex((category) => category.threshold > value);
+  return level === -1 ? 4 : level;
+}
+
 export function CategoricalBarScale({
   value,
   categories,

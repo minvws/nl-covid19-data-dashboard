@@ -698,7 +698,8 @@
       "gedrag": "Behaviour",
       "kwetsbare_groepen": "Vulnerable groups",
       "maatregelen": "Measures",
-      "algemeen": "General"
+      "algemeen": "General",
+      "inschaling": "Inschaling"
     }
   },
   "veiligheidsregio_metadata": {
@@ -2440,5 +2441,30 @@
     "description": "Information on the accessibility of the COVID-19 Dashboard.",
     "url": "https://coronadashboard.government.nl/verantwoording"
   },
-  "article_strip_title": ""
+  "article_strip_title": "",
+  "vr_risiconiveau": {
+    "metadata": {
+      "title": "Inschalen risiconiveau {{safetyRegionName}}",
+      "description": "Inschalen risiconiveau {{safetyRegionName}}"
+    },
+    "titel": "Risiconiveau in {{safetyRegionName}}",
+    "current_escalation_level": "Risiconiveau van dit moment",
+    "bronnen": {
+      "rivm": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_prevalentie.json",
+        "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/097155aa-75eb-4caa-8ed3-4c6edb80467e",
+        "text": "RIVM"
+      }
+    },
+    "positieve_testen": {
+      "title": "Positieve testen",
+      "value_annotation": "per 100.000 inwoners per week",
+      "description": ""
+    },
+    "ziekenhuisopnames": {
+      "title": "Ziekenhuisopnames (inclusief IC)",
+      "value_annotation": "per 1 miljoen inwoners per week",
+      "description": ""
+    }
+  }
 }

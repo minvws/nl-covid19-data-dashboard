@@ -2,7 +2,10 @@ import Maatregelen from '~/assets/maatregelen.svg';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
-import { CategoricalBarScale } from '~/components-styled/categorical-bar-scale';
+import {
+  CategoricalBarScale,
+  getMetricLevel,
+} from '~/components-styled/categorical-bar-scale';
 import { ContentHeader } from '~/components-styled/content-header';
 import { EscalationLevelIcon } from '~/components-styled/escalation-level-icon';
 import { KpiTile } from '~/components-styled/kpi-tile';
@@ -41,10 +44,12 @@ const escalationThresholds =
   regionThresholds.escalation_levels.escalation_level;
 
 const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { safetyRegionName, text: siteText, content } = props;
+  const { safetyRegionName, text: siteText, content, data } = props;
 
-  // @TODO
-  const text = siteText.veiligheidsregio_positief_geteste_personen;
+  const text = siteText.vr_risiconiveau;
+
+  const { escalation_level, hospital_nice_sum, tested_overall_sum } = data;
+  const currentLevel = escalation_level.level as 1 | 2 | 3 | 4;
 
   return (
     <>
@@ -58,19 +63,18 @@ const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
       />
       <TileList>
         <ContentHeader
-          category={'Inschaling'}
+          category={siteText.veiligheidsregio_layout.headings.inschaling}
           icon={<Maatregelen fill={theme.colors.restrictions} />}
-          title={replaceVariablesInText(
-            'Risiconiveau in {{safetyRegionName}}',
-            {
-              safetyRegionName,
-            }
-          )}
+          title={replaceVariablesInText(text.titel, {
+            safetyRegionName,
+          })}
+          subtitle={siteText.veiligheidsregio_layout.headings.inschaling}
+          reference={{ text: '', href: '' }}
         />
 
         <Tile>
           <Heading level={3} as="h2">
-            Risiconiveau
+            {text.current_escalation_level}
           </Heading>
 
           <Box
@@ -80,26 +84,23 @@ const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
             spacingHorizontal
             width={{ _: '8rem', md: '10rem' }}
           >
-            <EscalationLevelIcon level={3} isLarge />
+            <EscalationLevelIcon level={currentLevel} isLarge />
             <InlineText
               fontSize={3}
               fontWeight="bold"
-              color={escalationThresholds[3 - 1].color}
+              color={escalationThresholds[currentLevel].color}
             >
-              {siteText.escalatie_niveau.types[3].titel}
+              {siteText.escalatie_niveau.types[currentLevel].titel}
             </InlineText>
           </Box>
-          <Text
-            as="div"
-            dangerouslySetInnerHTML={{
-              __html: '<p>De situatie in deze regio is</p>',
-            }}
-          />
+          <Text>
+            {siteText.escalatie_niveau.types[currentLevel].toelichting}
+          </Text>
         </Tile>
 
         <TwoKpiSection>
           <KpiTile
-            title={'Positieve testen'}
+            title={text.positieve_testen.title}
             metadata={{
               date: 12345,
               source: text.bronnen.rivm,
@@ -108,7 +109,39 @@ const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
             <KpiValue
               data-cy="infected"
               absolute={32}
-              valueAnnotation="per 100.000 inwoners per week"
+              valueAnnotation={text.positieve_testen.value_annotation}
+              color={
+                colors.data.scale.magenta[
+                  getMetricLevel(
+                    [
+                      {
+                        name: 'Waakzaam',
+                        threshold: 0,
+                        color: colors.data.scale.magenta[0],
+                      },
+                      {
+                        name: 'Zorgelijk',
+                        threshold: 35,
+                        color: colors.data.scale.magenta[1],
+                      },
+                      {
+                        name: 'Ernstig',
+                        threshold: 100,
+                        color: colors.data.scale.magenta[2],
+                      },
+                      {
+                        name: 'Zeer ernstig',
+                        threshold: 250,
+                        color: colors.data.scale.magenta[3],
+                      },
+                      {
+                        threshold: 300,
+                      },
+                    ],
+                    tested_overall_sum.last_value.infected_per_100k
+                  )
+                ]
+              }
             />
 
             <CategoricalBarScale
@@ -137,17 +170,19 @@ const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
                   threshold: 300,
                 },
               ]}
-              value={250}
+              value={tested_overall_sum.last_value.infected_per_100k}
             />
 
             <Text
               as="div"
-              dangerouslySetInnerHTML={{ __html: '<p>Nullam id dolor</p>' }}
+              dangerouslySetInnerHTML={{
+                __html: text.positieve_testen.description,
+              }}
             />
           </KpiTile>
 
           <KpiTile
-            title={'Ziekenhuisopnames (inclusief IC)'}
+            title={text.ziekenhuisopnames.title}
             metadata={{
               date: 12345,
               source: text.bronnen.rivm,
@@ -156,7 +191,8 @@ const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
             <KpiValue
               data-cy="infected"
               absolute={18}
-              valueAnnotation="per 1 miljoen inwoners per week"
+              valueAnnotation={text.ziekenhuisopnames.value_annotation}
+              color={colors.data.scale.magenta[3 - 1]}
             />
 
             <CategoricalBarScale
@@ -185,12 +221,14 @@ const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
                   threshold: 30,
                 },
               ]}
-              value={18}
+              value={hospital_nice_sum.last_value.admissions_per_1m}
             />
 
             <Text
               as="div"
-              dangerouslySetInnerHTML={{ __html: '<p>Nullam id dolor</p>' }}
+              dangerouslySetInnerHTML={{
+                __html: text.ziekenhuisopnames.description,
+              }}
             />
           </KpiTile>
         </TwoKpiSection>
