@@ -1,29 +1,31 @@
-import { TimestampedValue } from '@corona-dashboard/common';
 import { localPoint } from '@visx/event';
-import { useCallback } from 'react';
+import { MouseEvent, TouchEvent, useCallback } from 'react';
 import { isDefined } from 'ts-is-present';
+import {
+  ChartScales,
+  HoverPoint,
+} from '~/components-styled/line-chart/components';
+import { BisectFunction } from '~/components-styled/line-chart/hooks/use-bisect';
+import { TrendValueWithTimestamp } from '~/components-styled/line-chart/logic';
 import { calculateDistance } from '~/utils/calculate-distance';
-import { LineConfig } from '..';
-import { ChartScales, HoverPoint } from '../components';
-import { TrendValueWithTimestamp } from '../logic';
-import { BisectFunction } from './use-bisect';
+import { TrendConfig } from '../area-chart-graph';
 
-export function useChartHover<T extends TimestampedValue>(
+export function useChartHover<T extends TrendValueWithTimestamp>(
   toggleHoverElements: (
     hide: boolean,
     hoverPoints?: HoverPoint<T>[],
     nearestPoint?: HoverPoint<T>
   ) => void,
-  trendsList: (T & TrendValueWithTimestamp)[][],
-  linesConfig: LineConfig<T>[],
+  trends: TrendConfig<T>[],
+  areas: TrendConfig<T>[],
   bisect: BisectFunction
 ) {
   return useCallback(
     (
-      event: React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>,
+      event: TouchEvent<SVGElement> | MouseEvent<SVGElement>,
       scales: ChartScales
     ) => {
-      if (!trendsList.length || event.type === 'mouseleave') {
+      if (!(trends.length + areas.length) || event.type === 'mouseleave') {
         toggleHoverElements(true);
         return;
       }
@@ -39,14 +41,13 @@ export function useChartHover<T extends TimestampedValue>(
       const sortByNearest = (left: HoverPoint<T>, right: HoverPoint<T>) =>
         calculateDistance(left, point) - calculateDistance(right, point);
 
-      const hoverPoints = trendsList
-        .map((trends, index) => {
-          const trendValue = bisect(trends, point.x, xScale);
-          console.dir(trendValue);
+      const trendHoverPoints = trends
+        .map((trendConfig) => {
+          const trendValue = bisect(trendConfig.values, point.x, xScale);
           return trendValue
             ? {
                 data: trendValue,
-                color: linesConfig[index]?.color,
+                color: trendConfig.color,
               }
             : undefined;
         })
@@ -61,10 +62,11 @@ export function useChartHover<T extends TimestampedValue>(
             };
           }
         );
-      const nearest = hoverPoints.slice().sort(sortByNearest);
 
-      toggleHoverElements(false, hoverPoints, nearest[0]);
+      const nearest = [...trendHoverPoints].sort(sortByNearest);
+
+      toggleHoverElements(false, trendHoverPoints, nearest[0]);
     },
-    [bisect, trendsList, linesConfig, toggleHoverElements]
+    [bisect, trends, areas, toggleHoverElements]
   );
 }

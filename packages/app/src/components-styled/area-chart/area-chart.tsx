@@ -14,6 +14,7 @@ import { Box } from '~/components-styled/base';
 import {
   ChartBounds,
   ChartPadding,
+  HoverPoint,
 } from '~/components-styled/line-chart/components';
 import { useChartPadding } from '~/components-styled/line-chart/hooks/use-chart-padding';
 import { useDomains } from '~/components-styled/line-chart/hooks/use-domains';
@@ -23,9 +24,11 @@ import { formatDateFromSeconds } from '~/utils/formatDate';
 import { TimeframeOption } from '~/utils/timeframe';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { LegendShape } from '../legenda';
+import { useBisect } from '../line-chart/hooks/use-bisect';
 import { TrendValueWithTimestamp } from '../line-chart/logic';
 import { AreaChartGraph, AreaConfig, AreaDisplay } from './area-chart-graph';
 import { useAreaConfigs } from './hooks/use-area-configs';
+import { useChartHover } from './hooks/use-chart-hover';
 import { useTrendConfigs } from './hooks/use-trend-configs';
 
 const NUM_TICKS = 3;
@@ -116,6 +119,23 @@ export function AreaChart<T extends TimestampedValue, K extends T>(
     overridePadding
   );
 
+  const bisect = useBisect(padding);
+
+  const onHover = useChartHover(
+    (
+      hide: boolean,
+      hoverPoints?: HoverPoint<T>[],
+      nearestPoint?: HoverPoint<T>
+    ) => {
+      console.dir(hoverPoints);
+      console.dir(nearestPoint);
+      return;
+    },
+    trendConfigs,
+    areaConfigs,
+    bisect
+  );
+
   const bounds: ChartBounds = {
     width: width - padding.left - padding.right,
     height: height - padding.top - padding.bottom,
@@ -136,7 +156,7 @@ export function AreaChart<T extends TimestampedValue, K extends T>(
 
   const handleHover = (
     event: TouchEvent<SVGElement> | MouseEvent<SVGElement>
-  ) => console.dir(event);
+  ) => onHover(event, scales);
 
   return (
     <Box position="relative">
