@@ -6,7 +6,7 @@ import { Image } from '~/components-styled/image';
 import { MaxWidth } from '~/components-styled/max-width';
 import { getImageProps } from '~/lib/sanity';
 import { ImageBlock, RichContentImageBlock } from '~/types/cms';
-import { SanityImage } from '~/components-styled/image-sanity';
+import { SanityImage } from '~/components-styled/image';
 
 interface ContentImageProps {
   node: ImageBlock | RichContentImageBlock;

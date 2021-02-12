@@ -6,7 +6,7 @@ import { Image } from '~/components-styled/image';
 import { Tile } from '~/components-styled/tile';
 import { Heading, Text } from '~/components-styled/typography';
 import { getImageProps } from '~/lib/sanity';
-import { SanityImage } from '~/components-styled/image-sanity';
+import { SanityImage } from '~/components-styled/image';
 import siteText from '~/locale';
 import { ImageBlock } from '~/types/cms';
 import { Link } from '~/utils/link';
