@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import ArrowIcon from '~/assets/arrow.svg';
 import { Box } from '~/components-styled/base';
 import { Tile } from '~/components-styled/tile';
-import { SanityImage } from '~/components-styled/image';
+import { SanityImage } from '~/components-styled/cms/sanity-image';
 import { Heading, Text } from '~/components-styled/typography';
 import { getImageProps } from '~/lib/sanity';
 import siteText from '~/locale';
