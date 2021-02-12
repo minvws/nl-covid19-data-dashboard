@@ -6,6 +6,7 @@ import { Image } from '~/components-styled/image';
 import { MaxWidth } from '~/components-styled/max-width';
 import { getImageProps } from '~/lib/sanity';
 import { ImageBlock, RichContentImageBlock } from '~/types/cms';
+import { SanityImage } from '~/components-styled/image-sanity';
 
 interface ContentImageProps {
   node: ImageBlock | RichContentImageBlock;
@@ -29,7 +30,7 @@ export function ContentImage({ node, contentWrapper }: ContentImageProps) {
           display="inline-block"
           maxWidth={980}
         >
-          <Image
+          <SanityImage
             {...getImageProps(node)}
             css={css({
               borderRadius: 1,
@@ -43,7 +44,7 @@ export function ContentImage({ node, contentWrapper }: ContentImageProps) {
   ) : (
     <ContentWrapper>
       <Box as="figure" role="group" spacing={3} my={2} textAlign="center">
-        <Image {...getImageProps(node)} />
+        <SanityImage {...getImageProps(node)} />
         {caption}
       </Box>
     </ContentWrapper>

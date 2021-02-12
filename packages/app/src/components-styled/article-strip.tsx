@@ -6,6 +6,7 @@ import { Image } from '~/components-styled/image';
 import { Tile } from '~/components-styled/tile';
 import { Heading, Text } from '~/components-styled/typography';
 import { getImageProps } from '~/lib/sanity';
+import { SanityImage } from '~/components-styled/image-sanity';
 import siteText from '~/locale';
 import { ImageBlock } from '~/types/cms';
 import { Link } from '~/utils/link';
@@ -63,7 +64,7 @@ function ArticleStripItem(props: ArticleStripItemProps) {
     <Link passHref href={`/artikelen/${slug}`}>
       <StyledLink>
         <Box width={122} maxHeight={122} overflow="hidden">
-          <Image {...getImageProps(cover, 122)} />
+          <SanityImage {...getImageProps(cover, 122)} />
         </Box>
         <Box paddingLeft={3}>
           <Text mt={0} mb={2}>

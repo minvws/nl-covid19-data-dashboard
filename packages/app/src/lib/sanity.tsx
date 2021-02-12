@@ -83,6 +83,7 @@ export function getImageProps<T extends ImageBlock>(
   node: T,
   desiredWith = node.asset.metadata.dimensions.width
 ) {
+  console.log(node);
   const { asset, alt } = node;
   const { metadata } = asset;
 
@@ -97,6 +98,13 @@ export function getImageProps<T extends ImageBlock>(
           .map((size) => `${getImageSrc(asset, size)} ${size}w`)
           .join(', ');
 
+  console.log({
+    src,
+    srcSet,
+    alt,
+    width,
+    height,
+  });
   return {
     src,
     srcSet,
