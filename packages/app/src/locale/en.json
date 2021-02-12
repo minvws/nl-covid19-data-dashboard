@@ -1952,8 +1952,6 @@
     }
   },
   "accessibility": {
-    "link_source": "View the data source of \"{{subject}}\" on",
-    "link_download": "Download the data source of \"{{subject}}\" on",
     "grafieken": {
       "reproductiegetal_verloop": "This graph shows the progression of the reproduction number over time.",
       "ziekenhuisopnames": "This graph shows the progression in hospital admissions over time.",
@@ -1973,7 +1971,9 @@
       "verwachte_leveringen": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks.",
       "vaccin_levering_en_prikken": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks.",
       "vaccinatie_draagvlak": "This graph shows the percentage of the population that wishes to be vaccinated against COVID-19."
-    }
+    },
+    "link_source": "",
+    "link_download": ""
   },
   "deceased_age_groups": {
     "title": "COVID-19 deaths by age",
@@ -2004,8 +2004,8 @@
     "title": "COVID-19 vaccinations",
     "description": "Vaccination is the most important step towards getting life back to normal. The Netherlands began vaccinating people against COVID-19 on 6 January 2021. Eventually, the vaccine will be offered to everyone aged 18 and over. This page shows how many doses of vaccine have been administered and how many doses are on their way.",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "date_unix": "1612959288",
-    "date_of_insertion_unix": "1612959288",
+    "date_unix": "1613128614",
+    "date_of_insertion_unix": "1613128614",
     "reference": {
       "href": "/verantwoording#vaccination",
       "text": "Read more about the source of the data on vaccination in the explanation of the presented data."
@@ -2041,27 +2041,27 @@
       "difference": "",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "626146",
-          "date_unix": "1612959288",
-          "date_of_insertion_unix": "1612959288"
+          "total_vaccinated": "694888",
+          "date_unix": "1613128614",
+          "date_of_insertion_unix": "1613128614"
         }
       },
       "kpi_total": {
         "title": "Number of doses administered",
-        "value": "460252",
+        "value": "518710",
         "description": "",
-        "date_of_report_unix": "1612959288",
-        "date_of_insertion_unix": "1612959288",
+        "date_of_report_unix": "1613128614",
+        "date_of_insertion_unix": "1613128614",
         "administered": [
           {
-            "value": "366436",
+            "value": "424894",
             "description": "reported by GGD-GHOR",
-            "report_date": "Reported number till 9 February"
+            "report_date": "Reported number till 11 February"
           },
           {
             "value": "93816",
             "description": "reported by LNAZ",
-            "report_date": "Reported number till 9 February"
+            "report_date": "Reported number till 11 February"
           },
           {
             "value": "",
@@ -2085,25 +2085,25 @@
         "first_tab_title": "Calculated number",
         "second_tab_title": "Reported number",
         "tab_total_estimated": {
-          "value": "626146",
+          "value": "694888",
           "description": "",
-          "date_of_report_unix": "1612959288",
-          "date_of_insertion_unix": "1612959288",
+          "date_of_report_unix": "1613128614",
+          "date_of_insertion_unix": "1613128614",
           "administered": [
             {
-              "value": "366436",
+              "value": "424894",
               "description": "administered by GGDs",
-              "report_date": "Reported number till 9 February"
+              "report_date": "Reported number till 11 February"
             },
             {
               "value": "93816",
               "description": "administered in hospitals",
-              "report_date": "Reported number till 9 February"
+              "report_date": "Reported number till 11 February"
             },
             {
-              "value": "165894",
+              "value": "176178",
               "description": "administered in long-term care institutions",
-              "report_date": "Calculated number till 9 February"
+              "report_date": "Calculated number till 11 February"
             },
             {
               "value": "",
