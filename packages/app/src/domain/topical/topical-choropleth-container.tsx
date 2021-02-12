@@ -46,7 +46,7 @@ export function TopicalChoroplethContainer({
       flexDirection="column"
       css={css({ position: 'relative' })}
       pr={{ md: '50%' }}
-      minHeight={{ md: '650px' }}
+      minHeight={{ md: '620px' }}
     >
       <Box mb={3}>
         <Heading
@@ -73,10 +73,10 @@ export function TopicalChoroplethContainer({
       <Box
         display="flex"
         flexDirection={{ _: 'column', md: 'column-reverse' }}
-        maxWidth={{ md: 'maxWidthText' }}
+        maxWidth="maxWidthText"
         spacing={4}
       >
-        <Box>{legendaComponent}</Box>
+        <Box mt={{ md: 4 }}>{legendaComponent}</Box>
 
         <Box>
           {typeof description === 'string' ? (
