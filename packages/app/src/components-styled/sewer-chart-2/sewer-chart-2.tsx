@@ -61,11 +61,6 @@ function formatDateString(dateOrNumber: Date | NumberValue) {
   return formatDate(date, 'axis');
 }
 
-const accessors = {
-  xAccessor: (x?: SewerChartValue) => x && x.date,
-  yAccessor: (x?: SewerChartValue) => x && x.value,
-};
-
 export function SewerChart2(props: SewerChart2Props) {
   /**
    * Destructuring here and not above, so we can easily switch between optional
@@ -106,10 +101,10 @@ export function SewerChart2(props: SewerChart2Props) {
     return name ? valuesStation.filter((x) => x.name === name) : [];
   }, [valuesStation, sewerStationSelectProps.value]);
 
-  const maxAverageValue = getMax(valuesAverage, accessors.yAccessor);
-  const maxStationValue = getMax(valuesStation, accessors.yAccessor);
+  const maxAverageValue = getMax(valuesAverage, (x) => x.value);
+  const maxStationValue = getMax(valuesStation, (x) => x.value);
   const selectedStationMax = selectedStationValues
-    ? getMax(selectedStationValues, accessors.yAccessor)
+    ? getMax(selectedStationValues, (x) => x.value)
     : 0;
 
   /**
