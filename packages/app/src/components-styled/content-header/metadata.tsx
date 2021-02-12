@@ -118,8 +118,8 @@ function MetadataItem(props: MetadataItemProps) {
             {index > 0 && ' & '}
             {item.href && (
               <ExternalLink href={item.href}>
-                <VisuallyHidden>{accessibilityText}</VisuallyHidden>
                 {item.text}
+                <VisuallyHidden>{accessibilityText}</VisuallyHidden>
               </ExternalLink>
             )}
             {!item.href && <>{item.text}</>}
