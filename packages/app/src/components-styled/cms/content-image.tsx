@@ -2,11 +2,10 @@ import css from '@styled-system/css';
 import { Fragment, FunctionComponent } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components-styled/base';
-import { Image } from '~/components-styled/image';
+import { SanityImage } from '~/components-styled/image';
 import { MaxWidth } from '~/components-styled/max-width';
 import { getImageProps } from '~/lib/sanity';
 import { ImageBlock, RichContentImageBlock } from '~/types/cms';
-import { SanityImage } from '~/components-styled/image';
 
 interface ContentImageProps {
   node: ImageBlock | RichContentImageBlock;
