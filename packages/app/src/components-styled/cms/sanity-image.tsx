@@ -10,7 +10,7 @@ export function SanityImage(props: SanityImageProps) {
   const { src, srcSet, extension, ...imageProps } = props;
 
   if (!srcSet) {
-    return <Image {...props} />;
+    return <Image src={src} {...imageProps} />;
   }
 
   return (
