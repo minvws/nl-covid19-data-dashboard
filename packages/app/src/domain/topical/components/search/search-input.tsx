@@ -21,7 +21,7 @@ export function SearchInput() {
         <SearchIcon />
       </IconContainer>
 
-      {!inputProps.disabled && inputProps.value && (
+      {inputProps.value && (
         <IconContainer
           as="button"
           align="right"
