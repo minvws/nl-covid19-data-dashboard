@@ -29,7 +29,13 @@ export function ContentImage({ node, contentWrapper }: ContentImageProps) {
           display="inline-block"
           maxWidth={980}
         >
-          <Image {...getImageProps(node)} borderRadius={1} boxShadow="tile" />
+          <Image
+            {...getImageProps(node)}
+            css={css({
+              borderRadius: 1,
+              boxShadow: 'tile',
+            })}
+          />
           {caption}
         </Box>
       </MaxWidth>
