@@ -26,7 +26,12 @@ export function HighlightTeaser(props: HighlightTeaserProps) {
       <StyledHightlightTeaser>
         <CoverImage height={200} image={cover} />
         <Box padding={3}>
-          <Heading level={3} mb={{ _: 1, sm: 3 }} lineHeight={{ _: 0, sm: 2 }}>
+          <Heading
+            level={3}
+            mb={{ _: 1, sm: 3 }}
+            lineHeight={{ _: 0, sm: 1 }}
+            fontSize="1.25rem"
+          >
             {title}
           </Heading>
           <Text>{summary}</Text>

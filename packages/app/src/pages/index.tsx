@@ -216,8 +216,9 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
               </TopicalTile>
             </Box>
             <DataSitemap />
-
-            <ArticleList articleSummaries={content.articles} />
+            <Box mt={{ md: 5 }}>
+              <ArticleList articleSummaries={content.articles} />
+            </Box>
           </TileList>
         </MaxWidth>
       </Box>
