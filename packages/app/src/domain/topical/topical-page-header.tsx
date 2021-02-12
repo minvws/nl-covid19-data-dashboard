@@ -42,7 +42,7 @@ export function TopicalPageHeader({
           m={0}
           lineHeight={0}
           mb={2}
-          fontSize={{ _: '2rem', lg: '2.75em' }}
+          fontSize={{ _: '2rem', lg: '2.75rem' }}
         >
           {title}
         </Heading>
