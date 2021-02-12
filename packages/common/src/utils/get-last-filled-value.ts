@@ -1,4 +1,4 @@
-import { every } from 'lodash';
+import every from 'lodash/every';
 import { isFilled } from 'ts-is-present';
 import { Metric } from '~/types';
 

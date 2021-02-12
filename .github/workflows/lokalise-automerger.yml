@@ -29,6 +29,8 @@ jobs:
           node-version: "14"
       - name: Yarn install
         run: yarn install
+      - name: Build @corona-dashboard/common package
+        run: yarn workspace @corona-dashboard/common build
       - name: Ensure JSON directory for datafiles exists
         run: mkdir -p packages/app/public/json/
       - name: Validate en.json

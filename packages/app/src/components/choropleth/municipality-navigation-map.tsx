@@ -70,7 +70,7 @@ export function MunicipalityNavigationMap<T>(
   const onClick = (id: string) => {
     if (onSelect) {
       const data = getChoroplethValue(id);
-      onSelect(data.gmcode);
+      onSelect(data.gemcode);
     }
   };
 

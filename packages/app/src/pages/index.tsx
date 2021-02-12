@@ -37,6 +37,7 @@ import {
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { HighlightTeaserProps } from '~/components-styled/highlight-teaser';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -51,7 +52,7 @@ export const getStaticProps = createGetStaticProps(
   createGetContent<{
     articles: ArticleSummary[];
     editorial: EditorialSummary;
-    highlight: { article: ArticleSummary };
+    highlight: HighlightTeaserProps;
   }>(topicalPageQuery),
   () => {
     const data = getNlData();
@@ -163,10 +164,10 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
               ]}
             />
 
-            {content.editorial && content.highlight?.article && (
+            {content.editorial && content.highlight && (
               <EditorialTile
                 editorial={content.editorial}
-                highlightedArticle={content.highlight.article}
+                highlight={content.highlight}
               />
             )}
 
