@@ -211,7 +211,7 @@ export function SewerChart({
           applyPositionStyle
           renderTooltip={SewerTooltip}
           detectBounds
-          style={{ pointerEvents: 'none' }}
+          style={{ pointerEvents: 'none', zIndex: 9999 }}
           glyphStyle={{
             fill: hasSelectedStationValues
               ? colors.data.secondary
