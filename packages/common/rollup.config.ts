@@ -27,9 +27,9 @@ export default {
     nodeResolve({ preferBuiltins: false }),
     commonjs({
       /**
-       * Rollup fails to understand some named imports when converting to
-       * commonjs. I don't quite understand why that is, but this seems to solve
-       * it.
+       * Rollup fails to understand some named imports when converting from
+       * commonjs. I don't understand why it would be importing
+       * ts-is-present as commonjs, but this seems to solve it.
        */
       namedExports: { 'ts-is-present': ['isFilled'] },
     }),
