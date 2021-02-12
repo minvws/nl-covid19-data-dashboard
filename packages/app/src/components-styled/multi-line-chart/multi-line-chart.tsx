@@ -304,7 +304,7 @@ export function MultiLineChart<T extends TimestampedValue>({
     (
       event: React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>,
       scales: ChartScales,
-      index: number
+      __index: number
     ) => {
       if (!trendsList.length || event.type === 'mouseleave') {
         toggleHoverElements(true);
