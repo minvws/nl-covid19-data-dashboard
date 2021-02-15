@@ -45,7 +45,7 @@ class MyDocument extends Document {
     return (
       <Html lang={locale} className="has-no-js">
         <Head>
-          <script src="https://polyfill.io/v3/polyfill.js?features=Intl%2CDate.now%2CDate.prototype.toISOString%2CIntl.DateTimeFormat%2CIntl.DateTimeFormat.prototype.formatToParts%2CIntl.getCanonicalLocales" />
+          <script src="https://polyfill.io/v3/polyfill.js?features=Intl.~locale.en,Intl.~locale.nl%2CDate.now%2CDate.prototype.toISOString%2CIntl.DateTimeFormat%2CIntl.DateTimeFormat.prototype.formatToParts%2CIntl.getCanonicalLocales" />
           <script src="/init.js" async />
         </Head>
         <body>
