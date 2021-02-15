@@ -1057,7 +1057,7 @@
     "summary_link_cta": "Read more",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
     "bron": {
-      "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://data.rivm.nl/covid-19/COVID-19_uitgevoerde_testen.html",
       "text": "RIVM"
     },
     "toelichting": "The figures below provide information on the overall number of tests conducted at GGD test locations and the percentage of positive results. An increase in the percentage of positive tests could be an indication that transmission of the virus is on the rise. Please note that most but not all tests are conducted by the GGD. This means that the total number of people who have tested positive differs from the number of people who have tested positive at GGD test locations. ",
@@ -1078,8 +1078,8 @@
     },
     "bronnen": {
       "rivm": {
-        "download": "",
-        "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+        "download": "https://data.rivm.nl/covid-19/COVID-19_uitgevoerde_testen.csv",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_uitgevoerde_testen.html",
         "text": "RIVM"
       }
     }
@@ -1095,7 +1095,7 @@
     "summary_link_cta": "Read more",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
     "bron": {
-      "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://data.rivm.nl/covid-19/COVID-19_uitgevoerde_testen.html",
       "text": "RIVM"
     },
     "toelichting": "The figures below provide information on the overall number of tests conducted at GGD test locations and the percentage of positive results. An increase in the percentage of positive tests could be an indication that transmission of the virus is on the rise. Please note that most but not all tests are conducted by the GGD. This means that the total number of people who have tested positive differs from the number of people who have tested positive at GGD test locations. ",
@@ -1107,7 +1107,7 @@
     "linechart_percentage_titel": "Percentage of GGD positive test results, over time",
     "linechart_percentage_toelichting": "This graph shows the daily percentage of tests conducted by the GGD with positive results in relation to the total number of GGD tests conducted that day for which the results are known. The data is organised based on the date on which the tests were conducted by the GGD. On average it takes one to two days before test results are known.",
     "linechart_totaltests_titel": "Number of test results over time",
-    "linechart_totaltests_toelichting": "This graph shows the daily number of tests conducted at GGD test locations for which the results are known and the number of known results that are positive, over time. The data is organised based on the date on which the tests were conducted by the GGD. On average it takes one to two days before test results are known.\n",
+    "linechart_totaltests_toelichting": "This graph shows the daily number of tests conducted at GGD test locations for which the results are known and the number of known results that are positive, over time. The data is organised based on the date on which the tests were conducted by the GGD. On average it takes one to two days before test results are known.",
     "linechart_totaltests_legend_label": "GGD tests for which results are known",
     "linechart_positivetests_legend_label": "GGD tests with a positive result",
     "reference": {
@@ -1116,8 +1116,8 @@
     },
     "bronnen": {
       "rivm": {
-        "download": "",
-        "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+        "download": "https://data.rivm.nl/covid-19/COVID-19_uitgevoerde_testen.csv",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_uitgevoerde_testen.html",
         "text": "RIVM"
       }
     }
