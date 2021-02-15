@@ -11,28 +11,23 @@ const escalationThresholds =
 
 interface EscalationLevelIconProps {
   level: EscalationLevel;
-  isLarge?: boolean;
+  size?: 'small' | 'normal' | 'large';
 }
 
 export function EscalationLevelIcon({
   level,
-  isLarge = false,
+  size = 'normal',
 }: EscalationLevelIconProps) {
   const color = escalationThresholds[level - 1].color;
-  const size = asResponsiveArray({
-    _: isLarge ? 32 : 24,
-    sm: isLarge ? 45 : 32,
-  });
-  const fontSize = asResponsiveArray({
-    _: isLarge ? 20 : 14,
-    sm: isLarge ? 28 : 20,
-  });
+  const outerDimension = getOuterDimension(size);
+  const fontSize = getFontSize(size);
+
   return (
     <div css={css({ display: 'inline-block' })}>
       <StyledEscalationLevelIcon
         color={color}
         title={`${text.common.niveau} ${level}`}
-        size={size}
+        outerDimension={outerDimension}
         fontSize={fontSize}
       >
         {level}
@@ -43,12 +38,12 @@ export function EscalationLevelIcon({
 
 const StyledEscalationLevelIcon = styled.div<{
   color: string;
-  size: number | ResponsiveValue<number>;
+  outerDimension: number | ResponsiveValue<number>;
   fontSize: number | ResponsiveValue<number>;
-}>(({ color, size, fontSize }) =>
+}>(({ color, outerDimension, fontSize }) =>
   css({
-    width: size,
-    height: size,
+    width: outerDimension,
+    height: outerDimension,
     borderRadius: '50%',
     backgroundColor: color,
     color: 'white',
@@ -59,3 +54,23 @@ const StyledEscalationLevelIcon = styled.div<{
     fontWeight: 'bold',
   })
 );
+
+function getOuterDimension(size: 'small' | 'normal' | 'large') {
+  if (size === 'small') {
+    return asResponsiveArray({ _: 20, sm: 24 });
+  }
+  if (size === 'large') {
+    return asResponsiveArray({ _: 32, sm: 45 });
+  }
+  return asResponsiveArray({ _: 24, sm: 32 });
+}
+
+function getFontSize(size: 'small' | 'normal' | 'large') {
+  if (size === 'small') {
+    return 14;
+  }
+  if (size === 'large') {
+    return asResponsiveArray({ _: 20, sm: 28 });
+  }
+  return asResponsiveArray({ _: 14, sm: 20 });
+}

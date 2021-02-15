@@ -2446,6 +2446,10 @@
   },
   "article_strip_title": "More about this topic",
   "vr_risiconiveau": {
+    "reference": {
+      "href": "/verantwoording",
+      "text": "Lees meer in de cijferverantwoording."
+    },
     "metadata": {
       "title": "Inschalen risiconiveau {{safetyRegionName}}",
       "description": "Inschalen risiconiveau {{safetyRegionName}}"

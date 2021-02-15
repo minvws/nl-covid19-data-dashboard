@@ -2446,6 +2446,11 @@
   },
   "article_strip_title": "Meer informatie over dit onderwerp",
   "vr_risiconiveau": {
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
+    "reference": {
+      "href": "/verantwoording",
+      "text": "Lees meer in de cijferverantwoording."
+    },
     "metadata": {
       "title": "Inschalen risiconiveau {{safetyRegionName}}",
       "description": "Inschalen risiconiveau {{safetyRegionName}}"

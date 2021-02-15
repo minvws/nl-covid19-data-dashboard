@@ -3,18 +3,34 @@ import { EscalationLevelIcon } from '~/components-styled/escalation-level-icon';
 import { Text } from '~/components-styled/typography';
 import { EscalationLevel } from '~/domain/restrictions/type';
 import siteText from '~/locale/index';
+import { regionThresholds } from '~/components/choropleth/region-thresholds';
 
 export type EscalationLevelProps = {
   escalationLevel: EscalationLevel;
+  iconSize?: 'small' | 'normal' | 'large';
+  fontSize?: number;
+  useLevelColor?: boolean;
 };
 
-export function EscalationLevelInfoLabel(props: EscalationLevelProps) {
-  const { escalationLevel } = props;
-
+export function EscalationLevelInfoLabel({
+  escalationLevel,
+  iconSize = 'normal',
+  fontSize = 2,
+  useLevelColor = false,
+}: EscalationLevelProps) {
+  const color = useLevelColor
+    ? regionThresholds.escalation_levels.escalation_level[escalationLevel].color
+    : 'inherit';
   return (
     <Box display="flex" alignItems="center" justifyContent="flex-start">
-      <EscalationLevelIcon level={escalationLevel} />
-      <Text as="span" ml={2} fontWeight="bold">
+      <EscalationLevelIcon level={escalationLevel} size={iconSize} />
+      <Text
+        as="span"
+        ml={2}
+        fontWeight="bold"
+        fontSize={fontSize}
+        color={color}
+      >
         {siteText.escalatie_niveau.types[escalationLevel].titel}
       </Text>
     </Box>

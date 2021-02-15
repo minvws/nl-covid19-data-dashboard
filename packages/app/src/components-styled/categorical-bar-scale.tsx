@@ -7,13 +7,13 @@ interface CategoricalBarScaleProps {
   categories: CategoricalBarScaleCategory[];
 }
 
-interface CategoricalBarScaleCategory {
+export interface CategoricalBarScaleCategory {
   threshold: number;
   name?: string;
   color?: string;
 }
 
-export function getMetricLevel(
+export function getCategory(
   categories: CategoricalBarScaleCategory[],
   value: number
 ) {

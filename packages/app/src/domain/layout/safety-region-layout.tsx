@@ -1,3 +1,4 @@
+import { Regionaal } from '@corona-dashboard/common';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import ElderlyIcon from '~/assets/elderly.svg';
@@ -14,17 +15,18 @@ import {
   Menu,
   MetricMenuItemLink,
 } from '~/components-styled/aside/menu';
+import { Box } from '~/components-styled/base';
 import { AppContent } from '~/components-styled/layout/app-content';
 import { SidebarMetric } from '~/components-styled/sidebar-metric';
 import { Text } from '~/components-styled/typography';
+import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { getLayout as getSiteLayout } from '~/domain/layout/layout';
 import siteText from '~/locale/index';
 import { colors } from '~/style/theme';
-import { Regionaal } from '@corona-dashboard/common';
-import { SafetyRegionComboBox } from './components/safety-region-combo-box';
-import { Box } from '~/components-styled/base';
 import { useBreakpoints } from '~/utils/useBreakpoints';
-import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
+import { SafetyRegionComboBox } from './components/safety-region-combo-box';
+import { EscalationLevelInfoLabel } from '~/components-styled/escalation-level';
+import { EscalationLevel } from '../restrictions/type';
 
 interface SafetyRegionLayoutProps {
   lastGenerated: string;
@@ -115,7 +117,7 @@ function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
                   {safetyRegionName}
                 </Text>
                 <Menu>
-                  <Box spacing={3} pt={3}>
+                  <Box pt={3}>
                     <MetricMenuItemLink
                       href={`/veiligheidsregio/${code}/maatregelen`}
                       icon={<Maatregelen fill={colors.restrictions} />}
@@ -130,7 +132,15 @@ function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
                       href={`/veiligheidsregio/${code}/risiconiveau`}
                       icon={<Maatregelen fill={colors.restrictions} />}
                       title={'Risiconiveau'}
-                    />
+                    >
+                      <EscalationLevelInfoLabel
+                        escalationLevel={
+                          data.escalation_level.level as EscalationLevel
+                        }
+                        iconSize={'small'}
+                        useLevelColor
+                      />
+                    </MetricMenuItemLink>
                   </Box>
 
                   <CategoryMenu
