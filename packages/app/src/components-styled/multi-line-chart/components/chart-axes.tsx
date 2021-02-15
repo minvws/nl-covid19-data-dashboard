@@ -154,8 +154,7 @@ export const ChartAxes = memo(function ChartAxes({
           hideAxisLine
           stroke={defaultColors.axis}
           tickFormat={formatYAxis as AnyTickFormatter}
-          tickLabelProps={(value, index) => ({
-            // fill: index % 5 ? 'transparent' : defaultColors.axisLabels,
+          tickLabelProps={() => ({
             fill: defaultColors.axisLabels,
             fontSize: 12,
             dx: 0,
