@@ -48,7 +48,11 @@ class MyDocument extends Document {
           {/**
            * Because we add the nomodule attribute polyfill.io is only called on IE11
            * IE11 will never complain about CSP policies, and modern browsers don't
-           * need to load the polyfills
+           * need to load the polyfills.
+           *
+           * IMPORTANT:
+           * Let's use this polyfill just for relative date formatting.
+           * Other polyfills should still be imported in _app.ts!
            * */}
           <script
             noModule
