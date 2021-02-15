@@ -151,32 +151,31 @@ export function AreaChartGraph<T extends TrendValue, K extends TrendValue>(
             verticalAnchor: 'middle',
           })}
         />
-        {areas.map((area, index) => (
-          <AreaStack
-            key={index}
-            top={padding.top}
-            left={padding.left}
-            keys={area.displays.map((x) => x.metricProperty) as string[]}
-            data={area.values}
-            x={(d) => xScale(d.data.__date) ?? 0}
-            y0={(d) => yScale(d[0]) ?? 0}
-            y1={(d) => yScale(d[1]) ?? 0}
-          >
-            {({ stacks, path }) =>
-              stacks.map((stack) => (
-                <path
-                  key={`area-chart-stack-${stack.key}`}
-                  d={path(stack) || ''}
-                  stroke="transparent"
-                  fill={getFill(area.displays, stack.key)}
-                  onClick={() => {
-                    alert(stack.key);
-                  }}
-                />
-              ))
-            }
-          </AreaStack>
-        ))}
+
+        <Group>
+          {areas.map((area, index) => (
+            <AreaStack
+              key={index}
+              keys={area.displays.map((x) => x.metricProperty) as string[]}
+              data={area.values}
+              x={(d) => xScale(d.data.__date) ?? 0}
+              y0={(d) => yScale(d[0]) ?? 0}
+              y1={(d) => yScale(d[1]) ?? 0}
+            >
+              {({ stacks, path }) =>
+                stacks.map((stack) => (
+                  <path
+                    key={`area-chart-stack-${stack.key}`}
+                    d={path(stack) || ''}
+                    stroke="transparent"
+                    fill={getFill(area.displays, stack.key)}
+                  />
+                ))
+              }
+            </AreaStack>
+          ))}
+        </Group>
+
         {trends.length > 0 && (
           <Group>
             {trends.map((trendConfig, index) => (
@@ -194,7 +193,9 @@ export function AreaChartGraph<T extends TrendValue, K extends TrendValue>(
             ))}
           </Group>
         )}
+
         {children}
+
         {/**
          * Render the bar on top of the trends because it captures mouse hover when you are above the trend line
          */}

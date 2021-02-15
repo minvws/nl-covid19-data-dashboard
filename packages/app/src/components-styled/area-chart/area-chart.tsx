@@ -6,17 +6,18 @@ import {
   TimestampedValue,
 } from '@corona-dashboard/common';
 import { Group } from '@visx/group';
-import { scaleLinear, scaleTime } from '@visx/scale';
+import { scaleBand, scaleLinear, scaleTime } from '@visx/scale';
 import { Line } from '@visx/shape';
 import { Text } from '@visx/text';
 import { ScaleTime } from 'd3-scale';
-import { MouseEvent, TouchEvent, useCallback } from 'react';
+import { MouseEvent, TouchEvent, useCallback, useMemo, useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
 import {
   ChartBounds,
   ChartPadding,
   HoverPoint,
+  Marker,
 } from '~/components-styled/line-chart/components';
 import { useChartPadding } from '~/components-styled/line-chart/hooks/use-chart-padding';
 import { useDomains } from '~/components-styled/line-chart/hooks/use-domains';
@@ -32,7 +33,7 @@ import { useBreakpoints } from '~/utils/useBreakpoints';
 import { LegendShape } from '../legenda';
 import { useBisect } from '../line-chart/hooks/use-bisect';
 import { useTooltip } from '../line-chart/hooks/use-tooltip';
-import { TimestampedTrendValue } from '../line-chart/logic';
+import { TimestampedTrendValue, TrendValue } from '../line-chart/logic';
 import { AreaChartGraph, AreaConfig, AreaDisplay } from './area-chart-graph';
 import { Tooltip } from './components/tooltip';
 import { useAreaConfigs } from './hooks/use-area-configs';
@@ -145,6 +146,15 @@ export function AreaChart<
     overridePadding
   );
 
+  const xMax = width - padding.left - padding.right;
+  const yMax = height - padding.top - padding.bottom;
+
+  const [markerProps, setMarkerProps] = useState<{
+    data: HoverPoint<
+      (T & TimestampedTrendValue) | (K & TimestampedTrendValue)
+    >[];
+  }>();
+
   const toggleHoverElements = useCallback(
     (
       hide: boolean,
@@ -157,16 +167,16 @@ export function AreaChart<
     ) => {
       if (hide) {
         hideTooltip();
-        //setMarkerProps(undefined);
+        setMarkerProps(undefined);
       } else if (hoverPoints?.length && nearestPoint) {
         showTooltip({
           tooltipData: hoverPoints,
           tooltipLeft: nearestPoint.x,
           tooltipTop: nearestPoint.y,
         });
-        /*setMarkerProps({
-          data: hoverPoints,
-        });*/
+        setMarkerProps({
+          data: [nearestPoint],
+        });
       }
     },
     [showTooltip, hideTooltip]
@@ -185,6 +195,21 @@ export function AreaChart<
     width: width - padding.left - padding.right,
     height: height - padding.top - padding.bottom,
   };
+
+  function getDate(x: TrendValue) {
+    return x.__date;
+  }
+
+  const timespanMarkerData = trendConfigs[0].values;
+
+  const dateSpanScale = useMemo(
+    () =>
+      scaleBand<Date>({
+        range: [0, xMax],
+        domain: timespanMarkerData.map(getDate),
+      }),
+    [xMax, timespanMarkerData]
+  );
 
   const xScale = scaleTime({
     domain: xDomain,
@@ -225,6 +250,27 @@ export function AreaChart<
         {divider &&
           renderDivider(areaConfigs as any, divider, height, padding, xScale)}
       </AreaChartGraph>
+
+      <Box
+        height={yMax}
+        width={xMax}
+        position="absolute"
+        top={padding.top}
+        left={padding.left}
+        style={{
+          pointerEvents: 'none',
+        }}
+      >
+        {markerProps && (
+          <Marker
+            {...markerProps}
+            showLine={false}
+            dateSpanWidth={dateSpanScale.bandwidth()}
+            height={height}
+            padding={padding}
+          />
+        )}
+      </Box>
 
       {isDefined(tooltipData) && (
         <Tooltip
