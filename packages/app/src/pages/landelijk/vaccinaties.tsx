@@ -33,16 +33,6 @@ import { colors } from '~/style/theme';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 
-// /**
-//  * @TODO this is put here because we need to extract things like colors for the
-//  * tooltip. I think a refactor should pass the colors to the tooltip as an extra
-//  * argument, but that refactor should tackle also data redundancy and type
-//  * simplification probably.
-//  */
-// const chartLinesConfig: LineConfig<NlVaccineSupportValue>[] =
-
-// const chartColors = chartLinesConfig.map((x) => x.color || colors.data.primary);
-
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   getNlData,
@@ -272,6 +262,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                 width={width}
                 ariaLabelledBy="chart_vaccine_support"
                 values={data.vaccine_support.values}
+                showMarkerLine
                 linesConfig={[
                   {
                     metricProperty: 'percentage_70_plus',
@@ -285,21 +276,14 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                   },
                 ]}
                 /**
-                 * This tooltip formatting is getting out of hand here. I think
-                 * we can refactor this into a set of selectable types of
+                 * @TODO The tooltip formatting is getting a bit out of hand here. I
+                 * think we can refactor this into a set of selectable types of
                  * tooltips. That probably means having to align a few charts
-                 * design wise, but I think that's a good thing. There is too
-                 * much variables and implementation details required to format
-                 * a good multi-line tooltip. It feels silly to expose that to
-                 * the calling context.
+                 * design-wise. There are too many variables and implementation
+                 * details required to format a good multi-line tooltip. It
+                 * feels silly to expose that to the calling context.
                  */
                 formatTooltip={(value, _key, linesConfig) => {
-                  /**
-                   * To get to the original value T we only need one of the
-                   * values because all of them contain a copy of T at the
-                   * moment. @TODO refactor so that T is passed separately /
-                   * once.
-                   */
                   const dateStartString = formatDateFromSeconds(
                     value.date_start_unix
                   );
@@ -309,7 +293,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
 
                   return (
                     <section>
-                      <Text m={0} style={{ fontWeight: 'bold' }}>
+                      <Text m={0} fontWeight="bold" fontSize={1}>
                         {`${dateStartString} - ${dateEndString}`}
                       </Text>
                       <ul

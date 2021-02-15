@@ -5,6 +5,11 @@
  * here the tooltip needs to be rendered on one side of the marker (instead of
  * centered) and flip to the other side once bounds are reached. The LineChart
  * tooltip didn't have logic for this and Visx does this out of the box.
+ *
+ * I have also refactored the way data is passed to the tooltip renderer,
+ * passing the original value + active key and lines configuration object to
+ * render any type of layout, and without exposing internal __date and __value
+ * properties.
  */
 import { TickFormatter } from '@visx/axis';
 import { localPoint } from '@visx/event';
@@ -80,10 +85,10 @@ export type LineConfig<T extends TimestampedValue> = {
    * For consistency and transparency it is probably a good idea to enforce
    * property, label and color to be defined for all lines. Then this data can
    * be easily passed to the tooltip function. The fallback to
-   * colors.data.primary can be made explicit at the consumer context.
+   * colors.data.primary can be made explicit at the consumer.
    *
-   * Since the label is likely to appear in both the tooltip and the legenda, it
-   * is named it label.
+   * Since the originally named "legendLabel" is likely to appear in both the
+   * tooltip and the legenda, it is now named "label".
    */
   metricProperty: keyof T;
   label: string;
@@ -148,9 +153,6 @@ export function MultiLineChart<T extends TimestampedValue>({
   ariaLabelledBy,
   seriesMax: overrideSeriesMax,
 }: MultiLineChartProps<T>) {
-  // const {tooltipData, tooltipLeft = 0, tooltipTop = 0, showTooltip,
-  //   hideTooltip,} = useTooltip<T & TrendValue>();
-
   const {
     tooltipData,
     tooltipLeft = 0,
