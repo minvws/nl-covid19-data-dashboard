@@ -263,16 +263,20 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                 ariaLabelledBy="chart_vaccine_support"
                 values={data.vaccine_support.values}
                 showMarkerLine
+                showLegend
+                yTickValues={[0, 25, 50, 75, 100]}
                 linesConfig={[
                   {
                     metricProperty: 'percentage_70_plus',
                     label: '70+',
                     color: 'hotpink',
+                    legendShape: 'square',
                   },
                   {
                     metricProperty: 'percentage_average',
                     label: 'gemiddelde',
                     color: colors.data.primary,
+                    legendShape: 'square',
                   },
                 ]}
                 /**

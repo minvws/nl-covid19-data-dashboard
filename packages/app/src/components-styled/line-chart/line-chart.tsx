@@ -70,6 +70,7 @@ export type LineChartProps<T extends TimestampedValue> = {
   componentCallback?: ComponentCallbackFunction;
   ariaLabelledBy?: string;
   seriesMax?: number;
+  yTickValues?: number[];
 };
 
 export function LineChart<T extends TimestampedValue>({
@@ -103,6 +104,7 @@ export function LineChart<T extends TimestampedValue>({
   componentCallback,
   ariaLabelledBy,
   seriesMax: overrideSeriesMax,
+  yTickValues,
 }: LineChartProps<T>) {
   const {
     tooltipData,
@@ -338,6 +340,7 @@ export function LineChart<T extends TimestampedValue>({
           componentCallback={componentCallback}
           ariaLabelledBy={ariaLabelledBy}
           dateSpanWidth={dateSpanScale.bandwidth()}
+          yTickValues={yTickValues}
         >
           {renderTrendLines}
         </ChartAxes>

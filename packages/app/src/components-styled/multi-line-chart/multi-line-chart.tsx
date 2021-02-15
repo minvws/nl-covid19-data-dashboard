@@ -22,12 +22,12 @@ import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
 import { Legenda, LegendItem, LegendShape } from '~/components-styled/legenda';
 import {
-  ChartAxes,
   ChartPadding,
   ChartScales,
   ComponentCallbackFunction,
   defaultPadding,
 } from '~/components-styled/line-chart/components';
+import { ChartAxes } from './components/chart-axes';
 import {
   isDateSpanValue,
   isDateValue,
@@ -40,6 +40,7 @@ import { colors } from '~/style/theme';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { TimeframeOption } from '~/utils/timeframe';
+
 /**
  * Importing unchanged logic and components from line-chart since this is
  * considered a fork.
@@ -57,6 +58,7 @@ import {
 import { defaultStyles, TooltipWithBounds, useTooltip } from '@visx/tooltip';
 import styled from 'styled-components';
 import css from '@styled-system/css';
+import { useBreakpoints } from '~/utils/useBreakpoints';
 
 const tooltipStyles = {
   ...defaultStyles,
@@ -124,6 +126,7 @@ export type MultiLineChartProps<T extends TimestampedValue> = {
   componentCallback?: ComponentCallbackFunction;
   ariaLabelledBy?: string;
   seriesMax?: number;
+  yTickValues?: number[];
 };
 
 export function MultiLineChart<T extends TimestampedValue>({
@@ -149,9 +152,9 @@ export function MultiLineChart<T extends TimestampedValue>({
         shape: x.legendShape ?? 'line',
       }))
     : undefined,
-  componentCallback,
   ariaLabelledBy,
   seriesMax: overrideSeriesMax,
+  yTickValues,
 }: MultiLineChartProps<T>) {
   const {
     tooltipData,
@@ -161,6 +164,9 @@ export function MultiLineChart<T extends TimestampedValue>({
     hideTooltip,
     tooltipOpen,
   } = useTooltip<TooltipData<T>>();
+
+  const breakpoints = useBreakpoints();
+  const isTinyScreen = !breakpoints.xs;
 
   const metricProperties = useMemo(
     () => linesConfig.map((x) => x.metricProperty),
@@ -407,9 +413,9 @@ export function MultiLineChart<T extends TimestampedValue>({
           formatXAxis={formatXAxis}
           onHover={(event, scales) => handleHover(event, scales, -1)}
           benchmark={benchmark}
-          componentCallback={componentCallback}
           ariaLabelledBy={ariaLabelledBy}
           dateSpanWidth={dateSpanScale.bandwidth()}
+          yTickValues={yTickValues}
         >
           {renderTrendLines}
         </ChartAxes>
@@ -419,8 +425,7 @@ export function MultiLineChart<T extends TimestampedValue>({
             left={tooltipLeft}
             top={tooltipTop}
             style={tooltipStyles}
-            // offsetLeft={isTinyScreen ? 0 : 10}
-            offsetLeft={50}
+            offsetLeft={isTinyScreen ? 0 : 50}
           >
             <TooltipContainer>
               {typeof formatTooltip === 'function'
