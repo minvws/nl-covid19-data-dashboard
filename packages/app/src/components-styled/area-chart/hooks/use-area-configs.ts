@@ -7,7 +7,7 @@ import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
 import {
   getTimeframeValues,
-  TrendValueWithTimestamp,
+  TimestampedTrendValue,
 } from '~/components-styled/line-chart/logic';
 import { timestampToDate } from '~/components-styled/stacked-chart/logic';
 import { TimeframeOption } from '~/utils/timeframe';
@@ -18,9 +18,9 @@ import { AreaConfig } from '../area-chart-graph';
 export function useAreaConfigs<T extends TimestampedValue>(
   areaDescriptors: AreaDescriptor<T>[],
   timeframe: TimeframeOption
-): AreaConfig<T & TrendValueWithTimestamp>[] {
+): AreaConfig<T & TimestampedTrendValue>[] {
   const areaConfigs = useMemo(() => {
-    return areaDescriptors.map<AreaConfig<T & TrendValueWithTimestamp>>(
+    return areaDescriptors.map<AreaConfig<T & TimestampedTrendValue>>(
       (descriptor) => ({
         values: getAreaData(
           descriptor.values,
@@ -41,7 +41,7 @@ export function getAreaData<T extends TimestampedValue>(
   values: T[],
   metricProperties: (keyof T)[],
   timeframe: TimeframeOption
-): (T & TrendValueWithTimestamp)[] {
+): (T & TimestampedTrendValue)[] {
   const valuesInFrame = getTimeframeValues(values, timeframe);
 
   if (valuesInFrame.length === 0) {
@@ -59,7 +59,7 @@ export function getAreaData<T extends TimestampedValue>(
 
   if (isDateSeries(valuesInFrame)) {
     return valuesInFrame
-      .map<T & TrendValueWithTimestamp>((x: any) => ({
+      .map<T & TimestampedTrendValue>((x: any) => ({
         ...x,
         __value: sum(x, metricProperties),
         __date: timestampToDate(x.date_unix),
@@ -69,10 +69,16 @@ export function getAreaData<T extends TimestampedValue>(
 
   if (isDateSpanSeries(valuesInFrame)) {
     return valuesInFrame
-      .map<T & TrendValueWithTimestamp>((x: any) => ({
+      .map<T & TimestampedTrendValue>((x: any) => ({
         ...x,
         __value: sum(x, metricProperties),
-        __date: timestampToDate(x.date_start_unix),
+        __date: timestampToDate(
+          /**
+           * Here we set the date to be in the middle of the timespan, so that
+           * the chart can render the points in the middle of each span.
+           */
+          x.date_start_unix + (x.date_end_unix - x.date_start_unix) / 2
+        ),
       }))
       .filter((x) => isPresent(x.__value));
   }

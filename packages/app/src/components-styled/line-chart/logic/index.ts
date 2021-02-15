@@ -86,19 +86,19 @@ export type TrendValue = {
   __value: number;
 };
 
-export type TrendValueWithTimestamp = TrendValue & TimestampedValue;
+export type TimestampedTrendValue = TrendValue & TimestampedValue;
 
 export function getTrendData<T extends TimestampedValue>(
   values: T[],
   metricProperties: (keyof T)[],
   timeframe: TimeframeOption
-): (T & TrendValueWithTimestamp)[][] {
+): (T & TimestampedTrendValue)[][] {
   const series = getValuesInTimeframe(values, timeframe);
 
   const trendData = metricProperties.map(
     (metricProperty) =>
       (getSingleTrendData(series, metricProperty as string) as unknown) as (T &
-        TrendValueWithTimestamp)[]
+        TimestampedTrendValue)[]
   );
 
   return trendData;
@@ -107,7 +107,7 @@ export function getTrendData<T extends TimestampedValue>(
 export function getSingleTrendData<T extends TimestampedValue>(
   values: T[],
   metricProperty: string
-): (T & TrendValueWithTimestamp)[] {
+): (T & TimestampedTrendValue)[] {
   if (values.length === 0) {
     /**
      * It could happen that you are using an old dataset and select last week as
@@ -119,7 +119,7 @@ export function getSingleTrendData<T extends TimestampedValue>(
 
   if (isDateSeries(values)) {
     return values
-      .map<T & TrendValueWithTimestamp>(
+      .map<T & TimestampedTrendValue>(
         (x) =>
           ({
             ...x,
@@ -130,14 +130,14 @@ export function getSingleTrendData<T extends TimestampedValue>(
              */
             __value: x[metricProperty as keyof TimestampedValue] as number,
             __date: timestampToDate((x as DateValue).date_unix),
-          } as T & TrendValueWithTimestamp)
+          } as T & TimestampedTrendValue)
       )
       .filter((x) => isPresent(x.__value));
   }
 
   if (isDateSpanSeries(values)) {
     return values
-      .map<T & TrendValueWithTimestamp>(
+      .map<T & TimestampedTrendValue>(
         (x) =>
           ({
             ...x,
@@ -157,7 +157,7 @@ export function getSingleTrendData<T extends TimestampedValue>(
                   (x as DateSpanValue).date_start_unix) /
                   2
             ),
-          } as T & TrendValueWithTimestamp)
+          } as T & TimestampedTrendValue)
       )
       .filter((x) => isPresent(x.__value));
   }

@@ -31,8 +31,9 @@ import { useBisect } from './hooks/use-bisect';
 import { useChartHover } from './hooks/use-chart-hover';
 import { useChartPadding } from './hooks/use-chart-padding';
 import { useDomains } from './hooks/use-domains';
+import { useTooltip } from './hooks/use-tooltip';
 import { useTrendValues } from './hooks/use-trend-values';
-import { TrendValue } from './logic';
+import { TimestampedTrendValue, TrendValue } from './logic';
 
 const dateToValue = (d: Date) => d.valueOf() / 1000;
 const formatXAxis = (date: Date) =>
@@ -57,14 +58,14 @@ export type LineChartProps<T extends TimestampedValue> = {
   height?: number;
   timeframe?: TimeframeOption;
   signaalwaarde?: number;
-  formatTooltip?: (value: (T & TrendValue)[]) => React.ReactNode;
+  formatTooltip?: (value: (T & TimestampedTrendValue)[]) => React.ReactNode;
   formatXAxis?: TickFormatter<Date>;
   formatYAxis?: TickFormatter<number>;
   hideFill?: boolean;
   valueAnnotation?: string;
   isPercentage?: boolean;
   showMarkerLine?: boolean;
-  formatMarkerLabel?: (value: T) => string;
+  formatMarkerLabel?: (value: T & TimestampedTrendValue) => string;
   padding?: Partial<ChartPadding>;
   showLegend?: boolean;
   legendItems?: LegendItem[];
@@ -111,7 +112,7 @@ export function LineChart<T extends TimestampedValue>({
     tooltipTop = 0,
     showTooltip,
     hideTooltip,
-  } = useTooltip<T & TrendValue>();
+  } = useTooltip<T & TimestampedTrendValue>();
 
   const benchmark = useMemo(
     () =>
@@ -154,14 +155,14 @@ export function LineChart<T extends TimestampedValue>({
   );
 
   const [markerProps, setMarkerProps] = useState<{
-    data: HoverPoint<T>[];
+    data: HoverPoint<T & TimestampedTrendValue>[];
   }>();
 
   const toggleHoverElements = useCallback(
     (
       hide: boolean,
-      hoverPoints?: HoverPoint<T>[],
-      nearestPoint?: HoverPoint<T>
+      hoverPoints?: HoverPoint<T & TimestampedTrendValue>[],
+      nearestPoint?: HoverPoint<T & TimestampedTrendValue>
     ) => {
       if (hide) {
         hideTooltip();
@@ -290,7 +291,7 @@ export function LineChart<T extends TimestampedValue>({
 }
 
 function formatDefaultTooltip<T extends TimestampedValue>(
-  values: (T & TrendValue)[],
+  values: (T & TimestampedTrendValue)[],
   isPercentage?: boolean
 ) {
   if (isDateSeries(values)) {
@@ -328,33 +329,4 @@ function formatDefaultTooltip<T extends TimestampedValue>(
   throw new Error(
     `Invalid value passed to format tooltip function: ${JSON.stringify(values)}`
   );
-}
-
-function useTooltip<T extends TimestampedValue>() {
-  const [tooltipData, setTooltipData] = useState<T[]>();
-  const [tooltipLeft, setTooltipLeft] = useState<number>();
-  const [tooltipTop, setTooltipTop] = useState<number>();
-
-  const showTooltip = useCallback(
-    (x: { tooltipData: T[]; tooltipLeft: number; tooltipTop: number }) => {
-      setTooltipData(x.tooltipData);
-      setTooltipLeft(x.tooltipLeft);
-      setTooltipTop(x.tooltipTop);
-    },
-    []
-  );
-
-  const hideTooltip = useCallback(() => {
-    setTooltipData(undefined);
-    setTooltipLeft(undefined);
-    setTooltipTop(undefined);
-  }, []);
-
-  return {
-    tooltipData,
-    tooltipLeft,
-    tooltipTop,
-    showTooltip,
-    hideTooltip,
-  };
 }

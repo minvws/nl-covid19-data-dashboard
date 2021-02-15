@@ -1,16 +1,16 @@
 import styled from 'styled-components';
+import { ChartPadding } from '~/components-styled/line-chart/components';
 import { Text } from '~/components-styled/typography';
 import { colors } from '~/style/theme';
 import { formatDateFromMilliseconds } from '~/utils/formatDate';
-import { TrendValue } from '../logic';
-import { ChartPadding } from '~/components-styled/line-chart/components';
-import { TimestampedValue } from '@corona-dashboard/common';
+import { TimestampedTrendValue } from '../logic';
 
 const MARKER_POINT_SIZE = 18;
 
-export type HoverPoint<T extends TimestampedValue> = {
-  data: T & TrendValue;
+export type HoverPoint<T> = {
+  data: T;
   color?: string;
+  label?: string;
   x: number;
   y: number;
 };
@@ -90,17 +90,17 @@ const LineContainer = styled.div`
   position: absolute;
 `;
 
-type MarkerProps<T extends TimestampedValue> = {
+type MarkerProps<T> = {
   data: HoverPoint<T>[];
   dateSpanWidth: number;
   primaryColor?: string;
   showLine: boolean;
-  formatLabel?: (data: T & TrendValue) => string;
+  formatLabel?: (data: T & TimestampedTrendValue) => string;
   padding: ChartPadding;
   height: number;
 };
 
-export function Marker<T extends TimestampedValue>(props: MarkerProps<T>) {
+export function Marker<T extends TimestampedTrendValue>(props: MarkerProps<T>) {
   const {
     primaryColor = colors.data.primary,
     data,
@@ -161,6 +161,6 @@ export function Marker<T extends TimestampedValue>(props: MarkerProps<T>) {
   );
 }
 
-function defaultFormatLabel<T>(data: T & TrendValue): string {
+function defaultFormatLabel(data: TimestampedTrendValue): string {
   return formatDateFromMilliseconds(data.__date.getTime());
 }

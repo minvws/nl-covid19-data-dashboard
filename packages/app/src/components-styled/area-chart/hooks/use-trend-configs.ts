@@ -2,7 +2,7 @@ import { TimestampedValue } from '@corona-dashboard/common';
 import { useMemo } from 'react';
 import {
   getSingleTrendData,
-  TrendValueWithTimestamp,
+  TimestampedTrendValue,
 } from '~/components-styled/line-chart/logic';
 import { getValuesInTimeframe } from '~/components-styled/stacked-chart/logic';
 import { TimeframeOption } from '~/utils/timeframe';
@@ -12,14 +12,14 @@ import { TrendConfig } from '../area-chart-graph';
 export function useTrendConfigs<T extends TimestampedValue>(
   trendDescriptors: TrendDescriptor<T>[],
   timeframe: TimeframeOption
-): TrendConfig<T & TrendValueWithTimestamp>[] {
+): TrendConfig<T & TimestampedTrendValue>[] {
   const trendConfigs = useMemo(
     () =>
       trendDescriptors
         .map((descriptor) => {
           const series = getValuesInTimeframe(descriptor.values, timeframe);
           return descriptor.displays.map<
-            TrendConfig<T & TrendValueWithTimestamp>
+            TrendConfig<T & TimestampedTrendValue>
           >((displayConfig) => {
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const { metricProperty, ...displayProps } = displayConfig;

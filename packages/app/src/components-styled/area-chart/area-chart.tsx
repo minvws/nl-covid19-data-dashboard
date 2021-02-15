@@ -1,6 +1,8 @@
 import {
   formatNumber,
   formatPercentage,
+  isDateSpanValue,
+  isDateValue,
   TimestampedValue,
 } from '@corona-dashboard/common';
 import { Group } from '@visx/group';
@@ -8,7 +10,7 @@ import { scaleLinear, scaleTime } from '@visx/scale';
 import { Line } from '@visx/shape';
 import { Text } from '@visx/text';
 import { ScaleTime } from 'd3-scale';
-import { MouseEvent, TouchEvent } from 'react';
+import { MouseEvent, TouchEvent, useCallback } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
 import {
@@ -18,15 +20,21 @@ import {
 } from '~/components-styled/line-chart/components';
 import { useChartPadding } from '~/components-styled/line-chart/hooks/use-chart-padding';
 import { useDomains } from '~/components-styled/line-chart/hooks/use-domains';
+import { Text as StyledText } from '~/components-styled/typography';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
 import theme from '~/style/theme';
-import { formatDateFromSeconds } from '~/utils/formatDate';
+import {
+  formatDateFromMilliseconds,
+  formatDateFromSeconds,
+} from '~/utils/formatDate';
 import { TimeframeOption } from '~/utils/timeframe';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { LegendShape } from '../legenda';
 import { useBisect } from '../line-chart/hooks/use-bisect';
-import { TrendValueWithTimestamp } from '../line-chart/logic';
+import { useTooltip } from '../line-chart/hooks/use-tooltip';
+import { TimestampedTrendValue } from '../line-chart/logic';
 import { AreaChartGraph, AreaConfig, AreaDisplay } from './area-chart-graph';
+import { Tooltip } from './components/tooltip';
 import { useAreaConfigs } from './hooks/use-area-configs';
 import { useChartHover } from './hooks/use-chart-hover';
 import { useTrendConfigs } from './hooks/use-trend-configs';
@@ -67,7 +75,13 @@ export type DividerConfig = {
   rightLabel: string;
 };
 
-type AreaChartProps<T extends TimestampedValue, K extends T> = {
+type AreaChartProps<T extends TimestampedValue, K extends TimestampedValue> = {
+  formatTooltip?: (
+    values: HoverPoint<
+      (T & TimestampedTrendValue) | (K & TimestampedTrendValue)
+    >[],
+    isPercentage?: boolean
+  ) => React.ReactNode;
   width: number;
   trends: TrendDescriptor<T>[];
   areas: AreaDescriptor<K>[];
@@ -85,9 +99,10 @@ const formatXAxis = (date: Date | { valueOf(): number }) =>
 const formatYAxisFn = (y: number) => formatNumber(y);
 const formatYAxisPercentageFn = (y: number) => `${formatPercentage(y)}%`;
 
-export function AreaChart<T extends TimestampedValue, K extends T>(
-  props: AreaChartProps<T, K>
-) {
+export function AreaChart<
+  T extends TimestampedValue,
+  K extends TimestampedValue
+>(props: AreaChartProps<T, K>) {
   const {
     trends,
     areas,
@@ -98,7 +113,18 @@ export function AreaChart<T extends TimestampedValue, K extends T>(
     signaalwaarde,
     isPercentage = false,
     divider,
+    formatTooltip = formatDefaultTooltip,
   } = props;
+  const {
+    tooltipData,
+    tooltipLeft = 0,
+    tooltipTop = 0,
+    showTooltip,
+    hideTooltip,
+  } = useTooltip<
+    HoverPoint<(T & TimestampedTrendValue) | (K & TimestampedTrendValue)>
+  >();
+
   const breakpoints = useBreakpoints();
   const trendConfigs = useTrendConfigs(trends, timeframe);
   const areaConfigs = useAreaConfigs(areas, timeframe);
@@ -119,18 +145,37 @@ export function AreaChart<T extends TimestampedValue, K extends T>(
     overridePadding
   );
 
+  const toggleHoverElements = useCallback(
+    (
+      hide: boolean,
+      hoverPoints?: HoverPoint<
+        (T & TimestampedTrendValue) | (K & TimestampedTrendValue)
+      >[],
+      nearestPoint?: HoverPoint<
+        (T & TimestampedTrendValue) | (K & TimestampedTrendValue)
+      >
+    ) => {
+      if (hide) {
+        hideTooltip();
+        //setMarkerProps(undefined);
+      } else if (hoverPoints?.length && nearestPoint) {
+        showTooltip({
+          tooltipData: hoverPoints,
+          tooltipLeft: nearestPoint.x,
+          tooltipTop: nearestPoint.y,
+        });
+        /*setMarkerProps({
+          data: hoverPoints,
+        });*/
+      }
+    },
+    [showTooltip, hideTooltip]
+  );
+
   const bisect = useBisect(padding);
 
   const onHover = useChartHover(
-    (
-      hide: boolean,
-      hoverPoints?: HoverPoint<T>[],
-      nearestPoint?: HoverPoint<T>
-    ) => {
-      console.dir(hoverPoints);
-      console.dir(nearestPoint);
-      return;
-    },
+    toggleHoverElements,
     trendConfigs,
     areaConfigs,
     bisect
@@ -180,12 +225,22 @@ export function AreaChart<T extends TimestampedValue, K extends T>(
         {divider &&
           renderDivider(areaConfigs as any, divider, height, padding, xScale)}
       </AreaChartGraph>
+
+      {isDefined(tooltipData) && (
+        <Tooltip
+          bounds={{ right: width, left: 0, top: 0, bottom: height }}
+          x={tooltipLeft + padding.left}
+          y={tooltipTop + padding.top}
+        >
+          {formatTooltip(tooltipData, isPercentage)}
+        </Tooltip>
+      )}
     </Box>
   );
 }
 
 function renderDivider(
-  areas: AreaConfig<TrendValueWithTimestamp>[],
+  areas: AreaConfig<TimestampedTrendValue>[],
   divider: DividerConfig,
   height: number,
   padding: ChartPadding,
@@ -197,7 +252,7 @@ function renderDivider(
   return dates.map((date) => {
     const x = xScale(date);
     return x !== undefined ? (
-      <Group>
+      <Group key={date.toISOString()}>
         <Text
           fontSize={theme.fontSizes[1]}
           x={x - 15}
@@ -226,4 +281,56 @@ function renderDivider(
       </Group>
     ) : null;
   });
+}
+
+function formatDefaultTooltip<
+  T extends TimestampedTrendValue,
+  K extends TimestampedTrendValue
+>(values: HoverPoint<T | K>[], isPercentage?: boolean) {
+  if (!values.length) {
+    return null;
+  }
+
+  const data = values[0].data;
+
+  if (isDateValue(data)) {
+    return (
+      <Box>
+        <StyledText fontWeight="bold">
+          {`${formatDateFromMilliseconds(data.__date.getTime())}: `}
+        </StyledText>
+        {values.map((value) => (
+          <Box key={value.data.__value}>
+            {isPercentage
+              ? `${formatPercentage(value.data.__value)}%`
+              : formatNumber(value.data.__value)}
+          </Box>
+        ))}
+      </Box>
+    );
+  } else if (isDateSpanValue(data)) {
+    const dateStartString = formatDateFromSeconds(
+      data.date_start_unix,
+      'short'
+    );
+    const dateEndString = formatDateFromSeconds(data.date_end_unix, 'short');
+    return (
+      <Box>
+        <StyledText fontWeight="bold">
+          {`${dateStartString} - ${dateEndString}: `}
+        </StyledText>
+        {values.map((value) => (
+          <Box key={value.data.__value}>
+            {isPercentage
+              ? `${formatPercentage(value.data.__value)}%`
+              : formatNumber(value.data.__value)}
+          </Box>
+        ))}
+      </Box>
+    );
+  }
+
+  throw new Error(
+    `Invalid value passed to format tooltip function: ${JSON.stringify(values)}`
+  );
 }

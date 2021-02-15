@@ -188,7 +188,7 @@ function renderTileIndicator(
 type SpanProps = SpaceProps & ColorProps & TypographyProps;
 
 const Span = styled.span<SpanProps>(compose(color, space, typography));
-const IconContainer = styled(Span)(
+const IconContainer = (styled as any)(Span, { stuff: 1 })(
   css({
     svg: {
       mr: 1,

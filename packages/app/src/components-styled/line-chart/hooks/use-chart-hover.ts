@@ -1,20 +1,19 @@
-import { TimestampedValue } from '@corona-dashboard/common';
 import { localPoint } from '@visx/event';
 import { useCallback } from 'react';
 import { isDefined } from 'ts-is-present';
 import { calculateDistance } from '~/utils/calculate-distance';
 import { LineConfig } from '..';
 import { ChartScales, HoverPoint } from '../components';
-import { TrendValueWithTimestamp } from '../logic';
+import { TimestampedTrendValue } from '../logic';
 import { BisectFunction } from './use-bisect';
 
-export function useChartHover<T extends TimestampedValue>(
+export function useChartHover<T extends TimestampedTrendValue>(
   toggleHoverElements: (
     hide: boolean,
     hoverPoints?: HoverPoint<T>[],
     nearestPoint?: HoverPoint<T>
   ) => void,
-  trendsList: (T & TrendValueWithTimestamp)[][],
+  trendsList: T[][],
   linesConfig: LineConfig<T>[],
   bisect: BisectFunction
 ) {
@@ -42,7 +41,6 @@ export function useChartHover<T extends TimestampedValue>(
       const hoverPoints = trendsList
         .map((trends, index) => {
           const trendValue = bisect(trends, point.x, xScale);
-          console.dir(trendValue);
           return trendValue
             ? {
                 data: trendValue,

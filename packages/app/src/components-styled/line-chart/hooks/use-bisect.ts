@@ -1,16 +1,15 @@
-import { TimestampedValue } from '@corona-dashboard/common';
 import { bisectLeft } from 'd3-array';
 import { ScaleTime } from 'd3-scale';
 import { useCallback } from 'react';
 import { ChartPadding } from '../components';
-import { TrendValue } from '../logic';
+import { TimestampedTrendValue } from '../logic';
 
 export type BisectFunction = ReturnType<typeof useBisect>;
 
 export function useBisect(padding: ChartPadding) {
   return useCallback(
     (
-      trend: (TrendValue & TimestampedValue)[],
+      trend: TimestampedTrendValue[],
       xPosition: number,
       xScale: ScaleTime<number, number>
     ) => {

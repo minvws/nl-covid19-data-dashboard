@@ -1,4 +1,12 @@
 // import { NlVaccineSupportValue } from '@corona-dashboard/common';
+import {
+  isDateSpanValue,
+  isDateValue,
+  NlVaccineAdministeredEstimateValue,
+  NlVaccineAdministeredValue,
+  NlVaccineDeliveryEstimateValue,
+  NlVaccineDeliveryValue,
+} from '@corona-dashboard/common';
 import { css } from '@styled-system/css';
 import { ParentSize } from '@visx/responsive';
 import { Fragment, useState } from 'react';
@@ -14,7 +22,9 @@ import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
+import { HoverPoint } from '~/components-styled/line-chart/components';
 import { LineChart } from '~/components-styled/line-chart/line-chart';
+import { TimestampedTrendValue } from '~/components-styled/line-chart/logic';
 import { RadioGroup } from '~/components-styled/radio-group';
 import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
@@ -32,7 +42,10 @@ import {
   getText,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
-import { formatDateFromSeconds } from '~/utils/formatDate';
+import {
+  formatDateFromMilliseconds,
+  formatDateFromSeconds,
+} from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
@@ -230,9 +243,14 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             {' '}
             <ParentSize>
               {({ width }) => (
-                <AreaChart
+                <AreaChart<
+                  NlVaccineDeliveryValue | NlVaccineDeliveryEstimateValue,
+                  | NlVaccineAdministeredValue
+                  | NlVaccineAdministeredEstimateValue
+                >
                   width={width}
                   timeframe="all"
+                  formatTooltip={formatVaccinationsTooltip}
                   divider={{
                     color: colors.annotation,
                     leftLabel: 'Berekend aantal',
@@ -245,6 +263,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                         {
                           metricProperty: 'total',
                           color: '#F8E435',
+                          legendLabel: 'Geleverd',
                         },
                       ],
                     },
@@ -254,6 +273,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                         {
                           metricProperty: 'total',
                           style: 'dashed',
+                          legendLabel: 'Geleverd',
                           color: '#F8E435',
                         },
                       ],
@@ -266,6 +286,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                         (key) => ({
                           metricProperty: key as any,
                           color: (colors.data.vaccines as any)[key],
+                          legendLabel: key,
                         })
                       ),
                     },
@@ -276,6 +297,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                           metricProperty: key as any,
                           pattern: 'hatched',
                           color: (colors.data.vaccines as any)[key],
+                          legendLabel: key,
                         })
                       ),
                     },
@@ -388,5 +410,57 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
 };
 
 VaccinationPage.getLayout = getNationalLayout;
+
+export type TooltipValue = (
+  | NlVaccineDeliveryValue
+  | NlVaccineDeliveryEstimateValue
+  | NlVaccineAdministeredValue
+  | NlVaccineAdministeredEstimateValue
+) &
+  TimestampedTrendValue;
+
+function formatVaccinationsTooltip(values: HoverPoint<TooltipValue>[]) {
+  if (!values.length) {
+    return null;
+  }
+
+  const data = values[0].data;
+
+  if (isDateValue(data)) {
+    return (
+      <Box>
+        <Text fontWeight="bold">
+          {`${formatDateFromMilliseconds(data.__date.getTime())}: `}
+        </Text>
+        {values.map((value) => (
+          <Box key={value.data.__value}>{formatNumber(value.data.__value)}</Box>
+        ))}
+      </Box>
+    );
+  } else if (isDateSpanValue(data)) {
+    const dateStartString = formatDateFromSeconds(
+      data.date_start_unix,
+      'short'
+    );
+    const dateEndString = formatDateFromSeconds(data.date_end_unix, 'short');
+    return (
+      <Box>
+        <Text fontWeight="bold">
+          {`${dateStartString} - ${dateEndString}: `}
+        </Text>
+        {values.map((value) => (
+          <Box key={`${value.label}-${value.data.__value}`}>
+            {value.label}:{' '}
+            {formatNumber((value.data as any)[value.label as string])}
+          </Box>
+        ))}
+      </Box>
+    );
+  }
+
+  throw new Error(
+    `Invalid value passed to format tooltip function: ${JSON.stringify(values)}`
+  );
+}
 
 export default VaccinationPage;
