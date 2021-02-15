@@ -238,20 +238,6 @@
       "80 tot 90",
       "90+"
     ],
-    "cluster_datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "cluster_bron": {
-      "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
-      "text": "RIVM"
-    },
-    "cluster_titel": "Clusters van positief geteste personen",
-    "cluster_toelichting": "---",
-    "cluster_barscale_titel": "Aantal actieve clusters",
-    "cluster_barscale_toelichting": "---",
-    "cluster_barscale_screenreader_text": "{{value}} actieve clusters.",
-    "cluster_gemiddelde_titel": "Gemiddelde grootte actieve clusters",
-    "cluster_gemiddelde_toelichting": "---.",
-    "cluster_linechart_titel": "Verloop actieve clusters over tijd",
-    "cluster_linechart_toelichting": "---",
     "chloropleth_legenda": {
       "titel": "Aantal per 100.000 inwoners",
       "geen_meldingen": "Geen meldingen"
@@ -777,21 +763,6 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
     },
-    "cluster_datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "cluster_bron": {
-      "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
-      "text": "RIVM",
-      "dowload": ""
-    },
-    "cluster_titel": "Clusters van positief geteste personen",
-    "cluster_toelichting": "---",
-    "cluster_barscale_titel": "Aantal actieve clusters",
-    "cluster_barscale_toelichting": "---",
-    "cluster_barscale_screenreader_text": "{{value}} actieve clusters.",
-    "cluster_gemiddelde_titel": "Gemiddelde grootte actieve clusters",
-    "cluster_gemiddelde_toelichting": "---.",
-    "cluster_linechart_titel": "Verloop actieve clusters over tijd",
-    "cluster_linechart_toelichting": "---",
     "metadata": {
       "title": "Positief geteste mensen in {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
       "description": "Overzicht van het aantal mensen in de veiligheidsregio {{safetyRegionName}} die positief getest zijn en COVID-19 hebben."
