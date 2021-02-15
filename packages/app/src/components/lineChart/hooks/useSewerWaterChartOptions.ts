@@ -310,10 +310,10 @@ export function useSewerWaterChartOptions<
 
             return `<strong>${formatDateFromSeconds(
               start,
-              'short'
+              'day-month'
             )} - ${formatDateFromSeconds(
               end,
-              'short'
+              'day-month'
             )}:</strong> ${formatNumber(this.y)}<br/>(${this.series.name})`;
           } else if (tooltipType === 'rwzi') {
             return `<strong>${formatDateFromSeconds(this.point.x)}:</strong> ${

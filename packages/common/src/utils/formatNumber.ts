@@ -5,7 +5,7 @@ const locale = getLocale();
 const NumberFormat = new Intl.NumberFormat(locale);
 
 export function formatNumber(
-  value: number | string | undefined | null
+  value: number | string | undefined | null | { valueOf(): number }
 ): string {
   if (typeof value === 'undefined' || value === null) return '-';
 

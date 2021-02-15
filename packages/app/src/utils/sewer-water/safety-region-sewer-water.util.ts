@@ -93,7 +93,7 @@ export function getSewerWaterBarChartData(
         color: colors.data.primary,
         tooltip: `${formatDateFromSeconds(
           data.sewer.last_value.date_end_unix,
-          'short'
+          'day-month'
         )}: ${formatNumber(data.sewer.last_value.average)}`,
       },
       ...sortedInstallations.map((installation) => ({
@@ -102,7 +102,7 @@ export function getSewerWaterBarChartData(
         color: '#C1C1C1',
         tooltip: `${formatDateFromSeconds(
           installation.last_value.date_unix,
-          'short'
+          'day-month'
         )}: ${formatNumber(installation.last_value.rna_normalized)}`,
       })),
     ],

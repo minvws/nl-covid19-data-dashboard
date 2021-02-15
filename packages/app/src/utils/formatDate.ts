@@ -39,11 +39,11 @@ type formatStyle =
   | 'time'
   | 'long'
   | 'medium'
-  | 'short'
   | 'relative'
   | 'iso'
   | 'axis'
-  | 'weekday-medium';
+  | 'weekday-medium'
+  | 'day-month';
 
 const Time = new Intl.DateTimeFormat(locale, {
   timeStyle: 'short',
@@ -111,23 +111,65 @@ export function formatDateFromMilliseconds(
   return formatDate(new Date(milliseconds), style);
 }
 
-export function formatDate(date: Date, style?: formatStyle) {
-  if (style === 'time') return Time.format(date); // '09:24'
-  if (style === 'iso') return new Date(date).toISOString(); // '2020-07-23T10:01:16.000Z'
-  if (style === 'long') return Long.format(date); // '23 juli 2020 om 12:01'
-  if (style === 'medium') return Medium.format(date); // '23 juli 2020'
-  if (style === 'axis') return `${Day.format(date)} ${MonthShort.format(date)}`; // '23 jul.'
-  if (style === 'weekday-medium') return WeekdayMedium.format(date);
+/**
+ * Improve date formatting performance in safari, in which it could easily
+ * take more than 20ms per function invocation.
+ */
+const formatCache: Record<string, string> = {};
 
-  /* Relative date formatting is disabled for server-side rendering */
-  if (style === 'relative' && typeof window !== 'undefined') {
-    if (isToday(date)) return siteText.utils.date_today;
-    if (isYesterday(date)) return siteText.utils.date_yesterday;
-    if (isDayBeforeYesterday(date))
-      return siteText.utils.date_day_before_yesterday;
+export function formatDate(
+  dateOrTimestamp: Date | number,
+  style: formatStyle = 'day-month'
+) {
+  const date =
+    dateOrTimestamp instanceof Date
+      ? dateOrTimestamp
+      : new Date(dateOrTimestamp as number);
+
+  const cacheKey = `${date.getTime()}-${style}`;
+  const dateCached = formatCache[cacheKey];
+
+  if (dateCached) return dateCached;
+
+  let dateFormatted: string;
+
+  switch (style) {
+    case 'time': // '09:24'
+      dateFormatted = Time.format(date);
+      break;
+    case 'iso': // '2020-07-23T10:01:16.000Z'
+      dateFormatted = new Date(date).toISOString();
+      break;
+    case 'long': // '23 juli 2020 om 12:01'
+      dateFormatted = Long.format(date);
+      break;
+    case 'medium': // '23 juli 2020'
+      dateFormatted = Medium.format(date);
+      break;
+    case 'axis': // '23 jul.'
+      dateFormatted = `${Day.format(date)} ${MonthShort.format(date)}`;
+      break;
+    case 'weekday-medium':
+      dateFormatted = WeekdayMedium.format(date);
+      break;
+    case 'relative':
+      dateFormatted = siteText.utils.date_day_before_yesterday;
+      dateFormatted = isToday(date)
+        ? siteText.utils.date_today
+        : isYesterday(date)
+        ? siteText.utils.date_yesterday
+        : isDayBeforeYesterday(date)
+        ? siteText.utils.date_day_before_yesterday
+        : DayMonth.format(date);
+      break;
+    default:
+      dateFormatted = DayMonth.format(date);
+      break;
   }
 
-  return DayMonth.format(date);
+  formatCache[cacheKey] = dateFormatted;
+
+  return dateFormatted;
 }
 
 export function formatDateFromString(

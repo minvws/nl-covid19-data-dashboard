@@ -137,10 +137,10 @@ function getOptions(
 
           return `<strong>${formatDateFromSeconds(
             originalData.week.start,
-            'short'
+            'day-month'
           )} - ${formatDateFromSeconds(
             originalData.week.end,
-            'short'
+            'day-month'
           )}:</strong> ${formatNumber(this.y)}`;
         },
     },
