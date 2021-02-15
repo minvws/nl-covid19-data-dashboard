@@ -238,20 +238,6 @@
       "80 to 90",
       "90+"
     ],
-    "cluster_datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "cluster_bron": {
-      "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
-      "text": "RIVM"
-    },
-    "cluster_titel": "Clusters of confirmed cases",
-    "cluster_toelichting": "---",
-    "cluster_barscale_titel": "Number of active clusters",
-    "cluster_barscale_toelichting": "---",
-    "cluster_barscale_screenreader_text": "{{value}} active clusters.",
-    "cluster_gemiddelde_titel": "Average size of active clusters",
-    "cluster_gemiddelde_toelichting": "---.",
-    "cluster_linechart_titel": "Progression of active clusters over time",
-    "cluster_linechart_toelichting": "---",
     "chloropleth_legenda": {
       "titel": "Number per 100.000 inhabitants",
       "geen_meldingen": "No confirmed cases"
@@ -777,21 +763,6 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
     },
-    "cluster_datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "cluster_bron": {
-      "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
-      "text": "RIVM",
-      "dowload": ""
-    },
-    "cluster_titel": "Clusters of confirmed cases",
-    "cluster_toelichting": "---",
-    "cluster_barscale_titel": "Number of active clusters",
-    "cluster_barscale_toelichting": "---",
-    "cluster_barscale_screenreader_text": "{{value}} active clusters.",
-    "cluster_gemiddelde_titel": "Average size of active clusters",
-    "cluster_gemiddelde_toelichting": "---.",
-    "cluster_linechart_titel": "Progression of active clusters over time",
-    "cluster_linechart_toelichting": "---",
     "metadata": {
       "title": "Confirmed cases in {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
       "description": "Overview of confirmed cases in safety region {{safetyRegionName}}."
