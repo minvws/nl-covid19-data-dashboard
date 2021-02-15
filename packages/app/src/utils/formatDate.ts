@@ -1,5 +1,3 @@
-require(`@formatjs/intl-datetimeformat/locale-data/${process.env.NEXT_PUBLIC_LOCALE}`);
-
 import { isSameDay, isToday, isYesterday, subDays } from 'date-fns';
 import siteText from '~/locale/index';
 import { getLocale } from '~/utils/getLocale';
