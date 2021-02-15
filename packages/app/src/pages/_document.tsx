@@ -51,13 +51,10 @@ class MyDocument extends Document {
            * need to load the polyfills.
            *
            * IMPORTANT:
-           * Let's use this polyfill just for relative date formatting.
-           * Other polyfills should still be imported in _app.ts!
+           * Only use this for IE11!
+           * https://polyfill.io/v3/polyfill.min.js?features=Intl.~locale.en,Intl.~locale.nl,Date.now,Date.prototype.toISOString,Intl.DateTimeFormat,Intl.DateTimeFormat.prototype.formatToParts,Intl.getCanonicalLocales&flags=always
            * */}
-          <script
-            noModule
-            src="https://polyfill.io/v3/polyfill.js?features=Intl.~locale.en,Intl.~locale.nl%2CDate.now%2CDate.prototype.toISOString%2CIntl.DateTimeFormat%2CIntl.DateTimeFormat.prototype.formatToParts%2CIntl.getCanonicalLocales"
-          />
+          <script noModule src="/ie11.js" />
           <script src="/init.js" async />
         </Head>
         <body>
