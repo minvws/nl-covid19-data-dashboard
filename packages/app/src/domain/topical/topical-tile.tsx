@@ -2,12 +2,12 @@ import { css } from '@styled-system/css';
 import styled from 'styled-components';
 import { asResponsiveArray } from '~/style/utils';
 import { space, SpaceProps } from 'styled-system';
-import shouldForwardProp from '@styled-system/should-forward-prop';
+import { StyledShouldForwardProp } from '~/utils/styledShouldForwardProp';
 
 type TopicalTileProps = SpaceProps;
 
 export const TopicalTile = styled.article.withConfig({
-  shouldForwardProp: shouldForwardProp as any,
+  shouldForwardProp: StyledShouldForwardProp,
 })<TopicalTileProps>(
   css({
     display: 'flex',

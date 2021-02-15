@@ -20,7 +20,7 @@ import {
   TypographyProps,
 } from 'styled-system';
 import { spacing, SpacingProps } from '~/style/functions/spacing';
-import shouldForwardProp from '@styled-system/should-forward-prop';
+import { StyledShouldForwardProp } from '~/utils/styledShouldForwardProp';
 
 export type BoxProps = SpaceProps &
   SpacingProps &
@@ -40,7 +40,7 @@ export type BoxProps = SpaceProps &
  * See https://styled-system.com/guides/build-a-box
  */
 export const Box = styled.div.withConfig({
-  shouldForwardProp: shouldForwardProp as any,
+  shouldForwardProp: StyledShouldForwardProp,
 })<BoxProps>(
   { boxSizing: 'border-box', minWidth: 0 },
   space,
