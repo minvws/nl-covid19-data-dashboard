@@ -8,7 +8,6 @@ RUN yarn
 ARG SANITY_AUTH_TOKEN
 ARG SANITY_DATASET
 ARG SANITY_ASSETS_CACHE_DIR
-RUN yarn workspace @corona-dashboard/common build
 RUN yarn workspace @corona-dashboard/cli validate-json
 # We need to have an ENV var switch to only enable this in production, because
 # BE does not guarantee consistent data in develop.
@@ -27,7 +26,6 @@ COPY --from=react-build-base /app/node_modules /app/node_modules
 COPY --from=react-build-base /app/packages/app/ /app/packages/app/node_modules
 COPY --from=react-build-base /app/packages/app/public/ /app/packages/app/public/
 COPY . .
-RUN yarn workspace @corona-dashboard/common build
 RUN yarn workspace @corona-dashboard/app build
 RUN yarn workspace @corona-dashboard/app export
 
@@ -41,7 +39,6 @@ COPY --from=react-build-base /app/node_modules /app/node_modules
 COPY --from=react-build-base /app/packages/app/ /app/packages/app/node_modules
 COPY --from=react-build-base /app/packages/app/public/ /app/packages/app/public/
 COPY . .
-RUN yarn workspace @corona-dashboard/common build
 RUN yarn workspace @corona-dashboard/app build
 RUN yarn workspace @corona-dashboard/app export
 
