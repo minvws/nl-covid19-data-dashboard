@@ -50,7 +50,7 @@ const MetricMenuItem = styled.li(
 
 interface MetricMenuItemLinkProps {
   title: string;
-  icon: ReactNode;
+  icon?: ReactNode;
   href?: Url;
   subtitle?: string;
   children?: ReactNode;
@@ -68,7 +68,11 @@ export function MetricMenuItemLink({
   const content = (
     <>
       <TitleWithIcon icon={icon} title={title} subtitle={subtitle} />
-      {children && <ChildrenWrapper>{children}</ChildrenWrapper>}
+      {children && (
+        <Box mx={icon ? '2.5em' : 0}>
+          <ChildrenWrapper>{children}</ChildrenWrapper>
+        </Box>
+      )}
     </>
   );
 
@@ -104,8 +108,6 @@ function isActivePath(router: NextRouter, href: Url) {
 
 const ChildrenWrapper = styled.div(
   css({
-    margin: '0 2.5rem',
-
     '& > div:not(:first-child)': {
       height: '3.5rem',
       marginTop: '-1.25em',

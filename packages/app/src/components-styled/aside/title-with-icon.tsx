@@ -27,7 +27,7 @@ export function TitleWithIcon(props: TitleWithIconProps) {
       alignItems="center"
       mb={-2}
     >
-      <Icon>{icon}</Icon>
+      {icon && <Icon>{icon}</Icon>}
 
       <Box>
         <Heading

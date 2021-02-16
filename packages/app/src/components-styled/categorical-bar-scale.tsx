@@ -44,13 +44,17 @@ export function CategoricalBarScale({
   return (
     <>
       <Box position="relative" width="100%" display="flex" my={4}>
-        {barPieces.map((category) => (
+        {barPieces.map((category, index) => (
           <Box
             key={`bar-${category.name}`}
             height={12}
             bg={category.color}
             width={`${(category.width / maxValue) * 100}%`}
             position="relative"
+            borderTopLeftRadius={index === 0 ? '3px' : 0}
+            borderBottomLeftRadius={index === 0 ? '3px' : 0}
+            borderTopRightRadius={category.isLast ? '3px' : 0}
+            borderBottomRightRadius={category.isLast ? '3px' : 0}
           >
             <Box
               position="absolute"

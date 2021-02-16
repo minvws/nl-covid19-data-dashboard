@@ -7,10 +7,12 @@ import { regionThresholds } from '~/components/choropleth/region-thresholds';
 
 export type EscalationLevelProps = {
   escalationLevel: EscalationLevel;
-  iconSize?: 'small' | 'normal' | 'large';
+  iconSize?: 'small' | 'normal';
   fontSize?: number;
   useLevelColor?: boolean;
 };
+
+type EscalationLevelString = '1' | '2' | '3' | '4';
 
 export function EscalationLevelInfoLabel({
   escalationLevel,
@@ -19,7 +21,8 @@ export function EscalationLevelInfoLabel({
   useLevelColor = false,
 }: EscalationLevelProps) {
   const color = useLevelColor
-    ? regionThresholds.escalation_levels.escalation_level[escalationLevel].color
+    ? regionThresholds.escalation_levels.escalation_level[escalationLevel - 1]
+        .color
     : 'inherit';
   return (
     <Box display="flex" alignItems="center" justifyContent="flex-start">
@@ -31,7 +34,11 @@ export function EscalationLevelInfoLabel({
         fontSize={fontSize}
         color={color}
       >
-        {siteText.escalatie_niveau.types[escalationLevel].titel}
+        {
+          siteText.escalatie_niveau.types[
+            escalationLevel.toString() as EscalationLevelString
+          ].titel
+        }
       </Text>
     </Box>
   );

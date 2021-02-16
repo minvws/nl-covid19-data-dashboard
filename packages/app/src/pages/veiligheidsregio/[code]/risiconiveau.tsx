@@ -1,4 +1,3 @@
-import Maatregelen from '~/assets/maatregelen.svg';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
@@ -14,7 +13,7 @@ import { SEOHead } from '~/components-styled/seo-head';
 import { Tile } from '~/components-styled/tile';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { Heading, Text } from '~/components-styled/typography';
+import { Heading, InlineText, Text } from '~/components-styled/typography';
 import {
   hospitalAdmissionsEscalationThresholds,
   positiveTestedEscalationThresholds,
@@ -30,7 +29,7 @@ import {
   getText,
   getVrData,
 } from '~/static-props/get-data';
-import theme, { colors } from '~/style/theme';
+import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 export { getStaticPaths } from '~/static-paths/vr';
@@ -65,18 +64,20 @@ const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
       <TileList>
         <ContentHeader
           category={siteText.veiligheidsregio_layout.headings.inschaling}
-          icon={<Maatregelen fill={theme.colors.restrictions} />}
           title={replaceVariablesInText(text.titel, {
             safetyRegionName,
           })}
-          subtitle={siteText.veiligheidsregio_layout.headings.inschaling}
+          subtitle={text.pagina_toelichting}
           reference={text.reference}
           metadata={{
             datumsText: text.datums,
             dateOrRange: hospital_nice_sum.last_value.date_end_unix,
             dateOfInsertionUnix:
               hospital_nice_sum.last_value.date_of_insertion_unix,
-            dataSources: [text.bronnen.rivm],
+            dataSources: [
+              text.bronnen.rivm_positieve_testen,
+              text.bronnen.rivm_ziekenhuisopnames,
+            ],
           }}
         />
 
@@ -85,16 +86,20 @@ const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
             {text.current_escalation_level}
           </Heading>
 
-          <Box display="flex" spacing={3} spacingHorizontal>
+          <Box
+            display={{ _: 'block', sm: 'flex' }}
+            spacing={3}
+            spacingHorizontal
+          >
             <Box flex="0 0 10rem">
               <EscalationLevelInfoLabel
                 escalationLevel={currentEscalationLevel}
-                iconSize={'large'}
                 fontSize={3}
                 useLevelColor
               />
             </Box>
-            <Box>
+            {/* alignment with baseline of EscalationLevelInfoLabel */}
+            <Box mt={{ sm: '-0.55rem' }}>
               <Text>
                 {
                   siteText.escalatie_niveau.types[currentEscalationLevel]
@@ -113,22 +118,26 @@ const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
                 tested_overall_sum.last_value.date_start_unix,
                 tested_overall_sum.last_value.date_end_unix,
               ],
-              source: text.bronnen.rivm,
+              source: text.bronnen.rivm_positieve_testen,
             }}
           >
-            <KpiValue
-              data-cy="infected"
-              absolute={tested_overall_sum.last_value.infected_per_100k}
-              valueAnnotation={text.positieve_testen.value_annotation}
-              color={
-                colors.data.scale.magenta[
-                  getCategory(
-                    positiveTestedEscalationThresholds,
-                    tested_overall_sum.last_value.infected_per_100k
-                  )
-                ]
-              }
-            />
+            <Box spacing={2} spacingHorizontal>
+              <Box display="inline-block">
+                <KpiValue
+                  data-cy="infected"
+                  absolute={tested_overall_sum.last_value.infected_per_100k}
+                  color={
+                    colors.data.scale.magenta[
+                      getCategory(
+                        positiveTestedEscalationThresholds,
+                        tested_overall_sum.last_value.infected_per_100k
+                      ) - 1
+                    ]
+                  }
+                />
+              </Box>
+              <InlineText>{text.positieve_testen.value_annotation}</InlineText>
+            </Box>
 
             <CategoricalBarScale
               categories={positiveTestedEscalationThresholds}
@@ -150,22 +159,26 @@ const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
                 hospital_nice_sum.last_value.date_start_unix,
                 hospital_nice_sum.last_value.date_end_unix,
               ],
-              source: text.bronnen.rivm,
+              source: text.bronnen.rivm_ziekenhuisopnames,
             }}
           >
-            <KpiValue
-              data-cy="infected"
-              absolute={hospital_nice_sum.last_value.admissions_per_1m}
-              valueAnnotation={text.ziekenhuisopnames.value_annotation}
-              color={
-                colors.data.scale.magenta[
-                  getCategory(
-                    hospitalAdmissionsEscalationThresholds,
-                    hospital_nice_sum.last_value.admissions_per_1m
-                  )
-                ]
-              }
-            />
+            <Box spacing={2} spacingHorizontal>
+              <Box display="inline-block">
+                <KpiValue
+                  data-cy="infected"
+                  absolute={hospital_nice_sum.last_value.admissions_per_1m}
+                  color={
+                    colors.data.scale.magenta[
+                      getCategory(
+                        hospitalAdmissionsEscalationThresholds,
+                        hospital_nice_sum.last_value.admissions_per_1m
+                      ) - 1
+                    ]
+                  }
+                />
+              </Box>
+              <InlineText>{text.ziekenhuisopnames.value_annotation}</InlineText>
+            </Box>
 
             <CategoricalBarScale
               categories={hospitalAdmissionsEscalationThresholds}

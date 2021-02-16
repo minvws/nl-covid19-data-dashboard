@@ -11,7 +11,7 @@ const escalationThresholds =
 
 interface EscalationLevelIconProps {
   level: EscalationLevel;
-  size?: 'small' | 'normal' | 'large';
+  size?: 'small' | 'normal';
 }
 
 export function EscalationLevelIcon({
@@ -55,22 +55,16 @@ const StyledEscalationLevelIcon = styled.div<{
   })
 );
 
-function getOuterDimension(size: 'small' | 'normal' | 'large') {
+function getOuterDimension(size: 'small' | 'normal') {
   if (size === 'small') {
-    return asResponsiveArray({ _: 20, sm: 24 });
-  }
-  if (size === 'large') {
-    return asResponsiveArray({ _: 32, sm: 45 });
+    return asResponsiveArray({ _: 20, sm: 20 });
   }
   return asResponsiveArray({ _: 24, sm: 32 });
 }
 
-function getFontSize(size: 'small' | 'normal' | 'large') {
+function getFontSize(size: 'small' | 'normal') {
   if (size === 'small') {
     return 14;
-  }
-  if (size === 'large') {
-    return asResponsiveArray({ _: 20, sm: 28 });
   }
   return asResponsiveArray({ _: 14, sm: 20 });
 }
