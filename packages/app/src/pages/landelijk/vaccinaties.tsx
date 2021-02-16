@@ -68,6 +68,15 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
     text.data.kpi_total.first_tab_title
   );
 
+  const vaccineDeliveryValues = data.vaccine_delivery.values;
+  const vaccineDeliveryEstimateValues = data.vaccine_delivery_estimate.values;
+  const vaccineAdministeredValues = data.vaccine_administered.values;
+  const vaccineAdministeredEstimateValues =
+    data.vaccine_administered_estimate.values;
+
+  vaccineDeliveryValues.push(vaccineDeliveryEstimateValues[0]);
+  vaccineAdministeredValues.push(vaccineAdministeredEstimateValues[0]);
+
   return (
     <>
       <SEOHead
@@ -258,7 +267,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                   }}
                   trends={[
                     {
-                      values: data.vaccine_delivery.values,
+                      values: vaccineDeliveryValues,
                       displays: [
                         {
                           metricProperty: 'total',
@@ -268,12 +277,12 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                       ],
                     },
                     {
-                      values: data.vaccine_delivery_estimate.values,
+                      values: vaccineDeliveryEstimateValues,
                       displays: [
                         {
                           metricProperty: 'total',
                           style: 'dashed',
-                          legendLabel: 'Geleverd',
+                          legendLabel: 'Geleverd verwacht',
                           color: '#F8E435',
                         },
                       ],
@@ -281,7 +290,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                   ]}
                   areas={[
                     {
-                      values: data.vaccine_administered.values,
+                      values: vaccineAdministeredValues,
                       displays: Object.keys(colors.data.vaccines).map(
                         (key) => ({
                           metricProperty: key as any,
@@ -291,7 +300,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                       ),
                     },
                     {
-                      values: data.vaccine_administered_estimate.values,
+                      values: vaccineAdministeredEstimateValues,
                       displays: Object.keys(colors.data.vaccines).map(
                         (key) => ({
                           metricProperty: key as any,
@@ -450,8 +459,7 @@ function formatVaccinationsTooltip(values: HoverPoint<TooltipValue>[]) {
         </Text>
         {values.map((value) => (
           <Box key={`${value.label}-${value.data.__value}`}>
-            {value.label}:{' '}
-            {formatNumber((value.data as any)[value.label as string])}
+            {value.label}: {formatValue(value)}
           </Box>
         ))}
       </Box>
@@ -461,6 +469,14 @@ function formatVaccinationsTooltip(values: HoverPoint<TooltipValue>[]) {
   throw new Error(
     `Invalid value passed to format tooltip function: ${JSON.stringify(values)}`
   );
+}
+
+function formatValue(value: HoverPoint<TooltipValue>) {
+  const data: any = value.data;
+  if (data.total) {
+    return formatNumber(data.total);
+  }
+  return formatNumber(data[value.label as string]);
 }
 
 export default VaccinationPage;

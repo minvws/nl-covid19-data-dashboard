@@ -72,6 +72,13 @@ function createSortNearest<T extends TimestampedTrendValue>(point: Point) {
     calculateDistance(left, point) - calculateDistance(right, point);
 }
 
+function createSortNearestHorizontal<T extends TimestampedTrendValue>(
+  point: Point
+) {
+  return (left: HoverPoint<T>, right: HoverPoint<T>) =>
+    Math.abs(point.x - left.x) - Math.abs(point.x - right.x);
+}
+
 export function useChartHover<
   T extends TimestampedTrendValue,
   K extends TimestampedTrendValue
@@ -104,6 +111,7 @@ export function useChartHover<
       }
 
       const sortByNearest = createSortNearest<T | K>(point);
+      const sortByNearestHorizontal = createSortNearestHorizontal<T | K>(point);
 
       // First gather all the trends and areas that are closest to the current mouse pointer
       const trendHoverPoints = trends
@@ -116,11 +124,11 @@ export function useChartHover<
         .filter(isDefined)
         .map<HoverPoint<K>>(createHoverPoint(xScale, yScale));
 
-      let nearestAreas = [...areaHoverPoints].sort(sortByNearest);
-      let nearestTrends = [...trendHoverPoints].sort(sortByNearest);
+      let nearestAreas = [...areaHoverPoints].sort(sortByNearestHorizontal);
+      let nearestTrends = [...trendHoverPoints].sort(sortByNearestHorizontal);
 
       // Filter the datasets that have the exact same date value as the nearest point.
-      // (Since we can draw trends that are adjacent to each other)
+      // (Since we can draw trends that are adjacent to each other in time)
       nearestTrends = nearestTrends.filter(
         (x) => x.data.__date === nearestTrends[0].data.__date
       );
