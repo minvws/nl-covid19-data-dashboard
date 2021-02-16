@@ -125,7 +125,7 @@ export function ContentHeader(props: ContentHeaderProps) {
 
   return (
     <Header id={id} skipLinkAnchor={skipLinkAnchor} hasIcon={!!icon}>
-      <Box px={[4, null, 0]} spacing={1}>
+      <Box px={[3, null, 0]} spacing={1}>
         {category && (
           <CategoryHeading level={1} hide={hideCategory}>
             {category}
