@@ -6,11 +6,15 @@ import { AreaStack, Bar } from '@visx/shape';
 import { ScaleLinear, ScaleTime } from 'd3-scale';
 import { MouseEvent, ReactNode, TouchEvent } from 'react';
 import styled from 'styled-components';
+import { LegendShape } from '~/components-styled/legenda';
+import {
+  ChartBounds,
+  ChartPadding,
+  Trend,
+} from '~/components-styled/line-chart/components';
+import { AnyTickFormatter } from '~/components-styled/line-chart/components/chart-axes';
+import { TrendValue } from '~/components-styled/line-chart/logic';
 import { colors } from '~/style/theme';
-import { LegendShape } from '../legenda';
-import { ChartBounds, ChartPadding, Trend } from '../line-chart/components';
-import { AnyTickFormatter } from '../line-chart/components/chart-axes';
-import { TrendValue } from '../line-chart/logic';
 
 export type TrendConfig<T> = {
   values: T[];
@@ -165,7 +169,7 @@ export function AreaChartGraph<T extends TrendValue, K extends TrendValue>(
               {({ stacks, path }) =>
                 stacks.map((stack) => (
                   <path
-                    key={`area-chart-stack-${stack.key}`}
+                    key={`area-chart-stack-${stack.key}-${index}`}
                     d={path(stack) || ''}
                     stroke="transparent"
                     fill={getFill(area.displays, stack.key)}

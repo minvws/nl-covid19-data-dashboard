@@ -10,9 +10,91 @@ import {
 import { BisectFunction } from '~/components-styled/line-chart/hooks/use-bisect';
 import { TimestampedTrendValue } from '~/components-styled/line-chart/logic';
 import { calculateDistance } from '~/utils/calculate-distance';
-import { AreaConfig, TrendConfig } from '../area-chart-graph';
+import { AreaConfig, TrendConfig } from '../components/area-chart-graph';
 
-function createTrendValue<T extends TimestampedTrendValue>(
+export function useChartHover<
+  T extends TimestampedTrendValue,
+  K extends TimestampedTrendValue
+>(
+  toggleHoverElements: (
+    hide: boolean,
+    hoverPoints?: HoverPoint<T | K>[],
+    nearestPoint?: HoverPoint<T | K>
+  ) => void,
+  trends: TrendConfig<T>[],
+  areas: AreaConfig<K>[],
+  bisect: BisectFunction
+) {
+  return useCallback(
+    (
+      event: TouchEvent<SVGElement> | MouseEvent<SVGElement>,
+      scales: ChartScales
+    ) => {
+      if (!(trends.length + areas.length) || event.type === 'mouseleave') {
+        toggleHoverElements(true);
+        return;
+      }
+
+      const { xScale, yScale } = scales;
+
+      const point = localPoint(event);
+
+      if (!point) {
+        return;
+      }
+
+      const sortByNearest = createSortNearest<T | K>(point);
+      const sortByNearestHorizontal = createSortNearestHorizontal<T | K>(point);
+
+      // First gather all the trends and areas that are closest to the current mouse pointer
+      const trendHoverPoints = trends
+        .map(calculateNearestTrend(bisect, point, xScale))
+        .filter(isDefined)
+        .map<HoverPoint<T>>(createHoverPoint(xScale, yScale));
+      const areaHoverPoints = areas
+        .map(calculateNearestArea(bisect, point, xScale))
+        .flat()
+        .filter(isDefined)
+        .map<HoverPoint<K>>(createHoverPoint(xScale, yScale));
+
+      let nearestAreas = [...areaHoverPoints].sort(sortByNearestHorizontal);
+      let nearestTrends = [...trendHoverPoints].sort(sortByNearestHorizontal);
+
+      // Filter the datasets that have the exact same date value as the nearest point.
+      // (Since we can draw trends that are adjacent to each other in time)
+      nearestTrends = nearestTrends.filter(
+        (x) => x.data.__date === nearestTrends[0].data.__date
+      );
+      nearestAreas = nearestAreas.filter(
+        (x) => x.data.__date === nearestAreas[0].data.__date
+      );
+
+      // of all the given points, trends and areas, determine which one is closest to the pointer
+      const nearest =
+        nearestTrends.length && nearestAreas.length
+          ? [nearestTrends[0], nearestAreas[0]].sort(sortByNearest)
+          : nearestTrends.length
+          ? nearestTrends
+          : nearestAreas;
+
+      toggleHoverElements(
+        false,
+        [
+          ...trendHoverPoints.filter(
+            (x) => x.data.__date === nearestTrends[0].data.__date
+          ),
+          ...areaHoverPoints.filter(
+            (x) => x.data.__date === nearestAreas[0].data.__date
+          ),
+        ],
+        nearest[0]
+      );
+    },
+    [bisect, trends, areas, toggleHoverElements]
+  );
+}
+
+function calculateNearestTrend<T extends TimestampedTrendValue>(
   bisect: BisectFunction,
   point: Point,
   xScale: ScaleTime<number, number>
@@ -29,7 +111,7 @@ function createTrendValue<T extends TimestampedTrendValue>(
   };
 }
 
-function createAreaValue<T extends TimestampedTrendValue>(
+function calculateNearestArea<T extends TimestampedTrendValue>(
   bisect: BisectFunction,
   point: Point,
   xScale: ScaleTime<number, number>
@@ -78,86 +160,4 @@ function createSortNearestHorizontal<T extends TimestampedTrendValue>(
   return (left: HoverPoint<T>, right: HoverPoint<T>) => {
     return Math.abs(point.x - left.x) - Math.abs(point.x - right.x);
   };
-}
-
-export function useChartHover<
-  T extends TimestampedTrendValue,
-  K extends TimestampedTrendValue
->(
-  toggleHoverElements: (
-    hide: boolean,
-    hoverPoints?: HoverPoint<T | K>[],
-    nearestPoint?: HoverPoint<T | K>
-  ) => void,
-  trends: TrendConfig<T>[],
-  areas: AreaConfig<K>[],
-  bisect: BisectFunction
-) {
-  return useCallback(
-    (
-      event: TouchEvent<SVGElement> | MouseEvent<SVGElement>,
-      scales: ChartScales
-    ) => {
-      if (!(trends.length + areas.length) || event.type === 'mouseleave') {
-        toggleHoverElements(true);
-        return;
-      }
-
-      const { xScale, yScale } = scales;
-
-      const point = localPoint(event);
-
-      if (!point) {
-        return;
-      }
-
-      const sortByNearest = createSortNearest<T | K>(point);
-      const sortByNearestHorizontal = createSortNearestHorizontal<T | K>(point);
-
-      // First gather all the trends and areas that are closest to the current mouse pointer
-      const trendHoverPoints = trends
-        .map(createTrendValue(bisect, point, xScale))
-        .filter(isDefined)
-        .map<HoverPoint<T>>(createHoverPoint(xScale, yScale));
-      const areaHoverPoints = areas
-        .map(createAreaValue(bisect, point, xScale))
-        .flat()
-        .filter(isDefined)
-        .map<HoverPoint<K>>(createHoverPoint(xScale, yScale));
-
-      let nearestAreas = [...areaHoverPoints].sort(sortByNearestHorizontal);
-      let nearestTrends = [...trendHoverPoints].sort(sortByNearestHorizontal);
-
-      // Filter the datasets that have the exact same date value as the nearest point.
-      // (Since we can draw trends that are adjacent to each other in time)
-      nearestTrends = nearestTrends.filter(
-        (x) => x.data.__date === nearestTrends[0].data.__date
-      );
-      nearestAreas = nearestAreas.filter(
-        (x) => x.data.__date === nearestAreas[0].data.__date
-      );
-
-      // of all the given points, trends and areas, determine which one is closest to the pointer
-      const nearest =
-        nearestTrends.length && nearestAreas.length
-          ? [nearestTrends[0], nearestAreas[0]].sort(sortByNearest)
-          : nearestTrends.length
-          ? nearestTrends
-          : nearestAreas;
-
-      toggleHoverElements(
-        false,
-        [
-          ...trendHoverPoints.filter(
-            (x) => x.data.__date === nearestTrends[0].data.__date
-          ),
-          ...areaHoverPoints.filter(
-            (x) => x.data.__date === nearestAreas[0].data.__date
-          ),
-        ],
-        nearest[0]
-      );
-    },
-    [bisect, trends, areas, toggleHoverElements]
-  );
 }

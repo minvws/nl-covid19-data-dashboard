@@ -34,7 +34,11 @@ import { LegendShape } from '../legenda';
 import { useBisect } from '../line-chart/hooks/use-bisect';
 import { useTooltip } from '../line-chart/hooks/use-tooltip';
 import { TimestampedTrendValue, TrendValue } from '../line-chart/logic';
-import { AreaChartGraph, AreaConfig, AreaDisplay } from './area-chart-graph';
+import {
+  AreaChartGraph,
+  AreaConfig,
+  AreaDisplay,
+} from './components/area-chart-graph';
 import { Tooltip } from './components/tooltip';
 import { useAreaConfigs } from './hooks/use-area-configs';
 import { useChartHover } from './hooks/use-chart-hover';
@@ -298,7 +302,7 @@ function renderDivider(
 
   return dates.map((date) => {
     const x = xScale(date);
-    return x !== undefined ? (
+    return x === undefined ? null : (
       <Group key={date.toISOString()}>
         <Text
           fontSize={theme.fontSizes[1]}
@@ -326,7 +330,7 @@ function renderDivider(
           style={{ stroke: divider.color, strokeWidth: 1 }}
         />
       </Group>
-    ) : null;
+    );
   });
 }
 

@@ -7,7 +7,7 @@ import {
 import { getValuesInTimeframe } from '~/components-styled/stacked-chart/logic';
 import { TimeframeOption } from '~/utils/timeframe';
 import { TrendDescriptor } from '../area-chart';
-import { TrendConfig } from '../area-chart-graph';
+import { TrendConfig } from '../components/area-chart-graph';
 
 export function useTrendConfigs<T extends TimestampedValue>(
   trendDescriptors: TrendDescriptor<T>[],

@@ -13,7 +13,7 @@ import { timestampToDate } from '~/components-styled/stacked-chart/logic';
 import { TimeframeOption } from '~/utils/timeframe';
 import { createUniqueId } from '~/utils/useUniqueId';
 import { AreaDescriptor } from '../area-chart';
-import { AreaConfig } from '../area-chart-graph';
+import { AreaConfig } from '../components/area-chart-graph';
 
 export function useAreaConfigs<T extends TimestampedValue>(
   areaDescriptors: AreaDescriptor<T>[],
