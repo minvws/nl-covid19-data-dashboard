@@ -117,8 +117,8 @@ export function getImageProps<T extends ImageBlock>(
     if (sizes) {
       srcSet = sizes
         .map((srcSetSize) => {
-          const [breakpoint, size] = srcSetSize;
-          return `${getImageSrc(asset, size)} ${breakpoint}w`;
+          const [viewport, size] = srcSetSize;
+          return `${getImageSrc(asset, size)} ${viewport}w`;
         })
         .join(', ');
     } else {
