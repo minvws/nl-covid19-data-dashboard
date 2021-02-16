@@ -645,7 +645,8 @@
     "gisteren": "Gisteren",
     "vandaag": "Vandaag",
     "read_more": "Lees meer",
-    "absolute_date_template": "op {{date}}"
+    "absolute_date_template": "op {{date}}",
+    "inwoners": "inwoners"
   },
   "seoHead": {
     "default_description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
@@ -752,13 +753,7 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": [
-      "0 tot 20",
-      "20 tot 40",
-      "40 tot 60",
-      "60 tot 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -806,6 +801,8 @@
     "graph_daily_label_text_rwzi": "Meetwaarden locatie ({{name}})",
     "graph_selected_rwzi_placeholder": "Selecteer locatie",
     "graph_range_description": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners over tijd",
+    "display_outliers": "Toon uitschieters",
+    "hide_outliers": "Verberg uitschieters",
     "titel_kpi": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners",
     "total_installation_count_titel": "Aantal meetlocaties",
     "total_installation_count_description": "Wekelijks aantal rioolwaterzuiveringsinstallaties die minimaal één keer een meting hebben gerapporteerd. Het weekgemiddelde wordt berekend door het gemiddelde te nemen van alle metingen op deze locaties. Per week kan dit aantal variëren omdat niet alle metingen altijd lukken. Let op: door de vrieskou is het niet mogelijk op alle locaties goede metingen van het rioolwater te doen. Dit heeft deze week invloed op de rioolwatercijfers.",
@@ -940,6 +937,8 @@
     "graph_daily_label_text_rwzi": "Meetwaarden locatie ({{name}})",
     "graph_selected_rwzi_placeholder": "Selecteer locatie",
     "graph_range_description": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners over tijd",
+    "display_outliers": "Toon uitschieters",
+    "hide_outliers": "Verberg uitschieters",
     "reference": {
       "href": "/verantwoording#rioolwater",
       "text": "Lees meer over het onderzoek naar het coronavirus in rioolwater in de cijferverantwoording."
@@ -2131,11 +2130,7 @@
       "kpi_expected_page_additions": {
         "title": "Verwachte toevoegingen aan deze pagina",
         "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer:",
-        "additions": [
-          "Vaccinatiebereidheid",
-          "Vaccinatiegraad",
-          ""
-        ]
+        "additions": ["Vaccinatiebereidheid", "Vaccinatiegraad", ""]
       }
     },
     "section_vaccinations_more_information": {
