@@ -15,7 +15,7 @@ interface EscalationLevelIconProps {
 
 export function EscalationLevelIcon({
   level,
-  isSmall = false,
+  isSmall,
 }: EscalationLevelIconProps) {
   /* Colors are in a 0-indexed array */
   const color = escalationThresholds[level - 1].color;
@@ -35,7 +35,7 @@ export function EscalationLevelIcon({
 
 const StyledEscalationLevelIcon = styled.div<{
   color: string;
-  isSmall: boolean;
+  isSmall?: boolean;
 }>(({ color, isSmall }) => {
   const size = isSmall
     ? asResponsiveArray({ _: 20, sm: 20 })

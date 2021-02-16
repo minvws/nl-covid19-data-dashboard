@@ -1,8 +1,11 @@
 import css from '@styled-system/css';
 import { Fragment } from 'react';
+import { isDefined } from 'ts-is-present';
 import { EscalationLevel } from '~/domain/restrictions/type';
 import { Box } from './base';
 import { InlineText } from './typography';
+
+const BAR_BORDER_RADIUS = '3px';
 
 interface CategoricalBarScaleProps {
   value: number;
@@ -32,7 +35,7 @@ export function CategoricalBarScale({
   }, value);
 
   const barPieces = categories
-    .filter((x) => x.name !== undefined)
+    .filter((x) => isDefined(x.name))
     .map((category, index, array) => {
       const isLast = array.length === index + 1;
       const to = isLast ? maxValue : array[index + 1].threshold;
@@ -53,10 +56,10 @@ export function CategoricalBarScale({
             bg={category.color}
             width={`${(category.width / maxValue) * 100}%`}
             position="relative"
-            borderTopLeftRadius={index === 0 ? '3px' : 0}
-            borderBottomLeftRadius={index === 0 ? '3px' : 0}
-            borderTopRightRadius={category.isLast ? '3px' : 0}
-            borderBottomRightRadius={category.isLast ? '3px' : 0}
+            borderTopLeftRadius={index === 0 ? BAR_BORDER_RADIUS : 0}
+            borderBottomLeftRadius={index === 0 ? BAR_BORDER_RADIUS : 0}
+            borderTopRightRadius={category.isLast ? BAR_BORDER_RADIUS : 0}
+            borderBottomRightRadius={category.isLast ? BAR_BORDER_RADIUS : 0}
           >
             <Box
               position="absolute"

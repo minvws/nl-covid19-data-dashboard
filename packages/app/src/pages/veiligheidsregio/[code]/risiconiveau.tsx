@@ -17,7 +17,7 @@ import { Heading, InlineText, Text } from '~/components-styled/typography';
 import {
   hospitalAdmissionsEscalationThresholds,
   positiveTestedEscalationThresholds,
-} from '~/domain/escalation-level/region-thresholds';
+} from '~/domain/escalation-level/thresholds';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { EscalationLevel } from '~/domain/restrictions/type';
