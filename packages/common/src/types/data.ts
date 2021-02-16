@@ -129,6 +129,7 @@ export interface National {
   vaccine_support: NlVaccineSupport;
   vaccine_delivery: NlVaccineDelivery;
   vaccine_administered_care_institutions: NlVaccineAdministeredCareInstitutions;
+  vaccine_administered_general_practitioner: NlVaccineAdministeredGeneralPractitioner;
   vaccine_administered_ggd_ghor: NlVaccineAdministeredGgdGhor;
   vaccine_administered_ggd: NlVaccineAdministeredGgd;
   vaccine_administered_hospitals: NlVaccineAdministeredHospitals;
@@ -453,6 +454,15 @@ export interface NlVaccineAdministeredCareInstitutions {
   last_value: NlVaccineAdministeredCareInstitutionsValue;
 }
 export interface NlVaccineAdministeredCareInstitutionsValue {
+  estimated: number;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlVaccineAdministeredGeneralPractitioner {
+  values: NlVaccineAdministeredGeneralPractitionerValue[];
+  last_value: NlVaccineAdministeredGeneralPractitionerValue;
+}
+export interface NlVaccineAdministeredGeneralPractitionerValue {
   estimated: number;
   date_unix: number;
   date_of_insertion_unix: number;
