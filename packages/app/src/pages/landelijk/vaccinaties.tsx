@@ -49,6 +49,7 @@ import {
 } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { Image } from '~/components-styled/image';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -340,9 +341,17 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
            */}
           <AspectRatio ratio={1.8325}>
             {targetLanguage === 'nl' ? (
-              <VaccinesAdministeredChartNl />
+              <Image
+                src="/images/vaccines_administered_chart_nl.svg"
+                loading="lazy"
+                decoding="async"
+              />
             ) : (
-              <VaccinesAdministeredChartEn />
+              <Image
+                src="/images/vaccines_administered_chart_en.svg"
+                loading="lazy"
+                decoding="async"
+              />
             )}
           </AspectRatio>
         </ChartTile>

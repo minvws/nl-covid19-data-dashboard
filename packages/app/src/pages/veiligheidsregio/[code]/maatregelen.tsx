@@ -98,7 +98,6 @@ const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
       />
       <TileList>
         <ContentHeader
-          category={siteText.veiligheidsregio_layout.headings.algemeen}
           icon={<Maatregelen fill={theme.colors.restrictions} />}
           title={replaceVariablesInText(
             siteText.veiligheidsregio_maatregelen.titel,

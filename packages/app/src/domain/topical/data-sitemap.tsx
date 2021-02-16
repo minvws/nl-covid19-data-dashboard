@@ -21,7 +21,7 @@ export function DataSitemap() {
       <TitleWithIcon
         level={2}
         title={siteText.nationaal_actueel.data_sitemap_titel}
-        fontSize="1.25rem"
+        fontSize="2.75em"
         icon={<NederlandIcon />}
       />
       <Box>
