@@ -9,23 +9,23 @@ export type BisectFunction = ReturnType<typeof useBisect>;
 export function useBisect(padding: ChartPadding) {
   return useCallback(
     (
-      trend: TimestampedTrendValue[],
+      trendValue: TimestampedTrendValue[],
       xPosition: number,
       xScale: ScaleTime<number, number>
     ) => {
-      if (!trend.length) return;
-      if (trend.length === 1) return trend[0];
+      if (!trendValue.length) return;
+      if (trendValue.length === 1) return trendValue[0];
 
       const date = xScale.invert(xPosition - padding.left);
 
       const index = bisectLeft(
-        trend.map((x) => x.__date),
+        trendValue.map((x) => x.__date),
         date,
         1
       );
 
-      const d0 = trend[index - 1];
-      const d1 = trend[index];
+      const d0 = trendValue[index - 1];
+      const d1 = trendValue[index];
 
       if (!d1) return d0;
 

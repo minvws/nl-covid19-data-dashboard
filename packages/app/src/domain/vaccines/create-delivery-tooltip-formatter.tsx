@@ -64,7 +64,7 @@ function formatVaccinationsTooltip(
           {`${dateStartString} - ${dateEndString}: `}
         </Text>
         {values.map((value) => (
-          <Box key={`${value.label}-${value.data.__value}`}>
+          <Box key={`${value.label}`}>
             {formatLabel(value.label, text)}: {formatValue(value)}
           </Box>
         ))}

@@ -204,7 +204,10 @@ export function AreaChart<
     return x.__date;
   }
 
-  const timespanMarkerData = trendConfigs[0].values;
+  const timespanMarkerData = trendConfigs
+    .flat()
+    .map((x) => x.values)
+    .flat();
 
   const dateSpanScale = useMemo(
     () =>

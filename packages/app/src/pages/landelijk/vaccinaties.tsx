@@ -58,11 +58,14 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
     text.data.kpi_total.first_tab_title
   );
 
-  const vaccineDeliveryValues = data.vaccine_delivery.values;
-  const vaccineDeliveryEstimateValues = data.vaccine_delivery_estimate.values;
-  const vaccineAdministeredValues = data.vaccine_administered.values;
-  const vaccineAdministeredEstimateValues =
-    data.vaccine_administered_estimate.values;
+  const vaccineDeliveryValues = [...data.vaccine_delivery.values];
+  const vaccineDeliveryEstimateValues = [
+    ...data.vaccine_delivery_estimate.values,
+  ];
+  const vaccineAdministeredValues = [...data.vaccine_administered.values];
+  const vaccineAdministeredEstimateValues = [
+    ...data.vaccine_administered_estimate.values,
+  ];
 
   // add the first estimate to the delivered values, otherwise the lines and stacks will
   // have a gap between them
