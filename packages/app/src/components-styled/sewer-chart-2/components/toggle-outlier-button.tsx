@@ -1,0 +1,16 @@
+import css from '@styled-system/css';
+import styled from 'styled-components';
+
+export const ToggleOutlierButton = styled.button(
+  css({
+    bg: 'rgba(218, 218, 218, 0.2)',
+    border: 0,
+    p: 1,
+    color: 'blue',
+    width: '100%',
+    cursor: 'pointer',
+    height: '26px',
+    fontSize: 1,
+    '&:hover': { bg: 'rgba(218, 218, 218, 0.3)' },
+  })
+);

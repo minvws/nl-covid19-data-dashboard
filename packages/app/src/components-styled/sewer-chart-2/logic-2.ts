@@ -1,7 +1,10 @@
 import { Municipal, Regionaal } from '@corona-dashboard/common';
+import { Point } from '@visx/point';
 import { scaleLinear, scaleTime } from '@visx/scale';
 import { voronoi } from '@visx/voronoi';
-import { useCallback, useMemo, useState } from 'react';
+import { bisector } from 'd3-array';
+import { lineLength } from 'geometric';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import { SelectProps } from '~/components-styled/select';
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
 
@@ -80,6 +83,9 @@ export function useSewerChartValues(
   return { averageValues, stationValues };
 }
 
+/**
+ * Create scales and datum=>coordinate-mappers (getX, getY)
+ */
 export function useSewerChartScales(
   values: SewerChartValue[],
   bounds: { width: number; height: number }
@@ -153,14 +159,14 @@ export function useSelectedStationValues(
 
   /**
    * Here we determine the outlier limit: find the highest line-value and
-   * multiply it by 1.1 in order to display station values which are close to
+   * multiply it by 1.2 in order to display station values which are close to
    * the highest value.
    */
   const outlierLimit =
     Math.max(
       getMax(averageValues, (x) => x.value),
       getMax(selectedStationValues, (x) => x.value)
-    ) * 1.0;
+    ) * 1.2;
 
   /**
    * If there's a station value GTE than the max line, it means we have outliers
@@ -190,7 +196,8 @@ export function useScatterTooltip({
   scales: ReturnType<typeof useSewerChartScales>;
   dimensions: Dimensions;
 }) {
-  const [datum, setDatum] = useState<SewerChartValue>();
+  const [inputPoint, setInputPoint] = useState<Point>();
+  const clear = useCallback(() => setInputPoint(undefined), []);
 
   const voronoiLayout = useMemo(
     () =>
@@ -209,26 +216,116 @@ export function useScatterTooltip({
     ]
   );
 
-  const findClosest = useCallback(
-    (point: { x: number; y: number }) => {
-      // max search radius distance in px
-      const distance = 25;
+  let datum: SewerChartValue | undefined;
+  let point: Point | undefined;
 
-      const closest = voronoiLayout.find(point.x, point.y, distance);
+  if (inputPoint) {
+    // max search radius distance in px
+    const distance = 25;
 
-      setDatum(closest?.data);
-    },
-    [voronoiLayout]
-  );
+    const closest =
+      voronoiLayout.find(
+        inputPoint.x - dimensions.padding.left,
+        inputPoint.y - dimensions.padding.top,
+        distance
+      ) || undefined;
 
-  return { datum, findClosest } as const;
+    datum = closest?.data;
+    point = closest && new Point({ x: closest[0], y: closest[1] });
+  }
+
+  return { datum, point, findClosest: setInputPoint, clear } as const;
 }
 
+const bisectDate = bisector<SewerChartValue, Date>((d) => new Date(d.dateMs))
+  .left;
+
+export function useLineTooltip({
+  values,
+  scales,
+  dimensions,
+}: {
+  values: SewerChartValue[];
+  scales: ReturnType<typeof useSewerChartScales>;
+  dimensions: Dimensions;
+}) {
+  const [inputPoint, setInputPoint] = useState<Point>();
+  const clear = useCallback(() => setInputPoint(undefined), []);
+
+  let datum: SewerChartValue | undefined;
+  let point: Point | undefined;
+
+  if (inputPoint) {
+    const x0 = scales.xScale.invert(inputPoint.x - dimensions.padding.left);
+    const index = bisectDate(values, x0, 1);
+    const d0 = values[index - 1];
+    const d1 = values[index];
+    datum = d0;
+
+    if (d1) {
+      datum = x0.valueOf() - d0.dateMs > d1.dateMs - x0.valueOf() ? d1 : d0;
+    }
+
+    point = new Point({
+      x: scales.getX(datum),
+      y: scales.getY(datum),
+    });
+  }
+
+  return { datum, point, findClosest: setInputPoint, clear } as const;
+}
+
+/**
+ * create dedupe-filter to be used within an Array.filter().
+ * It will deduplicate items based on the comparison of the object's keys.
+ *
+ * example:
+ *
+ *     const values: Array<{ foo: string }>
+ *     values.filter(dedupe('foo'))
+ */
 function dedupe<T>(key: keyof T) {
   return (x: T, index: number, list: T[]) =>
     list.findIndex((x2) => x[key] === x2[key]) === index;
 }
 
+/**
+ * get max value of items mapped by a getter
+ */
 function getMax<T>(items: T[], getValue: (item: T) => number | undefined) {
   return Math.max(...items.map((x) => getValue(x) || 0));
+}
+
+/**
+ * utility hook in order to calculate pan-distance based on given points
+ */
+export function usePanDistance() {
+  const panPointRef = useRef<Point>();
+  const panDistanceRef = useRef<number>(0);
+
+  const add = useCallback((point: Point) => {
+    const panDistance = panPointRef.current
+      ? lineLength([
+          [panPointRef.current.x, panPointRef.current.y],
+          [point.x, point.y],
+        ])
+      : 0;
+
+    panPointRef.current = point;
+    panDistanceRef.current += panDistance;
+  }, []);
+
+  const start = useCallback((point: Point) => {
+    panPointRef.current = point;
+    panDistanceRef.current = 0;
+  }, []);
+
+  return useMemo(
+    () => ({
+      value: panDistanceRef,
+      add,
+      start,
+    }),
+    [add, start]
+  );
 }

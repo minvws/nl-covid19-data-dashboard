@@ -1,24 +1,33 @@
 import { formatNumber, Municipal, Regionaal } from '@corona-dashboard/common';
 import css from '@styled-system/css';
+import { Label } from '@visx/annotation';
 import { AxisBottom, AxisLeft } from '@visx/axis';
 import { localPoint } from '@visx/event';
 import { GridRows } from '@visx/grid';
 import { Group } from '@visx/group';
-import { ParentSize } from '@visx/responsive';
-import { LinePath } from '@visx/shape';
+import { Bar, LinePath } from '@visx/shape';
+import { transparentize } from 'polished';
 import { PointerEvent, useCallback, useMemo, useState } from 'react';
-import styled from 'styled-components';
 import { isPresent } from 'ts-is-present';
+import { useDebouncedCallback } from 'use-debounce';
 import { Box } from '~/components-styled/base';
 import { Select } from '~/components-styled/select';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
+import siteText from '~/locale';
+// import { Tooltip } from '~/components/choropleth/tooltips/tooltipContainer';
 import { colors } from '~/style/theme';
 import { formatDate } from '~/utils/formatDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { TimeframeOption } from '~/utils/timeframe';
+import { useElementSize } from '~/utils/use-element-size';
 import { Legenda } from '../legenda';
+import { ScatterPlot } from './components/scatter-plot';
+import { ToggleOutlierButton } from './components/toggle-outlier-button';
+import { Tooltip } from './components/tooltip';
 import {
   Dimensions,
+  useLineTooltip,
+  usePanDistance,
   useScatterTooltip,
   useSelectedStationValues,
   useSewerChartScales,
@@ -44,7 +53,8 @@ export type SewerChart2Props = {
 };
 
 export function SewerChart2(props: SewerChart2Props) {
-  const { data, timeframe, valueAnnotation, width, height = 300, text } = props;
+  const { data, timeframe, valueAnnotation, height = 300, text } = props;
+  const [sizeRef, { width }] = useElementSize<HTMLDivElement>(400);
 
   /**
    * State for toggling outliers visibility
@@ -55,11 +65,11 @@ export function SewerChart2(props: SewerChart2Props) {
    * filter and shape data for our line-chart and scatter plot
    */
   const { averageValues, stationValues } = useSewerChartValues(data, timeframe);
-
   /**
    * create props for the station select dropdown
    */
   const sewerStationSelectProps = useSewerStationSelectProps(stationValues);
+  const hasSelectedStation = !!sewerStationSelectProps.value;
 
   /**
    * get filtered station values based on the `displayOutliers`-toggle
@@ -75,8 +85,17 @@ export function SewerChart2(props: SewerChart2Props) {
     displayOutliers
   );
 
+  /**
+   * cache paddings and bounds between renders
+   */
   const dimensions = useMemo<Dimensions>(() => {
-    const padding = { top: 20, right: 10, bottom: 30, left: 50 };
+    const padding = {
+      top: 20,
+      right: 10,
+      bottom: 30,
+      left: 50,
+    };
+
     const bounds = {
       width: (width || 0) - padding.left - padding.right,
       height: height - padding.top - padding.bottom,
@@ -84,6 +103,9 @@ export function SewerChart2(props: SewerChart2Props) {
     return { padding, bounds };
   }, [height, width]);
 
+  /**
+   * Get scales and "value -> coordinate" getters (getX, getY)
+   */
   const scales = useSewerChartScales(
     useMemo(() => [...averageValues, ...stationValuesFiltered], [
       averageValues,
@@ -92,33 +114,9 @@ export function SewerChart2(props: SewerChart2Props) {
     dimensions.bounds
   );
 
-  const scatterTooltip = useScatterTooltip({
-    values: stationValuesFiltered,
-    scales,
-    dimensions,
-  });
-
-  const handlePointerMove = useCallback(
-    (evt: PointerEvent<SVGSVGElement>) => {
-      // find the nearest polygon to the current mouse position
-      const point = localPoint(evt);
-
-      if (!point) return;
-
-      scatterTooltip.findClosest({
-        x: point.x - dimensions.padding.left,
-        y: point.y - dimensions.padding.top,
-      });
-    },
-    [dimensions, scatterTooltip]
-  );
-
-  const handlePointerUp = useCallback(() => {
-    if (scatterTooltip.datum) {
-      sewerStationSelectProps.onChange(scatterTooltip.datum.name);
-    }
-  }, [scatterTooltip.datum, sewerStationSelectProps]);
-
+  /**
+   * Manually set Y axis values, as per design
+   */
   const tickValuesY = useMemo(
     () => [
       scales.yScale.domain()[0],
@@ -128,62 +126,124 @@ export function SewerChart2(props: SewerChart2Props) {
     [scales.yScale]
   );
 
-  const hasSelectedStation = !!sewerStationSelectProps.value;
+  /**
+   * Call tooltip hooks for determining which datum should have "hover"-focus.
+   */
+  const scatterTooltip = useScatterTooltip({
+    values: stationValuesFiltered,
+    scales,
+    dimensions,
+  });
+
+  const lineTooltip = useLineTooltip({
+    values: hasSelectedStation ? selectedStationValues : averageValues,
+    scales,
+    dimensions,
+  });
 
   /**
-   * Make sure we have a width by recursively wrapping this component inside
-   * a ParentSize component.
+   * For touch devices we'll measure pan distance in order to prevent simulating
+   * a "click" (highlight a specific line) when someone has been panning instead
+   * of clicking.
    */
-  if (width === undefined) {
-    return (
-      <ParentSize>
-        {(parent) => <SewerChart2 {...props} width={parent.width} />}
-      </ParentSize>
-    );
-  }
+  const panDistance = usePanDistance();
+  const handlePointerDown = useCallback(
+    (evt: PointerEvent<SVGSVGElement>) => {
+      const point = localPoint(evt);
+      if (point) panDistance.start(point);
+    },
+    [panDistance]
+  );
+
+  const handlePointerMove = useCallback(
+    (evt: PointerEvent<SVGSVGElement>) => {
+      // find the nearest polygon to the current mouse position
+      const point = localPoint(evt);
+      if (!point) return;
+
+      /**
+       * update pan distance
+       */
+      panDistance.add(point);
+      /**
+       * find new tooltip datums to highlight
+       */
+      scatterTooltip.findClosest(point);
+      lineTooltip.findClosest(point);
+    },
+    [lineTooltip, panDistance, scatterTooltip]
+  );
+
+  const handlePointerUp = useCallback(() => {
+    /**
+     * update selected line when pan-distance is below threshold and when
+     * the pointer is currently close to a scatter value
+     */
+    if (panDistance.value.current < 10 && scatterTooltip.datum) {
+      sewerStationSelectProps.onChange(scatterTooltip.datum.name);
+    }
+  }, [panDistance.value, scatterTooltip.datum, sewerStationSelectProps]);
+
+  /**
+   * hide tooltips when focus is lost
+   */
+  const clearTooltips = useDebouncedCallback(() => {
+    scatterTooltip.clear();
+    lineTooltip.clear();
+  }, 300);
+
+  const handlePointerLeave = useCallback(() => {
+    clearTooltips.callback();
+  }, [clearTooltips]);
 
   return (
-    <Box>
-      <Box position="relative">
-        {sewerStationSelectProps.options.length > 0 && (
-          <Box display="flex" justifyContent="flex-end">
-            <Select
-              placeholder={text.select_station_placeholder}
-              {...sewerStationSelectProps}
-            />
-          </Box>
-        )}
+    <Box position="relative">
+      {sewerStationSelectProps.options.length > 0 && (
+        <Box display="flex" justifyContent="flex-end">
+          <Select
+            placeholder={text.select_station_placeholder}
+            {...sewerStationSelectProps}
+          />
+        </Box>
+      )}
 
-        {valueAnnotation && (
-          <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
-        )}
+      {valueAnnotation && (
+        <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
+      )}
 
-        {hasOutliers && (
-          <Box
-            ml={dimensions.padding.left}
-            mr={dimensions.padding.right}
-            position="relative"
-            /**
-             * The margin-bottom has been eyeballed to visually attach the
-             * button to the graph, not sure how future-proof this is.
-             */
-            mb={-19}
+      {hasOutliers && (
+        <Box
+          ml={dimensions.padding.left}
+          mr={dimensions.padding.right}
+          position="relative"
+          /**
+           * The margin-bottom has been eyeballed to visually attach the
+           * button to the graph, not sure how future-proof this is.
+           */
+          mb={-19}
+          zIndex={1}
+        >
+          <ToggleOutlierButton
+            onClick={() => setDisplayOutliers(!displayOutliers)}
           >
-            <ToggleOutliersButton
-              onClick={() => setDisplayOutliers(!displayOutliers)}
-            >
-              {displayOutliers ? text.hide_outliers : text.display_outliers}
-            </ToggleOutliersButton>
-          </Box>
-        )}
+            {displayOutliers ? text.hide_outliers : text.display_outliers}
+          </ToggleOutlierButton>
+        </Box>
+      )}
 
+      <Box position="relative" ref={sizeRef} css={css({ userSelect: 'none' })}>
         <svg
+          role="img"
           width={width}
           height={height}
-          role="img"
           onPointerMove={handlePointerMove}
+          onPointerLeave={handlePointerLeave}
+          onPointerDown={handlePointerDown}
           onPointerUp={handlePointerUp}
-          style={{ cursor: scatterTooltip.datum ? 'pointer' : 'default' }}
+          style={{
+            cursor: scatterTooltip.datum ? 'pointer' : 'default',
+            touchAction: 'pan-y', // allow vertical scroll, but capture horizontal
+          }}
         >
           <Group left={dimensions.padding.left} top={dimensions.padding.top}>
             <GridRows
@@ -207,6 +267,32 @@ export function SewerChart2(props: SewerChart2Props) {
               })}
             />
 
+            {lineTooltip.point && (
+              <Bar
+                x={lineTooltip.point.x - 4}
+                width={8}
+                height={dimensions.bounds.height}
+                fill="rgba(192, 232, 252, 0.5)"
+              />
+            )}
+
+            {lineTooltip.datum && lineTooltip.point && (
+              <Label
+                x={lineTooltip.point.x}
+                y={dimensions.bounds.height + 2}
+                title={formatDate(lineTooltip.datum?.dateMs)}
+                horizontalAnchor="middle"
+                verticalAnchor="start"
+                backgroundFill="#fff"
+                showAnchorLine={false}
+                fontColor={colors.data.benchmark}
+                titleFontSize={14}
+                titleFontWeight={'bold'}
+                backgroundPadding={6}
+                width={100}
+              />
+            )}
+
             <AxisLeft
               scale={scales.yScale}
               tickValues={tickValuesY}
@@ -223,26 +309,13 @@ export function SewerChart2(props: SewerChart2Props) {
               })}
             />
 
-            <Group>
-              {stationValuesFiltered.map((datum) => (
-                <circle
-                  key={datum.id}
-                  cx={scales.getX(datum)}
-                  cy={scales.getY(datum)}
-                  fill={
-                    scatterTooltip.datum === datum
-                      ? colors.data.benchmark
-                      : 'rgba(89, 89, 89, 0.3)'
-                  }
-                  r={3}
-                  css={css({
-                    transitionProperty: 'fill',
-                    transitionDuration:
-                      scatterTooltip.datum === datum ? '75ms' : '225ms',
-                  })}
-                />
-              ))}
-            </Group>
+            <ScatterPlot
+              data={stationValuesFiltered}
+              getX={scales.getX}
+              getY={scales.getY}
+              color="rgba(89, 89, 89, 0.3)"
+              r={2}
+            />
 
             <LinePath
               data={averageValues}
@@ -251,7 +324,7 @@ export function SewerChart2(props: SewerChart2Props) {
               stroke={
                 hasSelectedStation ? colors.data.neutral : colors.data.primary
               }
-              strokeWidth={5}
+              strokeWidth={4}
               strokeLinecap="round"
               strokeLinejoin="round"
             />
@@ -261,87 +334,98 @@ export function SewerChart2(props: SewerChart2Props) {
                 data={selectedStationValues}
                 x={scales.getX}
                 y={scales.getY}
-                strokeWidth={5}
+                strokeWidth={4}
                 stroke={colors.data.secondary}
                 strokeLinecap="round"
                 strokeLinejoin="round"
               />
             )}
+
+            {scatterTooltip.point && (
+              <circle
+                r={2}
+                fill={colors.data.benchmark}
+                cx={scatterTooltip.point.x}
+                cy={scatterTooltip.point.y}
+                css={css({
+                  transitionProperty: 'all',
+                  transitionDuration: '75ms',
+                  transitionTimingFunction: 'ease-out',
+                })}
+              />
+            )}
+
+            {lineTooltip.point && (
+              <Group left={lineTooltip.point.x} top={lineTooltip.point.y}>
+                <circle
+                  r={12}
+                  fill={transparentize(
+                    0.6,
+                    hasSelectedStation
+                      ? colors.data.secondary
+                      : colors.data.primary
+                  )}
+                />
+                <circle r={7} fill="#fff" />
+                <circle
+                  r={5}
+                  fill={
+                    hasSelectedStation
+                      ? colors.data.secondary
+                      : colors.data.primary
+                  }
+                />
+              </Group>
+            )}
           </Group>
         </svg>
+
+        {lineTooltip.point && lineTooltip.datum && (
+          <Tooltip
+            title={
+              hasSelectedStation
+                ? lineTooltip.datum.name
+                : text.average_label_text
+            }
+            bounds={{ left: 0, top: 0, right: width, bottom: height }}
+            x={lineTooltip.point.x + dimensions.padding.left}
+            y={lineTooltip.point.y + dimensions.padding.top}
+          >
+            <Box display="inline-block">
+              <b>{lineTooltip.datum.value} per 100.000</b>
+            </Box>{' '}
+            {siteText.common.inwoners}
+          </Tooltip>
+        )}
       </Box>
 
-      <Box>
-        <Legenda
-          items={[
-            stationValuesFiltered.length > 0
-              ? {
-                  color: 'rgba(89, 89, 89, 0.3)',
-                  label: text.secondary_label_text,
-                  shape: 'circle' as const,
-                }
-              : undefined,
-            {
-              color: hasSelectedStation
-                ? colors.data.neutral
-                : colors.data.primary,
-              label: text.average_label_text,
-              shape: 'line' as const,
-            },
-            sewerStationSelectProps.value
-              ? {
-                  color: colors.data.secondary,
-                  label: replaceVariablesInText(text.daily_label_text, {
-                    name: sewerStationSelectProps.value,
-                  }),
-                  shape: 'line' as const,
-                }
-              : undefined,
-          ].filter(isPresent)}
-        />
-      </Box>
+      <Legenda
+        items={[
+          stationValuesFiltered.length > 0
+            ? {
+                color: 'rgba(89, 89, 89, 0.3)',
+                label: text.secondary_label_text,
+                shape: 'circle' as const,
+              }
+            : undefined,
+          {
+            color: hasSelectedStation
+              ? colors.data.neutral
+              : colors.data.primary,
+            label: text.average_label_text,
+            shape: 'line' as const,
+          },
+          sewerStationSelectProps.value
+            ? {
+                color: colors.data.secondary,
+                label: replaceVariablesInText(text.daily_label_text, {
+                  name: sewerStationSelectProps.value,
+                }),
+                shape: 'line' as const,
+              }
+            : undefined,
+        ].filter(isPresent)}
+      />
     </Box>
   );
 }
-
-// function SewerTooltip() {
-//   // const datum = tooltipData?.nearestDatum;
-
-//   // if (!datum) return null;
-
-//   // const value = datum.datum.value
-//   const title = 'foo bar';
-//   const value = 1234;
-
-//   return (
-//     <div
-//       css={css({
-//         bg: 'white',
-//         boxShadow: 'rgba(33, 33, 33, 0.2) 0px 1px 2px',
-//         pointerEvents: 'none',
-//         zIndex: 1000,
-//         borderRadius: 1,
-//       })}
-//     >
-//       <TooltipContent title={title}>
-//         <div css={css({ whiteSpace: 'nowrap' })}>
-//           <b>{formatNumber(value)} per 100.000</b> inwoners
-//         </div>
-//       </TooltipContent>
-//     </div>
-//   );
-// }
-
-const ToggleOutliersButton = styled.button(
-  css({
-    bg: 'rgba(218, 218, 218, 0.2)',
-    border: 0,
-    p: 1,
-    color: 'blue',
-    width: '100%',
-    cursor: 'pointer',
-    height: '26px',
-    fontSize: 1,
-    '&:hover': { bg: 'rgba(218, 218, 218, 0.3)' },
-  })
-);
