@@ -11,7 +11,7 @@ import {
   PositionProps,
   TypographyProps,
 } from 'styled-system';
-import { StyledShouldForwardProp } from '~/utils/styledShouldForwardProp';
+import { styledShouldForwardProp } from '~/utils/styled-should-forward-prop';
 
 export type TextProps = SpaceProps &
   LayoutProps &
@@ -24,11 +24,11 @@ export type TextProps = SpaceProps &
  * text, only for headers we have a dedicated Title component.
  */
 export const Text = styled.p.withConfig({
-  shouldForwardProp: StyledShouldForwardProp,
+  shouldForwardProp: styledShouldForwardProp,
 })<TextProps>(compose(margin, padding, typography, color));
 
 export const InlineText = styled.span.withConfig({
-  shouldForwardProp: StyledShouldForwardProp,
+  shouldForwardProp: styledShouldForwardProp,
 })<TextProps>(compose(margin, padding, typography, color));
 
 /**

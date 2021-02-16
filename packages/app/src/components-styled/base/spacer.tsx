@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { space, SpaceProps } from 'styled-system';
-import { StyledShouldForwardProp } from '~/utils/styledShouldForwardProp';
+import { styledShouldForwardProp } from '~/utils/styled-should-forward-prop';
 
 /**
  * A generic spacer element.
@@ -14,5 +14,5 @@ import { StyledShouldForwardProp } from '~/utils/styledShouldForwardProp';
 type SpacerProps = SpaceProps;
 
 export const Spacer = styled.div.withConfig({
-  shouldForwardProp: StyledShouldForwardProp,
+  shouldForwardProp: styledShouldForwardProp,
 })<SpacerProps>(space);

@@ -11,7 +11,7 @@ import {
   typography,
   TypographyProps,
 } from 'styled-system';
-import { StyledShouldForwardProp } from '~/utils/styledShouldForwardProp';
+import { styledShouldForwardProp } from '~/utils/styled-should-forward-prop';
 
 export interface HeadingProps extends StyledHeadingProps {
   children: React.ReactNode;
@@ -43,7 +43,7 @@ const levelStyles: Record<HeadingLevel, ReturnType<typeof css>> = {
 
 export const Heading = styled.h1
   .withConfig({
-    shouldForwardProp: StyledShouldForwardProp,
+    shouldForwardProp: styledShouldForwardProp,
   })
   .attrs<HeadingProps>((x) => ({
     as: x.as || `h${x.level}`,
