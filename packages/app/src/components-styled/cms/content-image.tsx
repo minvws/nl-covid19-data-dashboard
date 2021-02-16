@@ -10,9 +10,14 @@ import { ImageBlock, RichContentImageBlock } from '~/types/cms';
 interface ContentImageProps {
   node: ImageBlock | RichContentImageBlock;
   contentWrapper?: FunctionComponent;
+  sizes: number[][] | undefined;
 }
 
-export function ContentImage({ node, contentWrapper }: ContentImageProps) {
+export function ContentImage({
+  node,
+  contentWrapper,
+  sizes,
+}: ContentImageProps) {
   const caption = 'caption' in node && node.caption && (
     <Caption>{node.caption}</Caption>
   );
@@ -29,7 +34,13 @@ export function ContentImage({ node, contentWrapper }: ContentImageProps) {
           display="inline-block"
           maxWidth={980}
         >
-          <Image {...getImageProps(node)} borderRadius={1} boxShadow="tile" />
+          <Image
+            {...getImageProps(node, {
+              sizes,
+            })}
+            borderRadius={1}
+            boxShadow="tile"
+          />
           {caption}
         </Box>
       </MaxWidth>
@@ -37,7 +48,7 @@ export function ContentImage({ node, contentWrapper }: ContentImageProps) {
   ) : (
     <ContentWrapper>
       <Box as="figure" role="group" spacing={3} my={2} textAlign="center">
-        <Image {...getImageProps(node)} />
+        <Image {...getImageProps(node, { sizes })} />
         {caption}
       </Box>
     </ContentWrapper>
