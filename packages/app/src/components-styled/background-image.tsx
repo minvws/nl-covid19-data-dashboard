@@ -13,6 +13,7 @@ import {
   position,
   PositionProps,
 } from 'styled-system';
+import { styledShouldForwardProp } from '~/utils/styled-should-forward-prop';
 
 export type BackgroundImageLocalProps = BackgroundImageProps &
   BackgroundPositionProps &
@@ -21,7 +22,9 @@ export type BackgroundImageLocalProps = BackgroundImageProps &
   LayoutProps &
   PositionProps;
 
-export const BackgroundImage = styled.div<BackgroundImageLocalProps>(
+export const BackgroundImage = styled.div.withConfig({
+  shouldForwardProp: styledShouldForwardProp,
+})<BackgroundImageLocalProps>(
   { boxSizing: 'border-box', minWidth: 0 },
   backgroundImage,
   backgroundPosition,
