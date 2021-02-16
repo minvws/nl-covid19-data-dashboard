@@ -5,7 +5,7 @@ import {
   NlVaccineAdministeredEstimateValue,
   NlVaccineAdministeredValue,
   NlVaccineDeliveryEstimateValue,
-  NlVaccineDeliveryValue,
+  NlVaccineDeliveryValue
 } from '@corona-dashboard/common';
 import { css } from '@styled-system/css';
 import { ParentSize } from '@visx/responsive';
@@ -29,19 +29,19 @@ import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { InlineText, Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
-import { AllLanguages } from '~/locale/APP_TARGET';
+import { AllLanguages } from '~/locale/APP_LOCALE';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
   getNlData,
-  getText,
+  getText
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import {
   formatDateFromMilliseconds,
-  formatDateFromSeconds,
+  formatDateFromSeconds
 } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
