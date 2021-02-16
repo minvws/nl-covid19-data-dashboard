@@ -75,8 +75,8 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
   const vaccineAdministeredEstimateValues =
     data.vaccine_administered_estimate.values;
 
-  vaccineDeliveryValues.push(vaccineDeliveryEstimateValues[0]);
-  vaccineAdministeredValues.push(vaccineAdministeredEstimateValues[0]);
+  vaccineDeliveryValues.push({ ...vaccineDeliveryEstimateValues[0] });
+  vaccineAdministeredValues.push({ ...vaccineAdministeredEstimateValues[0] });
 
   return (
     <>
@@ -263,8 +263,8 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                   formatTooltip={createTooltipFormatter(siteText)}
                   divider={{
                     color: colors.annotation,
-                    leftLabel: 'Berekend aantal',
-                    rightLabel: 'Verwacht aantal',
+                    leftLabel: text.data.vaccination_chart.left_divider_label,
+                    rightLabel: text.data.vaccination_chart.right_divider_label,
                   }}
                   trends={[
                     {
@@ -273,7 +273,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                         {
                           metricProperty: 'total',
                           color: '#F8E435',
-                          legendLabel: 'Geleverd',
+                          legendLabel: text.data.vaccination_chart.delivered,
                         },
                       ],
                     },
@@ -283,7 +283,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                         {
                           metricProperty: 'total',
                           style: 'dashed',
-                          legendLabel: 'Geleverd verwacht',
+                          legendLabel: text.data.vaccination_chart.estimated,
                           color: '#F8E435',
                         },
                       ],

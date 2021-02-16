@@ -2162,7 +2162,11 @@
           "cure_vac": "CureVac",
           "janssen": "Janssen & Janssen",
           "sanofi": "Sanofi"
-        }
+        },
+        "delivered": "Gelevered",
+        "estimated": "Berekend",
+        "left_divider_label": "Geleverd aantal",
+        "right_divider_label": "Berekend aantal"
       }
     },
     "section_vaccinations_more_information": {
