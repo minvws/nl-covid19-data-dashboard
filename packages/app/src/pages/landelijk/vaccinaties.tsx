@@ -31,6 +31,7 @@ import {
 } from '~/static-props/get-data';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -283,35 +284,50 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                 linesConfig={[
                   {
                     metricProperty: 'percentage_16_24',
-                    label: '16 - 24 jaar',
+                    label: replaceVariablesInText(
+                      text.grafiek_draagvlak.leeftijd_jaar,
+                      { ageGroup: '16 - 24' }
+                    ),
                     color: '#005082',
                     legendShape: 'square',
                     areaFillOpacity: 0,
                   },
                   {
                     metricProperty: 'percentage_25_39',
-                    label: '25 - 39 jaar',
+                    label: replaceVariablesInText(
+                      text.grafiek_draagvlak.leeftijd_jaar,
+                      { ageGroup: '25 - 39' }
+                    ),
                     color: '#00BBB5',
                     legendShape: 'square',
                     areaFillOpacity: 0,
                   },
                   {
                     metricProperty: 'percentage_40_54',
-                    label: '40 - 54 jaar',
+                    label: replaceVariablesInText(
+                      text.grafiek_draagvlak.leeftijd_jaar,
+                      { ageGroup: '40 - 54' }
+                    ),
                     color: '#FFC000',
                     legendShape: 'square',
                     areaFillOpacity: 0,
                   },
                   {
                     metricProperty: 'percentage_55_69',
-                    label: '55 - 69 jaar',
+                    label: replaceVariablesInText(
+                      text.grafiek_draagvlak.leeftijd_jaar,
+                      { ageGroup: '55 - 69' }
+                    ),
                     color: '#E28700',
                     legendShape: 'square',
                     areaFillOpacity: 0,
                   },
                   {
                     metricProperty: 'percentage_70_plus',
-                    label: '70+ jaar',
+                    label: replaceVariablesInText(
+                      text.grafiek_draagvlak.leeftijd_jaar,
+                      { ageGroup: '70+' }
+                    ),
                     color: '#C252D4',
                     legendShape: 'square',
                     areaFillOpacity: 0,
