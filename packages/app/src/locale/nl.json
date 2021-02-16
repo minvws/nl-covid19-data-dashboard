@@ -153,7 +153,7 @@
     "barscale_titel": "Gemeld aantal ziekenhuisopnames per dag",
     "extra_uitleg": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer laat het aantal ziekenhuisopnames - inclusief directe IC opnames - zien dat op één dag gemeld is. Dit kunnen ook meldingen zijn van opnames van eerdere dagen.",
     "map_titel": "Woonplaats opgenomen patiënten",
-    "map_toelichting": "Deze kaart laat zien in welke gemeenten of veiligheidsregio’s patiënten wonen die met COVID-19 in het ziekenhuis zijn opgenomen. Patiënten kunnen ook in een ziekenhuis in een ander deel van Nederland worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE. Het Flevoziekenhuis deelt zijn COVID-19 opnames op reguliere afdelingen op dit moment niet met Stichting NICE. Daardoor zijn de cijfers van sommige veiligheidsregio’s en gemeenten op de kaart mogelijk lager dan in werkelijkheid het geval is. Let op: met ingang van 5 februari is de kleurschaal veranderd, zodat beter te zien is welke gemeenten en regio’s geen ziekenhuisopnames melden.",
+    "map_toelichting": "Deze kaart laat zien in welke gemeenten of veiligheidsregio’s patiënten wonen die met COVID-19 in het ziekenhuis zijn opgenomen. Patiënten kunnen ook in een ziekenhuis in een ander deel van Nederland worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE. Het Flevoziekenhuis deelt zijn COVID-19 opnames op reguliere afdelingen op dit moment niet met Stichting NICE. Daardoor zijn de cijfers van sommige veiligheidsregio’s en gemeenten op de kaart mogelijk lager dan in werkelijkheid het geval is.",
     "linechart_titel": "Ziekenhuisopnames over tijd",
     "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "chloropleth_legenda": {
@@ -717,7 +717,7 @@
     "barscale_titel": "Gemeld aantal ziekenhuisopnames per dag",
     "extra_uitleg": "Aantal mensen uit deze veiligheidsregio met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer laat het aantal ziekenhuisopnames - inclusief directe IC opnames - zien dat op één dag gemeld is. Dit kunnen ook meldingen zijn van opnames van eerdere dagen. Patiënten kunnen in een ziekenhuis elders in Nederland zijn opgenomen.",
     "map_titel": "Verdeling ziekenhuisopnames in {{safetyRegion}}",
-    "map_toelichting": "Deze kaart laat zien in welke gemeenten of veiligheidsregio’s patiënten wonen die met COVID-19 in het ziekenhuis zijn opgenomen. Patiënten kunnen ook in een ziekenhuis in een ander deel van Nederland worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE. Het Flevoziekenhuis deelt zijn COVID-19 opnames op reguliere afdelingen op dit moment niet met Stichting NICE. Daardoor zijn de cijfers van sommige veiligheidsregio’s en gemeenten op de kaart mogelijk lager dan in werkelijkheid het geval is. Let op: met ingang van 5 februari is de kleurschaal veranderd, zodat beter te zien is welke gemeenten en regio’s geen ziekenhuisopnames melden.",
+    "map_toelichting": "Deze kaart laat zien in welke gemeenten of veiligheidsregio’s patiënten wonen die met COVID-19 in het ziekenhuis zijn opgenomen. Patiënten kunnen ook in een ziekenhuis in een ander deel van Nederland worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE. Het Flevoziekenhuis deelt zijn COVID-19 opnames op reguliere afdelingen op dit moment niet met Stichting NICE. Daardoor zijn de cijfers van sommige veiligheidsregio’s en gemeenten op de kaart mogelijk lager dan in werkelijkheid het geval is.",
     "linechart_titel": "Ziekenhuisopnames over tijd",
     "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "bron": {
@@ -861,7 +861,7 @@
     "barscale_titel": "Gemeld aantal ziekenhuisopnames per dag",
     "extra_uitleg": "Aantal mensen uit deze gemeente met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer laat het aantal ziekenhuisopnames - inclusief directe IC opnames - zien dat op één dag gemeld is. Dit kunnen ook meldingen zijn van opnames van eerdere dagen. Patiënten kunnen in een ziekenhuis elders in Nederland zijn opgenomen.",
     "map_titel": "Verdeling ziekenhuisopnames in veiligheidsregio van {{municipality}}",
-    "map_toelichting": "Deze kaart laat zien in welke gemeenten of veiligheidsregio’s patiënten wonen die met COVID-19 in het ziekenhuis zijn opgenomen. Patiënten kunnen ook in een ziekenhuis in een ander deel van Nederland worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE. Het Flevoziekenhuis deelt zijn COVID-19 opnames op reguliere afdelingen op dit moment niet met Stichting NICE. Daardoor zijn de cijfers van sommige veiligheidsregio’s en gemeenten op de kaart mogelijk lager dan in werkelijkheid het geval is. Let op: met ingang van 5 februari is de kleurschaal veranderd, zodat beter te zien is welke gemeenten en regio’s geen ziekenhuisopnames melden.",
+    "map_toelichting": "Deze kaart laat zien in welke gemeenten of veiligheidsregio’s patiënten wonen die met COVID-19 in het ziekenhuis zijn opgenomen. Patiënten kunnen ook in een ziekenhuis in een ander deel van Nederland worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE. Het Flevoziekenhuis deelt zijn COVID-19 opnames op reguliere afdelingen op dit moment niet met Stichting NICE. Daardoor zijn de cijfers van sommige veiligheidsregio’s en gemeenten op de kaart mogelijk lager dan in werkelijkheid het geval is.",
     "linechart_titel": "Ziekenhuisopnames over tijd",
     "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "bron": {
@@ -2000,8 +2000,8 @@
     "title": "COVID-19-vaccinaties",
     "description": "Vaccineren is de belangrijkste stap naar een samenleving zonder coronaregels. Op 6 januari 2021 is Nederland begonnen met vaccineren. Uiteindelijk komt iedereen van 18 jaar of ouder aan de beurt. De cijfers op deze pagina laten zien hoeveel prikken zijn gezet en hoeveel vaccins er beschikbaar komen.",
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "date_unix": "1613389863",
-    "date_of_insertion_unix": "1613389863",
+    "date_unix": "1613472174",
+    "date_of_insertion_unix": "1613472174",
     "reference": {
       "href": "/verantwoording#vaccinatie",
       "text": "Lees meer over de bron van de vaccinatiecijfers in de cijferverantwoording."
@@ -2038,26 +2038,26 @@
       "sidebar": {
         "last_value": {
           "total_vaccinated": "783606",
-          "date_unix": "1613389863",
-          "date_of_insertion_unix": "1613389863"
+          "date_unix": "1613472174",
+          "date_of_insertion_unix": "1613472174"
         }
       },
       "kpi_total": {
         "title": "Aantal gezette prikken",
         "value": "606861",
         "description": "",
-        "date_of_report_unix": "1613389863",
-        "date_of_insertion_unix": "1613389863",
+        "date_of_report_unix": "1613472174",
+        "date_of_insertion_unix": "1613472174",
         "administered": [
           {
             "value": "512392",
             "description": "gemeld door GGD-GHOR",
-            "report_date": "Gemeld aantal tot en met 14 februari"
+            "report_date": "Gemeld aantal tot en met 15 februari"
           },
           {
             "value": "94469",
             "description": "gemeld door LNAZ",
-            "report_date": "Gemeld aantal tot en met 14 februari"
+            "report_date": "Gemeld aantal tot en met 15 februari"
           },
           {
             "value": "",
@@ -2083,23 +2083,23 @@
         "tab_total_estimated": {
           "value": "783606",
           "description": "",
-          "date_of_report_unix": "1613389863",
-          "date_of_insertion_unix": "1613389863",
+          "date_of_report_unix": "1613472174",
+          "date_of_insertion_unix": "1613472174",
           "administered": [
             {
               "value": "512392",
               "description": "gezet door GGD'en",
-              "report_date": "Gemeld aantal tot en met 14 februari"
+              "report_date": "Gemeld aantal tot en met 15 februari"
             },
             {
               "value": "94469",
               "description": "gezet in ziekenhuizen",
-              "report_date": "Gemeld aantal tot en met 14 februari"
+              "report_date": "Gemeld aantal tot en met 15 februari"
             },
             {
               "value": "176745",
               "description": "gezet in langdurige zorginstellingen",
-              "report_date": "Berekend aantal tot en met 14 februari"
+              "report_date": "Berekend aantal tot en met 15 februari"
             },
             {
               "value": "",
