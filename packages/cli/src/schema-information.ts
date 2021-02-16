@@ -1,6 +1,7 @@
 import fs from 'fs';
 import { jsonDirectory, localeDirectory } from './config';
-import { validatePlaceholders } from './custom-validations/validate-placeholders';
+import { validatePlaceholders } from './validate-schema/custom-validations/validate-placeholders';
+import { assert } from '@corona-dashboard/common';
 
 type CustomValidationFunction = (
   input: Record<string, unknown>
@@ -14,9 +15,7 @@ export type SchemaItemInfo = {
 };
 
 export function getSchemaInfo(path: string = jsonDirectory) {
-  if (!fs.existsSync(path)) {
-    throw new Error(`Path ${path} does not exist`);
-  }
+  assert(fs.existsSync(path), `Path ${path} does not exist`);
 
   const fileList = fs.readdirSync(path);
 
@@ -40,6 +39,20 @@ export function getSchemaInfo(path: string = jsonDirectory) {
   };
 
   return info;
+}
+
+export function getFilesWithTimeSeries(directory: string) {
+  assert(fs.existsSync(directory), `Directory ${directory} does not exist`);
+
+  const fileList = fs.readdirSync(jsonDirectory);
+
+  const timeSeriesFiles = [
+    ...getFileNames(fileList, /^NL.json$/),
+    ...getFileNames(fileList, /^VR[0-9]+.json$/),
+    ...getFileNames(fileList, /^GM[0-9]+.json$/),
+  ];
+
+  return timeSeriesFiles;
 }
 
 /**
