@@ -3,14 +3,13 @@ import { ParentSize } from '@visx/responsive';
 import { Fragment, useState } from 'react';
 import styled from 'styled-components';
 import VaccinatieIcon from '~/assets/vaccinaties.svg';
-import VaccinesAdministeredChartEn from '~/assets/vaccines_administered_chart_en.svg';
-import VaccinesAdministeredChartNl from '~/assets/vaccines_administered_chart_nl.svg';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
 import { AspectRatio } from '~/components-styled/aspect-ratio';
 import { Box, Spacer } from '~/components-styled/base';
 import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
+import { Image } from '~/components-styled/image';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { MultiLineChart } from '~/components-styled/multi-line-chart';
@@ -30,7 +29,6 @@ import {
   getNlData,
   getText,
 } from '~/static-props/get-data';
-import { colors } from '~/style/theme';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 
@@ -238,9 +236,17 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
            */}
           <AspectRatio ratio={1.8325}>
             {targetLanguage === 'nl' ? (
-              <VaccinesAdministeredChartNl />
+              <Image
+                src="/images/vaccines_administered_chart_nl.svg"
+                loading="lazy"
+                decoding="async"
+              />
             ) : (
-              <VaccinesAdministeredChartEn />
+              <Image
+                src="/images/vaccines_administered_chart_en.svg"
+                loading="lazy"
+                decoding="async"
+              />
             )}
           </AspectRatio>
         </ChartTile>

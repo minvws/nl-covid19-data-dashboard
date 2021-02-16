@@ -31,7 +31,8 @@ export function TopicalVaccineTile() {
         py={2}
         pl="3.5rem"
         mb={2}
-        lineHeight={{ md: 0, lg: 2 }}
+        lineHeight={{ md: 0, lg: 1 }}
+        fontSize="1.25rem"
       >
         <LinkWithIcon
           href={'/landelijk/vaccinaties'}
@@ -44,7 +45,7 @@ export function TopicalVaccineTile() {
         </LinkWithIcon>
       </Heading>
 
-      <Text fontSize="2.75rem" fontWeight="bold" my={0} lineHeight={0} mb={2}>
+      <Text fontSize="2.25rem" fontWeight="bold" my={0} lineHeight={0} mb={2}>
         {formatNumber(data.administeredVaccines)}
       </Text>
 
