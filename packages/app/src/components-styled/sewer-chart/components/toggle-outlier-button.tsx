@@ -11,6 +11,11 @@ export const ToggleOutlierButton = styled.button(
     cursor: 'pointer',
     height: '26px',
     fontSize: 1,
-    '&:hover': { bg: 'rgba(218, 218, 218, 0.3)' },
+    '&:hover:not([disabled])': { bg: 'rgba(218, 218, 218, 0.3)' },
+
+    ':disabled': {
+      color: 'border',
+      cursor: 'default',
+    },
   })
 );

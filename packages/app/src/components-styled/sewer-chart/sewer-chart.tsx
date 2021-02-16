@@ -213,25 +213,24 @@ export function SewerChart(props: SewerChartProps) {
         <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
       )}
 
-      {hasOutliers && (
-        <Box
-          ml={dimensions.padding.left}
-          mr={dimensions.padding.right}
-          position="relative"
-          /**
-           * The margin-bottom has been eyeballed to visually attach the
-           * button to the graph, not sure how future-proof this is.
-           */
-          mb={-19}
-          zIndex={1}
+      <Box
+        ml={dimensions.padding.left}
+        mr={dimensions.padding.right}
+        position="relative"
+        /**
+         * The margin-bottom has been eyeballed to visually attach the
+         * button to the graph, not sure how future-proof this is.
+         */
+        mb={-19}
+        zIndex={1}
+      >
+        <ToggleOutlierButton
+          disabled={!hasOutliers}
+          onClick={() => setDisplayOutliers(!displayOutliers)}
         >
-          <ToggleOutlierButton
-            onClick={() => setDisplayOutliers(!displayOutliers)}
-          >
-            {displayOutliers ? text.hide_outliers : text.display_outliers}
-          </ToggleOutlierButton>
-        </Box>
-      )}
+          {displayOutliers ? text.hide_outliers : text.display_outliers}
+        </ToggleOutlierButton>
+      </Box>
 
       <Box position="relative" ref={sizeRef} css={css({ userSelect: 'none' })}>
         <svg
