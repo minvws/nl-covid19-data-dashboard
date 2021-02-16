@@ -276,34 +276,39 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                 yTickValues={[0, 25, 50, 75, 100]}
                 linesConfig={[
                   {
-                    metricProperty: 'percentage_70_plus',
-                    label: '70+ jaar',
-                    color: 'hotpink',
+                    metricProperty: 'percentage_16_24',
+                    label: '16 - 24 jaar',
+                    color: '#005082',
                     legendShape: 'square',
-                  },
-                  {
-                    metricProperty: 'percentage_55_69',
-                    label: '55 - 69 jaar',
-                    color: colors.data.primary,
-                    legendShape: 'square',
-                  },
-                  {
-                    metricProperty: 'percentage_40_54',
-                    label: '40 - 54 jaar',
-                    color: colors.data.primary,
-                    legendShape: 'square',
+                    areaFillOpacity: 0,
                   },
                   {
                     metricProperty: 'percentage_25_39',
                     label: '25 - 39 jaar',
-                    color: colors.data.primary,
+                    color: '#00BBB5',
                     legendShape: 'square',
+                    areaFillOpacity: 0,
                   },
                   {
-                    metricProperty: 'percentage_16_24',
-                    label: '16 - 24 jaar',
-                    color: colors.data.primary,
+                    metricProperty: 'percentage_40_54',
+                    label: '40 - 54 jaar',
+                    color: '#FFC000',
                     legendShape: 'square',
+                    areaFillOpacity: 0,
+                  },
+                  {
+                    metricProperty: 'percentage_55_69',
+                    label: '55 - 69 jaar',
+                    color: '#E28700',
+                    legendShape: 'square',
+                    areaFillOpacity: 0,
+                  },
+                  {
+                    metricProperty: 'percentage_70_plus',
+                    label: '70+ jaar',
+                    color: '#C252D4',
+                    legendShape: 'square',
+                    areaFillOpacity: 0,
                   },
                 ]}
                 /**
@@ -333,7 +338,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                         {`${dateStartString} - ${dateEndString}`}
                       </Text>
                       <TooltipList>
-                        {linesConfig.map((x) => (
+                        {[...linesConfig].reverse().map((x) => (
                           <TooltipListItem
                             key={x.metricProperty}
                             color={x.color}
