@@ -3,7 +3,7 @@ import { ArticleSummary } from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
 import {
   CategoricalBarScale,
-  getCategory,
+  getCategoryLevel,
 } from '~/components-styled/categorical-bar-scale';
 import { ContentHeader } from '~/components-styled/content-header';
 import { EscalationLevelInfoLabel } from '~/components-styled/escalation-level';
@@ -29,8 +29,8 @@ import {
   getText,
   getVrData,
 } from '~/static-props/get-data';
-import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { useEscalationColor } from '~/utils/use-escalation-color';
 
 export { getStaticPaths } from '~/static-paths/vr';
 
@@ -50,6 +50,20 @@ const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
 
   const { escalation_level, hospital_nice_sum, tested_overall_sum } = data;
   const currentEscalationLevel = escalation_level.level as EscalationLevel;
+
+  const positiveTestedColor = useEscalationColor(
+    getCategoryLevel(
+      positiveTestedEscalationThresholds,
+      tested_overall_sum.last_value.infected_per_100k
+    )
+  );
+
+  const hospitalAdmissionsColor = useEscalationColor(
+    getCategoryLevel(
+      hospitalAdmissionsEscalationThresholds,
+      hospital_nice_sum.last_value.admissions_per_1m
+    )
+  );
 
   return (
     <>
@@ -126,14 +140,7 @@ const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
                 <KpiValue
                   data-cy="infected"
                   absolute={tested_overall_sum.last_value.infected_per_100k}
-                  color={
-                    colors.data.scale.magenta[
-                      getCategory(
-                        positiveTestedEscalationThresholds,
-                        tested_overall_sum.last_value.infected_per_100k
-                      ) - 1
-                    ]
-                  }
+                  color={positiveTestedColor}
                 />
               </Box>
               <InlineText>{text.positieve_testen.value_annotation}</InlineText>
@@ -167,14 +174,7 @@ const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
                 <KpiValue
                   data-cy="infected"
                   absolute={hospital_nice_sum.last_value.admissions_per_1m}
-                  color={
-                    colors.data.scale.magenta[
-                      getCategory(
-                        hospitalAdmissionsEscalationThresholds,
-                        hospital_nice_sum.last_value.admissions_per_1m
-                      ) - 1
-                    ]
-                  }
+                  color={hospitalAdmissionsColor}
                 />
               </Box>
               <InlineText>{text.ziekenhuisopnames.value_annotation}</InlineText>

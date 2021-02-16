@@ -3,7 +3,7 @@ import { EscalationLevelIcon } from '~/components-styled/escalation-level-icon';
 import { Text } from '~/components-styled/typography';
 import { EscalationLevel } from '~/domain/restrictions/type';
 import siteText from '~/locale/index';
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
+import { useEscalationColor } from '~/utils/use-escalation-color';
 
 export type EscalationLevelProps = {
   escalationLevel: EscalationLevel;
@@ -20,11 +20,8 @@ export function EscalationLevelInfoLabel({
   fontSize = 2,
   useLevelColor = false,
 }: EscalationLevelProps) {
-  /* Colors are in a 0-indexed array */
-  const color = useLevelColor
-    ? regionThresholds.escalation_levels.escalation_level[escalationLevel - 1]
-        .color
-    : 'inherit';
+  const escalationColor = useEscalationColor(escalationLevel);
+  const color = useLevelColor ? escalationColor : 'inherit';
   return (
     <Box display="flex" alignItems="center" justifyContent="flex-start">
       <EscalationLevelIcon level={escalationLevel} isSmall={hasSmallIcon} />

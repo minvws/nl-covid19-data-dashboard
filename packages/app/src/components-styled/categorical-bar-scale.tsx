@@ -1,4 +1,6 @@
 import css from '@styled-system/css';
+import { Fragment } from 'react';
+import { EscalationLevel } from '~/domain/restrictions/type';
 import { Box } from './base';
 import { InlineText } from './typography';
 
@@ -13,12 +15,12 @@ export interface CategoricalBarScaleCategory {
   color?: string;
 }
 
-export function getCategory(
+export function getCategoryLevel(
   categories: CategoricalBarScaleCategory[],
   value: number
-) {
+): EscalationLevel {
   const level = categories.findIndex((category) => category.threshold > value);
-  return level === -1 ? 4 : level;
+  return level === -1 ? 4 : (level as EscalationLevel);
 }
 
 export function CategoricalBarScale({
@@ -46,7 +48,7 @@ export function CategoricalBarScale({
       <Box position="relative" width="100%" display="flex" my={4}>
         {barPieces.map((category, index) => (
           <Box
-            key={`bar-${category.name}`}
+            key={category.name}
             height={12}
             bg={category.color}
             width={`${(category.width / maxValue) * 100}%`}
@@ -86,7 +88,7 @@ export function CategoricalBarScale({
 
       <Box>
         {barPieces.map((category) => (
-          <>
+          <Fragment key={category.name}>
             <Box
               display="inline-block"
               width="0.65rem"
@@ -97,13 +99,12 @@ export function CategoricalBarScale({
             <InlineText
               ml={1}
               mr={3}
-              key={`legenda-${category.name}`}
               fontWeight={category.isActive ? 'bold' : 'normal'}
               fontSize={1}
             >
               {category.name}
             </InlineText>
-          </>
+          </Fragment>
         ))}
       </Box>
     </>
