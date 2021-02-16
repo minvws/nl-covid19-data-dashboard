@@ -10,7 +10,7 @@ import { UrlObject } from 'url';
 import { Link } from '~/utils/link';
 import { Box } from '../base';
 import { Category } from './category';
-import { TitleWithIcon } from './title-with-icon';
+import { Title } from './title';
 
 type Url = UrlObject | string;
 
@@ -67,7 +67,7 @@ export function MetricMenuItemLink({
 
   const content = (
     <>
-      <TitleWithIcon icon={icon} title={title} subtitle={subtitle} />
+      <Title icon={icon} title={title} subtitle={subtitle} />
       {children && (
         <Box mx={icon ? '2.5em' : 0}>
           <ChildrenWrapper>{children}</ChildrenWrapper>
