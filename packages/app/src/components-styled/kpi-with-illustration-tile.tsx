@@ -54,7 +54,7 @@ export function KpiWithIllustrationTile({
           <p>{illustration.description}</p>
         </Box>
       </Box>
-      <Metadata {...metadata} />
+      <Metadata accessibilitySubject={title} {...metadata} />
     </Tile>
   );
 }

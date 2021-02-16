@@ -1,5 +1,5 @@
 import { get, set } from 'lodash';
-import { TALLLanguages } from '~/locale';
+import { Locale } from '~/locale';
 import { MDToHTMLString } from './MDToHTMLString';
 
 /**
@@ -28,8 +28,8 @@ const MARKDOWN_KEYS = [
   'vaccinaties.grafiek.omschrijving',
 ];
 
-export function parseMarkdownInLocale(text: TALLLanguages) {
-  const textClone = JSON.parse(JSON.stringify(text)) as TALLLanguages;
+export function parseMarkdownInLocale(text: Locale) {
+  const textClone = JSON.parse(JSON.stringify(text)) as Locale;
 
   MARKDOWN_KEYS.forEach((key) => replaceWithMarkdown(textClone, key));
 

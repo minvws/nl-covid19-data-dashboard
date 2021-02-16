@@ -36,7 +36,14 @@ export function TopicalPageHeader({
       )}
 
       <Box>
-        <Heading level={1} fontWeight="normal" m={0} lineHeight={0} mb={2}>
+        <Heading
+          level={1}
+          fontWeight="normal"
+          m={0}
+          lineHeight={0}
+          mb={2}
+          fontSize={{ _: '2rem', lg: '2.75rem' }}
+        >
           {title}
         </Heading>
         <InlineText color="bodyLight">
