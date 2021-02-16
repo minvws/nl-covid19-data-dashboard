@@ -11,6 +11,7 @@ import {
   PositionProps,
   TypographyProps,
 } from 'styled-system';
+import { styledShouldForwardProp } from '~/utils/styled-should-forward-prop';
 
 export type TextProps = SpaceProps &
   LayoutProps &
@@ -22,13 +23,13 @@ export type TextProps = SpaceProps &
  * A generic text component that can be used for any paragraph or other piece of
  * text, only for headers we have a dedicated Title component.
  */
-export const Text = styled.p<TextProps>(
-  compose(margin, padding, typography, color)
-);
+export const Text = styled.p.withConfig({
+  shouldForwardProp: styledShouldForwardProp,
+})<TextProps>(compose(margin, padding, typography, color));
 
-export const InlineText = styled.span<TextProps>(
-  compose(margin, padding, typography, color)
-);
+export const InlineText = styled.span.withConfig({
+  shouldForwardProp: styledShouldForwardProp,
+})<TextProps>(compose(margin, padding, typography, color));
 
 /**
  * By setting defaultProps we can set themed defaults for the text component to

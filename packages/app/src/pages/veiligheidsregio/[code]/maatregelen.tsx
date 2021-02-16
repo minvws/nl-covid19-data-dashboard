@@ -94,7 +94,6 @@ const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
       />
       <TileList>
         <ContentHeader
-          category={siteText.veiligheidsregio_layout.headings.algemeen}
           title={replaceVariablesInText(
             siteText.veiligheidsregio_maatregelen.titel,
             {

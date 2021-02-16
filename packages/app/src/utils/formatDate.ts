@@ -1,13 +1,3 @@
-/**
- * The order of including these polyfills is important:
- * getcanonicallocales needs to be first
- * datetimeformat needs to be second
- * datetimeformat locale's last
- */
-import '@formatjs/intl-getcanonicallocales/polyfill';
-import '@formatjs/intl-datetimeformat/polyfill';
-import '@formatjs/intl-datetimeformat/locale-data/en';
-import '@formatjs/intl-datetimeformat/locale-data/nl';
 import { isSameDay, isToday, isYesterday, subDays } from 'date-fns';
 import siteText from '~/locale/index';
 import { getLocale } from '~/utils/getLocale';
@@ -117,6 +107,7 @@ export function formatDateFromMilliseconds(
   style?: formatStyle
 ): string {
   assert(!isNaN(milliseconds), 'milliseconds is NaN');
+
   if (style === 'time') return Time.format(milliseconds); // '09:24'
   if (style === 'iso') return new Date(milliseconds).toISOString(); // '2020-07-23T10:01:16.000Z'
   if (style === 'long') return Long.format(milliseconds); // '23 juli 2020 om 12:01'

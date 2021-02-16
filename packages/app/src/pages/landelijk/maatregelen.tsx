@@ -74,10 +74,7 @@ const NationalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
         description={text.nationaal_metadata.description}
       />
       <TileList>
-        <ContentHeader
-          category={text.nationaal_layout.headings.algemeen}
-          title={text.nationaal_maatregelen.titel}
-        />
+        <ContentHeader title={text.nationaal_maatregelen.titel} />
 
         {showLockdown && (
           <KpiSection flexDirection="column">
