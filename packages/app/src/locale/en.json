@@ -661,7 +661,6 @@
       "overig": "Early indicators",
       "verpleeghuis": "Nursing homes",
       "laatste": "Latest developments",
-      "algemeen": "General",
       "besmettingen": "Infections",
       "ziekenhuizen": "Hospitals",
       "verpleeghuizen": "Nursing homes",
@@ -683,8 +682,7 @@
       "vroege_signalen": "Early indicators",
       "gedrag": "Behaviour",
       "kwetsbare_groepen": "Vulnerable groups",
-      "maatregelen": "Measures",
-      "algemeen": "General"
+      "maatregelen": "Measures"
     }
   },
   "veiligheidsregio_metadata": {

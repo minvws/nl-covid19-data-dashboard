@@ -661,7 +661,6 @@
       "overig": "Vroegsignalering",
       "verpleeghuis": "Verpleeghuiszorg",
       "laatste": "Laatste ontwikkelingen",
-      "algemeen": "Algemeen",
       "besmettingen": "Besmettingen",
       "ziekenhuizen": "Ziekenhuizen",
       "verpleeghuizen": "Verpleeghuiszorg",
@@ -683,8 +682,7 @@
       "vroege_signalen": "Vroege signalen",
       "gedrag": "Gedrag",
       "kwetsbare_groepen": "Kwetsbare groepen",
-      "maatregelen": "Maatregelen",
-      "algemeen": "Algemeen"
+      "maatregelen": "Maatregelen"
     }
   },
   "veiligheidsregio_metadata": {

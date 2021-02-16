@@ -77,7 +77,6 @@ const NationalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
       />
       <TileList>
         <ContentHeader
-          category={text.nationaal_layout.headings.algemeen}
           icon={<Maatregelen fill={theme.colors.restrictions} />}
           title={text.nationaal_maatregelen.titel}
         />
