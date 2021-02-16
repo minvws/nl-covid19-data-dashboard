@@ -1,6 +1,5 @@
 import { css } from '@styled-system/css';
 import { ParentSize } from '@visx/responsive';
-import Head from 'next/head';
 import { Fragment, useState } from 'react';
 import styled from 'styled-components';
 import VaccinatieIcon from '~/assets/vaccinaties.svg';
@@ -261,10 +260,10 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             <KpiValue
               percentage={data.vaccine_support.last_value.percentage_average}
             />
-            <Text mt={0} /* @TODO remove margin-top from Text styling */>
-              Gemiddeld bladie bla lokalize @TODO
-            </Text>
+            <Text mt={0}>{text.grafiek_draagvlak.kpi_omschrijving}</Text>
           </section>
+
+          {/* <Text mt={0}>{text.grafiek_draagvlak.omschrijving}</Text> */}
           <ParentSize>
             {({ width }) => (
               <MultiLineChart
@@ -283,8 +282,26 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                     legendShape: 'square',
                   },
                   {
-                    metricProperty: 'percentage_average',
+                    metricProperty: 'percentage_55_69',
                     label: '55 - 69 jaar',
+                    color: colors.data.primary,
+                    legendShape: 'square',
+                  },
+                  {
+                    metricProperty: 'percentage_40_54',
+                    label: '40 - 54 jaar',
+                    color: colors.data.primary,
+                    legendShape: 'square',
+                  },
+                  {
+                    metricProperty: 'percentage_25_39',
+                    label: '25 - 39 jaar',
+                    color: colors.data.primary,
+                    legendShape: 'square',
+                  },
+                  {
+                    metricProperty: 'percentage_16_24',
+                    label: '16 - 24 jaar',
                     color: colors.data.primary,
                     legendShape: 'square',
                   },
@@ -299,18 +316,22 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                  */
                 formatTooltip={(value, _key, linesConfig) => {
                   const dateStartString = formatDateFromSeconds(
-                    value.date_start_unix
+                    value.date_start_unix,
+                    'axis'
                   );
                   const dateEndString = formatDateFromSeconds(
-                    value.date_end_unix
+                    value.date_end_unix,
+                    'axis'
                   );
 
                   return (
                     <section>
                       <Heading level={5} mb={1}>
-                        {/* {`${dateStartString} - ${dateEndString}`} */}
-                        Vaccinatiebereidheid
+                        {text.grafiek_draagvlak.titel}
                       </Heading>
+                      <Text m={0} mb={1} fontSize={1}>
+                        {`${dateStartString} - ${dateEndString}`}
+                      </Text>
                       <TooltipList>
                         {linesConfig.map((x) => (
                           <TooltipListItem
@@ -329,7 +350,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                         <Spacer mb={1} />
                         <TooltipListItem color="transparent">
                           <TooltipValueContainer>
-                            {'gemiddelde :'}
+                            {`${text.grafiek_draagvlak.tooltip_gemiddeld}:`}
                             <strong>
                               {formatPercentage(value['percentage_average'])}%
                             </strong>
