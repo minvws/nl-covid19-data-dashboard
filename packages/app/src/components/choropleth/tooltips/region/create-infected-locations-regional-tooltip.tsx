@@ -1,14 +1,19 @@
 import {
+  ChoroplethThresholdsValue,
   RegionsNursingHome,
   SafetyRegionProperties,
 } from '@corona-dashboard/common';
+import { css } from '@styled-system/css';
 import { ReactNode } from 'react';
+import { Box } from '~/components-styled/base';
 import { Text } from '~/components-styled/typography';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { RegionSelectionHandler } from '../../select-handlers/create-select-region-handler';
 
 export const createInfectedLocationsRegionalTooltip = (
+  subject: string,
+  thresholdValues: ChoroplethThresholdsValue[],
   selectHandler: RegionSelectionHandler
 ) => (context: SafetyRegionProperties & RegionsNursingHome): ReactNode => {
   const onSelect = (event: any) => {
@@ -16,12 +21,38 @@ export const createInfectedLocationsRegionalTooltip = (
     selectHandler(context.vrcode);
   };
 
+  const filteredThreshold = thresholdValues
+    .filter((item: ChoroplethThresholdsValue) => {
+      return item.threshold <= context.infected_locations_percentage;
+    })
+    .slice(-1)[0];
+
   return (
     <TooltipContent title={context.vrname} onSelect={onSelect}>
-      <Text m={0} fontWeight="bold">
-        {`${formatPercentage(
-          context.infected_locations_percentage
-        )}% (${formatNumber(context.infected_locations_total)})`}
+      <Text m={0} mb={1} fontWeight="bold">
+        {subject}
+      </Text>
+      <Text
+        m={0}
+        css={css({
+          display: 'flex',
+          alignItems: 'center',
+          flexWrap: 'nowrap',
+          whiteSpace: 'pre-wrap',
+        })}
+      >
+        <span css={css({ fontWeight: 'bold' })}>
+          {`${formatPercentage(
+            context.infected_locations_percentage
+          )}% (${formatNumber(context.infected_locations_total)})`}{' '}
+        </span>
+        <Box
+          height={13}
+          width={13}
+          borderRadius={'2px'}
+          ml={'auto'}
+          backgroundColor={filteredThreshold.color}
+        />
       </Text>
     </TooltipContent>
   );

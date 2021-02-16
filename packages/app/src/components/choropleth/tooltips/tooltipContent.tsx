@@ -1,6 +1,7 @@
 import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
+import Locatie from '~/assets/locatie.svg';
 import { Heading } from '~/components-styled/typography';
 
 interface IProps {
@@ -16,6 +17,9 @@ export function TooltipContent(props: IProps) {
     <StyledTooltipContent onClick={onSelect}>
       <TooltipHeader>
         <Heading level={3} m={0}>
+          <StyledLocationIcon>
+            <Locatie />
+          </StyledLocationIcon>
           {title}
         </Heading>
         {onSelect && <Chevron />}
@@ -25,11 +29,11 @@ export function TooltipContent(props: IProps) {
   );
 }
 
-const StyledTooltipContent = styled.div((x) =>
+const StyledTooltipContent = styled.div((x: any) =>
   css({
     color: 'body',
     width: '100%',
-    minWidth: 160,
+    minWidth: 250,
     borderRadius: 1,
     cursor: x.onClick ? 'pointer' : 'default',
   })
@@ -70,5 +74,20 @@ const TooltipInfo = styled.div(
     borderTopColor: 'border',
     py: 2,
     px: 3,
+  })
+);
+
+const StyledLocationIcon = styled.span(
+  css({
+    whiteSpace: 'nowrap',
+    display: 'inline-block',
+    mr: 2,
+
+    svg: {
+      pt: '3px',
+      color: 'black',
+      width: 9,
+      height: 17,
+    },
   })
 );

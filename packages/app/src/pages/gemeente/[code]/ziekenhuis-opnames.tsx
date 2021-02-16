@@ -127,6 +127,8 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
             metricName="hospital_nice"
             metricProperty="admissions_on_date_of_reporting"
             tooltipContent={createMunicipalHospitalAdmissionsTooltip(
+              siteText.choropleth_tooltip.hospital_admissions,
+              municipalThresholds.hospital_nice.admissions_on_date_of_reporting,
               createSelectMunicipalHandler(router, 'ziekenhuis-opnames')
             )}
             onSelect={createSelectMunicipalHandler(

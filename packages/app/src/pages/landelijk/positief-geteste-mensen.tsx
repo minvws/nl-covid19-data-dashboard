@@ -205,6 +205,8 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
               metricName="tested_overall"
               metricProperty="infected_per_100k"
               tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
+                siteText.choropleth_tooltip.positive_tested_people,
+                regionThresholds.tested_overall.infected_per_100k,
                 createSelectMunicipalHandler(router, 'positief-geteste-mensen')
               )}
               onSelect={createSelectMunicipalHandler(
@@ -219,6 +221,8 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
               metricName="tested_overall"
               metricProperty="infected_per_100k"
               tooltipContent={createPositiveTestedPeopleRegionalTooltip(
+                siteText.choropleth_tooltip.positive_tested_people,
+                regionThresholds.tested_overall.infected_per_100k,
                 createSelectRegionHandler(router, 'positief-geteste-mensen')
               )}
               onSelect={createSelectRegionHandler(
