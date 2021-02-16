@@ -23,7 +23,7 @@ const TooltipContainer = styled.div(
   css({
     position: 'absolute',
     bg: 'white',
-    boxShadow: 'rgba(33, 33, 33, 0.2) 0px 1px 2px',
+    boxShadow: 'tile',
     pointerEvents: 'none',
     zIndex: 1000,
     borderRadius: 1,
