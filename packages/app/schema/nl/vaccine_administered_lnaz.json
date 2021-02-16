@@ -4,16 +4,12 @@
       "title": "nl_vaccine_administered_lnaz_value",
       "type": "object",
       "required": [
-        "estimated",
         "reported",
         "date_unix",
         "date_of_insertion_unix"
       ],
       "additionalProperties": false,
       "properties": {
-        "estimated": {
-          "type": "number"
-        },
         "reported": {
           "type": "number"
         },
