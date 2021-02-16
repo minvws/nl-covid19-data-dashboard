@@ -27,9 +27,9 @@ export function useChartHover<
 ) {
   // This is a bit of a hack because to fit the charts neatly against each other,
   // the last value of the next area list is added to the previous. Which means
-  // there are doubles in the data lists. When determining the hovered point we
+  // there are duplicates in the data lists. When determining the hovered point we
   // don't want to have double hits, so we remove the last item from the first trends
-  // and area list here.
+  // and area list here. (This is also why we need to create a copy of these lists here.)
   const _trends = useMemo(() => {
     const result = trends.map((x) => ({
       ...x,
