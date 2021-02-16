@@ -1,7 +1,7 @@
 {
   "definitions": {
     "value": {
-      "title": "nl_vaccine_administered_general_practitioner_value",
+      "title": "nl_vaccine_administered_doctors_value",
       "type": "object",
       "required": [
         "estimated",
@@ -23,7 +23,7 @@
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_vaccine_administered_general_practitioner",
+  "title": "nl_vaccine_administered_doctors",
   "type": "object",
   "required": ["values", "last_value"],
   "additionalProperties": false,
