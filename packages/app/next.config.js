@@ -3,10 +3,8 @@ const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const sitemap = require('./generate-sitemap.js');
 
 const withTM = require('next-transpile-modules')([
-  // `internmap` is a dependency of `d3-array`
-  'internmap',
-  // `react-use-measure` is a dependency of `@visx/tooltip`
-  // 'react-use-measure',
+  'internmap', // `internmap` is a dependency of `d3-array`
+  'geometric',
 ]);
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
@@ -86,8 +84,8 @@ const nextConfig = {
        * is not ie11-compatible. We'll use an alias to point the import to a
        * common js version of that library.
        */
-      'react-spring$': 'react-spring/web.cjs',
-      'react-spring/renderprops$': 'react-spring/renderprops.cjs',
+      // 'react-spring$': 'react-spring/web.cjs',
+      // 'react-spring/renderprops$': 'react-spring/renderprops.cjs',
     };
 
     config.plugins.push(
