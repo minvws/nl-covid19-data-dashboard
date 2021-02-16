@@ -142,7 +142,7 @@ export function AreaChart<
     ...areaConfigs.map((x) => x.values).flat(),
   ];
 
-  const [xDomain, yDomain, seriesMax] = useDomains(allValues, signaalwaarde);
+  const [xDomain, yDomain] = useDomains(allValues, signaalwaarde);
 
   const padding = useChartPadding(0, defaultPadding, overridePadding);
 
@@ -195,10 +195,6 @@ export function AreaChart<
     width: width - padding.left - padding.right,
     height: height - padding.top - padding.bottom,
   };
-
-  function getDate(x: TrendValue) {
-    return x.__date;
-  }
 
   const timespanMarkerData = trendConfigs
     .flat()
@@ -288,6 +284,10 @@ export function AreaChart<
       </Box>
     </>
   );
+}
+
+function getDate(x: TrendValue) {
+  return x.__date;
 }
 
 function renderDivider(
