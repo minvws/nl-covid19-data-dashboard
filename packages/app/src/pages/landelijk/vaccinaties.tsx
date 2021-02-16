@@ -5,7 +5,7 @@ import {
   NlVaccineAdministeredEstimateValue,
   NlVaccineAdministeredValue,
   NlVaccineDeliveryEstimateValue,
-  NlVaccineDeliveryValue
+  NlVaccineDeliveryValue,
 } from '@corona-dashboard/common';
 import { css } from '@styled-system/css';
 import { ParentSize } from '@visx/responsive';
@@ -36,12 +36,12 @@ import {
   createGetContent,
   getLastGeneratedDate,
   getNlData,
-  getText
+  getText,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import {
   formatDateFromMilliseconds,
-  formatDateFromSeconds
+  formatDateFromSeconds,
 } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
@@ -240,8 +240,8 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
         </TwoKpiSection>
 
         <ChartTile
-          title="test"
-          description="toelichting"
+          title={text.grafiek.titel}
+          description={text.grafiek.omschrijving}
           metadata={{
             date: 1611593522,
             source: text.bronnen.rivm,

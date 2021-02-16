@@ -75,8 +75,9 @@ function createSortNearest<T extends TimestampedTrendValue>(point: Point) {
 function createSortNearestHorizontal<T extends TimestampedTrendValue>(
   point: Point
 ) {
-  return (left: HoverPoint<T>, right: HoverPoint<T>) =>
-    Math.abs(point.x - left.x) - Math.abs(point.x - right.x);
+  return (left: HoverPoint<T>, right: HoverPoint<T>) => {
+    return Math.abs(point.x - left.x) - Math.abs(point.x - right.x);
+  };
 }
 
 export function useChartHover<
