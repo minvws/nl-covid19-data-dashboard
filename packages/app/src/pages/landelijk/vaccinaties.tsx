@@ -407,7 +407,7 @@ export default VaccinationPage;
 const TooltipList = styled.ol`
   margin: 0;
   padding: 0;
-  list-style: 'none';
+  list-style: none;
 `;
 
 interface TooltipListItemProps {
