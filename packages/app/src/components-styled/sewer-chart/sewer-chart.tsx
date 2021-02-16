@@ -276,6 +276,7 @@ export function SewerChart(props: SewerChartProps) {
                 height={dimensions.bounds.height}
                 fill="rgba(192, 232, 252, 0.5)"
                 css={css({
+                  willChange: 'transform',
                   transitionProperty: 'x',
                   transitionDuration: '75ms',
                   transitionTimingFunction: 'ease-out',
@@ -354,6 +355,7 @@ export function SewerChart(props: SewerChartProps) {
                 cx={scatterTooltip.point.x}
                 cy={scatterTooltip.point.y}
                 css={css({
+                  willChange: 'transform',
                   transitionProperty: 'cx, cy',
                   transitionDuration: '75ms',
                   transitionTimingFunction: 'ease-out',

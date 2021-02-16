@@ -43,6 +43,7 @@ export function Tooltip({ children, title, x, y, bounds }: TooltipProps) {
       style={{
         top: 0,
         transform: `translate(${left}px,${top}px)`,
+        willChange: 'transform',
         transition: 'transform 75ms ease-out',
         maxWidth: bounds.right - bounds.left,
       }}
