@@ -89,12 +89,14 @@ export function CategoricalBarScale({
       <Box>
         {barPieces.map((category) => (
           <Fragment key={category.name}>
+            {/* 0.25px offset is used for sharper rendering of the circle */}
             <Box
               display="inline-block"
-              width="0.65rem"
-              height="0.65rem"
+              width="0.7rem"
+              height="0.7rem"
               borderRadius="50%"
               bg={category.color}
+              css={css({ transform: 'translateY(.25px)' })}
             />
             <InlineText
               ml={1}
