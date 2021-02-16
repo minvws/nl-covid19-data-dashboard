@@ -332,9 +332,9 @@ function renderDivider(
 
 function formatMarkerLabel(data: TimestampedTrendValue) {
   if (isDateValue(data)) {
-    return formatDateFromMilliseconds(data.date_unix);
+    return formatDateFromSeconds(data.date_unix);
   } else if (isDateSpanValue(data)) {
-    return formatDateFromMilliseconds(data.date_start_unix);
+    return formatDateFromSeconds(data.date_start_unix);
   }
   return '';
 }
