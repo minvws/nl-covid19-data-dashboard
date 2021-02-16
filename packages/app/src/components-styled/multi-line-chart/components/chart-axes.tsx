@@ -148,7 +148,6 @@ export const ChartAxes = memo(function ChartAxes({
         />
         <AxisLeft
           scale={yScale}
-          // numTicks={NUM_TICKS}
           tickValues={yTickValues}
           hideTicks
           hideAxisLine
