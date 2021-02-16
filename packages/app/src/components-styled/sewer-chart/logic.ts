@@ -159,14 +159,14 @@ export function useSelectedStationValues(
 
   /**
    * Here we determine the outlier limit: find the highest line-value and
-   * multiply it by 1.2 in order to display station values which are close to
+   * multiply it by 1.5 in order to display station values which are close to
    * the highest value.
    */
   const outlierLimit =
     Math.max(
       getMax(averageValues, (x) => x.value),
       getMax(selectedStationValues, (x) => x.value)
-    ) * 1.2;
+    ) * 1.5;
 
   /**
    * If there's a station value GTE than the max line, it means we have outliers
