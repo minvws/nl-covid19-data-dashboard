@@ -55,9 +55,12 @@ function formatVaccinationsTooltip(
   } else if (isDateSpanValue(data)) {
     const dateStartString = formatDateFromSeconds(
       data.date_start_unix,
-      'short'
+      'day-month'
     );
-    const dateEndString = formatDateFromSeconds(data.date_end_unix, 'short');
+    const dateEndString = formatDateFromSeconds(
+      data.date_end_unix,
+      'day-month'
+    );
     return (
       <Box>
         <Text fontWeight="bold">

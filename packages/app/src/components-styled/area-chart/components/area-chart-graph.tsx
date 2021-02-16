@@ -235,10 +235,5 @@ const StyledSvg = styled.svg(
     '&:focus': {
       outline: 'none',
     },
-    '& .area-chart-x-axis-label': {
-      fontSize: 1,
-      fill: 'annotation',
-      fontFamily: 'body',
-    },
   })
 );
