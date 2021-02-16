@@ -112,8 +112,9 @@ export function formatDateFromMilliseconds(
 }
 
 /**
- * Improve date formatting performance in safari, in which it could easily
- * take more than 20ms per function invocation.
+ * This formatting-cache will improve date formatting performance in
+ * I̶n̶t̶e̶r̶n̶e̶t̶ ̶E̶x̶p̶l̶o̶r̶e̶r̶ Safari.
+ * Formatting a date could easily take 20ms+, this is now reduced to < 1ms.
  */
 const formatCache: Record<string, string> = {};
 

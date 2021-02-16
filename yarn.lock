@@ -3794,6 +3794,22 @@
     "@typescript-eslint/types" "4.14.2"
     eslint-visitor-keys "^2.0.0"
 
+"@visx/annotation@^1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@visx/annotation/-/annotation-1.5.0.tgz#8dc1c1f873226ed55f67619cf8f0e5dcf7e51fdf"
+  integrity sha512-tzNajg/HWKY17CYR+Ma4CWX/mlfnpMOXH7hXDBOWUA1c8fngrIqK/URiI186XTscdN3uMNBNC9+ceZuylCauKg==
+  dependencies:
+    "@types/classnames" "^2.2.9"
+    "@types/react" "*"
+    "@visx/drag" "1.3.0"
+    "@visx/group" "1.0.0"
+    "@visx/point" "1.0.0"
+    "@visx/shape" "1.4.0"
+    "@visx/text" "1.3.0"
+    classnames "^2.2.5"
+    prop-types "^15.5.10"
+    react-use-measure "^2.0.3"
+
 "@visx/axis@1.4.0":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@visx/axis/-/axis-1.4.0.tgz#6a8737d0fb7d4313cf311f9c8b8071e7744b8e7c"
@@ -3824,6 +3840,15 @@
   dependencies:
     "@types/d3-shape" "^1.3.1"
     d3-shape "^1.0.6"
+
+"@visx/drag@1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@visx/drag/-/drag-1.3.0.tgz#79d022854d2a85e14cbcf5cc5d82dcfcd6bb8d46"
+  integrity sha512-Hr5ceQ7R4pVUGQ1yFLwfiWd2Nd4Z74xqaxB2xNs/vpxqX6xhzS90agVoD1KiDtCN9IKOrS0J2bEPStJFFpu1OQ==
+  dependencies:
+    "@types/react" "*"
+    "@visx/event" "1.3.0"
+    prop-types "^15.5.10"
 
 "@visx/event@1.3.0":
   version "1.3.0"
@@ -13498,6 +13523,13 @@ react-tiny-virtual-list@^2.0.5:
 react-use-measure@2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/react-use-measure/-/react-use-measure-2.0.1.tgz#4f23f94c832cd4512da55acb300d1915dcbf3ae8"
+  dependencies:
+    debounce "^1.2.0"
+
+react-use-measure@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/react-use-measure/-/react-use-measure-2.0.3.tgz#7b56ae3ca19ccf62326933678625a8ff6b3f90a3"
+  integrity sha512-57O8Os9MbgFEHuOHOXNdPmBHhXjCBIwtB3YxyrM/MgaX44a1o97Mu9YqiOA6cAF8kXIw4fO3XK0r2Taa4SqaqQ==
   dependencies:
     debounce "^1.2.0"
 
