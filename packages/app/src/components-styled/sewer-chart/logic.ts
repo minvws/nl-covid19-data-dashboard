@@ -282,36 +282,42 @@ function dedupe<T>(key: keyof T) {
  * get max value of items mapped by a getter
  */
 function getMax<T>(items: T[], getValue: (item: T) => number | undefined) {
-  return Math.max(...items.map((x) => getValue(x) || 0));
+  return Math.max(...items.map((x) => getValue(x) ?? -Infinity));
 }
 
 /**
- * utility hook in order to calculate pan-distance based on given points
+ * usePointDistance can be used to measure the distance between multiple points.
+ * This can be useful when you would like to track how far a user has moved its
+ * pointer (finger/mouse).
+ *
+ * An example usecase is listening to the `onPointerUp` event and distinguising
+ * clicks vs. drags. You'd feed points to this hook during the `onPointerMove`-
+ * event.
  */
-export function usePanDistance() {
-  const panPointRef = useRef<Point>();
-  const panDistanceRef = useRef<number>(0);
+export function usePointDistance() {
+  const pointRef = useRef<Point>();
+  const distanceRef = useRef<number>(0);
 
   const add = useCallback((point: Point) => {
-    const panDistance = panPointRef.current
+    const panDistance = pointRef.current
       ? lineLength([
-          [panPointRef.current.x, panPointRef.current.y],
+          [pointRef.current.x, pointRef.current.y],
           [point.x, point.y],
         ])
       : 0;
 
-    panPointRef.current = point;
-    panDistanceRef.current += panDistance;
+    pointRef.current = point;
+    distanceRef.current += panDistance;
   }, []);
 
   const start = useCallback((point: Point) => {
-    panPointRef.current = point;
-    panDistanceRef.current = 0;
+    pointRef.current = point;
+    distanceRef.current = 0;
   }, []);
 
   return useMemo(
     () => ({
-      value: panDistanceRef,
+      distanceRef,
       add,
       start,
     }),

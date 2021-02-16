@@ -26,7 +26,7 @@ import { Tooltip } from './components/tooltip';
 import {
   Dimensions,
   useLineTooltip,
-  usePanDistance,
+  usePointDistance,
   useScatterTooltip,
   useSelectedStationValues,
   useSewerChartScales,
@@ -144,17 +144,17 @@ export function SewerChart(props: SewerChartProps) {
   });
 
   /**
-   * For touch devices we'll measure pan distance in order to prevent simulating
-   * a "click" (highlight a specific line) when someone has been panning instead
-   * of clicking.
+   * For touch devices we'll measure pointer movement distance in order to
+   * prevent simulating a "click" (highlight a specific line) when someone has
+   * been "panning/dragging" instead of clicking.
    */
-  const panDistance = usePanDistance();
+  const pointDistance = usePointDistance();
   const handlePointerDown = useCallback(
     (evt: PointerEvent<SVGSVGElement>) => {
       const point = localPoint(evt);
-      if (point) panDistance.start(point);
+      if (point) pointDistance.start(point);
     },
-    [panDistance]
+    [pointDistance]
   );
 
   const handlePointerMove = useCallback(
@@ -166,14 +166,14 @@ export function SewerChart(props: SewerChartProps) {
       /**
        * update pan distance
        */
-      panDistance.add(point);
+      pointDistance.add(point);
       /**
        * find new tooltip datums to highlight
        */
       scatterTooltip.findClosest(point);
       lineTooltip.findClosest(point);
     },
-    [lineTooltip, panDistance, scatterTooltip]
+    [lineTooltip, pointDistance, scatterTooltip]
   );
 
   const handlePointerUp = useCallback(() => {
@@ -181,10 +181,14 @@ export function SewerChart(props: SewerChartProps) {
      * update selected line when pan-distance is below threshold and when
      * the pointer is currently close to a scatter value
      */
-    if (panDistance.value.current < 10 && scatterTooltip.datum) {
+    if (pointDistance.distanceRef.current < 10 && scatterTooltip.datum) {
       sewerStationSelectProps.onChange(scatterTooltip.datum.name);
     }
-  }, [panDistance.value, scatterTooltip.datum, sewerStationSelectProps]);
+  }, [
+    pointDistance.distanceRef,
+    scatterTooltip.datum,
+    sewerStationSelectProps,
+  ]);
 
   /**
    * hide tooltips when focus is lost
