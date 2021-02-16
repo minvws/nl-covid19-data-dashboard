@@ -47,17 +47,7 @@ export function Tooltip({ children, title, x, y, bounds }: TooltipProps) {
         maxWidth: bounds.right - bounds.left,
       }}
     >
-      <div
-        css={css({
-          bg: 'white',
-          boxShadow: 'tile',
-          pointerEvents: 'none',
-          zIndex: 1001,
-          borderRadius: 1,
-        })}
-      >
-        <TooltipContent title={title}>{children}</TooltipContent>
-      </div>
+      <TooltipContent title={title}>{children}</TooltipContent>
     </TooltipContainer>
   );
 }
