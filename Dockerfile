@@ -10,7 +10,9 @@ ARG SANITY_DATASET
 ARG SANITY_ASSETS_CACHE_DIR
 RUN yarn workspace @corona-dashboard/common build
 RUN yarn workspace @corona-dashboard/cli validate-json
-RUN yarn workspace @corona-dashboard/cli validate-last-values
+# We need to have an ENV var switch to only enable this in production, because
+# BE does not guarantee consistent data in develop.
+# RUN yarn workspace @corona-dashboard/cli validate-last-values
 RUN yarn workspace @corona-dashboard/cli generate-typescript
 RUN yarn workspace @corona-dashboard/cms sync-assets
 

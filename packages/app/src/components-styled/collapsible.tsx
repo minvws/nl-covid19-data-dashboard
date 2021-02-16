@@ -22,7 +22,7 @@ const Summary = styled(DisclosureButton)(
     color: 'blue',
     fontFamily: 'body',
     fontWeight: 'bold',
-    fontSize: 3,
+    fontSize: '1.25rem',
     textAlign: 'left',
     position: 'relative',
     cursor: 'pointer',

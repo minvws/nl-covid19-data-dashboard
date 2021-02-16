@@ -34,5 +34,6 @@
       "pre-commit": "yarn workspace @corona-dashboard/app lint-staged",
       "pre-push": "yarn workspace @corona-dashboard/app run type-check"
     }
-  }
+  },
+  "dependencies": {}
 }
