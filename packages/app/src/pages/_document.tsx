@@ -51,8 +51,8 @@ class MyDocument extends Document {
            * need to load the polyfills.
            *
            * IMPORTANT:
-           * Let's use this polyfill just for relative date formatting.
-           * Other polyfills should still be imported in _app.ts!
+           * This polyfill only loads for IE11.
+           * Other polyfills should be imported in _app.ts!
            * */}
           <script
             noModule
