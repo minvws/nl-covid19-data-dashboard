@@ -153,7 +153,7 @@
     "barscale_titel": "Gemeld aantal ziekenhuisopnames per dag",
     "extra_uitleg": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer laat het aantal ziekenhuisopnames - inclusief directe IC opnames - zien dat op één dag gemeld is. Dit kunnen ook meldingen zijn van opnames van eerdere dagen.",
     "map_titel": "Woonplaats opgenomen patiënten",
-    "map_toelichting": "Deze kaart laat zien in welke gemeenten of veiligheidsregio’s patiënten wonen die met COVID-19 in het ziekenhuis zijn opgenomen. Patiënten kunnen ook in een ziekenhuis in een ander deel van Nederland worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE. Het Flevoziekenhuis deelt zijn COVID-19 opnames op reguliere afdelingen op dit moment niet met Stichting NICE. Daardoor zijn de cijfers van sommige veiligheidsregio’s en gemeenten op de kaart mogelijk lager dan in werkelijkheid het geval is. Let op: met ingang van 5 februari is de kleurschaal veranderd, zodat beter te zien is welke gemeenten en regio’s geen ziekenhuisopnames melden.",
+    "map_toelichting": "Deze kaart laat zien in welke gemeenten of veiligheidsregio’s patiënten wonen die met COVID-19 in het ziekenhuis zijn opgenomen. Patiënten kunnen ook in een ziekenhuis in een ander deel van Nederland worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE. Het Flevoziekenhuis deelt zijn COVID-19 opnames op reguliere afdelingen op dit moment niet met Stichting NICE. Daardoor zijn de cijfers van sommige veiligheidsregio’s en gemeenten op de kaart mogelijk lager dan in werkelijkheid het geval is.",
     "linechart_titel": "Ziekenhuisopnames over tijd",
     "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "chloropleth_legenda": {
@@ -645,7 +645,8 @@
     "gisteren": "Gisteren",
     "vandaag": "Vandaag",
     "read_more": "Lees meer",
-    "absolute_date_template": "op {{date}}"
+    "absolute_date_template": "op {{date}}",
+    "inwoners": "inwoners"
   },
   "seoHead": {
     "default_description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
@@ -661,6 +662,7 @@
       "overig": "Vroegsignalering",
       "verpleeghuis": "Verpleeghuiszorg",
       "laatste": "Laatste ontwikkelingen",
+      "algemeen": "Algemeen",
       "besmettingen": "Besmettingen",
       "ziekenhuizen": "Ziekenhuizen",
       "verpleeghuizen": "Verpleeghuiszorg",
@@ -682,7 +684,8 @@
       "vroege_signalen": "Vroege signalen",
       "gedrag": "Gedrag",
       "kwetsbare_groepen": "Kwetsbare groepen",
-      "maatregelen": "Maatregelen"
+      "maatregelen": "Maatregelen",
+      "algemeen": "Algemeen"
     }
   },
   "veiligheidsregio_metadata": {
@@ -702,7 +705,7 @@
     "barscale_titel": "Gemeld aantal ziekenhuisopnames per dag",
     "extra_uitleg": "Aantal mensen uit deze veiligheidsregio met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer laat het aantal ziekenhuisopnames - inclusief directe IC opnames - zien dat op één dag gemeld is. Dit kunnen ook meldingen zijn van opnames van eerdere dagen. Patiënten kunnen in een ziekenhuis elders in Nederland zijn opgenomen.",
     "map_titel": "Verdeling ziekenhuisopnames in {{safetyRegion}}",
-    "map_toelichting": "Deze kaart laat zien in welke gemeenten of veiligheidsregio’s patiënten wonen die met COVID-19 in het ziekenhuis zijn opgenomen. Patiënten kunnen ook in een ziekenhuis in een ander deel van Nederland worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE. Het Flevoziekenhuis deelt zijn COVID-19 opnames op reguliere afdelingen op dit moment niet met Stichting NICE. Daardoor zijn de cijfers van sommige veiligheidsregio’s en gemeenten op de kaart mogelijk lager dan in werkelijkheid het geval is. Let op: met ingang van 5 februari is de kleurschaal veranderd, zodat beter te zien is welke gemeenten en regio’s geen ziekenhuisopnames melden.",
+    "map_toelichting": "Deze kaart laat zien in welke gemeenten of veiligheidsregio’s patiënten wonen die met COVID-19 in het ziekenhuis zijn opgenomen. Patiënten kunnen ook in een ziekenhuis in een ander deel van Nederland worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE. Het Flevoziekenhuis deelt zijn COVID-19 opnames op reguliere afdelingen op dit moment niet met Stichting NICE. Daardoor zijn de cijfers van sommige veiligheidsregio’s en gemeenten op de kaart mogelijk lager dan in werkelijkheid het geval is.",
     "linechart_titel": "Ziekenhuisopnames over tijd",
     "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "bron": {
@@ -798,6 +801,8 @@
     "graph_daily_label_text_rwzi": "Meetwaarden locatie ({{name}})",
     "graph_selected_rwzi_placeholder": "Selecteer locatie",
     "graph_range_description": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners over tijd",
+    "display_outliers": "Toon uitschieters",
+    "hide_outliers": "Verberg uitschieters",
     "titel_kpi": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners",
     "total_installation_count_titel": "Aantal meetlocaties",
     "total_installation_count_description": "Wekelijks aantal rioolwaterzuiveringsinstallaties die minimaal één keer een meting hebben gerapporteerd. Het weekgemiddelde wordt berekend door het gemiddelde te nemen van alle metingen op deze locaties. Per week kan dit aantal variëren omdat niet alle metingen altijd lukken. Let op: door de vrieskou is het niet mogelijk op alle locaties goede metingen van het rioolwater te doen. Dit heeft deze week invloed op de rioolwatercijfers.",
@@ -825,7 +830,7 @@
     "barscale_titel": "Gemeld aantal ziekenhuisopnames per dag",
     "extra_uitleg": "Aantal mensen uit deze gemeente met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer laat het aantal ziekenhuisopnames - inclusief directe IC opnames - zien dat op één dag gemeld is. Dit kunnen ook meldingen zijn van opnames van eerdere dagen. Patiënten kunnen in een ziekenhuis elders in Nederland zijn opgenomen.",
     "map_titel": "Verdeling ziekenhuisopnames in veiligheidsregio van {{municipality}}",
-    "map_toelichting": "Deze kaart laat zien in welke gemeenten of veiligheidsregio’s patiënten wonen die met COVID-19 in het ziekenhuis zijn opgenomen. Patiënten kunnen ook in een ziekenhuis in een ander deel van Nederland worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE. Het Flevoziekenhuis deelt zijn COVID-19 opnames op reguliere afdelingen op dit moment niet met Stichting NICE. Daardoor zijn de cijfers van sommige veiligheidsregio’s en gemeenten op de kaart mogelijk lager dan in werkelijkheid het geval is. Let op: met ingang van 5 februari is de kleurschaal veranderd, zodat beter te zien is welke gemeenten en regio’s geen ziekenhuisopnames melden.",
+    "map_toelichting": "Deze kaart laat zien in welke gemeenten of veiligheidsregio’s patiënten wonen die met COVID-19 in het ziekenhuis zijn opgenomen. Patiënten kunnen ook in een ziekenhuis in een ander deel van Nederland worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE. Het Flevoziekenhuis deelt zijn COVID-19 opnames op reguliere afdelingen op dit moment niet met Stichting NICE. Daardoor zijn de cijfers van sommige veiligheidsregio’s en gemeenten op de kaart mogelijk lager dan in werkelijkheid het geval is.",
     "linechart_titel": "Ziekenhuisopnames over tijd",
     "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "bron": {
@@ -932,6 +937,8 @@
     "graph_daily_label_text_rwzi": "Meetwaarden locatie ({{name}})",
     "graph_selected_rwzi_placeholder": "Selecteer locatie",
     "graph_range_description": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners over tijd",
+    "display_outliers": "Toon uitschieters",
+    "hide_outliers": "Verberg uitschieters",
     "reference": {
       "href": "/verantwoording#rioolwater",
       "text": "Lees meer over het onderzoek naar het coronavirus in rioolwater in de cijferverantwoording."
@@ -1015,8 +1022,8 @@
     }
   },
   "positief_geteste_personen_ggd": {
-    "titel": "Percentage positief geteste personen via GGD teststraten",
-    "summary_title": "{{percentage}} van de GGD testen was positief",
+    "titel": "Percentage positief geteste personen via GGD-teststraten",
+    "summary_title": "{{percentage}} van de GGD-testen was positief",
     "summary_link_cta": "Lees meer",
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
     "bron": {
@@ -1024,17 +1031,17 @@
       "text": "RIVM"
     },
     "toelichting": "De cijfers hieronder geven inzicht in het aantal tests via de GGD-teststraten en van welk deel daarvan de uitslag positief is. Als het percentage positieve tests toeneemt kan dat erop wijzen dat de verspreiding van het virus toeneemt. Let op dat de meeste testen via de GGD lopen, maar dit niet voor alle testen geldt. Daarom wijkt het absolute aantal positief geteste personen af van het aantal positief testen door de GGD",
-    "totaal_getest_week_titel": "Gemiddeld aantal GGD testen per dag",
+    "totaal_getest_week_titel": "Gemiddeld aantal GGD-testen per dag",
     "totaal_getest_week_uitleg": "Het gemiddelde aantal testen per dag, berekend over zeven dagen. De testen waarvan de uitslag nog niet bekend is, zijn niet meegenomen in dit gemiddelde.",
     "positief_getest_week_titel": "Positief geteste personen",
     "positief_getest_week_uitleg": "Percentage positieve testen in de GGD-teststraten, waarvan de uitslag bekend is. Dit is het gemiddelde over zeven dagen. Voor het berekenen van het percentage worden alleen tests meegeteld waarvan de testuitslag bekend is.",
     "positief_getest_getest_week_uitleg": "Dit zijn {{numerator}} van {{denominator}} tests met een bekende uitslag.",
     "linechart_percentage_titel": "Percentage positieve testen over tijd",
-    "linechart_percentage_toelichting": "Deze grafiek laat het dagelijks percentage GGD testen zien met een positieve uitslag, ten opzichte van alle GGD testen van die dag waarvan de uitslag bekend is. De gegevens zijn gesorteerd op de datum waarop de test bij de GGD plaatsvond. Het duurt gemiddeld één tot twee dagen voordat testuitslagen bekend zijn.",
+    "linechart_percentage_toelichting": "Deze grafiek laat het dagelijks percentage GGD-testen zien met een positieve uitslag, ten opzichte van alle GGD-testen van die dag waarvan de uitslag bekend is. De gegevens zijn gesorteerd op de datum waarop de test bij de GGD plaatsvond. Het duurt gemiddeld één tot twee dagen voordat testuitslagen bekend zijn.",
     "linechart_totaltests_titel": "Aantal testen over tijd",
     "linechart_totaltests_toelichting": "Deze grafiek laat het dagelijks aantal bekende testuitslagen in de GGD-teststraten over tijd zien, en hoeveel daarvan een positieve uitslag hebben. De gegevens zijn gesorteerd op de datum waarop de test bij de GGD plaatsgevond. Het duurt gemiddeld één tot twee dagen voordat testuitslagen bekend zijn.",
-    "linechart_totaltests_legend_label": "GGD testen waarvan uitslag bekend is",
-    "linechart_positivetests_legend_label": "GGD testen met een positieve uitslag",
+    "linechart_totaltests_legend_label": "GGD-testen waarvan uitslag bekend is",
+    "linechart_positivetests_legend_label": "GGD-testen met een positieve uitslag",
     "reference": {
       "href": "/verantwoording#positieve-testen",
       "text": "Lees meer in de cijferverantwoording."
@@ -1053,8 +1060,8 @@
     "url": "https://coronadashboard.rijksoverheid.nl/over-risiconiveaus"
   },
   "veiligheidsregio_positief_geteste_personen_ggd": {
-    "titel": "Percentage positief geteste personen via GGD teststraten in {{safetyRegion}}",
-    "summary_title": "{{percentage}} van de GGD testen was positief",
+    "titel": "Percentage positief geteste personen via GGD-teststraten in {{safetyRegion}}",
+    "summary_title": "{{percentage}} van de GGD-testen was positief",
     "summary_link_cta": "Lees meer",
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
     "bron": {
@@ -1062,17 +1069,17 @@
       "text": "RIVM"
     },
     "toelichting": "De cijfers hieronder geven inzicht in het aantal tests via de GGD-teststraten en van welk deel daarvan de uitslag positief is. Als het percentage positieve tests toeneemt kan dat erop wijzen dat de verspreiding van het virus toeneemt. Let op dat de meeste testen via de GGD lopen, maar dit niet voor alle testen geldt. Daarom wijkt het absolute aantal positief geteste personen af van het aantal positief testen door de GGD.",
-    "totaal_getest_week_titel": "Gemiddeld aantal GGD testen per dag",
+    "totaal_getest_week_titel": "Gemiddeld aantal GGD-testen per dag",
     "totaal_getest_week_uitleg": "Het gemiddelde aantal testen per dag, berekend over zeven dagen. De testen waarvan de uitslag nog niet bekend is, zijn niet meegenomen in dit gemiddelde.",
     "positief_getest_week_titel": "Positief geteste personen",
     "positief_getest_week_uitleg": "Percentage positieve testen in de GGD-teststraten, waarvan de uitslag bekend is. Dit is het gemiddelde over zeven dagen. Voor het berekenen van het percentage worden alleen tests meegeteld waarvan de testuitslag bekend is.",
     "positief_getest_getest_week_uitleg": "Dit zijn {{numerator}} van {{denominator}} geteste personen",
     "linechart_percentage_titel": "Percentage positieve testen over tijd",
-    "linechart_percentage_toelichting": "Deze grafiek laat het dagelijks percentage GGD testen zien met een positieve uitslag, ten opzichte van alle GGD testen van die dag waarvan de uitslag bekend is. De gegevens zijn gesorteerd op de datum waarop de test bij de GGD plaatsvond. Het duurt gemiddeld één tot twee dagen voordat testuitslagen bekend zijn.",
+    "linechart_percentage_toelichting": "Deze grafiek laat het dagelijks percentage GGD-testen zien met een positieve uitslag, ten opzichte van alle GGD-testen van die dag waarvan de uitslag bekend is. De gegevens zijn gesorteerd op de datum waarop de test bij de GGD plaatsvond. Het duurt gemiddeld één tot twee dagen voordat testuitslagen bekend zijn.",
     "linechart_totaltests_titel": "Aantal testen over tijd",
     "linechart_totaltests_toelichting": "Deze grafiek laat het dagelijks aantal bekende testuitslagen in de GGD-teststraten over tijd zien, en hoeveel daarvan een positieve uitslag hebben. De gegevens zijn gesorteerd op de datum waarop de test bij de GGD plaatsvond. Het duurt gemiddeld één tot twee dagen voordat testuitslagen bekend zijn.",
-    "linechart_totaltests_legend_label": "GGD testen waarvan uitslag bekend is",
-    "linechart_positivetests_legend_label": "GGD testen met een positieve uitslag",
+    "linechart_totaltests_legend_label": "GGD-testen waarvan uitslag bekend is",
+    "linechart_positivetests_legend_label": "GGD-testen met een positieve uitslag",
     "reference": {
       "href": "/verantwoording#positieve-testen",
       "text": "Lees meer in de cijferverantwoording."
@@ -1967,8 +1974,8 @@
     "title": "COVID-19-vaccinaties",
     "description": "Vaccineren is de belangrijkste stap naar een samenleving zonder coronaregels. Op 6 januari 2021 is Nederland begonnen met vaccineren. Uiteindelijk komt iedereen van 18 jaar of ouder aan de beurt. De cijfers op deze pagina laten zien hoeveel prikken zijn gezet en hoeveel vaccins er beschikbaar komen.",
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "date_unix": "1613389863",
-    "date_of_insertion_unix": "1613389863",
+    "date_unix": "1613472174",
+    "date_of_insertion_unix": "1613472174",
     "reference": {
       "href": "/verantwoording#vaccinatie",
       "text": "Lees meer over de bron van de vaccinatiecijfers in de cijferverantwoording."
@@ -2004,27 +2011,27 @@
       "difference": "Do not remove this key. It is required as a temporary workaround",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "783606",
-          "date_unix": "1613389863",
-          "date_of_insertion_unix": "1613389863"
+          "total_vaccinated": "800905",
+          "date_unix": "1613472174",
+          "date_of_insertion_unix": "1613472174"
         }
       },
       "kpi_total": {
         "title": "Aantal gezette prikken",
-        "value": "606861",
+        "value": "623539",
         "description": "",
-        "date_of_report_unix": "1613389863",
-        "date_of_insertion_unix": "1613389863",
+        "date_of_report_unix": "1613472174",
+        "date_of_insertion_unix": "1613472174",
         "administered": [
           {
-            "value": "512392",
+            "value": "528988",
             "description": "gemeld door GGD-GHOR",
-            "report_date": "Gemeld aantal tot en met 14 februari"
+            "report_date": "Gemeld aantal tot en met 15 februari"
           },
           {
-            "value": "94469",
+            "value": "94551",
             "description": "gemeld door LNAZ",
-            "report_date": "Gemeld aantal tot en met 14 februari"
+            "report_date": "Gemeld aantal tot en met 15 februari"
           },
           {
             "value": "",
@@ -2048,25 +2055,25 @@
         "first_tab_title": "Berekend aantal",
         "second_tab_title": "Gemeld aantal",
         "tab_total_estimated": {
-          "value": "783606",
+          "value": "800905",
           "description": "",
-          "date_of_report_unix": "1613389863",
-          "date_of_insertion_unix": "1613389863",
+          "date_of_report_unix": "1613472174",
+          "date_of_insertion_unix": "1613472174",
           "administered": [
             {
-              "value": "512392",
+              "value": "528988",
               "description": "gezet door GGD'en",
-              "report_date": "Gemeld aantal tot en met 14 februari"
+              "report_date": "Gemeld aantal tot en met 15 februari"
             },
             {
-              "value": "94469",
+              "value": "94551",
               "description": "gezet in ziekenhuizen",
-              "report_date": "Gemeld aantal tot en met 14 februari"
+              "report_date": "Gemeld aantal tot en met 15 februari"
             },
             {
-              "value": "176745",
+              "value": "177366",
               "description": "gezet in langdurige zorginstellingen",
-              "report_date": "Berekend aantal tot en met 14 februari"
+              "report_date": "Berekend aantal tot en met 15 februari"
             },
             {
               "value": "",
@@ -2185,7 +2192,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "De risicokaart van Nederland",
-      "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. \n\n**Bij elk risiconiveau horen bepaalde maatregelen. Die maatregelen staan in de routekaart die het kabinet heeft gemaakt. Er geldt een landelijke lockdown tot en met ten minste 2 maart. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**"
+      "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. [Meer informatie over de risiconiveaus](/over-risiconiveaus).\n\nBij elk risiconiveau horen bepaalde maatregelen. Die maatregelen staan in de routekaart die het kabinet heeft gemaakt. **Er geldt een landelijke lockdown tot en met ten minste 2 maart. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**"
     },
     "data_sitemap_titel": "Onderwerpen op dit dashboard",
     "data_sitemap_toelichting": "Ga direct naar de volgende onderwerpen:",
@@ -2272,7 +2279,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "De risicokaart van Nederland",
-      "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. \n\n**Bij elk risiconiveau horen bepaalde maatregelen. Die maatregelen staan in de routekaart die het kabinet heeft gemaakt. Er geldt een landelijke lockdown tot en met ten minste 2 maart. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**"
+      "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. [Meer informatie over de risiconiveaus](/over-risiconiveaus).\n\nBij elk risiconiveau horen bepaalde maatregelen. Die maatregelen staan in de routekaart die het kabinet heeft gemaakt. **Er geldt een landelijke lockdown tot en met ten minste 2 maart. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**"
     },
     "risoconiveau_maatregelen": {
       "title": "Risiconiveau & maatregelen",
@@ -2345,7 +2352,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "De risicokaart van Nederland",
-      "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. \n\n**Bij elk risiconiveau horen bepaalde maatregelen. Die maatregelen staan in de routekaart die het kabinet heeft gemaakt. Er geldt een landelijke lockdown tot en met ten minste 2 maart. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**"
+      "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. [Meer informatie over de risiconiveaus](/over-risiconiveaus).\n\nBij elk risiconiveau horen bepaalde maatregelen. Die maatregelen staan in de routekaart die het kabinet heeft gemaakt. **Er geldt een landelijke lockdown tot en met ten minste 2 maart. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**"
     },
     "risoconiveau_maatregelen": {
       "title": "Risiconiveau & maatregelen",

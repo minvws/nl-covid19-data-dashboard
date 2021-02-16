@@ -115,6 +115,7 @@ export const colors = {
     axis: '#C4C4C4',
     axisLabels: '#666666',
     benchmark: '#4f5458',
+    emphasis: '#F8E435',
     fill: 'rgba(0, 123, 199, .05)',
     margin: '#D0EDFF',
     scale: {

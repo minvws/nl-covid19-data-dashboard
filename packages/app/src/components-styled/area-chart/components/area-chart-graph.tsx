@@ -142,7 +142,7 @@ export function AreaChartGraph<T extends TrendValue, K extends TrendValue>(
 
         <AxisLeft
           scale={yScale}
-          numTicks={4}
+          numTicks={6}
           hideTicks={true}
           hideAxisLine={true}
           stroke={defaultColors.axis}
@@ -238,7 +238,7 @@ const StyledSvg = styled.svg(
     '& .area-chart-x-axis-label': {
       fontSize: 1,
       fill: 'annotation',
-      fontFamily: '"RO Sans", Calibri, sans-serif',
+      fontFamily: 'body',
     },
   })
 );

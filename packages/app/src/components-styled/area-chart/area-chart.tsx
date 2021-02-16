@@ -50,7 +50,7 @@ const defaultPadding: ChartPadding = {
   top: 10,
   right: 20,
   bottom: 30,
-  left: 30,
+  left: 15,
 };
 
 export type TrendDisplay<T> = {
@@ -101,7 +101,7 @@ type AreaChartProps<T extends TimestampedValue, K extends TimestampedValue> = {
 const dateToValue = (d: { valueOf(): number }) => d.valueOf() / 1000;
 const formatXAxis = (date: Date | { valueOf(): number }) =>
   formatDateFromSeconds(dateToValue(date), 'axis');
-const formatYAxisFn = (y: number) => formatNumber(y);
+const formatYAxisFn = (y: number) => formatNumber(y / 1000000);
 const formatYAxisPercentageFn = (y: number) => `${formatPercentage(y)}%`;
 
 export function AreaChart<
@@ -144,11 +144,7 @@ export function AreaChart<
 
   const [xDomain, yDomain, seriesMax] = useDomains(allValues, signaalwaarde);
 
-  const padding = useChartPadding(
-    seriesMax.toFixed(0).length * 10,
-    defaultPadding,
-    overridePadding
-  );
+  const padding = useChartPadding(0, defaultPadding, overridePadding);
 
   const xMax = width - padding.left - padding.right;
   const yMax = height - padding.top - padding.bottom;
@@ -236,60 +232,61 @@ export function AreaChart<
   ) => onHover(event, scales);
 
   return (
-    <Box position="relative">
+    <>
       {isDefined(valueAnnotation) && (
-        <ValueAnnotation>{valueAnnotation}</ValueAnnotation>
+        <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
       )}
+      <Box position="relative">
+        <AreaChartGraph
+          trends={trendConfigs}
+          areas={areaConfigs}
+          bounds={bounds}
+          width={width}
+          height={height}
+          padding={padding}
+          scales={scales}
+          formatXAxis={formatXAxis}
+          formatYAxis={isPercentage ? formatYAxisPercentageFn : formatYAxisFn}
+          numTicks={6}
+          onHover={handleHover}
+        >
+          {divider &&
+            renderDivider(areaConfigs as any, divider, height, padding, xScale)}
+        </AreaChartGraph>
 
-      <AreaChartGraph
-        trends={trendConfigs}
-        areas={areaConfigs}
-        bounds={bounds}
-        width={width}
-        height={height}
-        padding={padding}
-        scales={scales}
-        formatXAxis={formatXAxis}
-        formatYAxis={isPercentage ? formatYAxisPercentageFn : formatYAxisFn}
-        numTicks={6}
-        onHover={handleHover}
-      >
-        {divider &&
-          renderDivider(areaConfigs as any, divider, height, padding, xScale)}
-      </AreaChartGraph>
+        <Box
+          height={yMax}
+          width={xMax}
+          position="absolute"
+          top={padding.top}
+          left={padding.left}
+          style={{
+            pointerEvents: 'none',
+          }}
+        >
+          {markerProps && (
+            <Marker
+              {...markerProps}
+              showLine={true}
+              formatLabel={formatMarkerLabel}
+              dateSpanWidth={dateSpanScale.bandwidth()}
+              height={height}
+              padding={padding}
+            />
+          )}
+        </Box>
 
-      <Box
-        height={yMax}
-        width={xMax}
-        position="absolute"
-        top={padding.top}
-        left={padding.left}
-        style={{
-          pointerEvents: 'none',
-        }}
-      >
-        {markerProps && (
-          <Marker
-            {...markerProps}
-            showLine={true}
-            formatLabel={formatMarkerLabel}
-            dateSpanWidth={dateSpanScale.bandwidth()}
-            height={height}
-            padding={padding}
-          />
+        {isDefined(tooltipData) && (
+          <Tooltip
+            bounds={{ right: width, left: 0, top: 0, bottom: height }}
+            x={tooltipLeft + padding.left}
+            y={tooltipTop + padding.top}
+          >
+            {formatTooltip(tooltipData, isPercentage)}
+          </Tooltip>
         )}
       </Box>
-
-      {isDefined(tooltipData) && (
-        <Tooltip
-          bounds={{ right: width, left: 0, top: 0, bottom: height }}
-          x={tooltipLeft + padding.left}
-          y={tooltipTop + padding.top}
-        >
-          {formatTooltip(tooltipData, isPercentage)}
-        </Tooltip>
-      )}
-    </Box>
+    </>
   );
 }
 

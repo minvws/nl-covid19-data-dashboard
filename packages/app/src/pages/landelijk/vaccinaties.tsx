@@ -252,6 +252,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                   | NlVaccineAdministeredValue
                   | NlVaccineAdministeredEstimateValue
                 >
+                  valueAnnotation={siteText.waarde_annotaties.x_miljoen}
                   width={width}
                   timeframe="all"
                   formatTooltip={createDeliveryTooltipFormatter(siteText)}
@@ -266,7 +267,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                       displays: [
                         {
                           metricProperty: 'total',
-                          color: '#F8E435',
+                          color: colors.data.emphasis,
                           legendLabel: text.data.vaccination_chart.delivered,
                         },
                       ],
@@ -278,7 +279,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                           metricProperty: 'total',
                           style: 'dashed',
                           legendLabel: text.data.vaccination_chart.estimated,
-                          color: '#F8E435',
+                          color: colors.data.emphasis,
                         },
                       ],
                     },
