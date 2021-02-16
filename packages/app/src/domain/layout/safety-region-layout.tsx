@@ -134,7 +134,7 @@ function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
                           escalationLevel={
                             data.escalation_level.level as EscalationLevel
                           }
-                          iconSize={'small'}
+                          hasSmallIcon
                           useLevelColor
                         />
                       </Box>

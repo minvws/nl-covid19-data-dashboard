@@ -7,26 +7,27 @@ import { regionThresholds } from '~/components/choropleth/region-thresholds';
 
 export type EscalationLevelProps = {
   escalationLevel: EscalationLevel;
-  iconSize?: 'small' | 'normal';
   fontSize?: number;
   useLevelColor?: boolean;
+  hasSmallIcon?: boolean;
 };
 
 type EscalationLevelString = '1' | '2' | '3' | '4';
 
 export function EscalationLevelInfoLabel({
   escalationLevel,
-  iconSize = 'normal',
+  hasSmallIcon = false,
   fontSize = 2,
   useLevelColor = false,
 }: EscalationLevelProps) {
+  /* Colors are in a 0-indexed array */
   const color = useLevelColor
     ? regionThresholds.escalation_levels.escalation_level[escalationLevel - 1]
         .color
     : 'inherit';
   return (
     <Box display="flex" alignItems="center" justifyContent="flex-start">
-      <EscalationLevelIcon level={escalationLevel} size={iconSize} />
+      <EscalationLevelIcon level={escalationLevel} isSmall={hasSmallIcon} />
       <Text
         as="span"
         ml={2}

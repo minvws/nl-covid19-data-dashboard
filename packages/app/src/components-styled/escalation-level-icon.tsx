@@ -11,16 +11,17 @@ const escalationThresholds =
 
 interface EscalationLevelIconProps {
   level: EscalationLevel;
-  size?: 'small' | 'normal';
+  isSmall?: boolean;
 }
 
 export function EscalationLevelIcon({
   level,
-  size = 'normal',
+  isSmall = false,
 }: EscalationLevelIconProps) {
+  /* Colors are in a 0-indexed array */
   const color = escalationThresholds[level - 1].color;
-  const outerDimension = getOuterDimension(size);
-  const fontSize = getFontSize(size);
+  const outerDimension = getOuterDimension(isSmall);
+  const fontSize = getFontSize(isSmall);
 
   return (
     <div css={css({ display: 'inline-block' })}>
@@ -55,15 +56,15 @@ const StyledEscalationLevelIcon = styled.div<{
   })
 );
 
-function getOuterDimension(size: 'small' | 'normal') {
-  if (size === 'small') {
+function getOuterDimension(isSmall: boolean): number | ResponsiveValue<number> {
+  if (isSmall) {
     return asResponsiveArray({ _: 20, sm: 20 });
   }
   return asResponsiveArray({ _: 24, sm: 32 });
 }
 
-function getFontSize(size: 'small' | 'normal') {
-  if (size === 'small') {
+function getFontSize(isSmall: boolean): number | ResponsiveValue<number> {
+  if (isSmall) {
     return 14;
   }
   return asResponsiveArray({ _: 14, sm: 20 });
