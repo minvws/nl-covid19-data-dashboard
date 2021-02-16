@@ -2012,25 +2012,25 @@
       "difference": "Do not remove this key. It is required as a temporary workaround",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "783606",
+          "total_vaccinated": "800905",
           "date_unix": "1613472174",
           "date_of_insertion_unix": "1613472174"
         }
       },
       "kpi_total": {
         "title": "Aantal gezette prikken",
-        "value": "606861",
+        "value": "623539",
         "description": "",
         "date_of_report_unix": "1613472174",
         "date_of_insertion_unix": "1613472174",
         "administered": [
           {
-            "value": "512392",
+            "value": "528988",
             "description": "gemeld door GGD-GHOR",
             "report_date": "Gemeld aantal tot en met 15 februari"
           },
           {
-            "value": "94469",
+            "value": "94551",
             "description": "gemeld door LNAZ",
             "report_date": "Gemeld aantal tot en met 15 februari"
           },
@@ -2056,25 +2056,25 @@
         "first_tab_title": "Berekend aantal",
         "second_tab_title": "Gemeld aantal",
         "tab_total_estimated": {
-          "value": "783606",
+          "value": "800905",
           "description": "",
           "date_of_report_unix": "1613472174",
           "date_of_insertion_unix": "1613472174",
           "administered": [
             {
-              "value": "512392",
+              "value": "528988",
               "description": "gezet door GGD'en",
               "report_date": "Gemeld aantal tot en met 15 februari"
             },
             {
-              "value": "94469",
+              "value": "94551",
               "description": "gezet in ziekenhuizen",
               "report_date": "Gemeld aantal tot en met 15 februari"
             },
             {
-              "value": "176745",
+              "value": "177366",
               "description": "gezet in langdurige zorginstellingen",
-              "report_date": "Berekend aantal tot en met 14 februari"
+              "report_date": "Berekend aantal tot en met 15 februari"
             },
             {
               "value": "",
