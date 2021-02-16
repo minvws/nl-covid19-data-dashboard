@@ -89,8 +89,8 @@ export function CategoricalBarScale({
           <>
             <Box
               display="inline-block"
-              width="0.6rem"
-              height="0.6rem"
+              width="0.65rem"
+              height="0.65rem"
               borderRadius="50%"
               bg={category.color}
             />
