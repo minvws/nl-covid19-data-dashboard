@@ -90,35 +90,24 @@ export function useSewerChartScales(
   values: SewerChartValue[],
   bounds: { width: number; height: number }
 ) {
-  const xScale = useMemo(() => {
+  return useMemo(() => {
     const valuesX = values.map((x) => x.dateMs);
-
-    return scaleTime<number>({
-      domain: [Math.min(...valuesX), Math.max(...valuesX)],
-    }).range([0, bounds.width]);
-  }, [values, bounds.width]);
-
-  const yScale = useMemo(() => {
     const valuesY = values.map((x) => x.value);
 
-    return scaleLinear<number>({
+    const xScale = scaleTime<number>({
+      domain: [Math.min(...valuesX), Math.max(...valuesX)],
+    }).range([0, bounds.width]);
+
+    const yScale = scaleLinear<number>({
       domain: [Math.min(...valuesY), Math.max(...valuesY)],
       nice: true,
     }).range([bounds.height, 0]);
-  }, [values, bounds.height]);
 
-  const getX = useCallback((x: SewerChartValue) => xScale(x.dateMs), [xScale]);
-  const getY = useCallback((x: SewerChartValue) => yScale(x.value), [yScale]);
+    const getX = (x: SewerChartValue) => xScale(x.dateMs);
+    const getY = (x: SewerChartValue) => yScale(x.value);
 
-  return useMemo(
-    () => ({
-      xScale,
-      yScale,
-      getX,
-      getY,
-    }),
-    [getX, getY, xScale, yScale]
-  );
+    return { xScale, yScale, getX, getY };
+  }, [values, bounds.width, bounds.height]);
 }
 
 export function useSewerStationSelectProps(values: SewerChartValue[]) {

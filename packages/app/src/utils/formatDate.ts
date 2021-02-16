@@ -132,50 +132,44 @@ export function formatDate(
 
   if (dateCached) return dateCached;
 
-  let dateFormatted: string;
+  const formattedDate = getFormattedDate(date, style);
+  formatCache[cacheKey] = formattedDate;
 
+  return formattedDate;
+}
+
+function getFormattedDate(date: Date, style: formatStyle) {
   switch (style) {
     case 'time': // '09:24'
-      dateFormatted = Time.format(date);
-      break;
+      return Time.format(date);
+
     case 'iso': // '2020-07-23T10:01:16.000Z'
-      dateFormatted = new Date(date).toISOString();
-      break;
+      return new Date(date).toISOString();
+
     case 'long': // '23 juli 2020 om 12:01'
-      dateFormatted = Long.format(date);
-      break;
+      return Long.format(date);
+
     case 'medium': // '23 juli 2020'
-      dateFormatted = Medium.format(date);
-      break;
+      return Medium.format(date);
+
     case 'axis': // '23 jul.'
-      dateFormatted = `${Day.format(date)} ${MonthShort.format(date)}`;
-      break;
+      return `${Day.format(date)} ${MonthShort.format(date)}`;
+
     case 'weekday-medium':
-      dateFormatted = WeekdayMedium.format(date);
-      break;
+      return WeekdayMedium.format(date);
+
     case 'relative':
-      dateFormatted = siteText.utils.date_day_before_yesterday;
-      dateFormatted = isToday(date)
+      return typeof window === 'undefined'
+        ? DayMonth.format(date)
+        : isToday(date)
         ? siteText.utils.date_today
         : isYesterday(date)
         ? siteText.utils.date_yesterday
         : isDayBeforeYesterday(date)
         ? siteText.utils.date_day_before_yesterday
         : DayMonth.format(date);
-      break;
+
     default:
-      dateFormatted = DayMonth.format(date);
-      break;
+      return DayMonth.format(date);
   }
-
-  formatCache[cacheKey] = dateFormatted;
-
-  return dateFormatted;
-}
-
-export function formatDateFromString(
-  sanityDate: string,
-  style?: formatStyle
-): string {
-  return formatDateFromMilliseconds(new Date(sanityDate).getTime(), style);
 }

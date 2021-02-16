@@ -16,7 +16,6 @@ type TooltipProps = {
   title: string;
   x: number;
   y: number;
-  borderColor?: string;
   bounds: Bounds;
 };
 
@@ -51,9 +50,9 @@ export function Tooltip({ children, title, x, y, bounds }: TooltipProps) {
       <div
         css={css({
           bg: 'white',
-          boxShadow: 'rgba(33, 33, 33, 0.2) 0px 1px 2px',
+          boxShadow: 'tile',
           pointerEvents: 'none',
-          zIndex: 1000,
+          zIndex: 1001,
           borderRadius: 1,
         })}
       >
