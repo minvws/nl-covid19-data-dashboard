@@ -31,6 +31,7 @@ export interface MunicipalDifference {
   tested_overall__infected: DifferenceInteger;
   hospital_nice__admissions_on_date_of_reporting: DifferenceInteger;
   sewer__average?: DifferenceDecimal;
+  deceased_rivm__covid_daily: DifferenceInteger;
 }
 export interface DifferenceDecimal {
   old_value: number;
