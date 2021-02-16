@@ -32,6 +32,7 @@ import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { InlineText, Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
+import { AllLanguages } from '~/locale/APP_TARGET';
 import { targetLanguage } from '~/locale/index';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
@@ -259,7 +260,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                 >
                   width={width}
                   timeframe="all"
-                  formatTooltip={formatVaccinationsTooltip}
+                  formatTooltip={createTooltipFormatter(siteText)}
                   divider={{
                     color: colors.annotation,
                     leftLabel: 'Berekend aantal',
@@ -428,7 +429,16 @@ export type TooltipValue = (
 ) &
   TimestampedTrendValue;
 
-function formatVaccinationsTooltip(values: HoverPoint<TooltipValue>[]) {
+function createTooltipFormatter(text: AllLanguages) {
+  return (values: HoverPoint<TooltipValue>[]) => {
+    return formatVaccinationsTooltip(values, text);
+  };
+}
+
+function formatVaccinationsTooltip(
+  values: HoverPoint<TooltipValue>[],
+  text: AllLanguages
+) {
   if (!values.length) {
     return null;
   }
@@ -459,7 +469,7 @@ function formatVaccinationsTooltip(values: HoverPoint<TooltipValue>[]) {
         </Text>
         {values.map((value) => (
           <Box key={`${value.label}-${value.data.__value}`}>
-            {value.label}: {formatValue(value)}
+            {formatLabel(value.label, text)}: {formatValue(value)}
           </Box>
         ))}
       </Box>
@@ -469,6 +479,13 @@ function formatVaccinationsTooltip(values: HoverPoint<TooltipValue>[]) {
   throw new Error(
     `Invalid value passed to format tooltip function: ${JSON.stringify(values)}`
   );
+}
+
+function formatLabel(labelKey: string | undefined, text: AllLanguages) {
+  const labelText = labelKey
+    ? (text.vaccinaties.data.vaccination_chart.product_names as any)[labelKey]
+    : undefined;
+  return labelText ?? labelKey;
 }
 
 function formatValue(value: HoverPoint<TooltipValue>) {
