@@ -2037,25 +2037,25 @@
       "difference": "",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "783606",
+          "total_vaccinated": "800905",
           "date_unix": "1613472174",
           "date_of_insertion_unix": "1613472174"
         }
       },
       "kpi_total": {
         "title": "Number of doses administered",
-        "value": "606861",
+        "value": "623539",
         "description": "",
         "date_of_report_unix": "1613472174",
         "date_of_insertion_unix": "1613472174",
         "administered": [
           {
-            "value": "512392",
+            "value": "528988",
             "description": "reported by GGD-GHOR",
             "report_date": "Reported number till 15 February"
           },
           {
-            "value": "94469",
+            "value": "94551",
             "description": "reported by LNAZ",
             "report_date": "Reported number till 15 February"
           },
@@ -2081,23 +2081,23 @@
         "first_tab_title": "Calculated number",
         "second_tab_title": "Reported number",
         "tab_total_estimated": {
-          "value": "783606",
+          "value": "800905",
           "description": "",
           "date_of_report_unix": "1613472174",
           "date_of_insertion_unix": "1613472174",
           "administered": [
             {
-              "value": "512392",
+              "value": "528988",
               "description": "administered by GGDs",
               "report_date": "Reported number till 15 February"
             },
             {
-              "value": "94469",
+              "value": "94551",
               "description": "administered in hospitals",
               "report_date": "Reported number till 15 February"
             },
             {
-              "value": "176745",
+              "value": "177366",
               "description": "administered in long-term care institutions",
               "report_date": "Calculated number till 15 February"
             },
