@@ -126,12 +126,14 @@ export function Marker<T extends TimestampedValue>(props: MarkerProps<T>) {
         <LineContainer
           style={{
             top: 'calc(100% + 5px)',
+            // -1 makes it align better, not sure why
             left: data[0].x - 1,
           }}
         >
           <DottedLine
             indicatorColor={primaryColor}
             style={{
+              // +10 makes it align better, not sure why
               bottom: padding.top + 10,
               height: `${height - topY - (padding.top + padding.bottom)}px`,
             }}
