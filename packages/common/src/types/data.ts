@@ -455,6 +455,7 @@ export interface NlVaccineAdministeredCareInstitutions {
 }
 export interface NlVaccineAdministeredCareInstitutionsValue {
   estimated: number;
+  reported: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -464,6 +465,7 @@ export interface NlVaccineAdministeredGeneralPractitioner {
 }
 export interface NlVaccineAdministeredGeneralPractitionerValue {
   estimated: number;
+  reported: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -472,6 +474,7 @@ export interface NlVaccineAdministeredGgdGhor {
   last_value: NlVaccineAdministeredGgdGhorValue;
 }
 export interface NlVaccineAdministeredGgdGhorValue {
+  estimated: number;
   reported: number;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -482,6 +485,7 @@ export interface NlVaccineAdministeredGgd {
 }
 export interface NlVaccineAdministeredGgdValue {
   estimated: number;
+  reported: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -491,6 +495,7 @@ export interface NlVaccineAdministeredHospitals {
 }
 export interface NlVaccineAdministeredHospitalsValue {
   estimated: number;
+  reported: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -499,6 +504,7 @@ export interface NlVaccineAdministeredLnaz {
   last_value: NlVaccineAdministeredLnazValue;
 }
 export interface NlVaccineAdministeredLnazValue {
+  estimated: number;
   reported: number;
   date_unix: number;
   date_of_insertion_unix: number;
