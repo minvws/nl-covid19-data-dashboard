@@ -11,8 +11,6 @@ import { css } from '@styled-system/css';
 import { ParentSize } from '@visx/responsive';
 import { Fragment, useState } from 'react';
 import VaccinatieIcon from '~/assets/vaccinaties.svg';
-import VaccinesAdministeredChartEn from '~/assets/vaccines_administered_chart_en.svg';
-import VaccinesAdministeredChartNl from '~/assets/vaccines_administered_chart_nl.svg';
 import { AreaChart } from '~/components-styled/area-chart';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
@@ -20,6 +18,7 @@ import { AspectRatio } from '~/components-styled/aspect-ratio';
 import { Box } from '~/components-styled/base';
 import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
+import { Image } from '~/components-styled/image';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { HoverPoint } from '~/components-styled/line-chart/components';
@@ -49,7 +48,6 @@ import {
 } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { Image } from '~/components-styled/image';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -76,6 +74,8 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
   const vaccineAdministeredEstimateValues =
     data.vaccine_administered_estimate.values;
 
+  // add the first estimate to the delivered values, otherwise the lines and stacks will
+  // have a gap between them
   vaccineDeliveryValues.push({ ...vaccineDeliveryEstimateValues[0] });
   vaccineAdministeredValues.push({ ...vaccineAdministeredEstimateValues[0] });
 
