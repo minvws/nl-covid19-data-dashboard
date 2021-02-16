@@ -14,11 +14,9 @@ import VaccinatieIcon from '~/assets/vaccinaties.svg';
 import { AreaChart } from '~/components-styled/area-chart';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
-import { AspectRatio } from '~/components-styled/aspect-ratio';
 import { Box } from '~/components-styled/base';
 import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
-import { Image } from '~/components-styled/image';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { HoverPoint } from '~/components-styled/line-chart/components';
@@ -32,7 +30,6 @@ import { InlineText, Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import { AllLanguages } from '~/locale/APP_TARGET';
-import { targetLanguage } from '~/locale/index';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
@@ -317,43 +314,6 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
               )}
             </ParentSize>
           </Box>
-        </ChartTile>
-
-        <ChartTile
-          title={text.grafiek.titel}
-          description={
-            <div
-              dangerouslySetInnerHTML={{
-                __html: text.grafiek.omschrijving,
-              }}
-            />
-          }
-          ariaDescription={
-            siteText.accessibility.grafieken.vaccin_levering_en_prikken
-          }
-          metadata={{
-            date: 1612375710,
-            source: text.bronnen.rivm,
-          }}
-        >
-          {/**
-           * Aspect ratio was determined by the original SVG width/height which is now set to be 100% each.
-           */}
-          <AspectRatio ratio={1.8325}>
-            {targetLanguage === 'nl' ? (
-              <Image
-                src="/images/vaccines_administered_chart_nl.svg"
-                loading="lazy"
-                decoding="async"
-              />
-            ) : (
-              <Image
-                src="/images/vaccines_administered_chart_en.svg"
-                loading="lazy"
-                decoding="async"
-              />
-            )}
-          </AspectRatio>
         </ChartTile>
 
         <ChartTile
