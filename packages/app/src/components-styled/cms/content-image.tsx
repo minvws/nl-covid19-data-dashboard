@@ -10,6 +10,7 @@ import { ImageBlock, RichContentImageBlock } from '~/types/cms';
 interface ContentImageProps {
   node: ImageBlock | RichContentImageBlock;
   contentWrapper?: FunctionComponent;
+  sizes?: number[][];
 }
 
 const SanityImageTile = styled(SanityImage)(
@@ -19,7 +20,11 @@ const SanityImageTile = styled(SanityImage)(
   })
 );
 
-export function ContentImage({ node, contentWrapper }: ContentImageProps) {
+export function ContentImage({
+  node,
+  contentWrapper,
+  sizes,
+}: ContentImageProps) {
   const caption = 'caption' in node && node.caption && (
     <Caption>{node.caption}</Caption>
   );
@@ -36,7 +41,8 @@ export function ContentImage({ node, contentWrapper }: ContentImageProps) {
           display="inline-block"
           maxWidth={980}
         >
-          <SanityImageTile {...getImageProps(node)} />
+          <SanityImageTile {...getImageProps(node, { sizes })} />
+
           {caption}
         </Box>
       </MaxWidth>
@@ -44,7 +50,8 @@ export function ContentImage({ node, contentWrapper }: ContentImageProps) {
   ) : (
     <ContentWrapper>
       <Box as="figure" role="group" spacing={3} my={2} textAlign="center">
-        <SanityImage {...getImageProps(node)} />
+        <SanityImage {...getImageProps(node, { sizes })} />
+
         {caption}
       </Box>
     </ContentWrapper>
