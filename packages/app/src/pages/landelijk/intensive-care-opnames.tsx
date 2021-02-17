@@ -1,3 +1,4 @@
+import { getLastFilledValue } from '@corona-dashboard/common';
 import Arts from '~/assets/arts.svg';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
@@ -5,6 +6,7 @@ import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { addBackgroundRectangleCallback } from '~/components-styled/line-chart/logic';
 import { PageBarScale } from '~/components-styled/page-barscale';
 import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
@@ -20,6 +22,7 @@ import {
   getLastGeneratedDate,
   getNlData,
 } from '~/static-props/get-data';
+import { colors } from '~/style/theme';
 
 const text = siteText.ic_opnames_per_dag;
 const graphDescriptions = siteText.accessibility.grafieken;
@@ -37,7 +40,9 @@ const IntakeIntensiveCare: FCWithLayout<typeof getStaticProps> = (props) => {
 
   const dataIntake = data.intensive_care_nice;
 
-  const dataBeds = data.intensive_care_lcps;
+  const bedsLastValue = getLastFilledValue(data.intensive_care_lcps);
+
+  // const dataBeds = data.intensive_care_lcps;
 
   return (
     <>
@@ -85,14 +90,14 @@ const IntakeIntensiveCare: FCWithLayout<typeof getStaticProps> = (props) => {
           <KpiTile
             title={text.kpi_bedbezetting.title}
             metadata={{
-              date: dataBeds.last_value.date_unix,
+              date: bedsLastValue.date_unix,
               source: text.bronnen.lnaz,
             }}
           >
             <KpiValue
               data-cy="beds_occupied_covid"
-              absolute={dataBeds.last_value.beds_occupied_covid}
-              percentage={dataBeds.last_value.beds_occupied_covid_percentage}
+              absolute={bedsLastValue.beds_occupied_covid!}
+              percentage={bedsLastValue.beds_occupied_covid_percentage!}
               difference={
                 data.difference.intensive_care_lcps__beds_occupied_covid
               }
@@ -117,13 +122,19 @@ const IntakeIntensiveCare: FCWithLayout<typeof getStaticProps> = (props) => {
         <LineChartTile
           title={text.chart_bedbezetting.title}
           description={text.chart_bedbezetting.description}
-          values={dataBeds.values}
+          values={data.intensive_care_lcps.values}
           linesConfig={[
             {
               metricProperty: 'beds_occupied_covid',
             },
           ]}
           metadata={{ source: text.bronnen.lnaz }}
+          componentCallback={addBackgroundRectangleCallback(
+            [new Date(0), new Date('1 June 2020')],
+            {
+              fill: colors.data.underReported,
+            }
+          )}
         />
       </TileList>
     </>
