@@ -1,21 +1,18 @@
 import {
   formatNumber,
   isDateSpanValue,
-  isDateValue,
   NlVaccineAdministeredEstimateValue,
   NlVaccineAdministeredValue,
   NlVaccineDeliveryEstimateValue,
   NlVaccineDeliveryValue,
 } from '@corona-dashboard/common';
+import styled from 'styled-components';
 import { HoverPoint } from '~/components-styled/area-chart/components/marker';
 import { TimestampedTrendValue } from '~/components-styled/area-chart/logic';
 import { Box } from '~/components-styled/base';
 import { Text } from '~/components-styled/typography';
 import { AllLanguages } from '~/locale/APP_LOCALE';
-import {
-  formatDateFromMilliseconds,
-  formatDateFromSeconds,
-} from '~/utils/formatDate';
+import { formatDateFromSeconds } from '~/utils/formatDate';
 
 export type TooltipValue = (
   | NlVaccineDeliveryValue
@@ -41,18 +38,7 @@ function formatVaccinationsTooltip(
 
   const data = values[0].data;
 
-  if (isDateValue(data)) {
-    return (
-      <Box>
-        <Text fontWeight="bold">
-          {`${formatDateFromMilliseconds(data.__date.getTime())}: `}
-        </Text>
-        {values.map((value) => (
-          <Box key={value.data.__value}>{formatNumber(value.data.__value)}</Box>
-        ))}
-      </Box>
-    );
-  } else if (isDateSpanValue(data)) {
+  if (isDateSpanValue(data)) {
     const dateStartString = formatDateFromSeconds(
       data.date_start_unix,
       'day-month'
@@ -66,11 +52,19 @@ function formatVaccinationsTooltip(
         <Text fontWeight="bold">
           {`${dateStartString} - ${dateEndString}: `}
         </Text>
-        {values.map((value) => (
-          <Box key={`${value.label}`}>
-            {formatLabel(value.label, text)}: {formatValue(value)}
-          </Box>
-        ))}
+        <TooltipList>
+          {values.map((value) => (
+            <TooltipListItem
+              key={`${value.label}`}
+              color={value.color ?? 'black'}
+            >
+              <TooltipValueContainer>
+                {formatLabel(value.label, text)}:{' '}
+                <strong>{formatValue(value)}</strong>
+              </TooltipValueContainer>
+            </TooltipListItem>
+          ))}
+        </TooltipList>
       </Box>
     );
   }
@@ -94,3 +88,36 @@ function formatValue(value: HoverPoint<TooltipValue>) {
   }
   return formatNumber(data[value.label as string]);
 }
+
+const TooltipList = styled.ol`
+  margin: 0;
+  padding: 0;
+  list-style: none;
+`;
+
+interface TooltipListItemProps {
+  color: string;
+}
+
+const TooltipListItem = styled.li<TooltipListItemProps>`
+  display: flex;
+  align-items: center;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    background: ${(props) => props.color};
+    margin-right: 0.5em;
+    flex-shrink: 0;
+  }
+`;
+
+const TooltipValueContainer = styled.span`
+  display: flex;
+  width: 100%;
+  min-width: 120px;
+  justify-content: space-between;
+`;
