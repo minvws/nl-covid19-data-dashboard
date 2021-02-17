@@ -125,7 +125,7 @@
     "start": "next start -H 0.0.0.0 -p 8080",
     "test": "jest --watch",
     "test:ci": "jest --ci",
-    "format": "prettier --write src/**/*.{js,ts,tsx} *.{js,json,md}",
+    "format": "prettier --write \"src/**/*.{js,ts,tsx}\" \"*.{js,json,md}\"",
     "lint": "eslint .",
     "type-check": "yarn compile",
     "compile": "tsc --pretty --noEmit",
