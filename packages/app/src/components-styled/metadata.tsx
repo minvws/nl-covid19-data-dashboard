@@ -28,7 +28,7 @@ export function Metadata({ date, source }: MetadataProps) {
   const dateString = date ? formatMetadataDate(date) : null;
 
   return (
-    <Box as="footer" mt={3} mb={-3} gridArea="metadata">
+    <Box as="footer" mt={3} mb={{ _: 0, sm: -3 }} gridArea="metadata">
       <Text my={0} color="annotation" fontSize={1}>
         {dateString}
         {dateString && source ? ' · ' : null}
