@@ -13,6 +13,7 @@ interface KpiValueProps {
   difference?: DifferenceDecimal | DifferenceInteger;
   differenceStaticTimespan?: string;
   text?: string;
+  color?: string;
 }
 
 /**
@@ -44,24 +45,25 @@ export function KpiValue({
   difference,
   differenceStaticTimespan,
   text,
+  color = 'data.primary',
   ...otherProps
 }: KpiValueProps) {
   return (
     <>
       {isDefined(percentage) && isDefined(absolute) ? (
-        <StyledValue color="data.primary" {...otherProps}>
+        <StyledValue color={color} {...otherProps}>
           {`${formatNumber(absolute)} (${formatPercentage(percentage)}%)`}
         </StyledValue>
       ) : isDefined(percentage) ? (
-        <StyledValue color="data.primary" {...otherProps}>
+        <StyledValue color={color} {...otherProps}>
           {`${formatPercentage(percentage)}%`}
         </StyledValue>
       ) : isDefined(text) ? (
-        <StyledValue color="data.primary" {...otherProps}>
+        <StyledValue color={color} {...otherProps}>
           {text}
         </StyledValue>
       ) : (
-        <StyledValue color="data.primary" {...otherProps}>
+        <StyledValue color={color} {...otherProps}>
           {formatNumber(absolute)}
         </StyledValue>
       )}

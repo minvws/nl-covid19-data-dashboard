@@ -25,6 +25,8 @@ const MARKDOWN_KEYS = [
   'vaccinaties.data.kpi_total.tab_total_estimated.description_second',
   'vaccinaties.data.kpi_total.description_first',
   'vaccinaties.data.kpi_total.description_second',
+  'vr_risiconiveau.positieve_testen.description',
+  'vr_risiconiveau.ziekenhuisopnames.description',
 ];
 
 export function parseMarkdownInLocale(text: Locale) {

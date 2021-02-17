@@ -8,7 +8,8 @@ type ArticlePageSchema =
   | 'positiveTestsPage'
   | 'reproductionPage'
   | 'sewerPage'
-  | 'vaccinationsPage';
+  | 'vaccinationsPage'
+  | 'escalationLevelPage';
 
 export function createPageArticlesQuery(schemaName: ArticlePageSchema) {
   const query = `*[_type == '${schemaName}']{"articles":[...articles[]->{"title":title.${targetLanguage},
