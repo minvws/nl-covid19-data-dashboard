@@ -22,7 +22,7 @@ import { TimeframeOption } from '~/utils/timeframe';
 import { useElementSize } from '~/utils/use-element-size';
 import { ScatterPlot } from './components/scatter-plot';
 import { ToggleOutlierButton } from './components/toggle-outlier-button';
-import { Tooltip } from './components/tooltip';
+import { DateTooltip, Tooltip } from './components/tooltip';
 import {
   Dimensions,
   useLineTooltip,
@@ -240,22 +240,6 @@ export function SewerChart(props: SewerChartProps) {
               />
             )}
 
-            {lineTooltip.datum && lineTooltip.point && (
-              <Label
-                x={lineTooltip.point.x}
-                y={dimensions.bounds.height + 2}
-                title={formatDate(lineTooltip.datum?.dateMs)}
-                horizontalAnchor="middle"
-                verticalAnchor="start"
-                backgroundFill="#fff"
-                showAnchorLine={false}
-                fontColor={colors.data.benchmark}
-                titleFontSize={14}
-                titleFontWeight={'bold'}
-                backgroundPadding={6}
-              />
-            )}
-
             <AxisLeft
               scale={scales.yScale}
               tickValues={tickValuesY}
@@ -328,6 +312,16 @@ export function SewerChart(props: SewerChartProps) {
             )}
           </Group>
         </svg>
+
+        {lineTooltip.datum && lineTooltip.point && (
+          <DateTooltip
+            bounds={{ left: 0, top: 0, right: width, bottom: height }}
+            x={lineTooltip.point.x + dimensions.padding.left}
+            y={dimensions.bounds.height + dimensions.padding.top + 2}
+          >
+            {formatDate(lineTooltip.datum?.dateMs)}
+          </DateTooltip>
+        )}
 
         {lineTooltip.point && lineTooltip.datum && (
           <Tooltip
