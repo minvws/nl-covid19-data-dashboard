@@ -28,6 +28,10 @@ const MARKDOWN_KEYS = [
   'vaccinaties.grafiek.omschrijving',
   'vr_risiconiveau.positieve_testen.description',
   'vr_risiconiveau.ziekenhuisopnames.description',
+  'vr_risiconiveau.types[1].toelichting',
+  'vr_risiconiveau.types[2].toelichting',
+  'vr_risiconiveau.types[3].toelichting',
+  'vr_risiconiveau.types[4].toelichting',
 ];
 
 export function parseMarkdownInLocale(text: Locale) {

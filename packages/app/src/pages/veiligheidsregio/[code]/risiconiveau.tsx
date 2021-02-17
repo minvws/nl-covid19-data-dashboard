@@ -113,8 +113,13 @@ const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
               />
             </Box>
             {/* alignment with baseline of EscalationLevelInfoLabel */}
-            <Box mt={{ sm: '-0.55rem' }}>
-              <Text>{text.types[currentLevel].toelichting}</Text>
+            <Box mt={{ sm: '-.55rem' }}>
+              <Text
+                as="div"
+                dangerouslySetInnerHTML={{
+                  __html: text.types[currentLevel].toelichting,
+                }}
+              />
             </Box>
           </Box>
         </Tile>
