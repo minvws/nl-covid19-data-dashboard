@@ -632,7 +632,8 @@
     },
     "tooltip": {
       "positive_tested_people": "{{totalPositiveTestedPeople}} in totaal",
-      "positive_tested_value": "{{totalPositiveValue}} per 100.000"
+      "positive_tested_value": "{{totalPositiveValue}} per 100.000",
+      "vaccinatie_bereidheid": "{{percentageInFavor}}% vaccinatiebereidheid"
     },
     "niveau": "niveau",
     "clear_select_input": "Leegmaken",
@@ -753,7 +754,13 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
+    "barscale_keys": [
+      "0 tot 20",
+      "20 tot 40",
+      "40 tot 60",
+      "60 tot 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -801,8 +808,6 @@
     "graph_daily_label_text_rwzi": "Meetwaarden locatie ({{name}})",
     "graph_selected_rwzi_placeholder": "Selecteer locatie",
     "graph_range_description": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners over tijd",
-    "display_outliers": "Toon uitschieters",
-    "hide_outliers": "Verberg uitschieters",
     "titel_kpi": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners",
     "total_installation_count_titel": "Aantal meetlocaties",
     "total_installation_count_description": "Wekelijks aantal rioolwaterzuiveringsinstallaties die minimaal één keer een meting hebben gerapporteerd. Het weekgemiddelde wordt berekend door het gemiddelde te nemen van alle metingen op deze locaties. Per week kan dit aantal variëren omdat niet alle metingen altijd lukken. Let op: door de vrieskou is het niet mogelijk op alle locaties goede metingen van het rioolwater te doen. Dit heeft deze week invloed op de rioolwatercijfers.",
@@ -819,7 +824,9 @@
       }
     },
     "kpi_titel": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners",
-    "bar_chart_accessibility_description": ""
+    "bar_chart_accessibility_description": "",
+    "display_outliers": "Toon uitschieters",
+    "hide_outliers": "Verberg uitschieters"
   },
   "gemeente_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Ziekenhuisopnames",
@@ -937,8 +944,6 @@
     "graph_daily_label_text_rwzi": "Meetwaarden locatie ({{name}})",
     "graph_selected_rwzi_placeholder": "Selecteer locatie",
     "graph_range_description": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners over tijd",
-    "display_outliers": "Toon uitschieters",
-    "hide_outliers": "Verberg uitschieters",
     "reference": {
       "href": "/verantwoording#rioolwater",
       "text": "Lees meer over het onderzoek naar het coronavirus in rioolwater in de cijferverantwoording."
@@ -951,7 +956,9 @@
       }
     },
     "kpi_titel": "Gemiddelde aantal virusdeeltjes per 100.000 inwoners",
-    "bar_chart_accessibility_description": ""
+    "bar_chart_accessibility_description": "",
+    "display_outliers": "Toon uitschieters",
+    "hide_outliers": "Verberg uitschieters"
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "De risicokaart van Nederland",
@@ -2130,7 +2137,11 @@
       "kpi_expected_page_additions": {
         "title": "Verwachte toevoegingen aan deze pagina",
         "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer:",
-        "additions": ["Vaccinatiebereidheid", "Vaccinatiegraad", ""]
+        "additions": [
+          "Vaccinatiebereidheid",
+          "Vaccinatiegraad",
+          ""
+        ]
       }
     },
     "section_vaccinations_more_information": {
@@ -2147,7 +2158,7 @@
     },
     "grafiek_draagvlak": {
       "titel": "Vaccinatiebereidheid",
-      "omschrijving": "Deze grafiek toont hoeveel procent van de bevolking zelf een prik tegen corona wil hebben. Het cijfer komt voort uit onderzoek waarin wordt gevraagd of mensen een prik willen krijgen. Het onderzoek wordt elke drie weken herhaald.",
+      "omschrijving": "Deze grafiek toont per leeftijdsgroep en in totaal hoeveel procent van de bevolking zelf een prik tegen corona wil hebben. De cijfers komen uit onderzoek waarin wordt gevraagd of mensen een prik willen krijgen. Het onderzoek wordt elke drie weken herhaald.",
       "kpi_omschrijving": "Gemiddeld percentage van de Nederlandse bevolking die bereid is om zich te laten vaccineren",
       "tooltip_gemiddeld": "Gemiddeld",
       "leeftijd_jaar": "{{ageGroup}} jaar"
@@ -2413,37 +2424,6 @@
     "url": "https://coronadashboard.rijksoverheid.nl/verantwoording"
   },
   "article_strip_title": "Meer informatie over dit onderwerp",
-  "gemeente_sterfte": {
-    "titel_sidebar": "Sterfte",
-    "titel_kpi": "Gemeld aantal patiënten overleden aan COVID-19 per dag",
-    "metadata": {
-      "title": "Sterfte in {{municipalityName}} | Dashboard Coronavirus | Rijksoverheid.nl",
-      "description": "Aantal overledenen per dag in {{municipalityName}}"
-    },
-    "section_deceased_rivm": {
-      "title": "Sterfte in {{municipalityName}}",
-      "description": "Deze cijfers laten zien van hoeveel patiënten er aan de GGD gemeld is dat ze zijn overleden aan/met COVID-19. Het werkelijke aantal patiënten dat is overleden aan/met COVID-19 is waarschijnlijk hoger, omdat niet alle COVID-19 patiënten getest worden en er geen meldingsplicht geldt voor overlijden aan/met COVID-19. ",
-      "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-      "bronnen": {
-        "rivm": {
-          "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
-          "text": "RIVM",
-          "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv"
-        }
-      },
-      "reference": {
-        "href": "/verantwoording#sterfte",
-        "text": "Lees meer in de cijferverantwoording."
-      },
-      "kpi_covid_daily_title": "Gemeld aantal patiënten overleden aan COVID-19 per dag",
-      "kpi_covid_daily_description": "Dit getal toont het aantal patiënten waarvan aan de GGD gemeld is dat ze zijn overleden aan COVID-19, per dag. Een deel van de overlijdens is van eerdere dagen, die later zijn doorgegeven.",
-      "kpi_covid_total_title": "Totaal aantal personen overleden aan/met COVID-19",
-      "kpi_covid_total_description": "Dit getal laat zien van hoeveel personen in totaal is gemeld dat ze zijn overleden aan/met COVID-19, sinds het begin van de meldingen.",
-      "line_chart_covid_daily_title": "Gemelde aantal patiënten overleden aan/met COVID-19 over tijd",
-      "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel personen in de geselecteerde periode gemeld is dat ze zijn overleden aan COVID-19."
-    },
-    "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
-  },
   "vr_risiconiveau": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
     "reference": {
@@ -2479,5 +2459,36 @@
       "value_annotation": "per 1 miljoen inwoners per week",
       "description": "Dit getal laat zien hoeveel mensen met COVID-19 uit deze veiligheidsregio in de afgelopen 7 dagen in een ziekenhuis zijn opgenomen per 1 miljoen inwoners. De balk laat zien hoe ernstig het aantal ziekenhuisopnames is."
     }
+  },
+  "gemeente_sterfte": {
+    "titel_sidebar": "Sterfte",
+    "titel_kpi": "Gemeld aantal patiënten overleden aan COVID-19 per dag",
+    "metadata": {
+      "title": "Sterfte in {{municipalityName}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Aantal overledenen per dag in {{municipalityName}}"
+    },
+    "section_deceased_rivm": {
+      "title": "Sterfte in {{municipalityName}}",
+      "description": "Deze cijfers laten zien van hoeveel patiënten er aan de GGD gemeld is dat ze zijn overleden aan/met COVID-19. Het werkelijke aantal patiënten dat is overleden aan/met COVID-19 is waarschijnlijk hoger, omdat niet alle COVID-19 patiënten getest worden en er geen meldingsplicht geldt voor overlijden aan/met COVID-19. ",
+      "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+      "bronnen": {
+        "rivm": {
+          "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
+          "text": "RIVM",
+          "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv"
+        }
+      },
+      "reference": {
+        "href": "/verantwoording#sterfte",
+        "text": "Lees meer in de cijferverantwoording."
+      },
+      "kpi_covid_daily_title": "Gemeld aantal patiënten overleden aan COVID-19 per dag",
+      "kpi_covid_daily_description": "Dit getal toont het aantal patiënten waarvan aan de GGD gemeld is dat ze zijn overleden aan COVID-19, per dag. Een deel van de overlijdens is van eerdere dagen, die later zijn doorgegeven.",
+      "kpi_covid_total_title": "Totaal aantal personen overleden aan/met COVID-19",
+      "kpi_covid_total_description": "Dit getal laat zien van hoeveel personen in totaal is gemeld dat ze zijn overleden aan/met COVID-19, sinds het begin van de meldingen.",
+      "line_chart_covid_daily_title": "Gemelde aantal patiënten overleden aan/met COVID-19 over tijd",
+      "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel personen in de geselecteerde periode gemeld is dat ze zijn overleden aan COVID-19."
+    },
+    "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
   }
 }

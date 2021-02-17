@@ -646,7 +646,7 @@
     "vandaag": "Today",
     "read_more": "Read more",
     "absolute_date_template": "on {{date}}",
-    "inwoners": "inhabitants"
+    "inwoners": ""
   },
   "seoHead": {
     "default_description": "Information on the development of the coronavirus in The Netherlands.",
@@ -686,7 +686,7 @@
       "kwetsbare_groepen": "Vulnerable groups",
       "maatregelen": "Measures",
       "algemeen": "General",
-      "inschaling": "Inschaling"
+      "inschaling": ""
     }
   },
   "veiligheidsregio_metadata": {
@@ -754,7 +754,13 @@
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -802,8 +808,6 @@
     "graph_daily_label_text_rwzi": "Measurements for ({{name}})",
     "graph_selected_rwzi_placeholder": "Select location",
     "graph_range_description": "Average number of virus particles per 100.000 inhabitants over time",
-    "display_outliers": "Display outliers",
-    "hide_outliers": "Hide outliers",
     "titel_kpi": "Average number of virus particles per 100.000 inhabitants",
     "total_installation_count_titel": "Number of measurement locations",
     "total_installation_count_description": "Weekly number of sewage water treatment plants that have reported at least one measurement. The weekly average is calculated by taking the average of all measurements at these locations. This number can vary each week because not all measurements are successful. Please note: due to the freezing cold, it is not possible to take good measurements of the sewage water at all locations. This will affect the sewage water figures this week.",
@@ -820,7 +824,9 @@
       }
     },
     "kpi_titel": "Average number of coronavirus particles per 100.000 people",
-    "bar_chart_accessibility_description": ""
+    "bar_chart_accessibility_description": "",
+    "display_outliers": "",
+    "hide_outliers": ""
   },
   "gemeente_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Hospital admissions",
@@ -938,8 +944,6 @@
     "graph_daily_label_text_rwzi": "Measurements for location ({{name}})",
     "graph_selected_rwzi_placeholder": "Select location",
     "graph_range_description": "Progression overt time in the average number of virus particles per 100.000 residents.",
-    "display_outliers": "Display outliers",
-    "hide_outliers": "Hide outliers",
     "reference": {
       "href": "/verantwoording#sewage-water",
       "text": "Find out more about testing wastewater for coronavirus in the explanation of data presented."
@@ -952,7 +956,9 @@
       }
     },
     "kpi_titel": "Average number of coronavirus particles per 100.000 people",
-    "bar_chart_accessibility_description": ""
+    "bar_chart_accessibility_description": "",
+    "display_outliers": "",
+    "hide_outliers": ""
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Risk level map of the Netherlands",
@@ -1408,7 +1414,7 @@
       "age_group_range_tooltip": "{{ageGroupRange}} years old. ",
       "accessibility_description": "Graph with percentages for the distribution of the population and the distribution of positive tested age groups.",
       "clipped_value_message": "This value is higher than displayed in the figure.",
-      "value_percentage_title": "Confirmed cases by agegroup",
+      "value_percentage_title": "Confirmed cases by age group",
       "value_percentage_tooltip": "of the confirmed cases are {{ageGroupRange}} years old"
     }
   },
@@ -2152,10 +2158,10 @@
     },
     "grafiek_draagvlak": {
       "titel": "Willingness to be vaccinated",
-      "omschrijving": "This graph shows the percentage of the population that wishes to be vaccinated against COVID-19. The figure is taken from a survey where people are asked if they wish to be vaccinated. The survey is conducted every three weeks.",
-      "kpi_omschrijving": "Gemiddeld percentage van de Nederlandse bevolking die bereid is om zich te laten vaccineren",
-      "tooltip_gemiddeld": "Average",
-      "leeftijd_jaar": "Age {{ageGroup}}"
+      "omschrijving": "This graph shows the percentage per age group and in total of the population that wishes to be vaccinated against COVID-19. The figures are taken from a survey where people are asked if they wish to be vaccinated. The survey is conducted every three weeks.",
+      "kpi_omschrijving": "",
+      "tooltip_gemiddeld": "",
+      "leeftijd_jaar": ""
     }
   },
   "editorial_detail": {
@@ -2418,71 +2424,71 @@
     "url": "https://coronadashboard.government.nl/verantwoording"
   },
   "article_strip_title": "More about this topic",
-  "gemeente_sterfte": {
-    "titel_sidebar": "Sterfte",
-    "titel_kpi": "Gemeld aantal patiënten overleden aan COVID-19 per dag",
-    "metadata": {
-      "title": "Sterfte in {{municipalityName}} | Dashboard Coronavirus | Rijksoverheid.nl",
-      "description": "Aantal overledenen per dag in {{municipalityName}}"
-    },
-    "section_deceased_rivm": {
-      "title": "Sterfte",
-      "description": "Deze cijfers laten zien van hoeveel patiënten er aan de GGD gemeld is dat ze zijn overleden aan/met COVID-19. Het werkelijke aantal patiënten dat is overleden aan/met COVID-19 is waarschijnlijk hoger, omdat niet alle COVID-19 patiënten getest worden en er geen meldingsplicht geldt voor overlijden aan/met COVID-19. ",
-      "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-      "bronnen": {
-        "rivm": {
-          "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
-          "text": "RIVM",
-          "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv"
-        }
-      },
-      "reference": {
-        "href": "/verantwoording#sterfte",
-        "text": "Lees meer in de cijferverantwoording."
-      },
-      "kpi_covid_daily_title": "Gemeld aantal patiënten overleden aan COVID-19 per dag",
-      "kpi_covid_daily_description": "Dit getal toont het aantal patiënten waarvan aan de GGD gemeld is dat ze zijn overleden aan COVID-19, per dag. Een deel van de overlijdens is van eerdere dagen, die later zijn doorgegeven.",
-      "kpi_covid_total_title": "Totaal aantal personen overleden aan/met COVID-19",
-      "kpi_covid_total_description": "Dit getal laat zien van hoeveel personen in totaal is gemeld dat ze zijn overleden aan/met COVID-19, sinds het begin van de meldingen.",
-      "line_chart_covid_daily_title": "Gemelde aantal patiënten overleden aan/met COVID-19 over tijd",
-      "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel personen in de geselecteerde periode gemeld is dat ze zijn overleden aan COVID-19."
-    },
-    "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
-  },
   "vr_risiconiveau": {
-    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
+    "datums": "",
     "reference": {
-      "href": "/over-risiconiveaus",
-      "text": "Lees meer over de risiconiveaus en wat dit betekent voor de maatregelen op de pagina ‘Over de risiconiveaus’."
+      "href": "",
+      "text": ""
     },
     "metadata": {
-      "title": "Inschalen risiconiveau {{safetyRegionName}}",
-      "description": "Inschalen risiconiveau {{safetyRegionName}}"
+      "title": "",
+      "description": ""
     },
-    "titel": "Risiconiveau in {{safetyRegionName}}",
-    "pagina_toelichting": "Elke twee weken wordt bepaald in welk risiconiveau een regio zit. Daarvoor kijken we naar het aantal positieve testen en het aantal ziekenhuisopnames. Het meest ernstige cijfer bepaalt het risiconiveau. Bij de risiconiveaus horen maatregelen. Welke maatregelen precies gelden, hangt niet alleen af van hoe het in de Veiligheidsregio gaat, maar ook van de situatie in het hele land. ",
-    "current_escalation_level": "Risiconiveau van dit moment",
+    "titel": "",
+    "pagina_toelichting": "",
+    "current_escalation_level": "",
     "bronnen": {
       "rivm_positieve_testen": {
-        "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv",
-        "href": " https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.html",
-        "text": "RIVM"
+        "download": "",
+        "href": "",
+        "text": ""
       },
       "rivm_ziekenhuisopnames": {
-        "download": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.csv",
-        "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
-        "text": "RIVM"
+        "download": "",
+        "href": "",
+        "text": ""
       }
     },
     "positieve_testen": {
-      "title": "Positieve testen",
-      "value_annotation": "per 100.000 inwoners per week",
-      "description": "Dit getal laat zien hoeveel mensen de afgelopen 7 dagen positief getest zijn per 100.000 inwoners. De balk laat zien hoe ernstig het aantal positieve testen is."
+      "title": "",
+      "value_annotation": "",
+      "description": ""
     },
     "ziekenhuisopnames": {
-      "title": "Ziekenhuisopnames (inclusief IC)",
-      "value_annotation": "per 1 miljoen inwoners per week",
-      "description": "Dit getal laat zien hoeveel mensen met COVID-19 uit deze veiligheidsregio in de afgelopen 7 dagen in een ziekenhuis zijn opgenomen per 1 miljoen inwoners. De balk laat zien hoe ernstig het aantal ziekenhuisopnames is."
+      "title": "",
+      "value_annotation": "",
+      "description": ""
     }
+  },
+  "gemeente_sterfte": {
+    "titel_sidebar": "",
+    "titel_kpi": "",
+    "metadata": {
+      "title": "",
+      "description": ""
+    },
+    "section_deceased_rivm": {
+      "title": "",
+      "description": "",
+      "datums": "",
+      "bronnen": {
+        "rivm": {
+          "href": "",
+          "text": "",
+          "download": ""
+        }
+      },
+      "reference": {
+        "href": "",
+        "text": ""
+      },
+      "kpi_covid_daily_title": "",
+      "kpi_covid_daily_description": "",
+      "kpi_covid_total_title": "",
+      "kpi_covid_total_description": "",
+      "line_chart_covid_daily_title": "",
+      "line_chart_covid_daily_description": ""
+    },
+    "kpi_titel": ""
   }
 }
