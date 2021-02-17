@@ -1312,6 +1312,38 @@
       }
     }
   },
+  "corona_melder_app": {
+    "header": {
+      "category": "Preventie verspreiding",
+      "title": "Gebruik CoronaMelder app",
+      "description": "Om verspreiding van het coronavirus tegen te gaan is  de telefoon-app CoronaMelder ontwikkeld. CoronaMelder stuurt gebruikers van de app een bericht wanneer zij enige tijd in de buurt zijn geweest van iemand die besmet is met het coronavirus die ook de app gebruikt. Dit verlaagt het risico dat zij onbewust andere mensen in hun omgeving besmetten.",
+      "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+      "reference": {
+        "text": "Lees meer over de CoronaMelder app in de cijferverantwoording.",
+        "href": "/verantwoording#coronamelder"
+      },
+      "bronnen": {
+        "rivm": {
+          "download": "",
+          "text": "RIVM",
+          "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/8a72d78a-fcf8-4882-b0ab-cd594961a267?tab=relations"
+        }
+      }
+    },
+    "waarschuwingen": {
+      "title": "Aantal positieve tests gemeld via de CoronaMelder app:",
+      "description": "Dit cijfer toont hoeveel (positief geteste) gebruikers van CoronaMelder afgelopen dagen andere app-gebruikers hebben gewaarschuwd.",
+      "total": "{{totalDownloads}} mensen hebben de CoronaMelder app gedownload."
+    },
+    "rapport": {
+      "title": "Factsheet CoronaMelder",
+      "description": "Het meest actuele factsheet over het gebruik van de app is beschikbaar via de website van de CoronaMelder app.",
+      "link": {
+        "text": "Meest recente Factsheet CoronaMelder app",
+        "href": "https://www.coronamelder.nl/media/Factsheet_Corona_latest.pdf"
+      }
+    }
+  },
   "regionaal_gedrag": {
     "metadata": {
       "title": "Naleving en Draagvlak | Dashboard Coronavirus | Rijksoverheid.nl",
@@ -1929,6 +1961,8 @@
     }
   },
   "accessibility": {
+    "link_source": "databron voor \"{{subject}}\"",
+    "link_download": "download voor de databron van \"{{subject}}\"",
     "grafieken": {
       "reproductiegetal_verloop": "Deze grafiek geeft het reproductiegetal over tijd weer.",
       "ziekenhuisopnames": "Deze grafiek toont het aantal ziekenhuisopnames over tijd.",
@@ -1948,9 +1982,7 @@
       "verwachte_leveringen": "Het linkerdeel van de grafiek laat zien hoeveel vaccins Nederland in totaal heeft gekregen en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal verwachten te krijgen en hoeveel prikken we verwachten te zetten.",
       "vaccin_levering_en_prikken": "Het linkerdeel van de grafiek laat zien hoeveel vaccins Nederland in totaal heeft gekregen en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal verwachten te krijgen en hoeveel prikken we verwachten te zetten.",
       "vaccinatie_draagvlak": "Deze grafiek toont hoeveel procent van de bevolking zelf een prik tegen corona wil hebben."
-    },
-    "link_source": "Bekijk de databron van \"{{subject}}\" op",
-    "link_download": "Download de databron van \"{{subject}}\" op"
+    }
   },
   "deceased_age_groups": {
     "title": "COVID-19 sterfte: verdeling naar leeftijd",

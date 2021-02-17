@@ -9,7 +9,6 @@ import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { Box } from '../base';
 import { ExternalLink } from '../external-link';
 import { Text } from '../typography';
-import css from '@styled-system/css';
 import { VisuallyHidden } from '~/components-styled/visually-hidden';
 interface Datasource {
   href: string;
@@ -119,21 +118,11 @@ function MetadataItem(props: MetadataItemProps) {
             {index > 0 && ' & '}
             {item.href && (
               <ExternalLink href={item.href}>
-                <VisuallyHidden>{accessibilityText}</VisuallyHidden>
                 {item.text}
+                <VisuallyHidden>{accessibilityText}</VisuallyHidden>
               </ExternalLink>
             )}
-            {!item.href && (
-              <Text
-                css={css({
-                  display: 'inline-block',
-                  my: '0',
-                  fontSize: 'inherit',
-                })}
-              >
-                {item.text}
-              </Text>
-            )}
+            {!item.href && item.text}
           </Fragment>
         ))}
       </Text>

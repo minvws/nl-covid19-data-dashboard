@@ -1,1 +1,1 @@
-export {filterFn$ as default} from './datastore'
+export { filterFn$ as default } from './datastore';
