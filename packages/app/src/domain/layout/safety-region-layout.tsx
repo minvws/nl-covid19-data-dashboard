@@ -104,42 +104,41 @@ function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
              * and therefore optional
              */}
             {data && showMetricLinks && (
-              <nav
+              <Box
+                as="nav"
                 /** re-mount when route changes in order to blur anchors */
                 key={router.asPath}
                 id="metric-navigation"
                 aria-label={siteText.aria_labels.metriek_navigatie}
                 role="navigation"
+                spacing={3}
               >
                 <Text fontSize={3} fontWeight="bold" px={3} m={0}>
                   {safetyRegionName}
                 </Text>
+
                 <Menu>
-                  <Box pt={3}>
-                    <MetricMenuItemLink
-                      href={`/veiligheidsregio/${code}/maatregelen`}
-                      title={
-                        siteText.veiligheidsregio_maatregelen.titel_sidebar
-                      }
-                      subtitle={
-                        siteText.veiligheidsregio_maatregelen.subtitel_sidebar
-                      }
-                    />
-                    <MetricMenuItemLink
-                      href={`/veiligheidsregio/${code}/risiconiveau`}
-                      title={'Risiconiveau'}
-                    >
-                      <Box mt={2}>
-                        <EscalationLevelInfoLabel
-                          escalationLevel={
-                            data.escalation_level.level as EscalationLevel
-                          }
-                          hasSmallIcon
-                          useLevelColor
-                        />
-                      </Box>
-                    </MetricMenuItemLink>
-                  </Box>
+                  <MetricMenuItemLink
+                    href={`/veiligheidsregio/${code}/maatregelen`}
+                    title={siteText.veiligheidsregio_maatregelen.titel_sidebar}
+                    subtitle={
+                      siteText.veiligheidsregio_maatregelen.subtitel_sidebar
+                    }
+                  />
+                  <MetricMenuItemLink
+                    href={`/veiligheidsregio/${code}/risiconiveau`}
+                    title={'Risiconiveau'}
+                  >
+                    <Box mt={2}>
+                      <EscalationLevelInfoLabel
+                        escalationLevel={
+                          data.escalation_level.level as EscalationLevel
+                        }
+                        hasSmallIcon
+                        useLevelColor
+                      />
+                    </Box>
+                  </MetricMenuItemLink>
 
                   <CategoryMenu
                     title={
@@ -309,7 +308,7 @@ function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
                     </MetricMenuItemLink>
                   </CategoryMenu>
                 </Menu>
-              </nav>
+              </Box>
             )}
           </>
         }
