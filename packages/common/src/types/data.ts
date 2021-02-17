@@ -276,9 +276,9 @@ export interface NationalIntensiveCareLcps {
   last_value: NationalIntensiveCareLcpsValue;
 }
 export interface NationalIntensiveCareLcpsValue {
-  beds_occupied_covid: number;
-  beds_occupied_non_covid: number;
-  beds_occupied_covid_percentage: number;
+  beds_occupied_covid: number | null;
+  beds_occupied_non_covid: number | null;
+  beds_occupied_covid_percentage: number | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }
