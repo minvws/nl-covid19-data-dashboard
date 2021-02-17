@@ -2513,7 +2513,7 @@
       "datums": "",
       "reference": {
         "text": "Read more about the CoronaMelder app in the explanation of the presented data.",
-        "href": ""
+        "href": "/verantwoording#coronamelder"
       },
       "bronnen": {
         "rivm": {
@@ -2533,7 +2533,7 @@
       "description": "Researchers are closely monitoring the CoronaMelder app’s impact. Read the most recent factsheet about this on the CoronaMelder website.",
       "link": {
         "text": "Most recent factsheet CoronaMelder app",
-        "href": ""
+        "href": "https://www.coronamelder.nl/media/Factsheet_Corona_latest.pdf"
       }
     }
   }
