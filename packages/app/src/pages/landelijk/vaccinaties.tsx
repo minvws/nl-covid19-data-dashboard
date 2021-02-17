@@ -17,6 +17,7 @@ import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
+import { Legenda } from '~/components-styled/legenda';
 import { LineChart } from '~/components-styled/line-chart/line-chart';
 import { RadioGroup } from '~/components-styled/radio-group';
 import { SEOHead } from '~/components-styled/seo-head';
@@ -310,6 +311,28 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                 />
               )}
             </ParentSize>
+            <Legenda
+              items={[
+                {
+                  label: 'Beschikbare vaccins',
+                  color: 'data.emphasis',
+                  shape: 'line',
+                },
+                {
+                  label: 'Verwacht',
+                  color: 'black',
+                  shape: 'custom',
+                  ShapeComponent: HatchedSquare,
+                },
+              ]}
+            />
+            <Legenda
+              items={Object.keys(colors.data.vaccines).map((key) => ({
+                label: text.data.vaccination_chart.product_names[key as any],
+                color: `data.vaccines.${key}`,
+                shape: 'line',
+              }))}
+            />
           </Box>
         </ChartTile>
 
@@ -388,3 +411,29 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
 VaccinationPage.getLayout = getNationalLayout;
 
 export default VaccinationPage;
+
+function HatchedSquare() {
+  return (
+    <svg height="15" width="15">
+      <defs>
+        <pattern
+          id="hatch"
+          width="5"
+          height="5"
+          patternTransform="rotate(-45 0 0)"
+          patternUnits="userSpaceOnUse"
+        >
+          <rect x="0" y="0" width="5" height="5" fill="white" />
+          <line
+            x1="0"
+            y1="0"
+            x2="0"
+            y2="5"
+            style={{ stroke: 'black', strokeWidth: 2 }}
+          />
+        </pattern>
+      </defs>
+      <rect height="15" width="15" fill="url(#hatch)" />
+    </svg>
+  );
+}
