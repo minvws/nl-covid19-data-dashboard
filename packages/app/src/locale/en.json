@@ -2152,7 +2152,10 @@
     },
     "grafiek_draagvlak": {
       "titel": "Willingness to be vaccinated",
-      "omschrijving": "This graph shows the percentage of the population that wishes to be vaccinated against COVID-19. The figure is taken from a survey where people are asked if they wish to be vaccinated. The survey is conducted every three weeks."
+      "omschrijving": "This graph shows the percentage of the population that wishes to be vaccinated against COVID-19. The figure is taken from a survey where people are asked if they wish to be vaccinated. The survey is conducted every three weeks.",
+      "kpi_omschrijving": "Gemiddeld percentage van de Nederlandse bevolking die bereid is om zich te laten vaccineren",
+      "tooltip_gemiddeld": "Average",
+      "leeftijd_jaar": "Age {{ageGroup}}"
     }
   },
   "editorial_detail": {

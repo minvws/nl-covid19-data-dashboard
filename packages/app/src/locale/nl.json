@@ -632,8 +632,7 @@
     },
     "tooltip": {
       "positive_tested_people": "{{totalPositiveTestedPeople}} in totaal",
-      "positive_tested_value": "{{totalPositiveValue}} per 100.000",
-      "vaccinatie_bereidheid": "{{percentageInFavor}}% vaccinatiebereidheid"
+      "positive_tested_value": "{{totalPositiveValue}} per 100.000"
     },
     "niveau": "niveau",
     "clear_select_input": "Leegmaken",
@@ -2148,7 +2147,10 @@
     },
     "grafiek_draagvlak": {
       "titel": "Vaccinatiebereidheid",
-      "omschrijving": "Deze grafiek toont hoeveel procent van de bevolking zelf een prik tegen corona wil hebben. Het cijfer komt voort uit onderzoek waarin wordt gevraagd of mensen een prik willen krijgen. Het onderzoek wordt elke drie weken herhaald."
+      "omschrijving": "Deze grafiek toont hoeveel procent van de bevolking zelf een prik tegen corona wil hebben. Het cijfer komt voort uit onderzoek waarin wordt gevraagd of mensen een prik willen krijgen. Het onderzoek wordt elke drie weken herhaald.",
+      "kpi_omschrijving": "Gemiddeld percentage van de Nederlandse bevolking die bereid is om zich te laten vaccineren",
+      "tooltip_gemiddeld": "Gemiddeld",
+      "leeftijd_jaar": "{{ageGroup}} jaar"
     }
   },
   "editorial_detail": {
