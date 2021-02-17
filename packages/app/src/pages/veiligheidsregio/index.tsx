@@ -69,7 +69,7 @@ const SafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
               <EscalationMapLegenda
                 data={choropleth.vr}
                 metricName="escalation_levels"
-                metricProperty="escalation_level"
+                metricProperty="level"
               />
             </>
           }
@@ -77,7 +77,7 @@ const SafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
           <SafetyRegionChoropleth
             data={choropleth.vr}
             metricName="escalation_levels"
-            metricProperty="escalation_level"
+            metricProperty="level"
             onSelect={goToSafetyRegion}
             tooltipContent={escalationTooltip(goToSafetyRegion)}
           />

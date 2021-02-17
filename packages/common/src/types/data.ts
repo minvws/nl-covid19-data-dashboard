@@ -139,6 +139,7 @@ export interface National {
   deceased_cbs: NationalDeceasedCbs;
   elderly_at_home: NationalElderlyAtHome;
   vaccine_support: NlVaccineSupport;
+  corona_melder_app: NlCoronaMelderApp;
   vaccine_delivery: NlVaccineDelivery;
   vaccine_delivery_estimate: NlVaccineEstimateDelivery;
   vaccine_administered: NlVaccineAdministered;
@@ -163,6 +164,7 @@ export interface NationalDifference {
   nursing_home__infected_locations_total: DifferenceInteger;
   nursing_home__deceased_daily: DifferenceInteger;
   reproduction__index_average: DifferenceDecimal;
+  corona_melder_app__warned_daily: DifferenceInteger;
   disability_care__newly_infected_people: DifferenceInteger;
   disability_care__infected_locations_total: DifferenceInteger;
   elderly_at_home__positive_tested_daily: DifferenceInteger;
@@ -444,6 +446,16 @@ export interface NlVaccineSupportValue {
   percentage_16_24: number;
   date_start_unix: number;
   date_end_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlCoronaMelderApp {
+  values: NlCoronaMelderAppValue[];
+  last_value: NlCoronaMelderAppValue;
+}
+export interface NlCoronaMelderAppValue {
+  downloaded_total: number;
+  warned_daily: number;
+  date_unix: number;
   date_of_insertion_unix: number;
 }
 export interface NlVaccineDelivery {
@@ -782,7 +794,7 @@ export interface RegionsTestedOverall {
 export interface EscalationLevels {
   date_unix: number;
   vrcode: string;
-  escalation_level: number;
+  level: number;
   valid_from_unix: number;
   date_of_insertion_unix: number;
 }

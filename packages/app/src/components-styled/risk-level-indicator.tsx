@@ -10,8 +10,7 @@ import { assert } from '~/utils/assert';
 import { LinkWithIcon } from '~/components-styled/link-with-icon';
 import ArrowIcon from '~/assets/arrow.svg';
 
-const escalationThresholds =
-  regionThresholds.escalation_levels.escalation_level;
+const escalationThresholds = regionThresholds.escalation_levels.level;
 
 type escalationTypesType = {
   titel: string;
@@ -25,23 +24,16 @@ interface RiskLevelIndicatorProps {
   description: string;
   code: string;
   escalationTypes: Record<escalationRecord, escalationTypesType>;
-  escalationLevel: EscalationLevel | number;
+  level: EscalationLevel | number;
   children?: ReactNode;
   href: string;
 }
 
 export function RiskLevelIndicator(props: RiskLevelIndicatorProps) {
-  const {
-    title,
-    description,
-    children,
-    escalationTypes,
-    escalationLevel,
-    href,
-  } = props;
+  const { title, description, children, escalationTypes, level, href } = props;
 
   const filteredEscalationLevel = escalationThresholds.find(
-    (item) => item.threshold === escalationLevel
+    (item) => item.threshold === level
   );
 
   assert(filteredEscalationLevel, 'Could not find an escalation level');
@@ -83,15 +75,15 @@ export function RiskLevelIndicator(props: RiskLevelIndicatorProps) {
           spacing={3}
           spacingHorizontal
         >
-          <span>{escalationLevel}</span>
-          <span>{escalationTypes[escalationLevel].titel}</span>
+          <span>{level}</span>
+          <span>{escalationTypes[level].titel}</span>
         </Box>
       </Box>
 
       <Text>
-        {description} {escalationLevel}:{' '}
+        {description} {level}:{' '}
         <EscalationLevelTitle>
-          {escalationTypes[escalationLevel].titel.toLowerCase()}
+          {escalationTypes[level].titel.toLowerCase()}
         </EscalationLevelTitle>
       </Text>
 
