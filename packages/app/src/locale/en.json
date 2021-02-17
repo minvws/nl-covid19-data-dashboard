@@ -2052,12 +2052,12 @@
           {
             "value": "559635",
             "description": "reported by GGD-GHOR",
-            "report_date": "Reported number till 17 February"
+            "report_date": "Reported number till 16 February"
           },
           {
             "value": "94551",
             "description": "reported by LNAZ",
-            "report_date": "Reported number till 17 February"
+            "report_date": "Reported number till 16 February"
           },
           {
             "value": "",
@@ -2089,22 +2089,22 @@
             {
               "value": "559635",
               "description": "administered by GGDs",
-              "report_date": "Reported number till 17 February"
+              "report_date": "Reported number till 16 February"
             },
             {
               "value": "94551",
               "description": "administered in hospitals",
-              "report_date": "Reported number till 17 February"
+              "report_date": "Reported number till 16 February"
             },
             {
               "value": "180270",
               "description": "administered in long-term care institutions",
-              "report_date": "Calculated number till 17 February"
+              "report_date": "Calculated number till 16 February"
             },
             {
               "value": "1473",
               "description": "administered in general practices",
-              "report_date": "Calculated number till 17 February"
+              "report_date": "Calculated number till 16 February"
             },
             {
               "value": "",

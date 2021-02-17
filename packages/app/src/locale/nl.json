@@ -2052,12 +2052,12 @@
           {
             "value": "559635",
             "description": "gemeld door GGD-GHOR",
-            "report_date": "Gemeld aantal tot en met 17 februari"
+            "report_date": "Gemeld aantal tot en met 16 februari"
           },
           {
             "value": "94551",
             "description": "gemeld door LNAZ",
-            "report_date": "Gemeld aantal tot en met 17 februari"
+            "report_date": "Gemeld aantal tot en met 16 februari"
           },
           {
             "value": "",
@@ -2089,22 +2089,22 @@
             {
               "value": "559635",
               "description": "gezet door GGD'en",
-              "report_date": "Gemeld aantal tot en met 17 februari"
+              "report_date": "Gemeld aantal tot en met 16 februari"
             },
             {
               "value": "94551",
               "description": "gezet in ziekenhuizen",
-              "report_date": "Gemeld aantal tot en met 17 februari"
+              "report_date": "Gemeld aantal tot en met 16 februari"
             },
             {
               "value": "180270",
               "description": "gezet in langdurige zorginstellingen",
-              "report_date": "Berekend aantal tot en met 17 februari"
+              "report_date": "Berekend aantal tot en met 16 februari"
             },
             {
               "value": "1473",
               "description": "gezet in huisartsenpraktijken",
-              "report_date": "Berekend aantal tot en met 17 februari"
+              "report_date": "Berekend aantal tot en met 16 februari"
             },
             {
               "value": "",
