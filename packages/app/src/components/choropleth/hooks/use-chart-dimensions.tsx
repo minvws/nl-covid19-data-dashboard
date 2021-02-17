@@ -1,4 +1,3 @@
-import { useRef } from 'react';
 import useResizeObserver from 'use-resize-observer/polyfilled';
 
 /**
@@ -55,9 +54,8 @@ export const useChartDimensions = <T extends HTMLElement>(
    *
    * @REF https://trello.com/c/i25FG3jk/548-usechartdemensions-pass-ref-as-prop
    */
-  const ref = useRef<T>(null);
 
-  const { width, height } = useResizeObserver({ ref });
+  const { ref, width, height } = useResizeObserver<T>();
 
   const calculatedHeight = aspectRatio && width ? width * aspectRatio : height;
 

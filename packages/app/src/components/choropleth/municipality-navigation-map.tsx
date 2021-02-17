@@ -1,15 +1,15 @@
+import { MunicipalityProperties } from '@corona-dashboard/common';
 import { Feature, MultiPolygon } from 'geojson';
 import { ReactNode } from 'react';
 import { AspectRatio } from '~/components-styled/aspect-ratio';
 import { colors } from '~/style/theme';
 import { Choropleth } from './choropleth';
 import { useChartDimensions, useMunicipalityNavigationData } from './hooks';
-import { Path } from './path';
-import { MunicipalityProperties } from '@corona-dashboard/common';
+import { HoverPath, Path } from './path';
 import { countryGeo, municipalGeo } from './topology';
 
 type MunicipalityNavigationMapProps<T> = {
-  onSelect?: (context: MunicipalityProperties) => void;
+  onSelect?: (gmcode: string) => void;
   tooltipContent?: (
     context: MunicipalityProperties & { value: T }
   ) => ReactNode;
@@ -30,7 +30,7 @@ export function MunicipalityNavigationMap<T>(
 
   const { getChoroplethValue } = useMunicipalityNavigationData(municipalGeo);
 
-  const featureCallback = (
+  const renderFeature = (
     feature: Feature<MultiPolygon, MunicipalityProperties>,
     path: string,
     _index: number
@@ -41,7 +41,7 @@ export function MunicipalityNavigationMap<T>(
       <Path
         key={gemcode}
         id={gemcode}
-        d={path}
+        pathData={path}
         fill={'#fff'}
         stroke={colors.blue}
         strokeWidth={0.5}
@@ -49,19 +49,18 @@ export function MunicipalityNavigationMap<T>(
     );
   };
 
-  const hoverCallback = (
+  const renderHover = (
     feature: Feature<MultiPolygon, MunicipalityProperties>,
     path: string
   ) => {
     const { gemcode } = feature.properties;
 
     return (
-      <Path
-        isHoverable
+      <HoverPath
         isClickable
         id={gemcode}
         key={gemcode}
-        d={path}
+        pathData={path}
         stroke={colors.blue}
         fill={colors.blue}
       />
@@ -71,7 +70,7 @@ export function MunicipalityNavigationMap<T>(
   const onClick = (id: string) => {
     if (onSelect) {
       const data = getChoroplethValue(id);
-      onSelect(data as any);
+      onSelect(data.gemcode);
     }
   };
 
@@ -90,8 +89,8 @@ export function MunicipalityNavigationMap<T>(
         hovers={municipalGeo}
         boundingBox={countryGeo}
         dimensions={dimensions}
-        featureCallback={featureCallback}
-        hoverCallback={hoverCallback}
+        renderFeature={renderFeature}
+        renderHover={renderHover}
         onPathClick={onClick}
         getTooltipContent={getTooltipContent}
       />

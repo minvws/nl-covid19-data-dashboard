@@ -19,7 +19,7 @@ export const escalationTooltip = (selectHandler: RegionSelectionHandler) => {
 
     const onSelect = (event: React.MouseEvent<HTMLElement>) => {
       event.stopPropagation();
-      selectHandler(context);
+      selectHandler(context.vrcode);
     };
 
     const escalationText = ((text.escalatie_niveau.types as unknown) as Record<
@@ -30,7 +30,7 @@ export const escalationTooltip = (selectHandler: RegionSelectionHandler) => {
     const validFromText = replaceVariablesInText(
       text.escalatie_niveau.valid_from,
       {
-        validFrom: formatDateFromSeconds(context.valid_from_unix, 'short'),
+        validFrom: formatDateFromSeconds(context.valid_from_unix, 'day-month'),
       }
     );
 

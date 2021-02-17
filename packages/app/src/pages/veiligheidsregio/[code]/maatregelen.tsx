@@ -1,14 +1,11 @@
 import css from '@styled-system/css';
 import { useRouter } from 'next/router';
-import Maatregelen from '~/assets/maatregelen.svg';
 import { AnchorTile } from '~/components-styled/anchor-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiSection } from '~/components-styled/kpi-section';
 import { LockdownTable } from '~/domain/restrictions/lockdown-table';
-import { PortableText } from '~/lib/sanity';
 import { TileList } from '~/components-styled/tile-list';
 import { Heading } from '~/components-styled/typography';
-// import { EscalationLevel } from '~/components/restrictions/type';
 import { SEOHead } from '~/components-styled/seo-head';
 import { Box } from '~/components-styled/base/box';
 import { FCWithLayout } from '~/domain/layout/layout';
@@ -16,15 +13,15 @@ import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import siteText from '~/locale/index';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import { LockdownData, RoadmapData } from '~/types/cms';
+import { targetLanguage } from '~/locale/index';
 
 import {
   getLastGeneratedDate,
   createGetContent,
   getVrData,
 } from '~/static-props/get-data';
-import theme from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-// import { useEscalationLevel } from '~/utils/use-escalation-level';
+import { RichContent } from '~/components-styled/cms/rich-content';
 
 export { getStaticPaths } from '~/static-paths/vr';
 
@@ -35,7 +32,22 @@ type MaatregelenData = {
 
 const query = `
 {
-  'lockdown': *[_type == 'lockdown'][0],
+  'lockdown': *[_type == 'lockdown']{
+    ...,
+    "message": {
+      ...message,
+      "description": {
+        ...message.description,
+        "${targetLanguage}": [
+          ...message.description.${targetLanguage}[]
+          {
+            ...,
+            "asset": asset->
+          },
+        ]
+      },
+    }
+  }[0],
   // We will need the roadmap when lockdown is disabled in the CMS.
   // 'roadmap': *[_type == 'roadmap'][0]
 }`;
@@ -82,8 +94,6 @@ const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
       />
       <TileList>
         <ContentHeader
-          category={siteText.veiligheidsregio_layout.headings.algemeen}
-          icon={<Maatregelen fill={theme.colors.restrictions} />}
           title={replaceVariablesInText(
             siteText.veiligheidsregio_maatregelen.titel,
             {
@@ -103,7 +113,7 @@ const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
             >
               <Heading level={3}>{lockdown.message.title}</Heading>
               {lockdown.message.description ? (
-                <PortableText blocks={lockdown.message.description} />
+                <RichContent blocks={lockdown.message.description} />
               ) : null}
             </Box>
           </KpiSection>

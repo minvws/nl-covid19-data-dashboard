@@ -34,6 +34,12 @@
         "number_of_participants": {
           "type": "integer"
         },
+        "curfew_compliance": {
+          "type": ["integer", "null"]
+        },
+        "curfew_compliance_trend": {
+          "$ref": "#/definitions/value_trend"
+        },
         "wash_hands_compliance": {
           "type": ["integer", "null"]
         },
@@ -74,6 +80,12 @@
           "type": ["integer", "null"]
         },
         "max_visitors_compliance_trend": {
+          "$ref": "#/definitions/value_trend"
+        },
+        "curfew_support": {
+          "type": ["integer", "null"]
+        },
+        "curfew_support_trend": {
           "$ref": "#/definitions/value_trend"
         },
         "wash_hands_support": {
@@ -134,6 +146,8 @@
       },
       "required": [
         "number_of_participants",
+        "curfew_compliance",
+        "curfew_compliance_trend",
         "wash_hands_compliance",
         "wash_hands_compliance_trend",
         "keep_distance_compliance",
@@ -148,6 +162,8 @@
         "sneeze_cough_elbow_compliance_trend",
         "max_visitors_compliance",
         "max_visitors_compliance_trend",
+        "curfew_support",
+        "curfew_support_trend",
         "wash_hands_support",
         "wash_hands_support_trend",
         "keep_distance_support",

@@ -9,6 +9,20 @@ import * as piwik from '~/lib/piwik';
 import { GlobalStyle } from '~/style/global-style';
 import theme from '~/style/theme';
 
+if (typeof window !== 'undefined') {
+  if (process.env.NODE_ENV === 'development') {
+    /**
+     * this polyfill allows next.js to show runtime errors in IE11
+     */
+    require('@webcomponents/shadydom');
+  }
+
+  if (!window.ResizeObserver) {
+    const ResizeObserver = require('resize-observer-polyfill').default;
+    window.ResizeObserver = ResizeObserver;
+  }
+}
+
 type AppPropsWithLayout = AppProps & {
   Component: FCWithLayout;
 };

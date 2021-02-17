@@ -6,7 +6,7 @@ export const topicalPageQuery = `{
       "title":title.${targetLanguage},
       slug,
       "summary":summary.${targetLanguage},
-  		"cover": {
+      "cover": {
         ...cover,
         "asset": cover.asset->
       }
@@ -15,20 +15,21 @@ export const topicalPageQuery = `{
       "title":title.${targetLanguage},
       slug,
       "summary":summary.${targetLanguage},
-  		"cover": {
+      "cover": {
         ...cover,
         "asset": cover.asset->
       }
     }[0],
-    'highlight': *[_type == 'topicalPage']{
-      "article":highlightedArticle->{
-        "title":title.${targetLanguage},
-        slug,
-        "summary":summary.${targetLanguage},
-        "cover": {
-          ...cover,
-          "asset": cover.asset->
-        }
+    "highlight": *[_type=='topicalPage'] {
+      "title":title.${targetLanguage},
+      "summary":summary.${targetLanguage},
+      "link": {
+        "label":label.${targetLanguage},
+        href
+      },
+      "cover": {
+        ...cover,
+        "asset": cover.asset->  
       }
-    }[0],
-    }`;
+    }[0]
+  }`;

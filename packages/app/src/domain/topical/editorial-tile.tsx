@@ -1,18 +1,19 @@
-import {
-  ArticleSummary,
-  ArticleTeaser,
-} from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
 import { useBreakpoints } from '~/utils/useBreakpoints';
-import { EditorialSummary, EditorialTeaser } from './editorial-teaser';
+import { EditorialSummary } from './editorial-teaser';
+import { EditorialTeaser } from './editorial-teaser';
+import {
+  HighlightTeaser,
+  HighlightTeaserProps,
+} from '~/components-styled/highlight-teaser';
 
 type EditorialTileProps = {
   editorial: EditorialSummary;
-  highlightedArticle: ArticleSummary;
+  highlight: HighlightTeaserProps;
 };
 
 export function EditorialTile(props: EditorialTileProps) {
-  const { editorial, highlightedArticle } = props;
+  const { editorial, highlight } = props;
   const breakpoints = useBreakpoints();
 
   return (
@@ -31,11 +32,11 @@ export function EditorialTile(props: EditorialTileProps) {
         />
       </Box>
       <Box flex={{ lg: '1 1 33%' }}>
-        <ArticleTeaser
-          cover={highlightedArticle.cover}
-          slug={highlightedArticle.slug.current}
-          summary={highlightedArticle.summary}
-          title={highlightedArticle.title}
+        <HighlightTeaser
+          cover={highlight.cover}
+          link={highlight.link}
+          summary={highlight.summary}
+          title={highlight.title}
         />
       </Box>
     </Box>

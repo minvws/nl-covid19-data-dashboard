@@ -1,10 +1,9 @@
 {
-  "include": [
-    "./node_modules/@sanity/base/types/**/*.ts",
-    "./**/*.ts",
-    "./**/*.tsx"
-  ],
+  "extends": "../../tsconfig.base.json",
+  "include": ["src"],
   "compilerOptions": {
-    "jsx": "react"
-  }
+    "jsx": "react",
+    "allowJs": true
+  },
+  "references": [{ "path": "../common" }]
 }

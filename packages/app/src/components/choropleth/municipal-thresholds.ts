@@ -30,8 +30,12 @@ const positiveTestedThresholds: ChoroplethThresholdsValue[] = [
 
 const hospitalAdmissionsThresholds: ChoroplethThresholdsValue[] = [
   {
-    color: colors.data.scale.blue[0],
+    color: colors.data.underReported,
     threshold: 0,
+  },
+  {
+    color: colors.data.scale.blue[0],
+    threshold: 1,
   },
   {
     color: colors.data.scale.blue[1],
@@ -39,15 +43,15 @@ const hospitalAdmissionsThresholds: ChoroplethThresholdsValue[] = [
   },
   {
     color: colors.data.scale.blue[2],
-    threshold: 4,
+    threshold: 3,
   },
   {
     color: colors.data.scale.blue[3],
-    threshold: 6,
+    threshold: 4,
   },
   {
     color: colors.data.scale.blue[4],
-    threshold: 8,
+    threshold: 5,
   },
 ];
 

@@ -66,7 +66,7 @@ export function DeceasedMonitorSection({
             },
             margin: {
               label: text.deceased_monitor_chart_legenda_expected_margin,
-              color: '#D0EDFF',
+              color: theme.colors.data.margin,
             },
           }}
         />
@@ -86,7 +86,7 @@ export function DeceasedMonitorSection({
               },
               {
                 label: text.deceased_monitor_chart_legenda_expected_margin,
-                color: '#D0EDFF',
+                color: theme.colors.data.margin,
                 shape: 'square',
               },
             ]}

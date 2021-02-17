@@ -1,27 +1,53 @@
 import Head from 'next/head';
+import { RichContent } from '~/components-styled/cms/rich-content';
 import { Collapsible } from '~/components-styled/collapsible';
 import { MaxWidth } from '~/components-styled/max-width';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
-import { PortableText } from '~/lib/sanity';
-import siteText from '~/locale/index';
+import siteText, { targetLanguage } from '~/locale/index';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
 } from '~/static-props/get-data';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
-import { CollapsibleList } from '~/types/cms';
+import { CollapsibleList, RichContentBlock } from '~/types/cms';
 import { getSkipLinkId } from '~/utils/skipLinks';
 import styles from './over.module.scss';
-import { PortableTextEntry } from '@sanity/block-content-to-react';
 
 interface VeelgesteldeVragenData {
   title: string | null;
-  description: PortableTextEntry[] | null;
+  description: RichContentBlock[] | null;
   questions: CollapsibleList[];
 }
 
-const query = `
-*[_type == 'veelgesteldeVragen'][0]
+const query = `*[_type == 'veelgesteldeVragen']{
+  ...,
+  "description": {
+    "_type": description._type,
+    "${targetLanguage}": [
+      ...description.${targetLanguage}[]
+      {
+        ...,
+        "asset": asset->
+       },
+    ]
+  },
+  "questions": [
+    ...questions[]
+    {
+      ...,
+                
+      "content": {
+        ...content,
+        "${targetLanguage}": [...content.${targetLanguage}[]
+          {
+            ...,
+            "asset": asset->
+           },
+        ]
+      }
+  }]
+  
+}[0]
 `;
 
 export const getStaticProps = createGetStaticProps(
@@ -53,7 +79,7 @@ const Verantwoording: FCWithLayout<typeof getStaticProps> = (props) => {
           <div className={styles.maxwidth}>
             {content.title && <h2>{content.title}</h2>}
             {content.description && (
-              <PortableText blocks={content.description} />
+              <RichContent blocks={content.description} />
             )}
             {content.questions && (
               <article>
@@ -61,7 +87,7 @@ const Verantwoording: FCWithLayout<typeof getStaticProps> = (props) => {
                   const id = getSkipLinkId(item.title);
                   return (
                     <Collapsible key={id} id={id} summary={item.title}>
-                      <PortableText blocks={item.content} />
+                      {item.content && <RichContent blocks={item.content} />}
                     </Collapsible>
                   );
                 })}
