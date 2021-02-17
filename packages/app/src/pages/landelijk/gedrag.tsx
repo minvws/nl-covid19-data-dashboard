@@ -69,7 +69,8 @@ const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
               start: behaviorLastValue.last_value.date_start_unix,
               end: behaviorLastValue.last_value.date_end_unix,
             },
-            dateOfInsertionUnix: behaviorLastValue.last_value.date_of_insertion_unix,
+            dateOfInsertionUnix:
+              behaviorLastValue.last_value.date_of_insertion_unix,
             dataSources: [nl_gedrag.bronnen.rivm],
           }}
           reference={nl_gedrag.reference}
@@ -93,7 +94,9 @@ const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
               ],
             }}
           >
-            <KpiValue absolute={behaviorLastValue.last_value.number_of_participants} />
+            <KpiValue
+              absolute={behaviorLastValue.last_value.number_of_participants}
+            />
             <Text>{nl_gedrag.kpi.aantal_respondenten.toelichting}</Text>
           </KpiTile>
         </TwoKpiSection>
@@ -124,7 +127,8 @@ const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
           metadata={{
             datumsText: corona_melder_app.header.datums,
             dateOrRange: behaviorLastValue.last_value.date_start_unix,
-            dateOfInsertionUnix: behaviorLastValue.last_value.date_of_insertion_unix,
+            dateOfInsertionUnix:
+              behaviorLastValue.last_value.date_of_insertion_unix,
             dataSources: [corona_melder_app.header.bronnen.rivm],
           }}
           reference={corona_melder_app.header.reference}
@@ -132,7 +136,7 @@ const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
 
         <TwoKpiSection>
           <KpiTile
-            title={corona_melder_app.waarschuwen.title}
+            title={corona_melder_app.waarschuwingen.title}
             metadata={{
               date: behaviorLastValue.last_value.date_start_unix,
               source: corona_melder_app.header.bronnen.rivm,
@@ -144,9 +148,9 @@ const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
               difference={data.difference.corona_melder_app__warned_daily}
             />
 
-            <Text>{corona_melder_app.waarschuwen.description}</Text>
+            <Text>{corona_melder_app.waarschuwingen.description}</Text>
             <Text>
-              {replaceComponentsInText(corona_melder_app.waarschuwen.total, {
+              {replaceComponentsInText(corona_melder_app.waarschuwingen.total, {
                 totalDownloads: (
                   <span
                     css={css({ color: 'data.primary', fontWeight: 'bold' })}
@@ -155,7 +159,7 @@ const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
                       data.corona_melder_app?.last_value.downloaded_total
                     )}
                   </span>
-                )
+                ),
               })}
             </Text>
           </KpiTile>

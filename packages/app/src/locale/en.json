@@ -1324,7 +1324,7 @@
         }
       }
     },
-    "waarschuwen": {
+    "waarschuwingen": {
       "title": "Mensen die andere waarschuden via de CoronaMelder app:",
       "description": "Als je positief getest bent op corona, dan kun je dit vrijwillig aangeven in de app, samen met een medewerker van de GGD.",
       "total": "{{totalDownloads}} mensen hebben de CoronaMelder app gedownload"
