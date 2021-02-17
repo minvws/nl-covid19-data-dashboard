@@ -17,10 +17,7 @@ import {
   ChartBounds,
   ChartPadding,
   HoverPoint,
-  Marker,
 } from '~/components-styled/line-chart/components';
-import { useChartPadding } from '~/components-styled/line-chart/hooks/use-chart-padding';
-import { useDomains } from '~/components-styled/line-chart/hooks/use-domains';
 import { Text as StyledText } from '~/components-styled/typography';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
 import theme from '~/style/theme';
@@ -31,18 +28,21 @@ import {
 import { TimeframeOption } from '~/utils/timeframe';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { LegendShape } from '../legenda';
-import { useBisect } from '../line-chart/hooks/use-bisect';
-import { useTooltip } from '../line-chart/hooks/use-tooltip';
-import { TimestampedTrendValue, TrendValue } from '../line-chart/logic';
 import {
   AreaChartGraph,
   AreaConfig,
   AreaDisplay,
 } from './components/area-chart-graph';
+import { Marker } from './components/marker';
 import { Tooltip } from './components/tooltip';
 import { useAreaConfigs } from './hooks/use-area-configs';
+import { useBisect } from './hooks/use-bisect';
 import { useChartHover } from './hooks/use-chart-hover';
+import { useChartPadding } from './hooks/use-chart-padding';
+import { useDomains } from './hooks/use-domains';
+import { useTooltip } from './hooks/use-tooltip';
 import { useTrendConfigs } from './hooks/use-trend-configs';
+import { TimestampedTrendValue, TrendValue } from './logic';
 
 const NUM_TICKS = 3;
 

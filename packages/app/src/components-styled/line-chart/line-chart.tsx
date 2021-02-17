@@ -4,7 +4,11 @@ import {
   TimestampedValue,
 } from '@corona-dashboard/common';
 import { TickFormatter } from '@visx/axis';
+import { localPoint } from '@visx/event';
+import { Point } from '@visx/point';
 import { scaleBand } from '@visx/scale';
+import { bisectLeft, extent } from 'd3-array';
+import { ScaleTime } from 'd3-scale';
 import { useCallback, useMemo, useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
@@ -27,13 +31,7 @@ import {
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { TimeframeOption } from '~/utils/timeframe';
 import { HoverPoint, Marker, Tooltip, Trend } from './components';
-import { useBisect } from './hooks/use-bisect';
-import { useChartHover } from './hooks/use-chart-hover';
-import { useChartPadding } from './hooks/use-chart-padding';
-import { useDomains } from './hooks/use-domains';
-import { useTooltip } from './hooks/use-tooltip';
-import { useTrendValues } from './hooks/use-trend-values';
-import { TimestampedTrendValue, TrendValue } from './logic';
+import { calculateYMax, getTrendData, TrendValue } from './logic';
 
 const dateToValue = (d: Date) => d.valueOf() / 1000;
 const formatXAxis = (date: Date) =>
@@ -58,14 +56,14 @@ export type LineChartProps<T extends TimestampedValue> = {
   height?: number;
   timeframe?: TimeframeOption;
   signaalwaarde?: number;
-  formatTooltip?: (value: (T & TimestampedTrendValue)[]) => React.ReactNode;
+  formatTooltip?: (value: (T & TrendValue)[]) => React.ReactNode;
   formatXAxis?: TickFormatter<Date>;
   formatYAxis?: TickFormatter<number>;
   hideFill?: boolean;
   valueAnnotation?: string;
   isPercentage?: boolean;
   showMarkerLine?: boolean;
-  formatMarkerLabel?: (value: T & TimestampedTrendValue) => string;
+  formatMarkerLabel?: (value: T) => string;
   padding?: Partial<ChartPadding>;
   showLegend?: boolean;
   legendItems?: LegendItem[];
@@ -112,7 +110,12 @@ export function LineChart<T extends TimestampedValue>({
     tooltipTop = 0,
     showTooltip,
     hideTooltip,
-  } = useTooltip<T & TimestampedTrendValue>();
+  } = useTooltip<T & TrendValue>();
+
+  const metricProperties = useMemo(
+    () => linesConfig.map((x) => x.metricProperty),
+    [linesConfig]
+  );
 
   const benchmark = useMemo(
     () =>
@@ -122,18 +125,38 @@ export function LineChart<T extends TimestampedValue>({
     [signaalwaarde]
   );
 
-  const trendsList = useTrendValues(values, linesConfig, timeframe);
-
-  const [xDomain, yDomain, seriesMax] = useDomains(
-    trendsList.flat(),
-    signaalwaarde,
-    overrideSeriesMax
+  const trendsList = useMemo(
+    () => getTrendData(values, metricProperties as string[], timeframe),
+    [values, metricProperties, timeframe]
   );
 
-  const padding = useChartPadding(
-    seriesMax.toFixed(0).length * 10,
-    defaultPadding,
-    overridePadding
+  const calculatedSeriesMax = useMemo(
+    () => calculateYMax(trendsList, signaalwaarde),
+    [trendsList, signaalwaarde]
+  );
+
+  const seriesMax = isDefined(overrideSeriesMax)
+    ? overrideSeriesMax
+    : calculatedSeriesMax;
+
+  const xDomain = useMemo(() => {
+    const domain = extent(trendsList.flat().map(getDate));
+
+    return isDefined(domain[0]) && isDefined(domain[1])
+      ? (domain as [Date, Date])
+      : undefined;
+  }, [trendsList]);
+
+  const yDomain = useMemo(() => [0, seriesMax], [seriesMax]);
+
+  const padding: ChartPadding = useMemo(
+    () => ({
+      ...defaultPadding,
+      // Increase space for larger numbers
+      left: Math.max(seriesMax.toFixed(0).length * 10, defaultPadding.left),
+      ...overridePadding,
+    }),
+    [overridePadding, seriesMax]
   );
 
   const timespanMarkerData = trendsList[0];
@@ -155,14 +178,47 @@ export function LineChart<T extends TimestampedValue>({
   );
 
   const [markerProps, setMarkerProps] = useState<{
-    data: HoverPoint<T & TimestampedTrendValue>[];
+    data: HoverPoint<T>[];
   }>();
+
+  const bisect = useCallback(
+    (
+      trend: (TrendValue & TimestampedValue)[],
+      xPosition: number,
+      xScale: ScaleTime<number, number>
+    ) => {
+      if (!trend.length) return;
+      if (trend.length === 1) return trend[0];
+
+      const date = xScale.invert(xPosition - padding.left);
+
+      const index = bisectLeft(
+        trend.map((x) => x.__date),
+        date,
+        1
+      );
+
+      const d0 = trend[index - 1];
+      const d1 = trend[index];
+
+      if (!d1) return d0;
+
+      return +date - +d0.__date > +d1.__date - +date ? d1 : d0;
+    },
+    [padding]
+  );
+
+  const distance = (point1: HoverPoint<TimestampedValue>, point2: Point) => {
+    const x = point2.x - point1.x;
+    const y = point2.y - point1.y;
+    return Math.sqrt(x * x + y * y);
+  };
 
   const toggleHoverElements = useCallback(
     (
       hide: boolean,
-      hoverPoints?: HoverPoint<T & TimestampedTrendValue>[],
-      nearestPoint?: HoverPoint<T & TimestampedTrendValue>
+      hoverPoints?: HoverPoint<T>[],
+      nearestPoint?: HoverPoint<T>
     ) => {
       if (hide) {
         hideTooltip();
@@ -181,13 +237,53 @@ export function LineChart<T extends TimestampedValue>({
     [showTooltip, hideTooltip]
   );
 
-  const bisect = useBisect(padding);
+  const handleHover = useCallback(
+    (
+      event: React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>,
+      scales: ChartScales
+    ) => {
+      if (!trendsList.length || event.type === 'mouseleave') {
+        toggleHoverElements(true);
+        return;
+      }
 
-  const handleHover = useChartHover(
-    toggleHoverElements,
-    trendsList,
-    linesConfig,
-    bisect
+      const { xScale, yScale } = scales;
+
+      const point = localPoint(event);
+
+      if (!point) {
+        return;
+      }
+
+      const sortByNearest = (left: HoverPoint<T>, right: HoverPoint<T>) =>
+        distance(left, point) - distance(right, point);
+
+      const hoverPoints = trendsList
+        .map((trends, index) => {
+          const trendValue = bisect(trends, point.x, xScale);
+          return trendValue
+            ? {
+                data: trendValue,
+                color: linesConfig[index].color,
+              }
+            : undefined;
+        })
+        .filter(isDefined)
+        .map<HoverPoint<T>>(
+          ({ data, color }: { data: any; color?: string }) => {
+            return {
+              data,
+              color,
+              x: xScale(data.__date) ?? 0,
+              y: yScale(data.__value) ?? 0,
+            };
+          }
+        );
+      const nearest = hoverPoints.slice().sort(sortByNearest);
+
+      toggleHoverElements(false, hoverPoints, nearest[0]);
+    },
+    [bisect, trendsList, linesConfig, toggleHoverElements]
   );
 
   const renderTrendLines = useCallback(
@@ -291,9 +387,11 @@ export function LineChart<T extends TimestampedValue>({
 }
 
 function formatDefaultTooltip<T extends TimestampedValue>(
-  values: (T & TimestampedTrendValue)[],
+  values: (T & TrendValue)[],
   isPercentage?: boolean
 ) {
+  // default tooltip assumes one line is rendered:
+
   if (isDateSeries(values)) {
     const value = values[0];
     return (
@@ -332,4 +430,33 @@ function formatDefaultTooltip<T extends TimestampedValue>(
   throw new Error(
     `Invalid value passed to format tooltip function: ${JSON.stringify(values)}`
   );
+}
+
+function useTooltip<T extends TrendValue>() {
+  const [tooltipData, setTooltipData] = useState<T[]>();
+  const [tooltipLeft, setTooltipLeft] = useState<number>();
+  const [tooltipTop, setTooltipTop] = useState<number>();
+
+  const showTooltip = useCallback(
+    (x: { tooltipData: T[]; tooltipLeft: number; tooltipTop: number }) => {
+      setTooltipData(x.tooltipData);
+      setTooltipLeft(x.tooltipLeft);
+      setTooltipTop(x.tooltipTop);
+    },
+    []
+  );
+
+  const hideTooltip = useCallback(() => {
+    setTooltipData(undefined);
+    setTooltipLeft(undefined);
+    setTooltipTop(undefined);
+  }, []);
+
+  return {
+    tooltipData,
+    tooltipLeft,
+    tooltipTop,
+    showTooltip,
+    hideTooltip,
+  };
 }

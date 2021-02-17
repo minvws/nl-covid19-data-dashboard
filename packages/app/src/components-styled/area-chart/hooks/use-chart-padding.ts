@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { ChartPadding } from '../components';
+import { ChartPadding } from '~/components-styled/line-chart/components';
 
 export function useChartPadding(
   leftPos: number,

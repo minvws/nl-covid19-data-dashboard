@@ -3,14 +3,12 @@ import { Point } from '@visx/point';
 import { ScaleLinear, ScaleTime } from 'd3-scale';
 import { MouseEvent, TouchEvent, useCallback, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
-import {
-  ChartScales,
-  HoverPoint,
-} from '~/components-styled/line-chart/components';
-import { BisectFunction } from '~/components-styled/line-chart/hooks/use-bisect';
-import { TimestampedTrendValue } from '~/components-styled/line-chart/logic';
+import { ChartScales } from '~/components-styled/line-chart/components';
 import { calculateDistance } from '~/utils/calculate-distance';
 import { AreaConfig, TrendConfig } from '../components/area-chart-graph';
+import { HoverPoint } from '../components/marker';
+import { TimestampedTrendValue } from '../logic';
+import { BisectFunction } from './use-bisect';
 
 export function useChartHover<
   T extends TimestampedTrendValue,

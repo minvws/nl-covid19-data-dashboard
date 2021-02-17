@@ -12,15 +12,13 @@ import VaccinatieIcon from '~/assets/vaccinaties.svg';
 import { AreaChart } from '~/components-styled/area-chart';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
-import { AspectRatio } from '~/components-styled/aspect-ratio';
 import { Box, Spacer } from '~/components-styled/base';
 import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
-import { Image } from '~/components-styled/image';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
-import { MultiLineChart } from '~/components-styled/multi-line-chart';
 import { Legenda } from '~/components-styled/legenda';
+import { MultiLineChart } from '~/components-styled/multi-line-chart';
 import { RadioGroup } from '~/components-styled/radio-group';
 import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
@@ -29,7 +27,6 @@ import { Heading, InlineText, Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import { createDeliveryTooltipFormatter } from '~/domain/vaccines/create-delivery-tooltip-formatter';
-import { targetLanguage } from '~/locale/index';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
@@ -316,12 +313,12 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             <Legenda
               items={[
                 {
-                  label: 'Beschikbare vaccins',
+                  label: text.data.vaccination_chart.legend.available,
                   color: 'data.emphasis',
                   shape: 'line',
                 },
                 {
-                  label: 'Verwacht',
+                  label: text.data.vaccination_chart.legend.expected,
                   color: 'black',
                   shape: 'custom',
                   ShapeComponent: HatchedSquare,
@@ -538,7 +535,6 @@ const TooltipValueContainer = styled.span`
   min-width: 120px;
   justify-content: space-between;
 `;
-
 
 function HatchedSquare() {
   return (

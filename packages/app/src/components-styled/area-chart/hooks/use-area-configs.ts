@@ -5,15 +5,12 @@ import {
 } from '@corona-dashboard/common';
 import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
-import {
-  getTimeframeValues,
-  TimestampedTrendValue,
-} from '~/components-styled/line-chart/logic';
 import { timestampToDate } from '~/components-styled/stacked-chart/logic';
 import { TimeframeOption } from '~/utils/timeframe';
 import { createUniqueId } from '~/utils/useUniqueId';
 import { AreaDescriptor } from '../area-chart';
 import { AreaConfig } from '../components/area-chart-graph';
+import { getTimeframeValues, TimestampedTrendValue } from '../logic';
 
 export function useAreaConfigs<T extends TimestampedValue>(
   areaDescriptors: AreaDescriptor<T>[],

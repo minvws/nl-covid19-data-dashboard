@@ -1,13 +1,10 @@
 import { TimestampedValue } from '@corona-dashboard/common';
 import { useMemo } from 'react';
-import {
-  getSingleTrendData,
-  TimestampedTrendValue,
-} from '~/components-styled/line-chart/logic';
 import { getValuesInTimeframe } from '~/components-styled/stacked-chart/logic';
 import { TimeframeOption } from '~/utils/timeframe';
 import { TrendDescriptor } from '../area-chart';
 import { TrendConfig } from '../components/area-chart-graph';
+import { getSingleTrendData, TimestampedTrendValue } from '../logic';
 
 export function useTrendConfigs<T extends TimestampedValue>(
   trendDescriptors: TrendDescriptor<T>[],

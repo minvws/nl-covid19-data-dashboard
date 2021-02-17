@@ -7,9 +7,9 @@ import {
   NlVaccineDeliveryEstimateValue,
   NlVaccineDeliveryValue,
 } from '@corona-dashboard/common';
+import { HoverPoint } from '~/components-styled/area-chart/components/marker';
+import { TimestampedTrendValue } from '~/components-styled/area-chart/logic';
 import { Box } from '~/components-styled/base';
-import { HoverPoint } from '~/components-styled/line-chart/components';
-import { TimestampedTrendValue } from '~/components-styled/line-chart/logic';
 import { Text } from '~/components-styled/typography';
 import { AllLanguages } from '~/locale/APP_LOCALE';
 import {
