@@ -2428,30 +2428,30 @@
     "datums": "",
     "reference": {
       "href": "",
-      "text": ""
+      "text": "Read more about the risk levels and the impact they have on the coronavirus measures on the [page ‘About the risk levels’](/over-risiconiveaus)."
     },
     "metadata": {
-      "title": "",
-      "description": ""
+      "title": "Risk level {{safetyRegionName}}",
+      "description": "Risk level {{safetyRegionName}}"
     },
-    "titel": "",
-    "pagina_toelichting": "",
-    "current_escalation_level": "",
+    "titel": "Risk level in {{safetyRegionName}}",
+    "pagina_toelichting": "Every 2 weeks we reassess the risk level in each safety region based on the number of positive tests (new confirmed cases) and the number of hospital admissions there. If one of these figures gives cause to set a higher risk level than the other, the higher risk level applies. Certain measures apply at each risk level. The exact measures that apply in this safety region depend on the situation in the rest of the country as well as the situation here.",
+    "current_escalation_level": "Current risk level",
     "bronnen": {
       "rivm_positieve_testen": {
         "download": "",
         "href": "",
-        "text": ""
+        "text": "RIVM"
       },
       "rivm_ziekenhuisopnames": {
         "download": "",
         "href": "",
-        "text": ""
+        "text": "RIVM"
       }
     },
     "positieve_testen": {
-      "title": "",
-      "value_annotation": "",
+      "title": "Positive tests",
+      "value_annotation": "per 100,000 residents per week",
       "description": "This figure shows how many people have tested positive per 100,000 residents in the past 7 days. The bar shows the level of severity of this figure. "
     },
     "ziekenhuisopnames": {
@@ -2478,8 +2478,8 @@
     "titel_sidebar": "",
     "titel_kpi": "",
     "metadata": {
-      "title": "",
-      "description": ""
+      "title": "Deaths in {{municipalityName}} | Dashboard Coronavirus | Government.nl",
+      "description": "Number of deceased per day in {{municipalityName}}"
     },
     "section_deceased_rivm": {
       "title": "",
@@ -2489,7 +2489,7 @@
         "rivm": {
           "href": "",
           "text": "",
-          "download": ""
+          "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv"
         }
       },
       "reference": {
@@ -2503,7 +2503,7 @@
       "line_chart_covid_daily_title": "",
       "line_chart_covid_daily_description": ""
     },
-    "kpi_titel": ""
+    "kpi_titel": "Daily reported deaths from COVID-19"
   },
   "corona_melder_app": {
     "header": {

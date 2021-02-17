@@ -2428,11 +2428,11 @@
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
     "reference": {
       "href": "/over-risiconiveaus",
-      "text": "Lees meer over de risiconiveaus en wat dit betekent voor de maatregelen op de pagina ‘Over de risiconiveaus’."
+      "text": "Lees meer over de risiconiveaus en wat dit betekent voor de maatregelen op de [pagina ‘Over de risiconiveaus’](/over-risiconiveaus)."
     },
     "metadata": {
-      "title": "Inschalen risiconiveau {{safetyRegionName}}",
-      "description": "Inschalen risiconiveau {{safetyRegionName}}"
+      "title": "Risiconiveau {{safetyRegionName}}",
+      "description": "Risiconiveau {{safetyRegionName}}"
     },
     "titel": "Risiconiveau in {{safetyRegionName}}",
     "pagina_toelichting": "Elke twee weken wordt bepaald in welk risiconiveau een regio zit. Daarvoor kijken we naar het aantal positieve testen en het aantal ziekenhuisopnames. Het meest ernstige cijfer bepaalt het risiconiveau. Bij de risiconiveaus horen maatregelen. Welke maatregelen precies gelden, hangt niet alleen af van hoe het in de Veiligheidsregio gaat, maar ook van de situatie in het hele land. ",
