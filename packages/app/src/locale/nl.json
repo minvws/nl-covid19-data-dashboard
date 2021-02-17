@@ -2146,7 +2146,7 @@
     },
     "section_vaccinations_more_information": {
       "title": "Verwachte data over vaccinaties",
-      "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer:\n- vaccinatiebereidheid\n- vaccinatiegraad"
+      "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer:\n- vaccinatiegraad"
     },
     "grafiek": {
       "titel": "Leveringen vaccins en gezette prikken in totaal",
@@ -2160,7 +2160,7 @@
       "titel": "Vaccinatiebereidheid",
       "omschrijving": "Deze grafiek toont per leeftijdsgroep en in totaal hoeveel procent van de bevolking zelf een prik tegen corona wil hebben. De cijfers komen uit onderzoek waarin wordt gevraagd of mensen een prik willen krijgen. Het onderzoek wordt elke drie weken herhaald.",
       "kpi_omschrijving": "Percentage van de Nederlandse bevolking dat zelf een prik tegen corona wil hebben",
-      "tooltip_gemiddeld": "Gemiddeld",
+      "tooltip_gemiddeld": "Totaal",
       "leeftijd_jaar": "{{ageGroup}} jaar"
     }
   },
@@ -2508,11 +2508,11 @@
   "corona_melder_app": {
     "header": {
       "category": "Preventie verspreiding",
-      "title": "Gebruik CoronaMelder app",
-      "description": "Om verspreiding van het coronavirus tegen te gaan is  de telefoon-app CoronaMelder ontwikkeld. CoronaMelder stuurt gebruikers van de app een bericht wanneer zij enige tijd in de buurt zijn geweest van iemand die besmet is met het coronavirus die ook de app gebruikt. Dit verlaagt het risico dat zij onbewust andere mensen in hun omgeving besmetten.",
+      "title": "Gebruik CoronaMelder-app",
+      "description": "Om verspreiding van het coronavirus tegen te gaan, is de app CoronaMelder ontwikkeld. Deze app houdt bij wanneer gebruikers van de app langere tijd bij elkaar in de buurt zijn geweest. Wanneer een gebruiker van de CoronaMelder postitief test op COVID-19 kan (met hulp van de GGD) een waarschuwing worden verzonden naar andere appgebruikers die in de buurt zijn geweest. Zij kunnen zich dan laten testen en zo voorkomen dat ze onbewust andere mensen besmetten.",
       "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
       "reference": {
-        "text": "Lees meer over de CoronaMelder app in de cijferverantwoording.",
+        "text": "Lees meer over de CoronaMelder-app in de cijferverantwoording.",
         "href": "/verantwoording#coronamelder"
       },
       "bronnen": {
@@ -2524,15 +2524,15 @@
       }
     },
     "waarschuwingen": {
-      "title": "Aantal positieve tests gemeld via de CoronaMelder app:",
+      "title": "Aantal positieve tests gemeld via de CoronaMelder-app:",
       "description": "Dit cijfer toont hoeveel (positief geteste) gebruikers van CoronaMelder afgelopen dagen andere app-gebruikers hebben gewaarschuwd.",
-      "total": "{{totalDownloads}} mensen hebben de CoronaMelder app gedownload."
+      "total": "{{totalDownloads}} mensen hebben de CoronaMelder-app gedownload."
     },
     "rapport": {
       "title": "Factsheet CoronaMelder",
-      "description": "Het meest actuele factsheet over het gebruik van de app is beschikbaar via de website van de CoronaMelder app.",
+      "description": "Er wordt steeds onderzocht hoe CoronaMelder werkt in de praktijk. De laatste factsheet hierover is te vinden via de website van de CoronaMelder-app.",
       "link": {
-        "text": "Meest recente Factsheet CoronaMelder app",
+        "text": "Meest recente Factsheet CoronaMelder-app",
         "href": "https://www.coronamelder.nl/media/Factsheet_Corona_latest.pdf"
       }
     }
