@@ -646,7 +646,7 @@
     "vandaag": "Today",
     "read_more": "Read more",
     "absolute_date_template": "on {{date}}",
-    "inwoners": ""
+    "inwoners": "residents"
   },
   "seoHead": {
     "default_description": "Information on the development of the coronavirus in The Netherlands.",
@@ -686,7 +686,7 @@
       "kwetsbare_groepen": "Vulnerable groups",
       "maatregelen": "Measures",
       "algemeen": "General",
-      "inschaling": ""
+      "inschaling": "Risk level"
     }
   },
   "veiligheidsregio_metadata": {
@@ -825,8 +825,8 @@
     },
     "kpi_titel": "Average number of coronavirus particles per 100.000 people",
     "bar_chart_accessibility_description": "",
-    "display_outliers": "",
-    "hide_outliers": ""
+    "display_outliers": "Display outliers",
+    "hide_outliers": "Hide outliers"
   },
   "gemeente_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Hospital admissions",
@@ -957,8 +957,8 @@
     },
     "kpi_titel": "Average number of coronavirus particles per 100.000 people",
     "bar_chart_accessibility_description": "",
-    "display_outliers": "",
-    "hide_outliers": ""
+    "display_outliers": "Display outliers",
+    "hide_outliers": "Hide outliers"
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Risk level map of the Netherlands",
@@ -1949,8 +1949,8 @@
       "vaccin_levering_en_prikken": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks.",
       "vaccinatie_draagvlak": "This graph shows the percentage of the population that wishes to be vaccinated against COVID-19."
     },
-    "link_source": "",
-    "link_download": ""
+    "link_source": "View date source for \"{{subject}}\" at",
+    "link_download": "Download date source for \"{{subject}}\" at"
   },
   "deceased_age_groups": {
     "title": "COVID-19 deaths by age",
