@@ -6,11 +6,11 @@ import {
   TimestampedValue,
 } from '@corona-dashboard/common';
 import { Group } from '@visx/group';
-import { scaleBand, scaleLinear, scaleTime } from '@visx/scale';
+import { scaleLinear, scaleTime } from '@visx/scale';
 import { Line } from '@visx/shape';
 import { Text } from '@visx/text';
 import { ScaleTime } from 'd3-scale';
-import { MouseEvent, TouchEvent, useCallback, useMemo, useState } from 'react';
+import { MouseEvent, TouchEvent, useCallback, useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
 import {
@@ -42,7 +42,7 @@ import { useChartPadding } from './hooks/use-chart-padding';
 import { useDomains } from './hooks/use-domains';
 import { useTooltip } from './hooks/use-tooltip';
 import { useTrendConfigs } from './hooks/use-trend-configs';
-import { TimestampedTrendValue, TrendValue } from './logic';
+import { TimestampedTrendValue } from './logic';
 
 const NUM_TICKS = 3;
 
@@ -196,20 +196,6 @@ export function AreaChart<
     height: height - padding.top - padding.bottom,
   };
 
-  const timespanMarkerData = trendConfigs
-    .flat()
-    .map((x) => x.values)
-    .flat();
-
-  const dateSpanScale = useMemo(
-    () =>
-      scaleBand<Date>({
-        range: [0, xMax],
-        domain: timespanMarkerData.map(getDate),
-      }),
-    [xMax, timespanMarkerData]
-  );
-
   const xScale = scaleTime({
     domain: xDomain,
     range: [0, bounds.width],
@@ -264,7 +250,6 @@ export function AreaChart<
             <Marker
               {...markerProps}
               showLine={true}
-              dateSpanWidth={dateSpanScale.bandwidth()}
               height={height}
               padding={padding}
             />
@@ -283,10 +268,6 @@ export function AreaChart<
       </Box>
     </>
   );
-}
-
-function getDate(x: TrendValue) {
-  return x.__date;
 }
 
 function renderDivider(

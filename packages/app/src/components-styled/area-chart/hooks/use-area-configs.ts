@@ -74,7 +74,7 @@ export function getAreaData<T extends TimestampedValue>(
            * Here we set the date to be in the middle of the timespan, so that
            * the chart can render the points in the middle of each span.
            */
-          x.date_start_unix + (x.date_end_unix - x.date_start_unix) / 2
+          x.date_end_unix
         ),
       }))
       .filter((x) => isPresent(x.__value));

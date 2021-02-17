@@ -78,7 +78,7 @@ const DateSpanMarker = styled.div`
   flex-grow: 0;
   flex-shrink: 0;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.03);
+  background-color: transparent;
 `;
 
 const LineContainer = styled.div`
@@ -92,7 +92,6 @@ const LineContainer = styled.div`
 
 type MarkerProps<T> = {
   data: HoverPoint<T>[];
-  dateSpanWidth: number;
   primaryColor?: string;
   showLine: boolean;
   formatLabel?: (data: T & TimestampedTrendValue) => string;
@@ -106,7 +105,6 @@ export function Marker<T extends TimestampedTrendValue>(props: MarkerProps<T>) {
     data,
     showLine = false,
     formatLabel = defaultFormatLabel,
-    dateSpanWidth,
     height,
     padding,
   } = props;
@@ -147,7 +145,7 @@ export function Marker<T extends TimestampedTrendValue>(props: MarkerProps<T>) {
       )}
       <DateSpanMarker
         style={{
-          width: dateSpanWidth,
+          width: MARKER_POINT_SIZE,
           left: data[0].x,
         }}
       >

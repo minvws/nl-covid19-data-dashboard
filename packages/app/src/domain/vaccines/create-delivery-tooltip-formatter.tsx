@@ -39,19 +39,13 @@ function formatVaccinationsTooltip(
   const data = values[0].data;
 
   if (isDateSpanValue(data)) {
-    const dateStartString = formatDateFromSeconds(
-      data.date_start_unix,
-      'day-month'
-    );
     const dateEndString = formatDateFromSeconds(
       data.date_end_unix,
       'day-month'
     );
     return (
       <Box>
-        <Text fontWeight="bold">
-          {`${dateStartString} - ${dateEndString}: `}
-        </Text>
+        <Text fontWeight="bold">{dateEndString}</Text>
         <TooltipList>
           {values.map((value) => (
             <TooltipListItem

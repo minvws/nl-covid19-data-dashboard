@@ -150,10 +150,7 @@ export function getSingleTrendData<T extends TimestampedValue>(
                * Here we set the date to be in the middle of the timespan, so that
                * the chart can render the points in the middle of each span.
                */
-              (x as DateSpanValue).date_start_unix +
-                ((x as DateSpanValue).date_end_unix -
-                  (x as DateSpanValue).date_start_unix) /
-                  2
+              (x as DateSpanValue).date_end_unix
             ),
           } as T & TimestampedTrendValue)
       )
