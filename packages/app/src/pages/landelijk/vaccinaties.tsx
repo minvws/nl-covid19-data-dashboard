@@ -267,6 +267,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                       displays: [
                         {
                           metricProperty: 'total',
+                          strokeWidth: 3,
                           color: colors.data.emphasis,
                           legendLabel: text.data.vaccination_chart.delivered,
                         },
@@ -278,6 +279,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                         {
                           metricProperty: 'total',
                           style: 'dashed',
+                          strokeWidth: 3,
                           legendLabel: text.data.vaccination_chart.estimated,
                           color: colors.data.emphasis,
                         },
