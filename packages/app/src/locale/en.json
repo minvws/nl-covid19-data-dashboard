@@ -2425,10 +2425,10 @@
   },
   "article_strip_title": "More about this topic",
   "vr_risiconiveau": {
-    "datums": "",
+    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
     "reference": {
-      "href": "",
-      "text": "Read more about the risk levels and the impact they have on the coronavirus measures on the [page ‘About the risk levels’](/over-risiconiveaus)."
+      "href": "/over-risiconiveaus",
+      "text": "Read more about the risk levels and the impact they have on the coronavirus measures on the page ‘About the risk levels’"
     },
     "metadata": {
       "title": "Risk level {{safetyRegionName}}",
@@ -2439,13 +2439,13 @@
     "current_escalation_level": "Current risk level",
     "bronnen": {
       "rivm_positieve_testen": {
-        "download": "",
-        "href": "",
+        "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.html",
         "text": "RIVM"
       },
       "rivm_ziekenhuisopnames": {
-        "download": "",
-        "href": "",
+        "download": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.csv",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
         "text": "RIVM"
       }
     },
@@ -2461,16 +2461,16 @@
     },
     "types": {
       "1": {
-        "toelichting": ""
+        "toelichting": "This is the risk level that currently applies in this region. The risk level is reassessed every 2 weeks based on the number of hospital admissions and the number of positive tests (new confirmed cases) at that time.\n\n**Risk level determined on 17 February for the next two weeks**"
       },
       "2": {
-        "toelichting": ""
+        "toelichting": "This is the risk level that currently applies in this region. The risk level is reassessed every 2 weeks based on the number of hospital admissions and the number of positive tests (new confirmed cases) at that time.\n\n**Risk level determined on 17 February for the next two weeks**"
       },
       "3": {
-        "toelichting": ""
+        "toelichting": "This is the risk level that currently applies in this region. The risk level is reassessed every 2 weeks based on the number of hospital admissions and the number of positive tests (new confirmed cases) at that time.\n\n**Risk level determined on 17 February for the next two weeks**"
       },
       "4": {
-        "toelichting": ""
+        "toelichting": "This is the risk level that currently applies in this region. The risk level is reassessed every 2 weeks based on the number of hospital admissions and the number of positive tests (new confirmed cases) at that time."
       }
     }
   },
