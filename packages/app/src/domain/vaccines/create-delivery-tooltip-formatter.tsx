@@ -118,6 +118,6 @@ const TooltipListItem = styled.li<TooltipListItemProps>`
 const TooltipValueContainer = styled.span`
   display: flex;
   width: 100%;
-  min-width: 120px;
+  min-width: 150px;
   justify-content: space-between;
 `;
