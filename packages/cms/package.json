@@ -11,7 +11,8 @@
     "test:ci": "yarn run test",
     "compile": "tsc --pretty --noEmit",
     "lint": "echo '@TODO add eslint'",
-    "sync-assets": "ts-node scripts/sync-assets.ts"
+    "sync-assets": "ts-node scripts/sync-assets.ts",
+    "format": "prettier --write \"src/**/*.{js,ts,tsx}\" \"*.{js,json,md,yml}\""
   },
   "dependencies": {
     "@sanity/base": "^2.3.3",

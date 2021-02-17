@@ -1,9 +1,9 @@
+import { Regionaal } from '@corona-dashboard/common';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import ElderlyIcon from '~/assets/elderly.svg';
 import Gedrag from '~/assets/gedrag.svg';
 import Gehandicaptenzorg from '~/assets/gehandicapte-zorg.svg';
-import Maatregelen from '~/assets/maatregelen.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
@@ -14,17 +14,17 @@ import {
   Menu,
   MetricMenuItemLink,
 } from '~/components-styled/aside/menu';
+import { Box } from '~/components-styled/base';
 import { AppContent } from '~/components-styled/layout/app-content';
 import { SidebarMetric } from '~/components-styled/sidebar-metric';
 import { Text } from '~/components-styled/typography';
+import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { getLayout as getSiteLayout } from '~/domain/layout/layout';
 import siteText from '~/locale/index';
-import { colors } from '~/style/theme';
-import { Regionaal } from '@corona-dashboard/common';
-import { SafetyRegionComboBox } from './components/safety-region-combo-box';
-import { Box } from '~/components-styled/base';
 import { useBreakpoints } from '~/utils/useBreakpoints';
-import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
+import { SafetyRegionComboBox } from './components/safety-region-combo-box';
+import { EscalationLevelInfoLabel } from '~/components-styled/escalation-level';
+import { EscalationLevel } from '../restrictions/type';
 
 interface SafetyRegionLayoutProps {
   lastGenerated: string;
@@ -104,29 +104,39 @@ function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
              * and therefore optional
              */}
             {data && showMetricLinks && (
-              <nav
+              <Box
+                as="nav"
                 /** re-mount when route changes in order to blur anchors */
                 key={router.asPath}
                 id="metric-navigation"
                 aria-label={siteText.aria_labels.metriek_navigatie}
                 role="navigation"
+                spacing={3}
               >
                 <Text fontSize={3} fontWeight="bold" px={3} m={0}>
                   {safetyRegionName}
                 </Text>
+
                 <Menu>
-                  <Box spacing={3} pt={3}>
-                    <MetricMenuItemLink
-                      href={`/veiligheidsregio/${code}/maatregelen`}
-                      icon={<Maatregelen fill={colors.restrictions} />}
-                      title={
-                        siteText.veiligheidsregio_maatregelen.titel_sidebar
-                      }
-                      subtitle={
-                        siteText.veiligheidsregio_maatregelen.subtitel_sidebar
-                      }
-                    />
-                  </Box>
+                  <MetricMenuItemLink
+                    href={`/veiligheidsregio/${code}/maatregelen`}
+                    title={siteText.veiligheidsregio_maatregelen.titel_sidebar}
+                    subtitle={
+                      siteText.veiligheidsregio_maatregelen.subtitel_sidebar
+                    }
+                  />
+                  <MetricMenuItemLink
+                    href={`/veiligheidsregio/${code}/risiconiveau`}
+                    title={'Risiconiveau'}
+                  >
+                    <Box mt={2}>
+                      <EscalationLevelInfoLabel
+                        level={data.escalation_level.level as EscalationLevel}
+                        hasSmallIcon
+                        useLevelColor
+                      />
+                    </Box>
+                  </MetricMenuItemLink>
 
                   <CategoryMenu
                     title={
@@ -296,7 +306,7 @@ function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
                     </MetricMenuItemLink>
                   </CategoryMenu>
                 </Menu>
-              </nav>
+              </Box>
             )}
           </>
         }

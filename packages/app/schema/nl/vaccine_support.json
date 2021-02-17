@@ -20,10 +20,22 @@
       "title": "nl_vaccine_support_value",
       "type": "object",
       "properties": {
-        "percentage_in_favor": {
+        "percentage_average": {
           "type": "number"
         },
-        "percentage_already_vaccinated": {
+        "percentage_70_plus": {
+          "type": "number"
+        },
+        "percentage_55_69": {
+          "type": "number"
+        },
+        "percentage_40_54": {
+          "type": "number"
+        },
+        "percentage_25_39": {
+          "type": "number"
+        },
+        "percentage_16_24": {
           "type": "number"
         },
         "date_start_unix": {
@@ -37,8 +49,12 @@
         }
       },
       "required": [
-        "percentage_in_favor",
-        "percentage_already_vaccinated",
+        "percentage_average",
+        "percentage_70_plus",
+        "percentage_55_69",
+        "percentage_40_54",
+        "percentage_25_39",
+        "percentage_16_24",
         "date_start_unix",
         "date_end_unix",
         "date_of_insertion_unix"

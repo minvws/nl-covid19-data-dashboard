@@ -9,4 +9,5 @@ export type RegioPageName =
   | PageName
   | 'verpleeghuiszorg'
   | 'thuiswonende-ouderen'
-  | 'maatregelen';
+  | 'maatregelen'
+  | 'risiconiveau';

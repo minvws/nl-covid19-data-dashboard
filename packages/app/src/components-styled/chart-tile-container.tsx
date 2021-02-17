@@ -5,11 +5,9 @@ import { Metadata, MetadataProps } from './metadata';
 export function ChartTileContainer({
   children,
   metadata,
-  accessibilitySubject,
 }: {
   children: React.ReactNode;
   metadata?: MetadataProps;
-  accessibilitySubject: string;
 }) {
   return (
     <Tile>
@@ -18,7 +16,7 @@ export function ChartTileContainer({
       {metadata && (
         <>
           <Spacer m="auto" />
-          <Metadata {...metadata} accessibilitySubject={accessibilitySubject} />
+          <Metadata {...metadata} />
         </>
       )}
     </Tile>

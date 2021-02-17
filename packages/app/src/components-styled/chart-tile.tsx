@@ -45,7 +45,7 @@ export function ChartTile({
   const ariaLabelledBy = slugify(title);
 
   return (
-    <ChartTileContainer metadata={metadata} accessibilitySubject={title}>
+    <ChartTileContainer metadata={metadata}>
       <ChartTileHeader
         title={title}
         description={description}
@@ -72,7 +72,7 @@ export function ChartTileWithTimeframe({
   );
 
   return (
-    <ChartTileContainer metadata={metadata} accessibilitySubject={title}>
+    <ChartTileContainer metadata={metadata}>
       <ChartTileHeader
         title={title}
         description={description}
@@ -113,19 +113,20 @@ function ChartTileHeader({
     >
       <div css={css({ mb: [3, null, null, null, 0], mr: [0, 0, 2] })}>
         <Heading level={3}>{title}</Heading>
-        {!description && (
-          <div css={css({ display: 'none' })} aria-labelledby={ariaLabelledBy}>
-            {ariaDescription}
-          </div>
-        )}
-        {description &&
-          (typeof description === 'string' ? (
-            <p aria-labelledby={ariaLabelledBy} css={css({ m: 0 })}>
+
+        {description ? (
+          typeof description === 'string' ? (
+            <p id={ariaLabelledBy} css={css({ m: 0 })}>
               {description}
             </p>
           ) : (
-            <div aria-labelledby={ariaLabelledBy}>{description}</div>
-          ))}
+            <div id={ariaLabelledBy}>{description}</div>
+          )
+        ) : (
+          <Box display="none" id={ariaLabelledBy}>
+            {ariaDescription}
+          </Box>
+        )}
       </div>
       {timeframe && onTimeframeChange && (
         <div css={css({ ml: [0, 0, 2] })}>

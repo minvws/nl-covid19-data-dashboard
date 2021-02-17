@@ -3,7 +3,7 @@ import React, { ReactNode } from 'react';
 import { Box } from '../base';
 import { Heading, HeadingLevel, HeadingProps } from '../typography';
 
-type TitleWithIconProps = {
+type TitleProps = {
   title: string;
   icon: ReactNode;
   subtitle?: string;
@@ -11,12 +11,12 @@ type TitleWithIconProps = {
 } & Omit<HeadingProps, 'children' | 'level'>;
 
 /**
- * This is a title (with an icon) that looks like a heading, but isn't rendered using an H* element.
+ * This is a title (with or without an icon) that looks like a heading, but isn't rendered using an H* element.
  * To be used in places where the optics are required, but semantically it shouldn't be a heading.
  *
  * @param props
  */
-export function TitleWithIcon(props: TitleWithIconProps) {
+export function Title(props: TitleProps) {
   const { icon, title, subtitle, level = 4, ...headingProps } = props;
 
   return (
@@ -27,7 +27,7 @@ export function TitleWithIcon(props: TitleWithIconProps) {
       alignItems="center"
       mb={-2}
     >
-      <Icon>{icon}</Icon>
+      {icon && <Icon>{icon}</Icon>}
 
       <Box>
         <Heading

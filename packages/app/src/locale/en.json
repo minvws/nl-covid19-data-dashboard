@@ -515,7 +515,7 @@
     "titel_sidebar": "Sewage water examination",
     "titel_kpi": "Average number of coronavirus particles per 100,000 inhabitants",
     "total_installation_count_titel": "Number of measurement locations",
-    "total_installation_count_description": "Weekly number of sewage water treatment plants that have reported at least one measurement. The weekly average is calculated by taking the average of all measurements at these locations. This number can vary each week because not all measurements are successful. Please note: due to the freezing cold, it is not possible to take good measurements of the sewage water at all locations. This will affect the sewage water figures this week.",
+    "total_installation_count_description": "Weekly number of sewage water treatment plants that have reported at least one measurement. The weekly average is calculated by taking the average of all measurements at these locations. This number can vary each week because not all measurements are successful. Please note: due to the freezing cold, it was not possible to take good measurements of the sewage water at all locations last week. This will still affect the sewage water figures this week.",
     "rwzi_abbrev": "",
     "map_titel": "Average number of virus particles per 100.000 inhabitants",
     "map_toelichting": "This map shows the average number of virus particles per 100.000 inhabitants, per safety region.",
@@ -645,7 +645,8 @@
     "gisteren": "Yesterday",
     "vandaag": "Today",
     "read_more": "Read more",
-    "absolute_date_template": "on {{date}}"
+    "absolute_date_template": "on {{date}}",
+    "inwoners": ""
   },
   "choropleth_tooltip": {
     "inhabitants": "inwoners",
@@ -696,7 +697,8 @@
       "gedrag": "Behaviour",
       "kwetsbare_groepen": "Vulnerable groups",
       "maatregelen": "Measures",
-      "algemeen": "General"
+      "algemeen": "General",
+      "inschaling": ""
     }
   },
   "veiligheidsregio_metadata": {
@@ -820,7 +822,7 @@
     "graph_range_description": "Average number of virus particles per 100.000 inhabitants over time",
     "titel_kpi": "Average number of virus particles per 100.000 inhabitants",
     "total_installation_count_titel": "Number of measurement locations",
-    "total_installation_count_description": "Weekly number of sewage water treatment plants that have reported at least one measurement. The weekly average is calculated by taking the average of all measurements at these locations. This number can vary each week because not all measurements are successful. Please note: due to the freezing cold, it is not possible to take good measurements of the sewage water at all locations. This will affect the sewage water figures this week.",
+    "total_installation_count_description": "Weekly number of sewage water treatment plants that have reported at least one measurement. The weekly average is calculated by taking the average of all measurements at these locations. This number can vary each week because not all measurements are successful. Please note: due to the freezing cold, it was not possible to take good measurements of the sewage water at all locations last week. This will still affect the sewage water figures this week.",
     "rwzi_abbrev": "",
     "reference": {
       "href": "/verantwoording#sewage-water",
@@ -834,7 +836,9 @@
       }
     },
     "kpi_titel": "Average number of coronavirus particles per 100.000 people",
-    "bar_chart_accessibility_description": ""
+    "bar_chart_accessibility_description": "",
+    "display_outliers": "",
+    "hide_outliers": ""
   },
   "gemeente_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Hospital admissions",
@@ -947,7 +951,7 @@
     },
     "nodata_sidebar": "This information is not available for this municipality.",
     "total_installation_count_titel": "Number of measurement locations",
-    "total_installation_count_description": "Weekly number of sewage water treatment plants that have reported at least one measurement. The weekly average is calculated by taking the average of all measurements at these locations. This number can vary each week because not all measurements are successful. Please note: due to the freezing cold, it is not possible to take good measurements of the sewage water at all locations. This will affect the sewage water figures this week.",
+    "total_installation_count_description": "Weekly number of sewage water treatment plants that have reported at least one measurement. The weekly average is calculated by taking the average of all measurements at these locations. This number can vary each week because not all measurements are successful. Please note: due to the freezing cold, it was not possible to take good measurements of the sewage water at all locations last week. This will still affect the sewage water figures this week.",
     "rwzi_abbrev": "Sewage water treatment plant",
     "graph_daily_label_text_rwzi": "Measurements for location ({{name}})",
     "graph_selected_rwzi_placeholder": "Select location",
@@ -964,11 +968,13 @@
       }
     },
     "kpi_titel": "Average number of coronavirus particles per 100.000 people",
-    "bar_chart_accessibility_description": ""
+    "bar_chart_accessibility_description": "",
+    "display_outliers": "",
+    "hide_outliers": ""
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Risk level map of the Netherlands",
-    "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\nThere are specific measures for each risk level. These are explained in the road map drafted by the government. **There is a national lockdown until at least March 2. [Click here to view the lockdown measures](/landelijk/maatregelen).**",
+    "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on February 17. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\n**There remains a national lockdown until at least March 2. [Click here to view the lockdown measures](/landelijk/maatregelen).**",
     "metadata": {
       "title": "Level of risk per safety region | Dashboard Coronavirus | Government.nl",
       "description": "Overview of the level of risk per safety region in the Netherlands."
@@ -991,7 +997,7 @@
   },
   "escalatie_niveau": {
     "titel": "Risk levels",
-    "toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\nThere are specific measures for each risk level. These are explained in the road map drafted by the government. **There is a national lockdown until at least March 2. [Click here to view the lockdown measures](/landelijk/maatregelen).**",
+    "toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on February 17. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\n**There remains a national lockdown until at least March 2. [Click here to view the lockdown measures](/landelijk/maatregelen).**",
     "types": {
       "1": {
         "titel": "Caution",
@@ -1420,7 +1426,7 @@
       "age_group_range_tooltip": "{{ageGroupRange}} years old. ",
       "accessibility_description": "Graph with percentages for the distribution of the population and the distribution of positive tested age groups.",
       "clipped_value_message": "This value is higher than displayed in the figure.",
-      "value_percentage_title": "Confirmed cases by agegroup",
+      "value_percentage_title": "Confirmed cases by age group",
       "value_percentage_tooltip": "of the confirmed cases are {{ageGroupRange}} years old"
     }
   },
@@ -1987,8 +1993,8 @@
     "title": "COVID-19 vaccinations",
     "description": "Vaccination is the most important step towards getting life back to normal. The Netherlands began vaccinating people against COVID-19 on 6 January 2021. Eventually, the vaccine will be offered to everyone aged 18 and over. This page shows how many doses of vaccine have been administered and how many doses are on their way.",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "date_unix": "1613472174",
-    "date_of_insertion_unix": "1613472174",
+    "date_unix": "1613561000",
+    "date_of_insertion_unix": "1613561000",
     "reference": {
       "href": "/verantwoording#vaccination",
       "text": "Read more about the source of the data on vaccination in the explanation of the presented data."
@@ -2024,27 +2030,27 @@
       "difference": "",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "800905",
-          "date_unix": "1613472174",
-          "date_of_insertion_unix": "1613472174"
+          "total_vaccinated": "835929",
+          "date_unix": "1613561000",
+          "date_of_insertion_unix": "1613561000"
         }
       },
       "kpi_total": {
         "title": "Number of doses administered",
-        "value": "623539",
+        "value": "654186",
         "description": "",
-        "date_of_report_unix": "1613472174",
-        "date_of_insertion_unix": "1613472174",
+        "date_of_report_unix": "1613561000",
+        "date_of_insertion_unix": "1613561000",
         "administered": [
           {
-            "value": "528988",
+            "value": "559635",
             "description": "reported by GGD-GHOR",
-            "report_date": "Reported number till 15 February"
+            "report_date": "Reported number till 16 February"
           },
           {
             "value": "94551",
             "description": "reported by LNAZ",
-            "report_date": "Reported number till 15 February"
+            "report_date": "Reported number till 16 February"
           },
           {
             "value": "",
@@ -2068,30 +2074,30 @@
         "first_tab_title": "Calculated number",
         "second_tab_title": "Reported number",
         "tab_total_estimated": {
-          "value": "800905",
+          "value": "835929",
           "description": "",
-          "date_of_report_unix": "1613472174",
-          "date_of_insertion_unix": "1613472174",
+          "date_of_report_unix": "1613561000",
+          "date_of_insertion_unix": "1613561000",
           "administered": [
             {
-              "value": "528988",
+              "value": "559635",
               "description": "administered by GGDs",
-              "report_date": "Reported number till 15 February"
+              "report_date": "Reported number till 16 February"
             },
             {
               "value": "94551",
               "description": "administered in hospitals",
-              "report_date": "Reported number till 15 February"
+              "report_date": "Reported number till 16 February"
             },
             {
-              "value": "177366",
+              "value": "180270",
               "description": "administered in long-term care institutions",
-              "report_date": "Calculated number till 15 February"
+              "report_date": "Calculated number till 16 February"
             },
             {
-              "value": "",
-              "description": "",
-              "report_date": ""
+              "value": "1473",
+              "description": "administered in general practices",
+              "report_date": "Calculated number till 16 February"
             },
             {
               "value": "",
@@ -2164,7 +2170,10 @@
     },
     "grafiek_draagvlak": {
       "titel": "Willingness to be vaccinated",
-      "omschrijving": "This graph shows the percentage of the population that wishes to be vaccinated against COVID-19. The figure is taken from a survey where people are asked if they wish to be vaccinated. The survey is conducted every three weeks."
+      "omschrijving": "This graph shows the percentage per age group and in total of the population that wishes to be vaccinated against COVID-19. The figures are taken from a survey where people are asked if they wish to be vaccinated. The survey is conducted every three weeks.",
+      "kpi_omschrijving": "Percentage of the population that wishes to be vaccinated against COVID-19",
+      "tooltip_gemiddeld": "",
+      "leeftijd_jaar": ""
     }
   },
   "editorial_detail": {
@@ -2195,7 +2204,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of the Netherlands",
-      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\nThere are specific measures for each risk level. These are explained in the road map drafted by the government. **There is a national lockdown until at least March 2. [Click here to view the lockdown measures](/landelijk/maatregelen).**"
+      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on February 17. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\n**There remains a national lockdown until at least March 2. [Click here to view the lockdown measures](/landelijk/maatregelen).**"
     },
     "data_sitemap_titel": "Topics on this dashboard",
     "data_sitemap_toelichting": "Go directly to the following topics:",
@@ -2282,7 +2291,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of The Netherlands",
-      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\nThere are specific measures for each risk level. These are explained in the road map drafted by the government. **There is a national lockdown until at least March 2. [Click here to view the lockdown measures](/landelijk/maatregelen).**"
+      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on February 17. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\n**There remains a national lockdown until at least March 2. [Click here to view the lockdown measures](/landelijk/maatregelen).**"
     },
     "risoconiveau_maatregelen": {
       "title": "Risk level & measures",
@@ -2355,7 +2364,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of the Netherlands",
-      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\nThere are specific measures for each risk level. These are explained in the road map drafted by the government. **There is a national lockdown until at least March 2. [Click here to view the lockdown measures](/landelijk/maatregelen).**"
+      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on February 17. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\n**There remains a national lockdown until at least March 2. [Click here to view the lockdown measures](/landelijk/maatregelen).**"
     },
     "risoconiveau_maatregelen": {
       "title": "Risk level & measures",
@@ -2426,5 +2435,118 @@
     "description": "Information on the accessibility of the COVID-19 Dashboard.",
     "url": "https://coronadashboard.government.nl/verantwoording"
   },
-  "article_strip_title": "More about this topic"
+  "article_strip_title": "More about this topic",
+  "vr_risiconiveau": {
+    "datums": "",
+    "reference": {
+      "href": "",
+      "text": ""
+    },
+    "metadata": {
+      "title": "",
+      "description": ""
+    },
+    "titel": "",
+    "pagina_toelichting": "",
+    "current_escalation_level": "",
+    "bronnen": {
+      "rivm_positieve_testen": {
+        "download": "",
+        "href": "",
+        "text": ""
+      },
+      "rivm_ziekenhuisopnames": {
+        "download": "",
+        "href": "",
+        "text": ""
+      }
+    },
+    "positieve_testen": {
+      "title": "",
+      "value_annotation": "",
+      "description": ""
+    },
+    "ziekenhuisopnames": {
+      "title": "",
+      "value_annotation": "",
+      "description": ""
+    },
+    "types": {
+      "1": {
+        "toelichting": ""
+      },
+      "2": {
+        "toelichting": ""
+      },
+      "3": {
+        "toelichting": ""
+      },
+      "4": {
+        "toelichting": ""
+      }
+    }
+  },
+  "gemeente_sterfte": {
+    "titel_sidebar": "",
+    "titel_kpi": "",
+    "metadata": {
+      "title": "",
+      "description": ""
+    },
+    "section_deceased_rivm": {
+      "title": "",
+      "description": "",
+      "datums": "",
+      "bronnen": {
+        "rivm": {
+          "href": "",
+          "text": "",
+          "download": ""
+        }
+      },
+      "reference": {
+        "href": "",
+        "text": ""
+      },
+      "kpi_covid_daily_title": "",
+      "kpi_covid_daily_description": "",
+      "kpi_covid_total_title": "",
+      "kpi_covid_total_description": "",
+      "line_chart_covid_daily_title": "",
+      "line_chart_covid_daily_description": ""
+    },
+    "kpi_titel": ""
+  },
+  "corona_melder_app": {
+    "header": {
+      "category": "",
+      "title": "",
+      "description": "",
+      "datums": "",
+      "reference": {
+        "text": "",
+        "href": ""
+      },
+      "bronnen": {
+        "rivm": {
+          "download": "",
+          "text": "",
+          "href": ""
+        }
+      }
+    },
+    "waarschuwingen": {
+      "title": "",
+      "description": "",
+      "total": ""
+    },
+    "rapport": {
+      "title": "",
+      "description": "",
+      "link": {
+        "text": "",
+        "href": ""
+      }
+    }
+  }
 }
