@@ -76,7 +76,7 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
   const lcpsOldDataRange = [
     createDate(dataHospitalLcps.values[0].date_unix),
     new Date('1 June 2020'),
-  ];
+  ] as DateRange;
 
   return (
     <>
@@ -255,9 +255,12 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
           metadata={{
             source: text.bronnen.lnaz,
           }}
+          componentCallback={addBackgroundRectangleCallback(lcpsOldDataRange, {
+            fill: colors.data.underReported,
+          })}
           formatTooltip={(values) => {
             const value = values[0];
-            const isInaccurateValue = value.__date < lcpsOldDataRange[0];
+            const isInaccurateValue = value.__date < lcpsOldDataRange[1];
 
             return (
               <>
