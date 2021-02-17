@@ -6,7 +6,7 @@ import siteText from '~/locale/index';
 import { useEscalationColor } from '~/utils/use-escalation-color';
 
 export type EscalationLevelProps = {
-  escalationLevel: EscalationLevel;
+  level: EscalationLevel;
   fontSize?: number;
   useLevelColor?: boolean;
   hasSmallIcon?: boolean;
@@ -15,16 +15,16 @@ export type EscalationLevelProps = {
 type EscalationLevelString = '1' | '2' | '3' | '4';
 
 export function EscalationLevelInfoLabel({
-  escalationLevel,
+  level,
   hasSmallIcon = false,
   fontSize = 2,
   useLevelColor = false,
 }: EscalationLevelProps) {
-  const escalationColor = useEscalationColor(escalationLevel);
+  const escalationColor = useEscalationColor(level);
   const color = useLevelColor ? escalationColor : 'inherit';
   return (
     <Box display="flex" alignItems="center" justifyContent="flex-start">
-      <EscalationLevelIcon level={escalationLevel} isSmall={hasSmallIcon} />
+      <EscalationLevelIcon level={level} isSmall={hasSmallIcon} />
       <Text
         as="span"
         ml={2}
@@ -34,7 +34,7 @@ export function EscalationLevelInfoLabel({
       >
         {
           siteText.escalatie_niveau.types[
-            escalationLevel.toString() as EscalationLevelString
+            level.toString() as EscalationLevelString
           ].titel
         }
       </Text>
@@ -43,7 +43,7 @@ export function EscalationLevelInfoLabel({
 }
 
 export function EscalationLevelInfo(props: EscalationLevelProps) {
-  const { escalationLevel } = props;
+  const { level } = props;
 
   return (
     <Box
@@ -56,7 +56,7 @@ export function EscalationLevelInfo(props: EscalationLevelProps) {
       <Text as="span" marginLeft="0 !important" marginRight=".5em !important">
         {siteText.escalatie_niveau.sidebar_label}
       </Text>
-      <EscalationLevelInfoLabel escalationLevel={escalationLevel} />
+      <EscalationLevelInfoLabel level={level} />
     </Box>
   );
 }

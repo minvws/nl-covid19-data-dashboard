@@ -75,8 +75,8 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
   );
 
   assert(
-    filteredRegion,
-    `Could not find a "vrcode" to match with the region: ${safetyRegionForMunicipality?.code} to get the the current "escalation_level" of it.`
+    filteredRegion && filteredRegion.level,
+    `Could not find a "vrcode" to match with the region: ${safetyRegionForMunicipality?.code} to get the the current "level" of it.`
   );
 
   return (
@@ -150,7 +150,7 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
               <RiskLevelIndicator
                 title={text.risoconiveau_maatregelen.title}
                 description={text.risoconiveau_maatregelen.description}
-                escalationLevel={filteredRegion.escalation_level}
+                level={filteredRegion.level}
                 code={filteredRegion.vrcode}
                 escalationTypes={escalationText.types}
                 href={`/veiligheidsregio/${safetyRegionForMunicipality?.code}/maatregelen`}
@@ -223,14 +223,14 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
                       <EscalationMapLegenda
                         data={choropleth.vr}
                         metricName="escalation_levels"
-                        metricProperty="escalation_level"
+                        metricProperty="level"
                       />
                     }
                   >
                     <SafetyRegionChoropleth
                       data={choropleth.vr}
                       metricName="escalation_levels"
-                      metricProperty="escalation_level"
+                      metricProperty="level"
                       onSelect={createSelectRegionHandler(router, 'actueel')}
                       tooltipContent={escalationTooltip(
                         createSelectRegionHandler(router, 'actueel')
