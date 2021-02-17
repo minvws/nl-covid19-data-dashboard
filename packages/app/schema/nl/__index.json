@@ -5,7 +5,7 @@
   "required": [
     "behavior",
     "code",
-    "corona_app",
+    "corona_melder_app",
     "deceased_cbs",
     "deceased_rivm",
     "deceased_rivm_per_age_group",

@@ -139,7 +139,7 @@ export interface National {
   deceased_cbs: NationalDeceasedCbs;
   elderly_at_home: NationalElderlyAtHome;
   vaccine_support: NlVaccineSupport;
-  corona_melder_app?: NlCoronaMelderApp;
+  corona_melder_app: NlCoronaMelderApp;
   vaccine_delivery: NlVaccineDelivery;
 }
 export interface NationalDifference {
