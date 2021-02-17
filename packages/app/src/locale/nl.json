@@ -1312,6 +1312,38 @@
       }
     }
   },
+  "corona_melder_app": {
+    "header": {
+      "category": "Preventie verspreiding",
+      "title": "Gebruik CoronaMelder app",
+      "description": "Om verspreiding van het coronavirus tegen te gaan is  de telefoon-app CoronaMelder ontwikkeld. CoronaMelder stuurt gebruikers van de app een bericht wanneer zij enige tijd in de buurt zijn geweest van iemand die besmet is met het coronavirus die ook de app gebruikt. Dit verlaagt het risico dat zij onbewust andere mensen in hun omgeving besmetten.",
+      "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+      "reference": {
+        "text": "Lees meer over de CoronaMelder app in de cijferverantwoording.",
+        "href": "/verantwoording#coronamelder"
+      },
+      "bronnen": {
+        "rivm": {
+          "download": "",
+          "text": "RIVM",
+          "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/8a72d78a-fcf8-4882-b0ab-cd594961a267?tab=relations"
+        }
+      }
+    },
+    "waarschuwingen": {
+      "title": "Aantal positieve tests gemeld via de CoronaMelder app:",
+      "description": "Dit cijfer toont hoeveel (positief geteste) gebruikers van CoronaMelder afgelopen dagen andere app-gebruikers hebben gewaarschuwd.",
+      "total": "{{totalDownloads}} mensen hebben de CoronaMelder app gedownload."
+    },
+    "rapport": {
+      "title": "Factsheet CoronaMelder",
+      "description": "Het meest actuele factsheet over het gebruik van de app is beschikbaar via de website van de CoronaMelder app.",
+      "link": {
+        "text": "Meest recente Factsheet CoronaMelder app",
+        "href": "https://www.coronamelder.nl/media/Factsheet_Corona_latest.pdf"
+      }
+    }
+  },
   "regionaal_gedrag": {
     "metadata": {
       "title": "Naleving en Draagvlak | Dashboard Coronavirus | Rijksoverheid.nl",

@@ -1312,6 +1312,38 @@
       }
     }
   },
+  "corona_melder_app": {
+    "header": {
+      "category": "Preventie verspreding",
+      "title": "Gebruik CoronaMelder app",
+      "description": "Introductietekst die aangeeft........",
+      "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+      "reference": {
+        "text": "Lees meer in de cijferverantwoording.",
+        "href": "/verantwoording#coronamelder"
+      },
+      "bronnen": {
+        "rivm": {
+          "download": "https://data.rivm.nl/covid-19/COVID-19_gedrag.csv",
+          "text": "RIVM",
+          "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/8a72d78a-fcf8-4882-b0ab-cd594961a267?tab=relations"
+        }
+      }
+    },
+    "waarschuwingen": {
+      "title": "Mensen die andere waarschuden via de CoronaMelder app:",
+      "description": "Als je positief getest bent op corona, dan kun je dit vrijwillig aangeven in de app, samen met een medewerker van de GGD.",
+      "total": "{{totalDownloads}} mensen hebben de CoronaMelder app gedownload"
+    },
+    "rapport": {
+      "title": "Volledige rapport",
+      "description": "Het laatste rapport over gebruik van de app is beschikbaar via de site van de CoronaMelder app.",
+      "link": {
+        "text": "Laatste rapportage gebruik CoronaMelder app (PDF)",
+        "href": "#"
+      }
+    }
+  },
   "regionaal_gedrag": {
     "metadata": {
       "title": "Compliance and support | Coronavirus dashboard | Government.nl",
