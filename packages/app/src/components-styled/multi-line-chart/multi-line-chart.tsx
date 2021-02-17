@@ -66,10 +66,6 @@ const tooltipStyles = {
   zIndex: 100,
 };
 
-// type SeriesValue<T> = T & TrendValue;
-
-// type SeriesValue = TimestampedValue & Record<string, number>;
-
 type TooltipData<T extends TimestampedValue> = {
   value: T;
   key: keyof T;
@@ -220,10 +216,6 @@ export function MultiLineChart<T extends TimestampedValue>({
   const xMax = width - padding.left - padding.right;
   const yMax = height - padding.top - padding.bottom;
 
-  function getDate(x: TrendValue) {
-    return x.__date;
-  }
-
   const dateSpanScale = useMemo(
     () =>
       scaleBand<Date>({
@@ -318,8 +310,6 @@ export function MultiLineChart<T extends TimestampedValue>({
         toggleHoverElements(true);
         return;
       }
-
-      // console.log('handleHover index', index);
 
       const { xScale, yScale } = scales;
 
@@ -476,10 +466,14 @@ export function MultiLineChart<T extends TimestampedValue>({
   );
 }
 
+function getDate(x: TrendValue) {
+  return x.__date;
+}
+
 function formatDefaultTooltip<T extends TimestampedValue>(
   value: T,
   key: keyof T,
-  linesConfig: LineConfig<T>[],
+  _linesConfig: LineConfig<T>[],
   isPercentage?: boolean
 ) {
   // default tooltip assumes one line is rendered:
