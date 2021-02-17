@@ -645,7 +645,8 @@
     "gisteren": "Gisteren",
     "vandaag": "Vandaag",
     "read_more": "Lees meer",
-    "absolute_date_template": "op {{date}}"
+    "absolute_date_template": "op {{date}}",
+    "inwoners": "inwoners"
   },
   "seoHead": {
     "default_description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
@@ -684,7 +685,8 @@
       "gedrag": "Gedrag",
       "kwetsbare_groepen": "Kwetsbare groepen",
       "maatregelen": "Maatregelen",
-      "algemeen": "Algemeen"
+      "algemeen": "Algemeen",
+      "inschaling": "Inschaling"
     }
   },
   "veiligheidsregio_metadata": {
@@ -752,13 +754,7 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": [
-      "0 tot 20",
-      "20 tot 40",
-      "40 tot 60",
-      "60 tot 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -806,6 +802,8 @@
     "graph_daily_label_text_rwzi": "Meetwaarden locatie ({{name}})",
     "graph_selected_rwzi_placeholder": "Selecteer locatie",
     "graph_range_description": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners over tijd",
+    "display_outliers": "Toon uitschieters",
+    "hide_outliers": "Verberg uitschieters",
     "titel_kpi": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners",
     "total_installation_count_titel": "Aantal meetlocaties",
     "total_installation_count_description": "Wekelijks aantal rioolwaterzuiveringsinstallaties die minimaal één keer een meting hebben gerapporteerd. Het weekgemiddelde wordt berekend door het gemiddelde te nemen van alle metingen op deze locaties. Per week kan dit aantal variëren omdat niet alle metingen altijd lukken. Let op: door de vrieskou is het niet mogelijk op alle locaties goede metingen van het rioolwater te doen. Dit heeft deze week invloed op de rioolwatercijfers.",
@@ -940,6 +938,8 @@
     "graph_daily_label_text_rwzi": "Meetwaarden locatie ({{name}})",
     "graph_selected_rwzi_placeholder": "Selecteer locatie",
     "graph_range_description": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners over tijd",
+    "display_outliers": "Toon uitschieters",
+    "hide_outliers": "Verberg uitschieters",
     "reference": {
       "href": "/verantwoording#rioolwater",
       "text": "Lees meer over het onderzoek naar het coronavirus in rioolwater in de cijferverantwoording."
@@ -2131,11 +2131,7 @@
       "kpi_expected_page_additions": {
         "title": "Verwachte toevoegingen aan deze pagina",
         "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer:",
-        "additions": [
-          "Vaccinatiebereidheid",
-          "Vaccinatiegraad",
-          ""
-        ]
+        "additions": ["Vaccinatiebereidheid", "Vaccinatiegraad", ""]
       }
     },
     "section_vaccinations_more_information": {
@@ -2415,6 +2411,7 @@
     "url": "https://coronadashboard.rijksoverheid.nl/verantwoording"
   },
   "article_strip_title": "Meer informatie over dit onderwerp",
+<<<<<<< HEAD
   "gemeente_sterfte": {
     "titel_sidebar": "Sterfte",
     "titel_kpi": "Gemeld aantal patiënten overleden aan COVID-19 per dag",
@@ -2447,3 +2444,42 @@
     "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
   }
 }
+=======
+  "vr_risiconiveau": {
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
+    "reference": {
+      "href": "/over-risiconiveaus",
+      "text": "Lees meer over de risiconiveaus en wat dit betekent voor de maatregelen op de pagina ‘Over de risiconiveaus’."
+    },
+    "metadata": {
+      "title": "Inschalen risiconiveau {{safetyRegionName}}",
+      "description": "Inschalen risiconiveau {{safetyRegionName}}"
+    },
+    "titel": "Risiconiveau in {{safetyRegionName}}",
+    "pagina_toelichting": "Elke twee weken wordt bepaald in welk risiconiveau een regio zit. Daarvoor kijken we naar het aantal positieve testen en het aantal ziekenhuisopnames. Het meest ernstige cijfer bepaalt het risiconiveau. Bij de risiconiveaus horen maatregelen. Welke maatregelen precies gelden, hangt niet alleen af van hoe het in de Veiligheidsregio gaat, maar ook van de situatie in het hele land. ",
+    "current_escalation_level": "Risiconiveau van dit moment",
+    "bronnen": {
+      "rivm_positieve_testen": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv",
+        "href": " https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.html",
+        "text": "RIVM"
+      },
+      "rivm_ziekenhuisopnames": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.csv",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
+        "text": "RIVM"
+      }
+    },
+    "positieve_testen": {
+      "title": "Positieve testen",
+      "value_annotation": "per 100.000 inwoners per week",
+      "description": "Dit getal laat zien hoeveel mensen de afgelopen 7 dagen positief getest zijn per 100.000 inwoners. De balk laat zien hoe ernstig het aantal positieve testen is."
+    },
+    "ziekenhuisopnames": {
+      "title": "Ziekenhuisopnames (inclusief IC)",
+      "value_annotation": "per 1 miljoen inwoners per week",
+      "description": "Dit getal laat zien hoeveel mensen met COVID-19 uit deze veiligheidsregio in de afgelopen 7 dagen in een ziekenhuis zijn opgenomen per 1 miljoen inwoners. De balk laat zien hoe ernstig het aantal ziekenhuisopnames is."
+    }
+  }
+}
+>>>>>>> e404bfc11c295a6b031eb3766daf9fdc35e4157a

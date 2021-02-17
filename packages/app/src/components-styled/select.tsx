@@ -8,7 +8,7 @@ interface Option<T extends string> {
   label: string;
 }
 
-type SelectProps<T extends string> = {
+export type SelectProps<T extends string> = {
   options: Option<T>[];
   value: string | undefined;
   onChange: (value: T) => void;
