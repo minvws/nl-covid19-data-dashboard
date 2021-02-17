@@ -1,9 +1,8 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
 import { BarChart } from '~/components-styled/bar-chart/bar-chart';
-import { Box } from '~/components-styled/base';
 import {
   ChartTile,
   ChartTileWithTimeframe,
@@ -11,11 +10,10 @@ import {
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
-import { Select } from '~/components-styled/select';
 import { SEOHead } from '~/components-styled/seo-head';
+import { SewerChart } from '~/components-styled/sewer-chart';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { SewerWaterChart } from '~/components/lineChart/sewer-water-chart';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getMunicipalityLayout } from '~/domain/layout/municipality-layout';
 import siteText from '~/locale/index';
@@ -27,12 +25,7 @@ import {
   getLastGeneratedDate,
 } from '~/static-props/get-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import {
-  getInstallationNames,
-  getSewerWaterBarChartData,
-  getSewerWaterLineChartData,
-  getSewerWaterScatterPlotData,
-} from '~/utils/sewer-water/municipality-sewer-water.util';
+import { getSewerWaterBarChartData } from '~/utils/sewer-water/municipality-sewer-water.util';
 
 export { getStaticPaths } from '~/static-paths/gm';
 
@@ -50,31 +43,13 @@ const graphDescriptions = siteText.accessibility.grafieken;
 const SewerWater: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data, municipalityName, content } = props;
 
-  const {
-    lineChartData,
-    scatterPlotData,
-    barChartData,
-    sewerStationNames,
-  } = useMemo(() => {
+  const { barChartData } = useMemo(() => {
     return {
-      lineChartData: getSewerWaterLineChartData(data),
-      scatterPlotData: getSewerWaterScatterPlotData(data),
       barChartData: getSewerWaterBarChartData(data),
-      sewerStationNames: getInstallationNames(data),
     };
   }, [data]);
 
   const sewerAverages = data.sewer;
-
-  const [selectedInstallation, setSelectedInstallation] = useState<
-    string | undefined
-  >(sewerStationNames.length === 1 ? sewerStationNames[0] : undefined);
-
-  /**
-   * Only render a scatter plot when there's data coming from more than one
-   * sewer station
-   */
-  const enableScatterPlot = sewerStationNames.length > 1;
 
   if (!sewerAverages) {
     /**
@@ -159,45 +134,29 @@ const SewerWater: FCWithLayout<typeof getStaticProps> = (props) => {
           </KpiTile>
         </TwoKpiSection>
 
-        {lineChartData && (
-          <ChartTileWithTimeframe
-            title={text.linechart_titel}
-            metadata={{ source: text.bronnen.rivm }}
-            timeframeOptions={['all', '5weeks']}
-          >
-            {(timeframe) => (
-              <>
-                {enableScatterPlot && (
-                  <Box display="flex" justifyContent="flex-end">
-                    <Select
-                      options={sewerStationNames.map((x) => ({
-                        label: x,
-                        value: x,
-                      }))}
-                      value={selectedInstallation}
-                      placeholder={text.graph_selected_rwzi_placeholder}
-                      onChange={setSelectedInstallation}
-                      onClear={() => setSelectedInstallation(undefined)}
-                    />
-                  </Box>
-                )}
-                <SewerWaterChart
-                  timeframe={timeframe}
-                  scatterPlotValues={scatterPlotData}
-                  averageValues={lineChartData.averageValues}
-                  selectedInstallation={selectedInstallation}
-                  text={{
-                    average_label_text: lineChartData.averageLabelText,
-                    secondary_label_text: text.graph_secondary_label_text,
-                    daily_label_text: text.graph_daily_label_text_rwzi,
-                    range_description: text.graph_range_description,
-                  }}
-                  valueAnnotation={siteText.waarde_annotaties.riool_normalized}
-                />
-              </>
-            )}
-          </ChartTileWithTimeframe>
-        )}
+        <ChartTileWithTimeframe
+          title={text.linechart_titel}
+          metadata={{ source: text.bronnen.rivm }}
+          timeframeOptions={['all', '5weeks']}
+        >
+          {(timeframe) => (
+            <SewerChart
+              data={data}
+              timeframe={timeframe}
+              valueAnnotation={siteText.waarde_annotaties.riool_normalized}
+              text={{
+                select_station_placeholder:
+                  text.graph_selected_rwzi_placeholder,
+                average_label_text: text.graph_average_label_text,
+                secondary_label_text: text.graph_secondary_label_text,
+                daily_label_text: text.graph_daily_label_text_rwzi,
+                range_description: text.graph_range_description,
+                display_outliers: text.display_outliers,
+                hide_outliers: text.hide_outliers,
+              }}
+            />
+          )}
+        </ChartTileWithTimeframe>
 
         {barChartData && (
           <ChartTile

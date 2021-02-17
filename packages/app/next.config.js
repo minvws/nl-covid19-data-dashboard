@@ -3,10 +3,8 @@ const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const sitemap = require('./generate-sitemap.js');
 
 const withTM = require('next-transpile-modules')([
-  // `internmap` is a dependency of `d3-array`
-  'internmap',
-  // `react-use-measure` is a dependency of `@visx/tooltip`
-  'react-use-measure',
+  'internmap', // `internmap` is a dependency of `d3-array`
+  'geometric',
 ]);
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
@@ -75,7 +73,7 @@ const nextConfig = {
     config.module.rules.push({
       test: /\.js$/,
       loader: defaultLoaders.babel,
-      include: /[\\/]node_modules[\\/](d3-.*)[\\/]/,
+      include: /[\\/]node_modules[\\/](d3-.*|react-use-measure)[\\/]/,
     });
 
     config.resolve.alias = {

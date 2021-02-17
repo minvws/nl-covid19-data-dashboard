@@ -31,11 +31,13 @@ export function Search({ initialValue }: { initialValue?: string }) {
             <Box position="relative" ref={heightRef}>
               <SearchInput />
             </Box>
-            {context.showResults && (
-              <Box boxShadow="tile">
-                <SearchResults />
-              </Box>
-            )}
+
+            <Box
+              boxShadow="tile"
+              display={context.showResults ? 'block' : 'none'}
+            >
+              <SearchResults />
+            </Box>
           </Box>
         </SearchForm>
       )}

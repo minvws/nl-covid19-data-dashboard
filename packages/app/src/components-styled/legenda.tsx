@@ -2,7 +2,7 @@ import css from '@styled-system/css';
 import * as React from 'react';
 import styled from 'styled-components';
 
-export type LegendShape = 'line' | 'square';
+export type LegendShape = 'line' | 'square' | 'circle';
 
 export type LegendItem = { color: string; label: string; shape: LegendShape };
 interface LegendProps {
@@ -17,6 +17,7 @@ export function Legenda({ items }: LegendProps) {
           {label}
           {shape === 'square' && <Square color={color} />}
           {shape === 'line' && <Line color={color} />}
+          {shape === 'circle' && <Circle color={color} />}
         </Item>
       ))}
     </List>
@@ -63,5 +64,14 @@ const Square = styled(Shape)(
     top: '5px',
     width: '15px',
     height: '15px',
+  })
+);
+
+const Circle = styled(Shape)(
+  css({
+    top: '7.5px',
+    width: '10px',
+    height: '10px',
+    borderRadius: '50%',
   })
 );

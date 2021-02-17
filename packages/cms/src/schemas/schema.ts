@@ -10,6 +10,7 @@ import editorial from './documents/editorial';
 import behaviorPage from './documents/pages/behavior-page';
 import cijferVerantwoording from './documents/pages/cijfer-verantwoording-page';
 import deceasedPage from './documents/pages/deceased-page';
+import escalationLevelPage from './documents/pages/escalation-level-page';
 import hospitalPage from './documents/pages/hospital-page';
 import intensiveCarePage from './documents/pages/intensive-care-page';
 import overDitDashboard from './documents/pages/over-dit-dashboard-page';
@@ -55,6 +56,7 @@ export default createSchema({
     toegankelijkheid,
     topicalPage,
     deceasedPage,
+    escalationLevelPage,
     behaviorPage,
     hospitalPage,
     intensiveCarePage,

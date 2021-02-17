@@ -1,22 +1,26 @@
-// import { NlVaccineSupportValue } from '@corona-dashboard/common';
 import { css } from '@styled-system/css';
+import { ParentSize } from '@visx/responsive';
 import { Fragment, useState } from 'react';
+import styled from 'styled-components';
 import VaccinatieIcon from '~/assets/vaccinaties.svg';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
-import { Box } from '~/components-styled/base';
+import { AspectRatio } from '~/components-styled/aspect-ratio';
+import { Box, Spacer } from '~/components-styled/base';
 import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
+import { Image } from '~/components-styled/image';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
-import { LineChart } from '~/components-styled/line-chart/line-chart';
+import { MultiLineChart } from '~/components-styled/multi-line-chart';
 import { RadioGroup } from '~/components-styled/radio-group';
 import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { InlineText, Text } from '~/components-styled/typography';
+import { Heading, InlineText, Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
+import { targetLanguage } from '~/locale/index';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
@@ -26,10 +30,8 @@ import {
   getText,
 } from '~/static-props/get-data';
 import { formatDateFromSeconds } from '~/utils/formatDate';
-import { formatNumber } from '~/utils/formatNumber';
+import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { AspectRatio } from '~/components-styled/aspect-ratio';
-import { Image } from '~/components-styled/image';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -39,8 +41,6 @@ export const getStaticProps = createGetStaticProps(
     articles?: ArticleSummary[];
   }>(createPageArticlesQuery('vaccinationsPage'))
 );
-import { targetLanguage } from '~/locale/index';
-import { ParentSize } from '@visx/responsive';
 
 const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
   text: siteText,
@@ -263,36 +263,128 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             source: text.bronnen.rivm,
           }}
         >
+          <section>
+            <KpiValue
+              percentage={data.vaccine_support.last_value.percentage_average}
+            />
+            <Text mt={0}>{text.grafiek_draagvlak.kpi_omschrijving}</Text>
+          </section>
+
+          {/* <Text mt={0}>{text.grafiek_draagvlak.omschrijving}</Text> */}
           <ParentSize>
             {({ width }) => (
-              <LineChart
+              <MultiLineChart
                 timeframe="all"
                 width={width}
                 ariaLabelledBy="chart_vaccine_support"
                 values={data.vaccine_support.values}
-                linesConfig={[{ metricProperty: 'percentage_in_favor' }]}
-                formatTooltip={(values) => {
-                  const value = values[0];
+                showMarkerLine
+                showLegend
+                yTickValues={[0, 25, 50, 75, 100]}
+                linesConfig={[
+                  {
+                    metricProperty: 'percentage_16_24',
+                    label: replaceVariablesInText(
+                      text.grafiek_draagvlak.leeftijd_jaar,
+                      { ageGroup: '16 - 24' }
+                    ),
+                    color: '#005082',
+                    legendShape: 'square',
+                    areaFillOpacity: 0,
+                  },
+                  {
+                    metricProperty: 'percentage_25_39',
+                    label: replaceVariablesInText(
+                      text.grafiek_draagvlak.leeftijd_jaar,
+                      { ageGroup: '25 - 39' }
+                    ),
+                    color: '#00BBB5',
+                    legendShape: 'square',
+                    areaFillOpacity: 0,
+                  },
+                  {
+                    metricProperty: 'percentage_40_54',
+                    label: replaceVariablesInText(
+                      text.grafiek_draagvlak.leeftijd_jaar,
+                      { ageGroup: '40 - 54' }
+                    ),
+                    color: '#FFC000',
+                    legendShape: 'square',
+                    areaFillOpacity: 0,
+                  },
+                  {
+                    metricProperty: 'percentage_55_69',
+                    label: replaceVariablesInText(
+                      text.grafiek_draagvlak.leeftijd_jaar,
+                      { ageGroup: '55 - 69' }
+                    ),
+                    color: '#E28700',
+                    legendShape: 'square',
+                    areaFillOpacity: 0,
+                  },
+                  {
+                    metricProperty: 'percentage_70_plus',
+                    label: replaceVariablesInText(
+                      text.grafiek_draagvlak.leeftijd_jaar,
+                      { ageGroup: '70+' }
+                    ),
+                    color: '#C252D4',
+                    legendShape: 'square',
+                    areaFillOpacity: 0,
+                  },
+                ]}
+                /**
+                 * @TODO The tooltip formatting is getting a bit out of hand here. I
+                 * think we can refactor this into a set of selectable types of
+                 * tooltips. That probably means having to align a few charts
+                 * design-wise. There are too many variables and implementation
+                 * details required to format a good multi-line tooltip. It
+                 * feels silly to expose that to the calling context.
+                 */
+                formatTooltip={(value, _key, linesConfig) => {
                   const dateStartString = formatDateFromSeconds(
-                    value.date_start_unix
+                    value.date_start_unix,
+                    'axis'
                   );
                   const dateEndString = formatDateFromSeconds(
-                    value.date_end_unix
+                    value.date_end_unix,
+                    'axis'
                   );
-                  return (
-                    <Text m={0}>
-                      <span style={{ fontWeight: 'bold' }}>
-                        {`${dateStartString} - ${dateEndString}`}
-                      </span>
-                      <br />
 
-                      {replaceVariablesInText(
-                        siteText.common.tooltip.vaccinatie_bereidheid,
-                        {
-                          percentageInFavor: value.__value,
-                        }
-                      )}
-                    </Text>
+                  return (
+                    <section>
+                      <Heading level={5} mb={1}>
+                        {text.grafiek_draagvlak.titel}
+                      </Heading>
+                      <Text m={0} mb={1} fontSize={1}>
+                        {`${dateStartString} - ${dateEndString}`}
+                      </Text>
+                      <TooltipList>
+                        {[...linesConfig].reverse().map((x) => (
+                          <TooltipListItem
+                            key={x.metricProperty}
+                            color={x.color}
+                          >
+                            <TooltipValueContainer>
+                              {x.label}:{' '}
+                              <strong>
+                                {formatPercentage(value[x.metricProperty])}%
+                              </strong>
+                            </TooltipValueContainer>
+                          </TooltipListItem>
+                        ))}
+
+                        <Spacer mb={1} />
+                        <TooltipListItem color="transparent">
+                          <TooltipValueContainer>
+                            {`${text.grafiek_draagvlak.tooltip_gemiddeld}:`}
+                            <strong>
+                              {formatPercentage(value['percentage_average'])}%
+                            </strong>
+                          </TooltipValueContainer>
+                        </TooltipListItem>
+                      </TooltipList>
+                    </section>
                   );
                 }}
                 formatYAxis={(x) => `${x}%`}
@@ -327,3 +419,36 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
 VaccinationPage.getLayout = getNationalLayout;
 
 export default VaccinationPage;
+
+const TooltipList = styled.ol`
+  margin: 0;
+  padding: 0;
+  list-style: none;
+`;
+
+interface TooltipListItemProps {
+  color: string;
+}
+
+const TooltipListItem = styled.li<TooltipListItemProps>`
+  display: flex;
+  align-items: center;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    background: ${(props) => props.color};
+    margin-right: 0.5em;
+    flex-shrink: 0;
+  }
+`;
+
+const TooltipValueContainer = styled.span`
+  display: flex;
+  width: 100%;
+  min-width: 120px;
+  justify-content: space-between;
+`;

@@ -22,7 +22,7 @@ if ('__setDefaultTimeZone' in Intl.DateTimeFormat) {
   (Intl.DateTimeFormat as any).__setDefaultTimeZone('Europe/Amsterdam');
 }
 
-function isDayBeforeYesterday(date: number): boolean {
+function isDayBeforeYesterday(date: number | Date): boolean {
   return isSameDay(date, subDays(Date.now(), 2));
 }
 
@@ -39,11 +39,11 @@ type formatStyle =
   | 'time'
   | 'long'
   | 'medium'
-  | 'short'
   | 'relative'
   | 'iso'
   | 'axis'
-  | 'weekday-medium';
+  | 'weekday-medium'
+  | 'day-month';
 
 const Time = new Intl.DateTimeFormat(locale, {
   timeStyle: 'short',
@@ -108,28 +108,68 @@ export function formatDateFromMilliseconds(
 ): string {
   assert(!isNaN(milliseconds), 'milliseconds is NaN');
 
-  if (style === 'time') return Time.format(milliseconds); // '09:24'
-  if (style === 'iso') return new Date(milliseconds).toISOString(); // '2020-07-23T10:01:16.000Z'
-  if (style === 'long') return Long.format(milliseconds); // '23 juli 2020 om 12:01'
-  if (style === 'medium') return Medium.format(milliseconds); // '23 juli 2020'
-  if (style === 'axis')
-    return `${Day.format(milliseconds)} ${MonthShort.format(milliseconds)}`; // '23 jul.'
-  if (style === 'weekday-medium') return WeekdayMedium.format(milliseconds);
-
-  /* Relative date formatting is disabled for server-side rendering */
-  if (style === 'relative' && typeof window !== 'undefined') {
-    if (isToday(milliseconds)) return siteText.utils.date_today;
-    if (isYesterday(milliseconds)) return siteText.utils.date_yesterday;
-    if (isDayBeforeYesterday(milliseconds))
-      return siteText.utils.date_day_before_yesterday;
-  }
-
-  return DayMonth.format(milliseconds);
+  return formatDate(new Date(milliseconds), style);
 }
 
-export function formatDateFromString(
-  sanityDate: string,
-  style?: formatStyle
-): string {
-  return formatDateFromMilliseconds(new Date(sanityDate).getTime(), style);
+/**
+ * This formatting-cache will improve date formatting performance in
+ * I̶n̶t̶e̶r̶n̶e̶t̶ ̶E̶x̶p̶l̶o̶r̶e̶r̶ Safari.
+ * Formatting a date could easily take 20ms+, this is now reduced to < 1ms.
+ */
+const formatCache: Record<string, string> = {};
+
+export function formatDate(
+  dateOrTimestamp: Date | number,
+  style: formatStyle = 'day-month'
+) {
+  const date =
+    dateOrTimestamp instanceof Date
+      ? dateOrTimestamp
+      : new Date(dateOrTimestamp as number);
+
+  const cacheKey = `${date.getTime()}-${style}`;
+  const dateCached = formatCache[cacheKey];
+
+  if (dateCached) return dateCached;
+
+  const formattedDate = getFormattedDate(date, style);
+  formatCache[cacheKey] = formattedDate;
+
+  return formattedDate;
+}
+
+function getFormattedDate(date: Date, style: formatStyle) {
+  switch (style) {
+    case 'time': // '09:24'
+      return Time.format(date);
+
+    case 'iso': // '2020-07-23T10:01:16.000Z'
+      return new Date(date).toISOString();
+
+    case 'long': // '23 juli 2020 om 12:01'
+      return Long.format(date);
+
+    case 'medium': // '23 juli 2020'
+      return Medium.format(date);
+
+    case 'axis': // '23 jul.'
+      return `${Day.format(date)} ${MonthShort.format(date)}`;
+
+    case 'weekday-medium':
+      return WeekdayMedium.format(date);
+
+    case 'relative':
+      return typeof window === 'undefined'
+        ? DayMonth.format(date)
+        : isToday(date)
+        ? siteText.utils.date_today
+        : isYesterday(date)
+        ? siteText.utils.date_yesterday
+        : isDayBeforeYesterday(date)
+        ? siteText.utils.date_day_before_yesterday
+        : DayMonth.format(date);
+
+    default:
+      return DayMonth.format(date);
+  }
 }

@@ -61,6 +61,7 @@ const hiddenDocTypes = [
   'sewerPage',
   'vaccinationsPage',
   'toegankelijkheid',
+  'escalationLevelPage',
 ];
 
 export default () =>
@@ -102,6 +103,12 @@ export default () =>
         BsCardChecklist,
         'Cijferverantwoording',
         'cijferVerantwoording'
+      ),
+      addListItem(
+        StructureBuilder,
+        RiPagesFill,
+        'Inschaling risiconiveau',
+        'escalationLevelPage'
       ),
       addListItem(StructureBuilder, RiPagesFill, 'Sterfte', 'deceasedPage'),
       addListItem(
