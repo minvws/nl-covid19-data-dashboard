@@ -245,7 +245,6 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
           }}
         >
           <Box>
-            {' '}
             <ParentSize>
               {({ width }) => (
                 <AreaChart<
@@ -328,9 +327,9 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             />
             <Legenda
               items={Object.keys(colors.data.vaccines).map((key) => ({
-                label: text.data.vaccination_chart.product_names[key as any],
+                label: (text.data.vaccination_chart.product_names as any)[key],
                 color: `data.vaccines.${key}`,
-                shape: 'line',
+                shape: 'square',
               }))}
             />
           </Box>
@@ -429,7 +428,7 @@ function HatchedSquare() {
             y1="0"
             x2="0"
             y2="5"
-            style={{ stroke: 'black', strokeWidth: 2 }}
+            style={{ stroke: 'black', strokeWidth: 3 }}
           />
         </pattern>
       </defs>
