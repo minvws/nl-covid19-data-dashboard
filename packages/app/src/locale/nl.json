@@ -2518,8 +2518,8 @@
       "bronnen": {
         "rivm": {
           "download": "",
-          "text": "RIVM",
-          "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/8a72d78a-fcf8-4882-b0ab-cd594961a267?tab=relations"
+          "text": "CoronaMelder",
+          "href": "https://github.com/minvws/nl-covid19-notification-app-statistics"
         }
       }
     },

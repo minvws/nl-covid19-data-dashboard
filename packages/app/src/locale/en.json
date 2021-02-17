@@ -2452,12 +2452,12 @@
     "positieve_testen": {
       "title": "",
       "value_annotation": "",
-      "description": ""
+      "description": "This figure shows how many people have tested positive per 100,000 residents in the past 7 days. The bar shows the level of severity of this figure. "
     },
     "ziekenhuisopnames": {
-      "title": "",
-      "value_annotation": "",
-      "description": ""
+      "title": "Hospital admissions (including ICU)",
+      "value_annotation": "per million residents per week",
+      "description": "This figure shows how many people from this safety region have been admitted to the hospital with COVID-19 in the past 7 days (per million residents). The bar shows the level of severity of this figure."
     },
     "types": {
       "1": {
@@ -2507,10 +2507,10 @@
   },
   "corona_melder_app": {
     "header": {
-      "category": "",
+      "category": "Prevention",
       "title": "Use of the CoronaMelder app",
       "description": "The CoronaMelder app has been developed to help fight the spread of coronavirus. The app keeps track of when users have been within close range of one another for a longer period of time. If a CoronaMelder user tests positive for COVID-19, they can choose to alert other app users. App users who get an alert can then get tested and avoid unknowingly infecting others.",
-      "datums": "",
+      "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
       "reference": {
         "text": "Read more about the CoronaMelder app in the explanation of the presented data.",
         "href": "/verantwoording#coronamelder"
@@ -2518,8 +2518,8 @@
       "bronnen": {
         "rivm": {
           "download": "",
-          "text": "",
-          "href": ""
+          "text": "CoronaMelder",
+          "href": "https://github.com/minvws/nl-covid19-notification-app-statistics"
         }
       }
     },
