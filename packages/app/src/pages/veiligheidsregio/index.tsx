@@ -35,7 +35,7 @@ const SafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
 
   const goToSafetyRegion = createSelectRegionHandler(
     router,
-    'maatregelen',
+    'risiconiveau',
     !breakpoints.md
   );
 
