@@ -2,7 +2,7 @@ import css from '@styled-system/css';
 import { Fragment, FunctionComponent } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components-styled/base';
-import { Image } from '~/components-styled/image';
+import { SanityImage } from '~/components-styled/cms/sanity-image';
 import { MaxWidth } from '~/components-styled/max-width';
 import { getImageProps } from '~/lib/sanity';
 import { ImageBlock, RichContentImageBlock } from '~/types/cms';
@@ -12,6 +12,13 @@ interface ContentImageProps {
   contentWrapper?: FunctionComponent;
   sizes: number[][] | undefined;
 }
+
+const SanityImageTile = styled(SanityImage)(
+  css({
+    borderRadius: 1,
+    boxShadow: 'tile',
+  })
+);
 
 export function ContentImage({
   node,
@@ -34,13 +41,8 @@ export function ContentImage({
           display="inline-block"
           maxWidth={980}
         >
-          <Image
-            {...getImageProps(node, {
-              sizes,
-            })}
-            borderRadius={1}
-            boxShadow="tile"
-          />
+          <SanityImageTile {...getImageProps(node, { sizes })} />
+
           {caption}
         </Box>
       </MaxWidth>
@@ -48,7 +50,8 @@ export function ContentImage({
   ) : (
     <ContentWrapper>
       <Box as="figure" role="group" spacing={3} my={2} textAlign="center">
-        <Image {...getImageProps(node, { sizes })} />
+        <SanityImage {...getImageProps(node, { sizes })} />
+
         {caption}
       </Box>
     </ContentWrapper>

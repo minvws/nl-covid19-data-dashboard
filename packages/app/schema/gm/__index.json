@@ -10,6 +10,7 @@
     "code",
     "tested_overall",
     "hospital_nice",
+    "deceased_rivm",
     "difference"
   ],
   "properties": {
@@ -27,6 +28,9 @@
     "code": {
       "type": "string",
       "const": { "$data": "1/proto_name" }
+    },
+    "deceased_rivm": {
+      "$ref": "deceased_rivm.json"
     },
     "difference": {
       "$ref": "__difference.json"

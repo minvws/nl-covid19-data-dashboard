@@ -1,13 +1,11 @@
 import css from '@styled-system/css';
 import { useRouter } from 'next/router';
-import Maatregelen from '~/assets/maatregelen.svg';
 import { AnchorTile } from '~/components-styled/anchor-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiSection } from '~/components-styled/kpi-section';
 import { LockdownTable } from '~/domain/restrictions/lockdown-table';
 import { TileList } from '~/components-styled/tile-list';
 import { Heading } from '~/components-styled/typography';
-// import { EscalationLevel } from '~/components/restrictions/type';
 import { SEOHead } from '~/components-styled/seo-head';
 import { Box } from '~/components-styled/base/box';
 import { FCWithLayout } from '~/domain/layout/layout';
@@ -22,10 +20,8 @@ import {
   createGetContent,
   getVrData,
 } from '~/static-props/get-data';
-import theme from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { RichContent } from '~/components-styled/cms/rich-content';
-// import { useEscalationLevel } from '~/utils/use-escalation-level';
 
 export { getStaticPaths } from '~/static-paths/vr';
 
@@ -98,8 +94,6 @@ const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
       />
       <TileList>
         <ContentHeader
-          category={siteText.veiligheidsregio_layout.headings.algemeen}
-          icon={<Maatregelen fill={theme.colors.restrictions} />}
           title={replaceVariablesInText(
             siteText.veiligheidsregio_maatregelen.titel,
             {

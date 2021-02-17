@@ -126,18 +126,20 @@ export function Marker<T extends TimestampedValue>(props: MarkerProps<T>) {
         <LineContainer
           style={{
             top: 'calc(100% + 5px)',
-            left: data[0].x,
+            // -1 makes it align better, not sure why
+            left: data[0].x - 1,
           }}
         >
           <DottedLine
             indicatorColor={primaryColor}
             style={{
-              bottom: padding.top,
+              // +10 makes it align better, not sure why
+              bottom: padding.top + 10,
               height: `${height - topY - (padding.top + padding.bottom)}px`,
             }}
           />
           <Label>
-            <Text fontSize={0} fontWeight="bold" m={0}>
+            <Text fontSize={12} fontWeight="bold" m={0}>
               {formatLabel(data[0].data)}
             </Text>
           </Label>
@@ -162,5 +164,5 @@ export function Marker<T extends TimestampedValue>(props: MarkerProps<T>) {
 }
 
 function defaultFormatLabel<T>(data: T & TrendValue): string {
-  return formatDateFromMilliseconds(data.__date.getTime());
+  return formatDateFromMilliseconds(data.__date.getTime(), 'axis');
 }

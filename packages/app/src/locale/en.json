@@ -153,7 +153,7 @@
     "barscale_titel": "Hospital admissions reported per day",
     "extra_uitleg": "Number of people with COVID-19 admitted to hospital daily. This figure shows how many hospital admissions are reported per day, including patients from outside the hospital admitted directly to the ICU. It may include hospital admissions that occurred in previous days.",
     "map_titel": "Residence of patients admitted to hospital",
-    "map_toelichting": "This map shows, by municipality or safety region, where people live who have been admitted to hospital with COVID-19. Please note that people may have been admitted to a hospital located somewhere else in the Netherlands; the map therefore does not show admission numbers per hospital. The figures here reflect the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE). Observe: from February 5 the color scale of the map has been changed to better show municipalities or regions that have not reported hospital admissions.",
+    "map_toelichting": "This map shows, by municipality or safety region, where people live who have been admitted to hospital with COVID-19. Please note that people may have been admitted to a hospital located somewhere else in the Netherlands; the map therefore does not show admission numbers per hospital. The figures here reflect the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE).",
     "linechart_titel": "Progression in hospital admissions over time",
     "barscale_screenreader_text": "{{value}} hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
     "chloropleth_legenda": {
@@ -218,7 +218,7 @@
     "barscale_toelichting": "This figure shows how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
     "kpi_titel": "Number of confirmed cases",
-    "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.\n\nPlease note: Due to the winter weather, few people were tested on 7 and 8 February. This affects the numbers for the following days.",
+    "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.",
     "map_titel": "Distribution of confirmed cases in the Netherlands",
     "map_toelichting": "These maps show how many confirmed cases of COVID-19 were reported yesterday per 100,000 inhabitants.",
     "linechart_titel": "Progression over time",
@@ -238,20 +238,6 @@
       "80 to 90",
       "90+"
     ],
-    "cluster_datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "cluster_bron": {
-      "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
-      "text": "RIVM"
-    },
-    "cluster_titel": "Clusters of confirmed cases",
-    "cluster_toelichting": "---",
-    "cluster_barscale_titel": "Number of active clusters",
-    "cluster_barscale_toelichting": "---",
-    "cluster_barscale_screenreader_text": "{{value}} active clusters.",
-    "cluster_gemiddelde_titel": "Average size of active clusters",
-    "cluster_gemiddelde_toelichting": "---.",
-    "cluster_linechart_titel": "Progression of active clusters over time",
-    "cluster_linechart_toelichting": "---",
     "chloropleth_legenda": {
       "titel": "Number per 100.000 inhabitants",
       "geen_meldingen": "No confirmed cases"
@@ -659,7 +645,8 @@
     "gisteren": "Yesterday",
     "vandaag": "Today",
     "read_more": "Read more",
-    "absolute_date_template": "on {{date}}"
+    "absolute_date_template": "on {{date}}",
+    "inwoners": ""
   },
   "seoHead": {
     "default_description": "Information on the development of the coronavirus in The Netherlands.",
@@ -698,7 +685,8 @@
       "gedrag": "Behaviour",
       "kwetsbare_groepen": "Vulnerable groups",
       "maatregelen": "Measures",
-      "algemeen": "General"
+      "algemeen": "General",
+      "inschaling": ""
     }
   },
   "veiligheidsregio_metadata": {
@@ -718,7 +706,7 @@
     "barscale_titel": "Hospital admissions reported per day",
     "extra_uitleg": "Number of people from this safety region with COVID-19 admitted to hospital on a daily basis. This figure shows how many hospital admissions are reported per day, including patients from outside the hosptial admitted directly to the ICU. Patients can be admitted to hospitals in other regions.",
     "map_titel": "Distribution of hospital admissions in {{safetyRegion}}",
-    "map_toelichting": "This map shows, by municipality or safety region, where people live who have been admitted to hospital with COVID-19. Please note that people may have been admitted to a hospital located somewhere else in the Netherlands; the map therefore does not show admission numbers per hospital. The figures here reflect the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE). Observe: from February 5 the color scale of the map has been changed to better show municipalities or regions that have not reported hospital admissions.",
+    "map_toelichting": "This map shows, by municipality or safety region, where people live who have been admitted to hospital with COVID-19. Please note that people may have been admitted to a hospital located somewhere else in the Netherlands; the map therefore does not show admission numbers per hospital. The figures here reflect the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE).",
     "linechart_titel": "Progression in hospital admissions over time",
     "barscale_screenreader_text": "{{value}} hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
     "bron": {
@@ -758,7 +746,7 @@
     "barscale_toelichting": "This figure shows how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
     "kpi_titel": "Number of confirmed cases",
-    "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.\n\nPlease note: Due to the winter weather, few people were tested on 7 and 8 February. This affects the numbers for the following days.",
+    "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.",
     "map_titel": "Distribution of confirmed cases in {{safetyRegion}}",
     "map_toelichting": "This map shows how many confirmed cases of COVID-19 were reported yesterday in the municipalities of this safety region per 100,000 inhabitants.",
     "linechart_titel": "Progression over time",
@@ -777,21 +765,6 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
     },
-    "cluster_datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "cluster_bron": {
-      "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
-      "text": "RIVM",
-      "dowload": ""
-    },
-    "cluster_titel": "Clusters of confirmed cases",
-    "cluster_toelichting": "---",
-    "cluster_barscale_titel": "Number of active clusters",
-    "cluster_barscale_toelichting": "---",
-    "cluster_barscale_screenreader_text": "{{value}} active clusters.",
-    "cluster_gemiddelde_titel": "Average size of active clusters",
-    "cluster_gemiddelde_toelichting": "---.",
-    "cluster_linechart_titel": "Progression of active clusters over time",
-    "cluster_linechart_toelichting": "---",
     "metadata": {
       "title": "Confirmed cases in {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
       "description": "Overview of confirmed cases in safety region {{safetyRegionName}}."
@@ -851,7 +824,9 @@
       }
     },
     "kpi_titel": "Average number of coronavirus particles per 100.000 people",
-    "bar_chart_accessibility_description": ""
+    "bar_chart_accessibility_description": "",
+    "display_outliers": "",
+    "hide_outliers": ""
   },
   "gemeente_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Hospital admissions",
@@ -862,7 +837,7 @@
     "barscale_titel": "Hospital admissions reported per day",
     "extra_uitleg": "Number of people from this municipality with COVID-19 admitted to hospital on a daily basis. This figure shows how many hospital admissions are reported per day, including patients from outside the hosptial admitted directly to the ICU. Patients can be admitted to hospitals in other regions.",
     "map_titel": "Distribution of hospital admissions in safety region of {{municipality}}",
-    "map_toelichting": "This map shows, by municipality or safety region, where people live who have been admitted to hospital with COVID-19. Please note that people may have been admitted to a hospital located somewhere else in the Netherlands; the map therefore does not show admission numbers per hospital. The figures here reflect the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE). Observe: from February 5 the color scale of the map has been changed to better show municipalities or regions that have not reported hospital admissions.",
+    "map_toelichting": "This map shows, by municipality or safety region, where people live who have been admitted to hospital with COVID-19. Please note that people may have been admitted to a hospital located somewhere else in the Netherlands; the map therefore does not show admission numbers per hospital. The figures here reflect the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE).",
     "linechart_titel": "Progression in hospital admissions over time",
     "barscale_screenreader_text": "{{value}} hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
     "bron": {
@@ -902,7 +877,7 @@
     "barscale_toelichting": "This number shows how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
     "kpi_titel": "Number of confirmed cases",
-    "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.\n\nPlease note: Due to the winter weather, few people were tested on 7 and 8 February. This affects the numbers for the following days.",
+    "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.",
     "map_titel": "Distribution of confirmed cases in safety region of {{municipality}}",
     "map_toelichting": "This map shows how many confirmed cases of COVID-19 were reported yesterday in this municipality and other municipalities in the same safety region, per 100,000 inhabitants.",
     "linechart_titel": "Progression over time",
@@ -981,7 +956,9 @@
       }
     },
     "kpi_titel": "Average number of coronavirus particles per 100.000 people",
-    "bar_chart_accessibility_description": ""
+    "bar_chart_accessibility_description": "",
+    "display_outliers": "",
+    "hide_outliers": ""
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Risk level map of the Netherlands",
@@ -1057,7 +1034,7 @@
     "summary_link_cta": "Read more",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
     "bron": {
-      "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://data.rivm.nl/covid-19/COVID-19_uitgevoerde_testen.html",
       "text": "RIVM"
     },
     "toelichting": "The figures below provide information on the overall number of tests conducted at GGD test locations and the percentage of positive results. An increase in the percentage of positive tests could be an indication that transmission of the virus is on the rise. Please note that most but not all tests are conducted by the GGD. This means that the total number of people who have tested positive differs from the number of people who have tested positive at GGD test locations. ",
@@ -1078,8 +1055,8 @@
     },
     "bronnen": {
       "rivm": {
-        "download": "",
-        "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+        "download": "https://data.rivm.nl/covid-19/COVID-19_uitgevoerde_testen.csv",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_uitgevoerde_testen.html",
         "text": "RIVM"
       }
     }
@@ -1095,7 +1072,7 @@
     "summary_link_cta": "Read more",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
     "bron": {
-      "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://data.rivm.nl/covid-19/COVID-19_uitgevoerde_testen.html",
       "text": "RIVM"
     },
     "toelichting": "The figures below provide information on the overall number of tests conducted at GGD test locations and the percentage of positive results. An increase in the percentage of positive tests could be an indication that transmission of the virus is on the rise. Please note that most but not all tests are conducted by the GGD. This means that the total number of people who have tested positive differs from the number of people who have tested positive at GGD test locations. ",
@@ -1107,7 +1084,7 @@
     "linechart_percentage_titel": "Percentage of GGD positive test results, over time",
     "linechart_percentage_toelichting": "This graph shows the daily percentage of tests conducted by the GGD with positive results in relation to the total number of GGD tests conducted that day for which the results are known. The data is organised based on the date on which the tests were conducted by the GGD. On average it takes one to two days before test results are known.",
     "linechart_totaltests_titel": "Number of test results over time",
-    "linechart_totaltests_toelichting": "This graph shows the daily number of tests conducted at GGD test locations for which the results are known and the number of known results that are positive, over time. The data is organised based on the date on which the tests were conducted by the GGD. On average it takes one to two days before test results are known.\n",
+    "linechart_totaltests_toelichting": "This graph shows the daily number of tests conducted at GGD test locations for which the results are known and the number of known results that are positive, over time. The data is organised based on the date on which the tests were conducted by the GGD. On average it takes one to two days before test results are known.",
     "linechart_totaltests_legend_label": "GGD tests for which results are known",
     "linechart_positivetests_legend_label": "GGD tests with a positive result",
     "reference": {
@@ -1116,8 +1093,8 @@
     },
     "bronnen": {
       "rivm": {
-        "download": "",
-        "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+        "download": "https://data.rivm.nl/covid-19/COVID-19_uitgevoerde_testen.csv",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_uitgevoerde_testen.html",
         "text": "RIVM"
       }
     }
@@ -1427,7 +1404,7 @@
   },
   "infected_age_groups": {
     "title": "Distribution by age",
-    "description": "The blue (right) bars in this graph show which age group positive tested persons belong to. The gray (left) bars show how large each age group is in relation to the entire Dutch population. The blue and gray bars together show whether age groups have relatively more or less positive tested persons. For example: 10% of all positive tested persons are in their thirties (blue bar) and 14% of all Dutch people are in their thirties (gray bar). In this example, the age group thirties has relatively fewer positive tested people. The chart is updated daily and covers only the most recently reported cases.",
+    "description": "The blue (right) bars in this graph show which age group positive tested persons belong to. The gray (left) bars show how large each age group is in relation to the entire Dutch population. The blue and gray bars together show whether age groups have relatively more or less positive tested persons. For example: 16% of all positive tested persons are in their twenties (blue bar) and 13% of all Dutch people are in their twenties (gray bar). In this example, the age group twenties has relatively more positive tested people. The chart is updated daily and covers only the most recently reported cases.",
     "example": "For example: of all positive tested people is {{infectedPercentage}} between {{ageGroupRange}} years old. Of all Dutch people is {{ageGroupPercentage}} between {{ageGroupRange}} years old. ",
     "graph": {
       "age_group_percentage_title": "Distribution of age groups in the Netherlands",
@@ -1437,7 +1414,7 @@
       "age_group_range_tooltip": "{{ageGroupRange}} years old. ",
       "accessibility_description": "Graph with percentages for the distribution of the population and the distribution of positive tested age groups.",
       "clipped_value_message": "This value is higher than displayed in the figure.",
-      "value_percentage_title": "Confirmed cases by agegroup",
+      "value_percentage_title": "Confirmed cases by age group",
       "value_percentage_tooltip": "of the confirmed cases are {{ageGroupRange}} years old"
     }
   },
@@ -1804,11 +1781,11 @@
       "text": "Read more in 'explanation of the data presented'"
     },
     "cbs_message": {
-      "title": "Mortality slightly lower in week 4",
-      "published_text": "Date of publication: Friday 4 December",
-      "message": "In week 4 (25 to 31 January 2021 inclusive), estimated mortality stood at 3,750. This is over 300 deaths in excess of the expected number for this period. The number of deaths in week 3 stood at 3,823. Statistics Netherlands (CBS) reports this based on the provisional weekly figures on mortality. Since week 39 of 2020, weekly mortality has been higher than expected. During the second epidemic wave up to week 4 of 2021 inclusive, nearly 68 thousand deaths were recorded. This is 9.6 thousand more than the expected mortality in this period. Estimated mortality for week 4 is just within the range of expected mortality.",
+      "title": "Mortality declining further in week 5",
+      "published_text": "Date of publication: Friday 12 February",
+      "message": "In week 5 (1 through 7 February 2021 inclusive), estimated mortality stood at 3,600. This is 150 more than the number expected for this period. In week 4, the number of deaths stood at 3,678. Statistics Netherlands (CBS) reports this based on the provisional weekly figures on mortality. Since week 39 of 2020, weekly mortality has been higher than expected. During the second epidemic wave up to week 5 of 2021 inclusive, altogether more than 71 thousand deaths were recorded. This is 9.7 thousand more than expected mortality in this period. The estimated mortality in week 5 is slightly above the expected mortality in this period.",
       "link": {
-        "href": "https://www.cbs.nl/en-gb/news/2021/05/mortality-slightly-lower-in-week-4",
+        "href": "https://www.cbs.nl/en-gb/news/2021/06/mortality-declining-further-in-week-5",
         "text": "Website CBS"
       }
     },
@@ -1952,6 +1929,8 @@
     }
   },
   "accessibility": {
+    "link_source": "data source of \"{{subject}}\".",
+    "link_download": "download the data source of \"{{subject}}\".",
     "grafieken": {
       "reproductiegetal_verloop": "This graph shows the progression of the reproduction number over time.",
       "ziekenhuisopnames": "This graph shows the progression in hospital admissions over time.",
@@ -2002,8 +1981,8 @@
     "title": "COVID-19 vaccinations",
     "description": "Vaccination is the most important step towards getting life back to normal. The Netherlands began vaccinating people against COVID-19 on 6 January 2021. Eventually, the vaccine will be offered to everyone aged 18 and over. This page shows how many doses of vaccine have been administered and how many doses are on their way.",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "date_unix": "1612959288",
-    "date_of_insertion_unix": "1612959288",
+    "date_unix": "1613472174",
+    "date_of_insertion_unix": "1613472174",
     "reference": {
       "href": "/verantwoording#vaccination",
       "text": "Read more about the source of the data on vaccination in the explanation of the presented data."
@@ -2039,27 +2018,27 @@
       "difference": "",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "626146",
-          "date_unix": "1612959288",
-          "date_of_insertion_unix": "1612959288"
+          "total_vaccinated": "800905",
+          "date_unix": "1613472174",
+          "date_of_insertion_unix": "1613472174"
         }
       },
       "kpi_total": {
         "title": "Number of doses administered",
-        "value": "460252",
+        "value": "623539",
         "description": "",
-        "date_of_report_unix": "1612959288",
-        "date_of_insertion_unix": "1612959288",
+        "date_of_report_unix": "1613472174",
+        "date_of_insertion_unix": "1613472174",
         "administered": [
           {
-            "value": "366436",
+            "value": "528988",
             "description": "reported by GGD-GHOR",
-            "report_date": "Reported number till 9 February"
+            "report_date": "Reported number till 15 February"
           },
           {
-            "value": "93816",
+            "value": "94551",
             "description": "reported by LNAZ",
-            "report_date": "Reported number till 9 February"
+            "report_date": "Reported number till 15 February"
           },
           {
             "value": "",
@@ -2083,25 +2062,25 @@
         "first_tab_title": "Calculated number",
         "second_tab_title": "Reported number",
         "tab_total_estimated": {
-          "value": "626146",
+          "value": "800905",
           "description": "",
-          "date_of_report_unix": "1612959288",
-          "date_of_insertion_unix": "1612959288",
+          "date_of_report_unix": "1613472174",
+          "date_of_insertion_unix": "1613472174",
           "administered": [
             {
-              "value": "366436",
+              "value": "528988",
               "description": "administered by GGDs",
-              "report_date": "Reported number till 9 February"
+              "report_date": "Reported number till 15 February"
             },
             {
-              "value": "93816",
+              "value": "94551",
               "description": "administered in hospitals",
-              "report_date": "Reported number till 9 February"
+              "report_date": "Reported number till 15 February"
             },
             {
-              "value": "165894",
+              "value": "177366",
               "description": "administered in long-term care institutions",
-              "report_date": "Calculated number till 9 February"
+              "report_date": "Calculated number till 15 February"
             },
             {
               "value": "",
@@ -2179,7 +2158,10 @@
     },
     "grafiek_draagvlak": {
       "titel": "Willingness to be vaccinated",
-      "omschrijving": "This graph shows the percentage of the population that wishes to be vaccinated against COVID-19. The figure is taken from a survey where people are asked if they wish to be vaccinated. The survey is conducted every three weeks."
+      "omschrijving": "This graph shows the percentage per age group and in total of the population that wishes to be vaccinated against COVID-19. The figures are taken from a survey where people are asked if they wish to be vaccinated. The survey is conducted every three weeks.",
+      "kpi_omschrijving": "",
+      "tooltip_gemiddeld": "",
+      "leeftijd_jaar": ""
     }
   },
   "editorial_detail": {
@@ -2210,7 +2192,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of the Netherlands",
-      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions.  \n\n**There are specific measures for each risk level. These are explained in the road map drafted by the government. There is a national lockdown until at least March 2. [Click here to view the lockdown measures](landelijk/maatregelen).**"
+      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\nThere are specific measures for each risk level. These are explained in the road map drafted by the government. **There is a national lockdown until at least March 2. [Click here to view the lockdown measures](/landelijk/maatregelen).**"
     },
     "data_sitemap_titel": "Topics on this dashboard",
     "data_sitemap_toelichting": "Go directly to the following topics:",
@@ -2297,7 +2279,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of The Netherlands",
-      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions.  \n\n**There are specific measures for each risk level. These are explained in the road map drafted by the government. There is a national lockdown until at least March 2. [Click here to view the lockdown measures](landelijk/maatregelen).**"
+      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\nThere are specific measures for each risk level. These are explained in the road map drafted by the government. **There is a national lockdown until at least March 2. [Click here to view the lockdown measures](/landelijk/maatregelen).**"
     },
     "risoconiveau_maatregelen": {
       "title": "Risk level & measures",
@@ -2370,7 +2352,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of the Netherlands",
-      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions.  \n\n**There are specific measures for each risk level. These are explained in the road map drafted by the government. There is a national lockdown until at least March 2. [Click here to view the lockdown measures](landelijk/maatregelen).**"
+      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\nThere are specific measures for each risk level. These are explained in the road map drafted by the government. **There is a national lockdown until at least March 2. [Click here to view the lockdown measures](/landelijk/maatregelen).**"
     },
     "risoconiveau_maatregelen": {
       "title": "Risk level & measures",
@@ -2441,5 +2423,72 @@
     "description": "Information on the accessibility of the COVID-19 Dashboard.",
     "url": "https://coronadashboard.government.nl/verantwoording"
   },
-  "article_strip_title": "More about this topic"
+  "article_strip_title": "More about this topic",
+  "vr_risiconiveau": {
+    "datums": "",
+    "reference": {
+      "href": "",
+      "text": ""
+    },
+    "metadata": {
+      "title": "",
+      "description": ""
+    },
+    "titel": "",
+    "pagina_toelichting": "",
+    "current_escalation_level": "",
+    "bronnen": {
+      "rivm_positieve_testen": {
+        "download": "",
+        "href": "",
+        "text": ""
+      },
+      "rivm_ziekenhuisopnames": {
+        "download": "",
+        "href": "",
+        "text": ""
+      }
+    },
+    "positieve_testen": {
+      "title": "",
+      "value_annotation": "",
+      "description": ""
+    },
+    "ziekenhuisopnames": {
+      "title": "",
+      "value_annotation": "",
+      "description": ""
+    }
+  },
+  "gemeente_sterfte": {
+    "titel_sidebar": "",
+    "titel_kpi": "",
+    "metadata": {
+      "title": "",
+      "description": ""
+    },
+    "section_deceased_rivm": {
+      "title": "",
+      "description": "",
+      "datums": "",
+      "bronnen": {
+        "rivm": {
+          "href": "",
+          "text": "",
+          "download": ""
+        }
+      },
+      "reference": {
+        "href": "",
+        "text": ""
+      },
+      "kpi_covid_daily_title": "",
+      "kpi_covid_daily_description": "",
+      "kpi_covid_total_title": "",
+      "kpi_covid_total_description": "",
+      "line_chart_covid_daily_title": "",
+      "line_chart_covid_daily_description": ""
+    },
+    "kpi_titel": ""
+  }
 }

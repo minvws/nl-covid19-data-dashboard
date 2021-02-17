@@ -135,6 +135,7 @@ export function getImageProps<T extends ImageBlock>(
     alt,
     width,
     height,
+    extension: asset.extension,
   };
 }
 
