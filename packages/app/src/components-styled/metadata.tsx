@@ -32,9 +32,7 @@ export function Metadata({ date, source }: MetadataProps) {
       <Text my={0} color="annotation" fontSize={1}>
         {dateString}
         {dateString && source ? ' · ' : null}
-        {source ? (
-          <>{`${locale.common.metadata.source}: ${source.text}`}</>
-        ) : null}
+        {source ? `${locale.common.metadata.source}: ${source.text}` : null}
       </Text>
     </Box>
   );

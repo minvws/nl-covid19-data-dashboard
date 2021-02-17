@@ -122,7 +122,7 @@ function MetadataItem(props: MetadataItemProps) {
                 <VisuallyHidden>{accessibilityText}</VisuallyHidden>
               </ExternalLink>
             )}
-            {!item.href && <>{item.text}</>}
+            {!item.href && item.text}
           </Fragment>
         ))}
       </Text>
