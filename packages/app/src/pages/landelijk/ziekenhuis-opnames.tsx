@@ -41,7 +41,10 @@ import {
   formatDateFromMilliseconds,
   formatDateFromSeconds,
 } from '~/utils/formatDate';
-import { getTrailingDateRange } from '~/utils/get-trailing-date-range';
+import {
+  getTrailingDateRange,
+  DateRange,
+} from '~/utils/get-trailing-date-range';
 
 const text = siteText.ziekenhuisopnames_per_dag;
 const graphDescriptions = siteText.accessibility.grafieken;
