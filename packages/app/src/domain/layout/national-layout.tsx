@@ -5,7 +5,6 @@ import Arts from '~/assets/arts.svg';
 import ElderlyIcon from '~/assets/elderly.svg';
 import Gedrag from '~/assets/gedrag.svg';
 import Gehandicaptenzorg from '~/assets/gehandicapte-zorg.svg';
-import Maatregelen from '~/assets/maatregelen.svg';
 import ReproIcon from '~/assets/reproductiegetal.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
@@ -23,7 +22,6 @@ import { AppContent } from '~/components-styled/layout/app-content';
 import { SidebarMetric } from '~/components-styled/sidebar-metric';
 import { Layout } from '~/domain/layout/layout';
 import siteText from '~/locale/index';
-import theme from '~/style/theme';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { Box } from '~/components-styled/base';
 interface NationalLayoutProps {
@@ -106,7 +104,6 @@ function NationalLayout(props: NationalLayoutProps) {
                       ? { menu: '0' }
                       : { menu: '1' },
                   }}
-                  icon={<Maatregelen fill={theme.colors.restrictions} />}
                   title={siteText.nationaal_maatregelen.titel_sidebar}
                   subtitle={siteText.nationaal_maatregelen.subtitel_sidebar}
                 />
@@ -208,7 +205,7 @@ function NationalLayout(props: NationalLayoutProps) {
                   {/**
                    * A next step could be to embed the SidebarMetric component in an even
                    * higher-level component which would also include the link and the
-                   * TitleWithIcon, seeing that both appear to use the same localeTextKey,
+                   * Title, seeing that both appear to use the same localeTextKey,
                    * and it would make sense to enforce the existence of standardized
                    * properties like title_sidebar.
                    */}

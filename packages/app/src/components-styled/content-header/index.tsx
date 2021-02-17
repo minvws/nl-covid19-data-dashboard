@@ -30,7 +30,7 @@ const HeaderBox = styled.header<{
 }>((x) =>
   css({
     mt: 0,
-    ml: x.skipLinkAnchor ? '-100vw' : x.hasIcon ? undefined : 5,
+    ml: x.skipLinkAnchor ? '-100vw' : undefined,
     pl: x.skipLinkAnchor ? '100vw' : undefined,
     pointerEvents: x.skipLinkAnchor ? 'none' : 'auto',
   })
@@ -56,14 +56,16 @@ const Header = (props: HeaderProps) => {
   );
 };
 
-export const CategoryHeading = styled(Heading)<{ hide: boolean }>(
+export const CategoryHeading = styled(Heading)<{
+  hide: boolean;
+  hasIcon: boolean;
+}>(
   css({
     fontSize: 3,
     fontWeight: 'bold',
     color: 'category',
     margin: 0,
     marginBottom: 1,
-    marginLeft: 5,
   }),
   (x) =>
     x.hide &&
@@ -74,6 +76,11 @@ export const CategoryHeading = styled(Heading)<{ hide: boolean }>(
       width: '1px',
       height: '1px',
       overflow: 'hidden',
+    }),
+  (x) =>
+    x.hasIcon &&
+    css({
+      marginLeft: 5,
     })
 );
 
@@ -123,11 +130,13 @@ export function ContentHeader(props: ContentHeaderProps) {
     id,
   } = props;
 
+  const hasIcon = icon !== undefined;
+
   return (
-    <Header id={id} skipLinkAnchor={skipLinkAnchor} hasIcon={!!icon}>
+    <Header id={id} skipLinkAnchor={skipLinkAnchor} hasIcon={hasIcon}>
       <Box px={[3, null, 0]} spacing={1}>
         {category && (
-          <CategoryHeading level={1} hide={hideCategory}>
+          <CategoryHeading level={1} hide={hideCategory} hasIcon={hasIcon}>
             {category}
             {screenReaderCategory && (
               <AriaInlineText> - {screenReaderCategory}</AriaInlineText>
@@ -141,16 +150,26 @@ export function ContentHeader(props: ContentHeaderProps) {
             headingLevel={headingLevel}
           />
         ) : (
-          <Heading level={headingLevel} fontSize={4}>
-            {title}
-          </Heading>
+          <Box
+            display="flex"
+            flexDirection="row"
+            flexWrap="nowrap"
+            alignItems="center"
+            mb={-2}
+          >
+            <Box>
+              <Heading level={headingLevel} mb={0}>
+                {title}
+              </Heading>
+            </Box>
+          </Box>
         )}
 
         <Box
           spacing={3}
           display="flex"
           flexDirection={['column', null, null, null, 'row']}
-          ml={[null, null, null, 5]}
+          ml={[null, null, null, hasIcon ? 5 : null]}
         >
           {reference && (
             <ReferenceBox>

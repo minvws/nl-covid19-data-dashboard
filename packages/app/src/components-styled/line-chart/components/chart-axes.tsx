@@ -61,6 +61,7 @@ type ChartAxesProps = {
   componentCallback?: ComponentCallbackFunction;
   ariaLabelledBy?: string;
   dateSpanWidth: number;
+  yTickValues?: number[];
 };
 
 type AnyTickFormatter = (value: any) => string;
@@ -81,6 +82,7 @@ export const ChartAxes = memo(function ChartAxes({
   componentCallback = () => undefined,
   ariaLabelledBy,
   dateSpanWidth,
+  yTickValues,
 }: ChartAxesProps) {
   const bounds: ChartBounds = {
     width: width - padding.left - padding.right,
@@ -97,7 +99,7 @@ export const ChartAxes = memo(function ChartAxes({
   const yScale = scaleLinear({
     domain: yDomain,
     range: [bounds.height, 0],
-    nice: NUM_TICKS,
+    nice: yTickValues?.length || NUM_TICKS,
   });
 
   const scales = { xScale, yScale };
@@ -163,6 +165,7 @@ export const ChartAxes = memo(function ChartAxes({
             props: {
               scale: yScale,
               numTicks: NUM_TICKS,
+              tickValues: yTickValues,
               hideTicks: true,
               hideAxisLine: true,
               stroke: defaultColors.axis,

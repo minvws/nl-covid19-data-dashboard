@@ -645,7 +645,8 @@
     "gisteren": "Yesterday",
     "vandaag": "Today",
     "read_more": "Read more",
-    "absolute_date_template": "on {{date}}"
+    "absolute_date_template": "on {{date}}",
+    "inwoners": ""
   },
   "seoHead": {
     "default_description": "Information on the development of the coronavirus in The Netherlands.",
@@ -684,7 +685,8 @@
       "gedrag": "Behaviour",
       "kwetsbare_groepen": "Vulnerable groups",
       "maatregelen": "Measures",
-      "algemeen": "General"
+      "algemeen": "General",
+      "inschaling": ""
     }
   },
   "veiligheidsregio_metadata": {
@@ -822,7 +824,9 @@
       }
     },
     "kpi_titel": "Average number of coronavirus particles per 100.000 people",
-    "bar_chart_accessibility_description": ""
+    "bar_chart_accessibility_description": "",
+    "display_outliers": "",
+    "hide_outliers": ""
   },
   "gemeente_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Hospital admissions",
@@ -952,7 +956,9 @@
       }
     },
     "kpi_titel": "Average number of coronavirus particles per 100.000 people",
-    "bar_chart_accessibility_description": ""
+    "bar_chart_accessibility_description": "",
+    "display_outliers": "",
+    "hide_outliers": ""
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Risk level map of the Netherlands",
@@ -1408,7 +1414,7 @@
       "age_group_range_tooltip": "{{ageGroupRange}} years old. ",
       "accessibility_description": "Graph with percentages for the distribution of the population and the distribution of positive tested age groups.",
       "clipped_value_message": "This value is higher than displayed in the figure.",
-      "value_percentage_title": "Confirmed cases by agegroup",
+      "value_percentage_title": "Confirmed cases by age group",
       "value_percentage_tooltip": "of the confirmed cases are {{ageGroupRange}} years old"
     }
   },
@@ -1923,6 +1929,8 @@
     }
   },
   "accessibility": {
+    "link_source": "data source of \"{{subject}}\".",
+    "link_download": "download the data source of \"{{subject}}\".",
     "grafieken": {
       "reproductiegetal_verloop": "This graph shows the progression of the reproduction number over time.",
       "ziekenhuisopnames": "This graph shows the progression in hospital admissions over time.",
@@ -1942,9 +1950,7 @@
       "verwachte_leveringen": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks.",
       "vaccin_levering_en_prikken": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks.",
       "vaccinatie_draagvlak": "This graph shows the percentage of the population that wishes to be vaccinated against COVID-19."
-    },
-    "link_source": "",
-    "link_download": ""
+    }
   },
   "deceased_age_groups": {
     "title": "COVID-19 deaths by age",
@@ -2152,7 +2158,10 @@
     },
     "grafiek_draagvlak": {
       "titel": "Willingness to be vaccinated",
-      "omschrijving": "This graph shows the percentage of the population that wishes to be vaccinated against COVID-19. The figure is taken from a survey where people are asked if they wish to be vaccinated. The survey is conducted every three weeks."
+      "omschrijving": "This graph shows the percentage per age group and in total of the population that wishes to be vaccinated against COVID-19. The figures are taken from a survey where people are asked if they wish to be vaccinated. The survey is conducted every three weeks.",
+      "kpi_omschrijving": "",
+      "tooltip_gemiddeld": "",
+      "leeftijd_jaar": ""
     }
   },
   "editorial_detail": {
@@ -2414,5 +2423,72 @@
     "description": "Information on the accessibility of the COVID-19 Dashboard.",
     "url": "https://coronadashboard.government.nl/verantwoording"
   },
-  "article_strip_title": "More about this topic"
+  "article_strip_title": "More about this topic",
+  "vr_risiconiveau": {
+    "datums": "",
+    "reference": {
+      "href": "",
+      "text": ""
+    },
+    "metadata": {
+      "title": "",
+      "description": ""
+    },
+    "titel": "",
+    "pagina_toelichting": "",
+    "current_escalation_level": "",
+    "bronnen": {
+      "rivm_positieve_testen": {
+        "download": "",
+        "href": "",
+        "text": ""
+      },
+      "rivm_ziekenhuisopnames": {
+        "download": "",
+        "href": "",
+        "text": ""
+      }
+    },
+    "positieve_testen": {
+      "title": "",
+      "value_annotation": "",
+      "description": ""
+    },
+    "ziekenhuisopnames": {
+      "title": "",
+      "value_annotation": "",
+      "description": ""
+    }
+  },
+  "gemeente_sterfte": {
+    "titel_sidebar": "",
+    "titel_kpi": "",
+    "metadata": {
+      "title": "",
+      "description": ""
+    },
+    "section_deceased_rivm": {
+      "title": "",
+      "description": "",
+      "datums": "",
+      "bronnen": {
+        "rivm": {
+          "href": "",
+          "text": "",
+          "download": ""
+        }
+      },
+      "reference": {
+        "href": "",
+        "text": ""
+      },
+      "kpi_covid_daily_title": "",
+      "kpi_covid_daily_description": "",
+      "kpi_covid_total_title": "",
+      "kpi_covid_total_description": "",
+      "line_chart_covid_daily_title": "",
+      "line_chart_covid_daily_description": ""
+    },
+    "kpi_titel": ""
+  }
 }

@@ -14,12 +14,16 @@
     },
     "sewer__average": {
       "$ref": "#/definitions/diff_decimal"
+    },
+    "deceased_rivm__covid_daily": {
+      "$ref": "#/definitions/diff_integer"
     }
   },
   "required": [
     "tested_overall__infected_per_100k",
     "tested_overall__infected",
-    "hospital_nice__admissions_on_date_of_reporting"
+    "hospital_nice__admissions_on_date_of_reporting",
+    "deceased_rivm__covid_daily"
   ],
   "additionalProperties": false,
   "definitions": {

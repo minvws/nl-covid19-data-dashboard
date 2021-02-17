@@ -414,7 +414,7 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
 
             return (
               <>
-                {formatDateFromSeconds(x[0].date_unix, 'short')}
+                {formatDateFromSeconds(x[0].date_unix, 'day-month')}
                 <br />
                 <span
                   style={{
