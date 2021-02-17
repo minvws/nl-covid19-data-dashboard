@@ -1,6 +1,5 @@
 import { formatNumber, Municipal, Regionaal } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { Label } from '@visx/annotation';
 import { AxisBottom, AxisLeft } from '@visx/axis';
 import { localPoint } from '@visx/event';
 import { GridRows } from '@visx/grid';
