@@ -1,22 +1,22 @@
 /* eslint-disable react/no-multi-comp, react/no-did-mount-set-state */
-import React from "react";
-import PropTypes from "prop-types";
-import DefaultSelect from "part:@sanity/components/selects/default";
-import filters from "./filters.svg";
-import styles from "./ColorblindPreview.css";
+import React from 'react';
+import PropTypes from 'prop-types';
+import DefaultSelect from 'part:@sanity/components/selects/default';
+import filters from './filters.svg';
+import styles from './ColorblindPreview.css';
 
-import { assemblePreviewUrl } from "../assemble-preview-url";
+import { assemblePreviewUrl } from '../assemble-preview-url';
 
 const FILTER_ITEMS = [
-  { title: "Protanopia", value: "protanopia" },
-  { title: "Deuteranopia", value: "deuteranopia" },
-  { title: "Tritanopia", value: "tritanopia" },
-  { title: "Achromatopsia", value: "achromatopsia" },
-  { title: "Protanomaly", value: "protanomaly" },
-  { title: "Deuteranomaly", value: "deuteranomaly" },
-  { title: "Tritanomaly", value: "tritanomaly" },
-  { title: "Achromatomaly", value: "achromatomaly" },
-  { title: "No filter", value: null },
+  { title: 'Protanopia', value: 'protanopia' },
+  { title: 'Deuteranopia', value: 'deuteranopia' },
+  { title: 'Tritanopia', value: 'tritanopia' },
+  { title: 'Achromatopsia', value: 'achromatopsia' },
+  { title: 'Protanomaly', value: 'protanomaly' },
+  { title: 'Deuteranomaly', value: 'deuteranomaly' },
+  { title: 'Tritanomaly', value: 'tritanomaly' },
+  { title: 'Achromatomaly', value: 'achromatomaly' },
+  { title: 'No filter', value: null },
 ];
 
 class ColorblindPreview extends React.PureComponent {
@@ -51,7 +51,7 @@ class ColorblindPreview extends React.PureComponent {
     const filterStyle = {
       filter: activeFilter.value
         ? `url('${filters}#${activeFilter.value}')`
-        : "none",
+        : 'none',
     };
 
     const url = assemblePreviewUrl({ displayed, options });
@@ -67,7 +67,7 @@ class ColorblindPreview extends React.PureComponent {
     return (
       <div className={styles.componentWrapper}>
         <div className={styles.filterDropdown}>
-          <label className={styles.dropdownLabel} htmlFor={"select-filter"}>
+          <label className={styles.dropdownLabel} htmlFor={'select-filter'}>
             Select a filter:
           </label>
           <DefaultSelect
@@ -77,7 +77,7 @@ class ColorblindPreview extends React.PureComponent {
           />
         </div>
         <div className={styles.iframeContainer} style={filterStyle}>
-          <iframe src={url} frameBorder={"0"} />
+          <iframe src={url} frameBorder={'0'} />
         </div>
       </div>
     );

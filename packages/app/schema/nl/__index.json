@@ -5,6 +5,7 @@
   "required": [
     "behavior",
     "code",
+    "corona_melder_app",
     "deceased_cbs",
     "deceased_rivm",
     "deceased_rivm_per_age_group",
@@ -109,6 +110,9 @@
     },
     "vaccine_support": {
       "$ref": "vaccine_support.json"
+    },
+    "corona_melder_app": {
+      "$ref": "corona_melder_app.json"
     },
     "vaccine_delivery": {
       "$ref": "vaccine_delivery.json"

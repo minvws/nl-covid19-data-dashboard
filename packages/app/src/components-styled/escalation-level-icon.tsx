@@ -5,8 +5,7 @@ import { EscalationLevel } from '~/domain/restrictions/type';
 import text from '~/locale/index';
 import { asResponsiveArray } from '~/style/utils';
 
-const escalationThresholds =
-  regionThresholds.escalation_levels.escalation_level;
+const escalationThresholds = regionThresholds.escalation_levels.level;
 
 interface EscalationLevelIconProps {
   level: EscalationLevel;
