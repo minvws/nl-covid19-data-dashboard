@@ -122,39 +122,45 @@ export function getSingleTrendData(
   }
 
   if (isDateSeries(values)) {
-    return values
-      .map((x) => ({
-        ...x,
-        /**
-         * Assuming the config picks out a number property. We could make this
-         * stricter in the future with NumberProperty but I choose to strip it
-         * to minimize type complexity while figuring things out.
-         */
-        __value: x[metricProperty as keyof TimestampedValue] as number,
-        __date: timestampToDate(x.date_unix),
-      }))
-      .filter((x) => isPresent(x.__value));
+    return (
+      values
+        .map((x) => ({
+          ...x,
+          /**
+           * Assuming the config picks out a number property. We could make this
+           * stricter in the future with NumberProperty but I choose to strip it
+           * to minimize type complexity while figuring things out.
+           */
+          __value: x[metricProperty as keyof TimestampedValue] as number,
+          __date: timestampToDate(x.date_unix),
+        }))
+        // Filter any possible null values
+        .filter((x) => isPresent(x.__value))
+    );
   }
 
   if (isDateSpanSeries(values)) {
-    return values
-      .map((x) => ({
-        ...x,
-        /**
-         * Assuming the config picks out a number property. We could make this
-         * stricter in the future with NumberProperty but I choose to strip it
-         * to minimize type complexity while figuring things out.
-         */
-        __value: x[metricProperty as keyof TimestampedValue] as number,
-        __date: timestampToDate(
+    return (
+      values
+        .map((x) => ({
+          ...x,
           /**
-           * Here we set the date to be in the middle of the timespan, so that
-           * the chart can render the points in the middle of each span.
+           * Assuming the config picks out a number property. We could make this
+           * stricter in the future with NumberProperty but I choose to strip it
+           * to minimize type complexity while figuring things out.
            */
-          x.date_start_unix + (x.date_end_unix - x.date_start_unix) / 2
-        ),
-      }))
-      .filter((x) => isPresent(x.__value));
+          __value: x[metricProperty as keyof TimestampedValue] as number,
+          __date: timestampToDate(
+            /**
+             * Here we set the date to be in the middle of the timespan, so that
+             * the chart can render the points in the middle of each span.
+             */
+            x.date_start_unix + (x.date_end_unix - x.date_start_unix) / 2
+          ),
+        }))
+        // Filter any possible null values
+        .filter((x) => isPresent(x.__value))
+    );
   }
 
   throw new Error(`Incompatible timestamps are used in value ${values[0]}`);
