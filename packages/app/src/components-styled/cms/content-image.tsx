@@ -10,7 +10,7 @@ import { ImageBlock, RichContentImageBlock } from '~/types/cms';
 interface ContentImageProps {
   node: ImageBlock | RichContentImageBlock;
   contentWrapper?: FunctionComponent;
-  sizes: number[][] | undefined;
+  sizes?: number[][];
 }
 
 const SanityImageTile = styled(SanityImage)(
