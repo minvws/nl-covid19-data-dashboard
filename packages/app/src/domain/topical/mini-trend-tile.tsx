@@ -25,6 +25,10 @@ type MiniTrendTileProps<T extends TimestampedValue> = {
   href: string;
 };
 
+export const StyledArrowIcon = styled(ArrowIcon)`
+  transform: rotate(-90deg);
+`;
+
 export function MiniTrendTile<T extends TimestampedValue>(
   props: MiniTrendTileProps<T>
 ) {
@@ -50,7 +54,7 @@ export function MiniTrendTile<T extends TimestampedValue>(
       >
         <LinkWithIcon
           href={href}
-          icon={<ArrowIcon css={css({ transform: 'rotate(-90deg)' })} />}
+          icon={<StyledArrowIcon />}
           iconPlacement="right"
           fontWeight="bold"
           headingLink

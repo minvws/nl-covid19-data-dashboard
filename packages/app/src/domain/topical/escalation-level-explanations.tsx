@@ -1,5 +1,5 @@
 import css from '@styled-system/css';
-import ArrowIcon from '~/assets/arrow.svg';
+import { StyledArrowIcon } from '~/domain/topical/mini-trend-tile';
 import { Box } from '~/components-styled/base';
 import { Collapsible } from '~/components-styled/collapsible';
 import { EscalationLevelInfoLabel } from '~/components-styled/escalation-level';
@@ -48,7 +48,7 @@ export function EscalationLevelExplanations() {
         <Box mt={4}>
           <LinkWithIcon
             href="/over-risiconiveaus"
-            icon={<ArrowIcon css={css({ transform: 'rotate(-90deg)' })} />}
+            icon={<StyledArrowIcon />}
             iconPlacement="right"
           >
             {siteText.escalatie_niveau.lees_meer}
