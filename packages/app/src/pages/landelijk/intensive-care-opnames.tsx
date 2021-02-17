@@ -2,6 +2,7 @@ import { getLastFilledValue } from '@corona-dashboard/common';
 import Arts from '~/assets/arts.svg';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
+import { Box } from '~/components-styled/base';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
@@ -23,6 +24,9 @@ import {
   getNlData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
+import { createDate } from '~/utils/createDate';
+import { formatDateFromSeconds } from '~/utils/formatDate';
+import { formatNumber } from '~/utils/formatNumber';
 
 const text = siteText.ic_opnames_per_dag;
 const graphDescriptions = siteText.accessibility.grafieken;
@@ -41,6 +45,11 @@ const IntakeIntensiveCare: FCWithLayout<typeof getStaticProps> = (props) => {
   const dataIntake = data.intensive_care_nice;
 
   const bedsLastValue = getLastFilledValue(data.intensive_care_lcps);
+
+  const icOldDataRange = [
+    createDate(data.intensive_care_lcps.values[0].date_unix),
+    new Date('1 June 2020'),
+  ];
 
   // const dataBeds = data.intensive_care_lcps;
 
@@ -130,11 +139,36 @@ const IntakeIntensiveCare: FCWithLayout<typeof getStaticProps> = (props) => {
           ]}
           metadata={{ source: text.bronnen.lnaz }}
           componentCallback={addBackgroundRectangleCallback(
-            [new Date(0), new Date('1 June 2020')],
+            [
+              createDate(data.intensive_care_lcps.values[0].date_unix),
+              new Date('1 June 2020'),
+            ],
             {
               fill: colors.data.underReported,
             }
           )}
+          formatTooltip={(values) => {
+            const value = values[0];
+            const isInaccurateValue = value.__date < icOldDataRange[0];
+
+            return (
+              <>
+                <Box display="flex" alignItems="center" flexDirection="column">
+                  {isInaccurateValue && (
+                    <Text as="span" fontSize={0} color={colors.annotation}>
+                      ({siteText.common.incomplete})
+                    </Text>
+                  )}
+                  <Box>
+                    <Text as="span" fontWeight="bold">
+                      {`${formatDateFromSeconds(value.date_unix)}: `}
+                    </Text>
+                    {formatNumber(value.__value)}
+                  </Box>
+                </Box>
+              </>
+            );
+          }}
         />
       </TileList>
     </>
