@@ -26,8 +26,6 @@ import { Tooltip } from './components/tooltip';
 import {
   Dimensions,
   useLineTooltip,
-  usePointDistance,
-  useScatterTooltip,
   useSelectedStationValues,
   useSewerChartScales,
   useSewerChartValues,
@@ -129,33 +127,13 @@ export function SewerChart(props: SewerChartProps) {
   );
 
   /**
-   * Call tooltip hooks for determining which datum should have "hover"-focus.
+   * Call tooltip hook for determining which datum should have "hover"-focus.
    */
-  const scatterTooltip = useScatterTooltip({
-    values: stationValuesFiltered,
-    scales,
-    dimensions,
-  });
-
   const lineTooltip = useLineTooltip({
     values: hasSelectedStation ? selectedStationValues : averageValues,
     scales,
     dimensions,
   });
-
-  /**
-   * For touch devices we'll measure pointer movement distance in order to
-   * prevent simulating a "click" (highlight a specific line) when someone has
-   * been "panning/dragging" instead of clicking.
-   */
-  const pointDistance = usePointDistance();
-  const handlePointerDown = useCallback(
-    (evt: PointerEvent<SVGSVGElement>) => {
-      const point = localPoint(evt);
-      if (point) pointDistance.start(point);
-    },
-    [pointDistance]
-  );
 
   const handlePointerMove = useCallback(
     (evt: PointerEvent<SVGSVGElement>) => {
@@ -164,39 +142,17 @@ export function SewerChart(props: SewerChartProps) {
       if (!point) return;
 
       /**
-       * update pan distance
-       */
-      pointDistance.add(point);
-      /**
        * find new tooltip datums to highlight
        */
-      scatterTooltip.findClosest(point);
       lineTooltip.findClosest(point);
     },
-    [lineTooltip, pointDistance, scatterTooltip]
+    [lineTooltip]
   );
 
-  const handlePointerUp = useCallback(() => {
-    /**
-     * update selected line when pan-distance is below threshold and when
-     * the pointer is currently close to a scatter value
-     */
-    if (pointDistance.distanceRef.current < 10 && scatterTooltip.datum) {
-      sewerStationSelectProps.onChange(scatterTooltip.datum.name);
-    }
-  }, [
-    pointDistance.distanceRef,
-    scatterTooltip.datum,
-    sewerStationSelectProps,
-  ]);
-
   /**
-   * hide tooltips when focus is lost
+   * hide tooltip when focus is lost after small delay
    */
-  const clearTooltips = useDebouncedCallback(() => {
-    scatterTooltip.clear();
-    lineTooltip.clear();
-  }, 300);
+  const clearTooltips = useDebouncedCallback(() => lineTooltip.clear(), 300);
 
   const handlePointerLeave = useCallback(() => {
     clearTooltips.callback();
@@ -243,10 +199,7 @@ export function SewerChart(props: SewerChartProps) {
           height={height}
           onPointerMove={handlePointerMove}
           onPointerLeave={handlePointerLeave}
-          onPointerDown={handlePointerDown}
-          onPointerUp={handlePointerUp}
           style={{
-            cursor: scatterTooltip.datum ? 'pointer' : 'default',
             touchAction: 'pan-y', // allow vertical scroll, but capture horizontal
           }}
         >
@@ -348,21 +301,6 @@ export function SewerChart(props: SewerChartProps) {
                 stroke={colors.data.secondary}
                 strokeLinecap="round"
                 strokeLinejoin="round"
-              />
-            )}
-
-            {scatterTooltip.point && (
-              <circle
-                r={2}
-                fill={colors.data.benchmark}
-                cx={scatterTooltip.point.x}
-                cy={scatterTooltip.point.y}
-                css={css({
-                  willChange: 'transform',
-                  transitionProperty: 'cx, cy',
-                  transitionDuration: '75ms',
-                  transitionTimingFunction: 'ease-out',
-                })}
               />
             )}
 
