@@ -2508,7 +2508,7 @@
   "corona_melder_app": {
     "header": {
       "category": "",
-      "title": "Use of the CoronaMelder-app",
+      "title": "Use of the CoronaMelder app",
       "description": "The CoronaMelder app has been developed to help fight the spread of coronavirus. The app keeps track of when users have been within close range of one another for a longer period of time. If a CoronaMelder user tests positive for COVID-19, they can choose to alert other app users. App users who get an alert can then get tested and avoid unknowingly infecting others.",
       "datums": "",
       "reference": {
@@ -2524,15 +2524,15 @@
       }
     },
     "waarschuwingen": {
-      "title": "",
-      "description": "",
-      "total": ""
+      "title": "Number of people who alerted others via CoronaMelder: ",
+      "description": "This figure shows how many CoronaMelder users who tested positive alerted other app users of this yesterday.",
+      "total": "{{totalDownloads}} people have downloaded CoronaMelder."
     },
     "rapport": {
-      "title": "",
-      "description": "",
+      "title": "Factsheet CoronaMelder",
+      "description": "Researchers are closely monitoring the CoronaMelder app’s impact. Read the most recent factsheet about this on the CoronaMelder website.",
       "link": {
-        "text": "",
+        "text": "Most recent factsheet CoronaMelder app",
         "href": ""
       }
     }

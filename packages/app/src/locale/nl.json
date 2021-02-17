@@ -2524,15 +2524,15 @@
       }
     },
     "waarschuwingen": {
-      "title": "Aantal positieve tests gemeld via de CoronaMelder-app:",
-      "description": "Dit cijfer toont hoeveel (positief geteste) gebruikers van CoronaMelder afgelopen dagen andere app-gebruikers hebben gewaarschuwd.",
+      "title": "Aantal mensen dat anderen waarschuwden via CoronaMelder: ",
+      "description": "Dit cijfer laat zien hoeveel (positief geteste) gebruikers van CoronaMelder gisteren andere app-gebruikers hebben gewaarschuwd.",
       "total": "{{totalDownloads}} mensen hebben de CoronaMelder-app gedownload."
     },
     "rapport": {
       "title": "Factsheet CoronaMelder",
       "description": "Er wordt steeds onderzocht hoe CoronaMelder werkt in de praktijk. De laatste factsheet hierover is te vinden via de website van de CoronaMelder-app.",
       "link": {
-        "text": "Meest recente Factsheet CoronaMelder-app",
+        "text": "Meest recente factsheet CoronaMelder-app",
         "href": "https://www.coronamelder.nl/media/Factsheet_Corona_latest.pdf"
       }
     }
