@@ -494,9 +494,12 @@ function formatDefaultTooltip<T extends TimestampedValue>(
   } else if (isDateSpanValue(value)) {
     const dateStartString = formatDateFromSeconds(
       value.date_start_unix,
-      'short'
+      'day-month'
     );
-    const dateEndString = formatDateFromSeconds(value.date_end_unix, 'short');
+    const dateEndString = formatDateFromSeconds(
+      value.date_end_unix,
+      'day-month'
+    );
 
     return (
       <>
