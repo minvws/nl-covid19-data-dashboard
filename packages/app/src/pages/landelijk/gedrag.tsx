@@ -48,7 +48,7 @@ const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
   choropleth,
   content,
 }) => {
-  const { behavior: behaviorData } = data;
+  const behaviorLastValue = data.behavior.last_value;
   const { nl_gedrag, corona_melder_app } = siteText;
 
   return (
@@ -66,10 +66,10 @@ const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
           metadata={{
             datumsText: nl_gedrag.datums,
             dateOrRange: {
-              start: behaviorData.last_value.date_start_unix,
-              end: behaviorData.last_value.date_end_unix,
+              start: behaviorLastValue.date_start_unix,
+              end: behaviorLastValue.date_end_unix,
             },
-            dateOfInsertionUnix: behaviorData.last_value.date_of_insertion_unix,
+            dateOfInsertionUnix: behaviorLastValue.date_of_insertion_unix,
             dataSources: [nl_gedrag.bronnen.rivm],
           }}
           reference={nl_gedrag.reference}
@@ -88,20 +88,18 @@ const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
             metadata={{
               source: nl_gedrag.kpi.aantal_respondenten.bron,
               date: [
-                behaviorData.last_value.date_start_unix,
-                behaviorData.last_value.date_end_unix,
+                behaviorLastValue.date_start_unix,
+                behaviorLastValue.date_end_unix,
               ],
             }}
           >
-            <KpiValue
-              absolute={behaviorData.last_value.number_of_participants}
-            />
+            <KpiValue absolute={behaviorLastValue.number_of_participants} />
             <Text>{nl_gedrag.kpi.aantal_respondenten.toelichting}</Text>
           </KpiTile>
         </TwoKpiSection>
 
         <BehaviorTableTile
-          behavior={behaviorData.last_value}
+          behavior={behaviorLastValue}
           title={nl_gedrag.basisregels.title}
           introduction={nl_gedrag.basisregels.intro}
           footer={nl_gedrag.basisregels.voetnoot}
@@ -109,7 +107,7 @@ const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
         />
 
         <BehaviorLineChartTile
-          values={behaviorData.values}
+          values={data.behavior.values}
           title={nl_gedrag.basisregels_over_tijd.title}
           introduction={nl_gedrag.basisregels_over_tijd.intro}
         />
@@ -125,8 +123,8 @@ const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
           subtitle={corona_melder_app.header.description}
           metadata={{
             datumsText: corona_melder_app.header.datums,
-            dateOrRange: behaviorData.last_value.date_start_unix,
-            dateOfInsertionUnix: behaviorData.last_value.date_of_insertion_unix,
+            dateOrRange: behaviorLastValue.date_start_unix,
+            dateOfInsertionUnix: behaviorLastValue.date_of_insertion_unix,
             dataSources: [corona_melder_app.header.bronnen.rivm],
           }}
           reference={corona_melder_app.header.reference}
@@ -136,7 +134,7 @@ const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
           <KpiTile
             title={corona_melder_app.waarschuwingen.title}
             metadata={{
-              date: behaviorData.last_value.date_start_unix,
+              date: behaviorLastValue.date_start_unix,
               source: corona_melder_app.header.bronnen.rivm,
             }}
           >
