@@ -7,7 +7,7 @@ import { Heading, Text } from '~/components-styled/typography';
 import siteText from '~/locale';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 
-import { StyledArrowIcon } from '~/domain/topical/mini-trend-tile';
+import { ArrowIconRight } from '~/components-styled/arrow-icon';
 
 export function TopicalVaccineTile() {
   const text = siteText.nationaal_actueel.mini_trend_tiles.toegediende_vaccins;
@@ -37,7 +37,7 @@ export function TopicalVaccineTile() {
       >
         <LinkWithIcon
           href={'/landelijk/vaccinaties'}
-          icon={<StyledArrowIcon />}
+          icon={<ArrowIconRight />}
           iconPlacement="right"
           fontWeight="bold"
           headingLink

@@ -6,7 +6,7 @@ import { Box } from './base';
 import { LinkWithIcon } from './link-with-icon';
 import { Heading } from './typography';
 
-import { StyledArrowIcon } from '~/domain/topical/mini-trend-tile';
+import { ArrowIconRight } from '~/components-styled/arrow-icon';
 
 interface QuickLinksProps {
   header: string;
@@ -29,7 +29,7 @@ export function QuickLinks({ header, links }: QuickLinksProps) {
           <Item key={`${link.text}-${index}`}>
             <LinkWithIcon
               href={link.href}
-              icon={<StyledArrowIcon />}
+              icon={<ArrowIconRight />}
               iconPlacement="right"
               fontWeight="bold"
             >

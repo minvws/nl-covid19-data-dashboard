@@ -1,7 +1,7 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
 
-import { StyledArrowIcon } from '~/domain/topical/mini-trend-tile';
+import { ArrowIconRight } from '~/components-styled/arrow-icon';
 
 import { getImageSrc } from '~/lib/sanity';
 import { Block, ImageBlock } from '~/types/cms';
@@ -80,7 +80,7 @@ const StyledHightlightTeaser = styled.a(
 function Arrow() {
   return (
     <span css={css({ svg: { height: '11px', width: '13px', mx: '3px' } })}>
-      <StyledArrowIcon />
+      <ArrowIconRight />
     </span>
   );
 }
