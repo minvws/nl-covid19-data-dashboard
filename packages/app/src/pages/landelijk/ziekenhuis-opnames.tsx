@@ -36,7 +36,11 @@ import {
   getNlData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
-import { formatDateFromMilliseconds } from '~/utils/formatDate';
+import { createDate } from '~/utils/createDate';
+import {
+  formatDateFromMilliseconds,
+  formatDateFromSeconds,
+} from '~/utils/formatDate';
 import { getTrailingDateRange } from '~/utils/get-trailing-date-range';
 
 const text = siteText.ziekenhuisopnames_per_dag;
@@ -66,6 +70,11 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
   const lastValueLcps = data.hospital_lcps.last_value;
 
   const underReportedRange = getTrailingDateRange(dataHospitalNice.values, 4);
+
+  const lcpsOldDataRange = [
+    createDate(dataHospitalLcps.values[0].date_unix),
+    new Date('1 June 2020'),
+  ];
 
   return (
     <>
@@ -243,6 +252,28 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
           ]}
           metadata={{
             source: text.bronnen.lnaz,
+          }}
+          formatTooltip={(values) => {
+            const value = values[0];
+            const isInaccurateValue = value.__date < lcpsOldDataRange[0];
+
+            return (
+              <>
+                <Box display="flex" alignItems="center" flexDirection="column">
+                  {isInaccurateValue && (
+                    <Text as="span" fontSize={0} color={colors.annotation}>
+                      ({siteText.common.incomplete})
+                    </Text>
+                  )}
+                  <Box>
+                    <Text as="span" fontWeight="bold">
+                      {`${formatDateFromSeconds(value.date_unix)}: `}
+                    </Text>
+                    {formatNumber(value.__value)}
+                  </Box>
+                </Box>
+              </>
+            );
           }}
         />
       </TileList>

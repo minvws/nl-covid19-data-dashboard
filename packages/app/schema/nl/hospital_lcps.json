@@ -21,7 +21,7 @@
       "type": "object",
       "properties": {
         "beds_occupied_covid": {
-          "type": "integer"
+          "type": ["integer", "null"]
         },
         "date_unix": {
           "type": "integer"
