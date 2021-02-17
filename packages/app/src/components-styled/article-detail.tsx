@@ -1,4 +1,3 @@
-import css from '@styled-system/css';
 import { ArrowIconLeft } from '~/components-styled/arrow-icon';
 
 import { Box } from '~/components-styled/base';
