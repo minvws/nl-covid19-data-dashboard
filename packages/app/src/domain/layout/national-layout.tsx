@@ -24,6 +24,7 @@ import { Layout } from '~/domain/layout/layout';
 import siteText from '~/locale/index';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { Box } from '~/components-styled/base';
+
 interface NationalLayoutProps {
   lastGenerated: string;
   data: National;
@@ -86,28 +87,29 @@ function NationalLayout(props: NationalLayoutProps) {
 
       <AppContent
         sidebarComponent={
-          <nav
+          <Box
+            as="nav"
             /** re-mount when route changes in order to blur anchors */
             key={router.asPath}
             id="metric-navigation"
             aria-label={siteText.aria_labels.metriek_navigatie}
             role="navigation"
+            pt={4}
           >
             <Menu>
-              <Box spacing={3} pt={4}>
-                <MetricMenuItemLink
-                  href={{
-                    pathname: '/landelijk/maatregelen',
-                    query: breakpoints.md
-                      ? {} // only add menu flags on narrow devices
-                      : isMenuOpen
-                      ? { menu: '0' }
-                      : { menu: '1' },
-                  }}
-                  title={siteText.nationaal_maatregelen.titel_sidebar}
-                  subtitle={siteText.nationaal_maatregelen.subtitel_sidebar}
-                />
-              </Box>
+              <MetricMenuItemLink
+                href={{
+                  pathname: '/landelijk/maatregelen',
+                  query: breakpoints.md
+                    ? {} // only add menu flags on narrow devices
+                    : isMenuOpen
+                    ? { menu: '0' }
+                    : { menu: '1' },
+                }}
+                title={siteText.nationaal_maatregelen.titel_sidebar}
+                subtitle={siteText.nationaal_maatregelen.subtitel_sidebar}
+              />
+
               <CategoryMenu
                 title={siteText.nationaal_layout.headings.vaccinaties}
               >
@@ -336,7 +338,7 @@ function NationalLayout(props: NationalLayoutProps) {
                 </MetricMenuItemLink>
               </CategoryMenu>
             </Menu>
-          </nav>
+          </Box>
         }
       >
         {children}
