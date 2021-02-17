@@ -15,8 +15,8 @@
       "text": "View the full message from the RIVM",
       "href": "https://www.rivm.nl/en/news/uk-variant-gains-ground-in-the-netherlands"
     },
-    "subtitel": "",
-    "datum": ""
+    "subtitel": "Wekelijkse landelijke toelichting",
+    "datum": "12 december 2020"
   },
   "error_titel": {
     "text": "Something went wrong"
@@ -519,7 +519,7 @@
     "rwzi_abbrev": "",
     "map_titel": "Average number of virus particles per 100.000 inhabitants",
     "map_toelichting": "This map shows the average number of virus particles per 100.000 inhabitants, per safety region.",
-    "legenda_titel": "",
+    "legenda_titel": "Legenda",
     "map_tooltip": "per 100.000 inhabitants",
     "map_tooltip_value": "{{value}} x100 billion",
     "reference": {
@@ -633,7 +633,7 @@
     "tooltip": {
       "positive_tested_people": "{{totalPositiveTestedPeople}} in total",
       "positive_tested_value": "{{totalPositiveValue}} per 100.000",
-      "vaccinatie_bereidheid": ""
+      "vaccinatie_bereidheid": "{{percentageInFavor}}% vaccinatiebereidheid"
     },
     "niveau": "level",
     "clear_select_input": "Empty",
@@ -646,7 +646,7 @@
     "vandaag": "Today",
     "read_more": "Read more",
     "absolute_date_template": "on {{date}}",
-    "inwoners": ""
+    "inwoners": "inwoners"
   },
   "seoHead": {
     "default_description": "Information on the development of the coronavirus in The Netherlands.",
@@ -686,7 +686,7 @@
       "kwetsbare_groepen": "Vulnerable groups",
       "maatregelen": "Measures",
       "algemeen": "General",
-      "inschaling": ""
+      "inschaling": "Inschaling"
     }
   },
   "veiligheidsregio_metadata": {
@@ -825,8 +825,8 @@
     },
     "kpi_titel": "Average number of coronavirus particles per 100.000 people",
     "bar_chart_accessibility_description": "",
-    "display_outliers": "",
-    "hide_outliers": ""
+    "display_outliers": "Toon uitschieters",
+    "hide_outliers": "Verberg uitschieters"
   },
   "gemeente_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Hospital admissions",
@@ -957,8 +957,8 @@
     },
     "kpi_titel": "Average number of coronavirus particles per 100.000 people",
     "bar_chart_accessibility_description": "",
-    "display_outliers": "",
-    "hide_outliers": ""
+    "display_outliers": "Toon uitschieters",
+    "hide_outliers": "Verberg uitschieters"
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Risk level map of the Netherlands",
@@ -1204,7 +1204,7 @@
   },
   "waarde_annotaties": {
     "riool_normalized": "x100 billion",
-    "x_miljoen": "",
+    "x_miljoen": "x miljoen",
     "totaal": "total",
     "x_100k": "x 100.000"
   },
@@ -1524,8 +1524,8 @@
     "barscale_screenreader_text": "{{value}}deceased residents.",
     "extra_uitleg": "This is an estimate of the number of COVID-19 related deaths reported yesterday among disability care home residents in this region.",
     "linechart_titel": "Progression over time",
-    "map_titel": "",
-    "map_toelichting": "",
+    "map_titel": "Gehandicaptenzorg oversterfte in Nederland",
+    "map_toelichting": "Deze kaarten laten zien hoe de oversterfte in gehandicaptenzorglocaties is in Nederland per dag.",
     "titel_sidebar": "Death per day",
     "metadata": {
       "title": "Deceased residents of disability care homes in {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
@@ -1552,7 +1552,7 @@
     "kpi_titel": "Total no. of infected locations ",
     "kpi_toelichting": "This figure shows the total number of disability care homes that have reported at least one confirmed COVID-19 case, based on a positive test, in the last 28 days. The percentage expresses the share of all disability care homes in the Netherlands with confirmed COVID-19 cases.",
     "linechart_titel": "Total no. of infected locations – progression over time",
-    "barscale_screenreader_text": "",
+    "barscale_screenreader_text": "{{value}} nieuwe locaties waarbij tenminste één bewoner positief getest is, per dag.",
     "metadata": {
       "title": "Infected disability care homes in {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
       "description": "Regional overview of the disability care homes in {{safetyRegionName}} that have reported at least one confirmed COVID-19 case."
@@ -1577,13 +1577,13 @@
     "extra_uitleg": "The number of disability care home residents in this region who were reported as testing positive for COVID-19 yesterday.",
     "pagina_toelichting": "People who live in disability care homes are often extra vulnerable to coronavirus infection. Because of this, Municipal health services (GGDs) monitor whether a persons who tests positive for COVID-19 lives in a disability care home. By doing so, measures can be taken if the number of cases in residential care increases.",
     "linechart_titel": "Progression over time",
-    "barscale_screenreader_text": "",
+    "barscale_screenreader_text": "{{value}} positief geteste bewoners.",
     "titel_sidebar": "Number of confirmed cases (residents)",
     "chloropleth_legenda": {
-      "titel": "",
-      "geen_meldingen": ""
+      "titel": "Aantal per 100.000 inwoners",
+      "geen_meldingen": "Geen meldingen"
     },
-    "map_titel": "",
+    "map_titel": "Verdeling positief geteste mensen in Nederland",
     "map_toelichting": "These maps show how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
     "metadata": {
       "title": "Confirmed cases of disability care home residents in {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
@@ -1949,8 +1949,8 @@
       "vaccin_levering_en_prikken": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks.",
       "vaccinatie_draagvlak": "This graph shows the percentage of the population that wishes to be vaccinated against COVID-19."
     },
-    "link_source": "",
-    "link_download": ""
+    "link_source": "Bekijk de databron van \"{{subject}}\" op",
+    "link_download": "Download de databron van \"{{subject}}\" op"
   },
   "deceased_age_groups": {
     "title": "COVID-19 deaths by age",
@@ -2015,7 +2015,7 @@
       }
     },
     "data": {
-      "difference": "",
+      "difference": "Do not remove this key. It is required as a temporary workaround",
       "sidebar": {
         "last_value": {
           "total_vaccinated": "835929",
@@ -2160,8 +2160,8 @@
       "titel": "Willingness to be vaccinated",
       "omschrijving": "This graph shows the percentage per age group and in total of the population that wishes to be vaccinated against COVID-19. The figures are taken from a survey where people are asked if they wish to be vaccinated. The survey is conducted every three weeks.",
       "kpi_omschrijving": "Percentage of the population that wishes to be vaccinated against COVID-19",
-      "tooltip_gemiddeld": "",
-      "leeftijd_jaar": ""
+      "tooltip_gemiddeld": "Gemiddeld",
+      "leeftijd_jaar": "{{ageGroup}} jaar"
     }
   },
   "editorial_detail": {
@@ -2268,7 +2268,7 @@
   "common.tooltip.positive_tested_value": "",
   "search": {
     "placeholder": "Search for a municipality of safety region",
-    "clear": "",
+    "clear": "Zoekopdracht wissen",
     "no_hits": "No {{subject}} found with “{{search}}”"
   },
   "veiligheidsregio_actueel": {
@@ -2425,101 +2425,101 @@
   },
   "article_strip_title": "More about this topic",
   "vr_risiconiveau": {
-    "datums": "",
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
     "reference": {
-      "href": "",
-      "text": ""
+      "href": "/over-risiconiveaus",
+      "text": "Lees meer over de risiconiveaus en wat dit betekent voor de maatregelen op de pagina ‘Over de risiconiveaus’."
     },
     "metadata": {
-      "title": "",
-      "description": ""
+      "title": "Inschalen risiconiveau {{safetyRegionName}}",
+      "description": "Inschalen risiconiveau {{safetyRegionName}}"
     },
-    "titel": "",
-    "pagina_toelichting": "",
-    "current_escalation_level": "",
+    "titel": "Risiconiveau in {{safetyRegionName}}",
+    "pagina_toelichting": "Elke twee weken wordt bepaald in welk risiconiveau een regio zit. Daarvoor kijken we naar het aantal positieve testen en het aantal ziekenhuisopnames. Het meest ernstige cijfer bepaalt het risiconiveau. Bij de risiconiveaus horen maatregelen. Welke maatregelen precies gelden, hangt niet alleen af van hoe het in de Veiligheidsregio gaat, maar ook van de situatie in het hele land. ",
+    "current_escalation_level": "Risiconiveau van dit moment",
     "bronnen": {
       "rivm_positieve_testen": {
-        "download": "",
-        "href": "",
-        "text": ""
+        "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv",
+        "href": " https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.html",
+        "text": "RIVM"
       },
       "rivm_ziekenhuisopnames": {
-        "download": "",
-        "href": "",
-        "text": ""
+        "download": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.csv",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
+        "text": "RIVM"
       }
     },
     "positieve_testen": {
-      "title": "",
-      "value_annotation": "",
-      "description": ""
+      "title": "Positieve testen",
+      "value_annotation": "per 100.000 inwoners per week",
+      "description": "Dit getal laat zien hoeveel mensen de afgelopen 7 dagen positief getest zijn per 100.000 inwoners. De balk laat zien hoe ernstig het aantal positieve testen is."
     },
     "ziekenhuisopnames": {
-      "title": "",
-      "value_annotation": "",
-      "description": ""
+      "title": "Ziekenhuisopnames (inclusief IC)",
+      "value_annotation": "per 1 miljoen inwoners per week",
+      "description": "Dit getal laat zien hoeveel mensen met COVID-19 uit deze veiligheidsregio in de afgelopen 7 dagen in een ziekenhuis zijn opgenomen per 1 miljoen inwoners. De balk laat zien hoe ernstig het aantal ziekenhuisopnames is."
     }
   },
   "gemeente_sterfte": {
-    "titel_sidebar": "",
-    "titel_kpi": "",
+    "titel_sidebar": "Sterfte",
+    "titel_kpi": "Gemeld aantal patiënten overleden aan COVID-19 per dag",
     "metadata": {
-      "title": "",
-      "description": ""
+      "title": "Sterfte in {{municipalityName}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "description": "Aantal overledenen per dag in {{municipalityName}}"
     },
     "section_deceased_rivm": {
-      "title": "",
-      "description": "",
-      "datums": "",
+      "title": "Sterfte in {{municipalityName}}",
+      "description": "Deze cijfers laten zien van hoeveel patiënten er aan de GGD gemeld is dat ze zijn overleden aan/met COVID-19. Het werkelijke aantal patiënten dat is overleden aan/met COVID-19 is waarschijnlijk hoger, omdat niet alle COVID-19 patiënten getest worden en er geen meldingsplicht geldt voor overlijden aan/met COVID-19. ",
+      "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
       "bronnen": {
         "rivm": {
-          "href": "",
-          "text": "",
-          "download": ""
+          "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
+          "text": "RIVM",
+          "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv"
         }
       },
       "reference": {
-        "href": "",
-        "text": ""
+        "href": "/verantwoording#sterfte",
+        "text": "Lees meer in de cijferverantwoording."
       },
-      "kpi_covid_daily_title": "",
-      "kpi_covid_daily_description": "",
-      "kpi_covid_total_title": "",
-      "kpi_covid_total_description": "",
-      "line_chart_covid_daily_title": "",
-      "line_chart_covid_daily_description": ""
+      "kpi_covid_daily_title": "Gemeld aantal patiënten overleden aan COVID-19 per dag",
+      "kpi_covid_daily_description": "Dit getal toont het aantal patiënten waarvan aan de GGD gemeld is dat ze zijn overleden aan COVID-19, per dag. Een deel van de overlijdens is van eerdere dagen, die later zijn doorgegeven.",
+      "kpi_covid_total_title": "Totaal aantal personen overleden aan/met COVID-19",
+      "kpi_covid_total_description": "Dit getal laat zien van hoeveel personen in totaal is gemeld dat ze zijn overleden aan/met COVID-19, sinds het begin van de meldingen.",
+      "line_chart_covid_daily_title": "Gemelde aantal patiënten overleden aan/met COVID-19 over tijd",
+      "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel personen in de geselecteerde periode gemeld is dat ze zijn overleden aan COVID-19."
     },
-    "kpi_titel": ""
+    "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
   },
   "corona_melder_app": {
     "header": {
-      "category": "",
-      "title": "",
-      "description": "",
-      "datums": "",
+      "category": "Preventie verspreiding",
+      "title": "Gebruik CoronaMelder app",
+      "description": "Om verspreiding van het coronavirus tegen te gaan is  de telefoon-app CoronaMelder ontwikkeld. CoronaMelder stuurt gebruikers van de app een bericht wanneer zij enige tijd in de buurt zijn geweest van iemand die besmet is met het coronavirus die ook de app gebruikt. Dit verlaagt het risico dat zij onbewust andere mensen in hun omgeving besmetten.",
+      "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
       "reference": {
-        "text": "",
-        "href": ""
+        "text": "Lees meer over de CoronaMelder app in de cijferverantwoording.",
+        "href": "/verantwoording#coronamelder"
       },
       "bronnen": {
         "rivm": {
           "download": "",
-          "text": "",
-          "href": ""
+          "text": "RIVM",
+          "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/8a72d78a-fcf8-4882-b0ab-cd594961a267?tab=relations"
         }
       }
     },
     "waarschuwingen": {
-      "title": "",
-      "description": "",
-      "total": ""
+      "title": "Aantal positieve tests gemeld via de CoronaMelder app:",
+      "description": "Dit cijfer toont hoeveel (positief geteste) gebruikers van CoronaMelder afgelopen dagen andere app-gebruikers hebben gewaarschuwd.",
+      "total": "{{totalDownloads}} mensen hebben de CoronaMelder app gedownload."
     },
     "rapport": {
-      "title": "",
-      "description": "",
+      "title": "Factsheet CoronaMelder",
+      "description": "Het meest actuele factsheet over het gebruik van de app is beschikbaar via de website van de CoronaMelder app.",
       "link": {
-        "text": "",
-        "href": ""
+        "text": "Meest recente Factsheet CoronaMelder app",
+        "href": "https://www.coronamelder.nl/media/Factsheet_Corona_latest.pdf"
       }
     }
   }
