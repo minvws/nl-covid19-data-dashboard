@@ -188,8 +188,8 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                       }
                       text={text.gezette_prikken.reported.ggd_ghor}
                       date={
-                        data.vaccine_administered_ggd_ghor?.last_value
-                          ?.date_of_insertion_unix
+                        data.vaccine_administered_ggd_ghor.last_value
+                          .date_of_insertion_unix
                       }
                       isReported
                     />
