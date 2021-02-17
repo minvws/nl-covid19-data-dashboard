@@ -16,6 +16,11 @@ if (typeof window !== 'undefined') {
      */
     require('@webcomponents/shadydom');
   }
+
+  if (!window.ResizeObserver) {
+    const ResizeObserver = require('resize-observer-polyfill').default;
+    window.ResizeObserver = ResizeObserver;
+  }
 }
 
 type AppPropsWithLayout = AppProps & {

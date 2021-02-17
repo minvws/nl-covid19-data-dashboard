@@ -15,7 +15,11 @@ export function TooltipContent(props: IProps) {
   return (
     <StyledTooltipContent onClick={onSelect}>
       <TooltipHeader>
-        <Heading level={3} m={0}>
+        <Heading
+          level={3}
+          m={0}
+          css={css({ overflow: 'hidden', textOverflow: 'ellipsis' })}
+        >
           {title}
         </Heading>
         {onSelect && <Chevron />}
