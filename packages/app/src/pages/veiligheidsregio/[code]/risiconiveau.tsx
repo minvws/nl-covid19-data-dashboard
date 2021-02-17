@@ -114,9 +114,7 @@ const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
             </Box>
             {/* alignment with baseline of EscalationLevelInfoLabel */}
             <Box mt={{ sm: '-0.55rem' }}>
-              <Text>
-                {siteText.escalatie_niveau.types[currentLevel].toelichting}
-              </Text>
+              <Text>{text.types[currentLevel].toelichting}</Text>
             </Box>
           </Box>
         </Tile>
