@@ -1,5 +1,6 @@
 import { Group } from '@visx/group';
 import { memo } from 'react';
+import { motion } from 'framer-motion';
 
 interface ScatterPlotProps<T> {
   data: T[];
@@ -19,20 +20,26 @@ function ScatterPlotUnmemoized<T extends { id: string }>({
   getX,
   getY,
   color,
-  radius: r,
+  radius,
   dottedOutline: dotted,
 }: ScatterPlotProps<T>) {
   return (
     <Group>
       {data.map((datum) => (
-        <circle
+        <motion.circle
           key={datum.id}
-          cx={getX(datum)}
-          cy={getY(datum)}
+          r={radius}
           fill={dotted ? 'none' : color}
-          r={r}
           strokeDasharray={dotted ? '1,1' : undefined}
           stroke={dotted ? color : undefined}
+          initial={{
+            cx: getX(datum),
+            cy: getY(datum),
+          }}
+          animate={{
+            cx: getX(datum),
+            cy: getY(datum),
+          }}
         />
       ))}
     </Group>

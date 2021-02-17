@@ -5,6 +5,7 @@ import { localPoint } from '@visx/event';
 import { GridRows } from '@visx/grid';
 import { Group } from '@visx/group';
 import { Bar, LinePath } from '@visx/shape';
+import { motion } from 'framer-motion';
 import { transparentize } from 'polished';
 import { PointerEvent, useCallback, useMemo, useState } from 'react';
 import { isPresent } from 'ts-is-present';
@@ -283,27 +284,23 @@ export function SewerChart(props: SewerChartProps) {
               radius={2}
             />
 
-            <LinePath
+            <AnimatedLinePath
               data={averageValues}
               x={scales.getX}
               y={scales.getY}
-              stroke={
+              color={
                 hasSelectedStation ? colors.data.neutral : colors.data.primary
               }
-              strokeWidth={4}
-              strokeLinecap="round"
-              strokeLinejoin="round"
+              width={4}
             />
 
             {hasSelectedStation && (
-              <LinePath
+              <AnimatedLinePath
                 data={selectedStationValues}
                 x={scales.getX}
                 y={scales.getY}
-                strokeWidth={4}
-                stroke={colors.data.secondary}
-                strokeLinecap="round"
-                strokeLinejoin="round"
+                color={colors.data.secondary}
+                width={4}
               />
             )}
 
@@ -389,5 +386,36 @@ export function SewerChart(props: SewerChartProps) {
         ].filter(isPresent)}
       />
     </Box>
+  );
+}
+
+interface AnimatedLinePathProps<T> {
+  data: T[];
+  x: (datum: T) => number;
+  y: (datum: T) => number;
+  width: number;
+  color: string;
+}
+
+function AnimatedLinePath<T>(props: AnimatedLinePathProps<T>) {
+  const { data, x, y, width, color } = props;
+  return (
+    <LinePath x={x} y={y}>
+      {({ path }) => (
+        <motion.path
+          fill="transparent"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d={path(data) || ''}
+          stroke={color}
+          strokeWidth={width}
+          animate={{
+            d: path(data) || '',
+            stroke: color,
+            strokeWidth: width,
+          }}
+        />
+      )}
+    </LinePath>
   );
 }
