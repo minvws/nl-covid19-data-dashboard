@@ -962,7 +962,7 @@
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Risk level map of the Netherlands",
-    "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\nThere are specific measures for each risk level. These are explained in the road map drafted by the government. **There is a national lockdown until at least March 2. [Click here to view the lockdown measures](/landelijk/maatregelen).**",
+    "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on February 17. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\n**There remains a national lockdown until at least March 2. [Click here to view the lockdown measures](/landelijk/maatregelen).**",
     "metadata": {
       "title": "Level of risk per safety region | Dashboard Coronavirus | Government.nl",
       "description": "Overview of the level of risk per safety region in the Netherlands."
@@ -985,7 +985,7 @@
   },
   "escalatie_niveau": {
     "titel": "Risk levels",
-    "toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\nThere are specific measures for each risk level. These are explained in the road map drafted by the government. **There is a national lockdown until at least March 2. [Click here to view the lockdown measures](/landelijk/maatregelen).**",
+    "toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on February 17. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\n**There remains a national lockdown until at least March 2. [Click here to view the lockdown measures](/landelijk/maatregelen).**",
     "types": {
       "1": {
         "titel": "Caution",
@@ -1309,38 +1309,6 @@
         "download": "https://data.rivm.nl/covid-19/COVID-19_gedrag.csv",
         "text": "RIVM",
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/8a72d78a-fcf8-4882-b0ab-cd594961a267?tab=relations"
-      }
-    }
-  },
-  "corona_melder_app": {
-    "header": {
-      "category": "Preventie verspreding",
-      "title": "Gebruik CoronaMelder app",
-      "description": "Introductietekst die aangeeft........",
-      "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-      "reference": {
-        "text": "Lees meer in de cijferverantwoording.",
-        "href": "/verantwoording#coronamelder"
-      },
-      "bronnen": {
-        "rivm": {
-          "download": "https://data.rivm.nl/covid-19/COVID-19_gedrag.csv",
-          "text": "RIVM",
-          "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/8a72d78a-fcf8-4882-b0ab-cd594961a267?tab=relations"
-        }
-      }
-    },
-    "waarschuwingen": {
-      "title": "Mensen die andere waarschuden via de CoronaMelder app:",
-      "description": "Als je positief getest bent op corona, dan kun je dit vrijwillig aangeven in de app, samen met een medewerker van de GGD.",
-      "total": "{{totalDownloads}} mensen hebben de CoronaMelder app gedownload"
-    },
-    "rapport": {
-      "title": "Volledige rapport",
-      "description": "Het laatste rapport over gebruik van de app is beschikbaar via de site van de CoronaMelder app.",
-      "link": {
-        "text": "Laatste rapportage gebruik CoronaMelder app (PDF)",
-        "href": "#"
       }
     }
   },
@@ -1961,8 +1929,6 @@
     }
   },
   "accessibility": {
-    "link_source": "data source of \"{{subject}}\".",
-    "link_download": "download the data source of \"{{subject}}\".",
     "grafieken": {
       "reproductiegetal_verloop": "This graph shows the progression of the reproduction number over time.",
       "ziekenhuisopnames": "This graph shows the progression in hospital admissions over time.",
@@ -1982,7 +1948,9 @@
       "verwachte_leveringen": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks.",
       "vaccin_levering_en_prikken": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks.",
       "vaccinatie_draagvlak": "This graph shows the percentage of the population that wishes to be vaccinated against COVID-19."
-    }
+    },
+    "link_source": "",
+    "link_download": ""
   },
   "deceased_age_groups": {
     "title": "COVID-19 deaths by age",
@@ -2224,7 +2192,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of the Netherlands",
-      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\nThere are specific measures for each risk level. These are explained in the road map drafted by the government. **There is a national lockdown until at least March 2. [Click here to view the lockdown measures](/landelijk/maatregelen).**"
+      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on February 17. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\n**There remains a national lockdown until at least March 2. [Click here to view the lockdown measures](/landelijk/maatregelen).**"
     },
     "data_sitemap_titel": "Topics on this dashboard",
     "data_sitemap_toelichting": "Go directly to the following topics:",
@@ -2311,7 +2279,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of The Netherlands",
-      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\nThere are specific measures for each risk level. These are explained in the road map drafted by the government. **There is a national lockdown until at least March 2. [Click here to view the lockdown measures](/landelijk/maatregelen).**"
+      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on February 17. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\n**There remains a national lockdown until at least March 2. [Click here to view the lockdown measures](/landelijk/maatregelen).**"
     },
     "risoconiveau_maatregelen": {
       "title": "Risk level & measures",
@@ -2384,7 +2352,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of the Netherlands",
-      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\nThere are specific measures for each risk level. These are explained in the road map drafted by the government. **There is a national lockdown until at least March 2. [Click here to view the lockdown measures](/landelijk/maatregelen).**"
+      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on February 17. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\n**There remains a national lockdown until at least March 2. [Click here to view the lockdown measures](/landelijk/maatregelen).**"
     },
     "risoconiveau_maatregelen": {
       "title": "Risk level & measures",
@@ -2522,5 +2490,37 @@
       "line_chart_covid_daily_description": ""
     },
     "kpi_titel": ""
+  },
+  "corona_melder_app": {
+    "header": {
+      "category": "",
+      "title": "",
+      "description": "",
+      "datums": "",
+      "reference": {
+        "text": "",
+        "href": ""
+      },
+      "bronnen": {
+        "rivm": {
+          "download": "",
+          "text": "",
+          "href": ""
+        }
+      }
+    },
+    "waarschuwingen": {
+      "title": "",
+      "description": "",
+      "total": ""
+    },
+    "rapport": {
+      "title": "",
+      "description": "",
+      "link": {
+        "text": "",
+        "href": ""
+      }
+    }
   }
 }
