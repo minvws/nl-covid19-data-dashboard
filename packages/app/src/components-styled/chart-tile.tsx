@@ -45,7 +45,7 @@ export function ChartTile({
   const ariaLabelledBy = slugify(title);
 
   return (
-    <ChartTileContainer metadata={metadata} accessibilitySubject={title}>
+    <ChartTileContainer metadata={metadata}>
       <ChartTileHeader
         title={title}
         description={description}
@@ -72,7 +72,7 @@ export function ChartTileWithTimeframe({
   );
 
   return (
-    <ChartTileContainer metadata={metadata} accessibilitySubject={title}>
+    <ChartTileContainer metadata={metadata}>
       <ChartTileHeader
         title={title}
         description={description}

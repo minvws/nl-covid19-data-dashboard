@@ -1929,6 +1929,8 @@
     }
   },
   "accessibility": {
+    "link_source": "databron voor \"{{subject}}\"",
+    "link_download": "download voor de databron van \"{{subject}}\"",
     "grafieken": {
       "reproductiegetal_verloop": "Deze grafiek geeft het reproductiegetal over tijd weer.",
       "ziekenhuisopnames": "Deze grafiek toont het aantal ziekenhuisopnames over tijd.",
@@ -1948,9 +1950,7 @@
       "verwachte_leveringen": "Het linkerdeel van de grafiek laat zien hoeveel vaccins Nederland in totaal heeft gekregen en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal verwachten te krijgen en hoeveel prikken we verwachten te zetten.",
       "vaccin_levering_en_prikken": "Het linkerdeel van de grafiek laat zien hoeveel vaccins Nederland in totaal heeft gekregen en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal verwachten te krijgen en hoeveel prikken we verwachten te zetten.",
       "vaccinatie_draagvlak": "Deze grafiek toont hoeveel procent van de bevolking zelf een prik tegen corona wil hebben."
-    },
-    "link_source": "Bekijk de databron van \"{{subject}}\" op",
-    "link_download": "Download de databron van \"{{subject}}\" op"
+    }
   },
   "deceased_age_groups": {
     "title": "COVID-19 sterfte: verdeling naar leeftijd",

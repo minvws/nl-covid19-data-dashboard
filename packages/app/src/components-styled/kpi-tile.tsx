@@ -38,7 +38,7 @@ export function KpiTile({
       )}
       {/* Using a spacer to push the footer down */}
       <Spacer m="auto" />
-      {metadata && <Metadata accessibilitySubject={title} {...metadata} />}
+      {metadata && <Metadata {...metadata} />}
     </Tile>
   );
 }

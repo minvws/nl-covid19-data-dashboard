@@ -1929,6 +1929,8 @@
     }
   },
   "accessibility": {
+    "link_source": "data source of \"{{subject}}\".",
+    "link_download": "download the data source of \"{{subject}}\".",
     "grafieken": {
       "reproductiegetal_verloop": "This graph shows the progression of the reproduction number over time.",
       "ziekenhuisopnames": "This graph shows the progression in hospital admissions over time.",
@@ -1948,9 +1950,7 @@
       "verwachte_leveringen": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks.",
       "vaccin_levering_en_prikken": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks.",
       "vaccinatie_draagvlak": "This graph shows the percentage of the population that wishes to be vaccinated against COVID-19."
-    },
-    "link_source": "",
-    "link_download": ""
+    }
   },
   "deceased_age_groups": {
     "title": "COVID-19 deaths by age",
