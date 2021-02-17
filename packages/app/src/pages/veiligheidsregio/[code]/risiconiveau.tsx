@@ -49,7 +49,7 @@ const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
   const text = siteText.vr_risiconiveau;
 
   const { escalation_level, hospital_nice_sum, tested_overall_sum } = data;
-  const currentEscalationLevel = escalation_level.level as EscalationLevel;
+  const currentLevel = escalation_level.level as EscalationLevel;
 
   const positiveTestedColor = useEscalationColor(
     getCategoryLevel(
@@ -107,7 +107,7 @@ const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
           >
             <Box flex="0 0 10rem">
               <EscalationLevelInfoLabel
-                escalationLevel={currentEscalationLevel}
+                level={currentLevel}
                 fontSize={3}
                 useLevelColor
               />
@@ -115,10 +115,7 @@ const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
             {/* alignment with baseline of EscalationLevelInfoLabel */}
             <Box mt={{ sm: '-0.55rem' }}>
               <Text>
-                {
-                  siteText.escalatie_niveau.types[currentEscalationLevel]
-                    .toelichting
-                }
+                {siteText.escalatie_niveau.types[currentLevel].toelichting}
               </Text>
             </Box>
           </Box>

@@ -756,7 +756,7 @@ export interface RegionsTestedOverall {
 export interface EscalationLevels {
   date_unix: number;
   vrcode: string;
-  escalation_level: number;
+  level: number;
   valid_from_unix: number;
   date_of_insertion_unix: number;
 }

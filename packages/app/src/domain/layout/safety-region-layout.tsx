@@ -131,9 +131,7 @@ function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
                   >
                     <Box mt={2}>
                       <EscalationLevelInfoLabel
-                        escalationLevel={
-                          data.escalation_level.level as EscalationLevel
-                        }
+                        level={data.escalation_level.level as EscalationLevel}
                         hasSmallIcon
                         useLevelColor
                       />

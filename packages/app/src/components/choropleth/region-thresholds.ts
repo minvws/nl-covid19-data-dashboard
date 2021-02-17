@@ -224,7 +224,7 @@ export const regionThresholds = {
     admissions_on_date_of_reporting: hospitalAdmissionsThresholds,
   },
   escalation_levels: {
-    escalation_level: escalationThresholds,
+    level: escalationThresholds,
   },
   nursing_home: {
     infected_locations_percentage: nursingHomeInfectedLocationsPercentageThresholds,

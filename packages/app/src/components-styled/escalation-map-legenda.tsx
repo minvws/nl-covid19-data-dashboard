@@ -13,8 +13,7 @@ import { default as siteText, default as text } from '~/locale';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { Heading, InlineText } from './typography';
 
-const escalationThresholds =
-  regionThresholds.escalation_levels.escalation_level;
+const escalationThresholds = regionThresholds.escalation_levels.level;
 
 interface EscalationMapLegendaProps<K extends RegionsMetricName> {
   metricName: K;
