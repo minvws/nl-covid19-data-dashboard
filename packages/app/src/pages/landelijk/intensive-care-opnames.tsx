@@ -51,8 +51,6 @@ const IntakeIntensiveCare: FCWithLayout<typeof getStaticProps> = (props) => {
     new Date('1 June 2020'),
   ];
 
-  // const dataBeds = data.intensive_care_lcps;
-
   return (
     <>
       <SEOHead
