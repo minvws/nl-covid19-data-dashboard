@@ -1,5 +1,5 @@
 import css from '@styled-system/css';
-import ArrowIcon from '~/assets/arrow.svg';
+import { ArrowIconRight } from '~/components-styled/arrow-icon';
 import { Box } from '~/components-styled/base';
 import { Collapsible } from '~/components-styled/collapsible';
 import { EscalationLevelInfoLabel } from '~/components-styled/escalation-level';
@@ -16,11 +16,11 @@ type EscalationLevelExplanationProps = {
 function EscalationLevelExplanation(props: EscalationLevelExplanationProps) {
   const { level, explanation } = props;
   return (
-    <Box display="flex" flexDirection={{ _: 'column', lg: 'row' }}>
+    <Box display="flex" flexDirection={{ _: 'column', md: 'row' }}>
       <Box width="10rem" display="flex" flexGrow={0} flexShrink={0}>
-        <EscalationLevelInfoLabel escalationLevel={level} />
+        <EscalationLevelInfoLabel level={level} />
       </Box>
-      <Text>{explanation}</Text>
+      <Text css={css({ maxWidth: 'maxWidthText' })}>{explanation}</Text>
     </Box>
   );
 }
@@ -48,7 +48,7 @@ export function EscalationLevelExplanations() {
         <Box mt={4}>
           <LinkWithIcon
             href="/over-risiconiveaus"
-            icon={<ArrowIcon css={css({ transform: 'rotate(-90deg)' })} />}
+            icon={<ArrowIconRight />}
             iconPlacement="right"
           >
             {siteText.escalatie_niveau.lees_meer}

@@ -1,17 +1,15 @@
 {
   "name": "corona-dashboard",
   "private": true,
+  "license": "EUROPEAN UNION PUBLIC LICENCE v. 1.2",
   "resolutions": {
-    "//": "Visx internally uses d3-array@v2 but this isn't compatible with IE11",
-    "d3-array": "^1",
-    "//": "Visx internally uses version d3-scale@v3 but this isn't compatible with IE11",
-    "d3-scale": "^2",
-    "@types/d3-scale": "^2"
+    "//": "next@10.0.6 is broken in IE11: https://github.com/vercel/next.js/issues/21041#issuecomment-775983001",
+    "next": "10.0.5"
   },
   "scripts": {
     "test": "yarn workspaces run test",
     "test:ci": "yarn workspaces run test:ci",
-    "clean": "rimraf .build-cache && yarn workspace @corona-dashboard/common clean",
+    "clean": "rimraf .build-cache && yarn workspace @corona-dashboard/common clean && yarn workspace @corona-dashboard/app clean",
     "compile": "yarn workspace @corona-dashboard/common build && yarn workspaces run compile",
     "lint": "yarn workspaces run lint",
     "format": "yarn workspaces run format",
@@ -20,6 +18,7 @@
     "start": "yarn workspace @corona-dashboard/app start",
     "validate-json": "yarn workspace @corona-dashboard/cli validate-json",
     "validate-single": "yarn workspace @corona-dashboard/cli validate-single",
+    "validate-last-values": "yarn workspace @corona-dashboard/cli validate-last-values",
     "generate-typescript": "yarn workspace @corona-dashboard/cli generate-typescript",
     "e2e": "yarn workspace @corona-dashboard/e2e e2e",
     "e2e:ci": "yarn workspace @corona-dashboard/e2e e2e:ci",
@@ -35,5 +34,6 @@
       "pre-commit": "yarn workspace @corona-dashboard/app lint-staged",
       "pre-push": "yarn workspace @corona-dashboard/app run type-check"
     }
-  }
+  },
+  "dependencies": {}
 }

@@ -41,6 +41,7 @@ import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 export { getStaticPaths } from '~/static-paths/gm';
+import { HighlightTeaserProps } from '~/components-styled/highlight-teaser';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -52,7 +53,7 @@ export const getStaticProps = createGetStaticProps(
   createGetContent<{
     articles: ArticleSummary[];
     editorial: EditorialSummary;
-    highlight: { article: ArticleSummary };
+    highlight: HighlightTeaserProps;
   }>(topicalPageQuery)
 );
 
@@ -74,8 +75,8 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
   );
 
   assert(
-    filteredRegion,
-    `Could not find a "vrcode" to match with the region: ${safetyRegionForMunicipality?.code} to get the the current "escalation_level" of it.`
+    filteredRegion && filteredRegion.level,
+    `Could not find a "vrcode" to match with the region: ${safetyRegionForMunicipality?.code} to get the the current "level" of it.`
   );
 
   return (
@@ -149,7 +150,7 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
               <RiskLevelIndicator
                 title={text.risoconiveau_maatregelen.title}
                 description={text.risoconiveau_maatregelen.description}
-                escalationLevel={filteredRegion.escalation_level}
+                level={filteredRegion.level}
                 code={filteredRegion.vrcode}
                 escalationTypes={escalationText.types}
                 href={`/veiligheidsregio/${safetyRegionForMunicipality?.code}/maatregelen`}
@@ -199,10 +200,10 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
               ]}
             />
 
-            {content.editorial && content.highlight?.article && (
+            {content.editorial && content.highlight && (
               <EditorialTile
                 editorial={content.editorial}
-                highlightedArticle={content.highlight.article}
+                highlight={content.highlight}
               />
             )}
 
@@ -222,17 +223,20 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
                       <EscalationMapLegenda
                         data={choropleth.vr}
                         metricName="escalation_levels"
-                        metricProperty="escalation_level"
+                        metricProperty="level"
                       />
                     }
                   >
                     <SafetyRegionChoropleth
                       data={choropleth.vr}
                       metricName="escalation_levels"
-                      metricProperty="escalation_level"
-                      onSelect={createSelectRegionHandler(router, 'actueel')}
+                      metricProperty="level"
+                      onSelect={createSelectRegionHandler(
+                        router,
+                        'risiconiveau'
+                      )}
                       tooltipContent={escalationTooltip(
-                        createSelectRegionHandler(router, 'actueel')
+                        createSelectRegionHandler(router, 'risiconiveau')
                       )}
                       highlightCode={safetyRegionForMunicipality?.code}
                     />

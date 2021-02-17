@@ -33,11 +33,18 @@ const CACHE_DIR =
             filename: `${image.assetId}.${image.extension}`,
             directory: `images`,
           }
-        : imageResizeTargets.map((size) => ({
-            url: `${image.url}?w=${size}`,
-            filename: `${image.assetId}-${size}.${image.extension}`,
-            directory: `images`,
-          }))
+        : imageResizeTargets.flatMap((size) => [
+            {
+              url: `${image.url}?w=${size}`,
+              filename: `${image.assetId}-${size}.${image.extension}`,
+              directory: `images`,
+            },
+            {
+              url: `${image.url}?w=${size}&fm=webp`,
+              filename: `${image.assetId}-${size}.webp`,
+              directory: `images`,
+            },
+          ])
     ),
   ];
 

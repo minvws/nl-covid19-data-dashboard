@@ -1,4 +1,4 @@
-import { formatNumber } from '@corona-dashboard/common';
+import { formatNumber, getLastFilledValue } from '@corona-dashboard/common';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
@@ -10,7 +10,7 @@ import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
-import { addBackgroundRectangleCallback } from '~/components-styled/line-chart/components/chart-axes/component-callbacks/add-background-rectangle-callback';
+import { addBackgroundRectangleCallback } from '~/components-styled/line-chart/logic/background-rectangle';
 import { PageBarScale } from '~/components-styled/page-barscale';
 import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
@@ -36,8 +36,15 @@ import {
   getNlData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
-import { formatDateFromMilliseconds } from '~/utils/formatDate';
-import { getTrailingDateRange } from '~/utils/get-trailing-date-range';
+import { createDate } from '~/utils/createDate';
+import {
+  formatDateFromMilliseconds,
+  formatDateFromSeconds,
+} from '~/utils/formatDate';
+import {
+  getTrailingDateRange,
+  DateRange,
+} from '~/utils/get-trailing-date-range';
 
 const text = siteText.ziekenhuisopnames_per_dag;
 const graphDescriptions = siteText.accessibility.grafieken;
@@ -66,6 +73,13 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
   const lastValueLcps = data.hospital_lcps.last_value;
 
   const underReportedRange = getTrailingDateRange(dataHospitalNice.values, 4);
+
+  const bedsLastValue = getLastFilledValue(data.hospital_lcps);
+
+  const lcpsOldDataRange = [
+    createDate(dataHospitalLcps.values[0].date_unix),
+    new Date('1 June 2020'),
+  ] as DateRange;
 
   return (
     <>
@@ -122,7 +136,7 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
           >
             <KpiValue
               data-cy="beds_occupied_covid"
-              absolute={lastValueLcps.beds_occupied_covid}
+              absolute={bedsLastValue.beds_occupied_covid!}
               difference={data.difference.hospital_lcps__beds_occupied_covid}
             />
           </KpiTile>
@@ -243,6 +257,31 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
           ]}
           metadata={{
             source: text.bronnen.lnaz,
+          }}
+          componentCallback={addBackgroundRectangleCallback(lcpsOldDataRange, {
+            fill: colors.data.underReported,
+          })}
+          formatTooltip={(values) => {
+            const value = values[0];
+            const isInaccurateValue = value.__date < lcpsOldDataRange[1];
+
+            return (
+              <>
+                <Box display="flex" alignItems="center" flexDirection="column">
+                  {isInaccurateValue && (
+                    <Text as="span" fontSize={0} color={colors.annotation}>
+                      ({siteText.common.incomplete})
+                    </Text>
+                  )}
+                  <Box>
+                    <Text as="span" fontWeight="bold">
+                      {`${formatDateFromSeconds(value.date_unix)}: `}
+                    </Text>
+                    {formatNumber(value.__value)}
+                  </Box>
+                </Box>
+              </>
+            );
           }}
         />
       </TileList>

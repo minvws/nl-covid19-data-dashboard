@@ -22,7 +22,7 @@ const tooltipContent = (selectedHandler: MunicipalitySelectionHandler) => {
   return (context: MunicipalityProperties): ReactNode => {
     const onSelectMunicipal = (event: any) => {
       event.stopPropagation();
-      selectedHandler(context);
+      selectedHandler(context.gmcode);
     };
 
     return (
@@ -52,7 +52,7 @@ const Municipality: FCWithLayout<typeof getStaticProps> = () => {
 
       {!breakpoints.md && (
         <Box bg="white">
-          <MunicipalityComboBox />
+          <MunicipalityComboBox onSelect={goToMunicipal} />
         </Box>
       )}
 

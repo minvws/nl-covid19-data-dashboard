@@ -2,7 +2,7 @@
 import { imageResizeTargets } from '@corona-dashboard/common';
 import BlockContent from '@sanity/block-content-to-react';
 import sanityClient from '@sanity/client';
-import { TLanguageKey } from '~/locale';
+import { LanguageKey } from '~/locale';
 import { ImageBlock, SanityFileProps, SanityImageProps } from '~/types/cms';
 import { findClosestSize } from '~/utils/findClosestSize';
 
@@ -39,7 +39,7 @@ export const client = sanityClient(config);
  **/
 // export const urlFor = (source: SanityImageSource) => builder.image(source);
 
-export function localize<T>(value: T | T[], languages: TLanguageKey[]): T {
+export function localize<T>(value: T | T[], languages: LanguageKey[]): T {
   const anyValue = value as any;
 
   if (Array.isArray(value)) {
@@ -72,30 +72,62 @@ export function localize<T>(value: T | T[], languages: TLanguageKey[]): T {
  * for a correctly resizing responsive image.
  *
  * By default the `src` will resolve the to a size close to the original size.
- * Optionally you can provide a second parameter to override this size.
+ * Optionally you can provide a configuration objext to override this size.
+ *
+ * The configuration object accepts a an array called sizes where you map viewport widths to an image width in pixels.
+ * This allows you to override the 1-on-1 matching behavior of srcSet to a tailored one for your image.
+ * E.g. Normally a 1024vw viewport will load a 1024px image.
+ *
  *
  * Usage:
  *
  *     <img {...getImageProps(node)} />
- *     <img {...getImageProps(node, 450)} />
+ *     <img {...getImageProps(node, {defaultWidth: 450})} />
+ *     <img {...getImageProps(node, {defaultWidth: 450, sizes: [[320, 320], [1024, 512]]})} />
  */
+
+type ImageProps = {
+  defaultWidth?: number;
+  sizes?: number[][];
+};
+
 export function getImageProps<T extends ImageBlock>(
   node: T,
-  desiredWith = node.asset.metadata.dimensions.width
+  options: ImageProps
 ) {
   const { asset, alt } = node;
   const { metadata } = asset;
 
-  const width = findClosestSize(desiredWith, imageResizeTargets);
+  const {
+    defaultWidth = node.asset.metadata.dimensions.width,
+    sizes,
+  } = options;
+
+  const width = findClosestSize(defaultWidth, imageResizeTargets);
   const height = width / metadata.dimensions.aspectRatio;
 
-  const src = getImageSrc(node.asset, desiredWith);
-  const srcSet =
-    asset.extension === 'svg'
-      ? undefined
-      : imageResizeTargets
-          .map((size) => `${getImageSrc(asset, size)} ${size}w`)
-          .join(', ');
+  const src = getImageSrc(node.asset, defaultWidth);
+  let srcSet = undefined; //we keep this undefined for SVG's, which don't need srcSets
+
+  if (asset.extension !== 'svg') {
+    /**
+     * We can provide a specific set of options called sizes, which maps viewport widths to image widths.
+     * Passing this sizes option will override the default behavior
+     */
+    if (sizes) {
+      srcSet = sizes
+        .map((srcSetSize) => {
+          const [viewport, size] = srcSetSize;
+          return `${getImageSrc(asset, size)} ${viewport}w`;
+        })
+        .join(', ');
+    } else {
+      // Map viewports and sizes 1-on-1
+      srcSet = imageResizeTargets
+        .map((size) => `${getImageSrc(asset, size)} ${size}w`)
+        .join(', ');
+    }
+  }
 
   return {
     src,
@@ -103,6 +135,7 @@ export function getImageProps<T extends ImageBlock>(
     alt,
     width,
     height,
+    extension: asset.extension,
   };
 }
 
@@ -112,11 +145,11 @@ export function getFileSrc(asset: SanityFileProps) {
 
 export function getImageSrc(
   asset: SanityImageProps,
-  desiredWidth = asset.metadata.dimensions.width
+  defaultWidth = asset.metadata.dimensions.width
 ) {
   if (asset.extension === 'svg') {
     return `/cms/images/${asset.assetId}.svg`;
   }
-  const size = findClosestSize(desiredWidth, imageResizeTargets);
+  const size = findClosestSize(defaultWidth, imageResizeTargets);
   return `/cms/images/${asset.assetId}-${size}.${asset.extension}`;
 }

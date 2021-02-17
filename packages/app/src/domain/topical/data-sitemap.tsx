@@ -1,8 +1,8 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import NederlandIcon from '~/assets/nederland.svg';
-import ArrowIcon from '~/assets/arrow.svg';
-import { TitleWithIcon } from '~/components-styled/aside/title-with-icon';
+import { ArrowIconRight } from '~/components-styled/arrow-icon';
+import { Title } from '~/components-styled/aside/title';
 import { Box } from '~/components-styled/base';
 import { LinkWithIcon } from '~/components-styled/link-with-icon';
 import { InlineText, Text } from '~/components-styled/typography';
@@ -18,10 +18,10 @@ export function DataSitemap() {
 
   return (
     <Box>
-      <TitleWithIcon
+      <Title
         level={2}
         title={siteText.nationaal_actueel.data_sitemap_titel}
-        fontSize="1.25rem"
+        fontSize="2.75em"
         icon={<NederlandIcon />}
       />
       <Box>
@@ -146,7 +146,7 @@ function SitemapItem(props: SitemapItemProps) {
     <Item>
       <LinkWithIcon
         href={href}
-        icon={<ArrowIcon css={css({ transform: 'rotate(-90deg)' })} />}
+        icon={<ArrowIconRight />}
         iconPlacement="right"
         fontWeight="bold"
       >

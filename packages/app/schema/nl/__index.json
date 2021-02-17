@@ -5,6 +5,7 @@
   "required": [
     "behavior",
     "code",
+    "corona_melder_app",
     "deceased_cbs",
     "deceased_rivm",
     "deceased_rivm_per_age_group",
@@ -27,6 +28,7 @@
     "tested_ggd_average",
     "tested_overall",
     "tested_per_age_group",
+    "vaccine_support",
     "vaccine_delivery"
   ],
   "additionalProperties": false,
@@ -105,6 +107,12 @@
     },
     "elderly_at_home": {
       "$ref": "elderly_at_home.json"
+    },
+    "vaccine_support": {
+      "$ref": "vaccine_support.json"
+    },
+    "corona_melder_app": {
+      "$ref": "corona_melder_app.json"
     },
     "vaccine_delivery": {
       "$ref": "vaccine_delivery.json"

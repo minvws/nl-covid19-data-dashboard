@@ -34,11 +34,11 @@ import {
   getText,
   getVrData,
 } from '~/static-props/get-data';
-import { assert } from '~/utils/assert';
 import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 export { getStaticPaths } from '~/static-paths/vr';
+import { HighlightTeaserProps } from '~/components-styled/highlight-teaser';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -50,7 +50,7 @@ export const getStaticProps = createGetStaticProps(
   createGetContent<{
     articles: ArticleSummary[];
     editorial: EditorialSummary;
-    highlight: { article: ArticleSummary };
+    highlight: HighlightTeaserProps;
   }>(topicalPageQuery)
 );
 
@@ -61,15 +61,6 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
   const escalationText = siteText.escalatie_niveau;
 
   const regionCode = router.query.code;
-
-  const filteredRegion = props.choropleth.vr.escalation_levels.find(
-    (item) => item.vrcode === regionCode
-  );
-
-  assert(
-    filteredRegion,
-    `Could not find a "vrcode" to match with the region: ${regionCode} to get the the current "escalation_level" of it.`
-  );
 
   const dataInfectedTotal = data.tested_overall;
   const dataHospitalIntake = data.hospital_nice;
@@ -145,8 +136,8 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
               <RiskLevelIndicator
                 title={text.risoconiveau_maatregelen.title}
                 description={text.risoconiveau_maatregelen.description}
-                escalationLevel={filteredRegion.escalation_level}
-                code={filteredRegion.vrcode}
+                level={data.escalation_level.level}
+                code={data.code}
                 escalationTypes={escalationText.types}
                 href={`/veiligheidsregio/${router.query.code}/maatregelen`}
               >
@@ -174,10 +165,10 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
               ]}
             />
 
-            {content.editorial && content.highlight?.article && (
+            {content.editorial && content.highlight && (
               <EditorialTile
                 editorial={content.editorial}
-                highlightedArticle={content.highlight.article}
+                highlight={content.highlight}
               />
             )}
 
@@ -197,18 +188,21 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
                       <EscalationMapLegenda
                         data={choropleth.vr}
                         metricName="escalation_levels"
-                        metricProperty="escalation_level"
+                        metricProperty="level"
                       />
                     }
                   >
                     <SafetyRegionChoropleth
                       data={choropleth.vr}
                       metricName="escalation_levels"
-                      metricProperty="escalation_level"
-                      onSelect={createSelectRegionHandler(router, 'actueel')}
+                      metricProperty="level"
+                      onSelect={createSelectRegionHandler(
+                        router,
+                        'risiconiveau'
+                      )}
                       highlightCode={`${regionCode}`}
                       tooltipContent={escalationTooltip(
-                        createSelectRegionHandler(router, 'actueel')
+                        createSelectRegionHandler(router, 'risiconiveau')
                       )}
                     />
                   </TopicalChoroplethContainer>
