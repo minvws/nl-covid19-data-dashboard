@@ -267,7 +267,7 @@ export interface NationalHospitalLcps {
   last_value: NationalHospitalLcpsValue;
 }
 export interface NationalHospitalLcpsValue {
-  beds_occupied_covid: number;
+  beds_occupied_covid: number | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }

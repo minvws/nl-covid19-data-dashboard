@@ -27,6 +27,7 @@ import { colors } from '~/style/theme';
 import { createDate } from '~/utils/createDate';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
+import { DateRange } from '~/utils/get-trailing-date-range';
 
 const text = siteText.ic_opnames_per_dag;
 const graphDescriptions = siteText.accessibility.grafieken;
@@ -46,10 +47,10 @@ const IntakeIntensiveCare: FCWithLayout<typeof getStaticProps> = (props) => {
 
   const bedsLastValue = getLastFilledValue(data.intensive_care_lcps);
 
-  const icOldDataRange = [
+  const lcpsOldDataRange = [
     createDate(data.intensive_care_lcps.values[0].date_unix),
     new Date('1 June 2020'),
-  ];
+  ] as DateRange;
 
   return (
     <>
@@ -136,18 +137,12 @@ const IntakeIntensiveCare: FCWithLayout<typeof getStaticProps> = (props) => {
             },
           ]}
           metadata={{ source: text.bronnen.lnaz }}
-          componentCallback={addBackgroundRectangleCallback(
-            [
-              createDate(data.intensive_care_lcps.values[0].date_unix),
-              new Date('1 June 2020'),
-            ],
-            {
-              fill: colors.data.underReported,
-            }
-          )}
+          componentCallback={addBackgroundRectangleCallback(lcpsOldDataRange, {
+            fill: colors.data.underReported,
+          })}
           formatTooltip={(values) => {
             const value = values[0];
-            const isInaccurateValue = value.__date < icOldDataRange[0];
+            const isInaccurateValue = value.__date < lcpsOldDataRange[1];
 
             return (
               <>
