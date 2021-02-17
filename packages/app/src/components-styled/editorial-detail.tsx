@@ -1,5 +1,4 @@
-import css from '@styled-system/css';
-import ArrowIcon from '~/assets/arrow.svg';
+import { ArrowIconLeft } from '~/components-styled/arrow-icon';
 import { Box } from '~/components-styled/base';
 import { ContentBlock } from '~/components-styled/cms/content-block';
 import { ContentImage } from '~/components-styled/cms/content-image';
@@ -18,10 +17,7 @@ export function EditorialDetail({ editorial }: EditorialDetailProps) {
   return (
     <Box bg="white" py={{ _: 4, md: 5 }}>
       <ContentBlock spacing={3}>
-        <LinkWithIcon
-          href="/"
-          icon={<ArrowIcon css={css({ transform: 'rotate(90deg)' })} />}
-        >
+        <LinkWithIcon href="/" icon={<ArrowIconLeft />}>
           {siteText.editorial_detail.back_link.text}
         </LinkWithIcon>
 

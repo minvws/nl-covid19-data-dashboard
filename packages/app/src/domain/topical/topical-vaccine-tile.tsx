@@ -1,12 +1,13 @@
 import { formatNumber } from '@corona-dashboard/common';
-import css from '@styled-system/css';
-import ArrowIcon from '~/assets/arrow.svg';
+
 import Vaccinaties from '~/assets/vaccinaties.svg';
 import { Box } from '~/components-styled/base';
 import { LinkWithIcon } from '~/components-styled/link-with-icon';
 import { Heading, Text } from '~/components-styled/typography';
 import siteText from '~/locale';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+
+import { ArrowIconRight } from '~/components-styled/arrow-icon';
 
 export function TopicalVaccineTile() {
   const text = siteText.nationaal_actueel.mini_trend_tiles.toegediende_vaccins;
@@ -36,7 +37,7 @@ export function TopicalVaccineTile() {
       >
         <LinkWithIcon
           href={'/landelijk/vaccinaties'}
-          icon={<ArrowIcon css={css({ transform: 'rotate(-90deg)' })} />}
+          icon={<ArrowIconRight />}
           iconPlacement="right"
           fontWeight="bold"
           headingLink
