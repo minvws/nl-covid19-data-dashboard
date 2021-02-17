@@ -1,4 +1,4 @@
-import { formatNumber } from '@corona-dashboard/common';
+import { formatNumber, getLastFilledValue } from '@corona-dashboard/common';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
@@ -71,6 +71,8 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
 
   const underReportedRange = getTrailingDateRange(dataHospitalNice.values, 4);
 
+  const bedsLastValue = getLastFilledValue(data.hospital_lcps);
+
   const lcpsOldDataRange = [
     createDate(dataHospitalLcps.values[0].date_unix),
     new Date('1 June 2020'),
@@ -131,7 +133,7 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
           >
             <KpiValue
               data-cy="beds_occupied_covid"
-              absolute={lastValueLcps.beds_occupied_covid}
+              absolute={bedsLastValue.beds_occupied_covid!}
               difference={data.difference.hospital_lcps__beds_occupied_covid}
             />
           </KpiTile>

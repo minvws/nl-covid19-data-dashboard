@@ -46,7 +46,7 @@ const IntakeIntensiveCare: FCWithLayout<typeof getStaticProps> = (props) => {
 
   const bedsLastValue = getLastFilledValue(data.intensive_care_lcps);
 
-  const icOldDataRange = [
+  const lcpsOldDataRange = [
     createDate(data.intensive_care_lcps.values[0].date_unix),
     new Date('1 June 2020'),
   ];
@@ -147,7 +147,7 @@ const IntakeIntensiveCare: FCWithLayout<typeof getStaticProps> = (props) => {
           )}
           formatTooltip={(values) => {
             const value = values[0];
-            const isInaccurateValue = value.__date < icOldDataRange[0];
+            const isInaccurateValue = value.__date < lcpsOldDataRange[0];
 
             return (
               <>
