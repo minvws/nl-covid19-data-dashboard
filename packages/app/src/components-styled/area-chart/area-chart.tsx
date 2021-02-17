@@ -264,7 +264,6 @@ export function AreaChart<
             <Marker
               {...markerProps}
               showLine={true}
-              formatLabel={formatMarkerLabel}
               dateSpanWidth={dateSpanScale.bandwidth()}
               height={height}
               padding={padding}
@@ -332,15 +331,6 @@ function renderDivider(
       </Group>
     );
   });
-}
-
-function formatMarkerLabel(data: TimestampedTrendValue) {
-  if (isDateValue(data)) {
-    return formatDateFromSeconds(data.date_unix);
-  } else if (isDateSpanValue(data)) {
-    return formatDateFromSeconds(data.date_start_unix);
-  }
-  return '';
 }
 
 function formatDefaultTooltip<
