@@ -1,6 +1,6 @@
 import { css } from '@styled-system/css';
 import { ParentSize } from '@visx/responsive';
-import { Fragment, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import VaccinatieIcon from '~/assets/vaccinaties.svg';
 import { ArticleStrip } from '~/components-styled/article-strip';
@@ -20,7 +20,7 @@ import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
-import { targetLanguage } from '~/locale/index';
+import siteText, { targetLanguage } from '~/locale/index';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
@@ -49,7 +49,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
 }) => {
   const text = siteText.vaccinaties;
   const [selectedTab, setSelectedTab] = useState(
-    text.data.kpi_total.first_tab_title
+    text.gezette_prikken.tab_first.title
   );
 
   return (
@@ -77,9 +77,9 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
 
         <TwoKpiSection>
           <KpiTile
-            title={text.data.kpi_total.title}
+            title={text.gezette_prikken.title}
             metadata={{
-              date: parseFloat(text.data.kpi_total.date_of_report_unix),
+              date: data.vaccine_administered_total.last_value.date_unix,
               source: text.bronnen.all_left,
             }}
           >
@@ -92,122 +92,119 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                 onChange={(value) => setSelectedTab(value)}
                 items={[
                   {
-                    label: text.data.kpi_total.first_tab_title,
-                    value: text.data.kpi_total.first_tab_title,
+                    label: text.gezette_prikken.tab_first.title,
+                    value: text.gezette_prikken.tab_first.title,
                   },
                   {
-                    label: text.data.kpi_total.second_tab_title,
-                    value: text.data.kpi_total.second_tab_title,
+                    label: text.gezette_prikken.tab_second.title,
+                    value: text.gezette_prikken.tab_second.title,
                   },
                 ]}
               />
             </Box>
-            {selectedTab == text.data.kpi_total.first_tab_title && (
+            {selectedTab == text.gezette_prikken.tab_first.title && (
               <>
                 <KpiValue
-                  absolute={parseFloat(
-                    text.data.kpi_total.tab_total_estimated.value
-                  )}
+                  absolute={
+                    data.vaccine_administered_total.last_value.estimated
+                  }
                 />
                 <Box display="flex" flexDirection={{ _: 'column', lg: 'row' }}>
                   <Box flex={{ lg: '1 1 50%' }}>
                     <Text
                       mb={3}
                       dangerouslySetInnerHTML={{
-                        __html:
-                          text.data.kpi_total.tab_total_estimated
-                            .description_first,
-                      }}
-                    />
-                    <Text
-                      mb={3}
-                      dangerouslySetInnerHTML={{
-                        __html:
-                          text.data.kpi_total.tab_total_estimated
-                            .description_second,
+                        __html: text.gezette_prikken.tab_first.description,
                       }}
                     />
                   </Box>
                   <Box flex={{ lg: '1 1 50%' }} ml={{ lg: 4 }}>
-                    {text.data.kpi_total.tab_total_estimated.administered.map(
-                      (item, index) => (
-                        <Fragment key={index}>
-                          {item.value && item.description && (
-                            <Text fontWeight="bold">
-                              <InlineText css={css({ color: 'data.primary' })}>
-                                {formatNumber(parseFloat(item.value))}
-                              </InlineText>{' '}
-                              <InlineText
-                                css={css({
-                                  '& p': { display: 'inline-block', m: 0 },
-                                })}
-                                dangerouslySetInnerHTML={{
-                                  __html: item.description,
-                                }}
-                              />
-                              <br />
-                              <InlineText
-                                fontWeight="normal"
-                                fontSize={1}
-                                color="annotation"
-                              >
-                                {item.report_date}
-                              </InlineText>
-                            </Text>
-                          )}
-                        </Fragment>
-                      )
-                    )}
+                    <VaccineAdministeredItem
+                      amount={
+                        data.vaccine_administered_ggd.last_value.estimated
+                      }
+                      text={text.gezette_prikken.estimated.ggd}
+                      date={
+                        data.vaccine_administered_ggd.last_value
+                          .date_of_insertion_unix
+                      }
+                    />
+
+                    <VaccineAdministeredItem
+                      amount={
+                        data.vaccine_administered_hospitals.last_value.estimated
+                      }
+                      text={text.gezette_prikken.estimated.hospitals}
+                      date={
+                        data.vaccine_administered_hospitals.last_value
+                          .date_of_insertion_unix
+                      }
+                    />
+
+                    <VaccineAdministeredItem
+                      amount={
+                        data.vaccine_administered_care_institutions.last_value
+                          .estimated
+                      }
+                      text={text.gezette_prikken.estimated.care_institutions}
+                      date={
+                        data.vaccine_administered_care_institutions.last_value
+                          .date_of_insertion_unix
+                      }
+                    />
+
+                    <VaccineAdministeredItem
+                      amount={
+                        data.vaccine_administered_doctors.last_value.estimated
+                      }
+                      text={text.gezette_prikken.estimated.doctors}
+                      date={
+                        data.vaccine_administered_doctors.last_value
+                          .date_of_insertion_unix
+                      }
+                    />
                   </Box>
                 </Box>
               </>
             )}
-            {selectedTab == text.data.kpi_total.second_tab_title && (
+            {selectedTab == text.gezette_prikken.tab_second.title && (
               <>
-                <KpiValue absolute={parseFloat(text.data.kpi_total.value)} />
+                <KpiValue
+                  absolute={data.vaccine_administered_total.last_value.reported}
+                />
                 <Box display="flex" flexDirection={{ _: 'column', lg: 'row' }}>
                   <Box flex={{ lg: '1 1 50%' }}>
                     <Text
                       mb={3}
                       dangerouslySetInnerHTML={{
-                        __html: text.data.kpi_total.description_first,
-                      }}
-                    />
-                    <Text
-                      mb={3}
-                      dangerouslySetInnerHTML={{
-                        __html: text.data.kpi_total.description_second,
+                        __html: text.gezette_prikken.tab_second.description,
                       }}
                     />
                   </Box>
                   <Box flex={{ lg: '1 1 50%' }} ml={{ lg: 4 }}>
-                    {text.data.kpi_total.administered.map((item, index) => (
-                      <Fragment key={index}>
-                        {item.value && item.description && (
-                          <Text fontWeight="bold">
-                            <InlineText css={css({ color: 'data.primary' })}>
-                              {formatNumber(parseFloat(item.value))}
-                            </InlineText>{' '}
-                            <InlineText
-                              css={css({
-                                '& p': { display: 'inline-block', m: 0 },
-                              })}
-                              dangerouslySetInnerHTML={{
-                                __html: item.description,
-                              }}
-                            />
-                            <br />
-                            <InlineText
-                              fontWeight="normal"
-                              fontSize={1}
-                              color="annotation"
-                            >
-                              {item.report_date}
-                            </InlineText>
-                          </Text>
-                        )}
-                      </Fragment>
-                    ))}
+                    <VaccineAdministeredItem
+                      amount={
+                        data.vaccine_administered_ggd_ghor.last_value.reported
+                      }
+                      text={text.gezette_prikken.reported.ggd_ghor}
+                      date={
+                        data.vaccine_administered_ggd_ghor?.last_value
+                          ?.date_of_insertion_unix
+                      }
+                      isReported
+                    />
+
+                    <VaccineAdministeredItem
+                      amount={
+                        data.vaccine_administered_lnaz.last_value.reported
+                      }
+                      text={text.gezette_prikken.reported.lnaz}
+                      date={
+                        data.vaccine_administered_lnaz.last_value
+                          .date_of_insertion_unix
+                      }
+                      isReported
+                    />
                   </Box>
                 </Box>
               </>
@@ -396,12 +393,10 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
         </ChartTile>
 
         <TwoKpiSection>
-          <KpiTile title={text.data.kpi_expected_page_additions.title}>
-            <Text mb={4}>
-              {text.data.kpi_expected_page_additions.description}
-            </Text>
+          <KpiTile title={text.expected_page_additions.title}>
+            <Text mb={4}>{text.expected_page_additions.description}</Text>
             <ul>
-              {text.data.kpi_expected_page_additions.additions
+              {text.expected_page_additions.additions
                 .filter((x) => x.length)
                 .map((addition) => (
                   <li key={addition}>
@@ -419,6 +414,37 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
 VaccinationPage.getLayout = getNationalLayout;
 
 export default VaccinationPage;
+
+interface VaccineAdministeredProps {
+  amount: number;
+  date: number;
+  text: string;
+  isReported?: boolean;
+}
+
+function VaccineAdministeredItem(props: VaccineAdministeredProps) {
+  const { amount, date, text, isReported } = props;
+
+  return (
+    <Text fontWeight="bold">
+      <InlineText css={css({ color: 'data.primary' })}>
+        {formatNumber(amount)}
+      </InlineText>{' '}
+      {text}
+      <br />
+      <InlineText fontWeight="normal" fontSize={1} color="annotation">
+        {replaceVariablesInText(
+          isReported
+            ? siteText.vaccinaties.gezette_prikken.reported_until
+            : siteText.vaccinaties.gezette_prikken.estimated_until,
+          {
+            reportedDate: formatDateFromSeconds(date, 'weekday-medium'),
+          }
+        )}
+      </InlineText>
+    </Text>
+  );
+}
 
 const TooltipList = styled.ol`
   margin: 0;

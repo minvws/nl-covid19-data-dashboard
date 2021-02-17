@@ -8,17 +8,19 @@ import { Heading, Text } from '~/components-styled/typography';
 import siteText from '~/locale';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 
-export function TopicalVaccineTile() {
+interface TopicalVaccineProps {
+  estimatedAmount: number;
+}
+
+export function TopicalVaccineTile(props: TopicalVaccineProps) {
+  const { estimatedAmount } = props;
   const text = siteText.nationaal_actueel.mini_trend_tiles.toegediende_vaccins;
 
-  const data = {
-    administeredVaccines: parseFloat(
-      siteText.vaccinaties.data.kpi_total.tab_total_estimated.value
-    ),
-    expectedDelivery: parseFloat(
-      siteText.vaccinaties.data.kpi_expected_delivery.value
-    ),
-  };
+  // const data = {
+  //   expectedDelivery: parseFloat(
+  //     siteText.vaccinaties.data.kpi_expected_delivery.value
+  //   ),
+  // };
 
   return (
     <Box position="relative" pb={3}>
@@ -46,13 +48,13 @@ export function TopicalVaccineTile() {
       </Heading>
 
       <Text fontSize="2.25rem" fontWeight="bold" my={0} lineHeight={0} mb={2}>
-        {formatNumber(data.administeredVaccines)}
+        {formatNumber(estimatedAmount)}
       </Text>
 
       <Text mt={0}>
         {replaceComponentsInText(text.administered_tests, {
           administeredVaccines: (
-            <strong>{formatNumber(data.administeredVaccines)}</strong>
+            <strong>{formatNumber(estimatedAmount)}</strong>
           ),
         })}
       </Text>
@@ -61,13 +63,13 @@ export function TopicalVaccineTile() {
         {text.sub_title}
       </Text>
 
-      <Text mt={0}>
+      {/* <Text mt={0}>
         {replaceComponentsInText(text.supply, {
           expectedDelivery: (
             <strong>{formatNumber(data.expectedDelivery)}</strong>
           ),
         })}
-      </Text>
+      </Text> */}
     </Box>
   );
 }

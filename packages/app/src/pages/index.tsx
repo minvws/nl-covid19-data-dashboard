@@ -146,7 +146,11 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                 href="/landelijk/ziekenhuis-opnames"
               />
 
-              <TopicalVaccineTile />
+              <TopicalVaccineTile
+                estimatedAmount={
+                  data.vaccine_administered_total.last_value.estimated
+                }
+              />
             </MiniTrendTileLayout>
 
             <QuickLinks
