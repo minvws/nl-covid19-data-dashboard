@@ -90,7 +90,7 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
         })}
       />
       <Box bg="white" pb={4}>
-        <MaxWidth px={{ _: 3, sm: 0 }}>
+        <MaxWidth>
           <TileList>
             <WarningTile
               message={siteText.regionaal_index.belangrijk_bericht}

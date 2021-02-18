@@ -153,3 +153,11 @@ export function getImageSrc(
   const size = findClosestSize(defaultWidth, imageResizeTargets);
   return `/cms/images/${asset.assetId}-${size}.${asset.extension}`;
 }
+
+export function maybeCreateWebpUrl(url: string) {
+  const extensionRegex = /(.(png|gif|jpe?g))$/;
+
+  return url.startsWith('/cms/images') && extensionRegex.test(url)
+    ? url.replace(extensionRegex, '.webp')
+    : undefined;
+}

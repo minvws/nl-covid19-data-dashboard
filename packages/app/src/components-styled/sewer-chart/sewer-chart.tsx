@@ -343,11 +343,13 @@ export function SewerChart(props: SewerChartProps) {
 
       <Legenda
         items={[
-          stationValuesFiltered.length > 0
+          sewerStationSelectProps.value
             ? {
-                color: 'rgba(89, 89, 89, 0.3)',
-                label: text.secondary_label_text,
-                shape: 'circle' as const,
+                color: colors.data.secondary,
+                label: replaceVariablesInText(text.daily_label_text, {
+                  name: sewerStationSelectProps.value,
+                }),
+                shape: 'line' as const,
               }
             : undefined,
           {
@@ -357,13 +359,11 @@ export function SewerChart(props: SewerChartProps) {
             label: text.average_label_text,
             shape: 'line' as const,
           },
-          sewerStationSelectProps.value
+          stationValuesFiltered.length > 0
             ? {
-                color: colors.data.secondary,
-                label: replaceVariablesInText(text.daily_label_text, {
-                  name: sewerStationSelectProps.value,
-                }),
-                shape: 'line' as const,
+                color: 'rgba(89, 89, 89, 0.3)',
+                label: text.secondary_label_text,
+                shape: 'circle' as const,
               }
             : undefined,
         ].filter(isPresent)}

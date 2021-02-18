@@ -132,7 +132,7 @@ const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
                 tested_overall_sum.last_value.date_start_unix,
                 tested_overall_sum.last_value.date_end_unix,
               ],
-              source: text.bronnen.rivm_positieve_testen,
+              source: text.bronnen.rivm_positieve_testen_kpi,
             }}
           >
             <Box spacing={2} spacingHorizontal>
@@ -166,7 +166,7 @@ const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
                 hospital_nice_sum.last_value.date_start_unix,
                 hospital_nice_sum.last_value.date_end_unix,
               ],
-              source: text.bronnen.rivm_ziekenhuisopnames,
+              source: text.bronnen.rivm_ziekenhuisopnames_kpi,
             }}
           >
             <Box spacing={2} spacingHorizontal>
