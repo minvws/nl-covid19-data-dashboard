@@ -2452,7 +2452,7 @@
     "positieve_testen": {
       "title": "Positieve testen",
       "value_annotation": "per 100.000 inwoners per week",
-      "description": "Dit getal laat zien hoeveel mensen de afgelopen 7 dagen positief getest zijn per 100.000 inwoners. De balk laat zien hoe ernstig het aantal positieve testen is."
+      "description": "Dit getal laat zien hoeveel mensen uit deze veiligheidsregio de afgelopen 7 dagen positief getest zijn per 100.000 inwoners. De balk laat zien hoe ernstig het aantal positieve testen is."
     },
     "ziekenhuisopnames": {
       "title": "Ziekenhuisopnames (inclusief IC)",
@@ -2461,16 +2461,16 @@
     },
     "types": {
       "1": {
-        "toelichting": "Dit is het risiconiveau dat nu geldt in deze regio. Het risiconiveau wordt elke twee weken bepaald op basis van het aantal ziekenhuisopnames en het aantal positieve testen van dat moment.\n\n**Risiconiveau bepaald op 17 februari voor de twee weken daarna**"
+        "toelichting": "Dit is het risiconiveau dat nu geldt in deze regio. Het risiconiveau wordt elke twee weken bepaald op basis van het aantal ziekenhuisopnames en het aantal positieve testen van dat moment.\n\n**Risiconiveau bepaald op 17 februari**"
       },
       "2": {
-        "toelichting": "Dit is het risiconiveau dat nu geldt in deze regio. Het risiconiveau wordt elke twee weken bepaald op basis van het aantal ziekenhuisopnames en het aantal positieve testen van dat moment.\n\n**Risiconiveau bepaald op 17 februari voor de twee weken daarna**"
+        "toelichting": "Dit is het risiconiveau dat nu geldt in deze regio. Het risiconiveau wordt elke twee weken bepaald op basis van het aantal ziekenhuisopnames en het aantal positieve testen van dat moment.\n\n**Risiconiveau bepaald op 17 februari**"
       },
       "3": {
-        "toelichting": "Dit is het risiconiveau dat nu geldt in deze regio. Het risiconiveau wordt elke twee weken bepaald op basis van het aantal ziekenhuisopnames en het aantal positieve testen van dat moment.\n\n**Risiconiveau bepaald op 17 februari voor de twee weken daarna**"
+        "toelichting": "Dit is het risiconiveau dat nu geldt in deze regio. Het risiconiveau wordt elke twee weken bepaald op basis van het aantal ziekenhuisopnames en het aantal positieve testen van dat moment.\n\n**Risiconiveau bepaald op 17 februari**"
       },
       "4": {
-        "toelichting": "Dit is het risiconiveau dat nu geldt in deze regio. Het risiconiveau wordt elke twee weken bepaald op basis van het aantal ziekenhuisopnames en het aantal positieve testen van dat moment.\n\n**Risiconiveau bepaald op 17 februari voor de twee weken daarna**"
+        "toelichting": "Dit is het risiconiveau dat nu geldt in deze regio. Het risiconiveau wordt elke twee weken bepaald op basis van het aantal ziekenhuisopnames en het aantal positieve testen van dat moment.\n\n**Risiconiveau bepaald op 17 februari**"
       }
     }
   },

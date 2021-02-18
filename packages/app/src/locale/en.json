@@ -2452,7 +2452,7 @@
     "positieve_testen": {
       "title": "Positive tests",
       "value_annotation": "per 100,000 residents per week",
-      "description": "This figure shows how many people have tested positive per 100,000 residents in the past 7 days. The bar shows the level of severity of this figure. "
+      "description": "This figure shows how many people from this safety region have tested positive per 100,000 residents in the past 7 days. The bar shows the level of severity of this figure. "
     },
     "ziekenhuisopnames": {
       "title": "Hospital admissions (including ICU)",
@@ -2461,16 +2461,16 @@
     },
     "types": {
       "1": {
-        "toelichting": "This is the risk level that currently applies in this region. The risk level is reassessed every 2 weeks based on the number of hospital admissions and the number of positive tests (new confirmed cases) at that time.\n\n**Risk level determined on 17 February for the next two weeks**"
+        "toelichting": "This is the risk level that currently applies in this region. The risk level is reassessed every 2 weeks based on the number of hospital admissions and the number of positive tests (new confirmed cases) at that time.\n\n**Risk level determined on 17 February**"
       },
       "2": {
-        "toelichting": "This is the risk level that currently applies in this region. The risk level is reassessed every 2 weeks based on the number of hospital admissions and the number of positive tests (new confirmed cases) at that time.\n\n**Risk level determined on 17 February for the next two weeks**"
+        "toelichting": "This is the risk level that currently applies in this region. The risk level is reassessed every 2 weeks based on the number of hospital admissions and the number of positive tests (new confirmed cases) at that time.\n\n**Risk level determined on 17 February**"
       },
       "3": {
-        "toelichting": "This is the risk level that currently applies in this region. The risk level is reassessed every 2 weeks based on the number of hospital admissions and the number of positive tests (new confirmed cases) at that time.\n\n**Risk level determined on 17 February for the next two weeks**"
+        "toelichting": "This is the risk level that currently applies in this region. The risk level is reassessed every 2 weeks based on the number of hospital admissions and the number of positive tests (new confirmed cases) at that time.\n\n**Risk level determined on 17 February**"
       },
       "4": {
-        "toelichting": "This is the risk level that currently applies in this region. The risk level is reassessed every 2 weeks based on the number of hospital admissions and the number of positive tests (new confirmed cases) at that time."
+        "toelichting": "This is the risk level that currently applies in this region. The risk level is reassessed every 2 weeks based on the number of hospital admissions and the number of positive tests (new confirmed cases) at that time.\n\n**Risk level determined on 17 February**"
       }
     }
   },
