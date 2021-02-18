@@ -699,7 +699,7 @@
       "kwetsbare_groepen": "Kwetsbare groepen",
       "maatregelen": "Maatregelen",
       "algemeen": "Algemeen",
-      "inschaling": "Inschaling"
+      "inschaling": "Risiconiveau"
     }
   },
   "veiligheidsregio_metadata": {
@@ -1286,8 +1286,8 @@
       }
     },
     "verdeling_in_nederland": {
-      "titel": "Verschillen tussen Veiligheidsregio's",
-      "intro": "Selecteer een gedragsregel om de verschillen tussen de Veiligheidsregio’s te zien.",
+      "titel": "Verschillen tussen veiligheidsregio's",
+      "intro": "Selecteer een gedragsregel om de verschillen tussen de veiligheidsregio’s te zien.",
       "onbekend": "Onbekend",
       "legenda_titel": "Percentage"
     },
@@ -1755,7 +1755,7 @@
       "description": "Aantal overledenen per dag in {{safetyRegion}}"
     },
     "section_deceased_rivm": {
-      "title": "Sterfte",
+      "title": "Sterfte in {{safetyRegion}}",
       "description": "Deze cijfers laten zien van hoeveel patiënten er aan de GGD gemeld is dat ze zijn overleden aan/met COVID-19. Het werkelijke aantal patiënten dat is overleden aan/met COVID-19 is waarschijnlijk hoger, omdat niet alle COVID-19 patiënten getest worden en er geen meldingsplicht geldt voor overlijden aan/met COVID-19. ",
       "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
       "bronnen": {
@@ -2098,7 +2098,7 @@
             {
               "value": "1473",
               "description": "gezet in huisartsenpraktijken",
-              "report_date": "Gemeld aantal tot en met 16 februari"
+              "report_date": "Berekend aantal tot en met 16 februari"
             },
             {
               "value": "",
@@ -2149,17 +2149,17 @@
       },
       "kpi_expected_page_additions": {
         "title": "Verwachte toevoegingen aan deze pagina",
-        "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer:",
+        "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer de vaccinatiegraad.",
         "additions": [
-          "Vaccinatiebereidheid",
-          "Vaccinatiegraad",
+          "",
+          "",
           ""
         ]
       }
     },
     "section_vaccinations_more_information": {
       "title": "Verwachte data over vaccinaties",
-      "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer:\n- vaccinatiebereidheid\n- vaccinatiegraad"
+      "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer:\n- vaccinatiegraad"
     },
     "grafiek": {
       "titel": "Leveringen vaccins en gezette prikken in totaal",
@@ -2173,7 +2173,7 @@
       "titel": "Vaccinatiebereidheid",
       "omschrijving": "Deze grafiek toont per leeftijdsgroep en in totaal hoeveel procent van de bevolking zelf een prik tegen corona wil hebben. De cijfers komen uit onderzoek waarin wordt gevraagd of mensen een prik willen krijgen. Het onderzoek wordt elke drie weken herhaald.",
       "kpi_omschrijving": "Percentage van de Nederlandse bevolking dat zelf een prik tegen corona wil hebben",
-      "tooltip_gemiddeld": "Gemiddeld",
+      "tooltip_gemiddeld": "Totaal",
       "leeftijd_jaar": "{{ageGroup}} jaar"
     }
   },
@@ -2441,22 +2441,32 @@
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
     "reference": {
       "href": "/over-risiconiveaus",
-      "text": "Lees meer over de risiconiveaus en wat dit betekent voor de maatregelen op de pagina ‘Over de risiconiveaus’."
+      "text": "Lees meer over de risiconiveaus en wat dit betekent voor de maatregelen op de pagina ‘Over de risiconiveaus’"
     },
     "metadata": {
-      "title": "Inschalen risiconiveau {{safetyRegionName}}",
-      "description": "Inschalen risiconiveau {{safetyRegionName}}"
+      "title": "Risiconiveau {{safetyRegionName}}",
+      "description": "Risiconiveau {{safetyRegionName}}"
     },
     "titel": "Risiconiveau in {{safetyRegionName}}",
-    "pagina_toelichting": "Elke twee weken wordt bepaald in welk risiconiveau een regio zit. Daarvoor kijken we naar het aantal positieve testen en het aantal ziekenhuisopnames. Het meest ernstige cijfer bepaalt het risiconiveau. Bij de risiconiveaus horen maatregelen. Welke maatregelen precies gelden, hangt niet alleen af van hoe het in de Veiligheidsregio gaat, maar ook van de situatie in het hele land. ",
+    "pagina_toelichting": "Elke twee weken wordt bepaald in welk risiconiveau een regio zit. Daarvoor kijken we naar het aantal positieve testen en het aantal ziekenhuisopnames. Het meest ernstige cijfer bepaalt het risiconiveau. Bij de risiconiveaus horen maatregelen. Welke maatregelen precies gelden, hangt niet alleen af van hoe het in de veiligheidsregio gaat, maar ook van de situatie in het hele land. ",
     "current_escalation_level": "Risiconiveau van dit moment",
     "bronnen": {
       "rivm_positieve_testen": {
         "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv",
-        "href": " https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.html",
-        "text": "RIVM"
+        "href": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.html",
+        "text": "RIVM (positieve testen)"
       },
       "rivm_ziekenhuisopnames": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.csv",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
+        "text": "RIVM (ziekenhuisopnames)"
+      },
+      "rivm_positieve_testen_kpi": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.html",
+        "text": "RIVM"
+      },
+      "rivm_ziekenhuisopnames_kpi": {
         "download": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.csv",
         "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
         "text": "RIVM"
@@ -2465,7 +2475,7 @@
     "positieve_testen": {
       "title": "Positieve testen",
       "value_annotation": "per 100.000 inwoners per week",
-      "description": "Dit getal laat zien hoeveel mensen de afgelopen 7 dagen positief getest zijn per 100.000 inwoners. De balk laat zien hoe ernstig het aantal positieve testen is."
+      "description": "Dit getal laat zien hoeveel mensen uit deze veiligheidsregio de afgelopen 7 dagen positief getest zijn per 100.000 inwoners. De balk laat zien hoe ernstig het aantal positieve testen is."
     },
     "ziekenhuisopnames": {
       "title": "Ziekenhuisopnames (inclusief IC)",
@@ -2474,16 +2484,16 @@
     },
     "types": {
       "1": {
-        "toelichting": "De situatie is onder controle te houden. Het aantal nieuwe besmettingen is laag: per week minder dan 35 mensen per 100.000 inwoners. De druk op de zorg valt mee."
+        "toelichting": "Dit is het risiconiveau dat nu geldt in deze regio. Het risiconiveau wordt elke twee weken bepaald op basis van het aantal ziekenhuisopnames en het aantal positieve testen van dat moment.\n\n**Risiconiveau bepaald op 17 februari**"
       },
       "2": {
-        "toelichting": "De situatie is lastig onder controle te houden. Er zijn veel nieuwe besmettingen: per week tussen de 35 en 100 mensen per 100.000 inwoners. De druk op de zorg is groot."
+        "toelichting": "Dit is het risiconiveau dat nu geldt in deze regio. Het risiconiveau wordt elke twee weken bepaald op basis van het aantal ziekenhuisopnames en het aantal positieve testen van dat moment.\n\n**Risiconiveau bepaald op 17 februari**"
       },
       "3": {
-        "toelichting": "De situatie is slecht. Er is een groot aantal nieuwe besmettingen: per week tussen de 100 en 250 mensen per 100.000 inwoners. De druk op de zorg is erg groot."
+        "toelichting": "Dit is het risiconiveau dat nu geldt in deze regio. Het risiconiveau wordt elke twee weken bepaald op basis van het aantal ziekenhuisopnames en het aantal positieve testen van dat moment.\n\n**Risiconiveau bepaald op 17 februari**"
       },
       "4": {
-        "toelichting": "De situatie is erg slecht. Er zijn extreem veel nieuwe besmettingen: per week boven de 250 mensen per 100.000 inwoners. De druk op de zorg is extreem groot."
+        "toelichting": "Dit is het risiconiveau dat nu geldt in deze regio. Het risiconiveau wordt elke twee weken bepaald op basis van het aantal ziekenhuisopnames en het aantal positieve testen van dat moment.\n\n**Risiconiveau bepaald op 17 februari**"
       }
     }
   },
@@ -2521,31 +2531,31 @@
   "corona_melder_app": {
     "header": {
       "category": "Preventie verspreiding",
-      "title": "Gebruik CoronaMelder app",
-      "description": "Om verspreiding van het coronavirus tegen te gaan is  de telefoon-app CoronaMelder ontwikkeld. CoronaMelder stuurt gebruikers van de app een bericht wanneer zij enige tijd in de buurt zijn geweest van iemand die besmet is met het coronavirus die ook de app gebruikt. Dit verlaagt het risico dat zij onbewust andere mensen in hun omgeving besmetten.",
+      "title": "Gebruik CoronaMelder-app",
+      "description": "Om verspreiding van het coronavirus tegen te gaan, is de app CoronaMelder ontwikkeld. Deze app houdt bij wanneer gebruikers van de app langere tijd bij elkaar in de buurt zijn geweest. Wanneer een gebruiker van de CoronaMelder postitief test op COVID-19 kan (met hulp van de GGD) een waarschuwing worden verzonden naar andere appgebruikers die in de buurt zijn geweest. Zij kunnen zich dan laten testen en zo voorkomen dat ze onbewust andere mensen besmetten.",
       "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
       "reference": {
-        "text": "Lees meer over de CoronaMelder app in de cijferverantwoording.",
+        "text": "Lees meer over de CoronaMelder-app in de cijferverantwoording.",
         "href": "/verantwoording#coronamelder"
       },
       "bronnen": {
         "rivm": {
           "download": "",
-          "text": "RIVM",
-          "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/8a72d78a-fcf8-4882-b0ab-cd594961a267?tab=relations"
+          "text": "CoronaMelder",
+          "href": "https://github.com/minvws/nl-covid19-notification-app-statistics"
         }
       }
     },
     "waarschuwingen": {
-      "title": "Aantal positieve tests gemeld via de CoronaMelder app:",
-      "description": "Dit cijfer toont hoeveel (positief geteste) gebruikers van CoronaMelder afgelopen dagen andere app-gebruikers hebben gewaarschuwd.",
-      "total": "{{totalDownloads}} mensen hebben de CoronaMelder app gedownload."
+      "title": "Aantal mensen dat anderen waarschuwden via CoronaMelder: ",
+      "description": "Dit cijfer laat zien hoeveel (positief geteste) gebruikers van CoronaMelder gisteren andere app-gebruikers hebben gewaarschuwd.",
+      "total": "{{totalDownloads}} mensen hebben de CoronaMelder-app gedownload."
     },
     "rapport": {
       "title": "Factsheet CoronaMelder",
-      "description": "Het meest actuele factsheet over het gebruik van de app is beschikbaar via de website van de CoronaMelder app.",
+      "description": "Er wordt steeds onderzocht hoe CoronaMelder werkt in de praktijk. De laatste factsheet hierover is te vinden via de website van de CoronaMelder-app.",
       "link": {
-        "text": "Meest recente Factsheet CoronaMelder app",
+        "text": "Meest recente factsheet CoronaMelder-app",
         "href": "https://www.coronamelder.nl/media/Factsheet_Corona_latest.pdf"
       }
     }

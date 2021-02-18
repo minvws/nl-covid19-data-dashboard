@@ -633,7 +633,7 @@
     "tooltip": {
       "positive_tested_people": "{{totalPositiveTestedPeople}} total",
       "positive_tested_value": "{{totalPositiveValue}} per 100.000",
-      "vaccinatie_bereidheid": ""
+      "vaccinatie_bereidheid": "{{percentageInFavor}}% willingness to be vaccinated"
     },
     "niveau": "level",
     "clear_select_input": "Empty",
@@ -646,7 +646,7 @@
     "vandaag": "Today",
     "read_more": "Read more",
     "absolute_date_template": "on {{date}}",
-    "inwoners": ""
+    "inwoners": "residents"
   },
   "choropleth_tooltip": {
     "inhabitants": "inwoners",
@@ -698,7 +698,7 @@
       "kwetsbare_groepen": "Vulnerable groups",
       "maatregelen": "Measures",
       "algemeen": "General",
-      "inschaling": ""
+      "inschaling": "Risk level"
     }
   },
   "veiligheidsregio_metadata": {
@@ -837,8 +837,8 @@
     },
     "kpi_titel": "Average number of coronavirus particles per 100.000 people",
     "bar_chart_accessibility_description": "",
-    "display_outliers": "",
-    "hide_outliers": ""
+    "display_outliers": "Display outliers",
+    "hide_outliers": "Hide outliers"
   },
   "gemeente_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Hospital admissions",
@@ -969,8 +969,8 @@
     },
     "kpi_titel": "Average number of coronavirus particles per 100.000 people",
     "bar_chart_accessibility_description": "",
-    "display_outliers": "",
-    "hide_outliers": ""
+    "display_outliers": "Display outliers",
+    "hide_outliers": "Hide outliers"
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Risk level map of the Netherlands",
@@ -1748,13 +1748,13 @@
   },
   "veiligheidsregio_sterfte": {
     "titel_sidebar": "Deaths",
-    "titel_kpi": "Gemeld aantal patiënten overleden aan COVID-19 per dag",
+    "titel_kpi": "Number of reported deaths related to COVID-19 per day",
     "metadata": {
       "title": "Deaths in {{safetyRegion}} | Dashboard Coronavirus | Government.nl",
       "description": "Number of deceased per day in {{safetyRegion}}"
     },
     "section_deceased_rivm": {
-      "title": "Deaths",
+      "title": "Deaths in {{safetyRegion}}",
       "description": "These figures show the number of deaths related directly or indirectly to COVID-19, as reported to the GGD. The actual number of deaths related to COVID-19 may be higher because not all people with COVID-19 get tested and there is no requirement for reporting COVID-19 related deaths. ",
       "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
       "bronnen": {
@@ -1961,8 +1961,8 @@
       "vaccin_levering_en_prikken": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks.",
       "vaccinatie_draagvlak": "This graph shows the percentage of the population that wishes to be vaccinated against COVID-19."
     },
-    "link_source": "",
-    "link_download": ""
+    "link_source": "View date source for \"{{subject}}\" at",
+    "link_download": "Download date source for \"{{subject}}\" at"
   },
   "deceased_age_groups": {
     "title": "COVID-19 deaths by age",
@@ -2148,17 +2148,17 @@
       },
       "kpi_expected_page_additions": {
         "title": "Expected data on vaccinations",
-        "description": "More data on vaccinations will be added in the near future, including:",
+        "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
         "additions": [
-          "Willingness to be vaccinated",
-          "Vaccination coverage",
+          "",
+          "",
           ""
         ]
       }
     },
     "section_vaccinations_more_information": {
       "title": "Expected data on vaccinations",
-      "description": "More data on vaccinations will be added in the near future, including:\n- willingness to be vaccinated\n- vaccination coverage"
+      "description": "More data on vaccinations will be added in the near future, including:\n- vaccination coverage"
     },
     "grafiek": {
       "titel": "Deliveries and doses administered in total",
@@ -2172,8 +2172,8 @@
       "titel": "Willingness to be vaccinated",
       "omschrijving": "This graph shows the percentage per age group and in total of the population that wishes to be vaccinated against COVID-19. The figures are taken from a survey where people are asked if they wish to be vaccinated. The survey is conducted every three weeks.",
       "kpi_omschrijving": "Percentage of the population that wishes to be vaccinated against COVID-19",
-      "tooltip_gemiddeld": "",
-      "leeftijd_jaar": ""
+      "tooltip_gemiddeld": "In total",
+      "leeftijd_jaar": "{{ageGroup}} years old"
     }
   },
   "editorial_detail": {
@@ -2437,115 +2437,125 @@
   },
   "article_strip_title": "More about this topic",
   "vr_risiconiveau": {
-    "datums": "",
+    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
     "reference": {
-      "href": "",
-      "text": ""
+      "href": "/over-risiconiveaus",
+      "text": "Read more about the risk levels and the impact they have on the coronavirus measures on the page ‘About the risk levels’"
     },
     "metadata": {
-      "title": "",
-      "description": ""
+      "title": "Risk level {{safetyRegionName}}",
+      "description": "Risk level {{safetyRegionName}}"
     },
-    "titel": "",
-    "pagina_toelichting": "",
-    "current_escalation_level": "",
+    "titel": "Risk level in {{safetyRegionName}}",
+    "pagina_toelichting": "Every 2 weeks we reassess the risk level in each safety region based on the number of positive tests (new confirmed cases) and the number of hospital admissions there. If one of these figures gives cause to set a higher risk level than the other, the higher risk level applies. Certain measures apply at each risk level. The exact measures that apply in this safety region depend on the situation in the rest of the country as well as the situation here.",
+    "current_escalation_level": "Current risk level",
     "bronnen": {
       "rivm_positieve_testen": {
-        "download": "",
-        "href": "",
-        "text": ""
+        "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.html",
+        "text": "RIVM (confirmed cases)"
       },
       "rivm_ziekenhuisopnames": {
-        "download": "",
-        "href": "",
-        "text": ""
+        "download": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.csv",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
+        "text": "RIVM (hospital admissions)"
+      },
+      "rivm_positieve_testen_kpi": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.html",
+        "text": "RIVM"
+      },
+      "rivm_ziekenhuisopnames_kpi": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.csv",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
+        "text": "RIVM"
       }
     },
     "positieve_testen": {
-      "title": "",
-      "value_annotation": "",
-      "description": ""
+      "title": "Positive tests",
+      "value_annotation": "per 100,000 residents per week",
+      "description": "This figure shows how many people from this safety region have tested positive per 100,000 residents in the past 7 days. The bar shows the level of severity of this figure. "
     },
     "ziekenhuisopnames": {
-      "title": "",
-      "value_annotation": "",
-      "description": ""
+      "title": "Hospital admissions (including ICU)",
+      "value_annotation": "per million residents per week",
+      "description": "This figure shows how many people from this safety region have been admitted to the hospital with COVID-19 in the past 7 days (per million residents). The bar shows the level of severity of this figure."
     },
     "types": {
       "1": {
-        "toelichting": ""
+        "toelichting": "This is the risk level that currently applies in this region. The risk level is reassessed every 2 weeks based on the number of hospital admissions and the number of positive tests (new confirmed cases) at that time.\n\n**Risk level determined on 17 February**"
       },
       "2": {
-        "toelichting": ""
+        "toelichting": "This is the risk level that currently applies in this region. The risk level is reassessed every 2 weeks based on the number of hospital admissions and the number of positive tests (new confirmed cases) at that time.\n\n**Risk level determined on 17 February**"
       },
       "3": {
-        "toelichting": ""
+        "toelichting": "This is the risk level that currently applies in this region. The risk level is reassessed every 2 weeks based on the number of hospital admissions and the number of positive tests (new confirmed cases) at that time.\n\n**Risk level determined on 17 February**"
       },
       "4": {
-        "toelichting": ""
+        "toelichting": "This is the risk level that currently applies in this region. The risk level is reassessed every 2 weeks based on the number of hospital admissions and the number of positive tests (new confirmed cases) at that time.\n\n**Risk level determined on 17 February**"
       }
     }
   },
   "gemeente_sterfte": {
-    "titel_sidebar": "",
-    "titel_kpi": "",
+    "titel_sidebar": "Deaths",
+    "titel_kpi": "Number of reported deaths related to COVID-19 per day",
     "metadata": {
-      "title": "",
-      "description": ""
+      "title": "Deaths in {{municipalityName}} | Dashboard Coronavirus | Government.nl",
+      "description": "Number of deceased per day in {{municipalityName}}"
     },
     "section_deceased_rivm": {
-      "title": "",
-      "description": "",
-      "datums": "",
+      "title": "Deaths in {{municipalityName}}",
+      "description": "These figures show the number of deaths related directly or indirectly to COVID-19, as reported to the GGD. The actual number of deaths related to COVID-19 may be higher because not all people with COVID-19 get tested and there is no requirement for reporting COVID-19 related deaths. ",
+      "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
       "bronnen": {
         "rivm": {
-          "href": "",
-          "text": "",
-          "download": ""
+          "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
+          "text": "RIVM",
+          "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv"
         }
       },
       "reference": {
-        "href": "",
-        "text": ""
+        "href": "/verantwoording#deaths",
+        "text": "Read more in 'explanation of the data presented'."
       },
-      "kpi_covid_daily_title": "",
-      "kpi_covid_daily_description": "",
-      "kpi_covid_total_title": "",
-      "kpi_covid_total_description": "",
-      "line_chart_covid_daily_title": "",
-      "line_chart_covid_daily_description": ""
+      "kpi_covid_daily_title": "Daily reported deaths from COVID-19",
+      "kpi_covid_daily_description": "This figure shows the number of COVID-19 deaths reported to the GGD, per day. It includes late reports of deaths that occurred in the preceding days.",
+      "kpi_covid_total_title": "Total reported deaths from/related to COVID-19 per 100,000 inhabitants.",
+      "kpi_covid_total_description": "This figure shows the number of deaths from/related to COVID-19 reported yesterday, per 100,000 inhabitants. ",
+      "line_chart_covid_daily_title": "Number of reported deaths related to COVID-19 over time",
+      "line_chart_covid_daily_description": "This graph shows the number of reported deaths from COVID-19, in the selected period of time."
     },
-    "kpi_titel": ""
+    "kpi_titel": "Daily reported deaths from COVID-19"
   },
   "corona_melder_app": {
     "header": {
-      "category": "",
-      "title": "",
-      "description": "",
-      "datums": "",
+      "category": "Prevention",
+      "title": "Use of the CoronaMelder app",
+      "description": "The CoronaMelder app has been developed to help fight the spread of coronavirus. The app keeps track of when users have been within close range of one another for a longer period of time. If a CoronaMelder user tests positive for COVID-19, they can choose to alert other app users. App users who get an alert can then get tested and avoid unknowingly infecting others.",
+      "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
       "reference": {
-        "text": "",
-        "href": ""
+        "text": "Read more about the CoronaMelder app in the explanation of the presented data.",
+        "href": "/verantwoording#coronamelder"
       },
       "bronnen": {
         "rivm": {
           "download": "",
-          "text": "",
-          "href": ""
+          "text": "CoronaMelder",
+          "href": "https://github.com/minvws/nl-covid19-notification-app-statistics"
         }
       }
     },
     "waarschuwingen": {
-      "title": "",
-      "description": "",
-      "total": ""
+      "title": "Number of people who alerted others via CoronaMelder: ",
+      "description": "This figure shows how many CoronaMelder users who tested positive alerted other app users of this yesterday.",
+      "total": "{{totalDownloads}} people have downloaded CoronaMelder."
     },
     "rapport": {
-      "title": "",
-      "description": "",
+      "title": "Factsheet CoronaMelder",
+      "description": "Researchers are closely monitoring the CoronaMelder app’s impact. Read the most recent factsheet about this on the CoronaMelder website.",
       "link": {
-        "text": "",
-        "href": ""
+        "text": "Most recent factsheet CoronaMelder app",
+        "href": "https://www.coronamelder.nl/media/Factsheet_Corona_latest.pdf"
       }
     }
   }

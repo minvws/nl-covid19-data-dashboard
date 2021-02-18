@@ -113,8 +113,13 @@ const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
               />
             </Box>
             {/* alignment with baseline of EscalationLevelInfoLabel */}
-            <Box mt={{ sm: '-0.55rem' }}>
-              <Text>{text.types[currentLevel].toelichting}</Text>
+            <Box mt={{ sm: '-.55rem' }}>
+              <Text
+                as="div"
+                dangerouslySetInnerHTML={{
+                  __html: text.types[currentLevel].toelichting,
+                }}
+              />
             </Box>
           </Box>
         </Tile>
@@ -127,7 +132,7 @@ const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
                 tested_overall_sum.last_value.date_start_unix,
                 tested_overall_sum.last_value.date_end_unix,
               ],
-              source: text.bronnen.rivm_positieve_testen,
+              source: text.bronnen.rivm_positieve_testen_kpi,
             }}
           >
             <Box spacing={2} spacingHorizontal>
@@ -161,7 +166,7 @@ const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
                 hospital_nice_sum.last_value.date_start_unix,
                 hospital_nice_sum.last_value.date_end_unix,
               ],
-              source: text.bronnen.rivm_ziekenhuisopnames,
+              source: text.bronnen.rivm_ziekenhuisopnames_kpi,
             }}
           >
             <Box spacing={2} spacingHorizontal>

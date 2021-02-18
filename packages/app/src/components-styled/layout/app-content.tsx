@@ -1,7 +1,7 @@
 import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
-import ArrowIcon from '~/assets/arrow.svg';
+import { ArrowIconLeft } from '~/components-styled/arrow-icon';
 import { Box } from '~/components-styled/base';
 import { MaxWidth } from '~/components-styled/max-width';
 import siteText from '~/locale/index';
@@ -62,10 +62,7 @@ export function AppContent({
               position: 'relative',
             })}
           >
-            <LinkWithIcon
-              icon={<ArrowIcon css={css({ transform: 'rotate(90deg)' })} />}
-              href={menuOpenUrl}
-            >
+            <LinkWithIcon icon={<ArrowIconLeft />} href={menuOpenUrl}>
               {menuOpenText}
             </LinkWithIcon>
           </MenuLinkContainer>
@@ -87,10 +84,7 @@ export function AppContent({
               {children}
             </ResponsiveVisible>
             <MenuLinkContainer isVisible={!isMenuOpen && !hideMenuButton}>
-              <LinkWithIcon
-                icon={<ArrowIcon css={css({ transform: 'rotate(90deg)' })} />}
-                href={menuOpenUrl}
-              >
+              <LinkWithIcon icon={<ArrowIconLeft />} href={menuOpenUrl}>
                 {menuOpenText}
               </LinkWithIcon>
             </MenuLinkContainer>

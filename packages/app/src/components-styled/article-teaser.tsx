@@ -1,6 +1,6 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import ArrowIcon from '~/assets/arrow.svg';
+import { ArrowIconRight } from '~/components-styled/arrow-icon';
 import { getImageSrc } from '~/lib/sanity';
 import siteText from '~/locale';
 import { Article, Block, ImageBlock } from '~/types/cms';
@@ -81,7 +81,7 @@ const StyledArticleTeaser = styled.a(
 function Arrow() {
   return (
     <span css={css({ svg: { height: '11px', width: '13px', mx: '3px' } })}>
-      <ArrowIcon css={css({ transform: 'rotate(-90deg)' })} />
+      <ArrowIconRight />
     </span>
   );
 }
