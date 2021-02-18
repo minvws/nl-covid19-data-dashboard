@@ -1,16 +1,15 @@
-import { useTheme } from 'styled-components';
 import CoronaVirusIcon from '~/assets/coronavirus.svg';
 import { AnchorTile } from '~/components-styled/anchor-tile';
 import { Box } from '~/components-styled/base';
 import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { Legenda } from '~/components-styled/legenda';
-import DeceasedMonitor from '~/domain/deceased/components/deceased-monitor-chart';
 import siteText from '~/locale/index';
 import {
   NationalDeceasedCbs,
   RegionalDeceasedCbs,
 } from '@corona-dashboard/common';
+import { colors } from '~/style/theme';
 
 const text = siteText.section_sterftemonitor;
 
@@ -19,8 +18,6 @@ export function DeceasedMonitorSection({
 }: {
   data: NationalDeceasedCbs | RegionalDeceasedCbs;
 }) {
-  const theme = useTheme();
-
   return (
     <>
       <ContentHeader
@@ -53,40 +50,40 @@ export function DeceasedMonitorSection({
         title={text.deceased_monitor_chart_title}
         description={text.deceased_monitor_chart_description}
       >
-        <DeceasedMonitor
+        {/* <DeceasedMonitor
           values={data.values}
           config={{
             registered: {
               label: text.deceased_monitor_chart_legenda_registered,
-              color: theme.colors.data.secondary,
+              color: colors.data.secondary,
             },
             expected: {
               label: text.deceased_monitor_chart_legenda_expected,
-              color: theme.colors.data.primary,
+              color: colors.data.primary,
             },
             margin: {
               label: text.deceased_monitor_chart_legenda_expected_margin,
-              color: theme.colors.data.margin,
+              color: colors.data.margin,
             },
           }}
-        />
+        /> */}
 
         <Box pl="56px">
           <Legenda
             items={[
               {
                 label: text.deceased_monitor_chart_legenda_registered,
-                color: theme.colors.data.secondary,
+                color: colors.data.secondary,
                 shape: 'line',
               },
               {
                 label: text.deceased_monitor_chart_legenda_expected,
-                color: theme.colors.data.primary,
+                color: colors.data.primary,
                 shape: 'line',
               },
               {
                 label: text.deceased_monitor_chart_legenda_expected_margin,
-                color: theme.colors.data.margin,
+                color: colors.data.margin,
                 shape: 'square',
               },
             ]}
