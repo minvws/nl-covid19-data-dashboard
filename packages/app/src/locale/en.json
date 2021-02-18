@@ -2441,22 +2441,22 @@
       "rivm_positieve_testen": {
         "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv",
         "href": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.html",
-        "text": "RIVM"
+        "text": "RIVM (confirmed cases)"
       },
       "rivm_ziekenhuisopnames": {
         "download": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.csv",
         "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
-        "text": "RIVM"
+        "text": "RIVM (hospital admissions)"
       },
       "rivm_positieve_testen_kpi": {
         "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv",
         "href": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.html",
-        "text": "RIVM (confirmed cases)"
+        "text": "RIVM"
       },
       "rivm_ziekenhuisopnames_kpi": {
         "download": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.csv",
         "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
-        "text": "RIVM (confirmed cases)"
+        "text": "RIVM"
       }
     },
     "positieve_testen": {
