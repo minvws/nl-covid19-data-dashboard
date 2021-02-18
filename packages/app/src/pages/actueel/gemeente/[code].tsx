@@ -231,9 +231,12 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
                       data={choropleth.vr}
                       metricName="escalation_levels"
                       metricProperty="level"
-                      onSelect={createSelectRegionHandler(router, 'actueel')}
+                      onSelect={createSelectRegionHandler(
+                        router,
+                        'risiconiveau'
+                      )}
                       tooltipContent={escalationTooltip(
-                        createSelectRegionHandler(router, 'actueel')
+                        createSelectRegionHandler(router, 'risiconiveau')
                       )}
                       highlightCode={safetyRegionForMunicipality?.code}
                     />

@@ -515,7 +515,7 @@
     "titel_sidebar": "Rioolwatermeting",
     "titel_kpi": "Gemiddelde aantal virusdeeltjes per 100.000 inwoners",
     "total_installation_count_titel": "Aantal meetlocaties",
-    "total_installation_count_description": "Wekelijks aantal rioolwaterzuiveringsinstallaties die minimaal één keer een meting hebben gerapporteerd. Het weekgemiddelde wordt berekend door het gemiddelde te nemen van alle metingen op deze locaties. Per week kan dit aantal variëren omdat niet alle metingen altijd lukken. Let op: door de vrieskou is het niet mogelijk op alle locaties goede metingen van het rioolwater te doen. Dit heeft deze week invloed op de rioolwatercijfers.",
+    "total_installation_count_description": "Wekelijks aantal rioolwaterzuiveringsinstallaties die minimaal één keer een meting hebben gerapporteerd. Het weekgemiddelde wordt berekend door het gemiddelde te nemen van alle metingen op deze locaties. Per week kan dit aantal variëren omdat niet alle metingen altijd lukken. Let op: door de vrieskou was het de afgelopen week niet mogelijk op alle locaties goede metingen van het rioolwater te doen. Dit heeft ook deze week nog invloed op de rioolwatercijfers.",
     "rwzi_abbrev": "",
     "map_titel": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners in rioolwater",
     "map_toelichting": "Deze kaart toont het gemiddeld aantal virusdeeltjes per 100.000 inwoners, per veiligheidsregio.",
@@ -686,7 +686,7 @@
       "kwetsbare_groepen": "Kwetsbare groepen",
       "maatregelen": "Maatregelen",
       "algemeen": "Algemeen",
-      "inschaling": "Inschaling"
+      "inschaling": "Risiconiveau"
     }
   },
   "veiligheidsregio_metadata": {
@@ -804,7 +804,7 @@
     "graph_range_description": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners over tijd",
     "titel_kpi": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners",
     "total_installation_count_titel": "Aantal meetlocaties",
-    "total_installation_count_description": "Wekelijks aantal rioolwaterzuiveringsinstallaties die minimaal één keer een meting hebben gerapporteerd. Het weekgemiddelde wordt berekend door het gemiddelde te nemen van alle metingen op deze locaties. Per week kan dit aantal variëren omdat niet alle metingen altijd lukken. Let op: door de vrieskou is het niet mogelijk op alle locaties goede metingen van het rioolwater te doen. Dit heeft deze week invloed op de rioolwatercijfers.",
+    "total_installation_count_description": "Wekelijks aantal rioolwaterzuiveringsinstallaties die minimaal één keer een meting hebben gerapporteerd. Het weekgemiddelde wordt berekend door het gemiddelde te nemen van alle metingen op deze locaties. Per week kan dit aantal variëren omdat niet alle metingen altijd lukken. Let op: door de vrieskou was het de afgelopen week niet mogelijk op alle locaties goede metingen van het rioolwater te doen. Dit heeft ook deze week nog invloed op de rioolwatercijfers.",
     "rwzi_abbrev": "",
     "reference": {
       "href": "/verantwoording#rioolwater",
@@ -933,7 +933,7 @@
     },
     "nodata_sidebar": "Deze informatie is niet beschikbaar voor deze gemeente.",
     "total_installation_count_titel": "Aantal meetlocaties",
-    "total_installation_count_description": "Wekelijks aantal rioolwaterzuiveringsinstallaties die minimaal één keer een meting hebben gerapporteerd. Het weekgemiddelde wordt berekend door het gemiddelde te nemen van alle metingen op deze locaties. Per week kan dit aantal variëren omdat niet alle metingen altijd lukken. Let op: door de vrieskou is het niet mogelijk op alle locaties goede metingen van het rioolwater te doen. Dit heeft deze week invloed op de rioolwatercijfers.",
+    "total_installation_count_description": "Wekelijks aantal rioolwaterzuiveringsinstallaties die minimaal één keer een meting hebben gerapporteerd. Het weekgemiddelde wordt berekend door het gemiddelde te nemen van alle metingen op deze locaties. Per week kan dit aantal variëren omdat niet alle metingen altijd lukken. Let op: door de vrieskou was het de afgelopen week niet mogelijk op alle locaties goede metingen van het rioolwater te doen. Dit heeft ook deze week nog invloed op de rioolwatercijfers.",
     "rwzi_abbrev": "Rioolwaterzuiveringsinstallatie",
     "graph_daily_label_text_rwzi": "Meetwaarden locatie ({{name}})",
     "graph_selected_rwzi_placeholder": "Selecteer locatie",
@@ -1975,8 +1975,8 @@
     "title": "COVID-19-vaccinaties",
     "description": "Vaccineren is de belangrijkste stap naar een samenleving zonder coronaregels. Op 6 januari 2021 is Nederland begonnen met vaccineren. Uiteindelijk komt iedereen van 18 jaar of ouder aan de beurt. De cijfers op deze pagina laten zien hoeveel prikken zijn gezet en hoeveel vaccins er beschikbaar komen.",
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "date_unix": "1613472174",
-    "date_of_insertion_unix": "1613472174",
+    "date_unix": "1613561000",
+    "date_of_insertion_unix": "1613561000",
     "reference": {
       "href": "/verantwoording#vaccinatie",
       "text": "Lees meer over de bron van de vaccinatiecijfers in de cijferverantwoording."
@@ -2012,27 +2012,27 @@
       "difference": "Do not remove this key. It is required as a temporary workaround",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "800905",
-          "date_unix": "1613472174",
-          "date_of_insertion_unix": "1613472174"
+          "total_vaccinated": "835929",
+          "date_unix": "1613561000",
+          "date_of_insertion_unix": "1613561000"
         }
       },
       "kpi_total": {
         "title": "Aantal gezette prikken",
-        "value": "623539",
+        "value": "654186",
         "description": "",
-        "date_of_report_unix": "1613472174",
-        "date_of_insertion_unix": "1613472174",
+        "date_of_report_unix": "1613561000",
+        "date_of_insertion_unix": "1613561000",
         "administered": [
           {
-            "value": "528988",
+            "value": "559635",
             "description": "gemeld door GGD-GHOR",
-            "report_date": "Gemeld aantal tot en met 15 februari"
+            "report_date": "Gemeld aantal tot en met 16 februari"
           },
           {
             "value": "94551",
             "description": "gemeld door LNAZ",
-            "report_date": "Gemeld aantal tot en met 15 februari"
+            "report_date": "Gemeld aantal tot en met 16 februari"
           },
           {
             "value": "",
@@ -2056,30 +2056,30 @@
         "first_tab_title": "Berekend aantal",
         "second_tab_title": "Gemeld aantal",
         "tab_total_estimated": {
-          "value": "800905",
+          "value": "835929",
           "description": "",
-          "date_of_report_unix": "1613472174",
-          "date_of_insertion_unix": "1613472174",
+          "date_of_report_unix": "1613561000",
+          "date_of_insertion_unix": "1613561000",
           "administered": [
             {
-              "value": "528988",
+              "value": "559635",
               "description": "gezet door GGD'en",
-              "report_date": "Gemeld aantal tot en met 15 februari"
+              "report_date": "Gemeld aantal tot en met 16 februari"
             },
             {
               "value": "94551",
               "description": "gezet in ziekenhuizen",
-              "report_date": "Gemeld aantal tot en met 15 februari"
+              "report_date": "Gemeld aantal tot en met 16 februari"
             },
             {
-              "value": "177366",
+              "value": "180270",
               "description": "gezet in langdurige zorginstellingen",
-              "report_date": "Berekend aantal tot en met 15 februari"
+              "report_date": "Berekend aantal tot en met 16 februari"
             },
             {
-              "value": "",
-              "description": "",
-              "report_date": ""
+              "value": "1473",
+              "description": "gezet in huisartsenpraktijken",
+              "report_date": "Berekend aantal tot en met 16 februari"
             },
             {
               "value": "",
@@ -2131,7 +2131,7 @@
       "kpi_expected_page_additions": {
         "title": "Verwachte toevoegingen aan deze pagina",
         "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer:",
-        "additions": ["Vaccinatiebereidheid", "Vaccinatiegraad", ""]
+        "additions": ["Vaccinatiegraad", "", ""]
       },
       "vaccination_chart": {
         "product_names": {
@@ -2154,7 +2154,7 @@
     },
     "section_vaccinations_more_information": {
       "title": "Verwachte data over vaccinaties",
-      "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer:\n- vaccinatiebereidheid\n- vaccinatiegraad"
+      "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer:\n- vaccinatiegraad"
     },
     "grafiek": {
       "titel": "Leveringen vaccins en gezette prikken in totaal",
@@ -2167,8 +2167,8 @@
     "grafiek_draagvlak": {
       "titel": "Vaccinatiebereidheid",
       "omschrijving": "Deze grafiek toont per leeftijdsgroep en in totaal hoeveel procent van de bevolking zelf een prik tegen corona wil hebben. De cijfers komen uit onderzoek waarin wordt gevraagd of mensen een prik willen krijgen. Het onderzoek wordt elke drie weken herhaald.",
-      "kpi_omschrijving": "Gemiddeld percentage van de Nederlandse bevolking die bereid is om zich te laten vaccineren",
-      "tooltip_gemiddeld": "Gemiddeld",
+      "kpi_omschrijving": "Percentage van de Nederlandse bevolking dat zelf een prik tegen corona wil hebben",
+      "tooltip_gemiddeld": "Totaal",
       "leeftijd_jaar": "{{ageGroup}} jaar"
     }
   },
@@ -2436,11 +2436,11 @@
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
     "reference": {
       "href": "/over-risiconiveaus",
-      "text": "Lees meer over de risiconiveaus en wat dit betekent voor de maatregelen op de pagina ‘Over de risiconiveaus’."
+      "text": "Lees meer over de risiconiveaus en wat dit betekent voor de maatregelen op de pagina ‘Over de risiconiveaus’"
     },
     "metadata": {
-      "title": "Inschalen risiconiveau {{safetyRegionName}}",
-      "description": "Inschalen risiconiveau {{safetyRegionName}}"
+      "title": "Risiconiveau {{safetyRegionName}}",
+      "description": "Risiconiveau {{safetyRegionName}}"
     },
     "titel": "Risiconiveau in {{safetyRegionName}}",
     "pagina_toelichting": "Elke twee weken wordt bepaald in welk risiconiveau een regio zit. Daarvoor kijken we naar het aantal positieve testen en het aantal ziekenhuisopnames. Het meest ernstige cijfer bepaalt het risiconiveau. Bij de risiconiveaus horen maatregelen. Welke maatregelen precies gelden, hangt niet alleen af van hoe het in de Veiligheidsregio gaat, maar ook van de situatie in het hele land. ",
@@ -2448,7 +2448,7 @@
     "bronnen": {
       "rivm_positieve_testen": {
         "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv",
-        "href": " https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.html",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.html",
         "text": "RIVM"
       },
       "rivm_ziekenhuisopnames": {
@@ -2460,12 +2460,26 @@
     "positieve_testen": {
       "title": "Positieve testen",
       "value_annotation": "per 100.000 inwoners per week",
-      "description": "Dit getal laat zien hoeveel mensen de afgelopen 7 dagen positief getest zijn per 100.000 inwoners. De balk laat zien hoe ernstig het aantal positieve testen is."
+      "description": "Dit getal laat zien hoeveel mensen uit deze veiligheidsregio de afgelopen 7 dagen positief getest zijn per 100.000 inwoners. De balk laat zien hoe ernstig het aantal positieve testen is."
     },
     "ziekenhuisopnames": {
       "title": "Ziekenhuisopnames (inclusief IC)",
       "value_annotation": "per 1 miljoen inwoners per week",
       "description": "Dit getal laat zien hoeveel mensen met COVID-19 uit deze veiligheidsregio in de afgelopen 7 dagen in een ziekenhuis zijn opgenomen per 1 miljoen inwoners. De balk laat zien hoe ernstig het aantal ziekenhuisopnames is."
+    },
+    "types": {
+      "1": {
+        "toelichting": "Dit is het risiconiveau dat nu geldt in deze regio. Het risiconiveau wordt elke twee weken bepaald op basis van het aantal ziekenhuisopnames en het aantal positieve testen van dat moment.\n\n**Risiconiveau bepaald op 17 februari**"
+      },
+      "2": {
+        "toelichting": "Dit is het risiconiveau dat nu geldt in deze regio. Het risiconiveau wordt elke twee weken bepaald op basis van het aantal ziekenhuisopnames en het aantal positieve testen van dat moment.\n\n**Risiconiveau bepaald op 17 februari**"
+      },
+      "3": {
+        "toelichting": "Dit is het risiconiveau dat nu geldt in deze regio. Het risiconiveau wordt elke twee weken bepaald op basis van het aantal ziekenhuisopnames en het aantal positieve testen van dat moment.\n\n**Risiconiveau bepaald op 17 februari**"
+      },
+      "4": {
+        "toelichting": "Dit is het risiconiveau dat nu geldt in deze regio. Het risiconiveau wordt elke twee weken bepaald op basis van het aantal ziekenhuisopnames en het aantal positieve testen van dat moment.\n\n**Risiconiveau bepaald op 17 februari**"
+      }
     }
   },
   "gemeente_sterfte": {
@@ -2502,31 +2516,31 @@
   "corona_melder_app": {
     "header": {
       "category": "Preventie verspreiding",
-      "title": "Gebruik CoronaMelder app",
-      "description": "Om verspreiding van het coronavirus tegen te gaan is  de telefoon-app CoronaMelder ontwikkeld. CoronaMelder stuurt gebruikers van de app een bericht wanneer zij enige tijd in de buurt zijn geweest van iemand die besmet is met het coronavirus die ook de app gebruikt. Dit verlaagt het risico dat zij onbewust andere mensen in hun omgeving besmetten.",
+      "title": "Gebruik CoronaMelder-app",
+      "description": "Om verspreiding van het coronavirus tegen te gaan, is de app CoronaMelder ontwikkeld. Deze app houdt bij wanneer gebruikers van de app langere tijd bij elkaar in de buurt zijn geweest. Wanneer een gebruiker van de CoronaMelder postitief test op COVID-19 kan (met hulp van de GGD) een waarschuwing worden verzonden naar andere appgebruikers die in de buurt zijn geweest. Zij kunnen zich dan laten testen en zo voorkomen dat ze onbewust andere mensen besmetten.",
       "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
       "reference": {
-        "text": "Lees meer over de CoronaMelder app in de cijferverantwoording.",
+        "text": "Lees meer over de CoronaMelder-app in de cijferverantwoording.",
         "href": "/verantwoording#coronamelder"
       },
       "bronnen": {
         "rivm": {
           "download": "",
-          "text": "RIVM",
-          "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/8a72d78a-fcf8-4882-b0ab-cd594961a267?tab=relations"
+          "text": "CoronaMelder",
+          "href": "https://github.com/minvws/nl-covid19-notification-app-statistics"
         }
       }
     },
     "waarschuwingen": {
-      "title": "Aantal positieve tests gemeld via de CoronaMelder app:",
-      "description": "Dit cijfer toont hoeveel (positief geteste) gebruikers van CoronaMelder afgelopen dagen andere app-gebruikers hebben gewaarschuwd.",
-      "total": "{{totalDownloads}} mensen hebben de CoronaMelder app gedownload."
+      "title": "Aantal mensen dat anderen waarschuwden via CoronaMelder: ",
+      "description": "Dit cijfer laat zien hoeveel (positief geteste) gebruikers van CoronaMelder gisteren andere app-gebruikers hebben gewaarschuwd.",
+      "total": "{{totalDownloads}} mensen hebben de CoronaMelder-app gedownload."
     },
     "rapport": {
       "title": "Factsheet CoronaMelder",
-      "description": "Het meest actuele factsheet over het gebruik van de app is beschikbaar via de website van de CoronaMelder app.",
+      "description": "Er wordt steeds onderzocht hoe CoronaMelder werkt in de praktijk. De laatste factsheet hierover is te vinden via de website van de CoronaMelder-app.",
       "link": {
-        "text": "Meest recente Factsheet CoronaMelder app",
+        "text": "Meest recente factsheet CoronaMelder-app",
         "href": "https://www.coronamelder.nl/media/Factsheet_Corona_latest.pdf"
       }
     }

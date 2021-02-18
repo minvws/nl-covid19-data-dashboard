@@ -36,7 +36,7 @@ export const defaultPadding: ChartPadding = {
 const defaultColors = {
   axis: colors.silver,
   gridMain: colors.silver,
-  gridSub: colors.tileGray,
+  gridSub: '#E4E4E4',
   axisLabels: colors.data.axisLabels,
   benchmark: colors.data.benchmark,
 };

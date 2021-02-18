@@ -1,6 +1,5 @@
 import { formatNumber, Municipal, Regionaal } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { Label } from '@visx/annotation';
 import { AxisBottom, AxisLeft } from '@visx/axis';
 import { localPoint } from '@visx/event';
 import { GridRows } from '@visx/grid';
@@ -22,12 +21,10 @@ import { TimeframeOption } from '~/utils/timeframe';
 import { useElementSize } from '~/utils/use-element-size';
 import { ScatterPlot } from './components/scatter-plot';
 import { ToggleOutlierButton } from './components/toggle-outlier-button';
-import { Tooltip } from './components/tooltip';
+import { DateTooltip, Tooltip } from './components/tooltip';
 import {
   Dimensions,
   useLineTooltip,
-  usePointDistance,
-  useScatterTooltip,
   useSelectedStationValues,
   useSewerChartScales,
   useSewerChartValues,
@@ -129,33 +126,13 @@ export function SewerChart(props: SewerChartProps) {
   );
 
   /**
-   * Call tooltip hooks for determining which datum should have "hover"-focus.
+   * Call tooltip hook for determining which datum should have "hover"-focus.
    */
-  const scatterTooltip = useScatterTooltip({
-    values: stationValuesFiltered,
-    scales,
-    dimensions,
-  });
-
   const lineTooltip = useLineTooltip({
     values: hasSelectedStation ? selectedStationValues : averageValues,
     scales,
     dimensions,
   });
-
-  /**
-   * For touch devices we'll measure pointer movement distance in order to
-   * prevent simulating a "click" (highlight a specific line) when someone has
-   * been "panning/dragging" instead of clicking.
-   */
-  const pointDistance = usePointDistance();
-  const handlePointerDown = useCallback(
-    (evt: PointerEvent<SVGSVGElement>) => {
-      const point = localPoint(evt);
-      if (point) pointDistance.start(point);
-    },
-    [pointDistance]
-  );
 
   const handlePointerMove = useCallback(
     (evt: PointerEvent<SVGSVGElement>) => {
@@ -164,39 +141,17 @@ export function SewerChart(props: SewerChartProps) {
       if (!point) return;
 
       /**
-       * update pan distance
-       */
-      pointDistance.add(point);
-      /**
        * find new tooltip datums to highlight
        */
-      scatterTooltip.findClosest(point);
       lineTooltip.findClosest(point);
     },
-    [lineTooltip, pointDistance, scatterTooltip]
+    [lineTooltip]
   );
 
-  const handlePointerUp = useCallback(() => {
-    /**
-     * update selected line when pan-distance is below threshold and when
-     * the pointer is currently close to a scatter value
-     */
-    if (pointDistance.distanceRef.current < 10 && scatterTooltip.datum) {
-      sewerStationSelectProps.onChange(scatterTooltip.datum.name);
-    }
-  }, [
-    pointDistance.distanceRef,
-    scatterTooltip.datum,
-    sewerStationSelectProps,
-  ]);
-
   /**
-   * hide tooltips when focus is lost
+   * hide tooltip when focus is lost after small delay
    */
-  const clearTooltips = useDebouncedCallback(() => {
-    scatterTooltip.clear();
-    lineTooltip.clear();
-  }, 300);
+  const clearTooltips = useDebouncedCallback(() => lineTooltip.clear(), 300);
 
   const handlePointerLeave = useCallback(() => {
     clearTooltips.callback();
@@ -243,10 +198,7 @@ export function SewerChart(props: SewerChartProps) {
           height={height}
           onPointerMove={handlePointerMove}
           onPointerLeave={handlePointerLeave}
-          onPointerDown={handlePointerDown}
-          onPointerUp={handlePointerUp}
           style={{
-            cursor: scatterTooltip.datum ? 'pointer' : 'default',
             touchAction: 'pan-y', // allow vertical scroll, but capture horizontal
           }}
         >
@@ -284,22 +236,6 @@ export function SewerChart(props: SewerChartProps) {
                   transitionDuration: '75ms',
                   transitionTimingFunction: 'ease-out',
                 })}
-              />
-            )}
-
-            {lineTooltip.datum && lineTooltip.point && (
-              <Label
-                x={lineTooltip.point.x}
-                y={dimensions.bounds.height + 2}
-                title={formatDate(lineTooltip.datum?.dateMs)}
-                horizontalAnchor="middle"
-                verticalAnchor="start"
-                backgroundFill="#fff"
-                showAnchorLine={false}
-                fontColor={colors.data.benchmark}
-                titleFontSize={14}
-                titleFontWeight={'bold'}
-                backgroundPadding={6}
               />
             )}
 
@@ -351,21 +287,6 @@ export function SewerChart(props: SewerChartProps) {
               />
             )}
 
-            {scatterTooltip.point && (
-              <circle
-                r={2}
-                fill={colors.data.benchmark}
-                cx={scatterTooltip.point.x}
-                cy={scatterTooltip.point.y}
-                css={css({
-                  willChange: 'transform',
-                  transitionProperty: 'cx, cy',
-                  transitionDuration: '75ms',
-                  transitionTimingFunction: 'ease-out',
-                })}
-              />
-            )}
-
             {lineTooltip.point && (
               <Group left={lineTooltip.point.x} top={lineTooltip.point.y}>
                 <circle
@@ -390,6 +311,16 @@ export function SewerChart(props: SewerChartProps) {
             )}
           </Group>
         </svg>
+
+        {lineTooltip.datum && lineTooltip.point && (
+          <DateTooltip
+            bounds={{ left: 0, top: 0, right: width, bottom: height }}
+            x={lineTooltip.point.x + dimensions.padding.left}
+            y={dimensions.bounds.height + dimensions.padding.top + 2}
+          >
+            {formatDate(lineTooltip.datum?.dateMs)}
+          </DateTooltip>
+        )}
 
         {lineTooltip.point && lineTooltip.datum && (
           <Tooltip

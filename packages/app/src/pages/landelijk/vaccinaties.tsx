@@ -24,6 +24,7 @@ import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components-styled/typography';
+import { VisuallyHidden } from '~/components-styled/visually-hidden';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import { createDeliveryTooltipFormatter } from '~/domain/vaccines/create-delivery-tooltip-formatter';
@@ -441,9 +442,9 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                       <Heading level={5} mb={1}>
                         {text.grafiek_draagvlak.titel}
                       </Heading>
-                      <Text m={0} mb={1} fontSize={1}>
+                      <VisuallyHidden>
                         {`${dateStartString} - ${dateEndString}`}
-                      </Text>
+                      </VisuallyHidden>
                       <TooltipList>
                         {[...linesConfig].reverse().map((x) => (
                           <TooltipListItem
