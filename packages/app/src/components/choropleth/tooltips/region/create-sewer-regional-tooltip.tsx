@@ -5,9 +5,9 @@ import {
 } from '@corona-dashboard/common';
 import { css } from '@styled-system/css';
 import { ReactNode } from 'react';
-import { Box } from '~/components-styled/base';
 import { Text } from '~/components-styled/typography';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
+import { TooltipSubject } from '~/components/choropleth/tooltips/tooltipSubject';
 import siteText from '~/locale/index';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
@@ -24,41 +24,20 @@ export const createSewerRegionalTooltip = (
     selectHandler(context.vrcode);
   };
 
-  const filteredThreshold = thresholdValues
-    .filter((item: ChoroplethThresholdsValue) => {
-      return item.threshold <= context.average;
-    })
-    .slice(-1)[0];
-
   return (
     context && (
       <TooltipContent title={context.vrname} onSelect={onSelect}>
-        <Text m={0} mb={1} fontWeight="bold">
-          {subject}
-        </Text>
-
-        <Text
-          m={0}
-          css={css({
-            display: 'flex',
-            alignItems: 'center',
-            flexWrap: 'nowrap',
-            whiteSpace: 'pre-wrap',
-          })}
+        <TooltipSubject
+          subject={subject}
+          thresholdValues={thresholdValues}
+          filterBelow={context.average}
         >
           <span css={css({ fontWeight: 'bold' })}>
             {`${replaceVariablesInText(text.map_tooltip_value, {
               value: formatNumber(context.average),
             })}`}
           </span>
-          <Box
-            height={13}
-            width={13}
-            borderRadius={'2px'}
-            ml={'auto'}
-            backgroundColor={filteredThreshold.color}
-          />
-        </Text>
+        </TooltipSubject>
         <Text m={0} mt={-1}>
           {text.map_tooltip}
         </Text>
