@@ -1273,8 +1273,8 @@
       }
     },
     "verdeling_in_nederland": {
-      "titel": "Verschillen tussen Veiligheidsregio's",
-      "intro": "Selecteer een gedragsregel om de verschillen tussen de Veiligheidsregio’s te zien.",
+      "titel": "Verschillen tussen veiligheidsregio's",
+      "intro": "Selecteer een gedragsregel om de verschillen tussen de veiligheidsregio’s te zien.",
       "onbekend": "Onbekend",
       "legenda_titel": "Percentage"
     },
@@ -2435,7 +2435,7 @@
       "description": "Risiconiveau {{safetyRegionName}}"
     },
     "titel": "Risiconiveau in {{safetyRegionName}}",
-    "pagina_toelichting": "Elke twee weken wordt bepaald in welk risiconiveau een regio zit. Daarvoor kijken we naar het aantal positieve testen en het aantal ziekenhuisopnames. Het meest ernstige cijfer bepaalt het risiconiveau. Bij de risiconiveaus horen maatregelen. Welke maatregelen precies gelden, hangt niet alleen af van hoe het in de Veiligheidsregio gaat, maar ook van de situatie in het hele land. ",
+    "pagina_toelichting": "Elke twee weken wordt bepaald in welk risiconiveau een regio zit. Daarvoor kijken we naar het aantal positieve testen en het aantal ziekenhuisopnames. Het meest ernstige cijfer bepaalt het risiconiveau. Bij de risiconiveaus horen maatregelen. Welke maatregelen precies gelden, hangt niet alleen af van hoe het in de veiligheidsregio gaat, maar ook van de situatie in het hele land. ",
     "current_escalation_level": "Risiconiveau van dit moment",
     "bronnen": {
       "rivm_positieve_testen": {
