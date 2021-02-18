@@ -38,15 +38,14 @@ export const BackgroundImage = styled.div.withConfig({
     const prefix = x.backgroundImagePrefix ? `${x.backgroundImagePrefix},` : '';
     const suffix = x.backgroundImageSuffix ? `,${x.backgroundImageSuffix}` : '';
 
-    return css`
-      background-image: ${prefix} url('${x.backgroundImageUrl}') ${suffix};
+    return {
+      backgroundImage: `${prefix} url('${x.backgroundImageUrl}') ${suffix}`,
 
-      ${webpUrl &&
-      css`
-        .has-webp-support && {
-          background-image: ${prefix} url('${webpUrl}') ${suffix};
-        }
-      `}
-    `;
+      ...(webpUrl && {
+        '.has-webp-support &&': {
+          backgroundImage: `${prefix} url('${webpUrl}') ${suffix}`,
+        },
+      }),
+    };
   }
 );
