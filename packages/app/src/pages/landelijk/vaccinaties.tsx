@@ -53,6 +53,10 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
     text.data.kpi_total.first_tab_title
   );
 
+  const additions = text.data.kpi_expected_page_additions.additions.filter(
+    (x) => x.length
+  );
+
   return (
     <>
       <SEOHead
@@ -401,15 +405,15 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             <Text mb={4}>
               {text.data.kpi_expected_page_additions.description}
             </Text>
-            <ul>
-              {text.data.kpi_expected_page_additions.additions
-                .filter((x) => x.length)
-                .map((addition) => (
+            {additions.length > 0 && (
+              <ul>
+                {additions.map((addition) => (
                   <li key={addition}>
                     <InlineText>{addition}</InlineText>
                   </li>
                 ))}
-            </ul>
+              </ul>
+            )}
           </KpiTile>
         </TwoKpiSection>
       </TileList>
