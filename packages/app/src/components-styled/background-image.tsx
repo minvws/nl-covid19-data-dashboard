@@ -39,8 +39,10 @@ export const BackgroundImage = styled.div.withConfig({
     const suffix = x.backgroundImageSuffix ? `,${x.backgroundImageSuffix}` : '';
 
     return css`
+      /* Default background image */
       background-image: url('${x.backgroundImageUrl}');
 
+      /* apply prefix and/or suffix, but only if browser has support for it */
       @supports (
         background-image: ${prefix} url('${x.backgroundImageUrl}') ${suffix}
       ) {
@@ -49,17 +51,7 @@ export const BackgroundImage = styled.div.withConfig({
 
       ${webpUrl &&
       css`
-        /* Chrome 66+, Edge 79+, Opera 53+, Android Brower 80+ */
-        @media screen and (min-resolution: 0.001dpcm) and (-webkit-min-device-pixel-ratio: 0) {
-          @supports (
-            background-image: ${prefix} -webkit-image-set(url('${webpUrl}') 1x) ${suffix}
-          ) {
-            background-image: ${prefix} -webkit-image-set(url('${webpUrl}') 1x) ${suffix};
-          }
-        }
-
-        /* FF 66+ -- note the double parentheses are necessary (styled components bug?) */
-        @supports ((flex-basis: max-content)) and ((-moz-appearance: meterbar)) {
+        .has-webp-support && {
           background-image: ${prefix} url('${webpUrl}') ${suffix};
         }
       `}
