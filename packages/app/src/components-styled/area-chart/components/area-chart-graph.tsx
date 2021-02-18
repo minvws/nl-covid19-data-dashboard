@@ -98,23 +98,11 @@ export function AreaChartGraph<T extends TrendValue, K extends TrendValue>(
           .filter((display) => display.pattern === 'hatched')
           .map((display) => {
             return (
-              <pattern
+              <HatchedPattern
                 key={`pattern-${display.id}-${display.metricProperty}`}
                 id={`pattern-${display.id}-${display.metricProperty}`}
-                width="10"
-                height="10"
-                patternTransform="rotate(-45 0 0)"
-                patternUnits="userSpaceOnUse"
-              >
-                <rect x="0" y="0" width="10" height="10" fill={display.color} />
-                <line
-                  x1="0"
-                  y1="0"
-                  x2="0"
-                  y2="10"
-                  style={{ stroke: 'white', strokeWidth: 4 }}
-                />
-              </pattern>
+                color={display.color}
+              />
             );
           })}
       </defs>
@@ -237,3 +225,30 @@ const StyledSvg = styled.svg(
     },
   })
 );
+
+type HatchedPatternProps = {
+  id: string;
+  color?: string;
+};
+
+function HatchedPattern(props: HatchedPatternProps) {
+  const { id, color } = props;
+  return (
+    <pattern
+      id={id}
+      width="10"
+      height="10"
+      patternTransform="rotate(-45 0 0)"
+      patternUnits="userSpaceOnUse"
+    >
+      <rect x="0" y="0" width="10" height="10" fill={color} />
+      <line
+        x1="0"
+        y1="0"
+        x2="0"
+        y2="10"
+        style={{ stroke: 'white', strokeWidth: 4 }}
+      />
+    </pattern>
+  );
+}
