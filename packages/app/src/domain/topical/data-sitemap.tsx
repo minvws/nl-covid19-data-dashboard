@@ -1,7 +1,7 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import NederlandIcon from '~/assets/nederland.svg';
-import ArrowIcon from '~/assets/arrow.svg';
+import { ArrowIconRight } from '~/components-styled/arrow-icon';
 import { Title } from '~/components-styled/aside/title';
 import { Box } from '~/components-styled/base';
 import { LinkWithIcon } from '~/components-styled/link-with-icon';
@@ -146,7 +146,7 @@ function SitemapItem(props: SitemapItemProps) {
     <Item>
       <LinkWithIcon
         href={href}
-        icon={<ArrowIcon css={css({ transform: 'rotate(-90deg)' })} />}
+        icon={<ArrowIconRight />}
         iconPlacement="right"
         fontWeight="bold"
       >

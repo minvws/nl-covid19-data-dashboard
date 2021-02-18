@@ -1,19 +1,19 @@
 import { formatNumber } from '@corona-dashboard/common';
-import css from '@styled-system/css';
-import ArrowIcon from '~/assets/arrow.svg';
+
 import Vaccinaties from '~/assets/vaccinaties.svg';
 import { Box } from '~/components-styled/base';
 import { LinkWithIcon } from '~/components-styled/link-with-icon';
 import { Heading, Text } from '~/components-styled/typography';
 import siteText from '~/locale';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-
+import { ArrowIconRight } from '~/components-styled/arrow-icon';
 interface TopicalVaccineProps {
   estimatedAmount: number;
 }
 
 export function TopicalVaccineTile(props: TopicalVaccineProps) {
   const { estimatedAmount } = props;
+
   const text = siteText.nationaal_actueel.mini_trend_tiles.toegediende_vaccins;
 
   // const data = {
@@ -38,7 +38,7 @@ export function TopicalVaccineTile(props: TopicalVaccineProps) {
       >
         <LinkWithIcon
           href={'/landelijk/vaccinaties'}
-          icon={<ArrowIcon css={css({ transform: 'rotate(-90deg)' })} />}
+          icon={<ArrowIconRight />}
           iconPlacement="right"
           fontWeight="bold"
           headingLink
@@ -62,14 +62,6 @@ export function TopicalVaccineTile(props: TopicalVaccineProps) {
       <Text fontWeight="bold" mb={0}>
         {text.sub_title}
       </Text>
-
-      {/* <Text mt={0}>
-        {replaceComponentsInText(text.supply, {
-          expectedDelivery: (
-            <strong>{formatNumber(data.expectedDelivery)}</strong>
-          ),
-        })}
-      </Text> */}
     </Box>
   );
 }

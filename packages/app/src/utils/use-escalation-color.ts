@@ -10,8 +10,7 @@ export function useEscalationColor(level?: EscalationLevel) {
       'Cannot resolve an escalation color for an undefined level'
     );
 
-    const escalationThresholds =
-      regionThresholds.escalation_levels.escalation_level;
+    const escalationThresholds = regionThresholds.escalation_levels.level;
 
     const escalationColor = escalationThresholds.find(
       (threshold) => threshold.threshold === level

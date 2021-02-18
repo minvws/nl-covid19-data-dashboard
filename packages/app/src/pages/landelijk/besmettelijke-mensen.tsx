@@ -98,7 +98,7 @@ const InfectiousPeople: FCWithLayout<typeof getStaticProps> = (props) => {
                   },
                   {
                     label: text.legenda_marge,
-                    color: 'data.fill',
+                    color: 'data.margin',
                     shape: 'square',
                   },
                 ]}

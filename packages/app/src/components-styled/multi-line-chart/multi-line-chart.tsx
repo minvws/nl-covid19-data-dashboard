@@ -451,7 +451,7 @@ export function MultiLineChart<T extends TimestampedValue>({
               dateSpanWidth={dateSpanScale.bandwidth()}
               height={height}
               padding={padding}
-              primaryColor={colors.silver}
+              primaryColor={`#5B5B5B`}
             />
           )}
         </Box>

@@ -1,6 +1,6 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import ArrowIcon from '~/assets/arrow.svg';
+import { ArrowIconRight } from '~/components-styled/arrow-icon';
 import {
   ArticleSummary,
   ArticleTeaser,
@@ -57,7 +57,7 @@ export function ArticleList({ articleSummaries, hideLink }: ArticleListProps) {
           {!hideLink && (
             <LinkWithIcon
               href="/artikelen"
-              icon={<ArrowIcon css={css({ transform: 'rotate(-90deg)' })} />}
+              icon={<ArrowIconRight />}
               iconPlacement="right"
               fontWeight="bold"
             >

@@ -49,7 +49,7 @@ const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
   const text = siteText.vr_risiconiveau;
 
   const { escalation_level, hospital_nice_sum, tested_overall_sum } = data;
-  const currentEscalationLevel = escalation_level.level as EscalationLevel;
+  const currentLevel = escalation_level.level as EscalationLevel;
 
   const positiveTestedColor = useEscalationColor(
     getCategoryLevel(
@@ -107,19 +107,19 @@ const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
           >
             <Box flex="0 0 10rem">
               <EscalationLevelInfoLabel
-                escalationLevel={currentEscalationLevel}
+                level={currentLevel}
                 fontSize={3}
                 useLevelColor
               />
             </Box>
             {/* alignment with baseline of EscalationLevelInfoLabel */}
-            <Box mt={{ sm: '-0.55rem' }}>
-              <Text>
-                {
-                  siteText.escalatie_niveau.types[currentEscalationLevel]
-                    .toelichting
-                }
-              </Text>
+            <Box mt={{ sm: '-.55rem' }}>
+              <Text
+                as="div"
+                dangerouslySetInnerHTML={{
+                  __html: text.types[currentLevel].toelichting,
+                }}
+              />
             </Box>
           </Box>
         </Tile>
@@ -132,7 +132,7 @@ const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
                 tested_overall_sum.last_value.date_start_unix,
                 tested_overall_sum.last_value.date_end_unix,
               ],
-              source: text.bronnen.rivm_positieve_testen,
+              source: text.bronnen.rivm_positieve_testen_kpi,
             }}
           >
             <Box spacing={2} spacingHorizontal>
@@ -166,7 +166,7 @@ const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
                 hospital_nice_sum.last_value.date_start_unix,
                 hospital_nice_sum.last_value.date_end_unix,
               ],
-              source: text.bronnen.rivm_ziekenhuisopnames,
+              source: text.bronnen.rivm_ziekenhuisopnames_kpi,
             }}
           >
             <Box spacing={2} spacingHorizontal>

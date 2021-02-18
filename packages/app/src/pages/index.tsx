@@ -191,17 +191,20 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                       <EscalationMapLegenda
                         data={choropleth.vr}
                         metricName="escalation_levels"
-                        metricProperty="escalation_level"
+                        metricProperty="level"
                       />
                     }
                   >
                     <SafetyRegionChoropleth
                       data={choropleth.vr}
                       metricName="escalation_levels"
-                      metricProperty="escalation_level"
-                      onSelect={createSelectRegionHandler(router, 'actueel')}
+                      metricProperty="level"
+                      onSelect={createSelectRegionHandler(
+                        router,
+                        'risiconiveau'
+                      )}
                       tooltipContent={escalationTooltip(
-                        createSelectRegionHandler(router, 'actueel')
+                        createSelectRegionHandler(router, 'risiconiveau')
                       )}
                     />
                   </TopicalChoroplethContainer>

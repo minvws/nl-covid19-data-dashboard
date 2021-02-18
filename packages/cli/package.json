@@ -15,7 +15,7 @@
     "build": "echo 'No build available because @corona-dashboard/cli is not meant for direct consumption'",
     "test": "echo 'No tests available for @corona-dashboard/cli'",
     "test:ci": "echo 'No tests available for @corona-dashboard/cli'",
-    "format": "prettier --write src/**/*.{js,ts,tsx} *.{js,json,md,yml}",
+    "format": "prettier --write \"src/**/*.{js,ts,tsx}\" \"*.{js,json,md,yml}\"",
     "lint": "echo 'No linter configured for @corona-dashboard/cli'",
     "type-check": "echo 'No type-check configured for @corona-dashboard/cli'",
     "compile": "tsc --noEmit",
