@@ -1742,7 +1742,7 @@
       "description": "Number of deceased per day in {{safetyRegion}}"
     },
     "section_deceased_rivm": {
-      "title": "Deaths",
+      "title": "Deaths in {{safetyRegion}}",
       "description": "These figures show the number of deaths related directly or indirectly to COVID-19, as reported to the GGD. The actual number of deaths related to COVID-19 may be higher because not all people with COVID-19 get tested and there is no requirement for reporting COVID-19 related deaths. ",
       "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
       "bronnen": {
@@ -2136,9 +2136,9 @@
       },
       "kpi_expected_page_additions": {
         "title": "Expected data on vaccinations",
-        "description": "More data on vaccinations will be added in the near future, including:",
+        "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
         "additions": [
-          "Vaccination coverage",
+          "",
           "",
           ""
         ]
