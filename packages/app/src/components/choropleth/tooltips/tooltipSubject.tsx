@@ -15,8 +15,6 @@ interface TooltipSubjectProps {
 export function TooltipSubject(props: TooltipSubjectProps) {
   const { subject, thresholdValues, filterBelow, children } = props;
 
-  // Get all the thresholds and filter out the right color that needs to be rendered in the rectangle,
-  // by filtering out all the higher thresholds and then using the last key that still exists.
   const filteredThreshold = getFilteredThresholdValues(
     thresholdValues,
     filterBelow
