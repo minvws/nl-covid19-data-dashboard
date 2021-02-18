@@ -1,15 +1,11 @@
 /**
- * This chart is an adaptation from LineChart. It could already render multiple
- * lines, but the tooltip logic for vaccine support was different enough that I
- * wanted to implement this as a fork using the Visx tooltip. Namely because
- * here the tooltip needs to be rendered on one side of the marker (instead of
- * centered) and flip to the other side once bounds are reached. The LineChart
- * tooltip didn't have logic for this and Visx does this out of the box.
+ * This chart is an adaptation from MultiLineChart. It attempts to create a
+ * generic abstraction that can replace LineChart and MultiLineChart and
+ * AreaChart, by configuring the type of time series for each property.
  *
- * I have also refactored the way data is passed to the tooltip renderer,
- * passing the original value + active key and lines configuration object to
- * render any type of layout, and without exposing internal __date and __value
- * properties.
+ * It assumes that all data for the chart (regardless of sources) is passed in
+ * a single type on the values prop. Then the config prop will declare the type
+ * and visual properties for each of the series.
  */
 import { TickFormatter } from '@visx/axis';
 import { localPoint } from '@visx/event';
@@ -69,7 +65,7 @@ const tooltipStyles = {
 type TooltipData<T extends TimestampedValue> = {
   value: T;
   key: keyof T;
-  linesConfig: LineConfig<T>[];
+  seriesConfig: SeriesConfig<T>[];
 };
 
 const dateToValue = (d: Date) => d.valueOf() / 1000;
@@ -78,7 +74,7 @@ const formatXAxis = (date: Date) =>
 const formatYAxisFn = (y: number) => formatNumber(y);
 const formatYAxisPercentageFn = (y: number) => `${formatPercentage(y)}%`;
 
-export type LineConfig<T extends TimestampedValue> = {
+export type SeriesConfig<T extends TimestampedValue> = {
   /**
    * For consistency and transparency it is probably a good idea to enforce
    * property, label and color to be defined for all lines. Then this data can
@@ -99,7 +95,7 @@ export type LineConfig<T extends TimestampedValue> = {
 
 export type MultiLineChartProps<T extends TimestampedValue> = {
   values: T[];
-  linesConfig: LineConfig<T>[];
+  seriesConfig: SeriesConfig<T>[];
   width: number;
   height?: number;
   timeframe?: TimeframeOption;
@@ -107,7 +103,7 @@ export type MultiLineChartProps<T extends TimestampedValue> = {
   formatTooltip?: (
     value: T,
     key: keyof T,
-    linesConfig: LineConfig<T>[]
+    seriesConfig: SeriesConfig<T>[]
   ) => React.ReactNode;
   formatXAxis?: TickFormatter<Date>;
   formatYAxis?: TickFormatter<number>;
@@ -127,7 +123,7 @@ export type MultiLineChartProps<T extends TimestampedValue> = {
 
 export function MultiLineChart<T extends TimestampedValue>({
   values,
-  linesConfig,
+  seriesConfig,
   width,
   height = 250,
   timeframe = 'all',
@@ -142,7 +138,7 @@ export function MultiLineChart<T extends TimestampedValue>({
   padding: overridePadding,
   showLegend = false,
   legendItems = showLegend
-    ? linesConfig.map((x) => ({
+    ? seriesConfig.map((x) => ({
         color: x.color ?? colors.data.primary,
         label: x.label,
         shape: x.legendShape ?? 'line',
@@ -165,8 +161,8 @@ export function MultiLineChart<T extends TimestampedValue>({
   const isTinyScreen = !breakpoints.xs;
 
   const metricProperties = useMemo(
-    () => linesConfig.map((x) => x.metricProperty),
-    [linesConfig]
+    () => seriesConfig.map((x) => x.metricProperty),
+    [seriesConfig]
   );
 
   const benchmark = useMemo(
@@ -287,7 +283,7 @@ export function MultiLineChart<T extends TimestampedValue>({
              * I'm passing the full config here because the tooltip needs colors
              * and labels. In the future this could be distilled maybe.
              */
-            linesConfig: linesConfig,
+            seriesConfig: seriesConfig,
           },
           tooltipLeft: nearestPoint.x,
           tooltipTop: nearestPoint.y,
@@ -297,7 +293,7 @@ export function MultiLineChart<T extends TimestampedValue>({
         });
       }
     },
-    [showTooltip, hideTooltip, linesConfig]
+    [showTooltip, hideTooltip, seriesConfig]
   );
 
   const handleHover = useCallback(
@@ -328,7 +324,7 @@ export function MultiLineChart<T extends TimestampedValue>({
           return trendValue
             ? {
                 data: trendValue,
-                color: linesConfig[index].color,
+                color: seriesConfig[index].color,
               }
             : undefined;
         })
@@ -347,7 +343,7 @@ export function MultiLineChart<T extends TimestampedValue>({
 
       toggleHoverElements(false, hoverPoints, nearest[0]);
     },
-    [bisect, trendsList, linesConfig, toggleHoverElements]
+    [bisect, trendsList, seriesConfig, toggleHoverElements]
   );
 
   const renderTrendLines = useCallback(
@@ -358,12 +354,12 @@ export function MultiLineChart<T extends TimestampedValue>({
             key={index}
             trend={trend}
             type={hideFill ? 'line' : 'area'}
-            areaFillOpacity={linesConfig[index].areaFillOpacity}
-            strokeWidth={linesConfig[index].strokeWidth}
-            style={linesConfig[index].style}
+            areaFillOpacity={seriesConfig[index].areaFillOpacity}
+            strokeWidth={seriesConfig[index].strokeWidth}
+            style={seriesConfig[index].style}
             xScale={x.xScale}
             yScale={x.yScale}
-            color={linesConfig[index].color}
+            color={seriesConfig[index].color}
             /**
              * Here we pass the index to handle hover. Not sure if that is
              * enough to avoid having to search for the point
@@ -373,7 +369,7 @@ export function MultiLineChart<T extends TimestampedValue>({
         ))}
       </>
     ),
-    [handleHover, linesConfig, hideFill, trendsList]
+    [handleHover, seriesConfig, hideFill, trendsList]
   );
 
   if (!xDomain) {
@@ -422,12 +418,12 @@ export function MultiLineChart<T extends TimestampedValue>({
                 ? formatTooltip(
                     tooltipData.value,
                     tooltipData.key,
-                    tooltipData.linesConfig
+                    tooltipData.seriesConfig
                   )
                 : formatDefaultTooltip(
                     tooltipData.value,
                     tooltipData.key,
-                    tooltipData.linesConfig
+                    tooltipData.seriesConfig
                   )}
             </TooltipContainer>
           </TooltipWithBounds>
@@ -473,7 +469,7 @@ function getDate(x: TrendValue) {
 function formatDefaultTooltip<T extends TimestampedValue>(
   value: T,
   key: keyof T,
-  _linesConfig: LineConfig<T>[],
+  _seriesConfig: SeriesConfig<T>[],
   isPercentage?: boolean
 ) {
   // default tooltip assumes one line is rendered:
