@@ -2447,6 +2447,16 @@
         "download": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.csv",
         "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
         "text": "RIVM"
+      },
+      "rivm_positieve_testen_kpi": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.html",
+        "text": "RIVM"
+      },
+      "rivm_ziekenhuisopnames_kpi": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.csv",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
+        "text": "RIVM"
       }
     },
     "positieve_testen": {
