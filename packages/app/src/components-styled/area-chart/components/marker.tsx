@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import styled from 'styled-components';
 import { ChartPadding } from '~/components-styled/line-chart/components';
 import { Text } from '~/components-styled/typography';
@@ -99,7 +100,11 @@ type MarkerProps<T> = {
   height: number;
 };
 
-export function Marker<T extends TimestampedTrendValue>(props: MarkerProps<T>) {
+export const Marker = memo(MarkerUnmemoized) as typeof MarkerUnmemoized;
+
+function MarkerUnmemoized<T extends TimestampedTrendValue>(
+  props: MarkerProps<T>
+) {
   const {
     primaryColor = colors.data.primary,
     data,
