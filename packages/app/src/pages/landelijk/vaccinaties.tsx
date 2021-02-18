@@ -121,10 +121,8 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                   </Box>
                   <Box flex={{ lg: '1 1 50%' }} ml={{ lg: 4 }}>
                     <VaccineAdministeredItem
-                      amount={
-                        data.vaccine_administered_ggd.last_value.estimated
-                      }
-                      text={text.gezette_prikken.estimated.ggd}
+                      value={data.vaccine_administered_ggd.last_value.estimated}
+                      description={text.gezette_prikken.estimated.ggd}
                       date={
                         data.vaccine_administered_ggd.last_value
                           .date_of_insertion_unix
@@ -132,10 +130,10 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                     />
 
                     <VaccineAdministeredItem
-                      amount={
+                      value={
                         data.vaccine_administered_hospitals.last_value.estimated
                       }
-                      text={text.gezette_prikken.estimated.hospitals}
+                      description={text.gezette_prikken.estimated.hospitals}
                       date={
                         data.vaccine_administered_hospitals.last_value
                           .date_of_insertion_unix
@@ -143,11 +141,13 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                     />
 
                     <VaccineAdministeredItem
-                      amount={
+                      value={
                         data.vaccine_administered_care_institutions.last_value
                           .estimated
                       }
-                      text={text.gezette_prikken.estimated.care_institutions}
+                      description={
+                        text.gezette_prikken.estimated.care_institutions
+                      }
                       date={
                         data.vaccine_administered_care_institutions.last_value
                           .date_of_insertion_unix
@@ -155,10 +155,10 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                     />
 
                     <VaccineAdministeredItem
-                      amount={
+                      value={
                         data.vaccine_administered_doctors.last_value.estimated
                       }
-                      text={text.gezette_prikken.estimated.doctors}
+                      description={text.gezette_prikken.estimated.doctors}
                       date={
                         data.vaccine_administered_doctors.last_value
                           .date_of_insertion_unix
@@ -184,10 +184,10 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                   </Box>
                   <Box flex={{ lg: '1 1 50%' }} ml={{ lg: 4 }}>
                     <VaccineAdministeredItem
-                      amount={
+                      value={
                         data.vaccine_administered_ggd_ghor.last_value.reported
                       }
-                      text={text.gezette_prikken.reported.ggd_ghor}
+                      description={text.gezette_prikken.reported.ggd_ghor}
                       date={
                         data.vaccine_administered_ggd_ghor.last_value
                           .date_of_insertion_unix
@@ -196,10 +196,8 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                     />
 
                     <VaccineAdministeredItem
-                      amount={
-                        data.vaccine_administered_lnaz.last_value.reported
-                      }
-                      text={text.gezette_prikken.reported.lnaz}
+                      value={data.vaccine_administered_lnaz.last_value.reported}
+                      description={text.gezette_prikken.reported.lnaz}
                       date={
                         data.vaccine_administered_lnaz.last_value
                           .date_of_insertion_unix
@@ -417,21 +415,21 @@ VaccinationPage.getLayout = getNationalLayout;
 export default VaccinationPage;
 
 interface VaccineAdministeredProps {
-  amount: number;
+  value: number;
   date: number;
-  text: string;
+  description: string;
   isReported?: boolean;
 }
 
 function VaccineAdministeredItem(props: VaccineAdministeredProps) {
-  const { amount, date, text, isReported } = props;
+  const { value, date, description, isReported } = props;
 
   return (
     <Text fontWeight="bold">
       <InlineText css={css({ color: 'data.primary' })}>
-        {formatNumber(amount)}
+        {formatNumber(value)}
       </InlineText>{' '}
-      {text}
+      {description}
       <br />
       <InlineText fontWeight="normal" fontSize={1} color="annotation">
         {replaceVariablesInText(

@@ -147,9 +147,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
               />
 
               <TopicalVaccineTile
-                estimatedAmount={
-                  data.vaccine_administered_total.last_value.estimated
-                }
+                estimated={data.vaccine_administered_total.last_value.estimated}
               />
             </MiniTrendTileLayout>
 
