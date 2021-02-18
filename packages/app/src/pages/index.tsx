@@ -88,7 +88,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
         description={text.metadata.description}
       />
       <Box bg="white" pb={4}>
-        <MaxWidth px={{ _: 3, sm: 0 }}>
+        <MaxWidth>
           <TileList>
             <WarningTile
               message={siteText.regionaal_index.belangrijk_bericht}
