@@ -505,10 +505,10 @@ export interface RegionalDifference {
   nursing_home__newly_infected_people: DifferenceInteger;
   nursing_home__infected_locations_total: DifferenceInteger;
   nursing_home__deceased_daily: DifferenceInteger;
-  disability_care__newly_infected_people?: DifferenceInteger;
-  disability_care__infected_locations_total?: DifferenceInteger;
-  elderly_at_home__positive_tested_daily?: DifferenceInteger;
-  deceased_rivm__covid_daily?: DifferenceInteger;
+  disability_care__newly_infected_people: DifferenceInteger;
+  disability_care__infected_locations_total: DifferenceInteger;
+  elderly_at_home__positive_tested_daily: DifferenceInteger;
+  deceased_rivm__covid_daily: DifferenceInteger;
 }
 export interface DifferenceDecimal {
   old_value: number;
