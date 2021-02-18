@@ -10,7 +10,7 @@ import { scaleLinear, scaleTime } from '@visx/scale';
 import { Line } from '@visx/shape';
 import { Text } from '@visx/text';
 import { ScaleTime } from 'd3-scale';
-import { MouseEvent, TouchEvent, useCallback, useState } from 'react';
+import { memo, MouseEvent, TouchEvent, useCallback, useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
 import {
@@ -232,8 +232,15 @@ export function AreaChart<
           numTicks={6}
           onHover={handleHover}
         >
-          {divider &&
-            renderDivider(areaConfigs as any, divider, height, padding, xScale)}
+          {divider && (
+            <Dividers
+              areas={areaConfigs as any}
+              divider={divider}
+              height={height}
+              padding={padding}
+              xScale={xScale}
+            />
+          )}
         </AreaChartGraph>
 
         <Box
@@ -270,48 +277,58 @@ export function AreaChart<
   );
 }
 
-function renderDivider(
-  areas: AreaConfig<TimestampedTrendValue>[],
-  divider: DividerConfig,
-  height: number,
-  padding: ChartPadding,
-  xScale: ScaleTime<number, number>
-) {
+const Dividers = memo(DividersUnmemoized) as typeof DividersUnmemoized;
+
+type DividersProps = {
+  areas: AreaConfig<TimestampedTrendValue>[];
+  divider: DividerConfig;
+  height: number;
+  padding: ChartPadding;
+  xScale: ScaleTime<number, number>;
+};
+
+function DividersUnmemoized(props: DividersProps) {
+  const { areas, divider, height, padding, xScale } = props;
+
   const dates = areas.map((area) => area.values[0].__date);
   dates.shift();
 
-  return dates.map((date) => {
-    const x = xScale(date);
-    return x === undefined ? null : (
-      <Group key={date.toISOString()}>
-        <Text
-          fontSize={theme.fontSizes[1]}
-          x={x - 15}
-          y={padding.top * 2}
-          textAnchor="end"
-          fill={divider.color}
-        >
-          {divider.leftLabel}
-        </Text>
-        <Text
-          fontSize={theme.fontSizes[1]}
-          x={x + 15}
-          y={padding.top * 2}
-          textAnchor="start"
-          fill={divider.color}
-        >
-          {divider.rightLabel}
-        </Text>
-        <Line
-          x1={x}
-          y1={0}
-          x2={x}
-          y2={height - padding.bottom}
-          style={{ stroke: divider.color, strokeWidth: 1 }}
-        />
-      </Group>
-    );
-  });
+  return (
+    <>
+      {dates.map((date) => {
+        const x = xScale(date);
+        return x === undefined ? null : (
+          <Group key={date.toISOString()}>
+            <Text
+              fontSize={theme.fontSizes[1]}
+              x={x - 15}
+              y={padding.top * 2}
+              textAnchor="end"
+              fill={divider.color}
+            >
+              {divider.leftLabel}
+            </Text>
+            <Text
+              fontSize={theme.fontSizes[1]}
+              x={x + 15}
+              y={padding.top * 2}
+              textAnchor="start"
+              fill={divider.color}
+            >
+              {divider.rightLabel}
+            </Text>
+            <Line
+              x1={x}
+              y1={0}
+              x2={x}
+              y2={height - padding.bottom}
+              style={{ stroke: divider.color, strokeWidth: 1 }}
+            />
+          </Group>
+        );
+      })}
+    </>
+  );
 }
 
 function formatDefaultTooltip<
