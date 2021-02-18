@@ -154,7 +154,7 @@ export function getImageSrc(
   return `/cms/images/${asset.assetId}-${size}.${asset.extension}`;
 }
 
-export function maybeTransformImageUrlToWebp(url: string) {
+export function maybeCreateWebpUrl(url: string) {
   const extensionRegex = /(.(png|gif|jpe?g))$/;
 
   return url.startsWith('/cms/images') && extensionRegex.test(url)

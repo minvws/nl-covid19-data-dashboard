@@ -1,4 +1,3 @@
-import { maybeTransformImageUrlToWebp } from '~/lib/sanity';
 import styled, { css } from 'styled-components';
 import {
   backgroundPosition,
@@ -12,6 +11,7 @@ import {
   position,
   PositionProps,
 } from 'styled-system';
+import { maybeCreateWebpUrl } from '~/lib/sanity';
 import { styledShouldForwardProp } from '~/utils/styled-should-forward-prop';
 
 export type BackgroundImageLocalProps = {
@@ -34,20 +34,12 @@ export const BackgroundImage = styled.div.withConfig({
   layout,
   position,
   (x) => {
-    const webpUrl = maybeTransformImageUrlToWebp(x.backgroundImageUrl);
+    const webpUrl = maybeCreateWebpUrl(x.backgroundImageUrl);
     const prefix = x.backgroundImagePrefix ? `${x.backgroundImagePrefix},` : '';
     const suffix = x.backgroundImageSuffix ? `,${x.backgroundImageSuffix}` : '';
 
     return css`
-      /* Default background image */
-      background-image: url('${x.backgroundImageUrl}');
-
-      /* apply prefix and/or suffix, but only if browser has support for it */
-      @supports (
-        background-image: ${prefix} url('${x.backgroundImageUrl}') ${suffix}
-      ) {
-        background-image: ${prefix} url('${x.backgroundImageUrl}') ${suffix};
-      }
+      background-image: ${prefix} url('${x.backgroundImageUrl}') ${suffix};
 
       ${webpUrl &&
       css`
