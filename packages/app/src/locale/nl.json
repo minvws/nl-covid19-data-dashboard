@@ -1742,7 +1742,7 @@
       "description": "Aantal overledenen per dag in {{safetyRegion}}"
     },
     "section_deceased_rivm": {
-      "title": "Sterfte",
+      "title": "Sterfte in {{safetyRegion}}",
       "description": "Deze cijfers laten zien van hoeveel patiënten er aan de GGD gemeld is dat ze zijn overleden aan/met COVID-19. Het werkelijke aantal patiënten dat is overleden aan/met COVID-19 is waarschijnlijk hoger, omdat niet alle COVID-19 patiënten getest worden en er geen meldingsplicht geldt voor overlijden aan/met COVID-19. ",
       "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
       "bronnen": {
@@ -2136,9 +2136,9 @@
       },
       "kpi_expected_page_additions": {
         "title": "Verwachte toevoegingen aan deze pagina",
-        "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer:",
+        "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer de vaccinatiegraad.",
         "additions": [
-          "Vaccinatiegraad",
+          "",
           "",
           ""
         ]
