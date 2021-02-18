@@ -1,12 +1,4 @@
-export { ChartAxes, defaultPadding } from './chart-axes';
-export type {
-  ChartBounds,
-  ChartPadding,
-  ChartScales,
-  ComponentCallbackFunction,
-  ComponentCallbackInfo,
-} from './chart-axes';
-export { Marker } from './marker';
-export type { HoverPoint } from './marker';
-export { Tooltip } from './tooltip';
-export { Trend } from './trend';
+export * from './chart-axes';
+export * from './marker';
+export * from './tooltip';
+export * from './trend';

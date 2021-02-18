@@ -29,7 +29,7 @@ type MunicipalityChoroplethProps<T, K extends MunicipalitiesMetricName> = {
   metricProperty: string;
   selectedCode?: string;
   highlightSelection?: boolean;
-  onSelect?: (context: MunicipalityProperties) => void;
+  onSelect?: (gmcode: string) => void;
   tooltipContent?: (context: MunicipalityProperties & T) => ReactNode;
 } & DataProps;
 
@@ -165,7 +165,7 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
   const onClick = (id: string) => {
     if (onSelect) {
       const data = getChoroplethValue(id);
-      onSelect(data);
+      onSelect(data.gmcode);
     }
   };
 

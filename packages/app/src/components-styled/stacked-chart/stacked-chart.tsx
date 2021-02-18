@@ -27,6 +27,7 @@ import siteText from '~/locale';
 import { colors } from '~/style/theme';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { useIsMountedRef } from '~/utils/use-is-mounted-ref';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import {
   calculateSeriesMaximum,
@@ -36,8 +37,8 @@ import {
   getValuesInTimeframe,
   getWeekInfo,
   SeriesValue,
-  Value,
 } from './logic';
+import { TimestampedValue } from '@corona-dashboard/common';
 
 const tooltipStyles = {
   ...defaultStyles,
@@ -105,13 +106,13 @@ type TooltipFormatter = (
 
 type HoverEvent = TouchEvent<SVGElement> | MouseEvent<SVGElement>;
 
-export type Config<T extends Value> = {
+export type Config<T extends TimestampedValue> = {
   metricProperty: keyof T;
+  label: string;
   color: string;
-  legendLabel: string;
 };
 
-export type StackedChartProps<T extends Value> = {
+export type StackedChartProps<T extends TimestampedValue> = {
   values: T[];
   config: Config<T>[];
   valueAnnotation?: string;
@@ -120,7 +121,9 @@ export type StackedChartProps<T extends Value> = {
   isPercentage?: boolean;
 };
 
-export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
+export function StackedChart<T extends TimestampedValue>(
+  props: StackedChartProps<T>
+) {
   /**
    * Destructuring here and not above, so we can easily switch between optional
    * passed-in formatter functions or their default counterparts that have the
@@ -136,6 +139,8 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
     hideTooltip,
     tooltipOpen,
   } = useTooltip<TooltipData>();
+
+  const isMountedRef = useIsMountedRef();
 
   const breakpoints = useBreakpoints();
   const isExtraSmallScreen = !breakpoints.sm;
@@ -206,7 +211,7 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
               : hoveredIndex === itemIndex
               ? x.color
               : hoverColors[itemIndex],
-          label: x.legendLabel,
+          label: x.label,
           shape: 'square',
         } as LegendItem;
       }),
@@ -216,7 +221,7 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
   const labelByKey = useMemo(
     () =>
       config.reduce(
-        (acc, x) => set(acc, x.metricProperty, x.legendLabel),
+        (acc, x) => set(acc, x.metricProperty, x.label),
         {} as Record<string, string>
       ),
     [config]
@@ -332,36 +337,39 @@ export function StackedChart<T extends Value>(props: StackedChartProps<T>) {
    *
    * @TODO wrap in useCallback?
    */
-  function handleHover(
-    event: HoverEvent,
-    tooltipData: TooltipData,
-    hoverIndex: number
-  ) {
-    const isLeave = event.type === 'mouseleave';
+  const handleHover = useCallback(
+    function handleHover(
+      event: HoverEvent,
+      tooltipData: TooltipData,
+      hoverIndex: number
+    ) {
+      const isLeave = event.type === 'mouseleave';
 
-    if (isLeave) {
-      tooltipTimeout = window.setTimeout(() => {
-        hideTooltip();
-      }, 300);
-      hoverTimeout = window.setTimeout(() => {
-        setHoveredIndex(NO_HOVER_INDEX);
-      }, 300);
-      return;
-    }
+      if (isLeave) {
+        tooltipTimeout = window.setTimeout(() => {
+          if (isMountedRef.current) hideTooltip();
+        }, 300);
+        hoverTimeout = window.setTimeout(() => {
+          if (isMountedRef.current) setHoveredIndex(NO_HOVER_INDEX);
+        }, 300);
+        return;
+      }
 
-    if (tooltipTimeout) clearTimeout(tooltipTimeout);
-    if (hoverTimeout) clearTimeout(hoverTimeout);
+      if (tooltipTimeout) clearTimeout(tooltipTimeout);
+      if (hoverTimeout) clearTimeout(hoverTimeout);
 
-    setHoveredIndex(hoverIndex);
+      setHoveredIndex(hoverIndex);
 
-    // @ts-expect-error
-    const coords = localPoint(event.target.ownerSVGElement, event);
-    showTooltip({
-      tooltipLeft: coords?.x || 0,
-      tooltipTop: coords?.y || 0,
-      tooltipData,
-    });
-  }
+      // @ts-expect-error
+      const coords = localPoint(event.target.ownerSVGElement, event);
+      showTooltip({
+        tooltipLeft: coords?.x || 0,
+        tooltipTop: coords?.y || 0,
+        tooltipData,
+      });
+    },
+    [hideTooltip, showTooltip, isMountedRef]
+  );
 
   if (isEmpty(series)) {
     return null;

@@ -21,13 +21,13 @@
       "type": "object",
       "properties": {
         "beds_occupied_covid": {
-          "type": "integer"
+          "type": ["integer", "null"]
         },
         "beds_occupied_non_covid": {
-          "type": "integer"
+          "type": ["integer", "null"]
         },
         "beds_occupied_covid_percentage": {
-          "type": "number"
+          "type": ["number", "null"]
         },
         "date_unix": {
           "type": "integer"

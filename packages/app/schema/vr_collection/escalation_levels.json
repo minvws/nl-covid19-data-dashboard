@@ -6,7 +6,7 @@
   "required": [
     "date_unix",
     "vrcode",
-    "escalation_level",
+    "level",
     "valid_from_unix",
     "date_of_insertion_unix"
   ],
@@ -18,7 +18,7 @@
       "type": "string",
       "pattern": "^VR[0-9]+$"
     },
-    "escalation_level": {
+    "level": {
       "type": "number",
       "minimum": 1,
       "maximum": 4

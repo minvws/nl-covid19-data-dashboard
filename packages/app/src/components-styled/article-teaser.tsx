@@ -1,6 +1,6 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import ArrowIcon from '~/assets/arrow.svg';
+import { ArrowIconRight } from '~/components-styled/arrow-icon';
 import { getImageSrc } from '~/lib/sanity';
 import siteText from '~/locale';
 import { Article, Block, ImageBlock } from '~/types/cms';
@@ -29,7 +29,12 @@ export function ArticleTeaser(props: ArticleTeaserProps) {
       <StyledArticleTeaser>
         <CoverImage height={200} image={cover} />
         <Box padding={3}>
-          <Heading level={3} mb={{ _: 1, sm: 3 }} lineHeight={{ _: 0, sm: 2 }}>
+          <Heading
+            level={3}
+            mb={{ _: 1, sm: 3 }}
+            lineHeight={{ _: 0, sm: 1 }}
+            fontSize="1.25rem"
+          >
             {title}
           </Heading>
           <Text>{summary}</Text>
@@ -76,7 +81,7 @@ const StyledArticleTeaser = styled.a(
 function Arrow() {
   return (
     <span css={css({ svg: { height: '11px', width: '13px', mx: '3px' } })}>
-      <ArrowIcon css={css({ transform: 'rotate(-90deg)' })} />
+      <ArrowIconRight />
     </span>
   );
 }

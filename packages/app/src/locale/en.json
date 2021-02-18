@@ -238,20 +238,6 @@
       "80 to 90",
       "90+"
     ],
-    "cluster_datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "cluster_bron": {
-      "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
-      "text": "RIVM"
-    },
-    "cluster_titel": "Clusters of confirmed cases",
-    "cluster_toelichting": "---",
-    "cluster_barscale_titel": "Number of active clusters",
-    "cluster_barscale_toelichting": "---",
-    "cluster_barscale_screenreader_text": "{{value}} active clusters.",
-    "cluster_gemiddelde_titel": "Average size of active clusters",
-    "cluster_gemiddelde_toelichting": "---.",
-    "cluster_linechart_titel": "Progression of active clusters over time",
-    "cluster_linechart_toelichting": "---",
     "chloropleth_legenda": {
       "titel": "Number per 100.000 inhabitants",
       "geen_meldingen": "No confirmed cases"
@@ -529,7 +515,7 @@
     "titel_sidebar": "Sewage water examination",
     "titel_kpi": "Average number of coronavirus particles per 100,000 inhabitants",
     "total_installation_count_titel": "Number of measurement locations",
-    "total_installation_count_description": "Weekly number of sewage water treatment plants that have reported at least one measurement. The weekly average is calculated by taking the average of all measurements at these locations. This number can vary each week because not all measurements are successful.\n\nPlease note: due to the freezing cold, it was not possible to take good measurements of the sewage water at all locations last week. This will still affect the sewage water figures this week.",
+    "total_installation_count_description": "Weekly number of sewage water treatment plants that have reported at least one measurement. The weekly average is calculated by taking the average of all measurements at these locations. This number can vary each week because not all measurements are successful. Please note: due to the freezing cold, it was not possible to take good measurements of the sewage water at all locations last week. This will still affect the sewage water figures this week.",
     "rwzi_abbrev": "",
     "map_titel": "Average number of virus particles per 100.000 inhabitants",
     "map_toelichting": "This map shows the average number of virus particles per 100.000 inhabitants, per safety region.",
@@ -646,7 +632,8 @@
     },
     "tooltip": {
       "positive_tested_people": "{{totalPositiveTestedPeople}} in total",
-      "positive_tested_value": "{{totalPositiveValue}} per 100.000"
+      "positive_tested_value": "{{totalPositiveValue}} per 100.000",
+      "vaccinatie_bereidheid": "{{percentageInFavor}}% willingness to be vaccinated"
     },
     "niveau": "level",
     "clear_select_input": "Empty",
@@ -658,7 +645,8 @@
     "gisteren": "Yesterday",
     "vandaag": "Today",
     "read_more": "Read more",
-    "absolute_date_template": "on {{date}}"
+    "absolute_date_template": "on {{date}}",
+    "inwoners": "residents"
   },
   "seoHead": {
     "default_description": "Information on the development of the coronavirus in The Netherlands.",
@@ -697,7 +685,8 @@
       "gedrag": "Behaviour",
       "kwetsbare_groepen": "Vulnerable groups",
       "maatregelen": "Measures",
-      "algemeen": "General"
+      "algemeen": "General",
+      "inschaling": "Risk level"
     }
   },
   "veiligheidsregio_metadata": {
@@ -765,32 +754,11 @@
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": [
-      "0 to 20",
-      "20 to 40",
-      "40 to 60",
-      "60 to 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
     },
-    "cluster_datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "cluster_bron": {
-      "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
-      "text": "RIVM",
-      "dowload": ""
-    },
-    "cluster_titel": "Clusters of confirmed cases",
-    "cluster_toelichting": "---",
-    "cluster_barscale_titel": "Number of active clusters",
-    "cluster_barscale_toelichting": "---",
-    "cluster_barscale_screenreader_text": "{{value}} active clusters.",
-    "cluster_gemiddelde_titel": "Average size of active clusters",
-    "cluster_gemiddelde_toelichting": "---.",
-    "cluster_linechart_titel": "Progression of active clusters over time",
-    "cluster_linechart_toelichting": "---",
     "metadata": {
       "title": "Confirmed cases in {{safetyRegionName}} | Dashboard Coronavirus | Government.nl",
       "description": "Overview of confirmed cases in safety region {{safetyRegionName}}."
@@ -836,7 +804,7 @@
     "graph_range_description": "Average number of virus particles per 100.000 inhabitants over time",
     "titel_kpi": "Average number of virus particles per 100.000 inhabitants",
     "total_installation_count_titel": "Number of measurement locations",
-    "total_installation_count_description": "Weekly number of sewage water treatment plants that have reported at least one measurement. The weekly average is calculated by taking the average of all measurements at these locations. This number can vary each week because not all measurements are successful. \n\nPlease note: due to the freezing cold, it was not possible to take good measurements of the sewage water at all locations last week. This will still affect the sewage water figures this week.",
+    "total_installation_count_description": "Weekly number of sewage water treatment plants that have reported at least one measurement. The weekly average is calculated by taking the average of all measurements at these locations. This number can vary each week because not all measurements are successful. Please note: due to the freezing cold, it was not possible to take good measurements of the sewage water at all locations last week. This will still affect the sewage water figures this week.",
     "rwzi_abbrev": "",
     "reference": {
       "href": "/verantwoording#sewage-water",
@@ -850,7 +818,9 @@
       }
     },
     "kpi_titel": "Average number of coronavirus particles per 100.000 people",
-    "bar_chart_accessibility_description": ""
+    "bar_chart_accessibility_description": "",
+    "display_outliers": "Display outliers",
+    "hide_outliers": "Hide outliers"
   },
   "gemeente_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Hospital admissions",
@@ -963,7 +933,7 @@
     },
     "nodata_sidebar": "This information is not available for this municipality.",
     "total_installation_count_titel": "Number of measurement locations",
-    "total_installation_count_description": "Weekly number of sewage water treatment plants that have reported at least one measurement. The weekly average is calculated by taking the average of all measurements at these locations. This number can vary each week because not all measurements are successful. \n\nPlease note: due to the freezing cold, it was not possible to take good measurements of the sewage water at all locations last week. This will still affect the sewage water figures this week.",
+    "total_installation_count_description": "Weekly number of sewage water treatment plants that have reported at least one measurement. The weekly average is calculated by taking the average of all measurements at these locations. This number can vary each week because not all measurements are successful. Please note: due to the freezing cold, it was not possible to take good measurements of the sewage water at all locations last week. This will still affect the sewage water figures this week.",
     "rwzi_abbrev": "Sewage water treatment plant",
     "graph_daily_label_text_rwzi": "Measurements for location ({{name}})",
     "graph_selected_rwzi_placeholder": "Select location",
@@ -980,7 +950,9 @@
       }
     },
     "kpi_titel": "Average number of coronavirus particles per 100.000 people",
-    "bar_chart_accessibility_description": ""
+    "bar_chart_accessibility_description": "",
+    "display_outliers": "Display outliers",
+    "hide_outliers": "Hide outliers"
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Risk level map of the Netherlands",
@@ -1051,7 +1023,7 @@
     }
   },
   "positief_geteste_personen_ggd": {
-    "titel": "Percentage of positive test results at GGD test locations",
+    "titel": "Percentage of positive test results at GGD test locations ",
     "summary_title": "{{percentage}} of the test results at GGD test locations had a positive result",
     "summary_link_cta": "Read more",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
@@ -1062,7 +1034,7 @@
     "toelichting": "The figures below provide information on the overall number of tests conducted at GGD test locations and the percentage of positive results. An increase in the percentage of positive tests could be an indication that transmission of the virus is on the rise. Please note that most but not all tests are conducted by the GGD. This means that the total number of people who have tested positive differs from the number of people who have tested positive at GGD test locations. ",
     "totaal_getest_week_titel": "Average number of tests conducted by the GGD per day",
     "totaal_getest_week_uitleg": "The average number of tests conducted per day, calculated over seven days. The tests of which the results are as yet unknown, are excluded from this average.",
-    "positief_getest_week_titel": "Number of people who have tested positive",
+    "positief_getest_week_titel": "Number of people who have tested positive ",
     "positief_getest_week_uitleg": "Percentage of positive tests conducted at GGD test locations (for which results are known).  This figure is a seven-day average.",
     "positief_getest_getest_week_uitleg": "This represents {{numerator}} of {{denominator}} tests for which the result is known.",
     "linechart_percentage_titel": "Percentage of GGD positive test results, over time",
@@ -1100,7 +1072,7 @@
     "toelichting": "The figures below provide information on the overall number of tests conducted at GGD test locations and the percentage of positive results. An increase in the percentage of positive tests could be an indication that transmission of the virus is on the rise. Please note that most but not all tests are conducted by the GGD. This means that the total number of people who have tested positive differs from the number of people who have tested positive at GGD test locations. ",
     "totaal_getest_week_titel": "Average number of tests conducted by the GGD per day",
     "totaal_getest_week_uitleg": "The average number of tests conducted per day, calculated over seven days. The tests of which the results are as yet unknown, are excluded from this average.",
-    "positief_getest_week_titel": "Number of people who have tested positive",
+    "positief_getest_week_titel": "Number of people who have tested positive ",
     "positief_getest_week_uitleg": "Percentage of positive tests conducted at GGD test locations (for which results are known).  This figure is a seven-day average. ",
     "positief_getest_getest_week_uitleg": "This represents {{numerator}} of {{denominator}} tests for which the result is known",
     "linechart_percentage_titel": "Percentage of GGD positive test results, over time",
@@ -1427,6 +1399,7 @@
   "infected_age_groups": {
     "title": "Distribution by age",
     "description": "The blue (right) bars in this graph show which age group positive tested persons belong to. The gray (left) bars show how large each age group is in relation to the entire Dutch population. The blue and gray bars together show whether age groups have relatively more or less positive tested persons. For example: 16% of all positive tested persons are in their twenties (blue bar) and 13% of all Dutch people are in their twenties (gray bar). In this example, the age group twenties has relatively more positive tested people. The chart is updated daily and covers only the most recently reported cases.",
+    "example": "For example: of all positive tested people is {{infectedPercentage}} between {{ageGroupRange}} years old. Of all Dutch people is {{ageGroupPercentage}} between {{ageGroupRange}} years old. ",
     "graph": {
       "age_group_percentage_title": "Distribution of age groups in the Netherlands",
       "age_group_percentage_tooltip": "of the population is {{ageGroupRange}} years old.",
@@ -1435,10 +1408,9 @@
       "age_group_range_tooltip": "{{ageGroupRange}} years old. ",
       "accessibility_description": "Graph with percentages for the distribution of the population and the distribution of positive tested age groups.",
       "clipped_value_message": "This value is higher than displayed in the figure.",
-      "value_percentage_title": "Confirmed cases by agegroup",
+      "value_percentage_title": "Confirmed cases by age group",
       "value_percentage_tooltip": "of the confirmed cases are {{ageGroupRange}} years old"
-    },
-    "example": "For example: of all positive tested people is {{infectedPercentage}} between {{ageGroupRange}} years old. Of all Dutch people is {{ageGroupPercentage}} between {{ageGroupRange}} years old. "
+    }
   },
   "gehandicaptenzorg_besmette_locaties": {
     "datums": "Latest values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -1758,7 +1730,7 @@
   },
   "veiligheidsregio_sterfte": {
     "titel_sidebar": "Deaths",
-    "titel_kpi": "Gemeld aantal patiënten overleden aan COVID-19 per dag",
+    "titel_kpi": "Number of reported deaths related to COVID-19 per day",
     "metadata": {
       "title": "Deaths in {{safetyRegion}} | Dashboard Coronavirus | Government.nl",
       "description": "Number of deceased per day in {{safetyRegion}}"
@@ -1968,8 +1940,11 @@
       "ziekenhuis_opnames": "This graph shows the progression in hospital admissions over time.",
       "rioolwater_meetwaarde": "This graph shows the most recent measured value of the average amount of virus particles per 100.000 residents, per sewage processing facility.",
       "verwachte_leveringen": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks.",
-      "vaccin_levering_en_prikken": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks."
-    }
+      "vaccin_levering_en_prikken": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks.",
+      "vaccinatie_draagvlak": "This graph shows the percentage of the population that wishes to be vaccinated against COVID-19."
+    },
+    "link_source": "View date source for \"{{subject}}\" at",
+    "link_download": "Download date source for \"{{subject}}\" at"
   },
   "deceased_age_groups": {
     "title": "COVID-19 deaths by age",
@@ -2156,16 +2131,12 @@
       "kpi_expected_page_additions": {
         "title": "Expected data on vaccinations",
         "description": "More data on vaccinations will be added in the near future, including:",
-        "additions": [
-          "Willingness to be vaccinated",
-          "Vaccination coverage",
-          ""
-        ]
+        "additions": ["Vaccination coverage", "", ""]
       }
     },
     "section_vaccinations_more_information": {
       "title": "Expected data on vaccinations",
-      "description": "More data on vaccinations will be added in the near future, including:\n- willingness to be vaccinated\n- vaccination coverage"
+      "description": "More data on vaccinations will be added in the near future, including:\n- vaccination coverage"
     },
     "grafiek": {
       "titel": "Deliveries and doses administered in total",
@@ -2174,6 +2145,13 @@
     "verwachte_leveringen": {
       "van_week_tot_week": "Week {{weekNumberFrom}} to week {{weekNumberTo}}",
       "van_week_tot_week_klein_scherm": "Week {{weekNumberFrom}} to week {{weekNumberTo}}"
+    },
+    "grafiek_draagvlak": {
+      "titel": "Willingness to be vaccinated",
+      "omschrijving": "This graph shows the percentage per age group and in total of the population that wishes to be vaccinated against COVID-19. The figures are taken from a survey where people are asked if they wish to be vaccinated. The survey is conducted every three weeks.",
+      "kpi_omschrijving": "Percentage of the population that wishes to be vaccinated against COVID-19",
+      "tooltip_gemiddeld": "In total",
+      "leeftijd_jaar": "{{ageGroup}} years old"
     }
   },
   "editorial_detail": {
@@ -2435,5 +2413,128 @@
     "description": "Information on the accessibility of the COVID-19 Dashboard.",
     "url": "https://coronadashboard.government.nl/verantwoording"
   },
-  "article_strip_title": "More about this topic"
+  "article_strip_title": "More about this topic",
+  "vr_risiconiveau": {
+    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
+    "reference": {
+      "href": "/over-risiconiveaus",
+      "text": "Read more about the risk levels and the impact they have on the coronavirus measures on the page ‘About the risk levels’"
+    },
+    "metadata": {
+      "title": "Risk level {{safetyRegionName}}",
+      "description": "Risk level {{safetyRegionName}}"
+    },
+    "titel": "Risk level in {{safetyRegionName}}",
+    "pagina_toelichting": "Every 2 weeks we reassess the risk level in each safety region based on the number of positive tests (new confirmed cases) and the number of hospital admissions there. If one of these figures gives cause to set a higher risk level than the other, the higher risk level applies. Certain measures apply at each risk level. The exact measures that apply in this safety region depend on the situation in the rest of the country as well as the situation here.",
+    "current_escalation_level": "Current risk level",
+    "bronnen": {
+      "rivm_positieve_testen": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.html",
+        "text": "RIVM"
+      },
+      "rivm_ziekenhuisopnames": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.csv",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
+        "text": "RIVM"
+      },
+      "rivm_positieve_testen_kpi": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.html",
+        "text": "RIVM (confirmed cases)"
+      },
+      "rivm_ziekenhuisopnames_kpi": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.csv",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
+        "text": "RIVM (confirmed cases)"
+      }
+    },
+    "positieve_testen": {
+      "title": "Positive tests",
+      "value_annotation": "per 100,000 residents per week",
+      "description": "This figure shows how many people from this safety region have tested positive per 100,000 residents in the past 7 days. The bar shows the level of severity of this figure. "
+    },
+    "ziekenhuisopnames": {
+      "title": "Hospital admissions (including ICU)",
+      "value_annotation": "per million residents per week",
+      "description": "This figure shows how many people from this safety region have been admitted to the hospital with COVID-19 in the past 7 days (per million residents). The bar shows the level of severity of this figure."
+    },
+    "types": {
+      "1": {
+        "toelichting": "This is the risk level that currently applies in this region. The risk level is reassessed every 2 weeks based on the number of hospital admissions and the number of positive tests (new confirmed cases) at that time.\n\n**Risk level determined on 17 February**"
+      },
+      "2": {
+        "toelichting": "This is the risk level that currently applies in this region. The risk level is reassessed every 2 weeks based on the number of hospital admissions and the number of positive tests (new confirmed cases) at that time.\n\n**Risk level determined on 17 February**"
+      },
+      "3": {
+        "toelichting": "This is the risk level that currently applies in this region. The risk level is reassessed every 2 weeks based on the number of hospital admissions and the number of positive tests (new confirmed cases) at that time.\n\n**Risk level determined on 17 February**"
+      },
+      "4": {
+        "toelichting": "This is the risk level that currently applies in this region. The risk level is reassessed every 2 weeks based on the number of hospital admissions and the number of positive tests (new confirmed cases) at that time.\n\n**Risk level determined on 17 February**"
+      }
+    }
+  },
+  "gemeente_sterfte": {
+    "titel_sidebar": "Deaths",
+    "titel_kpi": "Number of reported deaths related to COVID-19 per day",
+    "metadata": {
+      "title": "Deaths in {{municipalityName}} | Dashboard Coronavirus | Government.nl",
+      "description": "Number of deceased per day in {{municipalityName}}"
+    },
+    "section_deceased_rivm": {
+      "title": "Deaths in {{municipalityName}}",
+      "description": "These figures show the number of deaths related directly or indirectly to COVID-19, as reported to the GGD. The actual number of deaths related to COVID-19 may be higher because not all people with COVID-19 get tested and there is no requirement for reporting COVID-19 related deaths. ",
+      "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
+      "bronnen": {
+        "rivm": {
+          "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
+          "text": "RIVM",
+          "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv"
+        }
+      },
+      "reference": {
+        "href": "/verantwoording#deaths",
+        "text": "Read more in 'explanation of the data presented'."
+      },
+      "kpi_covid_daily_title": "Daily reported deaths from COVID-19",
+      "kpi_covid_daily_description": "This figure shows the number of COVID-19 deaths reported to the GGD, per day. It includes late reports of deaths that occurred in the preceding days.",
+      "kpi_covid_total_title": "Total reported deaths from/related to COVID-19 per 100,000 inhabitants.",
+      "kpi_covid_total_description": "This figure shows the number of deaths from/related to COVID-19 reported yesterday, per 100,000 inhabitants. ",
+      "line_chart_covid_daily_title": "Number of reported deaths related to COVID-19 over time",
+      "line_chart_covid_daily_description": "This graph shows the number of reported deaths from COVID-19, in the selected period of time."
+    },
+    "kpi_titel": "Daily reported deaths from COVID-19"
+  },
+  "corona_melder_app": {
+    "header": {
+      "category": "Prevention",
+      "title": "Use of the CoronaMelder app",
+      "description": "The CoronaMelder app has been developed to help fight the spread of coronavirus. The app keeps track of when users have been within close range of one another for a longer period of time. If a CoronaMelder user tests positive for COVID-19, they can choose to alert other app users. App users who get an alert can then get tested and avoid unknowingly infecting others.",
+      "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
+      "reference": {
+        "text": "Read more about the CoronaMelder app in the explanation of the presented data.",
+        "href": "/verantwoording#coronamelder"
+      },
+      "bronnen": {
+        "rivm": {
+          "download": "",
+          "text": "CoronaMelder",
+          "href": "https://github.com/minvws/nl-covid19-notification-app-statistics"
+        }
+      }
+    },
+    "waarschuwingen": {
+      "title": "Number of people who alerted others via CoronaMelder: ",
+      "description": "This figure shows how many CoronaMelder users who tested positive alerted other app users of this yesterday.",
+      "total": "{{totalDownloads}} people have downloaded CoronaMelder."
+    },
+    "rapport": {
+      "title": "Factsheet CoronaMelder",
+      "description": "Researchers are closely monitoring the CoronaMelder app’s impact. Read the most recent factsheet about this on the CoronaMelder website.",
+      "link": {
+        "text": "Most recent factsheet CoronaMelder app",
+        "href": "https://www.coronamelder.nl/media/Factsheet_Corona_latest.pdf"
+      }
+    }
+  }
 }

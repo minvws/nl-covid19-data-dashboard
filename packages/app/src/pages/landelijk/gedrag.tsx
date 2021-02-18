@@ -1,4 +1,8 @@
+import { css } from '@styled-system/css';
+import styled from 'styled-components';
+import ExternalLinkIcon from '~/assets/external-link.svg';
 import Gedrag from '~/assets/gedrag.svg';
+import Phone from '~/assets/phone.svg';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
 import { ContentHeader } from '~/components-styled/content-header';
@@ -24,8 +28,9 @@ import {
   getLastGeneratedDate,
   getNlData,
 } from '~/static-props/get-data';
-
-const text = siteText.nl_gedrag;
+import { formatNumber } from '~/utils/formatNumber';
+import { Link } from '~/utils/link';
+import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -43,74 +48,134 @@ const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
   choropleth,
   content,
 }) => {
-  const behaviorData = data.behavior;
+  const behaviorLastValue = data.behavior.last_value;
+  const { nl_gedrag, corona_melder_app } = siteText;
 
   return (
     <>
       <SEOHead
-        title={text.metadata.title}
-        description={text.metadata.description}
+        title={nl_gedrag.metadata.title}
+        description={nl_gedrag.metadata.description}
       />
       <TileList>
         <ContentHeader
           category={siteText.nationaal_layout.headings.gedrag}
-          title={text.pagina.titel}
+          title={nl_gedrag.pagina.titel}
           icon={<Gedrag />}
-          subtitle={text.pagina.toelichting}
+          subtitle={nl_gedrag.pagina.toelichting}
           metadata={{
-            datumsText: text.datums,
+            datumsText: nl_gedrag.datums,
             dateOrRange: {
-              start: behaviorData.last_value.date_start_unix,
-              end: behaviorData.last_value.date_end_unix,
+              start: behaviorLastValue.date_start_unix,
+              end: behaviorLastValue.date_end_unix,
             },
-            dateOfInsertionUnix: behaviorData.last_value.date_of_insertion_unix,
-            dataSources: [text.bronnen.rivm],
+            dateOfInsertionUnix: behaviorLastValue.date_of_insertion_unix,
+            dataSources: [nl_gedrag.bronnen.rivm],
           }}
-          reference={text.reference}
+          reference={nl_gedrag.reference}
         />
 
         <ArticleStrip articles={content.articles} />
 
         <TwoKpiSection>
           <Tile height="100%">
-            <Heading level={3}>{text.onderzoek_uitleg.titel}</Heading>
-            <Text>{text.onderzoek_uitleg.toelichting}</Text>
+            <Heading level={3}>{nl_gedrag.onderzoek_uitleg.titel}</Heading>
+            <Text>{nl_gedrag.onderzoek_uitleg.toelichting}</Text>
           </Tile>
 
           <KpiTile
-            title={text.kpi.aantal_respondenten.titel}
+            title={nl_gedrag.kpi.aantal_respondenten.titel}
             metadata={{
-              source: text.kpi.aantal_respondenten.bron,
+              source: nl_gedrag.kpi.aantal_respondenten.bron,
               date: [
-                behaviorData.last_value.date_start_unix,
-                behaviorData.last_value.date_end_unix,
+                behaviorLastValue.date_start_unix,
+                behaviorLastValue.date_end_unix,
               ],
             }}
           >
-            <KpiValue
-              absolute={behaviorData.last_value.number_of_participants}
-            />
-            <Text>{text.kpi.aantal_respondenten.toelichting}</Text>
+            <KpiValue absolute={behaviorLastValue.number_of_participants} />
+            <Text>{nl_gedrag.kpi.aantal_respondenten.toelichting}</Text>
           </KpiTile>
         </TwoKpiSection>
 
         <BehaviorTableTile
-          behavior={behaviorData.last_value}
-          title={text.basisregels.title}
-          introduction={text.basisregels.intro}
-          footer={text.basisregels.voetnoot}
-          footerAsterisk={text.basisregels.voetnoot_asterisk}
+          behavior={behaviorLastValue}
+          title={nl_gedrag.basisregels.title}
+          introduction={nl_gedrag.basisregels.intro}
+          footer={nl_gedrag.basisregels.voetnoot}
+          footerAsterisk={nl_gedrag.basisregels.voetnoot_asterisk}
         />
 
         <BehaviorLineChartTile
-          values={behaviorData.values}
-          title={text.basisregels_over_tijd.title}
-          introduction={text.basisregels_over_tijd.intro}
+          values={data.behavior.values}
+          title={nl_gedrag.basisregels_over_tijd.title}
+          introduction={nl_gedrag.basisregels_over_tijd.intro}
         />
 
         <BehaviorChoroplethTile data={choropleth.vr} />
 
         <MoreInformation />
+
+        <ContentHeader
+          category={corona_melder_app.header.category}
+          title={corona_melder_app.header.title}
+          icon={<Phone />}
+          subtitle={corona_melder_app.header.description}
+          metadata={{
+            datumsText: corona_melder_app.header.datums,
+            dateOrRange: behaviorLastValue.date_start_unix,
+            dateOfInsertionUnix: behaviorLastValue.date_of_insertion_unix,
+            dataSources: [corona_melder_app.header.bronnen.rivm],
+          }}
+          reference={corona_melder_app.header.reference}
+        />
+
+        <TwoKpiSection>
+          <KpiTile
+            title={corona_melder_app.waarschuwingen.title}
+            metadata={{
+              date: behaviorLastValue.date_start_unix,
+              source: corona_melder_app.header.bronnen.rivm,
+            }}
+          >
+            <KpiValue
+              data-cy="infected"
+              absolute={data.corona_melder_app.last_value.warned_daily}
+              difference={data.difference.corona_melder_app__warned_daily}
+            />
+
+            <Text>{corona_melder_app.waarschuwingen.description}</Text>
+            <Text>
+              {replaceComponentsInText(corona_melder_app.waarschuwingen.total, {
+                totalDownloads: (
+                  <span
+                    css={css({ color: 'data.primary', fontWeight: 'bold' })}
+                  >
+                    {formatNumber(
+                      data.corona_melder_app?.last_value.downloaded_total
+                    )}
+                  </span>
+                ),
+              })}
+            </Text>
+          </KpiTile>
+
+          <Tile>
+            <Heading level={3}>{corona_melder_app.rapport.title}</Heading>
+            <Text>{corona_melder_app.rapport.description}</Text>
+
+            <Link href={corona_melder_app.rapport.link.href} passHref>
+              <a target="_blank" css={css({ display: 'flex' })}>
+                <IconContainer>
+                  <ExternalLinkIcon />
+                </IconContainer>
+                <span css={css({ maxWidth: 200 })}>
+                  {corona_melder_app.rapport.link.text}
+                </span>
+              </a>
+            </Link>
+          </Tile>
+        </TwoKpiSection>
       </TileList>
     </>
   );
@@ -119,3 +184,12 @@ const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
 BehaviorPage.getLayout = getNationalLayout;
 
 export default BehaviorPage;
+
+const IconContainer = styled.span(
+  css({
+    marginRight: 3,
+    color: 'gray',
+    height: 25,
+    width: 25,
+  })
+);

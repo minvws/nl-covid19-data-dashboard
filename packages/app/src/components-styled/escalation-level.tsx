@@ -3,26 +3,47 @@ import { EscalationLevelIcon } from '~/components-styled/escalation-level-icon';
 import { Text } from '~/components-styled/typography';
 import { EscalationLevel } from '~/domain/restrictions/type';
 import siteText from '~/locale/index';
+import { useEscalationColor } from '~/utils/use-escalation-color';
 
 export type EscalationLevelProps = {
-  escalationLevel: EscalationLevel;
+  level: EscalationLevel;
+  fontSize?: number;
+  useLevelColor?: boolean;
+  hasSmallIcon?: boolean;
 };
 
-export function EscalationLevelInfoLabel(props: EscalationLevelProps) {
-  const { escalationLevel } = props;
+type EscalationLevelString = '1' | '2' | '3' | '4';
 
+export function EscalationLevelInfoLabel({
+  level,
+  hasSmallIcon = false,
+  fontSize = 2,
+  useLevelColor = false,
+}: EscalationLevelProps) {
+  const escalationColor = useEscalationColor(level);
+  const color = useLevelColor ? escalationColor : 'inherit';
   return (
     <Box display="flex" alignItems="center" justifyContent="flex-start">
-      <EscalationLevelIcon level={escalationLevel} />
-      <Text as="span" ml={2} fontWeight="bold">
-        {siteText.escalatie_niveau.types[escalationLevel].titel}
+      <EscalationLevelIcon level={level} isSmall={hasSmallIcon} />
+      <Text
+        as="span"
+        ml={2}
+        fontWeight="bold"
+        fontSize={fontSize}
+        color={color}
+      >
+        {
+          siteText.escalatie_niveau.types[
+            level.toString() as EscalationLevelString
+          ].titel
+        }
       </Text>
     </Box>
   );
 }
 
 export function EscalationLevelInfo(props: EscalationLevelProps) {
-  const { escalationLevel } = props;
+  const { level } = props;
 
   return (
     <Box
@@ -35,7 +56,7 @@ export function EscalationLevelInfo(props: EscalationLevelProps) {
       <Text as="span" marginLeft="0 !important" marginRight=".5em !important">
         {siteText.escalatie_niveau.sidebar_label}
       </Text>
-      <EscalationLevelInfoLabel escalationLevel={escalationLevel} />
+      <EscalationLevelInfoLabel level={level} />
     </Box>
   );
 }

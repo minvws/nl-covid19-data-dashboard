@@ -37,6 +37,7 @@ import {
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { HighlightTeaserProps } from '~/components-styled/highlight-teaser';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -51,7 +52,7 @@ export const getStaticProps = createGetStaticProps(
   createGetContent<{
     articles: ArticleSummary[];
     editorial: EditorialSummary;
-    highlight: { article: ArticleSummary };
+    highlight: HighlightTeaserProps;
   }>(topicalPageQuery),
   () => {
     const data = getNlData();
@@ -163,10 +164,10 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
               ]}
             />
 
-            {content.editorial && content.highlight?.article && (
+            {content.editorial && content.highlight && (
               <EditorialTile
                 editorial={content.editorial}
-                highlightedArticle={content.highlight.article}
+                highlight={content.highlight}
               />
             )}
 
@@ -186,17 +187,20 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                       <EscalationMapLegenda
                         data={choropleth.vr}
                         metricName="escalation_levels"
-                        metricProperty="escalation_level"
+                        metricProperty="level"
                       />
                     }
                   >
                     <SafetyRegionChoropleth
                       data={choropleth.vr}
                       metricName="escalation_levels"
-                      metricProperty="escalation_level"
-                      onSelect={createSelectRegionHandler(router, 'actueel')}
+                      metricProperty="level"
+                      onSelect={createSelectRegionHandler(
+                        router,
+                        'risiconiveau'
+                      )}
                       tooltipContent={escalationTooltip(
-                        createSelectRegionHandler(router, 'actueel')
+                        createSelectRegionHandler(router, 'risiconiveau')
                       )}
                     />
                   </TopicalChoroplethContainer>
@@ -215,8 +219,9 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
               </TopicalTile>
             </Box>
             <DataSitemap />
-
-            <ArticleList articleSummaries={content.articles} />
+            <Box mt={{ md: 5 }}>
+              <ArticleList articleSummaries={content.articles} />
+            </Box>
           </TileList>
         </MaxWidth>
       </Box>

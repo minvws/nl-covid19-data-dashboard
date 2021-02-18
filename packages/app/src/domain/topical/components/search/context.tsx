@@ -156,7 +156,6 @@ function useSearchContextValue<T extends Element>(
       'aria-autocomplete': 'list',
       'aria-controls': id,
       'aria-activedescendant': getOptionId(focusIndex),
-      disabled: !!termSubmitted,
     },
 
     comboboxProps: {

@@ -15,7 +15,7 @@
     "@sanity/desk-tool",
     "@sanity/production-preview",
     "tabs",
-    "translate"
+    "./src/plugins/translate"
   ],
   "env": {
     "development": {
@@ -28,23 +28,23 @@
   "parts": [
     {
       "name": "part:@sanity/base/schema",
-      "path": "./schemas/schema"
+      "path": "./src/schemas/schema"
     },
     {
       "name": "part:@sanity/desk-tool/structure",
-      "path": "./desk-structure.js"
+      "path": "./src/desk-structure"
     },
     {
       "implements": "part:@sanity/production-preview/resolve-production-url",
-      "path": "./previews/resolve-production-url.js"
+      "path": "./src/previews/resolve-production-url"
     },
     {
       "implements": "part:@sanity/base/theme/variables/override-style",
-      "path": "variable-overrides.css"
+      "path": "./src/variable-overrides.css"
     },
     {
       "implements": "part:@sanity/base/document-actions/resolver",
-      "path": "resolve-document-actions.js"
+      "path": "./src/resolve-document-actions"
     }
   ]
 }

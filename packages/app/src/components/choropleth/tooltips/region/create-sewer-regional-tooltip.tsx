@@ -16,7 +16,7 @@ export const createSewerRegionalTooltip = (
 ) => (context: SafetyRegionProperties & RegionalSewerValue): ReactNode => {
   const onSelect = (event: any) => {
     event.stopPropagation();
-    selectHandler(context);
+    selectHandler(context.vrcode);
   };
 
   return (
