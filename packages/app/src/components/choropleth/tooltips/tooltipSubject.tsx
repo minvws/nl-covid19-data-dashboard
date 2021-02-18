@@ -3,6 +3,7 @@ import { css } from '@styled-system/css';
 import { ReactNode } from 'react';
 import { Box } from '~/components-styled/base';
 import { Text } from '~/components-styled/typography';
+import { getFilteredThresholdValues } from '~/utils/getFilteredThresholdValues';
 
 interface TooltipSubjectProps {
   subject: string;
@@ -16,11 +17,10 @@ export function TooltipSubject(props: TooltipSubjectProps) {
 
   // Get all the thresholds and filter out the right color that needs to be rendered in the rectangle,
   // by filtering out all the higher thresholds and then using the last key that still exists.
-  const filteredThreshold = thresholdValues
-    .filter((item: ChoroplethThresholdsValue) => {
-      return item.threshold <= filterBelow;
-    })
-    .slice(-1)[0];
+  const filteredThreshold = getFilteredThresholdValues(
+    thresholdValues,
+    filterBelow
+  );
 
   return (
     <>
