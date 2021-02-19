@@ -133,6 +133,7 @@ describe('Util: sort time series in data in place', () => {
   it('Should throw an error when there are no date_unix in a date series', () => {
     const invalidDateSeries = {
       ...dateSeriesRest,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       values: [...dateSeriesValues].map(({ date_unix, ...rest }) => ({
         ...rest,
       })),
@@ -158,6 +159,7 @@ describe('Util: sort time series in data in place', () => {
   it('Should throw an error when there are no date_end_unix in a date span series', () => {
     const invalidDateSpanSeries = {
       ...dateSpanSeriesRest,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       values: [...dateSpanSeriesValues].map(({ date_end_unix, ...rest }) => ({
         ...rest,
       })),
@@ -180,6 +182,7 @@ describe('Util: sort time series in data in place', () => {
   it('Should throw an error when there are no date_start_unix in a date span series', () => {
     const invalidDateSpanSeries = {
       ...dateSpanSeriesRest,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       values: [...dateSpanSeriesValues].map(({ date_start_unix, ...rest }) => ({
         ...rest,
       })),
