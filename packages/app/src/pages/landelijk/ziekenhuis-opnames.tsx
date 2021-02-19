@@ -283,6 +283,19 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
               </>
             );
           }}
+          legendItems={[
+            {
+              color: colors.data.primary,
+              label: text.chart_bedbezetting.legend_trend_label,
+              shape: 'line',
+            },
+            {
+              color: colors.data.underReported,
+              label: text.chart_bedbezetting.legend_inaccurate_label,
+              shape: 'square',
+            },
+          ]}
+          showLegend
         />
       </TileList>
     </>
