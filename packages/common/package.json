@@ -16,8 +16,8 @@
     "start": "tsdx watch",
     "build": "tsdx build",
     "test": "tsdx test --passWithNoTests",
-    "lint": "tsdx lint",
-    "format": "tsdx lint src --fix",
+    "lint": "tsdx lint src --ignore-pattern types/data.ts",
+    "format": "tsdx lint src --fix --ignore-pattern types/data.ts",
     "prepare": "tsdx build",
     "size": "size-limit",
     "analyze": "size-limit --why"
