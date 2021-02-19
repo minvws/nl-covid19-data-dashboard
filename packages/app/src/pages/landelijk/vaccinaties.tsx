@@ -131,6 +131,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                         data.vaccine_administered_ggd.last_value
                           .date_of_insertion_unix
                       }
+                      isReported
                     />
 
                     <VaccineAdministeredItem
@@ -142,6 +143,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                         data.vaccine_administered_hospitals.last_value
                           .date_of_insertion_unix
                       }
+                      isReported
                     />
 
                     <VaccineAdministeredItem
