@@ -24,6 +24,7 @@ import { ToggleOutlierButton } from './components/toggle-outlier-button';
 import { DateTooltip, Tooltip } from './components/tooltip';
 import {
   Dimensions,
+  SewerChartValue,
   useLineTooltip,
   useSelectedStationValues,
   useSewerChartScales,
@@ -77,12 +78,15 @@ export function SewerChart(props: SewerChartProps) {
     stationValuesFiltered,
     hasOutliers,
     selectedStationValues,
+    outlierValues,
   } = useSelectedStationValues(
     sewerStationSelectProps.value,
     stationValues,
     averageValues,
     displayOutliers
   );
+
+  console.dir(outlierValues);
 
   /**
    * cache paddings and bounds between renders
@@ -180,7 +184,7 @@ export function SewerChart(props: SewerChartProps) {
          * The margin-bottom has been eyeballed to visually attach the
          * button to the graph, not sure how future-proof this is.
          */
-        mb={-19}
+        mb={-38}
         zIndex={1}
       >
         <ToggleOutlierButton
@@ -192,6 +196,25 @@ export function SewerChart(props: SewerChartProps) {
       </Box>
 
       <Box position="relative" ref={sizeRef} css={css({ userSelect: 'none' })}>
+        <svg
+          width={width}
+          height={52}
+          role="img"
+          style={{ pointerEvents: 'none' }}
+        >
+          {outlierValues && (
+            <Group left={dimensions.padding.left}>
+              <ScatterPlot
+                data={outlierValues}
+                getX={scales.getX}
+                getY={(_x: SewerChartValue) => 26}
+                color="rgba(89, 89, 89, 0.8)"
+                r={4}
+                dotted
+              />
+            </Group>
+          )}
+        </svg>
         <svg
           role="img"
           width={width}
