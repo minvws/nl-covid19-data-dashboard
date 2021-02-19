@@ -53,6 +53,10 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
     text.gezette_prikken.tab_first.title
   );
 
+  const additions = text.expected_page_additions.additions.filter(
+    (x) => x.length
+  );
+
   return (
     <>
       <SEOHead
@@ -394,15 +398,17 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
         <TwoKpiSection>
           <KpiTile title={text.expected_page_additions.title}>
             <Text mb={4}>{text.expected_page_additions.description}</Text>
-            <ul>
-              {text.expected_page_additions.additions
-                .filter((x) => x.length)
-                .map((addition) => (
-                  <li key={addition}>
-                    <InlineText>{addition}</InlineText>
-                  </li>
-                ))}
-            </ul>
+            {additions.length > 0 && (
+              <ul>
+                {text.expected_page_additions.additions
+                  .filter((x) => x.length)
+                  .map((addition) => (
+                    <li key={addition}>
+                      <InlineText>{addition}</InlineText>
+                    </li>
+                  ))}
+              </ul>
+            )}
           </KpiTile>
         </TwoKpiSection>
       </TileList>

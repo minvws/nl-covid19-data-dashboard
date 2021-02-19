@@ -111,7 +111,8 @@ function CoverImage({ image }: CoverImageProps) {
       left={0}
       height="100%"
       width="100%"
-      backgroundImage={`linear-gradient(to left, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.75)), url(${url})`}
+      backgroundImagePrefix={`linear-gradient(to left, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.75))`}
+      backgroundImageUrl={url}
       backgroundPosition={bgPosition}
       backgroundRepeat="no-repeat"
       backgroundSize="cover"
