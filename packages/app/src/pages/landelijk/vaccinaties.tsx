@@ -227,23 +227,23 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             siteText.accessibility.grafieken.vaccin_levering_en_prikken
           }
           metadata={{
-            date: 1612375710,
+            date: 1613737324,
             source: text.bronnen.rivm,
           }}
         >
           {/**
            * Aspect ratio was determined by the original SVG width/height which is now set to be 100% each.
            */}
-          <AspectRatio ratio={1.8325}>
+          <AspectRatio ratio={821 / 448}>
             {targetLanguage === 'nl' ? (
               <Image
-                src="/images/vaccines_administered_chart_nl.svg"
+                src="/images/vaccines_administered_chart_nl.svg?v2"
                 loading="lazy"
                 decoding="async"
               />
             ) : (
               <Image
-                src="/images/vaccines_administered_chart_en.svg"
+                src="/images/vaccines_administered_chart_en.svg?v2"
                 loading="lazy"
                 decoding="async"
               />
