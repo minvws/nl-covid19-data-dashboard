@@ -13,25 +13,21 @@ const dateSeriesValues = [
     date_unix: 1582848000,
     admissions_on_date_of_admission: 0,
     admissions_on_date_of_reporting: 0,
-    date_of_insertion_unix: 1612966742,
   },
   {
     date_unix: 1582934400,
     admissions_on_date_of_admission: 0,
     admissions_on_date_of_reporting: 0,
-    date_of_insertion_unix: 1612966742,
   },
   {
     date_unix: 1582761600,
     admissions_on_date_of_admission: 0,
     admissions_on_date_of_reporting: 0,
-    date_of_insertion_unix: 1612966742,
   },
   {
     date_unix: 1582914400,
     admissions_on_date_of_admission: 0,
     admissions_on_date_of_reporting: 0,
-    date_of_insertion_unix: 1612966742,
   },
 ];
 
@@ -42,7 +38,6 @@ const dateSeriesRest = {
     date_unix: 1612828800,
     admissions_on_date_of_admission: 0,
     admissions_on_date_of_reporting: 0,
-    date_of_insertion_unix: 1612966742,
   },
 };
 
@@ -52,28 +47,24 @@ const dateSpanSeriesValues = [
     date_end_unix: 1601164800,
     average: 0.0,
     total_installation_count: 1,
-    date_of_insertion_unix: 1612965967,
   },
   {
     date_start_unix: 1600041600,
     date_end_unix: 1600560000,
     average: 0.0,
     total_installation_count: 1,
-    date_of_insertion_unix: 1612965967,
   },
   {
     date_start_unix: 1601251200,
     date_end_unix: 1601769600,
     average: 58.07,
     total_installation_count: 1,
-    date_of_insertion_unix: 1612965967,
   },
   {
     date_start_unix: 1599436800,
     date_end_unix: 1599955200,
     average: 8.39,
     total_installation_count: 1,
-    date_of_insertion_unix: 1612965967,
   },
 ];
 
