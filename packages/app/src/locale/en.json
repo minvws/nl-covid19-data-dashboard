@@ -2068,6 +2068,136 @@
         "",
         ""
       ]
+    },
+    "data": {
+      "difference": "",
+      "sidebar": {
+        "last_value": {
+          "total_vaccinated": "",
+          "date_unix": "",
+          "date_of_insertion_unix": ""
+        }
+      },
+      "kpi_total": {
+        "title": "",
+        "value": "",
+        "description": "",
+        "date_of_report_unix": "",
+        "date_of_insertion_unix": "",
+        "administered": [
+          {
+            "value": "",
+            "description": "",
+            "report_date": ""
+          },
+          {
+            "value": "",
+            "description": "",
+            "report_date": ""
+          },
+          {
+            "value": "",
+            "description": "",
+            "report_date": ""
+          },
+          {
+            "value": "",
+            "description": "",
+            "report_date": ""
+          },
+          {
+            "value": "",
+            "description": "",
+            "report_date": ""
+          }
+        ],
+        "description_first": "",
+        "description_second": "",
+        "warning": "",
+        "first_tab_title": "",
+        "second_tab_title": "",
+        "tab_total_estimated": {
+          "value": "",
+          "description": "",
+          "date_of_report_unix": "",
+          "date_of_insertion_unix": "",
+          "administered": [
+            {
+              "value": "",
+              "description": "",
+              "report_date": ""
+            },
+            {
+              "value": "",
+              "description": "",
+              "report_date": ""
+            },
+            {
+              "value": "",
+              "description": "",
+              "report_date": ""
+            },
+            {
+              "value": "",
+              "description": "",
+              "report_date": ""
+            },
+            {
+              "value": "",
+              "description": "",
+              "report_date": ""
+            }
+          ],
+          "description_first": "",
+          "description_second": ""
+        }
+      },
+      "kpi_expected_delivery": {
+        "title": "",
+        "value": "",
+        "description": "",
+        "date_of_report_unix": "",
+        "date_of_insertion_unix": ""
+      },
+      "kpi_stock": {
+        "title": "",
+        "value": "",
+        "amount": [
+          {
+            "value": "",
+            "description": ""
+          },
+          {
+            "value": "",
+            "description": ""
+          },
+          {
+            "value": "",
+            "description": ""
+          },
+          {
+            "value": "",
+            "description": ""
+          },
+          {
+            "value": "",
+            "description": ""
+          },
+          {
+            "value": "",
+            "description": ""
+          }
+        ]
+      },
+      "kpi_expected_page_additions": {
+        "title": "",
+        "description": "",
+        "additions": [
+          "",
+          "",
+          ""
+        ]
+      }
     }
   },
   "editorial_detail": {
