@@ -84,7 +84,9 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
           <KpiTile
             title={text.gezette_prikken.title}
             metadata={{
-              date: data.vaccine_administered_total.last_value.date_unix,
+              date:
+                data.vaccine_administered_total.last_value
+                  .date_of_insertion_unix,
               source: text.bronnen.all_left,
             }}
           >
@@ -127,10 +129,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                     <VaccineAdministeredItem
                       value={data.vaccine_administered_ggd.last_value.estimated}
                       description={text.gezette_prikken.estimated.ggd}
-                      date={
-                        data.vaccine_administered_ggd.last_value
-                          .date_of_insertion_unix
-                      }
+                      date={data.vaccine_administered_ggd.last_value.date_unix}
                       isReported
                     />
 
@@ -140,8 +139,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                       }
                       description={text.gezette_prikken.estimated.hospitals}
                       date={
-                        data.vaccine_administered_hospitals.last_value
-                          .date_of_insertion_unix
+                        data.vaccine_administered_hospitals.last_value.date_unix
                       }
                       isReported
                     />
@@ -156,7 +154,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                       }
                       date={
                         data.vaccine_administered_care_institutions.last_value
-                          .date_of_insertion_unix
+                          .date_unix
                       }
                     />
 
@@ -166,8 +164,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                       }
                       description={text.gezette_prikken.estimated.doctors}
                       date={
-                        data.vaccine_administered_doctors.last_value
-                          .date_of_insertion_unix
+                        data.vaccine_administered_doctors.last_value.date_unix
                       }
                     />
                   </Box>
@@ -194,8 +191,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                       }
                       description={text.gezette_prikken.reported.ggd_ghor}
                       date={
-                        data.vaccine_administered_ggd_ghor.last_value
-                          .date_of_insertion_unix
+                        data.vaccine_administered_ggd_ghor.last_value.date_unix
                       }
                       isReported
                     />
@@ -203,10 +199,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                     <VaccineAdministeredItem
                       value={data.vaccine_administered_lnaz.last_value.reported}
                       description={text.gezette_prikken.reported.lnaz}
-                      date={
-                        data.vaccine_administered_lnaz.last_value
-                          .date_of_insertion_unix
-                      }
+                      date={data.vaccine_administered_lnaz.last_value.date_unix}
                       isReported
                     />
                   </Box>
