@@ -86,8 +86,6 @@ export function SewerChart(props: SewerChartProps) {
     displayOutliers
   );
 
-  console.dir(outlierValues);
-
   /**
    * cache paddings and bounds between renders
    */

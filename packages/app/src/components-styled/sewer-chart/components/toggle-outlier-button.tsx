@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const ToggleOutlierButton = styled.button(
   css({
-    bg: 'transparent',
+    bg: 'rgba(218, 218, 218, 0.2)',
     border: 0,
     p: 1,
     color: 'blue',
