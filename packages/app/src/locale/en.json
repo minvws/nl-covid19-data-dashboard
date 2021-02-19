@@ -2053,7 +2053,7 @@
         "ggd": "administered by GGDs",
         "hospitals": "administered in hospitals",
         "care_institutions": "administered in long-term care institutions",
-        "doctors": "administered by general practitioner"
+        "doctors": "administered in general practices"
       },
       "reported": {
         "ggd_ghor": "reported by GGD-GHOR",
