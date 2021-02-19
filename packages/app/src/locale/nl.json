@@ -2039,10 +2039,10 @@
     },
     "expected_page_additions": {
       "title": "Verwachte toevoegingen aan deze pagina",
-      "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer:",
+      "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer de vaccinatiegraad.",
       "additions": [
-        "Vaccinatiebereidheid",
-        "Vaccinatiegraad",
+        "",
+        "",
         ""
       ]
     },

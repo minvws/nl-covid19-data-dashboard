@@ -2039,10 +2039,10 @@
     },
     "expected_page_additions": {
       "title": "Expected data on vaccinations",
-      "description": "More data on vaccinations will be added in the near future, including:",
+      "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
       "additions": [
-        "Willingness to be vaccinated",
-        "Vaccination coverage",
+        "",
+        "",
         ""
       ]
     },
