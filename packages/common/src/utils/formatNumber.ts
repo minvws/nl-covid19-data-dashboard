@@ -1,4 +1,4 @@
-import { getLocale } from '~/utils/getLocale';
+import { getLocale } from './getLocale';
 
 const locale = getLocale();
 
