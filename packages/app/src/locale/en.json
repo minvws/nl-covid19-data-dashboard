@@ -2014,135 +2014,37 @@
         "download": ""
       }
     },
-    "data": {
-      "difference": "",
-      "sidebar": {
-        "last_value": {
-          "total_vaccinated": "874959",
-          "date_unix": "1613650547",
-          "date_of_insertion_unix": "1613650547"
-        }
+    "gezette_prikken": {
+      "title": "Number of doses administered",
+      "estimated_until": "Estimated number till {{reportedDate}}",
+      "reported_until": "Reported number till {{reportedDate}}",
+      "tab_first": {
+        "title": "Calculated number",
+        "description": "This figure is a calculation of the total number of vaccine doses that have been administered. The calculation is based on the number of vaccine doses that have been delivered to the locations where injections are given. [Read more about the calculation in the explanation of the presented data.](https://coronadashboard.government.nl/verantwoording#vaccination)"
       },
-      "kpi_total": {
-        "title": "Number of doses administered",
-        "value": "687306",
-        "description": "",
-        "date_of_report_unix": "1613650547",
-        "date_of_insertion_unix": "1613650547",
-        "administered": [
-          {
-            "value": "592755",
-            "description": "reported by GGD-GHOR",
-            "report_date": "Reported number till 17 February"
-          },
-          {
-            "value": "94551",
-            "description": "reported by LNAZ",
-            "report_date": "Reported number till 17 February"
-          },
-          {
-            "value": "",
-            "description": "",
-            "report_date": ""
-          },
-          {
-            "value": "",
-            "description": "",
-            "report_date": ""
-          },
-          {
-            "value": "",
-            "description": "",
-            "report_date": ""
-          }
-        ],
-        "description_first": "This is the number of vaccine doses administered reported by GGD-GHOR and LNAZ. [Read more in the explanation of the presented data.](https://coronadashboard.government.nl/verantwoording#vaccination)",
-        "description_second": "",
-        "warning": "",
-        "first_tab_title": "Calculated number",
-        "second_tab_title": "Reported number",
-        "tab_total_estimated": {
-          "value": "874959",
-          "description": "",
-          "date_of_report_unix": "1613650547",
-          "date_of_insertion_unix": "1613650547",
-          "administered": [
-            {
-              "value": "592755",
-              "description": "administered by GGDs",
-              "report_date": "Reported number till 17 February"
-            },
-            {
-              "value": "94551",
-              "description": "administered in hospitals",
-              "report_date": "Reported number till 17 February"
-            },
-            {
-              "value": "184706",
-              "description": "administered in long-term care institutions",
-              "report_date": "Calculated number till 17 February"
-            },
-            {
-              "value": "2947",
-              "description": "administered in general practices",
-              "report_date": "Calculated number till 17 February"
-            },
-            {
-              "value": "",
-              "description": "",
-              "report_date": ""
-            }
-          ],
-          "description_first": "This figure is a calculation of the total number of vaccine doses that have been administered. The calculation is based on the number of vaccine doses that have been delivered to the locations where injections are given. [Read more about the calculation in the explanation of the presented data.](https://coronadashboard.government.nl/verantwoording#vaccination)",
-          "description_second": ""
-        }
+      "tab_second": {
+        "title": "Reported number",
+        "description": "This is the number of vaccine doses administered reported by GGD-GHOR and LNAZ. [Read more in the explanation of the presented data.](https://coronadashboard.government.nl/verantwoording#vaccination)"
       },
-      "kpi_expected_delivery": {
-        "title": "Approved vaccines to be delivered",
-        "value": "2473700",
-        "description": "This is the number of approved vaccine doses the Netherlands expects to receive over the next six weeks. The Netherlands will receive a new delivery each week. People need two separately administered doses for the vaccine to be maximally effective.",
-        "date_of_report_unix": "1612384200",
-        "date_of_insertion_unix": "1612384200"
+      "estimated": {
+        "ggd": "administered by GGDs",
+        "hospitals": "administered in hospitals",
+        "care_institutions": "administered in long-term care institutions",
+        "doctors": "administered by general practitioner"
       },
-      "kpi_stock": {
-        "title": "",
-        "value": "",
-        "amount": [
-          {
-            "value": "",
-            "description": ""
-          },
-          {
-            "value": "",
-            "description": ""
-          },
-          {
-            "value": "",
-            "description": ""
-          },
-          {
-            "value": "",
-            "description": ""
-          },
-          {
-            "value": "",
-            "description": ""
-          },
-          {
-            "value": "",
-            "description": ""
-          }
-        ]
-      },
-      "kpi_expected_page_additions": {
-        "title": "Expected data on vaccinations",
-        "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
-        "additions": [
-          "",
-          "",
-          ""
-        ]
+      "reported": {
+        "ggd_ghor": "reported by GGD-GHOR",
+        "lnaz": "reported by LNAZ"
       }
+    },
+    "expected_page_additions": {
+      "title": "Expected data on vaccinations",
+      "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
+      "additions": [
+        "",
+        "",
+        ""
+      ]
     },
     "section_vaccinations_more_information": {
       "title": "Expected data on vaccinations",
