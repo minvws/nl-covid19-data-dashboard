@@ -1,60 +1,56 @@
 /**
  * This chart is an adaptation from MultiLineChart. It attempts to create a
  * generic abstraction that can replace LineChart and MultiLineChart and
- * AreaChart, by configuring the type of time series for each property.
+ * AreaChart.
  *
- * It assumes that all data for the chart (regardless of sources) is passed in
- * a single type on the values prop. Then the config prop will declare the type
+ * The main focus in this iteration is to try to keep things as simple as
+ * possible.
+ *
+ * It assumes that all data for the chart (regardless of sources) is passed in a
+ * single type on the values prop. Then the config prop will declare the type
  * and visual properties for each of the series.
+ *
+ * A lot of customization functions have been stripped from the component props
+ * API to reduce complexity, because I think we should strive for consistency in
+ * design first and use component composition where possible.
+ *
+ * For this reason the legend was also excluded from this implementation, in
+ * order to see how convenient it is to have it as part of the ChartTile
+ * composition like some other charts.
  */
-import { TickFormatter } from '@visx/axis';
-import { localPoint } from '@visx/event';
-import { Point } from '@visx/point';
-import { scaleBand } from '@visx/scale';
-import { bisectLeft, extent } from 'd3-array';
-import { ScaleTime } from 'd3-scale';
-import { useCallback, useMemo, useState } from 'react';
-import { isDefined } from 'ts-is-present';
-import { Box } from '~/components-styled/base';
-import { Legenda, LegendItem, LegendShape } from '~/components-styled/legenda';
-import {
-  ChartPadding,
-  ChartScales,
-  ComponentCallbackFunction,
-  defaultPadding,
-} from '~/components-styled/line-chart/components';
-import { ChartAxes } from './components/chart-axes';
 import {
   isDateSpanValue,
   isDateValue,
   TimestampedValue,
 } from '@corona-dashboard/common';
-import { Text } from '~/components-styled/typography';
-import { ValueAnnotation } from '~/components-styled/value-annotation';
-import text from '~/locale/index';
-import { colors } from '~/style/theme';
-import { formatDateFromSeconds } from '~/utils/formatDate';
-import { formatNumber, formatPercentage } from '~/utils/formatNumber';
-import { TimeframeOption } from '~/utils/timeframe';
-
-/**
- * Importing unchanged logic and components from line-chart since this is
- * considered a fork.
- */
+import css from '@styled-system/css';
+import { localPoint } from '@visx/event';
+import { Point } from '@visx/point';
+import { scaleBand, scaleLinear, scaleTime } from '@visx/scale';
+import { defaultStyles, TooltipWithBounds, useTooltip } from '@visx/tooltip';
+import { bisectLeft, extent } from 'd3-array';
+import { ScaleTime } from 'd3-scale';
+import { useCallback, useMemo, useState } from 'react';
+import styled from 'styled-components';
+import { isDefined } from 'ts-is-present';
+import { Box } from '~/components-styled/base';
 import {
+  ChartPadding,
+  defaultPadding,
   HoverPoint,
-  Marker,
-  Trend,
 } from '~/components-styled/line-chart/components';
 import {
   calculateYMax,
   getTrendData,
   TrendValue,
 } from '~/components-styled/line-chart/logic';
-import { defaultStyles, TooltipWithBounds, useTooltip } from '@visx/tooltip';
-import styled from 'styled-components';
-import css from '@styled-system/css';
+import { Text } from '~/components-styled/typography';
+import text from '~/locale/index';
+import { formatDateFromSeconds } from '~/utils/formatDate';
+import { formatNumber, formatPercentage } from '~/utils/formatNumber';
+import { TimeframeOption } from '~/utils/timeframe';
 import { useBreakpoints } from '~/utils/useBreakpoints';
+import { ChartAxes, ChartContainer, Marker, Trend } from './components';
 
 const tooltipStyles = {
   ...defaultStyles,
@@ -68,32 +64,18 @@ type TooltipData<T extends TimestampedValue> = {
   seriesConfig: SeriesConfig<T>[];
 };
 
-const dateToValue = (d: Date) => d.valueOf() / 1000;
-const formatXAxis = (date: Date) =>
-  formatDateFromSeconds(dateToValue(date), 'axis');
-const formatYAxisFn = (y: number) => formatNumber(y);
-const formatYAxisPercentageFn = (y: number) => `${formatPercentage(y)}%`;
+export type ChartBounds = { width: number; height: number };
 
 export type SeriesConfig<T extends TimestampedValue> = {
-  /**
-   * For consistency and transparency it is probably a good idea to enforce
-   * property, label and color to be defined for all lines. Then this data can
-   * be easily passed to the tooltip function. The fallback to
-   * colors.data.primary can be made explicit at the consumer.
-   *
-   * Since the originally named "legendLabel" is likely to appear in both the
-   * tooltip and the legenda, it is now named "label".
-   */
   metricProperty: keyof T;
   label: string;
   color: string;
   style?: 'solid' | 'dashed';
   areaFillOpacity?: number;
   strokeWidth?: number;
-  legendShape?: LegendShape;
 };
 
-export type MultiLineChartProps<T extends TimestampedValue> = {
+export type TimeSeriesChartProps<T extends TimestampedValue> = {
   values: T[];
   seriesConfig: SeriesConfig<T>[];
   width: number;
@@ -105,23 +87,20 @@ export type MultiLineChartProps<T extends TimestampedValue> = {
     key: keyof T,
     seriesConfig: SeriesConfig<T>[]
   ) => React.ReactNode;
-  formatXAxis?: TickFormatter<Date>;
-  formatYAxis?: TickFormatter<number>;
-  hideFill?: boolean;
-  valueAnnotation?: string;
-  isPercentage?: boolean;
+  dataOptions?: {
+    annotation?: string;
+    maximumValue?: number;
+    isPercentage?: boolean;
+  };
+  numTicks?: number;
+  tickValues?: number[];
   showMarkerLine?: boolean;
-  formatMarkerLabel?: (value: T) => string;
-  padding?: Partial<ChartPadding>;
-  showLegend?: boolean;
-  legendItems?: LegendItem[];
-  componentCallback?: ComponentCallbackFunction;
-  ariaLabelledBy?: string;
-  seriesMax?: number;
-  yTickValues?: number[];
+  // only pad the left, because I think that's how it's used in practice
+  paddingLeft?: number;
+  ariaLabelledBy: string;
 };
 
-export function MultiLineChart<T extends TimestampedValue>({
+export function TimeSeriesChart<T extends TimestampedValue>({
   values,
   seriesConfig,
   width,
@@ -129,25 +108,13 @@ export function MultiLineChart<T extends TimestampedValue>({
   timeframe = 'all',
   signaalwaarde,
   formatTooltip,
-  formatYAxis,
-  hideFill = false,
-  valueAnnotation,
-  isPercentage,
-  showMarkerLine = false,
-  formatMarkerLabel,
-  padding: overridePadding,
-  showLegend = false,
-  legendItems = showLegend
-    ? seriesConfig.map((x) => ({
-        color: x.color ?? colors.data.primary,
-        label: x.label,
-        shape: x.legendShape ?? 'line',
-      }))
-    : undefined,
+  dataOptions,
+  numTicks = 3,
+  tickValues,
+  showMarkerLine,
+  paddingLeft,
   ariaLabelledBy,
-  seriesMax: overrideSeriesMax,
-  yTickValues,
-}: MultiLineChartProps<T>) {
+}: TimeSeriesChartProps<T>) {
   const {
     tooltipData,
     tooltipLeft = 0,
@@ -183,8 +150,10 @@ export function MultiLineChart<T extends TimestampedValue>({
     [trendsList, signaalwaarde]
   );
 
-  const seriesMax = isDefined(overrideSeriesMax)
-    ? overrideSeriesMax
+  const forcedMaximumValue = dataOptions?.maximumValue;
+
+  const seriesMax = isDefined(forcedMaximumValue)
+    ? forcedMaximumValue
     : calculatedSeriesMax;
 
   const xDomain = useMemo(() => {
@@ -197,29 +166,47 @@ export function MultiLineChart<T extends TimestampedValue>({
 
   const yDomain = useMemo(() => [0, seriesMax], [seriesMax]);
 
-  const padding: ChartPadding = useMemo(
-    () => ({
-      ...defaultPadding,
-      // Increase space for larger numbers
-      left: Math.max(seriesMax.toFixed(0).length * 10, defaultPadding.left),
-      ...overridePadding,
-    }),
-    [overridePadding, seriesMax]
+  const padding = useMemo(
+    () =>
+      ({
+        ...defaultPadding,
+        left: paddingLeft || defaultPadding.left,
+      } as ChartPadding),
+    [paddingLeft]
   );
 
   const timespanMarkerData = trendsList[0];
 
-  const xMax = width - padding.left - padding.right;
-  const yMax = height - padding.top - padding.bottom;
+  const bounds: ChartBounds = {
+    width: width - padding.left - padding.right,
+    height: height - padding.top - padding.bottom,
+  };
 
+  /**
+   * @TODO move calculation of datespan to hook only, maybe only pass in original
+   * data and not trend
+   */
   const dateSpanScale = useMemo(
     () =>
       scaleBand<Date>({
-        range: [0, xMax],
+        range: [0, bounds.width],
         domain: timespanMarkerData.map(getDate),
       }),
-    [xMax, timespanMarkerData]
+    [bounds.width, timespanMarkerData]
   );
+
+  const markerPadding = dateSpanScale.bandwidth() / 2;
+
+  const xScale = scaleTime({
+    domain: xDomain,
+    range: [markerPadding, bounds.width - markerPadding],
+  });
+
+  const yScale = scaleLinear({
+    domain: yDomain,
+    range: [bounds.height, 0],
+    nice: tickValues?.length || numTicks,
+  });
 
   const [markerProps, setMarkerProps] = useState<{
     data: HoverPoint<T>[];
@@ -260,11 +247,11 @@ export function MultiLineChart<T extends TimestampedValue>({
 
   const toggleHoverElements = useCallback(
     (
-      hide: boolean,
+      isHoverActive: boolean,
       hoverPoints?: HoverPoint<T>[],
       nearestPoint?: HoverPoint<T>
     ) => {
-      if (hide) {
+      if (!isHoverActive) {
         hideTooltip();
         setMarkerProps(undefined);
       } else if (hoverPoints?.length && nearestPoint) {
@@ -299,15 +286,12 @@ export function MultiLineChart<T extends TimestampedValue>({
   const handleHover = useCallback(
     (
       event: React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>,
-      scales: ChartScales,
       __index: number
     ) => {
       if (!trendsList.length || event.type === 'mouseleave') {
-        toggleHoverElements(true);
+        toggleHoverElements(false);
         return;
       }
-
-      const { xScale, yScale } = scales;
 
       const point = localPoint(event);
 
@@ -341,35 +325,32 @@ export function MultiLineChart<T extends TimestampedValue>({
         );
       const nearest = hoverPoints.slice().sort(sortByNearest);
 
-      toggleHoverElements(false, hoverPoints, nearest[0]);
+      toggleHoverElements(true, hoverPoints, nearest[0]);
     },
-    [bisect, trendsList, seriesConfig, toggleHoverElements]
+    [bisect, trendsList, seriesConfig, toggleHoverElements, xScale, yScale]
   );
 
-  const renderTrendLines = useCallback(
-    (x: ChartScales) => (
-      <>
-        {trendsList.map((trend, index) => (
-          <Trend
-            key={index}
-            trend={trend}
-            type={hideFill ? 'line' : 'area'}
-            areaFillOpacity={seriesConfig[index].areaFillOpacity}
-            strokeWidth={seriesConfig[index].strokeWidth}
-            style={seriesConfig[index].style}
-            xScale={x.xScale}
-            yScale={x.yScale}
-            color={seriesConfig[index].color}
-            /**
-             * Here we pass the index to handle hover. Not sure if that is
-             * enough to avoid having to search for the point
-             */
-            onHover={(event, scales) => handleHover(event, scales, index)}
-          />
-        ))}
-      </>
-    ),
-    [handleHover, seriesConfig, hideFill, trendsList]
+  const renderSeries = useCallback(
+    () =>
+      trendsList.map((trend, index) => (
+        <Trend
+          key={index}
+          trend={trend}
+          type="line"
+          areaFillOpacity={seriesConfig[index].areaFillOpacity}
+          strokeWidth={seriesConfig[index].strokeWidth}
+          style={seriesConfig[index].style}
+          xScale={xScale}
+          yScale={yScale}
+          color={seriesConfig[index].color}
+          /**
+           * Here we pass the index to handle hover. Not sure if that is
+           * enough to avoid having to search for the point
+           */
+          onHover={(event) => handleHover(event, index)}
+        />
+      )),
+    [handleHover, seriesConfig, trendsList]
   );
 
   if (!xDomain) {
@@ -377,88 +358,73 @@ export function MultiLineChart<T extends TimestampedValue>({
   }
 
   return (
-    <Box>
-      {valueAnnotation && (
-        <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
+    <ChartContainer
+      width={width}
+      height={height}
+      onHover={(evt) => handleHover(evt, -1)}
+      padding={padding}
+      ariaLabelledBy={ariaLabelledBy}
+    >
+      <ChartAxes
+        bounds={bounds}
+        yTickValues={tickValues}
+        xScale={xScale}
+        yScale={yScale}
+      />
+      {renderSeries}
+
+      {tooltipOpen && tooltipData && (
+        <TooltipWithBounds
+          left={tooltipLeft}
+          top={tooltipTop}
+          style={tooltipStyles}
+          offsetLeft={isTinyScreen ? 0 : 50}
+        >
+          {/**
+           * @TODO move this to Tooltip component together with default
+           * formatting function
+           */}
+          <TooltipContainer>
+            {typeof formatTooltip === 'function'
+              ? formatTooltip(
+                  tooltipData.value,
+                  tooltipData.key,
+                  tooltipData.seriesConfig
+                )
+              : formatDefaultTooltip(
+                  tooltipData.value,
+                  tooltipData.key,
+                  tooltipData.seriesConfig
+                )}
+          </TooltipContainer>
+        </TooltipWithBounds>
       )}
 
-      <Box position="relative">
-        <ChartAxes
-          padding={padding}
-          height={height}
-          width={width}
-          xDomain={xDomain}
-          yDomain={yDomain}
-          formatYAxis={
-            formatYAxis
-              ? formatYAxis
-              : isPercentage
-              ? formatYAxisPercentageFn
-              : formatYAxisFn
-          }
-          formatXAxis={formatXAxis}
-          onHover={(event, scales) => handleHover(event, scales, -1)}
-          benchmark={benchmark}
-          ariaLabelledBy={ariaLabelledBy}
-          dateSpanWidth={dateSpanScale.bandwidth()}
-          yTickValues={yTickValues}
-        >
-          {renderTrendLines}
-        </ChartAxes>
-
-        {tooltipOpen && tooltipData && (
-          <TooltipWithBounds
-            left={tooltipLeft}
-            top={tooltipTop}
-            style={tooltipStyles}
-            offsetLeft={isTinyScreen ? 0 : 50}
-          >
-            <TooltipContainer>
-              {typeof formatTooltip === 'function'
-                ? formatTooltip(
-                    tooltipData.value,
-                    tooltipData.key,
-                    tooltipData.seriesConfig
-                  )
-                : formatDefaultTooltip(
-                    tooltipData.value,
-                    tooltipData.key,
-                    tooltipData.seriesConfig
-                  )}
-            </TooltipContainer>
-          </TooltipWithBounds>
-        )}
-
-        <Box
-          height={yMax}
-          width={xMax}
-          position="absolute"
-          top={padding.top}
-          left={padding.left}
-          style={{
-            pointerEvents: 'none',
-          }}
-        >
-          {markerProps && (
-            <Marker
-              {...markerProps}
-              showLine={showMarkerLine}
-              formatLabel={formatMarkerLabel}
-              dateSpanWidth={dateSpanScale.bandwidth()}
-              height={height}
-              padding={padding}
-              primaryColor={`#5B5B5B`}
-            />
-          )}
-        </Box>
-
-        {showLegend && legendItems && (
-          <Box pl={`${padding.left}px`}>
-            <Legenda items={legendItems} />
-          </Box>
+      {/**
+       * @TODO see if we can bundle this wrapper with the marker logic and do not pass height and padding separately to Marker, because we already know the marker height
+       */}
+      <Box
+        height={bounds.height}
+        width={bounds.width}
+        position="absolute"
+        top={padding.top}
+        left={padding.left}
+        style={{
+          pointerEvents: 'none',
+        }}
+      >
+        {markerProps && (
+          <Marker
+            {...markerProps}
+            showLine={showMarkerLine}
+            dateSpanWidth={dateSpanScale.bandwidth()}
+            height={height}
+            padding={padding}
+            primaryColor={`#5B5B5B`}
+          />
         )}
       </Box>
-    </Box>
+    </ChartContainer>
   );
 }
 

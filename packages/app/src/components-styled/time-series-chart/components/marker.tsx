@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Text } from '~/components-styled/typography';
 import { colors } from '~/style/theme';
 import { formatDateFromMilliseconds } from '~/utils/formatDate';
-import { TrendValue } from '../logic';
+import { TrendValue } from '~/components-styled/line-chart/logic';
 import { ChartPadding } from '~/components-styled/line-chart/components';
 import { TimestampedValue } from '@corona-dashboard/common';
 
