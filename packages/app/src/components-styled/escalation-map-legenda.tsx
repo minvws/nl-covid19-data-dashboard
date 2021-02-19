@@ -99,7 +99,10 @@ interface EscalationBarLegendaProps {
   label: {
     titel: string;
     geen_regio: string;
-    regios: string;
+    regios: {
+      singular: string;
+      plural: string;
+    };
   };
   totalItems: number;
 }
