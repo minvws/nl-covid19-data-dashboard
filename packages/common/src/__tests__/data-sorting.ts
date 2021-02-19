@@ -104,8 +104,8 @@ const sortedData = {
 };
 
 describe('Util: sort time series in data in place', () => {
-  // Testing to make sure they are not referencing the same array of values
-  // causing the starting time series data to get sorted as well
+  // Testing to make sure the test data and sorted test data are not referencing the
+  // same array of values causing the starting time series data to get sorted as well
   it('Sorted values in test data should not match starting values ', () => {
     expect(dateSeriesValues).not.toStrictEqual(sortedData.dateSeries.values);
     expect(dateSpanSeriesValues).not.toStrictEqual(
@@ -193,33 +193,6 @@ describe('Util: sort time series in data in place', () => {
         ...rest,
       })),
     };
-    const invalidTestData = {
-      ...filler,
-      dateSeries: { ...dateSeriesRest, values: [...dateSeriesValues] },
-      dateSpanSeries: invalidDateSpanSeries,
-    };
-
-    // Date span series values should be different
-    expect(dateSpanSeriesValues).not.toStrictEqual(
-      invalidTestData.dateSpanSeries.values
-    );
-
-    // Sorting in place
-    expect(() => sortTimeSeriesInDataInPlace(invalidTestData)).toThrow(Error);
-  });
-
-  it('Should throw an error when one date_end_unix is missin in a date span series', () => {
-    const invalidItemIndex = 2;
-
-    const invalidDateSpanSeries = {
-      ...dateSpanSeriesRest,
-      values: [
-        ...dateSpanSeriesValues,
-      ].map(({ date_end_unix, ...rest }, index) =>
-        index === invalidItemIndex ? { ...rest } : { ...rest, date_end_unix }
-      ),
-    };
-
     const invalidTestData = {
       ...filler,
       dateSeries: { ...dateSeriesRest, values: [...dateSeriesValues] },
