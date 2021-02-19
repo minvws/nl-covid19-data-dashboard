@@ -60,7 +60,10 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
     text.data.kpi_total.first_tab_title
   );
 
-  const vaccineDeliveryValues = [...data.vaccine_delivery.values];
+  const additions = text.data.kpi_expected_page_additions.additions.filter(
+    (x) => x.length
+  );
+ const vaccineDeliveryValues = [...data.vaccine_delivery.values];
   const vaccineDeliveryEstimateValues = [
     ...data.vaccine_delivery_estimate.values,
   ];
@@ -73,7 +76,6 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
   // have a gap between them
   vaccineDeliveryValues.push({ ...vaccineDeliveryEstimateValues[0] });
   vaccineAdministeredValues.push({ ...vaccineAdministeredEstimateValues[0] });
-
   return (
     <>
       <SEOHead
@@ -486,15 +488,15 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             <Text mb={4}>
               {text.data.kpi_expected_page_additions.description}
             </Text>
-            <ul>
-              {text.data.kpi_expected_page_additions.additions
-                .filter((x) => x.length)
-                .map((addition) => (
+            {additions.length > 0 && (
+              <ul>
+                {additions.map((addition) => (
                   <li key={addition}>
                     <InlineText>{addition}</InlineText>
                   </li>
                 ))}
-            </ul>
+              </ul>
+            )}
           </KpiTile>
         </TwoKpiSection>
       </TileList>
