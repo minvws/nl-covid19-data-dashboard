@@ -116,7 +116,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                 />
                 <Box display="flex" flexDirection={{ _: 'column', lg: 'row' }}>
                   <Box flex={{ lg: '1 1 50%' }}>
-                    <Text
+                    <Box
                       mb={3}
                       dangerouslySetInnerHTML={{
                         __html: text.gezette_prikken.tab_first.description,
@@ -179,8 +179,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                 />
                 <Box display="flex" flexDirection={{ _: 'column', lg: 'row' }}>
                   <Box flex={{ lg: '1 1 50%' }}>
-                    <Text
-                      mb={3}
+                    <Box
                       dangerouslySetInnerHTML={{
                         __html: text.gezette_prikken.tab_second.description,
                       }}
