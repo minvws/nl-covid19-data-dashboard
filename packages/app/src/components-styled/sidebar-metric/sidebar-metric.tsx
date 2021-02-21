@@ -66,8 +66,6 @@ export function SidebarMetric<T extends { difference: unknown }>({
 
   const propertyValue = metricProperty && lastValue?.[metricProperty];
 
-  return null;
-
   if (metricProperty) {
     assert(
       isDefined(propertyValue),

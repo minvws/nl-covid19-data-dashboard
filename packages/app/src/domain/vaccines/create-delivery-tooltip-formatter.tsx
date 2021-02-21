@@ -9,7 +9,6 @@ import {
 import styled from 'styled-components';
 import { HoverPoint } from '~/components-styled/area-chart/components/marker';
 import { TimestampedTrendValue } from '~/components-styled/area-chart/logic';
-import { Box } from '~/components-styled/base';
 import { Text } from '~/components-styled/typography';
 import { AllLanguages } from '~/locale/APP_LOCALE';
 import { formatDateFromSeconds } from '~/utils/formatDate';
@@ -44,8 +43,10 @@ function formatVaccinationsTooltip(
       'day-month'
     );
     return (
-      <Box>
-        <Text fontWeight="bold">{dateEndString}</Text>
+      <>
+        <Text as="span" fontWeight="bold">
+          {dateEndString}
+        </Text>
         <TooltipList>
           {values.map((value) => (
             <TooltipListItem
@@ -59,7 +60,7 @@ function formatVaccinationsTooltip(
             </TooltipListItem>
           ))}
         </TooltipList>
-      </Box>
+      </>
     );
   }
 
