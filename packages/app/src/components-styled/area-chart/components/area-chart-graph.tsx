@@ -15,6 +15,7 @@ import {
 import { AnyTickFormatter } from '~/components-styled/line-chart/components/chart-axes';
 import { TrendValue } from '~/components-styled/line-chart/logic';
 import { colors } from '~/style/theme';
+import { useBreakpoints } from '~/utils/useBreakpoints';
 
 export type TrendConfig<T> = {
   values: T[];
@@ -85,6 +86,8 @@ export function AreaChartGraph<T extends TrendValue, K extends TrendValue>(
   } = props;
   const { xScale, yScale } = scales;
 
+  const breakpoints = useBreakpoints();
+
   const handleHover = (
     event: TouchEvent<SVGElement> | MouseEvent<SVGElement>
   ) => onHover(event);
@@ -102,6 +105,7 @@ export function AreaChartGraph<T extends TrendValue, K extends TrendValue>(
                 key={`pattern-${display.id}-${display.metricProperty}`}
                 id={`pattern-${display.id}-${display.metricProperty}`}
                 color={display.color}
+                smallscreen={!breakpoints.lg}
               />
             );
           })}
@@ -181,6 +185,7 @@ export function AreaChartGraph<T extends TrendValue, K extends TrendValue>(
                 xScale={xScale}
                 yScale={yScale}
                 color={trendConfig.color}
+                smallscreen={!breakpoints.lg}
               />
             ))}
           </Group>
@@ -229,25 +234,28 @@ const StyledSvg = styled.svg(
 type HatchedPatternProps = {
   id: string;
   color?: string;
+  smallscreen: boolean;
 };
 
 function HatchedPattern(props: HatchedPatternProps) {
-  const { id, color } = props;
+  const { id, color, smallscreen } = props;
+  const size = smallscreen ? 5 : 10;
+  const strokeWidth = smallscreen ? 2 : 4;
   return (
     <pattern
       id={id}
-      width="10"
-      height="10"
+      width={size}
+      height={size}
       patternTransform="rotate(-45 0 0)"
       patternUnits="userSpaceOnUse"
     >
-      <rect x="0" y="0" width="10" height="10" fill={color} />
+      <rect x="0" y="0" width={size} height={size} fill={color} />
       <line
         x1="0"
         y1="0"
         x2="0"
-        y2="10"
-        style={{ stroke: 'white', strokeWidth: 4 }}
+        y2={size}
+        style={{ stroke: 'white', strokeWidth }}
       />
     </pattern>
   );

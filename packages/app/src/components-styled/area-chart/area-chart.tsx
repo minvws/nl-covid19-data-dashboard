@@ -239,6 +239,7 @@ export function AreaChart<
               height={height}
               padding={padding}
               xScale={xScale}
+              smallscreen={!breakpoints.lg}
             />
           )}
         </AreaChartGraph>
@@ -285,13 +286,16 @@ type DividersProps = {
   height: number;
   padding: ChartPadding;
   xScale: ScaleTime<number, number>;
+  smallscreen: boolean;
 };
 
 function DividersUnmemoized(props: DividersProps) {
-  const { areas, divider, height, padding, xScale } = props;
+  const { areas, divider, height, padding, xScale, smallscreen } = props;
 
   const dates = areas.map((area) => area.values[0].__date);
   dates.shift();
+
+  const fontSize = smallscreen ? theme.fontSizes[0] : theme.fontSizes[1];
 
   return (
     <>
@@ -300,7 +304,7 @@ function DividersUnmemoized(props: DividersProps) {
         return x === undefined ? null : (
           <Group key={date.toISOString()}>
             <Text
-              fontSize={theme.fontSizes[1]}
+              fontSize={fontSize}
               x={x - 15}
               y={padding.top * 2}
               textAnchor="end"
@@ -309,7 +313,7 @@ function DividersUnmemoized(props: DividersProps) {
               {divider.leftLabel}
             </Text>
             <Text
-              fontSize={theme.fontSizes[1]}
+              fontSize={fontSize}
               x={x + 15}
               y={padding.top * 2}
               textAnchor="start"
