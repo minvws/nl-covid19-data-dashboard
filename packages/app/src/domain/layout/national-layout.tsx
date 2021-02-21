@@ -119,10 +119,10 @@ function NationalLayout(props: NationalLayoutProps) {
                   title={siteText.vaccinaties.titel_sidebar}
                 >
                   <SidebarMetric
-                    data={siteText.vaccinaties.data}
+                    data={data}
                     scope="nl"
-                    metricName="sidebar"
-                    metricProperty="total_vaccinated"
+                    metricName="vaccine_administered_total"
+                    metricProperty="estimated"
                     localeTextKey="vaccinaties"
                   />
                 </MetricMenuItemLink>

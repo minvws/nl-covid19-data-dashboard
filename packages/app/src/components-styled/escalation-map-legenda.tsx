@@ -99,7 +99,10 @@ interface EscalationBarLegendaProps {
   label: {
     titel: string;
     geen_regio: string;
-    regios: string;
+    regios: {
+      singular: string;
+      plural: string;
+    };
   };
   totalItems: number;
 }
@@ -114,7 +117,10 @@ function EscalationBarLegenda(props: EscalationBarLegendaProps) {
       <Box flexGrow={barWidth} backgroundColor={info.color} paddingRight={1} />
       <Box paddingLeft={2}>
         {info.amount
-          ? replaceVariablesInText(label.regios, { amount: info.amount })
+          ? replaceVariablesInText(
+              info.amount === 1 ? label.regios.singular : label.regios.plural,
+              { amount: info.amount }
+            )
           : label.geen_regio}
       </Box>
     </Box>

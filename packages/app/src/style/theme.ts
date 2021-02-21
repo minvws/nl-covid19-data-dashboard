@@ -128,8 +128,8 @@ export const colors = {
       red: '#f35065',
     },
     vaccines: {
-      pfizer: '#00529D',
-      moderna: '#5BADDB',
+      pfizer: '#8FCAE7',
+      moderna: '#1A87D0',
       astra_zeneca: '#003580',
       cure_vac: '#0070BB',
       janssen: '#248FCF',

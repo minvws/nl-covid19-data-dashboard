@@ -93,7 +93,9 @@
     },
     "chart_bedbezetting": {
       "title": "Bezetting IC-bedden over tijd",
-      "description": "Deze grafiek toont het verloop van het aantal IC-bedden dat is bezet door patiënten met COVID-19."
+      "description": "Deze grafiek toont het verloop van het aantal IC-bedden dat is bezet door patiënten met COVID-19.",
+      "legend_trend_label": "Bezetting IC-bedden",
+      "legend_inaccurate_label": "Data is minder nauwkeurig"
     },
     "metadata": {
       "title": "Intensive care-opnames | Dashboard coronavirus | Rijksoverheid.nl",
@@ -187,7 +189,9 @@
     },
     "chart_bedbezetting": {
       "title": "Bezetting gewone ziekenhuisbedden (exclusief IC-bedden) over tijd",
-      "description": "Deze grafiek toont het verloop in het aantal ziekenhuisbedden (exclusief IC-bedden) dat is bezet door patiënten met COVID-19."
+      "description": "Deze grafiek toont het verloop in het aantal ziekenhuisbedden (exclusief IC-bedden) dat is bezet door patiënten met COVID-19.",
+      "legend_trend_label": "Bezetting gewone ziekenhuisbedden",
+      "legend_inaccurate_label": "Data is minder nauwkeurig"
     },
     "linechart_description": "In deze grafiek staan de ziekenhuisopnames (inclusief directe IC opnames) vermeld op de dag dat mensen ook echt zijn opgenomen, in plaats van op de dag dat ze gemeld zijn. Zo kunnen we namelijk de ontwikkeling van het coronavirus in Nederland goed zien. Let op: omdat het aanmelden van ziekenhuisopnames vaak een paar dagen later gebeurt, zijn de meest recente dagen nooit compleet en kan het lijken alsof het aantal ziekenhuisopnames afneemt terwijl dit niet zo is.",
     "metadata": {
@@ -1005,7 +1009,10 @@
     "legenda": {
       "titel": "Legenda",
       "geen_regio": "geen regio's",
-      "regios": "{{amount}} regio's"
+      "regios": {
+        "singular": "{{amount}} regio",
+        "plural": "{{amount}} regio's"
+      }
     },
     "valid_from": "Geldig vanaf {{validFrom}}",
     "sidebar_label": "Risiconiveau:",
@@ -1775,11 +1782,11 @@
       "text": "Lees meer in de cijferverantwoording."
     },
     "cbs_message": {
-      "title": "Sterfte verder gedaald in week 5",
-      "published_text": "Publicatiedatum: vrijdag 12 februari",
-      "message": "In week 5 (1 tot en met 7 februari 2021) overleden naar schatting 3 600 mensen. Dat zijn 150 meer sterfgevallen dan verwacht voor deze periode. In week 4 overleden 3 678 mensen. Dat meldt het CBS op basis van de voorlopige sterftecijfers per week. Sinds week 39 van 2020 is de wekelijkse sterfte hoger dan verwacht. In de tweede golf van de corona-epidemie overleden tot en met week 5 van 2021 ruim 71 duizend mensen, 9,7 duizend meer dan je in deze periode zou verwachten. De schatting van de sterfte in week 5 zit net boven de verwachte sterfte in deze periode.",
+      "title": "Sterfte verder gedaald, aantal sterfgevallen in week 6 op verwacht niveau",
+      "published_text": "Publicatiedatum: vrijdag 19 februari",
+      "message": "In week 6 (8 tot en met 14 februari 2021) overleden naar schatting 3400 mensen. Dat zijn ongeveer evenveel sterfgevallen als verwacht voor deze periode. In week 5 overleden 3619 mensen. Dat meldt het CBS op basis van de voorlopige sterftecijfers per week. Sinds week 39 van 2020 was de wekelijkse sterfte hoger dan verwacht. De schatting van de sterfte in week 6 zit net onder de verwachte sterfte voor deze periode. Dit betekent niet dat er geen mensen meer overlijden aan COVID-19. Het RIVM registreerde 293 overleden COVID-19-patiënten in week 6 (stand 16 februari).",
       "link": {
-        "href": "https://www.cbs.nl/nl-nl/nieuws/2021/06/sterfte-verder-gedaald-in-week-5",
+        "href": "https://www.cbs.nl/nl-nl/nieuws/2021/07/sterfte-verder-gedaald-aantal-sterfgevallen-in-week-6-op-verwacht-niveau",
         "text": "Website CBS"
       }
     },
@@ -2008,6 +2015,57 @@
         "download": ""
       }
     },
+    "section_vaccinations_more_information": {
+      "title": "Verwachte data over vaccinaties",
+      "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer:\n- vaccinatiegraad"
+    },
+    "grafiek": {
+      "titel": "Leveringen vaccins en gezette prikken in totaal",
+      "omschrijving": "Het linkerdeel van de grafiek laat zien hoeveel vaccins Nederland in totaal heeft gekregen en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal verwachten te krijgen en hoeveel prikken we verwachten te zetten."
+    },
+    "verwachte_leveringen": {
+      "van_week_tot_week": "Week {{weekNumberFrom}} tot week {{weekNumberTo}}",
+      "van_week_tot_week_klein_scherm": "Week {{weekNumberFrom}} tot {{weekNumberTo}}"
+    },
+    "grafiek_draagvlak": {
+      "titel": "Vaccinatiebereidheid",
+      "omschrijving": "Deze grafiek toont per leeftijdsgroep en in totaal hoeveel procent van de bevolking zelf een prik tegen corona wil hebben. De cijfers komen uit onderzoek waarin wordt gevraagd of mensen een prik willen krijgen. Het onderzoek wordt elke drie weken herhaald.",
+      "kpi_omschrijving": "Percentage van de Nederlandse bevolking dat zelf een prik tegen corona wil hebben",
+      "tooltip_gemiddeld": "Totaal",
+      "leeftijd_jaar": "{{ageGroup}} jaar"
+    },
+    "gezette_prikken": {
+      "title": "Aantal gezette prikken",
+      "estimated_until": "Berekend aantal tot en met {{reportedDate}}",
+      "reported_until": "Gemeld aantal tot en met {{reportedDate}}",
+      "tab_first": {
+        "title": "Berekend aantal",
+        "description": "Dit getal is een rekenkundige aanname van hoeveel prikken in totaal zijn gezet. De GGD-cijfers worden gemeld door de GGD-GHOR en de ziekenhuiscijfers door het LNAZ. Voor de langdurige zorginstellingen maakt het RIVM een berekening door te kijken naar hoeveel vaccins er zijn bezorgd bij priklocaties. [Lees meer over de berekening in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)"
+      },
+      "tab_second": {
+        "title": "Gemeld aantal",
+        "description": "Dit getal laat zien hoeveel prikken zijn gemeld door GGD-GHOR en LNAZ. [Lees meer over de registratie in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)"
+      },
+      "estimated": {
+        "ggd": "gezet door GGD'en",
+        "hospitals": "gezet in ziekenhuizen",
+        "care_institutions": "gezet in langdurige zorginstellingen",
+        "doctors": "gezet bij de huisartsen"
+      },
+      "reported": {
+        "ggd_ghor": "gemeld door GGD-GHOR",
+        "lnaz": "gemeld door LNAZ"
+      }
+    },
+    "expected_page_additions": {
+      "title": "Verwachte toevoegingen aan deze pagina",
+      "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer de vaccinatiegraad.",
+      "additions": [
+        "",
+        "",
+        ""
+      ]
+    },
     "data": {
       "difference": "Do not remove this key. It is required as a temporary workaround",
       "sidebar": {
@@ -2087,7 +2145,7 @@
               "report_date": ""
             }
           ],
-          "description_first": "Dit getal is een rekenkundige aanname van hoeveel prikken in totaal zijn gezet. De GGD-cijfers worden gemeld door de GGD-GHOR en de ziekenhuiscijfers door het LNAZ. Voor de langdurige zorginstellingen maakt het RIVM een berekening door te kijken naar hoeveel vaccins er zijn bezorgd bij priklocaties. [Lees meer over de berekening in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)",
+          "description_first": "Dit getal is een berekening van hoeveel prikken in totaal zijn gezet. De GGD-cijfers worden gemeld door de GGD-GHOR en de ziekenhuiscijfers door het LNAZ. Voor de langdurige zorginstellingen en huisartsenpraktijken maakt het RIVM een berekening door te kijken naar hoeveel vaccins er zijn bezorgd bij priklocaties. [Lees meer over de berekening in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)",
           "description_second": ""
         }
       },
@@ -2095,8 +2153,8 @@
         "title": "Verwachte levering goedgekeurde vaccins",
         "value": "2473700",
         "description": "Aantal goedgekeurde vaccins dat Nederland de komende zes weken verwacht te krijgen. Elke week ontvangt Nederland een deel van de vaccins. Mensen hebben twee prikken nodig voor een volledige vaccinatie.",
-        "date_of_report_unix": "1612384200",
-        "date_of_insertion_unix": "1612384200"
+        "date_of_report_unix": "1613648204",
+        "date_of_insertion_unix": "1613648204"
       },
       "kpi_stock": {
         "title": "",
@@ -2151,25 +2209,6 @@
           "expected": "Verwacht"
         }
       }
-    },
-    "section_vaccinations_more_information": {
-      "title": "Verwachte data over vaccinaties",
-      "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer:\n- vaccinatiegraad"
-    },
-    "grafiek": {
-      "titel": "Leveringen vaccins en gezette prikken in totaal",
-      "omschrijving": "Het linkerdeel van de grafiek laat zien hoeveel vaccins Nederland in totaal heeft gekregen en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal verwachten te krijgen en hoeveel prikken we verwachten te zetten."
-    },
-    "verwachte_leveringen": {
-      "van_week_tot_week": "Week {{weekNumberFrom}} tot week {{weekNumberTo}}",
-      "van_week_tot_week_klein_scherm": "Week {{weekNumberFrom}} tot {{weekNumberTo}}"
-    },
-    "grafiek_draagvlak": {
-      "titel": "Vaccinatiebereidheid",
-      "omschrijving": "Deze grafiek toont per leeftijdsgroep en in totaal hoeveel procent van de bevolking zelf een prik tegen corona wil hebben. De cijfers komen uit onderzoek waarin wordt gevraagd of mensen een prik willen krijgen. Het onderzoek wordt elke drie weken herhaald.",
-      "kpi_omschrijving": "Percentage van de Nederlandse bevolking dat zelf een prik tegen corona wil hebben",
-      "tooltip_gemiddeld": "Totaal",
-      "leeftijd_jaar": "{{ageGroup}} jaar"
     }
   },
   "editorial_detail": {
