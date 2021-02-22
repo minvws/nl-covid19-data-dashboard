@@ -93,7 +93,7 @@
     },
     "chart_bedbezetting": {
       "title": "ICU bed occupancy over time",
-      "description": "This graph shows the progression of the number of ICU beds occupied by COVID-19 patients.",
+      "description": "This graph shows the progression of the number of ICU beds occupied by COVID-19 patients. The data before the 1st of June is less reliable due to setting up the registration by LCPS.",
       "legend_trend_label": "ICU beds occupied",
       "legend_inaccurate_label": "Data is less precise"
     },
@@ -189,7 +189,7 @@
     },
     "chart_bedbezetting": {
       "title": "Hospital bed occupancy over time (non ICU)",
-      "description": "This graph shows the progression of the number of non-ICU hospital beds occupied by COVID-19 patients.",
+      "description": "This graph shows the progression of the number of non-ICU hospital beds occupied by COVID-19 patients. The data before the 1st of June is less reliable due to setting up the registration by LCPS.",
       "legend_trend_label": "Regular hospital beds occupied by COVID-19 patients",
       "legend_inaccurate_label": "Data is less precise"
     },
@@ -758,7 +758,13 @@
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -2058,7 +2064,11 @@
     "expected_page_additions": {
       "title": "Expected data on vaccinations",
       "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
-      "additions": ["", "", ""]
+      "additions": [
+        "",
+        "",
+        ""
+      ]
     },
     "data": {
       "difference": "",
@@ -2183,24 +2193,28 @@
       "kpi_expected_page_additions": {
         "title": "",
         "description": "",
-        "additions": ["", "", ""]
+        "additions": [
+          "",
+          "",
+          ""
+        ]
       },
       "vaccination_chart": {
         "product_names": {
-          "pfizer": "BioNTech/Pfizer",
-          "moderna": "Moderna",
-          "astra_zeneca": "AstraZeneca",
-          "cure_vac": "CureVac",
-          "janssen": "Janssen & Janssen",
-          "sanofi": "Sanofi"
+          "pfizer": "",
+          "moderna": "",
+          "astra_zeneca": "",
+          "cure_vac": "",
+          "janssen": "",
+          "sanofi": ""
         },
-        "delivered": "Calculated",
-        "estimated": "Expected",
-        "left_divider_label": "Calculated number",
-        "right_divider_label": "Expected number",
+        "delivered": "",
+        "estimated": "",
+        "left_divider_label": "",
+        "right_divider_label": "",
         "legend": {
-          "available": "Available vaccines",
-          "expected": "Expected"
+          "available": "",
+          "expected": ""
         }
       }
     }

@@ -93,9 +93,9 @@
     },
     "chart_bedbezetting": {
       "title": "Bezetting IC-bedden over tijd",
-      "description": "Deze grafiek toont het verloop van het aantal IC-bedden dat is bezet door patiënten met COVID-19.",
+      "description": "Deze grafiek toont het verloop van het aantal IC-bedden dat is bezet door patiënten met COVID-19. De gegevens vóór 1 juni zijn mogelijk minder betrouwbaar i.v.m. het opzetten van een registratie door het LCPS.",
       "legend_trend_label": "Bezetting IC-bedden",
-      "legend_inaccurate_label": "Data is minder nauwkeurig"
+      "legend_inaccurate_label": "Cijfers zijn minder nauwkeurig"
     },
     "metadata": {
       "title": "Intensive care-opnames | Dashboard coronavirus | Rijksoverheid.nl",
@@ -189,9 +189,9 @@
     },
     "chart_bedbezetting": {
       "title": "Bezetting gewone ziekenhuisbedden (exclusief IC-bedden) over tijd",
-      "description": "Deze grafiek toont het verloop in het aantal ziekenhuisbedden (exclusief IC-bedden) dat is bezet door patiënten met COVID-19.",
+      "description": "Deze grafiek toont het verloop in het aantal ziekenhuisbedden (exclusief IC-bedden) dat is bezet door patiënten met COVID-19. De gegevens vóór 1 juni zijn mogelijk minder betrouwbaar i.v.m. het opzetten van een registratie door het LCPS.",
       "legend_trend_label": "Bezetting gewone ziekenhuisbedden",
-      "legend_inaccurate_label": "Data is minder nauwkeurig"
+      "legend_inaccurate_label": "Cijfers zijn minder nauwkeurig"
     },
     "linechart_description": "In deze grafiek staan de ziekenhuisopnames (inclusief directe IC opnames) vermeld op de dag dat mensen ook echt zijn opgenomen, in plaats van op de dag dat ze gemeld zijn. Zo kunnen we namelijk de ontwikkeling van het coronavirus in Nederland goed zien. Let op: omdat het aanmelden van ziekenhuisopnames vaak een paar dagen later gebeurt, zijn de meest recente dagen nooit compleet en kan het lijken alsof het aantal ziekenhuisopnames afneemt terwijl dit niet zo is.",
     "metadata": {
@@ -758,7 +758,13 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
+    "barscale_keys": [
+      "0 tot 20",
+      "20 tot 40",
+      "40 tot 60",
+      "60 tot 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -2058,7 +2064,11 @@
     "expected_page_additions": {
       "title": "Verwachte toevoegingen aan deze pagina",
       "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer de vaccinatiegraad.",
-      "additions": ["", "", ""]
+      "additions": [
+        "",
+        "",
+        ""
+      ]
     },
     "data": {
       "difference": "Do not remove this key. It is required as a temporary workaround",
@@ -2183,7 +2193,11 @@
       "kpi_expected_page_additions": {
         "title": "Verwachte toevoegingen aan deze pagina",
         "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer de vaccinatiegraad.",
-        "additions": ["", "", ""]
+        "additions": [
+          "",
+          "",
+          ""
+        ]
       },
       "vaccination_chart": {
         "product_names": {
