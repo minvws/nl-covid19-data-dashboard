@@ -4,7 +4,6 @@ import { ScaleLinear, ScaleTime } from 'd3-scale';
 import { MouseEvent, TouchEvent, useCallback, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { ChartScales } from '~/components-styled/line-chart/components';
-import { calculateDistance } from '~/utils/calculate-distance';
 import { AreaConfig, TrendConfig } from '../components/area-chart-graph';
 import { HoverPoint } from '../components/marker';
 import { TimestampedTrendValue } from '../logic';
@@ -66,7 +65,6 @@ export function useChartHover<
         return;
       }
 
-      const sortByNearest = createSortNearest<T | K>(point);
       const sortByNearestHorizontal = createSortNearestHorizontal<T | K>(point);
 
       // First gather all the trends and areas that are closest to the current mouse pointer
@@ -162,11 +160,6 @@ function createHoverPoint<T extends TimestampedTrendValue>(
     x: xScale(data.__date) ?? 0,
     y: yScale(data.__value) ?? 0,
   });
-}
-
-function createSortNearest<T extends TimestampedTrendValue>(point: Point) {
-  return (left: HoverPoint<T>, right: HoverPoint<T>) =>
-    calculateDistance(left, point) - calculateDistance(right, point);
 }
 
 function createSortNearestHorizontal<T extends TimestampedTrendValue>(
