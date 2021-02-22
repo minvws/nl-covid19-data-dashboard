@@ -2060,11 +2060,7 @@
     "expected_page_additions": {
       "title": "Verwachte toevoegingen aan deze pagina",
       "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer de vaccinatiegraad.",
-      "additions": [
-        "",
-        "",
-        ""
-      ]
+      "additions": ["", "", ""]
     },
     "data": {
       "difference": "Do not remove this key. It is required as a temporary workaround",
@@ -2200,10 +2196,10 @@
           "janssen": "Janssen & Janssen",
           "sanofi": "Sanofi"
         },
-        "delivered": "Geleverd",
-        "estimated": "Berekend",
-        "left_divider_label": "Geleverd aantal",
-        "right_divider_label": "Berekend aantal",
+        "delivered": "Berekend",
+        "estimated": "Verwacht",
+        "left_divider_label": "Berekend aantal",
+        "right_divider_label": "Verwacht aantal",
         "legend": {
           "available": "Beschikbare vaccins",
           "expected": "Verwacht"

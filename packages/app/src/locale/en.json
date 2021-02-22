@@ -2060,11 +2060,7 @@
     "expected_page_additions": {
       "title": "Expected data on vaccinations",
       "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
-      "additions": [
-        "",
-        "",
-        ""
-      ]
+      "additions": ["", "", ""]
     },
     "data": {
       "difference": "",
@@ -2189,11 +2185,7 @@
       "kpi_expected_page_additions": {
         "title": "",
         "description": "",
-        "additions": [
-          "",
-          "",
-          ""
-        ]
+        "additions": ["", "", ""]
       },
       "vaccination_chart": {
         "product_names": {
@@ -2204,10 +2196,10 @@
           "janssen": "Janssen & Janssen",
           "sanofi": "Sanofi"
         },
-        "delivered": "Delivered",
-        "estimated": "Estimated",
-        "left_divider_label": "Delivered number",
-        "right_divider_label": "Estimated number",
+        "delivered": "Calculated",
+        "estimated": "Expected",
+        "left_divider_label": "Calculated number",
+        "right_divider_label": "Expected number",
         "legend": {
           "available": "Available vaccines",
           "expected": "Expected"
