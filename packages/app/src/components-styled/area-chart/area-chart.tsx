@@ -175,7 +175,7 @@ export function AreaChart<
           tooltipTop: nearestPoint.y,
         });
         setMarkerProps({
-          data: [hoverPoints[0], hoverPoints[1]],
+          data: [nearestPoint],
         });
       }
     },

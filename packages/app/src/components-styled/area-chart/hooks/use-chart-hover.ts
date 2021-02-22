@@ -93,14 +93,6 @@ export function useChartHover<
         .filter(isDefined)
         .map<HoverPoint<K>>(createHoverPoint(xScale, yScale));
 
-      // of all the given points, trends and areas, determine which one is closest to the pointer
-      const nearest =
-        nearestTrends.length && nearestAreas.length
-          ? [nearestTrends[0], nearestAreas[0]].sort(sortByNearest)
-          : nearestTrends.length
-          ? nearestTrends
-          : nearestAreas;
-
       const hoverPoints = [
         ...trendHoverPoints.filter(
           (x) => x.data.__date.getTime() === nearestTime
@@ -108,7 +100,7 @@ export function useChartHover<
         ...nearestAreas,
       ];
 
-      toggleHoverElements(false, hoverPoints, nearest[0]);
+      toggleHoverElements(false, hoverPoints, nearestTrends[0]);
     },
     [bisect, _trends, _areas, toggleHoverElements]
   );
