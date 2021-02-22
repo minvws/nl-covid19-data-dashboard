@@ -63,7 +63,6 @@ class MyDocument extends Document {
         <body>
           <Main />
 
-          <script src="/piwik.js"></script>
           <noscript>
             <img
               src="https://statistiek.rijksoverheid.nl/piwik/piwik.php?idsite=7939&rec=1"

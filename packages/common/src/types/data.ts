@@ -141,6 +141,13 @@ export interface National {
   vaccine_support: NlVaccineSupport;
   corona_melder_app: NlCoronaMelderApp;
   vaccine_delivery: NlVaccineDelivery;
+  vaccine_administered_care_institutions: NlVaccineAdministeredCareInstitutions;
+  vaccine_administered_doctors: NlVaccineAdministeredDoctors;
+  vaccine_administered_ggd_ghor: NlVaccineAdministeredGgdGhor;
+  vaccine_administered_ggd: NlVaccineAdministeredGgd;
+  vaccine_administered_hospitals: NlVaccineAdministeredHospitals;
+  vaccine_administered_lnaz: NlVaccineAdministeredLnaz;
+  vaccine_administered_total: NlVaccineAdministeredTotal;
 }
 export interface NationalDifference {
   tested_overall__infected_per_100k: DifferenceDecimal;
@@ -469,6 +476,70 @@ export interface NlVaccineDeliveryValue {
   date_of_insertion_unix: number;
   date_start_unix: number;
   date_end_unix: number;
+}
+export interface NlVaccineAdministeredCareInstitutions {
+  values: NlVaccineAdministeredCareInstitutionsValue[];
+  last_value: NlVaccineAdministeredCareInstitutionsValue;
+}
+export interface NlVaccineAdministeredCareInstitutionsValue {
+  estimated: number;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlVaccineAdministeredDoctors {
+  values: NlVaccineAdministeredDoctorsValue[];
+  last_value: NlVaccineAdministeredDoctorsValue;
+}
+export interface NlVaccineAdministeredDoctorsValue {
+  estimated: number;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlVaccineAdministeredGgdGhor {
+  values: NlVaccineAdministeredGgdGhorValue[];
+  last_value: NlVaccineAdministeredGgdGhorValue;
+}
+export interface NlVaccineAdministeredGgdGhorValue {
+  reported: number;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlVaccineAdministeredGgd {
+  values: NlVaccineAdministeredGgdValue[];
+  last_value: NlVaccineAdministeredGgdValue;
+}
+export interface NlVaccineAdministeredGgdValue {
+  estimated: number;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlVaccineAdministeredHospitals {
+  values: NlVaccineAdministeredHospitalsValue[];
+  last_value: NlVaccineAdministeredHospitalsValue;
+}
+export interface NlVaccineAdministeredHospitalsValue {
+  estimated: number;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlVaccineAdministeredLnaz {
+  values: NlVaccineAdministeredLnazValue[];
+  last_value: NlVaccineAdministeredLnazValue;
+}
+export interface NlVaccineAdministeredLnazValue {
+  reported: number;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlVaccineAdministeredTotal {
+  values: NlVaccineAdministeredTotalValue[];
+  last_value: NlVaccineAdministeredTotalValue;
+}
+export interface NlVaccineAdministeredTotalValue {
+  estimated: number;
+  reported: number;
+  date_unix: number;
+  date_of_insertion_unix: number;
 }
 
 export interface Regionaal {

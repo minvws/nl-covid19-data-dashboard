@@ -6,20 +6,15 @@ import { LinkWithIcon } from '~/components-styled/link-with-icon';
 import { Heading, Text } from '~/components-styled/typography';
 import siteText from '~/locale';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-
 import { ArrowIconRight } from '~/components-styled/arrow-icon';
+interface TopicalVaccineProps {
+  estimated: number;
+}
 
-export function TopicalVaccineTile() {
+export function TopicalVaccineTile(props: TopicalVaccineProps) {
+  const { estimated } = props;
+
   const text = siteText.nationaal_actueel.mini_trend_tiles.toegediende_vaccins;
-
-  const data = {
-    administeredVaccines: parseFloat(
-      siteText.vaccinaties.data.kpi_total.tab_total_estimated.value
-    ),
-    expectedDelivery: parseFloat(
-      siteText.vaccinaties.data.kpi_expected_delivery.value
-    ),
-  };
 
   return (
     <Box position="relative" pb={3}>
@@ -47,27 +42,17 @@ export function TopicalVaccineTile() {
       </Heading>
 
       <Text fontSize="2.25rem" fontWeight="bold" my={0} lineHeight={0} mb={2}>
-        {formatNumber(data.administeredVaccines)}
+        {formatNumber(estimated)}
       </Text>
 
       <Text mt={0}>
         {replaceComponentsInText(text.administered_tests, {
-          administeredVaccines: (
-            <strong>{formatNumber(data.administeredVaccines)}</strong>
-          ),
+          administeredVaccines: <strong>{formatNumber(estimated)}</strong>,
         })}
       </Text>
 
       <Text fontWeight="bold" mb={0}>
         {text.sub_title}
-      </Text>
-
-      <Text mt={0}>
-        {replaceComponentsInText(text.supply, {
-          expectedDelivery: (
-            <strong>{formatNumber(data.expectedDelivery)}</strong>
-          ),
-        })}
       </Text>
     </Box>
   );
