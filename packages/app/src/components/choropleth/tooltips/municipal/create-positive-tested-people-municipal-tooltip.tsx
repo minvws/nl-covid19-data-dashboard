@@ -4,9 +4,9 @@ import {
   MunicipalityProperties,
 } from '@corona-dashboard/common';
 import { ReactNode } from 'react';
-import { InlineText, Text } from '~/components-styled/typography';
-import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
-import { TooltipSubject } from '~/components/choropleth/tooltips/tooltipSubject';
+import { InlineText, Text } from '~/components-styled/typography'
+import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
+import { TooltipSubject } from '~/components/choropleth/tooltips/tooltip-subject';
 import siteText from '~/locale/index';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';

@@ -5,10 +5,10 @@ import {
 } from '@corona-dashboard/common';
 import { ReactNode } from 'react';
 import { InlineText } from '~/components-styled/typography';
-import { TooltipSubject } from '~/components/choropleth/tooltips/tooltipSubject';
+import { TooltipSubject } from '~/components/choropleth/tooltips/tooltip-subject';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { RegionSelectionHandler } from '../../select-handlers/create-select-region-handler';
-import { TooltipContent } from '../tooltipContent';
+import { TooltipContent } from '../tooltip-content';
 
 export const createDisablityInfectedLocationsRegionalTooltip = (
   subject: string,
