@@ -639,7 +639,6 @@
       "positive_tested_value": "{{totalPositiveValue}} per 100.000",
       "vaccinatie_bereidheid": "{{percentageInFavor}}% vaccinatiebereidheid"
     },
-    "inwoners": "inwoners",
     "niveau": "niveau",
     "clear_select_input": "Leegmaken",
     "incomplete": "niet compleet",
@@ -650,7 +649,8 @@
     "gisteren": "Gisteren",
     "vandaag": "Vandaag",
     "read_more": "Lees meer",
-    "absolute_date_template": "op {{date}}"
+    "absolute_date_template": "op {{date}}",
+    "inwoners": "inwoners"
   },
   "choropleth_tooltip": {
     "patients": {

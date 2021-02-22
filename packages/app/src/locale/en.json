@@ -653,7 +653,6 @@
     "inwoners": "residents"
   },
   "choropleth_tooltip": {
-    "inhabitants": "inwoners",
     "patients": {
       "singular": "patiënt",
       "plural": "patiënten"
