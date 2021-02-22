@@ -2194,14 +2194,15 @@
           "janssen": "Janssen & Janssen",
           "sanofi": "Sanofi"
         },
-        "delivered": "",
-        "estimated": "",
-        "left_divider_label": "",
-        "right_divider_label": "",
+        "delivered": "Calculated number",
+        "estimated": "Expected",
+        "left_divider_label": "Calculated number of",
+        "right_divider_label": "Expected number",
         "legend": {
-          "available": "",
-          "expected": ""
-        }
+          "available": "Available vaccines",
+          "expected": "Expected"
+        },
+        "legend_label": "Calculated number of {{name}} doses"
       }
     }
   },
