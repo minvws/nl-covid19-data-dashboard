@@ -5,5 +5,5 @@ export function useVaccineNames(
   lastValue: NlVaccineAdministeredValue
 ): string[] {
   const productNames = Object.keys(colors.data.vaccines);
-  return productNames.filter((x) => (lastValue as Object).hasOwnProperty(x));
+  return productNames.filter((x) => (lastValue as any).hasOwnProperty(x));
 }

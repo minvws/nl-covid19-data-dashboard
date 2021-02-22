@@ -320,7 +320,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
               ]}
             />
             <Legenda
-              items={Object.keys(colors.data.vaccines).map((key) => ({
+              items={vaccineNames.map((key) => ({
                 label: (text.data.vaccination_chart.product_names as any)[key],
                 color: `data.vaccines.${key}`,
                 shape: 'square',
