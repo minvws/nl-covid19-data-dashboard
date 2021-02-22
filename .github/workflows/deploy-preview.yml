@@ -17,19 +17,21 @@ jobs:
     name: Build and Deploy Job
 
     steps:
-      # - name: Git checkout
-      #   uses: actions/checkout@v1
-      - name: Extract branch name
-        shell: bash
-        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-        id: extract_branch
-      - name: Branch name
-        run: echo running on branch ${{ steps.extract_branch.outputs.branch }}
+      - name: Git checkout
+        uses: actions/checkout@v2
+
+      - name: Set output
+        id: vars
+        run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
+
+      - name: Check output
+        run: echo ${{ steps.vars.outputs.short_ref }}
+
       - name: Push POST request
         uses: muinmomin/webhook-action@v1.0.0
         with:
           url: ${{ secrets.TRIGGER_BRANCH_DEPLOY }}
-          data: "{'branchName': '${{ steps.extract_branch.outputs.branch }}'"
+          data: '{"branchName": "${{ steps.extract_branch.outputs.branch }}"'
 
   # close_pull_request_job:
   #   if: github.event_name == 'pull_request' && github.event.action == 'closed'
