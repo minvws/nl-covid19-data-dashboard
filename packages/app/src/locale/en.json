@@ -537,7 +537,10 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
       }
     },
-    "kpi_titel": "Average number of coronavirus particles per 100.000 people"
+    "kpi_titel": "Average number of coronavirus particles per 100.000 people",
+    "total_measurements_title": "Aantal metingen deze week",
+    "total_measurements_description": "Meetlocaties kunnen ....",
+    "total_measurements_locations": "In totaal hebben {{sampled_installation_count}} van de {{total_installation_count}} meetlocaties minimaal één keer een meting doorgegeven."
   },
   "notfound_titel": {
     "text": "Something went wrong"
@@ -830,7 +833,10 @@
     "kpi_titel": "Average number of coronavirus particles per 100.000 people",
     "bar_chart_accessibility_description": "",
     "display_outliers": "Display outliers",
-    "hide_outliers": "Hide outliers"
+    "hide_outliers": "Hide outliers",
+    "total_measurements_title": "Aantal metingen deze week",
+    "total_measurements_description": "Meetlocaties kunnen ....",
+    "total_measurements_locations": "In totaal hebben {{sampled_installation_count}} van de {{total_installation_count}} meetlocaties minimaal één keer een meting doorgegeven."
   },
   "gemeente_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Hospital admissions",
@@ -962,7 +968,10 @@
     "kpi_titel": "Average number of coronavirus particles per 100.000 people",
     "bar_chart_accessibility_description": "",
     "display_outliers": "Display outliers",
-    "hide_outliers": "Hide outliers"
+    "hide_outliers": "Hide outliers",
+    "total_measurements_title": "Aantal metingen deze week",
+    "total_measurements_description": "Meetlocaties kunnen ....",
+    "total_measurements_locations": "In totaal hebben {{sampled_installation_count}} van de {{total_installation_count}} meetlocaties minimaal één keer een meting doorgegeven."
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Risk level map of the Netherlands",

@@ -537,7 +537,10 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
       }
     },
-    "kpi_titel": "Gemiddelde aantal virusdeeltjes per 100.000 inwoners"
+    "kpi_titel": "Gemiddelde aantal virusdeeltjes per 100.000 inwoners",
+    "total_measurements_title": "Aantal metingen deze week",
+    "total_measurements_description": "Meetlocaties kunnen ....",
+    "total_measurements_locations": "In totaal hebben {{sampled_installation_count}} van de {{total_installation_count}} meetlocaties minimaal één keer een meting doorgegeven."
   },
   "notfound_titel": {
     "text": "Er is iets misgegaan"
@@ -830,7 +833,10 @@
     "kpi_titel": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners",
     "bar_chart_accessibility_description": "",
     "display_outliers": "Toon uitschieters",
-    "hide_outliers": "Verberg uitschieters"
+    "hide_outliers": "Verberg uitschieters",
+    "total_measurements_title": "Aantal metingen deze week",
+    "total_measurements_description": "Meetlocaties kunnen ....",
+    "total_measurements_locations": "In totaal hebben {{sampled_installation_count}} van de {{total_installation_count}} meetlocaties minimaal één keer een meting doorgegeven."
   },
   "gemeente_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Ziekenhuisopnames",
@@ -962,7 +968,10 @@
     "kpi_titel": "Gemiddelde aantal virusdeeltjes per 100.000 inwoners",
     "bar_chart_accessibility_description": "",
     "display_outliers": "Toon uitschieters",
-    "hide_outliers": "Verberg uitschieters"
+    "hide_outliers": "Verberg uitschieters",
+    "total_measurements_title": "Aantal metingen deze week",
+    "total_measurements_description": "Meetlocaties kunnen ....",
+    "total_measurements_locations": "In totaal hebben {{sampled_installation_count}} van de {{total_installation_count}} meetlocaties minimaal één keer een meting doorgegeven."
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "De risicokaart van Nederland",
