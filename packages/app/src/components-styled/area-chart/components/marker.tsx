@@ -158,7 +158,7 @@ function MarkerUnmemoized<T extends TimestampedTrendValue>(
           <Point
             indicatorColor={d.color ?? colors.data.primary}
             style={{ top: d.y - index * MARKER_POINT_SIZE }}
-            key={d.y}
+            key={d.color ?? colors.data.primary}
           />
         ))}
       </DateSpanMarker>
