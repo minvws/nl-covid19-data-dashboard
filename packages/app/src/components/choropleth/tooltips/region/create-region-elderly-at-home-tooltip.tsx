@@ -3,8 +3,8 @@ import {
   RegionsElderlyAtHome,
   SafetyRegionProperties,
 } from '@corona-dashboard/common';
-import { css } from '@styled-system/css';
 import { ReactNode } from 'react';
+import { InlineText } from '~/components-styled/typography';
 import { RegionSelectionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
 import { TooltipSubject } from '~/components/choropleth/tooltips/tooltipSubject';
@@ -28,11 +28,12 @@ export const createRegionElderlyAtHomeTooltip = (
         thresholdValues={thresholdValues}
         filterBelow={context.positive_tested_daily_per_100k}
       >
-        <span css={css({ fontWeight: 'bold' })}>
-          {formatNumber(context.positive_tested_daily_per_100k)} per{' '}
-          {formatNumber(100_000)}{' '}
-        </span>
-        {siteText.choropleth_tooltip.inhabitants}
+        <InlineText fontWeight="bold">
+          {`${formatNumber(
+            context.positive_tested_daily_per_100k
+          )} per ${formatNumber(100_000)} `}
+        </InlineText>
+        {siteText.common.inwoners}
       </TooltipSubject>
     </TooltipContent>
   );

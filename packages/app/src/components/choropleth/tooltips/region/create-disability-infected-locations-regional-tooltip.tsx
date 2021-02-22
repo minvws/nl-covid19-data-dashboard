@@ -3,8 +3,8 @@ import {
   RegionsDisabilityCare,
   SafetyRegionProperties,
 } from '@corona-dashboard/common';
-import { css } from '@styled-system/css';
 import { ReactNode } from 'react';
+import { InlineText } from '~/components-styled/typography';
 import { TooltipSubject } from '~/components/choropleth/tooltips/tooltipSubject';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { RegionSelectionHandler } from '../../select-handlers/create-select-region-handler';
@@ -27,11 +27,11 @@ export const createDisablityInfectedLocationsRegionalTooltip = (
         thresholdValues={thresholdValues}
         filterBelow={context.infected_locations_total}
       >
-        <span css={css({ fontWeight: 'bold' })}>
+        <InlineText fontWeight="bold">
           {`${formatPercentage(
             context.infected_locations_percentage
           )}% (${formatNumber(context.infected_locations_total)})`}{' '}
-        </span>
+        </InlineText>
       </TooltipSubject>
     </TooltipContent>
   );

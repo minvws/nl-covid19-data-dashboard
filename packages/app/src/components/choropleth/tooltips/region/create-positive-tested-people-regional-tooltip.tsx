@@ -3,17 +3,15 @@ import {
   RegionsTestedOverall,
   SafetyRegionProperties,
 } from '@corona-dashboard/common';
-import { css } from '@styled-system/css';
 import { ReactNode } from 'react';
-import { Text } from '~/components-styled/typography';
+import { InlineText, Text } from '~/components-styled/typography';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
+import { TooltipSubject } from '~/components/choropleth/tooltips/tooltipSubject';
 import siteText from '~/locale/index';
-import { formatPercentage } from '~/utils/formatNumber';
+import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { RegionSelectionHandler } from '../../select-handlers/create-select-region-handler';
 const text = siteText.common.tooltip;
-import { formatNumber } from '~/utils/formatNumber';
-import { TooltipSubject } from '~/components/choropleth/tooltips/tooltipSubject';
 
 export const createPositiveTestedPeopleRegionalTooltip = (
   subject: string,
@@ -34,16 +32,16 @@ export const createPositiveTestedPeopleRegionalTooltip = (
         thresholdValues={thresholdValues}
         filterBelow={infected_per_100k}
       >
-        <span css={css({ fontWeight: 'bold' })}>
+        <InlineText fontWeight="bold">
           {formatPercentage(infected_per_100k)} per {formatNumber(100_000)}{' '}
-        </span>
-        {siteText.choropleth_tooltip.inhabitants}
+        </InlineText>
+        {siteText.common.inwoners}
       </TooltipSubject>
 
-      <Text m={0} mt={-1}>
+      <Text m={0} lineHeight={0}>
         {replaceComponentsInText(text.positive_tested_people, {
           totalPositiveTestedPeople: (
-            <span css={css({ fontWeight: 'bold' })}>{infected}</span>
+            <InlineText fontWeight="bold">{infected}</InlineText>
           ),
         })}
       </Text>

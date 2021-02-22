@@ -650,11 +650,9 @@
     "gisteren": "Gisteren",
     "vandaag": "Vandaag",
     "read_more": "Lees meer",
-    "absolute_date_template": "op {{date}}",
-    "inwoners": "inwoners"
+    "absolute_date_template": "op {{date}}"
   },
   "choropleth_tooltip": {
-    "inhabitants": "inwoners",
     "patients": {
       "singular": "patiënt",
       "plural": "patiënten"

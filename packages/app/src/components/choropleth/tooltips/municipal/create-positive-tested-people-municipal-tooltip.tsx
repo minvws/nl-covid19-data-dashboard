@@ -3,9 +3,8 @@ import {
   MunicipalitiesTestedOverall,
   MunicipalityProperties,
 } from '@corona-dashboard/common';
-import { css } from '@styled-system/css';
 import { ReactNode } from 'react';
-import { Text } from '~/components-styled/typography';
+import { InlineText, Text } from '~/components-styled/typography';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
 import { TooltipSubject } from '~/components/choropleth/tooltips/tooltipSubject';
 import siteText from '~/locale/index';
@@ -37,15 +36,15 @@ export const createPositiveTestedPeopleMunicipalTooltip = (
         thresholdValues={thresholdValues}
         filterBelow={infected_per_100k}
       >
-        <span css={css({ fontWeight: 'bold' })}>
+        <InlineText fontWeight="bold">
           {formatPercentage(infected_per_100k)} per {formatNumber(100_000)}{' '}
-        </span>
-        {siteText.choropleth_tooltip.inhabitants}
+        </InlineText>
+        {siteText.common.inwoners}
       </TooltipSubject>
       <Text m={0} mt={-1}>
         {replaceComponentsInText(text.positive_tested_people, {
           totalPositiveTestedPeople: (
-            <span css={css({ fontWeight: 'bold' })}>{infected}</span>
+            <InlineText fontWeight="bold">{infected}</InlineText>
           ),
         })}
       </Text>

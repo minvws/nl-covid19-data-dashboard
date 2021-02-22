@@ -3,9 +3,8 @@ import {
   RegionalSewerValue,
   SafetyRegionProperties,
 } from '@corona-dashboard/common';
-import { css } from '@styled-system/css';
 import { ReactNode } from 'react';
-import { Text } from '~/components-styled/typography';
+import { InlineText, Text } from '~/components-styled/typography';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
 import { TooltipSubject } from '~/components/choropleth/tooltips/tooltipSubject';
 import siteText from '~/locale/index';
@@ -32,13 +31,13 @@ export const createSewerRegionalTooltip = (
           thresholdValues={thresholdValues}
           filterBelow={context.average}
         >
-          <span css={css({ fontWeight: 'bold' })}>
-            {`${replaceVariablesInText(text.map_tooltip_value, {
+          <InlineText fontWeight="bold">
+            {replaceVariablesInText(text.map_tooltip_value, {
               value: formatNumber(context.average),
-            })}`}
-          </span>
+            })}
+          </InlineText>
         </TooltipSubject>
-        <Text m={0} mt={-1}>
+        <Text m={0} lineHeight={0}>
           {text.map_tooltip}
         </Text>
       </TooltipContent>
