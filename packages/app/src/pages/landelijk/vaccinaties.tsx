@@ -235,7 +235,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
 
         <ChartTile
           title={text.grafiek.titel}
-          description={text.grafiek.titel}
+          description={text.grafiek.omschrijving}
           metadata={{
             date: vaccineDeliveryValues[0].date_of_insertion_unix,
             source: text.bronnen.rivm,
