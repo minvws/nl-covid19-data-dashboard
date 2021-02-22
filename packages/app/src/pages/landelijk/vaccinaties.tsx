@@ -95,8 +95,9 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
           reference={text.reference}
           metadata={{
             datumsText: text.datums,
-            dateOrRange: parseFloat(text.date_of_insertion_unix),
-            dateOfInsertionUnix: parseFloat(text.date_of_insertion_unix),
+            dateOrRange: data.vaccine_administered_total.last_value.date_unix,
+            dateOfInsertionUnix:
+              data.vaccine_administered_total.last_value.date_of_insertion_unix,
             dataSources: [],
           }}
         />
