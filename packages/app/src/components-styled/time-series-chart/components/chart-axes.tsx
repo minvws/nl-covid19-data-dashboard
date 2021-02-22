@@ -7,13 +7,10 @@
  */
 
 import { formatNumber, formatPercentage } from '@corona-dashboard/common';
-import { AxisBottom, AxisLeft, TickFormatter } from '@visx/axis';
+import { AxisBottom, AxisLeft } from '@visx/axis';
 import { GridRows } from '@visx/grid';
-import { Group } from '@visx/group';
-import { scaleLinear, scaleTime } from '@visx/scale';
-import { Bar } from '@visx/shape';
-import { NumberValue, ScaleLinear, ScaleTime } from 'd3-scale';
-import { memo, MouseEvent, ReactNode, TouchEvent } from 'react';
+import { ScaleLinear, ScaleTime } from 'd3-scale';
+import { memo } from 'react';
 import { colors } from '~/style/theme';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 

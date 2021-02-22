@@ -13,6 +13,9 @@ export type TrendProps = {
   areaFillOpacity?: number;
   strokeWidth?: number;
   style?: LineStyle;
+  /**
+   * @TODO refactor to generic getX getY
+   */
   xScale: ScaleTime<number, number>;
   yScale: ScaleLinear<number, number>;
   color?: string;

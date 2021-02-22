@@ -35,22 +35,41 @@ import styled from 'styled-components';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
 import {
-  ChartPadding,
-  defaultPadding,
-  HoverPoint,
-} from '~/components-styled/line-chart/components';
-import {
   calculateYMax,
+  /**
+   * @TODO take this from stacked chart
+   */
   getTrendData,
   TrendValue,
 } from '~/components-styled/line-chart/logic';
 import { Text } from '~/components-styled/typography';
-import text from '~/locale/index';
+// import text from '~/locale/index';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { TimeframeOption } from '~/utils/timeframe';
 import { useBreakpoints } from '~/utils/useBreakpoints';
-import { ChartAxes, ChartContainer, Marker, Trend } from './components';
+import { ValueAnnotation } from '../value-annotation';
+import {
+  ChartAxes,
+  ChartContainer,
+  Markers,
+  Trend,
+  HoveredPoint,
+} from './components';
+
+export type ChartPadding = {
+  top: number;
+  right: number;
+  bottom: number;
+  left: number;
+};
+
+export const defaultPadding: ChartPadding = {
+  top: 10,
+  right: 20,
+  bottom: 30,
+  left: 30,
+};
 
 const tooltipStyles = {
   ...defaultStyles,
@@ -98,6 +117,7 @@ export type TimeSeriesChartProps<T extends TimestampedValue> = {
   // only pad the left, because I think that's how it's used in practice
   paddingLeft?: number;
   ariaLabelledBy: string;
+  valueAnnotation?: string;
 };
 
 export function TimeSeriesChart<T extends TimestampedValue>({
@@ -114,6 +134,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
   showMarkerLine,
   paddingLeft,
   ariaLabelledBy,
+  valueAnnotation,
 }: TimeSeriesChartProps<T>) {
   const {
     tooltipData,
@@ -132,13 +153,13 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     [seriesConfig]
   );
 
-  const benchmark = useMemo(
-    () =>
-      signaalwaarde
-        ? { value: signaalwaarde, label: text.common.barScale.signaalwaarde }
-        : undefined,
-    [signaalwaarde]
-  );
+  // const benchmark = useMemo(
+  //   () =>
+  //     signaalwaarde
+  //       ? { value: signaalwaarde, label: text.common.barScale.signaalwaarde }
+  //       : undefined,
+  //   [signaalwaarde]
+  // );
 
   const trendsList = useMemo(
     () => getTrendData(values, metricProperties as string[], timeframe),
@@ -208,19 +229,20 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     nice: tickValues?.length || numTicks,
   });
 
-  const [markerProps, setMarkerProps] = useState<{
-    data: HoverPoint<T>[];
-  }>();
+  const [hoveredPoints, setHoveredPoints] = useState<HoveredPoint[]>();
 
   const bisect = useCallback(
-    (
-      trend: (TrendValue & TimestampedValue)[],
+    function (
+      trend: TrendValue[],
       xPosition: number,
       xScale: ScaleTime<number, number>
-    ) => {
-      if (!trend.length) return;
-      if (trend.length === 1) return trend[0];
+    ): [TrendValue, number] {
+      if (trend.length === 1) return [trend[0], 0];
 
+      /**
+       * @TODO figure this out. If we can do it without padding, we can move
+       * this outside the component
+       */
       const date = xScale.invert(xPosition - padding.left);
 
       const index = bisectLeft(
@@ -232,65 +254,33 @@ export function TimeSeriesChart<T extends TimestampedValue>({
       const d0 = trend[index - 1];
       const d1 = trend[index];
 
-      if (!d1) return d0;
+      if (!d1) return [d0, 0];
 
-      return +date - +d0.__date > +d1.__date - +date ? d1 : d0;
+      return [+date - +d0.__date > +d1.__date - +date ? d1 : d0, index];
     },
     [padding]
   );
 
-  const distance = (point1: HoverPoint<TimestampedValue>, point2: Point) => {
-    const x = point2.x - point1.x;
-    const y = point2.y - point1.y;
+  const distance = (hoveredPoint: HoveredPoint, localPoint: Point) => {
+    /**
+     * @TODO rewrite this to getX getY
+     *
+     * can use use vix standard function for distance?
+     *
+     * we probably only need to look at the Y component, because all trend
+     * values come from the same sample, and that sample has been picked with
+     * the bisect call.
+     */
+    const x = localPoint.x - hoveredPoint.x;
+    const y = localPoint.y - hoveredPoint.y;
     return Math.sqrt(x * x + y * y);
   };
 
-  const toggleHoverElements = useCallback(
-    (
-      isHoverActive: boolean,
-      hoverPoints?: HoverPoint<T>[],
-      nearestPoint?: HoverPoint<T>
-    ) => {
-      if (!isHoverActive) {
-        hideTooltip();
-        setMarkerProps(undefined);
-      } else if (hoverPoints?.length && nearestPoint) {
-        showTooltip({
-          tooltipData: {
-            /**
-             * Ideally I think we would pass the original value + the key that
-             * this hover point belongs to. Similar to how the stacked-chart
-             * hover works. But in order to do so I think we need to use
-             * different hover logic, and possibly use mouse callbacks on the
-             * trends individually.
-             */
-            value: hoverPoints[0].data,
-            key: '__todo_figure_out_what_key_this_point_belongs_to' as keyof T,
-            /**
-             * I'm passing the full config here because the tooltip needs colors
-             * and labels. In the future this could be distilled maybe.
-             */
-            seriesConfig: seriesConfig,
-          },
-          tooltipLeft: nearestPoint.x,
-          tooltipTop: nearestPoint.y,
-        });
-        setMarkerProps({
-          data: hoverPoints,
-        });
-      }
-    },
-    [showTooltip, hideTooltip, seriesConfig]
-  );
-
   const handleHover = useCallback(
-    (
-      event: React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>,
-      __index: number
-    ) => {
-      if (!trendsList.length || event.type === 'mouseleave') {
-        toggleHoverElements(false);
-        return;
+    (event: React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>) => {
+      if (event.type === 'mouseleave') {
+        hideTooltip();
+        setHoveredPoints(undefined);
       }
 
       const point = localPoint(event);
@@ -299,35 +289,72 @@ export function TimeSeriesChart<T extends TimestampedValue>({
         return;
       }
 
-      const sortByNearest = (left: HoverPoint<T>, right: HoverPoint<T>) =>
-        distance(left, point) - distance(right, point);
+      const hoveredPoints = trendsList.map((trend, index) => {
+        /**
+         * @TODO we only really need to do the bisect once on a single trend
+         * because all trend values come from the same original value object
+         */
+        const [trendValue, trendValueIndex] = bisect(trend, point.x, xScale);
 
-      const hoverPoints = trendsList
-        .map((trends, index) => {
-          const trendValue = bisect(trends, point.x, xScale);
-          return trendValue
-            ? {
-                data: trendValue,
-                color: seriesConfig[index].color,
-              }
-            : undefined;
-        })
-        .filter(isDefined)
-        .map<HoverPoint<T>>(
-          ({ data, color }: { data: any; color?: string }) => {
-            return {
-              data,
-              color,
-              x: xScale(data.__date) ?? 0,
-              y: yScale(data.__value) ?? 0,
-            };
-          }
-        );
-      const nearest = hoverPoints.slice().sort(sortByNearest);
+        return {
+          trendValue,
+          trendValueIndex,
+          seriesConfigIndex: index,
+          /**
+           * @TODO I don't think we need to include color here. Can we derive
+           * active hover point index maybe?
+           */
+          color: seriesConfig[index].color,
+          x: xScale(trendValue.__date) ?? 0,
+          y: yScale(trendValue.__value) ?? 0,
+        } as HoveredPoint;
+      });
 
-      toggleHoverElements(true, hoverPoints, nearest[0]);
+      // console.log('hoveredPoints', hoveredPoints);
+
+      setHoveredPoints(hoveredPoints);
+
+      const sortedPoints = [...hoveredPoints].sort(
+        (left, right) => distance(left, point) - distance(right, point)
+      );
+
+      const nearestPoint = sortedPoints[0];
+
+      showTooltip({
+        tooltipData: {
+          /**
+           * Ideally I think we would pass the original value + the key that
+           * this hover point belongs to. Similar to how the stacked-chart
+           * hover works. But in order to do so I think we need to use
+           * different hover logic, and possibly use mouse callbacks on the
+           * trends individually.
+           */
+          value: values[nearestPoint.trendValueIndex],
+          /**
+           * The key of "value" that we are nearest to. Some tooltips might
+           * want to use this to highlight a series.
+           */
+          key: seriesConfig[nearestPoint.seriesConfigIndex].metricProperty,
+          /**
+           * I'm passing the full config here because the tooltip needs colors
+           * and labels. In the future this could be distilled maybe.
+           */
+          seriesConfig: seriesConfig,
+        },
+        tooltipLeft: nearestPoint.x,
+        tooltipTop: nearestPoint.y,
+      });
     },
-    [bisect, trendsList, seriesConfig, toggleHoverElements, xScale, yScale]
+    [
+      bisect,
+      trendsList,
+      seriesConfig,
+      xScale,
+      yScale,
+      hideTooltip,
+      showTooltip,
+      values,
+    ]
   );
 
   const renderSeries = useCallback(
@@ -347,10 +374,10 @@ export function TimeSeriesChart<T extends TimestampedValue>({
            * Here we pass the index to handle hover. Not sure if that is
            * enough to avoid having to search for the point
            */
-          onHover={(event) => handleHover(event, index)}
+          onHover={handleHover}
         />
       )),
-    [handleHover, seriesConfig, trendsList]
+    [handleHover, seriesConfig, trendsList, xScale, yScale]
   );
 
   if (!xDomain) {
@@ -358,73 +385,82 @@ export function TimeSeriesChart<T extends TimestampedValue>({
   }
 
   return (
-    <ChartContainer
-      width={width}
-      height={height}
-      onHover={(evt) => handleHover(evt, -1)}
-      padding={padding}
-      ariaLabelledBy={ariaLabelledBy}
-    >
-      <ChartAxes
-        bounds={bounds}
-        yTickValues={tickValues}
-        xScale={xScale}
-        yScale={yScale}
-      />
-      {renderSeries}
-
-      {tooltipOpen && tooltipData && (
-        <TooltipWithBounds
-          left={tooltipLeft}
-          top={tooltipTop}
-          style={tooltipStyles}
-          offsetLeft={isTinyScreen ? 0 : 50}
-        >
-          {/**
-           * @TODO move this to Tooltip component together with default
-           * formatting function
-           */}
-          <TooltipContainer>
-            {typeof formatTooltip === 'function'
-              ? formatTooltip(
-                  tooltipData.value,
-                  tooltipData.key,
-                  tooltipData.seriesConfig
-                )
-              : formatDefaultTooltip(
-                  tooltipData.value,
-                  tooltipData.key,
-                  tooltipData.seriesConfig
-                )}
-          </TooltipContainer>
-        </TooltipWithBounds>
+    <Box>
+      {valueAnnotation && (
+        <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
       )}
 
-      {/**
-       * @TODO see if we can bundle this wrapper with the marker logic and do not pass height and padding separately to Marker, because we already know the marker height
-       */}
-      <Box
-        height={bounds.height}
-        width={bounds.width}
-        position="absolute"
-        top={padding.top}
-        left={padding.left}
-        style={{
-          pointerEvents: 'none',
-        }}
-      >
-        {markerProps && (
-          <Marker
-            {...markerProps}
-            showLine={showMarkerLine}
-            dateSpanWidth={dateSpanScale.bandwidth()}
-            height={height}
-            padding={padding}
-            primaryColor={`#5B5B5B`}
+      <Box position="relative">
+        <ChartContainer
+          width={width}
+          height={height}
+          onHover={handleHover}
+          padding={padding}
+          ariaLabelledBy={ariaLabelledBy}
+        >
+          <ChartAxes
+            bounds={bounds}
+            yTickValues={tickValues}
+            xScale={xScale}
+            yScale={yScale}
           />
+
+          {renderSeries()}
+        </ChartContainer>
+
+        {tooltipOpen && tooltipData && (
+          <TooltipWithBounds
+            left={tooltipLeft}
+            top={tooltipTop}
+            style={tooltipStyles}
+            offsetLeft={isTinyScreen ? 0 : 50}
+          >
+            {/**
+             * @TODO move this to Tooltip component together with default
+             * formatting function
+             */}
+            <TooltipContainer>
+              {typeof formatTooltip === 'function'
+                ? formatTooltip(
+                    tooltipData.value,
+                    tooltipData.key,
+                    tooltipData.seriesConfig
+                  )
+                : formatDefaultTooltip(
+                    tooltipData.value,
+                    tooltipData.key,
+                    tooltipData.seriesConfig
+                  )}
+            </TooltipContainer>
+          </TooltipWithBounds>
+        )}
+
+        {/**
+         * @TODO see if we can bundle this wrapper with the marker logic and do not pass height and padding separately to Marker, because we already know the marker height
+         */}
+        {hoveredPoints && (
+          <Box
+            height={bounds.height}
+            width={bounds.width}
+            position="absolute"
+            top={padding.top}
+            left={padding.left}
+            style={{
+              pointerEvents: 'none',
+            }}
+          >
+            <Markers
+              hoveredPoints={hoveredPoints}
+              showLine={showMarkerLine}
+              dateSpanWidth={dateSpanScale.bandwidth()}
+              height={height}
+              padding={padding}
+              lineColor={`#5B5B5B`}
+            />
+          </Box>
         )}
       </Box>
-    </ChartContainer>
+    </Box>
   );
 }
 

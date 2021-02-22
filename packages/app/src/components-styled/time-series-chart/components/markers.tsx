@@ -1,22 +1,23 @@
 import styled from 'styled-components';
+import { ChartPadding } from '~/components-styled/line-chart/components';
+import { TrendValue } from '~/components-styled/line-chart/logic';
 import { Text } from '~/components-styled/typography';
 import { colors } from '~/style/theme';
 import { formatDateFromMilliseconds } from '~/utils/formatDate';
-import { TrendValue } from '~/components-styled/line-chart/logic';
-import { ChartPadding } from '~/components-styled/line-chart/components';
-import { TimestampedValue } from '@corona-dashboard/common';
 
 const MARKER_POINT_SIZE = 18;
 
-export type HoverPoint<T extends TimestampedValue> = {
-  data: T & TrendValue;
-  color?: string;
+export type HoveredPoint = {
+  trendValue: TrendValue;
+  trendValueIndex: number;
+  seriesConfigIndex: number;
+  color: string;
   x: number;
   y: number;
 };
 
 type ColorProps = {
-  indicatorColor: string;
+  color: string;
 };
 
 const Label = styled.div`
@@ -32,10 +33,10 @@ const DottedLine = styled.div<ColorProps>`
   width: 1px;
   border-left-width: 1px;
   border-left-style: dashed;
-  border-left-color: ${(props) => props.indicatorColor || 'black'};
+  border-left-color: ${(props) => props.color};
 `;
 
-const Point = styled.div<ColorProps>`
+const PointMarker = styled.div<ColorProps>`
   pointer-events: none;
   position: relative;
   height: 18px;
@@ -49,7 +50,7 @@ const Point = styled.div<ColorProps>`
     transform: translate(50%, -50%);
     border-radius: 50%;
     border: 1px solid white;
-    background: ${(props) => props.indicatorColor || 'black'};
+    background: ${(props) => props.color};
   }
 
   &::before {
@@ -62,7 +63,7 @@ const Point = styled.div<ColorProps>`
     */
     transform: translate(-5%, -50%);
     border-radius: 50%;
-    background: ${(props) => props.indicatorColor || 'black'};
+    background: ${(props) => props.color};
     opacity: 0.2;
   }
 `;
@@ -90,20 +91,25 @@ const LineContainer = styled.div`
   position: absolute;
 `;
 
-type MarkerProps<T extends TimestampedValue> = {
-  data: HoverPoint<T>[];
+interface MarkersProps {
+  hoveredPoints: HoveredPoint[];
   dateSpanWidth: number;
-  primaryColor?: string;
+  lineColor?: string;
   showLine?: boolean;
-  formatLabel?: (data: T & TrendValue) => string;
+  formatLabel?: (value: TrendValue) => string;
   padding: ChartPadding;
   height: number;
-};
+}
 
-export function Marker<T extends TimestampedValue>(props: MarkerProps<T>) {
+/**
+ * @TODO this component might be better split up into different kinds of
+ * markers. It feels like there are currently too many different concerns
+ * involved.
+ */
+export function Markers(props: MarkersProps) {
   const {
-    primaryColor = colors.data.primary,
-    data,
+    lineColor = colors.data.primary,
+    hoveredPoints,
     showLine = false,
     formatLabel = defaultFormatLabel,
     dateSpanWidth,
@@ -111,9 +117,13 @@ export function Marker<T extends TimestampedValue>(props: MarkerProps<T>) {
     padding,
   } = props;
 
-  const topY = data.reduce((min, d) => {
+  const topY = hoveredPoints.reduce((min, d) => {
     return Math.min(d.y, min);
   }, Infinity);
+
+  const firstPoint = hoveredPoints[0];
+
+  // console.log('+++ firstPoint', firstPoint);
 
   return (
     <>
@@ -127,11 +137,11 @@ export function Marker<T extends TimestampedValue>(props: MarkerProps<T>) {
           style={{
             top: 'calc(100% + 5px)',
             // -1 makes it align better, not sure why
-            left: data[0].x - 1,
+            left: firstPoint.x - 1,
           }}
         >
           <DottedLine
-            indicatorColor={primaryColor}
+            color={lineColor}
             style={{
               // +10 makes it align better, not sure why
               bottom: padding.top + 10,
@@ -140,7 +150,7 @@ export function Marker<T extends TimestampedValue>(props: MarkerProps<T>) {
           />
           <Label>
             <Text fontSize={12} fontWeight="bold" m={0}>
-              {formatLabel(data[0].data)}
+              {formatLabel(firstPoint.trendValue)}
             </Text>
           </Label>
         </LineContainer>
@@ -148,14 +158,14 @@ export function Marker<T extends TimestampedValue>(props: MarkerProps<T>) {
       <DateSpanMarker
         style={{
           width: dateSpanWidth,
-          left: data[0].x,
+          left: firstPoint.x,
         }}
       >
-        {data.map((d, index) => (
-          <Point
-            indicatorColor={d.color ?? colors.data.primary}
-            style={{ top: d.y - index * MARKER_POINT_SIZE }}
-            key={d.y}
+        {hoveredPoints.map((point, index) => (
+          <PointMarker
+            color={point.color}
+            style={{ top: point.y - index * MARKER_POINT_SIZE }}
+            key={point.y}
           />
         ))}
       </DateSpanMarker>

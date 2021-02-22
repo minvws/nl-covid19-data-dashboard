@@ -467,10 +467,11 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                     color: '#C252D4',
                   },
                 ]}
-                formatTooltip={(value, _key, config) => (
+                formatTooltip={(value, key, config) => (
                   <VaccineSupportTooltip
                     locale={locale}
                     value={value}
+                    key={key}
                     config={config}
                   />
                 )}
