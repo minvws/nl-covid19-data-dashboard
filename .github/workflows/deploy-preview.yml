@@ -8,23 +8,28 @@ on:
     types: [opened, synchronize, reopened, closed]
     branches:
       - develop
+      - master
 
 jobs:
   build_and_deploy_job:
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+    if: (github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')) && startsWith(github.head_ref, 'lokalise-') == false
     runs-on: ubuntu-latest
     name: Build and Deploy Job
 
     steps:
-      - name: Git checkout
-        uses: actions/checkout@v1
+      # - name: Git checkout
+      #   uses: actions/checkout@v1
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
       - name: Branch name
-        run: echo running on branch ${GITHUB_REF##*/}
+        run: echo running on branch ${{ steps.extract_branch.outputs.branch }}
       - name: Push POST request
         uses: muinmomin/webhook-action@v1.0.0
         with:
           url: ${{ secrets.TRIGGER_BRANCH_DEPLOY }}
-          data: "{'branchName': '${GITHUB_REF##*/}'}"
+          data: "{'branchName': '${{ steps.extract_branch.outputs.branch }}'"
 
   # close_pull_request_job:
   #   if: github.event_name == 'pull_request' && github.event.action == 'closed'
