@@ -141,6 +141,9 @@ export interface National {
   vaccine_support: NlVaccineSupport;
   corona_melder_app: NlCoronaMelderApp;
   vaccine_delivery: NlVaccineDelivery;
+  vaccine_delivery_estimate: NlVaccineEstimateDelivery;
+  vaccine_administered: NlVaccineAdministered;
+  vaccine_administered_estimate: NlVaccineAdministeredEstimate;
   vaccine_administered_care_institutions: NlVaccineAdministeredCareInstitutions;
   vaccine_administered_doctors: NlVaccineAdministeredDoctors;
   vaccine_administered_ggd_ghor: NlVaccineAdministeredGgdGhor;
@@ -467,12 +470,47 @@ export interface NlVaccineDelivery {
   last_value: NlVaccineDeliveryValue;
 }
 export interface NlVaccineDeliveryValue {
-  pfizer: number;
-  moderna: number;
-  astra_zeneca: number;
-  cure_vac: number;
-  janssen: number;
-  sanofi: number;
+  total: number;
+  date_of_insertion_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
+}
+export interface NlVaccineEstimateDelivery {
+  values: NlVaccineDeliveryEstimateValue[];
+  last_value: NlVaccineDeliveryEstimateValue;
+}
+export interface NlVaccineDeliveryEstimateValue {
+  total: number;
+  date_of_insertion_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
+}
+export interface NlVaccineAdministered {
+  values: NlVaccineAdministeredValue[];
+  last_value: NlVaccineAdministeredValue;
+}
+export interface NlVaccineAdministeredValue {
+  pfizer?: number;
+  moderna?: number;
+  astra_zeneca?: number;
+  cure_vac?: number;
+  janssen?: number;
+  sanofi?: number;
+  date_of_insertion_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
+}
+export interface NlVaccineAdministeredEstimate {
+  values: NlVaccineAdministeredEstimateValue[];
+  last_value: NlVaccineAdministeredEstimateValue;
+}
+export interface NlVaccineAdministeredEstimateValue {
+  pfizer?: number;
+  moderna?: number;
+  astra_zeneca?: number;
+  cure_vac?: number;
+  janssen?: number;
+  sanofi?: number;
   date_of_insertion_unix: number;
   date_start_unix: number;
   date_end_unix: number;

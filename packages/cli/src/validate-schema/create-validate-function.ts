@@ -23,11 +23,16 @@ function loadSchema(basePath: string, uri: string): Promise<any> {
  */
 export function createValidateFunction(schemaPath: string) {
   const basePath = path.dirname(schemaPath);
-  const schema = JSON.parse(
-    fs.readFileSync(schemaPath, {
-      encoding: 'utf8',
-    })
-  );
+  let schema = null;
+  try {
+    schema = JSON.parse(
+      fs.readFileSync(schemaPath, {
+        encoding: 'utf8',
+      })
+    );
+  } catch (e) {
+    throw new Error(`Error while parsing file ${schemaPath}:\n${e.message}`);
+  }
 
   const validator = new Ajv({
     loadSchema: loadSchema.bind(null, basePath),

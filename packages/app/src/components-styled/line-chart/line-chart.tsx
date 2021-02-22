@@ -1,3 +1,8 @@
+import {
+  isDateSeries,
+  isDateSpanSeries,
+  TimestampedValue,
+} from '@corona-dashboard/common';
 import { TickFormatter } from '@visx/axis';
 import { localPoint } from '@visx/event';
 import { Point } from '@visx/point';
@@ -15,11 +20,6 @@ import {
   ComponentCallbackFunction,
   defaultPadding,
 } from '~/components-styled/line-chart/components';
-import {
-  isDateSeries,
-  isDateSpanSeries,
-  TimestampedValue,
-} from '@corona-dashboard/common';
 import { Text } from '~/components-styled/typography';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
 import text from '~/locale/index';
@@ -432,7 +432,7 @@ function formatDefaultTooltip<T extends TimestampedValue>(
   );
 }
 
-function useTooltip<T extends TimestampedValue>() {
+function useTooltip<T extends TrendValue>() {
   const [tooltipData, setTooltipData] = useState<T[]>();
   const [tooltipLeft, setTooltipLeft] = useState<number>();
   const [tooltipTop, setTooltipTop] = useState<number>();
