@@ -23,7 +23,6 @@ const MARKDOWN_KEYS = [
   'gemeente_actueel.risiconiveaus.selecteer_toelichting',
   'vaccinaties.gezette_prikken.tab_first.description',
   'vaccinaties.gezette_prikken.tab_second.description',
-  'vaccinaties.grafiek.omschrijving',
   'vr_risiconiveau.positieve_testen.description',
   'vr_risiconiveau.ziekenhuisopnames.description',
   'vr_risiconiveau.types[1].toelichting',

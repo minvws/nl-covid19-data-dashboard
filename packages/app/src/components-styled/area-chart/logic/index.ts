@@ -1,13 +1,16 @@
 import {
+  DateSpanValue,
+  DateValue,
   isDateSeries,
   isDateSpanSeries,
   TimestampedValue,
 } from '@corona-dashboard/common';
 import { isPresent } from 'ts-is-present';
-import { getValuesInTimeframe } from '~/components-styled/stacked-chart/logic';
+import {
+  getValuesInTimeframe,
+  timestampToDate,
+} from '~/components-styled/stacked-chart/logic';
 import { getDaysForTimeframe, TimeframeOption } from '~/utils/timeframe';
-
-export * from './background-rectangle';
 
 // This type limits the allowed property names to those with a number type,
 // so its like keyof T, but filtered down to only the appropriate properties.
@@ -29,24 +32,17 @@ export type AnyFilteredValue = Record<string, number>;
  * render lines, so that the axis scales with whatever key contains the highest
  * values.
  */
-export function calculateYMax(
-  values: TrendValue[][],
-  signaalwaarde = -Infinity
-) {
-  const peakValues = values.map((list) =>
-    list
-      .map((x) => x.__value)
-      .filter(isPresent) // omit null values
-      .reduce((acc, value) => (value > acc ? value : acc), -Infinity)
-  );
-
-  const overallMaximum = Math.max(...peakValues);
+export function calculateYMax(values: TrendValue[], signaalwaarde = -Infinity) {
+  const peakValues = values
+    .map((x) => x.__value)
+    .filter(isPresent) // omit null values
+    .reduce((acc, value) => (value > acc ? value : acc), -Infinity);
 
   /**
    * Value cannot be 0, hence the 1 If the value is below signaalwaarde, make
    * sure the signaalwaarde floats in the middle
    */
-  return Math.max(overallMaximum, signaalwaarde * 2, 1);
+  return Math.max(peakValues, signaalwaarde * 2, 1);
 }
 
 /**
@@ -88,30 +84,28 @@ export type TrendValue = {
   __value: number;
 };
 
-const timestampToDate = (d: number) => new Date(d * 1000);
-
-export type TrendData = (TrendValue & TimestampedValue)[][];
+export type TimestampedTrendValue = TrendValue & TimestampedValue;
 
 export function getTrendData<T extends TimestampedValue>(
   values: T[],
-  metricProperties: string[],
+  metricProperties: (keyof T)[],
   timeframe: TimeframeOption
-): TrendData {
+): (T & TimestampedTrendValue)[][] {
   const series = getValuesInTimeframe(values, timeframe);
 
   const trendData = metricProperties.map(
     (metricProperty) =>
-      (getSingleTrendData(series, metricProperty) as unknown) as (TrendValue &
-        TimestampedValue)[]
+      (getSingleTrendData(series, metricProperty as string) as unknown) as (T &
+        TimestampedTrendValue)[]
   );
 
   return trendData;
 }
 
-export function getSingleTrendData(
-  values: TimestampedValue[],
+export function getSingleTrendData<T extends TimestampedValue>(
+  values: T[],
   metricProperty: string
-): TrendValue[] {
+): (T & TimestampedTrendValue)[] {
   if (values.length === 0) {
     /**
      * It could happen that you are using an old dataset and select last week as
@@ -122,45 +116,45 @@ export function getSingleTrendData(
   }
 
   if (isDateSeries(values)) {
-    return (
-      values
-        .map((x) => ({
-          ...x,
-          /**
-           * Assuming the config picks out a number property. We could make this
-           * stricter in the future with NumberProperty but I choose to strip it
-           * to minimize type complexity while figuring things out.
-           */
-          __value: x[metricProperty as keyof TimestampedValue] as number,
-          __date: timestampToDate(x.date_unix),
-        }))
-        // Filter any possible null values
-        .filter((x) => isPresent(x.__value))
-    );
+    return values
+      .map<T & TimestampedTrendValue>(
+        (x) =>
+          ({
+            ...x,
+            /**
+             * Assuming the config picks out a number property. We could make this
+             * stricter in the future with NumberProperty but I choose to strip it
+             * to minimize type complexity while figuring things out.
+             */
+            __value: x[metricProperty as keyof TimestampedValue] as number,
+            __date: timestampToDate((x as DateValue).date_unix),
+          } as T & TimestampedTrendValue)
+      )
+      .filter((x) => isPresent(x.__value));
   }
 
   if (isDateSpanSeries(values)) {
-    return (
-      values
-        .map((x) => ({
-          ...x,
-          /**
-           * Assuming the config picks out a number property. We could make this
-           * stricter in the future with NumberProperty but I choose to strip it
-           * to minimize type complexity while figuring things out.
-           */
-          __value: x[metricProperty as keyof TimestampedValue] as number,
-          __date: timestampToDate(
+    return values
+      .map<T & TimestampedTrendValue>(
+        (x) =>
+          ({
+            ...x,
             /**
-             * Here we set the date to be in the middle of the timespan, so that
-             * the chart can render the points in the middle of each span.
+             * Assuming the config picks out a number property. We could make this
+             * stricter in the future with NumberProperty but I choose to strip it
+             * to minimize type complexity while figuring things out.
              */
-            x.date_start_unix + (x.date_end_unix - x.date_start_unix) / 2
-          ),
-        }))
-        // Filter any possible null values
-        .filter((x) => isPresent(x.__value))
-    );
+            __value: x[metricProperty as keyof TimestampedValue] as number,
+            __date: timestampToDate(
+              /**
+               * Here we set the date to be in the middle of the timespan, so that
+               * the chart can render the points in the middle of each span.
+               */
+              (x as DateSpanValue).date_end_unix
+            ),
+          } as T & TimestampedTrendValue)
+      )
+      .filter((x) => isPresent(x.__value));
   }
 
   throw new Error(`Incompatible timestamps are used in value ${values[0]}`);

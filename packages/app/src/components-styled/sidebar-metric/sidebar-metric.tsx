@@ -1,6 +1,6 @@
 import {
-  getLastFilledValue,
   DifferenceKey,
+  getLastFilledValue,
   Metric,
   MetricKeys,
 } from '@corona-dashboard/common';
@@ -64,7 +64,7 @@ export function SidebarMetric<T extends { difference: unknown }>({
     ? getLastFilledValue((data[metricName] as unknown) as Metric<unknown>)
     : get(data, [metricName as string, 'last_value']);
 
-  const propertyValue = metricProperty && lastValue[metricProperty];
+  const propertyValue = metricProperty && lastValue?.[metricProperty];
 
   if (metricProperty) {
     assert(

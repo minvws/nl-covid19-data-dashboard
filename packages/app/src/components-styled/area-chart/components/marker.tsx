@@ -1,16 +1,17 @@
-import { TimestampedValue } from '@corona-dashboard/common';
+import { memo } from 'react';
 import styled from 'styled-components';
 import { ChartPadding } from '~/components-styled/line-chart/components';
 import { Text } from '~/components-styled/typography';
 import { colors } from '~/style/theme';
 import { formatDateFromMilliseconds } from '~/utils/formatDate';
-import { TrendValue } from '../logic';
+import { TimestampedTrendValue } from '../logic';
 
 const MARKER_POINT_SIZE = 18;
 
-export type HoverPoint<T extends TimestampedValue> = {
-  data: T & TrendValue;
+export type HoverPoint<T> = {
+  data: T;
   color?: string;
+  label?: string;
   x: number;
   y: number;
 };
@@ -78,7 +79,7 @@ const DateSpanMarker = styled.div`
   flex-grow: 0;
   flex-shrink: 0;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.03);
+  background-color: transparent;
 `;
 
 const LineContainer = styled.div`
@@ -90,23 +91,25 @@ const LineContainer = styled.div`
   position: absolute;
 `;
 
-type MarkerProps<T extends TimestampedValue> = {
+type MarkerProps<T> = {
   data: HoverPoint<T>[];
-  dateSpanWidth: number;
   primaryColor?: string;
   showLine: boolean;
-  formatLabel?: (data: T & TrendValue) => string;
+  formatLabel?: (data: T & TimestampedTrendValue) => string;
   padding: ChartPadding;
   height: number;
 };
 
-export function Marker<T extends TimestampedValue>(props: MarkerProps<T>) {
+export const Marker = memo(MarkerUnmemoized) as typeof MarkerUnmemoized;
+
+function MarkerUnmemoized<T extends TimestampedTrendValue>(
+  props: MarkerProps<T>
+) {
   const {
     primaryColor = colors.data.primary,
     data,
     showLine = false,
     formatLabel = defaultFormatLabel,
-    dateSpanWidth,
     height,
     padding,
   } = props;
@@ -147,7 +150,7 @@ export function Marker<T extends TimestampedValue>(props: MarkerProps<T>) {
       )}
       <DateSpanMarker
         style={{
-          width: dateSpanWidth,
+          width: MARKER_POINT_SIZE,
           left: data[0].x,
         }}
       >
@@ -155,7 +158,7 @@ export function Marker<T extends TimestampedValue>(props: MarkerProps<T>) {
           <Point
             indicatorColor={d.color ?? colors.data.primary}
             style={{ top: d.y - index * MARKER_POINT_SIZE }}
-            key={d.y}
+            key={d.color ?? colors.data.primary}
           />
         ))}
       </DateSpanMarker>
@@ -163,6 +166,6 @@ export function Marker<T extends TimestampedValue>(props: MarkerProps<T>) {
   );
 }
 
-function defaultFormatLabel<T>(data: T & TrendValue): string {
+function defaultFormatLabel(data: TimestampedTrendValue): string {
   return formatDateFromMilliseconds(data.__date.getTime(), 'axis');
 }
