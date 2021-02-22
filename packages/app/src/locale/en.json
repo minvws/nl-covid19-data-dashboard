@@ -1035,7 +1035,7 @@
   "positief_geteste_personen_ggd": {
     "titel": "Percentage of positive test results at GGD test locations ",
     "summary_title": "{{percentage}} of the test results at GGD test locations had a positive result",
-    "summary_link_cta": "Read more",
+    "summary_link_cta": "More about the percentage of positive test results from GGD test locations only",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
     "bron": {
       "href": "https://data.rivm.nl/covid-19/COVID-19_uitgevoerde_testen.html",
@@ -1073,7 +1073,7 @@
   "veiligheidsregio_positief_geteste_personen_ggd": {
     "titel": "Percentage of positive test results at GGD test locations in {{safetyRegion}}",
     "summary_title": "{{percentage}} of the tests at GGD test locations had a positive result",
-    "summary_link_cta": "Read more",
+    "summary_link_cta": "More about the percentage of positive test results from GGD test locations only",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
     "bron": {
       "href": "https://data.rivm.nl/covid-19/COVID-19_uitgevoerde_testen.html",
