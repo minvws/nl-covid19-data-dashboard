@@ -2187,12 +2187,12 @@
       },
       "vaccination_chart": {
         "product_names": {
-          "pfizer": "",
-          "moderna": "",
-          "astra_zeneca": "",
-          "cure_vac": "",
-          "janssen": "",
-          "sanofi": ""
+          "pfizer": "BioNTech/Pfizer",
+          "moderna": "Moderna",
+          "astra_zeneca": "AstraZeneca",
+          "cure_vac": "CureVac",
+          "janssen": "Janssen & Janssen",
+          "sanofi": "Sanofi"
         },
         "delivered": "",
         "estimated": "",
