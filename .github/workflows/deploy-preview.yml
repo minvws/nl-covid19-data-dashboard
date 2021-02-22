@@ -1,0 +1,31 @@
+name: Deploy Preview
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - develop
+      - master
+
+jobs:
+  deploy_preview_trigger_deploy:
+    if: (github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')) && startsWith(github.head_ref, 'lokalise-') == false
+    runs-on: ubuntu-latest
+    name: Trigger deploy preview
+    steps:
+      - name: Push POST request
+        uses: muinmomin/webhook-action@v1.0.0
+        with:
+          url: ${{ secrets.TRIGGER_BRANCH_DEPLOY }}
+          data: '{"branchName": "${{github.head_ref}}"}'
+
+  deploy_preview_trigger_removal:
+    if: (github.event_name == 'pull_request' && github.event.action == 'closed') && startsWith(github.head_ref, 'lokalise-') == false
+    runs-on: ubuntu-latest
+    name: Trigger removal of deploy preview
+    steps:
+      - name: Push POST request
+        uses: muinmomin/webhook-action@v1.0.0
+        with:
+          url: ${{ secrets.TRIGGER_BRANCH_REMOVAL }}
+          data: '{"branchName": "${{github.head_ref}}"}'
