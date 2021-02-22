@@ -18,7 +18,7 @@ export function WarningTile({ message }: WarningMessageProps) {
         {typeof message === 'string' ? (
           <Children dangerouslySetInnerHTML={{ __html: message }} />
         ) : (
-          <Box spacing={3} fontSize={3} fontWeight="bold">
+          <Box spacing={3} fontSize="1.25rem" fontWeight="bold">
             {message}
           </Box>
         )}
@@ -31,6 +31,7 @@ const StyledTile = styled(Tile)(
   css({
     flexDirection: 'row',
     padding: 0,
+    boxShadow: 'none',
   })
 );
 
@@ -53,6 +54,7 @@ const StyledWarning = styled(Warning)(
     height: asResponsiveArray({ _: 30, sm: 38 }),
     mx: asResponsiveArray({ _: '7px', sm: '21px' }),
     fill: 'black',
+    borderRadius: 1,
   })
 );
 
@@ -64,13 +66,17 @@ const WarningMessageBox = styled(Box)(
     py: 3,
     pl: 3,
     backgroundColor: '#FFEE87',
+    borderBottomRightRadius: 1,
+    borderTopRightRadius: 1,
   })
 );
 
 const Children = styled.div(
   css({
-    fontSize: 3,
+    fontSize: '1.25rem',
     fontWeight: 'bold',
+    borderBottomRightRadius: 1,
+    borderTopRightRadius: 1,
     '> *': {
       mt: 0,
       mb: 3,

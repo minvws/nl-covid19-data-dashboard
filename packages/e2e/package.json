@@ -19,6 +19,7 @@
     "compile": "tsc --pretty --noEmit",
     "test:ci": "echo 'No unit tests available for @corona-dashboard/e2e'",
     "e2e": "cypress open",
-    "e2e:ci": "cypress run --headless --browser chrome --config-file ./cypress-ci.json"
+    "e2e:ci": "cypress run --headless --browser chrome --config-file ./cypress-ci.json",
+    "format": "prettier --write \"src/**/*.{js,ts,tsx}\" \"*.{js,json,md,yml}\""
   }
 }

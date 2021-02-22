@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "vr_escalation_level",
+  "required": [
+    "date_unix",
+    "level",
+    "valid_from_unix",
+    "date_of_insertion_unix"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "date_unix": { "type": "integer" },
+    "level": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 4
+    },
+    "valid_from_unix": { "type": "integer" },
+    "date_of_insertion_unix": { "type": "integer" }
+  }
+}

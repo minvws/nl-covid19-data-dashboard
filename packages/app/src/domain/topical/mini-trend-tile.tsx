@@ -4,7 +4,6 @@ import { GridRows } from '@visx/grid';
 import { ParentSize } from '@visx/responsive';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
-import ArrowIcon from '~/assets/arrow.svg';
 import { Box } from '~/components-styled/base';
 import { LineChart } from '~/components-styled/line-chart';
 import { ComponentCallbackInfo } from '~/components-styled/line-chart/components';
@@ -15,6 +14,7 @@ import { Heading, Text } from '~/components-styled/typography';
 import text from '~/locale';
 import { formatNumber } from '~/utils/formatNumber';
 import { useBreakpoints } from '~/utils/useBreakpoints';
+import { ArrowIconRight } from '~/components-styled/arrow-icon';
 
 type MiniTrendTileProps<T extends TimestampedValue> = {
   icon: JSX.Element;
@@ -45,11 +45,12 @@ export function MiniTrendTile<T extends TimestampedValue>(
         py={2}
         pl="3.5rem"
         mb={2}
-        lineHeight={{ md: 0, lg: 2 }}
+        lineHeight={{ md: 0, lg: 1 }}
+        fontSize="1.25rem"
       >
         <LinkWithIcon
           href={href}
-          icon={<ArrowIcon css={css({ transform: 'rotate(-90deg)' })} />}
+          icon={<ArrowIconRight />}
           iconPlacement="right"
           fontWeight="bold"
           headingLink
@@ -57,7 +58,7 @@ export function MiniTrendTile<T extends TimestampedValue>(
           {title}
         </LinkWithIcon>
       </Heading>
-      <Text fontSize="2.75rem" fontWeight="bold" my={0} lineHeight={0} mb={2}>
+      <Text fontSize="2.25rem" fontWeight="bold" my={0} lineHeight={0} mb={2}>
         {formatNumber((value as unknown) as number)}
       </Text>
 

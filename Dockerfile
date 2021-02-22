@@ -8,9 +8,12 @@ RUN yarn
 ARG SANITY_AUTH_TOKEN
 ARG SANITY_DATASET
 ARG SANITY_ASSETS_CACHE_DIR
+ARG IS_PRODUCTION=false
 RUN yarn workspace @corona-dashboard/common build
 RUN yarn workspace @corona-dashboard/cli validate-json
-RUN yarn workspace @corona-dashboard/cli validate-last-values
+# We need to have an ENV var switch to only enable this in production, because
+# BE does not guarantee consistent data in develop.
+RUN if ["$IS_PRODUCTION" = "false"]; then echo "Skipping last-values validation because of non-production environment"; else yarn workspace @corona-dashboard/cli validate-last-values; fi
 RUN yarn workspace @corona-dashboard/cli generate-typescript
 RUN yarn workspace @corona-dashboard/cms sync-assets
 
@@ -33,6 +36,7 @@ RUN yarn workspace @corona-dashboard/app export
 FROM node:14 as react-build-en
 ARG NEXT_PUBLIC_LOCALE=en
 ARG NEXT_PUBLIC_SANITY_PROJECT_ID
+ARG NEXT_PUBLIC_SANITY_DATASET
 
 WORKDIR /app
 COPY --from=react-build-base /app/node_modules /app/node_modules

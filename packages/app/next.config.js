@@ -3,10 +3,8 @@ const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const sitemap = require('./generate-sitemap.js');
 
 const withTM = require('next-transpile-modules')([
-  // `internmap` is a dependency of `d3-array`
-  'internmap',
-  // `react-use-measure` is a dependency of `@visx/tooltip`
-  'react-use-measure',
+  'internmap', // `internmap` is a dependency of `d3-array`
+  'geometric',
 ]);
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
@@ -23,7 +21,7 @@ const nextConfig = {
     COMMIT_ID: commitHash,
   },
   reactStrictMode: true, // Enables react strict mode https://nextjs.org/docs/api-reference/next.config.js/react-strict-mode
-  webpack(config, { isServer, defaultLoaders }) {
+  webpack(config, { isServer, webpack, defaultLoaders }) {
     if (
       isServer &&
       process.env.DISABLE_SITEMAP !== '1' &&
@@ -31,6 +29,25 @@ const nextConfig = {
     ) {
       sitemap.generateSitemap(process.env.NEXT_PUBLIC_LOCALE);
     }
+
+    /** To prevent importing two languages, we use the NormalModuleReplacementPlugin plugin
+     *  We match any import that uses APP_LOCALE and replace it with the value of
+     *  process.env.NEXT_PUBLIC_LOCALE
+     *  e.g. ~/src/locale/APP_LOCALE.json becomes ~/src/locale/nl.json
+     */
+    var appLocale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+
+    config.plugins.push(
+      new webpack.NormalModuleReplacementPlugin(
+        /(.*)APP_LOCALE(\.*)/,
+        function (resource) {
+          resource.request = resource.request.replace(
+            /APP_LOCALE/,
+            `${appLocale}`
+          );
+        }
+      )
+    );
 
     config.module.rules.push({
       test: /\.svg$/,
@@ -56,7 +73,7 @@ const nextConfig = {
     config.module.rules.push({
       test: /\.js$/,
       loader: defaultLoaders.babel,
-      include: /[\\/]node_modules[\\/](d3-.*)[\\/]/,
+      include: /[\\/]node_modules[\\/](d3-.*|react-use-measure)[\\/]/,
     });
 
     config.resolve.alias = {
@@ -80,22 +97,6 @@ const nextConfig = {
         paths: true,
       })
     );
-
-    /**
-     * Add the polyfill.js file to our entries
-     */
-    const originalEntry = config.entry;
-    config.entry = async () => {
-      const entries = await originalEntry();
-
-      if (
-        entries['main.js'] &&
-        !entries['main.js'].includes('./src/polyfills.js')
-      ) {
-        entries['main.js'].unshift('./src/polyfills.js');
-      }
-      return entries;
-    };
 
     return config;
   },

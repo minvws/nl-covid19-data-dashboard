@@ -1,5 +1,5 @@
-import css from '@styled-system/css';
-import ArrowIcon from '~/assets/arrow.svg';
+import { ArrowIconLeft } from '~/components-styled/arrow-icon';
+
 import { Box } from '~/components-styled/base';
 import { ContentBlock } from '~/components-styled/cms/content-block';
 import { Heading } from '~/components-styled/typography';
@@ -10,6 +10,18 @@ import { RichContent } from './cms/rich-content';
 import { LinkWithIcon } from './link-with-icon';
 import { PublicationDate } from './publication-date';
 
+/**
+ * This is a mapping where we map a specific breakpoint in vw to a size in pixels.
+ * An article's cover image will be roughly 50% of the viewport on larger screens,
+ * which is why we can request a lower resolution image.
+ */
+export const articleCoverImageSizes = [
+  [320, 320],
+  [640, 640],
+  [768, 768],
+  [1024, 768],
+];
+
 interface ArticleDetailProps {
   article: Article;
 }
@@ -18,10 +30,7 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
   return (
     <Box bg="white" py={{ _: 4, md: 5 }}>
       <ContentBlock spacing={3}>
-        <LinkWithIcon
-          href="/artikelen"
-          icon={<ArrowIcon css={css({ transform: 'rotate(90deg)' })} />}
-        >
+        <LinkWithIcon href="/artikelen" icon={<ArrowIconLeft />}>
           {siteText.article_detail.back_link.text}
         </LinkWithIcon>
 
@@ -36,7 +45,11 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
           <RichContent blocks={article.intro} contentWrapper={ContentBlock} />
         </Box>
 
-        <ContentImage node={article.cover} contentWrapper={ContentBlock} />
+        <ContentImage
+          node={article.cover}
+          contentWrapper={ContentBlock}
+          sizes={articleCoverImageSizes}
+        />
       </ContentBlock>
 
       {!!article.content?.length && (

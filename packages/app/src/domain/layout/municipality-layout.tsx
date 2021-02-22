@@ -1,7 +1,9 @@
+import { Municipal } from '@corona-dashboard/common';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
+import VirusIcon from '~/assets/virus.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { Category } from '~/components-styled/aside/category';
 import {
@@ -13,14 +15,13 @@ import { Box } from '~/components-styled/base';
 import { AppContent } from '~/components-styled/layout/app-content';
 import { SidebarMetric } from '~/components-styled/sidebar-metric';
 import { Text } from '~/components-styled/typography';
+import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { getLayout } from '~/domain/layout/layout';
 import siteText from '~/locale/index';
-import { Municipal } from '@corona-dashboard/common';
 import { getSafetyRegionForMunicipalityCode } from '~/utils/getSafetyRegionForMunicipalityCode';
 import { Link } from '~/utils/link';
-import { MunicipalityComboBox } from './components/municipality-combo-box';
 import { useBreakpoints } from '~/utils/useBreakpoints';
-import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
+import { MunicipalityComboBox } from './components/municipality-combo-box';
 
 interface MunicipalityLayoutProps {
   lastGenerated: string;
@@ -141,6 +142,23 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                             metricProperty="infected"
                             localeTextKey="gemeente_positief_geteste_personen"
                             differenceKey="tested_overall__infected"
+                          />
+                        </MetricMenuItemLink>
+
+                        <MetricMenuItemLink
+                          href={`/gemeente/${code}/sterfte`}
+                          icon={<VirusIcon />}
+                          title={
+                            siteText.veiligheidsregio_sterfte.titel_sidebar
+                          }
+                        >
+                          <SidebarMetric
+                            data={data}
+                            scope="gm"
+                            metricName="deceased_rivm"
+                            metricProperty="covid_daily"
+                            localeTextKey="gemeente_sterfte"
+                            differenceKey="deceased_rivm__covid_daily"
                           />
                         </MetricMenuItemLink>
                       </CategoryMenu>

@@ -93,10 +93,12 @@
     },
     "chart_bedbezetting": {
       "title": "Bezetting IC-bedden over tijd",
-      "description": "Deze grafiek toont het verloop van het aantal IC-bedden dat is bezet door patiënten met COVID-19."
+      "description": "Deze grafiek toont het verloop van het aantal IC-bedden dat is bezet door patiënten met COVID-19.",
+      "legend_trend_label": "Bezetting IC-bedden",
+      "legend_inaccurate_label": "Data is minder nauwkeurig"
     },
     "metadata": {
-      "title": "Intensive care-opnames | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Intensive care-opnames | Dashboard coronavirus | Rijksoverheid.nl",
       "description": "Landelijk overzicht van het aantal mensen met bevestigd COVID-19 dat per dag op een intensive care-afdeling van een ziekenhuis is opgenomen."
     },
     "titel_sidebar": "Intensive care-opnames",
@@ -124,7 +126,7 @@
     "barscale_screenreader_text": "{{value}} patiënten die voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten, per 100.000 inwoners, per week.",
     "titel_sidebar": "Klachten bij huisartsen",
     "metadata": {
-      "title": "Aantal meldingen COVID-19-achtige klachten bij huisartsen | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Aantal meldingen COVID-19-achtige klachten bij huisartsen | Dashboard coronavirus | Rijksoverheid.nl",
       "description": "Landelijk overzicht van het geschat aantal patiënten dat voor het eerst contact opnemen met de huisartsenpraktijk vanwege COVID-19-achtige klachten per week."
     },
     "normalized_kpi_titel": "Aantal patiënten met COVID-19-achtige klachten per 100.000 inwoners",
@@ -153,7 +155,7 @@
     "barscale_titel": "Gemeld aantal ziekenhuisopnames per dag",
     "extra_uitleg": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer laat het aantal ziekenhuisopnames - inclusief directe IC opnames - zien dat op één dag gemeld is. Dit kunnen ook meldingen zijn van opnames van eerdere dagen.",
     "map_titel": "Woonplaats opgenomen patiënten",
-    "map_toelichting": "Deze kaart laat zien in welke gemeenten of veiligheidsregio’s patiënten wonen die met COVID-19 in het ziekenhuis zijn opgenomen. Patiënten kunnen ook in een ziekenhuis in een ander deel van Nederland worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE. Het Flevoziekenhuis deelt zijn COVID-19 opnames op reguliere afdelingen op dit moment niet met Stichting NICE. Daardoor zijn de cijfers van sommige veiligheidsregio’s en gemeenten op de kaart mogelijk lager dan in werkelijkheid het geval is. Let op: met ingang van 5 februari is de kleurschaal veranderd, zodat beter te zien is welke gemeenten en regio’s geen ziekenhuisopnames melden.",
+    "map_toelichting": "Deze kaart laat zien in welke gemeenten of veiligheidsregio’s patiënten wonen die met COVID-19 in het ziekenhuis zijn opgenomen. Patiënten kunnen ook in een ziekenhuis in een ander deel van Nederland worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE. Het Flevoziekenhuis deelt zijn COVID-19 opnames op reguliere afdelingen op dit moment niet met Stichting NICE. Daardoor zijn de cijfers van sommige veiligheidsregio’s en gemeenten op de kaart mogelijk lager dan in werkelijkheid het geval is.",
     "linechart_titel": "Ziekenhuisopnames over tijd",
     "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "chloropleth_legenda": {
@@ -187,11 +189,13 @@
     },
     "chart_bedbezetting": {
       "title": "Bezetting gewone ziekenhuisbedden (exclusief IC-bedden) over tijd",
-      "description": "Deze grafiek toont het verloop in het aantal ziekenhuisbedden (exclusief IC-bedden) dat is bezet door patiënten met COVID-19."
+      "description": "Deze grafiek toont het verloop in het aantal ziekenhuisbedden (exclusief IC-bedden) dat is bezet door patiënten met COVID-19.",
+      "legend_trend_label": "Bezetting gewone ziekenhuisbedden",
+      "legend_inaccurate_label": "Data is minder nauwkeurig"
     },
     "linechart_description": "In deze grafiek staan de ziekenhuisopnames (inclusief directe IC opnames) vermeld op de dag dat mensen ook echt zijn opgenomen, in plaats van op de dag dat ze gemeld zijn. Zo kunnen we namelijk de ontwikkeling van het coronavirus in Nederland goed zien. Let op: omdat het aanmelden van ziekenhuisopnames vaak een paar dagen later gebeurt, zijn de meest recente dagen nooit compleet en kan het lijken alsof het aantal ziekenhuisopnames afneemt terwijl dit niet zo is.",
     "metadata": {
-      "title": "Ziekenhuisopnames | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Ziekenhuisopnames | Dashboard coronavirus | Rijksoverheid.nl",
       "description": "Landelijk overzicht van het aantal mensen met COVID-19 dat een ziekenhuis is opgenomen."
     },
     "titel_sidebar": "Ziekenhuisopnames",
@@ -218,7 +222,7 @@
     "barscale_toelichting": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
     "barscale_screenreader_text": "{{value}} positief geteste mensen per dag.",
     "kpi_titel": "Aantal positief geteste mensen",
-    "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn en COVID-19 hebben. Een deel van de meldingen zijn positieve tests van eerdere dagen, die later zijn doorgegeven.\n\nLet op: door het winterweer zijn weinig mensen getest op 7 en 8 februari. Dit heeft invloed op de cijfers van de dagen daarna.",
+    "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn en COVID-19 hebben. Een deel van de meldingen zijn positieve tests van eerdere dagen, die later zijn doorgegeven.",
     "map_titel": "Verdeling positief geteste mensen in Nederland",
     "map_toelichting": "Deze kaarten laten zien van hoeveel mensen gisteren is gemeld dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
     "linechart_titel": "Verloop over tijd",
@@ -238,27 +242,13 @@
       "80 tot 90",
       "90+"
     ],
-    "cluster_datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "cluster_bron": {
-      "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
-      "text": "RIVM"
-    },
-    "cluster_titel": "Clusters van positief geteste personen",
-    "cluster_toelichting": "---",
-    "cluster_barscale_titel": "Aantal actieve clusters",
-    "cluster_barscale_toelichting": "---",
-    "cluster_barscale_screenreader_text": "{{value}} actieve clusters.",
-    "cluster_gemiddelde_titel": "Gemiddelde grootte actieve clusters",
-    "cluster_gemiddelde_toelichting": "---.",
-    "cluster_linechart_titel": "Verloop actieve clusters over tijd",
-    "cluster_linechart_toelichting": "---",
     "chloropleth_legenda": {
       "titel": "Aantal per 100.000 inwoners",
       "geen_meldingen": "Geen meldingen"
     },
     "titel_sidebar": "Positieve testen",
     "metadata": {
-      "title": "Positief geteste mensen | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Positief geteste mensen | Dashboard coronavirus | Rijksoverheid.nl",
       "description": "Landelijk overzicht van inwoners die positief getest zijn en COVID-19 hebben."
     },
     "titel_kpi": "Positief geteste mensen per dag",
@@ -295,7 +285,7 @@
     "linechart_titel": "Verloop over tijd",
     "titel_sidebar": "Besmettelijke mensen",
     "metadata": {
-      "title": "Besmettelijke mensen | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Besmettelijke mensen | Dashboard coronavirus | Rijksoverheid.nl",
       "description": "Landelijk overzicht van hoeveel mensen met COVID-19 besmettelijk zijn voor anderen. Dit getal wordt door het RIVM berekend."
     },
     "barscale_toelichting": "Een berekening van hoeveel mensen met COVID-19 per 100.000 inwoners besmettelijk zijn voor anderen. Dit getal wordt door het RIVM berekend.",
@@ -332,7 +322,7 @@
     "extra_uitleg": "Het reproductiegetal laat zien hoe snel het virus zich verspreidt. Dit getal geeft aan hoeveel mensen gemiddeld besmet worden door één patiënt met COVID-19. Bij een reproductiegetal van rond de 1 blijft het aantal besmettingen ongeveer gelijk. Als het reproductiegetal lager is dan 1, dan daalt het aantal besmettingen. Bij een getal hoger dan 1 stijgt het aantal besmettingen.",
     "linechart_titel": "Verloop over tijd",
     "metadata": {
-      "title": "Reproductiegetal | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Reproductiegetal | Dashboard coronavirus | Rijksoverheid.nl",
       "description": "Het reproductiegetal laat zien hoe snel het virus zich verspreidt. Dit getal geeft aan hoeveel mensen gemiddeld besmet worden door één patiënt met COVID-19."
     },
     "titel_sidebar": "Reproductiegetal",
@@ -416,7 +406,7 @@
     "map_titel": "Verdeling besmette locaties in Nederland",
     "map_toelichting": "Deze kaart toont een schatting van het aantal verpleeghuislocaties waar in de afgelopen 28 dagen minstens één (nieuwe) COVID-19 besmetting op basis van een positieve test is gemeld.",
     "metadata": {
-      "title": "Besmette verpleeghuizen | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Besmette verpleeghuizen | Dashboard coronavirus | Rijksoverheid.nl",
       "description": "Landelijk overzicht van verpleeghuislocaties waar tenminste één COVID-19 besmetting is vastgesteld."
     },
     "titel_sidebar": "Verpleeghuiszorg",
@@ -453,7 +443,7 @@
     "map_titel": "Verdeling positief geteste bewoners in Nederland",
     "map_toelichting": "Deze kaarten laten zien van hoeveel bewoners gisteren is gemeld dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
     "metadata": {
-      "title": "Positief geteste bewoners verpleeghuizen | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Positief geteste bewoners verpleeghuizen | Dashboard coronavirus | Rijksoverheid.nl",
       "description": "Landelijk overzicht van het aantal bewoners van verpleeghuizen die positief getest zijn en COVID-19 hebben."
     },
     "titel_kpi": "Aantal positief geteste bewoners per dag",
@@ -486,7 +476,7 @@
     "map_toelichting": "Deze kaarten laten zien hoe de oversterfte in verpleeghuizen is in Nederland per dag.",
     "titel_sidebar": "Overleden bewoners verpleeghuizen per dag",
     "metadata": {
-      "title": "Overleden bewoners verpleeghuizen | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Overleden bewoners verpleeghuizen | Dashboard coronavirus | Rijksoverheid.nl",
       "description": "Landelijk aantal gemelde verpleeghuisbewoners dat in Nederland overlijdt aan de gevolgen van het coronavirus."
     },
     "titel_kpi": "Sterfte per dag",
@@ -523,13 +513,13 @@
     "barscale_screenreader_text": "{{value}} virusdeeltjes per 100.000 inwoners",
     "linechart_titel": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners over tijd",
     "metadata": {
-      "title": "Rioolwatermeting | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Rioolwatermeting | Dashboard coronavirus | Rijksoverheid.nl",
       "description": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners"
     },
     "titel_sidebar": "Rioolwatermeting",
     "titel_kpi": "Gemiddelde aantal virusdeeltjes per 100.000 inwoners",
     "total_installation_count_titel": "Aantal meetlocaties",
-    "total_installation_count_description": "Wekelijks aantal rioolwaterzuiveringsinstallaties die minimaal één keer een meting hebben gerapporteerd. Het weekgemiddelde wordt berekend door het gemiddelde te nemen van alle metingen op deze locaties. Per week kan dit aantal variëren omdat niet alle metingen altijd lukken. Let op: door de vrieskou is het niet mogelijk op alle locaties goede metingen van het rioolwater te doen. Dit heeft deze week invloed op de rioolwatercijfers.",
+    "total_installation_count_description": "Wekelijks aantal rioolwaterzuiveringsinstallaties die minimaal één keer een meting hebben gerapporteerd. Het weekgemiddelde wordt berekend door het gemiddelde te nemen van alle metingen op deze locaties. Per week kan dit aantal variëren omdat niet alle metingen altijd lukken. Let op: door de vrieskou was het de afgelopen week niet mogelijk op alle locaties goede metingen van het rioolwater te doen. Dit heeft ook deze week nog invloed op de rioolwatercijfers.",
     "rwzi_abbrev": "",
     "map_titel": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners in rioolwater",
     "map_toelichting": "Deze kaart toont het gemiddeld aantal virusdeeltjes per 100.000 inwoners, per veiligheidsregio.",
@@ -568,10 +558,10 @@
     "text": "Terug naar regio selectie"
   },
   "error_metadata": {
-    "title": "COVID-19 Dashboard foutmelding | Rijksoverheid.nl"
+    "title": "Foutmelding Dashboard coronavirus | Rijksoverheid.nl"
   },
   "nationaal_metadata": {
-    "title": "Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
+    "title": "Dashboard coronavirus | COVID-19 | Rijksoverheid.nl",
     "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
     "url": "https://coronadashboard.rijksoverheid.nl"
   },
@@ -579,7 +569,7 @@
     "title": "Pagina kan niet gevonden worden | Rijksoverheid.nl"
   },
   "over_metadata": {
-    "title": "Over het Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
+    "title": "Over het Dashboard coronavirus | COVID-19 | Rijksoverheid.nl",
     "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
     "url": "https://coronadashboard.rijksoverheid.nl/over"
   },
@@ -589,14 +579,14 @@
     "url": "https://coronadashboard.rijksoverheid.nl/regio"
   },
   "verantwoording_metadata": {
-    "title": "Cijferverantwoording Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
+    "title": "Cijferverantwoording | Dashboard coronavirus | Rijksoverheid.nl",
     "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
     "url": "https://coronadashboard.rijksoverheid.nl/verantwoording"
   },
   "metadata": {
     "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
-    "titel": "COVID-19 Dashboard foutmelding | Rijksoverheid.nl",
-    "title": "Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
+    "titel": "Foutmelding Dashboard coronavirus | Rijksoverheid.nl",
+    "title": "Dashboard coronavirus | COVID-19 | Rijksoverheid.nl",
     "url": "https://coronadashboard.rijksoverheid.nl"
   },
   "charts": {
@@ -659,11 +649,12 @@
     "gisteren": "Gisteren",
     "vandaag": "Vandaag",
     "read_more": "Lees meer",
-    "absolute_date_template": "op {{date}}"
+    "absolute_date_template": "op {{date}}",
+    "inwoners": "inwoners"
   },
   "seoHead": {
     "default_description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
-    "default_title": "Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
+    "default_title": "Dashboard coronavirus | COVID-19 | Rijksoverheid.nl",
     "default_url": "https://coronadashboard.rijksoverheid.nl"
   },
   "no_data_for_this_municipality": {
@@ -698,11 +689,12 @@
       "gedrag": "Gedrag",
       "kwetsbare_groepen": "Kwetsbare groepen",
       "maatregelen": "Maatregelen",
-      "algemeen": "Algemeen"
+      "algemeen": "Algemeen",
+      "inschaling": "Risiconiveau"
     }
   },
   "veiligheidsregio_metadata": {
-    "title": "Regionaal Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
+    "title": "Regionaal Dashboard Coronavirus | COVID-19 | Rijksoverheid.nl",
     "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
     "url": "https://coronadashboard.rijksoverheid.nl/regio"
   },
@@ -718,7 +710,7 @@
     "barscale_titel": "Gemeld aantal ziekenhuisopnames per dag",
     "extra_uitleg": "Aantal mensen uit deze veiligheidsregio met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer laat het aantal ziekenhuisopnames - inclusief directe IC opnames - zien dat op één dag gemeld is. Dit kunnen ook meldingen zijn van opnames van eerdere dagen. Patiënten kunnen in een ziekenhuis elders in Nederland zijn opgenomen.",
     "map_titel": "Verdeling ziekenhuisopnames in {{safetyRegion}}",
-    "map_toelichting": "Deze kaart laat zien in welke gemeenten of veiligheidsregio’s patiënten wonen die met COVID-19 in het ziekenhuis zijn opgenomen. Patiënten kunnen ook in een ziekenhuis in een ander deel van Nederland worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE. Het Flevoziekenhuis deelt zijn COVID-19 opnames op reguliere afdelingen op dit moment niet met Stichting NICE. Daardoor zijn de cijfers van sommige veiligheidsregio’s en gemeenten op de kaart mogelijk lager dan in werkelijkheid het geval is. Let op: met ingang van 5 februari is de kleurschaal veranderd, zodat beter te zien is welke gemeenten en regio’s geen ziekenhuisopnames melden.",
+    "map_toelichting": "Deze kaart laat zien in welke gemeenten of veiligheidsregio’s patiënten wonen die met COVID-19 in het ziekenhuis zijn opgenomen. Patiënten kunnen ook in een ziekenhuis in een ander deel van Nederland worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE. Het Flevoziekenhuis deelt zijn COVID-19 opnames op reguliere afdelingen op dit moment niet met Stichting NICE. Daardoor zijn de cijfers van sommige veiligheidsregio’s en gemeenten op de kaart mogelijk lager dan in werkelijkheid het geval is.",
     "linechart_titel": "Ziekenhuisopnames over tijd",
     "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "bron": {
@@ -727,7 +719,7 @@
     },
     "linechart_description": "In deze grafiek staan de ziekenhuisopnames (inclusief directe IC opnames) vermeld op de dag dat mensen ook echt zijn opgenomen, in plaats van op de dag dat ze gemeld zijn. Zo kunnen we namelijk de ontwikkeling van het coronavirus in Nederland goed zien. Let op: omdat het aanmelden van ziekenhuisopnames vaak een paar dagen later gebeurt, zijn de meest recente dagen nooit compleet en kan het lijken alsof het aantal ziekenhuisopnames afneemt terwijl dit niet zo is.",
     "metadata": {
-      "title": "Ziekenhuisopnames inwoners {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Ziekenhuisopnames inwoners {{safetyRegionName}} | Dashboard coronavirus | Rijksoverheid.nl",
       "description": "Overzicht van het aantal mensen in de veiligheidsregio {{safetyRegionName}} die met COVID-19 in het ziekenhuis zijn opgenomen."
     },
     "titel_kpi": "Het aantal ziekenhuisopnames dat op één dag gemeld is.",
@@ -758,7 +750,7 @@
     "barscale_toelichting": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
     "barscale_screenreader_text": "{{value}} positief geteste mensen per dag.",
     "kpi_titel": "Aantal positief geteste mensen",
-    "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn en COVID-19 hebben. Een deel van de meldingen zijn positieve tests van eerdere dagen, die later zijn doorgegeven.\n\nLet op: door het winterweer zijn weinig mensen getest op 7 en 8 februari. Dit heeft invloed op de cijfers van de dagen daarna.",
+    "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn en COVID-19 hebben. Een deel van de meldingen zijn positieve tests van eerdere dagen, die later zijn doorgegeven.",
     "map_titel": "Verdeling positief geteste mensen in {{safetyRegion}}",
     "map_toelichting": "Deze kaart laat zien van hoeveel mensen in de gemeenten van deze veiligheidsregio's gisteren gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
     "linechart_titel": "Verloop over tijd",
@@ -777,23 +769,8 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
     },
-    "cluster_datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "cluster_bron": {
-      "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
-      "text": "RIVM",
-      "dowload": ""
-    },
-    "cluster_titel": "Clusters van positief geteste personen",
-    "cluster_toelichting": "---",
-    "cluster_barscale_titel": "Aantal actieve clusters",
-    "cluster_barscale_toelichting": "---",
-    "cluster_barscale_screenreader_text": "{{value}} actieve clusters.",
-    "cluster_gemiddelde_titel": "Gemiddelde grootte actieve clusters",
-    "cluster_gemiddelde_toelichting": "---.",
-    "cluster_linechart_titel": "Verloop actieve clusters over tijd",
-    "cluster_linechart_toelichting": "---",
     "metadata": {
-      "title": "Positief geteste mensen in {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Positief geteste mensen in {{safetyRegionName}} | Dashboard coronavirus | Rijksoverheid.nl",
       "description": "Overzicht van het aantal mensen in de veiligheidsregio {{safetyRegionName}} die positief getest zijn en COVID-19 hebben."
     },
     "reference": {
@@ -829,7 +806,7 @@
     "graph_average_label_text_rwzi": "Meetwaarde locatie {{name}}",
     "average": "Gemiddelde",
     "metadata": {
-      "title": "Rioolwatermeting in {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Rioolwatermeting in {{safetyRegionName}} | Dashboard coronavirus | Rijksoverheid.nl",
       "description": "Overzicht van rioolwatermetingen en aangetroffen COVID-19 virusdeeltjes in de veiligheidsregio {{safetyRegionName}}."
     },
     "graph_daily_label_text_rwzi": "Meetwaarden locatie ({{name}})",
@@ -837,7 +814,7 @@
     "graph_range_description": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners over tijd",
     "titel_kpi": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners",
     "total_installation_count_titel": "Aantal meetlocaties",
-    "total_installation_count_description": "Wekelijks aantal rioolwaterzuiveringsinstallaties die minimaal één keer een meting hebben gerapporteerd. Het weekgemiddelde wordt berekend door het gemiddelde te nemen van alle metingen op deze locaties. Per week kan dit aantal variëren omdat niet alle metingen altijd lukken. Let op: door de vrieskou is het niet mogelijk op alle locaties goede metingen van het rioolwater te doen. Dit heeft deze week invloed op de rioolwatercijfers.",
+    "total_installation_count_description": "Wekelijks aantal rioolwaterzuiveringsinstallaties die minimaal één keer een meting hebben gerapporteerd. Het weekgemiddelde wordt berekend door het gemiddelde te nemen van alle metingen op deze locaties. Per week kan dit aantal variëren omdat niet alle metingen altijd lukken. Let op: door de vrieskou was het de afgelopen week niet mogelijk op alle locaties goede metingen van het rioolwater te doen. Dit heeft ook deze week nog invloed op de rioolwatercijfers.",
     "rwzi_abbrev": "",
     "reference": {
       "href": "/verantwoording#rioolwater",
@@ -851,7 +828,9 @@
       }
     },
     "kpi_titel": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners",
-    "bar_chart_accessibility_description": ""
+    "bar_chart_accessibility_description": "",
+    "display_outliers": "Toon uitschieters",
+    "hide_outliers": "Verberg uitschieters"
   },
   "gemeente_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Ziekenhuisopnames",
@@ -862,7 +841,7 @@
     "barscale_titel": "Gemeld aantal ziekenhuisopnames per dag",
     "extra_uitleg": "Aantal mensen uit deze gemeente met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer laat het aantal ziekenhuisopnames - inclusief directe IC opnames - zien dat op één dag gemeld is. Dit kunnen ook meldingen zijn van opnames van eerdere dagen. Patiënten kunnen in een ziekenhuis elders in Nederland zijn opgenomen.",
     "map_titel": "Verdeling ziekenhuisopnames in veiligheidsregio van {{municipality}}",
-    "map_toelichting": "Deze kaart laat zien in welke gemeenten of veiligheidsregio’s patiënten wonen die met COVID-19 in het ziekenhuis zijn opgenomen. Patiënten kunnen ook in een ziekenhuis in een ander deel van Nederland worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE. Het Flevoziekenhuis deelt zijn COVID-19 opnames op reguliere afdelingen op dit moment niet met Stichting NICE. Daardoor zijn de cijfers van sommige veiligheidsregio’s en gemeenten op de kaart mogelijk lager dan in werkelijkheid het geval is. Let op: met ingang van 5 februari is de kleurschaal veranderd, zodat beter te zien is welke gemeenten en regio’s geen ziekenhuisopnames melden.",
+    "map_toelichting": "Deze kaart laat zien in welke gemeenten of veiligheidsregio’s patiënten wonen die met COVID-19 in het ziekenhuis zijn opgenomen. Patiënten kunnen ook in een ziekenhuis in een ander deel van Nederland worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE. Het Flevoziekenhuis deelt zijn COVID-19 opnames op reguliere afdelingen op dit moment niet met Stichting NICE. Daardoor zijn de cijfers van sommige veiligheidsregio’s en gemeenten op de kaart mogelijk lager dan in werkelijkheid het geval is.",
     "linechart_titel": "Ziekenhuisopnames over tijd",
     "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "bron": {
@@ -871,7 +850,7 @@
     },
     "linechart_description": "In deze grafiek staan de ziekenhuisopnames (inclusief directe IC opnames) vermeld op de dag dat mensen ook echt zijn opgenomen, in plaats van op de dag dat ze gemeld zijn. Zo kunnen we namelijk de ontwikkeling van het coronavirus in Nederland goed zien. Let op: omdat het aanmelden van ziekenhuisopnames vaak een paar dagen later gebeurt, zijn de meest recente dagen nooit compleet en kan het lijken alsof het aantal ziekenhuisopnames afneemt terwijl dit niet zo is.",
     "metadata": {
-      "title": "Ziekenhuisopnames inwoners {{municipalityName}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Ziekenhuisopnames inwoners {{municipalityName}} | Dashboard coronavirus | Rijksoverheid.nl",
       "description": "Overzicht van het aantal mensen in de gemeente {{municipalityName}} die met COVID-19 in het ziekenhuis zijn opgenomen."
     },
     "titel_kpi": "Het aantal ziekenhuisopnames dat op één dag gemeld is.",
@@ -902,7 +881,7 @@
     "barscale_toelichting": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
     "barscale_screenreader_text": "{{value}} positief geteste mensen per dag.",
     "kpi_titel": "Aantal positief geteste mensen",
-    "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn en COVID-19 hebben. Een deel van de meldingen zijn positieve tests van eerdere dagen, die later zijn doorgegeven.\n\nLet op: door het winterweer zijn weinig mensen getest op 7 en 8 februari. Dit heeft invloed op de cijfers van de dagen daarna.",
+    "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn en COVID-19 hebben. Een deel van de meldingen zijn positieve tests van eerdere dagen, die later zijn doorgegeven.",
     "map_titel": "Verdeling positief geteste mensen in veiligheidsregio van {{municipality}}",
     "map_toelichting": "Deze kaart laat zien van hoeveel mensen in deze gemeente en in andere gemeenten in dezelfde veiligheidsregio gisteren gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
     "linechart_titel": "Verloop over tijd",
@@ -922,7 +901,7 @@
       "text": "RIVM"
     },
     "metadata": {
-      "title": "Positief geteste mensen in {{municipalityName}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Positief geteste mensen in {{municipalityName}} | Dashboard coronavirus | Rijksoverheid.nl",
       "description": "Overzicht van het aantal mensen in de gemeente {{municipalityName}} die positief getest zijn en COVID-19 hebben."
     },
     "titel_kpi": "Positief geteste mensen per dag",
@@ -959,12 +938,12 @@
     "graph_average_label_text_rwzi": "Meetwaarde locatie {{name}}",
     "average": "Gemiddelde",
     "metadata": {
-      "title": "Rioolwatermeting in {{municipalityName}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Rioolwatermeting in {{municipalityName}} | Dashboard coronavirus | Rijksoverheid.nl",
       "description": "Overzicht van rioolwatermetingen en de hoeveelheid aangetroffen COVID-19 virusdeeltjes in de gemeente {{municipalityName}}."
     },
     "nodata_sidebar": "Deze informatie is niet beschikbaar voor deze gemeente.",
     "total_installation_count_titel": "Aantal meetlocaties",
-    "total_installation_count_description": "Wekelijks aantal rioolwaterzuiveringsinstallaties die minimaal één keer een meting hebben gerapporteerd. Het weekgemiddelde wordt berekend door het gemiddelde te nemen van alle metingen op deze locaties. Per week kan dit aantal variëren omdat niet alle metingen altijd lukken. Let op: door de vrieskou is het niet mogelijk op alle locaties goede metingen van het rioolwater te doen. Dit heeft deze week invloed op de rioolwatercijfers.",
+    "total_installation_count_description": "Wekelijks aantal rioolwaterzuiveringsinstallaties die minimaal één keer een meting hebben gerapporteerd. Het weekgemiddelde wordt berekend door het gemiddelde te nemen van alle metingen op deze locaties. Per week kan dit aantal variëren omdat niet alle metingen altijd lukken. Let op: door de vrieskou was het de afgelopen week niet mogelijk op alle locaties goede metingen van het rioolwater te doen. Dit heeft ook deze week nog invloed op de rioolwatercijfers.",
     "rwzi_abbrev": "Rioolwaterzuiveringsinstallatie",
     "graph_daily_label_text_rwzi": "Meetwaarden locatie ({{name}})",
     "graph_selected_rwzi_placeholder": "Selecteer locatie",
@@ -981,13 +960,15 @@
       }
     },
     "kpi_titel": "Gemiddelde aantal virusdeeltjes per 100.000 inwoners",
-    "bar_chart_accessibility_description": ""
+    "bar_chart_accessibility_description": "",
+    "display_outliers": "Toon uitschieters",
+    "hide_outliers": "Verberg uitschieters"
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "De risicokaart van Nederland",
-    "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. [Meer informatie over de risiconiveaus](/over-risiconiveaus).\n\nBij elk risiconiveau horen bepaalde maatregelen. Die maatregelen staan in de routekaart die het kabinet heeft gemaakt. **Er geldt een landelijke lockdown tot en met ten minste 2 maart. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**",
+    "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. De laatste keer is dit op 17 februari gebeurd. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. [Meer informatie over de risiconiveaus](/over-risiconiveaus).\n\n**De landelijke lockdown blijft van kracht tot en met ten minste 2 maart. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**",
     "metadata": {
-      "title": "Risiconiveaus per veiligheidsregio | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Risiconiveaus per veiligheidsregio | Dashboard coronavirus | Rijksoverheid.nl",
       "description": "Overzicht van het huidige risiconiveau per veiligheidsregio in Nederland."
     },
     "belangrijk_bericht": "Er geldt een [landelijke lockdown](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen) tot en met ten minste 2 maart."
@@ -996,7 +977,7 @@
     "selecteer_titel": "Selecteer een gemeente",
     "selecteer_toelichting": "",
     "metadata": {
-      "title": "Overzicht gemeentes | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Overzicht gemeentes | Dashboard coronavirus | Rijksoverheid.nl",
       "description": "Overzichtspagina gemeentes in Nederland."
     }
   },
@@ -1008,7 +989,7 @@
   },
   "escalatie_niveau": {
     "titel": "Risiconiveaus",
-    "toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. [Meer informatie over de risiconiveaus](/over-risiconiveaus).\n\nBij elk risiconiveau horen bepaalde maatregelen. Die maatregelen staan in de routekaart die het kabinet heeft gemaakt. **Er geldt een landelijke lockdown tot en met ten minste 2 maart. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**",
+    "toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. De laatste keer is dit op 17 februari gebeurd. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. [Meer informatie over de risiconiveaus](/over-risiconiveaus).\n\n**De landelijke lockdown blijft van kracht tot en met ten minste 2 maart. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**",
     "types": {
       "1": {
         "titel": "Waakzaam",
@@ -1034,7 +1015,10 @@
     "legenda": {
       "titel": "Legenda",
       "geen_regio": "geen regio's",
-      "regios": "{{amount}} regio's"
+      "regios": {
+        "singular": "{{amount}} regio",
+        "plural": "{{amount}} regio's"
+      }
     },
     "valid_from": "Geldig vanaf {{validFrom}}",
     "sidebar_label": "Risiconiveau:",
@@ -1052,72 +1036,72 @@
     }
   },
   "positief_geteste_personen_ggd": {
-    "titel": "Percentage positief geteste personen via GGD teststraten",
-    "summary_title": "{{percentage}} van de GGD testen was positief",
+    "titel": "Percentage positief geteste personen via GGD-teststraten",
+    "summary_title": "{{percentage}} van de GGD-testen was positief",
     "summary_link_cta": "Lees meer",
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
     "bron": {
-      "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://data.rivm.nl/covid-19/COVID-19_uitgevoerde_testen.html",
       "text": "RIVM"
     },
     "toelichting": "De cijfers hieronder geven inzicht in het aantal tests via de GGD-teststraten en van welk deel daarvan de uitslag positief is. Als het percentage positieve tests toeneemt kan dat erop wijzen dat de verspreiding van het virus toeneemt. Let op dat de meeste testen via de GGD lopen, maar dit niet voor alle testen geldt. Daarom wijkt het absolute aantal positief geteste personen af van het aantal positief testen door de GGD",
-    "totaal_getest_week_titel": "Gemiddeld aantal GGD testen per dag",
+    "totaal_getest_week_titel": "Gemiddeld aantal GGD-testen per dag",
     "totaal_getest_week_uitleg": "Het gemiddelde aantal testen per dag, berekend over zeven dagen. De testen waarvan de uitslag nog niet bekend is, zijn niet meegenomen in dit gemiddelde.",
     "positief_getest_week_titel": "Positief geteste personen",
     "positief_getest_week_uitleg": "Percentage positieve testen in de GGD-teststraten, waarvan de uitslag bekend is. Dit is het gemiddelde over zeven dagen. Voor het berekenen van het percentage worden alleen tests meegeteld waarvan de testuitslag bekend is.",
     "positief_getest_getest_week_uitleg": "Dit zijn {{numerator}} van {{denominator}} tests met een bekende uitslag.",
     "linechart_percentage_titel": "Percentage positieve testen over tijd",
-    "linechart_percentage_toelichting": "Deze grafiek laat het dagelijks percentage GGD testen zien met een positieve uitslag, ten opzichte van alle GGD testen van die dag waarvan de uitslag bekend is. De gegevens zijn gesorteerd op de datum waarop de test bij de GGD plaatsvond. Het duurt gemiddeld één tot twee dagen voordat testuitslagen bekend zijn.",
+    "linechart_percentage_toelichting": "Deze grafiek laat het dagelijks percentage GGD-testen zien met een positieve uitslag, ten opzichte van alle GGD-testen van die dag waarvan de uitslag bekend is. De gegevens zijn gesorteerd op de datum waarop de test bij de GGD plaatsvond. Het duurt gemiddeld één tot twee dagen voordat testuitslagen bekend zijn.",
     "linechart_totaltests_titel": "Aantal testen over tijd",
     "linechart_totaltests_toelichting": "Deze grafiek laat het dagelijks aantal bekende testuitslagen in de GGD-teststraten over tijd zien, en hoeveel daarvan een positieve uitslag hebben. De gegevens zijn gesorteerd op de datum waarop de test bij de GGD plaatsgevond. Het duurt gemiddeld één tot twee dagen voordat testuitslagen bekend zijn.",
-    "linechart_totaltests_legend_label": "GGD testen waarvan uitslag bekend is",
-    "linechart_positivetests_legend_label": "GGD testen met een positieve uitslag",
+    "linechart_totaltests_legend_label": "GGD-testen waarvan uitslag bekend is",
+    "linechart_positivetests_legend_label": "GGD-testen met een positieve uitslag",
     "reference": {
       "href": "/verantwoording#positieve-testen",
       "text": "Lees meer in de cijferverantwoording."
     },
     "bronnen": {
       "rivm": {
-        "download": "",
-        "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+        "download": "https://data.rivm.nl/covid-19/COVID-19_uitgevoerde_testen.csv",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_uitgevoerde_testen.html",
         "text": "RIVM"
       }
     }
   },
   "over_risiconiveaus_metadata": {
-    "title": "Risiconiveaus Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
+    "title": "Risiconiveaus | Dashboard coronavirus | Rijksoverheid.nl",
     "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
     "url": "https://coronadashboard.rijksoverheid.nl/over-risiconiveaus"
   },
   "veiligheidsregio_positief_geteste_personen_ggd": {
-    "titel": "Percentage positief geteste personen via GGD teststraten in {{safetyRegion}}",
-    "summary_title": "{{percentage}} van de GGD testen was positief",
+    "titel": "Percentage positief geteste personen via GGD-teststraten in {{safetyRegion}}",
+    "summary_title": "{{percentage}} van de GGD-testen was positief",
     "summary_link_cta": "Lees meer",
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
     "bron": {
-      "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "href": "https://data.rivm.nl/covid-19/COVID-19_uitgevoerde_testen.html",
       "text": "RIVM"
     },
     "toelichting": "De cijfers hieronder geven inzicht in het aantal tests via de GGD-teststraten en van welk deel daarvan de uitslag positief is. Als het percentage positieve tests toeneemt kan dat erop wijzen dat de verspreiding van het virus toeneemt. Let op dat de meeste testen via de GGD lopen, maar dit niet voor alle testen geldt. Daarom wijkt het absolute aantal positief geteste personen af van het aantal positief testen door de GGD.",
-    "totaal_getest_week_titel": "Gemiddeld aantal GGD testen per dag",
+    "totaal_getest_week_titel": "Gemiddeld aantal GGD-testen per dag",
     "totaal_getest_week_uitleg": "Het gemiddelde aantal testen per dag, berekend over zeven dagen. De testen waarvan de uitslag nog niet bekend is, zijn niet meegenomen in dit gemiddelde.",
     "positief_getest_week_titel": "Positief geteste personen",
     "positief_getest_week_uitleg": "Percentage positieve testen in de GGD-teststraten, waarvan de uitslag bekend is. Dit is het gemiddelde over zeven dagen. Voor het berekenen van het percentage worden alleen tests meegeteld waarvan de testuitslag bekend is.",
     "positief_getest_getest_week_uitleg": "Dit zijn {{numerator}} van {{denominator}} geteste personen",
     "linechart_percentage_titel": "Percentage positieve testen over tijd",
-    "linechart_percentage_toelichting": "Deze grafiek laat het dagelijks percentage GGD testen zien met een positieve uitslag, ten opzichte van alle GGD testen van die dag waarvan de uitslag bekend is. De gegevens zijn gesorteerd op de datum waarop de test bij de GGD plaatsvond. Het duurt gemiddeld één tot twee dagen voordat testuitslagen bekend zijn.",
+    "linechart_percentage_toelichting": "Deze grafiek laat het dagelijks percentage GGD-testen zien met een positieve uitslag, ten opzichte van alle GGD-testen van die dag waarvan de uitslag bekend is. De gegevens zijn gesorteerd op de datum waarop de test bij de GGD plaatsvond. Het duurt gemiddeld één tot twee dagen voordat testuitslagen bekend zijn.",
     "linechart_totaltests_titel": "Aantal testen over tijd",
-    "linechart_totaltests_toelichting": "Deze grafiek laat het dagelijks aantal bekende testuitslagen in de GGD-teststraten over tijd zien, en hoeveel daarvan een positieve uitslag hebben. De gegevens zijn gesorteerd op de datum waarop de test bij de GGD plaatsgevond. Het duurt gemiddeld één tot twee dagen voordat testuitslagen bekend zijn.",
-    "linechart_totaltests_legend_label": "GGD testen waarvan uitslag bekend is",
-    "linechart_positivetests_legend_label": "GGD testen met een positieve uitslag",
+    "linechart_totaltests_toelichting": "Deze grafiek laat het dagelijks aantal bekende testuitslagen in de GGD-teststraten over tijd zien, en hoeveel daarvan een positieve uitslag hebben. De gegevens zijn gesorteerd op de datum waarop de test bij de GGD plaatsvond. Het duurt gemiddeld één tot twee dagen voordat testuitslagen bekend zijn.",
+    "linechart_totaltests_legend_label": "GGD-testen waarvan uitslag bekend is",
+    "linechart_positivetests_legend_label": "GGD-testen met een positieve uitslag",
     "reference": {
       "href": "/verantwoording#positieve-testen",
       "text": "Lees meer in de cijferverantwoording."
     },
     "bronnen": {
       "rivm": {
-        "download": "",
-        "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+        "download": "https://data.rivm.nl/covid-19/COVID-19_uitgevoerde_testen.csv",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_uitgevoerde_testen.html",
         "text": "RIVM"
       }
     }
@@ -1138,7 +1122,7 @@
     "map_toelichting": "Deze kaarten laten zien hoe de oversterfte in verpleeghuizen is in Nederland per dag.",
     "titel_sidebar": "Sterfte per dag",
     "metadata": {
-      "title": "Overleden bewoners verpleeghuizen in {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Overleden bewoners verpleeghuizen in {{safetyRegionName}} | Dashboard coronavirus | Rijksoverheid.nl",
       "description": "Aantal gemelde verpleeghuisbewoners dat in veiligheidsregio {{safetyRegionName}} overlijdt aan de gevolgen van het coronavirus."
     },
     "reference": {
@@ -1168,7 +1152,7 @@
     "linechart_titel": "Totaal aantal besmette locaties over tijd",
     "barscale_screenreader_text": "{{value}} nieuwe locaties waarbij tenminste één bewoner positief getest is, per dag.",
     "metadata": {
-      "title": "Besmette verpleeghuizen in {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Besmette verpleeghuizen in {{safetyRegionName}} | Dashboard coronavirus | Rijksoverheid.nl",
       "description": "Overzicht van verpleeghuislocaties in veiligheidsregio {{safetyRegionName}} waar tenminste één COVID-19 besmetting is vastgesteld."
     },
     "titel_sidebar": "Verpleeghuiszorg",
@@ -1204,7 +1188,7 @@
     "map_titel": "Verdeling positief geteste mensen in Nederland",
     "map_toelichting": "Deze kaarten laten zien van hoeveel mensen gisteren is gemeld dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
     "metadata": {
-      "title": "Positief geteste bewoners verpleeghuizen in {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Positief geteste bewoners verpleeghuizen in {{safetyRegionName}} | Dashboard coronavirus | Rijksoverheid.nl",
       "description": "Overzicht aantal bewoners van verpleeghuizen in veiligheidsregio {{safetyRegionName}} waarbij COVID-19-besmetting is vastgesteld."
     },
     "reference": {
@@ -1221,7 +1205,7 @@
   },
   "data_warning_text": "",
   "veelgestelde_vragen_metadata": {
-    "title": "Veelgestelde vragen | Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
+    "title": "Veelgestelde vragen | Dashboard coronavirus | Rijksoverheid.nl",
     "description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
     "url": "https://coronadashboard.government.nl/veelgestelde-vragen"
   },
@@ -1234,7 +1218,7 @@
   "gedrag_onderwerpen": {
     "wash_hands": "Was vaak je handen",
     "keep_distance": "Houd 1,5 meter afstand",
-    "work_from_home": "Werk zoveel mogelijk thuis",
+    "work_from_home": "Werk volledig thuis als dat kan",
     "avoid_crowds": "Vermijd drukke plekken",
     "symptoms_stay_home": "Blijf thuis bij klachten",
     "symptoms_get_tested": "Laat je testen bij klachten",
@@ -1266,7 +1250,7 @@
   },
   "nl_gedrag": {
     "metadata": {
-      "title": "Naleving en Draagvlak | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Naleving en Draagvlak | Dashboard coronavirus | Rijksoverheid.nl",
       "description": "Landelijk overzicht van naleving en draagvlak."
     },
     "pagina": {
@@ -1296,8 +1280,8 @@
       }
     },
     "verdeling_in_nederland": {
-      "titel": "Verschillen tussen Veiligheidsregio's",
-      "intro": "Selecteer een gedragsregel om de verschillen tussen de Veiligheidsregio’s te zien.",
+      "titel": "Verschillen tussen veiligheidsregio's",
+      "intro": "Selecteer een gedragsregel om de verschillen tussen de veiligheidsregio’s te zien.",
       "onbekend": "Onbekend",
       "legenda_titel": "Percentage"
     },
@@ -1337,7 +1321,7 @@
   },
   "regionaal_gedrag": {
     "metadata": {
-      "title": "Naleving en Draagvlak | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Naleving en Draagvlak | Dashboard coronavirus | Rijksoverheid.nl",
       "description": "Landelijk overzicht van naleving en draagvlak."
     },
     "pagina": {
@@ -1427,7 +1411,7 @@
   },
   "infected_age_groups": {
     "title": "Verdeling naar leeftijd",
-    "description": "De blauwe rechterbalken in deze grafiek laten zien tot welke leeftijdsgroep positief geteste personen behoren. De grijze linkerbalken tonen hoe groot elke leeftijdsgroep is ten opzichte van de hele Nederlandse bevolking. De blauwe en grijze balken laten samen zien of leeftijdsgroepen naar verhouding meer of minder positief geteste personen hebben. Bijvoorbeeld: van alle positief geteste personen is 10% een dertiger (blauwe balk) en van alle Nederlanders is 14% een dertiger (grijze balk). De leeftijdsgroep dertigers heeft in dit voorbeeld naar verhouding minder positief geteste personen. De grafiek wordt dagelijks bijgewerkt en gaat alleen over de meest recent gemelde gevallen.",
+    "description": "De blauwe rechterbalken in deze grafiek laten zien tot welke leeftijdsgroep positief geteste personen behoren. De grijze linkerbalken tonen hoe groot elke leeftijdsgroep is ten opzichte van de hele Nederlandse bevolking. De blauwe en grijze balken laten samen zien of leeftijdsgroepen naar verhouding meer of minder positief geteste personen hebben. Bijvoorbeeld: van alle positief geteste personen is 16% een twintiger (blauwe balk) en van alle Nederlanders is 13% een twintiger (grijze balk). De leeftijdsgroep twintigers heeft in dit voorbeeld naar verhouding meer positief geteste personen. De grafiek wordt dagelijks bijgewerkt en gaat alleen over de meest recent gemelde gevallen.",
     "example": "Bijvoorbeeld: Van alle positief geteste mensen is {{infectedPercentage}} tussen de {{ageGroupRange}} jaar. Van alle Nederlanders is {{ageGroupPercentage}} tussen de {{ageGroupRange}} jaar.",
     "graph": {
       "age_group_percentage_title": "Verdeling leeftijdsgroepen in Nederland",
@@ -1458,7 +1442,7 @@
     "map_titel": "Verdeling besmette locaties in Nederland",
     "map_toelichting": "Deze kaart toont het aantal locaties voor gehandicaptenzorg waar in de afgelopen 28 dagen minstens één (nieuwe) vastgestelde COVID-19 besmetting op basis van een positieve test is gemeld.",
     "metadata": {
-      "title": "Besmette gehandicaptenzorglocaties | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Besmette gehandicaptenzorglocaties | Dashboard coronavirus | Rijksoverheid.nl",
       "description": "Landelijk overzicht van gehandicaptenzorglocaties waar tenminste één COVID-19 besmetting is vastgesteld."
     },
     "titel_sidebar": "Gehandicaptenzorg",
@@ -1490,7 +1474,7 @@
     "map_titel": "Verdeling positief geteste bewoners in Nederland",
     "map_toelichting": "Deze kaarten laten zien van hoeveel bewoners gisteren is gemeld dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
     "metadata": {
-      "title": "Positief geteste bewoners gehandicaptenzorglocaties | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Positief geteste bewoners gehandicaptenzorglocaties | Dashboard coronavirus | Rijksoverheid.nl",
       "description": "Landelijk overzicht van het aantal bewoners van gehandicaptenzorglocaties die positief getest zijn en COVID-19 hebben."
     },
     "titel_kpi": "Aantal positief geteste bewoners van gehandicapteninstellingen per dag",
@@ -1518,7 +1502,7 @@
     "map_titel": "Gehandicaptenzorg – sterfte",
     "map_toelichting": "Deze kaarten laten zien hoe de oversterfte in gehandicaptenzorglocatie is in Nederland per dag.",
     "metadata": {
-      "title": "Overleden bewoners gehandicaptenzorglocaties | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Overleden bewoners gehandicaptenzorglocaties | Dashboard coronavirus | Rijksoverheid.nl",
       "description": "Landelijk aantal gemelde gehandicaptenzorglocatiebewoners dat in Nederland overlijdt aan de gevolgen van het coronavirus."
     },
     "titel_kpi": "Aantal overleden personen",
@@ -1551,7 +1535,7 @@
     "map_toelichting": "Deze kaarten laten zien hoe de oversterfte in gehandicaptenzorglocaties is in Nederland per dag.",
     "titel_sidebar": "Sterfte per dag",
     "metadata": {
-      "title": "Overleden bewoners gehandicaptenzorglocaties in {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Overleden bewoners gehandicaptenzorglocaties in {{safetyRegionName}} | Dashboard coronavirus | Rijksoverheid.nl",
       "description": "Aantal gemelde gehandicaptenzorglocatiebewoners dat in veiligheidsregio {{safetyRegionName}} overlijdt aan de gevolgen van het coronavirus."
     },
     "reference": {
@@ -1577,7 +1561,7 @@
     "linechart_titel": "Totaal aantal besmette locaties over tijd",
     "barscale_screenreader_text": "{{value}} nieuwe locaties waarbij tenminste één bewoner positief getest is, per dag.",
     "metadata": {
-      "title": "Besmette gehandicaptenzorglocaties in {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Besmette gehandicaptenzorglocaties in {{safetyRegionName}} | Dashboard coronavirus | Rijksoverheid.nl",
       "description": "Overzicht van gehandicaptenzorglocaties in veiligheidsregio {{safetyRegionName}} waar tenminste één COVID-19 besmetting is vastgesteld."
     },
     "titel_sidebar": "Besmettelijke locaties",
@@ -1609,7 +1593,7 @@
     "map_titel": "Verdeling positief geteste mensen in Nederland",
     "map_toelichting": "Deze kaarten laten zien van hoeveel mensen gisteren is gemeld dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
     "metadata": {
-      "title": "Positief geteste bewoners gehandicaptenzorglocaties in {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Positief geteste bewoners gehandicaptenzorglocaties in {{safetyRegionName}} | Dashboard coronavirus | Rijksoverheid.nl",
       "description": "Overzicht aantal bewoners van gehandicaptenzorglocaties in veiligheidsregio {{safetyRegionName}} waarbij COVID-19-besmetting is vastgesteld."
     },
     "reference": {
@@ -1629,7 +1613,7 @@
     "titel_sidebar": "Thuiswonende 70-plussers",
     "titel_kpi": "Aantal positief geteste mensen",
     "metadata": {
-      "title": "Thuiswonende 70-plussers | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Thuiswonende 70-plussers | Dashboard coronavirus | Rijksoverheid.nl",
       "description": "Thuiswonende 70-plussers"
     },
     "section_positive_tested": {
@@ -1681,7 +1665,7 @@
     "titel_sidebar": "Thuiswonende 70-plussers",
     "titel_kpi": "Positief geteste mensen",
     "metadata": {
-      "title": "Thuiswonende 70-plussers in {{safetyRegion}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Thuiswonende 70-plussers in {{safetyRegion}} | Dashboard coronavirus | Rijksoverheid.nl",
       "description": "Thuiswonende 70-plussers in {{safetyRegion}}."
     },
     "section_positive_tested": {
@@ -1730,7 +1714,7 @@
     "titel_sidebar": "Sterfte",
     "titel_kpi": "Gemeld aantal patiënten overleden aan COVID-19 per dag",
     "metadata": {
-      "title": "Sterfte | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Sterfte | Dashboard coronavirus | Rijksoverheid.nl",
       "description": "Aantal overledenen per dag"
     },
     "section_deceased_rivm": {
@@ -1761,11 +1745,11 @@
     "titel_sidebar": "Sterfte",
     "titel_kpi": "Gemeld aantal patiënten overleden aan COVID-19 per dag",
     "metadata": {
-      "title": "Sterfte in {{safetyRegion}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Sterfte in {{safetyRegion}} | Dashboard coronavirus | Rijksoverheid.nl",
       "description": "Aantal overledenen per dag in {{safetyRegion}}"
     },
     "section_deceased_rivm": {
-      "title": "Sterfte",
+      "title": "Sterfte in {{safetyRegion}}",
       "description": "Deze cijfers laten zien van hoeveel patiënten er aan de GGD gemeld is dat ze zijn overleden aan/met COVID-19. Het werkelijke aantal patiënten dat is overleden aan/met COVID-19 is waarschijnlijk hoger, omdat niet alle COVID-19 patiënten getest worden en er geen meldingsplicht geldt voor overlijden aan/met COVID-19. ",
       "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
       "bronnen": {
@@ -1804,11 +1788,11 @@
       "text": "Lees meer in de cijferverantwoording."
     },
     "cbs_message": {
-      "title": "Sterfte iets gedaald in week 4",
-      "published_text": "Publicatiedatum: vrijdag 4 december",
-      "message": "In week 4 (25 tot en met 31 januari 2021) overleden naar schatting 3 750 mensen. Dat zijn ruim 300 meer sterfgevallen dan verwacht voor deze periode. In week 3 overleden 3 823 mensen. Dat meldt het CBS op basis van de voorlopige sterftecijfers per week. Sinds week 39 van 2020 is de wekelijkse sterfte hoger dan verwacht. In de tweede golf van de corona-epidemie overleden tot en met week 4 van 2021 bijna 68 duizend mensen, 9,6 duizend meer dan je in deze periode zou verwachten. De schatting van de sterfte in week 4 zit net binnen het interval van de verwachte sterfte.",
+      "title": "Sterfte verder gedaald, aantal sterfgevallen in week 6 op verwacht niveau",
+      "published_text": "Publicatiedatum: vrijdag 19 februari",
+      "message": "In week 6 (8 tot en met 14 februari 2021) overleden naar schatting 3400 mensen. Dat zijn ongeveer evenveel sterfgevallen als verwacht voor deze periode. In week 5 overleden 3619 mensen. Dat meldt het CBS op basis van de voorlopige sterftecijfers per week. Sinds week 39 van 2020 was de wekelijkse sterfte hoger dan verwacht. De schatting van de sterfte in week 6 zit net onder de verwachte sterfte voor deze periode. Dit betekent niet dat er geen mensen meer overlijden aan COVID-19. Het RIVM registreerde 293 overleden COVID-19-patiënten in week 6 (stand 16 februari).",
       "link": {
-        "href": "https://www.cbs.nl/nl-nl/nieuws/2021/05/sterfte-iets-gedaald-in-week-4",
+        "href": "https://www.cbs.nl/nl-nl/nieuws/2021/07/sterfte-verder-gedaald-aantal-sterfgevallen-in-week-6-op-verwacht-niveau",
         "text": "Website CBS"
       }
     },
@@ -1834,7 +1818,7 @@
     "titel_aanvullendemaatregelen": "Aanvullende informatie",
     "toelichting_aanvullendemaatregelen": "Lokaal of regionaal kunnen aanvullend nog strengere maatregelen gelden. Kijk hiervoor op de website van de veiligheidsregio.",
     "metadata": {
-      "title": "Maatregelen in {{safetyRegionName}} | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Maatregelen in {{safetyRegionName}} | Dashboard coronavirus | Rijksoverheid.nl",
       "description": "Overzicht van de corona maatregelen in de veiligheidsregio {{safetyRegionName}}."
     },
     "subtitel_sidebar": "Er gelden landelijke maatregelen",
@@ -1971,7 +1955,9 @@
       "verwachte_leveringen": "Het linkerdeel van de grafiek laat zien hoeveel vaccins Nederland in totaal heeft gekregen en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal verwachten te krijgen en hoeveel prikken we verwachten te zetten.",
       "vaccin_levering_en_prikken": "Het linkerdeel van de grafiek laat zien hoeveel vaccins Nederland in totaal heeft gekregen en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal verwachten te krijgen en hoeveel prikken we verwachten te zetten.",
       "vaccinatie_draagvlak": "Deze grafiek toont hoeveel procent van de bevolking zelf een prik tegen corona wil hebben."
-    }
+    },
+    "link_source": "Bekijk de databron van \"{{subject}}\" op",
+    "link_download": "Download de databron van \"{{subject}}\" op"
   },
   "deceased_age_groups": {
     "title": "COVID-19 sterfte: verdeling naar leeftijd",
@@ -1996,14 +1982,14 @@
     "titel_sidebar": "Vaccinaties",
     "titel_kpi": "Aantal gezette prikken",
     "metadata": {
-      "title": "Vaccinaties | Dashboard Coronavirus | Rijksoverheid.nl",
+      "title": "Vaccinaties | Dashboard coronavirus | Rijksoverheid.nl",
       "description": "Op 6 januari 2021 is Nederland begonnen met vaccineren. De cijfers op het dashboard coronavirus laten zien hoeveel prikken zijn gezet en hoeveel vaccins er beschikbaar komen."
     },
     "title": "COVID-19-vaccinaties",
     "description": "Vaccineren is de belangrijkste stap naar een samenleving zonder coronaregels. Op 6 januari 2021 is Nederland begonnen met vaccineren. Uiteindelijk komt iedereen van 18 jaar of ouder aan de beurt. De cijfers op deze pagina laten zien hoeveel prikken zijn gezet en hoeveel vaccins er beschikbaar komen.",
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "date_unix": "1612959288",
-    "date_of_insertion_unix": "1612959288",
+    "date_unix": "1613650547",
+    "date_of_insertion_unix": "1613650547",
     "reference": {
       "href": "/verantwoording#vaccinatie",
       "text": "Lees meer over de bron van de vaccinatiecijfers in de cijferverantwoording."
@@ -2035,31 +2021,82 @@
         "download": ""
       }
     },
+    "section_vaccinations_more_information": {
+      "title": "Verwachte data over vaccinaties",
+      "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer:\n- vaccinatiegraad"
+    },
+    "grafiek": {
+      "titel": "Leveringen vaccins en gezette prikken in totaal",
+      "omschrijving": "Het linkerdeel van de grafiek laat zien hoeveel vaccins Nederland in totaal heeft gekregen en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal verwachten te krijgen en hoeveel prikken we verwachten te zetten."
+    },
+    "verwachte_leveringen": {
+      "van_week_tot_week": "Week {{weekNumberFrom}} tot week {{weekNumberTo}}",
+      "van_week_tot_week_klein_scherm": "Week {{weekNumberFrom}} tot {{weekNumberTo}}"
+    },
+    "grafiek_draagvlak": {
+      "titel": "Vaccinatiebereidheid",
+      "omschrijving": "Deze grafiek toont per leeftijdsgroep en in totaal hoeveel procent van de bevolking zelf een prik tegen corona wil hebben. De cijfers komen uit onderzoek waarin wordt gevraagd of mensen een prik willen krijgen. Het onderzoek wordt elke drie weken herhaald.",
+      "kpi_omschrijving": "Percentage van de Nederlandse bevolking dat zelf een prik tegen corona wil hebben",
+      "tooltip_gemiddeld": "Totaal",
+      "leeftijd_jaar": "{{ageGroup}} jaar"
+    },
+    "gezette_prikken": {
+      "title": "Aantal gezette prikken",
+      "estimated_until": "Berekend aantal tot en met {{reportedDate}}",
+      "reported_until": "Gemeld aantal tot en met {{reportedDate}}",
+      "tab_first": {
+        "title": "Berekend aantal",
+        "description": "Dit getal is een rekenkundige aanname van hoeveel prikken in totaal zijn gezet. De GGD-cijfers worden gemeld door de GGD-GHOR en de ziekenhuiscijfers door het LNAZ. Voor de langdurige zorginstellingen maakt het RIVM een berekening door te kijken naar hoeveel vaccins er zijn bezorgd bij priklocaties. [Lees meer over de berekening in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)"
+      },
+      "tab_second": {
+        "title": "Gemeld aantal",
+        "description": "Dit getal laat zien hoeveel prikken zijn gemeld door GGD-GHOR en LNAZ. [Lees meer over de registratie in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)"
+      },
+      "estimated": {
+        "ggd": "gezet door GGD'en",
+        "hospitals": "gezet in ziekenhuizen",
+        "care_institutions": "gezet in langdurige zorginstellingen",
+        "doctors": "gezet bij de huisartsen"
+      },
+      "reported": {
+        "ggd_ghor": "gemeld door GGD-GHOR",
+        "lnaz": "gemeld door LNAZ"
+      }
+    },
+    "expected_page_additions": {
+      "title": "Verwachte toevoegingen aan deze pagina",
+      "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer de vaccinatiegraad.",
+      "additions": [
+        "",
+        "",
+        ""
+      ]
+    },
     "data": {
       "difference": "Do not remove this key. It is required as a temporary workaround",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "626146",
-          "date_unix": "1612959288",
-          "date_of_insertion_unix": "1612959288"
+          "total_vaccinated": "874959",
+          "date_unix": "1613650547",
+          "date_of_insertion_unix": "1613650547"
         }
       },
       "kpi_total": {
         "title": "Aantal gezette prikken",
-        "value": "460252",
+        "value": "687306",
         "description": "",
-        "date_of_report_unix": "1612959288",
-        "date_of_insertion_unix": "1612959288",
+        "date_of_report_unix": "1613650547",
+        "date_of_insertion_unix": "1613650547",
         "administered": [
           {
-            "value": "366436",
+            "value": "592755",
             "description": "gemeld door GGD-GHOR",
-            "report_date": "Gemeld aantal tot en met 9 februari"
+            "report_date": "Gemeld aantal tot en met 17 februari"
           },
           {
-            "value": "93816",
+            "value": "94551",
             "description": "gemeld door LNAZ",
-            "report_date": "Gemeld aantal tot en met 9 februari"
+            "report_date": "Gemeld aantal tot en met 17 februari"
           },
           {
             "value": "",
@@ -2083,30 +2120,30 @@
         "first_tab_title": "Berekend aantal",
         "second_tab_title": "Gemeld aantal",
         "tab_total_estimated": {
-          "value": "626146",
+          "value": "874959",
           "description": "",
-          "date_of_report_unix": "1612959288",
-          "date_of_insertion_unix": "1612959288",
+          "date_of_report_unix": "1613650547",
+          "date_of_insertion_unix": "1613650547",
           "administered": [
             {
-              "value": "366436",
+              "value": "592755",
               "description": "gezet door GGD'en",
-              "report_date": "Gemeld aantal tot en met 9 februari"
+              "report_date": "Gemeld aantal tot en met 17 februari"
             },
             {
-              "value": "93816",
+              "value": "94551",
               "description": "gezet in ziekenhuizen",
-              "report_date": "Gemeld aantal tot en met 9 februari"
+              "report_date": "Gemeld aantal tot en met 17 februari"
             },
             {
-              "value": "165894",
+              "value": "184706",
               "description": "gezet in langdurige zorginstellingen",
-              "report_date": "Berekend aantal tot en met 9 februari"
+              "report_date": "Berekend aantal tot en met 17 februari"
             },
             {
-              "value": "",
-              "description": "",
-              "report_date": ""
+              "value": "2947",
+              "description": "gezet in huisartsenpraktijken",
+              "report_date": "Berekend aantal tot en met 17 februari"
             },
             {
               "value": "",
@@ -2114,7 +2151,7 @@
               "report_date": ""
             }
           ],
-          "description_first": "Dit getal is een rekenkundige aanname van hoeveel prikken in totaal zijn gezet. De GGD-cijfers worden gemeld door de GGD-GHOR en de ziekenhuiscijfers door het LNAZ. Voor de langdurige zorginstellingen maakt het RIVM een berekening door te kijken naar hoeveel vaccins er zijn bezorgd bij priklocaties. [Lees meer over de berekening in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)",
+          "description_first": "Dit getal is een berekening van hoeveel prikken in totaal zijn gezet. De GGD-cijfers worden gemeld door de GGD-GHOR en de ziekenhuiscijfers door het LNAZ. Voor de langdurige zorginstellingen en huisartsenpraktijken maakt het RIVM een berekening door te kijken naar hoeveel vaccins er zijn bezorgd bij priklocaties. [Lees meer over de berekening in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)",
           "description_second": ""
         }
       },
@@ -2122,8 +2159,8 @@
         "title": "Verwachte levering goedgekeurde vaccins",
         "value": "2473700",
         "description": "Aantal goedgekeurde vaccins dat Nederland de komende zes weken verwacht te krijgen. Elke week ontvangt Nederland een deel van de vaccins. Mensen hebben twee prikken nodig voor een volledige vaccinatie.",
-        "date_of_report_unix": "1612384200",
-        "date_of_insertion_unix": "1612384200"
+        "date_of_report_unix": "1613648204",
+        "date_of_insertion_unix": "1613648204"
       },
       "kpi_stock": {
         "title": "",
@@ -2157,29 +2194,13 @@
       },
       "kpi_expected_page_additions": {
         "title": "Verwachte toevoegingen aan deze pagina",
-        "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer:",
+        "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer de vaccinatiegraad.",
         "additions": [
-          "Vaccinatiebereidheid",
-          "Vaccinatiegraad",
+          "",
+          "",
           ""
         ]
       }
-    },
-    "section_vaccinations_more_information": {
-      "title": "Verwachte data over vaccinaties",
-      "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer:\n- vaccinatiebereidheid\n- vaccinatiegraad"
-    },
-    "grafiek": {
-      "titel": "Leveringen vaccins en gezette prikken in totaal",
-      "omschrijving": "Het linkerdeel van de grafiek laat zien hoeveel vaccins Nederland in totaal heeft gekregen en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal verwachten te krijgen en hoeveel prikken we verwachten te zetten."
-    },
-    "verwachte_leveringen": {
-      "van_week_tot_week": "Week {{weekNumberFrom}} tot week {{weekNumberTo}}",
-      "van_week_tot_week_klein_scherm": "Week {{weekNumberFrom}} tot {{weekNumberTo}}"
-    },
-    "grafiek_draagvlak": {
-      "titel": "Vaccinatiebereidheid",
-      "omschrijving": "Deze grafiek toont hoeveel procent van de bevolking zelf een prik tegen corona wil hebben. Het cijfer komt voort uit onderzoek waarin wordt gevraagd of mensen een prik willen krijgen. Het onderzoek wordt elke drie weken herhaald."
     }
   },
   "editorial_detail": {
@@ -2193,7 +2214,7 @@
     }
   },
   "articles_metadata": {
-    "title": "Artikelen | Coronavirus COVID-19 Dashboard | Rijksoverheid.nl",
+    "title": "Artikelen | Dashboard coronavirus | Rijksoverheid.nl",
     "description": "",
     "url": "https://coronadashboard.rijksoverheid.nl/artikelen"
   },
@@ -2205,12 +2226,12 @@
     "title": "De actuele situatie in {{the_netherlands}}",
     "the_netherlands": "Nederland",
     "metadata": {
-      "title": "Dashboard Coronavirus COVID-19 | Rijksoverheid.nl",
+      "title": "Dashboard coronavirus | COVID-19 | Rijksoverheid.nl",
       "description": "Informatie over de ontwikkeling van het coronavirus in Nederland."
     },
     "risiconiveaus": {
       "selecteer_titel": "De risicokaart van Nederland",
-      "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. \n\n**Bij elk risiconiveau horen bepaalde maatregelen. Die maatregelen staan in de routekaart die het kabinet heeft gemaakt. Er geldt een landelijke lockdown tot en met ten minste 2 maart. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**"
+      "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. De laatste keer is dit op 17 februari gebeurd. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. [Meer informatie over de risiconiveaus](/over-risiconiveaus).\n\n**De landelijke lockdown blijft van kracht tot en met ten minste 2 maart. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**"
     },
     "data_sitemap_titel": "Onderwerpen op dit dashboard",
     "data_sitemap_toelichting": "Ga direct naar de volgende onderwerpen:",
@@ -2297,7 +2318,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "De risicokaart van Nederland",
-      "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. \n\n**Bij elk risiconiveau horen bepaalde maatregelen. Die maatregelen staan in de routekaart die het kabinet heeft gemaakt. Er geldt een landelijke lockdown tot en met ten minste 2 maart. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**"
+      "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. De laatste keer is dit op 17 februari gebeurd. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. [Meer informatie over de risiconiveaus](/over-risiconiveaus).\n\n**De landelijke lockdown blijft van kracht tot en met ten minste 2 maart. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**"
     },
     "risoconiveau_maatregelen": {
       "title": "Risiconiveau & maatregelen",
@@ -2370,7 +2391,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "De risicokaart van Nederland",
-      "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. \n\n**Bij elk risiconiveau horen bepaalde maatregelen. Die maatregelen staan in de routekaart die het kabinet heeft gemaakt. Er geldt een landelijke lockdown tot en met ten minste 2 maart. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**"
+      "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. De laatste keer is dit op 17 februari gebeurd. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. [Meer informatie over de risiconiveaus](/over-risiconiveaus).\n\n**De landelijke lockdown blijft van kracht tot en met ten minste 2 maart. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**"
     },
     "risoconiveau_maatregelen": {
       "title": "Risiconiveau & maatregelen",
@@ -2437,9 +2458,132 @@
     }
   },
   "toegankelijkheid_metadata": {
-    "title": "Toegankelijkheid COVID-19 Dashboard | Rijksoverheid.nl",
+    "title": "Toegankelijkheid | Dashboard coronavirus | Rijksoverheid.nl",
     "description": "Informatie over de toegankelijkheid van het COVID-19 Dashboard.",
     "url": "https://coronadashboard.rijksoverheid.nl/verantwoording"
   },
-  "article_strip_title": "Meer informatie over dit onderwerp"
+  "article_strip_title": "Meer informatie over dit onderwerp",
+  "vr_risiconiveau": {
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
+    "reference": {
+      "href": "/over-risiconiveaus",
+      "text": "Lees meer over de risiconiveaus en wat dit betekent voor de maatregelen op de pagina ‘Over de risiconiveaus’"
+    },
+    "metadata": {
+      "title": "Risiconiveau {{safetyRegionName}}",
+      "description": "Risiconiveau {{safetyRegionName}}"
+    },
+    "titel": "Risiconiveau in {{safetyRegionName}}",
+    "pagina_toelichting": "Elke twee weken wordt bepaald in welk risiconiveau een regio zit. Daarvoor kijken we naar het aantal positieve testen en het aantal ziekenhuisopnames. Het meest ernstige cijfer bepaalt het risiconiveau. Bij de risiconiveaus horen maatregelen. Welke maatregelen precies gelden, hangt niet alleen af van hoe het in de veiligheidsregio gaat, maar ook van de situatie in het hele land. ",
+    "current_escalation_level": "Risiconiveau van dit moment",
+    "bronnen": {
+      "rivm_positieve_testen": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.html",
+        "text": "RIVM (positieve testen)"
+      },
+      "rivm_ziekenhuisopnames": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.csv",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
+        "text": "RIVM (ziekenhuisopnames)"
+      },
+      "rivm_positieve_testen_kpi": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.html",
+        "text": "RIVM"
+      },
+      "rivm_ziekenhuisopnames_kpi": {
+        "download": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.csv",
+        "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
+        "text": "RIVM"
+      }
+    },
+    "positieve_testen": {
+      "title": "Positieve testen",
+      "value_annotation": "per 100.000 inwoners per week",
+      "description": "Dit getal laat zien hoeveel mensen uit deze veiligheidsregio de afgelopen 7 dagen positief getest zijn per 100.000 inwoners. De balk laat zien hoe ernstig het aantal positieve testen is."
+    },
+    "ziekenhuisopnames": {
+      "title": "Ziekenhuisopnames (inclusief IC)",
+      "value_annotation": "per 1 miljoen inwoners per week",
+      "description": "Dit getal laat zien hoeveel mensen met COVID-19 uit deze veiligheidsregio in de afgelopen 7 dagen in een ziekenhuis zijn opgenomen per 1 miljoen inwoners. De balk laat zien hoe ernstig het aantal ziekenhuisopnames is."
+    },
+    "types": {
+      "1": {
+        "toelichting": "Dit is het risiconiveau dat nu geldt in deze regio. Het risiconiveau wordt elke twee weken bepaald op basis van het aantal ziekenhuisopnames en het aantal positieve testen van dat moment.\n\n**Risiconiveau bepaald op 17 februari**"
+      },
+      "2": {
+        "toelichting": "Dit is het risiconiveau dat nu geldt in deze regio. Het risiconiveau wordt elke twee weken bepaald op basis van het aantal ziekenhuisopnames en het aantal positieve testen van dat moment.\n\n**Risiconiveau bepaald op 17 februari**"
+      },
+      "3": {
+        "toelichting": "Dit is het risiconiveau dat nu geldt in deze regio. Het risiconiveau wordt elke twee weken bepaald op basis van het aantal ziekenhuisopnames en het aantal positieve testen van dat moment.\n\n**Risiconiveau bepaald op 17 februari**"
+      },
+      "4": {
+        "toelichting": "Dit is het risiconiveau dat nu geldt in deze regio. Het risiconiveau wordt elke twee weken bepaald op basis van het aantal ziekenhuisopnames en het aantal positieve testen van dat moment.\n\n**Risiconiveau bepaald op 17 februari**"
+      }
+    }
+  },
+  "gemeente_sterfte": {
+    "titel_sidebar": "Sterfte",
+    "titel_kpi": "Gemeld aantal patiënten overleden aan COVID-19 per dag",
+    "metadata": {
+      "title": "Sterfte in {{municipalityName}} | Dashboard coronavirus | Rijksoverheid.nl",
+      "description": "Aantal overledenen per dag in {{municipalityName}}"
+    },
+    "section_deceased_rivm": {
+      "title": "Sterfte in {{municipalityName}}",
+      "description": "Deze cijfers laten zien van hoeveel patiënten er aan de GGD gemeld is dat ze zijn overleden aan/met COVID-19. Het werkelijke aantal patiënten dat is overleden aan/met COVID-19 is waarschijnlijk hoger, omdat niet alle COVID-19 patiënten getest worden en er geen meldingsplicht geldt voor overlijden aan/met COVID-19. ",
+      "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+      "bronnen": {
+        "rivm": {
+          "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
+          "text": "RIVM",
+          "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv"
+        }
+      },
+      "reference": {
+        "href": "/verantwoording#sterfte",
+        "text": "Lees meer in de cijferverantwoording."
+      },
+      "kpi_covid_daily_title": "Gemeld aantal patiënten overleden aan COVID-19 per dag",
+      "kpi_covid_daily_description": "Dit getal toont het aantal patiënten waarvan aan de GGD gemeld is dat ze zijn overleden aan COVID-19, per dag. Een deel van de overlijdens is van eerdere dagen, die later zijn doorgegeven.",
+      "kpi_covid_total_title": "Totaal aantal personen overleden aan/met COVID-19",
+      "kpi_covid_total_description": "Dit getal laat zien van hoeveel personen in totaal is gemeld dat ze zijn overleden aan/met COVID-19, sinds het begin van de meldingen.",
+      "line_chart_covid_daily_title": "Gemelde aantal patiënten overleden aan/met COVID-19 over tijd",
+      "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel personen in de geselecteerde periode gemeld is dat ze zijn overleden aan COVID-19."
+    },
+    "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
+  },
+  "corona_melder_app": {
+    "header": {
+      "category": "Preventie verspreiding",
+      "title": "Gebruik CoronaMelder-app",
+      "description": "Om verspreiding van het coronavirus tegen te gaan, is de app CoronaMelder ontwikkeld. Deze app houdt bij wanneer gebruikers van de app langere tijd bij elkaar in de buurt zijn geweest. Wanneer een gebruiker van de CoronaMelder postitief test op COVID-19 kan (met hulp van de GGD) een waarschuwing worden verzonden naar andere appgebruikers die in de buurt zijn geweest. Zij kunnen zich dan laten testen en zo voorkomen dat ze onbewust andere mensen besmetten.",
+      "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+      "reference": {
+        "text": "Lees meer over de CoronaMelder-app in de cijferverantwoording.",
+        "href": "/verantwoording#coronamelder"
+      },
+      "bronnen": {
+        "rivm": {
+          "download": "",
+          "text": "CoronaMelder",
+          "href": "https://github.com/minvws/nl-covid19-notification-app-statistics"
+        }
+      }
+    },
+    "waarschuwingen": {
+      "title": "Aantal mensen dat anderen waarschuwden via CoronaMelder: ",
+      "description": "Dit cijfer laat zien hoeveel (positief geteste) gebruikers van CoronaMelder gisteren andere app-gebruikers hebben gewaarschuwd.",
+      "total": "{{totalDownloads}} mensen hebben de CoronaMelder-app gedownload."
+    },
+    "rapport": {
+      "title": "Factsheet CoronaMelder",
+      "description": "Er wordt steeds onderzocht hoe CoronaMelder werkt in de praktijk. De laatste factsheet hierover is te vinden via de website van de CoronaMelder-app.",
+      "link": {
+        "text": "Meest recente factsheet CoronaMelder-app",
+        "href": "https://www.coronamelder.nl/media/Factsheet_Corona_latest.pdf"
+      }
+    }
+  }
 }

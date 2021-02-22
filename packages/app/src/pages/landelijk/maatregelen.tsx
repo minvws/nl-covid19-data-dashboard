@@ -8,7 +8,6 @@ import { LockdownTable } from '~/domain/restrictions/lockdown-table';
 import { SEOHead } from '~/components-styled/seo-head';
 import { Box } from '~/components-styled/base/box';
 import { TileList } from '~/components-styled/tile-list';
-import Maatregelen from '~/assets/maatregelen.svg';
 import { targetLanguage } from '~/locale/index';
 
 import text from '~/locale';
@@ -20,7 +19,6 @@ import {
 // import { useEscalationLevel } from '~/utils/use-escalation-level';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import { LockdownData, RoadmapData } from '~/types/cms';
-import theme from '~/style/theme';
 import { RichContent } from '~/components-styled/cms/rich-content';
 
 type MaatregelenData = {
@@ -76,11 +74,7 @@ const NationalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
         description={text.nationaal_metadata.description}
       />
       <TileList>
-        <ContentHeader
-          category={text.nationaal_layout.headings.algemeen}
-          icon={<Maatregelen fill={theme.colors.restrictions} />}
-          title={text.nationaal_maatregelen.titel}
-        />
+        <ContentHeader title={text.nationaal_maatregelen.titel} />
 
         {showLockdown && (
           <KpiSection flexDirection="column">

@@ -1,6 +1,5 @@
-import css from '@styled-system/css';
 import { ReactNode } from 'react';
-import ArrowIcon from '~/assets/arrow.svg';
+import { ArrowIconLeft } from '~/components-styled/arrow-icon';
 
 import { Box } from '~/components-styled/base';
 import { LinkWithIcon } from '~/components-styled/link-with-icon';
@@ -25,18 +24,21 @@ export function TopicalPageHeader({
     <Box spacing={3}>
       {showBackLink && (
         <Box fontSize="1.125rem">
-          <LinkWithIcon
-            href="/"
-            fontWeight="bold"
-            icon={<ArrowIcon css={css({ transform: 'rotate(90deg)' })} />}
-          >
+          <LinkWithIcon href="/" fontWeight="bold" icon={<ArrowIconLeft />}>
             {text.common_actueel.terug_naar_landelijk}
           </LinkWithIcon>
         </Box>
       )}
 
       <Box>
-        <Heading level={1} fontWeight="normal" m={0} lineHeight={0} mb={2}>
+        <Heading
+          level={1}
+          fontWeight="normal"
+          m={0}
+          lineHeight={0}
+          mb={2}
+          fontSize={{ _: '2rem', lg: '2.75rem' }}
+        >
           {title}
         </Heading>
         <InlineText color="bodyLight">

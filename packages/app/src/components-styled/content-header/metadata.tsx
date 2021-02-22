@@ -9,8 +9,7 @@ import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { Box } from '../base';
 import { ExternalLink } from '../external-link';
 import { Text } from '../typography';
-import css from '@styled-system/css';
-
+import { VisuallyHidden } from '~/components-styled/visually-hidden';
 interface Datasource {
   href: string;
   text: string;
@@ -27,12 +26,19 @@ export interface MetadataProps {
   datumsText: string;
   dateOrRange: number | DateRange;
   dateOfInsertionUnix: number;
+  accessibilitySubject?: string;
 }
 
 const text = siteText.common.metadata;
 
 export function Metadata(props: MetadataProps) {
-  const { dataSources, datumsText, dateOrRange, dateOfInsertionUnix } = props;
+  const {
+    dataSources,
+    datumsText,
+    dateOrRange,
+    dateOfInsertionUnix,
+    accessibilitySubject,
+  } = props;
 
   const dateText = formateDateText(
     dateOrRange,
@@ -57,6 +63,10 @@ export function Metadata(props: MetadataProps) {
         icon={<DatabaseIcon aria-hidden />}
         items={dataSources}
         label={text.source}
+        accessibilityText={replaceVariablesInText(
+          siteText.accessibility.link_source,
+          { subject: accessibilitySubject }
+        )}
       />
 
       <MetadataItem
@@ -70,6 +80,10 @@ export function Metadata(props: MetadataProps) {
         }
         items={dataDownloads}
         label={text.download}
+        accessibilityText={replaceVariablesInText(
+          siteText.accessibility.link_download,
+          { subject: accessibilitySubject }
+        )}
       />
     </Box>
   );
@@ -82,10 +96,11 @@ interface MetadataItemProps {
     href: string;
     text: string;
   }[];
+  accessibilityText: string;
 }
 
 function MetadataItem(props: MetadataItemProps) {
-  const { icon, label, items } = props;
+  const { icon, label, items, accessibilityText } = props;
 
   if (!items.length) {
     return null;
@@ -102,19 +117,12 @@ function MetadataItem(props: MetadataItemProps) {
           <Fragment key={index + item.href}>
             {index > 0 && ' & '}
             {item.href && (
-              <ExternalLink href={item.href}>{item.text}</ExternalLink>
-            )}
-            {!item.href && (
-              <Text
-                css={css({
-                  display: 'inline-block',
-                  my: '0',
-                  fontSize: 'inherit',
-                })}
-              >
+              <ExternalLink href={item.href}>
                 {item.text}
-              </Text>
+                <VisuallyHidden>{accessibilityText}</VisuallyHidden>
+              </ExternalLink>
             )}
+            {!item.href && item.text}
           </Fragment>
         ))}
       </Text>

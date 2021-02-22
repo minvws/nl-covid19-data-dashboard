@@ -15,7 +15,7 @@ import { RegionSelectionHandler } from '../../select-handlers/create-select-regi
 
 export const escalationTooltip = (selectHandler: RegionSelectionHandler) => {
   return (context: SafetyRegionProperties & EscalationLevels): ReactNode => {
-    const level = context.escalation_level as EscalationLevel;
+    const level = context.level as EscalationLevel;
 
     const onSelect = (event: React.MouseEvent<HTMLElement>) => {
       event.stopPropagation();
@@ -30,7 +30,7 @@ export const escalationTooltip = (selectHandler: RegionSelectionHandler) => {
     const validFromText = replaceVariablesInText(
       text.escalatie_niveau.valid_from,
       {
-        validFrom: formatDateFromSeconds(context.valid_from_unix, 'short'),
+        validFrom: formatDateFromSeconds(context.valid_from_unix, 'day-month'),
       }
     );
 

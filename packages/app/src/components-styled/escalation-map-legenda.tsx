@@ -11,10 +11,9 @@ import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { regionGeo } from '~/components/choropleth/topology';
 import { default as siteText, default as text } from '~/locale';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { InlineText } from './typography';
+import { Heading, InlineText } from './typography';
 
-const escalationThresholds =
-  regionThresholds.escalation_levels.escalation_level;
+const escalationThresholds = regionThresholds.escalation_levels.level;
 
 interface EscalationMapLegendaProps<K extends RegionsMetricName> {
   metricName: K;
@@ -63,7 +62,9 @@ export function EscalationMapLegenda<K extends RegionsMetricName>(
 
   return (
     <Box spacing={3} aria-label="legend" width="100%">
-      <h3>{siteText.escalatie_niveau.legenda.titel}</h3>
+      <Heading level={3} fontSize="1rem">
+        {siteText.escalatie_niveau.legenda.titel}
+      </Heading>
       {sortedEscalationArray.map((info) => (
         <Box key={info.threshold} display="flex" alignItems="center">
           <Box
@@ -71,10 +72,10 @@ export function EscalationMapLegenda<K extends RegionsMetricName>(
             alignItems="center"
             spacing={{ _: 2, sm: 3 }}
             spacingHorizontal
-            width={{ _: '8rem', md: '10rem' }}
+            width={{ _: '8rem', sm: '10rem' }}
           >
             <EscalationLevelIcon level={info.threshold} />
-            <InlineText fontSize={{ _: 2, sm: '1.2rem' }}>
+            <InlineText>
               {siteText.escalatie_niveau.types[info.threshold].titel}
             </InlineText>
           </Box>
@@ -98,7 +99,10 @@ interface EscalationBarLegendaProps {
   label: {
     titel: string;
     geen_regio: string;
-    regios: string;
+    regios: {
+      singular: string;
+      plural: string;
+    };
   };
   totalItems: number;
 }
@@ -113,7 +117,10 @@ function EscalationBarLegenda(props: EscalationBarLegendaProps) {
       <Box flexGrow={barWidth} backgroundColor={info.color} paddingRight={1} />
       <Box paddingLeft={2}>
         {info.amount
-          ? replaceVariablesInText(label.regios, { amount: info.amount })
+          ? replaceVariablesInText(
+              info.amount === 1 ? label.regios.singular : label.regios.plural,
+              { amount: info.amount }
+            )
           : label.geen_regio}
       </Box>
     </Box>

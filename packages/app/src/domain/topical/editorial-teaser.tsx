@@ -1,6 +1,8 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import ArrowIcon from '~/assets/arrow.svg';
+
+import { ArrowIconRight } from '~/components-styled/arrow-icon';
+
 import { BackgroundImage } from '~/components-styled/background-image';
 import { Box } from '~/components-styled/base';
 import { Heading, InlineText, Text } from '~/components-styled/typography';
@@ -86,7 +88,7 @@ const StyledEditorialTeaser = styled.a(
 function Arrow() {
   return (
     <span css={css({ svg: { height: '11px', width: '13px', mx: '3px' } })}>
-      <ArrowIcon css={css({ transform: 'rotate(-90deg)' })} />
+      <ArrowIconRight />
     </span>
   );
 }
@@ -109,7 +111,8 @@ function CoverImage({ image }: CoverImageProps) {
       left={0}
       height="100%"
       width="100%"
-      backgroundImage={`linear-gradient(to left, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.75)), url(${url})`}
+      backgroundImagePrefix={`linear-gradient(to left, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.75))`}
+      backgroundImageUrl={url}
       backgroundPosition={bgPosition}
       backgroundRepeat="no-repeat"
       backgroundSize="cover"
