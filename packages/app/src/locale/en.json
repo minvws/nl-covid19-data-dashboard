@@ -93,7 +93,7 @@
     },
     "chart_bedbezetting": {
       "title": "ICU bed occupancy over time",
-      "description": "This graph shows the progression of the number of ICU beds occupied by COVID-19 patients.",
+      "description": "This graph shows the progression of the number of ICU beds occupied by COVID-19 patients. The data before the 1st of June is less reliable due to setting up the registration by LCPS.",
       "legend_trend_label": "ICU beds occupied",
       "legend_inaccurate_label": "Data is less precise"
     },
@@ -189,7 +189,7 @@
     },
     "chart_bedbezetting": {
       "title": "Hospital bed occupancy over time (non ICU)",
-      "description": "This graph shows the progression of the number of non-ICU hospital beds occupied by COVID-19 patients.",
+      "description": "This graph shows the progression of the number of non-ICU hospital beds occupied by COVID-19 patients. The data before the 1st of June is less reliable due to setting up the registration by LCPS.",
       "legend_trend_label": "Regular hospital beds occupied by COVID-19 patients",
       "legend_inaccurate_label": "Data is less precise"
     },
