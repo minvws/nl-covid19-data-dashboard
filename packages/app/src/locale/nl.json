@@ -519,7 +519,7 @@
     "titel_sidebar": "Rioolwatermeting",
     "titel_kpi": "Gemiddelde aantal virusdeeltjes per 100.000 inwoners",
     "total_installation_count_titel": "Aantal meetlocaties",
-    "total_installation_count_description": "Wekelijks aantal rioolwaterzuiveringsinstallaties die minimaal één keer een meting hebben gerapporteerd. Het weekgemiddelde wordt berekend door het gemiddelde te nemen van alle metingen op deze locaties. Per week kan dit aantal variëren omdat niet alle metingen altijd lukken. Let op: door de vrieskou was het de afgelopen week niet mogelijk op alle locaties goede metingen van het rioolwater te doen. Dit heeft ook deze week nog invloed op de rioolwatercijfers.",
+    "total_installation_count_description": "Wekelijks aantal rioolwaterzuiveringsinstallaties die minimaal één keer een meting hebben gerapporteerd. Het weekgemiddelde wordt berekend door het gemiddelde te nemen van alle metingen op deze locaties. Per week kan dit aantal variëren omdat niet alle metingen altijd lukken.",
     "rwzi_abbrev": "",
     "map_titel": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners in rioolwater",
     "map_toelichting": "Deze kaart toont het gemiddeld aantal virusdeeltjes per 100.000 inwoners, per veiligheidsregio.",
@@ -814,7 +814,7 @@
     "graph_range_description": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners over tijd",
     "titel_kpi": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners",
     "total_installation_count_titel": "Aantal meetlocaties",
-    "total_installation_count_description": "Wekelijks aantal rioolwaterzuiveringsinstallaties die minimaal één keer een meting hebben gerapporteerd. Het weekgemiddelde wordt berekend door het gemiddelde te nemen van alle metingen op deze locaties. Per week kan dit aantal variëren omdat niet alle metingen altijd lukken. Let op: door de vrieskou was het de afgelopen week niet mogelijk op alle locaties goede metingen van het rioolwater te doen. Dit heeft ook deze week nog invloed op de rioolwatercijfers.",
+    "total_installation_count_description": "Wekelijks aantal rioolwaterzuiveringsinstallaties die minimaal één keer een meting hebben gerapporteerd. Het weekgemiddelde wordt berekend door het gemiddelde te nemen van alle metingen op deze locaties. Per week kan dit aantal variëren omdat niet alle metingen altijd lukken.",
     "rwzi_abbrev": "",
     "reference": {
       "href": "/verantwoording#rioolwater",
@@ -943,7 +943,7 @@
     },
     "nodata_sidebar": "Deze informatie is niet beschikbaar voor deze gemeente.",
     "total_installation_count_titel": "Aantal meetlocaties",
-    "total_installation_count_description": "Wekelijks aantal rioolwaterzuiveringsinstallaties die minimaal één keer een meting hebben gerapporteerd. Het weekgemiddelde wordt berekend door het gemiddelde te nemen van alle metingen op deze locaties. Per week kan dit aantal variëren omdat niet alle metingen altijd lukken. Let op: door de vrieskou was het de afgelopen week niet mogelijk op alle locaties goede metingen van het rioolwater te doen. Dit heeft ook deze week nog invloed op de rioolwatercijfers.",
+    "total_installation_count_description": "Wekelijks aantal rioolwaterzuiveringsinstallaties die minimaal één keer een meting hebben gerapporteerd. Het weekgemiddelde wordt berekend door het gemiddelde te nemen van alle metingen op deze locaties. Per week kan dit aantal variëren omdat niet alle metingen altijd lukken.",
     "rwzi_abbrev": "Rioolwaterzuiveringsinstallatie",
     "graph_daily_label_text_rwzi": "Meetwaarden locatie ({{name}})",
     "graph_selected_rwzi_placeholder": "Selecteer locatie",
@@ -2069,6 +2069,136 @@
         "",
         ""
       ]
+    },
+    "data": {
+      "difference": "Do not remove this key. It is required as a temporary workaround",
+      "sidebar": {
+        "last_value": {
+          "total_vaccinated": "874959",
+          "date_unix": "1613650547",
+          "date_of_insertion_unix": "1613650547"
+        }
+      },
+      "kpi_total": {
+        "title": "Aantal gezette prikken",
+        "value": "687306",
+        "description": "",
+        "date_of_report_unix": "1613650547",
+        "date_of_insertion_unix": "1613650547",
+        "administered": [
+          {
+            "value": "592755",
+            "description": "gemeld door GGD-GHOR",
+            "report_date": "Gemeld aantal tot en met 17 februari"
+          },
+          {
+            "value": "94551",
+            "description": "gemeld door LNAZ",
+            "report_date": "Gemeld aantal tot en met 17 februari"
+          },
+          {
+            "value": "",
+            "description": "",
+            "report_date": ""
+          },
+          {
+            "value": "",
+            "description": "",
+            "report_date": ""
+          },
+          {
+            "value": "",
+            "description": "",
+            "report_date": ""
+          }
+        ],
+        "description_first": "Dit getal laat zien hoeveel prikken zijn gemeld door GGD-GHOR en LNAZ. [Lees meer over de registratie in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)",
+        "description_second": "",
+        "warning": "",
+        "first_tab_title": "Berekend aantal",
+        "second_tab_title": "Gemeld aantal",
+        "tab_total_estimated": {
+          "value": "874959",
+          "description": "",
+          "date_of_report_unix": "1613650547",
+          "date_of_insertion_unix": "1613650547",
+          "administered": [
+            {
+              "value": "592755",
+              "description": "gezet door GGD'en",
+              "report_date": "Gemeld aantal tot en met 17 februari"
+            },
+            {
+              "value": "94551",
+              "description": "gezet in ziekenhuizen",
+              "report_date": "Gemeld aantal tot en met 17 februari"
+            },
+            {
+              "value": "184706",
+              "description": "gezet in langdurige zorginstellingen",
+              "report_date": "Berekend aantal tot en met 17 februari"
+            },
+            {
+              "value": "2947",
+              "description": "gezet in huisartsenpraktijken",
+              "report_date": "Berekend aantal tot en met 17 februari"
+            },
+            {
+              "value": "",
+              "description": "",
+              "report_date": ""
+            }
+          ],
+          "description_first": "Dit getal is een berekening van hoeveel prikken in totaal zijn gezet. De GGD-cijfers worden gemeld door de GGD-GHOR en de ziekenhuiscijfers door het LNAZ. Voor de langdurige zorginstellingen en huisartsenpraktijken maakt het RIVM een berekening door te kijken naar hoeveel vaccins er zijn bezorgd bij priklocaties. [Lees meer over de berekening in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)",
+          "description_second": ""
+        }
+      },
+      "kpi_expected_delivery": {
+        "title": "Verwachte levering goedgekeurde vaccins",
+        "value": "2473700",
+        "description": "Aantal goedgekeurde vaccins dat Nederland de komende zes weken verwacht te krijgen. Elke week ontvangt Nederland een deel van de vaccins. Mensen hebben twee prikken nodig voor een volledige vaccinatie.",
+        "date_of_report_unix": "1613648204",
+        "date_of_insertion_unix": "1613648204"
+      },
+      "kpi_stock": {
+        "title": "",
+        "value": "",
+        "amount": [
+          {
+            "value": "",
+            "description": ""
+          },
+          {
+            "value": "",
+            "description": ""
+          },
+          {
+            "value": "",
+            "description": ""
+          },
+          {
+            "value": "",
+            "description": ""
+          },
+          {
+            "value": "",
+            "description": ""
+          },
+          {
+            "value": "",
+            "description": ""
+          }
+        ]
+      },
+      "kpi_expected_page_additions": {
+        "title": "Verwachte toevoegingen aan deze pagina",
+        "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer de vaccinatiegraad.",
+        "additions": [
+          "",
+          "",
+          ""
+        ]
+      }
     }
   },
   "editorial_detail": {
