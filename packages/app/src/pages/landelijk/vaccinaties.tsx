@@ -33,14 +33,24 @@ import {
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { vaccinePageQuery } from '~/queries/vaccine-page-query';
+import { MileStones } from '~/domain/vaccine/milestones';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   getNlData,
   getText,
   createGetContent<{
-    articles?: ArticleSummary[];
-  }>(createPageArticlesQuery('vaccinationsPage'))
+    milestones: any;
+    highlight: {
+      articles?: ArticleSummary[];
+    };
+  }>(
+    `{
+      "milestones": ${vaccinePageQuery},
+      "highlight": ${createPageArticlesQuery('vaccinationsPage')} 
+    }`
+  )
 );
 
 const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
@@ -53,6 +63,8 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
     text.gezette_prikken.tab_first.title
   );
 
+  const { milestones } = content;
+
   const additions = text.expected_page_additions.additions.filter(
     (x) => x.length
   );
@@ -64,6 +76,13 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
         description={text.metadata.description}
       />
       <TileList>
+        <MileStones
+          title={milestones.title}
+          description={milestones.description}
+          miles={milestones.miles}
+          expected={milestones.expected}
+        />
+
         <ContentHeader
           category={siteText.nationaal_layout.headings.vaccinaties}
           title={text.title}
@@ -78,7 +97,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
           }}
         />
 
-        <ArticleStrip articles={content.articles} />
+        <ArticleStrip articles={content.highlight.articles} />
 
         <TwoKpiSection>
           <KpiTile
