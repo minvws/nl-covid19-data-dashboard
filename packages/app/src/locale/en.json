@@ -2054,7 +2054,7 @@
         "ggd": "administered by GGDs",
         "hospitals": "administered in hospitals",
         "care_institutions": "administered in long-term care institutions",
-        "doctors": "administered by general practitioner"
+        "doctors": "administered in general practices"
       },
       "reported": {
         "ggd_ghor": "reported by GGD-GHOR",
@@ -2154,9 +2154,9 @@
         }
       },
       "kpi_expected_delivery": {
-        "title": "",
+        "title": "Doses to be delivered",
         "value": "",
-        "description": "",
+        "description": "This is the number of vaccine doses the Netherlands expects to receive over the next six weeks. The Netherlands will receive a new delivery each week. People need two separately administered doses for the vaccine to be maximally effective.",
         "date_of_report_unix": "",
         "date_of_insertion_unix": ""
       },
@@ -2191,8 +2191,8 @@
         ]
       },
       "kpi_expected_page_additions": {
-        "title": "",
-        "description": "",
+        "title": "Expected data on vaccinations",
+        "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
         "additions": [
           "",
           "",
