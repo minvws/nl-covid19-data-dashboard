@@ -93,9 +93,9 @@
     },
     "chart_bedbezetting": {
       "title": "Bezetting IC-bedden over tijd",
-      "description": "Deze grafiek toont het verloop van het aantal IC-bedden dat is bezet door patiënten met COVID-19.",
+      "description": "Deze grafiek toont het verloop van het aantal IC-bedden dat is bezet door patiënten met COVID-19. De gegevens vóór 1 juni zijn mogelijk minder betrouwbaar i.v.m. het opzetten van een registratie door het LCPS.",
       "legend_trend_label": "Bezetting IC-bedden",
-      "legend_inaccurate_label": "Data is minder nauwkeurig"
+      "legend_inaccurate_label": "Cijfers zijn minder nauwkeurig"
     },
     "metadata": {
       "title": "Intensive care-opnames | Dashboard coronavirus | Rijksoverheid.nl",
@@ -189,9 +189,9 @@
     },
     "chart_bedbezetting": {
       "title": "Bezetting gewone ziekenhuisbedden (exclusief IC-bedden) over tijd",
-      "description": "Deze grafiek toont het verloop in het aantal ziekenhuisbedden (exclusief IC-bedden) dat is bezet door patiënten met COVID-19.",
+      "description": "Deze grafiek toont het verloop in het aantal ziekenhuisbedden (exclusief IC-bedden) dat is bezet door patiënten met COVID-19. De gegevens vóór 1 juni zijn mogelijk minder betrouwbaar i.v.m. het opzetten van een registratie door het LCPS.",
       "legend_trend_label": "Bezetting gewone ziekenhuisbedden",
-      "legend_inaccurate_label": "Data is minder nauwkeurig"
+      "legend_inaccurate_label": "Cijfers zijn minder nauwkeurig"
     },
     "linechart_description": "In deze grafiek staan de ziekenhuisopnames (inclusief directe IC opnames) vermeld op de dag dat mensen ook echt zijn opgenomen, in plaats van op de dag dat ze gemeld zijn. Zo kunnen we namelijk de ontwikkeling van het coronavirus in Nederland goed zien. Let op: omdat het aanmelden van ziekenhuisopnames vaak een paar dagen later gebeurt, zijn de meest recente dagen nooit compleet en kan het lijken alsof het aantal ziekenhuisopnames afneemt terwijl dit niet zo is.",
     "metadata": {
