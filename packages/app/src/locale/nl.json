@@ -1036,7 +1036,7 @@
   "positief_geteste_personen_ggd": {
     "titel": "Percentage positief geteste personen via GGD-teststraten",
     "summary_title": "{{percentage}} van de GGD-testen was positief",
-    "summary_link_cta": "Lees meer",
+    "summary_link_cta": "Meer over het percentage positieve testen via alleen de GGD",
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
     "bron": {
       "href": "https://data.rivm.nl/covid-19/COVID-19_uitgevoerde_testen.html",
@@ -1074,7 +1074,7 @@
   "veiligheidsregio_positief_geteste_personen_ggd": {
     "titel": "Percentage positief geteste personen via GGD-teststraten in {{safetyRegion}}",
     "summary_title": "{{percentage}} van de GGD-testen was positief",
-    "summary_link_cta": "Lees meer",
+    "summary_link_cta": "Meer over het percentage positieve testen via alleen de GGD",
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
     "bron": {
       "href": "https://data.rivm.nl/covid-19/COVID-19_uitgevoerde_testen.html",
