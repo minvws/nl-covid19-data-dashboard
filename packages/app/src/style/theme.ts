@@ -115,6 +115,7 @@ export const colors = {
     axis: '#C4C4C4',
     axisLabels: '#666666',
     benchmark: '#4f5458',
+    emphasis: '#F8E435',
     fill: 'rgba(0, 123, 199, .05)',
     margin: '#D0EDFF',
     scale: {
@@ -125,6 +126,14 @@ export const colors = {
       green: '#69c253',
       yellow: '#D3A500',
       red: '#f35065',
+    },
+    vaccines: {
+      pfizer: '#8FCAE7',
+      moderna: '#1A87D0',
+      astra_zeneca: '#003580',
+      cure_vac: '#0070BB',
+      janssen: '#248FCF',
+      sanofi: '#8FCAE7',
     },
   },
 } as const;

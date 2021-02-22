@@ -11,13 +11,21 @@
  * render any type of layout, and without exposing internal __date and __value
  * properties.
  */
+import {
+  isDateSpanValue,
+  isDateValue,
+  TimestampedValue,
+} from '@corona-dashboard/common';
+import css from '@styled-system/css';
 import { TickFormatter } from '@visx/axis';
 import { localPoint } from '@visx/event';
 import { Point } from '@visx/point';
 import { scaleBand } from '@visx/scale';
+import { defaultStyles, TooltipWithBounds, useTooltip } from '@visx/tooltip';
 import { bisectLeft, extent } from 'd3-array';
 import { ScaleTime } from 'd3-scale';
 import { useCallback, useMemo, useState } from 'react';
+import styled from 'styled-components';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
 import { Legenda, LegendItem, LegendShape } from '~/components-styled/legenda';
@@ -26,26 +34,6 @@ import {
   ChartScales,
   ComponentCallbackFunction,
   defaultPadding,
-} from '~/components-styled/line-chart/components';
-import { ChartAxes } from './components/chart-axes';
-import {
-  isDateSpanValue,
-  isDateValue,
-  TimestampedValue,
-} from '@corona-dashboard/common';
-import { Text } from '~/components-styled/typography';
-import { ValueAnnotation } from '~/components-styled/value-annotation';
-import text from '~/locale/index';
-import { colors } from '~/style/theme';
-import { formatDateFromSeconds } from '~/utils/formatDate';
-import { formatNumber, formatPercentage } from '~/utils/formatNumber';
-import { TimeframeOption } from '~/utils/timeframe';
-
-/**
- * Importing unchanged logic and components from line-chart since this is
- * considered a fork.
- */
-import {
   HoverPoint,
   Marker,
   Trend,
@@ -55,10 +43,15 @@ import {
   getTrendData,
   TrendValue,
 } from '~/components-styled/line-chart/logic';
-import { defaultStyles, TooltipWithBounds, useTooltip } from '@visx/tooltip';
-import styled from 'styled-components';
-import css from '@styled-system/css';
+import { Text } from '~/components-styled/typography';
+import { ValueAnnotation } from '~/components-styled/value-annotation';
+import text from '~/locale/index';
+import { colors } from '~/style/theme';
+import { formatDateFromSeconds } from '~/utils/formatDate';
+import { formatNumber, formatPercentage } from '~/utils/formatNumber';
+import { TimeframeOption } from '~/utils/timeframe';
 import { useBreakpoints } from '~/utils/useBreakpoints';
+import { ChartAxes } from './components/chart-axes';
 
 const tooltipStyles = {
   ...defaultStyles,

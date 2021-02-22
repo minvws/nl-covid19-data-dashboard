@@ -102,14 +102,17 @@ const IntakeIntensiveCare: FCWithLayout<typeof getStaticProps> = (props) => {
               source: text.bronnen.lnaz,
             }}
           >
-            <KpiValue
-              data-cy="beds_occupied_covid"
-              absolute={bedsLastValue.beds_occupied_covid!}
-              percentage={bedsLastValue.beds_occupied_covid_percentage!}
-              difference={
-                data.difference.intensive_care_lcps__beds_occupied_covid
-              }
-            />
+            {bedsLastValue.beds_occupied_covid !== null &&
+              bedsLastValue.beds_occupied_covid_percentage !== null && (
+                <KpiValue
+                  data-cy="beds_occupied_covid"
+                  absolute={bedsLastValue.beds_occupied_covid}
+                  percentage={bedsLastValue.beds_occupied_covid_percentage}
+                  difference={
+                    data.difference.intensive_care_lcps__beds_occupied_covid
+                  }
+                />
+              )}
             <Text>{text.kpi_bedbezetting.description}</Text>
           </KpiTile>
         </TwoKpiSection>
