@@ -1,14 +1,14 @@
-import { omit, pick, mapValues } from 'lodash';
-import { getDaysForTimeframe, TimeframeOption } from '~/utils/timeframe';
 import {
-  DateValue,
   DateSpanValue,
+  DateValue,
   isDateSeries,
   isDateSpanSeries,
-  isDateValue,
   isDateSpanValue,
+  isDateValue,
   TimestampedValue,
 } from '@corona-dashboard/common';
+import { mapValues, omit, pick } from 'lodash';
+import { getDaysForTimeframe, TimeframeOption } from '~/utils/timeframe';
 
 /**
  * A SeriesValue contains the properties for all trend values in key/value
@@ -39,15 +39,17 @@ export function calculateSeriesMaximum(series: SeriesValue[]) {
 export function getValuesInTimeframe<T extends TimestampedValue>(
   values: T[],
   timeframe: TimeframeOption
-) {
+): T[] {
   const boundary = getTimeframeBoundaryUnix(timeframe);
 
   if (isDateSeries(values)) {
-    return values.filter((x: DateValue) => x.date_unix >= boundary);
+    return values.filter((x: DateValue) => x.date_unix >= boundary) as T[];
   }
 
   if (isDateSpanSeries(values)) {
-    return values.filter((x: DateSpanValue) => x.date_start_unix >= boundary);
+    return values.filter(
+      (x: DateSpanValue) => x.date_start_unix >= boundary
+    ) as T[];
   }
 
   throw new Error(`Incompatible timestamps are used in value ${values[0]}`);
@@ -76,7 +78,7 @@ export type SeriesValue = {
   __date: Date;
 } & { [key: string]: number };
 
-const timestampToDate = (d: number) => new Date(d * 1000);
+export const timestampToDate = (d: number) => new Date(d * 1000);
 
 /**
  * This function converts the passed in data to the generic SeriesValue

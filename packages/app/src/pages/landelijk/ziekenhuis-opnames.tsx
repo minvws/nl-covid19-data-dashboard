@@ -42,8 +42,8 @@ import {
   formatDateFromSeconds,
 } from '~/utils/formatDate';
 import {
-  getTrailingDateRange,
   DateRange,
+  getTrailingDateRange,
 } from '~/utils/get-trailing-date-range';
 
 const text = siteText.ziekenhuisopnames_per_dag;
@@ -134,11 +134,13 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
               source: text.bronnen.lnaz,
             }}
           >
-            <KpiValue
-              data-cy="beds_occupied_covid"
-              absolute={bedsLastValue.beds_occupied_covid!}
-              difference={data.difference.hospital_lcps__beds_occupied_covid}
-            />
+            {bedsLastValue.beds_occupied_covid !== null && (
+              <KpiValue
+                data-cy="beds_occupied_covid"
+                absolute={bedsLastValue.beds_occupied_covid}
+                difference={data.difference.hospital_lcps__beds_occupied_covid}
+              />
+            )}
           </KpiTile>
         </TwoKpiSection>
 

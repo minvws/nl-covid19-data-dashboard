@@ -64,7 +64,7 @@ type ChartAxesProps = {
   yTickValues?: number[];
 };
 
-type AnyTickFormatter = (value: any) => string;
+export type AnyTickFormatter = (value: any) => string;
 
 export type ChartBounds = { width: number; height: number };
 
