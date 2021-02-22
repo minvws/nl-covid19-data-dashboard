@@ -1015,10 +1015,8 @@
     "legenda": {
       "titel": "Legenda",
       "geen_regio": "geen regio's",
-      "regios": {
-        "singular": "{{amount}} regio",
-        "plural": "{{amount}} regio's"
-      }
+      "regio_singular": "{{amount}} regio",
+      "regio_plural": "{{amount}} regio's"
     },
     "valid_from": "Geldig vanaf {{validFrom}}",
     "sidebar_label": "Risiconiveau:",

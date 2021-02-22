@@ -1015,10 +1015,8 @@
     "legenda": {
       "titel": "Legend",
       "geen_regio": "no regions",
-      "regios": {
-        "singular": "{{amount}} region",
-        "plural": "{{amount}} regions"
-      }
+      "regio_singular": "{{amount}} region",
+      "regio_plural": "{{amount}} regions"
     },
     "valid_from": "Valid from {{validFrom}}",
     "sidebar_label": "Risk level:",

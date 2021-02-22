@@ -1,5 +1,5 @@
 import { Regions, RegionsMetricName } from '@corona-dashboard/common';
-import { useMemo } from 'react';
+import { ReactNode, useMemo } from 'react';
 import { Box } from '~/components-styled/base';
 import { EscalationLevelIcon } from '~/components-styled/escalation-level-icon';
 import {
@@ -80,10 +80,18 @@ export function EscalationMapLegenda<K extends RegionsMetricName>(
             </InlineText>
           </Box>
           <EscalationBarLegenda
-            info={info}
-            totalItems={totalItems}
-            label={text.escalatie_niveau.legenda}
-          />
+            percentage={info.amount / totalItems}
+            color={info.color}
+          >
+            {info.amount
+              ? replaceVariablesInText(
+                  info.amount === 1
+                    ? text.escalatie_niveau.legenda.regio_singular
+                    : text.escalatie_niveau.legenda.regio_plural,
+                  { amount: info.amount }
+                )
+              : text.escalatie_niveau.legenda.geen_regio}
+          </EscalationBarLegenda>
         </Box>
       ))}
     </Box>
@@ -91,38 +99,18 @@ export function EscalationMapLegenda<K extends RegionsMetricName>(
 }
 
 interface EscalationBarLegendaProps {
-  info: {
-    amount: number;
-    color: string;
-    threshold: number;
-  };
-  label: {
-    titel: string;
-    geen_regio: string;
-    regios: {
-      singular: string;
-      plural: string;
-    };
-  };
-  totalItems: number;
+  children: ReactNode;
+  color: string;
+  percentage: number;
 }
 
 function EscalationBarLegenda(props: EscalationBarLegendaProps) {
-  const { info, totalItems, label } = props;
-
-  const barWidth = info.amount / totalItems;
+  const { color, percentage, children } = props;
 
   return (
     <Box flexGrow={1} paddingY={1} display="flex">
-      <Box flexGrow={barWidth} backgroundColor={info.color} paddingRight={1} />
-      <Box paddingLeft={2}>
-        {info.amount
-          ? replaceVariablesInText(
-              info.amount === 1 ? label.regios.singular : label.regios.plural,
-              { amount: info.amount }
-            )
-          : label.geen_regio}
-      </Box>
+      <Box flexGrow={percentage} backgroundColor={color} paddingRight={1} />
+      <Box paddingLeft={2}>{children}</Box>
     </Box>
   );
 }
