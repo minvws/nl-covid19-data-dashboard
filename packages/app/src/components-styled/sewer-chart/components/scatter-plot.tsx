@@ -6,8 +6,8 @@ interface ScatterPlotProps<T> {
   getX: (datum: T) => number;
   getY: (datum: T) => number;
   color: string;
-  r: number;
-  dotted?: boolean;
+  radius: number;
+  dottedOutline?: boolean;
 }
 
 export const ScatterPlot = memo(
@@ -19,8 +19,8 @@ function ScatterPlotUnmemoized<T extends { id: string }>({
   getX,
   getY,
   color,
-  r,
-  dotted,
+  radius: r,
+  dottedOutline: dotted,
 }: ScatterPlotProps<T>) {
   return (
     <Group>

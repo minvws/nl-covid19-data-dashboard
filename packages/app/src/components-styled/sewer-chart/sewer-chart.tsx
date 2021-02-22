@@ -24,7 +24,6 @@ import { ToggleOutlierButton } from './components/toggle-outlier-button';
 import { DateTooltip, Tooltip } from './components/tooltip';
 import {
   Dimensions,
-  SewerChartValue,
   useLineTooltip,
   useSelectedStationValues,
   useSewerChartScales,
@@ -205,10 +204,10 @@ export function SewerChart(props: SewerChartProps) {
               <ScatterPlot
                 data={outlierValues}
                 getX={scales.getX}
-                getY={(_x: SewerChartValue) => 26}
+                getY={() => 26}
                 color="rgba(89, 89, 89, 0.8)"
-                r={4}
-                dotted
+                radius={4}
+                dottedOutline
               />
             </Group>
           )}
@@ -281,7 +280,7 @@ export function SewerChart(props: SewerChartProps) {
               getX={scales.getX}
               getY={scales.getY}
               color="rgba(89, 89, 89, 0.3)"
-              r={2}
+              radius={2}
             />
 
             <LinePath
