@@ -1,9 +1,6 @@
 name: Deploy Preview
 
 on:
-  # push:
-  #   branches:
-  #     - master
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
@@ -11,29 +8,24 @@ on:
       - master
 
 jobs:
-  build_and_deploy_job:
+  deploy_preview_trigger_deploy:
     if: (github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')) && startsWith(github.head_ref, 'lokalise-') == false
     runs-on: ubuntu-latest
-    name: Build and Deploy Job
-
+    name: Trigger deploy preview
     steps:
-      - name: Git checkout
-        uses: actions/checkout@v2
-
       - name: Push POST request
         uses: muinmomin/webhook-action@v1.0.0
         with:
           url: ${{ secrets.TRIGGER_BRANCH_DEPLOY }}
           data: '{"branchName": "${{github.head_ref}}"}'
 
-  # close_pull_request_job:
-  #   if: github.event_name == 'pull_request' && github.event.action == 'closed'
-  #   runs-on: ubuntu-latest
-  #   name: Close Pull Request Job
-  #   steps:
-  #     - name: Close Pull Request
-  #       id: closepullrequest
-  #       uses: Azure/static-web-apps-deploy@v0.0.1-preview
-  #       with:
-  #         azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MANGO_RIVER_0AFDB141E }}
-  #         action: 'close'
+  deploy_preview_trigger_removal:
+    if: (github.event_name == 'pull_request' && github.event.action == 'closed') && startsWith(github.head_ref, 'lokalise-') == false
+    runs-on: ubuntu-latest
+    name: Trigger removal of deploy preview
+    steps:
+      - name: Push POST request
+        uses: muinmomin/webhook-action@v1.0.0
+        with:
+          url: ${{ secrets.TRIGGER_BRANCH_REMOVAL }}
+          data: '{"branchName": "${{github.head_ref}}"}'
