@@ -1,7 +1,20 @@
-import { National } from '@corona-dashboard/common';
+import {
+  National,
+  NlVaccineAdministeredEstimateValue,
+  NlVaccineAdministeredValue,
+  NlVaccineDeliveryEstimateValue,
+  NlVaccineDeliveryValue,
+} from '@corona-dashboard/common';
 import { useMemo } from 'react';
 
-export function useVaccineDeliveryData(data: National) {
+export function useVaccineDeliveryData(
+  data: National
+): [
+  NlVaccineDeliveryValue[],
+  NlVaccineDeliveryEstimateValue[],
+  NlVaccineAdministeredValue[],
+  NlVaccineAdministeredEstimateValue[]
+] {
   return useMemo(() => {
     const vaccineDeliveryValues = [...data.vaccine_delivery.values];
     const vaccineDeliveryEstimateValues = [
@@ -16,10 +29,10 @@ export function useVaccineDeliveryData(data: National) {
     // will have a gap rendered between them
     vaccineDeliveryEstimateValues.unshift({
       ...vaccineDeliveryValues[vaccineDeliveryValues.length - 1],
-    });
+    } as NlVaccineDeliveryEstimateValue);
     vaccineAdministeredEstimateValues.unshift({
       ...vaccineAdministeredValues[vaccineAdministeredValues.length - 1],
-    });
+    } as NlVaccineAdministeredEstimateValue);
 
     return [
       vaccineDeliveryValues,
