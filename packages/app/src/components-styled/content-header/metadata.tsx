@@ -9,7 +9,6 @@ import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { Box } from '../base';
 import { ExternalLink } from '../external-link';
 import { Text } from '../typography';
-import { VisuallyHidden } from '~/components-styled/visually-hidden';
 interface Datasource {
   href: string;
   text: string;
@@ -26,7 +25,7 @@ export interface MetadataProps {
   datumsText: string;
   dateOrRange: number | DateRange;
   dateOfInsertionUnix: number;
-  accessibilitySubject?: string;
+  accessibilitySubject: string;
 }
 
 const text = siteText.common.metadata;
@@ -63,10 +62,8 @@ export function Metadata(props: MetadataProps) {
         icon={<DatabaseIcon aria-hidden />}
         items={dataSources}
         label={text.source}
-        accessibilityText={replaceVariablesInText(
-          siteText.accessibility.link_source,
-          { subject: accessibilitySubject }
-        )}
+        accessibilityString={siteText.accessibility.link_source}
+        accessibilitySubject={accessibilitySubject}
       />
 
       <MetadataItem
@@ -80,10 +77,8 @@ export function Metadata(props: MetadataProps) {
         }
         items={dataDownloads}
         label={text.download}
-        accessibilityText={replaceVariablesInText(
-          siteText.accessibility.link_download,
-          { subject: accessibilitySubject }
-        )}
+        accessibilityString={siteText.accessibility.link_download}
+        accessibilitySubject={accessibilitySubject}
       />
     </Box>
   );
@@ -96,11 +91,18 @@ interface MetadataItemProps {
     href: string;
     text: string;
   }[];
-  accessibilityText: string;
+  accessibilityString: string;
+  accessibilitySubject: string;
 }
 
 function MetadataItem(props: MetadataItemProps) {
-  const { icon, label, items, accessibilityText } = props;
+  const {
+    icon,
+    label,
+    items,
+    accessibilityString,
+    accessibilitySubject,
+  } = props;
 
   if (!items.length) {
     return null;
@@ -117,9 +119,14 @@ function MetadataItem(props: MetadataItemProps) {
           <Fragment key={index + item.href}>
             {index > 0 && ' & '}
             {item.href && (
-              <ExternalLink href={item.href}>
+              <ExternalLink
+                href={item.href}
+                ariaLabel={replaceVariablesInText(accessibilityString, {
+                  subject: accessibilitySubject,
+                  source: item.text,
+                })}
+              >
                 {item.text}
-                <VisuallyHidden>{accessibilityText}</VisuallyHidden>
               </ExternalLink>
             )}
             {!item.href && item.text}
