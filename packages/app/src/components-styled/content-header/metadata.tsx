@@ -25,7 +25,7 @@ export interface MetadataProps {
   datumsText: string;
   dateOrRange: number | DateRange;
   dateOfInsertionUnix: number;
-  accessibilitySubject: string;
+  accessibilitySubject?: string;
 }
 
 const text = siteText.common.metadata;
@@ -91,8 +91,8 @@ interface MetadataItemProps {
     href: string;
     text: string;
   }[];
-  accessibilityString: string;
-  accessibilitySubject: string;
+  accessibilityString?: string;
+  accessibilitySubject?: string;
 }
 
 function MetadataItem(props: MetadataItemProps) {
@@ -121,10 +121,14 @@ function MetadataItem(props: MetadataItemProps) {
             {item.href && (
               <ExternalLink
                 href={item.href}
-                ariaLabel={replaceVariablesInText(accessibilityString, {
-                  subject: accessibilitySubject,
-                  source: item.text,
-                })}
+                ariaLabel={
+                  accessibilityString && accessibilitySubject
+                    ? replaceVariablesInText(accessibilityString, {
+                        subject: accessibilitySubject,
+                        source: item.text,
+                      })
+                    : undefined
+                }
               >
                 {item.text}
               </ExternalLink>
