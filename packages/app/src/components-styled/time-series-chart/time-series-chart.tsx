@@ -144,7 +144,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     : calculatedSeriesMax;
 
   const xDomain = useMemo(() => {
-    const domain = extent(trendsList.flat().map(getX));
+    const domain = extent(trendsList.flat().map((x) => x.__date));
 
     return isDefined(domain[0]) && isDefined(domain[1])
       ? (domain as [Date, Date])
@@ -177,7 +177,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     () =>
       scaleBand<Date>({
         range: [0, bounds.width],
-        domain: timespanMarkerData.map(getX),
+        domain: timespanMarkerData.map((x) => x.__date),
       }),
     [bounds.width, timespanMarkerData]
   );
@@ -194,6 +194,14 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     range: [bounds.height, 0],
     nice: tickValues?.length || numTicks,
   });
+
+  function getX(x: TrendValue) {
+    return xScale(x.__date);
+  }
+
+  function getY(x: TrendValue) {
+    return yScale(x.__value);
+  }
 
   const [hoveredPoints, setHoveredPoints] = useState<HoveredPoint[]>();
 
@@ -256,7 +264,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
       }
 
       /**
-       * @TOOD flip this around and do bisect on "values" instead of "trends"
+       * @TODO flip this around and do bisect on "values" instead of "trends"
        * We can construct the hoveredPoints from the seriesConfig
        */
       const hoveredPoints = trendsList.map((trend, index) => {
@@ -272,11 +280,11 @@ export function TimeSeriesChart<T extends TimestampedValue>({
           seriesConfigIndex: index,
           /**
            * @TODO I don't think we need to include color here. Can we derive
-           * active hover point index maybe?
+           * active hover point index maybe if we pass that to the markers component?
            */
           color: seriesConfig[index].color,
-          x: xScale(trendValue.__date) ?? 0,
-          y: yScale(trendValue.__value) ?? 0,
+          x: getX(trendValue),
+          y: getY(trendValue),
         } as HoveredPoint;
       });
 
@@ -319,8 +327,9 @@ export function TimeSeriesChart<T extends TimestampedValue>({
       bisect,
       trendsList,
       seriesConfig,
+      getX,
+      getY,
       xScale,
-      yScale,
       hideTooltip,
       showTooltip,
       values,
@@ -413,12 +422,4 @@ export function TimeSeriesChart<T extends TimestampedValue>({
       </Box>
     </Box>
   );
-}
-
-function getX(x: TrendValue) {
-  return x.__date;
-}
-
-function getY(x: TrendValue) {
-  return x.__value;
 }
