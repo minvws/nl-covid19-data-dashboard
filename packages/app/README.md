@@ -56,3 +56,9 @@ Copies the required json files from the `public/json` folder to the `src/pages-t
 
 `yarn test`
 Runs the unit test suite.
+
+### CI/CD deployment test
+
+We're testing the CI/CD deployment and editing this README file to trigger some test deploys.
+
+- Deploy 1 at 14:30.
