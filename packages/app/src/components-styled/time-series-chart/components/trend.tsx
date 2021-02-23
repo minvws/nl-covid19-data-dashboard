@@ -1,8 +1,8 @@
 import { AreaClosed, LinePath } from '@visx/shape';
-import { ScaleLinear, ScaleTime } from 'd3-scale';
 import { MouseEvent, TouchEvent, useState } from 'react';
 import { colors } from '~/style/theme';
 import { TrendValue } from '~/components-styled/line-chart/logic';
+import { PositionScale } from '@visx/shape/lib/types';
 
 export type TrendType = 'line' | 'area';
 export type LineStyle = 'solid' | 'dashed';
@@ -13,11 +13,9 @@ export type TrendProps = {
   areaFillOpacity?: number;
   strokeWidth?: number;
   style?: LineStyle;
-  /**
-   * @TODO refactor to generic getX getY
-   */
-  xScale: ScaleTime<number, number>;
-  yScale: ScaleLinear<number, number>;
+  getX: (v: TrendValue) => number;
+  getY: (v: TrendValue) => number;
+  yScale: PositionScale;
   color?: string;
   onHover: (event: TouchEvent<SVGElement> | MouseEvent<SVGElement>) => void;
 };
@@ -29,7 +27,8 @@ export function Trend({
   strokeWidth = 2,
   style = 'solid',
   color = colors.data.primary,
-  xScale,
+  getX,
+  getY,
   yScale,
   onHover,
 }: TrendProps) {
@@ -51,8 +50,8 @@ export function Trend({
         <AreaClosed
           style={{ pointerEvents: 'all' }}
           data={trend}
-          x={(d) => xScale(d.__date)}
-          y={(d) => yScale(d.__value)}
+          x={getX}
+          y={getY}
           fill={color}
           fillOpacity={areaFillOpacity}
           yScale={yScale}
@@ -65,8 +64,8 @@ export function Trend({
       <LinePath
         style={{ pointerEvents: 'all' }}
         data={trend}
-        x={(d) => xScale(d.__date)}
-        y={(d) => yScale(d.__value)}
+        x={getX}
+        y={getY}
         stroke={color}
         strokeWidth={isHovered ? strokeWidth + 1 : strokeWidth}
         strokeDasharray={dashes}

@@ -5,8 +5,16 @@ import { bisectLeft } from 'd3-array';
 import { ScaleTime } from 'd3-scale';
 import { useCallback, useState } from 'react';
 import { TrendValue } from '~/components-styled/line-chart/logic';
-import { HoveredPoint } from '../components';
 import { SeriesConfig } from './series';
+
+export type HoveredPoint = {
+  trendValue: TrendValue;
+  trendValueIndex: number;
+  seriesConfigIndex: number;
+  color: string;
+  x: number;
+  y: number;
+};
 
 interface UseHoverStateArgs<T extends TimestampedValue> {
   trendsList: TrendValue[][];
@@ -18,13 +26,13 @@ interface UseHoverStateArgs<T extends TimestampedValue> {
 }
 
 interface HoverState {
-  hoveredPoints: HoveredPoint[];
+  points: HoveredPoint[];
   nearestPoint: HoveredPoint;
 }
 
 type Event = React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>;
 
-type HoverHandler = (event: Event) => void;
+type HoverHandler = (event: Event, seriesIndex?: number) => void;
 
 type UseHoveStateResponse = [HoverHandler, HoverState | undefined];
 
@@ -71,22 +79,22 @@ export function useHoverState<T extends TimestampedValue>({
         setHoverState(undefined);
       }
 
-      const point = localPoint(event);
+      const mousePoint = localPoint(event);
 
-      if (!point) {
+      if (!mousePoint) {
         return;
       }
 
       /**
        * @TODO flip this around and do bisect on "values" instead of "trends"
-       * We can construct the hoveredPoints from the seriesConfig
+       * We can construct the points from the seriesConfig
        */
-      const hoveredPoints = trendsList.map((trend, index) => {
+      const points = trendsList.map((trend, index) => {
         /**
          * @TODO we only really need to do the bisect once on a single trend
          * because all trend values come from the same original value object
          */
-        const [trendValue, trendValueIndex] = bisect(trend, point.x);
+        const [trendValue, trendValueIndex] = bisect(trend, mousePoint.x);
 
         return {
           trendValue,
@@ -102,15 +110,16 @@ export function useHoverState<T extends TimestampedValue>({
         } as HoveredPoint;
       });
 
-      // console.log('hoveredPoints', hoveredPoints);
+      // console.log('points', points);
 
-      const sortedPoints = [...hoveredPoints].sort(
-        (left, right) => distance(left, point) - distance(right, point)
-      );
+      const nearestPoint = [...points].sort(
+        (left, right) =>
+          distance(left, mousePoint) - distance(right, mousePoint)
+      )[0];
 
-      const nearestPoint = sortedPoints[0];
+      // const nearestPoint = sortedPoints[0];
 
-      setHoverState({ hoveredPoints, nearestPoint });
+      setHoverState({ points, nearestPoint });
     },
     [bisect, trendsList, seriesConfig, getX, getY]
   );

@@ -35,14 +35,17 @@ import { ValueAnnotation } from '../value-annotation';
 import {
   ChartAxes,
   ChartContainer,
-  Markers,
+  DateSpanMarker,
+  LineMarker,
+  PointMarkers,
   Tooltip,
   TooltipData,
   TooltipFormatter,
   Trend,
 } from './components';
+import { Overlay } from './components/overlay';
 import { SeriesConfig } from './logic';
-import { useHoverState } from './logic/use-hover-state';
+import { useHoverState } from './logic/hover-state';
 export type { SeriesConfig } from './logic';
 
 export type ChartPadding = {
@@ -248,17 +251,18 @@ export function TimeSeriesChart<T extends TimestampedValue>({
           areaFillOpacity={seriesConfig[index].areaFillOpacity}
           strokeWidth={seriesConfig[index].strokeWidth}
           style={seriesConfig[index].style}
-          xScale={xScale}
+          getX={getX}
+          getY={getY}
           yScale={yScale}
           color={seriesConfig[index].color}
           /**
            * Here we pass the index to handle hover. Not sure if that is
            * enough to avoid having to search for the point
            */
-          onHover={handleHover}
+          onHover={(evt) => handleHover(evt, index)}
         />
       )),
-    [handleHover, seriesConfig, trendsList, xScale, yScale]
+    [handleHover, seriesConfig, trendsList, yScale, getX, getY]
   );
 
   if (!xDomain) {
@@ -297,29 +301,20 @@ export function TimeSeriesChart<T extends TimestampedValue>({
           formatTooltip={formatTooltip}
         />
 
-        {/**
-         * @TODO see if we can bundle this wrapper with the marker logic and do not pass height and padding separately to Marker, because we already know the marker height
-         */}
         {hoverState && (
-          <Box
-            height={bounds.height}
-            width={bounds.width}
-            position="absolute"
-            top={padding.top}
-            left={padding.left}
-            style={{
-              pointerEvents: 'none',
-            }}
-          >
-            <Markers
-              hoveredPoints={hoverState.hoveredPoints}
-              showLine={showMarkerLine}
-              dateSpanWidth={dateSpanScale.bandwidth()}
-              height={height}
-              padding={padding}
-              lineColor={`#5B5B5B`}
+          <Overlay bounds={bounds} padding={padding}>
+            <DateSpanMarker
+              width={dateSpanScale.bandwidth()}
+              point={hoverState.nearestPoint}
             />
-          </Box>
+            {showMarkerLine && (
+              <LineMarker
+                point={hoverState.nearestPoint}
+                lineColor={`#5B5B5B`}
+              />
+            )}
+            <PointMarkers points={hoverState.points} />
+          </Overlay>
         )}
       </Box>
     </Box>

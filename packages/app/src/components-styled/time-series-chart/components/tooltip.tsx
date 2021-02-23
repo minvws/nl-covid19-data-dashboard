@@ -1,3 +1,7 @@
+/**
+ * This component uses the VisX tooltip. It mainly exists to bundle the styling and
+ * default tooltip formatting logic into a single place
+ */
 import {
   isDateSpanValue,
   isDateValue,
