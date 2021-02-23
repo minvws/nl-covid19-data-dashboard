@@ -2208,12 +2208,12 @@
           "janssen": "Janssen & Janssen",
           "sanofi": "Sanofi"
         },
-        "delivered": "Berekend",
-        "estimated": "Verwacht",
+        "delivered": "Geleverd",
+        "estimated": "Verwachte leveringen",
         "left_divider_label": "Berekend aantal",
         "right_divider_label": "Verwacht aantal",
         "legend": {
-          "available": "Beschikbare vaccins",
+          "available": "Geleverde vaccins",
           "expected": "Verwacht"
         },
         "legend_label": "Berekend aantal prikken {{name}}"

@@ -2208,12 +2208,12 @@
           "janssen": "Janssen & Janssen",
           "sanofi": "Sanofi"
         },
-        "delivered": "Calculated number",
-        "estimated": "Expected",
+        "delivered": "Delivered",
+        "estimated": "Expected deliveries",
         "left_divider_label": "Calculated number of",
         "right_divider_label": "Expected number",
         "legend": {
-          "available": "Available vaccines",
+          "available": "Delivered vaccines",
           "expected": "Expected"
         },
         "legend_label": "Calculated number of {{name}} doses"
