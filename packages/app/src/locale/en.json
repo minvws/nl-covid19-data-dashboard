@@ -2216,7 +2216,7 @@
           "available": "Delivered vaccines",
           "expected": "Expected"
         },
-        "legend_label": "Calculated number of {{name}} doses"
+        "legend_label": "Number of {{name}} doses administered"
       }
     }
   },
