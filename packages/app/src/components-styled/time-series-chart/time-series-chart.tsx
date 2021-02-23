@@ -1,31 +1,25 @@
 /**
- * This chart is an adaptation from MultiLineChart. It attempts to create a
- * generic abstraction that can replace LineChart and MultiLineChart and
- * AreaChart.
+ * This chart started as an adaptation from MultiLineChart. It attempts to create a
+ * more generic abstraction that can replace LineChart, MultiLineChart,
+ * (highcharts) AreaChart and later possibly something like the vaccine delivery
+ * chart.
  *
- * The main focus in this iteration is to try to keep things as simple as
- * possible.
+ * The main focus in this iteration is to try to reduce complexity and improve
+ * the abstraction on which we build.
  *
  * It assumes that all data for the chart (regardless of sources) is passed in a
- * single type on the values prop. Then the config prop will declare the type
+ * single type on the values prop. The series config will declare the type
  * and visual properties for each of the series.
  *
  * A lot of customization functions have been stripped from the component props
  * API to reduce complexity, because I think we should strive for consistency in
  * design first and use component composition where possible.
- *
- * For this reason the legend was also excluded from this implementation, in
- * order to see how convenient it is to have it as part of the ChartTile
- * composition like some other charts.
  */
 import { TimestampedValue } from '@corona-dashboard/common';
-import { localPoint } from '@visx/event';
-import { Point } from '@visx/point';
 import { scaleBand, scaleLinear, scaleTime } from '@visx/scale';
 import { useTooltip } from '@visx/tooltip';
-import { bisectLeft, extent } from 'd3-array';
-import { ScaleTime } from 'd3-scale';
-import { useCallback, useMemo, useState } from 'react';
+import { extent } from 'd3-array';
+import { useCallback, useEffect, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
 import {
@@ -41,7 +35,6 @@ import { ValueAnnotation } from '../value-annotation';
 import {
   ChartAxes,
   ChartContainer,
-  HoveredPoint,
   Markers,
   Tooltip,
   TooltipData,
@@ -49,6 +42,7 @@ import {
   Trend,
 } from './components';
 import { SeriesConfig } from './logic';
+import { useHoverState } from './logic/use-hover-state';
 export type { SeriesConfig } from './logic';
 
 export type ChartPadding = {
@@ -203,101 +197,18 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     return yScale(x.__value);
   }
 
-  const [hoveredPoints, setHoveredPoints] = useState<HoveredPoint[]>();
+  const [handleHover, hoverState] = useHoverState({
+    paddingLeft: padding.left,
+    getX,
+    getY,
+    seriesConfig,
+    trendsList,
+    xScale,
+  });
 
-  const bisect = useCallback(
-    function (
-      trend: TrendValue[],
-      xPosition: number,
-      xScale: ScaleTime<number, number>
-    ): [TrendValue, number] {
-      if (trend.length === 1) return [trend[0], 0];
-
-      /**
-       * @TODO figure this out. If we can do it without padding, we can move
-       * this outside the component
-       */
-      const date = xScale.invert(xPosition - padding.left);
-
-      const index = bisectLeft(
-        trend.map((x) => x.__date),
-        date,
-        1
-      );
-
-      const d0 = trend[index - 1];
-      const d1 = trend[index];
-
-      if (!d1) return [d0, 0];
-
-      return [+date - +d0.__date > +d1.__date - +date ? d1 : d0, index];
-    },
-    [padding]
-  );
-
-  const distance = (hoveredPoint: HoveredPoint, localPoint: Point) => {
-    /**
-     * @TODO rewrite this to getX getY
-     *
-     * can use use vix standard function for distance?
-     *
-     * we probably only need to look at the Y component, because all trend
-     * values come from the same sample, and that sample has been picked with
-     * the bisect call.
-     */
-    const x = localPoint.x - hoveredPoint.x;
-    const y = localPoint.y - hoveredPoint.y;
-    return Math.sqrt(x * x + y * y);
-  };
-
-  const handleHover = useCallback(
-    (event: React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>) => {
-      if (event.type === 'mouseleave') {
-        hideTooltip();
-        setHoveredPoints(undefined);
-      }
-
-      const point = localPoint(event);
-
-      if (!point) {
-        return;
-      }
-
-      /**
-       * @TODO flip this around and do bisect on "values" instead of "trends"
-       * We can construct the hoveredPoints from the seriesConfig
-       */
-      const hoveredPoints = trendsList.map((trend, index) => {
-        /**
-         * @TODO we only really need to do the bisect once on a single trend
-         * because all trend values come from the same original value object
-         */
-        const [trendValue, trendValueIndex] = bisect(trend, point.x, xScale);
-
-        return {
-          trendValue,
-          trendValueIndex,
-          seriesConfigIndex: index,
-          /**
-           * @TODO I don't think we need to include color here. Can we derive
-           * active hover point index maybe if we pass that to the markers component?
-           */
-          color: seriesConfig[index].color,
-          x: getX(trendValue),
-          y: getY(trendValue),
-        } as HoveredPoint;
-      });
-
-      // console.log('hoveredPoints', hoveredPoints);
-
-      setHoveredPoints(hoveredPoints);
-
-      const sortedPoints = [...hoveredPoints].sort(
-        (left, right) => distance(left, point) - distance(right, point)
-      );
-
-      const nearestPoint = sortedPoints[0];
-
+  useEffect(() => {
+    if (hoverState) {
+      const { nearestPoint } = hoverState;
       showTooltip({
         tooltipData: {
           /**
@@ -322,19 +233,10 @@ export function TimeSeriesChart<T extends TimestampedValue>({
         tooltipLeft: nearestPoint.x,
         tooltipTop: nearestPoint.y,
       });
-    },
-    [
-      bisect,
-      trendsList,
-      seriesConfig,
-      getX,
-      getY,
-      xScale,
-      hideTooltip,
-      showTooltip,
-      values,
-    ]
-  );
+    } else {
+      hideTooltip();
+    }
+  }, [hoverState, seriesConfig, values, hideTooltip, showTooltip]);
 
   const renderSeries = useCallback(
     () =>
@@ -398,7 +300,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
         {/**
          * @TODO see if we can bundle this wrapper with the marker logic and do not pass height and padding separately to Marker, because we already know the marker height
          */}
-        {hoveredPoints && (
+        {hoverState && (
           <Box
             height={bounds.height}
             width={bounds.width}
@@ -410,7 +312,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
             }}
           >
             <Markers
-              hoveredPoints={hoveredPoints}
+              hoveredPoints={hoverState.hoveredPoints}
               showLine={showMarkerLine}
               dateSpanWidth={dateSpanScale.bandwidth()}
               height={height}
