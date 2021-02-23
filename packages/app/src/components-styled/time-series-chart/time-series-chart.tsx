@@ -18,20 +18,14 @@
  * order to see how convenient it is to have it as part of the ChartTile
  * composition like some other charts.
  */
-import {
-  isDateSpanValue,
-  isDateValue,
-  TimestampedValue,
-} from '@corona-dashboard/common';
-import css from '@styled-system/css';
+import { TimestampedValue } from '@corona-dashboard/common';
 import { localPoint } from '@visx/event';
 import { Point } from '@visx/point';
 import { scaleBand, scaleLinear, scaleTime } from '@visx/scale';
-import { defaultStyles, TooltipWithBounds, useTooltip } from '@visx/tooltip';
+import { useTooltip } from '@visx/tooltip';
 import { bisectLeft, extent } from 'd3-array';
 import { ScaleTime } from 'd3-scale';
 import { useCallback, useMemo, useState } from 'react';
-import styled from 'styled-components';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
 import {
@@ -42,20 +36,20 @@ import {
   getTrendData,
   TrendValue,
 } from '~/components-styled/line-chart/logic';
-import { Text } from '~/components-styled/typography';
-// import text from '~/locale/index';
-import { formatDateFromSeconds } from '~/utils/formatDate';
-import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { TimeframeOption } from '~/utils/timeframe';
-import { useBreakpoints } from '~/utils/useBreakpoints';
 import { ValueAnnotation } from '../value-annotation';
 import {
   ChartAxes,
   ChartContainer,
-  Markers,
-  Trend,
   HoveredPoint,
+  Markers,
+  Tooltip,
+  TooltipData,
+  TooltipFormatter,
+  Trend,
 } from './components';
+import { SeriesConfig } from './logic';
+export type { SeriesConfig } from './logic';
 
 export type ChartPadding = {
   top: number;
@@ -71,28 +65,7 @@ export const defaultPadding: ChartPadding = {
   left: 30,
 };
 
-const tooltipStyles = {
-  ...defaultStyles,
-  padding: 0,
-  zIndex: 100,
-};
-
-type TooltipData<T extends TimestampedValue> = {
-  value: T;
-  key: keyof T;
-  seriesConfig: SeriesConfig<T>[];
-};
-
 export type ChartBounds = { width: number; height: number };
-
-export type SeriesConfig<T extends TimestampedValue> = {
-  metricProperty: keyof T;
-  label: string;
-  color: string;
-  style?: 'solid' | 'dashed';
-  areaFillOpacity?: number;
-  strokeWidth?: number;
-};
 
 export type TimeSeriesChartProps<T extends TimestampedValue> = {
   values: T[];
@@ -101,11 +74,7 @@ export type TimeSeriesChartProps<T extends TimestampedValue> = {
   height?: number;
   timeframe?: TimeframeOption;
   signaalwaarde?: number;
-  formatTooltip?: (
-    value: T,
-    key: keyof T,
-    seriesConfig: SeriesConfig<T>[]
-  ) => React.ReactNode;
+  formatTooltip?: TooltipFormatter<T>;
   dataOptions?: {
     annotation?: string;
     maximumValue?: number;
@@ -145,9 +114,6 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     tooltipOpen,
   } = useTooltip<TooltipData<T>>();
 
-  const breakpoints = useBreakpoints();
-  const isTinyScreen = !breakpoints.xs;
-
   const metricProperties = useMemo(
     () => seriesConfig.map((x) => x.metricProperty),
     [seriesConfig]
@@ -178,7 +144,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     : calculatedSeriesMax;
 
   const xDomain = useMemo(() => {
-    const domain = extent(trendsList.flat().map(getDate));
+    const domain = extent(trendsList.flat().map(getX));
 
     return isDefined(domain[0]) && isDefined(domain[1])
       ? (domain as [Date, Date])
@@ -211,7 +177,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     () =>
       scaleBand<Date>({
         range: [0, bounds.width],
-        domain: timespanMarkerData.map(getDate),
+        domain: timespanMarkerData.map(getX),
       }),
     [bounds.width, timespanMarkerData]
   );
@@ -289,6 +255,10 @@ export function TimeSeriesChart<T extends TimestampedValue>({
         return;
       }
 
+      /**
+       * @TOOD flip this around and do bisect on "values" instead of "trends"
+       * We can construct the hoveredPoints from the seriesConfig
+       */
       const hoveredPoints = trendsList.map((trend, index) => {
         /**
          * @TODO we only really need to do the bisect once on a single trend
@@ -408,32 +378,13 @@ export function TimeSeriesChart<T extends TimestampedValue>({
           {renderSeries()}
         </ChartContainer>
 
-        {tooltipOpen && tooltipData && (
-          <TooltipWithBounds
-            left={tooltipLeft}
-            top={tooltipTop}
-            style={tooltipStyles}
-            offsetLeft={isTinyScreen ? 0 : 50}
-          >
-            {/**
-             * @TODO move this to Tooltip component together with default
-             * formatting function
-             */}
-            <TooltipContainer>
-              {typeof formatTooltip === 'function'
-                ? formatTooltip(
-                    tooltipData.value,
-                    tooltipData.key,
-                    tooltipData.seriesConfig
-                  )
-                : formatDefaultTooltip(
-                    tooltipData.value,
-                    tooltipData.key,
-                    tooltipData.seriesConfig
-                  )}
-            </TooltipContainer>
-          </TooltipWithBounds>
-        )}
+        <Tooltip
+          data={tooltipData}
+          left={tooltipLeft}
+          top={tooltipTop}
+          isOpen={tooltipOpen}
+          formatTooltip={formatTooltip}
+        />
 
         {/**
          * @TODO see if we can bundle this wrapper with the marker logic and do not pass height and padding separately to Marker, because we already know the marker height
@@ -464,71 +415,10 @@ export function TimeSeriesChart<T extends TimestampedValue>({
   );
 }
 
-function getDate(x: TrendValue) {
+function getX(x: TrendValue) {
   return x.__date;
 }
 
-function formatDefaultTooltip<T extends TimestampedValue>(
-  value: T,
-  key: keyof T,
-  _seriesConfig: SeriesConfig<T>[],
-  isPercentage?: boolean
-) {
-  // default tooltip assumes one line is rendered:
-
-  const numberValue = (value[key] as unknown) as number;
-
-  if (isDateValue(value)) {
-    return (
-      <>
-        <Text as="span" fontWeight="bold">
-          {`${formatDateFromSeconds(value.date_unix)}: `}
-        </Text>
-        {isPercentage
-          ? `${formatPercentage(numberValue)}%`
-          : formatNumber(numberValue)}
-      </>
-    );
-  } else if (isDateSpanValue(value)) {
-    const dateStartString = formatDateFromSeconds(
-      value.date_start_unix,
-      'day-month'
-    );
-    const dateEndString = formatDateFromSeconds(
-      value.date_end_unix,
-      'day-month'
-    );
-
-    return (
-      <>
-        <Text as="span" fontWeight="bold">
-          {`${dateStartString} - ${dateEndString}: `}
-        </Text>
-        {isPercentage
-          ? `${formatPercentage(numberValue)}%`
-          : formatNumber(numberValue)}
-      </>
-    );
-  }
-
-  throw new Error(
-    `Invalid value passed to format tooltip function: ${JSON.stringify(value)}`
-  );
+function getY(x: TrendValue) {
+  return x.__value;
 }
-
-export const TooltipContainer = styled.div(
-  css({
-    pointerEvents: 'none',
-    whiteSpace: 'nowrap',
-    minWidth: 72,
-    color: 'body',
-    backgroundColor: 'white',
-    lineHeight: 2,
-    borderColor: 'border',
-    borderWidth: '1px',
-    borderStyle: 'solid',
-    px: 2,
-    py: 1,
-    fontSize: 1,
-  })
-);

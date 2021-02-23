@@ -1,1 +1,1 @@
-export * from './series-config';
+export * from './series';

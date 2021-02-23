@@ -13,6 +13,7 @@ import { formatDateFromSeconds } from '~/utils/formatDate';
 export function VaccineSupportTooltip({
   locale,
   value,
+  key,
   config,
 }: {
   locale: Locale;
@@ -30,6 +31,7 @@ export function VaccineSupportTooltip({
       <Heading level={5} mb={1}>
         {text.grafiek_draagvlak.titel}
       </Heading>
+      {key}
       <VisuallyHidden>{`${dateStartString} - ${dateEndString}`}</VisuallyHidden>
       <TooltipList>
         {[...config].reverse().map((x) => (
