@@ -23,17 +23,18 @@ export function useChartHover<
   bisect: BisectFunction
 ) {
   // This is a bit of a hack because to fit the charts neatly against each other,
-  // the last value of the next area list is added to the previous. Which means
+  // the last value of one area list is added as the first to the next. Which means
   // there are duplicates in the data lists. When determining the hovered point we
-  // don't want to have double hits, so we remove the last item from the first trends
-  // and area list here. (This is also why we need to create a copy of these lists here.)
+  // don't want to include these copies as they're only used to make sure the rendering
+  // connects, so we remove the first item from the last trends and area list here.
+  // (This is also why we need to create a copy of these lists here.)
   const _trends = useMemo(() => {
     const result = trends.map((x) => ({
       ...x,
       values: x.values.map((x) => ({ ...x })),
     }));
 
-    result[0].values.pop();
+    result[1].values.shift();
 
     return result;
   }, [trends]);
@@ -43,7 +44,9 @@ export function useChartHover<
       ...x,
       values: x.values.map((x) => ({ ...x })),
     }));
-    result[0].values.pop();
+
+    result[1].values.shift();
+
     return result;
   }, [areas]);
 
