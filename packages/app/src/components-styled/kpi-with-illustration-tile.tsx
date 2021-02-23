@@ -2,7 +2,7 @@ import { Box } from './base';
 import { Tile } from '~/components-styled/tile';
 import { Metadata, MetadataProps } from './metadata';
 import { Heading, Text } from './typography';
-
+import { css } from '@styled-system/css';
 interface Illustration {
   image: string;
   alt: string;
@@ -50,6 +50,7 @@ export function KpiWithIllustrationTile({
             loading="lazy"
             src={illustration.image}
             alt={illustration.alt}
+            css={css({ mb: 3 })}
           />
           <p>{illustration.description}</p>
         </Box>

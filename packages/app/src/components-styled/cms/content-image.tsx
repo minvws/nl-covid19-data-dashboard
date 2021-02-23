@@ -50,8 +50,9 @@ export function ContentImage({
   ) : (
     <ContentWrapper>
       <Box as="figure" role="group" spacing={3} my={2} textAlign="center">
-        <SanityImage {...getImageProps(node, { sizes })} />
-
+        <Box mb={3}>
+          <SanityImage {...getImageProps(node, { sizes })} />
+        </Box>
         {caption}
       </Box>
     </ContentWrapper>
