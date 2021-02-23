@@ -12,8 +12,8 @@ export function useVaccineDeliveryData(data: National) {
       ...data.vaccine_administered_estimate.values,
     ];
 
-    // add the first estimate to the delivered values, otherwise the lines and stacks will
-    // have a gap between them
+    // add the first estimate to the delivered values, otherwise the lines and stacks
+    // will have a gap rendered between them
     vaccineDeliveryEstimateValues.unshift({
       ...vaccineDeliveryValues[vaccineDeliveryValues.length - 1],
     });
