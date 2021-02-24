@@ -262,7 +262,21 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
         "text": "RIVM"
       }
-    }
+    },
+    "cluster_datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "cluster_bron": {
+      "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "text": "RIVM"
+    },
+    "cluster_titel": "Clusters van positief geteste personen",
+    "cluster_toelichting": "---",
+    "cluster_barscale_titel": "Aantal actieve clusters",
+    "cluster_barscale_toelichting": "---",
+    "cluster_barscale_screenreader_text": "{{value}} actieve clusters.",
+    "cluster_gemiddelde_titel": "Gemiddelde grootte actieve clusters",
+    "cluster_gemiddelde_toelichting": "---.",
+    "cluster_linechart_titel": "Verloop actieve clusters over tijd",
+    "cluster_linechart_toelichting": "---"
   },
   "besmettelijke_personen": {
     "title": "Aantal besmettelijke mensen",
@@ -783,7 +797,22 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
         "text": "RIVM"
       }
-    }
+    },
+    "cluster_datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "cluster_bron": {
+      "href": "https://www.rivm.nl/coronavirus-covid-19/actueel/wekelijkse-update-epidemiologische-situatie-covid-19-in-nederland",
+      "text": "RIVM",
+      "dowload": ""
+    },
+    "cluster_titel": "Clusters van positief geteste personen",
+    "cluster_toelichting": "---",
+    "cluster_barscale_titel": "Aantal actieve clusters",
+    "cluster_barscale_toelichting": "---",
+    "cluster_barscale_screenreader_text": "{{value}} actieve clusters.",
+    "cluster_gemiddelde_titel": "Gemiddelde grootte actieve clusters",
+    "cluster_gemiddelde_toelichting": "---.",
+    "cluster_linechart_titel": "Verloop actieve clusters over tijd",
+    "cluster_linechart_toelichting": "---"
   },
   "veiligheidsregio_rioolwater_metingen": {
     "titel_sidebar": "Rioolwatermeting",
@@ -1016,7 +1045,8 @@
       "titel": "Legenda",
       "geen_regio": "geen regio's",
       "regio_singular": "{{amount}} regio",
-      "regio_plural": "{{amount}} regio's"
+      "regio_plural": "{{amount}} regio's",
+      "regios": "{{amount}} regio's"
     },
     "valid_from": "Geldig vanaf {{validFrom}}",
     "sidebar_label": "Risiconiveau:",
