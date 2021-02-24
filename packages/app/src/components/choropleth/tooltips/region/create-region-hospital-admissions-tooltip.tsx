@@ -1,14 +1,19 @@
 import {
+  ChoroplethThresholdsValue,
   RegionalHospitalNiceValue,
   SafetyRegionProperties,
 } from '@corona-dashboard/common';
 import { ReactNode } from 'react';
-import { Text } from '~/components-styled/typography';
-import { RegionSelectionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
-import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
+import { InlineText } from '~/components-styled/typography';
+import { RegionSelectionHandler } from '../../select-handlers/create-select-region-handler';
+import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
+import { TooltipSubject } from '~/components/choropleth/tooltips/tooltip-subject';
+import siteText from '~/locale/index';
 import { formatNumber } from '~/utils/formatNumber';
 
 export const createRegionHospitalAdmissionsTooltip = (
+  subject: string,
+  thresholdValues: ChoroplethThresholdsValue[],
   selectHandler: RegionSelectionHandler
 ) => (
   context: SafetyRegionProperties & RegionalHospitalNiceValue
@@ -21,9 +26,18 @@ export const createRegionHospitalAdmissionsTooltip = (
   return (
     context && (
       <TooltipContent title={context.vrname} onSelect={onSelect}>
-        <Text m={0} fontWeight="bold">
-          {formatNumber(context.admissions_on_date_of_reporting)}
-        </Text>
+        <TooltipSubject
+          subject={subject}
+          thresholdValues={thresholdValues}
+          filterBelow={context.admissions_on_date_of_reporting}
+        >
+          <InlineText fontWeight="bold">
+            {formatNumber(context.admissions_on_date_of_reporting)}{' '}
+          </InlineText>
+          {context.admissions_on_date_of_reporting === 1
+            ? siteText.choropleth_tooltip.patients.singular
+            : siteText.choropleth_tooltip.patients.plural}
+        </TooltipSubject>
       </TooltipContent>
     )
   );

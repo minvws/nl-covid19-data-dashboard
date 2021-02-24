@@ -635,7 +635,7 @@
       "dateRangeOfReport": "Waarde van {{startDate}} - {{endDate}}"
     },
     "tooltip": {
-      "positive_tested_people": "{{totalPositiveTestedPeople}} in totaal",
+      "positive_tested_people": "{{totalPositiveTestedPeople}} totaal",
       "positive_tested_value": "{{totalPositiveValue}} per 100.000",
       "vaccinatie_bereidheid": "{{percentageInFavor}}% vaccinatiebereidheid"
     },
@@ -651,6 +651,17 @@
     "read_more": "Lees meer",
     "absolute_date_template": "op {{date}}",
     "inwoners": "inwoners"
+  },
+  "choropleth_tooltip": {
+    "patients": {
+      "singular": "patiënt",
+      "plural": "patiënten"
+    },
+    "positive_tested_people": "Positief geteste mensen:",
+    "hospital_admissions": "Ziekenhuisopnames:",
+    "infected_locations": "Besmette locaties:",
+    "elderly_at_home": "Thuiswonende 70-plussers:",
+    "sewer_regional": "Gemiddeld aantal virusdeeltjes:"
   },
   "seoHead": {
     "default_description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
