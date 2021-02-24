@@ -2227,7 +2227,9 @@
           "available": "Geleverde vaccins",
           "expected": "Verwacht"
         },
-        "legend_label": "Aantal gezette prikken {{name}}"
+        "legend_label": "Aantal gezette prikken {{name}}",
+        "doses_administered": "Aantal gezette prikken",
+        "doses_administered_estimated": "Verwacht aantal gezette prikken"
       }
     }
   },

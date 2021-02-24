@@ -6,10 +6,11 @@ import {
   NlVaccineDeliveryEstimateValue,
   NlVaccineDeliveryValue,
 } from '@corona-dashboard/common';
+import { Fragment } from 'react';
 import styled from 'styled-components';
 import { HoverPoint } from '~/components-styled/area-chart/components/marker';
 import { TimestampedTrendValue } from '~/components-styled/area-chart/logic';
-import { Text } from '~/components-styled/typography';
+import { InlineText, Text } from '~/components-styled/typography';
 import { AllLanguages } from '~/locale/APP_LOCALE';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 
@@ -37,35 +38,60 @@ function formatVaccinationsTooltip(
 
   const data = values[0].data;
 
-  if (isDateSpanValue(data)) {
-    const dateEndString = formatDateFromSeconds(
-      data.date_end_unix,
-      'day-month'
+  if (!isDateSpanValue(data)) {
+    throw new Error(
+      `Invalid value passed to format tooltip function: ${JSON.stringify(
+        values
+      )}`
     );
-    return (
-      <>
-        <Text as="span" fontWeight="bold">
-          {dateEndString}
-        </Text>
-        <TooltipList>
-          {values.map((value) => (
-            <TooltipListItem
-              key={`${value.label}`}
-              color={value.color ?? 'black'}
-            >
+  }
+
+  const dateEndString = formatDateFromSeconds(data.date_end_unix, 'day-month');
+
+  return (
+    <>
+      <Text as="span" fontWeight="bold">
+        {dateEndString}
+      </Text>
+      <TooltipList>
+        {values.map((value) => (
+          <Fragment key={value.label}>
+            <TooltipListItem color={value.color ?? 'black'}>
               <TooltipValueContainer>
                 {formatLabel(value.label, text)}:{' '}
                 <strong>{formatValue(value)}</strong>
               </TooltipValueContainer>
             </TooltipListItem>
-          ))}
-        </TooltipList>
-      </>
-    );
-  }
 
-  throw new Error(
-    `Invalid value passed to format tooltip function: ${JSON.stringify(values)}`
+            {/**
+             * This is a bit hacky, but when the current value's label equals
+             * the 'delivered' or 'estimated' label, we'll render an extra
+             * list-item as header for the vaccines which are the next values
+             * in the array.
+             */}
+            {value.label ===
+              text.vaccinaties.data.vaccination_chart.delivered && (
+              <TooltipListItem>
+                <InlineText mt={2} fontWeight="bold">
+                  {text.vaccinaties.data.vaccination_chart.doses_administered}
+                </InlineText>
+              </TooltipListItem>
+            )}
+            {value.label ===
+              text.vaccinaties.data.vaccination_chart.estimated && (
+              <TooltipListItem>
+                <InlineText mt={2} fontWeight="bold">
+                  {
+                    text.vaccinaties.data.vaccination_chart
+                      .doses_administered_estimated
+                  }
+                </InlineText>
+              </TooltipListItem>
+            )}
+          </Fragment>
+        ))}
+      </TooltipList>
+    </>
   );
 }
 
@@ -91,7 +117,7 @@ const TooltipList = styled.ol`
 `;
 
 interface TooltipListItemProps {
-  color: string;
+  color?: string;
 }
 
 const TooltipListItem = styled.li<TooltipListItemProps>`
@@ -100,11 +126,11 @@ const TooltipListItem = styled.li<TooltipListItemProps>`
 
   &::before {
     content: '';
-    display: inline-block;
+    display: ${(x) => (x.color ? 'inline-block' : 'none')};
     height: 8px;
     width: 8px;
     border-radius: 50%;
-    background: ${(props) => props.color};
+    background: ${(x) => x.color};
     margin-right: 0.5em;
     flex-shrink: 0;
   }
