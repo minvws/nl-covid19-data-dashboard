@@ -9,7 +9,6 @@ const DateSpan = styled.div`
 
 const Container = styled.div`
   position: absolute;
-  /* pointer-events: none; */
   top: 0;
   bottom: 0;
   transform: translate(-50%, 0);

@@ -16,7 +16,6 @@ const Label = styled.div`
 `;
 
 const Line = styled.div<LineProps>`
-  /* pointer-events: none; */
   width: 1px;
   height: 100%;
   border-left-width: 1px;

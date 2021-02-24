@@ -1,6 +1,6 @@
 /**
- * This component uses the VisX tooltip. It mainly exists to bundle the styling and
- * default tooltip formatting logic into a single place
+ * This component uses the VisX tooltip. It mainly exists to bundle the styling
+ * and default tooltip formatting logic into a single place
  */
 import {
   isDateSpanValue,
@@ -24,8 +24,22 @@ const tooltipStyles = {
 
 export type TooltipData<T extends TimestampedValue> = {
   value: T;
+  /**
+   * The metric key of the nearest / active hover point. This can be used to
+   * loop up the value from T and highlight it.
+   */
   key: keyof T;
+  /**
+   * The full series config is passed to the tooltip so we can render whatever
+   * is needed.
+   */
   seriesConfig: SeriesConfig<T>[];
+  /**
+   * This is not used yet, but might come in handy. It signals what trend index
+   * the nearest / active point is, and can be used to lookup the configuration
+   * in the seriesConfig.
+   */
+  seriesConfigIndex: number;
 };
 
 export type TooltipFormatter<T extends TimestampedValue> = (
@@ -56,6 +70,8 @@ export function Tooltip<T extends TimestampedValue>({
     return null;
   }
 
+  const { value, key, seriesConfig } = data;
+
   return (
     <TooltipWithBounds
       left={left}
@@ -63,14 +79,10 @@ export function Tooltip<T extends TimestampedValue>({
       style={tooltipStyles}
       offsetLeft={isTinyScreen ? 0 : 50}
     >
-      {/**
-       * @TODO move this to Tooltip component together with default
-       * formatting function
-       */}
       <TooltipContainer>
         {typeof formatTooltip === 'function'
-          ? formatTooltip(data.value, data.key, data.seriesConfig)
-          : formatDefaultTooltip(data.value, data.key, data.seriesConfig)}
+          ? formatTooltip(value, key, seriesConfig)
+          : formatDefaultTooltip(value, key, seriesConfig)}
       </TooltipContainer>
     </TooltipWithBounds>
   );

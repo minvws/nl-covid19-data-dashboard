@@ -9,9 +9,23 @@ import { SeriesConfig } from './series';
 
 export type HoveredPoint = {
   trendValue: TrendValue;
-  trendValueIndex: number;
+  /**
+   * Values index is used to look up the original value from the values prop
+   * based on the bisect outcome (a HoveredPoint).
+   */
+  valuesIndex: number;
+  /**
+   * The series config index is used to link a point to the seriesConfig to look
+   * up things like color and type.
+   */
   seriesConfigIndex: number;
+  /**
+   * Color should be redundant here due to the seriesConfigIndex property
+   */
   color: string;
+  /**
+   * The position of the point on the overlay
+   */
   x: number;
   y: number;
 };
@@ -47,6 +61,11 @@ export function useHoverState<T extends TimestampedValue>({
 }: UseHoverStateArgs<T>): UseHoveStateResponse {
   const [hoverState, setHoverState] = useState<HoverState>();
 
+  /**
+   * @TODO we only really have to do bisect once on original values object,
+   * because all points of all trends are always coming from those values and
+   * are thus aligned vertically.
+   */
   const bisect = useCallback(
     function (trend: TrendValue[], xPosition: number): [TrendValue, number] {
       if (trend.length === 1) return [trend[0], 0];

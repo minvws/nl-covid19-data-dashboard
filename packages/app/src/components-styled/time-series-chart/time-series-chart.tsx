@@ -212,6 +212,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
   useEffect(() => {
     if (hoverState) {
       const { nearestPoint } = hoverState;
+
       showTooltip({
         tooltipData: {
           /**
@@ -221,7 +222,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
            * different hover logic, and possibly use mouse callbacks on the
            * trends individually.
            */
-          value: values[nearestPoint.trendValueIndex],
+          value: values[nearestPoint.valuesIndex],
           /**
            * The key of "value" that we are nearest to. Some tooltips might
            * want to use this to highlight a series.
@@ -232,6 +233,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
            * and labels. In the future this could be distilled maybe.
            */
           seriesConfig: seriesConfig,
+          seriesConfigIndex: nearestPoint.seriesConfigIndex,
         },
         tooltipLeft: nearestPoint.x,
         tooltipTop: nearestPoint.y,
@@ -256,8 +258,9 @@ export function TimeSeriesChart<T extends TimestampedValue>({
           yScale={yScale}
           color={seriesConfig[index].color}
           /**
-           * Here we pass the index to handle hover. Not sure if that is
-           * enough to avoid having to search for the point
+           * Here we pass the trend index to handle hover. Then we can bypass
+           * the "nearest point" calculation, because we already know what
+           * property this event belongs to.
            */
           onHover={(evt) => handleHover(evt, index)}
         />
