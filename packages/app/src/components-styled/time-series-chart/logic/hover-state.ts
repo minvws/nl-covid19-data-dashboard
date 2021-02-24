@@ -4,6 +4,7 @@ import { Point } from '@visx/point';
 import { bisectLeft } from 'd3-array';
 import { ScaleTime } from 'd3-scale';
 import { useCallback, useState } from 'react';
+// import { isDefined } from 'ts-is-present';
 import { TrendValue } from '~/components-styled/line-chart/logic';
 import { SeriesConfig } from './series';
 
@@ -31,6 +32,7 @@ export type HoveredPoint = {
 };
 
 interface UseHoverStateArgs<T extends TimestampedValue> {
+  values: T[];
   trendsList: TrendValue[][];
   seriesConfig: SeriesConfig<T>[];
   getX: (v: TrendValue) => number;
@@ -51,7 +53,7 @@ type HoverHandler = (event: Event, seriesIndex?: number) => void;
 type UseHoveStateResponse = [HoverHandler, HoverState | undefined];
 
 export function useHoverState<T extends TimestampedValue>({
-  // values,
+  values: __values,
   trendsList,
   seriesConfig,
   getX,
@@ -93,7 +95,7 @@ export function useHoverState<T extends TimestampedValue>({
   );
 
   const handleHover = useCallback(
-    (event: Event) => {
+    (event: Event, __trendIndex?: number) => {
       if (event.type === 'mouseleave') {
         setHoverState(undefined);
       }
@@ -104,41 +106,44 @@ export function useHoverState<T extends TimestampedValue>({
         return;
       }
 
+      // if (isDefined(trendIndex)) {
+      //   // setHoverState({ points, nearestPoint });
+      // } else {
       /**
        * @TODO flip this around and do bisect on "values" instead of "trends"
        * We can construct the points from the seriesConfig
        */
-      const points = trendsList.map((trend, index) => {
+      const points: HoveredPoint[] = trendsList.map((trend, index) => {
         /**
          * @TODO we only really need to do the bisect once on a single trend
          * because all trend values come from the same original value object
          */
-        const [trendValue, trendValueIndex] = bisect(trend, mousePoint.x);
+        const [trendValue, valuesIndex] = bisect(trend, mousePoint.x);
 
         return {
           trendValue,
-          trendValueIndex,
+          valuesIndex,
           seriesConfigIndex: index,
-          /**
-           * @TODO I don't think we need to include color here. Can we derive
-           * active hover point index maybe if we pass that to the markers component?
-           */
-          color: seriesConfig[index].color,
           x: getX(trendValue),
           y: getY(trendValue),
-        } as HoveredPoint;
+          /**
+           * Color is set here so that the MarkerPoints component doesn't have
+           * to look it up from the seriesConfig. This responsibility of
+           * figuring out visual properties could be moved to the markers themselves,
+           * depending on what is practical when we start using different trend
+           * types.
+           */
+          color: seriesConfig[index].color,
+        };
       });
-
-      // console.log('points', points);
 
       const nearestPoint = [...points].sort(
         (left, right) =>
           distance(left, mousePoint) - distance(right, mousePoint)
       )[0];
 
-      // const nearestPoint = sortedPoints[0];
-
       setHoverState({ points, nearestPoint });
+      // }
     },
     [bisect, trendsList, seriesConfig, getX, getY]
   );

@@ -64,6 +64,16 @@ export const defaultPadding: ChartPadding = {
 
 export type ChartBounds = { width: number; height: number };
 
+/**
+ * @TODO
+ *
+ * - handle isPercentage
+ * - Use date_unix instead of dates for xDomain
+ * - Include background rectangle in API
+ * - Bisect on values
+ * - Move logic out of main component
+ * - Add signaalwaarde marker
+ */
 export type TimeSeriesChartProps<T extends TimestampedValue> = {
   values: T[];
   seriesConfig: SeriesConfig<T>[];
@@ -192,15 +202,12 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     nice: tickValues?.length || numTicks,
   });
 
-  function getX(x: TrendValue) {
-    return xScale(x.__date);
-  }
+  const getX = useCallback((x: TrendValue) => xScale(x.__date), [xScale]);
 
-  function getY(x: TrendValue) {
-    return yScale(x.__value);
-  }
+  const getY = useCallback((x: TrendValue) => yScale(x.__value), [yScale]);
 
   const [handleHover, hoverState] = useHoverState({
+    values,
     paddingLeft: padding.left,
     getX,
     getY,
@@ -209,9 +216,20 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     xScale,
   });
 
+  const nearestPoint = hoverState?.nearestPoint;
+
   useEffect(() => {
-    if (hoverState) {
-      const { nearestPoint } = hoverState;
+    if (nearestPoint) {
+      // const { nearestPoint } = hoverState;
+
+      // console.log(
+      //   'nearestPoint.seriesConfigIndex',
+      //   nearestPoint.seriesConfigIndex
+      // );
+      // console.log(
+      //   'valueKey',
+      //   seriesConfig[nearestPoint.seriesConfigIndex].metricProperty
+      // );
 
       showTooltip({
         tooltipData: {
@@ -227,7 +245,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
            * The key of "value" that we are nearest to. Some tooltips might
            * want to use this to highlight a series.
            */
-          key: seriesConfig[nearestPoint.seriesConfigIndex].metricProperty,
+          valueKey: seriesConfig[nearestPoint.seriesConfigIndex].metricProperty,
           /**
            * I'm passing the full config here because the tooltip needs colors
            * and labels. In the future this could be distilled maybe.
@@ -241,7 +259,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     } else {
       hideTooltip();
     }
-  }, [hoverState, seriesConfig, values, hideTooltip, showTooltip]);
+  }, [nearestPoint, seriesConfig, values, hideTooltip, showTooltip]);
 
   const renderSeries = useCallback(
     () =>

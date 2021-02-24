@@ -9,6 +9,7 @@ import {
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { defaultStyles, TooltipWithBounds } from '@visx/tooltip';
+import { useCallback } from 'react';
 import styled from 'styled-components';
 import { Text } from '~/components-styled/typography';
 import { formatDateFromSeconds } from '~/utils/formatDate';
@@ -28,7 +29,7 @@ export type TooltipData<T extends TimestampedValue> = {
    * The metric key of the nearest / active hover point. This can be used to
    * loop up the value from T and highlight it.
    */
-  key: keyof T;
+  valueKey: keyof T;
   /**
    * The full series config is passed to the tooltip so we can render whatever
    * is needed.
@@ -42,11 +43,13 @@ export type TooltipData<T extends TimestampedValue> = {
   seriesConfigIndex: number;
 };
 
-export type TooltipFormatter<T extends TimestampedValue> = (
-  value: T,
-  key: keyof T,
-  seriesConfig: SeriesConfig<T>[]
-) => React.ReactNode;
+export type TooltipFormatter<T extends TimestampedValue> = (args: {
+  value: T;
+  valueKey: keyof T;
+  seriesConfig: SeriesConfig<T>[];
+  seriesConfigIndex?: number;
+  isPercentage?: boolean;
+}) => React.ReactNode;
 
 interface TooltipProps<T extends TimestampedValue> {
   data?: TooltipData<T>;
@@ -54,6 +57,7 @@ interface TooltipProps<T extends TimestampedValue> {
   left: number;
   top: number;
   formatTooltip?: TooltipFormatter<T>;
+  isPercentage?: boolean;
 }
 
 export function Tooltip<T extends TimestampedValue>({
@@ -62,15 +66,67 @@ export function Tooltip<T extends TimestampedValue>({
   left,
   top,
   formatTooltip,
+  isPercentage,
 }: TooltipProps<T>) {
   const breakpoints = useBreakpoints();
   const isTinyScreen = !breakpoints.xs;
+
+  const formatDefaultTooltip: TooltipFormatter<T> = useCallback((args) => {
+    const { value, valueKey, isPercentage } = args;
+    /**
+     * The default tooltip assumes one line is rendered. @TODO render all in config
+     */
+
+    /**
+     * @TODO I don't think we can assume a number here. Could be null as well probably.
+     */
+    const numberValue = (value[valueKey] as unknown) as number;
+
+    if (isDateValue(value)) {
+      return (
+        <>
+          <Text as="span" fontWeight="bold">
+            {`${formatDateFromSeconds(value.date_unix)}: `}
+          </Text>
+          {isPercentage
+            ? `${formatPercentage(numberValue)}%`
+            : formatNumber(numberValue)}
+        </>
+      );
+    } else if (isDateSpanValue(value)) {
+      const dateStartString = formatDateFromSeconds(
+        value.date_start_unix,
+        'day-month'
+      );
+      const dateEndString = formatDateFromSeconds(
+        value.date_end_unix,
+        'day-month'
+      );
+
+      return (
+        <>
+          <Text as="span" fontWeight="bold">
+            {`${dateStartString} - ${dateEndString}: `}
+          </Text>
+          {isPercentage
+            ? `${formatPercentage(numberValue)}%`
+            : formatNumber(numberValue)}
+        </>
+      );
+    }
+
+    throw new Error(
+      `Invalid value passed to format tooltip function: ${JSON.stringify(
+        value
+      )}`
+    );
+  }, []);
 
   if (!isOpen || !data) {
     return null;
   }
 
-  const { value, key, seriesConfig } = data;
+  const { value, valueKey, seriesConfig, seriesConfigIndex } = data;
 
   return (
     <TooltipWithBounds
@@ -81,58 +137,16 @@ export function Tooltip<T extends TimestampedValue>({
     >
       <TooltipContainer>
         {typeof formatTooltip === 'function'
-          ? formatTooltip(value, key, seriesConfig)
-          : formatDefaultTooltip(value, key, seriesConfig)}
+          ? formatTooltip({ value, valueKey, seriesConfig, seriesConfigIndex })
+          : formatDefaultTooltip({
+              value,
+              valueKey,
+              seriesConfig,
+              seriesConfigIndex,
+              isPercentage,
+            })}
       </TooltipContainer>
     </TooltipWithBounds>
-  );
-}
-
-export function formatDefaultTooltip<T extends TimestampedValue>(
-  value: T,
-  key: keyof T,
-  _seriesConfig: SeriesConfig<T>[],
-  isPercentage?: boolean
-) {
-  // default tooltip assumes one line is rendered:
-
-  const numberValue = (value[key] as unknown) as number;
-
-  if (isDateValue(value)) {
-    return (
-      <>
-        <Text as="span" fontWeight="bold">
-          {`${formatDateFromSeconds(value.date_unix)}: `}
-        </Text>
-        {isPercentage
-          ? `${formatPercentage(numberValue)}%`
-          : formatNumber(numberValue)}
-      </>
-    );
-  } else if (isDateSpanValue(value)) {
-    const dateStartString = formatDateFromSeconds(
-      value.date_start_unix,
-      'day-month'
-    );
-    const dateEndString = formatDateFromSeconds(
-      value.date_end_unix,
-      'day-month'
-    );
-
-    return (
-      <>
-        <Text as="span" fontWeight="bold">
-          {`${dateStartString} - ${dateEndString}: `}
-        </Text>
-        {isPercentage
-          ? `${formatPercentage(numberValue)}%`
-          : formatNumber(numberValue)}
-      </>
-    );
-  }
-
-  throw new Error(
-    `Invalid value passed to format tooltip function: ${JSON.stringify(value)}`
   );
 }
 
