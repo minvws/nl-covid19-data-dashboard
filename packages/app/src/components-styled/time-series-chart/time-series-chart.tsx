@@ -216,9 +216,9 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     xScale,
   });
 
-  const nearestPoint = hoverState?.nearestPoint;
-
   useEffect(() => {
+    const nearestPoint = hoverState?.nearestPoint;
+
     if (nearestPoint) {
       // const { nearestPoint } = hoverState;
 
@@ -259,7 +259,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     } else {
       hideTooltip();
     }
-  }, [nearestPoint, seriesConfig, values, hideTooltip, showTooltip]);
+  }, [hoverState, seriesConfig, values, hideTooltip, showTooltip]);
 
   const renderSeries = useCallback(
     () =>

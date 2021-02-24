@@ -3,8 +3,7 @@ import { localPoint } from '@visx/event';
 import { Point } from '@visx/point';
 import { bisectLeft } from 'd3-array';
 import { ScaleTime } from 'd3-scale';
-import { useCallback, useState } from 'react';
-// import { isDefined } from 'ts-is-present';
+import { useCallback, useRef, useState } from 'react';
 import { TrendValue } from '~/components-styled/line-chart/logic';
 import { SeriesConfig } from './series';
 
@@ -62,6 +61,7 @@ export function useHoverState<T extends TimestampedValue>({
   xScale,
 }: UseHoverStateArgs<T>): UseHoveStateResponse {
   const [hoverState, setHoverState] = useState<HoverState>();
+  const timeoutRef = useRef<any>();
 
   /**
    * @TODO we only really have to do bisect once on original values object,
@@ -97,7 +97,21 @@ export function useHoverState<T extends TimestampedValue>({
   const handleHover = useCallback(
     (event: Event, __trendIndex?: number) => {
       if (event.type === 'mouseleave') {
-        setHoverState(undefined);
+        /**
+         * Here a timeout is used on the clear hover state to prevent the tooltip from
+         * getting jittery. Individual elements in the chart can send mouseleave
+         * events. This logic is maybe best moved to the the tooltip itself. Or
+         * maybe it can be simplified without a ref.
+         */
+        timeoutRef.current = setTimeout(() => {
+          setHoverState(undefined);
+          timeoutRef.current = undefined;
+        }, 200);
+        return;
+      }
+
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
       }
 
       const mousePoint = localPoint(event);
@@ -143,7 +157,6 @@ export function useHoverState<T extends TimestampedValue>({
       )[0];
 
       setHoverState({ points, nearestPoint });
-      // }
     },
     [bisect, trendsList, seriesConfig, getX, getY]
   );
