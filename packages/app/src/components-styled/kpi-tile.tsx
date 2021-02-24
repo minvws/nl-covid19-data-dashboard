@@ -26,11 +26,11 @@ export function KpiTile({
       <Box>{children}</Box>
       {description && (
         <Box
-          as="p"
+          as="div"
           maxWidth="400px"
           fontSize={2}
           lineHeight={2}
-          mb={0}
+          mb={3}
           dangerouslySetInnerHTML={{
             __html: description,
           }}
