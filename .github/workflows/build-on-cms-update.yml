@@ -1,7 +1,7 @@
-name: Build on CMS update
+name: CMS
 on:
   repository_dispatch:
-    types: production_build
+
 jobs:
   build:
     name: Trigger workflow
