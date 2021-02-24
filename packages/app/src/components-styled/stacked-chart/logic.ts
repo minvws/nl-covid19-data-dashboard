@@ -39,15 +39,17 @@ export function calculateSeriesMaximum(series: SeriesValue[]) {
 export function getValuesInTimeframe<T extends TimestampedValue>(
   values: T[],
   timeframe: TimeframeOption
-): TimestampedValue[] {
+): T[] {
   const boundary = getTimeframeBoundaryUnix(timeframe);
 
   if (isDateSeries(values)) {
-    return values.filter((x: DateValue) => x.date_unix >= boundary);
+    return values.filter((x: DateValue) => x.date_unix >= boundary) as T[];
   }
 
   if (isDateSpanSeries(values)) {
-    return values.filter((x: DateSpanValue) => x.date_start_unix >= boundary);
+    return values.filter(
+      (x: DateSpanValue) => x.date_start_unix >= boundary
+    ) as T[];
   }
 
   throw new Error(`Incompatible timestamps are used in value ${values[0]}`);

@@ -58,7 +58,6 @@ const defaultPadding: Padding = {
  * @TODO
  *
  * - handle isPercentage
- * - Use date_unix instead of dates for xDomain
  * - Include background rectangle in API
  * - Bisect on values
  * - Move logic out of main component
@@ -125,7 +124,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
   // );
 
   const trendsList = useMemo(
-    () => getTrendData(values, metricProperties as string[], timeframe),
+    () => getTrendData(values, metricProperties, timeframe),
     [values, metricProperties, timeframe]
   );
 

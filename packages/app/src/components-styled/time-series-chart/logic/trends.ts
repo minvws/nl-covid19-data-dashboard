@@ -85,7 +85,7 @@ type TrendData = TrendValue[][];
 
 export function getTrendData<T extends TimestampedValue>(
   values: T[],
-  metricProperties: string[],
+  metricProperties: (keyof T)[],
   timeframe: TimeframeOption
 ): TrendData {
   const series = getValuesInTimeframe(values, timeframe);
@@ -97,9 +97,9 @@ export function getTrendData<T extends TimestampedValue>(
   return trendData;
 }
 
-export function getSingleTrendData(
-  values: TimestampedValue[],
-  metricProperty: string
+export function getSingleTrendData<T extends TimestampedValue>(
+  values: T[],
+  metricProperty: keyof T
 ): TrendValue[] {
   if (values.length === 0) {
     /**
@@ -117,7 +117,8 @@ export function getSingleTrendData(
           /**
            * This is messy and could be improved.
            */
-          __value: x[metricProperty as keyof TimestampedValue] as number | null,
+          __value: (x[metricProperty] as unknown) as number | null,
+          // @ts-expect-error @TODO figure out why the type guard doesn't work
           __date_unix: x.date_unix,
         }))
         // Filter any possible null values
@@ -132,12 +133,13 @@ export function getSingleTrendData(
           /**
            * This is messy and could be improved.
            */
-          __value: x[metricProperty as keyof TimestampedValue] as number | null,
+          __value: (x[metricProperty] as unknown) as number | null,
           __date_unix:
             /**
              * Here we set the date to be in the middle of the timespan, so that
              * the chart can render the points in the middle of each span.
              */
+            // @ts-expect-error @TODO figure out why the type guard doesn't work
             x.date_start_unix + (x.date_end_unix - x.date_start_unix) / 2,
         }))
         // Filter any possible null values
