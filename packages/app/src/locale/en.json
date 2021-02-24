@@ -2216,7 +2216,9 @@
           "available": "Delivered vaccines",
           "expected": "Expected"
         },
-        "legend_label": "Number of {{name}} doses administered"
+        "legend_label": "Number of {{name}} doses administered",
+        "doses_administered": "Gezette prikken",
+        "doses_administered_estimated": "Verwacht aantal gezette prikken"
       }
     }
   },
