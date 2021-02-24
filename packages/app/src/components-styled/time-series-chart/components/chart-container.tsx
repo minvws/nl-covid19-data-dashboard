@@ -11,7 +11,7 @@
 import { Group } from '@visx/group';
 import { Bar } from '@visx/shape';
 import React from 'react';
-import { ChartPadding } from '~/components-styled/line-chart/components';
+import { Padding } from '../logic';
 
 interface ChartContainerProps {
   children: React.ReactNode;
@@ -21,7 +21,7 @@ interface ChartContainerProps {
     event: React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>
   ) => void;
   valueAnnotation?: string;
-  padding: ChartPadding;
+  padding: Padding;
   ariaLabelledBy: string;
 }
 

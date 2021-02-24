@@ -5,3 +5,4 @@ export * from './tooltip';
 export * from './date-span-marker';
 export * from './point-markers';
 export * from './line-marker';
+export * from './overlay';

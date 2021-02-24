@@ -7,27 +7,13 @@ import { isPresent } from 'ts-is-present';
 import { getValuesInTimeframe } from '~/components-styled/stacked-chart/logic';
 import { getDaysForTimeframe, TimeframeOption } from '~/utils/timeframe';
 
-// This type limits the allowed property names to those with a number type,
-// so its like keyof T, but filtered down to only the appropriate properties.
-export type NumberProperty<T extends TimestampedValue> = {
-  [K in keyof T]: T[K] extends number | null ? K : never;
-}[keyof T];
-
-/**
- * To read an arbitrary value property from the passed in data, we need to cast
- * the type to a dictionary internally, otherwise TS will complain the index
- * signature is missing on the passed in value type T.
- */
-export type AnyValue = Record<string, number | null>;
-export type AnyFilteredValue = Record<string, number>;
-
 /**
  * From all the defined values, extract the highest number so we know how to
  * scale the y-axis. We need to do this for each of the keys that are used to
  * render lines, so that the axis scales with whatever key contains the highest
  * values.
  */
-export function calculateYMax(
+export function calculateSeriesMaximum(
   values: TrendValue[][],
   signaalwaarde = -Infinity
 ) {
@@ -41,7 +27,7 @@ export function calculateYMax(
   const overallMaximum = Math.max(...peakValues);
 
   /**
-   * Value cannot be 0, hence the 1 If the value is below signaalwaarde, make
+   * Value cannot be 0, hence the 1. If the value is below signaalwaarde, make
    * sure the signaalwaarde floats in the middle
    */
   return Math.max(overallMaximum, signaalwaarde * 2, 1);
@@ -81,14 +67,21 @@ function getTimeframeBoundaryUnix(timeframe: TimeframeOption) {
   return Date.now() / 1000 - days * oneDayInSeconds;
 }
 
+/**
+ * TrendValue here uses date_unix (seconds) timstamps just like the data we get as
+ * input unlike the LineChart. I think it makes calculations a little simpler
+ * and I didn't find a need for Date objects.
+ */
 export type TrendValue = {
-  __date: Date;
+  __date_unix: number;
   __value: number;
 };
 
-const timestampToDate = (d: number) => new Date(d * 1000);
-
-type TrendData = (TrendValue & TimestampedValue)[][];
+/**
+ * TrendData here doesn't use the union with TimestampedValue as the LineChart
+ * because types got simplified in other places.
+ */
+type TrendData = TrendValue[][];
 
 export function getTrendData<T extends TimestampedValue>(
   values: T[],
@@ -97,10 +90,8 @@ export function getTrendData<T extends TimestampedValue>(
 ): TrendData {
   const series = getValuesInTimeframe(values, timeframe);
 
-  const trendData = metricProperties.map(
-    (metricProperty) =>
-      (getSingleTrendData(series, metricProperty) as unknown) as (TrendValue &
-        TimestampedValue)[]
+  const trendData = metricProperties.map((metricProperty) =>
+    getSingleTrendData(series, metricProperty)
   );
 
   return trendData;
@@ -123,17 +114,14 @@ export function getSingleTrendData(
     return (
       values
         .map((x) => ({
-          ...x,
           /**
-           * Assuming the config picks out a number property. We could make this
-           * stricter in the future with NumberProperty but I choose to strip it
-           * to minimize type complexity while figuring things out.
+           * This is messy and could be improved.
            */
-          __value: x[metricProperty as keyof TimestampedValue] as number,
-          __date: timestampToDate(x.date_unix),
+          __value: x[metricProperty as keyof TimestampedValue] as number | null,
+          __date_unix: x.date_unix,
         }))
         // Filter any possible null values
-        .filter((x) => isPresent(x.__value))
+        .filter((x) => isPresent(x.__value)) as TrendValue[]
     );
   }
 
@@ -141,23 +129,19 @@ export function getSingleTrendData(
     return (
       values
         .map((x) => ({
-          ...x,
           /**
-           * Assuming the config picks out a number property. We could make this
-           * stricter in the future with NumberProperty but I choose to strip it
-           * to minimize type complexity while figuring things out.
+           * This is messy and could be improved.
            */
-          __value: x[metricProperty as keyof TimestampedValue] as number,
-          __date: timestampToDate(
+          __value: x[metricProperty as keyof TimestampedValue] as number | null,
+          __date_unix:
             /**
              * Here we set the date to be in the middle of the timespan, so that
              * the chart can render the points in the middle of each span.
              */
-            x.date_start_unix + (x.date_end_unix - x.date_start_unix) / 2
-          ),
+            x.date_start_unix + (x.date_end_unix - x.date_start_unix) / 2,
         }))
         // Filter any possible null values
-        .filter((x) => isPresent(x.__value))
+        .filter((x) => isPresent(x.__value)) as TrendValue[]
     );
   }
 

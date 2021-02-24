@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { HoveredPoint } from '../logic/hover-state';
+import { HoveredPoint } from '../logic';
 
 const DateSpan = styled.div`
   height: 100%;

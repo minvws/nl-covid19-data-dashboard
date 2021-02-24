@@ -3,12 +3,11 @@
  */
 import { ReactNode } from 'react';
 import { Box } from '~/components-styled/base';
-import { ChartPadding } from '../time-series-chart';
-import { ChartBounds } from './chart-axes';
+import { Bounds, Padding } from '../logic';
 
 interface OverlayProps {
-  bounds: ChartBounds;
-  padding: ChartPadding;
+  bounds: Bounds;
+  padding: Padding;
   children: ReactNode;
 }
 

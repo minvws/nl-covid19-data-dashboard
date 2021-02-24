@@ -39,7 +39,7 @@ export function calculateSeriesMaximum(series: SeriesValue[]) {
 export function getValuesInTimeframe<T extends TimestampedValue>(
   values: T[],
   timeframe: TimeframeOption
-) {
+): TimestampedValue[] {
   const boundary = getTimeframeBoundaryUnix(timeframe);
 
   if (isDateSeries(values)) {

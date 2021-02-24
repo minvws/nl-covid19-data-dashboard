@@ -22,14 +22,6 @@ import { extent } from 'd3-array';
 import { useCallback, useEffect, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
-import {
-  calculateYMax,
-  /**
-   * @TODO take this from stacked chart
-   */
-  getTrendData,
-  TrendValue,
-} from '~/components-styled/line-chart/logic';
 import { TimeframeOption } from '~/utils/timeframe';
 import { ValueAnnotation } from '../value-annotation';
 import {
@@ -42,27 +34,25 @@ import {
   TooltipData,
   TooltipFormatter,
   Trend,
+  Overlay,
 } from './components';
-import { Overlay } from './components/overlay';
-import { SeriesConfig } from './logic';
-import { useHoverState } from './logic/hover-state';
+import {
+  Bounds,
+  calculateSeriesMaximum,
+  getTrendData,
+  Padding,
+  SeriesConfig,
+  TrendValue,
+  useHoverState,
+} from './logic';
 export type { SeriesConfig } from './logic';
 
-export type ChartPadding = {
-  top: number;
-  right: number;
-  bottom: number;
-  left: number;
-};
-
-export const defaultPadding: ChartPadding = {
+const defaultPadding: Padding = {
   top: 10,
   right: 20,
   bottom: 30,
   left: 30,
 };
-
-export type ChartBounds = { width: number; height: number };
 
 /**
  * @TODO
@@ -140,7 +130,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
   );
 
   const calculatedSeriesMax = useMemo(
-    () => calculateYMax(trendsList, signaalwaarde),
+    () => calculateSeriesMaximum(trendsList, signaalwaarde),
     [trendsList, signaalwaarde]
   );
 
@@ -151,10 +141,10 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     : calculatedSeriesMax;
 
   const xDomain = useMemo(() => {
-    const domain = extent(trendsList.flat().map((x) => x.__date));
+    const domain = extent(trendsList.flat().map((x) => x.__date_unix));
 
     return isDefined(domain[0]) && isDefined(domain[1])
-      ? (domain as [Date, Date])
+      ? (domain as [number, number])
       : undefined;
   }, [trendsList]);
 
@@ -165,13 +155,13 @@ export function TimeSeriesChart<T extends TimestampedValue>({
       ({
         ...defaultPadding,
         left: paddingLeft || defaultPadding.left,
-      } as ChartPadding),
+      } as Padding),
     [paddingLeft]
   );
 
   const timespanMarkerData = trendsList[0];
 
-  const bounds: ChartBounds = {
+  const bounds: Bounds = {
     width: width - padding.left - padding.right,
     height: height - padding.top - padding.bottom,
   };
@@ -182,9 +172,9 @@ export function TimeSeriesChart<T extends TimestampedValue>({
    */
   const dateSpanScale = useMemo(
     () =>
-      scaleBand<Date>({
+      scaleBand<number>({
         range: [0, bounds.width],
-        domain: timespanMarkerData.map((x) => x.__date),
+        domain: timespanMarkerData.map((x) => x.__date_unix),
       }),
     [bounds.width, timespanMarkerData]
   );
@@ -202,7 +192,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     nice: tickValues?.length || numTicks,
   });
 
-  const getX = useCallback((x: TrendValue) => xScale(x.__date), [xScale]);
+  const getX = useCallback((x: TrendValue) => xScale(x.__date_unix), [xScale]);
 
   const getY = useCallback((x: TrendValue) => yScale(x.__value), [yScale]);
 

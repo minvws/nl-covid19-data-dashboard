@@ -4,7 +4,7 @@ import { Point } from '@visx/point';
 import { bisectLeft } from 'd3-array';
 import { ScaleTime } from 'd3-scale';
 import { useCallback, useRef, useState } from 'react';
-import { TrendValue } from '~/components-styled/line-chart/logic';
+import { TrendValue } from './trends';
 import { SeriesConfig } from './series';
 
 export type HoveredPoint = {
@@ -78,9 +78,20 @@ export function useHoverState<T extends TimestampedValue>({
        */
       const date = xScale.invert(xPosition - paddingLeft);
 
+      /**
+       * Because this chart is using date_unix (in seconds) as the input for
+       * xDomain, the xScale.invert() returns a Date object which was created
+       * with that time. Therefor getTime() gives us the original time we put
+       * in, so we should not divide by 1000 here.
+       *
+       * Maybe we can find an "invert" which just returns a number to avoid
+       * confusion.
+       */
+      const date_unix = date.getTime();
+
       const index = bisectLeft(
-        trend.map((x) => x.__date),
-        date,
+        trend.map((x) => x.__date_unix),
+        date_unix,
         1
       );
 
@@ -89,7 +100,10 @@ export function useHoverState<T extends TimestampedValue>({
 
       if (!d1) return [d0, 0];
 
-      return [+date - +d0.__date > +d1.__date - +date ? d1 : d0, index];
+      return [
+        date_unix - d0.__date_unix > d1.__date_unix - date_unix ? d1 : d0,
+        index,
+      ];
     },
     [paddingLeft, xScale]
   );
@@ -98,10 +112,10 @@ export function useHoverState<T extends TimestampedValue>({
     (event: Event, __trendIndex?: number) => {
       if (event.type === 'mouseleave') {
         /**
-         * Here a timeout is used on the clear hover state to prevent the tooltip from
-         * getting jittery. Individual elements in the chart can send mouseleave
-         * events. This logic is maybe best moved to the the tooltip itself. Or
-         * maybe it can be simplified without a ref.
+         * Here a timeout is used on the clear hover state to prevent the
+         * tooltip from getting jittery. Individual elements in the chart can
+         * send mouseleave events. This logic is maybe best moved to the the
+         * tooltip itself. Or maybe it can be simplified without a ref.
          */
         timeoutRef.current = setTimeout(() => {
           setHoverState(undefined);
@@ -120,12 +134,11 @@ export function useHoverState<T extends TimestampedValue>({
         return;
       }
 
-      // if (isDefined(trendIndex)) {
-      //   // setHoverState({ points, nearestPoint });
-      // } else {
+      // if (isDefined(trendIndex)) {// setHoverState({ points, nearestPoint});}
+      //   else {
       /**
-       * @TODO flip this around and do bisect on "values" instead of "trends"
-       * We can construct the points from the seriesConfig
+       * @TODO flip this around and do bisect on "values" instead of "trends" We
+       * can construct the points from the seriesConfig
        */
       const points: HoveredPoint[] = trendsList.map((trend, index) => {
         /**
@@ -143,9 +156,9 @@ export function useHoverState<T extends TimestampedValue>({
           /**
            * Color is set here so that the MarkerPoints component doesn't have
            * to look it up from the seriesConfig. This responsibility of
-           * figuring out visual properties could be moved to the markers themselves,
-           * depending on what is practical when we start using different trend
-           * types.
+           * figuring out visual properties could be moved to the markers
+           * themselves, depending on what is practical when we start using
+           * different trend types.
            */
           color: seriesConfig[index].color,
         };
@@ -170,9 +183,9 @@ const distance = (hoveredPoint: HoveredPoint, localPoint: Point) => {
    *
    * can use use vix standard function for distance?
    *
-   * we probably only need to look at the Y component, because all trend
-   * values come from the same sample, and that sample has been picked with
-   * the bisect call.
+   * we probably only need to look at the Y component, because all trend values
+   * come from the same sample, and that sample has been picked with the bisect
+   * call.
    */
   const x = localPoint.x - hoveredPoint.x;
   const y = localPoint.y - hoveredPoint.y;
