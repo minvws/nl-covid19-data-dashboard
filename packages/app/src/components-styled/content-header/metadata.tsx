@@ -62,7 +62,7 @@ export function Metadata(props: MetadataProps) {
         icon={<DatabaseIcon aria-hidden />}
         items={dataSources}
         label={text.source}
-        accessibilityString={siteText.accessibility.link_source}
+        accessibilityText={siteText.accessibility.text_source}
         accessibilitySubject={accessibilitySubject}
       />
 
@@ -77,7 +77,7 @@ export function Metadata(props: MetadataProps) {
         }
         items={dataDownloads}
         label={text.download}
-        accessibilityString={siteText.accessibility.link_download}
+        accessibilityText={siteText.accessibility.text_download}
         accessibilitySubject={accessibilitySubject}
       />
     </Box>
@@ -91,18 +91,12 @@ interface MetadataItemProps {
     href: string;
     text: string;
   }[];
-  accessibilityString?: string;
+  accessibilityText?: string;
   accessibilitySubject?: string;
 }
 
 function MetadataItem(props: MetadataItemProps) {
-  const {
-    icon,
-    label,
-    items,
-    accessibilityString,
-    accessibilitySubject,
-  } = props;
+  const { icon, label, items, accessibilityText, accessibilitySubject } = props;
 
   if (!items.length) {
     return null;
@@ -122,8 +116,8 @@ function MetadataItem(props: MetadataItemProps) {
               <ExternalLink
                 href={item.href}
                 ariaLabel={
-                  accessibilityString && accessibilitySubject
-                    ? replaceVariablesInText(accessibilityString, {
+                  accessibilityText && accessibilitySubject
+                    ? replaceVariablesInText(accessibilityText, {
                         subject: accessibilitySubject,
                         source: item.text,
                       })
