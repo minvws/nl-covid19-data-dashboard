@@ -1,0 +1,11 @@
+name: Build on CMS update
+on:
+  repository_dispatch:
+    types: production_build
+jobs:
+  build:
+    name: Trigger workflow
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "Workflow triggered by CMS changes"
