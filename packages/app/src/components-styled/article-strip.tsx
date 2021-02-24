@@ -1,6 +1,6 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import ArrowIcon from '~/assets/arrow.svg';
+import { ArrowIconRight } from '~/components-styled/arrow-icon';
 import { Box } from '~/components-styled/base';
 import { Tile } from '~/components-styled/tile';
 import { SanityImage } from '~/components-styled/cms/sanity-image';
@@ -75,7 +75,7 @@ function ArticleStripItem(props: ArticleStripItemProps) {
           </Text>
           <LinkWithIcon
             href={`/artikelen/${slug}`}
-            icon={<ArrowIcon css={css({ transform: 'rotate(-90deg)' })} />}
+            icon={<ArrowIconRight />}
             iconPlacement="right"
           >
             {siteText.common.read_more}

@@ -50,12 +50,12 @@ export function LinkWithIcon({
         {iconPlacement === 'right' && !headingLink && (
           <>
             {children}
-            <IconSmall icon={icon} width={11} height={13} />
+            <IconSmall icon={icon} width={11} height={10} />
           </>
         )}
         {iconPlacement === 'left' && !headingLink && (
           <>
-            <IconSmall icon={icon} width={11} height={13} />
+            <IconSmall icon={icon} width={11} height={10} />
             {children}
           </>
         )}
@@ -68,7 +68,7 @@ export function LinkWithIcon({
                 icon={icon}
                 isSingleWord={isSingleWord}
                 width={16}
-                height={18}
+                height={13}
               />
             </span>
           </Box>
