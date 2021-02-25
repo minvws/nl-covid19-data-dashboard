@@ -76,13 +76,6 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
         description={text.metadata.description}
       />
       <TileList>
-        <MileStones
-          title={milestones.title}
-          description={milestones.description}
-          miles={milestones.miles}
-          expected={milestones.expected}
-        />
-
         <ContentHeader
           category={siteText.nationaal_layout.headings.vaccinaties}
           title={text.title}
@@ -264,6 +257,13 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             )}
           </AspectRatio>
         </ChartTile>
+
+        <MileStones
+          title={milestones.title}
+          description={milestones.description}
+          miles={milestones.miles}
+          expected={milestones.expected}
+        />
 
         <ChartTile
           title={text.grafiek_draagvlak.titel}
