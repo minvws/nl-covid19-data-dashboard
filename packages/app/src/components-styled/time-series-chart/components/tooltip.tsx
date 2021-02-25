@@ -35,12 +35,6 @@ export type TooltipData<T extends TimestampedValue> = {
    * is needed.
    */
   seriesConfig: SeriesConfig<T>;
-  /**
-   * This is not used yet, but might come in handy. It signals what trend index
-   * the nearest / active point is, and can be used to lookup the configuration
-   * in the seriesConfig.
-   */
-  seriesConfigIndex: number;
 };
 
 export type TooltipFormatter<T extends TimestampedValue> = (args: {
@@ -128,7 +122,7 @@ export function Tooltip<T extends TimestampedValue>({
     return null;
   }
 
-  const { value, valueKey, seriesConfig, seriesConfigIndex } = data;
+  const { value, valueKey, seriesConfig } = data;
 
   return (
     <TooltipWithBounds
@@ -139,12 +133,11 @@ export function Tooltip<T extends TimestampedValue>({
     >
       <TooltipContainer>
         {typeof formatTooltip === 'function'
-          ? formatTooltip({ value, valueKey, seriesConfig, seriesConfigIndex })
+          ? formatTooltip({ value, valueKey, seriesConfig })
           : formatDefaultTooltip({
               value,
               valueKey,
               seriesConfig,
-              seriesConfigIndex,
               isPercentage,
             })}
       </TooltipContainer>

@@ -1,3 +1,4 @@
+import { TimestampedValue } from '@corona-dashboard/common';
 import styled from 'styled-components';
 import { HoveredPoint } from '../logic/hover-state';
 
@@ -44,13 +45,17 @@ const PointMarker = styled.div<MarkerProps>`
   }
 `;
 
-interface PointMarkerProps {
-  points: HoveredPoint[];
+interface PointMarkerProps<T extends TimestampedValue> {
+  points: HoveredPoint<T>[];
   size?: number;
 }
 
-export function PointMarkers(props: PointMarkerProps) {
+export function PointMarkers<T extends TimestampedValue>(
+  props: PointMarkerProps<T>
+) {
   const { points, size = MARKER_POINT_SIZE } = props;
+
+  if (!points.length) return null;
 
   return (
     <Container

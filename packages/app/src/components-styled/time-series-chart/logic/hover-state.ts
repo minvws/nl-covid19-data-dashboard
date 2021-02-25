@@ -1,31 +1,20 @@
-import { TimestampedValue } from '@corona-dashboard/common';
+import {
+  isDateSpanValue,
+  isDateValue,
+  TimestampedValue,
+} from '@corona-dashboard/common';
 import { localPoint } from '@visx/event';
-import { Point } from '@visx/point';
 import { bisectLeft } from 'd3-array';
-import { ScaleTime } from 'd3-scale';
-import { useCallback, useRef, useState } from 'react';
-import { TrendsList, TrendValue } from './trends';
+import { ScaleLinear, ScaleTime } from 'd3-scale';
+import { useCallback, useMemo, useRef, useState } from 'react';
+import { DoubleTrendValue, TrendsList, TrendValue } from './trends';
 import { SeriesConfig } from './series';
+import { isDefined } from 'ts-is-present';
 
-export type HoveredPoint = {
-  trendValue: TrendValue;
-  /**
-   * Values index is used to look up the original value from the values prop
-   * based on the bisect outcome (a HoveredPoint).
-   */
-  valuesIndex: number;
-  /**
-   * The series config index is used to link a point to the seriesConfig to look
-   * up things like color and type.
-   */
-  seriesConfigIndex: number;
-  /**
-   * Color should be redundant here due to the seriesConfigIndex property
-   */
+export type HoveredPoint<T> = {
+  trendValue: TrendValue | DoubleTrendValue;
+  metricProperty: keyof T;
   color: string;
-  /**
-   * The position of the point on the overlay
-   */
   x: number;
   y: number;
 };
@@ -34,47 +23,63 @@ interface UseHoverStateArgs<T extends TimestampedValue> {
   values: T[];
   trendsList: TrendsList;
   seriesConfig: SeriesConfig<T>;
-  getX: (v: TrendValue) => number;
-  getY: (v: TrendValue) => number;
   paddingLeft: number;
   xScale: ScaleTime<number, number>;
+  yScale: ScaleLinear<number, number>;
 }
 
-interface HoverState {
-  points: HoveredPoint[];
-  nearestPoint: HoveredPoint;
+interface HoverState<T> {
+  valuesIndex: number;
+  linePoints: HoveredPoint<T>[];
+  rangePoints: HoveredPoint<T>[];
+  nearestLinePoint: HoveredPoint<T>;
 }
 
 type Event = React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>;
 
 type HoverHandler = (event: Event, seriesIndex?: number) => void;
 
-type UseHoveStateResponse = [HoverHandler, HoverState | undefined];
+type UseHoveStateResponse<T> = [HoverHandler, HoverState<T> | undefined];
 
 export function useHoverState<T extends TimestampedValue>({
-  values: __values,
+  values,
   trendsList,
   seriesConfig,
-  getX,
-  getY,
   paddingLeft,
   xScale,
-}: UseHoverStateArgs<T>): UseHoveStateResponse {
-  const [hoverState, setHoverState] = useState<HoverState>();
+  yScale,
+}: UseHoverStateArgs<T>): UseHoveStateResponse<T> {
+  const [hoverState, setHoverState] = useState<HoverState<T>>();
   const timeoutRef = useRef<any>();
 
+  const valuesDateMs = useMemo(
+    () =>
+      values.map((x) =>
+        isDateValue(x)
+          ? x.date_unix * 1000
+          : isDateSpanValue(x)
+          ? /**
+             * @TODO share logic with trend code
+             */
+            (x.date_start_unix + (x.date_end_unix - x.date_start_unix) / 2) *
+            1000
+          : 0
+      ),
+    [values]
+  );
+
   /**
-   * @TODO we only really have to do bisect once on original values object,
-   * because all points of all trends are always coming from those values and
-   * are thus aligned vertically.
+   * We only really have to do bisect once on original values object, because
+   * all points of all trends are always coming from those values and are thus
+   * aligned vertically.
    *
    * In this chart TrendValue __date was replaced with __date_ms, just to see if
    * that is feasible. It simplifies calculations like these, dealing with basic
    * numbers.
    */
   const bisect = useCallback(
-    function (trend: TrendValue[], xPosition: number): [TrendValue, number] {
-      if (trend.length === 1) return [trend[0], 0];
+    function (values: TimestampedValue[], xPosition: number): number {
+      if (values.length === 1) return 0;
 
       /**
        * @TODO figure this out. If we can do it without padding, we can move
@@ -83,20 +88,9 @@ export function useHoverState<T extends TimestampedValue>({
       const date = xScale.invert(xPosition - paddingLeft);
       const date_ms = date.getTime();
 
-      const index = bisectLeft(
-        trend.map((x) => x.__date_ms),
-        date_ms,
-        1
-      );
-
-      const d0 = trend[index - 1];
-      const d1 = trend[index];
-
-      if (!d1) return [d0, 0];
-
-      return [date_ms - d0.__date_ms > d1.__date_ms - date_ms ? d1 : d0, index];
+      return bisectLeft(valuesDateMs, date_ms, 0, values.length - 1);
     },
-    [paddingLeft, xScale]
+    [paddingLeft, xScale, valuesDateMs]
   );
 
   const handleHover = useCallback(
@@ -126,53 +120,105 @@ export function useHoverState<T extends TimestampedValue>({
       }
 
       /**
-       * @TODO Try to flip this around and do bisect on "values" instead of
-       * "trends" We can construct the points from the seriesConfig
+       * Bisect here is working directly on the original values (as opposed to
+       * individual trends in LineChart. This should be more efficient since we
+       * only need to do it once. It also provides flexibility in constructing
+       * hover state elements for different types based on the series config.
        */
-      const points: HoveredPoint[] = trendsList.map((trend, index) => {
-        /**
-         * @TODO we only really need to do the bisect once on a single trend
-         * because all trend values come from the same original value object
-         */
-        const [trendValue, valuesIndex] = bisect(trend, mousePoint.x);
+      const valuesIndex = bisect(values, mousePoint.x);
 
-        return {
-          trendValue,
-          valuesIndex,
-          seriesConfigIndex: index,
-          x: getX(trendValue),
-          y: getY(trendValue),
-          /**
-           * Color is set here so that the MarkerPoints component doesn't have
-           * to look it up from the seriesConfig. This responsibility of
-           * figuring out visual properties could be moved to the markers
-           * themselves, depending on what is practical when we start using
-           * different trend types.
-           */
-          color: seriesConfig[index].color,
-        };
-      });
+      const linePoints: HoveredPoint<T>[] = seriesConfig
+        .map((config, index) => {
+          const trendValue = trendsList[index][valuesIndex];
 
-      const nearestPoint = [...points].sort(
-        (left, right) =>
-          distance(left, mousePoint) - distance(right, mousePoint)
+          switch (config.type) {
+            case 'line':
+            case 'area':
+              return {
+                trendValue,
+                // seriesConfigIndex: index,
+                x: xScale(trendValue.__date_ms),
+                y: yScale((trendValue as TrendValue).__value),
+                /**
+                 * Color is set here so that the MarkerPoints component doesn't
+                 * have to look it up from the seriesConfig. This responsibility
+                 * of figuring out visual properties could be moved to the
+                 * markers themselves, depending on what is practical when we
+                 * start using different trend types.
+                 */
+                color: config.color,
+                metricProperty: config.metricProperty,
+              };
+          }
+        })
+        .filter(isDefined);
+
+      /**
+       * Point markers on range data are rendered differently, so we split them
+       * out here, so we avoid having to create a union type and complicate
+       * things.
+       */
+      const rangePoints: HoveredPoint<T>[] = seriesConfig
+        .flatMap((config, index) => {
+          const trendValue = trendsList[index][valuesIndex];
+
+          switch (config.type) {
+            case 'range':
+              return [
+                {
+                  trendValue,
+                  // seriesConfigIndex: index,
+                  x: xScale(trendValue.__date_ms),
+                  y: yScale((trendValue as DoubleTrendValue).__value_a),
+                  /**
+                   * Color is set here so that the MarkerPoints component
+                   * doesn't have to look it up from the seriesConfig. This
+                   * responsibility of figuring out visual properties could be
+                   * moved to the markers themselves, depending on what is
+                   * practical when we start using different trend types.
+                   */
+                  color: config.color,
+                  metricProperty: config.metricPropertyLow,
+                },
+                {
+                  trendValue,
+                  // seriesConfigIndex: index,
+                  x: xScale(trendValue.__date_ms),
+                  y: yScale((trendValue as DoubleTrendValue).__value_b),
+                  /**
+                   * Color is set here so that the MarkerPoints component
+                   * doesn't have to look it up from the seriesConfig. This
+                   * responsibility of figuring out visual properties could be
+                   * moved to the markers themselves, depending on what is
+                   * practical when we start using different trend types.
+                   */
+                  color: config.color,
+                  metricProperty: config.metricPropertyHigh,
+                },
+              ];
+          }
+        })
+        .filter(isDefined);
+
+      /**
+       * @TODO Simplify this nearest point calculation by comparing mouse
+       * y with property values directly since we know all values align
+       * vertically anyway.
+       */
+      // const distance = (hoveredPoint: HoveredPoint<T>, localPoint: Point) => {
+      //   const x = localPoint.x - hoveredPoint.x;
+      //   const y = localPoint.y - hoveredPoint.y;
+      //   return Math.sqrt(x * x + y * y);
+      // };
+
+      const nearestLinePoint = [...linePoints].sort(
+        (a, b) => Math.abs(a.y - mousePoint.y) - Math.abs(b.y - mousePoint.y)
       )[0];
 
-      setHoverState({ points, nearestPoint });
+      setHoverState({ valuesIndex, linePoints, rangePoints, nearestLinePoint });
     },
-    [bisect, trendsList, seriesConfig, getX, getY]
+    [bisect, values, seriesConfig, trendsList, xScale, yScale]
   );
 
   return [handleHover, hoverState];
 }
-
-const distance = (hoveredPoint: HoveredPoint, localPoint: Point) => {
-  /**
-   * We probably only need to look at the Y component, because all trend
-   * values come from the same sample, and that sample has been picked on the
-   * x-axis with the bisect call.
-   */
-  const x = localPoint.x - hoveredPoint.x;
-  const y = localPoint.y - hoveredPoint.y;
-  return Math.sqrt(x * x + y * y);
-};

@@ -3,7 +3,7 @@ import { TimestampedValue } from '@corona-dashboard/common';
 export type SeriesConfig<T extends TimestampedValue> = (
   | LineDefinition<T>
   | AreaDefinition<T>
-  // | RangeDefinition<T>
+  | RangeDefinition<T>
 )[];
 
 export type LineDefinition<T extends TimestampedValue> = {

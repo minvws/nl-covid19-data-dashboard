@@ -10,14 +10,14 @@ import { ValueAnnotation } from '../value-annotation';
 import {
   Axes,
   ChartContainer,
-  DateSpanMarker,
   DateMarker,
+  DateSpanMarker,
+  LineTrend,
+  Overlay,
   PointMarkers,
   Tooltip,
   TooltipData,
   TooltipFormatter,
-  LineTrend,
-  Overlay,
 } from './components';
 import { AreaTrend } from './components/area-trend';
 import {
@@ -59,14 +59,15 @@ const defaultPadding: Padding = {
  * design. For example:
  *
  * - You can only set padding-left instead of all paddings
- * - showLegend, legend items, shape and color are derived from seriesConfig definition.
+ * - showLegend, legend items, shape and color are derived from seriesConfig
+ *   definition.
  * - formatAxis type callbacks have been removed.
  *
- * Components and logic are split up onto smaller abstractions so they can be used more
- * easily in composition. For example the Marker component is now several
- * components rendered separately inside an Overlay container. We might not be
- * able to avoid creating multiple chart root components, but with smaller
- * abstractions we should be able to re-use most elements and logic.
+ * Components and logic are split up onto smaller abstractions so they can be
+ * used more easily in composition. For example the Marker component is now
+ * several components rendered separately inside an Overlay container. We might
+ * not be able to avoid creating multiple chart root components, but with
+ * smaller abstractions we should be able to re-use most elements and logic.
  *
  * @TODO
  *
@@ -138,11 +139,6 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     forcedMaximumValue,
   } = dataOptions;
 
-  const metricProperties = useMemo(
-    () => seriesConfig.map((x) => x.metricProperty),
-    [seriesConfig]
-  );
-
   // const benchmark = useMemo(
   //   () =>
   //     benchmarkValue
@@ -152,13 +148,13 @@ export function TimeSeriesChart<T extends TimestampedValue>({
   // );
 
   const trendsList = useMemo(
-    () => getTrendsList(values, metricProperties, timeframe),
-    [values, metricProperties, timeframe]
+    () => getTrendsList(values, seriesConfig, timeframe),
+    [values, seriesConfig, timeframe]
   );
 
   const calculatedSeriesMax = useMemo(
-    () => calculateSeriesMaximum(trendsList, benchmarkValue),
-    [trendsList, benchmarkValue]
+    () => calculateSeriesMaximum(values, seriesConfig, benchmarkValue),
+    [values, seriesConfig, benchmarkValue]
   );
 
   const seriesMax = isDefined(forcedMaximumValue)
@@ -206,6 +202,10 @@ export function TimeSeriesChart<T extends TimestampedValue>({
 
   const markerPadding = dateSpanScale.bandwidth() / 2;
 
+  /**
+   * @TODO see if we can use scale linear instead and stick to unix numbers in
+   * reverse lookup.
+   */
   const xScale = scaleTime({
     domain: xDomain,
     range: [markerPadding, bounds.width - markerPadding],
@@ -217,24 +217,26 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     nice: tickValues?.length || numTicks,
   });
 
+  /**
+   * @TODO remove these and pass scales directly to trend components to keep it
+   * consistent
+   */
   const getX = useCallback((x: TrendValue) => xScale(x.__date_ms), [xScale]);
-
   const getY = useCallback((x: TrendValue) => yScale(x.__value), [yScale]);
 
   const [handleHover, hoverState] = useHoverState({
     values,
     paddingLeft: padding.left,
-    getX,
-    getY,
     seriesConfig,
     trendsList,
     xScale,
+    yScale,
   });
 
   useEffect(() => {
-    const nearestPoint = hoverState?.nearestPoint;
+    if (hoverState) {
+      const { nearestLinePoint: nearestPoint, valuesIndex } = hoverState;
 
-    if (nearestPoint) {
       showTooltip({
         tooltipData: {
           /**
@@ -243,18 +245,17 @@ export function TimeSeriesChart<T extends TimestampedValue>({
            * works. But in order to do so I think we need to use different hover
            * logic, and possibly use mouse callbacks on the trends individually.
            */
-          value: values[nearestPoint.valuesIndex],
+          value: values[valuesIndex],
           /**
            * The key of "value" that we are nearest to. Some tooltips might want
            * to use this to highlight a series.
            */
-          valueKey: seriesConfig[nearestPoint.seriesConfigIndex].metricProperty,
+          valueKey: nearestPoint.metricProperty as keyof T,
           /**
            * I'm passing the full config here because the tooltip needs colors
            * and labels. In the future this could be distilled maybe.
            */
           seriesConfig: seriesConfig,
-          seriesConfigIndex: nearestPoint.seriesConfigIndex,
         },
         tooltipLeft: nearestPoint.x,
         tooltipTop: nearestPoint.y,
@@ -274,7 +275,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
             return (
               <LineTrend
                 key={index}
-                trend={trend}
+                trend={trend as TrendValue[]}
                 color={config.color}
                 style={config.style}
                 strokeWidth={config.strokeWidth}
@@ -287,7 +288,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
             return (
               <AreaTrend
                 key={index}
-                trend={trend}
+                trend={trend as TrendValue[]}
                 color={config.color}
                 style={config.style}
                 fillOpacity={config.fillOpacity}
@@ -297,6 +298,23 @@ export function TimeSeriesChart<T extends TimestampedValue>({
                 yScale={yScale}
                 onHover={(evt) => handleHover(evt, index)}
               />
+            );
+
+          case 'range':
+            return (
+              <div>todo</div>
+              // <RangeTrend
+              //   key={index}
+              //   trend={trend as DoubleTrendValue[]}
+              //   color={config.color}
+              //   style={config.style}
+              //   fillOpacity={config.fillOpacity}
+              //   strokeWidth={config.strokeWidth}
+              //   getX={getX}
+              //   getY={getY}
+              //   yScale={yScale}
+              //   // onHover={(evt) => handleHover(evt, index)}
+              // />
             );
         }
       }),
@@ -342,15 +360,16 @@ export function TimeSeriesChart<T extends TimestampedValue>({
           <Overlay bounds={bounds} padding={padding}>
             <DateSpanMarker
               width={dateSpanScale.bandwidth()}
-              point={hoverState.nearestPoint}
+              point={hoverState.nearestLinePoint}
             />
             {showDateMarker && (
               <DateMarker
-                point={hoverState.nearestPoint}
+                point={hoverState.nearestLinePoint}
                 lineColor={`#5B5B5B`}
               />
             )}
-            <PointMarkers points={hoverState.points} />
+            <PointMarkers points={hoverState.rangePoints} />
+            <PointMarkers points={hoverState.linePoints} />
           </Overlay>
         )}
       </Box>

@@ -3,9 +3,11 @@ import {
   isDateSpanSeries,
   TimestampedValue,
 } from '@corona-dashboard/common';
-import { isPresent } from 'ts-is-present';
+import { pick } from 'lodash';
+import { isDefined, isPresent } from 'ts-is-present';
 import { getValuesInTimeframe } from '~/components-styled/stacked-chart/logic';
 import { getDaysForTimeframe, TimeframeOption } from '~/utils/timeframe';
+import { SeriesConfig } from './series';
 
 /**
  * From all the defined values, extract the highest number so we know how to
@@ -13,16 +15,24 @@ import { getDaysForTimeframe, TimeframeOption } from '~/utils/timeframe';
  * render lines, so that the axis scales with whatever key contains the highest
  * values.
  */
-export function calculateSeriesMaximum(
-  values: TrendValue[][],
+export function calculateSeriesMaximum<T extends TimestampedValue>(
+  values: T[],
+  seriesConfig: SeriesConfig<T>,
   signaalwaarde = -Infinity
 ) {
-  const peakValues = values.map((list) =>
-    list
-      .map((x) => x.__value)
-      .filter(isPresent) // omit null values
-      .reduce((acc, value) => (value > acc ? value : acc), -Infinity)
+  const metricProperties = seriesConfig.flatMap((x) =>
+    x.type === 'range'
+      ? [x.metricPropertyLow, x.metricPropertyHigh]
+      : x.metricProperty
   );
+
+  const peakValues = values.map((x) => {
+    const trendValues = Object.values(pick(x, metricProperties)) as (
+      | number
+      | null
+    )[];
+    return Math.max(...trendValues.filter(isPresent));
+  });
 
   const overallMaximum = Math.max(...peakValues);
 
@@ -77,27 +87,65 @@ export type TrendValue = {
   __value: number;
 };
 
+export type DoubleTrendValue = {
+  __date_ms: number;
+  __value_a: number;
+  __value_b: number;
+};
+
+export function isTrendValue(
+  value: TrendValue | DoubleTrendValue
+): value is TrendValue {
+  return isDefined((value as any).__value);
+}
+
 /**
- * TrendData here doesn't use the union with TimestampedValue as the LineChart
+ * There are two types of trends. The normal single value trend and a double
+ * value type. Probably we can cover all
+ * TrendList here doesn't use the union with TimestampedValue as the LineChart
  * because types got simplified in other places.
  */
-export type TrendsList = TrendValue[][];
+export type TrendsList = (TrendValue[] | DoubleTrendValue[])[];
 
 export function getTrendsList<T extends TimestampedValue>(
   values: T[],
-  metricProperties: (keyof T)[],
+  seriesConfig: SeriesConfig<T>,
   timeframe: TimeframeOption
 ): TrendsList {
   const series = getValuesInTimeframe(values, timeframe);
 
-  const trendData = metricProperties.map((metricProperty) =>
-    getSingleTrendData(series, metricProperty)
+  const trendData = seriesConfig.map((config) =>
+    config.type === 'range'
+      ? getDoubleTrendData(
+          series,
+          config.metricPropertyLow,
+          config.metricPropertyHigh
+        )
+      : getTrendData(series, config.metricProperty)
   );
 
   return trendData;
 }
 
-export function getSingleTrendData<T extends TimestampedValue>(
+export function getDoubleTrendData<T extends TimestampedValue>(
+  values: T[],
+  metricPropertyA: keyof T,
+  metricPropertyB: keyof T
+): DoubleTrendValue[] {
+  const trendA = getTrendData(values, metricPropertyA);
+  const trendB = getTrendData(values, metricPropertyB);
+
+  /**
+   * Merge the data from both trends
+   */
+  return trendA.map((x, index) => ({
+    __date_ms: x.__date_ms,
+    __value_a: x.__value,
+    __value_b: trendB[index].__value,
+  }));
+}
+
+export function getTrendData<T extends TimestampedValue>(
   values: T[],
   metricProperty: keyof T
 ): TrendValue[] {
