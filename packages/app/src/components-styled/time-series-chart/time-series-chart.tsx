@@ -1,23 +1,3 @@
-/**
- * This chart started as an adaptation from MultiLineChart. It attempts to
- * create a more generic abstraction that can replace LineChart, MultiLineChart,
- * (highcharts) AreaChart and later possibly something like the vaccine delivery
- * chart.
- *
- * The main focus in this iteration is to try to reduce complexity as much as
- * possible while rethinking the abstractions on which we build.
- *
- * It assumes that all data for the chart (regardless of multiple sources) is
- * passed in a single type on the values prop. If some trends to not overlap in
- * time the remaining values should contain null for those properties.
- *
- * The series config will declare the type and visual properties for each of the
- * trends.
- *
- * Some of the customization functions have been stripped from the component props
- * API to reduce complexity, because I think we should strive for consistency in
- * design first and use component composition where possible.
- */
 import { TimestampedValue } from '@corona-dashboard/common';
 import { scaleBand, scaleLinear, scaleTime } from '@visx/scale';
 import { useTooltip } from '@visx/tooltip';
@@ -58,13 +38,54 @@ const defaultPadding: Padding = {
 };
 
 /**
+ * This chart started as a fork from MultiLineChart. It attempts to create a
+ * more generic abstraction that can replace LineChart, MultiLineChart,
+ * (highcharts) AreaChart and later possibly something like the vaccine delivery
+ * chart.
+ *
+ * The main focus in this iteration is to try to reduce complexity as much as
+ * possible while rethinking the abstractions on which we build.
+ *
+ * It assumes that all data for the chart (regardless of multiple sources) is
+ * passed in a single type on the values prop. If some trends do not overlap in
+ * time, the remaining values should contain null for those properties.
+ *
+ * The series config defines the type and visual properties for each of the
+ * trends, like color and line/range/area type.
+ *
+ * Some of the customization functions have been stripped from the component
+ * public API to reduce complexity and in an attempt to enforce consistency in
+ * design. For example:
+ *
+ * - You can only set padding-left instead of all paddings
+ * - showLegend, legend items, shape and color are derived from seriesConfig definition.
+ * - formatAxis type callbacks have been removed.
+ *
+ * Components and logic are split up onto smaller abstractions so they can be used more
+ * easily in composition. For example the Marker component is now several
+ * components rendered separately inside an Overlay container. We might not be
+ * able to avoid creating multiple chart root components, but with smaller
+ * abstractions we should be able to re-use most elements and logic.
+ *
  * @TODO
  *
- * - handle isPercentage
  * - Include background rectangle in API
- * - Bisect on values
  * - Move logic out of main component
- * - Add signaalwaarde marker
+ * - Add signaalwaarde/benchmark marker
+ *
+ * Other possibly interesting things to look at:
+ *
+ * - Perform bisect once, on values directly. Since all trends originate from
+ *   the same value in the input values array, all bisect results always point
+ *   to the same index, so we can do it just once.
+ * - Avoid nearest point calculation when element calls onHover with index.
+ *   Individual elements like trends have their own onHover handler and from
+ *   that call we already know the nearest point belongs to that trend.
+ * - Calculate nearest point directly from value properties. We don't really
+ *   need to do a distance calculation if all points originate from to the same
+ *   input value object. We only need to translate the mouse Y position to a
+ *   value in the domain, and then we can look at the different value properties
+ *   to see which one is closest.
  */
 export type TimeSeriesChartProps<T extends TimestampedValue> = {
   values: T[];
@@ -82,7 +103,6 @@ export type TimeSeriesChartProps<T extends TimestampedValue> = {
   numTicks?: number;
   tickValues?: number[];
   showMarkerLine?: boolean;
-  // only pad the left, because I think that's how it's used in practice
   paddingLeft?: number;
   ariaLabelledBy: string;
   valueAnnotation?: string;
@@ -212,15 +232,6 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     const nearestPoint = hoverState?.nearestPoint;
 
     if (nearestPoint) {
-      // const { nearestPoint } = hoverState;
-
-      // console.log('nearestPoint.seriesConfigIndex',
-      //   nearestPoint.seriesConfigIndex
-      // );
-      // console.log('valueKey',
-      //   seriesConfig[nearestPoint.seriesConfigIndex].metricProperty
-      // );
-
       showTooltip({
         tooltipData: {
           /**

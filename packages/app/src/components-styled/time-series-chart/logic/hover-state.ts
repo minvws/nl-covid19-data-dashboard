@@ -125,11 +125,9 @@ export function useHoverState<T extends TimestampedValue>({
         return;
       }
 
-      // if (isDefined(trendIndex)) {// setHoverState({ points, nearestPoint});}
-      //   else {
       /**
-       * @TODO Try to flip this around and do bisect on "values" instead of "trends" We
-       * can construct the points from the seriesConfig
+       * @TODO Try to flip this around and do bisect on "values" instead of
+       * "trends" We can construct the points from the seriesConfig
        */
       const points: HoveredPoint[] = trendsList.map((trend, index) => {
         /**
@@ -170,13 +168,9 @@ export function useHoverState<T extends TimestampedValue>({
 
 const distance = (hoveredPoint: HoveredPoint, localPoint: Point) => {
   /**
-   * @TODO rewrite this to getX getY
-   *
-   * can use use vix standard function for distance?
-   *
-   * we probably only need to look at the Y component, because all trend values
-   * come from the same sample, and that sample has been picked with the bisect
-   * call.
+   * We probably only need to look at the Y component, because all trend
+   * values come from the same sample, and that sample has been picked on the
+   * x-axis with the bisect call.
    */
   const x = localPoint.x - hoveredPoint.x;
   const y = localPoint.y - hoveredPoint.y;
