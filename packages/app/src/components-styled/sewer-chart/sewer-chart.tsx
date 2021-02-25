@@ -10,7 +10,7 @@ import { PointerEvent, useCallback, useMemo, useState } from 'react';
 import { isPresent } from 'ts-is-present';
 import { useDebouncedCallback } from 'use-debounce';
 import { Box } from '~/components-styled/base';
-import { Legenda } from '~/components-styled/legenda';
+import { Legend } from '~/components-styled/legend';
 import { Select } from '~/components-styled/select';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
 import siteText from '~/locale';
@@ -341,7 +341,7 @@ export function SewerChart(props: SewerChartProps) {
         )}
       </Box>
 
-      <Legenda
+      <Legend
         items={[
           sewerStationSelectProps.value
             ? {

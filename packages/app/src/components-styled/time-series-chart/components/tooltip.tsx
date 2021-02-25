@@ -71,16 +71,14 @@ export function Tooltip<T extends TimestampedValue>({
   const breakpoints = useBreakpoints();
   const isTinyScreen = !breakpoints.xs;
 
+  /**
+   * The default tooltip assumes one line is rendered. @TODO render all items
+   * from series config.
+   */
   const formatDefaultTooltip: TooltipFormatter<T> = useCallback((args) => {
     const { value, valueKey, isPercentage } = args;
-    /**
-     * The default tooltip assumes one line is rendered. @TODO render all in config
-     */
 
-    /**
-     * @TODO I don't think we can assume a number here. Could be null as well probably.
-     */
-    const numberValue = (value[valueKey] as unknown) as number;
+    const numberValue = (value[valueKey] as unknown) as number | null;
 
     if (isDateValue(value)) {
       return (
@@ -88,9 +86,11 @@ export function Tooltip<T extends TimestampedValue>({
           <Text as="span" fontWeight="bold">
             {`${formatDateFromSeconds(value.date_unix)}: `}
           </Text>
-          {isPercentage
-            ? `${formatPercentage(numberValue)}%`
-            : formatNumber(numberValue)}
+          {numberValue
+            ? isPercentage
+              ? `${formatPercentage(numberValue)}%`
+              : formatNumber(numberValue)
+            : ''}
         </>
       );
     } else if (isDateSpanValue(value)) {
@@ -108,9 +108,11 @@ export function Tooltip<T extends TimestampedValue>({
           <Text as="span" fontWeight="bold">
             {`${dateStartString} - ${dateEndString}: `}
           </Text>
-          {isPercentage
-            ? `${formatPercentage(numberValue)}%`
-            : formatNumber(numberValue)}
+          {numberValue
+            ? isPercentage
+              ? `${formatPercentage(numberValue)}%`
+              : formatNumber(numberValue)
+            : ''}
         </>
       );
     }

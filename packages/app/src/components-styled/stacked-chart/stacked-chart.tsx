@@ -21,7 +21,7 @@ import { transparentize } from 'polished';
 import { MouseEvent, TouchEvent, useCallback, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components-styled/base';
-import { Legenda, LegendItem } from '~/components-styled/legenda';
+import { Legend, LegendItem } from '~/components-styled/legend';
 import { InlineText } from '~/components-styled/typography';
 import siteText from '~/locale';
 import { colors } from '~/style/theme';
@@ -515,7 +515,7 @@ export function StackedChart<T extends TimestampedValue>(
         )}
 
         <Box pl={`${padding.left}px`}>
-          <Legenda items={legendaItems} />
+          <Legend items={legendaItems} />
         </Box>
       </Box>
     </Box>

@@ -3,7 +3,7 @@ import { AnchorTile } from '~/components-styled/anchor-tile';
 import { Box } from '~/components-styled/base';
 import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
-import { Legenda } from '~/components-styled/legenda';
+import { Legend } from '~/components-styled/legend';
 import siteText from '~/locale/index';
 import {
   NationalDeceasedCbs,
@@ -69,7 +69,7 @@ export function DeceasedMonitorSection({
         /> */}
 
         <Box pl="56px">
-          <Legenda
+          <Legend
             items={[
               {
                 label: text.deceased_monitor_chart_legenda_registered,

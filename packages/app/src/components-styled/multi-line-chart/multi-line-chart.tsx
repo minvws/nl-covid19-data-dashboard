@@ -20,7 +20,7 @@ import { ScaleTime } from 'd3-scale';
 import { useCallback, useMemo, useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
-import { Legenda, LegendItem, LegendShape } from '~/components-styled/legenda';
+import { Legend, LegendItem, LegendShape } from '~/components-styled/legend';
 import {
   ChartPadding,
   ChartScales,
@@ -458,7 +458,7 @@ export function MultiLineChart<T extends TimestampedValue>({
 
         {showLegend && legendItems && (
           <Box pl={`${padding.left}px`}>
-            <Legenda items={legendItems} />
+            <Legend items={legendItems} />
           </Box>
         )}
       </Box>
