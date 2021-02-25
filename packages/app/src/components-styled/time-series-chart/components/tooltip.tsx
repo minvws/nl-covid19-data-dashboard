@@ -34,7 +34,7 @@ export type TooltipData<T extends TimestampedValue> = {
    * The full series config is passed to the tooltip so we can render whatever
    * is needed.
    */
-  seriesConfig: SeriesConfig<T>[];
+  seriesConfig: SeriesConfig<T>;
   /**
    * This is not used yet, but might come in handy. It signals what trend index
    * the nearest / active point is, and can be used to lookup the configuration
@@ -46,7 +46,7 @@ export type TooltipData<T extends TimestampedValue> = {
 export type TooltipFormatter<T extends TimestampedValue> = (args: {
   value: T;
   valueKey: keyof T;
-  seriesConfig: SeriesConfig<T>[];
+  seriesConfig: SeriesConfig<T>;
   seriesConfigIndex?: number;
   isPercentage?: boolean;
 }) => React.ReactNode;

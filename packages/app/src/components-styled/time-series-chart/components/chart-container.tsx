@@ -42,9 +42,10 @@ export function ChartContainer({
     >
       <Group left={padding.left} top={padding.top}>
         {/**
-         * This bar captures all mouse movements outside of trend elements. Render it below the children (in the DOM) so that the children can have their own hover handlers.
-         *
-         * @TODO figure out if we can use the onHover state of different trends to avoid bisect and nearest point calculations.
+         * The Bar captures all mouse movements outside of trend elements. The Trend components * are rendered op top (in DOM) so that they can have their own hover state and
+         * handlers. Trend hover handlers also have the advantage that we don't need to
+         * do nearest point calculation on that event, because we already know the trend
+         * index in the handler.
          */}
         <Bar
           x={0}

@@ -5,7 +5,6 @@
  * props. It might be easier to just create 2 or 3 different types of axes
  * layouts by forking this component.
  */
-
 import { formatNumber, formatPercentage } from '@corona-dashboard/common';
 import { AxisBottom, AxisLeft } from '@visx/axis';
 import { GridRows } from '@visx/grid';
@@ -63,9 +62,13 @@ export const Axes = memo(function Axes({
         top={bounds.height}
         stroke={colors.silver}
         tickLabelProps={() => ({
-          dx: -25,
           fill: colors.data.axisLabels,
           fontSize: 12,
+          /**
+           * Using anchor middle the line marker label will fall nicely on top
+           * of the axis label
+           */
+          textAnchor: 'middle',
         })}
         hideTicks
       />
@@ -83,7 +86,6 @@ export const Axes = memo(function Axes({
         tickLabelProps={() => ({
           fill: colors.data.axisLabels,
           fontSize: 12,
-          dx: 0,
           textAnchor: 'end',
           verticalAnchor: 'middle',
         })}

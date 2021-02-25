@@ -12,6 +12,8 @@ const Label = styled.div`
   background-color: white;
   margin-top: 7px;
   transform: translate(-50%, 0);
+  padding-left: 0.5em;
+  padding-right: 0.5em;
 `;
 
 const Line = styled.div<LineProps>`
@@ -29,15 +31,15 @@ const Container = styled.div`
   bottom: 0;
 `;
 
-interface LineMarkerProps {
+interface DateMarkerProps {
   point: HoveredPoint;
   lineColor?: string;
 }
 
-export function LineMarker({
+export function DateMarker({
   lineColor = colors.data.primary,
   point,
-}: LineMarkerProps) {
+}: DateMarkerProps) {
   return (
     <Container
       style={{

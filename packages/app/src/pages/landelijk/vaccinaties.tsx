@@ -419,14 +419,16 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                 width={width}
                 ariaLabelledBy="chart_vaccine_support"
                 values={data.vaccine_support.values}
-                showMarkerLine
+                showDateMarker
                 tickValues={[0, 25, 50, 75, 100]}
+                paddingLeft={36}
                 dataOptions={{
                   isPercentage: true,
                   maximumValue: 100,
                 }}
                 seriesConfig={[
                   {
+                    type: 'line',
                     metricProperty: 'percentage_16_24',
                     label: replaceVariablesInText(
                       text.grafiek_draagvlak.leeftijd_jaar,
@@ -435,6 +437,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                     color: '#005082',
                   },
                   {
+                    type: 'line',
                     metricProperty: 'percentage_25_39',
                     label: replaceVariablesInText(
                       text.grafiek_draagvlak.leeftijd_jaar,
@@ -443,6 +446,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                     color: '#00BBB5',
                   },
                   {
+                    type: 'line',
                     metricProperty: 'percentage_40_54',
                     label: replaceVariablesInText(
                       text.grafiek_draagvlak.leeftijd_jaar,
@@ -451,6 +455,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                     color: '#FFC000',
                   },
                   {
+                    type: 'line',
                     metricProperty: 'percentage_55_69',
                     label: replaceVariablesInText(
                       text.grafiek_draagvlak.leeftijd_jaar,
@@ -459,6 +464,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                     color: '#E28700',
                   },
                   {
+                    type: 'line',
                     metricProperty: 'percentage_70_plus',
                     label: replaceVariablesInText(
                       text.grafiek_draagvlak.leeftijd_jaar,
@@ -475,7 +481,6 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                     config={seriesConfig}
                   />
                 )}
-                paddingLeft={36}
               />
             )}
           </ParentSize>

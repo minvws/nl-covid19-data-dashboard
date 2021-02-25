@@ -4,7 +4,7 @@ import { Point } from '@visx/point';
 import { bisectLeft } from 'd3-array';
 import { ScaleTime } from 'd3-scale';
 import { useCallback, useRef, useState } from 'react';
-import { TrendValue } from './trends';
+import { TrendsList, TrendValue } from './trends';
 import { SeriesConfig } from './series';
 
 export type HoveredPoint = {
@@ -32,8 +32,8 @@ export type HoveredPoint = {
 
 interface UseHoverStateArgs<T extends TimestampedValue> {
   values: T[];
-  trendsList: TrendValue[][];
-  seriesConfig: SeriesConfig<T>[];
+  trendsList: TrendsList;
+  seriesConfig: SeriesConfig<T>;
   getX: (v: TrendValue) => number;
   getY: (v: TrendValue) => number;
   paddingLeft: number;

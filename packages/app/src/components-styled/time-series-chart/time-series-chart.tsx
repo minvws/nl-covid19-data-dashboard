@@ -11,18 +11,19 @@ import {
   Axes,
   ChartContainer,
   DateSpanMarker,
-  LineMarker,
+  DateMarker,
   PointMarkers,
   Tooltip,
   TooltipData,
   TooltipFormatter,
-  Trend,
+  LineTrend,
   Overlay,
 } from './components';
+import { AreaTrend } from './components/area-trend';
 import {
   Bounds,
   calculateSeriesMaximum,
-  getTrendData,
+  getTrendsList,
   Padding,
   SeriesConfig,
   TrendValue,
@@ -89,23 +90,22 @@ const defaultPadding: Padding = {
  */
 export type TimeSeriesChartProps<T extends TimestampedValue> = {
   values: T[];
-  seriesConfig: SeriesConfig<T>[];
+  seriesConfig: SeriesConfig<T>;
   width: number;
   height?: number;
   timeframe?: TimeframeOption;
-  signaalwaarde?: number;
   formatTooltip?: TooltipFormatter<T>;
   dataOptions?: {
     annotation?: string;
-    maximumValue?: number;
+    benchmarkValue?: number;
+    forcedMaximumValue?: number;
     isPercentage?: boolean;
   };
   numTicks?: number;
   tickValues?: number[];
-  showMarkerLine?: boolean;
+  showDateMarker?: boolean;
   paddingLeft?: number;
   ariaLabelledBy: string;
-  valueAnnotation?: string;
 };
 
 export function TimeSeriesChart<T extends TimestampedValue>({
@@ -114,15 +114,13 @@ export function TimeSeriesChart<T extends TimestampedValue>({
   width,
   height = 250,
   timeframe = 'all',
-  signaalwaarde,
   formatTooltip,
-  dataOptions,
+  dataOptions = {},
   numTicks = 3,
   tickValues,
-  showMarkerLine,
+  showDateMarker,
   paddingLeft,
   ariaLabelledBy,
-  valueAnnotation,
 }: TimeSeriesChartProps<T>) {
   const {
     tooltipData,
@@ -133,6 +131,13 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     tooltipOpen,
   } = useTooltip<TooltipData<T>>();
 
+  const {
+    benchmarkValue,
+    annotation,
+    isPercentage,
+    forcedMaximumValue,
+  } = dataOptions;
+
   const metricProperties = useMemo(
     () => seriesConfig.map((x) => x.metricProperty),
     [seriesConfig]
@@ -140,23 +145,21 @@ export function TimeSeriesChart<T extends TimestampedValue>({
 
   // const benchmark = useMemo(
   //   () =>
-  //     signaalwaarde
+  //     benchmarkValue
   //       ? { value: signaalwaarde, label: text.common.barScale.signaalwaarde }
   //       : undefined,
   //   [signaalwaarde]
   // );
 
   const trendsList = useMemo(
-    () => getTrendData(values, metricProperties, timeframe),
+    () => getTrendsList(values, metricProperties, timeframe),
     [values, metricProperties, timeframe]
   );
 
   const calculatedSeriesMax = useMemo(
-    () => calculateSeriesMaximum(trendsList, signaalwaarde),
-    [trendsList, signaalwaarde]
+    () => calculateSeriesMaximum(trendsList, benchmarkValue),
+    [trendsList, benchmarkValue]
   );
-
-  const forcedMaximumValue = dataOptions?.maximumValue;
 
   const seriesMax = isDefined(forcedMaximumValue)
     ? forcedMaximumValue
@@ -263,26 +266,40 @@ export function TimeSeriesChart<T extends TimestampedValue>({
 
   const renderSeries = useCallback(
     () =>
-      trendsList.map((trend, index) => (
-        <Trend
-          key={index}
-          trend={trend}
-          type="line"
-          areaFillOpacity={seriesConfig[index].areaFillOpacity}
-          strokeWidth={seriesConfig[index].strokeWidth}
-          style={seriesConfig[index].style}
-          getX={getX}
-          getY={getY}
-          yScale={yScale}
-          color={seriesConfig[index].color}
-          /**
-           * Here we pass the trend index to handle hover. Then we can bypass
-           * the "nearest point" calculation, because we already know what
-           * property this event belongs to.
-           */
-          onHover={(evt) => handleHover(evt, index)}
-        />
-      )),
+      trendsList.map((trend, index) => {
+        const config = seriesConfig[index];
+
+        switch (config.type) {
+          case 'line':
+            return (
+              <LineTrend
+                key={index}
+                trend={trend}
+                color={config.color}
+                style={config.style}
+                strokeWidth={config.strokeWidth}
+                getX={getX}
+                getY={getY}
+                onHover={(evt) => handleHover(evt, index)}
+              />
+            );
+          case 'area':
+            return (
+              <AreaTrend
+                key={index}
+                trend={trend}
+                color={config.color}
+                style={config.style}
+                fillOpacity={config.fillOpacity}
+                strokeWidth={config.strokeWidth}
+                getX={getX}
+                getY={getY}
+                yScale={yScale}
+                onHover={(evt) => handleHover(evt, index)}
+              />
+            );
+        }
+      }),
     [handleHover, seriesConfig, trendsList, yScale, getX, getY]
   );
 
@@ -292,9 +309,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
 
   return (
     <Box>
-      {valueAnnotation && (
-        <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
-      )}
+      {annotation && <ValueAnnotation mb={2}>{annotation}</ValueAnnotation>}
 
       <Box position="relative">
         <ChartContainer
@@ -309,7 +324,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
             yTickValues={tickValues}
             xScale={xScale}
             yScale={yScale}
-            isPercentage={dataOptions?.isPercentage}
+            isPercentage={isPercentage}
           />
 
           {renderSeries()}
@@ -329,8 +344,8 @@ export function TimeSeriesChart<T extends TimestampedValue>({
               width={dateSpanScale.bandwidth()}
               point={hoverState.nearestPoint}
             />
-            {showMarkerLine && (
-              <LineMarker
+            {showDateMarker && (
+              <DateMarker
                 point={hoverState.nearestPoint}
                 lineColor={`#5B5B5B`}
               />

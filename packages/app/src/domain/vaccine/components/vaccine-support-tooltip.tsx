@@ -18,7 +18,7 @@ export function VaccineSupportTooltip({
   locale: Locale;
   value: NlVaccineSupportValue;
   valueKey: keyof NlVaccineSupportValue;
-  config: SeriesConfig<NlVaccineSupportValue>[];
+  config: SeriesConfig<NlVaccineSupportValue>;
 }) {
   const dateStartString = formatDateFromSeconds(value.date_start_unix, 'axis');
   const dateEndString = formatDateFromSeconds(value.date_end_unix, 'axis');

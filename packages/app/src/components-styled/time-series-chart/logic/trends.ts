@@ -81,13 +81,13 @@ export type TrendValue = {
  * TrendData here doesn't use the union with TimestampedValue as the LineChart
  * because types got simplified in other places.
  */
-type TrendData = TrendValue[][];
+export type TrendsList = TrendValue[][];
 
-export function getTrendData<T extends TimestampedValue>(
+export function getTrendsList<T extends TimestampedValue>(
   values: T[],
   metricProperties: (keyof T)[],
   timeframe: TimeframeOption
-): TrendData {
+): TrendsList {
   const series = getValuesInTimeframe(values, timeframe);
 
   const trendData = metricProperties.map((metricProperty) =>
