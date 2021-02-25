@@ -1,5 +1,5 @@
 export default {
-  title: 'Inklapbare titel en inhoud',
+  title: 'Single milestone',
   name: 'milestone',
   type: 'object',
   fields: [
