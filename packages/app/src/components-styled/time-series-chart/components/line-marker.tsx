@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { TrendValue, HoveredPoint } from '../logic';
 import { Text } from '~/components-styled/typography';
 import { colors } from '~/style/theme';
-import { formatDateFromSeconds } from '~/utils/formatDate';
+import { formatDateFromMilliseconds } from '~/utils/formatDate';
+import { HoveredPoint, TrendValue } from '../logic';
 
 type LineProps = {
   color: string;
@@ -55,5 +55,5 @@ export function LineMarker({
 }
 
 function formatLabel(value: TrendValue) {
-  return formatDateFromSeconds(value.__date_unix, 'axis');
+  return formatDateFromMilliseconds(value.__date_ms, 'axis');
 }

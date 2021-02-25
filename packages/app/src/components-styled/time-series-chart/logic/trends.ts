@@ -73,7 +73,7 @@ function getTimeframeBoundaryUnix(timeframe: TimeframeOption) {
  * and I didn't find a need for Date objects.
  */
 export type TrendValue = {
-  __date_unix: number;
+  __date_ms: number;
   __value: number;
 };
 
@@ -119,7 +119,7 @@ export function getSingleTrendData<T extends TimestampedValue>(
            */
           __value: (x[metricProperty] as unknown) as number | null,
           // @ts-expect-error @TODO figure out why the type guard doesn't work
-          __date_unix: x.date_unix,
+          __date_ms: x.date_unix * 1000,
         }))
         // Filter any possible null values
         .filter((x) => isPresent(x.__value)) as TrendValue[]
@@ -134,13 +134,14 @@ export function getSingleTrendData<T extends TimestampedValue>(
            * This is messy and could be improved.
            */
           __value: (x[metricProperty] as unknown) as number | null,
-          __date_unix:
+          __date_ms:
             /**
              * Here we set the date to be in the middle of the timespan, so that
              * the chart can render the points in the middle of each span.
              */
             // @ts-expect-error @TODO figure out why the type guard doesn't work
-            x.date_start_unix + (x.date_end_unix - x.date_start_unix) / 2,
+            (x.date_start_unix + (x.date_end_unix - x.date_start_unix) / 2) *
+            1000,
         }))
         // Filter any possible null values
         .filter((x) => isPresent(x.__value)) as TrendValue[]

@@ -67,6 +67,10 @@ export function useHoverState<T extends TimestampedValue>({
    * @TODO we only really have to do bisect once on original values object,
    * because all points of all trends are always coming from those values and
    * are thus aligned vertically.
+   *
+   * In this chart TrendValue __date was replaced with __date_ms, just to see if
+   * that is feasible. It simplifies calculations like these, dealing with basic
+   * numbers.
    */
   const bisect = useCallback(
     function (trend: TrendValue[], xPosition: number): [TrendValue, number] {
@@ -77,21 +81,11 @@ export function useHoverState<T extends TimestampedValue>({
        * this outside the component
        */
       const date = xScale.invert(xPosition - paddingLeft);
-
-      /**
-       * Because this chart is using date_unix (in seconds) as the input for
-       * xDomain, the xScale.invert() returns a Date object which was created
-       * with that time. Therefor getTime() gives us the original time we put
-       * in, so we should not divide by 1000 here.
-       *
-       * Maybe we can find an "invert" which just returns a number to avoid
-       * confusion.
-       */
-      const date_unix = date.getTime();
+      const date_ms = date.getTime();
 
       const index = bisectLeft(
-        trend.map((x) => x.__date_unix),
-        date_unix,
+        trend.map((x) => x.__date_ms),
+        date_ms,
         1
       );
 
@@ -100,10 +94,7 @@ export function useHoverState<T extends TimestampedValue>({
 
       if (!d1) return [d0, 0];
 
-      return [
-        date_unix - d0.__date_unix > d1.__date_unix - date_unix ? d1 : d0,
-        index,
-      ];
+      return [date_ms - d0.__date_ms > d1.__date_ms - date_ms ? d1 : d0, index];
     },
     [paddingLeft, xScale]
   );
@@ -137,7 +128,7 @@ export function useHoverState<T extends TimestampedValue>({
       // if (isDefined(trendIndex)) {// setHoverState({ points, nearestPoint});}
       //   else {
       /**
-       * @TODO flip this around and do bisect on "values" instead of "trends" We
+       * @TODO Try to flip this around and do bisect on "values" instead of "trends" We
        * can construct the points from the seriesConfig
        */
       const points: HoveredPoint[] = trendsList.map((trend, index) => {

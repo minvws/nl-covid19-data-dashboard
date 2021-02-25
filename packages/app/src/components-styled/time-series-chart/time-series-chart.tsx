@@ -143,7 +143,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     : calculatedSeriesMax;
 
   const xDomain = useMemo(() => {
-    const domain = extent(trendsList.flat().map((x) => x.__date_unix));
+    const domain = extent(trendsList.flat().map((x) => x.__date_ms));
 
     return isDefined(domain[0]) && isDefined(domain[1])
       ? (domain as [number, number])
@@ -176,7 +176,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     () =>
       scaleBand<number>({
         range: [0, bounds.width],
-        domain: timespanMarkerData.map((x) => x.__date_unix),
+        domain: timespanMarkerData.map((x) => x.__date_ms),
       }),
     [bounds.width, timespanMarkerData]
   );
@@ -194,7 +194,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     nice: tickValues?.length || numTicks,
   });
 
-  const getX = useCallback((x: TrendValue) => xScale(x.__date_unix), [xScale]);
+  const getX = useCallback((x: TrendValue) => xScale(x.__date_ms), [xScale]);
 
   const getY = useCallback((x: TrendValue) => yScale(x.__value), [yScale]);
 
