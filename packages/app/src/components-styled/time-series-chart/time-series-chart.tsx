@@ -1,17 +1,20 @@
 /**
- * This chart started as an adaptation from MultiLineChart. It attempts to create a
- * more generic abstraction that can replace LineChart, MultiLineChart,
+ * This chart started as an adaptation from MultiLineChart. It attempts to
+ * create a more generic abstraction that can replace LineChart, MultiLineChart,
  * (highcharts) AreaChart and later possibly something like the vaccine delivery
  * chart.
  *
- * The main focus in this iteration is to try to reduce complexity and improve
- * the abstraction on which we build.
+ * The main focus in this iteration is to try to reduce complexity as much as
+ * possible while rethinking the abstractions on which we build.
  *
- * It assumes that all data for the chart (regardless of sources) is passed in a
- * single type on the values prop. The series config will declare the type
- * and visual properties for each of the series.
+ * It assumes that all data for the chart (regardless of multiple sources) is
+ * passed in a single type on the values prop. If some trends to not overlap in
+ * time the remaining values should contain null for those properties.
  *
- * A lot of customization functions have been stripped from the component props
+ * The series config will declare the type and visual properties for each of the
+ * trends.
+ *
+ * Some of the customization functions have been stripped from the component props
  * API to reduce complexity, because I think we should strive for consistency in
  * design first and use component composition where possible.
  */
@@ -25,7 +28,7 @@ import { Box } from '~/components-styled/base';
 import { TimeframeOption } from '~/utils/timeframe';
 import { ValueAnnotation } from '../value-annotation';
 import {
-  ChartAxes,
+  Axes,
   ChartContainer,
   DateSpanMarker,
   LineMarker,
@@ -166,8 +169,8 @@ export function TimeSeriesChart<T extends TimestampedValue>({
   };
 
   /**
-   * @TODO move calculation of datespan to hook only, maybe only pass in original
-   * data and not trend
+   * @TODO move calculation of datespan to hook only, maybe only pass in
+   * original data and not trend
    */
   const dateSpanScale = useMemo(
     () =>
@@ -211,12 +214,10 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     if (nearestPoint) {
       // const { nearestPoint } = hoverState;
 
-      // console.log(
-      //   'nearestPoint.seriesConfigIndex',
+      // console.log('nearestPoint.seriesConfigIndex',
       //   nearestPoint.seriesConfigIndex
       // );
-      // console.log(
-      //   'valueKey',
+      // console.log('valueKey',
       //   seriesConfig[nearestPoint.seriesConfigIndex].metricProperty
       // );
 
@@ -224,15 +225,14 @@ export function TimeSeriesChart<T extends TimestampedValue>({
         tooltipData: {
           /**
            * Ideally I think we would pass the original value + the key that
-           * this hover point belongs to. Similar to how the stacked-chart
-           * hover works. But in order to do so I think we need to use
-           * different hover logic, and possibly use mouse callbacks on the
-           * trends individually.
+           * this hover point belongs to. Similar to how the stacked-chart hover
+           * works. But in order to do so I think we need to use different hover
+           * logic, and possibly use mouse callbacks on the trends individually.
            */
           value: values[nearestPoint.valuesIndex],
           /**
-           * The key of "value" that we are nearest to. Some tooltips might
-           * want to use this to highlight a series.
+           * The key of "value" that we are nearest to. Some tooltips might want
+           * to use this to highlight a series.
            */
           valueKey: seriesConfig[nearestPoint.seriesConfigIndex].metricProperty,
           /**
@@ -293,11 +293,12 @@ export function TimeSeriesChart<T extends TimestampedValue>({
           padding={padding}
           ariaLabelledBy={ariaLabelledBy}
         >
-          <ChartAxes
+          <Axes
             bounds={bounds}
             yTickValues={tickValues}
             xScale={xScale}
             yScale={yScale}
+            isPercentage={dataOptions?.isPercentage}
           />
 
           {renderSeries()}

@@ -1,4 +1,4 @@
-export * from './chart-axes';
+export * from './axes';
 export * from './chart-container';
 export * from './trend';
 export * from './tooltip';
