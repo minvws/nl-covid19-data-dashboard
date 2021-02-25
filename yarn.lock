@@ -8065,15 +8065,15 @@ framer-motion@^3.2.1:
   optionalDependencies:
     "@emotion/is-prop-valid" "^0.8.2"
 
-framer-motion@^3.3.0:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-3.3.0.tgz#e355824369f03c8cd07a87ef59b7a8348c33fafd"
-  integrity sha512-bjUrwXfMJZ6D+HSMDiXbMGKmlWGnUux8HotWgORTZkdPTgKAndlRXjeC2ikCgNVo2ifmRvEla5ckP9JaZc7JKA==
+framer-motion@^3.7.0:
+  version "3.7.0"
+  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-3.7.0.tgz#57f4c4899223e1a9d76092a865b1245b48806d6c"
+  integrity sha512-sEmI/1a0vG91aFV7zW9vGHJ0O7IO+V/KAUWpuGFmXYbE7WojAomRMOgz7EkeOMgSm408jewf8/KNEzWK5b2N5g==
   dependencies:
-    framesync "^5.0.0"
+    framesync "^5.1.0"
     hey-listen "^1.0.8"
-    popmotion "^9.1.0"
-    style-value-types "^4.0.1"
+    popmotion "9.2.1"
+    style-value-types "4.0.3"
     tslib "^1.10.0"
   optionalDependencies:
     "@emotion/is-prop-valid" "^0.8.2"
@@ -8081,6 +8081,11 @@ framer-motion@^3.3.0:
 framesync@5.0.0, framesync@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/framesync/-/framesync-5.0.0.tgz#7de8caedf53ac441118e79680f1beb7391c328b6"
+
+framesync@5.1.0, framesync@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/framesync/-/framesync-5.1.0.tgz#b22639be6e83cf170e5cb3d0497e3e50100a01ef"
+  integrity sha512-31sDH8LxSFoLKDYENzKdI+YJD4vV8sMBpwcAW0/6Es2jZBQBdlqbFnqrYczpsnzpqG+y6EqYPvgFMI2ZDdlnyQ==
 
 fresh@0.5.2:
   version "0.5.2"
@@ -12068,6 +12073,16 @@ polished@^4.1.0:
     "@babel/runtime" "^7.12.5"
     "@scarf/scarf" "^1.1.0"
 
+popmotion@9.2.1:
+  version "9.2.1"
+  resolved "https://registry.yarnpkg.com/popmotion/-/popmotion-9.2.1.tgz#8bc19214a4f0ba7925a901455d0996131cbec6dc"
+  integrity sha512-kplHK5z2LwYkUXNMCC4+tSYuuAXcG3oatKdsEzJzc1r0I2wM5UnYKITO1ZUnmmFy84VJqIZuoBXwJrWuZuAKkg==
+  dependencies:
+    framesync "5.1.0"
+    hey-listen "^1.0.8"
+    style-value-types "4.0.3"
+    tslib "^1.10.0"
+
 popmotion@^9.1.0:
   version "9.1.0"
   resolved "https://registry.yarnpkg.com/popmotion/-/popmotion-9.1.0.tgz#4360d06bd18ce8baa8f9284ecec7d55344af6325"
@@ -13146,6 +13161,11 @@ proxy-addr@~2.0.5:
   dependencies:
     forwarded "~0.1.2"
     ipaddr.js "1.9.1"
+
+proxy-polyfill@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/proxy-polyfill/-/proxy-polyfill-0.3.2.tgz#55f190054a3044e105d9de16e23719e1e9be0898"
+  integrity sha512-ENKSXOMCewnQTOyqrQXxEjIhzT6dy572mtehiItbDoIUF5Sv5UkmRUc8kowg2MFvr232Uo8rwRpNg3V5kgTKbA==
 
 prr@~1.0.1:
   version "1.0.1"
@@ -14981,6 +15001,14 @@ style-loader@^0.20.1:
   dependencies:
     loader-utils "^1.1.0"
     schema-utils "^0.4.5"
+
+style-value-types@4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/style-value-types/-/style-value-types-4.0.3.tgz#3e2e46c50e876757cba02f442c8a0b0dd970c118"
+  integrity sha512-Yk2kpwC88W2HRlJXegWlT0pfLzjKWMjj8DI4s6m2VsZsL1Ht2oUyHl1EgTYIRlFiAnC4rBSQO+EEn0YiYAxQDw==
+  dependencies:
+    hey-listen "^1.0.8"
+    tslib "^1.10.0"
 
 style-value-types@^4.0.1:
   version "4.0.1"
