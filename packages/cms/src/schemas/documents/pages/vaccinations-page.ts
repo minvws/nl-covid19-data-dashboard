@@ -20,7 +20,7 @@ export default {
       type: 'array',
       title: 'Mijlpalen',
       description:
-        'Je kan hier mijlpalen toevoegen, de laatste zal uitgelicht worden',
+        'Je kan hier mijlpalen toevoegen, de laatste zal uitgelicht worden. Ze worden op het dashboard op datum geordend van oud naar nieuw.',
       of: [{ type: 'milestone', direction: 'asc' }],
       options: {
         sortable: false
@@ -31,8 +31,9 @@ export default {
       type: 'array',
       title: 'Verwacht',
       description:
-        'Je kan hier mijlpalen toevoegen, de laatste zal uitgelicht worden',
+        'Verwachte mijlpalen',
       of: [{ type: 'localeString' }],
+      validation: (Rule: any) => Rule.max(3),
     },
     HIGHLIGHTED_ARTICLES,
   ]
