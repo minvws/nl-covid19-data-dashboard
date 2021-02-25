@@ -53,7 +53,7 @@
       "actueel": "Latest developments",
       "toegankelijkheid": "Accessibility"
     },
-    "title": "Dashboard coronavirus",
+    "title": "Coronadashboard",
     "terug_naar_alle_cijfers": "Overview",
     "terug_naar_alle_cijfers_homepage": "Overview",
     "menu": {
@@ -98,7 +98,7 @@
       "legend_inaccurate_label": "Data is less precise"
     },
     "metadata": {
-      "title": "Intensive care admissions | Dashboard coronavirus | Government.nl",
+      "title": "Intensive care admissions | Coronadashboard | Government.nl",
       "description": "National overview of confirmed COVID-19 cases who are admitted to a hospital intensive care unit (ICU)."
     },
     "titel_sidebar": "Intensive care units admissions",
@@ -126,7 +126,7 @@
     "barscale_screenreader_text": "{{value}} patients who contact the general practitioner for the first time due to COVID-19 like symptoms, per 100.000 inhabitants, per week.",
     "titel_sidebar": "Symptoms at general practitioners",
     "metadata": {
-      "title": "Number of patients with COVID-19 symptoms reported by general practitioners | Dashboard coronavirus | Government.nl",
+      "title": "Number of patients with COVID-19 symptoms reported by general practitioners | Coronadashboard | Government.nl",
       "description": "National (estimated) number of patients who contact the general practitioner for the first time due to COVID-19 like symptoms."
     },
     "normalized_kpi_titel": "Number of patients with symptoms that could indicate COVID-19 per 100.000 inhabitants",
@@ -195,7 +195,7 @@
     },
     "linechart_description": "This graph shows hospital admissions, including admissions directly to ICU. The figure for each day indicates the number of people actually admitted on that day, not the number of admissions reported on that day. This gives a clear picture of the development of coronavirus in the Netherlands. There are often reporting delays of a few days for hospital admissions; data for the most recent days is therefore incomplete.",
     "metadata": {
-      "title": "Hospital admissions | Dashboard coronavirus | Government.nl",
+      "title": "Hospital admissions | Coronadashboard | Government.nl",
       "description": "Number of confirmed COVID-19 cases who are admitted to a hospital in the Netherlands."
     },
     "titel_sidebar": "Hospital admissions",
@@ -248,7 +248,7 @@
     },
     "titel_sidebar": "Confirmed cases",
     "metadata": {
-      "title": "Confirmed cases | Dashboard coronavirus | Government.nl",
+      "title": "Confirmed cases | Coronadashboard | Government.nl",
       "description": "National overview of confirmed cases in inhabitants with COVID-19."
     },
     "titel_kpi": "Confirmed cases per day",
@@ -299,7 +299,7 @@
     "linechart_titel": "Progression over time",
     "titel_sidebar": "Infectious people",
     "metadata": {
-      "title": "Number of infectious people | Dashboard coronavirus | Government.nl",
+      "title": "Number of infectious people | Coronadashboard | Government.nl",
       "description": "National overview of how many people with COVID-19 can transmit the virus. This number is calculated by the RIVM."
     },
     "barscale_toelichting": "A calculation of how many people with COVID-19 per 100.000 people can transmit the virus. This number is calculated by the RIVM.",
@@ -336,7 +336,7 @@
     "extra_uitleg": "The reproduction number shows how fast the virus is spreading. This number shows how many people are on average infected by one patient with COVID-19. The number of transmissions remains more or less constant when the reproduction number is 1, declines when it is less than 1 and increases when the number is above 1.",
     "linechart_titel": "Progression over time",
     "metadata": {
-      "title": "Reproduction number | Dashboard coronavirus | Government.nl",
+      "title": "Reproduction number | Coronadashboard | Government.nl",
       "description": "The reproduction number shows how fast the virus is spreading. This number shows how many people are on average infected by one patient with COVID-19."
     },
     "titel_sidebar": "Reproduction number",
@@ -420,7 +420,7 @@
     "map_titel": "Infected locations in the Netherlands",
     "map_toelichting": "This maps shows the percentage of nursing homes where in the past 28 days at least one (new) COVID-19 infection (confirmed by a positive test) is reported.",
     "metadata": {
-      "title": "Infected nursing homes | Dashboard coronavirus | Government.nl",
+      "title": "Infected nursing homes | Coronadashboard | Government.nl",
       "description": "National number of nursing homes with at least one confirmed case of COVID-19."
     },
     "titel_sidebar": "Nursing homes",
@@ -457,7 +457,7 @@
     "map_titel": "Confirmed cases in the Netherlands",
     "map_toelichting": "These maps show the number of confirmed cases per 100.000 residents.",
     "metadata": {
-      "title": "Confirmed cases in nursing homes | Dashboard coronavirus | Government.nl",
+      "title": "Confirmed cases in nursing homes | Coronadashboard | Government.nl",
       "description": "Number of confirmed cases of COVID-19 in nursing homes in the Netherlands."
     },
     "titel_kpi": "Number of confirmed cases per day",
@@ -490,7 +490,7 @@
     "map_toelichting": "These maps show the excess mortality in nursing homes in the Netherlands per day.",
     "titel_sidebar": "Deceased nursing home residents per day",
     "metadata": {
-      "title": "Number of confirmed cases in nursing homes | Dashboard coronavirus | Government.nl",
+      "title": "Number of confirmed cases in nursing homes | Coronadashboard | Government.nl",
       "description": "National number of deceased residents with confirmed cases of COVID-19 in nursing homes."
     },
     "titel_kpi": "Mortality per day",
@@ -527,7 +527,7 @@
     "barscale_screenreader_text": "{{value}} virus particles per 100.000 inhabitants",
     "linechart_titel": "Average number of virus particles per 100.000 inhabitants over time",
     "metadata": {
-      "title": "Sewage water examination | Dashboard coronavirus | Government.nl",
+      "title": "Sewage water examination | Coronadashboard | Government.nl",
       "description": "Average number of virus particles per 100.000 inhabitants"
     },
     "titel_sidebar": "Sewage water examination",
@@ -572,10 +572,10 @@
     "text": "Back to selection of region"
   },
   "error_metadata": {
-    "title": "Error message Dashboard coronavirus | Government.nl"
+    "title": "Error message Coronadashboard | Government.nl"
   },
   "nationaal_metadata": {
-    "title": "Dashboard coronavirus | COVID-19 | Government.nl",
+    "title": "Coronadashboard | COVID-19 | Government.nl",
     "description": "Information on the development of the coronavirus in the Netherlands.",
     "url": "https://coronadashboard.government.nl"
   },
@@ -583,24 +583,24 @@
     "title": "Page cannot be found | Government.nl"
   },
   "over_metadata": {
-    "title": "About the Dashboard coronavirus | COVID-19  | Government.nl",
+    "title": "About the Coronadashboard | COVID-19  | Government.nl",
     "description": "Information on the development of the coronavirus in the Netherlands.",
     "url": "https://coronadashboard.government.nl/over"
   },
   "regionaal_metadata": {
-    "title": "Regional Dashboard Coronavirus COVID-19 | Government.nl",
+    "title": "Regional Coronadashboard COVID-19 | Government.nl",
     "description": "Information on the development of the coronavirus in the Netherlands.",
     "url": "https://coronadashboard.government.nl/regio"
   },
   "verantwoording_metadata": {
-    "title": "Explanation of data | Dashboard coronavirus | Government.nl",
+    "title": "Explanation of data | Coronadashboard | Government.nl",
     "description": "Information on the development of the coronavirus in the Netherlands.",
     "url": "https://coronadashboard.government.nl/verantwoording"
   },
   "metadata": {
     "description": "Information on the development of the coronavirus in the Netherlands.",
-    "titel": "Error message Dashboard coronavirus | Government.nl",
-    "title": "Dashboard coronavirus | COVID-19 | Government.nl",
+    "titel": "Error message Coronadashboard | Government.nl",
+    "title": "Coronadashboard | COVID-19 | Government.nl",
     "url": "https://coronadashboard.government.nl"
   },
   "charts": {
@@ -668,7 +668,7 @@
   },
   "seoHead": {
     "default_description": "Information on the development of the coronavirus in The Netherlands.",
-    "default_title": "Dashboard coronavirus | COVID-19 | Government.nl",
+    "default_title": "Coronadashboard | COVID-19 | Government.nl",
     "default_url": "https://coronadashboard.government.nl/veelgestelde-vragen"
   },
   "no_data_for_this_municipality": {
@@ -708,7 +708,7 @@
     }
   },
   "veiligheidsregio_metadata": {
-    "title": "Regional Dashboard Coronavirus | COVID-19 | Government.nl",
+    "title": "Regional Coronadashboard | COVID-19 | Government.nl",
     "description": "Information on the development of the coronavirus in the Netherlands.",
     "url": "https://coronadashboard.government.nl/regio"
   },
@@ -733,7 +733,7 @@
     },
     "linechart_description": "This graph shows hospital admissions, including admissions directly to ICU. The figure for each day indicates the number of people actually admitted on that day, not the number of admissions reported on that day. This gives a clear picture of the development of coronavirus in the Netherlands. There are often reporting delays of a few days for hospital admissions; data for the most recent days is therefore incomplete.",
     "metadata": {
-      "title": "Hospital admissions residents {{safetyRegionName}} | Dashboard coronavirus | Government.nl",
+      "title": "Hospital admissions residents {{safetyRegionName}} | Coronadashboard | Government.nl",
       "description": "Confirmed cases of COVID-19 in safety region {{safetyRegionName}} who are admitted to a hospital."
     },
     "titel_kpi": "Number of hospital admissions reported on one day. ",
@@ -784,7 +784,7 @@
       "text": "RIVM"
     },
     "metadata": {
-      "title": "Confirmed cases in {{safetyRegionName}} | Dashboard coronavirus | Government.nl",
+      "title": "Confirmed cases in {{safetyRegionName}} | Coronadashboard | Government.nl",
       "description": "Overview of confirmed cases in safety region {{safetyRegionName}}."
     },
     "reference": {
@@ -835,8 +835,8 @@
     "graph_average_label_text_rwzi": "Measurements for {{name}}",
     "average": "Average",
     "metadata": {
-      "title": "Sewage water examination in {{safetyRegionName}} | Dashboard coronavirus | Government.nl",
-      "description": "Sewage water examination in {{safetyRegionName}} | Dashboard Coronavirus | Government.nl"
+      "title": "Sewage water examination in {{safetyRegionName}} | Coronadashboard | Government.nl",
+      "description": "Sewage water examination in {{safetyRegionName}} | Coronadashboard | Government.nl"
     },
     "graph_daily_label_text_rwzi": "Measurements for ({{name}})",
     "graph_selected_rwzi_placeholder": "Select location",
@@ -879,7 +879,7 @@
     },
     "linechart_description": "This graph shows hospital admissions, including admissions directly to ICU. The figure for each day indicates the number of people actually admitted on that day, not the number of admissions reported on that day. This gives a clear picture of the development of coronavirus in the Netherlands. There are often reporting delays of a few days for hospital admissions; data for the most recent days is therefore incomplete.",
     "metadata": {
-      "title": "Hospital admissions {{municipalityName}} | Dashboard coronavirus | Government.nl",
+      "title": "Hospital admissions {{municipalityName}} | Coronadashboard | Government.nl",
       "description": "Overview of the number of confirmed COVID-19 cases in {{municipalityName}} who are admitted to a hospital per day."
     },
     "titel_kpi": "Number of hospital admissions reported on one day. ",
@@ -930,7 +930,7 @@
       "text": "RIVM"
     },
     "metadata": {
-      "title": "Confirmed cases in  {{municipalityName}} | Dashboard coronavirus | Government.nl",
+      "title": "Confirmed cases in  {{municipalityName}} | Coronadashboard | Government.nl",
       "description": "Overview of confirmed cases in municipality {{municipalityName}}"
     },
     "titel_kpi": "Confirmed cases per day",
@@ -967,7 +967,7 @@
     "graph_average_label_text_rwzi": "Measurements for {{name}}",
     "average": "Average",
     "metadata": {
-      "title": "Sewage water examination in {{municipalityName}} | Dashboard coronavirus | Government.nl",
+      "title": "Sewage water examination in {{municipalityName}} | Coronadashboard | Government.nl",
       "description": "Overview of sewage water examination and the number of measured COVID-19 virus particles in municipality {{municipalityName}}."
     },
     "nodata_sidebar": "This information is not available for this municipality.",
@@ -997,7 +997,7 @@
     "selecteer_titel": "Risk level map of the Netherlands",
     "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on February 17. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\n**There remains a national lockdown until at least 15 March. [Click here to view the lockdown measures](/landelijk/maatregelen).**",
     "metadata": {
-      "title": "Level of risk per safety region | Dashboard coronavirus | Government.nl",
+      "title": "Level of risk per safety region | Coronadashboard | Government.nl",
       "description": "Overview of the level of risk per safety region in the Netherlands."
     },
     "belangrijk_bericht": "There is a [national lockdown](https://coronadashboard.government.nl/landelijk/maatregelen) until at least 15 March."
@@ -1006,7 +1006,7 @@
     "selecteer_titel": "Select your municipality",
     "selecteer_toelichting": "There are different measures per safety region and municipality",
     "metadata": {
-      "title": "Municipality overview | Dashboard coronavirus | Government.nl",
+      "title": "Municipality overview | Coronadashboard | Government.nl",
       "description": "Overview of municipalities in the Netherlands"
     }
   },
@@ -1097,7 +1097,7 @@
     }
   },
   "over_risiconiveaus_metadata": {
-    "title": "Risk levels | Dashboard coronavirus | Government.nl",
+    "title": "Risk levels | Coronadashboard | Government.nl",
     "description": "Information on the development of the coronavirus in the Netherlands.",
     "url": "https://coronadashboard.government.nl/over-risiconiveaus"
   },
@@ -1150,7 +1150,7 @@
     "map_toelichting": "These maps show the excess mortality in nursing homes in the Netherlands per day.",
     "titel_sidebar": "Mortality",
     "metadata": {
-      "title": "Deceased residents nursing homes in {{safetyRegionName}} | Dashboard coronavirus | Government.nl",
+      "title": "Deceased residents nursing homes in {{safetyRegionName}} | Coronadashboard | Government.nl",
       "description": "Number of deceased residents with confirmed cases of COVID-19 in nursing homes within safety region {{safetyRegionName}}."
     },
     "reference": {
@@ -1180,7 +1180,7 @@
     "linechart_titel": "Progression over time in the total number of infected locations",
     "barscale_screenreader_text": "{{value}} new locations where there is at least one confirmed case, per day.",
     "metadata": {
-      "title": "Infected nursing home locations in {{safetyRegionName}} | Dashboard coronavirus | Government.nl",
+      "title": "Infected nursing home locations in {{safetyRegionName}} | Coronadashboard | Government.nl",
       "description": "Number of nursing homes in safety region {{safetyRegionName}} with at least one confirmed case of COVID-19."
     },
     "titel_sidebar": "Nursing homes",
@@ -1216,7 +1216,7 @@
     "map_titel": "Confirmed cases in the Netherlands",
     "map_toelichting": "These maps show the number of confirmed cases per 100.000 residents.",
     "metadata": {
-      "title": "Confirmed cases in nursing homes in safety region {{safetyRegionName}} | Dashboard coronavirus | Government.nl",
+      "title": "Confirmed cases in nursing homes in safety region {{safetyRegionName}} | Coronadashboard | Government.nl",
       "description": "Number of confirmed cases of COVID-19 under nursing home residents in safety region {{safetyRegionName}}."
     },
     "reference": {
@@ -1233,7 +1233,7 @@
   },
   "data_warning_text": "",
   "veelgestelde_vragen_metadata": {
-    "title": "Frequently asked questions | Dashboard coronavirus | Government.nl",
+    "title": "Frequently asked questions | Coronadashboard | Government.nl",
     "description": "Information on the development of the coronavirus in the Netherlands.",
     "url": "https://coronadashboard.government.nl/veelgestelde-vragen"
   },
@@ -1278,7 +1278,7 @@
   },
   "nl_gedrag": {
     "metadata": {
-      "title": "Compliance and support | Dashboard coronavirus | Government.nl",
+      "title": "Compliance and support | Coronadashboard | Government.nl",
       "description": "National overview of compliance and support"
     },
     "pagina": {
@@ -1349,7 +1349,7 @@
   },
   "regionaal_gedrag": {
     "metadata": {
-      "title": "Compliance and support | Dashboard coronavirus | Government.nl",
+      "title": "Compliance and support | Coronadashboard | Government.nl",
       "description": "National overview of compliance and support"
     },
     "pagina": {
@@ -1470,7 +1470,7 @@
     "map_titel": "Distribution of infected locations in the Netherlands",
     "map_toelichting": "This map shows the number of disability care homes that have reported at least one confirmed COVID-19 case, based on a positive test, in the last 28 days.",
     "metadata": {
-      "title": "Infected disability care homes | Dashboard coronavirus | Government.nl",
+      "title": "Infected disability care homes | Coronadashboard | Government.nl",
       "description": "National overview of the disability care homes that have reported at least one confirmed COVID-19 case."
     },
     "titel_sidebar": "Disability care",
@@ -1502,7 +1502,7 @@
     "map_titel": "Distribution of infected locations in the Netherlands",
     "map_toelichting": "These maps show how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
     "metadata": {
-      "title": "Confirmed cases of disability care home residents | Dashboard coronavirus | Government.nl",
+      "title": "Confirmed cases of disability care home residents | Coronadashboard | Government.nl",
       "description": "National overview of the number of confirmed cases of disability care home residents for COVID-19."
     },
     "titel_kpi": "Disability care homes - daily confirmed cases (residents)",
@@ -1530,7 +1530,7 @@
     "map_titel": "Disability care homes – deaths",
     "map_toelichting": "The maps show the exces mortality amongst disability care homes in the Netherlands, per day.",
     "metadata": {
-      "title": "Deceased residents of disability care homes | Dashboard coronavirus | Government.nl",
+      "title": "Deceased residents of disability care homes | Coronadashboard | Government.nl",
       "description": "Total number of confirmed cases in disability care homes in the Netherlands that died from COVID-19"
     },
     "titel_kpi": "Number of deceased residents",
@@ -1563,7 +1563,7 @@
     "map_toelichting": "",
     "titel_sidebar": "Death per day",
     "metadata": {
-      "title": "Deceased residents of disability care homes in {{safetyRegionName}} | Dashboard coronavirus | Government.nl",
+      "title": "Deceased residents of disability care homes in {{safetyRegionName}} | Coronadashboard | Government.nl",
       "description": "Total number of confirmed cases in disability care homes in safety region {{safetyRegionName}} that died from COVID-19"
     },
     "reference": {
@@ -1589,7 +1589,7 @@
     "linechart_titel": "Total no. of infected locations – progression over time",
     "barscale_screenreader_text": "",
     "metadata": {
-      "title": "Infected disability care homes in {{safetyRegionName}} | Dashboard coronavirus | Government.nl",
+      "title": "Infected disability care homes in {{safetyRegionName}} | Coronadashboard | Government.nl",
       "description": "Regional overview of the disability care homes in {{safetyRegionName}} that have reported at least one confirmed COVID-19 case."
     },
     "titel_sidebar": "Confirmed cases (homes)",
@@ -1621,7 +1621,7 @@
     "map_titel": "",
     "map_toelichting": "These maps show how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
     "metadata": {
-      "title": "Confirmed cases of disability care home residents in {{safetyRegionName}} | Dashboard coronavirus | Government.nl",
+      "title": "Confirmed cases of disability care home residents in {{safetyRegionName}} | Coronadashboard | Government.nl",
       "description": "Regional overview of the number of confirmed cases of disability care home residents in {{safetyRegionName}} for COVID-19."
     },
     "reference": {
@@ -1641,7 +1641,7 @@
     "titel_sidebar": "People over 70 living at home",
     "titel_kpi": "Confirmed cases",
     "metadata": {
-      "title": "People over 70 living home | Dashboard coronavirus | Governement.nl",
+      "title": "People over 70 living home | Coronadashboard | Governement.nl",
       "description": "People over 70 living home"
     },
     "section_positive_tested": {
@@ -1693,7 +1693,7 @@
     "titel_sidebar": "People over 70 living at home",
     "titel_kpi": "Confirmed cases",
     "metadata": {
-      "title": "Over-70s living at home in {{safetyRegion}} I Dashboard coronavirus I Government.nl",
+      "title": "Over-70s living at home in {{safetyRegion}} I Coronadashboard I Government.nl",
       "description": "Over-70s living at home in {{safetyRegion}}"
     },
     "section_positive_tested": {
@@ -1742,7 +1742,7 @@
     "titel_sidebar": "Deaths",
     "titel_kpi": "Daily reported deaths from COVID-19",
     "metadata": {
-      "title": "Deaths | Dashboard coronavirus | Government.nl",
+      "title": "Deaths | Coronadashboard | Government.nl",
       "description": "Number of deceased per day"
     },
     "section_deceased_rivm": {
@@ -1773,7 +1773,7 @@
     "titel_sidebar": "Deaths",
     "titel_kpi": "Number of reported deaths related to COVID-19 per day",
     "metadata": {
-      "title": "Deaths in {{safetyRegion}} | Dashboard coronavirus | Government.nl",
+      "title": "Deaths in {{safetyRegion}} | Coronadashboard | Government.nl",
       "description": "Number of deceased per day in {{safetyRegion}}"
     },
     "section_deceased_rivm": {
@@ -1846,7 +1846,7 @@
     "titel_aanvullendemaatregelen": "Additional information",
     "toelichting_aanvullendemaatregelen": "There can be additional measures on a regional level. Please take a look at the website of the safety region.",
     "metadata": {
-      "title": "Measures in {{safetyRegionName}} | Dashboard coronavirus | Government.nl",
+      "title": "Measures in {{safetyRegionName}} | Coronadashboard | Government.nl",
       "description": "Overview of the corona measures in the safety region {{safetyRegionName}}."
     },
     "subtitel_sidebar": "There are national measures",
@@ -2010,7 +2010,7 @@
     "titel_sidebar": "Vaccinations",
     "titel_kpi": "Vaccine doses administered",
     "metadata": {
-      "title": "Vaccines | Dashboard coronavirus | Government.nl",
+      "title": "Vaccines | Coronadashboard | Government.nl",
       "description": "The Netherlands began vaccinating people against COVID-19 on 6 January 2021. The coronavirus dashboard shows how many doses of vaccine have been administered and how many doses are on their way."
     },
     "title": "COVID-19 vaccinations",
@@ -2263,7 +2263,7 @@
     }
   },
   "articles_metadata": {
-    "title": "Articles | Dashboard coronavirus | Government.nl",
+    "title": "Articles | Coronadashboard | Government.nl",
     "description": "",
     "url": "https://coronadashboard.government.nl/artikelen"
   },
@@ -2275,7 +2275,7 @@
     "title": "The current situation in {{the_netherlands}}",
     "the_netherlands": "The Netherlands",
     "metadata": {
-      "title": "Dashboard coronavirus | COVID-19 | Government.nl",
+      "title": "Coronadashboard | COVID-19 | Government.nl",
       "description": "Information on the development of the coronavirus in the Netherlands."
     },
     "risiconiveaus": {
@@ -2507,7 +2507,7 @@
     }
   },
   "toegankelijkheid_metadata": {
-    "title": "Accessibility | Dashboard coronavirus | Government.nl",
+    "title": "Accessibility | Coronadashboard | Government.nl",
     "description": "Information on the accessibility of the COVID-19 Dashboard.",
     "url": "https://coronadashboard.government.nl/verantwoording"
   },
@@ -2576,7 +2576,7 @@
     "titel_sidebar": "Deaths",
     "titel_kpi": "Number of reported deaths related to COVID-19 per day",
     "metadata": {
-      "title": "Deaths in {{municipalityName}} | Dashboard coronavirus | Government.nl",
+      "title": "Deaths in {{municipalityName}} | Coronadashboard | Government.nl",
       "description": "Number of deceased per day in {{municipalityName}}"
     },
     "section_deceased_rivm": {
