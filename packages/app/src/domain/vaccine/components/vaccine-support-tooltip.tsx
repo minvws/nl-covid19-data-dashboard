@@ -5,7 +5,7 @@ import {
 import styled from 'styled-components';
 import { Spacer } from '~/components-styled/base';
 import { SeriesConfig } from '~/components-styled/time-series-chart';
-import { Heading, Text } from '~/components-styled/typography';
+import { Heading } from '~/components-styled/typography';
 import { VisuallyHidden } from '~/components-styled/visually-hidden';
 import { Locale } from '~/locale';
 import { formatDateFromSeconds } from '~/utils/formatDate';
@@ -13,7 +13,6 @@ import { formatDateFromSeconds } from '~/utils/formatDate';
 export function VaccineSupportTooltip({
   locale,
   value,
-  valueKey,
   config,
 }: {
   locale: Locale;
@@ -31,7 +30,6 @@ export function VaccineSupportTooltip({
       <Heading level={5} mb={1}>
         {text.grafiek_draagvlak.titel}
       </Heading>
-      <Text>{`WUT? ${valueKey}`}</Text>
       <VisuallyHidden>{`${dateStartString} - ${dateEndString}`}</VisuallyHidden>
       <TooltipList>
         {[...config].reverse().map((x) => (
