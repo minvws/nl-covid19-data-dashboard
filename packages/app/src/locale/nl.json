@@ -1051,7 +1051,7 @@
     "linechart_percentage_titel": "Percentage positieve testen over tijd",
     "linechart_percentage_toelichting": "Deze grafiek laat het dagelijks percentage GGD-testen zien met een positieve uitslag, ten opzichte van alle GGD-testen van die dag waarvan de uitslag bekend is. De gegevens zijn gesorteerd op de datum waarop de test bij de GGD plaatsvond. Het duurt gemiddeld één tot twee dagen voordat testuitslagen bekend zijn.",
     "linechart_totaltests_titel": "Aantal testen over tijd",
-    "linechart_totaltests_toelichting": "Deze grafiek laat het dagelijks aantal bekende testuitslagen in de GGD-teststraten over tijd zien, en hoeveel daarvan een positieve uitslag hebben. De gegevens zijn gesorteerd op de datum waarop de test bij de GGD plaatsvondt. Het duurt gemiddeld één tot twee dagen voordat testuitslagen bekend zijn.",
+    "linechart_totaltests_toelichting": "Deze grafiek laat het dagelijks aantal bekende testuitslagen in de GGD-teststraten over tijd zien, en hoeveel daarvan een positieve uitslag hebben. De gegevens zijn gesorteerd op de datum waarop de test bij de GGD plaatsvond. Het duurt gemiddeld één tot twee dagen voordat testuitslagen bekend zijn.",
     "linechart_totaltests_legend_label": "GGD-testen waarvan uitslag bekend is",
     "linechart_positivetests_legend_label": "GGD-testen met een positieve uitslag",
     "reference": {
