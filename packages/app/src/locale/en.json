@@ -1710,14 +1710,14 @@
   },
   "sterfte": {
     "titel_sidebar": "Deaths",
-    "titel_kpi": "Daily reported deaths from COVID-19",
+    "titel_kpi": "Daily number of COVID-19 patients reported dead ",
     "metadata": {
       "title": "Deaths | Coronavirus Dashboard | Government.nl",
       "description": "Number of deceased per day"
     },
     "section_deceased_rivm": {
       "title": "Deaths",
-      "description": "These figures show the number of deaths from COVID-19, as reported to the GGD. The actual number of deaths from COVID-19 may be higher because not all people with COVID-19 get tested and there is no requirement for reporting deaths due to COVID-19. ",
+      "description": "These figures show the number of COVID-19 patients reported dead to the GGD yesterday. The actual number of COVID-19 patients that died may be higher because not all people with COVID-19 get tested and there is no requirement for reporting deaths due to COVID-19.",
       "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
       "bronnen": {
         "rivm": {
@@ -1730,10 +1730,10 @@
         "href": "/verantwoording#deaths",
         "text": "Read more in 'explanation of the data presented'."
       },
-      "kpi_covid_daily_title": "Daily reported deaths from COVID-19",
-      "kpi_covid_daily_description": "This figure shows the number of COVID-19 deaths reported to the GGD, per day. It includes late reports of deaths that occurred in the preceding days.",
-      "kpi_covid_total_title": "Total reported deaths from COVID-19.",
-      "kpi_covid_total_description": "This figure shows the number of reported deaths from COVID-19, since the reporting of COVID-19 deaths started.",
+      "kpi_covid_daily_title": "Daily number of COVID-19 patients reported dead ",
+      "kpi_covid_daily_description": "This figure shows the number of COVID-19 patients reported dead to the GGD, per day. It includes late reports of deaths that occurred in the preceding days.",
+      "kpi_covid_total_title": "Total number of COVID-19 patients reported dead",
+      "kpi_covid_total_description": "This figure shows the number of COVID-19 patients reported dead, since the reporting of COVID-19 deaths started.",
       "line_chart_covid_daily_title": "Number of reported deaths from COVID-19 over time",
       "line_chart_covid_daily_description": "This graph shows the number of reported deaths from COVID-19, in the selected period of time."
     },
@@ -1741,14 +1741,14 @@
   },
   "veiligheidsregio_sterfte": {
     "titel_sidebar": "Deaths",
-    "titel_kpi": "Number of reported deaths related to COVID-19 per day",
+    "titel_kpi": "Daily number of COVID-19 patients reported dead ",
     "metadata": {
       "title": "Deaths in {{safetyRegion}} | Coronavirus Dashboard | Government.nl",
       "description": "Number of deceased per day in {{safetyRegion}}"
     },
     "section_deceased_rivm": {
       "title": "Deaths in {{safetyRegion}}",
-      "description": "These figures show the number of deaths related directly or indirectly to COVID-19, as reported to the GGD. The actual number of deaths related to COVID-19 may be higher because not all people with COVID-19 get tested and there is no requirement for reporting COVID-19 related deaths. ",
+      "description": "These figures show the number of COVID-19 patients in this safety region reported dead to the GGD yesterday. The actual number of COVID-19 patients that died may be higher because not all people with COVID-19 get tested and there is no requirement for reporting deaths due to COVID-19.",
       "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
       "bronnen": {
         "rivm": {
@@ -1761,10 +1761,10 @@
         "href": "/verantwoording#deaths",
         "text": "Read more in 'explanation of the data presented'."
       },
-      "kpi_covid_daily_title": "Daily reported deaths from COVID-19",
-      "kpi_covid_daily_description": "This figure shows the number of COVID-19 deaths reported to the GGD, per day. It includes late reports of deaths that occurred in the preceding days.",
-      "kpi_covid_total_title": "Total reported deaths from/related to COVID-19 per 100,000 inhabitants.",
-      "kpi_covid_total_description": "This figure shows the number of deaths from/related to COVID-19 reported yesterday, per 100,000 inhabitants. ",
+      "kpi_covid_daily_title": "Daily number of COVID-19 patients reported dead ",
+      "kpi_covid_daily_description": "This figure shows the number of COVID-19 patients in this safety region reported dead to the GGD, per day. It includes late reports of deaths that occurred in the preceding days.",
+      "kpi_covid_total_title": "Total number of COVID-19 patients reported dead",
+      "kpi_covid_total_description": "This figure shows the number of COVID-19 patients in this safety region reported dead, since the reporting of COVID-19 deaths started.",
       "line_chart_covid_daily_title": "Number of reported deaths related to COVID-19 over time",
       "line_chart_covid_daily_description": "This graph shows the number of reported deaths from COVID-19, in the selected period of time."
     },
@@ -2544,14 +2544,14 @@
   },
   "gemeente_sterfte": {
     "titel_sidebar": "Deaths",
-    "titel_kpi": "Number of reported deaths related to COVID-19 per day",
+    "titel_kpi": "Daily number of COVID-19 patients reported dead ",
     "metadata": {
       "title": "Deaths in {{municipalityName}} | Coronavirus Dashboard | Government.nl",
       "description": "Number of deceased per day in {{municipalityName}}"
     },
     "section_deceased_rivm": {
       "title": "Deaths in {{municipalityName}}",
-      "description": "These figures show the number of deaths related directly or indirectly to COVID-19, as reported to the GGD. The actual number of deaths related to COVID-19 may be higher because not all people with COVID-19 get tested and there is no requirement for reporting COVID-19 related deaths. ",
+      "description": "These figures show the number of COVID-19 patients in this municipality reported dead to the GGD yesterday. The actual number of COVID-19 patients that died may be higher because not all people with COVID-19 get tested and there is no requirement for reporting deaths due to COVID-19.",
       "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
       "bronnen": {
         "rivm": {
@@ -2564,10 +2564,10 @@
         "href": "/verantwoording#deaths",
         "text": "Read more in 'explanation of the data presented'."
       },
-      "kpi_covid_daily_title": "Daily reported deaths from COVID-19",
-      "kpi_covid_daily_description": "This figure shows the number of COVID-19 deaths reported to the GGD, per day. It includes late reports of deaths that occurred in the preceding days.",
-      "kpi_covid_total_title": "Total reported deaths from/related to COVID-19 per 100,000 inhabitants.",
-      "kpi_covid_total_description": "This figure shows the number of deaths from/related to COVID-19 reported yesterday, per 100,000 inhabitants. ",
+      "kpi_covid_daily_title": "Daily number of COVID-19 patients reported dead ",
+      "kpi_covid_daily_description": "This figure shows the number of COVID-19 patients in this municipality reported dead to the GGD, per day. It includes late reports of deaths that occurred in the preceding days.",
+      "kpi_covid_total_title": "Total number of COVID-19 patients reported dead",
+      "kpi_covid_total_description": "This figure shows the number of COVID-19 patients in this municipality reported dead, since the reporting of COVID-19 deaths started.",
       "line_chart_covid_daily_title": "Number of reported deaths related to COVID-19 over time",
       "line_chart_covid_daily_description": "This graph shows the number of reported deaths from COVID-19, in the selected period of time."
     },
