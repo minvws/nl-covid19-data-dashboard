@@ -1,5 +1,5 @@
 import { css } from '@styled-system/css';
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import VaccineIcon from '~/assets/vaccine.svg';
 import { Box } from '~/components-styled/base';
@@ -14,25 +14,27 @@ import siteText from '~/locale/index';
 const MAX_ITEMS_VISIBLE = 5;
 const CIRCLE_SIZE = 26;
 
-interface MileProp {
+interface MileProps {
   title: string;
   date: string;
 }
 
-interface ExpectProp {
+interface ExpectProps {
   item: string;
 }
-interface MileStoneProps {
+export interface MileStoneProps {
   title: string;
   description: RichContentBlock[];
-  miles: MileProp[];
-  expected: ExpectProp[];
+  miles: MileProps[];
+  expected: ExpectProps[];
 }
 
 export function MileStones(props: MileStoneProps) {
   const { title, miles, description, expected } = props;
 
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(true);
+
+  useEffect(() => setIsExpanded(false), []);
 
   function expandedHandler() {
     setIsExpanded(true);
@@ -174,7 +176,7 @@ const ListItem = styled.li<{ isLast?: boolean; isFirst?: boolean }>((x) =>
       left: CIRCLE_SIZE / 2 - 1,
       width: x.isLast ? '2px' : '0',
       height: x.isLast ? '50%' : '100%',
-      backgroundColor: '#fff',
+      backgroundColor: 'white',
     },
   })
 );
@@ -209,7 +211,7 @@ const StyledButton = styled.button(
     outline: 'inherit',
     cursor: 'pointer',
 
-    '&:hover': {
+    '&:hover, &:focus': {
       textDecoration: 'underline',
     },
 
@@ -220,7 +222,7 @@ const StyledButton = styled.button(
       left: `calc(-1rem - ${CIRCLE_SIZE / 2 + 1}px)`,
       height: '100%',
       width: '2px',
-      backgroundColor: '#fff',
+      backgroundColor: 'white',
       backgroundImage: `linear-gradient(${colors.header} 50%, rgba(255,255,255,0) 0%)`,
       backgroundSize: '100% 6px',
       backgroundPosition: '0 2 px',
@@ -239,13 +241,13 @@ const CircleIcon = styled.div<{ isLast: boolean }>((x) =>
     height: CIRCLE_SIZE,
     minWidth: CIRCLE_SIZE,
     borderRadius: '100%',
-    backgroundColor: x.isLast ? '#fff' : 'header',
+    backgroundColor: x.isLast ? 'white' : 'header',
     zIndex: 2,
 
     svg: {
       width: 14,
       height: 14,
-      color: x.isLast ? 'header' : '#fff',
+      color: x.isLast ? 'header' : 'white',
     },
   })
 );
