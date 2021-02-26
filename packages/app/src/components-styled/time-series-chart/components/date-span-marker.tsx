@@ -1,3 +1,4 @@
+import { TimestampedValue } from '@corona-dashboard/common';
 import styled from 'styled-components';
 import { HoveredPoint } from '../logic';
 
@@ -14,12 +15,14 @@ const Container = styled.div`
   transform: translate(-50%, 0);
 `;
 
-interface DateSpanMarkerProps {
-  point: HoveredPoint;
+interface DateSpanMarkerProps<T extends TimestampedValue> {
+  point: HoveredPoint<T>;
   width: number;
 }
 
-export function DateSpanMarker(props: DateSpanMarkerProps) {
+export function DateSpanMarker<T extends TimestampedValue>(
+  props: DateSpanMarkerProps<T>
+) {
   const { point, width } = props;
 
   return (

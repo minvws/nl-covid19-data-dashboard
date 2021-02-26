@@ -1,5 +1,5 @@
 import { TimestampedValue } from '@corona-dashboard/common';
-import { scaleBand, scaleLinear, scaleTime } from '@visx/scale';
+import { scaleBand, scaleLinear } from '@visx/scale';
 import { useTooltip } from '@visx/tooltip';
 import { extent } from 'd3-array';
 import { useCallback, useEffect, useMemo } from 'react';
@@ -59,7 +59,8 @@ const defaultPadding: Padding = {
  * design. For example:
  *
  * - You can only set padding-left instead of all paddings, because only the
- *   left had a practical function (make space for larger numbers on the x-axis).
+ *   left had a practical function (make space for larger numbers on the
+ *   x-axis).
  * - The legend show/hide, items, shape and color are derived from seriesConfig
  *   definition and possibly other props that set things like date span
  *   annotations. We should be able to standardize this for all charts.
@@ -72,6 +73,10 @@ const defaultPadding: Padding = {
  * not be able to avoid creating multiple chart root components, but with
  * smaller abstractions we should be able to re-use most elements and logic.
  *
+ * The scales for x and y are using the same type (LinearScale). This was done
+ * to see if we can use the date_unix timestamps from the data directly
+ * everywhere without unnecessary conversion to and from Date objects.
+ *
  * @TODO
  *
  * - Generate legend contents
@@ -79,6 +84,7 @@ const defaultPadding: Padding = {
  * - Move more logic out of main component
  * - Add signaalwaarde/benchmark marker
  * - Implement RangeTrend component
+ * - Find better name / properties for DoubleTrendValue
  *
  * Known Issues:
  * - Bisect and nearest point calculations have a rounding / offset bug.
@@ -158,7 +164,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     : calculatedSeriesMax;
 
   const xDomain = useMemo(() => {
-    const domain = extent(trendsList.flat().map((x) => x.__date_ms));
+    const domain = extent(trendsList.flat().map((x) => x.__date_unix));
 
     return isDefined(domain[0]) && isDefined(domain[1])
       ? (domain as [number, number])
@@ -191,7 +197,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     () =>
       scaleBand<number>({
         range: [0, bounds.width],
-        domain: timespanMarkerData.map((x) => x.__date_ms),
+        domain: timespanMarkerData.map((x) => x.__date_unix),
       }),
     [bounds.width, timespanMarkerData]
   );
@@ -202,7 +208,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
    * @TODO see if we can use scale linear instead and stick to unix numbers in
    * reverse lookup.
    */
-  const xScale = scaleTime({
+  const xScale = scaleLinear({
     domain: xDomain,
     range: [markerPadding, bounds.width - markerPadding],
   });
@@ -217,7 +223,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
    * @TODO remove these and pass scales directly to trend components to keep it
    * consistent
    */
-  const getX = useCallback((x: TrendValue) => xScale(x.__date_ms), [xScale]);
+  const getX = useCallback((x: TrendValue) => xScale(x.__date_unix), [xScale]);
   const getY = useCallback((x: TrendValue) => yScale(x.__value), [yScale]);
 
   const [handleHover, hoverState] = useHoverState({

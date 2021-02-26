@@ -1,8 +1,9 @@
+import { TimestampedValue } from '@corona-dashboard/common';
 import styled from 'styled-components';
 import { Text } from '~/components-styled/typography';
 import { colors } from '~/style/theme';
-import { formatDateFromMilliseconds } from '~/utils/formatDate';
-import { HoveredPoint, TrendValue } from '../logic';
+import { formatDateFromSeconds } from '~/utils/formatDate';
+import { HoveredPoint } from '../logic';
 
 type LineProps = {
   color: string;
@@ -31,15 +32,15 @@ const Container = styled.div`
   bottom: 0;
 `;
 
-interface DateMarkerProps {
-  point: HoveredPoint;
+interface DateMarkerProps<T extends TimestampedValue> {
+  point: HoveredPoint<T>;
   lineColor?: string;
 }
 
-export function DateMarker({
+export function DateMarker<T extends TimestampedValue>({
   lineColor = colors.data.primary,
   point,
-}: DateMarkerProps) {
+}: DateMarkerProps<T>) {
   return (
     <Container
       style={{
@@ -49,13 +50,9 @@ export function DateMarker({
       <Line color={lineColor} />
       <Label>
         <Text fontSize={12} fontWeight="bold" m={0}>
-          {formatLabel(point.trendValue)}
+          {formatDateFromSeconds(point.trendValue.__date_unix, 'axis')}
         </Text>
       </Label>
     </Container>
   );
-}
-
-function formatLabel(value: TrendValue) {
-  return formatDateFromMilliseconds(value.__date_ms, 'axis');
 }

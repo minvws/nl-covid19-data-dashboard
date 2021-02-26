@@ -8,7 +8,7 @@
 import { formatNumber, formatPercentage } from '@corona-dashboard/common';
 import { AxisBottom, AxisLeft } from '@visx/axis';
 import { GridRows } from '@visx/grid';
-import { ScaleLinear, ScaleTime } from 'd3-scale';
+import { ScaleLinear } from 'd3-scale';
 import { memo } from 'react';
 import { colors } from '~/style/theme';
 import { formatDateFromSeconds } from '~/utils/formatDate';
@@ -18,7 +18,7 @@ const NUM_TICKS = 20;
 
 type AxesProps = {
   bounds: Bounds;
-  xScale: ScaleTime<number, number>;
+  xScale: ScaleLinear<number, number>;
   yScale: ScaleLinear<number, number>;
   isPercentage?: boolean;
   yTickValues?: number[];

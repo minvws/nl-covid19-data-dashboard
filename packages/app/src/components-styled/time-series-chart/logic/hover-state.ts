@@ -5,7 +5,7 @@ import {
 } from '@corona-dashboard/common';
 import { localPoint } from '@visx/event';
 import { bisectLeft } from 'd3-array';
-import { ScaleLinear, ScaleTime } from 'd3-scale';
+import { ScaleLinear } from 'd3-scale';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import { DoubleTrendValue, TrendsList, TrendValue } from './trends';
 import { SeriesConfig } from './series';
@@ -24,7 +24,7 @@ interface UseHoverStateArgs<T extends TimestampedValue> {
   trendsList: TrendsList;
   seriesConfig: SeriesConfig<T>;
   paddingLeft: number;
-  xScale: ScaleTime<number, number>;
+  xScale: ScaleLinear<number, number>;
   yScale: ScaleLinear<number, number>;
 }
 
@@ -52,17 +52,16 @@ export function useHoverState<T extends TimestampedValue>({
   const [hoverState, setHoverState] = useState<HoverState<T>>();
   const timeoutRef = useRef<any>();
 
-  const valuesDateMs = useMemo(
+  const valuesDateUnix = useMemo(
     () =>
       values.map((x) =>
         isDateValue(x)
-          ? x.date_unix * 1000
+          ? x.date_unix
           : isDateSpanValue(x)
           ? /**
              * @TODO share logic with trend code
              */
-            (x.date_start_unix + (x.date_end_unix - x.date_start_unix) / 2) *
-            1000
+            x.date_start_unix + (x.date_end_unix - x.date_start_unix) / 2
           : 0
       ),
     [values]
@@ -73,9 +72,9 @@ export function useHoverState<T extends TimestampedValue>({
    * all points of all trends are always coming from those values and are thus
    * aligned vertically.
    *
-   * In this chart TrendValue __date was replaced with __date_ms, just to see if
-   * that is feasible. It simplifies calculations like these, dealing with basic
-   * numbers.
+   * In this chart TrendValue __date was replaced with __date_unix, so that we
+   * can use the original data timestamps directly for the xDomain without
+   * conversion to/from Date objects.
    */
   const bisect = useCallback(
     function (values: TimestampedValue[], xPosition: number): number {
@@ -85,12 +84,11 @@ export function useHoverState<T extends TimestampedValue>({
        * @TODO figure this out. If we can do it without padding, we can move
        * this outside the component
        */
-      const date = xScale.invert(xPosition - paddingLeft);
-      const date_ms = date.getTime();
+      const date_unix = xScale.invert(xPosition - paddingLeft);
 
-      return bisectLeft(valuesDateMs, date_ms, 0, values.length - 1);
+      return bisectLeft(valuesDateUnix, date_unix, 0, values.length - 1);
     },
-    [paddingLeft, xScale, valuesDateMs]
+    [paddingLeft, xScale, valuesDateUnix]
   );
 
   const handleHover = useCallback(
@@ -137,7 +135,7 @@ export function useHoverState<T extends TimestampedValue>({
               return {
                 trendValue,
                 // seriesConfigIndex: index,
-                x: xScale(trendValue.__date_ms),
+                x: xScale(trendValue.__date_unix),
                 y: yScale((trendValue as TrendValue).__value),
                 /**
                  * Color is set here so that the MarkerPoints component doesn't
@@ -168,7 +166,7 @@ export function useHoverState<T extends TimestampedValue>({
                 {
                   trendValue,
                   // seriesConfigIndex: index,
-                  x: xScale(trendValue.__date_ms),
+                  x: xScale(trendValue.__date_unix),
                   y: yScale((trendValue as DoubleTrendValue).__value_a),
                   /**
                    * Color is set here so that the MarkerPoints component
@@ -183,7 +181,7 @@ export function useHoverState<T extends TimestampedValue>({
                 {
                   trendValue,
                   // seriesConfigIndex: index,
-                  x: xScale(trendValue.__date_ms),
+                  x: xScale(trendValue.__date_unix),
                   y: yScale((trendValue as DoubleTrendValue).__value_b),
                   /**
                    * Color is set here so that the MarkerPoints component
