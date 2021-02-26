@@ -19,7 +19,7 @@ export default {
       title: 'title.nl',
       date: 'date'
     },
-    prepare(selection: any) {
+    prepare(selection: { title: string; date: string}) {
       const {title, date} = selection
       return {
         title: title,

@@ -43,21 +43,24 @@ import { colors } from '~/style/theme';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { vaccinePageQuery } from '~/queries/vaccine-page-query';
-import { MileStones, MileStoneProps } from '~/domain/vaccine/milestones';
+import { vaccineMilestonesQuery } from '~/queries/vaccine-milestones-query';
+import {
+  MilestonesView,
+  MilestoneViewProps,
+} from '~/domain/vaccine/milestones-view';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   getNlData,
   getText,
   createGetContent<{
-    milestones: MileStoneProps;
+    milestones: MilestoneViewProps;
     highlight: {
       articles?: ArticleSummary[];
     };
   }>(
     `{
-      "milestones": ${vaccinePageQuery},
+      "milestones": ${vaccineMilestonesQuery},
       "highlight": ${createPageArticlesQuery('vaccinationsPage')} 
     }`
   )
@@ -345,11 +348,11 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
           </Box>
         </ChartTile>
 
-        <MileStones
+        <MilestonesView
           title={milestones.title}
           description={milestones.description}
-          miles={milestones.miles}
-          expected={milestones.expected}
+          milestones={milestones.milestones}
+          expectedMilestones={milestones.expectedMilestones}
         />
 
         <ChartTile

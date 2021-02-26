@@ -1,14 +1,14 @@
 import { targetLanguage } from '~/locale';
 
-export const vaccinePageQuery = `
+export const vaccineMilestonesQuery = `
   *[_type=='vaccinationsPage']{
     "title": title.${targetLanguage},
     "description": description.${targetLanguage},
-    "miles": [...milestones | order(date)[] {
+    "milestones": [...milestones | order(date)[] {
       "title": title.${targetLanguage},
       date,
     }],
-    "expected": [...expected[]{
+    "expectedMilestones": [...expected[]{
       "item": ${targetLanguage}
     }] 
   }[0]
