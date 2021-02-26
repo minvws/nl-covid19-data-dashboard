@@ -25,7 +25,7 @@ import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { InlineText, Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
-import { VaccineSupportTooltip } from '~/domain/vaccine/components/vaccine-support-tooltip';
+// import { VaccineSupportTooltip } from '~/domain/vaccine/components/vaccine-support-tooltip';
 import { createDeliveryTooltipFormatter } from '~/domain/vaccines/create-delivery-tooltip-formatter';
 import { useVaccineDeliveryData } from '~/domain/vaccines/use-vaccine-delivery-data';
 import { useVaccineNames } from '~/domain/vaccines/use-vaccine-names';
@@ -365,7 +365,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                 }}
                 seriesConfig={[
                   {
-                    type: 'line',
+                    type: 'area',
                     metricProperty: 'percentage_16_24',
                     label: replaceVariablesInText(
                       text.grafiek_draagvlak.leeftijd_jaar,
@@ -374,23 +374,25 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                     color: '#005082',
                   },
                   {
-                    type: 'line',
-                    metricProperty: 'percentage_25_39',
+                    type: 'range',
+                    metricPropertyLow: 'percentage_25_39',
+                    metricPropertyHigh: 'percentage_40_54',
                     label: replaceVariablesInText(
                       text.grafiek_draagvlak.leeftijd_jaar,
-                      { ageGroup: '25 - 39' }
+                      // { ageGroup: '25 - 39' }
+                      { ageGroup: '25 - 54' }
                     ),
                     color: '#00BBB5',
                   },
-                  {
-                    type: 'area',
-                    metricProperty: 'percentage_40_54',
-                    label: replaceVariablesInText(
-                      text.grafiek_draagvlak.leeftijd_jaar,
-                      { ageGroup: '40 - 54' }
-                    ),
-                    color: '#FFC000',
-                  },
+                  // {
+                  //   type: 'area',
+                  //   metricProperty: 'percentage_40_54',
+                  //   label: replaceVariablesInText(
+                  //     text.grafiek_draagvlak.leeftijd_jaar,
+                  //     { ageGroup: '40 - 54' }
+                  //   ),
+                  //   color: '#FFC000',
+                  // },
                   {
                     type: 'line',
                     metricProperty: 'percentage_55_69',
@@ -410,14 +412,14 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                     color: '#C252D4',
                   },
                 ]}
-                formatTooltip={({ value, valueKey, config }) => (
-                  <VaccineSupportTooltip
-                    locale={locale}
-                    value={value}
-                    valueKey={valueKey}
-                    config={config}
-                  />
-                )}
+                // formatTooltip={({ value, valueKey, config }) => (
+                //   <VaccineSupportTooltip
+                //     locale={locale}
+                //     value={value}
+                //     valueKey={valueKey}
+                //     config={config}
+                //   />
+                // )}
               />
             )}
           </ParentSize>

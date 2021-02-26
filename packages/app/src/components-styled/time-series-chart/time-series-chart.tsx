@@ -21,11 +21,13 @@ import {
   TooltipFormatter,
 } from './components';
 import { AreaTrend } from './components/area-trend';
+import { RangeTrend } from './components/range-trend';
 import {
   Bounds,
   calculateSeriesMaximum,
   getSeriesList,
   Padding,
+  RangeSeriesValue,
   SeriesConfig,
   SeriesValue,
   useHoverState,
@@ -299,13 +301,18 @@ export function TimeSeriesChart<T extends TimestampedValue>({
 
           case 'range':
             return (
-              <div>todo</div>
-              // <RangeTrend key={index} trend={trend as DoubleTrendValue[]}
-              //   color={config.color} style={config.style}
-              //   fillOpacity={config.fillOpacity}
-              //   strokeWidth={config.strokeWidth} getX={getX} getY={getY}
-              //   yScale={yScale} // onHover={(evt) => handleHover(evt, index)}
-              // />
+              <RangeTrend
+                key={index}
+                series={series as RangeSeriesValue[]}
+                color={config.color}
+                fillOpacity={config.fillOpacity}
+                strokeWidth={config.strokeWidth}
+                // getX={getX}
+                // getY={getY}
+                xScale={xScale}
+                yScale={yScale}
+                // onHover={(evt) => handleHover(evt, index)}
+              />
             );
         }
       }),
@@ -346,6 +353,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
           top={tooltipTop}
           isOpen={tooltipOpen}
           formatTooltip={formatTooltip}
+          isPercentage={isPercentage}
         />
 
         {hoverState && (

@@ -123,7 +123,7 @@ interface DefaultTooltipProps<T extends TimestampedValue> {
 export function DefaultTooltip<T extends TimestampedValue>({
   title,
   value,
-  valueKey,
+  valueKey: __valueKey,
   config,
   isPercentage,
 }: DefaultTooltipProps<T>) {
@@ -135,7 +135,7 @@ export function DefaultTooltip<T extends TimestampedValue>({
         {title}
       </Heading>
       <VisuallyHidden>{dateString}</VisuallyHidden>
-      <span>Debug: {valueKey}</span>
+      {/* <span>Active: {valueKey}</span> */}
       <TooltipList>
         {[...config].reverse().map((x, index) => {
           if (x.type === 'range') {
