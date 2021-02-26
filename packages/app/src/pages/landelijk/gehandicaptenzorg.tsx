@@ -168,6 +168,8 @@ const DisabilityCare: FCWithLayout<typeof getStaticProps> = (props) => {
             metricName="disability_care"
             metricProperty="infected_locations_percentage"
             tooltipContent={createDisablityInfectedLocationsRegionalTooltip(
+              siteText.choropleth_tooltip.infected_locations,
+              regionThresholds.nursing_home.infected_locations_percentage,
               createSelectRegionHandler(router, 'gehandicaptenzorg')
             )}
             onSelect={createSelectRegionHandler(router, 'gehandicaptenzorg')}

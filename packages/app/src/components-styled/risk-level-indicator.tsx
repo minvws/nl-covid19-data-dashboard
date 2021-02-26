@@ -8,7 +8,7 @@ import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { EscalationLevel } from '~/domain/restrictions/type';
 import { assert } from '~/utils/assert';
 import { LinkWithIcon } from '~/components-styled/link-with-icon';
-import ArrowIcon from '~/assets/arrow.svg';
+import { ArrowIconRight } from '~/components-styled/arrow-icon';
 
 const escalationThresholds = regionThresholds.escalation_levels.level;
 
@@ -53,7 +53,7 @@ export function RiskLevelIndicator(props: RiskLevelIndicatorProps) {
       <Heading level={3} as="h2" py={2} pl={{ _: '3.5rem' }}>
         <LinkWithIcon
           href={href}
-          icon={<ArrowIcon css={css({ transform: 'rotate(-90deg)' })} />}
+          icon={<ArrowIconRight />}
           iconPlacement="right"
           fontWeight="bold"
           headingLink

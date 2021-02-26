@@ -1,10 +1,10 @@
+import { TimestampedValue } from '@corona-dashboard/common';
 import styled from 'styled-components';
+import { ChartPadding } from '~/components-styled/line-chart/components';
 import { Text } from '~/components-styled/typography';
 import { colors } from '~/style/theme';
 import { formatDateFromMilliseconds } from '~/utils/formatDate';
 import { TrendValue } from '../logic';
-import { ChartPadding } from '~/components-styled/line-chart/components';
-import { TimestampedValue } from '@corona-dashboard/common';
 
 const MARKER_POINT_SIZE = 18;
 

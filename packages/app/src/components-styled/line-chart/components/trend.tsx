@@ -25,7 +25,8 @@ export type TrendProps = {
   xScale: any;
   yScale: any;
   color?: string;
-  onHover: (
+  smallscreen?: boolean;
+  onHover?: (
     event: TouchEvent<SVGElement> | MouseEvent<SVGElement>,
     scales: ChartScales
   ) => void;
@@ -34,13 +35,14 @@ export type TrendProps = {
 export function Trend({
   trend,
   type = 'line',
-  areaFillOpacity = 0.05,
+  areaFillOpacity = 0.25,
   strokeWidth = 2,
   style = 'solid',
   color = colors.data.primary,
   xScale,
   yScale,
   onHover,
+  smallscreen,
 }: TrendProps) {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -51,10 +53,12 @@ export function Trend({
   ) => {
     const isLeave = event.type === 'mouseleave';
     setIsHovered(!isLeave);
-    onHover(event, scales);
+    if (onHover) {
+      onHover(event, scales);
+    }
   };
 
-  const dashes = style === 'dashed' ? 4 : undefined;
+  const dashes = style === 'dashed' ? (smallscreen ? 4 : 10.4) : undefined;
 
   return (
     <>

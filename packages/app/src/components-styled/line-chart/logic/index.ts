@@ -90,7 +90,7 @@ export type TrendValue = {
 
 const timestampToDate = (d: number) => new Date(d * 1000);
 
-type TrendData = (TrendValue & TimestampedValue)[][];
+export type TrendData = (TrendValue & TimestampedValue)[][];
 
 export function getTrendData<T extends TimestampedValue>(
   values: T[],
