@@ -58,6 +58,7 @@ export function useMunicipalityNavigationData(
   return {
     getChoroplethValue: (id: string) => ({
       ...propertyData[id],
+      gmcode: propertyData[id].gmcode || propertyData[id].gemcode,
       __color_value: 0,
     }),
     hasData: true,
