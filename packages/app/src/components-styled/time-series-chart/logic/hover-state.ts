@@ -7,12 +7,16 @@ import { localPoint } from '@visx/event';
 import { bisectLeft } from 'd3-array';
 import { ScaleLinear } from 'd3-scale';
 import { useCallback, useMemo, useRef, useState } from 'react';
-import { DoubleTrendValue, TrendsList, TrendValue } from './trends';
-import { SeriesConfig } from './series';
 import { isDefined } from 'ts-is-present';
+import {
+  SeriesConfig,
+  RangeSeriesValue,
+  SeriesList,
+  SeriesValue,
+} from './series';
 
 export type HoveredPoint<T> = {
-  trendValue: TrendValue | DoubleTrendValue;
+  seriesValue: SeriesValue | RangeSeriesValue;
   metricProperty: keyof T;
   color: string;
   x: number;
@@ -21,7 +25,7 @@ export type HoveredPoint<T> = {
 
 interface UseHoverStateArgs<T extends TimestampedValue> {
   values: T[];
-  trendsList: TrendsList;
+  seriesList: SeriesList;
   seriesConfig: SeriesConfig<T>;
   paddingLeft: number;
   xScale: ScaleLinear<number, number>;
@@ -43,7 +47,7 @@ type UseHoveStateResponse<T> = [HoverHandler, HoverState<T> | undefined];
 
 export function useHoverState<T extends TimestampedValue>({
   values,
-  trendsList,
+  seriesList,
   seriesConfig,
   paddingLeft,
   xScale,
@@ -127,23 +131,15 @@ export function useHoverState<T extends TimestampedValue>({
 
       const linePoints: HoveredPoint<T>[] = seriesConfig
         .map((config, index) => {
-          const trendValue = trendsList[index][valuesIndex];
+          const seriesValue = seriesList[index][valuesIndex];
 
           switch (config.type) {
             case 'line':
             case 'area':
               return {
-                trendValue,
-                // seriesConfigIndex: index,
-                x: xScale(trendValue.__date_unix),
-                y: yScale((trendValue as TrendValue).__value),
-                /**
-                 * Color is set here so that the MarkerPoints component doesn't
-                 * have to look it up from the seriesConfig. This responsibility
-                 * of figuring out visual properties could be moved to the
-                 * markers themselves, depending on what is practical when we
-                 * start using different trend types.
-                 */
+                seriesValue,
+                x: xScale(seriesValue.__date_unix),
+                y: yScale((seriesValue as SeriesValue).__value),
                 color: config.color,
                 metricProperty: config.metricProperty,
               };
@@ -158,38 +154,22 @@ export function useHoverState<T extends TimestampedValue>({
        */
       const rangePoints: HoveredPoint<T>[] = seriesConfig
         .flatMap((config, index) => {
-          const trendValue = trendsList[index][valuesIndex];
+          const seriesValue = seriesList[index][valuesIndex];
 
           switch (config.type) {
             case 'range':
               return [
                 {
-                  trendValue,
-                  // seriesConfigIndex: index,
-                  x: xScale(trendValue.__date_unix),
-                  y: yScale((trendValue as DoubleTrendValue).__value_a),
-                  /**
-                   * Color is set here so that the MarkerPoints component
-                   * doesn't have to look it up from the seriesConfig. This
-                   * responsibility of figuring out visual properties could be
-                   * moved to the markers themselves, depending on what is
-                   * practical when we start using different trend types.
-                   */
+                  seriesValue,
+                  x: xScale(seriesValue.__date_unix),
+                  y: yScale((seriesValue as RangeSeriesValue).__value_low),
                   color: config.color,
                   metricProperty: config.metricPropertyLow,
                 },
                 {
-                  trendValue,
-                  // seriesConfigIndex: index,
-                  x: xScale(trendValue.__date_unix),
-                  y: yScale((trendValue as DoubleTrendValue).__value_b),
-                  /**
-                   * Color is set here so that the MarkerPoints component
-                   * doesn't have to look it up from the seriesConfig. This
-                   * responsibility of figuring out visual properties could be
-                   * moved to the markers themselves, depending on what is
-                   * practical when we start using different trend types.
-                   */
+                  seriesValue,
+                  x: xScale(seriesValue.__date_unix),
+                  y: yScale((seriesValue as RangeSeriesValue).__value_high),
                   color: config.color,
                   metricProperty: config.metricPropertyHigh,
                 },
@@ -199,23 +179,17 @@ export function useHoverState<T extends TimestampedValue>({
         .filter(isDefined);
 
       /**
-       * @TODO Simplify this nearest point calculation by comparing mouse
-       * y with property values directly since we know all values align
-       * vertically anyway.
+       * For nearest point calculation we only need to look at the y component
+       * of the mouse, since all series originate from the same original value
+       * and are thus aligned with the same timestamp.
        */
-      // const distance = (hoveredPoint: HoveredPoint<T>, localPoint: Point) => {
-      //   const x = localPoint.x - hoveredPoint.x;
-      //   const y = localPoint.y - hoveredPoint.y;
-      //   return Math.sqrt(x * x + y * y);
-      // };
-
       const nearestLinePoint = [...linePoints].sort(
         (a, b) => Math.abs(a.y - mousePoint.y) - Math.abs(b.y - mousePoint.y)
       )[0];
 
       setHoverState({ valuesIndex, linePoints, rangePoints, nearestLinePoint });
     },
-    [bisect, values, seriesConfig, trendsList, xScale, yScale]
+    [bisect, values, seriesConfig, seriesList, xScale, yScale]
   );
 
   return [handleHover, hoverState];

@@ -32,15 +32,15 @@ const Container = styled.div`
   bottom: 0;
 `;
 
-interface DateMarkerProps<T extends TimestampedValue> {
+interface DateLineMarkerProps<T extends TimestampedValue> {
   point: HoveredPoint<T>;
   lineColor?: string;
 }
 
-export function DateMarker<T extends TimestampedValue>({
+export function DateLineMarker<T extends TimestampedValue>({
   lineColor = colors.data.primary,
   point,
-}: DateMarkerProps<T>) {
+}: DateLineMarkerProps<T>) {
   return (
     <Container
       style={{
@@ -50,7 +50,7 @@ export function DateMarker<T extends TimestampedValue>({
       <Line color={lineColor} />
       <Label>
         <Text fontSize={12} fontWeight="bold" m={0}>
-          {formatDateFromSeconds(point.trendValue.__date_unix, 'axis')}
+          {formatDateFromSeconds(point.seriesValue.__date_unix, 'axis')}
         </Text>
       </Label>
     </Container>

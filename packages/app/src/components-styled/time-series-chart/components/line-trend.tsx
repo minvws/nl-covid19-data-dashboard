@@ -1,21 +1,21 @@
 import { LinePath } from '@visx/shape';
 import { MouseEvent, TouchEvent, useState } from 'react';
-import { TrendValue } from '../logic';
+import { SeriesValue } from '../logic';
 
 export type LineStyle = 'solid' | 'dashed';
 
 export type LineTrendProps = {
-  trend: TrendValue[];
+  series: SeriesValue[];
   color: string;
   style?: 'solid' | 'dashed';
   strokeWidth?: number;
-  getX: (v: TrendValue) => number;
-  getY: (v: TrendValue) => number;
+  getX: (v: SeriesValue) => number;
+  getY: (v: SeriesValue) => number;
   onHover: (event: TouchEvent<SVGElement> | MouseEvent<SVGElement>) => void;
 };
 
 export function LineTrend({
-  trend,
+  series,
   style = 'solid',
   strokeWidth = 2,
   color,
@@ -38,7 +38,7 @@ export function LineTrend({
   return (
     <LinePath
       style={{ pointerEvents: 'all' }}
-      data={trend}
+      data={series}
       x={getX}
       y={getY}
       stroke={color}

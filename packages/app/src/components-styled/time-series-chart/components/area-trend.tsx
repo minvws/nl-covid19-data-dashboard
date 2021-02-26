@@ -1,22 +1,22 @@
 import { AreaClosed } from '@visx/shape';
 import { PositionScale } from '@visx/shape/lib/types';
 import { MouseEvent, TouchEvent } from 'react';
-import { TrendValue } from '../logic';
+import { SeriesValue } from '../logic';
 
 export type AreaTrendProps = {
-  trend: TrendValue[];
+  series: SeriesValue[];
   color: string;
   fillOpacity?: number;
   strokeWidth?: number;
   style?: 'solid' | 'striped';
-  getX: (v: TrendValue) => number;
-  getY: (v: TrendValue) => number;
+  getX: (v: SeriesValue) => number;
+  getY: (v: SeriesValue) => number;
   yScale: PositionScale;
   onHover: (event: TouchEvent<SVGElement> | MouseEvent<SVGElement>) => void;
 };
 
 export function AreaTrend({
-  trend,
+  series,
   fillOpacity = 0.05,
   strokeWidth,
   color,
@@ -28,7 +28,7 @@ export function AreaTrend({
   return (
     <AreaClosed
       style={{ pointerEvents: 'all' }}
-      data={trend}
+      data={series}
       x={getX}
       y={getY}
       fill={color}

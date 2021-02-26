@@ -10,7 +10,7 @@ import { ValueAnnotation } from '../value-annotation';
 import {
   Axes,
   ChartContainer,
-  DateMarker,
+  DateLineMarker,
   DateSpanMarker,
   LineTrend,
   Overlay,
@@ -23,10 +23,10 @@ import { AreaTrend } from './components/area-trend';
 import {
   Bounds,
   calculateSeriesMaximum,
-  getTrendsList,
+  getSeriesList,
   Padding,
   SeriesConfig,
-  TrendValue,
+  SeriesValue,
   useHoverState,
 } from './logic';
 export type { SeriesConfig } from './logic';
@@ -84,7 +84,6 @@ const defaultPadding: Padding = {
  * - Move more logic out of main component
  * - Add signaalwaarde/benchmark marker
  * - Implement RangeTrend component
- * - Find better name / properties for DoubleTrendValue
  *
  * Known Issues:
  * - Bisect and nearest point calculations have a rounding / offset bug.
@@ -149,8 +148,8 @@ export function TimeSeriesChart<T extends TimestampedValue>({
   //   [signaalwaarde]
   // );
 
-  const trendsList = useMemo(
-    () => getTrendsList(values, seriesConfig, timeframe),
+  const seriesList = useMemo(
+    () => getSeriesList(values, seriesConfig, timeframe),
     [values, seriesConfig, timeframe]
   );
 
@@ -164,12 +163,12 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     : calculatedSeriesMax;
 
   const xDomain = useMemo(() => {
-    const domain = extent(trendsList.flat().map((x) => x.__date_unix));
+    const domain = extent(seriesList.flat().map((x) => x.__date_unix));
 
     return isDefined(domain[0]) && isDefined(domain[1])
       ? (domain as [number, number])
       : undefined;
-  }, [trendsList]);
+  }, [seriesList]);
 
   const yDomain = useMemo(() => [0, seriesMax], [seriesMax]);
 
@@ -182,7 +181,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     [paddingLeft]
   );
 
-  const timespanMarkerData = trendsList[0];
+  const timespanMarkerData = seriesList[0];
 
   const bounds: Bounds = {
     width: width - padding.left - padding.right,
@@ -223,14 +222,14 @@ export function TimeSeriesChart<T extends TimestampedValue>({
    * @TODO remove these and pass scales directly to trend components to keep it
    * consistent
    */
-  const getX = useCallback((x: TrendValue) => xScale(x.__date_unix), [xScale]);
-  const getY = useCallback((x: TrendValue) => yScale(x.__value), [yScale]);
+  const getX = useCallback((x: SeriesValue) => xScale(x.__date_unix), [xScale]);
+  const getY = useCallback((x: SeriesValue) => yScale(x.__value), [yScale]);
 
   const [handleHover, hoverState] = useHoverState({
     values,
     paddingLeft: padding.left,
     seriesConfig,
-    trendsList,
+    seriesList: seriesList,
     xScale,
     yScale,
   });
@@ -261,7 +260,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
 
   const renderSeries = useCallback(
     () =>
-      trendsList.map((trend, index) => {
+      seriesList.map((series, index) => {
         const config = seriesConfig[index];
 
         switch (config.type) {
@@ -269,7 +268,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
             return (
               <LineTrend
                 key={index}
-                trend={trend as TrendValue[]}
+                series={series as SeriesValue[]}
                 color={config.color}
                 style={config.style}
                 strokeWidth={config.strokeWidth}
@@ -282,7 +281,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
             return (
               <AreaTrend
                 key={index}
-                trend={trend as TrendValue[]}
+                series={series as SeriesValue[]}
                 color={config.color}
                 style={config.style}
                 fillOpacity={config.fillOpacity}
@@ -306,7 +305,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
             );
         }
       }),
-    [handleHover, seriesConfig, trendsList, yScale, getX, getY]
+    [handleHover, seriesConfig, seriesList, yScale, getX, getY]
   );
 
   if (!xDomain) {
@@ -352,7 +351,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
               point={hoverState.nearestLinePoint}
             />
             {showDateMarker && (
-              <DateMarker
+              <DateLineMarker
                 point={hoverState.nearestLinePoint}
                 lineColor={`#5B5B5B`}
               />
