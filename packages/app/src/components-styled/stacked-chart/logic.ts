@@ -37,7 +37,7 @@ export type SeriesValue = {
   __date: Date;
 } & { [key: string]: number };
 
-const timestampToDate = (d: number) => new Date(d * 1000);
+export const timestampToDate = (d: number) => new Date(d * 1000);
 
 /**
  * This function converts the passed in data to the generic SeriesValue

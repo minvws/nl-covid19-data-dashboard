@@ -88,10 +88,11 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
         description={text.metadata.description}
       />
       <Box bg="white" pb={4}>
-        <MaxWidth px={{ _: 3, sm: 0 }}>
+        <MaxWidth>
           <TileList>
             <WarningTile
               message={siteText.regionaal_index.belangrijk_bericht}
+              variant="emphasis"
             />
 
             <Search />
@@ -146,7 +147,9 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                 href="/landelijk/ziekenhuis-opnames"
               />
 
-              <TopicalVaccineTile />
+              <TopicalVaccineTile
+                estimated={data.vaccine_administered_total.last_value.estimated}
+              />
             </MiniTrendTileLayout>
 
             <QuickLinks

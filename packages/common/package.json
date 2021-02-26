@@ -9,8 +9,8 @@
     "dist/**/*"
   ],
   "scripts": {
-    "test": "echo 'There are no tests for packages/common yet'",
-    "test:ci": "echo 'There are no tests for packages/common yet.'",
+    "test": "jest --watch",
+    "test:ci": "jest --ci",
     "build": "tsc && tscpaths -p tsconfig.json -s ./src -o ./dist",
     "clean": "del-cli dist tsconfig.tsbuildinfo",
     "compile": "tsc -b .",

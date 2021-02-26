@@ -102,7 +102,7 @@ function CoverImage({ height, image }: CoverImageProps) {
     <Box height={height} overflow="hidden">
       <BackgroundImage
         height={height}
-        backgroundImage={`url(${url})`}
+        backgroundImageUrl={url}
         backgroundPosition={bgPosition}
         backgroundRepeat="no-repeat"
         backgroundSize="cover"
