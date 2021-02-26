@@ -4,20 +4,20 @@ import { useIsMountedRef } from './use-is-mounted-ref';
 /**
  * @param delayMs optionally mutate state after a delay
  */
-export function useIsMounted({ delay }: { delay?: number } = {}) {
+export function useIsMounted({ delayMs }: { delayMs?: number } = {}) {
   const isMountedRef = useIsMountedRef();
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    if (!delay) {
+    if (!delayMs) {
       return setIsMounted(true);
     }
 
     const timeoutId = setTimeout(() => {
       isMountedRef.current && setIsMounted(true);
-    }, delay);
+    }, delayMs);
 
     return () => clearTimeout(timeoutId);
-  }, [delay, isMountedRef]);
+  }, [delayMs, isMountedRef]);
   return isMounted;
 }

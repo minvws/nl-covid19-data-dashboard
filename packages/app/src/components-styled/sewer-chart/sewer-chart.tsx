@@ -60,7 +60,7 @@ export function SewerChart(props: SewerChartProps) {
    * This prevents an initial animation from the SSR width `840` to the
    * actual container width.
    */
-  const isMounted = useIsMounted({ delay: 1 });
+  const isMounted = useIsMounted({ delayMs: 1 });
 
   /**
    * State for toggling outliers visibility
