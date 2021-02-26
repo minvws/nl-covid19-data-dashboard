@@ -1,6 +1,6 @@
-import { AreaClosed } from '@visx/shape';
+import { AreaClosed, LinePath } from '@visx/shape';
 import { PositionScale } from '@visx/shape/lib/types';
-import { MouseEvent, TouchEvent } from 'react';
+import { MouseEvent, TouchEvent, useState } from 'react';
 import { SeriesValue } from '../logic';
 
 export type AreaTrendProps = {
@@ -18,28 +18,52 @@ export type AreaTrendProps = {
 export function AreaTrend({
   series,
   fillOpacity = 0.05,
-  strokeWidth,
+  strokeWidth = 2,
   color,
   getX,
   getY,
   yScale,
   onHover,
 }: AreaTrendProps) {
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleHover = (
+    event: TouchEvent<SVGElement> | MouseEvent<SVGElement>
+  ) => {
+    const isLeave = event.type === 'mouseleave';
+    setIsHovered(!isLeave);
+    onHover(event);
+  };
+
   return (
-    <AreaClosed
-      style={{ pointerEvents: 'all' }}
-      data={series}
-      x={getX}
-      y={getY}
-      fill={color}
-      fillOpacity={fillOpacity}
-      yScale={yScale}
-      stroke={color}
-      strokeWidth={strokeWidth}
-      onTouchStart={onHover}
-      onMouseLeave={onHover}
-      onMouseOver={onHover}
-      onMouseMove={onHover}
-    />
+    <>
+      <LinePath
+        style={{ pointerEvents: 'all' }}
+        data={series}
+        x={getX}
+        y={getY}
+        stroke={color}
+        strokeWidth={isHovered ? strokeWidth + 1 : strokeWidth}
+        onTouchStart={handleHover}
+        onMouseLeave={handleHover}
+        onMouseOver={handleHover}
+        onMouseMove={handleHover}
+      />
+      <AreaClosed
+        style={{ pointerEvents: 'all' }}
+        data={series}
+        x={getX}
+        y={getY}
+        fill={color}
+        fillOpacity={fillOpacity}
+        yScale={yScale}
+        // stroke={color}
+        // strokeWidth={strokeWidth}
+        onTouchStart={handleHover}
+        onMouseLeave={handleHover}
+        onMouseOver={handleHover}
+        onMouseMove={handleHover}
+      />
+    </>
   );
 }
