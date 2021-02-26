@@ -28,10 +28,12 @@ import {
   createGetContent,
   getGmData,
   getLastGeneratedDate,
+  createGetMessages,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { formatDateFromMilliseconds } from '~/utils/formatDate';
 import { getTrailingDateRange } from '~/utils/get-trailing-date-range';
+import { formatMessages } from '~/utils/messages/format-messages';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 export { getStaticPaths } from '~/static-paths/gm';
@@ -44,17 +46,20 @@ export const getStaticProps = createGetStaticProps(
   }),
   createGetContent<{
     articles?: ArticleSummary[];
-  }>(createPageArticlesQuery('hospitalPage'))
+  }>(createPageArticlesQuery('hospitalPage')),
+  createGetMessages(['hospitalPage'])
 );
 
 const text = siteText.gemeente_ziekenhuisopnames_per_dag;
 const graphDescriptions = siteText.accessibility.grafieken;
 
 const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { data, choropleth, municipalityName, content } = props;
+  const { data, choropleth, municipalityName, content, messages } = props;
   const router = useRouter();
 
   const lastValue = data.hospital_nice.last_value;
+
+  const { messageString, messageBlock } = formatMessages(messages);
 
   const underReportedRange = getTrailingDateRange(data.hospital_nice.values, 4);
 
@@ -70,12 +75,12 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
       />
       <TileList>
         <ContentHeader
-          category={siteText.gemeente_layout.headings.ziekenhuizen}
-          title={replaceVariablesInText(text.titel, {
+          category={messageString('intro:category')}
+          title={replaceVariablesInText(messageString('intro:title'), {
             municipality: municipalityName,
           })}
           icon={<Ziekenhuis />}
-          subtitle={text.pagina_toelichting}
+          subtitle={messageBlock('intro:description')}
           metadata={{
             datumsText: text.datums,
             dateOrRange: lastValue.date_unix,
@@ -89,8 +94,8 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
 
         <TwoKpiSection>
           <KpiTile
-            title={text.barscale_titel}
-            description={text.extra_uitleg}
+            title={messageString('barscale:title')}
+            description={messageString('barscale:description')}
             metadata={{
               date: lastValue.date_unix,
               source: text.bronnen.rivm,
@@ -107,14 +112,14 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
         </TwoKpiSection>
 
         <ChoroplethTile
-          title={replaceVariablesInText(text.map_titel, {
+          title={replaceVariablesInText(messageString('map:title'), {
             municipality: municipalityName,
           })}
           metadata={{
             date: lastValue.date_unix,
             source: text.bronnen.rivm,
           }}
-          description={text.map_toelichting}
+          description={messageString('map:description')}
           legend={{
             title: siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel,
             thresholds:
@@ -139,8 +144,8 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
         </ChoroplethTile>
 
         <LineChartTile
-          title={text.linechart_titel}
-          description={text.linechart_description}
+          title={messageString('linechart:title')}
+          description={messageString('linechart:description')}
           ariaDescription={graphDescriptions.ziekenhuis_opnames}
           metadata={{ source: text.bronnen.rivm }}
           timeframeOptions={['all', '5weeks', 'week']}
@@ -182,12 +187,12 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
           legendItems={[
             {
               color: colors.data.primary,
-              label: text.linechart_legend_titel,
+              label: messageString('linechart:label_title'),
               shape: 'line',
             },
             {
               color: colors.data.underReported,
-              label: text.linechart_legend_underreported_titel,
+              label: messageString('linechart:label_underreported'),
               shape: 'square',
             },
           ]}

@@ -22,9 +22,13 @@
     "validate-json": "ts-node src/validate-schema/validate-all.ts",
     "validate-single": "ts-node src/validate-schema/validate-single.ts",
     "validate-last-values": "ts-node src/validate-last-values/index.ts",
-    "generate-typescript": "ts-node src/generate-typescript.ts"
+    "generate-typescript": "ts-node src/generate-typescript.ts",
+    "messages:interfaces": "ts-node src/messages/generate-typescript-interfaces.ts",
+    "messages:schemas": "ts-node src/messages/generate-sanity-schemas.ts",
+    "messages": "yarn messages:interfaces && yarn messages:schemas"
   },
   "devDependencies": {
-    "@types/meow": "^5.0.0"
+    "@types/meow": "^5.0.0",
+    "file-set": "^4.0.1"
   }
 }

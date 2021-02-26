@@ -41,6 +41,7 @@ import {
   getLastGeneratedDate,
   getNlData,
   getText,
+  createGetMessages,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { assert } from '~/utils/assert';
@@ -49,6 +50,7 @@ import {
   formatDateFromSeconds,
 } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
+import { formatMessages } from '~/utils/messages/format-messages';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
@@ -62,7 +64,8 @@ export const getStaticProps = createGetStaticProps(
   }),
   createGetContent<{
     articles?: ArticleSummary[];
-  }>(createPageArticlesQuery('positiveTestsPage'))
+  }>(createPageArticlesQuery('positiveTestsPage')),
+  createGetMessages(['positiveTestsPage'])
 );
 
 const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
@@ -70,6 +73,7 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
   choropleth,
   text: siteText,
   content,
+  messages,
 }) => {
   const text = siteText.positief_geteste_personen;
   const ggdText = siteText.positief_geteste_personen_ggd;
@@ -81,6 +85,8 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
   const dataInfectedDelta = data.tested_overall;
   const dataGgdAverageLastValue = data.tested_ggd_average.last_value;
   const dataGgdDailyValues = data.tested_ggd_daily.values;
+
+  const { messageString, messageBlock } = formatMessages(messages);
 
   const ageDemographicExampleData = getAgeDemographicExampleData(
     data.tested_per_age_group
@@ -94,13 +100,13 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
       />
       <TileList>
         <ContentHeader
-          category={siteText.nationaal_layout.headings.besmettingen}
+          category={messageString('intro:category')}
           screenReaderCategory={
             siteText.positief_geteste_personen.titel_sidebar
           }
-          title={text.titel}
+          title={messageString('intro:title')}
           icon={<Getest />}
-          subtitle={text.pagina_toelichting}
+          subtitle={messageString('intro:description')}
           metadata={{
             datumsText: text.datums,
             dateOrRange: dataInfectedDelta.last_value.date_unix,
@@ -115,7 +121,7 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
 
         <TwoKpiSection>
           <KpiTile
-            title={text.kpi_titel}
+            title={messageString('infected_delta_kpi:title')}
             metadata={{
               date: dataInfectedDelta.last_value.date_unix,
               source: text.bronnen.rivm,
@@ -127,10 +133,7 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
               difference={data.difference.tested_overall__infected}
             />
 
-            <Text
-              as="div"
-              dangerouslySetInnerHTML={{ __html: text.kpi_toelichting }}
-            />
+            {messageBlock('infected_delta_kpi:description')}
             <Box>
               <Heading level={4} fontSize={'1.2em'} mt={'1.5em'} mb={0}>
                 <span
@@ -153,7 +156,7 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
             </Box>
           </KpiTile>
           <KpiTile
-            title={text.barscale_titel}
+            title={messageString('barscale:title')}
             data-cy="infected_per_100k"
             metadata={{
               date: dataInfectedDelta.last_value.date_unix,
@@ -169,7 +172,7 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
               differenceKey="tested_overall__infected_per_100k"
             />
 
-            <Text>{text.barscale_toelichting}</Text>
+            {messageBlock('barscale:description')}
           </KpiTile>
         </TwoKpiSection>
 

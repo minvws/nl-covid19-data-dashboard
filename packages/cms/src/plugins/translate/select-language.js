@@ -88,5 +88,7 @@ function findLocaleFields(documentId, schema) {
   if (!docSchema) {
     return true;
   }
+  return true;
+  // @TODO fix
   return docSchema.fields.some((field) => field.type.startsWith('locale'));
 }

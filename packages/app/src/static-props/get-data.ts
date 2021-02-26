@@ -13,6 +13,9 @@ import { client, localize } from '~/lib/sanity';
 import { targetLanguage } from '~/locale/index';
 import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
 import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
+import * as allMessages from '~/messages';
+import { HospitalPageBlockKeys, HospitalPageStringKeys } from '~/messages';
+import { cloneDeep } from 'lodash';
 
 /**
  * Usage:
@@ -57,6 +60,104 @@ export function createGetContent<T>(
 export async function getText() {
   return {
     text: parseMarkdownInLocale((await import('../locale/index')).default),
+  };
+}
+
+export function createGetMessages(pageName: string[]) {
+  return async (context: GetStaticPropsContext) => {
+    console.log('keyof', allMessages);
+
+    const messages: Record<string, unknown> = {};
+    pageName.forEach((pageName) => {
+      messages[pageName] = {};
+    });
+
+    const bucketName = pageName[0][0].toUpperCase() + pageName[0].substr(1);
+
+    const keys = (allMessages[
+      `${bucketName}StringKeys` as string
+    ] as unknown) as string[];
+    const blocks = (allMessages[
+      `${bucketName}BlockKeys` as string
+    ] as unknown) as string[];
+
+    console.log(keys, blocks);
+
+    const query = `
+    *[_type=="${pageName}"]{
+      "messages": {
+        ${keys
+          .map((key: string) => {
+            const safeKey = key.replace(/\:/g, '_');
+            return `"${safeKey}": messages.${safeKey}.${targetLanguage}`;
+          })
+          .join(',')},
+        ${blocks
+          .map((key: string) => {
+            const safeKey = key.replace(/\:/g, '_');
+            // return `"${safeKey}": messages.${safeKey}.${targetLanguage}`;
+
+            return `
+            "${safeKey}": [
+                ...messages.${safeKey}.${targetLanguage}[]{
+                ...,
+                "asset": asset->
+                }
+              ]`;
+          })
+          .join(',')}
+      },
+      "messageExceptions": messageExceptions[]{
+        ...,
+        "value": value.${targetLanguage}
+      }
+    }[0]
+    `;
+
+    const rawContent = await client.fetch(query);
+    const content = localize(rawContent ?? {}, [targetLanguage, 'nl']);
+    console.log(content.messageExceptions, context.params);
+
+    const formattedMessages = cloneDeep(content.messages);
+
+    if (content.messageExceptions) {
+      content.messageExceptions.forEach(
+        (exception: { field: string; match: string; value: string }) => {
+          console.log(exception);
+          if (!formattedMessages[exception.field]) {
+            return;
+          }
+          if (exception.match === 'NL' && !context?.params?.code) {
+            formattedMessages[exception.field] = exception.value;
+            return;
+          }
+          if (
+            exception.match === 'VR*' &&
+            context?.params?.code &&
+            (context?.params?.code as string).startsWith('VR')
+          ) {
+            formattedMessages[exception.field] = exception.value;
+            return;
+          }
+          if (
+            exception.match === 'GM*' &&
+            context?.params?.code &&
+            (context?.params?.code as string).startsWith('GM')
+          ) {
+            formattedMessages[exception.field] = exception.value;
+            return;
+          }
+          if (exception.match === context?.params?.code) {
+            formattedMessages[exception.field] = exception.value;
+            return;
+          }
+        }
+      );
+    }
+
+    return {
+      messages: formattedMessages,
+    };
   };
 }
 

@@ -27,12 +27,14 @@ import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
+  createGetMessages,
   getLastGeneratedDate,
   getVrData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { formatDateFromMilliseconds } from '~/utils/formatDate';
 import { getTrailingDateRange } from '~/utils/get-trailing-date-range';
+import { formatMessages } from '~/utils/messages/format-messages';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 export { getStaticPaths } from '~/static-paths/vr';
@@ -45,20 +47,23 @@ export const getStaticProps = createGetStaticProps(
   }),
   createGetContent<{
     articles?: ArticleSummary[];
-  }>(createPageArticlesQuery('hospitalPage'))
+  }>(createPageArticlesQuery('hospitalPage')),
+  createGetMessages(['hospitalPage'])
 );
 
 const text = siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
 const graphDescriptions = siteText.accessibility.grafieken;
 
 const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { data, safetyRegionName, choropleth, content } = props;
+  const { data, safetyRegionName, choropleth, content, messages } = props;
   const router = useRouter();
 
   const lastValue = data.hospital_nice.last_value;
 
   const municipalCodes = regionCodeToMunicipalCodeLookup[data.code];
   const selectedMunicipalCode = municipalCodes ? municipalCodes[0] : undefined;
+
+  const { messageString, messageBlock } = formatMessages(messages);
 
   const underReportedRange = getTrailingDateRange(data.hospital_nice.values, 4);
 
@@ -75,12 +80,12 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
 
       <TileList>
         <ContentHeader
-          category={siteText.veiligheidsregio_layout.headings.ziekenhuizen}
-          title={replaceVariablesInText(text.titel, {
+          category={messageString('intro:category')}
+          title={replaceVariablesInText(messageString('intro:title'), {
             safetyRegion: safetyRegionName,
           })}
           icon={<Ziekenhuis />}
-          subtitle={text.pagina_toelichting}
+          subtitle={messageBlock('intro:description')}
           metadata={{
             datumsText: text.datums,
             dateOrRange: lastValue.date_unix,
@@ -94,8 +99,8 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
 
         <TwoKpiSection>
           <KpiTile
-            title={text.barscale_titel}
-            description={text.extra_uitleg}
+            title={messageString('barscale:title')}
+            description={messageString('barscale:description')}
             metadata={{
               date: lastValue.date_unix,
               source: text.bronnen.rivm,
@@ -112,14 +117,14 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
         </TwoKpiSection>
 
         <ChoroplethTile
-          title={replaceVariablesInText(text.map_titel, {
+          title={replaceVariablesInText(messageString('map:title'), {
             safetyRegion: safetyRegionName,
           })}
-          description={text.map_toelichting}
+          description={messageString('map:description')}
           legend={{
             thresholds:
               municipalThresholds.hospital_nice.admissions_on_date_of_reporting,
-            title: siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel,
+            title: messageString('map:legenda_title'),
           }}
           metadata={{
             date: lastValue.date_unix,
@@ -146,8 +151,8 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
 
         <LineChartTile
           metadata={{ source: text.bronnen.rivm }}
-          title={text.linechart_titel}
-          description={text.linechart_description}
+          title={messageString('linechart:title')}
+          description={messageString('linechart:description')}
           ariaDescription={graphDescriptions.ziekenhuis_opnames}
           values={data.hospital_nice.values}
           formatTooltip={(values) => {
@@ -189,12 +194,12 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
           legendItems={[
             {
               color: colors.data.primary,
-              label: text.linechart_legend_titel,
+              label: messageString('linechart:label_title'),
               shape: 'line',
             },
             {
               color: colors.data.underReported,
-              label: text.linechart_legend_underreported_titel,
+              label: messageString('linechart:label_underreported'),
               shape: 'square',
             },
           ]}

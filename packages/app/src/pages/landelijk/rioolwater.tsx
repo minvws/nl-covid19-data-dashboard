@@ -26,7 +26,9 @@ import {
   getLastGeneratedDate,
   getNlData,
   getText,
+  createGetMessages,
 } from '~/static-props/get-data';
+import { formatMessages } from '~/utils/messages/format-messages';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -37,7 +39,8 @@ export const getStaticProps = createGetStaticProps(
   }),
   createGetContent<{
     articles?: ArticleSummary[];
-  }>(createPageArticlesQuery('sewerPage'))
+  }>(createPageArticlesQuery('sewerPage')),
+  createGetMessages(['sewerPage'])
 );
 
 const SewerWater: FCWithLayout<typeof getStaticProps> = ({
@@ -45,11 +48,14 @@ const SewerWater: FCWithLayout<typeof getStaticProps> = ({
   choropleth,
   content,
   text: siteText,
+  messages,
 }) => {
   const text = siteText.rioolwater_metingen;
   const graphDescriptions = siteText.accessibility.grafieken;
   const sewerAverages = data.sewer;
   const router = useRouter();
+
+  const { messageString, messageBlock } = formatMessages(messages);
 
   return (
     <>
@@ -64,6 +70,8 @@ const SewerWater: FCWithLayout<typeof getStaticProps> = ({
           title={text.titel}
           icon={<RioolwaterMonitoring />}
           subtitle={text.pagina_toelichting}
+          title={messageString('intro:title')}
+          subtitle={messageString('intro:description')}
           metadata={{
             datumsText: text.datums,
             dateOrRange: {

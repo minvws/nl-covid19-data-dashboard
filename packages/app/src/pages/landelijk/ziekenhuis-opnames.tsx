@@ -32,6 +32,7 @@ import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
+  createGetMessages,
   getLastGeneratedDate,
   getNlData,
 } from '~/static-props/get-data';
@@ -45,6 +46,7 @@ import {
   DateRange,
   getTrailingDateRange,
 } from '~/utils/get-trailing-date-range';
+import { formatMessages } from '~/utils/messages/format-messages';
 
 const text = siteText.ziekenhuisopnames_per_dag;
 const graphDescriptions = siteText.accessibility.grafieken;
@@ -58,11 +60,12 @@ export const getStaticProps = createGetStaticProps(
   }),
   createGetContent<{
     articles?: ArticleSummary[];
-  }>(createPageArticlesQuery('hospitalPage'))
+  }>(createPageArticlesQuery('hospitalPage')),
+  createGetMessages(['hospitalPage'])
 );
 
 const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { data, choropleth, content } = props;
+  const { data, choropleth, content, messages } = props;
   const router = useRouter();
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
     'region'
@@ -75,6 +78,8 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
   const underReportedRange = getTrailingDateRange(dataHospitalNice.values, 4);
 
   const bedsLastValue = getLastFilledValue(data.hospital_lcps);
+
+  const { messageString, messageBlock } = formatMessages(messages);
 
   const lcpsOldDataRange = [
     createDate(dataHospitalLcps.values[0].date_unix),
@@ -89,13 +94,13 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
       />
       <TileList>
         <ContentHeader
-          category={siteText.nationaal_layout.headings.ziekenhuizen}
+          category={messageString('intro:category')}
           screenReaderCategory={
             siteText.ziekenhuisopnames_per_dag.titel_sidebar
           }
-          title={text.titel}
+          title={messageString('intro:title')}
           icon={<Ziekenhuis />}
-          subtitle={text.pagina_toelichting}
+          subtitle={messageBlock('intro:description')}
           metadata={{
             datumsText: text.datums,
             dateOrRange: lastValueNice.date_unix,
@@ -109,8 +114,8 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
 
         <TwoKpiSection>
           <KpiTile
-            title={text.barscale_titel}
-            description={text.extra_uitleg}
+            title={messageString('barscale:title')}
+            description={messageString('barscale:description')}
             metadata={{
               date: lastValueNice.date_unix,
               source: text.bronnen.nice,
@@ -127,8 +132,8 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
           </KpiTile>
 
           <KpiTile
-            title={text.kpi_bedbezetting.title}
-            description={text.kpi_bedbezetting.description}
+            title={messageString('badbezetting_kpi:title')}
+            description={messageString('badbezetting_kpi:description')}
             metadata={{
               date: lastValueLcps.date_unix,
               source: text.bronnen.lnaz,
@@ -145,8 +150,8 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
         </TwoKpiSection>
 
         <ChoroplethTile
-          title={text.map_titel}
-          description={text.map_toelichting}
+          title={messageString('map:title')}
+          description={messageString('map:description')}
           onChartRegionChange={setSelectedMap}
           chartRegion={selectedMap}
           legend={{
@@ -156,7 +161,7 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
                     .admissions_on_date_of_reporting
                 : regionThresholds.hospital_nice
                     .admissions_on_date_of_reporting,
-            title: text.chloropleth_legenda.titel,
+            title: messageString('map:legenda_title'),
           }}
           metadata={{
             date: lastValueNice.date_unix,
@@ -196,8 +201,8 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
         </ChoroplethTile>
 
         <LineChartTile
-          title={text.linechart_titel}
-          description={text.linechart_description}
+          title={messageString('linechart:title')}
+          description={messageString('linechart:description')}
           ariaDescription={graphDescriptions.ziekenhuisopnames}
           values={dataHospitalNice.values}
           signaalwaarde={40}
@@ -241,12 +246,12 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
           legendItems={[
             {
               color: colors.data.primary,
-              label: text.linechart_legend_titel,
+              label: messageString('linechart:label_title'),
               shape: 'line',
             },
             {
               color: colors.data.underReported,
-              label: text.linechart_legend_underreported_titel,
+              label: messageString('linechart:label_underreported'),
               shape: 'square',
             },
           ]}
@@ -254,8 +259,8 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
         />
 
         <LineChartTile
-          title={text.chart_bedbezetting.title}
-          description={text.chart_bedbezetting.description}
+          title={messageString('bedbezetting_chart:title')}
+          description={messageString('bedbezetting_chart:description')}
           values={dataHospitalLcps.values}
           linesConfig={[
             {
@@ -293,12 +298,12 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
           legendItems={[
             {
               color: colors.data.primary,
-              label: text.chart_bedbezetting.legend_trend_label,
+              label: messageString('bedbezetting_chart:label_trend'),
               shape: 'line',
             },
             {
               color: colors.data.underReported,
-              label: text.chart_bedbezetting.legend_inaccurate_label,
+              label: messageString('bedbezetting_chart:label_underreported'),
               shape: 'square',
             },
           ]}
