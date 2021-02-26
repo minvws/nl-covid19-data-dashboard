@@ -58,10 +58,13 @@ const defaultPadding: Padding = {
  * public API to reduce complexity and in an attempt to enforce consistency in
  * design. For example:
  *
- * - You can only set padding-left instead of all paddings
- * - showLegend, legend items, shape and color are derived from seriesConfig
- *   definition.
- * - formatAxis type callbacks have been removed.
+ * - You can only set padding-left instead of all paddings, because only the
+ *   left had a practical function (make space for larger numbers on the x-axis).
+ * - The legend show/hide, items, shape and color are derived from seriesConfig
+ *   definition and possibly other props that set things like date span
+ *   annotations. We should be able to standardize this for all charts.
+ * - formatAxis type callbacks have been removed as we should be able to
+ *   standardize (a few flavors of) axis rendering.
  *
  * Components and logic are split up onto smaller abstractions so they can be
  * used more easily in composition. For example the Marker component is now
@@ -71,23 +74,14 @@ const defaultPadding: Padding = {
  *
  * @TODO
  *
+ * - Generate legend contents
  * - Include background rectangle in API
- * - Move logic out of main component
+ * - Move more logic out of main component
  * - Add signaalwaarde/benchmark marker
+ * - Implement RangeTrend component
  *
- * Other possibly interesting things to look at:
- *
- * - Perform bisect once, on values directly. Since all trends originate from
- *   the same value in the input values array, all bisect results always point
- *   to the same index, so we can do it just once.
- * - Avoid nearest point calculation when element calls onHover with index.
- *   Individual elements like trends have their own onHover handler and from
- *   that call we already know the nearest point belongs to that trend.
- * - Calculate nearest point directly from value properties. We don't really
- *   need to do a distance calculation if all points originate from to the same
- *   input value object. We only need to translate the mouse Y position to a
- *   value in the domain, and then we can look at the different value properties
- *   to see which one is closest.
+ * Known Issues:
+ * - Bisect and nearest point calculations have a rounding / offset bug.
  */
 export type TimeSeriesChartProps<T extends TimestampedValue> = {
   title: string; // Used for default tooltip formatting
@@ -242,21 +236,13 @@ export function TimeSeriesChart<T extends TimestampedValue>({
       showTooltip({
         tooltipData: {
           /**
-           * Ideally I think we would pass the original value + the key that
-           * this hover point belongs to. Similar to how the stacked-chart hover
-           * works. But in order to do so I think we need to use different hover
-           * logic, and possibly use mouse callbacks on the trends individually.
+           * The tooltip gets passed the original data value, plus the
+           * nearest/active hover property and the full series configuration.
+           * With these three arguments we should be able to render any sort of
+           * tooltip.
            */
           value: values[valuesIndex],
-          /**
-           * The key of "value" that we are nearest to. Some tooltips might want
-           * to use this to highlight a series.
-           */
           valueKey: nearestPoint.metricProperty as keyof T,
-          /**
-           * I'm passing the full config here because the tooltip needs colors
-           * and labels. In the future this could be distilled maybe.
-           */
           config: seriesConfig,
         },
         tooltipLeft: nearestPoint.x,
@@ -305,17 +291,11 @@ export function TimeSeriesChart<T extends TimestampedValue>({
           case 'range':
             return (
               <div>todo</div>
-              // <RangeTrend
-              //   key={index}
-              //   trend={trend as DoubleTrendValue[]}
-              //   color={config.color}
-              //   style={config.style}
+              // <RangeTrend key={index} trend={trend as DoubleTrendValue[]}
+              //   color={config.color} style={config.style}
               //   fillOpacity={config.fillOpacity}
-              //   strokeWidth={config.strokeWidth}
-              //   getX={getX}
-              //   getY={getY}
-              //   yScale={yScale}
-              //   // onHover={(evt) => handleHover(evt, index)}
+              //   strokeWidth={config.strokeWidth} getX={getX} getY={getY}
+              //   yScale={yScale} // onHover={(evt) => handleHover(evt, index)}
               // />
             );
         }
