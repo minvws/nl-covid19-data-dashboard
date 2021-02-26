@@ -538,7 +538,7 @@
       }
     },
     "kpi_titel": "Average number of coronavirus particles per 100.000 people",
-    "warning_method": "Deze manier van meten wordt nu nog getest. We hopen dat de rioolwatermetingen ons over een tijdje helpen om het virus op te sporen en te volgen. [Lees meer over het onderzoek naar het coronavirus in rioolwater](/cijferverantwoording)"
+    "warning_method": ""
   },
   "notfound_titel": {
     "text": "Something went wrong"
@@ -832,7 +832,7 @@
     "bar_chart_accessibility_description": "",
     "display_outliers": "Display outliers",
     "hide_outliers": "Hide outliers",
-    "warning_method": "Deze manier van meten wordt nu nog getest. We hopen dat de rioolwatermetingen ons over een tijdje helpen om het virus op te sporen en te volgen. [Lees meer over het onderzoek naar het coronavirus in rioolwater](/cijferverantwoording)"
+    "warning_method": ""
   },
   "gemeente_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Hospital admissions",
@@ -965,7 +965,7 @@
     "bar_chart_accessibility_description": "",
     "display_outliers": "Display outliers",
     "hide_outliers": "Hide outliers",
-    "warning_method": "Deze manier van meten wordt nu nog getest. We hopen dat de rioolwatermetingen ons over een tijdje helpen om het virus op te sporen en te volgen. [Lees meer over het onderzoek naar het coronavirus in rioolwater](/cijferverantwoording)"
+    "warning_method": ""
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Risk level map of the Netherlands",
