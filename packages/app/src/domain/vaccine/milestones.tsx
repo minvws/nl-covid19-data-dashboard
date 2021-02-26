@@ -41,7 +41,7 @@ export function MileStones(props: MileStoneProps) {
   }
 
   return (
-    <Tile>
+    <Tile css={css({ overflow: 'hidden' })}>
       <Heading level={2} m={0}>
         {title}
       </Heading>
