@@ -44,14 +44,14 @@ import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { vaccinePageQuery } from '~/queries/vaccine-page-query';
-import { MileStones } from '~/domain/vaccine/milestones';
+import { MileStones, MileStoneProps } from '~/domain/vaccine/milestones';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   getNlData,
   getText,
   createGetContent<{
-    milestones: any;
+    milestones: MileStoneProps;
     highlight: {
       articles?: ArticleSummary[];
     };
