@@ -217,7 +217,7 @@ export function SewerChart(props: SewerChartProps) {
                * filter circles which are close to each other, no need to
                * render them on top of each other.
                */
-              const threshold = 4; // 10px
+              const threshold = 4; // 4px
               const x1 = scales.getX(val1);
               const x2 = scales.getX(val2);
               return x1 > x2 - threshold && x1 < x2 + threshold;
