@@ -2618,5 +2618,9 @@
     "infected_locations": "Besmette locaties:",
     "elderly_at_home": "Thuiswonende 70-plussers:",
     "sewer_regional": "Gemiddeld aantal virusdeeltjes:"
+  },
+  "milestones": {
+    "toon_meer": "Toon eerdere mijlpalen",
+    "verwacht": "Verwacht"
   }
 }
