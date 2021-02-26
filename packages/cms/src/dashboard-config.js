@@ -7,12 +7,5 @@ export default {
         query: '*[_id in path("drafts.**")] | order(_updatedAt desc)',
       },
     },
-    {
-      name: 'document-list',
-      options: {
-        title: 'Last edited documents',
-        order: '_updatedAt desc',
-      },
-    },
   ],
 };
