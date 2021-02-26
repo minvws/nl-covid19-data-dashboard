@@ -5,7 +5,6 @@ import { localPoint } from '@visx/event';
 import { GridRows } from '@visx/grid';
 import { Group } from '@visx/group';
 import { Bar, LinePath } from '@visx/shape';
-import { motion } from 'framer-motion';
 import { transparentize } from 'polished';
 import { PointerEvent, useCallback, useMemo, useState } from 'react';
 import { isPresent } from 'ts-is-present';
@@ -20,6 +19,7 @@ import { formatDate } from '~/utils/formatDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { TimeframeOption } from '~/utils/timeframe';
 import { useElementSize } from '~/utils/use-element-size';
+import { Path } from './components/path';
 import { ScatterPlot } from './components/scatter-plot';
 import { ToggleOutlierButton } from './components/toggle-outlier-button';
 import { DateTooltip, Tooltip } from './components/tooltip';
@@ -48,13 +48,19 @@ interface SewerChartProps {
   };
 }
 
+/**
+ * The initial width `800.1337` is used for server side rendering. It's also
+ * a "weird" number to detect wether the browser has kicked in with the actual
+ * width. This will be the moment we enable motion.
+ */
+const INITIAL_WIDTH = 800.1337;
+
 export function SewerChart(props: SewerChartProps) {
   const { data, timeframe, valueAnnotation, height = 300, text } = props;
 
-  /**
-   * Grab width and default to 400 (SSR)
-   */
-  const [sizeRef, { width }] = useElementSize<HTMLDivElement>(400);
+  const [sizeRef, { width }] = useElementSize<HTMLDivElement>(INITIAL_WIDTH);
+
+  const isMotionEnabled = width !== INITIAL_WIDTH;
 
   /**
    * State for toggling outliers visibility
@@ -193,34 +199,36 @@ export function SewerChart(props: SewerChartProps) {
         </ToggleOutlierButton>
       </Box>
 
+      <svg
+        width={width}
+        height={52}
+        role="img"
+        style={{ pointerEvents: 'none' }}
+      >
+        {outlierValues && (
+          <Group left={dimensions.padding.left}>
+            <ScatterPlot
+              data={outlierValues}
+              getX={scales.getX}
+              getY={() => 26}
+              color="rgba(89, 89, 89, 0.8)"
+              radius={4}
+              dottedOutline
+            />
+          </Group>
+        )}
+      </svg>
       <Box position="relative" ref={sizeRef} css={css({ userSelect: 'none' })}>
-        <svg
-          width={width}
-          height={52}
-          role="img"
-          style={{ pointerEvents: 'none' }}
-        >
-          {outlierValues && (
-            <Group left={dimensions.padding.left}>
-              <ScatterPlot
-                data={outlierValues}
-                getX={scales.getX}
-                getY={() => 26}
-                color="rgba(89, 89, 89, 0.8)"
-                radius={4}
-                dottedOutline
-              />
-            </Group>
-          )}
-        </svg>
         <svg
           role="img"
           width={width}
           height={height}
+          viewBox={`0 0 ${width} ${height}`}
           onPointerMove={handlePointerMove}
           onPointerLeave={handlePointerLeave}
           style={{
             touchAction: 'pan-y', // allow vertical scroll, but capture horizontal
+            width: '100%',
           }}
         >
           <Group left={dimensions.padding.left} top={dimensions.padding.top}>
@@ -277,6 +285,7 @@ export function SewerChart(props: SewerChartProps) {
             />
 
             <ScatterPlot
+              isAnimated={isMotionEnabled}
               data={stationValuesFiltered}
               getX={scales.getX}
               getY={scales.getY}
@@ -284,24 +293,42 @@ export function SewerChart(props: SewerChartProps) {
               radius={2}
             />
 
-            <AnimatedLinePath
-              data={averageValues}
-              x={scales.getX}
-              y={scales.getY}
-              color={
-                hasSelectedStation ? colors.data.neutral : colors.data.primary
-              }
-              width={4}
-            />
+            <LinePath x={scales.getX} y={scales.getY}>
+              {({ path }) => (
+                <Path
+                  isAnimated={isMotionEnabled}
+                  fill="transparent"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d={path(averageValues) || ''}
+                  stroke={
+                    hasSelectedStation
+                      ? colors.data.neutral
+                      : colors.data.primary
+                  }
+                  strokeWidth={4}
+                />
+              )}
+            </LinePath>
 
             {hasSelectedStation && (
-              <AnimatedLinePath
-                data={selectedStationValues}
+              <LinePath
                 x={scales.getX}
                 y={scales.getY}
-                color={colors.data.secondary}
-                width={4}
-              />
+                key={sewerStationSelectProps.value}
+              >
+                {({ path }) => (
+                  <Path
+                    isAnimated={isMotionEnabled}
+                    fill="transparent"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d={path(selectedStationValues) || ''}
+                    stroke={colors.data.secondary}
+                    strokeWidth={4}
+                  />
+                )}
+              </LinePath>
             )}
 
             {lineTooltip.point && (
@@ -386,36 +413,5 @@ export function SewerChart(props: SewerChartProps) {
         ].filter(isPresent)}
       />
     </Box>
-  );
-}
-
-interface AnimatedLinePathProps<T> {
-  data: T[];
-  x: (datum: T) => number;
-  y: (datum: T) => number;
-  width: number;
-  color: string;
-}
-
-function AnimatedLinePath<T>(props: AnimatedLinePathProps<T>) {
-  const { data, x, y, width, color } = props;
-  return (
-    <LinePath x={x} y={y}>
-      {({ path }) => (
-        <motion.path
-          fill="transparent"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d={path(data) || ''}
-          stroke={color}
-          strokeWidth={width}
-          animate={{
-            d: path(data) || '',
-            stroke: color,
-            strokeWidth: width,
-          }}
-        />
-      )}
-    </LinePath>
   );
 }
