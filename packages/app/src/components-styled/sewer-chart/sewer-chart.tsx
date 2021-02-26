@@ -165,6 +165,25 @@ export function SewerChart(props: SewerChartProps) {
     clearTooltips.callback();
   }, [clearTooltips]);
 
+  const outlierPreviews = useMemo(
+    () =>
+      uniqWith(outlierValues, (val1, val2) => {
+        /**
+         * filter circles which are close to each other, no need to
+         * render them on top of each other.
+         */
+        const threshold = 4; // in pixels
+        const x1 = scales.getX(val1);
+        const x2 = scales.getX(val2);
+        return x1 > x2 - threshold && x1 < x2 + threshold;
+      }),
+    [outlierValues, scales]
+  );
+
+  const getOutlierPreviewY = useCallback(() => (displayOutliers ? 46 : 16), [
+    displayOutliers,
+  ]);
+
   return (
     <Box position="relative">
       {sewerStationSelectProps.options.length > 0 && (
@@ -212,18 +231,9 @@ export function SewerChart(props: SewerChartProps) {
           }}
         >
           <ScatterPlot
-            data={uniqWith(outlierValues, (val1, val2) => {
-              /**
-               * filter circles which are close to each other, no need to
-               * render them on top of each other.
-               */
-              const threshold = 4; // 4px
-              const x1 = scales.getX(val1);
-              const x2 = scales.getX(val2);
-              return x1 > x2 - threshold && x1 < x2 + threshold;
-            })}
+            data={outlierPreviews}
             getX={scales.getX}
-            getY={() => (displayOutliers ? 46 : 16)}
+            getY={getOutlierPreviewY}
             color="rgba(89, 89, 89, 0.8)"
             radius={4}
             dottedOutline
