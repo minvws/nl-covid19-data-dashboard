@@ -1786,11 +1786,11 @@
       "text": "Read more in 'explanation of the data presented'"
     },
     "cbs_message": {
-      "title": "Mortality declining further in week 5",
-      "published_text": "Date of publication: Friday 12 February",
-      "message": "In week 5 (1 through 7 February 2021 inclusive), estimated mortality stood at 3,600. This is 150 more than the number expected for this period. In week 4, the number of deaths stood at 3,678. Statistics Netherlands (CBS) reports this based on the provisional weekly figures on mortality. Since week 39 of 2020, weekly mortality has been higher than expected. During the second epidemic wave up to week 5 of 2021 inclusive, altogether more than 71 thousand deaths were recorded. This is 9.7 thousand more than expected mortality in this period. The estimated mortality in week 5 is slightly above the expected mortality in this period.",
+      "title": "Mortality not declining further in week 7",
+      "published_text": "Date of publication: Friday 26 February",
+      "message": "In week 7 (15 to 21 February inclusive), estimated mortality stood at 3,600. This is over 150 deaths in excess of the expected number for this period and around 100 more than in the previous week (3,521 deaths). Statistics Netherlands (CBS) reports this based on the provisional weekly figures on mortality.\nSince week 39 of 2020, weekly mortality has been higher than expected. Last week (week 6), the number of deaths was more or less the same as the expected mortality for this period. Estimated mortality for week 7 is more than 150 deaths above the expected number for this period. The National Institute for Public Health and the Environment (RIVM) registered 301 COVID-19 deaths in week 7 (as at 23 February).",
       "link": {
-        "href": "https://www.cbs.nl/en-gb/news/2021/06/mortality-declining-further-in-week-5",
+        "href": "https://www.cbs.nl/en-gb/news/2021/08/mortality-not-declining-further-in-week-7",
         "text": "Read the full news item on the CBS website"
       }
     },
