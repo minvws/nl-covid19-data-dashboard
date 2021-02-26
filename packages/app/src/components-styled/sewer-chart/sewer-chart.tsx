@@ -215,7 +215,7 @@ export function SewerChart(props: SewerChartProps) {
             data={uniqWith(outlierValues, (val1, val2) => {
               /**
                * filter circles which are close to each other, no need to
-               * render them above eachother.
+               * render them on top of each other.
                */
               const threshold = 4; // 10px
               const x1 = scales.getX(val1);
