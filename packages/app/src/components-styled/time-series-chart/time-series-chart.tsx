@@ -6,6 +6,7 @@ import { useCallback, useEffect, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
 import { TimeframeOption } from '~/utils/timeframe';
+import { Legend } from '../legend';
 import { ValueAnnotation } from '../value-annotation';
 import {
   Axes,
@@ -28,6 +29,7 @@ import {
   SeriesConfig,
   SeriesValue,
   useHoverState,
+  useLegendItems,
 } from './logic';
 export type { SeriesConfig } from './logic';
 
@@ -139,6 +141,8 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     isPercentage,
     forcedMaximumValue,
   } = dataOptions;
+
+  const legendItems = useLegendItems(seriesConfig);
 
   // const benchmark = useMemo(
   //   () =>
@@ -361,6 +365,12 @@ export function TimeSeriesChart<T extends TimestampedValue>({
           </Overlay>
         )}
       </Box>
+
+      {legendItems && (
+        <Box pl={paddingLeft}>
+          <Legend items={legendItems} />
+        </Box>
+      )}
     </Box>
   );
 }
