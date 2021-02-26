@@ -34,12 +34,14 @@ function PathUnmemoized(props: PathProps) {
   );
 }
 
+const animationOptions = {
+  type: 'spring',
+  stiffness: 500,
+  damping: 55,
+} as const;
+
 function AnimatedPath(props: PathProps) {
-  const animatedPath = usePathMorph(props.path, {
-    type: 'spring',
-    stiffness: 500,
-    damping: 55,
-  });
+  const animatedPath = usePathMorph(props.path, animationOptions);
 
   return (
     <motion.path

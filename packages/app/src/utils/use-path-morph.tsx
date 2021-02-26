@@ -1,6 +1,6 @@
 import { interpolatePath } from 'd3-interpolate-path';
 import { animate, MotionValue, useMotionValue } from 'framer-motion';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
 /**
  * By default framer-motion does not support _morphing_ svg paths, it can only
@@ -16,17 +16,15 @@ export function usePathMorph(
   config?: Parameters<typeof animate>[2]
 ): MotionValue<string> {
   const value = useMotionValue<string>(d);
-  const configRef = useRef(config);
-  configRef.current = config;
 
   useEffect(() => {
     const interpolator = interpolatePath(value.get(), d);
 
     animate(0, 1, {
-      ...configRef.current,
+      ...config,
       onUpdate: (progress) => value.set(interpolator(progress)),
     });
-  }, [d, value]);
+  }, [d, value, config]);
 
   return value;
 }
