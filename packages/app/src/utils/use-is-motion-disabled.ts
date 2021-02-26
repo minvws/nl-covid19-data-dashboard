@@ -1,5 +1,5 @@
 import { useReducedMotion } from 'framer-motion';
-import { useIsIE11 } from './use-is-ie11';
+import { useIsOldBrowser } from './use-is-old-browser';
 
 /**
  * We'll disable motion when:
@@ -8,8 +8,8 @@ import { useIsIE11 } from './use-is-ie11';
  *   support.
  */
 export function useIsMotionDisabled() {
-  const isIE11 = useIsIE11(true);
+  const isOldBrowser = useIsOldBrowser(true);
   const prefersReducedMotion = useReducedMotion() === true;
 
-  return isIE11 || prefersReducedMotion;
+  return isOldBrowser || prefersReducedMotion;
 }
