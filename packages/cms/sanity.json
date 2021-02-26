@@ -23,7 +23,7 @@
     "development": {
       "plugins": ["@sanity/vision"],
       "api": {
-        "dataset": "production"
+        "dataset": "development"
       }
     }
   },
