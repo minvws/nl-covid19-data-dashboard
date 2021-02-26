@@ -77,6 +77,7 @@ export function SewerChart(props: SewerChartProps) {
     stationValuesFiltered,
     hasOutliers,
     selectedStationValues,
+    outlierValues,
   } = useSelectedStationValues(
     sewerStationSelectProps.value,
     stationValues,
@@ -180,7 +181,7 @@ export function SewerChart(props: SewerChartProps) {
          * The margin-bottom has been eyeballed to visually attach the
          * button to the graph, not sure how future-proof this is.
          */
-        mb={-19}
+        mb={-38}
         zIndex={1}
       >
         <ToggleOutlierButton
@@ -192,6 +193,25 @@ export function SewerChart(props: SewerChartProps) {
       </Box>
 
       <Box position="relative" ref={sizeRef} css={css({ userSelect: 'none' })}>
+        <svg
+          width={width}
+          height={52}
+          role="img"
+          style={{ pointerEvents: 'none' }}
+        >
+          {outlierValues && (
+            <Group left={dimensions.padding.left}>
+              <ScatterPlot
+                data={outlierValues}
+                getX={scales.getX}
+                getY={() => 26}
+                color="rgba(89, 89, 89, 0.8)"
+                radius={4}
+                dottedOutline
+              />
+            </Group>
+          )}
+        </svg>
         <svg
           role="img"
           width={width}
@@ -260,7 +280,7 @@ export function SewerChart(props: SewerChartProps) {
               getX={scales.getX}
               getY={scales.getY}
               color="rgba(89, 89, 89, 0.3)"
-              r={2}
+              radius={2}
             />
 
             <LinePath

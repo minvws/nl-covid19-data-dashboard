@@ -157,6 +157,8 @@ const SewerWater: FCWithLayout<typeof getStaticProps> = ({
             metricName="sewer"
             metricProperty="average"
             tooltipContent={createSewerRegionalTooltip(
+              siteText.choropleth_tooltip.sewer_regional,
+              regionThresholds.sewer.average,
               createSelectRegionHandler(router, 'rioolwater')
             )}
             onSelect={createSelectRegionHandler(router, 'rioolwater')}

@@ -167,13 +167,24 @@ export function useSelectedStationValues(
    * Here' we'll filter the final list of station values based on that boolean
    * and the
    */
-  const stationValuesFiltered = useMemo(() => {
-    return hasOutliers && !displayOutliers
-      ? stationValues.filter((x) => x.value <= outlierLimit)
-      : stationValues;
+  const [stationValuesFiltered, outlierValues] = useMemo(() => {
+    const values =
+      hasOutliers && !displayOutliers
+        ? stationValues.filter((x) => x.value <= outlierLimit)
+        : stationValues;
+    const outliers =
+      hasOutliers && !displayOutliers
+        ? stationValues.filter((x) => x.value > outlierLimit)
+        : undefined;
+    return [values, outliers];
   }, [displayOutliers, hasOutliers, outlierLimit, stationValues]);
 
-  return { stationValuesFiltered, hasOutliers, selectedStationValues };
+  return {
+    stationValuesFiltered,
+    hasOutliers,
+    selectedStationValues,
+    outlierValues,
+  };
 }
 
 export function useScatterTooltip({
