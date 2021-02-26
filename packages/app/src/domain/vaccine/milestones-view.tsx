@@ -13,32 +13,31 @@ import siteText from '~/locale/index';
 
 const MAX_ITEMS_VISIBLE = 5;
 const CIRCLE_SIZE = 26;
+const CIRCLE_HALF = CIRCLE_SIZE / 2;
 
-interface MileProps {
+type MilestonesType = {
   title: string;
   date: string;
-}
+};
 
-interface ExpectProps {
+type ExpectedMilestonesType = {
   item: string;
-}
-export interface MileStoneProps {
+};
+export interface MilestoneViewProps {
   title: string;
   description: RichContentBlock[];
-  miles: MileProps[];
-  expected: ExpectProps[];
+  milestones: MilestonesType[];
+  expectedMilestones: ExpectedMilestonesType[];
 }
 
-export function MileStones(props: MileStoneProps) {
-  const { title, miles, description, expected } = props;
+export function MilestonesView(props: MilestoneViewProps) {
+  const { title, milestones, description, expectedMilestones } = props;
 
   const [isExpanded, setIsExpanded] = useState(true);
 
   useEffect(() => setIsExpanded(false), []);
 
-  function expandedHandler() {
-    setIsExpanded(true);
-  }
+  const expandedHandler = () => setIsExpanded(true);
 
   return (
     <Tile css={css({ overflow: 'hidden' })}>
@@ -49,20 +48,17 @@ export function MileStones(props: MileStoneProps) {
         <RichContent blocks={description} />
       </Box>
 
-      <UnorderedList>
+      <Box as="ul" p={0} m={0} mb={3}>
         <ListItem isFirst={true}>
           <CircleSmall />
-          <Box
-            pl={CIRCLE_SIZE / 2}
-            css={css({ transform: 'translateY(-6px)' })}
-          >
+          <Box pl={CIRCLE_HALF} css={css({ transform: 'translateY(-6px)' })}>
             <Text fontWeight="bold" m={0}>
               2021
             </Text>
           </Box>
         </ListItem>
 
-        {miles.length > MAX_ITEMS_VISIBLE && !isExpanded && (
+        {milestones.length > MAX_ITEMS_VISIBLE && !isExpanded && (
           <ListItemButton>
             <Box
               pl={`calc(${CIRCLE_SIZE}px + 1rem)`}
@@ -75,30 +71,31 @@ export function MileStones(props: MileStoneProps) {
           </ListItemButton>
         )}
 
-        {miles.map((mile, index) => (
+        {milestones.map((item, index) => (
           <Fragment key={index}>
-            {(isExpanded || index > miles.length - 1 - MAX_ITEMS_VISIBLE) && (
-              <ListItem isLast={index === miles.length - 1}>
-                <CircleIcon isLast={index === miles.length - 1}>
+            {(isExpanded ||
+              index > milestones.length - 1 - MAX_ITEMS_VISIBLE) && (
+              <ListItem isLast={index === milestones.length - 1}>
+                <CircleIcon isLast={index === milestones.length - 1}>
                   <VaccineIcon />
                 </CircleIcon>
 
                 <Box
-                  pl={CIRCLE_SIZE / 2}
+                  pl={CIRCLE_HALF}
                   position="relative"
                   maxWidth="maxWidthText"
                   width="100%"
                   zIndex={2}
                 >
-                  {index !== miles.length - 1 ? (
+                  {index !== milestones.length - 1 ? (
                     <>
                       <InlineText
                         color={'gray'}
                         css={css({ position: 'absolute', top: '-1.3rem' })}
                       >
-                        {formatDate(new Date(mile.date))}
+                        {formatDate(new Date(item.date))}
                       </InlineText>
-                      <Text m={0}>{mile.title}</Text>
+                      <Text m={0}>{item.title}</Text>
                     </>
                   ) : (
                     <>
@@ -107,7 +104,7 @@ export function MileStones(props: MileStoneProps) {
                         fontWeight="bold"
                         css={css({ position: 'absolute', top: '-1.3rem' })}
                       >
-                        {formatDate(new Date(mile.date))}
+                        {formatDate(new Date(item.date))}
                       </InlineText>
                       <Text
                         m={0}
@@ -116,46 +113,42 @@ export function MileStones(props: MileStoneProps) {
                         fontWeight="bold"
                         lineHeight={0}
                       >
-                        {mile.title}
+                        {item.title}
                       </Text>
                     </>
                   )}
                 </Box>
-                {index === miles.length - 1 && <Background />}
+                {index === milestones.length - 1 && <Background />}
               </ListItem>
             )}
           </Fragment>
         ))}
-      </UnorderedList>
-
-      <Text color="gray" m={0} mb={2} pl={3}>
-        {siteText.milestones.verwacht}
-      </Text>
-      <UnorderedList>
-        {expected.map((item, index) => (
-          <ExpectedListItem key={index}>{item.item}</ExpectedListItem>
-        ))}
-      </UnorderedList>
+      </Box>
+      <Box pl={CIRCLE_SIZE * 1.5}>
+        <Text color="gray" m={0} pl={3} mb={2}>
+          {siteText.milestones.verwacht}
+        </Text>
+        <Box as="ul" p={0} m={0} css={css({ listStyleType: 'none' })}>
+          {expectedMilestones.map((item, index) => (
+            <ExpectedListItem key={index}>{item.item}</ExpectedListItem>
+          ))}
+        </Box>
+      </Box>
     </Tile>
   );
 }
 
-const UnorderedList = styled.ul(
-  css({
-    listStyleType: 'none',
-    p: 0,
-    m: 0,
-    mb: 3,
-  })
-);
-
-const ListItem = styled.li<{ isLast?: boolean; isFirst?: boolean }>((x) =>
+const ListItem = styled.li<{
+  isLast?: boolean;
+  isFirst?: boolean;
+  isExpanded?: boolean;
+}>((x) =>
   css({
     position: 'relative',
     display: 'flex',
     alignItems: x.isLast ? 'center' : 'flex-start',
-    paddingBottom: x.isFirst ? '2.5rem' : 4,
-    paddingTop: x.isLast ? `${1.3 + 2}rem` : '',
+    paddingBottom: x.isFirst ? (x.isExpanded ? 4 : 3) : 4,
+    paddingTop: x.isLast ? `3.3rem` : '',
     backgroundColor: x.isLast ? 'red' : '',
     listStyleType: 'none',
 
@@ -163,7 +156,7 @@ const ListItem = styled.li<{ isLast?: boolean; isFirst?: boolean }>((x) =>
       content: '""',
       position: 'absolute',
       top: 0,
-      left: CIRCLE_SIZE / 2 - 1,
+      left: CIRCLE_HALF - 1,
       width: x.isLast ? '0' : '2px',
       height: '100%',
       backgroundColor: 'header',
@@ -173,7 +166,7 @@ const ListItem = styled.li<{ isLast?: boolean; isFirst?: boolean }>((x) =>
       content: '""',
       position: 'absolute',
       bottom: '50%',
-      left: CIRCLE_SIZE / 2 - 1,
+      left: CIRCLE_HALF - 1,
       width: x.isLast ? '2px' : '0',
       height: x.isLast ? '50%' : '100%',
       backgroundColor: 'white',
@@ -192,7 +185,7 @@ const ListItemButton = styled.li(
       content: '""',
       position: 'absolute',
       top: 0,
-      left: CIRCLE_SIZE / 2 - 1,
+      left: CIRCLE_HALF - 1,
       width: '2px',
       height: '100%',
       backgroundColor: 'header',
@@ -219,7 +212,7 @@ const StyledButton = styled.button(
       content: '""',
       position: 'absolute',
       top: 0,
-      left: `calc(-1rem - ${CIRCLE_SIZE / 2 + 1}px)`,
+      left: `calc(-1rem - ${CIRCLE_HALF + 1}px)`,
       height: '100%',
       width: '2px',
       backgroundColor: 'white',
@@ -248,6 +241,7 @@ const CircleIcon = styled.div<{ isLast: boolean }>((x) =>
       width: 14,
       height: 14,
       color: x.isLast ? 'header' : 'white',
+      transform: 'scaleX(-1)',
     },
   })
 );
@@ -269,8 +263,8 @@ const Background = styled.div(
   css({
     position: 'absolute',
     top: 0,
-    left: '-2rem',
-    right: '-2rem',
+    left: -4,
+    right: -4,
     width: 'calc(4rem + 100%);',
     height: '100%',
     backgroundColor: 'header',
