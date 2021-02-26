@@ -415,6 +415,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
           <ParentSize>
             {({ width }) => (
               <TimeSeriesChart
+                title={text.grafiek_draagvlak.titel}
                 timeframe="all"
                 width={width}
                 ariaLabelledBy="chart_vaccine_support"
@@ -473,12 +474,12 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                     color: '#C252D4',
                   },
                 ]}
-                formatTooltip={({ value, valueKey, seriesConfig }) => (
+                formatTooltip={({ value, valueKey, config }) => (
                   <VaccineSupportTooltip
                     locale={locale}
                     value={value}
                     valueKey={valueKey}
-                    config={seriesConfig}
+                    config={config}
                   />
                 )}
               />

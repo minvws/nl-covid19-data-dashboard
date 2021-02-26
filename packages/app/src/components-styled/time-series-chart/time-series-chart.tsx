@@ -90,6 +90,7 @@ const defaultPadding: Padding = {
  *   to see which one is closest.
  */
 export type TimeSeriesChartProps<T extends TimestampedValue> = {
+  title: string; // Used for default tooltip formatting
   values: T[];
   seriesConfig: SeriesConfig<T>;
   width: number;
@@ -122,6 +123,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
   showDateMarker,
   paddingLeft,
   ariaLabelledBy,
+  title,
 }: TimeSeriesChartProps<T>) {
   const {
     tooltipData,
@@ -255,7 +257,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
            * I'm passing the full config here because the tooltip needs colors
            * and labels. In the future this could be distilled maybe.
            */
-          seriesConfig: seriesConfig,
+          config: seriesConfig,
         },
         tooltipLeft: nearestPoint.x,
         tooltipTop: nearestPoint.y,
@@ -349,6 +351,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
         </ChartContainer>
 
         <Tooltip
+          title={title}
           data={tooltipData}
           left={tooltipLeft}
           top={tooltipTop}

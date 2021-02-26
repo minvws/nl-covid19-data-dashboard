@@ -13,6 +13,7 @@ import { formatDateFromSeconds } from '~/utils/formatDate';
 export function VaccineSupportTooltip({
   locale,
   value,
+  valueKey,
   config,
 }: {
   locale: Locale;
@@ -31,14 +32,33 @@ export function VaccineSupportTooltip({
         {text.grafiek_draagvlak.titel}
       </Heading>
       <VisuallyHidden>{`${dateStartString} - ${dateEndString}`}</VisuallyHidden>
+      <span>{valueKey}</span>
       <TooltipList>
-        {[...config].reverse().map((x) => (
-          <TooltipListItem key={x.metricProperty} color={x.color}>
-            <TooltipValueContainer>
-              {x.label}: <b>{formatPercentage(value[x.metricProperty])}%</b>
-            </TooltipValueContainer>
-          </TooltipListItem>
-        ))}
+        {[...config].reverse().map((x) => {
+          if (x.type === 'range') {
+            return (
+              <TooltipListItem key={x.metricPropertyLow} color={x.color}>
+                <TooltipValueContainer>
+                  {x.label}:{' '}
+                  <b>
+                    {`${value[x.metricPropertyLow]} - ${
+                      value[x.metricPropertyHigh]
+                    }`}
+                    %
+                  </b>
+                </TooltipValueContainer>
+              </TooltipListItem>
+            );
+          } else {
+            return (
+              <TooltipListItem key={x.metricProperty} color={x.color}>
+                <TooltipValueContainer>
+                  {x.label}: <b>{formatPercentage(value[x.metricProperty])}%</b>
+                </TooltipValueContainer>
+              </TooltipListItem>
+            );
+          }
+        })}
 
         <Spacer mb={1} />
         <TooltipListItem color="transparent">
