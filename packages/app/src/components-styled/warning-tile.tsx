@@ -1,22 +1,39 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import Warning from '~/assets/warning.svg';
+import WarningIcon from '~/assets/warning.svg';
 import { Box } from './base';
 import { Tile } from '~/components-styled/tile';
 import { asResponsiveArray } from '~/style/utils';
+import { ReactNode, ComponentType } from 'react';
+
+type WarningMessageVariant = 'emphasis' | 'default';
+
 interface WarningMessageProps {
-  message: React.ReactNode;
+  message: ReactNode;
+  variant?: WarningMessageVariant;
+  icon?: ComponentType;
 }
+
 // WarningMessage
-export function WarningTile({ message }: WarningMessageProps) {
+export function WarningTile({
+  message,
+  variant = 'default',
+  icon = WarningIcon,
+}: WarningMessageProps) {
+  const Icon = icon;
   return (
     <StyledTile>
-      <WarningBox>
-        <StyledWarning />
+      <WarningBox variant={variant}>
+        <IconWrapper>
+          <Icon />
+        </IconWrapper>
       </WarningBox>
-      <WarningMessageBox>
+      <WarningMessageBox variant={variant}>
         {typeof message === 'string' ? (
-          <Children dangerouslySetInnerHTML={{ __html: message }} />
+          <Children
+            variant={variant}
+            dangerouslySetInnerHTML={{ __html: message }}
+          />
         ) : (
           <Box spacing={3} fontSize="1.25rem" fontWeight="bold">
             {message}
@@ -29,60 +46,72 @@ export function WarningTile({ message }: WarningMessageProps) {
 
 const StyledTile = styled(Tile)(
   css({
+    backgroundColor: 'transparent',
     flexDirection: 'row',
     padding: 0,
     boxShadow: 'none',
   })
 );
 
-const WarningBox = styled(Box)(
-  css({
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: '0 0 auto',
-    backgroundColor: '#FFE060',
-    borderBottomLeftRadius: 1,
-    borderTopLeftRadius: 1,
-  })
+const WarningBox = styled(Box)<{ variant: WarningMessageVariant }>(
+  ({ variant }) => {
+    const backgroundColor = variant === 'emphasis' ? '#FFE060' : 'white';
+    return css({
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      flex: '0 0 auto',
+      backgroundColor,
+      borderBottomLeftRadius: 1,
+      borderTopLeftRadius: 1,
+    });
+  }
 );
 
-const StyledWarning = styled(Warning)(
+const IconWrapper = styled(Box)(
   css({
-    display: 'block',
-    width: asResponsiveArray({ _: 30, sm: 38 }),
-    height: asResponsiveArray({ _: 30, sm: 38 }),
-    mx: asResponsiveArray({ _: '7px', sm: '21px' }),
-    fill: 'black',
-    borderRadius: 1,
-  })
-);
-
-const WarningMessageBox = styled(Box)(
-  css({
-    display: 'flex',
-    alignItems: 'center',
-    flex: '1 1 auto',
-    py: 3,
-    pl: 3,
-    backgroundColor: '#FFEE87',
-    borderBottomRightRadius: 1,
-    borderTopRightRadius: 1,
-  })
-);
-
-const Children = styled.div(
-  css({
-    fontSize: '1.25rem',
-    fontWeight: 'bold',
-    borderBottomRightRadius: 1,
-    borderTopRightRadius: 1,
-    '> *': {
-      mt: 0,
-      mb: 3,
-      ':last-child': {
-        mb: 0,
-      },
+    svg: {
+      borderRadius: 1,
+      display: 'block',
+      fill: 'black',
+      width: asResponsiveArray({ _: 30, sm: 38 }),
+      height: asResponsiveArray({ _: 30, sm: 38 }),
+      mx: asResponsiveArray({ _: '7px', sm: '21px' }),
     },
   })
+);
+
+const WarningMessageBox = styled(Box)<{ variant: WarningMessageVariant }>(
+  ({ variant }) => {
+    const backgroundColor = variant === 'emphasis' ? '#FFEE87' : 'white';
+    return css({
+      display: 'flex',
+      alignItems: 'center',
+      flex: '1 1 auto',
+      py: 3,
+      pl: 3,
+      backgroundColor,
+      borderBottomRightRadius: 1,
+      borderTopRightRadius: 1,
+    });
+  }
+);
+
+const Children = styled.div<{ variant: WarningMessageVariant }>(
+  ({ variant }) => {
+    return css({
+      fontSize: variant === 'emphasis' ? '1.25rem' : 2,
+      fontWeight: variant === 'emphasis' ? 'bold' : 'normal',
+      borderBottomRightRadius: 1,
+      borderTopRightRadius: 1,
+      pr: 4,
+      '> *': {
+        mt: 0,
+        mb: 3,
+        ':last-child': {
+          mb: 0,
+        },
+      },
+    });
+  }
 );
