@@ -1740,14 +1740,14 @@
   },
   "sterfte": {
     "titel_sidebar": "Sterfte",
-    "titel_kpi": "Gemeld aantal patiënten overleden aan COVID-19 per dag",
+    "titel_kpi": "Gemeld aantal overleden COVID-19 patiënten per dag",
     "metadata": {
       "title": "Sterfte | Coronadashboard | Rijksoverheid.nl",
       "description": "Aantal overledenen per dag"
     },
     "section_deceased_rivm": {
       "title": "Sterfte",
-      "description": "Deze cijfers laten zien van hoeveel patiënten er aan de GGD gemeld is dat ze zijn overleden aan COVID-19. Het werkelijke aantal patiënten dat is overleden aan COVID-19 is waarschijnlijk hoger, omdat niet alle COVID-19 patiënten getest worden en er geen meldingsplicht geldt voor overlijden aan COVID-19. ",
+      "description": "Deze cijfers laten zien van hoeveel COVID-19 patiënten in Nederland gisteren aan de GGD gemeld is dat ze zijn overleden. Het werkelijke aantal overleden COVID-19 patiënten is waarschijnlijk hoger, omdat niet alle patiënten getest worden en er geen meldingsplicht geldt voor overlijden aan COVID-19.",
       "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
       "bronnen": {
         "rivm": {
@@ -1760,10 +1760,10 @@
         "href": "/verantwoording#sterfte",
         "text": "Lees meer in de cijferverantwoording."
       },
-      "kpi_covid_daily_title": "Gemeld aantal patiënten overleden aan COVID-19 per dag",
-      "kpi_covid_daily_description": "Dit getal toont het aantal patiënten waarvan aan de GGD gemeld is dat ze zijn overleden aan COVID-19, per dag. Een deel van de overlijdens is van eerdere dagen, die later zijn doorgegeven.",
-      "kpi_covid_total_title": "Totaal aantal personen overleden aan COVID-19",
-      "kpi_covid_total_description": "Dit getal laat zien van hoeveel personen in totaal is gemeld dat ze zijn overleden aan COVID-19, sinds het begin van de meldingen.",
+      "kpi_covid_daily_title": "Gemeld aantal overleden COVID-19 patiënten per dag",
+      "kpi_covid_daily_description": "Dit getal toont het aantal COVID-19 patiënten waarvan aan de GGD op die dag gemeld is dat ze zijn overleden. Een deel van de overlijdens is van eerdere dagen, die later zijn doorgegeven.",
+      "kpi_covid_total_title": "Totaal aantal overleden COVID-19 patiënten",
+      "kpi_covid_total_description": "Dit getal laat zien van hoeveel COVID-19 patiënten in totaal is gemeld dat ze zijn overleden, sinds het begin van de meldingen.",
       "line_chart_covid_daily_title": "Gemelde aantal patiënten overleden aan COVID-19 over tijd",
       "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel personen in de geselecteerde periode gemeld is dat ze zijn overleden aan COVID-19."
     },
@@ -1771,14 +1771,14 @@
   },
   "veiligheidsregio_sterfte": {
     "titel_sidebar": "Sterfte",
-    "titel_kpi": "Gemeld aantal patiënten overleden aan COVID-19 per dag",
+    "titel_kpi": "Gemeld aantal overleden COVID-19 patiënten per dag",
     "metadata": {
       "title": "Sterfte in {{safetyRegion}} | Coronadashboard | Rijksoverheid.nl",
       "description": "Aantal overledenen per dag in {{safetyRegion}}"
     },
     "section_deceased_rivm": {
       "title": "Sterfte in {{safetyRegion}}",
-      "description": "Deze cijfers laten zien van hoeveel patiënten er aan de GGD gemeld is dat ze zijn overleden aan/met COVID-19. Het werkelijke aantal patiënten dat is overleden aan/met COVID-19 is waarschijnlijk hoger, omdat niet alle COVID-19 patiënten getest worden en er geen meldingsplicht geldt voor overlijden aan/met COVID-19. ",
+      "description": "Deze cijfers laten zien van hoeveel COVID-19 patiënten in Nederland deze veiligheidsregio gisteren aan de GGD gemeld is dat ze zijn overleden. Het werkelijke aantal overleden COVID-19 patiënten is waarschijnlijk hoger, omdat niet alle patiënten getest worden en er geen meldingsplicht geldt voor overlijden aan COVID-19. ",
       "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
       "bronnen": {
         "rivm": {
@@ -1791,10 +1791,10 @@
         "href": "/verantwoording#sterfte",
         "text": "Lees meer in de cijferverantwoording."
       },
-      "kpi_covid_daily_title": "Gemeld aantal patiënten overleden aan COVID-19 per dag",
-      "kpi_covid_daily_description": "Dit getal toont het aantal patiënten waarvan aan de GGD gemeld is dat ze zijn overleden aan COVID-19, per dag. Een deel van de overlijdens is van eerdere dagen, die later zijn doorgegeven.",
-      "kpi_covid_total_title": "Totaal aantal personen overleden aan/met COVID-19",
-      "kpi_covid_total_description": "Dit getal laat zien van hoeveel personen in totaal is gemeld dat ze zijn overleden aan/met COVID-19, sinds het begin van de meldingen.",
+      "kpi_covid_daily_title": "Gemeld aantal overleden COVID-19 patiënten per dag",
+      "kpi_covid_daily_description": "Dit getal toont het aantal COVID-19 patiënten in deze veiligheidsregio waarvan aan de GGD op die dag gemeld is dat ze zijn overleden. Een deel van de overlijdens is van eerdere dagen, die later zijn doorgegeven.",
+      "kpi_covid_total_title": "Totaal aantal overleden COVID-19 patiënten",
+      "kpi_covid_total_description": "Dit getal laat zien van hoeveel COVID-19 patiënten in deze veiligheidsregio in totaal is gemeld dat ze zijn overleden, sinds het begin van de meldingen.",
       "line_chart_covid_daily_title": "Gemelde aantal patiënten overleden aan/met COVID-19 over tijd",
       "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel personen in de geselecteerde periode gemeld is dat ze zijn overleden aan COVID-19."
     },
@@ -2574,14 +2574,14 @@
   },
   "gemeente_sterfte": {
     "titel_sidebar": "Sterfte",
-    "titel_kpi": "Gemeld aantal patiënten overleden aan COVID-19 per dag",
+    "titel_kpi": "Gemeld aantal overleden COVID-19 patiënten per dag",
     "metadata": {
       "title": "Sterfte in {{municipalityName}} | Coronadashboard | Rijksoverheid.nl",
       "description": "Aantal overledenen per dag in {{municipalityName}}"
     },
     "section_deceased_rivm": {
       "title": "Sterfte in {{municipalityName}}",
-      "description": "Deze cijfers laten zien van hoeveel patiënten er aan de GGD gemeld is dat ze zijn overleden aan/met COVID-19. Het werkelijke aantal patiënten dat is overleden aan/met COVID-19 is waarschijnlijk hoger, omdat niet alle COVID-19 patiënten getest worden en er geen meldingsplicht geldt voor overlijden aan/met COVID-19. ",
+      "description": "Deze cijfers laten zien van hoeveel COVID-19 patiënten in deze gemeente gisteren aan de GGD gemeld is dat ze zijn overleden. Het werkelijke aantal overleden COVID-19 patiënten is waarschijnlijk hoger, omdat niet alle patiënten getest worden en er geen meldingsplicht geldt voor overlijden aan COVID-19.",
       "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
       "bronnen": {
         "rivm": {
@@ -2594,10 +2594,10 @@
         "href": "/verantwoording#sterfte",
         "text": "Lees meer in de cijferverantwoording."
       },
-      "kpi_covid_daily_title": "Gemeld aantal patiënten overleden aan COVID-19 per dag",
-      "kpi_covid_daily_description": "Dit getal toont het aantal patiënten waarvan aan de GGD gemeld is dat ze zijn overleden aan COVID-19, per dag. Een deel van de overlijdens is van eerdere dagen, die later zijn doorgegeven.",
-      "kpi_covid_total_title": "Totaal aantal personen overleden aan/met COVID-19",
-      "kpi_covid_total_description": "Dit getal laat zien van hoeveel personen in totaal is gemeld dat ze zijn overleden aan/met COVID-19, sinds het begin van de meldingen.",
+      "kpi_covid_daily_title": "Gemeld aantal overleden COVID-19 patiënten per dag",
+      "kpi_covid_daily_description": "Dit getal toont het aantal COVID-19 patiënten in deze gemeente waarvan aan de GGD op die dag gemeld is dat ze zijn overleden. Een deel van de overlijdens is van eerdere dagen, die later zijn doorgegeven.",
+      "kpi_covid_total_title": "Totaal aantal overleden COVID-19 patiënten",
+      "kpi_covid_total_description": "Dit getal laat zien van hoeveel COVID-19 patiënten in deze gemeente in totaal is gemeld dat ze zijn overleden, sinds het begin van de meldingen.",
       "line_chart_covid_daily_title": "Gemelde aantal patiënten overleden aan/met COVID-19 over tijd",
       "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel personen in de geselecteerde periode gemeld is dat ze zijn overleden aan COVID-19."
     },
