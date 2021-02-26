@@ -5,6 +5,7 @@ import { localPoint } from '@visx/event';
 import { GridRows } from '@visx/grid';
 import { Group } from '@visx/group';
 import { Bar, LinePath } from '@visx/shape';
+import { uniqWith } from 'lodash';
 import { transparentize } from 'polished';
 import { PointerEvent, useCallback, useMemo, useState } from 'react';
 import { isPresent } from 'ts-is-present';
@@ -19,6 +20,7 @@ import { formatDate } from '~/utils/formatDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { TimeframeOption } from '~/utils/timeframe';
 import { useElementSize } from '~/utils/use-element-size';
+import { useIsMounted } from '~/utils/use-is-mounted';
 import { Path } from './components/path';
 import { ScatterPlot } from './components/scatter-plot';
 import { ToggleOutlierButton } from './components/toggle-outlier-button';
@@ -48,19 +50,17 @@ interface SewerChartProps {
   };
 }
 
-/**
- * The initial width `800.1337` is used for server side rendering. It's also
- * a "weird" number to detect wether the browser has kicked in with the actual
- * width. This will be the moment we enable motion.
- */
-const INITIAL_WIDTH = 800.1337;
-
 export function SewerChart(props: SewerChartProps) {
   const { data, timeframe, valueAnnotation, height = 300, text } = props;
 
-  const [sizeRef, { width }] = useElementSize<HTMLDivElement>(INITIAL_WIDTH);
+  const [sizeRef, { width }] = useElementSize<HTMLDivElement>(840);
 
-  const isMotionEnabled = width !== INITIAL_WIDTH;
+  /**
+   * We enable animations slighly after the component is mounted (1ms).
+   * This prevents an initial animation from the SSR width `840` to the
+   * actual container width.
+   */
+  const isMounted = useIsMounted({ delay: 1 });
 
   /**
    * State for toggling outliers visibility
@@ -188,8 +188,10 @@ export function SewerChart(props: SewerChartProps) {
          * The margin-bottom has been eyeballed to visually attach the
          * button to the graph, not sure how future-proof this is.
          */
-        mb={-38}
-        zIndex={1}
+        mb={-19}
+        zIndex={10}
+        overflow="hidden"
+        bg="#f2f2f2"
       >
         <ToggleOutlierButton
           disabled={!hasOutliers}
@@ -197,27 +199,39 @@ export function SewerChart(props: SewerChartProps) {
         >
           {displayOutliers ? text.hide_outliers : text.display_outliers}
         </ToggleOutlierButton>
+
+        <svg
+          width={'100%'}
+          height={'100%'}
+          role="img"
+          style={{
+            pointerEvents: 'none',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+          }}
+        >
+          <ScatterPlot
+            data={uniqWith(outlierValues, (val1, val2) => {
+              /**
+               * filter circles which are close to each other, no need to
+               * render them above eachother.
+               */
+              const threshold = 4; // 10px
+              const x1 = scales.getX(val1);
+              const x2 = scales.getX(val2);
+              return x1 > x2 - threshold && x1 < x2 + threshold;
+            })}
+            getX={scales.getX}
+            getY={() => (displayOutliers ? 46 : 16)}
+            color="rgba(89, 89, 89, 0.8)"
+            radius={4}
+            dottedOutline
+            isAnimated={isMounted}
+          />
+        </svg>
       </Box>
 
-      <svg
-        width={width}
-        height={52}
-        role="img"
-        style={{ pointerEvents: 'none' }}
-      >
-        {outlierValues && (
-          <Group left={dimensions.padding.left}>
-            <ScatterPlot
-              data={outlierValues}
-              getX={scales.getX}
-              getY={() => 26}
-              color="rgba(89, 89, 89, 0.8)"
-              radius={4}
-              dottedOutline
-            />
-          </Group>
-        )}
-      </svg>
       <Box position="relative" ref={sizeRef} css={css({ userSelect: 'none' })}>
         <svg
           role="img"
@@ -229,6 +243,7 @@ export function SewerChart(props: SewerChartProps) {
           style={{
             touchAction: 'pan-y', // allow vertical scroll, but capture horizontal
             width: '100%',
+            overflow: 'hidden',
           }}
         >
           <Group left={dimensions.padding.left} top={dimensions.padding.top}>
@@ -285,7 +300,7 @@ export function SewerChart(props: SewerChartProps) {
             />
 
             <ScatterPlot
-              isAnimated={isMotionEnabled}
+              isAnimated={isMounted}
               data={stationValuesFiltered}
               getX={scales.getX}
               getY={scales.getY}
@@ -296,11 +311,11 @@ export function SewerChart(props: SewerChartProps) {
             <LinePath x={scales.getX} y={scales.getY}>
               {({ path }) => (
                 <Path
-                  isAnimated={isMotionEnabled}
+                  isAnimated={isMounted}
                   fill="transparent"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  d={path(averageValues) || ''}
+                  path={path(averageValues) || ''}
                   stroke={
                     hasSelectedStation
                       ? colors.data.neutral
@@ -319,11 +334,11 @@ export function SewerChart(props: SewerChartProps) {
               >
                 {({ path }) => (
                   <Path
-                    isAnimated={isMotionEnabled}
+                    isAnimated={isMounted}
                     fill="transparent"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    d={path(selectedStationValues) || ''}
+                    path={path(selectedStationValues) || ''}
                     stroke={colors.data.secondary}
                     strokeWidth={4}
                   />

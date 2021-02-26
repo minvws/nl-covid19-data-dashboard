@@ -3,8 +3,8 @@ import { memo } from 'react';
 import { useIsMotionDisabled } from '~/utils/use-is-motion-disabled';
 import { usePathMorph } from '~/utils/use-path-morph';
 
-interface AnimatedPathProps {
-  d: string;
+interface PathProps {
+  path: string;
   fill?: string;
   strokeLinecap?: 'round' | 'inherit' | 'butt' | 'square';
   strokeLinejoin?: 'inherit' | 'round' | 'bevel' | 'miter';
@@ -15,38 +15,27 @@ interface AnimatedPathProps {
 
 export const Path = memo(PathUnmemoized);
 
-function PathUnmemoized(props: AnimatedPathProps) {
-  const {
-    d,
-    fill,
-    strokeWidth,
-    stroke,
-    strokeLinecap,
-    strokeLinejoin,
-    isAnimated,
-  } = props;
+function PathUnmemoized(props: PathProps) {
   const isMotionDisabled = useIsMotionDisabled();
 
-  if (isAnimated && !isMotionDisabled) {
+  if (props.isAnimated && !isMotionDisabled) {
     return <AnimatedPath {...props} />;
   }
 
   return (
     <path
-      d={d}
-      fill={fill}
-      strokeLinecap={strokeLinecap}
-      strokeLinejoin={strokeLinejoin}
-      stroke={stroke}
-      strokeWidth={strokeWidth}
+      d={props.path}
+      fill={props.fill}
+      strokeLinecap={props.strokeLinecap}
+      strokeLinejoin={props.strokeLinejoin}
+      stroke={props.stroke}
+      strokeWidth={props.strokeWidth}
     />
   );
 }
 
-function AnimatedPath(props: AnimatedPathProps) {
-  const { d, fill, strokeWidth, stroke, strokeLinecap, strokeLinejoin } = props;
-
-  const path = usePathMorph(d, {
+function AnimatedPath(props: PathProps) {
+  const animatedPath = usePathMorph(props.path, {
     type: 'spring',
     stiffness: 500,
     damping: 55,
@@ -54,12 +43,12 @@ function AnimatedPath(props: AnimatedPathProps) {
 
   return (
     <motion.path
-      d={path}
-      fill={fill}
-      strokeLinecap={strokeLinecap}
-      strokeLinejoin={strokeLinejoin}
-      stroke={stroke}
-      strokeWidth={strokeWidth}
+      d={animatedPath}
+      fill={props.fill}
+      strokeLinecap={props.strokeLinecap}
+      strokeLinejoin={props.strokeLinejoin}
+      stroke={props.stroke}
+      strokeWidth={props.strokeWidth}
     />
   );
 }
