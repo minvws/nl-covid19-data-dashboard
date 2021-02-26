@@ -34,11 +34,11 @@ import {
   formatDayMonth,
   getSeriesData,
   getTotalSumForMetricProperty,
-  getValuesInTimeframe,
   getWeekInfo,
   SeriesValue,
 } from './logic';
 import { TimestampedValue } from '@corona-dashboard/common';
+import { getValuesInTimeframe } from '~/utils/timeframe';
 
 const tooltipStyles = {
   ...defaultStyles,

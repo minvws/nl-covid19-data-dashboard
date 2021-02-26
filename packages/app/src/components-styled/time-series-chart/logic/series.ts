@@ -5,8 +5,7 @@ import {
 } from '@corona-dashboard/common';
 import { pick } from 'lodash';
 import { isDefined, isPresent } from 'ts-is-present';
-import { getValuesInTimeframe } from '~/components-styled/stacked-chart/logic';
-import { getDaysForTimeframe, TimeframeOption } from '~/utils/timeframe';
+import { getValuesInTimeframe, TimeframeOption } from '~/utils/timeframe';
 
 export type SeriesConfig<T extends TimestampedValue> = (
   | LineSeriesDefinition<T>
@@ -53,7 +52,7 @@ export type AreaSeriesDefinition<T extends TimestampedValue> = {
 export function calculateSeriesMaximum<T extends TimestampedValue>(
   values: T[],
   seriesConfig: SeriesConfig<T>,
-  signaalwaarde = -Infinity
+  benchmarkValue = -Infinity
 ) {
   const metricProperties = seriesConfig.flatMap((x) =>
     x.type === 'range'
@@ -75,41 +74,7 @@ export function calculateSeriesMaximum<T extends TimestampedValue>(
    * Value cannot be 0, hence the 1. If the value is below signaalwaarde, make
    * sure the signaalwaarde floats in the middle
    */
-  return Math.max(overallMaximum, signaalwaarde * 2, 1);
-}
-
-/**
- * From a list of values, return the ones that are within the timeframe.
- *
- * This is similar to getFilteredValues but here we assume the value is passed
- * in as-is from the data, and we detect what type of timestamp we should filter
- * on.
- */
-export function getTimeframeValues(
-  values: TimestampedValue[],
-  timeframe: TimeframeOption
-) {
-  const boundary = getTimeframeBoundaryUnix(timeframe);
-
-  if (isDateSeries(values)) {
-    return values.filter((x) => x.date_unix >= boundary);
-  }
-
-  if (isDateSpanSeries(values)) {
-    return values.filter((x) => x.date_start_unix >= boundary);
-  }
-
-  throw new Error(`Incompatible timestamps are used in value ${values[0]}`);
-}
-
-const oneDayInSeconds = 24 * 60 * 60;
-
-function getTimeframeBoundaryUnix(timeframe: TimeframeOption) {
-  if (timeframe === 'all') {
-    return 0;
-  }
-  const days = getDaysForTimeframe(timeframe);
-  return Date.now() / 1000 - days * oneDayInSeconds;
+  return Math.max(overallMaximum, benchmarkValue * 2, 1);
 }
 
 export type SeriesValue = {

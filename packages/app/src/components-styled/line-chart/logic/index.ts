@@ -4,8 +4,7 @@ import {
   TimestampedValue,
 } from '@corona-dashboard/common';
 import { isPresent } from 'ts-is-present';
-import { getValuesInTimeframe } from '~/components-styled/stacked-chart/logic';
-import { getDaysForTimeframe, TimeframeOption } from '~/utils/timeframe';
+import { getValuesInTimeframe, TimeframeOption } from '~/utils/timeframe';
 
 export * from './background-rectangle';
 
@@ -47,40 +46,6 @@ export function calculateYMax(
    * sure the signaalwaarde floats in the middle
    */
   return Math.max(overallMaximum, signaalwaarde * 2, 1);
-}
-
-/**
- * From a list of values, return the ones that are within the timeframe.
- *
- * This is similar to getFilteredValues but here we assume the value is passed
- * in as-is from the data, and we detect what type of timestamp we should filter
- * on.
- */
-export function getTimeframeValues(
-  values: TimestampedValue[],
-  timeframe: TimeframeOption
-) {
-  const boundary = getTimeframeBoundaryUnix(timeframe);
-
-  if (isDateSeries(values)) {
-    return values.filter((x) => x.date_unix >= boundary);
-  }
-
-  if (isDateSpanSeries(values)) {
-    return values.filter((x) => x.date_start_unix >= boundary);
-  }
-
-  throw new Error(`Incompatible timestamps are used in value ${values[0]}`);
-}
-
-const oneDayInSeconds = 24 * 60 * 60;
-
-function getTimeframeBoundaryUnix(timeframe: TimeframeOption) {
-  if (timeframe === 'all') {
-    return 0;
-  }
-  const days = getDaysForTimeframe(timeframe);
-  return Date.now() / 1000 - days * oneDayInSeconds;
 }
 
 export type TrendValue = {
