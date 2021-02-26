@@ -49,7 +49,7 @@ export function MilestonesView(props: MilestoneViewProps) {
       </Box>
 
       <Box as="ul" p={0} m={0} mb={3}>
-        <ListItem isFirst={true}>
+        <ListItem isFirst={true} isExpanded={isExpanded}>
           <CircleSmall />
           <Box pl={CIRCLE_HALF} css={css({ transform: 'translateY(-6px)' })}>
             <Text fontWeight="bold" m={0}>
