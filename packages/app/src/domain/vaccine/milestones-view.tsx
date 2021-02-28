@@ -188,6 +188,7 @@ const ListItemLast = styled.li(
       zIndex: 2,
     },
 
+    // Background
     '&::after': {
       content: '""',
       position: 'absolute',
