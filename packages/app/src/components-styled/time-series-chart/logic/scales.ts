@@ -31,12 +31,12 @@ export function useScales(args: {
 
     const yDomain = [0, maximumValue];
 
-    // const timespanMarkerData = seriesList[0];
+    const timespanMarkerData = seriesList[0];
 
     const dateSpanScale = scaleBand<number>({
       range: [0, bounds.width],
-      // domain: timespanMarkerData.map((x) => x.__date_unix),
-      domain: xDomain,
+      domain: timespanMarkerData.map((x) => x.__date_unix),
+      // domain: xDomain,
     });
 
     const markerPadding = dateSpanScale.bandwidth() / 2;

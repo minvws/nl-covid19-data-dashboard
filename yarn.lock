@@ -3712,7 +3712,7 @@
     "@types/react" "*"
     prop-types "^15.5.10"
 
-"@visx/curve@1.0.0":
+"@visx/curve@1.0.0", "@visx/curve@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@visx/curve/-/curve-1.0.0.tgz#f1928821c0beea05d019f3066b28459b4b185c5b"
   dependencies:

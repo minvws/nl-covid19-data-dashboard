@@ -17,7 +17,7 @@ export type AreaTrendProps = {
 
 export function AreaTrend({
   series,
-  fillOpacity = 0.05,
+  fillOpacity = 0.2,
   strokeWidth = 2,
   color,
   getX,

@@ -13,7 +13,7 @@ import {
 import css from '@styled-system/css';
 import { defaultStyles, TooltipWithBounds } from '@visx/tooltip';
 import styled from 'styled-components';
-import { Heading } from '~/components-styled/typography';
+import { Heading, InlineText } from '~/components-styled/typography';
 import { VisuallyHidden } from '~/components-styled/visually-hidden';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
@@ -142,7 +142,7 @@ export function DefaultTooltip<T extends TimestampedValue>({
             return (
               <TooltipListItem key={index} color={x.color}>
                 <TooltipValueContainer>
-                  {x.label}:{' '}
+                  <InlineText mr={2}>{x.label}:</InlineText>
                   <b>
                     {`${getValueStringForKey(
                       value,
@@ -161,7 +161,7 @@ export function DefaultTooltip<T extends TimestampedValue>({
             return (
               <TooltipListItem key={index} color={x.color}>
                 <TooltipValueContainer>
-                  {x.label}:{' '}
+                  <InlineText mr={2}>{x.label}:</InlineText>
                   <b>
                     {getValueStringForKey(
                       value,
@@ -208,7 +208,9 @@ const TooltipListItem = styled.li<TooltipListItemProps>`
 const TooltipValueContainer = styled.span`
   display: flex;
   width: 100%;
-  min-width: 120px;
+  /* min-width: 130px; */
+  /* padding-left: 2em; */
+  /* margin-right: 1em; */
   justify-content: space-between;
 `;
 

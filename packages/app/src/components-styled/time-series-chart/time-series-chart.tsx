@@ -245,6 +245,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
                 getX={getX}
                 getY0={getY0}
                 getY1={getY1}
+                bounds={bounds}
               />
             );
         }
