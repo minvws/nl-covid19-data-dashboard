@@ -8,10 +8,10 @@ export function formatNumber(
   value: number | string | undefined | null
 ): string {
   if (typeof value === 'undefined' || value === null) return '-';
-
+  
   return NumberFormat.format(Number(value));
 }
 
-export function formatPercentage(value: number, maximumFractionDigits = 1) {
+export function formatPercentage(value: number, maximumFractionDigits = 2) {
   return new Intl.NumberFormat(locale, { maximumFractionDigits }).format(value);
 }
