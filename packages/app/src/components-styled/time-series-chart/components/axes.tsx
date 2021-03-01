@@ -24,10 +24,8 @@ type AxesProps = {
   yTickValues?: number[];
 };
 
-const dateToValue = (d: Date) => d.valueOf() / 1000;
-
-const formatXAxis = (date: Date) =>
-  formatDateFromSeconds(dateToValue(date), 'axis');
+const formatXAxis = (date_unix: number) =>
+  formatDateFromSeconds(date_unix, 'axis');
 const formatYAxis = (y: number) => formatNumber(y);
 const formatYAxisPercentage = (y: number) => `${formatPercentage(y)}%`;
 

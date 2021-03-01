@@ -250,7 +250,17 @@ export function TimeSeriesChart<T extends TimestampedValue>({
             );
         }
       }),
-    [handleHover, seriesConfig, seriesList, getX, getY, getY0, getY1, yScale]
+    [
+      handleHover,
+      seriesConfig,
+      seriesList,
+      getX,
+      getY,
+      getY0,
+      getY1,
+      yScale,
+      bounds,
+    ]
   );
 
   return (
