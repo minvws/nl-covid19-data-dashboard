@@ -4,6 +4,7 @@ import {
   TimestampedValue,
 } from '@corona-dashboard/common';
 import { pick } from 'lodash';
+import { useMemo } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
 import { getValuesInTimeframe, TimeframeOption } from '~/utils/timeframe';
 
@@ -42,6 +43,18 @@ export type AreaSeriesDefinition<T extends TimestampedValue> = {
   fillOpacity?: number;
   strokeWidth?: number;
 };
+
+export function useSeriesList<T extends TimestampedValue>(
+  values: T[],
+  seriesConfig: SeriesConfig<T>,
+  timeframe: TimeframeOption
+) {
+  return useMemo(() => getSeriesList(values, seriesConfig, timeframe), [
+    values,
+    seriesConfig,
+    timeframe,
+  ]);
+}
 
 /**
  * From all the defined values, extract the highest number so we know how to

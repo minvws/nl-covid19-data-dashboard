@@ -33,6 +33,7 @@ import {
   SeriesSingleValue,
   useHoverState,
   useLegendItems,
+  useSeriesList,
 } from './logic';
 export type { SeriesConfig } from './logic';
 
@@ -146,6 +147,8 @@ export function TimeSeriesChart<T extends TimestampedValue>({
 
   const legendItems = useLegendItems(seriesConfig);
 
+  const seriesList = useSeriesList(values, seriesConfig, timeframe);
+
   // const benchmark = useMemo(
   //   () =>
   //     benchmarkValue
@@ -153,11 +156,6 @@ export function TimeSeriesChart<T extends TimestampedValue>({
   //       : undefined,
   //   [signaalwaarde]
   // );
-
-  const seriesList = useMemo(
-    () => getSeriesList(values, seriesConfig, timeframe),
-    [values, seriesConfig, timeframe]
-  );
 
   const calculatedSeriesMax = useMemo(
     () => calculateSeriesMaximum(values, seriesConfig, benchmarkValue),
@@ -245,7 +243,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     values,
     paddingLeft: padding.left,
     seriesConfig,
-    seriesList: seriesList,
+    seriesList,
     xScale,
     yScale,
   });
