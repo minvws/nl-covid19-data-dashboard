@@ -14,7 +14,10 @@ export function TooltipContent(props: IProps) {
   const { title, onSelect, children } = props;
 
   return (
-    <StyledTooltipContent hasClickHandler={onSelect ? true : false}>
+    <StyledTooltipContent
+      onClick={onSelect}
+      hasClickHandler={onSelect ? true : false}
+    >
       <TooltipHeader>
         <Heading
           level={3}
