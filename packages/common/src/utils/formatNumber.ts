@@ -12,6 +12,6 @@ export function formatNumber(
   return NumberFormat.format(Number(value));
 }
 
-export function formatPercentage(value: number, maximumFractionDigits = 2) {
+export function formatPercentage(value: number, maximumFractionDigits = 1 as number) {
   return new Intl.NumberFormat(locale, { maximumFractionDigits }).format(value);
 }

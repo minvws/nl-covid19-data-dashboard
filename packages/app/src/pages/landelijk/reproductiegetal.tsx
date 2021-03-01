@@ -83,6 +83,7 @@ const ReproductionIndex: FCWithLayout<typeof getStaticProps> = (props) => {
               metricProperty="index_average"
               localeTextKey="reproductiegetal"
               differenceKey="reproduction__index_average"
+              differenceFractionDigits={2}
             />
             <Text>{text.barscale_toelichting}</Text>
           </KpiWithIllustrationTile>
