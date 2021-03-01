@@ -22,7 +22,8 @@ export function useScales(args: {
     /**
      * We could calculate the x domain based on the original values too, but in
      * the trends the timestamps are already unified for daily data and date
-     * spans like weeks. The week timestamp then falls in the middle of the week.
+     * spans like weeks. The week timestamp then falls in the middle of the
+     * week.
      */
     const [start, end] = extent(seriesList.flat().map((x) => x.__date_unix));
 
@@ -31,12 +32,18 @@ export function useScales(args: {
 
     const yDomain = [0, maximumValue];
 
+    /**
+     * To calculate the timespan width we need a full series worth of
+     * timestamps. This chart assumes that all series have the same length
+     * because they all originate from the same T[] values. If a trend is not
+     * full-length it should contain null values, but still have all the
+     * timestamps.
+     */
     const timespanMarkerData = seriesList[0];
 
     const dateSpanScale = scaleBand<number>({
       range: [0, bounds.width],
       domain: timespanMarkerData.map((x) => x.__date_unix),
-      // domain: xDomain,
     });
 
     const markerPadding = dateSpanScale.bandwidth() / 2;
