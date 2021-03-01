@@ -27,9 +27,10 @@ import {
   calculateSeriesMaximum,
   getSeriesList,
   Padding,
-  RangeSeriesValue,
+  SeriesDoubleValue,
   SeriesConfig,
-  SeriesValue,
+  SeriesItem,
+  SeriesSingleValue,
   useHoverState,
   useLegendItems,
 } from './logic';
@@ -83,11 +84,10 @@ const defaultPadding: Padding = {
  *
  * @TODO
  *
- * - Generate legend contents
- * - Include background rectangle in API
+ * - Include props for background rectangle aka date span annotation
  * - Move more logic out of main component
  * - Add signaalwaarde/benchmark marker
- * - Implement RangeTrend component
+ * - Finish RangeTrend component
  *
  * Known Issues:
  * - Bisect and nearest point calculations have a rounding / offset bug.
@@ -228,8 +228,18 @@ export function TimeSeriesChart<T extends TimestampedValue>({
    * @TODO remove these and pass scales directly to trend components to keep it
    * consistent
    */
-  const getX = useCallback((x: SeriesValue) => xScale(x.__date_unix), [xScale]);
-  const getY = useCallback((x: SeriesValue) => yScale(x.__value), [yScale]);
+  const getX = useCallback((x: SeriesItem) => xScale(x.__date_unix), [xScale]);
+  const getY = useCallback((x: SeriesSingleValue) => yScale(x.__value), [
+    yScale,
+  ]);
+
+  const getY0 = useCallback((x: SeriesDoubleValue) => yScale(x.__value_a), [
+    yScale,
+  ]);
+
+  const getY1 = useCallback((x: SeriesDoubleValue) => yScale(x.__value_b), [
+    yScale,
+  ]);
 
   const [handleHover, hoverState] = useHoverState({
     values,
@@ -274,7 +284,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
             return (
               <LineTrend
                 key={index}
-                series={series as SeriesValue[]}
+                series={series as SeriesSingleValue[]}
                 color={config.color}
                 style={config.style}
                 strokeWidth={config.strokeWidth}
@@ -287,7 +297,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
             return (
               <AreaTrend
                 key={index}
-                series={series as SeriesValue[]}
+                series={series as SeriesSingleValue[]}
                 color={config.color}
                 style={config.style}
                 fillOpacity={config.fillOpacity}
@@ -303,20 +313,18 @@ export function TimeSeriesChart<T extends TimestampedValue>({
             return (
               <RangeTrend
                 key={index}
-                series={series as RangeSeriesValue[]}
+                series={series as SeriesDoubleValue[]}
                 color={config.color}
                 fillOpacity={config.fillOpacity}
                 strokeWidth={config.strokeWidth}
-                // getX={getX}
-                // getY={getY}
-                xScale={xScale}
-                yScale={yScale}
-                // onHover={(evt) => handleHover(evt, index)}
+                getX={getX}
+                getY0={getY0}
+                getY1={getY1}
               />
             );
         }
       }),
-    [handleHover, seriesConfig, seriesList, yScale, getX, getY]
+    [handleHover, seriesConfig, seriesList, getX, getY, getY0, getY1, yScale]
   );
 
   if (!xDomain) {

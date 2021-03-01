@@ -1,16 +1,16 @@
 import { LinePath } from '@visx/shape';
 import { MouseEvent, TouchEvent, useState } from 'react';
-import { SeriesValue } from '../logic';
+import { SeriesSingleValue } from '../logic';
 
 export type LineStyle = 'solid' | 'dashed';
 
 export type LineTrendProps = {
-  series: SeriesValue[];
+  series: SeriesSingleValue[];
   color: string;
   style?: 'solid' | 'dashed';
   strokeWidth?: number;
-  getX: (v: SeriesValue) => number;
-  getY: (v: SeriesValue) => number;
+  getX: (v: SeriesSingleValue) => number;
+  getY: (v: SeriesSingleValue) => number;
   onHover: (event: TouchEvent<SVGElement> | MouseEvent<SVGElement>) => void;
 };
 

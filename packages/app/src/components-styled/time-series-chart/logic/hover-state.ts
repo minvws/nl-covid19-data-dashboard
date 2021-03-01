@@ -10,13 +10,13 @@ import { useCallback, useMemo, useRef, useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import {
   SeriesConfig,
-  RangeSeriesValue,
+  SeriesDoubleValue,
   SeriesList,
-  SeriesValue,
+  SeriesSingleValue,
 } from './series';
 
 export type HoveredPoint<T> = {
-  seriesValue: SeriesValue | RangeSeriesValue;
+  seriesValue: SeriesSingleValue | SeriesDoubleValue;
   metricProperty: keyof T;
   color: string;
   x: number;
@@ -139,7 +139,7 @@ export function useHoverState<T extends TimestampedValue>({
               return {
                 seriesValue,
                 x: xScale(seriesValue.__date_unix),
-                y: yScale((seriesValue as SeriesValue).__value),
+                y: yScale((seriesValue as SeriesSingleValue).__value),
                 color: config.color,
                 metricProperty: config.metricProperty,
               };
@@ -162,14 +162,14 @@ export function useHoverState<T extends TimestampedValue>({
                 {
                   seriesValue,
                   x: xScale(seriesValue.__date_unix),
-                  y: yScale((seriesValue as RangeSeriesValue).__value_low),
+                  y: yScale((seriesValue as SeriesDoubleValue).__value_a),
                   color: config.color,
                   metricProperty: config.metricPropertyLow,
                 },
                 {
                   seriesValue,
                   x: xScale(seriesValue.__date_unix),
-                  y: yScale((seriesValue as RangeSeriesValue).__value_high),
+                  y: yScale((seriesValue as SeriesDoubleValue).__value_b),
                   color: config.color,
                   metricProperty: config.metricPropertyHigh,
                 },

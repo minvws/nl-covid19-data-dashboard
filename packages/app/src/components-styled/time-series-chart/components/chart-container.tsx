@@ -17,11 +17,11 @@ interface ChartContainerProps {
   children: React.ReactNode;
   width: number;
   height: number;
+  padding: Padding;
   onHover: (
     event: React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>
   ) => void;
   valueAnnotation?: string;
-  padding: Padding;
   ariaLabelledBy: string;
 }
 

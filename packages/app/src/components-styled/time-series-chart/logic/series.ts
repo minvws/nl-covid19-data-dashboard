@@ -77,20 +77,20 @@ export function calculateSeriesMaximum<T extends TimestampedValue>(
   return Math.max(overallMaximum, benchmarkValue * 2, 1);
 }
 
-export type SeriesValue = {
+export type SeriesItem = {
   __date_unix: number;
+};
+export interface SeriesSingleValue extends SeriesItem {
   __value: number;
-};
-
-export type RangeSeriesValue = {
-  __date_unix: number;
-  __value_low: number;
-  __value_high: number;
-};
+}
+export interface SeriesDoubleValue extends SeriesItem {
+  __value_a: number;
+  __value_b: number;
+}
 
 export function isSeriesValue(
-  value: SeriesValue | RangeSeriesValue
-): value is SeriesValue {
+  value: SeriesSingleValue | SeriesDoubleValue
+): value is SeriesSingleValue {
   return isDefined((value as any).__value);
 }
 
@@ -100,7 +100,7 @@ export function isSeriesValue(
  * TrendList here doesn't use the union with TimestampedValue as the LineChart
  * because types got simplified in other places.
  */
-export type SeriesList = (SeriesValue[] | RangeSeriesValue[])[];
+export type SeriesList = (SeriesSingleValue[] | SeriesDoubleValue[])[];
 
 export function getSeriesList<T extends TimestampedValue>(
   values: T[],
@@ -124,21 +124,21 @@ export function getRangeSeriesData<T extends TimestampedValue>(
   values: T[],
   metricPropertyLow: keyof T,
   metricPropertyHigh: keyof T
-): RangeSeriesValue[] {
+): SeriesDoubleValue[] {
   const seriesLow = getSeriesData(values, metricPropertyLow);
   const seriesHigh = getSeriesData(values, metricPropertyHigh);
 
   return seriesLow.map((x, index) => ({
     __date_unix: x.__date_unix,
-    __value_low: x.__value,
-    __value_high: seriesHigh[index].__value,
+    __value_a: x.__value,
+    __value_b: seriesHigh[index].__value,
   }));
 }
 
 export function getSeriesData<T extends TimestampedValue>(
   values: T[],
   metricProperty: keyof T
-): SeriesValue[] {
+): SeriesSingleValue[] {
   if (values.length === 0) {
     /**
      * It could happen that you are using an old dataset and select last week as
@@ -160,7 +160,7 @@ export function getSeriesData<T extends TimestampedValue>(
           __date_unix: x.date_unix,
         }))
         // Filter any possible null values
-        .filter((x) => isPresent(x.__value)) as SeriesValue[]
+        .filter((x) => isPresent(x.__value)) as SeriesSingleValue[]
     );
   }
 
@@ -181,7 +181,7 @@ export function getSeriesData<T extends TimestampedValue>(
             x.date_start_unix + (x.date_end_unix - x.date_start_unix) / 2,
         }))
         // Filter any possible null values
-        .filter((x) => isPresent(x.__value)) as SeriesValue[]
+        .filter((x) => isPresent(x.__value)) as SeriesSingleValue[]
     );
   }
 

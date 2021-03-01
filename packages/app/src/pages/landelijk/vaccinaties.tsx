@@ -25,7 +25,7 @@ import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { InlineText, Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
-// import { VaccineSupportTooltip } from '~/domain/vaccine/components/vaccine-support-tooltip';
+import { VaccineSupportTooltip } from '~/domain/vaccine/components/vaccine-support-tooltip';
 import { createDeliveryTooltipFormatter } from '~/domain/vaccines/create-delivery-tooltip-formatter';
 import { useVaccineDeliveryData } from '~/domain/vaccines/use-vaccine-delivery-data';
 import { useVaccineNames } from '~/domain/vaccines/use-vaccine-names';
@@ -365,7 +365,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                 }}
                 seriesConfig={[
                   {
-                    type: 'area',
+                    type: 'line',
                     metricProperty: 'percentage_16_24',
                     label: replaceVariablesInText(
                       text.grafiek_draagvlak.leeftijd_jaar,
@@ -374,25 +374,23 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                     color: '#005082',
                   },
                   {
-                    type: 'range',
-                    metricPropertyLow: 'percentage_25_39',
-                    metricPropertyHigh: 'percentage_40_54',
+                    type: 'line',
+                    metricProperty: 'percentage_25_39',
                     label: replaceVariablesInText(
                       text.grafiek_draagvlak.leeftijd_jaar,
-                      // { ageGroup: '25 - 39' }
-                      { ageGroup: '25 - 54' }
+                      { ageGroup: '25 - 39' }
                     ),
                     color: '#00BBB5',
                   },
-                  // {
-                  //   type: 'area',
-                  //   metricProperty: 'percentage_40_54',
-                  //   label: replaceVariablesInText(
-                  //     text.grafiek_draagvlak.leeftijd_jaar,
-                  //     { ageGroup: '40 - 54' }
-                  //   ),
-                  //   color: '#FFC000',
-                  // },
+                  {
+                    type: 'line',
+                    metricProperty: 'percentage_40_54',
+                    label: replaceVariablesInText(
+                      text.grafiek_draagvlak.leeftijd_jaar,
+                      { ageGroup: '40 - 54' }
+                    ),
+                    color: '#FFC000',
+                  },
                   {
                     type: 'line',
                     metricProperty: 'percentage_55_69',
@@ -412,14 +410,112 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                     color: '#C252D4',
                   },
                 ]}
-                // formatTooltip={({ value, valueKey, config }) => (
-                //   <VaccineSupportTooltip
-                //     locale={locale}
-                //     value={value}
-                //     valueKey={valueKey}
-                //     config={config}
-                //   />
-                // )}
+                formatTooltip={({ value, valueKey, config }) => (
+                  <VaccineSupportTooltip
+                    locale={locale}
+                    value={value}
+                    valueKey={valueKey}
+                    config={config}
+                  />
+                )}
+              />
+            )}
+          </ParentSize>
+        </ChartTile>
+
+        {/**
+         * The chart below is a botched version of the vaccine support chart
+         * above. This is just to test and demonstrate how the chart can be
+         * configured for multiple types and what a default standardized tooltip
+         * could be like.
+         *
+         * This is not meant to be merged to develop.
+         */}
+        <ChartTile
+          title={text.grafiek_draagvlak.titel}
+          description={text.grafiek_draagvlak.omschrijving}
+          ariaDescription={locale.accessibility.grafieken.vaccinatie_draagvlak}
+          metadata={{
+            date: data.vaccine_support.last_value.date_of_insertion_unix,
+            source: text.bronnen.rivm,
+          }}
+        >
+          <section>
+            <KpiValue
+              percentage={data.vaccine_support.last_value.percentage_average}
+            />
+            <Text mt={0}>{text.grafiek_draagvlak.kpi_omschrijving}</Text>
+          </section>
+
+          <ParentSize>
+            {({ width }) => (
+              <TimeSeriesChart
+                title={text.grafiek_draagvlak.titel}
+                timeframe="all"
+                width={width}
+                ariaLabelledBy="chart_vaccine_support"
+                values={data.vaccine_support.values}
+                showDateMarker
+                tickValues={[0, 25, 50, 75, 100]}
+                paddingLeft={36}
+                dataOptions={{
+                  isPercentage: true,
+                  forcedMaximumValue: 100,
+                }}
+                seriesConfig={[
+                  {
+                    /**
+                     * Type area as a different type of line. Not sure if we
+                     * even need to treat this as a different type.
+                     */
+                    type: 'area',
+                    metricProperty: 'percentage_16_24',
+                    label: replaceVariablesInText(
+                      text.grafiek_draagvlak.leeftijd_jaar,
+                      { ageGroup: '16 - 24' }
+                    ),
+                    color: '#005082',
+                  },
+                  {
+                    /**
+                     * Range is really a different type, with two properties
+                     * instead of one. Here we group two age groups into one
+                     * shape by setting one for range low and one for high.
+                     */
+                    type: 'range',
+                    metricPropertyLow: 'percentage_25_39',
+                    metricPropertyHigh: 'percentage_40_54',
+                    label: replaceVariablesInText(
+                      text.grafiek_draagvlak.leeftijd_jaar,
+                      { ageGroup: '25 - 54' }
+                    ),
+                    color: '#00BBB5',
+                  },
+
+                  {
+                    type: 'line',
+                    metricProperty: 'percentage_55_69',
+                    label: replaceVariablesInText(
+                      text.grafiek_draagvlak.leeftijd_jaar,
+                      { ageGroup: '55 - 69' }
+                    ),
+                    color: '#E28700',
+                  },
+                  {
+                    type: 'line',
+                    metricProperty: 'percentage_70_plus',
+                    label: replaceVariablesInText(
+                      text.grafiek_draagvlak.leeftijd_jaar,
+                      { ageGroup: '70+' }
+                    ),
+                    color: '#C252D4',
+                  },
+                ]}
+                /**
+                 * No formatTooltip here. This chart uses the seriesConfig to
+                 * render a default tooltip for multiple types and properties in
+                 * a standardized way. way.
+                 */
               />
             )}
           </ParentSize>
