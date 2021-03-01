@@ -39,8 +39,12 @@ export function useScales(args: {
      * full-length it should contain null values, but still have all the
      * timestamps.
      */
-    const timespanMarkerData = seriesList[0];
-
+    const timespanMarkerData = seriesList[0] as SeriesItem[];
+    /**
+     * ☝️ weird. Typescript 4.3 doesn't complain below when mapping over the
+     * data, but TS 4.2 thinks x is any. So I'm just leaving this cast to
+     * SeriesItem until 4.3 comes along as the official version.
+     */
     const dateSpanScale = scaleBand<number>({
       range: [0, bounds.width],
       domain: timespanMarkerData.map((x) => x.__date_unix),
