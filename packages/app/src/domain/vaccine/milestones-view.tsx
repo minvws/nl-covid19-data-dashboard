@@ -197,6 +197,7 @@ const StyledButton = styled.button(
   css({
     position: 'relative',
     padding: 0,
+    margin: 0,
     border: 'none',
     background: 'none',
     font: 'inherit',
