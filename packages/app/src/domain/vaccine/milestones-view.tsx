@@ -74,7 +74,7 @@ export function MilestonesView(props: MilestoneViewProps) {
           </ListItem>
         )}
 
-        {milestones.map((item, index) => (
+        {milestones.map((milestone, index) => (
           <Fragment key={index}>
             {(isExpanded ||
               index > milestones.length - 1 - MAX_ITEMS_VISIBLE) && (
@@ -89,9 +89,9 @@ export function MilestonesView(props: MilestoneViewProps) {
                         color="gray"
                         css={css({ position: 'absolute', top: '-1.3rem' })}
                       >
-                        {formatDate(new Date(item.date))}
+                        {formatDate(new Date(milestone.date))}
                       </InlineText>
-                      <Text m={0}>{item.title}</Text>
+                      <Text m={0}>{milestone.title}</Text>
                     </Box>
                   </ListItem>
                 ) : (
@@ -110,7 +110,7 @@ export function MilestonesView(props: MilestoneViewProps) {
                         fontWeight="bold"
                         css={css({ position: 'absolute', top: '-1.3rem' })}
                       >
-                        {formatDate(new Date(item.date))}
+                        {formatDate(new Date(milestone.date))}
                       </InlineText>
                       <Text
                         m={0}
@@ -119,7 +119,7 @@ export function MilestonesView(props: MilestoneViewProps) {
                         fontWeight="bold"
                         lineHeight={0}
                       >
-                        {item.title}
+                        {milestone.title}
                       </Text>
                     </Box>
                   </ListItemLast>
@@ -136,8 +136,10 @@ export function MilestonesView(props: MilestoneViewProps) {
             {siteText.milestones.verwacht}
           </Text>
           <Box as="ul" p={0} m={0} css={css({ listStyleType: 'none' })}>
-            {expectedMilestones.map((item, index) => (
-              <ExpectedListItem key={index}>{item.item}</ExpectedListItem>
+            {expectedMilestones.map((expectedMilestone, index) => (
+              <ExpectedListItem key={index}>
+                {expectedMilestone.item}
+              </ExpectedListItem>
             ))}
           </Box>
         </Box>
@@ -146,7 +148,7 @@ export function MilestonesView(props: MilestoneViewProps) {
   );
 }
 
-const ListItemStyles = {
+const commonListItemStyles = {
   position: 'relative',
   display: 'flex',
   pb: 4,
@@ -162,18 +164,18 @@ const ListItemStyles = {
   },
 } as React.CSSProperties;
 
-const ListItem = styled.li(css({ ...ListItemStyles }));
+const ListItem = styled.li(css(commonListItemStyles));
 
 const ListItemFirst = styled.li<{ isExpanded: boolean }>((x) =>
   css({
-    ...ListItemStyles,
+    ...commonListItemStyles,
     paddingBottom: x.isExpanded ? 4 : 3,
   })
 );
 
 const ListItemLast = styled.li(
   css({
-    ...ListItemStyles,
+    ...commonListItemStyles,
     paddingTop: '3.3rem',
     color: 'white',
 
