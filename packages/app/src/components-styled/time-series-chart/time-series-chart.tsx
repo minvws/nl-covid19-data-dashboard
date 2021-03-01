@@ -1,7 +1,5 @@
 import { TimestampedValue } from '@corona-dashboard/common';
-import { scaleBand, scaleLinear } from '@visx/scale';
 import { useTooltip } from '@visx/tooltip';
-import { extent } from 'd3-array';
 import { useCallback, useEffect, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
@@ -9,6 +7,7 @@ import { TimeframeOption } from '~/utils/timeframe';
 import { Legend } from '../legend';
 import { ValueAnnotation } from '../value-annotation';
 import {
+  AreaTrend,
   Axes,
   ChartContainer,
   DateLineMarker,
@@ -16,33 +15,23 @@ import {
   LineTrend,
   Overlay,
   PointMarkers,
+  RangeTrend,
   Tooltip,
   TooltipData,
   TooltipFormatter,
 } from './components';
-import { AreaTrend } from './components/area-trend';
-import { RangeTrend } from './components/range-trend';
 import {
-  Bounds,
   calculateSeriesMaximum,
-  getSeriesList,
-  Padding,
-  SeriesDoubleValue,
   SeriesConfig,
-  SeriesItem,
+  SeriesDoubleValue,
   SeriesSingleValue,
   useHoverState,
   useLegendItems,
+  useScales,
   useSeriesList,
 } from './logic';
+import { useDimensions } from './logic/dimensions';
 export type { SeriesConfig } from './logic';
-
-const defaultPadding: Padding = {
-  top: 10,
-  right: 20,
-  bottom: 30,
-  left: 30,
-};
 
 /**
  * This chart started as a fork from MultiLineChart. It attempts to create a
@@ -145,6 +134,8 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     forcedMaximumValue,
   } = dataOptions;
 
+  const { padding, bounds } = useDimensions(width, height, paddingLeft);
+
   const legendItems = useLegendItems(seriesConfig);
 
   const seriesList = useSeriesList(values, seriesConfig, timeframe);
@@ -166,78 +157,14 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     ? forcedMaximumValue
     : calculatedSeriesMax;
 
-  const xDomain = useMemo(() => {
-    const domain = extent(seriesList.flat().map((x) => x.__date_unix));
-
-    return isDefined(domain[0]) && isDefined(domain[1])
-      ? (domain as [number, number])
-      : undefined;
-  }, [seriesList]);
-
-  const yDomain = useMemo(() => [0, seriesMax], [seriesMax]);
-
-  const padding = useMemo(
-    () =>
-      ({
-        ...defaultPadding,
-        left: paddingLeft || defaultPadding.left,
-      } as Padding),
-    [paddingLeft]
+  const { xScale, yScale, getX, getY, getY0, getY1, dateSpanWidth } = useScales(
+    {
+      seriesList,
+      maximumValue: seriesMax,
+      bounds,
+      numTicks: tickValues?.length || numTicks,
+    }
   );
-
-  const timespanMarkerData = seriesList[0];
-
-  const bounds: Bounds = {
-    width: width - padding.left - padding.right,
-    height: height - padding.top - padding.bottom,
-  };
-
-  /**
-   * @TODO move calculation of datespan to hook only, maybe only pass in
-   * original data and not trend
-   */
-  const dateSpanScale = useMemo(
-    () =>
-      scaleBand<number>({
-        range: [0, bounds.width],
-        domain: timespanMarkerData.map((x) => x.__date_unix),
-      }),
-    [bounds.width, timespanMarkerData]
-  );
-
-  const markerPadding = dateSpanScale.bandwidth() / 2;
-
-  /**
-   * @TODO see if we can use scale linear instead and stick to unix numbers in
-   * reverse lookup.
-   */
-  const xScale = scaleLinear({
-    domain: xDomain,
-    range: [markerPadding, bounds.width - markerPadding],
-  });
-
-  const yScale = scaleLinear({
-    domain: yDomain,
-    range: [bounds.height, 0],
-    nice: tickValues?.length || numTicks,
-  });
-
-  /**
-   * @TODO remove these and pass scales directly to trend components to keep it
-   * consistent
-   */
-  const getX = useCallback((x: SeriesItem) => xScale(x.__date_unix), [xScale]);
-  const getY = useCallback((x: SeriesSingleValue) => yScale(x.__value), [
-    yScale,
-  ]);
-
-  const getY0 = useCallback((x: SeriesDoubleValue) => yScale(x.__value_a), [
-    yScale,
-  ]);
-
-  const getY1 = useCallback((x: SeriesDoubleValue) => yScale(x.__value_b), [
-    yScale,
-  ]);
 
   const [handleHover, hoverState] = useHoverState({
     values,
@@ -325,10 +252,6 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     [handleHover, seriesConfig, seriesList, getX, getY, getY0, getY1, yScale]
   );
 
-  if (!xDomain) {
-    return null;
-  }
-
   return (
     <Box>
       {annotation && <ValueAnnotation mb={2}>{annotation}</ValueAnnotation>}
@@ -365,7 +288,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
         {hoverState && (
           <Overlay bounds={bounds} padding={padding}>
             <DateSpanMarker
-              width={dateSpanScale.bandwidth()}
+              width={dateSpanWidth}
               point={hoverState.nearestLinePoint}
             />
             {showDateMarker && (
