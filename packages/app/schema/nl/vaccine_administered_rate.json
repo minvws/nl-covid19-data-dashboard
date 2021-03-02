@@ -4,23 +4,23 @@
       "title": "nl_vaccine_administered_rate_value",
       "type": "object",
       "required": [
-        "doses_per_second",
-        "seconds_per_dose",
-        "doses_per_week_moving_average",
+        "doses_per_second_average",
+        "seconds_per_dose_average",
+        "doses_sum",
         "date_start_unix",
         "date_end_unix",
         "date_of_insertion_unix"
       ],
       "additionalProperties": false,
       "properties": {
-        "doses_per_second": {
+        "doses_per_second_average": {
           "type": "number"
         },
-        "seconds_per_dose": {
+        "seconds_per_dose_average": {
           "type": "number"
         },
-        "doses_per_week_moving_average": {
-          "type": "number"
+        "doses_sum": {
+          "type": "integer"
         },
         "date_start_unix": {
           "type": "integer"
