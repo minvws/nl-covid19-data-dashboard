@@ -16,11 +16,13 @@ type EscalationLevelExplanationProps = {
 function EscalationLevelExplanation(props: EscalationLevelExplanationProps) {
   const { level, explanation } = props;
   return (
-    <Box display="flex" flexDirection={{ _: 'column', md: 'row' }}>
+    <Box display="flex" flexDirection={{ _: 'column', md: 'row' }} py={3}>
       <Box width="10rem" display="flex" flexGrow={0} flexShrink={0}>
         <EscalationLevelInfoLabel level={level} />
       </Box>
-      <Text css={css({ maxWidth: 'maxWidthText' })}>{explanation}</Text>
+      <Text mb={0} css={css({ maxWidth: 'maxWidthText' })}>
+        {explanation}
+      </Text>
     </Box>
   );
 }

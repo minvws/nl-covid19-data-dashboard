@@ -29,6 +29,9 @@ const MARKDOWN_KEYS = [
   'vr_risiconiveau.types[2].toelichting',
   'vr_risiconiveau.types[3].toelichting',
   'vr_risiconiveau.types[4].toelichting',
+  'rioolwater_metingen.warning_method',
+  'veiligheidsregio_rioolwater_metingen.warning_method',
+  'gemeente_rioolwater_metingen.warning_method',
 ];
 
 export function parseMarkdownInLocale(text: Locale) {

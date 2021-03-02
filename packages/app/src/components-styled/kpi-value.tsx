@@ -1,11 +1,11 @@
+import { DifferenceDecimal, DifferenceInteger } from '@corona-dashboard/common';
 import styled from 'styled-components';
 import { color } from 'styled-system';
 import { isDefined } from 'ts-is-present';
-import { formatNumber, formatPercentage } from '~/utils/formatNumber';
-import { ValueAnnotation } from '~/components-styled/value-annotation';
-import { DifferenceDecimal, DifferenceInteger } from '@corona-dashboard/common';
+import { Box } from '~/components-styled/base';
 import { DifferenceIndicator } from '~/components-styled/difference-indicator';
-
+import { ValueAnnotation } from '~/components-styled/value-annotation';
+import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 interface KpiValueProps {
   absolute?: number;
   percentage?: number;
@@ -49,7 +49,7 @@ export function KpiValue({
   ...otherProps
 }: KpiValueProps) {
   return (
-    <>
+    <Box mb={3}>
       {isDefined(percentage) && isDefined(absolute) ? (
         <StyledValue color={color} {...otherProps}>
           {`${formatNumber(absolute)} (${formatPercentage(percentage)}%)`}
@@ -74,6 +74,6 @@ export function KpiValue({
         />
       )}
       {valueAnnotation && <ValueAnnotation>{valueAnnotation}</ValueAnnotation>}
-    </>
+    </Box>
   );
 }

@@ -31,6 +31,7 @@ import localeText from './locale/locale-text';
 //objects are building blocks, but not queryable in itself
 import collapsible from './objects/collapsible';
 import lineChart from './objects/line-chart';
+import milestone from './objects/milestone';
 import lockdown from './restrictions/lockdown';
 import restriction from './restrictions/restriction';
 import restrictionCategory from './restrictions/restriction-category';
@@ -76,6 +77,7 @@ export default createSchema({
     /* OBJECTS */
     lineChart,
     collapsible,
+    milestone,
 
     /* LOCALE HELPERS */
     localeString,

@@ -53,6 +53,7 @@ export function TopicalChoroplethContainer({
           level={2}
           fontSize={{ _: '2rem', lg: '2.75em' }}
           lineHeight="1em"
+          mb={4}
         >
           {title}
         </Heading>

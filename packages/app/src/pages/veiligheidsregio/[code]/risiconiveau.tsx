@@ -29,6 +29,7 @@ import {
   getText,
   getVrData,
 } from '~/static-props/get-data';
+import { formatDateFromSeconds } from '~/utils/formatDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { useEscalationColor } from '~/utils/use-escalation-color';
 
@@ -120,6 +121,13 @@ const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
                   __html: text.types[currentLevel].toelichting,
                 }}
               />
+              <Text fontWeight="bold">
+                {replaceVariablesInText(text.escalation_level_last_determined, {
+                  last_determined: formatDateFromSeconds(
+                    data.escalation_level.last_determined_unix
+                  ),
+                })}
+              </Text>
             </Box>
           </Box>
         </Tile>

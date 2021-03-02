@@ -28,6 +28,7 @@ import { VisuallyHidden } from '~/components-styled/visually-hidden';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import { createDeliveryTooltipFormatter } from '~/domain/vaccines/create-delivery-tooltip-formatter';
+import { useVaccineDeliveryData } from '~/domain/vaccines/use-vaccine-delivery-data';
 import { useVaccineNames } from '~/domain/vaccines/use-vaccine-names';
 import siteText from '~/locale/index';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
@@ -42,14 +43,27 @@ import { colors } from '~/style/theme';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { vaccineMilestonesQuery } from '~/queries/vaccine-milestones-query';
+import {
+  MilestonesView,
+  MilestoneViewProps,
+} from '~/domain/vaccine/milestones-view';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   getNlData,
   getText,
   createGetContent<{
-    articles?: ArticleSummary[];
-  }>(createPageArticlesQuery('vaccinationsPage'))
+    milestones: MilestoneViewProps;
+    highlight: {
+      articles?: ArticleSummary[];
+    };
+  }>(
+    `{
+      "milestones": ${vaccineMilestonesQuery},
+      "highlight": ${createPageArticlesQuery('vaccinationsPage')} 
+    }`
+  )
 );
 
 const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
@@ -62,24 +76,21 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
     text.gezette_prikken.tab_first.title
   );
 
+  const { milestones } = content;
+
   const additions = text.expected_page_additions.additions.filter(
     (x) => x.length
   );
-  const vaccineDeliveryValues = [...data.vaccine_delivery.values];
-  const vaccineDeliveryEstimateValues = [
-    ...data.vaccine_delivery_estimate.values,
-  ];
-  const vaccineAdministeredValues = [...data.vaccine_administered.values];
-  const vaccineAdministeredEstimateValues = [
-    ...data.vaccine_administered_estimate.values,
-  ];
 
   const vaccineNames = useVaccineNames(data.vaccine_administered.last_value);
 
-  // add the first estimate to the delivered values, otherwise the lines and stacks will
-  // have a gap between them
-  vaccineDeliveryValues.push({ ...vaccineDeliveryEstimateValues[0] });
-  vaccineAdministeredValues.push({ ...vaccineAdministeredEstimateValues[0] });
+  const [
+    vaccineDeliveryValues,
+    vaccineDeliveryEstimateValues,
+    vaccineAdministeredValues,
+    vaccineAdministeredEstimateValues,
+  ] = useVaccineDeliveryData(data);
+
   return (
     <>
       <SEOHead
@@ -102,7 +113,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
           }}
         />
 
-        <ArticleStrip articles={content.articles} />
+        <ArticleStrip articles={content.highlight.articles} />
 
         <TwoKpiSection>
           <KpiTile
@@ -336,6 +347,13 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             />
           </Box>
         </ChartTile>
+
+        <MilestonesView
+          title={milestones.title}
+          description={milestones.description}
+          milestones={milestones.milestones}
+          expectedMilestones={milestones.expectedMilestones}
+        />
 
         <ChartTile
           title={text.grafiek_draagvlak.titel}

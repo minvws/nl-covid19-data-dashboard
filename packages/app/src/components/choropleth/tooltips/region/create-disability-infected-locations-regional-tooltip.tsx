@@ -1,14 +1,18 @@
 import {
+  ChoroplethThresholdsValue,
   RegionsDisabilityCare,
   SafetyRegionProperties,
 } from '@corona-dashboard/common';
 import { ReactNode } from 'react';
-import { Text } from '~/components-styled/typography';
+import { InlineText } from '~/components-styled/typography';
+import { TooltipSubject } from '~/components/choropleth/tooltips/tooltip-subject';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { RegionSelectionHandler } from '../../select-handlers/create-select-region-handler';
-import { TooltipContent } from '../tooltipContent';
+import { TooltipContent } from '../tooltip-content';
 
 export const createDisablityInfectedLocationsRegionalTooltip = (
+  subject: string,
+  thresholdValues: ChoroplethThresholdsValue[],
   selectHandler: RegionSelectionHandler
 ) => (context: SafetyRegionProperties & RegionsDisabilityCare): ReactNode => {
   const onSelect = (event: any) => {
@@ -18,11 +22,17 @@ export const createDisablityInfectedLocationsRegionalTooltip = (
 
   return (
     <TooltipContent title={context.vrname} onSelect={onSelect}>
-      <Text m={0} fontWeight="bold">
-        {`${formatPercentage(
-          context.infected_locations_percentage
-        )}% (${formatNumber(context.infected_locations_total)})`}
-      </Text>
+      <TooltipSubject
+        subject={subject}
+        thresholdValues={thresholdValues}
+        filterBelow={context.infected_locations_total}
+      >
+        <InlineText fontWeight="bold">
+          {`${formatPercentage(
+            context.infected_locations_percentage
+          )}% (${formatNumber(context.infected_locations_total)})`}{' '}
+        </InlineText>
+      </TooltipSubject>
     </TooltipContent>
   );
 };
