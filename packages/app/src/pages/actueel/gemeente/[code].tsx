@@ -209,39 +209,34 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
 
             <Box pb={4}>
               <TopicalTile>
-                <>
-                  <TopicalChoroplethContainer
-                    title={text.risiconiveaus.selecteer_titel}
-                    description={
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: text.risiconiveaus.selecteer_toelichting,
-                        }}
-                      />
-                    }
-                    legendComponent={
-                      <EscalationMapLegenda
-                        data={choropleth.vr}
-                        metricName="escalation_levels"
-                        metricProperty="level"
-                      />
-                    }
-                  >
-                    <SafetyRegionChoropleth
+                <TopicalChoroplethContainer
+                  title={text.risiconiveaus.selecteer_titel}
+                  description={
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: text.risiconiveaus.selecteer_toelichting,
+                      }}
+                    />
+                  }
+                  legendComponent={
+                    <EscalationMapLegenda
                       data={choropleth.vr}
                       metricName="escalation_levels"
                       metricProperty="level"
-                      onSelect={createSelectRegionHandler(
-                        router,
-                        'risiconiveau'
-                      )}
-                      tooltipContent={escalationTooltip(
-                        createSelectRegionHandler(router, 'risiconiveau')
-                      )}
-                      highlightCode={safetyRegionForMunicipality?.code}
                     />
-                  </TopicalChoroplethContainer>
-                </>
+                  }
+                >
+                  <SafetyRegionChoropleth
+                    data={choropleth.vr}
+                    metricName="escalation_levels"
+                    metricProperty="level"
+                    onSelect={createSelectRegionHandler(router, 'risiconiveau')}
+                    tooltipContent={escalationTooltip(
+                      createSelectRegionHandler(router, 'risiconiveau')
+                    )}
+                    highlightCode={safetyRegionForMunicipality?.code}
+                  />
+                </TopicalChoroplethContainer>
               </TopicalTile>
               <Box
                 borderTopWidth="1px"

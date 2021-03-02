@@ -198,13 +198,9 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
             )}
 
             <Box pb={4}>
-              <TopicalSectionHeader
-                title={text.secties.risicokaart.titel}
-                link={text.secties.risicokaart.link}
-              />
+              <TopicalSectionHeader title={text.secties.risicokaart.titel} />
               <TopicalTile>
                 <TopicalChoroplethContainer
-                  // title={text.risiconiveaus.selecteer_titel}
                   description={
                     <div
                       dangerouslySetInnerHTML={{
@@ -244,9 +240,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
               </TopicalTile>
             </Box>
 
-            <DataSitemap />
-
-            <Box mt={{ md: 5 }}>
+            <Box pb={4}>
               <TopicalSectionHeader
                 title={text.secties.meer_lezen.titel}
                 description={text.secties.meer_lezen.omschrijving}
@@ -254,6 +248,8 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
               />
               <ArticleList articleSummaries={content.articles} />
             </Box>
+
+            <DataSitemap />
           </TileList>
         </MaxWidth>
       </Box>

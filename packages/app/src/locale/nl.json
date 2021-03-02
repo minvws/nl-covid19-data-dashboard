@@ -2252,18 +2252,10 @@
         }
       },
       "risicokaart": {
-        "titel": "De risicokaart van Nederland",
-        "link": {
-          "text": "Bekijk de risiconiveaus van alle regio's",
-          "href": "__@TODO_add_link"
-        }
+        "titel": "De risicokaart van Nederland"
       },
       "positief_geteste_mensen": {
-        "titel": "Positief geteste mensen in Nederland",
-        "link": {
-          "text": "",
-          "href": "__@TODO_add_link"
-        }
+        "titel": "Positief geteste mensen in Nederland"
       },
       "meer_lezen": {
         "titel": "Meer lezen over het coronavirus",

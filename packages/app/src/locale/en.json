@@ -2238,9 +2238,9 @@
 
     "secties": {
       "actuele_situatie": {
-        "titel": "The current situation in {{the_netherlands}}",
+        "titel": "De actuele situatie in {{the_netherlands}}",
         "link": {
-          "text": "View all data for the Netherlands",
+          "text": "Bekijk alle cijfers van Nederland",
           "href": "/landelijk/vaccinaties"
         }
       },
@@ -2248,28 +2248,21 @@
         "titel": "Actuele artikelen",
         "link": {
           "text": "Bekijk alle artikelen ",
-          "href": "__@TODO_add_link"
+          "href": "/artikelen"
         }
       },
       "risicokaart": {
-        "titel": "De risicokaart van Nederland",
-        "link": {
-          "text": "Bekijk de risiconiveaus van alle regio's",
-          "href": "__@TODO_add_link"
-        }
+        "titel": "De risicokaart van Nederland"
       },
       "positief_geteste_mensen": {
-        "titel": "Positief geteste mensen in Nederland",
-        "link": {
-          "text": "Bekijk de risiconiveaus van alle regio's",
-          "href": "__@TODO_add_link"
-        }
+        "titel": "Positief geteste mensen in Nederland"
       },
       "meer_lezen": {
         "titel": "Meer lezen over het coronavirus",
+        "omschrijving": "Hier vindt u geregeld nieuwe berichten die allerlei zaken rondom de coronacijfers uitleggen.",
         "link": {
-          "text": "Bekijk de risiconiveaus van alle regio's",
-          "href": "__@TODO_add_link"
+          "text": "Bekijk alle artikelen",
+          "href": "/artikelen"
         }
       }
     },
