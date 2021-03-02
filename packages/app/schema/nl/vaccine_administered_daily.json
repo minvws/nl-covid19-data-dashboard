@@ -4,23 +4,23 @@
       "title": "nl_vaccine_administered_daily_value",
       "type": "object",
       "required": [
-        "administrations_per_second",
-        "seconds_per_administration",
-        "moving_average",
+        "doses_per_second",
+        "seconds_per_dose",
+        "doses_per_week_moving_average",
         "date_start_unix",
         "date_end_unix",
         "date_of_insertion_unix"
       ],
       "additionalProperties": false,
       "properties": {
-        "administrations_per_second": {
+        "doses_per_second": {
           "type": "number"
         },
-        "seconds_per_administration": {
+        "seconds_per_dose": {
           "type": "number"
         },
-        "administrations_per_week_moving_average": {
-          "type": "integer"
+        "doses_per_week_moving_average": {
+          "type": "number"
         },
         "date_start_unix": {
           "type": "integer"
