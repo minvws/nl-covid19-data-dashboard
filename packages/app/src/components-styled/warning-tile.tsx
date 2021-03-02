@@ -84,12 +84,13 @@ const IconWrapper = styled(Box)(
 const WarningMessageBox = styled(Box)<{ variant: WarningMessageVariant }>(
   ({ variant }) => {
     const backgroundColor = variant === 'emphasis' ? '#FFEE87' : 'white';
+    const pl = variant === 'emphasis' ? 3 : 0;
     return css({
       display: 'flex',
       alignItems: 'center',
       flex: '1 1 auto',
       py: 3,
-      pl: 3,
+      pl,
       backgroundColor,
       borderBottomRightRadius: 1,
       borderTopRightRadius: 1,
