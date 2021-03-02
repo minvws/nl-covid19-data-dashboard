@@ -48,6 +48,7 @@ import {
   MilestonesView,
   MilestoneViewProps,
 } from '~/domain/vaccine/milestones-view';
+import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -61,7 +62,7 @@ export const getStaticProps = createGetStaticProps(
   }>(
     `{
       "milestones": ${vaccineMilestonesQuery},
-      "highlight": ${createPageArticlesQuery('vaccinationsPage')} 
+      "highlight": ${createPageArticlesQuery('vaccinationsPage')}
     }`
   )
 );
@@ -99,7 +100,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
       />
       <TileList>
         <ContentHeader
-          category={siteText.nationaal_layout.headings.vaccinaties}
+          isTileLayout
           title={text.title}
           icon={<VaccinatieIcon />}
           subtitle={text.description}
@@ -111,7 +112,24 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
               data.vaccine_administered_total.last_value.date_of_insertion_unix,
             dataSources: [],
           }}
-        />
+        >
+          <Text fontSize="1.625rem">
+            {replaceComponentsInText(
+              text.current_amount_of_administrations_text,
+              {
+                amount: (
+                  <InlineText color="data.primary" fontWeight="bold">
+                    {formatPercentage(
+                      data.vaccine_administered_total.last_value.estimated /
+                        1_000_000
+                    )}{' '}
+                    {siteText.common.miljoen}
+                  </InlineText>
+                ),
+              }
+            )}
+          </Text>
+        </ContentHeader>
 
         <ArticleStrip articles={content.highlight.articles} />
 

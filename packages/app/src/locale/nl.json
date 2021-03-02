@@ -664,7 +664,8 @@
     "vandaag": "Vandaag",
     "read_more": "Lees meer",
     "absolute_date_template": "op {{date}}",
-    "inwoners": "inwoners"
+    "inwoners": "inwoners",
+    "miljoen": "miljoen"
   },
   "seoHead": {
     "default_description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
@@ -2014,6 +2015,7 @@
       "description": "Op 6 januari 2021 is Nederland begonnen met vaccineren. De cijfers op het Coronadashboard laten zien hoeveel prikken zijn gezet en hoeveel vaccins er beschikbaar komen."
     },
     "title": "COVID-19-vaccinaties",
+    "current_amount_of_administrations_text": "Op dit moment zijn er naar verwachting {{amount}} prikken gezet in Nederland",
     "description": "Vaccineren is de belangrijkste stap naar een samenleving zonder coronaregels. Op 6 januari 2021 is Nederland begonnen met vaccineren. Uiteindelijk komt iedereen van 18 jaar of ouder aan de beurt. De cijfers op deze pagina laten zien hoeveel prikken zijn gezet en hoeveel vaccins er beschikbaar komen.",
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "date_unix": "1613650547",

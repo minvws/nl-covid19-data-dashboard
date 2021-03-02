@@ -1,20 +1,22 @@
+import { assert } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
+import { Box } from '~/components-styled/base';
 import {
   Metadata,
   MetadataProps,
 } from '~/components-styled/content-header/metadata';
 import { HeadingWithIcon } from '~/components-styled/heading-with-icon';
+import { Tile } from '~/components-styled/tile';
 import {
   Heading,
   HeadingLevel,
   InlineText,
   Text,
 } from '~/components-styled/typography';
-import { Link } from '~/utils/link';
 import { asResponsiveArray } from '~/style/utils';
-import { Box } from '../base';
+import { Link } from '~/utils/link';
 
 /*
   the left margin '-100w' and left padding '100w' hack ensures skip link anchors to have a (non visible) start at the left side of the screen.
@@ -50,7 +52,7 @@ const Header = (props: HeaderProps) => {
       {skipLinkAnchor ? (
         <PointerEventsBox>{children}</PointerEventsBox>
       ) : (
-        children
+        <Box spacing={4}>{children}</Box>
       )}
     </HeaderBox>
   );
@@ -128,69 +130,101 @@ export function ContentHeader(props: ContentHeaderProps) {
     reference,
     headingLevel = 2,
     id,
+    isTileLayout,
+    children,
   } = props;
+
+  assert(
+    !children || isTileLayout,
+    'ContentHeader only accepts children when `isTileLayout=true`'
+  );
 
   const hasIcon = icon !== undefined;
 
+  const ContainerComponent = isTileLayout ? Tile : Box;
+
+  const subContent = (
+    <>
+      {reference && (
+        <ReferenceBox>
+          <Text m={0}>
+            {subtitle}{' '}
+            <Link href={reference.href}>
+              <Text as="a" href={reference.href}>
+                {reference.text}
+              </Text>
+            </Link>
+          </Text>
+        </ReferenceBox>
+      )}
+
+      {metadata && (
+        <MetadataBox>
+          <Metadata {...metadata} accessibilitySubject={title} />
+        </MetadataBox>
+      )}
+    </>
+  );
+
   return (
     <Header id={id} skipLinkAnchor={skipLinkAnchor} hasIcon={hasIcon}>
-      <Box px={[3, null, 0]} spacing={1}>
-        {category && (
-          <CategoryHeading level={1} hide={hideCategory} hasIcon={hasIcon}>
-            {category}
-            {screenReaderCategory && (
-              <AriaInlineText> - {screenReaderCategory}</AriaInlineText>
-            )}
-          </CategoryHeading>
-        )}
-        {icon ? (
-          <HeadingWithIcon
-            icon={icon}
-            title={title}
-            headingLevel={headingLevel}
-          />
-        ) : (
-          <Box
-            display="flex"
-            flexDirection="row"
-            flexWrap="nowrap"
-            alignItems="center"
-            mb={-2}
-          >
-            <Box>
-              <Heading level={headingLevel} mb={0}>
-                {title}
-              </Heading>
+      <ContainerComponent>
+        <Box px={[3, null, 0]} spacing={1}>
+          {category && (
+            <CategoryHeading level={1} hide={hideCategory} hasIcon={hasIcon}>
+              {category}
+              {screenReaderCategory && (
+                <AriaInlineText> - {screenReaderCategory}</AriaInlineText>
+              )}
+            </CategoryHeading>
+          )}
+          {icon ? (
+            <HeadingWithIcon
+              icon={icon}
+              title={title}
+              headingLevel={headingLevel}
+            />
+          ) : (
+            <Box
+              display="flex"
+              flexDirection="row"
+              flexWrap="nowrap"
+              alignItems="center"
+              mb={-2}
+            >
+              <Box>
+                <Heading level={headingLevel} mb={0}>
+                  {title}
+                </Heading>
+              </Box>
             </Box>
-          </Box>
-        )}
-
-        <Box
-          spacing={3}
-          display="flex"
-          flexDirection={['column', null, null, null, 'row']}
-          ml={[null, null, null, hasIcon ? 5 : null]}
-        >
-          {reference && (
-            <ReferenceBox>
-              <Text m={0}>
-                {subtitle}{' '}
-                <Link href={reference.href}>
-                  <Text as="a" href={reference.href}>
-                    {reference.text}
-                  </Text>
-                </Link>
-              </Text>
-            </ReferenceBox>
           )}
 
-          {metadata && (
-            <MetadataBox>
-              <Metadata {...metadata} accessibilitySubject={title} />
-            </MetadataBox>
+          {!isTileLayout && (
+            <Box
+              spacing={3}
+              display="flex"
+              flexDirection={{ _: 'column', lg: 'row' }}
+              ml={{ md: hasIcon ? 5 : undefined }}
+            >
+              {subContent}
+            </Box>
           )}
+
+          {children}
         </Box>
-      </Box>
+      </ContainerComponent>
+
+      {isTileLayout && (
+        <Box
+          display="flex"
+          spacing={3}
+          flexDirection={{ _: 'column', lg: 'row' }}
+          px={{ _: 3, sm: 4 }}
+        >
+          {subContent}
+        </Box>
+      )}
     </Header>
   );
 }
@@ -210,4 +244,6 @@ interface ContentHeaderProps {
   icon?: JSX.Element;
   skipLinkAnchor?: boolean;
   headingLevel?: HeadingLevel;
+  isTileLayout?: boolean;
+  children?: ReactNode;
 }

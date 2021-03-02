@@ -664,7 +664,8 @@
     "vandaag": "Today",
     "read_more": "Read more",
     "absolute_date_template": "on {{date}}",
-    "inwoners": "residents"
+    "inwoners": "residents",
+    "miljoen": "million"
   },
   "seoHead": {
     "default_description": "Information on the development of the coronavirus in The Netherlands.",
@@ -2014,6 +2015,7 @@
       "description": "The Netherlands began vaccinating people against COVID-19 on 6 January 2021. The Coronavirus Dashboard shows how many doses of vaccine have been administered and how many doses are on their way."
     },
     "title": "COVID-19 vaccinations",
+    "current_amount_of_administrations_text": "Op dit moment zijn er naar verwachting {{amount}} prikken gezet in Nederland",
     "description": "Vaccination is the most important step towards getting life back to normal. The Netherlands began vaccinating people against COVID-19 on 6 January 2021. Eventually, the vaccine will be offered to everyone aged 18 and over. This page shows how many doses of vaccine have been administered and how many doses are on their way.",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "date_unix": "1613650547",
