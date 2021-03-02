@@ -25,11 +25,18 @@ import VervoerReizenOV from '~/assets/restrictions/vervoer-en-reizen_ov.svg';
 import WinkelsAlcohol from '~/assets/restrictions/winkelen-en-boodschappen_alcohol.svg';
 import WinkelsBoodschappen from '~/assets/restrictions/winkelen-en-boodschappen_open.svg';
 
-import Avondklok from '~/assets/restrictions/avondklok.svg';
-import Lopend from '~/assets/restrictions/lopend.svg';
-import Bezoek from '~/assets/restrictions/bezoek.svg';
+import avondklok from '~/assets/restrictions/avondklok.svg';
+import lopend from '~/assets/restrictions/lopend.svg';
+import bezoek from '~/assets/restrictions/bezoek.svg';
+import eenPersoonDoorgestreept from '~/assets/restrictions/een-persoon-doorgestreept.svg';
+import gedeeltelijkOpenRugzak from '~/assets/restrictions/gedeeltelijk-open-rugzak.svg';
+import geenWedstrijden from '~/assets/restrictions/geen-wedstrijden.svg';
+import sporterMetZweetband from '~/assets/restrictions/sporter-met-zweetband.svg';
 
-export const restrictionIcons: Record<string, any> = {
+export const restrictionIcons: Record<
+  string,
+  React.FunctionComponent<React.SVGProps<SVGSVGElement>> | null
+> = {
   '41_er_op_uit_1': null,
   '41_er_op_uit_2': null,
   '41_samenkomst_3': null,
@@ -75,7 +82,11 @@ export const restrictionIcons: Record<string, any> = {
   '41_onderwijs_39': OnderwijsOpAfstand,
   '41_onderwijs_40': OnderwijsKinderopvang,
   '41_onderwijs_41': OnderwijsNoodopvang,
-  avondklok: Avondklok,
-  bezoek: Bezoek,
-  lopend: Lopend,
+  avondklok,
+  bezoek,
+  lopend,
+  eenPersoonDoorgestreept,
+  gedeeltelijkOpenRugzak,
+  geenWedstrijden,
+  sporterMetZweetband,
 };
