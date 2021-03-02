@@ -25,9 +25,14 @@ import VervoerReizenOV from './assets/restrictions/vervoer-en-reizen_ov.svg';
 import WinkelsAlcohol from './assets/restrictions/winkelen-en-boodschappen_alcohol.svg';
 import WinkelsBoodschappen from './assets/restrictions/winkelen-en-boodschappen_open.svg';
 
-import Avondklok from './assets/restrictions/avondklok.svg';
-import Lopend from './assets/restrictions/lopend.svg';
-import Bezoek from './assets/restrictions/bezoek.svg';
+import avondklok from './assets/restrictions/avondklok.svg';
+import lopend from './assets/restrictions/lopend.svg';
+import bezoek from './assets/restrictions/bezoek.svg';
+
+import eenPersoonDoorgestreept from './assets/restrictions/een-persoon-doorgestreept.svg';
+import gedeeltelijkOpenRugzak from './assets/restrictions/gedeeltelijk-open-rugzak.svg';
+import geenWedstrijden from './assets/restrictions/geen-wedstrijden.svg';
+import sporterMetZweetband from './assets/restrictions/sporter-met-zweetband.svg';
 
 export type RestrictionIcon = keyof typeof restrictionIcons;
 
@@ -77,7 +82,11 @@ export const restrictionIcons = {
   '41_onderwijs_39': OnderwijsOpAfstand,
   '41_onderwijs_40': OnderwijsKinderopvang,
   '41_onderwijs_41': OnderwijsNoodopvang,
-  avondklok: Avondklok,
-  bezoek: Bezoek,
-  lopend: Lopend,
+  avondklok,
+  bezoek,
+  lopend,
+  eenPersoonDoorgestreept,
+  gedeeltelijkOpenRugzak,
+  geenWedstrijden,
+  sporterMetZweetband,
 } as const;
