@@ -14,7 +14,7 @@ export function TooltipContent(props: IProps) {
   const { title, onSelect, children } = props;
 
   return (
-    <StyledTooltipContent hasClickHandler={onSelect ? true : false}>
+    <StyledTooltipContent onClick={onSelect}>
       <TooltipHeader>
         <Heading
           level={3}
@@ -33,7 +33,7 @@ export function TooltipContent(props: IProps) {
   );
 }
 
-const StyledTooltipContent = styled.div<{ hasClickHandler?: boolean }>((x) =>
+const StyledTooltipContent = styled.div((x) =>
   css({
     color: 'body',
     width: '100%',
