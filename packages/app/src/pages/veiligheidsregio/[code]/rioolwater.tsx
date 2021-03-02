@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import ExperimenteelIcon from '~/assets/experimenteel.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
@@ -15,14 +16,15 @@ import { SewerChart } from '~/components-styled/sewer-chart';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
+import { WarningTile } from '~/components-styled/warning-tile';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
-import siteText from '~/locale/index';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
+  getText,
   getVrData,
 } from '~/static-props/get-data';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
@@ -33,17 +35,18 @@ export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
+  getText,
   getVrData,
   createGetContent<{
     articles?: ArticleSummary[];
   }>(createPageArticlesQuery('sewerPage'))
 );
 
-const text = siteText.veiligheidsregio_rioolwater_metingen;
-const graphDescriptions = siteText.accessibility.grafieken;
-
 const SewerWater: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { data, safetyRegionName, content } = props;
+  const { data, safetyRegionName, content, text: siteText } = props;
+
+  const text = siteText.veiligheidsregio_rioolwater_metingen;
+  const graphDescriptions = siteText.accessibility.grafieken;
 
   const { barChartData } = useMemo(() => {
     return {
@@ -83,6 +86,8 @@ const SewerWater: FCWithLayout<typeof getStaticProps> = (props) => {
           }}
           reference={text.reference}
         />
+
+        <WarningTile message={text.warning_method} icon={ExperimenteelIcon} />
 
         <ArticleStrip articles={content.articles} />
 

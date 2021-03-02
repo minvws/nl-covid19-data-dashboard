@@ -80,6 +80,7 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
           <TileList>
             <WarningTile
               message={siteText.regionaal_index.belangrijk_bericht}
+              variant="emphasis"
             />
 
             <TopicalPageHeader

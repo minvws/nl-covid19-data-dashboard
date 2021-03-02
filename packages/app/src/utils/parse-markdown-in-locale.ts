@@ -23,13 +23,15 @@ const MARKDOWN_KEYS = [
   'gemeente_actueel.risiconiveaus.selecteer_toelichting',
   'vaccinaties.gezette_prikken.tab_first.description',
   'vaccinaties.gezette_prikken.tab_second.description',
-  'vaccinaties.grafiek.omschrijving',
   'vr_risiconiveau.positieve_testen.description',
   'vr_risiconiveau.ziekenhuisopnames.description',
   'vr_risiconiveau.types[1].toelichting',
   'vr_risiconiveau.types[2].toelichting',
   'vr_risiconiveau.types[3].toelichting',
   'vr_risiconiveau.types[4].toelichting',
+  'rioolwater_metingen.warning_method',
+  'veiligheidsregio_rioolwater_metingen.warning_method',
+  'gemeente_rioolwater_metingen.warning_method',
 ];
 
 export function parseMarkdownInLocale(text: Locale) {

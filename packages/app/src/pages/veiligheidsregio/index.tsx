@@ -54,7 +54,10 @@ const SafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
 
       <TileList>
         {text.regionaal_index.belangrijk_bericht && (
-          <WarningTile message={text.regionaal_index.belangrijk_bericht} />
+          <WarningTile
+            message={text.regionaal_index.belangrijk_bericht}
+            variant="emphasis"
+          />
         )}
 
         <ChoroplethTile

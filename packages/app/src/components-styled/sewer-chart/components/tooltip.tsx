@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 import styled from 'styled-components';
 import useResizeObserver from 'use-resize-observer';
 import { Box } from '~/components-styled/base';
-import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
+import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
 
 type Bounds = {
   left: number;

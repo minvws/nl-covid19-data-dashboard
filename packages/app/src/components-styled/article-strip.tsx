@@ -1,6 +1,5 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import ArrowIcon from '~/assets/arrow.svg';
 import { Box } from '~/components-styled/base';
 import { Tile } from '~/components-styled/tile';
 import { SanityImage } from '~/components-styled/cms/sanity-image';
@@ -10,7 +9,8 @@ import siteText from '~/locale';
 import { ImageBlock } from '~/types/cms';
 import { Link } from '~/utils/link';
 import { ArticleSummary } from './article-teaser';
-import { LinkWithIcon } from './link-with-icon';
+import { ArrowIconRight } from '~/components-styled/arrow-icon';
+import { colors } from '~/style/theme';
 
 type ArticleStripProps = {
   articles?: ArticleSummary[];
@@ -73,13 +73,10 @@ function ArticleStripItem(props: ArticleStripItemProps) {
           <Text mt={0} mb={2}>
             {title}
           </Text>
-          <LinkWithIcon
-            href={`/artikelen/${slug}`}
-            icon={<ArrowIcon css={css({ transform: 'rotate(-90deg)' })} />}
-            iconPlacement="right"
-          >
+          <StyledSpan>
             {siteText.common.read_more}
-          </LinkWithIcon>
+            <Arrow />
+          </StyledSpan>
         </Box>
       </StyledLink>
     </Link>
@@ -93,3 +90,25 @@ const StyledLink = styled.a(
     display: 'flex',
   })
 );
+
+const StyledSpan = styled.span({
+  display: 'inline-flex',
+  alignItems: 'center',
+  color: colors.link,
+  '&:hover,&:focus': {
+    textDecoration: 'underline',
+  },
+});
+
+function Arrow() {
+  return (
+    <span
+      css={css({
+        display: 'inline-flex',
+        svg: { height: '13px', width: '11px', ml: '3px' },
+      })}
+    >
+      <ArrowIconRight />
+    </span>
+  );
+}

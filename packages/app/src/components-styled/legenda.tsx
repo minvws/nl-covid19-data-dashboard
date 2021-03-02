@@ -2,9 +2,14 @@ import css from '@styled-system/css';
 import * as React from 'react';
 import styled from 'styled-components';
 
-export type LegendShape = 'line' | 'square' | 'circle';
+export type LegendShape = 'line' | 'square' | 'circle' | 'custom';
 
-export type LegendItem = { color: string; label: string; shape: LegendShape };
+export type LegendItem = {
+  color: string;
+  label: string;
+  shape: LegendShape;
+  ShapeComponent?: any;
+};
 interface LegendProps {
   items: LegendItem[];
 }
@@ -12,14 +17,22 @@ interface LegendProps {
 export function Legenda({ items }: LegendProps) {
   return (
     <List>
-      {items.map(({ label, color, shape = 'line' }, i) => (
-        <Item key={i}>
-          {label}
-          {shape === 'square' && <Square color={color} />}
-          {shape === 'line' && <Line color={color} />}
-          {shape === 'circle' && <Circle color={color} />}
-        </Item>
-      ))}
+      {items.map((item, i) => {
+        const { label, color, shape, ShapeComponent } = item;
+        return (
+          <Item key={i}>
+            {label}
+            {shape === 'square' && <Square color={color} />}
+            {shape === 'line' && <Line color={color} />}
+            {shape === 'circle' && <Circle color={color} />}
+            {shape === 'custom' && ShapeComponent && (
+              <CustomShape>
+                <ShapeComponent />
+              </CustomShape>
+            )}
+          </Item>
+        );
+      })}
     </List>
   );
 }
@@ -38,6 +51,16 @@ const Item = styled.li(
     position: 'relative',
     display: 'inline-block',
     pl: '25px', // alignment with shape
+  })
+);
+
+const CustomShape = styled.div(
+  css({
+    content: '',
+    display: 'block',
+    position: 'absolute',
+    left: 0,
+    top: '3px',
   })
 );
 

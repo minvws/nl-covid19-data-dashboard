@@ -84,7 +84,6 @@ const Panel = styled(DisclosurePanel)(
     px: 3,
     py: 0,
     transition: 'max-height 0.4s ease-in-out, opacity 0.4s ease-in-out',
-
     '&[data-state="open"]': {
       opacity: 1,
     },

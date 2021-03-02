@@ -92,6 +92,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
           <TileList>
             <WarningTile
               message={siteText.regionaal_index.belangrijk_bericht}
+              variant="emphasis"
             />
 
             <Search />
@@ -220,7 +221,9 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                 </Box>
               </TopicalTile>
             </Box>
+
             <DataSitemap />
+
             <Box mt={{ md: 5 }}>
               <ArticleList articleSummaries={content.articles} />
             </Box>

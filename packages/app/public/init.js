@@ -25,15 +25,15 @@
   /**
    * load piwik
    */
-  var _paq = _paq || [];
-  _paq.push(['setLinkTrackingTimer', 750]);
-  _paq.push(['trackPageView']);
-  _paq.push(['enableLinkTracking']);
+  window._paq = window._paq || [];
+  window._paq.push(['setLinkTrackingTimer', 750]);
+  window._paq.push(['trackPageView']);
+  window._paq.push(['enableLinkTracking']);
 
   (function () {
     var u = '//statistiek.rijksoverheid.nl/piwik/';
-    _paq.push(['setTrackerUrl', u + 'piwik.php']);
-    _paq.push(['setSiteId', '7939']);
+    window._paq.push(['setTrackerUrl', u + 'piwik.php']);
+    window._paq.push(['setSiteId', '7939']);
     var d = document,
       g = d.createElement('script'),
       s = d.getElementsByTagName('script')[0];

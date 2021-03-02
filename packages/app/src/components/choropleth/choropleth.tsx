@@ -7,7 +7,7 @@ import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { TCombinedChartDimensions } from './hooks/use-chart-dimensions';
 import { Path } from './path';
-import { Tooltip } from './tooltips/tooltipContainer';
+import { Tooltip } from './tooltips/tooltip-container';
 import { countryGeo } from './topology';
 import { useUniqueId } from '~/utils/useUniqueId';
 import { colors } from '~/style/theme';

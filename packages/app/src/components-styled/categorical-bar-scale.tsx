@@ -89,7 +89,7 @@ export function CategoricalBarScale({
         />
       </Box>
 
-      <Box>
+      <Box mb={3}>
         {barPieces.map((category) => (
           <Fragment key={category.name}>
             {/* 0.25px offset is used for sharper rendering of the circle */}
