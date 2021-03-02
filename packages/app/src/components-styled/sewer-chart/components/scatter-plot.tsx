@@ -9,7 +9,6 @@ interface ScatterPlotProps<T> {
   getY: (datum: T) => number;
   color: string;
   radius: number;
-  dottedOutline?: boolean;
   isAnimated?: boolean;
 }
 
@@ -20,7 +19,7 @@ export const ScatterPlot = memo(
 function ScatterPlotUnmemoized<T extends { id: string }>(
   props: ScatterPlotProps<T>
 ) {
-  const { data, getX, getY, color, radius, dottedOutline, isAnimated } = props;
+  const { data, getX, getY, color, radius, isAnimated } = props;
 
   const isMotionDisabled = useIsMotionDisabled();
 
@@ -34,9 +33,7 @@ function ScatterPlotUnmemoized<T extends { id: string }>(
         <circle
           key={datum.id}
           r={radius}
-          fill={dottedOutline ? 'none' : color}
-          strokeDasharray={dottedOutline ? '1,1' : undefined}
-          stroke={dottedOutline ? color : undefined}
+          fill={color}
           cx={getX(datum)}
           cy={getY(datum)}
         />
@@ -51,7 +48,6 @@ function AnimatedScatterPlot<T extends { id: string }>({
   getY,
   color,
   radius,
-  dottedOutline,
 }: ScatterPlotProps<T>) {
   return (
     <Group>
@@ -60,9 +56,7 @@ function AnimatedScatterPlot<T extends { id: string }>({
           <motion.circle
             key={datum.id}
             r={radius}
-            fill={dottedOutline ? 'none' : color}
-            strokeDasharray={dottedOutline ? '1,1' : undefined}
-            stroke={dottedOutline ? color : undefined}
+            fill={color}
             initial={{
               cx: getX(datum),
               cy: getY(datum) - 100,
