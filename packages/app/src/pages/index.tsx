@@ -1,10 +1,13 @@
 import { useRouter } from 'next/router';
 import GetestIcon from '~/assets/test.svg';
 import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
+import { ArrowIconRight } from '~/components-styled/arrow-icon';
 import { ArticleSummary } from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
 import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
+import { HighlightTeaserProps } from '~/components-styled/highlight-teaser';
+import { LinkWithIcon } from '~/components-styled/link-with-icon';
 import { MaxWidth } from '~/components-styled/max-width';
 import { QuickLinks } from '~/components-styled/quick-links';
 import { SEOHead } from '~/components-styled/seo-head';
@@ -37,7 +40,6 @@ import {
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { HighlightTeaserProps } from '~/components-styled/highlight-teaser';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -90,18 +92,30 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
       <Box bg="white" pb={4}>
         <MaxWidth>
           <TileList>
-            <WarningTile
-              message={siteText.regionaal_index.belangrijk_bericht}
-              variant="emphasis"
-            />
-
-            <Search />
-
             <TopicalPageHeader
               lastGenerated={Number(lastGenerated)}
               title={replaceComponentsInText(text.title, {
-                the_netherlands: <strong>{text.the_netherlands}</strong>,
+                the_netherlands: text.the_netherlands,
               })}
+              link={
+                <LinkWithIcon
+                  href="/landelijk/vaccinaties"
+                  icon={<ArrowIconRight />}
+                  iconPlacement="right"
+                  fontWeight="bold"
+                >
+                  {text.title_link}
+                </LinkWithIcon>
+              }
+            />
+
+            <Box width={{ lg: '75%' }}>
+              <Search />
+            </Box>
+
+            <WarningTile
+              message={siteText.regionaal_index.belangrijk_bericht}
+              variant="emphasis"
             />
 
             <MiniTrendTileLayout>

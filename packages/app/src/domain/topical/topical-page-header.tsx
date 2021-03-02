@@ -1,6 +1,5 @@
 import { ReactNode } from 'react';
 import { ArrowIconLeft } from '~/components-styled/arrow-icon';
-
 import { Box } from '~/components-styled/base';
 import { LinkWithIcon } from '~/components-styled/link-with-icon';
 import { RelativeDate } from '~/components-styled/relative-date';
@@ -13,12 +12,14 @@ interface TopicalPageHeaderProps {
   title: ReactNode;
   lastGenerated: number;
   showBackLink?: boolean;
+  link?: ReactNode;
 }
 
 export function TopicalPageHeader({
   title,
   lastGenerated,
   showBackLink,
+  link,
 }: TopicalPageHeaderProps) {
   return (
     <Box spacing={3}>
@@ -31,16 +32,27 @@ export function TopicalPageHeader({
       )}
 
       <Box>
-        <Heading
-          level={1}
-          fontWeight="normal"
-          m={0}
-          lineHeight={0}
-          mb={2}
-          fontSize={{ _: '2rem', lg: '2.75rem' }}
+        <Box
+          borderBottomColor="border"
+          borderBottomStyle="solid"
+          borderBottomWidth="1px"
+          pb={{ _: 2, lg: 3 }}
+          mb={{ _: 2, lg: 3 }}
+          display="flex"
+          flexDirection={{ _: 'column', lg: 'row' }}
+          alignItems="baseline"
         >
-          {title}
-        </Heading>
+          <Heading
+            level={1}
+            m={0}
+            mb={{ _: 2, lg: 0 }}
+            lineHeight={0}
+            fontSize={{ _: '2rem', lg: '2.75rem' }}
+          >
+            {title}
+          </Heading>
+          {link && <Box ml={{ _: 0, lg: 4 }}>{link}</Box>}
+        </Box>
         <InlineText color="bodyLight">
           {replaceComponentsInText(text.common_actueel.laatst_bijgewerkt, {
             date: <RelativeDate dateInSeconds={lastGenerated} />,
