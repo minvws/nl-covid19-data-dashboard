@@ -151,7 +151,7 @@ export interface National {
   vaccine_administered_hospitals: NlVaccineAdministeredHospitals;
   vaccine_administered_lnaz: NlVaccineAdministeredLnaz;
   vaccine_administered_total: NlVaccineAdministeredTotal;
-  vaccine_administered_rate_moving_average: NlVaccineAdministeredRate;
+  vaccine_administered_rate_moving_average: NlVaccineAdministeredRateMovingAverage;
   vaccine_administered_planned: NlVaccineAdministeredPlanned;
 }
 export interface NationalDifference {
@@ -581,14 +581,14 @@ export interface NlVaccineAdministeredTotalValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlVaccineAdministeredRate {
-  values: NlVaccineAdministeredRateValue[];
-  last_value: NlVaccineAdministeredRateValue;
+export interface NlVaccineAdministeredRateMovingAverage {
+  values: NlVaccineAdministeredRateMovingAverageValue[];
+  last_value: NlVaccineAdministeredRateMovingAverageValue;
 }
-export interface NlVaccineAdministeredRateValue {
+export interface NlVaccineAdministeredRateMovingAverageValue {
+  doses_per_day: number;
   doses_per_second: number;
   seconds_per_dose: number;
-  doses_sum: number;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
