@@ -1,7 +1,7 @@
 {
   "definitions": {
     "value": {
-      "title": "nl_vaccine_administered_daily_value",
+      "title": "nl_vaccine_administered_rate_value",
       "type": "object",
       "required": [
         "doses_per_second",
@@ -35,7 +35,7 @@
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_vaccine_administered_daily",
+  "title": "nl_vaccine_administered_rate",
   "type": "object",
   "required": ["values", "last_value"],
   "additionalProperties": false,

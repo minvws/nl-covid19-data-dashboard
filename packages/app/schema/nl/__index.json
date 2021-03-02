@@ -40,7 +40,7 @@
     "vaccine_administered_hospitals",
     "vaccine_administered_lnaz",
     "vaccine_administered_total",
-    "vaccine_administered_daily",
+    "vaccine_administered_rate",
     "vaccine_administered_planned"
   ],
   "additionalProperties": false,
@@ -159,8 +159,8 @@
     "vaccine_administered_total": {
       "$ref": "vaccine_administered_total.json"
     },
-    "vaccine_administered_daily": {
-      "$ref": "vaccine_administered_daily.json"
+    "vaccine_administered_rate": {
+      "$ref": "vaccine_administered_rate.json"
     },
     "vaccine_administered_planned": {
       "$ref": "vaccine_administered_planned.json"
