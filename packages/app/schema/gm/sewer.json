@@ -8,6 +8,8 @@
         "date_start_unix",
         "date_end_unix",
         "average",
+        "total_number_of_samples",
+        "sampled_installation_count",
         "total_installation_count",
         "date_of_insertion_unix"
       ],
@@ -20,6 +22,12 @@
         },
         "average": {
           "type": "number"
+        },
+        "total_number_of_samples": {
+          "type": "integer"
+        },
+        "sampled_installation_count": {
+          "type": "integer"
         },
         "total_installation_count": {
           "type": "integer"

@@ -538,6 +538,9 @@
       }
     },
     "kpi_titel": "Average number of coronavirus particles per 100.000 people",
+    "total_measurements_title": "Aantal metingen deze week",
+    "total_measurements_description": "Meetlocaties kunnen ....",
+    "total_measurements_locations": "In totaal hebben {{sampled_installation_count}} van de {{total_installation_count}} meetlocaties minimaal één keer een meting doorgegeven.",
     "warning_method": ""
   },
   "notfound_titel": {
@@ -826,6 +829,9 @@
     "bar_chart_accessibility_description": "",
     "display_outliers": "Display outliers",
     "hide_outliers": "Hide outliers",
+    "total_measurements_title": "Aantal metingen deze week",
+    "total_measurements_description": "Meetlocaties kunnen ....",
+    "total_measurements_locations": "In totaal hebben {{sampled_installation_count}} van de {{total_installation_count}} meetlocaties minimaal één keer een meting doorgegeven.",
     "warning_method": ""
   },
   "gemeente_ziekenhuisopnames_per_dag": {
@@ -959,6 +965,9 @@
     "bar_chart_accessibility_description": "",
     "display_outliers": "Display outliers",
     "hide_outliers": "Hide outliers",
+    "total_measurements_title": "Aantal metingen deze week",
+    "total_measurements_description": "Meetlocaties kunnen ....",
+    "total_measurements_locations": "In totaal hebben {{sampled_installation_count}} van de {{total_installation_count}} meetlocaties minimaal één keer een meting doorgegeven.",
     "warning_method": ""
   },
   "veiligheidsregio_index": {
