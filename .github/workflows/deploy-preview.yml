@@ -3,6 +3,10 @@ name: Deploy Preview
 on:
   pull_request:
     types: [opened, synchronize, reopened, closed]
+  push:
+    branches:
+      - master
+      - develop
 
 jobs:
   deploy_preview_trigger_deploy:
