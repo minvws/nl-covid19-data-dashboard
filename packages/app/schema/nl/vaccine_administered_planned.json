@@ -4,15 +4,15 @@
       "title": "nl_vaccine_administered_planned_value",
       "type": "object",
       "required": [
-        "administrations_per_week",
+        "doses",
         "date_start_unix",
         "date_end_unix",
         "date_of_insertion_unix"
       ],
       "additionalProperties": false,
       "properties": {
-        "administrations_per_week": {
-          "type": "number"
+        "doses": {
+          "type": "integer"
         },
         "date_start_unix": {
           "type": "integer"
