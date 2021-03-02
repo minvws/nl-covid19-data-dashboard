@@ -40,7 +40,7 @@ export function BehaviorChoroplethTile({
       title={text.verdeling_in_nederland.titel}
       description={
         <>
-          <Box display="flex" justifyContent="start">
+          <Box display="flex" justifyContent="start" mb={3}>
             <BehaviorTypeControl value={type} onChange={setType} />
           </Box>
           <p>{text.verdeling_in_nederland.intro}</p>
