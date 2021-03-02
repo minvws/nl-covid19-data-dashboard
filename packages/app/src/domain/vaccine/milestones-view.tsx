@@ -10,24 +10,25 @@ import { colors } from '~/style/theme';
 import { RichContentBlock } from '~/types/cms';
 import { formatDate } from '~/utils/formatDate';
 import siteText from '~/locale/index';
+import { asResponsiveArray } from '~/style/utils';
 
 const MAX_ITEMS_VISIBLE = 5;
 const CIRCLE_SIZE = 26;
 const CIRCLE_HALF = CIRCLE_SIZE / 2;
 
-type MilestonesType = {
+type Milestones = {
   title: string;
   date: string;
 };
 
-type ExpectedMilestonesType = {
+type ExpectedMilestones = {
   item: string;
 };
 export interface MilestoneViewProps {
   title: string;
   description: RichContentBlock[];
-  milestones: MilestonesType[];
-  expectedMilestones: ExpectedMilestonesType[];
+  milestones: Milestones[];
+  expectedMilestones: ExpectedMilestones[];
 }
 
 export function MilestonesView(props: MilestoneViewProps) {
@@ -37,7 +38,7 @@ export function MilestonesView(props: MilestoneViewProps) {
 
   useEffect(() => setIsExpanded(false), []);
 
-  const expandedHandler = () => setIsExpanded(true);
+  const handleExpand = () => setIsExpanded(true);
 
   return (
     <Tile css={css({ overflow: 'hidden' })}>
@@ -48,63 +49,68 @@ export function MilestonesView(props: MilestoneViewProps) {
         <RichContent blocks={description} />
       </Box>
 
-      <Box as="ul" p={0} m={0} mb={3}>
-        <ListItem isFirst={true} isExpanded={isExpanded}>
+      <Box
+        as="ol"
+        p={0}
+        m={0}
+        mb={3}
+        position="relative"
+        css={css({ listStyleType: 'none' })}
+      >
+        <ListItemFirst isExpanded={isExpanded}>
           <CircleSmall />
-          <Box pl={CIRCLE_HALF} css={css({ transform: 'translateY(-6px)' })}>
-            <Text fontWeight="bold" m={0}>
-              2021
-            </Text>
-          </Box>
-        </ListItem>
+          <Text fontWeight="bold" m={0} pl={`calc(1rem)`}>
+            2021
+          </Text>
+        </ListItemFirst>
 
         {milestones.length > MAX_ITEMS_VISIBLE && !isExpanded && (
-          <ListItemButton>
-            <Box
-              pl={`calc(${CIRCLE_SIZE}px + 1rem)`}
-              css={css({ transform: 'translateY(-6px)' })}
-            >
-              <StyledButton color="link" onClick={expandedHandler}>
+          <ListItem>
+            <Box pl={`calc(1rem + ${CIRCLE_SIZE}px)`}>
+              <ExpandButton color="link" onClick={handleExpand}>
                 {siteText.milestones.toon_meer}
-              </StyledButton>
+              </ExpandButton>
             </Box>
-          </ListItemButton>
+          </ListItem>
         )}
 
-        {milestones.map((item, index) => (
+        {milestones.map((milestone, index) => (
           <Fragment key={index}>
             {(isExpanded ||
               index > milestones.length - 1 - MAX_ITEMS_VISIBLE) && (
-              <ListItem isLast={index === milestones.length - 1}>
-                <CircleIcon isLast={index === milestones.length - 1}>
-                  <VaccineIcon />
-                </CircleIcon>
-
-                <Box
-                  pl={CIRCLE_HALF}
-                  position="relative"
-                  maxWidth="maxWidthText"
-                  width="100%"
-                  zIndex={2}
-                >
-                  {index !== milestones.length - 1 ? (
-                    <>
+              <>
+                {index !== milestones.length - 1 ? (
+                  <ListItem>
+                    <CircleIcon>
+                      <VaccineIcon />
+                    </CircleIcon>
+                    <Box pl="3" maxWidth="maxWidthText">
                       <InlineText
-                        color={'gray'}
+                        color="gray"
                         css={css({ position: 'absolute', top: '-1.3rem' })}
                       >
-                        {formatDate(new Date(item.date))}
+                        {formatDate(new Date(milestone.date))}
                       </InlineText>
-                      <Text m={0}>{item.title}</Text>
-                    </>
-                  ) : (
-                    <>
+                      <Text m={0}>{milestone.title}</Text>
+                    </Box>
+                  </ListItem>
+                ) : (
+                  <ListItemLast>
+                    <CircleIcon isLast={true}>
+                      <VaccineIcon />
+                    </CircleIcon>
+                    <Box
+                      pl="3"
+                      maxWidth="maxWidthText"
+                      position="relative"
+                      zIndex={2}
+                    >
                       <InlineText
-                        color={'white'}
+                        color="white"
                         fontWeight="bold"
                         css={css({ position: 'absolute', top: '-1.3rem' })}
                       >
-                        {formatDate(new Date(item.date))}
+                        {formatDate(new Date(milestone.date))}
                       </InlineText>
                       <Text
                         m={0}
@@ -113,73 +119,65 @@ export function MilestonesView(props: MilestoneViewProps) {
                         fontWeight="bold"
                         lineHeight={0}
                       >
-                        {item.title}
+                        {milestone.title}
                       </Text>
-                    </>
-                  )}
-                </Box>
-                {index === milestones.length - 1 && <Background />}
-              </ListItem>
+                    </Box>
+                  </ListItemLast>
+                )}
+              </>
             )}
           </Fragment>
         ))}
       </Box>
-      <Box pl={CIRCLE_SIZE * 1.5}>
-        <Text color="gray" m={0} pl={3} mb={2}>
-          {siteText.milestones.verwacht}
-        </Text>
-        <Box as="ul" p={0} m={0} css={css({ listStyleType: 'none' })}>
-          {expectedMilestones.map((item, index) => (
-            <ExpectedListItem key={index}>{item.item}</ExpectedListItem>
-          ))}
+
+      {expectedMilestones && (
+        <Box pl={`calc(1rem + ${CIRCLE_SIZE}px)`}>
+          <Text color="gray" m={0} pl={3} mb={2}>
+            {siteText.milestones.verwacht}
+          </Text>
+          <Box as="ul" p={0} m={0} css={css({ listStyleType: 'none' })}>
+            {expectedMilestones.map((expectedMilestone, index) => (
+              <ExpectedListItem key={index}>
+                {expectedMilestone.item}
+              </ExpectedListItem>
+            ))}
+          </Box>
         </Box>
-      </Box>
+      )}
     </Tile>
   );
 }
 
-const ListItem = styled.li<{
-  isLast?: boolean;
-  isFirst?: boolean;
-  isExpanded?: boolean;
-}>((x) =>
+const commonListItemStyles = {
+  position: 'relative',
+  display: 'flex',
+  pb: 4,
+
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    top: '6px',
+    left: CIRCLE_HALF - 1,
+    width: '2px',
+    height: '100%',
+    backgroundColor: 'header',
+  },
+} as React.CSSProperties;
+
+const ListItem = styled.li(css(commonListItemStyles));
+
+const ListItemFirst = styled.li<{ isExpanded: boolean }>((x) =>
   css({
-    position: 'relative',
-    display: 'flex',
-    alignItems: x.isLast ? 'center' : 'flex-start',
-    paddingBottom: x.isFirst ? (x.isExpanded ? 4 : 3) : 4,
-    paddingTop: x.isLast ? `3.3rem` : '',
-    backgroundColor: x.isLast ? 'red' : '',
-    listStyleType: 'none',
-
-    '&::before': {
-      content: '""',
-      position: 'absolute',
-      top: 0,
-      left: CIRCLE_HALF - 1,
-      width: x.isLast ? '0' : '2px',
-      height: '100%',
-      backgroundColor: 'header',
-    },
-
-    '&::after': {
-      content: '""',
-      position: 'absolute',
-      bottom: '50%',
-      left: CIRCLE_HALF - 1,
-      width: x.isLast ? '2px' : '0',
-      height: x.isLast ? '50%' : '100%',
-      backgroundColor: 'white',
-    },
+    ...commonListItemStyles,
+    paddingBottom: x.isExpanded ? 4 : 3,
   })
 );
 
-const ListItemButton = styled.li(
+const ListItemLast = styled.li(
   css({
-    display: 'flex',
-    position: 'relative',
-    paddingBottom: 4,
-    listStyleType: 'none',
+    ...commonListItemStyles,
+    paddingTop: '3.3rem',
+    color: 'white',
 
     '&::before': {
       content: '""',
@@ -187,16 +185,68 @@ const ListItemButton = styled.li(
       top: 0,
       left: CIRCLE_HALF - 1,
       width: '2px',
+      height: '4rem',
+      backgroundColor: 'white',
+      zIndex: 2,
+    },
+
+    // Background
+    '&::after': {
+      content: '""',
+      position: 'absolute',
+      top: 0,
+      left: -4,
+      right: -4,
+      width: 'calc(4rem + 100%);',
       height: '100%',
       backgroundColor: 'header',
+      zIndex: 1,
     },
   })
 );
 
-const StyledButton = styled.button(
+const CircleIcon = styled.div<{ isLast?: boolean }>((x) =>
+  css({
+    position: 'relative',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: CIRCLE_SIZE,
+    height: CIRCLE_SIZE,
+    minWidth: `${CIRCLE_SIZE}px`,
+    borderRadius: '100%',
+    backgroundColor: x.isLast ? 'white' : 'header',
+    zIndex: 3,
+    marginTop: x.isLast ? asResponsiveArray({ _: '0.1rem', sm: '0.7rem' }) : 0,
+
+    svg: {
+      width: 14,
+      height: 14,
+      color: x.isLast ? 'header' : 'white',
+      transform: 'scaleX(-1)',
+    },
+  })
+);
+
+const CircleSmall = styled.div(
+  css({
+    display: 'inline-block',
+    position: 'relative',
+    height: 12,
+    width: 12,
+    minWidth: 12,
+    mx: '7px',
+    borderRadius: '100%',
+    backgroundColor: 'header',
+    transform: 'translateY(6px)',
+  })
+);
+
+const ExpandButton = styled.button(
   css({
     position: 'relative',
     padding: 0,
+    margin: 0,
     border: 'none',
     background: 'none',
     font: 'inherit',
@@ -217,57 +267,10 @@ const StyledButton = styled.button(
       width: '2px',
       backgroundColor: 'white',
       backgroundImage: `linear-gradient(${colors.header} 50%, rgba(255,255,255,0) 0%)`,
-      backgroundSize: '100% 6px',
-      backgroundPosition: '0 2 px',
+      backgroundSize: '100% 7px',
+      backgroundPosition: '0 3px',
       backgroundRepeat: 'repeat-y',
     },
-  })
-);
-
-const CircleIcon = styled.div<{ isLast: boolean }>((x) =>
-  css({
-    position: 'relative',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: CIRCLE_SIZE,
-    height: CIRCLE_SIZE,
-    minWidth: CIRCLE_SIZE,
-    borderRadius: '100%',
-    backgroundColor: x.isLast ? 'white' : 'header',
-    zIndex: 2,
-
-    svg: {
-      width: 14,
-      height: 14,
-      color: x.isLast ? 'header' : 'white',
-      transform: 'scaleX(-1)',
-    },
-  })
-);
-
-const CircleSmall = styled.div(
-  css({
-    display: 'inline-block',
-    position: 'relative',
-    height: 11,
-    width: 11,
-    minWidth: 11,
-    mx: '8px',
-    borderRadius: '100%',
-    backgroundColor: 'header',
-  })
-);
-
-const Background = styled.div(
-  css({
-    position: 'absolute',
-    top: 0,
-    left: -4,
-    right: -4,
-    width: 'calc(4rem + 100%);',
-    height: '100%',
-    backgroundColor: 'header',
   })
 );
 

@@ -70,7 +70,7 @@ function LastGeneratedMessage({ date }: { date: string }) {
 
   return (
     <Box maxWidth={450}>
-      <Box fontSize={3} fontWeight="bold">
+      <Box fontSize={3} fontWeight="bold" mb={3}>
         {text.laatst_bijgewerkt.title}
       </Box>
       <p

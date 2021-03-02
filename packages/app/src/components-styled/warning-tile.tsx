@@ -66,13 +66,12 @@ const StyledTile = styled(Tile)(
 
 const WarningBox = styled(Box)<{ variant: WarningMessageVariant }>(
   ({ variant }) => {
-    const backgroundColor = variant === 'emphasis' ? '#FEE670' : 'white';
     return css({
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       flex: '0 0 auto',
-      backgroundColor,
+      backgroundColor: variant === 'emphasis' ? '#FEE670' : 'white',
       borderBottomLeftRadius: 1,
       borderTopLeftRadius: 1,
     });
@@ -94,14 +93,13 @@ const IconWrapper = styled(Box)(
 
 const WarningMessageBox = styled(Box)<{ variant: WarningMessageVariant }>(
   ({ variant }) => {
-    const backgroundColor = variant === 'emphasis' ? '#FFF4C1' : 'white';
     return css({
       display: 'flex',
       alignItems: 'center',
       flex: '1 1 auto',
       py: 2,
-      pl: 2,
-      backgroundColor,
+      pl: variant === 'emphasis' ? 3 : 0,
+      backgroundColor: variant === 'emphasis' ? '#FFF4C1' : 'white',
       borderBottomRightRadius: 1,
       borderTopRightRadius: 1,
     });
