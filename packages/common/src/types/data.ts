@@ -586,9 +586,9 @@ export interface NlVaccineAdministeredRate {
   last_value: NlVaccineAdministeredRateValue;
 }
 export interface NlVaccineAdministeredRateValue {
-  doses_per_second: number;
-  seconds_per_dose: number;
-  doses_per_week_moving_average: number;
+  doses_per_second_average: number;
+  seconds_per_dose_average: number;
+  doses_sum: number;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
