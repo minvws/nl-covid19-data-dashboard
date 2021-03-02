@@ -1,26 +1,26 @@
 {
   "definitions": {
     "value": {
-      "title": "nl_vaccine_administered_rate_value",
+      "title": "nl_vaccine_administered_rate_moving_average_value",
       "type": "object",
       "required": [
+        "doses_per_day",
         "doses_per_second",
         "seconds_per_dose",
-        "doses_sum",
         "date_start_unix",
         "date_end_unix",
         "date_of_insertion_unix"
       ],
       "additionalProperties": false,
       "properties": {
+        "doses_per_day": {
+          "type": "number"
+        },
         "doses_per_second": {
           "type": "number"
         },
         "seconds_per_dose": {
           "type": "number"
-        },
-        "doses_sum": {
-          "type": "integer"
         },
         "date_start_unix": {
           "type": "integer"
@@ -35,7 +35,7 @@
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_vaccine_administered_rate",
+  "title": "nl_vaccine_administered_rate_moving_average",
   "type": "object",
   "required": ["values", "last_value"],
   "additionalProperties": false,
