@@ -19,7 +19,7 @@
         "seconds_per_administration": {
           "type": "number"
         },
-        "moving_average": {
+        "administrations_per_week_moving_average": {
           "type": "integer"
         },
         "date_start_unix": {
