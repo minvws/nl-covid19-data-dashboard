@@ -1,10 +1,11 @@
 import css from '@styled-system/css';
+import { ComponentType, ReactNode } from 'react';
 import styled from 'styled-components';
 import WarningIcon from '~/assets/warning.svg';
-import { Box } from './base';
 import { Tile } from '~/components-styled/tile';
 import { asResponsiveArray } from '~/style/utils';
-import { ReactNode, ComponentType } from 'react';
+import { useBreakpoints } from '~/utils/useBreakpoints';
+import { Box } from './base';
 
 type WarningMessageVariant = 'emphasis' | 'default';
 
@@ -21,12 +22,21 @@ export function WarningTile({
   icon = WarningIcon,
 }: WarningMessageProps) {
   const Icon = icon;
+
+  const breakpoints = useBreakpoints();
+
+  const isSmallScreen = !breakpoints.md;
+
   return (
     <StyledTile>
       <WarningBox variant={variant}>
-        <IconWrapper>
-          <Icon />
-        </IconWrapper>
+        {isSmallScreen ? (
+          <Box width="10px" />
+        ) : (
+          <IconWrapper>
+            <Icon />
+          </IconWrapper>
+        )}
       </WarningBox>
       <WarningMessageBox variant={variant}>
         {typeof message === 'string' ? (
@@ -50,12 +60,13 @@ const StyledTile = styled(Tile)(
     flexDirection: 'row',
     padding: 0,
     boxShadow: 'none',
+    display: 'inline-flex',
   })
 );
 
 const WarningBox = styled(Box)<{ variant: WarningMessageVariant }>(
   ({ variant }) => {
-    const backgroundColor = variant === 'emphasis' ? '#FFE060' : 'white';
+    const backgroundColor = variant === 'emphasis' ? '#FEE670' : 'white';
     return css({
       display: 'flex',
       alignItems: 'center',
@@ -83,13 +94,13 @@ const IconWrapper = styled(Box)(
 
 const WarningMessageBox = styled(Box)<{ variant: WarningMessageVariant }>(
   ({ variant }) => {
-    const backgroundColor = variant === 'emphasis' ? '#FFEE87' : 'white';
+    const backgroundColor = variant === 'emphasis' ? '#FFF4C1' : 'white';
     return css({
       display: 'flex',
       alignItems: 'center',
       flex: '1 1 auto',
-      py: 3,
-      pl: 3,
+      py: 2,
+      pl: 2,
       backgroundColor,
       borderBottomRightRadius: 1,
       borderTopRightRadius: 1,
