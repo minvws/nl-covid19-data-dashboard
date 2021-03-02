@@ -48,7 +48,6 @@ function AnimatedScatterPlot<T extends { id: string }>({
   getY,
   color,
   radius,
-  dottedOutline,
 }: ScatterPlotProps<T>) {
   return (
     <Group>
@@ -57,9 +56,7 @@ function AnimatedScatterPlot<T extends { id: string }>({
           <motion.circle
             key={datum.id}
             r={radius}
-            fill={dottedOutline ? 'none' : color}
-            strokeDasharray={dottedOutline ? '1,1' : undefined}
-            stroke={dottedOutline ? color : undefined}
+            fill={color}
             initial={{
               cx: getX(datum),
               cy: getY(datum) - 100,
