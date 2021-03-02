@@ -5,6 +5,7 @@ import { ArticleSummary } from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
 import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
+import { HighlightTeaserProps } from '~/components-styled/highlight-teaser';
 import { MaxWidth } from '~/components-styled/max-width';
 import { QuickLinks } from '~/components-styled/quick-links';
 import { RiskLevelIndicator } from '~/components-styled/risk-level-indicator';
@@ -38,7 +39,6 @@ import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 export { getStaticPaths } from '~/static-paths/vr';
-import { HighlightTeaserProps } from '~/components-styled/highlight-teaser';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -78,17 +78,17 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
       <Box bg="white" pb={4}>
         <MaxWidth>
           <TileList>
-            <WarningTile
-              message={siteText.regionaal_index.belangrijk_bericht}
-              variant="emphasis"
-            />
-
             <TopicalPageHeader
               showBackLink
               lastGenerated={Number(props.lastGenerated)}
               title={replaceComponentsInText(text.title, {
                 safetyRegionName: <strong>{props.safetyRegionName}</strong>,
               })}
+            />
+
+            <WarningTile
+              message={siteText.regionaal_index.belangrijk_bericht}
+              variant="emphasis"
             />
 
             <MiniTrendTileLayout>
