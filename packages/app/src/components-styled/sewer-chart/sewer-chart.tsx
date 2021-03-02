@@ -21,6 +21,7 @@ import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { TimeframeOption } from '~/utils/timeframe';
 import { useElementSize } from '~/utils/use-element-size';
 import { useIsMounted } from '~/utils/use-is-mounted';
+import { InlineText } from '../typography';
 import { Path } from './components/path';
 import { ScatterPlot } from './components/scatter-plot';
 import { ToggleOutlierButton } from './components/toggle-outlier-button';
@@ -216,7 +217,9 @@ export function SewerChart(props: SewerChartProps) {
           disabled={!hasOutliers}
           onClick={() => setDisplayOutliers(!displayOutliers)}
         >
-          {displayOutliers ? text.hide_outliers : text.display_outliers}
+          <InlineText bg="#f2f2f2">
+            {displayOutliers ? text.hide_outliers : text.display_outliers}
+          </InlineText>
         </ToggleOutlierButton>
 
         <svg
@@ -228,15 +231,15 @@ export function SewerChart(props: SewerChartProps) {
             position: 'absolute',
             top: 0,
             left: 0,
+            zIndex: -1,
           }}
         >
           <ScatterPlot
             data={outlierPreviews}
             getX={scales.getX}
             getY={getOutlierPreviewY}
-            color="rgba(89, 89, 89, 0.8)"
-            radius={4}
-            dottedOutline
+            color="rgba(89, 89, 89, 0.3)"
+            radius={2}
             isAnimated={isMounted}
           />
         </svg>
