@@ -507,7 +507,7 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
     },
     "titel": "Virus particles in wastewater",
-    "pagina_toelichting": "Average number of coronavirus particles per 100.000 inhabitants found in wastewater. The weekly average is calculated by adding up all the values measured at roughly 300 locations and dividing this by the number of measurements taken.If someone is infected with coronavirus, coronavirus particles will usually be present in their excrement, which is carried away into the sewers. By testing wastewater samples collected at treatment plants, we can find out how much of the virus is present in a given area. Such testing is still experimental. In the long run we hope that wastewater testing will enable early detection and monitoring of coronavirus.",
+    "pagina_toelichting": "If someone is infected with coronavirus, coronavirus particles will usually be present in their excrement, which is carried away into the sewers. By testing wastewater samples collected at treatment plants, we can find out how much of the virus is present in a given area. Such testing is still experimental. In the long run we hope that wastewater testing will enable early detection and monitoring of coronavirus.",
     "barscale_titel": "Average number of virus particles per 100.000 inhabitants",
     "extra_uitleg": "The weekly average for all of the Netherlands is calculated by adding up all the values measured in one week and dividing this by the number of measurements taken.",
     "barscale_screenreader_text": "{{value}} virus particles per 100.000 inhabitants",
@@ -538,10 +538,10 @@
       }
     },
     "kpi_titel": "Average number of coronavirus particles per 100.000 people",
-    "total_measurements_title": "Aantal metingen deze week",
-    "total_measurements_description": "Meetlocaties kunnen ....",
-    "total_measurements_locations": "In totaal hebben {{sampled_installation_count}} van de {{total_installation_count}} meetlocaties minimaal één keer een meting doorgegeven.",
-    "warning_method": ""
+    "warning_method": "",
+    "total_measurements_title": "",
+    "total_measurements_description": "",
+    "total_measurements_locations": ""
   },
   "notfound_titel": {
     "text": "Something went wrong"
@@ -762,7 +762,13 @@
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -829,10 +835,10 @@
     "bar_chart_accessibility_description": "",
     "display_outliers": "Display outliers",
     "hide_outliers": "Hide outliers",
-    "total_measurements_title": "Aantal metingen deze week",
-    "total_measurements_description": "Meetlocaties kunnen ....",
-    "total_measurements_locations": "In totaal hebben {{sampled_installation_count}} van de {{total_installation_count}} meetlocaties minimaal één keer een meting doorgegeven.",
-    "warning_method": ""
+    "warning_method": "",
+    "total_measurements_title": "",
+    "total_measurements_description": "",
+    "total_measurements_locations": ""
   },
   "gemeente_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Hospital admissions",
@@ -965,10 +971,10 @@
     "bar_chart_accessibility_description": "",
     "display_outliers": "Display outliers",
     "hide_outliers": "Hide outliers",
-    "total_measurements_title": "Aantal metingen deze week",
-    "total_measurements_description": "Meetlocaties kunnen ....",
-    "total_measurements_locations": "In totaal hebben {{sampled_installation_count}} van de {{total_installation_count}} meetlocaties minimaal één keer een meting doorgegeven.",
-    "warning_method": ""
+    "warning_method": "",
+    "total_measurements_title": "",
+    "total_measurements_description": "",
+    "total_measurements_locations": ""
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Risk level map of the Netherlands",
@@ -2072,7 +2078,11 @@
     "expected_page_additions": {
       "title": "Expected data on vaccinations",
       "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
-      "additions": ["", "", ""]
+      "additions": [
+        "",
+        "",
+        ""
+      ]
     },
     "data": {
       "difference": "",
@@ -2197,7 +2207,11 @@
       "kpi_expected_page_additions": {
         "title": "Expected data on vaccinations",
         "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
-        "additions": ["", "", ""]
+        "additions": [
+          "",
+          "",
+          ""
+        ]
       },
       "vaccination_chart": {
         "product_names": {
@@ -2243,7 +2257,6 @@
   },
   "nationaal_actueel": {
     "title": "The current situation in {{the_netherlands}}",
-    "title_link": "View all data for the Netherlands",
     "the_netherlands": "The Netherlands",
     "metadata": {
       "title": "Coronavirus Dashboard | COVID-19 | Government.nl",
@@ -2322,7 +2335,8 @@
       "title": "More information about the coronavirus",
       "subtitle": "New information about a range of topics concerning coronavirus data is posted here regularly.",
       "all_articles": "View all articles"
-    }
+    },
+    "title_link": ""
   },
   "common.tooltip.positive_tested_value": "",
   "search": {
@@ -2496,7 +2510,6 @@
     "titel": "Risk level in {{safetyRegionName}}",
     "pagina_toelichting": "Every 2 weeks we reassess the risk level in each safety region based on the number of positive tests (new confirmed cases) and the number of hospital admissions there. If one of these figures gives cause to set a higher risk level than the other, the higher risk level applies. Certain measures apply at each risk level. The exact measures that apply in this safety region depend on the situation in the rest of the country as well as the situation here.",
     "current_escalation_level": "Current risk level",
-    "escalation_level_last_determined": "Risiconiveau bepaald op {{last_determined}}",
     "bronnen": {
       "rivm_positieve_testen": {
         "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv",
@@ -2542,7 +2555,8 @@
       "4": {
         "toelichting": "This is the risk level that currently applies in this region. The risk level is reassessed every 2 weeks based on the number of hospital admissions and the number of positive tests (new confirmed cases) at that time.\n\n**Risk level determined with the figures from 22 to 28 February. The risk level will be reassessed around 16 March.**"
       }
-    }
+    },
+    "escalation_level_last_determined": ""
   },
   "gemeente_sterfte": {
     "titel_sidebar": "Deaths",
