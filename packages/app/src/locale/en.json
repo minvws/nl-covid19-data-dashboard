@@ -2233,9 +2233,47 @@
     "laatst_bijgewerkt": "Last update: {{date}}"
   },
   "nationaal_actueel": {
-    "title": "The current situation in {{the_netherlands}}",
-    "title_link": "View all data for the Netherlands",
+    "title": "Current",
     "the_netherlands": "The Netherlands",
+
+    "secties": {
+      "actuele_situatie": {
+        "titel": "The current situation in {{the_netherlands}}",
+        "link": {
+          "text": "View all data for the Netherlands",
+          "href": "/landelijk/vaccinaties"
+        }
+      },
+      "artikelen": {
+        "titel": "Actuele artikelen",
+        "link": {
+          "text": "Bekijk alle artikelen ",
+          "href": "__@TODO_add_link"
+        }
+      },
+      "risicokaart": {
+        "titel": "De risicokaart van Nederland",
+        "link": {
+          "text": "Bekijk de risiconiveaus van alle regio's",
+          "href": "__@TODO_add_link"
+        }
+      },
+      "positief_geteste_mensen": {
+        "titel": "Positief geteste mensen in Nederland",
+        "link": {
+          "text": "Bekijk de risiconiveaus van alle regio's",
+          "href": "__@TODO_add_link"
+        }
+      },
+      "meer_lezen": {
+        "titel": "Meer lezen over het coronavirus",
+        "link": {
+          "text": "Bekijk de risiconiveaus van alle regio's",
+          "href": "__@TODO_add_link"
+        }
+      }
+    },
+
     "metadata": {
       "title": "Coronavirus Dashboard | COVID-19 | Government.nl",
       "description": "Information on the development of the coronavirus in the Netherlands."

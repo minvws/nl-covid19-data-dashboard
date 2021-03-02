@@ -2233,9 +2233,48 @@
     "laatst_bijgewerkt": "Laatst bijgewerkt: {{date}}"
   },
   "nationaal_actueel": {
-    "title": "De actuele situatie in {{the_netherlands}}",
-    "title_link": "Bekijk alle cijfers van Nederland",
+    "title": "Actueel",
     "the_netherlands": "Nederland",
+
+    "secties": {
+      "actuele_situatie": {
+        "titel": "De actuele situatie in {{the_netherlands}}",
+        "link": {
+          "text": "Bekijk alle cijfers van Nederland",
+          "href": "/landelijk/vaccinaties"
+        }
+      },
+      "artikelen": {
+        "titel": "Actuele artikelen",
+        "link": {
+          "text": "Bekijk alle artikelen ",
+          "href": "/artikelen"
+        }
+      },
+      "risicokaart": {
+        "titel": "De risicokaart van Nederland",
+        "link": {
+          "text": "Bekijk de risiconiveaus van alle regio's",
+          "href": "__@TODO_add_link"
+        }
+      },
+      "positief_geteste_mensen": {
+        "titel": "Positief geteste mensen in Nederland",
+        "link": {
+          "text": "",
+          "href": "__@TODO_add_link"
+        }
+      },
+      "meer_lezen": {
+        "titel": "Meer lezen over het coronavirus",
+        "omschrijving": "Hier vindt u geregeld nieuwe berichten die allerlei zaken rondom de coronacijfers uitleggen.",
+        "link": {
+          "text": "Bekijk alle artikelen",
+          "href": "/artikelen"
+        }
+      }
+    },
+
     "metadata": {
       "title": "Coronadashboard | COVID-19 | Rijksoverheid.nl",
       "description": "Informatie over de ontwikkeling van het coronavirus in Nederland."
@@ -2310,9 +2349,9 @@
       }
     },
     "latest_articles": {
-      "title": "Meer lezen over het coronavirus",
-      "subtitle": "Hier vindt u geregeld nieuwe berichten die allerlei zaken rondom de coronacijfers uitleggen.",
-      "all_articles": "Bekijk alle artikelen"
+      "title": "__wordt niet meer gebruikt",
+      "subtitle": "__wordt niet meer gebruikt",
+      "all_articles": "__wordt niet meer gebruikt"
     }
   },
   "common.tooltip.positive_tested_value": "",

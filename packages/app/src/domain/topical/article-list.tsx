@@ -22,13 +22,13 @@ export function ArticleList({ articleSummaries, hideLink }: ArticleListProps) {
   }
 
   return (
-    <Box
+    /* <Box
       css={css({
         display: 'flex',
         flexDirection: 'column',
       })}
     >
-      <Box>
+       <Box>
         <Heading
           level={2}
           fontSize={{ _: '2rem', lg: '2.75em' }}
@@ -65,27 +65,27 @@ export function ArticleList({ articleSummaries, hideLink }: ArticleListProps) {
             </LinkWithIcon>
           )}
         </Box>
-      </Box>
-      <Box
-        display="flex"
-        alignItems="stretch"
-        margin={0}
-        maxWidth="100%"
-        flexWrap="wrap"
-        mt={3}
-      >
-        {articleSummaries.map((summary) => (
-          <ArticleBox key={summary.slug.current}>
-            <ArticleTeaser
-              title={summary.title}
-              slug={summary.slug.current}
-              summary={summary.summary}
-              cover={summary.cover}
-            />
-          </ArticleBox>
-        ))}
-      </Box>
+      </Box> */
+    <Box
+      display="flex"
+      alignItems="stretch"
+      margin={0}
+      maxWidth="100%"
+      flexWrap="wrap"
+      mt={3}
+    >
+      {articleSummaries.map((summary) => (
+        <ArticleBox key={summary.slug.current}>
+          <ArticleTeaser
+            title={summary.title}
+            slug={summary.slug.current}
+            summary={summary.summary}
+            cover={summary.cover}
+          />
+        </ArticleBox>
+      ))}
     </Box>
+    /* </Box> */
   );
 }
 
