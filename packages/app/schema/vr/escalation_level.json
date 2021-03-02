@@ -6,6 +6,7 @@
     "date_unix",
     "level",
     "valid_from_unix",
+    "last_determined_unix",
     "date_of_insertion_unix"
   ],
   "additionalProperties": false,
@@ -17,6 +18,7 @@
       "maximum": 4
     },
     "valid_from_unix": { "type": "integer" },
+    "last_determined_unix": { "type": "integer" },
     "date_of_insertion_unix": { "type": "integer" }
   }
 }

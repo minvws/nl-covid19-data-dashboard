@@ -2500,6 +2500,7 @@
     "titel": "Risk level in {{safetyRegionName}}",
     "pagina_toelichting": "Every 2 weeks we reassess the risk level in each safety region based on the number of positive tests (new confirmed cases) and the number of hospital admissions there. If one of these figures gives cause to set a higher risk level than the other, the higher risk level applies. Certain measures apply at each risk level. The exact measures that apply in this safety region depend on the situation in the rest of the country as well as the situation here.",
     "current_escalation_level": "Current risk level",
+    "escalation_level_last_determined": "Risiconiveau bepaald op {{last_determined}}",
     "bronnen": {
       "rivm_positieve_testen": {
         "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv",
