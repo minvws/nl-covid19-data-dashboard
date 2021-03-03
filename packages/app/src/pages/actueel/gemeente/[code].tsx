@@ -171,7 +171,7 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
                 level={filteredRegion.level}
                 code={filteredRegion.vrcode}
                 escalationTypes={escalationText.types}
-                href={`/veiligheidsregio/${safetyRegionForMunicipality?.code}/maatregelen`}
+                href={`/veiligheidsregio/${safetyRegionForMunicipality?.code}/risiconiveau`}
               >
                 {safetyRegionForMunicipality && (
                   <>
@@ -277,6 +277,8 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
               </TopicalTile>
             </Box>
 
+            <DataSitemap />
+
             <Box pb={4}>
               <TopicalSectionHeader
                 title={siteText.common_actueel.secties.meer_lezen.titel}
@@ -287,8 +289,6 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
               />
               <ArticleList articleSummaries={content.articles} />
             </Box>
-
-            <DataSitemap />
           </TileList>
         </MaxWidth>
       </Box>

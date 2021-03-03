@@ -31,7 +31,7 @@ export function WarningTile({
     <StyledTile>
       <WarningBox variant={variant}>
         {isSmallScreen ? (
-          <Box width="10px" />
+          <Box width="6px" />
         ) : (
           <IconWrapper>
             <Icon />
@@ -84,9 +84,9 @@ const IconWrapper = styled(Box)(
       borderRadius: 1,
       display: 'block',
       fill: 'black',
-      width: asResponsiveArray({ _: 30, sm: 38 }),
-      height: asResponsiveArray({ _: 30, sm: 38 }),
-      mx: asResponsiveArray({ _: '7px', sm: '21px' }),
+      width: asResponsiveArray({ _: 24, sm: 24 }),
+      height: asResponsiveArray({ _: 24, sm: 24 }),
+      mx: asResponsiveArray({ _: '7px', sm: '10px' }),
     },
   })
 );
@@ -109,7 +109,7 @@ const WarningMessageBox = styled(Box)<{ variant: WarningMessageVariant }>(
 const Children = styled.div<{ variant: WarningMessageVariant }>(
   ({ variant }) => {
     return css({
-      fontSize: variant === 'emphasis' ? '1.25rem' : 2,
+      fontSize: variant === 'emphasis' ? '1rem' : 2,
       fontWeight: variant === 'emphasis' ? 'bold' : 'normal',
       borderBottomRightRadius: 1,
       borderTopRightRadius: 1,
@@ -120,6 +120,10 @@ const Children = styled.div<{ variant: WarningMessageVariant }>(
         ':last-child': {
           mb: 0,
         },
+      },
+
+      '> a': {
+        color: 'hotpink !important',
       },
     });
   }

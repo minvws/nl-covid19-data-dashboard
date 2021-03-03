@@ -5,7 +5,7 @@ import { Heading, HeadingLevel, HeadingProps } from '../typography';
 
 type TitleProps = {
   title: string;
-  icon: ReactNode;
+  icon?: ReactNode;
   subtitle?: string;
   level?: HeadingLevel;
 } & Omit<HeadingProps, 'children' | 'level'>;
