@@ -16,8 +16,10 @@ const text = siteText.section_sterftemonitor;
 
 export function DeceasedMonitorSection({
   data,
+  showDataExplainer,
 }: {
   data: NationalDeceasedCbs | RegionalDeceasedCbs;
+  showDataExplainer?: boolean;
 }) {
   const theme = useTheme();
 
@@ -39,14 +41,16 @@ export function DeceasedMonitorSection({
         }}
       />
 
-      <AnchorTile
-        title={text.cbs_message.title}
-        label={text.cbs_message.link.text}
-        href={text.cbs_message.link.href}
-        external
-      >
-        {text.cbs_message.message}
-      </AnchorTile>
+      {showDataExplainer && (
+        <AnchorTile
+          title={text.cbs_message.title}
+          label={text.cbs_message.link.text}
+          href={text.cbs_message.link.href}
+          external
+        >
+          {text.cbs_message.message}
+        </AnchorTile>
+      )}
 
       <ChartTile
         metadata={{ source: text.bronnen.cbs }}
