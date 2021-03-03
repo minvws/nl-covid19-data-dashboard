@@ -101,7 +101,6 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
                 text.secties.actuele_situatie.titel,
                 {
                   safetyRegionName: props.safetyRegionName,
-                  vrCode,
                 }
               )}
               link={{

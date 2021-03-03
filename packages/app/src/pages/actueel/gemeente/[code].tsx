@@ -99,8 +99,23 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
               lastGenerated={Number(props.lastGenerated)}
               title={replaceComponentsInText(text.title, {
                 municipalityName: municipalityName,
-                gmCode,
               })}
+              link={
+                typeof gmCode === 'string'
+                  ? {
+                      text: replaceVariablesInText(
+                        text.secties.actuele_situatie.link.text,
+                        {
+                          municipalityName: municipalityName,
+                        }
+                      ),
+                      href: replaceVariablesInText(
+                        text.secties.actuele_situatie.link.href,
+                        { gmCode }
+                      ),
+                    }
+                  : undefined
+              }
             />
             <WarningTile
               message={siteText.regionaal_index.belangrijk_bericht}
