@@ -1,3 +1,4 @@
+import { isEmpty } from 'lodash';
 import { ReactNode } from 'react';
 import { ArrowIconLeft, ArrowIconRight } from '~/components-styled/arrow-icon';
 import { Box } from '~/components-styled/base';
@@ -61,18 +62,25 @@ export function TopicalSectionHeader({
           >
             {title}
           </Heading>
-          {link && (
-            <Box ml={{ _: 0, lg: 4 }} mb={'2px'}>
-              <LinkWithIcon
-                href={link.href}
-                icon={<ArrowIconRight />}
-                iconPlacement="right"
-                fontWeight="bold"
-              >
-                {link.text}
-              </LinkWithIcon>
-            </Box>
-          )}
+
+          {
+            /**
+             * Check also for empty link text, so that clearing it in Lokalize
+             * actually removes the link altogether
+             */
+            link && !isEmpty(link.text) ? (
+              <Box ml={{ _: 0, lg: 4 }} mb={'2px'}>
+                <LinkWithIcon
+                  href={link.href}
+                  icon={<ArrowIconRight />}
+                  iconPlacement="right"
+                  fontWeight="bold"
+                >
+                  {link.text}
+                </LinkWithIcon>
+              </Box>
+            ) : null
+          }
         </Box>
         {lastGenerated && (
           <InlineText color="bodyLight" fontSize={2}>
