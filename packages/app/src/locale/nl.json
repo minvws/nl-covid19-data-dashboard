@@ -538,9 +538,9 @@
       }
     },
     "kpi_titel": "Gemiddelde aantal virusdeeltjes per 100.000 inwoners",
-    "warning_method": "Deze manier van meten wordt nu nog getest. We hopen dat de rioolwatermetingen ons over een tijdje helpen om het virus op te sporen en te volgen. [Lees meer over dit programma op de website van het RIVM](https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater)",
-    "total_measurements_title": "Aantal metingen deze week",
-    "total_measurements_description": "Meetlocaties kunnen ....",
+    "warning_method": "Deze manier van meten wordt nu nog getest. We hopen dat de rioolwatermetingen ons over een tijdje helpen om het virus op te sporen en te volgen. [Lees meer over dit programma op de website van het RIVM](https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater).",
+    "total_measurements_title": "Aantal metingen per week",
+    "total_measurements_description": "Meetlocaties kunnen meerdere metingen per week doorgeven. Het landelijk gemiddelde per week wordt berekend door de gemiddelden per meetlocatie te wegen naar het aantal aangesloten inwoners per locatie. Per week kan het aantal metingen per locatie verschillen doordat niet alle metingen lukken.",
     "total_measurements_locations": "In totaal hebben {{sampled_installation_count}} van de {{total_installation_count}} meetlocaties minimaal één meting doorgegeven in de week."
   },
   "notfound_titel": {
@@ -762,13 +762,7 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": [
-      "0 tot 20",
-      "20 tot 40",
-      "40 tot 60",
-      "60 tot 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -818,7 +812,7 @@
     "graph_range_description": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners over tijd",
     "titel_kpi": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners",
     "total_installation_count_titel": "Aantal meetlocaties",
-    "total_installation_count_description": "Meetlocaties kunnen meerdere metingen per week doorgeven. Het landelijk gemiddelde per week wordt berekend door de gemiddelden per meetlocatie te wegen naar het aantal aangesloten inwoners per locatie. Per week kan het aantal metingen per locatie verschillen doordat niet alle metingen lukken.",
+    "total_installation_count_description": "Meetlocaties kunnen meerdere metingen per week doorgeven. Het weekgemiddelde wordt berekend door de weekgemiddelden per meetlocatie te wegen naar het aantal aangesloten inwoners per locatie. Per week kan het aantal metingen per locatie verschillen doordat niet alle metingen lukken.",
     "rwzi_abbrev": "",
     "reference": {
       "href": "/verantwoording#rioolwater",
@@ -835,9 +829,9 @@
     "bar_chart_accessibility_description": "",
     "display_outliers": "Toon uitschieters",
     "hide_outliers": "Verberg uitschieters",
-    "warning_method": "Deze manier van meten wordt nu nog getest. We hopen dat de rioolwatermetingen ons over een tijdje helpen om het virus op te sporen en te volgen. [Lees meer over dit programma op de website van het RIVM](https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater)",
-    "total_measurements_title": "Aantal metingen deze week",
-    "total_measurements_description": "Meetlocaties kunnen ....",
+    "warning_method": "Deze manier van meten wordt nu nog getest. We hopen dat de rioolwatermetingen ons over een tijdje helpen om het virus op te sporen en te volgen. [Lees meer over dit programma op de website van het RIVM](https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater).",
+    "total_measurements_title": "Aantal metingen per week",
+    "total_measurements_description": "Meetlocaties kunnen meerdere metingen per week doorgeven. Het weekgemiddelde wordt berekend door de weekgemiddelden per meetlocatie te wegen naar het aantal aangesloten inwoners per locatie. Per week kan het aantal metingen per locatie verschillen doordat niet alle metingen lukken.",
     "total_measurements_locations": "In totaal hebben {{sampled_installation_count}} van de {{total_installation_count}} meetlocaties minimaal één meting doorgegeven in de week."
   },
   "gemeente_ziekenhuisopnames_per_dag": {
@@ -971,9 +965,9 @@
     "bar_chart_accessibility_description": "",
     "display_outliers": "Toon uitschieters",
     "hide_outliers": "Verberg uitschieters",
-    "warning_method": "Deze manier van meten wordt nu nog getest. We hopen dat de rioolwatermetingen ons over een tijdje helpen om het virus op te sporen en te volgen. [Lees meer over dit programma op de website van het RIVM](https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater)",
-    "total_measurements_title": "Aantal metingen deze week",
-    "total_measurements_description": "Meetlocaties kunnen ....",
+    "warning_method": "Deze manier van meten wordt nu nog getest. We hopen dat de rioolwatermetingen ons over een tijdje helpen om het virus op te sporen en te volgen. [Lees meer over dit programma op de website van het RIVM](https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater).",
+    "total_measurements_title": "Aantal metingen per week",
+    "total_measurements_description": "Meetlocaties kunnen meerdere metingen per week doorgeven. Het landelijk gemiddelde per week wordt berekend door de gemiddelden per meetlocatie te wegen naar het aantal aangesloten inwoners per locatie. Per week kan het aantal metingen per locatie verschillen doordat niet alle metingen lukken.",
     "total_measurements_locations": "In totaal hebben {{sampled_installation_count}} van de {{total_installation_count}} meetlocaties minimaal één meting doorgegeven in de week."
   },
   "veiligheidsregio_index": {
@@ -1807,7 +1801,7 @@
       }
     },
     "deceased_monitor_chart_title": "Totaal aantal overledenen per week",
-    "deceased_monitor_chart_description": "Deze grafiek laat zien hoeveel mensen er in totaal wekelijks overleden zijn in Nederland. Het aantal daadwerkelijk overleden mensen wordt vergeleken met het aantal overlijdens dat wordt verwacht op basis van voorgaande jaren. De lichtblauwe lijn en omliggende marge tonen de sterfte die op dat moment in het jaar wordt verwacht, de donkerblauwe lijn toont de sterfte zoals deze heeft plaatsgevonden.",
+    "deceased_monitor_chart_description": "Deze grafiek laat zien hoeveel mensen er in totaal wekelijks overleden zijn. Het aantal daadwerkelijk overleden mensen wordt vergeleken met het aantal overlijdens dat wordt verwacht op basis van voorgaande jaren. De lichtblauwe lijn en omliggende marge tonen de sterfte die op dat moment in het jaar wordt verwacht, de donkerblauwe lijn toont de sterfte zoals deze heeft plaatsgevonden.",
     "deceased_monitor_chart_legenda_registered": "Daadwerkelijke aantal overledenen",
     "deceased_monitor_chart_legenda_expected": "Verwachte aantal overledenen",
     "deceased_monitor_chart_legenda_expected_margin": "Boven- en ondergrens van verwachte aantal overledenen"
@@ -1966,8 +1960,8 @@
       "vaccin_levering_en_prikken": "Het linkerdeel van de grafiek laat zien hoeveel vaccins Nederland in totaal heeft gekregen en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal verwachten te krijgen en hoeveel prikken we verwachten te zetten.",
       "vaccinatie_draagvlak": "Deze grafiek toont hoeveel procent van de bevolking zelf een prik tegen corona wil hebben."
     },
-    "link_source": "Bekijk de databron van \"{{subject}}\" op",
-    "link_download": "Download de databron van \"{{subject}}\" op",
+    "link_source": "Download de databron van \"{{subject}}\" op {{source}}",
+    "link_download": "Bekijk de databron van \"{{subject}}\" op {{source}}",
     "text_source": "Bekijk de databron van \"{{subject}}\" op {{source}}",
     "text_download": "Download de databron van \"{{subject}}\" op {{source}}"
   },
@@ -2078,11 +2072,7 @@
     "expected_page_additions": {
       "title": "Verwachte toevoegingen aan deze pagina",
       "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer de vaccinatiegraad.",
-      "additions": [
-        "",
-        "",
-        ""
-      ]
+      "additions": ["", "", ""]
     },
     "data": {
       "difference": "Do not remove this key. It is required as a temporary workaround",
@@ -2207,11 +2197,7 @@
       "kpi_expected_page_additions": {
         "title": "Verwachte toevoegingen aan deze pagina",
         "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer de vaccinatiegraad.",
-        "additions": [
-          "",
-          "",
-          ""
-        ]
+        "additions": ["", "", ""]
       },
       "vaccination_chart": {
         "product_names": {
@@ -2253,7 +2239,23 @@
   },
   "common_actueel": {
     "terug_naar_landelijk": "Terug naar landelijke situatie",
-    "laatst_bijgewerkt": "Laatst bijgewerkt: {{date}}"
+    "laatst_bijgewerkt": "Laatst bijgewerkt: {{date}}",
+    "secties": {
+      "artikelen": {
+        "titel": "Actuele ontwikkelingen"
+      },
+      "risicokaart": {
+        "titel": "De risicokaart van Nederland"
+      },
+      "meer_lezen": {
+        "titel": "Meer lezen over het coronavirus",
+        "omschrijving": "Hier vindt u geregeld nieuwe berichten die allerlei zaken rondom de coronacijfers uitleggen.",
+        "link": {
+          "text": "Bekijk alle artikelen",
+          "href": "/artikelen"
+        }
+      }
+    }
   },
   "nationaal_actueel": {
     "title": "De actuele situatie in {{the_netherlands}}",
@@ -2336,7 +2338,19 @@
       "subtitle": "Hier vindt u geregeld nieuwe berichten die allerlei zaken rondom de coronacijfers uitleggen.",
       "all_articles": "Bekijk alle artikelen"
     },
-    "title_link": "Bekijk alle cijfers van Nederland"
+    "title_link": "Bekijk alle cijfers van Nederland",
+    "secties": {
+      "actuele_situatie": {
+        "titel": "De actuele situatie in {{the_netherlands}}",
+        "link": {
+          "text": "Bekijk alle cijfers van Nederland",
+          "href": "/landelijk/vaccinaties"
+        }
+      },
+      "positief_geteste_mensen": {
+        "titel": "Positief geteste mensen in Nederland"
+      }
+    }
   },
   "common.tooltip.positive_tested_value": "",
   "search": {
@@ -2355,7 +2369,7 @@
       "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. De laatste keer is dit op 2 maart gebeurd. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. [Meer informatie over de risiconiveaus](/over-risiconiveaus).\n\n**De landelijke lockdown blijft van kracht tot en met ten minste 15 maart. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**"
     },
     "risoconiveau_maatregelen": {
-      "title": "Risiconiveau & maatregelen",
+      "title": "Risiconiveau",
       "description": "Voor de veiligheidsregio geldt het risiconiveau",
       "bekijk_href": "Bekijk de maatregelen"
     },
@@ -2415,6 +2429,15 @@
         "veiligheidsregio": "Cijfers van veiligheidsregio {{safetyRegionName}}",
         "gemeente": "Cijfers per gemeente"
       }
+    },
+    "secties": {
+      "actuele_situatie": {
+        "titel": "De actuele situatie in veiligheidsregio {{safetyRegionName}}",
+        "link": {
+          "text": "Bekijk alle cijfers van {{safetyRegionName}}",
+          "href": "/veiligheidsregio/{{vrCode}}/risiconiveau"
+        }
+      }
     }
   },
   "gemeente_actueel": {
@@ -2428,7 +2451,7 @@
       "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. De laatste keer is dit op 2 maart gebeurd. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. [Meer informatie over de risiconiveaus](/over-risiconiveaus).\n\n**De landelijke lockdown blijft van kracht tot en met ten minste 15 maart. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**"
     },
     "risoconiveau_maatregelen": {
-      "title": "Risiconiveau & maatregelen",
+      "title": "Risiconiveau",
       "description": "Voor de veiligheidsregio van deze gemeente geldt het risiconiveau",
       "bekijk_href": "Bekijk de maatregelen"
     },
@@ -2489,6 +2512,15 @@
         "veiligheidsregio_fallback": "Cijfers per veiligheidsregio",
         "gemeente": "Cijfers van gemeente {{municipalityName}}"
       }
+    },
+    "secties": {
+      "actuele_situatie": {
+        "titel": "Actuele situatie in {{municipalityName}}",
+        "link": {
+          "text": "Bekijk alle cijfers van {{municipalityName}}",
+          "href": "/gemeente/{{gmCode}}/positief-geteste-mensen"
+        }
+      }
     }
   },
   "toegankelijkheid_metadata": {
@@ -2544,19 +2576,19 @@
     },
     "types": {
       "1": {
-        "toelichting": "Dit is het risiconiveau dat nu geldt in deze regio. Het risiconiveau wordt elke twee weken bepaald op basis van het aantal ziekenhuisopnames en het aantal positieve testen van dat moment.\n\n**Risiconiveau vastgesteld met de cijfers van 22 t/m 28 februari. Rond 16 maart wordt het risiconiveau opnieuw bepaald.**"
+        "toelichting": "Dit is het risiconiveau dat nu geldt in deze regio. Het risiconiveau wordt elke twee weken bepaald op basis van het aantal ziekenhuisopnames en het aantal positieve testen van dat moment."
       },
       "2": {
-        "toelichting": "Dit is het risiconiveau dat nu geldt in deze regio. Het risiconiveau wordt elke twee weken bepaald op basis van het aantal ziekenhuisopnames en het aantal positieve testen van dat moment.\n\n**Risiconiveau vastgesteld met de cijfers van 22 t/m 28 februari. Rond 16 maart wordt het risiconiveau opnieuw bepaald.**"
+        "toelichting": "Dit is het risiconiveau dat nu geldt in deze regio. Het risiconiveau wordt elke twee weken bepaald op basis van het aantal ziekenhuisopnames en het aantal positieve testen van dat moment."
       },
       "3": {
-        "toelichting": "Dit is het risiconiveau dat nu geldt in deze regio. Het risiconiveau wordt elke twee weken bepaald op basis van het aantal ziekenhuisopnames en het aantal positieve testen van dat moment.\n\n**Risiconiveau vastgesteld met de cijfers van 22 t/m 28 februari. Rond 16 maart wordt het risiconiveau opnieuw bepaald.**"
+        "toelichting": "Dit is het risiconiveau dat nu geldt in deze regio. Het risiconiveau wordt elke twee weken bepaald op basis van het aantal ziekenhuisopnames en het aantal positieve testen van dat moment."
       },
       "4": {
-        "toelichting": "Dit is het risiconiveau dat nu geldt in deze regio. Het risiconiveau wordt elke twee weken bepaald op basis van het aantal ziekenhuisopnames en het aantal positieve testen van dat moment.\n\n**Risiconiveau vastgesteld met de cijfers van 22 t/m 28 februari. Rond 16 maart wordt het risiconiveau opnieuw bepaald.**"
+        "toelichting": "Dit is het risiconiveau dat nu geldt in deze regio. Het risiconiveau wordt elke twee weken bepaald op basis van het aantal ziekenhuisopnames en het aantal positieve testen van dat moment."
       }
     },
-    "escalation_level_last_determined": "Risiconiveau bepaald op {{last_determined}}"
+    "escalation_level_last_determined": "Dit risiconiveau is bepaald op {{last_determined}}, op basis van de cijfers van 22 t/m 28 februari. Rond 16 maart wordt het risiconiveau opnieuw bepaald."
   },
   "gemeente_sterfte": {
     "titel_sidebar": "Sterfte",
