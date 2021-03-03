@@ -100,8 +100,8 @@ export function BarChartGraph({
         labelProps={{
           verticalAnchor: 'start',
           textAnchor: 'middle',
-          width: width - spacing.left,
-          x: (width - spacing.left) / 2,
+          width: barsWidth,
+          x: barsWidth / 2,
         }}
         labelClassName="bar-chart-x-axis-label"
       />
