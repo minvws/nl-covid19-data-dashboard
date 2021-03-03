@@ -35,7 +35,7 @@ export type TrendProps = {
 export function Trend({
   trend,
   type = 'line',
-  areaFillOpacity = 0.05,
+  areaFillOpacity = 0.2,
   strokeWidth = 2,
   style = 'solid',
   color = colors.data.primary,

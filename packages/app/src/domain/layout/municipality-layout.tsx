@@ -109,7 +109,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                 aria-label={siteText.aria_labels.metriek_navigatie}
               >
                 <Box>
-                  <Category marginBottom={0}>{municipalityName}</Category>
+                  <Category>{municipalityName}</Category>
                   {safetyRegion && (
                     <Text pl={3}>
                       {siteText.common.veiligheidsregio_label}{' '}

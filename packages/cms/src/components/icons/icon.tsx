@@ -65,7 +65,6 @@ export function Icon(props: IconProps) {
           header="Kies een icoon"
           id="dialog-example"
           onClose={onClose}
-          /* @ts-expect-error Dialog is not properly typed and can receive Layer props (eg zOffset) */
           zOffset={1000}
         >
           <Box padding={4}>
