@@ -16,10 +16,10 @@ const text = siteText.section_sterftemonitor;
 
 export function DeceasedMonitorSection({
   data,
-  showDataExplainer,
+  showDataMessage,
 }: {
   data: NationalDeceasedCbs | RegionalDeceasedCbs;
-  showDataExplainer?: boolean;
+  showDataMessage?: boolean;
 }) {
   const theme = useTheme();
 
@@ -41,7 +41,7 @@ export function DeceasedMonitorSection({
         }}
       />
 
-      {showDataExplainer && (
+      {showDataMessage && (
         <AnchorTile
           title={text.cbs_message.title}
           label={text.cbs_message.link.text}
