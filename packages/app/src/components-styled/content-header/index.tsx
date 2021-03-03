@@ -152,13 +152,7 @@ export function ContentHeader(props: ContentHeaderProps) {
                 headingLevel={headingLevel}
               />
             ) : (
-              <Box
-                display="flex"
-                flexDirection="row"
-                flexWrap="nowrap"
-                alignItems="center"
-                mb={-2}
-              >
+              <Box display="flex" flexWrap="nowrap" alignItems="center" mb={-2}>
                 <Box>
                   <Heading level={headingLevel} mb={0}>
                     {title}

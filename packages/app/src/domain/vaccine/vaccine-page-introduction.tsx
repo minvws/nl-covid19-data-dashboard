@@ -20,15 +20,15 @@ import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { DateRange } from '~/utils/get-trailing-date-range';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 
-interface VaccinesContentHeaderProps {
+interface VaccinePageIntroductionProps {
   text: Locale['vaccinaties'];
   data: National;
 }
 
-export function VaccineContentHeader({
+export function VaccinePageIntroduction({
   text,
   data,
-}: VaccinesContentHeaderProps) {
+}: VaccinePageIntroductionProps) {
   return (
     <Box spacing={4}>
       <Tile>

@@ -32,7 +32,7 @@ import {
 } from '~/domain/vaccine/milestones-view';
 import { useVaccineDeliveryData } from '~/domain/vaccine/use-vaccine-delivery-data';
 import { useVaccineNames } from '~/domain/vaccine/use-vaccine-names';
-import { VaccineContentHeader } from '~/domain/vaccine/vaccine-content-header';
+import { VaccinePageIntroduction } from '~/domain/vaccine/vaccine-page-introduction';
 import siteText from '~/locale/index';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { vaccineMilestonesQuery } from '~/queries/vaccine-milestones-query';
@@ -97,7 +97,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
         description={text.metadata.description}
       />
       <TileList>
-        <VaccineContentHeader data={data} text={text} />
+        <VaccinePageIntroduction data={data} text={text} />
 
         <ArticleStrip articles={content.highlight.articles} />
 
