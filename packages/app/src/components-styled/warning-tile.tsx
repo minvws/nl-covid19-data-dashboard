@@ -3,7 +3,6 @@ import { ComponentType, ReactNode } from 'react';
 import styled from 'styled-components';
 import WarningIcon from '~/assets/warning.svg';
 import { Tile } from '~/components-styled/tile';
-import { asResponsiveArray } from '~/style/utils';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { Box } from './base';
 
@@ -84,9 +83,9 @@ const IconWrapper = styled(Box)(
       borderRadius: 1,
       display: 'block',
       fill: 'black',
-      width: asResponsiveArray({ _: 24, sm: 24 }),
-      height: asResponsiveArray({ _: 24, sm: 24 }),
-      mx: asResponsiveArray({ _: '7px', sm: '10px' }),
+      width: 24,
+      height: 24,
+      mx: '10px',
     },
   })
 );
@@ -120,10 +119,6 @@ const Children = styled.div<{ variant: WarningMessageVariant }>(
         ':last-child': {
           mb: 0,
         },
-      },
-
-      '> a': {
-        color: 'hotpink !important',
       },
     });
   }
