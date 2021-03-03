@@ -62,18 +62,25 @@ export function TopicalSectionHeader({
           >
             {title}
           </Heading>
-          {link && !isEmpty(link.text) ? (
-            <Box ml={{ _: 0, lg: 4 }} mb={'2px'}>
-              <LinkWithIcon
-                href={link.href}
-                icon={<ArrowIconRight />}
-                iconPlacement="right"
-                fontWeight="bold"
-              >
-                {link.text}
-              </LinkWithIcon>
-            </Box>
-          ) : null}
+
+          {
+            /**
+             * Check also for empty link text, so that clearing it in Lokalize
+             * actually removes the link altogether
+             */
+            link && !isEmpty(link.text) ? (
+              <Box ml={{ _: 0, lg: 4 }} mb={'2px'}>
+                <LinkWithIcon
+                  href={link.href}
+                  icon={<ArrowIconRight />}
+                  iconPlacement="right"
+                  fontWeight="bold"
+                >
+                  {link.text}
+                </LinkWithIcon>
+              </Box>
+            ) : null
+          }
         </Box>
         {lastGenerated && (
           <InlineText color="bodyLight" fontSize={2}>
