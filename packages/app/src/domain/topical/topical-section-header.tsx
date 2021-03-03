@@ -1,3 +1,4 @@
+import { isEmpty } from 'lodash';
 import { ReactNode } from 'react';
 import { ArrowIconLeft, ArrowIconRight } from '~/components-styled/arrow-icon';
 import { Box } from '~/components-styled/base';
@@ -61,7 +62,7 @@ export function TopicalSectionHeader({
           >
             {title}
           </Heading>
-          {link && (
+          {link && !isEmpty(link.text) ? (
             <Box ml={{ _: 0, lg: 4 }} mb={'2px'}>
               <LinkWithIcon
                 href={link.href}
@@ -72,7 +73,7 @@ export function TopicalSectionHeader({
                 {link.text}
               </LinkWithIcon>
             </Box>
-          )}
+          ) : null}
         </Box>
         {lastGenerated && (
           <InlineText color="bodyLight" fontSize={2}>
