@@ -539,7 +539,7 @@
     },
     "kpi_titel": "Average number of coronavirus particles per 100.000 people",
     "warning_method": "",
-    "total_measurements_title": "",
+    "total_measurements_title": "Number of measurements this week",
     "total_measurements_description": "",
     "total_measurements_locations": ""
   },
@@ -836,7 +836,7 @@
     "display_outliers": "Display outliers",
     "hide_outliers": "Hide outliers",
     "warning_method": "",
-    "total_measurements_title": "",
+    "total_measurements_title": "Number of measurements this week",
     "total_measurements_description": "",
     "total_measurements_locations": ""
   },
@@ -972,7 +972,7 @@
     "display_outliers": "Display outliers",
     "hide_outliers": "Hide outliers",
     "warning_method": "",
-    "total_measurements_title": "",
+    "total_measurements_title": "Number of measurements this week",
     "total_measurements_description": "",
     "total_measurements_locations": ""
   },
@@ -2336,7 +2336,7 @@
       "subtitle": "New information about a range of topics concerning coronavirus data is posted here regularly.",
       "all_articles": "View all articles"
     },
-    "title_link": ""
+    "title_link": "View all data for the Netherlands"
   },
   "common.tooltip.positive_tested_value": "",
   "search": {
@@ -2556,7 +2556,7 @@
         "toelichting": "This is the risk level that currently applies in this region. The risk level is reassessed every 2 weeks based on the number of hospital admissions and the number of positive tests (new confirmed cases) at that time.\n\n**Risk level determined with the figures from 22 to 28 February. The risk level will be reassessed around 16 March.**"
       }
     },
-    "escalation_level_last_determined": ""
+    "escalation_level_last_determined": "Risk level determined on {{last_determined}}"
   },
   "gemeente_sterfte": {
     "titel_sidebar": "Deaths",
