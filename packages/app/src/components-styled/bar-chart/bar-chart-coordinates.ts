@@ -32,12 +32,10 @@ export interface BarChartCoordinates {
   values: BarChartValue[];
   getBarSize: (x: BarChartValue) => number;
   getBarOffset: (x: BarChartValue) => number | undefined;
-  getLabel: GetLabelFunction;
+  getLabel: (x: BarChartValue) => string;
   getTooltipCoordinates: GetTooltipCoordinates<BarChartValue>;
   labelFontSize: string;
 }
-
-type GetLabelFunction = (x: BarChartValue) => string;
 
 function calculateMaximumLabelLength(labels: string[], fontSize: string) {
   const longestLabel = labels.reduce(
