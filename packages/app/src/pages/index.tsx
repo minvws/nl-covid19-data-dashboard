@@ -109,7 +109,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
               }
             />
 
-            <Box width={{ lg: '75%' }}>
+            <Box width={{ lg: '66%' }}>
               <Search />
             </Box>
 
