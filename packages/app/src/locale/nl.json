@@ -1807,7 +1807,7 @@
       }
     },
     "deceased_monitor_chart_title": "Totaal aantal overledenen per week",
-    "deceased_monitor_chart_description": "Deze grafiek laat zien hoeveel mensen er in totaal wekelijks overleden zijn in Nederland. Het aantal daadwerkelijk overleden mensen wordt vergeleken met het aantal overlijdens dat wordt verwacht op basis van voorgaande jaren. De lichtblauwe lijn en omliggende marge tonen de sterfte die op dat moment in het jaar wordt verwacht, de donkerblauwe lijn toont de sterfte zoals deze heeft plaatsgevonden.",
+    "deceased_monitor_chart_description": "Deze grafiek laat zien hoeveel mensen er in totaal wekelijks overleden zijn. Het aantal daadwerkelijk overleden mensen wordt vergeleken met het aantal overlijdens dat wordt verwacht op basis van voorgaande jaren. De lichtblauwe lijn en omliggende marge tonen de sterfte die op dat moment in het jaar wordt verwacht, de donkerblauwe lijn toont de sterfte zoals deze heeft plaatsgevonden.",
     "deceased_monitor_chart_legenda_registered": "Daadwerkelijke aantal overledenen",
     "deceased_monitor_chart_legenda_expected": "Verwachte aantal overledenen",
     "deceased_monitor_chart_legenda_expected_margin": "Boven- en ondergrens van verwachte aantal overledenen"
