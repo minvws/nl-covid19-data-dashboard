@@ -539,8 +539,8 @@
     },
     "kpi_titel": "Gemiddelde aantal virusdeeltjes per 100.000 inwoners",
     "warning_method": "Deze manier van meten wordt nu nog getest. We hopen dat de rioolwatermetingen ons over een tijdje helpen om het virus op te sporen en te volgen. [Lees meer over dit programma op de website van het RIVM](https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater)",
-    "total_measurements_title": "Aantal metingen deze week",
-    "total_measurements_description": "Meetlocaties kunnen ....",
+    "total_measurements_title": "Aantal metingen per week",
+    "total_measurements_description": "Meetlocaties kunnen meerdere metingen per week doorgeven. Per week kan dit aantal verschillen omdat niet alle metingen lukken.",
     "total_measurements_locations": "In totaal hebben {{sampled_installation_count}} van de {{total_installation_count}} meetlocaties minimaal één meting doorgegeven in de week."
   },
   "notfound_titel": {
@@ -836,8 +836,8 @@
     "display_outliers": "Toon uitschieters",
     "hide_outliers": "Verberg uitschieters",
     "warning_method": "Deze manier van meten wordt nu nog getest. We hopen dat de rioolwatermetingen ons over een tijdje helpen om het virus op te sporen en te volgen. [Lees meer over dit programma op de website van het RIVM](https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater)",
-    "total_measurements_title": "Aantal metingen deze week",
-    "total_measurements_description": "Meetlocaties kunnen ....",
+    "total_measurements_title": "Aantal metingen per week",
+    "total_measurements_description": "Meetlocaties kunnen meerdere metingen per week doorgeven. Per week kan dit aantal verschillen omdat niet alle metingen lukken.",
     "total_measurements_locations": "In totaal hebben {{sampled_installation_count}} van de {{total_installation_count}} meetlocaties minimaal één meting doorgegeven in de week."
   },
   "gemeente_ziekenhuisopnames_per_dag": {
@@ -972,8 +972,8 @@
     "display_outliers": "Toon uitschieters",
     "hide_outliers": "Verberg uitschieters",
     "warning_method": "Deze manier van meten wordt nu nog getest. We hopen dat de rioolwatermetingen ons over een tijdje helpen om het virus op te sporen en te volgen. [Lees meer over dit programma op de website van het RIVM](https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater)",
-    "total_measurements_title": "Aantal metingen deze week",
-    "total_measurements_description": "Meetlocaties kunnen ....",
+    "total_measurements_title": "Aantal metingen per week",
+    "total_measurements_description": "Meetlocaties kunnen meerdere metingen per week doorgeven. Per week kan dit aantal verschillen omdat niet alle metingen lukken.",
     "total_measurements_locations": "In totaal hebben {{sampled_installation_count}} van de {{total_installation_count}} meetlocaties minimaal één meting doorgegeven in de week."
   },
   "veiligheidsregio_index": {
@@ -2556,7 +2556,7 @@
         "toelichting": "Dit is het risiconiveau dat nu geldt in deze regio. Het risiconiveau wordt elke twee weken bepaald op basis van het aantal ziekenhuisopnames en het aantal positieve testen van dat moment.\n\n**Risiconiveau vastgesteld met de cijfers van 22 t/m 28 februari. Rond 16 maart wordt het risiconiveau opnieuw bepaald.**"
       }
     },
-    "escalation_level_last_determined": "Risiconiveau bepaald op {{last_determined}}"
+    "escalation_level_last_determined": "Risiconiveau bepaald op {{last_determined}}."
   },
   "gemeente_sterfte": {
     "titel_sidebar": "Sterfte",
