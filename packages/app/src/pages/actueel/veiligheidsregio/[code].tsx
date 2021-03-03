@@ -171,7 +171,7 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
                 level={data.escalation_level.level}
                 code={data.code}
                 escalationTypes={escalationText.types}
-                href={`/veiligheidsregio/${router.query.code}/maatregelen`}
+                href={`/veiligheidsregio/${router.query.code}/risiconiveau`}
               >
                 <Link href={`/veiligheidsregio/${vrCode}/maatregelen`}>
                   <a>{text.risoconiveau_maatregelen.bekijk_href}</a>
@@ -201,7 +201,6 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
               <>
                 <TopicalSectionHeader
                   title={siteText.common_actueel.secties.artikelen.titel}
-                  link={siteText.common_actueel.secties.artikelen.link}
                 />
                 <EditorialTile
                   editorial={content.editorial}
@@ -256,6 +255,8 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
               </TopicalTile>
             </Box>
 
+            <DataSitemap />
+
             <Box pb={4}>
               <TopicalSectionHeader
                 title={siteText.common_actueel.secties.meer_lezen.titel}
@@ -266,8 +267,6 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
               />
               <ArticleList articleSummaries={content.articles} />
             </Box>
-
-            <DataSitemap />
           </TileList>
         </MaxWidth>
       </Box>

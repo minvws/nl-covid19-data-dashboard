@@ -1,6 +1,5 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import NederlandIcon from '~/assets/nederland.svg';
 import { ArrowIconRight } from '~/components-styled/arrow-icon';
 import { Title } from '~/components-styled/aside/title';
 import { Box } from '~/components-styled/base';
@@ -17,12 +16,11 @@ export function DataSitemap() {
   }
 
   return (
-    <Box>
+    <Box pb={4}>
       <Title
         level={2}
         title={siteText.nationaal_actueel.data_sitemap_titel}
-        fontSize="2.75em"
-        icon={<NederlandIcon />}
+        fontSize="2rem"
       />
       <Box>
         <Box maxWidth={{ md: 'maxWidthText' }} mb={4}>
@@ -160,6 +158,7 @@ const StyledHeader = styled(InlineText)(
   css({
     fontWeight: 'bold',
     display: 'block',
+    marginBottom: '0.5rem',
   })
 );
 

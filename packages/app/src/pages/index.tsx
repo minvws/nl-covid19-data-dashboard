@@ -111,7 +111,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
               link={text.secties.actuele_situatie.link}
             />
 
-            <Box width={{ lg: '75%' }}>
+            <Box width={{ lg: '65%' }}>
               <Search />
             </Box>
 
@@ -184,20 +184,19 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
             />
 
             {content.editorial && content.highlight && (
-              <>
+              <Box pt={3}>
                 <TopicalSectionHeader
                   title={siteText.common_actueel.secties.artikelen.titel}
-                  link={siteText.common_actueel.secties.artikelen.link}
                 />
 
                 <EditorialTile
                   editorial={content.editorial}
                   highlight={content.highlight}
                 />
-              </>
+              </Box>
             )}
 
-            <Box pb={4}>
+            <Box pb={4} pt={3}>
               <TopicalSectionHeader
                 title={siteText.common_actueel.secties.risicokaart.titel}
               />
@@ -242,6 +241,8 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
               </TopicalTile>
             </Box>
 
+            <DataSitemap />
+
             <Box pb={4}>
               <TopicalSectionHeader
                 title={siteText.common_actueel.secties.meer_lezen.titel}
@@ -252,8 +253,6 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
               />
               <ArticleList articleSummaries={content.articles} />
             </Box>
-
-            <DataSitemap />
           </TileList>
         </MaxWidth>
       </Box>

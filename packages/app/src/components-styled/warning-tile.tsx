@@ -3,7 +3,6 @@ import { ComponentType, ReactNode } from 'react';
 import styled from 'styled-components';
 import WarningIcon from '~/assets/warning.svg';
 import { Tile } from '~/components-styled/tile';
-import { asResponsiveArray } from '~/style/utils';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { Box } from './base';
 
@@ -31,7 +30,7 @@ export function WarningTile({
     <StyledTile>
       <WarningBox variant={variant}>
         {isSmallScreen ? (
-          <Box width="10px" />
+          <Box width="6px" />
         ) : (
           <IconWrapper>
             <Icon />
@@ -84,9 +83,9 @@ const IconWrapper = styled(Box)(
       borderRadius: 1,
       display: 'block',
       fill: 'black',
-      width: asResponsiveArray({ _: 30, sm: 38 }),
-      height: asResponsiveArray({ _: 30, sm: 38 }),
-      mx: asResponsiveArray({ _: '7px', sm: '21px' }),
+      width: 24,
+      height: 24,
+      mx: '10px',
     },
   })
 );
@@ -109,7 +108,7 @@ const WarningMessageBox = styled(Box)<{ variant: WarningMessageVariant }>(
 const Children = styled.div<{ variant: WarningMessageVariant }>(
   ({ variant }) => {
     return css({
-      fontSize: variant === 'emphasis' ? '1.25rem' : 2,
+      fontSize: variant === 'emphasis' ? '1rem' : 2,
       fontWeight: variant === 'emphasis' ? 'bold' : 'normal',
       borderBottomRightRadius: 1,
       borderTopRightRadius: 1,
