@@ -2230,7 +2230,27 @@
   },
   "common_actueel": {
     "terug_naar_landelijk": "Back to national situation",
-    "laatst_bijgewerkt": "Last update: {{date}}"
+    "laatst_bijgewerkt": "Last update: {{date}}",
+    "secties": {
+      "artikelen": {
+        "titel": "Actuele artikelen",
+        "link": {
+          "text": "Bekijk alle artikelen ",
+          "href": "/artikelen"
+        }
+      },
+      "risicokaart": {
+        "titel": "De risicokaart van Nederland"
+      },
+      "meer_lezen": {
+        "titel": "Meer lezen over het coronavirus",
+        "omschrijving": "Hier vindt u geregeld nieuwe berichten die allerlei zaken rondom de coronacijfers uitleggen.",
+        "link": {
+          "text": "Bekijk alle artikelen",
+          "href": "/artikelen"
+        }
+      }
+    }
   },
   "nationaal_actueel": {
     "title": "Current",
@@ -2244,26 +2264,8 @@
           "href": "/landelijk/vaccinaties"
         }
       },
-      "artikelen": {
-        "titel": "Actuele artikelen",
-        "link": {
-          "text": "Bekijk alle artikelen ",
-          "href": "/artikelen"
-        }
-      },
-      "risicokaart": {
-        "titel": "De risicokaart van Nederland"
-      },
       "positief_geteste_mensen": {
         "titel": "Positief geteste mensen in Nederland"
-      },
-      "meer_lezen": {
-        "titel": "Meer lezen over het coronavirus",
-        "omschrijving": "Hier vindt u geregeld nieuwe berichten die allerlei zaken rondom de coronacijfers uitleggen.",
-        "link": {
-          "text": "Bekijk alle artikelen",
-          "href": "/artikelen"
-        }
       }
     },
 
@@ -2272,7 +2274,7 @@
       "description": "Information on the development of the coronavirus in the Netherlands."
     },
     "risiconiveaus": {
-      "selecteer_titel": "Risk level map of the Netherlands",
+      "selecteer_titel": "__Wordt niet meer gebruikt",
       "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on 2 March. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\n**There remains a national lockdown until at least 15 March. [Click here to view the lockdown measures](/landelijk/maatregelen).**"
     },
     "data_sitemap_titel": "Topics on this dashboard",
@@ -2358,6 +2360,15 @@
       "title": "Current situation in safety region {{safetyRegionName}}",
       "description": "Current situation in safety region {{safetyRegionName}}"
     },
+    "secties": {
+      "actuele_situatie": {
+        "titel": "De actuele situatie in veiligheidsregio {{safetyRegionName}}",
+        "link": {
+          "text": "Bekijk alle cijfers van {{safetyRegionName}}",
+          "href": "/veiligheidsregio/{{vrCode}}/risiconiveau"
+        }
+      }
+    },
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of The Netherlands",
       "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on 2 March. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\n**There remains a national lockdown until at least 15 March. [Click here to view the lockdown measures](/landelijk/maatregelen).**"
@@ -2426,10 +2437,19 @@
     }
   },
   "gemeente_actueel": {
-    "title": "Current situation in municipality {{municipalityName}}",
+    "title": "Current {{municipalityName}}",
     "metadata": {
       "title": "Current situation in {{municipalityName}}",
       "description": "The current situation in {{municipalityName}}"
+    },
+    "secties": {
+      "actuele_situatie": {
+        "titel": "Current situation in municipality {{municipalityName}}",
+        "link": {
+          "text": "Bekijk alle cijfers van {{municipalityName}}",
+          "href": "/gemeente/{{gmCode}}/positief-geteste-mensen"
+        }
+      }
     },
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of the Netherlands",

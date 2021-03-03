@@ -105,7 +105,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
               title={replaceComponentsInText(
                 text.secties.actuele_situatie.titel,
                 {
-                  the_netherlands: <strong>{text.the_netherlands}</strong>,
+                  the_netherlands: text.the_netherlands,
                 }
               )}
               link={text.secties.actuele_situatie.link}
@@ -186,8 +186,8 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
             {content.editorial && content.highlight && (
               <>
                 <TopicalSectionHeader
-                  title={text.secties.artikelen.titel}
-                  link={text.secties.artikelen.link}
+                  title={siteText.common_actueel.secties.artikelen.titel}
+                  link={siteText.common_actueel.secties.artikelen.link}
                 />
 
                 <EditorialTile
@@ -198,7 +198,9 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
             )}
 
             <Box pb={4}>
-              <TopicalSectionHeader title={text.secties.risicokaart.titel} />
+              <TopicalSectionHeader
+                title={siteText.common_actueel.secties.risicokaart.titel}
+              />
               <TopicalTile>
                 <TopicalChoroplethContainer
                   description={
@@ -242,9 +244,11 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
 
             <Box pb={4}>
               <TopicalSectionHeader
-                title={text.secties.meer_lezen.titel}
-                description={text.secties.meer_lezen.omschrijving}
-                link={text.secties.meer_lezen.link}
+                title={siteText.common_actueel.secties.meer_lezen.titel}
+                description={
+                  siteText.common_actueel.secties.meer_lezen.omschrijving
+                }
+                link={siteText.common_actueel.secties.meer_lezen.link}
               />
               <ArticleList articleSummaries={content.articles} />
             </Box>

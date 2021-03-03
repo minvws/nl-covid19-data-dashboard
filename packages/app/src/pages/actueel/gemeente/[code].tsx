@@ -61,9 +61,11 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
   const { text: siteText, municipalityName, choropleth, data, content } = props;
   const router = useRouter();
   const text = siteText.gemeente_actueel;
+  const gmCode = router.query.code;
+
   const safetyRegionForMunicipality =
-    typeof router.query.code === 'string'
-      ? getSafetyRegionForMunicipalityCode(router.query.code)
+    typeof gmCode === 'string'
+      ? getSafetyRegionForMunicipalityCode(gmCode)
       : undefined;
 
   const dataInfectedTotal = data.tested_overall;
@@ -96,7 +98,8 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
               showBackLink
               lastGenerated={Number(props.lastGenerated)}
               title={replaceComponentsInText(text.title, {
-                municipalityName: <strong>{municipalityName}</strong>,
+                municipalityName: municipalityName,
+                gmCode,
               })}
             />
             <WarningTile
@@ -201,16 +204,24 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
             />
 
             {content.editorial && content.highlight && (
-              <EditorialTile
-                editorial={content.editorial}
-                highlight={content.highlight}
-              />
+              <>
+                <TopicalSectionHeader
+                  title={siteText.common_actueel.secties.artikelen.titel}
+                  link={siteText.common_actueel.secties.artikelen.link}
+                />
+                <EditorialTile
+                  editorial={content.editorial}
+                  highlight={content.highlight}
+                />
+              </>
             )}
 
             <Box pb={4}>
+              <TopicalSectionHeader
+                title={siteText.common_actueel.secties.risicokaart.titel}
+              />
               <TopicalTile>
                 <TopicalChoroplethContainer
-                  title={text.risiconiveaus.selecteer_titel}
                   description={
                     <div
                       dangerouslySetInnerHTML={{
@@ -251,9 +262,18 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
               </TopicalTile>
             </Box>
 
-            <DataSitemap />
+            <Box pb={4}>
+              <TopicalSectionHeader
+                title={siteText.common_actueel.secties.meer_lezen.titel}
+                description={
+                  siteText.common_actueel.secties.meer_lezen.omschrijving
+                }
+                link={siteText.common_actueel.secties.meer_lezen.link}
+              />
+              <ArticleList articleSummaries={content.articles} />
+            </Box>
 
-            <ArticleList articleSummaries={content.articles} />
+            <DataSitemap />
           </TileList>
         </MaxWidth>
       </Box>

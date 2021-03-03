@@ -29,7 +29,6 @@ export function TopicalSectionHeader({
   title,
   lastGenerated,
   showBackLink,
-  // headingLevel = 1,
   link,
   description,
 }: TopicalSectionHeaderProps) {
@@ -76,7 +75,7 @@ export function TopicalSectionHeader({
           )}
         </Box>
         {lastGenerated && (
-          <InlineText color="bodyLight">
+          <InlineText color="bodyLight" fontSize={2}>
             {replaceComponentsInText(text.common_actueel.laatst_bijgewerkt, {
               date: <RelativeDate dateInSeconds={lastGenerated} />,
               time: formatDateFromSeconds(lastGenerated, 'time'),

@@ -2230,7 +2230,27 @@
   },
   "common_actueel": {
     "terug_naar_landelijk": "Terug naar landelijke situatie",
-    "laatst_bijgewerkt": "Laatst bijgewerkt: {{date}}"
+    "laatst_bijgewerkt": "Laatst bijgewerkt: {{date}}",
+    "secties": {
+      "artikelen": {
+        "titel": "Actuele artikelen",
+        "link": {
+          "text": "Bekijk alle artikelen ",
+          "href": "/artikelen"
+        }
+      },
+      "risicokaart": {
+        "titel": "De risicokaart van Nederland"
+      },
+      "meer_lezen": {
+        "titel": "Meer lezen over het coronavirus",
+        "omschrijving": "Hier vindt u geregeld nieuwe berichten die allerlei zaken rondom de coronacijfers uitleggen.",
+        "link": {
+          "text": "Bekijk alle artikelen",
+          "href": "/artikelen"
+        }
+      }
+    }
   },
   "nationaal_actueel": {
     "title": "Actueel",
@@ -2244,26 +2264,8 @@
           "href": "/landelijk/vaccinaties"
         }
       },
-      "artikelen": {
-        "titel": "Actuele artikelen",
-        "link": {
-          "text": "Bekijk alle artikelen ",
-          "href": "/artikelen"
-        }
-      },
-      "risicokaart": {
-        "titel": "De risicokaart van Nederland"
-      },
       "positief_geteste_mensen": {
         "titel": "Positief geteste mensen in Nederland"
-      },
-      "meer_lezen": {
-        "titel": "Meer lezen over het coronavirus",
-        "omschrijving": "Hier vindt u geregeld nieuwe berichten die allerlei zaken rondom de coronacijfers uitleggen.",
-        "link": {
-          "text": "Bekijk alle artikelen",
-          "href": "/artikelen"
-        }
       }
     },
 
@@ -2272,7 +2274,7 @@
       "description": "Informatie over de ontwikkeling van het coronavirus in Nederland."
     },
     "risiconiveaus": {
-      "selecteer_titel": "De risicokaart van Nederland",
+      "selecteer_titel": "__Wordt niet meer gebruikt",
       "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. De laatste keer is dit op 2 maart gebeurd. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. [Meer informatie over de risiconiveaus](/over-risiconiveaus).\n\n**De landelijke lockdown blijft van kracht tot en met ten minste 15 maart. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**"
     },
     "data_sitemap_titel": "Onderwerpen op dit dashboard",
@@ -2353,10 +2355,19 @@
     "no_hits": "Geen {{subject}} gevonden met “{{search}}”"
   },
   "veiligheidsregio_actueel": {
-    "title": "De actuele situatie in veiligheidsregio {{safetyRegionName}}",
+    "title": "Actueel {{safetyRegionName}}",
     "metadata": {
       "title": "Actuele situatie in de veiligheidsregio {{safetyRegionName}}",
       "description": "Actuele situatie in de veiligheidsregio {{safetyRegionName}}"
+    },
+    "secties": {
+      "actuele_situatie": {
+        "titel": "De actuele situatie in veiligheidsregio {{safetyRegionName}}",
+        "link": {
+          "text": "Bekijk alle cijfers van {{safetyRegionName}}",
+          "href": "/veiligheidsregio/{{vrCode}}/risiconiveau"
+        }
+      }
     },
     "risiconiveaus": {
       "selecteer_titel": "De risicokaart van Nederland",
@@ -2426,13 +2437,22 @@
     }
   },
   "gemeente_actueel": {
-    "title": "Actuele situatie in de gemeente {{municipalityName}}",
+    "title": "Actueel {{municipalityName}}",
     "metadata": {
       "title": "Actuele situatie in {{municipalityName}}",
       "description": "Actuele situatie in {{municipalityName}}"
     },
+    "secties": {
+      "actuele_situatie": {
+        "titel": "Actuele situatie in {{municipalityName}}",
+        "link": {
+          "text": "Bekijk alle cijfers van {{municipalityName}}",
+          "href": "/gemeente/{{gmCode}}/positief-geteste-mensen"
+        }
+      }
+    },
     "risiconiveaus": {
-      "selecteer_titel": "De risicokaart van Nederland",
+      "selecteer_titel": "__Wordt niet meer gebruikt",
       "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. De laatste keer is dit op 2 maart gebeurd. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. [Meer informatie over de risiconiveaus](/over-risiconiveaus).\n\n**De landelijke lockdown blijft van kracht tot en met ten minste 15 maart. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**"
     },
     "risoconiveau_maatregelen": {
