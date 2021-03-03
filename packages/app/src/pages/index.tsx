@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import GetestIcon from '~/assets/test.svg';
 import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
 import { ArticleSummary } from '~/components-styled/article-teaser';
-import { Box, Spacer } from '~/components-styled/base';
+import { Box } from '~/components-styled/base';
 import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
 import { HighlightTeaserProps } from '~/components-styled/highlight-teaser';
@@ -187,7 +187,6 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
               <Box pt={3}>
                 <TopicalSectionHeader
                   title={siteText.common_actueel.secties.artikelen.titel}
-                  link={siteText.common_actueel.secties.artikelen.link}
                 />
 
                 <EditorialTile

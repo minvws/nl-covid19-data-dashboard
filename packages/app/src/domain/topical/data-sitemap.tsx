@@ -1,6 +1,5 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import NederlandIcon from '~/assets/nederland.svg';
 import { ArrowIconRight } from '~/components-styled/arrow-icon';
 import { Title } from '~/components-styled/aside/title';
 import { Box } from '~/components-styled/base';

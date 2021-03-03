@@ -222,7 +222,6 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
               <>
                 <TopicalSectionHeader
                   title={siteText.common_actueel.secties.artikelen.titel}
-                  link={siteText.common_actueel.secties.artikelen.link}
                 />
                 <EditorialTile
                   editorial={content.editorial}
