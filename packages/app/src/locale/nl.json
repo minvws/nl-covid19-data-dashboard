@@ -1966,8 +1966,8 @@
       "vaccin_levering_en_prikken": "Het linkerdeel van de grafiek laat zien hoeveel vaccins Nederland in totaal heeft gekregen en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal verwachten te krijgen en hoeveel prikken we verwachten te zetten.",
       "vaccinatie_draagvlak": "Deze grafiek toont hoeveel procent van de bevolking zelf een prik tegen corona wil hebben."
     },
-    "link_source": "Bekijk de databron van \"{{subject}}\" op",
-    "link_download": "Download de databron van \"{{subject}}\" op",
+    "link_source": "Download de databron van \"{{subject}}\" op {{source}}",
+    "link_download": "Bekijk de databron van \"{{subject}}\" op {{source}}",
     "text_source": "Bekijk de databron van \"{{subject}}\" op {{source}}",
     "text_download": "Download de databron van \"{{subject}}\" op {{source}}"
   },
