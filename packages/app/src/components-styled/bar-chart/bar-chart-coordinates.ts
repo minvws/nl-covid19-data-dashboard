@@ -47,6 +47,7 @@ function calculateMaximumLabelLength(labels: string[], fontSize: string) {
     const textElement = window.document.createElementNS(SVG_NS, 'text');
     textElement.textContent = longestLabel;
     textElement.setAttributeNS(null, 'font-size', fontSize);
+    textElement.setAttributeNS(null, 'font-family', theme.fonts.body);
 
     const svgElement = window.document.createElementNS(SVG_NS, 'svg');
     svgElement.append(textElement);
