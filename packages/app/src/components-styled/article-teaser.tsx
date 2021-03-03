@@ -1,7 +1,7 @@
 import css from '@styled-system/css';
+import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { ArrowIconRight } from '~/components-styled/arrow-icon';
-import { getImageSrc } from '~/lib/sanity';
 import siteText from '~/locale';
 import { Article, Block, ImageBlock } from '~/types/cms';
 import { Link } from '~/utils/link';
@@ -21,13 +21,25 @@ type ArticleTeaserProps = {
   cover: ImageBlock;
 };
 
+const articleTeaserImageSizes = [
+  [0, 733],
+  [768, 445],
+  [960, 406],
+];
+
 export function ArticleTeaser(props: ArticleTeaserProps) {
   const { title, slug, summary, cover } = props;
 
   return (
     <Link passHref href={`/artikelen/${slug}`}>
       <StyledArticleTeaser>
-        <CoverImage height={200} image={cover} />
+        <ZoomContainer height={200}>
+          <BackgroundImage
+            image={cover}
+            height={200}
+            sizes={articleTeaserImageSizes}
+          />
+        </ZoomContainer>
         <Box padding={3}>
           <Heading
             level={3}
@@ -49,6 +61,24 @@ export function ArticleTeaser(props: ArticleTeaserProps) {
   );
 }
 
+const ZoomContainer = styled(ZoomContainerUnstyled)``;
+
+function ZoomContainerUnstyled({
+  children,
+  height,
+  className,
+}: {
+  height: number;
+  children: ReactNode;
+  className?: string;
+}) {
+  return (
+    <Box overflow="hidden" height={height} position="relative">
+      <Box className={className}>{children}</Box>
+    </Box>
+  );
+}
+
 const StyledArticleTeaser = styled.a(
   css({
     display: 'block',
@@ -61,15 +91,15 @@ const StyledArticleTeaser = styled.a(
     textDecoration: 'none',
     color: 'body',
 
-    [`${BackgroundImage}, ${Heading}`]: {
+    [`${ZoomContainer}, ${Heading}`]: {
       transitionProperty: 'transform, color',
       transitionDuration: '500ms, 250ms',
       transitionTimingFunction: 'ease-out',
-      willChange: 'transform',
+      willChange: 'transform, color',
     },
 
     '&:hover, &:focus': {
-      [BackgroundImage]: {
+      [ZoomContainer]: {
         transitionTimingFunction: 'ease-in-out',
         transform: 'scale(1.04)',
       },
@@ -83,31 +113,5 @@ function Arrow() {
     <span css={css({ svg: { height: '11px', width: '13px', mx: '3px' } })}>
       <ArrowIconRight />
     </span>
-  );
-}
-
-type CoverImageProps = {
-  image: ImageBlock;
-  height: number;
-};
-
-function CoverImage({ height, image }: CoverImageProps) {
-  const bgPosition = image.hotspot
-    ? `${image.hotspot.x * 100}% ${image.hotspot.y * 100}%`
-    : undefined;
-
-  const url = getImageSrc(image.asset, 700);
-
-  return (
-    <Box height={height} overflow="hidden">
-      <BackgroundImage
-        height={height}
-        backgroundImageUrl={url}
-        backgroundPosition={bgPosition}
-        backgroundRepeat="no-repeat"
-        backgroundSize="cover"
-        aria-label={image.alt}
-      />
-    </Box>
   );
 }

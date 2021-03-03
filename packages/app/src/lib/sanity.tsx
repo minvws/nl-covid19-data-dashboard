@@ -100,7 +100,7 @@ export function getImageProps<T extends ImageBlock>(
 
   const {
     defaultWidth = node.asset.metadata.dimensions.width,
-    sizes,
+    sizes: sizesOption,
   } = options;
 
   const width = findClosestSize(defaultWidth, imageResizeTargets);
@@ -114,8 +114,8 @@ export function getImageProps<T extends ImageBlock>(
      * We can provide a specific set of options called sizes, which maps viewport widths to image widths.
      * Passing this sizes option will override the default behavior
      */
-    if (sizes) {
-      srcSet = sizes
+    if (sizesOption) {
+      srcSet = sizesOption
         .map((srcSetSize) => {
           const [viewport, size] = srcSetSize;
           return `${getImageSrc(asset, size)} ${viewport}w`;
@@ -129,9 +129,14 @@ export function getImageProps<T extends ImageBlock>(
     }
   }
 
+  const sizes = sizesOption
+    ?.map(([viewport, size]) => `(min-width: ${viewport}px) ${size}px`)
+    .join(', ');
+
   return {
     src,
     srcSet,
+    sizes,
     alt,
     width,
     height,
