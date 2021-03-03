@@ -11,7 +11,7 @@
     "test:ci": "yarn run test",
     "compile": "tsc --pretty --noEmit",
     "lint": "echo '@TODO add eslint'",
-    "sync-assets": "ts-node scripts/sync-assets.ts",
+    "sync-assets": "ts-node -r dotenv-flow/config scripts/sync-assets.ts",
     "format": "prettier --write \"src/**/*.{js,ts,tsx}\" \"*.{js,json,md,yml}\""
   },
   "dependencies": {
@@ -42,6 +42,7 @@
     "@types/download": "^6.2.4",
     "@types/fs-extra": "^9.0.6",
     "@types/prompts": "^2.0.9",
-    "@types/react-world-flags": "^1.4.1"
+    "@types/react-world-flags": "^1.4.1",
+    "dotenv-flow": "^3.2.0"
   }
 }

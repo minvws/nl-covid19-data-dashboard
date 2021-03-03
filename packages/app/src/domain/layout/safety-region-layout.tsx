@@ -127,7 +127,7 @@ function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
                   />
                   <MetricMenuItemLink
                     href={`/veiligheidsregio/${code}/risiconiveau`}
-                    title={'Risiconiveau'}
+                    title={siteText.veiligheidsregio_layout.headings.inschaling}
                   >
                     <Box mt={2}>
                       <EscalationLevelInfoLabel

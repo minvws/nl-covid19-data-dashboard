@@ -73,6 +73,8 @@ export interface MunicipalSewerValue {
   date_start_unix: number;
   date_end_unix: number;
   average: number;
+  total_number_of_samples: number;
+  sampled_installation_count: number;
   total_installation_count: number;
   date_of_insertion_unix: number;
 }
@@ -257,6 +259,8 @@ export interface NationalSewer {
 }
 export interface NationalSewerValue {
   average: number;
+  total_number_of_samples: number;
+  sampled_installation_count: number;
   total_installation_count: number;
   date_of_insertion_unix: number;
   date_start_unix: number;
@@ -639,6 +643,8 @@ export interface RegionalSewerValue {
   date_start_unix: number;
   date_end_unix: number;
   average: number;
+  total_number_of_samples: number;
+  sampled_installation_count: number;
   total_installation_count: number;
   date_of_insertion_unix: number;
 }

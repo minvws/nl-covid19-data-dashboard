@@ -28,6 +28,8 @@ import {
 } from '~/static-props/get-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { getSewerWaterBarChartData } from '~/utils/sewer-water/municipality-sewer-water.util';
+import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { Text } from '~/components-styled/typography';
 
 export { getStaticPaths } from '~/static-paths/gm';
 
@@ -119,11 +121,8 @@ const SewerWater: FCWithLayout<typeof getStaticProps> = (props) => {
           </KpiTile>
 
           <KpiTile
-            title={text.total_installation_count_titel}
-            description={
-              text.total_installation_count_description +
-              `<p style="color:#595959">${text.rwzi_abbrev}</p>`
-            }
+            title={text.total_measurements_title}
+            description={text.total_measurements_description}
             metadata={{
               date: [
                 sewerAverages.last_value.date_start_unix,
@@ -133,9 +132,23 @@ const SewerWater: FCWithLayout<typeof getStaticProps> = (props) => {
             }}
           >
             <KpiValue
-              data-cy="total_installation_count"
-              absolute={sewerAverages.last_value.total_installation_count}
+              data-cy="total_number_of_samples"
+              absolute={sewerAverages.last_value.total_number_of_samples}
             />
+            <Text>
+              {replaceComponentsInText(text.total_measurements_locations, {
+                sampled_installation_count: (
+                  <strong>
+                    {sewerAverages.last_value.sampled_installation_count}
+                  </strong>
+                ),
+                total_installation_count: (
+                  <strong>
+                    {sewerAverages.last_value.total_installation_count}
+                  </strong>
+                ),
+              })}
+            </Text>
           </KpiTile>
         </TwoKpiSection>
 
