@@ -17,6 +17,7 @@ import siteText, { Locale } from '~/locale';
 import { colors } from '~/style/theme';
 import { createDate } from '~/utils/createDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
+import { DateRange } from '~/utils/get-trailing-date-range';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 
 interface VaccinesContentHeaderProps {
@@ -125,7 +126,8 @@ export function VaccineContentHeader({
     switch (callbackInfo.type) {
       case 'CustomBackground': {
         const { xScale, yScale, bounds } = callbackInfo.props;
-        const dateRange = [
+
+        const dateRange: DateRange = [
           createDate(data.vaccine_administered_total.values[0].date_unix),
           new Date('30 January 2021'),
         ];
