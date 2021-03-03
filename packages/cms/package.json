@@ -11,18 +11,19 @@
     "test:ci": "yarn run test",
     "compile": "tsc --pretty --noEmit",
     "lint": "echo '@TODO add eslint'",
-    "sync-assets": "ts-node scripts/sync-assets.ts",
+    "sync-assets": "ts-node -r dotenv-flow/config scripts/sync-assets.ts",
     "format": "prettier --write \"src/**/*.{js,ts,tsx}\" \"*.{js,json,md,yml}\""
   },
   "dependencies": {
-    "@sanity/base": "^2.3.3",
+    "@sanity/base": "^2.4.3",
     "@sanity/components": "^2.2.6",
-    "@sanity/core": "^2.3.3",
-    "@sanity/default-layout": "^2.3.3",
+    "@sanity/core": "^2.4.0",
+    "@sanity/dashboard": "^2.2.6",
+    "@sanity/default-layout": "^2.4.3",
     "@sanity/default-login": "^2.2.6",
-    "@sanity/desk-tool": "^2.3.3",
+    "@sanity/desk-tool": "^2.4.3",
     "@sanity/production-preview": "^2.2.6",
-    "@sanity/ui": "^0.33.0",
+    "@sanity/ui": "^0.33.7",
     "@sanity/vision": "^2.2.6",
     "download": "^8.0.0",
     "fs-extra": "^9.1.0",
@@ -33,13 +34,15 @@
     "react-icons": "^4.2.0",
     "react-world-flags": "^1.4.0",
     "sanity-mobile-preview": "^1.0.7",
+    "sanity-plugin-dashboard-widget-document-list": "^0.0.11",
     "sanity-plugin-tabs": "^2.0.1"
   },
   "devDependencies": {
-    "@sanity/cli": "^2.2.6",
+    "@sanity/cli": "^2.4.0",
     "@types/download": "^6.2.4",
     "@types/fs-extra": "^9.0.6",
     "@types/prompts": "^2.0.9",
-    "@types/react-world-flags": "^1.4.1"
+    "@types/react-world-flags": "^1.4.1",
+    "dotenv-flow": "^3.2.0"
   }
 }

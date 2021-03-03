@@ -6,7 +6,7 @@ import { ReactNode } from 'react';
 import { Box } from '~/components-styled/base';
 import { EscalationLevelIcon } from '~/components-styled/escalation-level-icon';
 import { Text } from '~/components-styled/typography';
-import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
+import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
 import { EscalationLevel } from '~/domain/restrictions/type';
 import text from '~/locale/index';
 import { formatDateFromSeconds } from '~/utils/formatDate';

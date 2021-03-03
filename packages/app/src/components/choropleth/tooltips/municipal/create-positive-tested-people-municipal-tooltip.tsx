@@ -1,17 +1,21 @@
 import {
+  ChoroplethThresholdsValue,
   MunicipalitiesTestedOverall,
   MunicipalityProperties,
 } from '@corona-dashboard/common';
 import { ReactNode } from 'react';
-import { Text } from '~/components-styled/typography';
-import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
+import { InlineText, Text } from '~/components-styled/typography';
+import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
+import { TooltipSubject } from '~/components/choropleth/tooltips/tooltip-subject';
 import siteText from '~/locale/index';
-import { formatPercentage } from '~/utils/formatNumber';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { formatNumber, formatPercentage } from '~/utils/formatNumber';
+import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { MunicipalitySelectionHandler } from '../../select-handlers/create-select-municipal-handler';
 const text = siteText.common.tooltip;
 
 export const createPositiveTestedPeopleMunicipalTooltip = (
+  subject: string,
+  thresholdValues: ChoroplethThresholdsValue[],
   selectHandler?: MunicipalitySelectionHandler
 ) => (
   context: MunicipalityProperties & MunicipalitiesTestedOverall
@@ -27,12 +31,21 @@ export const createPositiveTestedPeopleMunicipalTooltip = (
 
   return (
     <TooltipContent title={gemnaam} onSelect={onSelect}>
-      <Text m={0} fontWeight="bold">
-        {formatPercentage(infected_per_100k)} per 100.000
-      </Text>
-      <Text m={0}>
-        {replaceVariablesInText(text.positive_tested_people, {
-          totalPositiveTestedPeople: `${infected}`,
+      <TooltipSubject
+        subject={subject}
+        thresholdValues={thresholdValues}
+        filterBelow={infected_per_100k}
+      >
+        <InlineText fontWeight="bold">
+          {formatPercentage(infected_per_100k)} per {formatNumber(100_000)}{' '}
+        </InlineText>
+        {siteText.common.inwoners}
+      </TooltipSubject>
+      <Text m={0} mt={-1}>
+        {replaceComponentsInText(text.positive_tested_people, {
+          totalPositiveTestedPeople: (
+            <InlineText fontWeight="bold">{infected}</InlineText>
+          ),
         })}
       </Text>
     </TooltipContent>

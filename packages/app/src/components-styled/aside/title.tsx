@@ -5,7 +5,7 @@ import { Heading, HeadingLevel, HeadingProps } from '../typography';
 
 type TitleProps = {
   title: string;
-  icon: ReactNode;
+  icon?: ReactNode;
   subtitle?: string;
   level?: HeadingLevel;
 } & Omit<HeadingProps, 'children' | 'level'>;
@@ -25,7 +25,7 @@ export function Title(props: TitleProps) {
       flexDirection="row"
       flexWrap="nowrap"
       alignItems="center"
-      mb={-2}
+      mb={2}
     >
       {icon && <Icon>{icon}</Icon>}
 

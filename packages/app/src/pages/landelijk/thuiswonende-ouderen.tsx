@@ -133,6 +133,8 @@ const ElderlyAtHomeNationalPage: FCWithLayout<typeof getStaticProps> = ({
             metricName="elderly_at_home"
             metricProperty="positive_tested_daily_per_100k"
             tooltipContent={createRegionElderlyAtHomeTooltip(
+              siteText.choropleth_tooltip.elderly_at_home,
+              regionThresholds.elderly_at_home.positive_tested_daily_per_100k,
               createSelectRegionHandler(router, 'thuiswonende-ouderen')
             )}
             onSelect={createSelectRegionHandler(router, 'thuiswonende-ouderen')}

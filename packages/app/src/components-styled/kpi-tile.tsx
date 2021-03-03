@@ -28,9 +28,9 @@ export function KpiTile({
         <Box
           as="div"
           maxWidth="400px"
-          mt={3}
           fontSize={2}
           lineHeight={2}
+          mb={3}
           dangerouslySetInnerHTML={{
             __html: description,
           }}

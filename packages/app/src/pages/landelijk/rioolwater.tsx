@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import ExperimenteelIcon from '~/assets/experimenteel.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
@@ -10,13 +11,14 @@ import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
+import { Text } from '~/components-styled/typography';
+import { WarningTile } from '~/components-styled/warning-tile';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createSewerRegionalTooltip } from '~/components/choropleth/tooltips/region/create-sewer-regional-tooltip';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
-import siteText from '~/locale/index';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
@@ -24,14 +26,14 @@ import {
   createGetContent,
   getLastGeneratedDate,
   getNlData,
+  getText,
 } from '~/static-props/get-data';
-
-const text = siteText.rioolwater_metingen;
-const graphDescriptions = siteText.accessibility.grafieken;
+import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   getNlData,
+  getText,
   createGetChoroplethData({
     vr: ({ sewer }) => ({ sewer }),
   }),
@@ -44,7 +46,10 @@ const SewerWater: FCWithLayout<typeof getStaticProps> = ({
   data,
   choropleth,
   content,
+  text: siteText,
 }) => {
+  const text = siteText.rioolwater_metingen;
+  const graphDescriptions = siteText.accessibility.grafieken;
   const sewerAverages = data.sewer;
   const router = useRouter();
 
@@ -74,6 +79,8 @@ const SewerWater: FCWithLayout<typeof getStaticProps> = ({
           reference={text.reference}
         />
 
+        <WarningTile message={text.warning_method} icon={ExperimenteelIcon} />
+
         <ArticleStrip articles={content.articles} />
 
         <TwoKpiSection>
@@ -95,12 +102,10 @@ const SewerWater: FCWithLayout<typeof getStaticProps> = ({
               difference={data.difference.sewer__average}
             />
           </KpiTile>
+
           <KpiTile
-            title={text.total_installation_count_titel}
-            description={
-              text.total_installation_count_description +
-              `<p style="color:#595959">${text.rwzi_abbrev}</p>`
-            }
+            title={text.total_measurements_title}
+            description={text.total_measurements_description}
             metadata={{
               date: [
                 sewerAverages.last_value.date_start_unix,
@@ -110,9 +115,23 @@ const SewerWater: FCWithLayout<typeof getStaticProps> = ({
             }}
           >
             <KpiValue
-              data-cy="total_installation_count"
-              absolute={sewerAverages.last_value.total_installation_count}
+              data-cy="total_number_of_samples"
+              absolute={sewerAverages.last_value.total_number_of_samples}
             />
+            <Text>
+              {replaceComponentsInText(text.total_measurements_locations, {
+                sampled_installation_count: (
+                  <strong>
+                    {sewerAverages.last_value.sampled_installation_count}
+                  </strong>
+                ),
+                total_installation_count: (
+                  <strong>
+                    {sewerAverages.last_value.total_installation_count}
+                  </strong>
+                ),
+              })}
+            </Text>
           </KpiTile>
         </TwoKpiSection>
 
@@ -152,6 +171,8 @@ const SewerWater: FCWithLayout<typeof getStaticProps> = ({
             metricName="sewer"
             metricProperty="average"
             tooltipContent={createSewerRegionalTooltip(
+              siteText.choropleth_tooltip.sewer_regional,
+              regionThresholds.sewer.average,
               createSelectRegionHandler(router, 'rioolwater')
             )}
             onSelect={createSelectRegionHandler(router, 'rioolwater')}

@@ -12,7 +12,7 @@ import { CollapsibleList, RichContentBlock } from '~/types/cms';
 import { getSkipLinkId } from '~/utils/skipLinks';
 import styles from './over.module.scss';
 import { RichContent } from '~/components-styled/cms/rich-content';
-
+import { Box } from '~/components-styled/base';
 interface OverRisiconiveausData {
   title: string | null;
   description: RichContentBlock[] | null;
@@ -86,7 +86,11 @@ const OverRisicoNiveaus: FCWithLayout<typeof getStaticProps> = (props) => {
                   const id = getSkipLinkId(item.title);
                   return item.content ? (
                     <Collapsible key={id} id={id} summary={item.title}>
-                      {item.content && <RichContent blocks={item.content} />}
+                      {item.content && (
+                        <Box mt={3}>
+                          <RichContent blocks={item.content} />
+                        </Box>
+                      )}
                     </Collapsible>
                   ) : null;
                 })}

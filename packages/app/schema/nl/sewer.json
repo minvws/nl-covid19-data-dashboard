@@ -6,6 +6,8 @@
       "required": [
         "average",
         "date_of_insertion_unix",
+        "total_number_of_samples",
+        "sampled_installation_count",
         "total_installation_count",
         "date_start_unix",
         "date_end_unix"
@@ -14,6 +16,12 @@
       "properties": {
         "average": {
           "type": "number"
+        },
+        "total_number_of_samples": {
+          "type": "integer"
+        },
+        "sampled_installation_count": {
+          "type": "integer"
         },
         "total_installation_count": {
           "type": "integer"

@@ -15,7 +15,9 @@
     "@sanity/desk-tool",
     "@sanity/production-preview",
     "tabs",
-    "./src/plugins/translate"
+    "./src/plugins/translate",
+    "@sanity/dashboard",
+    "dashboard-widget-document-list"
   ],
   "env": {
     "development": {
@@ -45,6 +47,10 @@
     {
       "implements": "part:@sanity/base/document-actions/resolver",
       "path": "./src/resolve-document-actions"
+    },
+    {
+      "implements": "part:@sanity/dashboard/config",
+      "path": "./src/dashboard-config.js"
     }
   ]
 }

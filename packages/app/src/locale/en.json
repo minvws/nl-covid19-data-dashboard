@@ -5,7 +5,7 @@
     "message": "Data that could give insight in the spread of the virus."
   },
   "laatst_bijgewerkt": {
-    "message": "The Coronavirus Dashboard receives new data each day, around 15:20.",
+    "message": "The dashboard receives new data each day, around 15:20.",
     "title": "Last updated"
   },
   "notificatie": {
@@ -153,7 +153,7 @@
     "titel": "Hospital admissions per day",
     "pagina_toelichting": "A rise in the number of patients with COVID-19 could overburden hospitals. This number is also a valid indicator for epidemic growth. This section of the dashboard shows the number of patients with COVID-19 admitted to hospital each day and the number of regular hospital beds occupied by patients with COVID-19. The dashboard provides national and regional figures drawn from various sources.",
     "barscale_titel": "Hospital admissions reported per day",
-    "extra_uitleg": "Number of people with COVID-19 admitted to hospital daily. This figure shows how many hospital admissions are reported per day, including patients from outside the hospital admitted directly to the ICU. It may include hospital admissions that occurred in previous days. \n\n*The peak in hospital admissions on 23 February is due to late reports of admissions in the Gelderland-Midden region.*",
+    "extra_uitleg": "Number of people with COVID-19 admitted to hospital daily. This figure shows how many hospital admissions are reported per day, including patients from outside the hospital admitted directly to the ICU. It may include hospital admissions that occurred in previous days.\n\n*The peak in hospital admissions on 23 February is due to late reports of admissions in the Gelderland-Midden region.*",
     "map_titel": "Residence of patients admitted to hospital",
     "map_toelichting": "This map shows, by municipality or safety region, where people live who have been admitted to hospital with COVID-19. Please note that people may have been admitted to a hospital located somewhere else in the Netherlands; the map therefore does not show admission numbers per hospital. The figures here reflect the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE).",
     "linechart_titel": "Progression in hospital admissions over time",
@@ -262,21 +262,7 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
         "text": "RIVM"
       }
-    },
-    "cluster_datums": "",
-    "cluster_bron": {
-      "href": "",
-      "text": ""
-    },
-    "cluster_titel": "",
-    "cluster_toelichting": "",
-    "cluster_barscale_titel": "",
-    "cluster_barscale_toelichting": "",
-    "cluster_barscale_screenreader_text": "",
-    "cluster_gemiddelde_titel": "",
-    "cluster_gemiddelde_toelichting": "",
-    "cluster_linechart_titel": "",
-    "cluster_linechart_toelichting": ""
+    }
   },
   "besmettelijke_personen": {
     "title": "Number of infectious people",
@@ -521,9 +507,9 @@
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
     },
     "titel": "Virus particles in wastewater",
-    "pagina_toelichting": "Average number of coronavirus particles per 100.000 inhabitants found in wastewater. The weekly average is calculated by adding up all the values measured at roughly 300 locations and dividing this by the number of measurements taken.If someone is infected with coronavirus, coronavirus particles will usually be present in their excrement, which is carried away into the sewers. By testing wastewater samples collected at treatment plants, we can find out how much of the virus is present in a given area. Such testing is still experimental. In the long run we hope that wastewater testing will enable early detection and monitoring of coronavirus.",
+    "pagina_toelichting": "If you are infected with coronavirus, there are likely to be virus particles in your stool. These are flushed down the toilet and end up in wastewater. By testing samples of wastewater collected at wastewater treatment plants, we can get information about how widespread the virus is in the community. Please note: As of 4 March, more refined data analytics are being used. This leads to different values.",
     "barscale_titel": "Average number of virus particles per 100.000 inhabitants",
-    "extra_uitleg": "The weekly average for all of the Netherlands is calculated by adding up all the values measured in one week and dividing this by the number of measurements taken.",
+    "extra_uitleg": "The calculated average is based on all the wastewater measurements collected in one week. This figure also takes account of how many inhabitants are served by a wastewater treatment plant.",
     "barscale_screenreader_text": "{{value}} virus particles per 100.000 inhabitants",
     "linechart_titel": "Average number of virus particles per 100.000 inhabitants over time",
     "metadata": {
@@ -532,8 +518,8 @@
     },
     "titel_sidebar": "Sewage water examination",
     "titel_kpi": "Average number of coronavirus particles per 100,000 inhabitants",
-    "total_installation_count_titel": "Number of measurement locations",
-    "total_installation_count_description": "Weekly number of sewage water treatment plants that have reported at least one measurement. The weekly average is calculated by taking the average of all measurements at these locations. This number can vary each week because not all measurements are successful.",
+    "total_installation_count_titel": "Number of sampling locations",
+    "total_installation_count_description": "Sampling locations can report multiple measurements per week. The weekly average for the whole country is calculated by adjusting the weekly average for each sampling location for the number of inhabitants served by that location. The number of measurements used per location per week can differ because not all measurements are successful.",
     "rwzi_abbrev": "",
     "map_titel": "Average number of virus particles per 100.000 inhabitants",
     "map_toelichting": "This map shows the average number of virus particles per 100.000 inhabitants, per safety region.",
@@ -551,7 +537,11 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
       }
     },
-    "kpi_titel": "Average number of coronavirus particles per 100.000 people"
+    "kpi_titel": "Average number of coronavirus particles per 100.000 people",
+    "warning_method": "This monitoring method is still being developed. We hope wastewater monitoring will help us to detect and track the virus more effectively in the future. [Read more about this research programme on the website of the National Institute for Public Health and the Environment (RIVM)](https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater).",
+    "total_measurements_title": "Number of measurements per week",
+    "total_measurements_description": "Sampling locations can report multiple measurements per week. The weekly average for the whole country is calculated by adjusting the weekly average for each sampling location for the number of inhabitants served by that location. The number of measurements used per location per week can differ because not all measurements are successful.",
+    "total_measurements_locations": "{{sampled_installation_count}} of the {{total_installation_count}} sampling locations reported at least one measurement in the given week."
   },
   "notfound_titel": {
     "text": "Something went wrong"
@@ -772,13 +762,7 @@
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": [
-      "0 to 20",
-      "20 to 40",
-      "40 to 60",
-      "60 to 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -797,31 +781,16 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
         "text": "RIVM"
       }
-    },
-    "cluster_datums": "",
-    "cluster_bron": {
-      "href": "",
-      "text": "",
-      "dowload": ""
-    },
-    "cluster_titel": "",
-    "cluster_toelichting": "",
-    "cluster_barscale_titel": "",
-    "cluster_barscale_toelichting": "",
-    "cluster_barscale_screenreader_text": "",
-    "cluster_gemiddelde_titel": "",
-    "cluster_gemiddelde_toelichting": "",
-    "cluster_linechart_titel": "",
-    "cluster_linechart_toelichting": ""
+    }
   },
   "veiligheidsregio_rioolwater_metingen": {
     "titel_sidebar": "Sewage water examination",
     "titel": "Virus particles in wastewater {{safetyRegion}}",
-    "pagina_toelichting": "If someone is infected with coronavirus, coronavirus particles will usually be present in their excrement, which is carried away into the sewers. By testing wastewater samples collected at treatment plants, we can find out how much of the virus is present in a given area. Such testing is still experimental. In the long run we hope that wastewater testing will enable early detection and monitoring of coronavirus.",
+    "pagina_toelichting": "If you are infected with coronavirus, there are likely to be virus particles in your stool. These are flushed down the toilet and end up in wastewater. By testing samples of wastewater collected at wastewater treatment plants, we can get information about how widespread the virus is in the community. Please note: As of 4 March, more refined data analytics are being used. This leads to different values.",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "screen_reader_graph_content": "{{value}} virus particles per 100.000 inhabitants",
     "barscale_titel": "Average number of coronavirus particles per 100,000 inhabitants",
-    "extra_uitleg": "The weekly average is calculated by adding up all the values measured in one week and dividing this by the number of measurements taken.",
+    "extra_uitleg": "An average is calculated based on all the wastewater measurements collected in one week. It also takes account of how many inhabitants are served by a specific wastewater treatment plant, and how much of the wastewater flowing to the plant comes from the municipality.",
     "barscale_screenreader_text": "{{value}} virus particles per 100.000 inhabitants",
     "linechart_titel": "Average number of virus particles per 100.000 inhabitants over time",
     "bar_chart_title": "Most recent measurement per location in {{safetyRegion}}",
@@ -842,8 +811,8 @@
     "graph_selected_rwzi_placeholder": "Select location",
     "graph_range_description": "Average number of virus particles per 100.000 inhabitants over time",
     "titel_kpi": "Average number of virus particles per 100.000 inhabitants",
-    "total_installation_count_titel": "Number of measurement locations",
-    "total_installation_count_description": "Weekly number of sewage water treatment plants that have reported at least one measurement. The weekly average is calculated by taking the average of all measurements at these locations. This number can vary each week because not all measurements are successful.",
+    "total_installation_count_titel": "Number of sampling locations",
+    "total_installation_count_description": "Sampling locations can report multiple measurements per week. The weekly average is calculated by adjusting the weekly average for each sampling location for the number of inhabitants served by that plant. The number of measurements used per location per week can differ because not all measurements are successful.",
     "rwzi_abbrev": "",
     "reference": {
       "href": "/verantwoording#sewage-water",
@@ -859,7 +828,11 @@
     "kpi_titel": "Average number of coronavirus particles per 100.000 people",
     "bar_chart_accessibility_description": "",
     "display_outliers": "Display outliers",
-    "hide_outliers": "Hide outliers"
+    "hide_outliers": "Hide outliers",
+    "warning_method": "This monitoring method is still being developed. We hope wastewater monitoring will help us to detect and track the virus more effectively in the future. [Read more about this research programme on the website of the National Institute for Public Health and the Environment (RIVM)](https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater).",
+    "total_measurements_title": "Number of measurements per week",
+    "total_measurements_description": "Sampling locations can report multiple measurements per week. The weekly average is calculated by adjusting the weekly average for each sampling location for the number of inhabitants served by that plant. The number of measurements used per location per week can differ because not all measurements are successful.",
+    "total_measurements_locations": "{{sampled_installation_count}} of the {{total_installation_count}} sampling locations reported at least one measurement in the given week."
   },
   "gemeente_ziekenhuisopnames_per_dag": {
     "titel_sidebar": "Hospital admissions",
@@ -949,11 +922,11 @@
   "gemeente_rioolwater_metingen": {
     "titel_sidebar": "Sewage water examination",
     "titel": "Virus particles in wastewater {{municipality}}",
-    "pagina_toelichting": "If someone is infected with coronavirus, coronavirus particles will usually be present in their excrement, which is carried away into the sewers. By testing wastewater samples collected at treatment plants, we can find out how much of the virus is present in a given area. Such testing is still experimental. In the long run we hope that wastewater testing will enable early detection and monitoring of coronavirus.",
+    "pagina_toelichting": "If you are infected with coronavirus, there are likely to be virus particles in your stool. These are flushed down the toilet and end up in wastewater. By testing samples of wastewater collected at wastewater treatment plants, we can get information about how widespread the virus is in the community. Please note: As of 4 March, more refined data analytics are being used. This leads to different values.",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "screen_reader_graph_content": "{{value}} virus particles per 100.000 inhabitants",
     "barscale_titel": "Average number of virus particles per 100,000 inhabitants",
-    "extra_uitleg": "The weekly average for the municipality is calculated by adding up all the values measured in one week and dividing this by the number of measurements taken.",
+    "extra_uitleg": "The calculated average is based on all the wastewater measurements collected in one week. This figure also takes account of how many inhabitants are served by a wastewater treatment plant.",
     "barscale_screenreader_text": "{{value}} virus particles per 100.000 inhabitants",
     "linechart_titel": "Average number of virus particles per 100.000 inhabitants over time",
     "bar_chart_title": "Most recent measurement per location in {{municipality}}",
@@ -971,8 +944,8 @@
       "description": "Overview of sewage water examination and the number of measured COVID-19 virus particles in municipality {{municipalityName}}."
     },
     "nodata_sidebar": "This information is not available for this municipality.",
-    "total_installation_count_titel": "Number of measurement locations",
-    "total_installation_count_description": "Weekly number of sewage water treatment plants that have reported at least one measurement. The weekly average is calculated by taking the average of all measurements at these locations. This number can vary each week because not all measurements are successful.",
+    "total_installation_count_titel": "Number of sampling locations",
+    "total_installation_count_description": "Sampling locations can report multiple measurements per week. The weekly average for the whole country is calculated by adjusting the weekly average for each sampling location for the number of inhabitants served by that location. The number of measurements used per location per week can differ because not all measurements are successful.",
     "rwzi_abbrev": "",
     "graph_daily_label_text_rwzi": "Measurements for location ({{name}})",
     "graph_selected_rwzi_placeholder": "Select location",
@@ -991,7 +964,11 @@
     "kpi_titel": "Average number of coronavirus particles per 100.000 people",
     "bar_chart_accessibility_description": "",
     "display_outliers": "Display outliers",
-    "hide_outliers": "Hide outliers"
+    "hide_outliers": "Hide outliers",
+    "warning_method": "This monitoring method is still being developed. We hope wastewater monitoring will help us to detect and track the virus more effectively in the future. [Read more about this research programme on the website of the National Institute for Public Health and the Environment (RIVM)](https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater).",
+    "total_measurements_title": "Number of measurements per week",
+    "total_measurements_description": "Sampling locations can report multiple measurements per week. The weekly average for the whole country is calculated by adjusting the weekly average for each sampling location for the number of inhabitants served by that location. The number of measurements used per location per week can differ because not all measurements are successful.",
+    "total_measurements_locations": "{{sampled_installation_count}} of the {{total_installation_count}} sampling locations reported at least one measurement in the given week."
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Risk level map of the Netherlands",
@@ -1045,8 +1022,7 @@
       "titel": "Legend",
       "geen_regio": "no regions",
       "regio_singular": "{{amount}} region",
-      "regio_plural": "{{amount}} regions",
-      "regios": ""
+      "regio_plural": "{{amount}} regions"
     },
     "valid_from": "Valid from {{validFrom}}",
     "sidebar_label": "Risk level:",
@@ -1440,6 +1416,7 @@
   "infected_age_groups": {
     "title": "Distribution by age",
     "description": "The blue (right) bars in this graph show which age group positive tested persons belong to. The gray (left) bars show how large each age group is in relation to the entire Dutch population. The blue and gray bars together show whether age groups have relatively more or less positive tested persons. For example: 16% of all positive tested persons are in their twenties (blue bar) and 13% of all Dutch people are in their twenties (gray bar). In this example, the age group twenties has relatively more positive tested people. The chart is updated daily and covers only the most recently reported cases.",
+    "example": "For example: of all positive tested people is {{infectedPercentage}} between {{ageGroupRange}} years old. Of all Dutch people is {{ageGroupPercentage}} between {{ageGroupRange}} years old. ",
     "graph": {
       "age_group_percentage_title": "Distribution of age groups in the Netherlands",
       "age_group_percentage_tooltip": "of the population is {{ageGroupRange}} years old.",
@@ -1450,8 +1427,7 @@
       "clipped_value_message": "This value is higher than displayed in the figure.",
       "value_percentage_title": "Confirmed cases by age group",
       "value_percentage_tooltip": "of the confirmed cases are {{ageGroupRange}} years old"
-    },
-    "example": "For example: of all positive tested people is {{infectedPercentage}} between {{ageGroupRange}} years old. Of all Dutch people is {{ageGroupPercentage}} between {{ageGroupRange}} years old. "
+    }
   },
   "gehandicaptenzorg_besmette_locaties": {
     "datums": "Latest values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -1747,7 +1723,7 @@
     },
     "section_deceased_rivm": {
       "title": "Deaths",
-      "description": "These figures show the number of COVID-19 patients reported dead to the GGD yesterday. The actual number of COVID-19 patients that died may be higher because not all people with COVID-19 get tested and there is no requirement for reporting deaths due to COVID-19. ",
+      "description": "These figures show the number of COVID-19 patients reported dead to the GGD yesterday. The actual number of COVID-19 patients that died may be higher because not all people with COVID-19 get tested and there is no requirement for reporting deaths due to COVID-19.",
       "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
       "bronnen": {
         "rivm": {
@@ -1778,7 +1754,7 @@
     },
     "section_deceased_rivm": {
       "title": "Deaths in {{safetyRegion}}",
-      "description": "These figures show the number of COVID-19 patients in this saftey region reported dead to the GGD yesterday. The actual number of COVID-19 patients that died may be higher because not all people with COVID-19 get tested and there is no requirement for reporting deaths due to COVID-19.",
+      "description": "These figures show the number of COVID-19 patients in this safety region reported dead to the GGD yesterday. The actual number of COVID-19 patients that died may be higher because not all people with COVID-19 get tested and there is no requirement for reporting deaths due to COVID-19.",
       "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
       "bronnen": {
         "rivm": {
@@ -1818,14 +1794,14 @@
     "cbs_message": {
       "title": "Mortality not declining further in week 7",
       "published_text": "Date of publication: Friday 26 February",
-      "message": "In week 7 (15 to 21 February inclusive), estimated mortality stood at 3,600. This is over 150 deaths in excess of the expected number for this period and around 100 more than in the previous week (3,521 deaths). Statistics Netherlands (CBS) reports this based on the provisional weekly figures on mortality. Since week 39 of 2020, weekly mortality has been higher than expected. Last week (week 6), the number of deaths was more or less the same as the expected mortality for this period. Estimated mortality for week 7 is more than 150 deaths above the expected number for this period. The National Institute for Public Health and the Environment (RIVM) registered 301 COVID-19 deaths in week 7 (as at 23 February).",
+      "message": "In week 7 (15 to 21 February inclusive), estimated mortality stood at 3,600. This is over 150 deaths in excess of the expected number for this period and around 100 more than in the previous week (3,521 deaths). Statistics Netherlands (CBS) reports this based on the provisional weekly figures on mortality.\nSince week 39 of 2020, weekly mortality has been higher than expected. Last week (week 6), the number of deaths was more or less the same as the expected mortality for this period. Estimated mortality for week 7 is more than 150 deaths above the expected number for this period. The National Institute for Public Health and the Environment (RIVM) registered 301 COVID-19 deaths in week 7 (as at 23 February).",
       "link": {
         "href": "https://www.cbs.nl/en-gb/news/2021/08/mortality-not-declining-further-in-week-7",
         "text": "Read the full news item on the CBS website"
       }
     },
     "deceased_monitor_chart_title": "Total number of deaths per week",
-    "deceased_monitor_chart_description": "This graph shows the total number of deaths per week in the Netherlands in 2020. The actual number of deaths is compared to the number of deaths predicted based on the figures from preceding years. The light blue line, drawn within its range of uncertainty, shows the number of deaths predicted over the year. The dark blue line shows the number of actual deaths.",
+    "deceased_monitor_chart_description": "This graph shows the total number of deaths per week. The actual number of deaths is compared to the number of deaths predicted based on the figures from preceding years. The light blue line, drawn within its range of uncertainty, shows the number of deaths predicted over the year. The dark blue line shows the number of actual deaths.",
     "deceased_monitor_chart_legenda_registered": "Actual mortality",
     "deceased_monitor_chart_legenda_expected": "Predicted mortality",
     "deceased_monitor_chart_legenda_expected_margin": "Range of predicted mortality"
@@ -1984,8 +1960,10 @@
       "vaccin_levering_en_prikken": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks.",
       "vaccinatie_draagvlak": "This graph shows the percentage of the population that wishes to be vaccinated against COVID-19."
     },
-    "link_source": "View date source for \"{{subject}}\" at",
-    "link_download": "Download date source for \"{{subject}}\" at"
+    "link_source": "Download date source for \"{{subject}}\" at {{source}}",
+    "link_download": "View date source for \"{{subject}}\" at {{source}}",
+    "text_source": "",
+    "text_download": ""
   },
   "deceased_age_groups": {
     "title": "COVID-19 deaths by age",
@@ -2094,11 +2072,7 @@
     "expected_page_additions": {
       "title": "Expected data on vaccinations",
       "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
-      "additions": [
-        "",
-        "",
-        ""
-      ]
+      "additions": ["", "", ""]
     },
     "data": {
       "difference": "",
@@ -2223,11 +2197,7 @@
       "kpi_expected_page_additions": {
         "title": "Expected data on vaccinations",
         "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
-        "additions": [
-          "",
-          "",
-          ""
-        ]
+        "additions": ["", "", ""]
       },
       "vaccination_chart": {
         "product_names": {
@@ -2247,8 +2217,8 @@
           "expected": "Expected"
         },
         "legend_label": "Number of {{name}} doses administered",
-        "doses_administered": "Number of doses administered",
-        "doses_administered_estimated": "Calculated number of doses administered"
+        "doses_administered": "",
+        "doses_administered_estimated": ""
       }
     }
   },
@@ -2269,7 +2239,23 @@
   },
   "common_actueel": {
     "terug_naar_landelijk": "Back to national situation",
-    "laatst_bijgewerkt": "Last update: {{date}}"
+    "laatst_bijgewerkt": "Last update: {{date}}",
+    "secties": {
+      "artikelen": {
+        "titel": ""
+      },
+      "risicokaart": {
+        "titel": ""
+      },
+      "meer_lezen": {
+        "titel": "",
+        "omschrijving": "",
+        "link": {
+          "text": "",
+          "href": ""
+        }
+      }
+    }
   },
   "nationaal_actueel": {
     "title": "The current situation in {{the_netherlands}}",
@@ -2351,6 +2337,19 @@
       "title": "More information about the coronavirus",
       "subtitle": "New information about a range of topics concerning coronavirus data is posted here regularly.",
       "all_articles": "View all articles"
+    },
+    "title_link": "View all data for the Netherlands",
+    "secties": {
+      "actuele_situatie": {
+        "titel": "",
+        "link": {
+          "text": "",
+          "href": ""
+        }
+      },
+      "positief_geteste_mensen": {
+        "titel": ""
+      }
     }
   },
   "common.tooltip.positive_tested_value": "",
@@ -2430,6 +2429,15 @@
         "veiligheidsregio": "Data for safety region {{safetyRegionName}}",
         "gemeente": "Data by municipality"
       }
+    },
+    "secties": {
+      "actuele_situatie": {
+        "titel": "",
+        "link": {
+          "text": "",
+          "href": ""
+        }
+      }
     }
   },
   "gemeente_actueel": {
@@ -2504,6 +2512,15 @@
         "veiligheidsregio_fallback": "Data by safety region",
         "gemeente": "Data for the municipality {{municipalityName}}"
       }
+    },
+    "secties": {
+      "actuele_situatie": {
+        "titel": "",
+        "link": {
+          "text": "",
+          "href": ""
+        }
+      }
     }
   },
   "toegankelijkheid_metadata": {
@@ -2559,18 +2576,19 @@
     },
     "types": {
       "1": {
-        "toelichting": "This is the risk level that currently applies in this region. The risk level is reassessed every 2 weeks based on the number of hospital admissions and the number of positive tests (new confirmed cases) at that time.\n\n**Risk level determined with the figures from 22 to 28 February. The risk level will be reassessed around 16 March.**"
+        "toelichting": "This is the risk level that currently applies in this region. The risk level is reassessed every 2 weeks based on the number of hospital admissions and the number of positive tests (new confirmed cases) at that time."
       },
       "2": {
-        "toelichting": "This is the risk level that currently applies in this region. The risk level is reassessed every 2 weeks based on the number of hospital admissions and the number of positive tests (new confirmed cases) at that time.\n\n**Risk level determined with the figures from 22 to 28 February. The risk level will be reassessed around 16 March.**"
+        "toelichting": "This is the risk level that currently applies in this region. The risk level is reassessed every 2 weeks based on the number of hospital admissions and the number of positive tests (new confirmed cases) at that time."
       },
       "3": {
-        "toelichting": "This is the risk level that currently applies in this region. The risk level is reassessed every 2 weeks based on the number of hospital admissions and the number of positive tests (new confirmed cases) at that time.\n\n**Risk level determined with the figures from 22 to 28 February. The risk level will be reassessed around 16 March.**"
+        "toelichting": "This is the risk level that currently applies in this region. The risk level is reassessed every 2 weeks based on the number of hospital admissions and the number of positive tests (new confirmed cases) at that time."
       },
       "4": {
-        "toelichting": "This is the risk level that currently applies in this region. The risk level is reassessed every 2 weeks based on the number of hospital admissions and the number of positive tests (new confirmed cases) at that time.\n\n**Risk level determined with the figures from 22 to 28 February. The risk level will be reassessed around 16 March.**"
+        "toelichting": "This is the risk level that currently applies in this region. The risk level is reassessed every 2 weeks based on the number of hospital admissions and the number of positive tests (new confirmed cases) at that time."
       }
-    }
+    },
+    "escalation_level_last_determined": "This risk level has been determined on {{last_determined}}, based on the figures from 22 to 28 February. The risk level will be reassessed around 16 March."
   },
   "gemeente_sterfte": {
     "titel_sidebar": "Deaths",
@@ -2597,7 +2615,7 @@
       "kpi_covid_daily_title": "Daily number of COVID-19 patients reported dead ",
       "kpi_covid_daily_description": "This figure shows the number of COVID-19 patients in this municipality reported dead to the GGD, per day. It includes late reports of deaths that occurred in the preceding days.",
       "kpi_covid_total_title": "Total number of COVID-19 patients reported dead",
-      "kpi_covid_total_description": "This figure shows the number of COVID-19 patients in this municipilaty reported dead, since the reporting of COVID-19 deaths started.",
+      "kpi_covid_total_description": "This figure shows the number of COVID-19 patients in this municipality reported dead, since the reporting of COVID-19 deaths started.",
       "line_chart_covid_daily_title": "Number of COVID-19 patients reported dead over time",
       "line_chart_covid_daily_description": "This graph shows the number of COVID-19 patients in this municipality reported dead, in the selected period."
     },
@@ -2634,6 +2652,17 @@
         "href": "https://www.coronamelder.nl/media/Factsheet_Corona_latest.pdf"
       }
     }
+  },
+  "choropleth_tooltip": {
+    "patients": {
+      "singular": "",
+      "plural": ""
+    },
+    "positive_tested_people": "",
+    "hospital_admissions": "",
+    "infected_locations": "",
+    "elderly_at_home": "",
+    "sewer_regional": ""
   },
   "milestones": {
     "toon_meer": "Show earlier events",

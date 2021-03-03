@@ -20,7 +20,7 @@ interface QuickLink {
 
 export function QuickLinks({ header, links }: QuickLinksProps) {
   return (
-    <Box pb={{ _: 0, md: 3 }}>
+    <Box>
       <Heading level={2} fontSize="1.25rem" m={0}>
         {header}
       </Heading>

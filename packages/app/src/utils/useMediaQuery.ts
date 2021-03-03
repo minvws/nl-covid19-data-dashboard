@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export function useMediaQuery(
   breakpoint: string,
@@ -8,8 +8,7 @@ export function useMediaQuery(
 
   useEffect(() => {
     const mqList = window.matchMedia(breakpoint);
-    const onChange = (evt: any) => setMatches(evt.matches);
-
+    const onChange = (evt: MediaQueryListEvent) => setMatches(evt.matches);
     // set the initial value
     setMatches(mqList.matches);
 

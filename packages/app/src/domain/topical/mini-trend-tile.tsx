@@ -72,7 +72,7 @@ export function MiniTrendTile<T extends TimestampedValue>(
             values={trendData}
             height={sm ? 180 : 140}
             linesConfig={[
-              { metricProperty, areaFillOpacity: 0.25, strokeWidth: 3 },
+              { metricProperty, areaFillOpacity: 0.2, strokeWidth: 3 },
             ]}
             componentCallback={componentCallback}
             showMarkerLine
