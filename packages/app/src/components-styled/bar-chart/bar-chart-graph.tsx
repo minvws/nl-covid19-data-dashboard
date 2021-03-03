@@ -97,6 +97,12 @@ export function BarChartGraph({
         tickFormat={(a) => `${a}`}
         tickComponent={TickValue}
         label={xAxisLabel}
+        labelProps={{
+          verticalAnchor: 'start',
+          textAnchor: 'middle',
+          width: width - spacing.left,
+          x: (width - spacing.left) / 2,
+        }}
         labelClassName="bar-chart-x-axis-label"
       />
 
