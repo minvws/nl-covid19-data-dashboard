@@ -39,17 +39,11 @@ export interface BarChartCoordinates {
 
 type GetLabelFunction = (x: BarChartValue) => string;
 
-function calculateMaxLabelLength(
-  values: BarChartValue[],
-  getLabel: GetLabelFunction,
-  fontSize: string
-) {
-  const longestLabel = values
-    .map((x) => getLabel(x))
-    .reduce(
-      (longest, label) => (label.length > longest.length ? label : longest),
-      ''
-    );
+function calculateMaximumLabelLength(labels: string[], fontSize: string) {
+  const longestLabel = labels.reduce(
+    (longest, label) => (label.length > longest.length ? label : longest),
+    ''
+  );
 
   if (typeof window !== 'undefined' && longestLabel.length > 0) {
     const textElement = window.document.createElementNS(SVG_NS, 'text');
@@ -90,16 +84,13 @@ function generateBarChartCoordinates(
 
   const width = parentWidth;
 
-  const labelFontSize =
-    breakpoints.lg || breakpoints.md || breakpoints.xl
-      ? theme.fontSizes[2]
-      : theme.fontSizes[0];
+  const labelFontSize = breakpoints.md
+    ? theme.fontSizes[2]
+    : theme.fontSizes[0];
 
-  const maxLabelLength = calculateMaxLabelLength(
-    values,
-    getLabel,
-    labelFontSize
-  );
+  const labels = values.map(getLabel);
+
+  const maxLabelLength = calculateMaximumLabelLength(labels, labelFontSize);
 
   const spacing = {
     top: 0,
@@ -125,7 +116,7 @@ function generateBarChartCoordinates(
   const labelScale = scaleBand({
     range: [spacing.top, height - spacing.bottom],
     round: true,
-    domain: values.map(getLabel),
+    domain: labels,
     padding: 0.4,
   });
 
