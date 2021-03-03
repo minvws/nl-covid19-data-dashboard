@@ -1,17 +1,17 @@
 import { useRouter } from 'next/router';
 import GetestIcon from '~/assets/test.svg';
 import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
-import { ArrowIconRight } from '~/components-styled/arrow-icon';
 import { ArticleSummary } from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
 import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
 import { HighlightTeaserProps } from '~/components-styled/highlight-teaser';
-import { LinkWithIcon } from '~/components-styled/link-with-icon';
 import { MaxWidth } from '~/components-styled/max-width';
 import { QuickLinks } from '~/components-styled/quick-links';
 import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
+import { Heading } from '~/components-styled/typography';
+import { VisuallyHidden } from '~/components-styled/visually-hidden';
 import { WarningTile } from '~/components-styled/warning-tile';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
@@ -26,7 +26,7 @@ import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-e
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
 import { TopicalChoroplethContainer } from '~/domain/topical/topical-choropleth-container';
-import { TopicalPageHeader } from '~/domain/topical/topical-page-header';
+import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
 import { TopicalVaccineTile } from '~/domain/topical/topical-vaccine-tile';
 import { topicalPageQuery } from '~/queries/topical-page-query';
@@ -90,23 +90,25 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
         description={text.metadata.description}
       />
       <Box bg="white" pb={4}>
+        {/**
+         * Since now the sections have a H2 heading I think we need to include
+         * a hidden H1 here.
+         */}
+        <VisuallyHidden>
+          <Heading level={1}>{text.title}</Heading>
+        </VisuallyHidden>
+
         <MaxWidth>
           <TileList>
-            <TopicalPageHeader
+            <TopicalSectionHeader
               lastGenerated={Number(lastGenerated)}
-              title={replaceComponentsInText(text.title, {
-                the_netherlands: text.the_netherlands,
-              })}
-              link={
-                <LinkWithIcon
-                  href="/landelijk/vaccinaties"
-                  icon={<ArrowIconRight />}
-                  iconPlacement="right"
-                  fontWeight="bold"
-                >
-                  {text.title_link}
-                </LinkWithIcon>
-              }
+              title={replaceComponentsInText(
+                text.secties.actuele_situatie.titel,
+                {
+                  the_netherlands: text.the_netherlands,
+                }
+              )}
+              link={text.secties.actuele_situatie.link}
             />
 
             <Box width={{ lg: '75%' }}>
@@ -182,46 +184,50 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
             />
 
             {content.editorial && content.highlight && (
-              <EditorialTile
-                editorial={content.editorial}
-                highlight={content.highlight}
-              />
+              <>
+                <TopicalSectionHeader
+                  title={siteText.common_actueel.secties.artikelen.titel}
+                  link={siteText.common_actueel.secties.artikelen.link}
+                />
+
+                <EditorialTile
+                  editorial={content.editorial}
+                  highlight={content.highlight}
+                />
+              </>
             )}
 
             <Box pb={4}>
+              <TopicalSectionHeader
+                title={siteText.common_actueel.secties.risicokaart.titel}
+              />
               <TopicalTile>
-                <>
-                  <TopicalChoroplethContainer
-                    title={text.risiconiveaus.selecteer_titel}
-                    description={
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: text.risiconiveaus.selecteer_toelichting,
-                        }}
-                      />
-                    }
-                    legendComponent={
-                      <EscalationMapLegenda
-                        data={choropleth.vr}
-                        metricName="escalation_levels"
-                        metricProperty="level"
-                      />
-                    }
-                  >
-                    <SafetyRegionChoropleth
+                <TopicalChoroplethContainer
+                  description={
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: text.risiconiveaus.selecteer_toelichting,
+                      }}
+                    />
+                  }
+                  legendComponent={
+                    <EscalationMapLegenda
                       data={choropleth.vr}
                       metricName="escalation_levels"
                       metricProperty="level"
-                      onSelect={createSelectRegionHandler(
-                        router,
-                        'risiconiveau'
-                      )}
-                      tooltipContent={escalationTooltip(
-                        createSelectRegionHandler(router, 'risiconiveau')
-                      )}
                     />
-                  </TopicalChoroplethContainer>
-                </>
+                  }
+                >
+                  <SafetyRegionChoropleth
+                    data={choropleth.vr}
+                    metricName="escalation_levels"
+                    metricProperty="level"
+                    onSelect={createSelectRegionHandler(router, 'risiconiveau')}
+                    tooltipContent={escalationTooltip(
+                      createSelectRegionHandler(router, 'risiconiveau')
+                    )}
+                  />
+                </TopicalChoroplethContainer>
               </TopicalTile>
               <Box
                 borderTopWidth="1px"
@@ -236,11 +242,18 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
               </TopicalTile>
             </Box>
 
-            <DataSitemap />
-
-            <Box mt={{ md: 5 }}>
+            <Box pb={4}>
+              <TopicalSectionHeader
+                title={siteText.common_actueel.secties.meer_lezen.titel}
+                description={
+                  siteText.common_actueel.secties.meer_lezen.omschrijving
+                }
+                link={siteText.common_actueel.secties.meer_lezen.link}
+              />
               <ArticleList articleSummaries={content.articles} />
             </Box>
+
+            <DataSitemap />
           </TileList>
         </MaxWidth>
       </Box>

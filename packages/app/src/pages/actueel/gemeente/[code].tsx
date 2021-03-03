@@ -24,7 +24,7 @@ import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-e
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
 import { TopicalChoroplethContainer } from '~/domain/topical/topical-choropleth-container';
-import { TopicalPageHeader } from '~/domain/topical/topical-page-header';
+import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
 import { topicalPageQuery } from '~/queries/topical-page-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
@@ -61,9 +61,11 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
   const { text: siteText, municipalityName, choropleth, data, content } = props;
   const router = useRouter();
   const text = siteText.gemeente_actueel;
+  const gmCode = router.query.code;
+
   const safetyRegionForMunicipality =
-    typeof router.query.code === 'string'
-      ? getSafetyRegionForMunicipalityCode(router.query.code)
+    typeof gmCode === 'string'
+      ? getSafetyRegionForMunicipalityCode(gmCode)
       : undefined;
 
   const dataInfectedTotal = data.tested_overall;
@@ -92,14 +94,29 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
       <Box bg="white" pb={4}>
         <MaxWidth>
           <TileList>
-            <TopicalPageHeader
+            <TopicalSectionHeader
               showBackLink
               lastGenerated={Number(props.lastGenerated)}
               title={replaceComponentsInText(text.title, {
-                municipalityName: <strong>{municipalityName}</strong>,
+                municipalityName: municipalityName,
               })}
+              link={
+                typeof gmCode === 'string'
+                  ? {
+                      text: replaceVariablesInText(
+                        text.secties.actuele_situatie.link.text,
+                        {
+                          municipalityName: municipalityName,
+                        }
+                      ),
+                      href: replaceVariablesInText(
+                        text.secties.actuele_situatie.link.href,
+                        { gmCode }
+                      ),
+                    }
+                  : undefined
+              }
             />
-
             <WarningTile
               message={siteText.regionaal_index.belangrijk_bericht}
               variant="emphasis"
@@ -202,47 +219,50 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
             />
 
             {content.editorial && content.highlight && (
-              <EditorialTile
-                editorial={content.editorial}
-                highlight={content.highlight}
-              />
+              <>
+                <TopicalSectionHeader
+                  title={siteText.common_actueel.secties.artikelen.titel}
+                  link={siteText.common_actueel.secties.artikelen.link}
+                />
+                <EditorialTile
+                  editorial={content.editorial}
+                  highlight={content.highlight}
+                />
+              </>
             )}
 
             <Box pb={4}>
+              <TopicalSectionHeader
+                title={siteText.common_actueel.secties.risicokaart.titel}
+              />
               <TopicalTile>
-                <>
-                  <TopicalChoroplethContainer
-                    title={text.risiconiveaus.selecteer_titel}
-                    description={
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: text.risiconiveaus.selecteer_toelichting,
-                        }}
-                      />
-                    }
-                    legendComponent={
-                      <EscalationMapLegenda
-                        data={choropleth.vr}
-                        metricName="escalation_levels"
-                        metricProperty="level"
-                      />
-                    }
-                  >
-                    <SafetyRegionChoropleth
+                <TopicalChoroplethContainer
+                  description={
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: text.risiconiveaus.selecteer_toelichting,
+                      }}
+                    />
+                  }
+                  legendComponent={
+                    <EscalationMapLegenda
                       data={choropleth.vr}
                       metricName="escalation_levels"
                       metricProperty="level"
-                      onSelect={createSelectRegionHandler(
-                        router,
-                        'risiconiveau'
-                      )}
-                      tooltipContent={escalationTooltip(
-                        createSelectRegionHandler(router, 'risiconiveau')
-                      )}
-                      highlightCode={safetyRegionForMunicipality?.code}
                     />
-                  </TopicalChoroplethContainer>
-                </>
+                  }
+                >
+                  <SafetyRegionChoropleth
+                    data={choropleth.vr}
+                    metricName="escalation_levels"
+                    metricProperty="level"
+                    onSelect={createSelectRegionHandler(router, 'risiconiveau')}
+                    tooltipContent={escalationTooltip(
+                      createSelectRegionHandler(router, 'risiconiveau')
+                    )}
+                    highlightCode={safetyRegionForMunicipality?.code}
+                  />
+                </TopicalChoroplethContainer>
               </TopicalTile>
               <Box
                 borderTopWidth="1px"
@@ -257,9 +277,18 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
               </TopicalTile>
             </Box>
 
-            <DataSitemap />
+            <Box pb={4}>
+              <TopicalSectionHeader
+                title={siteText.common_actueel.secties.meer_lezen.titel}
+                description={
+                  siteText.common_actueel.secties.meer_lezen.omschrijving
+                }
+                link={siteText.common_actueel.secties.meer_lezen.link}
+              />
+              <ArticleList articleSummaries={content.articles} />
+            </Box>
 
-            <ArticleList articleSummaries={content.articles} />
+            <DataSitemap />
           </TileList>
         </MaxWidth>
       </Box>

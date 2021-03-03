@@ -11,6 +11,8 @@ import { QuickLinks } from '~/components-styled/quick-links';
 import { RiskLevelIndicator } from '~/components-styled/risk-level-indicator';
 import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
+import { Heading } from '~/components-styled/typography';
+import { VisuallyHidden } from '~/components-styled/visually-hidden';
 import { WarningTile } from '~/components-styled/warning-tile';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
@@ -24,7 +26,7 @@ import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-e
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
 import { TopicalChoroplethContainer } from '~/domain/topical/topical-choropleth-container';
-import { TopicalPageHeader } from '~/domain/topical/topical-page-header';
+import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
 import { topicalPageQuery } from '~/queries/topical-page-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
@@ -59,8 +61,7 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
   const router = useRouter();
   const text = siteText.veiligheidsregio_actueel;
   const escalationText = siteText.escalatie_niveau;
-
-  const regionCode = router.query.code;
+  const vrCode = router.query.code as string;
 
   const dataInfectedTotal = data.tested_overall;
   const dataHospitalIntake = data.hospital_nice;
@@ -75,15 +76,45 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
           safetyRegionName: props.safetyRegionName,
         })}
       />
+
       <Box bg="white" pb={4}>
+        {/**
+         * Since now the sections have a H2 heading I think we need to include
+         * a hidden H1 here.
+         *
+         * @TODO figure out what the title should be
+         */}
+        <VisuallyHidden>
+          <Heading level={1}>
+            {replaceComponentsInText(text.title, {
+              safetyRegionName: props.safetyRegionName,
+            })}
+          </Heading>
+        </VisuallyHidden>
+
         <MaxWidth>
           <TileList>
-            <TopicalPageHeader
+            <TopicalSectionHeader
               showBackLink
               lastGenerated={Number(props.lastGenerated)}
-              title={replaceComponentsInText(text.title, {
-                safetyRegionName: <strong>{props.safetyRegionName}</strong>,
-              })}
+              title={replaceComponentsInText(
+                text.secties.actuele_situatie.titel,
+                {
+                  safetyRegionName: props.safetyRegionName,
+                }
+              )}
+              link={{
+                text: replaceVariablesInText(
+                  text.secties.actuele_situatie.link.text,
+                  {
+                    safetyRegionName: props.safetyRegionName,
+                  }
+                ),
+                href: replaceVariablesInText(
+                  text.secties.actuele_situatie.link.href,
+                  { vrCode }
+                ),
+              }}
             />
 
             <WarningTile
@@ -142,7 +173,7 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
                 escalationTypes={escalationText.types}
                 href={`/veiligheidsregio/${router.query.code}/maatregelen`}
               >
-                <Link href={`/veiligheidsregio/${regionCode}/maatregelen`}>
+                <Link href={`/veiligheidsregio/${vrCode}/maatregelen`}>
                   <a>{text.risoconiveau_maatregelen.bekijk_href}</a>
                 </Link>
               </RiskLevelIndicator>
@@ -167,47 +198,50 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
             />
 
             {content.editorial && content.highlight && (
-              <EditorialTile
-                editorial={content.editorial}
-                highlight={content.highlight}
-              />
+              <>
+                <TopicalSectionHeader
+                  title={siteText.common_actueel.secties.artikelen.titel}
+                  link={siteText.common_actueel.secties.artikelen.link}
+                />
+                <EditorialTile
+                  editorial={content.editorial}
+                  highlight={content.highlight}
+                />
+              </>
             )}
 
             <Box pb={4}>
+              <TopicalSectionHeader
+                title={siteText.common_actueel.secties.risicokaart.titel}
+              />
               <TopicalTile>
-                <>
-                  <TopicalChoroplethContainer
-                    title={text.risiconiveaus.selecteer_titel}
-                    description={
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: text.risiconiveaus.selecteer_toelichting,
-                        }}
-                      />
-                    }
-                    legendComponent={
-                      <EscalationMapLegenda
-                        data={choropleth.vr}
-                        metricName="escalation_levels"
-                        metricProperty="level"
-                      />
-                    }
-                  >
-                    <SafetyRegionChoropleth
+                <TopicalChoroplethContainer
+                  description={
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: text.risiconiveaus.selecteer_toelichting,
+                      }}
+                    />
+                  }
+                  legendComponent={
+                    <EscalationMapLegenda
                       data={choropleth.vr}
                       metricName="escalation_levels"
                       metricProperty="level"
-                      onSelect={createSelectRegionHandler(
-                        router,
-                        'risiconiveau'
-                      )}
-                      highlightCode={`${regionCode}`}
-                      tooltipContent={escalationTooltip(
-                        createSelectRegionHandler(router, 'risiconiveau')
-                      )}
                     />
-                  </TopicalChoroplethContainer>
-                </>
+                  }
+                >
+                  <SafetyRegionChoropleth
+                    data={choropleth.vr}
+                    metricName="escalation_levels"
+                    metricProperty="level"
+                    onSelect={createSelectRegionHandler(router, 'risiconiveau')}
+                    highlightCode={`${vrCode}`}
+                    tooltipContent={escalationTooltip(
+                      createSelectRegionHandler(router, 'risiconiveau')
+                    )}
+                  />
+                </TopicalChoroplethContainer>
               </TopicalTile>
               <Box
                 borderTopWidth="1px"
@@ -222,9 +256,18 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
               </TopicalTile>
             </Box>
 
-            <DataSitemap />
+            <Box pb={4}>
+              <TopicalSectionHeader
+                title={siteText.common_actueel.secties.meer_lezen.titel}
+                description={
+                  siteText.common_actueel.secties.meer_lezen.omschrijving
+                }
+                link={siteText.common_actueel.secties.meer_lezen.link}
+              />
+              <ArticleList articleSummaries={content.articles} />
+            </Box>
 
-            <ArticleList articleSummaries={content.articles} />
+            <DataSitemap />
           </TileList>
         </MaxWidth>
       </Box>
