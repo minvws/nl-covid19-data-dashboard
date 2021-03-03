@@ -32,77 +32,82 @@ export function VaccineContentHeader({
   return (
     <Box spacing={4}>
       <Tile>
-        <HeadingWithIcon
-          icon={<VaccinatieIcon />}
-          title={text.title}
-          headingLevel={1}
-        />
+        <Box spacing={3}>
+          <HeadingWithIcon
+            icon={<VaccinatieIcon />}
+            title={text.title}
+            headingLevel={1}
+          />
+          <Box spacing={4} px={{ md: 5 }}>
+            <Text fontSize="1.625rem" m={0}>
+              {replaceComponentsInText(
+                text.current_amount_of_administrations_text,
+                {
+                  amount: (
+                    <InlineText color="data.primary" fontWeight="bold">
+                      {formatPercentage(
+                        data.vaccine_administered_total.last_value.estimated /
+                          1_000_000
+                      )}{' '}
+                      {siteText.common.miljoen}
+                    </InlineText>
+                  ),
+                }
+              )}
+            </Text>
 
-        <Box spacing={4} pt={4} px={{ md: 5 }}>
-          <Text fontSize="1.625rem" m={0}>
-            {replaceComponentsInText(
-              text.current_amount_of_administrations_text,
-              {
-                amount: (
-                  <InlineText color="data.primary" fontWeight="bold">
-                    {formatPercentage(
-                      data.vaccine_administered_total.last_value.estimated /
-                        1_000_000
-                    )}{' '}
-                    {siteText.common.miljoen}
-                  </InlineText>
-                ),
-              }
-            )}
-          </Text>
+            <TwoKpiSection spacing={4}>
+              <Box as="article" spacing={3}>
+                <Heading level={3}>Gezette prikken over tijd</Heading>
+                <Text m={0}>
+                  Deze grafiek toont het berekend totaal aantal gezette prikken
+                  sinds 4 januari 2021.
+                </Text>
 
-          <TwoKpiSection spacing={4}>
-            <Box as="article" spacing={3}>
-              <Heading level={3}>Gezette prikken over tijd</Heading>
-              <Text m={0}>
-                Deze grafiek toont het berekend totaal aantal gezette prikken
-                sinds 4 januari 2021.
-              </Text>
+                <ParentSize>
+                  {(parent) => (
+                    <LineChart
+                      width={parent.width}
+                      timeframe="all"
+                      values={data.vaccine_administered_total.values}
+                      height={180}
+                      linesConfig={[
+                        {
+                          metricProperty: 'estimated',
+                          areaFillOpacity: 0.25,
+                          strokeWidth: 3,
+                        },
+                      ]}
+                      componentCallback={componentCallback}
+                      showMarkerLine
+                      formatTooltip={(values) =>
+                        formatNumber(values[0].__value)
+                      }
+                      padding={{
+                        top: 13,
+                        left: 0,
+                        right: 0,
+                      }}
+                    />
+                  )}
+                </ParentSize>
+              </Box>
 
-              <ParentSize>
-                {(parent) => (
-                  <LineChart
-                    width={parent.width}
-                    timeframe="all"
-                    values={data.vaccine_administered_total.values}
-                    height={180}
-                    linesConfig={[
-                      {
-                        metricProperty: 'estimated',
-                        areaFillOpacity: 0.25,
-                        strokeWidth: 3,
-                      },
-                    ]}
-                    componentCallback={componentCallback}
-                    showMarkerLine
-                    formatTooltip={(values) => formatNumber(values[0].__value)}
-                    padding={{
-                      top: 13,
-                      left: 0,
-                      right: 0,
-                    }}
-                  />
-                )}
-              </ParentSize>
-            </Box>
-
-            <Box as="article" spacing={3}>
-              <Heading level={3}>Geplande prikken deze week</Heading>
-              <KpiValue
-                absolute={data.vaccine_administered_total.last_value.estimated}
-              />
-              <Text m={0}>
-                Berekend aantal prikken die gepland zijn van 22 tot en met 28
-                februari. Dit aantal kan afwijken door bijvoorbeeld annuleringen
-                of logistieke factoren.
-              </Text>
-            </Box>
-          </TwoKpiSection>
+              <Box as="article" spacing={3}>
+                <Heading level={3}>Geplande prikken deze week</Heading>
+                <KpiValue
+                  absolute={
+                    data.vaccine_administered_total.last_value.estimated
+                  }
+                />
+                <Text m={0}>
+                  Berekend aantal prikken die gepland zijn van 22 tot en met 28
+                  februari. Dit aantal kan afwijken door bijvoorbeeld
+                  annuleringen of logistieke factoren.
+                </Text>
+              </Box>
+            </TwoKpiSection>
+          </Box>
         </Box>
       </Tile>
 
