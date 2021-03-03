@@ -31,6 +31,7 @@ const StyledValue = styled.div(
     fontSize: '1.80203rem',
     fontWeight: 600,
     fontVariantNumeric: 'tabular-nums',
+    lineHeight: 1,
   },
   color
 );

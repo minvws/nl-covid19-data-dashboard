@@ -4,9 +4,14 @@ import { Box, BoxProps } from './base';
 
 interface TwoKpiSectionProps extends BoxProps {
   children: React.ReactNode;
+  spacing?: number;
 }
 
-export function TwoKpiSection({ children, ...props }: TwoKpiSectionProps) {
+export function TwoKpiSection({
+  children,
+  spacing = 3,
+  ...props
+}: TwoKpiSectionProps) {
   const childrenCount = React.Children.count(children);
 
   assert(
@@ -23,7 +28,7 @@ export function TwoKpiSection({ children, ...props }: TwoKpiSectionProps) {
         {childrenArray[0]}
       </Box>
       {hasTwoChildren && (
-        <Box flex="1 1 50%" ml={{ lg: 3 }}>
+        <Box flex="1 1 50%" ml={{ lg: spacing }}>
           {childrenArray[1]}
         </Box>
       )}
