@@ -54,7 +54,7 @@ export function TopicalSectionHeader({
         >
           <Heading
             level={2}
-            fontWeight={700}
+            fontWeight="bold"
             m={0}
             mb={{ _: 2, lg: 0 }}
             lineHeight={0}
