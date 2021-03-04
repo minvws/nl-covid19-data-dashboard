@@ -75,12 +75,13 @@ export type { SeriesConfig } from './logic';
  * @TODO
  *
  * - Include props for background rectangle aka date span annotation
- * - Move more logic out of main component
  * - Add signaalwaarde/benchmark marker
  * - Finish RangeTrend component
  *
  * Known Issues:
- * - Bisect and nearest point calculations have a rounding / offset bug.
+ * - Nearest point / tooltip valueKey calculation seems to be off by some
+ *   margin. This is currently not used in any charts but would be nice to solve
+ *   at some point.
  */
 export type TimeSeriesChartProps<T extends TimestampedValue> = {
   title: string; // Used for default tooltip formatting
