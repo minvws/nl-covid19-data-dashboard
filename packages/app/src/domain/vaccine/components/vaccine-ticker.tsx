@@ -152,14 +152,13 @@ function Tick({
     <div
       style={{
         position: 'absolute',
-        transform: `translate(
-                    ${translateX}px,
-                    ${translateY}px
-                  )
-                  rotate(${deg}deg)`,
+        transform: `
+          translate(${translateX}px, ${translateY}px)
+          rotate(${deg}deg)
+        `,
         width: ITEM_WIDTH,
         height: ITEM_HEIGHT,
-        backgroundColor: isSelected ? colors.data.primary : colors.data.neutral,
+        backgroundColor: isSelected ? colors.data.primary : '#e7e7e7',
         transitionProperty: 'background-color',
         transitionDuration: isSelected ? `${tickDuration / 2}ms` : '600ms',
         transitionDelay: isSelected
