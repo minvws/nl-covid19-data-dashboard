@@ -4,12 +4,13 @@ import { useEffect, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
 import { TimeframeOption } from '~/utils/timeframe';
-import { Legend } from '../legend';
+import { Legend } from '~/components-styled/legend';
 import { ValueAnnotation } from '../value-annotation';
 import {
   Axes,
   ChartContainer,
   DateLineMarker,
+  TimespanAnnotation,
   DateSpanMarker,
   Overlay,
   PointMarkers,
@@ -26,6 +27,7 @@ import {
   useLegendItems,
   useScales,
   useSeriesList,
+  DataOptions,
 } from './logic';
 import { useDimensions } from './logic/dimensions';
 export type { SeriesConfig } from './logic';
@@ -72,7 +74,6 @@ export type { SeriesConfig } from './logic';
  * @TODO
  *
  * - Include props for background rectangle aka date span annotation
- * - Add signaalwaarde/benchmark marker
  * - Finish RangeTrend component
  *
  * Known Issues:
@@ -85,23 +86,20 @@ export type TimeSeriesChartProps<T extends TimestampedValue> = {
   values: T[];
   seriesConfig: SeriesConfig<T>;
   width: number;
+  ariaLabelledBy: string;
   height?: number;
   timeframe?: TimeframeOption;
   formatTooltip?: TooltipFormatter<T>;
-  dataOptions?: {
-    annotation?: string;
-    forcedMaximumValue?: number;
-    isPercentage?: boolean;
-  };
-  benchmark?: {
-    value: number;
-    label: string;
-  };
   numTicks?: number;
   tickValues?: number[];
   showDateMarker?: boolean;
   paddingLeft?: number;
-  ariaLabelledBy: string;
+  /**
+   * The data specific options are grouped together. This way we can pass them
+   * together with the seriesConfig to the tooltip formatter. The options contain
+   * things that are essential to rendering a full tooltip layout
+   */
+  dataOptions?: DataOptions;
 };
 
 export function TimeSeriesChart<T extends TimestampedValue>({
@@ -118,7 +116,6 @@ export function TimeSeriesChart<T extends TimestampedValue>({
   paddingLeft,
   ariaLabelledBy,
   title,
-  benchmark,
 }: TimeSeriesChartProps<T>) {
   const {
     tooltipData,
@@ -129,7 +126,13 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     tooltipOpen,
   } = useTooltip<TooltipData<T>>();
 
-  const { annotation, isPercentage, forcedMaximumValue } = dataOptions;
+  const {
+    annotation,
+    isPercentage,
+    forcedMaximumValue,
+    benchmark,
+    timespanAnnotations: dateSpanAnnotations,
+  } = dataOptions;
 
   const { padding, bounds } = useDimensions(width, height, paddingLeft);
 
@@ -179,6 +182,11 @@ export function TimeSeriesChart<T extends TimestampedValue>({
           value: values[valuesIndex],
           valueKey: nearestPoint.metricProperty as keyof T,
           config: seriesConfig,
+          options: dataOptions,
+          /**
+           * @TODO add hovered annotation index
+           */
+          timespanAnnotationIndex: -42,
         },
         tooltipLeft: nearestPoint.x,
         tooltipTop: nearestPoint.y,
@@ -186,7 +194,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     } else {
       hideTooltip();
     }
-  }, [hoverState, seriesConfig, values, hideTooltip, showTooltip]);
+  }, [hoverState, seriesConfig, values, hideTooltip, showTooltip, dataOptions]);
 
   return (
     <Box>
@@ -207,6 +215,19 @@ export function TimeSeriesChart<T extends TimestampedValue>({
             yScale={yScale}
             isPercentage={isPercentage}
           />
+
+          {dateSpanAnnotations &&
+            dateSpanAnnotations.map((x, index) => (
+              <TimespanAnnotation
+                key={index}
+                start={x.start}
+                end={x.end}
+                color={x.color}
+                domain={xScale.domain() as [number, number]}
+                getX={getX}
+                height={bounds.height}
+              />
+            ))}
 
           {/**
            * The renderSeries() callback has been replaced by this component. As
@@ -247,7 +268,6 @@ export function TimeSeriesChart<T extends TimestampedValue>({
           top={tooltipTop}
           isOpen={tooltipOpen}
           formatTooltip={formatTooltip}
-          isPercentage={isPercentage}
         />
 
         {hoverState && (

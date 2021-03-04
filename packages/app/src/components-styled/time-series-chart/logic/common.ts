@@ -1,7 +1,24 @@
+export interface DataOptions {
+  annotation?: string;
+  forcedMaximumValue?: number;
+  isPercentage?: boolean;
+  benchmark?: {
+    value: number;
+    label: string;
+  };
+  timespanAnnotations?: TimespanAnnotationConfig[];
+}
+
+export interface TimespanAnnotationConfig {
+  start: number;
+  end: number;
+  color?: string;
+  label: string;
+}
+
 /**
  * @TODO find a more common place for this.
  */
-
 export type Padding = {
   top: number;
   right: number;

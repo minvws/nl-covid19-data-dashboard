@@ -40,7 +40,6 @@ function SeriesUnmemoized<T extends TimestampedValue>({
   yScale,
   bounds,
 }: SeriesProps<T>) {
-  assert(yScale, 'wut');
   return (
     <>
       {seriesList.map((series, index) => {

@@ -21,7 +21,7 @@ export function RangeTrend({
   getY1,
   bounds,
   color,
-  fillOpacity = 0.5,
+  fillOpacity = 0.6,
 }: RangeTrendProps) {
   const id = useUniqueId();
 
