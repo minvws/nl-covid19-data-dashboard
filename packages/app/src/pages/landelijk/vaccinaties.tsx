@@ -47,8 +47,6 @@ import { colors } from '~/style/theme';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { TickerClock } from '~/domain/vaccine/ticker-clock';
-import { Tile } from '~/components-styled/tile';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -102,10 +100,6 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
         <VaccinePageIntroduction data={data} text={text} />
 
         <ArticleStrip articles={content.highlight.articles} />
-
-        <Tile>
-          <TickerClock tickSpeed={500} />
-        </Tile>
 
         <TwoKpiSection>
           <KpiTile
