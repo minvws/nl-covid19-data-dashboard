@@ -143,30 +143,28 @@ export function ContentHeader(props: ContentHeaderProps) {
             )}
           </CategoryHeading>
         )}
-        {icon ? (
-          <HeadingWithIcon
-            icon={icon}
-            title={title}
-            headingLevel={headingLevel}
-          />
-        ) : (
-          <Box
-            display="flex"
-            flexDirection="row"
-            flexWrap="nowrap"
-            alignItems="center"
-            mb={-2}
-          >
-            <Box>
-              <Heading level={headingLevel} mb={0}>
-                {title}
-              </Heading>
-            </Box>
-          </Box>
+        {title && (
+          <>
+            {icon ? (
+              <HeadingWithIcon
+                icon={icon}
+                title={title}
+                headingLevel={headingLevel}
+              />
+            ) : (
+              <Box display="flex" flexWrap="nowrap" alignItems="center" mb={-2}>
+                <Box>
+                  <Heading level={headingLevel} mb={0}>
+                    {title}
+                  </Heading>
+                </Box>
+              </Box>
+            )}
+          </>
         )}
 
         <Box
-          spacing={3}
+          spacing={{ _: 3, md: 0 }}
           display="flex"
           flexDirection={['column', null, null, null, 'row']}
           ml={[null, null, null, hasIcon ? 5 : null]}
@@ -197,7 +195,7 @@ export function ContentHeader(props: ContentHeaderProps) {
 
 interface ContentHeaderProps {
   id?: string;
-  title: string;
+  title?: string;
   subtitle?: string;
   metadata?: MetadataProps;
   reference?: {
