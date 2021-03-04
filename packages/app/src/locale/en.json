@@ -2048,6 +2048,14 @@
       "tooltip_gemiddeld": "In total",
       "leeftijd_jaar": "{{ageGroup}} years old"
     },
+    "grafiek_gezette_prikken": {
+      "titel": "Gezette prikken over tijd",
+      "omschrijving": "Deze grafiek toont het berekend totaal aantal gezette prikken sinds 6 januari 2021."
+    },
+    "kpi_geplande_prikken_deze_week": {
+      "titel": "Geplande prikken deze week",
+      "omschrijving": "Berekend aantal prikken die gepland zijn van {{date_from}} tot en met {{date_to}}. Dit aantal kan afwijken door bijvoorbeeld annuleringen of logistieke factoren."
+    },
     "gezette_prikken": {
       "title": "Number of doses administered",
       "estimated_until": "Estimated number till {{reportedDate}}",

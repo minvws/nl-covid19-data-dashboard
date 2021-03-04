@@ -1,3 +1,4 @@
+import { formatDate } from '~/utils/formatDate';
 import { National } from '@corona-dashboard/common';
 import { AxisBottom, AxisLeft, TickFormatter } from '@visx/axis';
 import { GridRows } from '@visx/grid';
@@ -58,11 +59,10 @@ export function VaccinePageIntroduction({
 
             <TwoKpiSection spacing={4}>
               <Box as="article" spacing={3}>
-                <Heading level={3}>Gezette prikken over tijd</Heading>
-                <Text m={0}>
-                  Deze grafiek toont het berekend totaal aantal gezette prikken
-                  sinds 4 januari 2021.
-                </Text>
+                <Heading level={3}>
+                  {text.grafiek_gezette_prikken.titel}
+                </Heading>
+                <Text m={0}>{text.grafiek_gezette_prikken.omschrijving}</Text>
 
                 <ParentSize>
                   {(parent) => (
@@ -94,16 +94,49 @@ export function VaccinePageIntroduction({
               </Box>
 
               <Box as="article" spacing={3}>
-                <Heading level={3}>Geplande prikken deze week</Heading>
+                <Heading level={3}>
+                  {text.kpi_geplande_prikken_deze_week.titel}
+                </Heading>
                 <KpiValue
-                  absolute={
-                    data.vaccine_administered_total.last_value.estimated
-                  }
+                  absolute={data.vaccine_administered_planned.last_value.doses}
                 />
                 <Text m={0}>
-                  Berekend aantal prikken die gepland zijn van 22 tot en met 28
-                  februari. Dit aantal kan afwijken door bijvoorbeeld
-                  annuleringen of logistieke factoren.
+                  {(() => {
+                    /**
+                     * We'll render a date range either as:
+                     *
+                     * "1 tot en met 7 maart" (same month)
+                     *
+                     * or:
+                     *
+                     * "29 maart tot en met 4 april" (overlapping month)
+                     *
+                     */
+
+                    const dateFrom = createDate(
+                      data.vaccine_administered_planned.last_value
+                        .date_start_unix
+                    );
+                    const dateTo = createDate(
+                      data.vaccine_administered_planned.last_value.date_end_unix
+                    );
+
+                    const isSameMonth =
+                      dateFrom.getMonth() === dateTo.getMonth();
+
+                    const dateFromText = isSameMonth
+                      ? dateFrom.getDate()
+                      : formatDate(dateFrom);
+                    const dateToText = formatDate(dateTo);
+
+                    return replaceComponentsInText(
+                      text.kpi_geplande_prikken_deze_week.omschrijving,
+                      {
+                        date_from: dateFromText,
+                        date_to: dateToText,
+                      }
+                    );
+                  })()}
                 </Text>
               </Box>
             </TwoKpiSection>
