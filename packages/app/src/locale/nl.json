@@ -1422,7 +1422,6 @@
   "infected_age_groups": {
     "title": "Verdeling naar leeftijd",
     "description": "De blauwe rechterbalken in deze grafiek laten zien tot welke leeftijdsgroep positief geteste personen behoren. De grijze linkerbalken tonen hoe groot elke leeftijdsgroep is ten opzichte van de hele Nederlandse bevolking. De blauwe en grijze balken laten samen zien of leeftijdsgroepen naar verhouding meer of minder positief geteste personen hebben. Bijvoorbeeld: van alle positief geteste personen is 16% een twintiger (blauwe balk) en van alle Nederlanders is 13% een twintiger (grijze balk). De leeftijdsgroep twintigers heeft in dit voorbeeld naar verhouding meer positief geteste personen. De grafiek wordt dagelijks bijgewerkt en gaat alleen over de meest recent gemelde gevallen.",
-    "example": "Bijvoorbeeld: Van alle positief geteste mensen is {{infectedPercentage}} tussen de {{ageGroupRange}} jaar. Van alle Nederlanders is {{ageGroupPercentage}} tussen de {{ageGroupRange}} jaar.",
     "graph": {
       "age_group_percentage_title": "Verdeling leeftijdsgroepen in Nederland",
       "age_group_percentage_tooltip": "van de bevolking is {{ageGroupRange}} jaar",
@@ -1433,7 +1432,8 @@
       "clipped_value_message": "Deze waarde is groter dan in de grafiek is weergegeven",
       "value_percentage_title": "Positieve testen per leeftijdsgroep",
       "value_percentage_tooltip": "van het aantal positief geteste mensen is {{ageGroupRange}} jaar"
-    }
+    },
+    "example": "Bijvoorbeeld: Van alle positief geteste mensen is {{infectedPercentage}} tussen de {{ageGroupRange}} jaar. Van alle Nederlanders is {{ageGroupPercentage}} tussen de {{ageGroupRange}} jaar."
   },
   "gehandicaptenzorg_besmette_locaties": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -1811,22 +1811,6 @@
     "deceased_monitor_chart_legenda_registered": "Daadwerkelijke aantal overledenen",
     "deceased_monitor_chart_legenda_expected": "Verwachte aantal overledenen",
     "deceased_monitor_chart_legenda_expected_margin": "Boven- en ondergrens van verwachte aantal overledenen"
-  },
-  "section_sterftemonitor_vr": {
-    "title": "Sterftemonitor",
-    "description": "Het Centraal Bureau voor de Statistiek (CBS) publiceert wekelijks het totaal aantal overleden mensen in Nederland en vergelijkt dit aantal met het verwacht aantal overlijdens gecorrigeerd voor koude- of hittegolven, uitbraken en epidemieën. Er is sprake van oversterfte indien meer mensen overlijden dan verwacht. Deze grafiek geeft mogelijk een completer beeld van sterfte door COVID-19 dan de door de GGD’en gemelde COVID-19 sterfte, omdat niet alle mensen die overlijden aan COVID-19 getest zijn op COVID-19. ",
-    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "bronnen": {
-      "cbs": {
-        "href": "https://www.cbs.nl/nl-nl/cijfers/detail/70895ned",
-        "text": "CBS",
-        "download": "https://opendata.cbs.nl/ODataApi/odata/70895ned/TypedDataSet?$filter=((Geslacht eq '1100')) and ((LeeftijdOp31December eq '10000')) and (substringof('W', Perioden) eq true)&$select=Perioden, Overledenen_1"
-      }
-    },
-    "reference": {
-      "href": "/verantwoording#sterftemonitor-CBS",
-      "text": "Lees meer in de cijferverantwoording."
-    }
   },
   "nationaal_maatregelen": {
     "titel": "Maatregelen",
@@ -2687,6 +2671,10 @@
       }
     }
   },
+  "milestones": {
+    "toon_meer": "Toon eerdere gebeurtenissen",
+    "verwacht": "Verwacht"
+  },
   "choropleth_tooltip": {
     "patients": {
       "singular": "patiënt",
@@ -2698,8 +2686,20 @@
     "elderly_at_home": "Thuiswonende 70-plussers:",
     "sewer_regional": "Gemiddeld aantal virusdeeltjes:"
   },
-  "milestones": {
-    "toon_meer": "Toon eerdere gebeurtenissen",
-    "verwacht": "Verwacht"
+  "section_sterftemonitor_vr": {
+    "title": "Sterftemonitor",
+    "description": "Het Centraal Bureau voor de Statistiek (CBS) publiceert wekelijks het totaal aantal overleden mensen in Nederland en vergelijkt dit aantal met het verwacht aantal overlijdens gecorrigeerd voor koude- of hittegolven, uitbraken en epidemieën. Er is sprake van oversterfte indien meer mensen overlijden dan verwacht. Deze grafiek geeft mogelijk een completer beeld van sterfte door COVID-19 dan de door de GGD’en gemelde COVID-19 sterfte, omdat niet alle mensen die overlijden aan COVID-19 getest zijn op COVID-19. ",
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "bronnen": {
+      "cbs": {
+        "href": "https://www.cbs.nl/nl-nl/cijfers/detail/70895ned",
+        "text": "CBS",
+        "download": "https://opendata.cbs.nl/ODataApi/odata/70895ned/TypedDataSet?$filter=((Geslacht eq '1100')) and ((LeeftijdOp31December eq '10000')) and (substringof('W', Perioden) eq true)&$select=Perioden, Overledenen_1"
+      }
+    },
+    "reference": {
+      "href": "/verantwoording#sterftemonitor-CBS",
+      "text": "Lees meer in de cijferverantwoording."
+    }
   }
 }
