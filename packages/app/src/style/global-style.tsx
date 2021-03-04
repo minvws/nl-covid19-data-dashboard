@@ -115,4 +115,8 @@ button::-moz-focus-inner {
 figure {
   margin: 0
 }
+
+p {
+  margin-top: 0;
+}
 `;

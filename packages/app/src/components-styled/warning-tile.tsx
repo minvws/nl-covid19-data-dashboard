@@ -1,10 +1,10 @@
 import css from '@styled-system/css';
+import { ComponentType, ReactNode } from 'react';
 import styled from 'styled-components';
 import WarningIcon from '~/assets/warning.svg';
-import { Box } from './base';
 import { Tile } from '~/components-styled/tile';
-import { asResponsiveArray } from '~/style/utils';
-import { ReactNode, ComponentType } from 'react';
+import { useBreakpoints } from '~/utils/useBreakpoints';
+import { Box } from './base';
 
 type WarningMessageVariant = 'emphasis' | 'default';
 
@@ -21,12 +21,21 @@ export function WarningTile({
   icon = WarningIcon,
 }: WarningMessageProps) {
   const Icon = icon;
+
+  const breakpoints = useBreakpoints();
+
+  const isSmallScreen = !breakpoints.md;
+
   return (
     <StyledTile>
       <WarningBox variant={variant}>
-        <IconWrapper>
-          <Icon />
-        </IconWrapper>
+        {isSmallScreen ? (
+          <Box width="6px" />
+        ) : (
+          <IconWrapper>
+            <Icon />
+          </IconWrapper>
+        )}
       </WarningBox>
       <WarningMessageBox variant={variant}>
         {typeof message === 'string' ? (
@@ -50,18 +59,18 @@ const StyledTile = styled(Tile)(
     flexDirection: 'row',
     padding: 0,
     boxShadow: 'none',
+    display: 'inline-flex',
   })
 );
 
 const WarningBox = styled(Box)<{ variant: WarningMessageVariant }>(
   ({ variant }) => {
-    const backgroundColor = variant === 'emphasis' ? '#FFE060' : 'white';
     return css({
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       flex: '0 0 auto',
-      backgroundColor,
+      backgroundColor: variant === 'emphasis' ? '#FEE670' : 'white',
       borderBottomLeftRadius: 1,
       borderTopLeftRadius: 1,
     });
@@ -74,23 +83,22 @@ const IconWrapper = styled(Box)(
       borderRadius: 1,
       display: 'block',
       fill: 'black',
-      width: asResponsiveArray({ _: 30, sm: 38 }),
-      height: asResponsiveArray({ _: 30, sm: 38 }),
-      mx: asResponsiveArray({ _: '7px', sm: '21px' }),
+      width: 24,
+      height: 24,
+      mx: '10px',
     },
   })
 );
 
 const WarningMessageBox = styled(Box)<{ variant: WarningMessageVariant }>(
   ({ variant }) => {
-    const backgroundColor = variant === 'emphasis' ? '#FFEE87' : 'white';
     return css({
       display: 'flex',
       alignItems: 'center',
       flex: '1 1 auto',
-      py: 3,
-      pl: 3,
-      backgroundColor,
+      py: 2,
+      pl: variant === 'emphasis' ? 3 : 0,
+      backgroundColor: variant === 'emphasis' ? '#FFF4C1' : 'white',
       borderBottomRightRadius: 1,
       borderTopRightRadius: 1,
     });
@@ -100,7 +108,7 @@ const WarningMessageBox = styled(Box)<{ variant: WarningMessageVariant }>(
 const Children = styled.div<{ variant: WarningMessageVariant }>(
   ({ variant }) => {
     return css({
-      fontSize: variant === 'emphasis' ? '1.25rem' : 2,
+      fontSize: variant === 'emphasis' ? '1rem' : 2,
       fontWeight: variant === 'emphasis' ? 'bold' : 'normal',
       borderBottomRightRadius: 1,
       borderTopRightRadius: 1,

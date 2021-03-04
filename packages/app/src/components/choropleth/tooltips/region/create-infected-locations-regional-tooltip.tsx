@@ -4,7 +4,7 @@ import {
   SafetyRegionProperties,
 } from '@corona-dashboard/common';
 import { ReactNode } from 'react';
-import { InlineText } from '~/components-styled/typography'
+import { InlineText } from '~/components-styled/typography';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
 import { TooltipSubject } from '~/components/choropleth/tooltips/tooltip-subject';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';

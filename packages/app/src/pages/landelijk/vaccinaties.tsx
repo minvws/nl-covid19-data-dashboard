@@ -26,11 +26,16 @@ import { InlineText, Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import { VaccineSupportTooltip } from '~/domain/vaccine/components/vaccine-support-tooltip';
-import { createDeliveryTooltipFormatter } from '~/domain/vaccines/create-delivery-tooltip-formatter';
-import { useVaccineDeliveryData } from '~/domain/vaccines/use-vaccine-delivery-data';
-import { useVaccineNames } from '~/domain/vaccines/use-vaccine-names';
+import {
+  MilestonesView,
+  MilestoneViewProps,
+} from '~/domain/vaccine/milestones-view';
+import { createDeliveryTooltipFormatter } from '~/domain/vaccine/create-delivery-tooltip-formatter';
+import { useVaccineDeliveryData } from '~/domain/vaccine/use-vaccine-delivery-data';
+import { useVaccineNames } from '~/domain/vaccine/use-vaccine-names';
 import siteText from '~/locale/index';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import { vaccineMilestonesQuery } from '~/queries/vaccine-milestones-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
@@ -42,11 +47,6 @@ import { colors } from '~/style/theme';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { vaccineMilestonesQuery } from '~/queries/vaccine-milestones-query';
-import {
-  MilestonesView,
-  MilestoneViewProps,
-} from '~/domain/vaccine/milestones-view';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -60,7 +60,7 @@ export const getStaticProps = createGetStaticProps(
   }>(
     `{
       "milestones": ${vaccineMilestonesQuery},
-      "highlight": ${createPageArticlesQuery('vaccinationsPage')} 
+      "highlight": ${createPageArticlesQuery('vaccinationsPage')}
     }`
   )
 );

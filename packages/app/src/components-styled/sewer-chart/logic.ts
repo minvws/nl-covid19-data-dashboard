@@ -172,10 +172,7 @@ export function useSelectedStationValues(
       hasOutliers && !displayOutliers
         ? stationValues.filter((x) => x.value <= outlierLimit)
         : stationValues;
-    const outliers =
-      hasOutliers && !displayOutliers
-        ? stationValues.filter((x) => x.value > outlierLimit)
-        : undefined;
+    const outliers = stationValues.filter((x) => x.value > outlierLimit);
     return [values, outliers];
   }, [displayOutliers, hasOutliers, outlierLimit, stationValues]);
 

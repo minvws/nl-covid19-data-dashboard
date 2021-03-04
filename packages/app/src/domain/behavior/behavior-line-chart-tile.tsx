@@ -66,7 +66,7 @@ export function BehaviorLineChartTile({
         </Box>
       </Header>
 
-      <Box display="flex" justifyContent="start">
+      <Box display="flex" justifyContent="start" mb={3}>
         <BehaviorTypeControl value={type} onChange={setType} />
       </Box>
 
