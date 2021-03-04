@@ -2658,7 +2658,7 @@
       }
     },
     "waarschuwingen": {
-      "title": "Aantal mensen dat anderen waarschuwden via CoronaMelder: ",
+      "title": "Aantal mensen dat anderen waarschuwde via CoronaMelder: ",
       "description": "Dit cijfer laat zien hoeveel (positief geteste) gebruikers van CoronaMelder gisteren andere app-gebruikers hebben gewaarschuwd.",
       "total": "{{totalDownloads}} mensen hebben de CoronaMelder-app gedownload."
     },
