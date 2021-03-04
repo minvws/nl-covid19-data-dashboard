@@ -1,9 +1,7 @@
 import { useTheme } from 'styled-components';
-import CoronaVirusIcon from '~/assets/coronavirus.svg';
 import { AnchorTile } from '~/components-styled/anchor-tile';
 import { Box } from '~/components-styled/base';
 import { ChartTile } from '~/components-styled/chart-tile';
-import { ContentHeader } from '~/components-styled/content-header';
 import { Legenda } from '~/components-styled/legenda';
 import DeceasedMonitor from '~/domain/deceased/components/deceased-monitor-chart';
 import siteText from '~/locale/index';
@@ -25,22 +23,6 @@ export function DeceasedMonitorSection({
 
   return (
     <>
-      <ContentHeader
-        title={text.title}
-        icon={<CoronaVirusIcon />}
-        subtitle={text.description}
-        reference={text.reference}
-        metadata={{
-          datumsText: text.datums,
-          dateOrRange: {
-            start: data.last_value.date_start_unix,
-            end: data.last_value.date_end_unix,
-          },
-          dateOfInsertionUnix: data.last_value.date_of_insertion_unix,
-          dataSources: [text.bronnen.cbs],
-        }}
-      />
-
       {showDataMessage && (
         <AnchorTile
           title={text.cbs_message.title}

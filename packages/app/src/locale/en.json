@@ -519,7 +519,7 @@
     "titel_sidebar": "Sewage water examination",
     "titel_kpi": "Average number of coronavirus particles per 100,000 inhabitants",
     "total_installation_count_titel": "Number of sampling locations",
-    "total_installation_count_description": "Sampling locations can report multiple measurements per week. The weekly average for the whole country is calculated by adjusting the weekly average for each sampling location for the number of inhabitants served by that location. The number of measurements used per location per week can differ because not all measurements are successful.",
+    "total_installation_count_description": "Sampling locations can report multiple measurements per week. The number of measurements used per location per week can differ because not all measurements are successful.",
     "rwzi_abbrev": "",
     "map_titel": "Average number of virus particles per 100.000 inhabitants",
     "map_toelichting": "This map shows the average number of virus particles per 100.000 inhabitants, per safety region.",
@@ -540,7 +540,7 @@
     "kpi_titel": "Average number of coronavirus particles per 100.000 people",
     "warning_method": "This monitoring method is still being developed. We hope wastewater monitoring will help us to detect and track the virus more effectively in the future. [Read more about this research programme on the website of the National Institute for Public Health and the Environment (RIVM)](https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater).",
     "total_measurements_title": "Number of measurements per week",
-    "total_measurements_description": "Sampling locations can report multiple measurements per week. The weekly average for the whole country is calculated by adjusting the weekly average for each sampling location for the number of inhabitants served by that location. The number of measurements used per location per week can differ because not all measurements are successful.",
+    "total_measurements_description": "Sampling locations can report multiple measurements per week. The number of measurements used per location per week can differ because not all measurements are successful.",
     "total_measurements_locations": "{{sampled_installation_count}} of the {{total_installation_count}} sampling locations reported at least one measurement in the given week."
   },
   "notfound_titel": {
@@ -762,7 +762,13 @@
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -790,7 +796,7 @@
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "screen_reader_graph_content": "{{value}} virus particles per 100.000 inhabitants",
     "barscale_titel": "Average number of coronavirus particles per 100,000 inhabitants",
-    "extra_uitleg": "An average is calculated based on all the wastewater measurements collected in one week. It also takes account of how many inhabitants are served by a specific wastewater treatment plant, and how much of the wastewater flowing to the plant comes from the municipality.",
+    "extra_uitleg": "An average is calculated based on all the wastewater measurements collected in one week. It also takes account of how many inhabitants are served by a specific wastewater treatment plant, and how much of the wastewater flowing to the plant comes from the safety region.",
     "barscale_screenreader_text": "{{value}} virus particles per 100.000 inhabitants",
     "linechart_titel": "Average number of virus particles per 100.000 inhabitants over time",
     "bar_chart_title": "Most recent measurement per location in {{safetyRegion}}",
@@ -812,7 +818,7 @@
     "graph_range_description": "Average number of virus particles per 100.000 inhabitants over time",
     "titel_kpi": "Average number of virus particles per 100.000 inhabitants",
     "total_installation_count_titel": "Number of sampling locations",
-    "total_installation_count_description": "Sampling locations can report multiple measurements per week. The weekly average is calculated by adjusting the weekly average for each sampling location for the number of inhabitants served by that plant. The number of measurements used per location per week can differ because not all measurements are successful.",
+    "total_installation_count_description": "Sampling locations can report multiple measurements per week. The number of measurements used per location per week can differ because not all measurements are successful.",
     "rwzi_abbrev": "",
     "reference": {
       "href": "/verantwoording#sewage-water",
@@ -831,7 +837,7 @@
     "hide_outliers": "Hide outliers",
     "warning_method": "This monitoring method is still being developed. We hope wastewater monitoring will help us to detect and track the virus more effectively in the future. [Read more about this research programme on the website of the National Institute for Public Health and the Environment (RIVM)](https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater).",
     "total_measurements_title": "Number of measurements per week",
-    "total_measurements_description": "Sampling locations can report multiple measurements per week. The weekly average is calculated by adjusting the weekly average for each sampling location for the number of inhabitants served by that plant. The number of measurements used per location per week can differ because not all measurements are successful.",
+    "total_measurements_description": "Sampling locations can report multiple measurements per week. The number of measurements used per location per week can differ because not all measurements are successful.",
     "total_measurements_locations": "{{sampled_installation_count}} of the {{total_installation_count}} sampling locations reported at least one measurement in the given week."
   },
   "gemeente_ziekenhuisopnames_per_dag": {
@@ -945,7 +951,7 @@
     },
     "nodata_sidebar": "This information is not available for this municipality.",
     "total_installation_count_titel": "Number of sampling locations",
-    "total_installation_count_description": "Sampling locations can report multiple measurements per week. The weekly average for the whole country is calculated by adjusting the weekly average for each sampling location for the number of inhabitants served by that location. The number of measurements used per location per week can differ because not all measurements are successful.",
+    "total_installation_count_description": "Sampling locations can report multiple measurements per week. The number of measurements used per location per week can differ because not all measurements are successful.",
     "rwzi_abbrev": "",
     "graph_daily_label_text_rwzi": "Measurements for location ({{name}})",
     "graph_selected_rwzi_placeholder": "Select location",
@@ -967,7 +973,7 @@
     "hide_outliers": "Hide outliers",
     "warning_method": "This monitoring method is still being developed. We hope wastewater monitoring will help us to detect and track the virus more effectively in the future. [Read more about this research programme on the website of the National Institute for Public Health and the Environment (RIVM)](https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater).",
     "total_measurements_title": "Number of measurements per week",
-    "total_measurements_description": "Sampling locations can report multiple measurements per week. The weekly average for the whole country is calculated by adjusting the weekly average for each sampling location for the number of inhabitants served by that location. The number of measurements used per location per week can differ because not all measurements are successful.",
+    "total_measurements_description": "Sampling locations can report multiple measurements per week. The number of measurements used per location per week can differ because not all measurements are successful.",
     "total_measurements_locations": "{{sampled_installation_count}} of the {{total_installation_count}} sampling locations reported at least one measurement in the given week."
   },
   "veiligheidsregio_index": {
@@ -1778,7 +1784,7 @@
   },
   "section_sterftemonitor": {
     "title": "Mortality monitor",
-    "description": "Every week the national office Statistics Netherlands (CBS) publishes data on the total number of deaths in the Netherlands and compares this to the predicted number of deaths, corrected for extreme temperatures, epidemics, etc. If more deaths occur than predicted, these are considered excess deaths. This graph may show a more complete picture of COVID-19 related deaths than the numbers reported by the GGD because not everyone who dies from COVID-19 has been tested for it. ",
+    "description": "Every week the national office Statistics Netherlands (CBS) publishes data on the total number of deaths and compares this to the predicted number of deaths, corrected for extreme temperatures, epidemics, etc. If more deaths occur than predicted, these are considered excess deaths. This graph may show a more complete picture of COVID-19 related deaths than the numbers reported by the GGD because not everyone who dies from COVID-19 has been tested for it.",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "bronnen": {
       "cbs": {
@@ -1805,6 +1811,22 @@
     "deceased_monitor_chart_legenda_registered": "Actual mortality",
     "deceased_monitor_chart_legenda_expected": "Predicted mortality",
     "deceased_monitor_chart_legenda_expected_margin": "Range of predicted mortality"
+  },
+  "section_sterftemonitor_vr": {
+    "title": "Sterftemonitor",
+    "description": "Het Centraal Bureau voor de Statistiek (CBS) publiceert wekelijks het totaal aantal overleden mensen in Nederland en vergelijkt dit aantal met het verwacht aantal overlijdens gecorrigeerd voor koude- of hittegolven, uitbraken en epidemieën. Er is sprake van oversterfte indien meer mensen overlijden dan verwacht. Deze grafiek geeft mogelijk een completer beeld van sterfte door COVID-19 dan de door de GGD’en gemelde COVID-19 sterfte, omdat niet alle mensen die overlijden aan COVID-19 getest zijn op COVID-19. ",
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "bronnen": {
+      "cbs": {
+        "href": "https://www.cbs.nl/nl-nl/cijfers/detail/70895ned",
+        "text": "CBS",
+        "download": "https://opendata.cbs.nl/ODataApi/odata/70895ned/TypedDataSet?$filter=((Geslacht eq '1100')) and ((LeeftijdOp31December eq '10000')) and (substringof('W', Perioden) eq true)&$select=Perioden, Overledenen_1"
+      }
+    },
+    "reference": {
+      "href": "/verantwoording#sterftemonitor-CBS",
+      "text": "Lees meer in de cijferverantwoording."
+    }
   },
   "nationaal_maatregelen": {
     "titel": "Measures",
@@ -2072,7 +2094,11 @@
     "expected_page_additions": {
       "title": "Expected data on vaccinations",
       "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
-      "additions": ["", "", ""]
+      "additions": [
+        "",
+        "",
+        ""
+      ]
     },
     "data": {
       "difference": "",
@@ -2197,7 +2223,11 @@
       "kpi_expected_page_additions": {
         "title": "Expected data on vaccinations",
         "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
-        "additions": ["", "", ""]
+        "additions": [
+          "",
+          "",
+          ""
+        ]
       },
       "vaccination_chart": {
         "product_names": {
@@ -2242,7 +2272,11 @@
     "laatst_bijgewerkt": "Last update: {{date}}",
     "secties": {
       "artikelen": {
-        "titel": ""
+        "titel": "",
+        "link": {
+          "text": "",
+          "href": ""
+        }
       },
       "risicokaart": {
         "titel": ""
