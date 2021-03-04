@@ -192,6 +192,7 @@ export function DefaultTooltip<T extends TimestampedValue>({
       <Heading level={5} my={2}>
         Debug Info:
       </Heading>
+      <div>{dateString}</div>
       <div>Active: {__valueKey}</div>
       <div>AnnotationIndex: {timespanAnnotationIndex}</div>
     </section>
