@@ -487,8 +487,10 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                 seriesConfig={[
                   {
                     /**
-                     * Type area as a different type of line. Not sure if we
-                     * even need to treat this as a different type.
+                     * Type area is a different type of line. Not sure if we
+                     * even need to treat this as a different type, since it's
+                     * basically just a line with a fill color. Maybe it has
+                     * more meaning once we introduce stacked areas.
                      */
                     type: 'area',
                     metricProperty: 'percentage_16_24',

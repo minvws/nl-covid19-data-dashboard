@@ -4,7 +4,7 @@ import {
   TimestampedValue,
 } from '@corona-dashboard/common';
 import { localPoint } from '@visx/event';
-import { bisectLeft } from 'd3-array';
+import { bisectCenter } from 'd3-array';
 import { ScaleLinear } from 'd3-scale';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import { isDefined } from 'ts-is-present';
@@ -79,18 +79,18 @@ export function useHoverState<T extends TimestampedValue>({
    * In this chart TrendValue __date was replaced with __date_unix, so that we
    * can use the original data timestamps directly for the xDomain without
    * conversion to/from Date objects.
+   *
+   * The points are always rendered in the middle of the date-span, and therefor
+   * we use bisectCenter otherwise the calculated index jumps to the next as
+   * soon as you cross the marker line to the right.
    */
   const bisect = useCallback(
     function (values: TimestampedValue[], xPosition: number): number {
       if (values.length === 1) return 0;
 
-      /**
-       * @TODO figure this out. If we can do it without padding, we can move
-       * this outside the component
-       */
       const date_unix = xScale.invert(xPosition - paddingLeft);
 
-      return bisectLeft(valuesDateUnix, date_unix, 0, values.length - 1);
+      return bisectCenter(valuesDateUnix, date_unix, 0, values.length);
     },
     [paddingLeft, xScale, valuesDateUnix]
   );
