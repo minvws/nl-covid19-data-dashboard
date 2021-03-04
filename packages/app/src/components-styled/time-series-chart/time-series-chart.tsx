@@ -20,6 +20,8 @@ import {
   TooltipData,
   TooltipFormatter,
 } from './components';
+import { Benchmark } from './components/benchmark';
+import { Series } from './components/series';
 import {
   calculateSeriesMaximum,
   SeriesConfig,
@@ -93,9 +95,12 @@ export type TimeSeriesChartProps<T extends TimestampedValue> = {
   formatTooltip?: TooltipFormatter<T>;
   dataOptions?: {
     annotation?: string;
-    benchmarkValue?: number;
     forcedMaximumValue?: number;
     isPercentage?: boolean;
+  };
+  benchmark?: {
+    value: number;
+    label: string;
   };
   numTicks?: number;
   tickValues?: number[];
@@ -118,6 +123,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
   paddingLeft,
   ariaLabelledBy,
   title,
+  benchmark,
 }: TimeSeriesChartProps<T>) {
   const {
     tooltipData,
@@ -128,12 +134,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     tooltipOpen,
   } = useTooltip<TooltipData<T>>();
 
-  const {
-    benchmarkValue,
-    annotation,
-    isPercentage,
-    forcedMaximumValue,
-  } = dataOptions;
+  const { annotation, isPercentage, forcedMaximumValue } = dataOptions;
 
   const { padding, bounds } = useDimensions(width, height, paddingLeft);
 
@@ -141,17 +142,9 @@ export function TimeSeriesChart<T extends TimestampedValue>({
 
   const seriesList = useSeriesList(values, seriesConfig, timeframe);
 
-  // const benchmark = useMemo(
-  //   () =>
-  //     benchmarkValue
-  //       ? { value: signaalwaarde, label: text.common.barScale.signaalwaarde }
-  //       : undefined,
-  //   [signaalwaarde]
-  // );
-
   const calculatedSeriesMax = useMemo(
-    () => calculateSeriesMaximum(values, seriesConfig, benchmarkValue),
-    [values, seriesConfig, benchmarkValue]
+    () => calculateSeriesMaximum(values, seriesConfig, benchmark?.value),
+    [values, seriesConfig, benchmark]
   );
 
   const seriesMax = isDefined(forcedMaximumValue)
@@ -285,6 +278,14 @@ export function TimeSeriesChart<T extends TimestampedValue>({
           />
 
           {renderSeries()}
+          {benchmark && (
+            <Benchmark
+              value={benchmark.value}
+              label={benchmark.label}
+              top={yScale(benchmark.value)}
+              width={bounds.width}
+            />
+          )}
         </ChartContainer>
 
         <Tooltip

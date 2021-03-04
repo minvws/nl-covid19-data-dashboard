@@ -484,6 +484,10 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                   isPercentage: true,
                   forcedMaximumValue: 100,
                 }}
+                benchmark={{
+                  label: 'This is an important value',
+                  value: 77,
+                }}
                 seriesConfig={[
                   {
                     /**
