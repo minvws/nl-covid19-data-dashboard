@@ -25,22 +25,6 @@ export function DeceasedMonitorSection({
 
   return (
     <>
-      <ContentHeader
-        title={text.title}
-        icon={<CoronaVirusIcon />}
-        subtitle={text.description}
-        reference={text.reference}
-        metadata={{
-          datumsText: text.datums,
-          dateOrRange: {
-            start: data.last_value.date_start_unix,
-            end: data.last_value.date_end_unix,
-          },
-          dateOfInsertionUnix: data.last_value.date_of_insertion_unix,
-          dataSources: [text.bronnen.cbs],
-        }}
-      />
-
       {showDataMessage && (
         <AnchorTile
           title={text.cbs_message.title}
