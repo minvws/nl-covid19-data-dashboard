@@ -20,7 +20,6 @@ export function TopNavigation() {
   const breakpoints = useBreakpoints(true);
   const isSmallScreen = !breakpoints.md;
   const [panelHeight, setPanelHeight] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
   const navMenu = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -37,14 +36,7 @@ export function TopNavigation() {
   }, [isMenuOpen]);
 
   function toggleMenu() {
-    if (isAnimating) return;
-
-    setIsAnimating(!isAnimating);
     setIsMenuOpen(!isMenuOpen);
-  }
-
-  function handleTransitionEnd() {
-    setIsAnimating(false);
   }
 
   return (
@@ -67,7 +59,6 @@ export function TopNavigation() {
         role="navigation"
         aria-label={text.aria_labels.pagina_keuze}
         ref={navMenu}
-        onTransitionEnd={handleTransitionEnd}
         css={css({
           maxHeight: asResponsiveArray({ _: `${panelHeight}px`, md: '100%' }),
           opacity: asResponsiveArray({ _: isMenuOpen ? 1 : 0, md: 1 }),
@@ -76,10 +67,7 @@ export function TopNavigation() {
             md: 'auto',
           }),
           transition: asResponsiveArray({
-            _:
-              isMenuOpen || isAnimating
-                ? 'max-height 0.4s ease-in-out, opacity 0.4s ease-in-out'
-                : 'none',
+            _: 'max-height 0.4s ease-in-out, opacity 0.4s ease-in-out',
             md: 'none',
           }),
         })}
