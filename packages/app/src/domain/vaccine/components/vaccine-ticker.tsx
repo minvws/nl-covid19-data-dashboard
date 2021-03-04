@@ -8,10 +8,7 @@ import { colors } from '~/style/theme';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 
-const ITEM_WIDTH = 2;
-const ITEM_HEIGHT = 10;
 const RADIUS = 55;
-
 const CONTAINER_WIDTH = RADIUS * 2 + 12;
 const CONTAINER_HEIGHT = RADIUS * 2 + 12;
 
@@ -48,6 +45,8 @@ export function VaccineTicker({ data }: VaccineTickerProps) {
             numTicks={tickCount}
             currentTick={counter % tickCount}
             tickDuration={tickDuration}
+            tickWidth={2}
+            tickLength={10}
           />
 
           <Box
@@ -88,10 +87,14 @@ function TickCircle({
   numTicks,
   currentTick,
   tickDuration,
+  tickWidth,
+  tickLength,
 }: {
   numTicks: number;
   currentTick: number;
   tickDuration: number;
+  tickWidth: number;
+  tickLength: number;
 }) {
   const stepRadius = (2 * Math.PI) / numTicks;
   const stepDegree = 360 / numTicks;
@@ -117,6 +120,8 @@ function TickCircle({
             key={index}
             tickDuration={tickDuration}
             isLast={index === numTicks - 1}
+            tickWidth={tickWidth}
+            tickLength={tickLength}
             isSelected={
               currentTick === numTicks - 1 && index !== numTicks - 1
                 ? false
@@ -135,6 +140,8 @@ function Tick({
   isSelected,
   isLast,
   tickDuration,
+  tickWidth,
+  tickLength,
 }: {
   index: number;
   angle: number;
@@ -142,11 +149,13 @@ function Tick({
   isSelected: boolean;
   isLast: boolean;
   tickDuration: number;
+  tickWidth: number;
+  tickLength: number;
 }) {
   const translateX =
-    RADIUS * Math.cos(angle) - ITEM_WIDTH / 2 + CONTAINER_WIDTH / 2;
+    RADIUS * Math.cos(angle) - tickWidth / 2 + CONTAINER_WIDTH / 2;
   const translateY =
-    RADIUS * Math.sin(angle) - ITEM_HEIGHT / 2 + CONTAINER_HEIGHT / 2;
+    RADIUS * Math.sin(angle) - tickLength / 2 + CONTAINER_HEIGHT / 2;
 
   return (
     <div
@@ -156,8 +165,8 @@ function Tick({
           translate(${translateX}px, ${translateY}px)
           rotate(${deg}deg)
         `,
-        width: ITEM_WIDTH,
-        height: ITEM_HEIGHT,
+        width: tickWidth,
+        height: tickLength,
         backgroundColor: isSelected ? colors.data.primary : '#e7e7e7',
         transitionProperty: 'background-color',
         transitionDuration: isSelected ? `${tickDuration / 2}ms` : '600ms',
