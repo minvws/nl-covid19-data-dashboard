@@ -1,21 +1,18 @@
 import { TimestampedValue } from '@corona-dashboard/common';
 import { useTooltip } from '@visx/tooltip';
-import { useCallback, useEffect, useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
 import { TimeframeOption } from '~/utils/timeframe';
 import { Legend } from '../legend';
 import { ValueAnnotation } from '../value-annotation';
 import {
-  AreaTrend,
   Axes,
   ChartContainer,
   DateLineMarker,
   DateSpanMarker,
-  LineTrend,
   Overlay,
   PointMarkers,
-  RangeTrend,
   Tooltip,
   TooltipData,
   TooltipFormatter,
@@ -25,8 +22,6 @@ import { Series } from './components/series';
 import {
   calculateSeriesMaximum,
   SeriesConfig,
-  SeriesDoubleValue,
-  SeriesSingleValue,
   useHoverState,
   useLegendItems,
   useScales,
@@ -193,70 +188,6 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     }
   }, [hoverState, seriesConfig, values, hideTooltip, showTooltip]);
 
-  const renderSeries = useCallback(
-    () =>
-      seriesList.map((series, index) => {
-        const config = seriesConfig[index];
-
-        switch (config.type) {
-          case 'line':
-            return (
-              <LineTrend
-                key={index}
-                series={series as SeriesSingleValue[]}
-                color={config.color}
-                style={config.style}
-                strokeWidth={config.strokeWidth}
-                getX={getX}
-                getY={getY}
-                onHover={(evt) => handleHover(evt, index)}
-              />
-            );
-          case 'area':
-            return (
-              <AreaTrend
-                key={index}
-                series={series as SeriesSingleValue[]}
-                color={config.color}
-                style={config.style}
-                fillOpacity={config.fillOpacity}
-                strokeWidth={config.strokeWidth}
-                getX={getX}
-                getY={getY}
-                yScale={yScale}
-                onHover={(evt) => handleHover(evt, index)}
-              />
-            );
-
-          case 'range':
-            return (
-              <RangeTrend
-                key={index}
-                series={series as SeriesDoubleValue[]}
-                color={config.color}
-                fillOpacity={config.fillOpacity}
-                strokeWidth={config.strokeWidth}
-                getX={getX}
-                getY0={getY0}
-                getY1={getY1}
-                bounds={bounds}
-              />
-            );
-        }
-      }),
-    [
-      handleHover,
-      seriesConfig,
-      seriesList,
-      getX,
-      getY,
-      getY0,
-      getY1,
-      yScale,
-      bounds,
-    ]
-  );
-
   return (
     <Box>
       {annotation && <ValueAnnotation mb={2}>{annotation}</ValueAnnotation>}
@@ -277,7 +208,28 @@ export function TimeSeriesChart<T extends TimestampedValue>({
             isPercentage={isPercentage}
           />
 
-          {renderSeries()}
+          {/**
+           * The renderSeries() callback has been replaced by this component. As
+           * long as we use only very standardized series this might be a good
+           * idea because it removes quite some lines of code from the main
+           * component.
+           *
+           * With this amount of props if does feel like the wrong type of
+           * abstraction, but I still think it's an improvement over
+           * having it mixed in with the main component.
+           */}
+          <Series
+            seriesConfig={seriesConfig}
+            seriesList={seriesList}
+            onHover={handleHover}
+            getX={getX}
+            getY={getY}
+            getY0={getY0}
+            getY1={getY1}
+            bounds={bounds}
+            yScale={yScale}
+          />
+
           {benchmark && (
             <Benchmark
               value={benchmark.value}

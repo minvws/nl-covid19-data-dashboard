@@ -1,5 +1,6 @@
 import { scaleBand, scaleLinear } from '@visx/scale';
 import { extent } from 'd3-array';
+import { ScaleLinear } from 'd3-scale';
 import { useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Bounds } from './common';
@@ -9,6 +10,21 @@ import {
   SeriesList,
   SeriesSingleValue,
 } from './series';
+
+export type GetX = (x: SeriesItem) => number;
+export type GetY = (x: SeriesSingleValue) => number;
+export type GetY0 = (x: SeriesDoubleValue) => number;
+export type GetY1 = (x: SeriesDoubleValue) => number;
+
+interface UseScalesResult {
+  xScale: ScaleLinear<number, number>;
+  yScale: ScaleLinear<number, number>;
+  getX: GetX;
+  getY: GetY;
+  getY0: GetY0;
+  getY1: GetY1;
+  dateSpanWidth: number;
+}
 
 export function useScales(args: {
   seriesList: SeriesList;
@@ -63,20 +79,16 @@ export function useScales(args: {
       nice: numTicks,
     });
 
-    const getX = (x: SeriesItem) => xScale(x.__date_unix);
-
-    const getY = (x: SeriesSingleValue) => yScale(x.__value);
-    const getY0 = (x: SeriesDoubleValue) => yScale(x.__value_a);
-    const getY1 = (x: SeriesDoubleValue) => yScale(x.__value_b);
-
-    return {
+    const result: UseScalesResult = {
       xScale,
       yScale,
-      getX,
-      getY,
-      getY0,
-      getY1,
+      getX: (x: SeriesItem) => xScale(x.__date_unix),
+      getY: (x: SeriesSingleValue) => yScale(x.__value),
+      getY0: (x: SeriesDoubleValue) => yScale(x.__value_a),
+      getY1: (x: SeriesDoubleValue) => yScale(x.__value_b),
       dateSpanWidth: dateSpanScale.bandwidth(),
     };
+
+    return result;
   }, [seriesList, maximumValue, bounds, numTicks]);
 }

@@ -41,7 +41,7 @@ interface HoverState<T> {
 
 type Event = React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>;
 
-type HoverHandler = (event: Event, seriesIndex?: number) => void;
+export type HoverHandler = (event: Event, seriesIndex?: number) => void;
 
 type UseHoveStateResponse<T> = [HoverHandler, HoverState<T> | undefined];
 
