@@ -9,7 +9,6 @@
  * components as part of its children.
  */
 import { Group } from '@visx/group';
-import { Bar } from '@visx/shape';
 import React from 'react';
 import { Padding } from '../logic';
 
@@ -18,9 +17,6 @@ interface ChartContainerProps {
   width: number;
   height: number;
   padding: Padding;
-  onHover: (
-    event: React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>
-  ) => void;
   valueAnnotation?: string;
   ariaLabelledBy: string;
 }
@@ -30,7 +26,6 @@ export function ChartContainer({
   height,
   padding,
   ariaLabelledBy,
-  onHover,
   children,
 }: ChartContainerProps) {
   return (
@@ -41,24 +36,6 @@ export function ChartContainer({
       aria-labelledby={ariaLabelledBy}
     >
       <Group left={padding.left} top={padding.top}>
-        {/**
-         * The Bar captures all mouse movements outside of trend elements. The Trend components * are rendered op top (in DOM) so that they can have their own hover state and
-         * handlers. Trend hover handlers also have the advantage that we don't need to
-         * do nearest point calculation on that event, because we already know the trend
-         * index in the handler.
-         */}
-        <Bar
-          x={0}
-          y={0}
-          width={width}
-          height={height}
-          fill="transparent"
-          onTouchStart={onHover}
-          onTouchMove={onHover}
-          onMouseMove={onHover}
-          onMouseLeave={onHover}
-        />
-
         {children}
       </Group>
     </svg>

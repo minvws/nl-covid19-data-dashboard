@@ -30,6 +30,7 @@ import {
   DataOptions,
 } from './logic';
 import { useDimensions } from './logic/dimensions';
+import { Bar } from '@visx/shape';
 export type { SeriesConfig } from './logic';
 
 /**
@@ -96,8 +97,8 @@ export type TimeSeriesChartProps<T extends TimestampedValue> = {
   paddingLeft?: number;
   /**
    * The data specific options are grouped together. This way we can pass them
-   * together with the seriesConfig to the tooltip formatter. The options contain
-   * things that are essential to rendering a full tooltip layout
+   * together with the seriesConfig to the tooltip formatter. The options
+   * contain things that are essential to rendering a full tooltip layout
    */
   dataOptions?: DataOptions;
 };
@@ -204,7 +205,6 @@ export function TimeSeriesChart<T extends TimestampedValue>({
         <ChartContainer
           width={width}
           height={height}
-          onHover={handleHover}
           padding={padding}
           ariaLabelledBy={ariaLabelledBy}
         >
@@ -214,6 +214,26 @@ export function TimeSeriesChart<T extends TimestampedValue>({
             xScale={xScale}
             yScale={yScale}
             isPercentage={isPercentage}
+          />
+
+          <Bar
+            /**
+             * The Bar captures all mouse movements outside of trend elements.
+             * The Trend components * are rendered op top (in DOM) so that they
+             * can have their own hover state and handlers. Trend hover handlers
+             * also have the advantage that we don't need to do nearest point
+             * calculation on that event, because we already know the trend
+             * index in the handler.
+             */
+            x={0}
+            y={0}
+            width={bounds.width}
+            height={bounds.height}
+            fill="transparent"
+            onTouchStart={handleHover}
+            onTouchMove={handleHover}
+            onMouseMove={handleHover}
+            onMouseLeave={handleHover}
           />
 
           {dateSpanAnnotations &&
