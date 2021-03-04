@@ -19,7 +19,7 @@ import { createDate } from '~/utils/createDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { DateRange } from '~/utils/get-trailing-date-range';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { TickerClock } from './ticker-clock';
+import { VaccineTicker } from './components/vaccine-ticker';
 
 interface VaccinePageIntroductionProps {
   text: Locale['vaccinaties'];
@@ -109,7 +109,7 @@ export function VaccinePageIntroduction({
               </Box>
             </TwoKpiSection>
 
-            <TickerClock
+            <VaccineTicker
               data={data.vaccine_administered_rate_moving_average.last_value}
             />
           </Box>
