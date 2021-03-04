@@ -1,4 +1,7 @@
-import { formatNumber } from '@corona-dashboard/common';
+import {
+  formatNumber,
+  NlVaccineAdministeredTotal,
+} from '@corona-dashboard/common';
 
 import Vaccinaties from '~/assets/vaccinaties.svg';
 import { Box } from '~/components-styled/base';
@@ -7,17 +10,18 @@ import { Heading, Text } from '~/components-styled/typography';
 import siteText from '~/locale';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { ArrowIconRight } from '~/components-styled/arrow-icon';
+import { VaccineAdministrationsOverTimeChart } from '~/domain/vaccine/vaccine-administrations-over-time-chart';
 interface TopicalVaccineProps {
-  estimated: number;
+  data: NlVaccineAdministeredTotal;
 }
 
-export function TopicalVaccineTile(props: TopicalVaccineProps) {
-  const { estimated } = props;
+export function TopicalVaccineTile({ data }: TopicalVaccineProps) {
+  const estimated = data.last_value.estimated;
 
   const text = siteText.nationaal_actueel.mini_trend_tiles.toegediende_vaccins;
 
   return (
-    <Box position="relative" pb={3}>
+    <Box position="relative">
       <Box width="3.5rem" height="3.5rem" position="absolute" left={0} mr={1}>
         <Vaccinaties />
       </Box>
@@ -54,6 +58,8 @@ export function TopicalVaccineTile(props: TopicalVaccineProps) {
       <Text fontWeight="bold" mb={0}>
         {text.sub_title}
       </Text>
+
+      <VaccineAdministrationsOverTimeChart values={data.values} />
     </Box>
   );
 }

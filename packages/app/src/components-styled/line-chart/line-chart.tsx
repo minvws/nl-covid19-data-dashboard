@@ -47,6 +47,7 @@ export type LineConfig<T extends TimestampedValue> = {
   strokeWidth?: number;
   legendLabel?: string;
   legendShape?: LegendShape;
+  disableTooltip?: boolean;
 };
 
 export type LineChartProps<T extends TimestampedValue> = {
@@ -261,7 +262,8 @@ export function LineChart<T extends TimestampedValue>({
       const hoverPoints = trendsList
         .map((trends, index) => {
           const trendValue = bisect(trends, point.x, xScale);
-          return trendValue
+
+          return trendValue && !linesConfig[index].disableTooltip
             ? {
                 data: trendValue,
                 color: linesConfig[index].color,
