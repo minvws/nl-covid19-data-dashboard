@@ -74,7 +74,7 @@
     "barscale_titel": "Intensive care-opnames per dag",
     "barscale_screenreader_text": "{{value}} intensive care-opnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "extra_uitleg": "Aantal mensen met bevestigd COVID-19 dat per dag op een intensive care-afdeling van een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de afgelopen drie dagen.\n\nLet op: Hoewel ziekenhuizen proberen om COVID-19 patiënten snel te registreren, is het aannemelijk dat de registratie achter loopt. Om deze reden zijn de aantallen van de afgelopen dagen meestal nog niet compleet.",
-    "linechart_titel": "Intensive care-opnames over tijd",
+    "linechart_titel": "Intensive care-opnames door de tijd heen",
     "bronnen": {
       "nice": {
         "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
@@ -92,7 +92,7 @@
       "description": "Dit getal laat zien hoeveel IC-bedden bezet worden door patiënten met COVID-19. Het percentage geeft aan hoeveel dit is ten opzichte van alle bezette IC-bedden. Dit zegt dus niet iets over de maximale IC capaciteit."
     },
     "chart_bedbezetting": {
-      "title": "Bezetting IC-bedden over tijd",
+      "title": "Bezetting IC-bedden door de tijd heen",
       "description": "Deze grafiek toont het verloop van het aantal IC-bedden dat is bezet door patiënten met COVID-19. De gegevens vóór 1 juni zijn mogelijk minder betrouwbaar i.v.m. het opzetten van een registratie door het LCPS.",
       "legend_trend_label": "Bezetting IC-bedden",
       "legend_inaccurate_label": "Cijfers zijn minder nauwkeurig"
@@ -156,7 +156,7 @@
     "extra_uitleg": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer laat het aantal ziekenhuisopnames - inclusief directe IC opnames - zien dat op één dag gemeld is. Dit kunnen ook meldingen zijn van opnames van eerdere dagen. \n\n*De piek in de ziekenhuisopnames op 23 februari komt door verlate meldingen van opnames in de regio Gelderland-Midden.*",
     "map_titel": "Woonplaats opgenomen patiënten",
     "map_toelichting": "Deze kaart laat zien in welke gemeenten of veiligheidsregio’s patiënten wonen die met COVID-19 in het ziekenhuis zijn opgenomen. Patiënten kunnen ook in een ziekenhuis in een ander deel van Nederland worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE.",
-    "linechart_titel": "Ziekenhuisopnames over tijd",
+    "linechart_titel": "Ziekenhuisopnames door de tijd heen",
     "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "chloropleth_legenda": {
       "titel": "Ziekenhuisopnames",
@@ -188,7 +188,7 @@
       "description": "Dit getal laat zien hoeveel ziekenhuisbedden (exclusief IC-bedden) bezet worden door patiënten met COVID-19."
     },
     "chart_bedbezetting": {
-      "title": "Bezetting gewone ziekenhuisbedden (exclusief IC-bedden) over tijd",
+      "title": "Bezetting gewone ziekenhuisbedden (zonder IC-bedden) door de tijd heen",
       "description": "Deze grafiek toont het verloop in het aantal ziekenhuisbedden (exclusief IC-bedden) dat is bezet door patiënten met COVID-19. De gegevens vóór 1 juni zijn mogelijk minder betrouwbaar i.v.m. het opzetten van een registratie door het LCPS.",
       "legend_trend_label": "Bezetting gewone ziekenhuisbedden",
       "legend_inaccurate_label": "Cijfers zijn minder nauwkeurig"
@@ -225,7 +225,7 @@
     "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn en COVID-19 hebben. Een deel van de meldingen zijn positieve tests van eerdere dagen, die later zijn doorgegeven.",
     "map_titel": "Verdeling positief geteste mensen in Nederland",
     "map_toelichting": "Deze kaarten laten zien van hoeveel mensen gisteren is gemeld dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
-    "linechart_titel": "Verloop over tijd",
+    "linechart_titel": "Aantal positief geteste mensen door de tijd heen (per 100.000 inwoners)",
     "linechart_toelichting": "Deze grafiek laat zien van hoeveel mensen in de geselecteerde periode gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
@@ -282,7 +282,7 @@
     "barscale_screenreader_text": "{{value}} besmettelijke mensen",
     "cijfer_titel": "Geschat aantal besmettelijke mensen in Nederland:",
     "cijfer_toelichting": "Een schatting van hoeveel mensen met COVID-19 besmettelijk zijn voor anderen. Dit getal wordt door het RIVM berekend.",
-    "linechart_titel": "Verloop over tijd",
+    "linechart_titel": "Aantal besmettelijke mensen door de tijd heen",
     "titel_sidebar": "Besmettelijke mensen",
     "metadata": {
       "title": "Besmettelijke mensen | Coronadashboard | Rijksoverheid.nl",
@@ -320,7 +320,7 @@
     "barscale_toelichting": "Aantal mensen dat besmet wordt door één besmettelijke persoon.",
     "barscale_screenreader_text": "{{value}} positief geteste mensen per dag.",
     "extra_uitleg": "Het reproductiegetal laat zien hoe snel het virus zich verspreidt. Dit getal geeft aan hoeveel mensen gemiddeld besmet worden door één patiënt met COVID-19. Bij een reproductiegetal van rond de 1 blijft het aantal besmettingen ongeveer gelijk. Als het reproductiegetal lager is dan 1, dan daalt het aantal besmettingen. Bij een getal hoger dan 1 stijgt het aantal besmettingen.",
-    "linechart_titel": "Verloop over tijd",
+    "linechart_titel": "Het reproductiegetal door de tijd heen",
     "metadata": {
       "title": "Reproductiegetal | Coronadashboard | Rijksoverheid.nl",
       "description": "Het reproductiegetal laat zien hoe snel het virus zich verspreidt. Dit getal geeft aan hoeveel mensen gemiddeld besmet worden door één patiënt met COVID-19."
@@ -397,7 +397,7 @@
     "barscale_toelichting": "Aantal nieuwe locaties waarbij ten minste één bewoner positief getest is. Een verpleeghuis telt mee als ‘nieuwe locatie’ als er een nieuwe besmetting is vastgesteld, terwijl in de voorgaande 28 dagen – dit is twee keer de incubatietijd – geen bewoners positief waren getest.",
     "kpi_titel": "Totaal aantal besmette locaties",
     "kpi_toelichting": "Dit getal is een inschatting van het totaal aantal verpleeghuislocaties waar in de afgelopen 28 dagen minstens één (nieuwe) COVID-19 besmetting op basis van een positieve test, is gemeld. Het percentage geeft aan hoeveel dit is ten opzichte van het totaal aantal verpleeghuislocaties in Nederland.",
-    "linechart_titel": "Totaal aantal besmette locaties over tijd",
+    "linechart_titel": "Totaal aantal besmette locaties door de tijd heen",
     "barscale_screenreader_text": "{{value}} nieuwe locaties waarbij tenminste één bewoner positief getest is, per dag.",
     "chloropleth_legenda": {
       "titel": "Percentage besmette locaties",
@@ -433,7 +433,7 @@
     "barscale_titel": "Aantal positief geteste bewoners in verpleeghuizen per dag",
     "extra_uitleg": "Aantal nieuwe positief geteste bewoners in verpleeghuizen dat per dag gemeld is.",
     "pagina_toelichting": "Aantal nieuwe positief geteste bewoners in verpleeghuizen dat per dag is gemeld. Dit getal is een inschatting van het aantal gemelde bewoners in verpleeghuizen dat in Nederland positief getest is en COVID-19 heeft.\n\nDe rekenmethode is per 29 september verbeterd. Zie ook de cijferverantwoording.",
-    "linechart_titel": "Verloop over tijd",
+    "linechart_titel": "Aantal positief geteste bewoners door de tijd heen",
     "barscale_screenreader_text": "{{value}} positief geteste bewoners.",
     "titel_sidebar": "Positief geteste bewoners",
     "chloropleth_legenda": {
@@ -471,7 +471,7 @@
     "barscale_titel": "Aantal overleden bewoners per dag",
     "barscale_screenreader_text": "{{value}} overleden bewoners.",
     "extra_uitleg": "Dit getal is een inschatting van het aantal gemelde verpleeghuisbewoners dat in Nederland overlijdt aan de gevolgen van het nieuwe coronavirus.",
-    "linechart_titel": "Verloop over tijd",
+    "linechart_titel": "Aantal overleden bewoners door de tijd heen",
     "map_titel": "Verpleeghuis oversterfte in Nederland",
     "map_toelichting": "Deze kaarten laten zien hoe de oversterfte in verpleeghuizen is in Nederland per dag.",
     "titel_sidebar": "Overleden bewoners verpleeghuizen per dag",
@@ -715,7 +715,7 @@
     "extra_uitleg": "Aantal mensen uit deze veiligheidsregio met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer laat het aantal ziekenhuisopnames - inclusief directe IC opnames - zien dat op één dag gemeld is. Dit kunnen ook meldingen zijn van opnames van eerdere dagen. Patiënten kunnen in een ziekenhuis elders in Nederland zijn opgenomen.",
     "map_titel": "Verdeling ziekenhuisopnames in {{safetyRegion}}",
     "map_toelichting": "Deze kaart laat zien in welke gemeenten of veiligheidsregio’s patiënten wonen die met COVID-19 in het ziekenhuis zijn opgenomen. Patiënten kunnen ook in een ziekenhuis in een ander deel van Nederland worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE.",
-    "linechart_titel": "Ziekenhuisopnames over tijd",
+    "linechart_titel": "Ziekenhuisopnames door de tijd heen",
     "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "bron": {
       "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
@@ -757,7 +757,7 @@
     "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn en COVID-19 hebben. Een deel van de meldingen zijn positieve tests van eerdere dagen, die later zijn doorgegeven.",
     "map_titel": "Verdeling positief geteste mensen in {{safetyRegion}}",
     "map_toelichting": "Deze kaart laat zien van hoeveel mensen in de gemeenten van deze veiligheidsregio's gisteren gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
-    "linechart_titel": "Verloop over tijd",
+    "linechart_titel": "Aantal positief geteste mensen door de tijd heen (per 100.000 inwoners)",
     "linechart_toelichting": "Deze grafiek laat zien van hoeveel mensen in de geselecteerde periode in deze veiligheidsregio gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
@@ -850,7 +850,7 @@
     "extra_uitleg": "Aantal mensen uit deze gemeente met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer laat het aantal ziekenhuisopnames - inclusief directe IC opnames - zien dat op één dag gemeld is. Dit kunnen ook meldingen zijn van opnames van eerdere dagen. Patiënten kunnen in een ziekenhuis elders in Nederland zijn opgenomen.",
     "map_titel": "Verdeling ziekenhuisopnames in veiligheidsregio van {{municipality}}",
     "map_toelichting": "Deze kaart laat zien in welke gemeenten of veiligheidsregio’s patiënten wonen die met COVID-19 in het ziekenhuis zijn opgenomen. Patiënten kunnen ook in een ziekenhuis in een ander deel van Nederland worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE.",
-    "linechart_titel": "Ziekenhuisopnames over tijd",
+    "linechart_titel": "Ziekenhuisopnames door de tijd heen",
     "barscale_screenreader_text": "{{value}} ziekenhuisopnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "bron": {
       "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
@@ -892,7 +892,7 @@
     "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn en COVID-19 hebben. Een deel van de meldingen zijn positieve tests van eerdere dagen, die later zijn doorgegeven.",
     "map_titel": "Verdeling positief geteste mensen in veiligheidsregio van {{municipality}}",
     "map_toelichting": "Deze kaart laat zien van hoeveel mensen in deze gemeente en in andere gemeenten in dezelfde veiligheidsregio gisteren gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
-    "linechart_titel": "Verloop over tijd",
+    "linechart_titel": "Aantal positief geteste mensen door de tijd heen (per 100.000 inwoners)",
     "linechart_toelichting": "Deze grafiek laat zien van hoeveel mensen in de geselecteerde periode in deze gemeente gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
@@ -1127,7 +1127,7 @@
     "barscale_titel": "Overleden bewoners verpleeghuizen",
     "barscale_screenreader_text": "{{value}} overleden bewoners.",
     "extra_uitleg": "Dit getal is een inschatting van het aantal gemelde verpleeghuisbewoners uit deze veiligheidsregio dat overlijdt aan de gevolgen van het nieuwe coronavirus.",
-    "linechart_titel": "Verloop over tijd",
+    "linechart_titel": "Aantal overleden bewoners door de tijd heen",
     "map_titel": "Verpleeghuis oversterfte in Nederland",
     "map_toelichting": "Deze kaarten laten zien hoe de oversterfte in verpleeghuizen is in Nederland per dag.",
     "titel_sidebar": "Sterfte per dag",
@@ -1159,7 +1159,7 @@
     "barscale_toelichting": "Aantal nieuwe locaties waarbij ten minste één bewoner positief getest is. Een verpleeghuis telt mee als ‘nieuwe locatie’ als er een nieuwe besmetting is vastgesteld, terwijl in de voorgaande 28 dagen – dit is twee keer de incubatietijd – geen bewoners positief waren getest.",
     "kpi_titel": "Totaal aantal besmette locaties",
     "kpi_toelichting": "Dit getal is een inschatting van het totaal aantal verpleeghuislocaties waar in de afgelopen 28 dagen minstens één (nieuwe) COVID-19 besmetting op basis van een positieve test, is gemeld. Het percentage geeft aan hoeveel dit is ten opzichte van het totaal aantal verpleeghuislocaties in deze veiligheidsregio.",
-    "linechart_titel": "Totaal aantal besmette locaties over tijd",
+    "linechart_titel": "Totaal aantal besmette locaties door de tijd heen",
     "barscale_screenreader_text": "{{value}} nieuwe locaties waarbij tenminste één bewoner positief getest is, per dag.",
     "metadata": {
       "title": "Besmette verpleeghuizen in {{safetyRegionName}} | Coronadashboard | Rijksoverheid.nl",
@@ -1746,7 +1746,7 @@
       "kpi_covid_daily_description": "Dit getal toont het aantal COVID-19 patiënten waarvan aan de GGD op die dag gemeld is dat ze zijn overleden. Een deel van de overlijdens is van eerdere dagen, die later zijn doorgegeven.",
       "kpi_covid_total_title": "Totaal aantal overleden COVID-19 patiënten",
       "kpi_covid_total_description": "Dit getal laat zien van hoeveel COVID-19 patiënten in totaal is gemeld dat ze zijn overleden, sinds het begin van de meldingen.",
-      "line_chart_covid_daily_title": "Gemelde aantal patiënten overleden aan COVID-19 over tijd",
+      "line_chart_covid_daily_title": "Meldingen van aan COVID-19 overleden patiënten door de tijd heen",
       "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel COVID-19 patiënten in de geselecteerde periode gemeld is dat ze zijn overleden."
     },
     "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
