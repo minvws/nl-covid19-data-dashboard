@@ -1784,7 +1784,7 @@
   },
   "section_sterftemonitor": {
     "title": "Mortality monitor",
-    "description": "Every week the national office Statistics Netherlands (CBS) publishes data on the total number of deaths in the Netherlands and compares this to the predicted number of deaths, corrected for extreme temperatures, epidemics, etc. If more deaths occur than predicted, these are considered excess deaths. This graph may show a more complete picture of COVID-19 related deaths than the numbers reported by the GGD because not everyone who dies from COVID-19 has been tested for it. ",
+    "description": "Every week the national office Statistics Netherlands (CBS) publishes data on the total number of deaths and compares this to the predicted number of deaths, corrected for extreme temperatures, epidemics, etc. If more deaths occur than predicted, these are considered excess deaths. This graph may show a more complete picture of COVID-19 related deaths than the numbers reported by the GGD because not everyone who dies from COVID-19 has been tested for it.",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "bronnen": {
       "cbs": {
