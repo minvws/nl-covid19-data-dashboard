@@ -6,11 +6,12 @@ import { Heading, Text, InlineText } from '~/components-styled/typography';
 import siteText from '~/locale';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { formatNumber } from '~/utils/formatNumber';
+import { colors } from '~/style/theme';
 // import styled from 'styled-components';
 
 // const ITEMS_AMOUNT = 75;
 const ITEM_WIDTH = 2;
-const ITEM_HEIGHT = 15;
+const ITEM_HEIGHT = 10;
 const RADIUS = 70;
 
 // const STEP_RADIUS = (2 * Math.PI) / ITEMS_AMOUNT;
@@ -43,27 +44,6 @@ function useInterval(callback: any, delay: number) {
   }, [delay]);
 }
 
-// const useWindowFocus = () => {
-//   const [isWindowFocus, setIsWindowFocus] = useState(true)
-
-//   useEffect(() => {
-//     const setActive = (event: FocusEvent) => {
-//       if (event.type === 'focus') setIsWindowFocus(true)
-//       if (event.type === 'blur') setIsWindowFocus(false)
-//     }
-
-//     window.addEventListener('focus', setActive);
-//     window.addEventListener('blur', setActive);
-
-//     return () => {
-//       window.removeEventListener('focus', setActive);
-//       window.removeEventListener('blur', setActive);
-//     };
-//   });
-
-//   return isWindowFocus;
-// };
-
 // CLOCK
 interface TickerClockProps {
   tickSpeed: number;
@@ -72,15 +52,10 @@ interface TickerClockProps {
 export function TickerClock(props: TickerClockProps) {
   const { tickSpeed } = props;
 
-  // const isWindowFocus = useWindowFocus()
-
-  // useEffect(() => {
-  //   console.log(isWindowFocus)
-  // }, [isWindowFocus])
-
   const itemsAmount = MINUTE_IN_MS / tickSpeed;
   const stepRadius = (2 * Math.PI) / itemsAmount;
   const stepDegrees = 360 / itemsAmount;
+  // const svgMorphDuration = tickSpeed * 0.15;
 
   const [counter, setCounter] = useState(0);
   // const animateToCheck = useRef<any>(null);
@@ -113,7 +88,7 @@ export function TickerClock(props: TickerClockProps) {
     // if (current === 1) {
     //   animateToStar.current.beginElement();
     // }
-  }, tickSpeed);
+  }, tickSpeed / 30);
 
   return (
     <Box display="flex" alignItems="center">
@@ -154,7 +129,8 @@ export function TickerClock(props: TickerClockProps) {
                 rotate(${index * stepDegrees + 360 / itemsAmount}deg)`,
                 width: ITEM_WIDTH,
                 height: ITEM_HEIGHT,
-                backgroundColor: index ? '#007BC7' : '#d3d3d3',
+                backgroundColor: index < counter ? '#007BC7' : '#d3d3d3',
+                transition: index === 0 ? '0s' : '0.3s',
                 // transition:
                 //   index === counter ? '0s'  : '45s cubic-bezier(1,0,1,0.35)',
               }}
@@ -220,7 +196,7 @@ export function TickerClock(props: TickerClockProps) {
         <Heading level={3}>
           {replaceComponentsInText(siteText.vaccinaties.clock.title, {
             seconds: (
-              <InlineText color="blue" fontWeight="bold">
+              <InlineText color={colors.data.primary} fontWeight="bold">
                 0.8
               </InlineText>
             ),
@@ -229,7 +205,7 @@ export function TickerClock(props: TickerClockProps) {
         <Text m={0}>
           {replaceComponentsInText(siteText.vaccinaties.clock.description, {
             amount: (
-              <InlineText color="blue" fontWeight="bold">
+              <InlineText color={colors.data.primary} fontWeight="bold">
                 {formatNumber(84373)}
               </InlineText>
             ),
