@@ -127,7 +127,7 @@ const DeceasedNationalPage: FCWithLayout<typeof getStaticProps> = (props) => {
           />
         </ChartTile>
 
-        <DeceasedMonitorSection data={dataCbs} />
+        <DeceasedMonitorSection data={dataCbs} showDataMessage />
       </TileList>
     </>
   );
