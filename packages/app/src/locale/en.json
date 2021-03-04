@@ -122,15 +122,15 @@
     "barscale_toelichting": "Estimated number of patients who contact the general practitioner for the first time due to COVID-19 like symptoms, per week.",
     "kpi_titel": "Estimated number of patients with symptoms that could indicate COVID-19",
     "kpi_toelichting": "Estimated number of patients who contact the general practitioner for the first time due to COVID-19 like symptoms, per week.",
-    "linechart_titel": "Progression over time",
-    "barscale_screenreader_text": "{{value}} patients who contact the general practitioner for the first time due to COVID-19 like symptoms, per 100.000 inhabitants, per week.",
+    "linechart_titel": "Number of patients with symptoms that could indicate COVID-19 (per 100,000 inhabitants)",
+    "barscale_screenreader_text": "{{value}} patients who contact the general practitioner for the first time due to COVID-19 like symptoms, per 100,000 inhabitants, per week.",
     "titel_sidebar": "Symptoms at general practitioners",
     "metadata": {
       "title": "Number of patients with COVID-19 symptoms reported by general practitioners | Coronavirus Dashboard | Government.nl",
       "description": "National (estimated) number of patients who contact the general practitioner for the first time due to COVID-19 like symptoms."
     },
-    "normalized_kpi_titel": "Number of patients with symptoms that could indicate COVID-19 per 100.000 inhabitants",
-    "normalized_kpi_toelichting": "Number of patients, per 100.000 inhabitants, who contact the general practitioner for the first time due to COVID-19 like symptoms, per week.",
+    "normalized_kpi_titel": "Number of patients with symptoms that could indicate COVID-19 per 100,000 inhabitants",
+    "normalized_kpi_toelichting": "Number of patients, per 100,000 inhabitants, who contact the general practitioner for the first time due to COVID-19 like symptoms, per week.",
     "titel_kpi": "Patients who contact the general practitioner for the first time due to COVID-19 symptoms",
     "reference": {
       "href": "/verantwoording#general-practitioners",
@@ -156,7 +156,7 @@
     "extra_uitleg": "Number of people with COVID-19 admitted to hospital daily. This figure shows how many hospital admissions are reported per day, including patients from outside the hospital admitted directly to the ICU. It may include hospital admissions that occurred in previous days.\n\n*The peak in hospital admissions on 23 February is due to late reports of admissions in the Gelderland-Midden region.*",
     "map_titel": "Residence of patients admitted to hospital",
     "map_toelichting": "This map shows, by municipality or safety region, where people live who have been admitted to hospital with COVID-19. Please note that people may have been admitted to a hospital located somewhere else in the Netherlands; the map therefore does not show admission numbers per hospital. The figures here reflect the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE).",
-    "linechart_titel": "Progression in hospital admissions over time",
+    "linechart_titel": "Hospital admissions over time",
     "barscale_screenreader_text": "{{value}} hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
     "chloropleth_legenda": {
       "titel": "Hospital admissions",
@@ -225,7 +225,7 @@
     "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.",
     "map_titel": "Distribution of confirmed cases in the Netherlands",
     "map_toelichting": "These maps show how many confirmed cases of COVID-19 were reported yesterday per 100,000 inhabitants.",
-    "linechart_titel": "Progression over time",
+    "linechart_titel": "Number of confirmed cases over time (per 100,000 inhabitants)",
     "linechart_toelichting": "This graph shows how many confirmed cases of COVID-19 were reported in the selected period per 100,000 inhabitants.",
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
@@ -243,7 +243,7 @@
       "90+"
     ],
     "chloropleth_legenda": {
-      "titel": "Number per 100.000 inhabitants",
+      "titel": "Number per 100,000 inhabitants",
       "geen_meldingen": "No confirmed cases"
     },
     "titel_sidebar": "Confirmed cases",
@@ -278,17 +278,17 @@
     "geen_signaalwaarde_beschikbaar": "Due to a technical problem the data is currently not showing as intended. This is being investigated.",
     "geen_signaalwaarde_beschikbaar_lees_waarom": "Read here why",
     "toelichting_pagina": "A person who carries coronavirus can infect other people within a certain time frame. How long someone is infectious for differs from one person to another. The number of infectious people is estimated using data from various sources. It is not possible to know exactly how many people are infectious, but we can indicate whether there are dozens, hundreds, thousands or even more.",
-    "barscale_titel": "Average number of infectious people per 100.000 inhabitants.",
+    "barscale_titel": "Average number of infectious people per 100,000 inhabitants.",
     "barscale_screenreader_text": "{{value}} infectious people",
     "cijfer_titel": "Estimated number of infectious people in the Netherlands:",
     "cijfer_toelichting": "A calculation of how many people with COVID-19 can transmit the virus. This number is calculated by the RIVM.",
-    "linechart_titel": "Progression over time",
+    "linechart_titel": "Number of infectious people over time (per 100,000 inhabitants)",
     "titel_sidebar": "Infectious people",
     "metadata": {
       "title": "Number of infectious people | Coronavirus Dashboard | Government.nl",
       "description": "National overview of how many people with COVID-19 can transmit the virus. This number is calculated by the RIVM."
     },
-    "barscale_toelichting": "A calculation of how many people with COVID-19 per 100.000 people can transmit the virus. This number is calculated by the RIVM.",
+    "barscale_toelichting": "A calculation of how many people with COVID-19 per 100,000 people can transmit the virus. This number is calculated by the RIVM.",
     "titel_kpi": "Number of infectious people",
     "reference": {
       "href": "/verantwoording#infectious-people",
@@ -320,7 +320,7 @@
     "barscale_toelichting": "Number of people infected by one infectious person.",
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
     "extra_uitleg": "The reproduction number shows how fast the virus is spreading. This number shows how many people are on average infected by one patient with COVID-19. The number of transmissions remains more or less constant when the reproduction number is 1, declines when it is less than 1 and increases when the number is above 1.",
-    "linechart_titel": "Progression over time",
+    "linechart_titel": "The reproduction number over time",
     "metadata": {
       "title": "Reproduction number | Coronavirus Dashboard | Government.nl",
       "description": "The reproduction number shows how fast the virus is spreading. This number shows how many people are on average infected by one patient with COVID-19."
@@ -397,7 +397,7 @@
     "barscale_toelichting": "Number of new locations where there is at least one confirmed case. A nursing home is counted as a 'new location; when there have not been any confirmed cases for at least 28 days, which is twice the incubation period.",
     "kpi_titel": "Total number of infected locations",
     "kpi_toelichting": "This figure is an estimate of the number of nursing homes where in the past 28 days at least one (new) COVID-19 infection (confirmed by a positive test) is reported. The percentage shows what proportion of the total number of nursing homes in the Netherlands this is.",
-    "linechart_titel": "Progression over time in the total number of infected locations",
+    "linechart_titel": "Total number of infected locations over time",
     "barscale_screenreader_text": "{{value}} new locations where there is at least one confirmed case, per day.",
     "chloropleth_legenda": {
       "titel": "Percentage of infected nursing homes",
@@ -433,15 +433,15 @@
     "barscale_titel": "Number of confirmed cases in nursing homes per day",
     "extra_uitleg": "Number of new confirmed cases in nursing homes that have been reported per day.",
     "pagina_toelichting": "Number of new confirmed cases in nursing homes that have been reported per day. This number is an estimation of the number confirmed cases in nursing home inhabitants.\n\nThe calculation method has been changed on the 29th of September. Please also see the data explanation section.",
-    "linechart_titel": "Progression over time",
+    "linechart_titel": "Number of confirmed cases among residents over time",
     "barscale_screenreader_text": "{{value}} Number of residents who tested positive (confirmed cases).",
     "titel_sidebar": "Confirmed cases",
     "chloropleth_legenda": {
-      "titel": "Confirmed cases per 100.000 residents",
+      "titel": "Confirmed cases per 100,000 residents",
       "geen_meldingen": "No confirmed cases"
     },
     "map_titel": "Confirmed cases in the Netherlands",
-    "map_toelichting": "These maps show the number of confirmed cases per 100.000 residents.",
+    "map_toelichting": "These maps show the number of confirmed cases per 100,000 residents.",
     "metadata": {
       "title": "Confirmed cases in nursing homes | Coronavirus Dashboard | Government.nl",
       "description": "Number of confirmed cases of COVID-19 in nursing homes in the Netherlands."
@@ -471,7 +471,7 @@
     "barscale_titel": "Number of deceased residents per day",
     "barscale_screenreader_text": "{{value}} deceased residents",
     "extra_uitleg": "This number is an estimation of the number of nursing home inhabitants that have died due to the novel coronavirus.",
-    "linechart_titel": "Progression over time",
+    "linechart_titel": "Number of deceased residents over time",
     "map_titel": "Nursing home excess mortality in the Netherlands",
     "map_toelichting": "These maps show the excess mortality in nursing homes in the Netherlands per day.",
     "titel_sidebar": "Deceased nursing home residents per day",
@@ -508,23 +508,23 @@
     },
     "titel": "Virus particles in wastewater",
     "pagina_toelichting": "If you are infected with coronavirus, there are likely to be virus particles in your stool. These are flushed down the toilet and end up in wastewater. By testing samples of wastewater collected at wastewater treatment plants, we can get information about how widespread the virus is in the community. Please note: As of 4 March, more refined data analytics are being used. This leads to different values.",
-    "barscale_titel": "Average number of virus particles per 100.000 inhabitants",
+    "barscale_titel": "Average number of virus particles per 100,000 inhabitants",
     "extra_uitleg": "The calculated average is based on all the wastewater measurements collected in one week. This figure also takes account of how many inhabitants are served by a wastewater treatment plant.",
-    "barscale_screenreader_text": "{{value}} virus particles per 100.000 inhabitants",
-    "linechart_titel": "Average number of virus particles per 100.000 inhabitants over time",
+    "barscale_screenreader_text": "{{value}} virus particles per 100,000 inhabitants",
+    "linechart_titel": "Average number of virus particles over time (per 100,000 inhabitants)",
     "metadata": {
       "title": "Sewage water examination | Coronavirus Dashboard | Government.nl",
-      "description": "Average number of virus particles per 100.000 inhabitants"
+      "description": "Average number of virus particles per 100,000 inhabitants"
     },
     "titel_sidebar": "Sewage water examination",
     "titel_kpi": "Average number of coronavirus particles per 100,000 inhabitants",
     "total_installation_count_titel": "Number of sampling locations",
     "total_installation_count_description": "Sampling locations can report multiple measurements per week. The number of measurements used per location per week can differ because not all measurements are successful.",
     "rwzi_abbrev": "",
-    "map_titel": "Average number of virus particles per 100.000 inhabitants",
-    "map_toelichting": "This map shows the average number of virus particles per 100.000 inhabitants, per safety region.",
+    "map_titel": "Average number of virus particles per 100,000 inhabitants",
+    "map_toelichting": "This map shows the average number of virus particles per 100,000 inhabitants, per safety region.",
     "legenda_titel": "",
-    "map_tooltip": "per 100.000 inhabitants",
+    "map_tooltip": "per 100,000 inhabitants",
     "map_tooltip_value": "{{value}} x100 billion",
     "reference": {
       "href": "/verantwoording#sewage-water",
@@ -537,7 +537,7 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
       }
     },
-    "kpi_titel": "Average number of coronavirus particles per 100.000 people",
+    "kpi_titel": "Average number of coronavirus particles per 100,000 people",
     "warning_method": "This monitoring method is still being developed. We hope wastewater monitoring will help us to detect and track the virus more effectively in the future. [Read more about this research programme on the website of the National Institute for Public Health and the Environment (RIVM)](https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater).",
     "total_measurements_title": "Number of measurements per week",
     "total_measurements_description": "Sampling locations can report multiple measurements per week. The number of measurements used per location per week can differ because not all measurements are successful.",
@@ -640,7 +640,7 @@
     },
     "tooltip": {
       "positive_tested_people": "{{totalPositiveTestedPeople}} in total",
-      "positive_tested_value": "{{totalPositiveValue}} per 100.000",
+      "positive_tested_value": "{{totalPositiveValue}} per 100,000",
       "vaccinatie_bereidheid": "{{percentageInFavor}}% willingness to be vaccinated"
     },
     "niveau": "level",
@@ -715,7 +715,7 @@
     "extra_uitleg": "Number of people from this safety region with COVID-19 admitted to hospital on a daily basis. This figure shows how many hospital admissions are reported per day, including patients from outside the hosptial admitted directly to the ICU. Patients can be admitted to hospitals in other regions.",
     "map_titel": "Distribution of hospital admissions in {{safetyRegion}}",
     "map_toelichting": "This map shows, by municipality or safety region, where people live who have been admitted to hospital with COVID-19. Please note that people may have been admitted to a hospital located somewhere else in the Netherlands; the map therefore does not show admission numbers per hospital. The figures here reflect the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE).",
-    "linechart_titel": "Progression in hospital admissions over time",
+    "linechart_titel": "Hospital admissions over time",
     "barscale_screenreader_text": "{{value}} hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
     "bron": {
       "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
@@ -757,7 +757,7 @@
     "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.",
     "map_titel": "Distribution of confirmed cases in {{safetyRegion}}",
     "map_toelichting": "This map shows how many confirmed cases of COVID-19 were reported yesterday in the municipalities of this safety region per 100,000 inhabitants.",
-    "linechart_titel": "Progression over time",
+    "linechart_titel": "Number of confirmed cases over time (per 100,000 inhabitants)",
     "linechart_toelichting": "This graph shows how many confirmed cases of COVID-19 were reported in the selected period in this safety region per 100,000 inhabitants.",
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
@@ -794,11 +794,11 @@
     "titel": "Virus particles in wastewater {{safetyRegion}}",
     "pagina_toelichting": "If you are infected with coronavirus, there are likely to be virus particles in your stool. These are flushed down the toilet and end up in wastewater. By testing samples of wastewater collected at wastewater treatment plants, we can get information about how widespread the virus is in the community. Please note: As of 4 March, more refined data analytics are being used. This leads to different values.",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "screen_reader_graph_content": "{{value}} virus particles per 100.000 inhabitants",
+    "screen_reader_graph_content": "{{value}} virus particles per 100,000 inhabitants",
     "barscale_titel": "Average number of coronavirus particles per 100,000 inhabitants",
     "extra_uitleg": "An average is calculated based on all the wastewater measurements collected in one week. It also takes account of how many inhabitants are served by a specific wastewater treatment plant, and how much of the wastewater flowing to the plant comes from the safety region.",
-    "barscale_screenreader_text": "{{value}} virus particles per 100.000 inhabitants",
-    "linechart_titel": "Average number of virus particles per 100.000 inhabitants over time",
+    "barscale_screenreader_text": "{{value}} virus particles per 100,000 inhabitants",
+    "linechart_titel": "Average number of virus particles over time (per 100,000 inhabitants)",
     "bar_chart_title": "Most recent measurement per location in {{safetyRegion}}",
     "bar_chart_axis_title": "Average number of coronavirus particles (x100 billion) per 100,000 inhabitants",
     "bron": {
@@ -815,8 +815,8 @@
     },
     "graph_daily_label_text_rwzi": "Measurements for ({{name}})",
     "graph_selected_rwzi_placeholder": "Select location",
-    "graph_range_description": "Average number of virus particles per 100.000 inhabitants over time",
-    "titel_kpi": "Average number of virus particles per 100.000 inhabitants",
+    "graph_range_description": "Average number of virus particles over time (per 100,000 inhabitants)",
+    "titel_kpi": "Average number of virus particles per 100,000 inhabitants",
     "total_installation_count_titel": "Number of sampling locations",
     "total_installation_count_description": "Sampling locations can report multiple measurements per week. The number of measurements used per location per week can differ because not all measurements are successful.",
     "rwzi_abbrev": "",
@@ -831,7 +831,7 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
       }
     },
-    "kpi_titel": "Average number of coronavirus particles per 100.000 people",
+    "kpi_titel": "Average number of coronavirus particles per 100,000 people",
     "bar_chart_accessibility_description": "",
     "display_outliers": "Display outliers",
     "hide_outliers": "Hide outliers",
@@ -850,7 +850,7 @@
     "extra_uitleg": "Number of people from this municipality with COVID-19 admitted to hospital on a daily basis. This figure shows how many hospital admissions are reported per day, including patients from outside the hosptial admitted directly to the ICU. Patients can be admitted to hospitals in other regions.",
     "map_titel": "Distribution of hospital admissions in safety region of {{municipality}}",
     "map_toelichting": "This map shows, by municipality or safety region, where people live who have been admitted to hospital with COVID-19. Please note that people may have been admitted to a hospital located somewhere else in the Netherlands; the map therefore does not show admission numbers per hospital. The figures here reflect the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE).",
-    "linechart_titel": "Progression in hospital admissions over time",
+    "linechart_titel": "Hospital admissions over time",
     "barscale_screenreader_text": "{{value}} hospital admissions per day. Alert value: {{signaalwaarde}} admissions per day.",
     "bron": {
       "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
@@ -892,7 +892,7 @@
     "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.",
     "map_titel": "Distribution of confirmed cases in safety region of {{municipality}}",
     "map_toelichting": "This map shows how many confirmed cases of COVID-19 were reported yesterday in this municipality and other municipalities in the same safety region, per 100,000 inhabitants.",
-    "linechart_titel": "Progression over time",
+    "linechart_titel": "Number of confirmed cases over time (per 100,000 inhabitants)",
     "linechart_toelichting": "This graph shows how many confirmed cases of COVID-19 were reported in the selected period in this municipality per 100,000 inhabitants.",
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
@@ -930,11 +930,11 @@
     "titel": "Virus particles in wastewater {{municipality}}",
     "pagina_toelichting": "If you are infected with coronavirus, there are likely to be virus particles in your stool. These are flushed down the toilet and end up in wastewater. By testing samples of wastewater collected at wastewater treatment plants, we can get information about how widespread the virus is in the community. Please note: As of 4 March, more refined data analytics are being used. This leads to different values.",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "screen_reader_graph_content": "{{value}} virus particles per 100.000 inhabitants",
+    "screen_reader_graph_content": "{{value}} virus particles per 100,000 inhabitants",
     "barscale_titel": "Average number of virus particles per 100,000 inhabitants",
     "extra_uitleg": "The calculated average is based on all the wastewater measurements collected in one week. This figure also takes account of how many inhabitants are served by a wastewater treatment plant.",
-    "barscale_screenreader_text": "{{value}} virus particles per 100.000 inhabitants",
-    "linechart_titel": "Average number of virus particles per 100.000 inhabitants over time",
+    "barscale_screenreader_text": "{{value}} virus particles per 100,000 inhabitants",
+    "linechart_titel": "Average number of virus particles over time (per 100,000 inhabitants)",
     "bar_chart_title": "Most recent measurement per location in {{municipality}}",
     "bar_chart_axis_title": "Average number of coronavirus particles per 100,000 inhabitants",
     "bron": {
@@ -955,7 +955,7 @@
     "rwzi_abbrev": "",
     "graph_daily_label_text_rwzi": "Measurements for location ({{name}})",
     "graph_selected_rwzi_placeholder": "Select location",
-    "graph_range_description": "Progression overt time in the average number of virus particles per 100.000 residents.",
+    "graph_range_description": "Average number of virus particles over time (per 100.000 inhabitants)",
     "reference": {
       "href": "/verantwoording#sewage-water",
       "text": "Find out more about testing wastewater for coronavirus in the explanation of data presented."
@@ -967,7 +967,7 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
       }
     },
-    "kpi_titel": "Average number of coronavirus particles per 100.000 people",
+    "kpi_titel": "Average number of coronavirus particles per 100,000 people",
     "bar_chart_accessibility_description": "",
     "display_outliers": "Display outliers",
     "hide_outliers": "Hide outliers",
@@ -1127,7 +1127,7 @@
     "barscale_titel": "Deceased nursing home residents",
     "barscale_screenreader_text": "{{value}} deceased residents",
     "extra_uitleg": "This number is an estimation of the number of nursing home inhabitants in this safety region that have died due to the novel coronavirus.",
-    "linechart_titel": "Progression over time",
+    "linechart_titel": "Number of deceased residents over time",
     "map_titel": "Nursing home excess mortality in the Netherlands",
     "map_toelichting": "These maps show the excess mortality in nursing homes in the Netherlands per day.",
     "titel_sidebar": "Mortality",
@@ -1159,7 +1159,7 @@
     "barscale_toelichting": "Number of new locations where there is at least one confirmed case. A nursing home is counted as a 'new location; when there have not been any confirmed cases for at least 28 days, which is twice the incubation period.",
     "kpi_titel": "Total no. of infected locations",
     "kpi_toelichting": "This figure is an estimate of the number of nursing homes where in the past 28 days at least one (new) COVID-19 infection (confirmed by a positive test) is reported. The percentage shows what proportion of the total number of nursing homes in this safety region this is.",
-    "linechart_titel": "Progression over time in the total number of infected locations",
+    "linechart_titel": "Total number of infected locations over time",
     "barscale_screenreader_text": "{{value}} new locations where there is at least one confirmed case, per day.",
     "metadata": {
       "title": "Infected nursing home locations in {{safetyRegionName}} | Coronavirus Dashboard | Government.nl",
@@ -1188,15 +1188,15 @@
     "barscale_titel": "Number of confirmed cases in nursing homes per day",
     "extra_uitleg": "Number of new confirmed cases in nursing homes that have been reported per day.",
     "pagina_toelichting": "Number of confirmed cases in nursing homes per day in {{safetyRegion}}. This number is an estimation of the number confirmed cases in nursing home inhabitants.\n\nThe calculation method has been changed on the 29th of September. Please also see the data explanation section.",
-    "linechart_titel": "Progression over time",
+    "linechart_titel": "Number of confirmed cases among residents over time",
     "barscale_screenreader_text": "{{value}} Number of residents who tested positive (confirmed cases).",
     "titel_sidebar": "Confirmed cases",
     "chloropleth_legenda": {
-      "titel": "Number per 100.000 residents",
+      "titel": "Number per 100,000 residents",
       "geen_meldingen": "No confirmed cases"
     },
     "map_titel": "Confirmed cases in the Netherlands",
-    "map_toelichting": "These maps show the number of confirmed cases per 100.000 residents.",
+    "map_toelichting": "These maps show the number of confirmed cases per 100,000 residents.",
     "metadata": {
       "title": "Confirmed cases in nursing homes in safety region {{safetyRegionName}} | Coronavirus Dashboard | Government.nl",
       "description": "Number of confirmed cases of COVID-19 under nursing home residents in safety region {{safetyRegionName}}."
@@ -1311,7 +1311,7 @@
       }
     },
     "basisregels_over_tijd": {
-      "title": "Basic rules over time",
+      "title": "Following the rules of conduct over time over time ",
       "intro": {
         "compliance": "This graph shows the changes in the percentage of respondents who reported following the basic rule in their daily life.",
         "support": "This graph shows the changes in the percentage of respondents who reported supporting the basic rule."
@@ -1443,7 +1443,7 @@
     "barscale_toelichting": "This figure shows the number of disability care homes where at least one resident was reported as testing positive for COVID-19 yesterday. A disability care home is considered to have a new outbreak if there had been no new cases of COVID-19 in the home in the previous 28 days (i.e. twice the length of the incubation period).",
     "kpi_titel": "Total no. of new infected locations",
     "kpi_toelichting": "This figure shows the total number of disability care homes that have reported at least one confirmed COVID-19 case among residents, based on a positive test, in the last 28 days. The percentage expresses the share of all disability care homes in the Netherlands with confirmed COVID-19 cases.",
-    "linechart_titel": "Total no. of infected locations – progression over time",
+    "linechart_titel": "Total number of infected locations over time",
     "barscale_screenreader_text": "{{value}} new reported locations with at least one confirmed case amongst residents per day.",
     "chloropleth_legenda": {
       "titel": "Percentage of infected locations",
@@ -1475,10 +1475,10 @@
     "barscale_titel": "Disability care homes – daily confirmed cases (residents)",
     "extra_uitleg": "The number of disability care home residents in this region who were reported as testing positive for COVID-19 daily.",
     "pagina_toelichting": "People who live in disability care homes are often extra vulnerable to coronavirus infection. Because of this, Municipal health services (GGDs) monitor whether a persons who tests positive for COVID-19 lives in a disability care home. By doing so, measures can be taken if the number of cases in residential care increases.",
-    "linechart_titel": "Progression over time",
+    "linechart_titel": "Number of confirmed cases among residents over time",
     "barscale_screenreader_text": "{{value}} confirmed cases (residents)",
     "chloropleth_legenda": {
-      "titel": "Number per 100.000 residents",
+      "titel": "Number per 100,000 residents",
       "geen_meldingen": "No reports"
     },
     "map_titel": "Distribution of infected locations in the Netherlands",
@@ -1508,7 +1508,7 @@
     "barscale_titel": "Number of deceased residents per day",
     "barscale_screenreader_text": "{{value}} deceased residents",
     "extra_uitleg": "This is an estimate of the number of disability care home residents in the Netherlands who have died from COVID-19 per day.",
-    "linechart_titel": "Progression over time",
+    "linechart_titel": "Number of deceased residents over time",
     "map_titel": "Disability care homes – deaths",
     "map_toelichting": "The maps show the exces mortality amongst disability care homes in the Netherlands, per day.",
     "metadata": {
@@ -1540,7 +1540,7 @@
     "barscale_titel": "Number of deceased residents per day",
     "barscale_screenreader_text": "{{value}}deceased residents.",
     "extra_uitleg": "This is an estimate of the number of COVID-19 related deaths reported yesterday among disability care home residents in this region.",
-    "linechart_titel": "Progression over time",
+    "linechart_titel": "Number of deceased residents over time",
     "map_titel": "",
     "map_toelichting": "",
     "titel_sidebar": "Death per day",
@@ -1568,7 +1568,7 @@
     "barscale_toelichting": "This figure shows the number of disability care homes where at least one resident was reported as testing positive for COVID-19. A disability care home is considered to have a new outbreak if there had been no new cases of COVID-19 in the home in the previous 28 days (i.e. twice the length of the incubation period).",
     "kpi_titel": "Total no. of infected locations ",
     "kpi_toelichting": "This figure shows the total number of disability care homes that have reported at least one confirmed COVID-19 case, based on a positive test, in the last 28 days. The percentage expresses the share of all disability care homes in the Netherlands with confirmed COVID-19 cases.",
-    "linechart_titel": "Total no. of infected locations – progression over time",
+    "linechart_titel": "Total number of infected locations over time",
     "barscale_screenreader_text": "",
     "metadata": {
       "title": "Infected disability care homes in {{safetyRegionName}} | Coronavirus Dashboard | Government.nl",
@@ -1593,7 +1593,7 @@
     "barscale_titel": "Disability care homes - daily confirmed cases (residents)",
     "extra_uitleg": "The number of disability care home residents in this region who were reported as testing positive for COVID-19 yesterday.",
     "pagina_toelichting": "People who live in disability care homes are often extra vulnerable to coronavirus infection. Because of this, Municipal health services (GGDs) monitor whether a persons who tests positive for COVID-19 lives in a disability care home. By doing so, measures can be taken if the number of cases in residential care increases.",
-    "linechart_titel": "Progression over time",
+    "linechart_titel": "Number of confirmed cases among residents over time",
     "barscale_screenreader_text": "",
     "titel_sidebar": "Number of confirmed cases (residents)",
     "chloropleth_legenda": {
@@ -1644,10 +1644,10 @@
       "kpi_daily_description": "The number of people over 70 living at home who were reported as testing positive for COVID-19 yesterday.",
       "kpi_daily_per_100k_title": "Daily confirmed cases per 100,000 among over-70s living at home ",
       "kpi_daily_per_100k_description": "This figure shows how many people over 70 living at home were reported as testing positive for COVID-19 yesterday, per 100,000 over-70s living at home. This figure makes it easier to compare the situation in different regions.",
-      "line_chart_daily_title": "Daily confirmed cases among over-70s living at home: progression over time",
+      "line_chart_daily_title": "Newly confirmed cases among over-70s over time",
       "choropleth_daily_title": "Distribution of daily confirmed cases among over-70s living at home (per safety region)",
       "choropleth_daily_description": "This map shows the differences between safety regions in the number of confirmed cases per 100,000 among over-70s living at home, as reported yesterday.",
-      "choropleth_daily_legenda": "Number per 100.000 over-70s living at home",
+      "choropleth_daily_legenda": "Number per 100,000 over-70s living at home",
       "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis."
     },
     "section_deceased": {
@@ -1666,7 +1666,7 @@
       },
       "kpi_daily_title": "COVID-19 deaths among over-70s living at home, per day",
       "kpi_daily_description": "The number of people over 70 living at home who were reported as deceased due to COVID-19 yesterday.",
-      "line_chart_daily_title": "Number of COVID-19 deaths among over-70s living at home",
+      "line_chart_daily_title": "Number of COVID-19 deaths among over-70s living at home over time",
       "datums": "Last values obtained on {{dateOfInsertion}}. Updated daily."
     },
     "kpi_titel": "Confirmed cases"
@@ -1695,7 +1695,7 @@
       "kpi_daily_title": "Confirmed cases among over-70s living at home",
       "kpi_daily_description": "The number of people over 70 living at home in this safety region who were reported as testing positive for COVID-19 yesterday.",
       "kpi_daily_per_100k_title": "Daily confirmed cases per 100,000 among over-70s living at home",
-      "kpi_daily_per_100k_description": "Calculating the daily number of COVID-19 cases per 100.000 over-70s makes it possible to compare regions.",
+      "kpi_daily_per_100k_description": "Calculating the daily number of COVID-19 cases per 100,000 over-70s makes it possible to compare regions.",
       "line_chart_daily_title": "Daily confirmed cases among over-70s living at home: progression over time",
       "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis."
     },
@@ -1715,7 +1715,7 @@
       },
       "kpi_daily_title": "COVID-19 deaths among over-70s living at home, per day",
       "kpi_daily_description": "The number of people over 70 living at home in this safety region who were reported as deceased due to COVID-19 yesterday",
-      "line_chart_daily_title": "Number of COVID-19 deaths among over-70s living at home: progression over time",
+      "line_chart_daily_title": "Number of COVID-19 deaths among over-70s living at home over time",
       "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis."
     },
     "kpi_titel": "Confirmed cases"
@@ -1958,10 +1958,10 @@
       "gehandicaptenzorg_overleden": "This graph shows the progression of the number of deceased disability care home residents over time.",
       "thuiswonende_ouderen_besmettingen": "This graph shows the progression over time in daily confirmed cases among over-70s living at home.",
       "thuiswonende_ouderen_overleden": "This graph shows the progression over time in the number of COVID-19 deaths among over-70s living at home.",
-      "rioolwater_virusdeeltjes": "This graph shows the progression over time in the average amount of virus particles in waste water, per 100.000 residents.",
+      "rioolwater_virusdeeltjes": "This graph shows the progression over time in the average amount of virus particles in waste water, per 100,000 residents.",
       "verdenkingen_huisartsen": "This graph shows the progression over time in the estimated number of patients who contacted the general practitioner for the first time due to COVID-19 like symptoms.",
       "ziekenhuis_opnames": "This graph shows the progression in hospital admissions over time.",
-      "rioolwater_meetwaarde": "This graph shows the most recent measured value of the average amount of virus particles per 100.000 residents, per sewage processing facility.",
+      "rioolwater_meetwaarde": "This graph shows the most recent measured value of the average amount of virus particles per 100,000 residents, per sewage processing facility.",
       "verwachte_leveringen": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks.",
       "vaccin_levering_en_prikken": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks.",
       "vaccinatie_draagvlak": "This graph shows the percentage of the population that wishes to be vaccinated against COVID-19."
