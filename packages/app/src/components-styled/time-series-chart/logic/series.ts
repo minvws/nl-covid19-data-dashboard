@@ -87,7 +87,11 @@ export function calculateSeriesMaximum<T extends TimestampedValue>(
    * Value cannot be 0, hence the 1. If the value is below signaalwaarde, make
    * sure the signaalwaarde floats in the middle
    */
-  return Math.max(overallMaximum, benchmarkValue * 2, 1);
+
+  const artificialMax =
+    overallMaximum < benchmarkValue ? benchmarkValue * 2 : 0;
+
+  return Math.max(overallMaximum, artificialMax);
 }
 
 export type SeriesItem = {

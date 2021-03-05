@@ -91,7 +91,15 @@ export type TimeSeriesChartProps<T extends TimestampedValue> = {
   height?: number;
   timeframe?: TimeframeOption;
   formatTooltip?: TooltipFormatter<T>;
-  numTicks?: number;
+  /**
+   * The number of grid lines also by default determines the number of y-axis
+   * ticks, but the number of ticks can be overruled with specific tick values
+   * via the tickValues prop.
+   *
+   * This way you can also have many more grid lines than tick values, like in
+   * the vaccine support chart.
+   */
+  numGridLines?: number;
   tickValues?: number[];
   showDateMarker?: boolean;
   paddingLeft?: number;
@@ -111,7 +119,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
   timeframe = 'all',
   formatTooltip,
   dataOptions = {},
-  numTicks = 3,
+  numGridLines = 3,
   tickValues,
   showDateMarker,
   paddingLeft,
@@ -155,7 +163,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
       values,
       maximumValue: seriesMax,
       bounds,
-      numTicks: tickValues?.length || numTicks,
+      numTicks: tickValues?.length || numGridLines,
     }
   );
 
@@ -223,6 +231,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
         >
           <Axes
             bounds={bounds}
+            numGridLines={numGridLines}
             yTickValues={tickValues}
             xScale={xScale}
             yScale={yScale}

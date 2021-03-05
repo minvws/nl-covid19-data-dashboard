@@ -379,6 +379,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                 ariaLabelledBy="chart_vaccine_support"
                 values={data.vaccine_support.values}
                 showDateMarker
+                numGridLines={20}
                 tickValues={[0, 25, 50, 75, 100]}
                 paddingLeft={36}
                 dataOptions={{
@@ -478,11 +479,10 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                 ariaLabelledBy="chart_vaccine_support"
                 values={data.vaccine_support.values}
                 showDateMarker
-                tickValues={[0, 25, 50, 75, 100]}
                 paddingLeft={36}
                 dataOptions={{
                   isPercentage: true,
-                  forcedMaximumValue: 100,
+                  // forcedMaximumValue: 100,
                   benchmark: {
                     label: 'This is an important value',
                     value: 77,
@@ -494,14 +494,12 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                       label: 'Only first item',
                       color: 'hotpink',
                     },
-
                     {
                       start: data.vaccine_support.values[3].date_start_unix,
                       end: data.vaccine_support.values[4].date_end_unix,
                       label: 'Somewhere in the middle',
                       color: 'lightgreen',
                     },
-
                     {
                       start:
                         data.vaccine_support.values[
