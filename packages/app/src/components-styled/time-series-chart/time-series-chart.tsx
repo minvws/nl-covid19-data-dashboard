@@ -128,7 +128,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
   } = useTooltip<TooltipData<T>>();
 
   const {
-    annotation,
+    valueAnnotation,
     isPercentage,
     forcedMaximumValue,
     benchmark,
@@ -210,7 +210,9 @@ export function TimeSeriesChart<T extends TimestampedValue>({
 
   return (
     <Box>
-      {annotation && <ValueAnnotation mb={2}>{annotation}</ValueAnnotation>}
+      {valueAnnotation && (
+        <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
+      )}
 
       <Box position="relative">
         <ChartContainer
