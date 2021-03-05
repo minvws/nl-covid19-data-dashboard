@@ -482,7 +482,6 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                 paddingLeft={36}
                 dataOptions={{
                   isPercentage: true,
-                  // forcedMaximumValue: 100,
                   benchmark: {
                     label: 'This is an important value',
                     value: 77,
