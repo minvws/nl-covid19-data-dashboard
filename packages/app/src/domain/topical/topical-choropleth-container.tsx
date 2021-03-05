@@ -3,7 +3,7 @@ import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import { Box } from '~/components-styled/base';
 import { ChoroplethLegenda } from '~/components-styled/choropleth-legenda';
-import { Heading, Text } from '~/components-styled/typography';
+import { Text } from '~/components-styled/typography';
 import { asResponsiveArray } from '~/style/utils';
 
 /**
@@ -17,7 +17,6 @@ interface DataProps {
 }
 
 interface TopicalChoroplethContainerProps extends DataProps {
-  title: string;
   description?: string | React.ReactNode;
   children: React.ReactNode;
   legend?: {
@@ -28,7 +27,6 @@ interface TopicalChoroplethContainerProps extends DataProps {
 }
 
 export function TopicalChoroplethContainer({
-  title,
   description,
   legend,
   legendComponent,
@@ -48,17 +46,6 @@ export function TopicalChoroplethContainer({
       pr={{ md: '50%' }}
       minHeight={{ md: '620px' }}
     >
-      <Box mb={3}>
-        <Heading
-          level={2}
-          fontSize={{ _: '2rem', lg: '2.75em' }}
-          lineHeight="1em"
-          mb={4}
-        >
-          {title}
-        </Heading>
-      </Box>
-
       <Box
         p={{ _: 0, lg: 4 }}
         width={{ md: '45%' }}

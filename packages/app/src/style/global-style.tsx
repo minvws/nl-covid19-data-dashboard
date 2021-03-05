@@ -119,4 +119,11 @@ figure {
 p {
   margin-top: 0;
 }
+
+@media (prefers-reduced-motion) {
+  * { 
+    transition-duration: 0 !important;
+    transition: none !important;
+  }
+}
 `;

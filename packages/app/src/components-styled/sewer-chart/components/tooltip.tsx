@@ -70,6 +70,7 @@ export function DateTooltip({ children, x, y, bounds }: DateTooltipProps) {
       ref={ref}
       bg="white"
       style={{
+        pointerEvents: 'none',
         position: 'absolute',
         left: 0,
         top: 0,

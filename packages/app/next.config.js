@@ -20,7 +20,22 @@ const nextConfig = {
   env: {
     COMMIT_ID: commitHash,
   },
-  reactStrictMode: true, // Enables react strict mode https://nextjs.org/docs/api-reference/next.config.js/react-strict-mode
+
+  /**
+   * Our static preview environment cannot handle requests like `/{pagename}`
+   * which should resolve to `{pagename}.html`.
+   * The `trailingSlash: true` will export the pages as `/{pagename}/index.html`.
+   *
+   * read more:
+   * https://nextjs.org/docs/api-reference/next.config.js/exportPathMap#adding-a-trailing-slash
+   */
+  trailingSlash: process.env.BUILD_TARGET === 'preview',
+
+  /**
+   * Enables react strict mode https://nextjs.org/docs/api-reference/next.config.js/react-strict-mode
+   */
+  reactStrictMode: true,
+
   webpack(config, { isServer, webpack, defaultLoaders }) {
     if (
       isServer &&
