@@ -1,18 +1,18 @@
-import { assert, TimestampedValue } from '@corona-dashboard/common';
+import { TimestampedValue } from '@corona-dashboard/common';
 import { ScaleLinear } from 'd3-scale';
 import { memo } from 'react';
 import { AreaTrend, LineTrend, RangeTrend } from '.';
 import {
-  SeriesDoubleValue,
-  SeriesSingleValue,
-  SeriesConfig,
-  SeriesList,
   Bounds,
-  HoverHandler,
   GetX,
   GetY,
   GetY0,
   GetY1,
+  HoverHandler,
+  SeriesConfig,
+  SeriesDoubleValue,
+  SeriesList,
+  SeriesSingleValue,
 } from '../logic';
 
 interface SeriesProps<T extends TimestampedValue> {

@@ -152,6 +152,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
 
   const { xScale, yScale, getX, getY, getY0, getY1, dateSpanWidth } = useScales(
     {
+      values,
       seriesList,
       maximumValue: seriesMax,
       bounds,

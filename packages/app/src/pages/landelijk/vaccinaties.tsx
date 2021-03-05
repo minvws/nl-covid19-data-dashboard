@@ -489,9 +489,9 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                   },
                   timespanAnnotations: [
                     {
-                      start: data.vaccine_support.values[1].date_start_unix,
-                      end: data.vaccine_support.values[1].date_end_unix,
-                      label: 'Only second item',
+                      start: data.vaccine_support.values[0].date_start_unix,
+                      end: data.vaccine_support.values[0].date_end_unix,
+                      label: 'Only first item',
                       color: 'hotpink',
                     },
                     {

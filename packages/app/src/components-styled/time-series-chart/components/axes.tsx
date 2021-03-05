@@ -68,7 +68,7 @@ export const Axes = memo(function Axes({
            */
           textAnchor: 'middle',
         })}
-        hideTicks
+        // hideTicks
       />
       <AxisLeft
         scale={yScale}
