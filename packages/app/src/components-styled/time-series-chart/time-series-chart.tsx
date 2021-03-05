@@ -74,8 +74,9 @@ export type { SeriesConfig } from './logic';
  *
  * @TODO
  *
- * - Include props for background rectangle aka date span annotation
- * - Finish RangeTrend component
+ * - Render date start /end on x-axis for date spans series
+ * - Configure y-axis for standard charts
+ * - Calculate timespan annotation hover state
  *
  * Known Issues:
  * - Nearest point / tooltip valueKey calculation seems to be off by some
@@ -153,7 +154,6 @@ export function TimeSeriesChart<T extends TimestampedValue>({
   const { xScale, yScale, getX, getY, getY0, getY1, dateSpanWidth } = useScales(
     {
       values,
-      seriesList,
       maximumValue: seriesMax,
       bounds,
       numTicks: tickValues?.length || numTicks,
