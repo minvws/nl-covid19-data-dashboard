@@ -6,6 +6,7 @@ import {
 import { css } from '@styled-system/css';
 import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
+import useResizeObserver from 'use-resize-observer';
 import { Box, BoxProps } from './base';
 
 const Summary = styled(DisclosureButton)(
@@ -83,7 +84,7 @@ const Panel = styled(DisclosurePanel)(
     overflow: 'hidden',
     px: 3,
     py: 0,
-    transition: 'max-height 0.4s ease-in-out, opacity 0.4s ease-in-out',
+    transition: 'height 0.4s ease-in-out, opacity 0.4s ease-in-out',
     '&[data-state="open"]': {
       opacity: 1,
     },
@@ -103,51 +104,18 @@ export const Collapsible = ({
   id,
   hideBorder,
 }: CollapsableProps) => {
-  const [open, setOpen] = useState(false);
-  const [panelHeight, setPanelHeight] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
+  const [open, setOpen] = useState(true);
   const panelReference = useRef<HTMLDivElement>(null);
 
-  function toggle() {
-    if (isAnimating) {
-      return;
-    }
-    setOpen(!open);
-    startAnimation(!open);
-  }
-
-  /**
-   * Starts the panel animation by passing the proper from and to heights
-   */
-  const startAnimation = (opening: boolean) => {
-    setIsAnimating(true);
-    const height = panelReference.current?.scrollHeight ?? 0;
-    const from = opening ? 0 : height;
-    const to = opening ? height : 0;
-    animatePanelHeight(from, to);
-  };
-
-  /**
-   * Animate the panel height:
-   * set from height,
-   * wait for browser to render it,
-   * set destination height
-   */
-  const animatePanelHeight = (from: number, to: number) => {
-    setPanelHeight(from);
-    setTimeout(() => {
-      setPanelHeight(to);
-    }, 67);
-  };
+  const { ref, height: contentHeight } = useResizeObserver();
 
   /**
    * Checks the hash part of the URL to see if it matches this instances id.
    * If so, the collapsible needs to be opened.
    */
-  const checkLocationHash = useCallback(() => {
-    if (window?.location.hash.substr(1) === id) {
-      setOpen(true);
-    }
+  useEffect(() => {
+    const isOpenedByQueryParam = window.location.hash.substr(1) === id;
+    setOpen(isOpenedByQueryParam);
   }, [id]);
 
   /**
@@ -169,10 +137,6 @@ export const Collapsible = ({
 
   useEffect(() => setLinkTabability(open), [setLinkTabability, open]);
 
-  useEffect(() => {
-    requestAnimationFrame(() => checkLocationHash());
-  }, [checkLocationHash]);
-
   return (
     <Box
       as="section"
@@ -180,7 +144,7 @@ export const Collapsible = ({
       borderTopColor={hideBorder ? undefined : 'lightGray'}
       id={id}
     >
-      <Disclosure open={open} onChange={toggle}>
+      <Disclosure open={open} onChange={() => setOpen(!open)}>
         <Summary>
           {summary}
           {id && (
@@ -189,15 +153,26 @@ export const Collapsible = ({
             </AnchorLink>
           )}
         </Summary>
+
         <Panel
           ref={panelReference}
-          onTransitionEnd={() => setIsAnimating(false)}
           style={{
             /* panel max height is only controlled when collapsed, or during animations */
-            maxHeight: !open || isAnimating ? `${panelHeight}px` : undefined,
+            height: open ? contentHeight : 0,
           }}
         >
-          {children}
+          <div
+            ref={ref}
+            css={css({
+              /**
+               * Outside margins of children are breaking height calculations ヽ(ಠ_ಠ)ノ..
+               * We'll add `overflow: hidden` in order to fix this.
+               */
+              overflow: 'hidden',
+            })}
+          >
+            {children}
+          </div>
         </Panel>
       </Disclosure>
     </Box>
