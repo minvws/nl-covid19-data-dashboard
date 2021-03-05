@@ -2039,7 +2039,7 @@
       "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer:\n- vaccinatiegraad"
     },
     "grafiek": {
-      "titel": "Leveringen vaccins en gezette prikken in totaal",
+      "titel": "Geleverde en beschikbare vaccins en gezette prikken in totaal",
       "omschrijving": "Het linkerdeel van de grafiek laat zien hoeveel vaccins Nederland in totaal heeft gekregen en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal verwachten te krijgen en hoeveel prikken we verwachten te zetten."
     },
     "verwachte_leveringen": {
