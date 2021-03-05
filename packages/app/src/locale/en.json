@@ -2258,7 +2258,7 @@
       "artikelen": {
         "titel": "",
         "link": {
-          "text": "",
+          "text": "View all articles",
           "href": ""
         }
       },
@@ -2266,10 +2266,10 @@
         "titel": ""
       },
       "meer_lezen": {
-        "titel": "",
+        "titel": "More information about the coronavirus",
         "omschrijving": "",
         "link": {
-          "text": "",
+          "text": "View all articles",
           "href": ""
         }
       }
