@@ -33,13 +33,6 @@ export function VaccineAdministrationsOverTimeChart({
               strokeWidth: 3,
               color: colors.data.primary,
             },
-            {
-              metricProperty: 'reported',
-              areaFillOpacity: 0.25,
-              strokeWidth: 3,
-              color: colors.data.secondary,
-              disableTooltip: true,
-            },
           ]}
           componentCallback={componentCallback}
           showMarkerLine
@@ -49,21 +42,6 @@ export function VaccineAdministrationsOverTimeChart({
             left: 0,
             right: 0,
           }}
-          showLegend
-          legendItems={[
-            {
-              color: colors.data.secondary,
-              label:
-                siteText.vaccinaties.grafiek_gezette_prikken.estimated_label,
-              shape: 'line',
-            },
-            {
-              color: colors.data.primary,
-              label:
-                siteText.vaccinaties.grafiek_gezette_prikken.reported_label,
-              shape: 'line',
-            },
-          ]}
         />
       )}
     </ParentSize>
@@ -71,24 +49,6 @@ export function VaccineAdministrationsOverTimeChart({
 
   function componentCallback(callbackInfo: ComponentCallbackInfo) {
     switch (callbackInfo.type) {
-      case 'CustomBackground': {
-        /**
-         * render a dividing vertical line
-         */
-        const { xScale, bounds } = callbackInfo.props;
-        const x = xScale(values[divergeIndex - 1].date_unix * 1000);
-        return (
-          <line
-            x1={x}
-            y1={0}
-            x2={x}
-            y2={bounds.height}
-            stroke="#6A6A6A"
-            strokeWidth="1"
-            strokeDasharray="6 3"
-          />
-        );
-      }
       case 'GridRows': {
         const domain = callbackInfo.props.scale.domain();
         const lastItem = domain[domain.length - 1];
