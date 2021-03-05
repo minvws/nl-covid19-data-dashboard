@@ -41,6 +41,7 @@ const List = styled.ul(
   css({
     listStyle: 'none',
     px: 0,
+    m: 0,
   })
 );
 
