@@ -494,6 +494,14 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                       label: 'Only first item',
                       color: 'hotpink',
                     },
+
+                    {
+                      start: data.vaccine_support.values[3].date_start_unix,
+                      end: data.vaccine_support.values[4].date_end_unix,
+                      label: 'Somewhere in the middle',
+                      color: 'lightgreen',
+                    },
+
                     {
                       start:
                         data.vaccine_support.values[

@@ -137,7 +137,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
 
   const { padding, bounds } = useDimensions(width, height, paddingLeft);
 
-  const legendItems = useLegendItems(seriesConfig);
+  const legendItems = useLegendItems(seriesConfig, dataOptions);
 
   const seriesList = useSeriesList(values, seriesConfig, timeframe);
 
