@@ -2223,12 +2223,12 @@
           "janssen": "Janssen & Janssen",
           "sanofi": "Sanofi"
         },
-        "delivered": "Geleverd",
+        "delivered": "Geleverd en beschikbaar",
         "estimated": "Verwachte leveringen",
         "left_divider_label": "Berekend aantal",
         "right_divider_label": "Verwacht aantal",
         "legend": {
-          "available": "Geleverde vaccins",
+          "available": "Geleverde en beschikbare vaccins",
           "expected": "Verwacht"
         },
         "legend_label": "Aantal gezette prikken {{name}}",
@@ -2274,7 +2274,7 @@
       "artikelen": {
         "titel": "Actuele artikelen",
         "link": {
-          "text": "Bekijk alle artikelen ",
+          "text": "Bekijk alle artikelen",
           "href": "/artikelen"
         }
       },

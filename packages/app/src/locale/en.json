@@ -655,7 +655,7 @@
     "read_more": "Read more",
     "absolute_date_template": "on {{date}}",
     "inwoners": "residents",
-    "miljoen": ""
+    "miljoen": "million"
   },
   "seoHead": {
     "default_description": "Information on the development of the coronavirus in The Netherlands.",
@@ -2223,12 +2223,12 @@
           "janssen": "Janssen & Janssen",
           "sanofi": "Sanofi"
         },
-        "delivered": "Delivered",
+        "delivered": "Delivered and available",
         "estimated": "Expected deliveries",
         "left_divider_label": "Calculated number of",
         "right_divider_label": "Expected number",
         "legend": {
-          "available": "Delivered vaccines",
+          "available": "Delivered and available vaccines",
           "expected": "Expected"
         },
         "legend_label": "Number of {{name}} doses administered",
