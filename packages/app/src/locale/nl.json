@@ -763,7 +763,13 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
+    "barscale_keys": [
+      "0 tot 20",
+      "20 tot 40",
+      "40 tot 60",
+      "60 tot 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -1994,7 +2000,6 @@
     },
     "title": "COVID-19-vaccinaties",
     "description": "Vaccineren is de belangrijkste stap naar een samenleving zonder coronaregels. Op 6 januari 2021 is Nederland begonnen met vaccineren. Uiteindelijk komt iedereen van 18 jaar of ouder aan de beurt. De cijfers op deze pagina laten zien hoeveel prikken zijn gezet en hoeveel vaccins er beschikbaar komen.",
-    "current_amount_of_administrations_text": "Op dit moment zijn er naar verwachting {{amount}} prikken gezet in Nederland",
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "date_unix": "1613650547",
     "date_of_insertion_unix": "1613650547",
@@ -2048,16 +2053,6 @@
       "tooltip_gemiddeld": "Totaal",
       "leeftijd_jaar": "{{ageGroup}} jaar"
     },
-    "grafiek_gezette_prikken": {
-      "titel": "Gezette prikken over tijd",
-      "omschrijving": "Deze grafiek toont het berekend totaal aantal gezette prikken sinds 6 januari 2021.",
-      "estimated_label": "Berekend aantal",
-      "reported_label": "Gemeld aantal"
-    },
-    "kpi_geplande_prikken_deze_week": {
-      "titel": "Geplande prikken deze week",
-      "omschrijving": "Berekend aantal prikken die gepland zijn van {{date_from}} tot en met {{date_to}}. Dit aantal kan afwijken door bijvoorbeeld annuleringen of logistieke factoren."
-    },
     "gezette_prikken": {
       "title": "Aantal gezette prikken",
       "estimated_until": "Berekend aantal tot en met {{reportedDate}}",
@@ -2084,7 +2079,11 @@
     "expected_page_additions": {
       "title": "Verwachte toevoegingen aan deze pagina",
       "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer de vaccinatiegraad.",
-      "additions": ["", "", ""]
+      "additions": [
+        "",
+        "",
+        ""
+      ]
     },
     "data": {
       "difference": "Do not remove this key. It is required as a temporary workaround",
@@ -2209,7 +2208,11 @@
       "kpi_expected_page_additions": {
         "title": "Verwachte toevoegingen aan deze pagina",
         "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer de vaccinatiegraad.",
-        "additions": ["", "", ""]
+        "additions": [
+          "",
+          "",
+          ""
+        ]
       },
       "vaccination_chart": {
         "product_names": {
@@ -2233,9 +2236,20 @@
         "doses_administered_estimated": "Verwacht aantal gezette prikken"
       }
     },
+    "current_amount_of_administrations_text": "Tot nu toe zijn er ongeveer {{amount}} prikken gezet.",
+    "grafiek_gezette_prikken": {
+      "titel": "Gezette prikken in totaal",
+      "omschrijving": "Deze grafiek laat zien hoeveel prikken er in totaal zijn gezet volgens berekeningen.",
+      "estimated_label": "Berekend aantal",
+      "reported_label": "Gemeld aantal"
+    },
+    "kpi_geplande_prikken_deze_week": {
+      "titel": "Geplande prikken deze week",
+      "omschrijving": "Aantal prikken dat Nederland verwacht te zetten van {{date_from}} tot en met {{date_to}}. Het echte aantal kan anders zijn, bijvoorbeeld doordat mensen hun afspraak afzeggen of door problemen met de leveringen van vaccins."
+    },
     "clock": {
-      "title": "Iedere {{seconds}} seconden wordt er een prik gezet",
-      "description": "Dit wordt gebaseerd op een gemiddelde van {{amount}} prikken per dag van de afgelopen 7 dagen tussen 8:00 en 18:00."
+      "title": "Iedere {{seconds}} seconden krijgt iemand een prik",
+      "description": "Dit is een schatting. Deze schatting is gemaakt met het gemiddelde van {{amount}} prikken per dag tussen 8.00 en 20.00 uur in de afgelopen zeven dagen."
     }
   },
   "editorial_detail": {
