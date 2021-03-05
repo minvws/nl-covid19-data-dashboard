@@ -18,7 +18,7 @@ import { VisuallyHidden } from '~/components-styled/visually-hidden';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { useBreakpoints } from '~/utils/useBreakpoints';
-import { SeriesConfig } from '../logic';
+import { SeriesConfig, DataOptions } from '../logic';
 
 const tooltipStyles = {
   ...defaultStyles,
@@ -38,6 +38,20 @@ export type TooltipData<T extends TimestampedValue> = {
    * is needed.
    */
   config: SeriesConfig<T>;
+
+  /**
+   * The options are also essential to know whether to format percentages or
+   * show date span annotation labels.
+   */
+  options: DataOptions;
+
+  /**
+   * When hovering a date span annotation, the tooltip needs to know about it so
+   * that it can render the label accordingly. I am assuming here that we won't
+   * ever define overlapping annotations for now, because in that case we would
+   * need an array of numbers...
+   */
+  timespanAnnotationIndex?: number;
 };
 
 export type TooltipFormatter<T extends TimestampedValue> = (args: {
@@ -54,7 +68,7 @@ interface TooltipProps<T extends TimestampedValue> {
   left: number;
   top: number;
   formatTooltip?: TooltipFormatter<T>;
-  isPercentage?: boolean;
+  // options?: DataOptions;
 }
 
 export function Tooltip<T extends TimestampedValue>({
@@ -64,8 +78,8 @@ export function Tooltip<T extends TimestampedValue>({
   left,
   top,
   formatTooltip,
-  isPercentage,
-}: TooltipProps<T>) {
+}: // options = {},
+TooltipProps<T>) {
   const breakpoints = useBreakpoints();
   const isTinyScreen = !breakpoints.xs;
 
@@ -84,11 +98,7 @@ export function Tooltip<T extends TimestampedValue>({
         {typeof formatTooltip === 'function' ? (
           formatTooltip(tooltipData)
         ) : (
-          <DefaultTooltip
-            title={title}
-            {...tooltipData}
-            isPercentage={isPercentage}
-          />
+          <DefaultTooltip title={title} {...tooltipData} />
         )}
       </TooltipContainer>
     </TooltipWithBounds>
@@ -117,7 +127,8 @@ interface DefaultTooltipProps<T extends TimestampedValue> {
   value: T;
   valueKey: keyof T;
   config: SeriesConfig<T>;
-  isPercentage?: boolean;
+  options: DataOptions;
+  timespanAnnotationIndex?: number;
 }
 
 export function DefaultTooltip<T extends TimestampedValue>({
@@ -125,9 +136,12 @@ export function DefaultTooltip<T extends TimestampedValue>({
   value,
   valueKey: __valueKey,
   config,
-  isPercentage,
+  options,
+  timespanAnnotationIndex,
 }: DefaultTooltipProps<T>) {
   const dateString = getDateStringFromValue(value);
+
+  // console.log('timespanAnnotationIndex', timespanAnnotationIndex);
 
   return (
     <section>
@@ -135,7 +149,7 @@ export function DefaultTooltip<T extends TimestampedValue>({
         {title}
       </Heading>
       <VisuallyHidden>{dateString}</VisuallyHidden>
-      {/* <span>Active: {valueKey}</span> */}
+
       <TooltipList>
         {[...config].reverse().map((x, index) => {
           if (x.type === 'range') {
@@ -147,11 +161,11 @@ export function DefaultTooltip<T extends TimestampedValue>({
                     {`${getValueStringForKey(
                       value,
                       x.metricPropertyLow,
-                      isPercentage
+                      options.isPercentage
                     )} - ${getValueStringForKey(
                       value,
                       x.metricPropertyHigh,
-                      isPercentage
+                      options.isPercentage
                     )}`}
                   </b>
                 </TooltipValueContainer>
@@ -166,7 +180,7 @@ export function DefaultTooltip<T extends TimestampedValue>({
                     {getValueStringForKey(
                       value,
                       x.metricProperty,
-                      isPercentage
+                      options.isPercentage
                     )}
                   </b>
                 </TooltipValueContainer>
@@ -175,6 +189,12 @@ export function DefaultTooltip<T extends TimestampedValue>({
           }
         })}
       </TooltipList>
+      <Heading level={5} my={2}>
+        Debug Info:
+      </Heading>
+      <div>{dateString}</div>
+      <div>Active: {__valueKey}</div>
+      <div>AnnotationIndex: {timespanAnnotationIndex}</div>
     </section>
   );
 }
@@ -208,9 +228,6 @@ const TooltipListItem = styled.li<TooltipListItemProps>`
 const TooltipValueContainer = styled.span`
   display: flex;
   width: 100%;
-  /* min-width: 130px; */
-  /* padding-left: 2em; */
-  /* margin-right: 1em; */
   justify-content: space-between;
 `;
 

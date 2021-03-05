@@ -483,6 +483,27 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                 dataOptions={{
                   isPercentage: true,
                   forcedMaximumValue: 100,
+                  benchmark: {
+                    label: 'This is an important value',
+                    value: 77,
+                  },
+                  timespanAnnotations: [
+                    {
+                      start: data.vaccine_support.values[1].date_start_unix,
+                      end: data.vaccine_support.values[1].date_end_unix,
+                      label: 'Only second item',
+                      color: 'hotpink',
+                    },
+                    {
+                      start:
+                        data.vaccine_support.values[
+                          data.vaccine_support.values.length - 2
+                        ].date_start_unix,
+                      end: Infinity,
+                      label: 'Last two items',
+                      color: 'rebeccapurple',
+                    },
+                  ],
                 }}
                 seriesConfig={[
                   {
