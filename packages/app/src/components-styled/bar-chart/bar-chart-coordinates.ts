@@ -61,7 +61,7 @@ function generateBarChartCoordinates(
   const barsHeight = values.length * 35;
   const height = barsHeight + spacing.top + spacing.bottom;
 
-  const numTicks = 10;
+  const numTicks = parentWidth < 400 ? 5 : 10;
 
   const getValue = (value: BarChartValue): number => value.value;
   const getLabel = (value: BarChartValue): string => value.label;
