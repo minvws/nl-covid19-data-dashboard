@@ -32,7 +32,7 @@ export function addBackgroundRectangleCallback(
   };
 }
 
-function createBackgroundRectangle(
+export function createBackgroundRectangle(
   dateRange: DateRange,
   xScale: ScaleTime<number, number>,
   yScale: ScaleLinear<number, number>,
