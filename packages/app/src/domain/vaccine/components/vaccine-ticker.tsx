@@ -128,7 +128,7 @@ function TickCircle({
         .fill(null)
         .map((_, index) => (
           <Tick
-            deg={index * stepDegree + 360 / numTicks}
+            rotation={index * stepDegree + 360 / numTicks}
             angle={Math.PI / 2 + stepRadius * (index + 1)}
             index={index}
             key={index}
@@ -150,7 +150,7 @@ function TickCircle({
 function Tick({
   index,
   angle,
-  deg,
+  rotation,
   isSelected,
   isLast,
   tickDuration,
@@ -159,7 +159,7 @@ function Tick({
 }: {
   index: number;
   angle: number;
-  deg: number;
+  rotation: number;
   isSelected: boolean;
   isLast: boolean;
   tickDuration: number;
@@ -177,7 +177,7 @@ function Tick({
         position: 'absolute',
         transform: `
           translate(${translateX}px, ${translateY}px)
-          rotate(${deg}deg)
+          rotate(${rotation}deg)
         `,
         width: tickWidth,
         height: tickLength,
