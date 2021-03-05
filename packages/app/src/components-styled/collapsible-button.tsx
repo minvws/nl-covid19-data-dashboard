@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 
@@ -11,18 +11,34 @@ interface CollapsibleButtonProps {
 }
 
 export function CollapsibleButton({ label, children }: CollapsibleButtonProps) {
-  const [expanded, setExpanded] = useState(false);
   const { ref, height: contentHeight } = useResizeObserver();
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const [expanded, setExpanded] = useState(false);
+  const [initialWidth, setInitialWidth] = useState(0);
+
+  useEffect(() => {
+    if (buttonRef.current) {
+      setInitialWidth(buttonRef.current.offsetWidth);
+    }
+  }, [buttonRef.current]);
 
   return (
     <Box css={css({ textAlign: 'center' })}>
-      <Container css={css({ minWidth: expanded ? '100%' : 0 })}>
-        <ExpandButton color="link" onClick={() => setExpanded(!expanded)}>
+      <Container
+        maxWidth={initialWidth ? initialWidth : undefined}
+        minWidth={expanded ? '100%' : 0}
+      >
+        <ExpandButton ref={buttonRef} onClick={() => setExpanded(!expanded)}>
           {label}
           <Chevron expanded={expanded} />
         </ExpandButton>
 
-        <Content css={css({ height: expanded ? contentHeight : 0 })}>
+        <Content
+          css={css({
+            height: expanded ? contentHeight : 0,
+            width: expanded ? '100%' : 0,
+          })}
+        >
           <div ref={ref}>{children}</div>
         </Content>
       </Container>

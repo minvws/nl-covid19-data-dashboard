@@ -170,25 +170,22 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
               />
             </MiniTrendTileLayout>
 
-            <QuickLinks
-              header={text.quick_links.header}
-              links={[
-                {
-                  href: '/landelijk/vaccinaties',
-                  text: text.quick_links.links.nationaal,
-                },
-                {
-                  href: '/veiligheidsregio',
-                  text: text.quick_links.links.veiligheidsregio,
-                },
-                { href: '/gemeente', text: text.quick_links.links.gemeente },
-              ]}
-            />
-
-            <CollapsibleButton
-              label={text.quick_links.header}
-              children="hello"
-            />
+            <CollapsibleButton label={text.quick_links.header}>
+              <QuickLinks
+                header={text.quick_links.header}
+                links={[
+                  {
+                    href: '/landelijk/vaccinaties',
+                    text: text.quick_links.links.nationaal,
+                  },
+                  {
+                    href: '/veiligheidsregio',
+                    text: text.quick_links.links.veiligheidsregio,
+                  },
+                  { href: '/gemeente', text: text.quick_links.links.gemeente },
+                ]}
+              />
+            </CollapsibleButton>
 
             {content.editorial && content.highlight && (
               <Box pt={3}>
