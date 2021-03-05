@@ -24,6 +24,11 @@ export function VaccinePageIntroduction({
   text,
   data,
 }: VaccinePageIntroductionProps) {
+  const roundedMillion =
+    Math.floor(
+      (data.vaccine_administered_total.last_value.estimated / 1_000_000) * 10
+    ) / 10;
+
   return (
     <Box spacing={4}>
       <Tile>
@@ -40,10 +45,7 @@ export function VaccinePageIntroduction({
                 {
                   amount: (
                     <InlineText color="data.primary" fontWeight="bold">
-                      {formatPercentage(
-                        data.vaccine_administered_total.last_value.estimated /
-                          1_000_000
-                      )}{' '}
+                      {formatPercentage(roundedMillion)}{' '}
                       {siteText.common.miljoen}
                     </InlineText>
                   ),
