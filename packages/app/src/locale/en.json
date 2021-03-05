@@ -2256,21 +2256,21 @@
     "laatst_bijgewerkt": "Last update: {{date}}",
     "secties": {
       "artikelen": {
-        "titel": "",
+        "titel": "Current articles",
         "link": {
           "text": "View all articles",
-          "href": ""
+          "href": "/artikelen"
         }
       },
       "risicokaart": {
-        "titel": ""
+        "titel": "Risk level map of the Netherlands"
       },
       "meer_lezen": {
         "titel": "More information about the coronavirus",
-        "omschrijving": "",
+        "omschrijving": "Here you will regularly find new articles that explain the figures on the corona virus.",
         "link": {
           "text": "View all articles",
-          "href": ""
+          "href": "/artikelen"
         }
       }
     }
@@ -2359,14 +2359,14 @@
     "title_link": "View all data for the Netherlands",
     "secties": {
       "actuele_situatie": {
-        "titel": "",
+        "titel": "Current situation in {{the_netherlands}}",
         "link": {
-          "text": "",
-          "href": ""
+          "text": "View all data for the Netherlands",
+          "href": "/landelijk/vaccinaties"
         }
       },
       "positief_geteste_mensen": {
-        "titel": ""
+        "titel": "Confirmed cases in the Netherlands"
       }
     }
   },
@@ -2450,10 +2450,10 @@
     },
     "secties": {
       "actuele_situatie": {
-        "titel": "",
+        "titel": "Current situation in safety region {{safetyRegionName}}",
         "link": {
-          "text": "",
-          "href": ""
+          "text": "View all data for safety region {{safetyRegionName}}",
+          "href": "/veiligheidsregio/{{vrCode}}/risiconiveau"
         }
       }
     }
@@ -2533,10 +2533,10 @@
     },
     "secties": {
       "actuele_situatie": {
-        "titel": "",
+        "titel": "Current situation in {{municipalityName}}",
         "link": {
-          "text": "",
-          "href": ""
+          "text": "View all data for {{municipalityName}}",
+          "href": "/gemeente/{{gmCode}}/positief-geteste-mensen"
         }
       }
     }
