@@ -3,7 +3,7 @@ import css from '@styled-system/css';
 import { shuffle } from 'lodash';
 import { useEffect, useState } from 'react';
 import { Box } from '~/components-styled/base';
-import { Heading, InlineText, Text } from '~/components-styled/typography';
+import { InlineText, Text } from '~/components-styled/typography';
 import siteText from '~/locale';
 import { colors } from '~/style/theme';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
@@ -65,8 +65,8 @@ export function VaccineTicker({ data }: VaccineTickerProps) {
 
           <Box
             position="absolute"
-            top="calc(50% - 20px)"
-            left="calc(50% - 20px)"
+            top="calc(50% - 35px)"
+            left="calc(50% - 35px)"
           >
             <Shapes counter={counter} tickDuration={tickDuration} />
           </Box>
@@ -74,7 +74,7 @@ export function VaccineTicker({ data }: VaccineTickerProps) {
       </div>
 
       <Box my={2} pl={{ xs: 3, md: 4 }}>
-        <Heading level={3}>
+        <Text fontSize="1.625rem" m={0}>
           {replaceComponentsInText(siteText.vaccinaties.clock.title, {
             seconds: (
               <InlineText color={colors.data.primary} fontWeight="bold">
@@ -82,7 +82,7 @@ export function VaccineTicker({ data }: VaccineTickerProps) {
               </InlineText>
             ),
           })}
-        </Heading>
+        </Text>
         <Text m={0}>
           {replaceComponentsInText(siteText.vaccinaties.clock.description, {
             amount: (
@@ -203,7 +203,7 @@ function Shapes({
   const currentShapeIndex = counter % shapes.length;
 
   return (
-    <svg width="40" height="40" viewBox="0 0 40 40">
+    <svg width="70" height="70" viewBox="0 0 40 40">
       {shapes.map((path, index) => (
         <path
           key={index}
