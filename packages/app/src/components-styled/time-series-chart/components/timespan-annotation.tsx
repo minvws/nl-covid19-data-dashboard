@@ -38,6 +38,13 @@ export function TimespanAnnotation({
   if (width <= 0) return null;
 
   return (
-    <Bar height={height} x={x0} width={width} fill={color} opacity={0.2} />
+    <Bar
+      pointerEvents="none"
+      height={height}
+      x={x0}
+      width={width}
+      fill={color}
+      opacity={0.2}
+    />
   );
 }
