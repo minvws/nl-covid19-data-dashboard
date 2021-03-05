@@ -86,7 +86,13 @@ function getTimeDomain<T extends TimestampedValue>(values: T[]) {
       isDefined(start) && isDefined(end),
       `Missing start or end timestamp in [${start}, ${end}]`
     );
-    return [start, end];
+
+    /**
+     * In cases where we render daily data, it is probably good to add a bit of
+     * time scale "padding" so that the markers and their date span fall nicely
+     * within the "stretched" domain on both ends of the graph.
+     */
+    return [start - ONE_DAY_IN_SECONDS, end + ONE_DAY_IN_SECONDS];
   }
 
   if (isDateSpanSeries(values)) {

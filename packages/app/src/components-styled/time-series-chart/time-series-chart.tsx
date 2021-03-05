@@ -76,7 +76,6 @@ export type { SeriesConfig } from './logic';
  *
  * - Render date start /end on x-axis for date spans series
  * - Configure y-axis for standard charts
- * - Calculate timespan annotation hover state
  *
  * Known Issues:
  * - Nearest point / tooltip valueKey calculation seems to be off by some
@@ -133,7 +132,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     isPercentage,
     forcedMaximumValue,
     benchmark,
-    timespanAnnotations: dateSpanAnnotations,
+    timespanAnnotations,
   } = dataOptions;
 
   const { padding, bounds } = useDimensions(width, height, paddingLeft);
@@ -167,11 +166,16 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     seriesList,
     xScale,
     yScale,
+    timespanAnnotations,
   });
 
   useEffect(() => {
     if (hoverState) {
-      const { nearestLinePoint: nearestPoint, valuesIndex } = hoverState;
+      const {
+        nearestLinePoint: nearestPoint,
+        valuesIndex,
+        timespanAnnotationIndex,
+      } = hoverState;
 
       showTooltip({
         tooltipData: {
@@ -186,9 +190,15 @@ export function TimeSeriesChart<T extends TimestampedValue>({
           config: seriesConfig,
           options: dataOptions,
           /**
-           * @TODO add hovered annotation index
+           * Pass the full annotation data. We could just pass the index because
+           * dataOptions is already being passed, but it's cumbersome to have to
+           * dig up the annotation from the array in the tooltip logic.
            */
-          timespanAnnotationIndex: -42,
+          timespanAnnotation:
+            isDefined(dataOptions.timespanAnnotations) &&
+            isDefined(timespanAnnotationIndex)
+              ? dataOptions.timespanAnnotations[timespanAnnotationIndex]
+              : undefined,
         },
         tooltipLeft: nearestPoint.x,
         tooltipTop: nearestPoint.y,
@@ -237,8 +247,8 @@ export function TimeSeriesChart<T extends TimestampedValue>({
             onMouseLeave={handleHover}
           />
 
-          {dateSpanAnnotations &&
-            dateSpanAnnotations.map((x, index) => (
+          {timespanAnnotations &&
+            timespanAnnotations.map((x, index) => (
               <TimespanAnnotation
                 key={index}
                 start={x.start}

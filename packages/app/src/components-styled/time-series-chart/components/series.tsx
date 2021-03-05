@@ -20,6 +20,13 @@ interface SeriesProps<T extends TimestampedValue> {
   seriesConfig: SeriesConfig<T>;
   seriesList: SeriesList;
   getX: GetX;
+  /**
+   * @TODO it's maybe not worth it creating the getY functions in the hook and
+   * passing them along. Since we also need the yScale here anyway, we might as
+   * well let each component make its own y getters based on yScale. GetX is
+   * used in more places and is more universal so that might still be worth
+   * passing along instead of xScale.
+   */
   getY: GetY;
   getY0: GetY0;
   getY1: GetY1;

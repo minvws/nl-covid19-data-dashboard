@@ -13,12 +13,13 @@ import {
 import css from '@styled-system/css';
 import { defaultStyles, TooltipWithBounds } from '@visx/tooltip';
 import styled from 'styled-components';
+import { Box } from '~/components-styled/base';
 import { Heading, InlineText } from '~/components-styled/typography';
 import { VisuallyHidden } from '~/components-styled/visually-hidden';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { useBreakpoints } from '~/utils/useBreakpoints';
-import { SeriesConfig, DataOptions } from '../logic';
+import { SeriesConfig, DataOptions, TimespanAnnotationConfig } from '../logic';
 
 const tooltipStyles = {
   ...defaultStyles,
@@ -48,10 +49,9 @@ export type TooltipData<T extends TimestampedValue> = {
   /**
    * When hovering a date span annotation, the tooltip needs to know about it so
    * that it can render the label accordingly. I am assuming here that we won't
-   * ever define overlapping annotations for now, because in that case we would
-   * need an array of numbers...
+   * ever define overlapping annotations for now.
    */
-  timespanAnnotationIndex?: number;
+  timespanAnnotation?: TimespanAnnotationConfig;
 };
 
 export type TooltipFormatter<T extends TimestampedValue> = (args: {
@@ -68,7 +68,6 @@ interface TooltipProps<T extends TimestampedValue> {
   left: number;
   top: number;
   formatTooltip?: TooltipFormatter<T>;
-  // options?: DataOptions;
 }
 
 export function Tooltip<T extends TimestampedValue>({
@@ -78,8 +77,7 @@ export function Tooltip<T extends TimestampedValue>({
   left,
   top,
   formatTooltip,
-}: // options = {},
-TooltipProps<T>) {
+}: TooltipProps<T>) {
   const breakpoints = useBreakpoints();
   const isTinyScreen = !breakpoints.xs;
 
@@ -128,7 +126,7 @@ interface DefaultTooltipProps<T extends TimestampedValue> {
   valueKey: keyof T;
   config: SeriesConfig<T>;
   options: DataOptions;
-  timespanAnnotationIndex?: number;
+  timespanAnnotation?: TimespanAnnotationConfig;
 }
 
 export function DefaultTooltip<T extends TimestampedValue>({
@@ -137,11 +135,9 @@ export function DefaultTooltip<T extends TimestampedValue>({
   valueKey: __valueKey,
   config,
   options,
-  timespanAnnotationIndex,
+  timespanAnnotation,
 }: DefaultTooltipProps<T>) {
   const dateString = getDateStringFromValue(value);
-
-  // console.log('timespanAnnotationIndex', timespanAnnotationIndex);
 
   return (
     <section>
@@ -193,8 +189,10 @@ export function DefaultTooltip<T extends TimestampedValue>({
         Debug Info:
       </Heading>
       <div>{dateString}</div>
-      <div>Active: {__valueKey}</div>
-      <div>AnnotationIndex: {timespanAnnotationIndex}</div>
+      <div>Key: {__valueKey}</div>
+      {timespanAnnotation && (
+        <Box color={timespanAnnotation.color}>{timespanAnnotation.label}</Box>
+      )}
     </section>
   );
 }
