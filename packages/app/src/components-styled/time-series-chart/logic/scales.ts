@@ -1,20 +1,17 @@
 import {
+  assert,
   DateSpanValue,
-  DateValue,
   isDateSeries,
+  isDateSpanSeries,
   TimestampedValue,
 } from '@corona-dashboard/common';
 import { scaleLinear } from '@visx/scale';
-import { extent } from 'd3-array';
 import { ScaleLinear } from 'd3-scale';
+import { first, last } from 'lodash';
 import { useMemo } from 'react';
+import { isDefined } from 'ts-is-present';
 import { Bounds } from './common';
-import {
-  SeriesDoubleValue,
-  SeriesItem,
-  SeriesList,
-  SeriesSingleValue,
-} from './series';
+import { SeriesDoubleValue, SeriesItem, SeriesSingleValue } from './series';
 
 export type GetX = (x: SeriesItem) => number;
 export type GetY = (x: SeriesSingleValue) => number;
@@ -33,42 +30,14 @@ interface UseScalesResult {
 
 export function useScales<T extends TimestampedValue>(args: {
   values: T[];
-  seriesList: SeriesList;
   maximumValue: number;
   bounds: Bounds;
   numTicks: number;
 }) {
-  const { seriesList, maximumValue, bounds, numTicks, values } = args;
+  const { maximumValue, bounds, numTicks, values } = args;
 
   return useMemo(() => {
-    /**
-     * We could calculate the x domain based on the original values too, but in
-     * the trends the timestamps are already unified for daily data and date
-     * spans like weeks. The week timestamp then falls in the middle of the
-     * week.
-     */
-    // const [start, end] = extent(seriesList.flat().map((x) => x.__date_unix));
-
-    /**
-     * @TODO this could be a simple get first/last element function, because we
-     * should be able to assume that values are sorted already
-     */
-    const [start, end] = isDateSeries(values)
-      ? (extent((values as DateValue[]).map((x) => x.date_unix)) as [
-          number,
-          number
-        ])
-      : (extent(
-          (values as DateSpanValue[]).flatMap((x) => [
-            x.date_start_unix,
-            x.date_end_unix,
-          ])
-        ) as [number, number]);
-
-    // const xDomain =
-    //   isDefined(start) && isDefined(end) ? [start, end] : undefined;
-
-    // const yDomain = [0, maximumValue];
+    const [start, end] = getTimeDomain(values);
 
     const xScale = scaleLinear({
       domain: [start, end],
@@ -81,12 +50,6 @@ export function useScales<T extends TimestampedValue>(args: {
       nice: numTicks,
     });
 
-    const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
-    const dateSpanWidth = isDateSeries(values)
-      ? xScale(start + ONE_DAY_IN_SECONDS) - xScale(start)
-      : xScale((values[0] as DateSpanValue).date_end_unix) -
-        xScale((values[0] as DateSpanValue).date_start_unix);
-
     const result: UseScalesResult = {
       xScale,
       yScale,
@@ -94,10 +57,79 @@ export function useScales<T extends TimestampedValue>(args: {
       getY: (x: SeriesSingleValue) => yScale(x.__value),
       getY0: (x: SeriesDoubleValue) => yScale(x.__value_a),
       getY1: (x: SeriesDoubleValue) => yScale(x.__value_b),
-      dateSpanWidth,
-      // dateSpanWidth: dateSpanScale.bandwidth(),
+      dateSpanWidth: getDateSpanWidth(values, xScale),
     };
 
     return result;
-  }, [values, seriesList, maximumValue, bounds, numTicks]);
+  }, [values, maximumValue, bounds, numTicks]);
+}
+
+/**
+ * Calculate the first and last date to be shown on the x-axis. We are using the
+ * raw values input, assuming that if you passing in data that is showing
+ * partial series, you'd still want the first and last timestamps in the values
+ * array to be shown.
+ *
+ * Alternatively we could use the data from `seriesList` to see where the first
+ * series starts and where the last series ends, and that would remove all
+ * "empty" space on both ends of the chart.
+ */
+function getTimeDomain<T extends TimestampedValue>(values: T[]) {
+  /**
+   * This code is assuming the values array is already sorted in time, so we
+   * only need to pick the first and last values.
+   */
+  if (isDateSeries(values)) {
+    const start = first(values)?.date_unix;
+    const end = last(values)?.date_unix;
+    assert(
+      isDefined(start) && isDefined(end),
+      `Missing start or end timestamp in [${start}, ${end}]`
+    );
+    return [start, end];
+  }
+
+  if (isDateSpanSeries(values)) {
+    const start = first(values)?.date_start_unix;
+    const end = last(values)?.date_end_unix;
+    assert(
+      isDefined(start) && isDefined(end),
+      `Missing start or end timestamp in [${start}, ${end}]`
+    );
+    return [start, end];
+  }
+
+  throw new Error(
+    `Invalid timestamped values, shaped like: ${JSON.stringify(values[0])}`
+  );
+}
+
+const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
+
+/**
+ * Calculate the width that one value spans on the chart x-axis. This assumes
+ * that all values have consistent timestamps, and that date spans all span the
+ * same amount of time each.
+ *
+ * It also assumes that if we use date_unix it is always means one day worth of
+ * data.
+ */
+function getDateSpanWidth<T extends TimestampedValue>(
+  values: T[],
+  xScale: ScaleLinear<number, number>
+) {
+  if (isDateSeries(values)) {
+    return xScale(ONE_DAY_IN_SECONDS);
+  }
+
+  if (isDateSpanSeries(values)) {
+    return (
+      xScale((values[0] as DateSpanValue).date_end_unix) -
+      xScale((values[0] as DateSpanValue).date_start_unix)
+    );
+  }
+
+  throw new Error(
+    `Invalid timestamped values, shaped like: ${JSON.stringify(values[0])}`
+  );
 }
