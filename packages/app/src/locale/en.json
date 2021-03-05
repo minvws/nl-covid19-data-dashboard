@@ -655,7 +655,7 @@
     "read_more": "Read more",
     "absolute_date_template": "on {{date}}",
     "inwoners": "residents",
-    "miljoen": "million"
+    "miljoen": ""
   },
   "seoHead": {
     "default_description": "Information on the development of the coronavirus in The Netherlands.",
@@ -763,7 +763,13 @@
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -1994,7 +2000,6 @@
     },
     "title": "COVID-19 vaccinations",
     "description": "Vaccination is the most important step towards getting life back to normal. The Netherlands began vaccinating people against COVID-19 on 6 January 2021. Eventually, the vaccine will be offered to everyone aged 18 and over. This page shows how many doses of vaccine have been administered and how many doses are on their way.",
-    "current_amount_of_administrations_text": "Op dit moment zijn er naar verwachting {{amount}} prikken gezet in Nederland",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "date_unix": "1613650547",
     "date_of_insertion_unix": "1613650547",
@@ -2048,16 +2053,6 @@
       "tooltip_gemiddeld": "In total",
       "leeftijd_jaar": "{{ageGroup}} years old"
     },
-    "grafiek_gezette_prikken": {
-      "titel": "Gezette prikken over tijd",
-      "omschrijving": "Deze grafiek toont het berekend totaal aantal gezette prikken sinds 6 januari 2021.",
-      "estimated_label": "Berekend aantal",
-      "reported_label": "Gemeld aantal"
-    },
-    "kpi_geplande_prikken_deze_week": {
-      "titel": "Geplande prikken deze week",
-      "omschrijving": "Berekend aantal prikken die gepland zijn van {{date_from}} tot en met {{date_to}}. Dit aantal kan afwijken door bijvoorbeeld annuleringen of logistieke factoren."
-    },
     "gezette_prikken": {
       "title": "Number of doses administered",
       "estimated_until": "Estimated number till {{reportedDate}}",
@@ -2084,7 +2079,11 @@
     "expected_page_additions": {
       "title": "Expected data on vaccinations",
       "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
-      "additions": ["", "", ""]
+      "additions": [
+        "",
+        "",
+        ""
+      ]
     },
     "data": {
       "difference": "",
@@ -2209,7 +2208,11 @@
       "kpi_expected_page_additions": {
         "title": "Expected data on vaccinations",
         "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
-        "additions": ["", "", ""]
+        "additions": [
+          "",
+          "",
+          ""
+        ]
       },
       "vaccination_chart": {
         "product_names": {
@@ -2229,13 +2232,24 @@
           "expected": "Expected"
         },
         "legend_label": "Number of {{name}} doses administered",
-        "doses_administered": "",
-        "doses_administered_estimated": ""
+        "doses_administered": "Number of doses administered",
+        "doses_administered_estimated": "Expected number of doses administered"
       }
     },
+    "current_amount_of_administrations_text": "So far approximately {{amount}} vaccine doses have been administered.",
+    "grafiek_gezette_prikken": {
+      "titel": "Total vaccine doses administered",
+      "omschrijving": "This graph shows the total number of doses administered according to calculations.",
+      "estimated_label": "Calculated number",
+      "reported_label": "Reported number"
+    },
+    "kpi_geplande_prikken_deze_week": {
+      "titel": "Planned doses this week",
+      "omschrijving": "Number of doses the Netherlands expects to administer from {{date_from}} to {{date_to}}. The actual number may differ, for example due to people cancelling their appointments or problems with vaccine deliveries."
+    },
     "clock": {
-      "title": "Iedere {{seconds}} seconden wordt er een prik gezet",
-      "description": "Dit wordt gebaseerd op een gemiddelde van {{amount}} prikken per dag van de afgelopen 7 dagen tussen 8:00 en 18:00."
+      "title": "One person is vaccinated every {{seconds}} seconds",
+      "description": "This is an estimate. The estimated figure is based on an average of {{amount}} doses per day between 08.00 and 20.00 over the past seven days."
     }
   },
   "editorial_detail": {
