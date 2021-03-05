@@ -8,6 +8,7 @@ import siteText from '~/locale';
 import { colors } from '~/style/theme';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { useIsMountedRef } from '~/utils/use-is-mounted-ref';
 
 const RADIUS = 55;
 const CONTAINER_WIDTH = RADIUS * 2 + 12;
@@ -18,14 +19,26 @@ interface VaccineTickerProps {
 }
 
 export function VaccineTicker({ data }: VaccineTickerProps) {
+  const isMountedRef = useIsMountedRef();
   const tickDuration = data.seconds_per_dose * 1000;
   const tickCount = Math.floor(data.doses_per_second * 60);
   const [counter, setCounter] = useState(0);
 
   useEffect(() => {
-    const id = window.setInterval(() => setCounter((x) => x + 1), tickDuration);
-    return () => window.clearInterval(id);
-  }, [tickDuration]);
+    let timeoutId: number;
+    function tick() {
+      if (!isMountedRef.current) return;
+
+      setCounter((x) => x + 1);
+
+      timeoutId = window.setTimeout(
+        () => requestAnimationFrame(tick),
+        tickDuration
+      );
+    }
+    tick();
+    return () => window.clearTimeout(timeoutId);
+  }, [isMountedRef, tickDuration]);
 
   return (
     <Box
