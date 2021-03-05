@@ -4,11 +4,10 @@ import {
   isDateSeries,
   TimestampedValue,
 } from '@corona-dashboard/common';
-import { scaleBand, scaleLinear } from '@visx/scale';
+import { scaleLinear } from '@visx/scale';
 import { extent } from 'd3-array';
 import { ScaleLinear } from 'd3-scale';
 import { useMemo } from 'react';
-import { isDefined } from 'ts-is-present';
 import { Bounds } from './common';
 import {
   SeriesDoubleValue,
@@ -71,38 +70,8 @@ export function useScales<T extends TimestampedValue>(args: {
 
     // const yDomain = [0, maximumValue];
 
-    /**
-     * To calculate the timespan width we need a full series worth of
-     * timestamps. This chart assumes that all series have the same length
-     * because they all originate from the same T[] values. If a trend is not
-     * full-length it should contain null values, but still have all the
-     * timestamps.
-     */
-    // const timespanMarkerData = seriesList[0] as SeriesItem[];
-
-    // const timespanDates = isDateSeries(values)
-    //   ? (values as DateValue[]).map((x) => x.date_unix)
-    //   : (values as DateSpanValue[]).map(
-    //       (x) => x.date_start_unix
-    //       // x.date_end_unix,
-    //     );
-
-    /**
-     * ☝️ weird. Typescript 4.3 doesn't complain below when mapping over the
-     * data, but TS 4.2 thinks x is any. So I'm just leaving this cast to
-     * SeriesItem until 4.3 comes along as the official version.
-     */
-    // const dateSpanScale = scaleBand<number>({
-    //   range: [0, bounds.width],
-    //   // domain: timespanMarkerData.map((x) => x.__date_unix),
-    //   domain: timespanDates,
-    // });
-
-    // const markerPadding = dateSpanScale.bandwidth() / 2;
-
     const xScale = scaleLinear({
       domain: [start, end],
-      // range: [markerPadding, bounds.width - markerPadding],
       range: [0, bounds.width],
     });
 
@@ -115,7 +84,8 @@ export function useScales<T extends TimestampedValue>(args: {
     const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
     const dateSpanWidth = isDateSeries(values)
       ? xScale(start + ONE_DAY_IN_SECONDS) - xScale(start)
-      : xScale(end) - xScale(start);
+      : xScale((values[0] as DateSpanValue).date_end_unix) -
+        xScale((values[0] as DateSpanValue).date_start_unix);
 
     const result: UseScalesResult = {
       xScale,
