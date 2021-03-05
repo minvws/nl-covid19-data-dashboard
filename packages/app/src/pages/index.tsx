@@ -5,6 +5,8 @@ import { ArticleSummary } from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
 import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
+import { CollapsibleButton } from '~/components-styled/collapsible-button';
+import { Collapsible } from '~/components-styled/collapsible';
 import { HighlightTeaserProps } from '~/components-styled/highlight-teaser';
 import { MaxWidth } from '~/components-styled/max-width';
 import { QuickLinks } from '~/components-styled/quick-links';
@@ -181,6 +183,11 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                 },
                 { href: '/gemeente', text: text.quick_links.links.gemeente },
               ]}
+            />
+
+            <CollapsibleButton
+              label={text.quick_links.header}
+              children="hello"
             />
 
             {content.editorial && content.highlight && (
