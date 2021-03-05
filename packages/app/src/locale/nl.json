@@ -2050,7 +2050,9 @@
     },
     "grafiek_gezette_prikken": {
       "titel": "Gezette prikken over tijd",
-      "omschrijving": "Deze grafiek toont het berekend totaal aantal gezette prikken sinds 6 januari 2021."
+      "omschrijving": "Deze grafiek toont het berekend totaal aantal gezette prikken sinds 6 januari 2021.",
+      "estimated_label": "Berekend aantal",
+      "reported_label": "Gemeld aantal"
     },
     "kpi_geplande_prikken_deze_week": {
       "titel": "Geplande prikken deze week",

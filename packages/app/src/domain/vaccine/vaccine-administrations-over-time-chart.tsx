@@ -53,12 +53,14 @@ export function VaccineAdministrationsOverTimeChart({
           legendItems={[
             {
               color: colors.data.secondary,
-              label: 'Gemeld aantal',
+              label:
+                siteText.vaccinaties.grafiek_gezette_prikken.estimated_label,
               shape: 'line',
             },
             {
               color: colors.data.primary,
-              label: 'Berekend aantal',
+              label:
+                siteText.vaccinaties.grafiek_gezette_prikken.reported_label,
               shape: 'line',
             },
           ]}
