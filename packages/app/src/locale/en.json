@@ -2232,6 +2232,10 @@
         "doses_administered": "",
         "doses_administered_estimated": ""
       }
+    },
+    "clock": {
+      "title": "Iedere {{seconds}} seconden wordt er een prik gezet",
+      "description": "Dit wordt gebaseerd op een gemiddelde van {{amount}} prikken per dag van de afgelopen 7 dagen tussen 8:00 en 18:00."
     }
   },
   "editorial_detail": {

@@ -1,4 +1,3 @@
-import { formatDate } from '~/utils/formatDate';
 import { National } from '@corona-dashboard/common';
 import VaccinatieIcon from '~/assets/vaccinaties.svg';
 import { Box } from '~/components-styled/base';
@@ -9,10 +8,12 @@ import { Tile } from '~/components-styled/tile';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components-styled/typography';
 import siteText, { Locale } from '~/locale';
+import { createDate } from '~/utils/createDate';
+import { formatDate } from '~/utils/formatDate';
 import { formatPercentage } from '~/utils/formatNumber';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { VaccineTicker } from './components/vaccine-ticker';
 import { VaccineAdministrationsOverTimeChart } from './vaccine-administrations-over-time-chart';
-import { createDate } from '~/utils/createDate';
 
 interface VaccinePageIntroductionProps {
   text: Locale['vaccinaties'];
@@ -108,6 +109,10 @@ export function VaccinePageIntroduction({
                 </Text>
               </Box>
             </TwoKpiSection>
+
+            <VaccineTicker
+              data={data.vaccine_administered_rate_moving_average.last_value}
+            />
           </Box>
         </Box>
       </Tile>
