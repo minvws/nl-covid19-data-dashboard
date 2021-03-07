@@ -15,6 +15,7 @@ import { SEOHead } from '~/components-styled/seo-head';
 import { SewerChart } from '~/components-styled/sewer-chart';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
+import { Text } from '~/components-styled/typography';
 import { WarningTile } from '~/components-styled/warning-tile';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getMunicipalityLayout } from '~/domain/layout/municipality-layout';
@@ -26,10 +27,9 @@ import {
   getLastGeneratedDate,
   getText,
 } from '~/static-props/get-data';
+import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { getSewerWaterBarChartData } from '~/utils/sewer-water/municipality-sewer-water.util';
-import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { Text } from '~/components-styled/typography';
 
 export { getStaticPaths } from '~/static-paths/gm';
 
@@ -196,7 +196,6 @@ const SewerWater: FCWithLayout<typeof getStaticProps> = (props) => {
               accessibilityDescription={
                 text.bar_chart_accessibility_description
               }
-              valueAnnotation={siteText.waarde_annotaties.riool_normalized}
             />
           </ChartTile>
         )}
