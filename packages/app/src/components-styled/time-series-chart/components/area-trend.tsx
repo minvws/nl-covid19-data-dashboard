@@ -39,7 +39,6 @@ export function AreaTrend({
   return (
     <>
       <LinePath
-        style={{ pointerEvents: 'all' }}
         data={series}
         x={getX}
         y={getY}
@@ -51,7 +50,6 @@ export function AreaTrend({
         onMouseMove={handleHover}
       />
       <AreaClosed
-        style={{ pointerEvents: 'all' }}
         data={series}
         x={getX}
         y={getY}

@@ -38,7 +38,6 @@ export function LineTrend({
 
   return (
     <LinePath
-      style={{ pointerEvents: 'all' }}
       data={series}
       x={getX}
       y={getY}
