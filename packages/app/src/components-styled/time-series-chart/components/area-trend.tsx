@@ -1,6 +1,6 @@
 import { AreaClosed, LinePath } from '@visx/shape';
 import { PositionScale } from '@visx/shape/lib/types';
-import { MouseEvent, TouchEvent, useState } from 'react';
+import { MouseEvent, TouchEvent, useCallback, useState } from 'react';
 import { SeriesItem, SeriesSingleValue } from '../logic';
 
 export type AreaTrendProps = {
@@ -27,13 +27,14 @@ export function AreaTrend({
 }: AreaTrendProps) {
   const [isHovered, setIsHovered] = useState(false);
 
-  const handleHover = (
-    event: TouchEvent<SVGElement> | MouseEvent<SVGElement>
-  ) => {
-    const isLeave = event.type === 'mouseleave';
-    setIsHovered(!isLeave);
-    onHover(event);
-  };
+  const handleHover = useCallback(
+    (event: TouchEvent<SVGElement> | MouseEvent<SVGElement>) => {
+      const isLeave = event.type === 'mouseleave';
+      setIsHovered(!isLeave);
+      onHover(event);
+    },
+    [onHover]
+  );
 
   return (
     <>

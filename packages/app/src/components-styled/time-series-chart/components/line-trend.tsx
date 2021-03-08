@@ -1,5 +1,5 @@
 import { LinePath } from '@visx/shape';
-import { MouseEvent, TouchEvent, useState } from 'react';
+import { MouseEvent, TouchEvent, useCallback, useState } from 'react';
 import { SeriesItem, SeriesSingleValue } from '../logic';
 
 export type LineStyle = 'solid' | 'dashed';
@@ -25,13 +25,14 @@ export function LineTrend({
 }: LineTrendProps) {
   const [isHovered, setIsHovered] = useState(false);
 
-  const handleHover = (
-    event: TouchEvent<SVGElement> | MouseEvent<SVGElement>
-  ) => {
-    const isLeave = event.type === 'mouseleave';
-    setIsHovered(!isLeave);
-    onHover(event);
-  };
+  const handleHover = useCallback(
+    (event: TouchEvent<SVGElement> | MouseEvent<SVGElement>) => {
+      const isLeave = event.type === 'mouseleave';
+      setIsHovered(!isLeave);
+      onHover(event);
+    },
+    [onHover]
+  );
 
   const strokeDasharray = style === 'dashed' ? 4 : undefined;
 
