@@ -7,7 +7,6 @@ import { Text } from '@visx/text';
 import { KeyboardEvent, MouseEvent } from 'react';
 import styled from 'styled-components';
 import theme, { colors } from '~/style/theme';
-import { useBreakpoints } from '~/utils/useBreakpoints';
 import { BarChartCoordinates, BarChartValue } from './bar-chart-coordinates';
 
 export const BAR_CHART_TOOLTIP_MAX_WIDTH = 200;
@@ -57,14 +56,8 @@ export function BarChartGraph({
     getBarSize,
     getBarOffset,
     getLabel,
+    labelFontSize,
   } = coordinates;
-
-  const breakpoints = useBreakpoints();
-
-  const labelFontSize =
-    breakpoints.lg || breakpoints.md || breakpoints.xl
-      ? theme.fontSizes[2]
-      : theme.fontSizes[0];
 
   return (
     <StyledSvg
