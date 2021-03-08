@@ -75,6 +75,8 @@
     "barscale_screenreader_text": "{{value}} intensive care-admissions by day. Alert value: {{signaalwaarde}} admissions per day.",
     "extra_uitleg": "Number of confirmed COVID-19 cases who are admitted to a hospital intensive care unit (ICU) per day. This figure is an average for the daily admissions over the past three days.\n\nNote: Although hospitals try to register COVID-19 patients promptly, it is likely that the numbers of the last days are yet incomplete.",
     "linechart_titel": "ICU admissions over time",
+    "linechart_legend_trend_label": "ICU admissions",
+    "linechart_legend_inaccurate_label": "Processing time GGD",
     "bronnen": {
       "nice": {
         "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
@@ -434,6 +436,8 @@
     "extra_uitleg": "Number of new confirmed cases in nursing homes that have been reported per day.",
     "pagina_toelichting": "Number of new confirmed cases in nursing homes that have been reported per day. This number is an estimation of the number confirmed cases in nursing home inhabitants.\n\nThe calculation method has been changed on the 29th of September. Please also see the 'Explanation of the data presented'.",
     "linechart_titel": "Number of confirmed cases among residents over time",
+    "line_chart_legend_trend_label": "Number of confirmed cases",
+    "line_chart_legend_inaccurate_label": "Processing time GGD",
     "barscale_screenreader_text": "{{value}} Number of residents who tested positive (confirmed cases).",
     "titel_sidebar": "Confirmed cases",
     "chloropleth_legenda": {
@@ -472,6 +476,8 @@
     "barscale_screenreader_text": "{{value}} deceased residents",
     "extra_uitleg": "This number is an estimation of the number of nursing home inhabitants that have died due to the novel coronavirus.",
     "linechart_titel": "Number of deceased residents over time",
+    "line_chart_legend_trend_label": "Number of deceased residents",
+    "line_chart_legend_inaccurate_label": "Processing time GGD",
     "map_titel": "Nursing home excess mortality in the Netherlands",
     "map_toelichting": "These maps show the excess mortality in nursing homes in the Netherlands per day.",
     "titel_sidebar": "Deceased nursing home residents per day",
@@ -763,13 +769,7 @@
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": [
-      "0 to 20",
-      "20 to 40",
-      "40 to 60",
-      "60 to 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -1129,6 +1129,8 @@
     "barscale_screenreader_text": "{{value}} deceased residents",
     "extra_uitleg": "This number is an estimation of the number of nursing home inhabitants in this safety region that have died due to the novel coronavirus.",
     "linechart_titel": "Number of deceased residents over time",
+    "line_chart_legend_trend_label": "Number of deceased residents",
+    "line_chart_legend_inaccurate_label": "Processing time GGD",
     "map_titel": "Nursing home excess mortality in the Netherlands",
     "map_toelichting": "These maps show the excess mortality in nursing homes in the Netherlands per day.",
     "titel_sidebar": "Mortality",
@@ -1190,6 +1192,8 @@
     "extra_uitleg": "Number of new confirmed cases in nursing homes that have been reported per day.",
     "pagina_toelichting": "Number of confirmed cases in nursing homes per day in {{safetyRegion}}. This number is an estimation of the number confirmed cases in nursing home inhabitants.\n\nThe calculation method has been changed on the 29th of September. Please also see the 'Explanation of the data presented'.",
     "linechart_titel": "Number of confirmed cases among residents over time",
+    "line_chart_legend_trend_label": "Number of confirmed cases",
+    "line_chart_legend_inaccurate_label": "Processing time GGD",
     "barscale_screenreader_text": "{{value}} Number of residents who tested positive (confirmed cases).",
     "titel_sidebar": "Confirmed cases",
     "chloropleth_legenda": {
@@ -1477,6 +1481,8 @@
     "extra_uitleg": "The number of disability care home residents in this region who were reported as testing positive for COVID-19 daily.",
     "pagina_toelichting": "People who live in disability care homes are often extra vulnerable to coronavirus infection. Because of this, Municipal health services (GGDs) monitor whether a persons who tests positive for COVID-19 lives in a disability care home. By doing so, measures can be taken if the number of cases in residential care increases.",
     "linechart_titel": "Number of confirmed cases among residents over time",
+    "line_chart_legend_trend_label": "Number of confirmed cases",
+    "line_chart_legend_inaccurate_label": "Processing time GGD",
     "barscale_screenreader_text": "{{value}} confirmed cases (residents)",
     "chloropleth_legenda": {
       "titel": "Number per 100,000 residents",
@@ -1510,6 +1516,8 @@
     "barscale_screenreader_text": "{{value}} deceased residents",
     "extra_uitleg": "This is an estimate of the number of disability care home residents in the Netherlands who have died from COVID-19 per day.",
     "linechart_titel": "Number of deceased residents over time",
+    "line_chart_legend_trend_label": "Number of deceased residents",
+    "line_chart_legend_inaccurate_label": "Processing time GGD",
     "map_titel": "Disability care homes – deaths",
     "map_toelichting": "The maps show the exces mortality amongst disability care homes in the Netherlands, per day.",
     "metadata": {
@@ -1542,6 +1550,8 @@
     "barscale_screenreader_text": "{{value}}deceased residents.",
     "extra_uitleg": "This is an estimate of the number of COVID-19 related deaths reported yesterday among disability care home residents in this region.",
     "linechart_titel": "Number of deceased residents over time",
+    "line_chart_legend_trend_label": "Number of deceased residents",
+    "line_chart_legend_inaccurate_label": "Processing time GGD",
     "map_titel": "",
     "map_toelichting": "",
     "titel_sidebar": "Death per day",
@@ -1595,6 +1605,8 @@
     "extra_uitleg": "The number of disability care home residents in this region who were reported as testing positive for COVID-19 yesterday.",
     "pagina_toelichting": "People who live in disability care homes are often extra vulnerable to coronavirus infection. Because of this, Municipal health services (GGDs) monitor whether a persons who tests positive for COVID-19 lives in a disability care home. By doing so, measures can be taken if the number of cases in residential care increases.",
     "linechart_titel": "Number of confirmed cases among residents over time",
+    "line_chart_legend_trend_label": "Number of confirmed cases",
+    "line_chart_legend_inaccurate_label": "Processing time GGD",
     "barscale_screenreader_text": "",
     "titel_sidebar": "Number of confirmed cases (residents)",
     "chloropleth_legenda": {
@@ -1646,6 +1658,8 @@
       "kpi_daily_per_100k_title": "Daily confirmed cases per 100,000 among over-70s living at home ",
       "kpi_daily_per_100k_description": "This figure shows how many people over 70 living at home were reported as testing positive for COVID-19 yesterday, per 100,000 over-70s living at home. This figure makes it easier to compare the situation in different regions.",
       "line_chart_daily_title": "Newly confirmed cases among over-70s over time",
+      "line_chart_legend_trend_label": "Newly confirmed cases",
+      "line_chart_legend_inaccurate_label": "Processing time GGD",
       "choropleth_daily_title": "Distribution of daily confirmed cases among over-70s living at home (per safety region)",
       "choropleth_daily_description": "This map shows the differences between safety regions in the number of confirmed cases per 100,000 among over-70s living at home, as reported yesterday.",
       "choropleth_daily_legenda": "Number per 100,000 over-70s living at home",
@@ -1668,6 +1682,8 @@
       "kpi_daily_title": "COVID-19 deaths among over-70s living at home, per day",
       "kpi_daily_description": "The number of people over 70 living at home who were reported as deceased due to COVID-19 yesterday.",
       "line_chart_daily_title": "Number of COVID-19 deaths among over-70s living at home over time",
+      "line_chart_legend_trend_label": "Number of deaths",
+      "line_chart_legend_inaccurate_label": "Processing time GGD",
       "datums": "Last values obtained on {{dateOfInsertion}}. Updated daily."
     },
     "kpi_titel": "Confirmed cases"
@@ -1698,6 +1714,8 @@
       "kpi_daily_per_100k_title": "Daily confirmed cases per 100,000 among over-70s living at home",
       "kpi_daily_per_100k_description": "Calculating the daily number of COVID-19 cases per 100,000 over-70s makes it possible to compare regions.",
       "line_chart_daily_title": "Daily confirmed cases among over-70s living at home: progression over time",
+      "line_chart_legend_trend_label": "Daily confirmed cases",
+      "line_chart_legend_inaccurate_label": "Processing time GGD",
       "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis."
     },
     "section_deceased": {
@@ -1717,6 +1735,8 @@
       "kpi_daily_title": "COVID-19 deaths among over-70s living at home, per day",
       "kpi_daily_description": "The number of people over 70 living at home in this safety region who were reported as deceased due to COVID-19 yesterday",
       "line_chart_daily_title": "Number of COVID-19 deaths among over-70s living at home over time",
+      "line_chart_legend_trend_label": "Number of deaths",
+      "line_chart_legend_inaccurate_label": "Processing time GGD",
       "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis."
     },
     "kpi_titel": "Confirmed cases"
@@ -1748,7 +1768,9 @@
       "kpi_covid_total_title": "Total number of COVID-19 patients reported dead",
       "kpi_covid_total_description": "This figure shows the number of COVID-19 patients reported dead, since the reporting of COVID-19 deaths started.",
       "line_chart_covid_daily_title": "Number of reported deaths from COVID-19 over time",
-      "line_chart_covid_daily_description": "This graph shows the number of COVID-19 patients reported dead, in the selected period."
+      "line_chart_covid_daily_description": "This graph shows the number of COVID-19 patients reported dead, in the selected period.",
+      "line_chart_covid_daily_legend_trend_label": "Number of reported deaths",
+      "line_chart_covid_daily_legend_inaccurate_label": "Processing time GGD"
     },
     "kpi_titel": "Daily reported deaths from COVID-19"
   },
@@ -1779,7 +1801,9 @@
       "kpi_covid_total_title": "Total number of COVID-19 patients reported dead",
       "kpi_covid_total_description": "This figure shows the number of COVID-19 patients in this safety region reported dead, since the reporting of COVID-19 deaths started.",
       "line_chart_covid_daily_title": "Number of COVID-19 patients reported dead over time",
-      "line_chart_covid_daily_description": "This graph shows the number of COVID-19 patients in this safety region reported dead, in the selected period."
+      "line_chart_covid_daily_description": "This graph shows the number of COVID-19 patients in this safety region reported dead, in the selected period.",
+      "line_chart_covid_daily_legend_trend_label": "Number of reported deaths",
+      "line_chart_covid_daily_legend_inaccurate_label": "Processing time GGD"
     },
     "kpi_titel": "Daily reported deaths from COVID-19"
   },
@@ -2079,11 +2103,7 @@
     "expected_page_additions": {
       "title": "Expected data on vaccinations",
       "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
-      "additions": [
-        "",
-        "",
-        ""
-      ]
+      "additions": ["", "", ""]
     },
     "data": {
       "difference": "",
@@ -2208,11 +2228,7 @@
       "kpi_expected_page_additions": {
         "title": "Expected data on vaccinations",
         "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
-        "additions": [
-          "",
-          "",
-          ""
-        ]
+        "additions": ["", "", ""]
       },
       "vaccination_chart": {
         "product_names": {

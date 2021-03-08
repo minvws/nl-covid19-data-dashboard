@@ -27,7 +27,10 @@ import { colors } from '~/style/theme';
 import { createDate } from '~/utils/createDate';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
-import { DateRange } from '~/utils/get-trailing-date-range';
+import {
+  DateRange,
+  getTrailingDateRange,
+} from '~/utils/get-trailing-date-range';
 
 const text = siteText.ic_opnames_per_dag;
 const graphDescriptions = siteText.accessibility.grafieken;
@@ -46,6 +49,8 @@ const IntakeIntensiveCare: FCWithLayout<typeof getStaticProps> = (props) => {
   const dataIntake = data.intensive_care_nice;
 
   const bedsLastValue = getLastFilledValue(data.intensive_care_lcps);
+
+  const intakeUnderReportedRange = getTrailingDateRange(dataIntake.values, 4);
 
   const lcpsOldDataRange = [
     createDate(data.intensive_care_lcps.values[0].date_unix),
@@ -128,6 +133,25 @@ const IntakeIntensiveCare: FCWithLayout<typeof getStaticProps> = (props) => {
           ]}
           signaalwaarde={10}
           metadata={{ source: text.bronnen.nice }}
+          componentCallback={addBackgroundRectangleCallback(
+            intakeUnderReportedRange,
+            {
+              fill: colors.data.underReported,
+            }
+          )}
+          legendItems={[
+            {
+              color: colors.data.primary,
+              label: text.linechart_legend_trend_label,
+              shape: 'line',
+            },
+            {
+              color: colors.data.underReported,
+              label: text.linechart_legend_inaccurate_label,
+              shape: 'square',
+            },
+          ]}
+          showLegend
         />
 
         <LineChartTile
