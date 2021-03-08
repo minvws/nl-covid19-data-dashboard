@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { Bounds, Padding } from './common';
 
 const defaultPadding: Padding = {
@@ -12,15 +13,17 @@ export function useDimensions(
   height: number,
   paddingLeft?: number
 ) {
-  const padding: Padding = {
-    ...defaultPadding,
-    left: paddingLeft ?? defaultPadding.left,
-  };
+  return useMemo(() => {
+    const padding: Padding = {
+      ...defaultPadding,
+      left: paddingLeft ?? defaultPadding.left,
+    };
 
-  const bounds: Bounds = {
-    width: width - padding.left - padding.right,
-    height: height - padding.top - padding.bottom,
-  };
+    const bounds: Bounds = {
+      width: width - padding.left - padding.right,
+      height: height - padding.top - padding.bottom,
+    };
 
-  return { padding, bounds };
+    return { padding, bounds };
+  }, [width, height, paddingLeft]);
 }
