@@ -34,6 +34,7 @@ export function ChartContainer({
       height={height}
       role="img"
       aria-labelledby={ariaLabelledBy}
+      style={{ touchAction: 'pan-y' }}
     >
       <Group left={padding.left} top={padding.top}>
         {children}
