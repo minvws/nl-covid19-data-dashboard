@@ -105,7 +105,7 @@
     "titel_kpi": "Average number of intensive care admissions in 3 days",
     "reference": {
       "href": "/verantwoording#intensive-care",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "kpi_titel": "Average number of intensive care admissions in 3 days"
   },
@@ -134,7 +134,7 @@
     "titel_kpi": "Patients who contact the general practitioner for the first time due to COVID-19 symptoms",
     "reference": {
       "href": "/verantwoording#general-practitioners",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "nivel": {
@@ -202,7 +202,7 @@
     "titel_kpi": "Number of hospital admissions reported on one day. ",
     "reference": {
       "href": "/verantwoording#hospitals",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "tijdelijk_onbeschikbaar_titel": "",
     "tijdelijk_onbeschikbaar": "",
@@ -254,7 +254,7 @@
     "titel_kpi": "Confirmed cases per day",
     "reference": {
       "href": "/verantwoording#confirmed-cases",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -292,7 +292,7 @@
     "titel_kpi": "Number of infectious people",
     "reference": {
       "href": "/verantwoording#infectious-people",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -329,7 +329,7 @@
     "titel_kpi": "Most recent reproduction number",
     "reference": {
       "href": "/verantwoording#reproduction-number",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -392,7 +392,7 @@
       "text": "RIVM"
     },
     "titel": "Nursing homes – Number of infected locations",
-    "pagina_toelichting": "This number is an estimation of the number of new nursing home locations where there is at least one confirmed case.\n\nThe calculation method has been changed on the 29th of September. Please also see the data explanation section.",
+    "pagina_toelichting": "This number is an estimation of the number of new nursing home locations where there is at least one confirmed case.\n\nThe calculation method has been changed on the 29th of September. Please also see the 'Explanation of the data presented'.",
     "barscale_titel": "Number of new locations per day",
     "barscale_toelichting": "Number of new locations where there is at least one confirmed case. A nursing home is counted as a 'new location; when there have not been any confirmed cases for at least 28 days, which is twice the incubation period.",
     "kpi_titel": "Total number of infected locations",
@@ -413,7 +413,7 @@
     "titel_kpi": "Number of infected locations",
     "reference": {
       "href": "/verantwoording#nursing-homes",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -432,7 +432,7 @@
     "titel": "Nursing homes – Number of confirmed cases",
     "barscale_titel": "Number of confirmed cases in nursing homes per day",
     "extra_uitleg": "Number of new confirmed cases in nursing homes that have been reported per day.",
-    "pagina_toelichting": "Number of new confirmed cases in nursing homes that have been reported per day. This number is an estimation of the number confirmed cases in nursing home inhabitants.\n\nThe calculation method has been changed on the 29th of September. Please also see the data explanation section.",
+    "pagina_toelichting": "Number of new confirmed cases in nursing homes that have been reported per day. This number is an estimation of the number confirmed cases in nursing home inhabitants.\n\nThe calculation method has been changed on the 29th of September. Please also see the 'Explanation of the data presented'.",
     "linechart_titel": "Number of confirmed cases among residents over time",
     "barscale_screenreader_text": "{{value}} Number of residents who tested positive (confirmed cases).",
     "titel_sidebar": "Confirmed cases",
@@ -449,7 +449,7 @@
     "titel_kpi": "Number of confirmed cases per day",
     "reference": {
       "href": "/verantwoording#nursing-homes",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -482,7 +482,7 @@
     "titel_kpi": "Mortality per day",
     "reference": {
       "href": "/verantwoording#nursing-homes",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -528,7 +528,7 @@
     "map_tooltip_value": "{{value}} x100 billion",
     "reference": {
       "href": "/verantwoording#sewage-water",
-      "text": "Find out more about testing wastewater for coronavirus in the explanation of data presented."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -730,7 +730,7 @@
     "titel_kpi": "Number of hospital admissions reported on one day. ",
     "reference": {
       "href": "/verantwoording#hospitals",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -865,7 +865,7 @@
     "titel_kpi": "Number of hospital admissions reported on one day. ",
     "reference": {
       "href": "/verantwoording#hospitals",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -916,7 +916,7 @@
     "titel_kpi": "Confirmed cases per day",
     "reference": {
       "href": "/verantwoording#confirmed-cases",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -959,7 +959,7 @@
     "graph_range_description": "Average number of virus particles over time (per 100.000 inhabitants)",
     "reference": {
       "href": "/verantwoording#sewage-water",
-      "text": "Find out more about testing wastewater for coronavirus in the explanation of data presented."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -1069,7 +1069,7 @@
     "linechart_positivetests_legend_label": "GGD tests with a positive result",
     "reference": {
       "href": "/verantwoording#confirmed-cases",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -1188,7 +1188,7 @@
     "titel": "Nursing homes – Confirmed cases in {{safetyRegion}}",
     "barscale_titel": "Number of confirmed cases in nursing homes per day",
     "extra_uitleg": "Number of new confirmed cases in nursing homes that have been reported per day.",
-    "pagina_toelichting": "Number of confirmed cases in nursing homes per day in {{safetyRegion}}. This number is an estimation of the number confirmed cases in nursing home inhabitants.\n\nThe calculation method has been changed on the 29th of September. Please also see the data explanation section.",
+    "pagina_toelichting": "Number of confirmed cases in nursing homes per day in {{safetyRegion}}. This number is an estimation of the number confirmed cases in nursing home inhabitants.\n\nThe calculation method has been changed on the 29th of September. Please also see the 'Explanation of the data presented'.",
     "linechart_titel": "Number of confirmed cases among residents over time",
     "barscale_screenreader_text": "{{value}} Number of residents who tested positive (confirmed cases).",
     "titel_sidebar": "Confirmed cases",
@@ -1204,7 +1204,7 @@
     },
     "reference": {
       "href": "/verantwoording#nursing-homes",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -1320,7 +1320,7 @@
     },
     "reference": {
       "href": "https://coronadashboard.government.nl/verantwoording#gedrag",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -1385,7 +1385,7 @@
     },
     "reference": {
       "href": "https://coronadashboard.government.nl/verantwoording#gedrag",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -1460,7 +1460,7 @@
     "titel_kpi": "Total no. of infected locations",
     "reference": {
       "href": "/verantwoording#disability-care-homes",
-      "text": "Read more in the explanation of the data presented"
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -1491,7 +1491,7 @@
     "titel_kpi": "Disability care homes - daily confirmed cases (residents)",
     "reference": {
       "href": "/verantwoording#disability-care-homes",
-      "text": "Read more in the explanation of the presented data."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -1519,7 +1519,7 @@
     "titel_kpi": "Number of deceased residents",
     "reference": {
       "href": "/verantwoording#disability-care-homes",
-      "text": "Read more in explanation of the data presented"
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -1551,7 +1551,7 @@
     },
     "reference": {
       "href": "/verantwoording#disability-care-homes",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -1578,7 +1578,7 @@
     "titel_sidebar": "Confirmed cases (homes)",
     "reference": {
       "href": "/verantwoording#disability-care-homes",
-      "text": "Read more in explanation of the data presented"
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -1609,7 +1609,7 @@
     },
     "reference": {
       "href": "/verantwoording#disability-care-homes",
-      "text": "Read more in the explanation of the presented data."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -1632,7 +1632,7 @@
       "description": "People aged over 70 are extra vulnerable to coronavirus infection. Keeping track of the number of infections among over-70s who are still living independently in their own homes makes targeted measures possible.",
       "reference": {
         "href": "/verantwoording#thuiswonende-70-plussers",
-        "text": "See the explanation of the data presented."
+        "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
       },
       "bronnen": {
         "rivm": {
@@ -1656,7 +1656,7 @@
       "description": "The number of people over 70 living at home who were reported as deceased due to COVID-19 yesterday.",
       "reference": {
         "href": "/verantwoording#people-over-70-living-at-home",
-        "text": "See the explanation on the data presented."
+        "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
       },
       "bronnen": {
         "rivm": {
@@ -1741,7 +1741,7 @@
       },
       "reference": {
         "href": "/verantwoording#deaths",
-        "text": "Read more in 'explanation of the data presented'."
+        "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
       },
       "kpi_covid_daily_title": "Daily number of COVID-19 patients reported dead ",
       "kpi_covid_daily_description": "This figure shows the number of COVID-19 patients reported dead to the GGD, per day. It includes late reports of deaths that occurred in the preceding days.",
@@ -1796,7 +1796,7 @@
     },
     "reference": {
       "href": "/verantwoording#mortality-monitor-CBS",
-      "text": "Read more in 'explanation of the data presented'"
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "cbs_message": {
       "title": "Mortality in week 8 lower than expected",
@@ -2005,7 +2005,7 @@
     "date_of_insertion_unix": "1613650547",
     "reference": {
       "href": "/verantwoording#vaccination",
-      "text": "Read more about the source of the data on vaccination in the explanation of the presented data."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -2059,11 +2059,11 @@
       "reported_until": "Reported number till {{reportedDate}}",
       "tab_first": {
         "title": "Calculated number",
-        "description": "This figure is a calculation of the total number of vaccine doses that have been administered. The calculation is based on the number of vaccine doses that have been delivered to the locations where injections are given. [Read more about the calculation in the explanation of the presented data.](https://coronadashboard.government.nl/verantwoording#vaccination)"
+        "description": "This figure is a calculation of the total number of vaccine doses that have been administered. The calculation is based on the number of vaccine doses that have been delivered to the locations where injections are given. [Read more about the calculation in the 'Explanation of the data presented'.](https://coronadashboard.government.nl/verantwoording#vaccination)"
       },
       "tab_second": {
         "title": "Reported number",
-        "description": "This is the number of vaccine doses administered reported by GGD-GHOR and LNAZ. [Read more in the explanation of the presented data.](https://coronadashboard.government.nl/verantwoording#vaccination)"
+        "description": "This is the number of vaccine doses administered reported by GGD-GHOR and LNAZ. [Read more in the 'Explanation of the data presented'.](https://coronadashboard.government.nl/verantwoording#vaccination)"
       },
       "estimated": {
         "ggd": "administered by GGDs",
@@ -2164,7 +2164,7 @@
               "report_date": ""
             }
           ],
-          "description_first": "This figure is a calculation of the total number of vaccine doses that have been administered. The calculation is based on the number of vaccine doses that have been delivered to the locations where injections are given. [Read more about the calculation in the explanation of the presented data.](https://coronadashboard.government.nl/verantwoording#vaccination)",
+          "description_first": "This figure is a calculation of the total number of vaccine doses that have been administered. The calculation is based on the number of vaccine doses that have been delivered to the locations where injections are given. [Read more about the calculation in the 'Explanation of the data presented'.](https://coronadashboard.government.nl/verantwoording#vaccination)",
           "description_second": ""
         }
       },
@@ -2644,7 +2644,7 @@
       },
       "reference": {
         "href": "/verantwoording#deaths",
-        "text": "Read more in 'explanation of the data presented'."
+        "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
       },
       "kpi_covid_daily_title": "Daily number of COVID-19 patients reported dead ",
       "kpi_covid_daily_description": "This figure shows the number of COVID-19 patients in this municipality reported dead to the GGD, per day. It includes late reports of deaths that occurred in the preceding days.",
@@ -2662,7 +2662,7 @@
       "description": "The CoronaMelder app has been developed to help fight the spread of coronavirus. The app keeps track of when users have been within close range of one another for a longer period of time. If a CoronaMelder user tests positive for COVID-19, they can choose to alert other app users. App users who get an alert can then get tested and avoid unknowingly infecting others.",
       "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
       "reference": {
-        "text": "Read more about the CoronaMelder app in the explanation of the presented data.",
+        "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’.",
         "href": "/verantwoording#coronamelder"
       },
       "bronnen": {
