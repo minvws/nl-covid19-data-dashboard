@@ -185,6 +185,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                   { href: '/gemeente', text: text.quick_links.links.gemeente },
                 ]}
               />
+              <DataSitemap />
             </CollapsibleButton>
 
             {content.editorial && content.highlight && (
@@ -244,8 +245,6 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                 </Box>
               </TopicalTile>
             </Box>
-
-            <DataSitemap />
 
             <Box pb={4}>
               <TopicalSectionHeader

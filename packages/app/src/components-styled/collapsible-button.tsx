@@ -11,35 +11,55 @@ interface CollapsibleButtonProps {
 }
 
 export function CollapsibleButton({ label, children }: CollapsibleButtonProps) {
-  const { ref, height: contentHeight } = useResizeObserver();
-  const buttonRef = useRef<HTMLButtonElement>(null);
+  const { ref: containerRef, width: containerWidth } = useResizeObserver();
+  const { ref: contentRef, height: contentHeight } = useResizeObserver();
+  const {
+    ref: buttonRef,
+    width: buttonWidth,
+    height: buttonHeight,
+  } = useResizeObserver();
+  // const buttonRef = useRef<HTMLButtonElement>(null);
   const [expanded, setExpanded] = useState(false);
-  const [initialWidth, setInitialWidth] = useState(0);
+  // const [initialWidth, setInitialWidth] = useState(0);
 
-  useEffect(() => {
-    if (buttonRef.current) {
-      setInitialWidth(buttonRef.current.offsetWidth);
-    }
-  }, [buttonRef.current]);
+  // useEffect(() => {
+  //   if (buttonRef.current) {
+  //     setInitialWidth(buttonRef.current.offsetWidth);
+  //   }
+  // }, [buttonRef.current]);
 
+  const expandedHeight =
+    buttonHeight && contentHeight ? buttonHeight + contentHeight : 0;
   return (
-    <Box css={css({ textAlign: 'center' })}>
+    <Box
+      ref={containerRef}
+      css={css({
+        textAlign: 'center',
+        position: 'relative',
+        overflow: 'hidden',
+      })}
+    >
       <Container
-        maxWidth={initialWidth ? initialWidth : undefined}
-        minWidth={expanded ? '100%' : 0}
+        // maxWidth={buttonWidth ? buttonWidth : undefined}
+        minHeight={expanded ? expandedHeight : 0}
+        width="100%"
+        // minWidth={expanded ? '100%' : 0}
       >
         <ExpandButton ref={buttonRef} onClick={() => setExpanded(!expanded)}>
           {label}
           <Chevron expanded={expanded} />
         </ExpandButton>
-
         <Content
           css={css({
-            height: expanded ? contentHeight : 0,
-            width: expanded ? '100%' : 0,
+            // position: 'absolute',
+            top: buttonHeight,
+            // bottom: 0,
+            // zIndex: 1,
+            // right: '0%',
+            // width: containerWidth,
           })}
         >
-          <div ref={ref}>{children}</div>
+          <div ref={contentRef}>{children}</div>
         </Content>
       </Container>
     </Box>
@@ -53,18 +73,19 @@ const Container = styled(Box).attrs({ as: 'section' })(
     flexDirection: 'column',
     padding: 0,
     margin: '0 auto',
-    transitionProperty: 'min-width',
+    transitionProperty: 'min-width, min-height',
     transitionDuration: '0.5s',
     bg: 'tileGray',
+    // overflow: 'hidden',
   })
 );
 
 const Content = styled(Box)(
   css({
-    position: 'relative',
+    position: 'absolute',
     transitionProperty: 'height',
     transitionDuration: '0.5s',
-    overflow: 'hidden',
+    // overflow: 'hidden',
 
     '&::after': {
       content: '""',
@@ -90,6 +111,7 @@ const ExpandButton = styled.button(
     cursor: 'pointer',
     fontWeight: 'bold',
     zIndex: 1,
+    boxSizing: 'border-box',
 
     '&:focus': {
       outlineWidth: '1px',
