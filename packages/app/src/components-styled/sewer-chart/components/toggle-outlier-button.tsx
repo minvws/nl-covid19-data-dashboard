@@ -26,7 +26,6 @@ export function ToggleOutlierButton({
 
 export const StyledToggleOutlierButton = styled.button(
   css({
-    // bg: 'transparent',
     border: 0,
     p: 1,
     color: 'blue',

@@ -207,8 +207,8 @@ export function SewerChart(props: SewerChartProps) {
   const getScatterY = useCallback(
     (x: SewerChartValue) => {
       /**
-       * return default value when we display outliers of the value is lower
-       * than the outlier limit
+       * return default value when we display outliers or when the value is
+       * lower than the outlier limit
        */
       if (displayOutliers || x.value !== outlierLimit) {
         return scales.getY(x);
