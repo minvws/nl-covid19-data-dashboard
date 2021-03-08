@@ -3,8 +3,8 @@ import {
   isDateSpanValue,
   TimestampedValue,
 } from '@corona-dashboard/common';
+import css from '@styled-system/css';
 import styled from 'styled-components';
-import { Box } from '~/components-styled/base';
 import { colors } from '~/style/theme';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { HoveredPoint } from '../logic';
@@ -13,36 +13,41 @@ type LineProps = {
   color: string;
 };
 
-const LabelContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 7px;
-  transform: translate(-50%, 0);
-  width: 100px;
-`;
+const LabelContainer = styled.div({
+  display: 'flex',
+  justifyContent: 'center',
+  marginTop: '7px',
+  transform: 'translate(-50%, 0)',
+  width: 100,
+});
 
-const Label = styled.span`
-  background-color: white;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
-  font-size: 12px;
-  font-weight: bold;
-`;
+const Label = styled.span(
+  css({
+    backgroundColor: 'white',
+    px: '0.5em',
+    fontSize: 12,
+    fontWeight: 'bold',
+  })
+);
 
-const Line = styled.div<LineProps>`
-  width: 1px;
-  height: 100%;
-  border-left-width: 1px;
-  border-left-style: dashed;
-  border-left-color: ${(props) => props.color};
-`;
+const Line = styled.div<LineProps>(
+  css({
+    width: '1px',
+    height: '100%',
+    borderLeftWidth: '1px',
+    borderLeftStyle: 'dashed',
+    borderLeftColor: (props) => props.color,
+  })
+);
 
-const Container = styled.div`
-  position: absolute;
-  pointer-events: none;
-  top: 0;
-  bottom: 0;
-`;
+const Container = styled.div(
+  css({
+    position: 'absolute',
+    pointerEvents: 'none',
+    top: 0,
+    bottom: 0,
+  })
+);
 
 interface DateLineMarkerProps<T extends TimestampedValue> {
   point: HoveredPoint<T>;
