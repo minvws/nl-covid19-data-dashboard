@@ -2693,14 +2693,14 @@
   },
   "choropleth_tooltip": {
     "patients": {
-      "singular": "",
-      "plural": ""
+      "singular": "patient",
+      "plural": "patients"
     },
-    "positive_tested_people": "",
-    "hospital_admissions": "",
-    "infected_locations": "",
-    "elderly_at_home": "",
-    "sewer_regional": ""
+    "positive_tested_people": "Number of confirmed cases:",
+    "hospital_admissions": "Hospital admissions:",
+    "infected_locations": "Infected locations:",
+    "elderly_at_home": "People over 70 living at home:",
+    "sewer_regional": "Average number of virus particles:"
   },
   "section_sterftemonitor_vr": {
     "title": "Sterftemonitor",
