@@ -144,7 +144,7 @@ export interface National {
   corona_melder_app: NlCoronaMelderApp;
   vaccine_delivery: NlVaccineDelivery;
   vaccine_delivery_estimate: NlVaccineEstimateDelivery;
-  vaccine_delivery_estimate_time_span: NlVaccineDeliveryEstimateTimeSpan;
+  vaccine_delivery_estimate_time_span?: NlVaccineDeliveryEstimateTimeSpan;
   vaccine_administered: NlVaccineAdministered;
   vaccine_administered_estimate: NlVaccineAdministeredEstimate;
   vaccine_administered_care_institutions: NlVaccineAdministeredCareInstitutions;
@@ -156,7 +156,7 @@ export interface National {
   vaccine_administered_total: NlVaccineAdministeredTotal;
   vaccine_administered_rate_moving_average: NlVaccineAdministeredRateMovingAverage;
   vaccine_administered_planned: NlVaccineAdministeredPlanned;
-  vaccine_supply: NlVaccineSupply;
+  vaccine_in_stock: NlVaccineInStock;
 }
 export interface NationalDifference {
   tested_overall__infected_per_100k: DifferenceDecimal;
@@ -498,8 +498,8 @@ export interface NlVaccineDeliveryEstimateTimeSpan {
   last_value: NlVaccineDeliveryEstimateTimeSpanValue;
 }
 export interface NlVaccineDeliveryEstimateTimeSpanValue {
-  total: number;
-  duration_weeks: number;
+  doses: number;
+  time_span_weeks: number;
   date_of_insertion_unix: number;
 }
 export interface NlVaccineAdministered {
@@ -618,11 +618,11 @@ export interface NlVaccineAdministeredPlannedValue {
   date_end_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlVaccineSupply {
-  values: NlVaccineSupplyValue[];
-  last_value: NlVaccineSupplyValue;
+export interface NlVaccineInStock {
+  values: NlVaccineInStockValue[];
+  last_value: NlVaccineInStockValue;
 }
-export interface NlVaccineSupplyValue {
+export interface NlVaccineInStockValue {
   doses: number;
   date_of_insertion_unix: number;
   date_unix: number;

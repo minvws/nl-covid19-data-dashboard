@@ -4,16 +4,16 @@
       "title": "nl_vaccine_delivery_estimate_time_span_value",
       "type": "object",
       "required": [
-        "total",
-        "duration_weeks",
+        "doses",
+        "time_span_weeks",
         "date_of_insertion_unix"
       ],
       "additionalProperties": false,
       "properties": {
-        "total": {
+        "doses": {
           "type": "number"
         },
-        "duration_weeks": {
+        "time_span_weeks": {
           "type": "integer"
         },
         "date_of_insertion_unix": {

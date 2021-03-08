@@ -1,7 +1,7 @@
 {
   "definitions": {
     "value": {
-      "title": "nl_vaccine_supply_value",
+      "title": "nl_vaccine_in_stock_value",
       "type": "object",
       "required": [
         "doses",
@@ -23,7 +23,7 @@
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_vaccine_supply",
+  "title": "nl_vaccine_in_stock",
   "type": "object",
   "required": ["values", "last_value"],
   "additionalProperties": false,
