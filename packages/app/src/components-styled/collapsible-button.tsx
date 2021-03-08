@@ -1,6 +1,11 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import css from '@styled-system/css';
 import styled from 'styled-components';
+import {
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
+} from '@reach/disclosure';
 
 import useResizeObserver from 'use-resize-observer';
 import { Box } from './base';
@@ -11,58 +16,25 @@ interface CollapsibleButtonProps {
 }
 
 export function CollapsibleButton({ label, children }: CollapsibleButtonProps) {
-  const { ref: containerRef, width: containerWidth } = useResizeObserver();
   const { ref: contentRef, height: contentHeight } = useResizeObserver();
-  const {
-    ref: buttonRef,
-    width: buttonWidth,
-    height: buttonHeight,
-  } = useResizeObserver();
-  // const buttonRef = useRef<HTMLButtonElement>(null);
-  const [expanded, setExpanded] = useState(false);
-  // const [initialWidth, setInitialWidth] = useState(0);
+  const { ref: buttonRef, height: buttonHeight } = useResizeObserver();
+  const [open, setOpen] = useState(false);
 
-  // useEffect(() => {
-  //   if (buttonRef.current) {
-  //     setInitialWidth(buttonRef.current.offsetWidth);
-  //   }
-  // }, [buttonRef.current]);
-
-  const expandedHeight =
+  const openHeight =
     buttonHeight && contentHeight ? buttonHeight + contentHeight : 0;
   return (
-    <Box
-      ref={containerRef}
-      css={css({
-        textAlign: 'center',
-        position: 'relative',
-        overflow: 'hidden',
-      })}
-    >
-      <Container
-        // maxWidth={buttonWidth ? buttonWidth : undefined}
-        minHeight={expanded ? expandedHeight : 0}
-        width="100%"
-        // minWidth={expanded ? '100%' : 0}
-      >
-        <ExpandButton ref={buttonRef} onClick={() => setExpanded(!expanded)}>
+    <Container minHeight={open ? openHeight : 0}>
+      <Disclosure open={open} onChange={() => setOpen(!open)}>
+        <ExpandButton ref={buttonRef}>
           {label}
-          <Chevron expanded={expanded} />
+          <Chevron open={open} />
         </ExpandButton>
-        <Content
-          css={css({
-            // position: 'absolute',
-            top: buttonHeight,
-            // bottom: 0,
-            // zIndex: 1,
-            // right: '0%',
-            // width: containerWidth,
-          })}
-        >
+
+        <Content style={{ height: open ? contentHeight : 0 }}>
           <div ref={contentRef}>{children}</div>
         </Content>
-      </Container>
-    </Box>
+      </Disclosure>
+    </Container>
   );
 }
 
@@ -76,30 +48,24 @@ const Container = styled(Box).attrs({ as: 'section' })(
     transitionProperty: 'min-width, min-height',
     transitionDuration: '0.5s',
     bg: 'tileGray',
-    // overflow: 'hidden',
+    width: '100%',
   })
 );
 
-const Content = styled(Box)(
+const Content = styled(DisclosurePanel)(
   css({
-    position: 'absolute',
-    transitionProperty: 'height',
+    transitionProperty: 'height, opacity',
     transitionDuration: '0.5s',
-    // overflow: 'hidden',
-
-    '&::after': {
-      content: '""',
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      right: 0,
-      bg: 'lightGray',
-      height: '1px',
+    width: '100%',
+    overflow: 'hidden',
+    opacity: 0,
+    '&[data-state="open"]': {
+      opacity: 1,
     },
   })
 );
 
-const ExpandButton = styled.button(
+const ExpandButton = styled(DisclosureButton)(
   css({
     position: 'relative',
     px: 4,
@@ -111,18 +77,27 @@ const ExpandButton = styled.button(
     cursor: 'pointer',
     fontWeight: 'bold',
     zIndex: 1,
-    boxSizing: 'border-box',
 
     '&:focus': {
       outlineWidth: '1px',
       outlineStyle: 'dashed',
       outlineColor: 'blue',
     },
+
+    '&[data-state="open"]:after': {
+      content: '""',
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      right: 0,
+      bg: 'lightGray',
+      height: '1px',
+    },
   })
 );
 
 const Chevron = styled.div<{
-  expanded: boolean;
+  open: boolean;
 }>((x) =>
   css({
     ml: 2,
@@ -135,6 +110,6 @@ const Chevron = styled.div<{
     display: 'inline-block',
     transitionProperty: 'transform',
     transitionDuration: '0.5s',
-    transform: x.expanded ? 'rotate(-180deg)' : '',
+    transform: x.open ? 'rotate(-180deg)' : '',
   })
 );

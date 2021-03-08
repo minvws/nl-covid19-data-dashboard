@@ -188,6 +188,24 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
               <DataSitemap />
             </CollapsibleButton>
 
+            <Collapsible>
+              <QuickLinks
+                header={text.quick_links.header}
+                links={[
+                  {
+                    href: '/landelijk/vaccinaties',
+                    text: text.quick_links.links.nationaal,
+                  },
+                  {
+                    href: '/veiligheidsregio',
+                    text: text.quick_links.links.veiligheidsregio,
+                  },
+                  { href: '/gemeente', text: text.quick_links.links.gemeente },
+                ]}
+              />
+              <DataSitemap />
+            </Collapsible>
+
             {content.editorial && content.highlight && (
               <Box pt={3}>
                 <TopicalSectionHeader
