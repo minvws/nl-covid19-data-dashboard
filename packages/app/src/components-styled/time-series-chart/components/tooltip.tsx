@@ -13,13 +13,12 @@ import {
 import css from '@styled-system/css';
 import { defaultStyles, TooltipWithBounds } from '@visx/tooltip';
 import styled from 'styled-components';
-import { Box } from '~/components-styled/base';
 import { Heading, InlineText } from '~/components-styled/typography';
 import { VisuallyHidden } from '~/components-styled/visually-hidden';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { useBreakpoints } from '~/utils/useBreakpoints';
-import { SeriesConfig, DataOptions, TimespanAnnotationConfig } from '../logic';
+import { DataOptions, SeriesConfig, TimespanAnnotationConfig } from '../logic';
 
 const tooltipStyles = {
   ...defaultStyles,
@@ -135,7 +134,7 @@ export function DefaultTooltip<T extends TimestampedValue>({
   valueKey: __valueKey,
   config,
   options,
-  timespanAnnotation,
+  timespanAnnotation: __timespanAnnotation,
 }: DefaultTooltipProps<T>) {
   const dateString = getDateStringFromValue(value);
 
@@ -185,14 +184,6 @@ export function DefaultTooltip<T extends TimestampedValue>({
           }
         })}
       </TooltipList>
-      <Heading level={5} my={2}>
-        Debug Info:
-      </Heading>
-      <div>{dateString}</div>
-      <div>Key: {__valueKey}</div>
-      {timespanAnnotation && (
-        <Box color={timespanAnnotation.color}>{timespanAnnotation.label}</Box>
-      )}
     </section>
   );
 }
