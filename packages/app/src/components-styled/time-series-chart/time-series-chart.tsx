@@ -322,6 +322,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
               <DateLineMarker
                 point={hoverState.nearestLinePoint}
                 lineColor={`#5B5B5B`}
+                value={values[hoverState.valuesIndex]}
               />
             )}
             <PointMarkers points={hoverState.rangePoints} />
