@@ -5,6 +5,9 @@
       "type": "object",
       "required": [
         "total",
+        "bio_n_tech_pfizer",
+        "moderna",
+        "astra_zeneca",
         "date_of_insertion_unix",
         "date_start_unix",
         "date_end_unix"
@@ -12,7 +15,16 @@
       "additionalProperties": false,
       "properties": {
         "total": {
-          "type": "number"
+          "type": "integer"
+        },
+        "bio_n_tech_pfizer": {
+          "type": "integer"
+        },
+        "moderna": {
+          "type": "integer"
+        },
+        "astra_zeneca": {
+          "type": "integer"
         },
         "date_of_insertion_unix": {
           "type": "integer"
