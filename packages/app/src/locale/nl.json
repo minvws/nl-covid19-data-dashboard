@@ -1061,9 +1061,9 @@
     "positief_getest_week_titel": "Positief geteste personen",
     "positief_getest_week_uitleg": "Percentage positieve testen in de GGD-teststraten, waarvan de uitslag bekend is. Dit is het gemiddelde over zeven dagen. Voor het berekenen van het percentage worden alleen tests meegeteld waarvan de testuitslag bekend is.",
     "positief_getest_getest_week_uitleg": "Dit zijn {{numerator}} van {{denominator}} tests met een bekende uitslag.",
-    "linechart_percentage_titel": "Percentage positieve testen over tijd",
+    "linechart_percentage_titel": "Percentage positieve testen door de tijd heen",
     "linechart_percentage_toelichting": "Deze grafiek laat het dagelijks percentage GGD-testen zien met een positieve uitslag, ten opzichte van alle GGD-testen van die dag waarvan de uitslag bekend is. De gegevens zijn gesorteerd op de datum waarop de test bij de GGD plaatsvond. Het duurt gemiddeld één tot twee dagen voordat testuitslagen bekend zijn.",
-    "linechart_totaltests_titel": "Aantal testen over tijd",
+    "linechart_totaltests_titel": "Aantal testen door de tijd heen",
     "linechart_totaltests_toelichting": "Deze grafiek laat het dagelijks aantal bekende testuitslagen in de GGD-teststraten over tijd zien, en hoeveel daarvan een positieve uitslag hebben. De gegevens zijn gesorteerd op de datum waarop de test bij de GGD plaatsvond. Het duurt gemiddeld één tot twee dagen voordat testuitslagen bekend zijn.",
     "linechart_totaltests_legend_label": "GGD-testen waarvan uitslag bekend is",
     "linechart_positivetests_legend_label": "GGD-testen met een positieve uitslag",
@@ -1099,9 +1099,9 @@
     "positief_getest_week_titel": "Positief geteste personen",
     "positief_getest_week_uitleg": "Percentage positieve testen in de GGD-teststraten, waarvan de uitslag bekend is. Dit is het gemiddelde over zeven dagen. Voor het berekenen van het percentage worden alleen tests meegeteld waarvan de testuitslag bekend is.",
     "positief_getest_getest_week_uitleg": "Dit zijn {{numerator}} van {{denominator}} geteste personen",
-    "linechart_percentage_titel": "Percentage positieve testen over tijd",
+    "linechart_percentage_titel": "Percentage positieve testen door de tijd heen",
     "linechart_percentage_toelichting": "Deze grafiek laat het dagelijks percentage GGD-testen zien met een positieve uitslag, ten opzichte van alle GGD-testen van die dag waarvan de uitslag bekend is. De gegevens zijn gesorteerd op de datum waarop de test bij de GGD plaatsvond. Het duurt gemiddeld één tot twee dagen voordat testuitslagen bekend zijn.",
-    "linechart_totaltests_titel": "Aantal testen over tijd",
+    "linechart_totaltests_titel": "Aantal testen door de tijd heen",
     "linechart_totaltests_toelichting": "Deze grafiek laat het dagelijks aantal bekende testuitslagen in de GGD-teststraten over tijd zien, en hoeveel daarvan een positieve uitslag hebben. De gegevens zijn gesorteerd op de datum waarop de test bij de GGD plaatsvond. Het duurt gemiddeld één tot twee dagen voordat testuitslagen bekend zijn.",
     "linechart_totaltests_legend_label": "GGD-testen waarvan uitslag bekend is",
     "linechart_positivetests_legend_label": "GGD-testen met een positieve uitslag",
@@ -1377,7 +1377,7 @@
       }
     },
     "basisregels_over_tijd": {
-      "title": "Gedragsregels over tijd",
+      "title": "Gedragsregels door de tijd heen",
       "intro": {
         "compliance": "Deze grafiek toont veranderingen in de loop van de tijd van het percentage van de respondenten dat aangeeft de gedragsregel te volgen in zijn/haar dagelijks leven. ",
         "support": "Deze grafiek toont veranderingen in de loop van de tijd van het percentage van de respondenten dat aangeeft achter de gedragsregel te staan."
@@ -1697,7 +1697,7 @@
       "kpi_daily_description": "Het aantal 70-plussers in deze veiligheidsregio waarvan gisteren is gemeld dat ze besmet zijn met COVID-19.",
       "kpi_daily_per_100k_title": "Aantal positief geteste thuiswonende 70-plussers per dag, per 100.000",
       "kpi_daily_per_100k_description": "Door te berekenen hoeveel thuiswonende 70-plussers in deze regio dagelijks besmet worden per 100.000 70-plussers is vergelijking met andere regio's mogelijk.",
-      "line_chart_daily_title": "Nieuwe besmettingen onder thuiswonenden van 70 jaar of ouder: verloop over tijd",
+      "line_chart_daily_title": "Nieuwe besmettingen onder thuiswonenden van 70 jaar of ouder door de tijd heen",
       "datums": "Laatste waarden verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt."
     },
     "section_deceased": {
@@ -1778,7 +1778,7 @@
       "kpi_covid_daily_description": "Dit getal toont het aantal COVID-19 patiënten in deze veiligheidsregio waarvan aan de GGD op die dag gemeld is dat ze zijn overleden. Een deel van de overlijdens is van eerdere dagen, die later zijn doorgegeven.",
       "kpi_covid_total_title": "Totaal aantal overleden COVID-19 patiënten",
       "kpi_covid_total_description": "Dit getal laat zien van hoeveel COVID-19 patiënten in deze veiligheidsregio in totaal is gemeld dat ze zijn overleden, sinds het begin van de meldingen.",
-      "line_chart_covid_daily_title": "Gemelde aantal overleden COVID-19 patiënten over tijd",
+      "line_chart_covid_daily_title": "Gemelde aantal overleden COVID-19 patiënten door de tijd heen",
       "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel COVID-19 patiënten in deze veiligheidsregio in de geselecteerde periode gemeld is dat ze zijn overleden."
     },
     "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
@@ -2650,7 +2650,7 @@
       "kpi_covid_daily_description": "Dit getal toont het aantal COVID-19 patiënten in deze gemeente waarvan aan de GGD op die dag gemeld is dat ze zijn overleden. Een deel van de overlijdens is van eerdere dagen, die later zijn doorgegeven.",
       "kpi_covid_total_title": "Totaal aantal overleden COVID-19 patiënten",
       "kpi_covid_total_description": "Dit getal laat zien van hoeveel COVID-19 patiënten in deze gemeente in totaal is gemeld dat ze zijn overleden, sinds het begin van de meldingen.",
-      "line_chart_covid_daily_title": "Gemelde aantal overleden COVID-19 patiënten over tijd",
+      "line_chart_covid_daily_title": "Gemelde aantal overleden COVID-19 patiënten door de tijd heen",
       "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel COVID-19 patiënten in deze gemeente in de geselecteerde periode gemeld is dat ze zijn overleden."
     },
     "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
