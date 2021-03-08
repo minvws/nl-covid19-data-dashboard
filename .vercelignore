@@ -1,0 +1,6 @@
+node_modules
+packages/app/public/json
+packages/app/.next
+packages/common/node_modules
+packages/common/dist
+packages/cli/node_modules
