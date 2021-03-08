@@ -10,6 +10,7 @@ import { Fragment } from 'react';
 import styled from 'styled-components';
 import { HoverPoint } from '~/components-styled/area-chart/components/marker';
 import { TimestampedTrendValue } from '~/components-styled/area-chart/logic';
+import { Spacer } from '~/components-styled/base';
 import { InlineText, Text } from '~/components-styled/typography';
 import { AllLanguages } from '~/locale/APP_LOCALE';
 import { formatDateFromSeconds } from '~/utils/formatDate';
@@ -90,9 +91,31 @@ function formatVaccinationsTooltip(
             )}
           </Fragment>
         ))}
+        <Spacer mb={1} />
+        <TooltipListItem color="transparent">
+          <TooltipValueContainer>
+            {text.vaccinaties.data.vaccination_chart
+              .doses_administered_total}:{' '}
+            <strong>{formatNumber(sumSubCategories(values))}</strong>
+          </TooltipValueContainer>
+        </TooltipListItem>
       </TooltipList>
     </>
   );
+}
+
+function sumSubCategories(values: HoverPoint<TooltipValue>[]) {
+  return values.reduce((acc, currentValue) => {
+    const data: any = currentValue.data;
+    if (!data.total) {
+      /**
+       * We're only interested in values with a `data` since
+       * they make up the subcategories, hence this if-statement.
+       */
+      return acc + data[currentValue.label as string];
+    }
+    return 0;
+  }, 0)
 }
 
 function formatLabel(labelKey: string | undefined, text: AllLanguages) {
