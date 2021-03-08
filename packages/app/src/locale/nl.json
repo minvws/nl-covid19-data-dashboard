@@ -413,7 +413,7 @@
     "titel_kpi": "Aantal besmette locaties",
     "reference": {
       "href": "/verantwoording#verpleeghuizen",
-      "text": "Lees meer in de cijferverantwoording."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     },
     "bronnen": {
       "rivm": {
@@ -449,7 +449,7 @@
     "titel_kpi": "Aantal positief geteste bewoners per dag",
     "reference": {
       "href": "/verantwoording#verpleeghuizen",
-      "text": "Lees meer in de cijferverantwoording."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     },
     "bronnen": {
       "rivm": {
@@ -482,7 +482,7 @@
     "titel_kpi": "Sterfte per dag",
     "reference": {
       "href": "/verantwoording#verpleeghuizen",
-      "text": "Lees meer in de cijferverantwoording."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     },
     "bronnen": {
       "rivm": {
@@ -528,7 +528,7 @@
     "map_tooltip_value": "{{value}} x100 miljard",
     "reference": {
       "href": "/verantwoording#rioolwater",
-      "text": "Lees meer over het onderzoek naar het coronavirus in rioolwater in de cijferverantwoording."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     },
     "bronnen": {
       "rivm": {
@@ -730,7 +730,7 @@
     "titel_kpi": "Het aantal ziekenhuisopnames dat op één dag gemeld is.",
     "reference": {
       "href": "/verantwoording#ziekenhuizen",
-      "text": "Lees meer over het tellen van ziekenhuisopnames en het verschil tussen diverse databronnen in de cijferverantwoording."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     },
     "bronnen": {
       "rivm": {
@@ -780,7 +780,7 @@
     },
     "reference": {
       "href": "/verantwoording#positieve-testen",
-      "text": "Lees meer in de cijferverantwoording."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     },
     "bronnen": {
       "rivm": {
@@ -823,7 +823,7 @@
     "rwzi_abbrev": "",
     "reference": {
       "href": "/verantwoording#rioolwater",
-      "text": "Lees meer over het onderzoek naar het coronavirus in rioolwater in de cijferverantwoording."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     },
     "bronnen": {
       "rivm": {
@@ -865,7 +865,7 @@
     "titel_kpi": "Het aantal ziekenhuisopnames dat op één dag gemeld is.",
     "reference": {
       "href": "/verantwoording#ziekenhuizen",
-      "text": "Lees meer over het tellen van ziekenhuisopnames en het verschil tussen diverse databronnen in de cijferverantwoording."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     },
     "bronnen": {
       "rivm": {
