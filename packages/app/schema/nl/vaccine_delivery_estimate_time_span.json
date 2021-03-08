@@ -11,7 +11,7 @@
       "additionalProperties": false,
       "properties": {
         "doses": {
-          "type": "number"
+          "type": "integer"
         },
         "time_span_weeks": {
           "type": "integer"
