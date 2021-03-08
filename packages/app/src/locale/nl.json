@@ -105,7 +105,7 @@
     "titel_kpi": "Gemiddeld aantal intensive care-opnames over 3 dagen",
     "reference": {
       "href": "/verantwoording#intensive-care",
-      "text": "Lees meer in de cijferverantwoording."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     },
     "kpi_titel": "Gemiddeld aantal intensive care-opnames over 3 dagen"
   },
@@ -134,7 +134,7 @@
     "titel_kpi": "Patiënten met eerste melding van COVID-19 klachten bij de huisarts",
     "reference": {
       "href": "/verantwoording#huisartsen",
-      "text": "Lees meer in de cijferverantwoording."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     },
     "bronnen": {
       "nivel": {
@@ -202,7 +202,7 @@
     "titel_kpi": "Het aantal ziekenhuisopnames dat op één dag gemeld is.",
     "reference": {
       "href": "/verantwoording#ziekenhuizen",
-      "text": "Lees meer over het tellen van ziekenhuisopnames en het verschil tussen diverse databronnen in de cijferverantwoording."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     },
     "tijdelijk_onbeschikbaar_titel": "",
     "tijdelijk_onbeschikbaar": "",
@@ -254,7 +254,7 @@
     "titel_kpi": "Positief geteste mensen per dag",
     "reference": {
       "href": "/verantwoording#positieve-testen",
-      "text": "Lees meer in de cijferverantwoording."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     },
     "bronnen": {
       "rivm": {
@@ -292,7 +292,7 @@
     "titel_kpi": "Aantal besmettelijke mensen",
     "reference": {
       "href": "/verantwoording#besmettelijke-mensen",
-      "text": "Lees meer in de cijferverantwoording."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     },
     "bronnen": {
       "rivm": {
@@ -329,7 +329,7 @@
     "titel_kpi": "Meest recente reproductiegetal",
     "reference": {
       "href": "/verantwoording#reproductiegetal",
-      "text": "Lees meer in de cijferverantwoording."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     },
     "bronnen": {
       "rivm": {
@@ -392,7 +392,7 @@
       "text": "RIVM"
     },
     "titel": "Verpleeghuiszorg – Besmette locaties",
-    "pagina_toelichting": "Dit getal is een inschatting van het aantal nieuwe verpleeghuislocaties waar sprake is van tenminste een COVID-19 besmetting op basis van een positieve test.\n\nDe rekenmethode is per 29 september verbeterd. Zie ook de cijferverantwoording.",
+    "pagina_toelichting": "Dit getal is een inschatting van het aantal nieuwe verpleeghuislocaties waar sprake is van tenminste een COVID-19 besmetting op basis van een positieve test.\n\nDe rekenmethode is per 29 september verbeterd. Zie ook de 'Uitleg bij de cijfers'.",
     "barscale_titel": "Aantal nieuwe locaties per dag",
     "barscale_toelichting": "Aantal nieuwe locaties waarbij ten minste één bewoner positief getest is. Een verpleeghuis telt mee als ‘nieuwe locatie’ als er een nieuwe besmetting is vastgesteld, terwijl in de voorgaande 28 dagen – dit is twee keer de incubatietijd – geen bewoners positief waren getest.",
     "kpi_titel": "Totaal aantal besmette locaties",
@@ -432,7 +432,7 @@
     "titel": "Verpleeghuiszorg – Aantal positief geteste bewoners",
     "barscale_titel": "Aantal positief geteste bewoners in verpleeghuizen per dag",
     "extra_uitleg": "Aantal nieuwe positief geteste bewoners in verpleeghuizen dat per dag gemeld is.",
-    "pagina_toelichting": "Aantal nieuwe positief geteste bewoners in verpleeghuizen dat per dag is gemeld. Dit getal is een inschatting van het aantal gemelde bewoners in verpleeghuizen dat in Nederland positief getest is en COVID-19 heeft.\n\nDe rekenmethode is per 29 september verbeterd. Zie ook de cijferverantwoording.",
+    "pagina_toelichting": "Aantal nieuwe positief geteste bewoners in verpleeghuizen dat per dag is gemeld. Dit getal is een inschatting van het aantal gemelde bewoners in verpleeghuizen dat in Nederland positief getest is en COVID-19 heeft.\n\nDe rekenmethode is per 29 september verbeterd. Zie ook de 'Uitleg bij de cijfers'.",
     "linechart_titel": "Aantal positief geteste bewoners door de tijd heen",
     "barscale_screenreader_text": "{{value}} positief geteste bewoners.",
     "titel_sidebar": "Positief geteste bewoners",
@@ -916,7 +916,7 @@
     "titel_kpi": "Positief geteste mensen per dag",
     "reference": {
       "href": "/verantwoording#positieve-testen",
-      "text": "Lees meer in de cijferverantwoording."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     },
     "bronnen": {
       "rivm": {
@@ -959,7 +959,7 @@
     "graph_range_description": "Gemiddeld aantal virusdeeltjes door de tijd heen (per 100.000 inwoners)",
     "reference": {
       "href": "/verantwoording#rioolwater",
-      "text": "Lees meer over het onderzoek naar het coronavirus in rioolwater in de cijferverantwoording."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     },
     "bronnen": {
       "rivm": {
@@ -1069,7 +1069,7 @@
     "linechart_positivetests_legend_label": "GGD-testen met een positieve uitslag",
     "reference": {
       "href": "/verantwoording#positieve-testen",
-      "text": "Lees meer in de cijferverantwoording."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     },
     "bronnen": {
       "rivm": {
@@ -1107,7 +1107,7 @@
     "linechart_positivetests_legend_label": "GGD-testen met een positieve uitslag",
     "reference": {
       "href": "/verantwoording#positieve-testen",
-      "text": "Lees meer in de cijferverantwoording."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     },
     "bronnen": {
       "rivm": {
@@ -1138,7 +1138,7 @@
     },
     "reference": {
       "href": "/verantwoording#verpleeghuizen",
-      "text": "Lees meer in de cijferverantwoording."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     },
     "bronnen": {
       "rivm": {
@@ -1155,7 +1155,7 @@
       "text": "RIVM"
     },
     "titel": "Verpleeghuiszorg - Aantal besmette locaties in {{safetyRegion}}",
-    "pagina_toelichting": "Dit getal is een inschatting van het aantal nieuwe verpleeghuislocaties waar sprake is van tenminste een COVID-19 besmetting op basis van een positieve test.\n\nDe rekenmethode is per 29 september verbeterd. Zie ook de cijferverantwoording.",
+    "pagina_toelichting": "Dit getal is een inschatting van het aantal nieuwe verpleeghuislocaties waar sprake is van tenminste een COVID-19 besmetting op basis van een positieve test.\n\nDe rekenmethode is per 29 september verbeterd. Zie ook de 'Uitleg bij de cijfers'.",
     "barscale_titel": "Aantal nieuwe locaties per dag",
     "barscale_toelichting": "Aantal nieuwe locaties waarbij ten minste één bewoner positief getest is. Een verpleeghuis telt mee als ‘nieuwe locatie’ als er een nieuwe besmetting is vastgesteld, terwijl in de voorgaande 28 dagen – dit is twee keer de incubatietijd – geen bewoners positief waren getest.",
     "kpi_titel": "Totaal aantal besmette locaties",
@@ -1169,7 +1169,7 @@
     "titel_sidebar": "Verpleeghuiszorg",
     "reference": {
       "href": "/verantwoording#verpleeghuizen",
-      "text": "Lees meer in de cijferverantwoording."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     },
     "bronnen": {
       "rivm": {
@@ -1188,7 +1188,7 @@
     "titel": "Verpleeghuiszorg – Aantal positief geteste bewoners in {{safetyRegion}}",
     "barscale_titel": "Aantal positief geteste bewoners in verpleeghuizen per dag",
     "extra_uitleg": "Aantal nieuwe positief geteste bewoners in verpleeghuizen dat per dag gemeld is.",
-    "pagina_toelichting": "Aantal positief geteste bewoners in verpleeghuizen per dag in {{safetyRegion}}. Dit getal is een inschatting van het aantal gemelde bewoners in verpleeghuizen dat in Nederland positief getest is en COVID-19 heeft.\n\nDe rekenmethode is per 29 september verbeterd. Zie ook de cijferverantwoording.",
+    "pagina_toelichting": "Aantal positief geteste bewoners in verpleeghuizen per dag in {{safetyRegion}}. Dit getal is een inschatting van het aantal gemelde bewoners in verpleeghuizen dat in Nederland positief getest is en COVID-19 heeft.\n\nDe rekenmethode is per 29 september verbeterd. Zie ook de 'Uitleg bij de cijfers'.",
     "linechart_titel": "Aantal positief geteste bewoners door de tijd heen",
     "barscale_screenreader_text": "{{value}} positief geteste bewoners.",
     "titel_sidebar": "Positief geteste bewoners",
@@ -1204,7 +1204,7 @@
     },
     "reference": {
       "href": "/verantwoording#verpleeghuizen",
-      "text": "Lees meer in de cijferverantwoording."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     },
     "bronnen": {
       "rivm": {
@@ -1320,7 +1320,7 @@
     },
     "reference": {
       "href": "https://coronadashboard.rijksoverheid.nl/verantwoording#gedrag",
-      "text": "Lees meer in de cijferverantwoording."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     },
     "bronnen": {
       "rivm": {
@@ -1385,7 +1385,7 @@
     },
     "reference": {
       "href": "https://coronadashboard.rijksoverheid.nl/verantwoording#gedrag",
-      "text": "Lees meer in de cijferverantwoording."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     },
     "bronnen": {
       "rivm": {
@@ -1460,7 +1460,7 @@
     "titel_kpi": "Aantal besmette locaties",
     "reference": {
       "href": "/verantwoording#gehandicaptenzorg",
-      "text": "Lees meer in de cijferverantwoording."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     },
     "bronnen": {
       "rivm": {
@@ -1491,7 +1491,7 @@
     "titel_kpi": "Aantal positief geteste bewoners van gehandicapteninstellingen per dag",
     "reference": {
       "href": "/verantwoording#gehandicaptenzorg",
-      "text": "Lees meer in de cijferverantwoording."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     },
     "bronnen": {
       "rivm": {
@@ -1519,7 +1519,7 @@
     "titel_kpi": "Aantal overleden personen",
     "reference": {
       "href": "/verantwoording#gehandicaptenzorg",
-      "text": "Lees meer in de cijferverantwoording."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     },
     "bronnen": {
       "rivm": {
@@ -1551,7 +1551,7 @@
     },
     "reference": {
       "href": "/verantwoording#gehandicaptenzorg",
-      "text": "Lees meer in de cijferverantwoording."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     },
     "bronnen": {
       "rivm": {
@@ -1578,7 +1578,7 @@
     "titel_sidebar": "Besmettelijke locaties",
     "reference": {
       "href": "/verantwoording#gehandicaptenzorg",
-      "text": "Lees meer in de cijferverantwoording."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     },
     "bronnen": {
       "rivm": {
@@ -1609,7 +1609,7 @@
     },
     "reference": {
       "href": "/verantwoording#gehandicaptenzorg",
-      "text": "Lees meer in de cijferverantwoording."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     },
     "bronnen": {
       "rivm": {
@@ -1632,7 +1632,7 @@
       "description": "Personen van 70 jaar of ouder zijn extra kwetsbaar bij een besmetting met het coronavirus. Door zicht te houden op het aantal besmettingen onder deze groep kunnen de juiste maatregelen genomen worden om het virus in te dammen. Het gaat hierbij alleen om zelfstandig wonende 70-plussers.",
       "reference": {
         "href": "/verantwoording#thuiswonende-70-plussers",
-        "text": "Lees meer in de cijferverantwoording."
+        "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
       },
       "bronnen": {
         "rivm": {
@@ -1656,7 +1656,7 @@
       "description": "Aantal thuiswonende personen van 70 jaar of ouder waarvan gisteren is gemeld dat ze zijn overleden aan COVID-19.",
       "reference": {
         "href": "/verantwoording#thuiswonende-70-plussers",
-        "text": "Lees meer in de cijferverantwoording."
+        "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
       },
       "bronnen": {
         "rivm": {
@@ -1684,7 +1684,7 @@
       "description": "Personen van 70 jaar of ouder zijn extra kwetsbaar bij een besmetting met het coronavirus. Door zicht te houden op het aantal besmettingen onder deze groep kunnen de juiste maatregelen genomen worden om het virus in te dammen. Het gaat hierbij alleen om zelfstandig wonende 70-plussers.",
       "reference": {
         "href": "/verantwoording#thuiswonende-70-plussers",
-        "text": "Lees meer in de cijferverantwoording."
+        "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
       },
       "bronnen": {
         "rivm": {
@@ -1705,7 +1705,7 @@
       "description": "Aantal thuiswonende personen van 70 jaar of ouder in deze veiligheidsregio die zijn overleden aan COVID-19, per dag.",
       "reference": {
         "href": "/verantwoording#thuiswonende-70-plussers",
-        "text": "Lees meer in de cijferverantwoording."
+        "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
       },
       "bronnen": {
         "rivm": {
@@ -1741,7 +1741,7 @@
       },
       "reference": {
         "href": "/verantwoording#sterfte",
-        "text": "Lees meer in de cijferverantwoording."
+        "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
       },
       "kpi_covid_daily_title": "Gemelde aantal overleden COVID-19 patiënten per dag",
       "kpi_covid_daily_description": "Dit getal toont het aantal COVID-19 patiënten waarvan aan de GGD op die dag gemeld is dat ze zijn overleden. Een deel van de overlijdens is van eerdere dagen, die later zijn doorgegeven.",
@@ -1772,7 +1772,7 @@
       },
       "reference": {
         "href": "/verantwoording#sterfte",
-        "text": "Lees meer in de cijferverantwoording."
+        "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
       },
       "kpi_covid_daily_title": "Gemelde aantal overleden COVID-19 patiënten per dag",
       "kpi_covid_daily_description": "Dit getal toont het aantal COVID-19 patiënten in deze veiligheidsregio waarvan aan de GGD op die dag gemeld is dat ze zijn overleden. Een deel van de overlijdens is van eerdere dagen, die later zijn doorgegeven.",
@@ -1796,7 +1796,7 @@
     },
     "reference": {
       "href": "/verantwoording#sterftemonitor-CBS",
-      "text": "Lees meer in de cijferverantwoording."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     },
     "cbs_message": {
       "title": "Sterfte lager dan verwacht in week 8",
@@ -2005,7 +2005,7 @@
     "date_of_insertion_unix": "1613650547",
     "reference": {
       "href": "/verantwoording#vaccinatie",
-      "text": "Lees meer over de bron van de vaccinatiecijfers in de cijferverantwoording."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     },
     "bronnen": {
       "rivm": {
@@ -2059,11 +2059,11 @@
       "reported_until": "Gemeld aantal tot en met {{reportedDate}}",
       "tab_first": {
         "title": "Berekend aantal",
-        "description": "Dit getal is een rekenkundige aanname van hoeveel prikken in totaal zijn gezet. De GGD-cijfers worden gemeld door de GGD-GHOR en de ziekenhuiscijfers door het LNAZ. Voor de langdurige zorginstellingen maakt het RIVM een berekening door te kijken naar hoeveel vaccins er zijn bezorgd bij priklocaties. [Lees meer over de berekening in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)"
+        "description": "Dit getal is een rekenkundige aanname van hoeveel prikken in totaal zijn gezet. De GGD-cijfers worden gemeld door de GGD-GHOR en de ziekenhuiscijfers door het LNAZ. Voor de langdurige zorginstellingen maakt het RIVM een berekening door te kijken naar hoeveel vaccins er zijn bezorgd bij priklocaties. [Lees meer over de berekening in de 'Uitleg bij de cijfers'.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)"
       },
       "tab_second": {
         "title": "Gemeld aantal",
-        "description": "Dit getal laat zien hoeveel prikken zijn gemeld door GGD-GHOR en LNAZ. [Lees meer over de registratie in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)"
+        "description": "Dit getal laat zien hoeveel prikken zijn gemeld door GGD-GHOR en LNAZ. [Lees meer over de registratie in de 'Uitleg bij de cijfers'.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)"
       },
       "estimated": {
         "ggd": "gezet door GGD'en",
@@ -2127,7 +2127,7 @@
             "report_date": ""
           }
         ],
-        "description_first": "Dit getal laat zien hoeveel prikken zijn gemeld door GGD-GHOR en LNAZ. [Lees meer over de registratie in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)",
+        "description_first": "Dit getal laat zien hoeveel prikken zijn gemeld door GGD-GHOR en LNAZ. [Lees meer over de registratie in de 'Uitleg bij de cijfers'.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)",
         "description_second": "",
         "warning": "",
         "first_tab_title": "Berekend aantal",
@@ -2164,7 +2164,7 @@
               "report_date": ""
             }
           ],
-          "description_first": "Dit getal is een berekening van hoeveel prikken in totaal zijn gezet. De GGD-cijfers worden gemeld door de GGD-GHOR en de ziekenhuiscijfers door het LNAZ. Voor de langdurige zorginstellingen en huisartsenpraktijken maakt het RIVM een berekening door te kijken naar de hoeveelheid vaccins die zijn bezorgd bij priklocaties. [Lees meer over de berekening in de cijferverantwoording.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)",
+          "description_first": "Dit getal is een berekening van hoeveel prikken in totaal zijn gezet. De GGD-cijfers worden gemeld door de GGD-GHOR en de ziekenhuiscijfers door het LNAZ. Voor de langdurige zorginstellingen en huisartsenpraktijken maakt het RIVM een berekening door te kijken naar de hoeveelheid vaccins die zijn bezorgd bij priklocaties. [Lees meer over de berekening in de 'Uitleg bij de cijfers'.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)",
           "description_second": ""
         }
       },
@@ -2644,7 +2644,7 @@
       },
       "reference": {
         "href": "/verantwoording#sterfte",
-        "text": "Lees meer in de cijferverantwoording."
+        "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
       },
       "kpi_covid_daily_title": "Gemelde aantal overleden COVID-19 patiënten per dag",
       "kpi_covid_daily_description": "Dit getal toont het aantal COVID-19 patiënten in deze gemeente waarvan aan de GGD op die dag gemeld is dat ze zijn overleden. Een deel van de overlijdens is van eerdere dagen, die later zijn doorgegeven.",
@@ -2662,7 +2662,7 @@
       "description": "Om verspreiding van het coronavirus tegen te gaan, is de app CoronaMelder ontwikkeld. Deze app houdt bij wanneer gebruikers van de app langere tijd bij elkaar in de buurt zijn geweest. Wanneer een gebruiker van de CoronaMelder postitief test op COVID-19 kan (met hulp van de GGD) een waarschuwing worden verzonden naar andere appgebruikers die in de buurt zijn geweest. Zij kunnen zich dan laten testen en zo voorkomen dat ze onbewust andere mensen besmetten.",
       "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
       "reference": {
-        "text": "Lees meer over de CoronaMelder-app in de cijferverantwoording.",
+        "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’.",
         "href": "/verantwoording#coronamelder"
       },
       "bronnen": {
@@ -2715,7 +2715,7 @@
     },
     "reference": {
       "href": "/verantwoording#sterftemonitor-CBS",
-      "text": "Lees meer in de cijferverantwoording."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     }
   }
 }
