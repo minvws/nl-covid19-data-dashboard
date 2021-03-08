@@ -780,7 +780,7 @@
     },
     "reference": {
       "href": "/verantwoording#confirmed-cases",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -823,7 +823,7 @@
     "rwzi_abbrev": "",
     "reference": {
       "href": "/verantwoording#sewage-water",
-      "text": "Find out more about testing wastewater for coronavirus in the explanation of data presented."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -1107,7 +1107,7 @@
     "linechart_positivetests_legend_label": "GGD tests with a positive result",
     "reference": {
       "href": "/verantwoording#confirmed-cases",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -1138,7 +1138,7 @@
     },
     "reference": {
       "href": "/verantwoording#nursing-homes",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -1155,7 +1155,7 @@
       "text": "RIVM"
     },
     "titel": "Nursing homes – Total number of infected locations in {{safetyRegion}}",
-    "pagina_toelichting": "This number is an estimation of the number of new nursing home locations where there is at least one confirmed case.\n\nThe calculation method has been changed on the 29th of September. Please also see the data explanation section.",
+    "pagina_toelichting": "This number is an estimation of the number of new nursing home locations where there is at least one confirmed case.\n\nThe calculation method has been changed on the 29th of September. Please also see the 'Explanation of the data presented'.",
     "barscale_titel": "Number of new locations per day",
     "barscale_toelichting": "Number of new locations where there is at least one confirmed case. A nursing home is counted as a 'new location; when there have not been any confirmed cases for at least 28 days, which is twice the incubation period.",
     "kpi_titel": "Total no. of infected locations",
@@ -1169,7 +1169,7 @@
     "titel_sidebar": "Nursing homes",
     "reference": {
       "href": "/verantwoording#nursing-homes",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -1684,7 +1684,7 @@
       "description": "People aged over 70 are extra vulnerable to coronavirus infection. Keeping track of the number of infections among over-70s who are still living independently in their own homes makes targeted measures possible.",
       "reference": {
         "href": "/verantwoording#people-over-70-living-at-home",
-        "text": "Read more in explanation of the data presented"
+        "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
       },
       "bronnen": {
         "rivm": {
@@ -1705,7 +1705,7 @@
       "description": "Number of over-70s living at home in this region deceased due to COVID-19, per day.",
       "reference": {
         "href": "/verantwoording#people-over-70-living-at-home",
-        "text": "Read more in explanation of the data presented."
+        "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
       },
       "bronnen": {
         "rivm": {
@@ -1772,7 +1772,7 @@
       },
       "reference": {
         "href": "/verantwoording#deaths",
-        "text": "Read more in 'explanation of the data presented'."
+        "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
       },
       "kpi_covid_daily_title": "Daily number of COVID-19 patients reported dead ",
       "kpi_covid_daily_description": "This figure shows the number of COVID-19 patients in this safety region reported dead to the GGD, per day. It includes late reports of deaths that occurred in the preceding days.",
