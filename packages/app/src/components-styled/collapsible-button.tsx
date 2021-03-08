@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import {
@@ -19,6 +19,26 @@ export function CollapsibleButton({ label, children }: CollapsibleButtonProps) {
   const { ref: contentRef, height: contentHeight } = useResizeObserver();
   const { ref: buttonRef, height: buttonHeight } = useResizeObserver();
   const [open, setOpen] = useState(false);
+  const panelRef = useRef<HTMLDivElement>(null);
+
+  /**
+   * Collapsed content should not be accessible using the tab functionality.
+   */
+  const setLinkTabability = useCallback(
+    (open) => {
+      if (!panelRef.current) {
+        return;
+      }
+
+      const links = panelRef.current?.querySelectorAll('a');
+      Array.from(links).forEach((link) => {
+        link.setAttribute('tabindex', open ? '0' : '-1');
+      });
+    },
+    [panelRef]
+  );
+
+  useEffect(() => setLinkTabability(open), [setLinkTabability, open]);
 
   const openHeight =
     buttonHeight && contentHeight ? buttonHeight + contentHeight : 0;
@@ -30,17 +50,7 @@ export function CollapsibleButton({ label, children }: CollapsibleButtonProps) {
             minWidth={open ? '100%' : 0}
             css={css({
               '&::after': {
-                content: '""',
-                position: 'absolute',
-                zIndex: 0,
-                top: 0,
-                bottom: 0,
-                left: 0,
-                right: 0,
-                bg: 'tileGray',
                 minHeight: open ? openHeight : 0,
-                transitionProperty: 'min-height',
-                transitionDuration: '0.5s',
               },
             })}
           >
@@ -50,7 +60,7 @@ export function CollapsibleButton({ label, children }: CollapsibleButtonProps) {
             </ExpandButton>
           </Background>
         </Box>
-        <Content style={{ height: open ? contentHeight : 0 }}>
+        <Content ref={panelRef} style={{ height: open ? contentHeight : 0 }}>
           <div ref={contentRef}>{children}</div>
         </Content>
       </Disclosure>
@@ -65,6 +75,19 @@ const Background = styled(Box)(
     margin: '0 auto',
     transitionProperty: 'min-width, min-height',
     transitionDuration: '0.5s',
+
+    '&::after': {
+      content: '""',
+      position: 'absolute',
+      zIndex: 0,
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
+      bg: 'tileGray',
+      transitionProperty: 'min-height',
+      transitionDuration: '0.5s',
+    },
   })
 );
 
