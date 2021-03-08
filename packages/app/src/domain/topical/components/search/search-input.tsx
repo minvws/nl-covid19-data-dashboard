@@ -53,7 +53,7 @@ export function SearchInput() {
 }
 
 export const paddedStyle = css({
-  p: ['1rem', null, null, '1.5rem'],
+  p: '1rem',
   px: [ICON_SPACE, null, null, ICON_SPACE_LARGE],
 });
 

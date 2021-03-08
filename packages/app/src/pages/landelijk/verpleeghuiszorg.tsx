@@ -189,6 +189,9 @@ const NursingHomeCare: FCWithLayout<typeof getStaticProps> = ({
               metricProperty: 'infected_locations_total',
             },
           ]}
+          padding={{
+            left: 35,
+          }}
         />
 
         <ContentHeader
