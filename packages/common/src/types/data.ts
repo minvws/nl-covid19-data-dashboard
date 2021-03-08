@@ -154,6 +154,7 @@ export interface National {
   vaccine_administered_lnaz: NlVaccineAdministeredLnaz;
   vaccine_administered_total: NlVaccineAdministeredTotal;
   vaccine_administered_rate_moving_average: NlVaccineAdministeredRateMovingAverage;
+  vaccine_in_stock_weekly: NlVaccineInStockWeekly;
   vaccine_administered_planned: NlVaccineAdministeredPlanned;
 }
 export interface NationalDifference {
@@ -487,6 +488,9 @@ export interface NlVaccineEstimateDelivery {
 }
 export interface NlVaccineDeliveryEstimateValue {
   total: number;
+  bio_n_tech_pfizer: number;
+  moderna: number;
+  astra_zeneca: number;
   date_of_insertion_unix: number;
   date_start_unix: number;
   date_end_unix: number;
@@ -596,6 +600,19 @@ export interface NlVaccineAdministeredRateMovingAverageValue {
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
+}
+export interface NlVaccineInStockWeekly {
+  values: NlVaccineInStockWeeklyValue[];
+  last_value: NlVaccineInStockWeeklyValue;
+}
+export interface NlVaccineInStockWeeklyValue {
+  total: number;
+  bio_n_tech_pfizer: number;
+  moderna: number;
+  astra_zeneca: number;
+  date_of_insertion_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
 }
 export interface NlVaccineAdministeredPlanned {
   values: NlVaccineAdministeredPlannedValue[];
