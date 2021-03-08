@@ -65,11 +65,11 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
-  text: locale,
+  text: siteText,
   content,
   data,
 }) => {
-  const text = locale.vaccinaties;
+  const text = siteText.vaccinaties;
   const [selectedTab, setSelectedTab] = useState(
     text.gezette_prikken.tab_first.title
   );
@@ -345,7 +345,9 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
         <ChartTile
           title={text.grafiek_draagvlak.titel}
           description={text.grafiek_draagvlak.omschrijving}
-          ariaDescription={locale.accessibility.grafieken.vaccinatie_draagvlak}
+          ariaDescription={
+            siteText.accessibility.grafieken.vaccinatie_draagvlak
+          }
           metadata={{
             date: data.vaccine_support.last_value.date_of_insertion_unix,
             source: text.bronnen.rivm,
@@ -423,7 +425,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                 ]}
                 formatTooltip={({ value, valueKey, config }) => (
                   <VaccineSupportTooltip
-                    locale={locale}
+                    locale={siteText}
                     value={value}
                     valueKey={valueKey}
                     config={config}
