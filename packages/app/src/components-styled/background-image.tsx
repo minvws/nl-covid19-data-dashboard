@@ -1,5 +1,5 @@
 import css from '@styled-system/css';
-import styled, { CSSProperties } from 'styled-components';
+import { CSSProperties } from 'styled-components';
 import { getImageProps } from '~/lib/sanity';
 import { ImageBlock } from '~/types/cms';
 import { SanityImage } from './cms/sanity-image';
@@ -13,9 +13,7 @@ interface BackgroundImageProps {
   className?: string;
 }
 
-export const BackgroundImage = styled(BackgroundImageUnstyled)``;
-
-function BackgroundImageUnstyled({
+export function BackgroundImage({
   height,
   image,
   sizes,
