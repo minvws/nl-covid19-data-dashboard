@@ -1801,7 +1801,7 @@
     "cbs_message": {
       "title": "Mortality in week 8 lower than expected",
       "published_text": "Date of publication: Friday 5 March",
-      "message": "IIn week 8 (22 to 28 February inclusive), estimated mortality stood at more than 3,200. This number is lower than expected for this period and nearly 300 down on the previous week (3,491). There were mainly fewer deaths among people aged 80 and over and among long-term care users. Statistics Netherlands (CBS) reports this based on the provisional weekly figures on mortality. Since week 39 of 2020, weekly mortality has been higher than expected. In week 7, the number of deaths was more or less the same as the expected mortality for this period. Estimated mortality for week 8 is more than 200 deaths below the expected number for this period. The National Institute for Public Health and the Environment (RIVM) registered 205 COVID-19 deaths in week 8 (as at 2 March).",
+      "message": "In week 8 (22 to 28 February inclusive), estimated mortality stood at more than 3,200. This number is lower than expected for this period and nearly 300 down on the previous week (3,491). There were mainly fewer deaths among people aged 80 and over and among long-term care users. Statistics Netherlands (CBS) reports this based on the provisional weekly figures on mortality. Since week 39 of 2020, weekly mortality has been higher than expected. In week 7, the number of deaths was more or less the same as the expected mortality for this period. Estimated mortality for week 8 is more than 200 deaths below the expected number for this period. The National Institute for Public Health and the Environment (RIVM) registered 205 COVID-19 deaths in week 8 (as at 2 March).",
       "link": {
         "href": "https://www.cbs.nl/en-gb/news/2021/09/mortality-in-week-8-lower-than-expected",
         "text": "Read the full news item on the CBS website"
@@ -2704,13 +2704,13 @@
   },
   "section_sterftemonitor_vr": {
     "title": "Sterftemonitor",
-    "description": "Het Centraal Bureau voor de Statistiek (CBS) publiceert wekelijks het totaal aantal overleden mensen in Nederland en vergelijkt dit aantal met het verwacht aantal overlijdens gecorrigeerd voor koude- of hittegolven, uitbraken en epidemieën. Er is sprake van oversterfte indien meer mensen overlijden dan verwacht. Deze grafiek geeft mogelijk een completer beeld van sterfte door COVID-19 dan de door de GGD’en gemelde COVID-19 sterfte, omdat niet alle mensen die overlijden aan COVID-19 getest zijn op COVID-19. ",
+    "description": "Every week the national office Statistics Netherlands (CBS) publishes data on the total number of deaths and compares this to the predicted number of deaths, corrected for extreme temperatures, epidemics, etc. If more deaths occur than predicted, these are considered excess deaths. This graph may show a more complete picture of COVID-19 related deaths than the numbers reported by the GGD because not everyone who dies from COVID-19 has been tested for it.",
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "bronnen": {
       "cbs": {
-        "href": "https://www.cbs.nl/nl-nl/cijfers/detail/70895ned",
+        "href": "https://mlzopendata.cbs.nl/#/MLZ/nl/dataset/40080NED",
         "text": "CBS",
-        "download": "https://opendata.cbs.nl/ODataApi/odata/70895ned/TypedDataSet?$filter=((Geslacht eq '1100')) and ((LeeftijdOp31December eq '10000')) and (substringof('W', Perioden) eq true)&$select=Perioden, Overledenen_1"
+        "download": "https://dataderden.cbs.nl/ODataApi/OData/40080NED/TypedDataSet?$filter=(substringof(%272020W%27,%20Perioden)%20eq%20true)%20or%20(substringof(%272021W%27,%20Perioden)%20eq%20true)%20and%20(substringof(%27VR%27,%20RegioS)%20eq%20true)&$select=Perioden,%20RegioS,%20Overledenen_1"
       }
     },
     "reference": {
