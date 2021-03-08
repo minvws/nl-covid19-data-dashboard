@@ -2696,7 +2696,8 @@
     "hospital_admissions": "",
     "infected_locations": "",
     "elderly_at_home": "",
-    "sewer_regional": ""
+    "sewer_regional": "",
+    "sewer_municipal": ""
   },
   "milestones": {
     "toon_meer": "Show earlier events",
