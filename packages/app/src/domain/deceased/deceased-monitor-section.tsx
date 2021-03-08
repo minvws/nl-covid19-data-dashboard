@@ -1,20 +1,17 @@
-import CoronaVirusIcon from '~/assets/coronavirus.svg';
-import { AnchorTile } from '~/components-styled/anchor-tile';
-import { Box } from '~/components-styled/base';
-import { ChartTile } from '~/components-styled/chart-tile';
-import { ContentHeader } from '~/components-styled/content-header';
-import { Legend } from '~/components-styled/legend';
-import siteText from '~/locale/index';
 import {
   NationalDeceasedCbs,
   RegionalDeceasedCbs,
 } from '@corona-dashboard/common';
+import { AnchorTile } from '~/components-styled/anchor-tile';
+import { Box } from '~/components-styled/base';
+import { ChartTile } from '~/components-styled/chart-tile';
+import { Legend } from '~/components-styled/legend';
+import siteText from '~/locale/index';
 import { colors } from '~/style/theme';
 
 const text = siteText.section_sterftemonitor;
 
 export function DeceasedMonitorSection({
-  data,
   showDataMessage,
 }: {
   data: NationalDeceasedCbs | RegionalDeceasedCbs;
@@ -22,22 +19,6 @@ export function DeceasedMonitorSection({
 }) {
   return (
     <>
-      <ContentHeader
-        title={text.title}
-        icon={<CoronaVirusIcon />}
-        subtitle={text.description}
-        reference={text.reference}
-        metadata={{
-          datumsText: text.datums,
-          dateOrRange: {
-            start: data.last_value.date_start_unix,
-            end: data.last_value.date_end_unix,
-          },
-          dateOfInsertionUnix: data.last_value.date_of_insertion_unix,
-          dataSources: [text.bronnen.cbs],
-        }}
-      />
-
       {showDataMessage && (
         <AnchorTile
           title={text.cbs_message.title}

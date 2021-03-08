@@ -5,7 +5,6 @@ on:
     types: [opened, synchronize, reopened, closed]
   push:
     branches:
-      - master
       - develop
 
 jobs:
@@ -14,11 +13,17 @@ jobs:
     runs-on: ubuntu-latest
     name: Trigger deploy preview
     steps:
+      - uses: haya14busa/action-cond@v1
+        id: condval
+        with:
+          cond: ${{ github.ref == 'refs/heads/develop' }}
+          if_true: "develop"
+          if_false: "${{github.head_ref}}"
       - name: Push POST request
         uses: muinmomin/webhook-action@v1.0.0
         with:
           url: ${{ secrets.TRIGGER_BRANCH_DEPLOY }}
-          data: '{"branchName": "${{github.head_ref}}"}'
+          data: '{"branchName": "${{steps.condval.outputs.value}}"}'
 
   deploy_preview_trigger_removal:
     if: (github.event_name == 'pull_request' && github.event.action == 'closed') && startsWith(github.head_ref, 'lokalise-') == false

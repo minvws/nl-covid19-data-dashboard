@@ -90,9 +90,7 @@ function useSearchContextValue<T extends Element>(
   const { hits, vrHits, gmHits } = useSearchResults(term);
 
   const showResults =
-    hasHadInputFocus &&
-    !!term &&
-    (hasInputFocus || hasHitFocus || !breakpoints.md);
+    hasHadInputFocus && (hasInputFocus || hasHitFocus || !breakpoints.md);
 
   const { focusRef, focusIndex, setFocusIndex } = useHitSelection({
     numberOfHits: hits.length,

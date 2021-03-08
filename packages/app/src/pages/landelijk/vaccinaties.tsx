@@ -7,13 +7,11 @@ import {
 import { css } from '@styled-system/css';
 import { ParentSize } from '@visx/responsive';
 import { useState } from 'react';
-import VaccinatieIcon from '~/assets/vaccinaties.svg';
 import { AreaChart } from '~/components-styled/area-chart';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
 import { ChartTile } from '~/components-styled/chart-tile';
-import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { Legend } from '~/components-styled/legend';
@@ -26,13 +24,14 @@ import { InlineText, Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import { VaccineSupportTooltip } from '~/domain/vaccine/components/vaccine-support-tooltip';
+import { createDeliveryTooltipFormatter } from '~/domain/vaccine/create-delivery-tooltip-formatter';
 import {
   MilestonesView,
   MilestoneViewProps,
 } from '~/domain/vaccine/milestones-view';
-import { createDeliveryTooltipFormatter } from '~/domain/vaccine/create-delivery-tooltip-formatter';
 import { useVaccineDeliveryData } from '~/domain/vaccine/use-vaccine-delivery-data';
 import { useVaccineNames } from '~/domain/vaccine/use-vaccine-names';
+import { VaccinePageIntroduction } from '~/domain/vaccine/vaccine-page-introduction';
 import siteText from '~/locale/index';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { vaccineMilestonesQuery } from '~/queries/vaccine-milestones-query';
@@ -97,20 +96,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
         description={text.metadata.description}
       />
       <TileList>
-        <ContentHeader
-          category={locale.nationaal_layout.headings.vaccinaties}
-          title={text.title}
-          icon={<VaccinatieIcon />}
-          subtitle={text.description}
-          reference={text.reference}
-          metadata={{
-            datumsText: text.datums,
-            dateOrRange: data.vaccine_administered_total.last_value.date_unix,
-            dateOfInsertionUnix:
-              data.vaccine_administered_total.last_value.date_of_insertion_unix,
-            dataSources: [],
-          }}
-        />
+        <VaccinePageIntroduction data={data} text={text} />
 
         <ArticleStrip articles={content.highlight.articles} />
 

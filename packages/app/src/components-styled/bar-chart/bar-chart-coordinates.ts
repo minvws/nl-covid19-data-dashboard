@@ -51,7 +51,7 @@ function generateBarChartCoordinates(
   const spacing = {
     top: 0,
     right: 0,
-    bottom: 50, // used for x axis values and label
+    bottom: 54, // used for x axis values and label
     left: 108, // for y axis labels
   };
 
@@ -61,7 +61,7 @@ function generateBarChartCoordinates(
   const barsHeight = values.length * 35;
   const height = barsHeight + spacing.top + spacing.bottom;
 
-  const numTicks = 10;
+  const numTicks = width > 400 ? 10 : 6;
 
   const getValue = (value: BarChartValue): number => value.value;
   const getLabel = (value: BarChartValue): string => value.label;

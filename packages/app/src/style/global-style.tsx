@@ -119,4 +119,15 @@ figure {
 p {
   margin-top: 0;
 }
+
+@media (prefers-reduced-motion) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  * {
+    transition-duration: 0 !important;
+    transition: none !important;
+  }
+}
 `;
