@@ -53,11 +53,11 @@ export function useLegendItems<T extends TimestampedValue>(
     }
 
     /**
-     * In current charts we only show a legend if there are more then 1 items. So
+     * In current charts we only show a legend if there are more than 1 items. So
      * for example a line plus an date span annotation. If it's just one line
      * then no legend is displayed, so in that case we return an empty array.
      *
-     * This prevents is from having to manually set (and possibly forget to set)
+     * This prevents us from having to manually set (and possibly forget to set)
      * a boolean on the chart props.
      */
     return items.length > 1 ? items : [];
