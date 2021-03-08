@@ -283,8 +283,17 @@ export function SewerChart(props: SewerChartProps) {
 
             {lineTooltip.point && (
               <Bar
-                x={lineTooltip.point.x - 4}
-                width={8}
+                x={
+                  lineTooltip.datum.dateStartMs
+                    ? scales.xScale(lineTooltip.datum.dateStartMs)
+                    : lineTooltip.point.x - 4
+                }
+                width={
+                  lineTooltip.datum.dateStartMs
+                    ? scales.xScale(lineTooltip.datum.dateEndMs) -
+                      scales.xScale(lineTooltip.datum.dateStartMs)
+                    : 8
+                }
                 height={dimensions.bounds.height}
                 fill="rgba(192, 232, 252, 0.5)"
                 css={css({
@@ -384,13 +393,21 @@ export function SewerChart(props: SewerChartProps) {
           </Group>
         </svg>
 
-        {lineTooltip.datum && lineTooltip.point && (
+        {lineTooltip.datum && (
           <DateTooltip
             bounds={{ left: 0, top: 0, right: width, bottom: height }}
             x={lineTooltip.point.x + dimensions.padding.left}
             y={dimensions.bounds.height + dimensions.padding.top + 2}
           >
-            {formatDate(lineTooltip.datum?.dateMs)}
+            {lineTooltip.datum.dateStartMs ? (
+              <>
+                {formatDate(lineTooltip.datum.dateStartMs, 'axis')}
+                {' – '}
+                {formatDate(lineTooltip.datum.dateEndMs, 'axis')}
+              </>
+            ) : (
+              formatDate(lineTooltip.datum.dateMs, 'axis')
+            )}
           </DateTooltip>
         )}
 
@@ -406,7 +423,10 @@ export function SewerChart(props: SewerChartProps) {
             y={lineTooltip.point.y + dimensions.padding.top}
           >
             <Box display="inline-block">
-              <b>{lineTooltip.datum.value} per 100.000</b>
+              <b>
+                {formatNumber(lineTooltip.datum.value)} per{' '}
+                {formatNumber(100_000)}
+              </b>
             </Box>{' '}
             {siteText.common.inwoners}
           </Tooltip>
