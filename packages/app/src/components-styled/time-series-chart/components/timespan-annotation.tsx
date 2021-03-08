@@ -29,8 +29,6 @@ export function TimespanAnnotation({
   const x0 = getX({ __date_unix: clippedStart });
   const x1 = getX({ __date_unix: clippedEnd });
 
-  // console.log('clipped domain', clippedStart, clippedEnd);
-  // console.log('x0 x1', x0, x1);
   /**
    * Here we do not have to calculate where the dates fall on the x-axis because
    * the unix timestamps are used directly for the xScale.
@@ -40,6 +38,13 @@ export function TimespanAnnotation({
   if (width <= 0) return null;
 
   return (
-    <Bar height={height} x={x0} width={width} fill={color} opacity={0.2} />
+    <Bar
+      pointerEvents="none"
+      height={height}
+      x={x0}
+      width={width}
+      fill={color}
+      opacity={0.2}
+    />
   );
 }

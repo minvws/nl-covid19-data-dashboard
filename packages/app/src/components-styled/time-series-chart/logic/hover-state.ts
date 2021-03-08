@@ -8,6 +8,7 @@ import { bisectCenter } from 'd3-array';
 import { ScaleLinear } from 'd3-scale';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import { isDefined } from 'ts-is-present';
+import { TimespanAnnotationConfig } from './common';
 import {
   SeriesConfig,
   SeriesDoubleValue,
@@ -30,6 +31,7 @@ interface UseHoverStateArgs<T extends TimestampedValue> {
   paddingLeft: number;
   xScale: ScaleLinear<number, number>;
   yScale: ScaleLinear<number, number>;
+  timespanAnnotations?: TimespanAnnotationConfig[];
 }
 
 interface HoverState<T> {
@@ -37,13 +39,14 @@ interface HoverState<T> {
   linePoints: HoveredPoint<T>[];
   rangePoints: HoveredPoint<T>[];
   nearestLinePoint: HoveredPoint<T>;
+  timespanAnnotationIndex?: number;
 }
 
 type Event = React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>;
 
 export type HoverHandler = (event: Event, seriesIndex?: number) => void;
 
-type UseHoveStateResponse<T> = [HoverHandler, HoverState<T> | undefined];
+type UseHoverStateResponse<T> = [HoverHandler, HoverState<T> | undefined];
 
 export function useHoverState<T extends TimestampedValue>({
   values,
@@ -52,7 +55,8 @@ export function useHoverState<T extends TimestampedValue>({
   paddingLeft,
   xScale,
   yScale,
-}: UseHoverStateArgs<T>): UseHoveStateResponse<T> {
+  timespanAnnotations,
+}: UseHoverStateArgs<T>): UseHoverStateResponse<T> {
   const [hoverState, setHoverState] = useState<HoverState<T>>();
   const timeoutRef = useRef<any>();
 
@@ -187,10 +191,59 @@ export function useHoverState<T extends TimestampedValue>({
         (a, b) => Math.abs(a.y - mousePoint.y) - Math.abs(b.y - mousePoint.y)
       )[0];
 
-      setHoverState({ valuesIndex, linePoints, rangePoints, nearestLinePoint });
+      const timespanAnnotationIndex = timespanAnnotations
+        ? findActiveTimespanAnnotationIndex(
+            values[valuesIndex],
+            timespanAnnotations
+          )
+        : undefined;
+
+      setHoverState({
+        valuesIndex,
+        linePoints,
+        rangePoints,
+        nearestLinePoint,
+        timespanAnnotationIndex,
+      });
     },
-    [bisect, values, seriesConfig, seriesList, xScale, yScale]
+    [
+      bisect,
+      values,
+      seriesConfig,
+      seriesList,
+      xScale,
+      yScale,
+      timespanAnnotations,
+    ]
   );
 
   return [handleHover, hoverState];
+}
+
+function findActiveTimespanAnnotationIndex(
+  hoveredValue: TimestampedValue,
+  timespanAnnotations: TimespanAnnotationConfig[]
+) {
+  const valueSpanStart = isDateValue(hoveredValue)
+    ? hoveredValue.date_unix
+    : hoveredValue.date_start_unix;
+
+  const valueSpanEnd = isDateValue(hoveredValue)
+    ? hoveredValue.date_unix
+    : hoveredValue.date_end_unix;
+
+  /**
+   * Loop over the annotations and see if the hovered value falls within its
+   * timespan. By assuming these timespans never overlap, we can exist on the
+   * first match and return a single index.
+   */
+  for (const [index, annotation] of [...timespanAnnotations].entries()) {
+    /**
+     * Tesing overlap of two ranges
+     * x1 <= y2 && y1 <= x2
+     */
+    if (valueSpanStart <= annotation.end && annotation.start <= valueSpanEnd) {
+      return index;
+    }
+  }
 }

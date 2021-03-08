@@ -74,8 +74,8 @@ export type { SeriesConfig } from './logic';
  *
  * @TODO
  *
- * - Include props for background rectangle aka date span annotation
- * - Finish RangeTrend component
+ * - Render date start /end on x-axis for date spans series
+ * - Configure y-axis for standard charts
  *
  * Known Issues:
  * - Nearest point / tooltip valueKey calculation seems to be off by some
@@ -91,7 +91,15 @@ export type TimeSeriesChartProps<T extends TimestampedValue> = {
   height?: number;
   timeframe?: TimeframeOption;
   formatTooltip?: TooltipFormatter<T>;
-  numTicks?: number;
+  /**
+   * The number of grid lines also by default determines the number of y-axis
+   * ticks, but the number of ticks can be overruled with specific tick values
+   * via the tickValues prop.
+   *
+   * This way you can also have many more grid lines than tick values, like in
+   * the vaccine support chart.
+   */
+  numGridLines?: number;
   tickValues?: number[];
   showDateMarker?: boolean;
   paddingLeft?: number;
@@ -111,7 +119,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
   timeframe = 'all',
   formatTooltip,
   dataOptions = {},
-  numTicks = 3,
+  numGridLines = 3,
   tickValues,
   showDateMarker,
   paddingLeft,
@@ -128,16 +136,16 @@ export function TimeSeriesChart<T extends TimestampedValue>({
   } = useTooltip<TooltipData<T>>();
 
   const {
-    annotation,
+    valueAnnotation,
     isPercentage,
     forcedMaximumValue,
     benchmark,
-    timespanAnnotations: dateSpanAnnotations,
+    timespanAnnotations,
   } = dataOptions;
 
   const { padding, bounds } = useDimensions(width, height, paddingLeft);
 
-  const legendItems = useLegendItems(seriesConfig);
+  const legendItems = useLegendItems(seriesConfig, dataOptions);
 
   const seriesList = useSeriesList(values, seriesConfig, timeframe);
 
@@ -152,10 +160,10 @@ export function TimeSeriesChart<T extends TimestampedValue>({
 
   const { xScale, yScale, getX, getY, getY0, getY1, dateSpanWidth } = useScales(
     {
-      seriesList,
+      values,
       maximumValue: seriesMax,
       bounds,
-      numTicks: tickValues?.length || numTicks,
+      numTicks: tickValues?.length || numGridLines,
     }
   );
 
@@ -166,11 +174,16 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     seriesList,
     xScale,
     yScale,
+    timespanAnnotations,
   });
 
   useEffect(() => {
     if (hoverState) {
-      const { nearestLinePoint: nearestPoint, valuesIndex } = hoverState;
+      const {
+        nearestLinePoint: nearestPoint,
+        valuesIndex,
+        timespanAnnotationIndex,
+      } = hoverState;
 
       showTooltip({
         tooltipData: {
@@ -185,9 +198,15 @@ export function TimeSeriesChart<T extends TimestampedValue>({
           config: seriesConfig,
           options: dataOptions,
           /**
-           * @TODO add hovered annotation index
+           * Pass the full annotation data. We could just pass the index because
+           * dataOptions is already being passed, but it's cumbersome to have to
+           * dig up the annotation from the array in the tooltip logic.
            */
-          timespanAnnotationIndex: -42,
+          timespanAnnotation:
+            isDefined(dataOptions.timespanAnnotations) &&
+            isDefined(timespanAnnotationIndex)
+              ? dataOptions.timespanAnnotations[timespanAnnotationIndex]
+              : undefined,
         },
         tooltipLeft: nearestPoint.x,
         tooltipTop: nearestPoint.y,
@@ -199,7 +218,9 @@ export function TimeSeriesChart<T extends TimestampedValue>({
 
   return (
     <Box>
-      {annotation && <ValueAnnotation mb={2}>{annotation}</ValueAnnotation>}
+      {valueAnnotation && (
+        <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
+      )}
 
       <Box position="relative">
         <ChartContainer
@@ -210,6 +231,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
         >
           <Axes
             bounds={bounds}
+            numGridLines={numGridLines}
             yTickValues={tickValues}
             xScale={xScale}
             yScale={yScale}
@@ -236,8 +258,8 @@ export function TimeSeriesChart<T extends TimestampedValue>({
             onMouseLeave={handleHover}
           />
 
-          {dateSpanAnnotations &&
-            dateSpanAnnotations.map((x, index) => (
+          {timespanAnnotations &&
+            timespanAnnotations.map((x, index) => (
               <TimespanAnnotation
                 key={index}
                 start={x.start}

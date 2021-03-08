@@ -1,5 +1,5 @@
 export interface DataOptions {
-  annotation?: string;
+  valueAnnotation?: string;
   forcedMaximumValue?: number;
   isPercentage?: boolean;
   benchmark?: {

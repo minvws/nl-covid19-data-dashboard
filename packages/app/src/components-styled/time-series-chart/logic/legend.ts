@@ -1,18 +1,18 @@
 import { TimestampedValue } from '@corona-dashboard/common';
+import { transparentize } from 'polished';
 import { useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { LegendItem } from '~/components-styled/legend';
+import { colors } from '~/style/theme';
+import { DataOptions } from './common';
 import { SeriesConfig } from './series';
 
 export function useLegendItems<T extends TimestampedValue>(
-  config: SeriesConfig<T>
-  /**
-   * @TODO pass date span annotations so we can include them in the legenda
-   */
-  //dateSpanAnnotations: DateSpanAnnotation[]
+  config: SeriesConfig<T>,
+  dataOptions: DataOptions
 ) {
   const legendItems = useMemo(() => {
-    return config
+    const items = config
       .map((x) => {
         switch (x.type) {
           case 'line':
@@ -36,19 +36,32 @@ export function useLegendItems<T extends TimestampedValue>(
         }
       })
       .filter(isDefined);
-  }, [config]);
 
-  /**
-   * @TODO add the other legend items that come from annotations
-   */
+    /**
+     * Add annotations to the legend
+     */
+    if (dataOptions.timespanAnnotations) {
+      for (const annotation of dataOptions.timespanAnnotations) {
+        items.push({
+          color: annotation.color
+            ? transparentize(0.7, annotation.color)
+            : colors.data.emphasis,
+          label: annotation.label,
+          shape: 'square',
+        } as LegendItem);
+      }
+    }
 
-  /**
-   * In current charts we only show a legend if there are more then 1 items. So
-   * for example a line plus an date span annotation. If it's just one line
-   * then no legend is displayed, so in that case we return an empty array.
-   *
-   * This prevents is from having to manually set (and possibly forget to set)
-   * a boolean on the chart props.
-   */
-  return legendItems.length > 1 ? legendItems : [];
+    /**
+     * In current charts we only show a legend if there are more then 1 items. So
+     * for example a line plus an date span annotation. If it's just one line
+     * then no legend is displayed, so in that case we return an empty array.
+     *
+     * This prevents is from having to manually set (and possibly forget to set)
+     * a boolean on the chart props.
+     */
+    return items.length > 1 ? items : [];
+  }, [config, dataOptions]);
+
+  return legendItems;
 }

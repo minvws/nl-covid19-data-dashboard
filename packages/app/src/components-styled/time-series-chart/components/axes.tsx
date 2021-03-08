@@ -14,13 +14,19 @@ import { colors } from '~/style/theme';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { Bounds } from '../logic';
 
-const NUM_TICKS = 20;
-
 type AxesProps = {
   bounds: Bounds;
   xScale: ScaleLinear<number, number>;
   yScale: ScaleLinear<number, number>;
   isPercentage?: boolean;
+  /**
+   * The number of grid lines are by default linked to the number of y-axis
+   * ticks. By setting tick values, you overrule that number for the ticks, so
+   * you can have less labelled ticks than the number of total grid lines. For
+   * example the vaccine_support chart uses 20 grid lines but 5 of those get a
+   * label.
+   */
+  numGridLines: number;
   yTickValues?: number[];
 };
 
@@ -32,6 +38,7 @@ const formatYAxisPercentage = (y: number) => `${formatPercentage(y)}%`;
 type AnyTickFormatter = (value: any) => string;
 
 export const Axes = memo(function Axes({
+  numGridLines,
   bounds,
   isPercentage,
   yTickValues,
@@ -41,15 +48,23 @@ export const Axes = memo(function Axes({
   return (
     <>
       <GridRows
+        /**
+         * Lighter gray grid lines are used for the lines that have no label on
+         * the y-axis
+         */
         scale={yScale}
         width={bounds.width}
-        numTicks={NUM_TICKS}
+        numTicks={numGridLines}
         stroke="#E4E4E4"
       />
       <GridRows
+        /**
+         * Darker gray grid lines are used for the lines that also have a label
+         * on the y-axis.
+         */
         scale={yScale}
         width={bounds.width}
-        numTicks={5}
+        numTicks={yTickValues?.length || numGridLines}
         tickValues={yTickValues}
         stroke={colors.silver}
       />
@@ -73,6 +88,7 @@ export const Axes = memo(function Axes({
       <AxisLeft
         scale={yScale}
         tickValues={yTickValues}
+        numTicks={yTickValues?.length || numGridLines}
         hideTicks
         hideAxisLine
         stroke={colors.silver}
