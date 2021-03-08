@@ -304,7 +304,7 @@
     "kpi_titel": "Number of infectious people"
   },
   "reproductiegetal": {
-    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
+    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated twice per week.",
     "rangeLegendLabel": "Confidence interval",
     "lineLegendLabel": "Effective R",
     "bron": {
@@ -312,7 +312,7 @@
       "text": "RIVM"
     },
     "legenda_r": "The reproduction number is not an exact value but a reliable estimate. Reproduction numbers (R) using data from less than two weeks ago are not reliable, therefore, the line depicting R stops at a date two weeks in the past. ",
-    "legenda_marge": "The confidence interval shows the range between which the number R falls. This is updated on a weekly basis.",
+    "legenda_marge": "The confidence interval shows the range between which the number R falls. This is updated twice per week.",
     "reproductie_explainer_alt": "Image to support the explanation above",
     "titel": "Reproduction number",
     "pagina_toelichting": "The reproduction number shows how fast the virus is spreading. The number shows how many people are on average infected by one patient with COVID-19.",
@@ -2704,17 +2704,17 @@
   },
   "section_sterftemonitor_vr": {
     "title": "",
-    "description": "",
+    "description": "Every week the national office Statistics Netherlands (CBS) publishes data on the total number of deaths and compares this to the predicted number of deaths, corrected for extreme temperatures, epidemics, etc. If more deaths occur than predicted, these are considered excess deaths. This graph may show a more complete picture of COVID-19 related deaths than the numbers reported by the GGD because not everyone who dies from COVID-19 has been tested for it.",
     "datums": "",
     "bronnen": {
       "cbs": {
-        "href": "",
-        "text": "",
-        "download": ""
+        "href": "https://mlzopendata.cbs.nl/#/MLZ/nl/dataset/40080NED",
+        "text": "CBS",
+        "download": "https://dataderden.cbs.nl/ODataApi/OData/40080NED/TypedDataSet?$filter=(substringof(%272020W%27,%20Perioden)%20eq%20true)%20or%20(substringof(%272021W%27,%20Perioden)%20eq%20true)%20and%20(substringof(%27VR%27,%20RegioS)%20eq%20true)&$select=Perioden,%20RegioS,%20Overledenen_1"
       }
     },
     "reference": {
-      "href": "",
+      "href": "/verantwoording#sterftemonitor-CBS",
       "text": ""
     }
   }
