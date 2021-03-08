@@ -395,7 +395,7 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
           hideFill={true}
           showLegend
           padding={{
-            left: 45,
+            left: 50,
           }}
           values={dataGgdDailyValues}
           linesConfig={[
