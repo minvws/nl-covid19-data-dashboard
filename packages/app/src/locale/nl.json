@@ -2281,6 +2281,9 @@
       "risicokaart": {
         "titel": "De risicokaart van Nederland"
       },
+      "positief_getest_kaart": {
+        "titel": "Positief geteste mensen in Nederland"
+      },
       "meer_lezen": {
         "titel": "Meer lezen over het coronavirus",
         "omschrijving": "Hier vindt u geregeld nieuwe berichten die allerlei zaken rondom de coronacijfers uitleggen.",

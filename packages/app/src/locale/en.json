@@ -2281,6 +2281,9 @@
       "risicokaart": {
         "titel": "Risk level map of the Netherlands"
       },
+      "positief_getest_kaart": {
+        "titel": "Positively tested people in the Netherlands"
+      },
       "meer_lezen": {
         "titel": "More information about the coronavirus",
         "omschrijving": "Here you will regularly find new articles that explain the figures on the corona virus.",

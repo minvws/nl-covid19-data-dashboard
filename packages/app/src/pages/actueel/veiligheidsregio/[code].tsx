@@ -1,8 +1,15 @@
+import css from '@styled-system/css';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import GetestIcon from '~/assets/test.svg';
 import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
 import { ArticleSummary } from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
+import {
+  ChartRegionControls,
+  RegionControlOption,
+} from '~/components-styled/chart-region-controls';
+import { ChoroplethLegenda } from '~/components-styled/choropleth-legenda';
 import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
 import { HighlightTeaserProps } from '~/components-styled/highlight-teaser';
@@ -11,11 +18,16 @@ import { QuickLinks } from '~/components-styled/quick-links';
 import { RiskLevelIndicator } from '~/components-styled/risk-level-indicator';
 import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
-import { Heading } from '~/components-styled/typography';
+import { Heading, Text } from '~/components-styled/typography';
 import { VisuallyHidden } from '~/components-styled/visually-hidden';
 import { WarningTile } from '~/components-styled/warning-tile';
+import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
+import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
+import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
+import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
+import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/create-positive-tested-people-regional-tooltip';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
 import { FCWithLayout, getDefaultLayout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
@@ -26,6 +38,7 @@ import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-e
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
 import { TopicalChoroplethContainer } from '~/domain/topical/topical-choropleth-container';
+import { TopicalChoroplethTile } from '~/domain/topical/topical-choropleth-layout';
 import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
 import { topicalPageQuery } from '~/queries/topical-page-query';
@@ -47,7 +60,11 @@ export const getStaticProps = createGetStaticProps(
   getText,
   getVrData,
   createGetChoroplethData({
-    vr: ({ escalation_levels }) => ({ escalation_levels }),
+    vr: ({ escalation_levels, tested_overall }) => ({
+      escalation_levels,
+      tested_overall,
+    }),
+    gm: ({ tested_overall }) => ({ tested_overall }),
   }),
   createGetContent<{
     articles: ArticleSummary[];
@@ -65,6 +82,10 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
 
   const dataInfectedTotal = data.tested_overall;
   const dataHospitalIntake = data.hospital_nice;
+
+  const [selectedMap, setSelectedMap] = useState<RegionControlOption>(
+    'municipal'
+  );
 
   return (
     <>
@@ -254,6 +275,70 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
                 </Box>
               </TopicalTile>
             </Box>
+
+            <TopicalChoroplethTile
+              title={
+                siteText.common_actueel.secties.positief_getest_kaart.titel
+              }
+              choropleth={
+                <>
+                  {selectedMap === 'municipal' && (
+                    <MunicipalityChoropleth
+                      data={choropleth.gm}
+                      metricName="tested_overall"
+                      metricProperty="infected_per_100k"
+                      tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
+                        siteText.choropleth_tooltip.positive_tested_people,
+                        regionThresholds.tested_overall.infected_per_100k,
+                        createSelectMunicipalHandler(
+                          router,
+                          'positief-geteste-mensen'
+                        )
+                      )}
+                      onSelect={createSelectMunicipalHandler(
+                        router,
+                        'positief-geteste-mensen'
+                      )}
+                    />
+                  )}
+                  {selectedMap === 'region' && (
+                    <SafetyRegionChoropleth
+                      data={choropleth.vr}
+                      metricName="tested_overall"
+                      metricProperty="infected_per_100k"
+                      tooltipContent={createPositiveTestedPeopleRegionalTooltip(
+                        siteText.choropleth_tooltip.positive_tested_people,
+                        regionThresholds.tested_overall.infected_per_100k,
+                        createSelectRegionHandler(
+                          router,
+                          'positief-geteste-mensen'
+                        )
+                      )}
+                      onSelect={createSelectRegionHandler(
+                        router,
+                        'positief-geteste-mensen'
+                      )}
+                    />
+                  )}
+                </>
+              }
+            >
+              <Text css={css({ maxWidth: 350 })}>
+                {siteText.positief_geteste_personen.map_toelichting}
+              </Text>
+              <Box mb={5}>
+                <ChartRegionControls
+                  value={selectedMap}
+                  onChange={setSelectedMap}
+                />
+              </Box>
+              <ChoroplethLegenda
+                thresholds={regionThresholds.tested_overall.infected_per_100k}
+                title={
+                  siteText.positief_geteste_personen.chloropleth_legenda.titel
+                }
+              />
+            </TopicalChoroplethTile>
 
             <DataSitemap />
 
