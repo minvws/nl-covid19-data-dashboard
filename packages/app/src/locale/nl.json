@@ -266,7 +266,7 @@
   },
   "besmettelijke_personen": {
     "title": "Aantal besmettelijke mensen",
-    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt twee keer per week bijgewerkt.",
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/097155aa-75eb-4caa-8ed3-4c6edb80467e",
       "text": "RIVM"
@@ -304,7 +304,7 @@
     "kpi_titel": "Aantal besmettelijke mensen"
   },
   "reproductiegetal": {
-    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt twee keer per week bijgewerkt.",
     "rangeLegendLabel": "Onzekerheidsmarge",
     "lineLegendLabel": "Effectieve R",
     "bron": {
