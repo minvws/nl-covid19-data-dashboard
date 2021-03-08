@@ -111,24 +111,18 @@ export function getImageProps<T extends ImageBlock>(
 
   if (asset.extension !== 'svg') {
     /**
-     * We can provide a specific set of options called sizes, which maps viewport widths to image widths.
-     * Passing this sizes option will override the default behavior
+     * The following srcset attribute will tell the browser which image-widths
+     * are available.
      */
-    if (sizesOption) {
-      srcSet = sizesOption
-        .map((srcSetSize) => {
-          const [viewport, size] = srcSetSize;
-          return `${getImageSrc(asset, size)} ${viewport}w`;
-        })
-        .join(', ');
-    } else {
-      // Map viewports and sizes 1-on-1
-      srcSet = imageResizeTargets
-        .map((size) => `${getImageSrc(asset, size)} ${size}w`)
-        .join(', ');
-    }
+    srcSet = imageResizeTargets
+      .map((size) => `${getImageSrc(asset, size)} ${size}w`)
+      .join(', ');
   }
 
+  /**
+   * The sizes attribute will tell the browser which image-width to use on given
+   * viewport-widths.
+   */
   const sizes = sizesOption
     ?.map(([viewport, size]) => `(min-width: ${viewport}px) ${size}px`)
     .join(', ');

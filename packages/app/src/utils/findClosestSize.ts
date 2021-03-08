@@ -4,6 +4,6 @@
  * eg: `findClosestSize(320, [300, 400]) === 400`
  */
 export function findClosestSize(size: number, sizes: number[]) {
-  const match = sizes.sort((a, b) => a - b).find((size) => size > size);
+  const match = sizes.sort((a, b) => a - b).find((x) => x >= size);
   return match || sizes[sizes.length - 1];
 }

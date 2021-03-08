@@ -19,26 +19,17 @@ type ArticleTeaserProps = {
   slug: string;
   summary: Block;
   cover: ImageBlock;
+  coverSizes: number[][];
 };
 
-const articleTeaserImageSizes = [
-  [0, 733],
-  [768, 445],
-  [960, 406],
-];
-
 export function ArticleTeaser(props: ArticleTeaserProps) {
-  const { title, slug, summary, cover } = props;
+  const { title, slug, summary, cover, coverSizes } = props;
 
   return (
     <Link passHref href={`/artikelen/${slug}`}>
       <StyledArticleTeaser>
         <ZoomContainer height={200}>
-          <BackgroundImage
-            image={cover}
-            height={200}
-            sizes={articleTeaserImageSizes}
-          />
+          <BackgroundImage image={cover} height={200} sizes={coverSizes} />
         </ZoomContainer>
         <Box padding={3}>
           <Heading

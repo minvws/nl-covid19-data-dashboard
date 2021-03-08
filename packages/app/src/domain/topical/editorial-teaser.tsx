@@ -28,7 +28,13 @@ export function EditorialTeaser(props: EditorialTeaserProps) {
       <StyledEditorialTeaser>
         <CoverImage image={cover} />
         <StyledTextOverlay>
-          <Box width={{ lg: '60%' }} position="absolute" bottom={3} left={3}>
+          <Box
+            width={{ lg: '60%' }}
+            position="absolute"
+            bottom={3}
+            left={3}
+            right={3}
+          >
             <Heading level={3} fontSize={5} lineHeight="1em">
               {title}
             </Heading>
@@ -56,14 +62,6 @@ type CoverImageProps = {
   image: ImageBlock;
 };
 
-const coverImageSizes = [
-  [320, 320],
-  [640, 640],
-  [768, 768],
-  [1024, 1024],
-  [1200, 878],
-];
-
 function CoverImage({ image }: CoverImageProps) {
   return (
     <div
@@ -77,7 +75,10 @@ function CoverImage({ image }: CoverImageProps) {
         <BackgroundImage
           image={image}
           height={'100%'}
-          sizes={coverImageSizes}
+          sizes={[
+            // viewport min-width 1200px display images at max. 745px wide
+            [1200, 745],
+          ]}
         />
       </ZoomContainer>
       <div

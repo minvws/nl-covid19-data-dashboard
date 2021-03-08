@@ -18,12 +18,6 @@ export type HighlightTeaserProps = {
   };
 };
 
-const articleTeaserImageSizes = [
-  [0, 733],
-  [768, 445],
-  [960, 406],
-];
-
 export function HighlightTeaser(props: HighlightTeaserProps) {
   const { title, link, summary, cover } = props;
 
@@ -34,7 +28,10 @@ export function HighlightTeaser(props: HighlightTeaserProps) {
           <BackgroundImage
             image={cover}
             height={200}
-            sizes={articleTeaserImageSizes}
+            sizes={[
+              // viewport min-width 1200px display images at max. 438px wide
+              [1200, 438],
+            ]}
           />
         </ZoomContainer>
         <Box padding={3}>
