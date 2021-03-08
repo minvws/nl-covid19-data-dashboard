@@ -149,9 +149,8 @@ export const ChartAxes = memo(function ChartAxes({
               tickFormat: formatXAxis as AnyTickFormatter,
               top: bounds.height,
               stroke: defaultColors.axis,
-              tickLabelProps: (value) => ({
-                textAnchor:
-                  value.getTime() === xDomain[0].getTime() ? 'start' : 'end',
+              tickLabelProps: () => ({
+                dx: -25,
                 fill: defaultColors.axisLabels,
                 fontSize: 12,
               }),
