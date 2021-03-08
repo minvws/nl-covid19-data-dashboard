@@ -27,7 +27,7 @@ import {
 } from '~/utils/formatDate';
 import { TimeframeOption } from '~/utils/timeframe';
 import { useBreakpoints } from '~/utils/useBreakpoints';
-import { LegendShape } from '../legenda';
+import { LegendShape } from '../legend';
 import {
   AreaChartGraph,
   AreaConfig,

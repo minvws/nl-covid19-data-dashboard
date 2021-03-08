@@ -6,11 +6,12 @@ import {
   TimestampedValue,
 } from '@corona-dashboard/common';
 import { isPresent } from 'ts-is-present';
+import { timestampToDate } from '~/components-styled/stacked-chart/logic';
 import {
+  getDaysForTimeframe,
+  TimeframeOption,
   getValuesInTimeframe,
-  timestampToDate,
-} from '~/components-styled/stacked-chart/logic';
-import { getDaysForTimeframe, TimeframeOption } from '~/utils/timeframe';
+} from '~/utils/timeframe';
 
 // This type limits the allowed property names to those with a number type,
 // so its like keyof T, but filtered down to only the appropriate properties.
