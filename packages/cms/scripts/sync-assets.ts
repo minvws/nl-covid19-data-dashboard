@@ -65,7 +65,7 @@ async function cacheAssets(assets: LocalAsset[], cacheDirectory: string) {
 
       if (!fileExists) {
         await download(url, cacheDirectory, { filename });
-        console.log(`downloaded ${url}`);
+        // console.log(`downloaded ${url}`);
         count++;
       }
     });
