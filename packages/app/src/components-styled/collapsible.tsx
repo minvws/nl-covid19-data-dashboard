@@ -91,7 +91,7 @@ const Panel = styled(DisclosurePanel)(
   })
 );
 
-interface CollapsableProps extends BoxProps {
+interface CollapsibleProps extends BoxProps {
   summary: string;
   children: ReactNode;
   id?: string;
@@ -103,7 +103,7 @@ export const Collapsible = ({
   children,
   id,
   hideBorder,
-}: CollapsableProps) => {
+}: CollapsibleProps) => {
   const [open, setOpen] = useState(true);
   const panelReference = useRef<HTMLDivElement>(null);
 
