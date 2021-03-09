@@ -1,10 +1,20 @@
 // lib/sanity.ts
-import { imageResizeTargets } from '@corona-dashboard/common';
+import { assert, imageResizeTargets } from '@corona-dashboard/common';
 import BlockContent from '@sanity/block-content-to-react';
 import sanityClient from '@sanity/client';
 import { LanguageKey } from '~/locale';
 import { ImageBlock, SanityFileProps, SanityImageProps } from '~/types/cms';
 import { findClosestSize } from '~/utils/findClosestSize';
+
+assert(
+  process.env.NEXT_PUBLIC_SANITY_DATASET,
+  'NEXT_PUBLIC_SANITY_DATASET is undefined'
+);
+
+assert(
+  process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  'NEXT_PUBLIC_SANITY_PROJECT_ID is undefined'
+);
 
 const config = {
   /**
@@ -14,8 +24,8 @@ const config = {
    *
    * https://nextjs.org/docs/basic-features/environment-variables
    **/
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || '',
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
   useCdn: process.env.NODE_ENV === 'production',
   /**
    * Set useCdn to `false` if your application require the freshest possible
