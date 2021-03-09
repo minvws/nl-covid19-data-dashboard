@@ -177,6 +177,6 @@ function getFormattedDate(date: Date, style: formatStyle) {
         : DayMonth.format(date);
 
     default:
-      return Medium.format(date);
+      return DayMonth.format(date);
   }
 }

@@ -130,11 +130,10 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
           }}
           formatTooltip={(values) => {
             const value = values[0];
-
             return (
               <Text textAlign="center" m={0}>
                 <span style={{ fontWeight: 'bold' }}>
-                  {formatDateFromMilliseconds(value.__date.getTime())}
+                  {formatDateFromMilliseconds(value.__date.getTime(), 'medium')}
                 </span>
                 <br />
                 <span
