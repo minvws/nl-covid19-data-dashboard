@@ -7,8 +7,8 @@ import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
 import { CollapsibleButton } from '~/components-styled/collapsible/collapsible-button';
 import { HighlightTeaserProps } from '~/components-styled/highlight-teaser';
+import { LinkBlock } from '~/domain/topical/link-block';
 import { MaxWidth } from '~/components-styled/max-width';
-import { QuickLinks } from '~/components-styled/quick-links';
 import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
 import { Heading } from '~/components-styled/typography';
@@ -20,7 +20,6 @@ import { escalationTooltip } from '~/components/choropleth/tooltips/region/escal
 import { FCWithLayout, getDefaultLayout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import { Search } from '~/domain/topical/components/search';
-import { DataSitemap } from '~/domain/topical/data-sitemap';
 import { EditorialSummary } from '~/domain/topical/editorial-teaser';
 import { EditorialTile } from '~/domain/topical/editorial-tile';
 import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
@@ -170,7 +169,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
             </MiniTrendTileLayout>
 
             <CollapsibleButton label={text.quick_links.header}>
-              <QuickLinks
+              <LinkBlock
                 header={text.quick_links.header}
                 links={[
                   {
@@ -181,10 +180,12 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                     href: '/veiligheidsregio',
                     text: text.quick_links.links.veiligheidsregio,
                   },
-                  { href: '/gemeente', text: text.quick_links.links.gemeente },
+                  {
+                    href: '/gemeente',
+                    text: text.quick_links.links.gemeente,
+                  },
                 ]}
               />
-              <DataSitemap />
             </CollapsibleButton>
 
             {content.editorial && content.highlight && (

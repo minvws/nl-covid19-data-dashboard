@@ -17,7 +17,7 @@ import { createSelectRegionHandler } from '~/components/choropleth/select-handle
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
 import { FCWithLayout, getDefaultLayout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
-import { DataSitemap } from '~/domain/topical/data-sitemap';
+import { LinkBlock } from '~/domain/topical/link-block';
 import { EditorialSummary } from '~/domain/topical/editorial-teaser';
 import { EditorialTile } from '~/domain/topical/editorial-tile';
 import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
@@ -187,7 +187,7 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
               </RiskLevelIndicator>
             </MiniTrendTileLayout>
 
-            <QuickLinks
+            <LinkBlock
               header={text.quick_links.header}
               links={[
                 {
@@ -275,8 +275,6 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
                 </Box>
               </TopicalTile>
             </Box>
-
-            <DataSitemap />
 
             <Box pb={4}>
               <TopicalSectionHeader

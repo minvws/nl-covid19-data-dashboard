@@ -20,7 +20,7 @@ interface QuickLink {
 
 export function QuickLinks({ header, links }: QuickLinksProps) {
   return (
-    <Box>
+    <Box zIndex={1}>
       <Heading level={2} fontSize="1.25rem" m={0}>
         {header}
       </Heading>
@@ -45,7 +45,7 @@ export function QuickLinks({ header, links }: QuickLinksProps) {
 const List = styled.ol(
   css({
     display: 'flex',
-    flexDirection: asResponsiveArray({ _: 'column', md: 'row' }),
+    flexDirection: 'column',
     m: 0,
     px: 0,
     py: asResponsiveArray({ _: 0, md: 1 }),

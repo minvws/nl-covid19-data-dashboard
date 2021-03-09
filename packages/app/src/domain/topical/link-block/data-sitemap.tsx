@@ -6,15 +6,9 @@ import { Box } from '~/components-styled/base';
 import { LinkWithIcon } from '~/components-styled/link-with-icon';
 import { InlineText, Text } from '~/components-styled/typography';
 import siteText from '~/locale/index';
-import { useBreakpoints } from '~/utils/useBreakpoints';
+import { asResponsiveArray } from '~/style/utils';
 
 export function DataSitemap() {
-  const breakpoints = useBreakpoints(true);
-
-  if (!breakpoints.md) {
-    return null;
-  }
-
   return (
     <Box pb={4}>
       <Title
@@ -22,17 +16,19 @@ export function DataSitemap() {
         title={siteText.nationaal_actueel.data_sitemap_titel}
         fontSize="2rem"
       />
-      <Box>
-        <Box maxWidth={{ md: 'maxWidthText' }} mb={4}>
-          <Text>{siteText.nationaal_actueel.data_sitemap_toelichting}</Text>
-        </Box>
-        <Box
-          display="flex"
-          justifyContent={{ lg: 'space-between' }}
-          flexWrap={{ md: 'wrap', lg: 'nowrap' }}
-        >
-          <SitemapItems />
-        </Box>
+      <Box
+        display="flex"
+        justifyContent={{ lg: 'space-between' }}
+        flexWrap="wrap"
+        css={css({
+          '> div': {
+            flexGrow: 1,
+            flexBasis: asResponsiveArray({ _: '100%', md: '50%', lg: '33%' }),
+            mb: 4,
+          },
+        })}
+      >
+        <SitemapItems />
       </Box>
     </Box>
   );
@@ -41,7 +37,7 @@ export function DataSitemap() {
 export function SitemapItems() {
   return (
     <>
-      <Box width={{ md: '25%', lg: 'auto' }}>
+      <Box>
         <StyledHeader>
           {siteText.nationaal_layout.headings.vaccinaties}
         </StyledHeader>
@@ -52,7 +48,7 @@ export function SitemapItems() {
           />
         </List>
       </Box>
-      <Box width={{ md: '25%', lg: 'auto' }}>
+      <Box>
         <StyledHeader>
           {siteText.nationaal_layout.headings.besmettingen}
         </StyledHeader>
@@ -75,7 +71,7 @@ export function SitemapItems() {
           />
         </List>
       </Box>
-      <Box width={{ md: '25%', lg: 'auto' }}>
+      <Box>
         <StyledHeader>
           {siteText.nationaal_layout.headings.ziekenhuizen}
         </StyledHeader>
@@ -90,7 +86,7 @@ export function SitemapItems() {
           />
         </List>
       </Box>
-      <Box width={{ md: '25%', lg: 'auto' }}>
+      <Box>
         <StyledHeader>
           {siteText.nationaal_layout.headings.kwetsbare_groepen}
         </StyledHeader>
@@ -109,7 +105,7 @@ export function SitemapItems() {
           />
         </List>
       </Box>
-      <Box width={{ md: '25%', lg: 'auto' }} marginTop={{ md: 4, lg: 0 }}>
+      <Box>
         <StyledHeader>
           {siteText.nationaal_layout.headings.vroege_signalen}
         </StyledHeader>
@@ -124,7 +120,7 @@ export function SitemapItems() {
           />
         </List>
       </Box>
-      <Box width={{ md: '25%', lg: 'auto' }} marginTop={{ md: 4, lg: 0 }}>
+      <Box>
         <StyledHeader>{siteText.nationaal_layout.headings.gedrag}</StyledHeader>
         <List>
           <SitemapItem
