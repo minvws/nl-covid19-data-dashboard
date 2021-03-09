@@ -3182,7 +3182,15 @@
     "@types/react-dom" "*"
     prop-types "^15.5.10"
 
-"@visx/curve@1.0.0":
+"@visx/clip-path@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@visx/clip-path/-/clip-path-1.0.0.tgz#75fbc3414fb9ab2c42792545c70ffdd0d64e4038"
+  integrity sha512-s5Xdjlf/1RaOOS5kJO8d0xOY6BdEifP8dq0gIJwEfBMyQALOtTyiDNZ0v0yTT82qssLrtZ0fm3xVSRJC1cPB/Q==
+  dependencies:
+    "@types/react" "*"
+    prop-types "^15.5.10"
+
+"@visx/curve@1.0.0", "@visx/curve@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@visx/curve/-/curve-1.0.0.tgz#f1928821c0beea05d019f3066b28459b4b185c5b"
   integrity sha512-rN9TUf4uRmPuQ5Rd4kbvinSDsTbR61YB26+ucK6RNMHIr9aLmujpcPJhVwk22EWphRRGIxzK2OSp0d5dgpNppQ==
@@ -3314,6 +3322,18 @@
     lodash "^4.17.20"
     prop-types "^15.7.2"
     reduce-css-calc "^1.3.0"
+
+"@visx/threshold@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@visx/threshold/-/threshold-1.4.0.tgz#b57f8455cf63fc326763497c1d9a8bcdb7b2bb59"
+  integrity sha512-WJ2QanIuDYJ6IYVPz3FY6ZWgK3Ru0iM46FcCyddOcPIpNigsCI7an/cEMSYAhn5YtrGZaKMKJaR4N3bKo/7czw==
+  dependencies:
+    "@types/classnames" "^2.2.9"
+    "@types/react" "*"
+    "@visx/clip-path" "1.0.0"
+    "@visx/shape" "1.4.0"
+    classnames "^2.2.5"
+    prop-types "^15.5.10"
 
 "@visx/tooltip@^1.3.0":
   version "1.5.0"

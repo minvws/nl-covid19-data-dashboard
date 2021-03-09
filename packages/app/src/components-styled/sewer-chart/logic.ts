@@ -13,12 +13,15 @@ export interface Dimensions {
   padding: Record<'top' | 'right' | 'bottom' | 'left', number>;
 }
 
-export interface SewerChartValue {
+export type SewerChartValue = {
   id: string;
   name: string;
   value: number;
   dateMs: number;
-}
+} & (
+  | { dateStartMs: number; dateEndMs: number }
+  | { dateStartMs?: never; dateEndMs?: never }
+);
 
 export function useSewerChartValues(
   data: Regionaal | Municipal,
@@ -38,7 +41,12 @@ export function useSewerChartValues(
             .map((x) => ({
               name: '__average',
               value: x.average,
-              dateMs: x.date_end_unix * 1000,
+              dateMs:
+                (x.date_start_unix +
+                  (x.date_end_unix - x.date_start_unix) / 2) *
+                1000,
+              dateStartMs: x.date_start_unix * 1000,
+              dateEndMs: x.date_end_unix * 1000,
             }))
             .map((x) => ({
               ...x,
@@ -269,7 +277,13 @@ export function useLineTooltip({
     });
   }
 
-  return { datum, point, findClosest: setInputPoint, clear } as const;
+  return { datum, point, findClosest: setInputPoint, clear } as {
+    findClosest: typeof setInputPoint;
+    clear: typeof clear;
+  } & (
+    | { datum: undefined; point: undefined }
+    | { datum: SewerChartValue; point: Point }
+  );
 }
 
 /**
