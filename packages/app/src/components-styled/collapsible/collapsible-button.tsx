@@ -8,17 +8,22 @@ import {
 } from '@reach/disclosure';
 
 import useResizeObserver from 'use-resize-observer';
-import { Box } from './base';
+import { Box } from '~/components-styled/base';
+import { useSetCollapsibleLinkTabbability } from './use-set-collapsible-link-tabbability';
 
 interface CollapsibleButtonProps {
   children: React.ReactNode;
   label: string;
 }
 
-export function CollapsibleButton({ label, children }: CollapsibleButtonProps) {
+export const CollapsibleButton = ({
+  label,
+  children,
+}: CollapsibleButtonProps) => {
   const { ref: contentRef, height: contentHeight } = useResizeObserver();
   const { ref: buttonRef, height: buttonHeight } = useResizeObserver();
   const [open, setOpen] = useState(false);
+  const { panelRef } = useSetCollapsibleLinkTabbability(open);
 
   const openHeight =
     buttonHeight && contentHeight ? buttonHeight + contentHeight : 0;
@@ -30,13 +35,13 @@ export function CollapsibleButton({ label, children }: CollapsibleButtonProps) {
           <Chevron open={open} />
         </ExpandButton>
 
-        <Content style={{ height: open ? contentHeight : 0 }}>
+        <Panel ref={panelRef} style={{ height: open ? contentHeight : 0 }}>
           <div ref={contentRef}>{children}</div>
-        </Content>
+        </Panel>
       </Disclosure>
     </Container>
   );
-}
+};
 
 const Container = styled(Box).attrs({ as: 'section' })(
   css({
@@ -52,13 +57,14 @@ const Container = styled(Box).attrs({ as: 'section' })(
   })
 );
 
-const Content = styled(DisclosurePanel)(
+const Panel = styled(DisclosurePanel)(
   css({
     transitionProperty: 'height, opacity',
     transitionDuration: '0.5s',
     width: '100%',
     overflow: 'hidden',
     opacity: 0,
+    display: 'block',
     '&[data-state="open"]': {
       opacity: 1,
     },
