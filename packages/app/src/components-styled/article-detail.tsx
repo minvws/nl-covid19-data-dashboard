@@ -13,6 +13,11 @@ interface ArticleDetailProps {
   article: Article;
 }
 
+const imageSizes = [
+  // viewport min-width 700px display images at max. 636px wide
+  [700, 636],
+];
+
 export function ArticleDetail({ article }: ArticleDetailProps) {
   return (
     <Box bg="white" py={{ _: 4, md: 5 }}>
@@ -35,16 +40,17 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
         <ContentImage
           node={article.cover}
           contentWrapper={ContentBlock}
-          sizes={[
-            // viewport min-width 700px display images at max. 636px wide
-            [700, 636],
-          ]}
+          sizes={imageSizes}
         />
       </ContentBlock>
 
       {!!article.content?.length && (
         <Box fontSize="1.125rem">
-          <RichContent blocks={article.content} contentWrapper={ContentBlock} />
+          <RichContent
+            blocks={article.content}
+            contentWrapper={ContentBlock}
+            imageSizes={imageSizes}
+          />
         </Box>
       )}
     </Box>
