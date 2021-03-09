@@ -7,9 +7,9 @@
     "date_unix",
     "vrcode",
     "level",
-    "date_start_measurement",
-    "date_end_measurement",
-    "date_next_estimate",
+    "date_start_measurement_unix",
+    "date_end_measurement_unix",
+    "date_next_estimate_unix",
     "valid_from_unix",
     "last_determined_unix",
     "date_of_insertion_unix"
@@ -27,13 +27,13 @@
       "minimum": 1,
       "maximum": 4
     },
-    "date_start_measurement": {
+    "date_start_measurement_unix": {
       "type": "integer"
     },
-    "date_end_measurement": {
+    "date_end_measurement_unix": {
       "type": "integer"
     },
-    "date_next_estimate": {
+    "date_next_estimate_unix": {
       "type": "integer"
     },
     "valid_from_unix": {

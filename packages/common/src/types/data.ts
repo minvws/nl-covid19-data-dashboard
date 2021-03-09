@@ -840,9 +840,9 @@ export interface RegionalElderlyAtHomeValue {
 export interface VrEscalationLevel {
   date_unix: number;
   level: number;
-  date_start_measurement: number;
-  date_end_measurement: number;
-  date_next_estimate: number;
+  date_start_measurement_unix: number;
+  date_end_measurement_unix: number;
+  date_next_estimate_unix: number;
   valid_from_unix: number;
   last_determined_unix: number;
   date_of_insertion_unix: number;
@@ -900,9 +900,9 @@ export interface EscalationLevels {
   date_unix: number;
   vrcode: string;
   level: number;
-  date_start_measurement: number;
-  date_end_measurement: number;
-  date_next_estimate: number;
+  date_start_measurement_unix: number;
+  date_end_measurement_unix: number;
+  date_next_estimate_unix: number;
   valid_from_unix: number;
   last_determined_unix: number;
   date_of_insertion_unix: number;
