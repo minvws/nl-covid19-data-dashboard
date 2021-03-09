@@ -14,7 +14,7 @@ interface LegendProps {
   items: LegendItem[];
 }
 
-export function Legenda({ items }: LegendProps) {
+export function Legend({ items }: LegendProps) {
   return (
     <List>
       {items.map((item, i) => {

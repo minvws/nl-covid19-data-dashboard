@@ -3,7 +3,7 @@ import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
-import { Legenda } from '~/components-styled/legenda';
+import { Legend } from '~/components-styled/legend';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { AreaChart } from '~/components/charts/index';
@@ -89,7 +89,7 @@ const InfectiousPeople: FCWithLayout<typeof getStaticProps> = (props) => {
                 rangeLegendLabel={text.rangeLegendLabel}
                 lineLegendLabel={text.lineLegendLabel}
               />
-              <Legenda
+              <Legend
                 items={[
                   {
                     label: text.legenda_line,

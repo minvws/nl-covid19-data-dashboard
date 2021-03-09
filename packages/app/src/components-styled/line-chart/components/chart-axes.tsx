@@ -7,6 +7,7 @@ import { Text } from '@visx/text';
 import { ScaleLinear, ScaleTime } from 'd3-scale';
 import { ComponentProps, memo, MouseEvent, ReactNode, TouchEvent } from 'react';
 import { colors } from '~/style/theme';
+import css from '@styled-system/css';
 
 const NUM_TICKS = 4;
 
@@ -114,6 +115,7 @@ export const ChartAxes = memo(function ChartAxes({
       height={height}
       role="img"
       aria-labelledby={ariaLabelledBy}
+      css={css({ overflow: 'visible' })}
     >
       <Group left={padding.left} top={padding.top}>
         {createComponent(
