@@ -6,6 +6,7 @@ type SanityImageProps = {
   srcSet?: string;
   sizes?: string;
   className?: string;
+  alt?: string;
 };
 
 export function SanityImage(props: SanityImageProps) {

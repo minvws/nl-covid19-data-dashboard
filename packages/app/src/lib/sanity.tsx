@@ -95,7 +95,7 @@ export function getImageProps<T extends ImageBlock>(
   node: T,
   options: ImageProps
 ) {
-  const { asset, alt } = node;
+  const { asset, alt = '' } = node;
   const { metadata } = asset;
 
   const {
