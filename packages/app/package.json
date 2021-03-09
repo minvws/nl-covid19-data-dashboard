@@ -62,7 +62,6 @@
   "devDependencies": {
     "@babel/core": "^7.12.13",
     "@babel/preset-env": "^7.12.13",
-    "@corona-dashboard/common": "*",
     "@next/bundle-analyzer": "^10.0.6",
     "@svgr/webpack": "^5.4.0",
     "@testing-library/jest-dom": "^5.11.4",
