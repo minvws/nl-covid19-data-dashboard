@@ -56,7 +56,6 @@ export function SewerChart(props: SewerChartProps) {
 
   const [sizeRef, { width }] = useElementSize<HTMLDivElement>(840);
 
-  console.log('sever');
   /**
    * We enable animations slighly after the component is mounted (1ms).
    * This prevents an initial animation from the SSR width `840` to the
