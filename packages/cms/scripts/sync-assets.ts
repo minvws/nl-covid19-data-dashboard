@@ -48,10 +48,14 @@ const CACHE_DIR =
     ),
   ];
 
-  await cacheAssets(assets, CACHE_DIR);
-  await copyCachedAssets(assets, CACHE_DIR, TARGET_DIR);
-
-  console.log('🎉 Done.\n');
+  try {
+    await cacheAssets(assets, CACHE_DIR);
+    await copyCachedAssets(assets, CACHE_DIR, TARGET_DIR);
+    console.log('🎉 Done.\n');
+  } catch (err) {
+    console.log('Error occured:', err);
+    throw err;
+  }
 })().catch((err) => console.log(err));
 
 async function cacheAssets(assets: LocalAsset[], cacheDirectory: string) {
