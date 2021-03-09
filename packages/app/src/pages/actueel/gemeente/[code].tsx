@@ -114,7 +114,7 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
         })}
       />
       <Box bg="white" pb={4}>
-        <MaxWidth>
+        <MaxWidth id="content">
           <TileList>
             <TopicalSectionHeader
               showBackLink
@@ -144,7 +144,7 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
               variant="emphasis"
             />
 
-            <MiniTrendTileLayout>
+            <MiniTrendTileLayout id="metric-navigation">
               <MiniTrendTile
                 title={text.mini_trend_tiles.positief_getest.title}
                 text={

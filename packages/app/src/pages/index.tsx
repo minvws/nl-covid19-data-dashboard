@@ -115,7 +115,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
           <Heading level={1}>{text.title}</Heading>
         </VisuallyHidden>
 
-        <MaxWidth>
+        <MaxWidth id="content">
           <TileList>
             <TopicalSectionHeader
               lastGenerated={Number(lastGenerated)}
@@ -137,7 +137,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
               variant="emphasis"
             />
 
-            <MiniTrendTileLayout>
+            <MiniTrendTileLayout id="metric-navigation">
               <MiniTrendTile
                 title={text.mini_trend_tiles.positief_getest.title}
                 text={
