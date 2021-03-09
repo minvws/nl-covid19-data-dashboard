@@ -143,7 +143,7 @@ export interface National {
   vaccine_support: NlVaccineSupport;
   corona_melder_app: NlCoronaMelderApp;
   vaccine_delivery: NlVaccineDelivery;
-  vaccine_delivery_estimate: NlVaccineEstimateDelivery;
+  vaccine_delivery_estimate: NlVaccineDeliveryEstimate;
   vaccine_administered: NlVaccineAdministered;
   vaccine_administered_estimate: NlVaccineAdministeredEstimate;
   vaccine_administered_care_institutions: NlVaccineAdministeredCareInstitutions;
@@ -154,7 +154,7 @@ export interface National {
   vaccine_administered_lnaz: NlVaccineAdministeredLnaz;
   vaccine_administered_total: NlVaccineAdministeredTotal;
   vaccine_administered_rate_moving_average: NlVaccineAdministeredRateMovingAverage;
-  vaccine_in_stock_weekly: NlVaccineInStockWeekly;
+  vaccine_stock_per_supplier: NlVaccineStockPerSupplier;
   vaccine_administered_planned: NlVaccineAdministeredPlanned;
 }
 export interface NationalDifference {
@@ -482,15 +482,12 @@ export interface NlVaccineDeliveryValue {
   date_start_unix: number;
   date_end_unix: number;
 }
-export interface NlVaccineEstimateDelivery {
+export interface NlVaccineDeliveryEstimate {
   values: NlVaccineDeliveryEstimateValue[];
   last_value: NlVaccineDeliveryEstimateValue;
 }
 export interface NlVaccineDeliveryEstimateValue {
   total: number;
-  bio_n_tech_pfizer: number;
-  moderna: number;
-  astra_zeneca: number;
   date_of_insertion_unix: number;
   date_start_unix: number;
   date_end_unix: number;
@@ -601,11 +598,11 @@ export interface NlVaccineAdministeredRateMovingAverageValue {
   date_end_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlVaccineInStockWeekly {
-  values: NlVaccineInStockWeeklyValue[];
-  last_value: NlVaccineInStockWeeklyValue;
+export interface NlVaccineStockPerSupplier {
+  values: NlVaccineStockPerSupplierValue[];
+  last_value: NlVaccineStockPerSupplierValue;
 }
-export interface NlVaccineInStockWeeklyValue {
+export interface NlVaccineStockPerSupplierValue {
   total: number;
   bio_n_tech_pfizer: number;
   moderna: number;
