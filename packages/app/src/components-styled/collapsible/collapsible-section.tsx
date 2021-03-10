@@ -8,7 +8,7 @@ import { ReactNode, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import useResizeObserver from 'use-resize-observer';
 import { Box, BoxProps } from '~/components-styled/base';
-import { useSetCollapsibleLinkTabbability } from './use-set-collapsible-link-tabbability';
+import { useSetLinkTabbability } from './use-set-link-tabbability';
 
 const Summary = styled(DisclosureButton)(
   css({
@@ -106,7 +106,7 @@ export const CollapsibleSection = ({
   hideBorder,
 }: CollapsibleSectionProps) => {
   const [open, setOpen] = useState(true);
-  const { panelRef } = useSetCollapsibleLinkTabbability(open);
+  const { wrapperRef } = useSetLinkTabbability(open);
 
   const { ref, height: contentHeight } = useResizeObserver();
 
@@ -137,7 +137,7 @@ export const CollapsibleSection = ({
         </Summary>
 
         <Panel
-          ref={panelRef}
+          ref={wrapperRef}
           style={{
             /* panel max height is only controlled when collapsed, or during animations */
             height: open ? contentHeight : 0,
