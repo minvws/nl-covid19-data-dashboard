@@ -839,8 +839,8 @@ export interface RegionalElderlyAtHomeValue {
 }
 export interface VrEscalationLevel {
   level: number;
-  based_on_statistics_to: number;
-  based_on_statistics_from: number;
+  based_on_statistics_to_unix: number;
+  based_on_statistics_from_unix: number;
   next_determined_unix: number;
   last_determined_unix: number;
   valid_from_unix: number;
@@ -898,8 +898,8 @@ export interface RegionsTestedOverall {
 export interface EscalationLevels {
   vrcode: string;
   level: number;
-  based_on_statistics_to: number;
-  based_on_statistics_from: number;
+  based_on_statistics_to_unix: number;
+  based_on_statistics_from_unix: number;
   next_determined_unix: number;
   last_determined_unix: number;
   valid_from_unix: number;
