@@ -143,7 +143,8 @@ export interface National {
   vaccine_support: NlVaccineSupport;
   corona_melder_app: NlCoronaMelderApp;
   vaccine_delivery: NlVaccineDelivery;
-  vaccine_delivery_estimate: NlVaccineEstimateDelivery;
+  vaccine_delivery_estimate: NlVaccineDeliveryEstimate;
+  vaccine_delivery_per_supplier: NlVaccineDeliveryPerSupplier;
   vaccine_administered: NlVaccineAdministered;
   vaccine_administered_estimate: NlVaccineAdministeredEstimate;
   vaccine_administered_care_institutions: NlVaccineAdministeredCareInstitutions;
@@ -481,12 +482,26 @@ export interface NlVaccineDeliveryValue {
   date_start_unix: number;
   date_end_unix: number;
 }
-export interface NlVaccineEstimateDelivery {
+export interface NlVaccineDeliveryEstimate {
   values: NlVaccineDeliveryEstimateValue[];
   last_value: NlVaccineDeliveryEstimateValue;
 }
 export interface NlVaccineDeliveryEstimateValue {
   total: number;
+  date_of_insertion_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
+}
+export interface NlVaccineDeliveryPerSupplier {
+  values: NlVaccineDeliveryPerSupplierValue[];
+  last_value: NlVaccineDeliveryPerSupplierValue;
+}
+export interface NlVaccineDeliveryPerSupplierValue {
+  total: number;
+  bio_n_tech_pfizer: number;
+  moderna: number;
+  astra_zeneca: number;
+  is_estimate: boolean;
   date_of_insertion_unix: number;
   date_start_unix: number;
   date_end_unix: number;
