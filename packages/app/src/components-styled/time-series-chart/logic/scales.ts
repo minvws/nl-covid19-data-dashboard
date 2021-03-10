@@ -38,9 +38,16 @@ export function useScales<T extends TimestampedValue>(args: {
 
   return useMemo(() => {
     if (isEmpty(values)) {
+      const today = Date.now() / 1000;
       return {
-        xScale: scaleLinear({ domain: [0, 0], range: [0, 0] }),
-        yScale: scaleLinear({ domain: [0, 0], range: [0, 0] }),
+        xScale: scaleLinear({
+          domain: [today, today + ONE_DAY_IN_SECONDS],
+          range: [0, bounds.width],
+        }),
+        yScale: scaleLinear({
+          domain: [0, maximumValue],
+          range: [bounds.height, 0],
+        }),
         getX: (_x: SeriesItem) => 0,
         getY: (_x: SeriesSingleValue) => 0,
         getY0: (_x: SeriesDoubleValue) => 0,
