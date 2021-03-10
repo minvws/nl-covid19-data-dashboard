@@ -506,7 +506,16 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                 data.vaccine_delivery_estimate_time_span.last_value.doses
               }
             />
-            <Text mb={4}>{text.delivery_estimate_time_span.description}</Text>
+            <Text mb={4}>
+              {replaceVariablesInText(
+                text.delivery_estimate_time_span.description,
+                {
+                  weeks:
+                    data.vaccine_delivery_estimate_time_span.last_value
+                      .time_span_weeks,
+                }
+              )}
+            </Text>
           </KpiTile>
         </TwoKpiSection>
 
