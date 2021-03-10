@@ -20,14 +20,7 @@ import { VisuallyHidden } from '~/components-styled/visually-hidden';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { useBreakpoints } from '~/utils/useBreakpoints';
-import {
-  DataOptions,
-  isAreaSeriesDefinition,
-  isLineSeriesDefinition,
-  isRangeSeriesDefinition,
-  SeriesConfig,
-  TimespanAnnotationConfig,
-} from '../logic';
+import { DataOptions, SeriesConfig, TimespanAnnotationConfig } from '../logic';
 import { AreaTrendIcon } from './area-trend';
 import { LineTrendIcon } from './line-trend';
 import { RangeTrendIcon } from './range-trend';
@@ -234,19 +227,16 @@ interface TrendIconProps<T extends TimestampedValue> {
 }
 
 function TrendIcon<T extends TimestampedValue>({ config }: TrendIconProps<T>) {
-  if (isLineSeriesDefinition(config)) {
-    return <LineTrendIcon config={config} />;
+  switch (config.type) {
+    case 'line':
+      return <LineTrendIcon config={config} />;
+    case 'range':
+      return <RangeTrendIcon config={config} />;
+    case 'area':
+      return <AreaTrendIcon config={config} />;
+    default:
+      return null;
   }
-
-  if (isRangeSeriesDefinition(config)) {
-    return <RangeTrendIcon config={config} />;
-  }
-
-  if (isAreaSeriesDefinition(config)) {
-    return <AreaTrendIcon config={config} />;
-  }
-
-  return null;
 }
 
 const TooltipValueContainer = styled.span`
