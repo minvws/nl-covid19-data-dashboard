@@ -7,7 +7,7 @@ import {
 } from '@corona-dashboard/common';
 import { scaleLinear } from '@visx/scale';
 import { ScaleLinear } from 'd3-scale';
-import { first, last } from 'lodash';
+import { first, isEmpty, last } from 'lodash';
 import { useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Bounds } from './common';
@@ -37,6 +37,18 @@ export function useScales<T extends TimestampedValue>(args: {
   const { maximumValue, bounds, numTicks, values } = args;
 
   return useMemo(() => {
+    if (isEmpty(values)) {
+      return {
+        xScale: scaleLinear({ domain: [0, 0], range: [0, 0] }),
+        yScale: scaleLinear({ domain: [0, 0], range: [0, 0] }),
+        getX: (_x: SeriesItem) => 0,
+        getY: (_x: SeriesSingleValue) => 0,
+        getY0: (_x: SeriesDoubleValue) => 0,
+        getY1: (_x: SeriesDoubleValue) => 0,
+        dateSpanWidth: 0,
+      };
+    }
+
     const [start, end] = getTimeDomain(values);
 
     const xScale = scaleLinear({

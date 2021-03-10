@@ -108,7 +108,7 @@ export function isDateSeries(
   timeSeries: TimestampedValue[]
 ): timeSeries is DateValue[] {
   const firstValue = (timeSeries as DateValue[])[0];
-  return isDefined(firstValue.date_unix);
+  return isDefined(firstValue?.date_unix);
 }
 
 export function isDateSpanSeries(
@@ -116,6 +116,7 @@ export function isDateSpanSeries(
 ): timeSeries is DateSpanValue[] {
   const firstValue = (timeSeries as DateSpanValue[])[0];
   return (
-    isDefined(firstValue.date_end_unix) && isDefined(firstValue.date_start_unix)
+    isDefined(firstValue?.date_end_unix) &&
+    isDefined(firstValue?.date_start_unix)
   );
 }
