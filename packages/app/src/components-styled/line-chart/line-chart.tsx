@@ -399,7 +399,7 @@ function formatDefaultTooltip<T extends TimestampedValue>(
     return (
       <>
         <Text as="span" fontWeight="bold">
-          {`${formatDateFromMilliseconds(value.__date.getTime())}: `}
+          {`${formatDateFromMilliseconds(value.__date.getTime(), 'medium')}: `}
         </Text>
         {isPercentage
           ? `${formatPercentage(value.__value)}%`
