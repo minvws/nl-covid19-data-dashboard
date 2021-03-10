@@ -43,9 +43,13 @@ export function RelativeDate({
     displayDate = displayDate.charAt(0).toUpperCase() + displayDate.substr(1);
   }
 
+  // if the displaydate is something like 'today' or 'yesterday', we put the full date behind it
+  const suffix = fullDate.startsWith(displayDate) ? '' : ` (${fullDate})`;
+
   return (
     <Time dateTime={isoDate} title={fullDate}>
       {displayDate}
+      {suffix}
     </Time>
   );
 }

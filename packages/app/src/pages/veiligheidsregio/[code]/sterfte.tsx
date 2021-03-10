@@ -118,6 +118,22 @@ const DeceasedRegionalPage: FCWithLayout<typeof getStaticProps> = (props) => {
           metadata={{ source: text.section_deceased_rivm.bronnen.rivm }}
         />
 
+        <ContentHeader
+          title={siteText.section_sterftemonitor_vr.title}
+          icon={<CoronaVirusIcon />}
+          subtitle={siteText.section_sterftemonitor_vr.description}
+          reference={siteText.section_sterftemonitor_vr.reference}
+          metadata={{
+            datumsText: siteText.section_sterftemonitor_vr.datums,
+            dateOrRange: {
+              start: dataCbs.last_value.date_start_unix,
+              end: dataCbs.last_value.date_end_unix,
+            },
+            dateOfInsertionUnix: dataCbs.last_value.date_of_insertion_unix,
+            dataSources: [siteText.section_sterftemonitor_vr.bronnen.cbs],
+          }}
+        />
+
         <DeceasedMonitorSection data={dataCbs} />
       </TileList>
     </>

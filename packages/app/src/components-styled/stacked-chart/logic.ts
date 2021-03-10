@@ -1,14 +1,9 @@
 import {
-  DateSpanValue,
-  DateValue,
-  isDateSeries,
-  isDateSpanSeries,
   isDateSpanValue,
   isDateValue,
   TimestampedValue,
 } from '@corona-dashboard/common';
 import { mapValues, omit, pick } from 'lodash';
-import { getDaysForTimeframe, TimeframeOption } from '~/utils/timeframe';
 
 /**
  * A SeriesValue contains the properties for all trend values in key/value
@@ -27,42 +22,6 @@ export function calculateSeriesMaximum(series: SeriesValue[]) {
   const stackedSumValues = series.map(sumTrendPointValue);
 
   return Math.max(...stackedSumValues);
-}
-
-/**
- * From a list of values, return the ones that are within the timeframe.
- *
- * This is similar to getFilteredValues but here we assume the value is passed
- * in as-is from the data, and we detect what type of timestamp we should filter
- * on.
- */
-export function getValuesInTimeframe<T extends TimestampedValue>(
-  values: T[],
-  timeframe: TimeframeOption
-): T[] {
-  const boundary = getTimeframeBoundaryUnix(timeframe);
-
-  if (isDateSeries(values)) {
-    return values.filter((x: DateValue) => x.date_unix >= boundary) as T[];
-  }
-
-  if (isDateSpanSeries(values)) {
-    return values.filter(
-      (x: DateSpanValue) => x.date_start_unix >= boundary
-    ) as T[];
-  }
-
-  throw new Error(`Incompatible timestamps are used in value ${values[0]}`);
-}
-
-const oneDayInSeconds = 24 * 60 * 60;
-
-function getTimeframeBoundaryUnix(timeframe: TimeframeOption) {
-  if (timeframe === 'all') {
-    return 0;
-  }
-  const days = getDaysForTimeframe(timeframe);
-  return Date.now() / 1000 - days * oneDayInSeconds;
 }
 
 /**

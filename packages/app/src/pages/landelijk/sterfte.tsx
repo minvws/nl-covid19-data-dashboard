@@ -127,6 +127,22 @@ const DeceasedNationalPage: FCWithLayout<typeof getStaticProps> = (props) => {
           />
         </ChartTile>
 
+        <ContentHeader
+          title={siteText.section_sterftemonitor.title}
+          icon={<CoronaVirusIcon />}
+          subtitle={siteText.section_sterftemonitor.description}
+          reference={siteText.section_sterftemonitor.reference}
+          metadata={{
+            datumsText: siteText.section_sterftemonitor.datums,
+            dateOrRange: {
+              start: dataCbs.last_value.date_start_unix,
+              end: dataCbs.last_value.date_end_unix,
+            },
+            dateOfInsertionUnix: dataCbs.last_value.date_of_insertion_unix,
+            dataSources: [siteText.section_sterftemonitor.bronnen.cbs],
+          }}
+        />
+
         <DeceasedMonitorSection data={dataCbs} showDataMessage />
       </TileList>
     </>

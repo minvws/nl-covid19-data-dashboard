@@ -99,7 +99,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
           <Heading level={1}>{text.title}</Heading>
         </VisuallyHidden>
 
-        <MaxWidth>
+        <MaxWidth id="content">
           <TileList>
             <TopicalSectionHeader
               lastGenerated={Number(lastGenerated)}
@@ -121,7 +121,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
               variant="emphasis"
             />
 
-            <MiniTrendTileLayout>
+            <MiniTrendTileLayout id="metric-navigation">
               <MiniTrendTile
                 title={text.mini_trend_tiles.positief_getest.title}
                 text={
@@ -164,9 +164,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                 href="/landelijk/ziekenhuis-opnames"
               />
 
-              <TopicalVaccineTile
-                estimated={data.vaccine_administered_total.last_value.estimated}
-              />
+              <TopicalVaccineTile data={data.vaccine_administered_total} />
             </MiniTrendTileLayout>
 
             <CollapsibleButton label={text.quick_links.header}>
