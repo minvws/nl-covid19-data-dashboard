@@ -5,7 +5,7 @@ import { Box } from '~/components-styled/base';
 import { LinkWithIcon } from '~/components-styled/link-with-icon';
 import { InlineText, Text } from '~/components-styled/typography';
 
-type LinkGroupProps = {
+export type LinkGroupProps = {
   header?: string;
   links: Link[];
 };
@@ -54,7 +54,7 @@ const StyledHeader = styled(InlineText)(
   css({
     fontWeight: 'bold',
     display: 'block',
-    my: 2,
+    mb: 2,
   })
 );
 

@@ -181,6 +181,8 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
 
             <CollapsibleButton label={text.quick_links.header}>
               <LinkBlock
+                base="veiligheidsregio"
+                code={router.query.code}
                 quickLinks={[
                   {
                     href: '/landelijk/vaccinaties',

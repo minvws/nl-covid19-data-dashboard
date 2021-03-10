@@ -4,11 +4,11 @@ import { asResponsiveArray } from '~/style/utils';
 
 import { Heading } from '~/components-styled/typography';
 import { Box } from '~/components-styled/base';
-import { DataSitemap } from './data-sitemap';
+import { DataSitemap, DataSitemapProps } from './data-sitemap';
 import { LinkGroup, Link } from './link-group';
 import siteText from '~/locale/index';
 
-type LinkBlockProps = {
+type LinkBlockProps = DataSitemapProps & {
   quickLinksHeader?: string;
   quickLinks: Link[];
 };
@@ -16,6 +16,8 @@ type LinkBlockProps = {
 export function LinkBlock({
   quickLinksHeader = siteText.common_actueel.quick_links.overview.header,
   quickLinks,
+  base,
+  code,
 }: LinkBlockProps) {
   return (
     <Container>
@@ -26,7 +28,7 @@ export function LinkBlock({
         <LinkGroup links={quickLinks} />
       </QuickLinks>
       <Sitemap>
-        <DataSitemap />
+        <DataSitemap base={base} code={code} />
       </Sitemap>
     </Container>
   );
@@ -54,7 +56,7 @@ const Container = styled(Box)(
 const QuickLinks = styled(Box)(
   css({
     position: 'relative',
-    flexGrow: 3,
+    flexBasis: asResponsiveArray({ _: '33%', lg: '25%' }),
     pb: asResponsiveArray({ _: 4, md: 0 }),
     pr: asResponsiveArray({ _: 0, md: 3 }),
   })
@@ -62,7 +64,7 @@ const QuickLinks = styled(Box)(
 
 const Sitemap = styled(Box)(
   css({
-    flexGrow: asResponsiveArray({ _: 2, lg: 3 }),
+    flexBasis: asResponsiveArray({ _: '66%', lg: '75%' }),
     pt: asResponsiveArray({ _: 4, md: 0 }),
     pl: asResponsiveArray({ _: 0, md: 4 }),
   })

@@ -74,7 +74,7 @@ const Panel = styled(DisclosurePanel)(
 const ExpandButton = styled(DisclosureButton)(
   css({
     position: 'relative',
-    px: 4,
+    px: 2,
     py: 3,
     border: 'none',
     background: 'none',

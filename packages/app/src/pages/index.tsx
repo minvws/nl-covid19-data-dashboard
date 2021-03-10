@@ -168,6 +168,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
 
             <CollapsibleButton label={text.quick_links.header}>
               <LinkBlock
+                base="landelijk"
                 quickLinks={[
                   {
                     href: '/landelijk/vaccinaties',

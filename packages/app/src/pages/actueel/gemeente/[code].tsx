@@ -189,6 +189,8 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
 
             <CollapsibleButton label={text.quick_links.header}>
               <LinkBlock
+                base="gemeente"
+                code={router.query.code}
                 quickLinks={[
                   {
                     href: '/landelijk/vaccinaties',
