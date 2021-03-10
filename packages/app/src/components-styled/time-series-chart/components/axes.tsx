@@ -9,7 +9,7 @@ import { formatNumber, formatPercentage } from '@corona-dashboard/common';
 import { AxisBottom, AxisLeft } from '@visx/axis';
 import { GridRows } from '@visx/grid';
 import { ScaleLinear } from 'd3-scale';
-import { memo, RefObject } from 'react';
+import { memo, Ref } from 'react';
 import { colors } from '~/style/theme';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { Bounds } from '../logic';
@@ -31,7 +31,7 @@ type AxesProps = {
    * This ref is used for measuring the width of the Y-axis to automagically
    * calculate a left-padding.
    */
-  yAxisRef: RefObject<SVGGElement>;
+  yAxisRef: Ref<SVGGElement>;
   yTickValues?: number[];
 };
 
