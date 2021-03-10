@@ -1,13 +1,19 @@
+import { TimestampedValue } from '@corona-dashboard/common';
 import { Threshold } from '@visx/threshold';
 import { useUniqueId } from '~/utils/useUniqueId';
-import { Bounds, SeriesDoubleValue, SeriesItem } from '../logic';
+import {
+  Bounds,
+  RangeSeriesDefinition,
+  SeriesDoubleValue,
+  SeriesItem,
+} from '../logic';
 
-export type RangeTrendProps = {
+const DEFAULT_FILL_OPACITY = 0.6;
+
+type RangeTrendProps = {
   series: SeriesDoubleValue[];
   color: string;
   fillOpacity?: number;
-  strokeWidth?: number;
-  style?: 'solid' | 'hatched';
   bounds: Bounds;
   getX: (v: SeriesItem) => number;
   getY0: (v: SeriesDoubleValue) => number;
@@ -21,7 +27,7 @@ export function RangeTrend({
   getY1,
   bounds,
   color,
-  fillOpacity = 0.6,
+  fillOpacity = DEFAULT_FILL_OPACITY,
 }: RangeTrendProps) {
   const id = useUniqueId();
 
@@ -53,5 +59,32 @@ export function RangeTrend({
         fillOpacity,
       }}
     />
+  );
+}
+
+interface RangeTrendIconProps<T extends TimestampedValue> {
+  config: RangeSeriesDefinition<T>;
+  width?: number;
+  height?: number;
+}
+
+export function RangeTrendIcon<T extends TimestampedValue>({
+  config,
+  width = 15,
+  height = 15,
+}: RangeTrendIconProps<T>) {
+  const { color, fillOpacity = DEFAULT_FILL_OPACITY } = config;
+
+  return (
+    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
+      <rect
+        x={0}
+        y={0}
+        width={width}
+        height={height}
+        fill={color}
+        opacity={fillOpacity}
+      />
+    </svg>
   );
 }

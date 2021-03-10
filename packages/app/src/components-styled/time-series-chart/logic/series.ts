@@ -31,7 +31,6 @@ export type RangeSeriesDefinition<T extends TimestampedValue> = {
   color: string;
   style?: 'solid' | 'dashed';
   fillOpacity?: number;
-  strokeWidth?: number;
 };
 
 export type AreaSeriesDefinition<T extends TimestampedValue> = {
@@ -203,4 +202,22 @@ export function getSeriesData<T extends TimestampedValue>(
   }
 
   throw new Error(`Incompatible timestamps are used in value ${values[0]}`);
+}
+
+export function isLineSeriesDefinition<T extends TimestampedValue>(
+  config: SeriesConfig<T>[number]
+): config is LineSeriesDefinition<T> {
+  return config.type === 'line';
+}
+
+export function isAreaSeriesDefinition<T extends TimestampedValue>(
+  config: SeriesConfig<T>[number]
+): config is AreaSeriesDefinition<T> {
+  return config.type === 'area';
+}
+
+export function isRangeSeriesDefinition<T extends TimestampedValue>(
+  config: SeriesConfig<T>[number]
+): config is RangeSeriesDefinition<T> {
+  return config.type === 'range';
 }
