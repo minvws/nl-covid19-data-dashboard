@@ -4,13 +4,25 @@
       "title": "nl_vaccine_stock_value",
       "type": "object",
       "required": [
-        "doses",
+        "total",
+        "bio_n_tech_pfizer",
+        "moderna",
+        "astra_zeneca",
         "date_of_insertion_unix",
         "date_unix"
       ],
       "additionalProperties": false,
       "properties": {
-        "doses": {
+        "total": {
+          "type": "integer"
+        },
+        "bio_n_tech_pfizer": {
+          "type": "integer"
+        },
+        "moderna": {
+          "type": "integer"
+        },
+        "astra_zeneca": {
           "type": "integer"
         },
         "date_of_insertion_unix": {
