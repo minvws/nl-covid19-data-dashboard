@@ -35,6 +35,7 @@ import { TimeSeriesChart } from '~/components-styled/time-series-chart';
 import { ChartTile } from '~/components-styled/chart-tile';
 import { ParentSize } from '@visx/responsive';
 import { colors } from '~/style/theme';
+import { LineChartTile } from '~/components-styled/line-chart-tile';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -80,23 +81,34 @@ const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
         />
 
         <ChartTile
-          metadata={{ source: corona_melder_app.header.bronnen.rivm }}
-          title={'TEST'}
-          description={'descriptie'}
+          metadata={{
+            source: corona_melder_app.linechart.bronnen.coronamelder,
+          }}
+          title={corona_melder_app.linechart.title}
+          description={corona_melder_app.linechart.description}
         >
           <ParentSize>
             {({ width }) => (
               <TimeSeriesChart
-                title={'titel'}
+                title={'Gemeld aantal'}
                 width={width}
                 values={data.corona_melder_app.values}
                 ariaLabelledBy=""
                 paddingLeft={40}
+                // dataOptions={{
+                //   timespanAnnotations: {
+                //     start: 1608455388,
+                //     end: 1608455388,
+                //     domain: [3, 4],
+                //     height: 20,
+                //     getX: Infinity,
+                //   }
+                // }}
                 seriesConfig={[
                   {
-                    type: 'line',
+                    type: 'area',
                     metricProperty: 'warned_daily',
-                    label: 'hier komt text',
+                    label: 'waarschuwingen',
                     color: colors.data.primary,
                   },
                 ]}
@@ -104,6 +116,22 @@ const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
             )}
           </ParentSize>
         </ChartTile>
+
+        <LineChartTile
+          timeframeOptions={['all', '5weeks', 'week']}
+          title={corona_melder_app.linechart.title}
+          ariaDescription={''}
+          description={corona_melder_app.linechart.description}
+          values={data.corona_melder_app.values}
+          linesConfig={[
+            {
+              metricProperty: 'warned_daily',
+            },
+          ]}
+          metadata={{
+            source: corona_melder_app.linechart.bronnen.coronamelder,
+          }}
+        />
 
         <ArticleStrip articles={content.articles} />
 

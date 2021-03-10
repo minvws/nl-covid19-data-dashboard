@@ -2685,6 +2685,17 @@
         "text": "Meest recente factsheet CoronaMelder-app",
         "href": "https://www.coronamelder.nl/media/Factsheet_Corona_latest.pdf"
       }
+    },
+    "linechart": {
+      "title": "Waarschuwingen over tijd",
+      "description": "Bekijk alle waarschuwingen over tijd van de CoronaMelder",
+      "bronnen": {
+        "coronamelder": {
+          "download": "",
+          "text": "CoronaMelder",
+          "href": ""
+        }
+      }
     }
   },
   "choropleth_tooltip": {
