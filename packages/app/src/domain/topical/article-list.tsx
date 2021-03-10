@@ -33,6 +33,10 @@ export function ArticleList({ articleSummaries }: ArticleListProps) {
             slug={summary.slug.current}
             summary={summary.summary}
             cover={summary.cover}
+            coverSizes={[
+              // viewport min-width 768px display images at max. 445px wide
+              [768, 445],
+            ]}
           />
         </ArticleBox>
       ))}

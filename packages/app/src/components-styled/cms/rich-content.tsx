@@ -12,9 +12,14 @@ import { ContentImage } from './content-image';
 interface RichContentProps {
   blocks: PortableTextEntry[];
   contentWrapper?: FunctionComponent;
+  imageSizes?: number[][];
 }
 
-export function RichContent({ contentWrapper, blocks }: RichContentProps) {
+export function RichContent({
+  contentWrapper,
+  blocks,
+  imageSizes,
+}: RichContentProps) {
   const ContentWrapper = contentWrapper ?? Fragment;
   const serializers = {
     types: {
@@ -30,7 +35,11 @@ export function RichContent({ contentWrapper, blocks }: RichContentProps) {
         );
       },
       image: (props: { node: ImageBlock | RichContentImageBlock }) => (
-        <ContentImage contentWrapper={contentWrapper} {...props} />
+        <ContentImage
+          contentWrapper={contentWrapper}
+          sizes={imageSizes}
+          {...props}
+        />
       ),
     },
     marks: {

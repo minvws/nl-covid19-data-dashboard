@@ -118,7 +118,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
   height = 250,
   timeframe = 'all',
   formatTooltip,
-  dataOptions = {},
+  dataOptions,
   numGridLines = 3,
   tickValues,
   showDateMarker,
@@ -141,7 +141,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     forcedMaximumValue,
     benchmark,
     timespanAnnotations,
-  } = dataOptions;
+  } = dataOptions || {};
 
   const { padding, bounds } = useDimensions(width, height, paddingLeft);
 
@@ -196,14 +196,14 @@ export function TimeSeriesChart<T extends TimestampedValue>({
           value: values[valuesIndex],
           valueKey: nearestPoint.metricProperty as keyof T,
           config: seriesConfig,
-          options: dataOptions,
+          options: dataOptions || {},
           /**
            * Pass the full annotation data. We could just pass the index because
            * dataOptions is already being passed, but it's cumbersome to have to
            * dig up the annotation from the array in the tooltip logic.
            */
           timespanAnnotation:
-            isDefined(dataOptions.timespanAnnotations) &&
+            dataOptions?.timespanAnnotations &&
             isDefined(timespanAnnotationIndex)
               ? dataOptions.timespanAnnotations[timespanAnnotationIndex]
               : undefined,

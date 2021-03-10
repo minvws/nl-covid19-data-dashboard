@@ -2,22 +2,29 @@ import { Image } from '~/components-styled/image';
 
 type SanityImageProps = {
   src: string;
-  srcSet?: string;
   extension: string;
+  srcSet?: string;
+  sizes?: string;
+  className?: string;
+  alt?: string;
 };
 
 export function SanityImage(props: SanityImageProps) {
-  const { src, srcSet, extension, ...imageProps } = props;
+  const { src, srcSet, sizes, extension, ...imageProps } = props;
 
   if (!srcSet) {
-    return <Image src={src} {...imageProps} />;
+    return <Image src={src} sizes={sizes} {...imageProps} />;
   }
 
   return (
-    <picture>
-      <source srcSet={srcSet.split(extension).join('webp')} type="image/webp" />
-      <source srcSet={srcSet} type={`image/${extension}`} />
-      <Image src={src} {...imageProps} />
+    <picture className={props.className}>
+      <source
+        srcSet={srcSet.split(extension).join('webp')}
+        sizes={sizes}
+        type="image/webp"
+      />
+      <source srcSet={srcSet} sizes={sizes} type={`image/${extension}`} />
+      <Image src={src} srcSet={srcSet} sizes={sizes} {...imageProps} />
     </picture>
   );
 }

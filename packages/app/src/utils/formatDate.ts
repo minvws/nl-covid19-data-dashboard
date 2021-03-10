@@ -73,6 +73,11 @@ const MonthShort = new Intl.DateTimeFormat(locale, {
   timeZone: 'Europe/Amsterdam',
 });
 
+const Year = new Intl.DateTimeFormat(locale, {
+  year: 'numeric',
+  timeZone: 'Europe/Amsterdam',
+});
+
 const Day = new Intl.DateTimeFormat(locale, {
   day: 'numeric',
   timeZone: 'Europe/Amsterdam',
@@ -153,7 +158,9 @@ function getFormattedDate(date: Date, style: formatStyle) {
       return Medium.format(date);
 
     case 'axis': // '23 jul.'
-      return `${Day.format(date)} ${MonthShort.format(date)}`;
+      return `${Day.format(date)} ${MonthShort.format(date)} ${Year.format(
+        date
+      )}`;
 
     case 'weekday-medium':
       return WeekdayMedium.format(date);
