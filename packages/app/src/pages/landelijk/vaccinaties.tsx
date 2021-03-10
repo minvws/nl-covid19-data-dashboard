@@ -494,6 +494,12 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                     .time_span_weeks,
               }
             )}
+            metadata={{
+              date:
+                data.vaccine_delivery_estimate_time_span.last_value
+                  .date_of_insertion_unix,
+              source: text.bronnen.delivery_estimate_time_span,
+            }}
           >
             <KpiValue
               absolute={
