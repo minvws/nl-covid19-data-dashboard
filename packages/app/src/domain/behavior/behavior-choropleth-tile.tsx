@@ -7,7 +7,7 @@ import { Select } from '~/components-styled/select';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { SafetyRegionProperties } from '@corona-dashboard/common';
-import { TooltipContent } from '~/components/choropleth/tooltips/tooltipContent';
+import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
 import siteText from '~/locale/index';
 import { RegionsBehavior } from '@corona-dashboard/common';
 import {
@@ -40,7 +40,7 @@ export function BehaviorChoroplethTile({
       title={text.verdeling_in_nederland.titel}
       description={
         <>
-          <Box display="flex" justifyContent="start">
+          <Box display="flex" justifyContent="start" mb={3}>
             <BehaviorTypeControl value={type} onChange={setType} />
           </Box>
           <p>{text.verdeling_in_nederland.intro}</p>

@@ -205,6 +205,8 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
               metricName="tested_overall"
               metricProperty="infected_per_100k"
               tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
+                siteText.choropleth_tooltip.positive_tested_people,
+                regionThresholds.tested_overall.infected_per_100k,
                 createSelectMunicipalHandler(router, 'positief-geteste-mensen')
               )}
               onSelect={createSelectMunicipalHandler(
@@ -219,6 +221,8 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
               metricName="tested_overall"
               metricProperty="infected_per_100k"
               tooltipContent={createPositiveTestedPeopleRegionalTooltip(
+                siteText.choropleth_tooltip.positive_tested_people,
+                regionThresholds.tested_overall.infected_per_100k,
                 createSelectRegionHandler(router, 'positief-geteste-mensen')
               )}
               onSelect={createSelectRegionHandler(
@@ -244,7 +248,7 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
             return (
               <Text textAlign="center" m={0}>
                 <span style={{ fontWeight: 'bold' }}>
-                  {formatDateFromMilliseconds(value.__date.getTime())}
+                  {formatDateFromMilliseconds(value.__date.getTime(), 'medium')}
                 </span>
                 <br />
                 <span
@@ -391,7 +395,7 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
           hideFill={true}
           showLegend
           padding={{
-            left: 45,
+            left: 50,
           }}
           values={dataGgdDailyValues}
           linesConfig={[
@@ -414,7 +418,7 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
 
             return (
               <>
-                {formatDateFromSeconds(x[0].date_unix, 'day-month')}
+                {formatDateFromSeconds(x[0].date_unix, 'medium')}
                 <br />
                 <span
                   style={{

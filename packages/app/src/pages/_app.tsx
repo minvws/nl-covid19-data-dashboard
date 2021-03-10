@@ -10,6 +10,8 @@ import { GlobalStyle } from '~/style/global-style';
 import theme from '~/style/theme';
 
 if (typeof window !== 'undefined') {
+  require('proxy-polyfill/proxy.min.js');
+
   if (process.env.NODE_ENV === 'development') {
     /**
      * this polyfill allows next.js to show runtime errors in IE11

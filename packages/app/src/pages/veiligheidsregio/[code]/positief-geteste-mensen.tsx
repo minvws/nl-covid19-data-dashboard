@@ -63,7 +63,6 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
   const router = useRouter();
 
   const lastValue = data.tested_overall.last_value;
-
   const ggdAverageLastValue = data.tested_ggd_average.last_value;
   const ggdDailyValues = data.tested_ggd_daily.values;
 
@@ -179,7 +178,7 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
             return (
               <Text textAlign="center" m={0}>
                 <span style={{ fontWeight: 'bold' }}>
-                  {formatDateFromMilliseconds(value.__date.getTime())}
+                  {formatDateFromMilliseconds(value.__date.getTime(), 'medium')}
                 </span>
                 <br />
                 <span
@@ -231,6 +230,8 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
             metricName="tested_overall"
             metricProperty="infected_per_100k"
             tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
+              siteText.choropleth_tooltip.positive_tested_people,
+              regionThresholds.tested_overall.infected_per_100k,
               createSelectMunicipalHandler(router, 'positief-geteste-mensen')
             )}
             onSelect={createSelectMunicipalHandler(
@@ -264,7 +265,10 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
           <KpiTile
             title={ggdText.totaal_getest_week_titel}
             metadata={{
-              date: ggdAverageLastValue.date_end_unix,
+              date: [
+                ggdAverageLastValue.date_start_unix,
+                ggdAverageLastValue.date_end_unix,
+              ],
               source: ggdText.bronnen.rivm,
             }}
           >
@@ -357,7 +361,7 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
 
             return (
               <>
-                {formatDateFromSeconds(x[0].date_unix, 'day-month')}
+                {formatDateFromSeconds(x[0].date_unix, 'medium')}
                 <br />
                 <span
                   style={{

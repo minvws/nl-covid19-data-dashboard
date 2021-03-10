@@ -73,6 +73,8 @@ export interface MunicipalSewerValue {
   date_start_unix: number;
   date_end_unix: number;
   average: number;
+  total_number_of_samples: number;
+  sampled_installation_count: number;
   total_installation_count: number;
   date_of_insertion_unix: number;
 }
@@ -151,6 +153,8 @@ export interface National {
   vaccine_administered_hospitals: NlVaccineAdministeredHospitals;
   vaccine_administered_lnaz: NlVaccineAdministeredLnaz;
   vaccine_administered_total: NlVaccineAdministeredTotal;
+  vaccine_administered_rate_moving_average: NlVaccineAdministeredRateMovingAverage;
+  vaccine_administered_planned: NlVaccineAdministeredPlanned;
 }
 export interface NationalDifference {
   tested_overall__infected_per_100k: DifferenceDecimal;
@@ -257,6 +261,8 @@ export interface NationalSewer {
 }
 export interface NationalSewerValue {
   average: number;
+  total_number_of_samples: number;
+  sampled_installation_count: number;
   total_installation_count: number;
   date_of_insertion_unix: number;
   date_start_unix: number;
@@ -579,6 +585,28 @@ export interface NlVaccineAdministeredTotalValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
+export interface NlVaccineAdministeredRateMovingAverage {
+  values: NlVaccineAdministeredRateMovingAverageValue[];
+  last_value: NlVaccineAdministeredRateMovingAverageValue;
+}
+export interface NlVaccineAdministeredRateMovingAverageValue {
+  doses_per_day: number;
+  doses_per_second: number;
+  seconds_per_dose: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlVaccineAdministeredPlanned {
+  values: NlVaccineAdministeredPlannedValue[];
+  last_value: NlVaccineAdministeredPlannedValue;
+}
+export interface NlVaccineAdministeredPlannedValue {
+  doses: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
+}
 
 export interface Regionaal {
   last_generated: string;
@@ -639,6 +667,8 @@ export interface RegionalSewerValue {
   date_start_unix: number;
   date_end_unix: number;
   average: number;
+  total_number_of_samples: number;
+  sampled_installation_count: number;
   total_installation_count: number;
   date_of_insertion_unix: number;
 }
@@ -811,6 +841,7 @@ export interface VrEscalationLevel {
   date_unix: number;
   level: number;
   valid_from_unix: number;
+  last_determined_unix: number;
   date_of_insertion_unix: number;
 }
 export interface VrTestedOverallSum {
@@ -867,6 +898,7 @@ export interface EscalationLevels {
   vrcode: string;
   level: number;
   valid_from_unix: number;
+  last_determined_unix: number;
   date_of_insertion_unix: number;
 }
 export interface RegionsNursingHome {

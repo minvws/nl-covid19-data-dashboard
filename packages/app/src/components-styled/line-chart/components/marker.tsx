@@ -94,7 +94,7 @@ type MarkerProps<T extends TimestampedValue> = {
   data: HoverPoint<T>[];
   dateSpanWidth: number;
   primaryColor?: string;
-  showLine: boolean;
+  showLine?: boolean;
   formatLabel?: (data: T & TrendValue) => string;
   padding: ChartPadding;
   height: number;

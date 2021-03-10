@@ -5,13 +5,15 @@ import { localPoint } from '@visx/event';
 import { GridRows } from '@visx/grid';
 import { Group } from '@visx/group';
 import { Bar, LinePath } from '@visx/shape';
+import { uniqWith } from 'lodash';
 import { transparentize } from 'polished';
 import { PointerEvent, useCallback, useMemo, useState } from 'react';
 import { isPresent } from 'ts-is-present';
 import { useDebouncedCallback } from 'use-debounce';
 import { Box } from '~/components-styled/base';
-import { Legenda } from '~/components-styled/legenda';
+import { Legend } from '~/components-styled/legend';
 import { Select } from '~/components-styled/select';
+import { InlineText } from '~/components-styled/typography';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
 import siteText from '~/locale';
 import { colors } from '~/style/theme';
@@ -19,6 +21,8 @@ import { formatDate } from '~/utils/formatDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { TimeframeOption } from '~/utils/timeframe';
 import { useElementSize } from '~/utils/use-element-size';
+import { useIsMounted } from '~/utils/use-is-mounted';
+import { Path } from './components/path';
 import { ScatterPlot } from './components/scatter-plot';
 import { ToggleOutlierButton } from './components/toggle-outlier-button';
 import { DateTooltip, Tooltip } from './components/tooltip';
@@ -50,10 +54,14 @@ interface SewerChartProps {
 export function SewerChart(props: SewerChartProps) {
   const { data, timeframe, valueAnnotation, height = 300, text } = props;
 
+  const [sizeRef, { width }] = useElementSize<HTMLDivElement>(840);
+
   /**
-   * Grab width and default to 400 (SSR)
+   * We enable animations slighly after the component is mounted (1ms).
+   * This prevents an initial animation from the SSR width `840` to the
+   * actual container width.
    */
-  const [sizeRef, { width }] = useElementSize<HTMLDivElement>(400);
+  const isMounted = useIsMounted({ delayMs: 1 });
 
   /**
    * State for toggling outliers visibility
@@ -77,6 +85,7 @@ export function SewerChart(props: SewerChartProps) {
     stationValuesFiltered,
     hasOutliers,
     selectedStationValues,
+    outlierValues,
   } = useSelectedStationValues(
     sewerStationSelectProps.value,
     stationValues,
@@ -90,7 +99,7 @@ export function SewerChart(props: SewerChartProps) {
   const dimensions = useMemo<Dimensions>(() => {
     const padding = {
       top: 20,
-      right: 10,
+      right: 35,
       bottom: 30,
       left: 50,
     };
@@ -157,6 +166,25 @@ export function SewerChart(props: SewerChartProps) {
     clearTooltips.callback();
   }, [clearTooltips]);
 
+  const outlierPreviews = useMemo(
+    () =>
+      uniqWith(outlierValues, (val1, val2) => {
+        /**
+         * filter circles which are close to each other, no need to
+         * render them on top of each other.
+         */
+        const threshold = 4; // in pixels
+        const x1 = scales.getX(val1);
+        const x2 = scales.getX(val2);
+        return x1 > x2 - threshold && x1 < x2 + threshold;
+      }),
+    [outlierValues, scales]
+  );
+
+  const getOutlierPreviewY = useCallback(() => (displayOutliers ? 46 : 16), [
+    displayOutliers,
+  ]);
+
   return (
     <Box position="relative">
       {sewerStationSelectProps.options.length > 0 && (
@@ -181,14 +209,40 @@ export function SewerChart(props: SewerChartProps) {
          * button to the graph, not sure how future-proof this is.
          */
         mb={-19}
-        zIndex={1}
+        zIndex={10}
+        overflow="hidden"
+        bg="#f2f2f2"
       >
         <ToggleOutlierButton
           disabled={!hasOutliers}
           onClick={() => setDisplayOutliers(!displayOutliers)}
         >
-          {displayOutliers ? text.hide_outliers : text.display_outliers}
+          <InlineText bg="#f2f2f2">
+            {displayOutliers ? text.hide_outliers : text.display_outliers}
+          </InlineText>
         </ToggleOutlierButton>
+
+        <svg
+          width={'100%'}
+          height={'100%'}
+          role="img"
+          style={{
+            pointerEvents: 'none',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            zIndex: -1,
+          }}
+        >
+          <ScatterPlot
+            data={outlierPreviews}
+            getX={scales.getX}
+            getY={getOutlierPreviewY}
+            color="rgba(89, 89, 89, 0.3)"
+            radius={2}
+            isAnimated={isMounted}
+          />
+        </svg>
       </Box>
 
       <Box position="relative" ref={sizeRef} css={css({ userSelect: 'none' })}>
@@ -196,10 +250,13 @@ export function SewerChart(props: SewerChartProps) {
           role="img"
           width={width}
           height={height}
+          viewBox={`0 0 ${width} ${height}`}
           onPointerMove={handlePointerMove}
           onPointerLeave={handlePointerLeave}
           style={{
             touchAction: 'pan-y', // allow vertical scroll, but capture horizontal
+            width: '100%',
+            overflow: 'hidden',
           }}
         >
           <Group left={dimensions.padding.left} top={dimensions.padding.top}>
@@ -226,8 +283,17 @@ export function SewerChart(props: SewerChartProps) {
 
             {lineTooltip.point && (
               <Bar
-                x={lineTooltip.point.x - 4}
-                width={8}
+                x={
+                  lineTooltip.datum.dateStartMs
+                    ? scales.xScale(lineTooltip.datum.dateStartMs)
+                    : lineTooltip.point.x - 4
+                }
+                width={
+                  lineTooltip.datum.dateStartMs
+                    ? scales.xScale(lineTooltip.datum.dateEndMs) -
+                      scales.xScale(lineTooltip.datum.dateStartMs)
+                    : 8
+                }
                 height={dimensions.bounds.height}
                 fill="rgba(192, 232, 252, 0.5)"
                 css={css({
@@ -256,35 +322,50 @@ export function SewerChart(props: SewerChartProps) {
             />
 
             <ScatterPlot
+              isAnimated={isMounted}
               data={stationValuesFiltered}
               getX={scales.getX}
               getY={scales.getY}
               color="rgba(89, 89, 89, 0.3)"
-              r={2}
+              radius={2}
             />
 
-            <LinePath
-              data={averageValues}
-              x={scales.getX}
-              y={scales.getY}
-              stroke={
-                hasSelectedStation ? colors.data.neutral : colors.data.primary
-              }
-              strokeWidth={4}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
+            <LinePath x={scales.getX} y={scales.getY}>
+              {({ path }) => (
+                <Path
+                  isAnimated={isMounted}
+                  fill="transparent"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  path={path(averageValues) || ''}
+                  stroke={
+                    hasSelectedStation
+                      ? colors.data.neutral
+                      : colors.data.primary
+                  }
+                  strokeWidth={4}
+                />
+              )}
+            </LinePath>
 
             {hasSelectedStation && (
               <LinePath
-                data={selectedStationValues}
                 x={scales.getX}
                 y={scales.getY}
-                strokeWidth={4}
-                stroke={colors.data.secondary}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
+                key={sewerStationSelectProps.value}
+              >
+                {({ path }) => (
+                  <Path
+                    isAnimated={isMounted}
+                    fill="transparent"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    path={path(selectedStationValues) || ''}
+                    stroke={colors.data.secondary}
+                    strokeWidth={4}
+                  />
+                )}
+              </LinePath>
             )}
 
             {lineTooltip.point && (
@@ -312,13 +393,21 @@ export function SewerChart(props: SewerChartProps) {
           </Group>
         </svg>
 
-        {lineTooltip.datum && lineTooltip.point && (
+        {lineTooltip.datum && (
           <DateTooltip
             bounds={{ left: 0, top: 0, right: width, bottom: height }}
             x={lineTooltip.point.x + dimensions.padding.left}
             y={dimensions.bounds.height + dimensions.padding.top + 2}
           >
-            {formatDate(lineTooltip.datum?.dateMs)}
+            {lineTooltip.datum.dateStartMs ? (
+              <>
+                {formatDate(lineTooltip.datum.dateStartMs, 'axis')}
+                {' – '}
+                {formatDate(lineTooltip.datum.dateEndMs, 'axis')}
+              </>
+            ) : (
+              formatDate(lineTooltip.datum.dateMs, 'axis')
+            )}
           </DateTooltip>
         )}
 
@@ -334,14 +423,17 @@ export function SewerChart(props: SewerChartProps) {
             y={lineTooltip.point.y + dimensions.padding.top}
           >
             <Box display="inline-block">
-              <b>{lineTooltip.datum.value} per 100.000</b>
+              <b>
+                {formatNumber(lineTooltip.datum.value)} per{' '}
+                {formatNumber(100_000)}
+              </b>
             </Box>{' '}
             {siteText.common.inwoners}
           </Tooltip>
         )}
       </Box>
 
-      <Legenda
+      <Legend
         items={[
           sewerStationSelectProps.value
             ? {

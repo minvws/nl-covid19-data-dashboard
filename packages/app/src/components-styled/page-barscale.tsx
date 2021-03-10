@@ -113,7 +113,7 @@ export function PageBarScale<T>({
   }
 
   return (
-    <Box spacing={2}>
+    <Box spacing={2} mb={3}>
       <BarScale
         min={config.barScale.min}
         max={config.barScale.max}

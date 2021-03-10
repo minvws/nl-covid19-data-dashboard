@@ -123,8 +123,9 @@ const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
           subtitle={corona_melder_app.header.description}
           metadata={{
             datumsText: corona_melder_app.header.datums,
-            dateOrRange: behaviorLastValue.date_start_unix,
-            dateOfInsertionUnix: behaviorLastValue.date_of_insertion_unix,
+            dateOrRange: data.corona_melder_app.last_value.date_unix,
+            dateOfInsertionUnix:
+              data.corona_melder_app.last_value.date_of_insertion_unix,
             dataSources: [corona_melder_app.header.bronnen.rivm],
           }}
           reference={corona_melder_app.header.reference}
@@ -134,7 +135,7 @@ const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
           <KpiTile
             title={corona_melder_app.waarschuwingen.title}
             metadata={{
-              date: behaviorLastValue.date_start_unix,
+              date: data.corona_melder_app.last_value.date_unix,
               source: corona_melder_app.header.bronnen.rivm,
             }}
           >

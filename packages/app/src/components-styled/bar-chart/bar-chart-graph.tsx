@@ -56,6 +56,7 @@ export function BarChartGraph({
     getBarSize,
     getBarOffset,
     getLabel,
+    labelFontSize,
   } = coordinates;
 
   return (
@@ -89,6 +90,12 @@ export function BarChartGraph({
         tickFormat={(a) => `${a}`}
         tickComponent={TickValue}
         label={xAxisLabel}
+        labelProps={{
+          verticalAnchor: 'start',
+          textAnchor: 'middle',
+          width: barsWidth,
+          x: barsWidth / 2,
+        }}
         labelClassName="bar-chart-x-axis-label"
       />
 
@@ -100,8 +107,8 @@ export function BarChartGraph({
               verticalAnchor="middle"
               y={(getBarOffset(value) ?? 0) + labelScale.bandwidth() / 2}
               x={spacing.left - spacingLabel}
-              fill={colors.annotation}
-              fontSize={theme.fontSizes[0]}
+              fill={colors.body}
+              fontSize={labelFontSize}
             >
               {getLabel(value)}
             </Text>
