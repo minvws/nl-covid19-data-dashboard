@@ -1,7 +1,7 @@
 import css from '@styled-system/css';
 import { ArrowIconRight } from '~/components-styled/arrow-icon';
 import { Box } from '~/components-styled/base';
-import { CollapsibleSection } from '~/components-styled/collapsible/collapsible-section';
+import { CollapsibleSection } from '~/components-styled/collapsible';
 import { EscalationLevelInfoLabel } from '~/components-styled/escalation-level';
 import { LinkWithIcon } from '~/components-styled/link-with-icon';
 import { Text } from '~/components-styled/typography';
