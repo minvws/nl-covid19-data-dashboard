@@ -9,6 +9,7 @@
         "moderna",
         "astra_zeneca",
         "is_estimate",
+        "week_number",
         "date_of_insertion_unix",
         "date_start_unix",
         "date_end_unix"
@@ -29,6 +30,9 @@
         },
         "is_estimate": {
           "type": "boolean"
+        },
+        "week_number": {
+          "type": "integer"
         },
         "date_of_insertion_unix": {
           "type": "integer"

@@ -514,6 +514,7 @@ export interface NlVaccineDeliveryPerSupplierValue {
   moderna: number;
   astra_zeneca: number;
   is_estimate: boolean;
+  week_number: number;
   date_of_insertion_unix: number;
   date_start_unix: number;
   date_end_unix: number;
