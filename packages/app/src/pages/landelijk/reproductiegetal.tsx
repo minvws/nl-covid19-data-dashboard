@@ -5,7 +5,7 @@ import { ArticleSummary } from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiWithIllustrationTile } from '~/components-styled/kpi-with-illustration-tile';
-import { Legenda } from '~/components-styled/legenda';
+import { Legend } from '~/components-styled/legend';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { PageBarScale } from '~/components-styled/page-barscale';
 import { SEOHead } from '~/components-styled/seo-head';
@@ -104,7 +104,7 @@ const ReproductionIndex: FCWithLayout<typeof getStaticProps> = (props) => {
             hideFill={true}
             footer={
               <Box pl="30px">
-                <Legenda
+                <Legend
                   items={[
                     {
                       label: text.legenda_r,
