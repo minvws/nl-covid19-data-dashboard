@@ -375,6 +375,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                 dataOptions={{
                   isPercentage: true,
                   forcedMaximumValue: 100,
+                  forcedMinimumValue: 0,
                 }}
                 seriesConfig={[
                   {

@@ -21,7 +21,7 @@ import {
 import { Benchmark } from './components/benchmark';
 import { Series } from './components/series';
 import {
-  calculateSeriesMaximum,
+  calculateSeriesRange,
   SeriesConfig,
   useHoverState,
   useLegendItems,
@@ -139,6 +139,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     valueAnnotation,
     isPercentage,
     forcedMaximumValue,
+    forcedMinimumValue,
     benchmark,
     timespanAnnotations,
   } = dataOptions || {};
@@ -149,22 +150,30 @@ export function TimeSeriesChart<T extends TimestampedValue>({
 
   const seriesList = useSeriesList(values, seriesConfig, timeframe);
 
-  const calculatedSeriesMax = useMemo(
-    () => calculateSeriesMaximum(values, seriesConfig, benchmark?.value),
+  const [calculatedSeriesMin, calculatedSeriesMax] = useMemo(
+    () => calculateSeriesRange(values, seriesConfig, benchmark?.value),
     [values, seriesConfig, benchmark]
   );
 
-  const seriesMax = isDefined(forcedMaximumValue)
-    ? forcedMaximumValue
-    : calculatedSeriesMax;
+  const seriesMin = forcedMinimumValue ?? calculatedSeriesMin;
+  const seriesMax = forcedMaximumValue ?? calculatedSeriesMax;
 
   const { xScale, yScale, getX, getY, getY0, getY1, dateSpanWidth } = useScales(
     {
       values,
+      minimumValue: seriesMin,
       maximumValue: seriesMax,
       bounds,
       numTicks: tickValues?.length || numGridLines,
     }
+  );
+
+  /**
+   * Do not render tick values which are out of range
+   */
+  const tickValuesInRange = useMemo(
+    () => tickValues?.filter((x) => x >= seriesMin && x <= seriesMax),
+    [seriesMax, seriesMin, tickValues]
   );
 
   const [handleHover, hoverState] = useHoverState({
@@ -232,7 +241,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
           <Axes
             bounds={bounds}
             numGridLines={numGridLines}
-            yTickValues={tickValues}
+            yTickValues={tickValuesInRange}
             xScale={xScale}
             yScale={yScale}
             isPercentage={isPercentage}

@@ -30,11 +30,12 @@ interface UseScalesResult {
 
 export function useScales<T extends TimestampedValue>(args: {
   values: T[];
+  minimumValue: number;
   maximumValue: number;
   bounds: Bounds;
   numTicks: number;
 }) {
-  const { maximumValue, bounds, numTicks, values } = args;
+  const { minimumValue, maximumValue, bounds, numTicks, values } = args;
 
   return useMemo(() => {
     const [start, end] = getTimeDomain(values);
@@ -45,7 +46,7 @@ export function useScales<T extends TimestampedValue>(args: {
     });
 
     const yScale = scaleLinear({
-      domain: [0, maximumValue],
+      domain: [minimumValue, maximumValue],
       range: [bounds.height, 0],
       nice: numTicks,
     });
@@ -61,7 +62,14 @@ export function useScales<T extends TimestampedValue>(args: {
     };
 
     return result;
-  }, [values, maximumValue, bounds, numTicks]);
+  }, [
+    values,
+    maximumValue,
+    minimumValue,
+    bounds.width,
+    bounds.height,
+    numTicks,
+  ]);
 }
 
 /**

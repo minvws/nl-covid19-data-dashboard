@@ -62,7 +62,7 @@ export function useSeriesList<T extends TimestampedValue>(
  * render lines, so that the axis scales with whatever key contains the highest
  * values.
  */
-export function calculateSeriesMaximum<T extends TimestampedValue>(
+export function calculateSeriesRange<T extends TimestampedValue>(
   values: T[],
   seriesConfig: SeriesConfig<T>,
   benchmarkValue = -Infinity
@@ -81,6 +81,15 @@ export function calculateSeriesMaximum<T extends TimestampedValue>(
     return Math.max(...trendValues.filter(isPresent));
   });
 
+  const bottomValues = values.map((x) => {
+    const trendValues = Object.values(pick(x, metricProperties)) as (
+      | number
+      | null
+    )[];
+    return Math.min(...trendValues.filter(isPresent));
+  });
+
+  const overallMinimum = Math.min(...bottomValues);
   const overallMaximum = Math.max(...peakValues);
 
   /**
@@ -91,7 +100,10 @@ export function calculateSeriesMaximum<T extends TimestampedValue>(
   const artificialMax =
     overallMaximum < benchmarkValue ? benchmarkValue * 2 : 0;
 
-  return Math.max(overallMaximum, artificialMax);
+  const min = overallMinimum;
+  const max = Math.max(overallMaximum, artificialMax);
+
+  return [min, max] as const;
 }
 
 export type SeriesItem = {
