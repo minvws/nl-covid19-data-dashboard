@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { RichContent } from '~/components-styled/cms/rich-content';
-import { CollapsibleSection } from '~/components-styled/collapsible/collapsible-section';
+import { CollapsibleSection } from '~/components-styled/collapsible';
 import { MaxWidth } from '~/components-styled/max-width';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import siteText, { targetLanguage } from '~/locale/index';

@@ -5,7 +5,7 @@ import { ArticleSummary } from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
 import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
-import { CollapsibleButton } from '~/components-styled/collapsible/collapsible-button';
+import { CollapsibleButton } from '~/components-styled/collapsible';
 import { HighlightTeaserProps } from '~/components-styled/highlight-teaser';
 import { LinkBlock } from '~/domain/topical/link-block';
 import { MaxWidth } from '~/components-styled/max-width';
@@ -98,7 +98,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
           <Heading level={1}>{text.title}</Heading>
         </VisuallyHidden>
 
-        <MaxWidth>
+        <MaxWidth id="content">
           <TileList>
             <TopicalSectionHeader
               lastGenerated={Number(lastGenerated)}
@@ -120,7 +120,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
               variant="emphasis"
             />
 
-            <MiniTrendTileLayout>
+            <MiniTrendTileLayout id="metric-navigation">
               <MiniTrendTile
                 title={text.mini_trend_tiles.positief_getest.title}
                 text={
@@ -163,9 +163,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                 href="/landelijk/ziekenhuis-opnames"
               />
 
-              <TopicalVaccineTile
-                estimated={data.vaccine_administered_total.last_value.estimated}
-              />
+              <TopicalVaccineTile data={data.vaccine_administered_total} />
             </MiniTrendTileLayout>
 
             <CollapsibleButton label={text.quick_links.header}>

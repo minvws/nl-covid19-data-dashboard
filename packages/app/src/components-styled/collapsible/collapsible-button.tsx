@@ -9,7 +9,7 @@ import {
 
 import useResizeObserver from 'use-resize-observer';
 import { Box } from '~/components-styled/base';
-import { useSetCollapsibleLinkTabbability } from './use-set-collapsible-link-tabbability';
+import { useSetLinkTabbability } from './use-set-link-tabbability';
 
 interface CollapsibleButtonProps {
   children: React.ReactNode;
@@ -23,7 +23,7 @@ export const CollapsibleButton = ({
   const { ref: contentRef, height: contentHeight } = useResizeObserver();
   const { ref: buttonRef, height: buttonHeight } = useResizeObserver();
   const [open, setOpen] = useState(false);
-  const { panelRef } = useSetCollapsibleLinkTabbability(open);
+  const { wrapperRef } = useSetLinkTabbability(open);
 
   const openHeight =
     buttonHeight && contentHeight ? buttonHeight + contentHeight : 0;
@@ -35,7 +35,7 @@ export const CollapsibleButton = ({
           <Chevron open={open} />
         </ExpandButton>
 
-        <Panel ref={panelRef} style={{ height: open ? contentHeight : 0 }}>
+        <Panel ref={wrapperRef} style={{ height: open ? contentHeight : 0 }}>
           <div ref={contentRef}>{children}</div>
         </Panel>
       </Disclosure>

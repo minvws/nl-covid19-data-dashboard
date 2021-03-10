@@ -153,6 +153,8 @@ export interface National {
   vaccine_administered_hospitals: NlVaccineAdministeredHospitals;
   vaccine_administered_lnaz: NlVaccineAdministeredLnaz;
   vaccine_administered_total: NlVaccineAdministeredTotal;
+  vaccine_administered_rate_moving_average: NlVaccineAdministeredRateMovingAverage;
+  vaccine_administered_planned: NlVaccineAdministeredPlanned;
 }
 export interface NationalDifference {
   tested_overall__infected_per_100k: DifferenceDecimal;
@@ -581,6 +583,28 @@ export interface NlVaccineAdministeredTotalValue {
   estimated: number;
   reported: number;
   date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlVaccineAdministeredRateMovingAverage {
+  values: NlVaccineAdministeredRateMovingAverageValue[];
+  last_value: NlVaccineAdministeredRateMovingAverageValue;
+}
+export interface NlVaccineAdministeredRateMovingAverageValue {
+  doses_per_day: number;
+  doses_per_second: number;
+  seconds_per_dose: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlVaccineAdministeredPlanned {
+  values: NlVaccineAdministeredPlannedValue[];
+  last_value: NlVaccineAdministeredPlannedValue;
+}
+export interface NlVaccineAdministeredPlannedValue {
+  doses: number;
+  date_start_unix: number;
+  date_end_unix: number;
   date_of_insertion_unix: number;
 }
 

@@ -14,7 +14,7 @@ interface LegendProps {
   items: LegendItem[];
 }
 
-export function Legenda({ items }: LegendProps) {
+export function Legend({ items }: LegendProps) {
   return (
     <List>
       {items.map((item, i) => {
@@ -41,6 +41,7 @@ const List = styled.ul(
   css({
     listStyle: 'none',
     px: 0,
+    m: 0,
   })
 );
 

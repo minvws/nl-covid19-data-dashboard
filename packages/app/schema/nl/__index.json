@@ -39,7 +39,9 @@
     "vaccine_administered_ggd",
     "vaccine_administered_hospitals",
     "vaccine_administered_lnaz",
-    "vaccine_administered_total"
+    "vaccine_administered_total",
+    "vaccine_administered_rate_moving_average",
+    "vaccine_administered_planned"
   ],
   "additionalProperties": false,
   "properties": {
@@ -156,6 +158,12 @@
     },
     "vaccine_administered_total": {
       "$ref": "vaccine_administered_total.json"
+    },
+    "vaccine_administered_rate_moving_average": {
+      "$ref": "vaccine_administered_rate_moving_average.json"
+    },
+    "vaccine_administered_planned": {
+      "$ref": "vaccine_administered_planned.json"
     }
   }
 }

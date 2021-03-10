@@ -12,7 +12,7 @@ import { ScaleTime } from 'd3-scale';
 import { useCallback, useMemo, useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
-import { Legenda, LegendItem, LegendShape } from '~/components-styled/legenda';
+import { Legend, LegendItem, LegendShape } from '~/components-styled/legend';
 import {
   ChartAxes,
   ChartPadding,
@@ -47,6 +47,7 @@ export type LineConfig<T extends TimestampedValue> = {
   strokeWidth?: number;
   legendLabel?: string;
   legendShape?: LegendShape;
+  disableTooltip?: boolean;
 };
 
 export type LineChartProps<T extends TimestampedValue> = {
@@ -261,7 +262,8 @@ export function LineChart<T extends TimestampedValue>({
       const hoverPoints = trendsList
         .map((trends, index) => {
           const trendValue = bisect(trends, point.x, xScale);
-          return trendValue
+
+          return trendValue && !linesConfig[index].disableTooltip
             ? {
                 data: trendValue,
                 color: linesConfig[index].color,
@@ -378,7 +380,7 @@ export function LineChart<T extends TimestampedValue>({
 
         {showLegend && legendItems && (
           <Box pl={`${padding.left}px`}>
-            <Legenda items={legendItems} />
+            <Legend items={legendItems} />
           </Box>
         )}
       </Box>
