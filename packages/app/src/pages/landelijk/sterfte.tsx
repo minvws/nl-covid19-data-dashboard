@@ -7,6 +7,7 @@ import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { addBackgroundRectangleCallback } from '~/components-styled/line-chart/logic';
 import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
@@ -22,6 +23,8 @@ import {
   getLastGeneratedDate,
   getNlData,
 } from '~/static-props/get-data';
+import { colors } from '~/style/theme';
+import { getTrailingDateRange } from '~/utils/get-trailing-date-range';
 
 const text = siteText.sterfte;
 
@@ -38,6 +41,8 @@ const DeceasedNationalPage: FCWithLayout<typeof getStaticProps> = (props) => {
   const dataRivm = props.data.deceased_rivm;
   const dataDeceasedPerAgeGroup = props.data.deceased_rivm_per_age_group;
   const content = props.content;
+
+  const dataRivmUnderReportedRange = getTrailingDateRange(dataRivm.values, 4);
 
   return (
     <>
@@ -109,6 +114,29 @@ const DeceasedNationalPage: FCWithLayout<typeof getStaticProps> = (props) => {
             },
           ]}
           metadata={{ source: text.section_deceased_rivm.bronnen.rivm }}
+          componentCallback={addBackgroundRectangleCallback(
+            dataRivmUnderReportedRange,
+            {
+              fill: colors.data.underReported,
+            }
+          )}
+          legendItems={[
+            {
+              color: colors.data.primary,
+              label:
+                text.section_deceased_rivm
+                  .line_chart_covid_daily_legend_trend_label,
+              shape: 'line',
+            },
+            {
+              color: colors.data.underReported,
+              label:
+                text.section_deceased_rivm
+                  .line_chart_covid_daily_legend_inaccurate_label,
+              shape: 'square',
+            },
+          ]}
+          showLegend
         />
 
         <ChartTile
