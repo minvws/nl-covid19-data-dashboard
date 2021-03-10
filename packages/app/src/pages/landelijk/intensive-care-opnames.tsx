@@ -157,7 +157,7 @@ const IntakeIntensiveCare: FCWithLayout<typeof getStaticProps> = (props) => {
                   )}
                   <Box>
                     <Text as="span" fontWeight="bold">
-                      {`${formatDateFromSeconds(value.date_unix)}: `}
+                      {`${formatDateFromSeconds(value.date_unix, 'medium')}: `}
                     </Text>
                     {formatNumber(value.__value)}
                   </Box>
