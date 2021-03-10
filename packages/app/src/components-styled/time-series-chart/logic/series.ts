@@ -128,17 +128,17 @@ export function isSeriesValue(
 export type SeriesList = (SeriesSingleValue[] | SeriesDoubleValue[])[];
 
 export function getSeriesList<T extends TimestampedValue>(
-  valuesInTimeframe: T[],
+  values: T[],
   seriesConfig: SeriesConfig<T>
 ): SeriesList {
   return seriesConfig.map((config) =>
     config.type === 'range'
       ? getRangeSeriesData(
-          valuesInTimeframe,
+          values,
           config.metricPropertyLow,
           config.metricPropertyHigh
         )
-      : getSeriesData(valuesInTimeframe, config.metricProperty)
+      : getSeriesData(values, config.metricProperty)
   );
 }
 
