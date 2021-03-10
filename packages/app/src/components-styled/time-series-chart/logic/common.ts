@@ -1,3 +1,23 @@
+import { TimestampedValue } from '@corona-dashboard/common';
+import {
+  AreaSeriesDefinition,
+  LineSeriesDefinition,
+  RangeSeriesDefinition,
+  SeriesConfigTypes,
+} from './series';
+
+export function isLineOrAreaDefinition<T extends TimestampedValue>(
+  config: SeriesConfigTypes<T>
+): config is LineSeriesDefinition<T> | AreaSeriesDefinition<T> {
+  return config.type == 'line' || config.type == 'area';
+}
+
+export function isRangeDefinition<T extends TimestampedValue>(
+  config: SeriesConfigTypes<T>
+): config is RangeSeriesDefinition<T> {
+  return config.type == 'range';
+}
+
 export interface DataOptions {
   valueAnnotation?: string;
   forcedMaximumValue?: number;

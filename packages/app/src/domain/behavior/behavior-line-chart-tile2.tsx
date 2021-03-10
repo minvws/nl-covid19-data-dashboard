@@ -10,13 +10,14 @@ import { isPresent } from 'ts-is-present';
 import { Box, Spacer } from '~/components-styled/base';
 import { Select } from '~/components-styled/select';
 import { Tile } from '~/components-styled/tile';
-import {
-  SeriesConfig,
-  TimeSeriesChart,
-} from '~/components-styled/time-series-chart';
+import { TimeSeriesChart } from '~/components-styled/time-series-chart';
 import { Heading } from '~/components-styled/typography';
 import siteText from '~/locale/index';
 import { colors } from '~/style/theme';
+import {
+  isLineOrAreaDefinition,
+  SeriesConfig,
+} from '../../components-styled/time-series-chart/logic';
 import {
   BehaviorIdentifier,
   behaviorIdentifiers,
@@ -63,21 +64,17 @@ export function BehaviorLineChartTile2({
           : undefined;
       })
       .filter(isPresent);
-  }, [siteText, values, type]);
+  }, [values, type]);
 
-  const seriesConfig = useMemo(() => {
-    return behaviorIdentifierWithData.map<
-      SeriesConfig<NationalBehaviorValue | RegionalBehaviorValue>
-    >(
-      (behaviorData) =>
-        ({
-          type: 'line',
-          metricProperty: behaviorData.valueKey,
-          label: behaviorData.label,
-          color:
-            currentId === behaviorData.id ? colors.data.primary : '#E7E7E7',
-        } as any)
-    );
+  const seriesConfig: SeriesConfig<
+    NationalBehaviorValue | RegionalBehaviorValue
+  > = useMemo(() => {
+    return behaviorIdentifierWithData.map((behaviorData) => ({
+      type: 'line',
+      metricProperty: behaviorData.valueKey as any,
+      label: behaviorData.label,
+      color: currentId === behaviorData.id ? colors.data.primary : '#E7E7E7',
+    }));
   }, [behaviorIdentifierWithData, currentId]);
 
   return (
@@ -121,7 +118,7 @@ export function BehaviorLineChartTile2({
             values={values}
             ariaLabelledBy=""
             paddingLeft={40}
-            seriesConfig={seriesConfig as any}
+            seriesConfig={seriesConfig}
             dataOptions={{
               isPercentage: true,
               hideLegend: true,
@@ -129,7 +126,10 @@ export function BehaviorLineChartTile2({
             }}
             tickValues={[0, 25, 50, 75, 100]}
             formatTooltip={(data) => {
-              return data.value[data.valueKey];
+              const cf = data.config
+                .filter(isLineOrAreaDefinition)
+                .find((x) => x.metricProperty === data.valueKey);
+              return `${cf?.label} ${data.value[data.valueKey]}`;
             }}
             showDateMarker
           />

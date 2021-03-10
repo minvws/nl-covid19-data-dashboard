@@ -8,11 +8,12 @@ import { useMemo } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
 import { getValuesInTimeframe, TimeframeOption } from '~/utils/timeframe';
 
-export type SeriesConfig<T extends TimestampedValue> = (
+export type SeriesConfigTypes<T extends TimestampedValue> =
   | LineSeriesDefinition<T>
   | AreaSeriesDefinition<T>
-  | RangeSeriesDefinition<T>
-)[];
+  | RangeSeriesDefinition<T>;
+
+export type SeriesConfig<T extends TimestampedValue> = SeriesConfigTypes<T>[];
 
 export type LineSeriesDefinition<T extends TimestampedValue> = {
   type: 'line';
