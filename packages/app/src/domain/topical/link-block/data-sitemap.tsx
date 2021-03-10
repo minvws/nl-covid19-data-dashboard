@@ -1,7 +1,7 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { ArrowIconRight } from '~/components-styled/arrow-icon';
-import { Title } from '~/components-styled/aside/title';
+import { Heading } from '~/components-styled/typography';
 import { Box } from '~/components-styled/base';
 import { LinkWithIcon } from '~/components-styled/link-with-icon';
 import { InlineText, Text } from '~/components-styled/typography';
@@ -10,12 +10,11 @@ import { asResponsiveArray } from '~/style/utils';
 
 export function DataSitemap() {
   return (
-    <Box pb={4}>
-      <Title
-        level={2}
-        title={siteText.nationaal_actueel.data_sitemap_titel}
-        fontSize="2rem"
-      />
+    <Box>
+      <Heading level={3} fontSize={3}>
+        {siteText.nationaal_actueel.data_sitemap_titel}
+      </Heading>
+
       <Box
         display="flex"
         justifyContent={{ lg: 'space-between' }}
@@ -23,7 +22,7 @@ export function DataSitemap() {
         css={css({
           '> div': {
             flexGrow: 1,
-            flexBasis: asResponsiveArray({ _: '100%', md: '50%', lg: '33%' }),
+            flexBasis: asResponsiveArray({ _: '100%', sm: '50%', lg: '33%' }),
             mb: 4,
           },
         })}
@@ -158,7 +157,7 @@ const StyledHeader = styled(InlineText)(
   css({
     fontWeight: 'bold',
     display: 'block',
-    marginBottom: '0.5rem',
+    my: 2,
   })
 );
 
