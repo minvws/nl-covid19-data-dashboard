@@ -10,7 +10,6 @@ import { ScaleLinear } from 'd3-scale';
 import { first, last } from 'lodash';
 import { useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
-import { TimeframeOption } from '~/utils/timeframe';
 import { Bounds } from './common';
 import { SeriesDoubleValue, SeriesItem, SeriesSingleValue } from './series';
 
@@ -34,7 +33,6 @@ export function useScales<T extends TimestampedValue>(args: {
   maximumValue: number;
   bounds: Bounds;
   numTicks: number;
-  timeframe: TimeframeOption;
 }) {
   const { maximumValue, bounds, numTicks, values } = args;
 

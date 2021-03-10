@@ -166,7 +166,6 @@ export function TimeSeriesChart<T extends TimestampedValue>({
       maximumValue: seriesMax,
       bounds,
       numTicks: tickValues?.length || numGridLines,
-      timeframe,
     }
   );
 
