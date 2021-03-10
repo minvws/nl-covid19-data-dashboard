@@ -136,7 +136,7 @@
     "lint": "eslint .",
     "type-check": "yarn compile",
     "compile": "tsc --pretty --noEmit",
-    "download": "download https://coronadashboard.rijksoverheid.nl/json/latest-data.zip -e -o public/json/",
+    "download": "node ./infra/download.js",
     "clean": "rimraf .next"
   },
   "browserslist": [
