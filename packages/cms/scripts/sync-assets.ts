@@ -35,12 +35,12 @@ const CACHE_DIR =
           }
         : imageResizeTargets.flatMap((size) => [
             {
-              url: `${image.url}?w=${size}`,
+              url: `${image.url}?&q=65&w=${size}`,
               filename: `${image.assetId}-${size}.${image.extension}`,
               directory: `images`,
             },
             {
-              url: `${image.url}?w=${size}&fm=webp`,
+              url: `${image.url}?&q=65&w=${size}&fm=webp`,
               filename: `${image.assetId}-${size}.webp`,
               directory: `images`,
             },
@@ -48,10 +48,14 @@ const CACHE_DIR =
     ),
   ];
 
-  await cacheAssets(assets, CACHE_DIR);
-  await copyCachedAssets(assets, CACHE_DIR, TARGET_DIR);
-
-  console.log('🎉 Done.\n');
+  try {
+    await cacheAssets(assets, CACHE_DIR);
+    await copyCachedAssets(assets, CACHE_DIR, TARGET_DIR);
+    console.log('🎉 Done.\n');
+  } catch (err) {
+    console.log('Error occured:', err);
+    throw err;
+  }
 })().catch((err) => console.log(err));
 
 async function cacheAssets(assets: LocalAsset[], cacheDirectory: string) {
