@@ -20,6 +20,8 @@ const SanityImageTile = styled(SanityImage)(
   })
 );
 
+const IMAGE_MAX_WIDTH = 980;
+
 export function ContentImage({
   node,
   contentWrapper,
@@ -39,9 +41,13 @@ export function ContentImage({
           role="group"
           spacing={3}
           display="inline-block"
-          maxWidth={980}
+          maxWidth={IMAGE_MAX_WIDTH}
         >
-          <SanityImageTile {...getImageProps(node, { sizes })} />
+          <SanityImageTile
+            {...getImageProps(node, {
+              sizes: [[IMAGE_MAX_WIDTH, IMAGE_MAX_WIDTH]],
+            })}
+          />
 
           {caption}
         </Box>

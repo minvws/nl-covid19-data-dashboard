@@ -1,13 +1,9 @@
-// find closest resized element
-export function findClosestSize(width: number, list: number[]) {
-  return list.reduce((a: number, b: number) => {
-    const aDiff = Math.abs(a - width);
-    const bDiff = Math.abs(b - width);
-
-    if (aDiff == bDiff) {
-      return a > b ? a : b;
-    } else {
-      return bDiff < aDiff ? b : a;
-    }
-  });
+/**
+ * find closest size, but not smaller than given size. When there's no match
+ * it will return the biggest size.
+ * eg: `findClosestSize(320, [300, 400]) === 400`
+ */
+export function findClosestSize(size: number, sizes: number[]) {
+  const match = sizes.sort((a, b) => a - b).find((x) => x >= size);
+  return match || sizes[sizes.length - 1];
 }
