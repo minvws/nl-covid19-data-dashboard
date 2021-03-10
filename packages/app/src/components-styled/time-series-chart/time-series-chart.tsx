@@ -1,19 +1,20 @@
 import { TimestampedValue } from '@corona-dashboard/common';
+import { Bar } from '@visx/shape';
 import { useTooltip } from '@visx/tooltip';
 import { useEffect, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
-import { TimeframeOption } from '~/utils/timeframe';
 import { Legend } from '~/components-styled/legend';
+import { TimeframeOption } from '~/utils/timeframe';
 import { ValueAnnotation } from '../value-annotation';
 import {
   Axes,
   ChartContainer,
   DateLineMarker,
-  TimespanAnnotation,
   DateSpanMarker,
   Overlay,
   PointMarkers,
+  TimespanAnnotation,
   Tooltip,
   TooltipData,
   TooltipFormatter,
@@ -22,15 +23,14 @@ import { Benchmark } from './components/benchmark';
 import { Series } from './components/series';
 import {
   calculateSeriesMaximum,
+  DataOptions,
   SeriesConfig,
   useHoverState,
   useLegendItems,
   useScales,
   useSeriesList,
-  DataOptions,
 } from './logic';
 import { useDimensions } from './logic/dimensions';
-import { Bar } from '@visx/shape';
 export type { SeriesConfig } from './logic';
 
 /**
@@ -141,6 +141,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     forcedMaximumValue,
     benchmark,
     timespanAnnotations,
+    showOnlyNearestPoint: onlyShowNearestPoint,
   } = dataOptions;
 
   const { padding, bounds } = useDimensions(width, height, paddingLeft);
@@ -175,6 +176,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     xScale,
     yScale,
     timespanAnnotations,
+    onlyShowNearestPoint,
   });
 
   useEffect(() => {

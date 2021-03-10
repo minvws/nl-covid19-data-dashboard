@@ -7,6 +7,8 @@ export interface DataOptions {
     label: string;
   };
   timespanAnnotations?: TimespanAnnotationConfig[];
+  hideLegend?: boolean;
+  showOnlyNearestPoint?: boolean;
 }
 
 export interface TimespanAnnotationConfig {

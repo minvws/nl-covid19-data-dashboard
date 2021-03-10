@@ -15,6 +15,7 @@ import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
 import { BehaviorChoroplethTile } from '~/domain/behavior/behavior-choropleth-tile';
 import { BehaviorLineChartTile } from '~/domain/behavior/behavior-line-chart-tile';
+import { BehaviorLineChartTile2 } from '~/domain/behavior/behavior-line-chart-tile2';
 import { BehaviorTableTile } from '~/domain/behavior/behavior-table-tile';
 import { MoreInformation } from '~/domain/behavior/components/more-information';
 import { FCWithLayout } from '~/domain/layout/layout';
@@ -107,6 +108,12 @@ const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
         />
 
         <BehaviorLineChartTile
+          values={data.behavior.values}
+          title={nl_gedrag.basisregels_over_tijd.title}
+          introduction={nl_gedrag.basisregels_over_tijd.intro}
+        />
+
+        <BehaviorLineChartTile2
           values={data.behavior.values}
           title={nl_gedrag.basisregels_over_tijd.title}
           introduction={nl_gedrag.basisregels_over_tijd.intro}

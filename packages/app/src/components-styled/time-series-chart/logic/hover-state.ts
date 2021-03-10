@@ -32,6 +32,7 @@ interface UseHoverStateArgs<T extends TimestampedValue> {
   xScale: ScaleLinear<number, number>;
   yScale: ScaleLinear<number, number>;
   timespanAnnotations?: TimespanAnnotationConfig[];
+  onlyShowNearestPoint?: boolean;
 }
 
 interface HoverState<T> {
@@ -56,6 +57,7 @@ export function useHoverState<T extends TimestampedValue>({
   xScale,
   yScale,
   timespanAnnotations,
+  onlyShowNearestPoint,
 }: UseHoverStateArgs<T>): UseHoverStateResponse<T> {
   const [hoverState, setHoverState] = useState<HoverState<T>>();
   const timeoutRef = useRef<any>();
@@ -76,7 +78,7 @@ export function useHoverState<T extends TimestampedValue>({
   );
 
   /**
-   * We only really have to do bisect once on original values object, because
+   * We only really have to do bisect once on the original values object, because
    * all points of all trends are always coming from those values and are thus
    * aligned vertically.
    *
@@ -84,7 +86,7 @@ export function useHoverState<T extends TimestampedValue>({
    * can use the original data timestamps directly for the xDomain without
    * conversion to/from Date objects.
    *
-   * The points are always rendered in the middle of the date-span, and therefor
+   * The points are always rendered in the middle of the date-span, and therefore
    * we use bisectCenter otherwise the calculated index jumps to the next as
    * soon as you cross the marker line to the right.
    */
@@ -137,6 +139,10 @@ export function useHoverState<T extends TimestampedValue>({
         .map((config, index) => {
           const seriesValue = seriesList[index][valuesIndex];
 
+          if (!seriesValue) {
+            return;
+          }
+
           switch (config.type) {
             case 'line':
             case 'area':
@@ -159,6 +165,10 @@ export function useHoverState<T extends TimestampedValue>({
       const rangePoints: HoveredPoint<T>[] = seriesConfig
         .flatMap((config, index) => {
           const seriesValue = seriesList[index][valuesIndex];
+
+          if (!seriesValue) {
+            return;
+          }
 
           switch (config.type) {
             case 'range':
@@ -200,7 +210,7 @@ export function useHoverState<T extends TimestampedValue>({
 
       setHoverState({
         valuesIndex,
-        linePoints,
+        linePoints: onlyShowNearestPoint ? [nearestLinePoint] : linePoints,
         rangePoints,
         nearestLinePoint,
         timespanAnnotationIndex,
