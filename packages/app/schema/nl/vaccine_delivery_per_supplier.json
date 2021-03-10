@@ -1,13 +1,14 @@
 {
   "definitions": {
     "value": {
-      "title": "nl_vaccine_delivery_estimate_per_supplier_value",
+      "title": "nl_vaccine_delivery_per_supplier_value",
       "type": "object",
       "required": [
         "total",
         "bio_n_tech_pfizer",
         "moderna",
         "astra_zeneca",
+        "is_estimate",
         "date_of_insertion_unix",
         "date_start_unix",
         "date_end_unix"
@@ -26,6 +27,9 @@
         "astra_zeneca": {
           "type": "integer"
         },
+        "is_estimate": {
+          "type": "boolean"
+        },
         "date_of_insertion_unix": {
           "type": "integer"
         },
@@ -39,7 +43,7 @@
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_vaccine_delivery_estimate_per_supplier",
+  "title": "nl_vaccine_delivery_per_supplier",
   "type": "object",
   "required": ["values", "last_value"],
   "additionalProperties": false,

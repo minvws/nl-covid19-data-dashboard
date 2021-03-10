@@ -144,6 +144,7 @@ export interface National {
   corona_melder_app: NlCoronaMelderApp;
   vaccine_delivery: NlVaccineDelivery;
   vaccine_delivery_estimate: NlVaccineDeliveryEstimate;
+  vaccine_delivery_per_supplier: NlVaccineDeliveryPerSupplier;
   vaccine_administered: NlVaccineAdministered;
   vaccine_administered_estimate: NlVaccineAdministeredEstimate;
   vaccine_administered_care_institutions: NlVaccineAdministeredCareInstitutions;
@@ -154,7 +155,6 @@ export interface National {
   vaccine_administered_lnaz: NlVaccineAdministeredLnaz;
   vaccine_administered_total: NlVaccineAdministeredTotal;
   vaccine_administered_rate_moving_average: NlVaccineAdministeredRateMovingAverage;
-  vaccine_stock_per_supplier: NlVaccineStockPerSupplier;
   vaccine_administered_planned: NlVaccineAdministeredPlanned;
 }
 export interface NationalDifference {
@@ -492,6 +492,20 @@ export interface NlVaccineDeliveryEstimateValue {
   date_start_unix: number;
   date_end_unix: number;
 }
+export interface NlVaccineDeliveryPerSupplier {
+  values: NlVaccineDeliveryPerSupplierValue[];
+  last_value: NlVaccineDeliveryPerSupplierValue;
+}
+export interface NlVaccineDeliveryPerSupplierValue {
+  total: number;
+  bio_n_tech_pfizer: number;
+  moderna: number;
+  astra_zeneca: number;
+  is_estimate: boolean;
+  date_of_insertion_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
+}
 export interface NlVaccineAdministered {
   values: NlVaccineAdministeredValue[];
   last_value: NlVaccineAdministeredValue;
@@ -597,19 +611,6 @@ export interface NlVaccineAdministeredRateMovingAverageValue {
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
-}
-export interface NlVaccineStockPerSupplier {
-  values: NlVaccineStockPerSupplierValue[];
-  last_value: NlVaccineStockPerSupplierValue;
-}
-export interface NlVaccineStockPerSupplierValue {
-  total: number;
-  bio_n_tech_pfizer: number;
-  moderna: number;
-  astra_zeneca: number;
-  date_of_insertion_unix: number;
-  date_start_unix: number;
-  date_end_unix: number;
 }
 export interface NlVaccineAdministeredPlanned {
   values: NlVaccineAdministeredPlannedValue[];
