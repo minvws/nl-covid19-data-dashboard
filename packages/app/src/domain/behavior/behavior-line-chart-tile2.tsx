@@ -14,15 +14,13 @@ import { TimeSeriesChart } from '~/components-styled/time-series-chart';
 import { Heading } from '~/components-styled/typography';
 import siteText from '~/locale/index';
 import { colors } from '~/style/theme';
-import {
-  isLineOrAreaDefinition,
-  SeriesConfig,
-} from '../../components-styled/time-series-chart/logic';
+import { SeriesConfig } from '../../components-styled/time-series-chart/logic';
 import {
   BehaviorIdentifier,
   behaviorIdentifiers,
   BehaviorType,
 } from './behavior-types';
+import { BehaviorTooltip } from './components/behavior-tooltip';
 import { BehaviorTypeControl } from './components/behavior-type-control';
 
 interface BehaviorLineChartTileProps {
@@ -128,12 +126,13 @@ export function BehaviorLineChartTile2({
               markNearestPointOnly: true,
             }}
             tickValues={[0, 25, 50, 75, 100]}
-            formatTooltip={(data) => {
-              const cf = data.config
-                .filter(isLineOrAreaDefinition)
-                .find((x) => x.metricProperty === data.valueKey);
-              return `${cf?.label} ${data.value[data.valueKey]}`;
-            }}
+            formatTooltip={({ value, valueKey, config }) => (
+              <BehaviorTooltip
+                value={value}
+                valueKey={valueKey}
+                config={config}
+              />
+            )}
             showDateMarker
           />
         )}
