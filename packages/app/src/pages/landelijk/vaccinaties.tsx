@@ -97,7 +97,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
         description={text.metadata.description}
       />
       <TileList>
-        {/* <VaccinePageIntroduction data={data} text={text} /> */}
+        <VaccinePageIntroduction data={data} text={text} />
 
         <ArticleStrip articles={content.highlight.articles} />
 
@@ -489,9 +489,10 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             title={replaceVariablesInText(
               text.delivery_estimate_time_span.title,
               {
-                weeks:
+                weeks: formatNumber(
                   data.vaccine_delivery_estimate_time_span.last_value
-                    .time_span_weeks,
+                    .time_span_weeks
+                ),
               }
             )}
             metadata={{
@@ -510,9 +511,10 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
               {replaceVariablesInText(
                 text.delivery_estimate_time_span.description,
                 {
-                  weeks:
+                  weeks: formatNumber(
                     data.vaccine_delivery_estimate_time_span.last_value
-                      .time_span_weeks,
+                      .time_span_weeks
+                  ),
                 }
               )}
             </Text>
