@@ -29,7 +29,7 @@ export function LinkGroup(props: LinkGroupProps) {
   );
 }
 
-interface Link {
+export interface Link {
   href: string;
   text: string;
 }
@@ -69,8 +69,5 @@ const Item = styled.li(
   css({
     listStyle: 'none',
     marginBottom: 2,
-    ':last-of-type': {
-      marginBottom: 0,
-    },
   })
 );

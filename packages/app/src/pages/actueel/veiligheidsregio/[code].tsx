@@ -7,7 +7,7 @@ import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
 import { HighlightTeaserProps } from '~/components-styled/highlight-teaser';
 import { MaxWidth } from '~/components-styled/max-width';
-import { QuickLinks } from '~/components-styled/quick-links';
+import { CollapsibleButton } from '~/components-styled/collapsible';
 import { RiskLevelIndicator } from '~/components-styled/risk-level-indicator';
 import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
@@ -179,23 +179,24 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
               </RiskLevelIndicator>
             </MiniTrendTileLayout>
 
-            <LinkBlock
-              header={text.quick_links.header}
-              links={[
-                {
-                  href: '/landelijk/vaccinaties',
-                  text: text.quick_links.links.nationaal,
-                },
-                {
-                  href: `/veiligheidsregio/${router.query.code}/positief-geteste-mensen`,
-                  text: replaceVariablesInText(
-                    text.quick_links.links.veiligheidsregio,
-                    { safetyRegionName: props.safetyRegionName }
-                  ),
-                },
-                { href: '/gemeente', text: text.quick_links.links.gemeente },
-              ]}
-            />
+            <CollapsibleButton label={text.quick_links.header}>
+              <LinkBlock
+                quickLinks={[
+                  {
+                    href: '/landelijk/vaccinaties',
+                    text: text.quick_links.links.nationaal,
+                  },
+                  {
+                    href: `/veiligheidsregio/${router.query.code}/positief-geteste-mensen`,
+                    text: replaceVariablesInText(
+                      text.quick_links.links.veiligheidsregio,
+                      { safetyRegionName: props.safetyRegionName }
+                    ),
+                  },
+                  { href: '/gemeente', text: text.quick_links.links.gemeente },
+                ]}
+              />
+            </CollapsibleButton>
 
             {content.editorial && content.highlight && (
               <>

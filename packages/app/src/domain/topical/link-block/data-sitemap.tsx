@@ -23,7 +23,7 @@ export function DataSitemap() {
           '> div': {
             flexGrow: 1,
             flexBasis: asResponsiveArray({ _: '100%', sm: '50%', lg: '33%' }),
-            mb: 4,
+            mb: 3,
           },
         })}
       >
@@ -171,9 +171,6 @@ const List = styled.ul(
 const Item = styled.li(
   css({
     listStyle: 'none',
-    marginBottom: 2,
-    ':last-of-type': {
-      marginBottom: 0,
-    },
+    mb: 2,
   })
 );

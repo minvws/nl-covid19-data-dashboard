@@ -2,35 +2,32 @@ import styled from 'styled-components';
 import css from '@styled-system/css';
 import { asResponsiveArray } from '~/style/utils';
 
-import { LinkWithIcon } from '~/components-styled/link-with-icon';
 import { Heading } from '~/components-styled/typography';
-import { ArrowIconRight } from '~/components-styled/arrow-icon';
 import { Box } from '~/components-styled/base';
 import { DataSitemap } from './data-sitemap';
-import { LinkGroup } from './link-group';
+import { LinkGroup, Link } from './link-group';
+import siteText from '~/locale/index';
 
-interface LinkBlockProps {
-  header: string;
-  links: QuickLink[];
-}
+type LinkBlockProps = {
+  quickLinksHeader?: string;
+  quickLinks: Link[];
+};
 
-interface QuickLink {
-  href: string;
-  text: string;
-}
-
-export function LinkBlock({ header, links }: LinkBlockProps) {
+export function LinkBlock({
+  quickLinksHeader = siteText.common_actueel.quick_links.overview.header,
+  quickLinks,
+}: LinkBlockProps) {
   return (
     <Container>
-      <MainLinks>
+      <QuickLinks>
         <Heading level={3} fontSize={3}>
-          {header}
+          {quickLinksHeader}
         </Heading>
-        <LinkGroup links={links} />
-      </MainLinks>
-      <FilteredLinks>
+        <LinkGroup links={quickLinks} />
+      </QuickLinks>
+      <Sitemap>
         <DataSitemap />
-      </FilteredLinks>
+      </Sitemap>
     </Container>
   );
 }
@@ -54,7 +51,7 @@ const Container = styled(Box)(
   })
 );
 
-const MainLinks = styled(Box)(
+const QuickLinks = styled(Box)(
   css({
     position: 'relative',
     flexGrow: 3,
@@ -63,7 +60,7 @@ const MainLinks = styled(Box)(
   })
 );
 
-const FilteredLinks = styled(Box)(
+const Sitemap = styled(Box)(
   css({
     flexGrow: asResponsiveArray({ _: 2, lg: 3 }),
     pt: asResponsiveArray({ _: 4, md: 0 }),
