@@ -435,6 +435,19 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
         </ChartTile>
 
         <TwoKpiSection>
+          <KpiTile
+            title={text.stock.title}
+            metadata={{
+              date: data.vaccine_stock.last_value.date_of_insertion_unix,
+              source: text.bronnen.stock,
+            }}
+          >
+            <KpiValue absolute={data.vaccine_stock.last_value.total} />
+            <Text>{text.stock.description}</Text>
+          </KpiTile>
+        </TwoKpiSection>
+
+        <TwoKpiSection>
           <KpiTile title={text.expected_page_additions.title}>
             <Text mb={4}>{text.expected_page_additions.description}</Text>
             {additions.length > 0 && (
