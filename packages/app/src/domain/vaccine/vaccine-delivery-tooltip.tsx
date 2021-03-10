@@ -22,13 +22,7 @@ export type TooltipValue = (
 ) &
   TimestampedTrendValue;
 
-export function createDeliveryTooltipFormatter(text: AllLanguages) {
-  return (values: HoverPoint<TooltipValue>[]) => {
-    return formatVaccinationsTooltip(values, text);
-  };
-}
-
-function formatVaccinationsTooltip(
+export function formatVaccinationsTooltip(
   values: HoverPoint<TooltipValue>[],
   text: AllLanguages
 ) {
@@ -56,10 +50,13 @@ function formatVaccinationsTooltip(
       <TooltipList>
         {values.map((value) => (
           <Fragment key={value.label}>
-            <TooltipListItem color={value.color ?? 'black'}>
+            <TooltipListItem>
+              <span>
+                <ColorIndicator color={value.color} />
+                {formatLabel(value.label, text)}:
+              </span>
               <TooltipValueContainer>
-                {formatLabel(value.label, text)}:{' '}
-                <strong>{formatValue(value)}</strong>
+                {formatValue(value)}
               </TooltipValueContainer>
             </TooltipListItem>
 
@@ -116,29 +113,28 @@ const TooltipList = styled.ol`
   list-style: none;
 `;
 
-interface TooltipListItemProps {
+const ColorIndicator = styled.span<{
   color?: string;
-}
-
-const TooltipListItem = styled.li<TooltipListItemProps>`
-  display: flex;
-  align-items: center;
-
+}>`
   &::before {
     content: '';
     display: ${(x) => (x.color ? 'inline-block' : 'none')};
     height: 8px;
     width: 8px;
     border-radius: 50%;
-    background: ${(x) => x.color};
+    background: ${(x) => x.color || 'black'};
     margin-right: 0.5em;
     flex-shrink: 0;
   }
 `;
 
-const TooltipValueContainer = styled.span`
+const TooltipListItem = styled.li`
   display: flex;
-  width: 100%;
-  min-width: 150px;
+  align-items: center;
   justify-content: space-between;
+`;
+
+const TooltipValueContainer = styled.span`
+  font-weight: bold;
+  margin-left: 1em;
 `;

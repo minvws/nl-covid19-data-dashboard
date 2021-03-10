@@ -100,6 +100,14 @@ export function AreaChartGraph<T extends TrendValue, K extends TrendValue>(
           .flat()
           .filter((display) => display.pattern === 'hatched')
           .map((display) => {
+            /**
+             * @TODO If the hatched pattern is rendered as a white/transparent
+             * overlay than we only need to create one pattern (See stacked bar
+             * chart implementation).
+             *
+             * This is probably only worth refactoring if we need to make the
+             * styling consistent with the stacked bar chart.
+             */
             return (
               <HatchedPattern
                 key={`pattern-${display.id}-${display.metricProperty}`}
