@@ -9,7 +9,7 @@ import { SeriesConfig } from './series';
 
 export function useLegendItems<T extends TimestampedValue>(
   config: SeriesConfig<T>,
-  dataOptions: DataOptions
+  dataOptions?: DataOptions
 ) {
   const legendItems = useMemo(() => {
     const items = config
@@ -40,7 +40,7 @@ export function useLegendItems<T extends TimestampedValue>(
     /**
      * Add annotations to the legend
      */
-    if (dataOptions.timespanAnnotations) {
+    if (dataOptions?.timespanAnnotations) {
       for (const annotation of dataOptions.timespanAnnotations) {
         items.push({
           color: annotation.color
