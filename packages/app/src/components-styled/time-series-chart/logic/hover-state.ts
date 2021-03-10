@@ -192,14 +192,14 @@ export function useHoverState<T extends TimestampedValue>({
         .filter(isDefined);
 
       /**
-       * For nearest point calculation we only need to look at the y component
-       * of the mouse, since all series originate from the same original value
-       * and are thus aligned with the same timestamp.
+       * For nearest point calculation we only first need to find the nearest X position,
+       * then filter all the linepoints by the given X. This way shorter lines that
+       * lie before or after the current X position are ignored.
        */
       const nearestX = [...linePoints].sort(
         (a, b) => Math.abs(a.x - mousePoint.x) - Math.abs(b.x - mousePoint.x)
       )[0];
-      const sameX = [...linePoints].filter((point) => point.x === nearestX.x);
+      const sameX = linePoints.filter((point) => point.x === nearestX.x);
 
       const nearestLinePoint = sameX.sort(
         (a, b) => Math.abs(a.y - mousePoint.y) - Math.abs(b.y - mousePoint.y)
