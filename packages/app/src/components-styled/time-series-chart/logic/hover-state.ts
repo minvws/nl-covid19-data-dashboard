@@ -8,7 +8,6 @@ import { bisectCenter } from 'd3-array';
 import { ScaleLinear } from 'd3-scale';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import { isDefined } from 'ts-is-present';
-import { calculateDistance } from '~/utils/calculate-distance';
 import {
   isLineOrAreaDefinition,
   isRangeDefinition,
@@ -197,9 +196,13 @@ export function useHoverState<T extends TimestampedValue>({
        * of the mouse, since all series originate from the same original value
        * and are thus aligned with the same timestamp.
        */
-      const nearestLinePoint = [...linePoints].sort(
-        (a, b) =>
-          calculateDistance(a, mousePoint) - calculateDistance(b, mousePoint)
+      const nearestX = [...linePoints].sort(
+        (a, b) => Math.abs(a.x - mousePoint.x) - Math.abs(b.x - mousePoint.x)
+      )[0];
+      const sameX = [...linePoints].filter((point) => point.x === nearestX.x);
+
+      const nearestLinePoint = sameX.sort(
+        (a, b) => Math.abs(a.y - mousePoint.y) - Math.abs(b.y - mousePoint.y)
       )[0];
 
       const timespanAnnotationIndex = timespanAnnotations
