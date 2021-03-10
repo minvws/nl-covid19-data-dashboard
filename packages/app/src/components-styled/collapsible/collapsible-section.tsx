@@ -4,7 +4,7 @@ import {
   DisclosurePanel,
 } from '@reach/disclosure';
 import { css } from '@styled-system/css';
-import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import useResizeObserver from 'use-resize-observer';
 import { Box, BoxProps } from '~/components-styled/base';
