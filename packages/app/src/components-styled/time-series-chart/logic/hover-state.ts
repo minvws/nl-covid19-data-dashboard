@@ -144,7 +144,7 @@ export function useHoverState<T extends TimestampedValue>({
         .map((config, index) => {
           const seriesValue = seriesList[index][valuesIndex];
 
-          if (!seriesValue) {
+          if (!(seriesValue as SeriesSingleValue)?.__value) {
             return;
           }
 
@@ -168,7 +168,7 @@ export function useHoverState<T extends TimestampedValue>({
         .flatMap((config, index) => {
           const seriesValue = seriesList[index][valuesIndex];
 
-          if (!seriesValue) {
+          if (!(seriesValue as SeriesDoubleValue)?.__value_a) {
             return;
           }
 
