@@ -613,7 +613,10 @@ export interface NlVaccineStock {
   last_value: NlVaccineStockValue;
 }
 export interface NlVaccineStockValue {
-  doses: number;
+  total: number;
+  bio_n_tech_pfizer: number;
+  moderna: number;
+  astra_zeneca: number;
   date_of_insertion_unix: number;
   date_unix: number;
 }
