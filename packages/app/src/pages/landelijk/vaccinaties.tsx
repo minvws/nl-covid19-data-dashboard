@@ -364,7 +364,6 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             {({ width }) => (
               <TimeSeriesChart
                 title={text.grafiek_draagvlak.titel}
-                timeframe="week"
                 width={width}
                 ariaLabelledBy="chart_vaccine_support"
                 values={data.vaccine_support.values}
