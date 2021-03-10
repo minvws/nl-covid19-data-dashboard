@@ -31,6 +31,10 @@ import {
 import { formatNumber } from '~/utils/formatNumber';
 import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { TimeSeriesChart } from '~/components-styled/time-series-chart';
+import { ChartTile } from '~/components-styled/chart-tile';
+import { ParentSize } from '@visx/responsive';
+import { colors } from '~/style/theme';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -74,6 +78,32 @@ const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
           }}
           reference={nl_gedrag.reference}
         />
+
+        <ChartTile
+          metadata={{ source: corona_melder_app.header.bronnen.rivm }}
+          title={'TEST'}
+          description={'descriptie'}
+        >
+          <ParentSize>
+            {({ width }) => (
+              <TimeSeriesChart
+                title={'titel'}
+                width={width}
+                values={data.corona_melder_app.values}
+                ariaLabelledBy=""
+                paddingLeft={40}
+                seriesConfig={[
+                  {
+                    type: 'line',
+                    metricProperty: 'warned_daily',
+                    label: 'hier komt text',
+                    color: colors.data.primary,
+                  },
+                ]}
+              />
+            )}
+          </ParentSize>
+        </ChartTile>
 
         <ArticleStrip articles={content.articles} />
 
