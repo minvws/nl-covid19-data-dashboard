@@ -22,6 +22,7 @@ export type LineSeriesDefinition<T extends TimestampedValue> = {
   color: string;
   style?: 'solid' | 'dashed';
   strokeWidth?: number;
+  isFaded?: boolean;
 };
 
 export type RangeSeriesDefinition<T extends TimestampedValue> = {
@@ -112,6 +113,12 @@ export function isSeriesValue(
   return isDefined((value as any).__value);
 }
 
+export function isSeriesDoubleValue(
+  value: SeriesSingleValue | SeriesDoubleValue
+): value is SeriesDoubleValue {
+  return isDefined((value as SeriesDoubleValue).__value_a);
+}
+
 /**
  * There are two types of trends. The normal single value trend and a double
  * value type. Probably we can cover all
@@ -167,40 +174,30 @@ export function getSeriesData<T extends TimestampedValue>(
   }
 
   if (isDateSeries(values)) {
-    return (
-      values
-        .map((x) => ({
-          /**
-           * This is messy and could be improved.
-           */
-          __value: (x[metricProperty] as unknown) as number | null,
-          // @ts-expect-error @TODO figure out why the type guard doesn't work
-          __date_unix: x.date_unix,
-        }))
-        // Filter any possible null values
-        .filter((x) => isPresent(x.__value)) as SeriesSingleValue[]
-    );
+    return values.map((x) => ({
+      /**
+       * This is messy and could be improved.
+       */
+      __value: (x[metricProperty] as unknown) as number | null,
+      // @ts-expect-error @TODO figure out why the type guard doesn't work
+      __date_unix: x.date_unix,
+    })) as SeriesSingleValue[];
   }
 
   if (isDateSpanSeries(values)) {
-    return (
-      values
-        .map((x) => ({
-          /**
-           * This is messy and could be improved.
-           */
-          __value: (x[metricProperty] as unknown) as number | null,
-          __date_unix:
-            /**
-             * Here we set the date to be in the middle of the timespan, so that
-             * the chart can render the points in the middle of each span.
-             */
-            // @ts-expect-error @TODO figure out why the type guard doesn't work
-            x.date_start_unix + (x.date_end_unix - x.date_start_unix) / 2,
-        }))
-        // Filter any possible null values
-        .filter((x) => isPresent(x.__value)) as SeriesSingleValue[]
-    );
+    return values.map((x) => ({
+      /**
+       * This is messy and could be improved.
+       */
+      __value: (x[metricProperty] as unknown) as number | null,
+      __date_unix:
+        /**
+         * Here we set the date to be in the middle of the timespan, so that
+         * the chart can render the points in the middle of each span.
+         */
+        // @ts-expect-error @TODO figure out why the type guard doesn't work
+        x.date_start_unix + (x.date_end_unix - x.date_start_unix) / 2,
+    })) as SeriesSingleValue[];
   }
 
   throw new Error(`Incompatible timestamps are used in value ${values[0]}`);

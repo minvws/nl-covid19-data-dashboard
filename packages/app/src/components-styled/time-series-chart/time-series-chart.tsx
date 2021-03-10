@@ -141,7 +141,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     forcedMaximumValue,
     benchmark,
     timespanAnnotations,
-    showOnlyNearestPoint: onlyShowNearestPoint,
+    markNearestPointOnly,
   } = dataOptions || {};
 
   const { padding, bounds } = useDimensions(width, height, paddingLeft);
@@ -176,7 +176,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     xScale,
     yScale,
     timespanAnnotations,
-    showOnlyNearestPoint: onlyShowNearestPoint,
+    showOnlyNearestPoint: markNearestPointOnly,
   });
 
   useEffect(() => {

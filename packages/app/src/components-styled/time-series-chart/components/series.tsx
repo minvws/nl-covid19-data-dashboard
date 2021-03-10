@@ -1,6 +1,7 @@
 import { TimestampedValue } from '@corona-dashboard/common';
 import { ScaleLinear } from 'd3-scale';
 import { memo } from 'react';
+import { colors } from '~/style/theme';
 import { AreaTrend, LineTrend, RangeTrend } from '.';
 import {
   Bounds,
@@ -52,13 +53,17 @@ function SeriesUnmemoized<T extends TimestampedValue>({
       {seriesList.map((series, index) => {
         const config = seriesConfig[index];
 
+        const filteredSeries = (series as any[]).filter((x) => {
+          return x.__value !== null && x.__value_a !== null;
+        });
+
         switch (config.type) {
           case 'line':
             return (
               <LineTrend
                 key={config.metricProperty as string}
-                series={series as SeriesSingleValue[]}
-                color={config.color}
+                series={filteredSeries as SeriesSingleValue[]}
+                color={config.isFaded ? colors.data.faded : config.color}
                 style={config.style}
                 strokeWidth={config.strokeWidth}
                 getX={getX}
@@ -70,7 +75,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({
             return (
               <AreaTrend
                 key={index}
-                series={series as SeriesSingleValue[]}
+                series={filteredSeries as SeriesSingleValue[]}
                 color={config.color}
                 style={config.style}
                 fillOpacity={config.fillOpacity}
@@ -86,7 +91,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({
             return (
               <RangeTrend
                 key={config.metricPropertyLow as string}
-                series={series as SeriesDoubleValue[]}
+                series={filteredSeries as SeriesDoubleValue[]}
                 color={config.color}
                 fillOpacity={config.fillOpacity}
                 strokeWidth={config.strokeWidth}

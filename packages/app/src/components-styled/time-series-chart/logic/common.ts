@@ -27,8 +27,8 @@ export interface DataOptions {
     label: string;
   };
   timespanAnnotations?: TimespanAnnotationConfig[];
-  hideLegend?: boolean;
-  showOnlyNearestPoint?: boolean;
+  disableLegend?: boolean;
+  markNearestPointOnly?: boolean;
 }
 
 export interface TimespanAnnotationConfig {

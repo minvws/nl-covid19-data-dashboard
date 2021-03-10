@@ -69,12 +69,15 @@ export function BehaviorLineChartTile2({
   const seriesConfig: SeriesConfig<
     NationalBehaviorValue | RegionalBehaviorValue
   > = useMemo(() => {
-    return behaviorIdentifierWithData.map((behaviorData) => ({
-      type: 'line',
-      metricProperty: behaviorData.valueKey as any,
-      label: behaviorData.label,
-      color: currentId === behaviorData.id ? colors.data.primary : '#E7E7E7',
-    }));
+    return behaviorIdentifierWithData
+      .sort((x) => (x.id === currentId ? 1 : -1)) // sort selected as last so it will be rendered on top in the SVG
+      .map((behaviorData) => ({
+        type: 'line',
+        metricProperty: behaviorData.valueKey as any,
+        label: behaviorData.label,
+        color: colors.data.primary,
+        isFaded: currentId !== behaviorData.id,
+      }));
   }, [behaviorIdentifierWithData, currentId]);
 
   return (
@@ -121,8 +124,8 @@ export function BehaviorLineChartTile2({
             seriesConfig={seriesConfig}
             dataOptions={{
               isPercentage: true,
-              hideLegend: true,
-              showOnlyNearestPoint: true,
+              disableLegend: true,
+              markNearestPointOnly: true,
             }}
             tickValues={[0, 25, 50, 75, 100]}
             formatTooltip={(data) => {

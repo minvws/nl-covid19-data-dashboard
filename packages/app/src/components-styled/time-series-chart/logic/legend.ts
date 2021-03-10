@@ -12,7 +12,7 @@ export function useLegendItems<T extends TimestampedValue>(
   dataOptions?: DataOptions
 ) {
   const legendItems = useMemo(() => {
-    if (dataOptions?.hideLegend) {
+    if (dataOptions?.disableLegend) {
       return;
     }
 
