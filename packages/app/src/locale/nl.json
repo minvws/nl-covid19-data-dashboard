@@ -2071,6 +2071,11 @@
         "href": "",
         "text": "Ministerie van VWS",
         "download": ""
+      },
+      "delivery_estimate_time_span": {
+        "href": "",
+        "text": "",
+        "download": ""
       }
     },
     "section_vaccinations_more_information": {
