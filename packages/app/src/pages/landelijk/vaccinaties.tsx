@@ -104,9 +104,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
           <KpiTile
             title={text.gezette_prikken.title}
             metadata={{
-              date:
-                data.vaccine_administered_total.last_value
-                  .date_of_insertion_unix,
+              date: data.vaccine_administered_total.last_value.date_unix,
               source: text.bronnen.all_left,
             }}
           >
@@ -233,7 +231,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
           title={text.grafiek.titel}
           description={text.grafiek.omschrijving}
           metadata={{
-            date: vaccineDeliveryValues[0].date_of_insertion_unix,
+            date: data.vaccine_delivery.last_value.date_end_unix,
             source: text.bronnen.rivm,
           }}
         >
@@ -349,7 +347,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             siteText.accessibility.grafieken.vaccinatie_draagvlak
           }
           metadata={{
-            date: data.vaccine_support.last_value.date_of_insertion_unix,
+            date: data.vaccine_support.last_value.date_end_unix,
             source: text.bronnen.rivm,
           }}
         >
