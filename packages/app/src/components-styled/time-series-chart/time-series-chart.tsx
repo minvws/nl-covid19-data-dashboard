@@ -1,6 +1,7 @@
+import useResizeObserver from 'use-resize-observer';
 import { TimestampedValue } from '@corona-dashboard/common';
 import { useTooltip } from '@visx/tooltip';
-import { useEffect, useMemo } from 'react';
+import { RefObject, useEffect, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
 import { TimeframeOption } from '~/utils/timeframe';
@@ -143,7 +144,13 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     timespanAnnotations,
   } = dataOptions || {};
 
-  const { padding, bounds } = useDimensions(width, height, paddingLeft);
+  const { width: yAxisWidth = 0, ref: yAxisRef } = useResizeObserver();
+
+  const { padding, bounds } = useDimensions(
+    width,
+    height,
+    paddingLeft ?? yAxisWidth + 10 // 10px seems to be enough padding
+  );
 
   const legendItems = useLegendItems(seriesConfig, dataOptions);
 
@@ -236,6 +243,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
             xScale={xScale}
             yScale={yScale}
             isPercentage={isPercentage}
+            yAxisRef={(yAxisRef as unknown) as RefObject<SVGGElement>}
           />
 
           <Bar
