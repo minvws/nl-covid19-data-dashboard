@@ -2,9 +2,7 @@ import React from 'react';
 import { useTheme } from 'styled-components';
 import { useMediaQuery } from './useMediaQuery';
 
-export function useBreakpoints(
-  initialValue?: boolean
-): {
+export type Breakpoints = {
   /**
    * ~420px
    */
@@ -25,7 +23,9 @@ export function useBreakpoints(
    * ~1600px
    */
   xl: boolean;
-} {
+};
+
+export function useBreakpoints(initialValue?: boolean): Breakpoints {
   const { mediaQueries } = useTheme();
   const xs = useMediaQuery(mediaQueries.xs, initialValue);
   const sm = useMediaQuery(mediaQueries.sm, initialValue);
