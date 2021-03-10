@@ -7,7 +7,10 @@ import {
 import { TimestampedValue } from '@corona-dashboard/common';
 import { TimeframeOption } from '~/utils/timeframe';
 import { ChartTileWithTimeframe } from './chart-tile';
-import { ComponentCallbackInfo } from '~/components-styled/line-chart/components';
+import {
+  ComponentCallbackFunction,
+  ComponentCallbackInfo,
+} from '~/components-styled/line-chart/components';
 import { MetadataProps } from './metadata';
 import { assert } from '~/utils/assert';
 import slugify from 'slugify';
@@ -57,7 +60,9 @@ export function LineChartTile<T extends TimestampedValue>({
                 width={parent.width}
                 timeframe={timeframe}
                 ariaLabelledBy={ariaLabelledBy}
-                componentCallback={componentCallback}
+                componentCallback={createComponentCallback(
+                  chartProps.componentCallback
+                )}
               />
             )}
           </ParentSize>
@@ -68,30 +73,41 @@ export function LineChartTile<T extends TimestampedValue>({
   );
 }
 
-function componentCallback(callbackInfo: ComponentCallbackInfo) {
-  switch (callbackInfo.type) {
-    case 'AxisBottom': {
-      const domain = callbackInfo.props.scale.domain();
-      const tickFormat = callbackInfo.props.tickFormat;
+/*
+ * @TODO: This setup does not allow passing a componentCallback for the
+ * AxisBottom to the LineChartTile.
+ */
+function createComponentCallback(suppliedCallback?: ComponentCallbackFunction) {
+  return function (callbackInfo: ComponentCallbackInfo) {
+    switch (callbackInfo.type) {
+      case 'AxisBottom': {
+        const domain = callbackInfo.props.scale.domain();
+        const tickFormat = callbackInfo.props.tickFormat;
 
-      const tickLabelProps = (value: Date, index: number) => {
-        const labelProps = callbackInfo.props.tickLabelProps
-          ? callbackInfo.props.tickLabelProps(value, index)
-          : {};
-        labelProps.textAnchor = value === domain[0] ? 'start' : 'end';
-        labelProps.dx = 0;
-        labelProps.dy = -4;
-        return labelProps;
-      };
+        const tickLabelProps = (value: Date, index: number) => {
+          const labelProps = callbackInfo.props.tickLabelProps
+            ? callbackInfo.props.tickLabelProps(value, index)
+            : {};
+          labelProps.textAnchor = value === domain[0] ? 'start' : 'end';
+          labelProps.dx = 0;
+          labelProps.dy = -4;
+          return labelProps;
+        };
 
-      return (
-        <AxisBottom
-          {...(callbackInfo.props as any)}
-          tickLabelProps={tickLabelProps}
-          tickFormat={tickFormat}
-          tickValues={domain}
-        />
-      );
+        return (
+          <AxisBottom
+            {...(callbackInfo.props as any)}
+            tickLabelProps={tickLabelProps}
+            tickFormat={tickFormat}
+            tickValues={domain}
+          />
+        );
+      }
     }
-  }
+
+    // Provide components for all possible spots except AxisBottom
+    if (suppliedCallback) {
+      return suppliedCallback(callbackInfo);
+    }
+  };
 }
