@@ -3,36 +3,34 @@
   "type": "object",
   "title": "vr_escalation_level",
   "required": [
-    "date_unix",
     "level",
-    "date_start_measurement_unix",
-    "date_end_measurement_unix",
-    "date_next_estimate_unix",
-    "valid_from_unix",
+    "based_on_statistics_to",
+    "based_on_statistics_from",
+    "next_determined_unix",
     "last_determined_unix",
+    "valid_from_unix",
     "date_of_insertion_unix"
   ],
   "additionalProperties": false,
   "properties": {
-    "date_unix": { "type": "integer" },
     "level": {
       "type": "number",
       "minimum": 1,
       "maximum": 4
     },
-    "date_start_measurement_unix": {
+    "based_on_statistics_to": {
       "type": "integer"
     },
-    "date_end_measurement_unix": {
+    "based_on_statistics_from": {
       "type": "integer"
     },
-    "date_next_estimate_unix": {
-      "type": "integer"
-    },
-    "valid_from_unix": {
+    "next_determined_unix": {
       "type": "integer"
     },
     "last_determined_unix": {
+      "type": "integer"
+    },
+    "valid_from_unix": {
       "type": "integer"
     },
     "date_of_insertion_unix": {

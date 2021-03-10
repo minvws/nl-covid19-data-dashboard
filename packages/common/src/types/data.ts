@@ -838,13 +838,12 @@ export interface RegionalElderlyAtHomeValue {
   vrcode: string;
 }
 export interface VrEscalationLevel {
-  date_unix: number;
   level: number;
-  date_start_measurement_unix: number;
-  date_end_measurement_unix: number;
-  date_next_estimate_unix: number;
-  valid_from_unix: number;
+  based_on_statistics_to: number;
+  based_on_statistics_from: number;
+  next_determined_unix: number;
   last_determined_unix: number;
+  valid_from_unix: number;
   date_of_insertion_unix: number;
 }
 export interface VrTestedOverallSum {
@@ -897,14 +896,13 @@ export interface RegionsTestedOverall {
   date_of_insertion_unix: number;
 }
 export interface EscalationLevels {
-  date_unix: number;
   vrcode: string;
   level: number;
-  date_start_measurement_unix: number;
-  date_end_measurement_unix: number;
-  date_next_estimate_unix: number;
-  valid_from_unix: number;
+  based_on_statistics_to: number;
+  based_on_statistics_from: number;
+  next_determined_unix: number;
   last_determined_unix: number;
+  valid_from_unix: number;
   date_of_insertion_unix: number;
 }
 export interface RegionsNursingHome {
