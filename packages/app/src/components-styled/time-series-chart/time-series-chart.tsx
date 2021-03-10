@@ -28,6 +28,7 @@ import {
   useScales,
   useSeriesList,
   DataOptions,
+  useValuesInTimeframe,
 } from './logic';
 import { useDimensions } from './logic/dimensions';
 import { Bar } from '@visx/shape';
@@ -112,7 +113,7 @@ export type TimeSeriesChartProps<T extends TimestampedValue> = {
 };
 
 export function TimeSeriesChart<T extends TimestampedValue>({
-  values,
+  values: allValues,
   seriesConfig,
   width,
   height = 250,
@@ -147,7 +148,8 @@ export function TimeSeriesChart<T extends TimestampedValue>({
 
   const legendItems = useLegendItems(seriesConfig, dataOptions);
 
-  const seriesList = useSeriesList(values, seriesConfig, timeframe);
+  const values = useValuesInTimeframe(allValues, timeframe);
+  const seriesList = useSeriesList(values, seriesConfig);
 
   const calculatedSeriesMax = useMemo(
     () => calculateSeriesMaximum(values, seriesConfig, benchmark?.value),
@@ -164,6 +166,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
       maximumValue: seriesMax,
       bounds,
       numTicks: tickValues?.length || numGridLines,
+      timeframe,
     }
   );
 
