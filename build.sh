@@ -2,10 +2,6 @@
 start=`date +%s`
 set -e # Any subsequent(*) commands which fail will cause the shell script to exit immediately
 
-# These are the environment variables we need to build the application.
-# We also define defaults in case you're running this locally
-# SANITY_DATASET="${SANITY_DATASET:-development}"
-
 # Zip JSON files so the data is included in the build.
 cd packages/app/public/ && zip -qq latest-data.zip json/* && cd ../../../
 
@@ -28,13 +24,13 @@ yarn workspace @corona-dashboard/cms sync-assets
 NEXT_PUBLIC_LOCALE="nl"
 yarn workspace @corona-dashboard/app build
 yarn workspace @corona-dashboard/app export
-mv packages/app/out exports/nl
+mv packages/app/out/ exports/nl
 
 # Do the same thing again for EN build
 NEXT_PUBLIC_LOCALE="en"
 yarn workspace @corona-dashboard/app build
 yarn workspace @corona-dashboard/app export
-mv packages/app/out exports/en
+mv packages/app/out/ exports/en
 
 # Done
 end=`date +%s`
