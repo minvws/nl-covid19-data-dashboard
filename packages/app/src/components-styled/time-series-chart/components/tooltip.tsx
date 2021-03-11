@@ -151,7 +151,7 @@ export function DefaultTooltip<T extends TimestampedValue>({
             return (
               <TooltipListItem key={index} color={x.color}>
                 <TooltipValueContainer>
-                  <InlineText mr={2}>{x.label}:</InlineText>
+                  <InlineText mr={2}>{x.shortLabel ?? x.label}:</InlineText>
                   <b>
                     {`${getValueStringForKey(
                       value,
@@ -170,7 +170,7 @@ export function DefaultTooltip<T extends TimestampedValue>({
             return (
               <TooltipListItem key={index} color={x.color}>
                 <TooltipValueContainer>
-                  <InlineText mr={2}>{x.label}:</InlineText>
+                  <InlineText mr={2}>{x.shortLabel ?? x.label}:</InlineText>
                   <b>
                     {getValueStringForKey(
                       value,
