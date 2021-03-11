@@ -75,8 +75,6 @@
     "barscale_screenreader_text": "{{value}} intensive care-opnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
     "extra_uitleg": "Aantal mensen met bevestigd COVID-19 dat per dag op een intensive care-afdeling van een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de afgelopen drie dagen.\n\nLet op: Hoewel ziekenhuizen proberen om COVID-19 patiënten snel te registreren, is het aannemelijk dat de registratie achter loopt. Om deze reden zijn de aantallen van de afgelopen dagen meestal nog niet compleet.",
     "linechart_titel": "Intensive care-opnames door de tijd heen",
-    "linechart_legend_trend_label": "Intensive care-opnames",
-    "linechart_legend_inaccurate_label": "Verwerkingstijd van GGD",
     "bronnen": {
       "nice": {
         "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
@@ -109,7 +107,9 @@
       "href": "/verantwoording#intensive-care",
       "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     },
-    "kpi_titel": "Gemiddeld aantal intensive care-opnames over 3 dagen"
+    "kpi_titel": "Gemiddeld aantal intensive care-opnames over 3 dagen",
+    "linechart_legend_trend_label": "Intensive care-opnames",
+    "linechart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
   },
   "verdenkingen_huisartsen": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
@@ -436,8 +436,6 @@
     "extra_uitleg": "Aantal nieuwe positief geteste bewoners in verpleeghuizen dat per dag gemeld is.",
     "pagina_toelichting": "Aantal nieuwe positief geteste bewoners in verpleeghuizen dat per dag is gemeld. Dit getal is een inschatting van het aantal gemelde bewoners in verpleeghuizen dat in Nederland positief getest is en COVID-19 heeft.\n\nDe rekenmethode is per 29 september verbeterd. Zie ook de 'Uitleg bij de cijfers'.",
     "linechart_titel": "Aantal positief geteste bewoners door de tijd heen",
-    "line_chart_legend_trend_label": "Aantal positief geteste bewoners",
-    "line_chart_legend_inaccurate_label": "Verwerkingstijd GGD",
     "barscale_screenreader_text": "{{value}} positief geteste bewoners.",
     "titel_sidebar": "Positief geteste bewoners",
     "chloropleth_legenda": {
@@ -462,7 +460,9 @@
         "text": "RIVM"
       }
     },
-    "kpi_titel": "Aantal positief geteste bewoners per dag"
+    "kpi_titel": "Aantal positief geteste bewoners per dag",
+    "line_chart_legend_trend_label": "Aantal positief geteste bewoners",
+    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
   },
   "verpleeghuis_oversterfte": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -476,8 +476,6 @@
     "barscale_screenreader_text": "{{value}} overleden bewoners.",
     "extra_uitleg": "Dit getal is een inschatting van het aantal gemelde verpleeghuisbewoners dat in Nederland overlijdt aan de gevolgen van het nieuwe coronavirus.",
     "linechart_titel": "Aantal overleden bewoners door de tijd heen",
-    "line_chart_legend_trend_label": "Aantal overleden bewoners",
-    "line_chart_legend_inaccurate_label": "Verwerkingstijd GGD",
     "map_titel": "Verpleeghuis oversterfte in Nederland",
     "map_toelichting": "Deze kaarten laten zien hoe de oversterfte in verpleeghuizen is in Nederland per dag.",
     "titel_sidebar": "Overleden bewoners verpleeghuizen per dag",
@@ -497,7 +495,9 @@
         "text": "RIVM"
       }
     },
-    "kpi_titel": "Sterfte per dag"
+    "kpi_titel": "Sterfte per dag",
+    "line_chart_legend_trend_label": "Aantal overleden bewoners",
+    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
   },
   "blok_verpleeghuis_zorg": {
     "title": "Verpleeghuiszorg",
@@ -769,7 +769,13 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
+    "barscale_keys": [
+      "0 tot 20",
+      "20 tot 40",
+      "40 tot 60",
+      "60 tot 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -979,7 +985,7 @@
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "De risicokaart van Nederland",
-    "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. De laatste keer is dit op {{last_update}} gebeurd. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. [Meer informatie over de risiconiveaus](/over-risiconiveaus).\n\n**De landelijke lockdown blijft van kracht tot en met ten minste 15 maart. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**",
+    "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. De laatste keer is dit op 2 maart gebeurd. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. [Meer informatie over de risiconiveaus](/over-risiconiveaus).\n\n**De landelijke lockdown blijft van kracht tot en met ten minste 30 maart. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**",
     "metadata": {
       "title": "Risiconiveaus per veiligheidsregio | Coronadashboard | Rijksoverheid.nl",
       "description": "Overzicht van het huidige risiconiveau per veiligheidsregio in Nederland."
@@ -1129,8 +1135,6 @@
     "barscale_screenreader_text": "{{value}} overleden bewoners.",
     "extra_uitleg": "Dit getal is een inschatting van het aantal gemelde verpleeghuisbewoners uit deze veiligheidsregio dat overlijdt aan de gevolgen van het nieuwe coronavirus.",
     "linechart_titel": "Aantal overleden bewoners door de tijd heen",
-    "line_chart_legend_trend_label": "Aantal overleden bewoners",
-    "line_chart_legend_inaccurate_label": "Verwerkingstijd GGD",
     "map_titel": "Verpleeghuis oversterfte in Nederland",
     "map_toelichting": "Deze kaarten laten zien hoe de oversterfte in verpleeghuizen is in Nederland per dag.",
     "titel_sidebar": "Sterfte per dag",
@@ -1148,7 +1152,9 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
         "text": "RIVM"
       }
-    }
+    },
+    "line_chart_legend_trend_label": "Aantal overleden bewoners",
+    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
   },
   "veiligheidsregio_verpleeghuis_besmette_locaties": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -1192,8 +1198,6 @@
     "extra_uitleg": "Aantal nieuwe positief geteste bewoners in verpleeghuizen dat per dag gemeld is.",
     "pagina_toelichting": "Aantal positief geteste bewoners in verpleeghuizen per dag in {{safetyRegion}}. Dit getal is een inschatting van het aantal gemelde bewoners in verpleeghuizen dat in Nederland positief getest is en COVID-19 heeft.\n\nDe rekenmethode is per 29 september verbeterd. Zie ook de 'Uitleg bij de cijfers'.",
     "linechart_titel": "Aantal positief geteste bewoners door de tijd heen",
-    "line_chart_legend_trend_label": "Aantal positief geteste bewoners",
-    "line_chart_legend_inaccurate_label": "Verwerkingstijd GGD",
     "barscale_screenreader_text": "{{value}} positief geteste bewoners.",
     "titel_sidebar": "Positief geteste bewoners",
     "chloropleth_legenda": {
@@ -1216,7 +1220,9 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
         "text": "RIVM"
       }
-    }
+    },
+    "line_chart_legend_trend_label": "Aantal positief geteste bewoners",
+    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
   },
   "data_warning_text": "",
   "veelgestelde_vragen_metadata": {
@@ -1481,8 +1487,6 @@
     "extra_uitleg": "Het aantal bewoners van een instelling voor gehandicaptenzorg waarvan dagelijks is gemeld dat ze positief getest zijn op COVID-19.",
     "pagina_toelichting": "Bewoners van een instelling voor gehandicaptenzorg zijn vaak extra kwetsbaar bij een besmetting met het coronavirus. GGD’en houden daarom sinds 1 juli  bij of een positief geteste persoon in een instelling voor gehandicaptenzorg woont. Zo kunnen maatregelen worden genomen wanneer het aantal besmettingen in instellingen toeneemt.",
     "linechart_titel": "Aantal positief geteste bewoners door de tijd heen",
-    "line_chart_legend_trend_label": "Aantal positief geteste bewoners",
-    "line_chart_legend_inaccurate_label": "Verwerkingstijd GGD",
     "barscale_screenreader_text": "{{value}} positief geteste bewoners.",
     "chloropleth_legenda": {
       "titel": "Aantal per 100.000 inwoners",
@@ -1506,7 +1510,9 @@
         "text": "RIVM"
       }
     },
-    "kpi_titel": "Aantal positief geteste bewoners van gehandicapteninstellingen per dag"
+    "kpi_titel": "Aantal positief geteste bewoners van gehandicapteninstellingen per dag",
+    "line_chart_legend_trend_label": "Aantal positief geteste bewoners",
+    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
   },
   "gehandicaptenzorg_oversterfte": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -1516,8 +1522,6 @@
     "barscale_screenreader_text": "{{value}} overleden bewoners.",
     "extra_uitleg": "Dit getal is een berekening van het aantal bewoners van instellingen voor gehandicaptenzorg dat is overleden per dag.",
     "linechart_titel": "Aantal overleden bewoners door de tijd heen",
-    "line_chart_legend_trend_label": "Aantal overleden bewoners",
-    "line_chart_legend_inaccurate_label": "Verwerkingstijd GGD",
     "map_titel": "Gehandicaptenzorg – sterfte",
     "map_toelichting": "Deze kaarten laten zien hoe de oversterfte in gehandicaptenzorglocatie is in Nederland per dag.",
     "metadata": {
@@ -1536,7 +1540,9 @@
         "text": "RIVM"
       }
     },
-    "kpi_titel": "Aantal overleden personen"
+    "kpi_titel": "Aantal overleden personen",
+    "line_chart_legend_trend_label": "Aantal overleden bewoners",
+    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
   },
   "veiligheidsregio_gehandicaptenzorg_oversterfte": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -1550,8 +1556,6 @@
     "barscale_screenreader_text": "{{value}} overleden bewoners.",
     "extra_uitleg": "Berekening van het aantal bewoners van instellingen voor gehandicaptenzorg dat gisteren in deze regio is overleden aan de gevolgen van het coronavirus.",
     "linechart_titel": "Aantal overleden bewoners door de tijd heen",
-    "line_chart_legend_trend_label": "Aantal overleden bewoners",
-    "line_chart_legend_inaccurate_label": "Verwerkingstijd GGD",
     "map_titel": "Gehandicaptenzorg oversterfte in Nederland",
     "map_toelichting": "Deze kaarten laten zien hoe de oversterfte in gehandicaptenzorglocaties is in Nederland per dag.",
     "titel_sidebar": "Sterfte per dag",
@@ -1569,7 +1573,9 @@
         "href": "https://data.rivm.nl/covid-19/COVID-19_gehandicaptenzorg.html",
         "text": "RIVM"
       }
-    }
+    },
+    "line_chart_legend_trend_label": "Aantal overleden bewoners",
+    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
   },
   "veiligheidsregio_gehandicaptenzorg_besmette_locaties": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -1605,8 +1611,6 @@
     "extra_uitleg": "Het aantal bewoners van een instelling voor gehandicaptenzorg in deze regio waarvan gisteren is gemeld dat ze positief getest zijn op COVID-19.",
     "pagina_toelichting": "Bewoners van een instelling voor gehandicaptenzorg zijn vaak extra kwetsbaar bij een besmetting met het coronavirus. GGD’en houden daarom bij waneer een bewoner van een instelling positief test op COVID-19. Zo kunnen maatregelen worden genomen wanneer het aantal besmettingen in instellingen toeneemt.",
     "linechart_titel": "Aantal positief geteste bewoners door de tijd heen",
-    "line_chart_legend_trend_label": "Aantal positief geteste bewoners",
-    "line_chart_legend_inaccurate_label": "Verwerkingstijd GGD",
     "barscale_screenreader_text": "{{value}} positief geteste bewoners.",
     "titel_sidebar": "Positief geteste bewoners",
     "chloropleth_legenda": {
@@ -1630,7 +1634,9 @@
         "text": "RIVM"
       }
     },
-    "kpi_titel": "Aantal positief geteste bewoners van gehandicapteninstellingen per dag"
+    "kpi_titel": "Aantal positief geteste bewoners van gehandicapteninstellingen per dag",
+    "line_chart_legend_trend_label": "Aantal positief geteste bewoners",
+    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
   },
   "thuiswonende_ouderen": {
     "titel_sidebar": "Thuiswonende 70-plussers",
@@ -1658,12 +1664,12 @@
       "kpi_daily_per_100k_title": "Aantal positief geteste thuiswonende 70-plussers per dag, per 100.000",
       "kpi_daily_per_100k_description": "Dit getal laat zien van hoeveel thuiswonende personen van 70 jaar of ouder gisteren is gemeld dat ze positief zijn getest op COVID-19,  per 100.000 thuiswonende 70-plussers. Deze berekening maakt het mogelijk om regio’s beter met elkaar te vergelijken.",
       "line_chart_daily_title": "Nieuwe besmettingen onder 70-plussers door de tijd heen",
-      "line_chart_legend_trend_label": "Nieuwe besmettingen",
-      "line_chart_legend_inaccurate_label": "Verwerkingstijd van GGD",
       "choropleth_daily_title": "Verdeling nieuwe besmettingen thuiswonende 70-plussers (per veiligheidsregio)",
       "choropleth_daily_description": "Deze kaart laat de verdeling zien van het aantal nieuwe besmettingen per dag onder thuiswonende personen van 70 jaar of ouder per 100.000 thuiswonende personen van 70 jaar of ouder, waarvan gisteren is gemeld dat ze positief getest zijn op COVID-19.",
       "choropleth_daily_legenda": "Aantal per 100.000 thuiswonende 70-plussers",
-      "datums": "Laatste waarden verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt."
+      "datums": "Laatste waarden verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+      "line_chart_legend_trend_label": "Nieuwe besmettingen",
+      "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
     },
     "section_deceased": {
       "title": "Thuiswonende 70-plussers - COVID-19 sterfte",
@@ -1682,9 +1688,9 @@
       "kpi_daily_title": "Aantal 70-plussers dat aan COVID-19 is overleden, per dag",
       "kpi_daily_description": "Aantal thuiswonende personen van 70 jaar of ouder waarvan gisteren is gemeld dat ze zijn overleden aan COVID-19.",
       "line_chart_daily_title": "Aantal aan COVID-19 overleden 70-plussers door de tijd heen",
+      "datums": "Laatste waarden verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
       "line_chart_legend_trend_label": "Aantal overledenen",
-      "line_chart_legend_inaccurate_label": "Verwerkingstijd GGD",
-      "datums": "Laatste waarden verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt."
+      "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
     },
     "kpi_titel": "Aantal positief geteste mensen"
   },
@@ -1714,9 +1720,9 @@
       "kpi_daily_per_100k_title": "Aantal positief geteste thuiswonende 70-plussers per dag, per 100.000",
       "kpi_daily_per_100k_description": "Door te berekenen hoeveel thuiswonende 70-plussers in deze regio dagelijks besmet worden per 100.000 70-plussers is vergelijking met andere regio's mogelijk.",
       "line_chart_daily_title": "Nieuwe besmettingen onder thuiswonenden van 70 jaar of ouder door de tijd heen",
+      "datums": "Laatste waarden verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
       "line_chart_legend_trend_label": "Nieuwe besmettingen",
-      "line_chart_legend_inaccurate_label": "Verwerkingstijd van GGD",
-      "datums": "Laatste waarden verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt."
+      "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
     },
     "section_deceased": {
       "title": "Thuiswonende 70-plussers in {{safetyRegion}} - COVID-19 sterfte",
@@ -1735,9 +1741,9 @@
       "kpi_daily_title": "Aantal 70-plussers overleden aan COVID-19, per dag",
       "kpi_daily_description": "Aantal thuiswonende personen van 70 jaar of ouder in deze regio waarvan gisteren is gemeld dat ze zijn overleden aan COVID-19",
       "line_chart_daily_title": "Aantal aan COVID-19 overleden 70-plussers door de tijd heen",
+      "datums": "Laatste waarden verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
       "line_chart_legend_trend_label": "Aantal overledenen",
-      "line_chart_legend_inaccurate_label": "Verwerkingstijd GGD",
-      "datums": "Laatste waarden verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt."
+      "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
     },
     "kpi_titel": "Aantal positief geteste mensen"
   },
@@ -1770,7 +1776,7 @@
       "line_chart_covid_daily_title": "Meldingen van aan COVID-19 overleden patiënten door de tijd heen",
       "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel COVID-19 patiënten in de geselecteerde periode gemeld is dat ze zijn overleden.",
       "line_chart_covid_daily_legend_trend_label": "Meldingen overleden patiënten",
-      "line_chart_covid_daily_legend_inaccurate_label": "Verwerkingsperiode GGD"
+      "line_chart_covid_daily_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
     },
     "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
   },
@@ -1803,7 +1809,7 @@
       "line_chart_covid_daily_title": "Gemelde aantal overleden COVID-19 patiënten door de tijd heen",
       "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel COVID-19 patiënten in deze veiligheidsregio in de geselecteerde periode gemeld is dat ze zijn overleden.",
       "line_chart_covid_daily_legend_trend_label": "Gemeld aantal overleden",
-      "line_chart_covid_daily_legend_inaccurate_label": "Verwerkingstijd GGD"
+      "line_chart_covid_daily_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
     },
     "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
   },
@@ -2103,7 +2109,11 @@
     "expected_page_additions": {
       "title": "Verwachte toevoegingen aan deze pagina",
       "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer de vaccinatiegraad.",
-      "additions": ["", "", ""]
+      "additions": [
+        "",
+        "",
+        ""
+      ]
     },
     "data": {
       "difference": "Do not remove this key. It is required as a temporary workaround",
@@ -2228,7 +2238,11 @@
       "kpi_expected_page_additions": {
         "title": "Verwachte toevoegingen aan deze pagina",
         "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer de vaccinatiegraad.",
-        "additions": ["", "", ""]
+        "additions": [
+          "",
+          "",
+          ""
+        ]
       },
       "vaccination_chart": {
         "product_names": {
@@ -2316,7 +2330,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "De risicokaart van Nederland",
-      "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. De laatste keer is dit op {{last_update}} gebeurd. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. [Meer informatie over de risiconiveaus](/over-risiconiveaus).\n\n**De landelijke lockdown blijft van kracht tot en met ten minste 15 maart. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**"
+      "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. De laatste keer is dit op 2 maart gebeurd. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. [Meer informatie over de risiconiveaus](/over-risiconiveaus).\n\n**De landelijke lockdown blijft van kracht tot en met ten minste 30 maart. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**"
     },
     "data_sitemap_titel": "Onderwerpen op dit dashboard",
     "data_sitemap_toelichting": "Ga direct naar de volgende onderwerpen:",
