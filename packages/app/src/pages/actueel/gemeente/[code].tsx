@@ -17,7 +17,7 @@ import { createSelectRegionHandler } from '~/components/choropleth/select-handle
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
 import { FCWithLayout, getDefaultLayout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
-import { LinkBlock } from '~/domain/topical/link-block';
+import { Sitemap } from '~/domain/topical/sitemap';
 import { EditorialSummary } from '~/domain/topical/editorial-teaser';
 import { EditorialTile } from '~/domain/topical/editorial-tile';
 import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
@@ -42,7 +42,7 @@ import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 export { getStaticPaths } from '~/static-paths/gm';
-import { useDataSitemap } from '~/domain/topical/link-block/use-data-sitemap';
+import { useDataSitemap } from '~/domain/topical/sitemap/use-data-sitemap';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -193,7 +193,7 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
             <CollapsibleButton
               label={siteText.common_actueel.overview_links_header}
             >
-              <LinkBlock
+              <Sitemap
                 quickLinksHeader={text.quick_links.header}
                 quickLinks={[
                   {

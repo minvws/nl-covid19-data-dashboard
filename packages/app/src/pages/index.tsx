@@ -7,7 +7,7 @@ import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
 import { CollapsibleButton } from '~/components-styled/collapsible';
 import { HighlightTeaserProps } from '~/components-styled/highlight-teaser';
-import { LinkBlock } from '~/domain/topical/link-block';
+import { Sitemap } from '~/domain/topical/sitemap';
 import { MaxWidth } from '~/components-styled/max-width';
 import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
@@ -41,7 +41,7 @@ import {
 import { colors } from '~/style/theme';
 import { formatDate } from '~/utils/formatDate';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { useDataSitemap } from '~/domain/topical/link-block/use-data-sitemap';
+import { useDataSitemap } from '~/domain/topical/sitemap/use-data-sitemap';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 export const getStaticProps = createGetStaticProps(
@@ -173,7 +173,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
             <CollapsibleButton
               label={siteText.common_actueel.overview_links_header}
             >
-              <LinkBlock
+              <Sitemap
                 quickLinksHeader={text.quick_links.header}
                 quickLinks={[
                   {

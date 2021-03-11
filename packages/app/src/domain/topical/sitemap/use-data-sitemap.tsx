@@ -1,10 +1,11 @@
 import siteText from '~/locale/index';
 import { LinkGroupProps } from './link-group';
+import { Municipal, National, Regionaal } from '@corona-dashboard/common';
 
 export function useDataSitemap(
   base: 'landelijk' | 'veiligheidsregio' | 'gemeente',
   code?: string,
-  data?: any
+  data?: National | Regionaal | Municipal
 ): LinkGroupProps[] {
   if (base === 'gemeente' && code) {
     const baseUrl = `/${base}/${code}`;

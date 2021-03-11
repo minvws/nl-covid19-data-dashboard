@@ -4,19 +4,19 @@ import { Heading } from '~/components-styled/typography';
 import { Box } from '~/components-styled/base';
 import { LinkGroup, LinkItemProps, LinkGroupProps } from './link-group';
 
-type LinkBlockProps = {
+type SitemapProps = {
   quickLinksHeader: string;
   quickLinks: LinkItemProps[];
   dataSitemapHeader: string;
   dataSitemap: LinkGroupProps[];
 };
 
-export function LinkBlock({
+export function Sitemap({
   quickLinksHeader,
   quickLinks,
   dataSitemapHeader,
   dataSitemap,
-}: LinkBlockProps) {
+}: SitemapProps) {
   return (
     <Box display="flex" p={4} flexDirection={{ _: 'column', md: 'row' }}>
       <Box
