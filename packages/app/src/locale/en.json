@@ -2415,6 +2415,7 @@
       "title": "Current situation in safety region {{safetyRegionName}}",
       "description": "Current situation in safety region {{safetyRegionName}}"
     },
+    "data_sitemap_title": "Cijfers van {{safetyRegionName}}",
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of The Netherlands",
       "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on 2 March. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\n**There remains a national lockdown until at least 30 March. [Click here to view the lockdown measures](/landelijk/maatregelen).**"
@@ -2497,6 +2498,7 @@
       "title": "Current situation in {{municipalityName}}",
       "description": "The current situation in {{municipalityName}}"
     },
+    "data_sitemap_title": "Cijfers van {{municipalityName}}",
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of the Netherlands",
       "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on 2 March. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\n**There remains a national lockdown until at least 30 March. [Click here to view the lockdown measures](/landelijk/maatregelen).**"
