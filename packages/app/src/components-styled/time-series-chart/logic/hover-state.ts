@@ -9,7 +9,7 @@ import { ScaleLinear } from 'd3-scale';
 import { isEmpty } from 'lodash';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
-import { TimespanAnnotationConfig } from './common';
+import { Padding, TimespanAnnotationConfig } from './common';
 import {
   SeriesConfig,
   SeriesDoubleValue,
@@ -29,10 +29,11 @@ interface UseHoverStateArgs<T extends TimestampedValue> {
   values: T[];
   seriesList: SeriesList;
   seriesConfig: SeriesConfig<T>;
-  paddingLeft: number;
+  padding: Padding;
   xScale: ScaleLinear<number, number>;
   yScale: ScaleLinear<number, number>;
   timespanAnnotations?: TimespanAnnotationConfig[];
+  isNearestPointOnly?: boolean;
 }
 
 interface HoverState<T> {
@@ -53,10 +54,11 @@ export function useHoverState<T extends TimestampedValue>({
   values,
   seriesList,
   seriesConfig,
-  paddingLeft,
+  padding,
   xScale,
   yScale,
   timespanAnnotations,
+  isNearestPointOnly,
 }: UseHoverStateArgs<T>): UseHoverStateResponse<T> {
   const [hoverState, setHoverState] = useState<HoverState<T>>();
   const timeoutRef = useRef<any>();
@@ -93,11 +95,11 @@ export function useHoverState<T extends TimestampedValue>({
     function (values: TimestampedValue[], xPosition: number): number {
       if (values.length === 1) return 0;
 
-      const date_unix = xScale.invert(xPosition - paddingLeft);
+      const date_unix = xScale.invert(xPosition);
 
       return bisectCenter(valuesDateUnix, date_unix, 0, values.length);
     },
-    [paddingLeft, xScale, valuesDateUnix]
+    [xScale, valuesDateUnix]
   );
 
   const handleHover = useCallback(
@@ -129,6 +131,12 @@ export function useHoverState<T extends TimestampedValue>({
       if (!mousePoint) {
         return;
       }
+
+      /**
+       * Align point coordinates with actual datapoints by subtracting padding
+       */
+      mousePoint.x -= padding.left;
+      mousePoint.y -= padding.top;
 
       /**
        * Bisect here is working directly on the original values (as opposed to
@@ -210,20 +218,27 @@ export function useHoverState<T extends TimestampedValue>({
 
       setHoverState({
         valuesIndex,
-        linePoints,
-        rangePoints,
+        linePoints: isNearestPointOnly
+          ? linePoints.filter((x) => x === nearestPoint)
+          : linePoints,
+        rangePoints: isNearestPointOnly
+          ? rangePoints.filter((x) => x === nearestPoint)
+          : rangePoints,
         nearestPoint,
         timespanAnnotationIndex,
       });
     },
     [
-      bisect,
       values,
+      padding.left,
+      padding.top,
+      bisect,
       seriesConfig,
+      timespanAnnotations,
+      isNearestPointOnly,
       seriesList,
       xScale,
       yScale,
-      timespanAnnotations,
     ]
   );
 
