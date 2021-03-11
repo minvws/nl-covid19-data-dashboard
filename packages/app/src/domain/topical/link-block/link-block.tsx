@@ -1,14 +1,10 @@
-import styled from 'styled-components';
 import css from '@styled-system/css';
 import { asResponsiveArray } from '~/style/utils';
-
 import { Heading } from '~/components-styled/typography';
 import { Box } from '~/components-styled/base';
-import { DataSitemap, DataSitemapProps } from './data-sitemap';
 import { LinkGroup, Link, LinkGroupProps } from './link-group';
-import siteText from '~/locale/index';
 
-type LinkBlockProps = DataSitemapProps & {
+type LinkBlockProps = {
   quickLinksHeader: string;
   quickLinks: Link[];
   dataSitemapHeader: string;
@@ -22,17 +18,34 @@ export function LinkBlock({
   dataSitemap,
 }: LinkBlockProps) {
   return (
-    <Container>
-      <QuickLinks>
-        <Heading level={3} fontSize={3}>
-          {quickLinksHeader}
-        </Heading>
+    <Box display="flex" p={4} flexDirection={{ _: 'column', md: 'row' }}>
+      <Box
+        position="relative"
+        flexBasis={{ _: '33%', lg: '25%' }}
+        pb={{ _: 4, md: 0 }}
+        pr={{ _: 0, md: 3 }}
+        css={css({
+          '&::after': {
+            content: '""',
+            position: 'absolute',
+            bg: 'lightGray',
+            bottom: 0,
+            right: 0,
+            height: asResponsiveArray({ _: '1px', md: '100%' }),
+            width: asResponsiveArray({ _: '100%', md: '1px' }),
+          },
+        })}
+      >
+        <Heading level={3}>{quickLinksHeader}</Heading>
         <LinkGroup links={quickLinks} />
-      </QuickLinks>
-      <Sitemap>
-        <Heading level={3} fontSize={3}>
-          {dataSitemapHeader}
-        </Heading>
+      </Box>
+
+      <Box
+        flexBasis={{ _: '66%', lg: '75%' }}
+        pt={{ _: 4, md: 0 }}
+        pl={{ _: 0, md: 4 }}
+      >
+        <Heading level={3}>{dataSitemapHeader}</Heading>
         <Box
           display="flex"
           flexWrap="wrap"
@@ -44,7 +57,7 @@ export function LinkBlock({
             },
           })}
         >
-          {dataSitemap.map((group) => (
+          {dataSitemap.map((group: LinkGroupProps) => (
             <LinkGroup
               key={group.header}
               header={group.header}
@@ -52,43 +65,7 @@ export function LinkBlock({
             />
           ))}
         </Box>
-      </Sitemap>
-    </Container>
+      </Box>
+    </Box>
   );
 }
-
-const Container = styled(Box)(
-  css({
-    flexDirection: asResponsiveArray({ _: 'column', md: 'row' }),
-    display: 'flex',
-    px: 4,
-    py: 4,
-
-    '> div:not(:last-child)::after': {
-      content: '""',
-      position: 'absolute',
-      bg: 'lightGray',
-      bottom: 0,
-      right: 0,
-      height: asResponsiveArray({ _: '1px', md: '100%' }),
-      width: asResponsiveArray({ _: '100%', md: '1px' }),
-    },
-  })
-);
-
-const QuickLinks = styled(Box)(
-  css({
-    position: 'relative',
-    flexBasis: asResponsiveArray({ _: '33%', lg: '25%' }),
-    pb: asResponsiveArray({ _: 4, md: 0 }),
-    pr: asResponsiveArray({ _: 0, md: 3 }),
-  })
-);
-
-const Sitemap = styled(Box)(
-  css({
-    flexBasis: asResponsiveArray({ _: '66%', lg: '75%' }),
-    pt: asResponsiveArray({ _: 4, md: 0 }),
-    pl: asResponsiveArray({ _: 0, md: 4 }),
-  })
-);
