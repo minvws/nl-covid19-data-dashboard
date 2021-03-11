@@ -5,6 +5,7 @@ import { ArticleSummary } from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
 import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
+import { CollapsibleButton } from '~/components-styled/collapsible';
 import { HighlightTeaserProps } from '~/components-styled/highlight-teaser';
 import { MaxWidth } from '~/components-styled/max-width';
 import { QuickLinks } from '~/components-styled/quick-links';
@@ -168,20 +169,23 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
               <TopicalVaccineTile data={data.vaccine_administered_total} />
             </MiniTrendTileLayout>
 
-            <QuickLinks
-              header={text.quick_links.header}
-              links={[
-                {
-                  href: '/landelijk/vaccinaties',
-                  text: text.quick_links.links.nationaal,
-                },
-                {
-                  href: '/veiligheidsregio',
-                  text: text.quick_links.links.veiligheidsregio,
-                },
-                { href: '/gemeente', text: text.quick_links.links.gemeente },
-              ]}
-            />
+            <CollapsibleButton label={text.quick_links.header}>
+              <QuickLinks
+                header={text.quick_links.header}
+                links={[
+                  {
+                    href: '/landelijk/vaccinaties',
+                    text: text.quick_links.links.nationaal,
+                  },
+                  {
+                    href: '/veiligheidsregio',
+                    text: text.quick_links.links.veiligheidsregio,
+                  },
+                  { href: '/gemeente', text: text.quick_links.links.gemeente },
+                ]}
+              />
+              <DataSitemap />
+            </CollapsibleButton>
 
             {content.editorial && content.highlight && (
               <Box pt={3}>
@@ -249,8 +253,6 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                 </Box>
               </TopicalTile>
             </Box>
-
-            <DataSitemap />
 
             <Box pb={4}>
               <TopicalSectionHeader
