@@ -6,6 +6,7 @@ import {
 import { localPoint } from '@visx/event';
 import { bisectCenter } from 'd3-array';
 import { ScaleLinear } from 'd3-scale';
+import { isEmpty } from 'lodash';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { TimespanAnnotationConfig } from './common';
@@ -101,6 +102,10 @@ export function useHoverState<T extends TimestampedValue>({
 
   const handleHover = useCallback(
     (event: Event, __trendIndex?: number) => {
+      if (isEmpty(values)) {
+        return;
+      }
+
       if (event.type === 'mouseleave') {
         /**
          * Here a timeout is used on the clear hover state to prevent the
