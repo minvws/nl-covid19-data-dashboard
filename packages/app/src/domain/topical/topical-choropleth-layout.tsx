@@ -17,12 +17,12 @@ export function TopicalChoroplethTile(props: TopicalChoroplethTileProps) {
       <TopicalSectionHeader title={title} />
       <Box
         display="flex"
-        flexDirection={{ _: 'column', md: 'row' }}
+        flexDirection={{ _: 'column-reverse', md: 'row' }}
         pt={{ _: 3, md: 4 }}
       >
         <Box
           flex={{ _: '1 1 0%', md: '0.8 1 0%', lg: '0.65 1 0%' }}
-          px={{ _: 0, md: 3, lg: 5 }}
+          px={{ _: 0, sm: 5, md: 3, lg: 5 }}
           pb={{ _: 4, md: 0 }}
         >
           {choropleth}
