@@ -1,16 +1,19 @@
-import css from '@styled-system/css';
-import { useState } from 'react';
-import styled from 'styled-components';
-import { isPresent } from 'ts-is-present';
-import { Box, Spacer } from '~/components-styled/base';
-import { Tile } from '~/components-styled/tile';
-import { Select } from '~/components-styled/select';
-import { Heading } from '~/components-styled/typography';
-import siteText from '~/locale/index';
 import {
   NationalBehaviorValue,
   RegionalBehaviorValue,
 } from '@corona-dashboard/common';
+import css from '@styled-system/css';
+import { ParentSize } from '@visx/responsive';
+import { useState } from 'react';
+import styled from 'styled-components';
+import { isPresent } from 'ts-is-present';
+import { Box, Spacer } from '~/components-styled/base';
+import { Select } from '~/components-styled/select';
+import { Tile } from '~/components-styled/tile';
+import { TimeSeriesChart } from '~/components-styled/time-series-chart';
+import { Heading } from '~/components-styled/typography';
+import siteText from '~/locale/index';
+import { colors } from '~/style/theme';
 import {
   BehaviorIdentifier,
   behaviorIdentifiers,
@@ -32,6 +35,7 @@ export function BehaviorLineChartTile({
 }: BehaviorLineChartTileProps) {
   const [type, setType] = useState<BehaviorType>('compliance');
   const [currentId, setCurrentId] = useState<BehaviorIdentifier>('wash_hands');
+  const selectedValueKey = `${currentId}_${type}` as keyof NationalBehaviorValue;
 
   const behaviorIdentifierWithData = behaviorIdentifiers
     .map((id) => {
@@ -116,6 +120,43 @@ export function BehaviorLineChartTile({
           onClick: setCurrentId,
         }))}
       />
+
+      <Spacer mb={3} />
+
+      <ParentSize>
+        {({ width }) => (
+          <TimeSeriesChart
+            title={'Gedragsregels'}
+            width={width}
+            values={values}
+            ariaLabelledBy=""
+            seriesConfig={[...behaviorIdentifierWithData]
+              .sort((x) => (x.valueKey === selectedValueKey ? 1 : -1))
+              .map((x) => ({
+                type: 'line' as const,
+                metricProperty: x.valueKey,
+                label: x.label,
+                strokeWidth: x.valueKey === selectedValueKey ? 3 : 2,
+                color:
+                  x.valueKey === selectedValueKey
+                    ? colors.data.primary
+                    : '#E7E7E7',
+              }))}
+            disableLegend
+            dataOptions={{
+              isPercentage: true,
+              isNearestPointOnly: true,
+            }}
+            tickValues={[0, 25, 50, 75, 100]}
+            showDateMarker
+            onTooltipClick={(x) =>
+              setCurrentId(
+                x.valueKey.replace(`_${type}`, '') as BehaviorIdentifier
+              )
+            }
+          />
+        )}
+      </ParentSize>
     </Tile>
   );
 }

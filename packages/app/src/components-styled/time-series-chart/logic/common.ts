@@ -2,6 +2,7 @@ export interface DataOptions {
   valueAnnotation?: string;
   forcedMaximumValue?: number;
   isPercentage?: boolean;
+  isNearestPointOnly?: boolean;
   benchmark?: {
     value: number;
     label: string;

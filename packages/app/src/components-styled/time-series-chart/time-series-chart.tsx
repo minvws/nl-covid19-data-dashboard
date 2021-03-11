@@ -110,6 +110,8 @@ export type TimeSeriesChartProps<T extends TimestampedValue> = {
    * contain things that are essential to rendering a full tooltip layout
    */
   dataOptions?: DataOptions;
+  disableLegend?: boolean;
+  onTooltipClick?: (x: TooltipData<T>) => void;
 };
 
 export function TimeSeriesChart<T extends TimestampedValue>({
@@ -126,6 +128,8 @@ export function TimeSeriesChart<T extends TimestampedValue>({
   paddingLeft,
   ariaLabelledBy,
   title,
+  disableLegend,
+  onTooltipClick,
 }: TimeSeriesChartProps<T>) {
   const {
     tooltipData,
@@ -139,6 +143,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
   const {
     valueAnnotation,
     isPercentage,
+    isNearestPointOnly,
     forcedMaximumValue,
     benchmark,
     timespanAnnotations,
@@ -186,12 +191,13 @@ export function TimeSeriesChart<T extends TimestampedValue>({
 
   const [handleHover, hoverState] = useHoverState({
     values,
-    paddingLeft: padding.left,
+    padding,
     seriesConfig,
     seriesList,
     xScale,
     yScale,
     timespanAnnotations,
+    isNearestPointOnly,
   });
 
   useEffect(() => {
@@ -216,9 +222,8 @@ export function TimeSeriesChart<T extends TimestampedValue>({
            * dig up the annotation from the array in the tooltip logic.
            */
           timespanAnnotation:
-            dataOptions?.timespanAnnotations &&
-            isDefined(timespanAnnotationIndex)
-              ? dataOptions.timespanAnnotations[timespanAnnotationIndex]
+            timespanAnnotations && isDefined(timespanAnnotationIndex)
+              ? timespanAnnotations[timespanAnnotationIndex]
               : undefined,
         },
         tooltipLeft: nearestPoint.x,
@@ -227,7 +232,15 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     } else {
       hideTooltip();
     }
-  }, [hoverState, seriesConfig, values, hideTooltip, showTooltip, dataOptions]);
+  }, [
+    hoverState,
+    seriesConfig,
+    values,
+    hideTooltip,
+    showTooltip,
+    dataOptions,
+    timespanAnnotations,
+  ]);
 
   return (
     <Box>
@@ -242,6 +255,9 @@ export function TimeSeriesChart<T extends TimestampedValue>({
           padding={padding}
           ariaLabelledBy={ariaLabelledBy}
           onHover={handleHover}
+          onClick={() =>
+            onTooltipClick && tooltipData && onTooltipClick(tooltipData)
+          }
         >
           <Axes
             bounds={bounds}
@@ -326,7 +342,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
         )}
       </Box>
 
-      {legendItems && (
+      {!disableLegend && legendItems && (
         <Box pl={paddingLeft}>
           <Legend items={legendItems} />
         </Box>
