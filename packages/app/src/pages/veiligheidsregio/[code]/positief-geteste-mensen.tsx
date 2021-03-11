@@ -357,7 +357,11 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
             source: ggdText.bronnen.rivm,
           }}
           formatTooltip={(x) => {
-            const percentage = (x[1].__value * 100) / x[0].__value;
+            const numerator = x[0].__value;
+            const denominator = x[1].__value;
+
+            const percentage =
+              numerator === 0 ? 0 : (denominator * 100) / numerator;
 
             return (
               <>
@@ -372,7 +376,7 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
                     display: 'inline-block',
                   }}
                 />{' '}
-                {formatNumber(x[0].__value)}
+                {formatNumber(numerator)}
                 <br />
                 <span
                   style={{
@@ -383,7 +387,7 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
                     display: 'inline-block',
                   }}
                 />{' '}
-                {formatNumber(x[1].__value)} ({formatPercentage(percentage)}%)
+                {formatNumber(denominator)} ({formatPercentage(percentage)}%)
               </>
             );
           }}
