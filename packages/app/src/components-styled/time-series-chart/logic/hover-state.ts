@@ -3,17 +3,18 @@ import {
   isDateValue,
   TimestampedValue,
 } from '@corona-dashboard/common';
-import { localPoint } from '@visx/event';
 import { bisectCenter } from 'd3-array';
 import { ScaleLinear } from 'd3-scale';
 import { isEmpty } from 'lodash';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import { isDefined } from 'ts-is-present';
+import { ChartPadding } from '~/components-styled/line-chart/components';
 import {
   isLineOrAreaDefinition,
   isRangeDefinition,
   TimespanAnnotationConfig,
 } from './common';
+import { localPointWithPadding } from './local-point-with-padding';
 import {
   SeriesConfig,
   SeriesDoubleValue,
@@ -38,6 +39,7 @@ interface UseHoverStateArgs<T extends TimestampedValue> {
   yScale: ScaleLinear<number, number>;
   timespanAnnotations?: TimespanAnnotationConfig[];
   showOnlyNearestPoint?: boolean;
+  padding: ChartPadding;
 }
 
 interface HoverState<T> {
@@ -63,6 +65,7 @@ export function useHoverState<T extends TimestampedValue>({
   yScale,
   timespanAnnotations,
   showOnlyNearestPoint,
+  padding,
 }: UseHoverStateArgs<T>): UseHoverStateResponse<T> {
   const [hoverState, setHoverState] = useState<HoverState<T>>();
   const timeoutRef = useRef<any>();
@@ -130,7 +133,7 @@ export function useHoverState<T extends TimestampedValue>({
         clearTimeout(timeoutRef.current);
       }
 
-      const mousePoint = localPoint(event);
+      const mousePoint = localPointWithPadding(event, padding);
 
       if (!mousePoint) {
         return;

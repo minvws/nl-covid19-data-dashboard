@@ -195,6 +195,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     yScale,
     timespanAnnotations,
     showOnlyNearestPoint: markNearestPointOnly,
+    padding,
   });
 
   useEffect(() => {

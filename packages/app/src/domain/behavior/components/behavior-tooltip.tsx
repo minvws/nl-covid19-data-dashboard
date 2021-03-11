@@ -5,6 +5,7 @@ import {
 } from '@corona-dashboard/common';
 import styled from 'styled-components';
 import { SeriesConfig } from '~/components-styled/time-series-chart';
+import { InlineText } from '~/components-styled/typography';
 
 export function BehaviorTooltip({
   value,
@@ -27,9 +28,9 @@ export function BehaviorTooltip({
     cf && (
       <section>
         <TooltipListItem color={cf.color}>
-          <TooltipValueContainer>
+          <InlineText>
             {cf.label}: <b>{formatPercentage((value as any)[valueKey])}%</b>
-          </TooltipValueContainer>
+          </InlineText>
         </TooltipListItem>
       </section>
     )
@@ -54,11 +55,4 @@ const TooltipListItem = styled.li<TooltipListItemProps>`
     margin-right: 0.5em;
     flex-shrink: 0;
   }
-`;
-
-const TooltipValueContainer = styled.span`
-  display: flex;
-  width: 100%;
-  min-width: 130px;
-  justify-content: space-between;
 `;

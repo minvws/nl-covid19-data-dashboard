@@ -1,22 +1,26 @@
-import css from '@styled-system/css';
-import { useState } from 'react';
-import styled from 'styled-components';
-import { isPresent } from 'ts-is-present';
-import { Box, Spacer } from '~/components-styled/base';
-import { Tile } from '~/components-styled/tile';
-import { Select } from '~/components-styled/select';
-import { Heading } from '~/components-styled/typography';
-import siteText from '~/locale/index';
 import {
   NationalBehaviorValue,
   RegionalBehaviorValue,
 } from '@corona-dashboard/common';
+import css from '@styled-system/css';
+import { ParentSize } from '@visx/responsive';
+import { useMemo, useState } from 'react';
+import styled from 'styled-components';
+import { isPresent } from 'ts-is-present';
+import { Box, Spacer } from '~/components-styled/base';
+import { Select } from '~/components-styled/select';
+import { Tile } from '~/components-styled/tile';
+import { TimeSeriesChart } from '~/components-styled/time-series-chart';
+import { Heading } from '~/components-styled/typography';
+import siteText from '~/locale/index';
+import { colors } from '~/style/theme';
+import { SeriesConfig } from '../../components-styled/time-series-chart/logic';
 import {
   BehaviorIdentifier,
   behaviorIdentifiers,
   BehaviorType,
 } from './behavior-types';
-import { BehaviorLineChart, Value } from './components/behavior-line-chart';
+import { BehaviorTooltip } from './components/behavior-tooltip';
 import { BehaviorTypeControl } from './components/behavior-type-control';
 
 interface BehaviorLineChartTileProps {
@@ -33,30 +37,46 @@ export function BehaviorLineChartTile({
   const [type, setType] = useState<BehaviorType>('compliance');
   const [currentId, setCurrentId] = useState<BehaviorIdentifier>('wash_hands');
 
-  const behaviorIdentifierWithData = behaviorIdentifiers
-    .map((id) => {
-      const label = siteText.gedrag_onderwerpen[id];
-      const valueKey = `${id}_${type}` as keyof NationalBehaviorValue;
+  const behaviorIdentifierWithData = useMemo(() => {
+    return behaviorIdentifiers
+      .map((id) => {
+        const label = siteText.gedrag_onderwerpen[id];
+        const valueKey = `${id}_${type}` as
+          | keyof NationalBehaviorValue
+          | keyof RegionalBehaviorValue;
 
-      /**
-       * We'll only render behaviors with 2 or more values, otherwise it cannot
-       * result in a "line" in our line-chart.
-       */
-      const hasEnoughData =
-        (values as NationalBehaviorValue[])
-          .map((x) => x[valueKey])
-          .filter(isPresent).length > 1;
+        /**
+         * We'll only render behaviors with 2 or more values, otherwise it cannot
+         * result in a "line" in our line-chart.
+         */
+        const hasEnoughData =
+          values.map((x: any) => x[valueKey]).filter(isPresent).length > 1;
 
-      return hasEnoughData
-        ? {
-            id,
-            label,
-            valueKey,
-            isEnabled: hasEnoughData,
-          }
-        : undefined;
-    })
-    .filter(isPresent);
+        return hasEnoughData
+          ? {
+              id,
+              label,
+              valueKey,
+              isEnabled: hasEnoughData,
+            }
+          : undefined;
+      })
+      .filter(isPresent);
+  }, [values, type]);
+
+  const seriesConfig: SeriesConfig<
+    NationalBehaviorValue | RegionalBehaviorValue
+  > = useMemo(() => {
+    return behaviorIdentifierWithData
+      .sort((x) => (x.id === currentId ? 1 : -1)) // sort selected as last so it will be rendered on top in the SVG
+      .map((behaviorData) => ({
+        type: 'line',
+        metricProperty: behaviorData.valueKey as any,
+        label: behaviorData.label,
+        color: colors.data.primary,
+        isFaded: currentId !== behaviorData.id,
+      }));
+  }, [behaviorIdentifierWithData, currentId]);
 
   return (
     <Tile>
@@ -91,31 +111,32 @@ export function BehaviorLineChartTile({
       </Box>
 
       <Spacer mb={3} />
-
-      <BehaviorLineChart
-        values={behaviorIdentifierWithData.map(({ valueKey, label }) =>
-          (values as NationalBehaviorValue[])
-            .map((value) =>
-              valueKey in value
-                ? ({
-                    label,
-                    date: value.date_start_unix,
-                    value: value[valueKey],
-                    week: {
-                      start: value.date_start_unix,
-                      end: value.date_end_unix,
-                    },
-                  } as Value)
-                : undefined
-            )
-            .filter(isPresent)
+      <ParentSize>
+        {({ width }) => (
+          <TimeSeriesChart
+            title={'Gedragsregels'}
+            width={width}
+            values={values}
+            ariaLabelledBy=""
+            paddingLeft={40}
+            seriesConfig={seriesConfig}
+            dataOptions={{
+              isPercentage: true,
+              disableLegend: true,
+              markNearestPointOnly: true,
+            }}
+            tickValues={[0, 25, 50, 75, 100]}
+            formatTooltip={({ value, valueKey, config }) => (
+              <BehaviorTooltip
+                value={value}
+                valueKey={valueKey}
+                config={config}
+              />
+            )}
+            showDateMarker
+          />
         )}
-        linesConfig={behaviorIdentifierWithData.map(({ id }) => ({
-          id,
-          isSelected: id === currentId,
-          onClick: setCurrentId,
-        }))}
-      />
+      </ParentSize>
     </Tile>
   );
 }
