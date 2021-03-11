@@ -9,7 +9,7 @@ import { formatNumber, formatPercentage } from '@corona-dashboard/common';
 import { AxisBottom, AxisLeft } from '@visx/axis';
 import { GridRows } from '@visx/grid';
 import { ScaleLinear } from 'd3-scale';
-import { memo } from 'react';
+import { memo, Ref } from 'react';
 import { colors } from '~/style/theme';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { Bounds } from '../logic';
@@ -27,6 +27,11 @@ type AxesProps = {
    * label.
    */
   numGridLines: number;
+  /**
+   * This ref is used for measuring the width of the Y-axis to automagically
+   * calculate a left-padding.
+   */
+  yAxisRef: Ref<SVGGElement>;
   yTickValues?: number[];
 };
 
@@ -44,6 +49,7 @@ export const Axes = memo(function Axes({
   yTickValues,
   xScale,
   yScale,
+  yAxisRef,
 }: AxesProps) {
   return (
     <>
@@ -85,25 +91,27 @@ export const Axes = memo(function Axes({
         })}
         hideTicks
       />
-      <AxisLeft
-        scale={yScale}
-        tickValues={yTickValues}
-        numTicks={yTickValues?.length || numGridLines}
-        hideTicks
-        hideAxisLine
-        stroke={colors.silver}
-        tickFormat={
-          isPercentage
-            ? (formatYAxisPercentage as AnyTickFormatter)
-            : (formatYAxis as AnyTickFormatter)
-        }
-        tickLabelProps={() => ({
-          fill: colors.data.axisLabels,
-          fontSize: 12,
-          textAnchor: 'end',
-          verticalAnchor: 'middle',
-        })}
-      />
+      <g ref={yAxisRef}>
+        <AxisLeft
+          scale={yScale}
+          tickValues={yTickValues}
+          numTicks={yTickValues?.length || numGridLines}
+          hideTicks
+          hideAxisLine
+          stroke={colors.silver}
+          tickFormat={
+            isPercentage
+              ? (formatYAxisPercentage as AnyTickFormatter)
+              : (formatYAxis as AnyTickFormatter)
+          }
+          tickLabelProps={() => ({
+            fill: colors.data.axisLabels,
+            fontSize: 12,
+            textAnchor: 'end',
+            verticalAnchor: 'middle',
+          })}
+        />
+      </g>
     </>
   );
 });

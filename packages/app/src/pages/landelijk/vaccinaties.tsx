@@ -370,7 +370,6 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                 showDateMarker
                 numGridLines={20}
                 tickValues={[0, 25, 50, 75, 100]}
-                paddingLeft={36}
                 dataOptions={{
                   isPercentage: true,
                   forcedMaximumValue: 100,
