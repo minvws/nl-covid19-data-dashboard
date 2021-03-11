@@ -2,11 +2,11 @@ import css from '@styled-system/css';
 import { asResponsiveArray } from '~/style/utils';
 import { Heading } from '~/components-styled/typography';
 import { Box } from '~/components-styled/base';
-import { LinkGroup, Link, LinkGroupProps } from './link-group';
+import { LinkGroup, LinkItemProps, LinkGroupProps } from './link-group';
 
 type LinkBlockProps = {
   quickLinksHeader: string;
-  quickLinks: Link[];
+  quickLinks: LinkItemProps[];
   dataSitemapHeader: string;
   dataSitemap: LinkGroupProps[];
 };

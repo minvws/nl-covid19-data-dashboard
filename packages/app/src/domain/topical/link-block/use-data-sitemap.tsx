@@ -37,8 +37,7 @@ export function useDataSitemap(
         links: [
           {
             text: siteText.rioolwater_metingen.titel_sidebar,
-            href: baseUrl + '/rioolwater',
-            // disabled: !data?.sewer,
+            href: data?.sewer ? baseUrl + '/rioolwater' : undefined,
           },
         ],
       },

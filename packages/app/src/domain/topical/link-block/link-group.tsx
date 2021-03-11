@@ -7,7 +7,7 @@ import { InlineText } from '~/components-styled/typography';
 
 export type LinkGroupProps = {
   header?: string;
-  links: Link[];
+  links: LinkItemProps[];
 };
 
 export function LinkGroup(props: LinkGroupProps) {
@@ -29,13 +29,27 @@ export function LinkGroup(props: LinkGroupProps) {
   );
 }
 
-export interface Link {
-  href: string;
+export type LinkItemProps = {
+  href?: string;
   text: string;
-}
+};
 
-function LinkItem(props: Link) {
+function LinkItem(props: LinkItemProps) {
   const { href, text } = props;
+
+  if (!href) {
+    return (
+      <Item>
+        <InlineText fontWeight="bold" color="gray">
+          {text}
+          <span css={css({ svg: { height: 10, width: 11, mx: '3px' } })}>
+            <ArrowIconRight />
+          </span>
+        </InlineText>
+      </Item>
+    );
+  }
+
   return (
     <Item>
       <LinkWithIcon
