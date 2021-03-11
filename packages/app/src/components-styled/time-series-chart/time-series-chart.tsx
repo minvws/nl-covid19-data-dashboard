@@ -1,19 +1,21 @@
 import { TimestampedValue } from '@corona-dashboard/common';
+import { Bar } from '@visx/shape';
 import { useTooltip } from '@visx/tooltip';
 import { useEffect, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
+import useResizeObserver from 'use-resize-observer';
 import { Box } from '~/components-styled/base';
-import { TimeframeOption } from '~/utils/timeframe';
 import { Legend } from '~/components-styled/legend';
+import { TimeframeOption } from '~/utils/timeframe';
 import { ValueAnnotation } from '../value-annotation';
 import {
   Axes,
   ChartContainer,
   DateLineMarker,
-  TimespanAnnotation,
   DateSpanMarker,
   Overlay,
   PointMarkers,
+  TimespanAnnotation,
   Tooltip,
   TooltipData,
   TooltipFormatter,
@@ -22,15 +24,14 @@ import { Benchmark } from './components/benchmark';
 import { Series } from './components/series';
 import {
   calculateSeriesMaximum,
+  DataOptions,
   SeriesConfig,
   useHoverState,
   useLegendItems,
   useScales,
   useSeriesList,
-  DataOptions,
 } from './logic';
 import { useDimensions } from './logic/dimensions';
-import { Bar } from '@visx/shape';
 export type { SeriesConfig } from './logic';
 
 /**
@@ -143,7 +144,17 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     timespanAnnotations,
   } = dataOptions || {};
 
-  const { padding, bounds } = useDimensions(width, height, paddingLeft);
+  const {
+    width: yAxisWidth = 0,
+    ref: yAxisRef,
+    // @ts-expect-error useResizeObserver expects element extending HTMLElement
+  } = useResizeObserver<SVGElement>();
+
+  const { padding, bounds } = useDimensions(
+    width,
+    height,
+    paddingLeft ?? yAxisWidth + 10 // 10px seems to be enough padding
+  );
 
   const legendItems = useLegendItems(seriesConfig, dataOptions);
 
@@ -236,6 +247,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
             xScale={xScale}
             yScale={yScale}
             isPercentage={isPercentage}
+            yAxisRef={yAxisRef}
           />
 
           <Bar
