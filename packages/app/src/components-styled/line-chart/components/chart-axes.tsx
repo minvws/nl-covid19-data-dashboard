@@ -1,3 +1,4 @@
+import css from '@styled-system/css';
 import { AxisBottom, AxisLeft, TickFormatter } from '@visx/axis';
 import { GridRows } from '@visx/grid';
 import { Group } from '@visx/group';
@@ -5,9 +6,16 @@ import { scaleLinear, scaleTime } from '@visx/scale';
 import { Bar, Line } from '@visx/shape';
 import { Text } from '@visx/text';
 import { ScaleLinear, ScaleTime } from 'd3-scale';
-import { ComponentProps, memo, MouseEvent, ReactNode, TouchEvent } from 'react';
+import {
+  ComponentProps,
+  memo,
+  MouseEvent,
+  ReactNode,
+  TouchEvent,
+  useCallback,
+} from 'react';
 import { colors } from '~/style/theme';
-import css from '@styled-system/css';
+import { formatDate } from '~/utils/formatDate';
 
 const NUM_TICKS = 4;
 
@@ -20,7 +28,7 @@ export type ChartPadding = {
 
 export const defaultPadding: ChartPadding = {
   top: 10,
-  right: 20,
+  right: 0,
   bottom: 30,
   left: 30,
 };
@@ -56,7 +64,6 @@ type ChartAxesProps = {
   width: number;
   height: number;
   padding: ChartPadding;
-  formatXAxis: TickFormatter<Date>;
   formatYAxis: TickFormatter<number>;
   children: (props: ChartScales) => ReactNode;
   componentCallback?: ComponentCallbackFunction;
@@ -77,7 +84,6 @@ export const ChartAxes = memo(function ChartAxes({
   yDomain,
   onHover,
   benchmark,
-  formatXAxis,
   formatYAxis,
   children,
   componentCallback = () => undefined,
@@ -104,6 +110,22 @@ export const ChartAxes = memo(function ChartAxes({
   });
 
   const scales = { xScale, yScale };
+
+  const [startDate, endDate] = xScale.domain();
+
+  const formatXAxis = useCallback(
+    (date: Date) => {
+      const startYear = startDate.getFullYear();
+      const endYear = endDate.getFullYear();
+      const isMultipleYearSpan = startYear !== endYear;
+
+      return isMultipleYearSpan &&
+        [startDate.getTime(), endDate.getTime()].includes(date.getTime())
+        ? formatDate(date, 'axis-with-year')
+        : formatDate(date, 'axis');
+    },
+    [startDate, endDate]
+  );
 
   const handleHover = (
     event: TouchEvent<SVGElement> | MouseEvent<SVGElement>
@@ -151,10 +173,15 @@ export const ChartAxes = memo(function ChartAxes({
               tickFormat: formatXAxis as AnyTickFormatter,
               top: bounds.height,
               stroke: defaultColors.axis,
-              tickLabelProps: () => ({
-                dx: -25,
+              tickLabelProps: (x: Date) => ({
                 fill: defaultColors.axisLabels,
                 fontSize: 12,
+                textAnchor:
+                  x.getTime() === startDate.getTime()
+                    ? 'start'
+                    : x.getTime() === endDate.getTime()
+                    ? 'end'
+                    : 'middle',
               }),
               hideTicks: true,
             },
