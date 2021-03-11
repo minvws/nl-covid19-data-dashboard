@@ -40,6 +40,7 @@ import {
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { useDataSitemap } from '~/domain/topical/link-block/use-data-sitemap';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -82,6 +83,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
 
   const dataInfectedTotal = data.tested_overall;
   const dataHospitalIntake = data.hospital_nice;
+  const dataSitemap = useDataSitemap('landelijk');
 
   return (
     <>
@@ -166,9 +168,11 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
               <TopicalVaccineTile data={data.vaccine_administered_total} />
             </MiniTrendTileLayout>
 
-            <CollapsibleButton label={text.quick_links.header}>
+            <CollapsibleButton
+              label={siteText.common_actueel.overview_links_header}
+            >
               <LinkBlock
-                base="landelijk"
+                quickLinksHeader={text.quick_links.header}
                 quickLinks={[
                   {
                     href: '/landelijk/vaccinaties',
@@ -183,6 +187,8 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                     text: text.quick_links.links.gemeente,
                   },
                 ]}
+                dataSitemapHeader={text.data_sitemap_titel}
+                dataSitemap={dataSitemap}
               />
             </CollapsibleButton>
 

@@ -2254,11 +2254,7 @@
     "url": "https://coronadashboard.government.nl/artikelen"
   },
   "common_actueel": {
-    "quick_links": {
-      "overview": {
-        "header": "Alle cijfers"
-      }
-    },
+    "overview_links_header": "Bekijk alle cijfers op dit dashboard",
     "terug_naar_landelijk": "Back to national situation",
     "laatst_bijgewerkt": "Last update: {{date}}",
     "secties": {
@@ -2351,7 +2347,7 @@
       }
     },
     "quick_links": {
-      "header": "View all data on the dashboard",
+      "header": "View all data",
       "links": {
         "nationaal": "Data for the Netherlands",
         "veiligheidsregio": "Data by safety region",

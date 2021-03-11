@@ -1,9 +1,10 @@
 import siteText from '~/locale/index';
-import { LinkGroupProps } from './../link-group';
+import { LinkGroupProps } from './link-group';
 
-export function useDataSitemapLinks(
+export function useDataSitemap(
   base: 'landelijk' | 'veiligheidsregio' | 'gemeente',
-  code?: string | string[]
+  code?: string,
+  data?: any
 ): LinkGroupProps[] {
   if (base === 'gemeente' && code) {
     const baseUrl = `/${base}/${code}`;
@@ -37,6 +38,7 @@ export function useDataSitemapLinks(
           {
             text: siteText.rioolwater_metingen.titel_sidebar,
             href: baseUrl + '/rioolwater',
+            // disabled: !data?.sewer,
           },
         ],
       },

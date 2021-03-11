@@ -8,7 +8,7 @@ import { useDataSitemapLinks } from './use-data-sitemap-links';
 
 export type DataSitemapProps = {
   base: 'landelijk' | 'veiligheidsregio' | 'gemeente';
-  code?: string | string[];
+  code?: string;
 };
 
 export function DataSitemap(props: DataSitemapProps) {

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { ArrowIconRight } from '~/components-styled/arrow-icon';
 import { Box } from '~/components-styled/base';
 import { LinkWithIcon } from '~/components-styled/link-with-icon';
-import { InlineText, Text } from '~/components-styled/typography';
+import { InlineText } from '~/components-styled/typography';
 
 export type LinkGroupProps = {
   header?: string;

@@ -5,19 +5,21 @@ import { asResponsiveArray } from '~/style/utils';
 import { Heading } from '~/components-styled/typography';
 import { Box } from '~/components-styled/base';
 import { DataSitemap, DataSitemapProps } from './data-sitemap';
-import { LinkGroup, Link } from './link-group';
+import { LinkGroup, Link, LinkGroupProps } from './link-group';
 import siteText from '~/locale/index';
 
 type LinkBlockProps = DataSitemapProps & {
-  quickLinksHeader?: string;
+  quickLinksHeader: string;
   quickLinks: Link[];
+  dataSitemapHeader: string;
+  dataSitemap: LinkGroupProps[];
 };
 
 export function LinkBlock({
-  quickLinksHeader = siteText.common_actueel.quick_links.overview.header,
+  quickLinksHeader,
   quickLinks,
-  base,
-  code,
+  dataSitemapHeader,
+  dataSitemap,
 }: LinkBlockProps) {
   return (
     <Container>
@@ -28,7 +30,28 @@ export function LinkBlock({
         <LinkGroup links={quickLinks} />
       </QuickLinks>
       <Sitemap>
-        <DataSitemap base={base} code={code} />
+        <Heading level={3} fontSize={3}>
+          {dataSitemapHeader}
+        </Heading>
+        <Box
+          display="flex"
+          flexWrap="wrap"
+          css={css({
+            '> div': {
+              flexGrow: 0,
+              flexBasis: asResponsiveArray({ _: '100%', sm: '50%', lg: '33%' }),
+              mb: 3,
+            },
+          })}
+        >
+          {dataSitemap.map((group) => (
+            <LinkGroup
+              key={group.header}
+              header={group.header}
+              links={group.links}
+            />
+          ))}
+        </Box>
       </Sitemap>
     </Container>
   );

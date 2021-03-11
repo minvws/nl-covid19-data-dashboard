@@ -41,6 +41,7 @@ import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 export { getStaticPaths } from '~/static-paths/vr';
+import { useDataSitemap } from '~/domain/topical/link-block/use-data-sitemap';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -65,6 +66,8 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
 
   const dataInfectedTotal = data.tested_overall;
   const dataHospitalIntake = data.hospital_nice;
+
+  const dataSitemap = useDataSitemap('veiligheidsregio', vrCode);
 
   return (
     <>
@@ -179,10 +182,11 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
               </RiskLevelIndicator>
             </MiniTrendTileLayout>
 
-            <CollapsibleButton label={text.quick_links.header}>
+            <CollapsibleButton
+              label={siteText.common_actueel.overview_links_header}
+            >
               <LinkBlock
-                base="veiligheidsregio"
-                code={router.query.code}
+                quickLinksHeader={text.quick_links.header}
                 quickLinks={[
                   {
                     href: '/landelijk/vaccinaties',
@@ -197,6 +201,11 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
                   },
                   { href: '/gemeente', text: text.quick_links.links.gemeente },
                 ]}
+                dataSitemapHeader={replaceVariablesInText(
+                  text.data_sitemap_title,
+                  { safetyRegionName: props.safetyRegionName }
+                )}
+                dataSitemap={dataSitemap}
               />
             </CollapsibleButton>
 

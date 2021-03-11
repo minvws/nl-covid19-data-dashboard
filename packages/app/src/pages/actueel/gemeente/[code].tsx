@@ -42,6 +42,7 @@ import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 export { getStaticPaths } from '~/static-paths/gm';
+import { useDataSitemap } from '~/domain/topical/link-block/use-data-sitemap';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -75,6 +76,8 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
   const filteredRegion = props.choropleth.vr.escalation_levels.find(
     (item) => item.vrcode === safetyRegionForMunicipality?.code
   );
+
+  const dataSitemap = useDataSitemap('gemeente', gmCode as string, data);
 
   assert(
     filteredRegion && filteredRegion.level,
@@ -187,10 +190,11 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
               </RiskLevelIndicator>
             </MiniTrendTileLayout>
 
-            <CollapsibleButton label={text.quick_links.header}>
+            <CollapsibleButton
+              label={siteText.common_actueel.overview_links_header}
+            >
               <LinkBlock
-                base="gemeente"
-                code={router.query.code}
+                quickLinksHeader={text.quick_links.header}
                 quickLinks={[
                   {
                     href: '/landelijk/vaccinaties',
@@ -212,12 +216,15 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
                     href: `/gemeente/${router.query.code}/positief-geteste-mensen`,
                     text: replaceVariablesInText(
                       text.quick_links.links.gemeente,
-                      {
-                        municipalityName: municipalityName,
-                      }
+                      { municipalityName: municipalityName }
                     ),
                   },
                 ]}
+                dataSitemapHeader={replaceVariablesInText(
+                  text.data_sitemap_title,
+                  { municipalityName: municipalityName }
+                )}
+                dataSitemap={dataSitemap}
               />
             </CollapsibleButton>
 
