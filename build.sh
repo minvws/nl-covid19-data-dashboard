@@ -3,9 +3,10 @@ start=`date +%s`
 set -e # Any subsequent(*) commands which fail will cause the shell script to exit immediately
 
 # Zip JSON files so the data is included in the build.
-cd packages/app/public/ && zip -qq latest-data.zip json/* && cd ../../../
+cd packages/app/public/ && zip -qq latest-data.zip json/* && mv latest-data.zip json/ &&cd ../../../
 
 # Prepare the export folders
+rm -rf ./exports
 mkdir -p exports/nl
 mkdir -p exports/en
 
@@ -15,20 +16,21 @@ yarn workspace @corona-dashboard/common build
 
 # Validate data
 yarn workspace @corona-dashboard/cli validate-json
-RUN if [ "$IS_PRODUCTION" = "false" ] ; then echo "Skipping last-values validation because of non-production environment" ; else yarn workspace @corona-dashboard/cli validate-last-values ; fi
+# RUN if [ "$IS_PRODUCTION" = "false" ] ; then echo "Skipping last-values validation because of non-production environment" ; else yarn workspace @corona-dashboard/cli validate-last-values ; fi
 
 # Prepare types and assets
 yarn workspace @corona-dashboard/cli generate-typescript
 yarn workspace @corona-dashboard/cms sync-assets
 
 # Build the Dutch application and move to export folder
-NEXT_PUBLIC_LOCALE="nl"
+export NEXT_PUBLIC_LOCALE="nl"
 yarn workspace @corona-dashboard/app build
 yarn workspace @corona-dashboard/app export
 mv packages/app/out/ exports/nl
 
 # Do the same thing again for EN build
-NEXT_PUBLIC_LOCALE="en"
+rm -rf packages/app/out
+export NEXT_PUBLIC_LOCALE="en"
 yarn workspace @corona-dashboard/app build
 yarn workspace @corona-dashboard/app export
 mv packages/app/out/ exports/en
