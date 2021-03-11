@@ -269,6 +269,55 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
 
             <TopicalTile>
               <TopicalSectionHeader
+                title={siteText.common_actueel.secties.risicokaart.titel}
+                link={{
+                  href: '#',
+                  text: 'IK BEN EEN LINK',
+                }}
+              />
+              <ChoroplethTwoColumnLayout>
+                <Box>
+                  <SafetyRegionChoropleth
+                    data={choropleth.vr}
+                    metricName="escalation_levels"
+                    metricProperty="level"
+                    onSelect={createSelectRegionHandler(router, 'risiconiveau')}
+                    tooltipContent={escalationTooltip(
+                      createSelectRegionHandler(router, 'risiconiveau')
+                    )}
+                  />
+                </Box>
+                <Box maxWidth={500}>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: replaceVariablesInText(
+                        text.risiconiveaus.selecteer_toelichting,
+                        {
+                          last_update: formatDate(
+                            choropleth.vr.escalation_levels[0]
+                              .date_of_insertion_unix,
+                            'day-month'
+                          ),
+                        }
+                      ),
+                    }}
+                  />
+
+                  <EscalationMapLegenda
+                    data={choropleth.vr}
+                    metricName="escalation_levels"
+                    metricProperty="level"
+                  />
+                </Box>
+              </ChoroplethTwoColumnLayout>
+              <Box>
+                <h2>Collapsible</h2>
+                <EscalationLevelExplanations />
+              </Box>
+            </TopicalTile>
+
+            <TopicalTile>
+              <TopicalSectionHeader
                 title={
                   siteText.common_actueel.secties.positief_getest_kaart.titel
                 }

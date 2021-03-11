@@ -11,7 +11,7 @@ import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { regionGeo } from '~/components/choropleth/topology';
 import { default as siteText, default as text } from '~/locale';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { Heading, InlineText } from './typography';
+import { Heading, InlineText, Text } from './typography';
 
 const escalationThresholds = regionThresholds.escalation_levels.level;
 
@@ -61,10 +61,12 @@ export function EscalationMapLegenda<K extends RegionsMetricName>(
   }, [getFillColor, hasData]);
 
   return (
-    <Box spacing={3} aria-label="legend" width="100%">
-      <Heading level={3} fontSize="1rem">
+    <Box aria-label="legend" width="100%">
+      <Heading level={3} fontSize="1rem" mb={0}>
         {siteText.escalatie_niveau.legenda.titel}
       </Heading>
+      <Text>Laatste inschaling op:</Text>
+
       {sortedEscalationArray.map((info) => (
         <Box key={info.threshold} display="flex" alignItems="center">
           <Box
