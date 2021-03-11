@@ -69,6 +69,7 @@ const ReproductionIndex: FCWithLayout<typeof getStaticProps> = (props) => {
             metadata={{
               date: lastFilledValue.date_unix,
               source: text.bronnen.rivm,
+              obtained: lastFilledValue.date_of_insertion_unix,
             }}
             illustration={{
               image: '/images/reproductie-explainer.svg',

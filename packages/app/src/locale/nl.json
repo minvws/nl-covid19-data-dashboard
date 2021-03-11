@@ -631,7 +631,8 @@
       "source": "Bron",
       "date": "Waarde van {{date}}",
       "dateFromTo": "Waarde van {{startDate}} - {{endDate}}",
-      "download": "Download data"
+      "download": "Download data",
+      "obtained": "verkregen op {{date}}"
     },
     "barScale": {
       "signaalwaarde": "Signaalwaarde"
