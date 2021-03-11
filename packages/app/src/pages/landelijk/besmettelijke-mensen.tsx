@@ -14,6 +14,9 @@ import siteText from '~/locale/index';
 import { getNlData, getLastGeneratedDate } from '~/static-props/get-data';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import { getLastFilledValue } from '@corona-dashboard/common';
+import { ParentSize } from '@visx/responsive';
+import { TimeSeriesChart } from '~/components-styled/time-series-chart';
+import { colors } from '~/style/theme';
 
 const text = siteText.besmettelijke_personen;
 
@@ -104,6 +107,43 @@ const InfectiousPeople: FCWithLayout<typeof getStaticProps> = (props) => {
                 ]}
               />
             </>
+          )}
+        </ChartTileWithTimeframe>
+
+        <ChartTileWithTimeframe
+          metadata={{ source: text.bronnen.rivm }}
+          title={text.linechart_titel}
+          timeframeOptions={['all', '5weeks']}
+        >
+          {(timeframe) => (
+            <ParentSize>
+              {({ width }) => (
+                <TimeSeriesChart
+                  timeframe={timeframe}
+                  title={text.linechart_titel}
+                  width={width}
+                  values={data.infectious_people.values}
+                  ariaLabelledBy=""
+                  seriesConfig={[
+                    {
+                      type: 'range',
+                      metricPropertyLow: 'margin_low',
+                      metricPropertyHigh: 'margin_high',
+                      label: text.legenda_marge,
+                      // shortLabel: text.rangeLegendLabel,
+                      color: colors.data.margin,
+                    },
+                    {
+                      type: 'line',
+                      metricProperty: 'estimate',
+                      label: text.legenda_line,
+                      // shortLabel: text.lineLegendLabel,
+                      color: colors.data.primary,
+                    },
+                  ]}
+                />
+              )}
+            </ParentSize>
           )}
         </ChartTileWithTimeframe>
       </TileList>
