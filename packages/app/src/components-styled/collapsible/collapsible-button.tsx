@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import css from '@styled-system/css';
 import styled from 'styled-components';
+import { asResponsiveArray } from '~/style/utils';
 import {
   Disclosure,
   DisclosureButton,
@@ -74,7 +75,7 @@ const Panel = styled(DisclosurePanel)(
 const ExpandButton = styled(DisclosureButton)(
   css({
     position: 'relative',
-    px: 4,
+    px: asResponsiveArray({ _: 2, sm: 4 }),
     py: 3,
     border: 'none',
     background: 'none',
