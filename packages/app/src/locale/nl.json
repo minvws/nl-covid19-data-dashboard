@@ -107,7 +107,9 @@
       "href": "/verantwoording#intensive-care",
       "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     },
-    "kpi_titel": "Gemiddeld aantal intensive care-opnames over 3 dagen"
+    "kpi_titel": "Gemiddeld aantal intensive care-opnames over 3 dagen",
+    "linechart_legend_trend_label": "Intensive care-opnames",
+    "linechart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
   },
   "verdenkingen_huisartsen": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
@@ -458,7 +460,9 @@
         "text": "RIVM"
       }
     },
-    "kpi_titel": "Aantal positief geteste bewoners per dag"
+    "kpi_titel": "Aantal positief geteste bewoners per dag",
+    "line_chart_legend_trend_label": "Aantal positief geteste bewoners",
+    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
   },
   "verpleeghuis_oversterfte": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -491,7 +495,9 @@
         "text": "RIVM"
       }
     },
-    "kpi_titel": "Sterfte per dag"
+    "kpi_titel": "Sterfte per dag",
+    "line_chart_legend_trend_label": "Aantal overleden bewoners",
+    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
   },
   "blok_verpleeghuis_zorg": {
     "title": "Verpleeghuiszorg",
@@ -1140,7 +1146,9 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
         "text": "RIVM"
       }
-    }
+    },
+    "line_chart_legend_trend_label": "Aantal overleden bewoners",
+    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
   },
   "veiligheidsregio_verpleeghuis_besmette_locaties": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -1206,7 +1214,9 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
         "text": "RIVM"
       }
-    }
+    },
+    "line_chart_legend_trend_label": "Aantal positief geteste bewoners",
+    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
   },
   "data_warning_text": "",
   "veelgestelde_vragen_metadata": {
@@ -1494,7 +1504,9 @@
         "text": "RIVM"
       }
     },
-    "kpi_titel": "Aantal positief geteste bewoners van gehandicapteninstellingen per dag"
+    "kpi_titel": "Aantal positief geteste bewoners van gehandicapteninstellingen per dag",
+    "line_chart_legend_trend_label": "Aantal positief geteste bewoners",
+    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
   },
   "gehandicaptenzorg_oversterfte": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -1522,7 +1534,9 @@
         "text": "RIVM"
       }
     },
-    "kpi_titel": "Aantal overleden personen"
+    "kpi_titel": "Aantal overleden personen",
+    "line_chart_legend_trend_label": "Aantal overleden bewoners",
+    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
   },
   "veiligheidsregio_gehandicaptenzorg_oversterfte": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -1553,7 +1567,9 @@
         "href": "https://data.rivm.nl/covid-19/COVID-19_gehandicaptenzorg.html",
         "text": "RIVM"
       }
-    }
+    },
+    "line_chart_legend_trend_label": "Aantal overleden bewoners",
+    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
   },
   "veiligheidsregio_gehandicaptenzorg_besmette_locaties": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -1612,7 +1628,9 @@
         "text": "RIVM"
       }
     },
-    "kpi_titel": "Aantal positief geteste bewoners van gehandicapteninstellingen per dag"
+    "kpi_titel": "Aantal positief geteste bewoners van gehandicapteninstellingen per dag",
+    "line_chart_legend_trend_label": "Aantal positief geteste bewoners",
+    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
   },
   "thuiswonende_ouderen": {
     "titel_sidebar": "Thuiswonende 70-plussers",
@@ -1643,7 +1661,9 @@
       "choropleth_daily_title": "Verdeling nieuwe besmettingen thuiswonende 70-plussers (per veiligheidsregio)",
       "choropleth_daily_description": "Deze kaart laat de verdeling zien van het aantal nieuwe besmettingen per dag onder thuiswonende personen van 70 jaar of ouder per 100.000 thuiswonende personen van 70 jaar of ouder, waarvan gisteren is gemeld dat ze positief getest zijn op COVID-19.",
       "choropleth_daily_legenda": "Aantal per 100.000 thuiswonende 70-plussers",
-      "datums": "Laatste waarden verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt."
+      "datums": "Laatste waarden verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+      "line_chart_legend_trend_label": "Nieuwe besmettingen",
+      "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
     },
     "section_deceased": {
       "title": "Thuiswonende 70-plussers - COVID-19 sterfte",
@@ -1662,7 +1682,9 @@
       "kpi_daily_title": "Aantal 70-plussers dat aan COVID-19 is overleden, per dag",
       "kpi_daily_description": "Aantal thuiswonende personen van 70 jaar of ouder waarvan gisteren is gemeld dat ze zijn overleden aan COVID-19.",
       "line_chart_daily_title": "Aantal aan COVID-19 overleden 70-plussers door de tijd heen",
-      "datums": "Laatste waarden verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt."
+      "datums": "Laatste waarden verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+      "line_chart_legend_trend_label": "Aantal overledenen",
+      "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
     },
     "kpi_titel": "Aantal positief geteste mensen"
   },
@@ -1692,7 +1714,9 @@
       "kpi_daily_per_100k_title": "Aantal positief geteste thuiswonende 70-plussers per dag, per 100.000",
       "kpi_daily_per_100k_description": "Door te berekenen hoeveel thuiswonende 70-plussers in deze regio dagelijks besmet worden per 100.000 70-plussers is vergelijking met andere regio's mogelijk.",
       "line_chart_daily_title": "Nieuwe besmettingen onder thuiswonenden van 70 jaar of ouder door de tijd heen",
-      "datums": "Laatste waarden verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt."
+      "datums": "Laatste waarden verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+      "line_chart_legend_trend_label": "Nieuwe besmettingen",
+      "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
     },
     "section_deceased": {
       "title": "Thuiswonende 70-plussers in {{safetyRegion}} - COVID-19 sterfte",
@@ -1711,7 +1735,9 @@
       "kpi_daily_title": "Aantal 70-plussers overleden aan COVID-19, per dag",
       "kpi_daily_description": "Aantal thuiswonende personen van 70 jaar of ouder in deze regio waarvan gisteren is gemeld dat ze zijn overleden aan COVID-19",
       "line_chart_daily_title": "Aantal aan COVID-19 overleden 70-plussers door de tijd heen",
-      "datums": "Laatste waarden verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt."
+      "datums": "Laatste waarden verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+      "line_chart_legend_trend_label": "Aantal overledenen",
+      "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
     },
     "kpi_titel": "Aantal positief geteste mensen"
   },
@@ -1742,7 +1768,9 @@
       "kpi_covid_total_title": "Totaal aantal overleden COVID-19 patiënten",
       "kpi_covid_total_description": "Dit getal laat zien van hoeveel COVID-19 patiënten in totaal is gemeld dat ze zijn overleden, sinds het begin van de meldingen.",
       "line_chart_covid_daily_title": "Meldingen van aan COVID-19 overleden patiënten door de tijd heen",
-      "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel COVID-19 patiënten in de geselecteerde periode gemeld is dat ze zijn overleden."
+      "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel COVID-19 patiënten in de geselecteerde periode gemeld is dat ze zijn overleden.",
+      "line_chart_covid_daily_legend_trend_label": "Meldingen overleden patiënten",
+      "line_chart_covid_daily_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
     },
     "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
   },
@@ -1773,7 +1801,9 @@
       "kpi_covid_total_title": "Totaal aantal overleden COVID-19 patiënten",
       "kpi_covid_total_description": "Dit getal laat zien van hoeveel COVID-19 patiënten in deze veiligheidsregio in totaal is gemeld dat ze zijn overleden, sinds het begin van de meldingen.",
       "line_chart_covid_daily_title": "Gemelde aantal overleden COVID-19 patiënten door de tijd heen",
-      "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel COVID-19 patiënten in deze veiligheidsregio in de geselecteerde periode gemeld is dat ze zijn overleden."
+      "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel COVID-19 patiënten in deze veiligheidsregio in de geselecteerde periode gemeld is dat ze zijn overleden.",
+      "line_chart_covid_daily_legend_trend_label": "Gemeld aantal overleden",
+      "line_chart_covid_daily_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
     },
     "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
   },

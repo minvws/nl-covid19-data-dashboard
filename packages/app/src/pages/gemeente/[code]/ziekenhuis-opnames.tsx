@@ -159,7 +159,8 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
                   <Box>
                     <Text as="span" fontWeight="bold">
                       {`${formatDateFromMilliseconds(
-                        value.__date.getTime()
+                        value.__date.getTime(),
+                        'medium'
                       )}: `}
                     </Text>
                     {formatNumber(value.__value)}

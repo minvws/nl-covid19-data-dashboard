@@ -35,12 +35,12 @@ const CACHE_DIR =
           }
         : imageResizeTargets.flatMap((size) => [
             {
-              url: `${image.url}?w=${size}`,
+              url: `${image.url}?&q=65&w=${size}`,
               filename: `${image.assetId}-${size}.${image.extension}`,
               directory: `images`,
             },
             {
-              url: `${image.url}?w=${size}&fm=webp`,
+              url: `${image.url}?&q=65&w=${size}&fm=webp`,
               filename: `${image.assetId}-${size}.webp`,
               directory: `images`,
             },
@@ -52,7 +52,10 @@ const CACHE_DIR =
   await copyCachedAssets(assets, CACHE_DIR, TARGET_DIR);
 
   console.log('🎉 Done.\n');
-})().catch((err) => console.log(err));
+})().catch((err) => {
+  console.log('Error occured:', err);
+  process.exit(1);
+});
 
 async function cacheAssets(assets: LocalAsset[], cacheDirectory: string) {
   console.log(`Ensuring ${assets.length} assets are part of local cache...`);
@@ -64,10 +67,10 @@ async function cacheAssets(assets: LocalAsset[], cacheDirectory: string) {
       const fileExists = await fs.pathExists(`${cacheDirectory}/${filename}`);
 
       if (!fileExists) {
-        await download(url, cacheDirectory, { filename });
         if (!process.env.CI) {
-          console.log(`downloaded ${url}`);
+          console.log(`downloading ${url}`);
         }
+        await download(url, cacheDirectory, { filename });
         count++;
       }
     });

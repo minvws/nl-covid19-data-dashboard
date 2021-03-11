@@ -17,6 +17,8 @@ import {
   getLastGeneratedDate,
   getText,
 } from '~/static-props/get-data';
+import { formatDate } from '~/utils/formatDate';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 
 export const getStaticProps = createGetStaticProps(
@@ -66,7 +68,16 @@ const SafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
             <>
               <div
                 dangerouslySetInnerHTML={{
-                  __html: text.veiligheidsregio_index.selecteer_toelichting,
+                  __html: replaceVariablesInText(
+                    text.veiligheidsregio_index.selecteer_toelichting,
+                    {
+                      last_update: formatDate(
+                        choropleth.vr.escalation_levels[0]
+                          .date_of_insertion_unix,
+                        'day-month'
+                      ),
+                    }
+                  ),
                 }}
               />
               <EscalationMapLegenda

@@ -39,8 +39,10 @@ import {
   getText,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
+import { formatDate } from '~/utils/formatDate';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { useDataSitemap } from '~/domain/topical/link-block/use-data-sitemap';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -214,7 +216,16 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                   description={
                     <div
                       dangerouslySetInnerHTML={{
-                        __html: text.risiconiveaus.selecteer_toelichting,
+                        __html: replaceVariablesInText(
+                          text.risiconiveaus.selecteer_toelichting,
+                          {
+                            last_update: formatDate(
+                              choropleth.vr.escalation_levels[0]
+                                .date_of_insertion_unix,
+                              'day-month'
+                            ),
+                          }
+                        ),
                       }}
                     />
                   }
