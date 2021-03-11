@@ -65,6 +65,7 @@ export function PointMarkers<T extends TimestampedValue>(
          */
         left: points[0].x + 1,
         width: size,
+        pointerEvents: 'none',
       }}
     >
       {points.map((point, index) => (
@@ -75,7 +76,7 @@ export function PointMarkers<T extends TimestampedValue>(
            * Dynamic properties like y position are set via inline style because
            * SC would dynamically generate and inject a new class for every position
            */
-          style={{ top: point.y }}
+          style={{ top: point.y, pointerEvents: 'none' }}
           key={index}
         />
       ))}

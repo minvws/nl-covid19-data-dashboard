@@ -30,6 +30,7 @@ export function DateSpanMarker<T extends TimestampedValue>(
       style={{
         width,
         left: point.x,
+        pointerEvents: 'none',
       }}
     >
       <DateSpan />

@@ -70,6 +70,7 @@ export function DateLineMarker<T extends TimestampedValue>({
     <Container
       style={{
         left: point.x,
+        pointerEvents: 'none',
       }}
     >
       <Line color={lineColor} />
