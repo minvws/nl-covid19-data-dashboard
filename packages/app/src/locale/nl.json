@@ -943,7 +943,7 @@
     "barscale_screenreader_text": "{{value}} virusdeeltjes per 100.000 inwoners",
     "linechart_titel": "Gemiddeld aantal virusdeeltjes door de tijd heen (per 100.000 inwoners)",
     "bar_chart_title": "Meest recente meetwaarde per locatie in {{municipality}}",
-    "bar_chart_axis_title": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners",
+    "bar_chart_axis_title": "Gemiddelde aantal virusdeeltjes (x100 miljard) per 100.000 inwoners",
     "bron": {
       "text": "RIVM",
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
