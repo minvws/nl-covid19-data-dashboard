@@ -130,14 +130,14 @@ const InfectiousPeople: FCWithLayout<typeof getStaticProps> = (props) => {
                       metricPropertyLow: 'margin_low',
                       metricPropertyHigh: 'margin_high',
                       label: text.legenda_marge,
-                      // shortLabel: text.rangeLegendLabel,
+                      shortLabel: text.rangeLegendLabel,
                       color: colors.data.margin,
                     },
                     {
                       type: 'line',
                       metricProperty: 'estimate',
                       label: text.legenda_line,
-                      // shortLabel: text.lineLegendLabel,
+                      shortLabel: text.lineLegendLabel,
                       color: colors.data.primary,
                     },
                   ]}
