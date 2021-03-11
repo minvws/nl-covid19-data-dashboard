@@ -504,6 +504,7 @@ export interface NlVaccineDeliveryEstimateTimeSpanValue {
   date_of_insertion_unix: number;
   date_start_unix: number;
   date_end_unix: number;
+  date_of_report_unix: number;
 }
 export interface NlVaccineDeliveryPerSupplier {
   values: NlVaccineDeliveryPerSupplierValue[];
@@ -519,6 +520,7 @@ export interface NlVaccineDeliveryPerSupplierValue {
   date_of_insertion_unix: number;
   date_start_unix: number;
   date_end_unix: number;
+  date_of_report_unix: number;
 }
 export interface NlVaccineAdministered {
   values: NlVaccineAdministeredValue[];
