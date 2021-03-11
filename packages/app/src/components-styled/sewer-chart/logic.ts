@@ -80,7 +80,7 @@ export function useSewerChartValues(
     [data.sewer_per_installation, timeframe]
   );
 
-  return { averageValues, stationValues };
+  return [averageValues, stationValues] as const;
 }
 
 /**

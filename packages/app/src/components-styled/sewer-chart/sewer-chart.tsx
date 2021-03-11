@@ -70,10 +70,11 @@ export function SewerChart(props: SewerChartProps) {
   /**
    * filter and shape data for our line-chart and scatter plot
    */
-  const {
-    averageValues: averageLineData,
-    stationValues: stationScatterData,
-  } = useSewerChartValues(data, timeframe);
+  const [averageLineData, stationScatterData] = useSewerChartValues(
+    data,
+    timeframe
+  );
+
   /**
    * create props for the station select dropdown
    */
