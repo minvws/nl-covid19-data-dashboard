@@ -11,14 +11,11 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
 
-const commitHash = require('child_process')
-  .execSync('git rev-parse --short HEAD')
-  .toString()
-  .trim();
+const COMMIT_ID = process.env.NEXT_PUBLIC_COMMIT_ID || 'no-version-found';
 
 const nextConfig = {
   env: {
-    COMMIT_ID: commitHash,
+    COMMIT_ID,
   },
 
   /**

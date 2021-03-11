@@ -105,9 +105,11 @@
     "titel_kpi": "Average number of intensive care admissions in 3 days",
     "reference": {
       "href": "/verantwoording#intensive-care",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
-    "kpi_titel": "Average number of intensive care admissions in 3 days"
+    "kpi_titel": "Average number of intensive care admissions in 3 days",
+    "linechart_legend_trend_label": "",
+    "linechart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
   },
   "verdenkingen_huisartsen": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
@@ -134,7 +136,7 @@
     "titel_kpi": "Patients who contact the general practitioner for the first time due to COVID-19 symptoms",
     "reference": {
       "href": "/verantwoording#general-practitioners",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "nivel": {
@@ -153,7 +155,7 @@
     "titel": "Hospital admissions per day",
     "pagina_toelichting": "A rise in the number of patients with COVID-19 could overburden hospitals. This number is also a valid indicator for epidemic growth. This section of the dashboard shows the number of patients with COVID-19 admitted to hospital each day and the number of regular hospital beds occupied by patients with COVID-19. The dashboard provides national and regional figures drawn from various sources.",
     "barscale_titel": "Hospital admissions reported per day",
-    "extra_uitleg": "Number of people with COVID-19 admitted to hospital daily. This figure shows how many hospital admissions are reported per day, including patients from outside the hospital admitted directly to the ICU. It may include hospital admissions that occurred in previous days.\n\n*The peak in hospital admissions on 23 February is due to late reports of admissions in the Gelderland-Midden region.*",
+    "extra_uitleg": "Number of people with COVID-19 admitted to hospital daily. This figure shows how many hospital admissions are reported per day, including patients from outside the hospital admitted directly to the ICU. It may include hospital admissions that occurred in previous days.",
     "map_titel": "Residence of patients admitted to hospital",
     "map_toelichting": "This map shows, by municipality or safety region, where people live who have been admitted to hospital with COVID-19. Please note that people may have been admitted to a hospital located somewhere else in the Netherlands; the map therefore does not show admission numbers per hospital. The figures here reflect the daily hospital admissions reported to the National Intensive Care Evaluation Registry (Stichting NICE).",
     "linechart_titel": "Hospital admissions over time, by admission date",
@@ -202,7 +204,7 @@
     "titel_kpi": "Number of hospital admissions reported on one day. ",
     "reference": {
       "href": "/verantwoording#hospitals",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "tijdelijk_onbeschikbaar_titel": "",
     "tijdelijk_onbeschikbaar": "",
@@ -254,7 +256,7 @@
     "titel_kpi": "Confirmed cases per day",
     "reference": {
       "href": "/verantwoording#confirmed-cases",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -292,7 +294,7 @@
     "titel_kpi": "Number of infectious people",
     "reference": {
       "href": "/verantwoording#infectious-people",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -304,7 +306,7 @@
     "kpi_titel": "Number of infectious people"
   },
   "reproductiegetal": {
-    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
+    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated twice per week.",
     "rangeLegendLabel": "Confidence interval",
     "lineLegendLabel": "Effective R",
     "bron": {
@@ -312,7 +314,7 @@
       "text": "RIVM"
     },
     "legenda_r": "The reproduction number is not an exact value but a reliable estimate. Reproduction numbers (R) using data from less than two weeks ago are not reliable, therefore, the line depicting R stops at a date two weeks in the past. ",
-    "legenda_marge": "The confidence interval shows the range between which the number R falls. This is updated on a weekly basis.",
+    "legenda_marge": "The confidence interval shows the range between which the number R falls. This is updated twice per week.",
     "reproductie_explainer_alt": "Image to support the explanation above",
     "titel": "Reproduction number",
     "pagina_toelichting": "The reproduction number shows how fast the virus is spreading. The number shows how many people are on average infected by one patient with COVID-19.",
@@ -329,7 +331,7 @@
     "titel_kpi": "Most recent reproduction number",
     "reference": {
       "href": "/verantwoording#reproduction-number",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -392,7 +394,7 @@
       "text": "RIVM"
     },
     "titel": "Nursing homes – Number of infected locations",
-    "pagina_toelichting": "This number is an estimation of the number of new nursing home locations where there is at least one confirmed case.\n\nThe calculation method has been changed on the 29th of September. Please also see the data explanation section.",
+    "pagina_toelichting": "This number is an estimation of the number of new nursing home locations where there is at least one confirmed case.\n\nThe calculation method has been changed on the 29th of September. Please also see the 'Explanation of the data presented'.",
     "barscale_titel": "Number of new locations per day",
     "barscale_toelichting": "Number of new locations where there is at least one confirmed case. A nursing home is counted as a 'new location; when there have not been any confirmed cases for at least 28 days, which is twice the incubation period.",
     "kpi_titel": "Total number of infected locations",
@@ -413,7 +415,7 @@
     "titel_kpi": "Number of infected locations",
     "reference": {
       "href": "/verantwoording#nursing-homes",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -432,7 +434,7 @@
     "titel": "Nursing homes – Number of confirmed cases",
     "barscale_titel": "Number of confirmed cases in nursing homes per day",
     "extra_uitleg": "Number of new confirmed cases in nursing homes that have been reported per day.",
-    "pagina_toelichting": "Number of new confirmed cases in nursing homes that have been reported per day. This number is an estimation of the number confirmed cases in nursing home inhabitants.\n\nThe calculation method has been changed on the 29th of September. Please also see the data explanation section.",
+    "pagina_toelichting": "Number of new confirmed cases in nursing homes that have been reported per day. This number is an estimation of the number confirmed cases in nursing home inhabitants.\n\nThe calculation method has been changed on the 29th of September. Please also see the 'Explanation of the data presented'.",
     "linechart_titel": "Number of confirmed cases among residents over time",
     "barscale_screenreader_text": "{{value}} Number of residents who tested positive (confirmed cases).",
     "titel_sidebar": "Confirmed cases",
@@ -449,7 +451,7 @@
     "titel_kpi": "Number of confirmed cases per day",
     "reference": {
       "href": "/verantwoording#nursing-homes",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -458,7 +460,9 @@
         "text": "RIVM"
       }
     },
-    "kpi_titel": "Number of confirmed cases per day"
+    "kpi_titel": "Number of confirmed cases per day",
+    "line_chart_legend_trend_label": "",
+    "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
   },
   "verpleeghuis_oversterfte": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -482,7 +486,7 @@
     "titel_kpi": "Mortality per day",
     "reference": {
       "href": "/verantwoording#nursing-homes",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -491,7 +495,9 @@
         "text": "RIVM"
       }
     },
-    "kpi_titel": "Mortality per day"
+    "kpi_titel": "Mortality per day",
+    "line_chart_legend_trend_label": "",
+    "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
   },
   "blok_verpleeghuis_zorg": {
     "title": "Nursing homes",
@@ -528,7 +534,7 @@
     "map_tooltip_value": "{{value}} x100 billion",
     "reference": {
       "href": "/verantwoording#sewage-water",
-      "text": "Find out more about testing wastewater for coronavirus in the explanation of data presented."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -618,7 +624,7 @@
     "select_region_municipality_legend": "Select a municipality:",
     "select_region_type_legend": "Show numbers from:",
     "your_municipality": "Municipality",
-    "belangrijk_bericht": "There is a [national lockdown](https://coronadashboard.government.nl/landelijk/maatregelen) until at least 15 March."
+    "belangrijk_bericht": "There is a [national lockdown](https://coronadashboard.government.nl/landelijk/maatregelen) until at least 30 March."
   },
   "common": {
     "metadata": {
@@ -730,7 +736,7 @@
     "titel_kpi": "Number of hospital admissions reported on one day. ",
     "reference": {
       "href": "/verantwoording#hospitals",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -780,7 +786,7 @@
     },
     "reference": {
       "href": "/verantwoording#confirmed-cases",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -823,7 +829,7 @@
     "rwzi_abbrev": "",
     "reference": {
       "href": "/verantwoording#sewage-water",
-      "text": "Find out more about testing wastewater for coronavirus in the explanation of data presented."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -865,7 +871,7 @@
     "titel_kpi": "Number of hospital admissions reported on one day. ",
     "reference": {
       "href": "/verantwoording#hospitals",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -916,7 +922,7 @@
     "titel_kpi": "Confirmed cases per day",
     "reference": {
       "href": "/verantwoording#confirmed-cases",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -937,7 +943,7 @@
     "barscale_screenreader_text": "{{value}} virus particles per 100,000 inhabitants",
     "linechart_titel": "Average number of virus particles over time (per 100,000 inhabitants)",
     "bar_chart_title": "Most recent measurement per location in {{municipality}}",
-    "bar_chart_axis_title": "Average number of coronavirus particles per 100,000 inhabitants",
+    "bar_chart_axis_title": "Average number of coronavirus particles (x100 billion) per 100,000 inhabitants",
     "bron": {
       "text": "RIVM",
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
@@ -959,7 +965,7 @@
     "graph_range_description": "Average number of virus particles over time (per 100.000 inhabitants)",
     "reference": {
       "href": "/verantwoording#sewage-water",
-      "text": "Find out more about testing wastewater for coronavirus in the explanation of data presented."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -979,12 +985,12 @@
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Risk level map of the Netherlands",
-    "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on 2 March. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\n**There remains a national lockdown until at least 15 March. [Click here to view the lockdown measures](/landelijk/maatregelen).**",
+    "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on 2 March. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\n**There remains a national lockdown until at least 30 March. [Click here to view the lockdown measures](/landelijk/maatregelen).**",
     "metadata": {
       "title": "Level of risk per safety region | Coronavirus Dashboard | Government.nl",
       "description": "Overview of the level of risk per safety region in the Netherlands."
     },
-    "belangrijk_bericht": "There is a [national lockdown](https://coronadashboard.government.nl/landelijk/maatregelen) until at least 15 March."
+    "belangrijk_bericht": "There is a [national lockdown](https://coronadashboard.government.nl/landelijk/maatregelen) until at least 30 March."
   },
   "gemeente_index": {
     "selecteer_titel": "Select your municipality",
@@ -1002,7 +1008,7 @@
   },
   "escalatie_niveau": {
     "titel": "Risk levels",
-    "toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on 2 March. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\n**There remains a national lockdown until at least 15 March. [Click here to view the lockdown measures](/landelijk/maatregelen).**",
+    "toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on 2 March. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\n**There remains a national lockdown until at least 30 March. [Click here to view the lockdown measures](/landelijk/maatregelen).**",
     "types": {
       "1": {
         "titel": "Caution",
@@ -1069,7 +1075,7 @@
     "linechart_positivetests_legend_label": "GGD tests with a positive result",
     "reference": {
       "href": "/verantwoording#confirmed-cases",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -1107,7 +1113,7 @@
     "linechart_positivetests_legend_label": "GGD tests with a positive result",
     "reference": {
       "href": "/verantwoording#confirmed-cases",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -1138,7 +1144,7 @@
     },
     "reference": {
       "href": "/verantwoording#nursing-homes",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -1146,7 +1152,9 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
         "text": "RIVM"
       }
-    }
+    },
+    "line_chart_legend_trend_label": "",
+    "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
   },
   "veiligheidsregio_verpleeghuis_besmette_locaties": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -1155,7 +1163,7 @@
       "text": "RIVM"
     },
     "titel": "Nursing homes – Total number of infected locations in {{safetyRegion}}",
-    "pagina_toelichting": "This number is an estimation of the number of new nursing home locations where there is at least one confirmed case.\n\nThe calculation method has been changed on the 29th of September. Please also see the data explanation section.",
+    "pagina_toelichting": "This number is an estimation of the number of new nursing home locations where there is at least one confirmed case.\n\nThe calculation method has been changed on the 29th of September. Please also see the 'Explanation of the data presented'.",
     "barscale_titel": "Number of new locations per day",
     "barscale_toelichting": "Number of new locations where there is at least one confirmed case. A nursing home is counted as a 'new location; when there have not been any confirmed cases for at least 28 days, which is twice the incubation period.",
     "kpi_titel": "Total no. of infected locations",
@@ -1169,7 +1177,7 @@
     "titel_sidebar": "Nursing homes",
     "reference": {
       "href": "/verantwoording#nursing-homes",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -1188,7 +1196,7 @@
     "titel": "Nursing homes – Confirmed cases in {{safetyRegion}}",
     "barscale_titel": "Number of confirmed cases in nursing homes per day",
     "extra_uitleg": "Number of new confirmed cases in nursing homes that have been reported per day.",
-    "pagina_toelichting": "Number of confirmed cases in nursing homes per day in {{safetyRegion}}. This number is an estimation of the number confirmed cases in nursing home inhabitants.\n\nThe calculation method has been changed on the 29th of September. Please also see the data explanation section.",
+    "pagina_toelichting": "Number of confirmed cases in nursing homes per day in {{safetyRegion}}. This number is an estimation of the number confirmed cases in nursing home inhabitants.\n\nThe calculation method has been changed on the 29th of September. Please also see the 'Explanation of the data presented'.",
     "linechart_titel": "Number of confirmed cases among residents over time",
     "barscale_screenreader_text": "{{value}} Number of residents who tested positive (confirmed cases).",
     "titel_sidebar": "Confirmed cases",
@@ -1204,7 +1212,7 @@
     },
     "reference": {
       "href": "/verantwoording#nursing-homes",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -1212,7 +1220,9 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
         "text": "RIVM"
       }
-    }
+    },
+    "line_chart_legend_trend_label": "",
+    "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
   },
   "data_warning_text": "",
   "veelgestelde_vragen_metadata": {
@@ -1320,7 +1330,7 @@
     },
     "reference": {
       "href": "https://coronadashboard.government.nl/verantwoording#gedrag",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -1385,7 +1395,7 @@
     },
     "reference": {
       "href": "https://coronadashboard.government.nl/verantwoording#gedrag",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -1460,7 +1470,7 @@
     "titel_kpi": "Total no. of infected locations",
     "reference": {
       "href": "/verantwoording#disability-care-homes",
-      "text": "Read more in the explanation of the data presented"
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -1491,7 +1501,7 @@
     "titel_kpi": "Disability care homes - daily confirmed cases (residents)",
     "reference": {
       "href": "/verantwoording#disability-care-homes",
-      "text": "Read more in the explanation of the presented data."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -1500,7 +1510,9 @@
         "text": "RIVM"
       }
     },
-    "kpi_titel": "Daily number of disabililty care home residents who were reported as testing positive for COVID-19"
+    "kpi_titel": "Daily number of disabililty care home residents who were reported as testing positive for COVID-19",
+    "line_chart_legend_trend_label": "",
+    "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
   },
   "gehandicaptenzorg_oversterfte": {
     "datums": "Latest values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -1519,7 +1531,7 @@
     "titel_kpi": "Number of deceased residents",
     "reference": {
       "href": "/verantwoording#disability-care-homes",
-      "text": "Read more in explanation of the data presented"
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -1528,7 +1540,9 @@
         "text": "RIVM"
       }
     },
-    "kpi_titel": "Number of deceased residents"
+    "kpi_titel": "Number of deceased residents",
+    "line_chart_legend_trend_label": "",
+    "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
   },
   "veiligheidsregio_gehandicaptenzorg_oversterfte": {
     "datums": "Latest values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -1551,7 +1565,7 @@
     },
     "reference": {
       "href": "/verantwoording#disability-care-homes",
-      "text": "Read more in 'explanation of the data presented'."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -1559,7 +1573,9 @@
         "href": "https://data.rivm.nl/covid-19/COVID-19_gehandicaptenzorg.html",
         "text": "RIVM"
       }
-    }
+    },
+    "line_chart_legend_trend_label": "",
+    "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
   },
   "veiligheidsregio_gehandicaptenzorg_besmette_locaties": {
     "datums": "Latest values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -1578,7 +1594,7 @@
     "titel_sidebar": "Confirmed cases (homes)",
     "reference": {
       "href": "/verantwoording#disability-care-homes",
-      "text": "Read more in explanation of the data presented"
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -1609,7 +1625,7 @@
     },
     "reference": {
       "href": "/verantwoording#disability-care-homes",
-      "text": "Read more in the explanation of the presented data."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -1618,7 +1634,9 @@
         "text": "RIVM"
       }
     },
-    "kpi_titel": "Daily number of disabililty care home residents who were reported as testing positive for COVID-19"
+    "kpi_titel": "Daily number of disabililty care home residents who were reported as testing positive for COVID-19",
+    "line_chart_legend_trend_label": "",
+    "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
   },
   "thuiswonende_ouderen": {
     "titel_sidebar": "People over 70 living at home",
@@ -1632,7 +1650,7 @@
       "description": "People aged over 70 are extra vulnerable to coronavirus infection. Keeping track of the number of infections among over-70s who are still living independently in their own homes makes targeted measures possible.",
       "reference": {
         "href": "/verantwoording#thuiswonende-70-plussers",
-        "text": "See the explanation of the data presented."
+        "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
       },
       "bronnen": {
         "rivm": {
@@ -1649,14 +1667,16 @@
       "choropleth_daily_title": "Distribution of daily confirmed cases among over-70s living at home (per safety region)",
       "choropleth_daily_description": "This map shows the differences between safety regions in the number of confirmed cases per 100,000 among over-70s living at home, as reported yesterday.",
       "choropleth_daily_legenda": "Number per 100,000 over-70s living at home",
-      "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis."
+      "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
+      "line_chart_legend_trend_label": "",
+      "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
     },
     "section_deceased": {
       "title": "People over 70 living at home - COVID-19 deaths",
       "description": "The number of people over 70 living at home who were reported as deceased due to COVID-19 yesterday.",
       "reference": {
         "href": "/verantwoording#people-over-70-living-at-home",
-        "text": "See the explanation on the data presented."
+        "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
       },
       "bronnen": {
         "rivm": {
@@ -1668,7 +1688,9 @@
       "kpi_daily_title": "COVID-19 deaths among over-70s living at home, per day",
       "kpi_daily_description": "The number of people over 70 living at home who were reported as deceased due to COVID-19 yesterday.",
       "line_chart_daily_title": "Number of COVID-19 deaths among over-70s living at home over time",
-      "datums": "Last values obtained on {{dateOfInsertion}}. Updated daily."
+      "datums": "Last values obtained on {{dateOfInsertion}}. Updated daily.",
+      "line_chart_legend_trend_label": "",
+      "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
     },
     "kpi_titel": "Confirmed cases"
   },
@@ -1684,7 +1706,7 @@
       "description": "People aged over 70 are extra vulnerable to coronavirus infection. Keeping track of the number of infections among over-70s who are still living independently in their own homes makes targeted measures possible.",
       "reference": {
         "href": "/verantwoording#people-over-70-living-at-home",
-        "text": "Read more in explanation of the data presented"
+        "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
       },
       "bronnen": {
         "rivm": {
@@ -1698,14 +1720,16 @@
       "kpi_daily_per_100k_title": "Daily confirmed cases per 100,000 among over-70s living at home",
       "kpi_daily_per_100k_description": "Calculating the daily number of COVID-19 cases per 100,000 over-70s makes it possible to compare regions.",
       "line_chart_daily_title": "Daily confirmed cases among over-70s living at home: progression over time",
-      "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis."
+      "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
+      "line_chart_legend_trend_label": "",
+      "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
     },
     "section_deceased": {
       "title": "People over 70 in {{safetyRegion}} living at home – COVID-19 deaths",
       "description": "Number of over-70s living at home in this region deceased due to COVID-19, per day.",
       "reference": {
         "href": "/verantwoording#people-over-70-living-at-home",
-        "text": "Read more in explanation of the data presented."
+        "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
       },
       "bronnen": {
         "rivm": {
@@ -1717,7 +1741,9 @@
       "kpi_daily_title": "COVID-19 deaths among over-70s living at home, per day",
       "kpi_daily_description": "The number of people over 70 living at home in this safety region who were reported as deceased due to COVID-19 yesterday",
       "line_chart_daily_title": "Number of COVID-19 deaths among over-70s living at home over time",
-      "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis."
+      "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
+      "line_chart_legend_trend_label": "",
+      "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
     },
     "kpi_titel": "Confirmed cases"
   },
@@ -1741,14 +1767,16 @@
       },
       "reference": {
         "href": "/verantwoording#deaths",
-        "text": "Read more in 'explanation of the data presented'."
+        "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
       },
       "kpi_covid_daily_title": "Daily number of COVID-19 patients reported dead ",
       "kpi_covid_daily_description": "This figure shows the number of COVID-19 patients reported dead to the GGD, per day. It includes late reports of deaths that occurred in the preceding days.",
       "kpi_covid_total_title": "Total number of COVID-19 patients reported dead",
       "kpi_covid_total_description": "This figure shows the number of COVID-19 patients reported dead, since the reporting of COVID-19 deaths started.",
       "line_chart_covid_daily_title": "Number of reported deaths from COVID-19 over time",
-      "line_chart_covid_daily_description": "This graph shows the number of COVID-19 patients reported dead, in the selected period."
+      "line_chart_covid_daily_description": "This graph shows the number of COVID-19 patients reported dead, in the selected period.",
+      "line_chart_covid_daily_legend_trend_label": "",
+      "line_chart_covid_daily_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
     },
     "kpi_titel": "Daily reported deaths from COVID-19"
   },
@@ -1772,14 +1800,16 @@
       },
       "reference": {
         "href": "/verantwoording#deaths",
-        "text": "Read more in 'explanation of the data presented'."
+        "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
       },
       "kpi_covid_daily_title": "Daily number of COVID-19 patients reported dead ",
       "kpi_covid_daily_description": "This figure shows the number of COVID-19 patients in this safety region reported dead to the GGD, per day. It includes late reports of deaths that occurred in the preceding days.",
       "kpi_covid_total_title": "Total number of COVID-19 patients reported dead",
       "kpi_covid_total_description": "This figure shows the number of COVID-19 patients in this safety region reported dead, since the reporting of COVID-19 deaths started.",
       "line_chart_covid_daily_title": "Number of COVID-19 patients reported dead over time",
-      "line_chart_covid_daily_description": "This graph shows the number of COVID-19 patients in this safety region reported dead, in the selected period."
+      "line_chart_covid_daily_description": "This graph shows the number of COVID-19 patients in this safety region reported dead, in the selected period.",
+      "line_chart_covid_daily_legend_trend_label": "",
+      "line_chart_covid_daily_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
     },
     "kpi_titel": "Daily reported deaths from COVID-19"
   },
@@ -1796,7 +1826,7 @@
     },
     "reference": {
       "href": "/verantwoording#mortality-monitor-CBS",
-      "text": "Read more in 'explanation of the data presented'"
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "cbs_message": {
       "title": "Mortality in week 8 lower than expected",
@@ -2005,7 +2035,7 @@
     "date_of_insertion_unix": "1613650547",
     "reference": {
       "href": "/verantwoording#vaccination",
-      "text": "Read more about the source of the data on vaccination in the explanation of the presented data."
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "bronnen": {
       "rivm": {
@@ -2059,11 +2089,11 @@
       "reported_until": "Reported number till {{reportedDate}}",
       "tab_first": {
         "title": "Calculated number",
-        "description": "This figure is a calculation of the total number of vaccine doses that have been administered. The calculation is based on the number of vaccine doses that have been delivered to the locations where injections are given. [Read more about the calculation in the explanation of the presented data.](https://coronadashboard.government.nl/verantwoording#vaccination)"
+        "description": "This figure is a calculation of the total number of vaccine doses that have been administered. The calculation is based on the number of vaccine doses that have been delivered to the locations where injections are given. [Read more about the calculation in the 'Explanation of the data presented'.](https://coronadashboard.government.nl/verantwoording#vaccination)"
       },
       "tab_second": {
         "title": "Reported number",
-        "description": "This is the number of vaccine doses administered reported by GGD-GHOR and LNAZ. [Read more in the explanation of the presented data.](https://coronadashboard.government.nl/verantwoording#vaccination)"
+        "description": "This is the number of vaccine doses administered reported by GGD-GHOR and LNAZ. [Read more in the 'Explanation of the data presented'.](https://coronadashboard.government.nl/verantwoording#vaccination)"
       },
       "estimated": {
         "ggd": "administered by GGDs",
@@ -2164,7 +2194,7 @@
               "report_date": ""
             }
           ],
-          "description_first": "This figure is a calculation of the total number of vaccine doses that have been administered. The calculation is based on the number of vaccine doses that have been delivered to the locations where injections are given. [Read more about the calculation in the explanation of the presented data.](https://coronadashboard.government.nl/verantwoording#vaccination)",
+          "description_first": "This figure is a calculation of the total number of vaccine doses that have been administered. The calculation is based on the number of vaccine doses that have been delivered to the locations where injections are given. [Read more about the calculation in the 'Explanation of the data presented'.](https://coronadashboard.government.nl/verantwoording#vaccination)",
           "description_second": ""
         }
       },
@@ -2300,7 +2330,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of the Netherlands",
-      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on 2 March. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\n**There remains a national lockdown until at least 15 March. [Click here to view the lockdown measures](/landelijk/maatregelen).**"
+      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on 2 March. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\n**There remains a national lockdown until at least 30 March. [Click here to view the lockdown measures](/landelijk/maatregelen).**"
     },
     "data_sitemap_titel": "Topics on this dashboard",
     "data_sitemap_toelichting": "Go directly to the following topics:",
@@ -2400,7 +2430,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of The Netherlands",
-      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on 2 March. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\n**There remains a national lockdown until at least 15 March. [Click here to view the lockdown measures](/landelijk/maatregelen).**"
+      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on 2 March. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\n**There remains a national lockdown until at least 30 March. [Click here to view the lockdown measures](/landelijk/maatregelen).**"
     },
     "risoconiveau_maatregelen": {
       "title": "Risk level & measures",
@@ -2482,7 +2512,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of the Netherlands",
-      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on 2 March. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\n**There remains a national lockdown until at least 15 March. [Click here to view the lockdown measures](/landelijk/maatregelen).**"
+      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on 2 March. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\n**There remains a national lockdown until at least 30 March. [Click here to view the lockdown measures](/landelijk/maatregelen).**"
     },
     "risoconiveau_maatregelen": {
       "title": "Risk level & measures",
@@ -2644,7 +2674,7 @@
       },
       "reference": {
         "href": "/verantwoording#deaths",
-        "text": "Read more in 'explanation of the data presented'."
+        "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
       },
       "kpi_covid_daily_title": "Daily number of COVID-19 patients reported dead ",
       "kpi_covid_daily_description": "This figure shows the number of COVID-19 patients in this municipality reported dead to the GGD, per day. It includes late reports of deaths that occurred in the preceding days.",
@@ -2662,7 +2692,7 @@
       "description": "The CoronaMelder app has been developed to help fight the spread of coronavirus. The app keeps track of when users have been within close range of one another for a longer period of time. If a CoronaMelder user tests positive for COVID-19, they can choose to alert other app users. App users who get an alert can then get tested and avoid unknowingly infecting others.",
       "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
       "reference": {
-        "text": "Read more about the CoronaMelder app in the explanation of the presented data.",
+        "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’.",
         "href": "/verantwoording#coronamelder"
       },
       "bronnen": {
@@ -2689,14 +2719,14 @@
   },
   "choropleth_tooltip": {
     "patients": {
-      "singular": "",
-      "plural": ""
+      "singular": "patient",
+      "plural": "patients"
     },
-    "positive_tested_people": "",
-    "hospital_admissions": "",
-    "infected_locations": "",
-    "elderly_at_home": "",
-    "sewer_regional": ""
+    "positive_tested_people": "Number of confirmed cases:",
+    "hospital_admissions": "Hospital admissions:",
+    "infected_locations": "Infected locations:",
+    "elderly_at_home": "People over 70 living at home:",
+    "sewer_regional": "Average number of virus particles:"
   },
   "milestones": {
     "toon_meer": "Show earlier events",
@@ -2704,18 +2734,18 @@
   },
   "section_sterftemonitor_vr": {
     "title": "",
-    "description": "",
+    "description": "Every week the national office Statistics Netherlands (CBS) publishes data on the total number of deaths and compares this to the predicted number of deaths, corrected for extreme temperatures, epidemics, etc. If more deaths occur than predicted, these are considered excess deaths. This graph may show a more complete picture of COVID-19 related deaths than the numbers reported by the GGD because not everyone who dies from COVID-19 has been tested for it.",
     "datums": "",
     "bronnen": {
       "cbs": {
-        "href": "",
-        "text": "",
-        "download": ""
+        "href": "https://mlzopendata.cbs.nl/#/MLZ/nl/dataset/40080NED",
+        "text": "CBS",
+        "download": "https://dataderden.cbs.nl/ODataApi/OData/40080NED/TypedDataSet?$filter=(substringof(%272020W%27,%20Perioden)%20eq%20true)%20or%20(substringof(%272021W%27,%20Perioden)%20eq%20true)%20and%20(substringof(%27VR%27,%20RegioS)%20eq%20true)&$select=Perioden,%20RegioS,%20Overledenen_1"
       }
     },
     "reference": {
-      "href": "",
-      "text": ""
+      "href": "/verantwoording#mortality-monitor-CBS",
+      "text": "Read more about the information on this page in the 'Explanation of data presented'."
     }
   }
 }

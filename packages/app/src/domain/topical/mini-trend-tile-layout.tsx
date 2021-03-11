@@ -3,9 +3,13 @@ import { Box } from '~/components-styled/base';
 
 type MiniTrendTileLayoutProps = {
   children: ReactNode;
+  id?: string;
 };
 
-export function MiniTrendTileLayout({ children }: MiniTrendTileLayoutProps) {
+export function MiniTrendTileLayout({
+  children,
+  id,
+}: MiniTrendTileLayoutProps) {
   const tiles = Children.toArray(children);
 
   const columnWidth = `${Math.floor(100 / tiles.length)}%`;
@@ -16,6 +20,7 @@ export function MiniTrendTileLayout({ children }: MiniTrendTileLayoutProps) {
       display={{ _: 'block', md: 'flex' }}
       overflow="hidden"
       mx={-gutterSize}
+      id={id}
     >
       {tiles.map((tile: ReactNode, index: number) => (
         <Box flex={`1 1 ${columnWidth}`} key={index} mx={gutterSize}>

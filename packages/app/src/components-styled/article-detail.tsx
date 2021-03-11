@@ -9,22 +9,14 @@ import { ContentImage } from './cms/content-image';
 import { RichContent } from './cms/rich-content';
 import { LinkWithIcon } from './link-with-icon';
 import { PublicationDate } from './publication-date';
-
-/**
- * This is a mapping where we map a specific breakpoint in vw to a size in pixels.
- * An article's cover image will be roughly 50% of the viewport on larger screens,
- * which is why we can request a lower resolution image.
- */
-export const articleCoverImageSizes = [
-  [320, 320],
-  [640, 640],
-  [768, 768],
-  [1024, 768],
-];
-
 interface ArticleDetailProps {
   article: Article;
 }
+
+const imageSizes = [
+  // viewport min-width 700px display images at max. 636px wide
+  [700, 636],
+];
 
 export function ArticleDetail({ article }: ArticleDetailProps) {
   return (
@@ -48,13 +40,17 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
         <ContentImage
           node={article.cover}
           contentWrapper={ContentBlock}
-          sizes={articleCoverImageSizes}
+          sizes={imageSizes}
         />
       </ContentBlock>
 
       {!!article.content?.length && (
         <Box fontSize="1.125rem">
-          <RichContent blocks={article.content} contentWrapper={ContentBlock} />
+          <RichContent
+            blocks={article.content}
+            contentWrapper={ContentBlock}
+            imageSizes={imageSizes}
+          />
         </Box>
       )}
     </Box>
