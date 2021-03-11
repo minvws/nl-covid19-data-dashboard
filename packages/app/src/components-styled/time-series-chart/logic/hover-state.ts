@@ -34,7 +34,6 @@ interface UseHoverStateArgs<T extends TimestampedValue> {
   values: T[];
   seriesList: SeriesList;
   seriesConfig: SeriesConfig<T>;
-  paddingLeft: number;
   xScale: ScaleLinear<number, number>;
   yScale: ScaleLinear<number, number>;
   timespanAnnotations?: TimespanAnnotationConfig[];
@@ -60,7 +59,6 @@ export function useHoverState<T extends TimestampedValue>({
   values,
   seriesList,
   seriesConfig,
-  paddingLeft,
   xScale,
   yScale,
   timespanAnnotations,
@@ -102,11 +100,11 @@ export function useHoverState<T extends TimestampedValue>({
     function (values: TimestampedValue[], xPosition: number): number {
       if (values.length === 1) return 0;
 
-      const date_unix = xScale.invert(xPosition - paddingLeft);
+      const date_unix = xScale.invert(xPosition - padding.left);
 
       return bisectCenter(valuesDateUnix, date_unix, 0, values.length);
     },
-    [paddingLeft, xScale, valuesDateUnix]
+    [padding.left, xScale, valuesDateUnix]
   );
 
   const handleHover = useCallback(

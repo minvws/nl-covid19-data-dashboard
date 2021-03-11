@@ -188,7 +188,6 @@ export function TimeSeriesChart<T extends TimestampedValue>({
 
   const [handleHover, hoverState] = useHoverState({
     values,
-    paddingLeft: padding.left,
     seriesConfig,
     seriesList,
     xScale,
