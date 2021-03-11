@@ -356,9 +356,9 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
           icon={scaledVaccinatiesIcon}
           metadata={{
             datumsText: text.datums,
-            dateOrRange: data.vaccine_administered_total.last_value.date_unix,
+            dateOrRange: data.vaccine_support.last_value.date_of_insertion_unix,
             dateOfInsertionUnix:
-              data.vaccine_administered_total.last_value.date_of_insertion_unix,
+              data.vaccine_support.last_value.date_of_insertion_unix,
             dataSources: [],
           }}
         />
@@ -513,12 +513,8 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
           reference={text.stock_and_delivery_section.reference}
           metadata={{
             datumsText: text.datums,
-            dateOrRange:
-              data.vaccine_administered_total.last_value
-                .date_unix /** TODO replace dates for correct source */,
-            dateOfInsertionUnix:
-              data.vaccine_administered_total.last_value
-                .date_of_insertion_unix /** TODO replace dates for correct source */,
+            dateOrRange: 0 /** TODO replace dates for correct source */,
+            dateOfInsertionUnix: 0 /** TODO replace dates for correct source */,
             dataSources: [],
           }}
         />
