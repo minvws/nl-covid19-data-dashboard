@@ -32,13 +32,10 @@ export function Metadata({ date, source, obtained }: MetadataProps) {
     <Box as="footer" mt={3} mb={{ _: 0, sm: -3 }} gridArea="metadata">
       <Text my={0} color="annotation" fontSize={1}>
         {dateString}
-        {obtained && (
-          <>
-            {` ${replaceVariablesInText(locale.common.metadata.obtained, {
-              date: formatDateFromSeconds(obtained, 'weekday-medium'),
-            })}`}
-          </>
-        )}
+        {obtained &&
+          ` ${replaceVariablesInText(locale.common.metadata.obtained, {
+            date: formatDateFromSeconds(obtained, 'weekday-medium'),
+          })}`}
         {dateString && source ? ' · ' : null}
         {source ? `${locale.common.metadata.source}: ${source.text}` : null}
       </Text>
