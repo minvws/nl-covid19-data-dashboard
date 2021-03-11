@@ -16,7 +16,7 @@ yarn workspace @corona-dashboard/common build
 
 # Validate data
 yarn workspace @corona-dashboard/cli validate-json
-# RUN if [ "$IS_PRODUCTION" = "false" ] ; then echo "Skipping last-values validation because of non-production environment" ; else yarn workspace @corona-dashboard/cli validate-last-values ; fi
+yarn workspace @corona-dashboard/cli validate-last-values
 
 # Prepare types and assets
 yarn workspace @corona-dashboard/cli generate-typescript
