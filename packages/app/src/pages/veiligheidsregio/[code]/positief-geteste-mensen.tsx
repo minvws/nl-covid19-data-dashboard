@@ -178,7 +178,7 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
             return (
               <Text textAlign="center" m={0}>
                 <span style={{ fontWeight: 'bold' }}>
-                  {formatDateFromMilliseconds(value.__date.getTime())}
+                  {formatDateFromMilliseconds(value.__date.getTime(), 'medium')}
                 </span>
                 <br />
                 <span
@@ -357,11 +357,15 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
             source: ggdText.bronnen.rivm,
           }}
           formatTooltip={(x) => {
-            const percentage = (x[1].__value * 100) / x[0].__value;
+            const numerator = x[0].__value;
+            const denominator = x[1].__value;
+
+            const percentage =
+              numerator === 0 ? 0 : (denominator * 100) / numerator;
 
             return (
               <>
-                {formatDateFromSeconds(x[0].date_unix, 'day-month')}
+                {formatDateFromSeconds(x[0].date_unix, 'medium')}
                 <br />
                 <span
                   style={{
@@ -372,7 +376,7 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
                     display: 'inline-block',
                   }}
                 />{' '}
-                {formatNumber(x[0].__value)}
+                {formatNumber(numerator)}
                 <br />
                 <span
                   style={{
@@ -383,7 +387,7 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
                     display: 'inline-block',
                   }}
                 />{' '}
-                {formatNumber(x[1].__value)} ({formatPercentage(percentage)}%)
+                {formatNumber(denominator)} ({formatPercentage(percentage)}%)
               </>
             );
           }}

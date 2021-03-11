@@ -46,12 +46,20 @@ export type AreaSeriesDefinition<T extends TimestampedValue> = {
 
 export function useSeriesList<T extends TimestampedValue>(
   values: T[],
-  seriesConfig: SeriesConfig<T>,
-  timeframe: TimeframeOption
+  seriesConfig: SeriesConfig<T>
 ) {
-  return useMemo(() => getSeriesList(values, seriesConfig, timeframe), [
+  return useMemo(() => getSeriesList(values, seriesConfig), [
     values,
     seriesConfig,
+  ]);
+}
+
+export function useValuesInTimeframe<T extends TimestampedValue>(
+  values: T[],
+  timeframe: TimeframeOption
+) {
+  return useMemo(() => getValuesInTimeframe(values, timeframe), [
+    values,
     timeframe,
   ]);
 }
@@ -121,19 +129,16 @@ export type SeriesList = (SeriesSingleValue[] | SeriesDoubleValue[])[];
 
 export function getSeriesList<T extends TimestampedValue>(
   values: T[],
-  seriesConfig: SeriesConfig<T>,
-  timeframe: TimeframeOption
+  seriesConfig: SeriesConfig<T>
 ): SeriesList {
-  const series = getValuesInTimeframe(values, timeframe);
-
   return seriesConfig.map((config) =>
     config.type === 'range'
       ? getRangeSeriesData(
-          series,
+          values,
           config.metricPropertyLow,
           config.metricPropertyHigh
         )
-      : getSeriesData(series, config.metricProperty)
+      : getSeriesData(values, config.metricProperty)
   );
 }
 

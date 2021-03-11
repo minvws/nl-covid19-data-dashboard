@@ -43,7 +43,6 @@ export function DeceasedMonitorSection({
               width={width}
               values={data.values}
               ariaLabelledBy=""
-              paddingLeft={40}
               seriesConfig={[
                 {
                   type: 'range',

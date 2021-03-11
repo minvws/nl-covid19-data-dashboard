@@ -1,12 +1,9 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
-
 import { ArrowIconRight } from '~/components-styled/arrow-icon';
-
 import { BackgroundImage } from '~/components-styled/background-image';
 import { Box } from '~/components-styled/base';
 import { Heading, InlineText, Text } from '~/components-styled/typography';
-import { getImageSrc } from '~/lib/sanity';
 import siteText from '~/locale';
 import { Block, Editorial, ImageBlock } from '~/types/cms';
 import { Link } from '~/utils/link';
@@ -31,7 +28,13 @@ export function EditorialTeaser(props: EditorialTeaserProps) {
       <StyledEditorialTeaser>
         <CoverImage image={cover} />
         <StyledTextOverlay>
-          <Box width={{ lg: '60%' }} position="absolute" bottom={3} left={3}>
+          <Box
+            width={{ lg: '60%' }}
+            position="absolute"
+            bottom={3}
+            left={3}
+            right={3}
+          >
             <Heading level={3} fontSize={5} lineHeight="1em">
               {title}
             </Heading>
@@ -46,6 +49,60 @@ export function EditorialTeaser(props: EditorialTeaserProps) {
     </Link>
   );
 }
+
+function Arrow() {
+  return (
+    <span css={css({ svg: { height: '11px', width: '13px', mx: '3px' } })}>
+      <ArrowIconRight />
+    </span>
+  );
+}
+
+type CoverImageProps = {
+  image: ImageBlock;
+};
+
+function CoverImage({ image }: CoverImageProps) {
+  return (
+    <div
+      css={css({
+        width: '100%',
+        height: '100%',
+        position: 'absolute',
+      })}
+    >
+      <ZoomContainer>
+        <BackgroundImage
+          image={image}
+          height={'100%'}
+          sizes={[
+            // viewport min-width 1200px display images at max. 745px wide
+            [1200, 745],
+          ]}
+        />
+      </ZoomContainer>
+      <div
+        css={css({
+          backgroundImage: `linear-gradient(to left, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.75))`,
+          width: '100%',
+          height: '100%',
+          top: 0,
+          left: 0,
+          position: 'absolute',
+          pointerEvents: 'none',
+        })}
+      />
+    </div>
+  );
+}
+
+const ZoomContainer = styled.div(
+  css({
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+  })
+);
 
 const StyledTextOverlay = styled.div(
   css({
@@ -69,7 +126,7 @@ const StyledEditorialTeaser = styled.a(
     color: 'white',
     height: '100%',
 
-    [`${BackgroundImage}, ${Heading}`]: {
+    [`${ZoomContainer}, ${Heading}`]: {
       transitionProperty: 'transform, color',
       transitionDuration: '500ms, 250ms',
       transitionTimingFunction: 'ease-out',
@@ -77,46 +134,10 @@ const StyledEditorialTeaser = styled.a(
     },
 
     '&:hover, &:focus': {
-      [BackgroundImage]: {
+      [ZoomContainer]: {
         transitionTimingFunction: 'ease-in-out',
         transform: 'scale(1.04)',
       },
     },
   })
 );
-
-function Arrow() {
-  return (
-    <span css={css({ svg: { height: '11px', width: '13px', mx: '3px' } })}>
-      <ArrowIconRight />
-    </span>
-  );
-}
-
-type CoverImageProps = {
-  image: ImageBlock;
-};
-
-function CoverImage({ image }: CoverImageProps) {
-  const bgPosition = image.hotspot
-    ? `${image.hotspot.x * 100}% ${image.hotspot.y * 100}%`
-    : undefined;
-
-  const url = getImageSrc(image.asset, 700);
-
-  return (
-    <BackgroundImage
-      position="absolute"
-      top={0}
-      left={0}
-      height="100%"
-      width="100%"
-      backgroundImagePrefix={`linear-gradient(to left, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.75))`}
-      backgroundImageUrl={url}
-      backgroundPosition={bgPosition}
-      backgroundRepeat="no-repeat"
-      backgroundSize="cover"
-      aria-label={image.alt}
-    />
-  );
-}

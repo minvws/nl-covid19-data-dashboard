@@ -1,10 +1,20 @@
 // lib/sanity.ts
-import { imageResizeTargets } from '@corona-dashboard/common';
+import { assert, imageResizeTargets } from '@corona-dashboard/common';
 import BlockContent from '@sanity/block-content-to-react';
 import sanityClient from '@sanity/client';
 import { LanguageKey } from '~/locale';
 import { ImageBlock, SanityFileProps, SanityImageProps } from '~/types/cms';
 import { findClosestSize } from '~/utils/findClosestSize';
+
+assert(
+  process.env.NEXT_PUBLIC_SANITY_DATASET,
+  'NEXT_PUBLIC_SANITY_DATASET is undefined'
+);
+
+assert(
+  process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  'NEXT_PUBLIC_SANITY_PROJECT_ID is undefined'
+);
 
 const config = {
   /**
@@ -14,8 +24,8 @@ const config = {
    *
    * https://nextjs.org/docs/basic-features/environment-variables
    **/
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || '',
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
   useCdn: process.env.NODE_ENV === 'production',
   /**
    * Set useCdn to `false` if your application require the freshest possible
@@ -95,12 +105,12 @@ export function getImageProps<T extends ImageBlock>(
   node: T,
   options: ImageProps
 ) {
-  const { asset, alt } = node;
+  const { asset, alt = '' } = node;
   const { metadata } = asset;
 
   const {
     defaultWidth = node.asset.metadata.dimensions.width,
-    sizes,
+    sizes: sizesOption,
   } = options;
 
   const width = findClosestSize(defaultWidth, imageResizeTargets);
@@ -111,27 +121,26 @@ export function getImageProps<T extends ImageBlock>(
 
   if (asset.extension !== 'svg') {
     /**
-     * We can provide a specific set of options called sizes, which maps viewport widths to image widths.
-     * Passing this sizes option will override the default behavior
+     * The following srcset attribute will tell the browser which image-widths
+     * are available.
      */
-    if (sizes) {
-      srcSet = sizes
-        .map((srcSetSize) => {
-          const [viewport, size] = srcSetSize;
-          return `${getImageSrc(asset, size)} ${viewport}w`;
-        })
-        .join(', ');
-    } else {
-      // Map viewports and sizes 1-on-1
-      srcSet = imageResizeTargets
-        .map((size) => `${getImageSrc(asset, size)} ${size}w`)
-        .join(', ');
-    }
+    srcSet = imageResizeTargets
+      .map((size) => `${getImageSrc(asset, size)} ${size}w`)
+      .join(', ');
   }
+
+  /**
+   * The sizes attribute will tell the browser which image-width to use on given
+   * viewport-widths.
+   */
+  const sizes = sizesOption
+    ?.map(([viewport, size]) => `(min-width: ${viewport}px) ${size}px`)
+    .join(', ');
 
   return {
     src,
     srcSet,
+    sizes,
     alt,
     width,
     height,

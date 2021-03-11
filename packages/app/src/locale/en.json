@@ -107,7 +107,9 @@
       "href": "/verantwoording#intensive-care",
       "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
-    "kpi_titel": "Average number of intensive care admissions in 3 days"
+    "kpi_titel": "Average number of intensive care admissions in 3 days",
+    "linechart_legend_trend_label": "",
+    "linechart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
   },
   "verdenkingen_huisartsen": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
@@ -458,7 +460,9 @@
         "text": "RIVM"
       }
     },
-    "kpi_titel": "Number of confirmed cases per day"
+    "kpi_titel": "Number of confirmed cases per day",
+    "line_chart_legend_trend_label": "",
+    "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
   },
   "verpleeghuis_oversterfte": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -491,7 +495,9 @@
         "text": "RIVM"
       }
     },
-    "kpi_titel": "Mortality per day"
+    "kpi_titel": "Mortality per day",
+    "line_chart_legend_trend_label": "",
+    "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
   },
   "blok_verpleeghuis_zorg": {
     "title": "Nursing homes",
@@ -937,7 +943,7 @@
     "barscale_screenreader_text": "{{value}} virus particles per 100,000 inhabitants",
     "linechart_titel": "Average number of virus particles over time (per 100,000 inhabitants)",
     "bar_chart_title": "Most recent measurement per location in {{municipality}}",
-    "bar_chart_axis_title": "Average number of coronavirus particles per 100,000 inhabitants",
+    "bar_chart_axis_title": "Average number of coronavirus particles (x100 billion) per 100,000 inhabitants",
     "bron": {
       "text": "RIVM",
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
@@ -1146,7 +1152,9 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
         "text": "RIVM"
       }
-    }
+    },
+    "line_chart_legend_trend_label": "",
+    "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
   },
   "veiligheidsregio_verpleeghuis_besmette_locaties": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -1212,7 +1220,9 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
         "text": "RIVM"
       }
-    }
+    },
+    "line_chart_legend_trend_label": "",
+    "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
   },
   "data_warning_text": "",
   "veelgestelde_vragen_metadata": {
@@ -1500,7 +1510,9 @@
         "text": "RIVM"
       }
     },
-    "kpi_titel": "Daily number of disabililty care home residents who were reported as testing positive for COVID-19"
+    "kpi_titel": "Daily number of disabililty care home residents who were reported as testing positive for COVID-19",
+    "line_chart_legend_trend_label": "",
+    "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
   },
   "gehandicaptenzorg_oversterfte": {
     "datums": "Latest values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -1528,7 +1540,9 @@
         "text": "RIVM"
       }
     },
-    "kpi_titel": "Number of deceased residents"
+    "kpi_titel": "Number of deceased residents",
+    "line_chart_legend_trend_label": "",
+    "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
   },
   "veiligheidsregio_gehandicaptenzorg_oversterfte": {
     "datums": "Latest values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -1559,7 +1573,9 @@
         "href": "https://data.rivm.nl/covid-19/COVID-19_gehandicaptenzorg.html",
         "text": "RIVM"
       }
-    }
+    },
+    "line_chart_legend_trend_label": "",
+    "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
   },
   "veiligheidsregio_gehandicaptenzorg_besmette_locaties": {
     "datums": "Latest values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -1618,7 +1634,9 @@
         "text": "RIVM"
       }
     },
-    "kpi_titel": "Daily number of disabililty care home residents who were reported as testing positive for COVID-19"
+    "kpi_titel": "Daily number of disabililty care home residents who were reported as testing positive for COVID-19",
+    "line_chart_legend_trend_label": "",
+    "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
   },
   "thuiswonende_ouderen": {
     "titel_sidebar": "People over 70 living at home",
@@ -1649,7 +1667,9 @@
       "choropleth_daily_title": "Distribution of daily confirmed cases among over-70s living at home (per safety region)",
       "choropleth_daily_description": "This map shows the differences between safety regions in the number of confirmed cases per 100,000 among over-70s living at home, as reported yesterday.",
       "choropleth_daily_legenda": "Number per 100,000 over-70s living at home",
-      "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis."
+      "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
+      "line_chart_legend_trend_label": "",
+      "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
     },
     "section_deceased": {
       "title": "People over 70 living at home - COVID-19 deaths",
@@ -1668,7 +1688,9 @@
       "kpi_daily_title": "COVID-19 deaths among over-70s living at home, per day",
       "kpi_daily_description": "The number of people over 70 living at home who were reported as deceased due to COVID-19 yesterday.",
       "line_chart_daily_title": "Number of COVID-19 deaths among over-70s living at home over time",
-      "datums": "Last values obtained on {{dateOfInsertion}}. Updated daily."
+      "datums": "Last values obtained on {{dateOfInsertion}}. Updated daily.",
+      "line_chart_legend_trend_label": "",
+      "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
     },
     "kpi_titel": "Confirmed cases"
   },
@@ -1698,7 +1720,9 @@
       "kpi_daily_per_100k_title": "Daily confirmed cases per 100,000 among over-70s living at home",
       "kpi_daily_per_100k_description": "Calculating the daily number of COVID-19 cases per 100,000 over-70s makes it possible to compare regions.",
       "line_chart_daily_title": "Daily confirmed cases among over-70s living at home: progression over time",
-      "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis."
+      "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
+      "line_chart_legend_trend_label": "",
+      "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
     },
     "section_deceased": {
       "title": "People over 70 in {{safetyRegion}} living at home – COVID-19 deaths",
@@ -1717,7 +1741,9 @@
       "kpi_daily_title": "COVID-19 deaths among over-70s living at home, per day",
       "kpi_daily_description": "The number of people over 70 living at home in this safety region who were reported as deceased due to COVID-19 yesterday",
       "line_chart_daily_title": "Number of COVID-19 deaths among over-70s living at home over time",
-      "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis."
+      "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
+      "line_chart_legend_trend_label": "",
+      "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
     },
     "kpi_titel": "Confirmed cases"
   },
@@ -1748,7 +1774,9 @@
       "kpi_covid_total_title": "Total number of COVID-19 patients reported dead",
       "kpi_covid_total_description": "This figure shows the number of COVID-19 patients reported dead, since the reporting of COVID-19 deaths started.",
       "line_chart_covid_daily_title": "Number of reported deaths from COVID-19 over time",
-      "line_chart_covid_daily_description": "This graph shows the number of COVID-19 patients reported dead, in the selected period."
+      "line_chart_covid_daily_description": "This graph shows the number of COVID-19 patients reported dead, in the selected period.",
+      "line_chart_covid_daily_legend_trend_label": "",
+      "line_chart_covid_daily_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
     },
     "kpi_titel": "Daily reported deaths from COVID-19"
   },
@@ -1779,7 +1807,9 @@
       "kpi_covid_total_title": "Total number of COVID-19 patients reported dead",
       "kpi_covid_total_description": "This figure shows the number of COVID-19 patients in this safety region reported dead, since the reporting of COVID-19 deaths started.",
       "line_chart_covid_daily_title": "Number of COVID-19 patients reported dead over time",
-      "line_chart_covid_daily_description": "This graph shows the number of COVID-19 patients in this safety region reported dead, in the selected period."
+      "line_chart_covid_daily_description": "This graph shows the number of COVID-19 patients in this safety region reported dead, in the selected period.",
+      "line_chart_covid_daily_legend_trend_label": "",
+      "line_chart_covid_daily_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
     },
     "kpi_titel": "Daily reported deaths from COVID-19"
   },
