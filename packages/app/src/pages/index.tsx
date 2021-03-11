@@ -30,6 +30,7 @@ import { createPositiveTestedPeopleRegionalTooltip } from '~/components/chorople
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
 import { FCWithLayout, getDefaultLayout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
+import { ChoroplethTwoColumnLayout } from '~/domain/topical/choropleth-two-column-layout';
 import { Search } from '~/domain/topical/components/search';
 import { DataSitemap } from '~/domain/topical/data-sitemap';
 import { EditorialSummary } from '~/domain/topical/editorial-teaser';
@@ -38,7 +39,6 @@ import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-e
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
 import { TopicalChoroplethContainer } from '~/domain/topical/topical-choropleth-container';
-import { TopicalChoroplethTile } from '~/domain/topical/topical-choropleth-layout';
 import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
 import { TopicalVaccineTile } from '~/domain/topical/topical-vaccine-tile';
@@ -267,12 +267,15 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
               </TopicalTile>
             </Box>
 
-            <TopicalChoroplethTile
-              title={
-                siteText.common_actueel.secties.positief_getest_kaart.titel
-              }
-              choropleth={
-                <>
+            <TopicalTile>
+              <TopicalSectionHeader
+                title={
+                  siteText.common_actueel.secties.positief_getest_kaart.titel
+                }
+              />
+
+              <ChoroplethTwoColumnLayout>
+                <Box>
                   {selectedMap === 'municipal' && (
                     <MunicipalityChoropleth
                       data={choropleth.gm}
@@ -311,25 +314,32 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                       )}
                     />
                   )}
-                </>
-              }
-            >
-              <Text css={css({ maxWidth: 350 })}>
-                {siteText.positief_geteste_personen.map_toelichting}
-              </Text>
-              <Box mb={4}>
-                <ChartRegionControls
-                  value={selectedMap}
-                  onChange={setSelectedMap}
-                />
-              </Box>
-              <ChoroplethLegenda
-                thresholds={regionThresholds.tested_overall.infected_per_100k}
-                title={
-                  siteText.positief_geteste_personen.chloropleth_legenda.titel
-                }
-              />
-            </TopicalChoroplethTile>
+                </Box>
+                <Box>
+                  <Text css={css({ maxWidth: 350 })}>
+                    {siteText.positief_geteste_personen.map_toelichting}
+                  </Text>
+                  <Box
+                    mb={4}
+                    css={css({ '> div': { justifyContent: 'flex-start' } })}
+                  >
+                    <ChartRegionControls
+                      value={selectedMap}
+                      onChange={setSelectedMap}
+                    />
+                  </Box>
+                  <ChoroplethLegenda
+                    thresholds={
+                      regionThresholds.tested_overall.infected_per_100k
+                    }
+                    title={
+                      siteText.positief_geteste_personen.chloropleth_legenda
+                        .titel
+                    }
+                  />
+                </Box>
+              </ChoroplethTwoColumnLayout>
+            </TopicalTile>
 
             <DataSitemap />
 
