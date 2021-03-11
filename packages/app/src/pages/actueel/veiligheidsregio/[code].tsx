@@ -41,7 +41,7 @@ import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 export { getStaticPaths } from '~/static-paths/vr';
-import { useDataSitemap } from '~/domain/topical/sitemap/use-data-sitemap';
+import { getDataSitemap } from '~/domain/topical/sitemap/utils';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -67,7 +67,7 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
   const dataInfectedTotal = data.tested_overall;
   const dataHospitalIntake = data.hospital_nice;
 
-  const dataSitemap = useDataSitemap('veiligheidsregio', vrCode);
+  const dataSitemap = getDataSitemap('veiligheidsregio', vrCode);
 
   return (
     <>

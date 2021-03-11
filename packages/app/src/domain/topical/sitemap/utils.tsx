@@ -2,7 +2,7 @@ import siteText from '~/locale/index';
 import { LinkGroupProps } from './link-group';
 import { Municipal, National, Regionaal } from '@corona-dashboard/common';
 
-export function useDataSitemap(
+export function getDataSitemap(
   base: 'landelijk' | 'veiligheidsregio' | 'gemeente',
   code?: string,
   data?: National | Regionaal | Municipal

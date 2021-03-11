@@ -42,7 +42,7 @@ import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 export { getStaticPaths } from '~/static-paths/gm';
-import { useDataSitemap } from '~/domain/topical/sitemap/use-data-sitemap';
+import { getDataSitemap } from '~/domain/topical/sitemap/utils';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -77,7 +77,7 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
     (item) => item.vrcode === safetyRegionForMunicipality?.code
   );
 
-  const dataSitemap = useDataSitemap('gemeente', gmCode as string, data);
+  const dataSitemap = getDataSitemap('gemeente', gmCode as string, data);
 
   assert(
     filteredRegion && filteredRegion.level,

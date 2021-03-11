@@ -41,7 +41,7 @@ import {
 import { colors } from '~/style/theme';
 import { formatDate } from '~/utils/formatDate';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { useDataSitemap } from '~/domain/topical/sitemap/use-data-sitemap';
+import { getDataSitemap } from '~/domain/topical/sitemap/utils';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 export const getStaticProps = createGetStaticProps(
@@ -85,7 +85,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
 
   const dataInfectedTotal = data.tested_overall;
   const dataHospitalIntake = data.hospital_nice;
-  const dataSitemap = useDataSitemap('landelijk');
+  const dataSitemap = getDataSitemap('landelijk');
 
   return (
     <>
