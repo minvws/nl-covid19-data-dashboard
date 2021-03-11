@@ -27,20 +27,32 @@ interface DifferenceIndicatorProps {
   isDecimal?: boolean;
   context?: 'sidebar' | 'tile' | 'inline';
   staticTimespan?: string;
+  differenceFractionDigits?: number;
 }
 
 export function DifferenceIndicator(props: DifferenceIndicatorProps) {
-  const { value, isDecimal, context, staticTimespan } = props;
+  const {
+    value,
+    isDecimal,
+    context,
+    staticTimespan,
+    differenceFractionDigits,
+  } = props;
 
   if (context === 'sidebar') {
     return renderSidebarIndicator(value);
   }
 
   if (context === 'inline') {
-    return renderInlineIndicator(value, isDecimal);
+    return renderInlineIndicator(value, isDecimal, differenceFractionDigits);
   }
 
-  return renderTileIndicator(value, isDecimal, staticTimespan);
+  return renderTileIndicator(
+    value,
+    isDecimal,
+    staticTimespan,
+    differenceFractionDigits
+  );
 }
 
 function renderSidebarIndicator(value: DifferenceDecimal | DifferenceInteger) {
@@ -77,12 +89,13 @@ function renderSidebarIndicator(value: DifferenceDecimal | DifferenceInteger) {
 
 function renderInlineIndicator(
   value: DifferenceDecimal | DifferenceInteger,
-  isDecimal?: boolean
+  isDecimal?: boolean,
+  differenceFractionDigits?: number
 ) {
   const { difference } = value;
 
   const differenceFormattedString = isDecimal
-    ? formatPercentage(Math.abs(difference))
+    ? formatPercentage(Math.abs(difference), differenceFractionDigits)
     : formatNumber(Math.abs(difference));
 
   if (difference > 0) {
@@ -126,12 +139,13 @@ function renderInlineIndicator(
 function renderTileIndicator(
   value: DifferenceDecimal | DifferenceInteger,
   isDecimal?: boolean,
-  staticTimespan?: string
+  staticTimespan?: string,
+  maximumFractionDigits?: number
 ) {
   const { difference } = value;
 
   const differenceFormattedString = isDecimal
-    ? formatPercentage(Math.abs(difference))
+    ? formatPercentage(Math.abs(difference), maximumFractionDigits)
     : formatNumber(Math.abs(difference));
 
   const timespanTextNode = staticTimespan ?? text.vorige_waarde;

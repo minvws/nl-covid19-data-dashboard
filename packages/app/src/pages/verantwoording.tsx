@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { RichContent } from '~/components-styled/cms/rich-content';
-import { Collapsible } from '~/components-styled/collapsible';
+import { CollapsibleSection } from '~/components-styled/collapsible';
 import { MaxWidth } from '~/components-styled/max-width';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import siteText, { targetLanguage } from '~/locale/index';
@@ -86,13 +86,13 @@ const Verantwoording: FCWithLayout<typeof getStaticProps> = (props) => {
                 {content.collapsibleList.map((item) => {
                   const id = getSkipLinkId(item.title);
                   return item.content ? (
-                    <Collapsible key={id} id={id} summary={item.title}>
+                    <CollapsibleSection key={id} id={id} summary={item.title}>
                       {item.content && (
                         <Box mt={3}>
                           <RichContent blocks={item.content} />
                         </Box>
                       )}
-                    </Collapsible>
+                    </CollapsibleSection>
                   ) : null;
                 })}
               </article>

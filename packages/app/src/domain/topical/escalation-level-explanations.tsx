@@ -1,7 +1,7 @@
 import css from '@styled-system/css';
 import { ArrowIconRight } from '~/components-styled/arrow-icon';
 import { Box } from '~/components-styled/base';
-import { Collapsible } from '~/components-styled/collapsible';
+import { CollapsibleSection } from '~/components-styled/collapsible';
 import { EscalationLevelInfoLabel } from '~/components-styled/escalation-level';
 import { LinkWithIcon } from '~/components-styled/link-with-icon';
 import { Text } from '~/components-styled/typography';
@@ -29,7 +29,10 @@ function EscalationLevelExplanation(props: EscalationLevelExplanationProps) {
 
 export function EscalationLevelExplanations() {
   return (
-    <Collapsible summary={siteText.escalatie_niveau.tile_title} hideBorder>
+    <CollapsibleSection
+      summary={siteText.escalatie_niveau.tile_title}
+      hideBorder
+    >
       <Box my={3}>
         <EscalationLevelExplanation
           level={1}
@@ -57,6 +60,6 @@ export function EscalationLevelExplanations() {
           </LinkWithIcon>
         </Box>
       </Box>
-    </Collapsible>
+    </CollapsibleSection>
   );
 }
