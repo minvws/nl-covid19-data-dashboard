@@ -1,4 +1,6 @@
 import { Threshold } from '@visx/threshold';
+import { useMemo } from 'react';
+import { isPresent } from 'ts-is-present';
 import { useUniqueId } from '~/utils/useUniqueId';
 import { Bounds, SeriesDoubleValue, SeriesItem } from '../logic';
 
@@ -25,6 +27,12 @@ export function RangeTrend({
 }: RangeTrendProps) {
   const id = useUniqueId();
 
+  const nonNullSeries = useMemo(
+    () =>
+      series.filter((x) => isPresent(x.__value_a) && isPresent(x.__value_b)),
+    [series]
+  );
+
   return (
     /**
      * @TODO further implement styling. Not sure if Threshold is the best Visx
@@ -32,7 +40,7 @@ export function RangeTrend({
      */
     <Threshold<SeriesDoubleValue>
       id={id}
-      data={series}
+      data={nonNullSeries}
       x={getX}
       y0={getY0}
       y1={getY1}

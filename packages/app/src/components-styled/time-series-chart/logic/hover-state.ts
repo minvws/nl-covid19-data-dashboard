@@ -8,7 +8,7 @@ import { bisectCenter } from 'd3-array';
 import { ScaleLinear } from 'd3-scale';
 import { isEmpty } from 'lodash';
 import { useCallback, useMemo, useRef, useState } from 'react';
-import { isDefined } from 'ts-is-present';
+import { isDefined, isPresent } from 'ts-is-present';
 import { TimespanAnnotationConfig } from './common';
 import {
   SeriesConfig,
@@ -22,7 +22,7 @@ export type HoveredPoint<T> = {
   metricProperty: keyof T;
   color: string;
   x: number;
-  y: number;
+  y: number | null;
 };
 
 interface UseHoverStateArgs<T extends TimestampedValue> {
@@ -39,7 +39,7 @@ interface HoverState<T> {
   valuesIndex: number;
   linePoints: HoveredPoint<T>[];
   rangePoints: HoveredPoint<T>[];
-  nearestLinePoint: HoveredPoint<T>;
+  nearestPoint: HoveredPoint<T>;
   timespanAnnotationIndex?: number;
 }
 
@@ -101,7 +101,7 @@ export function useHoverState<T extends TimestampedValue>({
   );
 
   const handleHover = useCallback(
-    (event: Event, __trendIndex?: number) => {
+    (event: Event) => {
       if (isEmpty(values)) {
         return;
       }
@@ -141,6 +141,7 @@ export function useHoverState<T extends TimestampedValue>({
       const linePoints: HoveredPoint<T>[] = seriesConfig
         .map((config, index) => {
           const seriesValue = seriesList[index][valuesIndex];
+          const value = (seriesValue as SeriesSingleValue).__value;
 
           switch (config.type) {
             case 'line':
@@ -148,7 +149,7 @@ export function useHoverState<T extends TimestampedValue>({
               return {
                 seriesValue,
                 x: xScale(seriesValue.__date_unix),
-                y: yScale((seriesValue as SeriesSingleValue).__value),
+                y: isPresent(value) ? yScale(value) : null,
                 color: config.color,
                 metricProperty: config.metricProperty,
               };
@@ -164,6 +165,8 @@ export function useHoverState<T extends TimestampedValue>({
       const rangePoints: HoveredPoint<T>[] = seriesConfig
         .flatMap((config, index) => {
           const seriesValue = seriesList[index][valuesIndex];
+          const valueA = (seriesValue as SeriesDoubleValue).__value_a;
+          const valueB = (seriesValue as SeriesDoubleValue).__value_b;
 
           switch (config.type) {
             case 'range':
@@ -171,14 +174,14 @@ export function useHoverState<T extends TimestampedValue>({
                 {
                   seriesValue,
                   x: xScale(seriesValue.__date_unix),
-                  y: yScale((seriesValue as SeriesDoubleValue).__value_a),
+                  y: isPresent(valueA) ? yScale(valueA) : null,
                   color: config.color,
                   metricProperty: config.metricPropertyLow,
                 },
                 {
                   seriesValue,
                   x: xScale(seriesValue.__date_unix),
-                  y: yScale((seriesValue as SeriesDoubleValue).__value_b),
+                  y: isPresent(valueB) ? yScale(valueB) : null,
                   color: config.color,
                   metricProperty: config.metricPropertyHigh,
                 },
@@ -192,7 +195,9 @@ export function useHoverState<T extends TimestampedValue>({
        * of the mouse, since all series originate from the same original value
        * and are thus aligned with the same timestamp.
        */
-      const nearestLinePoint = [...linePoints].sort(
+      const nearestPoint = ([...linePoints, ...rangePoints].filter(
+        (x) => x.y !== null
+      ) as (HoveredPoint<T> & { y: number })[]).sort(
         (a, b) => Math.abs(a.y - mousePoint.y) - Math.abs(b.y - mousePoint.y)
       )[0];
 
@@ -207,7 +212,7 @@ export function useHoverState<T extends TimestampedValue>({
         valuesIndex,
         linePoints,
         rangePoints,
-        nearestLinePoint,
+        nearestPoint,
         timespanAnnotationIndex,
       });
     },

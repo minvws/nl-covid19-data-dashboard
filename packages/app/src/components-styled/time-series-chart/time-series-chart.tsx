@@ -1,5 +1,4 @@
 import { TimestampedValue } from '@corona-dashboard/common';
-import { Bar } from '@visx/shape';
 import { useTooltip } from '@visx/tooltip';
 import { useEffect, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
@@ -197,11 +196,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
 
   useEffect(() => {
     if (hoverState) {
-      const {
-        nearestLinePoint: nearestPoint,
-        valuesIndex,
-        timespanAnnotationIndex,
-      } = hoverState;
+      const { nearestPoint, valuesIndex, timespanAnnotationIndex } = hoverState;
 
       showTooltip({
         tooltipData: {
@@ -227,7 +222,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
               : undefined,
         },
         tooltipLeft: nearestPoint.x,
-        tooltipTop: nearestPoint.y,
+        tooltipTop: nearestPoint.y ?? undefined,
       });
     } else {
       hideTooltip();
@@ -246,6 +241,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
           height={height}
           padding={padding}
           ariaLabelledBy={ariaLabelledBy}
+          onHover={handleHover}
         >
           <Axes
             bounds={bounds}
@@ -255,26 +251,6 @@ export function TimeSeriesChart<T extends TimestampedValue>({
             yScale={yScale}
             isPercentage={isPercentage}
             yAxisRef={yAxisRef}
-          />
-
-          <Bar
-            /**
-             * The Bar captures all mouse movements outside of trend elements.
-             * The Trend components * are rendered op top (in DOM) so that they
-             * can have their own hover state and handlers. Trend hover handlers
-             * also have the advantage that we don't need to do nearest point
-             * calculation on that event, because we already know the trend
-             * index in the handler.
-             */
-            x={0}
-            y={0}
-            width={bounds.width}
-            height={bounds.height}
-            fill="transparent"
-            onTouchStart={handleHover}
-            onTouchMove={handleHover}
-            onMouseMove={handleHover}
-            onMouseLeave={handleHover}
           />
 
           {timespanAnnotations &&
@@ -335,11 +311,11 @@ export function TimeSeriesChart<T extends TimestampedValue>({
           <Overlay bounds={bounds} padding={padding}>
             <DateSpanMarker
               width={dateSpanWidth}
-              point={hoverState.nearestLinePoint}
+              point={hoverState.nearestPoint}
             />
             {showDateMarker && (
               <DateLineMarker
-                point={hoverState.nearestLinePoint}
+                point={hoverState.nearestPoint}
                 lineColor={`#5B5B5B`}
                 value={values[hoverState.valuesIndex]}
               />

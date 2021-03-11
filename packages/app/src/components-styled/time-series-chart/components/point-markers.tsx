@@ -1,5 +1,6 @@
 import { TimestampedValue } from '@corona-dashboard/common';
 import styled from 'styled-components';
+import { isPresent } from 'ts-is-present';
 import { HoveredPoint } from '../logic/hover-state';
 
 const MARKER_POINT_SIZE = 18;
@@ -67,18 +68,21 @@ export function PointMarkers<T extends TimestampedValue>(
         width: size,
       }}
     >
-      {points.map((point, index) => (
-        <PointMarker
-          color={point.color}
-          size={size}
-          /**
-           * Dynamic properties like y position are set via inline style because
-           * SC would dynamically generate and inject a new class for every position
-           */
-          style={{ top: point.y }}
-          key={index}
-        />
-      ))}
+      {points.map(
+        (point, index) =>
+          isPresent(point.y) && (
+            <PointMarker
+              color={point.color}
+              size={size}
+              /**
+               * Dynamic properties like y position are set via inline style because
+               * SC would dynamically generate and inject a new class for every position
+               */
+              style={{ top: point.y }}
+              key={index}
+            />
+          )
+      )}
     </Container>
   );
 }

@@ -1,5 +1,6 @@
 import { LinePath } from '@visx/shape';
-import { MouseEvent, TouchEvent, useCallback, useState } from 'react';
+import { MouseEvent, TouchEvent, useCallback, useMemo, useState } from 'react';
+import { isPresent } from 'ts-is-present';
 import { SeriesItem, SeriesSingleValue } from '../logic';
 
 export type LineStyle = 'solid' | 'dashed';
@@ -25,6 +26,11 @@ export function LineTrend({
 }: LineTrendProps) {
   const [isHovered, setIsHovered] = useState(false);
 
+  const nonNullSeries = useMemo(
+    () => series.filter((x) => isPresent(x.__value)),
+    [series]
+  );
+
   const handleHover = useCallback(
     (event: TouchEvent<SVGElement> | MouseEvent<SVGElement>) => {
       const isLeave = event.type === 'mouseleave';
@@ -38,7 +44,7 @@ export function LineTrend({
 
   return (
     <LinePath
-      data={series}
+      data={nonNullSeries}
       x={getX}
       y={getY}
       stroke={color}
