@@ -222,7 +222,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
               : undefined,
         },
         tooltipLeft: nearestPoint.x,
-        tooltipTop: nearestPoint.y ?? undefined,
+        tooltipTop: nearestPoint.y,
       });
     } else {
       hideTooltip();

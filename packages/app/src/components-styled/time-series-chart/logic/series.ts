@@ -181,7 +181,7 @@ export function getSeriesData<T extends TimestampedValue>(
       __value: (x[metricProperty] as unknown) as number | null,
       // @ts-expect-error @TODO figure out why the type guard doesn't work
       __date_unix: x.date_unix,
-    })) as SeriesSingleValue[];
+    }));
   }
 
   if (isDateSpanSeries(values)) {
@@ -197,7 +197,7 @@ export function getSeriesData<T extends TimestampedValue>(
          */
         // @ts-expect-error @TODO figure out why the type guard doesn't work
         x.date_start_unix + (x.date_end_unix - x.date_start_unix) / 2,
-    })) as SeriesSingleValue[];
+    }));
   }
 
   throw new Error(`Incompatible timestamps are used in value ${values[0]}`);

@@ -22,7 +22,7 @@ export type HoveredPoint<T> = {
   metricProperty: keyof T;
   color: string;
   x: number;
-  y: number | null;
+  y: number;
 };
 
 interface UseHoverStateArgs<T extends TimestampedValue> {
@@ -140,16 +140,27 @@ export function useHoverState<T extends TimestampedValue>({
 
       const linePoints: HoveredPoint<T>[] = seriesConfig
         .map((config, index) => {
-          const seriesValue = seriesList[index][valuesIndex];
-          const value = (seriesValue as SeriesSingleValue).__value;
+          const seriesValue = seriesList[index][
+            valuesIndex
+          ] as SeriesSingleValue;
+
+          const xValue = seriesValue.__date_unix;
+          const yValue = seriesValue.__value;
+
+          /**
+           * Filter series without Y value on the current valuesIndex
+           */
+          if (!isPresent(yValue)) {
+            return undefined;
+          }
 
           switch (config.type) {
             case 'line':
             case 'area':
               return {
                 seriesValue,
-                x: xScale(seriesValue.__date_unix),
-                y: isPresent(value) ? yScale(value) : null,
+                x: xScale(xValue),
+                y: yScale(yValue),
                 color: config.color,
                 metricProperty: config.metricProperty,
               };
@@ -164,24 +175,35 @@ export function useHoverState<T extends TimestampedValue>({
        */
       const rangePoints: HoveredPoint<T>[] = seriesConfig
         .flatMap((config, index) => {
-          const seriesValue = seriesList[index][valuesIndex];
-          const valueA = (seriesValue as SeriesDoubleValue).__value_a;
-          const valueB = (seriesValue as SeriesDoubleValue).__value_b;
+          const seriesValue = seriesList[index][
+            valuesIndex
+          ] as SeriesDoubleValue;
+
+          const xValue = seriesValue.__date_unix;
+          const yValueA = seriesValue.__value_a;
+          const yValueB = seriesValue.__value_b;
+
+          /**
+           * Filter series without Y value on the current valuesIndex
+           */
+          if (!isPresent(yValueA) || !isPresent(yValueB)) {
+            return undefined;
+          }
 
           switch (config.type) {
             case 'range':
               return [
                 {
                   seriesValue,
-                  x: xScale(seriesValue.__date_unix),
-                  y: isPresent(valueA) ? yScale(valueA) : null,
+                  x: xScale(xValue),
+                  y: yScale(yValueA),
                   color: config.color,
                   metricProperty: config.metricPropertyLow,
                 },
                 {
                   seriesValue,
-                  x: xScale(seriesValue.__date_unix),
-                  y: isPresent(valueB) ? yScale(valueB) : null,
+                  x: xScale(xValue),
+                  y: yScale(yValueB),
                   color: config.color,
                   metricProperty: config.metricPropertyHigh,
                 },
@@ -195,9 +217,7 @@ export function useHoverState<T extends TimestampedValue>({
        * of the mouse, since all series originate from the same original value
        * and are thus aligned with the same timestamp.
        */
-      const nearestPoint = ([...linePoints, ...rangePoints].filter(
-        (x) => x.y !== null
-      ) as (HoveredPoint<T> & { y: number })[]).sort(
+      const nearestPoint = [...linePoints, ...rangePoints].sort(
         (a, b) => Math.abs(a.y - mousePoint.y) - Math.abs(b.y - mousePoint.y)
       )[0];
 

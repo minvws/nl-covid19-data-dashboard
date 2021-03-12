@@ -56,7 +56,11 @@ export function PointMarkers<T extends TimestampedValue>(
 ) {
   const { points, size = MARKER_POINT_SIZE } = props;
 
-  if (!points.length) return null;
+  const nonNullPoints = points.filter((x) =>
+    isPresent(x.y)
+  ) as (HoveredPoint<T> & { y: number })[];
+
+  if (!nonNullPoints.length) return null;
 
   return (
     <Container
@@ -68,21 +72,18 @@ export function PointMarkers<T extends TimestampedValue>(
         width: size,
       }}
     >
-      {points.map(
-        (point, index) =>
-          isPresent(point.y) && (
-            <PointMarker
-              color={point.color}
-              size={size}
-              /**
-               * Dynamic properties like y position are set via inline style because
-               * SC would dynamically generate and inject a new class for every position
-               */
-              style={{ top: point.y }}
-              key={index}
-            />
-          )
-      )}
+      {nonNullPoints.map((point, index) => (
+        <PointMarker
+          color={point.color}
+          size={size}
+          /**
+           * Dynamic properties like y position are set via inline style because
+           * SC would dynamically generate and inject a new class for every position
+           */
+          style={{ top: point.y }}
+          key={index}
+        />
+      ))}
     </Container>
   );
 }
