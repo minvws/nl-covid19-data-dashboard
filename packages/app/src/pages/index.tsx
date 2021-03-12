@@ -12,6 +12,7 @@ import {
 import { ChoroplethLegenda } from '~/components-styled/choropleth-legenda';
 import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
+import { CollapsibleButton } from '~/components-styled/collapsible';
 import { HighlightTeaserProps } from '~/components-styled/highlight-teaser';
 import { MaxWidth } from '~/components-styled/max-width';
 import { QuickLinks } from '~/components-styled/quick-links';
@@ -38,7 +39,6 @@ import { EditorialTile } from '~/domain/topical/editorial-tile';
 import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
-import { TopicalChoroplethContainer } from '~/domain/topical/topical-choropleth-container';
 import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
 import { TopicalVaccineTile } from '~/domain/topical/topical-vaccine-tile';
@@ -51,7 +51,6 @@ import {
   getNlData,
   getText,
 } from '~/static-props/get-data';
-import { colors } from '~/style/theme';
 import { formatDate } from '~/utils/formatDate';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
@@ -185,20 +184,23 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
               <TopicalVaccineTile data={data.vaccine_administered_total} />
             </MiniTrendTileLayout>
 
-            <QuickLinks
-              header={text.quick_links.header}
-              links={[
-                {
-                  href: '/landelijk/vaccinaties',
-                  text: text.quick_links.links.nationaal,
-                },
-                {
-                  href: '/veiligheidsregio',
-                  text: text.quick_links.links.veiligheidsregio,
-                },
-                { href: '/gemeente', text: text.quick_links.links.gemeente },
-              ]}
-            />
+            <CollapsibleButton label={text.quick_links.header}>
+              <QuickLinks
+                header={text.quick_links.header}
+                links={[
+                  {
+                    href: '/landelijk/vaccinaties',
+                    text: text.quick_links.links.nationaal,
+                  },
+                  {
+                    href: '/veiligheidsregio',
+                    text: text.quick_links.links.veiligheidsregio,
+                  },
+                  { href: '/gemeente', text: text.quick_links.links.gemeente },
+                ]}
+              />
+              <DataSitemap />
+            </CollapsibleButton>
 
             {content.editorial && content.highlight && (
               <Box pt={3}>
@@ -213,69 +215,23 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
               </Box>
             )}
 
-            <Box pb={4} pt={3}>
-              <TopicalSectionHeader
-                title={siteText.common_actueel.secties.risicokaart.titel}
-              />
-              <TopicalTile>
-                <TopicalChoroplethContainer
-                  description={
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: replaceVariablesInText(
-                          text.risiconiveaus.selecteer_toelichting,
-                          {
-                            last_update: formatDate(
-                              choropleth.vr.escalation_levels[0]
-                                .date_of_insertion_unix,
-                              'day-month'
-                            ),
-                          }
-                        ),
-                      }}
-                    />
-                  }
-                  legendComponent={
-                    <EscalationMapLegenda
-                      data={choropleth.vr}
-                      metricName="escalation_levels"
-                      metricProperty="level"
-                    />
-                  }
-                >
-                  <SafetyRegionChoropleth
-                    data={choropleth.vr}
-                    metricName="escalation_levels"
-                    metricProperty="level"
-                    onSelect={createSelectRegionHandler(router, 'risiconiveau')}
-                    tooltipContent={escalationTooltip(
-                      createSelectRegionHandler(router, 'risiconiveau')
-                    )}
-                  />
-                </TopicalChoroplethContainer>
-              </TopicalTile>
-              <Box
-                borderTopWidth="1px"
-                borderTopStyle="solid"
-                borderTopColor={colors.silver}
-                mx={{ _: -3, md: 0 }}
-              />
-              <TopicalTile py={0}>
-                <Box mx={-3}>
-                  <EscalationLevelExplanations />
-                </Box>
-              </TopicalTile>
-            </Box>
-
             <TopicalTile>
               <TopicalSectionHeader
                 title={siteText.common_actueel.secties.risicokaart.titel}
-                link={{
-                  href: '#',
-                  text: 'IK BEN EEN LINK',
-                }}
+                link={siteText.common_actueel.secties.risicokaart.link}
               />
-              <ChoroplethTwoColumnLayout>
+              <ChoroplethTwoColumnLayout
+                legenda={
+                  <EscalationMapLegenda
+                    data={choropleth.vr}
+                    metricName="escalation_levels"
+                    metricProperty="level"
+                    lastDetermined={
+                      choropleth.vr.escalation_levels[0].last_determined_unix
+                    }
+                  />
+                }
+              >
                 <Box>
                   <SafetyRegionChoropleth
                     data={choropleth.vr}
@@ -287,7 +243,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                     )}
                   />
                 </Box>
-                <Box maxWidth={500}>
+                <Box>
                   <div
                     dangerouslySetInnerHTML={{
                       __html: replaceVariablesInText(
@@ -302,16 +258,10 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                       ),
                     }}
                   />
-
-                  <EscalationMapLegenda
-                    data={choropleth.vr}
-                    metricName="escalation_levels"
-                    metricProperty="level"
-                  />
                 </Box>
               </ChoroplethTwoColumnLayout>
-              <Box>
-                <h2>Collapsible</h2>
+
+              <Box mt={4}>
                 <EscalationLevelExplanations />
               </Box>
             </TopicalTile>
@@ -323,7 +273,19 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                 }
               />
 
-              <ChoroplethTwoColumnLayout>
+              <ChoroplethTwoColumnLayout
+                legenda={
+                  <ChoroplethLegenda
+                    thresholds={
+                      regionThresholds.tested_overall.infected_per_100k
+                    }
+                    title={
+                      siteText.positief_geteste_personen.chloropleth_legenda
+                        .titel
+                    }
+                  />
+                }
+              >
                 <Box>
                   {selectedMap === 'municipal' && (
                     <MunicipalityChoropleth
@@ -365,7 +327,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                   )}
                 </Box>
                 <Box>
-                  <Text css={css({ maxWidth: 350 })}>
+                  <Text>
                     {siteText.positief_geteste_personen.map_toelichting}
                   </Text>
                   <Box
@@ -377,22 +339,13 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                       onChange={setSelectedMap}
                     />
                   </Box>
-                  <ChoroplethLegenda
-                    thresholds={
-                      regionThresholds.tested_overall.infected_per_100k
-                    }
-                    title={
-                      siteText.positief_geteste_personen.chloropleth_legenda
-                        .titel
-                    }
-                  />
                 </Box>
               </ChoroplethTwoColumnLayout>
             </TopicalTile>
 
             <DataSitemap />
 
-            <Box pb={5}>
+            <Box pb={4}>
               <TopicalSectionHeader
                 title={siteText.common_actueel.secties.meer_lezen.titel}
                 description={

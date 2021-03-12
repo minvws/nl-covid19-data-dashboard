@@ -943,7 +943,7 @@
     "barscale_screenreader_text": "{{value}} virus particles per 100,000 inhabitants",
     "linechart_titel": "Average number of virus particles over time (per 100,000 inhabitants)",
     "bar_chart_title": "Most recent measurement per location in {{municipality}}",
-    "bar_chart_axis_title": "Average number of coronavirus particles per 100,000 inhabitants",
+    "bar_chart_axis_title": "Average number of coronavirus particles (x100 billion) per 100,000 inhabitants",
     "bron": {
       "text": "RIVM",
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/a2960b68-9d3f-4dc3-9485-600570cd52b9"
@@ -1035,7 +1035,8 @@
       "titel": "Legend",
       "geen_regio": "no regions",
       "regio_singular": "{{amount}} region",
-      "regio_plural": "{{amount}} regions"
+      "regio_plural": "{{amount}} regions",
+      "determined_on": "Determined on {{date}}"
     },
     "valid_from": "Valid from {{validFrom}}",
     "sidebar_label": "Risk level:",
@@ -2309,7 +2310,11 @@
         }
       },
       "risicokaart": {
-        "titel": "Risk level map of the Netherlands"
+        "titel": "Risk level map of the Netherlands",
+        "link": {
+          "text": "View the risk levels of all regions",
+          "href": "/veiligheidsregio"
+        }
       },
       "positief_getest_kaart": {
         "titel": "Positively tested people in the Netherlands"

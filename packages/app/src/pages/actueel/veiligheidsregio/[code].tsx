@@ -38,7 +38,7 @@ import { EditorialTile } from '~/domain/topical/editorial-tile';
 import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
-import { TopicalChoroplethContainer } from '~/domain/topical/topical-choropleth-container';
+import { formatDate } from '~/utils/formatDate';
 import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
 import { topicalPageQuery } from '~/queries/topical-page-query';
@@ -230,54 +230,77 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
               </>
             )}
 
-            <Box pb={4}>
+            <TopicalTile>
               <TopicalSectionHeader
                 title={siteText.common_actueel.secties.risicokaart.titel}
+                link={siteText.common_actueel.secties.risicokaart.link}
               />
-              <TopicalTile>
-                <TopicalChoroplethContainer
-                  description={
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: text.risiconiveaus.selecteer_toelichting,
-                      }}
-                    />
-                  }
-                  legendComponent={
-                    <EscalationMapLegenda
-                      data={choropleth.vr}
-                      metricName="escalation_levels"
-                      metricProperty="level"
-                    />
-                  }
-                >
+              <ChoroplethTwoColumnLayout
+                legenda={
+                  <EscalationMapLegenda
+                    data={choropleth.vr}
+                    metricName="escalation_levels"
+                    metricProperty="level"
+                    lastDetermined={
+                      choropleth.vr.escalation_levels[0].last_determined_unix
+                    }
+                  />
+                }
+              >
+                <Box>
                   <SafetyRegionChoropleth
                     data={choropleth.vr}
                     metricName="escalation_levels"
                     metricProperty="level"
                     onSelect={createSelectRegionHandler(router, 'risiconiveau')}
-                    highlightCode={`${vrCode}`}
                     tooltipContent={escalationTooltip(
                       createSelectRegionHandler(router, 'risiconiveau')
                     )}
                   />
-                </TopicalChoroplethContainer>
-              </TopicalTile>
-              <Box
-                borderTopWidth="1px"
-                borderTopStyle="solid"
-                borderTopColor="silver"
-                mx={{ _: -3, md: 0 }}
-              />
-              <TopicalTile py={0}>
-                <Box mx={-3}>
-                  <EscalationLevelExplanations />
                 </Box>
-              </TopicalTile>
-            </Box>
+                <Box>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: replaceVariablesInText(
+                        text.risiconiveaus.selecteer_toelichting,
+                        {
+                          last_update: formatDate(
+                            choropleth.vr.escalation_levels[0]
+                              .date_of_insertion_unix,
+                            'day-month'
+                          ),
+                        }
+                      ),
+                    }}
+                  />
+                </Box>
+              </ChoroplethTwoColumnLayout>
+
+              <Box mt={4}>
+                <EscalationLevelExplanations />
+              </Box>
+            </TopicalTile>
 
             <TopicalTile>
-              <ChoroplethTwoColumnLayout>
+              <TopicalSectionHeader
+                title={
+                  siteText.common_actueel.secties.positief_getest_kaart.titel
+                }
+              />
+
+              <ChoroplethTwoColumnLayout
+                legenda={
+                  <ChoroplethLegenda
+                    thresholds={
+                      regionThresholds.tested_overall.infected_per_100k
+                    }
+                    title={
+                      siteText.positief_geteste_personen.chloropleth_legenda
+                        .titel
+                    }
+                  />
+                }
+              >
                 <Box>
                   {selectedMap === 'municipal' && (
                     <MunicipalityChoropleth
@@ -319,7 +342,7 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
                   )}
                 </Box>
                 <Box>
-                  <Text css={css({ maxWidth: 350 })}>
+                  <Text>
                     {siteText.positief_geteste_personen.map_toelichting}
                   </Text>
                   <Box
@@ -331,15 +354,6 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
                       onChange={setSelectedMap}
                     />
                   </Box>
-                  <ChoroplethLegenda
-                    thresholds={
-                      regionThresholds.tested_overall.infected_per_100k
-                    }
-                    title={
-                      siteText.positief_geteste_personen.chloropleth_legenda
-                        .titel
-                    }
-                  />
                 </Box>
               </ChoroplethTwoColumnLayout>
             </TopicalTile>

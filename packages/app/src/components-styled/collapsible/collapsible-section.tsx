@@ -4,10 +4,11 @@ import {
   DisclosurePanel,
 } from '@reach/disclosure';
 import { css } from '@styled-system/css';
-import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import useResizeObserver from 'use-resize-observer';
-import { Box, BoxProps } from './base';
+import { Box, BoxProps } from '~/components-styled/base';
+import { useSetLinkTabbability } from './use-set-link-tabbability';
 
 const Summary = styled(DisclosureButton)(
   css({
@@ -91,21 +92,21 @@ const Panel = styled(DisclosurePanel)(
   })
 );
 
-interface CollapsableProps extends BoxProps {
+interface CollapsibleSectionProps extends BoxProps {
   summary: string;
   children: ReactNode;
   id?: string;
   hideBorder?: boolean;
 }
 
-export const Collapsible = ({
+export const CollapsibleSection = ({
   summary,
   children,
   id,
   hideBorder,
-}: CollapsableProps) => {
+}: CollapsibleSectionProps) => {
   const [open, setOpen] = useState(true);
-  const panelReference = useRef<HTMLDivElement>(null);
+  const { wrapperRef } = useSetLinkTabbability(open);
 
   const { ref, height: contentHeight } = useResizeObserver();
 
@@ -117,25 +118,6 @@ export const Collapsible = ({
     const isOpenedByQueryParam = window.location.hash.substr(1) === id;
     setOpen(isOpenedByQueryParam);
   }, [id]);
-
-  /**
-   * Collapsed content should not be accessible using the tab functionality.
-   */
-  const setLinkTabability = useCallback(
-    (open) => {
-      if (!panelReference.current) {
-        return;
-      }
-
-      const links = panelReference.current?.querySelectorAll('a');
-      Array.from(links).forEach((link) => {
-        link.setAttribute('tabindex', open ? '0' : '-1');
-      });
-    },
-    [panelReference]
-  );
-
-  useEffect(() => setLinkTabability(open), [setLinkTabability, open]);
 
   return (
     <Box
@@ -155,7 +137,7 @@ export const Collapsible = ({
         </Summary>
 
         <Panel
-          ref={panelReference}
+          ref={wrapperRef}
           style={{
             /* panel max height is only controlled when collapsed, or during animations */
             height: open ? contentHeight : 0,
