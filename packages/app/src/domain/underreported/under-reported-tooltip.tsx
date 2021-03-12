@@ -1,7 +1,7 @@
 import { formatNumber } from '@corona-dashboard/common';
 import { Box } from '~/components-styled/base';
 import { TrendValue } from '~/components-styled/line-chart/logic';
-import { Text } from '~/components-styled/typography';
+import { InlineText } from '~/components-styled/typography';
 import { colors } from '~/style/theme';
 import { formatDateFromMilliseconds } from '~/utils/formatDate';
 
@@ -19,14 +19,14 @@ export function UnderReportedTooltip<T extends TrendValue>(
   return (
     <Box display="flex" alignItems="center" flexDirection="column">
       {isInUnderReportedRange && (
-        <Text as="span" fontSize={0} color={colors.annotation}>
+        <InlineText fontSize={0} color={colors.annotation}>
           ({underReportedText})
-        </Text>
+        </InlineText>
       )}
       <Box>
-        <Text as="span" fontWeight="bold">
+        <InlineText fontWeight="bold">
           {`${formatDateFromMilliseconds(value.__date.getTime(), 'medium')}: `}
-        </Text>
+        </InlineText>
         {formatNumber(value.__value)}
       </Box>
     </Box>
