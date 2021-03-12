@@ -631,7 +631,8 @@
       "source": "Source",
       "date": "Value of {{date}}",
       "dateFromTo": "Value from {{startDate}} - {{endDate}}",
-      "download": "Download data"
+      "download": "Download data",
+      "obtained": "obtained on {{date}}"
     },
     "barScale": {
       "signaalwaarde": "Alert value"
