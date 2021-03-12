@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom/extend-expect';
 
-// Disable dynamic imports for now (Sorry HighCharts)
+// Disable dynamic imports for now
 jest.mock('next/dynamic', () => {
   return jest.fn(() => 'div');
 });
