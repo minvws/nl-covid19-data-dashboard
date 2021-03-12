@@ -770,13 +770,7 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": [
-      "0 tot 20",
-      "20 tot 40",
-      "40 tot 60",
-      "60 tot 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -2110,11 +2104,7 @@
     "expected_page_additions": {
       "title": "Verwachte toevoegingen aan deze pagina",
       "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer de vaccinatiegraad.",
-      "additions": [
-        "",
-        "",
-        ""
-      ]
+      "additions": ["", "", ""]
     },
     "data": {
       "difference": "Do not remove this key. It is required as a temporary workaround",
@@ -2239,11 +2229,7 @@
       "kpi_expected_page_additions": {
         "title": "Verwachte toevoegingen aan deze pagina",
         "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer de vaccinatiegraad.",
-        "additions": [
-          "",
-          "",
-          ""
-        ]
+        "additions": ["", "", ""]
       },
       "vaccination_chart": {
         "product_names": {
@@ -2299,6 +2285,7 @@
     "url": "https://coronadashboard.rijksoverheid.nl/artikelen"
   },
   "common_actueel": {
+    "overview_links_header": "Bekijk alle cijfers op dit dashboard",
     "terug_naar_landelijk": "Terug naar landelijke situatie",
     "laatst_bijgewerkt": "Laatst bijgewerkt: {{date}}",
     "secties": {
@@ -2333,7 +2320,7 @@
       "selecteer_titel": "De risicokaart van Nederland",
       "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. De laatste keer is dit op 2 maart gebeurd. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. [Meer informatie over de risiconiveaus](/over-risiconiveaus).\n\n**De landelijke lockdown blijft van kracht tot en met ten minste 30 maart. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**"
     },
-    "data_sitemap_titel": "Onderwerpen op dit dashboard",
+    "data_sitemap_titel": "Landelijke cijfers",
     "data_sitemap_toelichting": "Ga direct naar de volgende onderwerpen:",
     "mini_trend_tiles": {
       "positief_getest": {
@@ -2391,7 +2378,7 @@
       }
     },
     "quick_links": {
-      "header": "Bekijk alle cijfers van het dashboard",
+      "header": "Alle cijfers",
       "links": {
         "nationaal": "Cijfers van Nederland",
         "veiligheidsregio": "Cijfers per veiligheidsregio",
@@ -2429,6 +2416,7 @@
       "title": "Actuele situatie in de veiligheidsregio {{safetyRegionName}}",
       "description": "Actuele situatie in de veiligheidsregio {{safetyRegionName}}"
     },
+    "data_sitemap_title": "Cijfers van {{safetyRegionName}}",
     "risiconiveaus": {
       "selecteer_titel": "De risicokaart van Nederland",
       "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. De laatste keer is dit op 2 maart gebeurd. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. [Meer informatie over de risiconiveaus](/over-risiconiveaus).\n\n**De landelijke lockdown blijft van kracht tot en met ten minste 30 maart. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**"
@@ -2488,7 +2476,7 @@
       }
     },
     "quick_links": {
-      "header": "Bekijk alle cijfers van het dashboard",
+      "header": "Alle cijfers",
       "links": {
         "nationaal": "Cijfers van Nederland",
         "veiligheidsregio": "Cijfers van veiligheidsregio {{safetyRegionName}}",
@@ -2511,6 +2499,7 @@
       "title": "Actuele situatie in {{municipalityName}}",
       "description": "Actuele situatie in {{municipalityName}}"
     },
+    "data_sitemap_title": "Cijfers van {{municipalityName}}",
     "risiconiveaus": {
       "selecteer_titel": "De risicokaart van Nederland",
       "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. De laatste keer is dit op 2 maart gebeurd. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. [Meer informatie over de risiconiveaus](/over-risiconiveaus).\n\n**De landelijke lockdown blijft van kracht tot en met ten minste 30 maart. [Bekijk hier de maatregelen van de lockdown](landelijk/maatregelen).**"
@@ -2570,7 +2559,7 @@
       }
     },
     "quick_links": {
-      "header": "Bekijk alle cijfers van het dashboard",
+      "header": "Alle cijfers",
       "links": {
         "nationaal": "Cijfers van Nederland",
         "veiligheidsregio": "Cijfers van veiligheidsregio {{safetyRegionName}}",

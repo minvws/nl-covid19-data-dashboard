@@ -770,13 +770,7 @@
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": [
-      "0 to 20",
-      "20 to 40",
-      "40 to 60",
-      "60 to 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -2110,11 +2104,7 @@
     "expected_page_additions": {
       "title": "Expected data on vaccinations",
       "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
-      "additions": [
-        "",
-        "",
-        ""
-      ]
+      "additions": ["", "", ""]
     },
     "data": {
       "difference": "",
@@ -2239,11 +2229,7 @@
       "kpi_expected_page_additions": {
         "title": "Expected data on vaccinations",
         "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
-        "additions": [
-          "",
-          "",
-          ""
-        ]
+        "additions": ["", "", ""]
       },
       "vaccination_chart": {
         "product_names": {
@@ -2299,6 +2285,7 @@
     "url": "https://coronadashboard.government.nl/artikelen"
   },
   "common_actueel": {
+    "overview_links_header": "Bekijk alle cijfers op dit dashboard",
     "terug_naar_landelijk": "Back to national situation",
     "laatst_bijgewerkt": "Last update: {{date}}",
     "secties": {
@@ -2391,7 +2378,7 @@
       }
     },
     "quick_links": {
-      "header": "View all data on the dashboard",
+      "header": "View all data",
       "links": {
         "nationaal": "Data for the Netherlands",
         "veiligheidsregio": "Data by safety region",
@@ -2429,6 +2416,7 @@
       "title": "Current situation in safety region {{safetyRegionName}}",
       "description": "Current situation in safety region {{safetyRegionName}}"
     },
+    "data_sitemap_title": "Cijfers van {{safetyRegionName}}",
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of The Netherlands",
       "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on 2 March. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\n**There remains a national lockdown until at least 30 March. [Click here to view the lockdown measures](/landelijk/maatregelen).**"
@@ -2488,7 +2476,7 @@
       }
     },
     "quick_links": {
-      "header": "View all data on the dashboard",
+      "header": "View all data",
       "links": {
         "nationaal": "Data for The Netherlands",
         "veiligheidsregio": "Data for safety region {{safetyRegionName}}",
@@ -2511,6 +2499,7 @@
       "title": "Current situation in {{municipalityName}}",
       "description": "The current situation in {{municipalityName}}"
     },
+    "data_sitemap_title": "Cijfers van {{municipalityName}}",
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of the Netherlands",
       "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on 2 March. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\n**There remains a national lockdown until at least 30 March. [Click here to view the lockdown measures](/landelijk/maatregelen).**"
@@ -2570,7 +2559,7 @@
       }
     },
     "quick_links": {
-      "header": "View all data on the dashboard",
+      "header": "View all data",
       "links": {
         "nationaal": "Data for The Netherlands",
         "veiligheidsregio": "Data for the safety region {{safetyRegionName}}",
