@@ -2251,7 +2251,7 @@
       "title": "Iedere {{seconds}} seconden krijgt iemand een prik",
       "description": "Dit is een schatting. Deze schatting is gemaakt met het gemiddelde van {{amount}} prikken per dag tussen 8.00 en 20.00 uur in de afgelopen zeven dagen."
     },
-    "willingness_section": {
+    "bereidheid_section": {
       "title": "Vaccinatiebereidheid",
       "description": "Vaccinatiebereidheid",
       "reference": {

@@ -50,7 +50,7 @@ import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import VaccinatiesIcon from '~/assets/vaccinaties.svg';
 
-const scaledVaccinatiesIcon = (
+const scaledVaccineIcon = (
   <Box p={2}>
     <VaccinatiesIcon />
   </Box>
@@ -350,10 +350,10 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
         />
 
         <ContentHeader
-          title={text.willingness_section.title}
-          subtitle={text.willingness_section.description}
-          reference={text.willingness_section.reference}
-          icon={scaledVaccinatiesIcon}
+          title={text.bereidheid_section.title}
+          subtitle={text.bereidheid_section.description}
+          reference={text.bereidheid_section.reference}
+          icon={scaledVaccineIcon}
           metadata={{
             datumsText: text.datums,
             dateOrRange: data.vaccine_support.last_value.date_of_insertion_unix,
@@ -508,7 +508,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
 
         <ContentHeader
           title={text.stock_and_delivery_section.title}
-          icon={scaledVaccinatiesIcon}
+          icon={scaledVaccineIcon}
           subtitle={text.stock_and_delivery_section.description}
           reference={text.stock_and_delivery_section.reference}
           metadata={{
