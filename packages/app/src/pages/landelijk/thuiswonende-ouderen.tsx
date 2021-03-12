@@ -16,6 +16,7 @@ import { createSelectRegionHandler } from '~/components/choropleth/select-handle
 import { createRegionElderlyAtHomeTooltip } from '~/components/choropleth/tooltips/region/create-region-elderly-at-home-tooltip';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
+import { UnderReportedTooltip } from '~/domain/underreported/under-reported-tooltip';
 import siteText from '~/locale/index';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
@@ -123,6 +124,19 @@ const ElderlyAtHomeNationalPage: FCWithLayout<typeof getStaticProps> = ({
             },
           ]}
           metadata={{ source: text.section_positive_tested.bronnen.rivm }}
+          formatTooltip={(values) => {
+            const value = values[0];
+            const isInaccurateValue =
+              value.__date >= elderlyAtHomeInfectedUnderReportedRange[0];
+
+            return (
+              <UnderReportedTooltip
+                value={value}
+                isInUnderReportedRange={isInaccurateValue}
+                underReportedText={siteText.common.incomplete}
+              />
+            );
+          }}
           componentCallback={addBackgroundRectangleCallback(
             elderlyAtHomeInfectedUnderReportedRange,
             {
@@ -220,6 +234,19 @@ const ElderlyAtHomeNationalPage: FCWithLayout<typeof getStaticProps> = ({
               fill: colors.data.underReported,
             }
           )}
+          formatTooltip={(values) => {
+            const value = values[0];
+            const isInaccurateValue =
+              value.__date >= elderlyAtHomeDeceasedUnderReportedRange[0];
+
+            return (
+              <UnderReportedTooltip
+                value={value}
+                isInUnderReportedRange={isInaccurateValue}
+                underReportedText={siteText.common.incomplete}
+              />
+            );
+          }}
           legendItems={[
             {
               color: colors.data.primary,
