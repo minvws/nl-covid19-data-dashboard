@@ -19,7 +19,6 @@ import {
   behaviorIdentifiers,
   BehaviorType,
 } from './behavior-types';
-import { BehaviorLineChart, Value } from './components/behavior-line-chart';
 import { BehaviorTypeControl } from './components/behavior-type-control';
 
 interface BehaviorLineChartTileProps {
@@ -93,33 +92,6 @@ export function BehaviorLineChartTile({
           />
         </Box>
       </Box>
-
-      <Spacer mb={3} />
-
-      <BehaviorLineChart
-        values={behaviorIdentifierWithData.map(({ valueKey, label }) =>
-          (values as NationalBehaviorValue[])
-            .map((value) =>
-              valueKey in value
-                ? ({
-                    label,
-                    date: value.date_start_unix,
-                    value: value[valueKey],
-                    week: {
-                      start: value.date_start_unix,
-                      end: value.date_end_unix,
-                    },
-                  } as Value)
-                : undefined
-            )
-            .filter(isPresent)
-        )}
-        linesConfig={behaviorIdentifierWithData.map(({ id }) => ({
-          id,
-          isSelected: id === currentId,
-          onClick: setCurrentId,
-        }))}
-      />
 
       <Spacer mb={3} />
 
