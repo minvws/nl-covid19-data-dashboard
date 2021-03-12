@@ -3,6 +3,7 @@ import { ReactNode } from 'react';
 import { UrlObject } from 'url';
 import { Link } from '~/utils/link';
 import { Box } from './base';
+import styled from 'styled-components';
 
 interface LinkWithIconProps {
   href: UrlObject | string;
@@ -49,20 +50,26 @@ export function LinkWithIcon({
       >
         {iconPlacement === 'right' && !headingLink && (
           <>
-            {children}
-            <IconSmall icon={icon} width={11} height={10} />
+            {!words.length ? children : firstWords}
+            <IconWrapper>
+              {words[words.length - 1]}
+              <IconSmall icon={icon} width={11} height={10} />
+            </IconWrapper>
           </>
         )}
         {iconPlacement === 'left' && !headingLink && (
           <>
-            <IconSmall icon={icon} width={11} height={10} />
-            {children}
+            {!words.length ? children : firstWords}
+            <IconWrapper>
+              <IconSmall icon={icon} width={11} height={10} />
+              {words[words.length - 1]}
+            </IconWrapper>
           </>
         )}
         {headingLink && (
           <Box paddingRight={isSingleWord ? `calc(0.5rem + 18px)` : ''}>
             {!words.length ? children : firstWords}
-            <span css={css({ display: 'inline-block' })}>
+            <IconWrapper>
               {words[words.length - 1]}
               <IconLarge
                 icon={icon}
@@ -70,7 +77,7 @@ export function LinkWithIcon({
                 width={16}
                 height={13}
               />
-            </span>
+            </IconWrapper>
           </Box>
         )}
       </a>
@@ -101,3 +108,10 @@ export function LinkWithIcon({
     );
   }
 }
+
+const IconWrapper = styled.span(
+  css({
+    display: 'inline-block',
+    textDecoration: 'inherit',
+  })
+);
