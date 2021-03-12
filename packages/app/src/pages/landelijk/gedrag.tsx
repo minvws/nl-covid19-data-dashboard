@@ -32,7 +32,7 @@ import { formatNumber } from '~/utils/formatNumber';
 import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { TimeSeriesChart } from '~/components-styled/time-series-chart';
-import { ChartTile } from '~/components-styled/chart-tile';
+import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
 import { ParentSize } from '@visx/responsive';
 import { colors } from '~/style/theme';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
@@ -79,43 +79,6 @@ const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
           }}
           reference={nl_gedrag.reference}
         />
-
-        <ChartTile
-          metadata={{
-            source: corona_melder_app.linechart.bronnen.coronamelder,
-          }}
-          title={corona_melder_app.linechart.title}
-          description={corona_melder_app.linechart.description}
-        >
-          <ParentSize>
-            {({ width }) => (
-              <TimeSeriesChart
-                title={'Gemeld aantal'}
-                width={width}
-                values={data.corona_melder_app.values}
-                ariaLabelledBy=""
-                paddingLeft={40}
-                // dataOptions={{
-                //   timespanAnnotations: {
-                //     start: 1608455388,
-                //     end: 1608455388,
-                //     domain: [3, 4],
-                //     height: 20,
-                //     getX: Infinity,
-                //   }
-                // }}
-                seriesConfig={[
-                  {
-                    type: 'area',
-                    metricProperty: 'warned_daily',
-                    label: 'waarschuwingen',
-                    color: colors.data.primary,
-                  },
-                ]}
-              />
-            )}
-          </ParentSize>
-        </ChartTile>
 
         <LineChartTile
           timeframeOptions={['all', '5weeks', 'week']}
@@ -235,6 +198,38 @@ const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
             </Link>
           </Tile>
         </TwoKpiSection>
+
+        <ChartTileWithTimeframe
+          metadata={{
+            source: corona_melder_app.linechart.bronnen.coronamelder,
+          }}
+          title={corona_melder_app.linechart.title}
+          description={corona_melder_app.linechart.description}
+        >
+          {(timeframe) => (
+            <ParentSize>
+              {({ width }) => (
+                <TimeSeriesChart
+                  title={corona_melder_app.linechart.tooltip.title}
+                  timeframe={timeframe}
+                  width={width}
+                  values={data.corona_melder_app.values}
+                  showDateMarker
+                  ariaLabelledBy=""
+                  paddingLeft={40}
+                  seriesConfig={[
+                    {
+                      type: 'area',
+                      metricProperty: 'warned_daily',
+                      label: corona_melder_app.linechart.tooltip.warnings,
+                      color: colors.data.primary,
+                    },
+                  ]}
+                />
+              )}
+            </ParentSize>
+          )}
+        </ChartTileWithTimeframe>
       </TileList>
     </>
   );

@@ -2725,6 +2725,10 @@
           "text": "CoronaMelder",
           "href": ""
         }
+      },
+      "tooltip": {
+        "title": "Gemeld aantal",
+        "warnings": "waarschuwingen"
       }
     }
   },

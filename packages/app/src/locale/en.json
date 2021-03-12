@@ -2717,14 +2717,18 @@
       }
     },
     "linechart": {
-      "title": "lijngrafiek corona melder",
-      "description": "lijngrafiek corona melder",
+      "title": "",
+      "description": "",
       "bronnen": {
         "coronamelder": {
           "download": "",
           "text": "CoronaMelder",
           "href": ""
         }
+      },
+      "tooltip": {
+        "title": "",
+        "warnings": ""
       }
     }
   },
