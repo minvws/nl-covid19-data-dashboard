@@ -2250,6 +2250,22 @@
     "clock": {
       "title": "Iedere {{seconds}} seconden krijgt iemand een prik",
       "description": "Dit is een schatting. Deze schatting is gemaakt met het gemiddelde van {{amount}} prikken per dag tussen 8.00 en 20.00 uur in de afgelopen zeven dagen."
+    },
+    "bereidheid_section": {
+      "title": "Vaccinatiebereidheid",
+      "description": "Vaccinatiebereidheid",
+      "reference": {
+        "href": "/",
+        "text": "Vaccinatiebereidheid"
+      }
+    },
+    "stock_and_delivery_section": {
+      "title": "Voorraad & Levering",
+      "description": "Voorraad & Levering",
+      "reference": {
+        "href": "/",
+        "text": "Voorraad & Levering"
+      }
     }
   },
   "editorial_detail": {
