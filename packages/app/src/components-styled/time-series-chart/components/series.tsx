@@ -53,7 +53,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({
       {seriesList.map((series, index) => {
         const config = seriesConfig[index];
 
-        const filteredSeries = (series as any[]).filter((x) => {
+        const nonNullSeries = (series as any[]).filter((x) => {
           return x.__value !== null && x.__value_a !== null;
         });
 
@@ -62,7 +62,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({
             return (
               <LineTrend
                 key={config.metricProperty as string}
-                series={filteredSeries as SeriesSingleValue[]}
+                series={nonNullSeries as SeriesSingleValue[]}
                 color={config.isFaded ? colors.data.faded : config.color}
                 style={config.style}
                 strokeWidth={config.strokeWidth}
@@ -75,7 +75,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({
             return (
               <AreaTrend
                 key={index}
-                series={filteredSeries as SeriesSingleValue[]}
+                series={nonNullSeries as SeriesSingleValue[]}
                 color={config.color}
                 style={config.style}
                 fillOpacity={config.fillOpacity}
@@ -91,7 +91,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({
             return (
               <RangeTrend
                 key={config.metricPropertyLow as string}
-                series={filteredSeries as SeriesDoubleValue[]}
+                series={nonNullSeries as SeriesDoubleValue[]}
                 color={config.color}
                 fillOpacity={config.fillOpacity}
                 strokeWidth={config.strokeWidth}
