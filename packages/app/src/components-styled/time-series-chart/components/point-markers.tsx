@@ -56,9 +56,7 @@ export function PointMarkers<T extends TimestampedValue>(
 ) {
   const { points, size = MARKER_POINT_SIZE } = props;
 
-  const nonNullPoints = points.filter((x) =>
-    isPresent(x.y)
-  ) as (HoveredPoint<T> & { y: number })[];
+  const nonNullPoints = points.filter((x) => isPresent(x.y));
 
   if (!nonNullPoints.length) return null;
 
