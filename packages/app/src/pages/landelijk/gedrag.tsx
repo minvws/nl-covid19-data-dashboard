@@ -1,16 +1,19 @@
 import { css } from '@styled-system/css';
+import { ParentSize } from '@visx/responsive';
 import styled from 'styled-components';
 import ExternalLinkIcon from '~/assets/external-link.svg';
 import Gedrag from '~/assets/gedrag.svg';
 import Phone from '~/assets/phone.svg';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
+import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { SEOHead } from '~/components-styled/seo-head';
 import { Tile } from '~/components-styled/tile';
 import { TileList } from '~/components-styled/tile-list';
+import { TimeSeriesChart } from '~/components-styled/time-series-chart';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, Text } from '~/components-styled/typography';
 import { BehaviorChoroplethTile } from '~/domain/behavior/behavior-choropleth-tile';
@@ -28,14 +31,10 @@ import {
   getLastGeneratedDate,
   getNlData,
 } from '~/static-props/get-data';
+import { colors } from '~/style/theme';
 import { formatNumber } from '~/utils/formatNumber';
 import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { TimeSeriesChart } from '~/components-styled/time-series-chart';
-import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
-import { ParentSize } from '@visx/responsive';
-import { colors } from '~/style/theme';
-import { LineChartTile } from '~/components-styled/line-chart-tile';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -78,22 +77,6 @@ const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
             dataSources: [nl_gedrag.bronnen.rivm],
           }}
           reference={nl_gedrag.reference}
-        />
-
-        <LineChartTile
-          timeframeOptions={['all', '5weeks', 'week']}
-          title={corona_melder_app.linechart.title}
-          ariaDescription={''}
-          description={corona_melder_app.linechart.description}
-          values={data.corona_melder_app.values}
-          linesConfig={[
-            {
-              metricProperty: 'warned_daily',
-            },
-          ]}
-          metadata={{
-            source: corona_melder_app.linechart.bronnen.coronamelder,
-          }}
         />
 
         <ArticleStrip articles={content.articles} />
