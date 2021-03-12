@@ -2,6 +2,7 @@
  * Code loosely based on
  * https://codesandbox.io/s/github/airbnb/visx/tree/master/packages/visx-demo/src/sandboxes/visx-barstack
  */
+import { TimestampedValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { AxisBottom, AxisLeft } from '@visx/axis';
 import { localPoint } from '@visx/event';
@@ -21,7 +22,7 @@ import { transparentize } from 'polished';
 import { MouseEvent, TouchEvent, useCallback, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components-styled/base';
-import { Legenda, LegendItem } from '~/components-styled/legenda';
+import { Legenda } from '~/components-styled/legenda';
 import { InlineText } from '~/components-styled/typography';
 import siteText from '~/locale';
 import { colors } from '~/style/theme';
@@ -38,7 +39,6 @@ import {
   getWeekInfo,
   SeriesValue,
 } from './logic';
-import { TimestampedValue } from '@corona-dashboard/common';
 
 const tooltipStyles = {
   ...defaultStyles,
@@ -197,26 +197,34 @@ export function StackedChart<T extends TimestampedValue>(
    * abstraction for this so that we can set the colors directly on the DOM
    * elements similar to how bars are rendered.
    */
-  const legendaItems = useMemo(
-    () =>
-      config.map((x) => {
-        const itemIndex = metricProperties.findIndex(
-          (v) => v === x.metricProperty
-        );
+  const legendaItems = useMemo(() => {
+    const barItems = config.map((x) => {
+      const itemIndex = metricProperties.findIndex(
+        (v) => v === x.metricProperty
+      );
 
-        return {
-          color:
-            hoveredIndex === NO_HOVER_INDEX
-              ? x.color
-              : hoveredIndex === itemIndex
-              ? x.color
-              : hoverColors[itemIndex],
-          label: x.label,
-          shape: 'square',
-        } as LegendItem;
-      }),
-    [config, hoveredIndex, metricProperties, hoverColors]
-  );
+      return {
+        color:
+          hoveredIndex === NO_HOVER_INDEX
+            ? x.color
+            : hoveredIndex === itemIndex
+            ? x.color
+            : hoverColors[itemIndex],
+        label: x.label,
+        shape: 'square' as const,
+      };
+    });
+
+    return [
+      ...barItems,
+      {
+        label: '@TODO lokalize',
+        color: 'black',
+        shape: 'custom' as const,
+        ShapeComponent: HatchedSquare,
+      },
+    ];
+  }, [config, hoveredIndex, metricProperties, hoverColors]);
 
   const labelByKey = useMemo(
     () =>
@@ -561,3 +569,29 @@ const Square = styled.span<{ color: string }>((x) =>
     height: 15,
   })
 );
+
+function HatchedSquare() {
+  return (
+    <svg height="15" width="15">
+      <defs>
+        <pattern
+          id="hatch"
+          width="5"
+          height="5"
+          patternTransform="rotate(-45 0 0)"
+          patternUnits="userSpaceOnUse"
+        >
+          <rect x="0" y="0" width="5" height="5" fill="white" />
+          <line
+            x1="0"
+            y1="0"
+            x2="0"
+            y2="5"
+            style={{ stroke: 'black', strokeWidth: 3 }}
+          />
+        </pattern>
+      </defs>
+      <rect height="15" width="15" fill="url(#hatch)" />
+    </svg>
+  );
+}
