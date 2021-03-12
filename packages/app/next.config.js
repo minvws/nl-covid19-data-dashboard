@@ -38,7 +38,7 @@ const nextConfig = {
     // your application
     locales: ['nl', 'en'],
     // This is the default locale you want to be used when visiting
-    // a non-locale prefixed path e.g. `/hello`
+    // a non-locale prefixed path e.g. `/hello` or a (sub)domain that's not mapped to a locale.
     defaultLocale: 'nl',
     // When localeDetection is set to false Next.js will no longer automatically
     // redirect based on the user's preferred locale and will only provide locale information
