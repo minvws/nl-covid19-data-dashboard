@@ -139,6 +139,9 @@ export function DefaultTooltip<T extends TimestampedValue>({
   const dateString = getDateStringFromValue(value);
 
   const seriesConfig = config
+    /**
+     * @TODO There's room for improvement https://github.com/minvws/nl-covid19-data-dashboard/pull/2284#discussion_r593158099
+     */
     .filter((x) => {
       if (options.showNearestPointOnly) {
         /**
