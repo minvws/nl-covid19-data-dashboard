@@ -140,27 +140,27 @@ export function DefaultTooltip<T extends TimestampedValue>({
 
   const seriesConfig = config
     .filter((x) => {
-      if (!options.isNearestPointOnly) {
+      if (options.isNearestPointOnly) {
         /**
-         * render all series in the tooltip
+         * We only want to render a single serie belonging to the nearest point
          */
-        return true;
-      }
 
-      if (x.type === 'range') {
-        if (
-          __valueKey === x.metricPropertyHigh ||
-          __valueKey === x.metricPropertyLow
-        ) {
-          return true;
+        if (x.type === 'range') {
+          return (
+            x.metricPropertyLow === __valueKey ||
+            x.metricPropertyHigh === __valueKey
+          );
+        }
+
+        if (x.type === 'line' || x.type === 'area') {
+          return x.metricProperty === __valueKey;
         }
       }
 
-      if (x.type === 'line' || x.type === 'area') {
-        if (__valueKey === x.metricProperty) {
-          return true;
-        }
-      }
+      /**
+       * render all series in the tooltip
+       */
+      return true;
     })
     .reverse();
 
