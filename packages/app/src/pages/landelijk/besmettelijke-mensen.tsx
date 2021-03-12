@@ -121,6 +121,7 @@ const InfectiousPeople: FCWithLayout<typeof getStaticProps> = (props) => {
                 <TimeSeriesChart
                   timeframe={timeframe}
                   title={text.linechart_titel}
+                  showDateMarker
                   width={width}
                   values={data.infectious_people.values}
                   ariaLabelledBy=""
