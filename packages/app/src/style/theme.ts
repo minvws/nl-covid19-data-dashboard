@@ -146,6 +146,9 @@ export const colors = {
       cure_vac: '#E37321', // multiseries.magenta
       janssen: '#E37321', // multiseries.orange
       sanofi: '#005082', // multiseries.cyan_dark
+
+      // @TODO remove when data is updated to new name
+      pfizer: '#219BE5', // multiseries.cyan
     },
   },
 } as const;

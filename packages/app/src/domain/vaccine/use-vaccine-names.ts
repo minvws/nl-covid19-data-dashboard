@@ -9,6 +9,9 @@ const vaccines = [
   'cure_vac',
   'janssen',
   'sanofi',
+  // @TODO remove when data is updated to new name bio_n_tech_pfizer or chart is
+  // replaced with TimeSeriesChart or similar component.
+  'pfizer',
 ] as const;
 
 vaccines.forEach((x) =>
