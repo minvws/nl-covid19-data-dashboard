@@ -62,8 +62,8 @@ const nextConfig = {
       //   defaultLocale: 'en',
       // },
       // For convenience, the deploy previews are configured as well
-      { domain: 'nl-covid19-data-dashboard.vercel.app', defaultLocale: 'nl' },
-      { domain: 'en-covid19-data-dashboard.vercel.app', defaultLocale: 'en' },
+      // { domain: 'nl-covid19-data-dashboard.vercel.app', defaultLocale: 'nl' },
+      // { domain: 'en-covid19-data-dashboard.vercel.app', defaultLocale: 'en' },
       {
         domain: 'develop-en-covid19-data-dashboard.vercel.app',
         defaultLocale: 'en',
