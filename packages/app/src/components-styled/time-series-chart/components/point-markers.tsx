@@ -1,4 +1,5 @@
 import { TimestampedValue } from '@corona-dashboard/common';
+import { getLuminance } from 'polished';
 import styled from 'styled-components';
 import { isPresent } from 'ts-is-present';
 import { HoveredPoint } from '../logic/hover-state';
@@ -27,7 +28,8 @@ const PointMarker = styled.div<MarkerProps>`
     width: 8px;
     transform: translate(50%, -50%);
     border-radius: 50%;
-    border: 1px solid white;
+    border: 1px solid
+      ${(x) => (getLuminance(x.color) > 0.6 ? x.theme.colors.gray : 'white')};
     background: ${(props) => props.color};
   }
 
