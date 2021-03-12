@@ -2475,7 +2475,7 @@
       }
     },
     "quick_links": {
-      "header": "View all data on the dashboard",
+      "header": "View all data",
       "links": {
         "nationaal": "Data for The Netherlands",
         "veiligheidsregio": "Data for safety region {{safetyRegionName}}",
@@ -2558,7 +2558,7 @@
       }
     },
     "quick_links": {
-      "header": "View all data on the dashboard",
+      "header": "View all data",
       "links": {
         "nationaal": "Data for The Netherlands",
         "veiligheidsregio": "Data for the safety region {{safetyRegionName}}",

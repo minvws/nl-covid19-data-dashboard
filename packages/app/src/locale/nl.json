@@ -2475,7 +2475,7 @@
       }
     },
     "quick_links": {
-      "header": "Bekijk alle cijfers van het dashboard",
+      "header": "Alle cijfers",
       "links": {
         "nationaal": "Cijfers van Nederland",
         "veiligheidsregio": "Cijfers van veiligheidsregio {{safetyRegionName}}",
@@ -2558,7 +2558,7 @@
       }
     },
     "quick_links": {
-      "header": "Bekijk alle cijfers van het dashboard",
+      "header": "Alle cijfers",
       "links": {
         "nationaal": "Cijfers van Nederland",
         "veiligheidsregio": "Cijfers van veiligheidsregio {{safetyRegionName}}",
