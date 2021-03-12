@@ -632,7 +632,7 @@
       "date": "Value of {{date}}",
       "dateFromTo": "Value from {{startDate}} - {{endDate}}",
       "download": "Download data",
-      "obtained": "obtained on {{date}}"
+      "obtained": ""
     },
     "barScale": {
       "signaalwaarde": "Alert value"
@@ -1830,11 +1830,11 @@
       "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "cbs_message": {
-      "title": "Mortality in week 8 lower than expected",
-      "published_text": "Date of publication: Friday 5 March",
-      "message": "In week 8 (22 to 28 February inclusive), estimated mortality stood at more than 3,200. This number is lower than expected for this period and nearly 300 down on the previous week (3,491). There were mainly fewer deaths among people aged 80 and over and among long-term care users. Statistics Netherlands (CBS) reports this based on the provisional weekly figures on mortality. Since week 39 of 2020, weekly mortality has been higher than expected. In week 7, the number of deaths was more or less the same as the expected mortality for this period. Estimated mortality for week 8 is more than 200 deaths below the expected number for this period. The National Institute for Public Health and the Environment (RIVM) registered 205 COVID-19 deaths in week 8 (as at 2 March).",
+      "title": "Decline in mortality continued in week 9",
+      "published_text": "Date of publication: Friday 12 March",
+      "message": "In week 9 (1 to 7 March 2021 inclusive), the estimated number of deaths stood at nearly 3,100. This is lower than the expected number for this period and nearly 100 down on the previous week (3,175). There were mainly fewer deaths among people aged 80 and over. Mortality among long-term care users declined further as well. Statistics Netherlands (CBS) reports this based on the provisional weekly mortality figures. Since week 39 of 2020, weekly mortality has been higher than expected. In week 7, the number of deaths was more or less the same as the expected mortality for this period. In week 8, it was lower than expected. Estimated mortality for week 9 is nearly 300 deaths below the expected number for this period. The National Institute for Public Health and the Environment (RIVM) registered 171 COVID-19 deaths in week 9 (as at 9 March).",
       "link": {
-        "href": "https://www.cbs.nl/en-gb/news/2021/09/mortality-in-week-8-lower-than-expected",
+        "href": "https://www.cbs.nl/en-gb/news/2021/10/decline-in-mortality-continued-in-week-9",
         "text": "Read the full news item on the CBS website"
       }
     },
