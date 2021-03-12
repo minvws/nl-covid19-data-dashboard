@@ -100,6 +100,12 @@ export function AreaChartGraph<T extends TrendValue, K extends TrendValue>(
           .flat()
           .filter((display) => display.pattern === 'hatched')
           .map((display) => {
+            /**
+             * It appears that only one pattern is actually needed; white
+             * stripes with transparent / no background.
+             *
+             * @TODO see if that would work...
+             */
             return (
               <HatchedPattern
                 key={`pattern-${display.id}-${display.metricProperty}`}

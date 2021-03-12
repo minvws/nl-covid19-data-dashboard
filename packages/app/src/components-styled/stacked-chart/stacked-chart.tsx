@@ -16,6 +16,7 @@ import { SeriesPoint } from '@visx/shape/lib/types';
  * https://github.com/airbnb/visx/issues/904
  */
 import { defaultStyles, TooltipWithBounds, useTooltip } from '@visx/tooltip';
+import { group } from 'd3-array';
 import { NumberValue } from 'd3-scale';
 import { isEmpty, set } from 'lodash';
 import { transparentize } from 'polished';
@@ -190,6 +191,17 @@ export function StackedChart<T extends TimestampedValue>(
     () => config.map((x) => transparentize(0.6, x.color)),
     [config]
   );
+
+  /**
+   * This is a bit of a hack for now because this chart should be replaced by
+   * something more standardized anyway. We could introduce a special property
+   * like is_estimate to trigger the hatched pattern in all charts.
+   */
+  const hatchedFromIndex = valuesInTimeframe.findIndex(
+    (v) => ((v as unknown) as { is_estimate?: boolean }).is_estimate === true
+  );
+
+  console.log('hatchedFromIndex', hatchedFromIndex);
 
   /**
    * We generate new legend items based on hover state. This is probably not a
@@ -405,6 +417,8 @@ export function StackedChart<T extends TimestampedValue>(
     <Box>
       <Box position="relative">
         <svg width={width} height={height} role="img">
+          <HatchedPattern />
+
           <Group left={padding.left} top={padding.top}>
             <GridRows
               scale={yScale}
@@ -471,26 +485,53 @@ export function StackedChart<T extends TimestampedValue>(
                       handleHover(event, bar, barStack.index);
 
                     return (
-                      <rect
-                        id={barId}
-                        key={barId}
-                        x={bar.x}
-                        /**
-                         * Create a little gap between the stacked bars. Bars
-                         * can be 0 height so we need to clip it on 0 since
-                         * negative height is not allowed.
-                         */
-                        y={bar.y + (isTinyScreen ? 1 : 2)}
-                        height={Math.max(
-                          0,
-                          bar.height - (isTinyScreen ? 1 : 2)
+                      <Group key={barId}>
+                        <rect
+                          id={barId}
+                          key={barId}
+                          x={bar.x}
+                          /**
+                           * Create a little gap between the stacked bars. Bars
+                           * can be 0 height so we need to clip it on 0 since
+                           * negative height is not allowed.
+                           */
+                          y={bar.y + (isTinyScreen ? 1 : 2)}
+                          height={Math.max(
+                            0,
+                            bar.height - (isTinyScreen ? 1 : 2)
+                          )}
+                          width={bar.width}
+                          fill={fillColor}
+                          onMouseLeave={handleHoverWithBar}
+                          onMouseMove={handleHoverWithBar}
+                          onTouchStart={handleHoverWithBar}
+                        />
+                        {bar.index >= hatchedFromIndex && (
+                          <rect
+                            pointerEvents="none"
+                            x={bar.x}
+                            /**
+                             * Create a little gap between the stacked bars. Bars
+                             * can be 0 height so we need to clip it on 0 since
+                             * negative height is not allowed.
+                             */
+                            y={bar.y + (isTinyScreen ? 1 : 2)}
+                            height={Math.max(
+                              0,
+                              bar.height - (isTinyScreen ? 1 : 2)
+                            )}
+                            width={bar.width}
+                            fill={
+                              breakpoints.lg
+                                ? 'url(#pattern-hatched)'
+                                : 'url(#pattern-hatched-small)'
+                            }
+                            onMouseLeave={handleHoverWithBar}
+                            onMouseMove={handleHoverWithBar}
+                            onTouchStart={handleHoverWithBar}
+                          />
                         )}
-                        width={bar.width}
-                        fill={fillColor}
-                        onMouseLeave={handleHoverWithBar}
-                        onMouseMove={handleHoverWithBar}
-                        onTouchStart={handleHoverWithBar}
-                      />
+                      </Group>
                     );
                   })
                 )
@@ -573,25 +614,48 @@ const Square = styled.span<{ color: string }>((x) =>
 function HatchedSquare() {
   return (
     <svg height="15" width="15">
-      <defs>
-        <pattern
-          id="hatch"
-          width="5"
-          height="5"
-          patternTransform="rotate(-45 0 0)"
-          patternUnits="userSpaceOnUse"
-        >
-          <rect x="0" y="0" width="5" height="5" fill="white" />
-          <line
-            x1="0"
-            y1="0"
-            x2="0"
-            y2="5"
-            style={{ stroke: 'black', strokeWidth: 3 }}
-          />
-        </pattern>
-      </defs>
-      <rect height="15" width="15" fill="url(#hatch)" />
+      <rect height="15" width="15" fill="lightgray" />
+      <rect height="15" width="15" fill="url(#pattern-hatched-small)" />
     </svg>
+  );
+}
+
+function HatchedPattern() {
+  const SIZE_LARGE = 8;
+  const SIZE_SMALL = 4;
+
+  return (
+    <defs>
+      <pattern
+        id="pattern-hatched"
+        width={SIZE_LARGE}
+        height={SIZE_LARGE}
+        patternTransform="rotate(-45 0 0)"
+        patternUnits="userSpaceOnUse"
+      >
+        <line
+          x1="0"
+          y1="0"
+          x2="0"
+          y2={SIZE_LARGE}
+          style={{ stroke: 'white', strokeWidth: 4 }}
+        />
+      </pattern>
+      <pattern
+        id="pattern-hatched-small"
+        width={SIZE_SMALL}
+        height={SIZE_SMALL}
+        patternTransform="rotate(-45 0 0)"
+        patternUnits="userSpaceOnUse"
+      >
+        <line
+          x1="0"
+          y1="0"
+          x2="0"
+          y2={SIZE_SMALL}
+          style={{ stroke: 'white', strokeWidth: 3 }}
+        />
+      </pattern>
+    </defs>
   );
 }
