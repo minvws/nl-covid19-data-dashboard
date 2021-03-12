@@ -33,9 +33,6 @@ import { TimeframeOption } from '~/utils/timeframe';
 import { HoverPoint, Marker, Tooltip, Trend } from './components';
 import { calculateYMax, getTrendData, TrendValue } from './logic';
 
-const dateToValue = (d: Date) => d.valueOf() / 1000;
-const formatXAxis = (date: Date) =>
-  formatDateFromSeconds(dateToValue(date), 'axis');
 const formatYAxisFn = (y: number) => formatNumber(y);
 const formatYAxisPercentageFn = (y: number) => `${formatPercentage(y)}%`;
 
@@ -334,7 +331,6 @@ export function LineChart<T extends TimestampedValue>({
               ? formatYAxisPercentageFn
               : formatYAxisFn
           }
-          formatXAxis={formatXAxis}
           onHover={handleHover}
           benchmark={benchmark}
           componentCallback={componentCallback}
