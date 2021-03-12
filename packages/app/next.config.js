@@ -49,18 +49,18 @@ const nextConfig = {
     // Note: subdomains must be included in the domain value to be matched e.g. "fr.example.com".
     domains: [
       //Production environments
-      {
-        domain: 'coronadashboard.nl',
-        defaultLocale: 'nl',
-      },
-      {
-        domain: 'coronadashboard.rijksoverheid.nl',
-        defaultLocale: 'nl',
-      },
-      {
-        domain: 'coronadashboard.government.com',
-        defaultLocale: 'en',
-      },
+      // {
+      //   domain: 'coronadashboard.nl',
+      //   defaultLocale: 'nl',
+      // },
+      // {
+      //   domain: 'coronadashboard.rijksoverheid.nl',
+      //   defaultLocale: 'nl',
+      // },
+      // {
+      //   domain: 'coronadashboard.government.com',
+      //   defaultLocale: 'en',
+      // },
       // For convenience, the deploy previews are configured as well
       { domain: 'nl-covid19-data-dashboard.vercel.app', defaultLocale: 'nl' },
       { domain: 'en-covid19-data-dashboard.vercel.app', defaultLocale: 'en' },
