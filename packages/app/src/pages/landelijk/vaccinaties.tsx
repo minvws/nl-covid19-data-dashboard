@@ -32,6 +32,7 @@ import {
 } from '~/domain/vaccine/milestones-view';
 import { useVaccineDeliveryData } from '~/domain/vaccine/use-vaccine-delivery-data';
 import { useVaccineNames } from '~/domain/vaccine/use-vaccine-names';
+import { VaccineDeliveryBarChart } from '~/domain/vaccine/vaccine-delivery-bar-chart';
 import { VaccinePageIntroduction } from '~/domain/vaccine/vaccine-page-introduction';
 import siteText from '~/locale/index';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
@@ -339,6 +340,11 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
           description={milestones.description}
           milestones={milestones.milestones}
           expectedMilestones={milestones.expectedMilestones}
+        />
+
+        <VaccineDeliveryBarChart
+          data={data.vaccine_delivery_per_supplier}
+          siteText={siteText}
         />
 
         <ChartTile
