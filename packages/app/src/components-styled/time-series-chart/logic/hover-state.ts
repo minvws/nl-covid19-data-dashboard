@@ -133,9 +133,9 @@ export function useHoverState<T extends TimestampedValue>({
     [values]
   );
 
-  let hoverState: HoverState<T> | undefined;
+  const hoverState = useMemo(() => {
+    if (!point) return undefined;
 
-  if (point) {
     let [pointX, pointY] = point.toArray();
 
     /**
@@ -238,7 +238,7 @@ export function useHoverState<T extends TimestampedValue>({
         )
       : undefined;
 
-    hoverState = {
+    const hoverState: HoverState<T> = {
       valuesIndex,
       linePoints: isNearestPointOnly
         ? linePoints.filter((x) => x === nearestPoint)
@@ -249,7 +249,20 @@ export function useHoverState<T extends TimestampedValue>({
       nearestPoint,
       timespanAnnotationIndex,
     };
-  }
+
+    return hoverState;
+  }, [
+    bisect,
+    isNearestPointOnly,
+    padding,
+    point,
+    seriesConfig,
+    seriesList,
+    timespanAnnotations,
+    values,
+    xScale,
+    yScale,
+  ]);
 
   return [handleHover, hoverState];
 }
