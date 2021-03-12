@@ -31,105 +31,109 @@ export function DataSitemap() {
           justifyContent={{ lg: 'space-between' }}
           flexWrap={{ md: 'wrap', lg: 'nowrap' }}
         >
-          <Box width={{ md: '25%', lg: 'auto' }}>
-            <StyledHeader>
-              {siteText.nationaal_layout.headings.vaccinaties}
-            </StyledHeader>
-            <List>
-              <SitemapItem
-                href="/landelijk/vaccinaties"
-                text={siteText.vaccinaties.titel_sidebar}
-              />
-            </List>
-          </Box>
-          <Box width={{ md: '25%', lg: 'auto' }}>
-            <StyledHeader>
-              {siteText.nationaal_layout.headings.besmettingen}
-            </StyledHeader>
-            <List>
-              <SitemapItem
-                href="/landelijk/positief-geteste-mensen"
-                text={siteText.positief_geteste_personen.titel_sidebar}
-              />
-              <SitemapItem
-                href="/landelijk/besmettelijke-mensen"
-                text={siteText.besmettelijke_personen.titel_sidebar}
-              />
-              <SitemapItem
-                href="/landelijk/reproductiegetal"
-                text={siteText.reproductiegetal.titel_sidebar}
-              />
-              <SitemapItem
-                href="/landelijk/sterfte"
-                text={siteText.sterfte.titel_sidebar}
-              />
-            </List>
-          </Box>
-          <Box width={{ md: '25%', lg: 'auto' }}>
-            <StyledHeader>
-              {siteText.nationaal_layout.headings.ziekenhuizen}
-            </StyledHeader>
-            <List>
-              <SitemapItem
-                href="/landelijk/ziekenhuis-opnames"
-                text={siteText.ziekenhuisopnames_per_dag.titel_sidebar}
-              />
-              <SitemapItem
-                href="/landelijk/intensive-care-opnames"
-                text={siteText.ic_opnames_per_dag.titel_sidebar}
-              />
-            </List>
-          </Box>
-          <Box width={{ md: '25%', lg: 'auto' }}>
-            <StyledHeader>
-              {siteText.nationaal_layout.headings.kwetsbare_groepen}
-            </StyledHeader>
-            <List>
-              <SitemapItem
-                href="/landelijk/verpleeghuiszorg"
-                text={siteText.verpleeghuis_besmette_locaties.titel_sidebar}
-              />
-              <SitemapItem
-                href="/landelijk/gehandicaptenzorg"
-                text={
-                  siteText.gehandicaptenzorg_besmette_locaties.titel_sidebar
-                }
-              />
-              <SitemapItem
-                href="/landelijk/thuiswonende-ouderen"
-                text={siteText.thuiswonende_ouderen.titel_sidebar}
-              />
-            </List>
-          </Box>
-          <Box width={{ md: '25%', lg: 'auto' }} marginTop={{ md: 4, lg: 0 }}>
-            <StyledHeader>
-              {siteText.nationaal_layout.headings.vroege_signalen}
-            </StyledHeader>
-            <List>
-              <SitemapItem
-                href="/landelijk/rioolwater"
-                text={siteText.rioolwater_metingen.titel_sidebar}
-              />
-              <SitemapItem
-                href="/landelijk/verdenkingen-huisartsen"
-                text={siteText.verdenkingen_huisartsen.titel_sidebar}
-              />
-            </List>
-          </Box>
-          <Box width={{ md: '25%', lg: 'auto' }} marginTop={{ md: 4, lg: 0 }}>
-            <StyledHeader>
-              {siteText.nationaal_layout.headings.gedrag}
-            </StyledHeader>
-            <List>
-              <SitemapItem
-                href="/landelijk/gedrag"
-                text={siteText.nl_gedrag.sidebar.titel}
-              />
-            </List>
-          </Box>
+          <SitemapItems />
         </Box>
       </Box>
     </Box>
+  );
+}
+
+export function SitemapItems() {
+  return (
+    <>
+      <Box width={{ md: '25%', lg: 'auto' }}>
+        <StyledHeader>
+          {siteText.nationaal_layout.headings.vaccinaties}
+        </StyledHeader>
+        <List>
+          <SitemapItem
+            href="/landelijk/vaccinaties"
+            text={siteText.vaccinaties.titel_sidebar}
+          />
+        </List>
+      </Box>
+      <Box width={{ md: '25%', lg: 'auto' }}>
+        <StyledHeader>
+          {siteText.nationaal_layout.headings.besmettingen}
+        </StyledHeader>
+        <List>
+          <SitemapItem
+            href="/landelijk/positief-geteste-mensen"
+            text={siteText.positief_geteste_personen.titel_sidebar}
+          />
+          <SitemapItem
+            href="/landelijk/besmettelijke-mensen"
+            text={siteText.besmettelijke_personen.titel_sidebar}
+          />
+          <SitemapItem
+            href="/landelijk/reproductiegetal"
+            text={siteText.reproductiegetal.titel_sidebar}
+          />
+          <SitemapItem
+            href="/landelijk/sterfte"
+            text={siteText.sterfte.titel_sidebar}
+          />
+        </List>
+      </Box>
+      <Box width={{ md: '25%', lg: 'auto' }}>
+        <StyledHeader>
+          {siteText.nationaal_layout.headings.ziekenhuizen}
+        </StyledHeader>
+        <List>
+          <SitemapItem
+            href="/landelijk/ziekenhuis-opnames"
+            text={siteText.ziekenhuisopnames_per_dag.titel_sidebar}
+          />
+          <SitemapItem
+            href="/landelijk/intensive-care-opnames"
+            text={siteText.ic_opnames_per_dag.titel_sidebar}
+          />
+        </List>
+      </Box>
+      <Box width={{ md: '25%', lg: 'auto' }}>
+        <StyledHeader>
+          {siteText.nationaal_layout.headings.kwetsbare_groepen}
+        </StyledHeader>
+        <List>
+          <SitemapItem
+            href="/landelijk/verpleeghuiszorg"
+            text={siteText.verpleeghuis_besmette_locaties.titel_sidebar}
+          />
+          <SitemapItem
+            href="/landelijk/gehandicaptenzorg"
+            text={siteText.gehandicaptenzorg_besmette_locaties.titel_sidebar}
+          />
+          <SitemapItem
+            href="/landelijk/thuiswonende-ouderen"
+            text={siteText.thuiswonende_ouderen.titel_sidebar}
+          />
+        </List>
+      </Box>
+      <Box width={{ md: '25%', lg: 'auto' }} marginTop={{ md: 4, lg: 0 }}>
+        <StyledHeader>
+          {siteText.nationaal_layout.headings.vroege_signalen}
+        </StyledHeader>
+        <List>
+          <SitemapItem
+            href="/landelijk/rioolwater"
+            text={siteText.rioolwater_metingen.titel_sidebar}
+          />
+          <SitemapItem
+            href="/landelijk/verdenkingen-huisartsen"
+            text={siteText.verdenkingen_huisartsen.titel_sidebar}
+          />
+        </List>
+      </Box>
+      <Box width={{ md: '25%', lg: 'auto' }} marginTop={{ md: 4, lg: 0 }}>
+        <StyledHeader>{siteText.nationaal_layout.headings.gedrag}</StyledHeader>
+        <List>
+          <SitemapItem
+            href="/landelijk/gedrag"
+            text={siteText.nl_gedrag.sidebar.titel}
+          />
+        </List>
+      </Box>
+    </>
   );
 }
 

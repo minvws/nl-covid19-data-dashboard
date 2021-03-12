@@ -30,6 +30,7 @@ import {
   useLegendItems,
   useScales,
   useSeriesList,
+  useValuesInTimeframe,
 } from './logic';
 import { useDimensions } from './logic/dimensions';
 export type { SeriesConfig } from './logic';
@@ -113,7 +114,7 @@ export type TimeSeriesChartProps<T extends TimestampedValue> = {
 };
 
 export function TimeSeriesChart<T extends TimestampedValue>({
-  values,
+  values: allValues,
   seriesConfig,
   width,
   height = 250,
@@ -158,11 +159,17 @@ export function TimeSeriesChart<T extends TimestampedValue>({
 
   const legendItems = useLegendItems(seriesConfig, dataOptions);
 
-  const seriesList = useSeriesList(values, seriesConfig, timeframe);
+  const values = useValuesInTimeframe(allValues, timeframe);
 
+  const seriesList = useSeriesList(values, seriesConfig);
+
+  /**
+   * The maximum is calculated over all values, because you don't want the
+   * y-axis scaling to change when toggling the timeframe setting.
+   */
   const calculatedSeriesMax = useMemo(
-    () => calculateSeriesMaximum(values, seriesConfig, benchmark?.value),
-    [values, seriesConfig, benchmark]
+    () => calculateSeriesMaximum(allValues, seriesConfig, benchmark?.value),
+    [allValues, seriesConfig, benchmark]
   );
 
   const seriesMax = isDefined(forcedMaximumValue)

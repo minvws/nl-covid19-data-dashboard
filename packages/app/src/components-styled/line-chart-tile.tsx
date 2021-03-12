@@ -1,14 +1,14 @@
+import { TimestampedValue } from '@corona-dashboard/common';
 import { ParentSize } from '@visx/responsive';
+import slugify from 'slugify';
 import {
   LineChart,
   LineChartProps,
 } from '~/components-styled/line-chart/line-chart';
-import { TimestampedValue } from '@corona-dashboard/common';
+import { assert } from '~/utils/assert';
 import { TimeframeOption } from '~/utils/timeframe';
 import { ChartTileWithTimeframe } from './chart-tile';
 import { MetadataProps } from './metadata';
-import { assert } from '~/utils/assert';
-import slugify from 'slugify';
 interface LineChartTileProps<T extends TimestampedValue>
   extends LineChartProps<T> {
   title: string;
