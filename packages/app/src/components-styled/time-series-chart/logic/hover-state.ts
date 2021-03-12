@@ -1,3 +1,4 @@
+import { Point } from '@visx/point';
 import {
   isDateSpanValue,
   isDateValue,
@@ -9,7 +10,7 @@ import { ScaleLinear } from 'd3-scale';
 import { isEmpty } from 'lodash';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
-import { TimespanAnnotationConfig } from './common';
+import { Padding, TimespanAnnotationConfig } from './common';
 import {
   SeriesConfig,
   SeriesDoubleValue,
@@ -29,10 +30,11 @@ interface UseHoverStateArgs<T extends TimestampedValue> {
   values: T[];
   seriesList: SeriesList;
   seriesConfig: SeriesConfig<T>;
-  paddingLeft: number;
+  padding: Padding;
   xScale: ScaleLinear<number, number>;
   yScale: ScaleLinear<number, number>;
   timespanAnnotations?: TimespanAnnotationConfig[];
+  isNearestPointOnly?: boolean;
 }
 
 interface HoverState<T> {
@@ -53,12 +55,13 @@ export function useHoverState<T extends TimestampedValue>({
   values,
   seriesList,
   seriesConfig,
-  paddingLeft,
+  padding,
   xScale,
   yScale,
   timespanAnnotations,
+  isNearestPointOnly,
 }: UseHoverStateArgs<T>): UseHoverStateResponse<T> {
-  const [hoverState, setHoverState] = useState<HoverState<T>>();
+  const [point, setPoint] = useState<Point>();
   const timeoutRef = useRef<any>();
 
   const valuesDateUnix = useMemo(
@@ -93,11 +96,11 @@ export function useHoverState<T extends TimestampedValue>({
     function (values: TimestampedValue[], xPosition: number): number {
       if (values.length === 1) return 0;
 
-      const date_unix = xScale.invert(xPosition - paddingLeft);
+      const date_unix = xScale.invert(xPosition);
 
       return bisectCenter(valuesDateUnix, date_unix, 0, values.length);
     },
-    [paddingLeft, xScale, valuesDateUnix]
+    [xScale, valuesDateUnix]
   );
 
   const handleHover = useCallback(
@@ -114,7 +117,7 @@ export function useHoverState<T extends TimestampedValue>({
          * tooltip itself. Or maybe it can be simplified without a ref.
          */
         timeoutRef.current = setTimeout(() => {
-          setHoverState(undefined);
+          setPoint(undefined);
           timeoutRef.current = undefined;
         }, 200);
         return;
@@ -125,127 +128,128 @@ export function useHoverState<T extends TimestampedValue>({
       }
 
       const mousePoint = localPoint(event);
+      setPoint(mousePoint || undefined);
+    },
+    [values]
+  );
 
-      if (!mousePoint) {
-        return;
-      }
+  let hoverState: HoverState<T> | undefined;
 
-      /**
-       * Bisect here is working directly on the original values (as opposed to
-       * individual trends in LineChart. This should be more efficient since we
-       * only need to do it once. It also provides flexibility in constructing
-       * hover state elements for different types based on the series config.
-       */
-      const valuesIndex = bisect(values, mousePoint.x);
+  if (point) {
+    let [pointX, pointY] = point.toArray();
 
-      const linePoints: HoveredPoint<T>[] = seriesConfig
-        .map((config, index) => {
-          const seriesValue = seriesList[index][
-            valuesIndex
-          ] as SeriesSingleValue;
+    /**
+     * Align point coordinates with actual datapoints by subtracting padding
+     */
+    pointX -= padding.left;
+    pointY -= padding.top;
 
-          const xValue = seriesValue.__date_unix;
-          const yValue = seriesValue.__value;
+    /**
+     * Bisect here is working directly on the original values (as opposed to
+     * individual trends in LineChart. This should be more efficient since we
+     * only need to do it once. It also provides flexibility in constructing
+     * hover state elements for different types based on the series config.
+     */
+    const valuesIndex = bisect(values, pointX);
 
-          /**
-           * Filter series without Y value on the current valuesIndex
-           */
-          if (!isPresent(yValue)) {
-            return undefined;
-          }
+    const linePoints: HoveredPoint<T>[] = seriesConfig
+      .map((config, index) => {
+        const seriesValue = seriesList[index][valuesIndex] as SeriesSingleValue;
 
-          switch (config.type) {
-            case 'line':
-            case 'area':
-              return {
+        const xValue = seriesValue.__date_unix;
+        const yValue = seriesValue.__value;
+
+        /**
+         * Filter series without Y value on the current valuesIndex
+         */
+        if (!isPresent(yValue)) {
+          return undefined;
+        }
+
+        switch (config.type) {
+          case 'line':
+          case 'area':
+            return {
+              seriesValue,
+              x: xScale(xValue),
+              y: yScale(yValue),
+              color: config.color,
+              metricProperty: config.metricProperty,
+            };
+        }
+      })
+      .filter(isDefined);
+
+    /**
+     * Point markers on range data are rendered differently, so we split them
+     * out here, so we avoid having to create a union type and complicate
+     * things.
+     */
+    const rangePoints: HoveredPoint<T>[] = seriesConfig
+      .flatMap((config, index) => {
+        const seriesValue = seriesList[index][valuesIndex] as SeriesDoubleValue;
+
+        const xValue = seriesValue.__date_unix;
+        const yValueA = seriesValue.__value_a;
+        const yValueB = seriesValue.__value_b;
+
+        /**
+         * Filter series without Y value on the current valuesIndex
+         */
+        if (!isPresent(yValueA) || !isPresent(yValueB)) {
+          return undefined;
+        }
+
+        switch (config.type) {
+          case 'range':
+            return [
+              {
                 seriesValue,
                 x: xScale(xValue),
-                y: yScale(yValue),
+                y: yScale(yValueA),
                 color: config.color,
-                metricProperty: config.metricProperty,
-              };
-          }
-        })
-        .filter(isDefined);
+                metricProperty: config.metricPropertyLow,
+              },
+              {
+                seriesValue,
+                x: xScale(xValue),
+                y: yScale(yValueB),
+                color: config.color,
+                metricProperty: config.metricPropertyHigh,
+              },
+            ];
+        }
+      })
+      .filter(isDefined);
 
-      /**
-       * Point markers on range data are rendered differently, so we split them
-       * out here, so we avoid having to create a union type and complicate
-       * things.
-       */
-      const rangePoints: HoveredPoint<T>[] = seriesConfig
-        .flatMap((config, index) => {
-          const seriesValue = seriesList[index][
-            valuesIndex
-          ] as SeriesDoubleValue;
+    /**
+     * For nearest point calculation we only need to look at the y component
+     * of the mouse, since all series originate from the same original value
+     * and are thus aligned with the same timestamp.
+     */
+    const nearestPoint = [...linePoints, ...rangePoints].sort(
+      (a, b) => Math.abs(a.y - pointY) - Math.abs(b.y - pointY)
+    )[0];
 
-          const xValue = seriesValue.__date_unix;
-          const yValueA = seriesValue.__value_a;
-          const yValueB = seriesValue.__value_b;
+    const timespanAnnotationIndex = timespanAnnotations
+      ? findActiveTimespanAnnotationIndex(
+          values[valuesIndex],
+          timespanAnnotations
+        )
+      : undefined;
 
-          /**
-           * Filter series without Y value on the current valuesIndex
-           */
-          if (!isPresent(yValueA) || !isPresent(yValueB)) {
-            return undefined;
-          }
-
-          switch (config.type) {
-            case 'range':
-              return [
-                {
-                  seriesValue,
-                  x: xScale(xValue),
-                  y: yScale(yValueA),
-                  color: config.color,
-                  metricProperty: config.metricPropertyLow,
-                },
-                {
-                  seriesValue,
-                  x: xScale(xValue),
-                  y: yScale(yValueB),
-                  color: config.color,
-                  metricProperty: config.metricPropertyHigh,
-                },
-              ];
-          }
-        })
-        .filter(isDefined);
-
-      /**
-       * For nearest point calculation we only need to look at the y component
-       * of the mouse, since all series originate from the same original value
-       * and are thus aligned with the same timestamp.
-       */
-      const nearestPoint = [...linePoints, ...rangePoints].sort(
-        (a, b) => Math.abs(a.y - mousePoint.y) - Math.abs(b.y - mousePoint.y)
-      )[0];
-
-      const timespanAnnotationIndex = timespanAnnotations
-        ? findActiveTimespanAnnotationIndex(
-            values[valuesIndex],
-            timespanAnnotations
-          )
-        : undefined;
-
-      setHoverState({
-        valuesIndex,
-        linePoints,
-        rangePoints,
-        nearestPoint,
-        timespanAnnotationIndex,
-      });
-    },
-    [
-      bisect,
-      values,
-      seriesConfig,
-      seriesList,
-      xScale,
-      yScale,
-      timespanAnnotations,
-    ]
-  );
+    hoverState = {
+      valuesIndex,
+      linePoints: isNearestPointOnly
+        ? linePoints.filter((x) => x === nearestPoint)
+        : linePoints,
+      rangePoints: isNearestPointOnly
+        ? rangePoints.filter((x) => x === nearestPoint)
+        : rangePoints,
+      nearestPoint,
+      timespanAnnotationIndex,
+    };
+  }
 
   return [handleHover, hoverState];
 }
