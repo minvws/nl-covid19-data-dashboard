@@ -153,7 +153,7 @@
     "titel": "Ziekenhuisopnames per dag",
     "pagina_toelichting": "Groei van het aantal opgenomen patiënten met COVID-19 kan ervoor zorgen dat ziekenhuizen het te druk krijgen. Daarnaast geeft dit cijfer een goed beeld van hoe de epidemie zich ontwikkelt. We houden hier het aantal patiënten bij dat met COVID-19 wordt opgenomen in ziekenhuizen en het aantal bedden op gewone ziekenhuisafdelingen die door patiënten met COVID-19 wordt bezet. We houden dit zowel landelijk als regionaal bij en dat doen we op basis van verschillende bronnen.",
     "barscale_titel": "Gemeld aantal ziekenhuisopnames per dag",
-    "extra_uitleg": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer laat het aantal ziekenhuisopnames - inclusief directe IC opnames - zien dat op één dag gemeld is. Dit kunnen ook meldingen zijn van opnames van eerdere dagen. \n\n*De piek in de ziekenhuisopnames op 23 februari komt door verlate meldingen van opnames in de regio Gelderland-Midden.*",
+    "extra_uitleg": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer laat het aantal ziekenhuisopnames - inclusief directe IC opnames - zien dat op één dag gemeld is. Dit kunnen ook meldingen zijn van opnames van eerdere dagen. ",
     "map_titel": "Woonplaats opgenomen patiënten",
     "map_toelichting": "Deze kaart laat zien in welke gemeenten of veiligheidsregio’s patiënten wonen die met COVID-19 in het ziekenhuis zijn opgenomen. Patiënten kunnen ook in een ziekenhuis in een ander deel van Nederland worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE.",
     "linechart_titel": "Ziekenhuisopnames door de tijd heen, op datum van opname",
@@ -1799,11 +1799,11 @@
       "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     },
     "cbs_message": {
-      "title": "Sterfte lager dan verwacht in week 8",
-      "published_text": "Publicatiedatum: vrijdag 5 maart",
-      "message": "In week 8 (22 tot en met 28 februari) overleden naar schatting ruim 3200 mensen. Dat zijn minder sterfgevallen dan verwacht voor deze periode en bijna 300 sterfgevallen minder dan in de week ervoor (3491). Vooral de sterfte onder mensen van 80 jaar of ouder en Wlz-zorggebruikers nam af. Dat meldt het CBS op basis van de voorlopige sterftecijfers per week. Sinds week 39 van 2020 was de wekelijkse sterfte hoger dan verwacht. In week 7 was de sterfte ongeveer gelijk aan de verwachte sterfte voor deze periode. De schatting van de sterfte in week 8 zit ruim 200 sterfgevallen onder de verwachte sterfte voor deze periode. Het RIVM registreerde 205 overleden COVID-19-patiënten in week 8 (stand 2 maart).",
+      "title": "Daling in de sterfte zet door in week 9",
+      "published_text": "Publicatiedatum: vrijdag 12 maart",
+      "message": "In week 9 (1 tot en met 7 maart 2021) overleden naar schatting bijna 3100 mensen. Dat zijn minder sterfgevallen dan verwacht voor deze periode en bijna 100 sterfgevallen minder dan in de week ervoor (3175). Vooral de sterfte onder mensen van 80 jaar of ouder nam af. Ook onder Wlz-zorggebruikers daalde de sterfte verder. Dat meldt het CBS op basis van de voorlopige sterftecijfers per week. Sinds week 39 van 2020 was de wekelijkse sterfte hoger dan verwacht. In week 7 was de sterfte ongeveer gelijk aan de verwachte sterfte voor deze periode en in week 8 lag de sterfte eronder. De schatting van de sterfte in week 9 zit bijna 300 sterfgevallen onder de verwachte sterfte voor deze periode. Het RIVM registreerde 171 overleden COVID-19-patiënten in week 9 (stand 9 maart).",
       "link": {
-        "href": "https://www.cbs.nl/nl-nl/nieuws/2021/09/sterfte-lager-dan-verwacht-in-week-8",
+        "href": "https://www.cbs.nl/nl-nl/nieuws/2021/10/daling-in-de-sterfte-zet-door-in-week-9",
         "text": "Lees het volledige nieuwsbericht op de website van het CBS"
       }
     },
