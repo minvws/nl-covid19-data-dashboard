@@ -33,7 +33,7 @@ export function LinkWithIcon({
   const isSingleWord = words.length === 1;
 
   return (
-    <Link href={href} passHref>
+    <Link href={href} passHref locale={false}>
       <a
         css={css({
           display: 'inline-block',
