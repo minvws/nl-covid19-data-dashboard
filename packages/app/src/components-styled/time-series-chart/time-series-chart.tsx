@@ -37,7 +37,7 @@ export type { SeriesConfig } from './logic';
 /**
  * This chart started as a fork from MultiLineChart. It attempts to create a
  * more generic abstraction that can replace LineChart, MultiLineChart,
- * (highcharts) AreaChart and later possibly something like the vaccine delivery
+ * AreaChart and later possibly something like the vaccine delivery
  * chart.
  *
  * The main focus in this iteration is to try to reduce complexity as much as
