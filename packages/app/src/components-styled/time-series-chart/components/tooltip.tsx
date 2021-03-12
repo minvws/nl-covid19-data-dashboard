@@ -138,6 +138,32 @@ export function DefaultTooltip<T extends TimestampedValue>({
 }: DefaultTooltipProps<T>) {
   const dateString = getDateStringFromValue(value);
 
+  const seriesConfig = config
+    .filter((x) => {
+      if (options.isNearestPointOnly) {
+        /**
+         * We only want to render a single serie belonging to the nearest point
+         */
+
+        if (x.type === 'range') {
+          return (
+            x.metricPropertyLow === __valueKey ||
+            x.metricPropertyHigh === __valueKey
+          );
+        }
+
+        if (x.type === 'line' || x.type === 'area') {
+          return x.metricProperty === __valueKey;
+        }
+      }
+
+      /**
+       * render all series in the tooltip
+       */
+      return true;
+    })
+    .reverse();
+
   return (
     <section>
       <Heading level={5} mb={1}>
@@ -146,7 +172,7 @@ export function DefaultTooltip<T extends TimestampedValue>({
       <VisuallyHidden>{dateString}</VisuallyHidden>
 
       <TooltipList>
-        {[...config].reverse().map((x, index) => {
+        {seriesConfig.map((x, index) => {
           if (x.type === 'range') {
             return (
               <TooltipListItem key={index} color={x.color}>
