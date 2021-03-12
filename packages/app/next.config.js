@@ -93,7 +93,11 @@ const nextConfig = {
       process.env.DISABLE_SITEMAP !== '1' &&
       !process.env.DISABLE_SITEMAP
     ) {
-      sitemap.generateSitemap(process.env.NEXT_PUBLIC_LOCALE);
+      sitemap.generateSitemap(
+        process.env.NEXT_PUBLIC_LOCALE,
+        process.env.NEXT_PUBLIC_SANITY_DATASET,
+        process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
+      );
     }
 
     /** To prevent importing two languages, we use the NormalModuleReplacementPlugin plugin

@@ -5,25 +5,6 @@ const prettier = require('prettier');
 const gemeenteCodes = require('./gemeentecodes.json');
 const sanityClient = require('@sanity/client');
 
-const config = {
-  /**
-   * Find your project ID and dataset in `sanity.json` in your studio project.
-   * These are considered “public”, but you can use environment variables
-   * if you want differ between local dev and production.
-   *
-   * https://nextjs.org/docs/basic-features/environment-variables
-   **/
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || '',
-  useCdn: process.env.NODE_ENV === 'production',
-  /**
-   * Set useCdn to `false` if your application require the freshest possible
-   * data always (potentially slightly slower and a bit more expensive).
-   * Authenticated request (like preview) will always bypass the CDN
-   **/
-};
-const client = sanityClient(config);
-
 // regioData being generated as we can't import an ES export into CommonJS
 const regioData = [...Array(25).keys()].map(
   (n) => `VR${(n + 1).toString().padStart(2, '0')}`
@@ -34,7 +15,21 @@ const regioData = [...Array(25).keys()].map(
  *
  * @param locale
  */
-const generateSitemap = async function (locale) {
+const generateSitemap = async function (
+  locale,
+  dataset = 'production',
+  projectId = '',
+  useCdn = true
+) {
+  const config = {
+    dataset,
+    projectId,
+    useCdn,
+  };
+
+  console.log(config);
+  const client = sanityClient(config);
+
   console.log(`Generating sitemap '${locale || 'nl'}'`);
   const prettierConfig = await prettier.resolveConfig('./.prettierrc.js');
 
