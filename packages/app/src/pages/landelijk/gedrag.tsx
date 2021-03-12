@@ -198,7 +198,7 @@ const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
                   width={width}
                   values={data.corona_melder_app.values}
                   showDateMarker
-                  ariaLabelledBy=""
+                  ariaLabelledBy={corona_melder_app.linechart.description}
                   paddingLeft={40}
                   seriesConfig={[
                     {
