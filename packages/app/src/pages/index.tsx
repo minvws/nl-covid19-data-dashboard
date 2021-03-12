@@ -3,9 +3,9 @@ import GetestIcon from '~/assets/test.svg';
 import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
 import { ArticleSummary } from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
+import { CollapsibleButton } from '~/components-styled/collapsible';
 import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
-import { CollapsibleButton } from '~/components-styled/collapsible';
 import { HighlightTeaserProps } from '~/components-styled/highlight-teaser';
 import { Sitemap } from '~/domain/topical/sitemap';
 import { MaxWidth } from '~/components-styled/max-width';
@@ -221,7 +221,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                           {
                             last_update: formatDate(
                               choropleth.vr.escalation_levels[0]
-                                .date_of_insertion_unix,
+                                .last_determined_unix,
                               'day-month'
                             ),
                           }
