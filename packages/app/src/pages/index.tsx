@@ -10,9 +10,9 @@ import {
   RegionControlOption,
 } from '~/components-styled/chart-region-controls';
 import { ChoroplethLegenda } from '~/components-styled/choropleth-legenda';
+import { CollapsibleButton } from '~/components-styled/collapsible';
 import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
-import { CollapsibleButton } from '~/components-styled/collapsible';
 import { HighlightTeaserProps } from '~/components-styled/highlight-teaser';
 import { MaxWidth } from '~/components-styled/max-width';
 import { QuickLinks } from '~/components-styled/quick-links';
