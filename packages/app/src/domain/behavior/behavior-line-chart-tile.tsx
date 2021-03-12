@@ -117,7 +117,7 @@ export function BehaviorLineChartTile({
             disableLegend
             dataOptions={{
               isPercentage: true,
-              isNearestPointOnly: true,
+              showNearestPointOnly: true,
             }}
             tickValues={[0, 25, 50, 75, 100]}
             showDateMarker

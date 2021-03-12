@@ -140,7 +140,7 @@ export function DefaultTooltip<T extends TimestampedValue>({
 
   const seriesConfig = config
     .filter((x) => {
-      if (options.isNearestPointOnly) {
+      if (options.showNearestPointOnly) {
         /**
          * We only want to render a single serie belonging to the nearest point
          */

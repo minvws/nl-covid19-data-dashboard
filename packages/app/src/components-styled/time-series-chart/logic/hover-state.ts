@@ -34,7 +34,7 @@ interface UseHoverStateArgs<T extends TimestampedValue> {
   xScale: ScaleLinear<number, number>;
   yScale: ScaleLinear<number, number>;
   timespanAnnotations?: TimespanAnnotationConfig[];
-  isNearestPointOnly?: boolean;
+  showNearestPointOnly?: boolean;
 }
 
 interface HoverState<T> {
@@ -59,7 +59,7 @@ export function useHoverState<T extends TimestampedValue>({
   xScale,
   yScale,
   timespanAnnotations,
-  isNearestPointOnly,
+  showNearestPointOnly,
 }: UseHoverStateArgs<T>): UseHoverStateResponse<T> {
   const [point, setPoint] = useState<Point>();
   const timeoutRef = useRef<any>();
@@ -240,10 +240,10 @@ export function useHoverState<T extends TimestampedValue>({
 
     const hoverState: HoverState<T> = {
       valuesIndex,
-      linePoints: isNearestPointOnly
+      linePoints: showNearestPointOnly
         ? linePoints.filter((x) => x === nearestPoint)
         : linePoints,
-      rangePoints: isNearestPointOnly
+      rangePoints: showNearestPointOnly
         ? rangePoints.filter((x) => x === nearestPoint)
         : rangePoints,
       nearestPoint,
@@ -253,7 +253,7 @@ export function useHoverState<T extends TimestampedValue>({
     return hoverState;
   }, [
     bisect,
-    isNearestPointOnly,
+    showNearestPointOnly,
     padding,
     point,
     seriesConfig,

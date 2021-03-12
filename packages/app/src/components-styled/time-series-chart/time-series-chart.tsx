@@ -143,7 +143,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
   const {
     valueAnnotation,
     isPercentage,
-    isNearestPointOnly,
+    showNearestPointOnly,
     forcedMaximumValue,
     benchmark,
     timespanAnnotations,
@@ -197,7 +197,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     xScale,
     yScale,
     timespanAnnotations,
-    isNearestPointOnly,
+    showNearestPointOnly,
   });
 
   useEffect(() => {
