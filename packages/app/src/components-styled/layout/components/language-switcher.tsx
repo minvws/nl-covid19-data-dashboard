@@ -1,36 +1,32 @@
 import css from '@styled-system/css';
 import { useRouter } from 'next/router';
+import { Link } from '~/utils/link';
 import styled from 'styled-components';
 import { Box } from '~/components-styled/base';
-import { getLocale } from '~/utils/getLocale';
 
 export function LanguageSwitcher() {
   const router = useRouter();
-  const locale = getLocale();
+
+  const { locale } = router;
 
   return (
     <Box height={55} mt={-55} textAlign="right">
-      <LanguageLink
-        href={`https://coronadashboard.rijksoverheid.nl${router.asPath}`}
-        lang="nl"
-        hrefLang="nl"
-        isActive={locale === 'nl'}
-        title="Website in het Nederlands"
-      >
-        NL
-      </LanguageLink>
+      <Link href={`${router.asPath}`} locale="nl" passHref>
+        <LanguageLink
+          isActive={locale === 'nl'}
+          title="Website in het Nederlands"
+        >
+          NL
+        </LanguageLink>
+      </Link>
 
       <Separator />
 
-      <LanguageLink
-        href={`https://coronadashboard.government.nl${router.asPath}`}
-        lang="en-GB"
-        hrefLang="en-GB"
-        isActive={locale === 'en-GB'}
-        title="Website in English"
-      >
-        EN
-      </LanguageLink>
+      <Link href={`${router.asPath}`} locale="en" passHref>
+        <LanguageLink isActive={locale === 'en'} title="Website in English">
+          EN
+        </LanguageLink>
+      </Link>
     </Box>
   );
 }
