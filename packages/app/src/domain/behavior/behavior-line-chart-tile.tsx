@@ -98,7 +98,11 @@ export function BehaviorLineChartTile({
       <ParentSize>
         {({ width }) => (
           <TimeSeriesChart
-            title={'Gedragsregels'}
+            title={
+              type === 'compliance'
+                ? siteText.gedrag_common.compliance
+                : siteText.gedrag_common.support
+            }
             width={width}
             values={values}
             ariaLabelledBy=""
