@@ -109,11 +109,11 @@ export type SeriesItem = {
   __date_unix: number;
 };
 export interface SeriesSingleValue extends SeriesItem {
-  __value: number | null;
+  __value?: number;
 }
 export interface SeriesDoubleValue extends SeriesItem {
-  __value_a: number | null;
-  __value_b: number | null;
+  __value_a?: number;
+  __value_b?: number;
 }
 
 export function isSeriesValue(
@@ -178,7 +178,7 @@ export function getSeriesData<T extends TimestampedValue>(
       /**
        * This is messy and could be improved.
        */
-      __value: (x[metricProperty] as unknown) as number | null,
+      __value: (x[metricProperty] || undefined) as number | undefined,
       // @ts-expect-error @TODO figure out why the type guard doesn't work
       __date_unix: x.date_unix,
     }));
@@ -189,7 +189,7 @@ export function getSeriesData<T extends TimestampedValue>(
       /**
        * This is messy and could be improved.
        */
-      __value: (x[metricProperty] as unknown) as number | null,
+      __value: (x[metricProperty] || undefined) as number | undefined,
       __date_unix:
         /**
          * Here we set the date to be in the middle of the timespan, so that

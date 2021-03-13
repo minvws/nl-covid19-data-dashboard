@@ -131,7 +131,7 @@ interface DefaultTooltipProps<T extends TimestampedValue> {
 export function DefaultTooltip<T extends TimestampedValue>({
   title,
   value,
-  valueKey: __valueKey,
+  valueKey,
   config,
   options,
   timespanAnnotation: __timespanAnnotation,
@@ -150,13 +150,13 @@ export function DefaultTooltip<T extends TimestampedValue>({
 
         if (x.type === 'range') {
           return (
-            x.metricPropertyLow === __valueKey ||
-            x.metricPropertyHigh === __valueKey
+            x.metricPropertyLow === valueKey ||
+            x.metricPropertyHigh === valueKey
           );
         }
 
         if (x.type === 'line' || x.type === 'area') {
-          return x.metricProperty === __valueKey;
+          return x.metricProperty === valueKey;
         }
       }
 
