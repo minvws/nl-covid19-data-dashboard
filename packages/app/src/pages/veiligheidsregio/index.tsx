@@ -72,8 +72,7 @@ const SafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
                     text.veiligheidsregio_index.selecteer_toelichting,
                     {
                       last_update: formatDate(
-                        choropleth.vr.escalation_levels[0]
-                          .date_of_insertion_unix,
+                        choropleth.vr.escalation_levels[0].last_determined_unix,
                         'day-month'
                       ),
                     }

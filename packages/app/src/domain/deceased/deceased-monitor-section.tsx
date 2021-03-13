@@ -43,6 +43,7 @@ export function DeceasedMonitorSection({
               width={width}
               values={data.values}
               ariaLabelledBy=""
+              showDateMarker
               seriesConfig={[
                 {
                   type: 'range',

@@ -2,10 +2,6 @@
   "name": "corona-dashboard",
   "private": true,
   "license": "EUROPEAN UNION PUBLIC LICENCE v. 1.2",
-  "resolutions": {
-    "//": "next@10.0.6 is broken in IE11: https://github.com/vercel/next.js/issues/21041#issuecomment-775983001",
-    "next": "10.0.5"
-  },
   "scripts": {
     "test": "yarn workspaces run test",
     "test:ci": "yarn workspaces run test:ci",

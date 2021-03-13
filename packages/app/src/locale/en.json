@@ -631,7 +631,8 @@
       "source": "Source",
       "date": "Value of {{date}}",
       "dateFromTo": "Value from {{startDate}} - {{endDate}}",
-      "download": "Download data"
+      "download": "Download data",
+      "obtained": ""
     },
     "barScale": {
       "signaalwaarde": "Alert value"
@@ -769,13 +770,7 @@
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": [
-      "0 to 20",
-      "20 to 40",
-      "40 to 60",
-      "60 to 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -985,7 +980,7 @@
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Risk level map of the Netherlands",
-    "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on 2 March. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\n**There remains a national lockdown until at least 30 March. [Click here to view the lockdown measures](/landelijk/maatregelen).**",
+    "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on {{last_update}}. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\n**There remains a national lockdown until at least 30 March. [Click here to view the lockdown measures](/landelijk/maatregelen).**",
     "metadata": {
       "title": "Level of risk per safety region | Coronavirus Dashboard | Government.nl",
       "description": "Overview of the level of risk per safety region in the Netherlands."
@@ -1829,11 +1824,11 @@
       "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "cbs_message": {
-      "title": "Mortality in week 8 lower than expected",
-      "published_text": "Date of publication: Friday 5 March",
-      "message": "In week 8 (22 to 28 February inclusive), estimated mortality stood at more than 3,200. This number is lower than expected for this period and nearly 300 down on the previous week (3,491). There were mainly fewer deaths among people aged 80 and over and among long-term care users. Statistics Netherlands (CBS) reports this based on the provisional weekly figures on mortality. Since week 39 of 2020, weekly mortality has been higher than expected. In week 7, the number of deaths was more or less the same as the expected mortality for this period. Estimated mortality for week 8 is more than 200 deaths below the expected number for this period. The National Institute for Public Health and the Environment (RIVM) registered 205 COVID-19 deaths in week 8 (as at 2 March).",
+      "title": "Decline in mortality continued in week 9",
+      "published_text": "Date of publication: Friday 12 March",
+      "message": "In week 9 (1 to 7 March 2021 inclusive), the estimated number of deaths stood at nearly 3,100. This is lower than the expected number for this period and nearly 100 down on the previous week (3,175). There were mainly fewer deaths among people aged 80 and over. Mortality among long-term care users declined further as well. Statistics Netherlands (CBS) reports this based on the provisional weekly mortality figures. Since week 39 of 2020, weekly mortality has been higher than expected. In week 7, the number of deaths was more or less the same as the expected mortality for this period. In week 8, it was lower than expected. Estimated mortality for week 9 is nearly 300 deaths below the expected number for this period. The National Institute for Public Health and the Environment (RIVM) registered 171 COVID-19 deaths in week 9 (as at 9 March).",
       "link": {
-        "href": "https://www.cbs.nl/en-gb/news/2021/09/mortality-in-week-8-lower-than-expected",
+        "href": "https://www.cbs.nl/en-gb/news/2021/10/decline-in-mortality-continued-in-week-9",
         "text": "Read the full news item on the CBS website"
       }
     },
@@ -2109,11 +2104,7 @@
     "expected_page_additions": {
       "title": "Expected data on vaccinations",
       "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
-      "additions": [
-        "",
-        "",
-        ""
-      ]
+      "additions": ["", "", ""]
     },
     "data": {
       "difference": "",
@@ -2238,11 +2229,7 @@
       "kpi_expected_page_additions": {
         "title": "Expected data on vaccinations",
         "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
-        "additions": [
-          "",
-          "",
-          ""
-        ]
+        "additions": ["", "", ""]
       },
       "vaccination_chart": {
         "product_names": {
@@ -2298,6 +2285,7 @@
     "url": "https://coronadashboard.government.nl/artikelen"
   },
   "common_actueel": {
+    "overview_links_header": "Bekijk alle cijfers op dit dashboard",
     "terug_naar_landelijk": "Back to national situation",
     "laatst_bijgewerkt": "Last update: {{date}}",
     "secties": {
@@ -2330,7 +2318,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of the Netherlands",
-      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on 2 March. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\n**There remains a national lockdown until at least 30 March. [Click here to view the lockdown measures](/landelijk/maatregelen).**"
+      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on {{last_update}}. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\n**There remains a national lockdown until at least 30 March. [Click here to view the lockdown measures](/landelijk/maatregelen).**"
     },
     "data_sitemap_titel": "Topics on this dashboard",
     "data_sitemap_toelichting": "Go directly to the following topics:",
@@ -2390,7 +2378,7 @@
       }
     },
     "quick_links": {
-      "header": "View all data on the dashboard",
+      "header": "View all data",
       "links": {
         "nationaal": "Data for the Netherlands",
         "veiligheidsregio": "Data by safety region",
@@ -2428,6 +2416,7 @@
       "title": "Current situation in safety region {{safetyRegionName}}",
       "description": "Current situation in safety region {{safetyRegionName}}"
     },
+    "data_sitemap_title": "Cijfers van {{safetyRegionName}}",
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of The Netherlands",
       "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on 2 March. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\n**There remains a national lockdown until at least 30 March. [Click here to view the lockdown measures](/landelijk/maatregelen).**"
@@ -2487,7 +2476,7 @@
       }
     },
     "quick_links": {
-      "header": "View all data on the dashboard",
+      "header": "View all data",
       "links": {
         "nationaal": "Data for The Netherlands",
         "veiligheidsregio": "Data for safety region {{safetyRegionName}}",
@@ -2510,6 +2499,7 @@
       "title": "Current situation in {{municipalityName}}",
       "description": "The current situation in {{municipalityName}}"
     },
+    "data_sitemap_title": "Cijfers van {{municipalityName}}",
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of the Netherlands",
       "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on 2 March. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\n**There remains a national lockdown until at least 30 March. [Click here to view the lockdown measures](/landelijk/maatregelen).**"
@@ -2569,7 +2559,7 @@
       }
     },
     "quick_links": {
-      "header": "View all data on the dashboard",
+      "header": "View all data",
       "links": {
         "nationaal": "Data for The Netherlands",
         "veiligheidsregio": "Data for the safety region {{safetyRegionName}}",
