@@ -59,7 +59,7 @@ const Container = styled(Box).attrs({ as: 'section' })(
   })
 );
 
-const Panel = styled(DisclosurePanel)(
+const Panel = styled((props) => <DisclosurePanel {...props} />)(
   css({
     transitionProperty: 'height, opacity',
     transitionDuration: '0.5s',
@@ -73,7 +73,7 @@ const Panel = styled(DisclosurePanel)(
   })
 );
 
-const ExpandButton = styled(DisclosureButton)(
+const ExpandButton = styled((props) => <DisclosureButton {...props} />)(
   css({
     position: 'relative',
     px: asResponsiveArray({ _: 2, sm: 4 }),
