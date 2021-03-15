@@ -102,7 +102,6 @@ export type TimeSeriesChartProps<T extends TimestampedValue> = {
    */
   numGridLines?: number;
   tickValues?: number[];
-  showDateMarker?: boolean;
   paddingLeft?: number;
   /**
    * The data specific options are grouped together. This way we can pass them
@@ -124,7 +123,6 @@ export function TimeSeriesChart<T extends TimestampedValue>({
   dataOptions,
   numGridLines = 3,
   tickValues,
-  showDateMarker,
   paddingLeft,
   ariaLabelledBy,
   title,
@@ -333,13 +331,11 @@ export function TimeSeriesChart<T extends TimestampedValue>({
               width={dateSpanWidth}
               point={hoverState.nearestPoint}
             />
-            {showDateMarker && (
-              <DateLineMarker
-                point={hoverState.nearestPoint}
-                lineColor={`#5B5B5B`}
-                value={values[hoverState.valuesIndex]}
-              />
-            )}
+            <DateLineMarker
+              point={hoverState.nearestPoint}
+              lineColor={`#5B5B5B`}
+              value={values[hoverState.valuesIndex]}
+            />
             <PointMarkers points={hoverState.rangePoints} />
             <PointMarkers points={hoverState.linePoints} />
           </Overlay>

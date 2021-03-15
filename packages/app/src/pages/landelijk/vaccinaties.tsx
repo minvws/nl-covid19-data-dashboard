@@ -367,7 +367,6 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                 width={width}
                 ariaLabelledBy="chart_vaccine_support"
                 values={data.vaccine_support.values}
-                showDateMarker
                 numGridLines={20}
                 tickValues={[0, 25, 50, 75, 100]}
                 dataOptions={{
