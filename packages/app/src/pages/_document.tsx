@@ -59,6 +59,7 @@ class MyDocument extends Document {
             noModule
             src="https://polyfill.io/v3/polyfill.js?features=Intl.~locale.en,Intl.~locale.nl%2CDate.now%2CDate.prototype.toISOString%2CIntl.DateTimeFormat%2CIntl.DateTimeFormat.prototype.formatToParts%2CIntl.getCanonicalLocales"
           />
+          <Fonts />
         </Head>
         <body>
           <Main />
@@ -79,3 +80,40 @@ class MyDocument extends Document {
 }
 
 export default MyDocument;
+
+function Fonts() {
+  return (
+    <style
+      dangerouslySetInnerHTML={{
+        __html: `
+@font-face {
+  font-family: 'RO Sans';
+  font-weight: normal;
+  font-style: normal;
+  src: url('/webfonts/RO-SansWebText-Regular.woff2') format('woff2'),
+    url('/webfonts/RO-SansWebText-Regular.woff') format('woff');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'RO Sans';
+  font-weight: normal;
+  font-style: italic;
+  src: url('/webfonts/RO-SansWebText-Italic.woff2') format('woff2'),
+    url('/webfonts/RO-SansWebText-Italic.woff') format('woff');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'RO Sans';
+  font-weight: bold;
+  font-style: normal;
+  src: url('/webfonts/RO-SansWebText-Bold.woff2') format('woff2'),
+    url('/webfonts/RO-SansWebText-Bold.woff') format('woff');
+  font-display: swap;
+}
+      `.trim(),
+      }}
+    />
+  );
+}
