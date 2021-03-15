@@ -35,8 +35,8 @@ interface TooltipProps<T extends TimestampedValue> {
 export function Tooltip<T extends TimestampedValue>({
   title,
   data: tooltipData,
-  left: x,
-  top: y,
+  left: pointX,
+  top: pointY,
   formatTooltip,
   bounds,
   padding,
@@ -46,8 +46,8 @@ export function Tooltip<T extends TimestampedValue>({
   const { width = 0, height = 0, ref } = useResizeObserver<HTMLDivElement>();
   const [boundingBox, boundingBoxRef] = useBoundingBox<HTMLDivElement>();
 
-  const centeredLeft = x + padding.left - width / 2;
-  const top = y - height - 20;
+  const centeredLeft = pointX + padding.left - width / 2;
+  const top = pointY - height - 20;
 
   const maxWidth = Math.min(
     bounds.width + padding.left + padding.right,
@@ -81,7 +81,7 @@ export function Tooltip<T extends TimestampedValue>({
           )}
         </TooltipContent>
       </TooltipContainer>
-      <Triangle left={x + padding.left} top={y} />
+      <Triangle left={pointX + padding.left} top={pointY} />
     </>
   );
 }
