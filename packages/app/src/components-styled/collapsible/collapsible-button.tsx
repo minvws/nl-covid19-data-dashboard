@@ -37,7 +37,7 @@ export const CollapsibleButton = ({
         </DisclosureButton>
 
         <DisclosurePanel>
-          <div ref={contentRef} minHeight={open ? contentHeight : 0}>
+          <div ref={contentRef}>
             <div ref={wrapperRef}>{children}</div>
           </div>
         </DisclosurePanel>
