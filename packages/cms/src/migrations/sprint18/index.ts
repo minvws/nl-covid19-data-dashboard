@@ -19,29 +19,24 @@ const fetchDefaultGroup = () =>
 
 const buildPatches = (docs: any[], group: any) =>
   docs
-    .map((doc) => {
-      if (doc.questions.every((x: any) => x._type === 'faqQuestion')) {
-        return;
-      }
-      return {
-        id: doc._id,
-        patch: {
-          set: {
-            questions: doc.questions.map((x: any) => ({
-              ...x,
-              _type: 'faqQuestion',
-              group: {
-                _type: 'reference',
-                _ref: group._id,
-              },
-            })),
-          },
-          // this will cause the transaction to fail if the documents has been
-          // modified since it was fetched.
-          ifRevisionID: doc._rev,
+    .map((doc) => ({
+      id: doc._id,
+      patch: {
+        set: {
+          questions: doc.questions.map((x: any) => ({
+            ...x,
+            _type: 'faqQuestion',
+            group: {
+              _type: 'reference',
+              _ref: group._id,
+            },
+          })),
         },
-      };
-    })
+        // this will cause the transaction to fail if the documents has been
+        // modified since it was fetched.
+        ifRevisionID: doc._rev,
+      },
+    }))
     .filter((x) => x !== undefined);
 
 const createTransaction = (patches: any[]) =>
