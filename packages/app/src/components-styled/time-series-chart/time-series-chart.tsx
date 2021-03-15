@@ -1,4 +1,5 @@
 import { TimestampedValue } from '@corona-dashboard/common';
+import css from '@styled-system/css';
 import { useTooltip } from '@visx/tooltip';
 import { useCallback, useEffect, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
@@ -269,7 +270,7 @@ export function TimeSeriesChart<
   }, [onSeriesClick, seriesConfig, tooltipData]);
 
   return (
-    <Box ref={sizeRef}>
+    <Box ref={sizeRef} css={css({ userSelect: 'none' })}>
       {valueAnnotation && (
         <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
       )}
@@ -338,14 +339,17 @@ export function TimeSeriesChart<
           )}
         </ChartContainer>
 
-        <Tooltip
-          title={title}
-          data={tooltipData}
-          left={tooltipLeft}
-          top={tooltipTop}
-          isOpen={tooltipOpen}
-          formatTooltip={formatTooltip}
-        />
+        {tooltipOpen && tooltipData && (
+          <Tooltip
+            title={title}
+            data={tooltipData}
+            left={tooltipLeft}
+            top={tooltipTop}
+            formatTooltip={formatTooltip}
+            bounds={bounds}
+            padding={padding}
+          />
+        )}
 
         {hoverState && (
           <Overlay bounds={bounds} padding={padding}>

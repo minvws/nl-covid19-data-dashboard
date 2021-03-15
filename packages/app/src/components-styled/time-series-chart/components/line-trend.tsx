@@ -88,7 +88,7 @@ export function LineTrendIcon<T extends TimestampedValue>({
         strokeDasharray={style === 'dashed' ? 4 : undefined}
         strokeLinecap="round"
         strokeLinejoin="round"
-        x1={1}
+        x1={2}
         y1={height / 2}
         x2={width - 2}
         y2={height / 2}
