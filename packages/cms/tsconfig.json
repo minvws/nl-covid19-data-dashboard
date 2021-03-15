@@ -1,6 +1,6 @@
 {
   "extends": "../../tsconfig.base.json",
-  "include": ["src"],
+  "include": ["src", "@types/sanity.d.ts"],
   "compilerOptions": {
     "jsx": "react",
     "allowJs": true

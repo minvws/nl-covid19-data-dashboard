@@ -1,5 +1,11 @@
 import { PortableTextEntry } from '@sanity/block-content-to-react';
 
+export type FAQQuestion = {
+  content: RichContentBlock[] | null;
+  title: string;
+  group: string;
+};
+
 export type CollapsibleList = {
   content: RichContentBlock[] | null;
   title: string;
