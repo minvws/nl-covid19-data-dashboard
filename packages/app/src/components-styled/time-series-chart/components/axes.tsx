@@ -6,6 +6,7 @@
  * layouts by forking this component.
  */
 import { formatNumber, formatPercentage } from '@corona-dashboard/common';
+import css from '@styled-system/css';
 import { AxisBottom, AxisLeft } from '@visx/axis';
 import { GridRows } from '@visx/grid';
 import { ScaleLinear } from 'd3-scale';
@@ -67,7 +68,7 @@ export const Axes = memo(function Axes({
   );
 
   return (
-    <>
+    <g css={css({ pointerEvents: 'none' })}>
       <GridRows
         /**
          * Lighter gray grid lines are used for the lines that have no label on
@@ -128,6 +129,6 @@ export const Axes = memo(function Axes({
           })}
         />
       </g>
-    </>
+    </g>
   );
 });

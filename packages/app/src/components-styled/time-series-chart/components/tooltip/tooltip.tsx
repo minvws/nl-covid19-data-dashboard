@@ -4,7 +4,7 @@
  */
 import { TimestampedValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { ReactNode } from 'react';
+import { ReactNode, useRef } from 'react';
 import styled from 'styled-components';
 import useResizeObserver from 'use-resize-observer';
 import { Heading } from '~/components-styled/typography';
@@ -16,7 +16,7 @@ import { TooltipSeriesList } from './tooltip-series-list';
 import { TooltipData, TooltipFormatter } from './types';
 
 interface TooltipProps<T extends TimestampedValue> {
-  title: string;
+  title?: string;
   data: TooltipData<T>;
   left: number;
   top: number;
@@ -42,8 +42,9 @@ export function Tooltip<T extends TimestampedValue>({
   padding,
 }: TooltipProps<T>) {
   const viewportSize = useViewport();
-  const isMounted = useIsMounted({ delayMs: 60 });
-  const { width = 0, height = 0, ref } = useResizeObserver<HTMLDivElement>();
+  const isMounted = useIsMounted({ delayMs: 10 });
+  const ref = useRef<HTMLDivElement>(null);
+  const { width = 0, height = 0 } = useResizeObserver<HTMLDivElement>({ ref });
   const [boundingBox, boundingBoxRef] = useBoundingBox<HTMLDivElement>();
 
   const centeredLeft = pointX + padding.left - width / 2;
@@ -62,8 +63,7 @@ export function Tooltip<T extends TimestampedValue>({
   const left = Math.max(minLeft, Math.min(centeredLeft, maxLeft));
 
   return (
-    <>
-      <div ref={boundingBoxRef} />
+    <div ref={boundingBoxRef}>
       <TooltipContainer
         ref={ref}
         style={{
@@ -81,19 +81,30 @@ export function Tooltip<T extends TimestampedValue>({
           )}
         </TooltipContent>
       </TooltipContainer>
-      <Triangle left={pointX + padding.left} top={pointY} />
-    </>
+      <Triangle
+        left={pointX + padding.left}
+        top={pointY}
+        isMounted={isMounted}
+      />
+    </div>
   );
 }
 
-function Triangle({ left, top }: { left: number; top: number }) {
+interface TriangleProps {
+  left: number;
+  top: number;
+  isMounted: boolean;
+}
+
+function Triangle({ left, top, isMounted }: TriangleProps) {
   return (
     <div
       css={css({
+        opacity: isMounted ? 1 : 0,
         position: 'absolute',
         left: 0,
         top: 0,
-        transition: `transform 75ms ease-out`,
+        transition: `transform ${isMounted ? '75ms' : '0ms'} ease-out`,
         zIndex: 1010,
         pointerEvents: 'none',
       })}
@@ -132,23 +143,23 @@ const TooltipContainer = styled.div(
   })
 );
 
-interface IProps {
-  title: string;
+interface TooltipContentProps {
+  title?: string;
   onSelect?: (event: React.MouseEvent<HTMLElement>) => void;
   children?: ReactNode;
 }
 
-export function TooltipContent(props: IProps) {
+export function TooltipContent(props: TooltipContentProps) {
   const { title, onSelect, children } = props;
 
   return (
     <StyledTooltipContent onClick={onSelect}>
-      <TooltipHeading title={title} />
+      {title && <TooltipHeading title={title} />}
       {children && (
         <div
           css={css({
-            borderTop: '1px solid',
-            borderTopColor: 'border',
+            borderTop: title && '1px solid',
+            borderTopColor: title && 'border',
             py: 2,
             px: 3,
           })}

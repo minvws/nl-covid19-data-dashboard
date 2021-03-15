@@ -90,7 +90,7 @@ export type TimeSeriesChartProps<
   T extends TimestampedValue,
   C extends SeriesConfig<T>
 > = {
-  title: string; // Used for default tooltip formatting
+  title?: string; // Used for default tooltip formatting
   values: T[];
   seriesConfig: C;
   ariaLabelledBy: string;
@@ -273,12 +273,12 @@ export function TimeSeriesChart<
   }, [onSeriesClick, seriesConfig, tooltipData]);
 
   return (
-    <Box ref={sizeRef} css={css({ userSelect: 'none' })}>
+    <Box ref={sizeRef}>
       {valueAnnotation && (
         <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
       )}
 
-      <Box position="relative">
+      <Box position="relative" css={css({ userSelect: 'none' })}>
         <ChartContainer
           width={width}
           height={height}
@@ -323,7 +323,6 @@ export function TimeSeriesChart<
           <Series
             seriesConfig={seriesConfig}
             seriesList={seriesList}
-            onHover={handleHover}
             getX={getX}
             getY={getY}
             getY0={getY0}

@@ -2,8 +2,8 @@ import { throttle } from 'lodash';
 import { useEffect, useRef, useState } from 'react';
 
 export function useBoundingBox<T extends HTMLElement>() {
-  const [boundingRect, setBoundingRect] = useState<DOMRect>();
   const ref = useRef<T>(null);
+  const [boundingRect, setBoundingRect] = useState<DOMRect>();
 
   useEffect(() => {
     const handleResize = throttle(() => {

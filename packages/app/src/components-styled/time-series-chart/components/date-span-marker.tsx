@@ -13,6 +13,7 @@ const Container = styled.div`
   top: 0;
   bottom: 0;
   transform: translate(-50%, 0);
+  transition: left 75ms ease-out;
 `;
 
 interface DateSpanMarkerProps<T extends TimestampedValue> {

@@ -9,3 +9,4 @@ export * from './point-markers';
 export * from './range-trend';
 export * from './tooltip';
 export * from './timespan-annotation';
+export * from './trend-icon';
