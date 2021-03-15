@@ -10,7 +10,7 @@ import useResizeObserver from 'use-resize-observer';
 import { Box, BoxProps } from '~/components-styled/base';
 import { useSetLinkTabbability } from './use-set-link-tabbability';
 
-const Summary = styled(DisclosureButton)(
+const Summary = styled((props) => <DisclosureButton {...props} />)(
   css({
     display: 'flex',
     alignItems: 'flex-start',
@@ -78,7 +78,7 @@ const AnchorLink = styled.a(
   })
 );
 
-const Panel = styled(DisclosurePanel)(
+const Panel = styled((props) => <DisclosurePanel {...props} />)(
   css({
     display: 'block',
     opacity: 0,

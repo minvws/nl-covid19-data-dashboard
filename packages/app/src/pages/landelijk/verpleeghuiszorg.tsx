@@ -18,6 +18,7 @@ import { createSelectRegionHandler } from '~/components/choropleth/select-handle
 import { createInfectedLocationsRegionalTooltip } from '~/components/choropleth/tooltips/region/create-infected-locations-regional-tooltip';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
+import { UnderReportedTooltip } from '~/domain/underreported/under-reported-tooltip';
 import siteText from '~/locale/index';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
@@ -112,6 +113,19 @@ const NursingHomeCare: FCWithLayout<typeof getStaticProps> = ({
               fill: colors.data.underReported,
             }
           )}
+          formatTooltip={(values) => {
+            const value = values[0];
+            const isInaccurateValue =
+              value.__date >= nursinghomeDataUnderReportedValues[0];
+
+            return (
+              <UnderReportedTooltip
+                value={value}
+                isInUnderReportedRange={isInaccurateValue}
+                underReportedText={siteText.common.incomplete}
+              />
+            );
+          }}
           legendItems={[
             {
               color: colors.data.primary,
@@ -263,6 +277,19 @@ const NursingHomeCare: FCWithLayout<typeof getStaticProps> = ({
               metricProperty: 'deceased_daily',
             },
           ]}
+          formatTooltip={(values) => {
+            const value = values[0];
+            const isInaccurateValue =
+              value.__date >= nursinghomeDataUnderReportedValues[0];
+
+            return (
+              <UnderReportedTooltip
+                value={value}
+                isInUnderReportedRange={isInaccurateValue}
+                underReportedText={siteText.common.incomplete}
+              />
+            );
+          }}
           componentCallback={addBackgroundRectangleCallback(
             nursinghomeDataUnderReportedValues,
             {

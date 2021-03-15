@@ -43,6 +43,7 @@ export function DeceasedMonitorSection({
               width={width}
               values={data.values}
               ariaLabelledBy=""
+              showDateMarker
               seriesConfig={[
                 {
                   type: 'range',
@@ -62,6 +63,7 @@ export function DeceasedMonitorSection({
                   metricProperty: 'registered',
                   label: text.deceased_monitor_chart_legenda_registered,
                   color: colors.data.secondary,
+                  strokeWidth: 4,
                 },
               ]}
             />

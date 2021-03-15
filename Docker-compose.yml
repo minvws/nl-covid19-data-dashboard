@@ -1,27 +1,8 @@
 version: '3'
 
 services:
-  web-node:
+  web:
     build:
       context: .
-      dockerfile: Dockerfile.develop
-      args:
-        NEXT_PUBLIC_LOCALE: 'nl'
     ports:
       - '8080:8080'
-
-  web-nl:
-    build:
-      context: .
-      args:
-        NEXT_PUBLIC_LOCALE: 'nl'
-    ports:
-      - '8081:8080'
-
-  web-en:
-    build:
-      context: .
-      args:
-        NEXT_PUBLIC_LOCALE: 'en'
-    ports:
-      - '8082:8080'

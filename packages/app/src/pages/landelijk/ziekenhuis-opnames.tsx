@@ -1,10 +1,9 @@
-import { formatNumber, getLastFilledValue } from '@corona-dashboard/common';
+import { getLastFilledValue } from '@corona-dashboard/common';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
-import { Box } from '~/components-styled/base';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
@@ -15,7 +14,6 @@ import { PageBarScale } from '~/components-styled/page-barscale';
 import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { Text } from '~/components-styled/typography';
 import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
@@ -26,6 +24,7 @@ import { createMunicipalHospitalAdmissionsTooltip } from '~/components/choroplet
 import { createRegionHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/region/create-region-hospital-admissions-tooltip';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
+import { UnderReportedTooltip } from '~/domain/underreported/under-reported-tooltip';
 import siteText from '~/locale/index';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
@@ -37,10 +36,6 @@ import {
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { createDate } from '~/utils/createDate';
-import {
-  formatDateFromMilliseconds,
-  formatDateFromSeconds,
-} from '~/utils/formatDate';
 import {
   DateRange,
   getTrailingDateRange,
@@ -203,26 +198,12 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
           signaalwaarde={40}
           formatTooltip={(values) => {
             const value = values[0];
-            const isInrange = value.__date >= underReportedRange[0];
             return (
-              <>
-                <Box display="flex" alignItems="center" flexDirection="column">
-                  {isInrange && (
-                    <Text as="span" fontSize={0} color={colors.annotation}>
-                      ({siteText.common.incomplete})
-                    </Text>
-                  )}
-                  <Box>
-                    <Text as="span" fontWeight="bold">
-                      {`${formatDateFromMilliseconds(
-                        value.__date.getTime(),
-                        'medium'
-                      )}: `}
-                    </Text>
-                    {formatNumber(value.__value)}
-                  </Box>
-                </Box>
-              </>
+              <UnderReportedTooltip
+                value={value}
+                isInUnderReportedRange={value.__date >= underReportedRange[0]}
+                underReportedText={siteText.common.incomplete}
+              />
             );
           }}
           linesConfig={[
@@ -274,21 +255,11 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
             const isInaccurateValue = value.__date < lcpsOldDataRange[1];
 
             return (
-              <>
-                <Box display="flex" alignItems="center" flexDirection="column">
-                  {isInaccurateValue && (
-                    <Text as="span" fontSize={0} color={colors.annotation}>
-                      ({siteText.common.incomplete})
-                    </Text>
-                  )}
-                  <Box>
-                    <Text as="span" fontWeight="bold">
-                      {`${formatDateFromSeconds(value.date_unix, 'medium')}: `}
-                    </Text>
-                    {formatNumber(value.__value)}
-                  </Box>
-                </Box>
-              </>
+              <UnderReportedTooltip
+                value={value}
+                isInUnderReportedRange={isInaccurateValue}
+                underReportedText={siteText.common.incomplete}
+              />
             );
           }}
           legendItems={[
