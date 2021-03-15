@@ -12,13 +12,18 @@ import {
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { defaultStyles, TooltipWithBounds } from '@visx/tooltip';
+import { ReactNode } from 'react';
 import styled from 'styled-components';
+import { Box } from '~/components-styled/base';
 import { Heading, InlineText } from '~/components-styled/typography';
 import { VisuallyHidden } from '~/components-styled/visually-hidden';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { DataOptions, SeriesConfig, TimespanAnnotationConfig } from '../logic';
+import { AreaTrendIcon } from './area-trend';
+import { LineTrendIcon } from './line-trend';
+import { RangeTrendIcon } from './range-trend';
 
 const tooltipStyles = {
   ...defaultStyles,
@@ -149,7 +154,7 @@ export function DefaultTooltip<T extends TimestampedValue>({
         {[...config].reverse().map((x, index) => {
           if (x.type === 'range') {
             return (
-              <TooltipListItem key={index} color={x.color}>
+              <TooltipListItem key={index} config={x}>
                 <TooltipValueContainer>
                   <InlineText mr={2}>{x.label}:</InlineText>
                   <b>
@@ -168,7 +173,7 @@ export function DefaultTooltip<T extends TimestampedValue>({
             );
           } else {
             return (
-              <TooltipListItem key={index} color={x.color}>
+              <TooltipListItem key={index} config={x}>
                 <TooltipValueContainer>
                   <InlineText mr={2}>{x.label}:</InlineText>
                   <b>
@@ -194,25 +199,45 @@ const TooltipList = styled.ol`
   list-style: none;
 `;
 
-interface TooltipListItemProps {
-  color: string;
+interface TooltipListItemProps<T extends TimestampedValue> {
+  children: ReactNode;
+  config: SeriesConfig<T>[number];
 }
 
-const TooltipListItem = styled.li<TooltipListItemProps>`
-  display: flex;
-  align-items: center;
+function TooltipListItem<T extends TimestampedValue>({
+  children,
+  config,
+}: TooltipListItemProps<T>) {
+  return (
+    <Box
+      as="li"
+      spacing={2}
+      spacingHorizontal
+      display="flex"
+      alignItems="center"
+    >
+      <TrendIcon config={config} />
+      <Box flexGrow={1}>{children}</Box>
+    </Box>
+  );
+}
 
-  &::before {
-    content: '';
-    display: inline-block;
-    height: 8px;
-    width: 8px;
-    border-radius: 50%;
-    background: ${(props) => props.color};
-    margin-right: 0.5em;
-    flex-shrink: 0;
+interface TrendIconProps<T extends TimestampedValue> {
+  config: SeriesConfig<T>[number];
+}
+
+function TrendIcon<T extends TimestampedValue>({ config }: TrendIconProps<T>) {
+  switch (config.type) {
+    case 'line':
+      return <LineTrendIcon config={config} />;
+    case 'range':
+      return <RangeTrendIcon config={config} />;
+    case 'area':
+      return <AreaTrendIcon config={config} />;
+    default:
+      return null;
   }
-`;
+}
 
 const TooltipValueContainer = styled.span`
   display: flex;
