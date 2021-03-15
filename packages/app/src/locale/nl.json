@@ -2258,7 +2258,8 @@
     },
     "stock": {
       "title": "Vaccins in voorraad",
-      "description": "Dit getal laat zien hoeveel vaccins het RIVM op voorraad heeft. Een beschikbare voorraad van vijf dagen betekent bijvoorbeeld dat er genoeg vaccins klaar liggen in de opslag voor de mensen die in de vijf dagen daarna worden geprikt, ook als er onverwacht geen nieuwe vaccins worden geleverd."
+      "description": "Dit getal laat zien hoeveel vaccins het RIVM op voorraad heeft. Een beschikbare voorraad van vijf dagen betekent bijvoorbeeld dat er genoeg vaccins klaar liggen in de opslag voor de mensen die in de vijf dagen daarna worden geprikt, ook als er onverwacht geen nieuwe vaccins worden geleverd.",
+      "per_vaccine": "{{amount}} {{label}} prikken"
     }
   },
   "editorial_detail": {
