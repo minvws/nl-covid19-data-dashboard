@@ -4,9 +4,8 @@ import { shuffle } from 'lodash';
 import { useEffect, useState } from 'react';
 import { Box } from '~/components-styled/base';
 import { InlineText, Text } from '~/components-styled/typography';
-import siteText from '~/locale';
+import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
-import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { useIsMountedRef } from '~/utils/use-is-mounted-ref';
 
@@ -19,6 +18,8 @@ interface VaccineTickerProps {
 }
 
 export function VaccineTicker({ data }: VaccineTickerProps) {
+  const { siteText, formatPercentage, formatNumber } = useIntl();
+
   const isMountedRef = useIsMountedRef();
   const tickDuration = data.seconds_per_dose * 1000;
   const tickCount = Math.floor(data.doses_per_second * 60);

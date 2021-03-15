@@ -5,7 +5,7 @@ import { SEOHead } from '~/components-styled/seo-head';
 import { AppFooter } from '~/components-styled/layout/app-footer';
 import { AppHeader } from '~/components-styled/layout/app-header';
 import { SkipLinkMenu } from '~/components-styled/skip-link-menu';
-import siteText from '~/locale/index';
+import { useIntl } from '~/intl';
 
 interface LayoutProps {
   title: string;
@@ -42,8 +42,9 @@ export function getDefaultLayout() {
     page: React.ReactNode,
     pageProps: T
   ) {
+    const { siteText } = useIntl();
     const lastGenerated = pageProps.lastGenerated;
-    return getLayout(siteText.metadata, lastGenerated)(<>{page}</>);
+    return getLayout(siteText?.metadata, lastGenerated)(<>{page}</>);
   };
 }
 

@@ -2,7 +2,7 @@ import { Municipal } from '@corona-dashboard/common';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 
-import siteText from '~/locale/index';
+import { useIntl } from '~/intl';
 import { assert } from '../assert';
 import { colors } from '~/style/theme';
 import { BarChartValue } from '~/components-styled/bar-chart/bar-chart-coordinates';

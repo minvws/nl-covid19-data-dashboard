@@ -20,7 +20,7 @@ import { SidebarMetric } from '~/components-styled/sidebar-metric';
 import { Text } from '~/components-styled/typography';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { getLayout as getSiteLayout } from '~/domain/layout/layout';
-import siteText from '~/locale/index';
+import { useIntl } from '~/intl';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { SafetyRegionComboBox } from './components/safety-region-combo-box';
 import { EscalationLevelInfoLabel } from '~/components-styled/escalation-level';

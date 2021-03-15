@@ -1,6 +1,6 @@
 import { AnchorTile } from '~/components-styled/anchor-tile';
 import { Text } from '~/components-styled/typography';
-import siteText from '~/locale/index';
+import { useIntl } from '~/intl';
 
 const text = siteText.gedrag_common.meer_onderzoeksresultaten;
 

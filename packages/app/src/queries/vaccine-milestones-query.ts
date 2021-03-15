@@ -1,15 +1,18 @@
-import { targetLanguage } from '~/locale';
+import { GetStaticPropsContext } from 'next';
 
-export const vaccineMilestonesQuery = `
+export function getVaccineMilestonesQuery() {
+  const locale = 'nl';
+  return `
   *[_type=='vaccinationsPage']{
-    "title": title.${targetLanguage},
-    "description": description.${targetLanguage},
+    "title": title.${locale},
+    "description": description.${locale},
     "milestones": [...milestones | order(date)[] {
-      "title": title.${targetLanguage},
+      "title": title.${locale},
       date,
     }],
     "expectedMilestones": [...expected[]{
-      "item": ${targetLanguage}
+      "item": ${locale}
     }] 
   }[0]
 `;
+}

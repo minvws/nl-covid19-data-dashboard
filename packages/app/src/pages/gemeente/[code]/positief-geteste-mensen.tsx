@@ -24,17 +24,14 @@ import {
   createGetContent,
   getGmData,
   getLastGeneratedDate,
-  getText,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
-import { formatDateFromMilliseconds } from '~/utils/formatDate';
-import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 export { getStaticPaths } from '~/static-paths/gm';
+import { useIntl } from '~/intl';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getText,
   getGmData,
   createGetChoroplethData({
     gm: ({ tested_overall }) => ({ tested_overall }),
@@ -45,8 +42,9 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { data, choropleth, municipalityName, text: siteText, content } = props;
+  const { data, choropleth, municipalityName, content } = props;
 
+  const { siteText, formatDateFromMilliseconds, formatNumber } = useIntl();
   const text = siteText.gemeente_positief_geteste_personen;
   const lastValue = data.tested_overall.last_value;
 

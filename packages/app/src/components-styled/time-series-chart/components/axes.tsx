@@ -12,8 +12,8 @@ import { ScaleLinear } from 'd3-scale';
 import { memo, Ref, useCallback } from 'react';
 import { colors } from '~/style/theme';
 import { createDate } from '~/utils/createDate';
-import { formatDateFromSeconds } from '~/utils/formatDate';
 import { Bounds } from '../logic';
+import { useIntl } from '~/intl';
 
 type AxesProps = {
   bounds: Bounds;
@@ -52,6 +52,8 @@ export const Axes = memo(function Axes({
 }: AxesProps) {
   const [startUnix, endUnix] = xScale.domain();
 
+  const { formatDateFromSeconds } = useIntl();
+
   const formatXAxis = useCallback(
     (date_unix: number) => {
       const startYear = createDate(startUnix).getFullYear();
@@ -63,7 +65,7 @@ export const Axes = memo(function Axes({
         ? formatDateFromSeconds(date_unix, 'axis-with-year')
         : formatDateFromSeconds(date_unix, 'axis');
     },
-    [startUnix, endUnix]
+    [startUnix, endUnix, formatDateFromSeconds]
   );
 
   return (

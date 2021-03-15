@@ -1,6 +1,6 @@
 import { ComboBox } from '~/components-styled/combo-box/combo-box';
 import safetyRegions from '~/data/index';
-import siteText from '~/locale/index';
+import { useIntl } from '~/intl';
 
 export function SafetyRegionComboBox({
   onSelect,

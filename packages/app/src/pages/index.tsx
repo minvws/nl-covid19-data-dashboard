@@ -29,7 +29,7 @@ import { TopicalChoroplethContainer } from '~/domain/topical/topical-choropleth-
 import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
 import { TopicalVaccineTile } from '~/domain/topical/topical-vaccine-tile';
-import { topicalPageQuery } from '~/queries/topical-page-query';
+import { getTopicalPageQuery } from '~/queries/topical-page-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
@@ -41,7 +41,7 @@ import { colors } from '~/style/theme';
 import { useIntl } from '~/intl';
 
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { getDataSitemap } from '~/domain/topical/sitemap/utils';
+import { useDataSitemap } from '~/domain/topical/sitemap/utils';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 export const getStaticProps = createGetStaticProps(
@@ -57,7 +57,7 @@ export const getStaticProps = createGetStaticProps(
     articles: ArticleSummary[];
     editorial: EditorialSummary;
     highlight: HighlightTeaserProps;
-  }>(topicalPageQuery),
+  }>(getTopicalPageQuery),
   () => {
     const data = getNlData();
 
@@ -83,7 +83,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
 
   const dataInfectedTotal = data.tested_overall;
   const dataHospitalIntake = data.hospital_nice;
-  const dataSitemap = getDataSitemap('landelijk');
+  const dataSitemap = useDataSitemap('landelijk');
 
   const { siteText, formatDate } = useIntl();
   const text = siteText.nationaal_actueel;

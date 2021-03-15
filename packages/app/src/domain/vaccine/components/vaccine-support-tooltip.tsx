@@ -7,24 +7,23 @@ import { Spacer } from '~/components-styled/base';
 import { SeriesConfig } from '~/components-styled/time-series-chart';
 import { Heading } from '~/components-styled/typography';
 import { VisuallyHidden } from '~/components-styled/visually-hidden';
-import { Locale } from '~/locale';
-import { formatDateFromSeconds } from '~/utils/formatDate';
+import { useIntl } from '~/intl';
 
 export function VaccineSupportTooltip({
-  locale,
   value,
   valueKey: __valueKey,
   config,
 }: {
-  locale: Locale;
   value: NlVaccineSupportValue;
   valueKey: keyof NlVaccineSupportValue;
   config: SeriesConfig<NlVaccineSupportValue>;
 }) {
+  const { siteText, formatDateFromSeconds } = useIntl();
+
   const dateStartString = formatDateFromSeconds(value.date_start_unix, 'axis');
   const dateEndString = formatDateFromSeconds(value.date_end_unix, 'axis');
 
-  const text = locale.vaccinaties;
+  const text = siteText.vaccinaties;
 
   return (
     <section>

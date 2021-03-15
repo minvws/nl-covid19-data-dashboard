@@ -21,10 +21,6 @@ import {
 import { Text as StyledText } from '~/components-styled/typography';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
 import theme from '~/style/theme';
-import {
-  formatDateFromMilliseconds,
-  formatDateFromSeconds,
-} from '~/utils/formatDate';
 import { TimeframeOption } from '~/utils/timeframe';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { LegendShape } from '../legend';
@@ -43,6 +39,7 @@ import { useDomains } from './hooks/use-domains';
 import { useTooltip } from './hooks/use-tooltip';
 import { useTrendConfigs } from './hooks/use-trend-configs';
 import { TimestampedTrendValue } from './logic';
+import { useIntl } from '~/intl';
 
 const NUM_TICKS = 3;
 
@@ -98,16 +95,18 @@ type AreaChartProps<T extends TimestampedValue, K extends TimestampedValue> = {
   divider?: DividerConfig;
 };
 
-const dateToValue = (d: { valueOf(): number }) => d.valueOf() / 1000;
-const formatXAxis = (date: Date | { valueOf(): number }) =>
-  formatDateFromSeconds(dateToValue(date), 'axis');
-const formatYAxisFn = (y: number) => formatNumber(y / 1000000);
-const formatYAxisPercentageFn = (y: number) => `${formatPercentage(y)}%`;
-
 export function AreaChart<
   T extends TimestampedValue,
   K extends TimestampedValue
 >(props: AreaChartProps<T, K>) {
+  const { formatDateFromSeconds } = useIntl();
+
+  const dateToValue = (d: { valueOf(): number }) => d.valueOf() / 1000;
+  const formatXAxis = (date: Date | { valueOf(): number }) =>
+    formatDateFromSeconds(dateToValue(date), 'axis');
+  const formatYAxisFn = (y: number) => formatNumber(y / 1000000);
+  const formatYAxisPercentageFn = (y: number) => `${formatPercentage(y)}%`;
+
   const {
     trends,
     areas,
@@ -118,7 +117,7 @@ export function AreaChart<
     signaalwaarde,
     isPercentage = false,
     divider,
-    formatTooltip = formatDefaultTooltip,
+    formatTooltip = FormatDefaultTooltip,
   } = props;
   const {
     tooltipData,
@@ -337,13 +336,14 @@ function DividersUnmemoized(props: DividersProps) {
   );
 }
 
-function formatDefaultTooltip<
+function FormatDefaultTooltip<
   T extends TimestampedTrendValue,
   K extends TimestampedTrendValue
 >(values: HoverPoint<T | K>[], isPercentage?: boolean) {
   if (!values.length) {
     return null;
   }
+  const { formatDateFromMilliseconds, formatDateFromSeconds } = useIntl();
 
   const data = values[0].data;
 

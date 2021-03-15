@@ -10,7 +10,7 @@ import { Box } from '~/components-styled/base/box';
 import { TileList } from '~/components-styled/tile-list';
 import { targetLanguage } from '~/locale/index';
 
-import text from '~/locale';
+import { useIntl } from '~/intl';
 import {
   getNlData,
   createGetContent,

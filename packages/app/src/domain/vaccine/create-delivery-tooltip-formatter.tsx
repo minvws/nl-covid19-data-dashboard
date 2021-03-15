@@ -11,8 +11,7 @@ import styled from 'styled-components';
 import { HoverPoint } from '~/components-styled/area-chart/components/marker';
 import { TimestampedTrendValue } from '~/components-styled/area-chart/logic';
 import { InlineText, Text } from '~/components-styled/typography';
-import { AllLanguages } from '~/locale/APP_LOCALE';
-import { formatDateFromSeconds } from '~/utils/formatDate';
+import { useIntl } from '~/intl';
 
 export type TooltipValue = (
   | NlVaccineDeliveryValue
@@ -22,16 +21,15 @@ export type TooltipValue = (
 ) &
   TimestampedTrendValue;
 
-export function createDeliveryTooltipFormatter(text: AllLanguages) {
+export function createDeliveryTooltipFormatter() {
   return (values: HoverPoint<TooltipValue>[]) => {
-    return formatVaccinationsTooltip(values, text);
+    return FormatVaccinationsTooltip(values);
   };
 }
 
-function formatVaccinationsTooltip(
-  values: HoverPoint<TooltipValue>[],
-  text: AllLanguages
-) {
+function FormatVaccinationsTooltip(values: HoverPoint<TooltipValue>[]) {
+  const { siteText, formatDateFromSeconds } = useIntl();
+
   if (!values.length) {
     return null;
   }
@@ -58,7 +56,7 @@ function formatVaccinationsTooltip(
           <Fragment key={value.label}>
             <TooltipListItem color={value.color ?? 'black'}>
               <TooltipValueContainer>
-                {formatLabel(value.label, text)}:{' '}
+                {formatLabel(value.label, siteText)}:{' '}
                 <strong>{formatValue(value)}</strong>
               </TooltipValueContainer>
             </TooltipListItem>
@@ -70,19 +68,22 @@ function formatVaccinationsTooltip(
              * in the array.
              */}
             {value.label ===
-              text.vaccinaties.data.vaccination_chart.delivered && (
+              siteText.vaccinaties.data.vaccination_chart.delivered && (
               <TooltipListItem>
                 <InlineText mt={2} fontWeight="bold">
-                  {text.vaccinaties.data.vaccination_chart.doses_administered}
+                  {
+                    siteText.vaccinaties.data.vaccination_chart
+                      .doses_administered
+                  }
                 </InlineText>
               </TooltipListItem>
             )}
             {value.label ===
-              text.vaccinaties.data.vaccination_chart.estimated && (
+              siteText.vaccinaties.data.vaccination_chart.estimated && (
               <TooltipListItem>
                 <InlineText mt={2} fontWeight="bold">
                   {
-                    text.vaccinaties.data.vaccination_chart
+                    siteText.vaccinaties.data.vaccination_chart
                       .doses_administered_estimated
                   }
                 </InlineText>
@@ -95,7 +96,7 @@ function formatVaccinationsTooltip(
   );
 }
 
-function formatLabel(labelKey: string | undefined, text: AllLanguages) {
+function formatLabel(labelKey: string | undefined, text: any) {
   const labelText = labelKey
     ? (text.vaccinaties.data.vaccination_chart.product_names as any)[labelKey]
     : undefined;

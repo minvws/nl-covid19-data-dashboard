@@ -15,7 +15,7 @@ import { Legend } from '~/components-styled/legend';
 import { Select } from '~/components-styled/select';
 import { InlineText } from '~/components-styled/typography';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
-import siteText from '~/locale';
+import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { formatDate } from '~/utils/formatDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';

@@ -6,7 +6,7 @@ import { Box } from '~/components-styled/base';
 import { Tile } from '~/components-styled/tile';
 import { PercentageBar } from '~/components-styled/percentage-bar';
 import { Heading } from '~/components-styled/typography';
-import siteText from '~/locale/index';
+import { useIntl } from '~/intl';
 import {
   NationalBehaviorValue,
   RegionalBehaviorValue,

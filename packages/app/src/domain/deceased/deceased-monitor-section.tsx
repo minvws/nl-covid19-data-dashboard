@@ -6,7 +6,7 @@ import { ParentSize } from '@visx/responsive';
 import { AnchorTile } from '~/components-styled/anchor-tile';
 import { ChartTile } from '~/components-styled/chart-tile';
 import { TimeSeriesChart } from '~/components-styled/time-series-chart';
-import siteText from '~/locale/index';
+import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 
 const text = siteText.section_sterftemonitor;

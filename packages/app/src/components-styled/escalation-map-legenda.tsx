@@ -9,7 +9,7 @@ import {
 import { getDataThresholds } from '~/components/choropleth/legenda/utils';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { regionGeo } from '~/components/choropleth/topology';
-import { default as siteText, default as text } from '~/locale';
+import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { Heading, InlineText } from './typography';
 
@@ -25,6 +25,8 @@ export function EscalationMapLegenda<K extends RegionsMetricName>(
   props: EscalationMapLegendaProps<K>
 ) {
   const { metricName, metricProperty, data } = props;
+
+  const { siteText } = useIntl();
 
   const { getChoroplethValue, hasData } = useSafetyRegionData(
     regionGeo,
@@ -86,11 +88,11 @@ export function EscalationMapLegenda<K extends RegionsMetricName>(
             {info.amount
               ? replaceVariablesInText(
                   info.amount === 1
-                    ? text.escalatie_niveau.legenda.regio_singular
-                    : text.escalatie_niveau.legenda.regio_plural,
+                    ? siteText.escalatie_niveau.legenda.regio_singular
+                    : siteText.escalatie_niveau.legenda.regio_plural,
                   { amount: info.amount }
                 )
-              : text.escalatie_niveau.legenda.geen_regio}
+              : siteText.escalatie_niveau.legenda.geen_regio}
           </EscalationBarLegenda>
         </Box>
       ))}

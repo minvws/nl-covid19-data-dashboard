@@ -1,8 +1,7 @@
 import css from '@styled-system/css';
 import { scaleQuantile, scaleThreshold } from 'd3-scale';
 import { Box } from '~/components-styled/base';
-import siteText from '~/locale/index';
-import { formatNumber } from '~/utils/formatNumber';
+import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { useDynamicScale } from '~/utils/useDynamicScale';
 import { VisuallyHidden } from './visually-hidden';
@@ -36,6 +35,7 @@ export function BarScale({
   showValue,
 }: BarscaleProps) {
   const scale = useDynamicScale(value, min, max);
+  const { siteText, formatNumber } = useIntl();
 
   const text = siteText.common.barScale;
 

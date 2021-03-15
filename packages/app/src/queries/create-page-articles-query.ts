@@ -1,5 +1,3 @@
-import { targetLanguage } from '~/locale';
-
 type ArticlePageSchema =
   | 'deceasedPage'
   | 'behaviorPage'
@@ -12,9 +10,13 @@ type ArticlePageSchema =
   | 'escalationLevelPage';
 
 export function createPageArticlesQuery(schemaName: ArticlePageSchema) {
-  const query = `*[_type == '${schemaName}']{"articles":[...articles[]->{"title":title.${targetLanguage},
+  //@TODO!
+  // THIS NEEDS TO COME FROM CONTEXT! I DON'T WANT TO BLOCK MY PR PROGRESS ON FIGURING THIS OUT ATM.
+  const locale = 'nl';
+
+  const query = `*[_type == '${schemaName}']{"articles":[...articles[]->{"title":title.${locale},
   slug,
-  "summary":summary.${targetLanguage},
+  "summary":summary.${locale},
   "cover": {
     ...cover,
     "asset": cover.asset->

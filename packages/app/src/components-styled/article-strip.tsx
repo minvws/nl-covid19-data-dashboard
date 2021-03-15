@@ -5,7 +5,7 @@ import { Tile } from '~/components-styled/tile';
 import { SanityImage } from '~/components-styled/cms/sanity-image';
 import { Heading, Text } from '~/components-styled/typography';
 import { getImageProps } from '~/lib/sanity';
-import siteText from '~/locale';
+import { useIntl } from '~/intl';
 import { ImageBlock } from '~/types/cms';
 import { Link } from '~/utils/link';
 import { ArticleSummary } from './article-teaser';

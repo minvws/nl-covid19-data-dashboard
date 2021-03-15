@@ -23,7 +23,7 @@ import styled from 'styled-components';
 import { Box } from '~/components-styled/base';
 import { Legend, LegendItem } from '~/components-styled/legend';
 import { InlineText } from '~/components-styled/typography';
-import siteText from '~/locale';
+import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';

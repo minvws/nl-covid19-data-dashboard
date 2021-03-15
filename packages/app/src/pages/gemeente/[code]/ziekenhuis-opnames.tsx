@@ -18,7 +18,7 @@ import { createMunicipalHospitalAdmissionsTooltip } from '~/components/choroplet
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getMunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { UnderReportedTooltip } from '~/domain/underreported/under-reported-tooltip';
-import siteText from '~/locale/index';
+import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {

@@ -17,7 +17,7 @@ import { createRegionElderlyAtHomeTooltip } from '~/components/choropleth/toolti
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import { UnderReportedTooltip } from '~/domain/underreported/under-reported-tooltip';
-import siteText from '~/locale/index';
+import { useIntl } from '~/intl';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,

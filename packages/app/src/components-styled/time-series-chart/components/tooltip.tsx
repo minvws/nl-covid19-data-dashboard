@@ -15,9 +15,9 @@ import { defaultStyles, TooltipWithBounds } from '@visx/tooltip';
 import styled from 'styled-components';
 import { Heading, InlineText } from '~/components-styled/typography';
 import { VisuallyHidden } from '~/components-styled/visually-hidden';
-import { formatDateFromSeconds } from '~/utils/formatDate';
-import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { useBreakpoints } from '~/utils/useBreakpoints';
+import { useIntl } from '~/intl';
+
 import { DataOptions, SeriesConfig, TimespanAnnotationConfig } from '../logic';
 
 const tooltipStyles = {
@@ -136,6 +136,42 @@ export function DefaultTooltip<T extends TimestampedValue>({
   options,
   timespanAnnotation: __timespanAnnotation,
 }: DefaultTooltipProps<T>) {
+  const { formatDateFromSeconds, formatPercentage, formatNumber } = useIntl();
+
+  /**
+   * @TODO move this to a more common location
+   */
+  function getDateStringFromValue(value: TimestampedValue) {
+    if (isDateValue(value)) {
+      return formatDateFromSeconds(value.date_unix);
+    } else if (isDateSpanValue(value)) {
+      const dateStartString = formatDateFromSeconds(
+        value.date_start_unix,
+        'axis'
+      );
+      const dateEndString = formatDateFromSeconds(value.date_end_unix, 'axis');
+
+      return `${dateStartString} - ${dateEndString}`;
+    }
+  }
+
+  /**
+   * @TODO move this to a more common location
+   */
+  function getValueStringForKey<T extends TimestampedValue>(
+    value: T,
+    key: keyof T,
+    isPercentage?: boolean
+  ) {
+    const numberValue = (value[key] as unknown) as number | null;
+
+    return numberValue
+      ? isPercentage
+        ? `${formatPercentage(numberValue)}%`
+        : formatNumber(numberValue)
+      : '';
+  }
+
   const dateString = getDateStringFromValue(value);
 
   return (
@@ -219,37 +255,3 @@ const TooltipValueContainer = styled.span`
   width: 100%;
   justify-content: space-between;
 `;
-
-/**
- * @TODO move this to a more common location
- */
-export function getDateStringFromValue(value: TimestampedValue) {
-  if (isDateValue(value)) {
-    return formatDateFromSeconds(value.date_unix);
-  } else if (isDateSpanValue(value)) {
-    const dateStartString = formatDateFromSeconds(
-      value.date_start_unix,
-      'axis'
-    );
-    const dateEndString = formatDateFromSeconds(value.date_end_unix, 'axis');
-
-    return `${dateStartString} - ${dateEndString}`;
-  }
-}
-
-/**
- * @TODO move this to a more common location
- */
-export function getValueStringForKey<T extends TimestampedValue>(
-  value: T,
-  key: keyof T,
-  isPercentage?: boolean
-) {
-  const numberValue = (value[key] as unknown) as number | null;
-
-  return numberValue
-    ? isPercentage
-      ? `${formatPercentage(numberValue)}%`
-      : formatNumber(numberValue)
-    : '';
-}

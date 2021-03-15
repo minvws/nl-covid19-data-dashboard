@@ -7,16 +7,14 @@ import { KpiValue } from '~/components-styled/kpi-value';
 import { Tile } from '~/components-styled/tile';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components-styled/typography';
-import siteText, { Locale } from '~/locale';
+import { useIntl } from '~/intl';
 import { createDate } from '~/utils/createDate';
-import { formatDate } from '~/utils/formatDate';
-import { formatPercentage } from '~/utils/formatNumber';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { VaccineTicker } from './components/vaccine-ticker';
 import { VaccineAdministrationsOverTimeChart } from './vaccine-administrations-over-time-chart';
 
 interface VaccinePageIntroductionProps {
-  text: Locale['vaccinaties'];
+  text: any;
   data: National;
 }
 
@@ -24,6 +22,8 @@ export function VaccinePageIntroduction({
   text,
   data,
 }: VaccinePageIntroductionProps) {
+  const { siteText, formatPercentage, formatDate } = useIntl();
+
   const roundedMillion =
     Math.floor(
       (data.vaccine_administered_total.last_value.estimated / 1_000_000) * 10

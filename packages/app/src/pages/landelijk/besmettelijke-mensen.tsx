@@ -10,7 +10,7 @@ import { AreaChart } from '~/components/charts/index';
 import { SEOHead } from '~/components-styled/seo-head';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
-import siteText from '~/locale/index';
+import { useIntl } from '~/intl';
 import { getNlData, getLastGeneratedDate } from '~/static-props/get-data';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import { getLastFilledValue } from '@corona-dashboard/common';

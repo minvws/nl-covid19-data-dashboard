@@ -52,6 +52,9 @@ export function useIntl() {
   const { locale } = useRouter();
   const { messages } = useContext(IntlContext);
 
+  console.log('useIntl');
+  console.log({ locale });
+
   // Number formatting
   const NumberFormat = new Intl.NumberFormat(locale);
 

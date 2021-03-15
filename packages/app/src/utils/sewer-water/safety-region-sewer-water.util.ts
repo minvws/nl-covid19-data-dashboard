@@ -1,5 +1,5 @@
 import { BarChartValue } from '~/components-styled/bar-chart/bar-chart-coordinates';
-import siteText from '~/locale/index';
+import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { Regionaal } from '@corona-dashboard/common';
 import { formatDateFromSeconds } from '~/utils/formatDate';

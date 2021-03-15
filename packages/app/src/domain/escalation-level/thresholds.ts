@@ -1,6 +1,6 @@
 import { CategoricalBarScaleCategory } from '~/components-styled/categorical-bar-scale';
 import { colors } from '~/style/theme';
-import siteText from '~/locale/index';
+import { useIntl } from '~/intl';
 
 const levels = siteText.escalatie_niveau.types;
 

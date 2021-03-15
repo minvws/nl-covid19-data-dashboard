@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { ArrowIconLeft } from '~/components-styled/arrow-icon';
 import { Box } from '~/components-styled/base';
 import { MaxWidth } from '~/components-styled/max-width';
-import siteText from '~/locale/index';
+import { useIntl } from '~/intl';
 import { LinkWithIcon } from '../link-with-icon';
 
 interface AppContentProps {

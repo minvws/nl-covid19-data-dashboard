@@ -13,7 +13,7 @@ import { Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { UnderReportedTooltip } from '~/domain/underreported/under-reported-tooltip';
-import siteText from '~/locale/index';
+import { useIntl } from '~/intl';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import { getLastGeneratedDate, getVrData } from '~/static-props/get-data';
 import { colors } from '~/style/theme';

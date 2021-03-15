@@ -4,7 +4,7 @@ import Gelijk from '~/assets/gelijk.svg';
 import PijlOmhoog from '~/assets/pijl-omhoog.svg';
 import PijlOmlaag from '~/assets/pijl-omlaag.svg';
 import { BehaviorTrendType } from '../behavior-types';
-import siteText from '~/locale/index';
+import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 const commonText = siteText.gedrag_common;
 

@@ -6,7 +6,7 @@ import { Box, Spacer } from '~/components-styled/base';
 import { Tile } from '~/components-styled/tile';
 import { Select } from '~/components-styled/select';
 import { Heading } from '~/components-styled/typography';
-import siteText from '~/locale/index';
+import { useIntl } from '~/intl';
 import {
   NationalBehaviorValue,
   RegionalBehaviorValue,

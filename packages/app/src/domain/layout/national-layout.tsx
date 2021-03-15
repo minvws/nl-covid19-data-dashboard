@@ -21,7 +21,7 @@ import {
 import { AppContent } from '~/components-styled/layout/app-content';
 import { SidebarMetric } from '~/components-styled/sidebar-metric';
 import { Layout } from '~/domain/layout/layout';
-import siteText from '~/locale/index';
+import { useIntl } from '~/intl';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { Box } from '~/components-styled/base';
 

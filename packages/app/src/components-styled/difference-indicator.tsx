@@ -18,9 +18,7 @@ import {
 import IconGelijk from '~/assets/gelijk.svg';
 import IconUp from '~/assets/pijl-omhoog.svg';
 import IconDown from '~/assets/pijl-omlaag.svg';
-import siteText from '~/locale/index';
-
-const text = siteText.toe_en_afname;
+import { useIntl } from '~/intl';
 
 interface DifferenceIndicatorProps {
   value: DifferenceDecimal | DifferenceInteger;
@@ -40,14 +38,14 @@ export function DifferenceIndicator(props: DifferenceIndicatorProps) {
   } = props;
 
   if (context === 'sidebar') {
-    return renderSidebarIndicator(value);
+    return RenderSidebarIndicator(value);
   }
 
   if (context === 'inline') {
-    return renderInlineIndicator(value, isDecimal, differenceFractionDigits);
+    return RenderInlineIndicator(value, isDecimal, differenceFractionDigits);
   }
 
-  return renderTileIndicator(
+  return RenderTileIndicator(
     value,
     isDecimal,
     staticTimespan,
@@ -55,7 +53,7 @@ export function DifferenceIndicator(props: DifferenceIndicatorProps) {
   );
 }
 
-function renderSidebarIndicator(value: DifferenceDecimal | DifferenceInteger) {
+function RenderSidebarIndicator(value: DifferenceDecimal | DifferenceInteger) {
   const { difference } = value;
 
   if (difference > 0) {
@@ -87,11 +85,14 @@ function renderSidebarIndicator(value: DifferenceDecimal | DifferenceInteger) {
   );
 }
 
-function renderInlineIndicator(
+function RenderInlineIndicator(
   value: DifferenceDecimal | DifferenceInteger,
   isDecimal?: boolean,
   differenceFractionDigits?: number
 ) {
+  const { siteText } = useIntl();
+  const text = siteText.toe_en_afname;
+
   const { difference } = value;
 
   const differenceFormattedString = isDecimal
@@ -136,12 +137,15 @@ function renderInlineIndicator(
   );
 }
 
-function renderTileIndicator(
+function RenderTileIndicator(
   value: DifferenceDecimal | DifferenceInteger,
   isDecimal?: boolean,
   staticTimespan?: string,
   maximumFractionDigits?: number
 ) {
+  const { siteText } = useIntl();
+  const text = siteText.toe_en_afname;
+
   const { difference } = value;
 
   const differenceFormattedString = isDecimal

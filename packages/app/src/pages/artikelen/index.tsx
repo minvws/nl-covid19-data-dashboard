@@ -3,7 +3,7 @@ import { Box } from '~/components-styled/base';
 import { MaxWidth } from '~/components-styled/max-width';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
-import siteText, { targetLanguage } from '~/locale';
+import { useIntl } from '~/intl';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetContent,

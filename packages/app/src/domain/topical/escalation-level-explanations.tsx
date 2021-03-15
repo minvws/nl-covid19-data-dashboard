@@ -5,7 +5,7 @@ import { CollapsibleSection } from '~/components-styled/collapsible';
 import { EscalationLevelInfoLabel } from '~/components-styled/escalation-level';
 import { LinkWithIcon } from '~/components-styled/link-with-icon';
 import { Text } from '~/components-styled/typography';
-import siteText from '~/locale';
+import { useIntl } from '~/intl';
 import { EscalationLevel } from '../restrictions/type';
 
 type EscalationLevelExplanationProps = {
@@ -28,6 +28,8 @@ function EscalationLevelExplanation(props: EscalationLevelExplanationProps) {
 }
 
 export function EscalationLevelExplanations() {
+  const { siteText } = useIntl();
+
   return (
     <CollapsibleSection
       summary={siteText.escalatie_niveau.tile_title}

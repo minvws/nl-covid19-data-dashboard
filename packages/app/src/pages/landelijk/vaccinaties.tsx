@@ -32,25 +32,21 @@ import {
 import { useVaccineDeliveryData } from '~/domain/vaccine/use-vaccine-delivery-data';
 import { useVaccineNames } from '~/domain/vaccine/use-vaccine-names';
 import { VaccinePageIntroduction } from '~/domain/vaccine/vaccine-page-introduction';
-import siteText from '~/locale/index';
+import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
-import { vaccineMilestonesQuery } from '~/queries/vaccine-milestones-query';
+import { getVaccineMilestonesQuery } from '~/queries/vaccine-milestones-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
   getNlData,
-  getText,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
-import { formatDateFromSeconds } from '~/utils/formatDate';
-import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   getNlData,
-  getText,
   createGetContent<{
     milestones: MilestoneViewProps;
     highlight: {
@@ -58,17 +54,17 @@ export const getStaticProps = createGetStaticProps(
     };
   }>(
     `{
-      "milestones": ${vaccineMilestonesQuery},
+      "milestones": ${getVaccineMilestonesQuery},
       "highlight": ${createPageArticlesQuery('vaccinationsPage')}
     }`
   )
 );
 
 const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
-  text: siteText,
   content,
   data,
 }) => {
+  const { siteText } = useIntl();
   const text = siteText.vaccinaties;
   const [selectedTab, setSelectedTab] = useState(
     text.gezette_prikken.tab_first.title
@@ -423,7 +419,6 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                 ]}
                 formatTooltip={({ value, valueKey, config }) => (
                   <VaccineSupportTooltip
-                    locale={siteText}
                     value={value}
                     valueKey={valueKey}
                     config={config}
@@ -468,6 +463,7 @@ interface VaccineAdministeredProps {
 
 function VaccineAdministeredItem(props: VaccineAdministeredProps) {
   const { value, date, description, isReported } = props;
+  const { siteText } = useIntl();
 
   return (
     <Text fontWeight="bold">

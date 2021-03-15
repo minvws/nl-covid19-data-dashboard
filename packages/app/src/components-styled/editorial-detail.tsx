@@ -3,7 +3,7 @@ import { Box } from '~/components-styled/base';
 import { ContentBlock } from '~/components-styled/cms/content-block';
 import { ContentImage } from '~/components-styled/cms/content-image';
 import { Heading } from '~/components-styled/typography';
-import siteText from '~/locale';
+import { useIntl } from '~/intl';
 import { Editorial } from '~/types/cms';
 import { RichContent } from './cms/rich-content';
 import { LinkWithIcon } from './link-with-icon';

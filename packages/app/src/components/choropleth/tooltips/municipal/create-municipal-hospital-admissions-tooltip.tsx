@@ -8,7 +8,7 @@ import { InlineText } from '~/components-styled/typography';
 import { MunicipalitySelectionHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
 import { TooltipSubject } from '~/components/choropleth/tooltips/tooltip-subject';
-import siteText from '~/locale/index';
+import { useIntl } from '~/intl';
 import { formatNumber } from '~/utils/formatNumber';
 
 export const createMunicipalHospitalAdmissionsTooltip = (

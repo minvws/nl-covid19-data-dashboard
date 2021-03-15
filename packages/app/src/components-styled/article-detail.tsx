@@ -3,7 +3,7 @@ import { ArrowIconLeft } from '~/components-styled/arrow-icon';
 import { Box } from '~/components-styled/base';
 import { ContentBlock } from '~/components-styled/cms/content-block';
 import { Heading } from '~/components-styled/typography';
-import siteText from '~/locale';
+import { useIntl } from '~/intl';
 import { Article } from '~/types/cms';
 import { ContentImage } from './cms/content-image';
 import { RichContent } from './cms/rich-content';

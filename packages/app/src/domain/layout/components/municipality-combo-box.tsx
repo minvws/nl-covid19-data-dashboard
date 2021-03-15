@@ -1,6 +1,6 @@
 import { ComboBox } from '~/components-styled/combo-box/combo-box';
 import municipalities from '~/data/municipalSearchData';
-import siteText from '~/locale/index';
+import { useIntl } from '~/intl';
 
 export function MunicipalityComboBox({
   onSelect,
