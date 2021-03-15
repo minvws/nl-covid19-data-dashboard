@@ -1,5 +1,14 @@
 import client from 'part:@sanity/base/client';
 
+/**
+ * This migration first checks if any 'veelgesteldeVragenGroups' documents exist, if not, it creates one called 'Algemeen/General'.
+ * The first of the 'veelgesteldeVragenGroups' documents is then retrieved.
+ *
+ * Then it changes the '_type' field for all 'veelgesteldeVragen.question' documents from 'collapsible' to 'faqQuestion' and
+ * assigns the veelgesteldeVragenGroups document to the 'group' field.
+ *
+ */
+
 const fetchFAQ = () => client.fetch(`*[_type == 'veelgesteldeVragen']`);
 const fetchDefaultGroup = () =>
   client.fetch(`*[_type == 'veelgesteldeVragenGroups'][0]`);
@@ -57,15 +66,18 @@ const migrateNextBatch = async (): Promise<any> => {
   if (group === null) {
     group = await createDefaultGroup();
   }
+
   const documents = (await fetchFAQ()).filter((x: any) =>
     x.questions.some((x: any) => x._type === 'collapsible')
   );
+
   const patches = buildPatches(documents, group);
+
   if (patches.length === 0) {
     console.log('No more documents to migrate!');
     return null;
   }
-  console.dir(patches);
+
   console.log(
     `Migrating batch:\n %s`,
     patches
@@ -73,7 +85,9 @@ const migrateNextBatch = async (): Promise<any> => {
       .join('\n')
   );
   const transaction = createTransaction(patches);
+
   await commitTransaction(transaction);
+
   return migrateNextBatch();
 };
 
