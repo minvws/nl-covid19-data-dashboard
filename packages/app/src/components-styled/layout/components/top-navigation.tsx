@@ -11,6 +11,7 @@ import theme from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { useBreakpoints } from '~/utils/useBreakpoints';
+import { useIsMounted } from '~/utils/use-is-mounted';
 
 export function TopNavigation() {
   const router = useRouter();
@@ -21,11 +22,20 @@ export function TopNavigation() {
   const isSmallScreen = !breakpoints.md;
   const [panelHeight, setPanelHeight] = useState(0);
   const navMenu = useRef<HTMLDivElement>(null);
+  const navWrapperTransition = useRef('none');
+
+  const isMounted = useIsMounted();
 
   useEffect(() => {
     // Menu is opened by default as fallback: JS opens it
     setIsMenuOpen(false);
     setPanelHeight(0);
+
+    // Set the transistion after the panel has been closd to prevent possible flickering for the user
+    window.requestAnimationFrame(() => {
+      navWrapperTransition.current =
+        'max-height 0.4s ease-in-out, opacity 0.4s ease-in-out';
+    });
 
     // Workaround to get the mobile menu opened when linking to a sub-page.
     setNeedsMobileMenuLink(isSmallScreen);
@@ -60,14 +70,17 @@ export function TopNavigation() {
         aria-label={text.aria_labels.pagina_keuze}
         ref={navMenu}
         css={css({
-          maxHeight: asResponsiveArray({ _: `${panelHeight}px`, md: '100%' }),
+          maxHeight: asResponsiveArray({
+            _: isMounted ? `${panelHeight}px` : '100%',
+            md: '100%',
+          }),
           opacity: asResponsiveArray({ _: isMenuOpen ? 1 : 0, md: 1 }),
           pointerEvents: asResponsiveArray({
             _: isMenuOpen ? 'auto' : 'none',
             md: 'auto',
           }),
           transition: asResponsiveArray({
-            _: 'max-height 0.4s ease-in-out, opacity 0.4s ease-in-out',
+            _: navWrapperTransition.current,
             md: 'none',
           }),
         })}
