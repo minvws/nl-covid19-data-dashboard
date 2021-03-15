@@ -10,6 +10,7 @@ import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
+import { UnderReportedTooltip } from '~/domain/underreported/under-reported-tooltip';
 import siteText from '~/locale/index';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import { getLastGeneratedDate, getVrData } from '~/static-props/get-data';
@@ -128,6 +129,19 @@ const ElderlyAtHomeRegionalPage: FCWithLayout<typeof getStaticProps> = (
               fill: colors.data.underReported,
             }
           )}
+          formatTooltip={(values) => {
+            const value = values[0];
+            const isInaccurateValue =
+              value.__date >= elderlyAtHomeUnderReportedRange[0];
+
+            return (
+              <UnderReportedTooltip
+                value={value}
+                isInUnderReportedRange={isInaccurateValue}
+                underReportedText={siteText.common.incomplete}
+              />
+            );
+          }}
           legendItems={[
             {
               color: colors.data.primary,
@@ -195,6 +209,19 @@ const ElderlyAtHomeRegionalPage: FCWithLayout<typeof getStaticProps> = (
               fill: colors.data.underReported,
             }
           )}
+          formatTooltip={(values) => {
+            const value = values[0];
+            const isInaccurateValue =
+              value.__date >= elderlyAtHomeDeceasedUnderReportedRange[0];
+
+            return (
+              <UnderReportedTooltip
+                value={value}
+                isInUnderReportedRange={isInaccurateValue}
+                underReportedText={siteText.common.incomplete}
+              />
+            );
+          }}
           legendItems={[
             {
               color: colors.data.primary,

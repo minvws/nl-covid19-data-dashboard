@@ -1,9 +1,7 @@
-import { formatNumber } from '@corona-dashboard/common';
 import { useRouter } from 'next/router';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
-import { Box } from '~/components-styled/base';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
@@ -13,13 +11,13 @@ import { addBackgroundRectangleCallback } from '~/components-styled/line-chart/l
 import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { Text } from '~/components-styled/typography';
 import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createMunicipalHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/municipal/create-municipal-hospital-admissions-tooltip';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getMunicipalityLayout } from '~/domain/layout/municipality-layout';
+import { UnderReportedTooltip } from '~/domain/underreported/under-reported-tooltip';
 import siteText from '~/locale/index';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
@@ -30,7 +28,6 @@ import {
   getLastGeneratedDate,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
-import { formatDateFromMilliseconds } from '~/utils/formatDate';
 import { getTrailingDateRange } from '~/utils/get-trailing-date-range';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
@@ -149,24 +146,11 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
             const value = values[0];
             const isInrange = value.__date >= underReportedRange[0];
             return (
-              <>
-                <Box display="flex" alignItems="center" flexDirection="column">
-                  {isInrange && (
-                    <Text as="span" fontSize={0} color={colors.annotation}>
-                      ({siteText.common.incomplete})
-                    </Text>
-                  )}
-                  <Box>
-                    <Text as="span" fontWeight="bold">
-                      {`${formatDateFromMilliseconds(
-                        value.__date.getTime(),
-                        'medium'
-                      )}: `}
-                    </Text>
-                    {formatNumber(value.__value)}
-                  </Box>
-                </Box>
-              </>
+              <UnderReportedTooltip
+                value={value}
+                isInUnderReportedRange={isInrange}
+                underReportedText={siteText.common.incomplete}
+              />
             );
           }}
           linesConfig={[

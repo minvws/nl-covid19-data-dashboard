@@ -99,7 +99,7 @@ export function SewerChart(props: SewerChartProps) {
   const dimensions = useMemo<Dimensions>(() => {
     const padding = {
       top: 20,
-      right: 35,
+      right: 10,
       bottom: 30,
       left: 50,
     };

@@ -82,7 +82,7 @@ function getChartOptions<T>(values: Value[][], linesConfig: LineConfig<T>[]) {
         rotation: '0' as any,
         formatter: function () {
           return this.isFirst || this.isLast
-            ? formatDateFromSeconds(this.value, 'axis')
+            ? formatDateFromSeconds(this.value, 'axis-with-year')
             : '';
         },
       },

@@ -9,8 +9,9 @@ import { formatNumber, formatPercentage } from '@corona-dashboard/common';
 import { AxisBottom, AxisLeft } from '@visx/axis';
 import { GridRows } from '@visx/grid';
 import { ScaleLinear } from 'd3-scale';
-import { memo, Ref } from 'react';
+import { memo, Ref, useCallback } from 'react';
 import { colors } from '~/style/theme';
+import { createDate } from '~/utils/createDate';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { Bounds } from '../logic';
 
@@ -35,8 +36,6 @@ type AxesProps = {
   yTickValues?: number[];
 };
 
-const formatXAxis = (date_unix: number) =>
-  formatDateFromSeconds(date_unix, 'axis');
 const formatYAxis = (y: number) => formatNumber(y);
 const formatYAxisPercentage = (y: number) => `${formatPercentage(y)}%`;
 
@@ -51,6 +50,22 @@ export const Axes = memo(function Axes({
   yScale,
   yAxisRef,
 }: AxesProps) {
+  const [startUnix, endUnix] = xScale.domain();
+
+  const formatXAxis = useCallback(
+    (date_unix: number) => {
+      const startYear = createDate(startUnix).getFullYear();
+      const endYear = createDate(endUnix).getFullYear();
+
+      const isMultipleYearSpan = startYear !== endYear;
+
+      return isMultipleYearSpan && [startUnix, endUnix].includes(date_unix)
+        ? formatDateFromSeconds(date_unix, 'axis-with-year')
+        : formatDateFromSeconds(date_unix, 'axis');
+    },
+    [startUnix, endUnix]
+  );
+
   return (
     <>
       <GridRows
@@ -80,14 +95,15 @@ export const Axes = memo(function Axes({
         tickFormat={formatXAxis as AnyTickFormatter}
         top={bounds.height}
         stroke={colors.silver}
-        tickLabelProps={() => ({
+        tickLabelProps={(x) => ({
           fill: colors.data.axisLabels,
           fontSize: 12,
           /**
            * Using anchor middle the line marker label will fall nicely on top
            * of the axis label
            */
-          textAnchor: 'middle',
+          textAnchor:
+            x === startUnix ? 'start' : x === endUnix ? 'end' : 'middle',
         })}
         hideTicks
       />
