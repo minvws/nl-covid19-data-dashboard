@@ -1,7 +1,7 @@
 import '@reach/combobox/styles.css';
 import { AppProps } from 'next/app';
-import Router from 'next/router';
-import { useEffect } from 'react';
+import Router, { useRouter } from 'next/router';
+import { useEffect, createContext, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import '~/components-styled/combo-box/combo-box.scss';
 import { FCWithLayout } from '~/domain/layout/layout';
@@ -29,10 +29,18 @@ type AppPropsWithLayout = AppProps & {
   Component: FCWithLayout;
 };
 
+export const IntlContext = createContext({ messages: null as any });
+
 export default function App(props: AppPropsWithLayout) {
   const { Component, pageProps } = props;
   const page = (page: React.ReactNode) => page;
   const getLayout = Component.getLayout || page;
+
+  const { locale } = useRouter();
+
+  const [intlState] = useState({
+    messages: require(`~/locale/${locale}.json`),
+  });
 
   useEffect(() => {
     const handleRouteChange = (pathname: string) => {
@@ -53,8 +61,10 @@ export default function App(props: AppPropsWithLayout) {
 
   return (
     <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      {pageWithLayout}
+      <IntlContext.Provider value={intlState}>
+        <GlobalStyle />
+        {pageWithLayout}
+      </IntlContext.Provider>
     </ThemeProvider>
   );
 }
