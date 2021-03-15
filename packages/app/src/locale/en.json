@@ -2716,7 +2716,8 @@
     "hospital_admissions": "Hospital admissions:",
     "infected_locations": "Infected locations:",
     "elderly_at_home": "People over 70 living at home:",
-    "sewer_regional": "Average number of virus particles:"
+    "sewer_regional": "Average number of virus particles:",
+    "sewer_municipal": "Average number of virus particles:"
   },
   "milestones": {
     "toon_meer": "Show earlier events",

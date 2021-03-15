@@ -2716,7 +2716,8 @@
     "hospital_admissions": "Ziekenhuisopnames:",
     "infected_locations": "Besmette locaties:",
     "elderly_at_home": "Thuiswonende 70-plussers:",
-    "sewer_regional": "Gemiddeld aantal virusdeeltjes:"
+    "sewer_regional": "Gemiddeld aantal virusdeeltjes:",
+    "sewer_municipal": "Gemiddeld aantal virusdeeltjes:"
   },
   "milestones": {
     "toon_meer": "Toon eerdere gebeurtenissen",

@@ -28,7 +28,7 @@ export function RelativeDate({
   const { formatDateFromSeconds } = useIntl();
 
   const isoDate = formatDateFromSeconds(dateInSeconds, 'iso');
-  const fullDate = formatDateFromSeconds(dateInSeconds, 'medium');
+  const fullDate = formatDateFromSeconds(dateInSeconds, 'day-month');
   const relativeDate = formatDateFromSeconds(dateInSeconds, 'relative');
 
   /* Date to display; relative date is only available in browsers, not on server. */
