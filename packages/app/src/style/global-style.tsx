@@ -1,33 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
-@font-face {
-  font-family: 'RO Sans';
-  font-weight: normal;
-  font-style: normal;
-  src: url('/webfonts/RO-SansWebText-Regular.woff2') format('woff2'),
-    url('/webfonts/RO-SansWebText-Regular.woff') format('woff');
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'RO Sans';
-  font-weight: normal;
-  font-style: italic;
-  src: url('/webfonts/RO-SansWebText-Italic.woff2') format('woff2'),
-    url('/webfonts/RO-SansWebText-Italic.woff') format('woff');
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'RO Sans';
-  font-weight: bold;
-  font-style: normal;
-  src: url('/webfonts/RO-SansWebText-Bold.woff2') format('woff2'),
-    url('/webfonts/RO-SansWebText-Bold.woff') format('woff');
-  font-display: swap;
-}
-
 /*
   Apply a natural box layout model to all elements, but allowing components to
   change. This might not be needed anymore after we migrated to styled-system,
