@@ -63,6 +63,7 @@ export const CollapsibleButton = ({
 
 const Container = styled(Box).attrs({ as: 'section' })(
   css({
+    borderRadius: 1,
     position: 'relative',
     display: 'inline-flex',
     flexDirection: 'column',

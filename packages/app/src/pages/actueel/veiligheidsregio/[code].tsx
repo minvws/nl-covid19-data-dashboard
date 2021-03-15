@@ -14,7 +14,7 @@ import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
 import { HighlightTeaserProps } from '~/components-styled/highlight-teaser';
 import { MaxWidth } from '~/components-styled/max-width';
-import { QuickLinks } from '~/components-styled/quick-links';
+import { CollapsibleButton } from '~/components-styled/collapsible';
 import { RiskLevelIndicator } from '~/components-styled/risk-level-indicator';
 import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
@@ -32,7 +32,7 @@ import { escalationTooltip } from '~/components/choropleth/tooltips/region/escal
 import { FCWithLayout, getDefaultLayout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import { ChoroplethTwoColumnLayout } from '~/domain/topical/choropleth-two-column-layout';
-import { DataSitemap } from '~/domain/topical/data-sitemap';
+import { Sitemap } from '~/domain/topical/sitemap';
 import { EditorialSummary } from '~/domain/topical/editorial-teaser';
 import { EditorialTile } from '~/domain/topical/editorial-tile';
 import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
@@ -54,6 +54,7 @@ import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 export { getStaticPaths } from '~/static-paths/vr';
+import { getDataSitemap } from '~/domain/topical/sitemap/utils';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -86,6 +87,8 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>(
     'municipal'
   );
+
+  const dataSitemap = getDataSitemap('veiligheidsregio', vrCode);
 
   return (
     <>
@@ -200,23 +203,32 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
               </RiskLevelIndicator>
             </MiniTrendTileLayout>
 
-            <QuickLinks
-              header={text.quick_links.header}
-              links={[
-                {
-                  href: '/landelijk/vaccinaties',
-                  text: text.quick_links.links.nationaal,
-                },
-                {
-                  href: `/veiligheidsregio/${router.query.code}/positief-geteste-mensen`,
-                  text: replaceVariablesInText(
-                    text.quick_links.links.veiligheidsregio,
-                    { safetyRegionName: props.safetyRegionName }
-                  ),
-                },
-                { href: '/gemeente', text: text.quick_links.links.gemeente },
-              ]}
-            />
+            <CollapsibleButton
+              label={siteText.common_actueel.overview_links_header}
+            >
+              <Sitemap
+                quickLinksHeader={text.quick_links.header}
+                quickLinks={[
+                  {
+                    href: '/landelijk/vaccinaties',
+                    text: text.quick_links.links.nationaal,
+                  },
+                  {
+                    href: `/veiligheidsregio/${router.query.code}/positief-geteste-mensen`,
+                    text: replaceVariablesInText(
+                      text.quick_links.links.veiligheidsregio,
+                      { safetyRegionName: props.safetyRegionName }
+                    ),
+                  },
+                  { href: '/gemeente', text: text.quick_links.links.gemeente },
+                ]}
+                dataSitemapHeader={replaceVariablesInText(
+                  text.data_sitemap_title,
+                  { safetyRegionName: props.safetyRegionName }
+                )}
+                dataSitemap={dataSitemap}
+              />
+            </CollapsibleButton>
 
             {content.editorial && content.highlight && (
               <>
@@ -357,8 +369,6 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
                 </Box>
               </ChoroplethTwoColumnLayout>
             </TopicalTile>
-
-            <DataSitemap />
 
             <Box pb={4}>
               <TopicalSectionHeader

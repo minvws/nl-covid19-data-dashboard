@@ -26,6 +26,7 @@ node_modules
 # CI/CD
 /env
 /public/json
+public/latest-data.zip
 .gitlab-ci.yml
 
 npm-debug.log*

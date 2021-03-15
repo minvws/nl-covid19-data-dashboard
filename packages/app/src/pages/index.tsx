@@ -14,8 +14,8 @@ import { CollapsibleButton } from '~/components-styled/collapsible';
 import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
 import { HighlightTeaserProps } from '~/components-styled/highlight-teaser';
+import { Sitemap } from '~/domain/topical/sitemap';
 import { MaxWidth } from '~/components-styled/max-width';
-import { QuickLinks } from '~/components-styled/quick-links';
 import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
 import { Heading, Text } from '~/components-styled/typography';
@@ -33,7 +33,6 @@ import { FCWithLayout, getDefaultLayout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import { ChoroplethTwoColumnLayout } from '~/domain/topical/choropleth-two-column-layout';
 import { Search } from '~/domain/topical/components/search';
-import { DataSitemap } from '~/domain/topical/data-sitemap';
 import { EditorialSummary } from '~/domain/topical/editorial-teaser';
 import { EditorialTile } from '~/domain/topical/editorial-tile';
 import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
@@ -53,6 +52,7 @@ import {
 } from '~/static-props/get-data';
 import { formatDate } from '~/utils/formatDate';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { getDataSitemap } from '~/domain/topical/sitemap/utils';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 export const getStaticProps = createGetStaticProps(
@@ -96,6 +96,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
 
   const dataInfectedTotal = data.tested_overall;
   const dataHospitalIntake = data.hospital_nice;
+  const dataSitemap = getDataSitemap('landelijk');
 
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>(
     'municipal'
@@ -184,10 +185,12 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
               <TopicalVaccineTile data={data.vaccine_administered_total} />
             </MiniTrendTileLayout>
 
-            <CollapsibleButton label={text.quick_links.header}>
-              <QuickLinks
-                header={text.quick_links.header}
-                links={[
+            <CollapsibleButton
+              label={siteText.common_actueel.overview_links_header}
+            >
+              <Sitemap
+                quickLinksHeader={text.quick_links.header}
+                quickLinks={[
                   {
                     href: '/landelijk/vaccinaties',
                     text: text.quick_links.links.nationaal,
@@ -196,10 +199,14 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                     href: '/veiligheidsregio',
                     text: text.quick_links.links.veiligheidsregio,
                   },
-                  { href: '/gemeente', text: text.quick_links.links.gemeente },
+                  {
+                    href: '/gemeente',
+                    text: text.quick_links.links.gemeente,
+                  },
                 ]}
+                dataSitemapHeader={text.data_sitemap_titel}
+                dataSitemap={dataSitemap}
               />
-              <DataSitemap />
             </CollapsibleButton>
 
             {content.editorial && content.highlight && (
@@ -342,8 +349,6 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                 </Box>
               </ChoroplethTwoColumnLayout>
             </TopicalTile>
-
-            <DataSitemap />
 
             <Box pb={4}>
               <TopicalSectionHeader
