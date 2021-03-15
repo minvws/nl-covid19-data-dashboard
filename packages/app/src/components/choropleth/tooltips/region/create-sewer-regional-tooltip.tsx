@@ -8,10 +8,8 @@ import { InlineText, Text } from '~/components-styled/typography';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
 import { TooltipSubject } from '~/components/choropleth/tooltips/tooltip-subject';
 import { useIntl } from '~/intl';
-import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { RegionSelectionHandler } from '../../select-handlers/create-select-region-handler';
-const text = siteText.rioolwater_metingen;
 
 export const createSewerRegionalTooltip = (
   subject: string,
@@ -22,6 +20,9 @@ export const createSewerRegionalTooltip = (
     event.stopPropagation();
     selectHandler(context.vrcode);
   };
+
+  const { siteText, formatNumber } = useIntl();
+  const text = siteText.rioolwater_metingen;
 
   return (
     context && (

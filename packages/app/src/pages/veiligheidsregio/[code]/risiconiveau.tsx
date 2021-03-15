@@ -14,10 +14,7 @@ import { Tile } from '~/components-styled/tile';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components-styled/typography';
-import {
-  hospitalAdmissionsEscalationThresholds,
-  positiveTestedEscalationThresholds,
-} from '~/domain/escalation-level/thresholds';
+import { useEscalationThresholds } from '~/domain/escalation-level/thresholds';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { EscalationLevel } from '~/domain/restrictions/type';
@@ -26,18 +23,16 @@ import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
-  getText,
   getVrData,
 } from '~/static-props/get-data';
-import { formatDateFromSeconds } from '~/utils/formatDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { useEscalationColor } from '~/utils/use-escalation-color';
+import { useIntl } from '~/intl';
 
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getText,
   getVrData,
   createGetContent<{
     articles?: ArticleSummary[];
@@ -45,12 +40,18 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { safetyRegionName, text: siteText, content, data } = props;
+  const { safetyRegionName, content, data } = props;
 
+  const { siteText, formatDateFromSeconds } = useIntl();
   const text = siteText.vr_risiconiveau;
 
   const { escalation_level, hospital_nice_sum, tested_overall_sum } = data;
   const currentLevel = escalation_level.level as EscalationLevel;
+
+  const {
+    hospitalAdmissionsEscalationThresholds,
+    positiveTestedEscalationThresholds,
+  } = useEscalationThresholds();
 
   const positiveTestedColor = useEscalationColor(
     getCategoryLevel(

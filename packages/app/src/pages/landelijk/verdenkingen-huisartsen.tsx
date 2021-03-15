@@ -7,14 +7,11 @@ import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
 import { SEOHead } from '~/components-styled/seo-head';
 import { FCWithLayout } from '~/domain/layout/layout';
-import { getNationalLayout } from '~/domain/layout/national-layout';
+import { GetNationalLayout } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
 import { getNlData, getLastGeneratedDate } from '~/static-props/get-data';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
-
-const text = siteText.verdenkingen_huisartsen;
-const graphDescriptions = siteText.accessibility.grafieken;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -25,6 +22,9 @@ const SuspectedPatients: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data } = props;
   const lastValue = data.doctor.last_value;
 
+  const { siteText } = useIntl();
+  const text = siteText.verdenkingen_huisartsen;
+  const graphDescriptions = siteText.accessibility.grafieken;
   return (
     <>
       <SEOHead
@@ -95,6 +95,6 @@ const SuspectedPatients: FCWithLayout<typeof getStaticProps> = (props) => {
   );
 };
 
-SuspectedPatients.getLayout = getNationalLayout;
+SuspectedPatients.getLayout = GetNationalLayout;
 
 export default SuspectedPatients;

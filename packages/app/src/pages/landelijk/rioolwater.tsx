@@ -18,7 +18,7 @@ import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-ch
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createSewerRegionalTooltip } from '~/components/choropleth/tooltips/region/create-sewer-regional-tooltip';
 import { FCWithLayout } from '~/domain/layout/layout';
-import { getNationalLayout } from '~/domain/layout/national-layout';
+import { GetNationalLayout } from '~/domain/layout/national-layout';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
@@ -26,14 +26,13 @@ import {
   createGetContent,
   getLastGeneratedDate,
   getNlData,
-  getText,
 } from '~/static-props/get-data';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { useIntl } from '~/intl';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   getNlData,
-  getText,
   createGetChoroplethData({
     vr: ({ sewer }) => ({ sewer }),
   }),
@@ -46,8 +45,9 @@ const SewerWater: FCWithLayout<typeof getStaticProps> = ({
   data,
   choropleth,
   content,
-  text: siteText,
 }) => {
+  const { siteText } = useIntl();
+
   const text = siteText.rioolwater_metingen;
   const graphDescriptions = siteText.accessibility.grafieken;
   const sewerAverages = data.sewer;
@@ -183,6 +183,6 @@ const SewerWater: FCWithLayout<typeof getStaticProps> = ({
   );
 };
 
-SewerWater.getLayout = getNationalLayout;
+SewerWater.getLayout = GetNationalLayout;
 
 export default SewerWater;

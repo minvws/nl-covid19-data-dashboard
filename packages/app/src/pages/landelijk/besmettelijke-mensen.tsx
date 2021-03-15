@@ -9,13 +9,11 @@ import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { AreaChart } from '~/components/charts/index';
 import { SEOHead } from '~/components-styled/seo-head';
 import { FCWithLayout } from '~/domain/layout/layout';
-import { getNationalLayout } from '~/domain/layout/national-layout';
+import { GetNationalLayout } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
 import { getNlData, getLastGeneratedDate } from '~/static-props/get-data';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import { getLastFilledValue } from '@corona-dashboard/common';
-
-const text = siteText.besmettelijke_personen;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -27,7 +25,8 @@ const InfectiousPeople: FCWithLayout<typeof getStaticProps> = (props) => {
 
   const lastFullValue = getLastFilledValue(data.infectious_people);
   const values = data.infectious_people.values;
-
+  const { siteText } = useIntl();
+  const text = siteText.besmettelijke_personen;
   return (
     <>
       <SEOHead
@@ -37,7 +36,7 @@ const InfectiousPeople: FCWithLayout<typeof getStaticProps> = (props) => {
       <TileList>
         <ContentHeader
           category={siteText.nationaal_layout.headings.besmettingen}
-          screenReaderCategory={siteText.besmettelijke_personen.titel_sidebar}
+          screenReaderCategory={text.titel_sidebar}
           title={text.title}
           icon={<Ziektegolf />}
           subtitle={text.toelichting_pagina}
@@ -111,6 +110,6 @@ const InfectiousPeople: FCWithLayout<typeof getStaticProps> = (props) => {
   );
 };
 
-InfectiousPeople.getLayout = getNationalLayout;
+InfectiousPeople.getLayout = GetNationalLayout;
 
 export default InfectiousPeople;

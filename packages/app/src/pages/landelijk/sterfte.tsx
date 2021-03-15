@@ -14,7 +14,7 @@ import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
 import { DeceasedMonitorSection } from '~/domain/deceased/deceased-monitor-section';
 import { FCWithLayout } from '~/domain/layout/layout';
-import { getNationalLayout } from '~/domain/layout/national-layout';
+import { GetNationalLayout } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
@@ -25,8 +25,6 @@ import {
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { getTrailingDateRange } from '~/utils/get-trailing-date-range';
-
-const text = siteText.sterfte;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -44,6 +42,9 @@ const DeceasedNationalPage: FCWithLayout<typeof getStaticProps> = (props) => {
 
   const dataRivmUnderReportedRange = getTrailingDateRange(dataRivm.values, 4);
 
+  const { siteText } = useIntl();
+
+  const text = siteText.sterfte;
   return (
     <>
       <SEOHead
@@ -177,6 +178,6 @@ const DeceasedNationalPage: FCWithLayout<typeof getStaticProps> = (props) => {
   );
 };
 
-DeceasedNationalPage.getLayout = getNationalLayout;
+DeceasedNationalPage.getLayout = GetNationalLayout;
 
 export default DeceasedNationalPage;

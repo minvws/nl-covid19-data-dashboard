@@ -45,13 +45,13 @@ export const getStaticProps = createGetStaticProps(
   }>(createPageArticlesQuery('hospitalPage'))
 );
 
-const text = siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
-const graphDescriptions = siteText.accessibility.grafieken;
-
 const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data, safetyRegionName, choropleth, content } = props;
   const router = useRouter();
+  const { siteText } = useIntl();
 
+  const text = siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
+  const graphDescriptions = siteText.accessibility.grafieken;
   const lastValue = data.hospital_nice.last_value;
 
   const municipalCodes = regionCodeToMunicipalCodeLookup[data.code];

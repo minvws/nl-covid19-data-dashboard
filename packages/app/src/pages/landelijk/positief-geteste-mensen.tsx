@@ -32,7 +32,7 @@ import { createSelectRegionHandler } from '~/components/choropleth/select-handle
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
 import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/create-positive-tested-people-regional-tooltip';
 import { FCWithLayout } from '~/domain/layout/layout';
-import { getNationalLayout } from '~/domain/layout/national-layout';
+import { GetNationalLayout } from '~/domain/layout/national-layout';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
@@ -40,21 +40,15 @@ import {
   createGetContent,
   getLastGeneratedDate,
   getNlData,
-  getText,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { assert } from '~/utils/assert';
-import {
-  formatDateFromMilliseconds,
-  formatDateFromSeconds,
-} from '~/utils/formatDate';
-import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { useIntl } from '~/intl';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getText,
   getNlData,
   createGetChoroplethData({
     gm: ({ tested_overall }) => ({ tested_overall }),
@@ -68,9 +62,15 @@ export const getStaticProps = createGetStaticProps(
 const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
   data,
   choropleth,
-  text: siteText,
   content,
 }) => {
+  const {
+    siteText,
+    formatPercentage,
+    formatNumber,
+    formatDateFromMilliseconds,
+    formatDateFromSeconds,
+  } = useIntl();
   const text = siteText.positief_geteste_personen;
   const ggdText = siteText.positief_geteste_personen_ggd;
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>(
@@ -82,7 +82,7 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
   const dataGgdAverageLastValue = data.tested_ggd_average.last_value;
   const dataGgdDailyValues = data.tested_ggd_daily.values;
 
-  const ageDemographicExampleData = getAgeDemographicExampleData(
+  const ageDemographicExampleData = useAgeDemographicExampleData(
     data.tested_per_age_group
   );
 
@@ -450,14 +450,16 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
   );
 };
 
-PositivelyTestedPeople.getLayout = getNationalLayout;
+PositivelyTestedPeople.getLayout = GetNationalLayout;
 
 export default PositivelyTestedPeople;
 
 /* Retrieves certain age demographic data to be used in the example text. */
-function getAgeDemographicExampleData(data: NationalTestedPerAgeGroup) {
+function useAgeDemographicExampleData(data: NationalTestedPerAgeGroup) {
   const ageGroupRange = '20-29';
   const value = data.values.find((x) => x.age_group_range === ageGroupRange);
+
+  const { formatPercentage } = useIntl();
 
   assert(
     value,

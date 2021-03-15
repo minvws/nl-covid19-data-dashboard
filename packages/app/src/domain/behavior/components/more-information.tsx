@@ -2,9 +2,9 @@ import { AnchorTile } from '~/components-styled/anchor-tile';
 import { Text } from '~/components-styled/typography';
 import { useIntl } from '~/intl';
 
-const text = siteText.gedrag_common.meer_onderzoeksresultaten;
-
 export function MoreInformation() {
+  const { siteText } = useIntl();
+  const text = siteText.gedrag_common.meer_onderzoeksresultaten;
   return (
     <AnchorTile
       title={text.title}

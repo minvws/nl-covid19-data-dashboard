@@ -23,7 +23,7 @@ import { createSelectRegionHandler } from '~/components/choropleth/select-handle
 import { createMunicipalHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/municipal/create-municipal-hospital-admissions-tooltip';
 import { createRegionHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/region/create-region-hospital-admissions-tooltip';
 import { FCWithLayout } from '~/domain/layout/layout';
-import { getNationalLayout } from '~/domain/layout/national-layout';
+import { GetNationalLayout } from '~/domain/layout/national-layout';
 import { UnderReportedTooltip } from '~/domain/underreported/under-reported-tooltip';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
@@ -40,9 +40,6 @@ import {
   DateRange,
   getTrailingDateRange,
 } from '~/utils/get-trailing-date-range';
-
-const text = siteText.ziekenhuisopnames_per_dag;
-const graphDescriptions = siteText.accessibility.grafieken;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -75,6 +72,10 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
     createDate(dataHospitalLcps.values[0].date_unix),
     new Date('1 June 2020'),
   ] as DateRange;
+
+  const { siteText } = useIntl();
+  const text = siteText.ziekenhuisopnames_per_dag;
+  const graphDescriptions = siteText.accessibility.grafieken;
 
   return (
     <>
@@ -281,6 +282,6 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
   );
 };
 
-IntakeHospital.getLayout = getNationalLayout;
+IntakeHospital.getLayout = GetNationalLayout;
 
 export default IntakeHospital;

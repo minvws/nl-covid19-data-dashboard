@@ -17,7 +17,7 @@ import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-ch
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createDisablityInfectedLocationsRegionalTooltip } from '~/components/choropleth/tooltips/region/create-disability-infected-locations-regional-tooltip';
 import { FCWithLayout } from '~/domain/layout/layout';
-import { getNationalLayout } from '~/domain/layout/national-layout';
+import { GetNationalLayout } from '~/domain/layout/national-layout';
 import { UnderReportedTooltip } from '~/domain/underreported/under-reported-tooltip';
 import { useIntl } from '~/intl';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
@@ -28,12 +28,6 @@ import {
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { getTrailingDateRange } from '~/utils/get-trailing-date-range';
-
-const infectedLocationsText = siteText.gehandicaptenzorg_besmette_locaties;
-const positiveTestedPeopleText =
-  siteText.gehandicaptenzorg_positief_geteste_personen;
-const locationDeaths = siteText.gehandicaptenzorg_oversterfte;
-const graphDescriptions = siteText.accessibility.grafieken;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -50,6 +44,13 @@ const DisabilityCare: FCWithLayout<typeof getStaticProps> = (props) => {
   const underReportedValues = getTrailingDateRange(values, 7);
 
   const router = useRouter();
+
+  const { siteText } = useIntl();
+  const infectedLocationsText = siteText.gehandicaptenzorg_besmette_locaties;
+  const positiveTestedPeopleText =
+    siteText.gehandicaptenzorg_positief_geteste_personen;
+  const locationDeaths = siteText.gehandicaptenzorg_oversterfte;
+  const graphDescriptions = siteText.accessibility.grafieken;
 
   return (
     <>
@@ -306,6 +307,6 @@ const DisabilityCare: FCWithLayout<typeof getStaticProps> = (props) => {
   );
 };
 
-DisabilityCare.getLayout = getNationalLayout;
+DisabilityCare.getLayout = GetNationalLayout;
 
 export default DisabilityCare;

@@ -23,6 +23,8 @@ export function Select<T extends string>({
   options,
   placeholder,
 }: SelectProps<T>) {
+  const { siteText } = useIntl();
+
   return (
     <Container>
       <StyledSelect

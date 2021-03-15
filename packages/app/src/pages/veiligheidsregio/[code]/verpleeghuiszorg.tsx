@@ -27,14 +27,17 @@ export const getStaticProps = createGetStaticProps(
   getVrData
 );
 
-const locationsText = siteText.veiligheidsregio_verpleeghuis_besmette_locaties;
-const positiveTestPeopleText =
-  siteText.veiligheidsregio_verpleeghuis_positief_geteste_personen;
-const mortalityText = siteText.veiligheidsregio_verpleeghuis_oversterfte;
-const graphDescriptions = siteText.accessibility.grafieken;
-
 const NursingHomeCare: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data, safetyRegionName } = props;
+
+  const { siteText } = useIntl();
+
+  const locationsText =
+    siteText.veiligheidsregio_verpleeghuis_besmette_locaties;
+  const positiveTestPeopleText =
+    siteText.veiligheidsregio_verpleeghuis_positief_geteste_personen;
+  const mortalityText = siteText.veiligheidsregio_verpleeghuis_oversterfte;
+  const graphDescriptions = siteText.accessibility.grafieken;
 
   const nursinghomeLastValue = data.nursing_home.last_value;
   const nursinghomeDataUnderReportedValues = getTrailingDateRange(

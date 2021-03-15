@@ -2,8 +2,8 @@ import React from 'react';
 import { HighchartsWrapper } from '~/components/highcharts-wrapper';
 import { colors } from '~/style/theme';
 import { assert } from '~/utils/assert';
-import { formatDateFromSeconds } from '~/utils/formatDate';
 import { getFilteredValues } from '~/utils/timeframe';
+import { useIntl } from '~/intl';
 
 interface LineConfig<T> {
   id: T;
@@ -44,12 +44,14 @@ export function BehaviorLineChart<T>({
     getFilteredValues(lineValues, 'all', (x) => x.date * 1000)
   );
 
-  const options = getChartOptions<T>(filteredValueLists, linesConfig);
+  const options = useChartOptions<T>(filteredValueLists, linesConfig);
 
   return <HighchartsWrapper options={options} />;
 }
 
-function getChartOptions<T>(values: Value[][], linesConfig: LineConfig<T>[]) {
+function useChartOptions<T>(values: Value[][], linesConfig: LineConfig<T>[]) {
+  const { formatDateFromSeconds } = useIntl();
+
   const categories = values
     .flatMap((value) => value.map((value) => value.date.toString()))
     .filter((date, index, self) => self.indexOf(date) === index);

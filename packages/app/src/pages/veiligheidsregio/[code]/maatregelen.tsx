@@ -13,7 +13,6 @@ import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { useIntl } from '~/intl';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import { LockdownData, RoadmapData } from '~/types/cms';
-import { targetLanguage } from '~/locale/index';
 
 import {
   getLastGeneratedDate,
@@ -30,6 +29,8 @@ type MaatregelenData = {
   roadmap?: RoadmapData;
 };
 
+//@TODO HARDCODED FOR NOW. NEEDS TO COME FROM CONTEXT
+const locale = 'nl';
 const query = `
 {
   'lockdown': *[_type == 'lockdown']{
@@ -38,8 +39,8 @@ const query = `
       ...message,
       "description": {
         ...message.description,
-        "${targetLanguage}": [
-          ...message.description.${targetLanguage}[]
+        "${locale}": [
+          ...message.description.${locale}[]
           {
             ...,
             "asset": asset->
@@ -58,11 +59,12 @@ export const getStaticProps = createGetStaticProps(
   createGetContent<MaatregelenData>(query)
 );
 
-const text = siteText.veiligheidsregio_maatregelen;
-type VRCode = keyof typeof siteText.veiligheidsregio_maatregelen_urls;
-
 const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
   const { content, safetyRegionName } = props;
+
+  const { siteText } = useIntl();
+  const text = siteText.veiligheidsregio_maatregelen;
+  type VRCode = keyof typeof siteText.veiligheidsregio_maatregelen_urls;
 
   const { lockdown } = content;
   const { showLockdown } = lockdown;

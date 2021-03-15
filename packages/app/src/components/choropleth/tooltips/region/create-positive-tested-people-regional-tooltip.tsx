@@ -8,10 +8,8 @@ import { InlineText, Text } from '~/components-styled/typography';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
 import { TooltipSubject } from '~/components/choropleth/tooltips/tooltip-subject';
 import { useIntl } from '~/intl';
-import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { RegionSelectionHandler } from '../../select-handlers/create-select-region-handler';
-const text = siteText.common.tooltip;
 
 export const createPositiveTestedPeopleRegionalTooltip = (
   subject: string,
@@ -19,6 +17,9 @@ export const createPositiveTestedPeopleRegionalTooltip = (
   selectHandler: RegionSelectionHandler
 ) => (context: SafetyRegionProperties & RegionsTestedOverall): ReactNode => {
   const { vrname, infected_per_100k, infected } = context;
+
+  const { siteText, formatPercentage, formatNumber } = useIntl();
+  const text = siteText.common.tooltip;
 
   const onSelect = (event: any) => {
     event.stopPropagation();

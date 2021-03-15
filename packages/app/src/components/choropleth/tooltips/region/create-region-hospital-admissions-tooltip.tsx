@@ -9,7 +9,6 @@ import { RegionSelectionHandler } from '../../select-handlers/create-select-regi
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
 import { TooltipSubject } from '~/components/choropleth/tooltips/tooltip-subject';
 import { useIntl } from '~/intl';
-import { formatNumber } from '~/utils/formatNumber';
 
 export const createRegionHospitalAdmissionsTooltip = (
   subject: string,
@@ -22,6 +21,8 @@ export const createRegionHospitalAdmissionsTooltip = (
     event.stopPropagation();
     selectHandler(context.vrcode);
   };
+
+  const { siteText, formatNumber } = useIntl();
 
   return (
     context && (

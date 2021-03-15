@@ -35,14 +35,15 @@ export const getStaticProps = createGetStaticProps(
   }>(createPageArticlesQuery('deceasedPage'))
 );
 
-const text = siteText.veiligheidsregio_sterfte;
-
 const DeceasedRegionalPage: FCWithLayout<typeof getStaticProps> = (props) => {
   const {
     safetyRegionName: safetyRegion,
     data: { deceased_cbs: dataCbs, deceased_rivm: dataRivm, difference },
     content,
   } = props;
+
+  const { siteText } = useIntl();
+  const text = siteText.veiligheidsregio_sterfte;
 
   const dataRivmUnderReportedRange = getTrailingDateRange(dataRivm.values, 4);
 

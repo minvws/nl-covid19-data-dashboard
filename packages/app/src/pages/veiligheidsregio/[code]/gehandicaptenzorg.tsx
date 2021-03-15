@@ -27,15 +27,17 @@ export const getStaticProps = createGetStaticProps(
   getVrData
 );
 
-const locationsText =
-  siteText.veiligheidsregio_gehandicaptenzorg_besmette_locaties;
-const positiveTestPeopleText =
-  siteText.veiligheidsregio_gehandicaptenzorg_positief_geteste_personen;
-const mortalityText = siteText.veiligheidsregio_gehandicaptenzorg_oversterfte;
-const graphDescriptions = siteText.accessibility.grafieken;
-
 const DisabilityCare: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data, safetyRegionName } = props;
+
+  const { siteText } = useIntl();
+
+  const locationsText =
+    siteText.veiligheidsregio_gehandicaptenzorg_besmette_locaties;
+  const positiveTestPeopleText =
+    siteText.veiligheidsregio_gehandicaptenzorg_positief_geteste_personen;
+  const mortalityText = siteText.veiligheidsregio_gehandicaptenzorg_oversterfte;
+  const graphDescriptions = siteText.accessibility.grafieken;
 
   const lastValue = data.disability_care.last_value;
   const values = data.disability_care.values;

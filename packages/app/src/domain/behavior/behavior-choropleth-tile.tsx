@@ -18,8 +18,6 @@ import {
 import { BehaviorTypeControl } from './components/behavior-type-control';
 import css from '@styled-system/css';
 
-const text = siteText.nl_gedrag;
-
 export function BehaviorChoroplethTile({
   data,
 }: {
@@ -34,6 +32,8 @@ export function BehaviorChoroplethTile({
   function goToRegion(vrcode: string) {
     router.push(`/veiligheidsregio/${vrcode}/gedrag`);
   }
+  const { siteText } = useIntl();
+  const text = siteText.nl_gedrag;
 
   return (
     <ChoroplethTile

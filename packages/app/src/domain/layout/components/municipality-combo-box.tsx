@@ -7,6 +7,8 @@ export function MunicipalityComboBox({
 }: {
   onSelect: (gmcode: string) => void;
 }) {
+  const { siteText } = useIntl();
+
   return (
     <ComboBox
       placeholder={siteText.common.zoekveld_placeholder_gemeente}

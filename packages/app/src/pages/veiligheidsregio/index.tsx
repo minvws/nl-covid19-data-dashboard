@@ -15,15 +15,13 @@ import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   getLastGeneratedDate,
-  getText,
 } from '~/static-props/get-data';
-import { formatDate } from '~/utils/formatDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { useBreakpoints } from '~/utils/useBreakpoints';
+import { useIntl } from '~/intl';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getText,
   createGetChoroplethData({
     vr: ({ escalation_levels }) => ({ escalation_levels }),
   })
@@ -33,7 +31,9 @@ const SafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
   const router = useRouter();
   const breakpoints = useBreakpoints();
 
-  const { text, choropleth } = props;
+  const { siteText, formatDate } = useIntl();
+
+  const { choropleth } = props;
 
   const goToSafetyRegion = createSelectRegionHandler(
     router,
@@ -44,8 +44,8 @@ const SafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
   return (
     <>
       <SEOHead
-        title={text.veiligheidsregio_index.metadata.title}
-        description={text.veiligheidsregio_index.metadata.description}
+        title={siteText.veiligheidsregio_index.metadata.title}
+        description={siteText.veiligheidsregio_index.metadata.description}
       />
 
       {!breakpoints.md && (
@@ -55,21 +55,21 @@ const SafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
       )}
 
       <TileList>
-        {text.regionaal_index.belangrijk_bericht && (
+        {siteText.regionaal_index.belangrijk_bericht && (
           <WarningTile
-            message={text.regionaal_index.belangrijk_bericht}
+            message={siteText.regionaal_index.belangrijk_bericht}
             variant="emphasis"
           />
         )}
 
         <ChoroplethTile
-          title={text.veiligheidsregio_index.selecteer_titel}
+          title={siteText.veiligheidsregio_index.selecteer_titel}
           description={
             <>
               <div
                 dangerouslySetInnerHTML={{
                   __html: replaceVariablesInText(
-                    text.veiligheidsregio_index.selecteer_toelichting,
+                    siteText.veiligheidsregio_index.selecteer_toelichting,
                     {
                       last_update: formatDate(
                         choropleth.vr.escalation_levels[0].last_determined_unix,

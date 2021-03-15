@@ -15,7 +15,7 @@ import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-ch
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createRegionElderlyAtHomeTooltip } from '~/components/choropleth/tooltips/region/create-region-elderly-at-home-tooltip';
 import { FCWithLayout } from '~/domain/layout/layout';
-import { getNationalLayout } from '~/domain/layout/national-layout';
+import { GetNationalLayout } from '~/domain/layout/national-layout';
 import { UnderReportedTooltip } from '~/domain/underreported/under-reported-tooltip';
 import { useIntl } from '~/intl';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
@@ -26,9 +26,6 @@ import {
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { getTrailingDateRange } from '~/utils/get-trailing-date-range';
-
-const text = siteText.thuiswonende_ouderen;
-const graphDescriptions = siteText.accessibility.grafieken;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -54,6 +51,10 @@ const ElderlyAtHomeNationalPage: FCWithLayout<typeof getStaticProps> = ({
     7
   );
 
+  const { siteText } = useIntl();
+
+  const text = siteText.thuiswonende_ouderen;
+  const graphDescriptions = siteText.accessibility.grafieken;
   return (
     <>
       <SEOHead
@@ -266,6 +267,6 @@ const ElderlyAtHomeNationalPage: FCWithLayout<typeof getStaticProps> = ({
   );
 };
 
-ElderlyAtHomeNationalPage.getLayout = getNationalLayout;
+ElderlyAtHomeNationalPage.getLayout = GetNationalLayout;
 
 export default ElderlyAtHomeNationalPage;

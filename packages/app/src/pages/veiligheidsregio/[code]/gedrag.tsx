@@ -20,7 +20,6 @@ import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
-  getText,
   getVrData,
 } from '~/static-props/get-data';
 
@@ -28,19 +27,18 @@ export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getText,
   getVrData,
   createGetContent<{
     articles?: ArticleSummary[];
   }>(createPageArticlesQuery('behaviorPage'))
 );
 
-const text = siteText.regionaal_gedrag;
-
 const BehaviorPage: FCWithLayout<typeof getStaticProps> = (props) => {
   const content = props.content;
   const behaviorData = props.data.behavior;
 
+  const { siteText } = useIntl();
+  const text = siteText.regionaal_gedrag;
   return (
     <>
       <SEOHead

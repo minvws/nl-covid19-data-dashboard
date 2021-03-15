@@ -13,7 +13,7 @@ import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/domain/layout/layout';
-import { getNationalLayout } from '~/domain/layout/national-layout';
+import { GetNationalLayout } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
@@ -22,9 +22,6 @@ import {
   getLastGeneratedDate,
   getNlData,
 } from '~/static-props/get-data';
-
-const text = siteText.reproductiegetal;
-const graphDescriptions = siteText.accessibility.grafieken;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -38,6 +35,10 @@ const ReproductionIndex: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data, content } = props;
 
   const lastFilledValue = getLastFilledValue(data.reproduction);
+
+  const { siteText } = useIntl();
+  const text = siteText.reproductiegetal;
+  const graphDescriptions = siteText.accessibility.grafieken;
 
   return (
     <>
@@ -124,6 +125,6 @@ const ReproductionIndex: FCWithLayout<typeof getStaticProps> = (props) => {
   );
 };
 
-ReproductionIndex.getLayout = getNationalLayout;
+ReproductionIndex.getLayout = GetNationalLayout;
 
 export default ReproductionIndex;

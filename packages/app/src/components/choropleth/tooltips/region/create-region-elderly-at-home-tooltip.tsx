@@ -9,7 +9,6 @@ import { RegionSelectionHandler } from '../../select-handlers/create-select-regi
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
 import { TooltipSubject } from '~/components/choropleth/tooltips/tooltip-subject';
 import { useIntl } from '~/intl';
-import { formatNumber } from '~/utils/formatNumber';
 
 export const createRegionElderlyAtHomeTooltip = (
   subject: string,
@@ -20,6 +19,8 @@ export const createRegionElderlyAtHomeTooltip = (
     event.stopPropagation();
     selectHandler(context.vrcode);
   };
+
+  const { siteText, formatNumber } = useIntl();
 
   return (
     <TooltipContent title={context.vrname} onSelect={onSelect}>

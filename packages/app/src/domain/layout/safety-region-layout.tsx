@@ -35,8 +35,11 @@ interface SafetyRegionLayoutProps {
 
 export function getSafetyRegionLayout() {
   return function (page: React.ReactNode, pageProps: SafetyRegionLayoutProps) {
+    //@TODO WHY IS THIS NULL
+    const { siteText } = useIntl(); //null
+
     return getSiteLayout(
-      siteText.veiligheidsregio_metadata,
+      siteText?.veiligheidsregio_metadata,
       pageProps.lastGenerated
     )(<SafetyRegionLayout {...pageProps}>{page}</SafetyRegionLayout>);
   };
@@ -62,8 +65,9 @@ function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
   const { children, data, safetyRegionName } = props;
 
   const breakpoints = useBreakpoints();
-
   const router = useRouter();
+  const { siteText } = useIntl();
+
   const { code } = router.query;
 
   const isMainRoute =

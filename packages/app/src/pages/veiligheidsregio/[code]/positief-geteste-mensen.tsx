@@ -29,22 +29,16 @@ import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  getText,
   getVrData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
-import {
-  formatDateFromMilliseconds,
-  formatDateFromSeconds,
-} from '~/utils/formatDate';
-import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 export { getStaticPaths } from '~/static-paths/vr';
+import { useIntl } from '~/intl';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getText,
   getVrData,
   createGetChoroplethData({
     gm: ({ tested_overall }) => ({ tested_overall }),
@@ -55,7 +49,15 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { data, choropleth, safetyRegionName, text: siteText, content } = props;
+  const { data, choropleth, safetyRegionName, content } = props;
+
+  const {
+    siteText,
+    formatNumber,
+    formatDateFromMilliseconds,
+    formatDateFromSeconds,
+    formatPercentage,
+  } = useIntl();
 
   const text = siteText.veiligheidsregio_positief_geteste_personen;
   const ggdText = siteText.veiligheidsregio_positief_geteste_personen_ggd;

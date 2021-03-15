@@ -1,10 +1,10 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Text } from '~/components-styled/typography';
-import { formatPercentage } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { AgeDemographicChartText, AgeDemographicDefaultValue } from './types';
 import { formatAgeGroupRange } from './utils';
+import { useIntl } from '~/intl';
 
 interface AgeDemographicTooltipContentProps<
   T extends AgeDemographicDefaultValue
@@ -17,6 +17,8 @@ interface AgeDemographicTooltipContentProps<
 export function AgeDemographicTooltipContent<
   T extends AgeDemographicDefaultValue
 >({ value, metricProperty, text }: AgeDemographicTooltipContentProps<T>) {
+  const { formatPercentage } = useIntl();
+
   return (
     <>
       <Text fontSize={3} fontWeight="bold" px={3} py={2} m="0">

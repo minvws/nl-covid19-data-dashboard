@@ -9,8 +9,6 @@ import { TimeSeriesChart } from '~/components-styled/time-series-chart';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 
-const text = siteText.section_sterftemonitor;
-
 export function DeceasedMonitorSection({
   data,
   showDataMessage,
@@ -18,6 +16,9 @@ export function DeceasedMonitorSection({
   data: NationalDeceasedCbs | RegionalDeceasedCbs;
   showDataMessage?: boolean;
 }) {
+  const { siteText } = useIntl();
+  const text = siteText.section_sterftemonitor;
+
   return (
     <>
       {showDataMessage && (

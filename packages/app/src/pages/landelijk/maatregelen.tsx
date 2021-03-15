@@ -1,14 +1,13 @@
 import css from '@styled-system/css';
 import { ContentHeader } from '~/components-styled/content-header';
 import { FCWithLayout } from '~/domain/layout/layout';
-import { getNationalLayout } from '~/domain/layout/national-layout';
+import { GetNationalLayout } from '~/domain/layout/national-layout';
 import { Heading } from '~/components-styled/typography';
 import { KpiSection } from '~/components-styled/kpi-section';
 import { LockdownTable } from '~/domain/restrictions/lockdown-table';
 import { SEOHead } from '~/components-styled/seo-head';
 import { Box } from '~/components-styled/base/box';
 import { TileList } from '~/components-styled/tile-list';
-import { targetLanguage } from '~/locale/index';
 
 import { useIntl } from '~/intl';
 import {
@@ -26,6 +25,9 @@ type MaatregelenData = {
   roadmap?: RoadmapData;
 };
 
+//@TODO THIS IS HARDCODED TO NL BUT NEEDS TO COME FROM CONTEXT
+const locale = 'nl';
+
 const query = `
 {
   'lockdown': *[_type == 'lockdown']{
@@ -34,8 +36,8 @@ const query = `
       ...message,
       "description": {
         ...message.description,
-        "${targetLanguage}": [
-          ...message.description.${targetLanguage}[]
+        "${locale}": [
+          ...message.description.${locale}[]
           {
             ...,
             "asset": asset->
@@ -55,6 +57,8 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const NationalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
+  const { siteText } = useIntl();
+
   const { content } = props;
   const { lockdown } = content;
 
@@ -70,11 +74,11 @@ const NationalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
   return (
     <>
       <SEOHead
-        title={text.nationaal_metadata.title}
-        description={text.nationaal_metadata.description}
+        title={siteText.nationaal_metadata.title}
+        description={siteText.nationaal_metadata.description}
       />
       <TileList>
-        <ContentHeader title={text.nationaal_maatregelen.titel} />
+        <ContentHeader title={siteText.nationaal_maatregelen.titel} />
 
         {showLockdown && (
           <KpiSection flexDirection="column">
@@ -104,6 +108,6 @@ const NationalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
   );
 };
 
-NationalRestrictions.getLayout = getNationalLayout;
+NationalRestrictions.getLayout = GetNationalLayout;
 
 export default NationalRestrictions;

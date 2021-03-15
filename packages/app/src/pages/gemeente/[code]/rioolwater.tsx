@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import ExperimenteelIcon from '~/assets/experimenteel.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import { ArticleStrip } from '~/components-styled/article-strip';
@@ -21,38 +20,35 @@ import { FCWithLayout } from '~/domain/layout/layout';
 import { getMunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import { useIntl } from '~/intl';
+
 import {
   createGetContent,
   getGmData,
   getLastGeneratedDate,
-  getText,
 } from '~/static-props/get-data';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { getSewerWaterBarChartData } from '~/utils/sewer-water/municipality-sewer-water.util';
+import { useSewerWaterBarChartData } from '~/utils/sewer-water/municipality-sewer-water.util';
 
 export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   getGmData,
-  getText,
   createGetContent<{
     articles?: ArticleSummary[];
   }>(createPageArticlesQuery('sewerPage'))
 );
 
 const SewerWater: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { data, municipalityName, content, text: siteText } = props;
+  const { data, municipalityName, content } = props;
+  const { siteText } = useIntl();
 
   const text = siteText.gemeente_rioolwater_metingen;
   const graphDescriptions = siteText.accessibility.grafieken;
 
-  const { barChartData } = useMemo(() => {
-    return {
-      barChartData: getSewerWaterBarChartData(data),
-    };
-  }, [data]);
+  const barChartData = useSewerWaterBarChartData(data);
 
   const sewerAverages = data.sewer;
 

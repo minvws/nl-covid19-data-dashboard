@@ -31,14 +31,15 @@ export const getStaticProps = createGetStaticProps(
   }>(createPageArticlesQuery('deceasedPage'))
 );
 
-const text = siteText.gemeente_sterfte;
-
 const DeceasedMunicipalPage: FCWithLayout<typeof getStaticProps> = (props) => {
   const {
     municipalityName,
     data: { deceased_rivm: dataRivm, difference },
     content,
   } = props;
+
+  const { siteText } = useIntl();
+  const text = siteText.gemeente_sterfte;
 
   return (
     <>

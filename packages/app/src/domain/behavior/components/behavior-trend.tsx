@@ -6,7 +6,6 @@ import PijlOmlaag from '~/assets/pijl-omlaag.svg';
 import { BehaviorTrendType } from '../behavior-types';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
-const commonText = siteText.gedrag_common;
 
 interface BehaviorTrendProps {
   trend: BehaviorTrendType | undefined;
@@ -28,6 +27,9 @@ const Trend = styled.span((a) =>
 );
 
 export function BehaviorTrend({ trend }: BehaviorTrendProps) {
+  const { siteText } = useIntl();
+  const commonText = siteText.gedrag_common;
+
   if (trend === undefined) {
     return <>-</>;
   }

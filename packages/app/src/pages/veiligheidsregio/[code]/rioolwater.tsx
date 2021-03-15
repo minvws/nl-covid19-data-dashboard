@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import ExperimenteelIcon from '~/assets/experimenteel.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import { ArticleStrip } from '~/components-styled/article-strip';
@@ -24,18 +23,17 @@ import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
-  getText,
   getVrData,
 } from '~/static-props/get-data';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { getSewerWaterBarChartData } from '~/utils/sewer-water/safety-region-sewer-water.util';
+import { useSewerWaterBarChartData } from '~/utils/sewer-water/safety-region-sewer-water.util';
+import { useIntl } from '~/intl';
 
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getText,
   getVrData,
   createGetContent<{
     articles?: ArticleSummary[];
@@ -43,16 +41,14 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const SewerWater: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { data, safetyRegionName, content, text: siteText } = props;
+  const { data, safetyRegionName, content } = props;
+
+  const { siteText } = useIntl();
 
   const text = siteText.veiligheidsregio_rioolwater_metingen;
   const graphDescriptions = siteText.accessibility.grafieken;
 
-  const { barChartData } = useMemo(() => {
-    return {
-      barChartData: getSewerWaterBarChartData(data),
-    };
-  }, [data]);
+  const barChartData = useSewerWaterBarChartData(data);
 
   const sewerAverages = data.sewer;
 

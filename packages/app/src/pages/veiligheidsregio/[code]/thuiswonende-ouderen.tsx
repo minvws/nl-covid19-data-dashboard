@@ -25,14 +25,16 @@ export const getStaticProps = createGetStaticProps(
   getVrData
 );
 
-const text = siteText.veiligheidsregio_thuiswonende_ouderen;
-const graphDescriptions = siteText.accessibility.grafieken;
-
 const ElderlyAtHomeRegionalPage: FCWithLayout<typeof getStaticProps> = (
   props
 ) => {
   const { safetyRegionName, data } = props;
   const { elderly_at_home, difference } = data;
+
+  const { siteText } = useIntl();
+
+  const text = siteText.veiligheidsregio_thuiswonende_ouderen;
+  const graphDescriptions = siteText.accessibility.grafieken;
 
   const elderlyAtHomeUnderReportedRange = getTrailingDateRange(
     elderly_at_home.values,

@@ -32,6 +32,7 @@ export function BehaviorLineChartTile({
 }: BehaviorLineChartTileProps) {
   const [type, setType] = useState<BehaviorType>('compliance');
   const [currentId, setCurrentId] = useState<BehaviorIdentifier>('wash_hands');
+  const { siteText } = useIntl();
 
   const behaviorIdentifierWithData = behaviorIdentifiers
     .map((id) => {

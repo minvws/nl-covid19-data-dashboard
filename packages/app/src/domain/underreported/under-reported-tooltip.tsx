@@ -3,7 +3,7 @@ import { Box } from '~/components-styled/base';
 import { TrendValue } from '~/components-styled/line-chart/logic';
 import { InlineText } from '~/components-styled/typography';
 import { colors } from '~/style/theme';
-import { formatDateFromMilliseconds } from '~/utils/formatDate';
+import { useIntl } from '~/intl';
 
 type UnderReportedTooltipProps<T extends TrendValue> = {
   value: T;
@@ -14,6 +14,8 @@ type UnderReportedTooltipProps<T extends TrendValue> = {
 export function UnderReportedTooltip<T extends TrendValue>(
   props: UnderReportedTooltipProps<T>
 ) {
+  const { formatDateFromMilliseconds } = useIntl();
+
   const { value, isInUnderReportedRange, underReportedText } = props;
 
   return (

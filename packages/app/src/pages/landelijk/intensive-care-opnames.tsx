@@ -14,7 +14,7 @@ import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/domain/layout/layout';
-import { getNationalLayout } from '~/domain/layout/national-layout';
+import { GetNationalLayout } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
@@ -25,15 +25,10 @@ import {
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { createDate } from '~/utils/createDate';
-import { formatDateFromSeconds } from '~/utils/formatDate';
-import { formatNumber } from '~/utils/formatNumber';
 import {
   DateRange,
   getTrailingDateRange,
 } from '~/utils/get-trailing-date-range';
-
-const text = siteText.ic_opnames_per_dag;
-const graphDescriptions = siteText.accessibility.grafieken;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -56,6 +51,10 @@ const IntakeIntensiveCare: FCWithLayout<typeof getStaticProps> = (props) => {
     createDate(data.intensive_care_lcps.values[0].date_unix),
     new Date('1 June 2020'),
   ] as DateRange;
+
+  const { siteText, formatDateFromSeconds, formatNumber } = useIntl();
+  const text = siteText.ic_opnames_per_dag;
+  const graphDescriptions = siteText.accessibility.grafieken;
 
   return (
     <>
@@ -208,6 +207,6 @@ const IntakeIntensiveCare: FCWithLayout<typeof getStaticProps> = (props) => {
   );
 };
 
-IntakeIntensiveCare.getLayout = getNationalLayout;
+IntakeIntensiveCare.getLayout = GetNationalLayout;
 
 export default IntakeIntensiveCare;

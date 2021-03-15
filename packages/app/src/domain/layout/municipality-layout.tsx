@@ -36,8 +36,12 @@ export function getMunicipalityLayout() {
     pageProps: MunicipalityLayoutProps
   ): React.ReactNode {
     const lastGenerated = pageProps.lastGenerated;
+
+    //@TODO THIS IS NULL
+    const { siteText } = useIntl(); //null
+
     return getLayout(
-      siteText.gemeente_metadata,
+      siteText?.gemeente_metadata,
       lastGenerated
     )(<MunicipalityLayout {...pageProps}>{page}</MunicipalityLayout>);
   };
@@ -62,8 +66,8 @@ export function getMunicipalityLayout() {
 function MunicipalityLayout(props: MunicipalityLayoutProps) {
   const { children, data, municipalityName } = props;
 
+  const { siteText } = useIntl();
   const breakpoints = useBreakpoints();
-
   const router = useRouter();
   const { code } = router.query;
 

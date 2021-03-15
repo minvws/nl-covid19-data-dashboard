@@ -17,7 +17,7 @@ import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-ch
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createInfectedLocationsRegionalTooltip } from '~/components/choropleth/tooltips/region/create-infected-locations-regional-tooltip';
 import { FCWithLayout } from '~/domain/layout/layout';
-import { getNationalLayout } from '~/domain/layout/national-layout';
+import { GetNationalLayout } from '~/domain/layout/national-layout';
 import { UnderReportedTooltip } from '~/domain/underreported/under-reported-tooltip';
 import { useIntl } from '~/intl';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
@@ -28,12 +28,6 @@ import {
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { getTrailingDateRange } from '~/utils/get-trailing-date-range';
-
-const infectedLocationsText = siteText.verpleeghuis_besmette_locaties;
-const positiveTestedPeopleText =
-  siteText.verpleeghuis_positief_geteste_personen;
-const locationDeaths = siteText.verpleeghuis_oversterfte;
-const graphDescriptions = siteText.accessibility.grafieken;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -54,6 +48,13 @@ const NursingHomeCare: FCWithLayout<typeof getStaticProps> = ({
   );
 
   const router = useRouter();
+
+  const { siteText } = useIntl();
+  const infectedLocationsText = siteText.verpleeghuis_besmette_locaties;
+  const positiveTestedPeopleText =
+    siteText.verpleeghuis_positief_geteste_personen;
+  const locationDeaths = siteText.verpleeghuis_oversterfte;
+  const graphDescriptions = siteText.accessibility.grafieken;
 
   return (
     <>
@@ -315,6 +316,6 @@ const NursingHomeCare: FCWithLayout<typeof getStaticProps> = ({
   );
 };
 
-NursingHomeCare.getLayout = getNationalLayout;
+NursingHomeCare.getLayout = GetNationalLayout;
 
 export default NursingHomeCare;

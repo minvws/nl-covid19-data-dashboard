@@ -18,7 +18,7 @@ import { BehaviorLineChartTile } from '~/domain/behavior/behavior-line-chart-til
 import { BehaviorTableTile } from '~/domain/behavior/behavior-table-tile';
 import { MoreInformation } from '~/domain/behavior/components/more-information';
 import { FCWithLayout } from '~/domain/layout/layout';
-import { getNationalLayout } from '~/domain/layout/national-layout';
+import { GetNationalLayout } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
@@ -28,7 +28,6 @@ import {
   getLastGeneratedDate,
   getNlData,
 } from '~/static-props/get-data';
-import { formatNumber } from '~/utils/formatNumber';
 import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 
@@ -49,6 +48,9 @@ const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
   content,
 }) => {
   const behaviorLastValue = data.behavior.last_value;
+
+  const { siteText, formatNumber } = useIntl();
+
   const { nl_gedrag, corona_melder_app } = siteText;
 
   return (
@@ -182,7 +184,7 @@ const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
   );
 };
 
-BehaviorPage.getLayout = getNationalLayout;
+BehaviorPage.getLayout = GetNationalLayout;
 
 export default BehaviorPage;
 
