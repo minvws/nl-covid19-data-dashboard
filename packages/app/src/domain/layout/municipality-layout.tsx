@@ -37,9 +37,6 @@ export function getMunicipalityLayout() {
   ): React.ReactNode {
     const lastGenerated = pageProps.lastGenerated;
 
-    //@TODO THIS IS NULL
-    const { siteText } = useIntl(); //null
-
     return getLayout(
       siteText?.gemeente_metadata,
       lastGenerated

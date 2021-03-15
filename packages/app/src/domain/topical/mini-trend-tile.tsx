@@ -92,7 +92,7 @@ export function MiniTrendTile<T extends TimestampedValue>(
 }
 
 function ComponentCallback(callbackInfo: ComponentCallbackInfo) {
-  const { messages } = useIntl();
+  const { siteText } = useIntl();
 
   const DAY_IN_SECONDS = 24 * 60 * 60;
   function formatLastDate(date: Date, defaultFormat?: TickFormatter<any>) {
@@ -101,11 +101,11 @@ function ComponentCallback(callbackInfo: ComponentCallbackInfo) {
     );
 
     if (days < 1) {
-      return messages.common.vandaag;
+      return siteText.common.vandaag;
     }
 
     if (days < 2) {
-      return messages.common.gisteren;
+      return siteText.common.gisteren;
     }
 
     return defaultFormat ? defaultFormat(date, 0, []) : '';

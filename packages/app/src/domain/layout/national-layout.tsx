@@ -31,17 +31,14 @@ interface NationalLayoutProps {
   children?: React.ReactNode;
 }
 
-export function GetNationalLayout(
+export function getNationalLayout(
   page: React.ReactNode,
   pageProps: NationalLayoutProps
 ) {
-  //@TODO THIS DOES NOT WORK. SITETEXT IS NULL?
-  const { siteText } = useIntl();
-  console.log(siteText); //null
-
   return (
     <Layout
-      {...siteText?.nationaal_metadata}
+      //@TODO HOW DO I GET METADATA HERE?
+      // {...siteText?.nationaal_metadata}
       lastGenerated={pageProps.lastGenerated}
     >
       <NationalLayout {...pageProps}>{page}</NationalLayout>

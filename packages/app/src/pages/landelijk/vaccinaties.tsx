@@ -53,6 +53,7 @@ export const getStaticProps = createGetStaticProps(
       articles?: ArticleSummary[];
     };
   }>(
+    //@TODO THIS NEEDS TO PASS CONTEXT
     `{
       "milestones": ${getVaccineMilestonesQuery(null)},
       "highlight": ${createPageArticlesQuery('vaccinationsPage')}
@@ -73,7 +74,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
   const { milestones } = content;
 
   const additions = text.expected_page_additions.additions.filter(
-    (x) => x.length
+    (x: any) => x.length
   );
 
   const vaccineNames = useVaccineNames(data.vaccine_administered.last_value);
@@ -245,7 +246,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                     valueAnnotation={siteText.waarde_annotaties.x_miljoen}
                     width={width}
                     timeframe="all"
-                    formatTooltip={createDeliveryTooltipFormatter(siteText)}
+                    formatTooltip={createDeliveryTooltipFormatter()}
                     divider={{
                       color: colors.annotation,
                       leftLabel: text.data.vaccination_chart.left_divider_label,
@@ -435,8 +436,8 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             {additions.length > 0 && (
               <ul>
                 {text.expected_page_additions.additions
-                  .filter((x) => x.length)
-                  .map((addition) => (
+                  .filter((x: any) => x.length)
+                  .map((addition: any) => (
                     <li key={addition}>
                       <InlineText>{addition}</InlineText>
                     </li>

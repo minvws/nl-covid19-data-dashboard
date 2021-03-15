@@ -16,20 +16,21 @@ export const escalationTooltip = (selectHandler: RegionSelectionHandler) => {
   return (context: SafetyRegionProperties & EscalationLevels): ReactNode => {
     const level = context.level as EscalationLevel;
 
-    const { formatDateFromSeconds, messages: text } = useIntl();
+    const { formatDateFromSeconds, siteText } = useIntl();
 
     const onSelect = (event: React.MouseEvent<HTMLElement>) => {
       event.stopPropagation();
       selectHandler(context.vrcode);
     };
 
-    const escalationText = ((text.escalatie_niveau.types as unknown) as Record<
+    const escalationText = ((siteText.escalatie_niveau
+      .types as unknown) as Record<
       EscalationLevel,
       { titel: string; valid_from: string }
     >)[level];
 
     const validFromText = replaceVariablesInText(
-      text.escalatie_niveau.valid_from,
+      siteText.escalatie_niveau.valid_from,
       {
         validFrom: formatDateFromSeconds(context.valid_from_unix, 'day-month'),
       }

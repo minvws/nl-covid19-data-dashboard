@@ -26,14 +26,13 @@ import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
 import { TopicalChoroplethContainer } from '~/domain/topical/topical-choropleth-container';
 import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
-import { topicalPageQuery } from '~/queries/topical-page-query';
+import { getTopicalPageQuery } from '~/queries/topical-page-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
   getGmData,
   getLastGeneratedDate,
-  getText,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { assert } from '~/utils/assert';
@@ -42,11 +41,11 @@ import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 export { getStaticPaths } from '~/static-paths/gm';
-import { getDataSitemap } from '~/domain/topical/sitemap/utils';
+import { useDataSitemap } from '~/domain/topical/sitemap/utils';
+import { useIntl } from '~/intl';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getText,
   getGmData,
   createGetChoroplethData({
     vr: ({ escalation_levels }) => ({ escalation_levels }),
@@ -55,11 +54,13 @@ export const getStaticProps = createGetStaticProps(
     articles: ArticleSummary[];
     editorial: EditorialSummary;
     highlight: HighlightTeaserProps;
-  }>(topicalPageQuery)
+  }>(getTopicalPageQuery)
 );
 
 const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { text: siteText, municipalityName, choropleth, data, content } = props;
+  const { municipalityName, choropleth, data, content } = props;
+
+  const { siteText } = useIntl();
   const router = useRouter();
   const text = siteText.gemeente_actueel;
   const gmCode = router.query.code;
@@ -77,7 +78,7 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
     (item) => item.vrcode === safetyRegionForMunicipality?.code
   );
 
-  const dataSitemap = getDataSitemap('gemeente', gmCode as string, data);
+  const dataSitemap = useDataSitemap('gemeente', gmCode as string, data);
 
   assert(
     filteredRegion && filteredRegion.level,

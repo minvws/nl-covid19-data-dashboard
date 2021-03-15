@@ -30,7 +30,17 @@ export type FCWithLayout<
   getLayout: (page: React.ReactNode, pageProps: Props) => React.ReactNode;
 };
 
-export function getLayoutWithMetadata(metadata: LayoutProps) {
+export function GetLayoutWithMetadata(metadata: LayoutProps) {
+  return function (page: React.ReactNode, pageProps: any) {
+    const lastGenerated = pageProps.lastGenerated;
+    return getLayout(metadata, lastGenerated)(<>{page}</>);
+  };
+}
+
+export function GetLayoutWithMetadataKey(metadatakey: string) {
+  const { siteText } = useIntl();
+  const metadata = siteText[metadatakey] as LayoutProps;
+
   return function (page: React.ReactNode, pageProps: any) {
     const lastGenerated = pageProps.lastGenerated;
     return getLayout(metadata, lastGenerated)(<>{page}</>);

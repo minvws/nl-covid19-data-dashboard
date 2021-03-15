@@ -2,8 +2,7 @@ import Head from 'next/head';
 import { Box } from '~/components-styled/base';
 import { ContentBlock } from '~/components-styled/cms/content-block';
 import { RichContent } from '~/components-styled/cms/rich-content';
-import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
-import siteText, { targetLanguage } from '~/locale/index';
+import { FCWithLayout, GetLayoutWithMetadataKey } from '~/domain/layout/layout';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
@@ -16,6 +15,8 @@ interface AccessibilityPageData {
   description: RichContentBlock[] | null;
 }
 
+//@TODO THIS NEEDS TO COME FROM CONTEXT
+const locale = 'nl';
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   createGetContent<AccessibilityPageData>(`
@@ -24,8 +25,8 @@ export const getStaticProps = createGetStaticProps(
     "description": {
       ...,
       "_type": description._type,
-      "${targetLanguage}": [
-        ...description.${targetLanguage}[]{
+      "${locale}": [
+        ...description.${locale}[]{
           ...,
           "asset": asset->,
           markDefs[]{
@@ -69,10 +70,8 @@ const AccessibilityPage: FCWithLayout<typeof getStaticProps> = (props) => {
   );
 };
 
-const metadata = {
-  ...siteText.toegankelijkheid_metadata,
-};
-
-AccessibilityPage.getLayout = getLayoutWithMetadata(metadata);
+AccessibilityPage.getLayout = GetLayoutWithMetadataKey(
+  'toegankelijkheid_metadata'
+);
 
 export default AccessibilityPage;

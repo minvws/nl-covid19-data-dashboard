@@ -1,8 +1,7 @@
 import Head from 'next/head';
 import { CollapsibleSection } from '~/components-styled/collapsible';
 import { MaxWidth } from '~/components-styled/max-width';
-import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
-import siteText, { targetLanguage } from '~/locale/index';
+import { FCWithLayout, GetLayoutWithMetadataKey } from '~/domain/layout/layout';
 import {
   createGetContent,
   getLastGeneratedDate,
@@ -19,13 +18,15 @@ interface OverRisiconiveausData {
   collapsibleList: CollapsibleList[];
 }
 
+//@TODO THIS NEEDS TO COME FROM CONTEXT
+const locale = 'nl';
 const query = `
 *[_type == 'overRisicoNiveaus']{
   ...,
   "description": {
     "_type": description._type,
-    "${targetLanguage}": [
-      ...description.${targetLanguage}[]
+    "${locale}": [
+      ...description.${locale}[]
       {
         ...,
         "asset": asset->
@@ -37,8 +38,8 @@ const query = `
       ...,
       "content": {
         ...content,
-        "${targetLanguage}": [
-          ...content.${targetLanguage}[]
+        "${locale}": [
+          ...content.${locale}[]
           {
             ...,
             "asset": asset->
@@ -103,10 +104,8 @@ const OverRisicoNiveaus: FCWithLayout<typeof getStaticProps> = (props) => {
   );
 };
 
-const metadata = {
-  ...siteText.over_risiconiveaus_metadata,
-};
-
-OverRisicoNiveaus.getLayout = getLayoutWithMetadata(metadata);
+OverRisicoNiveaus.getLayout = GetLayoutWithMetadataKey(
+  'over_risiconiveaus_metadata'
+);
 
 export default OverRisicoNiveaus;

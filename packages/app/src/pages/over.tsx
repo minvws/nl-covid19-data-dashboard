@@ -1,8 +1,7 @@
 import Head from 'next/head';
 import { RichContent } from '~/components-styled/cms/rich-content';
 import { MaxWidth } from '~/components-styled/max-width';
-import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
-import siteText, { targetLanguage } from '~/locale/index';
+import { FCWithLayout, GetLayoutWithMetadataKey } from '~/domain/layout/layout';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
@@ -16,13 +15,15 @@ interface OverData {
   description: RichContentBlock[] | null;
 }
 
+//@TODO THIS NEEDS TO COME FROM CONTEXT
+const locale = 'nl';
 const query = `
 *[_type == 'overDitDashboard']{
   ...,
   "description": {
     "_type": description._type,
-    "${targetLanguage}": [
-      ...description.${targetLanguage}[]
+    "${locale}": [
+      ...description.${locale}[]
       {
         ...,
         "asset": asset->
@@ -70,10 +71,6 @@ const Over: FCWithLayout<typeof getStaticProps> = (props) => {
   );
 };
 
-const metadata = {
-  ...siteText.over_metadata,
-};
-
-Over.getLayout = getLayoutWithMetadata(metadata);
+Over.getLayout = GetLayoutWithMetadataKey('over_metadata');
 
 export default Over;

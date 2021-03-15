@@ -1,22 +1,24 @@
 import { ArticleSummary } from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
 import { MaxWidth } from '~/components-styled/max-width';
-import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
+import { FCWithLayout, GetLayoutWithMetadataKey } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
-import { useIntl } from '~/intl';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
 } from '~/static-props/get-data';
 
+//@TODO THIS NEEDS TO COME FROM CONTEXT
+const locale = 'nl';
+
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   createGetContent<ArticleSummary[]>(
     `*[_type == 'article'] | order(publicationDate desc) {
-      "title":title.${targetLanguage},
+      "title":title.${locale},
       slug,
-      "summary":summary.${targetLanguage},
+      "summary":summary.${locale},
       "cover": {
         ...cover,
         "asset": cover.asset->
@@ -37,6 +39,6 @@ const ArticlesOverview: FCWithLayout<typeof getStaticProps> = (props) => {
   );
 };
 
-ArticlesOverview.getLayout = getLayoutWithMetadata(siteText.articles_metadata);
+ArticlesOverview.getLayout = GetLayoutWithMetadataKey('articles_metadata');
 
 export default ArticlesOverview;

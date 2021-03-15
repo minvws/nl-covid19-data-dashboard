@@ -36,10 +36,10 @@ interface SafetyRegionLayoutProps {
 export function getSafetyRegionLayout() {
   return function (page: React.ReactNode, pageProps: SafetyRegionLayoutProps) {
     //@TODO WHY IS THIS NULL
-    const { siteText } = useIntl(); //null
 
     return getSiteLayout(
-      siteText?.veiligheidsregio_metadata,
+      //@TODO HOW DO I GET METADATA HERE?
+      // siteText?.veiligheidsregio_metadata,
       pageProps.lastGenerated
     )(<SafetyRegionLayout {...pageProps}>{page}</SafetyRegionLayout>);
   };

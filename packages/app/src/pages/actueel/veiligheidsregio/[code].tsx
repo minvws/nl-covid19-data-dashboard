@@ -28,24 +28,23 @@ import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
 import { TopicalChoroplethContainer } from '~/domain/topical/topical-choropleth-container';
 import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
-import { topicalPageQuery } from '~/queries/topical-page-query';
+import { getTopicalPageQuery } from '~/queries/topical-page-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  getText,
   getVrData,
 } from '~/static-props/get-data';
 import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 export { getStaticPaths } from '~/static-paths/vr';
-import { getDataSitemap } from '~/domain/topical/sitemap/utils';
+import { useDataSitemap } from '~/domain/topical/sitemap/utils';
+import { useIntl } from '~/intl';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getText,
   getVrData,
   createGetChoroplethData({
     vr: ({ escalation_levels }) => ({ escalation_levels }),
@@ -54,12 +53,14 @@ export const getStaticProps = createGetStaticProps(
     articles: ArticleSummary[];
     editorial: EditorialSummary;
     highlight: HighlightTeaserProps;
-  }>(topicalPageQuery)
+  }>(getTopicalPageQuery)
 );
 
 const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { text: siteText, choropleth, data, content } = props;
+  const { choropleth, data, content } = props;
   const router = useRouter();
+  const { siteText } = useIntl();
+
   const text = siteText.veiligheidsregio_actueel;
   const escalationText = siteText.escalatie_niveau;
   const vrCode = router.query.code as string;
@@ -67,7 +68,7 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
   const dataInfectedTotal = data.tested_overall;
   const dataHospitalIntake = data.hospital_nice;
 
-  const dataSitemap = getDataSitemap('veiligheidsregio', vrCode);
+  const dataSitemap = useDataSitemap('veiligheidsregio', vrCode);
 
   return (
     <>

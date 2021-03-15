@@ -2,8 +2,7 @@ import Head from 'next/head';
 import { RichContent } from '~/components-styled/cms/rich-content';
 import { CollapsibleSection } from '~/components-styled/collapsible';
 import { MaxWidth } from '~/components-styled/max-width';
-import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
-import siteText, { targetLanguage } from '~/locale/index';
+import { FCWithLayout, GetLayoutWithMetadataKey } from '~/domain/layout/layout';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
@@ -19,12 +18,14 @@ interface VeelgesteldeVragenData {
   questions: CollapsibleList[];
 }
 
+//@TODO THIS NEEDS TO COME FROM CONTEXT
+const locale = 'nl';
 const query = `*[_type == 'veelgesteldeVragen']{
   ...,
   "description": {
     "_type": description._type,
-    "${targetLanguage}": [
-      ...description.${targetLanguage}[]
+    "${locale}": [
+      ...description.${locale}[]
       {
         ...,
         "asset": asset->
@@ -38,7 +39,7 @@ const query = `*[_type == 'veelgesteldeVragen']{
                 
       "content": {
         ...content,
-        "${targetLanguage}": [...content.${targetLanguage}[]
+        "${locale}": [...content.${locale}[]
           {
             ...,
             "asset": asset->
@@ -104,10 +105,8 @@ const Verantwoording: FCWithLayout<typeof getStaticProps> = (props) => {
   );
 };
 
-const metadata = {
-  ...siteText.veelgestelde_vragen_metadata,
-};
-
-Verantwoording.getLayout = getLayoutWithMetadata(metadata);
+Verantwoording.getLayout = GetLayoutWithMetadataKey(
+  'veelgestelde_vragen_metadata'
+);
 
 export default Verantwoording;

@@ -1,8 +1,7 @@
 import { Box } from '~/components-styled/base';
 import { EditorialDetail } from '~/components-styled/editorial-detail';
-import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
+import { FCWithLayout, GetLayoutWithMetadata } from '~/domain/layout/layout';
 import { client, getImageSrc, localize } from '~/lib/sanity';
-import { targetLanguage } from '~/locale/index';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
@@ -13,10 +12,12 @@ import { assert } from '~/utils/assert';
 
 const editorialsQuery = `*[_type == 'editorial'] {"slug":slug.current}`;
 
+//@TODO THIS NEED TO COME FROM CONTEXT
+const locale = 'nl';
 export async function getStaticPaths() {
   const editorialData = await client.fetch(editorialsQuery);
   const editorials = localize<{ slug: string }[]>(editorialData, [
-    targetLanguage,
+    locale,
     'nl',
   ]);
 
@@ -41,8 +42,8 @@ export const getStaticProps = createGetStaticProps(
         },
         "intro": {
           ...intro,
-          "${targetLanguage}": [
-            ...intro.${targetLanguage}[]
+          "${locale}": [
+            ...intro.${locale}[]
             {
               ...,
               "asset": asset->
@@ -51,8 +52,8 @@ export const getStaticProps = createGetStaticProps(
         },
         "content": {
           "_type": content._type,
-          "${targetLanguage}": [
-            ...content.${targetLanguage}[]
+          "${locale}": [
+            ...content.${locale}[]
             {
               ...,
               "asset": asset->,
@@ -88,7 +89,7 @@ EditorialDetailPage.getLayout = (page, props) => {
 
   const imgPath = getImageSrc(asset, 1200);
 
-  return getLayoutWithMetadata({
+  return GetLayoutWithMetadata({
     title: getTitle(props.content.title),
     description: toPlainText(props.content.intro),
     openGraphImage: imgPath,
