@@ -14,19 +14,6 @@ interface AppContentProps {
   hideMenuButton?: boolean;
 }
 
-function getMenuOpenText(pathname: string) {
-  if (pathname.startsWith('/landelijk')) {
-    return siteText.nav.terug_naar_alle_cijfers_homepage;
-  }
-  if (pathname.startsWith('/veiligheidsregio')) {
-    return siteText.nav.terug_naar_alle_cijfers_veiligheidsregio;
-  }
-  if (pathname.startsWith('/gemeente')) {
-    return siteText.nav.terug_naar_alle_cijfers_gemeente;
-  }
-  return siteText.nav.terug_naar_alle_cijfers;
-}
-
 export function AppContent({
   children,
   sidebarComponent,
@@ -34,11 +21,25 @@ export function AppContent({
   hideMenuButton,
 }: AppContentProps) {
   const router = useRouter();
+  const { siteText } = useIntl();
 
   const menuOpenUrl = {
     pathname: router.pathname,
     query: { ...router.query, menu: '1' },
   };
+
+  function getMenuOpenText(pathname: string) {
+    if (pathname.startsWith('/landelijk')) {
+      return siteText.nav.terug_naar_alle_cijfers_homepage;
+    }
+    if (pathname.startsWith('/veiligheidsregio')) {
+      return siteText.nav.terug_naar_alle_cijfers_veiligheidsregio;
+    }
+    if (pathname.startsWith('/gemeente')) {
+      return siteText.nav.terug_naar_alle_cijfers_gemeente;
+    }
+    return siteText.nav.terug_naar_alle_cijfers;
+  }
 
   /**
    * @TODO Possibly not the right place to check the "homepage" (/) menu-state,

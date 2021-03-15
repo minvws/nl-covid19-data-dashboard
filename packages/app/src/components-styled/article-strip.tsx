@@ -19,6 +19,8 @@ type ArticleStripProps = {
 export function ArticleStrip(props: ArticleStripProps) {
   const { articles } = props;
 
+  const { siteText } = useIntl();
+
   if (!articles?.length) {
     return null;
   }
@@ -58,6 +60,8 @@ type ArticleStripItemProps = {
 
 function ArticleStripItem(props: ArticleStripItemProps) {
   const { slug, cover, title } = props;
+
+  const { siteText } = useIntl();
 
   return (
     <Link passHref href={`/artikelen/${slug}`}>

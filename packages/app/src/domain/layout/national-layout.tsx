@@ -31,13 +31,17 @@ interface NationalLayoutProps {
   children?: React.ReactNode;
 }
 
-export function getNationalLayout(
+export function GetNationalLayout(
   page: React.ReactNode,
   pageProps: NationalLayoutProps
 ) {
+  //@TODO THIS DOES NOT WORK. SITETEXT IS NULL?
+  const { siteText } = useIntl();
+  console.log(siteText); //null
+
   return (
     <Layout
-      {...siteText.nationaal_metadata}
+      {...siteText?.nationaal_metadata}
       lastGenerated={pageProps.lastGenerated}
     >
       <NationalLayout {...pageProps}>{page}</NationalLayout>
@@ -64,6 +68,7 @@ function NationalLayout(props: NationalLayoutProps) {
   const { children, data } = props;
   const router = useRouter();
   const breakpoints = useBreakpoints();
+  const { siteText } = useIntl();
 
   const isMenuOpen =
     (router.pathname === '/landelijk' && !('menu' in router.query)) ||

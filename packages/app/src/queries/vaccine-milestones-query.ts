@@ -1,6 +1,8 @@
 import { GetStaticPropsContext } from 'next';
 
-export function getVaccineMilestonesQuery() {
+export function getVaccineMilestonesQuery(context: GetStaticPropsContext) {
+  //@TODO
+  // CONTEXT IS NOT PASSED TO THIS GETTER. FIGURE OUT HOW TO SOLVE THIS!
   const locale = 'nl';
   return `
   *[_type=='vaccinationsPage']{

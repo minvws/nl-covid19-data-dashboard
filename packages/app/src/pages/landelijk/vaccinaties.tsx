@@ -22,7 +22,7 @@ import { TimeSeriesChart } from '~/components-styled/time-series-chart';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { InlineText, Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/domain/layout/layout';
-import { getNationalLayout } from '~/domain/layout/national-layout';
+import { GetNationalLayout } from '~/domain/layout/national-layout';
 import { VaccineSupportTooltip } from '~/domain/vaccine/components/vaccine-support-tooltip';
 import { createDeliveryTooltipFormatter } from '~/domain/vaccine/create-delivery-tooltip-formatter';
 import {
@@ -54,7 +54,7 @@ export const getStaticProps = createGetStaticProps(
     };
   }>(
     `{
-      "milestones": ${getVaccineMilestonesQuery},
+      "milestones": ${getVaccineMilestonesQuery(null)},
       "highlight": ${createPageArticlesQuery('vaccinationsPage')}
     }`
   )
@@ -450,7 +450,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
   );
 };
 
-VaccinationPage.getLayout = getNationalLayout;
+VaccinationPage.getLayout = GetNationalLayout;
 
 export default VaccinationPage;
 
@@ -463,7 +463,7 @@ interface VaccineAdministeredProps {
 
 function VaccineAdministeredItem(props: VaccineAdministeredProps) {
   const { value, date, description, isReported } = props;
-  const { siteText } = useIntl();
+  const { siteText, formatNumber, formatDateFromSeconds } = useIntl();
 
   return (
     <Text fontWeight="bold">

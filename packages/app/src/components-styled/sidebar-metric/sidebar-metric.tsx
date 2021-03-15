@@ -27,7 +27,7 @@ interface SidebarMetricProps<T extends { difference: unknown }> {
    * Currently only behavior is doing that.
    */
   metricProperty?: string;
-  localeTextKey: keyof Locale;
+  localeTextKey: any;
   differenceKey?: DifferenceKey;
   showBarScale?: boolean;
   annotationKey?: string;
