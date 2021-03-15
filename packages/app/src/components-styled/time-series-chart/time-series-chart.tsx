@@ -1,6 +1,6 @@
 import { TimestampedValue } from '@corona-dashboard/common';
 import { useTooltip } from '@visx/tooltip';
-import { useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import useResizeObserver from 'use-resize-observer';
 import { Box } from '~/components-styled/base';
@@ -111,7 +111,7 @@ export type TimeSeriesChartProps<T extends TimestampedValue> = {
    */
   dataOptions?: DataOptions;
   disableLegend?: boolean;
-  onTooltipClick?: (x: TooltipData<T>) => void;
+  onSeriesClick?: (metricProperty: keyof T, value: T) => void;
 };
 
 export function TimeSeriesChart<T extends TimestampedValue>({
@@ -129,7 +129,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
   ariaLabelledBy,
   title,
   disableLegend,
-  onTooltipClick,
+  onSeriesClick,
 }: TimeSeriesChartProps<T>) {
   const {
     tooltipData,
@@ -242,6 +242,12 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     timespanAnnotations,
   ]);
 
+  const handleClick = useCallback(() => {
+    if (onSeriesClick && tooltipData) {
+      onSeriesClick(tooltipData.valueKey, tooltipData.value);
+    }
+  }, [onSeriesClick, tooltipData]);
+
   return (
     <Box>
       {valueAnnotation && (
@@ -255,9 +261,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
           padding={padding}
           ariaLabelledBy={ariaLabelledBy}
           onHover={handleHover}
-          onClick={() =>
-            onTooltipClick && tooltipData && onTooltipClick(tooltipData)
-          }
+          onClick={handleClick}
         >
           <Axes
             bounds={bounds}

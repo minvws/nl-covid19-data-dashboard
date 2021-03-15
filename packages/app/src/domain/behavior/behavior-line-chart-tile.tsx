@@ -4,7 +4,7 @@ import {
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { ParentSize } from '@visx/responsive';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import { isPresent } from 'ts-is-present';
 import { Box, Spacer } from '~/components-styled/base';
@@ -60,6 +60,12 @@ export function BehaviorLineChartTile({
         : undefined;
     })
     .filter(isPresent);
+
+  const handleSeriesClick = useCallback(
+    (key: keyof NationalBehaviorValue) =>
+      setCurrentId(key.replace(`_${type}`, '') as BehaviorIdentifier),
+    [type]
+  );
 
   return (
     <Tile>
@@ -125,11 +131,7 @@ export function BehaviorLineChartTile({
             }}
             tickValues={[0, 25, 50, 75, 100]}
             showDateMarker
-            onTooltipClick={(x) =>
-              setCurrentId(
-                x.valueKey.replace(`_${type}`, '') as BehaviorIdentifier
-              )
-            }
+            onSeriesClick={handleSeriesClick}
           />
         )}
       </ParentSize>
