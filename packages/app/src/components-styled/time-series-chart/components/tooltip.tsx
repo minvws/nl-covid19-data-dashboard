@@ -28,11 +28,13 @@ const tooltipStyles = {
 
 export type TooltipData<T extends TimestampedValue> = {
   value: T;
+
   /**
-   * The metric key of the nearest / active hover point. This can be used to
+   * The config index of the nearest / active hover point. This can be used to
    * look up the value from T and highlight it.
    */
-  valueKey: keyof T;
+  configIndex: number;
+
   /**
    * The full series config is passed to the tooltip so we can render whatever
    * is needed.
@@ -51,11 +53,16 @@ export type TooltipData<T extends TimestampedValue> = {
    * ever define overlapping annotations for now.
    */
   timespanAnnotation?: TimespanAnnotationConfig;
+
+  /**
+   * Configuration to display the nearest point only in the tooltip
+   */
+  markNearestPointOnly?: boolean;
 };
 
 export type TooltipFormatter<T extends TimestampedValue> = (args: {
   value: T;
-  valueKey: keyof T;
+  configIndex: number;
   config: SeriesConfig<T>;
   isPercentage?: boolean;
 }) => React.ReactNode;
@@ -119,53 +126,25 @@ export const TooltipContainer = styled.div(
   })
 );
 
-interface DefaultTooltipProps<T extends TimestampedValue> {
+interface DefaultTooltipProps<T extends TimestampedValue>
+  extends TooltipData<T> {
   title: string;
-  value: T;
-  valueKey: keyof T;
-  config: SeriesConfig<T>;
-  options: DataOptions;
-  timespanAnnotation?: TimespanAnnotationConfig;
 }
 
 export function DefaultTooltip<T extends TimestampedValue>({
   title,
   value,
-  valueKey,
+  configIndex,
   config,
   options,
+  markNearestPointOnly,
   timespanAnnotation: __timespanAnnotation,
 }: DefaultTooltipProps<T>) {
   const dateString = getDateStringFromValue(value);
 
-  const seriesConfig = config
-    /**
-     * @TODO There's room for improvement https://github.com/minvws/nl-covid19-data-dashboard/pull/2284#discussion_r593158099
-     */
-    .filter((x) => {
-      if (options.showNearestPointOnly) {
-        /**
-         * We only want to render a single serie belonging to the nearest point
-         */
-
-        if (x.type === 'range') {
-          return (
-            x.metricPropertyLow === valueKey ||
-            x.metricPropertyHigh === valueKey
-          );
-        }
-
-        if (x.type === 'line' || x.type === 'area') {
-          return x.metricProperty === valueKey;
-        }
-      }
-
-      /**
-       * render all series in the tooltip
-       */
-      return true;
-    })
-    .reverse();
+  const seriesConfig: SeriesConfig<T> = markNearestPointOnly
+    ? [config[configIndex]]
+    : [...config].reverse();
 
   return (
     <section>

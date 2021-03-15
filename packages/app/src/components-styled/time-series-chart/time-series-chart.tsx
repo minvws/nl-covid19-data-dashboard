@@ -84,10 +84,13 @@ export type { SeriesConfig } from './logic';
  *   margin. This is currently not used in any charts but would be nice to solve
  *   at some point.
  */
-export type TimeSeriesChartProps<T extends TimestampedValue> = {
+export type TimeSeriesChartProps<
+  T extends TimestampedValue,
+  C extends SeriesConfig<T>
+> = {
   title: string; // Used for default tooltip formatting
   values: T[];
-  seriesConfig: SeriesConfig<T>;
+  seriesConfig: C;
   ariaLabelledBy: string;
   height?: number;
   timeframe?: TimeframeOption;
@@ -110,10 +113,20 @@ export type TimeSeriesChartProps<T extends TimestampedValue> = {
    */
   dataOptions?: DataOptions;
   disableLegend?: boolean;
-  onSeriesClick?: (metricProperty: keyof T, value: T) => void;
+  onSeriesClick?: (serieConfig: C[number], value: T) => void;
+
+  /**
+   * By default markers for all series are displayed on hover, also the tooltip
+   * will display all series of the selected X-value. The `markNearestPointOnly`
+   * will result in a user interacting with the single nearest point only.
+   */
+  markNearestPointOnly?: boolean;
 };
 
-export function TimeSeriesChart<T extends TimestampedValue>({
+export function TimeSeriesChart<
+  T extends TimestampedValue,
+  C extends SeriesConfig<T>
+>({
   values: allValues,
   seriesConfig,
   height = 250,
@@ -127,7 +140,8 @@ export function TimeSeriesChart<T extends TimestampedValue>({
   title,
   disableLegend,
   onSeriesClick,
-}: TimeSeriesChartProps<T>) {
+  markNearestPointOnly,
+}: TimeSeriesChartProps<T, C>) {
   const {
     tooltipData,
     tooltipLeft = 0,
@@ -142,7 +156,6 @@ export function TimeSeriesChart<T extends TimestampedValue>({
   const {
     valueAnnotation,
     isPercentage,
-    showNearestPointOnly,
     forcedMaximumValue,
     benchmark,
     timespanAnnotations,
@@ -196,7 +209,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     xScale,
     yScale,
     timespanAnnotations,
-    showNearestPointOnly,
+    markNearestPointOnly,
   });
 
   useEffect(() => {
@@ -212,8 +225,9 @@ export function TimeSeriesChart<T extends TimestampedValue>({
            * tooltip.
            */
           value: values[valuesIndex],
-          valueKey: nearestPoint.metricProperty as keyof T,
           config: seriesConfig,
+          configIndex: nearestPoint.seriesConfigIndex,
+          markNearestPointOnly,
           options: dataOptions || {},
           /**
            * Pass the full annotation data. We could just pass the index because
@@ -239,13 +253,14 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     showTooltip,
     dataOptions,
     timespanAnnotations,
+    markNearestPointOnly,
   ]);
 
   const handleClick = useCallback(() => {
     if (onSeriesClick && tooltipData) {
-      onSeriesClick(tooltipData.valueKey, tooltipData.value);
+      onSeriesClick(seriesConfig[tooltipData.configIndex], tooltipData.value);
     }
-  }, [onSeriesClick, tooltipData]);
+  }, [onSeriesClick, seriesConfig, tooltipData]);
 
   return (
     <Box ref={sizeRef}>

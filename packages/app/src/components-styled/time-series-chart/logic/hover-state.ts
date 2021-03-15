@@ -21,6 +21,7 @@ import {
 export type HoveredPoint<T> = {
   seriesValue: SeriesSingleValue | SeriesDoubleValue;
   metricProperty: keyof T;
+  seriesConfigIndex: number;
   color: string;
   x: number;
   y: number;
@@ -34,7 +35,7 @@ interface UseHoverStateArgs<T extends TimestampedValue> {
   xScale: ScaleLinear<number, number>;
   yScale: ScaleLinear<number, number>;
   timespanAnnotations?: TimespanAnnotationConfig[];
-  showNearestPointOnly?: boolean;
+  markNearestPointOnly?: boolean;
 }
 
 interface HoverState<T> {
@@ -59,7 +60,7 @@ export function useHoverState<T extends TimestampedValue>({
   xScale,
   yScale,
   timespanAnnotations,
-  showNearestPointOnly,
+  markNearestPointOnly,
 }: UseHoverStateArgs<T>): UseHoverStateResponse<T> {
   const [point, setPoint] = useState<Point>();
   const timeoutRef = useRef<any>();
@@ -175,6 +176,7 @@ export function useHoverState<T extends TimestampedValue>({
               y: yScale(yValue),
               color: config.color,
               metricProperty: config.metricProperty,
+              seriesConfigIndex: index,
             };
         }
       })
@@ -209,6 +211,7 @@ export function useHoverState<T extends TimestampedValue>({
                 y: yScale(yValueA),
                 color: config.color,
                 metricProperty: config.metricPropertyLow,
+                seriesConfigIndex: index,
               },
               {
                 seriesValue,
@@ -216,6 +219,7 @@ export function useHoverState<T extends TimestampedValue>({
                 y: yScale(yValueB),
                 color: config.color,
                 metricProperty: config.metricPropertyHigh,
+                seriesConfigIndex: index,
               },
             ];
         }
@@ -240,10 +244,10 @@ export function useHoverState<T extends TimestampedValue>({
 
     const hoverState: HoverState<T> = {
       valuesIndex,
-      linePoints: showNearestPointOnly
+      linePoints: markNearestPointOnly
         ? linePoints.filter((x) => x === nearestPoint)
         : linePoints,
-      rangePoints: showNearestPointOnly
+      rangePoints: markNearestPointOnly
         ? rangePoints.filter((x) => x === nearestPoint)
         : rangePoints,
       nearestPoint,
@@ -253,7 +257,7 @@ export function useHoverState<T extends TimestampedValue>({
     return hoverState;
   }, [
     bisect,
-    showNearestPointOnly,
+    markNearestPointOnly,
     padding,
     point,
     seriesConfig,

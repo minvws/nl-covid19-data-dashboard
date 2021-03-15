@@ -3,7 +3,7 @@ import {
   RegionalBehaviorValue,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import { isPresent } from 'ts-is-present';
 import { Box, Spacer } from '~/components-styled/base';
@@ -60,12 +60,6 @@ export function BehaviorLineChartTile({
     })
     .filter(isPresent);
 
-  const handleSeriesClick = useCallback(
-    (key: keyof NationalBehaviorValue) =>
-      setCurrentId(key.replace(`_${type}`, '') as BehaviorIdentifier),
-    [type]
-  );
-
   return (
     <Tile>
       <Header>
@@ -121,11 +115,13 @@ export function BehaviorLineChartTile({
         disableLegend
         dataOptions={{
           isPercentage: true,
-          showNearestPointOnly: true,
         }}
         tickValues={[0, 25, 50, 75, 100]}
-        showDateMarker
-        onSeriesClick={handleSeriesClick}
+        onSeriesClick={(config) => {
+          const id = config.metricProperty.replace(`_${type}`, '');
+          setCurrentId(id as BehaviorIdentifier);
+        }}
+        markNearestPointOnly
       />
     </Tile>
   );
