@@ -2048,7 +2048,7 @@
       "leeftijd_jaar": "{{ageGroup}} years old"
     },
     "grafiek_leveringen": {
-      "titel": "Leveringen t/m {{weekNumber}}",
+      "titel": "Leveringen t/m week {{weekNumber}}",
       "omschrijving": "Iets over deze grafiek"
     },
     "gezette_prikken": {

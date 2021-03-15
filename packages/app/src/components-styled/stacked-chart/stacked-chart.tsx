@@ -4,7 +4,7 @@
  */
 import { TimestampedValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { AxisBottom, AxisLeft } from '@visx/axis';
+import { AxisBottom, AxisLeft, TickFormatter } from '@visx/axis';
 import { localPoint } from '@visx/event';
 import { GridRows } from '@visx/grid';
 import { Group } from '@visx/group';
@@ -119,6 +119,7 @@ export type StackedChartProps<T extends TimestampedValue> = {
   width: number;
   formatTooltip?: TooltipFormatter;
   isPercentage?: boolean;
+  formatXAxis?: TickFormatter<Date>;
 };
 
 export function StackedChart<T extends TimestampedValue>(
@@ -428,7 +429,7 @@ export function StackedChart<T extends TimestampedValue>(
               tickValues={xScale.domain()}
               top={bounds.height}
               stroke={colors.data.axis}
-              tickFormat={formatDateString}
+              tickFormat={props.formatXAxis ?? formatDateString}
               tickLabelProps={() => {
                 return {
                   textAnchor: 'middle',

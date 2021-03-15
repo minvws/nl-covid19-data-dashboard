@@ -7,6 +7,7 @@ import { ChartTile } from '~/components-styled/chart-tile';
 import { StackedChart } from '~/components-styled/stacked-chart';
 import { AllLanguages } from '~/locale/APP_LOCALE';
 import { colors } from '~/style/theme';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 interface VaccineDeliveryBarChartProps {
   data: NlVaccineDeliveryPerSupplier;
@@ -109,7 +110,9 @@ export function VaccineDeliveryBarChart({
 
   return (
     <ChartTile
-      title={text.titel}
+      title={replaceVariablesInText(text.titel, {
+        weekNumber: last_value.week_number,
+      })}
       description={text.omschrijving}
       metadata={{
         date: last_value.date_of_report_unix,
@@ -138,6 +141,9 @@ export function VaccineDeliveryBarChart({
                 label: 'AstraZeneca',
               },
             ]}
+            formatXAxis={(__value, index) =>
+              `Week ${values[index].week_number}`
+            }
           />
         )}
       </ParentSize>
