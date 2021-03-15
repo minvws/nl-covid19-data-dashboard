@@ -42,6 +42,7 @@ type formatStyle =
   | 'relative'
   | 'iso'
   | 'axis'
+  | 'axis-with-year'
   | 'weekday-medium'
   | 'day-month';
 
@@ -68,13 +69,16 @@ const DayMonth = new Intl.DateTimeFormat(locale, {
   timeZone: 'Europe/Amsterdam',
 });
 
-const MonthShort = new Intl.DateTimeFormat(locale, {
+const DayMonthShort = new Intl.DateTimeFormat(locale, {
   month: 'short',
+  day: 'numeric',
   timeZone: 'Europe/Amsterdam',
 });
 
-const Day = new Intl.DateTimeFormat(locale, {
+const DayMonthShortYear = new Intl.DateTimeFormat(locale, {
+  month: 'short',
   day: 'numeric',
+  year: 'numeric',
   timeZone: 'Europe/Amsterdam',
 });
 
@@ -152,8 +156,11 @@ function getFormattedDate(date: Date, style: formatStyle) {
     case 'medium': // '23 juli 2020'
       return Medium.format(date);
 
-    case 'axis': // '23 jul.'
-      return `${Day.format(date)} ${MonthShort.format(date)}`;
+    case 'axis': // '23 jul'
+      return DayMonthShort.format(date).replace(/\./g, '');
+
+    case 'axis-with-year': // '23 jul. 2021'
+      return DayMonthShortYear.format(date);
 
     case 'weekday-medium':
       return WeekdayMedium.format(date);
@@ -169,6 +176,7 @@ function getFormattedDate(date: Date, style: formatStyle) {
         ? siteText.utils.date_day_before_yesterday
         : DayMonth.format(date);
 
+    case 'day-month':
     default:
       return DayMonth.format(date);
   }

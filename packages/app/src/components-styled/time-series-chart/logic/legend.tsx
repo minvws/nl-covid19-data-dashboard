@@ -4,12 +4,13 @@ import { useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { LegendItem } from '~/components-styled/legend';
 import { colors } from '~/style/theme';
+import { AreaTrendIcon, LineTrendIcon, RangeTrendIcon } from '../components';
 import { DataOptions } from './common';
 import { SeriesConfig } from './series';
 
 export function useLegendItems<T extends TimestampedValue>(
   config: SeriesConfig<T>,
-  dataOptions: DataOptions
+  dataOptions?: DataOptions
 ) {
   const legendItems = useMemo(() => {
     const items = config
@@ -19,19 +20,22 @@ export function useLegendItems<T extends TimestampedValue>(
             return {
               color: x.color,
               label: x.label,
-              shape: 'line',
+              shape: 'custom',
+              shapeComponent: <LineTrendIcon config={x} />,
             } as LegendItem;
           case 'area':
             return {
               color: x.color,
               label: x.label,
-              shape: 'square',
+              shape: 'custom',
+              shapeComponent: <AreaTrendIcon config={x} />,
             } as LegendItem;
           case 'range':
             return {
               color: x.color,
               label: x.label,
-              shape: 'square',
+              shape: 'custom',
+              shapeComponent: <RangeTrendIcon config={x} />,
             } as LegendItem;
         }
       })
@@ -40,7 +44,7 @@ export function useLegendItems<T extends TimestampedValue>(
     /**
      * Add annotations to the legend
      */
-    if (dataOptions.timespanAnnotations) {
+    if (dataOptions?.timespanAnnotations) {
       for (const annotation of dataOptions.timespanAnnotations) {
         items.push({
           color: annotation.color

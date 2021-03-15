@@ -3,11 +3,12 @@ import GetestIcon from '~/assets/test.svg';
 import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
 import { ArticleSummary } from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
+import { CollapsibleButton } from '~/components-styled/collapsible';
 import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
 import { HighlightTeaserProps } from '~/components-styled/highlight-teaser';
+import { Sitemap } from '~/domain/topical/sitemap';
 import { MaxWidth } from '~/components-styled/max-width';
-import { QuickLinks } from '~/components-styled/quick-links';
 import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
 import { Heading } from '~/components-styled/typography';
@@ -19,7 +20,6 @@ import { escalationTooltip } from '~/components/choropleth/tooltips/region/escal
 import { FCWithLayout, getDefaultLayout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import { Search } from '~/domain/topical/components/search';
-import { DataSitemap } from '~/domain/topical/data-sitemap';
 import { EditorialSummary } from '~/domain/topical/editorial-teaser';
 import { EditorialTile } from '~/domain/topical/editorial-tile';
 import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
@@ -39,7 +39,10 @@ import {
   getText,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
+import { formatDate } from '~/utils/formatDate';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { getDataSitemap } from '~/domain/topical/sitemap/utils';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -82,6 +85,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
 
   const dataInfectedTotal = data.tested_overall;
   const dataHospitalIntake = data.hospital_nice;
+  const dataSitemap = getDataSitemap('landelijk');
 
   return (
     <>
@@ -166,20 +170,29 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
               <TopicalVaccineTile data={data.vaccine_administered_total} />
             </MiniTrendTileLayout>
 
-            <QuickLinks
-              header={text.quick_links.header}
-              links={[
-                {
-                  href: '/landelijk/vaccinaties',
-                  text: text.quick_links.links.nationaal,
-                },
-                {
-                  href: '/veiligheidsregio',
-                  text: text.quick_links.links.veiligheidsregio,
-                },
-                { href: '/gemeente', text: text.quick_links.links.gemeente },
-              ]}
-            />
+            <CollapsibleButton
+              label={siteText.common_actueel.overview_links_header}
+            >
+              <Sitemap
+                quickLinksHeader={text.quick_links.header}
+                quickLinks={[
+                  {
+                    href: '/landelijk/vaccinaties',
+                    text: text.quick_links.links.nationaal,
+                  },
+                  {
+                    href: '/veiligheidsregio',
+                    text: text.quick_links.links.veiligheidsregio,
+                  },
+                  {
+                    href: '/gemeente',
+                    text: text.quick_links.links.gemeente,
+                  },
+                ]}
+                dataSitemapHeader={text.data_sitemap_titel}
+                dataSitemap={dataSitemap}
+              />
+            </CollapsibleButton>
 
             {content.editorial && content.highlight && (
               <Box pt={3}>
@@ -203,7 +216,16 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                   description={
                     <div
                       dangerouslySetInnerHTML={{
-                        __html: text.risiconiveaus.selecteer_toelichting,
+                        __html: replaceVariablesInText(
+                          text.risiconiveaus.selecteer_toelichting,
+                          {
+                            last_update: formatDate(
+                              choropleth.vr.escalation_levels[0]
+                                .last_determined_unix,
+                              'day-month'
+                            ),
+                          }
+                        ),
                       }}
                     />
                   }
@@ -238,8 +260,6 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                 </Box>
               </TopicalTile>
             </Box>
-
-            <DataSitemap />
 
             <Box pb={4}>
               <TopicalSectionHeader

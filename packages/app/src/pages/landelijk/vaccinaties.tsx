@@ -312,7 +312,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                         label: text.data.vaccination_chart.legend.expected,
                         color: 'black',
                         shape: 'custom',
-                        ShapeComponent: HatchedSquare,
+                        shapeComponent: <HatchedSquare />,
                       },
                     ]}
                   />
@@ -364,14 +364,12 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             {({ width }) => (
               <TimeSeriesChart
                 title={text.grafiek_draagvlak.titel}
-                timeframe="all"
                 width={width}
                 ariaLabelledBy="chart_vaccine_support"
                 values={data.vaccine_support.values}
                 showDateMarker
                 numGridLines={20}
                 tickValues={[0, 25, 50, 75, 100]}
-                paddingLeft={36}
                 dataOptions={{
                   isPercentage: true,
                   forcedMaximumValue: 100,
