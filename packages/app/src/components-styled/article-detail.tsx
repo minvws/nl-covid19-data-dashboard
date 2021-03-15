@@ -19,6 +19,7 @@ const imageSizes = [
 ];
 
 export function ArticleDetail({ article }: ArticleDetailProps) {
+  const { siteText } = useIntl();
   return (
     <Box bg="white" py={{ _: 4, md: 5 }}>
       <ContentBlock spacing={3}>
