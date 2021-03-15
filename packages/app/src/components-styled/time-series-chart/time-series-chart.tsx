@@ -8,6 +8,7 @@ import { Box } from '~/components-styled/base';
 import { Legend } from '~/components-styled/legend';
 import { TimeframeOption } from '~/utils/timeframe';
 import { useElementSize } from '~/utils/use-element-size';
+import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { ValueAnnotation } from '../value-annotation';
 import {
   Axes,
@@ -262,6 +263,8 @@ export function TimeSeriesChart<
     timespanAnnotations,
     markNearestPointOnly,
   ]);
+
+  useOnClickOutside([sizeRef], () => tooltipData && hideTooltip());
 
   const handleClick = useCallback(() => {
     if (onSeriesClick && tooltipData) {
