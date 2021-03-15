@@ -22,13 +22,7 @@ export type TooltipValue = (
 ) &
   TimestampedTrendValue;
 
-export function createDeliveryTooltipFormatter(text: AllLanguages) {
-  return (values: HoverPoint<TooltipValue>[]) => {
-    return formatVaccinationsTooltip(values, text);
-  };
-}
-
-function formatVaccinationsTooltip(
+export function formatVaccinationsTooltip(
   values: HoverPoint<TooltipValue>[],
   text: AllLanguages
 ) {
@@ -57,9 +51,9 @@ function formatVaccinationsTooltip(
         {values.map((value) => (
           <Fragment key={value.label}>
             <TooltipListItem color={value.color ?? 'black'}>
+              {formatLabel(value.label, text)}:{' '}
               <TooltipValueContainer>
-                {formatLabel(value.label, text)}:{' '}
-                <strong>{formatValue(value)}</strong>
+                {formatValue(value)}
               </TooltipValueContainer>
             </TooltipListItem>
 
@@ -123,6 +117,7 @@ interface TooltipListItemProps {
 const TooltipListItem = styled.li<TooltipListItemProps>`
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
   &::before {
     content: '';
@@ -137,8 +132,6 @@ const TooltipListItem = styled.li<TooltipListItemProps>`
 `;
 
 const TooltipValueContainer = styled.span`
-  display: flex;
-  width: 100%;
-  min-width: 150px;
-  justify-content: space-between;
+  font-weight: bold;
+  margin-left: 1em;
 `;

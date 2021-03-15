@@ -25,7 +25,7 @@ import { Heading, InlineText, Text } from '~/components-styled/typography';
 import { VisuallyHidden } from '~/components-styled/visually-hidden';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
-import { createDeliveryTooltipFormatter } from '~/domain/vaccine/create-delivery-tooltip-formatter';
+import { formatVaccinationsTooltip } from '~/domain/vaccine/vaccine-delivery-tooltip';
 import {
   MilestonesView,
   MilestoneViewProps,
@@ -250,7 +250,9 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                   valueAnnotation={siteText.waarde_annotaties.x_miljoen}
                   width={width}
                   timeframe="all"
-                  formatTooltip={createDeliveryTooltipFormatter(siteText)}
+                  formatTooltip={(values) =>
+                    formatVaccinationsTooltip(values, siteText)
+                  }
                   divider={{
                     color: colors.annotation,
                     leftLabel: text.data.vaccination_chart.left_divider_label,
@@ -263,7 +265,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                         {
                           metricProperty: 'total',
                           strokeWidth: 3,
-                          color: colors.data.emphasis,
+                          color: 'black',
                           legendLabel: text.data.vaccination_chart.delivered,
                         },
                       ],
@@ -276,7 +278,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                           style: 'dashed',
                           strokeWidth: 3,
                           legendLabel: text.data.vaccination_chart.estimated,
-                          color: colors.data.emphasis,
+                          color: 'black',
                         },
                       ],
                     },
@@ -307,7 +309,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
               items={[
                 {
                   label: text.data.vaccination_chart.legend.available,
-                  color: 'data.emphasis',
+                  color: 'black',
                   shape: 'line',
                 },
                 {
