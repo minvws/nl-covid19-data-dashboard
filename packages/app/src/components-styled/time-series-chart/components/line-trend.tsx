@@ -1,10 +1,14 @@
+import { TimestampedValue } from '@corona-dashboard/common';
 import { LinePath } from '@visx/shape';
 import { MouseEvent, TouchEvent, useCallback, useState } from 'react';
-import { SeriesItem, SeriesSingleValue } from '../logic';
+import { LineSeriesDefinition, SeriesItem, SeriesSingleValue } from '../logic';
 
 export type LineStyle = 'solid' | 'dashed';
 
-export type LineTrendProps = {
+const DEFAULT_STYLE = 'solid';
+const DEFAULT_STROKE_WIDTH = 2;
+
+type LineTrendProps = {
   series: SeriesSingleValue[];
   color: string;
   style?: 'solid' | 'dashed';
@@ -16,8 +20,8 @@ export type LineTrendProps = {
 
 export function LineTrend({
   series,
-  style = 'solid',
-  strokeWidth = 2,
+  style = DEFAULT_STYLE,
+  strokeWidth = DEFAULT_STROKE_WIDTH,
   color,
   getX,
   getY,
@@ -49,5 +53,36 @@ export function LineTrend({
       onMouseOver={handleHover}
       onMouseMove={handleHover}
     />
+  );
+}
+
+interface LineTrendIconProps<T extends TimestampedValue> {
+  config: LineSeriesDefinition<T>;
+  width?: number;
+  height?: number;
+}
+
+export function LineTrendIcon<T extends TimestampedValue>({
+  config,
+  width = 15,
+  height = 15,
+}: LineTrendIconProps<T>) {
+  const {
+    color,
+    strokeWidth = DEFAULT_STROKE_WIDTH,
+    style = DEFAULT_STYLE,
+  } = config;
+  return (
+    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
+      <line
+        stroke={color}
+        strokeWidth={strokeWidth}
+        strokeDasharray={style === 'dashed' ? 4 : undefined}
+        x1={0}
+        y1={height / 2}
+        x2={width}
+        y2={height / 2}
+      />
+    </svg>
   );
 }
