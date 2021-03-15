@@ -12,7 +12,7 @@ export const TopicalTile = styled.article.withConfig({
   css({
     display: 'flex',
     flexDirection: 'column',
-    p: 4,
+    py: 4,
     mx: asResponsiveArray({ _: -3, md: 0 }),
     mb: 0,
     borderRadius: 1,
