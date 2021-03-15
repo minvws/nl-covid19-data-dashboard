@@ -16,7 +16,6 @@ import { SeriesPoint } from '@visx/shape/lib/types';
  * https://github.com/airbnb/visx/issues/904
  */
 import { defaultStyles, TooltipWithBounds, useTooltip } from '@visx/tooltip';
-import { group } from 'd3-array';
 import { NumberValue } from 'd3-scale';
 import { isEmpty, set } from 'lodash';
 import { transparentize } from 'polished';
@@ -200,8 +199,6 @@ export function StackedChart<T extends TimestampedValue>(
   const hatchedFromIndex = valuesInTimeframe.findIndex(
     (v) => ((v as unknown) as { is_estimate?: boolean }).is_estimate === true
   );
-
-  console.log('hatchedFromIndex', hatchedFromIndex);
 
   /**
    * We generate new legend items based on hover state. This is probably not a
