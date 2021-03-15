@@ -58,6 +58,8 @@ export function LineTrend({
       onMouseLeave={handleHover}
       onMouseOver={handleHover}
       onMouseMove={handleHover}
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   );
 }
@@ -84,9 +86,11 @@ export function LineTrendIcon<T extends TimestampedValue>({
         stroke={color}
         strokeWidth={strokeWidth}
         strokeDasharray={style === 'dashed' ? 4 : undefined}
-        x1={0}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        x1={1}
         y1={height / 2}
-        x2={width}
+        x2={width - 2}
         y2={height / 2}
       />
     </svg>

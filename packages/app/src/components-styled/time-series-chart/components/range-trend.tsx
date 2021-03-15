@@ -92,6 +92,7 @@ export function RangeTrendIcon<T extends TimestampedValue>({
         height={height}
         fill={color}
         opacity={fillOpacity}
+        rx={2}
       />
     </svg>
   );

@@ -58,6 +58,8 @@ export function AreaTrend({
         onMouseLeave={handleHover}
         onMouseOver={handleHover}
         onMouseMove={handleHover}
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <AreaClosed
         data={nonNullSeries}
@@ -97,18 +99,22 @@ export function AreaTrendIcon<T extends TimestampedValue>({
       <line
         stroke={color}
         strokeWidth={strokeWidth}
-        x1={0}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        x1={2}
         y1={strokeWidth / 2}
-        x2={width}
+        x2={width - 2}
         y2={strokeWidth / 2}
       />
       <rect
+        rx={2}
         x={0}
         y={0}
         width={width}
         height={height}
         fill={color}
         opacity={fillOpacity}
+        r={2}
       />
     </svg>
   );
