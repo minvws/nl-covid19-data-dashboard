@@ -33,7 +33,6 @@ export type RangeSeriesDefinition<T extends TimestampedValue> = {
   color: string;
   style?: 'solid' | 'dashed';
   fillOpacity?: number;
-  strokeWidth?: number;
 };
 
 export type AreaSeriesDefinition<T extends TimestampedValue> = {
