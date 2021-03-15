@@ -144,6 +144,9 @@ export function VaccineDeliveryBarChart({
             formatXAxis={(__value, index) =>
               `Week ${values[index].week_number}`
             }
+            expectedLabel={
+              siteText.vaccinaties.data.vaccination_chart.legend.expected
+            }
           />
         )}
       </ParentSize>

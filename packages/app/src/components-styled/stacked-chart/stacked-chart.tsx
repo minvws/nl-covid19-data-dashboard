@@ -117,6 +117,7 @@ export type StackedChartProps<T extends TimestampedValue> = {
   config: Config<T>[];
   valueAnnotation?: string;
   width: number;
+  expectedLabel: string;
   formatTooltip?: TooltipFormatter;
   isPercentage?: boolean;
   formatXAxis?: TickFormatter<Date>;
@@ -225,10 +226,16 @@ export function StackedChart<T extends TimestampedValue>(
       };
     });
 
+    /**
+     * @TODO this is a hard-coded addition to the chart legend. We should
+     * refactor this if we ever want to re-use this component. But I think we
+     * better create a new stacked start based on TimeSeriesChart components or
+     * something and try to refactor this one.
+     */
     return [
       ...barItems,
       {
-        label: '@TODO lokalize',
+        label: props.expectedLabel,
         color: 'black',
         shape: 'custom' as const,
         ShapeComponent: HatchedSquare,
