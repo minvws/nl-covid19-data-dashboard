@@ -31,14 +31,16 @@ export const CollapsibleButton = ({
   return (
     <Container minHeight={open ? openHeight : 0}>
       <Disclosure open={open} onChange={() => setOpen(!open)}>
-        <ExpandButton ref={buttonRef}>
+        <DisclosureButton ref={buttonRef}>
           {label}
           <Chevron open={open} />
-        </ExpandButton>
+        </DisclosureButton>
 
-        <Panel ref={wrapperRef} style={{ height: open ? contentHeight : 0 }}>
-          <div ref={contentRef}>{children}</div>
-        </Panel>
+        <DisclosurePanel>
+          <div ref={contentRef} minHeight={open ? contentHeight : 0}>
+            <div ref={wrapperRef}>{children}</div>
+          </div>
+        </DisclosurePanel>
       </Disclosure>
     </Container>
   );
@@ -56,43 +58,26 @@ const Container = styled(Box).attrs({ as: 'section' })(
     transitionDuration: '0.5s',
     bg: 'tileGray',
     width: '100%',
-  })
-);
 
-const Panel = styled((props) => <DisclosurePanel {...props} />)(
-  css({
-    transitionProperty: 'height, opacity',
-    transitionDuration: '0.5s',
-    width: '100%',
-    overflow: 'hidden',
-    opacity: 0,
-    display: 'block',
-    '&[data-state="open"]': {
-      opacity: 1,
+    //button
+    '[data-reach-disclosure-button]': {
+      position: 'relative',
+      px: asResponsiveArray({ _: 2, sm: 4 }),
+      py: 3,
+      border: 'none',
+      background: 'none',
+      font: 'inherit',
+      color: 'blue',
+      cursor: 'pointer',
+      fontWeight: 'bold',
+      zIndex: 1,
     },
-  })
-);
-
-const ExpandButton = styled((props) => <DisclosureButton {...props} />)(
-  css({
-    position: 'relative',
-    px: asResponsiveArray({ _: 2, sm: 4 }),
-    py: 3,
-    border: 'none',
-    background: 'none',
-    font: 'inherit',
-    color: 'blue',
-    cursor: 'pointer',
-    fontWeight: 'bold',
-    zIndex: 1,
-
-    '&:focus': {
+    '[data-reach-disclosure-button]:focus': {
       outlineWidth: '1px',
       outlineStyle: 'dashed',
       outlineColor: 'blue',
     },
-
-    '&[data-state="open"]:after': {
+    '[data-reach-disclosure-button][data-state="open"]:after': {
       content: '""',
       position: 'absolute',
       bottom: 0,
@@ -100,6 +85,22 @@ const ExpandButton = styled((props) => <DisclosureButton {...props} />)(
       right: 0,
       bg: 'lightGray',
       height: '1px',
+    },
+    //panel
+    '[data-reach-disclosure-panel]': {
+      transitionProperty: 'height, opacity',
+      transitionDuration: '0.5s',
+      width: '100%',
+      overflow: 'hidden',
+      opacity: 0,
+      display: 'block',
+    },
+    '[data-reach-disclosure-panel][data-state="open"]': {
+      opacity: 1,
+    },
+    '[data-reach-disclosure-panel][data-state="collapsed"]': {
+      height: 0,
+      opacity: 0,
     },
   })
 );
