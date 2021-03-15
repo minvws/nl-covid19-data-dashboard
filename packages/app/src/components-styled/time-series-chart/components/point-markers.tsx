@@ -56,9 +56,7 @@ export function PointMarkers<T extends TimestampedValue>(
 ) {
   const { points, size = MARKER_POINT_SIZE } = props;
 
-  const nonNullPoints = points.filter((x) => isPresent(x.y));
-
-  if (!nonNullPoints.length) return null;
+  if (!points.length) return null;
 
   return (
     <Container
@@ -70,7 +68,7 @@ export function PointMarkers<T extends TimestampedValue>(
         width: size,
       }}
     >
-      {nonNullPoints.map((point, index) => (
+      {points.map((point, index) => (
         <PointMarker
           color={point.color}
           size={size}
