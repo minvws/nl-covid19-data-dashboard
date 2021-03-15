@@ -8,14 +8,15 @@ import { EscalationLevelIcon } from '~/components-styled/escalation-level-icon';
 import { Text } from '~/components-styled/typography';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
 import { EscalationLevel } from '~/domain/restrictions/type';
-import text from '~/locale/index';
-import { formatDateFromSeconds } from '~/utils/formatDate';
+import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { RegionSelectionHandler } from '../../select-handlers/create-select-region-handler';
 
 export const escalationTooltip = (selectHandler: RegionSelectionHandler) => {
   return (context: SafetyRegionProperties & EscalationLevels): ReactNode => {
     const level = context.level as EscalationLevel;
+
+    const { formatDateFromSeconds, messages: text } = useIntl();
 
     const onSelect = (event: React.MouseEvent<HTMLElement>) => {
       event.stopPropagation();

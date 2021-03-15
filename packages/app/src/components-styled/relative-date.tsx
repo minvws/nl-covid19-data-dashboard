@@ -7,7 +7,7 @@
 
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import { formatDateFromSeconds } from '~/utils/formatDate';
+import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { useIsMounted } from '~/utils/use-is-mounted';
 
@@ -24,6 +24,9 @@ export function RelativeDate({
   absoluteDateTemplate,
 }: RelativeDateProps) {
   const isMounted = useIsMounted();
+
+  const { formatDateFromSeconds } = useIntl();
+
   const isoDate = formatDateFromSeconds(dateInSeconds, 'iso');
   const fullDate = formatDateFromSeconds(dateInSeconds, 'medium');
   const relativeDate = formatDateFromSeconds(dateInSeconds, 'relative');

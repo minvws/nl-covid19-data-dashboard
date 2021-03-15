@@ -54,12 +54,6 @@ export function createGetContent<T>(
   };
 }
 
-export async function getText() {
-  return {
-    text: parseMarkdownInLocale((await import('../locale/index')).default),
-  };
-}
-
 export function getNlData() {
   // clone data to prevent mutation of the original
   const data = JSON.parse(JSON.stringify(json.nl)) as National;

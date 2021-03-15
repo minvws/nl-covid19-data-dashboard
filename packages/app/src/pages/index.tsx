@@ -36,17 +36,16 @@ import {
   createGetContent,
   getLastGeneratedDate,
   getNlData,
-  getText,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
-import { formatDate } from '~/utils/formatDate';
+import { useIntl } from '~/intl';
+
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { getDataSitemap } from '~/domain/topical/sitemap/utils';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getText,
   createGetChoroplethData({
     vr: ({ escalation_levels, tested_overall }) => ({
       escalation_levels,
@@ -79,13 +78,15 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const Home: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { text: siteText, data, choropleth, content, lastGenerated } = props;
+  const { data, choropleth, content, lastGenerated } = props;
   const router = useRouter();
-  const text = siteText.nationaal_actueel;
 
   const dataInfectedTotal = data.tested_overall;
   const dataHospitalIntake = data.hospital_nice;
   const dataSitemap = getDataSitemap('landelijk');
+
+  const { siteText, formatDate } = useIntl();
+  const text = siteText.nationaal_actueel;
 
   return (
     <>

@@ -10,8 +10,7 @@ import {
   InlineText,
   Text,
 } from '~/components-styled/typography';
-import text from '~/locale';
-import { formatDateFromSeconds } from '~/utils/formatDate';
+import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 
 interface TopicalSectionHeaderProps {
@@ -33,6 +32,8 @@ export function TopicalSectionHeader({
   link,
   description,
 }: TopicalSectionHeaderProps) {
+  const { siteText: text, formatDateFromSeconds } = useIntl();
+
   return (
     <Box spacing={3} mt={{ _: 2, md: 4 }}>
       {showBackLink && (

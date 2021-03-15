@@ -1,7 +1,27 @@
+import { useContext } from 'react';
+import { useRouter } from 'next/router';
 import { isSameDay, isToday, isYesterday, subDays } from 'date-fns';
-import siteText from '~/locale/index';
-import { getLocale } from '~/utils/getLocale';
-import { assert } from './assert';
+import { assert } from '~/utils/assert';
+
+import { IntlContext } from '~/intl';
+
+// TypeScript is missing some types for `Intl.DateTimeFormat`.
+// https://github.com/microsoft/TypeScript/issues/35865
+interface DateTimeFormatOptions extends Intl.DateTimeFormatOptions {
+  dateStyle?: 'full' | 'long' | 'medium' | 'short';
+  timeStyle?: 'full' | 'long' | 'medium' | 'short';
+}
+
+type formatStyle =
+  | 'time'
+  | 'long'
+  | 'medium'
+  | 'relative'
+  | 'iso'
+  | 'axis'
+  | 'axis-with-year'
+  | 'weekday-medium'
+  | 'day-month';
 
 // Adding the Europe/Amsterdam time zone manually since its the only being used.
 // The data was pulled from the @formatjs/add-golden-ts.js file.
@@ -22,162 +42,180 @@ if ('__setDefaultTimeZone' in Intl.DateTimeFormat) {
   (Intl.DateTimeFormat as any).__setDefaultTimeZone('Europe/Amsterdam');
 }
 
+// Helper functions
+
 function isDayBeforeYesterday(date: number | Date): boolean {
   return isSameDay(date, subDays(Date.now(), 2));
 }
 
-const locale = getLocale();
+export function useIntl() {
+  const { locale } = useRouter();
+  const { messages } = useContext(IntlContext);
 
-// TypeScript is missing some types for `Intl.DateTimeFormat`.
-// https://github.com/microsoft/TypeScript/issues/35865
-interface DateTimeFormatOptions extends Intl.DateTimeFormatOptions {
-  dateStyle?: 'full' | 'long' | 'medium' | 'short';
-  timeStyle?: 'full' | 'long' | 'medium' | 'short';
-}
+  // Number formatting
+  const NumberFormat = new Intl.NumberFormat(locale);
 
-type formatStyle =
-  | 'time'
-  | 'long'
-  | 'medium'
-  | 'relative'
-  | 'iso'
-  | 'axis'
-  | 'axis-with-year'
-  | 'weekday-medium'
-  | 'day-month';
+  function formatNumber(value: number | string | undefined | null): string {
+    if (typeof value === 'undefined' || value === null) return '-';
 
-const Time = new Intl.DateTimeFormat(locale, {
-  timeStyle: 'short',
-  timeZone: 'Europe/Amsterdam',
-} as DateTimeFormatOptions);
+    return NumberFormat.format(Number(value));
+  }
 
-const Long = new Intl.DateTimeFormat(locale, {
-  dateStyle: 'long',
-  timeStyle: 'short',
-  timeZone: 'Europe/Amsterdam',
-} as DateTimeFormatOptions);
+  function formatPercentage(
+    value: number,
+    options = {
+      maximumFractionDigits: 1,
+    }
+  ) {
+    return new Intl.NumberFormat(locale, options).format(value);
+  }
 
-const Medium = new Intl.DateTimeFormat(locale, {
-  dateStyle: 'long',
-  timeZone: 'Europe/Amsterdam',
-} as DateTimeFormatOptions);
+  // Start of date formatting
 
-// Day Month or Month Day depending on the locale
-const DayMonth = new Intl.DateTimeFormat(locale, {
-  month: 'long',
-  day: 'numeric',
-  timeZone: 'Europe/Amsterdam',
-});
+  // Define all styles of formatting
+  const Time = new Intl.DateTimeFormat(locale, {
+    timeStyle: 'short',
+    timeZone: 'Europe/Amsterdam',
+  } as DateTimeFormatOptions);
 
-const DayMonthShort = new Intl.DateTimeFormat(locale, {
-  month: 'short',
-  day: 'numeric',
-  timeZone: 'Europe/Amsterdam',
-});
+  const Long = new Intl.DateTimeFormat(locale, {
+    dateStyle: 'long',
+    timeStyle: 'short',
+    timeZone: 'Europe/Amsterdam',
+  } as DateTimeFormatOptions);
 
-const DayMonthShortYear = new Intl.DateTimeFormat(locale, {
-  month: 'short',
-  day: 'numeric',
-  year: 'numeric',
-  timeZone: 'Europe/Amsterdam',
-});
+  const Medium = new Intl.DateTimeFormat(locale, {
+    dateStyle: 'long',
+    timeZone: 'Europe/Amsterdam',
+  } as DateTimeFormatOptions);
 
-const WeekdayMedium = new Intl.DateTimeFormat(locale, {
-  weekday: 'long',
-  month: 'long',
-  day: 'numeric',
-  timeZone: 'Europe/Amsterdam',
-} as DateTimeFormatOptions);
+  // Day Month or Month Day depending on the locale
+  const DayMonth = new Intl.DateTimeFormat(locale, {
+    month: 'long',
+    day: 'numeric',
+    timeZone: 'Europe/Amsterdam',
+  });
 
-export function formatDateFromSeconds(
-  seconds: number,
-  style?: formatStyle
-): string {
-  assert(!isNaN(seconds), 'seconds is NaN');
+  const DayMonthShort = new Intl.DateTimeFormat(locale, {
+    month: 'short',
+    day: 'numeric',
+    timeZone: 'Europe/Amsterdam',
+  });
+
+  const DayMonthShortYear = new Intl.DateTimeFormat(locale, {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+    timeZone: 'Europe/Amsterdam',
+  });
+
+  const WeekdayMedium = new Intl.DateTimeFormat(locale, {
+    weekday: 'long',
+    month: 'long',
+    day: 'numeric',
+    timeZone: 'Europe/Amsterdam',
+  } as DateTimeFormatOptions);
+
+  // The actual functions
 
   /**
-   * JavaScript uses milliseconds since EPOCH, therefore the value
-   * formatted by the format() function needs to be multiplied by 1000
-   * to format to an accurate dateTime
+   * This formatting-cache will improve date formatting performance in
+   * I̶n̶t̶e̶r̶n̶e̶t̶ ̶E̶x̶p̶l̶o̶r̶e̶r̶ Safari.
+   * Formatting a date could easily take 20ms+, this is now reduced to < 1ms.
    */
+  const formatCache: Record<string, string> = {};
 
-  const milliseconds = seconds * 1000;
+  function getFormattedDate(date: Date, style: formatStyle) {
+    switch (style) {
+      case 'time': // '09:24'
+        return Time.format(date);
 
-  return formatDateFromMilliseconds(milliseconds, style);
-}
+      case 'iso': // '2020-07-23T10:01:16.000Z'
+        return new Date(date).toISOString();
 
-export function formatDateFromMilliseconds(
-  milliseconds: number,
-  style?: formatStyle
-): string {
-  assert(!isNaN(milliseconds), 'milliseconds is NaN');
+      case 'long': // '23 juli 2020 om 12:01'
+        return Long.format(date);
 
-  return formatDate(new Date(milliseconds), style);
-}
+      case 'medium': // '23 juli 2020'
+        return Medium.format(date);
 
-/**
- * This formatting-cache will improve date formatting performance in
- * I̶n̶t̶e̶r̶n̶e̶t̶ ̶E̶x̶p̶l̶o̶r̶e̶r̶ Safari.
- * Formatting a date could easily take 20ms+, this is now reduced to < 1ms.
- */
-const formatCache: Record<string, string> = {};
+      case 'axis': // '23 jul'
+        return DayMonthShort.format(date).replace(/\./g, '');
 
-export function formatDate(
-  dateOrTimestamp: Date | number,
-  style: formatStyle = 'day-month'
-) {
-  const date =
-    dateOrTimestamp instanceof Date
-      ? dateOrTimestamp
-      : new Date(dateOrTimestamp as number);
+      case 'axis-with-year': // '23 jul. 2021'
+        return DayMonthShortYear.format(date);
 
-  const cacheKey = `${date.getTime()}-${style}`;
-  const dateCached = formatCache[cacheKey];
+      case 'weekday-medium':
+        return WeekdayMedium.format(date);
 
-  if (dateCached) return dateCached;
+      case 'relative':
+        return typeof window === 'undefined'
+          ? DayMonth.format(date)
+          : isToday(date)
+          ? messages.utils.date_today
+          : isYesterday(date)
+          ? messages.utils.date_yesterday
+          : isDayBeforeYesterday(date)
+          ? messages.utils.date_day_before_yesterday
+          : DayMonth.format(date);
 
-  const formattedDate = getFormattedDate(date, style);
-  formatCache[cacheKey] = formattedDate;
-
-  return formattedDate;
-}
-
-function getFormattedDate(date: Date, style: formatStyle) {
-  switch (style) {
-    case 'time': // '09:24'
-      return Time.format(date);
-
-    case 'iso': // '2020-07-23T10:01:16.000Z'
-      return new Date(date).toISOString();
-
-    case 'long': // '23 juli 2020 om 12:01'
-      return Long.format(date);
-
-    case 'medium': // '23 juli 2020'
-      return Medium.format(date);
-
-    case 'axis': // '23 jul'
-      return DayMonthShort.format(date).replace(/\./g, '');
-
-    case 'axis-with-year': // '23 jul. 2021'
-      return DayMonthShortYear.format(date);
-
-    case 'weekday-medium':
-      return WeekdayMedium.format(date);
-
-    case 'relative':
-      return typeof window === 'undefined'
-        ? DayMonth.format(date)
-        : isToday(date)
-        ? siteText.utils.date_today
-        : isYesterday(date)
-        ? siteText.utils.date_yesterday
-        : isDayBeforeYesterday(date)
-        ? siteText.utils.date_day_before_yesterday
-        : DayMonth.format(date);
-
-    case 'day-month':
-    default:
-      return DayMonth.format(date);
+      case 'day-month':
+      default:
+        return DayMonth.format(date);
+    }
   }
+
+  function formatDate(
+    dateOrTimestamp: Date | number,
+    style: formatStyle = 'day-month'
+  ) {
+    const date =
+      dateOrTimestamp instanceof Date
+        ? dateOrTimestamp
+        : new Date(dateOrTimestamp as number);
+
+    const cacheKey = `${date.getTime()}-${style}`;
+    const dateCached = formatCache[cacheKey];
+
+    if (dateCached) return dateCached;
+
+    const formattedDate = getFormattedDate(date, style);
+    formatCache[cacheKey] = formattedDate;
+
+    return formattedDate;
+  }
+
+  function formatDateFromSeconds(seconds: number, style?: formatStyle): string {
+    assert(!isNaN(seconds), 'seconds is NaN');
+
+    /**
+     * JavaScript uses milliseconds since EPOCH, therefore the value
+     * formatted by the format() function needs to be multiplied by 1000
+     * to format to an accurate dateTime
+     */
+
+    const milliseconds = seconds * 1000;
+
+    return formatDateFromMilliseconds(milliseconds, style);
+  }
+
+  function formatDateFromMilliseconds(
+    milliseconds: number,
+    style?: formatStyle
+  ): string {
+    assert(!isNaN(milliseconds), 'milliseconds is NaN');
+
+    return formatDate(new Date(milliseconds), style);
+  }
+
+  // Return all localized helpers
+  return {
+    formatNumber,
+    formatPercentage,
+    formatDate,
+    formatDateFromSeconds,
+    formatDateFromMilliseconds,
+    siteText: messages,
+    locale,
+  };
 }

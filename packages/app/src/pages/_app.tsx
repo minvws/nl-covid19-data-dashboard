@@ -1,10 +1,11 @@
 import '@reach/combobox/styles.css';
 import { AppProps } from 'next/app';
 import Router, { useRouter } from 'next/router';
-import { useEffect, createContext, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import '~/components-styled/combo-box/combo-box.scss';
 import { FCWithLayout } from '~/domain/layout/layout';
+import { IntlContext } from '~/intl';
 import * as piwik from '~/lib/piwik';
 import { GlobalStyle } from '~/style/global-style';
 import theme from '~/style/theme';
@@ -28,8 +29,6 @@ if (typeof window !== 'undefined') {
 type AppPropsWithLayout = AppProps & {
   Component: FCWithLayout;
 };
-
-export const IntlContext = createContext({ messages: null as any });
 
 export default function App(props: AppPropsWithLayout) {
   const { Component, pageProps } = props;
