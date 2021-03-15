@@ -2007,6 +2007,13 @@
       "href": "/verantwoording#vaccination",
       "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
+    "more_information": {
+      "label": "Meer informatie over de vaccinaties kunt u vinden op",
+      "link": {
+        "href": "https://www.coronavaccinatie.nl/",
+        "text": "www.coronavaccinatie.nl"
+      }
+    },
     "bronnen": {
       "rivm": {
         "href": "",
