@@ -83,6 +83,19 @@ const mediaQueries = {
   xl: `screen and (min-width: ${breakpoints[4]})`,
 } as const;
 
+const multiseries = {
+  cyan: '#219BE5',
+  cyan_dark: '#005082',
+  yellow: '#FFC000',
+  yellow_dark: '#CF9C00',
+  turquoise: '#00BBB5',
+  turquoise_dark: '#089792',
+  orange: '#E37321',
+  orange_dark: '#A14E00',
+  magenta: '#D360E5',
+  magenta_dark: '#9515AA',
+};
+
 export const colors = {
   body: '#000000',
   bodyLight: '#555555',
@@ -127,13 +140,17 @@ export const colors = {
       yellow: '#D3A500',
       red: '#f35065',
     },
+
+    multiseries,
+
     vaccines: {
-      pfizer: '#8FCAE7',
-      moderna: '#1A87D0',
-      astra_zeneca: '#003580',
-      cure_vac: '#0070BB',
-      janssen: '#248FCF',
-      sanofi: '#8FCAE7',
+      bio_n_tech_pfizer: multiseries.cyan,
+      moderna: multiseries.yellow,
+      astra_zeneca: multiseries.turquoise,
+      cure_vac: multiseries.magenta,
+      janssen: multiseries.orange,
+      sanofi: multiseries.cyan_dark,
+      pfizer: multiseries.cyan,
     },
   },
 } as const;

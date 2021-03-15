@@ -31,6 +31,7 @@ import {
 } from '~/domain/vaccine/milestones-view';
 import { useVaccineDeliveryData } from '~/domain/vaccine/use-vaccine-delivery-data';
 import { useVaccineNames } from '~/domain/vaccine/use-vaccine-names';
+import { useVaccineStockData } from '~/domain/vaccine/use-vaccine-stock-data';
 import { VaccinePageIntroduction } from '~/domain/vaccine/vaccine-page-introduction';
 import siteText from '~/locale/index';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
@@ -44,7 +45,7 @@ import {
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { formatDateFromSeconds } from '~/utils/formatDate';
-import { formatNumber } from '~/utils/formatNumber';
+import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 export const getStaticProps = createGetStaticProps(
@@ -88,6 +89,8 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
     vaccineAdministeredValues,
     vaccineAdministeredEstimateValues,
   ] = useVaccineDeliveryData(data);
+
+  const vaccineStock = useVaccineStockData(data);
 
   return (
     <>
@@ -444,6 +447,18 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
           >
             <KpiValue absolute={data.vaccine_stock.last_value.total} />
             <Text>{text.stock.description}</Text>
+
+            <Box as="ul" p={0}>
+              {vaccineStock.map((vaccine) => (
+                <Box as="li" display="block" key={vaccine.label}>
+                  <ColorIndicator color={vaccine.color} />
+                  {replaceComponentsInText(text.stock.per_vaccine, {
+                    amount: <strong>{formatNumber(vaccine.amount)}</strong>,
+                    label: vaccine.label,
+                  })}
+                </Box>
+              ))}
+            </Box>
           </KpiTile>
         </TwoKpiSection>
 
@@ -528,3 +543,16 @@ function HatchedSquare() {
     </svg>
   );
 }
+
+const ColorIndicator = styled.span<{
+  color?: string;
+}>`
+  content: '';
+  display: ${(x) => (x.color ? 'inline-block' : 'none')};
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  background: ${(x) => x.color || 'black'};
+  margin-right: 0.5em;
+  flex-shrink: 0;
+`;
