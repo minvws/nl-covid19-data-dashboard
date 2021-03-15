@@ -1,6 +1,5 @@
 import { TimestampedValue } from '@corona-dashboard/common';
 import styled from 'styled-components';
-import { isPresent } from 'ts-is-present';
 import { HoveredPoint } from '../logic/hover-state';
 
 const MARKER_POINT_SIZE = 18;

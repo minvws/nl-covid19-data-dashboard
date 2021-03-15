@@ -92,6 +92,11 @@ export type TimeSeriesChartProps<
   values: T[];
   seriesConfig: C;
   ariaLabelledBy: string;
+  /**
+   * The initial width of the chart is used for server-side rendering. it will
+   * use the available width when the chart mounts.
+   */
+  initialWidth?: number;
   height?: number;
   timeframe?: TimeframeOption;
   formatTooltip?: TooltipFormatter<T>;
@@ -129,6 +134,7 @@ export function TimeSeriesChart<
 >({
   values: allValues,
   seriesConfig,
+  initialWidth = 840,
   height = 250,
   timeframe = 'all',
   formatTooltip,
@@ -151,7 +157,7 @@ export function TimeSeriesChart<
     tooltipOpen,
   } = useTooltip<TooltipData<T>>();
 
-  const [sizeRef, { width }] = useElementSize<HTMLDivElement>(840);
+  const [sizeRef, { width }] = useElementSize<HTMLDivElement>(initialWidth);
 
   const {
     valueAnnotation,
@@ -349,7 +355,7 @@ export function TimeSeriesChart<
             />
             <DateLineMarker
               point={hoverState.nearestPoint}
-              lineColor={`#5B5B5B`}
+              lineColor="#5B5B5B"
               value={values[hoverState.valuesIndex]}
             />
             <PointMarkers points={hoverState.rangePoints} />
