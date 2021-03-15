@@ -193,12 +193,12 @@ const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
             <ParentSize>
               {({ width }) => (
                 <TimeSeriesChart
-                  title={corona_melder_app.linechart.tooltip.title}
+                  title={corona_melder_app.linechart.title}
                   timeframe={timeframe}
                   width={width}
                   values={data.corona_melder_app.values}
                   showDateMarker
-                  ariaLabelledBy={corona_melder_app.linechart.description}
+                  ariaLabelledBy={corona_melder_app.linechart.ariaDescription}
                   paddingLeft={40}
                   seriesConfig={[
                     {
