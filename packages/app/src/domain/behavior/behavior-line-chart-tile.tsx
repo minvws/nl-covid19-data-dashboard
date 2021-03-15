@@ -3,7 +3,6 @@ import {
   RegionalBehaviorValue,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { ParentSize } from '@visx/responsive';
 import { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import { isPresent } from 'ts-is-present';
@@ -101,40 +100,33 @@ export function BehaviorLineChartTile({
 
       <Spacer mb={3} />
 
-      <ParentSize>
-        {({ width }) => (
-          <TimeSeriesChart
-            title={
-              type === 'compliance'
-                ? siteText.gedrag_common.compliance
-                : siteText.gedrag_common.support
-            }
-            width={width}
-            values={values}
-            ariaLabelledBy=""
-            seriesConfig={[...behaviorIdentifierWithData]
-              .sort((x) => (x.valueKey === selectedValueKey ? 1 : -1))
-              .map((x) => ({
-                type: 'line' as const,
-                metricProperty: x.valueKey,
-                label: x.label,
-                strokeWidth: x.valueKey === selectedValueKey ? 3 : 2,
-                color:
-                  x.valueKey === selectedValueKey
-                    ? colors.data.primary
-                    : '#E7E7E7',
-              }))}
-            disableLegend
-            dataOptions={{
-              isPercentage: true,
-              showNearestPointOnly: true,
-            }}
-            tickValues={[0, 25, 50, 75, 100]}
-            showDateMarker
-            onSeriesClick={handleSeriesClick}
-          />
-        )}
-      </ParentSize>
+      <TimeSeriesChart
+        title={
+          type === 'compliance'
+            ? siteText.gedrag_common.compliance
+            : siteText.gedrag_common.support
+        }
+        values={values}
+        ariaLabelledBy=""
+        seriesConfig={[...behaviorIdentifierWithData]
+          .sort((x) => (x.valueKey === selectedValueKey ? 1 : -1))
+          .map((x) => ({
+            type: 'line' as const,
+            metricProperty: x.valueKey,
+            label: x.label,
+            strokeWidth: x.valueKey === selectedValueKey ? 3 : 2,
+            color:
+              x.valueKey === selectedValueKey ? colors.data.primary : '#E7E7E7',
+          }))}
+        disableLegend
+        dataOptions={{
+          isPercentage: true,
+          showNearestPointOnly: true,
+        }}
+        tickValues={[0, 25, 50, 75, 100]}
+        showDateMarker
+        onSeriesClick={handleSeriesClick}
+      />
     </Tile>
   );
 }

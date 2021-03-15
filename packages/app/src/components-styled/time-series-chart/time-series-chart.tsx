@@ -6,6 +6,7 @@ import useResizeObserver from 'use-resize-observer';
 import { Box } from '~/components-styled/base';
 import { Legend } from '~/components-styled/legend';
 import { TimeframeOption } from '~/utils/timeframe';
+import { useElementSize } from '~/utils/use-element-size';
 import { ValueAnnotation } from '../value-annotation';
 import {
   Axes,
@@ -87,7 +88,6 @@ export type TimeSeriesChartProps<T extends TimestampedValue> = {
   title: string; // Used for default tooltip formatting
   values: T[];
   seriesConfig: SeriesConfig<T>;
-  width: number;
   ariaLabelledBy: string;
   height?: number;
   timeframe?: TimeframeOption;
@@ -116,7 +116,6 @@ export type TimeSeriesChartProps<T extends TimestampedValue> = {
 export function TimeSeriesChart<T extends TimestampedValue>({
   values: allValues,
   seriesConfig,
-  width,
   height = 250,
   timeframe = 'all',
   formatTooltip,
@@ -137,6 +136,8 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     hideTooltip,
     tooltipOpen,
   } = useTooltip<TooltipData<T>>();
+
+  const [sizeRef, { width }] = useElementSize<HTMLDivElement>(840);
 
   const {
     valueAnnotation,
@@ -247,7 +248,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
   }, [onSeriesClick, tooltipData]);
 
   return (
-    <Box>
+    <Box ref={sizeRef}>
       {valueAnnotation && (
         <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
       )}

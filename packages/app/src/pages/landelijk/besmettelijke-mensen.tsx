@@ -1,5 +1,4 @@
 import { getLastFilledValue } from '@corona-dashboard/common';
-import { ParentSize } from '@visx/responsive';
 import Ziektegolf from '~/assets/ziektegolf.svg';
 import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
@@ -76,34 +75,29 @@ const InfectiousPeople: FCWithLayout<typeof getStaticProps> = (props) => {
           timeframeOptions={['all', '5weeks']}
         >
           {(timeframe) => (
-            <ParentSize>
-              {({ width }) => (
-                <TimeSeriesChart
-                  timeframe={timeframe}
-                  title={text.linechart_titel}
-                  width={width}
-                  values={data.infectious_people.values}
-                  ariaLabelledBy=""
-                  seriesConfig={[
-                    {
-                      type: 'range',
-                      metricPropertyLow: 'margin_low',
-                      metricPropertyHigh: 'margin_high',
-                      label: text.legenda_marge,
-                      shortLabel: text.rangeLegendLabel,
-                      color: colors.data.margin,
-                    },
-                    {
-                      type: 'line',
-                      metricProperty: 'estimate',
-                      label: text.legenda_line,
-                      shortLabel: text.lineLegendLabel,
-                      color: colors.data.primary,
-                    },
-                  ]}
-                />
-              )}
-            </ParentSize>
+            <TimeSeriesChart
+              timeframe={timeframe}
+              title={text.linechart_titel}
+              values={data.infectious_people.values}
+              ariaLabelledBy=""
+              seriesConfig={[
+                {
+                  type: 'range',
+                  metricPropertyLow: 'margin_low',
+                  metricPropertyHigh: 'margin_high',
+                  label: text.legenda_marge,
+                  shortLabel: text.rangeLegendLabel,
+                  color: colors.data.margin,
+                },
+                {
+                  type: 'line',
+                  metricProperty: 'estimate',
+                  label: text.legenda_line,
+                  shortLabel: text.lineLegendLabel,
+                  color: colors.data.primary,
+                },
+              ]}
+            />
           )}
         </ChartTileWithTimeframe>
       </TileList>
