@@ -2007,13 +2007,6 @@
       "href": "/verantwoording#vaccinatie",
       "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     },
-    "more_information": {
-      "label": "Meer informatie over de vaccinaties kunt u vinden op",
-      "link": {
-        "href": "https://www.coronavaccinatie.nl/",
-        "text": "www.coronavaccinatie.nl"
-      }
-    },
     "bronnen": {
       "rivm": {
         "href": "",
@@ -2257,6 +2250,13 @@
     "clock": {
       "title": "Iedere {{seconds}} seconden krijgt iemand een prik",
       "description": "Dit is een schatting. Deze schatting is gemaakt met het gemiddelde van {{amount}} prikken per dag tussen 8.00 en 20.00 uur in de afgelopen zeven dagen."
+    },
+    "more_information": {
+      "label": "Meer informatie en nieuws over vaccinaties kunt u vinden op",
+      "link": {
+        "href": "https://www.coronavaccinatie.nl/",
+        "text": "coronavaccinatie.nl"
+      }
     }
   },
   "editorial_detail": {
@@ -2717,7 +2717,7 @@
       "cbs": {
         "href": "https://mlzopendata.cbs.nl/#/MLZ/nl/dataset/40080NED",
         "text": "CBS",
-        "download": "https://dataderden.cbs.nl/ODataApi/OData/40080NED/TypedDataSet?$filter=(substringof(%272020W%27,%20Perioden)%20eq%20true)%20or%20(substringof(%272021W%27,%20Perioden)%20eq%20true)%20and%20(substringof(%27VR%27,%20RegioS)%20eq%20true)&$select=Perioden,%20RegioS,%20Overledenen_1"
+        "download": "https://dataderden.cbs.nl/ODataApi/OData/40080NED/TypedDataSet?$filter=(substringof({{272020W}}27,%20Perioden){{20eq}}20true){{20or}}20(substringof({{272021W}}27,%20Perioden){{20eq}}20true){{20and}}20(substringof({{27VR}}27,%20RegioS){{20eq}}20true)&$select=Perioden,%20RegioS,%20Overledenen_1"
       }
     },
     "reference": {

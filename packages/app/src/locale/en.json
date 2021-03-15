@@ -2007,13 +2007,6 @@
       "href": "/verantwoording#vaccination",
       "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
-    "more_information": {
-      "label": "Meer informatie over de vaccinaties kunt u vinden op",
-      "link": {
-        "href": "https://www.coronavaccinatie.nl/",
-        "text": "www.coronavaccinatie.nl"
-      }
-    },
     "bronnen": {
       "rivm": {
         "href": "",
@@ -2257,6 +2250,13 @@
     "clock": {
       "title": "One person is vaccinated every {{seconds}} seconds",
       "description": "This is an estimate. The estimated figure is based on an average of {{amount}} doses per day between 08.00 and 20.00 over the past seven days."
+    },
+    "more_information": {
+      "label": "Read more about the",
+      "link": {
+        "href": "https://www.government.nl/topics/coronavirus-covid-19/dutch-vaccination-programme",
+        "text": "Dutch vaccination programme against COVID-19"
+      }
     }
   },
   "editorial_detail": {
