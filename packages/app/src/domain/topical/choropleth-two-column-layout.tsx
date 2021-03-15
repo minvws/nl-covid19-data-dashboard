@@ -4,11 +4,11 @@ import { assert } from '~/utils/assert';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 interface TopicalChoroplethTileProps {
   children: ReactNode;
-  legenda?: ReactNode;
+  legendComponent?: ReactNode;
 }
 
 export function ChoroplethTwoColumnLayout(props: TopicalChoroplethTileProps) {
-  const { children, legenda } = props;
+  const { children, legendComponent } = props;
   const childrenCount = Children.count(children);
 
   const breakpoints = useBreakpoints();
@@ -32,7 +32,7 @@ export function ChoroplethTwoColumnLayout(props: TopicalChoroplethTileProps) {
           <Box flex={{ _: '1 1 0%' }} px={{ _: 0, sm: '6rem' }} pb={4}>
             {childrenArray[0]}
           </Box>
-          {legenda}
+          {legendComponent}
         </>
       ) : (
         <>
@@ -49,7 +49,7 @@ export function ChoroplethTwoColumnLayout(props: TopicalChoroplethTileProps) {
             maxWidth={500}
           >
             {childrenArray[1]}
-            {legenda}
+            {legendComponent}
           </Box>
         </>
       )}
