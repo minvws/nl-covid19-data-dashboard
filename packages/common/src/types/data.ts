@@ -99,6 +99,7 @@ export interface Municipalities {
   code: string;
   hospital_nice: MunicipalitiesHospitalNice[];
   tested_overall: MunicipalitiesTestedOverall[];
+  sewer: MunicipalitiesSewer[];
 }
 export interface MunicipalitiesHospitalNice {
   date_unix: number;
@@ -112,6 +113,14 @@ export interface MunicipalitiesTestedOverall {
   gmcode: string;
   infected_per_100k: number;
   infected: number;
+  date_of_insertion_unix: number;
+}
+export interface MunicipalitiesSewer {
+  date_start_unix: number;
+  date_end_unix: number;
+  gmcode: string;
+  average: number;
+  total_installation_count: number;
   date_of_insertion_unix: number;
 }
 
