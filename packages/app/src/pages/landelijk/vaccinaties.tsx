@@ -385,7 +385,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                       text.grafiek_draagvlak.leeftijd_jaar,
                       { ageGroup: '16 - 24' }
                     ),
-                    color: '#005082',
+                    color: colors.data.multiseries.cyan,
                     legendShape: 'square',
                     areaFillOpacity: 0,
                   },
@@ -395,7 +395,8 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                       text.grafiek_draagvlak.leeftijd_jaar,
                       { ageGroup: '25 - 39' }
                     ),
-                    color: '#00BBB5',
+                    color: colors.data.multiseries.yellow,
+
                     legendShape: 'square',
                     areaFillOpacity: 0,
                   },
@@ -405,7 +406,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                       text.grafiek_draagvlak.leeftijd_jaar,
                       { ageGroup: '40 - 54' }
                     ),
-                    color: '#FFC000',
+                    color: colors.data.multiseries.turquoise,
                     legendShape: 'square',
                     areaFillOpacity: 0,
                   },
@@ -415,7 +416,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                       text.grafiek_draagvlak.leeftijd_jaar,
                       { ageGroup: '55 - 69' }
                     ),
-                    color: '#E28700',
+                    color: colors.data.multiseries.orange,
                     legendShape: 'square',
                     areaFillOpacity: 0,
                   },
@@ -425,7 +426,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                       text.grafiek_draagvlak.leeftijd_jaar,
                       { ageGroup: '70+' }
                     ),
-                    color: '#C252D4',
+                    color: colors.data.multiseries.magenta,
                     legendShape: 'square',
                     areaFillOpacity: 0,
                   },
