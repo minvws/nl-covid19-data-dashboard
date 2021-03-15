@@ -7,6 +7,10 @@ import client from 'part:@sanity/base/client';
  * Then it changes the '_type' field for all 'veelgesteldeVragen.question' documents from 'collapsible' to 'faqQuestion' and
  * assigns the veelgesteldeVragenGroups document to the 'group' field.
  *
+ * This migration can be run by executing the following command from the packages/cms directory:
+ * sanity exec src/migrations/sprint18 --with-user-token
+ *
+ * (Don't forget to run 'sanity login' first and choose the 'Google' option to login with)
  */
 
 const fetchFAQ = () => client.fetch(`*[_type == 'veelgesteldeVragen']`);
