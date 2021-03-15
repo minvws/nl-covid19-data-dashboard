@@ -2717,8 +2717,7 @@
           "href": ""
         }
       },
-      "tooltip": {
-        "title": "",
+      "labels": {
         "warnings": ""
       }
     }

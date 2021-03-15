@@ -204,7 +204,7 @@ const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
                     {
                       type: 'area',
                       metricProperty: 'warned_daily',
-                      label: corona_melder_app.linechart.tooltip.warnings,
+                      label: corona_melder_app.linechart.labels.warnings,
                       color: colors.data.primary,
                     },
                   ]}
