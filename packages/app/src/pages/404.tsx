@@ -12,7 +12,7 @@ const NotFound = (props) => {
   const { siteText } = useIntl();
 
   return (
-    <Layout {...siteText.nationaal_metadata} lastGenerated={lastGenerated}>
+    <Layout {...siteText.notfound_metadata} lastGenerated={lastGenerated}>
       <div className={styles.container}>
         <MaxWidth>
           <div className={styles.maxwidth}>
