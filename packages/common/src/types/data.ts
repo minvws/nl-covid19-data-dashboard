@@ -505,12 +505,13 @@ export interface NlVaccineAdministered {
   last_value: NlVaccineAdministeredValue;
 }
 export interface NlVaccineAdministeredValue {
-  pfizer?: number;
-  moderna?: number;
-  astra_zeneca?: number;
+  pfizer: number;
+  moderna: number;
+  astra_zeneca: number;
   cure_vac?: number;
   janssen?: number;
   sanofi?: number;
+  total: number;
   date_of_insertion_unix: number;
   date_start_unix: number;
   date_end_unix: number;
@@ -520,12 +521,13 @@ export interface NlVaccineAdministeredEstimate {
   last_value: NlVaccineAdministeredEstimateValue;
 }
 export interface NlVaccineAdministeredEstimateValue {
-  pfizer?: number;
-  moderna?: number;
-  astra_zeneca?: number;
+  pfizer: number;
+  moderna: number;
+  astra_zeneca: number;
   cure_vac?: number;
   janssen?: number;
   sanofi?: number;
+  total: number;
   date_of_insertion_unix: number;
   date_start_unix: number;
   date_end_unix: number;
