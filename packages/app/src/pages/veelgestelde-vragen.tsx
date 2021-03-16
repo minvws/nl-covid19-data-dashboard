@@ -1,3 +1,4 @@
+import groupBy from 'lodash/groupBy';
 import Head from 'next/head';
 import { Box } from '~/components-styled/base';
 import { RichContent } from '~/components-styled/cms/rich-content';
@@ -58,15 +59,10 @@ export const getStaticProps = createGetStaticProps(
 const Verantwoording: FCWithLayout<typeof getStaticProps> = (props) => {
   const { content } = props;
 
-  const groups = content.questions.reduce<
-    Record<string, FAQuestionAndAnswer[]>
-  >((groupsAggr, question) => {
-    if (!groupsAggr[question.group]) {
-      groupsAggr[question.group] = [];
-    }
-    groupsAggr[question.group].push(question);
-    return groupsAggr;
-  }, {});
+  const groups = groupBy<FAQuestionAndAnswer>(
+    content.questions,
+    (x) => x.group
+  );
 
   return (
     <>
