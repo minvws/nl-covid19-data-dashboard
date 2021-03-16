@@ -41,6 +41,8 @@ const BehaviorPage = (props) => {
 
   const metadata = {
     ...siteText.veiligheidsregio_index.metadata,
+    title: text.metadata.title,
+    description: text.metadata.description,
   };
 
   return (

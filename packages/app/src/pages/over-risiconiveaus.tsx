@@ -62,7 +62,10 @@ const OverRisicoNiveaus = (props) => {
   const { content, lastGenerated } = props;
 
   return (
-    <Layout {...siteText.nationaal_metadata} lastGenerated={lastGenerated}>
+    <Layout
+      {...siteText.over_risiconiveaus_metadata}
+      lastGenerated={lastGenerated}
+    >
       <Head>
         <link
           key="dc-type"

@@ -63,7 +63,10 @@ const Verantwoording = (props) => {
   const { siteText } = useIntl();
 
   return (
-    <Layout {...siteText.nationaal_metadata} lastGenerated={lastGenerated}>
+    <Layout
+      {...siteText.veelgestelde_vragen_metadata}
+      lastGenerated={lastGenerated}
+    >
       <Head>
         <link
           key="dc-type"

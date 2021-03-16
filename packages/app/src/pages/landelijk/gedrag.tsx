@@ -8,7 +8,7 @@ import { ArticleSummary } from '~/components-styled/article-teaser';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
-import { SEOHead } from '~/components-styled/seo-head';
+
 import { Tile } from '~/components-styled/tile';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
@@ -49,13 +49,15 @@ const BehaviorPage = ({ data, choropleth, content, lastGenerated }) => {
 
   const { nl_gedrag, corona_melder_app } = siteText;
 
+  const metadata = {
+    ...siteText.nationaal_metadata,
+    title: nl_gedrag.metadata.title,
+    description: nl_gedrag.metadata.description,
+  };
+
   return (
-    <Layout {...siteText.nationaal_metadata} lastGenerated={lastGenerated}>
+    <Layout {...metadata} lastGenerated={lastGenerated}>
       <NationalLayout data={data} lastGenerated={lastGenerated}>
-        <SEOHead
-          title={nl_gedrag.metadata.title}
-          description={nl_gedrag.metadata.description}
-        />
         <TileList>
           <ContentHeader
             category={siteText.nationaal_layout.headings.gedrag}

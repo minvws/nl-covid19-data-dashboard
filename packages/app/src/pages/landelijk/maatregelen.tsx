@@ -3,12 +3,10 @@ import { ContentHeader } from '~/components-styled/content-header';
 import { Heading } from '~/components-styled/typography';
 import { KpiSection } from '~/components-styled/kpi-section';
 import { LockdownTable } from '~/domain/restrictions/lockdown-table';
-import { SEOHead } from '~/components-styled/seo-head';
 import { Box } from '~/components-styled/base/box';
 import { TileList } from '~/components-styled/tile-list';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
-
 import { useIntl } from '~/intl';
 import {
   getNlData,
@@ -71,13 +69,13 @@ const NationalRestrictions = (props) => {
    */
   // const effectiveEscalationLevel: EscalationLevel = escalationLevel > 4 ? 4 : (escalationLevel as EscalationLevel);
 
+  const metadata = {
+    ...siteText.nationaal_metadata,
+  };
+
   return (
-    <Layout {...siteText.nationaal_metadata} lastGenerated={lastGenerated}>
+    <Layout {...metadata} lastGenerated={lastGenerated}>
       <NationalLayout data={data} lastGenerated={lastGenerated}>
-        <SEOHead
-          title={siteText.nationaal_metadata.title}
-          description={siteText.nationaal_metadata.description}
-        />
         <TileList>
           <ContentHeader title={siteText.nationaal_maatregelen.titel} />
 

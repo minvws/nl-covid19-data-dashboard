@@ -48,7 +48,10 @@ const AccessibilityPage = (props) => {
   const { content, lastGenerated } = props;
 
   return (
-    <Layout {...siteText.nationaal_metadata} lastGenerated={lastGenerated}>
+    <Layout
+      {...siteText.toegankelijkheid_metadata}
+      lastGenerated={lastGenerated}
+    >
       <Head>
         <link
           key="dc-type"

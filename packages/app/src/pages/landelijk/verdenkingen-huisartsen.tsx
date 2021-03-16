@@ -5,7 +5,6 @@ import { KpiValue } from '~/components-styled/kpi-value';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
-import { SEOHead } from '~/components-styled/seo-head';
 import { useIntl } from '~/intl';
 import { getNlData, getLastGeneratedDate } from '~/static-props/get-data';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
@@ -25,13 +24,16 @@ const SuspectedPatients = (props) => {
   const { siteText } = useIntl();
   const text = siteText.verdenkingen_huisartsen;
   const graphDescriptions = siteText.accessibility.grafieken;
+
+  const metadata = {
+    ...siteText.nationaal_metadata,
+    title: text.metadata.title,
+    description: text.metadata.description,
+  };
+
   return (
-    <Layout {...siteText.nationaal_metadata} lastGenerated={lastGenerated}>
+    <Layout {...metadata} lastGenerated={lastGenerated}>
       <NationalLayout data={data} lastGenerated={lastGenerated}>
-        <SEOHead
-          title={text.metadata.title}
-          description={text.metadata.description}
-        />
         <TileList>
           <ContentHeader
             category={siteText.nationaal_layout.headings.vroege_signalen}

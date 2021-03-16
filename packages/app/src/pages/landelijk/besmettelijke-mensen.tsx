@@ -7,7 +7,6 @@ import { Legend } from '~/components-styled/legend';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { AreaChart } from '~/components/charts/index';
-import { SEOHead } from '~/components-styled/seo-head';
 import { useIntl } from '~/intl';
 import { getNlData, getLastGeneratedDate } from '~/static-props/get-data';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
@@ -27,13 +26,16 @@ const InfectiousPeople = (props) => {
   const values = data.infectious_people.values;
   const { siteText } = useIntl();
   const text = siteText.besmettelijke_personen;
+
+  const metadata = {
+    ...siteText.nationaal_metadata,
+    title: text.metadata.title,
+    description: text.metadata.description,
+  };
+
   return (
-    <Layout {...siteText.nationaal_metadata} lastGenerated={lastGenerated}>
+    <Layout {...metadata} lastGenerated={lastGenerated}>
       <NationalLayout data={data} lastGenerated={lastGenerated}>
-        <SEOHead
-          title={text.metadata.title}
-          description={text.metadata.description}
-        />
         <TileList>
           <ContentHeader
             category={siteText.nationaal_layout.headings.besmettingen}

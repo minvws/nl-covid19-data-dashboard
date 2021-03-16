@@ -8,7 +8,6 @@ import { KpiWithIllustrationTile } from '~/components-styled/kpi-with-illustrati
 import { Legend } from '~/components-styled/legend';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { PageBarScale } from '~/components-styled/page-barscale';
-import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
@@ -40,13 +39,15 @@ const ReproductionIndex = (props) => {
   const text = siteText.reproductiegetal;
   const graphDescriptions = siteText.accessibility.grafieken;
 
+  const metadata = {
+    ...siteText.nationaal_metadata,
+    title: text.metadata.title,
+    description: text.metadata.description,
+  };
+
   return (
-    <Layout {...siteText.nationaal_metadata} lastGenerated={lastGenerated}>
+    <Layout {...metadata} lastGenerated={lastGenerated}>
       <NationalLayout data={data} lastGenerated={lastGenerated}>
-        <SEOHead
-          title={text.metadata.title}
-          description={text.metadata.description}
-        />
         <TileList>
           <ContentHeader
             category={siteText.nationaal_layout.headings.besmettingen}

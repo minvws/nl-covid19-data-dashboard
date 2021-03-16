@@ -10,7 +10,6 @@ import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
-import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
@@ -58,13 +57,15 @@ const SewerWater = ({ data, choropleth, content, lastGenerated }) => {
     'municipal'
   );
 
+  const metadata = {
+    ...siteText.nationaal_metadata,
+    title: text.metadata.title,
+    description: text.metadata.description,
+  };
+
   return (
-    <Layout {...siteText.nationaal_metadata} lastGenerated={lastGenerated}>
+    <Layout {...metadata} lastGenerated={lastGenerated}>
       <NationalLayout data={data} lastGenerated={lastGenerated}>
-        <SEOHead
-          title={text.metadata.title}
-          description={text.metadata.description}
-        />
         <TileList>
           <ContentHeader
             category={siteText.nationaal_layout.headings.vroege_signalen}
