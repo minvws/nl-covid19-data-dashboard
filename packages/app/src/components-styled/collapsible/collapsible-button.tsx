@@ -21,24 +21,35 @@ export const CollapsibleButton = ({
   label,
   children,
 }: CollapsibleButtonProps) => {
-  const { ref: contentRef, height: contentHeight } = useResizeObserver();
-  const { ref: buttonRef, height: buttonHeight } = useResizeObserver();
-  const [open, setOpen] = useState(false);
-  const { wrapperRef } = useSetLinkTabbability(open);
+  const { ref: contentRef, height: contentHeight = 0 } = useResizeObserver();
+  const { ref: buttonRef, height: buttonHeight = 0 } = useResizeObserver();
+  const [isOpen, setIsOpen] = useState(false);
+  const { wrapperRef } = useSetLinkTabbability(isOpen);
 
-  const openHeight =
-    buttonHeight && contentHeight ? buttonHeight + contentHeight : 0;
+  /**
+   * falback to `undefined` to prevent an initial animation from `0` to
+   * measured height
+   */
+  const height = buttonHeight + (isOpen ? contentHeight : 0) || undefined;
+
   return (
-    <Container minHeight={open ? openHeight : 0}>
-      <Disclosure open={open} onChange={() => setOpen(!open)}>
-        <ExpandButton ref={buttonRef}>
-          {label}
-          <Chevron open={open} />
-        </ExpandButton>
+    <Container style={{ height }}>
+      <Disclosure open={isOpen} onChange={() => setIsOpen(!isOpen)}>
+        <div
+          ref={buttonRef}
+          css={css({ display: 'flex', justifyContent: 'center' })}
+        >
+          <DisclosureButton>
+            {label} {buttonHeight} {contentHeight}
+            <Chevron open={isOpen} />
+          </DisclosureButton>
+        </div>
 
-        <Panel ref={wrapperRef} style={{ height: open ? contentHeight : 0 }}>
-          <div ref={contentRef}>{children}</div>
-        </Panel>
+        <DisclosurePanel>
+          <div ref={contentRef} style={{ height }}>
+            <div ref={wrapperRef}>{children}</div>
+          </div>
+        </DisclosurePanel>
       </Disclosure>
     </Container>
   );
@@ -52,47 +63,31 @@ const Container = styled(Box).attrs({ as: 'section' })(
     flexDirection: 'column',
     padding: 0,
     margin: '0 auto',
-    transitionProperty: 'min-width, min-height',
+    transitionProperty: 'height',
     transitionDuration: '0.5s',
     bg: 'tileGray',
     width: '100%',
-  })
-);
 
-const Panel = styled((props) => <DisclosurePanel {...props} />)(
-  css({
-    transitionProperty: 'height, opacity',
-    transitionDuration: '0.5s',
-    width: '100%',
-    overflow: 'hidden',
-    opacity: 0,
-    display: 'block',
-    '&[data-state="open"]': {
-      opacity: 1,
+    //button
+    '[data-reach-disclosure-button]': {
+      position: 'relative',
+      px: asResponsiveArray({ _: 2, sm: 4 }),
+      py: 3,
+      border: 'none',
+      background: 'none',
+      font: 'inherit',
+      color: 'blue',
+      cursor: 'pointer',
+      fontWeight: 'bold',
+      zIndex: 1,
+      width: '100%',
     },
-  })
-);
-
-const ExpandButton = styled((props) => <DisclosureButton {...props} />)(
-  css({
-    position: 'relative',
-    px: asResponsiveArray({ _: 2, sm: 4 }),
-    py: 3,
-    border: 'none',
-    background: 'none',
-    font: 'inherit',
-    color: 'blue',
-    cursor: 'pointer',
-    fontWeight: 'bold',
-    zIndex: 1,
-
-    '&:focus': {
+    '[data-reach-disclosure-button]:focus': {
       outlineWidth: '1px',
       outlineStyle: 'dashed',
       outlineColor: 'blue',
     },
-
-    '&[data-state="open"]:after': {
+    '[data-reach-disclosure-button][data-state="open"]:after': {
       content: '""',
       position: 'absolute',
       bottom: 0,
@@ -100,6 +95,22 @@ const ExpandButton = styled((props) => <DisclosureButton {...props} />)(
       right: 0,
       bg: 'lightGray',
       height: '1px',
+    },
+    //panel
+    '[data-reach-disclosure-panel]': {
+      transitionProperty: 'height, opacity',
+      transitionDuration: '0.5s',
+      width: '100%',
+      overflow: 'hidden',
+      opacity: 0,
+      display: 'block',
+    },
+    '[data-reach-disclosure-panel][data-state="open"]': {
+      opacity: 1,
+    },
+    '[data-reach-disclosure-panel][data-state="collapsed"]': {
+      height: 0,
+      opacity: 0,
     },
   })
 );
