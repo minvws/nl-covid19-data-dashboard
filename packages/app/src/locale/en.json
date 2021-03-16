@@ -2664,7 +2664,7 @@
         "toelichting": "This is the risk level that currently applies in this region. The risk level is reassessed every 2 weeks based on the number of hospital admissions and the number of positive tests (new confirmed cases) at that time."
       }
     },
-    "escalation_level_last_determined": "This risk level has been determined on {{last_determined}}, based on the figures from 22 to 28 February. The risk level will be reassessed around 16 March."
+    "escalation_level_last_determined": "This risk level has been determined on {{last_determined}}, based on the figures from {{based_from}} to {{based_to}}. The risk level will be reassessed around {{next_determined}}."
   },
   "gemeente_sterfte": {
     "titel_sidebar": "Deaths",
