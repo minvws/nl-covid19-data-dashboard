@@ -63,7 +63,7 @@ const Verantwoording = (props) => {
   const { content, lastGenerated } = props;
 
   return (
-    <Layout {...siteText.nationaal_metadata} lastGenerated={lastGenerated}>
+    <Layout {...siteText.verantwoording_metadata} lastGenerated={lastGenerated}>
       <Head>
         <link
           key="dc-type"
