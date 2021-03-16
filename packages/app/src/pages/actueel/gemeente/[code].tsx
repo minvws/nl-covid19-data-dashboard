@@ -9,13 +9,11 @@ import { HighlightTeaserProps } from '~/components-styled/highlight-teaser';
 import { MaxWidth } from '~/components-styled/max-width';
 import { CollapsibleButton } from '~/components-styled/collapsible';
 import { RiskLevelIndicator } from '~/components-styled/risk-level-indicator';
-import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
 import { WarningTile } from '~/components-styled/warning-tile';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
-import { FCWithLayout, getDefaultLayout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import { Sitemap } from '~/domain/topical/sitemap';
 import { EditorialSummary } from '~/domain/topical/editorial-teaser';
@@ -42,6 +40,7 @@ import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 export { getStaticPaths } from '~/static-paths/gm';
 import { useDataSitemap } from '~/domain/topical/sitemap/utils';
+import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
 
 export const getStaticProps = createGetStaticProps(
@@ -57,8 +56,8 @@ export const getStaticProps = createGetStaticProps(
   }>(getTopicalPageQuery)
 );
 
-const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { municipalityName, choropleth, data, content } = props;
+const TopicalMunicipality = (props) => {
+  const { municipalityName, choropleth, data, content, lastGenerated } = props;
 
   const { siteText } = useIntl();
   const router = useRouter();
@@ -85,16 +84,17 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
     `Could not find a "vrcode" to match with the region: ${safetyRegionForMunicipality?.code} to get the the current "level" of it.`
   );
 
+  const metadata = {
+    title: replaceVariablesInText(text.metadata.title, {
+      municipalityName,
+    }),
+    description: replaceVariablesInText(text.metadata.description, {
+      municipalityName,
+    }),
+  };
+
   return (
-    <>
-      <SEOHead
-        title={replaceVariablesInText(text.metadata.title, {
-          municipalityName,
-        })}
-        description={replaceVariablesInText(text.metadata.description, {
-          municipalityName,
-        })}
-      />
+    <Layout {...metadata} lastGenerated={lastGenerated}>
       <Box bg="white" pb={4}>
         <MaxWidth id="content">
           <TileList>
@@ -300,10 +300,8 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
           </TileList>
         </MaxWidth>
       </Box>
-    </>
+    </Layout>
   );
 };
-
-TopicalMunicipality.getLayout = getDefaultLayout();
 
 export default TopicalMunicipality;

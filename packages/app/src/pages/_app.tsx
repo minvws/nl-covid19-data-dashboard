@@ -4,7 +4,6 @@ import Router, { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import '~/components-styled/combo-box/combo-box.scss';
-import { FCWithLayout } from '~/domain/layout/layout';
 import { IntlContext } from '~/intl';
 import * as piwik from '~/lib/piwik';
 import { GlobalStyle } from '~/style/global-style';
@@ -26,14 +25,8 @@ if (typeof window !== 'undefined') {
   }
 }
 
-type AppPropsWithLayout = AppProps & {
-  Component: FCWithLayout;
-};
-
-export default function App(props: AppPropsWithLayout) {
+export default function App(props: AppProps) {
   const { Component, pageProps } = props;
-  const page = (page: React.ReactNode) => page;
-  const getLayout = Component.getLayout || page;
 
   const { locale } = useRouter();
 
@@ -56,13 +49,11 @@ export default function App(props: AppPropsWithLayout) {
     };
   }, []);
 
-  const pageWithLayout = getLayout(<Component {...pageProps} />, pageProps);
-
   return (
     <ThemeProvider theme={theme}>
       <IntlContext.Provider value={intlState}>
         <GlobalStyle />
-        {pageWithLayout}
+        <Component {...pageProps} />
       </IntlContext.Provider>
     </ThemeProvider>
   );

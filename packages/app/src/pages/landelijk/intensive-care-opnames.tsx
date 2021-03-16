@@ -9,12 +9,10 @@ import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { addBackgroundRectangleCallback } from '~/components-styled/line-chart/logic';
 import { PageBarScale } from '~/components-styled/page-barscale';
-import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/domain/layout/layout';
-import { GetNationalLayout } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
@@ -29,6 +27,8 @@ import {
   DateRange,
   getTrailingDateRange,
 } from '~/utils/get-trailing-date-range';
+import { Layout } from '~/domain/layout/layout';
+import { NationalLayout } from '~/domain/layout/national-layout';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -39,7 +39,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const IntakeIntensiveCare: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { data, content } = props;
+  const { data, content, lastGenerated } = props;
 
   const dataIntake = data.intensive_care_nice;
 
@@ -56,157 +56,169 @@ const IntakeIntensiveCare: FCWithLayout<typeof getStaticProps> = (props) => {
   const text = siteText.ic_opnames_per_dag;
   const graphDescriptions = siteText.accessibility.grafieken;
 
+  const metadata = {
+    ...siteText.nationaal_metadata,
+    title: text.metadata.title,
+    description: text.metadata.description,
+  };
+
   return (
-    <>
-      <SEOHead
-        title={text.metadata.title}
-        description={text.metadata.description}
-      />
-      <TileList>
-        <ContentHeader
-          category={siteText.nationaal_layout.headings.ziekenhuizen}
-          screenReaderCategory={siteText.ic_opnames_per_dag.titel_sidebar}
-          title={text.titel}
-          icon={<Arts />}
-          subtitle={text.pagina_toelichting}
-          metadata={{
-            datumsText: text.datums,
-            dateOrRange: dataIntake.last_value.date_unix,
-            dateOfInsertionUnix: dataIntake.last_value.date_of_insertion_unix,
-            dataSources: [text.bronnen.nice, text.bronnen.lnaz],
-          }}
-          reference={text.reference}
-        />
-
-        <ArticleStrip articles={content?.articles} />
-
-        <TwoKpiSection>
-          <KpiTile
-            title={text.barscale_titel}
+    <Layout {...metadata} lastGenerated={lastGenerated}>
+      <NationalLayout data={data} lastGenerated={lastGenerated}>
+        <TileList>
+          <ContentHeader
+            category={siteText.nationaal_layout.headings.ziekenhuizen}
+            screenReaderCategory={siteText.ic_opnames_per_dag.titel_sidebar}
+            title={text.titel}
+            icon={<Arts />}
+            subtitle={text.pagina_toelichting}
             metadata={{
-              date: dataIntake.last_value.date_unix,
-              source: text.bronnen.nice,
+              datumsText: text.datums,
+              dateOrRange: dataIntake.last_value.date_unix,
+              dateOfInsertionUnix: dataIntake.last_value.date_of_insertion_unix,
+              dataSources: [text.bronnen.nice, text.bronnen.lnaz],
             }}
-          >
-            <PageBarScale
-              data={data}
-              scope="nl"
-              metricName="intensive_care_nice"
-              metricProperty="admissions_moving_average"
-              localeTextKey="ic_opnames_per_dag"
-              differenceKey="intensive_care_nice__admissions_moving_average"
-            />
-            <Text>{text.extra_uitleg}</Text>
-          </KpiTile>
+            reference={text.reference}
+          />
 
-          <KpiTile
-            title={text.kpi_bedbezetting.title}
-            metadata={{
-              date: bedsLastValue.date_unix,
-              source: text.bronnen.lnaz,
-            }}
-          >
-            {bedsLastValue.beds_occupied_covid !== null &&
-              bedsLastValue.beds_occupied_covid_percentage !== null && (
-                <KpiValue
-                  data-cy="beds_occupied_covid"
-                  absolute={bedsLastValue.beds_occupied_covid}
-                  percentage={bedsLastValue.beds_occupied_covid_percentage}
-                  difference={
-                    data.difference.intensive_care_lcps__beds_occupied_covid
-                  }
-                />
-              )}
-            <Text>{text.kpi_bedbezetting.description}</Text>
-          </KpiTile>
-        </TwoKpiSection>
+          <ArticleStrip articles={content?.articles} />
 
-        <LineChartTile
-          title={text.linechart_titel}
-          values={dataIntake.values}
-          ariaDescription={graphDescriptions.intensive_care_opnames}
-          linesConfig={[
-            {
-              metricProperty: 'admissions_moving_average',
-            },
-          ]}
-          signaalwaarde={10}
-          metadata={{ source: text.bronnen.nice }}
-          componentCallback={addBackgroundRectangleCallback(
-            intakeUnderReportedRange,
-            {
-              fill: colors.data.underReported,
-            }
-          )}
-          legendItems={[
-            {
-              color: colors.data.primary,
-              label: text.linechart_legend_trend_label,
-              shape: 'line',
-            },
-            {
-              color: colors.data.underReported,
-              label: text.linechart_legend_inaccurate_label,
-              shape: 'square',
-            },
-          ]}
-          showLegend
-        />
+          <TwoKpiSection>
+            <KpiTile
+              title={text.barscale_titel}
+              metadata={{
+                date: dataIntake.last_value.date_unix,
+                source: text.bronnen.nice,
+              }}
+            >
+              <PageBarScale
+                data={data}
+                scope="nl"
+                metricName="intensive_care_nice"
+                metricProperty="admissions_moving_average"
+                localeTextKey="ic_opnames_per_dag"
+                differenceKey="intensive_care_nice__admissions_moving_average"
+              />
+              <Text>{text.extra_uitleg}</Text>
+            </KpiTile>
 
-        <LineChartTile
-          title={text.chart_bedbezetting.title}
-          description={text.chart_bedbezetting.description}
-          values={data.intensive_care_lcps.values}
-          linesConfig={[
-            {
-              metricProperty: 'beds_occupied_covid',
-            },
-          ]}
-          metadata={{ source: text.bronnen.lnaz }}
-          componentCallback={addBackgroundRectangleCallback(lcpsOldDataRange, {
-            fill: colors.data.underReported,
-          })}
-          formatTooltip={(values) => {
-            const value = values[0];
-            const isInaccurateValue = value.__date < lcpsOldDataRange[1];
+            <KpiTile
+              title={text.kpi_bedbezetting.title}
+              metadata={{
+                date: bedsLastValue.date_unix,
+                source: text.bronnen.lnaz,
+              }}
+            >
+              {bedsLastValue.beds_occupied_covid !== null &&
+                bedsLastValue.beds_occupied_covid_percentage !== null && (
+                  <KpiValue
+                    data-cy="beds_occupied_covid"
+                    absolute={bedsLastValue.beds_occupied_covid}
+                    percentage={bedsLastValue.beds_occupied_covid_percentage}
+                    difference={
+                      data.difference.intensive_care_lcps__beds_occupied_covid
+                    }
+                  />
+                )}
+              <Text>{text.kpi_bedbezetting.description}</Text>
+            </KpiTile>
+          </TwoKpiSection>
 
-            return (
-              <>
-                <Box display="flex" alignItems="center" flexDirection="column">
-                  {isInaccurateValue && (
-                    <Text as="span" fontSize={0} color={colors.annotation}>
-                      ({siteText.common.incomplete})
-                    </Text>
-                  )}
-                  <Box>
-                    <Text as="span" fontWeight="bold">
-                      {`${formatDateFromSeconds(value.date_unix, 'medium')}: `}
-                    </Text>
-                    {formatNumber(value.__value)}
+          <LineChartTile
+            title={text.linechart_titel}
+            values={dataIntake.values}
+            ariaDescription={graphDescriptions.intensive_care_opnames}
+            linesConfig={[
+              {
+                metricProperty: 'admissions_moving_average',
+              },
+            ]}
+            signaalwaarde={10}
+            metadata={{ source: text.bronnen.nice }}
+            componentCallback={addBackgroundRectangleCallback(
+              intakeUnderReportedRange,
+              {
+                fill: colors.data.underReported,
+              }
+            )}
+            legendItems={[
+              {
+                color: colors.data.primary,
+                label: text.linechart_legend_trend_label,
+                shape: 'line',
+              },
+              {
+                color: colors.data.underReported,
+                label: text.linechart_legend_inaccurate_label,
+                shape: 'square',
+              },
+            ]}
+            showLegend
+          />
+
+          <LineChartTile
+            title={text.chart_bedbezetting.title}
+            description={text.chart_bedbezetting.description}
+            values={data.intensive_care_lcps.values}
+            linesConfig={[
+              {
+                metricProperty: 'beds_occupied_covid',
+              },
+            ]}
+            metadata={{ source: text.bronnen.lnaz }}
+            componentCallback={addBackgroundRectangleCallback(
+              lcpsOldDataRange,
+              {
+                fill: colors.data.underReported,
+              }
+            )}
+            formatTooltip={(values) => {
+              const value = values[0];
+              const isInaccurateValue = value.__date < lcpsOldDataRange[1];
+
+              return (
+                <>
+                  <Box
+                    display="flex"
+                    alignItems="center"
+                    flexDirection="column"
+                  >
+                    {isInaccurateValue && (
+                      <Text as="span" fontSize={0} color={colors.annotation}>
+                        ({siteText.common.incomplete})
+                      </Text>
+                    )}
+                    <Box>
+                      <Text as="span" fontWeight="bold">
+                        {`${formatDateFromSeconds(
+                          value.date_unix,
+                          'medium'
+                        )}: `}
+                      </Text>
+                      {formatNumber(value.__value)}
+                    </Box>
                   </Box>
-                </Box>
-              </>
-            );
-          }}
-          legendItems={[
-            {
-              color: colors.data.primary,
-              label: text.chart_bedbezetting.legend_trend_label,
-              shape: 'line',
-            },
-            {
-              color: colors.data.underReported,
-              label: text.chart_bedbezetting.legend_inaccurate_label,
-              shape: 'square',
-            },
-          ]}
-          showLegend
-        />
-      </TileList>
-    </>
+                </>
+              );
+            }}
+            legendItems={[
+              {
+                color: colors.data.primary,
+                label: text.chart_bedbezetting.legend_trend_label,
+                shape: 'line',
+              },
+              {
+                color: colors.data.underReported,
+                label: text.chart_bedbezetting.legend_inaccurate_label,
+                shape: 'square',
+              },
+            ]}
+            showLegend
+          />
+        </TileList>
+      </NationalLayout>
+    </Layout>
   );
 };
-
-IntakeIntensiveCare.getLayout = GetNationalLayout;
 
 export default IntakeIntensiveCare;

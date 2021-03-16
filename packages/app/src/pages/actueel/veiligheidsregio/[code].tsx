@@ -9,7 +9,6 @@ import { HighlightTeaserProps } from '~/components-styled/highlight-teaser';
 import { MaxWidth } from '~/components-styled/max-width';
 import { CollapsibleButton } from '~/components-styled/collapsible';
 import { RiskLevelIndicator } from '~/components-styled/risk-level-indicator';
-import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
 import { Heading } from '~/components-styled/typography';
 import { VisuallyHidden } from '~/components-styled/visually-hidden';
@@ -17,7 +16,6 @@ import { WarningTile } from '~/components-styled/warning-tile';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
-import { FCWithLayout, getDefaultLayout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import { Sitemap } from '~/domain/topical/sitemap';
 import { EditorialSummary } from '~/domain/topical/editorial-teaser';
@@ -42,6 +40,7 @@ import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 export { getStaticPaths } from '~/static-paths/vr';
 import { useDataSitemap } from '~/domain/topical/sitemap/utils';
 import { useIntl } from '~/intl';
+import { Layout } from '~/domain/layout/layout';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -56,8 +55,8 @@ export const getStaticProps = createGetStaticProps(
   }>(getTopicalPageQuery)
 );
 
-const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { choropleth, data, content } = props;
+const TopicalSafetyRegion = (props) => {
+  const { choropleth, data, content, lastGenerated } = props;
   const router = useRouter();
   const { siteText } = useIntl();
 
@@ -70,17 +69,17 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
 
   const dataSitemap = useDataSitemap('veiligheidsregio', vrCode);
 
-  return (
-    <>
-      <SEOHead
-        title={replaceVariablesInText(text.metadata.title, {
-          safetyRegionName: props.safetyRegionName,
-        })}
-        description={replaceVariablesInText(text.metadata.description, {
-          safetyRegionName: props.safetyRegionName,
-        })}
-      />
+  const metadata = {
+    title: replaceVariablesInText(text.metadata.title, {
+      safetyRegionName: props.safetyRegionName,
+    }),
+    description: replaceVariablesInText(text.metadata.description, {
+      safetyRegionName: props.safetyRegionName,
+    }),
+  };
 
+  return (
+    <Layout {...metadata} lastGenerated={lastGenerated}>
       <Box bg="white" pb={4}>
         {/**
          * Since now the sections have a H2 heading I think we need to include
@@ -281,10 +280,8 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
           </TileList>
         </MaxWidth>
       </Box>
-    </>
+    </Layout>
   );
 };
-
-TopicalSafetyRegion.getLayout = getDefaultLayout();
 
 export default TopicalSafetyRegion;

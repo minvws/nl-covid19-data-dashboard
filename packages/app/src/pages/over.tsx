@@ -1,7 +1,8 @@
 import Head from 'next/head';
 import { RichContent } from '~/components-styled/cms/rich-content';
 import { MaxWidth } from '~/components-styled/max-width';
-import { FCWithLayout, GetLayoutWithMetadataKey } from '~/domain/layout/layout';
+import { useIntl } from '~/intl';
+import { Layout } from '~/domain/layout/layout';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
@@ -38,11 +39,12 @@ export const getStaticProps = createGetStaticProps(
   createGetContent<OverData>(query)
 );
 
-const Over: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { content } = props;
+const Over = (props) => {
+  const { siteText } = useIntl();
+  const { content, lastGenerated } = props;
 
   return (
-    <>
+    <Layout {...siteText.over_metadata} lastGenerated={lastGenerated}>
       <Head>
         <link
           key="dc-type"
@@ -67,10 +69,8 @@ const Over: FCWithLayout<typeof getStaticProps> = (props) => {
           </div>
         </MaxWidth>
       </div>
-    </>
+    </Layout>
   );
 };
-
-Over.getLayout = GetLayoutWithMetadataKey('over_metadata');
 
 export default Over;
