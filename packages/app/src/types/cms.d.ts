@@ -1,6 +1,6 @@
 import { PortableTextEntry } from '@sanity/block-content-to-react';
 
-export type FAQQuestion = {
+export type FAQuestionAndAnswer = {
   content: RichContentBlock[] | null;
   title: string;
   group: string;

@@ -11,12 +11,12 @@ import {
   createGetContent,
   getLastGeneratedDate,
 } from '~/static-props/get-data';
-import { FAQQuestion, RichContentBlock } from '~/types/cms';
+import { FAQuestionAndAnswer, RichContentBlock } from '~/types/cms';
 import { getSkipLinkId } from '~/utils/skipLinks';
 interface VeelgesteldeVragenData {
   title: string | null;
   description: RichContentBlock[] | null;
-  questions: FAQQuestion[];
+  questions: FAQuestionAndAnswer[];
 }
 
 const query = `*[_type == 'veelgesteldeVragen']{
@@ -58,16 +58,15 @@ export const getStaticProps = createGetStaticProps(
 const Verantwoording: FCWithLayout<typeof getStaticProps> = (props) => {
   const { content } = props;
 
-  const groups = content.questions.reduce<Record<string, FAQQuestion[]>>(
-    (groupsAggr, question) => {
-      if (!groupsAggr[question.group]) {
-        groupsAggr[question.group] = [];
-      }
-      groupsAggr[question.group].push(question);
-      return groupsAggr;
-    },
-    {}
-  );
+  const groups = content.questions.reduce<
+    Record<string, FAQuestionAndAnswer[]>
+  >((groupsAggr, question) => {
+    if (!groupsAggr[question.group]) {
+      groupsAggr[question.group] = [];
+    }
+    groupsAggr[question.group].push(question);
+    return groupsAggr;
+  }, {});
 
   return (
     <>
