@@ -5,7 +5,6 @@ import { SEOHead } from '~/components-styled/seo-head';
 import { AppFooter } from '~/components-styled/layout/app-footer';
 import { AppHeader } from '~/components-styled/layout/app-header';
 import { SkipLinkMenu } from '~/components-styled/skip-link-menu';
-import { useIntl } from '~/intl';
 
 interface LayoutProps {
   title: string;
@@ -26,47 +25,7 @@ export type FCWithLayout<
   ) => Promise<{ props: any }>
     ? StaticProps<PropsOrGetStaticProps>
     : PropsOrGetStaticProps
-> = React.FC<Props> & {
-  getLayout: (page: React.ReactNode, pageProps: Props) => React.ReactNode;
-};
-
-export function GetLayoutWithMetadata(metadata: LayoutProps) {
-  return function (page: React.ReactNode, pageProps: any) {
-    const lastGenerated = pageProps.lastGenerated;
-    return getLayout(metadata, lastGenerated)(<>{page}</>);
-  };
-}
-
-export function GetLayoutWithMetadataKey(metadatakey: string) {
-  const { siteText } = useIntl();
-  const metadata = siteText[metadatakey] as LayoutProps;
-
-  return function (page: React.ReactNode, pageProps: any) {
-    const lastGenerated = pageProps.lastGenerated;
-    return getLayout(metadata, lastGenerated)(<>{page}</>);
-  };
-}
-
-export function getDefaultLayout() {
-  return function <T extends { lastGenerated: string }>(
-    page: React.ReactNode,
-    pageProps: T
-  ) {
-    const { siteText } = useIntl();
-    const lastGenerated = pageProps.lastGenerated;
-    return getLayout(siteText?.metadata, lastGenerated)(<>{page}</>);
-  };
-}
-
-export function getLayout(layoutProps: LayoutProps, lastGenerated: string) {
-  return function (page: React.ReactNode): React.ReactNode {
-    return (
-      <Layout {...layoutProps} lastGenerated={lastGenerated}>
-        {page}
-      </Layout>
-    );
-  };
-}
+> = React.FC<Props>;
 
 export function Layout(
   props: LayoutProps & { lastGenerated: string; children: React.ReactNode }
