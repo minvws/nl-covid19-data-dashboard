@@ -45,8 +45,12 @@ const Municipality = (props) => {
     !breakpoints.md
   );
 
+  const metadata = {
+    ...siteText.gemeente_index.metadata,
+  };
+
   return (
-    <Layout {...siteText.gemeente_index.metadata} lastGenerated={lastGenerated}>
+    <Layout {...metadata} lastGenerated={lastGenerated}>
       <MunicipalityLayout lastGenerated={lastGenerated}>
         {!breakpoints.md && (
           <Box bg="white">

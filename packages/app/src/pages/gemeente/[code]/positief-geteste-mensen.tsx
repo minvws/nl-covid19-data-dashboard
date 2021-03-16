@@ -51,6 +51,7 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
   const router = useRouter();
 
   const metadata = {
+    ...siteText.gemeente_index.metadata,
     title: replaceVariablesInText(text.metadata.title, {
       municipalityName,
     }),

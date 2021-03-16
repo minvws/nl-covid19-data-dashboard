@@ -9,7 +9,6 @@ import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda
 import { HighlightTeaserProps } from '~/components-styled/highlight-teaser';
 import { Sitemap } from '~/domain/topical/sitemap';
 import { MaxWidth } from '~/components-styled/max-width';
-import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
 import { Heading } from '~/components-styled/typography';
 import { VisuallyHidden } from '~/components-styled/visually-hidden';
@@ -89,12 +88,14 @@ const Home = (props) => {
   const { siteText, formatDate } = useIntl();
   const text = siteText.nationaal_actueel;
 
+  const metadata = {
+    ...siteText.nationaal_metadata,
+    title: text.metadata.title,
+    description: text.metadata.description,
+  };
+
   return (
-    <Layout {...siteText.nationaal_metadata} lastGenerated={lastGenerated}>
-      <SEOHead
-        title={text.metadata.title}
-        description={text.metadata.description}
-      />
+    <Layout {...metadata} lastGenerated={lastGenerated}>
       <Box bg="white" pb={4}>
         {/**
          * Since now the sections have a H2 heading I think we need to include

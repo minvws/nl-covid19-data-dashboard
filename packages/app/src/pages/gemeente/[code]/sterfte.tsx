@@ -42,6 +42,7 @@ const DeceasedMunicipalPage = (props) => {
   const text = siteText.gemeente_sterfte;
 
   const metadata = {
+    ...siteText.gemeente_index.metadata,
     title: replaceVariablesInText(text.metadata.title, {
       municipalityName,
     }),

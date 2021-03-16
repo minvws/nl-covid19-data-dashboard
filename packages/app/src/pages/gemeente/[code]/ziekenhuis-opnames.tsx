@@ -56,6 +56,7 @@ const IntakeHospital = (props) => {
   const underReportedRange = getTrailingDateRange(data.hospital_nice.values, 4);
 
   const metadata = {
+    ...siteText.gemeente_index.metadata,
     title: replaceVariablesInText(text.metadata.title, {
       municipalityName,
     }),

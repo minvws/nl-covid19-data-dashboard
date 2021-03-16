@@ -60,6 +60,7 @@ const SewerWater = (props) => {
   }
 
   const metadata = {
+    ...siteText.gemeente_index.metadata,
     title: replaceVariablesInText(text.metadata.title, {
       municipalityName,
     }),
