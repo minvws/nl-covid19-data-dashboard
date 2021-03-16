@@ -9,7 +9,6 @@ import { HighlightTeaserProps } from '~/components-styled/highlight-teaser';
 import { MaxWidth } from '~/components-styled/max-width';
 import { CollapsibleButton } from '~/components-styled/collapsible';
 import { RiskLevelIndicator } from '~/components-styled/risk-level-indicator';
-import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
 import { WarningTile } from '~/components-styled/warning-tile';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
@@ -85,16 +84,17 @@ const TopicalMunicipality = (props) => {
     `Could not find a "vrcode" to match with the region: ${safetyRegionForMunicipality?.code} to get the the current "level" of it.`
   );
 
+  const metadata = {
+    title: replaceVariablesInText(text.metadata.title, {
+      municipalityName,
+    }),
+    description: replaceVariablesInText(text.metadata.description, {
+      municipalityName,
+    }),
+  };
+
   return (
-    <Layout {...siteText.nationaal_metadata} lastGenerated={lastGenerated}>
-      <SEOHead
-        title={replaceVariablesInText(text.metadata.title, {
-          municipalityName,
-        })}
-        description={replaceVariablesInText(text.metadata.description, {
-          municipalityName,
-        })}
-      />
+    <Layout {...metadata} lastGenerated={lastGenerated}>
       <Box bg="white" pb={4}>
         <MaxWidth id="content">
           <TileList>

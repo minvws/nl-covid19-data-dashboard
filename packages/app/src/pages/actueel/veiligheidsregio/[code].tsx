@@ -9,7 +9,6 @@ import { HighlightTeaserProps } from '~/components-styled/highlight-teaser';
 import { MaxWidth } from '~/components-styled/max-width';
 import { CollapsibleButton } from '~/components-styled/collapsible';
 import { RiskLevelIndicator } from '~/components-styled/risk-level-indicator';
-import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
 import { Heading } from '~/components-styled/typography';
 import { VisuallyHidden } from '~/components-styled/visually-hidden';
@@ -70,17 +69,17 @@ const TopicalSafetyRegion = (props) => {
 
   const dataSitemap = useDataSitemap('veiligheidsregio', vrCode);
 
-  return (
-    <Layout {...siteText.nationaal_metadata} lastGenerated={lastGenerated}>
-      <SEOHead
-        title={replaceVariablesInText(text.metadata.title, {
-          safetyRegionName: props.safetyRegionName,
-        })}
-        description={replaceVariablesInText(text.metadata.description, {
-          safetyRegionName: props.safetyRegionName,
-        })}
-      />
+  const metadata = {
+    title: replaceVariablesInText(text.metadata.title, {
+      safetyRegionName: props.safetyRegionName,
+    }),
+    description: replaceVariablesInText(text.metadata.description, {
+      safetyRegionName: props.safetyRegionName,
+    }),
+  };
 
+  return (
+    <Layout {...metadata} lastGenerated={lastGenerated}>
       <Box bg="white" pb={4}>
         {/**
          * Since now the sections have a H2 heading I think we need to include
