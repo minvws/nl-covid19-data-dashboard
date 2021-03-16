@@ -487,6 +487,7 @@ export interface NlVaccineDelivery {
 export interface NlVaccineDeliveryValue {
   total: number;
   date_of_insertion_unix: number;
+  date_of_report_unix: number;
   date_start_unix: number;
   date_end_unix: number;
 }
