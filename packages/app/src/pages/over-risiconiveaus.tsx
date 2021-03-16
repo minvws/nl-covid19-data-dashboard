@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import { CollapsibleSection } from '~/components-styled/collapsible';
 import { MaxWidth } from '~/components-styled/max-width';
-import { FCWithLayout, GetLayoutWithMetadataKey } from '~/domain/layout/layout';
 import {
   createGetContent,
   getLastGeneratedDate,
@@ -12,6 +11,9 @@ import { getSkipLinkId } from '~/utils/skipLinks';
 import styles from './over.module.scss';
 import { RichContent } from '~/components-styled/cms/rich-content';
 import { Box } from '~/components-styled/base';
+import { Layout } from '~/domain/layout/layout';
+import { useIntl } from '~/intl';
+
 interface OverRisiconiveausData {
   title: string | null;
   description: RichContentBlock[] | null;
@@ -55,11 +57,15 @@ export const getStaticProps = createGetStaticProps(
   createGetContent<OverRisiconiveausData>(query)
 );
 
-const OverRisicoNiveaus: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { content } = props;
+const OverRisicoNiveaus = (props) => {
+  const { siteText } = useIntl();
+  const { content, lastGenerated } = props;
 
   return (
-    <>
+    <Layout
+      {...siteText.over_risiconiveaus_metadata}
+      lastGenerated={lastGenerated}
+    >
       <Head>
         <link
           key="dc-type"
@@ -100,12 +106,8 @@ const OverRisicoNiveaus: FCWithLayout<typeof getStaticProps> = (props) => {
           </div>
         </MaxWidth>
       </div>
-    </>
+    </Layout>
   );
 };
-
-OverRisicoNiveaus.getLayout = GetLayoutWithMetadataKey(
-  'over_risiconiveaus_metadata'
-);
 
 export default OverRisicoNiveaus;

@@ -2,8 +2,10 @@ import Head from 'next/head';
 import { Box } from '~/components-styled/base';
 import { ContentBlock } from '~/components-styled/cms/content-block';
 import { RichContent } from '~/components-styled/cms/rich-content';
-import { FCWithLayout, GetLayoutWithMetadataKey } from '~/domain/layout/layout';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import { Layout } from '~/domain/layout/layout';
+import { useIntl } from '~/intl';
+
 import {
   createGetContent,
   getLastGeneratedDate,
@@ -41,11 +43,15 @@ export const getStaticProps = createGetStaticProps(
   `)
 );
 
-const AccessibilityPage: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { content } = props;
+const AccessibilityPage = (props) => {
+  const { siteText } = useIntl();
+  const { content, lastGenerated } = props;
 
   return (
-    <>
+    <Layout
+      {...siteText.toegankelijkheid_metadata}
+      lastGenerated={lastGenerated}
+    >
       <Head>
         <link
           key="dc-type"
@@ -66,12 +72,8 @@ const AccessibilityPage: FCWithLayout<typeof getStaticProps> = (props) => {
           {content.description && <RichContent blocks={content.description} />}
         </ContentBlock>
       </Box>
-    </>
+    </Layout>
   );
 };
-
-AccessibilityPage.getLayout = GetLayoutWithMetadataKey(
-  'toegankelijkheid_metadata'
-);
 
 export default AccessibilityPage;
