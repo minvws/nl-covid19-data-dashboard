@@ -2039,13 +2039,6 @@
       "href": "/verantwoording#vaccinatie",
       "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     },
-    "more_information": {
-      "label": "Meer informatie over de vaccinaties kunt u vinden op",
-      "link": {
-        "href": "https://www.coronavaccinatie.nl/",
-        "text": "www.coronavaccinatie.nl"
-      }
-    },
     "bronnen": {
       "rivm": {
         "href": "",
@@ -2289,6 +2282,13 @@
     "clock": {
       "title": "Iedere {{seconds}} seconden krijgt iemand een prik",
       "description": "Dit is een schatting. Deze schatting is gemaakt met het gemiddelde van {{amount}} prikken per dag tussen 8.00 en 20.00 uur in de afgelopen zeven dagen."
+    },
+    "more_information": {
+      "label": "Meer informatie en nieuws over vaccinaties kunt u vinden op",
+      "link": {
+        "href": "https://www.coronavaccinatie.nl/",
+        "text": "coronavaccinatie.nl"
+      }
     }
   },
   "editorial_detail": {
