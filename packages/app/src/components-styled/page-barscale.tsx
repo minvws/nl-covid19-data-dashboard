@@ -15,6 +15,7 @@ import {
 import { Box } from './base';
 import { DifferenceIndicator } from './difference-indicator';
 import { useIntl } from '~/intl';
+import { NLLocale } from '~/locale';
 
 /**
  * This component originated from SidebarBarScale, but is used on pages and
@@ -25,7 +26,7 @@ import { useIntl } from '~/intl';
 interface PageBarScaleProps<T> {
   scope: DataScope;
   data: T;
-  localeTextKey: keyof Locale;
+  localeTextKey: keyof NLLocale;
   metricName: MetricKeys<T>;
   metricProperty: string;
   differenceKey?: string;
