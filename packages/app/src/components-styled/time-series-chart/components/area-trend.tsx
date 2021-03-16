@@ -2,6 +2,7 @@ import { AreaClosed, LinePath } from '@visx/shape';
 import { PositionScale } from '@visx/shape/lib/types';
 import { MouseEvent, TouchEvent, useCallback, useMemo, useState } from 'react';
 import { isPresent } from 'ts-is-present';
+import { useUniqueId } from '~/utils/use-unique-id';
 import { SeriesItem, SeriesSingleValue } from '../logic';
 
 const DEFAULT_FILL_OPACITY = 0.2;
@@ -91,12 +92,14 @@ export function AreaTrendIcon({
   width = 15,
   height = 15,
 }: AreaTrendIconProps) {
+  const maskId = useUniqueId();
+
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
-      <mask id="myMask">
+      <mask id={maskId}>
         <rect rx={2} x={0} y={0} width={width} height={height} fill={'white'} />
       </mask>
-      <g mask="url(#myMask)">
+      <g mask={`url(#${maskId})`}>
         <line
           stroke={color}
           strokeWidth={strokeWidth}

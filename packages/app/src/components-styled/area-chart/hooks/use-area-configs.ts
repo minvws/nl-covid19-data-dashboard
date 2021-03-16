@@ -7,7 +7,7 @@ import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
 import { timestampToDate } from '~/components-styled/stacked-chart/logic';
 import { TimeframeOption } from '~/utils/timeframe';
-import { createUniqueId } from '~/utils/useUniqueId';
+import { createUniqueId } from '~/utils/use-unique-id';
 import { AreaDescriptor } from '../area-chart';
 import { AreaConfig } from '../components/area-chart-graph';
 import { getTimeframeValues, TimestampedTrendValue } from '../logic';
