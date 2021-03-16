@@ -36,7 +36,7 @@ export function Tooltip<T extends TimestampedValue>({
   title,
   data: tooltipData,
   left: pointX,
-  top: pointY,
+  top: _pointY,
   formatTooltip,
   bounds,
   padding,
@@ -47,8 +47,11 @@ export function Tooltip<T extends TimestampedValue>({
   const { width = 0, height = 0 } = useResizeObserver<HTMLDivElement>({ ref });
   const [boundingBox, boundingBoxRef] = useBoundingBox<HTMLDivElement>();
 
-  const centeredLeft = pointX + padding.left - width / 2;
-  const top = pointY - height - 20;
+  /**
+   * nudge the top to render the tooltip a slightly bit on top of the chart
+   */
+  const targetY = -height + 8;
+  const targetX = pointX + padding.left;
 
   const maxWidth = Math.min(
     bounds.width + padding.left + padding.right,
@@ -60,7 +63,14 @@ export function Tooltip<T extends TimestampedValue>({
   const minLeft = -offsetLeft + 10;
   const maxLeft = viewportSize.width - width - offsetLeft - 10;
 
-  const left = Math.max(minLeft, Math.min(centeredLeft, maxLeft));
+  const top = targetY;
+  const left = Math.max(
+    minLeft, // stay within left side of viewport
+    Math.min(
+      targetX - width / 2, // center tooltip
+      maxLeft // stay within right side of viewport
+    )
+  );
 
   return (
     <div ref={boundingBoxRef}>
@@ -81,11 +91,7 @@ export function Tooltip<T extends TimestampedValue>({
           )}
         </TooltipContent>
       </TooltipContainer>
-      <Triangle
-        left={pointX + padding.left}
-        top={pointY}
-        isMounted={isMounted}
-      />
+      <Triangle left={targetX} top={targetY + height} isMounted={isMounted} />
     </div>
   );
 }
@@ -108,27 +114,33 @@ function Triangle({ left, top, isMounted }: TriangleProps) {
         zIndex: 1010,
         pointerEvents: 'none',
       })}
-      style={{ transform: `translate(${left}px, ${top - 22}px)` }}
+      style={{ transform: `translate(${left}px, ${top}px)` }}
     >
-      <StyledTriangle />
+      <StyledTriangle width={16} />
     </div>
   );
 }
 
-const StyledTriangle = styled.div(
-  css({
+const StyledTriangle = styled.div<{ width: number }>((x) => {
+  /**
+   *  🙏  pythagoras
+   */
+  const borderWidth = Math.sqrt(Math.pow(x.width, 2) / 2) / 2;
+
+  return css({
     position: 'absolute',
     width: 0,
     height: 0,
-    marginLeft: '-11px', // no idea why this should be 11px, but it works.
+    marginLeft: -borderWidth,
     boxSizing: 'border-box',
-    border: '8px solid black',
+    borderWidth,
+    borderStyle: 'solid',
     borderColor: 'transparent transparent #fff #fff',
     transformOrigin: '0 0',
     transform: 'rotate(-45deg)',
     boxShadow: '-3px 3px 3px 0 rgba(0, 0, 0, 0.05)',
-  })
-);
+  });
+});
 
 const TooltipContainer = styled.div(
   css({
@@ -199,8 +211,7 @@ function TooltipHeading({ title }: { title: string }) {
 const StyledTooltipContent = styled.div((x) =>
   css({
     color: 'body',
-    width: '100%',
-    minWidth: 250,
+    maxWidth: 350,
     borderRadius: 1,
     cursor: x.onClick ? 'pointer' : 'default',
     fontSize: 1,
