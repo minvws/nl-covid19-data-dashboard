@@ -1,6 +1,5 @@
 import { Box } from '~/components-styled/base';
 import { EditorialDetail } from '~/components-styled/editorial-detail';
-import { FCWithLayout, GetLayoutWithMetadata } from '~/domain/layout/layout';
 import { client, getImageSrc, localize } from '~/lib/sanity';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
@@ -9,6 +8,7 @@ import {
 } from '~/static-props/get-data';
 import { Block, Editorial, RichContentBlock } from '~/types/cms';
 import { assert } from '~/utils/assert';
+import { Layout } from '~/domain/layout/layout';
 
 const editorialsQuery = `*[_type == 'editorial'] {"slug":slug.current}`;
 
@@ -69,32 +69,27 @@ export const getStaticProps = createGetStaticProps(
   })
 );
 
-const EditorialDetailPage: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { content } = props;
-
-  return (
-    <Box backgroundColor="white">
-      <EditorialDetail editorial={content} />
-    </Box>
-  );
-};
-
-/**
- *  @TODO this implementation below is not very sexy yet, its hacked together
- * to simply have _something_
- */
-EditorialDetailPage.getLayout = (page, props) => {
+const EditorialDetailPage = (props) => {
+  const { content, lastGenerated } = props;
   const { cover } = props.content;
   const { asset } = cover;
 
   const imgPath = getImageSrc(asset, 1200);
 
-  return GetLayoutWithMetadata({
+  const metadata = {
     title: getTitle(props.content.title),
     description: toPlainText(props.content.intro),
     openGraphImage: imgPath,
     twitterImage: imgPath,
-  })(page, props);
+  };
+
+  return (
+    <Layout {...metadata} lastGenerated={lastGenerated}>
+      <Box backgroundColor="white">
+        <EditorialDetail editorial={content} />
+      </Box>
+    </Layout>
+  );
 };
 
 export default EditorialDetailPage;

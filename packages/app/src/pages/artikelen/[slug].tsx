@@ -1,6 +1,5 @@
 import { ArticleDetail } from '~/components-styled/article-detail';
 import { Box } from '~/components-styled/base';
-import { FCWithLayout, GetLayoutWithMetadata } from '~/domain/layout/layout';
 import { client, getImageSrc, localize } from '~/lib/sanity';
 import { targetLanguage } from '~/locale/index';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
@@ -10,6 +9,7 @@ import {
 } from '~/static-props/get-data';
 import { Article, Block, RichContentBlock } from '~/types/cms';
 import { assert } from '~/utils/assert';
+import { Layout } from '~/domain/layout/layout';
 
 const articlesQuery = `*[_type == 'article'] {"slug":slug.current}`;
 
@@ -67,32 +67,28 @@ export const getStaticProps = createGetStaticProps(
   })
 );
 
-const ArticleDetailPage: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { content } = props;
+const ArticleDetailPage = (props) => {
+  const { content, lastGenerated } = props;
 
-  return (
-    <Box backgroundColor="white">
-      <ArticleDetail article={content} />
-    </Box>
-  );
-};
-
-/**
- *  @TODO this implementation below is not very sexy yet, its hacked together
- * to simply have _something_
- */
-ArticleDetailPage.getLayout = (page, props) => {
-  const { cover } = props.content;
+  const { cover } = content;
   const { asset } = cover;
 
   const imgPath = getImageSrc(asset, 1200);
 
-  return GetLayoutWithMetadata({
+  const metadata = {
     title: getTitle(props.content.title),
     description: toPlainText(props.content.intro),
     openGraphImage: imgPath,
     twitterImage: imgPath,
-  })(page, props);
+  };
+
+  return (
+    <Layout {...metadata} lastGenerated={lastGenerated}>
+      <Box backgroundColor="white">
+        <ArticleDetail article={content} />
+      </Box>
+    </Layout>
+  );
 };
 
 export default ArticleDetailPage;
