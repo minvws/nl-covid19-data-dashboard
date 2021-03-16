@@ -31,15 +31,19 @@ export function TopNavigation() {
     setIsMenuOpen(false);
     setPanelHeight(0);
 
-    // Set the transistion after the panel has been closd to prevent possible flickering for the user
-    window.requestAnimationFrame(() => {
-      navWrapperTransition.current =
-        'max-height 0.4s ease-in-out, opacity 0.4s ease-in-out';
-    });
-
     // Workaround to get the mobile menu opened when linking to a sub-page.
     setNeedsMobileMenuLink(isSmallScreen);
   }, [isSmallScreen]);
+
+  useEffect(() => {
+    if (!isMenuOpen && isMounted && navWrapperTransition.current === 'none') {
+      // Set the transistion after the panel has been closd to prevent possible flickering for the user
+      window.requestAnimationFrame(() => {
+        navWrapperTransition.current =
+          'max-height 0.4s ease-in-out, opacity 0.4s ease-in-out';
+      });
+    }
+  }, [isMenuOpen, isMounted, navWrapperTransition]);
 
   useEffect(() => {
     setPanelHeight(isMenuOpen ? 1000 : 0);
