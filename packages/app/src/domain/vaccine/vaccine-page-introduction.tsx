@@ -129,6 +129,8 @@ export function VaccinePageIntroduction({
             dateOfInsertionUnix:
               data.vaccine_administered_total.last_value.date_of_insertion_unix,
             dataSources: [],
+            moreInformationLabel: text.more_information.label,
+            moreInformationLink: text.more_information.link,
           }}
         />
       </Box>
