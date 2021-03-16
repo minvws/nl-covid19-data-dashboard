@@ -177,7 +177,7 @@ export function getSeriesData<T extends TimestampedValue>(
       /**
        * This is messy and could be improved.
        */
-      __value: (x[metricProperty] || undefined) as number | undefined,
+      __value: (x[metricProperty] ?? undefined) as number | undefined,
       // @ts-expect-error @TODO figure out why the type guard doesn't work
       __date_unix: x.date_unix,
     }));
@@ -188,7 +188,7 @@ export function getSeriesData<T extends TimestampedValue>(
       /**
        * This is messy and could be improved.
        */
-      __value: (x[metricProperty] || undefined) as number | undefined,
+      __value: (x[metricProperty] ?? undefined) as number | undefined,
       __date_unix:
         /**
          * Here we set the date to be in the middle of the timespan, so that
