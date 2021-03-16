@@ -20,6 +20,7 @@ import reproductionPage from './documents/pages/reproduction-page';
 import sewerPage from './documents/pages/sewer-page';
 import topicalPage from './documents/pages/topical-page';
 import vaccinationsPage from './documents/pages/vaccinations-page';
+import veelgesteldeVragenGroepen from './documents/pages/veelgestelde-vragen-groepen-page';
 import veelgesteldeVragen from './documents/pages/veelgestelde-vragen-page';
 import toegankelijkheid from './documents/toegankelijkheid';
 import localeBlock from './locale/locale-block';
@@ -30,6 +31,7 @@ import localeString from './locale/locale-string';
 import localeText from './locale/locale-text';
 //objects are building blocks, but not queryable in itself
 import collapsible from './objects/collapsible';
+import faqQuestion from './objects/faq-question';
 import lineChart from './objects/line-chart';
 import milestone from './objects/milestone';
 import lockdown from './restrictions/lockdown';
@@ -51,6 +53,7 @@ export default createSchema({
     article,
     editorial,
     veelgesteldeVragen,
+    veelgesteldeVragenGroepen,
     cijferVerantwoording,
     overRisicoNiveaus,
     overDitDashboard,
@@ -78,6 +81,7 @@ export default createSchema({
     lineChart,
     collapsible,
     milestone,
+    faqQuestion,
 
     /* LOCALE HELPERS */
     localeString,

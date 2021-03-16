@@ -20,8 +20,30 @@ export function addBackgroundRectangleCallback(
     switch (callbackInfo.type) {
       case 'CustomBackground': {
         const { xScale, yScale, bounds } = callbackInfo.props;
+        /**
+         * Get displayed range
+         */
+        const [displayedStartMs, displayedEndMs] = xScale
+          .domain()
+          .map((x) => x.getTime());
+
+        /**
+         * Get background rectangle range
+         */
+        const [rectangleStartMs, rectangleEndMs] = dateRange.map((x) =>
+          x.getTime()
+        );
+
+        /**
+         * Create clipped backround rectangle range to fit within displayed range
+         */
+        const dateRangeClipped = [
+          new Date(Math.max(rectangleStartMs, displayedStartMs)),
+          new Date(Math.max(rectangleEndMs, displayedEndMs)),
+        ] as DateRange;
+
         return createBackgroundRectangle(
-          dateRange,
+          dateRangeClipped,
           xScale,
           yScale,
           bounds,

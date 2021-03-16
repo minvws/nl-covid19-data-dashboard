@@ -1563,7 +1563,7 @@
   resolved "https://registry.yarnpkg.com/@sanity/asset-utils/-/asset-utils-1.1.2.tgz#d6b4b875bee4189cb56f274a7fb5494174463cb2"
   integrity sha512-wVNhZ/W0ktlvHUzUrCuJMY9YtSls3PU+p5iQko8+P2R0HhEJfBCeTMTdqCe4BY/AfzVb4tn3/xr6XRRBKEL+AA==
 
-"@sanity/base@2.6.0", "@sanity/base@^2.4.3":
+"@sanity/base@2.6.0", "@sanity/base@^2.6.0":
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/@sanity/base/-/base-2.6.0.tgz#98f2816ba8d6fd7b3d5f6c608e26eae819cb83d0"
   integrity sha512-HT13hy07xGBnwmyezVTRZkk7FdGaJ1raZE0qq7FwtzhT7d1+4rNu2rkfY4uNrpEAnI0+BgkX5LvEikUDeNFzfQ==
@@ -1652,7 +1652,7 @@
     get-random-values "^1.2.0"
     lodash "^4.17.15"
 
-"@sanity/cli@^2.4.0":
+"@sanity/cli@^2.6.0":
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/@sanity/cli/-/cli-2.6.0.tgz#ffc0ba15cf6e34627538fe8ba655369f5a655a48"
   integrity sha512-lZFSF9ahk67YI/hYXP7RpQv1iubw5N/OA8+X7CjiLqoBe0C7kQ/B7hPnw3TyMz4r67Mwt5ApnsKd5466S5M3/A==
@@ -1685,7 +1685,7 @@
   resolved "https://registry.yarnpkg.com/@sanity/components/-/components-2.2.6.tgz#d1d6d1017a53ebb413ef026eabd5dd0b4a1bcdad"
   integrity sha512-KK+6eJgrgHEd9Hq+LbRamdAI64cNXYoVn/f/Dn3ES1GA55AvQyKQUay4T/zZ1yEITKSyIZgETQjpAl/Hg+72eQ==
 
-"@sanity/core@^2.4.0":
+"@sanity/core@^2.6.1":
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/@sanity/core/-/core-2.6.1.tgz#abdebe2e9dc62a9a198e477963be35f008aad581"
   integrity sha512-OljJZvehYZktf35auusKcfZL3ewMeg6BkJ5kmK7mc7OGBIcTaT0q8o4PAYMc63TZ5aPvjljbn2ONyATnTrjIPw==
@@ -1777,7 +1777,7 @@
     "@sanity/generate-help-url" "2.2.6"
     lodash "^4.17.15"
 
-"@sanity/default-layout@^2.4.3":
+"@sanity/default-layout@^2.6.0":
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/@sanity/default-layout/-/default-layout-2.6.0.tgz#2f5b7d5a54016a1b632d4dafc103aa0f4aa6838e"
   integrity sha512-bGIHaDZzI5BJlLAJ21XMhUm3zR8vJsKURcbqOK/moDuBvbOfbrmTvnadTljV8KEubCnRFZMw446qZQqY1b6uFQ==
@@ -1803,7 +1803,7 @@
     prop-types "^15.6.0"
     rxjs "^6.5.3"
 
-"@sanity/desk-tool@^2.4.3":
+"@sanity/desk-tool@^2.6.1":
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/@sanity/desk-tool/-/desk-tool-2.6.1.tgz#b6e09c8ab53675e06e8535f1a9746be9151b7dcc"
   integrity sha512-0pItzqRzVq7ZnwdamQm3/A2RZQwqqrIU/RwdcGe5Gx3Q87u5k9uvW8UBWdGbdfA+PfjGZ9mSrhyyWigOWjDF9w==

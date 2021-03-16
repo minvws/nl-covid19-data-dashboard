@@ -770,7 +770,13 @@
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -980,7 +986,7 @@
   },
   "veiligheidsregio_index": {
     "selecteer_titel": "Risk level map of the Netherlands",
-    "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on {{last_update}}. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\n**There remains a national lockdown until at least 30 March. [Click here to view the lockdown measures](/landelijk/maatregelen).**",
+    "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on 2 March. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\n**There remains a national lockdown until at least 30 March. [Click here to view the lockdown measures](/landelijk/maatregelen).**",
     "metadata": {
       "title": "Level of risk per safety region | Coronavirus Dashboard | Government.nl",
       "description": "Overview of the level of risk per safety region in the Netherlands."
@@ -1078,7 +1084,8 @@
         "href": "https://data.rivm.nl/covid-19/COVID-19_uitgevoerde_testen.html",
         "text": "RIVM"
       }
-    }
+    },
+    "summary_text": ""
   },
   "over_risiconiveaus_metadata": {
     "title": "Risk levels | Coronavirus Dashboard | Government.nl",
@@ -2107,7 +2114,11 @@
     "expected_page_additions": {
       "title": "Expected data on vaccinations",
       "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
-      "additions": ["", "", ""]
+      "additions": [
+        "",
+        "",
+        ""
+      ]
     },
     "data": {
       "difference": "",
@@ -2232,7 +2243,11 @@
       "kpi_expected_page_additions": {
         "title": "Expected data on vaccinations",
         "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
-        "additions": ["", "", ""]
+        "additions": [
+          "",
+          "",
+          ""
+        ]
       },
       "vaccination_chart": {
         "product_names": {
@@ -2270,6 +2285,13 @@
     "clock": {
       "title": "One person is vaccinated every {{seconds}} seconds",
       "description": "This is an estimate. The estimated figure is based on an average of {{amount}} doses per day between 08.00 and 20.00 over the past seven days."
+    },
+    "more_information": {
+      "label": "Read more about the",
+      "link": {
+        "href": "https://www.government.nl/topics/coronavirus-covid-19/dutch-vaccination-programme",
+        "text": "Dutch vaccination programme against COVID-19"
+      }
     }
   },
   "editorial_detail": {
@@ -2288,7 +2310,6 @@
     "url": "https://coronadashboard.government.nl/artikelen"
   },
   "common_actueel": {
-    "overview_links_header": "Bekijk alle cijfers op dit dashboard",
     "terug_naar_landelijk": "Back to national situation",
     "laatst_bijgewerkt": "Last update: {{date}}",
     "secties": {
@@ -2310,7 +2331,8 @@
           "href": "/artikelen"
         }
       }
-    }
+    },
+    "overview_links_header": ""
   },
   "nationaal_actueel": {
     "title": "The current situation in {{the_netherlands}}",
@@ -2321,7 +2343,7 @@
     },
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of the Netherlands",
-      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on {{last_update}}. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\n**There remains a national lockdown until at least 30 March. [Click here to view the lockdown measures](/landelijk/maatregelen).**"
+      "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on 2 March. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\n**There remains a national lockdown until at least 30 March. [Click here to view the lockdown measures](/landelijk/maatregelen).**"
     },
     "data_sitemap_titel": "Topics on this dashboard",
     "data_sitemap_toelichting": "Go directly to the following topics:",
@@ -2381,7 +2403,7 @@
       }
     },
     "quick_links": {
-      "header": "View all data",
+      "header": "View all data on the dashboard",
       "links": {
         "nationaal": "Data for the Netherlands",
         "veiligheidsregio": "Data by safety region",
@@ -2419,7 +2441,6 @@
       "title": "Current situation in safety region {{safetyRegionName}}",
       "description": "Current situation in safety region {{safetyRegionName}}"
     },
-    "data_sitemap_title": "Cijfers van {{safetyRegionName}}",
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of The Netherlands",
       "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on 2 March. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\n**There remains a national lockdown until at least 30 March. [Click here to view the lockdown measures](/landelijk/maatregelen).**"
@@ -2479,7 +2500,7 @@
       }
     },
     "quick_links": {
-      "header": "View all data",
+      "header": "View all data on the dashboard",
       "links": {
         "nationaal": "Data for The Netherlands",
         "veiligheidsregio": "Data for safety region {{safetyRegionName}}",
@@ -2494,7 +2515,8 @@
           "href": "/veiligheidsregio/{{vrCode}}/risiconiveau"
         }
       }
-    }
+    },
+    "data_sitemap_title": ""
   },
   "gemeente_actueel": {
     "title": "Current situation in municipality {{municipalityName}}",
@@ -2502,7 +2524,6 @@
       "title": "Current situation in {{municipalityName}}",
       "description": "The current situation in {{municipalityName}}"
     },
-    "data_sitemap_title": "Cijfers van {{municipalityName}}",
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of the Netherlands",
       "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on 2 March. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\n**There remains a national lockdown until at least 30 March. [Click here to view the lockdown measures](/landelijk/maatregelen).**"
@@ -2562,7 +2583,7 @@
       }
     },
     "quick_links": {
-      "header": "View all data",
+      "header": "View all data on the dashboard",
       "links": {
         "nationaal": "Data for The Netherlands",
         "veiligheidsregio": "Data for the safety region {{safetyRegionName}}",
@@ -2578,7 +2599,8 @@
           "href": "/gemeente/{{gmCode}}/positief-geteste-mensen"
         }
       }
-    }
+    },
+    "data_sitemap_title": ""
   },
   "toegankelijkheid_metadata": {
     "title": "Accessibility | Coronavirus Dashboard | Government.nl",
@@ -2645,7 +2667,7 @@
         "toelichting": "This is the risk level that currently applies in this region. The risk level is reassessed every 2 weeks based on the number of hospital admissions and the number of positive tests (new confirmed cases) at that time."
       }
     },
-    "escalation_level_last_determined": "This risk level has been determined on {{last_determined}}, based on the figures from 22 to 28 February. The risk level will be reassessed around 16 March."
+    "escalation_level_last_determined": "This risk level has been determined on {{last_determined}}, based on the figures from {{based_from}} to {{based_to}}. The risk level will be reassessed around {{next_determined}}."
   },
   "gemeente_sterfte": {
     "titel_sidebar": "Deaths",
@@ -2719,7 +2741,8 @@
     "hospital_admissions": "Hospital admissions:",
     "infected_locations": "Infected locations:",
     "elderly_at_home": "People over 70 living at home:",
-    "sewer_regional": "Average number of virus particles:"
+    "sewer_regional": "Average number of virus particles:",
+    "sewer_municipal": ""
   },
   "milestones": {
     "toon_meer": "Show earlier events",
