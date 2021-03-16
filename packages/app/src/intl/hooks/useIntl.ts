@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 import { isSameDay, isToday, isYesterday, subDays } from 'date-fns';
 import { assert } from '~/utils/assert';
 
@@ -49,7 +49,8 @@ function isDayBeforeYesterday(date: number | Date): boolean {
 }
 
 export function useIntl() {
-  const { locale } = useRouter();
+  // const { locale } = useRouter();
+  const locale = process.env.NEXT_PUBLIC_LOCALE;
   const { messages } = useContext(IntlContext);
 
   // Number formatting
