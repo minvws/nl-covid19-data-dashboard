@@ -1,4 +1,5 @@
 import {
+  formatNumber,
   NlVaccineAdministeredEstimateValue,
   NlVaccineAdministeredValue,
   NlVaccineDeliveryEstimateValue,
@@ -7,6 +8,7 @@ import {
 import { css } from '@styled-system/css';
 import { ParentSize } from '@visx/responsive';
 import { useState } from 'react';
+import styled from 'styled-components';
 import { AreaChart } from '~/components-styled/area-chart';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
@@ -31,7 +33,6 @@ import {
 } from '~/domain/vaccine/milestones-view';
 import { useVaccineDeliveryData } from '~/domain/vaccine/use-vaccine-delivery-data';
 import { useVaccineNames } from '~/domain/vaccine/use-vaccine-names';
-import { useVaccineStockData } from '~/domain/vaccine/use-vaccine-stock-data';
 import { VaccinePageIntroduction } from '~/domain/vaccine/vaccine-page-introduction';
 import siteText from '~/locale/index';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
@@ -45,7 +46,6 @@ import {
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { formatDateFromSeconds } from '~/utils/formatDate';
-import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 export const getStaticProps = createGetStaticProps(
@@ -89,8 +89,6 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
     vaccineAdministeredValues,
     vaccineAdministeredEstimateValues,
   ] = useVaccineDeliveryData(data);
-
-  const vaccineStock = useVaccineStockData(data);
 
   return (
     <>
@@ -437,6 +435,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
           </ParentSize>
         </ChartTile>
 
+        {/*
         <TwoKpiSection>
           <KpiTile
             title={text.stock.title}
@@ -449,18 +448,47 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             <Text>{text.stock.description}</Text>
 
             <Box as="ul" p={0}>
-              {vaccineStock.map((vaccine) => (
-                <Box as="li" display="block" key={vaccine.label}>
-                  <ColorIndicator color={vaccine.color} />
-                  {replaceComponentsInText(text.stock.per_vaccine, {
-                    amount: <strong>{formatNumber(vaccine.amount)}</strong>,
-                    label: vaccine.label,
-                  })}
-                </Box>
-              ))}
+              <Box as="li" display="block">
+                <ColorIndicator
+                  color={colors.data.vaccines.bio_n_tech_pfizer}
+                />
+                {replaceComponentsInText(text.stock.per_vaccine, {
+                  amount: (
+                    <strong>
+                      {formatNumber(
+                        data.vaccine_stock.last_value.bio_n_tech_pfizer
+                      )}
+                    </strong>
+                  ),
+                  label: 'BioNTech/Pfizer',
+                })}
+              </Box>
+              <Box as="li" display="block">
+                <ColorIndicator color={colors.data.vaccines.moderna} />
+                {replaceComponentsInText(text.stock.per_vaccine, {
+                  amount: (
+                    <strong>
+                      {formatNumber(data.vaccine_stock.last_value.moderna)}
+                    </strong>
+                  ),
+                  label: 'Moderna',
+                })}
+              </Box>
+              <Box as="li" display="block">
+                <ColorIndicator color={colors.data.vaccines.astra_zeneca} />
+                {replaceComponentsInText(text.stock.per_vaccine, {
+                  amount: (
+                    <strong>
+                      {formatNumber(data.vaccine_stock.last_value.astra_zeneca)}
+                    </strong>
+                  ),
+                  label: 'AstraZeneca',
+                })}
+              </Box>
             </Box>
           </KpiTile>
         </TwoKpiSection>
+              */}
 
         <TwoKpiSection>
           <KpiTile title={text.expected_page_additions.title}>

@@ -41,8 +41,7 @@
     "vaccine_administered_lnaz",
     "vaccine_administered_total",
     "vaccine_administered_rate_moving_average",
-    "vaccine_administered_planned",
-    "vaccine_stock"
+    "vaccine_administered_planned"
   ],
   "additionalProperties": false,
   "properties": {
@@ -165,9 +164,6 @@
     },
     "vaccine_administered_planned": {
       "$ref": "vaccine_administered_planned.json"
-    },
-    "vaccine_stock": {
-      "$ref": "vaccine_stock.json"
     }
   }
 }
