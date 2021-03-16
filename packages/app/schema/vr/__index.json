@@ -7,6 +7,7 @@
     "proto_name",
     "name",
     "code",
+    "g_number",
     "tested_overall",
     "hospital_nice",
     "tested_ggd_daily",
@@ -43,6 +44,9 @@
     },
     "difference": {
       "$ref": "__difference.json"
+    },
+    "g_number": {
+      "$ref": "g_number.json"
     },
     "sewer": {
       "$ref": "sewer.json"
