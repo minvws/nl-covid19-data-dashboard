@@ -96,7 +96,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
         description={text.metadata.description}
       />
       <TileList>
-        {/* <VaccinePageIntroduction data={data} text={text} /> */}
+        <VaccinePageIntroduction data={data} text={text} />
 
         <ArticleStrip articles={content.highlight.articles} />
 
@@ -434,6 +434,8 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
           </ParentSize>
         </ChartTile>
 
+        {/*
+        @Todo enable when data is available
         <TwoKpiSection>
           <KpiTile
             title={replaceVariablesInText(
@@ -468,6 +470,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             </Text>
           </KpiTile>
         </TwoKpiSection>
+        */}
 
         <TwoKpiSection>
           <KpiTile title={text.expected_page_additions.title}>

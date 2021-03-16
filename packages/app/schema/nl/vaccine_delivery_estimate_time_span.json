@@ -6,7 +6,10 @@
       "required": [
         "doses",
         "time_span_weeks",
-        "date_of_insertion_unix"
+        "date_start_unix",
+        "date_end_unix",
+        "date_of_insertion_unix",
+        "date_of_report_unix"
       ],
       "additionalProperties": false,
       "properties": {
@@ -17,6 +20,15 @@
           "type": "integer"
         },
         "date_of_insertion_unix": {
+          "type": "integer"
+        },
+        "date_start_unix": {
+          "type": "integer"
+        },
+        "date_end_unix": {
+          "type": "integer"
+        },
+        "date_of_report_unix": {
           "type": "integer"
         }
       }
