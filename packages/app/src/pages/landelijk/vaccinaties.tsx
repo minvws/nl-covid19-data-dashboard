@@ -8,7 +8,6 @@ import {
 import { css } from '@styled-system/css';
 import { ParentSize } from '@visx/responsive';
 import { useState } from 'react';
-import styled from 'styled-components';
 import { AreaChart } from '~/components-styled/area-chart';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
@@ -436,6 +435,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
         </ChartTile>
 
         {/*
+        @TODO re-enable when data is available
         <TwoKpiSection>
           <KpiTile
             title={text.stock.title}
@@ -572,15 +572,17 @@ function HatchedSquare() {
   );
 }
 
-const ColorIndicator = styled.span<{
-  color?: string;
-}>`
-  content: '';
-  display: ${(x) => (x.color ? 'inline-block' : 'none')};
-  height: 8px;
-  width: 8px;
-  border-radius: 50%;
-  background: ${(x) => x.color || 'black'};
-  margin-right: 0.5em;
-  flex-shrink: 0;
-`;
+// @TODO re-enable when data is available
+//
+// const ColorIndicator = styled.span<{
+//   color?: string;
+// }>`
+//   content: '';
+//   display: ${(x) => (x.color ? 'inline-block' : 'none')};
+//   height: 8px;
+//   width: 8px;
+//   border-radius: 50%;
+//   background: ${(x) => x.color || 'black'};
+//   margin-right: 0.5em;
+//   flex-shrink: 0;
+// `;
