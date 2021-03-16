@@ -17,7 +17,6 @@ import { WarningTile } from '~/components-styled/warning-tile';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
-import { FCWithLayout, getDefaultLayout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import { Search } from '~/domain/topical/components/search';
 import { EditorialSummary } from '~/domain/topical/editorial-teaser';
@@ -43,6 +42,8 @@ import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { useDataSitemap } from '~/domain/topical/sitemap/utils';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+
+import { Layout } from '~/domain/layout/layout';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -77,7 +78,7 @@ export const getStaticProps = createGetStaticProps(
   }
 );
 
-const Home: FCWithLayout<typeof getStaticProps> = (props) => {
+const Home = (props) => {
   const { data, choropleth, content, lastGenerated } = props;
   const router = useRouter();
 
@@ -89,7 +90,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
   const text = siteText.nationaal_actueel;
 
   return (
-    <>
+    <Layout {...siteText.nationaal_metadata} lastGenerated={lastGenerated}>
       <SEOHead
         title={text.metadata.title}
         description={text.metadata.description}
@@ -275,10 +276,8 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
           </TileList>
         </MaxWidth>
       </Box>
-    </>
+    </Layout>
   );
 };
-
-Home.getLayout = getDefaultLayout();
 
 export default Home;

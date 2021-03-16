@@ -2,7 +2,6 @@ import Head from 'next/head';
 import { RichContent } from '~/components-styled/cms/rich-content';
 import { CollapsibleSection } from '~/components-styled/collapsible';
 import { MaxWidth } from '~/components-styled/max-width';
-import { FCWithLayout, GetLayoutWithMetadataKey } from '~/domain/layout/layout';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
@@ -12,6 +11,9 @@ import { CollapsibleList, RichContentBlock } from '~/types/cms';
 import { getSkipLinkId } from '~/utils/skipLinks';
 import styles from './over.module.scss';
 import { Box } from '~/components-styled/base';
+import { Layout } from '~/domain/layout/layout';
+import { useIntl } from '~/intl';
+
 interface VerantwoordingData {
   title: string | null;
   description: RichContentBlock[] | null;
@@ -56,11 +58,12 @@ export const getStaticProps = createGetStaticProps(
   createGetContent<VerantwoordingData>(query)
 );
 
-const Verantwoording: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { content } = props;
+const Verantwoording = (props) => {
+  const { siteText } = useIntl();
+  const { content, lastGenerated } = props;
 
   return (
-    <>
+    <Layout {...siteText.nationaal_metadata} lastGenerated={lastGenerated}>
       <Head>
         <link
           key="dc-type"
@@ -101,10 +104,8 @@ const Verantwoording: FCWithLayout<typeof getStaticProps> = (props) => {
           </div>
         </MaxWidth>
       </div>
-    </>
+    </Layout>
   );
 };
-
-Verantwoording.getLayout = GetLayoutWithMetadataKey('verantwoording_metadata');
 
 export default Verantwoording;
