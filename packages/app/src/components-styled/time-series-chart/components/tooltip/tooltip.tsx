@@ -4,7 +4,7 @@
  */
 import { TimestampedValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { Children, ReactNode, useRef } from 'react';
+import { ReactNode, useRef } from 'react';
 import styled from 'styled-components';
 import useResizeObserver from 'use-resize-observer';
 import { Heading } from '~/components-styled/typography';
@@ -81,7 +81,7 @@ export function Tooltip<T extends TimestampedValue>({
       <TooltipSeriesList data={tooltipData} />
     );
 
-  if (Children.count(content) === 0) return null;
+  if (!content) return null;
 
   return (
     <div ref={boundingBoxRef}>
