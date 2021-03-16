@@ -1,14 +1,8 @@
-import { TimestampedValue } from '@corona-dashboard/common';
 import { Threshold } from '@visx/threshold';
 import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
 import { useUniqueId } from '~/utils/useUniqueId';
-import {
-  Bounds,
-  RangeSeriesDefinition,
-  SeriesDoubleValue,
-  SeriesItem,
-} from '../logic';
+import { Bounds, SeriesDoubleValue, SeriesItem } from '../logic';
 
 const DEFAULT_FILL_OPACITY = 0.6;
 
@@ -70,19 +64,19 @@ export function RangeTrend({
   );
 }
 
-interface RangeTrendIconProps<T extends TimestampedValue> {
-  config: RangeSeriesDefinition<T>;
+interface RangeTrendIconProps {
+  color: string;
+  fillOpacity?: number;
   width?: number;
   height?: number;
 }
 
-export function RangeTrendIcon<T extends TimestampedValue>({
-  config,
+export function RangeTrendIcon({
+  color,
+  fillOpacity = DEFAULT_FILL_OPACITY,
   width = 15,
   height = 15,
-}: RangeTrendIconProps<T>) {
-  const { color, fillOpacity = DEFAULT_FILL_OPACITY } = config;
-
+}: RangeTrendIconProps) {
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
       <rect

@@ -46,7 +46,6 @@ const Container = styled.div(
     pointerEvents: 'none',
     top: 0,
     bottom: 0,
-    transition: 'left 75ms ease-out',
   })
 );
 

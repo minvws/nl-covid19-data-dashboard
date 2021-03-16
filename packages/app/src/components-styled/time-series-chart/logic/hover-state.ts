@@ -43,7 +43,7 @@ interface HoverState<T> {
   linePoints: HoveredPoint<T>[];
   rangePoints: HoveredPoint<T>[];
   nearestPoint: HoveredPoint<T>;
-  timespanAnnotationIndex?: number;
+  timespanAnnotationIndices?: number[];
 }
 
 type Event = React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>;
@@ -235,8 +235,8 @@ export function useHoverState<T extends TimestampedValue>({
       (a, b) => Math.abs(a.y - pointY) - Math.abs(b.y - pointY)
     )[0];
 
-    const timespanAnnotationIndex = timespanAnnotations
-      ? findActiveTimespanAnnotationIndex(
+    const timespanAnnotationIndices = timespanAnnotations
+      ? findActiveTimespanAnnotationIndices(
           values[valuesIndex],
           timespanAnnotations
         )
@@ -251,7 +251,7 @@ export function useHoverState<T extends TimestampedValue>({
         ? rangePoints.filter((x) => x === nearestPoint)
         : rangePoints,
       nearestPoint,
-      timespanAnnotationIndex,
+      timespanAnnotationIndices,
     };
 
     return hoverState;
@@ -271,7 +271,7 @@ export function useHoverState<T extends TimestampedValue>({
   return [handleHover, hoverState];
 }
 
-function findActiveTimespanAnnotationIndex(
+function findActiveTimespanAnnotationIndices(
   hoveredValue: TimestampedValue,
   timespanAnnotations: TimespanAnnotationConfig[]
 ) {
@@ -282,6 +282,8 @@ function findActiveTimespanAnnotationIndex(
   const valueSpanEnd = isDateValue(hoveredValue)
     ? hoveredValue.date_unix
     : hoveredValue.date_end_unix;
+
+  const activeTimespanAnnotationIndices: number[] = [];
 
   /**
    * Loop over the annotations and see if the hovered value falls within its
@@ -294,7 +296,9 @@ function findActiveTimespanAnnotationIndex(
      * x1 <= y2 && y1 <= x2
      */
     if (valueSpanStart <= annotation.end && annotation.start <= valueSpanEnd) {
-      return index;
+      activeTimespanAnnotationIndices.push(index);
     }
   }
+
+  return activeTimespanAnnotationIndices;
 }

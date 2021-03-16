@@ -1,8 +1,7 @@
-import { TimestampedValue } from '@corona-dashboard/common';
 import { LinePath } from '@visx/shape';
 import { MouseEvent, TouchEvent, useCallback, useMemo, useState } from 'react';
 import { isPresent } from 'ts-is-present';
-import { LineSeriesDefinition, SeriesItem, SeriesSingleValue } from '../logic';
+import { SeriesItem, SeriesSingleValue } from '../logic';
 
 export type LineStyle = 'solid' | 'dashed';
 
@@ -64,22 +63,21 @@ export function LineTrend({
   );
 }
 
-interface LineTrendIconProps<T extends TimestampedValue> {
-  config: LineSeriesDefinition<T>;
+interface LineTrendIconProps {
+  color: string;
+  style?: 'solid' | 'dashed';
+  strokeWidth?: number;
   width?: number;
   height?: number;
 }
 
-export function LineTrendIcon<T extends TimestampedValue>({
-  config,
+export function LineTrendIcon({
+  color,
+  strokeWidth = DEFAULT_STROKE_WIDTH,
+  style = DEFAULT_STYLE,
   width = 15,
   height = 15,
-}: LineTrendIconProps<T>) {
-  const {
-    color,
-    strokeWidth = DEFAULT_STROKE_WIDTH,
-    style = DEFAULT_STYLE,
-  } = config;
+}: LineTrendIconProps) {
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
       <line

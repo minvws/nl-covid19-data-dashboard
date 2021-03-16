@@ -31,7 +31,7 @@ export type TooltipData<T extends TimestampedValue> = {
    * that it can render the label accordingly. I am assuming here that we won't
    * ever define overlapping annotations for now.
    */
-  timespanAnnotation?: TimespanAnnotationConfig;
+  timespanAnnotations?: TimespanAnnotationConfig[];
 
   /**
    * Configuration to display the nearest point only in the tooltip
@@ -39,9 +39,6 @@ export type TooltipData<T extends TimestampedValue> = {
   markNearestPointOnly?: boolean;
 };
 
-export type TooltipFormatter<T extends TimestampedValue> = (args: {
-  value: T;
-  configIndex: number;
-  config: SeriesConfig<T>;
-  isPercentage?: boolean;
-}) => React.ReactNode;
+export type TooltipFormatter<T extends TimestampedValue> = (
+  tooltipData: TooltipData<T>
+) => React.ReactNode;

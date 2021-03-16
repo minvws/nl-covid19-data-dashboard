@@ -4,7 +4,7 @@
  */
 import { TimestampedValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { ReactNode, useRef } from 'react';
+import { Children, ReactNode, useRef } from 'react';
 import styled from 'styled-components';
 import useResizeObserver from 'use-resize-observer';
 import { Heading } from '~/components-styled/typography';
@@ -25,6 +25,8 @@ interface TooltipProps<T extends TimestampedValue> {
   formatTooltip?: TooltipFormatter<T>;
 }
 
+const VIEWPORT_PADDING = 10;
+
 /**
  * The Tooltip will always be rendered inside the viewport. Calculations
  * are quite messy and need to be cleaned up / refactored, but it does the
@@ -35,8 +37,8 @@ interface TooltipProps<T extends TimestampedValue> {
 export function Tooltip<T extends TimestampedValue>({
   title,
   data: tooltipData,
-  left: pointX,
-  top: _pointY,
+  left,
+  top: _top,
   formatTooltip,
   bounds,
   padding,
@@ -48,23 +50,23 @@ export function Tooltip<T extends TimestampedValue>({
   const [boundingBox, boundingBoxRef] = useBoundingBox<HTMLDivElement>();
 
   /**
-   * nudge the top to render the tooltip a slightly bit on top of the chart
+   * nudge the top to render the tooltip a little bit on top of the chart
    */
   const targetY = -height + 8;
-  const targetX = pointX + padding.left;
+  const targetX = left + padding.left;
 
   const maxWidth = Math.min(
     bounds.width + padding.left + padding.right,
-    viewportSize.width - 20
+    viewportSize.width - VIEWPORT_PADDING * 2
   );
 
-  const offsetLeft = boundingBox?.left ?? 0;
+  const relativeLeft = boundingBox?.left ?? 0;
 
-  const minLeft = -offsetLeft + 10;
-  const maxLeft = viewportSize.width - width - offsetLeft - 10;
+  const minLeft = -relativeLeft + VIEWPORT_PADDING;
+  const maxLeft = viewportSize.width - width - relativeLeft - VIEWPORT_PADDING;
 
-  const top = targetY;
-  const left = Math.max(
+  const y = targetY;
+  const x = Math.max(
     minLeft, // stay within left side of viewport
     Math.min(
       targetX - width / 2, // center tooltip
@@ -72,24 +74,26 @@ export function Tooltip<T extends TimestampedValue>({
     )
   );
 
+  const content =
+    typeof formatTooltip === 'function' ? (
+      formatTooltip(tooltipData)
+    ) : (
+      <TooltipSeriesList data={tooltipData} />
+    );
+
+  if (Children.count(content) === 0) return null;
+
   return (
     <div ref={boundingBoxRef}>
       <TooltipContainer
         ref={ref}
         style={{
           opacity: isMounted ? 1 : 0,
-          transform: `translate(${Math.round(left)}px,${Math.round(top)}px)`,
-          transition: `transform ${isMounted ? '75ms' : '0ms'} ease-out`,
+          transform: `translate(${Math.round(x)}px,${Math.round(y)}px)`,
           maxWidth,
         }}
       >
-        <TooltipContent title={title}>
-          {typeof formatTooltip === 'function' ? (
-            formatTooltip(tooltipData)
-          ) : (
-            <TooltipSeriesList data={tooltipData} />
-          )}
-        </TooltipContent>
+        <TooltipContent title={title}>{content}</TooltipContent>
       </TooltipContainer>
       <Triangle left={targetX} top={targetY + height} isMounted={isMounted} />
     </div>
@@ -110,7 +114,6 @@ function Triangle({ left, top, isMounted }: TriangleProps) {
         position: 'absolute',
         left: 0,
         top: 0,
-        transition: `transform ${isMounted ? '75ms' : '0ms'} ease-out`,
         zIndex: 1010,
         pointerEvents: 'none',
       })}

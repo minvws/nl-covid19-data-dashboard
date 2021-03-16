@@ -12,9 +12,8 @@ import { VisuallyHidden } from '~/components-styled/visually-hidden';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { SeriesConfig } from '../../logic';
-import { AreaTrendIcon } from '../area-trend';
-import { LineTrendIcon } from '../line-trend';
-import { RangeTrendIcon } from '../range-trend';
+import { SeriesIcon } from '../series-icon';
+import { TimespanAnnotationIcon } from '../timespan-annotation';
 import { TooltipData } from './types';
 
 export function TooltipSeriesList<T extends TimestampedValue>({
@@ -28,6 +27,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
     config,
     options,
     markNearestPointOnly,
+    timespanAnnotations,
   } = tooltipData;
 
   const dateString = getDateStringFromValue(value);
@@ -44,9 +44,9 @@ export function TooltipSeriesList<T extends TimestampedValue>({
         {seriesConfig.map((x, index) => {
           if (x.type === 'range') {
             return (
-              <TooltipListItem key={index} config={x}>
+              <TooltipListItem key={index} icon={<SeriesIcon config={x} />}>
                 <TooltipValueContainer>
-                  <InlineText mr={2}>{x.shortLabel ?? x.label}:</InlineText>
+                  <InlineText mr={2}>{x.shortLabel || x.label}:</InlineText>
                   <b css={css({ whiteSpace: 'nowrap' })}>
                     {`${getValueStringForKey(
                       value,
@@ -63,9 +63,9 @@ export function TooltipSeriesList<T extends TimestampedValue>({
             );
           } else {
             return (
-              <TooltipListItem key={index} config={x}>
+              <TooltipListItem key={index} icon={<SeriesIcon config={x} />}>
                 <TooltipValueContainer>
-                  <InlineText mr={2}>{x.shortLabel ?? x.label}:</InlineText>
+                  <InlineText mr={2}>{x.shortLabel || x.label}:</InlineText>
                   <b>
                     {getValueStringForKey(
                       value,
@@ -78,6 +78,22 @@ export function TooltipSeriesList<T extends TimestampedValue>({
             );
           }
         })}
+
+        {timespanAnnotations?.map((x, index) => (
+          <TooltipListItem
+            key={index}
+            icon={
+              <TimespanAnnotationIcon
+                color={x.color}
+                fillOpacity={x.fillOpacity}
+              />
+            }
+          >
+            <TooltipValueContainer>
+              <InlineText mr={2}>{x.shortLabel || x.label}</InlineText>
+            </TooltipValueContainer>
+          </TooltipListItem>
+        ))}
       </TooltipList>
     </section>
   );
@@ -89,15 +105,12 @@ const TooltipList = styled.ol`
   list-style: none;
 `;
 
-interface TooltipListItemProps<T extends TimestampedValue> {
+interface TooltipListItemProps {
   children: ReactNode;
-  config: SeriesConfig<T>[number];
+  icon: ReactNode;
 }
 
-function TooltipListItem<T extends TimestampedValue>({
-  children,
-  config,
-}: TooltipListItemProps<T>) {
+function TooltipListItem({ children, icon }: TooltipListItemProps) {
   return (
     <Box
       as="li"
@@ -107,29 +120,12 @@ function TooltipListItem<T extends TimestampedValue>({
       alignItems="stretch"
     >
       <Box flexShrink={0} display="flex" alignItems="baseline" mt={1}>
-        <TrendIcon config={config} />
+        {icon}
       </Box>
 
       <Box flexGrow={1}>{children}</Box>
     </Box>
   );
-}
-
-interface TrendIconProps<T extends TimestampedValue> {
-  config: SeriesConfig<T>[number];
-}
-
-function TrendIcon<T extends TimestampedValue>({ config }: TrendIconProps<T>) {
-  switch (config.type) {
-    case 'line':
-      return <LineTrendIcon config={config} />;
-    case 'range':
-      return <RangeTrendIcon config={config} />;
-    case 'area':
-      return <AreaTrendIcon config={config} />;
-    default:
-      return null;
-  }
 }
 
 const TooltipValueContainer = styled.span`

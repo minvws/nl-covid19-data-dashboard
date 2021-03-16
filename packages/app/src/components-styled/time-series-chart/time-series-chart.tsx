@@ -120,7 +120,7 @@ export type TimeSeriesChartProps<
    */
   dataOptions?: DataOptions;
   disableLegend?: boolean;
-  onSeriesClick?: (serieConfig: C[number], value: T) => void;
+  onSeriesClick?: (seriesConfig: C[number], value: T) => void;
 
   /**
    * By default markers for all series are displayed on hover, also the tooltip
@@ -222,7 +222,11 @@ export function TimeSeriesChart<
 
   useEffect(() => {
     if (hoverState) {
-      const { nearestPoint, valuesIndex, timespanAnnotationIndex } = hoverState;
+      const {
+        nearestPoint,
+        valuesIndex,
+        timespanAnnotationIndices,
+      } = hoverState;
 
       showTooltip({
         tooltipData: {
@@ -242,10 +246,11 @@ export function TimeSeriesChart<
            * dataOptions is already being passed, but it's cumbersome to have to
            * dig up the annotation from the array in the tooltip logic.
            */
-          timespanAnnotation:
-            timespanAnnotations && isDefined(timespanAnnotationIndex)
-              ? timespanAnnotations[timespanAnnotationIndex]
-              : undefined,
+          timespanAnnotations: isDefined(timespanAnnotations)
+            ? timespanAnnotationIndices?.map(
+                (index) => timespanAnnotations[index]
+              )
+            : undefined,
         },
         tooltipLeft: nearestPoint.x,
         tooltipTop: nearestPoint.y,
@@ -304,6 +309,7 @@ export function TimeSeriesChart<
                 start={x.start}
                 end={x.end}
                 color={x.color}
+                fillOpacity={x.fillOpacity}
                 domain={xScale.domain() as [number, number]}
                 getX={getX}
                 height={bounds.height}
@@ -370,7 +376,7 @@ export function TimeSeriesChart<
         )}
       </Box>
 
-      {!disableLegend && legendItems && (
+      {!disableLegend && legendItems.length > 0 && (
         <Box pl={paddingLeft}>
           <Legend items={legendItems} />
         </Box>

@@ -1,9 +1,7 @@
 import { TimestampedValue } from '@corona-dashboard/common';
-import { transparentize } from 'polished';
 import { useMemo } from 'react';
 import { LegendItem } from '~/components-styled/legend';
-import { colors } from '~/style/theme';
-import { TrendIcon } from '../components';
+import { SeriesIcon, TimespanAnnotationIcon } from '../components';
 import { DataOptions } from './common';
 import { SeriesConfig } from './series';
 
@@ -16,7 +14,7 @@ export function useLegendItems<T extends TimestampedValue>(
       color: x.color,
       label: x.label,
       shape: 'custom',
-      shapeComponent: <TrendIcon config={x} />,
+      shapeComponent: <SeriesIcon config={x} />,
     }));
 
     /**
@@ -25,11 +23,14 @@ export function useLegendItems<T extends TimestampedValue>(
     if (dataOptions?.timespanAnnotations) {
       for (const annotation of dataOptions.timespanAnnotations) {
         items.push({
-          color: annotation.color
-            ? transparentize(0.7, annotation.color)
-            : colors.data.emphasis,
           label: annotation.label,
-          shape: 'square',
+          shape: 'custom',
+          shapeComponent: (
+            <TimespanAnnotationIcon
+              color={annotation.color}
+              fillOpacity={annotation.fillOpacity}
+            />
+          ),
         } as LegendItem);
       }
     }
