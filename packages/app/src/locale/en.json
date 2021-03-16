@@ -1055,7 +1055,7 @@
   },
   "positief_geteste_personen_ggd": {
     "titel": "Percentage of positive test results at GGD test locations ",
-    "summary_title": "{{percentage}} of the test results at GGD test locations had a positive result",
+    "summary_text": "{{percentage}} of the test results at GGD test locations had a positive result from {{dateFrom}} to {{dateTo}}.",
     "summary_link_cta": "More about the percentage of positive test results from GGD test locations only",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
     "bron": {
