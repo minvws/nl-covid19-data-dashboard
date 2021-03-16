@@ -7,7 +7,9 @@ import styles from './error.module.scss';
 
 export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
 
-const ErrorPage = (props) => {
+const ErrorPage = (
+  props: Await<ReturnType<typeof getStaticProps>>['props']
+) => {
   const { lastGenerated } = props;
   const { siteText } = useIntl();
 

@@ -57,7 +57,9 @@ export const getStaticProps = createGetStaticProps(
   createGetContent<OverRisiconiveausData>(query)
 );
 
-const OverRisicoNiveaus = (props) => {
+const OverRisicoNiveaus = (
+  props: Await<ReturnType<typeof getStaticProps>>['props']
+) => {
   const { siteText } = useIntl();
   const { content, lastGenerated } = props;
 

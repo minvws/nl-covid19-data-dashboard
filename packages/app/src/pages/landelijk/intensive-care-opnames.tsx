@@ -38,7 +38,9 @@ export const getStaticProps = createGetStaticProps(
   }>(createPageArticlesQuery('intensiveCarePage'))
 );
 
-const IntakeIntensiveCare: FCWithLayout<typeof getStaticProps> = (props) => {
+const IntakeIntensiveCare = (
+  props: Await<ReturnType<typeof getStaticProps>>['props']
+) => {
   const { data, content, lastGenerated } = props;
 
   const dataIntake = data.intensive_care_nice;

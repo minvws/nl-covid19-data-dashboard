@@ -53,7 +53,9 @@ export const getStaticProps = createGetStaticProps(
   }>(createPageArticlesQuery('hospitalPage'))
 );
 
-const IntakeHospital = (props) => {
+const IntakeHospital = (
+  props: Await<ReturnType<typeof getStaticProps>>['props']
+) => {
   const { data, choropleth, content, lastGenerated } = props;
   const router = useRouter();
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(

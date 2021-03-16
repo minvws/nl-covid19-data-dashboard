@@ -32,7 +32,9 @@ const tooltipContent = (selectedHandler: MunicipalitySelectionHandler) => {
 
 export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
 
-const Municipality = (props) => {
+const Municipality = (
+  props: Await<ReturnType<typeof getStaticProps>>['props']
+) => {
   const { siteText } = useIntl();
   const { lastGenerated } = props;
 

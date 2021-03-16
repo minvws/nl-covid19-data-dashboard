@@ -47,7 +47,9 @@ export const getStaticProps = createGetStaticProps(
   }>(createPageArticlesQuery('positiveTestsPage'))
 );
 
-const PositivelyTestedPeople = (props) => {
+const PositivelyTestedPeople = (
+  props: Await<ReturnType<typeof getStaticProps>>['props']
+) => {
   const { data, choropleth, safetyRegionName, content, lastGenerated } = props;
 
   const {

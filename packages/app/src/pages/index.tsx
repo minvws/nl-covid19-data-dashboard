@@ -77,7 +77,7 @@ export const getStaticProps = createGetStaticProps(
   }
 );
 
-const Home = (props) => {
+const Home = (props: Await<ReturnType<typeof getStaticProps>>['props']) => {
   const { data, choropleth, content, lastGenerated } = props;
   const router = useRouter();
 

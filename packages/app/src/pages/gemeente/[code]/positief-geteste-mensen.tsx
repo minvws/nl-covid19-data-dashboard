@@ -41,7 +41,9 @@ export const getStaticProps = createGetStaticProps(
   }>(createPageArticlesQuery('positiveTestsPage'))
 );
 
-const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
+const PositivelyTestedPeople = (
+  props: Await<ReturnType<typeof getStaticProps>>['props']
+) => {
   const { data, choropleth, municipalityName, content, lastGenerated } = props;
 
   const { siteText, formatDateFromMilliseconds, formatNumber } = useIntl();

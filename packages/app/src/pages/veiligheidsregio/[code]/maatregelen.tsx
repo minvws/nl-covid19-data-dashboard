@@ -58,7 +58,9 @@ export const getStaticProps = createGetStaticProps(
   createGetContent<MaatregelenData>(query)
 );
 
-const RegionalRestrictions = (props) => {
+const RegionalRestrictions = (
+  props: Await<ReturnType<typeof getStaticProps>>['props']
+) => {
   const { content, safetyRegionName, lastGenerated } = props;
 
   const { siteText } = useIntl();

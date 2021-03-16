@@ -36,7 +36,10 @@ export const getStaticProps = createGetStaticProps(
   })
 );
 
-const NursingHomeCare = ({ data, choropleth, lastGenerated }) => {
+const NursingHomeCare = (
+  props: Await<ReturnType<typeof getStaticProps>>['props']
+) => {
+  const { data, choropleth, lastGenerated } = props;
   const nursinghomeData = data.nursing_home;
   const nursinghomeDataUnderReportedValues = getTrailingDateRange(
     nursinghomeData.values,

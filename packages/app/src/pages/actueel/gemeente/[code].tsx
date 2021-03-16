@@ -56,7 +56,9 @@ export const getStaticProps = createGetStaticProps(
   }>(getTopicalPageQuery)
 );
 
-const TopicalMunicipality = (props) => {
+const TopicalMunicipality = (
+  props: Await<ReturnType<typeof getStaticProps>>['props']
+) => {
   const { municipalityName, choropleth, data, content, lastGenerated } = props;
 
   const { siteText } = useIntl();

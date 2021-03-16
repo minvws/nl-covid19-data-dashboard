@@ -17,7 +17,9 @@ export const getStaticProps = createGetStaticProps(
   getNlData
 );
 
-const SuspectedPatients = (props) => {
+const SuspectedPatients = (
+  props: Await<ReturnType<typeof getStaticProps>>['props']
+) => {
   const { data, lastGenerated } = props;
   const lastValue = data.doctor.last_value;
 

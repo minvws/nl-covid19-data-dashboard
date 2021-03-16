@@ -28,7 +28,9 @@ export const getStaticProps = createGetStaticProps(
   )
 );
 
-const ArticlesOverview = (props) => {
+const ArticlesOverview = (
+  props: Await<ReturnType<typeof getStaticProps>>['props']
+) => {
   const { content, lastGenerated } = props;
   const { siteText } = useIntl();
 

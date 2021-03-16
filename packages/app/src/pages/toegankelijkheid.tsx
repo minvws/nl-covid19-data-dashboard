@@ -43,7 +43,9 @@ export const getStaticProps = createGetStaticProps(
   `)
 );
 
-const AccessibilityPage = (props) => {
+const AccessibilityPage = (
+  props: Await<ReturnType<typeof getStaticProps>>['props']
+) => {
   const { siteText } = useIntl();
   const { content, lastGenerated } = props;
 

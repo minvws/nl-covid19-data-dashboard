@@ -11,7 +11,9 @@ export const getStaticProps = createGetStaticProps(
   getGmData
 );
 
-const Municipality = (props) => {
+const Municipality = (
+  props: Await<ReturnType<typeof getStaticProps>>['props']
+) => {
   const { lastGenerated } = props;
   const { siteText } = useIntl();
 

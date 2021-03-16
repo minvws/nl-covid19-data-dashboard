@@ -19,7 +19,9 @@ export const getStaticProps = createGetStaticProps(
   getNlData
 );
 
-const InfectiousPeople = (props) => {
+const InfectiousPeople = (
+  props: Await<ReturnType<typeof getStaticProps>>['props']
+) => {
   const { data, lastGenerated } = props;
 
   const lastFullValue = getLastFilledValue(data.infectious_people);

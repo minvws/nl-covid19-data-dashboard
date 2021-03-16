@@ -34,7 +34,10 @@ export const getStaticProps = createGetStaticProps(
   })
 );
 
-const ElderlyAtHomeNationalPage = ({ data, choropleth, lastGenerated }) => {
+const ElderlyAtHomeNationalPage = (
+  props: Await<ReturnType<typeof getStaticProps>>['props']
+) => {
+  const { data, choropleth, lastGenerated } = props;
   const router = useRouter();
   const elderlyAtHomeData = data.elderly_at_home;
 

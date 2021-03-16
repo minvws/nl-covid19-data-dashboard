@@ -7,7 +7,7 @@ import { Layout } from '~/domain/layout/layout';
 
 export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
 
-const NotFound = (props) => {
+const NotFound = (props: Await<ReturnType<typeof getStaticProps>>['props']) => {
   const { lastGenerated } = props;
   const { siteText } = useIntl();
 

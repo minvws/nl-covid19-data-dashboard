@@ -14,19 +14,6 @@ interface LayoutProps {
   twitterImage?: string;
 }
 
-type StaticProps<T extends (...args: any) => any> = Await<
-  ReturnType<T>
->['props'];
-
-export type FCWithLayout<
-  PropsOrGetStaticProps = void,
-  Props = PropsOrGetStaticProps extends (
-    ...args: any[]
-  ) => Promise<{ props: any }>
-    ? StaticProps<PropsOrGetStaticProps>
-    : PropsOrGetStaticProps
-> = React.FC<Props>;
-
 export function Layout(
   props: LayoutProps & { lastGenerated: string; children: React.ReactNode }
 ) {

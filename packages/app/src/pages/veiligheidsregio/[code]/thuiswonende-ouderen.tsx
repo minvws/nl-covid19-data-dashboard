@@ -24,7 +24,9 @@ export const getStaticProps = createGetStaticProps(
   getVrData
 );
 
-const ElderlyAtHomeRegionalPage = (props) => {
+const ElderlyAtHomeRegionalPage = (
+  props: Await<ReturnType<typeof getStaticProps>>['props']
+) => {
   const { safetyRegionName, data, lastGenerated } = props;
   const { elderly_at_home, difference } = data;
 

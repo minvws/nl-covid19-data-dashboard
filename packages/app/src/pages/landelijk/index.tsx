@@ -9,7 +9,7 @@ export const getStaticProps = createGetStaticProps(
   getNlData
 );
 
-const National = (props) => {
+const National = (props: Await<ReturnType<typeof getStaticProps>>['props']) => {
   const { siteText } = useIntl();
   const { data, lastGenerated } = props;
   return (

@@ -30,7 +30,9 @@ export const getStaticProps = createGetStaticProps(
   }>(createPageArticlesQuery('reproductionPage'))
 );
 
-const ReproductionIndex = (props) => {
+const ReproductionIndex = (
+  props: Await<ReturnType<typeof getStaticProps>>['props']
+) => {
   const { data, content, lastGenerated } = props;
 
   const lastFilledValue = getLastFilledValue(data.reproduction);

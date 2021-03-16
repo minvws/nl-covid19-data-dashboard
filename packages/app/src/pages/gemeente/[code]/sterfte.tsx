@@ -30,7 +30,9 @@ export const getStaticProps = createGetStaticProps(
   }>(createPageArticlesQuery('deceasedPage'))
 );
 
-const DeceasedMunicipalPage = (props) => {
+const DeceasedMunicipalPage = (
+  props: Await<ReturnType<typeof getStaticProps>>['props']
+) => {
   const {
     municipalityName,
     data: { deceased_rivm: dataRivm, difference },

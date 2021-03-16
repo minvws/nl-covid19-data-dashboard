@@ -32,7 +32,9 @@ export const getStaticProps = createGetStaticProps(
   }>(createPageArticlesQuery('behaviorPage'))
 );
 
-const BehaviorPage = (props) => {
+const BehaviorPage = (
+  props: Await<ReturnType<typeof getStaticProps>>['props']
+) => {
   const { lastGenerated, content, data } = props;
   const behaviorData = data.behavior;
 

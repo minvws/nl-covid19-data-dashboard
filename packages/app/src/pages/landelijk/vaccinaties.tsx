@@ -61,7 +61,10 @@ export const getStaticProps = createGetStaticProps(
   )
 );
 
-const VaccinationPage = ({ content, data, lastGenerated }) => {
+const VaccinationPage = (
+  props: Await<ReturnType<typeof getStaticProps>>['props']
+) => {
+  const { content, data, lastGenerated } = props;
   const { siteText } = useIntl();
   const text = siteText.vaccinaties;
   const [selectedTab, setSelectedTab] = useState(

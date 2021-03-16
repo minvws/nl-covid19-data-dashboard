@@ -39,7 +39,7 @@ export const getStaticProps = createGetStaticProps(
   createGetContent<OverData>(query)
 );
 
-const Over = (props) => {
+const Over = (props: Await<ReturnType<typeof getStaticProps>>['props']) => {
   const { siteText } = useIntl();
   const { content, lastGenerated } = props;
 

@@ -46,8 +46,11 @@ export const getStaticProps = createGetStaticProps(
   }>(createPageArticlesQuery('sewerPage'))
 );
 
-const SewerWater = ({ data, choropleth, content, lastGenerated }) => {
+const SewerWater = (
+  props: Await<ReturnType<typeof getStaticProps>>['props']
+) => {
   const { siteText } = useIntl();
+  const { data, choropleth, content, lastGenerated } = props;
 
   const text = siteText.rioolwater_metingen;
   const graphDescriptions = siteText.accessibility.grafieken;

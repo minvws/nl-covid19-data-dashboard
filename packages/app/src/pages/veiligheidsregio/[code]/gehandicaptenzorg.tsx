@@ -26,7 +26,9 @@ export const getStaticProps = createGetStaticProps(
   getVrData
 );
 
-const DisabilityCare = (props) => {
+const DisabilityCare = (
+  props: Await<ReturnType<typeof getStaticProps>>['props']
+) => {
   const { data, safetyRegionName, lastGenerated } = props;
 
   const { siteText } = useIntl();

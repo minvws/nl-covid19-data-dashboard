@@ -58,12 +58,9 @@ export const getStaticProps = createGetStaticProps(
   }>(createPageArticlesQuery('positiveTestsPage'))
 );
 
-const PositivelyTestedPeople = ({
-  data,
-  choropleth,
-  content,
-  lastGenerated,
-}) => {
+const PositivelyTestedPeople = (
+  props: Await<ReturnType<typeof getStaticProps>>['props']
+) => {
   const {
     siteText,
     formatPercentage,
@@ -71,6 +68,7 @@ const PositivelyTestedPeople = ({
     formatDateFromMilliseconds,
     formatDateFromSeconds,
   } = useIntl();
+  const { data, choropleth, content, lastGenerated } = props;
   const text = siteText.positief_geteste_personen;
   const ggdText = siteText.positief_geteste_personen_ggd;
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>(

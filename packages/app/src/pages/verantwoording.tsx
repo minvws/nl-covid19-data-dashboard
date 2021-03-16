@@ -58,7 +58,9 @@ export const getStaticProps = createGetStaticProps(
   createGetContent<VerantwoordingData>(query)
 );
 
-const Verantwoording = (props) => {
+const Verantwoording = (
+  props: Await<ReturnType<typeof getStaticProps>>['props']
+) => {
   const { siteText } = useIntl();
   const { content, lastGenerated } = props;
 

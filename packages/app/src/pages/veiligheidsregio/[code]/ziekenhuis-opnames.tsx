@@ -44,7 +44,9 @@ export const getStaticProps = createGetStaticProps(
   }>(createPageArticlesQuery('hospitalPage'))
 );
 
-const IntakeHospital = (props) => {
+const IntakeHospital = (
+  props: Await<ReturnType<typeof getStaticProps>>['props']
+) => {
   const { data, safetyRegionName, choropleth, content, lastGenerated } = props;
   const router = useRouter();
   const { siteText } = useIntl();

@@ -11,7 +11,9 @@ export const getStaticProps = createGetStaticProps(
   getVrData
 );
 
-const SafetyRegion = (props) => {
+const SafetyRegion = (
+  props: Await<ReturnType<typeof getStaticProps>>['props']
+) => {
   const { lastGenerated } = props;
   const { siteText } = useIntl();
 

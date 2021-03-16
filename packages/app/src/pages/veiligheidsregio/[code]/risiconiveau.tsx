@@ -38,7 +38,9 @@ export const getStaticProps = createGetStaticProps(
   }>(createPageArticlesQuery('escalationLevelPage'))
 );
 
-const RegionalRestrictions = (props) => {
+const RegionalRestrictions = (
+  props: Await<ReturnType<typeof getStaticProps>>['props']
+) => {
   const { safetyRegionName, content, data, lastGenerated } = props;
 
   const { siteText, formatDateFromSeconds } = useIntl();

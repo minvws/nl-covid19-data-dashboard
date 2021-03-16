@@ -33,7 +33,9 @@ export const getStaticProps = createGetStaticProps(
   }>(createPageArticlesQuery('deceasedPage'))
 );
 
-const DeceasedNationalPage = (props) => {
+const DeceasedNationalPage = (
+  props: Await<ReturnType<typeof getStaticProps>>['props']
+) => {
   const { data, lastGenerated } = props;
 
   const dataCbs = props.data.deceased_cbs;

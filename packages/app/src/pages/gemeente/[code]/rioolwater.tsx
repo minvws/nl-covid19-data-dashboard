@@ -39,7 +39,9 @@ export const getStaticProps = createGetStaticProps(
   }>(createPageArticlesQuery('sewerPage'))
 );
 
-const SewerWater = (props) => {
+const SewerWater = (
+  props: Await<ReturnType<typeof getStaticProps>>['props']
+) => {
   const { data, municipalityName, content, lastGenerated } = props;
   const { siteText } = useIntl();
 

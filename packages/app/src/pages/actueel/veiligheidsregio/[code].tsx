@@ -55,7 +55,9 @@ export const getStaticProps = createGetStaticProps(
   }>(getTopicalPageQuery)
 );
 
-const TopicalSafetyRegion = (props) => {
+const TopicalSafetyRegion = (
+  props: Await<ReturnType<typeof getStaticProps>>['props']
+) => {
   const { choropleth, data, content, lastGenerated } = props;
   const router = useRouter();
   const { siteText } = useIntl();

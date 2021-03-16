@@ -28,7 +28,9 @@ export const getStaticProps = createGetStaticProps(
   })
 );
 
-const SafetyRegion = (props) => {
+const SafetyRegion = (
+  props: Await<ReturnType<typeof getStaticProps>>['props']
+) => {
   const router = useRouter();
   const breakpoints = useBreakpoints();
 

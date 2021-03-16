@@ -29,8 +29,7 @@ if (typeof window !== 'undefined') {
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
 
-  const { locale = 'nl' } = useRouter();
-  console.log({ locale });
+  const { locale = 'nl' } = useRouter(); // if we replace this with process.env.NEXT_PUBLIC_LOCALE, next export should still be possible?
 
   const [intlState] = useState({
     messages: languages[locale as LanguageKey],

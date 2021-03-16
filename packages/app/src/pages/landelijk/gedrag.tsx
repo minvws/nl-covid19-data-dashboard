@@ -42,7 +42,10 @@ export const getStaticProps = createGetStaticProps(
   }>(createPageArticlesQuery('behaviorPage'))
 );
 
-const BehaviorPage = ({ data, choropleth, content, lastGenerated }) => {
+const BehaviorPage = (
+  props: Await<ReturnType<typeof getStaticProps>>['props']
+) => {
+  const { data, choropleth, content, lastGenerated } = props;
   const behaviorLastValue = data.behavior.last_value;
 
   const { siteText, formatNumber } = useIntl();

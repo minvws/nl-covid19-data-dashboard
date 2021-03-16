@@ -34,7 +34,9 @@ export const getStaticProps = createGetStaticProps(
   }>(createPageArticlesQuery('deceasedPage'))
 );
 
-const DeceasedRegionalPage = (props) => {
+const DeceasedRegionalPage = (
+  props: Await<ReturnType<typeof getStaticProps>>['props']
+) => {
   const {
     safetyRegionName: safetyRegion,
     data: { deceased_cbs: dataCbs, deceased_rivm: dataRivm, difference },

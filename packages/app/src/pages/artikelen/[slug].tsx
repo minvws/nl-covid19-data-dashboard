@@ -65,7 +65,9 @@ export const getStaticProps = createGetStaticProps(
   })
 );
 
-const ArticleDetailPage = (props) => {
+const ArticleDetailPage = (
+  props: Await<ReturnType<typeof getStaticProps>>['props']
+) => {
   const { content, lastGenerated } = props;
 
   const { cover } = content;
