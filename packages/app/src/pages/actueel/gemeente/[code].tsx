@@ -332,44 +332,46 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
                   />
                 }
               >
-                {selectedMap === 'municipal' && (
-                  <MunicipalityChoropleth
-                    data={choropleth.gm}
-                    metricName="tested_overall"
-                    metricProperty="infected_per_100k"
-                    tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
-                      siteText.choropleth_tooltip.positive_tested_people,
-                      regionThresholds.tested_overall.infected_per_100k,
-                      createSelectMunicipalHandler(
+                <>
+                  {selectedMap === 'municipal' && (
+                    <MunicipalityChoropleth
+                      data={choropleth.gm}
+                      metricName="tested_overall"
+                      metricProperty="infected_per_100k"
+                      tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
+                        siteText.choropleth_tooltip.positive_tested_people,
+                        regionThresholds.tested_overall.infected_per_100k,
+                        createSelectMunicipalHandler(
+                          router,
+                          'positief-geteste-mensen'
+                        )
+                      )}
+                      onSelect={createSelectMunicipalHandler(
                         router,
                         'positief-geteste-mensen'
-                      )
-                    )}
-                    onSelect={createSelectMunicipalHandler(
-                      router,
-                      'positief-geteste-mensen'
-                    )}
-                  />
-                )}
-                {selectedMap === 'region' && (
-                  <SafetyRegionChoropleth
-                    data={choropleth.vr}
-                    metricName="tested_overall"
-                    metricProperty="infected_per_100k"
-                    tooltipContent={createPositiveTestedPeopleRegionalTooltip(
-                      siteText.choropleth_tooltip.positive_tested_people,
-                      regionThresholds.tested_overall.infected_per_100k,
-                      createSelectRegionHandler(
+                      )}
+                    />
+                  )}
+                  {selectedMap === 'region' && (
+                    <SafetyRegionChoropleth
+                      data={choropleth.vr}
+                      metricName="tested_overall"
+                      metricProperty="infected_per_100k"
+                      tooltipContent={createPositiveTestedPeopleRegionalTooltip(
+                        siteText.choropleth_tooltip.positive_tested_people,
+                        regionThresholds.tested_overall.infected_per_100k,
+                        createSelectRegionHandler(
+                          router,
+                          'positief-geteste-mensen'
+                        )
+                      )}
+                      onSelect={createSelectRegionHandler(
                         router,
                         'positief-geteste-mensen'
-                      )
-                    )}
-                    onSelect={createSelectRegionHandler(
-                      router,
-                      'positief-geteste-mensen'
-                    )}
-                  />
-                )}
+                      )}
+                    />
+                  )}
+                </>
 
                 <Box>
                   <Text>
