@@ -1,4 +1,3 @@
-import text from '~/locale/index';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { SEOHead } from '~/components-styled/seo-head';

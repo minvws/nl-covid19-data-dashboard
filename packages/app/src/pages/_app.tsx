@@ -9,6 +9,7 @@ import { IntlContext } from '~/intl';
 import * as piwik from '~/lib/piwik';
 import { GlobalStyle } from '~/style/global-style';
 import theme from '~/style/theme';
+import { languages } from '~/locale';
 
 if (typeof window !== 'undefined') {
   require('proxy-polyfill/proxy.min.js');
@@ -35,10 +36,12 @@ export default function App(props: AppPropsWithLayout) {
   const page = (page: React.ReactNode) => page;
   const getLayout = Component.getLayout || page;
 
-  const { locale } = useRouter();
+  const { locale = 'nl' } = useRouter();
+
+  console.log(languages);
 
   const [intlState] = useState({
-    messages: require(`~/locale/${locale}.json`),
+    messages: languages[locale],
   });
 
   useEffect(() => {

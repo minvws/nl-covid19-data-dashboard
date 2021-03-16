@@ -7,7 +7,7 @@ import { useIntl } from '~/intl';
 
 export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
 
-const NotFound: FCWithLayout = () => {
+const NotFound: FCWithLayout = (props) => {
   const { siteText } = useIntl();
 
   return (
