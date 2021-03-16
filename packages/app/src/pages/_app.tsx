@@ -30,7 +30,7 @@ export default function App(props: AppProps) {
   const { Component, pageProps } = props;
 
   // const { locale = 'nl' } = useRouter(); // if we replace this with process.env.NEXT_PUBLIC_LOCALE, next export should still be possible?
-  const locale = process.env.NEXT_PUBLIC_LOCALE;
+  const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
 
   const [intlState] = useState({
     messages: languages[locale as LanguageKey],

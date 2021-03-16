@@ -51,7 +51,7 @@ function isDayBeforeYesterday(date: number | Date): boolean {
 export function useIntl() {
   // const { locale } = useRouter();
   const locale = process.env.NEXT_PUBLIC_LOCALE;
-  const { messages } = useContext(IntlContext);
+  const { siteText } = useContext(IntlContext);
 
   // Number formatting
   const NumberFormat = new Intl.NumberFormat(locale);
@@ -153,11 +153,11 @@ export function useIntl() {
         return typeof window === 'undefined'
           ? DayMonth.format(date)
           : isToday(date)
-          ? messages.utils.date_today
+          ? siteText.utils.date_today
           : isYesterday(date)
-          ? messages.utils.date_yesterday
+          ? siteText.utils.date_yesterday
           : isDayBeforeYesterday(date)
-          ? messages.utils.date_day_before_yesterday
+          ? siteText.utils.date_day_before_yesterday
           : DayMonth.format(date);
 
       case 'day-month':
@@ -216,7 +216,7 @@ export function useIntl() {
     formatDate,
     formatDateFromSeconds,
     formatDateFromMilliseconds,
-    siteText: messages,
+    siteText,
     locale,
   };
 }

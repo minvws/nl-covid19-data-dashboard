@@ -28,7 +28,7 @@ export function SidebarBarScale<T>({
   localeTextKey,
 }: SidebarBarScaleProps<T>) {
   const { siteText } = useIntl();
-  const text = siteText[localeTextKey] as Record<string, string>;
+  const text = siteText[localeTextKey];
   /**
    * @TODO this is still a bit messy due to improper typing. Not sure how to
    * fix this easily. The getLastFilledValue function is now strongly typed on
