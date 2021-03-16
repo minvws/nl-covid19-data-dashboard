@@ -456,6 +456,8 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
           </ParentSize>
         </ChartTile>
 
+        {/*
+        @TODO enable when content is available
         <ContentHeader
           title={text.stock_and_delivery_section.title}
           icon={scaledVaccineIcon}
@@ -463,11 +465,12 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
           reference={text.stock_and_delivery_section.reference}
           metadata={{
             datumsText: text.datums,
-            dateOrRange: 0 /** TODO replace dates for correct source */,
-            dateOfInsertionUnix: 0 /** TODO replace dates for correct source */,
+            dateOrRange: 0 // TODO replace dates for correct source,
+            dateOfInsertionUnix: 0 // TODO replace dates for correct source,
             dataSources: [],
           }}
         />
+        */}
 
         <TwoKpiSection>
           <KpiTile title={text.expected_page_additions.title}>
