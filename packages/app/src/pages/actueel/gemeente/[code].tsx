@@ -15,7 +15,6 @@ import { WarningTile } from '~/components-styled/warning-tile';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
-import { FCWithLayout, getDefaultLayout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import { Sitemap } from '~/domain/topical/sitemap';
 import { EditorialSummary } from '~/domain/topical/editorial-teaser';
@@ -42,6 +41,7 @@ import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 export { getStaticPaths } from '~/static-paths/gm';
 import { useDataSitemap } from '~/domain/topical/sitemap/utils';
+import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
 
 export const getStaticProps = createGetStaticProps(
@@ -57,8 +57,8 @@ export const getStaticProps = createGetStaticProps(
   }>(getTopicalPageQuery)
 );
 
-const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { municipalityName, choropleth, data, content } = props;
+const TopicalMunicipality = (props) => {
+  const { municipalityName, choropleth, data, content, lastGenerated } = props;
 
   const { siteText } = useIntl();
   const router = useRouter();
@@ -86,7 +86,7 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
   );
 
   return (
-    <>
+    <Layout {...siteText.nationaal_metadata} lastGenerated={lastGenerated}>
       <SEOHead
         title={replaceVariablesInText(text.metadata.title, {
           municipalityName,
@@ -300,10 +300,8 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
           </TileList>
         </MaxWidth>
       </Box>
-    </>
+    </Layout>
   );
 };
-
-TopicalMunicipality.getLayout = getDefaultLayout();
 
 export default TopicalMunicipality;
