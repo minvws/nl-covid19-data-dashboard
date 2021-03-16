@@ -5,5 +5,6 @@ const API_URL =
 (async () => {
   await download(API_URL, './public/json', {
     extract: true,
+    strip: 1, // strip `/protos`-directory
   });
 })();
