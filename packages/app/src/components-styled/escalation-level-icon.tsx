@@ -2,8 +2,8 @@ import css from '@styled-system/css';
 import styled from 'styled-components';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { EscalationLevel } from '~/domain/restrictions/type';
-import text from '~/locale/index';
 import { asResponsiveArray } from '~/style/utils';
+import { useIntl } from '~/intl';
 
 const escalationThresholds = regionThresholds.escalation_levels.level;
 
@@ -19,11 +19,13 @@ export function EscalationLevelIcon({
   /* Colors are in a 0-indexed array */
   const color = escalationThresholds[level - 1].color;
 
+  const { siteText } = useIntl();
+
   return (
     <div css={css({ display: 'inline-block' })}>
       <StyledEscalationLevelIcon
         color={color}
-        title={`${text.common.niveau} ${level}`}
+        title={`${siteText.common.niveau} ${level}`}
         isSmall={isSmall}
       >
         {level}

@@ -10,7 +10,6 @@ import { GetStaticPropsContext } from 'next';
 import safetyRegions from '~/data/index';
 import municipalities from '~/data/municipalSearchData';
 import { client, localize } from '~/lib/sanity';
-import { targetLanguage } from '~/locale/index';
 import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
 import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
 
@@ -38,6 +37,8 @@ export function getLastGeneratedDate() {
   };
 }
 
+//@TODO THIS NEEDS TO COME FROM CONTEXT
+const locale = 'nl';
 export function createGetContent<T>(
   queryOrQueryGetter: string | ((context: GetStaticPropsContext) => string)
 ) {
@@ -48,7 +49,7 @@ export function createGetContent<T>(
         : queryOrQueryGetter;
     const rawContent = await client.fetch<T>(query);
 
-    const content = localize(rawContent ?? {}, [targetLanguage, 'nl']) as T;
+    const content = localize(rawContent ?? {}, [locale, 'nl']) as T;
 
     return { content };
   };

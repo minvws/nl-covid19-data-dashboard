@@ -2,7 +2,6 @@ import { get } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { BarScale } from '~/components-styled/bar-scale';
 import { Metric, MetricKeys } from '@corona-dashboard/common';
-import siteText, { Locale } from '~/locale/index';
 import { assert } from '~/utils/assert';
 import { getLastFilledValue } from '@corona-dashboard/common';
 import {
@@ -11,6 +10,7 @@ import {
   metricContainsPartialData,
 } from '../../metric-config';
 import { Box } from '../base';
+import { useIntl } from '~/intl';
 
 interface SidebarBarScaleProps<T> {
   scope: DataScope;
@@ -27,6 +27,7 @@ export function SidebarBarScale<T>({
   metricProperty,
   localeTextKey,
 }: SidebarBarScaleProps<T>) {
+  const { siteText } = useIntl();
   const text = siteText[localeTextKey] as Record<string, string>;
   /**
    * @TODO this is still a bit messy due to improper typing. Not sure how to

@@ -1,7 +1,6 @@
 import { ArticleDetail } from '~/components-styled/article-detail';
 import { Box } from '~/components-styled/base';
 import { client, getImageSrc, localize } from '~/lib/sanity';
-import { targetLanguage } from '~/locale/index';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
@@ -13,12 +12,11 @@ import { Layout } from '~/domain/layout/layout';
 
 const articlesQuery = `*[_type == 'article'] {"slug":slug.current}`;
 
+//@TODO THIS NEEDS TO COME FROM CONTEXT
+const locale = 'nl';
 export async function getStaticPaths() {
   const articlesData = await client.fetch(articlesQuery);
-  const articles = localize<{ slug: string }[]>(articlesData, [
-    targetLanguage,
-    'nl',
-  ]);
+  const articles = localize<{ slug: string }[]>(articlesData, [locale, 'nl']);
 
   const paths = articles.map((article) => ({
     params: { slug: article.slug },
@@ -41,8 +39,8 @@ export const getStaticProps = createGetStaticProps(
       },
       "intro": {
         ...intro,
-        "${targetLanguage}": [
-          ...intro.${targetLanguage}[]
+        "${locale}": [
+          ...intro.${locale}[]
           {
             ...,
             "asset": asset->
@@ -51,8 +49,8 @@ export const getStaticProps = createGetStaticProps(
       },
       "content": {
         "_type": content._type,
-        "${targetLanguage}": [
-          ...content.${targetLanguage}[]
+        "${locale}": [
+          ...content.${locale}[]
           {
             ...,
             "asset": asset->,

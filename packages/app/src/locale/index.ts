@@ -11,4 +11,9 @@ export type Languages = {
 
 export type AllLanguages = NLLocale | ENLocale;
 
-export const languages: Languages = { en, nl };
+export type LanguageKey = keyof Languages;
+
+export const languages = {
+  nl,
+  en,
+};

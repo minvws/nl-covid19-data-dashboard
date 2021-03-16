@@ -8,7 +8,7 @@ import { IntlContext } from '~/intl';
 import * as piwik from '~/lib/piwik';
 import { GlobalStyle } from '~/style/global-style';
 import theme from '~/style/theme';
-import { languages } from '~/locale';
+import { languages, LanguageKey } from '~/locale';
 
 if (typeof window !== 'undefined') {
   require('proxy-polyfill/proxy.min.js');
@@ -30,11 +30,10 @@ export default function App(props: AppProps) {
   const { Component, pageProps } = props;
 
   const { locale = 'nl' } = useRouter();
-
-  console.log(languages);
+  console.log({ locale });
 
   const [intlState] = useState({
-    messages: languages[locale],
+    messages: languages[locale as LanguageKey],
   });
 
   useEffect(() => {

@@ -4,6 +4,7 @@ import { SEOHead } from '~/components-styled/seo-head';
 import { AppFooter } from '~/components-styled/layout/app-footer';
 import { AppHeader } from '~/components-styled/layout/app-header';
 import { SkipLinkMenu } from '~/components-styled/skip-link-menu';
+import { useIntl } from '~/intl';
 
 interface LayoutProps {
   title: string;
@@ -40,6 +41,7 @@ export function Layout(
   } = props;
 
   const router = useRouter();
+  const { siteText } = useIntl();
 
   return (
     <div key={router.asPath}>
@@ -52,12 +54,12 @@ export function Layout(
       />
 
       <SkipLinkMenu
-        ariaLabel={text.aria_labels.skip_links}
+        ariaLabel={siteText.aria_labels.skip_links}
         links={[
-          { href: '#content', label: text.skiplinks.inhoud },
-          { href: '#main-navigation', label: text.skiplinks.nav },
-          { href: '#metric-navigation', label: text.skiplinks.metric_nav },
-          { href: '#footer-navigation', label: text.skiplinks.footer_nav },
+          { href: '#content', label: siteText.skiplinks.inhoud },
+          { href: '#main-navigation', label: siteText.skiplinks.nav },
+          { href: '#metric-navigation', label: siteText.skiplinks.metric_nav },
+          { href: '#footer-navigation', label: siteText.skiplinks.footer_nav },
         ]}
       />
 
