@@ -87,13 +87,15 @@ const Verantwoording: FCWithLayout<typeof getStaticProps> = (props) => {
       <Box fontSize={2} bg={'white'} pt={6} pb={4}>
         <MaxWidth>
           <Box maxWidth="39em" margin="auto" mt={0} px={{ _: 4, md: 0 }}>
-            {content.title && <Heading level={2}>{content.title}</Heading>}
+            {content.title && <Heading level={1}>{content.title}</Heading>}
             {content.description && (
               <RichContent blocks={content.description} />
             )}
             {Object.entries(groups).map(([group, questions]) => (
               <Box as="article" mt={5} key={group}>
-                <Heading level={3}>{group}</Heading>
+                <Heading level={2} fontSize={3}>
+                  {group}
+                </Heading>
                 {questions.map((item) => {
                   const id = getSkipLinkId(item.title);
                   return (
