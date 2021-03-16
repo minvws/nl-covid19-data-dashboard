@@ -131,6 +131,7 @@ export interface National {
   code: string;
   difference: NationalDifference;
   doctor: NationalDoctor;
+  g_number: NlGNumber;
   infectious_people: NationalInfectiousPeople;
   intensive_care_nice: NationalIntensiveCareNice;
   tested_overall: NationalTestedOverall;
@@ -211,6 +212,15 @@ export interface NationalDoctorValue {
   date_end_unix: number;
   covid_symptoms_per_100k: number;
   covid_symptoms: number;
+  date_of_insertion_unix: number;
+}
+export interface NlGNumber {
+  values: NlGNumberValue[];
+  last_value: NlGNumberValue;
+}
+export interface NlGNumberValue {
+  g_number: number;
+  date_unix: number;
   date_of_insertion_unix: number;
 }
 export interface NationalInfectiousPeople {
@@ -625,6 +635,7 @@ export interface Regionaal {
   name: string;
   code: string;
   difference: RegionalDifference;
+  g_number: VrGNumber;
   sewer: RegionalSewer;
   sewer_per_installation: RegionalSewerPerInstallation;
   tested_overall: RegionalTestedOverall;
@@ -669,6 +680,15 @@ export interface DifferenceInteger {
   difference: number;
   old_date_unix: number;
   new_date_unix: number;
+}
+export interface VrGNumber {
+  values: VrGNumberValue[];
+  last_value: VrGNumberValue;
+}
+export interface VrGNumberValue {
+  g_number: number;
+  date_unix: number;
+  date_of_insertion_unix: number;
 }
 export interface RegionalSewer {
   values: RegionalSewerValue[];
