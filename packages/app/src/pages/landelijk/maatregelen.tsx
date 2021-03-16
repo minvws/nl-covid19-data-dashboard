@@ -1,13 +1,13 @@
 import css from '@styled-system/css';
 import { ContentHeader } from '~/components-styled/content-header';
-import { FCWithLayout } from '~/domain/layout/layout';
-import { GetNationalLayout } from '~/domain/layout/national-layout';
 import { Heading } from '~/components-styled/typography';
 import { KpiSection } from '~/components-styled/kpi-section';
 import { LockdownTable } from '~/domain/restrictions/lockdown-table';
 import { SEOHead } from '~/components-styled/seo-head';
 import { Box } from '~/components-styled/base/box';
 import { TileList } from '~/components-styled/tile-list';
+import { Layout } from '~/domain/layout/layout';
+import { NationalLayout } from '~/domain/layout/national-layout';
 
 import { useIntl } from '~/intl';
 import {
@@ -56,10 +56,10 @@ export const getStaticProps = createGetStaticProps(
   createGetContent<MaatregelenData>(query)
 );
 
-const NationalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
+const NationalRestrictions = (props) => {
   const { siteText } = useIntl();
 
-  const { content } = props;
+  const { content, lastGenerated, data } = props;
   const { lockdown } = content;
 
   const { showLockdown } = lockdown;
@@ -72,42 +72,42 @@ const NationalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
   // const effectiveEscalationLevel: EscalationLevel = escalationLevel > 4 ? 4 : (escalationLevel as EscalationLevel);
 
   return (
-    <>
-      <SEOHead
-        title={siteText.nationaal_metadata.title}
-        description={siteText.nationaal_metadata.description}
-      />
-      <TileList>
-        <ContentHeader title={siteText.nationaal_maatregelen.titel} />
+    <Layout {...siteText.nationaal_metadata} lastGenerated={lastGenerated}>
+      <NationalLayout data={data} lastGenerated={lastGenerated}>
+        <SEOHead
+          title={siteText.nationaal_metadata.title}
+          description={siteText.nationaal_metadata.description}
+        />
+        <TileList>
+          <ContentHeader title={siteText.nationaal_maatregelen.titel} />
 
-        {showLockdown && (
-          <KpiSection flexDirection="column">
-            <Box
-              css={css({
-                'p:last-child': {
-                  margin: '0',
-                },
-              })}
-            >
-              <Heading level={3}>{lockdown.message.title}</Heading>
-              {lockdown.message.description ? (
-                <RichContent blocks={lockdown.message.description} />
-              ) : null}
-            </Box>
-          </KpiSection>
-        )}
+          {showLockdown && (
+            <KpiSection flexDirection="column">
+              <Box
+                css={css({
+                  'p:last-child': {
+                    margin: '0',
+                  },
+                })}
+              >
+                <Heading level={3}>{lockdown.message.title}</Heading>
+                {lockdown.message.description ? (
+                  <RichContent blocks={lockdown.message.description} />
+                ) : null}
+              </Box>
+            </KpiSection>
+          )}
 
-        {showLockdown && (
-          <KpiSection display="flex" flexDirection="column">
-            <Heading level={3}>{lockdown.title}</Heading>
-            <LockdownTable data={lockdown} />
-          </KpiSection>
-        )}
-      </TileList>
-    </>
+          {showLockdown && (
+            <KpiSection display="flex" flexDirection="column">
+              <Heading level={3}>{lockdown.title}</Heading>
+              <LockdownTable data={lockdown} />
+            </KpiSection>
+          )}
+        </TileList>
+      </NationalLayout>
+    </Layout>
   );
 };
-
-NationalRestrictions.getLayout = GetNationalLayout;
 
 export default NationalRestrictions;

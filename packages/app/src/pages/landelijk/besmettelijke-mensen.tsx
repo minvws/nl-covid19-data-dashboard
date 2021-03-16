@@ -8,108 +8,108 @@ import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { AreaChart } from '~/components/charts/index';
 import { SEOHead } from '~/components-styled/seo-head';
-import { FCWithLayout } from '~/domain/layout/layout';
-import { GetNationalLayout } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
 import { getNlData, getLastGeneratedDate } from '~/static-props/get-data';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import { getLastFilledValue } from '@corona-dashboard/common';
+import { Layout } from '~/domain/layout/layout';
+import { NationalLayout } from '~/domain/layout/national-layout';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   getNlData
 );
 
-const InfectiousPeople: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { data } = props;
+const InfectiousPeople = (props) => {
+  const { data, lastGenerated } = props;
 
   const lastFullValue = getLastFilledValue(data.infectious_people);
   const values = data.infectious_people.values;
   const { siteText } = useIntl();
   const text = siteText.besmettelijke_personen;
   return (
-    <>
-      <SEOHead
-        title={text.metadata.title}
-        description={text.metadata.description}
-      />
-      <TileList>
-        <ContentHeader
-          category={siteText.nationaal_layout.headings.besmettingen}
-          screenReaderCategory={text.titel_sidebar}
-          title={text.title}
-          icon={<Ziektegolf />}
-          subtitle={text.toelichting_pagina}
-          metadata={{
-            datumsText: text.datums,
-            dateOrRange: lastFullValue.date_unix,
-            dateOfInsertionUnix: lastFullValue.date_of_insertion_unix,
-            dataSources: [text.bronnen.rivm],
-          }}
-          reference={text.reference}
+    <Layout {...siteText.nationaal_metadata} lastGenerated={lastGenerated}>
+      <NationalLayout data={data} lastGenerated={lastGenerated}>
+        <SEOHead
+          title={text.metadata.title}
+          description={text.metadata.description}
         />
-
-        <TwoKpiSection>
-          <KpiTile
-            title={text.cijfer_titel}
-            description={text.cijfer_toelichting}
+        <TileList>
+          <ContentHeader
+            category={siteText.nationaal_layout.headings.besmettingen}
+            screenReaderCategory={text.titel_sidebar}
+            title={text.title}
+            icon={<Ziektegolf />}
+            subtitle={text.toelichting_pagina}
             metadata={{
-              date: lastFullValue.date_unix,
-              source: text.bronnen.rivm,
+              datumsText: text.datums,
+              dateOrRange: lastFullValue.date_unix,
+              dateOfInsertionUnix: lastFullValue.date_of_insertion_unix,
+              dataSources: [text.bronnen.rivm],
             }}
-          >
-            <KpiValue
-              data-cy="estimate"
-              /**
-               * Somehow non-null assertion via ! was not allowed. At this point
-               * we can be sure that estimate exists
-               */
-              absolute={lastFullValue.estimate || 0}
-              difference={data.difference.infectious_people__estimate}
-            />
-          </KpiTile>
-        </TwoKpiSection>
+            reference={text.reference}
+          />
 
-        <ChartTileWithTimeframe
-          metadata={{ source: text.bronnen.rivm }}
-          title={text.linechart_titel}
-          timeframeOptions={['all', '5weeks']}
-        >
-          {(timeframe) => (
-            <>
-              <AreaChart
-                timeframe={timeframe}
-                data={values.map((value) => ({
-                  avg: value.estimate,
-                  min: value.margin_low,
-                  max: value.margin_high,
-                  date: value.date_unix,
-                }))}
-                rangeLegendLabel={text.rangeLegendLabel}
-                lineLegendLabel={text.lineLegendLabel}
+          <TwoKpiSection>
+            <KpiTile
+              title={text.cijfer_titel}
+              description={text.cijfer_toelichting}
+              metadata={{
+                date: lastFullValue.date_unix,
+                source: text.bronnen.rivm,
+              }}
+            >
+              <KpiValue
+                data-cy="estimate"
+                /**
+                 * Somehow non-null assertion via ! was not allowed. At this point
+                 * we can be sure that estimate exists
+                 */
+                absolute={lastFullValue.estimate || 0}
+                difference={data.difference.infectious_people__estimate}
               />
-              <Legend
-                items={[
-                  {
-                    label: text.legenda_line,
-                    color: 'data.primary',
-                    shape: 'line',
-                  },
-                  {
-                    label: text.legenda_marge,
-                    color: 'data.margin',
-                    shape: 'square',
-                  },
-                ]}
-              />
-            </>
-          )}
-        </ChartTileWithTimeframe>
-      </TileList>
-    </>
+            </KpiTile>
+          </TwoKpiSection>
+
+          <ChartTileWithTimeframe
+            metadata={{ source: text.bronnen.rivm }}
+            title={text.linechart_titel}
+            timeframeOptions={['all', '5weeks']}
+          >
+            {(timeframe) => (
+              <>
+                <AreaChart
+                  timeframe={timeframe}
+                  data={values.map((value) => ({
+                    avg: value.estimate,
+                    min: value.margin_low,
+                    max: value.margin_high,
+                    date: value.date_unix,
+                  }))}
+                  rangeLegendLabel={text.rangeLegendLabel}
+                  lineLegendLabel={text.lineLegendLabel}
+                />
+                <Legend
+                  items={[
+                    {
+                      label: text.legenda_line,
+                      color: 'data.primary',
+                      shape: 'line',
+                    },
+                    {
+                      label: text.legenda_marge,
+                      color: 'data.margin',
+                      shape: 'square',
+                    },
+                  ]}
+                />
+              </>
+            )}
+          </ChartTileWithTimeframe>
+        </TileList>
+      </NationalLayout>
+    </Layout>
   );
 };
-
-InfectiousPeople.getLayout = GetNationalLayout;
 
 export default InfectiousPeople;

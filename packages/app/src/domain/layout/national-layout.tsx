@@ -20,7 +20,6 @@ import {
 } from '~/components-styled/aside/menu';
 import { AppContent } from '~/components-styled/layout/app-content';
 import { SidebarMetric } from '~/components-styled/sidebar-metric';
-import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { Box } from '~/components-styled/base';
@@ -31,20 +30,6 @@ interface NationalLayoutProps {
   children?: React.ReactNode;
 }
 
-export function getNationalLayout(
-  page: React.ReactNode,
-  pageProps: NationalLayoutProps
-) {
-  return (
-    <Layout
-      //@TODO HOW DO I GET METADATA HERE?
-      // {...siteText?.nationaal_metadata}
-      lastGenerated={pageProps.lastGenerated}
-    >
-      <NationalLayout {...pageProps}>{page}</NationalLayout>
-    </Layout>
-  );
-}
 /**
  * NationalLayout is a composition of persistent layouts.
  *
@@ -61,7 +46,7 @@ export function getNationalLayout(
  * More info on persistent layouts:
  * https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
  */
-function NationalLayout(props: NationalLayoutProps) {
+export function NationalLayout(props: NationalLayoutProps) {
   const { children, data } = props;
   const router = useRouter();
   const breakpoints = useBreakpoints();
