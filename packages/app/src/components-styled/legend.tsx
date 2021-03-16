@@ -1,5 +1,5 @@
 import css from '@styled-system/css';
-import * as React from 'react';
+import { ReactNode } from 'react';
 import styled from 'styled-components';
 
 export type LegendShape = 'line' | 'square' | 'circle' | 'custom';
@@ -8,27 +8,25 @@ export type LegendItem = {
   color: string;
   label: string;
   shape: LegendShape;
-  ShapeComponent?: any;
+  shapeComponent?: ReactNode;
 };
 interface LegendProps {
   items: LegendItem[];
 }
 
-export function Legenda({ items }: LegendProps) {
+export function Legend({ items }: LegendProps) {
   return (
     <List>
       {items.map((item, i) => {
-        const { label, color, shape, ShapeComponent } = item;
+        const { label, color, shape, shapeComponent } = item;
         return (
           <Item key={i}>
             {label}
             {shape === 'square' && <Square color={color} />}
             {shape === 'line' && <Line color={color} />}
             {shape === 'circle' && <Circle color={color} />}
-            {shape === 'custom' && ShapeComponent && (
-              <CustomShape>
-                <ShapeComponent />
-              </CustomShape>
+            {shape === 'custom' && shapeComponent && (
+              <CustomShape>{shapeComponent}</CustomShape>
             )}
           </Item>
         );

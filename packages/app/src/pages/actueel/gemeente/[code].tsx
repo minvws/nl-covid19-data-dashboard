@@ -7,7 +7,7 @@ import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
 import { HighlightTeaserProps } from '~/components-styled/highlight-teaser';
 import { MaxWidth } from '~/components-styled/max-width';
-import { QuickLinks } from '~/components-styled/quick-links';
+import { CollapsibleButton } from '~/components-styled/collapsible';
 import { RiskLevelIndicator } from '~/components-styled/risk-level-indicator';
 import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
@@ -17,7 +17,7 @@ import { createSelectRegionHandler } from '~/components/choropleth/select-handle
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
 import { FCWithLayout, getDefaultLayout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
-import { DataSitemap } from '~/domain/topical/data-sitemap';
+import { Sitemap } from '~/domain/topical/sitemap';
 import { EditorialSummary } from '~/domain/topical/editorial-teaser';
 import { EditorialTile } from '~/domain/topical/editorial-tile';
 import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
@@ -42,6 +42,7 @@ import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 export { getStaticPaths } from '~/static-paths/gm';
+import { getDataSitemap } from '~/domain/topical/sitemap/utils';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -76,6 +77,8 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
     (item) => item.vrcode === safetyRegionForMunicipality?.code
   );
 
+  const dataSitemap = getDataSitemap('gemeente', gmCode as string, data);
+
   assert(
     filteredRegion && filteredRegion.level,
     `Could not find a "vrcode" to match with the region: ${safetyRegionForMunicipality?.code} to get the the current "level" of it.`
@@ -92,7 +95,7 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
         })}
       />
       <Box bg="white" pb={4}>
-        <MaxWidth>
+        <MaxWidth id="content">
           <TileList>
             <TopicalSectionHeader
               showBackLink
@@ -122,7 +125,7 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
               variant="emphasis"
             />
 
-            <MiniTrendTileLayout>
+            <MiniTrendTileLayout id="metric-navigation">
               <MiniTrendTile
                 title={text.mini_trend_tiles.positief_getest.title}
                 text={
@@ -187,36 +190,43 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
               </RiskLevelIndicator>
             </MiniTrendTileLayout>
 
-            <QuickLinks
-              header={text.quick_links.header}
-              links={[
-                {
-                  href: '/landelijk/vaccinaties',
-                  text: text.quick_links.links.nationaal,
-                },
-                safetyRegionForMunicipality
-                  ? {
-                      href: `/veiligheidsregio/${safetyRegionForMunicipality.code}/positief-geteste-mensen`,
-                      text: replaceVariablesInText(
-                        text.quick_links.links.veiligheidsregio,
-                        { safetyRegionName: safetyRegionForMunicipality.name }
-                      ),
-                    }
-                  : {
-                      href: '/veiligheidsregio',
-                      text: text.quick_links.links.veiligheidsregio_fallback,
-                    },
-                {
-                  href: `/gemeente/${router.query.code}/positief-geteste-mensen`,
-                  text: replaceVariablesInText(
-                    text.quick_links.links.gemeente,
-                    {
-                      municipalityName: municipalityName,
-                    }
-                  ),
-                },
-              ]}
-            />
+            <CollapsibleButton
+              label={siteText.common_actueel.overview_links_header}
+            >
+              <Sitemap
+                quickLinksHeader={text.quick_links.header}
+                quickLinks={[
+                  {
+                    href: '/landelijk/vaccinaties',
+                    text: text.quick_links.links.nationaal,
+                  },
+                  safetyRegionForMunicipality
+                    ? {
+                        href: `/veiligheidsregio/${safetyRegionForMunicipality.code}/positief-geteste-mensen`,
+                        text: replaceVariablesInText(
+                          text.quick_links.links.veiligheidsregio,
+                          { safetyRegionName: safetyRegionForMunicipality.name }
+                        ),
+                      }
+                    : {
+                        href: '/veiligheidsregio',
+                        text: text.quick_links.links.veiligheidsregio_fallback,
+                      },
+                  {
+                    href: `/gemeente/${router.query.code}/positief-geteste-mensen`,
+                    text: replaceVariablesInText(
+                      text.quick_links.links.gemeente,
+                      { municipalityName: municipalityName }
+                    ),
+                  },
+                ]}
+                dataSitemapHeader={replaceVariablesInText(
+                  text.data_sitemap_title,
+                  { municipalityName: municipalityName }
+                )}
+                dataSitemap={dataSitemap}
+              />
+            </CollapsibleButton>
 
             {content.editorial && content.highlight && (
               <>
@@ -275,8 +285,6 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
                 </Box>
               </TopicalTile>
             </Box>
-
-            <DataSitemap />
 
             <Box pb={4}>
               <TopicalSectionHeader

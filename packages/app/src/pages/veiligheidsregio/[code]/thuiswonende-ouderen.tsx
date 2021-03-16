@@ -3,15 +3,19 @@ import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { addBackgroundRectangleCallback } from '~/components-styled/line-chart/logic';
+import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
-import { SEOHead } from '~/components-styled/seo-head';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
+import { UnderReportedTooltip } from '~/domain/underreported/under-reported-tooltip';
 import siteText from '~/locale/index';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import { getLastGeneratedDate, getVrData } from '~/static-props/get-data';
+import { colors } from '~/style/theme';
+import { getTrailingDateRange } from '~/utils/get-trailing-date-range';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 export { getStaticPaths } from '~/static-paths/vr';
@@ -29,6 +33,16 @@ const ElderlyAtHomeRegionalPage: FCWithLayout<typeof getStaticProps> = (
 ) => {
   const { safetyRegionName, data } = props;
   const { elderly_at_home, difference } = data;
+
+  const elderlyAtHomeUnderReportedRange = getTrailingDateRange(
+    elderly_at_home.values,
+    4
+  );
+
+  const elderlyAtHomeDeceasedUnderReportedRange = getTrailingDateRange(
+    elderly_at_home.values,
+    7
+  );
 
   return (
     <>
@@ -109,6 +123,39 @@ const ElderlyAtHomeRegionalPage: FCWithLayout<typeof getStaticProps> = (
             },
           ]}
           metadata={{ source: text.section_positive_tested.bronnen.rivm }}
+          componentCallback={addBackgroundRectangleCallback(
+            elderlyAtHomeUnderReportedRange,
+            {
+              fill: colors.data.underReported,
+            }
+          )}
+          formatTooltip={(values) => {
+            const value = values[0];
+            const isInaccurateValue =
+              value.__date >= elderlyAtHomeUnderReportedRange[0];
+
+            return (
+              <UnderReportedTooltip
+                value={value}
+                isInUnderReportedRange={isInaccurateValue}
+                underReportedText={siteText.common.incomplete}
+              />
+            );
+          }}
+          legendItems={[
+            {
+              color: colors.data.primary,
+              label: text.section_positive_tested.line_chart_legend_trend_label,
+              shape: 'line',
+            },
+            {
+              color: colors.data.underReported,
+              label:
+                text.section_positive_tested.line_chart_legend_inaccurate_label,
+              shape: 'square',
+            },
+          ]}
+          showLegend
         />
 
         <ContentHeader
@@ -156,6 +203,38 @@ const ElderlyAtHomeRegionalPage: FCWithLayout<typeof getStaticProps> = (
             },
           ]}
           metadata={{ source: text.section_positive_tested.bronnen.rivm }}
+          componentCallback={addBackgroundRectangleCallback(
+            elderlyAtHomeDeceasedUnderReportedRange,
+            {
+              fill: colors.data.underReported,
+            }
+          )}
+          formatTooltip={(values) => {
+            const value = values[0];
+            const isInaccurateValue =
+              value.__date >= elderlyAtHomeDeceasedUnderReportedRange[0];
+
+            return (
+              <UnderReportedTooltip
+                value={value}
+                isInUnderReportedRange={isInaccurateValue}
+                underReportedText={siteText.common.incomplete}
+              />
+            );
+          }}
+          legendItems={[
+            {
+              color: colors.data.primary,
+              label: text.section_deceased.line_chart_legend_trend_label,
+              shape: 'line',
+            },
+            {
+              color: colors.data.underReported,
+              label: text.section_deceased.line_chart_legend_inaccurate_label,
+              shape: 'square',
+            },
+          ]}
+          showLegend
         />
       </TileList>
     </>

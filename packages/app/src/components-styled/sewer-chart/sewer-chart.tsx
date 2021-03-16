@@ -5,15 +5,13 @@ import { localPoint } from '@visx/event';
 import { GridRows } from '@visx/grid';
 import { Group } from '@visx/group';
 import { Bar, LinePath } from '@visx/shape';
-import { uniqWith } from 'lodash';
 import { transparentize } from 'polished';
 import { PointerEvent, useCallback, useMemo, useState } from 'react';
 import { isPresent } from 'ts-is-present';
 import { useDebouncedCallback } from 'use-debounce';
 import { Box } from '~/components-styled/base';
-import { Legenda } from '~/components-styled/legenda';
+import { Legend } from '~/components-styled/legend';
 import { Select } from '~/components-styled/select';
-import { InlineText } from '~/components-styled/typography';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
 import siteText from '~/locale';
 import { colors } from '~/style/theme';
@@ -28,8 +26,9 @@ import { ToggleOutlierButton } from './components/toggle-outlier-button';
 import { DateTooltip, Tooltip } from './components/tooltip';
 import {
   Dimensions,
+  getMax,
+  SewerChartValue,
   useLineTooltip,
-  useSelectedStationValues,
   useSewerChartScales,
   useSewerChartValues,
   useSewerStationSelectProps,
@@ -71,26 +70,66 @@ export function SewerChart(props: SewerChartProps) {
   /**
    * filter and shape data for our line-chart and scatter plot
    */
-  const { averageValues, stationValues } = useSewerChartValues(data, timeframe);
+  const [averageLineData, stationScatterData] = useSewerChartValues(
+    data,
+    timeframe
+  );
+
   /**
    * create props for the station select dropdown
    */
-  const sewerStationSelectProps = useSewerStationSelectProps(stationValues);
+  const sewerStationSelectProps = useSewerStationSelectProps(
+    stationScatterData
+  );
   const hasSelectedStation = !!sewerStationSelectProps.value;
 
   /**
-   * get filtered station values based on the `displayOutliers`-toggle
+   * get filtered station values
    */
-  const {
-    stationValuesFiltered,
-    hasOutliers,
-    selectedStationValues,
-    outlierValues,
-  } = useSelectedStationValues(
-    sewerStationSelectProps.value,
-    stationValues,
-    averageValues,
-    displayOutliers
+  const selectedLineData = useMemo(() => {
+    return sewerStationSelectProps.value
+      ? stationScatterData.filter(
+          (x) => x.name === sewerStationSelectProps.value
+        )
+      : [];
+  }, [stationScatterData, sewerStationSelectProps.value]);
+
+  /**
+   * Here we determine the outlier limit: find the highest line-value and
+   * multiply it by 1.5 in order to display station values which are close to
+   * the highest value.
+   */
+  const outlierLimit =
+    Math.max(
+      getMax(averageLineData, (x) => x.value),
+      getMax(selectedLineData, (x) => x.value)
+    ) * 1.5;
+
+  /**
+   * If there's a station value GTE than the max line, it means we have outliers
+   * we might not want to display, based on the incoming boolean
+   */
+  const hasOutliers =
+    getMax(stationScatterData, (x) => x.value) >= outlierLimit;
+
+  /**
+   * scatter data with outliers limited to the limit when applicable
+   */
+  const stationScatterDataLimited = useMemo(
+    () =>
+      stationScatterData.map((x) => ({
+        ...x,
+        /**
+         * Users can toggle outlier visibility. When they are "hidden" the outliers
+         * will still be rendered but with their value set to the outlier-limit.
+         * Then we can visually nudge those a few pixels so they appear to be
+         * rendered inside the toggle button.
+         *
+         */
+        value:
+          displayOutliers || x.value < outlierLimit ? x.value : outlierLimit,
+      })),
+    [displayOutliers, outlierLimit, stationScatterData]
   );
 
   /**
@@ -115,9 +154,9 @@ export function SewerChart(props: SewerChartProps) {
    * Get scales and "value -> coordinate" getters (getX, getY)
    */
   const scales = useSewerChartScales(
-    useMemo(() => [...averageValues, ...stationValuesFiltered], [
-      averageValues,
-      stationValuesFiltered,
+    useMemo(() => [...averageLineData, ...stationScatterDataLimited], [
+      averageLineData,
+      stationScatterDataLimited,
     ]),
     dimensions.bounds
   );
@@ -138,7 +177,7 @@ export function SewerChart(props: SewerChartProps) {
    * Call tooltip hook for determining which datum should have "hover"-focus.
    */
   const lineTooltip = useLineTooltip({
-    values: hasSelectedStation ? selectedStationValues : averageValues,
+    values: hasSelectedStation ? selectedLineData : averageLineData,
     scales,
     dimensions,
   });
@@ -166,24 +205,25 @@ export function SewerChart(props: SewerChartProps) {
     clearTooltips.callback();
   }, [clearTooltips]);
 
-  const outlierPreviews = useMemo(
-    () =>
-      uniqWith(outlierValues, (val1, val2) => {
-        /**
-         * filter circles which are close to each other, no need to
-         * render them on top of each other.
-         */
-        const threshold = 4; // in pixels
-        const x1 = scales.getX(val1);
-        const x2 = scales.getX(val2);
-        return x1 > x2 - threshold && x1 < x2 + threshold;
-      }),
-    [outlierValues, scales]
-  );
+  const getScatterY = useCallback(
+    (x: SewerChartValue) => {
+      /**
+       * return default value when we display outliers or when the value is
+       * lower than the outlier limit
+       */
+      if (displayOutliers || x.value !== outlierLimit) {
+        return scales.getY(x);
+      }
 
-  const getOutlierPreviewY = useCallback(() => (displayOutliers ? 46 : 16), [
-    displayOutliers,
-  ]);
+      /**
+       * When the condition above fails it means we're handling an outlier-value.
+       * We'll apply a static Y position to display those "below" the
+       * toggle-button
+       */
+      return -12;
+    },
+    [displayOutliers, outlierLimit, scales]
+  );
 
   return (
     <Box position="relative">
@@ -203,46 +243,18 @@ export function SewerChart(props: SewerChartProps) {
       <Box
         ml={dimensions.padding.left}
         mr={dimensions.padding.right}
-        position="relative"
         /**
          * The margin-bottom has been eyeballed to visually attach the
          * button to the graph, not sure how future-proof this is.
          */
         mb={-19}
-        zIndex={10}
-        overflow="hidden"
-        bg="#f2f2f2"
       >
         <ToggleOutlierButton
           disabled={!hasOutliers}
           onClick={() => setDisplayOutliers(!displayOutliers)}
         >
-          <InlineText bg="#f2f2f2">
-            {displayOutliers ? text.hide_outliers : text.display_outliers}
-          </InlineText>
+          {displayOutliers ? text.hide_outliers : text.display_outliers}
         </ToggleOutlierButton>
-
-        <svg
-          width={'100%'}
-          height={'100%'}
-          role="img"
-          style={{
-            pointerEvents: 'none',
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            zIndex: -1,
-          }}
-        >
-          <ScatterPlot
-            data={outlierPreviews}
-            getX={scales.getX}
-            getY={getOutlierPreviewY}
-            color="rgba(89, 89, 89, 0.3)"
-            radius={2}
-            isAnimated={isMounted}
-          />
-        </svg>
       </Box>
 
       <Box position="relative" ref={sizeRef} css={css({ userSelect: 'none' })}>
@@ -283,8 +295,17 @@ export function SewerChart(props: SewerChartProps) {
 
             {lineTooltip.point && (
               <Bar
-                x={lineTooltip.point.x - 4}
-                width={8}
+                x={
+                  lineTooltip.datum.dateStartMs
+                    ? scales.xScale(lineTooltip.datum.dateStartMs)
+                    : lineTooltip.point.x - 4
+                }
+                width={
+                  lineTooltip.datum.dateStartMs
+                    ? scales.xScale(lineTooltip.datum.dateEndMs) -
+                      scales.xScale(lineTooltip.datum.dateStartMs)
+                    : 8
+                }
                 height={dimensions.bounds.height}
                 fill="rgba(192, 232, 252, 0.5)"
                 css={css({
@@ -314,11 +335,15 @@ export function SewerChart(props: SewerChartProps) {
 
             <ScatterPlot
               isAnimated={isMounted}
-              data={stationValuesFiltered}
+              data={stationScatterDataLimited}
               getX={scales.getX}
-              getY={scales.getY}
+              getY={getScatterY}
               color="rgba(89, 89, 89, 0.3)"
               radius={2}
+              /**
+               * disable animations when the timeframe changes
+               */
+              key={timeframe}
             />
 
             <LinePath x={scales.getX} y={scales.getY}>
@@ -328,13 +353,17 @@ export function SewerChart(props: SewerChartProps) {
                   fill="transparent"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  path={path(averageValues) || ''}
+                  path={path(averageLineData) || ''}
                   stroke={
                     hasSelectedStation
                       ? colors.data.neutral
                       : colors.data.primary
                   }
                   strokeWidth={4}
+                  /**
+                   * disable animations when the timeframe changes
+                   */
+                  key={timeframe}
                 />
               )}
             </LinePath>
@@ -351,9 +380,13 @@ export function SewerChart(props: SewerChartProps) {
                     fill="transparent"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    path={path(selectedStationValues) || ''}
+                    path={path(selectedLineData) || ''}
                     stroke={colors.data.secondary}
                     strokeWidth={4}
+                    /**
+                     * disable animations when the timeframe changes
+                     */
+                    key={timeframe}
                   />
                 )}
               </LinePath>
@@ -384,13 +417,21 @@ export function SewerChart(props: SewerChartProps) {
           </Group>
         </svg>
 
-        {lineTooltip.datum && lineTooltip.point && (
+        {lineTooltip.datum && (
           <DateTooltip
             bounds={{ left: 0, top: 0, right: width, bottom: height }}
             x={lineTooltip.point.x + dimensions.padding.left}
             y={dimensions.bounds.height + dimensions.padding.top + 2}
           >
-            {formatDate(lineTooltip.datum?.dateMs)}
+            {lineTooltip.datum.dateStartMs ? (
+              <>
+                {formatDate(lineTooltip.datum.dateStartMs, 'axis')}
+                {' – '}
+                {formatDate(lineTooltip.datum.dateEndMs, 'axis')}
+              </>
+            ) : (
+              formatDate(lineTooltip.datum.dateMs, 'axis')
+            )}
           </DateTooltip>
         )}
 
@@ -406,14 +447,17 @@ export function SewerChart(props: SewerChartProps) {
             y={lineTooltip.point.y + dimensions.padding.top}
           >
             <Box display="inline-block">
-              <b>{lineTooltip.datum.value} per 100.000</b>
+              <b>
+                {formatNumber(lineTooltip.datum.value)} per{' '}
+                {formatNumber(100_000)}
+              </b>
             </Box>{' '}
             {siteText.common.inwoners}
           </Tooltip>
         )}
       </Box>
 
-      <Legenda
+      <Legend
         items={[
           sewerStationSelectProps.value
             ? {
@@ -431,7 +475,7 @@ export function SewerChart(props: SewerChartProps) {
             label: text.average_label_text,
             shape: 'line' as const,
           },
-          stationValuesFiltered.length > 0
+          stationScatterDataLimited.length > 0
             ? {
                 color: 'rgba(89, 89, 89, 0.3)',
                 label: text.secondary_label_text,

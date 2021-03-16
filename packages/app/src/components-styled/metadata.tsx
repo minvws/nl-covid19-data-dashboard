@@ -9,6 +9,7 @@ export interface MetadataProps {
     text: string;
     href: string;
   };
+  obtained?: number;
 }
 
 function formatMetadataDate(date: number | [number, number]): string {
@@ -24,13 +25,17 @@ function formatMetadataDate(date: number | [number, number]): string {
   });
 }
 
-export function Metadata({ date, source }: MetadataProps) {
+export function Metadata({ date, source, obtained }: MetadataProps) {
   const dateString = date ? formatMetadataDate(date) : null;
 
   return (
     <Box as="footer" mt={3} mb={{ _: 0, sm: -3 }} gridArea="metadata">
       <Text my={0} color="annotation" fontSize={1}>
         {dateString}
+        {obtained &&
+          ` ${replaceVariablesInText(locale.common.metadata.obtained, {
+            date: formatDateFromSeconds(obtained, 'weekday-medium'),
+          })}`}
         {dateString && source ? ' · ' : null}
         {source ? `${locale.common.metadata.source}: ${source.text}` : null}
       </Text>

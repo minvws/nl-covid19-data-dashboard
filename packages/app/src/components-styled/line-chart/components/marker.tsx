@@ -94,7 +94,7 @@ type MarkerProps<T extends TimestampedValue> = {
   data: HoverPoint<T>[];
   dateSpanWidth: number;
   primaryColor?: string;
-  showLine: boolean;
+  showLine?: boolean;
   formatLabel?: (data: T & TrendValue) => string;
   padding: ChartPadding;
   height: number;
@@ -155,7 +155,7 @@ export function Marker<T extends TimestampedValue>(props: MarkerProps<T>) {
           <Point
             indicatorColor={d.color ?? colors.data.primary}
             style={{ top: d.y - index * MARKER_POINT_SIZE }}
-            key={d.y}
+            key={index}
           />
         ))}
       </DateSpanMarker>

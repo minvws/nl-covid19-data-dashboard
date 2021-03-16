@@ -51,6 +51,7 @@ import {
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -129,24 +130,31 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
 
             <Text
               as="div"
+              css={css({ mb: 4 })}
               dangerouslySetInnerHTML={{ __html: text.kpi_toelichting }}
             />
             <Box>
-              <Heading level={4} fontSize={'1.2em'} mt={'1.5em'} mb={0}>
-                <span
-                  css={css({ '& > span': { color: 'data.primary' } })}
-                  dangerouslySetInnerHTML={{
-                    __html: replaceKpisInText(ggdText.summary_title, [
-                      {
-                        name: 'percentage',
-                        value: `${formatPercentage(
-                          dataGgdAverageLastValue.infected_percentage
-                        )}%`,
-                      },
-                    ]),
-                  }}
-                />
+              <Heading level={4} fontSize={'1.2em'} mb={0}>
+                {replaceComponentsInText(ggdText.summary_text, {
+                  percentage: (
+                    <span css={css({ color: 'data.primary' })}>
+                      {formatPercentage(
+                        dataGgdAverageLastValue.infected_percentage
+                      )}
+                      %
+                    </span>
+                  ),
+                  dateFrom: formatDateFromSeconds(
+                    dataGgdAverageLastValue.date_start_unix,
+                    'weekday-medium'
+                  ),
+                  dateTo: formatDateFromSeconds(
+                    dataGgdAverageLastValue.date_end_unix,
+                    'weekday-medium'
+                  ),
+                })}
               </Heading>
+
               <Text mt={0} lineHeight={1}>
                 <Anchor name="ggd" text={ggdText.summary_link_cta} />
               </Text>
@@ -248,7 +256,7 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
             return (
               <Text textAlign="center" m={0}>
                 <span style={{ fontWeight: 'bold' }}>
-                  {formatDateFromMilliseconds(value.__date.getTime())}
+                  {formatDateFromMilliseconds(value.__date.getTime(), 'medium')}
                 </span>
                 <br />
                 <span
@@ -418,7 +426,7 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
 
             return (
               <>
-                {formatDateFromSeconds(x[0].date_unix, 'day-month')}
+                {formatDateFromSeconds(x[0].date_unix, 'medium')}
                 <br />
                 <span
                   style={{
