@@ -23,7 +23,7 @@ export default {
   preview: {
     select: {
       title: 'title',
-      subtitle: 'content',
+      subtitle: 'group.group',
     },
     prepare: prepareLocalized,
   },
