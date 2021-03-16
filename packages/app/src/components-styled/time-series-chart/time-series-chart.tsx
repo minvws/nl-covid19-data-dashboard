@@ -222,11 +222,7 @@ export function TimeSeriesChart<
 
   useEffect(() => {
     if (hoverState) {
-      const {
-        nearestPoint,
-        valuesIndex,
-        timespanAnnotationIndices,
-      } = hoverState;
+      const { nearestPoint, valuesIndex, timespanAnnotationIndex } = hoverState;
 
       showTooltip({
         tooltipData: {
@@ -246,11 +242,10 @@ export function TimeSeriesChart<
            * dataOptions is already being passed, but it's cumbersome to have to
            * dig up the annotation from the array in the tooltip logic.
            */
-          timespanAnnotations: isDefined(timespanAnnotations)
-            ? timespanAnnotationIndices?.map(
-                (index) => timespanAnnotations[index]
-              )
-            : undefined,
+          timespanAnnotation:
+            timespanAnnotations && isDefined(timespanAnnotationIndex)
+              ? timespanAnnotations[timespanAnnotationIndex]
+              : undefined,
         },
         tooltipLeft: nearestPoint.x,
         tooltipTop: nearestPoint.y,

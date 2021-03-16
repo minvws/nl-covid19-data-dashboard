@@ -31,7 +31,7 @@ export type TooltipData<T extends TimestampedValue> = {
    * that it can render the label accordingly. I am assuming here that we won't
    * ever define overlapping annotations for now.
    */
-  timespanAnnotations?: TimespanAnnotationConfig[];
+  timespanAnnotation?: TimespanAnnotationConfig;
 
   /**
    * Configuration to display the nearest point only in the tooltip

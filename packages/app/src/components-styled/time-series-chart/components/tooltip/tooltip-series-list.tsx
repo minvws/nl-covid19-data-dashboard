@@ -27,7 +27,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
     config,
     options,
     markNearestPointOnly,
-    timespanAnnotations,
+    timespanAnnotation,
   } = tooltipData;
 
   const dateString = getDateStringFromValue(value);
@@ -79,21 +79,22 @@ export function TooltipSeriesList<T extends TimestampedValue>({
           }
         })}
 
-        {timespanAnnotations?.map((x, index) => (
+        {timespanAnnotation && (
           <TooltipListItem
-            key={index}
             icon={
               <TimespanAnnotationIcon
-                color={x.color}
-                fillOpacity={x.fillOpacity}
+                color={timespanAnnotation.color}
+                fillOpacity={timespanAnnotation.fillOpacity}
               />
             }
           >
             <TooltipValueContainer>
-              <InlineText mr={2}>{x.shortLabel || x.label}</InlineText>
+              <InlineText mr={2}>
+                {timespanAnnotation.shortLabel || timespanAnnotation.label}
+              </InlineText>
             </TooltipValueContainer>
           </TooltipListItem>
-        ))}
+        )}
       </TooltipList>
     </section>
   );
