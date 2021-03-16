@@ -4,6 +4,14 @@
       "title": "nl_vaccine_administered_estimate_value",
       "type": "object",
       "required": [
+        "pfizer",
+        "moderna",
+        "astra_zeneca",
+        "cure_vac",
+        "janssen",
+        "sanofi",
+        "total",
+        "date_of_report_unix",
         "date_of_insertion_unix",
         "date_start_unix",
         "date_end_unix"
@@ -11,22 +19,28 @@
       "additionalProperties": false,
       "properties": {
         "pfizer": {
-          "type": "number"
+          "type": "integer"
         },
         "moderna": {
-          "type": "number"
+          "type": "integer"
         },
         "astra_zeneca": {
-          "type": "number"
+          "type": "integer"
         },
         "cure_vac": {
-          "type": "number"
+          "type": "integer"
         },
         "janssen": {
-          "type": "number"
+          "type": "integer"
         },
         "sanofi": {
-          "type": "number"
+          "type": "integer"
+        },
+        "total": {
+          "type": "integer"
+        },
+        "date_of_report_unix": {
+          "type": "integer"
         },
         "date_of_insertion_unix": {
           "type": "integer"

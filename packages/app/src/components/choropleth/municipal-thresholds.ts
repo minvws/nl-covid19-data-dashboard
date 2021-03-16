@@ -86,6 +86,33 @@ const elderlyAtHomeThresholds: ChoroplethThresholdsValue[] = [
   },
 ];
 
+const sewerThresholds: ChoroplethThresholdsValue[] = [
+  {
+    color: colors.data.scale.blue[0],
+    threshold: 0,
+  },
+  {
+    color: colors.data.scale.blue[1],
+    threshold: 50,
+  },
+  {
+    color: colors.data.scale.blue[2],
+    threshold: 250,
+  },
+  {
+    color: colors.data.scale.blue[3],
+    threshold: 500,
+  },
+  {
+    color: colors.data.scale.blue[4],
+    threshold: 750,
+  },
+  {
+    color: colors.data.scale.blue[5],
+    threshold: 1000,
+  },
+];
+
 export const municipalThresholds = {
   tested_overall: {
     infected_per_100k: positiveTestedThresholds,
@@ -94,4 +121,7 @@ export const municipalThresholds = {
     admissions_on_date_of_reporting: hospitalAdmissionsThresholds,
   },
   elderly_at_home: elderlyAtHomeThresholds,
+  sewer: {
+    average: sewerThresholds,
+  },
 } as const;
