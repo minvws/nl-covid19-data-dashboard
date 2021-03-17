@@ -164,6 +164,7 @@ export interface National {
   vaccine_administered_total: NlVaccineAdministeredTotal;
   vaccine_administered_rate_moving_average: NlVaccineAdministeredRateMovingAverage;
   vaccine_administered_planned: NlVaccineAdministeredPlanned;
+  vaccinated_per_age_group?: NlVaccinatedPerAgeGroup;
 }
 export interface NationalDifference {
   tested_overall__infected_per_100k: DifferenceDecimal;
@@ -617,6 +618,19 @@ export interface NlVaccineAdministeredPlannedValue {
   doses: number;
   date_start_unix: number;
   date_end_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlVaccinatedPerAgeGroup {
+  values: NlVaccinatedPerAgeGroupValue[];
+}
+export interface NlVaccinatedPerAgeGroupValue {
+  age_group_range: string;
+  age_group_percentage: number;
+  age_group_total: number;
+  fully_vaccinated: number;
+  partially_vaccinated: number;
+  coverage: number;
+  date_unix: number;
   date_of_insertion_unix: number;
 }
 
