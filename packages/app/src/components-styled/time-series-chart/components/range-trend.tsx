@@ -1,12 +1,8 @@
-import { TimestampedValue } from '@corona-dashboard/common';
 import { Threshold } from '@visx/threshold';
-import { useUniqueId } from '~/utils/useUniqueId';
-import {
-  Bounds,
-  RangeSeriesDefinition,
-  SeriesDoubleValue,
-  SeriesItem,
-} from '../logic';
+import { useMemo } from 'react';
+import { isPresent } from 'ts-is-present';
+import { useUniqueId } from '~/utils/use-unique-id';
+import { Bounds, SeriesDoubleValue, SeriesItem } from '../logic';
 
 const DEFAULT_FILL_OPACITY = 0.6;
 
@@ -31,6 +27,12 @@ export function RangeTrend({
 }: RangeTrendProps) {
   const id = useUniqueId();
 
+  const nonNullSeries = useMemo(
+    () =>
+      series.filter((x) => isPresent(x.__value_a) && isPresent(x.__value_b)),
+    [series]
+  );
+
   return (
     /**
      * @TODO further implement styling. Not sure if Threshold is the best Visx
@@ -38,7 +40,7 @@ export function RangeTrend({
      */
     <Threshold<SeriesDoubleValue>
       id={id}
-      data={series}
+      data={nonNullSeries}
       x={getX}
       y0={getY0}
       y1={getY1}
@@ -62,19 +64,19 @@ export function RangeTrend({
   );
 }
 
-interface RangeTrendIconProps<T extends TimestampedValue> {
-  config: RangeSeriesDefinition<T>;
+interface RangeTrendIconProps {
+  color: string;
+  fillOpacity?: number;
   width?: number;
   height?: number;
 }
 
-export function RangeTrendIcon<T extends TimestampedValue>({
-  config,
+export function RangeTrendIcon({
+  color,
+  fillOpacity = DEFAULT_FILL_OPACITY,
   width = 15,
   height = 15,
-}: RangeTrendIconProps<T>) {
-  const { color, fillOpacity = DEFAULT_FILL_OPACITY } = config;
-
+}: RangeTrendIconProps) {
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
       <rect
@@ -84,6 +86,7 @@ export function RangeTrendIcon<T extends TimestampedValue>({
         height={height}
         fill={color}
         opacity={fillOpacity}
+        rx={2}
       />
     </svg>
   );

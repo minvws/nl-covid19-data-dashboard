@@ -1,7 +1,7 @@
-import { TimestampedValue } from '@corona-dashboard/common';
 import { LinePath } from '@visx/shape';
-import { MouseEvent, TouchEvent, useCallback, useState } from 'react';
-import { LineSeriesDefinition, SeriesItem, SeriesSingleValue } from '../logic';
+import { MouseEvent, TouchEvent, useCallback, useMemo, useState } from 'react';
+import { isPresent } from 'ts-is-present';
+import { SeriesItem, SeriesSingleValue } from '../logic';
 
 export type LineStyle = 'solid' | 'dashed';
 
@@ -29,6 +29,11 @@ export function LineTrend({
 }: LineTrendProps) {
   const [isHovered, setIsHovered] = useState(false);
 
+  const nonNullSeries = useMemo(
+    () => series.filter((x) => isPresent(x.__value)),
+    [series]
+  );
+
   const handleHover = useCallback(
     (event: TouchEvent<SVGElement> | MouseEvent<SVGElement>) => {
       const isLeave = event.type === 'mouseleave';
@@ -42,7 +47,7 @@ export function LineTrend({
 
   return (
     <LinePath
-      data={series}
+      data={nonNullSeries}
       x={getX}
       y={getY}
       stroke={color}
@@ -52,35 +57,38 @@ export function LineTrend({
       onMouseLeave={handleHover}
       onMouseOver={handleHover}
       onMouseMove={handleHover}
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   );
 }
 
-interface LineTrendIconProps<T extends TimestampedValue> {
-  config: LineSeriesDefinition<T>;
+interface LineTrendIconProps {
+  color: string;
+  style?: 'solid' | 'dashed';
+  strokeWidth?: number;
   width?: number;
   height?: number;
 }
 
-export function LineTrendIcon<T extends TimestampedValue>({
-  config,
+export function LineTrendIcon({
+  color,
+  strokeWidth = DEFAULT_STROKE_WIDTH,
+  style = DEFAULT_STYLE,
   width = 15,
   height = 15,
-}: LineTrendIconProps<T>) {
-  const {
-    color,
-    strokeWidth = DEFAULT_STROKE_WIDTH,
-    style = DEFAULT_STYLE,
-  } = config;
+}: LineTrendIconProps) {
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
       <line
         stroke={color}
         strokeWidth={strokeWidth}
         strokeDasharray={style === 'dashed' ? 4 : undefined}
-        x1={0}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        x1={2}
         y1={height / 2}
-        x2={width}
+        x2={width - 2}
         y2={height / 2}
       />
     </svg>

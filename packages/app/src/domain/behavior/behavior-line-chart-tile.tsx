@@ -1,22 +1,23 @@
+import {
+  NationalBehaviorValue,
+  RegionalBehaviorValue,
+} from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { isPresent } from 'ts-is-present';
 import { Box, Spacer } from '~/components-styled/base';
-import { Tile } from '~/components-styled/tile';
 import { Select } from '~/components-styled/select';
+import { Tile } from '~/components-styled/tile';
+import { TimeSeriesChart } from '~/components-styled/time-series-chart';
 import { Heading } from '~/components-styled/typography';
 import siteText from '~/locale/index';
-import {
-  NationalBehaviorValue,
-  RegionalBehaviorValue,
-} from '@corona-dashboard/common';
+import { colors } from '~/style/theme';
 import {
   BehaviorIdentifier,
   behaviorIdentifiers,
   BehaviorType,
 } from './behavior-types';
-import { BehaviorLineChart, Value } from './components/behavior-line-chart';
 import { BehaviorTypeControl } from './components/behavior-type-control';
 
 interface BehaviorLineChartTileProps {
@@ -32,6 +33,7 @@ export function BehaviorLineChartTile({
 }: BehaviorLineChartTileProps) {
   const [type, setType] = useState<BehaviorType>('compliance');
   const [currentId, setCurrentId] = useState<BehaviorIdentifier>('wash_hands');
+  const selectedValueKey = `${currentId}_${type}` as keyof NationalBehaviorValue;
 
   const behaviorIdentifierWithData = behaviorIdentifiers
     .map((id) => {
@@ -92,29 +94,34 @@ export function BehaviorLineChartTile({
 
       <Spacer mb={3} />
 
-      <BehaviorLineChart
-        values={behaviorIdentifierWithData.map(({ valueKey, label }) =>
-          (values as NationalBehaviorValue[])
-            .map((value) =>
-              valueKey in value
-                ? ({
-                    label,
-                    date: value.date_start_unix,
-                    value: value[valueKey],
-                    week: {
-                      start: value.date_start_unix,
-                      end: value.date_end_unix,
-                    },
-                  } as Value)
-                : undefined
-            )
-            .filter(isPresent)
-        )}
-        linesConfig={behaviorIdentifierWithData.map(({ id }) => ({
-          id,
-          isSelected: id === currentId,
-          onClick: setCurrentId,
-        }))}
+      <TimeSeriesChart
+        title={
+          type === 'compliance'
+            ? siteText.gedrag_common.compliance
+            : siteText.gedrag_common.support
+        }
+        values={values}
+        ariaLabelledBy=""
+        seriesConfig={[...behaviorIdentifierWithData]
+          .sort((x) => (x.valueKey === selectedValueKey ? 1 : -1))
+          .map((x) => ({
+            type: 'line' as const,
+            metricProperty: x.valueKey,
+            label: x.label,
+            strokeWidth: x.valueKey === selectedValueKey ? 3 : 2,
+            color:
+              x.valueKey === selectedValueKey ? colors.data.primary : '#E7E7E7',
+          }))}
+        disableLegend
+        dataOptions={{
+          isPercentage: true,
+        }}
+        tickValues={[0, 25, 50, 75, 100]}
+        onSeriesClick={(config) => {
+          const id = config.metricProperty.replace(`_${type}`, '');
+          setCurrentId(id as BehaviorIdentifier);
+        }}
+        markNearestPointOnly
       />
     </Tile>
   );

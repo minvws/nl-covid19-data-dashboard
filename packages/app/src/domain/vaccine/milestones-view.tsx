@@ -10,7 +10,6 @@ import { colors } from '~/style/theme';
 import { RichContentBlock } from '~/types/cms';
 import { formatDate } from '~/utils/formatDate';
 import siteText from '~/locale/index';
-import { asResponsiveArray } from '~/style/utils';
 
 const MAX_ITEMS_VISIBLE = 5;
 const CIRCLE_SIZE = 26;
@@ -112,13 +111,7 @@ export function MilestonesView(props: MilestoneViewProps) {
                       >
                         {formatDate(new Date(milestone.date))}
                       </InlineText>
-                      <Text
-                        m={0}
-                        color="white"
-                        fontSize={{ _: 28, sm: 42 }}
-                        fontWeight="bold"
-                        lineHeight={0}
-                      >
+                      <Text m={0} color="white" fontSize={3} fontWeight="bold">
                         {milestone.title}
                       </Text>
                     </Box>
@@ -217,7 +210,7 @@ const CircleIcon = styled.div<{ isLast?: boolean }>((x) =>
     borderRadius: '100%',
     backgroundColor: x.isLast ? 'white' : 'header',
     zIndex: 3,
-    marginTop: x.isLast ? asResponsiveArray({ _: '0.1rem', sm: '0.7rem' }) : 0,
+    marginTop: x.isLast ? '0.2rem' : 0,
 
     svg: {
       width: 14,

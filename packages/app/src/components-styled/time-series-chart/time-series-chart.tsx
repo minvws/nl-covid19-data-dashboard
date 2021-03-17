@@ -1,12 +1,14 @@
 import { TimestampedValue } from '@corona-dashboard/common';
-import { Bar } from '@visx/shape';
+import css from '@styled-system/css';
 import { useTooltip } from '@visx/tooltip';
-import { useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import useResizeObserver from 'use-resize-observer';
 import { Box } from '~/components-styled/base';
 import { Legend } from '~/components-styled/legend';
 import { TimeframeOption } from '~/utils/timeframe';
+import { useElementSize } from '~/utils/use-element-size';
+import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { ValueAnnotation } from '../value-annotation';
 import {
   Axes,
@@ -38,7 +40,7 @@ export type { SeriesConfig } from './logic';
 /**
  * This chart started as a fork from MultiLineChart. It attempts to create a
  * more generic abstraction that can replace LineChart, MultiLineChart,
- * (highcharts) AreaChart and later possibly something like the vaccine delivery
+ * AreaChart and later possibly something like the vaccine delivery
  * chart.
  *
  * The main focus in this iteration is to try to reduce complexity as much as
@@ -84,12 +86,19 @@ export type { SeriesConfig } from './logic';
  *   margin. This is currently not used in any charts but would be nice to solve
  *   at some point.
  */
-export type TimeSeriesChartProps<T extends TimestampedValue> = {
-  title: string; // Used for default tooltip formatting
+export type TimeSeriesChartProps<
+  T extends TimestampedValue,
+  C extends SeriesConfig<T>
+> = {
+  title?: string; // Used for default tooltip formatting
   values: T[];
-  seriesConfig: SeriesConfig<T>;
-  width: number;
+  seriesConfig: C;
   ariaLabelledBy: string;
+  /**
+   * The initial width of the chart is used for server-side rendering. it will
+   * use the available width when the chart mounts.
+   */
+  initialWidth?: number;
   height?: number;
   timeframe?: TimeframeOption;
   formatTooltip?: TooltipFormatter<T>;
@@ -103,7 +112,6 @@ export type TimeSeriesChartProps<T extends TimestampedValue> = {
    */
   numGridLines?: number;
   tickValues?: number[];
-  showDateMarker?: boolean;
   paddingLeft?: number;
   /**
    * The data specific options are grouped together. This way we can pass them
@@ -111,23 +119,37 @@ export type TimeSeriesChartProps<T extends TimestampedValue> = {
    * contain things that are essential to rendering a full tooltip layout
    */
   dataOptions?: DataOptions;
+  disableLegend?: boolean;
+  onSeriesClick?: (seriesConfig: C[number], value: T) => void;
+
+  /**
+   * By default markers for all series are displayed on hover, also the tooltip
+   * will display all series of the selected X-value. The `markNearestPointOnly`
+   * will result in a user interacting with the single nearest point only.
+   */
+  markNearestPointOnly?: boolean;
 };
 
-export function TimeSeriesChart<T extends TimestampedValue>({
+export function TimeSeriesChart<
+  T extends TimestampedValue,
+  C extends SeriesConfig<T>
+>({
   values: allValues,
   seriesConfig,
-  width,
+  initialWidth = 840,
   height = 250,
   timeframe = 'all',
   formatTooltip,
   dataOptions,
   numGridLines = 3,
   tickValues,
-  showDateMarker,
   paddingLeft,
   ariaLabelledBy,
   title,
-}: TimeSeriesChartProps<T>) {
+  disableLegend,
+  onSeriesClick,
+  markNearestPointOnly,
+}: TimeSeriesChartProps<T, C>) {
   const {
     tooltipData,
     tooltipLeft = 0,
@@ -136,6 +158,8 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     hideTooltip,
     tooltipOpen,
   } = useTooltip<TooltipData<T>>();
+
+  const [sizeRef, { width }] = useElementSize<HTMLDivElement>(initialWidth);
 
   const {
     valueAnnotation,
@@ -187,21 +211,18 @@ export function TimeSeriesChart<T extends TimestampedValue>({
 
   const [handleHover, hoverState] = useHoverState({
     values,
-    paddingLeft: padding.left,
+    padding,
     seriesConfig,
     seriesList,
     xScale,
     yScale,
     timespanAnnotations,
+    markNearestPointOnly,
   });
 
   useEffect(() => {
     if (hoverState) {
-      const {
-        nearestLinePoint: nearestPoint,
-        valuesIndex,
-        timespanAnnotationIndex,
-      } = hoverState;
+      const { nearestPoint, valuesIndex, timespanAnnotationIndex } = hoverState;
 
       showTooltip({
         tooltipData: {
@@ -212,8 +233,9 @@ export function TimeSeriesChart<T extends TimestampedValue>({
            * tooltip.
            */
           value: values[valuesIndex],
-          valueKey: nearestPoint.metricProperty as keyof T,
           config: seriesConfig,
+          configIndex: nearestPoint.seriesConfigIndex,
+          markNearestPointOnly,
           options: dataOptions || {},
           /**
            * Pass the full annotation data. We could just pass the index because
@@ -221,9 +243,8 @@ export function TimeSeriesChart<T extends TimestampedValue>({
            * dig up the annotation from the array in the tooltip logic.
            */
           timespanAnnotation:
-            dataOptions?.timespanAnnotations &&
-            isDefined(timespanAnnotationIndex)
-              ? dataOptions.timespanAnnotations[timespanAnnotationIndex]
+            timespanAnnotations && isDefined(timespanAnnotationIndex)
+              ? timespanAnnotations[timespanAnnotationIndex]
               : undefined,
         },
         tooltipLeft: nearestPoint.x,
@@ -232,20 +253,39 @@ export function TimeSeriesChart<T extends TimestampedValue>({
     } else {
       hideTooltip();
     }
-  }, [hoverState, seriesConfig, values, hideTooltip, showTooltip, dataOptions]);
+  }, [
+    hoverState,
+    seriesConfig,
+    values,
+    hideTooltip,
+    showTooltip,
+    dataOptions,
+    timespanAnnotations,
+    markNearestPointOnly,
+  ]);
+
+  useOnClickOutside([sizeRef], () => tooltipData && hideTooltip());
+
+  const handleClick = useCallback(() => {
+    if (onSeriesClick && tooltipData) {
+      onSeriesClick(seriesConfig[tooltipData.configIndex], tooltipData.value);
+    }
+  }, [onSeriesClick, seriesConfig, tooltipData]);
 
   return (
-    <Box>
+    <Box ref={sizeRef}>
       {valueAnnotation && (
         <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
       )}
 
-      <Box position="relative">
+      <Box position="relative" css={css({ userSelect: 'none' })}>
         <ChartContainer
           width={width}
           height={height}
           padding={padding}
           ariaLabelledBy={ariaLabelledBy}
+          onHover={handleHover}
+          onClick={handleClick}
         >
           <Axes
             bounds={bounds}
@@ -257,26 +297,6 @@ export function TimeSeriesChart<T extends TimestampedValue>({
             yAxisRef={yAxisRef}
           />
 
-          <Bar
-            /**
-             * The Bar captures all mouse movements outside of trend elements.
-             * The Trend components * are rendered op top (in DOM) so that they
-             * can have their own hover state and handlers. Trend hover handlers
-             * also have the advantage that we don't need to do nearest point
-             * calculation on that event, because we already know the trend
-             * index in the handler.
-             */
-            x={0}
-            y={0}
-            width={bounds.width}
-            height={bounds.height}
-            fill="transparent"
-            onTouchStart={handleHover}
-            onTouchMove={handleHover}
-            onMouseMove={handleHover}
-            onMouseLeave={handleHover}
-          />
-
           {timespanAnnotations &&
             timespanAnnotations.map((x, index) => (
               <TimespanAnnotation
@@ -284,6 +304,7 @@ export function TimeSeriesChart<T extends TimestampedValue>({
                 start={x.start}
                 end={x.end}
                 color={x.color}
+                fillOpacity={x.fillOpacity}
                 domain={xScale.domain() as [number, number]}
                 getX={getX}
                 height={bounds.height}
@@ -303,7 +324,6 @@ export function TimeSeriesChart<T extends TimestampedValue>({
           <Series
             seriesConfig={seriesConfig}
             seriesList={seriesList}
-            onHover={handleHover}
             getX={getX}
             getY={getY}
             getY0={getY0}
@@ -322,35 +342,36 @@ export function TimeSeriesChart<T extends TimestampedValue>({
           )}
         </ChartContainer>
 
-        <Tooltip
-          title={title}
-          data={tooltipData}
-          left={tooltipLeft}
-          top={tooltipTop}
-          isOpen={tooltipOpen}
-          formatTooltip={formatTooltip}
-        />
+        {tooltipOpen && tooltipData && (
+          <Tooltip
+            title={title}
+            data={tooltipData}
+            left={tooltipLeft}
+            top={tooltipTop}
+            formatTooltip={formatTooltip}
+            bounds={bounds}
+            padding={padding}
+          />
+        )}
 
         {hoverState && (
           <Overlay bounds={bounds} padding={padding}>
             <DateSpanMarker
               width={dateSpanWidth}
-              point={hoverState.nearestLinePoint}
+              point={hoverState.nearestPoint}
             />
-            {showDateMarker && (
-              <DateLineMarker
-                point={hoverState.nearestLinePoint}
-                lineColor={`#5B5B5B`}
-                value={values[hoverState.valuesIndex]}
-              />
-            )}
+            <DateLineMarker
+              point={hoverState.nearestPoint}
+              lineColor="#5B5B5B"
+              value={values[hoverState.valuesIndex]}
+            />
             <PointMarkers points={hoverState.rangePoints} />
             <PointMarkers points={hoverState.linePoints} />
           </Overlay>
         )}
       </Box>
 
-      {legendItems && (
+      {!disableLegend && legendItems.length > 0 && (
         <Box pl={paddingLeft}>
           <Legend items={legendItems} />
         </Box>

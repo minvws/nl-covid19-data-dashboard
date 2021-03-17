@@ -1,5 +1,4 @@
 import { css } from '@styled-system/css';
-import { ParentSize } from '@visx/responsive';
 import styled from 'styled-components';
 import ExternalLinkIcon from '~/assets/external-link.svg';
 import Gedrag from '~/assets/gedrag.svg';
@@ -190,27 +189,21 @@ const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
           description={corona_melder_app.linechart.description}
         >
           {(timeframe) => (
-            <ParentSize>
-              {({ width }) => (
-                <TimeSeriesChart
-                  title={corona_melder_app.linechart.title}
-                  timeframe={timeframe}
-                  width={width}
-                  values={data.corona_melder_app.values}
-                  showDateMarker
-                  ariaLabelledBy={corona_melder_app.linechart.ariaDescription}
-                  paddingLeft={40}
-                  seriesConfig={[
-                    {
-                      type: 'area',
-                      metricProperty: 'warned_daily',
-                      label: corona_melder_app.linechart.labels.warnings,
-                      color: colors.data.primary,
-                    },
-                  ]}
-                />
-              )}
-            </ParentSize>
+            <TimeSeriesChart
+              title={corona_melder_app.linechart.title}
+              timeframe={timeframe}
+              values={data.corona_melder_app.values}
+              ariaLabelledBy={corona_melder_app.linechart.ariaDescription}
+              paddingLeft={40}
+              seriesConfig={[
+                {
+                  type: 'area',
+                  metricProperty: 'warned_daily',
+                  label: corona_melder_app.linechart.labels.warnings,
+                  color: colors.data.primary,
+                },
+              ]}
+            />
           )}
         </ChartTileWithTimeframe>
       </TileList>
