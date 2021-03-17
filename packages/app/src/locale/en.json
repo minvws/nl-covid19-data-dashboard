@@ -1842,11 +1842,11 @@
     "deceased_monitor_chart_title": "Total number of deaths per week",
     "deceased_monitor_chart_description": "This graph shows the total number of deaths per week. The actual number of deaths is compared to the number of deaths predicted based on the figures from preceding years. The light blue line, drawn within its range of uncertainty, shows the number of deaths predicted over the year. The dark blue line shows the number of actual deaths.",
     "deceased_monitor_chart_legenda_registered": "Actual mortality",
-    "deceased_monitor_chart_legenda_registered_short": "Actual",
     "deceased_monitor_chart_legenda_expected": "Predicted mortality",
-    "deceased_monitor_chart_legenda_expected_short": "Predicted",
     "deceased_monitor_chart_legenda_expected_margin": "Range of predicted mortality",
-    "deceased_monitor_chart_legenda_expected_margin_short": "Range of predicted"
+    "deceased_monitor_chart_legenda_registered_short": "",
+    "deceased_monitor_chart_legenda_expected_short": "",
+    "deceased_monitor_chart_legenda_expected_margin_short": ""
   },
   "nationaal_maatregelen": {
     "titel": "Measures",
@@ -2286,27 +2286,27 @@
       "title": "One person is vaccinated every {{seconds}} seconds",
       "description": "This is an estimate. The estimated figure is based on an average of {{amount}} doses per day between 08.00 and 20.00 over the past seven days."
     },
-    "bereidheid_section": {
-      "title": "Vaccinatiebereidheid",
-      "description": "Vaccinatiebereidheid",
-      "reference": {
-        "href": "/",
-        "text": "Vaccinatiebereidheid"
-      }
-    },
-    "stock_and_delivery_section": {
-      "title": "Voorraad & Levering",
-      "description": "Voorraad & Levering",
-      "reference": {
-        "href": "/",
-        "text": "Voorraad & Levering"
-      }
-    },
     "more_information": {
       "label": "Read more about the",
       "link": {
         "href": "https://www.government.nl/topics/coronavirus-covid-19/dutch-vaccination-programme",
         "text": "Dutch vaccination programme against COVID-19"
+      }
+    },
+    "bereidheid_section": {
+      "title": "",
+      "description": "",
+      "reference": {
+        "href": "",
+        "text": ""
+      }
+    },
+    "stock_and_delivery_section": {
+      "title": "",
+      "description": "",
+      "reference": {
+        "href": "",
+        "text": ""
       }
     }
   },
@@ -2360,7 +2360,7 @@
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of the Netherlands",
       "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on 2 March. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).\n\n**There remains a national lockdown until at least 30 March. [Click here to view the lockdown measures](/landelijk/maatregelen).**",
-      "belangrijk_bericht": "Er geldt een [landelijke lockdown](/landelijk/maatregelen) tot en met ten minste 30 maart."
+      "belangrijk_bericht": ""
     },
     "data_sitemap_titel": "Topics on this dashboard",
     "data_sitemap_toelichting": "Go directly to the following topics:",
@@ -2684,7 +2684,7 @@
         "toelichting": "This is the risk level that currently applies in this region. The risk level is reassessed every 2 weeks based on the number of hospital admissions and the number of positive tests (new confirmed cases) at that time."
       }
     },
-    "escalation_level_last_determined": "This risk level has been determined on {{last_determined}}, based on the figures from {{based_from}} to {{based_to}}. The risk level will be reassessed around {{next_determined}}."
+    "escalation_level_last_determined": "This risk level has been determined on {{last_determined}}, based on the figures from 22 to 28 February. The risk level will be reassessed around 16 March."
   },
   "gemeente_sterfte": {
     "titel_sidebar": "Deaths",
