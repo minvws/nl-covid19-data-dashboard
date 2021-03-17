@@ -281,7 +281,10 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
           <KpiTile
             title={ggdText.positief_getest_week_titel}
             metadata={{
-              date: ggdAverageLastValue.date_end_unix,
+              date: [
+                ggdAverageLastValue.date_start_unix,
+                ggdAverageLastValue.date_end_unix,
+              ],
               source: ggdText.bronnen.rivm,
             }}
           >
