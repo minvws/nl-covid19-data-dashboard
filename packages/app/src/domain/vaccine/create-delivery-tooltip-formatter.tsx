@@ -73,9 +73,12 @@ export function formatVaccinationsTooltip(
         ))}
 
         <Spacer mb={1} />
-        <TooltipListItem color="transparent">
+        <TooltipListItem>
+          <span>
+            <ColorIndicator color="transparent" />
+            {text.vaccinaties.data.vaccination_chart.doses_administered_total}:
+          </span>
           <TooltipValueContainer>
-            {text.vaccinaties.data.vaccination_chart.doses_administered_total}:{' '}
             <strong>{formatNumber(administeredData.total)}</strong>
           </TooltipValueContainer>
         </TooltipListItem>
