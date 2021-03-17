@@ -108,7 +108,7 @@
       "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "kpi_titel": "Average number of intensive care admissions in 3 days",
-    "linechart_legend_trend_label": "",
+    "linechart_legend_trend_label": "ICU admissions",
     "linechart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
   },
   "verdenkingen_huisartsen": {
@@ -632,7 +632,7 @@
       "date": "Value of {{date}}",
       "dateFromTo": "Value from {{startDate}} - {{endDate}}",
       "download": "Download data",
-      "obtained": ""
+      "obtained": "obtained on {{date}}"
     },
     "barScale": {
       "signaalwaarde": "Alert value"
@@ -1086,7 +1086,7 @@
         "text": "RIVM"
       }
     },
-    "summary_text": ""
+    "summary_text": "{{percentage}} of the test results at GGD test locations had a positive result between {{dateFrom}} and {{dateTo}}."
   },
   "over_risiconiveaus_metadata": {
     "title": "Risk levels | Coronavirus Dashboard | Government.nl",
@@ -1724,7 +1724,7 @@
       "kpi_daily_per_100k_description": "Calculating the daily number of COVID-19 cases per 100,000 over-70s makes it possible to compare regions.",
       "line_chart_daily_title": "Daily confirmed cases among over-70s living at home: progression over time",
       "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-      "line_chart_legend_trend_label": "",
+      "line_chart_legend_trend_label": "New confirmed cases",
       "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
     },
     "section_deceased": {
@@ -1745,7 +1745,7 @@
       "kpi_daily_description": "The number of people over 70 living at home in this safety region who were reported as deceased due to COVID-19 yesterday",
       "line_chart_daily_title": "Number of COVID-19 deaths among over-70s living at home over time",
       "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-      "line_chart_legend_trend_label": "",
+      "line_chart_legend_trend_label": "Number of deceased",
       "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
     },
     "kpi_titel": "Confirmed cases"
@@ -1845,9 +1845,9 @@
     "deceased_monitor_chart_legenda_registered": "Actual mortality",
     "deceased_monitor_chart_legenda_expected": "Predicted mortality",
     "deceased_monitor_chart_legenda_expected_margin": "Range of predicted mortality",
-    "deceased_monitor_chart_legenda_registered_short": "",
-    "deceased_monitor_chart_legenda_expected_short": "",
-    "deceased_monitor_chart_legenda_expected_margin_short": ""
+    "deceased_monitor_chart_legenda_registered_short": "Actual",
+    "deceased_monitor_chart_legenda_expected_short": "Predicted",
+    "deceased_monitor_chart_legenda_expected_margin_short": "Upper and lower bound of prediction"
   },
   "nationaal_maatregelen": {
     "titel": "Measures",
@@ -2341,8 +2341,8 @@
       "risicokaart": {
         "titel": "Risk level map of the Netherlands",
         "link": {
-          "text": "",
-          "href": ""
+          "text": "View risk level for all regions",
+          "href": "/veiligheidsregio"
         }
       },
       "meer_lezen": {
@@ -2354,10 +2354,10 @@
         }
       },
       "positief_getest_kaart": {
-        "titel": ""
+        "titel": "Confirmed cases in the Netherlands"
       }
     },
-    "overview_links_header": ""
+    "overview_links_header": "View all"
   },
   "nationaal_actueel": {
     "title": "The current situation in {{the_netherlands}}",
@@ -2542,7 +2542,7 @@
         }
       }
     },
-    "data_sitemap_title": ""
+    "data_sitemap_title": "Data for {{safetyRegionName}}"
   },
   "gemeente_actueel": {
     "title": "Current situation in municipality {{municipalityName}}",
@@ -2626,7 +2626,7 @@
         }
       }
     },
-    "data_sitemap_title": ""
+    "data_sitemap_title": "Data for {{municipalityName}}"
   },
   "toegankelijkheid_metadata": {
     "title": "Accessibility | Coronavirus Dashboard | Government.nl",
@@ -2758,18 +2758,18 @@
       }
     },
     "waarschuwingen_over_tijd_grafiek": {
-      "title": "",
-      "description": "",
-      "ariaDescription": "",
+      "title": "Warnings over time",
+      "description": "This graph shows how many users with a confirmed case of COVID-19 have informed other users of CoronaMelder of this.",
+      "ariaDescription": "This graph shows how many users with a confirmed case of COVID-19 have informed other users of CoronaMelder of this.",
       "bronnen": {
         "coronamelder": {
           "download": "",
-          "text": "",
+          "text": "CoronaMelder",
           "href": ""
         }
       },
       "labels": {
-        "warnings": ""
+        "warnings": "Number of warnings"
       }
     }
   },
@@ -2787,7 +2787,7 @@
     "infected_locations": "Infected locations:",
     "elderly_at_home": "People over 70 living at home:",
     "sewer_regional": "Average number of virus particles:",
-    "sewer_municipal": ""
+    "sewer_municipal": "Average number of virus particles:"
   },
   "milestones": {
     "toon_meer": "Show earlier events",

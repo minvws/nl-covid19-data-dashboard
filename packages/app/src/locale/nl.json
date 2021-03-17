@@ -2759,8 +2759,8 @@
     },
     "waarschuwingen_over_tijd_grafiek": {
       "title": "Waarschuwingen over tijd",
-      "description": "Bekijk alle waarschuwingen over tijd van de CoronaMelder",
-      "ariaDescription": "De grafiek gaat over de meldingen vanuit de CoronaMelder over tijd",
+      "description": "Deze grafiek laat op dagbasis zien hoeveel (positief geteste) gebruikers van CoronaMelder andere app-gebruikers hebben gewaarschuwd.",
+      "ariaDescription": "Deze grafiek laat op dagbasis zien hoeveel (positief geteste) gebruikers van CoronaMelder andere app-gebruikers hebben gewaarschuwd.",
       "bronnen": {
         "coronamelder": {
           "download": "",
@@ -2769,7 +2769,7 @@
         }
       },
       "labels": {
-        "warnings": "waarschuwingen"
+        "warnings": "Aantal waarschuwingen"
       }
     }
   },
