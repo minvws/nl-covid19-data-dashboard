@@ -2742,6 +2742,21 @@
         "text": "Most recent factsheet CoronaMelder app",
         "href": "https://www.coronamelder.nl/media/Factsheet_Corona_latest.pdf"
       }
+    },
+    "waarschuwingen_over_tijd_grafiek": {
+      "title": "",
+      "description": "",
+      "ariaDescription" : "",
+      "bronnen": {
+        "coronamelder": {
+          "download": "",
+          "text": "CoronaMelder",
+          "href": ""
+        }
+      },
+      "labels": {
+        "warnings": ""
+      }
     }
   },
   "choropleth_tooltip": {

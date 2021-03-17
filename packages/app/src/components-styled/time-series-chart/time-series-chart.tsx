@@ -33,6 +33,7 @@ import {
   useScales,
   useSeriesList,
   useValuesInTimeframe,
+  getTimeDomain,
 } from './logic';
 import { useDimensions } from './logic/dimensions';
 export type { SeriesConfig } from './logic';
@@ -142,7 +143,7 @@ export function TimeSeriesChart<
   formatTooltip,
   dataOptions,
   numGridLines = 3,
-  tickValues,
+  tickValues: yTickValues,
   paddingLeft,
   ariaLabelledBy,
   title,
@@ -205,8 +206,13 @@ export function TimeSeriesChart<
       values,
       maximumValue: seriesMax,
       bounds,
-      numTicks: tickValues?.length || numGridLines,
+      numTicks: yTickValues?.length || numGridLines,
     }
+  );
+
+  const xTickValues = useMemo(
+    () => getTimeDomain(values, { withPadding: false }),
+    [values]
   );
 
   const [handleHover, hoverState] = useHoverState({
@@ -290,7 +296,8 @@ export function TimeSeriesChart<
           <Axes
             bounds={bounds}
             numGridLines={numGridLines}
-            yTickValues={tickValues}
+            yTickValues={yTickValues}
+            xTickValues={xTickValues}
             xScale={xScale}
             yScale={yScale}
             isPercentage={isPercentage}
