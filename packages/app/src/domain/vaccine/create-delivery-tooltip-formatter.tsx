@@ -46,8 +46,6 @@ function formatVaccinationsTooltip(
     );
   }
 
-  console.dir(values);
-
   const dateEndString = formatDateFromSeconds(data.date_end_unix, 'day-month');
 
   return (
