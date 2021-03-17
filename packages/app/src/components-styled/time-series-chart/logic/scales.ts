@@ -66,10 +66,8 @@ export function useScales<T extends TimestampedValue>(args: {
 
     const yDomain = tickValues
       ? [
-          tickValues[0] < 0 ? tickValues[0] : 0,
-          tickValues[tickValues.length - 1] > maximumValue
-            ? tickValues[tickValues.length - 1]
-            : maximumValue,
+          Math.min(first(tickValues), 0),
+          Math.max(last(tickValues), maximumValue),
         ]
       : [0, maximumValue];
     const yScale = scaleLinear({

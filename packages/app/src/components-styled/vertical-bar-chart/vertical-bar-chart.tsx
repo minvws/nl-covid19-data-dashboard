@@ -126,8 +126,6 @@ export function VerticalBarChart<T extends TimestampedValue>({
     paddingLeft ?? yAxisWidth + 10 // 10px seems to be enough padding
   );
 
-  const legendItems = useLegendItems(seriesConfig, dataOptions);
-
   const values = useValuesInTimeframe(allValues, timeframe);
 
   const seriesList = useSeriesList(values, seriesConfig);
@@ -162,7 +160,6 @@ export function VerticalBarChart<T extends TimestampedValue>({
     seriesList,
     xScale,
     yScale,
-    timespanAnnotations,
   });
 
   useEffect(() => {
@@ -173,32 +170,32 @@ export function VerticalBarChart<T extends TimestampedValue>({
         timespanAnnotationIndex,
       } = hoverState;
 
-      showTooltip({
-        tooltipData: {
-          /**
-           * The tooltip gets passed the original data value, plus the
-           * nearest/active hover property and the full series configuration.
-           * With these three arguments we should be able to render any sort of
-           * tooltip.
-           */
-          value: values[valuesIndex],
-          valueKey: nearestPoint.metricProperty as keyof T,
-          config: seriesConfig,
-          options: dataOptions || {},
-          /**
-           * Pass the full annotation data. We could just pass the index because
-           * dataOptions is already being passed, but it's cumbersome to have to
-           * dig up the annotation from the array in the tooltip logic.
-           */
-          timespanAnnotation:
-            dataOptions?.timespanAnnotations &&
-            isDefined(timespanAnnotationIndex)
-              ? dataOptions.timespanAnnotations[timespanAnnotationIndex]
-              : undefined,
-        },
-        tooltipLeft: nearestPoint.x,
-        tooltipTop: nearestPoint.y,
-      });
+      // showTooltip({
+      //   tooltipData: {
+      //     /**
+      //      * The tooltip gets passed the original data value, plus the
+      //      * nearest/active hover property and the full series configuration.
+      //      * With these three arguments we should be able to render any sort of
+      //      * tooltip.
+      //      */
+      //     value: values[valuesIndex],
+      //     valueKey: nearestPoint.metricProperty as keyof T,
+      //     config: seriesConfig,
+      //     options: dataOptions || {},
+      //     /**
+      //      * Pass the full annotation data. We could just pass the index because
+      //      * dataOptions is already being passed, but it's cumbersome to have to
+      //      * dig up the annotation from the array in the tooltip logic.
+      //      */
+      //     timespanAnnotation:
+      //       dataOptions?.timespanAnnotations &&
+      //       isDefined(timespanAnnotationIndex)
+      //         ? dataOptions.timespanAnnotations[timespanAnnotationIndex]
+      //         : undefined,
+      //   },
+      //   tooltipLeft: nearestPoint.x,
+      //   tooltipTop: nearestPoint.y,
+      // });
     } else {
       hideTooltip();
     }
@@ -247,29 +244,6 @@ export function VerticalBarChart<T extends TimestampedValue>({
             onMouseLeave={handleHover}
           />
 
-          {timespanAnnotations &&
-            timespanAnnotations.map((x, index) => (
-              <TimespanAnnotation
-                key={index}
-                start={x.start}
-                end={x.end}
-                color={x.color}
-                domain={xScale.domain() as [number, number]}
-                getX={getX}
-                height={bounds.height}
-              />
-            ))}
-
-          {/**
-           * The renderSeries() callback has been replaced by this component. As
-           * long as we use only very standardized series this might be a good
-           * idea because it removes quite some lines of code from the main
-           * component.
-           *
-           * With this amount of props if does feel like the wrong type of
-           * abstraction, but I still think it's an improvement over
-           * having it mixed in with the main component.
-           */}
           <Series
             seriesConfig={seriesConfig}
             seriesList={seriesList}
@@ -281,15 +255,6 @@ export function VerticalBarChart<T extends TimestampedValue>({
             bounds={bounds}
             yScale={yScale}
           />
-
-          {benchmark && (
-            <Benchmark
-              value={benchmark.value}
-              label={benchmark.label}
-              top={yScale(benchmark.value)}
-              width={bounds.width}
-            />
-          )}
         </ChartContainer>
 
         <Tooltip
@@ -301,7 +266,7 @@ export function VerticalBarChart<T extends TimestampedValue>({
           formatTooltip={formatTooltip}
         />
 
-        {hoverState && (
+        {/* {hoverState && (
           <Overlay bounds={bounds} padding={padding}>
             <DateSpanMarker
               width={dateSpanWidth}
@@ -317,14 +282,8 @@ export function VerticalBarChart<T extends TimestampedValue>({
             <PointMarkers points={hoverState.rangePoints} />
             <PointMarkers points={hoverState.linePoints} />
           </Overlay>
-        )}
+        )} */}
       </Box>
-
-      {legendItems && (
-        <Box pl={paddingLeft}>
-          <Legend items={legendItems} />
-        </Box>
-      )}
     </Box>
   );
 }

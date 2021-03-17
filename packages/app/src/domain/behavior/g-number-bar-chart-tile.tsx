@@ -9,6 +9,7 @@ import { AllLanguages } from '~/locale/APP_LOCALE';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { formatPercentage } from '~/utils/formatNumber';
+import { rest } from 'lodash';
 
 interface GNumberBarChartTileProps {
   data: NlVaccineDeliveryPerSupplier;
@@ -27,58 +28,69 @@ export function GNumberBarChartTile({
 
   const values: NlVaccineDeliveryPerSupplierValue[] = [
     {
-      g_number: 0.321,
+      g_number: 32.1,
       date_of_insertion_unix: 0,
       date_start_unix: new Date('01-01-2020').getTime() / 1000,
       date_end_unix: new Date('01-08-2020').getTime() / 1000,
     },
     {
-      g_number: -0.123,
+      g_number: -12.3,
       date_of_insertion_unix: 0,
       date_start_unix: new Date('01-02-2020').getTime() / 1000,
       date_end_unix: new Date('01-09-2020').getTime() / 1000,
     },
     {
-      g_number: 0.2,
+      g_number: 20,
       date_of_insertion_unix: 0,
       date_start_unix: new Date('01-03-2020').getTime() / 1000,
       date_end_unix: new Date('01-10-2020').getTime() / 1000,
     },
     {
-      g_number: 0.321,
+      g_number: 32.1,
       date_of_insertion_unix: 0,
       date_start_unix: new Date('01-04-2020').getTime() / 1000,
       date_end_unix: new Date('01-11-2020').getTime() / 1000,
     },
     {
-      g_number: -0.123,
+      g_number: -12.3,
       date_of_insertion_unix: 0,
       date_start_unix: new Date('01-05-2020').getTime() / 1000,
       date_end_unix: new Date('01-12-2020').getTime() / 1000,
     },
     {
-      g_number: 0.2,
+      g_number: 20,
       date_of_insertion_unix: 0,
-      date_start_unix: new Date('02-06-2020').getTime() / 1000,
-      date_end_unix: new Date('02-13-2020').getTime() / 1000,
+      date_start_unix: new Date('01-06-2020').getTime() / 1000,
+      date_end_unix: new Date('01-13-2020').getTime() / 1000,
+    },
+    {
+      g_number: 32.1,
+      date_of_insertion_unix: 0,
+      date_start_unix: new Date('01-07-2020').getTime() / 1000,
+      date_end_unix: new Date('01-14-2020').getTime() / 1000,
     },
   ];
 
   const last_value: NlVaccineDeliveryPerSupplierValue = {
-    g_number: 0.2,
+    g_number: 20,
     date_of_insertion_unix: 0,
-    date_start_unix: new Date('02-06-2020').getTime() / 1000,
-    date_end_unix: new Date('02-13-2020').getTime() / 1000,
+    date_start_unix: new Date('01-07-2020').getTime() / 1000,
+    date_end_unix: new Date('01-14-2020').getTime() / 1000,
   };
+
+  const simplifiedData = values.map(
+    ({ date_start_unix, date_end_unix, ...rest }) => ({
+      ...rest,
+      date_unix: date_end_unix,
+    })
+  );
 
   return (
     <ChartTile
-      title={replaceVariablesInText(text.title, {
-        weekNumber: last_value.week_number,
-      })}
+      title={text.title}
       description={text.description}
       metadata={{
-        date: last_value.date_of_report_unix,
+        date: last_value.date_of_insertion_unix,
         // source: "source",
       }}
     >
@@ -88,24 +100,23 @@ export function GNumberBarChartTile({
             title="G Number"
             width={width}
             ariaLabelledBy="chart_g_number"
-            values={values}
+            values={simplifiedData}
             showDateMarker
             numGridLines={3}
-            tickValues={[-0.5, 0, 0.5]}
+            tickValues={[-50, 0, 50]}
             dataOptions={{
               isPercentage: true,
-              // forcedMaximumValue: 100,
             }}
             seriesConfig={[
               {
-                type: 'line',
+                type: 'bar',
                 metricProperty: 'g_number',
                 color: '#005082',
                 label: 'lineee',
               },
             ]}
             formatTooltip={({ value }) =>
-              `${formatPercentage(value.g_number)} getaald`
+              `${formatPercentage(value.g_number)}% getaald`
             }
           />
         )}
