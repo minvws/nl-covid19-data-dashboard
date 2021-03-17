@@ -143,7 +143,7 @@ export function TimeSeriesChart<
   formatTooltip,
   dataOptions,
   numGridLines = 3,
-  tickValues,
+  tickValues: yTickValues,
   paddingLeft,
   ariaLabelledBy,
   title,
@@ -206,8 +206,13 @@ export function TimeSeriesChart<
       values,
       maximumValue: seriesMax,
       bounds,
-      numTicks: tickValues?.length || numGridLines,
+      numTicks: yTickValues?.length || numGridLines,
     }
+  );
+
+  const xTickValues = useMemo(
+    () => getTimeDomain(values, { withPadding: false }),
+    [values]
   );
 
   const [handleHover, hoverState] = useHoverState({
@@ -291,8 +296,8 @@ export function TimeSeriesChart<
           <Axes
             bounds={bounds}
             numGridLines={numGridLines}
-            yTickValues={tickValues}
-            xTickValues={getTimeDomain(values, { withPadding: false })}
+            yTickValues={yTickValues}
+            xTickValues={xTickValues}
             xScale={xScale}
             yScale={yScale}
             isPercentage={isPercentage}
