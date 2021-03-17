@@ -618,7 +618,7 @@
     "select_region_municipality_legend": "Select a municipality:",
     "select_region_type_legend": "Show numbers from:",
     "your_municipality": "Municipality",
-    "belangrijk_bericht": ""
+    "belangrijk_bericht": "There remains a national lockdown until at least 30 March. Click here to view [the lockdown measures](https://coronadashboard.government.nl/landelijk/maatregelen)."
   },
   "common": {
     "metadata": {
