@@ -1,5 +1,4 @@
 import { StructureBuilder } from '@sanity/structure';
-import { ReactNode } from 'react';
 // import StructureBuilder from '@sanity/desk-tool/structure-builder';
 import { BsCardChecklist, BsLockFill, BsMap, BsTable } from 'react-icons/bs';
 import { GrCircleInformation, GrDashboard } from 'react-icons/gr';
@@ -47,6 +46,7 @@ const hiddenDocTypes = [
   'siteSettings',
   'topicalPage',
   'veelgesteldeVragen',
+  'veelgesteldeVragenGroups',
   'cijferVerantwoording',
   'overDitDashboard',
   'overRisicoNiveaus',
@@ -92,12 +92,24 @@ export default () =>
         'Over de risiconiveaus',
         'overRisicoNiveaus'
       ),
-      addListItem(
-        StructureBuilder,
-        MdQuestionAnswer,
-        'Veelgestelde vragen',
-        'veelgesteldeVragen'
-      ),
+      StructureBuilder.listItem()
+        .title('Veelgestelde vragen')
+        .icon(MdQuestionAnswer)
+        .child(
+          StructureBuilder.list()
+            .title('Groepen en Vragen')
+            .items([
+              ...StructureBuilder.documentTypeListItems().filter(
+                (item) => item.getId() === 'veelgesteldeVragenGroups'
+              ),
+              addListItem(
+                StructureBuilder,
+                MdQuestionAnswer,
+                'Veelgestelde vragen',
+                'veelgesteldeVragen'
+              ),
+            ])
+        ),
       addListItem(
         StructureBuilder,
         BsCardChecklist,

@@ -18,6 +18,15 @@ export function sortTimeSeriesInDataInPlace<T>(data: T) {
     const nestedSeries = (data as UnknownObject)
       .sewer_per_installation as SewerPerInstallationData;
 
+    if (!nestedSeries.values) {
+      /**
+       * It can happen that we get incomplete json data and assuming that values
+       * exists here might crash the app
+       */
+      console.error('sewer_per_installation.values does not exist');
+      return;
+    }
+
     nestedSeries.values = nestedSeries.values.map((x) => {
       x.values = sortTimeSeriesValues(x.values);
       return x;

@@ -487,6 +487,7 @@ export interface NlVaccineDelivery {
 export interface NlVaccineDeliveryValue {
   total: number;
   date_of_insertion_unix: number;
+  date_of_report_unix: number;
   date_start_unix: number;
   date_end_unix: number;
 }
@@ -508,11 +509,10 @@ export interface NlVaccineAdministeredValue {
   pfizer: number;
   moderna: number;
   astra_zeneca: number;
-  cure_vac: number;
-  janssen: number;
-  sanofi: number;
+  cure_vac?: number;
+  janssen?: number;
+  sanofi?: number;
   total: number;
-  date_of_report_unix: number;
   date_of_insertion_unix: number;
   date_start_unix: number;
   date_end_unix: number;
@@ -525,11 +525,10 @@ export interface NlVaccineAdministeredEstimateValue {
   pfizer: number;
   moderna: number;
   astra_zeneca: number;
-  cure_vac: number;
-  janssen: number;
-  sanofi: number;
+  cure_vac?: number;
+  janssen?: number;
+  sanofi?: number;
   total: number;
-  date_of_report_unix: number;
   date_of_insertion_unix: number;
   date_start_unix: number;
   date_end_unix: number;
@@ -851,10 +850,12 @@ export interface RegionalElderlyAtHomeValue {
   vrcode: string;
 }
 export interface VrEscalationLevel {
-  date_unix: number;
   level: number;
-  valid_from_unix: number;
+  based_on_statistics_to_unix: number;
+  based_on_statistics_from_unix: number;
+  next_determined_unix: number;
   last_determined_unix: number;
+  valid_from_unix: number;
   date_of_insertion_unix: number;
 }
 export interface VrTestedOverallSum {
@@ -907,11 +908,13 @@ export interface RegionsTestedOverall {
   date_of_insertion_unix: number;
 }
 export interface EscalationLevels {
-  date_unix: number;
   vrcode: string;
   level: number;
-  valid_from_unix: number;
+  based_on_statistics_to_unix: number;
+  based_on_statistics_from_unix: number;
+  next_determined_unix: number;
   last_determined_unix: number;
+  valid_from_unix: number;
   date_of_insertion_unix: number;
 }
 export interface RegionsNursingHome {

@@ -1,5 +1,6 @@
 import { Fragment } from 'react';
 import ClockIcon from '~/assets/clock.svg';
+import MeerInformatieIcon from '~/assets/meer-informatie.svg';
 import DatabaseIcon from '~/assets/database.svg';
 import DownloadIcon from '~/assets/download.svg';
 import siteText from '~/locale/index';
@@ -9,6 +10,7 @@ import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { Box } from '../base';
 import { ExternalLink } from '../external-link';
 import { Text } from '../typography';
+
 interface Datasource {
   href: string;
   text: string;
@@ -26,6 +28,11 @@ export interface MetadataProps {
   dateOrRange: number | DateRange;
   dateOfInsertionUnix: number;
   accessibilitySubject?: string;
+  moreInformationLabel?: string;
+  moreInformationLink?: {
+    href: string;
+    text: string;
+  };
 }
 
 const text = siteText.common.metadata;
@@ -37,6 +44,8 @@ export function Metadata(props: MetadataProps) {
     dateOrRange,
     dateOfInsertionUnix,
     accessibilitySubject,
+    moreInformationLabel,
+    moreInformationLink,
   } = props;
 
   const dateText = formateDateText(
@@ -80,6 +89,14 @@ export function Metadata(props: MetadataProps) {
         accessibilityText={siteText.accessibility.text_download}
         accessibilitySubject={accessibilitySubject}
       />
+
+      {moreInformationLabel && (
+        <MetadataItem
+          icon={<MeerInformatieIcon aria-hidden />}
+          items={moreInformationLink ? [moreInformationLink] : []}
+          label={moreInformationLabel}
+        />
+      )}
     </Box>
   );
 }

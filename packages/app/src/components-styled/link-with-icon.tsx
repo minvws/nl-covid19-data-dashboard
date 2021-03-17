@@ -59,11 +59,8 @@ export function LinkWithIcon({
         )}
         {iconPlacement === 'left' && !headingLink && (
           <>
-            {!words.length ? children : firstWords}
-            <IconWrapper>
-              <IconSmall icon={icon} width={11} height={10} />
-              {words[words.length - 1]}
-            </IconWrapper>
+            <IconSmall icon={icon} width={11} height={10} />
+            {children}
           </>
         )}
         {headingLink && (
