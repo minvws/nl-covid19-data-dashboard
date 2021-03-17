@@ -2760,7 +2760,7 @@
     "waarschuwingen_over_tijd_grafiek": {
       "title": "Waarschuwingen over tijd",
       "description": "Bekijk alle waarschuwingen over tijd van de CoronaMelder",
-      "ariaDescription": "De grafiek gaat over de meldingen vanuit de CoronaMelder over tijd",
+      "ariaDescription": "Deze grafiek gaat over de meldingen vanuit de CoronaMelder over tijd",
       "bronnen": {
         "coronamelder": {
           "download": "",
