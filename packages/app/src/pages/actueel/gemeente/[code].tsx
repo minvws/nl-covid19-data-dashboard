@@ -1,4 +1,5 @@
 import css from '@styled-system/css';
+import { isEmpty } from 'lodash';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import GetestIcon from '~/assets/test.svg';
@@ -10,11 +11,11 @@ import {
   RegionControlOption,
 } from '~/components-styled/chart-region-controls';
 import { ChoroplethLegenda } from '~/components-styled/choropleth-legenda';
+import { CollapsibleButton } from '~/components-styled/collapsible';
 import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
 import { HighlightTeaserProps } from '~/components-styled/highlight-teaser';
 import { MaxWidth } from '~/components-styled/max-width';
-import { CollapsibleButton } from '~/components-styled/collapsible';
 import { RiskLevelIndicator } from '~/components-styled/risk-level-indicator';
 import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
@@ -31,12 +32,13 @@ import { escalationTooltip } from '~/components/choropleth/tooltips/region/escal
 import { FCWithLayout, getDefaultLayout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import { ChoroplethTwoColumnLayout } from '~/domain/topical/choropleth-two-column-layout';
-import { Sitemap } from '~/domain/topical/sitemap';
 import { EditorialSummary } from '~/domain/topical/editorial-teaser';
 import { EditorialTile } from '~/domain/topical/editorial-tile';
 import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
+import { Sitemap } from '~/domain/topical/sitemap';
+import { getDataSitemap } from '~/domain/topical/sitemap/utils';
 import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
 import { topicalPageQuery } from '~/queries/topical-page-query';
@@ -55,7 +57,6 @@ import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 export { getStaticPaths } from '~/static-paths/gm';
-import { getDataSitemap } from '~/domain/topical/sitemap/utils';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -140,10 +141,6 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
                     }
                   : undefined
               }
-            />
-            <WarningTile
-              message={siteText.regionaal_index.belangrijk_bericht}
-              variant="emphasis"
             />
 
             <MiniTrendTileLayout id="metric-navigation">
@@ -290,6 +287,22 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
                   />
                 </Box>
                 <Box>
+                  {siteText.nationaal_actueel.risiconiveaus
+                    .belangrijk_bericht &&
+                    !isEmpty(
+                      siteText.nationaal_actueel.risiconiveaus
+                        .belangrijk_bericht
+                    ) && (
+                      <Box mb={3}>
+                        <WarningTile
+                          message={
+                            siteText.nationaal_actueel.risiconiveaus
+                              .belangrijk_bericht
+                          }
+                          variant="emphasis"
+                        />
+                      </Box>
+                    )}
                   <div
                     dangerouslySetInnerHTML={{
                       __html: replaceVariablesInText(

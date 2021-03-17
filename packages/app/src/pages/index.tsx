@@ -1,4 +1,5 @@
 import css from '@styled-system/css';
+import { isEmpty } from 'lodash';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import GetestIcon from '~/assets/test.svg';
@@ -14,7 +15,6 @@ import { CollapsibleButton } from '~/components-styled/collapsible';
 import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
 import { HighlightTeaserProps } from '~/components-styled/highlight-teaser';
-import { Sitemap } from '~/domain/topical/sitemap';
 import { MaxWidth } from '~/components-styled/max-width';
 import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
@@ -38,6 +38,8 @@ import { EditorialTile } from '~/domain/topical/editorial-tile';
 import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
+import { Sitemap } from '~/domain/topical/sitemap';
+import { getDataSitemap } from '~/domain/topical/sitemap/utils';
 import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
 import { TopicalVaccineTile } from '~/domain/topical/topical-vaccine-tile';
@@ -52,7 +54,6 @@ import {
 } from '~/static-props/get-data';
 import { formatDate } from '~/utils/formatDate';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { getDataSitemap } from '~/domain/topical/sitemap/utils';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 export const getStaticProps = createGetStaticProps(
@@ -133,11 +134,6 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
             <Box width={{ lg: '65%' }}>
               <Search />
             </Box>
-
-            <WarningTile
-              message={siteText.regionaal_index.belangrijk_bericht}
-              variant="emphasis"
-            />
 
             <MiniTrendTileLayout id="metric-navigation">
               <MiniTrendTile
@@ -251,12 +247,15 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                   />
                 </Box>
                 <Box>
-                  <Box mb={3}>
-                    <WarningTile
-                      message={text.risiconiveaus.belangrijk_bericht}
-                      variant="emphasis"
-                    />
-                  </Box>
+                  {text.risiconiveaus.belangrijk_bericht &&
+                    !isEmpty(text.risiconiveaus.belangrijk_bericht) && (
+                      <Box mb={3}>
+                        <WarningTile
+                          message={text.risiconiveaus.belangrijk_bericht}
+                          variant="emphasis"
+                        />
+                      </Box>
+                    )}
                   <div
                     dangerouslySetInnerHTML={{
                       __html: replaceVariablesInText(
