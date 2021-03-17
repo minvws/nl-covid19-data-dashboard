@@ -115,11 +115,6 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
               <Search />
             </Box>
 
-            <WarningTile
-              message={siteText.regionaal_index.belangrijk_bericht}
-              variant="emphasis"
-            />
-
             <MiniTrendTileLayout>
               <MiniTrendTile
                 title={text.mini_trend_tiles.positief_getest.title}

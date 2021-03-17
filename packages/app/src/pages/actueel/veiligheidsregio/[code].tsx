@@ -117,11 +117,6 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
               }}
             />
 
-            <WarningTile
-              message={siteText.regionaal_index.belangrijk_bericht}
-              variant="emphasis"
-            />
-
             <MiniTrendTileLayout>
               <MiniTrendTile
                 title={text.mini_trend_tiles.positief_getest.title}
@@ -228,6 +223,9 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
                       metricName="escalation_levels"
                       metricProperty="level"
                     />
+                  }
+                  message={
+                    siteText.nationaal_actueel.risiconiveaus.belangrijk_bericht
                   }
                 >
                   <SafetyRegionChoropleth
