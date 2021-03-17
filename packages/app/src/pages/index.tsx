@@ -236,6 +236,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                       metricProperty="level"
                     />
                   }
+                  message={text.risiconiveaus.belangrijk_bericht}
                 >
                   <SafetyRegionChoropleth
                     data={choropleth.vr}
@@ -248,6 +249,7 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                   />
                 </TopicalChoroplethContainer>
               </TopicalTile>
+
               <Box
                 borderTopWidth="1px"
                 borderTopStyle="solid"
