@@ -10,7 +10,6 @@ import { colors } from '~/style/theme';
 import { RichContentBlock } from '~/types/cms';
 import { formatDate } from '~/utils/formatDate';
 import siteText from '~/locale/index';
-import { asResponsiveArray } from '~/style/utils';
 
 const MAX_ITEMS_VISIBLE = 5;
 const CIRCLE_SIZE = 26;
