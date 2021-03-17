@@ -33,6 +33,7 @@ import {
   useScales,
   useSeriesList,
   useValuesInTimeframe,
+  getTimeDomain,
 } from './logic';
 import { useDimensions } from './logic/dimensions';
 export type { SeriesConfig } from './logic';
@@ -291,6 +292,7 @@ export function TimeSeriesChart<
             bounds={bounds}
             numGridLines={numGridLines}
             yTickValues={tickValues}
+            xTickValues={getTimeDomain(values, { withPadding: false })}
             xScale={xScale}
             yScale={yScale}
             isPercentage={isPercentage}

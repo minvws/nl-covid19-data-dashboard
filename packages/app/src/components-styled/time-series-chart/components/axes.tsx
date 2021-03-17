@@ -35,6 +35,7 @@ type AxesProps = {
    */
   yAxisRef: Ref<SVGGElement>;
   yTickValues?: number[];
+  xTickValues: [number, number];
 };
 
 const formatYAxis = (y: number) => formatNumber(y);
@@ -46,12 +47,13 @@ export const Axes = memo(function Axes({
   numGridLines,
   bounds,
   isPercentage,
-  yTickValues,
   xScale,
   yScale,
+  yTickValues,
+  xTickValues,
   yAxisRef,
 }: AxesProps) {
-  const [startUnix, endUnix] = xScale.domain();
+  const [startUnix, endUnix] = xTickValues;
 
   const formatXAxis = useCallback(
     (date_unix: number) => {
@@ -92,7 +94,7 @@ export const Axes = memo(function Axes({
       />
       <AxisBottom
         scale={xScale}
-        tickValues={xScale.domain()}
+        tickValues={xTickValues}
         tickFormat={formatXAxis as AnyTickFormatter}
         top={bounds.height}
         stroke={colors.silver}
