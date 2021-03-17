@@ -618,7 +618,7 @@
     "select_region_municipality_legend": "Select a municipality:",
     "select_region_type_legend": "Show numbers from:",
     "your_municipality": "Municipality",
-    "belangrijk_bericht": "There remains a national lockdown until at least 30 March. Click here to view [the lockdown measures](https://coronadashboard.government.nl/landelijk/maatregelen)."
+    "belangrijk_bericht": "There remains a national lockdown until at least 30 March. [The lockdown measures apply throughout the whole country](https://coronadashboard.government.nl/landelijk/maatregelen)."
   },
   "common": {
     "metadata": {
@@ -984,7 +984,7 @@
       "title": "Level of risk per safety region | Coronavirus Dashboard | Government.nl",
       "description": "Overview of the level of risk per safety region in the Netherlands."
     },
-    "belangrijk_bericht": "There remains a national lockdown until at least 30 March. Click here to view [the lockdown measures](https://coronadashboard.government.nl/landelijk/maatregelen)."
+    "belangrijk_bericht": "There remains a national lockdown until at least 30 March. [The lockdown measures apply throughout the whole country](https://coronadashboard.government.nl/landelijk/maatregelen)."
   },
   "gemeente_index": {
     "selecteer_titel": "Select your municipality",
@@ -2308,7 +2308,7 @@
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of the Netherlands",
       "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on 17 March. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).",
-      "belangrijk_bericht": "There remains a national lockdown until at least 30 March. Click here to view [the lockdown measures](https://coronadashboard.government.nl/landelijk/maatregelen)."
+      "belangrijk_bericht": "There remains a national lockdown until at least 30 March. [The lockdown measures apply throughout the whole country](https://coronadashboard.government.nl/landelijk/maatregelen)."
     },
     "data_sitemap_titel": "Topics on this dashboard",
     "data_sitemap_toelichting": "Go directly to the following topics:",
