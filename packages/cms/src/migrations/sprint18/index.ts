@@ -10,6 +10,9 @@ import client from 'part:@sanity/base/client';
  * This migration can be run by executing the following command from the packages/cms directory:
  * sanity exec src/migrations/sprint18 --with-user-token
  *
+ * to run the migration against the production dataset, prefix the command like this:
+ * SANITY_STUDIO_API_DATASET=production sanity exec src/migrations/sprint18 --with-user-token
+ *
  * (Don't forget to run 'sanity login' first and choose the 'Google' option to login with)
  */
 
