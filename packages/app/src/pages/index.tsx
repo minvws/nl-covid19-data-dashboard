@@ -29,6 +29,7 @@ import { TopicalChoroplethContainer } from '~/domain/topical/topical-choropleth-
 import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
 import { TopicalVaccineTile } from '~/domain/topical/topical-vaccine-tile';
+import { GNumberBarChartTile } from '~/domain/behavior/g-number-bar-chart-tile';
 import { topicalPageQuery } from '~/queries/topical-page-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
@@ -123,6 +124,8 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
               message={siteText.regionaal_index.belangrijk_bericht}
               variant="emphasis"
             />
+
+            <GNumberBarChartTile />
 
             <MiniTrendTileLayout id="metric-navigation">
               <MiniTrendTile
