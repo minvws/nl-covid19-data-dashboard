@@ -770,7 +770,13 @@
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -2109,7 +2115,11 @@
     "expected_page_additions": {
       "title": "Expected data on vaccinations",
       "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
-      "additions": ["", "", ""]
+      "additions": [
+        "",
+        "",
+        ""
+      ]
     },
     "data": {
       "difference": "",
@@ -2234,7 +2244,11 @@
       "kpi_expected_page_additions": {
         "title": "Expected data on vaccinations",
         "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
-        "additions": ["", "", ""]
+        "additions": [
+          "",
+          "",
+          ""
+        ]
       },
       "vaccination_chart": {
         "product_names": {
@@ -2256,7 +2270,7 @@
         "legend_label": "Number of {{name}} doses administered",
         "doses_administered": "Number of doses administered",
         "doses_administered_estimated": "Expected number of doses administered",
-        "doses_administered_total": "Total"
+        "doses_administered_total": ""
       }
     },
     "current_amount_of_administrations_text": "So far approximately {{amount}} vaccine doses have been administered.",
@@ -2282,11 +2296,11 @@
       }
     },
     "bereidheid_section": {
-      "title": "",
-      "description": "",
+      "title": "Willingness to be vaccinated",
+      "description": "Coronavirus vaccination is not obligatory. But if everyone does get vaccinated, the virus will no longer be able to spread. It is therefore vital to know how many people are prepared to be vaccinated. Every three weeks, the National Institute for Public Health and the Environment (RIVM) conducts a survey to establish how many people want to be vaccinated.",
       "reference": {
-        "href": "",
-        "text": ""
+        "href": "/verantwoording#willingness-to-be-vaccinated",
+        "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
       }
     },
     "stock_and_delivery_section": {
@@ -2679,7 +2693,7 @@
         "toelichting": "This is the risk level that currently applies in this region. The risk level is reassessed every 2 weeks based on the number of hospital admissions and the number of positive tests (new confirmed cases) at that time."
       }
     },
-    "escalation_level_last_determined": "This risk level has been determined on {{last_determined}}, based on the figures from 8 to 14 March. The risk level will be reassessed around 30 March."
+    "escalation_level_last_determined": "This risk level has been determined on {{last_determined}}, based on the figures from {{based_from}} to {{based_to}}. The risk level will be reassessed around {{next_determined}}."
   },
   "gemeente_sterfte": {
     "titel_sidebar": "Deaths",
@@ -2746,11 +2760,11 @@
     "waarschuwingen_over_tijd_grafiek": {
       "title": "",
       "description": "",
-      "ariaDescription" : "",
+      "ariaDescription": "",
       "bronnen": {
         "coronamelder": {
           "download": "",
-          "text": "CoronaMelder",
+          "text": "",
           "href": ""
         }
       },
