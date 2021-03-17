@@ -38,6 +38,7 @@ export function ChartContainer({
     <svg
       width={width}
       height={height}
+      viewBox={`0 0 ${width} ${height}`}
       role="img"
       aria-labelledby={ariaLabelledBy}
       style={{ touchAction: 'pan-y' }}
