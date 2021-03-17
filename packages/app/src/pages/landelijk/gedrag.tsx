@@ -183,23 +183,32 @@ const BehaviorPage: FCWithLayout<typeof getStaticProps> = ({
 
         <ChartTileWithTimeframe
           metadata={{
-            source: corona_melder_app.linechart.bronnen.coronamelder,
+            source:
+              corona_melder_app.waarschuwingen_over_tijd_grafiek.bronnen
+                .coronamelder,
           }}
-          title={corona_melder_app.linechart.title}
-          description={corona_melder_app.linechart.description}
+          title={corona_melder_app.waarschuwingen_over_tijd_grafiek.title}
+          description={
+            corona_melder_app.waarschuwingen_over_tijd_grafiek.description
+          }
         >
           {(timeframe) => (
             <TimeSeriesChart
-              title={corona_melder_app.linechart.title}
+              title={corona_melder_app.waarschuwingen_over_tijd_grafiek.title}
               timeframe={timeframe}
               values={data.corona_melder_app.values}
-              ariaLabelledBy={corona_melder_app.linechart.ariaDescription}
+              ariaLabelledBy={
+                corona_melder_app.waarschuwingen_over_tijd_grafiek
+                  .ariaDescription
+              }
               paddingLeft={40}
               seriesConfig={[
                 {
                   type: 'area',
                   metricProperty: 'warned_daily',
-                  label: corona_melder_app.linechart.labels.warnings,
+                  label:
+                    corona_melder_app.waarschuwingen_over_tijd_grafiek.labels
+                      .warnings,
                   color: colors.data.primary,
                 },
               ]}
