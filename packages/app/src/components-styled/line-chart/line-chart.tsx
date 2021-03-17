@@ -12,7 +12,7 @@ import { ScaleTime } from 'd3-scale';
 import { useCallback, useMemo, useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
-import { Legenda, LegendItem, LegendShape } from '~/components-styled/legenda';
+import { Legend, LegendItem, LegendShape } from '~/components-styled/legend';
 import {
   ChartAxes,
   ChartPadding,
@@ -33,9 +33,6 @@ import { TimeframeOption } from '~/utils/timeframe';
 import { HoverPoint, Marker, Tooltip, Trend } from './components';
 import { calculateYMax, getTrendData, TrendValue } from './logic';
 
-const dateToValue = (d: Date) => d.valueOf() / 1000;
-const formatXAxis = (date: Date) =>
-  formatDateFromSeconds(dateToValue(date), 'axis');
 const formatYAxisFn = (y: number) => formatNumber(y);
 const formatYAxisPercentageFn = (y: number) => `${formatPercentage(y)}%`;
 
@@ -334,7 +331,6 @@ export function LineChart<T extends TimestampedValue>({
               ? formatYAxisPercentageFn
               : formatYAxisFn
           }
-          formatXAxis={formatXAxis}
           onHover={handleHover}
           benchmark={benchmark}
           componentCallback={componentCallback}
@@ -380,7 +376,7 @@ export function LineChart<T extends TimestampedValue>({
 
         {showLegend && legendItems && (
           <Box pl={`${padding.left}px`}>
-            <Legenda items={legendItems} />
+            <Legend items={legendItems} />
           </Box>
         )}
       </Box>

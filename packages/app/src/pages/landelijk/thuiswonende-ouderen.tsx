@@ -5,6 +5,8 @@ import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { addBackgroundRectangleCallback } from '~/components-styled/line-chart/logic';
+import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
@@ -12,16 +14,18 @@ import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createRegionElderlyAtHomeTooltip } from '~/components/choropleth/tooltips/region/create-region-elderly-at-home-tooltip';
-import { SEOHead } from '~/components-styled/seo-head';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
+import { UnderReportedTooltip } from '~/domain/underreported/under-reported-tooltip';
 import siteText from '~/locale/index';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
-  getNlData,
   getLastGeneratedDate,
+  getNlData,
 } from '~/static-props/get-data';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import { colors } from '~/style/theme';
+import { getTrailingDateRange } from '~/utils/get-trailing-date-range';
 
 const text = siteText.thuiswonende_ouderen;
 const graphDescriptions = siteText.accessibility.grafieken;
@@ -40,6 +44,15 @@ const ElderlyAtHomeNationalPage: FCWithLayout<typeof getStaticProps> = ({
 }) => {
   const router = useRouter();
   const elderlyAtHomeData = data.elderly_at_home;
+
+  const elderlyAtHomeInfectedUnderReportedRange = getTrailingDateRange(
+    elderlyAtHomeData.values,
+    4
+  );
+  const elderlyAtHomeDeceasedUnderReportedRange = getTrailingDateRange(
+    elderlyAtHomeData.values,
+    7
+  );
 
   return (
     <>
@@ -111,6 +124,39 @@ const ElderlyAtHomeNationalPage: FCWithLayout<typeof getStaticProps> = ({
             },
           ]}
           metadata={{ source: text.section_positive_tested.bronnen.rivm }}
+          formatTooltip={(values) => {
+            const value = values[0];
+            const isInaccurateValue =
+              value.__date >= elderlyAtHomeInfectedUnderReportedRange[0];
+
+            return (
+              <UnderReportedTooltip
+                value={value}
+                isInUnderReportedRange={isInaccurateValue}
+                underReportedText={siteText.common.incomplete}
+              />
+            );
+          }}
+          componentCallback={addBackgroundRectangleCallback(
+            elderlyAtHomeInfectedUnderReportedRange,
+            {
+              fill: colors.data.underReported,
+            }
+          )}
+          legendItems={[
+            {
+              color: colors.data.primary,
+              label: text.section_positive_tested.line_chart_legend_trend_label,
+              shape: 'line',
+            },
+            {
+              color: colors.data.underReported,
+              label:
+                text.section_positive_tested.line_chart_legend_inaccurate_label,
+              shape: 'square',
+            },
+          ]}
+          showLegend
         />
 
         <ChoroplethTile
@@ -182,6 +228,38 @@ const ElderlyAtHomeNationalPage: FCWithLayout<typeof getStaticProps> = ({
             },
           ]}
           metadata={{ source: text.section_positive_tested.bronnen.rivm }}
+          componentCallback={addBackgroundRectangleCallback(
+            elderlyAtHomeDeceasedUnderReportedRange,
+            {
+              fill: colors.data.underReported,
+            }
+          )}
+          formatTooltip={(values) => {
+            const value = values[0];
+            const isInaccurateValue =
+              value.__date >= elderlyAtHomeDeceasedUnderReportedRange[0];
+
+            return (
+              <UnderReportedTooltip
+                value={value}
+                isInUnderReportedRange={isInaccurateValue}
+                underReportedText={siteText.common.incomplete}
+              />
+            );
+          }}
+          legendItems={[
+            {
+              color: colors.data.primary,
+              label: text.section_deceased.line_chart_legend_trend_label,
+              shape: 'line',
+            },
+            {
+              color: colors.data.underReported,
+              label: text.section_deceased.line_chart_legend_inaccurate_label,
+              shape: 'square',
+            },
+          ]}
+          showLegend
         />
       </TileList>
     </>

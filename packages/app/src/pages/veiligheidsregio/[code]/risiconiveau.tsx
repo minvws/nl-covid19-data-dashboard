@@ -126,6 +126,15 @@ const RegionalRestrictions: FCWithLayout<typeof getStaticProps> = (props) => {
                   last_determined: formatDateFromSeconds(
                     data.escalation_level.last_determined_unix
                   ),
+                  based_from: formatDateFromSeconds(
+                    data.escalation_level.based_on_statistics_from_unix
+                  ),
+                  based_to: formatDateFromSeconds(
+                    data.escalation_level.based_on_statistics_to_unix
+                  ),
+                  next_determined: formatDateFromSeconds(
+                    data.escalation_level.next_determined_unix
+                  ),
                 })}
               </Text>
             </Box>

@@ -9,7 +9,7 @@ import { TCombinedChartDimensions } from './hooks/use-chart-dimensions';
 import { Path } from './path';
 import { Tooltip } from './tooltips/tooltip-container';
 import { countryGeo } from './topology';
-import { useUniqueId } from '~/utils/useUniqueId';
+import { useUniqueId } from '~/utils/use-unique-id';
 import { colors } from '~/style/theme';
 
 export type TooltipSettings = {

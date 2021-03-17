@@ -7,6 +7,8 @@ import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { addBackgroundRectangleCallback } from '~/components-styled/line-chart/logic';
+import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
@@ -14,16 +16,18 @@ import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createDisablityInfectedLocationsRegionalTooltip } from '~/components/choropleth/tooltips/region/create-disability-infected-locations-regional-tooltip';
-import { SEOHead } from '~/components-styled/seo-head';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
+import { UnderReportedTooltip } from '~/domain/underreported/under-reported-tooltip';
 import siteText from '~/locale/index';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
-  getNlData,
   getLastGeneratedDate,
+  getNlData,
 } from '~/static-props/get-data';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import { colors } from '~/style/theme';
+import { getTrailingDateRange } from '~/utils/get-trailing-date-range';
 
 const infectedLocationsText = siteText.gehandicaptenzorg_besmette_locaties;
 const positiveTestedPeopleText =
@@ -43,6 +47,7 @@ const DisabilityCare: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data, choropleth } = props;
   const lastValue = data.disability_care.last_value;
   const values = data.disability_care.values;
+  const underReportedValues = getTrailingDateRange(values, 7);
 
   const router = useRouter();
 
@@ -99,6 +104,38 @@ const DisabilityCare: FCWithLayout<typeof getStaticProps> = (props) => {
               metricProperty: 'newly_infected_people',
             },
           ]}
+          formatTooltip={(values) => {
+            const value = values[0];
+            const isInaccurateValue = value.__date >= underReportedValues[0];
+
+            return (
+              <UnderReportedTooltip
+                value={value}
+                isInUnderReportedRange={isInaccurateValue}
+                underReportedText={siteText.common.incomplete}
+              />
+            );
+          }}
+          componentCallback={addBackgroundRectangleCallback(
+            underReportedValues,
+            {
+              fill: colors.data.underReported,
+            }
+          )}
+          legendItems={[
+            {
+              color: colors.data.primary,
+              label: positiveTestedPeopleText.line_chart_legend_trend_label,
+              shape: 'line',
+            },
+            {
+              color: colors.data.underReported,
+              label:
+                positiveTestedPeopleText.line_chart_legend_inaccurate_label,
+              shape: 'square',
+            },
+          ]}
+          showLegend
         />
 
         <ContentHeader
@@ -231,6 +268,38 @@ const DisabilityCare: FCWithLayout<typeof getStaticProps> = (props) => {
               metricProperty: 'deceased_daily',
             },
           ]}
+          formatTooltip={(values) => {
+            const value = values[0];
+            const isInaccurateValue = value.__date >= underReportedValues[0];
+
+            return (
+              <UnderReportedTooltip
+                value={value}
+                isInUnderReportedRange={isInaccurateValue}
+                underReportedText={siteText.common.incomplete}
+              />
+            );
+          }}
+          componentCallback={addBackgroundRectangleCallback(
+            underReportedValues,
+            {
+              fill: colors.data.underReported,
+            }
+          )}
+          legendItems={[
+            {
+              color: colors.data.primary,
+              label: positiveTestedPeopleText.line_chart_legend_trend_label,
+              shape: 'line',
+            },
+            {
+              color: colors.data.underReported,
+              label:
+                positiveTestedPeopleText.line_chart_legend_inaccurate_label,
+              shape: 'square',
+            },
+          ]}
+          showLegend
         />
       </TileList>
     </>

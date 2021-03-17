@@ -1,8 +1,10 @@
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import ExperimenteelIcon from '~/assets/experimenteel.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
+import { RegionControlOption } from '~/components-styled/chart-region-controls';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
@@ -13,9 +15,12 @@ import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
 import { WarningTile } from '~/components-styled/warning-tile';
+import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
+import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
+import { createSewerMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-sewer-regional-tooltip';
 import { createSewerRegionalTooltip } from '~/components/choropleth/tooltips/region/create-sewer-regional-tooltip';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
@@ -36,6 +41,7 @@ export const getStaticProps = createGetStaticProps(
   getText,
   createGetChoroplethData({
     vr: ({ sewer }) => ({ sewer }),
+    gm: ({ sewer }) => ({ sewer }),
   }),
   createGetContent<{
     articles?: ArticleSummary[];
@@ -52,6 +58,9 @@ const SewerWater: FCWithLayout<typeof getStaticProps> = ({
   const graphDescriptions = siteText.accessibility.grafieken;
   const sewerAverages = data.sewer;
   const router = useRouter();
+  const [selectedMap, setSelectedMap] = useState<RegionControlOption>(
+    'municipal'
+  );
 
   return (
     <>
@@ -161,22 +170,38 @@ const SewerWater: FCWithLayout<typeof getStaticProps> = ({
             ],
             source: text.bronnen.rivm,
           }}
+          onChartRegionChange={setSelectedMap}
+          chartRegion={selectedMap}
           legend={{
             title: text.legenda_titel,
             thresholds: regionThresholds.sewer.average,
           }}
         >
-          <SafetyRegionChoropleth
-            data={choropleth.vr}
-            metricName="sewer"
-            metricProperty="average"
-            tooltipContent={createSewerRegionalTooltip(
-              siteText.choropleth_tooltip.sewer_regional,
-              regionThresholds.sewer.average,
-              createSelectRegionHandler(router, 'rioolwater')
-            )}
-            onSelect={createSelectRegionHandler(router, 'rioolwater')}
-          />
+          {selectedMap === 'municipal' ? (
+            <MunicipalityChoropleth
+              data={choropleth.gm}
+              metricName="sewer"
+              metricProperty="average"
+              tooltipContent={createSewerMunicipalTooltip(
+                siteText.choropleth_tooltip.sewer_regional,
+                regionThresholds.sewer.average,
+                createSelectMunicipalHandler(router, 'rioolwater')
+              )}
+              onSelect={createSelectMunicipalHandler(router, 'rioolwater')}
+            />
+          ) : (
+            <SafetyRegionChoropleth
+              data={choropleth.vr}
+              metricName="sewer"
+              metricProperty="average"
+              tooltipContent={createSewerRegionalTooltip(
+                siteText.choropleth_tooltip.sewer_regional,
+                regionThresholds.sewer.average,
+                createSelectRegionHandler(router, 'rioolwater')
+              )}
+              onSelect={createSelectRegionHandler(router, 'rioolwater')}
+            />
+          )}
         </ChoroplethTile>
       </TileList>
     </>

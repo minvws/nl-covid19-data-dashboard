@@ -6,6 +6,7 @@
     "target": "es5",
     "allowJs": false,
     "noEmit": true,
+    "downlevelIteration": true,
     "baseUrl": ".",
     "paths": {
       "~/*": ["src/*"]

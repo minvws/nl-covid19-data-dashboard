@@ -2,7 +2,6 @@ import { getLastFilledValue } from '@corona-dashboard/common';
 import Arts from '~/assets/arts.svg';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
-import { Box } from '~/components-styled/base';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
@@ -15,6 +14,7 @@ import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
+import { UnderReportedTooltip } from '~/domain/underreported/under-reported-tooltip';
 import siteText from '~/locale/index';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
@@ -25,9 +25,10 @@ import {
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { createDate } from '~/utils/createDate';
-import { formatDateFromSeconds } from '~/utils/formatDate';
-import { formatNumber } from '~/utils/formatNumber';
-import { DateRange } from '~/utils/get-trailing-date-range';
+import {
+  DateRange,
+  getTrailingDateRange,
+} from '~/utils/get-trailing-date-range';
 
 const text = siteText.ic_opnames_per_dag;
 const graphDescriptions = siteText.accessibility.grafieken;
@@ -46,6 +47,8 @@ const IntakeIntensiveCare: FCWithLayout<typeof getStaticProps> = (props) => {
   const dataIntake = data.intensive_care_nice;
 
   const bedsLastValue = getLastFilledValue(data.intensive_care_lcps);
+
+  const intakeUnderReportedRange = getTrailingDateRange(dataIntake.values, 4);
 
   const lcpsOldDataRange = [
     createDate(data.intensive_care_lcps.values[0].date_unix),
@@ -128,6 +131,37 @@ const IntakeIntensiveCare: FCWithLayout<typeof getStaticProps> = (props) => {
           ]}
           signaalwaarde={10}
           metadata={{ source: text.bronnen.nice }}
+          formatTooltip={(values) => {
+            const value = values[0];
+            return (
+              <UnderReportedTooltip
+                value={value}
+                isInUnderReportedRange={
+                  value.__date >= intakeUnderReportedRange[0]
+                }
+                underReportedText={siteText.common.incomplete}
+              />
+            );
+          }}
+          componentCallback={addBackgroundRectangleCallback(
+            intakeUnderReportedRange,
+            {
+              fill: colors.data.underReported,
+            }
+          )}
+          legendItems={[
+            {
+              color: colors.data.primary,
+              label: text.linechart_legend_trend_label,
+              shape: 'line',
+            },
+            {
+              color: colors.data.underReported,
+              label: text.linechart_legend_inaccurate_label,
+              shape: 'square',
+            },
+          ]}
+          showLegend
         />
 
         <LineChartTile
@@ -145,24 +179,13 @@ const IntakeIntensiveCare: FCWithLayout<typeof getStaticProps> = (props) => {
           })}
           formatTooltip={(values) => {
             const value = values[0];
-            const isInaccurateValue = value.__date < lcpsOldDataRange[1];
 
             return (
-              <>
-                <Box display="flex" alignItems="center" flexDirection="column">
-                  {isInaccurateValue && (
-                    <Text as="span" fontSize={0} color={colors.annotation}>
-                      ({siteText.common.incomplete})
-                    </Text>
-                  )}
-                  <Box>
-                    <Text as="span" fontWeight="bold">
-                      {`${formatDateFromSeconds(value.date_unix, 'medium')}: `}
-                    </Text>
-                    {formatNumber(value.__value)}
-                  </Box>
-                </Box>
-              </>
+              <UnderReportedTooltip
+                value={value}
+                isInUnderReportedRange={value.__date < lcpsOldDataRange[1]}
+                underReportedText={siteText.common.incomplete}
+              />
             );
           }}
           legendItems={[

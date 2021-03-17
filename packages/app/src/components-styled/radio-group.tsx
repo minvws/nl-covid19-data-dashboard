@@ -2,7 +2,7 @@ import { css } from '@styled-system/css';
 import { Fragment, useState } from 'react';
 import styled from 'styled-components';
 import { asResponsiveArray } from '~/style/utils';
-import { useUniqueId } from '~/utils/useUniqueId';
+import { useUniqueId } from '~/utils/use-unique-id';
 import { Box } from './base';
 interface RadioGroupItem<T extends string> {
   label: string;

@@ -63,7 +63,6 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
   const router = useRouter();
 
   const lastValue = data.tested_overall.last_value;
-
   const ggdAverageLastValue = data.tested_ggd_average.last_value;
   const ggdDailyValues = data.tested_ggd_daily.values;
 
@@ -266,7 +265,10 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
           <KpiTile
             title={ggdText.totaal_getest_week_titel}
             metadata={{
-              date: ggdAverageLastValue.date_end_unix,
+              date: [
+                ggdAverageLastValue.date_start_unix,
+                ggdAverageLastValue.date_end_unix,
+              ],
               source: ggdText.bronnen.rivm,
             }}
           >
@@ -279,7 +281,10 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
           <KpiTile
             title={ggdText.positief_getest_week_titel}
             metadata={{
-              date: ggdAverageLastValue.date_end_unix,
+              date: [
+                ggdAverageLastValue.date_start_unix,
+                ggdAverageLastValue.date_end_unix,
+              ],
               source: ggdText.bronnen.rivm,
             }}
           >
@@ -355,7 +360,11 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
             source: ggdText.bronnen.rivm,
           }}
           formatTooltip={(x) => {
-            const percentage = (x[1].__value * 100) / x[0].__value;
+            const numerator = x[0].__value;
+            const denominator = x[1].__value;
+
+            const percentage =
+              numerator === 0 ? 0 : (denominator * 100) / numerator;
 
             return (
               <>
@@ -370,7 +379,7 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
                     display: 'inline-block',
                   }}
                 />{' '}
-                {formatNumber(x[0].__value)}
+                {formatNumber(numerator)}
                 <br />
                 <span
                   style={{
@@ -381,7 +390,7 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
                     display: 'inline-block',
                   }}
                 />{' '}
-                {formatNumber(x[1].__value)} ({formatPercentage(percentage)}%)
+                {formatNumber(denominator)} ({formatPercentage(percentage)}%)
               </>
             );
           }}
