@@ -2286,7 +2286,6 @@
       "title": "Iedere {{seconds}} seconden krijgt iemand een prik",
       "description": "Dit is een schatting. Deze schatting is gemaakt met het gemiddelde van {{amount}} prikken per dag tussen 8.00 en 20.00 uur in de afgelopen zeven dagen."
     },
-<<<<<<< HEAD
     "bereidheid_section": {
       "title": "Vaccinatiebereidheid",
       "description": "Vaccinatiebereidheid",
@@ -2301,13 +2300,13 @@
       "reference": {
         "href": "/",
         "text": "Voorraad & Levering"
-=======
+      }
+    },
     "more_information": {
       "label": "Meer informatie en nieuws over vaccinaties kunt u vinden op",
       "link": {
         "href": "https://www.coronavaccinatie.nl/",
         "text": "coronavaccinatie.nl"
->>>>>>> 3d0af6c83462056e0ca74e6e73a3294baf30d20b
       }
     }
   },
