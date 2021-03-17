@@ -46,6 +46,8 @@ function formatVaccinationsTooltip(
     );
   }
 
+  console.dir(values);
+
   const dateEndString = formatDateFromSeconds(data.date_end_unix, 'day-month');
 
   return (
@@ -104,10 +106,10 @@ function formatLabel(labelKey: string | undefined, text: AllLanguages) {
 
 function formatValue(value: HoverPoint<TooltipValue>) {
   const data: any = value.data;
-  if (data.total) {
-    return formatNumber(data.total);
+  if (data[value.label as string]) {
+    return formatNumber(data[value.label as string]);
   }
-  return formatNumber(data[value.label as string]);
+  return formatNumber(data.total);
 }
 
 const TooltipList = styled.ol`
