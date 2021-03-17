@@ -1,6 +1,5 @@
 import {
   formatNumber,
-  isDateSpanValue,
   NlVaccineAdministeredEstimateValue,
   NlVaccineAdministeredValue,
   NlVaccineDeliveryEstimateValue,
@@ -10,6 +9,7 @@ import { Fragment } from 'react';
 import styled from 'styled-components';
 import { HoverPoint } from '~/components-styled/area-chart/components/marker';
 import { TimestampedTrendValue } from '~/components-styled/area-chart/logic';
+import { Spacer } from '~/components-styled/base';
 import { InlineText, Text } from '~/components-styled/typography';
 import { AllLanguages } from '~/locale/APP_LOCALE';
 import { formatDateFromSeconds } from '~/utils/formatDate';
@@ -22,13 +22,7 @@ export type TooltipValue = (
 ) &
   TimestampedTrendValue;
 
-export function createDeliveryTooltipFormatter(text: AllLanguages) {
-  return (values: HoverPoint<TooltipValue>[]) => {
-    return formatVaccinationsTooltip(values, text);
-  };
-}
-
-function formatVaccinationsTooltip(
+export function formatVaccinationsTooltip(
   values: HoverPoint<TooltipValue>[],
   text: AllLanguages
 ) {
@@ -36,15 +30,11 @@ function formatVaccinationsTooltip(
     return null;
   }
 
-  const data = values[0].data;
-
-  if (!isDateSpanValue(data)) {
-    throw new Error(
-      `Invalid value passed to format tooltip function: ${JSON.stringify(
-        values
-      )}`
-    );
-  }
+  /**
+   * The values with administered data are index >= 1. These kind of things will
+   * be solved later when converting to TimeSeriesChart.
+   */
+  const data = values[1].data;
 
   const dateEndString = formatDateFromSeconds(data.date_end_unix, 'day-month');
 
@@ -90,6 +80,13 @@ function formatVaccinationsTooltip(
             )}
           </Fragment>
         ))}
+        <Spacer mb={1} />
+        <TooltipListItem color="transparent">
+          <TooltipValueContainer>
+            {text.vaccinaties.data.vaccination_chart.doses_administered_total}:{' '}
+            <strong>{formatNumber(data.total)}</strong>
+          </TooltipValueContainer>
+        </TooltipListItem>
       </TooltipList>
     </>
   );

@@ -25,7 +25,7 @@ import { InlineText, Text } from '~/components-styled/typography';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
 import { VaccineSupportTooltip } from '~/domain/vaccine/components/vaccine-support-tooltip';
-import { createDeliveryTooltipFormatter } from '~/domain/vaccine/create-delivery-tooltip-formatter';
+import { formatVaccinationsTooltip } from '~/domain/vaccine/create-delivery-tooltip-formatter';
 import {
   MilestonesView,
   MilestoneViewProps,
@@ -257,7 +257,9 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                     valueAnnotation={siteText.waarde_annotaties.x_miljoen}
                     width={width}
                     timeframe="all"
-                    formatTooltip={createDeliveryTooltipFormatter(siteText)}
+                    formatTooltip={(values) =>
+                      formatVaccinationsTooltip(values, siteText)
+                    }
                     divider={{
                       color: colors.annotation,
                       leftLabel: text.data.vaccination_chart.left_divider_label,
