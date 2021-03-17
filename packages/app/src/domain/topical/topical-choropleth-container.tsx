@@ -1,5 +1,6 @@
 import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
+import { isEmpty } from 'lodash';
 import { ReactNode } from 'react';
 import { Box } from '~/components-styled/base';
 import { ChoroplethLegenda } from '~/components-styled/choropleth-legenda';
@@ -49,7 +50,7 @@ export function TopicalChoroplethContainer({
       pr={{ md: '50%' }}
       minHeight={{ md: '620px' }}
     >
-      {message && (
+      {message && !isEmpty(message) && (
         <Box mb={3}>
           <WarningTile message={message} variant="emphasis" />
         </Box>

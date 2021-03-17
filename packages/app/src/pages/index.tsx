@@ -12,7 +12,6 @@ import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
 import { Heading } from '~/components-styled/typography';
 import { VisuallyHidden } from '~/components-styled/visually-hidden';
-import { WarningTile } from '~/components-styled/warning-tile';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
@@ -114,11 +113,6 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
             <Box width={{ lg: '65%' }}>
               <Search />
             </Box>
-
-            <WarningTile
-              message={siteText.regionaal_index.belangrijk_bericht}
-              variant="emphasis"
-            />
 
             <MiniTrendTileLayout>
               <MiniTrendTile
