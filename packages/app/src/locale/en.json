@@ -2759,8 +2759,8 @@
     },
     "waarschuwingen_over_tijd_grafiek": {
       "title": "Warnings over time",
-      "description": "",
-      "ariaDescription": "",
+      "description": "This graph shows how many users with a confirmed case of COVID-19 have informed other users of CoronaMelder of this.",
+      "ariaDescription": "This graph shows how many users with a confirmed case of COVID-19 have informed other users of CoronaMelder of this.",
       "bronnen": {
         "coronamelder": {
           "download": "",
@@ -2769,7 +2769,7 @@
         }
       },
       "labels": {
-        "warnings": "warnings"
+        "warnings": "Number of warnings"
       }
     }
   },
