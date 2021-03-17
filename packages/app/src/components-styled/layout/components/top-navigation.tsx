@@ -22,7 +22,7 @@ export function TopNavigation() {
   const isSmallScreen = !breakpoints.md;
   const [panelHeight, setPanelHeight] = useState(0);
   const navMenu = useRef<HTMLDivElement>(null);
-  const navWrapperTransition = useRef('none');
+  const [navWrapperTransition, setNavWrapperTransition] = useState('none');
 
   const isMounted = useIsMounted();
 
@@ -36,12 +36,13 @@ export function TopNavigation() {
   }, [isSmallScreen]);
 
   useEffect(() => {
-    if (!isMenuOpen && isMounted && navWrapperTransition.current === 'none') {
+    if (!isMenuOpen && isMounted && navWrapperTransition === 'none') {
       // Set the transistion after the panel has been closd to prevent possible flickering for the user
-      window.requestAnimationFrame(() => {
-        navWrapperTransition.current =
-          'max-height 0.4s ease-in-out, opacity 0.4s ease-in-out';
-      });
+      window.requestAnimationFrame(() =>
+        setNavWrapperTransition(
+          'max-height 0.4s ease-in-out, opacity 0.4s ease-in-out'
+        )
+      );
     }
   }, [isMenuOpen, isMounted, navWrapperTransition]);
 
@@ -84,7 +85,7 @@ export function TopNavigation() {
             md: 'auto',
           }),
           transition: asResponsiveArray({
-            _: navWrapperTransition.current,
+            _: navWrapperTransition,
             md: 'none',
           }),
         })}
