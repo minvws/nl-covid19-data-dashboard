@@ -310,7 +310,6 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                       },
                       {
                         label: text.data.vaccination_chart.legend.expected,
-                        color: 'black',
                         shape: 'custom',
                         shapeComponent: <HatchedSquare />,
                       },

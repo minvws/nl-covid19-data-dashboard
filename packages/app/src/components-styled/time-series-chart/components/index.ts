@@ -7,5 +7,6 @@ export * from './line-trend';
 export * from './overlay';
 export * from './point-markers';
 export * from './range-trend';
-export * from './tooltip';
+export * from './series-icon';
 export * from './timespan-annotation';
+export * from './tooltip';

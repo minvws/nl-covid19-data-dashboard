@@ -5,7 +5,6 @@ import {
 import styled from 'styled-components';
 import { Spacer } from '~/components-styled/base';
 import { SeriesConfig } from '~/components-styled/time-series-chart';
-import { Heading } from '~/components-styled/typography';
 import { VisuallyHidden } from '~/components-styled/visually-hidden';
 import { Locale } from '~/locale';
 import { formatDateFromSeconds } from '~/utils/formatDate';
@@ -26,9 +25,6 @@ export function VaccineSupportTooltip({
 
   return (
     <section>
-      <Heading level={5} mb={1}>
-        {text.grafiek_draagvlak.titel}
-      </Heading>
       <VisuallyHidden>{`${dateStartString} - ${dateEndString}`}</VisuallyHidden>
       <TooltipList>
         {[...config].reverse().map((x) => {

@@ -1842,8 +1842,11 @@
     "deceased_monitor_chart_title": "Total number of deaths per week",
     "deceased_monitor_chart_description": "This graph shows the total number of deaths per week. The actual number of deaths is compared to the number of deaths predicted based on the figures from preceding years. The light blue line, drawn within its range of uncertainty, shows the number of deaths predicted over the year. The dark blue line shows the number of actual deaths.",
     "deceased_monitor_chart_legenda_registered": "Actual mortality",
+    "deceased_monitor_chart_legenda_registered_short": "Actual",
     "deceased_monitor_chart_legenda_expected": "Predicted mortality",
-    "deceased_monitor_chart_legenda_expected_margin": "Range of predicted mortality"
+    "deceased_monitor_chart_legenda_expected_short": "Predicted",
+    "deceased_monitor_chart_legenda_expected_margin": "Range of predicted mortality",
+    "deceased_monitor_chart_legenda_expected_margin_short": "Range of predicted"
   },
   "nationaal_maatregelen": {
     "titel": "Measures",

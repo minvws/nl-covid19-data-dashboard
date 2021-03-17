@@ -1,4 +1,5 @@
 import { TimestampedValue } from '@corona-dashboard/common';
+import css from '@styled-system/css';
 import { useTooltip } from '@visx/tooltip';
 import { useCallback, useEffect, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
@@ -7,6 +8,7 @@ import { Box } from '~/components-styled/base';
 import { Legend } from '~/components-styled/legend';
 import { TimeframeOption } from '~/utils/timeframe';
 import { useElementSize } from '~/utils/use-element-size';
+import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { ValueAnnotation } from '../value-annotation';
 import {
   Axes,
@@ -88,7 +90,7 @@ export type TimeSeriesChartProps<
   T extends TimestampedValue,
   C extends SeriesConfig<T>
 > = {
-  title: string; // Used for default tooltip formatting
+  title?: string; // Used for default tooltip formatting
   values: T[];
   seriesConfig: C;
   ariaLabelledBy: string;
@@ -118,7 +120,7 @@ export type TimeSeriesChartProps<
    */
   dataOptions?: DataOptions;
   disableLegend?: boolean;
-  onSeriesClick?: (serieConfig: C[number], value: T) => void;
+  onSeriesClick?: (seriesConfig: C[number], value: T) => void;
 
   /**
    * By default markers for all series are displayed on hover, also the tooltip
@@ -262,6 +264,8 @@ export function TimeSeriesChart<
     markNearestPointOnly,
   ]);
 
+  useOnClickOutside([sizeRef], () => tooltipData && hideTooltip());
+
   const handleClick = useCallback(() => {
     if (onSeriesClick && tooltipData) {
       onSeriesClick(seriesConfig[tooltipData.configIndex], tooltipData.value);
@@ -274,7 +278,7 @@ export function TimeSeriesChart<
         <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
       )}
 
-      <Box position="relative">
+      <Box position="relative" css={css({ userSelect: 'none' })}>
         <ChartContainer
           width={width}
           height={height}
@@ -300,6 +304,7 @@ export function TimeSeriesChart<
                 start={x.start}
                 end={x.end}
                 color={x.color}
+                fillOpacity={x.fillOpacity}
                 domain={xScale.domain() as [number, number]}
                 getX={getX}
                 height={bounds.height}
@@ -319,7 +324,6 @@ export function TimeSeriesChart<
           <Series
             seriesConfig={seriesConfig}
             seriesList={seriesList}
-            onHover={handleHover}
             getX={getX}
             getY={getY}
             getY0={getY0}
@@ -338,14 +342,17 @@ export function TimeSeriesChart<
           )}
         </ChartContainer>
 
-        <Tooltip
-          title={title}
-          data={tooltipData}
-          left={tooltipLeft}
-          top={tooltipTop}
-          isOpen={tooltipOpen}
-          formatTooltip={formatTooltip}
-        />
+        {tooltipOpen && tooltipData && (
+          <Tooltip
+            title={title}
+            data={tooltipData}
+            left={tooltipLeft}
+            top={tooltipTop}
+            formatTooltip={formatTooltip}
+            bounds={bounds}
+            padding={padding}
+          />
+        )}
 
         {hoverState && (
           <Overlay bounds={bounds} padding={padding}>
@@ -364,7 +371,7 @@ export function TimeSeriesChart<
         )}
       </Box>
 
-      {!disableLegend && legendItems && (
+      {!disableLegend && legendItems.length > 0 && (
         <Box pl={paddingLeft}>
           <Legend items={legendItems} />
         </Box>

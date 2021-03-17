@@ -45,18 +45,22 @@ export function DeceasedMonitorSection({
               metricPropertyLow: 'expected_min',
               metricPropertyHigh: 'expected_max',
               label: text.deceased_monitor_chart_legenda_expected_margin,
+              shortLabel:
+                text.deceased_monitor_chart_legenda_expected_margin_short,
               color: colors.data.margin,
             },
             {
               type: 'line',
               metricProperty: 'expected',
               label: text.deceased_monitor_chart_legenda_expected,
+              shortLabel: text.deceased_monitor_chart_legenda_expected_short,
               color: colors.data.primary,
             },
             {
               type: 'line',
               metricProperty: 'registered',
               label: text.deceased_monitor_chart_legenda_registered,
+              shortLabel: text.deceased_monitor_chart_legenda_registered_short,
               color: colors.data.secondary,
               strokeWidth: 4,
             },
