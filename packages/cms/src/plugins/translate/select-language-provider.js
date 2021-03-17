@@ -5,13 +5,15 @@ import { selectedLanguages$, setLangs } from './datastore';
 import SelectLanguage from './select-language';
 
 export default function SelectLanguageProvider() {
-  const [selected, setSelected] = useState('nl');
+  const [selected, setSelected] = useState(['nl']);
   const langSubscription = useRef();
   const document = useCurrentDocument();
 
   useEffect(() => {
     langSubscription.current = selectedLanguages$.subscribe((selected) => {
-      setSelected(selected);
+      if (selected?.length) {
+        setSelected(selected);
+      }
     });
     return () => {
       langSubscription.current.unsubscribe();
