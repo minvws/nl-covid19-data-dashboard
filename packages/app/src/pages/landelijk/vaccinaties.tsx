@@ -12,6 +12,7 @@ import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
 import { ChartTile } from '~/components-styled/chart-tile';
+import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { Legend } from '~/components-styled/legend';
@@ -46,6 +47,13 @@ import { colors } from '~/style/theme';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import VaccinatiesIcon from '~/assets/vaccinaties.svg';
+
+const scaledVaccineIcon = (
+  <Box p={2}>
+    <VaccinatiesIcon />
+  </Box>
+);
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -310,7 +318,6 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                       },
                       {
                         label: text.data.vaccination_chart.legend.expected,
-                        color: 'black',
                         shape: 'custom',
                         shapeComponent: <HatchedSquare />,
                       },
@@ -342,6 +349,20 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
           expectedMilestones={milestones.expectedMilestones}
         />
 
+        <ContentHeader
+          title={text.bereidheid_section.title}
+          subtitle={text.bereidheid_section.description}
+          reference={text.bereidheid_section.reference}
+          icon={scaledVaccineIcon}
+          metadata={{
+            datumsText: text.datums,
+            dateOrRange: data.vaccine_support.last_value.date_of_insertion_unix,
+            dateOfInsertionUnix:
+              data.vaccine_support.last_value.date_of_insertion_unix,
+            dataSources: [],
+          }}
+        />
+
         <ChartTile
           title={text.grafiek_draagvlak.titel}
           description={text.grafiek_draagvlak.omschrijving}
@@ -360,79 +381,88 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             <Text mt={0}>{text.grafiek_draagvlak.kpi_omschrijving}</Text>
           </section>
 
-          <ParentSize>
-            {({ width }) => (
-              <TimeSeriesChart
-                title={text.grafiek_draagvlak.titel}
-                width={width}
-                ariaLabelledBy="chart_vaccine_support"
-                values={data.vaccine_support.values}
-                showDateMarker
-                numGridLines={20}
-                tickValues={[0, 25, 50, 75, 100]}
-                dataOptions={{
-                  isPercentage: true,
-                  forcedMaximumValue: 100,
-                }}
-                seriesConfig={[
-                  {
-                    type: 'line',
-                    metricProperty: 'percentage_16_24',
-                    label: replaceVariablesInText(
-                      text.grafiek_draagvlak.leeftijd_jaar,
-                      { ageGroup: '16 - 24' }
-                    ),
-                    color: '#005082',
-                  },
-                  {
-                    type: 'line',
-                    metricProperty: 'percentage_25_39',
-                    label: replaceVariablesInText(
-                      text.grafiek_draagvlak.leeftijd_jaar,
-                      { ageGroup: '25 - 39' }
-                    ),
-                    color: '#00BBB5',
-                  },
-                  {
-                    type: 'line',
-                    metricProperty: 'percentage_40_54',
-                    label: replaceVariablesInText(
-                      text.grafiek_draagvlak.leeftijd_jaar,
-                      { ageGroup: '40 - 54' }
-                    ),
-                    color: '#FFC000',
-                  },
-                  {
-                    type: 'line',
-                    metricProperty: 'percentage_55_69',
-                    label: replaceVariablesInText(
-                      text.grafiek_draagvlak.leeftijd_jaar,
-                      { ageGroup: '55 - 69' }
-                    ),
-                    color: '#E28700',
-                  },
-                  {
-                    type: 'line',
-                    metricProperty: 'percentage_70_plus',
-                    label: replaceVariablesInText(
-                      text.grafiek_draagvlak.leeftijd_jaar,
-                      { ageGroup: '70+' }
-                    ),
-                    color: '#C252D4',
-                  },
-                ]}
-                formatTooltip={({ value, valueKey, config }) => (
-                  <VaccineSupportTooltip
-                    locale={siteText}
-                    value={value}
-                    valueKey={valueKey}
-                    config={config}
-                  />
-                )}
+          <TimeSeriesChart
+            title={text.grafiek_draagvlak.titel}
+            ariaLabelledBy="chart_vaccine_support"
+            values={data.vaccine_support.values}
+            numGridLines={20}
+            tickValues={[0, 25, 50, 75, 100]}
+            dataOptions={{
+              isPercentage: true,
+              forcedMaximumValue: 100,
+            }}
+            seriesConfig={[
+              {
+                type: 'line',
+                metricProperty: 'percentage_16_24',
+                label: replaceVariablesInText(
+                  text.grafiek_draagvlak.leeftijd_jaar,
+                  { ageGroup: '16 - 24' }
+                ),
+                color: '#005082',
+              },
+              {
+                type: 'line',
+                metricProperty: 'percentage_25_39',
+                label: replaceVariablesInText(
+                  text.grafiek_draagvlak.leeftijd_jaar,
+                  { ageGroup: '25 - 39' }
+                ),
+                color: '#00BBB5',
+              },
+              {
+                type: 'line',
+                metricProperty: 'percentage_40_54',
+                label: replaceVariablesInText(
+                  text.grafiek_draagvlak.leeftijd_jaar,
+                  { ageGroup: '40 - 54' }
+                ),
+                color: '#FFC000',
+              },
+              {
+                type: 'line',
+                metricProperty: 'percentage_55_69',
+                label: replaceVariablesInText(
+                  text.grafiek_draagvlak.leeftijd_jaar,
+                  { ageGroup: '55 - 69' }
+                ),
+                color: '#E28700',
+              },
+              {
+                type: 'line',
+                metricProperty: 'percentage_70_plus',
+                label: replaceVariablesInText(
+                  text.grafiek_draagvlak.leeftijd_jaar,
+                  { ageGroup: '70+' }
+                ),
+                color: '#C252D4',
+              },
+            ]}
+            formatTooltip={({ value, config }) => (
+              <VaccineSupportTooltip
+                locale={siteText}
+                value={value}
+                config={config}
               />
             )}
-          </ParentSize>
+          />
         </ChartTile>
+
+        {/*
+        @TODO enable when content is available
+        <ContentHeader
+          title={text.stock_and_delivery_section.title}
+          icon={scaledVaccineIcon}
+          subtitle={text.stock_and_delivery_section.description}
+          reference={text.stock_and_delivery_section.reference}
+          metadata={{
+            datumsText: text.datums,
+            dateOrRange: 0 // TODO replace dates for correct source,
+            dateOfInsertionUnix: 0 // TODO replace dates for correct source,
+            dataSources: [],
+          }}
+        />
+        */}
 
         <TwoKpiSection>
           <KpiTile title={text.expected_page_additions.title}>

@@ -251,6 +251,12 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                   />
                 </Box>
                 <Box>
+                  <Box mb={3}>
+                    <WarningTile
+                      message={text.risiconiveaus.belangrijk_bericht}
+                      variant="emphasis"
+                    />
+                  </Box>
                   <div
                     dangerouslySetInnerHTML={{
                       __html: replaceVariablesInText(

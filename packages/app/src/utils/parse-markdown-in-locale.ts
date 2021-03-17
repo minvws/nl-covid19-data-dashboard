@@ -19,6 +19,7 @@ const MARKDOWN_KEYS = [
   'veiligheidsregio_positief_geteste_personen.kpi_toelichting',
   'gemeente_positief_geteste_personen.kpi_toelichting',
   'nationaal_actueel.risiconiveaus.selecteer_toelichting',
+  'nationaal_actueel.risiconiveaus.belangrijk_bericht',
   'veiligheidsregio_actueel.risiconiveaus.selecteer_toelichting',
   'gemeente_actueel.risiconiveaus.selecteer_toelichting',
   'vaccinaties.gezette_prikken.tab_first.description',

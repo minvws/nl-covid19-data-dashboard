@@ -3,7 +3,7 @@ import { Bounds, Padding } from './common';
 
 const defaultPadding: Padding = {
   top: 10,
-  right: 20,
+  right: 0,
   bottom: 30,
   left: 30,
 };

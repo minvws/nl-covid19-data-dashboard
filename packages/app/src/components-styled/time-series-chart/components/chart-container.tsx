@@ -19,7 +19,11 @@ interface ChartContainerProps {
   padding: Padding;
   valueAnnotation?: string;
   ariaLabelledBy: string;
+  onHover: (event: Event) => void;
+  onClick: (event: Event) => void;
 }
+
+type Event = React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>;
 
 export function ChartContainer({
   width,
@@ -27,6 +31,8 @@ export function ChartContainer({
   padding,
   ariaLabelledBy,
   children,
+  onHover,
+  onClick,
 }: ChartContainerProps) {
   return (
     <svg
@@ -35,6 +41,11 @@ export function ChartContainer({
       role="img"
       aria-labelledby={ariaLabelledBy}
       style={{ touchAction: 'pan-y' }}
+      onTouchStart={onHover}
+      onTouchMove={onHover}
+      onMouseMove={onHover}
+      onMouseLeave={onHover}
+      onClick={onClick}
     >
       <Group left={padding.left} top={padding.top}>
         {children}
