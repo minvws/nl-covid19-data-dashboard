@@ -1,7 +1,10 @@
+import groupBy from 'lodash/groupBy';
 import Head from 'next/head';
+import { Box } from '~/components-styled/base';
 import { RichContent } from '~/components-styled/cms/rich-content';
 import { CollapsibleSection } from '~/components-styled/collapsible';
 import { MaxWidth } from '~/components-styled/max-width';
+import { Heading } from '~/components-styled/typography';
 import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import siteText, { targetLanguage } from '~/locale/index';
 import { createGetStaticProps } from '~/static-props/create-get-static-props';
@@ -9,14 +12,12 @@ import {
   createGetContent,
   getLastGeneratedDate,
 } from '~/static-props/get-data';
-import { CollapsibleList, RichContentBlock } from '~/types/cms';
+import { FAQuestionAndAnswer, RichContentBlock } from '~/types/cms';
 import { getSkipLinkId } from '~/utils/skipLinks';
-import styles from './over.module.scss';
-import { Box } from '~/components-styled/base';
 interface VeelgesteldeVragenData {
   title: string | null;
   description: RichContentBlock[] | null;
-  questions: CollapsibleList[];
+  questions: FAQuestionAndAnswer[];
 }
 
 const query = `*[_type == 'veelgesteldeVragen']{
@@ -35,7 +36,7 @@ const query = `*[_type == 'veelgesteldeVragen']{
     ...questions[]
     {
       ...,
-                
+      "group": group->group.${targetLanguage},
       "content": {
         ...content,
         "${targetLanguage}": [...content.${targetLanguage}[]
@@ -58,6 +59,11 @@ export const getStaticProps = createGetStaticProps(
 const Verantwoording: FCWithLayout<typeof getStaticProps> = (props) => {
   const { content } = props;
 
+  const groups = groupBy<FAQuestionAndAnswer>(
+    content.questions,
+    (x) => x.group
+  );
+
   return (
     <>
       <Head>
@@ -74,16 +80,19 @@ const Verantwoording: FCWithLayout<typeof getStaticProps> = (props) => {
         />
       </Head>
 
-      <div className={styles.container}>
+      <Box fontSize={2} bg={'white'} pt={6} pb={4}>
         <MaxWidth>
-          <div className={styles.maxwidth}>
-            {content.title && <h2>{content.title}</h2>}
+          <Box maxWidth="39em" margin="auto" mt={0} px={{ _: 4, md: 0 }}>
+            {content.title && <Heading level={1}>{content.title}</Heading>}
             {content.description && (
               <RichContent blocks={content.description} />
             )}
-            {content.questions && (
-              <article>
-                {content.questions.map((item) => {
+            {Object.entries(groups).map(([group, questions]) => (
+              <Box as="article" mt={5} key={group}>
+                <Heading level={2} fontSize={3}>
+                  {group}
+                </Heading>
+                {questions.map((item) => {
                   const id = getSkipLinkId(item.title);
                   return (
                     <CollapsibleSection key={id} id={id} summary={item.title}>
@@ -95,11 +104,11 @@ const Verantwoording: FCWithLayout<typeof getStaticProps> = (props) => {
                     </CollapsibleSection>
                   );
                 })}
-              </article>
-            )}
-          </div>
+              </Box>
+            ))}
+          </Box>
         </MaxWidth>
-      </div>
+      </Box>
     </>
   );
 };

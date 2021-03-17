@@ -73,9 +73,9 @@ export function useScales<T extends TimestampedValue>(args: {
       xScale,
       yScale,
       getX: (x: SeriesItem) => xScale(x.__date_unix),
-      getY: (x: SeriesSingleValue) => yScale(x.__value),
-      getY0: (x: SeriesDoubleValue) => yScale(x.__value_a),
-      getY1: (x: SeriesDoubleValue) => yScale(x.__value_b),
+      getY: (x: SeriesSingleValue) => yScale(x.__value ?? NaN),
+      getY0: (x: SeriesDoubleValue) => yScale(x.__value_a ?? NaN),
+      getY1: (x: SeriesDoubleValue) => yScale(x.__value_b ?? NaN),
       dateSpanWidth: getDateSpanWidth(values, xScale),
     };
 
