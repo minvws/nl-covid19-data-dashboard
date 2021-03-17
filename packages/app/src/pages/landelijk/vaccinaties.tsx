@@ -12,6 +12,7 @@ import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
 import { ChartTile } from '~/components-styled/chart-tile';
+import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { Legend } from '~/components-styled/legend';
@@ -46,6 +47,13 @@ import { colors } from '~/style/theme';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import VaccinatiesIcon from '~/assets/vaccinaties.svg';
+
+const scaledVaccineIcon = (
+  <Box p={2}>
+    <VaccinatiesIcon />
+  </Box>
+);
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -341,6 +349,20 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
           expectedMilestones={milestones.expectedMilestones}
         />
 
+        <ContentHeader
+          title={text.bereidheid_section.title}
+          subtitle={text.bereidheid_section.description}
+          reference={text.bereidheid_section.reference}
+          icon={scaledVaccineIcon}
+          metadata={{
+            datumsText: text.datums,
+            dateOrRange: data.vaccine_support.last_value.date_of_insertion_unix,
+            dateOfInsertionUnix:
+              data.vaccine_support.last_value.date_of_insertion_unix,
+            dataSources: [],
+          }}
+        />
+
         <ChartTile
           title={text.grafiek_draagvlak.titel}
           description={text.grafiek_draagvlak.omschrijving}
@@ -425,6 +447,22 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             )}
           />
         </ChartTile>
+
+        {/*
+        @TODO enable when content is available
+        <ContentHeader
+          title={text.stock_and_delivery_section.title}
+          icon={scaledVaccineIcon}
+          subtitle={text.stock_and_delivery_section.description}
+          reference={text.stock_and_delivery_section.reference}
+          metadata={{
+            datumsText: text.datums,
+            dateOrRange: 0 // TODO replace dates for correct source,
+            dateOfInsertionUnix: 0 // TODO replace dates for correct source,
+            dataSources: [],
+          }}
+        />
+        */}
 
         <TwoKpiSection>
           <KpiTile title={text.expected_page_additions.title}>

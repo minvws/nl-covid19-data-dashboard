@@ -2286,6 +2286,22 @@
       "title": "One person is vaccinated every {{seconds}} seconds",
       "description": "This is an estimate. The estimated figure is based on an average of {{amount}} doses per day between 08.00 and 20.00 over the past seven days."
     },
+    "bereidheid_section": {
+      "title": "Vaccinatiebereidheid",
+      "description": "Vaccinatiebereidheid",
+      "reference": {
+        "href": "/",
+        "text": "Vaccinatiebereidheid"
+      }
+    },
+    "stock_and_delivery_section": {
+      "title": "Voorraad & Levering",
+      "description": "Voorraad & Levering",
+      "reference": {
+        "href": "/",
+        "text": "Voorraad & Levering"
+      }
+    },
     "more_information": {
       "label": "Read more about the",
       "link": {
