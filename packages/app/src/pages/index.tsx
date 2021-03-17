@@ -52,6 +52,7 @@ import {
   getNlData,
   getText,
 } from '~/static-props/get-data';
+import { createDate } from '~/utils/createDate';
 import { formatDate } from '~/utils/formatDate';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
@@ -262,8 +263,10 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                         text.risiconiveaus.selecteer_toelichting,
                         {
                           last_update: formatDate(
-                            choropleth.vr.escalation_levels[0]
-                              .date_of_insertion_unix,
+                            createDate(
+                              choropleth.vr.escalation_levels[0]
+                                .last_determined_unix
+                            ),
                             'day-month'
                           ),
                         }

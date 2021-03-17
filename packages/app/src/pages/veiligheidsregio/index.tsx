@@ -17,6 +17,7 @@ import {
   getLastGeneratedDate,
   getText,
 } from '~/static-props/get-data';
+import { createDate } from '~/utils/createDate';
 import { formatDate } from '~/utils/formatDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { useBreakpoints } from '~/utils/useBreakpoints';
@@ -72,7 +73,10 @@ const SafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
                     text.veiligheidsregio_index.selecteer_toelichting,
                     {
                       last_update: formatDate(
-                        choropleth.vr.escalation_levels[0].last_determined_unix,
+                        createDate(
+                          choropleth.vr.escalation_levels[0]
+                            .last_determined_unix
+                        ),
                         'day-month'
                       ),
                     }
