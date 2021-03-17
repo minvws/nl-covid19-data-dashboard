@@ -1,6 +1,3 @@
-# Ignore everything
-*
-
-# Allowlist
-!packages/app/*.conf
-!exports
+node_modules
+.github
+packages/app/node_modules
