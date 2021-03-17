@@ -4,6 +4,7 @@ import { ReactNode } from 'react';
 import { Box } from '~/components-styled/base';
 import { ChoroplethLegenda } from '~/components-styled/choropleth-legenda';
 import { Text } from '~/components-styled/typography';
+import { WarningTile } from '~/components-styled/warning-tile';
 import { asResponsiveArray } from '~/style/utils';
 
 /**
@@ -24,6 +25,7 @@ interface TopicalChoroplethContainerProps extends DataProps {
     thresholds: ChoroplethThresholdsValue[];
   };
   legendComponent?: ReactNode;
+  message?: string;
 }
 
 export function TopicalChoroplethContainer({
@@ -31,6 +33,7 @@ export function TopicalChoroplethContainer({
   legend,
   legendComponent,
   children,
+  message,
 }: TopicalChoroplethContainerProps) {
   const legendaComponent =
     (legend && (
@@ -46,6 +49,12 @@ export function TopicalChoroplethContainer({
       pr={{ md: '50%' }}
       minHeight={{ md: '620px' }}
     >
+      {message && (
+        <Box mb={3}>
+          <WarningTile message={message} variant="emphasis" />
+        </Box>
+      )}
+
       <Box
         p={{ _: 0, lg: 4 }}
         width={{ md: '45%' }}
