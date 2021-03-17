@@ -83,6 +83,9 @@ const SafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
                 data={choropleth.vr}
                 metricName="escalation_levels"
                 metricProperty="level"
+                lastDetermined={
+                  choropleth.vr.escalation_levels[0].last_determined_unix
+                }
               />
             </>
           }

@@ -1036,7 +1036,8 @@
       "titel": "Legend",
       "geen_regio": "no regions",
       "regio_singular": "{{amount}} region",
-      "regio_plural": "{{amount}} regions"
+      "regio_plural": "{{amount}} regions",
+      "determined_on": "Determined on {{date}}"
     },
     "valid_from": "Valid from {{validFrom}}",
     "sidebar_label": "Risk level:",
@@ -2337,7 +2338,14 @@
         }
       },
       "risicokaart": {
-        "titel": "Risk level map of the Netherlands"
+        "titel": "Risk level map of the Netherlands",
+        "link": {
+          "text": "View the risk levels of all regions",
+          "href": "/veiligheidsregio"
+        }
+      },
+      "positief_getest_kaart": {
+        "titel": "Positively tested people in the Netherlands"
       },
       "meer_lezen": {
         "titel": "More information about the coronavirus",

@@ -1036,7 +1036,8 @@
       "titel": "Legenda",
       "geen_regio": "geen regio's",
       "regio_singular": "{{amount}} regio",
-      "regio_plural": "{{amount}} regio's"
+      "regio_plural": "{{amount}} regio's",
+      "determined_on": "Laatste inschaling: {{date}}"
     },
     "valid_from": "Geldig vanaf {{validFrom}}",
     "sidebar_label": "Risiconiveau:",
@@ -2337,7 +2338,14 @@
         }
       },
       "risicokaart": {
-        "titel": "De risicokaart van Nederland"
+        "titel": "De risicokaart van Nederland",
+        "link": {
+          "text": "Bekijk de risiconiveaus van alle regio's",
+          "href": "/veiligheidsregio"
+        }
+      },
+      "positief_getest_kaart": {
+        "titel": "Positief geteste mensen in Nederland"
       },
       "meer_lezen": {
         "titel": "Meer lezen over het coronavirus",
