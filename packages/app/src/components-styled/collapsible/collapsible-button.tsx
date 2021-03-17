@@ -40,7 +40,7 @@ export const CollapsibleButton = ({
           css={css({ display: 'flex', justifyContent: 'center' })}
         >
           <DisclosureButton>
-            {label} {buttonHeight} {contentHeight}
+            {label}
             <Chevron open={isOpen} />
           </DisclosureButton>
         </div>
