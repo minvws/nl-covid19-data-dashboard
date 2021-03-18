@@ -1,6 +1,6 @@
 import css from '@styled-system/css';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Close from '~/assets/close.svg';
 import Menu from '~/assets/menu.svg';
@@ -11,44 +11,24 @@ import theme from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { useBreakpoints } from '~/utils/useBreakpoints';
-import { useIsMounted } from '~/utils/use-is-mounted';
+import useResizeObserver from 'use-resize-observer';
 
 export function TopNavigation() {
   const router = useRouter();
 
   const [isMenuOpen, setIsMenuOpen] = useState(true);
-  const [needsMobileMenuLink, setNeedsMobileMenuLink] = useState(false);
   const breakpoints = useBreakpoints(true);
   const isSmallScreen = !breakpoints.md;
-  const [panelHeight, setPanelHeight] = useState(0);
-  const navMenu = useRef<HTMLDivElement>(null);
-  const [navWrapperTransition, setNavWrapperTransition] = useState('none');
+  const { ref: contentRef, height: contentHeight = 0 } = useResizeObserver();
+  // const [navWrapperTransition, setNavWrapperTransition] = useState('none');
 
-  const isMounted = useIsMounted();
+  // const isMounted = useIsMounted();
+
+  const height = (isMenuOpen ? contentHeight : '0px') || undefined;
 
   useEffect(() => {
-    // Menu is opened by default as fallback: JS opens it
     setIsMenuOpen(false);
-    setPanelHeight(0);
-
-    // Workaround to get the mobile menu opened when linking to a sub-page.
-    setNeedsMobileMenuLink(isSmallScreen);
-  }, [isSmallScreen]);
-
-  useEffect(() => {
-    if (!isMenuOpen && isMounted && navWrapperTransition === 'none') {
-      // Set the transistion after the panel has been closd to prevent possible flickering for the user
-      window.requestAnimationFrame(() =>
-        setNavWrapperTransition(
-          'max-height 0.4s ease-in-out, opacity 0.4s ease-in-out'
-        )
-      );
-    }
-  }, [isMenuOpen, isMounted, navWrapperTransition]);
-
-  useEffect(() => {
-    setPanelHeight(isMenuOpen ? 1000 : 0);
-  }, [isMenuOpen]);
+  }, []);
 
   function toggleMenu() {
     setIsMenuOpen(!isMenuOpen);
@@ -73,22 +53,8 @@ export function TopNavigation() {
         id="main-navigation"
         role="navigation"
         aria-label={text.aria_labels.pagina_keuze}
-        ref={navMenu}
-        css={css({
-          maxHeight: asResponsiveArray({
-            _: isMounted ? `${panelHeight}px` : '100%',
-            md: '100%',
-          }),
-          opacity: asResponsiveArray({ _: isMenuOpen ? 1 : 0, md: 1 }),
-          pointerEvents: asResponsiveArray({
-            _: isMenuOpen ? 'auto' : 'none',
-            md: 'auto',
-          }),
-          transition: asResponsiveArray({
-            _: navWrapperTransition,
-            md: 'none',
-          }),
-        })}
+        ref={contentRef}
+        style={{ height }}
       >
         <MaxWidth>
           <NavList>
@@ -163,6 +129,8 @@ const NavWrapper = styled.nav(
     width: '100%',
     borderTopWidth: '1px',
     p: 0,
+    transition: 'height 0.4s ease-in-out, opacity 0.4s ease-in-out',
+    overflow: 'hidden',
     [`@media ${theme.mediaQueries.md}`]: {
       display: 'inline',
       width: 'auto',
