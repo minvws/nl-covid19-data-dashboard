@@ -29,7 +29,6 @@
     "tested_overall",
     "tested_per_age_group",
     "vaccine_support",
-    "vaccine_coverage",
     "vaccine_delivery",
     "vaccine_delivery_estimate",
     "vaccine_delivery_estimate_time_span",

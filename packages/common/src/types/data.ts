@@ -151,7 +151,7 @@ export interface National {
   elderly_at_home: NationalElderlyAtHome;
   vaccine_support: NlVaccineSupport;
   corona_melder_app: NlCoronaMelderApp;
-  vaccine_coverage: NlVaccineCoverage;
+  vaccine_coverage?: NlVaccineCoverage;
   vaccine_delivery: NlVaccineDelivery;
   vaccine_delivery_estimate: NlVaccineEstimateDelivery;
   vaccine_delivery_estimate_time_span: NlVaccineDeliveryEstimateTimeSpan;
