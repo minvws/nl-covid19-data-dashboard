@@ -196,30 +196,11 @@ export function VerticalBarChart<T extends TimestampedValue>({
             yAxisRef={yAxisRef}
           />
 
-          <Bar
-            /**
-             * The Bar captures all mouse movements outside of trend elements.
-             * The Trend components * are rendered op top (in DOM) so that they
-             * can have their own hover state and handlers. Trend hover handlers
-             * also have the advantage that we don't need to do nearest point
-             * calculation on that event, because we already know the trend
-             * index in the handler.
-             */
-            x={0}
-            y={0}
-            width={bounds.width}
-            height={bounds.height}
-            fill="transparent"
-            onTouchStart={handleHover}
-            onTouchMove={handleHover}
-            onMouseMove={handleHover}
-            onMouseLeave={handleHover}
-          />
-
           <BarTrend
             key={0}
             series={series}
             color={config.color}
+            secondaryColor={config.secondaryColor}
             getX={getX}
             getY={getY}
             barWidth={xScale.bandwidth()}

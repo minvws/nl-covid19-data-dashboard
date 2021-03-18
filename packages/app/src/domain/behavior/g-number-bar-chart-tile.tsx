@@ -111,6 +111,7 @@ export function GNumberBarChartTile({
               type: 'bar',
               metricProperty: 'g_number',
               color: '#005082',
+              secondaryColor: 'red',
               label: 'lineee',
             }}
             formatTooltip={({ value }) =>

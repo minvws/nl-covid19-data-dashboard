@@ -8,6 +8,7 @@ import { SeriesItem, SeriesSingleValue } from '../logic';
 type BarTrendProps = {
   series: SeriesSingleValue[];
   color: string;
+  secondaryColor?: string;
   getX: (v: SeriesItem) => number;
   getY: (v: SeriesSingleValue) => number;
   yScale: PositionScale;
@@ -18,6 +19,7 @@ type BarTrendProps = {
 export function BarTrend({
   series,
   color,
+  secondaryColor = color,
   getX,
   getY,
   yScale,
@@ -43,7 +45,7 @@ export function BarTrend({
     <Group>
       {series.map((value, index) => {
         const barId = `bar-${index}`;
-        const fillColor = color;
+        const fillColor = value.__value > 0 ? color : secondaryColor;
 
         const { x, y, height } = getRectPosition(value);
         return (

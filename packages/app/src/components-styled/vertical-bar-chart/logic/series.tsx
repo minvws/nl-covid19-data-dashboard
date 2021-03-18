@@ -7,6 +7,7 @@ export type BarSeriesDefinition<T extends TimestampedValue> = {
   metricProperty: keyof T;
   label: string;
   color: string;
+  secondaryColor?: string;
   style?: 'solid' | 'striped';
 };
 
