@@ -41,7 +41,7 @@ const PointMarker = styled.div<MarkerProps>`
     transform: translate(-5%, -50%);
     border-radius: 50%;
     background: ${(props) => props.color};
-    opacity: 0.2;
+    opacity: 0.4;
   }
 `;
 

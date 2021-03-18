@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { map, publishReplay, refCount, startWith, tap } from 'rxjs/operators';
 import config from './config.js';
 
-const onSelect$ = new BehaviorSubject();
+const onSelect$ = new BehaviorSubject(['nl']);
 
 export const setLangs = (langs) => onSelect$.next(langs);
 

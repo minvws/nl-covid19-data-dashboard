@@ -80,7 +80,7 @@ const Verantwoording: FCWithLayout<typeof getStaticProps> = (props) => {
         />
       </Head>
 
-      <Box fontSize={2} bg={'white'} pt={6} pb={4}>
+      <Box fontSize={2} bg={'white'} pt={5} pb={4}>
         <MaxWidth>
           <Box maxWidth="39em" margin="auto" mt={0} px={{ _: 4, md: 0 }}>
             {content.title && <Heading level={1}>{content.title}</Heading>}
@@ -88,7 +88,7 @@ const Verantwoording: FCWithLayout<typeof getStaticProps> = (props) => {
               <RichContent blocks={content.description} />
             )}
             {Object.entries(groups).map(([group, questions]) => (
-              <Box as="article" mt={5} key={group}>
+              <Box as="article" mt={4} key={group}>
                 <Heading level={2} fontSize={3}>
                   {group}
                 </Heading>

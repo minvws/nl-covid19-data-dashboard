@@ -6,6 +6,7 @@
  * layouts by forking this component.
  */
 import { formatNumber, formatPercentage } from '@corona-dashboard/common';
+import css from '@styled-system/css';
 import { AxisBottom, AxisLeft } from '@visx/axis';
 import { GridRows } from '@visx/grid';
 import { ScaleLinear } from 'd3-scale';
@@ -34,6 +35,7 @@ type AxesProps = {
    */
   yAxisRef: Ref<SVGGElement>;
   yTickValues?: number[];
+  xTickValues: [number, number];
 };
 
 const formatYAxis = (y: number) => formatNumber(y);
@@ -45,12 +47,13 @@ export const Axes = memo(function Axes({
   numGridLines,
   bounds,
   isPercentage,
-  yTickValues,
   xScale,
   yScale,
+  yTickValues,
+  xTickValues,
   yAxisRef,
 }: AxesProps) {
-  const [startUnix, endUnix] = xScale.domain();
+  const [startUnix, endUnix] = xTickValues;
 
   const formatXAxis = useCallback(
     (date_unix: number) => {
@@ -67,7 +70,7 @@ export const Axes = memo(function Axes({
   );
 
   return (
-    <>
+    <g css={css({ pointerEvents: 'none' })}>
       <GridRows
         /**
          * Lighter gray grid lines are used for the lines that have no label on
@@ -91,7 +94,7 @@ export const Axes = memo(function Axes({
       />
       <AxisBottom
         scale={xScale}
-        tickValues={xScale.domain()}
+        tickValues={xTickValues}
         tickFormat={formatXAxis as AnyTickFormatter}
         top={bounds.height}
         stroke={colors.silver}
@@ -128,6 +131,6 @@ export const Axes = memo(function Axes({
           })}
         />
       </g>
-    </>
+    </g>
   );
 });

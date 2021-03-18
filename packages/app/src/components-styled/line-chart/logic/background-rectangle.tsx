@@ -39,7 +39,7 @@ export function addBackgroundRectangleCallback(
          */
         const dateRangeClipped = [
           new Date(Math.max(rectangleStartMs, displayedStartMs)),
-          new Date(Math.max(rectangleEndMs, displayedEndMs)),
+          new Date(Math.min(rectangleEndMs, displayedEndMs)),
         ] as DateRange;
 
         return createBackgroundRectangle(

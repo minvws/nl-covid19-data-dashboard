@@ -2,6 +2,8 @@ import { Bar } from '@visx/shape';
 import { colors } from '~/style/theme';
 import { GetX } from '../logic';
 
+const DEFAULT_FILL_OPACITY = 0.2;
+
 export function TimespanAnnotation({
   start,
   end,
@@ -9,13 +11,15 @@ export function TimespanAnnotation({
   getX,
   height,
   color = colors.data.underReported,
+  fillOpacity = DEFAULT_FILL_OPACITY,
 }: {
   start: number;
   end: number;
   domain: [number, number];
   height: number;
   getX: GetX;
-  color?: string;
+  color: string;
+  fillOpacity?: number;
 }) {
   const [min, max] = domain;
 
@@ -44,7 +48,35 @@ export function TimespanAnnotation({
       x={x0}
       width={width}
       fill={color}
-      opacity={0.2}
+      opacity={fillOpacity}
     />
+  );
+}
+
+interface TimespanAnnotationIconProps {
+  color: string;
+  fillOpacity?: number;
+  width?: number;
+  height?: number;
+}
+
+export function TimespanAnnotationIcon({
+  color,
+  fillOpacity = DEFAULT_FILL_OPACITY,
+  width = 15,
+  height = 15,
+}: TimespanAnnotationIconProps) {
+  return (
+    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
+      <rect
+        x={0}
+        y={0}
+        width={width}
+        height={height}
+        fill={color}
+        opacity={fillOpacity}
+        rx={2}
+      />
+    </svg>
   );
 }

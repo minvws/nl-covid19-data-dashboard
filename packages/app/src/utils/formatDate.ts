@@ -1,4 +1,5 @@
 import { isSameDay, isToday, isYesterday, subDays } from 'date-fns';
+import { isDefined } from 'ts-is-present';
 import siteText from '~/locale/index';
 import { getLocale } from '~/utils/getLocale';
 import { assert } from './assert';
@@ -22,10 +23,6 @@ if ('__setDefaultTimeZone' in Intl.DateTimeFormat) {
   (Intl.DateTimeFormat as any).__setDefaultTimeZone('Europe/Amsterdam');
 }
 
-function isDayBeforeYesterday(date: number | Date): boolean {
-  return isSameDay(date, subDays(Date.now(), 2));
-}
-
 const locale = getLocale();
 
 // TypeScript is missing some types for `Intl.DateTimeFormat`.
@@ -39,7 +36,6 @@ type formatStyle =
   | 'time'
   | 'long'
   | 'medium'
-  | 'relative'
   | 'iso'
   | 'axis'
   | 'axis-with-year'
@@ -89,10 +85,7 @@ const WeekdayMedium = new Intl.DateTimeFormat(locale, {
   timeZone: 'Europe/Amsterdam',
 } as DateTimeFormatOptions);
 
-export function formatDateFromSeconds(
-  seconds: number,
-  style?: formatStyle
-): string {
+export function formatDateFromSeconds(seconds: number, style?: formatStyle) {
   assert(!isNaN(seconds), 'seconds is NaN');
 
   /**
@@ -109,7 +102,7 @@ export function formatDateFromSeconds(
 export function formatDateFromMilliseconds(
   milliseconds: number,
   style?: formatStyle
-): string {
+) {
   assert(!isNaN(milliseconds), 'milliseconds is NaN');
 
   return formatDate(new Date(milliseconds), style);
@@ -165,19 +158,53 @@ function getFormattedDate(date: Date, style: formatStyle) {
     case 'weekday-medium':
       return WeekdayMedium.format(date);
 
-    case 'relative':
-      return typeof window === 'undefined'
-        ? DayMonth.format(date)
-        : isToday(date)
-        ? siteText.utils.date_today
-        : isYesterday(date)
-        ? siteText.utils.date_yesterday
-        : isDayBeforeYesterday(date)
-        ? siteText.utils.date_day_before_yesterday
-        : DayMonth.format(date);
-
     case 'day-month':
     default:
       return DayMonth.format(date);
   }
+}
+
+/**
+ * Returns one of `vandaag` | `gisteren` | `eergisteren`.
+ * If given date is more than 2 days ago it will return `undefined`.
+ */
+export function formatRelativeDate(input: DateInput) {
+  const date = getDate(input);
+
+  if (typeof window === 'undefined') {
+    throw new Error('formatRelativeDate cannot be called server-side');
+  }
+
+  return isToday(date)
+    ? siteText.utils.date_today
+    : isYesterday(date)
+    ? siteText.utils.date_yesterday
+    : isDayBeforeYesterday(date)
+    ? siteText.utils.date_day_before_yesterday
+    : undefined;
+}
+
+function isDayBeforeYesterday(date: Date) {
+  return isSameDay(date, subDays(Date.now(), 2));
+}
+
+type DateInput = { seconds: number } | { milliseconds: number };
+
+/**
+ * Utility to create a Date from seconds or milliseconds
+ * eg:
+ *
+ *     getDate({      seconds: 1616066567 })
+ *     getDate({ milliseconds: 1616066567880 })
+ */
+function getDate(input: DateInput) {
+  if ('seconds' in input && isDefined(input.seconds)) {
+    return new Date(input.seconds * 1000);
+  }
+
+  if ('milliseconds' in input && isDefined(input.milliseconds)) {
+    return new Date(input.milliseconds);
+  }
+
+  throw new Error(`Unknown date input: ${JSON.stringify(input)}`);
 }

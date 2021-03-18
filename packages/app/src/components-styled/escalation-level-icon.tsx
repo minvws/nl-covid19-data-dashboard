@@ -38,7 +38,7 @@ const StyledEscalationLevelIcon = styled.div<{
 }>(({ color, isSmall }) => {
   const size = isSmall
     ? asResponsiveArray({ _: 20, sm: 20 })
-    : asResponsiveArray({ _: 24, sm: 32 });
+    : asResponsiveArray({ _: 24, sm: 22 });
   return css({
     width: size,
     height: size,
@@ -48,7 +48,7 @@ const StyledEscalationLevelIcon = styled.div<{
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    fontSize: isSmall ? 14 : asResponsiveArray({ _: 14, sm: 20 }),
+    fontSize: isSmall ? 14 : asResponsiveArray({ _: 14, sm: 18 }),
     fontWeight: 'bold',
   });
 });
