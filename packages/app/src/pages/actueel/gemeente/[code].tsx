@@ -14,6 +14,7 @@ import { ChoroplethLegenda } from '~/components-styled/choropleth-legenda';
 import { CollapsibleButton } from '~/components-styled/collapsible';
 import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
+import { ExternalLink } from '~/components-styled/external-link';
 import { HighlightTeaserProps } from '~/components-styled/highlight-teaser';
 import { MaxWidth } from '~/components-styled/max-width';
 import { RiskLevelIndicator } from '~/components-styled/risk-level-indicator';
@@ -51,7 +52,7 @@ import {
   getText,
 } from '~/static-props/get-data';
 import { assert } from '~/utils/assert';
-import { formatDate } from '~/utils/formatDate';
+import { formatDate, formatDateFromSeconds } from '~/utils/formatDate';
 import { getSafetyRegionForMunicipalityCode } from '~/utils/getSafetyRegionForMunicipalityCode';
 import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
@@ -387,6 +388,26 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
                 </>
 
                 <Box>
+                  <Text mb={3} color="annotation" fontSize={1}>
+                    {replaceVariablesInText(siteText.common.metadata.date, {
+                      date: formatDateFromSeconds(
+                        choropleth.vr.tested_overall[0].date_unix,
+                        'weekday-medium'
+                      ),
+                    })}
+                    {` - ${siteText.common.metadata.source}: `}
+                    <ExternalLink
+                      ariaLabel={
+                        siteText.positief_geteste_personen.bronnen.rivm
+                          .aria_text
+                      }
+                      href={
+                        siteText.positief_geteste_personen.bronnen.rivm.href
+                      }
+                    >
+                      {siteText.positief_geteste_personen.bronnen.rivm.text}
+                    </ExternalLink>
+                  </Text>
                   <Text>
                     {siteText.positief_geteste_personen.map_toelichting}
                   </Text>
