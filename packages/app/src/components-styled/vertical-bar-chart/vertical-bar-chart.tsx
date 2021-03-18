@@ -5,34 +5,27 @@ import { useEffect, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import useResizeObserver from 'use-resize-observer';
 import { Box } from '~/components-styled/base';
-import { Legend } from '~/components-styled/legend';
 import { TimeframeOption } from '~/utils/timeframe';
 import { ValueAnnotation } from '../value-annotation';
 import {
   Axes,
   ChartContainer,
-  DateLineMarker,
-  DateSpanMarker,
-  Overlay,
-  PointMarkers,
-  TimespanAnnotation,
   Tooltip,
   TooltipData,
   TooltipFormatter,
-} from './../time-series-chart/components';
-import { Benchmark } from './../time-series-chart/components/benchmark';
-import { Series } from './../time-series-chart/components/series';
+} from '~/components-styled/time-series-chart/components';
+import { BarTrend } from '~/components-styled/time-series-chart/components/bar-trend';
 import {
-  calculateSeriesMaximum,
   DataOptions,
-  SeriesConfig,
-  useHoverState,
-  useLegendItems,
-  useScales,
-  useSeriesList,
   useValuesInTimeframe,
-} from './../time-series-chart/logic';
-import { useDimensions } from './../time-series-chart/logic/dimensions';
+} from '~/components-styled/time-series-chart/logic';
+import { useDimensions } from '~/components-styled/time-series-chart/logic/dimensions';
+import {
+  useSeries,
+  useCalculatedSeriesMaximum,
+  useScales,
+  BarSeriesDefinition,
+} from './logic';
 
 export type BarDefinition<T extends TimestampedValue> = {
   type: 'bar';
@@ -56,7 +49,7 @@ export type BarDefinition<T extends TimestampedValue> = {
 export type VerticalBarChartProps<T extends TimestampedValue> = {
   title: string; // Used for default tooltip formatting
   values: T[];
-  seriesConfig: SeriesConfig<T>;
+  config: BarSeriesDefinition<T>;
   width: number;
   ariaLabelledBy: string;
   height?: number;
@@ -84,7 +77,7 @@ export type VerticalBarChartProps<T extends TimestampedValue> = {
 
 export function VerticalBarChart<T extends TimestampedValue>({
   values: allValues,
-  seriesConfig,
+  config,
   width,
   height = 250,
   timeframe = 'all',
@@ -106,13 +99,7 @@ export function VerticalBarChart<T extends TimestampedValue>({
     tooltipOpen,
   } = useTooltip<TooltipData<T>>();
 
-  const {
-    valueAnnotation,
-    isPercentage,
-    forcedMaximumValue,
-    benchmark,
-    timespanAnnotations,
-  } = dataOptions || {};
+  const { isPercentage } = dataOptions || {};
 
   const {
     width: yAxisWidth = 0,
@@ -128,85 +115,70 @@ export function VerticalBarChart<T extends TimestampedValue>({
 
   const values = useValuesInTimeframe(allValues, timeframe);
 
-  const seriesList = useSeriesList(values, seriesConfig);
+  const series = useSeries(values, config);
 
-  /**
-   * The maximum is calculated over all values, because you don't want the
-   * y-axis scaling to change when toggling the timeframe setting.
-   */
-  const calculatedSeriesMax = useMemo(
-    () => calculateSeriesMaximum(allValues, seriesConfig, benchmark?.value),
-    [allValues, seriesConfig, benchmark]
-  );
+  const calculatedSeriesMax = useCalculatedSeriesMaximum(values, config);
 
-  const seriesMax = isDefined(forcedMaximumValue)
-    ? forcedMaximumValue
-    : calculatedSeriesMax;
-
-  const { xScale, yScale, getX, getY, getY0, getY1, dateSpanWidth } = useScales(
-    {
-      values,
-      maximumValue: seriesMax,
-      tickValues,
-      bounds,
-      numTicks: tickValues?.length || numGridLines,
-    }
-  );
-
-  const [handleHover, hoverState] = useHoverState({
+  const { xScale, yScale, getX, getY } = useScales({
     values,
-    paddingLeft: padding.left,
-    seriesConfig,
-    seriesList,
-    xScale,
-    yScale,
+    maximumValue: calculatedSeriesMax,
+    tickValues,
+    bounds,
+    numTicks: tickValues?.length || numGridLines,
   });
 
-  useEffect(() => {
-    if (hoverState) {
-      const {
-        nearestLinePoint: nearestPoint,
-        valuesIndex,
-        timespanAnnotationIndex,
-      } = hoverState;
+  // const [handleHover, hoverState] = useHoverState({
+  //   values,
+  //   paddingLeft: padding.left,
+  //   seriesConfig,
+  //   seriesList,
+  //   xScale,
+  //   yScale,
+  // });
 
-      // showTooltip({
-      //   tooltipData: {
-      //     /**
-      //      * The tooltip gets passed the original data value, plus the
-      //      * nearest/active hover property and the full series configuration.
-      //      * With these three arguments we should be able to render any sort of
-      //      * tooltip.
-      //      */
-      //     value: values[valuesIndex],
-      //     valueKey: nearestPoint.metricProperty as keyof T,
-      //     config: seriesConfig,
-      //     options: dataOptions || {},
-      //     /**
-      //      * Pass the full annotation data. We could just pass the index because
-      //      * dataOptions is already being passed, but it's cumbersome to have to
-      //      * dig up the annotation from the array in the tooltip logic.
-      //      */
-      //     timespanAnnotation:
-      //       dataOptions?.timespanAnnotations &&
-      //       isDefined(timespanAnnotationIndex)
-      //         ? dataOptions.timespanAnnotations[timespanAnnotationIndex]
-      //         : undefined,
-      //   },
-      //   tooltipLeft: nearestPoint.x,
-      //   tooltipTop: nearestPoint.y,
-      // });
-    } else {
-      hideTooltip();
-    }
-  }, [hoverState, seriesConfig, values, hideTooltip, showTooltip, dataOptions]);
+  const handleHover = (x) => console.log(x);
+
+  // useEffect(() => {
+  //   if (hoverState) {
+  //     const {
+  //       nearestLinePoint: nearestPoint,
+  //       valuesIndex,
+  //       timespanAnnotationIndex,
+  //     } = hoverState;
+
+  //     showTooltip({
+  //       tooltipData: {
+  //         /**
+  //          * The tooltip gets passed the original data value, plus the
+  //          * nearest/active hover property and the full series configuration.
+  //          * With these three arguments we should be able to render any sort of
+  //          * tooltip.
+  //          */
+  //         value: values[valuesIndex],
+  //         valueKey: nearestPoint.metricProperty as keyof T,
+  //         config: seriesConfig,
+  //         options: dataOptions || {},
+  //         /**
+  //          * Pass the full annotation data. We could just pass the index because
+  //          * dataOptions is already being passed, but it's cumbersome to have to
+  //          * dig up the annotation from the array in the tooltip logic.
+  //          */
+  //         timespanAnnotation:
+  //           dataOptions?.timespanAnnotations &&
+  //           isDefined(timespanAnnotationIndex)
+  //             ? dataOptions.timespanAnnotations[timespanAnnotationIndex]
+  //             : undefined,
+  //       },
+  //       tooltipLeft: nearestPoint.x,
+  //       tooltipTop: nearestPoint.y,
+  //     });
+  //   } else {
+  //     hideTooltip();
+  //   }
+  // }, [hoverState, seriesConfig, values, hideTooltip, showTooltip, dataOptions]);\
 
   return (
     <Box>
-      {valueAnnotation && (
-        <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
-      )}
-
       <Box position="relative">
         <ChartContainer
           width={width}
@@ -244,16 +216,15 @@ export function VerticalBarChart<T extends TimestampedValue>({
             onMouseLeave={handleHover}
           />
 
-          <Series
-            seriesConfig={seriesConfig}
-            seriesList={seriesList}
-            onHover={handleHover}
+          <BarTrend
+            key={0}
+            series={series}
+            color={config.color}
             getX={getX}
             getY={getY}
-            getY0={getY0}
-            getY1={getY1}
-            bounds={bounds}
+            barWidth={xScale.bandwidth()}
             yScale={yScale}
+            onHover={(evt) => handleHover(evt, 0)}
           />
         </ChartContainer>
 

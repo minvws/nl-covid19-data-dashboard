@@ -107,14 +107,12 @@ export function GNumberBarChartTile({
             dataOptions={{
               isPercentage: true,
             }}
-            seriesConfig={[
-              {
-                type: 'bar',
-                metricProperty: 'g_number',
-                color: '#005082',
-                label: 'lineee',
-              },
-            ]}
+            config={{
+              type: 'bar',
+              metricProperty: 'g_number',
+              color: '#005082',
+              label: 'lineee',
+            }}
             formatTooltip={({ value }) =>
               `${formatPercentage(value.g_number)}% getaald`
             }

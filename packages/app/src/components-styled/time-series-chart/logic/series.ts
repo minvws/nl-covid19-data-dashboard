@@ -12,7 +12,6 @@ export type SeriesConfig<T extends TimestampedValue> = (
   | LineSeriesDefinition<T>
   | AreaSeriesDefinition<T>
   | RangeSeriesDefinition<T>
-  | BarDefinition<T>
 )[];
 
 export type LineSeriesDefinition<T extends TimestampedValue> = {
@@ -42,14 +41,6 @@ export type AreaSeriesDefinition<T extends TimestampedValue> = {
   style?: 'solid' | 'striped';
   fillOpacity?: number;
   strokeWidth?: number;
-};
-
-export type BarDefinition<T extends TimestampedValue> = {
-  type: 'bar';
-  metricProperty: keyof T;
-  label: string;
-  color: string;
-  style?: 'solid' | 'striped';
 };
 
 export function useSeriesList<T extends TimestampedValue>(

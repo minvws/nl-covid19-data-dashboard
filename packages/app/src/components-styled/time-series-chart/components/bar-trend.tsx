@@ -11,6 +11,7 @@ type BarTrendProps = {
   getX: (v: SeriesItem) => number;
   getY: (v: SeriesSingleValue) => number;
   yScale: PositionScale;
+  barWidth: number;
   onHover: (event: TouchEvent<SVGElement> | MouseEvent<SVGElement>) => void;
 };
 
@@ -20,9 +21,12 @@ export function BarTrend({
   getX,
   getY,
   yScale,
+  barWidth,
   onHover,
 }: BarTrendProps) {
   const [isHovered, setIsHovered] = useState(false);
+
+  console.log(barWidth);
 
   const handleHover = useCallback(
     (event: TouchEvent<SVGElement> | MouseEvent<SVGElement>) => {
@@ -41,7 +45,7 @@ export function BarTrend({
         const barId = `bar-${index}`;
         const fillColor = color;
 
-        const { x, y, width, height } = getRectPosition(value);
+        const { x, y, height } = getRectPosition(value);
         return (
           <rect
             id={barId}
@@ -52,7 +56,7 @@ export function BarTrend({
             onTouchStart={handleHover}
             x={x}
             y={y}
-            width={width}
+            width={barWidth}
             height={height}
           />
         );
@@ -72,7 +76,6 @@ function getRectPositionFunction(
     return {
       x: getX(value),
       y: Math.min(zeroPosition, valuePosition),
-      width: 10,
       height: Math.abs(zeroPosition - valuePosition),
     };
   };
