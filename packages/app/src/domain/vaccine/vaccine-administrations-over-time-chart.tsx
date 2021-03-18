@@ -1,12 +1,12 @@
 import { NlVaccineAdministeredTotalValue } from '@corona-dashboard/common';
 import { AxisBottom, AxisLeft, TickFormatter } from '@visx/axis';
 import { GridRows } from '@visx/grid';
-import { ParentSize } from '@visx/responsive';
 import { LineChart } from '~/components-styled/line-chart';
 import { ComponentCallbackInfo } from '~/components-styled/line-chart/components';
 import siteText from '~/locale';
 import { colors } from '~/style/theme';
 import { formatNumber } from '~/utils/formatNumber';
+import { useBreakpoints } from '~/utils/useBreakpoints';
 
 export function VaccineAdministrationsOverTimeChart({
   values,
@@ -14,37 +14,34 @@ export function VaccineAdministrationsOverTimeChart({
   values: NlVaccineAdministeredTotalValue[];
 }) {
   const divergeIndex = values.findIndex((x) => x.estimated !== x.reported);
+  const { sm } = useBreakpoints(true);
 
   return (
-    <ParentSize>
-      {(parent) => (
-        <LineChart
-          width={parent.width}
-          timeframe="all"
-          values={values.map((x, i) => ({
-            ...x,
-            reported: divergeIndex > i ? x.reported : null,
-          }))}
-          height={180}
-          linesConfig={[
-            {
-              metricProperty: 'estimated',
-              areaFillOpacity: 0.25,
-              strokeWidth: 3,
-              color: colors.data.primary,
-            },
-          ]}
-          componentCallback={componentCallback}
-          showMarkerLine
-          formatTooltip={(values) => formatNumber(values[0].__value)}
-          padding={{
-            top: 13,
-            left: 0,
-            right: 0,
-          }}
-        />
-      )}
-    </ParentSize>
+    <LineChart
+      initialWidth={400}
+      height={sm ? 180 : 140}
+      timeframe="all"
+      values={values.map((x, i) => ({
+        ...x,
+        reported: divergeIndex > i ? x.reported : null,
+      }))}
+      linesConfig={[
+        {
+          metricProperty: 'estimated',
+          areaFillOpacity: 0.25,
+          strokeWidth: 3,
+          color: colors.data.primary,
+        },
+      ]}
+      componentCallback={componentCallback}
+      showMarkerLine
+      formatTooltip={(values) => formatNumber(values[0].__value)}
+      padding={{
+        top: 13,
+        left: 0,
+        right: 0,
+      }}
+    />
   );
 
   function componentCallback(callbackInfo: ComponentCallbackInfo) {

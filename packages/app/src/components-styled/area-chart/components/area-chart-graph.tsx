@@ -6,6 +6,7 @@ import { AreaStack, Bar } from '@visx/shape';
 import { ScaleLinear, ScaleTime } from 'd3-scale';
 import { MouseEvent, ReactNode, TouchEvent } from 'react';
 import styled from 'styled-components';
+import { AspectRatio } from '~/components-styled/aspect-ratio';
 import { LegendShape } from '~/components-styled/legend';
 import {
   ChartBounds,
@@ -93,122 +94,130 @@ export function AreaChartGraph<T extends TrendValue, K extends TrendValue>(
   ) => onHover(event);
 
   return (
-    <StyledSvg role="img" tabIndex={0} width={width} height={height}>
-      <defs>
-        {areas
-          .map((x) => x.displays)
-          .flat()
-          .filter((display) => display.pattern === 'hatched')
-          .map((display) => {
-            return (
-              <HatchedPattern
-                key={`pattern-${display.id}-${display.metricProperty}`}
-                id={`pattern-${display.id}-${display.metricProperty}`}
-                color={display.color}
-                smallscreen={!breakpoints.lg}
-              />
-            );
-          })}
-      </defs>
-      <Group left={padding.left} top={padding.top}>
-        <GridRows
-          scale={yScale}
-          width={bounds.width}
-          numTicks={numTicks}
-          stroke={defaultColors.axis}
-        />
+    <AspectRatio ratio={width / height}>
+      <StyledSvg
+        role="img"
+        tabIndex={0}
+        width={width}
+        viewBox={`0 0 ${width} ${height}`}
+        css={css({ width: '100%' })}
+      >
+        <defs>
+          {areas
+            .map((x) => x.displays)
+            .flat()
+            .filter((display) => display.pattern === 'hatched')
+            .map((display) => {
+              return (
+                <HatchedPattern
+                  key={`pattern-${display.id}-${display.metricProperty}`}
+                  id={`pattern-${display.id}-${display.metricProperty}`}
+                  color={display.color}
+                  smallscreen={!breakpoints.lg}
+                />
+              );
+            })}
+        </defs>
+        <Group left={padding.left} top={padding.top}>
+          <GridRows
+            scale={yScale}
+            width={bounds.width}
+            numTicks={numTicks}
+            stroke={defaultColors.axis}
+          />
 
-        <AxisBottom
-          scale={xScale}
-          tickValues={xScale.domain()}
-          tickFormat={formatXAxis as AnyTickFormatter}
-          top={bounds.height}
-          stroke={defaultColors.axis}
-          tickLabelProps={() => ({
-            dx: -25,
-            fill: defaultColors.axisLabels,
-            fontSize: 12,
-          })}
-          hideTicks={true}
-        />
+          <AxisBottom
+            scale={xScale}
+            tickValues={xScale.domain()}
+            tickFormat={formatXAxis as AnyTickFormatter}
+            top={bounds.height}
+            stroke={defaultColors.axis}
+            tickLabelProps={() => ({
+              dx: -25,
+              fill: defaultColors.axisLabels,
+              fontSize: 12,
+            })}
+            hideTicks={true}
+          />
 
-        <AxisLeft
-          scale={yScale}
-          numTicks={6}
-          hideTicks={true}
-          hideAxisLine={true}
-          stroke={defaultColors.axis}
-          tickFormat={formatYAxis as AnyTickFormatter}
-          tickLabelProps={() => ({
-            fill: defaultColors.axisLabels,
-            fontSize: 12,
-            dx: 0,
-            textAnchor: 'end',
-            verticalAnchor: 'middle',
-          })}
-        />
+          <AxisLeft
+            scale={yScale}
+            numTicks={6}
+            hideTicks={true}
+            hideAxisLine={true}
+            stroke={defaultColors.axis}
+            tickFormat={formatYAxis as AnyTickFormatter}
+            tickLabelProps={() => ({
+              fill: defaultColors.axisLabels,
+              fontSize: 12,
+              dx: 0,
+              textAnchor: 'end',
+              verticalAnchor: 'middle',
+            })}
+          />
 
-        <Group>
-          {areas.map((area, index) => (
-            <AreaStack
-              key={index}
-              keys={area.displays.map((x) => x.metricProperty) as string[]}
-              data={area.values}
-              x={(d) => xScale(d.data.__date) ?? 0}
-              y0={(d) => yScale(d[0]) ?? 0}
-              y1={(d) => yScale(d[1]) ?? 0}
-            >
-              {({ stacks, path }) =>
-                stacks.map((stack) => (
-                  <path
-                    key={`area-chart-stack-${stack.key}-${index}`}
-                    d={path(stack) || ''}
-                    stroke="transparent"
-                    fill={getFill(area.displays, stack.key)}
-                  />
-                ))
-              }
-            </AreaStack>
-          ))}
-        </Group>
-
-        {trends.length > 0 && (
           <Group>
-            {trends.map((trendConfig, index) => (
-              <Trend
-                areaFillOpacity={trendConfig.areaFillOpacity}
+            {areas.map((area, index) => (
+              <AreaStack
                 key={index}
-                trend={trendConfig.values}
-                type={trendConfig.areaFill ? 'area' : 'line'}
-                strokeWidth={trendConfig.strokeWidth}
-                style={trendConfig.style}
-                xScale={xScale}
-                yScale={yScale}
-                color={trendConfig.color}
-                smallscreen={!breakpoints.lg}
-              />
+                keys={area.displays.map((x) => x.metricProperty) as string[]}
+                data={area.values}
+                x={(d) => xScale(d.data.__date) ?? 0}
+                y0={(d) => yScale(d[0]) ?? 0}
+                y1={(d) => yScale(d[1]) ?? 0}
+              >
+                {({ stacks, path }) =>
+                  stacks.map((stack) => (
+                    <path
+                      key={`area-chart-stack-${stack.key}-${index}`}
+                      d={path(stack) || ''}
+                      stroke="transparent"
+                      fill={getFill(area.displays, stack.key)}
+                    />
+                  ))
+                }
+              </AreaStack>
             ))}
           </Group>
-        )}
 
-        {children}
+          {trends.length > 0 && (
+            <Group>
+              {trends.map((trendConfig, index) => (
+                <Trend
+                  areaFillOpacity={trendConfig.areaFillOpacity}
+                  key={index}
+                  trend={trendConfig.values}
+                  type={trendConfig.areaFill ? 'area' : 'line'}
+                  strokeWidth={trendConfig.strokeWidth}
+                  style={trendConfig.style}
+                  xScale={xScale}
+                  yScale={yScale}
+                  color={trendConfig.color}
+                  smallscreen={!breakpoints.lg}
+                />
+              ))}
+            </Group>
+          )}
 
-        {/**
-         * Render the bar on top of the trends because it captures mouse hover when you are above the trend line
-         */}
-        <Bar
-          x={0}
-          y={0}
-          width={bounds.width}
-          height={bounds.height}
-          fill="transparent"
-          onTouchStart={handleHover}
-          onTouchMove={handleHover}
-          onMouseMove={handleHover}
-          onMouseLeave={handleHover}
-        />
-      </Group>
-    </StyledSvg>
+          {children}
+
+          {/**
+           * Render the bar on top of the trends because it captures mouse hover when you are above the trend line
+           */}
+          <Bar
+            x={0}
+            y={0}
+            width={bounds.width}
+            height={bounds.height}
+            fill="transparent"
+            onTouchStart={handleHover}
+            onTouchMove={handleHover}
+            onMouseMove={handleHover}
+            onMouseLeave={handleHover}
+          />
+        </Group>
+      </StyledSvg>
+    </AspectRatio>
   );
 }
 

@@ -10,6 +10,7 @@
  */
 import { Group } from '@visx/group';
 import React from 'react';
+import { AspectRatio } from '~/components-styled/aspect-ratio';
 import { Padding } from '../logic';
 
 interface ChartContainerProps {
@@ -35,22 +36,23 @@ export function ChartContainer({
   onClick,
 }: ChartContainerProps) {
   return (
-    <svg
-      width={width}
-      height={height}
-      viewBox={`0 0 ${width} ${height}`}
-      role="img"
-      aria-labelledby={ariaLabelledBy}
-      style={{ touchAction: 'pan-y' }}
-      onTouchStart={onHover}
-      onTouchMove={onHover}
-      onMouseMove={onHover}
-      onMouseLeave={onHover}
-      onClick={onClick}
-    >
-      <Group left={padding.left} top={padding.top}>
-        {children}
-      </Group>
-    </svg>
+    <AspectRatio ratio={width / height}>
+      <svg
+        width={width}
+        viewBox={`0 0 ${width} ${height}`}
+        role="img"
+        aria-labelledby={ariaLabelledBy}
+        style={{ touchAction: 'pan-y', userSelect: 'none', width: '100%' }}
+        onTouchStart={onHover}
+        onTouchMove={onHover}
+        onMouseMove={onHover}
+        onMouseLeave={onHover}
+        onClick={onClick}
+      >
+        <Group left={padding.left} top={padding.top}>
+          {children}
+        </Group>
+      </svg>
+    </AspectRatio>
   );
 }

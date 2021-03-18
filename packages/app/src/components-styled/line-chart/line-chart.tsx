@@ -30,6 +30,7 @@ import {
 } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { TimeframeOption } from '~/utils/timeframe';
+import { useElementSize } from '~/utils/use-element-size';
 import { HoverPoint, Marker, Tooltip, Trend } from './components';
 import { calculateYMax, getTrendData, TrendValue } from './logic';
 
@@ -50,7 +51,7 @@ export type LineConfig<T extends TimestampedValue> = {
 export type LineChartProps<T extends TimestampedValue> = {
   values: T[];
   linesConfig: LineConfig<T>[];
-  width?: number;
+  initialWidth?: number;
   height?: number;
   timeframe?: TimeframeOption;
   signaalwaarde?: number;
@@ -73,7 +74,7 @@ export type LineChartProps<T extends TimestampedValue> = {
 export function LineChart<T extends TimestampedValue>({
   values,
   linesConfig,
-  width = 500,
+  initialWidth = 850,
   height = 250,
   /**
    * @TODO This is a weird default. The chart should show "all" by default
@@ -109,6 +110,8 @@ export function LineChart<T extends TimestampedValue>({
     showTooltip,
     hideTooltip,
   } = useTooltip<T & TrendValue>();
+
+  const [sizeRef, { width }] = useElementSize<HTMLDivElement>(initialWidth);
 
   const metricProperties = useMemo(
     () => linesConfig.map((x) => x.metricProperty),
@@ -317,7 +320,7 @@ export function LineChart<T extends TimestampedValue>({
         <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
       )}
 
-      <Box position="relative">
+      <Box position="relative" ref={sizeRef}>
         <ChartAxes
           padding={padding}
           height={height}
