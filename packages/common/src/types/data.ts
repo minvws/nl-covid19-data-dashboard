@@ -151,6 +151,7 @@ export interface National {
   elderly_at_home: NationalElderlyAtHome;
   vaccine_support: NlVaccineSupport;
   corona_melder_app: NlCoronaMelderApp;
+  vaccine_coverage: NlVaccineCoverage;
   vaccine_delivery: NlVaccineDelivery;
   vaccine_delivery_estimate: NlVaccineEstimateDelivery;
   vaccine_delivery_estimate_time_span: NlVaccineDeliveryEstimateTimeSpan;
@@ -479,6 +480,17 @@ export interface NlCoronaMelderAppValue {
   downloaded_total: number;
   warned_daily: number;
   date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlVaccineCoverage {
+  values: NlVaccineCoverageValue[];
+  last_value: NlVaccineCoverageValue;
+}
+export interface NlVaccineCoverageValue {
+  partially_vaccinated: number;
+  fully_vaccinated: number;
+  date_unix: number;
+  date_of_report_unix: number;
   date_of_insertion_unix: number;
 }
 export interface NlVaccineDelivery {
