@@ -1,0 +1,81 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "nl_tested_per_age_group",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/value"
+      }
+    },
+    "last_value": {
+      "$ref": "#/definitions/value"
+    }
+  },
+  "required": ["values", "last_value"],
+  "definitions": {
+    "value": {
+      "title": "nl_tested_per_age_group_value",
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "infected_0_9",
+        "infected_10_19",
+        "infected_20_29",
+        "infected_30_39",
+        "infected_40_49",
+        "infected_50_59",
+        "infected_60_69",
+        "infected_70_79",
+        "infected_80_89",
+        "infected_90_plus",
+        "infected_overall",
+        "date_unix",
+        "date_of_insertion_unix"
+      ],
+      "properties": {
+        "infected_0_9": {
+          "type": "number"
+        },
+        "infected_10_19": {
+          "type": "number"
+        },
+        "infected_20_29": {
+          "type": "number"
+        },
+        "infected_30_39": {
+          "type": "number"
+        },
+        "infected_40_49": {
+          "type": "number"
+        },
+        "infected_50_59": {
+          "type": "number"
+        },
+        "infected_60_69": {
+          "type": "number"
+        },
+        "infected_70_79": {
+          "type": "number"
+        },
+        "infected_80_89": {
+          "type": "number"
+        },
+        "infected_90_plus": {
+          "type": "number"
+        },
+        "infected_overall": {
+          "type": "number"
+        },
+        "date_unix": {
+          "type": "integer"
+        },
+        "date_of_insertion_unix": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}
