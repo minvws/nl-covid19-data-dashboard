@@ -86,8 +86,8 @@ export function useIntl() {
 
   function formatPercentage(
     value: number,
-    options = {
-      maximumFractionDigits: 1,
+    options?: {
+      maximumFractionDigits: number;
     }
   ) {
     return new Intl.NumberFormat(locale, options).format(value);
