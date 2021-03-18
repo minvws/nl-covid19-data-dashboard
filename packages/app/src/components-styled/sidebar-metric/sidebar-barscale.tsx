@@ -11,7 +11,7 @@ import {
 } from '../../metric-config';
 import { Box } from '../base';
 import { useIntl } from '~/intl';
-import { NLLocale } from '~/locale';
+import { AllLanguages, NLLocale } from '~/locale';
 
 interface SidebarBarScaleProps<T> {
   scope: DataScope;
@@ -29,6 +29,9 @@ export function SidebarBarScale<T>({
   localeTextKey,
 }: SidebarBarScaleProps<T>) {
   const { siteText } = useIntl();
+
+  console.log(localeTextKey);
+
   const text = siteText[localeTextKey];
   /**
    * @TODO this is still a bit messy due to improper typing. Not sure how to

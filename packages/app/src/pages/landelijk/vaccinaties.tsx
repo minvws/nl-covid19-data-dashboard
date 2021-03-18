@@ -64,7 +64,7 @@ const VaccinationPage = (
 ) => {
   const { siteText } = useIntl();
 
-  const { content, data } = props;
+  const { content, data, lastGenerated } = props;
   const text = siteText.vaccinaties;
   const [selectedTab, setSelectedTab] = useState(
     text.gezette_prikken.tab_first.title
@@ -444,7 +444,6 @@ const VaccinationPage = (
                   ]}
                   formatTooltip={({ value, valueKey, config }) => (
                     <VaccineSupportTooltip
-                      locale={siteText}
                       value={value}
                       valueKey={valueKey}
                       config={config}
