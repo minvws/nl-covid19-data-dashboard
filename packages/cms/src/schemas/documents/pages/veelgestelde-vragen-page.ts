@@ -19,7 +19,7 @@ export default {
       title: 'Vragen',
       description:
         'Je kan veel gestelde vragen toevoegen, de volgorde veranderen, de tekst bijwerken of verwijderen',
-      of: [{ type: 'collapsible' }],
+      of: [{ type: 'faqQuestion' }],
     },
   ],
   preview: {

@@ -88,7 +88,7 @@ export function useSewerChartValues(
     [data.sewer_per_installation, timeframe]
   );
 
-  return { averageValues, stationValues };
+  return [averageValues, stationValues] as const;
 }
 
 /**
@@ -144,8 +144,7 @@ export function useSewerStationSelectProps(values: SewerChartValue[]) {
 export function useSelectedStationValues(
   value: string | undefined,
   stationValues: SewerChartValue[],
-  averageValues: SewerChartValue[],
-  displayOutliers: boolean
+  averageValues: SewerChartValue[]
 ) {
   /**
    * filter stationValues to only include values of a single station
@@ -171,24 +170,10 @@ export function useSelectedStationValues(
    */
   const hasOutliers = getMax(stationValues, (x) => x.value) >= outlierLimit;
 
-  /**
-   * Here' we'll filter the final list of station values based on that boolean
-   * and the
-   */
-  const [stationValuesFiltered, outlierValues] = useMemo(() => {
-    const values =
-      hasOutliers && !displayOutliers
-        ? stationValues.filter((x) => x.value <= outlierLimit)
-        : stationValues;
-    const outliers = stationValues.filter((x) => x.value > outlierLimit);
-    return [values, outliers];
-  }, [displayOutliers, hasOutliers, outlierLimit, stationValues]);
-
   return {
-    stationValuesFiltered,
-    hasOutliers,
     selectedStationValues,
-    outlierValues,
+    hasOutliers,
+    outlierLimit,
   };
 }
 
@@ -287,27 +272,6 @@ export function useLineTooltip({
 }
 
 /**
- * create dedupe-filter to be used within an Array.filter().
- * It will deduplicate items based on the comparison of the object's keys.
- *
- * example:
- *
- *     const values: Array<{ foo: string }>
- *     values.filter(dedupe('foo'))
- */
-function dedupe<T>(key: keyof T) {
-  return (x: T, index: number, list: T[]) =>
-    list.findIndex((x2) => x[key] === x2[key]) === index;
-}
-
-/**
- * get max value of items mapped by a getter
- */
-function getMax<T>(items: T[], getValue: (item: T) => number | undefined) {
-  return Math.max(...items.map((x) => getValue(x) ?? -Infinity));
-}
-
-/**
  * usePointDistance can be used to measure the distance between multiple points.
  * This can be useful when you would like to track how far a user has moved its
  * pointer (finger/mouse).
@@ -345,4 +309,28 @@ export function usePointDistance() {
     }),
     [add, start]
   );
+}
+
+/**
+ * get max value of items mapped by a getter
+ */
+export function getMax<T>(
+  items: T[],
+  getValue: (item: T) => number | undefined
+) {
+  return Math.max(...items.map((x) => getValue(x) ?? -Infinity));
+}
+
+/**
+ * create dedupe-filter to be used within an Array.filter().
+ * It will deduplicate items based on the comparison of the object's keys.
+ *
+ * example:
+ *
+ *     const values: Array<{ foo: string }>
+ *     values.filter(dedupe('foo'))
+ */
+function dedupe<T>(key: keyof T) {
+  return (x: T, index: number, list: T[]) =>
+    list.findIndex((x2) => x[key] === x2[key]) === index;
 }

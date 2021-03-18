@@ -1,16 +1,15 @@
 import {
   formatNumber,
-  isDateSpanValue,
   NlVaccineAdministeredEstimateValue,
   NlVaccineAdministeredValue,
   NlVaccineDeliveryEstimateValue,
   NlVaccineDeliveryValue,
 } from '@corona-dashboard/common';
-import { Fragment } from 'react';
 import styled from 'styled-components';
 import { HoverPoint } from '~/components-styled/area-chart/components/marker';
 import { TimestampedTrendValue } from '~/components-styled/area-chart/logic';
-import { InlineText, Text } from '~/components-styled/typography';
+import { Spacer } from '~/components-styled/base';
+import { Text } from '~/components-styled/typography';
 import { AllLanguages } from '~/locale/APP_LOCALE';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 
@@ -30,17 +29,18 @@ export function formatVaccinationsTooltip(
     return null;
   }
 
-  const data = values[0].data;
+  const [firstValue, ...otherValues] = values;
 
-  if (!isDateSpanValue(data)) {
-    throw new Error(
-      `Invalid value passed to format tooltip function: ${JSON.stringify(
-        values
-      )}`
-    );
-  }
+  /**
+   * The values with administered data are all of the "other" value. These kind
+   * of things will be solved later when converting to TimeSeriesChart.
+   */
+  const administeredData = otherValues[0].data;
 
-  const dateEndString = formatDateFromSeconds(data.date_end_unix, 'day-month');
+  const dateEndString = formatDateFromSeconds(
+    administeredData.date_end_unix,
+    'day-month'
+  );
 
   return (
     <>
@@ -48,45 +48,40 @@ export function formatVaccinationsTooltip(
         {dateEndString}
       </Text>
       <TooltipList>
-        {values.map((value) => (
-          <Fragment key={value.label}>
-            <TooltipListItem>
-              <span>
-                <ColorIndicator color={value.color} />
-                {formatLabel(value.label, text)}:
-              </span>
-              <TooltipValueContainer>
-                {formatValue(value)}
-              </TooltipValueContainer>
-            </TooltipListItem>
+        <TooltipListItem>
+          <span>
+            <ColorIndicator color={firstValue.color} />
+            {formatLabel(firstValue.label, text)}:
+          </span>
+          <TooltipValueContainer>
+            {formatNumber(firstValue.data.total)}
+          </TooltipValueContainer>
+        </TooltipListItem>
 
-            {/**
-             * This is a bit hacky, but when the current value's label equals
-             * the 'delivered' or 'estimated' label, we'll render an extra
-             * list-item as header for the vaccines which are the next values
-             * in the array.
-             */}
-            {value.label ===
-              text.vaccinaties.data.vaccination_chart.delivered && (
-              <TooltipListItem>
-                <InlineText mt={2} fontWeight="bold">
-                  {text.vaccinaties.data.vaccination_chart.doses_administered}
-                </InlineText>
-              </TooltipListItem>
-            )}
-            {value.label ===
-              text.vaccinaties.data.vaccination_chart.estimated && (
-              <TooltipListItem>
-                <InlineText mt={2} fontWeight="bold">
-                  {
-                    text.vaccinaties.data.vaccination_chart
-                      .doses_administered_estimated
-                  }
-                </InlineText>
-              </TooltipListItem>
-            )}
-          </Fragment>
+        {otherValues.map((value) => (
+          <TooltipListItem key={value.label}>
+            <span>
+              <ColorIndicator color={value.color} />
+              {formatLabel(value.label, text)}:
+            </span>
+            <TooltipValueContainer>
+              <strong>
+                {formatNumber((value.data as any)[value.label as string] || 0)}
+              </strong>
+            </TooltipValueContainer>
+          </TooltipListItem>
         ))}
+
+        <Spacer mb={1} />
+        <TooltipListItem>
+          <span>
+            <ColorIndicator color="transparent" />
+            {text.vaccinaties.data.vaccination_chart.doses_administered_total}:
+          </span>
+          <TooltipValueContainer>
+            <strong>{formatNumber(administeredData.total)}</strong>
+          </TooltipValueContainer>
+        </TooltipListItem>
       </TooltipList>
     </>
   );
@@ -97,14 +92,6 @@ function formatLabel(labelKey: string | undefined, text: AllLanguages) {
     ? (text.vaccinaties.data.vaccination_chart.product_names as any)[labelKey]
     : undefined;
   return labelText ?? labelKey;
-}
-
-function formatValue(value: HoverPoint<TooltipValue>) {
-  const data: any = value.data;
-  if (data.total) {
-    return formatNumber(data.total);
-  }
-  return formatNumber(data[value.label as string]);
 }
 
 const TooltipList = styled.ol`

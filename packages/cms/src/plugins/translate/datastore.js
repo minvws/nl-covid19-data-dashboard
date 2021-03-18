@@ -1,9 +1,9 @@
 import { intersection } from 'lodash';
-import { Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { map, publishReplay, refCount, startWith, tap } from 'rxjs/operators';
 import config from './config.js';
 
-const onSelect$ = new Subject();
+const onSelect$ = new BehaviorSubject();
 
 export const setLangs = (langs) => onSelect$.next(langs);
 
