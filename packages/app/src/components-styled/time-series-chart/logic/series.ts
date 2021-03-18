@@ -18,6 +18,7 @@ export type LineSeriesDefinition<T extends TimestampedValue> = {
   type: 'line';
   metricProperty: keyof T;
   label: string;
+  shortLabel?: string;
   color: string;
   style?: 'solid' | 'dashed';
   strokeWidth?: number;
@@ -28,6 +29,7 @@ export type RangeSeriesDefinition<T extends TimestampedValue> = {
   metricPropertyLow: keyof T;
   metricPropertyHigh: keyof T;
   label: string;
+  shortLabel?: string;
   color: string;
   style?: 'solid' | 'dashed';
   fillOpacity?: number;
@@ -37,6 +39,7 @@ export type AreaSeriesDefinition<T extends TimestampedValue> = {
   type: 'area';
   metricProperty: keyof T;
   label: string;
+  shortLabel?: string;
   color: string;
   style?: 'solid' | 'striped';
   fillOpacity?: number;
@@ -105,11 +108,11 @@ export type SeriesItem = {
   __date_unix: number;
 };
 export interface SeriesSingleValue extends SeriesItem {
-  __value: number;
+  __value?: number;
 }
 export interface SeriesDoubleValue extends SeriesItem {
-  __value_a: number;
-  __value_b: number;
+  __value_a?: number;
+  __value_b?: number;
 }
 
 export function isSeriesValue(
@@ -170,40 +173,30 @@ export function getSeriesData<T extends TimestampedValue>(
   }
 
   if (isDateSeries(values)) {
-    return (
-      values
-        .map((x) => ({
-          /**
-           * This is messy and could be improved.
-           */
-          __value: (x[metricProperty] as unknown) as number | null,
-          // @ts-expect-error @TODO figure out why the type guard doesn't work
-          __date_unix: x.date_unix,
-        }))
-        // Filter any possible null values
-        .filter((x) => isPresent(x.__value)) as SeriesSingleValue[]
-    );
+    return values.map((x) => ({
+      /**
+       * This is messy and could be improved.
+       */
+      __value: (x[metricProperty] ?? undefined) as number | undefined,
+      // @ts-expect-error @TODO figure out why the type guard doesn't work
+      __date_unix: x.date_unix,
+    }));
   }
 
   if (isDateSpanSeries(values)) {
-    return (
-      values
-        .map((x) => ({
-          /**
-           * This is messy and could be improved.
-           */
-          __value: (x[metricProperty] as unknown) as number | null,
-          __date_unix:
-            /**
-             * Here we set the date to be in the middle of the timespan, so that
-             * the chart can render the points in the middle of each span.
-             */
-            // @ts-expect-error @TODO figure out why the type guard doesn't work
-            x.date_start_unix + (x.date_end_unix - x.date_start_unix) / 2,
-        }))
-        // Filter any possible null values
-        .filter((x) => isPresent(x.__value)) as SeriesSingleValue[]
-    );
+    return values.map((x) => ({
+      /**
+       * This is messy and could be improved.
+       */
+      __value: (x[metricProperty] ?? undefined) as number | undefined,
+      __date_unix:
+        /**
+         * Here we set the date to be in the middle of the timespan, so that
+         * the chart can render the points in the middle of each span.
+         */
+        // @ts-expect-error @TODO figure out why the type guard doesn't work
+        x.date_start_unix + (x.date_end_unix - x.date_start_unix) / 2,
+    }));
   }
 
   throw new Error(`Incompatible timestamps are used in value ${values[0]}`);

@@ -4,6 +4,7 @@ import { colors } from '~/style/theme';
 
 const vaccines = [
   'pfizer',
+  'bio_n_tech_pfizer',
   'moderna',
   'astra_zeneca',
   'cure_vac',
