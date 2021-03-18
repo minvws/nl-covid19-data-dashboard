@@ -2068,6 +2068,11 @@
         "href": "",
         "text": "Ministerie van VWS",
         "download": ""
+      },
+      "stock": {
+        "href": "",
+        "text": "",
+        "download": ""
       }
     },
     "section_vaccinations_more_information": {
@@ -2287,6 +2292,11 @@
     "clock": {
       "title": "Iedere {{seconds}} seconden krijgt iemand een prik",
       "description": "Dit is een schatting. Deze schatting is gemaakt met het gemiddelde van {{amount}} prikken per dag tussen 8.00 en 20.00 uur in de afgelopen zeven dagen."
+    },
+    "stock": {
+      "title": "Vaccins in voorraad",
+      "description": "Dit getal laat zien hoeveel vaccins het RIVM op voorraad heeft. Een beschikbare voorraad van vijf dagen betekent bijvoorbeeld dat er genoeg vaccins klaar liggen in de opslag voor de mensen die in de vijf dagen daarna worden geprikt, ook als er onverwacht geen nieuwe vaccins worden geleverd.",
+      "per_vaccine": "{{amount}} {{label}} prikken"
     },
     "more_information": {
       "label": "Meer informatie en nieuws over vaccinaties kunt u vinden op",
