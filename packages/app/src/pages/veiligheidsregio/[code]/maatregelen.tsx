@@ -29,7 +29,8 @@ type MaatregelenData = {
 };
 
 //@TODO HARDCODED FOR NOW. NEEDS TO COME FROM CONTEXT
-const locale = 'nl';
+const locale = process.env.NEXT_PUBLIC_LOCALE;
+
 const query = `
 {
   'lockdown': *[_type == 'lockdown']{

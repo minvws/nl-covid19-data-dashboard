@@ -18,7 +18,7 @@ interface AccessibilityPageData {
 }
 
 //@TODO THIS NEEDS TO COME FROM CONTEXT
-const locale = 'nl';
+const locale = process.env.NEXT_PUBLIC_LOCALE;
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   createGetContent<AccessibilityPageData>(`

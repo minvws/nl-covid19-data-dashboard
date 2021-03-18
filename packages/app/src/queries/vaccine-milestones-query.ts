@@ -5,7 +5,8 @@ export function getVaccineMilestonesQuery(
 ) {
   //@TODO
   // CONTEXT IS NOT PASSED TO THIS GETTER. FIGURE OUT HOW TO SOLVE THIS!
-  const locale = 'nl';
+  const locale = process.env.NEXT_PUBLIC_LOCALE;
+
   return `
   *[_type=='vaccinationsPage']{
     "title": title.${locale},

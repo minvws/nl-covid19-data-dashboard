@@ -24,7 +24,7 @@ type MaatregelenData = {
 };
 
 //@TODO THIS IS HARDCODED TO NL BUT NEEDS TO COME FROM CONTEXT
-const locale = 'nl';
+const locale = process.env.NEXT_PUBLIC_LOCALE;
 
 const query = `
 {

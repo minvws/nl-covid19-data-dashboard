@@ -13,7 +13,8 @@ import { Layout } from '~/domain/layout/layout';
 const editorialsQuery = `*[_type == 'editorial'] {"slug":slug.current}`;
 
 //@TODO THIS NEED TO COME FROM CONTEXT
-const locale = 'nl';
+const locale = process.env.NEXT_PUBLIC_LOCALE;
+
 export async function getStaticPaths() {
   const editorialData = await client.fetch(editorialsQuery);
   const editorials = localize<{ slug: string }[]>(editorialData, [

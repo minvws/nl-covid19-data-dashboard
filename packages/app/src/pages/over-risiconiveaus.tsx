@@ -21,7 +21,7 @@ interface OverRisiconiveausData {
 }
 
 //@TODO THIS NEEDS TO COME FROM CONTEXT
-const locale = 'nl';
+const locale = process.env.NEXT_PUBLIC_LOCALE;
 const query = `
 *[_type == 'overRisicoNiveaus']{
   ...,
