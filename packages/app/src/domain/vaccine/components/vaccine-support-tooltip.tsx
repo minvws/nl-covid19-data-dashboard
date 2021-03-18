@@ -1,7 +1,4 @@
-import {
-  formatPercentage,
-  NlVaccineSupportValue,
-} from '@corona-dashboard/common';
+import { NlVaccineSupportValue } from '@corona-dashboard/common';
 import styled from 'styled-components';
 import { Spacer } from '~/components-styled/base';
 import { SeriesConfig } from '~/components-styled/time-series-chart';
@@ -15,7 +12,7 @@ export function VaccineSupportTooltip({
   value: NlVaccineSupportValue;
   config: SeriesConfig<NlVaccineSupportValue>;
 }) {
-  const { siteText, formatDateFromSeconds } = useIntl();
+  const { siteText, formatDateFromSeconds, formatPercentage } = useIntl();
 
   const dateStartString = formatDateFromSeconds(value.date_start_unix, 'axis');
   const dateEndString = formatDateFromSeconds(value.date_end_unix, 'axis');

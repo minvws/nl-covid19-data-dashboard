@@ -265,11 +265,11 @@ interface TrendIconProps<T extends TimestampedValue> {
 function TrendIcon<T extends TimestampedValue>({ config }: TrendIconProps<T>) {
   switch (config.type) {
     case 'line':
-      return <LineTrendIcon config={config} />;
+      return <LineTrendIcon {...config} />;
     case 'range':
-      return <RangeTrendIcon config={config} />;
+      return <RangeTrendIcon {...config} />;
     case 'area':
-      return <AreaTrendIcon config={config} />;
+      return <AreaTrendIcon {...config} />;
     default:
       return null;
   }

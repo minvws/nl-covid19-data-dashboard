@@ -1,5 +1,4 @@
 import {
-  formatNumber,
   isDateSpanValue,
   NlVaccineAdministeredEstimateValue,
   NlVaccineAdministeredValue,
@@ -28,7 +27,15 @@ export function createDeliveryTooltipFormatter() {
 }
 
 function FormatVaccinationsTooltip(values: HoverPoint<TooltipValue>[]) {
-  const { siteText, formatDateFromSeconds } = useIntl();
+  const { siteText, formatDateFromSeconds, formatNumber } = useIntl();
+
+  function formatValue(value: HoverPoint<TooltipValue>) {
+    const data: any = value.data;
+    if (data.total) {
+      return formatNumber(data.total);
+    }
+    return formatNumber(data[value.label as string]);
+  }
 
   if (!values.length) {
     return null;
@@ -101,14 +108,6 @@ function formatLabel(labelKey: string | undefined, text: any) {
     ? (text.vaccinaties.data.vaccination_chart.product_names as any)[labelKey]
     : undefined;
   return labelText ?? labelKey;
-}
-
-function formatValue(value: HoverPoint<TooltipValue>) {
-  const data: any = value.data;
-  if (data.total) {
-    return formatNumber(data.total);
-  }
-  return formatNumber(data[value.label as string]);
 }
 
 const TooltipList = styled.ol`

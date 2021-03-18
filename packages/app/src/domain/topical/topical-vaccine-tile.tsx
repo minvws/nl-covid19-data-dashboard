@@ -1,7 +1,4 @@
-import {
-  formatNumber,
-  NlVaccineAdministeredTotal,
-} from '@corona-dashboard/common';
+import { NlVaccineAdministeredTotal } from '@corona-dashboard/common';
 
 import Vaccinaties from '~/assets/vaccinaties.svg';
 import { Box } from '~/components-styled/base';
@@ -18,7 +15,7 @@ interface TopicalVaccineProps {
 export function TopicalVaccineTile({ data }: TopicalVaccineProps) {
   const estimated = data.last_value.estimated;
 
-  const { siteText } = useIntl();
+  const { siteText, formatNumber } = useIntl();
 
   const text = siteText.nationaal_actueel.mini_trend_tiles.toegediende_vaccins;
 

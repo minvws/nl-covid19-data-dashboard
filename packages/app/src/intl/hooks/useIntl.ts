@@ -88,7 +88,7 @@ export function useIntl() {
     value: number,
     options = {
       maximumFractionDigits: 1,
-    }
+    }?
   ) {
     return new Intl.NumberFormat(locale, options).format(value);
   }

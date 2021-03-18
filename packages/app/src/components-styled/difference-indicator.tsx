@@ -1,9 +1,4 @@
-import {
-  DifferenceDecimal,
-  DifferenceInteger,
-  formatNumber,
-  formatPercentage,
-} from '@corona-dashboard/common';
+import { DifferenceDecimal, DifferenceInteger } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import {
@@ -90,13 +85,20 @@ function RenderInlineIndicator(
   isDecimal?: boolean,
   differenceFractionDigits?: number
 ) {
-  const { siteText } = useIntl();
+  const { siteText, formatPercentage, formatNumber } = useIntl();
   const text = siteText.toe_en_afname;
 
   const { difference } = value;
 
   const differenceFormattedString = isDecimal
-    ? formatPercentage(Math.abs(difference), differenceFractionDigits)
+    ? formatPercentage(
+        Math.abs(difference),
+        differenceFractionDigits
+          ? {
+              maximumFractionDigits: differenceFractionDigits,
+            }
+          : undefined
+      )
     : formatNumber(Math.abs(difference));
 
   if (difference > 0) {
@@ -143,13 +145,16 @@ function RenderTileIndicator(
   staticTimespan?: string,
   maximumFractionDigits?: number
 ) {
-  const { siteText } = useIntl();
+  const { siteText, formatNumber, formatPercentage } = useIntl();
   const text = siteText.toe_en_afname;
 
   const { difference } = value;
 
   const differenceFormattedString = isDecimal
-    ? formatPercentage(Math.abs(difference), maximumFractionDigits)
+    ? formatPercentage(
+        Math.abs(difference),
+        maximumFractionDigits ? { maximumFractionDigits } : undefined
+      )
     : formatNumber(Math.abs(difference));
 
   const timespanTextNode = staticTimespan ?? text.vorige_waarde;
