@@ -59,7 +59,8 @@ function calculateMaximumLabelLength(labels: string[], fontSize: string) {
 
     return length;
   }
-  return longestLabel.length;
+
+  return longestLabel.length * 4;
 }
 
 export function useBarChartCoordinates(

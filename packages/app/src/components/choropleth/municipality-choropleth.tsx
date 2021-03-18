@@ -6,12 +6,10 @@ import {
 import css from '@styled-system/css';
 import { Feature, MultiPolygon } from 'geojson';
 import { ReactNode, useCallback } from 'react';
-import { AspectRatio } from '~/components-styled/aspect-ratio';
 import { colors } from '~/style/theme';
 import { DataProps } from '~/types/attributes';
 import { Choropleth } from './choropleth';
 import {
-  useChartDimensions,
   useChoroplethColorScale,
   useMunicipalityBoundingbox,
   useMunicipalityData,
@@ -58,9 +56,6 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
     tooltipContent,
     highlightSelection = true,
   } = props;
-
-  const ratio = 1.2;
-  const [ref, dimensions] = useChartDimensions<HTMLDivElement>(ratio);
 
   const [boundingbox] = useMunicipalityBoundingbox(regionGeo, selectedCode);
 
@@ -178,20 +173,17 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
   };
 
   return (
-    <div ref={ref} css={css({ bg: 'transparent', position: 'relative' })}>
-      <AspectRatio ratio={1 / ratio}>
-        <Choropleth
-          description={dataDescription}
-          featureCollection={municipalGeo}
-          hovers={hasData ? municipalGeo : undefined}
-          boundingBox={boundingbox || countryGeo}
-          dimensions={dimensions}
-          renderFeature={renderFeature}
-          renderHover={renderHover}
-          onPathClick={onClick}
-          getTooltipContent={getTooltipContent}
-        />
-      </AspectRatio>
+    <div css={css({ bg: 'transparent', position: 'relative' })}>
+      <Choropleth
+        description={dataDescription}
+        featureCollection={municipalGeo}
+        hovers={hasData ? municipalGeo : undefined}
+        boundingBox={boundingbox || countryGeo}
+        renderFeature={renderFeature}
+        renderHover={renderHover}
+        onPathClick={onClick}
+        getTooltipContent={getTooltipContent}
+      />
     </div>
   );
 }

@@ -5,13 +5,11 @@ import {
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { Feature, MultiPolygon } from 'geojson';
-import { ReactNode, useCallback, Fragment } from 'react';
-import { AspectRatio } from '~/components-styled/aspect-ratio';
+import { Fragment, ReactNode, useCallback } from 'react';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { colors } from '~/style/theme';
 import { Choropleth } from './choropleth';
 import {
-  useChartDimensions,
   useChoroplethColorScale,
   useSafetyRegionBoundingbox,
   useSafetyRegionData,
@@ -59,9 +57,6 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
     highlightCode,
     highlightSelection,
   } = props;
-
-  const ratio = 1.2;
-  const [ref, dimensions] = useChartDimensions<HTMLDivElement>(ratio);
 
   const boundingBox = useSafetyRegionBoundingbox(regionGeo, selectedCode);
 
@@ -171,21 +166,18 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
   };
 
   return (
-    <div ref={ref} css={css({ position: 'relative', bg: 'transparent' })}>
-      <AspectRatio ratio={1 / ratio}>
-        <Choropleth
-          description={dataDescription}
-          featureCollection={regionGeo}
-          hovers={hasData ? regionGeo : undefined}
-          boundingBox={boundingBox || countryGeo}
-          dimensions={dimensions}
-          renderFeature={renderFeature}
-          renderHover={renderHover}
-          onPathClick={onClick}
-          getTooltipContent={getTooltipContent}
-          renderHighlight={renderHighlight}
-        />
-      </AspectRatio>
+    <div css={css({ position: 'relative', bg: 'transparent' })}>
+      <Choropleth
+        description={dataDescription}
+        featureCollection={regionGeo}
+        hovers={hasData ? regionGeo : undefined}
+        boundingBox={boundingBox || countryGeo}
+        renderFeature={renderFeature}
+        renderHover={renderHover}
+        onPathClick={onClick}
+        getTooltipContent={getTooltipContent}
+        renderHighlight={renderHighlight}
+      />
     </div>
   );
 }

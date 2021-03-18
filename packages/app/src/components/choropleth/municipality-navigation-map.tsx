@@ -1,10 +1,9 @@
 import { MunicipalityProperties } from '@corona-dashboard/common';
 import { Feature, MultiPolygon } from 'geojson';
 import { ReactNode } from 'react';
-import { AspectRatio } from '~/components-styled/aspect-ratio';
 import { colors } from '~/style/theme';
 import { Choropleth } from './choropleth';
-import { useChartDimensions, useMunicipalityNavigationData } from './hooks';
+import { useMunicipalityNavigationData } from './hooks';
 import { HoverPath, Path } from './path';
 import { countryGeo, municipalGeo } from './topology';
 
@@ -24,9 +23,6 @@ export function MunicipalityNavigationMap<T>(
   props: MunicipalityNavigationMapProps<T>
 ) {
   const { onSelect, tooltipContent } = props;
-
-  const ratio = 1.2;
-  const [ref, dimensions] = useChartDimensions<HTMLDivElement>(ratio);
 
   const { getChoroplethValue } = useMunicipalityNavigationData(municipalGeo);
 
@@ -83,17 +79,14 @@ export function MunicipalityNavigationMap<T>(
   };
 
   return (
-    <AspectRatio ratio={1 / ratio} ref={ref}>
-      <Choropleth
-        featureCollection={municipalGeo}
-        hovers={municipalGeo}
-        boundingBox={countryGeo}
-        dimensions={dimensions}
-        renderFeature={renderFeature}
-        renderHover={renderHover}
-        onPathClick={onClick}
-        getTooltipContent={getTooltipContent}
-      />
-    </AspectRatio>
+    <Choropleth
+      featureCollection={municipalGeo}
+      hovers={municipalGeo}
+      boundingBox={countryGeo}
+      renderFeature={renderFeature}
+      renderHover={renderHover}
+      onPathClick={onClick}
+      getTooltipContent={getTooltipContent}
+    />
   );
 }

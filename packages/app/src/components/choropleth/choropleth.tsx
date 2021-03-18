@@ -5,7 +5,7 @@ import { Feature, FeatureCollection, Geometry, MultiPolygon } from 'geojson';
 import { memo, MutableRefObject, ReactNode, useRef, useState } from 'react';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
-import { TCombinedChartDimensions } from './hooks/use-chart-dimensions';
+import { useChartDimensions } from './hooks/use-chart-dimensions';
 import { Path } from './path';
 import { Tooltip } from './tooltips/tooltip-container';
 import { countryGeo } from './topology';
@@ -19,6 +19,7 @@ export type TooltipSettings = {
 };
 
 type TProps<T1, T3> = {
+  initialWidth?: number;
   // This is the main feature collection that displays the features that will
   // be colored in as part of the choropleth
   featureCollection: FeatureCollection<MultiPolygon, T1>;
@@ -28,8 +29,6 @@ type TProps<T1, T3> = {
   // The bounding box is calculated based on these features, this can be used to
   // zoom in on a specific part of the map upon initialization.
   boundingBox: FeatureCollection<MultiPolygon>;
-  // Height, width, etc
-  dimensions: TCombinedChartDimensions;
   // This callback is invoked for each of the features in the featureCollection property.
   // This will usually return a <path/> element.
   renderFeature: (
@@ -118,7 +117,6 @@ const ChoroplethMap: <T1, T3>(
     featureCollection,
     hovers,
     boundingBox,
-    dimensions,
     renderFeature,
     renderHover,
     onPathClick,
@@ -126,7 +124,14 @@ const ChoroplethMap: <T1, T3>(
     hoverRef,
     description,
     renderHighlight,
+    initialWidth = 850,
   } = props;
+
+  const ratio = 1.2;
+  const [ref, dimensions] = useChartDimensions<SVGSVGElement>(
+    initialWidth,
+    ratio
+  );
 
   const clipPathId = useUniqueId();
   const dataDescriptionId = useUniqueId();
@@ -135,8 +140,8 @@ const ChoroplethMap: <T1, T3>(
   const isTouch = useIsTouchDevice();
 
   const {
-    width = 0,
-    height = 0,
+    width,
+    height,
     marginLeft,
     marginTop,
     boundedWidth,
@@ -151,9 +156,10 @@ const ChoroplethMap: <T1, T3>(
         {description}
       </span>
       <svg
-        width="100%"
-        height="100%"
-        css={css({ display: 'block', bg: 'transparent' })}
+        ref={ref}
+        width={width}
+        viewBox={`0 0 ${width} ${height}`}
+        css={css({ display: 'block', bg: 'transparent', width: '100%' })}
         onMouseMove={createSvgMouseOverHandler(timeout, setTooltip)}
         onMouseOut={
           isTouch ? undefined : createSvgMouseOutHandler(timeout, setTooltip)
