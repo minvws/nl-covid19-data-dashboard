@@ -11,12 +11,12 @@ import {
 } from '../../metric-config';
 import { Box } from '../base';
 import { useIntl } from '~/intl';
-import { AllLanguages, NLLocale } from '~/locale';
+import { AllLanguages } from '~/locale';
 
 interface SidebarBarScaleProps<T> {
   scope: DataScope;
   data: T;
-  localeTextKey: keyof NLLocale;
+  localeTextKey: keyof AllLanguages;
   metricName: MetricKeys<T>;
   metricProperty: string;
 }
@@ -30,9 +30,7 @@ export function SidebarBarScale<T>({
 }: SidebarBarScaleProps<T>) {
   const { siteText } = useIntl();
 
-  console.log(localeTextKey);
-
-  const text = siteText[localeTextKey];
+  const text = siteText[localeTextKey] as Record<string, string>;
   /**
    * @TODO this is still a bit messy due to improper typing. Not sure how to
    * fix this easily. The getLastFilledValue function is now strongly typed on
