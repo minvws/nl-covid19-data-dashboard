@@ -11,11 +11,12 @@ import {
 } from '../../metric-config';
 import { Box } from '../base';
 import { useIntl } from '~/intl';
+import { NLLocale } from '~/locale';
 
 interface SidebarBarScaleProps<T> {
   scope: DataScope;
   data: T;
-  localeTextKey: keyof Locale;
+  localeTextKey: keyof NLLocale;
   metricName: MetricKeys<T>;
   metricProperty: string;
 }

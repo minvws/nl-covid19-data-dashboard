@@ -51,7 +51,7 @@ function isDayBeforeYesterday(date: number | Date): boolean {
 export function useIntl() {
   // const { locale } = useRouter();
   const locale = process.env.NEXT_PUBLIC_LOCALE;
-  const { siteText } = useContext(IntlContext);
+  const siteText = useContext(IntlContext);
 
   // Number formatting
   const NumberFormat = new Intl.NumberFormat(locale);
