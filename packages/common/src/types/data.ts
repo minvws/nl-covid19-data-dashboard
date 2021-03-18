@@ -629,7 +629,7 @@ export interface NlVaccinatedPerAgeGroupValue {
   age_group_total: number;
   fully_vaccinated: number;
   partially_vaccinated: number;
-  coverage: number;
+  fully_vaccinated_percentage: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
