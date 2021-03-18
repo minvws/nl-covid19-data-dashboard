@@ -2,6 +2,7 @@ import { useContext } from 'react';
 // import { useRouter } from 'next/router';
 import { isSameDay, isToday, isYesterday, subDays } from 'date-fns';
 import { assert } from '~/utils/assert';
+import { isDefined } from 'ts-is-present';
 
 import { IntlContext } from '~/intl';
 
@@ -46,6 +47,27 @@ if ('__setDefaultTimeZone' in Intl.DateTimeFormat) {
 
 function isDayBeforeYesterday(date: number | Date): boolean {
   return isSameDay(date, subDays(Date.now(), 2));
+}
+
+type DateInput = { seconds: number } | { milliseconds: number };
+
+/**
+ * Utility to create a Date from seconds or milliseconds
+ * eg:
+ *
+ *     getDate({      seconds: 1616066567 })
+ *     getDate({ milliseconds: 1616066567880 })
+ */
+function getDate(input: DateInput) {
+  if ('seconds' in input && isDefined(input.seconds)) {
+    return new Date(input.seconds * 1000);
+  }
+
+  if ('milliseconds' in input && isDefined(input.milliseconds)) {
+    return new Date(input.milliseconds);
+  }
+
+  throw new Error(`Unknown date input: ${JSON.stringify(input)}`);
 }
 
 export function useIntl() {
@@ -166,6 +188,26 @@ export function useIntl() {
     }
   }
 
+  /**
+   * Returns one of `vandaag` | `gisteren` | `eergisteren`.
+   * If given date is more than 2 days ago it will return `undefined`.
+   */
+  function formatRelativeDate(input: DateInput) {
+    const date = getDate(input);
+
+    if (typeof window === 'undefined') {
+      throw new Error('formatRelativeDate cannot be called server-side');
+    }
+
+    return isToday(date)
+      ? siteText.utils.date_today
+      : isYesterday(date)
+      ? siteText.utils.date_yesterday
+      : isDayBeforeYesterday(date)
+      ? siteText.utils.date_day_before_yesterday
+      : undefined;
+  }
+
   function formatDate(
     dateOrTimestamp: Date | number,
     style: formatStyle = 'day-month'
@@ -216,6 +258,7 @@ export function useIntl() {
     formatDate,
     formatDateFromSeconds,
     formatDateFromMilliseconds,
+    formatRelativeDate,
     siteText,
     locale,
   };

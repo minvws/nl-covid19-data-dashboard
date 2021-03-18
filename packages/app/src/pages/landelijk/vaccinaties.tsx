@@ -30,7 +30,7 @@ import {
 import { useVaccineDeliveryData } from '~/domain/vaccine/use-vaccine-delivery-data';
 import { useVaccineNames } from '~/domain/vaccine/use-vaccine-names';
 import { VaccineDeliveryBarChart } from '~/domain/vaccine/vaccine-delivery-bar-chart';
-import { formatVaccinationsTooltip } from '~/domain/vaccine/vaccine-delivery-tooltip';
+import { FormatVaccinationsTooltip } from '~/domain/vaccine/vaccine-delivery-tooltip';
 import { VaccinePageIntroduction } from '~/domain/vaccine/vaccine-page-introduction';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { getVaccineMilestonesQuery } from '~/queries/vaccine-milestones-query';
@@ -277,7 +277,7 @@ const VaccinationPage = (
                     width={width}
                     timeframe="all"
                     formatTooltip={(values) =>
-                      formatVaccinationsTooltip(values, siteText)
+                      FormatVaccinationsTooltip(values, siteText)
                     }
                     divider={{
                       color: colors.annotation,

@@ -5,7 +5,6 @@
  * props. It might be easier to just create 2 or 3 different types of axes
  * layouts by forking this component.
  */
-import { formatNumber, formatPercentage } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { AxisBottom, AxisLeft } from '@visx/axis';
 import { GridRows } from '@visx/grid';
@@ -38,9 +37,6 @@ type AxesProps = {
   xTickValues: [number, number];
 };
 
-const formatYAxis = (y: number) => formatNumber(y);
-const formatYAxisPercentage = (y: number) => `${formatPercentage(y)}%`;
-
 type AnyTickFormatter = (value: any) => string;
 
 export const Axes = memo(function Axes({
@@ -55,7 +51,10 @@ export const Axes = memo(function Axes({
 }: AxesProps) {
   const [startUnix, endUnix] = xTickValues;
 
-  const { formatDateFromSeconds } = useIntl();
+  const { formatDateFromSeconds, formatNumber, formatPercentage } = useIntl();
+
+  const formatYAxis = (y: number) => formatNumber(y);
+  const formatYAxisPercentage = (y: number) => `${formatPercentage(y)}%`;
 
   const formatXAxis = useCallback(
     (date_unix: number) => {

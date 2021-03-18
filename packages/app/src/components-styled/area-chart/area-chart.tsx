@@ -1,6 +1,4 @@
 import {
-  formatNumber,
-  formatPercentage,
   isDateSpanValue,
   isDateValue,
   TimestampedValue,
@@ -99,7 +97,7 @@ export function AreaChart<
   T extends TimestampedValue,
   K extends TimestampedValue
 >(props: AreaChartProps<T, K>) {
-  const { formatDateFromSeconds } = useIntl();
+  const { formatDateFromSeconds, formatNumber, formatPercentage } = useIntl();
 
   const dateToValue = (d: { valueOf(): number }) => d.valueOf() / 1000;
   const formatXAxis = (date: Date | { valueOf(): number }) =>
@@ -340,10 +338,16 @@ function FormatDefaultTooltip<
   T extends TimestampedTrendValue,
   K extends TimestampedTrendValue
 >(values: HoverPoint<T | K>[], isPercentage?: boolean) {
+  const {
+    formatDateFromMilliseconds,
+    formatDateFromSeconds,
+    formatPercentage,
+    formatNumber,
+  } = useIntl();
+
   if (!values.length) {
     return null;
   }
-  const { formatDateFromMilliseconds, formatDateFromSeconds } = useIntl();
 
   const data = values[0].data;
 
