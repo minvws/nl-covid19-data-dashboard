@@ -2099,6 +2099,10 @@
       "tooltip_gemiddeld": "Totaal",
       "leeftijd_jaar": "{{ageGroup}} jaar"
     },
+    "grafiek_leveringen": {
+      "titel": "Leveringen t/m week {{weekNumber}}",
+      "omschrijving": "Iets over deze grafiek"
+    },
     "gezette_prikken": {
       "title": "Aantal gezette prikken",
       "estimated_until": "Berekend aantal tot en met {{reportedDate}}",

@@ -2,8 +2,9 @@
  * Code loosely based on
  * https://codesandbox.io/s/github/airbnb/visx/tree/master/packages/visx-demo/src/sandboxes/visx-barstack
  */
+import { TimestampedValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { AxisBottom, AxisLeft } from '@visx/axis';
+import { AxisBottom, AxisLeft, TickFormatter } from '@visx/axis';
 import { localPoint } from '@visx/event';
 import { GridRows } from '@visx/grid';
 import { Group } from '@visx/group';
@@ -21,12 +22,13 @@ import { transparentize } from 'polished';
 import { MouseEvent, TouchEvent, useCallback, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components-styled/base';
-import { Legend, LegendItem } from '~/components-styled/legend';
+import { Legend } from '~/components-styled/legend';
 import { InlineText } from '~/components-styled/typography';
 import siteText from '~/locale';
 import { colors } from '~/style/theme';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { getValuesInTimeframe } from '~/utils/timeframe';
 import { useIsMountedRef } from '~/utils/use-is-mounted-ref';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import {
@@ -37,8 +39,6 @@ import {
   getWeekInfo,
   SeriesValue,
 } from './logic';
-import { TimestampedValue } from '@corona-dashboard/common';
-import { getValuesInTimeframe } from '~/utils/timeframe';
 
 const tooltipStyles = {
   ...defaultStyles,
@@ -117,8 +117,10 @@ export type StackedChartProps<T extends TimestampedValue> = {
   config: Config<T>[];
   valueAnnotation?: string;
   width: number;
+  expectedLabel: string;
   formatTooltip?: TooltipFormatter;
   isPercentage?: boolean;
+  formatXAxis?: TickFormatter<Date>;
 };
 
 export function StackedChart<T extends TimestampedValue>(
@@ -129,7 +131,7 @@ export function StackedChart<T extends TimestampedValue>(
    * passed-in formatter functions or their default counterparts that have the
    * same name.
    */
-  const { values, config, width, isPercentage } = props;
+  const { values, config, width, isPercentage, expectedLabel } = props;
 
   const {
     tooltipData,
@@ -192,31 +194,53 @@ export function StackedChart<T extends TimestampedValue>(
   );
 
   /**
+   * This is a bit of a hack for now because this chart should be replaced by
+   * something more standardized anyway. We could introduce a special property
+   * like is_estimate to trigger the hatched pattern in all charts.
+   */
+  const hatchedFromIndex = valuesInTimeframe.findIndex(
+    (v) => ((v as unknown) as { is_estimate?: boolean }).is_estimate === true
+  );
+
+  /**
    * We generate new legend items based on hover state. This is probably not a
    * very efficient way of handling this. Maybe we should break open the Legend
    * abstraction for this so that we can set the colors directly on the DOM
    * elements similar to how bars are rendered.
    */
-  const legendaItems = useMemo(
-    () =>
-      config.map((x) => {
-        const itemIndex = metricProperties.findIndex(
-          (v) => v === x.metricProperty
-        );
+  const legendaItems = useMemo(() => {
+    const barItems = config.map((x) => {
+      const itemIndex = metricProperties.findIndex(
+        (v) => v === x.metricProperty
+      );
 
-        return {
-          color:
-            hoveredIndex === NO_HOVER_INDEX
-              ? x.color
-              : hoveredIndex === itemIndex
-              ? x.color
-              : hoverColors[itemIndex],
-          label: x.label,
-          shape: 'square',
-        } as LegendItem;
-      }),
-    [config, hoveredIndex, metricProperties, hoverColors]
-  );
+      return {
+        color:
+          hoveredIndex === NO_HOVER_INDEX
+            ? x.color
+            : hoveredIndex === itemIndex
+            ? x.color
+            : hoverColors[itemIndex],
+        label: x.label,
+        shape: 'square' as const,
+      };
+    });
+
+    /**
+     * @TODO this is a hard-coded addition to the chart legend. We should
+     * refactor this if we ever want to re-use this component. But I think we
+     * better create a new stacked start based on TimeSeriesChart components or
+     * something and try to refactor this one.
+     */
+    return [
+      ...barItems,
+      {
+        label: expectedLabel,
+        shape: 'custom' as const,
+        shapeComponent: HatchedSquare,
+      },
+    ];
+  }, [config, hoveredIndex, metricProperties, hoverColors, expectedLabel]);
 
   const labelByKey = useMemo(
     () =>
@@ -397,6 +421,8 @@ export function StackedChart<T extends TimestampedValue>(
     <Box>
       <Box position="relative">
         <svg width={width} height={height} role="img">
+          <HatchedPattern />
+
           <Group left={padding.left} top={padding.top}>
             <GridRows
               scale={yScale}
@@ -409,7 +435,7 @@ export function StackedChart<T extends TimestampedValue>(
               tickValues={xScale.domain()}
               top={bounds.height}
               stroke={colors.data.axis}
-              tickFormat={formatDateString}
+              tickFormat={props.formatXAxis ?? formatDateString}
               tickLabelProps={() => {
                 return {
                   textAnchor: 'middle',
@@ -463,26 +489,53 @@ export function StackedChart<T extends TimestampedValue>(
                       handleHover(event, bar, barStack.index);
 
                     return (
-                      <rect
-                        id={barId}
-                        key={barId}
-                        x={bar.x}
-                        /**
-                         * Create a little gap between the stacked bars. Bars
-                         * can be 0 height so we need to clip it on 0 since
-                         * negative height is not allowed.
-                         */
-                        y={bar.y + (isTinyScreen ? 1 : 2)}
-                        height={Math.max(
-                          0,
-                          bar.height - (isTinyScreen ? 1 : 2)
+                      <Group key={barId}>
+                        <rect
+                          id={barId}
+                          key={barId}
+                          x={bar.x}
+                          /**
+                           * Create a little gap between the stacked bars. Bars
+                           * can be 0 height so we need to clip it on 0 since
+                           * negative height is not allowed.
+                           */
+                          y={bar.y + (isTinyScreen ? 1 : 2)}
+                          height={Math.max(
+                            0,
+                            bar.height - (isTinyScreen ? 1 : 2)
+                          )}
+                          width={bar.width}
+                          fill={fillColor}
+                          onMouseLeave={handleHoverWithBar}
+                          onMouseMove={handleHoverWithBar}
+                          onTouchStart={handleHoverWithBar}
+                        />
+                        {bar.index >= hatchedFromIndex && (
+                          <rect
+                            pointerEvents="none"
+                            x={bar.x}
+                            /**
+                             * Create a little gap between the stacked bars. Bars
+                             * can be 0 height so we need to clip it on 0 since
+                             * negative height is not allowed.
+                             */
+                            y={bar.y + (isTinyScreen ? 1 : 2)}
+                            height={Math.max(
+                              0,
+                              bar.height - (isTinyScreen ? 1 : 2)
+                            )}
+                            width={bar.width}
+                            fill={
+                              breakpoints.lg
+                                ? 'url(#pattern-hatched)'
+                                : 'url(#pattern-hatched-small)'
+                            }
+                            onMouseLeave={handleHoverWithBar}
+                            onMouseMove={handleHoverWithBar}
+                            onTouchStart={handleHoverWithBar}
+                          />
                         )}
-                        width={bar.width}
-                        fill={fillColor}
-                        onMouseLeave={handleHoverWithBar}
-                        onMouseMove={handleHoverWithBar}
-                        onTouchStart={handleHoverWithBar}
-                      />
+                      </Group>
                     );
                   })
                 )
@@ -561,3 +614,52 @@ const Square = styled.span<{ color: string }>((x) =>
     height: 15,
   })
 );
+
+function HatchedSquare() {
+  return (
+    <svg height="15" width="15">
+      <rect height="15" width="15" fill="lightgray" />
+      <rect height="15" width="15" fill="url(#pattern-hatched-small)" />
+    </svg>
+  );
+}
+
+function HatchedPattern() {
+  const SIZE_LARGE = 8;
+  const SIZE_SMALL = 4;
+
+  return (
+    <defs>
+      <pattern
+        id="pattern-hatched"
+        width={SIZE_LARGE}
+        height={SIZE_LARGE}
+        patternTransform="rotate(-45 0 0)"
+        patternUnits="userSpaceOnUse"
+      >
+        <line
+          x1="0"
+          y1="0"
+          x2="0"
+          y2={SIZE_LARGE}
+          style={{ stroke: 'white', strokeWidth: 4 }}
+        />
+      </pattern>
+      <pattern
+        id="pattern-hatched-small"
+        width={SIZE_SMALL}
+        height={SIZE_SMALL}
+        patternTransform="rotate(-45 0 0)"
+        patternUnits="userSpaceOnUse"
+      >
+        <line
+          x1="0"
+          y1="0"
+          x2="0"
+          y2={SIZE_SMALL}
+          style={{ stroke: 'white', strokeWidth: 3 }}
+        />
+      </pattern>
+    </defs>
+  );
+}
