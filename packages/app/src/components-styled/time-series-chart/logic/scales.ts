@@ -56,7 +56,7 @@ export function useScales<T extends TimestampedValue>(args: {
       };
     }
 
-    const [start, end] = getTimeDomain(values);
+    const [start, end] = getTimeDomain(values, { withPadding: true });
 
     const xScale = scaleLinear({
       domain: [start, end],
@@ -73,9 +73,9 @@ export function useScales<T extends TimestampedValue>(args: {
       xScale,
       yScale,
       getX: (x: SeriesItem) => xScale(x.__date_unix),
-      getY: (x: SeriesSingleValue) => yScale(x.__value),
-      getY0: (x: SeriesDoubleValue) => yScale(x.__value_a),
-      getY1: (x: SeriesDoubleValue) => yScale(x.__value_b),
+      getY: (x: SeriesSingleValue) => yScale(x.__value ?? NaN),
+      getY0: (x: SeriesDoubleValue) => yScale(x.__value_a ?? NaN),
+      getY1: (x: SeriesDoubleValue) => yScale(x.__value_b ?? NaN),
       dateSpanWidth: getDateSpanWidth(values, xScale),
     };
 
@@ -93,7 +93,10 @@ export function useScales<T extends TimestampedValue>(args: {
  * series starts and where the last series ends, and that would remove all
  * "empty" space on both ends of the chart.
  */
-function getTimeDomain<T extends TimestampedValue>(values: T[]) {
+export function getTimeDomain<T extends TimestampedValue>(
+  values: T[],
+  { withPadding }: { withPadding: boolean }
+): [start: number, end: number] {
   /**
    * This code is assuming the values array is already sorted in time, so we
    * only need to pick the first and last values.
@@ -111,7 +114,9 @@ function getTimeDomain<T extends TimestampedValue>(values: T[]) {
      * time scale "padding" so that the markers and their date span fall nicely
      * within the "stretched" domain on both ends of the graph.
      */
-    return [start - ONE_DAY_IN_SECONDS, end + ONE_DAY_IN_SECONDS];
+    return withPadding
+      ? [start - ONE_DAY_IN_SECONDS / 2, end + ONE_DAY_IN_SECONDS / 2]
+      : [start, end];
   }
 
   if (isDateSpanSeries(values)) {
@@ -144,7 +149,7 @@ function getDateSpanWidth<T extends TimestampedValue>(
   xScale: ScaleLinear<number, number>
 ) {
   if (isDateSeries(values)) {
-    return xScale(ONE_DAY_IN_SECONDS);
+    return xScale(ONE_DAY_IN_SECONDS) - xScale(0);
   }
 
   if (isDateSpanSeries(values)) {

@@ -2,7 +2,6 @@ import {
   NationalDeceasedCbs,
   RegionalDeceasedCbs,
 } from '@corona-dashboard/common';
-import { ParentSize } from '@visx/responsive';
 import { AnchorTile } from '~/components-styled/anchor-tile';
 import { ChartTile } from '~/components-styled/chart-tile';
 import { TimeSeriesChart } from '~/components-styled/time-series-chart';
@@ -36,39 +35,37 @@ export function DeceasedMonitorSection({
         title={text.deceased_monitor_chart_title}
         description={text.deceased_monitor_chart_description}
       >
-        <ParentSize>
-          {({ width }) => (
-            <TimeSeriesChart
-              title={text.deceased_monitor_chart_title}
-              width={width}
-              values={data.values}
-              ariaLabelledBy=""
-              showDateMarker
-              seriesConfig={[
-                {
-                  type: 'range',
-                  metricPropertyLow: 'expected_min',
-                  metricPropertyHigh: 'expected_max',
-                  label: text.deceased_monitor_chart_legenda_expected_margin,
-                  color: colors.data.margin,
-                },
-                {
-                  type: 'line',
-                  metricProperty: 'expected',
-                  label: text.deceased_monitor_chart_legenda_expected,
-                  color: colors.data.primary,
-                },
-                {
-                  type: 'line',
-                  metricProperty: 'registered',
-                  label: text.deceased_monitor_chart_legenda_registered,
-                  color: colors.data.secondary,
-                  strokeWidth: 4,
-                },
-              ]}
-            />
-          )}
-        </ParentSize>
+        <TimeSeriesChart
+          title={text.deceased_monitor_chart_title}
+          values={data.values}
+          ariaLabelledBy=""
+          seriesConfig={[
+            {
+              type: 'range',
+              metricPropertyLow: 'expected_min',
+              metricPropertyHigh: 'expected_max',
+              label: text.deceased_monitor_chart_legenda_expected_margin,
+              shortLabel:
+                text.deceased_monitor_chart_legenda_expected_margin_short,
+              color: colors.data.margin,
+            },
+            {
+              type: 'line',
+              metricProperty: 'expected',
+              label: text.deceased_monitor_chart_legenda_expected,
+              shortLabel: text.deceased_monitor_chart_legenda_expected_short,
+              color: colors.data.primary,
+            },
+            {
+              type: 'line',
+              metricProperty: 'registered',
+              label: text.deceased_monitor_chart_legenda_registered,
+              shortLabel: text.deceased_monitor_chart_legenda_registered_short,
+              color: colors.data.secondary,
+              strokeWidth: 4,
+            },
+          ]}
+        />
       </ChartTile>
     </>
   );

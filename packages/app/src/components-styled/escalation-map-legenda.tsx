@@ -11,7 +11,8 @@ import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { regionGeo } from '~/components/choropleth/topology';
 import { default as siteText, default as text } from '~/locale';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { Heading, InlineText } from './typography';
+import { Heading, InlineText, Text } from './typography';
+import { formatDateFromSeconds } from '~/utils/formatDate';
 
 const escalationThresholds = regionThresholds.escalation_levels.level;
 
@@ -19,12 +20,13 @@ interface EscalationMapLegendaProps<K extends RegionsMetricName> {
   metricName: K;
   metricProperty: string;
   data: Pick<Regions, K>;
+  lastDetermined: number;
 }
 
 export function EscalationMapLegenda<K extends RegionsMetricName>(
   props: EscalationMapLegendaProps<K>
 ) {
-  const { metricName, metricProperty, data } = props;
+  const { metricName, metricProperty, data, lastDetermined } = props;
 
   const { getChoroplethValue, hasData } = useSafetyRegionData(
     regionGeo,
@@ -61,39 +63,47 @@ export function EscalationMapLegenda<K extends RegionsMetricName>(
   }, [getFillColor, hasData]);
 
   return (
-    <Box spacing={3} aria-label="legend" width="100%">
-      <Heading level={3} fontSize="1rem">
+    <Box aria-label="legend" width="100%">
+      <Heading level={3} fontSize="1rem" mb={0}>
         {siteText.escalatie_niveau.legenda.titel}
       </Heading>
-      {sortedEscalationArray.map((info) => (
-        <Box key={info.threshold} display="flex" alignItems="center">
-          <Box
-            display="flex"
-            alignItems="center"
-            spacing={{ _: 2, sm: 3 }}
-            spacingHorizontal
-            width={{ _: '8rem', sm: '10rem' }}
-          >
-            <EscalationLevelIcon level={info.threshold} />
-            <InlineText>
-              {siteText.escalatie_niveau.types[info.threshold].titel}
-            </InlineText>
+      <Text>
+        {replaceVariablesInText(
+          siteText.escalatie_niveau.legenda.determined_on,
+          { date: formatDateFromSeconds(lastDetermined, 'weekday-medium') }
+        )}
+      </Text>
+
+      <Box spacing={1}>
+        {sortedEscalationArray.map((info) => (
+          <Box key={info.threshold} display="flex" alignItems="center">
+            <Box
+              display="flex"
+              alignItems="center"
+              spacingHorizontal
+              width={{ _: '8rem', sm: '10rem' }}
+            >
+              <EscalationLevelIcon level={info.threshold} />
+              <InlineText pl={2}>
+                {siteText.escalatie_niveau.types[info.threshold].titel}
+              </InlineText>
+            </Box>
+            <EscalationBarLegenda
+              percentage={info.amount / totalItems}
+              color={info.color}
+            >
+              {info.amount
+                ? replaceVariablesInText(
+                    info.amount === 1
+                      ? text.escalatie_niveau.legenda.regio_singular
+                      : text.escalatie_niveau.legenda.regio_plural,
+                    { amount: info.amount }
+                  )
+                : text.escalatie_niveau.legenda.geen_regio}
+            </EscalationBarLegenda>
           </Box>
-          <EscalationBarLegenda
-            percentage={info.amount / totalItems}
-            color={info.color}
-          >
-            {info.amount
-              ? replaceVariablesInText(
-                  info.amount === 1
-                    ? text.escalatie_niveau.legenda.regio_singular
-                    : text.escalatie_niveau.legenda.regio_plural,
-                  { amount: info.amount }
-                )
-              : text.escalatie_niveau.legenda.geen_regio}
-          </EscalationBarLegenda>
-        </Box>
-      ))}
+        ))}
+      </Box>
     </Box>
   );
 }

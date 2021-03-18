@@ -1,10 +1,7 @@
 import { TimestampedValue } from '@corona-dashboard/common';
-import { transparentize } from 'polished';
 import { useMemo } from 'react';
-import { isDefined } from 'ts-is-present';
 import { LegendItem } from '~/components-styled/legend';
-import { colors } from '~/style/theme';
-import { AreaTrendIcon, LineTrendIcon, RangeTrendIcon } from '../components';
+import { SeriesIcon, TimespanAnnotationIcon } from '../components';
 import { DataOptions } from './common';
 import { SeriesConfig } from './series';
 
@@ -13,33 +10,12 @@ export function useLegendItems<T extends TimestampedValue>(
   dataOptions?: DataOptions
 ) {
   const legendItems = useMemo(() => {
-    const items = config
-      .map((x) => {
-        switch (x.type) {
-          case 'line':
-            return {
-              color: x.color,
-              label: x.label,
-              shape: 'custom',
-              shapeComponent: <LineTrendIcon config={x} />,
-            } as LegendItem;
-          case 'area':
-            return {
-              color: x.color,
-              label: x.label,
-              shape: 'custom',
-              shapeComponent: <AreaTrendIcon config={x} />,
-            } as LegendItem;
-          case 'range':
-            return {
-              color: x.color,
-              label: x.label,
-              shape: 'custom',
-              shapeComponent: <RangeTrendIcon config={x} />,
-            } as LegendItem;
-        }
-      })
-      .filter(isDefined);
+    const items = [...config].reverse().map<LegendItem>((x) => ({
+      color: x.color,
+      label: x.label,
+      shape: 'custom',
+      shapeComponent: <SeriesIcon config={x} />,
+    }));
 
     /**
      * Add annotations to the legend
@@ -47,11 +23,14 @@ export function useLegendItems<T extends TimestampedValue>(
     if (dataOptions?.timespanAnnotations) {
       for (const annotation of dataOptions.timespanAnnotations) {
         items.push({
-          color: annotation.color
-            ? transparentize(0.7, annotation.color)
-            : colors.data.emphasis,
           label: annotation.label,
-          shape: 'square',
+          shape: 'custom',
+          shapeComponent: (
+            <TimespanAnnotationIcon
+              color={annotation.color}
+              fillOpacity={annotation.fillOpacity}
+            />
+          ),
         } as LegendItem);
       }
     }
