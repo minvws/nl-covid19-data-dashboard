@@ -2,7 +2,7 @@ import { NlVaccineDeliveryPerSupplier } from '@corona-dashboard/common';
 import { ParentSize } from '@visx/responsive';
 import { ChartTile } from '~/components-styled/chart-tile';
 import { StackedChart } from '~/components-styled/stacked-chart';
-import { AllLanguages } from '~/locale/APP_LOCALE';
+import { AllLanguages } from '~/locale';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
