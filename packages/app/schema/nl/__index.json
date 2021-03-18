@@ -41,7 +41,8 @@
     "vaccine_administered_lnaz",
     "vaccine_administered_total",
     "vaccine_administered_rate_moving_average",
-    "vaccine_administered_planned"
+    "vaccine_administered_planned",
+    "vaccine_coverage_per_age_group"
   ],
   "additionalProperties": false,
   "properties": {
@@ -165,8 +166,8 @@
     "vaccine_administered_planned": {
       "$ref": "vaccine_administered_planned.json"
     },
-    "vaccinated_per_age_group": {
-      "$ref": "vaccinated_per_age_group.json"
+    "vaccine_coverage_per_age_group": {
+      "$ref": "vaccine_coverage_per_age_group.json"
     }
   }
 }
