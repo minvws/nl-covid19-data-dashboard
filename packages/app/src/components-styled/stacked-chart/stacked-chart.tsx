@@ -236,9 +236,8 @@ export function StackedChart<T extends TimestampedValue>(
       ...barItems,
       {
         label: expectedLabel,
-        color: 'black',
         shape: 'custom' as const,
-        ShapeComponent: HatchedSquare,
+        shapeComponent: HatchedSquare,
       },
     ];
   }, [config, hoveredIndex, metricProperties, hoverColors, expectedLabel]);
