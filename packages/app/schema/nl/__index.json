@@ -31,7 +31,6 @@
     "vaccine_support",
     "vaccine_delivery",
     "vaccine_delivery_estimate",
-    "vaccine_delivery_estimate_time_span",
     "vaccine_administered",
     "vaccine_administered_estimate",
     "vaccine_administered_care_institutions",
