@@ -1,12 +1,12 @@
 import css from '@styled-system/css';
 import { ArrowIconRight } from '~/components-styled/arrow-icon';
 import { Box } from '~/components-styled/base';
-import { CollapsibleSection } from '~/components-styled/collapsible';
 import { EscalationLevelInfoLabel } from '~/components-styled/escalation-level';
 import { LinkWithIcon } from '~/components-styled/link-with-icon';
 import { Text } from '~/components-styled/typography';
 import { useIntl } from '~/intl';
 import { EscalationLevel } from '../restrictions/type';
+import { CollapsibleButton } from '~/components-styled/collapsible';
 
 type EscalationLevelExplanationProps = {
   level: EscalationLevel;
@@ -31,11 +31,8 @@ export function EscalationLevelExplanations() {
   const { siteText } = useIntl();
 
   return (
-    <CollapsibleSection
-      summary={siteText.escalatie_niveau.tile_title}
-      hideBorder
-    >
-      <Box my={3}>
+    <CollapsibleButton label={siteText.escalatie_niveau.tile_title}>
+      <Box my={3} px={{ _: 3, xs: 4, md: 5, lg: '12rem' }}>
         <EscalationLevelExplanation
           level={1}
           explanation={siteText.escalatie_niveau.types['1'].toelichting}
@@ -52,7 +49,7 @@ export function EscalationLevelExplanations() {
           level={4}
           explanation={siteText.escalatie_niveau.types['4'].toelichting}
         />
-        <Box mt={4}>
+        <Box my={4}>
           <LinkWithIcon
             href="/over-risiconiveaus"
             icon={<ArrowIconRight />}
@@ -62,6 +59,6 @@ export function EscalationLevelExplanations() {
           </LinkWithIcon>
         </Box>
       </Box>
-    </CollapsibleSection>
+    </CollapsibleButton>
   );
 }

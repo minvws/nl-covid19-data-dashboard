@@ -364,6 +364,10 @@ const PositivelyTestedPeople = (
               },
             ]}
             metadata={{
+              date: [
+                ggdAverageLastValue.date_start_unix,
+                ggdAverageLastValue.date_end_unix,
+              ],
               source: ggdText.bronnen.rivm,
             }}
             formatTooltip={(x) => {
