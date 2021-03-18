@@ -62,7 +62,7 @@ export const getStaticProps = createGetStaticProps(
     };
   }>(
     `{
-      "milestones": ${getVaccineMilestonesQuery(null)},
+      "milestones": ${getVaccineMilestonesQuery},
       "highlight": ${createPageArticlesQuery('vaccinationsPage')}
     }`
   )
