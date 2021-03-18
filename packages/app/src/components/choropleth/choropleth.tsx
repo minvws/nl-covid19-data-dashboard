@@ -128,7 +128,7 @@ const ChoroplethMap: <T1, T3>(
   } = props;
 
   const ratio = 1.2;
-  const [ref, dimensions] = useChartDimensions<SVGSVGElement>(
+  const [ref, dimensions] = useChartDimensions<HTMLDivElement>(
     initialWidth,
     ratio
   );
@@ -155,63 +155,71 @@ const ChoroplethMap: <T1, T3>(
       <span id={dataDescriptionId} style={{ display: 'none' }}>
         {description}
       </span>
-      <svg
-        ref={ref}
-        width={width}
-        viewBox={`0 0 ${width} ${height}`}
-        css={css({ display: 'block', bg: 'transparent', width: '100%' })}
-        onMouseMove={createSvgMouseOverHandler(timeout, setTooltip)}
-        onMouseOut={
-          isTouch ? undefined : createSvgMouseOutHandler(timeout, setTooltip)
-        }
-        onClick={createSvgClickHandler(onPathClick, setTooltip, isTouch)}
-        data-cy="choropleth-map"
-        aria-labelledby={dataDescriptionId}
-      >
-        <clipPath id={clipPathId}>
-          <rect
-            x={dimensions.marginLeft}
-            y={0}
-            height={dimensions.boundedHeight}
-            width={
-              (dimensions.boundedWidth ?? 0) -
-              (dimensions.marginLeft ?? 0) -
-              (dimensions.marginRight ?? 0)
-            }
-          />
-        </clipPath>
-        <rect x={0} y={0} width={width} height={height} fill={'none'} rx={14} />
-        <g
-          transform={`translate(${marginLeft},${marginTop})`}
-          clipPath={`url(#${clipPathId})`}
+      <div ref={ref}>
+        <svg
+          width={width}
+          viewBox={`0 0 ${width} ${height}`}
+          css={css({ display: 'block', bg: 'transparent', width: '100%' })}
+          onMouseMove={createSvgMouseOverHandler(timeout, setTooltip)}
+          onMouseOut={
+            isTouch ? undefined : createSvgMouseOutHandler(timeout, setTooltip)
+          }
+          onClick={createSvgClickHandler(onPathClick, setTooltip, isTouch)}
+          data-cy="choropleth-map"
+          aria-labelledby={dataDescriptionId}
         >
-          <MercatorGroup
-            data={featureCollection.features}
-            render={renderFeature}
-            fitSize={fitSize}
+          <clipPath id={clipPathId}>
+            <rect
+              x={dimensions.marginLeft}
+              y={0}
+              height={dimensions.boundedHeight}
+              width={
+                (dimensions.boundedWidth ?? 0) -
+                (dimensions.marginLeft ?? 0) -
+                (dimensions.marginRight ?? 0)
+              }
+            />
+          </clipPath>
+          <rect
+            x={0}
+            y={0}
+            width={width}
+            height={height}
+            fill={'none'}
+            rx={14}
           />
-
-          <Country fitSize={fitSize} />
-
-          {hovers && (
-            <g ref={hoverRef}>
-              <MercatorGroup
-                data={hovers.features}
-                render={renderHover}
-                fitSize={fitSize}
-              />
-            </g>
-          )}
-
-          {renderHighlight && (
+          <g
+            transform={`translate(${marginLeft},${marginTop})`}
+            clipPath={`url(#${clipPathId})`}
+          >
             <MercatorGroup
               data={featureCollection.features}
-              render={renderHighlight}
+              render={renderFeature}
               fitSize={fitSize}
             />
-          )}
-        </g>
-      </svg>
+
+            <Country fitSize={fitSize} />
+
+            {hovers && (
+              <g ref={hoverRef}>
+                <MercatorGroup
+                  data={hovers.features}
+                  render={renderHover}
+                  fitSize={fitSize}
+                />
+              </g>
+            )}
+
+            {renderHighlight && (
+              <MercatorGroup
+                data={featureCollection.features}
+                render={renderHighlight}
+                fitSize={fitSize}
+              />
+            )}
+          </g>
+        </svg>
+      </div>
     </>
   );
 });
