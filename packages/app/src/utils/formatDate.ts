@@ -85,10 +85,7 @@ const WeekdayMedium = new Intl.DateTimeFormat(locale, {
   timeZone: 'Europe/Amsterdam',
 } as DateTimeFormatOptions);
 
-export function formatDateFromSeconds(
-  seconds: number,
-  style?: formatStyle
-): string {
+export function formatDateFromSeconds(seconds: number, style?: formatStyle) {
   assert(!isNaN(seconds), 'seconds is NaN');
 
   /**
@@ -105,7 +102,7 @@ export function formatDateFromSeconds(
 export function formatDateFromMilliseconds(
   milliseconds: number,
   style?: formatStyle
-): string {
+) {
   assert(!isNaN(milliseconds), 'milliseconds is NaN');
 
   return formatDate(new Date(milliseconds), style);
@@ -187,7 +184,7 @@ export function formatRelativeDate(input: DateInput) {
     : undefined;
 }
 
-function isDayBeforeYesterday(date: Date): boolean {
+function isDayBeforeYesterday(date: Date) {
   return isSameDay(date, subDays(Date.now(), 2));
 }
 
