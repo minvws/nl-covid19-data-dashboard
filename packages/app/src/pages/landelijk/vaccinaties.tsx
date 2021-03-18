@@ -1,4 +1,5 @@
 import {
+  formatNumber,
   NlVaccineAdministeredEstimateValue,
   NlVaccineAdministeredValue,
   NlVaccineDeliveryEstimateValue,
@@ -47,7 +48,6 @@ import {
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { formatDateFromSeconds } from '~/utils/formatDate';
-import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 const scaledVaccineIcon = (
@@ -457,7 +457,8 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
         </ChartTile>
 
         {/*
-        @TODO enable when content is available
+        @TODO re-enable when data is available
+
         <ContentHeader
           title={text.stock_and_delivery_section.title}
           icon={scaledVaccineIcon}
@@ -470,11 +471,96 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
             dataSources: [],
           }}
         />
-        */}
+        
+        <TwoKpiSection>
+          <KpiTile
+            title={text.stock.title}
+            metadata={{
+              date: data.vaccine_stock.last_value.date_of_insertion_unix,
+              source: text.bronnen.stock,
+            }}
+          >
+            <KpiValue absolute={data.vaccine_stock.last_value.total} />
+            <Text>{text.stock.description}</Text>
+
+            <Box as="ul" p={0}>
+              <Box as="li" display="block">
+                <ColorIndicator
+                  color={colors.data.vaccines.bio_n_tech_pfizer}
+                />
+                {replaceComponentsInText(text.stock.per_vaccine, {
+                  amount: (
+                    <strong>
+                      {formatNumber(
+                        data.vaccine_stock.last_value.bio_n_tech_pfizer
+                      )}
+                    </strong>
+                  ),
+                  label: 'BioNTech/Pfizer',
+                })}
+              </Box>
+              <Box as="li" display="block">
+                <ColorIndicator color={colors.data.vaccines.moderna} />
+                {replaceComponentsInText(text.stock.per_vaccine, {
+                  amount: (
+                    <strong>
+                      {formatNumber(data.vaccine_stock.last_value.moderna)}
+                    </strong>
+                  ),
+                  label: 'Moderna',
+                })}
+              </Box>
+              <Box as="li" display="block">
+                <ColorIndicator color={colors.data.vaccines.astra_zeneca} />
+                {replaceComponentsInText(text.stock.per_vaccine, {
+                  amount: (
+                    <strong>
+                      {formatNumber(data.vaccine_stock.last_value.astra_zeneca)}
+                    </strong>
+                  ),
+                  label: 'AstraZeneca',
+                })}
+              </Box>
+            </Box>
+          </KpiTile>
+
+          <KpiTile
+            title={replaceVariablesInText(
+              text.delivery_estimate_time_span.title,
+              {
+                weeks:
+                  data.vaccine_delivery_estimate_time_span.last_value
+                    .time_span_weeks,
+              }
+            )}
+            metadata={{
+              date:
+                data.vaccine_delivery_estimate_time_span.last_value
+                  .date_of_insertion_unix,
+              source: text.bronnen.delivery_estimate_time_span,
+            }}
+          >
+            <KpiValue
+              absolute={
+                data.vaccine_delivery_estimate_time_span.last_value.doses
+              }
+            />
+            <Text mb={4}>
+              {replaceVariablesInText(
+                text.delivery_estimate_time_span.description,
+                {
+                  weeks:
+                    data.vaccine_delivery_estimate_time_span.last_value
+                      .time_span_weeks,
+                }
+              )}
+            </Text>
+          </KpiTile>
+        </TwoKpiSection>
+              */}
 
         <TwoKpiSection>
           <KpiTile title={text.expected_page_additions.title}>
-            <Text mb={4}>{text.expected_page_additions.description}</Text>
             {additions.length > 0 && (
               <ul>
                 {text.expected_page_additions.additions
@@ -553,3 +639,18 @@ function HatchedSquare() {
     </svg>
   );
 }
+
+// @TODO re-enable when data is available
+//
+// const ColorIndicator = styled.span<{
+//   color?: string;
+// }>`
+//   content: '';
+//   display: ${(x) => (x.color ? 'inline-block' : 'none')};
+//   height: 8px;
+//   width: 8px;
+//   border-radius: 50%;
+//   background: ${(x) => x.color || 'black'};
+//   margin-right: 0.5em;
+//   flex-shrink: 0;
+// `;

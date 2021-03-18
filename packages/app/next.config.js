@@ -33,7 +33,7 @@ const nextConfig = {
    */
   reactStrictMode: true,
 
-  i18n: {
+  /*i18n: {
     // These are all the locales you want to support in
     // your application
     locales: ['nl', 'en'],
@@ -79,7 +79,7 @@ const nextConfig = {
         defaultLocale: 'nl',
       },
     ],
-  },
+  },*/
 
   webpack(config, { isServer, webpack, defaultLoaders }) {
     if (
