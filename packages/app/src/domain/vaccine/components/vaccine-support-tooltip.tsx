@@ -13,12 +13,10 @@ import { formatDateFromSeconds } from '~/utils/formatDate';
 export function VaccineSupportTooltip({
   locale,
   value,
-  valueKey: __valueKey,
   config,
 }: {
   locale: Locale;
   value: NlVaccineSupportValue;
-  valueKey: keyof NlVaccineSupportValue;
   config: SeriesConfig<NlVaccineSupportValue>;
 }) {
   const dateStartString = formatDateFromSeconds(value.date_start_unix, 'axis');

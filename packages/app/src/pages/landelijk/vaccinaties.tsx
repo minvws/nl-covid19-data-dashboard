@@ -315,7 +315,7 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
                   label: text.data.vaccination_chart.legend.expected,
                   color: 'black',
                   shape: 'custom',
-                  ShapeComponent: HatchedSquare,
+                  shapeComponent: HatchedSquare,
                 },
               ]}
             />
@@ -343,10 +343,12 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
           expectedMilestones={milestones.expectedMilestones}
         />
 
-        <VaccineDeliveryBarChart
-          data={data.vaccine_delivery_per_supplier}
-          siteText={siteText}
-        />
+        {data.vaccine_delivery_per_supplier ? (
+          <VaccineDeliveryBarChart
+            data={data.vaccine_delivery_per_supplier}
+            siteText={siteText}
+          />
+        ) : null}
 
         <ChartTile
           title={text.grafiek_draagvlak.titel}

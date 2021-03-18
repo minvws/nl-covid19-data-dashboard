@@ -144,7 +144,7 @@ export interface National {
   corona_melder_app: NlCoronaMelderApp;
   vaccine_delivery: NlVaccineDelivery;
   vaccine_delivery_estimate: NlVaccineDeliveryEstimate;
-  vaccine_delivery_per_supplier: NlVaccineDeliveryPerSupplier;
+  vaccine_delivery_per_supplier?: NlVaccineDeliveryPerSupplier;
   vaccine_administered: NlVaccineAdministered;
   vaccine_administered_estimate: NlVaccineAdministeredEstimate;
   vaccine_administered_care_institutions: NlVaccineAdministeredCareInstitutions;

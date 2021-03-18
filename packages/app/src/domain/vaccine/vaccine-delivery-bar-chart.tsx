@@ -20,6 +20,9 @@ export function VaccineDeliveryBarChart({
 }: VaccineDeliveryBarChartProps) {
   const text = siteText.vaccinaties.grafiek_leveringen;
 
+   /**
+   * @TODO connect to real data and remove mock data
+   */
   const values: NlVaccineDeliveryPerSupplierValue[] = [
     {
       total: 23456,
