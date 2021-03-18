@@ -10,7 +10,6 @@ import { GetStaticPropsContext } from 'next';
 import safetyRegions from '~/data/index';
 import municipalities from '~/data/municipalSearchData';
 import { client, localize } from '~/lib/sanity';
-import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
 import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
 
 /**
@@ -39,7 +38,6 @@ export function getLastGeneratedDate() {
 
 //@TODO THIS NEEDS TO COME FROM CONTEXT
 const locale = process.env.NEXT_PUBLIC_LOCALE;
-
 export function createGetContent<T>(
   queryOrQueryGetter: string | ((context: GetStaticPropsContext) => string)
 ) {
