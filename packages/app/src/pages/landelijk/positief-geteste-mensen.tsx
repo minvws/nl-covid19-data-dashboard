@@ -52,6 +52,7 @@ import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { TimeSeriesChart } from '~/components-styled/time-series-chart';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -79,7 +80,6 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
   );
   const router = useRouter();
 
-  const dataInfectedDelta = data.tested_overall;
   const dataGgdAverageLastValue = data.tested_ggd_average.last_value;
   const dataGgdDailyValues = data.tested_ggd_daily.values;
 
@@ -104,9 +104,9 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
           subtitle={text.pagina_toelichting}
           metadata={{
             datumsText: text.datums,
-            dateOrRange: dataInfectedDelta.last_value.date_unix,
+            dateOrRange: data.tested_overall.last_value.date_unix,
             dateOfInsertionUnix:
-              dataInfectedDelta.last_value.date_of_insertion_unix,
+              data.tested_overall.last_value.date_of_insertion_unix,
             dataSources: [text.bronnen.rivm],
           }}
           reference={text.reference}
@@ -118,7 +118,7 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
           <KpiTile
             title={text.kpi_titel}
             metadata={{
-              date: dataInfectedDelta.last_value.date_unix,
+              date: data.tested_overall.last_value.date_unix,
               source: text.bronnen.rivm,
             }}
           >
@@ -164,7 +164,7 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
             title={text.barscale_titel}
             data-cy="infected_per_100k"
             metadata={{
-              date: dataInfectedDelta.last_value.date_unix,
+              date: data.tested_overall.last_value.date_unix,
               source: text.bronnen.rivm,
             }}
           >
@@ -185,7 +185,7 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
           data-cy="choropleths"
           title={text.map_titel}
           metadata={{
-            date: dataInfectedDelta.last_value.date_unix,
+            date: data.tested_overall.last_value.date_unix,
             source: text.bronnen.rivm,
           }}
           description={text.map_toelichting}
@@ -241,51 +241,69 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
           )}
         </ChoroplethTile>
 
-        <LineChartTile
+        <ChartTile
           title={text.linechart_titel}
           description={text.linechart_toelichting}
-          signaalwaarde={7}
-          values={dataInfectedDelta.values}
-          linesConfig={[{ metricProperty: 'infected_per_100k' }]}
           metadata={{
             source: text.bronnen.rivm,
           }}
-          formatTooltip={(values) => {
-            const value = values[0];
+        >
+          <TimeSeriesChart
+            title={text.linechart_titel}
+            values={data.tested_overall.values}
+            seriesConfig={[
+              {
+                type: 'area' as const,
+                metricProperty: 'infected_per_100k',
+                label: '@TODO',
+                color: colors.data.primary,
+              },
+            ]}
+            dataOptions={{
+              benchmark: {
+                value: 7,
+                label: siteText.common.barScale.signaalwaarde,
+              },
+            }}
+          />
+        </ChartTile>
 
-            return (
-              <Text textAlign="center" m={0}>
-                <span style={{ fontWeight: 'bold' }}>
-                  {formatDateFromMilliseconds(value.__date.getTime(), 'medium')}
-                </span>
-                <br />
-                <span
-                  style={{
-                    height: '0.5em',
-                    width: '0.5em',
-                    marginBottom: '0.5px',
-                    backgroundColor: colors.data.primary,
-                    borderRadius: '50%',
-                    display: 'inline-block',
-                  }}
-                />{' '}
-                {replaceVariablesInText(
-                  siteText.common.tooltip.positive_tested_value,
-                  {
-                    totalPositiveValue: formatNumber(value.__value),
-                  }
-                )}
-                <br />
-                {replaceVariablesInText(
-                  siteText.common.tooltip.positive_tested_people,
-                  {
-                    totalPositiveTestedPeople: formatNumber(value.infected),
-                  }
-                )}
-              </Text>
-            );
-          }}
-        />
+        {/*  //   formatTooltip={(values) => {
+        //     const value = values[0];
+
+        //     return (
+        //       <Text textAlign="center" m={0}>
+        //         <span style={{ fontWeight: 'bold' }}>
+        //           {formatDateFromMilliseconds(value.__date.getTime(), 'medium')}
+        //         </span>
+        //         <br />
+        //         <span
+        //           style={{
+        //             height: '0.5em',
+        //             width: '0.5em',
+        //             marginBottom: '0.5px',
+        //             backgroundColor: colors.data.primary,
+        //             borderRadius: '50%',
+        //             display: 'inline-block',
+        //           }}
+        //         />{' '}
+        //         {replaceVariablesInText(
+        //           siteText.common.tooltip.positive_tested_value,
+        //           {
+        //             totalPositiveValue: formatNumber(value.__value),
+        //           }
+        //         )}
+        //         <br />
+        //         {replaceVariablesInText(
+        //           siteText.common.tooltip.positive_tested_people,
+        //           {
+        //             totalPositiveTestedPeople: formatNumber(value.infected),
+        //           }
+        //         )}
+        //       </Text>
+        //     );
+        //   }}
+        // /> */}
 
         <ChartTile
           title={siteText.infected_age_groups.title}
@@ -294,7 +312,7 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
             ageDemographicExampleData
           )}
           metadata={{
-            date: dataInfectedDelta.last_value.date_unix,
+            date: data.tested_overall.last_value.date_unix,
             source: text.bronnen.rivm,
           }}
         >
