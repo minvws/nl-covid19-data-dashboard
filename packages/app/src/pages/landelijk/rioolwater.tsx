@@ -58,7 +58,9 @@ const SewerWater: FCWithLayout<typeof getStaticProps> = ({
   const graphDescriptions = siteText.accessibility.grafieken;
   const sewerAverages = data.sewer;
   const router = useRouter();
-  const [selectedMap, setSelectedMap] = useState<RegionControlOption>('municipal');
+  const [selectedMap, setSelectedMap] = useState<RegionControlOption>(
+    'municipal'
+  );
 
   return (
     <>

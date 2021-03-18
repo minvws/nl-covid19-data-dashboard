@@ -20,6 +20,7 @@ export function TopNavigation() {
   const breakpoints = useBreakpoints(true);
   const isSmallScreen = !breakpoints.md;
   const { ref: contentRef, height: contentHeight = 0 } = useResizeObserver();
+  const [needsMobileMenuLink, setNeedsMobileMenuLink] = useState(false);
   // const [navWrapperTransition, setNavWrapperTransition] = useState('none');
 
   // const isMounted = useIsMounted();
@@ -29,6 +30,11 @@ export function TopNavigation() {
   useEffect(() => {
     setIsMenuOpen(false);
   }, []);
+
+  useEffect(() => {
+    // Workaround to get the mobile menu opened when linking to a sub-page.
+    setNeedsMobileMenuLink(isSmallScreen);
+  }, [isSmallScreen]);
 
   function toggleMenu() {
     setIsMenuOpen(!isMenuOpen);
