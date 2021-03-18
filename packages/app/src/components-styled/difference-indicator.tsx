@@ -19,36 +19,28 @@ interface DifferenceIndicatorProps {
   value: DifferenceDecimal | DifferenceInteger;
   isDecimal?: boolean;
   context?: 'sidebar' | 'tile' | 'inline';
+  maximumFractionDigits?: number;
   staticTimespan?: string;
-  differenceFractionDigits?: number;
 }
 
 export function DifferenceIndicator(props: DifferenceIndicatorProps) {
-  const {
-    value,
-    isDecimal,
-    context,
-    staticTimespan,
-    differenceFractionDigits,
-  } = props;
+  switch (props.context) {
+    case 'sidebar':
+      return <SidebarIndicator {...props} />;
 
-  if (context === 'sidebar') {
-    return RenderSidebarIndicator(value);
+    case 'inline':
+      return <InlineIndicator {...props} />;
+
+    default:
+      return <TileIndicator {...props} />;
   }
-
-  if (context === 'inline') {
-    return RenderInlineIndicator(value, isDecimal, differenceFractionDigits);
-  }
-
-  return RenderTileIndicator(
-    value,
-    isDecimal,
-    staticTimespan,
-    differenceFractionDigits
-  );
 }
 
-function RenderSidebarIndicator(value: DifferenceDecimal | DifferenceInteger) {
+function SidebarIndicator({
+  value,
+}: {
+  value: DifferenceDecimal | DifferenceInteger;
+}) {
   const { difference } = value;
 
   if (difference > 0) {
@@ -80,11 +72,15 @@ function RenderSidebarIndicator(value: DifferenceDecimal | DifferenceInteger) {
   );
 }
 
-function RenderInlineIndicator(
-  value: DifferenceDecimal | DifferenceInteger,
-  isDecimal?: boolean,
-  differenceFractionDigits?: number
-) {
+function InlineIndicator({
+  value,
+  isDecimal,
+  maximumFractionDigits,
+}: {
+  value: DifferenceDecimal | DifferenceInteger;
+  isDecimal?: boolean;
+  maximumFractionDigits?: number;
+}) {
   const { siteText, formatPercentage, formatNumber } = useIntl();
   const text = siteText.toe_en_afname;
 
@@ -93,11 +89,7 @@ function RenderInlineIndicator(
   const differenceFormattedString = isDecimal
     ? formatPercentage(
         Math.abs(difference),
-        differenceFractionDigits
-          ? {
-              maximumFractionDigits: differenceFractionDigits,
-            }
-          : undefined
+        maximumFractionDigits ? { maximumFractionDigits } : undefined
       )
     : formatNumber(Math.abs(difference));
 
@@ -139,12 +131,17 @@ function RenderInlineIndicator(
   );
 }
 
-function RenderTileIndicator(
-  value: DifferenceDecimal | DifferenceInteger,
-  isDecimal?: boolean,
-  staticTimespan?: string,
-  maximumFractionDigits?: number
-) {
+function TileIndicator({
+  value,
+  isDecimal,
+  staticTimespan,
+  maximumFractionDigits,
+}: {
+  value: DifferenceDecimal | DifferenceInteger;
+  isDecimal?: boolean;
+  maximumFractionDigits?: number;
+  staticTimespan?: string;
+}) {
   const { siteText, formatNumber, formatPercentage } = useIntl();
   const text = siteText.toe_en_afname;
 
