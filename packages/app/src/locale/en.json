@@ -780,8 +780,7 @@
     ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
-      "text": "RIVM",
-      "hidden_text": "Bekijk de Bron van de positief geteste mensen op RIVM"
+      "text": "RIVM"
     },
     "metadata": {
       "title": "Confirmed cases in {{safetyRegionName}} | Coronavirus Dashboard | Government.nl",
