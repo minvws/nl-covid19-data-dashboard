@@ -133,7 +133,7 @@ export function PageBarScale<T>({
           value={differenceValue}
           isDecimal={config.isDecimal}
           staticTimespan={differenceStaticTimespan}
-          differenceFractionDigits={differenceFractionDigits}
+          maximumFractionDigits={differenceFractionDigits}
         />
       )}
     </Box>
