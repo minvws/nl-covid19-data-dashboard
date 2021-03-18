@@ -1,7 +1,4 @@
-import {
-  NlVaccineDeliveryPerSupplier,
-  NlVaccineDeliveryPerSupplierValue,
-} from '@corona-dashboard/common';
+import { NlVaccineDeliveryPerSupplier } from '@corona-dashboard/common';
 import { ParentSize } from '@visx/responsive';
 import { ChartTile } from '~/components-styled/chart-tile';
 import { StackedChart } from '~/components-styled/stacked-chart';
@@ -15,15 +12,16 @@ interface VaccineDeliveryBarChartProps {
 }
 
 export function VaccineDeliveryBarChart({
-  data: __data,
+  data,
   siteText,
 }: VaccineDeliveryBarChartProps) {
   const text = siteText.vaccinaties.grafiek_leveringen;
 
-   /**
-   * @TODO connect to real data and remove mock data
+  /**
+   * @TODO Remove mock data, but leaving it in for now in case we need to work
+   * on the chart again before actual data is available.
    */
-  const values: NlVaccineDeliveryPerSupplierValue[] = [
+  /*  const values: NlVaccineDeliveryPerSupplierValue[] = [
     {
       total: 23456,
       bio_n_tech_pfizer: 1234,
@@ -110,15 +108,15 @@ export function VaccineDeliveryBarChart({
     date_end_unix: new Date('02-14-2020').getTime() / 1000,
     date_of_report_unix: new Date('02-16-2020').getTime() / 1000,
   };
-
+ */
   return (
     <ChartTile
       title={replaceVariablesInText(text.titel, {
-        weekNumber: last_value.week_number,
+        weekNumber: data.last_value.week_number,
       })}
       description={text.omschrijving}
       metadata={{
-        date: last_value.date_of_report_unix,
+        date: data.last_value.date_of_report_unix,
         source: siteText.vaccinaties.bronnen.rivm,
       }}
     >
@@ -126,7 +124,7 @@ export function VaccineDeliveryBarChart({
         {({ width }) => (
           <StackedChart
             width={width}
-            values={values}
+            values={data.values}
             config={[
               {
                 metricProperty: 'bio_n_tech_pfizer',
@@ -145,7 +143,7 @@ export function VaccineDeliveryBarChart({
               },
             ]}
             formatXAxis={(__value, index) =>
-              `Week ${values[index].week_number}`
+              `Week ${data.values[index].week_number}`
             }
             expectedLabel={
               siteText.vaccinaties.data.vaccination_chart.legend.expected
