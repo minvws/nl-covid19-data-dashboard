@@ -1,8 +1,4 @@
-import { GetStaticPropsContext } from 'next';
-
-export function getVaccineMilestonesQuery(
-  context: GetStaticPropsContext | null
-) {
+export function getVaccineMilestonesQuery() {
   //@TODO
   // CONTEXT IS NOT PASSED TO THIS GETTER. FIGURE OUT HOW TO SOLVE THIS!
   const locale = process.env.NEXT_PUBLIC_LOCALE;
