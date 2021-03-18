@@ -153,6 +153,7 @@ export interface National {
   corona_melder_app: NlCoronaMelderApp;
   vaccine_delivery: NlVaccineDelivery;
   vaccine_delivery_estimate: NlVaccineEstimateDelivery;
+  vaccine_delivery_estimate_time_span: NlVaccineDeliveryEstimateTimeSpan;
   vaccine_administered: NlVaccineAdministered;
   vaccine_administered_estimate: NlVaccineAdministeredEstimate;
   vaccine_administered_care_institutions: NlVaccineAdministeredCareInstitutions;
@@ -500,6 +501,15 @@ export interface NlVaccineDeliveryEstimateValue {
   date_of_insertion_unix: number;
   date_start_unix: number;
   date_end_unix: number;
+}
+export interface NlVaccineDeliveryEstimateTimeSpan {
+  values: NlVaccineDeliveryEstimateTimeSpanValue[];
+  last_value: NlVaccineDeliveryEstimateTimeSpanValue;
+}
+export interface NlVaccineDeliveryEstimateTimeSpanValue {
+  doses: number;
+  time_span_weeks: number;
+  date_of_insertion_unix: number;
 }
 export interface NlVaccineAdministered {
   values: NlVaccineAdministeredValue[];

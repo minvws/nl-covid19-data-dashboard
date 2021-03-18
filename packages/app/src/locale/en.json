@@ -2069,6 +2069,11 @@
         "text": "Ministry of Health, Welfare and Sport",
         "download": ""
       },
+      "delivery_estimate_time_span": {
+        "href": "",
+        "text": "",
+        "download": ""
+      },
       "stock": {
         "href": "",
         "text": "",
@@ -2292,6 +2297,10 @@
     "clock": {
       "title": "One person is vaccinated every {{seconds}} seconds",
       "description": "This is an estimate. The estimated figure is based on an average of {{amount}} doses per day between 08.00 and 20.00 over the past seven days."
+    },
+    "delivery_estimate_time_span": {
+      "title": "Vaccins in voorraad: Dit is voldoende om {{weeks}} weken mee te prikken.",
+      "description": "Dit getal laat zien hoeveel vaccins het RIVM op voorraad heeft. Een beschikbare voorraad van vijf dagen betekent bijvoorbeeld dat er genoeg vaccins klaar liggen in de opslag voor de mensen die in de vijf dagen daarna worden geprikt, ook als er onverwacht geen nieuwe vaccins worden geleverd."
     },
     "stock": {
       "title": "Vaccins in voorraad",

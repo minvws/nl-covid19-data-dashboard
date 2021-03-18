@@ -517,12 +517,44 @@ const VaccinationPage: FCWithLayout<typeof getStaticProps> = ({
               </Box>
             </Box>
           </KpiTile>
+
+          <KpiTile
+            title={replaceVariablesInText(
+              text.delivery_estimate_time_span.title,
+              {
+                weeks:
+                  data.vaccine_delivery_estimate_time_span.last_value
+                    .time_span_weeks,
+              }
+            )}
+            metadata={{
+              date:
+                data.vaccine_delivery_estimate_time_span.last_value
+                  .date_of_insertion_unix,
+              source: text.bronnen.delivery_estimate_time_span,
+            }}
+          >
+            <KpiValue
+              absolute={
+                data.vaccine_delivery_estimate_time_span.last_value.doses
+              }
+            />
+            <Text mb={4}>
+              {replaceVariablesInText(
+                text.delivery_estimate_time_span.description,
+                {
+                  weeks:
+                    data.vaccine_delivery_estimate_time_span.last_value
+                      .time_span_weeks,
+                }
+              )}
+            </Text>
+          </KpiTile>
         </TwoKpiSection>
               */}
 
         <TwoKpiSection>
           <KpiTile title={text.expected_page_additions.title}>
-            <Text mb={4}>{text.expected_page_additions.description}</Text>
             {additions.length > 0 && (
               <ul>
                 {text.expected_page_additions.additions
