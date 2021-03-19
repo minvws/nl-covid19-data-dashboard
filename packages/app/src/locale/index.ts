@@ -1,15 +1,15 @@
 import nl from './nl.json';
 import en from './en.json';
 
-export type NLLocale = typeof nl;
-export type ENLocale = typeof en;
+export type NlLocale = typeof nl;
+export type EnLocale = typeof en;
 
 export type Languages = {
-  nl: NLLocale;
-  en: ENLocale;
+  nl: NlLocale;
+  en: EnLocale;
 };
 
-export type AllLanguages = NLLocale | ENLocale;
+export type AllLanguages = NlLocale | EnLocale;
 
 export type LanguageKey = keyof Languages;
 
