@@ -10,8 +10,6 @@ import { GetStaticPropsContext } from 'next';
 import safetyRegions from '~/data/index';
 import municipalities from '~/data/municipalSearchData';
 import { client, localize } from '~/lib/sanity';
-import { targetLanguage } from '~/locale/index';
-import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
 import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
 
 /**
@@ -48,15 +46,12 @@ export function createGetContent<T>(
         : queryOrQueryGetter;
     const rawContent = await client.fetch<T>(query);
 
-    const content = localize(rawContent ?? {}, [targetLanguage, 'nl']) as T;
+    //@TODO We need to switch this from process.env to context as soon as we use i18n routing
+    // const { locale } = context;
+    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+    const content = localize(rawContent ?? {}, [locale, 'nl']) as T;
 
     return { content };
-  };
-}
-
-export async function getText() {
-  return {
-    text: parseMarkdownInLocale((await import('../locale/index')).default),
   };
 }
 

@@ -7,11 +7,10 @@ import { ReactNode } from 'react';
 import { InlineText, Text } from '~/components-styled/typography';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
 import { TooltipSubject } from '~/components/choropleth/tooltips/tooltip-subject';
-import siteText from '~/locale/index';
-import { formatNumber, formatPercentage } from '~/utils/formatNumber';
+import { useIntl } from '~/intl';
+
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { MunicipalitySelectionHandler } from '../../select-handlers/create-select-municipal-handler';
-const text = siteText.common.tooltip;
 
 export const createPositiveTestedPeopleMunicipalTooltip = (
   subject: string,
@@ -20,6 +19,9 @@ export const createPositiveTestedPeopleMunicipalTooltip = (
 ) => (
   context: MunicipalityProperties & MunicipalitiesTestedOverall
 ): ReactNode => {
+  const { siteText, formatNumber, formatPercentage } = useIntl();
+  const text = siteText.common.tooltip;
+
   const { gemnaam, infected_per_100k, infected } = context;
 
   const onSelect = (event: any) => {

@@ -8,7 +8,7 @@ import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { SafetyRegionProperties } from '@corona-dashboard/common';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
-import siteText from '~/locale/index';
+import { useIntl } from '~/intl';
 import { RegionsBehavior } from '@corona-dashboard/common';
 import {
   BehaviorIdentifier,
@@ -17,8 +17,6 @@ import {
 } from './behavior-types';
 import { BehaviorTypeControl } from './components/behavior-type-control';
 import css from '@styled-system/css';
-
-const text = siteText.nl_gedrag;
 
 export function BehaviorChoroplethTile({
   data,
@@ -34,6 +32,8 @@ export function BehaviorChoroplethTile({
   function goToRegion(vrcode: string) {
     router.push(`/veiligheidsregio/${vrcode}/gedrag`);
   }
+  const { siteText } = useIntl();
+  const text = siteText.nl_gedrag;
 
   return (
     <ChoroplethTile

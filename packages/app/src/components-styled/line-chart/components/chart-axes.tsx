@@ -15,7 +15,7 @@ import {
   useCallback,
 } from 'react';
 import { colors } from '~/style/theme';
-import { formatDate } from '~/utils/formatDate';
+import { useIntl } from '~/intl';
 
 const NUM_TICKS = 4;
 
@@ -96,6 +96,8 @@ export const ChartAxes = memo(function ChartAxes({
     height: height - padding.top - padding.bottom,
   };
 
+  const { formatDate } = useIntl();
+
   const markerPadding = dateSpanWidth / 2;
 
   const xScale = scaleTime({
@@ -124,7 +126,7 @@ export const ChartAxes = memo(function ChartAxes({
         ? formatDate(date, 'axis-with-year')
         : formatDate(date, 'axis');
     },
-    [startDate, endDate]
+    [startDate, endDate, formatDate]
   );
 
   const handleHover = (

@@ -5,7 +5,7 @@ import { Tile } from '~/components-styled/tile';
 import { SanityImage } from '~/components-styled/cms/sanity-image';
 import { Heading, Text } from '~/components-styled/typography';
 import { getImageProps } from '~/lib/sanity';
-import siteText from '~/locale';
+import { useIntl } from '~/intl';
 import { ImageBlock } from '~/types/cms';
 import { Link } from '~/utils/link';
 import { ArticleSummary } from './article-teaser';
@@ -18,6 +18,8 @@ type ArticleStripProps = {
 
 export function ArticleStrip(props: ArticleStripProps) {
   const { articles } = props;
+
+  const { siteText } = useIntl();
 
   if (!articles?.length) {
     return null;
@@ -58,6 +60,8 @@ type ArticleStripItemProps = {
 
 function ArticleStripItem(props: ArticleStripItemProps) {
   const { slug, cover, title } = props;
+
+  const { siteText } = useIntl();
 
   return (
     <Link passHref href={`/artikelen/${slug}`}>
