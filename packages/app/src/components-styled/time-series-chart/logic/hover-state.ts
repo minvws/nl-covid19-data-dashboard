@@ -140,7 +140,7 @@ export function useHoverState<T extends TimestampedValue>({
     let [pointX, pointY] = point.toArray();
 
     /**
-     * Align point coordinates with actual datapoints by subtracting padding
+     * Align point coordinates with actual data points by subtracting padding
      */
     pointX -= padding.left;
     pointY -= padding.top;
@@ -154,6 +154,7 @@ export function useHoverState<T extends TimestampedValue>({
     const valuesIndex = bisect(values, pointX);
 
     const linePoints: HoveredPoint<T>[] = seriesConfig
+      .filter((x) => x.type !== 'invisible')
       .map((config, index) => {
         const seriesValue = seriesList[index][valuesIndex] as SeriesSingleValue;
 
@@ -188,6 +189,7 @@ export function useHoverState<T extends TimestampedValue>({
      * things.
      */
     const rangePoints: HoveredPoint<T>[] = seriesConfig
+      .filter((x) => x.type !== 'invisible')
       .flatMap((config, index) => {
         const seriesValue = seriesList[index][valuesIndex] as SeriesDoubleValue;
 

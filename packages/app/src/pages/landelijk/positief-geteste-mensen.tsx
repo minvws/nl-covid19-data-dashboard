@@ -279,14 +279,20 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             }}
           >
             <TimeSeriesChart
-              tooltipTitle={text.linechart_titel}
               values={data.tested_overall.values}
               seriesConfig={[
                 {
                   type: 'area',
                   metricProperty: 'infected_per_100k',
-                  label: '@TODO',
+                  // @TODO move to lokalize
+                  label: 'Positief getest per 100.000',
                   color: colors.data.primary,
+                },
+                {
+                  type: 'invisible',
+                  metricProperty: 'infected',
+                  // @TODO move to lokalize
+                  label: 'Totaal',
                 },
               ]}
               dataOptions={{

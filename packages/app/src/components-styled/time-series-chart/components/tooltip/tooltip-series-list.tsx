@@ -69,7 +69,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
 
   const seriesConfig: SeriesConfig<T> = markNearestPointOnly
     ? [config[configIndex]]
-    : [...config].reverse();
+    : [...config];
 
   return (
     <section>
