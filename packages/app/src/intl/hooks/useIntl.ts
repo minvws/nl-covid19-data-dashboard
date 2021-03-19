@@ -15,7 +15,6 @@ type formatStyle =
   | 'time'
   | 'long'
   | 'medium'
-  | 'relative'
   | 'iso'
   | 'axis'
   | 'axis-with-year'
@@ -43,7 +42,7 @@ if ('__setDefaultTimeZone' in Intl.DateTimeFormat) {
 
 // Helper functions
 
-function isDayBeforeYesterday(date: number | Date): boolean {
+function isDayBeforeYesterday(date: Date) {
   return isSameDay(date, subDays(Date.now(), 2));
 }
 
@@ -169,17 +168,6 @@ export function useIntl() {
       case 'weekday-medium':
         return WeekdayMedium.format(date);
 
-      case 'relative':
-        return typeof window === 'undefined'
-          ? DayMonth.format(date)
-          : isToday(date)
-          ? siteText.utils.date_today
-          : isYesterday(date)
-          ? siteText.utils.date_yesterday
-          : isDayBeforeYesterday(date)
-          ? siteText.utils.date_day_before_yesterday
-          : DayMonth.format(date);
-
       case 'day-month':
       default:
         return DayMonth.format(date);
@@ -226,7 +214,7 @@ export function useIntl() {
     return formattedDate;
   }
 
-  function formatDateFromSeconds(seconds: number, style?: formatStyle): string {
+  function formatDateFromSeconds(seconds: number, style?: formatStyle) {
     assert(!isNaN(seconds), 'seconds is NaN');
 
     /**
@@ -243,7 +231,7 @@ export function useIntl() {
   function formatDateFromMilliseconds(
     milliseconds: number,
     style?: formatStyle
-  ): string {
+  ) {
     assert(!isNaN(milliseconds), 'milliseconds is NaN');
 
     return formatDate(new Date(milliseconds), style);
