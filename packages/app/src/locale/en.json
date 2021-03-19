@@ -2069,12 +2069,12 @@
         "text": "Ministry of Health, Welfare and Sport",
         "download": ""
       },
-      "delivery_estimate_time_span": {
+      "stock": {
         "href": "",
         "text": "",
         "download": ""
       },
-      "stock": {
+      "delivery_estimate_time_span": {
         "href": "",
         "text": "",
         "download": ""
@@ -2098,10 +2098,6 @@
       "kpi_omschrijving": "Percentage of the population that wishes to be vaccinated against COVID-19",
       "tooltip_gemiddeld": "In total",
       "leeftijd_jaar": "{{ageGroup}} years old"
-    },
-    "grafiek_leveringen": {
-      "titel": "Leveringen t/m week {{weekNumber}}",
-      "omschrijving": "Iets over deze grafiek"
     },
     "gezette_prikken": {
       "title": "Number of doses administered",
@@ -2302,15 +2298,6 @@
       "title": "One person is vaccinated every {{seconds}} seconds",
       "description": "This is an estimate. The estimated figure is based on an average of {{amount}} doses per day between 08.00 and 20.00 over the past seven days."
     },
-    "delivery_estimate_time_span": {
-      "title": "Vaccins in voorraad: Dit is voldoende om {{weeks}} weken mee te prikken.",
-      "description": "Dit getal laat zien hoeveel vaccins het RIVM op voorraad heeft. Een beschikbare voorraad van vijf dagen betekent bijvoorbeeld dat er genoeg vaccins klaar liggen in de opslag voor de mensen die in de vijf dagen daarna worden geprikt, ook als er onverwacht geen nieuwe vaccins worden geleverd."
-    },
-    "stock": {
-      "title": "Vaccins in voorraad",
-      "description": "Dit getal laat zien hoeveel vaccins het RIVM op voorraad heeft. Een beschikbare voorraad van vijf dagen betekent bijvoorbeeld dat er genoeg vaccins klaar liggen in de opslag voor de mensen die in de vijf dagen daarna worden geprikt, ook als er onverwacht geen nieuwe vaccins worden geleverd.",
-      "per_vaccine": "{{amount}} {{label}} prikken"
-    },
     "more_information": {
       "label": "Read more about the",
       "link": {
@@ -2333,6 +2320,19 @@
         "href": "",
         "text": ""
       }
+    },
+    "stock": {
+      "title": "",
+      "description": "",
+      "per_vaccine": ""
+    },
+    "delivery_estimate_time_span": {
+      "title": "",
+      "description": ""
+    },
+    "grafiek_leveringen": {
+      "titel": "",
+      "omschrijving": ""
     }
   },
   "editorial_detail": {
