@@ -10,7 +10,10 @@ import { Box } from '~/components-styled/base/box';
 import { Layout } from '~/domain/layout/layout';
 import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { useIntl } from '~/intl';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import { LockdownData, RoadmapData } from '~/types/cms';
 
 import {
@@ -59,9 +62,7 @@ export const getStaticProps = createGetStaticProps(
   createGetContent<MaatregelenData>(query)
 );
 
-const RegionalRestrictions = (
-  props: Await<ReturnType<typeof getStaticProps>>['props']
-) => {
+const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
   const { content, safetyRegionName, lastGenerated } = props;
 
   const { siteText } = useIntl();

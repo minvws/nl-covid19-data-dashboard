@@ -11,7 +11,10 @@ import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
 import { UnderReportedTooltip } from '~/domain/underreported/under-reported-tooltip';
 import { useIntl } from '~/intl';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import { getLastGeneratedDate, getVrData } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { getTrailingDateRange } from '~/utils/get-trailing-date-range';
@@ -25,7 +28,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const ElderlyAtHomeRegionalPage = (
-  props: Await<ReturnType<typeof getStaticProps>>['props']
+  props: StaticProps<typeof getStaticProps>
 ) => {
   const { safetyRegionName, data, lastGenerated } = props;
   const { elderly_at_home, difference } = data;

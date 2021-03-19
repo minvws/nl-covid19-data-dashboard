@@ -16,7 +16,10 @@ import { Heading, InlineText, Text } from '~/components-styled/typography';
 import { useEscalationThresholds } from '~/domain/escalation-level/thresholds';
 import { EscalationLevel } from '~/domain/restrictions/type';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
@@ -38,9 +41,7 @@ export const getStaticProps = createGetStaticProps(
   }>(createPageArticlesQuery('escalationLevelPage'))
 );
 
-const RegionalRestrictions = (
-  props: Await<ReturnType<typeof getStaticProps>>['props']
-) => {
+const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
   const { safetyRegionName, content, data, lastGenerated } = props;
 
   const { siteText, formatDateFromSeconds } = useIntl();

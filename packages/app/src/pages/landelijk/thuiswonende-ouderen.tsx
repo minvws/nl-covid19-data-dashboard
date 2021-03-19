@@ -15,7 +15,10 @@ import { createSelectRegionHandler } from '~/components/choropleth/select-handle
 import { createRegionElderlyAtHomeTooltip } from '~/components/choropleth/tooltips/region/create-region-elderly-at-home-tooltip';
 import { UnderReportedTooltip } from '~/domain/underreported/under-reported-tooltip';
 import { useIntl } from '~/intl';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   getLastGeneratedDate,
@@ -35,7 +38,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const ElderlyAtHomeNationalPage = (
-  props: Await<ReturnType<typeof getStaticProps>>['props']
+  props: StaticProps<typeof getStaticProps>
 ) => {
   const { data, choropleth, lastGenerated } = props;
   const router = useRouter();

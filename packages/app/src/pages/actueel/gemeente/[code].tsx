@@ -40,7 +40,10 @@ import { useDataSitemap } from '~/domain/topical/sitemap/utils';
 import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
 import { getTopicalPageQuery } from '~/queries/topical-page-query';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
@@ -73,9 +76,7 @@ export const getStaticProps = createGetStaticProps(
   }>(getTopicalPageQuery)
 );
 
-const TopicalMunicipality = (
-  props: Await<ReturnType<typeof getStaticProps>>['props']
-) => {
+const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
   const { municipalityName, choropleth, data, content, lastGenerated } = props;
 
   const router = useRouter();

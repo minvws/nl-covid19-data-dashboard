@@ -1,13 +1,16 @@
 import { MaxWidth } from '~/components-styled/max-width';
 import styles from './over.module.scss';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import { getLastGeneratedDate } from '~/static-props/get-data';
 import { useIntl } from '~/intl';
 import { Layout } from '~/domain/layout/layout';
 
 export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
 
-const NotFound = (props: Await<ReturnType<typeof getStaticProps>>['props']) => {
+const NotFound = (props: StaticProps<typeof getStaticProps>) => {
   const { lastGenerated } = props;
   const { siteText } = useIntl();
 

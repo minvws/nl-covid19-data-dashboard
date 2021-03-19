@@ -14,7 +14,10 @@ import {
   getLastGeneratedDate,
 } from '~/static-props/get-data';
 // import { useEscalationLevel } from '~/utils/use-escalation-level';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import { LockdownData, RoadmapData } from '~/types/cms';
 import { RichContent } from '~/components-styled/cms/rich-content';
 
@@ -54,9 +57,7 @@ export const getStaticProps = createGetStaticProps(
   createGetContent<MaatregelenData>(query)
 );
 
-const NationalRestrictions = (
-  props: Await<ReturnType<typeof getStaticProps>>['props']
-) => {
+const NationalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
 
   const { content, lastGenerated, data } = props;

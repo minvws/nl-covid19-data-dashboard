@@ -1,5 +1,8 @@
 import { getVrData, getLastGeneratedDate } from '~/static-props/get-data';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import { Layout } from '~/domain/layout/layout';
 import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { useIntl } from '~/intl';
@@ -11,9 +14,7 @@ export const getStaticProps = createGetStaticProps(
   getVrData
 );
 
-const SafetyRegion = (
-  props: Await<ReturnType<typeof getStaticProps>>['props']
-) => {
+const SafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
   const { lastGenerated } = props;
   const { siteText } = useIntl();
 

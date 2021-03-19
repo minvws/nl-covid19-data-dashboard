@@ -11,7 +11,10 @@ import { MunicipalityProperties } from '@corona-dashboard/common';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
 import { MunicipalityComboBox } from '~/domain/layout/components/municipality-combo-box';
 import { getLastGeneratedDate } from '~/static-props/get-data';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { Layout } from '~/domain/layout/layout';
 import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
@@ -32,9 +35,7 @@ const tooltipContent = (selectedHandler: MunicipalitySelectionHandler) => {
 
 export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
 
-const Municipality = (
-  props: Await<ReturnType<typeof getStaticProps>>['props']
-) => {
+const Municipality = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
   const { lastGenerated } = props;
 

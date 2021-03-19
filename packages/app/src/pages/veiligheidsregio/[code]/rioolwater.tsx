@@ -18,7 +18,10 @@ import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
 import { WarningTile } from '~/components-styled/warning-tile';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
@@ -39,9 +42,7 @@ export const getStaticProps = createGetStaticProps(
   }>(createPageArticlesQuery('sewerPage'))
 );
 
-const SewerWater = (
-  props: Await<ReturnType<typeof getStaticProps>>['props']
-) => {
+const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
   const { data, safetyRegionName, content, lastGenerated } = props;
 
   const { siteText } = useIntl();

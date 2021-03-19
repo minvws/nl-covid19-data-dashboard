@@ -10,7 +10,10 @@ import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
@@ -30,9 +33,7 @@ export const getStaticProps = createGetStaticProps(
   }>(createPageArticlesQuery('deceasedPage'))
 );
 
-const DeceasedMunicipalPage = (
-  props: Await<ReturnType<typeof getStaticProps>>['props']
-) => {
+const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
   const {
     municipalityName,
     data: { deceased_rivm: dataRivm, difference },

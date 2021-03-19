@@ -1,7 +1,10 @@
 import { ArticleDetail } from '~/components-styled/article-detail';
 import { Box } from '~/components-styled/base';
 import { client, getImageSrc, localize } from '~/lib/sanity';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
@@ -66,9 +69,7 @@ export const getStaticProps = createGetStaticProps(
   })
 );
 
-const ArticleDetailPage = (
-  props: Await<ReturnType<typeof getStaticProps>>['props']
-) => {
+const ArticleDetailPage = (props: StaticProps<typeof getStaticProps>) => {
   const { content, lastGenerated } = props;
 
   const { cover } = content;

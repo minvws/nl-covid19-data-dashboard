@@ -1,5 +1,8 @@
 import { getGmData, getLastGeneratedDate } from '~/static-props/get-data';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
@@ -11,9 +14,7 @@ export const getStaticProps = createGetStaticProps(
   getGmData
 );
 
-const Municipality = (
-  props: Await<ReturnType<typeof getStaticProps>>['props']
-) => {
+const Municipality = (props: StaticProps<typeof getStaticProps>) => {
   const { lastGenerated } = props;
   const { siteText } = useIntl();
 

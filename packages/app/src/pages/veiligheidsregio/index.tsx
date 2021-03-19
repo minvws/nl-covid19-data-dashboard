@@ -8,7 +8,10 @@ import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-ch
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
 import { SafetyRegionComboBox } from '~/domain/layout/components/safety-region-combo-box';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   getLastGeneratedDate,
@@ -27,9 +30,7 @@ export const getStaticProps = createGetStaticProps(
   })
 );
 
-const SafetyRegion = (
-  props: Await<ReturnType<typeof getStaticProps>>['props']
-) => {
+const SafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
   const router = useRouter();
   const breakpoints = useBreakpoints();
 

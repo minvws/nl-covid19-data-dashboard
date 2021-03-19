@@ -42,7 +42,10 @@ import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
 import { TopicalVaccineTile } from '~/domain/topical/topical-vaccine-tile';
 import { getTopicalPageQuery } from '~/queries/topical-page-query';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
@@ -88,7 +91,7 @@ export const getStaticProps = createGetStaticProps(
   }
 );
 
-const Home = (props: Await<ReturnType<typeof getStaticProps>>['props']) => {
+const Home = (props: StaticProps<typeof getStaticProps>) => {
   const { data, choropleth, content, lastGenerated } = props;
   const router = useRouter();
 

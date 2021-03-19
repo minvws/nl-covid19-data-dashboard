@@ -2,7 +2,10 @@ import Head from 'next/head';
 import { Box } from '~/components-styled/base';
 import { ContentBlock } from '~/components-styled/cms/content-block';
 import { RichContent } from '~/components-styled/cms/rich-content';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
 
@@ -43,9 +46,7 @@ export const getStaticProps = createGetStaticProps(
   `)
 );
 
-const AccessibilityPage = (
-  props: Await<ReturnType<typeof getStaticProps>>['props']
-) => {
+const AccessibilityPage = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
   const { content, lastGenerated } = props;
 

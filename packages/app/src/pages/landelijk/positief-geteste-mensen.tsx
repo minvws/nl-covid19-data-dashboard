@@ -31,7 +31,10 @@ import { createSelectRegionHandler } from '~/components/choropleth/select-handle
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
 import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/create-positive-tested-people-regional-tooltip';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
@@ -59,9 +62,7 @@ export const getStaticProps = createGetStaticProps(
   }>(createPageArticlesQuery('positiveTestsPage'))
 );
 
-const PositivelyTestedPeople = (
-  props: Await<ReturnType<typeof getStaticProps>>['props']
-) => {
+const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
   const { data, choropleth, content, lastGenerated } = props;
   const {
     siteText,

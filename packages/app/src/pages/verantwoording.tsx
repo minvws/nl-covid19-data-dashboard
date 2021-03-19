@@ -2,7 +2,10 @@ import Head from 'next/head';
 import { RichContent } from '~/components-styled/cms/rich-content';
 import { CollapsibleSection } from '~/components-styled/collapsible';
 import { MaxWidth } from '~/components-styled/max-width';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
@@ -59,9 +62,7 @@ export const getStaticProps = createGetStaticProps(
   createGetContent<VerantwoordingData>(query)
 );
 
-const Verantwoording = (
-  props: Await<ReturnType<typeof getStaticProps>>['props']
-) => {
+const Verantwoording = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
   const { content, lastGenerated } = props;
 

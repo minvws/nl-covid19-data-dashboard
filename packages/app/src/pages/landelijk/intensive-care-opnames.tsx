@@ -13,7 +13,10 @@ import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
 import { UnderReportedTooltip } from '~/domain/underreported/under-reported-tooltip';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
@@ -37,9 +40,7 @@ export const getStaticProps = createGetStaticProps(
   }>(createPageArticlesQuery('intensiveCarePage'))
 );
 
-const IntakeIntensiveCare = (
-  props: Await<ReturnType<typeof getStaticProps>>['props']
-) => {
+const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
 
   const text = siteText.ic_opnames_per_dag;

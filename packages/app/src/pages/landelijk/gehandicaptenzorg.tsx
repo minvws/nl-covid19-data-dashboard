@@ -17,7 +17,10 @@ import { createSelectRegionHandler } from '~/components/choropleth/select-handle
 import { createDisablityInfectedLocationsRegionalTooltip } from '~/components/choropleth/tooltips/region/create-disability-infected-locations-regional-tooltip';
 import { UnderReportedTooltip } from '~/domain/underreported/under-reported-tooltip';
 import { useIntl } from '~/intl';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   getLastGeneratedDate,
@@ -36,9 +39,7 @@ export const getStaticProps = createGetStaticProps(
   })
 );
 
-const DisabilityCare = (
-  props: Await<ReturnType<typeof getStaticProps>>['props']
-) => {
+const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
   const { data, choropleth, lastGenerated } = props;
   const lastValue = data.disability_care.last_value;
   const values = data.disability_care.values;

@@ -15,7 +15,10 @@ import { Layout } from '~/domain/layout/layout';
 import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
@@ -32,9 +35,7 @@ export const getStaticProps = createGetStaticProps(
   }>(createPageArticlesQuery('behaviorPage'))
 );
 
-const BehaviorPage = (
-  props: Await<ReturnType<typeof getStaticProps>>['props']
-) => {
+const BehaviorPage = (props: StaticProps<typeof getStaticProps>) => {
   const { lastGenerated, content, data } = props;
   const behaviorData = data.behavior;
 

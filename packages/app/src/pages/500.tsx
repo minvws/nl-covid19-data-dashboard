@@ -1,5 +1,8 @@
 import { MaxWidth } from '~/components-styled/max-width';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import { getLastGeneratedDate } from '~/static-props/get-data';
 import styles from './error.module.scss';
 import { Layout } from '~/domain/layout/layout';
@@ -8,9 +11,7 @@ import { useIntl } from '~/intl';
 
 export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
 
-const ErrorPage = (
-  props: Await<ReturnType<typeof getStaticProps>>['props']
-) => {
+const ErrorPage = (props: StaticProps<typeof getStaticProps>) => {
   const { lastGenerated } = props;
   const { siteText } = useIntl();
 

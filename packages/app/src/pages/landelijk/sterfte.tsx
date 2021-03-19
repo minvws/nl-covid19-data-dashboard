@@ -14,7 +14,10 @@ import { Text } from '~/components-styled/typography';
 import { DeceasedMonitorSection } from '~/domain/deceased/deceased-monitor-section';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
@@ -33,9 +36,7 @@ export const getStaticProps = createGetStaticProps(
   }>(createPageArticlesQuery('deceasedPage'))
 );
 
-const DeceasedNationalPage = (
-  props: Await<ReturnType<typeof getStaticProps>>['props']
-) => {
+const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
   const { data, lastGenerated } = props;
 
   const dataCbs = props.data.deceased_cbs;

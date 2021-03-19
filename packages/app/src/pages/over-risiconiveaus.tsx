@@ -5,7 +5,10 @@ import {
   createGetContent,
   getLastGeneratedDate,
 } from '~/static-props/get-data';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import { CollapsibleList, RichContentBlock } from '~/types/cms';
 import { getSkipLinkId } from '~/utils/skipLinks';
 import styles from './over.module.scss';
@@ -57,9 +60,7 @@ export const getStaticProps = createGetStaticProps(
   createGetContent<OverRisiconiveausData>(query)
 );
 
-const OverRisicoNiveaus = (
-  props: Await<ReturnType<typeof getStaticProps>>['props']
-) => {
+const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
   const { content, lastGenerated } = props;
 

@@ -3,7 +3,10 @@ import { RichContent } from '~/components-styled/cms/rich-content';
 import { MaxWidth } from '~/components-styled/max-width';
 import { useIntl } from '~/intl';
 import { Layout } from '~/domain/layout/layout';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
@@ -39,7 +42,7 @@ export const getStaticProps = createGetStaticProps(
   createGetContent<OverData>(query)
 );
 
-const Over = (props: Await<ReturnType<typeof getStaticProps>>['props']) => {
+const Over = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
   const { content, lastGenerated } = props;
 

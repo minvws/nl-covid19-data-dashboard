@@ -25,7 +25,10 @@ import { createRegionHospitalAdmissionsTooltip } from '~/components/choropleth/t
 import { UnderReportedTooltip } from '~/domain/underreported/under-reported-tooltip';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
@@ -53,9 +56,7 @@ export const getStaticProps = createGetStaticProps(
   }>(createPageArticlesQuery('hospitalPage'))
 );
 
-const IntakeHospital = (
-  props: Await<ReturnType<typeof getStaticProps>>['props']
-) => {
+const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   const { data, choropleth, content, lastGenerated } = props;
   const router = useRouter();
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(

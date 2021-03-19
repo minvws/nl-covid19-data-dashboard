@@ -1,5 +1,8 @@
 import { getNlData, getLastGeneratedDate } from '~/static-props/get-data';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
@@ -9,7 +12,7 @@ export const getStaticProps = createGetStaticProps(
   getNlData
 );
 
-const National = (props: Await<ReturnType<typeof getStaticProps>>['props']) => {
+const National = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
   const { data, lastGenerated } = props;
   return (

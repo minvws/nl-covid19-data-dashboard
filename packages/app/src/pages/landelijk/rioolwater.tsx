@@ -22,7 +22,10 @@ import { createSelectRegionHandler } from '~/components/choropleth/select-handle
 import { createSewerMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-sewer-regional-tooltip';
 import { createSewerRegionalTooltip } from '~/components/choropleth/tooltips/region/create-sewer-regional-tooltip';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
@@ -46,9 +49,7 @@ export const getStaticProps = createGetStaticProps(
   }>(createPageArticlesQuery('sewerPage'))
 );
 
-const SewerWater = (
-  props: Await<ReturnType<typeof getStaticProps>>['props']
-) => {
+const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
   const { data, choropleth, content, lastGenerated } = props;
 

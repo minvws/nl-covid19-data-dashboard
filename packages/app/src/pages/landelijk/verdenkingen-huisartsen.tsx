@@ -7,7 +7,10 @@ import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
 import { useIntl } from '~/intl';
 import { getNlData, getLastGeneratedDate } from '~/static-props/get-data';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
@@ -17,9 +20,7 @@ export const getStaticProps = createGetStaticProps(
   getNlData
 );
 
-const SuspectedPatients = (
-  props: Await<ReturnType<typeof getStaticProps>>['props']
-) => {
+const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
   const { data, lastGenerated } = props;
   const lastValue = data.doctor.last_value;
 

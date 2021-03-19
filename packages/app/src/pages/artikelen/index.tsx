@@ -2,7 +2,10 @@ import { ArticleSummary } from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
 import { MaxWidth } from '~/components-styled/max-width';
 import { ArticleList } from '~/domain/topical/article-list';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
@@ -28,9 +31,7 @@ export const getStaticProps = createGetStaticProps(
   )
 );
 
-const ArticlesOverview = (
-  props: Await<ReturnType<typeof getStaticProps>>['props']
-) => {
+const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
   const { content, lastGenerated } = props;
   const { siteText } = useIntl();
 

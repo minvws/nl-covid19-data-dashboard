@@ -19,7 +19,10 @@ import { BehaviorLineChartTile } from '~/domain/behavior/behavior-line-chart-til
 import { BehaviorTableTile } from '~/domain/behavior/behavior-table-tile';
 import { MoreInformation } from '~/domain/behavior/components/more-information';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
@@ -44,9 +47,7 @@ export const getStaticProps = createGetStaticProps(
   }>(createPageArticlesQuery('behaviorPage'))
 );
 
-const BehaviorPage = (
-  props: Await<ReturnType<typeof getStaticProps>>['props']
-) => {
+const BehaviorPage = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText, formatNumber } = useIntl();
 
   const { data, choropleth, content, lastGenerated } = props;

@@ -7,7 +7,10 @@ import { KpiValue } from '~/components-styled/kpi-value';
 import { TileList } from '~/components-styled/tile-list';
 import { TimeSeriesChart } from '~/components-styled/time-series-chart';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import { getLastGeneratedDate, getNlData } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { useIntl } from '~/intl';
@@ -19,9 +22,7 @@ export const getStaticProps = createGetStaticProps(
   getNlData
 );
 
-const InfectiousPeople = (
-  props: Await<ReturnType<typeof getStaticProps>>['props']
-) => {
+const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
   const { data, lastGenerated } = props;
   const { siteText } = useIntl();
 
