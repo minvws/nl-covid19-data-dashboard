@@ -9,7 +9,7 @@ import styled from 'styled-components';
 import { HoverPoint } from '~/components-styled/area-chart/components/marker';
 import { TimestampedTrendValue } from '~/components-styled/area-chart/logic';
 import { Spacer } from '~/components-styled/base';
-import { Text } from '~/components-styled/typography';
+import { Heading, Text } from '~/components-styled/typography';
 import { AllLanguages } from '~/locale/APP_LOCALE';
 import { formatDateFromSeconds } from '~/utils/formatDate';
 
@@ -57,7 +57,16 @@ export function formatVaccinationsTooltip(
             {formatNumber(firstValue.data.total)}
           </TooltipValueContainer>
         </TooltipListItem>
+      </TooltipList>
 
+      <Heading level={5} my={1}>
+        {firstValue.label === text.vaccinaties.data.vaccination_chart.delivered
+          ? text.vaccinaties.data.vaccination_chart.doses_administered
+          : text.vaccinaties.data.vaccination_chart
+              .doses_administered_estimated}
+      </Heading>
+
+      <TooltipList>
         {otherValues.map((value) => (
           <TooltipListItem key={value.label}>
             <span>
