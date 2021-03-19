@@ -15,22 +15,17 @@ export interface MetadataProps {
 export function Metadata({ date, source, obtained }: MetadataProps) {
   const { siteText, formatDateFromSeconds } = useIntl();
 
-  //metadata helpers
-
-  function formatMetadataDate(date: number | [number, number]): string {
-    if (typeof date === 'number') {
-      return replaceVariablesInText(siteText.common.metadata.date, {
-        date: formatDateFromSeconds(date, 'weekday-medium'),
-      });
-    }
-
-    return replaceVariablesInText(siteText.common.metadata.dateFromTo, {
-      startDate: formatDateFromSeconds(date[0], 'weekday-medium'),
-      endDate: formatDateFromSeconds(date[1], 'weekday-medium'),
-    });
-  }
-
-  const dateString = date ? formatMetadataDate(date) : null;
+  const dateString =
+    typeof date === 'number'
+      ? replaceVariablesInText(siteText.common.metadata.date, {
+          date: formatDateFromSeconds(date, 'weekday-medium'),
+        })
+      : Array.isArray(date)
+      ? replaceVariablesInText(siteText.common.metadata.dateFromTo, {
+          startDate: formatDateFromSeconds(date[0], 'weekday-medium'),
+          endDate: formatDateFromSeconds(date[1], 'weekday-medium'),
+        })
+      : null;
 
   return (
     <Box as="footer" mt={3} mb={{ _: 0, sm: -3 }} gridArea="metadata">
