@@ -134,8 +134,6 @@ export function VerticalBarChart<T extends TimestampedValue>({
     yScale,
   });
 
-  console.log(hoverState);
-
   useEffect(() => {
     if (hoverState) {
       const { index, point } = hoverState;
