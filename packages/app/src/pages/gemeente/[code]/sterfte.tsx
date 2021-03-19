@@ -30,7 +30,10 @@ export const getStaticProps = createGetStaticProps(
   getGmData,
   createGetContent<{
     articles?: ArticleSummary[];
-  }>(createPageArticlesQuery('deceasedPage'))
+  }>((_context) => {
+    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+    return createPageArticlesQuery('deceasedPage', locale);
+  })
 );
 
 const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {

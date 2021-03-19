@@ -33,7 +33,10 @@ export const getStaticProps = createGetStaticProps(
   getNlData,
   createGetContent<{
     articles?: ArticleSummary[];
-  }>(createPageArticlesQuery('deceasedPage'))
+  }>((_context) => {
+    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+    return createPageArticlesQuery('deceasedPage', locale);
+  })
 );
 
 const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {

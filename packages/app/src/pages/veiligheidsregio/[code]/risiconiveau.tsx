@@ -38,7 +38,10 @@ export const getStaticProps = createGetStaticProps(
   getVrData,
   createGetContent<{
     articles?: ArticleSummary[];
-  }>(createPageArticlesQuery('escalationLevelPage'))
+  }>((_context) => {
+    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+    return createPageArticlesQuery('escalationLevelPage', locale);
+  })
 );
 
 const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {

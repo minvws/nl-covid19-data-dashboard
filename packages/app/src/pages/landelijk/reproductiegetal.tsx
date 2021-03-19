@@ -30,7 +30,10 @@ export const getStaticProps = createGetStaticProps(
   getNlData,
   createGetContent<{
     articles?: ArticleSummary[];
-  }>(createPageArticlesQuery('reproductionPage'))
+  }>((_context) => {
+    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+    return createPageArticlesQuery('reproductionPage', locale);
+  })
 );
 
 const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {

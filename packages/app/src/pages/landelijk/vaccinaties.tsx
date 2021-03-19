@@ -63,12 +63,13 @@ export const getStaticProps = createGetStaticProps(
     highlight: {
       articles?: ArticleSummary[];
     };
-  }>(
-    `{
+  }>((_context) => {
+    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+    return `{
       "milestones": ${getVaccineMilestonesQuery()},
-      "highlight": ${createPageArticlesQuery('vaccinationsPage')}
-    }`
-  )
+      "highlight": ${createPageArticlesQuery('vaccinationsPage', locale)}
+    }`;
+  })
 );
 
 const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {

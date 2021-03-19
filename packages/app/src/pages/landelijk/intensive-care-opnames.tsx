@@ -37,7 +37,10 @@ export const getStaticProps = createGetStaticProps(
   getNlData,
   createGetContent<{
     articles?: ArticleSummary[];
-  }>(createPageArticlesQuery('intensiveCarePage'))
+  }>((_context) => {
+    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+    return createPageArticlesQuery('intensiveCarePage', locale);
+  })
 );
 
 const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {

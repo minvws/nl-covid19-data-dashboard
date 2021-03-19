@@ -44,7 +44,10 @@ export const getStaticProps = createGetStaticProps(
   }),
   createGetContent<{
     articles?: ArticleSummary[];
-  }>(createPageArticlesQuery('behaviorPage'))
+  }>((_context) => {
+    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+    return createPageArticlesQuery('behaviorPage', locale);
+  })
 );
 
 const BehaviorPage = (props: StaticProps<typeof getStaticProps>) => {

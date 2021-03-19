@@ -39,7 +39,10 @@ export const getStaticProps = createGetStaticProps(
   getGmData,
   createGetContent<{
     articles?: ArticleSummary[];
-  }>(createPageArticlesQuery('sewerPage'))
+  }>((_context) => {
+    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+    return createPageArticlesQuery('sewerPage', locale);
+  })
 );
 
 const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
