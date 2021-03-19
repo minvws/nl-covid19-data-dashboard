@@ -279,7 +279,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             }}
           >
             <TimeSeriesChart
-              title={text.linechart_titel}
+              tooltipTitle={text.linechart_titel}
               values={data.tested_overall.values}
               seriesConfig={[
                 {

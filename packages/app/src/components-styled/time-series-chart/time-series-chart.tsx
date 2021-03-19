@@ -90,7 +90,7 @@ export type TimeSeriesChartProps<
   T extends TimestampedValue,
   C extends SeriesConfig<T>
 > = {
-  title?: string; // Used for default tooltip formatting
+  tooltipTitle?: string;
   values: T[];
   seriesConfig: C;
   /**
@@ -149,7 +149,7 @@ export function TimeSeriesChart<
   tickValues: yTickValues,
   paddingLeft,
   ariaLabelledBy,
-  title,
+  tooltipTitle,
   disableLegend,
   onSeriesClick,
   markNearestPointOnly,
@@ -354,7 +354,7 @@ export function TimeSeriesChart<
 
         {tooltipOpen && tooltipData && (
           <Tooltip
-            title={title}
+            title={tooltipTitle}
             data={tooltipData}
             left={tooltipLeft}
             top={tooltipTop}

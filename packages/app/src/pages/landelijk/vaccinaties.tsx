@@ -413,7 +413,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             </section>
 
             <TimeSeriesChart
-              title={text.grafiek_draagvlak.titel}
+              tooltipTitle={text.grafiek_draagvlak.titel}
               ariaLabelledBy="chart_vaccine_support"
               values={data.vaccine_support.values}
               numGridLines={20}
@@ -490,7 +490,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             dataSources: [],
           }}
         />
-        
+
         <TwoKpiSection>
           <KpiTile
             title={text.stock.title}
