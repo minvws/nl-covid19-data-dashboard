@@ -7,6 +7,8 @@ import Document, {
 } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 
+const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
     /**
@@ -40,7 +42,7 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html className="has-no-js">
+      <Html lang={locale} className="has-no-js">
         <Head>
           <script src="/init.js" />
           {/**
