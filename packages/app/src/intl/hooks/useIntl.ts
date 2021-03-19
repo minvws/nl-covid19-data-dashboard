@@ -1,9 +1,7 @@
 import { useContext } from 'react';
-// import { useRouter } from 'next/router';
 import { isSameDay, isToday, isYesterday, subDays } from 'date-fns';
 import { assert } from '~/utils/assert';
 import { isDefined } from 'ts-is-present';
-
 import { IntlContext } from '~/intl';
 
 // TypeScript is missing some types for `Intl.DateTimeFormat`.
