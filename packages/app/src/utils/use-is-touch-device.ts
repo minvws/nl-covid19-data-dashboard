@@ -4,21 +4,31 @@ import { useEffect, useState } from 'react';
  * Subsequential calls to the hook can read this static value for initial
  * touch state
  */
-let isTouchRegistered = false;
+let isTouch = false;
 
 export function useIsTouchDevice() {
-  const [isTouchDevice, setIsTouchDevice] = useState(isTouchRegistered);
+  const [isTouchDevice, setIsTouchDevice] = useState(isTouch);
 
   useEffect(() => {
     if (isTouchDevice) return;
 
     const handleTouchStart = () => {
-      isTouchRegistered = true;
+      isTouch = true;
       setIsTouchDevice(true);
     };
 
+    const handleMouseMove = () => {
+      isTouch = false;
+      setIsTouchDevice(false);
+    };
+
     document.addEventListener('touchstart', handleTouchStart);
-    return () => document.removeEventListener('touchstart', handleTouchStart);
+    document.addEventListener('mousemove', handleMouseMove);
+
+    return () => {
+      document.removeEventListener('touchstart', handleTouchStart);
+      document.removeEventListener('mousemove', handleMouseMove);
+    };
   }, [isTouchDevice]);
 
   return isTouchDevice;
