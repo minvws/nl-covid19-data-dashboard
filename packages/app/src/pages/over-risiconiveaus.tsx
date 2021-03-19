@@ -23,41 +23,41 @@ interface OverRisiconiveausData {
   collapsibleList: CollapsibleList[];
 }
 
-//@TODO THIS NEEDS TO COME FROM CONTEXT
-const locale = process.env.NEXT_PUBLIC_LOCALE;
-const query = `
-*[_type == 'overRisicoNiveaus']{
-  ...,
-  "description": {
-    "_type": description._type,
-    "${locale}": [
-      ...description.${locale}[]
-      {
-        ...,
-        "asset": asset->
-       },
-    ]
-  },
-  "collapsibleList": [...collapsibleList[]
-    {
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  createGetContent<OverRisiconiveausData>((_context) => {
+    //@TODO We need to switch this from process.env to context as soon as we use i18n routing
+    // const { locale } = context;
+    const locale = process.env.NEXT_PUBLIC_LOCALE;
+    return `*[_type == 'overRisicoNiveaus']{
       ...,
-      "content": {
-        ...content,
+      "description": {
+        "_type": description._type,
         "${locale}": [
-          ...content.${locale}[]
+          ...description.${locale}[]
           {
             ...,
             "asset": asset->
            },
         ]
-      }
-  }]
-}[0]
-`;
-
-export const getStaticProps = createGetStaticProps(
-  getLastGeneratedDate,
-  createGetContent<OverRisiconiveausData>(query)
+      },
+      "collapsibleList": [...collapsibleList[]
+        {
+          ...,
+          "content": {
+            ...content,
+            "${locale}": [
+              ...content.${locale}[]
+              {
+                ...,
+                "asset": asset->
+               },
+            ]
+          }
+      }]
+    }[0]
+    `;
+  })
 );
 
 const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {

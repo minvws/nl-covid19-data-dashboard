@@ -20,30 +20,32 @@ interface AccessibilityPageData {
   description: RichContentBlock[] | null;
 }
 
-//@TODO THIS NEEDS TO COME FROM CONTEXT
-const locale = process.env.NEXT_PUBLIC_LOCALE;
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  createGetContent<AccessibilityPageData>(`
-  *[_type == 'toegankelijkheid']{
-    ...,
-    "description": {
-      ...,
-      "_type": description._type,
-      "${locale}": [
-        ...description.${locale}[]{
-          ...,
-          "asset": asset->,
-          markDefs[]{
-            ...,
-            "asset": asset->
-          }
-        }
-      ]
-    }
-  }[0]
+  createGetContent<AccessibilityPageData>((_context) => {
+    //@TODO We need to switch this from process.env to context as soon as we use i18n routing
+    // const { locale } = context;
+    const locale = process.env.NEXT_PUBLIC_LOCALE;
 
-  `)
+    return `*[_type == 'toegankelijkheid']{
+      ...,
+      "description": {
+        ...,
+        "_type": description._type,
+        "${locale}": [
+          ...description.${locale}[]{
+            ...,
+            "asset": asset->,
+            markDefs[]{
+              ...,
+              "asset": asset->
+            }
+          }
+        ]
+      }
+    }[0]
+    `;
+  })
 );
 
 const AccessibilityPage = (props: StaticProps<typeof getStaticProps>) => {

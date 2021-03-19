@@ -19,27 +19,28 @@ interface OverData {
   description: RichContentBlock[] | null;
 }
 
-//@TODO THIS NEEDS TO COME FROM CONTEXT
-const locale = process.env.NEXT_PUBLIC_LOCALE;
-const query = `
-*[_type == 'overDitDashboard']{
-  ...,
-  "description": {
-    "_type": description._type,
-    "${locale}": [
-      ...description.${locale}[]
-      {
-        ...,
-        "asset": asset->
-       },
-    ]
-  }
-}[0]
-`;
-
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  createGetContent<OverData>(query)
+  createGetContent<OverData>((_context) => {
+    //@TODO We need to switch this from process.env to context as soon as we use i18n routing
+    // const { locale } = context;
+    const locale = process.env.NEXT_PUBLIC_LOCALE;
+    return `
+    *[_type == 'overDitDashboard']{
+      ...,
+      "description": {
+        "_type": description._type,
+        "${locale}": [
+          ...description.${locale}[]
+          {
+            ...,
+            "asset": asset->
+           },
+        ]
+      }
+    }[0]
+    `;
+  })
 );
 
 const Over = (props: StaticProps<typeof getStaticProps>) => {

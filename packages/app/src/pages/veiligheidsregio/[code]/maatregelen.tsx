@@ -31,35 +31,36 @@ type MaatregelenData = {
   roadmap?: RoadmapData;
 };
 
-//@TODO HARDCODED FOR NOW. NEEDS TO COME FROM CONTEXT
-const locale = process.env.NEXT_PUBLIC_LOCALE;
-
-const query = `
-{
-  'lockdown': *[_type == 'lockdown']{
-    ...,
-    "message": {
-      ...message,
-      "description": {
-        ...message.description,
-        "${locale}": [
-          ...message.description.${locale}[]
-          {
-            ...,
-            "asset": asset->
-          },
-        ]
-      },
-    }
-  }[0],
-  // We will need the roadmap when lockdown is disabled in the CMS.
-  // 'roadmap': *[_type == 'roadmap'][0]
-}`;
-
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   getVrData,
-  createGetContent<MaatregelenData>(query)
+  createGetContent<MaatregelenData>((_context) => {
+    //@TODO We need to switch this from process.env to context as soon as we use i18n routing
+    // const { locale } = context;
+    const locale = process.env.NEXT_PUBLIC_LOCALE;
+
+    return `
+    {
+      'lockdown': *[_type == 'lockdown']{
+        ...,
+        "message": {
+          ...message,
+          "description": {
+            ...message.description,
+            "${locale}": [
+              ...message.description.${locale}[]
+              {
+                ...,
+                "asset": asset->
+              },
+            ]
+          },
+        }
+      }[0],
+      // We will need the roadmap when lockdown is disabled in the CMS.
+      // 'roadmap': *[_type == 'roadmap'][0]
+    }`;
+  })
 );
 
 const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {

@@ -15,10 +15,10 @@ import { Layout } from '~/domain/layout/layout';
 
 const articlesQuery = `*[_type == 'article'] {"slug":slug.current}`;
 
-//@TODO THIS NEEDS TO COME FROM CONTEXT
-const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
-
 export async function getStaticPaths() {
+  //@TODO THIS NEEDS TO COME FROM CONTEXT OR SIMILAR?
+  const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+
   const articlesData = await client.fetch(articlesQuery);
   const articles = localize<{ slug: string }[]>(articlesData, [locale, 'nl']);
 
@@ -33,6 +33,10 @@ export async function getStaticPaths() {
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   createGetContent<Article>((context) => {
+    //@TODO We need to switch this from process.env to context as soon as we use i18n routing
+    // const { locale } = context;
+    const locale = process.env.NEXT_PUBLIC_LOCALE;
+
     assert(context?.params?.slug, 'Slug required to retrieve article');
     return `*[_type == 'article' && slug.current == '${context.params.slug}']{
       ...,

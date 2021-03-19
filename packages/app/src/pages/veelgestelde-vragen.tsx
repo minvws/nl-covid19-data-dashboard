@@ -25,42 +25,44 @@ interface VeelgesteldeVragenData {
   questions: FAQuestionAndAnswer[];
 }
 
-//@TODO THIS NEEDS TO COME FROM CONTEXT
-const locale = process.env.NEXT_PUBLIC_LOCALE;
-const query = `*[_type == 'veelgesteldeVragen']{
-  ...,
-  "description": {
-    "_type": description._type,
-    "${locale}": [
-      ...description.${locale}[]
-      {
-        ...,
-        "asset": asset->
-       },
-    ]
-  },
-  "questions": [
-    ...questions[]
-    {
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  createGetContent<VeelgesteldeVragenData>((_context) => {
+    //@TODO We need to switch this from process.env to context as soon as we use i18n routing
+    // const { locale } = context;
+    const locale = process.env.NEXT_PUBLIC_LOCALE;
+
+    return `*[_type == 'veelgesteldeVragen']{
       ...,
-      "group": group->group.${locale},
-      "content": {
-        ...content,
-        "${locale}": [...content.${locale}[]
+      "description": {
+        "_type": description._type,
+        "${locale}": [
+          ...description.${locale}[]
           {
             ...,
             "asset": asset->
-           },
+          },
         ]
-      }
-  }]
-  
-}[0]
-`;
-
-export const getStaticProps = createGetStaticProps(
-  getLastGeneratedDate,
-  createGetContent<VeelgesteldeVragenData>(query)
+      },
+      "questions": [
+        ...questions[]
+        {
+          ...,
+          "group": group->group.${locale},
+          "content": {
+            ...content,
+            "${locale}": [...content.${locale}[]
+              {
+                ...,
+                "asset": asset->
+              },
+            ]
+          }
+      }]
+      
+    }[0]
+    `;
+  })
 );
 
 const Verantwoording = (props: StaticProps<typeof getStaticProps>) => {

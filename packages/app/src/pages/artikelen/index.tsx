@@ -13,22 +13,23 @@ import {
 import { useIntl } from '~/intl';
 import { Layout } from '~/domain/layout/layout';
 
-//@TODO THIS NEEDS TO COME FROM CONTEXT
-const locale = process.env.NEXT_PUBLIC_LOCALE;
-
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  createGetContent<ArticleSummary[]>(
-    `*[_type == 'article'] | order(publicationDate desc) {
-      "title":title.${locale},
-      slug,
-      "summary":summary.${locale},
-      "cover": {
-        ...cover,
-        "asset": cover.asset->
-      }
-    }`
-  )
+  createGetContent<ArticleSummary[]>((_context) => {
+    //@TODO We need to switch this from process.env to context as soon as we use i18n routing
+    // const { locale } = context;
+    const locale = process.env.NEXT_PUBLIC_LOCALE;
+
+    return `*[_type == 'article'] | order(publicationDate desc) {
+        "title":title.${locale},
+        slug,
+        "summary":summary.${locale},
+        "cover": {
+          ...cover,
+          "asset": cover.asset->
+        }
+      }`;
+  })
 );
 
 const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
