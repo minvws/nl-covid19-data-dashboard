@@ -28,19 +28,6 @@ export function AppContent({
     query: { ...router.query, menu: '1' },
   };
 
-  function getMenuOpenText(pathname: string) {
-    if (pathname.startsWith('/landelijk')) {
-      return siteText.nav.terug_naar_alle_cijfers_homepage;
-    }
-    if (pathname.startsWith('/veiligheidsregio')) {
-      return siteText.nav.terug_naar_alle_cijfers_veiligheidsregio;
-    }
-    if (pathname.startsWith('/gemeente')) {
-      return siteText.nav.terug_naar_alle_cijfers_gemeente;
-    }
-    return siteText.nav.terug_naar_alle_cijfers;
-  }
-
   /**
    * @TODO Possibly not the right place to check the "homepage" (/) menu-state,
    * but it's good enough for now I guess
@@ -48,8 +35,13 @@ export function AppContent({
   const isMenuOpen =
     router.pathname == '/landelijk' || router.query.menu === '1';
 
-  const menuOpenText = getMenuOpenText(router.pathname);
-
+  const menuOpenText = router.pathname.startsWith('/landelijk')
+    ? siteText.nav.terug_naar_alle_cijfers_homepage
+    : pathname.startsWith('/veiligheidsregio')
+    ? siteText.nav.terug_naar_alle_cijfers_veiligheidsregio
+    : pathname.startsWith('/gemeente')
+    ? siteText.nav.terug_naar_alle_cijfers_gemeente
+    : siteText.nav.terug_naar_alle_cijfers;
   return (
     <MaxWidth px={[0, 0, 0, 0, 3]}>
       <AppContentContainer>
