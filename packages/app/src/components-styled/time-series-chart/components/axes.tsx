@@ -53,8 +53,19 @@ export const Axes = memo(function Axes({
 
   const { formatDateFromSeconds, formatNumber, formatPercentage } = useIntl();
 
-  const formatYAxis = (y: number) => formatNumber(y);
-  const formatYAxisPercentage = (y: number) => `${formatPercentage(y)}%`;
+  const formatYAxis = useCallback(
+    (y: number) => {
+      return formatNumber(y);
+    },
+    [formatNumber]
+  );
+
+  const formatYAxisPercentage = useCallback(
+    (y: number) => {
+      return `${formatPercentage(y)}%`;
+    },
+    [formatPercentage]
+  );
 
   const formatXAxis = useCallback(
     (date_unix: number) => {

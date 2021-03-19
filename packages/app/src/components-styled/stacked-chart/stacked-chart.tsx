@@ -160,8 +160,12 @@ export function StackedChart<T extends TimestampedValue>(
 
   const height = isExtraSmallScreen ? 200 : 400;
 
-  const tickFormatPercentage = (v: NumberValue) =>
-    `${formatPercentage(v.valueOf())}%`;
+  const tickFormatPercentage = useCallback(
+    (v: NumberValue) => {
+      return `${formatPercentage(v.valueOf())}%`;
+    },
+    [formatPercentage]
+  );
 
   const metricProperties = useMemo(() => config.map((x) => x.metricProperty), [
     config,
