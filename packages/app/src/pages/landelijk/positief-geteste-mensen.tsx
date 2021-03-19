@@ -83,7 +83,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
   );
   const router = useRouter();
 
-  const dataInfectedDelta = data.tested_overall;
+  const dataOverallLastValue = data.tested_overall.last_value;
   const dataGgdAverageLastValue = data.tested_ggd_average.last_value;
   const dataGgdDailyValues = data.tested_ggd_daily.values;
 
@@ -132,9 +132,8 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             subtitle={text.pagina_toelichting}
             metadata={{
               datumsText: text.datums,
-              dateOrRange: dataInfectedDelta.last_value.date_unix,
-              dateOfInsertionUnix:
-                dataInfectedDelta.last_value.date_of_insertion_unix,
+              dateOrRange: dataOverallLastValue.date_unix,
+              dateOfInsertionUnix: dataOverallLastValue.date_of_insertion_unix,
               dataSources: [text.bronnen.rivm],
             }}
             reference={text.reference}
@@ -146,13 +145,13 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             <KpiTile
               title={text.kpi_titel}
               metadata={{
-                date: dataInfectedDelta.last_value.date_unix,
+                date: dataOverallLastValue.date_unix,
                 source: text.bronnen.rivm,
               }}
             >
               <KpiValue
                 data-cy="infected"
-                absolute={data.tested_overall.last_value.infected}
+                absolute={dataOverallLastValue.infected}
                 difference={data.difference.tested_overall__infected}
               />
 
@@ -192,7 +191,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               title={text.barscale_titel}
               data-cy="infected_per_100k"
               metadata={{
-                date: dataInfectedDelta.last_value.date_unix,
+                date: dataOverallLastValue.date_unix,
                 source: text.bronnen.rivm,
               }}
             >
@@ -213,7 +212,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             data-cy="choropleths"
             title={text.map_titel}
             metadata={{
-              date: dataInfectedDelta.last_value.date_unix,
+              date: dataOverallLastValue.date_unix,
               source: text.bronnen.rivm,
             }}
             description={text.map_toelichting}
@@ -303,7 +302,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             title={text.linechart_titel}
             description={text.linechart_toelichting}
             signaalwaarde={7}
-            values={dataInfectedDelta.values}
+            values={data.tested_overall.values}
             linesConfig={[{ metricProperty: 'infected_per_100k' }]}
             metadata={{
               source: text.bronnen.rivm,
@@ -355,7 +354,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               ageDemographicExampleData
             )}
             metadata={{
-              date: dataInfectedDelta.last_value.date_unix,
+              date: dataOverallLastValue.date_unix,
               source: text.bronnen.rivm,
             }}
           >
