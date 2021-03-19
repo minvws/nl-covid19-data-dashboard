@@ -135,7 +135,7 @@ const NavWrapper = styled.nav(
     width: '100%',
     borderTopWidth: '1px',
     p: 0,
-    transition: 'height 0.4s ease-in-out, opacity 0.4s ease-in-out',
+    // transition: 'height 0.4s ease-in-out, opacity 0.4s ease-in-out',
     overflow: 'hidden',
     [`@media ${theme.mediaQueries.md}`]: {
       display: 'inline',
