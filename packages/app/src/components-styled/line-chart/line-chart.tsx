@@ -104,8 +104,19 @@ export function LineChart<T extends TimestampedValue>({
 
   const { formatNumber, formatPercentage, siteText: text } = useIntl();
 
-  const formatYAxisFn = (y: number) => formatNumber(y);
-  const formatYAxisPercentageFn = (y: number) => `${formatPercentage(y)}%`;
+  const formatYAxisFn = useCallback(
+    (y: number) => {
+      return formatNumber(y);
+    },
+    [formatNumber]
+  );
+
+  const formatYAxisPercentageFn = useCallback(
+    (y: number) => {
+      return `${formatPercentage(y)}%`;
+    },
+    [formatPercentage]
+  );
 
   const metricProperties = useMemo(
     () => linesConfig.map((x) => x.metricProperty),
