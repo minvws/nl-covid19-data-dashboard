@@ -48,7 +48,7 @@ export const client = sanityClient(config);
  **/
 // export const urlFor = (source: SanityImageSource) => builder.image(source);
 
-export function localize<T>(value: T | T[], languages: any[]): T {
+export function localize<T>(value: T | T[], languages: string[]): T {
   const anyValue = value as any;
 
   if (Array.isArray(value)) {

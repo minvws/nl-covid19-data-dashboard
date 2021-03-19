@@ -13,7 +13,7 @@ import { Layout } from '~/domain/layout/layout';
 const articlesQuery = `*[_type == 'article'] {"slug":slug.current}`;
 
 //@TODO THIS NEEDS TO COME FROM CONTEXT
-const locale = process.env.NEXT_PUBLIC_LOCALE;
+const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
 
 export async function getStaticPaths() {
   const articlesData = await client.fetch(articlesQuery);

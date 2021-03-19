@@ -37,7 +37,7 @@ export function getLastGeneratedDate() {
 }
 
 //@TODO THIS NEEDS TO COME FROM CONTEXT
-const locale = process.env.NEXT_PUBLIC_LOCALE;
+const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
 export function createGetContent<T>(
   queryOrQueryGetter: string | ((context: GetStaticPropsContext) => string)
 ) {

@@ -17,6 +17,7 @@ import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { SidebarBarScale } from './sidebar-barscale';
 import { SidebarKpiValue } from './sidebar-kpi-value';
 import { useIntl } from '~/intl';
+import { AllLanguages } from '~/locale';
 
 interface SidebarMetricProps<T extends { difference: unknown }> {
   scope: DataScope;
@@ -27,7 +28,7 @@ interface SidebarMetricProps<T extends { difference: unknown }> {
    * Currently only behavior is doing that.
    */
   metricProperty?: string;
-  localeTextKey: any;
+  localeTextKey: keyof AllLanguages;
   differenceKey?: DifferenceKey;
   showBarScale?: boolean;
   annotationKey?: string;
