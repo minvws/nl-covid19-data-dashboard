@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
 import styled from 'styled-components';
 import { ChartPadding } from '~/components-styled/line-chart/components';
 import { Text } from '~/components-styled/typography';
@@ -107,9 +107,12 @@ function MarkerUnmemoized<T extends TimestampedTrendValue>(
 ) {
   const { formatDateFromMilliseconds } = useIntl();
 
-  function defaultFormatLabel(data: TimestampedTrendValue): string {
-    return formatDateFromMilliseconds(data.__date.getTime(), 'axis');
-  }
+  const defaultFormatLabel = useCallback(
+    (data: TimestampedTrendValue): string => {
+      return formatDateFromMilliseconds(data.__date.getTime(), 'axis');
+    },
+    [formatDateFromMilliseconds]
+  );
 
   const {
     primaryColor = colors.data.primary,
