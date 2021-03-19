@@ -60,6 +60,12 @@ export type InvisibleSeriesDefinition<T extends TimestampedValue> = {
   type: 'invisible';
   metricProperty: keyof T;
   label: string;
+  /**
+   * The properties that only show in the tooltip are usually different from the
+   * chart configuration dataOptions, so we use a specific boolean here to
+   * indicate the format.
+   */
+  isPercentage?: boolean;
 };
 
 /**

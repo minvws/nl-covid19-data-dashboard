@@ -130,7 +130,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
                       {getValueStringForKey(
                         value,
                         x.metricProperty,
-                        options.isPercentage
+                        x.isPercentage
                       )}
                     </b>
                   </TooltipValueContainer>
