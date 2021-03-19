@@ -37,9 +37,9 @@ export function AppContent({
 
   const menuOpenText = router.pathname.startsWith('/landelijk')
     ? siteText.nav.terug_naar_alle_cijfers_homepage
-    : pathname.startsWith('/veiligheidsregio')
+    : router.pathname.startsWith('/veiligheidsregio')
     ? siteText.nav.terug_naar_alle_cijfers_veiligheidsregio
-    : pathname.startsWith('/gemeente')
+    : router.pathname.startsWith('/gemeente')
     ? siteText.nav.terug_naar_alle_cijfers_gemeente
     : siteText.nav.terug_naar_alle_cijfers;
   return (
