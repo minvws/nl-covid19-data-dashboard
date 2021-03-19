@@ -2,11 +2,10 @@ import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { Box } from '~/components-styled/base';
-import { getLocale } from '~/utils/getLocale';
 
 export function LanguageSwitcher() {
   const router = useRouter();
-  const locale = getLocale();
+  const locale = process.env.NEXT_PUBLIC_LOCALE;
 
   return (
     <Box height={55} mt={-55} textAlign="right">

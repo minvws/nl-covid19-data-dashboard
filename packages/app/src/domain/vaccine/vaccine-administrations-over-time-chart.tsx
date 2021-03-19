@@ -4,15 +4,16 @@ import { GridRows } from '@visx/grid';
 import { ParentSize } from '@visx/responsive';
 import { LineChart } from '~/components-styled/line-chart';
 import { ComponentCallbackInfo } from '~/components-styled/line-chart/components';
-import siteText from '~/locale';
 import { colors } from '~/style/theme';
-import { formatNumber } from '~/utils/formatNumber';
+import { useIntl } from '~/intl';
 
 export function VaccineAdministrationsOverTimeChart({
   values,
 }: {
   values: NlVaccineAdministeredTotalValue[];
 }) {
+  const { formatNumber } = useIntl();
+
   const divergeIndex = values.findIndex((x) => x.estimated !== x.reported);
 
   return (
@@ -34,7 +35,7 @@ export function VaccineAdministrationsOverTimeChart({
               color: colors.data.primary,
             },
           ]}
-          componentCallback={componentCallback}
+          componentCallback={ComponentCallback}
           showMarkerLine
           formatTooltip={(values) => formatNumber(values[0].__value)}
           padding={{
@@ -47,7 +48,26 @@ export function VaccineAdministrationsOverTimeChart({
     </ParentSize>
   );
 
-  function componentCallback(callbackInfo: ComponentCallbackInfo) {
+  function ComponentCallback(callbackInfo: ComponentCallbackInfo) {
+    const { siteText } = useIntl();
+
+    const DAY_IN_SECONDS = 24 * 60 * 60;
+    function formatLastDate(date: Date, defaultFormat?: TickFormatter<any>) {
+      const days = Math.floor(
+        (Date.now() / 1000 - date.valueOf() / 1000) / DAY_IN_SECONDS
+      );
+
+      if (days < 1) {
+        return siteText.common.vandaag;
+      }
+
+      if (days < 2) {
+        return siteText.common.gisteren;
+      }
+
+      return defaultFormat ? defaultFormat(date, 0, []) : '';
+    }
+
     switch (callbackInfo.type) {
       case 'GridRows': {
         const domain = callbackInfo.props.scale.domain();
@@ -112,21 +132,4 @@ export function VaccineAdministrationsOverTimeChart({
       }
     }
   }
-}
-
-const DAY_IN_SECONDS = 24 * 60 * 60;
-function formatLastDate(date: Date, defaultFormat?: TickFormatter<any>) {
-  const days = Math.floor(
-    (Date.now() / 1000 - date.valueOf() / 1000) / DAY_IN_SECONDS
-  );
-
-  if (days < 1) {
-    return siteText.common.vandaag;
-  }
-
-  if (days < 2) {
-    return siteText.common.gisteren;
-  }
-
-  return defaultFormat ? defaultFormat(date, 0, []) : '';
 }

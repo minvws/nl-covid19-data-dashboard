@@ -168,8 +168,9 @@ export interface National {
   corona_melder_app: NlCoronaMelderApp;
   vaccine_coverage?: NlVaccineCoverage;
   vaccine_delivery: NlVaccineDelivery;
-  vaccine_delivery_estimate: NlVaccineEstimateDelivery;
-  vaccine_delivery_estimate_time_span: NlVaccineDeliveryEstimateTimeSpan;
+  vaccine_delivery_estimate: NlVaccineDeliveryEstimate;
+  vaccine_delivery_per_supplier?: NlVaccineDeliveryPerSupplier;
+  vaccine_delivery_estimate_time_span?: NlVaccineDeliveryEstimateTimeSpan;
   vaccine_administered: NlVaccineAdministered;
   vaccine_administered_estimate: NlVaccineAdministeredEstimate;
   vaccine_administered_care_institutions: NlVaccineAdministeredCareInstitutions;
@@ -181,6 +182,7 @@ export interface National {
   vaccine_administered_total: NlVaccineAdministeredTotal;
   vaccine_administered_rate_moving_average: NlVaccineAdministeredRateMovingAverage;
   vaccine_administered_planned: NlVaccineAdministeredPlanned;
+  vaccine_stock?: NlVaccineStock;
 }
 export interface NationalDifference {
   tested_overall__infected_per_100k: DifferenceDecimal;
@@ -522,7 +524,7 @@ export interface NlVaccineDeliveryValue {
   date_start_unix: number;
   date_end_unix: number;
 }
-export interface NlVaccineEstimateDelivery {
+export interface NlVaccineDeliveryEstimate {
   values: NlVaccineDeliveryEstimateValue[];
   last_value: NlVaccineDeliveryEstimateValue;
 }
@@ -531,6 +533,22 @@ export interface NlVaccineDeliveryEstimateValue {
   date_of_insertion_unix: number;
   date_start_unix: number;
   date_end_unix: number;
+}
+export interface NlVaccineDeliveryPerSupplier {
+  values: NlVaccineDeliveryPerSupplierValue[];
+  last_value: NlVaccineDeliveryPerSupplierValue;
+}
+export interface NlVaccineDeliveryPerSupplierValue {
+  total: number;
+  bio_n_tech_pfizer: number;
+  moderna: number;
+  astra_zeneca: number;
+  is_estimate: boolean;
+  week_number: number;
+  date_of_insertion_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_report_unix: number;
 }
 export interface NlVaccineDeliveryEstimateTimeSpan {
   values: NlVaccineDeliveryEstimateTimeSpanValue[];
@@ -661,6 +679,18 @@ export interface NlVaccineAdministeredPlannedValue {
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
+}
+export interface NlVaccineStock {
+  values: NlVaccineStockValue[];
+  last_value: NlVaccineStockValue;
+}
+export interface NlVaccineStockValue {
+  total: number;
+  bio_n_tech_pfizer: number;
+  moderna: number;
+  astra_zeneca: number;
+  date_of_insertion_unix: number;
+  date_unix: number;
 }
 
 export interface Regionaal {

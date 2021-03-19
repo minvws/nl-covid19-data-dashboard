@@ -8,8 +8,7 @@ import { Tile } from '~/components-styled/tile';
 import { Heading, InlineText, Text } from '~/components-styled/typography';
 import { colors } from '~/style/theme';
 import { RichContentBlock } from '~/types/cms';
-import { formatDate } from '~/utils/formatDate';
-import siteText from '~/locale/index';
+import { useIntl } from '~/intl';
 
 const MAX_ITEMS_VISIBLE = 5;
 const CIRCLE_SIZE = 26;
@@ -32,6 +31,8 @@ export interface MilestoneViewProps {
 
 export function MilestonesView(props: MilestoneViewProps) {
   const { title, milestones, description, expectedMilestones } = props;
+
+  const { siteText, formatDate } = useIntl();
 
   const [isExpanded, setIsExpanded] = useState(true);
 

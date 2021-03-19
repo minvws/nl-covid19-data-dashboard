@@ -1,15 +1,19 @@
-import { targetLanguage } from '~/locale';
+export function getVaccineMilestonesQuery() {
+  //@TODO
+  // CONTEXT IS NOT PASSED TO THIS GETTER. FIGURE OUT HOW TO SOLVE THIS!
+  const locale = process.env.NEXT_PUBLIC_LOCALE;
 
-export const vaccineMilestonesQuery = `
+  return `
   *[_type=='vaccinationsPage']{
-    "title": title.${targetLanguage},
-    "description": description.${targetLanguage},
+    "title": title.${locale},
+    "description": description.${locale},
     "milestones": [...milestones | order(date)[] {
-      "title": title.${targetLanguage},
+      "title": title.${locale},
       date,
     }],
     "expectedMilestones": [...expected[]{
-      "item": ${targetLanguage}
+      "item": ${locale}
     }] 
   }[0]
 `;
+}

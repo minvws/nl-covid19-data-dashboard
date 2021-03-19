@@ -1,20 +1,22 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import text from '~/locale/index';
+import { useIntl } from '~/intl';
 
 export function Logo() {
+  const { siteText } = useIntl();
+
   return (
     <LogoWrapper>
       <LogoImage
         src="/images/logo-ro.svg"
-        alt={text.header.logo_alt}
+        alt={siteText.header.logo_alt}
         width={314}
         height={125}
         css={css({ display: ['none', 'block'] })}
       />
       <LogoImage
         src="/images/logo-ro-small.svg"
-        alt={text.header.logo_alt}
+        alt={siteText.header.logo_alt}
         width={40}
         height={76}
         css={css({ display: ['block', 'none'] })}

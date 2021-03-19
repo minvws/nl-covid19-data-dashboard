@@ -5,9 +5,9 @@
  * - machine readable iso dates
  */
 
-import { formatDateFromSeconds, formatRelativeDate } from '~/utils/formatDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { useIsMounted } from '~/utils/use-is-mounted';
+import { useIntl } from '~/intl';
 
 interface RelativeDateProps {
   dateInSeconds: number;
@@ -38,6 +38,8 @@ export function RelativeDate({
   isCapitalized,
   absoluteDateTemplate,
 }: RelativeDateProps) {
+  const { formatDateFromSeconds, formatRelativeDate } = useIntl();
+
   const isMounted = useIsMounted();
   const isoDate = formatDateFromSeconds(dateInSeconds, 'iso');
   const dayMonthDate = formatDateFromSeconds(dateInSeconds, 'day-month');
