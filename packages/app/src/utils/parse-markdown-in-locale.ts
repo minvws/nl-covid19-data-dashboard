@@ -1,5 +1,4 @@
 import { get, set } from 'lodash';
-import { Locale } from '~/locale';
 import { MDToHTMLString } from './MDToHTMLString';
 
 /**

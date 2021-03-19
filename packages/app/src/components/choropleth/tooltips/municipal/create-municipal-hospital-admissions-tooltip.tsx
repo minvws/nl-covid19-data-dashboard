@@ -8,8 +8,7 @@ import { InlineText } from '~/components-styled/typography';
 import { MunicipalitySelectionHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
 import { TooltipSubject } from '~/components/choropleth/tooltips/tooltip-subject';
-import siteText from '~/locale/index';
-import { formatNumber } from '~/utils/formatNumber';
+import { useIntl } from '~/intl';
 
 export const createMunicipalHospitalAdmissionsTooltip = (
   subject: string,
@@ -22,6 +21,8 @@ export const createMunicipalHospitalAdmissionsTooltip = (
     event.stopPropagation();
     selectHandler(context.gmcode);
   };
+
+  const { siteText, formatNumber } = useIntl();
 
   return (
     <TooltipContent title={context.gemnaam} onSelect={onSelect}>

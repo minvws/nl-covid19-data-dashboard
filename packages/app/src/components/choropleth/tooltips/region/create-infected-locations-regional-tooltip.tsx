@@ -7,7 +7,8 @@ import { ReactNode } from 'react';
 import { InlineText } from '~/components-styled/typography';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
 import { TooltipSubject } from '~/components/choropleth/tooltips/tooltip-subject';
-import { formatNumber, formatPercentage } from '~/utils/formatNumber';
+import { useIntl } from '~/intl';
+
 import { RegionSelectionHandler } from '../../select-handlers/create-select-region-handler';
 
 export const createInfectedLocationsRegionalTooltip = (
@@ -19,6 +20,8 @@ export const createInfectedLocationsRegionalTooltip = (
     event.stopPropagation();
     selectHandler(context.vrcode);
   };
+
+  const { formatPercentage, formatNumber } = useIntl();
 
   return (
     <TooltipContent title={context.vrname} onSelect={onSelect}>

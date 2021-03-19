@@ -1,19 +1,18 @@
 import { BarChartValue } from '~/components-styled/bar-chart/bar-chart-coordinates';
-import siteText from '~/locale/index';
+import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { Regionaal } from '@corona-dashboard/common';
-import { formatDateFromSeconds } from '~/utils/formatDate';
-import { formatNumber } from '~/utils/formatNumber';
-
-const text = siteText.veiligheidsregio_rioolwater_metingen;
 
 export interface SewerWaterBarChartData {
   values: BarChartValue[];
 }
 
-export function getSewerWaterBarChartData(
+export function useSewerWaterBarChartData(
   data: Regionaal
 ): SewerWaterBarChartData | undefined {
+  const { siteText, formatDateFromSeconds, formatNumber } = useIntl();
+  const text = siteText.veiligheidsregio_rioolwater_metingen;
+
   const sortedInstallations = data.sewer_per_installation.values.sort(
     (a, b) => {
       return b.last_value.rna_normalized - a.last_value.rna_normalized;

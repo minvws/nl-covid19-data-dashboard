@@ -1,22 +1,27 @@
 import { Box } from '~/components-styled/base';
 import { EditorialDetail } from '~/components-styled/editorial-detail';
-import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import { client, getImageSrc, localize } from '~/lib/sanity';
-import { targetLanguage } from '~/locale/index';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
 } from '~/static-props/get-data';
 import { Block, Editorial, RichContentBlock } from '~/types/cms';
 import { assert } from '~/utils/assert';
+import { Layout } from '~/domain/layout/layout';
 
 const editorialsQuery = `*[_type == 'editorial'] {"slug":slug.current}`;
 
 export async function getStaticPaths() {
+  //@TODO THIS NEED TO COME FROM CONTEXT
+  const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+
   const editorialData = await client.fetch(editorialsQuery);
   const editorials = localize<{ slug: string }[]>(editorialData, [
-    targetLanguage,
+    locale,
     'nl',
   ]);
 
@@ -31,6 +36,10 @@ export async function getStaticPaths() {
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   createGetContent<Editorial>((context) => {
+    //@TODO We need to switch this from process.env to context as soon as we use i18n routing
+    // const { locale } = context;
+    const locale = process.env.NEXT_PUBLIC_LOCALE;
+
     assert(context?.params?.slug, 'Slug required to retrieve article');
     return `
       *[_type == 'editorial' && slug.current == '${context.params.slug}'][0]{
@@ -41,8 +50,8 @@ export const getStaticProps = createGetStaticProps(
         },
         "intro": {
           ...intro,
-          "${targetLanguage}": [
-            ...intro.${targetLanguage}[]
+          "${locale}": [
+            ...intro.${locale}[]
             {
               ...,
               "asset": asset->
@@ -51,8 +60,8 @@ export const getStaticProps = createGetStaticProps(
         },
         "content": {
           "_type": content._type,
-          "${targetLanguage}": [
-            ...content.${targetLanguage}[]
+          "${locale}": [
+            ...content.${locale}[]
             {
               ...,
               "asset": asset->,
@@ -68,32 +77,27 @@ export const getStaticProps = createGetStaticProps(
   })
 );
 
-const EditorialDetailPage: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { content } = props;
-
-  return (
-    <Box backgroundColor="white">
-      <EditorialDetail editorial={content} />
-    </Box>
-  );
-};
-
-/**
- *  @TODO this implementation below is not very sexy yet, its hacked together
- * to simply have _something_
- */
-EditorialDetailPage.getLayout = (page, props) => {
+const EditorialDetailPage = (props: StaticProps<typeof getStaticProps>) => {
+  const { content, lastGenerated } = props;
   const { cover } = props.content;
   const { asset } = cover;
 
   const imgPath = getImageSrc(asset, 1200);
 
-  return getLayoutWithMetadata({
+  const metadata = {
     title: getTitle(props.content.title),
     description: toPlainText(props.content.intro),
     openGraphImage: imgPath,
     twitterImage: imgPath,
-  })(page, props);
+  };
+
+  return (
+    <Layout {...metadata} lastGenerated={lastGenerated}>
+      <Box backgroundColor="white">
+        <EditorialDetail editorial={content} />
+      </Box>
+    </Layout>
+  );
 };
 
 export default EditorialDetailPage;

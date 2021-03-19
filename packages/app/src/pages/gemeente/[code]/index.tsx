@@ -1,7 +1,11 @@
-import { FCWithLayout } from '~/domain/layout/layout';
-import { getMunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { getGmData, getLastGeneratedDate } from '~/static-props/get-data';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
+import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
+import { Layout } from '~/domain/layout/layout';
+import { useIntl } from '~/intl';
 
 export { getStaticPaths } from '~/static-paths/gm';
 
@@ -10,7 +14,15 @@ export const getStaticProps = createGetStaticProps(
   getGmData
 );
 
-const Municipality: FCWithLayout<typeof getStaticProps> = () => null;
-Municipality.getLayout = getMunicipalityLayout();
+const Municipality = (props: StaticProps<typeof getStaticProps>) => {
+  const { lastGenerated } = props;
+  const { siteText } = useIntl();
+
+  return (
+    <Layout {...siteText.gemeente_index.metadata} lastGenerated={lastGenerated}>
+      <MunicipalityLayout lastGenerated={lastGenerated} />
+    </Layout>
+  );
+};
 
 export default Municipality;

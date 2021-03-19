@@ -24,9 +24,8 @@ import styled from 'styled-components';
 import { Box } from '~/components-styled/base';
 import { Legend } from '~/components-styled/legend';
 import { InlineText } from '~/components-styled/typography';
-import siteText from '~/locale';
+import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
-import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { getValuesInTimeframe } from '~/utils/timeframe';
 import { useIsMountedRef } from '~/utils/use-is-mounted-ref';
@@ -62,8 +61,6 @@ const tickFormatNumber = (v: NumberValue) => {
     ? `${value100K}00k`
     : '0';
 };
-const tickFormatPercentage = (v: NumberValue) =>
-  `${formatPercentage(v.valueOf())}%`;
 
 /**
  * A timeout prevents the tooltip from closing directly when you move out of the
@@ -133,6 +130,8 @@ export function StackedChart<T extends TimestampedValue>(
    */
   const { values, config, width, isPercentage, expectedLabel } = props;
 
+  const { siteText, formatNumber, formatPercentage } = useIntl();
+
   const {
     tooltipData,
     tooltipLeft = 0,
@@ -160,6 +159,13 @@ export function StackedChart<T extends TimestampedValue>(
   );
 
   const height = isExtraSmallScreen ? 200 : 400;
+
+  const tickFormatPercentage = useCallback(
+    (v: NumberValue) => {
+      return `${formatPercentage(v.valueOf())}%`;
+    },
+    [formatPercentage]
+  );
 
   const metricProperties = useMemo(() => config.map((x) => x.metricProperty), [
     config,
@@ -347,7 +353,17 @@ export function StackedChart<T extends TimestampedValue>(
         </Box>
       );
     },
-    [labelByKey, seriesSumByKey, series, isTinyScreen]
+    [
+      seriesSumByKey,
+      series,
+      labelByKey,
+      formatPercentage,
+      formatNumber,
+      isTinyScreen,
+      siteText.vaccinaties.verwachte_leveringen.van_week_tot_week_klein_scherm,
+      siteText.vaccinaties.verwachte_leveringen.van_week_tot_week,
+      siteText.waarde_annotaties.totaal,
+    ]
   );
 
   /**
