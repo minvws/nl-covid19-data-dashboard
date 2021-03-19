@@ -1,5 +1,4 @@
 import {
-  formatNumber,
   NlVaccineAdministeredEstimateValue,
   NlVaccineAdministeredValue,
   NlVaccineDeliveryEstimateValue,
@@ -10,8 +9,8 @@ import { HoverPoint } from '~/components-styled/area-chart/components/marker';
 import { TimestampedTrendValue } from '~/components-styled/area-chart/logic';
 import { Spacer } from '~/components-styled/base';
 import { Text } from '~/components-styled/typography';
-import { AllLanguages } from '~/locale/APP_LOCALE';
-import { formatDateFromSeconds } from '~/utils/formatDate';
+import { AllLanguages } from '~/locale';
+import { useIntl } from '~/intl';
 
 export type TooltipValue = (
   | NlVaccineDeliveryValue
@@ -21,10 +20,12 @@ export type TooltipValue = (
 ) &
   TimestampedTrendValue;
 
-export function formatVaccinationsTooltip(
+export function FormatVaccinationsTooltip(
   values: HoverPoint<TooltipValue>[],
   text: AllLanguages
 ) {
+  const { formatDateFromSeconds, formatNumber } = useIntl();
+
   if (!values.length) {
     return null;
   }

@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-import siteText from '~/locale/index';
+import { useIntl } from '~/intl';
 
 type SEOHeadProps = {
   title?: string;
@@ -10,16 +10,16 @@ type SEOHeadProps = {
   twitterImage?: string;
 };
 
-SEOHead.defaultProps = {
-  description: siteText.seoHead.default_description,
-  openGraphImage: '/banner.png',
-  title: siteText.seoHead.default_title,
-  twitterImage: '/banner-twitter.png',
-  url: siteText.seoHead.default_url,
-};
-
 export function SEOHead(props: SEOHeadProps) {
-  const { description, openGraphImage, title, twitterImage, url } = props;
+  const { siteText } = useIntl();
+
+  const {
+    description = siteText.seoHead.default_description,
+    openGraphImage = '/banner.png',
+    title = siteText.seoHead.default_title,
+    twitterImage = '/banner-twitter.png',
+    url = siteText.seoHead.default_url,
+  } = props;
 
   return (
     <Head>

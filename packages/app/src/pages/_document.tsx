@@ -6,7 +6,8 @@ import Document, {
   NextScript,
 } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
-import { getLocale } from '~/utils/getLocale';
+
+const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
@@ -40,8 +41,6 @@ class MyDocument extends Document {
   }
 
   render() {
-    const locale = getLocale();
-
     return (
       <Html lang={locale} className="has-no-js">
         <Head>

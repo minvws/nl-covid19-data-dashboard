@@ -17,7 +17,6 @@ import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda
 import { HighlightTeaserProps } from '~/components-styled/highlight-teaser';
 import { MaxWidth } from '~/components-styled/max-width';
 import { RiskLevelIndicator } from '~/components-styled/risk-level-indicator';
-import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
 import { Heading, Text } from '~/components-styled/typography';
 import { VisuallyHidden } from '~/components-styled/visually-hidden';
@@ -30,7 +29,6 @@ import { createSelectRegionHandler } from '~/components/choropleth/select-handle
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
 import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/create-positive-tested-people-regional-tooltip';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
-import { FCWithLayout, getDefaultLayout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import { ChoroplethTwoColumnLayout } from '~/domain/topical/choropleth-two-column-layout';
 import { EditorialSummary } from '~/domain/topical/editorial-teaser';
@@ -39,27 +37,29 @@ import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-e
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
 import { Sitemap } from '~/domain/topical/sitemap';
-import { getDataSitemap } from '~/domain/topical/sitemap/utils';
+import { useDataSitemap } from '~/domain/topical/sitemap/utils';
 import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
-import { topicalPageQuery } from '~/queries/topical-page-query';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import { getTopicalPageQuery } from '~/queries/topical-page-query';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  getText,
   getVrData,
 } from '~/static-props/get-data';
-import { formatDate } from '~/utils/formatDate';
 import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 export { getStaticPaths } from '~/static-paths/vr';
+import { useIntl } from '~/intl';
+import { Layout } from '~/domain/layout/layout';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getText,
   getVrData,
   createGetChoroplethData({
     vr: ({ escalation_levels, tested_overall }) => ({
@@ -72,12 +72,14 @@ export const getStaticProps = createGetStaticProps(
     articles: ArticleSummary[];
     editorial: EditorialSummary;
     highlight: HighlightTeaserProps;
-  }>(topicalPageQuery)
+  }>(getTopicalPageQuery)
 );
 
-const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { text: siteText, choropleth, data, content } = props;
+const TopicalSafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
+  const { choropleth, data, content, lastGenerated } = props;
   const router = useRouter();
+  const { siteText, formatDate } = useIntl();
+
   const text = siteText.veiligheidsregio_actueel;
   const escalationText = siteText.escalatie_niveau;
   const vrCode = router.query.code as string;
@@ -89,19 +91,19 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
     'municipal'
   );
 
-  const dataSitemap = getDataSitemap('veiligheidsregio', vrCode);
+  const dataSitemap = useDataSitemap('veiligheidsregio', vrCode);
+
+  const metadata = {
+    title: replaceVariablesInText(text.metadata.title, {
+      safetyRegionName: props.safetyRegionName,
+    }),
+    description: replaceVariablesInText(text.metadata.description, {
+      safetyRegionName: props.safetyRegionName,
+    }),
+  };
 
   return (
-    <>
-      <SEOHead
-        title={replaceVariablesInText(text.metadata.title, {
-          safetyRegionName: props.safetyRegionName,
-        })}
-        description={replaceVariablesInText(text.metadata.description, {
-          safetyRegionName: props.safetyRegionName,
-        })}
-      />
-
+    <Layout {...metadata} lastGenerated={lastGenerated}>
       <Box bg="white" pb={4}>
         {/**
          * Since now the sections have a H2 heading I think we need to include
@@ -395,10 +397,8 @@ const TopicalSafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
           </TileList>
         </MaxWidth>
       </Box>
-    </>
+    </Layout>
   );
 };
-
-TopicalSafetyRegion.getLayout = getDefaultLayout();
 
 export default TopicalSafetyRegion;

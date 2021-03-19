@@ -1,25 +1,31 @@
-import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import { MaxWidth } from '~/components-styled/max-width';
-import text from '~/locale/index';
 import styles from './over.module.scss';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import { getLastGeneratedDate } from '~/static-props/get-data';
+import { useIntl } from '~/intl';
+import { Layout } from '~/domain/layout/layout';
 
 export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
 
-const NotFound: FCWithLayout = () => {
+const NotFound = (props: StaticProps<typeof getStaticProps>) => {
+  const { lastGenerated } = props;
+  const { siteText } = useIntl();
+
   return (
-    <div className={styles.container}>
-      <MaxWidth>
-        <div className={styles.maxwidth}>
-          <h2>{text.notfound_titel.text}</h2>
-          <p>{text.notfound_beschrijving.text}</p>
-        </div>
-      </MaxWidth>
-    </div>
+    <Layout {...siteText.notfound_metadata} lastGenerated={lastGenerated}>
+      <div className={styles.container}>
+        <MaxWidth>
+          <div className={styles.maxwidth}>
+            <h2>{siteText.notfound_titel.text}</h2>
+            <p>{siteText.notfound_beschrijving.text}</p>
+          </div>
+        </MaxWidth>
+      </div>
+    </Layout>
   );
 };
-
-NotFound.getLayout = getLayoutWithMetadata(text.notfound_metadata);
 
 export default NotFound;

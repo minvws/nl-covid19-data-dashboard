@@ -1,10 +1,10 @@
 import { isDefined } from 'ts-is-present';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
 import { DifferenceDecimal, DifferenceInteger } from '@corona-dashboard/common';
-import { formatNumber, formatPercentage } from '~/utils/formatNumber';
 import { Box } from '../base';
 import { DifferenceIndicator } from '../difference-indicator';
 import { Heading, InlineText } from '../typography';
+import { useIntl } from '~/intl';
 
 type SidebarKpiValueProps = {
   title: string;
@@ -28,6 +28,8 @@ export function SidebarKpiValue(props: SidebarKpiValueProps) {
     valueAnnotation,
     difference,
   } = props;
+
+  const { formatPercentage, formatNumber } = useIntl();
 
   return (
     <Box width="100%" minHeight="4rem">
