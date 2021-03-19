@@ -1,7 +1,7 @@
 import { TimestampedValue } from '@corona-dashboard/common';
 import { ScaleLinear } from 'd3-scale';
 import { memo } from 'react';
-import { AreaTrend, LineTrend, RangeTrend, BarTrend } from '.';
+import { AreaTrend, LineTrend, RangeTrend } from '.';
 import {
   Bounds,
   GetX,
@@ -93,19 +93,6 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                 getY0={getY0}
                 getY1={getY1}
                 bounds={bounds}
-              />
-            );
-
-          case 'bar':
-            return (
-              <BarTrend
-                key={index}
-                series={series as SeriesSingleValue[]}
-                color={config.color}
-                getX={getX}
-                getY={getY}
-                yScale={yScale}
-                onHover={(evt) => onHover(evt, index)}
               />
             );
         }

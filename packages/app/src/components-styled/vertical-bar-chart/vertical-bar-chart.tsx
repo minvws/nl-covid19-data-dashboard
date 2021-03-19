@@ -6,7 +6,6 @@ import { isDefined } from 'ts-is-present';
 import useResizeObserver from 'use-resize-observer';
 import { Box } from '~/components-styled/base';
 import { TimeframeOption } from '~/utils/timeframe';
-import { ValueAnnotation } from '../value-annotation';
 import {
   Axes,
   ChartContainer,
@@ -14,18 +13,20 @@ import {
   TooltipData,
   TooltipFormatter,
 } from '~/components-styled/time-series-chart/components';
-import { BarTrend } from '~/components-styled/time-series-chart/components/bar-trend';
 import {
   DataOptions,
   useValuesInTimeframe,
 } from '~/components-styled/time-series-chart/logic';
 import { useDimensions } from '~/components-styled/time-series-chart/logic/dimensions';
+
 import {
+  BarSeriesDefinition,
   useSeries,
   useCalculatedSeriesMaximum,
   useScales,
-  BarSeriesDefinition,
+  useHoverState,
 } from './logic';
+import { BarTrend } from './components';
 
 export type BarDefinition<T extends TimestampedValue> = {
   type: 'bar';
@@ -127,16 +128,13 @@ export function VerticalBarChart<T extends TimestampedValue>({
     numTicks: tickValues?.length || numGridLines,
   });
 
-  // const [handleHover, hoverState] = useHoverState({
-  //   values,
-  //   paddingLeft: padding.left,
-  //   seriesConfig,
-  //   seriesList,
-  //   xScale,
-  //   yScale,
-  // });
+  const [handleHover, hoverState] = useHoverState({
+    values,
+    paddingLeft: padding.left,
+    xScale,
+  });
 
-  const handleHover = (x) => console.log(x);
+  console.log(hoverState);
 
   // useEffect(() => {
   //   if (hoverState) {
@@ -205,7 +203,7 @@ export function VerticalBarChart<T extends TimestampedValue>({
             getY={getY}
             barWidth={xScale.bandwidth()}
             yScale={yScale}
-            onHover={(evt) => handleHover(evt, 0)}
+            onHover={handleHover}
           />
         </ChartContainer>
 

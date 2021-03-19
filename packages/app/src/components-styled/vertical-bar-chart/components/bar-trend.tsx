@@ -1,9 +1,10 @@
-import { TimestampedValue } from '@corona-dashboard/common';
-import { LinePath } from '@visx/shape';
 import { PositionScale } from '@visx/shape/lib/types';
 import { Group } from '@visx/group';
-import { MouseEvent, TouchEvent, useCallback, useState } from 'react';
-import { SeriesItem, SeriesSingleValue } from '../logic';
+import { MouseEvent, TouchEvent } from 'react';
+import {
+  SeriesItem,
+  SeriesSingleValue,
+} from '~/components-styled/time-series-chart/logic';
 
 type BarTrendProps = {
   series: SeriesSingleValue[];
@@ -26,20 +27,11 @@ export function BarTrend({
   barWidth,
   onHover,
 }: BarTrendProps) {
-  const [isHovered, setIsHovered] = useState(false);
-
-  console.log(barWidth);
-
-  const handleHover = useCallback(
-    (event: TouchEvent<SVGElement> | MouseEvent<SVGElement>) => {
-      const isLeave = event.type === 'mouseleave';
-      setIsHovered(!isLeave);
-      onHover(event);
-    },
-    [onHover]
+  const getRectPosition = getRectPositionFunction(
+    yScale(0) as number,
+    getX,
+    getY
   );
-
-  const getRectPosition = getRectPositionFunction(yScale(0), getX, getY);
 
   return (
     <Group>
@@ -49,18 +41,34 @@ export function BarTrend({
 
         const { x, y, height } = getRectPosition(value);
         return (
-          <rect
-            id={barId}
-            key={barId}
-            fill={fillColor}
-            onMouseLeave={handleHover}
-            onMouseMove={handleHover}
-            onTouchStart={handleHover}
-            x={x}
-            y={y}
-            width={barWidth}
-            height={height}
-          />
+          <Group
+            onMouseLeave={onHover}
+            onMouseMove={onHover}
+            onTouchStart={onHover}
+          >
+            <rect
+              /**
+               * The captures mouse movements that align vertically
+               * with the bar
+               */
+              id={`${barId}-hover`}
+              key={`${barId}-hover`}
+              fill={'transparent'}
+              x={x}
+              y={0}
+              width={barWidth}
+              height="100%"
+            />
+            <rect
+              id={barId}
+              key={barId}
+              fill={fillColor}
+              x={x}
+              y={y}
+              width={barWidth}
+              height={height}
+            />
+          </Group>
         );
       })}
     </Group>

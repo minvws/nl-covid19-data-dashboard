@@ -15,7 +15,7 @@ import {
 } from '~/components-styled/time-series-chart/logic/scales';
 
 interface UseScalesResult {
-  xScale: ScaleBand<number, number>;
+  xScale: ScaleBand<number>;
   yScale: ScaleLinear<number, number>;
   getX: GetX;
   getY: GetY;
