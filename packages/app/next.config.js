@@ -66,7 +66,7 @@ const nextConfig = {
     ],
   },*/
 
-  webpack(config, { isServer, webpack, defaultLoaders }) {
+  webpack(config, { isServer }) {
     if (
       isServer &&
       process.env.DISABLE_SITEMAP !== '1' &&
