@@ -34,6 +34,41 @@ export interface MetadataProps {
   };
 }
 
+function useFormateDateText(
+  dateOrRange: number | DateRange,
+  dateOfInsertionUnix: number,
+  datumsText: string
+) {
+  const { formatDateFromSeconds } = useIntl();
+
+  if (typeof dateOrRange === 'number') {
+    const dateOfReport = formatDateFromSeconds(dateOrRange, 'weekday-medium');
+    const dateOfInsertion = formatDateFromSeconds(
+      dateOfInsertionUnix,
+      'weekday-medium'
+    );
+    return replaceVariablesInText(datumsText, {
+      dateOfReport,
+      dateOfInsertion,
+    });
+  } else {
+    const weekStart = formatDateFromSeconds(
+      dateOrRange.start,
+      'weekday-medium'
+    );
+    const weekEnd = formatDateFromSeconds(dateOrRange.end, 'weekday-medium');
+    const dateOfInsertion = formatDateFromSeconds(
+      dateOfInsertionUnix,
+      'weekday-medium'
+    );
+    return replaceVariablesInText(datumsText, {
+      weekStart,
+      weekEnd,
+      dateOfInsertion,
+    });
+  }
+}
+
 export function Metadata(props: MetadataProps) {
   const {
     dataSources,
@@ -45,43 +80,10 @@ export function Metadata(props: MetadataProps) {
     moreInformationLink,
   } = props;
 
-  const { siteText, formatDateFromSeconds } = useIntl();
+  const { siteText } = useIntl();
   const text = siteText.common.metadata;
 
-  function formateDateText(
-    dateOrRange: number | DateRange,
-    dateOfInsertionUnix: number,
-    datumsText: string
-  ) {
-    if (typeof dateOrRange === 'number') {
-      const dateOfReport = formatDateFromSeconds(dateOrRange, 'weekday-medium');
-      const dateOfInsertion = formatDateFromSeconds(
-        dateOfInsertionUnix,
-        'weekday-medium'
-      );
-      return replaceVariablesInText(datumsText, {
-        dateOfReport,
-        dateOfInsertion,
-      });
-    } else {
-      const weekStart = formatDateFromSeconds(
-        dateOrRange.start,
-        'weekday-medium'
-      );
-      const weekEnd = formatDateFromSeconds(dateOrRange.end, 'weekday-medium');
-      const dateOfInsertion = formatDateFromSeconds(
-        dateOfInsertionUnix,
-        'weekday-medium'
-      );
-      return replaceVariablesInText(datumsText, {
-        weekStart,
-        weekEnd,
-        dateOfInsertion,
-      });
-    }
-  }
-
-  const dateText = formateDateText(
+  const dateText = useFormateDateText(
     dateOrRange,
     dateOfInsertionUnix,
     datumsText
