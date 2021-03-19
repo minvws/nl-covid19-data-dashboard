@@ -1,7 +1,7 @@
 import '@reach/combobox/styles.css';
 import { AppProps } from 'next/app';
 import Router from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import '~/components-styled/combo-box/combo-box.scss';
 import { IntlContext } from '~/intl';
@@ -31,7 +31,7 @@ export default function App(props: AppProps) {
 
   // const { locale = 'nl' } = useRouter(); // if we replace this with process.env.NEXT_PUBLIC_LOCALE, next export should still be possible?
   const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
-  const [intlState] = useState(languages[locale as LanguageKey]);
+  const text = languages[locale as LanguageKey];
 
   useEffect(() => {
     const handleRouteChange = (pathname: string) => {
@@ -50,7 +50,7 @@ export default function App(props: AppProps) {
 
   return (
     <ThemeProvider theme={theme}>
-      <IntlContext.Provider value={intlState}>
+      <IntlContext.Provider value={text}>
         <GlobalStyle />
         <Component {...pageProps} />
       </IntlContext.Provider>
