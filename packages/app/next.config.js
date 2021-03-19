@@ -2,11 +2,6 @@ const withPlugins = require('next-compose-plugins');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const sitemap = require('./generate-sitemap.js');
 
-const withTM = require('next-transpile-modules')([
-  'internmap', // `internmap` is a dependency of `d3-array`
-  'geometric',
-]);
-
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
@@ -81,7 +76,7 @@ const nextConfig = {
     ],
   },*/
 
-  webpack(config, { isServer, webpack, defaultLoaders }) {
+  webpack(config, { isServer, webpack }) {
     if (
       isServer &&
       process.env.DISABLE_SITEMAP !== '1' &&
@@ -130,16 +125,6 @@ const nextConfig = {
       },
     });
 
-    /**
-     * All d3-* packages needs to be transpiled to make them ie11 compatible.
-     * For some reason `next-transpile-modules` doesn't pick them up properly.
-     */
-    config.module.rules.push({
-      test: /\.js$/,
-      loader: defaultLoaders.babel,
-      include: /[\\/]node_modules[\\/](d3-.*|react-use-measure)[\\/]/,
-    });
-
     config.resolve.alias = {
       ...config.resolve.alias,
 
@@ -166,6 +151,6 @@ const nextConfig = {
   },
 };
 
-const plugins = [withTM, withBundleAnalyzer];
+const plugins = [withBundleAnalyzer];
 
 module.exports = withPlugins(plugins, nextConfig);
