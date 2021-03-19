@@ -25,9 +25,7 @@ export function TopNavigation() {
     setNeedsMobileMenuLink(isSmallScreen);
   }, [isSmallScreen]);
 
-  function toggleMenu() {
-    setIsMenuOpen(!isMenuOpen);
-  }
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
     <>
@@ -50,14 +48,10 @@ export function TopNavigation() {
         aria-label={text.aria_labels.pagina_keuze}
         css={css({
           maxHeight: asResponsiveArray({
-            _: isMenuOpen ? '1000px' : '0px',
+            _: isMenuOpen ? '1000px' : 0,
             md: '100%',
           }),
-          opacity: asResponsiveArray({ _: isMenuOpen ? '1' : '0', md: '1' }),
-          transition: asResponsiveArray({
-            _: 'max-height 0.4s ease-in-out, opacity 0.4s ease-in-out',
-            md: 'none',
-          }),
+          opacity: asResponsiveArray({ _: isMenuOpen ? 1 : 0, md: 1 }),
         })}
       >
         <MaxWidth>
@@ -134,6 +128,10 @@ const NavWrapper = styled.nav(
     borderTopWidth: '1px',
     p: 0,
     maxHeight: asResponsiveArray({ _: '0', md: '100%' }),
+    transition: asResponsiveArray({
+      _: 'max-height 0.4s ease-in-out, opacity 0.4s ease-in-out',
+      md: 'none',
+    }),
     overflow: 'hidden',
 
     '.has-no-js &': {
@@ -150,7 +148,6 @@ const NavWrapper = styled.nav(
         maxHeight: '1000px',
       },
     },
-    // transition: 'height 0.4s ease-in-out, opacity 0.4s ease-in-out',
 
     [`@media ${theme.mediaQueries.md}`]: {
       display: 'inline',
