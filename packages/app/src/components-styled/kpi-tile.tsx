@@ -2,7 +2,7 @@ import { Tile } from '~/components-styled/tile';
 import { Box, Spacer } from './base';
 import { Metadata, MetadataProps } from './metadata';
 import { Heading } from './typography';
-
+import { Markdown } from '~/components-styled/markdown'
 interface KpiTileProps {
   title: string;
   description?: string;
@@ -26,15 +26,13 @@ export function KpiTile({
       <Box>{children}</Box>
       {description && (
         <Box
-          as="div"
           maxWidth="400px"
           fontSize={2}
           lineHeight={2}
           mb={3}
-          dangerouslySetInnerHTML={{
-            __html: description,
-          }}
-        />
+        >
+          <Markdown content={description} />
+        </Box>
       )}
       {/* Using a spacer to push the footer down */}
       <Spacer m="auto" />
