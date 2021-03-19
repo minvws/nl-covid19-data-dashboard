@@ -11,25 +11,14 @@ import theme from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { useBreakpoints } from '~/utils/useBreakpoints';
-import useResizeObserver from 'use-resize-observer';
 
 export function TopNavigation() {
   const router = useRouter();
 
-  const [isMenuOpen, setIsMenuOpen] = useState(true);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const breakpoints = useBreakpoints(true);
   const isSmallScreen = !breakpoints.md;
-  const { ref: contentRef, height: contentHeight = 0 } = useResizeObserver();
   const [needsMobileMenuLink, setNeedsMobileMenuLink] = useState(false);
-  // const [navWrapperTransition, setNavWrapperTransition] = useState('none');
-
-  // const isMounted = useIsMounted();
-
-  const height = (isMenuOpen ? contentHeight : '0px') || undefined;
-
-  useEffect(() => {
-    setIsMenuOpen(false);
-  }, []);
 
   useEffect(() => {
     // Workaround to get the mobile menu opened when linking to a sub-page.
@@ -59,8 +48,17 @@ export function TopNavigation() {
         id="main-navigation"
         role="navigation"
         aria-label={text.aria_labels.pagina_keuze}
-        ref={contentRef}
-        style={{ height }}
+        css={css({
+          maxHeight: asResponsiveArray({
+            _: isMenuOpen ? '1000px' : '0px',
+            md: '100%',
+          }),
+          opacity: asResponsiveArray({ _: isMenuOpen ? '1' : '0', md: '1' }),
+          transition: asResponsiveArray({
+            _: 'max-height 0.4s ease-in-out, opacity 0.4s ease-in-out',
+            md: 'none',
+          }),
+        })}
       >
         <MaxWidth>
           <NavList>
@@ -135,8 +133,25 @@ const NavWrapper = styled.nav(
     width: '100%',
     borderTopWidth: '1px',
     p: 0,
-    // transition: 'height 0.4s ease-in-out, opacity 0.4s ease-in-out',
+    maxHeight: asResponsiveArray({ _: '0', md: '100%' }),
     overflow: 'hidden',
+
+    '.has-no-js &': {
+      animation: `show-menu 1s forwards`,
+      animationDelay: '1s',
+    },
+
+    [`@keyframes show-menu`]: {
+      from: {
+        maxHeight: 0,
+      },
+      to: {
+        opacity: 1,
+        maxHeight: '1000px',
+      },
+    },
+    // transition: 'height 0.4s ease-in-out, opacity 0.4s ease-in-out',
+
     [`@media ${theme.mediaQueries.md}`]: {
       display: 'inline',
       width: 'auto',
