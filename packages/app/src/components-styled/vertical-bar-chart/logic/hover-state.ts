@@ -1,45 +1,40 @@
-import {
-  isDateSpanValue,
-  isDateValue,
-  TimestampedValue,
-} from '@corona-dashboard/common';
+import { useCallback, useState } from 'react';
+import { ScaleBand, ScaleLinear } from 'd3-scale';
 import { localPoint } from '@visx/event';
-import { bisectCenter } from 'd3-array';
-import { ScaleBand } from 'd3-scale';
 import { isEmpty } from 'lodash';
-import { useCallback, useMemo, useRef, useState } from 'react';
-import { isDefined } from 'ts-is-present';
-import { TimespanAnnotationConfig } from './common';
-import {
-  BarSeriesDefinition,
-  SeriesDoubleValue,
-  SeriesList,
-  SeriesSingleValue,
-} from './series';
+import { SeriesSingleValue } from '~/components-styled/time-series-chart/logic/series';
 
-interface UseHoverStateArgs<T extends TimestampedValue> {
-  values: T[];
+interface UseHoverStateArgs {
+  series: SeriesSingleValue[];
   paddingLeft: number;
   xScale: ScaleBand<number>;
+  yScale: ScaleLinear<number, number>;
 }
 
-interface HoverState<T> {
-  index: number;
+export type HoveredPoint = {
   value: SeriesSingleValue;
+  x: number;
+  y: number;
+};
+
+interface HoverState {
+  index: number;
+  point: HoveredPoint;
 }
 
 type Event = React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>;
 
 export type HoverHandler = (event: Event) => void;
 
-type UseHoverStateResponse<T> = [HoverHandler, HoverState<T> | undefined];
+type UseHoverStateResponse = [HoverHandler, HoverState | undefined];
 
-export function useHoverState<T extends TimestampedValue>({
-  values,
+export function useHoverState({
+  series,
   paddingLeft,
   xScale,
-}: UseHoverStateArgs<T>): UseHoverStateResponse<T> {
-  const [hoverState, setHoverState] = useState<HoverState<T>>();
+  yScale,
+}: UseHoverStateArgs): UseHoverStateResponse {
+  const [hoverState, setHoverState] = useState<HoverState>();
 
   const bisect = useCallback(
     function (xPosition: number): number {
@@ -56,7 +51,7 @@ export function useHoverState<T extends TimestampedValue>({
         return;
       }
 
-      if (isEmpty(values)) {
+      if (isEmpty(series)) {
         return;
       }
 
@@ -66,13 +61,23 @@ export function useHoverState<T extends TimestampedValue>({
       }
 
       const index = bisect(mousePoint.x);
+      const value = series[index];
+
+      if (!value) {
+        setHoverState(undefined);
+        return;
+      }
 
       setHoverState({
         index,
-        value: values[index],
+        point: {
+          value,
+          x: xScale(value.__date_unix) + xScale.bandwidth() / 2,
+          y: yScale(value.__value),
+        },
       });
     },
-    [bisect, values, xScale]
+    [bisect, series, xScale]
   );
 
   return [handleHover, hoverState];

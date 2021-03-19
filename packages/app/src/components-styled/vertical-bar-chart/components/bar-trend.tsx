@@ -1,6 +1,7 @@
 import { PositionScale } from '@visx/shape/lib/types';
 import { Group } from '@visx/group';
-import { MouseEvent, TouchEvent } from 'react';
+import { first, last } from 'lodash';
+import { MouseEvent, TouchEvent, useCallback, useState, useMemo } from 'react';
 import {
   SeriesItem,
   SeriesSingleValue,
@@ -27,6 +28,25 @@ export function BarTrend({
   barWidth,
   onHover,
 }: BarTrendProps) {
+  const [hovered, setHovered] = useState<number | undefined>();
+  const handleHover = useCallback(
+    (event: TouchEvent<SVGElement> | MouseEvent<SVGElement>, index: number) => {
+      if (event.type === 'mouseleave') {
+        setHovered(undefined);
+      } else {
+        setHovered(index);
+      }
+
+      onHover(event);
+    },
+    [onHover]
+  );
+
+  const hoverBarHeight = useMemo(() => {
+    const range = yScale.range();
+    return Math.abs((first(range) as number) - (last(range) as number));
+  }, [yScale]);
+
   const getRectPosition = getRectPositionFunction(
     yScale(0) as number,
     getX,
@@ -42,9 +62,9 @@ export function BarTrend({
         const { x, y, height } = getRectPosition(value);
         return (
           <Group
-            onMouseLeave={onHover}
-            onMouseMove={onHover}
-            onTouchStart={onHover}
+            onMouseLeave={(e) => handleHover(e, index)}
+            onMouseMove={(e) => handleHover(e, index)}
+            onTouchStart={(e) => handleHover(e, index)}
           >
             <rect
               /**
@@ -53,11 +73,11 @@ export function BarTrend({
                */
               id={`${barId}-hover`}
               key={`${barId}-hover`}
-              fill={'transparent'}
+              fill={hovered === index ? 'rgba(0, 0, 0, 0.03)' : 'transparent'}
               x={x}
               y={0}
               width={barWidth}
-              height="100%"
+              height={hoverBarHeight}
             />
             <rect
               id={barId}

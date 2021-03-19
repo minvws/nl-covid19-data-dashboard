@@ -12,6 +12,7 @@ import {
   Tooltip,
   TooltipData,
   TooltipFormatter,
+  Overlay,
 } from '~/components-styled/time-series-chart/components';
 import {
   DataOptions,
@@ -26,7 +27,7 @@ import {
   useScales,
   useHoverState,
 } from './logic';
-import { BarTrend } from './components';
+import { BarTrend, DateMarker } from './components';
 
 export type BarDefinition<T extends TimestampedValue> = {
   type: 'bar';
@@ -115,65 +116,44 @@ export function VerticalBarChart<T extends TimestampedValue>({
   );
 
   const values = useValuesInTimeframe(allValues, timeframe);
-
   const series = useSeries(values, config);
 
-  const calculatedSeriesMax = useCalculatedSeriesMaximum(values, config);
-
+  const calculatedMax = useCalculatedSeriesMaximum(values, config);
   const { xScale, yScale, getX, getY } = useScales({
     values,
-    maximumValue: calculatedSeriesMax,
+    maximumValue: calculatedMax,
     tickValues,
     bounds,
     numTicks: tickValues?.length || numGridLines,
   });
 
   const [handleHover, hoverState] = useHoverState({
-    values,
+    series,
     paddingLeft: padding.left,
     xScale,
+    yScale,
   });
 
   console.log(hoverState);
 
-  // useEffect(() => {
-  //   if (hoverState) {
-  //     const {
-  //       nearestLinePoint: nearestPoint,
-  //       valuesIndex,
-  //       timespanAnnotationIndex,
-  //     } = hoverState;
+  useEffect(() => {
+    if (hoverState) {
+      const { index, point } = hoverState;
 
-  //     showTooltip({
-  //       tooltipData: {
-  //         /**
-  //          * The tooltip gets passed the original data value, plus the
-  //          * nearest/active hover property and the full series configuration.
-  //          * With these three arguments we should be able to render any sort of
-  //          * tooltip.
-  //          */
-  //         value: values[valuesIndex],
-  //         valueKey: nearestPoint.metricProperty as keyof T,
-  //         config: seriesConfig,
-  //         options: dataOptions || {},
-  //         /**
-  //          * Pass the full annotation data. We could just pass the index because
-  //          * dataOptions is already being passed, but it's cumbersome to have to
-  //          * dig up the annotation from the array in the tooltip logic.
-  //          */
-  //         timespanAnnotation:
-  //           dataOptions?.timespanAnnotations &&
-  //           isDefined(timespanAnnotationIndex)
-  //             ? dataOptions.timespanAnnotations[timespanAnnotationIndex]
-  //             : undefined,
-  //       },
-  //       tooltipLeft: nearestPoint.x,
-  //       tooltipTop: nearestPoint.y,
-  //     });
-  //   } else {
-  //     hideTooltip();
-  //   }
-  // }, [hoverState, seriesConfig, values, hideTooltip, showTooltip, dataOptions]);\
+      showTooltip({
+        tooltipData: {
+          value: values[index],
+          valueKey: config.metricProperty,
+          config: [config],
+          options: dataOptions || {},
+        },
+        tooltipLeft: point.x,
+        tooltipTop: point.y,
+      });
+    } else {
+      hideTooltip();
+    }
+  }, [hoverState, config, values, hideTooltip, showTooltip, dataOptions]);
 
   return (
     <Box>
@@ -216,23 +196,11 @@ export function VerticalBarChart<T extends TimestampedValue>({
           formatTooltip={formatTooltip}
         />
 
-        {/* {hoverState && (
+        {hoverState && (
           <Overlay bounds={bounds} padding={padding}>
-            <DateSpanMarker
-              width={dateSpanWidth}
-              point={hoverState.nearestLinePoint}
-            />
-            {showDateMarker && (
-              <DateLineMarker
-                point={hoverState.nearestLinePoint}
-                lineColor={`#5B5B5B`}
-                value={values[hoverState.valuesIndex]}
-              />
-            )}
-            <PointMarkers points={hoverState.rangePoints} />
-            <PointMarkers points={hoverState.linePoints} />
+            <DateMarker point={hoverState.point} />
           </Overlay>
-        )} */}
+        )}
       </Box>
     </Box>
   );

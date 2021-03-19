@@ -55,8 +55,8 @@ export function useScales<T extends TimestampedValue>(args: {
 
     const yDomain = tickValues
       ? [
-          Math.min(first(tickValues), 0),
-          Math.max(last(tickValues), maximumValue),
+          Math.min(first(tickValues) as number, 0),
+          Math.max(last(tickValues) as number, maximumValue),
         ]
       : [0, maximumValue];
     const yScale = scaleLinear({
@@ -68,7 +68,7 @@ export function useScales<T extends TimestampedValue>(args: {
     const result: UseScalesResult = {
       xScale,
       yScale,
-      getX: (x: SeriesItem) => xScale(x.__date_unix),
+      getX: (x: SeriesItem) => xScale(x.__date_unix) as number,
       getY: (x: SeriesSingleValue) => yScale(x.__value),
     };
 
