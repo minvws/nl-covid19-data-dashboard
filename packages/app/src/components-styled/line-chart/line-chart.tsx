@@ -22,20 +22,12 @@ import {
 } from '~/components-styled/line-chart/components';
 import { Text } from '~/components-styled/typography';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
-import text from '~/locale/index';
 import { colors } from '~/style/theme';
-import {
-  formatDateFromMilliseconds,
-  formatDateFromSeconds,
-} from '~/utils/formatDate';
-import { formatNumber, formatPercentage } from '~/utils/formatNumber';
+import { useIntl } from '~/intl';
 import { TimeframeOption } from '~/utils/timeframe';
 import { useElementSize } from '~/utils/use-element-size';
 import { HoverPoint, Marker, Tooltip, Trend } from './components';
 import { calculateYMax, getTrendData, TrendValue } from './logic';
-
-const formatYAxisFn = (y: number) => formatNumber(y);
-const formatYAxisPercentageFn = (y: number) => `${formatPercentage(y)}%`;
 
 export type LineConfig<T extends TimestampedValue> = {
   metricProperty: keyof T;
@@ -112,6 +104,21 @@ export function LineChart<T extends TimestampedValue>({
   } = useTooltip<T & TrendValue>();
 
   const [sizeRef, { width }] = useElementSize<HTMLDivElement>(initialWidth);
+  const { formatNumber, formatPercentage, siteText: text } = useIntl();
+
+  const formatYAxisFn = useCallback(
+    (y: number) => {
+      return formatNumber(y);
+    },
+    [formatNumber]
+  );
+
+  const formatYAxisPercentageFn = useCallback(
+    (y: number) => {
+      return `${formatPercentage(y)}%`;
+    },
+    [formatPercentage]
+  );
 
   const metricProperties = useMemo(
     () => linesConfig.map((x) => x.metricProperty),
@@ -123,7 +130,7 @@ export function LineChart<T extends TimestampedValue>({
       signaalwaarde
         ? { value: signaalwaarde, label: text.common.barScale.signaalwaarde }
         : undefined,
-    [signaalwaarde]
+    [signaalwaarde, text.common.barScale.signaalwaarde]
   );
 
   const trendsList = useMemo(
@@ -351,7 +358,7 @@ export function LineChart<T extends TimestampedValue>({
           >
             {formatTooltip
               ? formatTooltip(tooltipData)
-              : formatDefaultTooltip(tooltipData, isPercentage)}
+              : FormatDefaultTooltip(tooltipData, isPercentage)}
           </Tooltip>
         )}
 
@@ -387,11 +394,18 @@ export function LineChart<T extends TimestampedValue>({
   );
 }
 
-function formatDefaultTooltip<T extends TimestampedValue>(
+function FormatDefaultTooltip<T extends TimestampedValue>(
   values: (T & TrendValue)[],
   isPercentage?: boolean
 ) {
   // default tooltip assumes one line is rendered:
+
+  const {
+    formatDateFromMilliseconds,
+    formatDateFromSeconds,
+    formatPercentage,
+    formatNumber,
+  } = useIntl();
 
   if (isDateSeries(values)) {
     const value = values[0];

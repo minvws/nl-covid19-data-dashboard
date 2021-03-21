@@ -7,7 +7,7 @@ import css from '@styled-system/css';
 import { Feature, MultiPolygon } from 'geojson';
 import { Fragment, ReactNode, useCallback } from 'react';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import siteText from '~/locale';
+import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { Choropleth } from './choropleth';
@@ -58,6 +58,8 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
     highlightSelection,
     getLink,
   } = props;
+
+  const { siteText } = useIntl();
 
   const boundingBox = useSafetyRegionBoundingbox(regionGeo, selectedCode);
 

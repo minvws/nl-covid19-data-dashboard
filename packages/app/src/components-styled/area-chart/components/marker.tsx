@@ -1,9 +1,9 @@
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
 import styled from 'styled-components';
 import { ChartPadding } from '~/components-styled/line-chart/components';
 import { Text } from '~/components-styled/typography';
 import { colors } from '~/style/theme';
-import { formatDateFromMilliseconds } from '~/utils/formatDate';
+import { useIntl } from '~/intl';
 import { TimestampedTrendValue } from '../logic';
 
 const MARKER_POINT_SIZE = 18;
@@ -105,6 +105,15 @@ export const Marker = memo(MarkerUnmemoized) as typeof MarkerUnmemoized;
 function MarkerUnmemoized<T extends TimestampedTrendValue>(
   props: MarkerProps<T>
 ) {
+  const { formatDateFromMilliseconds } = useIntl();
+
+  const defaultFormatLabel = useCallback(
+    (data: TimestampedTrendValue): string => {
+      return formatDateFromMilliseconds(data.__date.getTime(), 'axis');
+    },
+    [formatDateFromMilliseconds]
+  );
+
   const {
     primaryColor = colors.data.primary,
     data,
@@ -164,8 +173,4 @@ function MarkerUnmemoized<T extends TimestampedTrendValue>(
       </DateSpanMarker>
     </>
   );
-}
-
-function defaultFormatLabel(data: TimestampedTrendValue): string {
-  return formatDateFromMilliseconds(data.__date.getTime(), 'axis');
 }

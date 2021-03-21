@@ -10,10 +10,10 @@ import styled from 'styled-components';
 import { Box } from '~/components-styled/base';
 import { Text } from '~/components-styled/typography';
 import { colors } from '~/style/theme';
-import { formatPercentage } from '~/utils/formatNumber';
 import { AgeDemographicCoordinates } from './age-demographic-coordinates';
 import { AgeDemographicChartText, AgeDemographicDefaultValue } from './types';
 import { formatAgeGroupRange } from './utils';
+import { useIntl } from '~/intl';
 
 export const AGE_GROUP_TOOLTIP_WIDTH = 340;
 
@@ -71,6 +71,8 @@ function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
     values,
     ageGroupRange,
   } = coordinates;
+
+  const { formatPercentage } = useIntl();
 
   const hasClippedValue = !!values.find(
     (value) =>

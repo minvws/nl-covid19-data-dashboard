@@ -11,8 +11,8 @@ import {
 } from './hooks';
 import { HoverPathLink, Path } from './path';
 import { countryGeo, municipalGeo } from './topology';
-import siteText from '~/locale';
 import { reverseRouter } from '~/utils/reverse-router';
+import { useIntl } from '~/intl';
 
 type MunicipalityNavigationMapProps<T> = {
   onSelect?: (gmcode: string) => void;
@@ -36,6 +36,8 @@ export function MunicipalityNavigationMap<T>(
   props: MunicipalityNavigationMapProps<T>
 ) {
   const { tooltipContent } = props;
+
+  const { siteText } = useIntl();
 
   const { getChoroplethValue } = useMunicipalityNavigationData(municipalGeo);
 

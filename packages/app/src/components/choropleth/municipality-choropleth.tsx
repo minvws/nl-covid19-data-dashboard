@@ -6,7 +6,7 @@ import {
 import css from '@styled-system/css';
 import { Feature, MultiPolygon } from 'geojson';
 import { ReactNode, useCallback } from 'react';
-import siteText from '~/locale';
+import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { DataProps } from '~/types/attributes';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
@@ -59,6 +59,8 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
     highlightSelection = true,
     getLink,
   } = props;
+
+  const { siteText } = useIntl();
 
   const [boundingbox] = useMunicipalityBoundingbox(regionGeo, selectedCode);
 

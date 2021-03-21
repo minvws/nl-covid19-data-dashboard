@@ -1,4 +1,4 @@
-import { formatNumber, Municipal, Regionaal } from '@corona-dashboard/common';
+import { Municipal, Regionaal } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { AxisBottom, AxisLeft } from '@visx/axis';
 import { localPoint } from '@visx/event';
@@ -13,9 +13,8 @@ import { Box } from '~/components-styled/base';
 import { Legend } from '~/components-styled/legend';
 import { Select } from '~/components-styled/select';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
-import siteText from '~/locale';
+import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
-import { formatDate } from '~/utils/formatDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { TimeframeOption } from '~/utils/timeframe';
 import { useElementSize } from '~/utils/use-element-size';
@@ -54,6 +53,8 @@ export function SewerChart(props: SewerChartProps) {
   const { data, timeframe, valueAnnotation, height = 300, text } = props;
 
   const [sizeRef, { width }] = useElementSize<HTMLDivElement>(840);
+
+  const { siteText, formatDate, formatNumber } = useIntl();
 
   /**
    * We enable animations slighly after the component is mounted (1ms).

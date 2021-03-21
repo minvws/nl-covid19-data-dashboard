@@ -1,8 +1,12 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { FCWithLayout } from '~/domain/layout/layout';
-import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import { Layout } from '~/domain/layout/layout';
+import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
+import { useIntl } from '~/intl';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import { getLastGeneratedDate, getVrData } from '~/static-props/get-data';
 import { reverseRouter } from '~/utils/reverse-router';
 import { useBreakpoints } from '~/utils/useBreakpoints';
@@ -14,9 +18,11 @@ export const getStaticProps = createGetStaticProps(
   getVrData
 );
 
-const SafetyRegion: FCWithLayout<typeof getStaticProps> = () => {
-  const router = useRouter();
+const SafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
+  const { lastGenerated } = props;
+  const { siteText } = useIntl();
   const breakpoints = useBreakpoints();
+  const router = useRouter();
 
   useEffect(() => {
     const menuSuffix = !breakpoints.md ? '?menu=1' : '';
@@ -26,9 +32,14 @@ const SafetyRegion: FCWithLayout<typeof getStaticProps> = () => {
     router.replace(route);
   }, [breakpoints.md, router]);
 
-  return null;
+  return (
+    <Layout
+      {...siteText.veiligheidsregio_index.metadata}
+      lastGenerated={lastGenerated}
+    >
+      <SafetyRegionLayout lastGenerated={lastGenerated} />
+    </Layout>
+  );
 };
-
-SafetyRegion.getLayout = getSafetyRegionLayout();
 
 export default SafetyRegion;

@@ -15,8 +15,7 @@ import { Box } from '~/components-styled/base';
 import { AppContent } from '~/components-styled/layout/app-content';
 import { SidebarMetric } from '~/components-styled/sidebar-metric';
 import { Text } from '~/components-styled/typography';
-import { getLayout } from '~/domain/layout/layout';
-import siteText from '~/locale/index';
+import { useIntl } from '~/intl';
 import { getSafetyRegionForMunicipalityCode } from '~/utils/getSafetyRegionForMunicipalityCode';
 import { Link } from '~/utils/link';
 import { MunicipalityComboBox } from './components/municipality-combo-box';
@@ -26,19 +25,6 @@ interface MunicipalityLayoutProps {
   data?: Municipal;
   municipalityName?: string;
   children?: React.ReactNode;
-}
-
-export function getMunicipalityLayout() {
-  return function (
-    page: React.ReactNode,
-    pageProps: MunicipalityLayoutProps
-  ): React.ReactNode {
-    const lastGenerated = pageProps.lastGenerated;
-    return getLayout(
-      siteText.gemeente_metadata,
-      lastGenerated
-    )(<MunicipalityLayout {...pageProps}>{page}</MunicipalityLayout>);
-  };
 }
 
 /**
@@ -57,9 +43,10 @@ export function getMunicipalityLayout() {
  * More info on persistent layouts:
  * https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
  */
-function MunicipalityLayout(props: MunicipalityLayoutProps) {
+export function MunicipalityLayout(props: MunicipalityLayoutProps) {
   const { children, data, municipalityName } = props;
 
+  const { siteText } = useIntl();
   const router = useRouter();
   const { code } = router.query;
 

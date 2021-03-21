@@ -11,7 +11,7 @@ import { Text } from '~/components-styled/typography';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
-import siteText from '~/locale/index';
+import { useIntl } from '~/intl';
 import { reverseRouter } from '~/utils/reverse-router';
 import {
   BehaviorIdentifier,
@@ -19,8 +19,6 @@ import {
   BehaviorType,
 } from './behavior-types';
 import { BehaviorTypeControl } from './components/behavior-type-control';
-
-const text = siteText.nl_gedrag;
 
 export function BehaviorChoroplethTile({
   data,
@@ -31,6 +29,9 @@ export function BehaviorChoroplethTile({
   const [currentId, setCurrentId] = useState<BehaviorIdentifier>('wash_hands');
 
   const metricValueName = `${currentId}_${type}` as keyof RegionsBehavior;
+
+  const { siteText } = useIntl();
+  const text = siteText.nl_gedrag;
 
   return (
     <ChoroplethTile
