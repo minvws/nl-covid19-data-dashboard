@@ -1,5 +1,7 @@
-export type PageName =
+export type MunicipalityPageName =
+  | 'index'
   | 'positief-geteste-mensen'
+  | 'sterfte'
   | 'ziekenhuis-opnames'
   | 'rioolwater'
   | 'gehandicaptenzorg'
@@ -10,4 +12,5 @@ export type RegioPageName =
   | 'verpleeghuiszorg'
   | 'thuiswonende-ouderen'
   | 'maatregelen'
-  | 'risiconiveau';
+  | 'risiconiveau'
+  | 'gedrag';

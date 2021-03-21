@@ -1,22 +1,24 @@
-import { useRouter } from 'next/router';
+import {
+  RegionsBehavior,
+  SafetyRegionProperties,
+} from '@corona-dashboard/common';
+import css from '@styled-system/css';
 import { useState } from 'react';
 import { Box } from '~/components-styled/base';
-import { Text } from '~/components-styled/typography';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { Select } from '~/components-styled/select';
+import { Text } from '~/components-styled/typography';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
-import { SafetyRegionProperties } from '@corona-dashboard/common';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
 import siteText from '~/locale/index';
-import { RegionsBehavior } from '@corona-dashboard/common';
+import { reverseRouter } from '~/utils/reverse-router';
 import {
   BehaviorIdentifier,
   behaviorIdentifiers,
   BehaviorType,
 } from './behavior-types';
 import { BehaviorTypeControl } from './components/behavior-type-control';
-import css from '@styled-system/css';
 
 const text = siteText.nl_gedrag;
 
@@ -27,13 +29,8 @@ export function BehaviorChoroplethTile({
 }) {
   const [type, setType] = useState<BehaviorType>('compliance');
   const [currentId, setCurrentId] = useState<BehaviorIdentifier>('wash_hands');
-  const router = useRouter();
 
   const metricValueName = `${currentId}_${type}` as keyof RegionsBehavior;
-
-  function goToRegion(vrcode: string) {
-    router.push(`/veiligheidsregio/${vrcode}/gedrag`);
-  }
 
   return (
     <ChoroplethTile
@@ -68,13 +65,14 @@ export function BehaviorChoroplethTile({
       }}
     >
       <SafetyRegionChoropleth
+        getLink={reverseRouter.vr.gedrag}
         data={data}
         metricName="behavior"
         metricProperty={metricValueName}
         tooltipContent={(context: RegionsBehavior & SafetyRegionProperties) => {
           const onSelect = (event: React.MouseEvent) => {
             event.stopPropagation();
-            goToRegion(context.vrcode);
+            reverseRouter.vr.gedrag(context.vrcode);
           };
           const value = context[metricValueName];
 
@@ -88,7 +86,6 @@ export function BehaviorChoroplethTile({
             </TooltipContent>
           );
         }}
-        onSelect={goToRegion}
       />
     </ChoroplethTile>
   );

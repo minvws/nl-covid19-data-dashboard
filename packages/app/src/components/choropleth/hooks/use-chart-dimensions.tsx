@@ -1,4 +1,4 @@
-import useResizeObserver from 'use-resize-observer/polyfilled';
+import { useElementSize } from '~/utils/use-element-size';
 
 /**
  * This code was originally inspired by https://wattenberger.com/blog/react-and-d3
@@ -57,7 +57,7 @@ export function useChartDimensions<T extends HTMLElement | SVGElement>(
    */
 
   //@ts-expect-error useResizeObserver won't accept SVGElement type, but it works fine
-  const { ref, width = initialWidth, height } = useResizeObserver<T>();
+  const [ref, { width, height }] = useElementSize<T>(initialWidth);
 
   const calculatedHeight = aspectRatio && width ? width * aspectRatio : height;
 

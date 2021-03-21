@@ -1,17 +1,17 @@
+import { useRouter } from 'next/router';
 import { ComboBox } from '~/components-styled/combo-box/combo-box';
 import safetyRegions from '~/data/index';
 import siteText from '~/locale/index';
+import { reverseRouter } from '~/utils/reverse-router';
 
-export function SafetyRegionComboBox({
-  onSelect,
-}: {
-  onSelect: (vrcode: string) => void;
-}) {
+export function SafetyRegionComboBox() {
+  const router = useRouter();
+
   return (
     <ComboBox
       placeholder={siteText.common.zoekveld_placeholder_regio}
       options={safetyRegions}
-      onSelect={(region) => onSelect(region.code)}
+      onSelect={(region) => router.push(reverseRouter.vr.index(region.code))}
     />
   );
 }

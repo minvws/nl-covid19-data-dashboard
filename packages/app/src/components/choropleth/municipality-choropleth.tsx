@@ -6,19 +6,22 @@ import {
 import css from '@styled-system/css';
 import { Feature, MultiPolygon } from 'geojson';
 import { ReactNode, useCallback } from 'react';
+import siteText from '~/locale';
 import { colors } from '~/style/theme';
 import { DataProps } from '~/types/attributes';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { Choropleth } from './choropleth';
 import {
   useChoroplethColorScale,
   useMunicipalityBoundingbox,
   useMunicipalityData,
   useRegionMunicipalities,
+  useTabInteractiveButton,
 } from './hooks';
 import { useChoroplethDataDescription } from './hooks/use-choropleth-data-description';
 import { getDataThresholds } from './legenda/utils';
 import { municipalThresholds } from './municipal-thresholds';
-import { HoverPath, Path } from './path';
+import { HoverPathLink, Path } from './path';
 import { countryGeo, municipalGeo, regionGeo } from './topology';
 
 type MunicipalityChoroplethProps<T, K extends MunicipalitiesMetricName> = {
@@ -27,8 +30,8 @@ type MunicipalityChoroplethProps<T, K extends MunicipalitiesMetricName> = {
   metricProperty: string;
   selectedCode?: string;
   highlightSelection?: boolean;
-  onSelect?: (gmcode: string) => void;
   tooltipContent?: (context: MunicipalityProperties & T) => ReactNode;
+  getLink: (code: string) => string;
 } & DataProps;
 
 /**
@@ -52,9 +55,9 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
     selectedCode,
     metricName,
     metricProperty,
-    onSelect,
     tooltipContent,
     highlightSelection = true,
+    getLink,
   } = props;
 
   const [boundingbox] = useMunicipalityBoundingbox(regionGeo, selectedCode);
@@ -123,11 +126,19 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
     [getFillColor, hasData, safetyRegionMunicipalCodes, selectedCode]
   );
 
-  const hasSelectHander = !!onSelect;
+  const {
+    isTabInteractive,
+    tabInteractiveButton,
+    anchorEventHandlers,
+  } = useTabInteractiveButton(
+    replaceVariablesInText(siteText.choropleth.a11y.tab_navigatie_button, {
+      subject: siteText.choropleth.gm.plural,
+    })
+  );
 
   const renderHover = useCallback(
     (feature: Feature<MultiPolygon, MunicipalityProperties>, path: string) => {
-      const { gemcode } = feature.properties;
+      const { gemcode, gemnaam } = feature.properties;
       const isSelected = gemcode === selectedCode && highlightSelection;
       const isInSameRegion =
         safetyRegionMunicipalCodes?.includes(gemcode) ?? true;
@@ -137,14 +148,17 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
       }
 
       return (
-        <HoverPath
-          isClickable={hasSelectHander}
-          id={gemcode}
+        <HoverPathLink
           key={gemcode}
+          href={getLink(gemcode)}
+          title={gemnaam}
+          isTabInteractive={isTabInteractive}
+          id={gemcode}
           pathData={path}
           stroke={isSelected ? '#000' : undefined}
           strokeWidth={isSelected ? 3 : undefined}
           isSelected={isSelected}
+          {...anchorEventHandlers}
         />
       );
     },
@@ -153,16 +167,11 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
       highlightSelection,
       safetyRegionMunicipalCodes,
       hasData,
-      hasSelectHander,
+      getLink,
+      isTabInteractive,
+      anchorEventHandlers,
     ]
   );
-
-  const onClick = (id: string) => {
-    if (onSelect) {
-      const data = getChoroplethValue(id);
-      onSelect(data.gmcode);
-    }
-  };
 
   const getTooltipContent = (id: string) => {
     if (tooltipContent) {
@@ -174,6 +183,7 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
 
   return (
     <div css={css({ bg: 'transparent', position: 'relative' })}>
+      {tabInteractiveButton}
       <Choropleth
         description={dataDescription}
         featureCollection={municipalGeo}
@@ -181,8 +191,8 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
         boundingBox={boundingbox || countryGeo}
         renderFeature={renderFeature}
         renderHover={renderHover}
-        onPathClick={onClick}
         getTooltipContent={getTooltipContent}
+        showTooltipOnFocus={isTabInteractive}
       />
     </div>
   );

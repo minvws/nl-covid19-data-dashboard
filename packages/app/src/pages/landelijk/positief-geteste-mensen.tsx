@@ -1,6 +1,5 @@
 import { NationalTestedPerAgeGroup } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Afname from '~/assets/afname.svg';
 import Getest from '~/assets/test.svg';
@@ -27,8 +26,6 @@ import { Heading, Text } from '~/components-styled/typography';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
-import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
-import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
 import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/create-positive-tested-people-regional-tooltip';
 import { FCWithLayout } from '~/domain/layout/layout';
@@ -49,9 +46,10 @@ import {
   formatDateFromSeconds,
 } from '~/utils/formatDate';
 import { formatNumber, formatPercentage } from '~/utils/formatNumber';
+import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { reverseRouter } from '~/utils/reverse-router';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -77,7 +75,6 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>(
     'municipal'
   );
-  const router = useRouter();
 
   const dataInfectedDelta = data.tested_overall;
   const dataGgdAverageLastValue = data.tested_ggd_average.last_value;
@@ -210,32 +207,26 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = ({
           {selectedMap === 'municipal' && (
             <MunicipalityChoropleth
               data={choropleth.gm}
+              getLink={reverseRouter.gm.positiefGetesteMensen}
               metricName="tested_overall"
               metricProperty="infected_per_100k"
               tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
                 siteText.choropleth_tooltip.positive_tested_people,
                 regionThresholds.tested_overall.infected_per_100k,
-                createSelectMunicipalHandler(router, 'positief-geteste-mensen')
-              )}
-              onSelect={createSelectMunicipalHandler(
-                router,
-                'positief-geteste-mensen'
+                reverseRouter.gm.positiefGetesteMensen
               )}
             />
           )}
           {selectedMap === 'region' && (
             <SafetyRegionChoropleth
               data={choropleth.vr}
+              getLink={reverseRouter.vr.positiefGetesteMensen}
               metricName="tested_overall"
               metricProperty="infected_per_100k"
               tooltipContent={createPositiveTestedPeopleRegionalTooltip(
                 siteText.choropleth_tooltip.positive_tested_people,
                 regionThresholds.tested_overall.infected_per_100k,
-                createSelectRegionHandler(router, 'positief-geteste-mensen')
-              )}
-              onSelect={createSelectRegionHandler(
-                router,
-                'positief-geteste-mensen'
+                reverseRouter.vr.positiefGetesteMensen
               )}
             />
           )}

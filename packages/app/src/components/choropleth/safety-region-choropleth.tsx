@@ -7,16 +7,19 @@ import css from '@styled-system/css';
 import { Feature, MultiPolygon } from 'geojson';
 import { Fragment, ReactNode, useCallback } from 'react';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
+import siteText from '~/locale';
 import { colors } from '~/style/theme';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { Choropleth } from './choropleth';
 import {
   useChoroplethColorScale,
   useSafetyRegionBoundingbox,
   useSafetyRegionData,
+  useTabInteractiveButton,
 } from './hooks';
 import { useChoroplethDataDescription } from './hooks/use-choropleth-data-description';
 import { getDataThresholds } from './legenda/utils';
-import { HoverPath, Path } from './path';
+import { HoverPathLink, Path } from './path';
 import { countryGeo, regionGeo } from './topology';
 
 type SafetyRegionChoroplethProps<T, K extends RegionsMetricName> = {
@@ -25,9 +28,9 @@ type SafetyRegionChoroplethProps<T, K extends RegionsMetricName> = {
   metricProperty: string;
   selectedCode?: string;
   highlightSelection?: boolean;
-  onSelect?: (vrcode: string) => void;
   tooltipContent?: (context: SafetyRegionProperties & T) => ReactNode;
   highlightCode?: string;
+  getLink: (code: string) => string;
 };
 
 /**
@@ -41,8 +44,6 @@ type SafetyRegionChoroplethProps<T, K extends RegionsMetricName> = {
  *
  * When a selected region code is specified, the map will zoom in on the safety
  * region.
- *
- * @param props
  */
 export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
   props: SafetyRegionChoroplethProps<T, K>
@@ -52,10 +53,10 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
     selectedCode,
     metricName,
     metricProperty,
-    onSelect,
     tooltipContent,
     highlightCode,
     highlightSelection,
+    getLink,
   } = props;
 
   const boundingBox = useSafetyRegionBoundingbox(regionGeo, selectedCode);
@@ -127,35 +128,45 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
     [highlightCode]
   );
 
-  const hasSelectHander = !!onSelect;
+  const {
+    isTabInteractive,
+    tabInteractiveButton,
+    anchorEventHandlers,
+  } = useTabInteractiveButton(
+    replaceVariablesInText(siteText.choropleth.a11y.tab_navigatie_button, {
+      subject: siteText.choropleth.vr.plural,
+    })
+  );
 
   const renderHover = useCallback(
     (feature: Feature<MultiPolygon, SafetyRegionProperties>, path: string) => {
-      const { vrcode } = feature.properties;
+      const { vrcode, vrname } = feature.properties;
 
       const isSelected = vrcode === selectedCode && highlightSelection;
 
       return (
-        <HoverPath
-          isClickable={hasSelectHander}
+        <HoverPathLink
+          href={getLink(vrcode)}
+          title={vrname}
+          isTabInteractive={isTabInteractive}
           id={vrcode}
-          key={vrcode}
           pathData={path}
           stroke={isEscalationLevelTheme || isSelected ? '#fff' : undefined}
           strokeWidth={isEscalationLevelTheme || isSelected ? 3 : undefined}
           isSelected={isSelected}
+          {...anchorEventHandlers}
         />
       );
     },
-    [hasSelectHander, isEscalationLevelTheme, selectedCode, highlightSelection]
+    [
+      selectedCode,
+      highlightSelection,
+      getLink,
+      isTabInteractive,
+      isEscalationLevelTheme,
+      anchorEventHandlers,
+    ]
   );
-
-  const onClick = (id: string) => {
-    if (onSelect) {
-      const data = getChoroplethValue(id);
-      onSelect(data.vrcode);
-    }
-  };
 
   const getTooltipContent = (id: string) => {
     if (tooltipContent) {
@@ -167,6 +178,7 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
 
   return (
     <div css={css({ position: 'relative', bg: 'transparent' })}>
+      {tabInteractiveButton}
       <Choropleth
         description={dataDescription}
         featureCollection={regionGeo}
@@ -174,9 +186,9 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
         boundingBox={boundingBox || countryGeo}
         renderFeature={renderFeature}
         renderHover={renderHover}
-        onPathClick={onClick}
         getTooltipContent={getTooltipContent}
         renderHighlight={renderHighlight}
+        showTooltipOnFocus={isTabInteractive}
       />
     </div>
   );

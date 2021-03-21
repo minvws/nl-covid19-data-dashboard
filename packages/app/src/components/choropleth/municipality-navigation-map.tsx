@@ -1,11 +1,18 @@
 import { MunicipalityProperties } from '@corona-dashboard/common';
+import css from '@styled-system/css';
 import { Feature, MultiPolygon } from 'geojson';
 import { ReactNode } from 'react';
 import { colors } from '~/style/theme';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { Choropleth } from './choropleth';
-import { useMunicipalityNavigationData } from './hooks';
-import { HoverPath, Path } from './path';
+import {
+  useMunicipalityNavigationData,
+  useTabInteractiveButton,
+} from './hooks';
+import { HoverPathLink, Path } from './path';
 import { countryGeo, municipalGeo } from './topology';
+import siteText from '~/locale';
+import { reverseRouter } from '~/utils/reverse-router';
 
 type MunicipalityNavigationMapProps<T> = {
   onSelect?: (gmcode: string) => void;
@@ -19,10 +26,16 @@ type MunicipalityNavigationMapProps<T> = {
  * municipalities but contains no data. It can be used for navigating at GM
  * index page.
  */
+
+/**
+ * @TODO IMplement anchor navigation with respect for the different targets
+ * across desktop/mobile (nav etc)
+ */
+
 export function MunicipalityNavigationMap<T>(
   props: MunicipalityNavigationMapProps<T>
 ) {
-  const { onSelect, tooltipContent } = props;
+  const { tooltipContent } = props;
 
   const { getChoroplethValue } = useMunicipalityNavigationData(municipalGeo);
 
@@ -45,29 +58,35 @@ export function MunicipalityNavigationMap<T>(
     );
   };
 
+  const {
+    isTabInteractive,
+    tabInteractiveButton,
+    anchorEventHandlers,
+  } = useTabInteractiveButton(
+    replaceVariablesInText(siteText.choropleth.a11y.tab_navigatie_button, {
+      subject: siteText.choropleth.gm.plural,
+    })
+  );
+
   const renderHover = (
     feature: Feature<MultiPolygon, MunicipalityProperties>,
     path: string
   ) => {
-    const { gemcode } = feature.properties;
+    const { gemcode, gemnaam } = feature.properties;
 
     return (
-      <HoverPath
-        isClickable
-        id={gemcode}
+      <HoverPathLink
         key={gemcode}
+        href={reverseRouter.gm.index(gemcode)}
+        title={gemnaam}
+        isTabInteractive
+        id={gemcode}
         pathData={path}
         stroke={colors.blue}
         fill={colors.blue}
+        {...anchorEventHandlers}
       />
     );
-  };
-
-  const onClick = (id: string) => {
-    if (onSelect) {
-      const data = getChoroplethValue(id);
-      onSelect(data.gemcode);
-    }
   };
 
   const getTooltipContent = (id: string) => {
@@ -79,14 +98,17 @@ export function MunicipalityNavigationMap<T>(
   };
 
   return (
-    <Choropleth
-      featureCollection={municipalGeo}
-      hovers={municipalGeo}
-      boundingBox={countryGeo}
-      renderFeature={renderFeature}
-      renderHover={renderHover}
-      onPathClick={onClick}
-      getTooltipContent={getTooltipContent}
-    />
+    <div css={css({ bg: 'transparent', position: 'relative' })}>
+      {tabInteractiveButton}
+      <Choropleth
+        featureCollection={municipalGeo}
+        hovers={municipalGeo}
+        boundingBox={countryGeo}
+        renderFeature={renderFeature}
+        renderHover={renderHover}
+        getTooltipContent={getTooltipContent}
+        showTooltipOnFocus={isTabInteractive}
+      />
+    </div>
   );
 }

@@ -24,8 +24,6 @@ import { WarningTile } from '~/components-styled/warning-tile';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
-import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
-import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
 import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/create-positive-tested-people-regional-tooltip';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
@@ -56,6 +54,7 @@ import { getSafetyRegionForMunicipalityCode } from '~/utils/getSafetyRegionForMu
 import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { reverseRouter } from '~/utils/reverse-router';
 export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
@@ -280,9 +279,9 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
                     data={choropleth.vr}
                     metricName="escalation_levels"
                     metricProperty="level"
-                    onSelect={createSelectRegionHandler(router, 'risiconiveau')}
+                    getLink={reverseRouter.vr.risiconiveau}
                     tooltipContent={escalationTooltip(
-                      createSelectRegionHandler(router, 'risiconiveau')
+                      reverseRouter.vr.risiconiveau
                     )}
                   />
                 </Box>
@@ -349,38 +348,26 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
                   {selectedMap === 'municipal' && (
                     <MunicipalityChoropleth
                       data={choropleth.gm}
+                      getLink={reverseRouter.vr.positiefGetesteMensen}
                       metricName="tested_overall"
                       metricProperty="infected_per_100k"
                       tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
                         siteText.choropleth_tooltip.positive_tested_people,
                         regionThresholds.tested_overall.infected_per_100k,
-                        createSelectMunicipalHandler(
-                          router,
-                          'positief-geteste-mensen'
-                        )
-                      )}
-                      onSelect={createSelectMunicipalHandler(
-                        router,
-                        'positief-geteste-mensen'
+                        reverseRouter.gm.positiefGetesteMensen
                       )}
                     />
                   )}
                   {selectedMap === 'region' && (
                     <SafetyRegionChoropleth
                       data={choropleth.vr}
+                      getLink={reverseRouter.vr.positiefGetesteMensen}
                       metricName="tested_overall"
                       metricProperty="infected_per_100k"
                       tooltipContent={createPositiveTestedPeopleRegionalTooltip(
                         siteText.choropleth_tooltip.positive_tested_people,
                         regionThresholds.tested_overall.infected_per_100k,
-                        createSelectRegionHandler(
-                          router,
-                          'positief-geteste-mensen'
-                        )
-                      )}
-                      onSelect={createSelectRegionHandler(
-                        router,
-                        'positief-geteste-mensen'
+                        reverseRouter.vr.positiefGetesteMensen
                       )}
                     />
                   )}

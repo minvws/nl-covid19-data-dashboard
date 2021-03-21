@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import CoronaVirus from '~/assets/coronavirus.svg';
 import Locatie from '~/assets/locaties.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
@@ -14,7 +13,6 @@ import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
-import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createInfectedLocationsRegionalTooltip } from '~/components/choropleth/tooltips/region/create-infected-locations-regional-tooltip';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getNationalLayout } from '~/domain/layout/national-layout';
@@ -28,6 +26,7 @@ import {
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { getTrailingDateRange } from '~/utils/get-trailing-date-range';
+import { reverseRouter } from '~/utils/reverse-router';
 
 const infectedLocationsText = siteText.verpleeghuis_besmette_locaties;
 const positiveTestedPeopleText =
@@ -52,8 +51,6 @@ const NursingHomeCare: FCWithLayout<typeof getStaticProps> = ({
     nursinghomeData.values,
     7
   );
-
-  const router = useRouter();
 
   return (
     <>
@@ -209,14 +206,14 @@ const NursingHomeCare: FCWithLayout<typeof getStaticProps> = ({
         >
           <SafetyRegionChoropleth
             data={choropleth.vr}
+            getLink={reverseRouter.vr.verpleeghuiszorg}
             metricName="nursing_home"
             metricProperty="infected_locations_percentage"
             tooltipContent={createInfectedLocationsRegionalTooltip(
               siteText.choropleth_tooltip.infected_locations,
               regionThresholds.nursing_home.infected_locations_percentage,
-              createSelectRegionHandler(router, 'verpleeghuiszorg')
+              reverseRouter.vr.verpleeghuiszorg
             )}
-            onSelect={createSelectRegionHandler(router, 'verpleeghuiszorg')}
           />
         </ChoroplethTile>
 

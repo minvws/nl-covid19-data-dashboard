@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import Getest from '~/assets/test.svg';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
@@ -13,7 +12,6 @@ import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
 import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
-import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
 import { FCWithLayout } from '~/domain/layout/layout';
 import { getMunicipalityLayout } from '~/domain/layout/municipality-layout';
@@ -30,6 +28,7 @@ import { colors } from '~/style/theme';
 import { formatDateFromMilliseconds } from '~/utils/formatDate';
 import { formatNumber } from '~/utils/formatNumber';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { reverseRouter } from '~/utils/reverse-router';
 export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
@@ -49,8 +48,6 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
 
   const text = siteText.gemeente_positief_geteste_personen;
   const lastValue = data.tested_overall.last_value;
-
-  const router = useRouter();
 
   return (
     <>
@@ -181,16 +178,13 @@ const PositivelyTestedPeople: FCWithLayout<typeof getStaticProps> = (props) => {
           <MunicipalityChoropleth
             selectedCode={data.code}
             data={choropleth.gm}
+            getLink={reverseRouter.gm.positiefGetesteMensen}
             metricName="tested_overall"
             metricProperty="infected_per_100k"
             tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
               siteText.choropleth_tooltip.positive_tested_people,
               municipalThresholds.tested_overall.infected_per_100k,
-              createSelectMunicipalHandler(router, 'positief-geteste-mensen')
-            )}
-            onSelect={createSelectMunicipalHandler(
-              router,
-              'positief-geteste-mensen'
+              reverseRouter.gm.positiefGetesteMensen
             )}
           />
         </ChoroplethTile>

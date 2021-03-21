@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { Box } from '~/components-styled/base';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
@@ -6,7 +5,6 @@ import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
 import { WarningTile } from '~/components-styled/warning-tile';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
-import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
 import { SafetyRegionComboBox } from '~/domain/layout/components/safety-region-combo-box';
 import { FCWithLayout } from '~/domain/layout/layout';
@@ -20,6 +18,7 @@ import {
 import { createDate } from '~/utils/createDate';
 import { formatDate } from '~/utils/formatDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { reverseRouter } from '~/utils/reverse-router';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 
 export const getStaticProps = createGetStaticProps(
@@ -31,16 +30,9 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const SafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
-  const router = useRouter();
   const breakpoints = useBreakpoints();
 
   const { text, choropleth } = props;
-
-  const goToSafetyRegion = createSelectRegionHandler(
-    router,
-    'risiconiveau',
-    !breakpoints.md
-  );
 
   return (
     <>
@@ -51,7 +43,7 @@ const SafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
 
       {!breakpoints.md && (
         <Box bg="white">
-          <SafetyRegionComboBox onSelect={goToSafetyRegion} />
+          <SafetyRegionComboBox />
         </Box>
       )}
 
@@ -95,11 +87,11 @@ const SafetyRegion: FCWithLayout<typeof getStaticProps> = (props) => {
           }
         >
           <SafetyRegionChoropleth
+            getLink={reverseRouter.vr.index}
             data={choropleth.vr}
             metricName="escalation_levels"
             metricProperty="level"
-            onSelect={goToSafetyRegion}
-            tooltipContent={escalationTooltip(goToSafetyRegion)}
+            tooltipContent={escalationTooltip(reverseRouter.vr.index)}
           />
         </ChoroplethTile>
       </TileList>

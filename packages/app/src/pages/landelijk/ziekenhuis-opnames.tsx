@@ -1,5 +1,4 @@
 import { getLastFilledValue } from '@corona-dashboard/common';
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { ArticleStrip } from '~/components-styled/article-strip';
@@ -18,8 +17,6 @@ import { municipalThresholds } from '~/components/choropleth/municipal-threshold
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
-import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
-import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { createMunicipalHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/municipal/create-municipal-hospital-admissions-tooltip';
 import { createRegionHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/region/create-region-hospital-admissions-tooltip';
 import { FCWithLayout } from '~/domain/layout/layout';
@@ -40,6 +37,7 @@ import {
   DateRange,
   getTrailingDateRange,
 } from '~/utils/get-trailing-date-range';
+import { reverseRouter } from '~/utils/reverse-router';
 
 const text = siteText.ziekenhuisopnames_per_dag;
 const graphDescriptions = siteText.accessibility.grafieken;
@@ -58,7 +56,6 @@ export const getStaticProps = createGetStaticProps(
 
 const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
   const { data, choropleth, content } = props;
-  const router = useRouter();
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
     'region'
   );
@@ -163,15 +160,12 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
               data={choropleth.gm}
               metricName="hospital_nice"
               metricProperty="admissions_on_date_of_reporting"
+              getLink={reverseRouter.gm.ziekenhuisopnames}
               tooltipContent={createMunicipalHospitalAdmissionsTooltip(
                 siteText.choropleth_tooltip.hospital_admissions,
                 municipalThresholds.hospital_nice
                   .admissions_on_date_of_reporting,
-                createSelectMunicipalHandler(router, 'ziekenhuis-opnames')
-              )}
-              onSelect={createSelectMunicipalHandler(
-                router,
-                'ziekenhuis-opnames'
+                reverseRouter.gm.ziekenhuisopnames
               )}
             />
           )}
@@ -180,12 +174,12 @@ const IntakeHospital: FCWithLayout<typeof getStaticProps> = (props) => {
               data={choropleth.vr}
               metricName="hospital_nice"
               metricProperty="admissions_on_date_of_reporting"
+              getLink={reverseRouter.vr.ziekenhuisopnames}
               tooltipContent={createRegionHospitalAdmissionsTooltip(
                 siteText.choropleth_tooltip.hospital_admissions,
                 regionThresholds.hospital_nice.admissions_on_date_of_reporting,
-                createSelectRegionHandler(router, 'ziekenhuis-opnames')
+                reverseRouter.vr.ziekenhuisopnames
               )}
-              onSelect={createSelectRegionHandler(router, 'ziekenhuis-opnames')}
             />
           )}
         </ChoroplethTile>

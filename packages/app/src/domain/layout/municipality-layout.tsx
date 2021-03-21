@@ -15,12 +15,10 @@ import { Box } from '~/components-styled/base';
 import { AppContent } from '~/components-styled/layout/app-content';
 import { SidebarMetric } from '~/components-styled/sidebar-metric';
 import { Text } from '~/components-styled/typography';
-import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { getLayout } from '~/domain/layout/layout';
 import siteText from '~/locale/index';
 import { getSafetyRegionForMunicipalityCode } from '~/utils/getSafetyRegionForMunicipalityCode';
 import { Link } from '~/utils/link';
-import { useBreakpoints } from '~/utils/useBreakpoints';
 import { MunicipalityComboBox } from './components/municipality-combo-box';
 
 interface MunicipalityLayoutProps {
@@ -62,8 +60,6 @@ export function getMunicipalityLayout() {
 function MunicipalityLayout(props: MunicipalityLayoutProps) {
   const { children, data, municipalityName } = props;
 
-  const breakpoints = useBreakpoints();
-
   const router = useRouter();
   const { code } = router.query;
 
@@ -73,12 +69,6 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
     router.route === '/gemeente' || router.route === `/gemeente/[code]`;
 
   const safetyRegion = getSafetyRegionForMunicipalityCode(code as string);
-
-  const goToMunicipal = createSelectMunicipalHandler(
-    router,
-    'positief-geteste-mensen',
-    !breakpoints.md
-  );
 
   return (
     <>
@@ -97,7 +87,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
       </Head>
       <AppContent
         hideMenuButton={isMainRoute}
-        searchComponent={<MunicipalityComboBox onSelect={goToMunicipal} />}
+        searchComponent={<MunicipalityComboBox />}
         sidebarComponent={
           <>
             {showMetricLinks && (

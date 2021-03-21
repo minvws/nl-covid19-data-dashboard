@@ -1,4 +1,5 @@
 import { NextRouter } from 'next/router';
+import { getSafetyRegionRoute } from '~/utils/reverse-router';
 import { RegioPageName } from './types';
 
 export type RegionSelectionHandler = (vrcode: string) => void;
@@ -9,14 +10,8 @@ export function createSelectRegionHandler(
   openMenu?: boolean
 ): RegionSelectionHandler {
   return (vrcode) => {
-    if (pageName === 'actueel') {
-      router.push(
-        `/actueel/veiligheidsregio/${vrcode}` + (openMenu ? '?menu=1' : '')
-      );
-      return;
-    }
     router.push(
-      `/veiligheidsregio/${vrcode}/${pageName}` + (openMenu ? '?menu=1' : '')
+      getSafetyRegionRoute(pageName, vrcode) + openMenu ? `?menu=1` : ''
     );
   };
 }

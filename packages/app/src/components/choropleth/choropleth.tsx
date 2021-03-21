@@ -2,7 +2,14 @@ import css from '@styled-system/css';
 import { localPoint } from '@visx/event';
 import { Mercator } from '@visx/geo';
 import { Feature, FeatureCollection, Geometry, MultiPolygon } from 'geojson';
-import { memo, MutableRefObject, ReactNode, useRef, useState } from 'react';
+import {
+  memo,
+  MutableRefObject,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useChartDimensions } from './hooks/use-chart-dimensions';
@@ -49,13 +56,11 @@ type TProps<T1, T3> = {
     path: string,
     index: number
   ) => ReactNode;
-  // This callback is invoked after a click was received on one of the features in the featureCollection property.
-  // The id is the value that is assigned to the data-id attribute in the renderFeature.
-  onPathClick: (id: string) => void;
   // This callback is invoked right before a tooltip is shown for one of the features in the featureCollection property.
   // The id is the value that is assigned to the data-id attribute in the renderFeature.
   getTooltipContent: (id: string) => ReactNode;
   description?: string;
+  showTooltipOnFocus?: boolean;
 };
 
 /**
@@ -119,12 +124,12 @@ const ChoroplethMap: <T1, T3>(
     boundingBox,
     renderFeature,
     renderHover,
-    onPathClick,
     setTooltip,
     hoverRef,
     description,
     renderHighlight,
     initialWidth = 850,
+    showTooltipOnFocus,
   } = props;
 
   const ratio = 1.2;
@@ -150,11 +155,58 @@ const ChoroplethMap: <T1, T3>(
 
   const fitSize: FitSize = [[boundedWidth, boundedHeight], boundingBox];
 
+  useEffect(() => {
+    if (!showTooltipOnFocus) {
+      setTooltip(undefined);
+      return;
+    }
+
+    const container = ref.current;
+
+    function handleBubbledFocusIn(event: FocusEvent) {
+      const link = event.target as HTMLAnchorElement;
+      if (!container || !link) {
+        return;
+      }
+
+      const id = link.getAttribute('data-id');
+
+      if (id) {
+        const bboxContainer = container.getBoundingClientRect();
+        const bboxLink = link.getBoundingClientRect();
+        const left = bboxLink.left - bboxContainer.left;
+        const top = bboxLink.top - bboxContainer.top;
+
+        setTooltip({
+          left: left + bboxLink.width + 5,
+          top: top,
+          data: id,
+        });
+      }
+    }
+
+    function handleBubbledFocusOut() {
+      setTooltip(undefined);
+    }
+
+    /**
+     * `focusin` and `focusout` events bubble whereas `focus` doesn't
+     */
+    container?.addEventListener('focusin', handleBubbledFocusIn);
+    container?.addEventListener('focusout', handleBubbledFocusOut);
+
+    return () => {
+      container?.removeEventListener('focusin', handleBubbledFocusIn);
+      container?.removeEventListener('focusout', handleBubbledFocusOut);
+    };
+  }, [ref, setTooltip, showTooltipOnFocus, isTouch]);
+
   return (
     <>
       <span id={dataDescriptionId} style={{ display: 'none' }}>
         {description}
       </span>
+      <a onFocus={(x) => x} />
       <div ref={ref}>
         <svg
           width={width}
@@ -164,7 +216,6 @@ const ChoroplethMap: <T1, T3>(
           onMouseOut={
             isTouch ? undefined : createSvgMouseOutHandler(timeout, setTooltip)
           }
-          onClick={createSvgClickHandler(onPathClick, setTooltip, isTouch)}
           data-cy="choropleth-map"
           aria-labelledby={dataDescriptionId}
         >
@@ -269,25 +320,6 @@ function MercatorGroup<G extends Geometry, P>(props: MercatorGroupProps<G, P>) {
   );
 }
 
-const createSvgClickHandler = (
-  onPathClick: (id: string) => void,
-  setTooltip: (settings: TooltipSettings | undefined) => void,
-  isTouch: boolean
-) => {
-  return (event: React.MouseEvent) => {
-    const elm = event.target as HTMLElement | SVGElement;
-    const id = elm.getAttribute('data-id');
-
-    if (id) {
-      if (isTouch) {
-        positionTooltip(event, setTooltip, id);
-      } else {
-        onPathClick(id);
-      }
-    }
-  };
-};
-
 const createSvgMouseOverHandler = (
   timeout: MutableRefObject<number>,
   setTooltip: (settings: TooltipSettings | undefined) => void
@@ -302,25 +334,17 @@ const createSvgMouseOverHandler = (
         timeout.current = -1;
       }
 
-      positionTooltip(event, setTooltip, id);
+      const coords = localPoint(event);
+
+      if (coords) {
+        setTooltip({
+          left: coords.x + 5,
+          top: coords.y + 5,
+          data: id,
+        });
+      }
     }
   };
-};
-
-const positionTooltip = (
-  event: React.MouseEvent,
-  setTooltip: (settings: TooltipSettings | undefined) => void,
-  id: string
-) => {
-  const coords = localPoint(event);
-
-  if (coords) {
-    setTooltip({
-      left: coords.x + 5,
-      top: coords.y + 5,
-      data: id,
-    });
-  }
 };
 
 const createSvgMouseOutHandler = (
