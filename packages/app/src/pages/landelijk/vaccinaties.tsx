@@ -22,7 +22,8 @@ import { TileList } from '~/components-styled/tile-list';
 import { TimeSeriesChart } from '~/components-styled/time-series-chart';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { InlineText, Text } from '~/components-styled/typography';
-import { VaccineSupportTooltip } from '~/domain/vaccine/components/vaccine-support-tooltip';
+import { Layout } from '~/domain/layout/layout';
+import { NationalLayout } from '~/domain/layout/national-layout';
 import {
   MilestonesView,
   MilestoneViewProps,
@@ -32,6 +33,7 @@ import { useVaccineNames } from '~/domain/vaccine/use-vaccine-names';
 import { VaccineDeliveryBarChart } from '~/domain/vaccine/vaccine-delivery-bar-chart';
 import { FormatVaccinationsTooltip } from '~/domain/vaccine/vaccine-delivery-tooltip';
 import { VaccinePageIntroduction } from '~/domain/vaccine/vaccine-page-introduction';
+import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { getVaccineMilestonesQuery } from '~/queries/vaccine-milestones-query';
 import {
@@ -45,9 +47,6 @@ import {
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { useIntl } from '~/intl';
-import { Layout } from '~/domain/layout/layout';
-import { NationalLayout } from '~/domain/layout/national-layout';
 
 const scaledVaccineIcon = (
   <Box p={2}>
