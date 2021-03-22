@@ -15,6 +15,7 @@ export interface Municipal {
   tested_overall: MunicipalTestedOverall;
   sewer?: MunicipalSewer;
   sewer_per_installation?: MunicipalSewerPerInstallation;
+  vaccine_coverage?: GmVaccineCoverage;
 }
 export interface GmDeceasedRivm {
   values: GmDeceasedRivmValue[];
@@ -91,6 +92,20 @@ export interface MunicipalSewerPerInstallationValue {
   rna_normalized: number;
   date_of_insertion_unix: number;
 }
+export interface GmVaccineCoverage {
+  values: GmVaccineCoverageValue[];
+  last_value: GmVaccineCoverageValue;
+}
+export interface GmVaccineCoverageValue {
+  partially_vaccinated: number;
+  partially_vaccinated_percentage: number;
+  fully_vaccinated: number;
+  fully_vaccinated_percentage: number;
+  partially_or_fully_vaccinated: number;
+  date_unix: number;
+  date_of_report_unix: number;
+  date_of_insertion_unix: number;
+}
 
 export interface Municipalities {
   last_generated: string;
@@ -151,6 +166,7 @@ export interface National {
   elderly_at_home: NationalElderlyAtHome;
   vaccine_support: NlVaccineSupport;
   corona_melder_app: NlCoronaMelderApp;
+  vaccine_coverage?: NlVaccineCoverage;
   vaccine_delivery: NlVaccineDelivery;
   vaccine_delivery_estimate: NlVaccineDeliveryEstimate;
   vaccine_delivery_per_supplier?: NlVaccineDeliveryPerSupplier;
@@ -483,6 +499,20 @@ export interface NlCoronaMelderAppValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
+export interface NlVaccineCoverage {
+  values: NlVaccineCoverageValue[];
+  last_value: NlVaccineCoverageValue;
+}
+export interface NlVaccineCoverageValue {
+  partially_vaccinated: number;
+  partially_vaccinated_percentage: number;
+  fully_vaccinated: number;
+  fully_vaccinated_percentage: number;
+  partially_or_fully_vaccinated: number;
+  date_unix: number;
+  date_of_report_unix: number;
+  date_of_insertion_unix: number;
+}
 export interface NlVaccineDelivery {
   values: NlVaccineDeliveryValue[];
   last_value: NlVaccineDeliveryValue;
@@ -684,6 +714,7 @@ export interface Regionaal {
   escalation_level: VrEscalationLevel;
   tested_overall_sum: VrTestedOverallSum;
   hospital_nice_sum: VrHospitalNiceSum;
+  vaccine_coverage: VrVaccineCoverage;
 }
 export interface RegionalDifference {
   tested_overall__infected_per_100k: DifferenceDecimal;
@@ -919,6 +950,20 @@ export interface VrHospitalNiceSumValue {
   admissions_per_1m: number;
   date_start_unix: number;
   date_end_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface VrVaccineCoverage {
+  values: VrVaccineCoverageValue[];
+  last_value: VrVaccineCoverageValue;
+}
+export interface VrVaccineCoverageValue {
+  partially_vaccinated: number;
+  partially_vaccinated_percentage: number;
+  fully_vaccinated: number;
+  fully_vaccinated_percentage: number;
+  partially_or_fully_vaccinated: number;
+  date_unix: number;
+  date_of_report_unix: number;
   date_of_insertion_unix: number;
 }
 
