@@ -468,10 +468,13 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                   ),
                   color: colors.data.multiseries.magenta,
                 },
+                {
+                  type: 'invisible',
+                  metricProperty: 'percentage_average',
+                  label: siteText.common.totaal,
+                  isPercentage: true,
+                },
               ]}
-              formatTooltip={({ value, config }) => (
-                <VaccineSupportTooltip value={value} config={config} />
-              )}
             />
           </ChartTile>
 
