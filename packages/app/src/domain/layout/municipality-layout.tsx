@@ -20,12 +20,23 @@ import { getSafetyRegionForMunicipalityCode } from '~/utils/getSafetyRegionForMu
 import { Link } from '~/utils/link';
 import { MunicipalityComboBox } from './components/municipality-combo-box';
 
-interface MunicipalityLayoutProps {
+type MunicipalityLayoutProps = {
   lastGenerated: string;
-  data: Municipal;
-  municipalityName?: string;
   children?: React.ReactNode;
-}
+} & (
+  | {
+      data: Municipal;
+      municipalityName: string;
+    }
+  | {
+      /**
+       * the route `/gemeente` can render without sidebar and thus without `data`
+       */
+      isLandingPage: true;
+      data?: undefined;
+      municipalityName?: undefined;
+    }
+);
 
 /**
  * MunicipalityLayout is a composition of persistent layouts.

@@ -18,7 +18,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const Municipality = (props: StaticProps<typeof getStaticProps>) => {
-  const { data, lastGenerated } = props;
+  const { data, lastGenerated, municipalityName } = props;
   const router = useRouter();
   const { siteText } = useIntl();
   const reverseRouter = useReverseRouter();
@@ -30,7 +30,11 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...siteText.gemeente_index.metadata} lastGenerated={lastGenerated}>
-      <MunicipalityLayout data={data} lastGenerated={lastGenerated} />
+      <MunicipalityLayout
+        data={data}
+        municipalityName={municipalityName}
+        lastGenerated={lastGenerated}
+      />
     </Layout>
   );
 };

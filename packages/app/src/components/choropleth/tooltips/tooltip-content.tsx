@@ -23,7 +23,11 @@ export function TooltipContent(props: IProps) {
         <Heading
           level={3}
           m={0}
-          css={css({ overflow: 'hidden', textOverflow: 'ellipsis' })}
+          fontSize="1.125rem"
+          css={css({
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+          })}
         >
           <StyledLocationIcon>
             <Locatie />
@@ -71,7 +75,6 @@ const StyledTooltipHeader = styled.div(
     padding: '0.25rem 2rem 0.25rem 0.5rem',
     whiteSpace: 'nowrap',
     fontSize: '1.125rem',
-    '& > *': { fontSize: '1.125rem' },
     color: 'body',
     py: 2,
     px: 3,

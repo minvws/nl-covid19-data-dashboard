@@ -23,12 +23,23 @@ import { useIntl } from '~/intl';
 import { EscalationLevel } from '../restrictions/type';
 import { SafetyRegionComboBox } from './components/safety-region-combo-box';
 
-interface SafetyRegionLayoutProps {
+type SafetyRegionLayoutProps = {
   lastGenerated: string;
-  data: Regionaal;
-  safetyRegionName?: string;
   children?: React.ReactNode;
-}
+} & (
+  | {
+      data: Regionaal;
+      safetyRegionName: string;
+    }
+  | {
+      /**
+       * the route `/veiligheidsregio` can render without sidebar and thus without `data`
+       */
+      isLandingPage: true;
+      data?: undefined;
+      safetyRegionName?: undefined;
+    }
+);
 
 /**
  * SafetyRegionLayout is a composition of persistent layouts.

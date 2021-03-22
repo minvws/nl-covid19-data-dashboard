@@ -18,7 +18,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const SafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
-  const { data, lastGenerated } = props;
+  const { data, lastGenerated, safetyRegionName } = props;
   const { siteText } = useIntl();
   const router = useRouter();
   const reverseRouter = useReverseRouter();
@@ -33,7 +33,11 @@ const SafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
       {...siteText.veiligheidsregio_index.metadata}
       lastGenerated={lastGenerated}
     >
-      <SafetyRegionLayout data={data} lastGenerated={lastGenerated} />
+      <SafetyRegionLayout
+        data={data}
+        safetyRegionName={safetyRegionName}
+        lastGenerated={lastGenerated}
+      />
     </Layout>
   );
 };
