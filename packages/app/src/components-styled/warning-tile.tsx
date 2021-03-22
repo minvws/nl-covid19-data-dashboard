@@ -5,7 +5,7 @@ import WarningIcon from '~/assets/warning.svg';
 import { Tile } from '~/components-styled/tile';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { Box } from './base';
-import { Markdown } from './markdown'
+import { Markdown } from './markdown';
 
 type WarningMessageVariant = 'emphasis' | 'default';
 
@@ -41,7 +41,7 @@ export function WarningTile({
       <WarningMessageBox variant={variant}>
         {typeof message === 'string' ? (
           <Children variant={variant}>
-            <Markdown content={message}/>
+            <Markdown content={message} />
           </Children>
         ) : (
           <Box spacing={3} fontSize="1.25rem" fontWeight="bold">

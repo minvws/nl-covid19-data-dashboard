@@ -3,7 +3,7 @@ import { Tile } from '~/components-styled/tile';
 import { Metadata, MetadataProps } from './metadata';
 import { Heading } from './typography';
 import { css } from '@styled-system/css';
-import { Markdown } from '~/components-styled/markdown'
+import { Markdown } from '~/components-styled/markdown';
 interface Illustration {
   image: string;
   alt: string;
@@ -35,9 +35,7 @@ export function KpiWithIllustrationTile({
         <Box mb={4} flex={{ _: '0 0 100%', lg: '1' }} pr={{ lg: 4 }}>
           <Heading level={3}>{title}</Heading>
           {children}
-          {description && (
-            <Markdown content={description}/>
-          )}
+          {description && <Markdown content={description} />}
         </Box>
         <Box flex={{ _: '0 0 100%', lg: '1' }} pl={{ lg: 4 }}>
           <img

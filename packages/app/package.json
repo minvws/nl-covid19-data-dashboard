@@ -43,7 +43,6 @@
     "proxy-polyfill": "^0.3.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "rehype-stringify": "^8.0.0",
     "remark-external-links": "^8.0.0",
     "remark-parse": "^9.0.0",
     "remark-react": "^8.0.0",
