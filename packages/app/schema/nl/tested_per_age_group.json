@@ -74,6 +74,9 @@
         },
         "date_of_insertion_unix": {
           "type": "integer"
+        },
+        "date_of_report_unix": {
+          "type": "integer"
         }
       }
     }
