@@ -12,7 +12,9 @@ export function useTabInteractiveButton(label: string) {
     isDisabled: !isTabInteractive,
   });
 
-  const handleFocus = useCallback(() => clearTimeout(timeoutRef.current), []);
+  const handleFocus = useCallback(() => {
+    clearTimeout(timeoutRef.current);
+  }, []);
   const handleBlur = useCallback(() => {
     clearTimeout(timeoutRef.current);
     timeoutRef.current = window.setTimeout(() => setIsTabInteractive(false), 0);
@@ -57,8 +59,15 @@ const SkipButton = styled.button<{ isActive: boolean }>((x) =>
     py: 2,
     cursor: 'pointer',
     textDecoration: 'none',
-    top: -9999,
-    left: -9999,
+    /**
+     * we'll toggle the opacity because for some reason firefox will not keep
+     * the toggle button in the viewport, instead it will scroll entirely to the
+     * top when the button receives focus.
+     */
+    opacity: 0,
+    pointerEvents: 'none',
+    top: 0,
+    left: 0,
 
     border: '1px solid',
     borderColor: 'blue',
@@ -66,8 +75,8 @@ const SkipButton = styled.button<{ isActive: boolean }>((x) =>
     color: x.isActive ? 'white' : 'blue',
 
     '&:focus': {
-      top: 0,
-      left: 0,
+      opacity: 1,
+      pointerEvents: 'all',
     },
   })
 );
