@@ -31,6 +31,7 @@ export { getStaticPaths } from '~/static-paths/gm';
 import { useIntl } from '~/intl';
 import { Layout } from '~/domain/layout/layout';
 import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
+import { Markdown } from '~/components-styled/markdown';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -101,10 +102,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 absolute={lastValue.infected}
                 difference={data.difference.tested_overall__infected}
               />
-              <Text
-                as="div"
-                dangerouslySetInnerHTML={{ __html: text.kpi_toelichting }}
-              />
+              <Markdown content={text.kpi_toelichting} />
             </KpiTile>
 
             <KpiTile
