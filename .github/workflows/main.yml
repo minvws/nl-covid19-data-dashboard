@@ -48,6 +48,23 @@ jobs:
       - name: Compile all code
         run: yarn compile
 
+  build:
+    runs-on: ubuntu-latest
+    needs: init
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        uses: bahmutov/npm-install@v1
+      - name: Build common module
+        run: yarn workspace @corona-dashboard/common build
+      - name: Download dataset
+        run: yarn download
+      - name: Build the application
+        run: yarn build
+      - name: Create a static version
+        run: yarn export
+
   test:
     runs-on: ubuntu-latest
     needs: compile
