@@ -100,7 +100,6 @@ export function AreaChartGraph<T extends TrendValue, K extends TrendValue>(
         tabIndex={0}
         width={width}
         viewBox={`0 0 ${width} ${height}`}
-        css={css({ width: '100%' })}
       >
         <defs>
           {areas
@@ -239,6 +238,7 @@ function getFill<T>(areaConfig: AreaDisplay<T>[], areaKey: string) {
 
 const StyledSvg = styled.svg(
   css({
+    width: '100%',
     '&:not(:root)': {
       overflow: 'visible',
     },
