@@ -356,9 +356,14 @@ export function LineChart<T extends TimestampedValue>({
             x={tooltipLeft + padding.left}
             y={tooltipTop + padding.top}
           >
-            {formatTooltip
-              ? formatTooltip(tooltipData)
-              : FormatDefaultTooltip(tooltipData, isPercentage)}
+            {formatTooltip ? (
+              formatTooltip(tooltipData)
+            ) : (
+              <DefaultTooltip
+                values={tooltipData}
+                isPercentage={isPercentage}
+              />
+            )}
           </Tooltip>
         )}
 
@@ -394,10 +399,13 @@ export function LineChart<T extends TimestampedValue>({
   );
 }
 
-function FormatDefaultTooltip<T extends TimestampedValue>(
-  values: (T & TrendValue)[],
-  isPercentage?: boolean
-) {
+function DefaultTooltip<T extends TimestampedValue>({
+  values,
+  isPercentage,
+}: {
+  values: (T & TrendValue)[];
+  isPercentage?: boolean;
+}) {
   // default tooltip assumes one line is rendered:
 
   const {
