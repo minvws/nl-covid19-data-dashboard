@@ -1,28 +1,26 @@
-import unified from 'unified';
-import parse from 'remark-parse';
-import remark2react from 'remark-react';
-import externalLinks from 'remark-external-links';
-import styled from 'styled-components';
-import { ReactNode } from 'react';
+import ReactMarkdown from 'react-markdown';
 
 interface MarkdownProps {
   content: string;
 }
 
 export function Markdown({ content }: MarkdownProps) {
-  const parsedMarkdown = unified()
-    .use(parse)
-    .use(externalLinks, {
-      target: '_blank',
-      rel: ['noopener', 'noreferrer'],
-    })
-    .use(remark2react)
-    .processSync(content).result;
+  const isExternalURL = (url: string) => /^https?:\/\//.test(url);
 
-  return <MarkdownStyles>{parsedMarkdown as ReactNode}</MarkdownStyles>;
+  return (
+    <ReactMarkdown
+      source={content}
+      renderers={{
+        link: (props) => (
+          <a
+            href={props.href}
+            rel="noreferrer"
+            target={isExternalURL(props.href) ? '_blank' : ''}
+          >
+            {props.children}
+          </a>
+        ),
+      }}
+    />
+  );
 }
-const MarkdownStyles = styled.div({
-  'p:last-of-type': {
-    marginBottom: 0,
-  },
-});
