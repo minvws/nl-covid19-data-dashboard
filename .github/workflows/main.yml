@@ -61,9 +61,9 @@ jobs:
       - name: Download dataset
         run: yarn download
       - name: Build the application
-        run: yarn build
+        run: yarn workspace @corona-dashboard/app build
       - name: Create a static version
-        run: yarn export
+        run: yarn workspace @corona-dashboard/app export
 
   test:
     runs-on: ubuntu-latest
