@@ -7,7 +7,6 @@
     "proto_name",
     "name",
     "code",
-    "g_number",
     "tested_overall",
     "hospital_nice",
     "tested_ggd_daily",
