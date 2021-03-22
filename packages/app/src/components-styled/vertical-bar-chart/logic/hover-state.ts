@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useRef } from 'react';
 import { ScaleBand, ScaleLinear } from 'd3-scale';
 import { localPoint } from '@visx/event';
 import { isEmpty } from 'lodash';
@@ -35,6 +35,7 @@ export function useHoverState({
   yScale,
 }: UseHoverStateArgs): UseHoverStateResponse {
   const [hoverState, setHoverState] = useState<HoverState>();
+  const timeoutRef = useRef<any>();
 
   const bisect = useCallback(
     function (xPosition: number): number {
@@ -47,8 +48,21 @@ export function useHoverState({
   const handleHover = useCallback(
     (event: Event) => {
       if (event.type === 'mouseleave') {
-        setHoverState(undefined);
+        /**
+         * Here a timeout is used on the clear hover state to prevent the
+         * tooltip from getting jittery. Individual elements in the chart can
+         * send mouseleave events. This logic is maybe best moved to the the
+         * tooltip itself. Or maybe it can be simplified without a ref.
+         */
+        timeoutRef.current = setTimeout(() => {
+          setHoverState(undefined);
+          timeoutRef.current = undefined;
+        }, 200);
         return;
+      }
+
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
       }
 
       if (isEmpty(series)) {

@@ -29,11 +29,12 @@ export function BarTrend({
   onHover,
 }: BarTrendProps) {
   const [hovered, setHovered] = useState<number | undefined>();
+
   const handleHover = useCallback(
     (event: TouchEvent<SVGElement> | MouseEvent<SVGElement>, index: number) => {
       if (event.type === 'mouseleave') {
         setHovered(undefined);
-      } else {
+      } else if (hovered !== index) {
         setHovered(index);
       }
 
