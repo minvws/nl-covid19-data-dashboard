@@ -182,7 +182,7 @@ export interface National {
   vaccine_administered_total: NlVaccineAdministeredTotal;
   vaccine_administered_rate_moving_average: NlVaccineAdministeredRateMovingAverage;
   vaccine_administered_planned: NlVaccineAdministeredPlanned;
-  vaccine_coverage_per_age_group: NlVaccineCoveragePerAgeGroup;
+  vaccine_coverage_per_age_group?: NlVaccineCoveragePerAgeGroup;
   vaccine_stock?: NlVaccineStock;
 }
 export interface NationalDifference {
@@ -693,6 +693,7 @@ export interface NlVaccineCoveragePerAgeGroupValue {
   fully_vaccinated_percentage: number;
   date_unix: number;
   date_of_insertion_unix: number;
+  date_of_report_unix?: number;
 }
 export interface NlVaccineStock {
   values: NlVaccineStockValue[];

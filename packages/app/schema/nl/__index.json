@@ -41,8 +41,7 @@
     "vaccine_administered_lnaz",
     "vaccine_administered_total",
     "vaccine_administered_rate_moving_average",
-    "vaccine_administered_planned",
-    "vaccine_coverage_per_age_group"
+    "vaccine_administered_planned"
   ],
   "additionalProperties": false,
   "properties": {
