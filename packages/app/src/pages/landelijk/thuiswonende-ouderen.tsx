@@ -10,7 +10,7 @@ import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
-import { createRegionElderlyAtHomeTooltip } from '~/components/choropleth/tooltips/region/create-region-elderly-at-home-tooltip';
+import { ElderlyAtHomeRegionalTooltip } from '~/components/choropleth/tooltips/region/elderly-at-home-regional-tooltip';
 import { UnderReportedTooltip } from '~/domain/underreported/under-reported-tooltip';
 import { useIntl } from '~/intl';
 import {
@@ -28,6 +28,10 @@ import { reverseRouter } from '~/utils/reverse-router';
 
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
+import {
+  RegionsElderlyAtHome,
+  SafetyRegionProperties,
+} from '@corona-dashboard/common';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -189,11 +193,9 @@ const ElderlyAtHomeNationalPage = (
               getLink={reverseRouter.vr.thuiswonendeOuderen}
               metricName="elderly_at_home"
               metricProperty="positive_tested_daily_per_100k"
-              tooltipContent={createRegionElderlyAtHomeTooltip(
-                siteText.choropleth_tooltip.elderly_at_home,
-                regionThresholds.elderly_at_home.positive_tested_daily_per_100k,
-                reverseRouter.vr.thuiswonendeOuderen
-              )}
+              tooltipContent={(
+                context: SafetyRegionProperties & RegionsElderlyAtHome
+              ) => <ElderlyAtHomeRegionalTooltip context={context} />}
             />
           </ChoroplethTile>
 

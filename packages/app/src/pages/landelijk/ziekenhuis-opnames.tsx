@@ -1,4 +1,10 @@
-import { getLastFilledValue } from '@corona-dashboard/common';
+import {
+  getLastFilledValue,
+  MunicipalHospitalNiceValue,
+  MunicipalityProperties,
+  RegionalHospitalNiceValue,
+  SafetyRegionProperties,
+} from '@corona-dashboard/common';
 import { useState } from 'react';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { ArticleStrip } from '~/components-styled/article-strip';
@@ -17,8 +23,8 @@ import { municipalThresholds } from '~/components/choropleth/municipal-threshold
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
-import { createMunicipalHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/municipal/create-municipal-hospital-admissions-tooltip';
-import { createRegionHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/region/create-region-hospital-admissions-tooltip';
+import { HospitalAdmissionsMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/municipal-hospital-admissions-tooltip';
+import { HospitalAdmissionsRegionalTooltip } from '~/components/choropleth/tooltips/region/hospital-admissions-regional-tooltip';
 import { UnderReportedTooltip } from '~/domain/underreported/under-reported-tooltip';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
@@ -173,12 +179,9 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 getLink={reverseRouter.gm.ziekenhuisopnames}
                 metricName="hospital_nice"
                 metricProperty="admissions_on_date_of_reporting"
-                tooltipContent={createMunicipalHospitalAdmissionsTooltip(
-                  siteText.choropleth_tooltip.hospital_admissions,
-                  municipalThresholds.hospital_nice
-                    .admissions_on_date_of_reporting,
-                  reverseRouter.gm.ziekenhuisopnames
-                )}
+                tooltipContent={(
+                  context: MunicipalityProperties & MunicipalHospitalNiceValue
+                ) => <HospitalAdmissionsMunicipalTooltip context={context} />}
               />
             )}
             {selectedMap === 'region' && (
@@ -187,12 +190,9 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 getLink={reverseRouter.vr.ziekenhuisopnames}
                 metricName="hospital_nice"
                 metricProperty="admissions_on_date_of_reporting"
-                tooltipContent={createRegionHospitalAdmissionsTooltip(
-                  siteText.choropleth_tooltip.hospital_admissions,
-                  regionThresholds.hospital_nice
-                    .admissions_on_date_of_reporting,
-                  reverseRouter.vr.ziekenhuisopnames
-                )}
+                tooltipContent={(
+                  context: SafetyRegionProperties & RegionalHospitalNiceValue
+                ) => <HospitalAdmissionsRegionalTooltip context={context} />}
               />
             )}
           </ChoroplethTile>

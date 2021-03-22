@@ -12,7 +12,7 @@ import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
-import { createInfectedLocationsRegionalTooltip } from '~/components/choropleth/tooltips/region/create-infected-locations-regional-tooltip';
+import { InfectedLocationsRegionalTooltip } from '~/components/choropleth/tooltips/region/infected-locations-regional-tooltip';
 import { UnderReportedTooltip } from '~/domain/underreported/under-reported-tooltip';
 import { useIntl } from '~/intl';
 import {
@@ -30,6 +30,10 @@ import { reverseRouter } from '~/utils/reverse-router';
 
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
+import {
+  RegionsNursingHome,
+  SafetyRegionProperties,
+} from '@corona-dashboard/common';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -214,11 +218,9 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
               getLink={reverseRouter.vr.verpleeghuiszorg}
               metricName="nursing_home"
               metricProperty="infected_locations_percentage"
-              tooltipContent={createInfectedLocationsRegionalTooltip(
-                siteText.choropleth_tooltip.infected_locations,
-                regionThresholds.nursing_home.infected_locations_percentage,
-                reverseRouter.vr.verpleeghuiszorg
-              )}
+              tooltipContent={(
+                context: SafetyRegionProperties & RegionsNursingHome
+              ) => <InfectedLocationsRegionalTooltip context={context} />}
             />
           </ChoroplethTile>
 

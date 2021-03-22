@@ -4,7 +4,7 @@ import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda
 import { TileList } from '~/components-styled/tile-list';
 import { WarningTile } from '~/components-styled/warning-tile';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
-import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
+import { EscalationRegionalTooltip } from '~/components/choropleth/tooltips/region/escalation-regional-tooltip';
 import { SafetyRegionComboBox } from '~/domain/layout/components/safety-region-combo-box';
 import {
   createGetStaticProps,
@@ -21,6 +21,10 @@ import { useBreakpoints } from '~/utils/useBreakpoints';
 import { useIntl } from '~/intl';
 import { Layout } from '~/domain/layout/layout';
 import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
+import {
+  EscalationLevels,
+  SafetyRegionProperties,
+} from '@corona-dashboard/common';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -93,7 +97,14 @@ const SafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
               getLink={reverseRouter.vr.index}
               metricName="escalation_levels"
               metricProperty="level"
-              tooltipContent={escalationTooltip(reverseRouter.vr.index)}
+              tooltipContent={(
+                context: SafetyRegionProperties & EscalationLevels
+              ) => (
+                <EscalationRegionalTooltip
+                  context={context}
+                  getLink={reverseRouter.vr.index}
+                />
+              )}
             />
           </ChoroplethTile>
         </TileList>

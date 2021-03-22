@@ -16,8 +16,8 @@ import { WarningTile } from '~/components-styled/warning-tile';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
-import { createSewerMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-sewer-regional-tooltip';
-import { createSewerRegionalTooltip } from '~/components/choropleth/tooltips/region/create-sewer-regional-tooltip';
+import { SewerMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/sewer-municipal-tooltip';
+import { SewerRegionalTooltip } from '~/components/choropleth/tooltips/region/sewer-regional-tooltip';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
@@ -34,6 +34,12 @@ import { reverseRouter } from '~/utils/reverse-router';
 import { useIntl } from '~/intl';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
+import {
+  MunicipalityProperties,
+  MunicipalSewerValue,
+  RegionalSewerValue,
+  SafetyRegionProperties,
+} from '@corona-dashboard/common';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -185,11 +191,9 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 getLink={reverseRouter.gm.rioolwater}
                 metricName="sewer"
                 metricProperty="average"
-                tooltipContent={createSewerMunicipalTooltip(
-                  siteText.choropleth_tooltip.sewer_regional,
-                  regionThresholds.sewer.average,
-                  reverseRouter.gm.rioolwater
-                )}
+                tooltipContent={(
+                  context: MunicipalityProperties & MunicipalSewerValue
+                ) => <SewerMunicipalTooltip context={context} />}
               />
             ) : (
               <SafetyRegionChoropleth
@@ -197,11 +201,9 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 getLink={reverseRouter.vr.rioolwater}
                 metricName="sewer"
                 metricProperty="average"
-                tooltipContent={createSewerRegionalTooltip(
-                  siteText.choropleth_tooltip.sewer_regional,
-                  regionThresholds.sewer.average,
-                  reverseRouter.gm.rioolwater
-                )}
+                tooltipContent={(
+                  context: SafetyRegionProperties & RegionalSewerValue
+                ) => <SewerRegionalTooltip context={context} />}
               />
             )}
           </ChoroplethTile>

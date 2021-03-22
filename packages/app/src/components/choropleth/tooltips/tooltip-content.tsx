@@ -57,7 +57,7 @@ function TooltipHeader({
 }) {
   if (href) {
     return (
-      <Link href={href}>
+      <Link href={href} passHref>
         <StyledTooltipHeader as="a">{children}</StyledTooltipHeader>
       </Link>
     );

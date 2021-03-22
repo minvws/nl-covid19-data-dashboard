@@ -1,3 +1,7 @@
+import {
+  RegionsDisabilityCare,
+  SafetyRegionProperties,
+} from '@corona-dashboard/common';
 import CoronaVirus from '~/assets/coronavirus.svg';
 import Gehandicaptenzorg from '~/assets/gehandicapte-zorg.svg';
 import Locatie from '~/assets/locaties.svg';
@@ -12,7 +16,9 @@ import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
-import { createDisablityInfectedLocationsRegionalTooltip } from '~/components/choropleth/tooltips/region/create-disability-infected-locations-regional-tooltip';
+import { DisablityInfectedLocationsRegionalTooltip } from '~/components/choropleth/tooltips/region/disability-infected-locations-regional-tooltip';
+import { Layout } from '~/domain/layout/layout';
+import { NationalLayout } from '~/domain/layout/national-layout';
 import { UnderReportedTooltip } from '~/domain/underreported/under-reported-tooltip';
 import { useIntl } from '~/intl';
 import {
@@ -27,9 +33,6 @@ import {
 import { colors } from '~/style/theme';
 import { getTrailingDateRange } from '~/utils/get-trailing-date-range';
 import { reverseRouter } from '~/utils/reverse-router';
-
-import { Layout } from '~/domain/layout/layout';
-import { NationalLayout } from '~/domain/layout/national-layout';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -211,10 +214,10 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
               getLink={reverseRouter.vr.gehandicaptenzorg}
               metricName="disability_care"
               metricProperty="infected_locations_percentage"
-              tooltipContent={createDisablityInfectedLocationsRegionalTooltip(
-                siteText.choropleth_tooltip.infected_locations,
-                regionThresholds.nursing_home.infected_locations_percentage,
-                reverseRouter.vr.gehandicaptenzorg
+              tooltipContent={(
+                context: SafetyRegionProperties & RegionsDisabilityCare
+              ) => (
+                <DisablityInfectedLocationsRegionalTooltip context={context} />
               )}
             />
           </ChoroplethTile>

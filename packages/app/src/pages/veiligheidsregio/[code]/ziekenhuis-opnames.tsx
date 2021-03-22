@@ -13,7 +13,7 @@ import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
-import { createMunicipalHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/municipal/create-municipal-hospital-admissions-tooltip';
+import { HospitalAdmissionsMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/municipal-hospital-admissions-tooltip';
 import regionCodeToMunicipalCodeLookup from '~/data/regionCodeToMunicipalCodeLookup';
 import { UnderReportedTooltip } from '~/domain/underreported/under-reported-tooltip';
 import { useIntl } from '~/intl';
@@ -32,6 +32,10 @@ import { colors } from '~/style/theme';
 import { getTrailingDateRange } from '~/utils/get-trailing-date-range';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { reverseRouter } from '~/utils/reverse-router';
+import {
+  MunicipalHospitalNiceValue,
+  MunicipalityProperties,
+} from '@corona-dashboard/common';
 
 export { getStaticPaths } from '~/static-paths/vr';
 
@@ -137,12 +141,9 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               getLink={reverseRouter.gm.ziekenhuisopnames}
               metricName="hospital_nice"
               metricProperty="admissions_on_date_of_reporting"
-              tooltipContent={createMunicipalHospitalAdmissionsTooltip(
-                siteText.choropleth_tooltip.hospital_admissions,
-                municipalThresholds.hospital_nice
-                  .admissions_on_date_of_reporting,
-                reverseRouter.gm.ziekenhuisopnames
-              )}
+              tooltipContent={(
+                context: MunicipalityProperties & MunicipalHospitalNiceValue
+              ) => <HospitalAdmissionsMunicipalTooltip context={context} />}
             />
           </ChoroplethTile>
 

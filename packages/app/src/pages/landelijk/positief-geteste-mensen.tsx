@@ -1,4 +1,10 @@
-import { NationalTestedPerAgeGroup } from '@corona-dashboard/common';
+import {
+  MunicipalitiesTestedOverall,
+  MunicipalityProperties,
+  NationalTestedPerAgeGroup,
+  RegionsTestedOverall,
+  SafetyRegionProperties,
+} from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useState } from 'react';
 import Afname from '~/assets/afname.svg';
@@ -25,8 +31,8 @@ import { Heading, Text } from '~/components-styled/typography';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
-import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
-import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/create-positive-tested-people-regional-tooltip';
+import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
+import { PositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/positive-tested-people-regional-tooltip';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
@@ -135,9 +141,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             }}
             reference={text.reference}
           />
-
           <ArticleStrip articles={content.articles} />
-
           <TwoKpiSection>
             <KpiTile
               title={text.kpi_titel}
@@ -237,11 +241,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 getLink={reverseRouter.gm.positiefGetesteMensen}
                 metricName="tested_overall"
                 metricProperty="infected_per_100k"
-                tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
-                  siteText.choropleth_tooltip.positive_tested_people,
-                  regionThresholds.tested_overall.infected_per_100k,
-                  reverseRouter.gm.positiefGetesteMensen
-                )}
+                tooltipContent={(
+                  context: MunicipalityProperties & MunicipalitiesTestedOverall
+                ) => <PositiveTestedPeopleMunicipalTooltip context={context} />}
               />
             )}
             {selectedMap === 'region' && (
@@ -250,15 +252,12 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 getLink={reverseRouter.vr.positiefGetesteMensen}
                 metricName="tested_overall"
                 metricProperty="infected_per_100k"
-                tooltipContent={createPositiveTestedPeopleRegionalTooltip(
-                  siteText.choropleth_tooltip.positive_tested_people,
-                  regionThresholds.tested_overall.infected_per_100k,
-                  reverseRouter.vr.positiefGetesteMensen
-                )}
+                tooltipContent={(
+                  context: SafetyRegionProperties & RegionsTestedOverall
+                ) => <PositiveTestedPeopleRegionalTooltip context={context} />}
               />
             )}
           </ChoroplethTile>
-
           <LineChartTile
             title={text.linechart_titel}
             description={text.linechart_toelichting}
@@ -307,7 +306,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               );
             }}
           />
-
           <ChartTile
             title={siteText.infected_age_groups.title}
             description={replaceVariablesInText(
@@ -325,7 +323,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               text={siteText.infected_age_groups.graph}
             />
           </ChartTile>
-
           <ContentHeader
             title={ggdText.titel}
             skipLinkAnchor={true}
@@ -344,7 +341,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             }}
             reference={text.reference}
           />
-
           <TwoKpiSection>
             <KpiTile
               title={ggdText.totaal_getest_week_titel}
@@ -405,7 +401,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               </Text>
             </KpiTile>
           </TwoKpiSection>
-
           <LineChartTile
             timeframeOptions={['all', '5weeks']}
             title={ggdText.linechart_percentage_titel}
@@ -417,7 +412,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               source: ggdText.bronnen.rivm,
             }}
           />
-
           <LineChartTile
             timeframeOptions={['all', '5weeks']}
             title={ggdText.linechart_totaltests_titel}

@@ -23,9 +23,9 @@ import { WarningTile } from '~/components-styled/warning-tile';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
-import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
-import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/create-positive-tested-people-regional-tooltip';
-import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
+import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
+import { PositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/positive-tested-people-regional-tooltip';
+import { EscalationRegionalTooltip } from '~/components/choropleth/tooltips/region/escalation-regional-tooltip';
 import { ArticleList } from '~/domain/topical/article-list';
 import { ChoroplethTwoColumnLayout } from '~/domain/topical/choropleth-two-column-layout';
 import { EditorialSummary } from '~/domain/topical/editorial-teaser';
@@ -57,6 +57,13 @@ import { reverseRouter } from '~/utils/reverse-router';
 export { getStaticPaths } from '~/static-paths/gm';
 import { useIntl } from '~/intl';
 import { Layout } from '~/domain/layout/layout';
+import {
+  EscalationLevels,
+  MunicipalitiesTestedOverall,
+  MunicipalityProperties,
+  RegionsTestedOverall,
+  SafetyRegionProperties,
+} from '@corona-dashboard/common';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -284,8 +291,13 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                     metricName="escalation_levels"
                     metricProperty="level"
                     getLink={reverseRouter.vr.risiconiveau}
-                    tooltipContent={escalationTooltip(
-                      reverseRouter.vr.risiconiveau
+                    tooltipContent={(
+                      context: SafetyRegionProperties & EscalationLevels
+                    ) => (
+                      <EscalationRegionalTooltip
+                        context={context}
+                        getLink={reverseRouter.vr.risiconiveau}
+                      />
                     )}
                   />
                 </Box>
@@ -355,10 +367,13 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                       getLink={reverseRouter.vr.positiefGetesteMensen}
                       metricName="tested_overall"
                       metricProperty="infected_per_100k"
-                      tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
-                        siteText.choropleth_tooltip.positive_tested_people,
-                        regionThresholds.tested_overall.infected_per_100k,
-                        reverseRouter.gm.positiefGetesteMensen
+                      tooltipContent={(
+                        context: MunicipalityProperties &
+                          MunicipalitiesTestedOverall
+                      ) => (
+                        <PositiveTestedPeopleMunicipalTooltip
+                          context={context}
+                        />
                       )}
                     />
                   )}
@@ -368,10 +383,12 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                       getLink={reverseRouter.vr.positiefGetesteMensen}
                       metricName="tested_overall"
                       metricProperty="infected_per_100k"
-                      tooltipContent={createPositiveTestedPeopleRegionalTooltip(
-                        siteText.choropleth_tooltip.positive_tested_people,
-                        regionThresholds.tested_overall.infected_per_100k,
-                        reverseRouter.vr.positiefGetesteMensen
+                      tooltipContent={(
+                        context: SafetyRegionProperties & RegionsTestedOverall
+                      ) => (
+                        <PositiveTestedPeopleRegionalTooltip
+                          context={context}
+                        />
                       )}
                     />
                   )}
