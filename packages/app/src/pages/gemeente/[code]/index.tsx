@@ -15,12 +15,12 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const Municipality = (props: StaticProps<typeof getStaticProps>) => {
-  const { lastGenerated } = props;
+  const { data, lastGenerated } = props;
   const { siteText } = useIntl();
 
   return (
     <Layout {...siteText.gemeente_index.metadata} lastGenerated={lastGenerated}>
-      <MunicipalityLayout lastGenerated={lastGenerated} />
+      <MunicipalityLayout data={data} lastGenerated={lastGenerated} />
     </Layout>
   );
 };

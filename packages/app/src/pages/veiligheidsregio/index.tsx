@@ -2,12 +2,16 @@ import { useRouter } from 'next/router';
 import { Box } from '~/components-styled/base';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
+import { Markdown } from '~/components-styled/markdown';
 import { TileList } from '~/components-styled/tile-list';
 import { WarningTile } from '~/components-styled/warning-tile';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
 import { SafetyRegionComboBox } from '~/domain/layout/components/safety-region-combo-box';
+import { Layout } from '~/domain/layout/layout';
+import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
+import { useIntl } from '~/intl';
 import {
   createGetStaticProps,
   StaticProps,
@@ -15,16 +19,15 @@ import {
 import {
   createGetChoroplethData,
   getLastGeneratedDate,
+  getVrData,
 } from '~/static-props/get-data';
 import { createDate } from '~/utils/createDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { useBreakpoints } from '~/utils/useBreakpoints';
-import { useIntl } from '~/intl';
-import { Layout } from '~/domain/layout/layout';
-import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
+  getVrData,
   createGetChoroplethData({
     vr: ({ escalation_levels }) => ({ escalation_levels }),
   })
@@ -36,7 +39,7 @@ const SafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
 
   const { siteText, formatDate } = useIntl();
 
-  const { choropleth, lastGenerated } = props;
+  const { data, choropleth, lastGenerated } = props;
 
   const goToSafetyRegion = createSelectRegionHandler(
     router,
@@ -50,7 +53,7 @@ const SafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <SafetyRegionLayout lastGenerated={lastGenerated}>
+      <SafetyRegionLayout data={data} lastGenerated={lastGenerated}>
         {!breakpoints.md && (
           <Box bg="white">
             <SafetyRegionComboBox onSelect={goToSafetyRegion} />
@@ -69,9 +72,9 @@ const SafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
             title={siteText.veiligheidsregio_index.selecteer_titel}
             description={
               <>
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: replaceVariablesInText(
+                <Box mb={3}>
+                  <Markdown
+                    content={replaceVariablesInText(
                       siteText.veiligheidsregio_index.selecteer_toelichting,
                       {
                         last_update: formatDate(
@@ -82,9 +85,9 @@ const SafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
                           'day-month'
                         ),
                       }
-                    ),
-                  }}
-                />
+                    )}
+                  />
+                </Box>
                 <EscalationMapLegenda
                   data={choropleth.vr}
                   metricName="escalation_levels"
