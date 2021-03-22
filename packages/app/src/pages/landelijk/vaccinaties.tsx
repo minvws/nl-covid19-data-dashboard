@@ -424,30 +424,12 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               seriesConfig={[
                 {
                   type: 'line',
-                  metricProperty: 'percentage_16_24',
+                  metricProperty: 'percentage_70_plus',
                   label: replaceVariablesInText(
                     text.grafiek_draagvlak.leeftijd_jaar,
-                    { ageGroup: '16 - 24' }
+                    { ageGroup: '70+' }
                   ),
-                  color: colors.data.multiseries.cyan,
-                },
-                {
-                  type: 'line',
-                  metricProperty: 'percentage_25_39',
-                  label: replaceVariablesInText(
-                    text.grafiek_draagvlak.leeftijd_jaar,
-                    { ageGroup: '25 - 39' }
-                  ),
-                  color: colors.data.multiseries.yellow,
-                },
-                {
-                  type: 'line',
-                  metricProperty: 'percentage_40_54',
-                  label: replaceVariablesInText(
-                    text.grafiek_draagvlak.leeftijd_jaar,
-                    { ageGroup: '40 - 54' }
-                  ),
-                  color: colors.data.multiseries.turquoise,
+                  color: colors.data.multiseries.magenta,
                 },
                 {
                   type: 'line',
@@ -460,12 +442,30 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 },
                 {
                   type: 'line',
-                  metricProperty: 'percentage_70_plus',
+                  metricProperty: 'percentage_40_54',
                   label: replaceVariablesInText(
                     text.grafiek_draagvlak.leeftijd_jaar,
-                    { ageGroup: '70+' }
+                    { ageGroup: '40 - 54' }
                   ),
-                  color: colors.data.multiseries.magenta,
+                  color: colors.data.multiseries.turquoise,
+                },
+                {
+                  type: 'line',
+                  metricProperty: 'percentage_25_39',
+                  label: replaceVariablesInText(
+                    text.grafiek_draagvlak.leeftijd_jaar,
+                    { ageGroup: '25 - 39' }
+                  ),
+                  color: colors.data.multiseries.yellow,
+                },
+                {
+                  type: 'line',
+                  metricProperty: 'percentage_16_24',
+                  label: replaceVariablesInText(
+                    text.grafiek_draagvlak.leeftijd_jaar,
+                    { ageGroup: '16 - 24' }
+                  ),
+                  color: colors.data.multiseries.cyan,
                 },
                 {
                   type: 'invisible',
