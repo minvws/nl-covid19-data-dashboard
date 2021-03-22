@@ -1,6 +1,4 @@
-import { GetStaticPropsContext } from 'next';
-
-export function getVaccineMilestonesQuery(_context: GetStaticPropsContext) {
+export function getVaccineMilestonesQuery() {
   //@TODO We need to switch this from process.env to context as soon as we use i18n routing
   // const { locale } = context;
   const locale = process.env.NEXT_PUBLIC_LOCALE;
