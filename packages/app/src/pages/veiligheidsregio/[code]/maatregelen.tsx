@@ -64,7 +64,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
-  const { content, safetyRegionName, lastGenerated } = props;
+  const { data, content, safetyRegionName, lastGenerated } = props;
 
   const { siteText } = useIntl();
   const text = siteText.veiligheidsregio_maatregelen;
@@ -100,7 +100,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <SafetyRegionLayout lastGenerated={lastGenerated}>
+      <SafetyRegionLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
           <ContentHeader
             title={replaceVariablesInText(

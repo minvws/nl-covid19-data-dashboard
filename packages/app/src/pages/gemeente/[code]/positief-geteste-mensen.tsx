@@ -69,7 +69,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <MunicipalityLayout lastGenerated={lastGenerated}>
+      <MunicipalityLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
           <ContentHeader
             category={siteText.gemeente_layout.headings.besmettingen}

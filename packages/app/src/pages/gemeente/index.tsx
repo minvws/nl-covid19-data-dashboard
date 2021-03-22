@@ -19,6 +19,7 @@ import { useBreakpoints } from '~/utils/useBreakpoints';
 import { Layout } from '~/domain/layout/layout';
 import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { useIntl } from '~/intl';
+import { getGmData } from '~/static-props/get-data';
 
 const tooltipContent = (selectedHandler: MunicipalitySelectionHandler) => {
   return (context: MunicipalityProperties): ReactNode => {
@@ -33,11 +34,14 @@ const tooltipContent = (selectedHandler: MunicipalitySelectionHandler) => {
   };
 };
 
-export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getGmData
+);
 
 const Municipality = (props: StaticProps<typeof getStaticProps>) => {
+  const { data, lastGenerated } = props;
   const { siteText } = useIntl();
-  const { lastGenerated } = props;
 
   const router = useRouter();
   const breakpoints = useBreakpoints();
@@ -54,7 +58,7 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <MunicipalityLayout lastGenerated={lastGenerated}>
+      <MunicipalityLayout data={data} lastGenerated={lastGenerated}>
         {!breakpoints.md && (
           <Box bg="white">
             <MunicipalityComboBox onSelect={goToMunicipal} />

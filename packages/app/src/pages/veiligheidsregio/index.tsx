@@ -19,6 +19,7 @@ import {
 import {
   createGetChoroplethData,
   getLastGeneratedDate,
+  getVrData,
 } from '~/static-props/get-data';
 import { createDate } from '~/utils/createDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
@@ -26,6 +27,7 @@ import { useBreakpoints } from '~/utils/useBreakpoints';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
+  getVrData,
   createGetChoroplethData({
     vr: ({ escalation_levels }) => ({ escalation_levels }),
   })
@@ -37,7 +39,7 @@ const SafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
 
   const { siteText, formatDate } = useIntl();
 
-  const { choropleth, lastGenerated } = props;
+  const { data, choropleth, lastGenerated } = props;
 
   const goToSafetyRegion = createSelectRegionHandler(
     router,
@@ -51,7 +53,7 @@ const SafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <SafetyRegionLayout lastGenerated={lastGenerated}>
+      <SafetyRegionLayout data={data} lastGenerated={lastGenerated}>
         {!breakpoints.md && (
           <Box bg="white">
             <SafetyRegionComboBox onSelect={goToSafetyRegion} />

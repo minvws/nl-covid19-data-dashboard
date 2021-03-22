@@ -42,6 +42,7 @@ export const getStaticProps = createGetStaticProps(
 
 const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
   const {
+    data,
     safetyRegionName: safetyRegion,
     data: { deceased_cbs: dataCbs, deceased_rivm: dataRivm, difference },
     content,
@@ -63,7 +64,7 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <SafetyRegionLayout lastGenerated={lastGenerated}>
+      <SafetyRegionLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
           <ContentHeader
             category={siteText.veiligheidsregio_layout.headings.besmettingen}
