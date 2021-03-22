@@ -45,7 +45,7 @@ export type TCombinedChartDimensions = TChartDimensions & {
   boundedHeight: number;
 };
 
-export function useChartDimensions<T extends HTMLElement | SVGElement>(
+export function useChartDimensions<T extends HTMLElement>(
   initialWidth: number,
   aspectRatio: number
 ) {
