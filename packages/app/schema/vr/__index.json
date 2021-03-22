@@ -45,6 +45,9 @@
     "difference": {
       "$ref": "__difference.json"
     },
+    "g_number": {
+      "$ref": "g_number.json"
+    },
     "sewer": {
       "$ref": "sewer.json"
     },
