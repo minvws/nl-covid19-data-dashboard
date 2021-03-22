@@ -24,7 +24,7 @@ import {
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { getTrailingDateRange } from '~/utils/get-trailing-date-range';
-import { reverseRouter } from '~/utils/reverse-router';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
@@ -57,6 +57,7 @@ const ElderlyAtHomeNationalPage = (
   );
 
   const { siteText } = useIntl();
+  const reverseRouter = useReverseRouter();
 
   const text = siteText.thuiswonende_ouderen;
   const graphDescriptions = siteText.accessibility.grafieken;

@@ -39,7 +39,7 @@ import {
 import { colors } from '~/style/theme';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { reverseRouter } from '~/utils/reverse-router';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
@@ -66,6 +66,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     formatDateFromSeconds,
     formatPercentage,
   } = useIntl();
+  const reverseRouter = useReverseRouter();
 
   const text = siteText.veiligheidsregio_positief_geteste_personen;
   const ggdText = siteText.veiligheidsregio_positief_geteste_personen_ggd;

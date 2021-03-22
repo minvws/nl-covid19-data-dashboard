@@ -53,7 +53,7 @@ import { getSafetyRegionForMunicipalityCode } from '~/utils/getSafetyRegionForMu
 import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { reverseRouter } from '~/utils/reverse-router';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 export { getStaticPaths } from '~/static-paths/gm';
 import { useIntl } from '~/intl';
 import { Layout } from '~/domain/layout/layout';
@@ -87,6 +87,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
   const { municipalityName, choropleth, data, content, lastGenerated } = props;
 
   const router = useRouter();
+  const reverseRouter = useReverseRouter();
   const { siteText, formatDate } = useIntl();
 
   const text = siteText.gemeente_actueel;

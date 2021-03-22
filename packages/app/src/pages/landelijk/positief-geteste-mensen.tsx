@@ -52,7 +52,7 @@ import { colors } from '~/style/theme';
 import { assert } from '~/utils/assert';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { reverseRouter } from '~/utils/reverse-router';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -78,6 +78,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     formatDateFromMilliseconds,
     formatDateFromSeconds,
   } = useIntl();
+  const reverseRouter = useReverseRouter();
 
   const text = siteText.positief_geteste_personen;
   const ggdText = siteText.positief_geteste_personen_ggd;

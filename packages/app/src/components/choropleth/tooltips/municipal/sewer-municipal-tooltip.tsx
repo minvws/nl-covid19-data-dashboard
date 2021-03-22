@@ -7,7 +7,7 @@ import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content
 import { TooltipSubject } from '~/components/choropleth/tooltips/tooltip-subject';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { reverseRouter } from '~/utils/reverse-router';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 import { regionThresholds } from '../../region-thresholds';
 
 export function SewerMunicipalTooltip({
@@ -16,6 +16,7 @@ export function SewerMunicipalTooltip({
   context: MunicipalityProperties & MunicipalSewerValue;
 }) {
   const { siteText, formatNumber } = useIntl();
+  const reverseRouter = useReverseRouter();
   const text = siteText.rioolwater_metingen;
 
   const subject = siteText.choropleth_tooltip.sewer_regional;

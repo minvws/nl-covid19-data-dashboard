@@ -32,7 +32,7 @@ import {
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { getTrailingDateRange } from '~/utils/get-trailing-date-range';
-import { reverseRouter } from '~/utils/reverse-router';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -49,6 +49,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
   const underReportedValues = getTrailingDateRange(values, 7);
 
   const { siteText } = useIntl();
+  const reverseRouter = useReverseRouter();
   const infectedLocationsText = siteText.gehandicaptenzorg_besmette_locaties;
   const positiveTestedPeopleText =
     siteText.gehandicaptenzorg_positief_geteste_personen;

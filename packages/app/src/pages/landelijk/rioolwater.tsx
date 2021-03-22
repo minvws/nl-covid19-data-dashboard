@@ -30,7 +30,7 @@ import {
   getNlData,
 } from '~/static-props/get-data';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { reverseRouter } from '~/utils/reverse-router';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 import { useIntl } from '~/intl';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
@@ -58,6 +58,7 @@ export const getStaticProps = createGetStaticProps(
 
 const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
+  const reverseRouter = useReverseRouter();
   const { data, choropleth, content, lastGenerated } = props;
 
   const text = siteText.rioolwater_metingen;

@@ -52,7 +52,7 @@ import {
 import { createDate } from '~/utils/createDate';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { reverseRouter } from '~/utils/reverse-router';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
 import {
@@ -105,6 +105,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   const dataSitemap = useDataSitemap('landelijk');
 
   const { siteText, formatDate } = useIntl();
+  const reverseRouter = useReverseRouter();
   const text = siteText.nationaal_actueel;
 
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>(

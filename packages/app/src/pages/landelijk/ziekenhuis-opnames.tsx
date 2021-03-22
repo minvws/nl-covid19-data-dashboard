@@ -44,7 +44,7 @@ import {
   DateRange,
   getTrailingDateRange,
 } from '~/utils/get-trailing-date-range';
-import { reverseRouter } from '~/utils/reverse-router';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
@@ -66,7 +66,7 @@ export const getStaticProps = createGetStaticProps(
 
 const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   const { data, choropleth, content, lastGenerated } = props;
-
+  const reverseRouter = useReverseRouter();
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
     'region'
   );

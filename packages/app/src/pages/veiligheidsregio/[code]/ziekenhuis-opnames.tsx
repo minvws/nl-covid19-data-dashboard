@@ -31,7 +31,7 @@ import {
 import { colors } from '~/style/theme';
 import { getTrailingDateRange } from '~/utils/get-trailing-date-range';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { reverseRouter } from '~/utils/reverse-router';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 import {
   MunicipalHospitalNiceValue,
   MunicipalityProperties,
@@ -56,6 +56,7 @@ export const getStaticProps = createGetStaticProps(
 const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   const { data, safetyRegionName, choropleth, content, lastGenerated } = props;
   const { siteText } = useIntl();
+  const reverseRouter = useReverseRouter();
 
   const text = siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
   const graphDescriptions = siteText.accessibility.grafieken;

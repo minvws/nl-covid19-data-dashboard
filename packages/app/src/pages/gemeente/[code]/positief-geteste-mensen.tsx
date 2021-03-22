@@ -25,7 +25,7 @@ import {
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { reverseRouter } from '~/utils/reverse-router';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 export { getStaticPaths } from '~/static-paths/gm';
 import { useIntl } from '~/intl';
 import { Layout } from '~/domain/layout/layout';
@@ -55,6 +55,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
   const { data, choropleth, municipalityName, content, lastGenerated } = props;
 
   const { siteText, formatDateFromMilliseconds, formatNumber } = useIntl();
+  const reverseRouter = useReverseRouter();
   const text = siteText.gemeente_positief_geteste_personen;
   const lastValue = data.tested_overall.last_value;
 

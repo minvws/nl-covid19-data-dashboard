@@ -2,10 +2,11 @@ import { useRouter } from 'next/router';
 import { ComboBox } from '~/components-styled/combo-box/combo-box';
 import safetyRegions from '~/data/index';
 import { useIntl } from '~/intl';
-import { reverseRouter } from '~/utils/reverse-router';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export function SafetyRegionComboBox() {
   const { siteText } = useIntl();
+  const reverseRouter = useReverseRouter();
   const router = useRouter();
 
   return (

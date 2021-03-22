@@ -6,7 +6,7 @@ import { InlineText } from '~/components-styled/typography';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
 import { TooltipSubject } from '~/components/choropleth/tooltips/tooltip-subject';
 import { useIntl } from '~/intl';
-import { reverseRouter } from '~/utils/reverse-router';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 import { regionThresholds } from '../../region-thresholds';
 
 export function HospitalAdmissionsRegionalTooltip({
@@ -15,6 +15,7 @@ export function HospitalAdmissionsRegionalTooltip({
   context: SafetyRegionProperties & RegionalHospitalNiceValue;
 }) {
   const { siteText, formatNumber } = useIntl();
+  const reverseRouter = useReverseRouter();
   const subject = siteText.choropleth_tooltip.hospital_admissions;
   const thresholdValues =
     regionThresholds.hospital_nice.admissions_on_date_of_reporting;

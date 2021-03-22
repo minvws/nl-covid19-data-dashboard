@@ -6,7 +6,7 @@ import { InlineText } from '~/components-styled/typography';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
 import { TooltipSubject } from '~/components/choropleth/tooltips/tooltip-subject';
 import { useIntl } from '~/intl';
-import { reverseRouter } from '~/utils/reverse-router';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 import { regionThresholds } from '../../region-thresholds';
 
 export function InfectedLocationsRegionalTooltip({
@@ -15,6 +15,7 @@ export function InfectedLocationsRegionalTooltip({
   context: SafetyRegionProperties & RegionsNursingHome;
 }) {
   const { siteText, formatPercentage, formatNumber } = useIntl();
+  const reverseRouter = useReverseRouter();
   const subject = siteText.choropleth_tooltip.infected_locations;
   const thresholdValues =
     regionThresholds.nursing_home.infected_locations_percentage;

@@ -24,7 +24,7 @@ import {
 } from '~/static-props/get-data';
 import { createDate } from '~/utils/createDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { reverseRouter } from '~/utils/reverse-router';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 
 export const getStaticProps = createGetStaticProps(
@@ -38,6 +38,7 @@ const SafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
   const breakpoints = useBreakpoints();
 
   const { siteText, formatDate } = useIntl();
+  const reverseRouter = useReverseRouter();
 
   const { choropleth, lastGenerated } = props;
 

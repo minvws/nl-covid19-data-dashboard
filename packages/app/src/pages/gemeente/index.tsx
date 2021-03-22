@@ -11,13 +11,14 @@ import {
   StaticProps,
 } from '~/static-props/create-get-static-props';
 import { getLastGeneratedDate } from '~/static-props/get-data';
-import { reverseRouter } from '~/utils/reverse-router';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 
 export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
 
 const Municipality = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
+  const reverseRouter = useReverseRouter();
   const { lastGenerated } = props;
 
   const breakpoints = useBreakpoints();

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useIsMountedRef } from './use-is-mounted-ref';
 
 /**
  * Subsequential calls to the hook can read this static value for initial
@@ -7,6 +8,7 @@ import { useEffect, useState } from 'react';
 let isTouch = false;
 
 export function useIsTouchDevice() {
+  const isMountedRef = useIsMountedRef();
   const [isTouchDevice, setIsTouchDevice] = useState(isTouch);
 
   useEffect(() => {
@@ -22,14 +24,16 @@ export function useIsTouchDevice() {
       setIsTouchDevice(false);
     };
 
-    document.addEventListener('touchstart', handleTouchStart);
-    document.addEventListener('mousemove', handleMouseMove);
+    !isTouchDevice && document.addEventListener('touchstart', handleTouchStart);
+    isTouchDevice && document.addEventListener('mousemove', handleMouseMove);
 
     return () => {
-      document.removeEventListener('touchstart', handleTouchStart);
-      document.removeEventListener('mousemove', handleMouseMove);
+      !isTouchDevice &&
+        document.removeEventListener('touchstart', handleTouchStart);
+      isTouchDevice &&
+        document.removeEventListener('mousemove', handleMouseMove);
     };
-  }, [isTouchDevice]);
+  }, [isMountedRef, isTouchDevice]);
 
   return isTouchDevice;
 }

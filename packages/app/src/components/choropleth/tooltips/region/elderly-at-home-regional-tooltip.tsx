@@ -6,7 +6,7 @@ import { InlineText } from '~/components-styled/typography';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
 import { TooltipSubject } from '~/components/choropleth/tooltips/tooltip-subject';
 import { useIntl } from '~/intl';
-import { reverseRouter } from '~/utils/reverse-router';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 import { regionThresholds } from '../../region-thresholds';
 
 export function ElderlyAtHomeRegionalTooltip({
@@ -15,6 +15,7 @@ export function ElderlyAtHomeRegionalTooltip({
   context: SafetyRegionProperties & RegionsElderlyAtHome;
 }) {
   const { siteText, formatNumber } = useIntl();
+  const reverseRouter = useReverseRouter();
   const subject = siteText.choropleth_tooltip.elderly_at_home;
   const thresholdValues =
     regionThresholds.elderly_at_home.positive_tested_daily_per_100k;

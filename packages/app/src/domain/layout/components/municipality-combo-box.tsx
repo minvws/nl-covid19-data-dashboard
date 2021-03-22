@@ -2,10 +2,11 @@ import { useRouter } from 'next/router';
 import { ComboBox } from '~/components-styled/combo-box/combo-box';
 import municipalities from '~/data/municipalSearchData';
 import { useIntl } from '~/intl';
-import { reverseRouter } from '~/utils/reverse-router';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export function MunicipalityComboBox() {
   const { siteText } = useIntl();
+  const reverseRouter = useReverseRouter();
   const router = useRouter();
 
   return (

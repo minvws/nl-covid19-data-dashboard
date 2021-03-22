@@ -12,7 +12,7 @@ import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
 import { useIntl } from '~/intl';
-import { reverseRouter } from '~/utils/reverse-router';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 import {
   BehaviorIdentifier,
   behaviorIdentifiers,
@@ -25,6 +25,7 @@ export function BehaviorChoroplethTile({
 }: {
   data: { behavior: RegionsBehavior[] };
 }) {
+  const reverseRouter = useReverseRouter();
   const [type, setType] = useState<BehaviorType>('compliance');
   const [currentId, setCurrentId] = useState<BehaviorIdentifier>('wash_hands');
 

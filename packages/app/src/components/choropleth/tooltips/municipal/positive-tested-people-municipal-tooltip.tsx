@@ -7,7 +7,7 @@ import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content
 import { TooltipSubject } from '~/components/choropleth/tooltips/tooltip-subject';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { reverseRouter } from '~/utils/reverse-router';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 import { municipalThresholds } from '../../municipal-thresholds';
 
 export function PositiveTestedPeopleMunicipalTooltip({
@@ -16,6 +16,7 @@ export function PositiveTestedPeopleMunicipalTooltip({
   context: MunicipalityProperties & MunicipalitiesTestedOverall;
 }) {
   const { siteText, formatNumber, formatPercentage } = useIntl();
+  const reverseRouter = useReverseRouter();
   const text = siteText.common.tooltip;
 
   const subject = siteText.choropleth_tooltip.positive_tested_people;
