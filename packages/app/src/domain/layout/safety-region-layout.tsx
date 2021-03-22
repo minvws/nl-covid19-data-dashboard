@@ -27,7 +27,7 @@ import { EscalationLevel } from '../restrictions/type';
 
 interface SafetyRegionLayoutProps {
   lastGenerated: string;
-  data?: Regionaal;
+  data: Regionaal;
   safetyRegionName?: string;
   children?: React.ReactNode;
 }
