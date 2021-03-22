@@ -10,18 +10,12 @@ import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content
 import { EscalationLevel } from '~/domain/restrictions/type';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { RegionSelectionHandler } from '../../select-handlers/create-select-region-handler';
 
-export const escalationTooltip = (selectHandler: RegionSelectionHandler) => {
+export const escalationTooltip = (getLink: (code: string) => string) => {
   return (context: SafetyRegionProperties & EscalationLevels): ReactNode => {
     const level = context.level as EscalationLevel;
 
     const { formatDateFromSeconds, siteText } = useIntl();
-
-    const onSelect = (event: React.MouseEvent<HTMLElement>) => {
-      event.stopPropagation();
-      selectHandler(context.vrcode);
-    };
 
     const escalationText = ((siteText.escalatie_niveau
       .types as unknown) as Record<
@@ -37,7 +31,7 @@ export const escalationTooltip = (selectHandler: RegionSelectionHandler) => {
     );
 
     return (
-      <TooltipContent title={context.vrname} onSelect={onSelect}>
+      <TooltipContent title={context.vrname} link={getLink(context.vrcode)}>
         <Box
           display="flex"
           alignItems="flex-start"
