@@ -19,24 +19,10 @@ export function Markdown({ content }: MarkdownProps) {
     .use(remark2react)
     .processSync(content).result;
 
-  return (
-    <MarkdownStyles>
-      {parsedMarkdown as ReactNode}
-    </MarkdownStyles>
-  )
+  return <MarkdownStyles>{parsedMarkdown as ReactNode}</MarkdownStyles>;
 }
 const MarkdownStyles = styled.div({
   'p:last-of-type': {
     marginBottom: 0,
-    color: 'red'
-  }
-})
-
-// const MarkdownStyles = styled.div<{ mb?: number | string; }>((x) =>
-//   css({
-//     'p:last-of-type': {
-//       marginBottom: x.mb ? x.mb : 0,
-//       color: 'red'
-//     }
-//   })
-// )
+  },
+});
