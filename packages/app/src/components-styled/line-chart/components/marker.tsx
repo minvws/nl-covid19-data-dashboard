@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { ChartPadding } from '~/components-styled/line-chart/components';
 import { Text } from '~/components-styled/typography';
 import { colors } from '~/style/theme';
-import { formatDateFromMilliseconds } from '~/utils/formatDate';
+import { useIntl } from '~/intl';
 import { TrendValue } from '../logic';
 
 const MARKER_POINT_SIZE = 18;
@@ -101,6 +101,12 @@ type MarkerProps<T extends TimestampedValue> = {
 };
 
 export function Marker<T extends TimestampedValue>(props: MarkerProps<T>) {
+  const { formatDateFromMilliseconds } = useIntl();
+
+  function defaultFormatLabel<T>(data: T & TrendValue): string {
+    return formatDateFromMilliseconds(data.__date.getTime(), 'axis');
+  }
+
   const {
     primaryColor = colors.data.primary,
     data,
@@ -161,8 +167,4 @@ export function Marker<T extends TimestampedValue>(props: MarkerProps<T>) {
       </DateSpanMarker>
     </>
   );
-}
-
-function defaultFormatLabel<T>(data: T & TrendValue): string {
-  return formatDateFromMilliseconds(data.__date.getTime(), 'axis');
 }

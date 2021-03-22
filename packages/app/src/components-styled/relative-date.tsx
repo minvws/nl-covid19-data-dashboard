@@ -5,16 +5,31 @@
  * - machine readable iso dates
  */
 
-import css from '@styled-system/css';
-import styled from 'styled-components';
-import { formatDateFromSeconds } from '~/utils/formatDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { useIsMounted } from '~/utils/use-is-mounted';
+import { useIntl } from '~/intl';
 
 interface RelativeDateProps {
   dateInSeconds: number;
   isCapitalized?: boolean;
-  /* absoluteDateTemplate is used when there is no relative date, to fix the sentence structure */
+
+  /**
+   * Template used is used server-side to fix the sentence structure.
+   * Replaceable variable is `{{date}}`.
+   *
+   * e.g.:
+   *
+   * input:
+   *
+   *     dateInSeconds = 1615852800 // (march 16th)
+   *     absoluteDateTemplate = `Op {{date}}`
+   *
+   * output:
+   *
+   *     server-side: `Op 16 maart`
+   *     client-side: `Gisteren (16 maart)`
+   * )
+   */
   absoluteDateTemplate?: string;
 }
 
@@ -23,39 +38,48 @@ export function RelativeDate({
   isCapitalized,
   absoluteDateTemplate,
 }: RelativeDateProps) {
+  const { formatDateFromSeconds, formatRelativeDate } = useIntl();
+
   const isMounted = useIsMounted();
   const isoDate = formatDateFromSeconds(dateInSeconds, 'iso');
-  const fullDate = formatDateFromSeconds(dateInSeconds, 'day-month');
-  const relativeDate = formatDateFromSeconds(dateInSeconds, 'relative');
+  const dayMonthDate = formatDateFromSeconds(dateInSeconds, 'day-month');
 
-  /* Date to display; relative date is only available in browsers, not on server. */
-  let displayDate = isMounted ? relativeDate : fullDate;
+  if (!isMounted) {
+    const formattedDate = absoluteDateTemplate
+      ? replaceVariablesInText(absoluteDateTemplate, { date: dayMonthDate })
+      : dayMonthDate;
 
-  /* Format absolute dates when a template is provided (used to construct grammatically correct sentences) */
-  if (absoluteDateTemplate && displayDate.match(/[0-9]/)) {
-    displayDate = replaceVariablesInText(absoluteDateTemplate, {
-      date: displayDate,
-    });
+    return (
+      <time dateTime={isoDate}>
+        {isCapitalized ? capitalize(formattedDate) : formattedDate}
+      </time>
+    );
   }
 
-  /* Capitalize the chunk when it's at the start of a sentence. */
-  if (isCapitalized) {
-    displayDate = displayDate.charAt(0).toUpperCase() + displayDate.substr(1);
-  }
+  /**
+   * From this point on we assume the component is mounted and thus we can
+   * call the `formatRelativeDate` which wouldn't work server-side.
+   */
 
-  // if the displaydate is something like 'today' or 'yesterday', we put the full date behind it
-  const suffix = fullDate.startsWith(displayDate) ? '' : ` (${fullDate})`;
+  const relativeDate = formatRelativeDate({ seconds: dateInSeconds });
+  const dayMonthYearDate = formatDateFromSeconds(dateInSeconds, 'medium');
+
+  if (relativeDate) {
+    return (
+      <time dateTime={isoDate} title={dayMonthYearDate}>
+        {isCapitalized ? capitalize(relativeDate) : relativeDate} (
+        {dayMonthDate})
+      </time>
+    );
+  }
 
   return (
-    <Time dateTime={isoDate} title={fullDate}>
-      {displayDate}
-      {suffix}
-    </Time>
+    <time dateTime={isoDate} title={dayMonthYearDate}>
+      {dayMonthDate}
+    </time>
   );
 }
 
-const Time = styled.time(
-  css({
-    cursor: 'help',
-  })
-);
+function capitalize(text: string) {
+  return text.charAt(0).toUpperCase() + text.substr(1);
+}

@@ -11,8 +11,8 @@ import { NumberProperty } from '~/components-styled/line-chart/logic';
 import { TimestampedValue } from '@corona-dashboard/common';
 import { LinkWithIcon } from '~/components-styled/link-with-icon';
 import { Heading, Text } from '~/components-styled/typography';
-import text from '~/locale';
-import { formatNumber } from '~/utils/formatNumber';
+import { useIntl } from '~/intl';
+
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { ArrowIconRight } from '~/components-styled/arrow-icon';
 
@@ -28,6 +28,8 @@ type MiniTrendTileProps<T extends TimestampedValue> = {
 export function MiniTrendTile<T extends TimestampedValue>(
   props: MiniTrendTileProps<T>
 ) {
+  const { formatNumber } = useIntl();
+
   const { icon, title, text, trendData, metricProperty, href } = props;
 
   const value = trendData[trendData.length - 1][metricProperty];
@@ -74,7 +76,7 @@ export function MiniTrendTile<T extends TimestampedValue>(
             linesConfig={[
               { metricProperty, areaFillOpacity: 0.2, strokeWidth: 3 },
             ]}
-            componentCallback={componentCallback}
+            componentCallback={ComponentCallback}
             showMarkerLine
             formatTooltip={(values) => formatNumber(values[0].__value)}
             padding={{
@@ -89,7 +91,26 @@ export function MiniTrendTile<T extends TimestampedValue>(
   );
 }
 
-function componentCallback(callbackInfo: ComponentCallbackInfo) {
+function ComponentCallback(callbackInfo: ComponentCallbackInfo) {
+  const { siteText } = useIntl();
+
+  const DAY_IN_SECONDS = 24 * 60 * 60;
+  function formatLastDate(date: Date, defaultFormat?: TickFormatter<any>) {
+    const days = Math.floor(
+      (Date.now() / 1000 - date.valueOf() / 1000) / DAY_IN_SECONDS
+    );
+
+    if (days < 1) {
+      return siteText.common.vandaag;
+    }
+
+    if (days < 2) {
+      return siteText.common.gisteren;
+    }
+
+    return defaultFormat ? defaultFormat(date, 0, []) : '';
+  }
+
   switch (callbackInfo.type) {
     case 'GridRows': {
       const domain = callbackInfo.props.scale.domain();
@@ -153,23 +174,6 @@ function componentCallback(callbackInfo: ComponentCallbackInfo) {
       );
     }
   }
-}
-
-const DAY_IN_SECONDS = 24 * 60 * 60;
-function formatLastDate(date: Date, defaultFormat?: TickFormatter<any>) {
-  const days = Math.floor(
-    (Date.now() / 1000 - date.valueOf() / 1000) / DAY_IN_SECONDS
-  );
-
-  if (days < 1) {
-    return text.common.vandaag;
-  }
-
-  if (days < 2) {
-    return text.common.gisteren;
-  }
-
-  return defaultFormat ? defaultFormat(date, 0, []) : '';
 }
 
 const StyledDiv = styled.div(

@@ -2,8 +2,8 @@ import css from '@styled-system/css';
 import styled from 'styled-components';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { EscalationLevel } from '~/domain/restrictions/type';
-import text from '~/locale/index';
 import { asResponsiveArray } from '~/style/utils';
+import { useIntl } from '~/intl';
 
 const escalationThresholds = regionThresholds.escalation_levels.level;
 
@@ -19,11 +19,13 @@ export function EscalationLevelIcon({
   /* Colors are in a 0-indexed array */
   const color = escalationThresholds[level - 1].color;
 
+  const { siteText } = useIntl();
+
   return (
     <div css={css({ display: 'inline-block' })}>
       <StyledEscalationLevelIcon
         color={color}
-        title={`${text.common.niveau} ${level}`}
+        title={`${siteText.common.niveau} ${level}`}
         isSmall={isSmall}
       >
         {level}
@@ -38,7 +40,7 @@ const StyledEscalationLevelIcon = styled.div<{
 }>(({ color, isSmall }) => {
   const size = isSmall
     ? asResponsiveArray({ _: 20, sm: 20 })
-    : asResponsiveArray({ _: 24, sm: 32 });
+    : asResponsiveArray({ _: 24, sm: 22 });
   return css({
     width: size,
     height: size,
@@ -48,7 +50,7 @@ const StyledEscalationLevelIcon = styled.div<{
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    fontSize: isSmall ? 14 : asResponsiveArray({ _: 14, sm: 20 }),
+    fontSize: isSmall ? 14 : asResponsiveArray({ _: 14, sm: 18 }),
     fontWeight: 'bold',
   });
 });

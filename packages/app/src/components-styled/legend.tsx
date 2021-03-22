@@ -2,14 +2,15 @@ import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 
-export type LegendShape = 'line' | 'square' | 'circle' | 'custom';
+export type LegendShape = 'line' | 'square' | 'circle';
 
 export type LegendItem = {
-  color: string;
   label: string;
-  shape: LegendShape;
-  shapeComponent?: ReactNode;
-};
+} & (
+  | { shape: LegendShape; color: string }
+  | { shape: 'custom'; shapeComponent: ReactNode }
+);
+
 interface LegendProps {
   items: LegendItem[];
 }
@@ -18,16 +19,21 @@ export function Legend({ items }: LegendProps) {
   return (
     <List>
       {items.map((item, i) => {
-        const { label, color, shape, shapeComponent } = item;
+        if (item.shape === 'custom') {
+          return (
+            <Item key={i}>
+              {item.label}
+              <CustomShape>{item.shapeComponent}</CustomShape>
+            </Item>
+          );
+        }
+
         return (
           <Item key={i}>
-            {label}
-            {shape === 'square' && <Square color={color} />}
-            {shape === 'line' && <Line color={color} />}
-            {shape === 'circle' && <Circle color={color} />}
-            {shape === 'custom' && shapeComponent && (
-              <CustomShape>{shapeComponent}</CustomShape>
-            )}
+            {item.label}
+            {item.shape === 'square' && <Square color={item.color} />}
+            {item.shape === 'line' && <Line color={item.color} />}
+            {item.shape === 'circle' && <Circle color={item.color} />}
           </Item>
         );
       })}
