@@ -15,7 +15,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const SafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
-  const { lastGenerated } = props;
+  const { data, lastGenerated } = props;
   const { siteText } = useIntl();
 
   return (
@@ -23,7 +23,7 @@ const SafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
       {...siteText.veiligheidsregio_index.metadata}
       lastGenerated={lastGenerated}
     >
-      <SafetyRegionLayout lastGenerated={lastGenerated} />
+      <SafetyRegionLayout data={data} lastGenerated={lastGenerated} />
     </Layout>
   );
 };
