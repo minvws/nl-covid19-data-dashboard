@@ -30,6 +30,7 @@ export function useTabInteractiveButton(label: string) {
     <SkipButton
       type="button"
       role="switch"
+      isActive={isTabInteractive}
       aria-checked={isTabInteractive ? 'true' : 'false'}
       ref={toggleButtonRef}
       onClick={() => setIsTabInteractive((x) => !x)}
@@ -46,7 +47,7 @@ export function useTabInteractiveButton(label: string) {
   } as const;
 }
 
-const SkipButton = styled.button(
+const SkipButton = styled.button<{ isActive: boolean }>((x) =>
   css({
     position: 'absolute',
     fontSize: 1,
@@ -55,17 +56,16 @@ const SkipButton = styled.button(
     px: 3,
     py: 2,
     cursor: 'pointer',
-    color: 'white',
-    bg: 'blue',
     textDecoration: 'none',
     top: -9999,
     left: -9999,
-    border: 0,
+
+    border: '1px solid',
+    borderColor: 'blue',
+    bg: x.isActive ? 'blue' : 'white',
+    color: x.isActive ? 'white' : 'blue',
 
     '&:focus': {
-      position: 'absolute',
-      outline: '2px dotted white',
-      outlineOffset: '-2px',
       top: 0,
       left: 0,
     },
