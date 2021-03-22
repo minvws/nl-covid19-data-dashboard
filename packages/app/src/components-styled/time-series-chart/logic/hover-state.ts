@@ -12,6 +12,7 @@ import { useCallback, useMemo, useRef, useState } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
 import { Padding, TimespanAnnotationConfig } from './common';
 import {
+  isVisible,
   SeriesConfig,
   SeriesDoubleValue,
   SeriesList,
@@ -154,7 +155,7 @@ export function useHoverState<T extends TimestampedValue>({
     const valuesIndex = bisect(values, pointX);
 
     const linePoints: HoveredPoint<T>[] = seriesConfig
-      .filter((x) => x.type !== 'invisible')
+      .filter(isVisible)
       .map((config, index) => {
         const seriesValue = seriesList[index][valuesIndex] as SeriesSingleValue;
 
@@ -189,7 +190,7 @@ export function useHoverState<T extends TimestampedValue>({
      * things.
      */
     const rangePoints: HoveredPoint<T>[] = seriesConfig
-      .filter((x) => x.type !== 'invisible')
+      .filter(isVisible)
       .flatMap((config, index) => {
         const seriesValue = seriesList[index][valuesIndex] as SeriesDoubleValue;
 
