@@ -57,6 +57,7 @@ import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
+import { Markdown } from '~/components-styled/markdown';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -261,9 +262,9 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                         />
                       </Box>
                     )}
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: replaceVariablesInText(
+                  <Box mb={3}>
+                    <Markdown
+                      content={replaceVariablesInText(
                         text.risiconiveaus.selecteer_toelichting,
                         {
                           last_update: formatDate(
@@ -274,9 +275,9 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                             'day-month'
                           ),
                         }
-                      ),
-                    }}
-                  />
+                      )}
+                    />
+                  </Box>
                 </Box>
               </ChoroplethTwoColumnLayout>
 
