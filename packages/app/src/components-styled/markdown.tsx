@@ -1,26 +1,29 @@
+import { ReactNode } from 'react';
 import ReactMarkdown from 'react-markdown';
 
 interface MarkdownProps {
   content: string;
 }
 
-export function Markdown({ content }: MarkdownProps) {
-  const isExternalURL = (url: string) => /^https?:\/\//.test(url);
+interface LinkProp {
+  children: ReactNode[];
+  href: string;
+}
 
-  return (
-    <ReactMarkdown
-      source={content}
-      renderers={{
-        link: (props) => (
-          <a
-            href={props.href}
-            rel="noreferrer"
-            target={isExternalURL(props.href) ? '_blank' : ''}
-          >
-            {props.children}
-          </a>
-        ),
-      }}
-    />
-  );
+const isExternalURL = (url: string) => /^https?:\/\//.test(url);
+
+const renderers = {
+  link: (props: LinkProp) => (
+    <a
+      href={props.href}
+      rel="noreferrer"
+      target={isExternalURL(props.href) ? '_blank' : ''}
+    >
+      {props.children}
+    </a>
+  ),
+};
+
+export function Markdown({ content }: MarkdownProps) {
+  return <ReactMarkdown source={content} renderers={renderers} />;
 }
