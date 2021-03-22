@@ -49,16 +49,7 @@ export function useChartDimensions<T extends HTMLElement | SVGElement>(
   initialWidth: number,
   aspectRatio: number
 ) {
-  /**
-   * The ref will be initialized from the outside by mutating the return value of this
-   * hook. This is a bit funky.
-   *
-   * @REF https://trello.com/c/i25FG3jk/548-usechartdemensions-pass-ref-as-prop
-   */
-
-  //@ts-expect-error useResizeObserver won't accept SVGElement type, but it works fine
   const [ref, { width, height }] = useElementSize<T>(initialWidth);
-
   const calculatedHeight = aspectRatio && width ? width * aspectRatio : height;
 
   return [

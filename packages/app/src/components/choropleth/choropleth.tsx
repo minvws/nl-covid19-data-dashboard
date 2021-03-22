@@ -206,7 +206,6 @@ const ChoroplethMap: <T1, T3>(
       <span id={dataDescriptionId} style={{ display: 'none' }}>
         {description}
       </span>
-      <a onFocus={(x) => x} />
       <div ref={ref}>
         <svg
           width={width}

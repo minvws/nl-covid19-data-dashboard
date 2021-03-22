@@ -30,7 +30,7 @@ const StyledSkipLinkMenu = styled.nav(
   })
 );
 
-export const SkipLink = styled.a(
+const SkipLink = styled.a(
   css({
     position: 'absolute',
     fontSize: 2,

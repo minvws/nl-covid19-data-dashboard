@@ -33,8 +33,7 @@ export function useTabInteractiveButton(label: string) {
       aria-checked={isTabInteractive ? 'true' : 'false'}
       ref={toggleButtonRef}
       onClick={() => setIsTabInteractive((x) => !x)}
-      onFocus={handleFocus}
-      onBlur={handleBlur}
+      {...anchorEventHandlers}
     >
       {label}
     </SkipButton>
@@ -69,13 +68,6 @@ const SkipButton = styled.button(
       outlineOffset: '-2px',
       top: 0,
       left: 0,
-    },
-
-    kbd: {
-      borderRadius: 1,
-      px: 2,
-      py: 1,
-      border: '1px solid white',
     },
   })
 );

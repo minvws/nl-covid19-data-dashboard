@@ -1,12 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { Layout } from '~/domain/layout/layout';
-import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
-import { useIntl } from '~/intl';
-import {
-  createGetStaticProps,
-  StaticProps,
-} from '~/static-props/create-get-static-props';
+import { createGetStaticProps } from '~/static-props/create-get-static-props';
 import { getGmData, getLastGeneratedDate } from '~/static-props/get-data';
 import { reverseRouter } from '~/utils/reverse-router';
 import { useBreakpoints } from '~/utils/useBreakpoints';
@@ -18,9 +12,7 @@ export const getStaticProps = createGetStaticProps(
   getGmData
 );
 
-const Municipality = (props: StaticProps<typeof getStaticProps>) => {
-  const { lastGenerated } = props;
-  const { siteText } = useIntl();
+const Municipality = () => {
   const router = useRouter();
   const breakpoints = useBreakpoints();
 
@@ -33,11 +25,7 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
     router.replace(route);
   }, [breakpoints.md, router]);
 
-  return (
-    <Layout {...siteText.gemeente_index.metadata} lastGenerated={lastGenerated}>
-      <MunicipalityLayout lastGenerated={lastGenerated} />
-    </Layout>
-  );
+  return null;
 };
 
 export default Municipality;

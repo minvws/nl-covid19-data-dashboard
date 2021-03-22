@@ -36,23 +36,21 @@ export function ChartContainer({
   onClick,
 }: ChartContainerProps) {
   return (
-    <AspectRatio ratio={width / height}>
-      <svg
-        width={width}
-        viewBox={`0 0 ${width} ${height}`}
-        role="img"
-        aria-labelledby={ariaLabelledBy}
-        style={{ touchAction: 'pan-y', userSelect: 'none', width: '100%' }}
-        onTouchStart={onHover}
-        onTouchMove={onHover}
-        onMouseMove={onHover}
-        onMouseLeave={onHover}
-        onClick={onClick}
-      >
-        <Group left={padding.left} top={padding.top}>
-          {children}
-        </Group>
-      </svg>
-    </AspectRatio>
+    <svg
+      width={width}
+      viewBox={`0 0 ${width} ${height}`}
+      role="img"
+      aria-labelledby={ariaLabelledBy}
+      style={{ touchAction: 'pan-y', userSelect: 'none', width: '100%' }}
+      onTouchStart={onHover}
+      onTouchMove={onHover}
+      onMouseMove={onHover}
+      onMouseLeave={onHover}
+      onClick={onClick}
+    >
+      <Group left={padding.left} top={padding.top}>
+        {children}
+      </Group>
+    </svg>
   );
 }

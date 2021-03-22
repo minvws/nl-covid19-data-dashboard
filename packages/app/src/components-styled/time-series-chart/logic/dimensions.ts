@@ -8,9 +8,9 @@ const defaultPadding: Padding = {
   bottom: 30,
   /**
    * The left padding gives room for the Y-axis labels.
-   * It's 40px by default for server-side rendered charts, to support labels
+   * for server-side rendered charts we set it to 40px in order to support labels
    * up to 4 digits (4,000).
-   * Client-side the Y-axis will be measured runtime.
+   * During run-time (client-side) the actual Y-axis width will be measured.
    */
   left: 40,
 };

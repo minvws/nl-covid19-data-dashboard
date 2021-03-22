@@ -27,11 +27,6 @@ type MunicipalityNavigationMapProps<T> = {
  * index page.
  */
 
-/**
- * @TODO IMplement anchor navigation with respect for the different targets
- * across desktop/mobile (nav etc)
- */
-
 export function MunicipalityNavigationMap<T>(
   props: MunicipalityNavigationMapProps<T>
 ) {
