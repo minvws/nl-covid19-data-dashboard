@@ -10,7 +10,6 @@
  */
 import { Group } from '@visx/group';
 import React from 'react';
-import { AspectRatio } from '~/components-styled/aspect-ratio';
 import { Padding } from '../logic';
 
 interface ChartContainerProps {

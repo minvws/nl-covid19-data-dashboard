@@ -135,119 +135,117 @@ export const ChartAxes = memo(function ChartAxes({
   ) => onHover(event, scales);
 
   return (
-    <AspectRatio ratio={width / height}>
-      <svg
-        width={width}
-        viewBox={`0 0 ${width} ${height}`}
-        role="img"
-        aria-labelledby={ariaLabelledBy}
-        css={css({ overflow: 'visible', width: '100%' })}
-      >
-        <Group left={padding.left} top={padding.top}>
-          {createComponent(
-            {
-              type: 'CustomBackground',
-              props: {
-                xScale,
-                yScale,
-                bounds,
-              },
+    <svg
+      width={width}
+      viewBox={`0 0 ${width} ${height}`}
+      role="img"
+      aria-labelledby={ariaLabelledBy}
+      css={css({ overflow: 'visible', width: '100%' })}
+    >
+      <Group left={padding.left} top={padding.top}>
+        {createComponent(
+          {
+            type: 'CustomBackground',
+            props: {
+              xScale,
+              yScale,
+              bounds,
             },
-            componentCallback
-          )}
-          {createComponent(
-            {
-              type: 'GridRows',
-              props: {
-                scale: yScale,
-                width: bounds.width,
-                // width: width,
-                numTicks: NUM_TICKS,
-                stroke: defaultColors.axis,
-              },
+          },
+          componentCallback
+        )}
+        {createComponent(
+          {
+            type: 'GridRows',
+            props: {
+              scale: yScale,
+              width: bounds.width,
+              // width: width,
+              numTicks: NUM_TICKS,
+              stroke: defaultColors.axis,
             },
-            componentCallback
-          )}
-          {createComponent(
-            {
-              type: 'AxisBottom',
-              props: {
-                scale: xScale,
-                tickValues: xScale.domain(),
-                tickFormat: formatXAxis as AnyTickFormatter,
-                top: bounds.height,
-                stroke: defaultColors.axis,
-                tickLabelProps: (x: Date) => ({
-                  fill: defaultColors.axisLabels,
-                  fontSize: 12,
-                  textAnchor:
-                    x.getTime() === startDate.getTime()
-                      ? 'start'
-                      : x.getTime() === endDate.getTime()
-                      ? 'end'
-                      : 'middle',
-                }),
-                hideTicks: true,
-              },
+          },
+          componentCallback
+        )}
+        {createComponent(
+          {
+            type: 'AxisBottom',
+            props: {
+              scale: xScale,
+              tickValues: xScale.domain(),
+              tickFormat: formatXAxis as AnyTickFormatter,
+              top: bounds.height,
+              stroke: defaultColors.axis,
+              tickLabelProps: (x: Date) => ({
+                fill: defaultColors.axisLabels,
+                fontSize: 12,
+                textAnchor:
+                  x.getTime() === startDate.getTime()
+                    ? 'start'
+                    : x.getTime() === endDate.getTime()
+                    ? 'end'
+                    : 'middle',
+              }),
+              hideTicks: true,
             },
-            componentCallback
-          )}
-          {createComponent(
-            {
-              type: 'AxisLeft',
-              props: {
-                scale: yScale,
-                numTicks: NUM_TICKS,
-                tickValues: yTickValues,
-                hideTicks: true,
-                hideAxisLine: true,
-                stroke: defaultColors.axis,
-                tickFormat: formatYAxis as AnyTickFormatter,
-                tickLabelProps: () => ({
-                  fill: defaultColors.axisLabels,
-                  fontSize: 12,
-                  dx: 0,
-                  textAnchor: 'end',
-                  verticalAnchor: 'middle',
-                }),
-              },
+          },
+          componentCallback
+        )}
+        {createComponent(
+          {
+            type: 'AxisLeft',
+            props: {
+              scale: yScale,
+              numTicks: NUM_TICKS,
+              tickValues: yTickValues,
+              hideTicks: true,
+              hideAxisLine: true,
+              stroke: defaultColors.axis,
+              tickFormat: formatYAxis as AnyTickFormatter,
+              tickLabelProps: () => ({
+                fill: defaultColors.axisLabels,
+                fontSize: 12,
+                dx: 0,
+                textAnchor: 'end',
+                verticalAnchor: 'middle',
+              }),
             },
-            componentCallback
-          )}
+          },
+          componentCallback
+        )}
 
-          {benchmark && (
-            <Group top={yScale(benchmark.value)}>
-              <Text fontSize="14px" dy={-8} fill={defaultColors.benchmark}>
-                {`${benchmark.label}: ${benchmark.value}`}
-              </Text>
-              <Line
-                stroke={defaultColors.benchmark}
-                strokeDasharray="4,3"
-                from={{ x: 0, y: 0 }}
-                to={{ x: bounds.width, y: 0 }}
-              />
-            </Group>
-          )}
+        {benchmark && (
+          <Group top={yScale(benchmark.value)}>
+            <Text fontSize="14px" dy={-8} fill={defaultColors.benchmark}>
+              {`${benchmark.label}: ${benchmark.value}`}
+            </Text>
+            <Line
+              stroke={defaultColors.benchmark}
+              strokeDasharray="4,3"
+              from={{ x: 0, y: 0 }}
+              to={{ x: bounds.width, y: 0 }}
+            />
+          </Group>
+        )}
 
-          {children(scales)}
+        {children(scales)}
 
-          {/**
-           * Render the bar on top of the trends because it captures mouse hover when you are above the trend line
-           */}
-          <Bar
-            x={0}
-            y={0}
-            width={width}
-            height={height}
-            fill="transparent"
-            onTouchStart={handleHover}
-            onTouchMove={handleHover}
-            onMouseMove={handleHover}
-            onMouseLeave={handleHover}
-          />
-        </Group>
-      </svg>
-    </AspectRatio>
+        {/**
+         * Render the bar on top of the trends because it captures mouse hover when you are above the trend line
+         */}
+        <Bar
+          x={0}
+          y={0}
+          width={width}
+          height={height}
+          fill="transparent"
+          onTouchStart={handleHover}
+          onTouchMove={handleHover}
+          onMouseMove={handleHover}
+          onMouseLeave={handleHover}
+        />
+      </Group>
+    </svg>
   );
 });
 
