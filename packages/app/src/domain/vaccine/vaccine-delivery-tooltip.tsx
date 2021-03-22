@@ -9,8 +9,8 @@ import { HoverPoint } from '~/components-styled/area-chart/components/marker';
 import { TimestampedTrendValue } from '~/components-styled/area-chart/logic';
 import { Spacer } from '~/components-styled/base';
 import { Text } from '~/components-styled/typography';
-import { AllLanguages } from '~/locale';
 import { useIntl } from '~/intl';
+import { AllLanguages } from '~/locale';
 
 export type TooltipValue = (
   | NlVaccineDeliveryValue
@@ -101,7 +101,7 @@ const TooltipList = styled.ol`
   list-style: none;
 `;
 
-const ColorIndicator = styled.span<{
+export const ColorIndicator = styled.span<{
   color?: string;
 }>`
   &::before {

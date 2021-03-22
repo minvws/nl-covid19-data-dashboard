@@ -22,6 +22,8 @@ import { TileList } from '~/components-styled/tile-list';
 import { TimeSeriesChart } from '~/components-styled/time-series-chart';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { InlineText, Text } from '~/components-styled/typography';
+import { Layout } from '~/domain/layout/layout';
+import { NationalLayout } from '~/domain/layout/national-layout';
 import { VaccineSupportTooltip } from '~/domain/vaccine/components/vaccine-support-tooltip';
 import {
   MilestonesView,
@@ -30,8 +32,12 @@ import {
 import { useVaccineDeliveryData } from '~/domain/vaccine/use-vaccine-delivery-data';
 import { useVaccineNames } from '~/domain/vaccine/use-vaccine-names';
 import { VaccineDeliveryBarChart } from '~/domain/vaccine/vaccine-delivery-bar-chart';
-import { FormatVaccinationsTooltip } from '~/domain/vaccine/vaccine-delivery-tooltip';
+import {
+  ColorIndicator,
+  FormatVaccinationsTooltip,
+} from '~/domain/vaccine/vaccine-delivery-tooltip';
 import { VaccinePageIntroduction } from '~/domain/vaccine/vaccine-page-introduction';
+import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { getVaccineMilestonesQuery } from '~/queries/vaccine-milestones-query';
 import {
@@ -44,10 +50,8 @@ import {
   getNlData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
+import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { useIntl } from '~/intl';
-import { Layout } from '~/domain/layout/layout';
-import { NationalLayout } from '~/domain/layout/national-layout';
 
 const scaledVaccineIcon = (
   <Box p={2}>
@@ -75,7 +79,7 @@ export const getStaticProps = createGetStaticProps(
 const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const { content, data, lastGenerated } = props;
 
-  const { siteText } = useIntl();
+  const { siteText, formatNumber } = useIntl();
 
   const text = siteText.vaccinaties;
   const [selectedTab, setSelectedTab] = useState(
@@ -475,108 +479,106 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             />
           </ChartTile>
 
-          {/*
-        @TODO re-enable when data is available
-
-        <ContentHeader
-          title={text.stock_and_delivery_section.title}
-          icon={scaledVaccineIcon}
-          subtitle={text.stock_and_delivery_section.description}
-          reference={text.stock_and_delivery_section.reference}
-          metadata={{
-            datumsText: text.datums,
-            dateOrRange: 0 // TODO replace dates for correct source,
-            dateOfInsertionUnix: 0 // TODO replace dates for correct source,
-            dataSources: [],
-          }}
-        />
-        
-        <TwoKpiSection>
-          <KpiTile
-            title={text.stock.title}
+          <ContentHeader
+            title={text.stock_and_delivery_section.title}
+            icon={scaledVaccineIcon}
+            subtitle={text.stock_and_delivery_section.description}
+            reference={text.stock_and_delivery_section.reference}
             metadata={{
-              date: data.vaccine_stock.last_value.date_of_insertion_unix,
-              source: text.bronnen.stock,
+              datumsText: text.datums,
+              dateOrRange: data.vaccine_stock.last_value.date_unix, // TODO replace dates for correct source,
+              dateOfInsertionUnix:
+                data.vaccine_stock.last_value.date_of_insertion_unix, // TODO replace dates for correct source,
+              dataSources: [],
             }}
-          >
-            <KpiValue absolute={data.vaccine_stock.last_value.total} />
-            <Text>{text.stock.description}</Text>
+          />
 
-            <Box as="ul" p={0}>
-              <Box as="li" display="block">
-                <ColorIndicator
-                  color={colors.data.vaccines.bio_n_tech_pfizer}
-                />
-                {replaceComponentsInText(text.stock.per_vaccine, {
-                  amount: (
-                    <strong>
-                      {formatNumber(
-                        data.vaccine_stock.last_value.bio_n_tech_pfizer
-                      )}
-                    </strong>
-                  ),
-                  label: 'BioNTech/Pfizer',
-                })}
+          <TwoKpiSection>
+            <KpiTile
+              title={text.stock.title}
+              metadata={{
+                date: data.vaccine_stock.last_value.date_of_insertion_unix,
+                source: text.bronnen.stock,
+              }}
+            >
+              <Box as="ul" p={0} width="100%">
+                <Box as="li" display="flex" width="100%" alignItems="stretch">
+                  <ColorIndicator
+                    color={colors.data.vaccines.bio_n_tech_pfizer}
+                  />
+                  <InlineText
+                    color={colors.data.vaccines.bio_n_tech_pfizer}
+                    fontWeight="bold"
+                  >
+                    BioNTech/Pfizer:
+                  </InlineText>
+                  <strong>
+                    {formatNumber(
+                      data.vaccine_stock.last_value.bio_n_tech_pfizer
+                    )}
+                  </strong>
+                </Box>
+                <Box as="li" display="block">
+                  <ColorIndicator color={colors.data.vaccines.moderna} />
+                  {replaceComponentsInText(text.stock.per_vaccine, {
+                    amount: (
+                      <strong>
+                        {formatNumber(data.vaccine_stock.last_value.moderna)}
+                      </strong>
+                    ),
+                    label: 'Moderna',
+                  })}
+                </Box>
+                <Box as="li" display="block">
+                  <ColorIndicator color={colors.data.vaccines.astra_zeneca} />
+                  {replaceComponentsInText(text.stock.per_vaccine, {
+                    amount: (
+                      <strong>
+                        {formatNumber(
+                          data.vaccine_stock.last_value.astra_zeneca
+                        )}
+                      </strong>
+                    ),
+                    label: 'AstraZeneca',
+                  })}
+                </Box>
               </Box>
-              <Box as="li" display="block">
-                <ColorIndicator color={colors.data.vaccines.moderna} />
-                {replaceComponentsInText(text.stock.per_vaccine, {
-                  amount: (
-                    <strong>
-                      {formatNumber(data.vaccine_stock.last_value.moderna)}
-                    </strong>
-                  ),
-                  label: 'Moderna',
-                })}
-              </Box>
-              <Box as="li" display="block">
-                <ColorIndicator color={colors.data.vaccines.astra_zeneca} />
-                {replaceComponentsInText(text.stock.per_vaccine, {
-                  amount: (
-                    <strong>
-                      {formatNumber(data.vaccine_stock.last_value.astra_zeneca)}
-                    </strong>
-                  ),
-                  label: 'AstraZeneca',
-                })}
-              </Box>
-            </Box>
-          </KpiTile>
+              <Text>{text.stock.description}</Text>
+            </KpiTile>
 
-          <KpiTile
-            title={replaceVariablesInText(
-              text.delivery_estimate_time_span.title,
-              {
-                weeks:
-                  data.vaccine_delivery_estimate_time_span.last_value
-                    .time_span_weeks,
-              }
-            )}
-            metadata={{
-              date:
-                data.vaccine_delivery_estimate_time_span.last_value
-                  .date_of_insertion_unix,
-              source: text.bronnen.delivery_estimate_time_span,
-            }}
-          >
-            <KpiValue
-              absolute={
-                data.vaccine_delivery_estimate_time_span.last_value.doses
-              }
-            />
-            <Text mb={4}>
-              {replaceVariablesInText(
-                text.delivery_estimate_time_span.description,
+            <KpiTile
+              title={replaceVariablesInText(
+                text.delivery_estimate_time_span.title,
                 {
                   weeks:
                     data.vaccine_delivery_estimate_time_span.last_value
                       .time_span_weeks,
                 }
               )}
-            </Text>
-          </KpiTile>
-        </TwoKpiSection>
-              */}
+              metadata={{
+                date:
+                  data.vaccine_delivery_estimate_time_span.last_value
+                    .date_of_insertion_unix,
+                source: text.bronnen.delivery_estimate_time_span,
+              }}
+            >
+              <KpiValue
+                absolute={
+                  data.vaccine_delivery_estimate_time_span.last_value.doses
+                }
+              />
+              <Text mb={4}>
+                {replaceVariablesInText(
+                  text.delivery_estimate_time_span.description,
+                  {
+                    weeks:
+                      data.vaccine_delivery_estimate_time_span.last_value
+                        .time_span_weeks,
+                  }
+                )}
+              </Text>
+            </KpiTile>
+          </TwoKpiSection>
 
           <TwoKpiSection>
             <KpiTile title={text.expected_page_additions.title}>
