@@ -114,6 +114,7 @@ export interface Municipalities {
   code: string;
   hospital_nice: MunicipalitiesHospitalNice[];
   tested_overall: MunicipalitiesTestedOverall[];
+  vaccine_coverage?: GmCollectionVaccineCoverage[];
   sewer: MunicipalitiesSewer[];
 }
 export interface MunicipalitiesHospitalNice {
@@ -128,6 +129,16 @@ export interface MunicipalitiesTestedOverall {
   gmcode: string;
   infected_per_100k: number;
   infected: number;
+  date_of_insertion_unix: number;
+}
+export interface GmCollectionVaccineCoverage {
+  partially_vaccinated: number;
+  partially_vaccinated_percentage: number;
+  fully_vaccinated: number;
+  fully_vaccinated_percentage: number;
+  partially_or_fully_vaccinated: number;
+  date_unix: number;
+  date_of_report_unix: number;
   date_of_insertion_unix: number;
 }
 export interface MunicipalitiesSewer {
@@ -1001,6 +1012,7 @@ export interface Regions {
   sewer: RegionsSewer[];
   behavior: RegionsBehavior[];
   disability_care: RegionsDisabilityCare[];
+  vaccine_coverage?: VrCollectionVaccineCoverage[];
   elderly_at_home: RegionsElderlyAtHome[];
 }
 export interface RegionsHospitalNice {
@@ -1093,6 +1105,16 @@ export interface RegionsDisabilityCare {
   date_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;
+}
+export interface VrCollectionVaccineCoverage {
+  partially_vaccinated: number;
+  partially_vaccinated_percentage: number;
+  fully_vaccinated: number;
+  fully_vaccinated_percentage: number;
+  partially_or_fully_vaccinated: number;
+  date_unix: number;
+  date_of_report_unix: number;
+  date_of_insertion_unix: number;
 }
 export interface RegionsElderlyAtHome {
   positive_tested_daily: number;

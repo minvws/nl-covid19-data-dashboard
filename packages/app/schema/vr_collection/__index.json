@@ -88,6 +88,14 @@
         "$ref": "disability_care.json"
       }
     },
+    "vaccine_coverage": {
+      "type": "array",
+      "minItems": 25,
+      "maxItems": 25,
+      "items": {
+        "$ref": "vaccine_coverage.json"
+      }
+    },
     "elderly_at_home": {
       "type": "array",
       "minItems": 25,

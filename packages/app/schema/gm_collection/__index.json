@@ -42,6 +42,13 @@
         "$ref": "tested_overall.json"
       }
     },
+    "vaccine_coverage": {
+      "type": "array",
+      "maxItems": 355,
+      "items": {
+        "$ref": "vaccine_coverage.json"
+      }
+    },
     "sewer": {
       "type": "array",
       "maxItems": 355,
