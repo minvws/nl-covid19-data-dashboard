@@ -126,6 +126,9 @@
     "corona_melder_app": {
       "$ref": "corona_melder_app.json"
     },
+    "vaccine_coverage": {
+      "$ref": "vaccine_coverage.json"
+    },
     "vaccine_delivery": {
       "$ref": "vaccine_delivery.json"
     },
