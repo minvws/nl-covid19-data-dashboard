@@ -2,7 +2,7 @@ import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { ArrowIconRight } from '~/components-styled/arrow-icon';
-import siteText from '~/locale';
+import { useIntl } from '~/intl';
 import { Article, Block, ImageBlock } from '~/types/cms';
 import { Link } from '~/utils/link';
 import { BackgroundImage } from './background-image';
@@ -24,6 +24,7 @@ type ArticleTeaserProps = {
 
 export function ArticleTeaser(props: ArticleTeaserProps) {
   const { title, slug, summary, cover, coverSizes } = props;
+  const { siteText } = useIntl();
 
   return (
     <Link passHref href={`/artikelen/${slug}`}>

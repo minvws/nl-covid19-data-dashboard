@@ -16,7 +16,6 @@ import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
 import { HighlightTeaserProps } from '~/components-styled/highlight-teaser';
 import { MaxWidth } from '~/components-styled/max-width';
-import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
 import { Heading, Text } from '~/components-styled/typography';
 import { VisuallyHidden } from '~/components-styled/visually-hidden';
@@ -29,7 +28,6 @@ import { createSelectRegionHandler } from '~/components/choropleth/select-handle
 import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
 import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/create-positive-tested-people-regional-tooltip';
 import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
-import { FCWithLayout, getDefaultLayout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import { ChoroplethTwoColumnLayout } from '~/domain/topical/choropleth-two-column-layout';
 import { Search } from '~/domain/topical/components/search';
@@ -39,27 +37,29 @@ import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-e
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
 import { Sitemap } from '~/domain/topical/sitemap';
-import { getDataSitemap } from '~/domain/topical/sitemap/utils';
+import { useDataSitemap } from '~/domain/topical/sitemap/utils';
 import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
 import { TopicalVaccineTile } from '~/domain/topical/topical-vaccine-tile';
-import { topicalPageQuery } from '~/queries/topical-page-query';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import { getTopicalPageQuery } from '~/queries/topical-page-query';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
   getNlData,
-  getText,
 } from '~/static-props/get-data';
 import { createDate } from '~/utils/createDate';
-import { formatDate } from '~/utils/formatDate';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { Layout } from '~/domain/layout/layout';
+import { useIntl } from '~/intl';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getText,
   createGetChoroplethData({
     vr: ({ escalation_levels, tested_overall }) => ({
       escalation_levels,
@@ -71,7 +71,7 @@ export const getStaticProps = createGetStaticProps(
     articles: ArticleSummary[];
     editorial: EditorialSummary;
     highlight: HighlightTeaserProps;
-  }>(topicalPageQuery),
+  }>(getTopicalPageQuery),
   () => {
     const data = getNlData();
 
@@ -91,25 +91,29 @@ export const getStaticProps = createGetStaticProps(
   }
 );
 
-const Home: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { text: siteText, data, choropleth, content, lastGenerated } = props;
+const Home = (props: StaticProps<typeof getStaticProps>) => {
+  const { data, choropleth, content, lastGenerated } = props;
   const router = useRouter();
-  const text = siteText.nationaal_actueel;
 
   const dataInfectedTotal = data.tested_overall;
   const dataHospitalIntake = data.hospital_nice;
-  const dataSitemap = getDataSitemap('landelijk');
+  const dataSitemap = useDataSitemap('landelijk');
+
+  const { siteText, formatDate } = useIntl();
+  const text = siteText.nationaal_actueel;
 
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>(
     'municipal'
   );
 
+  const metadata = {
+    ...siteText.nationaal_metadata,
+    title: text.metadata.title,
+    description: text.metadata.description,
+  };
+
   return (
-    <>
-      <SEOHead
-        title={text.metadata.title}
-        description={text.metadata.description}
-      />
+    <Layout {...metadata} lastGenerated={lastGenerated}>
       <Box bg="white" pb={4}>
         {/**
          * Since now the sections have a H2 heading I think we need to include
@@ -371,10 +375,8 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
           </TileList>
         </MaxWidth>
       </Box>
-    </>
+    </Layout>
   );
 };
-
-Home.getLayout = getDefaultLayout();
 
 export default Home;

@@ -8,8 +8,7 @@ import { EscalationLevelIcon } from '~/components-styled/escalation-level-icon';
 import { Text } from '~/components-styled/typography';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
 import { EscalationLevel } from '~/domain/restrictions/type';
-import text from '~/locale/index';
-import { formatDateFromSeconds } from '~/utils/formatDate';
+import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { RegionSelectionHandler } from '../../select-handlers/create-select-region-handler';
 
@@ -17,18 +16,21 @@ export const escalationTooltip = (selectHandler: RegionSelectionHandler) => {
   return (context: SafetyRegionProperties & EscalationLevels): ReactNode => {
     const level = context.level as EscalationLevel;
 
+    const { formatDateFromSeconds, siteText } = useIntl();
+
     const onSelect = (event: React.MouseEvent<HTMLElement>) => {
       event.stopPropagation();
       selectHandler(context.vrcode);
     };
 
-    const escalationText = ((text.escalatie_niveau.types as unknown) as Record<
+    const escalationText = ((siteText.escalatie_niveau
+      .types as unknown) as Record<
       EscalationLevel,
       { titel: string; valid_from: string }
     >)[level];
 
     const validFromText = replaceVariablesInText(
-      text.escalatie_niveau.valid_from,
+      siteText.escalatie_niveau.valid_from,
       {
         validFrom: formatDateFromSeconds(context.valid_from_unix, 'day-month'),
       }

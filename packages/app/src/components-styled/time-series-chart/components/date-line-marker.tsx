@@ -6,8 +6,8 @@ import {
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { colors } from '~/style/theme';
-import { formatDateFromSeconds } from '~/utils/formatDate';
 import { HoveredPoint } from '../logic';
+import { useIntl } from '~/intl';
 
 type LineProps = {
   color: string;
@@ -65,6 +65,7 @@ export function DateLineMarker<T extends TimestampedValue>({
   value,
 }: DateLineMarkerProps<T>) {
   const isDateSpan = isDateSpanValue(value);
+  const { formatDateFromSeconds } = useIntl();
 
   return (
     <Container

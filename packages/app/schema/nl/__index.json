@@ -132,7 +132,10 @@
     "vaccine_delivery_estimate": {
       "$ref": "vaccine_delivery_estimate.json"
     },
-    "vaccine_delivery_estimate_time_span":{
+    "vaccine_delivery_per_supplier": {
+      "$ref": "vaccine_delivery_per_supplier.json"
+    },
+    "vaccine_delivery_estimate_time_span": {
       "$ref": "vaccine_delivery_estimate_time_span.json"
     },
     "vaccine_administered": {
