@@ -101,7 +101,7 @@ const TooltipList = styled.ol`
   list-style: none;
 `;
 
-export const ColorIndicator = styled.span<{
+const ColorIndicator = styled.span<{
   color?: string;
 }>`
   &::before {

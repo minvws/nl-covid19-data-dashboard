@@ -7,6 +7,7 @@ import {
 import { css } from '@styled-system/css';
 import { ParentSize } from '@visx/responsive';
 import { useState } from 'react';
+import styled from 'styled-components';
 import VaccinatiesIcon from '~/assets/vaccinaties.svg';
 import { AreaChart } from '~/components-styled/area-chart';
 import { ArticleStrip } from '~/components-styled/article-strip';
@@ -17,6 +18,7 @@ import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { Legend } from '~/components-styled/legend';
+import { Markdown } from '~/components-styled/markdown';
 import { RadioGroup } from '~/components-styled/radio-group';
 import { TileList } from '~/components-styled/tile-list';
 import { TimeSeriesChart } from '~/components-styled/time-series-chart';
@@ -32,10 +34,7 @@ import {
 import { useVaccineDeliveryData } from '~/domain/vaccine/use-vaccine-delivery-data';
 import { useVaccineNames } from '~/domain/vaccine/use-vaccine-names';
 import { VaccineDeliveryBarChart } from '~/domain/vaccine/vaccine-delivery-bar-chart';
-import {
-  ColorIndicator,
-  FormatVaccinationsTooltip,
-} from '~/domain/vaccine/vaccine-delivery-tooltip';
+import { FormatVaccinationsTooltip } from '~/domain/vaccine/vaccine-delivery-tooltip';
 import { VaccinePageIntroduction } from '~/domain/vaccine/vaccine-page-introduction';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
@@ -50,9 +49,7 @@ import {
   getNlData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
-import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { Markdown } from '~/components-styled/markdown';
 
 const scaledVaccineIcon = (
   <Box p={2}>
@@ -497,47 +494,25 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 source: text.bronnen.stock,
               }}
             >
-              <Box as="ul" p={0} width="100%">
-                <Box as="li" display="flex" width="100%" alignItems="stretch">
-                  <ColorIndicator
-                    color={colors.data.vaccines.bio_n_tech_pfizer}
-                  />
-                  <InlineText
-                    color={colors.data.vaccines.bio_n_tech_pfizer}
-                    fontWeight="bold"
-                  >
-                    BioNTech/Pfizer:
-                  </InlineText>
-                  <strong>
-                    {formatNumber(
-                      data.vaccine_stock.last_value.bio_n_tech_pfizer
-                    )}
-                  </strong>
-                </Box>
-                <Box as="li" display="block">
-                  <ColorIndicator color={colors.data.vaccines.moderna} />
-                  {replaceComponentsInText(text.stock.per_vaccine, {
-                    amount: (
-                      <strong>
-                        {formatNumber(data.vaccine_stock.last_value.moderna)}
-                      </strong>
-                    ),
-                    label: 'Moderna',
-                  })}
-                </Box>
-                <Box as="li" display="block">
-                  <ColorIndicator color={colors.data.vaccines.astra_zeneca} />
-                  {replaceComponentsInText(text.stock.per_vaccine, {
-                    amount: (
-                      <strong>
-                        {formatNumber(
-                          data.vaccine_stock.last_value.astra_zeneca
-                        )}
-                      </strong>
-                    ),
-                    label: 'AstraZeneca',
-                  })}
-                </Box>
+              <Box as="ul" p={0} width="50%">
+                <VaccineStockRow
+                  formatNumber={formatNumber}
+                  color={colors.data.vaccines.bio_n_tech_pfizer}
+                  productName="BioNTech/Pfizer"
+                  value={data.vaccine_stock.last_value.bio_n_tech_pfizer}
+                />
+                <VaccineStockRow
+                  formatNumber={formatNumber}
+                  color={colors.data.vaccines.moderna}
+                  productName="Moderna"
+                  value={data.vaccine_stock.last_value.moderna}
+                />
+                <VaccineStockRow
+                  formatNumber={formatNumber}
+                  color={colors.data.vaccines.astra_zeneca}
+                  productName="AstraZeneca"
+                  value={data.vaccine_stock.last_value.astra_zeneca}
+                />
               </Box>
               <Text>{text.stock.description}</Text>
             </KpiTile>
@@ -658,17 +633,41 @@ function HatchedSquare() {
   );
 }
 
-// @TODO re-enable when data is available
-//
-// const ColorIndicator = styled.span<{
-//   color?: string;
-// }>`
-//   content: '';
-//   display: ${(x) => (x.color ? 'inline-block' : 'none')};
-//   height: 8px;
-//   width: 8px;
-//   border-radius: 50%;
-//   background: ${(x) => x.color || 'black'};
-//   margin-right: 0.5em;
-//   flex-shrink: 0;
-// `;
+const ColorIndicator = styled.span<{
+  color?: string;
+}>`
+  content: '';
+  display: ${(x) => (x.color ? 'inline-block' : 'none')};
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  background: ${(x) => x.color || 'black'};
+  margin-right: 0.5em;
+  flex-shrink: 0;
+`;
+
+type VaccineStockRowProps = {
+  color: string;
+  productName: string;
+  value: number | undefined;
+  formatNumber: (value: number) => string;
+};
+
+function VaccineStockRow(props: VaccineStockRowProps) {
+  const { color, productName, value, formatNumber } = props;
+  return (
+    <Box as="li" display="flex" flexDirection="row" alignItems="stretch">
+      <Box>
+        <ColorIndicator color={color} />
+      </Box>
+      <Box flex={1}>
+        <InlineText color={color} fontWeight="bold">
+          {productName}:
+        </InlineText>
+      </Box>
+      <Box marginLeft="auto">
+        <strong>{formatNumber(value)}</strong>
+      </Box>
+    </Box>
+  );
+}
