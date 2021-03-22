@@ -6,7 +6,7 @@ interface MarkdownProps {
 }
 
 interface LinkProps {
-  children: ReactNode[];
+  children: ReactNode;
   href: string;
 }
 
