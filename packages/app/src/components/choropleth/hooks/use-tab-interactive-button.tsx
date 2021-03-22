@@ -9,7 +9,7 @@ export function useTabInteractiveButton(label: string) {
   const timeoutRef = useRef<number>();
 
   useHotkey('escape', () => toggleButtonRef.current?.focus(), {
-    disabled: !isTabInteractive,
+    isDisabled: !isTabInteractive,
   });
 
   const handleFocus = useCallback(() => clearTimeout(timeoutRef.current), []);
