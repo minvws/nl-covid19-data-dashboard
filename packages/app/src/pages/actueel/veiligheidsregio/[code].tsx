@@ -63,6 +63,7 @@ import {
   RegionsTestedOverall,
   SafetyRegionProperties,
 } from '@corona-dashboard/common';
+import { Markdown } from '~/components-styled/markdown';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -296,9 +297,9 @@ const TopicalSafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
                         />
                       </Box>
                     )}
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: replaceVariablesInText(
+                  <Box mb={3}>
+                    <Markdown
+                      content={replaceVariablesInText(
                         text.risiconiveaus.selecteer_toelichting,
                         {
                           last_update: formatDate(
@@ -307,9 +308,9 @@ const TopicalSafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
                             'day-month'
                           ),
                         }
-                      ),
-                    }}
-                  />
+                      )}
+                    />
+                  </Box>
                 </Box>
               </ChoroplethTwoColumnLayout>
 

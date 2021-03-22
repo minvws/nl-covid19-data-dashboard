@@ -1,11 +1,19 @@
+import {
+  EscalationLevels,
+  SafetyRegionProperties,
+} from '@corona-dashboard/common';
 import { Box } from '~/components-styled/base';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
+import { Markdown } from '~/components-styled/markdown';
 import { TileList } from '~/components-styled/tile-list';
 import { WarningTile } from '~/components-styled/warning-tile';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { EscalationRegionalTooltip } from '~/components/choropleth/tooltips/region/escalation-regional-tooltip';
 import { SafetyRegionComboBox } from '~/domain/layout/components/safety-region-combo-box';
+import { Layout } from '~/domain/layout/layout';
+import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
+import { useIntl } from '~/intl';
 import {
   createGetStaticProps,
   StaticProps,
@@ -18,13 +26,6 @@ import { createDate } from '~/utils/createDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { reverseRouter } from '~/utils/reverse-router';
 import { useBreakpoints } from '~/utils/useBreakpoints';
-import { useIntl } from '~/intl';
-import { Layout } from '~/domain/layout/layout';
-import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
-import {
-  EscalationLevels,
-  SafetyRegionProperties,
-} from '@corona-dashboard/common';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -65,9 +66,9 @@ const SafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
             title={siteText.veiligheidsregio_index.selecteer_titel}
             description={
               <>
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: replaceVariablesInText(
+                <Box mb={3}>
+                  <Markdown
+                    content={replaceVariablesInText(
                       siteText.veiligheidsregio_index.selecteer_toelichting,
                       {
                         last_update: formatDate(
@@ -78,9 +79,9 @@ const SafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
                           'day-month'
                         ),
                       }
-                    ),
-                  }}
-                />
+                    )}
+                  />
+                </Box>
                 <EscalationMapLegenda
                   data={choropleth.vr}
                   metricName="escalation_levels"

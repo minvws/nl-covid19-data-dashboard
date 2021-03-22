@@ -6,7 +6,6 @@ import { AreaStack, Bar } from '@visx/shape';
 import { ScaleLinear, ScaleTime } from 'd3-scale';
 import { MouseEvent, ReactNode, TouchEvent } from 'react';
 import styled from 'styled-components';
-import { AspectRatio } from '~/components-styled/aspect-ratio';
 import { LegendShape } from '~/components-styled/legend';
 import {
   ChartBounds,

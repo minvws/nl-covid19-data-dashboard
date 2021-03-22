@@ -47,6 +47,7 @@ import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { useIntl } from '~/intl';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
+import { Markdown } from '~/components-styled/markdown';
 
 const scaledVaccineIcon = (
   <Box p={2}>
@@ -150,12 +151,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                     display="flex"
                     flexDirection={{ _: 'column', lg: 'row' }}
                   >
-                    <Box flex={{ lg: '1 1 50%' }}>
-                      <Box
-                        mb={3}
-                        dangerouslySetInnerHTML={{
-                          __html: text.gezette_prikken.tab_first.description,
-                        }}
+                    <Box flex={{ lg: '1 1 50%' }} mb={3}>
+                      <Markdown
+                        content={text.gezette_prikken.tab_first.description}
                       />
                     </Box>
                     <Box flex={{ lg: '1 1 50%' }} ml={{ lg: 4 }}>
@@ -222,10 +220,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                     flexDirection={{ _: 'column', lg: 'row' }}
                   >
                     <Box flex={{ lg: '1 1 50%' }}>
-                      <Box
-                        dangerouslySetInnerHTML={{
-                          __html: text.gezette_prikken.tab_second.description,
-                        }}
+                      <Markdown
+                        content={text.gezette_prikken.tab_second.description}
                       />
                     </Box>
                     <Box flex={{ lg: '1 1 50%' }} ml={{ lg: 4 }}>

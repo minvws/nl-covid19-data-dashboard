@@ -14,7 +14,6 @@ import {
   TouchEvent,
   useCallback,
 } from 'react';
-import { AspectRatio } from '~/components-styled/aspect-ratio';
 import { colors } from '~/style/theme';
 import { useIntl } from '~/intl';
 

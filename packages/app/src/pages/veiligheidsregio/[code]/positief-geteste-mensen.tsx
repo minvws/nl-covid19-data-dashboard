@@ -1,4 +1,7 @@
-import css from '@styled-system/css';
+import {
+  MunicipalitiesTestedOverall,
+  MunicipalityProperties,
+} from '@corona-dashboard/common';
 import Afname from '~/assets/afname.svg';
 import Getest from '~/assets/test.svg';
 import { Anchor } from '~/components-styled/anchor';
@@ -10,14 +13,18 @@ import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { Markdown } from '~/components-styled/markdown';
 import { PageBarScale } from '~/components-styled/page-barscale';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { Heading, Text } from '~/components-styled/typography';
+import { Heading, InlineText, Text } from '~/components-styled/typography';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
 import regionCodeToMunicipalCodeLookup from '~/data/regionCodeToMunicipalCodeLookup';
+import { Layout } from '~/domain/layout/layout';
+import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
+import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
@@ -30,17 +37,10 @@ import {
   getVrData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
-import { replaceKpisInText } from '~/utils/replaceKpisInText';
+import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { reverseRouter } from '~/utils/reverse-router';
 export { getStaticPaths } from '~/static-paths/vr';
-import { useIntl } from '~/intl';
-import { Layout } from '~/domain/layout/layout';
-import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
-import {
-  MunicipalitiesTestedOverall,
-  MunicipalityProperties,
-} from '@corona-dashboard/common';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -125,27 +125,17 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 absolute={Math.round(lastValue.infected)}
                 difference={data.difference.tested_overall__infected}
               />
-
-              <Text
-                as="div"
-                dangerouslySetInnerHTML={{ __html: text.kpi_toelichting }}
-              />
+              <Markdown content={text.kpi_toelichting} />
 
               <Box>
                 <Heading level={4} fontSize={'1.2em'} mt={'1.5em'} mb={0}>
-                  <span
-                    css={css({ '& > span': { color: 'data.primary' } })}
-                    dangerouslySetInnerHTML={{
-                      __html: replaceKpisInText(ggdText.summary_title, [
-                        {
-                          name: 'percentage',
-                          value: `${formatPercentage(
-                            ggdAverageLastValue.infected_percentage
-                          )}%`,
-                        },
-                      ]),
-                    }}
-                  />
+                  {replaceComponentsInText(ggdText.summary_title, {
+                    percentage: (
+                      <InlineText color="data.primary">{`${formatPercentage(
+                        ggdAverageLastValue.infected_percentage
+                      )}%`}</InlineText>
+                    ),
+                  })}
                 </Heading>
                 <Text mt={0} lineHeight={1}>
                   <Anchor name="ggd" text={ggdText.summary_link_cta} />
@@ -302,25 +292,22 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 }
               />
               <Text>{ggdText.positief_getest_week_uitleg}</Text>
-              <Text>
-                <strong
-                  css={css({ '& > span': { color: 'data.primary' } })}
-                  dangerouslySetInnerHTML={{
-                    __html: replaceKpisInText(
-                      ggdText.positief_getest_getest_week_uitleg,
-                      [
-                        {
-                          name: 'numerator',
-                          value: formatNumber(ggdAverageLastValue.infected),
-                        },
-                        {
-                          name: 'denominator',
-                          value: formatNumber(ggdAverageLastValue.tested_total),
-                        },
-                      ]
+              <Text fontWeight="bold">
+                {replaceComponentsInText(
+                  ggdText.positief_getest_getest_week_uitleg,
+                  {
+                    numerator: (
+                      <InlineText color="data.primary">
+                        {formatNumber(ggdAverageLastValue.infected)}
+                      </InlineText>
                     ),
-                  }}
-                />
+                    denominator: (
+                      <InlineText color="data.primary">
+                        {formatNumber(ggdAverageLastValue.tested_total)}
+                      </InlineText>
+                    ),
+                  }
+                )}
               </Text>
             </KpiTile>
           </TwoKpiSection>

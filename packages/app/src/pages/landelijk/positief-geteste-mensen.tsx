@@ -24,10 +24,11 @@ import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { Markdown } from '~/components-styled/markdown';
 import { PageBarScale } from '~/components-styled/page-barscale';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { Heading, Text } from '~/components-styled/typography';
+import { Heading, InlineText, Text } from '~/components-styled/typography';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
@@ -50,7 +51,6 @@ import {
 import { colors } from '~/style/theme';
 import { assert } from '~/utils/assert';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { reverseRouter } from '~/utils/reverse-router';
 
@@ -156,11 +156,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 difference={data.difference.tested_overall__infected}
               />
 
-              <Text
-                as="div"
-                css={css({ mb: 4 })}
-                dangerouslySetInnerHTML={{ __html: text.kpi_toelichting }}
-              />
+              <Box mb={4}>
+                <Markdown content={text.kpi_toelichting} />
+              </Box>
+
               <Box>
                 <Heading level={4} fontSize={'1.2em'} mb={0}>
                   {replaceComponentsInText(ggdText.summary_text, {
@@ -377,27 +376,23 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 }
               />
               <Text>{ggdText.positief_getest_week_uitleg}</Text>
-              <Text>
-                <strong
-                  css={css({ '& > span': { color: 'data.primary' } })}
-                  dangerouslySetInnerHTML={{
-                    __html: replaceKpisInText(
-                      ggdText.positief_getest_getest_week_uitleg,
-                      [
-                        {
-                          name: 'numerator',
-                          value: formatNumber(dataGgdAverageLastValue.infected),
-                        },
-                        {
-                          name: 'denominator',
-                          value: formatNumber(
-                            dataGgdAverageLastValue.tested_total
-                          ),
-                        },
-                      ]
+
+              <Text fontWeight="bold">
+                {replaceComponentsInText(
+                  ggdText.positief_getest_getest_week_uitleg,
+                  {
+                    numerator: (
+                      <InlineText color="data.primary">
+                        {formatNumber(dataGgdAverageLastValue.infected)}
+                      </InlineText>
                     ),
-                  }}
-                />
+                    denominator: (
+                      <InlineText color="data.primary">
+                        {formatNumber(dataGgdAverageLastValue.tested_total)}
+                      </InlineText>
+                    ),
+                  }
+                )}
               </Text>
             </KpiTile>
           </TwoKpiSection>
