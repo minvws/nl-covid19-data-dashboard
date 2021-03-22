@@ -120,7 +120,7 @@ export function PageBarScale<T>({
       <BarScale
         min={config.barScale.min}
         max={config.barScale.max}
-        signaalwaarde={config.barScale.signaalwaarde}
+        signaalwaarde={config.common.signaalwaarde}
         screenReaderText={text.barscale_screenreader_text}
         value={propertyValue}
         id={uniqueId}

@@ -21,7 +21,6 @@ import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
-import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { PageBarScale } from '~/components-styled/page-barscale';
 import { TileList } from '~/components-styled/tile-list';
 import { TimeSeriesChart } from '~/components-styled/time-series-chart';
@@ -75,7 +74,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     siteText,
     formatNumber,
     formatPercentage,
-    formatDateFromMilliseconds,
     formatDateFromSeconds,
   } = useIntl();
 
@@ -289,21 +287,22 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                   {
                     type: 'area',
                     metricProperty: 'infected_per_100k',
-                    // @TODO move to lokalize
-                    label: 'Positief getest per 100.000',
+                    label:
+                      siteText.positief_geteste_personen.tooltip_labels
+                        .infected_per_100k,
                     color: colors.data.primary,
                   },
                   {
                     type: 'invisible',
                     metricProperty: 'infected',
-                    // @TODO move to lokalize
-                    label: 'Totaal',
+                    label: siteText.common.totaal,
                   },
                 ]}
                 dataOptions={{
+                  isPercentage: true,
                   benchmark: {
                     value: 7,
-                    label: siteText.common.barScale.signaalwaarde,
+                    label: siteText.common.signaalwaarde,
                   },
                 }}
               />
@@ -425,8 +424,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                     type: 'area',
                     metricProperty: 'infected_percentage',
                     color: colors.data.primary,
-                    // @TODO lokalize
-                    label: 'Positieve testen',
+                    label:
+                      siteText.positief_geteste_personen.tooltip_labels
+                        .infected_percentage,
                   },
                 ]}
                 dataOptions={{ isPercentage: true }}
@@ -452,22 +452,25 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                     metricProperty: 'tested_total',
                     color: colors.data.secondary,
                     label: ggdText.linechart_totaltests_legend_label,
-                    // @TODO lokalize
-                    shortLabel: 'Totaal aantal testen',
+                    shortLabel:
+                      siteText.positief_geteste_personen.tooltip_labels
+                        .tested_total,
                   },
                   {
                     type: 'line',
                     metricProperty: 'infected',
                     color: colors.data.primary,
                     label: ggdText.linechart_positivetests_legend_label,
-                    // @TODO lokalize
-                    shortLabel: 'Aantal positieve testen',
+                    shortLabel:
+                      siteText.positief_geteste_personen.tooltip_labels
+                        .infected,
                   },
                   {
                     type: 'invisible',
                     metricProperty: 'infected_percentage',
-                    // @TODO lokalize
-                    label: 'Percentage positieve testen',
+                    label:
+                      siteText.positief_geteste_personen.tooltip_labels
+                        .infected_percentage,
                     isPercentage: true,
                   },
                 ]}
