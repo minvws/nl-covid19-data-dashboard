@@ -16,7 +16,7 @@ const renderers = {
   link: (props: LinkProp) => (
     <a
       href={props.href}
-      rel="noreferrer"
+      rel="noreferrer noopener"
       target={isExternalURL(props.href) ? '_blank' : ''}
     >
       {props.children}
