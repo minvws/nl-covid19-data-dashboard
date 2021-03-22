@@ -49,6 +49,7 @@ import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
+import { Markdown } from '~/components-styled/markdown'
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -155,11 +156,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 difference={data.difference.tested_overall__infected}
               />
 
-              <Text
-                as="div"
-                css={css({ mb: 4 })}
-                dangerouslySetInnerHTML={{ __html: text.kpi_toelichting }}
-              />
+              <Box mb={4}>
+                <Markdown content={text.kpi_toelichting}/>
+              </Box>
+
               <Box>
                 <Heading level={4} fontSize={'1.2em'} mb={0}>
                   {replaceComponentsInText(ggdText.summary_text, {
@@ -393,6 +393,8 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 }
               />
               <Text>{ggdText.positief_getest_week_uitleg}</Text>
+
+              
               <Text>
                 <strong
                   css={css({ '& > span': { color: 'data.primary' } })}

@@ -38,6 +38,7 @@ export { getStaticPaths } from '~/static-paths/vr';
 import { useIntl } from '~/intl';
 import { Layout } from '~/domain/layout/layout';
 import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
+import { Markdown } from '~/components-styled/markdown'
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
