@@ -86,8 +86,9 @@ export function useHoverState({
         index,
         point: {
           value,
-          x: xScale(value.__date_unix) + xScale.bandwidth() / 2,
-          y: yScale(value.__value),
+          markerX: xScale(value.__date_unix) + xScale.bandwidth() / 2,
+          x: mousePoint?.x || 0,
+          y: mousePoint?.y || 0,
         },
       });
     },
