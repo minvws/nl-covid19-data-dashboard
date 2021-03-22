@@ -32,7 +32,7 @@ export function useHitSelection({
       setFocusIndex(nextIndex);
       maybeScrollIntoView(focusRef.current);
     },
-    { allowRepeat: true, disabled: !isEnabled }
+    { allowRepeat: true, isDisabled: !isEnabled }
   );
 
   useHotkey(
@@ -43,7 +43,7 @@ export function useHitSelection({
       setFocusIndex(nextIndex);
       maybeScrollIntoView(focusRef.current);
     },
-    { allowRepeat: true, disabled: !isEnabled }
+    { allowRepeat: true, isDisabled: !isEnabled }
   );
 
   useHotkey(
@@ -51,7 +51,7 @@ export function useHitSelection({
     () => {
       focusRef.current && onSelectHit(focusIndex, false);
     },
-    { allowRepeat: true, disabled: !isEnabled }
+    { allowRepeat: true, isDisabled: !isEnabled }
   );
 
   useHotkey(
@@ -59,7 +59,7 @@ export function useHitSelection({
     () => {
       focusRef.current && onSelectHit(focusIndex, true);
     },
-    { allowRepeat: true, disabled: !isEnabled }
+    { allowRepeat: true, isDisabled: !isEnabled }
   );
 
   useHotkey(
@@ -67,7 +67,7 @@ export function useHitSelection({
     () => {
       focusRef.current && onSelectHit(focusIndex, true);
     },
-    { allowRepeat: true, disabled: !isEnabled }
+    { allowRepeat: true, isDisabled: !isEnabled }
   );
 
   return { focusIndex, setFocusIndex, focusRef };

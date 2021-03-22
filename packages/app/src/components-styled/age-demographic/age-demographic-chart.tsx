@@ -87,13 +87,14 @@ function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
     <Box>
       <svg
         width={width}
-        height={height}
+        viewBox={`0 0 ${width} ${height}`}
         role="img"
         id="age-demographic-chart"
         aria-label={text.accessibility_description}
         tabIndex={0}
         onKeyUp={(event) => onKeyInput(event)}
         css={css({
+          width: '100%',
           overflow: 'visible',
           '&:focus': {
             outline: 'none',

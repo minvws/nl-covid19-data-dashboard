@@ -1,4 +1,7 @@
-import { useRouter } from 'next/router';
+import {
+  MunicipalitiesTestedOverall,
+  MunicipalityProperties,
+} from '@corona-dashboard/common';
 import Afname from '~/assets/afname.svg';
 import Getest from '~/assets/test.svg';
 import { Anchor } from '~/components-styled/anchor';
@@ -10,15 +13,18 @@ import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { Markdown } from '~/components-styled/markdown';
 import { PageBarScale } from '~/components-styled/page-barscale';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components-styled/typography';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
-import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
+import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
 import regionCodeToMunicipalCodeLookup from '~/data/regionCodeToMunicipalCodeLookup';
+import { Layout } from '~/domain/layout/layout';
+import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
+import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
@@ -31,13 +37,10 @@ import {
   getVrData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-export { getStaticPaths } from '~/static-paths/vr';
-import { useIntl } from '~/intl';
-import { Layout } from '~/domain/layout/layout';
-import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
-import { Markdown } from '~/components-styled/markdown';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { useReverseRouter } from '~/utils/use-reverse-router';
+export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -63,11 +66,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     formatDateFromSeconds,
     formatPercentage,
   } = useIntl();
+  const reverseRouter = useReverseRouter();
 
   const text = siteText.veiligheidsregio_positief_geteste_personen;
   const ggdText = siteText.veiligheidsregio_positief_geteste_personen_ggd;
-
-  const router = useRouter();
 
   const lastValue = data.tested_overall.last_value;
   const ggdAverageLastValue = data.tested_ggd_average.last_value;
@@ -88,7 +90,11 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <SafetyRegionLayout data={data} lastGenerated={lastGenerated}>
+      <SafetyRegionLayout
+        data={data}
+        safetyRegionName={safetyRegionName}
+        lastGenerated={lastGenerated}
+      >
         <TileList>
           <ContentHeader
             category={siteText.veiligheidsregio_layout.headings.besmettingen}
@@ -231,17 +237,12 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               selectedCode={selectedMunicipalCode}
               highlightSelection={false}
               data={choropleth.gm}
+              getLink={reverseRouter.gm.positiefGetesteMensen}
               metricName="tested_overall"
               metricProperty="infected_per_100k"
-              tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
-                siteText.choropleth_tooltip.positive_tested_people,
-                regionThresholds.tested_overall.infected_per_100k,
-                createSelectMunicipalHandler(router, 'positief-geteste-mensen')
-              )}
-              onSelect={createSelectMunicipalHandler(
-                router,
-                'positief-geteste-mensen'
-              )}
+              tooltipContent={(
+                context: MunicipalityProperties & MunicipalitiesTestedOverall
+              ) => <PositiveTestedPeopleMunicipalTooltip context={context} />}
             />
           </ChoroplethTile>
 

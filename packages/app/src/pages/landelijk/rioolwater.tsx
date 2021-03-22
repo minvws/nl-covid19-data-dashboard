@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 import ExperimenteelIcon from '~/assets/experimenteel.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
@@ -17,10 +16,8 @@ import { WarningTile } from '~/components-styled/warning-tile';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
-import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
-import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
-import { createSewerMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-sewer-regional-tooltip';
-import { createSewerRegionalTooltip } from '~/components/choropleth/tooltips/region/create-sewer-regional-tooltip';
+import { SewerMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/sewer-municipal-tooltip';
+import { SewerRegionalTooltip } from '~/components/choropleth/tooltips/region/sewer-regional-tooltip';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
@@ -33,9 +30,16 @@ import {
   getNlData,
 } from '~/static-props/get-data';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 import { useIntl } from '~/intl';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
+import {
+  MunicipalityProperties,
+  MunicipalSewerValue,
+  RegionalSewerValue,
+  SafetyRegionProperties,
+} from '@corona-dashboard/common';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -54,12 +58,12 @@ export const getStaticProps = createGetStaticProps(
 
 const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
+  const reverseRouter = useReverseRouter();
   const { data, choropleth, content, lastGenerated } = props;
 
   const text = siteText.rioolwater_metingen;
   const graphDescriptions = siteText.accessibility.grafieken;
   const sewerAverages = data.sewer;
-  const router = useRouter();
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>(
     'municipal'
   );
@@ -185,26 +189,22 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             {selectedMap === 'municipal' ? (
               <MunicipalityChoropleth
                 data={choropleth.gm}
+                getLink={reverseRouter.gm.rioolwater}
                 metricName="sewer"
                 metricProperty="average"
-                tooltipContent={createSewerMunicipalTooltip(
-                  siteText.choropleth_tooltip.sewer_regional,
-                  regionThresholds.sewer.average,
-                  createSelectMunicipalHandler(router, 'rioolwater')
-                )}
-                onSelect={createSelectMunicipalHandler(router, 'rioolwater')}
+                tooltipContent={(
+                  context: MunicipalityProperties & MunicipalSewerValue
+                ) => <SewerMunicipalTooltip context={context} />}
               />
             ) : (
               <SafetyRegionChoropleth
                 data={choropleth.vr}
+                getLink={reverseRouter.vr.rioolwater}
                 metricName="sewer"
                 metricProperty="average"
-                tooltipContent={createSewerRegionalTooltip(
-                  siteText.choropleth_tooltip.sewer_regional,
-                  regionThresholds.sewer.average,
-                  createSelectRegionHandler(router, 'rioolwater')
-                )}
-                onSelect={createSelectRegionHandler(router, 'rioolwater')}
+                tooltipContent={(
+                  context: SafetyRegionProperties & RegionalSewerValue
+                ) => <SewerRegionalTooltip context={context} />}
               />
             )}
           </ChoroplethTile>

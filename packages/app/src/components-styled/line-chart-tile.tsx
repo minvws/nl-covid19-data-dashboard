@@ -1,5 +1,4 @@
 import { TimestampedValue } from '@corona-dashboard/common';
-import { ParentSize } from '@visx/responsive';
 import slugify from 'slugify';
 import {
   LineChart,
@@ -48,16 +47,11 @@ export function LineChartTile<T extends TimestampedValue>({
     >
       {(timeframe) => (
         <>
-          <ParentSize>
-            {(parent) => (
-              <LineChart
-                {...chartProps}
-                width={parent.width}
-                timeframe={timeframe}
-                ariaLabelledBy={ariaLabelledBy}
-              />
-            )}
-          </ParentSize>
+          <LineChart
+            {...chartProps}
+            timeframe={timeframe}
+            ariaLabelledBy={ariaLabelledBy}
+          />
           {footer}
         </>
       )}

@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
@@ -12,8 +11,7 @@ import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
-import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
-import { createMunicipalHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips/municipal/create-municipal-hospital-admissions-tooltip';
+import { HospitalAdmissionsMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/municipal-hospital-admissions-tooltip';
 import { UnderReportedTooltip } from '~/domain/underreported/under-reported-tooltip';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
@@ -30,8 +28,13 @@ import {
 import { colors } from '~/style/theme';
 import { getTrailingDateRange } from '~/utils/get-trailing-date-range';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { Layout } from '~/domain/layout/layout';
+import {
+  MunicipalHospitalNiceValue,
+  MunicipalityProperties,
+} from '@corona-dashboard/common';
 
 export { getStaticPaths } from '~/static-paths/gm';
 
@@ -51,8 +54,8 @@ export const getStaticProps = createGetStaticProps(
 
 const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   const { data, choropleth, municipalityName, content, lastGenerated } = props;
-  const router = useRouter();
   const { siteText } = useIntl();
+  const reverseRouter = useReverseRouter();
 
   const text = siteText.gemeente_ziekenhuisopnames_per_dag;
   const graphDescriptions = siteText.accessibility.grafieken;
@@ -73,7 +76,11 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <MunicipalityLayout data={data} lastGenerated={lastGenerated}>
+      <MunicipalityLayout
+        data={data}
+        municipalityName={municipalityName}
+        lastGenerated={lastGenerated}
+      >
         <TileList>
           <ContentHeader
             category={siteText.gemeente_layout.headings.ziekenhuizen}
@@ -132,18 +139,12 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             <MunicipalityChoropleth
               selectedCode={data.code}
               data={choropleth.gm}
+              getLink={reverseRouter.gm.ziekenhuisopnames}
               metricName="hospital_nice"
               metricProperty="admissions_on_date_of_reporting"
-              tooltipContent={createMunicipalHospitalAdmissionsTooltip(
-                siteText.choropleth_tooltip.hospital_admissions,
-                municipalThresholds.hospital_nice
-                  .admissions_on_date_of_reporting,
-                createSelectMunicipalHandler(router, 'ziekenhuis-opnames')
-              )}
-              onSelect={createSelectMunicipalHandler(
-                router,
-                'ziekenhuis-opnames'
-              )}
+              tooltipContent={(
+                context: MunicipalityProperties & MunicipalHospitalNiceValue
+              ) => <HospitalAdmissionsMunicipalTooltip context={context} />}
             />
           </ChoroplethTile>
 

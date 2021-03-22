@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import Getest from '~/assets/test.svg';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
@@ -12,8 +11,7 @@ import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
 import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
-import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
-import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
+import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
@@ -27,10 +25,15 @@ import {
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 export { getStaticPaths } from '~/static-paths/gm';
 import { useIntl } from '~/intl';
 import { Layout } from '~/domain/layout/layout';
 import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
+import {
+  MunicipalitiesTestedOverall,
+  MunicipalityProperties,
+} from '@corona-dashboard/common';
 import { Markdown } from '~/components-styled/markdown';
 
 export const getStaticProps = createGetStaticProps(
@@ -52,10 +55,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
   const { data, choropleth, municipalityName, content, lastGenerated } = props;
 
   const { siteText, formatDateFromMilliseconds, formatNumber } = useIntl();
+  const reverseRouter = useReverseRouter();
   const text = siteText.gemeente_positief_geteste_personen;
   const lastValue = data.tested_overall.last_value;
-
-  const router = useRouter();
 
   const metadata = {
     ...siteText.gemeente_index.metadata,
@@ -69,7 +71,11 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <MunicipalityLayout data={data} lastGenerated={lastGenerated}>
+      <MunicipalityLayout
+        data={data}
+        municipalityName={municipalityName}
+        lastGenerated={lastGenerated}
+      >
         <TileList>
           <ContentHeader
             category={siteText.gemeente_layout.headings.besmettingen}
@@ -190,17 +196,12 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             <MunicipalityChoropleth
               selectedCode={data.code}
               data={choropleth.gm}
+              getLink={reverseRouter.gm.positiefGetesteMensen}
               metricName="tested_overall"
               metricProperty="infected_per_100k"
-              tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
-                siteText.choropleth_tooltip.positive_tested_people,
-                municipalThresholds.tested_overall.infected_per_100k,
-                createSelectMunicipalHandler(router, 'positief-geteste-mensen')
-              )}
-              onSelect={createSelectMunicipalHandler(
-                router,
-                'positief-geteste-mensen'
-              )}
+              tooltipContent={(
+                context: MunicipalityProperties & MunicipalitiesTestedOverall
+              ) => <PositiveTestedPeopleMunicipalTooltip context={context} />}
             />
           </ChoroplethTile>
         </TileList>

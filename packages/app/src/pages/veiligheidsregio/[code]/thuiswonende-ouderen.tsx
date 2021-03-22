@@ -60,7 +60,11 @@ const ElderlyAtHomeRegionalPage = (
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <SafetyRegionLayout data={data} lastGenerated={lastGenerated}>
+      <SafetyRegionLayout
+        data={data}
+        safetyRegionName={safetyRegionName}
+        lastGenerated={lastGenerated}
+      >
         <TileList>
           <ContentHeader
             category={
