@@ -25,7 +25,7 @@ import { SafetyRegionComboBox } from './components/safety-region-combo-box';
 
 interface SafetyRegionLayoutProps {
   lastGenerated: string;
-  data?: Regionaal;
+  data: Regionaal;
   safetyRegionName?: string;
   children?: React.ReactNode;
 }

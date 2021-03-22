@@ -10,16 +10,19 @@ import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
-import { getLastGeneratedDate } from '~/static-props/get-data';
+import { getGmData, getLastGeneratedDate } from '~/static-props/get-data';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 
-export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getGmData
+);
 
 const Municipality = (props: StaticProps<typeof getStaticProps>) => {
+  const { data, lastGenerated } = props;
   const { siteText } = useIntl();
   const reverseRouter = useReverseRouter();
-  const { lastGenerated } = props;
 
   const breakpoints = useBreakpoints();
 
@@ -29,7 +32,7 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <MunicipalityLayout lastGenerated={lastGenerated}>
+      <MunicipalityLayout data={data} lastGenerated={lastGenerated}>
         {!breakpoints.md && (
           <Box bg="white">
             <MunicipalityComboBox />

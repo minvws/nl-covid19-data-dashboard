@@ -22,7 +22,7 @@ import { MunicipalityComboBox } from './components/municipality-combo-box';
 
 interface MunicipalityLayoutProps {
   lastGenerated: string;
-  data?: Municipal;
+  data: Municipal;
   municipalityName?: string;
   children?: React.ReactNode;
 }
