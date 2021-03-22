@@ -5,7 +5,7 @@ interface MarkdownProps {
   content: string;
 }
 
-interface LinkProp {
+interface LinkProps {
   children: ReactNode[];
   href: string;
 }
@@ -13,7 +13,7 @@ interface LinkProp {
 const isExternalURL = (url: string) => /^https?:\/\//.test(url);
 
 const renderers = {
-  link: (props: LinkProp) => (
+  link: (props: LinkProps) => (
     <a
       href={props.href}
       rel="noreferrer noopener"
