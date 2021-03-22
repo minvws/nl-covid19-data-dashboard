@@ -19,8 +19,7 @@ import { AppContent } from '~/components-styled/layout/app-content';
 import { SidebarMetric } from '~/components-styled/sidebar-metric';
 import { Text } from '~/components-styled/typography';
 import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
-import { getLayout as getSiteLayout } from '~/domain/layout/layout';
-import siteText from '~/locale/index';
+import { useIntl } from '~/intl';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { SafetyRegionComboBox } from './components/safety-region-combo-box';
 import { EscalationLevelInfoLabel } from '~/components-styled/escalation-level';
@@ -31,15 +30,6 @@ interface SafetyRegionLayoutProps {
   data?: Regionaal;
   safetyRegionName?: string;
   children?: React.ReactNode;
-}
-
-export function getSafetyRegionLayout() {
-  return function (page: React.ReactNode, pageProps: SafetyRegionLayoutProps) {
-    return getSiteLayout(
-      siteText.veiligheidsregio_metadata,
-      pageProps.lastGenerated
-    )(<SafetyRegionLayout {...pageProps}>{page}</SafetyRegionLayout>);
-  };
 }
 
 /**
@@ -58,12 +48,13 @@ export function getSafetyRegionLayout() {
  * More info on persistent layouts:
  * https:adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
  */
-function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
+export function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
   const { children, data, safetyRegionName } = props;
 
   const breakpoints = useBreakpoints();
-
   const router = useRouter();
+  const { siteText } = useIntl();
+
   const { code } = router.query;
 
   const isMainRoute =

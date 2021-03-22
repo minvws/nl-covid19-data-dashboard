@@ -4,7 +4,7 @@ import { ArrowIconRight } from '~/components-styled/arrow-icon';
 import { BackgroundImage } from '~/components-styled/background-image';
 import { Box } from '~/components-styled/base';
 import { Heading, InlineText, Text } from '~/components-styled/typography';
-import siteText from '~/locale';
+import { useIntl } from '~/intl';
 import { Block, Editorial, ImageBlock } from '~/types/cms';
 import { Link } from '~/utils/link';
 
@@ -22,6 +22,7 @@ type EditorialTeaserProps = {
 
 export function EditorialTeaser(props: EditorialTeaserProps) {
   const { title, slug, summary, cover } = props;
+  const { siteText } = useIntl();
 
   return (
     <Link passHref href={`/weekberichten/${slug}`}>

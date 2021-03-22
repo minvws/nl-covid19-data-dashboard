@@ -7,17 +7,17 @@ import {
 import { get } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
-import siteText, { Locale } from '~/locale/index';
 import {
   DataScope,
   getMetricConfig,
   metricContainsPartialData,
 } from '~/metric-config';
 import { assert } from '~/utils/assert';
-import { formatDateFromSeconds } from '~/utils/formatDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { SidebarBarScale } from './sidebar-barscale';
 import { SidebarKpiValue } from './sidebar-kpi-value';
+import { useIntl } from '~/intl';
+import { AllLanguages } from '~/locale';
 
 interface SidebarMetricProps<T extends { difference: unknown }> {
   scope: DataScope;
@@ -28,7 +28,7 @@ interface SidebarMetricProps<T extends { difference: unknown }> {
    * Currently only behavior is doing that.
    */
   metricProperty?: string;
-  localeTextKey: keyof Locale;
+  localeTextKey: keyof AllLanguages;
   differenceKey?: DifferenceKey;
   showBarScale?: boolean;
   annotationKey?: string;
@@ -55,6 +55,8 @@ export function SidebarMetric<T extends { difference: unknown }>({
   annotationKey,
   altBarScaleMetric,
 }: SidebarMetricProps<T>) {
+  const { siteText, formatDateFromSeconds } = useIntl();
+
   /**
    * @TODO this is still a bit messy due to improper typing. Not sure how to
    * fix this easily. The getLastFilledValue function is now strongly typed on

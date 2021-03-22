@@ -1,7 +1,11 @@
-import { FCWithLayout } from '~/domain/layout/layout';
-import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { getVrData, getLastGeneratedDate } from '~/static-props/get-data';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
+import { Layout } from '~/domain/layout/layout';
+import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
+import { useIntl } from '~/intl';
 
 export { getStaticPaths } from '~/static-paths/vr';
 
@@ -10,7 +14,18 @@ export const getStaticProps = createGetStaticProps(
   getVrData
 );
 
-const SafetyRegion: FCWithLayout<typeof getStaticProps> = () => null;
-SafetyRegion.getLayout = getSafetyRegionLayout();
+const SafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
+  const { lastGenerated } = props;
+  const { siteText } = useIntl();
+
+  return (
+    <Layout
+      {...siteText.veiligheidsregio_index.metadata}
+      lastGenerated={lastGenerated}
+    >
+      <SafetyRegionLayout lastGenerated={lastGenerated} />
+    </Layout>
+  );
+};
 
 export default SafetyRegion;
