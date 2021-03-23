@@ -28,6 +28,7 @@ import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { getValuesInTimeframe } from '~/utils/timeframe';
+import { useElementSize } from '~/utils/use-element-size';
 import { useIsMountedRef } from '~/utils/use-is-mounted-ref';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import {
@@ -113,7 +114,7 @@ export type StackedChartProps<T extends TimestampedValue> = {
   values: T[];
   config: Config<T>[];
   valueAnnotation?: string;
-  width: number;
+  initialWidth?: number;
   expectedLabel: string;
   formatTooltip?: TooltipFormatter;
   isPercentage?: boolean;
@@ -128,7 +129,15 @@ export function StackedChart<T extends TimestampedValue>(
    * passed-in formatter functions or their default counterparts that have the
    * same name.
    */
-  const { values, config, width, isPercentage, expectedLabel } = props;
+  const {
+    values,
+    config,
+    initialWidth = 840,
+    isPercentage,
+    expectedLabel,
+  } = props;
+
+  const [sizeRef, { width }] = useElementSize<HTMLDivElement>(initialWidth);
 
   const { siteText, formatNumber, formatPercentage } = useIntl();
 
@@ -435,8 +444,13 @@ export function StackedChart<T extends TimestampedValue>(
 
   return (
     <Box>
-      <Box position="relative">
-        <svg width={width} height={height} role="img">
+      <Box position="relative" ref={sizeRef}>
+        <svg
+          width={width}
+          viewBox={`0 0 ${width} ${height}`}
+          css={css({ width: '100%' })}
+          role="img"
+        >
           <HatchedPattern />
 
           <Group left={padding.left} top={padding.top}>
