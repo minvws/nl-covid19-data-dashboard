@@ -1,3 +1,10 @@
+import {
+  EscalationLevels,
+  MunicipalitiesTestedOverall,
+  MunicipalityProperties,
+  RegionsTestedOverall,
+  SafetyRegionProperties,
+} from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { isEmpty } from 'lodash';
 import { useState } from 'react';
@@ -13,9 +20,10 @@ import { ChoroplethLegenda } from '~/components-styled/choropleth-legenda';
 import { CollapsibleButton } from '~/components-styled/collapsible';
 import { DataDrivenText } from '~/components-styled/data-driven-text';
 import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
-import { ExternalLink } from '~/components-styled/external-link';
 import { HighlightTeaserProps } from '~/components-styled/highlight-teaser';
+import { Markdown } from '~/components-styled/markdown';
 import { MaxWidth } from '~/components-styled/max-width';
+import { Metadata } from '~/components-styled/metadata';
 import { TileList } from '~/components-styled/tile-list';
 import { Heading, Text } from '~/components-styled/typography';
 import { VisuallyHidden } from '~/components-styled/visually-hidden';
@@ -24,8 +32,9 @@ import { MunicipalityChoropleth } from '~/components/choropleth/municipality-cho
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
-import { PositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/positive-tested-people-regional-tooltip';
 import { EscalationRegionalTooltip } from '~/components/choropleth/tooltips/region/escalation-regional-tooltip';
+import { PositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/positive-tested-people-regional-tooltip';
+import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import { ChoroplethTwoColumnLayout } from '~/domain/topical/choropleth-two-column-layout';
 import { Search } from '~/domain/topical/components/search';
@@ -39,6 +48,7 @@ import { useDataSitemap } from '~/domain/topical/sitemap/utils';
 import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
 import { TopicalVaccineTile } from '~/domain/topical/topical-vaccine-tile';
+import { useIntl } from '~/intl';
 import { getTopicalPageQuery } from '~/queries/topical-page-query';
 import {
   createGetStaticProps,
@@ -54,16 +64,6 @@ import { createDate } from '~/utils/createDate';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import { Layout } from '~/domain/layout/layout';
-import { useIntl } from '~/intl';
-import {
-  EscalationLevels,
-  MunicipalitiesTestedOverall,
-  MunicipalityProperties,
-  RegionsTestedOverall,
-  SafetyRegionProperties,
-} from '@corona-dashboard/common';
-import { Markdown } from '~/components-styled/markdown';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -351,27 +351,12 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   )}
                 </>
                 <Box>
-                  <Text mb={3} color="annotation" fontSize={1}>
-                    {replaceVariablesInText(siteText.common.metadata.date, {
-                      date: formatDateFromSeconds(
-                        choropleth.vr.tested_overall[0].date_unix,
-                        'weekday-medium'
-                      ),
-                    })}
-                    {` - ${siteText.common.metadata.source}: `}
-                    <ExternalLink
-                      ariaLabel={
-                        siteText.positief_geteste_personen.bronnen.rivm
-                          .aria_text
-                      }
-                      href={
-                        siteText.positief_geteste_personen.bronnen.rivm.href
-                      }
-                    >
-                      {siteText.positief_geteste_personen.bronnen.rivm.text}
-                    </ExternalLink>
-                  </Text>
-
+                  <Metadata
+                    date={
+                      choropleth.vr.escalation_levels[0].date_of_insertion_unix
+                    }
+                    source={siteText.positief_geteste_personen.bronnen.rivm}
+                  />
                   <Text>
                     {siteText.positief_geteste_personen.map_toelichting}
                   </Text>
