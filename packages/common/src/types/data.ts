@@ -289,10 +289,10 @@ export interface NlTestedPerAgeGroupValue {
   infected_age_70_79_per_100k: number;
   infected_age_80_89_per_100k: number;
   infected_age_90_plus_per_100k: number;
-  infected_overall_per_100k?: number;
+  infected_overall_per_100k: number;
   date_unix: number;
   date_of_insertion_unix: number;
-  date_of_report_unix?: number;
+  date_of_report_unix: number;
 }
 export interface NationalReproduction {
   values: NationalReproductionValue[];

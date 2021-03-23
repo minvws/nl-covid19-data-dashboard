@@ -31,9 +31,10 @@
         "infected_age_70_79_per_100k",
         "infected_age_80_89_per_100k",
         "infected_age_90_plus_per_100k",
-        "infected_overall",
+        "infected_overall_per_100k",
         "date_unix",
-        "date_of_insertion_unix"
+        "date_of_insertion_unix",
+        "date_of_report_unix"
       ],
       "properties": {
         "infected_age_0_9_per_100k": {
