@@ -74,7 +74,14 @@ function MobileLockdownTable(props: LockdownTableData) {
                             })}
                           >
                             {restriction.icon ? (
-                              getIcon(restrictionIcons[restriction.icon], color)
+                              <img
+                                src={`/icons/restrictions/${
+                                  restrictionIcons[restriction.icon]
+                                }`}
+                                width="36"
+                                height="36"
+                                alt=""
+                              />
                             ) : (
                               <Box size={36} />
                             )}
@@ -143,7 +150,14 @@ function DesktopLockdownTable(props: LockdownTableData) {
                         >
                           {restriction.icon &&
                           restrictionIcons[restriction.icon] ? (
-                            getIcon(restrictionIcons[restriction.icon], color)
+                            <img
+                              src={`/icons/restrictions/${
+                                restrictionIcons[restriction.icon]
+                              }`}
+                              width="36"
+                              height="36"
+                              alt=""
+                            />
                           ) : (
                             <Box size={36} />
                           )}
@@ -162,8 +176,4 @@ function DesktopLockdownTable(props: LockdownTableData) {
       </TableBody>
     </Table>
   );
-}
-
-function getIcon(IconComponent: any, color: string) {
-  return <IconComponent color={color} />;
 }
