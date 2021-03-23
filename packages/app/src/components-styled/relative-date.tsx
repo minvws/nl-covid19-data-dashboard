@@ -5,9 +5,9 @@
  * - machine readable iso dates
  */
 
-import { formatDateFromSeconds } from '~/utils/formatDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { useIsMounted } from '~/utils/use-is-mounted';
+import { useIntl } from '~/intl';
 
 interface RelativeDateProps {
   dateInSeconds: number;
@@ -38,6 +38,8 @@ export function RelativeDate({
   isCapitalized,
   absoluteDateTemplate,
 }: RelativeDateProps) {
+  const { formatDateFromSeconds, formatRelativeDate } = useIntl();
+
   const isMounted = useIsMounted();
   const isoDate = formatDateFromSeconds(dateInSeconds, 'iso');
   const dayMonthDate = formatDateFromSeconds(dateInSeconds, 'day-month');
@@ -54,12 +56,26 @@ export function RelativeDate({
     );
   }
 
-  const relativeDate = formatDateFromSeconds(dateInSeconds, 'relative');
+  /**
+   * From this point on we assume the component is mounted and thus we can
+   * call the `formatRelativeDate` which wouldn't work server-side.
+   */
+
+  const relativeDate = formatRelativeDate({ seconds: dateInSeconds });
   const dayMonthYearDate = formatDateFromSeconds(dateInSeconds, 'medium');
+
+  if (relativeDate) {
+    return (
+      <time dateTime={isoDate} title={dayMonthYearDate}>
+        {isCapitalized ? capitalize(relativeDate) : relativeDate} (
+        {dayMonthDate})
+      </time>
+    );
+  }
 
   return (
     <time dateTime={isoDate} title={dayMonthYearDate}>
-      {isCapitalized ? capitalize(relativeDate) : relativeDate} ({dayMonthDate})
+      {dayMonthDate}
     </time>
   );
 }

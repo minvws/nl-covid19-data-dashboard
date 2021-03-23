@@ -6,11 +6,11 @@ import Close from '~/assets/close.svg';
 import Menu from '~/assets/menu.svg';
 import { MaxWidth } from '~/components-styled/max-width';
 import { VisuallyHidden } from '~/components-styled/visually-hidden';
-import text from '~/locale/index';
 import theme from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { useBreakpoints } from '~/utils/useBreakpoints';
+import { useIntl } from '~/intl';
 
 export function TopNavigation() {
   const router = useRouter();
@@ -21,6 +21,7 @@ export function TopNavigation() {
   const isSmallScreen = !breakpoints.md;
   const [panelHeight, setPanelHeight] = useState(0);
   const navMenu = useRef<HTMLDivElement>(null);
+  const { siteText } = useIntl();
 
   useEffect(() => {
     // Menu is opened by default as fallback: JS opens it
@@ -49,7 +50,9 @@ export function TopNavigation() {
         >
           {isMenuOpen ? <Close /> : <Menu />}
           <VisuallyHidden>
-            {isMenuOpen ? text.nav.menu.close_menu : text.nav.menu.open_menu}
+            {isMenuOpen
+              ? siteText.nav.menu.close_menu
+              : siteText.nav.menu.open_menu}
           </VisuallyHidden>
         </NavToggle>
       )}
@@ -57,7 +60,7 @@ export function TopNavigation() {
       <NavWrapper
         id="main-navigation"
         role="navigation"
-        aria-label={text.aria_labels.pagina_keuze}
+        aria-label={siteText.aria_labels.pagina_keuze}
         ref={navMenu}
         css={css({
           maxHeight: asResponsiveArray({ _: `${panelHeight}px`, md: '100%' }),
@@ -81,7 +84,7 @@ export function TopNavigation() {
                 router.pathname.startsWith('/actueel')
               }
             >
-              {text.nav.links.actueel}
+              {siteText.nav.links.actueel}
             </NavItem>
             <NavItem
               href={`/landelijk/vaccinaties${
@@ -89,14 +92,14 @@ export function TopNavigation() {
               }`}
               isActive={router.pathname.startsWith('/landelijk')}
             >
-              {text.nav.links.index}
+              {siteText.nav.links.index}
             </NavItem>
             <NavItem href="/veiligheidsregio">
-              {text.nav.links.veiligheidsregio}
+              {siteText.nav.links.veiligheidsregio}
             </NavItem>
-            <NavItem href="/gemeente">{text.nav.links.gemeente}</NavItem>
+            <NavItem href="/gemeente">{siteText.nav.links.gemeente}</NavItem>
 
-            <NavItem href="/over">{text.nav.links.over}</NavItem>
+            <NavItem href="/over">{siteText.nav.links.over}</NavItem>
           </NavList>
         </MaxWidth>
       </NavWrapper>

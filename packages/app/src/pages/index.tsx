@@ -1,6 +1,5 @@
 import css from '@styled-system/css';
 import { isEmpty } from 'lodash';
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 import GetestIcon from '~/assets/test.svg';
 import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
@@ -17,7 +16,6 @@ import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda
 import { ExternalLink } from '~/components-styled/external-link';
 import { HighlightTeaserProps } from '~/components-styled/highlight-teaser';
 import { MaxWidth } from '~/components-styled/max-width';
-import { SEOHead } from '~/components-styled/seo-head';
 import { TileList } from '~/components-styled/tile-list';
 import { Heading, Text } from '~/components-styled/typography';
 import { VisuallyHidden } from '~/components-styled/visually-hidden';
@@ -25,12 +23,9 @@ import { WarningTile } from '~/components-styled/warning-tile';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
-import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
-import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
-import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
-import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/create-positive-tested-people-regional-tooltip';
-import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
-import { FCWithLayout, getDefaultLayout } from '~/domain/layout/layout';
+import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
+import { PositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/positive-tested-people-regional-tooltip';
+import { EscalationRegionalTooltip } from '~/components/choropleth/tooltips/region/escalation-regional-tooltip';
 import { ArticleList } from '~/domain/topical/article-list';
 import { ChoroplethTwoColumnLayout } from '~/domain/topical/choropleth-two-column-layout';
 import { Search } from '~/domain/topical/components/search';
@@ -40,27 +35,38 @@ import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-e
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
 import { Sitemap } from '~/domain/topical/sitemap';
-import { getDataSitemap } from '~/domain/topical/sitemap/utils';
+import { useDataSitemap } from '~/domain/topical/sitemap/utils';
 import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
 import { TopicalVaccineTile } from '~/domain/topical/topical-vaccine-tile';
-import { topicalPageQuery } from '~/queries/topical-page-query';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import { getTopicalPageQuery } from '~/queries/topical-page-query';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
   getNlData,
-  getText,
 } from '~/static-props/get-data';
 import { createDate } from '~/utils/createDate';
-import { formatDate, formatDateFromSeconds } from '~/utils/formatDate';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { useReverseRouter } from '~/utils/use-reverse-router';
+import { Layout } from '~/domain/layout/layout';
+import { useIntl } from '~/intl';
+import {
+  EscalationLevels,
+  MunicipalitiesTestedOverall,
+  MunicipalityProperties,
+  RegionsTestedOverall,
+  SafetyRegionProperties,
+} from '@corona-dashboard/common';
+import { Markdown } from '~/components-styled/markdown';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getText,
   createGetChoroplethData({
     vr: ({ escalation_levels, tested_overall }) => ({
       escalation_levels,
@@ -72,7 +78,7 @@ export const getStaticProps = createGetStaticProps(
     articles: ArticleSummary[];
     editorial: EditorialSummary;
     highlight: HighlightTeaserProps;
-  }>(topicalPageQuery),
+  }>(getTopicalPageQuery),
   () => {
     const data = getNlData();
 
@@ -92,25 +98,29 @@ export const getStaticProps = createGetStaticProps(
   }
 );
 
-const Home: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { text: siteText, data, choropleth, content, lastGenerated } = props;
-  const router = useRouter();
-  const text = siteText.nationaal_actueel;
+const Home = (props: StaticProps<typeof getStaticProps>) => {
+  const { data, choropleth, content, lastGenerated } = props;
 
   const dataInfectedTotal = data.tested_overall;
   const dataHospitalIntake = data.hospital_nice;
-  const dataSitemap = getDataSitemap('landelijk');
+  const dataSitemap = useDataSitemap('landelijk');
+
+  const { siteText, formatDate } = useIntl();
+  const reverseRouter = useReverseRouter();
+  const text = siteText.nationaal_actueel;
 
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>(
     'municipal'
   );
 
+  const metadata = {
+    ...siteText.nationaal_metadata,
+    title: text.metadata.title,
+    description: text.metadata.description,
+  };
+
   return (
-    <>
-      <SEOHead
-        title={text.metadata.title}
-        description={text.metadata.description}
-      />
+    <Layout {...metadata} lastGenerated={lastGenerated}>
       <Box bg="white" pb={4}>
         {/**
          * Since now the sections have a H2 heading I think we need to include
@@ -240,11 +250,16 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                 <Box>
                   <SafetyRegionChoropleth
                     data={choropleth.vr}
+                    getLink={reverseRouter.vr.risiconiveau}
                     metricName="escalation_levels"
                     metricProperty="level"
-                    onSelect={createSelectRegionHandler(router, 'risiconiveau')}
-                    tooltipContent={escalationTooltip(
-                      createSelectRegionHandler(router, 'risiconiveau')
+                    tooltipContent={(
+                      context: SafetyRegionProperties & EscalationLevels
+                    ) => (
+                      <EscalationRegionalTooltip
+                        context={context}
+                        getLink={reverseRouter.vr.risiconiveau}
+                      />
                     )}
                   />
                 </Box>
@@ -258,9 +273,9 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                         />
                       </Box>
                     )}
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: replaceVariablesInText(
+                  <Box mb={3}>
+                    <Markdown
+                      content={replaceVariablesInText(
                         text.risiconiveaus.selecteer_toelichting,
                         {
                           last_update: formatDate(
@@ -271,9 +286,9 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                             'day-month'
                           ),
                         }
-                      ),
-                    }}
-                  />
+                      )}
+                    />
+                  </Box>
                 </Box>
               </ChoroplethTwoColumnLayout>
 
@@ -308,36 +323,29 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
                       data={choropleth.gm}
                       metricName="tested_overall"
                       metricProperty="infected_per_100k"
-                      tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
-                        siteText.choropleth_tooltip.positive_tested_people,
-                        regionThresholds.tested_overall.infected_per_100k,
-                        createSelectMunicipalHandler(
-                          router,
-                          'positief-geteste-mensen'
-                        )
-                      )}
-                      onSelect={createSelectMunicipalHandler(
-                        router,
-                        'positief-geteste-mensen'
+                      getLink={reverseRouter.gm.positiefGetesteMensen}
+                      tooltipContent={(
+                        context: MunicipalityProperties &
+                          MunicipalitiesTestedOverall
+                      ) => (
+                        <PositiveTestedPeopleMunicipalTooltip
+                          context={context}
+                        />
                       )}
                     />
                   )}
                   {selectedMap === 'region' && (
                     <SafetyRegionChoropleth
                       data={choropleth.vr}
+                      getLink={reverseRouter.vr.positiefGetesteMensen}
                       metricName="tested_overall"
                       metricProperty="infected_per_100k"
-                      tooltipContent={createPositiveTestedPeopleRegionalTooltip(
-                        siteText.choropleth_tooltip.positive_tested_people,
-                        regionThresholds.tested_overall.infected_per_100k,
-                        createSelectRegionHandler(
-                          router,
-                          'positief-geteste-mensen'
-                        )
-                      )}
-                      onSelect={createSelectRegionHandler(
-                        router,
-                        'positief-geteste-mensen'
+                      tooltipContent={(
+                        context: SafetyRegionProperties & RegionsTestedOverall
+                      ) => (
+                        <PositiveTestedPeopleRegionalTooltip
+                          context={context}
+                        />
                       )}
                     />
                   )}
@@ -393,10 +401,8 @@ const Home: FCWithLayout<typeof getStaticProps> = (props) => {
           </TileList>
         </MaxWidth>
       </Box>
-    </>
+    </Layout>
   );
 };
-
-Home.getLayout = getDefaultLayout();
 
 export default Home;

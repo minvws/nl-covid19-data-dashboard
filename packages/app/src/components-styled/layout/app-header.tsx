@@ -3,13 +3,15 @@ import React from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components-styled/base';
 import { MaxWidth } from '~/components-styled/max-width';
-import text from '~/locale/index';
 import { Link } from '~/utils/link';
 import { LanguageSwitcher } from './components/language-switcher';
 import { Logo } from './components/logo';
 import { TopNavigation } from './components/top-navigation';
+import { useIntl } from '~/intl';
 
 export function AppHeader() {
+  const { siteText } = useIntl();
+
   return (
     <Box as="header" zIndex={4} position="relative" bg="white">
       <MaxWidth px={{ _: 3, sm: 4, md: 3, lg: 4 }}>
@@ -28,7 +30,7 @@ export function AppHeader() {
         >
           <Box py={[2, 2, 2, 3]} lineHeight={'1em'} fontWeight="bold">
             <Link href="/" passHref>
-              <TextLogoLink>{text.header.title}</TextLogoLink>
+              <TextLogoLink>{siteText.header.title}</TextLogoLink>
             </Link>
           </Box>
 

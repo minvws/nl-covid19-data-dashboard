@@ -3,9 +3,8 @@ import ClockIcon from '~/assets/clock.svg';
 import MeerInformatieIcon from '~/assets/meer-informatie.svg';
 import DatabaseIcon from '~/assets/database.svg';
 import DownloadIcon from '~/assets/download.svg';
-import siteText from '~/locale/index';
+import { useIntl } from '~/intl';
 import theme from '~/style/theme';
-import { formatDateFromSeconds } from '~/utils/formatDate';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { Box } from '../base';
 import { ExternalLink } from '../external-link';
@@ -35,7 +34,40 @@ export interface MetadataProps {
   };
 }
 
-const text = siteText.common.metadata;
+function useFormateDateText(
+  dateOrRange: number | DateRange,
+  dateOfInsertionUnix: number,
+  datumsText: string
+) {
+  const { formatDateFromSeconds } = useIntl();
+
+  if (typeof dateOrRange === 'number') {
+    const dateOfReport = formatDateFromSeconds(dateOrRange, 'weekday-medium');
+    const dateOfInsertion = formatDateFromSeconds(
+      dateOfInsertionUnix,
+      'weekday-medium'
+    );
+    return replaceVariablesInText(datumsText, {
+      dateOfReport,
+      dateOfInsertion,
+    });
+  } else {
+    const weekStart = formatDateFromSeconds(
+      dateOrRange.start,
+      'weekday-medium'
+    );
+    const weekEnd = formatDateFromSeconds(dateOrRange.end, 'weekday-medium');
+    const dateOfInsertion = formatDateFromSeconds(
+      dateOfInsertionUnix,
+      'weekday-medium'
+    );
+    return replaceVariablesInText(datumsText, {
+      weekStart,
+      weekEnd,
+      dateOfInsertion,
+    });
+  }
+}
 
 export function Metadata(props: MetadataProps) {
   const {
@@ -48,7 +80,10 @@ export function Metadata(props: MetadataProps) {
     moreInformationLink,
   } = props;
 
-  const dateText = formateDateText(
+  const { siteText } = useIntl();
+  const text = siteText.common.metadata;
+
+  const dateText = useFormateDateText(
     dateOrRange,
     dateOfInsertionUnix,
     datumsText
@@ -150,37 +185,4 @@ function MetadataItem(props: MetadataItemProps) {
       </Text>
     </Box>
   );
-}
-
-function formateDateText(
-  dateOrRange: number | DateRange,
-  dateOfInsertionUnix: number,
-  datumsText: string
-) {
-  if (typeof dateOrRange === 'number') {
-    const dateOfReport = formatDateFromSeconds(dateOrRange, 'weekday-medium');
-    const dateOfInsertion = formatDateFromSeconds(
-      dateOfInsertionUnix,
-      'weekday-medium'
-    );
-    return replaceVariablesInText(datumsText, {
-      dateOfReport,
-      dateOfInsertion,
-    });
-  } else {
-    const weekStart = formatDateFromSeconds(
-      dateOrRange.start,
-      'weekday-medium'
-    );
-    const weekEnd = formatDateFromSeconds(dateOrRange.end, 'weekday-medium');
-    const dateOfInsertion = formatDateFromSeconds(
-      dateOfInsertionUnix,
-      'weekday-medium'
-    );
-    return replaceVariablesInText(datumsText, {
-      weekStart,
-      weekEnd,
-      dateOfInsertion,
-    });
-  }
 }

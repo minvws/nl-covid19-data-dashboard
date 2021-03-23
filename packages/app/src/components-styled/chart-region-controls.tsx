@@ -1,6 +1,5 @@
 import { RadioGroup } from '~/components-styled/radio-group';
-
-import text from '~/locale/index';
+import { useIntl } from '~/intl';
 
 export type RegionControlOption = 'municipal' | 'region';
 
@@ -9,19 +8,21 @@ interface ChartRegionControlsProps {
   onChange: (value: RegionControlOption) => void;
 }
 
-const items = [
-  {
-    label: text.charts.region_controls.municipal,
-    value: 'municipal',
-  },
-  {
-    label: text.charts.region_controls.region,
-    value: 'region',
-  },
-];
-
 export function ChartRegionControls(props: ChartRegionControlsProps) {
+  const { siteText } = useIntl();
+
   const { value, onChange } = props;
+
+  const items = [
+    {
+      label: siteText.charts.region_controls.municipal,
+      value: 'municipal',
+    },
+    {
+      label: siteText.charts.region_controls.region,
+      value: 'region',
+    },
+  ];
 
   return <RadioGroup items={items} value={value} onChange={onChange} />;
 }

@@ -141,3 +141,8 @@ export function createGetStaticProps(
     return { props };
   };
 }
+
+// Type the results of createGetStaticProps
+export type StaticProps<
+  T extends (arg: any) => Promise<{ props: Record<string, unknown> }>
+> = Await<ReturnType<T>>['props'];

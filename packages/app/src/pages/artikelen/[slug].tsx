@@ -1,24 +1,26 @@
 import { ArticleDetail } from '~/components-styled/article-detail';
 import { Box } from '~/components-styled/base';
-import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
 import { client, getImageSrc, localize } from '~/lib/sanity';
-import { targetLanguage } from '~/locale/index';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
 } from '~/static-props/get-data';
 import { Article, Block, RichContentBlock } from '~/types/cms';
 import { assert } from '~/utils/assert';
+import { Layout } from '~/domain/layout/layout';
 
 const articlesQuery = `*[_type == 'article'] {"slug":slug.current}`;
 
 export async function getStaticPaths() {
+  //@TODO THIS NEEDS TO COME FROM CONTEXT OR SIMILAR?
+  const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+
   const articlesData = await client.fetch(articlesQuery);
-  const articles = localize<{ slug: string }[]>(articlesData, [
-    targetLanguage,
-    'nl',
-  ]);
+  const articles = localize<{ slug: string }[]>(articlesData, [locale, 'nl']);
 
   const paths = articles.map((article) => ({
     params: { slug: article.slug },
@@ -31,6 +33,10 @@ export async function getStaticPaths() {
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   createGetContent<Article>((context) => {
+    //@TODO We need to switch this from process.env to context as soon as we use i18n routing
+    // const { locale } = context;
+    const locale = process.env.NEXT_PUBLIC_LOCALE;
+
     assert(context?.params?.slug, 'Slug required to retrieve article');
     return `*[_type == 'article' && slug.current == '${context.params.slug}']{
       ...,
@@ -41,8 +47,8 @@ export const getStaticProps = createGetStaticProps(
       },
       "intro": {
         ...intro,
-        "${targetLanguage}": [
-          ...intro.${targetLanguage}[]
+        "${locale}": [
+          ...intro.${locale}[]
           {
             ...,
             "asset": asset->
@@ -51,8 +57,8 @@ export const getStaticProps = createGetStaticProps(
       },
       "content": {
         "_type": content._type,
-        "${targetLanguage}": [
-          ...content.${targetLanguage}[]
+        "${locale}": [
+          ...content.${locale}[]
           {
             ...,
             "asset": asset->,
@@ -67,32 +73,28 @@ export const getStaticProps = createGetStaticProps(
   })
 );
 
-const ArticleDetailPage: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { content } = props;
+const ArticleDetailPage = (props: StaticProps<typeof getStaticProps>) => {
+  const { content, lastGenerated } = props;
 
-  return (
-    <Box backgroundColor="white">
-      <ArticleDetail article={content} />
-    </Box>
-  );
-};
-
-/**
- *  @TODO this implementation below is not very sexy yet, its hacked together
- * to simply have _something_
- */
-ArticleDetailPage.getLayout = (page, props) => {
-  const { cover } = props.content;
+  const { cover } = content;
   const { asset } = cover;
 
   const imgPath = getImageSrc(asset, 1200);
 
-  return getLayoutWithMetadata({
+  const metadata = {
     title: getTitle(props.content.title),
     description: toPlainText(props.content.intro),
     openGraphImage: imgPath,
     twitterImage: imgPath,
-  })(page, props);
+  };
+
+  return (
+    <Layout {...metadata} lastGenerated={lastGenerated}>
+      <Box backgroundColor="white">
+        <ArticleDetail article={content} />
+      </Box>
+    </Layout>
+  );
 };
 
 export default ArticleDetailPage;

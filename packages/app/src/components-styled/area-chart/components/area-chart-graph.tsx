@@ -93,13 +93,26 @@ export function AreaChartGraph<T extends TrendValue, K extends TrendValue>(
   ) => onHover(event);
 
   return (
-    <StyledSvg role="img" tabIndex={0} width={width} height={height}>
+    <StyledSvg
+      role="img"
+      tabIndex={0}
+      width={width}
+      viewBox={`0 0 ${width} ${height}`}
+    >
       <defs>
         {areas
           .map((x) => x.displays)
           .flat()
           .filter((display) => display.pattern === 'hatched')
           .map((display) => {
+            /**
+             * @TODO If the hatched pattern is rendered as a white/transparent
+             * overlay than we only need to create one pattern (See stacked bar
+             * chart implementation).
+             *
+             * This is probably only worth refactoring if we need to make the
+             * styling consistent with the stacked bar chart.
+             */
             return (
               <HatchedPattern
                 key={`pattern-${display.id}-${display.metricProperty}`}
@@ -222,6 +235,7 @@ function getFill<T>(areaConfig: AreaDisplay<T>[], areaKey: string) {
 
 const StyledSvg = styled.svg(
   css({
+    width: '100%',
     '&:not(:root)': {
       overflow: 'visible',
     },

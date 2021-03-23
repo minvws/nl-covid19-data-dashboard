@@ -1,64 +1,74 @@
 import Head from 'next/head';
 import { CollapsibleSection } from '~/components-styled/collapsible';
 import { MaxWidth } from '~/components-styled/max-width';
-import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
-import siteText, { targetLanguage } from '~/locale/index';
 import {
   createGetContent,
   getLastGeneratedDate,
 } from '~/static-props/get-data';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import { CollapsibleList, RichContentBlock } from '~/types/cms';
 import { getSkipLinkId } from '~/utils/skipLinks';
 import styles from './over.module.scss';
 import { RichContent } from '~/components-styled/cms/rich-content';
 import { Box } from '~/components-styled/base';
+import { Layout } from '~/domain/layout/layout';
+import { useIntl } from '~/intl';
+
 interface OverRisiconiveausData {
   title: string | null;
   description: RichContentBlock[] | null;
   collapsibleList: CollapsibleList[];
 }
 
-const query = `
-*[_type == 'overRisicoNiveaus']{
-  ...,
-  "description": {
-    "_type": description._type,
-    "${targetLanguage}": [
-      ...description.${targetLanguage}[]
-      {
-        ...,
-        "asset": asset->
-       },
-    ]
-  },
-  "collapsibleList": [...collapsibleList[]
-    {
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  createGetContent<OverRisiconiveausData>((_context) => {
+    //@TODO We need to switch this from process.env to context as soon as we use i18n routing
+    // const { locale } = context;
+    const locale = process.env.NEXT_PUBLIC_LOCALE;
+    return `*[_type == 'overRisicoNiveaus']{
       ...,
-      "content": {
-        ...content,
-        "${targetLanguage}": [
-          ...content.${targetLanguage}[]
+      "description": {
+        "_type": description._type,
+        "${locale}": [
+          ...description.${locale}[]
           {
             ...,
             "asset": asset->
            },
         ]
-      }
-  }]
-}[0]
-`;
-
-export const getStaticProps = createGetStaticProps(
-  getLastGeneratedDate,
-  createGetContent<OverRisiconiveausData>(query)
+      },
+      "collapsibleList": [...collapsibleList[]
+        {
+          ...,
+          "content": {
+            ...content,
+            "${locale}": [
+              ...content.${locale}[]
+              {
+                ...,
+                "asset": asset->
+               },
+            ]
+          }
+      }]
+    }[0]
+    `;
+  })
 );
 
-const OverRisicoNiveaus: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { content } = props;
+const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
+  const { siteText } = useIntl();
+  const { content, lastGenerated } = props;
 
   return (
-    <>
+    <Layout
+      {...siteText.over_risiconiveaus_metadata}
+      lastGenerated={lastGenerated}
+    >
       <Head>
         <link
           key="dc-type"
@@ -99,14 +109,8 @@ const OverRisicoNiveaus: FCWithLayout<typeof getStaticProps> = (props) => {
           </div>
         </MaxWidth>
       </div>
-    </>
+    </Layout>
   );
 };
-
-const metadata = {
-  ...siteText.over_risiconiveaus_metadata,
-};
-
-OverRisicoNiveaus.getLayout = getLayoutWithMetadata(metadata);
 
 export default OverRisicoNiveaus;

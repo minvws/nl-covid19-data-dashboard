@@ -1,32 +1,34 @@
 import {
-  ChoroplethThresholdsValue,
   RegionsTestedOverall,
   SafetyRegionProperties,
 } from '@corona-dashboard/common';
-import { ReactNode } from 'react';
 import { InlineText, Text } from '~/components-styled/typography';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
 import { TooltipSubject } from '~/components/choropleth/tooltips/tooltip-subject';
-import siteText from '~/locale/index';
-import { formatNumber, formatPercentage } from '~/utils/formatNumber';
+import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { RegionSelectionHandler } from '../../select-handlers/create-select-region-handler';
-const text = siteText.common.tooltip;
+import { useReverseRouter } from '~/utils/use-reverse-router';
+import { regionThresholds } from '../../region-thresholds';
 
-export const createPositiveTestedPeopleRegionalTooltip = (
-  subject: string,
-  thresholdValues: ChoroplethThresholdsValue[],
-  selectHandler: RegionSelectionHandler
-) => (context: SafetyRegionProperties & RegionsTestedOverall): ReactNode => {
+export function PositiveTestedPeopleRegionalTooltip({
+  context,
+}: {
+  context: SafetyRegionProperties & RegionsTestedOverall;
+}) {
   const { vrname, infected_per_100k, infected } = context;
 
-  const onSelect = (event: any) => {
-    event.stopPropagation();
-    selectHandler(context.vrcode);
-  };
+  const reverseRouter = useReverseRouter();
+  const { siteText, formatPercentage, formatNumber } = useIntl();
+  const text = siteText.common.tooltip;
+
+  const subject = siteText.choropleth_tooltip.positive_tested_people;
+  const thresholdValues = regionThresholds.tested_overall.infected_per_100k;
 
   return (
-    <TooltipContent title={vrname} onSelect={onSelect}>
+    <TooltipContent
+      title={vrname}
+      link={reverseRouter.vr.positiefGetesteMensen(context.vrcode)}
+    >
       <TooltipSubject
         subject={subject}
         thresholdValues={thresholdValues}
@@ -47,4 +49,4 @@ export const createPositiveTestedPeopleRegionalTooltip = (
       </Text>
     </TooltipContent>
   );
-};
+}
