@@ -1,5 +1,4 @@
 import { NlVaccineDeliveryPerSupplier } from '@corona-dashboard/common';
-import { ParentSize } from '@visx/responsive';
 import { ChartTile } from '~/components-styled/chart-tile';
 import { StackedChart } from '~/components-styled/stacked-chart';
 import { AllLanguages } from '~/locale';
@@ -120,37 +119,32 @@ export function VaccineDeliveryBarChart({
         source: siteText.vaccinaties.bronnen.rivm,
       }}
     >
-      <ParentSize>
-        {({ width }) => (
-          <StackedChart
-            width={width}
-            values={data.values}
-            config={[
-              {
-                metricProperty: 'bio_n_tech_pfizer',
-                color: colors.data.vaccines.bio_n_tech_pfizer,
-                label: 'BioNTech/Pfizer',
-              },
-              {
-                metricProperty: 'moderna',
-                color: colors.data.vaccines.moderna,
-                label: 'Moderna',
-              },
-              {
-                metricProperty: 'astra_zeneca',
-                color: colors.data.vaccines.astra_zeneca,
-                label: 'AstraZeneca',
-              },
-            ]}
-            formatXAxis={(__value, index) =>
-              `Week ${data.values[index].week_number}`
-            }
-            expectedLabel={
-              siteText.vaccinaties.data.vaccination_chart.legend.expected
-            }
-          />
-        )}
-      </ParentSize>
+      <StackedChart
+        values={data.values}
+        config={[
+          {
+            metricProperty: 'bio_n_tech_pfizer',
+            color: colors.data.vaccines.bio_n_tech_pfizer,
+            label: 'BioNTech/Pfizer',
+          },
+          {
+            metricProperty: 'moderna',
+            color: colors.data.vaccines.moderna,
+            label: 'Moderna',
+          },
+          {
+            metricProperty: 'astra_zeneca',
+            color: colors.data.vaccines.astra_zeneca,
+            label: 'AstraZeneca',
+          },
+        ]}
+        formatXAxis={(__value, index) =>
+          `Week ${data.values[index].week_number}`
+        }
+        expectedLabel={
+          siteText.vaccinaties.data.vaccination_chart.legend.expected
+        }
+      />
     </ChartTile>
   );
 }

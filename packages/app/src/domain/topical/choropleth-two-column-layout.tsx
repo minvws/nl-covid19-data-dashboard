@@ -11,7 +11,7 @@ export function ChoroplethTwoColumnLayout(props: TopicalChoroplethTileProps) {
   const { children, legendComponent } = props;
   const childrenCount = Children.count(children);
 
-  const breakpoints = useBreakpoints();
+  const breakpoints = useBreakpoints(true);
 
   assert(
     childrenCount === 2,
