@@ -261,6 +261,8 @@ export interface NationalIntensiveCareNice {
 }
 export interface NationalIntensiveCareNiceValue {
   admissions_moving_average: number;
+  admissions_on_date_of_admission: number;
+  admissions_on_date_of_reporting: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
