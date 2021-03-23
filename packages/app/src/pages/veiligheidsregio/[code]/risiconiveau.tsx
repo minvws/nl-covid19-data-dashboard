@@ -30,6 +30,7 @@ import { useEscalationColor } from '~/utils/use-escalation-color';
 import { useIntl } from '~/intl';
 import { Layout } from '~/domain/layout/layout';
 import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
+import { Markdown } from '~/components-styled/markdown';
 
 export { getStaticPaths } from '~/static-paths/vr';
 
@@ -85,7 +86,11 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <SafetyRegionLayout lastGenerated={lastGenerated}>
+      <SafetyRegionLayout
+        data={data}
+        safetyRegionName={safetyRegionName}
+        lastGenerated={lastGenerated}
+      >
         <TileList>
           <ContentHeader
             category={siteText.veiligheidsregio_layout.headings.inschaling}
@@ -124,13 +129,11 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                 />
               </Box>
               {/* alignment with baseline of EscalationLevelInfoLabel */}
+
               <Box mt={{ sm: '-.55rem' }}>
-                <Text
-                  as="div"
-                  dangerouslySetInnerHTML={{
-                    __html: text.types[currentLevel].toelichting,
-                  }}
-                />
+                <Box mb={3}>
+                  <Markdown content={text.types[currentLevel].toelichting} />
+                </Box>
                 <Text fontWeight="bold">
                   {replaceVariablesInText(
                     text.escalation_level_last_determined,
@@ -183,12 +186,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                 value={tested_overall_sum.last_value.infected_per_100k}
               />
 
-              <Text
-                as="div"
-                dangerouslySetInnerHTML={{
-                  __html: text.positieve_testen.description,
-                }}
-              />
+              <Markdown content={text.positieve_testen.description} />
             </KpiTile>
 
             <KpiTile
@@ -219,12 +217,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                 value={hospital_nice_sum.last_value.admissions_per_1m}
               />
 
-              <Text
-                as="div"
-                dangerouslySetInnerHTML={{
-                  __html: text.ziekenhuisopnames.description,
-                }}
-              />
+              <Markdown content={text.ziekenhuisopnames.description} />
             </KpiTile>
           </TwoKpiSection>
 

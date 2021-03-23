@@ -136,10 +136,10 @@ export const ChartAxes = memo(function ChartAxes({
   return (
     <svg
       width={width}
-      height={height}
+      viewBox={`0 0 ${width} ${height}`}
       role="img"
       aria-labelledby={ariaLabelledBy}
-      css={css({ overflow: 'visible' })}
+      css={css({ overflow: 'visible', width: '100%' })}
     >
       <Group left={padding.left} top={padding.top}>
         {createComponent(

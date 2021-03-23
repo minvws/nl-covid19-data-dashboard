@@ -1,31 +1,32 @@
 import {
-  ChoroplethThresholdsValue,
   MunicipalHospitalNiceValue,
   MunicipalityProperties,
 } from '@corona-dashboard/common';
-import { ReactNode } from 'react';
 import { InlineText } from '~/components-styled/typography';
-import { MunicipalitySelectionHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
 import { TooltipSubject } from '~/components/choropleth/tooltips/tooltip-subject';
 import { useIntl } from '~/intl';
+import { useReverseRouter } from '~/utils/use-reverse-router';
+import { municipalThresholds } from '../../municipal-thresholds';
 
-export const createMunicipalHospitalAdmissionsTooltip = (
-  subject: string,
-  thresholdValues: ChoroplethThresholdsValue[],
-  selectHandler: MunicipalitySelectionHandler
-) => (
-  context: MunicipalityProperties & MunicipalHospitalNiceValue
-): ReactNode => {
-  const onSelect = (event: any) => {
-    event.stopPropagation();
-    selectHandler(context.gmcode);
-  };
+export function HospitalAdmissionsMunicipalTooltip({
+  context,
+}: {
+  context: MunicipalityProperties & MunicipalHospitalNiceValue;
+}) {
+  const intl = useIntl();
+  const reverseRouter = useReverseRouter();
+  const subject = intl.siteText.choropleth_tooltip.hospital_admissions;
+  const thresholdValues =
+    municipalThresholds.hospital_nice.admissions_on_date_of_reporting;
 
   const { siteText, formatNumber } = useIntl();
 
   return (
-    <TooltipContent title={context.gemnaam} onSelect={onSelect}>
+    <TooltipContent
+      title={context.gemnaam}
+      link={reverseRouter.gm.ziekenhuisopnames(context.gmcode)}
+    >
       <TooltipSubject
         subject={subject}
         thresholdValues={thresholdValues}
@@ -40,4 +41,4 @@ export const createMunicipalHospitalAdmissionsTooltip = (
       </TooltipSubject>
     </TooltipContent>
   );
-};
+}

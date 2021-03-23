@@ -23,11 +23,9 @@ import { WarningTile } from '~/components-styled/warning-tile';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
-import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
-import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
-import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
-import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/create-positive-tested-people-regional-tooltip';
-import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
+import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
+import { PositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/positive-tested-people-regional-tooltip';
+import { EscalationRegionalTooltip } from '~/components/choropleth/tooltips/region/escalation-regional-tooltip';
 import { ArticleList } from '~/domain/topical/article-list';
 import { ChoroplethTwoColumnLayout } from '~/domain/topical/choropleth-two-column-layout';
 import { EditorialSummary } from '~/domain/topical/editorial-teaser';
@@ -55,9 +53,18 @@ import { getSafetyRegionForMunicipalityCode } from '~/utils/getSafetyRegionForMu
 import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 export { getStaticPaths } from '~/static-paths/gm';
 import { useIntl } from '~/intl';
 import { Layout } from '~/domain/layout/layout';
+import {
+  EscalationLevels,
+  MunicipalitiesTestedOverall,
+  MunicipalityProperties,
+  RegionsTestedOverall,
+  SafetyRegionProperties,
+} from '@corona-dashboard/common';
+import { Markdown } from '~/components-styled/markdown';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -80,6 +87,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
   const { municipalityName, choropleth, data, content, lastGenerated } = props;
 
   const router = useRouter();
+  const reverseRouter = useReverseRouter();
   const { siteText, formatDate } = useIntl();
 
   const text = siteText.gemeente_actueel;
@@ -284,9 +292,14 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                     data={choropleth.vr}
                     metricName="escalation_levels"
                     metricProperty="level"
-                    onSelect={createSelectRegionHandler(router, 'risiconiveau')}
-                    tooltipContent={escalationTooltip(
-                      createSelectRegionHandler(router, 'risiconiveau')
+                    getLink={reverseRouter.vr.risiconiveau}
+                    tooltipContent={(
+                      context: SafetyRegionProperties & EscalationLevels
+                    ) => (
+                      <EscalationRegionalTooltip
+                        context={context}
+                        getLink={reverseRouter.vr.risiconiveau}
+                      />
                     )}
                   />
                 </Box>
@@ -307,9 +320,9 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                         />
                       </Box>
                     )}
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: replaceVariablesInText(
+                  <Box mb={3}>
+                    <Markdown
+                      content={replaceVariablesInText(
                         text.risiconiveaus.selecteer_toelichting,
                         {
                           last_update: formatDate(
@@ -318,9 +331,9 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                             'day-month'
                           ),
                         }
-                      ),
-                    }}
-                  />
+                      )}
+                    />
+                  </Box>
                 </Box>
               </ChoroplethTwoColumnLayout>
 
@@ -353,38 +366,31 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                   {selectedMap === 'municipal' && (
                     <MunicipalityChoropleth
                       data={choropleth.gm}
+                      getLink={reverseRouter.vr.positiefGetesteMensen}
                       metricName="tested_overall"
                       metricProperty="infected_per_100k"
-                      tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
-                        siteText.choropleth_tooltip.positive_tested_people,
-                        regionThresholds.tested_overall.infected_per_100k,
-                        createSelectMunicipalHandler(
-                          router,
-                          'positief-geteste-mensen'
-                        )
-                      )}
-                      onSelect={createSelectMunicipalHandler(
-                        router,
-                        'positief-geteste-mensen'
+                      tooltipContent={(
+                        context: MunicipalityProperties &
+                          MunicipalitiesTestedOverall
+                      ) => (
+                        <PositiveTestedPeopleMunicipalTooltip
+                          context={context}
+                        />
                       )}
                     />
                   )}
                   {selectedMap === 'region' && (
                     <SafetyRegionChoropleth
                       data={choropleth.vr}
+                      getLink={reverseRouter.vr.positiefGetesteMensen}
                       metricName="tested_overall"
                       metricProperty="infected_per_100k"
-                      tooltipContent={createPositiveTestedPeopleRegionalTooltip(
-                        siteText.choropleth_tooltip.positive_tested_people,
-                        regionThresholds.tested_overall.infected_per_100k,
-                        createSelectRegionHandler(
-                          router,
-                          'positief-geteste-mensen'
-                        )
-                      )}
-                      onSelect={createSelectRegionHandler(
-                        router,
-                        'positief-geteste-mensen'
+                      tooltipContent={(
+                        context: SafetyRegionProperties & RegionsTestedOverall
+                      ) => (
+                        <PositiveTestedPeopleRegionalTooltip
+                          context={context}
+                        />
                       )}
                     />
                   )}

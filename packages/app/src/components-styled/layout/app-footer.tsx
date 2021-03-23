@@ -7,6 +7,7 @@ import { MaxWidth } from '~/components-styled/max-width';
 import { useIntl } from '~/intl';
 import { Link } from '~/utils/link';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { Markdown } from '~/components-styled/markdown';
 
 export function AppFooter({ lastGenerated }: { lastGenerated: string }) {
   const { siteText: text } = useIntl();
@@ -75,12 +76,10 @@ function LastGeneratedMessage({ date }: { date: string }) {
       <Box fontSize={3} fontWeight="bold" mb={3}>
         {text.laatst_bijgewerkt.title}
       </Box>
-      <p
-        dangerouslySetInnerHTML={{
-          __html: replaceVariablesInText(text.laatst_bijgewerkt.message, {
-            dateOfInsertion: `<time datetime=${dateIso}>${dateLong}</time>`,
-          }),
-        }}
+      <Markdown
+        content={replaceVariablesInText(text.laatst_bijgewerkt.message, {
+          dateOfInsertion: `<time datetime=${dateIso}>${dateLong}</time>`,
+        })}
       />
     </Box>
   );
