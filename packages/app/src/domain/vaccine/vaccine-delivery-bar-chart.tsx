@@ -9,7 +9,7 @@ import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 interface VaccineDeliveryBarChartProps {
-  data: NlVaccineDeliveryPerSupplier;
+  data?: NlVaccineDeliveryPerSupplier;
   siteText: AllLanguages;
 }
 

@@ -353,12 +353,10 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             </Box>
           </ChartTile>
 
-          {/* {data.vaccine_delivery_per_supplier ? ( */}
           <VaccineDeliveryBarChart
             data={data.vaccine_delivery_per_supplier}
             siteText={siteText}
           />
-          {/* ) : null} */}
 
           <MilestonesView
             title={milestones.title}
