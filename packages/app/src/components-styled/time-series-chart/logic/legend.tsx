@@ -10,7 +10,7 @@ export function useLegendItems<T extends TimestampedValue>(
   dataOptions?: DataOptions
 ) {
   const legendItems = useMemo(() => {
-    const items = [...config].filter(isVisible).map<LegendItem>((x) => ({
+    const items = config.filter(isVisible).map<LegendItem>((x) => ({
       color: x.color,
       label: x.label,
       shape: 'custom',
