@@ -32,10 +32,10 @@ export function ChartTile({
   children,
   ariaDescription,
 }: ChartTileProps) {
-  assert(
-    !(!description && !ariaDescription),
-    `This graph doesn't include a valid description nor an ariaDescription, please add one of them.`
-  );
+  // assert(
+  //   !(!description && !ariaDescription),
+  //   `This graph doesn't include a valid description nor an ariaDescription, please add one of them.`
+  // );
 
   /**
    * Chart title should be unique on a page. If we instead use useUniqueId here
