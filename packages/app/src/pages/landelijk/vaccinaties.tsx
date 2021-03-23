@@ -16,12 +16,14 @@ import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { Legend } from '~/components-styled/legend';
+import { Markdown } from '~/components-styled/markdown';
 import { RadioGroup } from '~/components-styled/radio-group';
 import { TileList } from '~/components-styled/tile-list';
 import { TimeSeriesChart } from '~/components-styled/time-series-chart';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { InlineText, Text } from '~/components-styled/typography';
-import { VaccineSupportTooltip } from '~/domain/vaccine/components/vaccine-support-tooltip';
+import { Layout } from '~/domain/layout/layout';
+import { NationalLayout } from '~/domain/layout/national-layout';
 import {
   MilestonesView,
   MilestoneViewProps,
@@ -31,6 +33,7 @@ import { useVaccineNames } from '~/domain/vaccine/use-vaccine-names';
 import { VaccineDeliveryBarChart } from '~/domain/vaccine/vaccine-delivery-bar-chart';
 import { FormatVaccinationsTooltip } from '~/domain/vaccine/vaccine-delivery-tooltip';
 import { VaccinePageIntroduction } from '~/domain/vaccine/vaccine-page-introduction';
+import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { getVaccineMilestonesQuery } from '~/queries/vaccine-milestones-query';
 import {
@@ -44,10 +47,6 @@ import {
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { useIntl } from '~/intl';
-import { Layout } from '~/domain/layout/layout';
-import { NationalLayout } from '~/domain/layout/national-layout';
-import { Markdown } from '~/components-styled/markdown';
 
 const scaledVaccineIcon = (
   <Box p={2}>
@@ -402,7 +401,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             </section>
 
             <TimeSeriesChart
-              title={text.grafiek_draagvlak.titel}
+              tooltipTitle={text.grafiek_draagvlak.titel}
               ariaLabelledBy="chart_vaccine_support"
               values={data.vaccine_support.values}
               numGridLines={20}
@@ -414,30 +413,12 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               seriesConfig={[
                 {
                   type: 'line',
-                  metricProperty: 'percentage_16_24',
+                  metricProperty: 'percentage_70_plus',
                   label: replaceVariablesInText(
                     text.grafiek_draagvlak.leeftijd_jaar,
-                    { ageGroup: '16 - 24' }
+                    { ageGroup: '70+' }
                   ),
-                  color: colors.data.multiseries.cyan,
-                },
-                {
-                  type: 'line',
-                  metricProperty: 'percentage_25_39',
-                  label: replaceVariablesInText(
-                    text.grafiek_draagvlak.leeftijd_jaar,
-                    { ageGroup: '25 - 39' }
-                  ),
-                  color: colors.data.multiseries.yellow,
-                },
-                {
-                  type: 'line',
-                  metricProperty: 'percentage_40_54',
-                  label: replaceVariablesInText(
-                    text.grafiek_draagvlak.leeftijd_jaar,
-                    { ageGroup: '40 - 54' }
-                  ),
-                  color: colors.data.multiseries.turquoise,
+                  color: colors.data.multiseries.magenta,
                 },
                 {
                   type: 'line',
@@ -450,17 +431,38 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 },
                 {
                   type: 'line',
-                  metricProperty: 'percentage_70_plus',
+                  metricProperty: 'percentage_40_54',
                   label: replaceVariablesInText(
                     text.grafiek_draagvlak.leeftijd_jaar,
-                    { ageGroup: '70+' }
+                    { ageGroup: '40 - 54' }
                   ),
-                  color: colors.data.multiseries.magenta,
+                  color: colors.data.multiseries.turquoise,
+                },
+                {
+                  type: 'line',
+                  metricProperty: 'percentage_25_39',
+                  label: replaceVariablesInText(
+                    text.grafiek_draagvlak.leeftijd_jaar,
+                    { ageGroup: '25 - 39' }
+                  ),
+                  color: colors.data.multiseries.yellow,
+                },
+                {
+                  type: 'line',
+                  metricProperty: 'percentage_16_24',
+                  label: replaceVariablesInText(
+                    text.grafiek_draagvlak.leeftijd_jaar,
+                    { ageGroup: '16 - 24' }
+                  ),
+                  color: colors.data.multiseries.cyan,
+                },
+                {
+                  type: 'invisible',
+                  metricProperty: 'percentage_average',
+                  label: siteText.common.totaal,
+                  isPercentage: true,
                 },
               ]}
-              formatTooltip={({ value, config }) => (
-                <VaccineSupportTooltip value={value} config={config} />
-              )}
             />
           </ChartTile>
 
