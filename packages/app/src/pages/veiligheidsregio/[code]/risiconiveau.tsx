@@ -39,6 +39,7 @@ import {
   getLastGeneratedDate,
   getVrData,
 } from '~/static-props/get-data';
+import { asResponsiveArray } from '~/style/utils';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { useEscalationColor } from '~/utils/use-escalation-color';
@@ -131,14 +132,16 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
               {text.current_escalation_level}
             </Heading>
             <Box display="flex" flexDirection={{ _: 'column', md: 'row' }}>
-              <Box width={{ _: '100%', md: '50%' }} pr={{ _: 0, md: 2 }}>
-                <EscalationLevelInfoLabel
-                  level={currentLevel}
-                  fontSize={4}
-                  useLevelColor
-                  hasBigIcon
-                />
-                <Text mt={3}>{text.momenteel.description}</Text>
+              <Box width={{ _: '100%', md: '50%' }} pr={{ _: 0, md: 3 }}>
+                <Box mb={3}>
+                  <EscalationLevelInfoLabel
+                    level={currentLevel}
+                    fontSize={4}
+                    useLevelColor
+                    hasBigIcon
+                  />
+                </Box>
+                <Markdown content={text.types[currentLevel].toelichting} />
                 <Text>
                   {replaceVariablesInText(text.momenteel.description_from_to, {
                     last_determined: formatDateFromSeconds(
@@ -155,7 +158,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                   })}
                 </Text>
               </Box>
-              <Box width={{ _: '100%', md: '50%' }} pl={{ _: 0, md: 2 }} mb={3}>
+              <Box width={{ _: '100%', md: '50%' }} pl={{ _: 0, md: 3 }} mb={3}>
                 <UnorderedList>
                   <ListItem
                     title={text.momenteel.last_determined}
@@ -198,52 +201,6 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                     isAroundDate
                   />
                 </UnorderedList>
-              </Box>
-            </Box>
-          </Tile>
-
-          <Tile>
-            <Heading level={3} as="h2">
-              {text.current_escalation_level}
-            </Heading>
-
-            <Box
-              display={{ _: 'block', sm: 'flex' }}
-              spacing={3}
-              spacingHorizontal
-            >
-              <Box flex="0 0 10rem">
-                <EscalationLevelInfoLabel
-                  level={currentLevel}
-                  fontSize={3}
-                  useLevelColor
-                />
-              </Box>
-              {/* alignment with baseline of EscalationLevelInfoLabel */}
-
-              <Box mt={{ sm: '-.55rem' }}>
-                <Box mb={3}>
-                  <Markdown content={text.types[currentLevel].toelichting} />
-                </Box>
-                <Text fontWeight="bold">
-                  {replaceVariablesInText(
-                    text.escalation_level_last_determined,
-                    {
-                      last_determined: formatDateFromSeconds(
-                        data.escalation_level.last_determined_unix
-                      ),
-                      based_from: formatDateFromSeconds(
-                        data.escalation_level.based_on_statistics_from_unix
-                      ),
-                      based_to: formatDateFromSeconds(
-                        data.escalation_level.based_on_statistics_to_unix
-                      ),
-                      next_determined: formatDateFromSeconds(
-                        data.escalation_level.next_determined_unix
-                      ),
-                    }
-                  )}
-                </Text>
               </Box>
             </Box>
           </Tile>
@@ -355,18 +312,20 @@ function ListItem({
           height={18}
           mt="2px"
           mr={2}
-          css={css({
-            svg: {
-              width: '100%',
-            },
-          })}
         >
           {icon}
         </Box>
-        <Text m={0}>
+        <Text
+          m={0}
+          css={css({
+            display: asResponsiveArray({ _: 'block', xs: 'flex' }),
+            flexWrap: 'wrap',
+            whiteSpace: 'pre-wrap',
+          })}
+        >
           <InlineText fontWeight="bold">{`${title} `}</InlineText>
           {date && (
-            <>
+            <span>
               {Array.isArray(date)
                 ? replaceVariablesInText(
                     siteText.vr_risiconiveau.momenteel.established_with
@@ -379,7 +338,7 @@ function ListItem({
                 : `${
                     isAroundDate ? `${siteText.common.rond} ` : ''
                   }${formatDateFromSeconds(date)}`}
-            </>
+            </span>
           )}
         </Text>
       </Box>
@@ -412,6 +371,10 @@ const UnorderedList = styled.ul({
   margin: 0,
   padding: 0,
   listStyleType: 'none',
+
+  svg: {
+    width: '100%',
+  },
 });
 
 const StyledList = styled.li<{ hasBorderBottom?: boolean }>((x) =>
