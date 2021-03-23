@@ -1,56 +1,27 @@
-import { useRouter } from 'next/router';
-import { ReactNode } from 'react';
 import { Box } from '~/components-styled/base';
 import { Heading, Text } from '~/components-styled/typography';
 import { MunicipalityNavigationMap } from '~/components/choropleth/municipality-navigation-map';
-import {
-  createSelectMunicipalHandler,
-  MunicipalitySelectionHandler,
-} from '~/components/choropleth/select-handlers/create-select-municipal-handler';
-import { MunicipalityProperties } from '@corona-dashboard/common';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
 import { MunicipalityComboBox } from '~/domain/layout/components/municipality-combo-box';
-import { getLastGeneratedDate } from '~/static-props/get-data';
+import { Layout } from '~/domain/layout/layout';
+import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
+import { useIntl } from '~/intl';
 import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
+import { getLastGeneratedDate } from '~/static-props/get-data';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 import { useBreakpoints } from '~/utils/useBreakpoints';
-import { Layout } from '~/domain/layout/layout';
-import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
-import { useIntl } from '~/intl';
-import { getGmData } from '~/static-props/get-data';
 
-const tooltipContent = (selectedHandler: MunicipalitySelectionHandler) => {
-  return (context: MunicipalityProperties): ReactNode => {
-    const onSelectMunicipal = (event: any) => {
-      event.stopPropagation();
-      selectedHandler(context.gmcode);
-    };
-
-    return (
-      <TooltipContent title={context.gemnaam} onSelect={onSelectMunicipal} />
-    );
-  };
-};
-
-export const getStaticProps = createGetStaticProps(
-  getLastGeneratedDate,
-  getGmData
-);
+export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
 
 const Municipality = (props: StaticProps<typeof getStaticProps>) => {
-  const { data, lastGenerated } = props;
+  const { lastGenerated } = props;
   const { siteText } = useIntl();
+  const reverseRouter = useReverseRouter();
 
-  const router = useRouter();
   const breakpoints = useBreakpoints();
-
-  const goToMunicipal = createSelectMunicipalHandler(
-    router,
-    'positief-geteste-mensen',
-    !breakpoints.md
-  );
 
   const metadata = {
     ...siteText.gemeente_index.metadata,
@@ -58,10 +29,10 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <MunicipalityLayout data={data} lastGenerated={lastGenerated}>
+      <MunicipalityLayout isLandingPage lastGenerated={lastGenerated}>
         {!breakpoints.md && (
           <Box bg="white">
-            <MunicipalityComboBox onSelect={goToMunicipal} />
+            <MunicipalityComboBox />
           </Box>
         )}
 
@@ -81,8 +52,12 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
             margin="0 auto"
           >
             <MunicipalityNavigationMap
-              tooltipContent={tooltipContent(goToMunicipal)}
-              onSelect={goToMunicipal}
+              tooltipContent={(context) => (
+                <TooltipContent
+                  title={context.gemnaam}
+                  link={reverseRouter.gm.index(context.gmcode)}
+                />
+              )}
             />
           </Box>
         </Box>

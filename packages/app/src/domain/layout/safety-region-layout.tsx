@@ -15,22 +15,31 @@ import {
   MetricMenuItemLink,
 } from '~/components-styled/aside/menu';
 import { Box } from '~/components-styled/base';
+import { EscalationLevelInfoLabel } from '~/components-styled/escalation-level';
 import { AppContent } from '~/components-styled/layout/app-content';
 import { SidebarMetric } from '~/components-styled/sidebar-metric';
 import { Text } from '~/components-styled/typography';
-import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
 import { useIntl } from '~/intl';
-import { useBreakpoints } from '~/utils/useBreakpoints';
-import { SafetyRegionComboBox } from './components/safety-region-combo-box';
-import { EscalationLevelInfoLabel } from '~/components-styled/escalation-level';
 import { EscalationLevel } from '../restrictions/type';
+import { SafetyRegionComboBox } from './components/safety-region-combo-box';
 
-interface SafetyRegionLayoutProps {
+type SafetyRegionLayoutProps = {
   lastGenerated: string;
-  data: Regionaal;
-  safetyRegionName?: string;
   children?: React.ReactNode;
-}
+} & (
+  | {
+      data: Regionaal;
+      safetyRegionName: string;
+    }
+  | {
+      /**
+       * the route `/veiligheidsregio` can render without sidebar and thus without `data`
+       */
+      isLandingPage: true;
+      data?: undefined;
+      safetyRegionName?: undefined;
+    }
+);
 
 /**
  * SafetyRegionLayout is a composition of persistent layouts.
@@ -51,7 +60,6 @@ interface SafetyRegionLayoutProps {
 export function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
   const { children, data, safetyRegionName } = props;
 
-  const breakpoints = useBreakpoints();
   const router = useRouter();
   const { siteText } = useIntl();
 
@@ -62,12 +70,6 @@ export function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
     router.route === `/veiligheidsregio/[code]`;
 
   const showMetricLinks = router.route !== '/veiligheidsregio';
-
-  const goToSafetyRegion = createSelectRegionHandler(
-    router,
-    'maatregelen',
-    !breakpoints.md
-  );
 
   return (
     <>
@@ -87,7 +89,7 @@ export function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
 
       <AppContent
         hideMenuButton={isMainRoute}
-        searchComponent={<SafetyRegionComboBox onSelect={goToSafetyRegion} />}
+        searchComponent={<SafetyRegionComboBox />}
         sidebarComponent={
           <>
             {/**

@@ -37,10 +37,10 @@ export function ChartContainer({
   return (
     <svg
       width={width}
-      height={height}
+      viewBox={`0 0 ${width} ${height}`}
       role="img"
       aria-labelledby={ariaLabelledBy}
-      style={{ touchAction: 'pan-y' }}
+      style={{ touchAction: 'pan-y', userSelect: 'none', width: '100%' }}
       onTouchStart={onHover}
       onTouchMove={onHover}
       onMouseMove={onHover}
