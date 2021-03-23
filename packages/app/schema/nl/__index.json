@@ -177,6 +177,9 @@
     "vaccine_administered_planned": {
       "$ref": "vaccine_administered_planned.json"
     },
+    "vaccine_coverage_per_age_group": {
+      "$ref": "vaccine_coverage_per_age_group.json"
+    },
     "vaccine_stock": {
       "$ref": "vaccine_stock.json"
     }
