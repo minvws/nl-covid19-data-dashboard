@@ -12,14 +12,14 @@ export interface MetadataProps {
     aria_text?: string;
   };
   obtained?: number;
-  tileFooter?: boolean;
+  isTileFooter?: boolean;
 }
 
 export function Metadata({
   date,
   source,
   obtained,
-  tileFooter,
+  isTileFooter,
 }: MetadataProps) {
   const { siteText, formatDateFromSeconds } = useIntl();
 
@@ -37,7 +37,7 @@ export function Metadata({
 
   return (
     <>
-      {!tileFooter && source && (
+      {!isTileFooter && source && (
         <Text mb={3} color="annotation" fontSize={1}>
           {`${dateString} - ${siteText.common.metadata.source}: `}
           <ExternalLink ariaLabel={source.aria_text} href={source.href}>
@@ -46,7 +46,7 @@ export function Metadata({
         </Text>
       )}
 
-      {tileFooter && (
+      {isTileFooter && (
         <Box as="footer" mt={3} mb={{ _: 0, sm: -3 }} gridArea="metadata">
           <Text my={0} color="annotation" fontSize={1}>
             {dateString}
