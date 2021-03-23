@@ -30,10 +30,9 @@ export function LockdownTable(props: LockdownTableProps) {
 
 /**
  *
- * This function returns a css filter to change an image from black to the desired escalation level
+ * This function returns a css filter to change an image from black to the desired escalation level color
  * We can't use fill or currentColor because we're loading the SVG's as images to save on bundle size
  * The colors are pre-calculated though this URL: https://codepen.io/sosuke/pen/Pjoqqp
- * @returns
  */
 function getEscalationFilter(escalationLevel: 1 | 2 | 3 | 4) {
   switch (escalationLevel) {
