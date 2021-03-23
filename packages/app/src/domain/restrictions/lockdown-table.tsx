@@ -16,11 +16,16 @@ export function LockdownTable(props: LockdownTableProps) {
 
   const breakpoints = useBreakpoints(true);
 
+  //@TODO This should come from data or the CMS.
+  const escalationLevel = 4;
+
   if (breakpoints.lg) {
-    return <DesktopLockdownTable data={data} escalationLevel={4} />;
+    return (
+      <DesktopLockdownTable data={data} escalationLevel={escalationLevel} />
+    );
   }
 
-  return <MobileLockdownTable data={data} escalationLevel={4} />;
+  return <MobileLockdownTable data={data} escalationLevel={escalationLevel} />;
 }
 
 /**
