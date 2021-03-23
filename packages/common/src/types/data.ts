@@ -146,6 +146,7 @@ export interface National {
   code: string;
   difference: NationalDifference;
   doctor: NationalDoctor;
+  g_number?: NlGNumber;
   infectious_people: NationalInfectiousPeople;
   intensive_care_nice: NationalIntensiveCareNice;
   tested_overall: NationalTestedOverall;
@@ -182,6 +183,7 @@ export interface National {
   vaccine_administered_total: NlVaccineAdministeredTotal;
   vaccine_administered_rate_moving_average: NlVaccineAdministeredRateMovingAverage;
   vaccine_administered_planned: NlVaccineAdministeredPlanned;
+  vaccine_coverage_per_age_group?: NlVaccineCoveragePerAgeGroup;
   vaccine_stock?: NlVaccineStock;
 }
 export interface NationalDifference {
@@ -230,6 +232,16 @@ export interface NationalDoctorValue {
   date_end_unix: number;
   covid_symptoms_per_100k: number;
   covid_symptoms: number;
+  date_of_insertion_unix: number;
+}
+export interface NlGNumber {
+  values: NlGNumberValue[];
+  last_value: NlGNumberValue;
+}
+export interface NlGNumberValue {
+  g_number: number;
+  date_start_unix: number;
+  date_end_unix: number;
   date_of_insertion_unix: number;
 }
 export interface NationalInfectiousPeople {
@@ -680,6 +692,20 @@ export interface NlVaccineAdministeredPlannedValue {
   date_end_unix: number;
   date_of_insertion_unix: number;
 }
+export interface NlVaccineCoveragePerAgeGroup {
+  values: NlVaccineCoveragePerAgeGroupValue[];
+}
+export interface NlVaccineCoveragePerAgeGroupValue {
+  age_group_range: string;
+  age_group_percentage: number;
+  age_group_total: number;
+  fully_vaccinated: number;
+  partially_vaccinated: number;
+  fully_vaccinated_percentage: number;
+  date_unix: number;
+  date_of_insertion_unix: number;
+  date_of_report_unix: number;
+}
 export interface NlVaccineStock {
   values: NlVaccineStockValue[];
   last_value: NlVaccineStockValue;
@@ -699,6 +725,7 @@ export interface Regionaal {
   name: string;
   code: string;
   difference: RegionalDifference;
+  g_number?: VrGNumber;
   sewer: RegionalSewer;
   sewer_per_installation: RegionalSewerPerInstallation;
   tested_overall: RegionalTestedOverall;
@@ -744,6 +771,16 @@ export interface DifferenceInteger {
   difference: number;
   old_date_unix: number;
   new_date_unix: number;
+}
+export interface VrGNumber {
+  values: VrGNumberValue[];
+  last_value: VrGNumberValue;
+}
+export interface VrGNumberValue {
+  g_number: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
 }
 export interface RegionalSewer {
   values: RegionalSewerValue[];

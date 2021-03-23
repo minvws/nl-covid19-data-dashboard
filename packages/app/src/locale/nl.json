@@ -264,6 +264,12 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
         "text": "RIVM"
       }
+    },
+    "tooltip_labels": {
+      "infected_per_100k": "Positief getest per 100.000",
+      "infected_percentage": "Percentage positieve testen",
+      "tested_total": "Totaal aantal testen",
+      "infected": "Aantal positieve testen"
     }
   },
   "besmettelijke_personen": {
@@ -635,7 +641,7 @@
       "obtained": "verkregen op {{date}}"
     },
     "barScale": {
-      "signaalwaarde": "Signaalwaarde"
+      "signaalwaarde": "__niet meer gebruikt"
     },
     "zoekveld_geen_resultaten": "Geen resultaten",
     "zoekveld_placeholder_regio": "Zoek op veiligheidsregio ",
@@ -646,8 +652,8 @@
       "dateRangeOfReport": "Waarde van {{startDate}} - {{endDate}}"
     },
     "tooltip": {
-      "positive_tested_people": "{{totalPositiveTestedPeople}} in totaal",
-      "positive_tested_value": "{{totalPositiveValue}} per 100.000",
+      "positive_tested_people": "__niet meer gebruikt",
+      "positive_tested_value": "__niet meer gebruikt",
       "vaccinatie_bereidheid": "{{percentageInFavor}}% vaccinatiebereidheid"
     },
     "niveau": "niveau",
@@ -662,7 +668,9 @@
     "read_more": "Lees meer",
     "absolute_date_template": "op {{date}}",
     "inwoners": "inwoners",
-    "miljoen": "miljoen"
+    "miljoen": "miljoen",
+    "signaalwaarde": "Signaalwaarde",
+    "totaal": "Totaal"
   },
   "seoHead": {
     "default_description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
@@ -770,13 +778,7 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": [
-      "0 tot 20",
-      "20 tot 40",
-      "40 tot 60",
-      "60 tot 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -1899,6 +1901,9 @@
     "VR25": "http://www.veiligheidsregioflevoland.nl/"
   },
   "choropleth": {
+    "a11y": {
+      "tab_navigatie_button": "'Navigeer met Tab door alle {{subject}}"
+    },
     "verb": {
       "singular": "heeft",
       "plural": "hebben"
@@ -2125,11 +2130,7 @@
     "expected_page_additions": {
       "title": "Verwachte toevoegingen aan deze pagina",
       "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer de vaccinatiegraad.",
-      "additions": [
-        "",
-        "",
-        ""
-      ]
+      "additions": ["", "", ""]
     },
     "data": {
       "difference": "Do not remove this key. It is required as a temporary workaround",
@@ -2254,11 +2255,7 @@
       "kpi_expected_page_additions": {
         "title": "Verwachte toevoegingen aan deze pagina",
         "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer de vaccinatiegraad.",
-        "additions": [
-          "",
-          "",
-          ""
-        ]
+        "additions": ["", "", ""]
       },
       "vaccination_chart": {
         "product_names": {

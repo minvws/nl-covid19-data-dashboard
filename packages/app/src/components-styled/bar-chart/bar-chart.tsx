@@ -20,7 +20,7 @@ export function BarChart({
   accessibilityDescription,
   valueAnnotation,
 }: BarChartProps) {
-  const [sizeRef, size] = useElementSize<HTMLDivElement>(400);
+  const [sizeRef, size] = useElementSize<HTMLDivElement>(840);
 
   const coordinates = useBarChartCoordinates(values, size.width);
 

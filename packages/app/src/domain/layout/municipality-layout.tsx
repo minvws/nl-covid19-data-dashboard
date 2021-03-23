@@ -15,19 +15,28 @@ import { Box } from '~/components-styled/base';
 import { AppContent } from '~/components-styled/layout/app-content';
 import { SidebarMetric } from '~/components-styled/sidebar-metric';
 import { Text } from '~/components-styled/typography';
-import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
 import { useIntl } from '~/intl';
 import { getSafetyRegionForMunicipalityCode } from '~/utils/getSafetyRegionForMunicipalityCode';
 import { Link } from '~/utils/link';
-import { useBreakpoints } from '~/utils/useBreakpoints';
 import { MunicipalityComboBox } from './components/municipality-combo-box';
 
-interface MunicipalityLayoutProps {
+type MunicipalityLayoutProps = {
   lastGenerated: string;
-  data?: Municipal;
-  municipalityName?: string;
   children?: React.ReactNode;
-}
+} & (
+  | {
+      data: Municipal;
+      municipalityName: string;
+    }
+  | {
+      /**
+       * the route `/gemeente` can render without sidebar and thus without `data`
+       */
+      isLandingPage: true;
+      data?: undefined;
+      municipalityName?: undefined;
+    }
+);
 
 /**
  * MunicipalityLayout is a composition of persistent layouts.
@@ -49,7 +58,6 @@ export function MunicipalityLayout(props: MunicipalityLayoutProps) {
   const { children, data, municipalityName } = props;
 
   const { siteText } = useIntl();
-  const breakpoints = useBreakpoints();
   const router = useRouter();
   const { code } = router.query;
 
@@ -59,12 +67,6 @@ export function MunicipalityLayout(props: MunicipalityLayoutProps) {
     router.route === '/gemeente' || router.route === `/gemeente/[code]`;
 
   const safetyRegion = getSafetyRegionForMunicipalityCode(code as string);
-
-  const goToMunicipal = createSelectMunicipalHandler(
-    router,
-    'positief-geteste-mensen',
-    !breakpoints.md
-  );
 
   return (
     <>
@@ -83,7 +85,7 @@ export function MunicipalityLayout(props: MunicipalityLayoutProps) {
       </Head>
       <AppContent
         hideMenuButton={isMainRoute}
-        searchComponent={<MunicipalityComboBox onSelect={goToMunicipal} />}
+        searchComponent={<MunicipalityComboBox />}
         sidebarComponent={
           <>
             {showMetricLinks && (

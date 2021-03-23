@@ -1,4 +1,4 @@
-import useResizeObserver from 'use-resize-observer/polyfilled';
+import { useElementSize } from '~/utils/use-element-size';
 
 /**
  * This code was originally inspired by https://wattenberger.com/blog/react-and-d3
@@ -45,18 +45,11 @@ export type TCombinedChartDimensions = TChartDimensions & {
   boundedHeight: number;
 };
 
-export const useChartDimensions = <T extends HTMLElement>(
-  aspectRatio?: number
-) => {
-  /**
-   * The ref will be initialized from the outside by mutating the return value of this
-   * hook. This is a bit funky.
-   *
-   * @REF https://trello.com/c/i25FG3jk/548-usechartdemensions-pass-ref-as-prop
-   */
-
-  const { ref, width, height } = useResizeObserver<T>();
-
+export function useChartDimensions<T extends HTMLElement>(
+  initialWidth: number,
+  aspectRatio: number
+) {
+  const [ref, { width, height }] = useElementSize<T>(initialWidth);
   const calculatedHeight = aspectRatio && width ? width * aspectRatio : height;
 
   return [
@@ -66,4 +59,4 @@ export const useChartDimensions = <T extends HTMLElement>(
       height: calculatedHeight,
     }),
   ] as const;
-};
+}
