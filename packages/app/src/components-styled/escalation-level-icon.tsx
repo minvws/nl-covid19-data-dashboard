@@ -10,11 +10,13 @@ const escalationThresholds = regionThresholds.escalation_levels.level;
 interface EscalationLevelIconProps {
   level: EscalationLevel;
   isSmall?: boolean;
+  isBig?: boolean;
 }
 
 export function EscalationLevelIcon({
   level,
   isSmall,
+  isBig,
 }: EscalationLevelIconProps) {
   /* Colors are in a 0-indexed array */
   const color = escalationThresholds[level - 1].color;
@@ -27,6 +29,7 @@ export function EscalationLevelIcon({
         color={color}
         title={`${siteText.common.niveau} ${level}`}
         isSmall={isSmall}
+        isBig={isBig}
       >
         {level}
       </StyledEscalationLevelIcon>
@@ -37,10 +40,12 @@ export function EscalationLevelIcon({
 const StyledEscalationLevelIcon = styled.div<{
   color: string;
   isSmall?: boolean;
-}>(({ color, isSmall }) => {
-  const size = isSmall
-    ? asResponsiveArray({ _: 20, sm: 20 })
-    : asResponsiveArray({ _: 24, sm: 22 });
+  isBig?: boolean;
+}>(({ color, isSmall, isBig }) => {
+  let size = asResponsiveArray({ _: 24, sm: 22 });
+  if (isSmall) size = asResponsiveArray({ _: 20, sm: 20 });
+  if (isBig) size = asResponsiveArray({ _: 45, sm: 45 });
+
   return css({
     width: size,
     height: size,
@@ -50,7 +55,13 @@ const StyledEscalationLevelIcon = styled.div<{
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    fontSize: isSmall ? 14 : asResponsiveArray({ _: 14, sm: 18 }),
+    fontSize:
+      isSmall || isBig
+        ? isSmall
+          ? 14 // small
+          : 28 // big
+        : asResponsiveArray({ _: 14, sm: 18 }), // default
     fontWeight: 'bold',
+    lineHeight: 'normal',
   });
 });

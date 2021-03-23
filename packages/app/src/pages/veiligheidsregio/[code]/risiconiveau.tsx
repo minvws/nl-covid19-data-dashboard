@@ -1,3 +1,10 @@
+import css from '@styled-system/css';
+import { ReactNode } from 'react';
+import styled from 'styled-components';
+import BarChart from '~/assets/bar-chart.svg';
+import Calender from '~/assets/calender.svg';
+import Getest from '~/assets/test.svg';
+import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
@@ -6,15 +13,22 @@ import {
   getCategoryLevel,
 } from '~/components-styled/categorical-bar-scale';
 import { ContentHeader } from '~/components-styled/content-header';
-import { EscalationLevelInfoLabel } from '~/components-styled/escalation-level';
+import {
+  EscalationLevelInfoLabel,
+  EscalationLevelString,
+} from '~/components-styled/escalation-level';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
+import { Markdown } from '~/components-styled/markdown';
 import { Tile } from '~/components-styled/tile';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components-styled/typography';
 import { useEscalationThresholds } from '~/domain/escalation-level/thresholds';
+import { Layout } from '~/domain/layout/layout';
+import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { EscalationLevel } from '~/domain/restrictions/type';
+import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
@@ -25,13 +39,9 @@ import {
   getLastGeneratedDate,
   getVrData,
 } from '~/static-props/get-data';
+import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { useEscalationColor } from '~/utils/use-escalation-color';
-import { useIntl } from '~/intl';
-import { Layout } from '~/domain/layout/layout';
-import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
-import { Markdown } from '~/components-styled/markdown';
-
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
@@ -84,6 +94,11 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
     }),
   };
 
+  const escalationColor = useEscalationColor(currentLevel);
+
+  const positive_tested_per_100k = 38;
+  const hospital_admissions_per_million = 32;
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <SafetyRegionLayout
@@ -110,6 +125,82 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
               ],
             }}
           />
+
+          <Tile>
+            <Heading level={3} as="h2">
+              {text.current_escalation_level}
+            </Heading>
+            <Box display="flex" flexDirection={{ _: 'column', md: 'row' }}>
+              <Box width={{ _: '100%', md: '50%' }} pr={{ _: 0, md: 2 }}>
+                <EscalationLevelInfoLabel
+                  level={currentLevel}
+                  fontSize={4}
+                  useLevelColor
+                  hasBigIcon
+                />
+                <Text mt={3}>{text.momenteel.description}</Text>
+                <Text>
+                  {replaceVariablesInText(text.momenteel.description_from_to, {
+                    last_determined: formatDateFromSeconds(
+                      data.escalation_level.last_determined_unix
+                    ),
+                    risk_level: `'${
+                      siteText.escalatie_niveau.types[
+                        currentLevel.toString() as EscalationLevelString
+                      ].titel
+                    }'`,
+                    next_determined: formatDateFromSeconds(
+                      data.escalation_level.next_determined_unix
+                    ),
+                  })}
+                </Text>
+              </Box>
+              <Box width={{ _: '100%', md: '50%' }} pl={{ _: 0, md: 2 }} mb={3}>
+                <UnorderedList>
+                  <ListItem
+                    title={text.momenteel.last_determined}
+                    icon={<Calender />}
+                    date={data.escalation_level.last_determined_unix}
+                    hasBorderBottom
+                  />
+                  <ListItem
+                    title={text.momenteel.established_with.title}
+                    icon={<BarChart />}
+                    date={[
+                      data.escalation_level.based_on_statistics_from_unix,
+                      data.escalation_level.based_on_statistics_to_unix,
+                    ]}
+                    hasBorderBottom
+                  >
+                    <UnorderedList>
+                      <ListItem
+                        title={text.momenteel.positive_tests.title}
+                        icon={<Getest />}
+                        description={text.momenteel.positive_tests.description}
+                        escalationColor={escalationColor}
+                        amount={positive_tested_per_100k}
+                      />
+                      <ListItem
+                        title={text.momenteel.hospital_admissions.title}
+                        icon={<Ziekenhuis />}
+                        description={
+                          text.momenteel.hospital_admissions.description
+                        }
+                        escalationColor={escalationColor}
+                        amount={hospital_admissions_per_million}
+                      />
+                    </UnorderedList>
+                  </ListItem>
+                  <ListItem
+                    title={text.momenteel.next_determined}
+                    icon={<Calender />}
+                    date={data.escalation_level.next_determined_unix}
+                    isAroundDate
+                  />
+                </UnorderedList>
+              </Box>
+            </Box>
+          </Tile>
 
           <Tile>
             <Heading level={3} as="h2">
@@ -227,5 +318,112 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
     </Layout>
   );
 };
+
+interface ListItemProps {
+  icon: ReactNode;
+  title: string;
+  hasBorderBottom?: boolean;
+  description?: string;
+  escalationColor?: string;
+  date?: number | number[];
+  children?: ReactNode;
+  amount?: number;
+  isAroundDate?: boolean;
+}
+
+function ListItem({
+  title,
+  date,
+  icon,
+  children,
+  hasBorderBottom,
+  description,
+  escalationColor,
+  amount,
+  isAroundDate,
+}: ListItemProps) {
+  const { siteText, formatDateFromSeconds } = useIntl();
+
+  return (
+    <StyledList hasBorderBottom={hasBorderBottom}>
+      <Box display="flex" pb={children ? '0.75rem' : undefined}>
+        <Box
+          display="flex"
+          alignItems="center"
+          minWidth="26px"
+          width={26}
+          height={18}
+          mt="2px"
+          mr={2}
+          css={css({
+            svg: {
+              width: '100%',
+            },
+          })}
+        >
+          {icon}
+        </Box>
+        <Text m={0}>
+          <InlineText fontWeight="bold">{`${title} `}</InlineText>
+          {date && (
+            <>
+              {Array.isArray(date)
+                ? replaceVariablesInText(
+                    siteText.vr_risiconiveau.momenteel.established_with
+                      .description,
+                    {
+                      based_from: formatDateFromSeconds(date[0]),
+                      based_to: formatDateFromSeconds(date[1]),
+                    }
+                  )
+                : `${
+                    isAroundDate ? `${siteText.common.rond} ` : ''
+                  }${formatDateFromSeconds(date)}`}
+            </>
+          )}
+        </Text>
+      </Box>
+      {description && (
+        <Box display="flex" alignItems="center" pl={18} ml={2}>
+          <Box
+            height={9}
+            width={9}
+            backgroundColor={escalationColor}
+            borderRadius="50%"
+            mr={2}
+          />
+          <Text m={0}>
+            {replaceComponentsInText(description, {
+              amount: <InlineText fontWeight="bold">{`${amount} `}</InlineText>,
+            })}
+          </Text>
+        </Box>
+      )}
+      {children && (
+        <Box pl={18} ml={2}>
+          {children}
+        </Box>
+      )}
+    </StyledList>
+  );
+}
+
+const UnorderedList = styled.ul({
+  margin: 0,
+  padding: 0,
+  listStyleType: 'none',
+});
+
+const StyledList = styled.li<{ hasBorderBottom?: boolean }>((x) =>
+  css({
+    paddingBottom: '0.75rem',
+    marginBottom: x.hasBorderBottom ? '0.75rem' : undefined,
+    borderBottom: x.hasBorderBottom ? '1px solid silver' : undefined,
+
+    '&:last-of-type': {
+      padding: 0,
+    },
+  })
+);
 
 export default RegionalRestrictions;
