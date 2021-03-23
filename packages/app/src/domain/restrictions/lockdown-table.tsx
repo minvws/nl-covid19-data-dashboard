@@ -31,28 +31,22 @@ export function LockdownTable(props: LockdownTableProps) {
  * @returns
  */
 function getEscalationFilter(escalationLevel: 1 | 2 | 3 | 4) {
-  let filter = undefined;
-  // #F291BC
-  if (escalationLevel === 1) {
-    filter =
-      'invert(64%) sepia(40%) saturate(490%) hue-rotate(286deg) brightness(99%) contrast(91%)';
+  switch (escalationLevel) {
+    // #F291BC
+    case 1:
+      return 'invert(64%) sepia(40%) saturate(490%) hue-rotate(286deg) brightness(99%) contrast(91%)';
+    // #D95790
+    case 2:
+      return 'invert(52%) sepia(21%) saturate(3993%) hue-rotate(302deg) brightness(91%) contrast(86%)';
+    // #A11050
+    case 3:
+      return 'invert(15%) sepia(48%) saturate(4967%) hue-rotate(317deg) brightness(92%) contrast(101%)';
+    // #68032F
+    case 4:
+      return 'invert(9%) sepia(48%) saturate(6614%) hue-rotate(322deg) brightness(85%) contrast(103%)';
+    default:
+      return undefined;
   }
-  // #D95790
-  if (escalationLevel === 2) {
-    filter =
-      'invert(52%) sepia(21%) saturate(3993%) hue-rotate(302deg) brightness(91%) contrast(86%)';
-  }
-  // #A11050
-  if (escalationLevel === 3) {
-    filter =
-      'invert(15%) sepia(48%) saturate(4967%) hue-rotate(317deg) brightness(92%) contrast(101%)';
-  }
-  // #68032F
-  if (escalationLevel === 4) {
-    filter =
-      'invert(9%) sepia(48%) saturate(6614%) hue-rotate(322deg) brightness(85%) contrast(103%)';
-  }
-  return filter;
 }
 
 type LockdownTableData = {
