@@ -332,7 +332,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                   {
                     label: text.data.vaccination_chart.legend.expected,
                     shape: 'custom',
-                    shapeComponent: HatchedSquare,
+                    shapeComponent: <HatchedSquare />,
                   },
                 ]}
               />
