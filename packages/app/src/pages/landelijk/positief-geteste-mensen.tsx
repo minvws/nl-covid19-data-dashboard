@@ -5,7 +5,7 @@ import {
   SafetyRegionProperties,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import Afname from '~/assets/afname.svg';
 import Getest from '~/assets/test.svg';
 import { Anchor } from '~/components-styled/anchor';
@@ -87,6 +87,27 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     title: text.metadata.title,
     description: text.metadata.description,
   };
+
+  const ageGroupSeries = useMemo(() => {
+    const ageGroups = [
+      'infected_age_0_9_per_100k',
+      'infected_age_10_19_per_100k',
+      'infected_age_20_29_per_100k',
+      'infected_age_30_39_per_100k',
+      'infected_age_40_49_per_100k',
+      'infected_age_50_59_per_100k',
+      'infected_age_60_69_per_100k',
+      'infected_age_70_79_per_100k',
+      'infected_age_80_89_per_100k',
+      'infected_age_90_plus_per_100k',
+    ];
+    return ageGroups.map((ageGroup) => ({
+      type: 'line',
+      metricProperty: ageGroup,
+      label: ageGroup,
+      color: colors.data.primary,
+    }));
+  }, []);
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -257,6 +278,36 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                     value: 7,
                     label: siteText.common.signaalwaarde,
                   },
+                }}
+              />
+            )}
+          </ChartTileWithTimeframe>
+
+          <pre>
+            {JSON.stringify(data.tested_per_age_group.values, null, '  ')}
+          </pre>
+
+          <ChartTileWithTimeframe
+            title={'Per leeftijd over tijd'}
+            description={'Toelichting'}
+            metadata={{
+              source: text.bronnen.rivm,
+            }}
+          >
+            {(timeframe) => (
+              <TimeSeriesChart
+                values={data.tested_per_age_group.values}
+                timeframe={timeframe}
+                seriesConfig={[
+                  ...ageGroupSeries,
+                  // {
+                  //   type: 'invisible',
+                  //   metricProperty: 'infected',
+                  //   label: siteText.common.totaal,
+                  // },
+                ]}
+                dataOptions={{
+                  isPercentage: true,
                 }}
               />
             )}
