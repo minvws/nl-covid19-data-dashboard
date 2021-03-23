@@ -1899,6 +1899,9 @@
     "VR25": "http://www.veiligheidsregioflevoland.nl/"
   },
   "choropleth": {
+    "a11y": {
+      "tab_navigatie_button": "'Navigate with Tab through all {{subject}}"
+    },
     "verb": {
       "singular": "has",
       "plural": "have"
