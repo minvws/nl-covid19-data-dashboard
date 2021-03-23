@@ -947,8 +947,8 @@ export interface RegionalElderlyAtHomeValue {
 }
 export interface VrEscalationLevel {
   level: number;
-  positive_tested_per_100k?: number;
-  hospital_admissions_per_million?: number;
+  positive_tested_per_100k: number;
+  hospital_admissions_per_million: number;
   based_on_statistics_to_unix: number;
   based_on_statistics_from_unix: number;
   next_determined_unix: number;
@@ -1022,8 +1022,8 @@ export interface RegionsTestedOverall {
 export interface EscalationLevels {
   vrcode: string;
   level: number;
-  positive_tested_per_100k?: number;
-  hospital_admissions_per_million?: number;
+  positive_tested_per_100k: number;
+  hospital_admissions_per_million: number;
   based_on_statistics_to_unix: number;
   based_on_statistics_from_unix: number;
   next_determined_unix: number;
