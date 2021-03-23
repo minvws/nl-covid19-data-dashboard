@@ -66,6 +66,9 @@
     "doctor": {
       "$ref": "doctor.json"
     },
+    "g_number": {
+      "$ref": "g_number.json"
+    },
     "infectious_people": {
       "$ref": "infectious_people.json"
     },
