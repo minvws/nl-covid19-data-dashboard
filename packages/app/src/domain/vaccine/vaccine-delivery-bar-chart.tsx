@@ -1,4 +1,7 @@
-import { NlVaccineDeliveryPerSupplier } from '@corona-dashboard/common';
+import {
+  NlVaccineDeliveryPerSupplier,
+  NlVaccineDeliveryPerSupplierValue,
+} from '@corona-dashboard/common';
 import { ChartTile } from '~/components-styled/chart-tile';
 import { StackedChart } from '~/components-styled/stacked-chart';
 import { AllLanguages } from '~/locale';
@@ -11,7 +14,7 @@ interface VaccineDeliveryBarChartProps {
 }
 
 export function VaccineDeliveryBarChart({
-  data,
+  data: __data,
   siteText,
 }: VaccineDeliveryBarChartProps) {
   const text = siteText.vaccinaties.grafiek_leveringen;
@@ -20,7 +23,7 @@ export function VaccineDeliveryBarChart({
    * @TODO Remove mock data, but leaving it in for now in case we need to work
    * on the chart again before actual data is available.
    */
-  /*  const values: NlVaccineDeliveryPerSupplierValue[] = [
+  const values: NlVaccineDeliveryPerSupplierValue[] = [
     {
       total: 23456,
       bio_n_tech_pfizer: 1234,
@@ -107,20 +110,20 @@ export function VaccineDeliveryBarChart({
     date_end_unix: new Date('02-14-2020').getTime() / 1000,
     date_of_report_unix: new Date('02-16-2020').getTime() / 1000,
   };
- */
+
   return (
     <ChartTile
       title={replaceVariablesInText(text.titel, {
-        weekNumber: data.last_value.week_number,
+        weekNumber: last_value.week_number,
       })}
       description={text.omschrijving}
       metadata={{
-        date: data.last_value.date_of_report_unix,
+        date: last_value.date_of_report_unix,
         source: siteText.vaccinaties.bronnen.rivm,
       }}
     >
       <StackedChart
-        values={data.values}
+        values={values}
         config={[
           {
             metricProperty: 'bio_n_tech_pfizer',
@@ -138,9 +141,7 @@ export function VaccineDeliveryBarChart({
             label: 'AstraZeneca',
           },
         ]}
-        formatXAxis={(__value, index) =>
-          `Week ${data.values[index].week_number}`
-        }
+        formatXAxis={(__value, index) => `Week ${values[index].week_number}`}
         expectedLabel={
           siteText.vaccinaties.data.vaccination_chart.legend.expected
         }
