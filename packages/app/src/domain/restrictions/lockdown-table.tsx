@@ -112,9 +112,7 @@ function MobileLockdownTable(props: LockdownTableData) {
                                 width="36"
                                 height="36"
                                 alt=""
-                                css={css({
-                                  filter: filter,
-                                })}
+                                css={css({ filter })}
                               />
                             ) : (
                               <Box size={36} />
