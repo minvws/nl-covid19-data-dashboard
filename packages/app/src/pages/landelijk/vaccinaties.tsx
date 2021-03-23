@@ -479,9 +479,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             reference={text.stock_and_delivery_section.reference}
             metadata={{
               datumsText: text.datums,
-              dateOrRange: data.vaccine_stock.last_value.date_unix, // TODO replace dates for correct source,
+              dateOrRange: data.vaccine_stock.last_value.date_unix,
               dateOfInsertionUnix:
-                data.vaccine_stock.last_value.date_of_insertion_unix, // TODO replace dates for correct source,
+                data.vaccine_stock.last_value.date_of_insertion_unix,
               dataSources: [],
             }}
           />
@@ -496,22 +496,23 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             >
               <Box as="ul" p={0} width="50%">
                 <VaccineStockRow
-                  formatNumber={formatNumber}
                   color={colors.data.vaccines.bio_n_tech_pfizer}
                   productName="BioNTech/Pfizer"
-                  value={data.vaccine_stock.last_value.bio_n_tech_pfizer}
+                  value={formatNumber(
+                    data.vaccine_stock.last_value.bio_n_tech_pfizer
+                  )}
                 />
                 <VaccineStockRow
-                  formatNumber={formatNumber}
                   color={colors.data.vaccines.moderna}
                   productName="Moderna"
-                  value={data.vaccine_stock.last_value.moderna}
+                  value={formatNumber(data.vaccine_stock.last_value.moderna)}
                 />
                 <VaccineStockRow
-                  formatNumber={formatNumber}
                   color={colors.data.vaccines.astra_zeneca}
                   productName="AstraZeneca"
-                  value={data.vaccine_stock.last_value.astra_zeneca}
+                  value={formatNumber(
+                    data.vaccine_stock.last_value.astra_zeneca
+                  )}
                 />
               </Box>
               <Text>{text.stock.description}</Text>
@@ -649,12 +650,11 @@ const ColorIndicator = styled.span<{
 type VaccineStockRowProps = {
   color: string;
   productName: string;
-  value: number | undefined;
-  formatNumber: (value: number) => string;
+  value: string;
 };
 
 function VaccineStockRow(props: VaccineStockRowProps) {
-  const { color, productName, value, formatNumber } = props;
+  const { color, productName, value } = props;
   return (
     <Box as="li" display="flex" flexDirection="row" alignItems="stretch">
       <Box>
@@ -666,7 +666,7 @@ function VaccineStockRow(props: VaccineStockRowProps) {
         </InlineText>
       </Box>
       <Box marginLeft="auto">
-        <strong>{formatNumber(value)}</strong>
+        <strong>{value}</strong>
       </Box>
     </Box>
   );
