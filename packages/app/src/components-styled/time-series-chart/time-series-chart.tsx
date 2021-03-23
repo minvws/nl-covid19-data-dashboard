@@ -41,8 +41,7 @@ export type { SeriesConfig } from './logic';
 /**
  * This chart started as a fork from MultiLineChart. It attempts to create a
  * more generic abstraction that can replace LineChart, MultiLineChart,
- * AreaChart and later possibly something like the vaccine delivery
- * chart.
+ * AreaChart and later possibly something like the vaccine delivery chart.
  *
  * The main focus in this iteration is to try to reduce complexity as much as
  * possible while rethinking the abstractions on which we build.
@@ -91,10 +90,14 @@ export type TimeSeriesChartProps<
   T extends TimestampedValue,
   C extends SeriesConfig<T>
 > = {
-  title?: string; // Used for default tooltip formatting
+  tooltipTitle?: string;
   values: T[];
   seriesConfig: C;
-  ariaLabelledBy: string;
+  /**
+   * @TODO making it optional for now until we figure out how we want to enforce
+   * aria labels and descriptions
+   */
+  ariaLabelledBy?: string;
   /**
    * The initial width of the chart is used for server-side rendering. it will
    * use the available width when the chart mounts.
@@ -146,7 +149,7 @@ export function TimeSeriesChart<
   tickValues: yTickValues,
   paddingLeft,
   ariaLabelledBy,
-  title,
+  tooltipTitle,
   disableLegend,
   onSeriesClick,
   markNearestPointOnly,
@@ -289,7 +292,7 @@ export function TimeSeriesChart<
           width={width}
           height={height}
           padding={padding}
-          ariaLabelledBy={ariaLabelledBy}
+          ariaLabelledBy={ariaLabelledBy || ''}
           onHover={handleHover}
           onClick={handleClick}
         >
@@ -351,7 +354,7 @@ export function TimeSeriesChart<
 
         {tooltipOpen && tooltipData && (
           <Tooltip
-            title={title}
+            title={tooltipTitle}
             data={tooltipData}
             left={tooltipLeft}
             top={tooltipTop}

@@ -264,6 +264,12 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
         "text": "RIVM"
       }
+    },
+    "tooltip_labels": {
+      "infected_per_100k": "Positive tests per 100.000",
+      "infected_percentage": "Percentage of positive tests",
+      "tested_total": "Total number of tests",
+      "infected": "Number of positive tests"
     }
   },
   "besmettelijke_personen": {
@@ -635,7 +641,7 @@
       "obtained": "obtained on {{date}}"
     },
     "barScale": {
-      "signaalwaarde": "Alert value"
+      "signaalwaarde": "__niet meer gebruikt"
     },
     "zoekveld_geen_resultaten": "No results",
     "zoekveld_placeholder_regio": "Search by safety region",
@@ -646,8 +652,8 @@
       "dateRangeOfReport": "Value from {{startDate}} - {{endDate}}"
     },
     "tooltip": {
-      "positive_tested_people": "{{totalPositiveTestedPeople}} in total",
-      "positive_tested_value": "{{totalPositiveValue}} per 100,000",
+      "positive_tested_people": "__niet meer gebruikt",
+      "positive_tested_value": "__niet meer gebruikt",
       "vaccinatie_bereidheid": "{{percentageInFavor}}% willingness to be vaccinated"
     },
     "niveau": "level",
@@ -662,7 +668,9 @@
     "read_more": "Read more",
     "absolute_date_template": "on {{date}}",
     "inwoners": "residents",
-    "miljoen": "million"
+    "miljoen": "million",
+    "signaalwaarde": "Alert value",
+    "totaal": "Total"
   },
   "seoHead": {
     "default_description": "Information on the development of the coronavirus in The Netherlands.",
@@ -770,13 +778,7 @@
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": [
-      "0 to 20",
-      "20 to 40",
-      "40 to 60",
-      "60 to 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -2128,11 +2130,7 @@
     "expected_page_additions": {
       "title": "Expected data on vaccinations",
       "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
-      "additions": [
-        "",
-        "",
-        ""
-      ]
+      "additions": ["", "", ""]
     },
     "data": {
       "difference": "",
@@ -2257,11 +2255,7 @@
       "kpi_expected_page_additions": {
         "title": "Expected data on vaccinations",
         "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
-        "additions": [
-          "",
-          "",
-          ""
-        ]
+        "additions": ["", "", ""]
       },
       "vaccination_chart": {
         "product_names": {

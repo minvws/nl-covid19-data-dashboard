@@ -141,7 +141,7 @@ const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
  * that all values have consistent timestamps, and that date spans all span the
  * same amount of time each.
  *
- * It also assumes that if we use date_unix it is always means one day worth of
+ * It also assumes that if we use date_unix it always means one day worth of
  * data.
  */
 function getDateSpanWidth<T extends TimestampedValue>(
