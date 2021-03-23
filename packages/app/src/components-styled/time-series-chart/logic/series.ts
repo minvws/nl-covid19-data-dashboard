@@ -10,8 +10,9 @@ import { getValuesInTimeframe, TimeframeOption } from '~/utils/timeframe';
 
 export type SeriesConfig<T extends TimestampedValue> = (
   | LineSeriesDefinition<T>
-  | AreaSeriesDefinition<T>
   | RangeSeriesDefinition<T>
+  | AreaSeriesDefinition<T>
+  | StackedAreaSeriesDefinition<T>
   | InvisibleSeriesDefinition<T>
 )[];
 
@@ -38,6 +39,17 @@ export type RangeSeriesDefinition<T extends TimestampedValue> = {
 
 export type AreaSeriesDefinition<T extends TimestampedValue> = {
   type: 'area';
+  metricProperty: keyof T;
+  label: string;
+  shortLabel?: string;
+  color: string;
+  style?: 'solid' | 'striped';
+  fillOpacity?: number;
+  strokeWidth?: number;
+};
+
+export type StackedAreaSeriesDefinition<T extends TimestampedValue> = {
+  type: 'stacked-area';
   metricProperty: keyof T;
   label: string;
   shortLabel?: string;
@@ -139,6 +151,32 @@ export function calculateSeriesMaximum<T extends TimestampedValue>(
   return Math.max(overallMaximum, artificialMax);
 }
 
+export function calculateSeriesMaximum2<T extends TimestampedValue>(
+  seriesList: SeriesList,
+  seriesConfig: SeriesConfig<T>,
+  benchmarkValue = -Infinity
+) {
+  const values = seriesList
+    .flatMap((series) =>
+      series.flatMap((x: SeriesSingleValue | SeriesDoubleValue) =>
+        isSeriesValue(x) ? x.__value : [x.__value_a, x.__value_b]
+      )
+    )
+    .filter(isDefined);
+
+  const overallMaximum = Math.max(...values);
+
+  /**
+   * Value cannot be 0, hence the 1. If the value is below signaalwaarde, make
+   * sure the signaalwaarde floats in the middle
+   */
+
+  const artificialMax =
+    overallMaximum < benchmarkValue ? benchmarkValue * 2 : 0;
+
+  return Math.max(overallMaximum, artificialMax);
+}
+
 export type SeriesItem = {
   __date_unix: number;
 };
@@ -171,7 +209,15 @@ export function getSeriesList<T extends TimestampedValue>(
   return seriesConfig
     .filter(isVisible)
     .map((config) =>
-      config.type === 'range'
+      config.type === 'stacked-area'
+        ? getStackedAreaSeriesData(
+            values,
+            config.metricProperty,
+            seriesConfig.filter(
+              (x) => x.type === 'stacked-area'
+            ) as StackedAreaSeriesDefinition<T>[]
+          )
+        : config.type === 'range'
         ? getRangeSeriesData(
             values,
             config.metricPropertyLow,
@@ -181,7 +227,39 @@ export function getSeriesList<T extends TimestampedValue>(
     );
 }
 
-export function getRangeSeriesData<T extends TimestampedValue>(
+function getStackedAreaSeriesData<T extends TimestampedValue>(
+  values: T[],
+  metricProperty: keyof T,
+  seriesConfig: StackedAreaSeriesDefinition<T>[]
+) {
+  const stackIndex = seriesConfig.findIndex(
+    (x) => x.metricProperty === metricProperty
+  );
+
+  const seriesHigh = getSeriesData(values, metricProperty);
+  const seriesLow = values.map(() => ({ __value: 0 }));
+
+  /**
+   * get cumulative y value of all previous stacks
+   */
+  let index = 0;
+  while (index < stackIndex) {
+    getSeriesData(values, seriesConfig[index].metricProperty).forEach(
+      (x, i) => {
+        seriesLow[i].__value += x.__value || 0;
+      }
+    );
+    index++;
+  }
+
+  return seriesHigh.map((x, index) => ({
+    __date_unix: x.__date_unix,
+    __value_a: seriesLow[index].__value ?? 0,
+    __value_b: (seriesLow[index].__value ?? 0) + (x.__value ?? 0),
+  }));
+}
+
+function getRangeSeriesData<T extends TimestampedValue>(
   values: T[],
   metricPropertyLow: keyof T,
   metricPropertyHigh: keyof T
@@ -196,7 +274,7 @@ export function getRangeSeriesData<T extends TimestampedValue>(
   }));
 }
 
-export function getSeriesData<T extends TimestampedValue>(
+function getSeriesData<T extends TimestampedValue>(
   values: T[],
   metricProperty: keyof T
 ): SeriesSingleValue[] {

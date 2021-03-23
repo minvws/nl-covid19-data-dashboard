@@ -78,6 +78,25 @@ export function TooltipSeriesList<T extends TimestampedValue>({
       <TooltipList>
         {seriesConfig.map((x) => {
           switch (x.type) {
+            case 'stacked-area':
+              return (
+                <TooltipListItem
+                  key={x.metricProperty as string}
+                  icon={<SeriesIcon config={x} />}
+                >
+                  <TooltipValueContainer>
+                    <InlineText mr={2}>{x.shortLabel || x.label}:</InlineText>
+                    <b>
+                      {getValueStringForKey(
+                        value,
+                        x.metricProperty,
+                        options.isPercentage
+                      )}
+                    </b>
+                  </TooltipValueContainer>
+                </TooltipListItem>
+              );
+
             case 'range':
               return (
                 <TooltipListItem

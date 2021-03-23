@@ -3,9 +3,10 @@ import {
   NlVaccineAdministeredValue,
   NlVaccineDeliveryEstimateValue,
   NlVaccineDeliveryValue,
+  NlVaccineCoverageValue,
 } from '@corona-dashboard/common';
 import { css } from '@styled-system/css';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import VaccinatiesIcon from '~/assets/vaccinaties.svg';
 import { AreaChart } from '~/components-styled/area-chart';
 import { ArticleStrip } from '~/components-styled/article-strip';
@@ -101,6 +102,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     title: text.metadata.title,
     description: text.metadata.description,
   };
+
+  const mockDataRef = useRef(createNlVaccineCoverageValueMock());
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -252,6 +255,52 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               )}
             </KpiTile>
           </TwoKpiSection>
+
+          <ChartTile
+            title={text.grafiek.titel}
+            description={text.grafiek.omschrijving}
+            metadata={{
+              date: data.vaccine_delivery.last_value.date_of_report_unix,
+              source: text.bronnen.rivm,
+            }}
+          >
+            <TimeSeriesChart
+              values={mockDataRef.current}
+              seriesConfig={[
+                {
+                  metricProperty: 'fully_vaccinated',
+                  type: 'stacked-area',
+                  label: 'Volledig gevaccineerde mensen',
+                  shortLabel: 'volledig gevaccineerd',
+                  color: colors.data.multiseries.cyan_dark,
+                  fillOpacity: 1,
+                },
+                {
+                  metricProperty: 'partially_vaccinated',
+                  type: 'stacked-area',
+                  label: 'Gedeeltelijk gevaccineerde mensen',
+                  shortLabel: 'gedeeltelijk gevaccineerd',
+                  color: colors.data.multiseries.cyan,
+                  fillOpacity: 1,
+                },
+                // {
+                //   metricProperty: 'partially_or_fully_vaccinated',
+                //   type: 'stacked-area',
+                //   label: 'Volledig gevaccineerde mensen',
+                //   shortLabel: 'volledig gevaccineerd',
+                //   color: colors.data.multiseries.magenta,
+                //   fillOpacity: 1,
+                // },
+                {
+                  metricProperty: 'partially_or_fully_vaccinated',
+                  type: 'line',
+                  label: 'Totaal aantal geprikte mensen',
+                  color: 'black',
+                  strokeWidth: 3,
+                },
+              ]}
+            />
+          </ChartTile>
 
           <ChartTile
             title={text.grafiek.titel}
@@ -665,3 +714,62 @@ function HatchedSquare() {
 //   margin-right: 0.5em;
 //   flex-shrink: 0;
 // `;
+
+function createNlVaccineCoverageValueMock() {
+  const date = new Date('3 jan 2021');
+
+  const initial = 10000;
+  let multiplier = 0.8;
+
+  const mockValues: NlVaccineCoverageValue[] = [
+    {
+      date_of_insertion_unix: date.getTime() / 1000,
+      date_of_report_unix: date.getTime() / 1000,
+      date_unix: date.getTime() / 1000,
+      fully_vaccinated: initial,
+      fully_vaccinated_percentage: 0,
+      partially_or_fully_vaccinated: initial,
+      partially_vaccinated: initial,
+      partially_vaccinated_percentage: 0,
+    },
+  ];
+
+  while (date.getTime() < Date.now()) {
+    date.setDate(date.getDate() + 2);
+
+    const lastValue = mockValues[mockValues.length - 1];
+
+    const dateSeconds = date.getTime() / 1000;
+
+    const incrementFully = 1 + Math.random() * multiplier;
+    const incrementPartial = 1 + Math.random() * multiplier;
+    multiplier = multiplier * 0.95;
+
+    const fully_vaccinated = Math.floor(
+      lastValue.fully_vaccinated * incrementFully
+    );
+    const partially_vaccinated = Math.floor(
+      lastValue.partially_vaccinated * incrementPartial
+    );
+    const partially_or_fully_vaccinated =
+      fully_vaccinated + partially_vaccinated;
+
+    const fully_vaccinated_percentage =
+      fully_vaccinated / partially_or_fully_vaccinated;
+    const partially_vaccinated_percentage =
+      partially_vaccinated / partially_or_fully_vaccinated;
+
+    mockValues.push({
+      date_of_insertion_unix: dateSeconds,
+      date_of_report_unix: dateSeconds,
+      date_unix: dateSeconds,
+      fully_vaccinated,
+      fully_vaccinated_percentage,
+      partially_or_fully_vaccinated,
+      partially_vaccinated,
+      partially_vaccinated_percentage,
+    });
+  }
+
+  return mockValues;
+}

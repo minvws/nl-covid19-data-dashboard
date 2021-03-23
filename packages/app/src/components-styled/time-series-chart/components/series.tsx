@@ -14,6 +14,7 @@ import {
   SeriesList,
   SeriesSingleValue,
 } from '../logic';
+import { StackedAreaTrend } from './stacked-area-trend';
 
 interface SeriesProps<T extends TimestampedValue> {
   onHover?: HoverHandler;
@@ -81,11 +82,23 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                 onHover={(evt) => onHover && onHover(evt, index)}
               />
             );
-
           case 'range':
             return (
               <RangeTrend
                 key={config.metricPropertyLow as string}
+                series={series as SeriesDoubleValue[]}
+                color={config.color}
+                fillOpacity={config.fillOpacity}
+                getX={getX}
+                getY0={getY0}
+                getY1={getY1}
+                bounds={bounds}
+              />
+            );
+          case 'stacked-area':
+            return (
+              <StackedAreaTrend
+                key={`${config.metricProperty}${index}` as string}
                 series={series as SeriesDoubleValue[]}
                 color={config.color}
                 fillOpacity={config.fillOpacity}
