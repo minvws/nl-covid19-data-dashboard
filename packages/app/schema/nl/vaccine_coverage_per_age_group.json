@@ -24,6 +24,7 @@
         "fully_vaccinated_percentage",
         "date_of_insertion_unix",
         "date_unix",
+        "date_of_report_unix",
         "fully_vaccinated",
         "partially_vaccinated"
       ],
