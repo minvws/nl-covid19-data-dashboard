@@ -5,7 +5,6 @@ import {
   NlVaccineDeliveryValue,
 } from '@corona-dashboard/common';
 import { css } from '@styled-system/css';
-import { ParentSize } from '@visx/responsive';
 import { useState } from 'react';
 import VaccinatiesIcon from '~/assets/vaccinaties.svg';
 import { AreaChart } from '~/components-styled/area-chart';
@@ -17,6 +16,7 @@ import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { Legend } from '~/components-styled/legend';
+import { Markdown } from '~/components-styled/markdown';
 import { RadioGroup } from '~/components-styled/radio-group';
 import { TileList } from '~/components-styled/tile-list';
 import { TimeSeriesChart } from '~/components-styled/time-series-chart';
@@ -150,12 +150,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                     display="flex"
                     flexDirection={{ _: 'column', lg: 'row' }}
                   >
-                    <Box flex={{ lg: '1 1 50%' }}>
-                      <Box
-                        mb={3}
-                        dangerouslySetInnerHTML={{
-                          __html: text.gezette_prikken.tab_first.description,
-                        }}
+                    <Box flex={{ lg: '1 1 50%' }} mb={3}>
+                      <Markdown
+                        content={text.gezette_prikken.tab_first.description}
                       />
                     </Box>
                     <Box flex={{ lg: '1 1 50%' }} ml={{ lg: 4 }}>
@@ -222,10 +219,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                     flexDirection={{ _: 'column', lg: 'row' }}
                   >
                     <Box flex={{ lg: '1 1 50%' }}>
-                      <Box
-                        dangerouslySetInnerHTML={{
-                          __html: text.gezette_prikken.tab_second.description,
-                        }}
+                      <Markdown
+                        content={text.gezette_prikken.tab_second.description}
                       />
                     </Box>
                     <Box flex={{ lg: '1 1 50%' }} ml={{ lg: 4 }}>
@@ -267,72 +262,66 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             }}
           >
             <Box>
-              <ParentSize>
-                {({ width }) => (
-                  <AreaChart<
-                    NlVaccineDeliveryValue | NlVaccineDeliveryEstimateValue,
-                    | NlVaccineAdministeredValue
-                    | NlVaccineAdministeredEstimateValue
-                  >
-                    valueAnnotation={siteText.waarde_annotaties.x_miljoen}
-                    width={width}
-                    timeframe="all"
-                    formatTooltip={(values) =>
-                      FormatVaccinationsTooltip(values, siteText)
-                    }
-                    divider={{
-                      color: colors.annotation,
-                      leftLabel: text.data.vaccination_chart.left_divider_label,
-                      rightLabel:
-                        text.data.vaccination_chart.right_divider_label,
-                    }}
-                    trends={[
+              <AreaChart<
+                NlVaccineDeliveryValue | NlVaccineDeliveryEstimateValue,
+                NlVaccineAdministeredValue | NlVaccineAdministeredEstimateValue
+              >
+                valueAnnotation={siteText.waarde_annotaties.x_miljoen}
+                timeframe="all"
+                formatTooltip={(values) =>
+                  FormatVaccinationsTooltip(values, siteText)
+                }
+                divider={{
+                  color: colors.annotation,
+                  leftLabel: text.data.vaccination_chart.left_divider_label,
+                  rightLabel: text.data.vaccination_chart.right_divider_label,
+                }}
+                trends={[
+                  {
+                    values: vaccineDeliveryValues,
+                    displays: [
                       {
-                        values: vaccineDeliveryValues,
-                        displays: [
-                          {
-                            metricProperty: 'total',
-                            strokeWidth: 3,
-                            color: 'black',
-                            legendLabel: text.data.vaccination_chart.delivered,
-                          },
-                        ],
+                        metricProperty: 'total',
+                        strokeWidth: 3,
+                        color: 'black',
+                        legendLabel: text.data.vaccination_chart.delivered,
                       },
+                    ],
+                  },
+                  {
+                    values: vaccineDeliveryEstimateValues,
+                    displays: [
                       {
-                        values: vaccineDeliveryEstimateValues,
-                        displays: [
-                          {
-                            metricProperty: 'total',
-                            style: 'dashed',
-                            strokeWidth: 3,
-                            legendLabel: text.data.vaccination_chart.estimated,
-                            color: 'black',
-                          },
-                        ],
+                        metricProperty: 'total',
+                        style: 'dashed',
+                        strokeWidth: 3,
+                        legendLabel: text.data.vaccination_chart.estimated,
+                        color: 'black',
                       },
-                    ]}
-                    areas={[
-                      {
-                        values: vaccineAdministeredValues,
-                        displays: vaccineNames.map((key) => ({
-                          metricProperty: key as any,
-                          color: (colors.data.vaccines as any)[key],
-                          legendLabel: key,
-                        })),
-                      },
-                      {
-                        values: vaccineAdministeredEstimateValues,
-                        displays: vaccineNames.map((key) => ({
-                          metricProperty: key as any,
-                          pattern: 'hatched',
-                          color: (colors.data.vaccines as any)[key],
-                          legendLabel: key,
-                        })),
-                      },
-                    ]}
-                  />
-                )}
-              </ParentSize>
+                    ],
+                  },
+                ]}
+                areas={[
+                  {
+                    values: vaccineAdministeredValues,
+                    displays: vaccineNames.map((key) => ({
+                      metricProperty: key as any,
+                      color: (colors.data.vaccines as any)[key],
+                      legendLabel: key,
+                    })),
+                  },
+                  {
+                    values: vaccineAdministeredEstimateValues,
+                    displays: vaccineNames.map((key) => ({
+                      metricProperty: key as any,
+                      pattern: 'hatched',
+                      color: (colors.data.vaccines as any)[key],
+                      legendLabel: key,
+                    })),
+                  },
+                ]}
+              />
+
               <Legend
                 items={[
                   {

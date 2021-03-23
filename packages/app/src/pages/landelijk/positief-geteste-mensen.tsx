@@ -1,6 +1,11 @@
-import { NationalTestedPerAgeGroup } from '@corona-dashboard/common';
+import {
+  MunicipalitiesTestedOverall,
+  MunicipalityProperties,
+  NationalTestedPerAgeGroup,
+  RegionsTestedOverall,
+  SafetyRegionProperties,
+} from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Afname from '~/assets/afname.svg';
 import Getest from '~/assets/test.svg';
@@ -21,18 +26,17 @@ import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
+import { Markdown } from '~/components-styled/markdown';
 import { PageBarScale } from '~/components-styled/page-barscale';
 import { TileList } from '~/components-styled/tile-list';
 import { TimeSeriesChart } from '~/components-styled/time-series-chart';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { Heading, Text } from '~/components-styled/typography';
+import { Heading, InlineText, Text } from '~/components-styled/typography';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
-import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
-import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
-import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
-import { createPositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/create-positive-tested-people-regional-tooltip';
+import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
+import { PositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/positive-tested-people-regional-tooltip';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
@@ -50,8 +54,8 @@ import {
 import { colors } from '~/style/theme';
 import { assert } from '~/utils/assert';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { replaceKpisInText } from '~/utils/replaceKpisInText';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -76,13 +80,13 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     formatPercentage,
     formatDateFromSeconds,
   } = useIntl();
+  const reverseRouter = useReverseRouter();
 
   const text = siteText.positief_geteste_personen;
   const ggdText = siteText.positief_geteste_personen_ggd;
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>(
     'municipal'
   );
-  const router = useRouter();
 
   const dataOverallLastValue = data.tested_overall.last_value;
   const dataGgdAverageLastValue = data.tested_ggd_average.last_value;
@@ -139,9 +143,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             }}
             reference={text.reference}
           />
-
           <ArticleStrip articles={content.articles} />
-
           <TwoKpiSection>
             <KpiTile
               title={text.kpi_titel}
@@ -156,11 +158,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 difference={data.difference.tested_overall__infected}
               />
 
-              <Text
-                as="div"
-                css={css({ mb: 4 })}
-                dangerouslySetInnerHTML={{ __html: text.kpi_toelichting }}
-              />
+              <Box mb={4}>
+                <Markdown content={text.kpi_toelichting} />
+              </Box>
+
               <Box>
                 <Heading level={4} fontSize={'1.2em'} mb={0}>
                   {replaceComponentsInText(ggdText.summary_text, {
@@ -238,36 +239,23 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             {selectedMap === 'municipal' && (
               <MunicipalityChoropleth
                 data={choropleth.gm}
+                getLink={reverseRouter.gm.positiefGetesteMensen}
                 metricName="tested_overall"
                 metricProperty="infected_per_100k"
-                tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
-                  siteText.choropleth_tooltip.positive_tested_people,
-                  regionThresholds.tested_overall.infected_per_100k,
-                  createSelectMunicipalHandler(
-                    router,
-                    'positief-geteste-mensen'
-                  )
-                )}
-                onSelect={createSelectMunicipalHandler(
-                  router,
-                  'positief-geteste-mensen'
-                )}
+                tooltipContent={(
+                  context: MunicipalityProperties & MunicipalitiesTestedOverall
+                ) => <PositiveTestedPeopleMunicipalTooltip context={context} />}
               />
             )}
             {selectedMap === 'region' && (
               <SafetyRegionChoropleth
                 data={choropleth.vr}
+                getLink={reverseRouter.vr.positiefGetesteMensen}
                 metricName="tested_overall"
                 metricProperty="infected_per_100k"
-                tooltipContent={createPositiveTestedPeopleRegionalTooltip(
-                  siteText.choropleth_tooltip.positive_tested_people,
-                  regionThresholds.tested_overall.infected_per_100k,
-                  createSelectRegionHandler(router, 'positief-geteste-mensen')
-                )}
-                onSelect={createSelectRegionHandler(
-                  router,
-                  'positief-geteste-mensen'
-                )}
+                tooltipContent={(
+                  context: SafetyRegionProperties & RegionsTestedOverall
+                ) => <PositiveTestedPeopleRegionalTooltip context={context} />}
               />
             )}
           </ChoroplethTile>
@@ -326,7 +314,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               text={siteText.infected_age_groups.graph}
             />
           </ChartTile>
-
           <ContentHeader
             title={ggdText.titel}
             skipLinkAnchor={true}
@@ -345,7 +332,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             }}
             reference={text.reference}
           />
-
           <TwoKpiSection>
             <KpiTile
               title={ggdText.totaal_getest_week_titel}
@@ -382,27 +368,23 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 }
               />
               <Text>{ggdText.positief_getest_week_uitleg}</Text>
-              <Text>
-                <strong
-                  css={css({ '& > span': { color: 'data.primary' } })}
-                  dangerouslySetInnerHTML={{
-                    __html: replaceKpisInText(
-                      ggdText.positief_getest_getest_week_uitleg,
-                      [
-                        {
-                          name: 'numerator',
-                          value: formatNumber(dataGgdAverageLastValue.infected),
-                        },
-                        {
-                          name: 'denominator',
-                          value: formatNumber(
-                            dataGgdAverageLastValue.tested_total
-                          ),
-                        },
-                      ]
+
+              <Text fontWeight="bold">
+                {replaceComponentsInText(
+                  ggdText.positief_getest_getest_week_uitleg,
+                  {
+                    numerator: (
+                      <InlineText color="data.primary">
+                        {formatNumber(dataGgdAverageLastValue.infected)}
+                      </InlineText>
                     ),
-                  }}
-                />
+                    denominator: (
+                      <InlineText color="data.primary">
+                        {formatNumber(dataGgdAverageLastValue.tested_total)}
+                      </InlineText>
+                    ),
+                  }
+                )}
               </Text>
             </KpiTile>
           </TwoKpiSection>

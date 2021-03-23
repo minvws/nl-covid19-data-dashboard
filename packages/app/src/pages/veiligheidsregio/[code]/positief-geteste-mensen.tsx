@@ -1,5 +1,7 @@
-import css from '@styled-system/css';
-import { useRouter } from 'next/router';
+import {
+  MunicipalitiesTestedOverall,
+  MunicipalityProperties,
+} from '@corona-dashboard/common';
 import Afname from '~/assets/afname.svg';
 import Getest from '~/assets/test.svg';
 import { Anchor } from '~/components-styled/anchor';
@@ -11,15 +13,15 @@ import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
+import { Markdown } from '~/components-styled/markdown';
 import { PageBarScale } from '~/components-styled/page-barscale';
 import { TileList } from '~/components-styled/tile-list';
 import { TimeSeriesChart } from '~/components-styled/time-series-chart';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { Heading, Text } from '~/components-styled/typography';
+import { Heading, InlineText, Text } from '~/components-styled/typography';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { createSelectMunicipalHandler } from '~/components/choropleth/select-handlers/create-select-municipal-handler';
-import { createPositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/create-positive-tested-people-municipal-tooltip';
+import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
 import regionCodeToMunicipalCodeLookup from '~/data/regionCodeToMunicipalCodeLookup';
 import { Layout } from '~/domain/layout/layout';
 import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
@@ -36,8 +38,9 @@ import {
   getVrData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
-import { replaceKpisInText } from '~/utils/replaceKpisInText';
+import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
@@ -59,10 +62,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
   const { siteText, formatNumber, formatPercentage } = useIntl();
 
+  const reverseRouter = useReverseRouter();
+
   const text = siteText.veiligheidsregio_positief_geteste_personen;
   const ggdText = siteText.veiligheidsregio_positief_geteste_personen_ggd;
-
-  const router = useRouter();
 
   const dataOverallLastValue = data.tested_overall.last_value;
   const dataGgdAverageLastValue = data.tested_ggd_average.last_value;
@@ -83,7 +86,11 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <SafetyRegionLayout lastGenerated={lastGenerated}>
+      <SafetyRegionLayout
+        data={data}
+        safetyRegionName={safetyRegionName}
+        lastGenerated={lastGenerated}
+      >
         <TileList>
           <ContentHeader
             category={siteText.veiligheidsregio_layout.headings.besmettingen}
@@ -119,27 +126,17 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 absolute={Math.round(dataOverallLastValue.infected)}
                 difference={data.difference.tested_overall__infected}
               />
-
-              <Text
-                as="div"
-                dangerouslySetInnerHTML={{ __html: text.kpi_toelichting }}
-              />
+              <Markdown content={text.kpi_toelichting} />
 
               <Box>
                 <Heading level={4} fontSize={'1.2em'} mt={'1.5em'} mb={0}>
-                  <span
-                    css={css({ '& > span': { color: 'data.primary' } })}
-                    dangerouslySetInnerHTML={{
-                      __html: replaceKpisInText(ggdText.summary_title, [
-                        {
-                          name: 'percentage',
-                          value: `${formatPercentage(
-                            dataGgdAverageLastValue.infected_percentage
-                          )}%`,
-                        },
-                      ]),
-                    }}
-                  />
+                  {replaceComponentsInText(ggdText.summary_title, {
+                    percentage: (
+                      <InlineText color="data.primary">{`${formatPercentage(
+                        dataGgdAverageLastValue.infected_percentage
+                      )}%`}</InlineText>
+                    ),
+                  })}
                 </Heading>
                 <Text mt={0} lineHeight={1}>
                   <Anchor name="ggd" text={ggdText.summary_link_cta} />
@@ -222,17 +219,12 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               selectedCode={selectedMunicipalCode}
               highlightSelection={false}
               data={choropleth.gm}
+              getLink={reverseRouter.gm.positiefGetesteMensen}
               metricName="tested_overall"
               metricProperty="infected_per_100k"
-              tooltipContent={createPositiveTestedPeopleMunicipalTooltip(
-                siteText.choropleth_tooltip.positive_tested_people,
-                regionThresholds.tested_overall.infected_per_100k,
-                createSelectMunicipalHandler(router, 'positief-geteste-mensen')
-              )}
-              onSelect={createSelectMunicipalHandler(
-                router,
-                'positief-geteste-mensen'
-              )}
+              tooltipContent={(
+                context: MunicipalityProperties & MunicipalitiesTestedOverall
+              ) => <PositiveTestedPeopleMunicipalTooltip context={context} />}
             />
           </ChoroplethTile>
 
@@ -288,27 +280,22 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 }
               />
               <Text>{ggdText.positief_getest_week_uitleg}</Text>
-              <Text>
-                <strong
-                  css={css({ '& > span': { color: 'data.primary' } })}
-                  dangerouslySetInnerHTML={{
-                    __html: replaceKpisInText(
-                      ggdText.positief_getest_getest_week_uitleg,
-                      [
-                        {
-                          name: 'numerator',
-                          value: formatNumber(dataGgdAverageLastValue.infected),
-                        },
-                        {
-                          name: 'denominator',
-                          value: formatNumber(
-                            dataGgdAverageLastValue.tested_total
-                          ),
-                        },
-                      ]
+              <Text fontWeight="bold">
+                {replaceComponentsInText(
+                  ggdText.positief_getest_getest_week_uitleg,
+                  {
+                    numerator: (
+                      <InlineText color="data.primary">
+                        {formatNumber(dataGgdAverageLastValue.infected)}
+                      </InlineText>
                     ),
-                  }}
-                />
+                    denominator: (
+                      <InlineText color="data.primary">
+                        {formatNumber(dataGgdAverageLastValue.tested_total)}
+                      </InlineText>
+                    ),
+                  }
+                )}
               </Text>
             </KpiTile>
           </TwoKpiSection>

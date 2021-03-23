@@ -2,10 +2,17 @@ import css from '@styled-system/css';
 import { localPoint } from '@visx/event';
 import { Mercator } from '@visx/geo';
 import { Feature, FeatureCollection, Geometry, MultiPolygon } from 'geojson';
-import { memo, MutableRefObject, ReactNode, useRef, useState } from 'react';
+import {
+  memo,
+  MutableRefObject,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
-import { TCombinedChartDimensions } from './hooks/use-chart-dimensions';
+import { useChartDimensions } from './hooks/use-chart-dimensions';
 import { Path } from './path';
 import { Tooltip } from './tooltips/tooltip-container';
 import { countryGeo } from './topology';
@@ -19,6 +26,7 @@ export type TooltipSettings = {
 };
 
 type TProps<T1, T3> = {
+  initialWidth?: number;
   // This is the main feature collection that displays the features that will
   // be colored in as part of the choropleth
   featureCollection: FeatureCollection<MultiPolygon, T1>;
@@ -28,8 +36,6 @@ type TProps<T1, T3> = {
   // The bounding box is calculated based on these features, this can be used to
   // zoom in on a specific part of the map upon initialization.
   boundingBox: FeatureCollection<MultiPolygon>;
-  // Height, width, etc
-  dimensions: TCombinedChartDimensions;
   // This callback is invoked for each of the features in the featureCollection property.
   // This will usually return a <path/> element.
   renderFeature: (
@@ -50,13 +56,11 @@ type TProps<T1, T3> = {
     path: string,
     index: number
   ) => ReactNode;
-  // This callback is invoked after a click was received on one of the features in the featureCollection property.
-  // The id is the value that is assigned to the data-id attribute in the renderFeature.
-  onPathClick: (id: string) => void;
   // This callback is invoked right before a tooltip is shown for one of the features in the featureCollection property.
   // The id is the value that is assigned to the data-id attribute in the renderFeature.
   getTooltipContent: (id: string) => ReactNode;
   description?: string;
+  showTooltipOnFocus?: boolean;
 };
 
 /**
@@ -118,15 +122,21 @@ const ChoroplethMap: <T1, T3>(
     featureCollection,
     hovers,
     boundingBox,
-    dimensions,
     renderFeature,
     renderHover,
-    onPathClick,
     setTooltip,
     hoverRef,
     description,
     renderHighlight,
+    initialWidth = 850,
+    showTooltipOnFocus,
   } = props;
+
+  const ratio = 1.2;
+  const [ref, dimensions] = useChartDimensions<HTMLDivElement>(
+    initialWidth,
+    ratio
+  );
 
   const clipPathId = useUniqueId();
   const dataDescriptionId = useUniqueId();
@@ -135,8 +145,8 @@ const ChoroplethMap: <T1, T3>(
   const isTouch = useIsTouchDevice();
 
   const {
-    width = 0,
-    height = 0,
+    width,
+    height,
     marginLeft,
     marginTop,
     boundedWidth,
@@ -145,67 +155,121 @@ const ChoroplethMap: <T1, T3>(
 
   const fitSize: FitSize = [[boundedWidth, boundedHeight], boundingBox];
 
+  useEffect(() => {
+    if (!showTooltipOnFocus) {
+      setTooltip(undefined);
+      return;
+    }
+
+    const container = ref.current;
+
+    function handleBubbledFocusIn(event: FocusEvent) {
+      const link = event.target as HTMLAnchorElement;
+      if (!container || !link) {
+        return;
+      }
+
+      const id = link.getAttribute('data-id');
+
+      if (id) {
+        const bboxContainer = container.getBoundingClientRect();
+        const bboxLink = link.getBoundingClientRect();
+        const left = bboxLink.left - bboxContainer.left;
+        const top = bboxLink.top - bboxContainer.top;
+
+        setTooltip({
+          left: left + bboxLink.width + 5,
+          top: top,
+          data: id,
+        });
+      }
+    }
+
+    function handleBubbledFocusOut() {
+      setTooltip(undefined);
+    }
+
+    /**
+     * `focusin` and `focusout` events bubble whereas `focus` doesn't
+     */
+    container?.addEventListener('focusin', handleBubbledFocusIn);
+    container?.addEventListener('focusout', handleBubbledFocusOut);
+
+    return () => {
+      container?.removeEventListener('focusin', handleBubbledFocusIn);
+      container?.removeEventListener('focusout', handleBubbledFocusOut);
+    };
+  }, [ref, setTooltip, showTooltipOnFocus, isTouch]);
+
   return (
     <>
       <span id={dataDescriptionId} style={{ display: 'none' }}>
         {description}
       </span>
-      <svg
-        width="100%"
-        height="100%"
-        css={css({ display: 'block', bg: 'transparent' })}
-        onMouseMove={createSvgMouseOverHandler(timeout, setTooltip)}
-        onMouseOut={
-          isTouch ? undefined : createSvgMouseOutHandler(timeout, setTooltip)
-        }
-        onClick={createSvgClickHandler(onPathClick, setTooltip, isTouch)}
-        data-cy="choropleth-map"
-        aria-labelledby={dataDescriptionId}
-      >
-        <clipPath id={clipPathId}>
-          <rect
-            x={dimensions.marginLeft}
-            y={0}
-            height={dimensions.boundedHeight}
-            width={
-              (dimensions.boundedWidth ?? 0) -
-              (dimensions.marginLeft ?? 0) -
-              (dimensions.marginRight ?? 0)
-            }
-          />
-        </clipPath>
-        <rect x={0} y={0} width={width} height={height} fill={'none'} rx={14} />
-        <g
-          transform={`translate(${marginLeft},${marginTop})`}
-          clipPath={`url(#${clipPathId})`}
+      <div ref={ref}>
+        <svg
+          width={width}
+          viewBox={`0 0 ${width} ${height}`}
+          css={css({ display: 'block', bg: 'transparent', width: '100%' })}
+          onMouseMove={createSvgMouseOverHandler(timeout, setTooltip)}
+          onMouseOut={
+            isTouch ? undefined : createSvgMouseOutHandler(timeout, setTooltip)
+          }
+          data-cy="choropleth-map"
+          aria-labelledby={dataDescriptionId}
         >
-          <MercatorGroup
-            data={featureCollection.features}
-            render={renderFeature}
-            fitSize={fitSize}
+          <clipPath id={clipPathId}>
+            <rect
+              x={dimensions.marginLeft}
+              y={0}
+              height={dimensions.boundedHeight}
+              width={
+                (dimensions.boundedWidth ?? 0) -
+                (dimensions.marginLeft ?? 0) -
+                (dimensions.marginRight ?? 0)
+              }
+            />
+          </clipPath>
+          <rect
+            x={0}
+            y={0}
+            width={width}
+            height={height}
+            fill={'none'}
+            rx={14}
           />
-
-          <Country fitSize={fitSize} />
-
-          {hovers && (
-            <g ref={hoverRef}>
-              <MercatorGroup
-                data={hovers.features}
-                render={renderHover}
-                fitSize={fitSize}
-              />
-            </g>
-          )}
-
-          {renderHighlight && (
+          <g
+            transform={`translate(${marginLeft},${marginTop})`}
+            clipPath={`url(#${clipPathId})`}
+          >
             <MercatorGroup
               data={featureCollection.features}
-              render={renderHighlight}
+              render={renderFeature}
               fitSize={fitSize}
             />
-          )}
-        </g>
-      </svg>
+
+            <Country fitSize={fitSize} />
+
+            {hovers && (
+              <g ref={hoverRef}>
+                <MercatorGroup
+                  data={hovers.features}
+                  render={renderHover}
+                  fitSize={fitSize}
+                />
+              </g>
+            )}
+
+            {renderHighlight && (
+              <MercatorGroup
+                data={featureCollection.features}
+                render={renderHighlight}
+                fitSize={fitSize}
+              />
+            )}
+          </g>
+        </svg>
+      </div>
     </>
   );
 });
@@ -255,25 +319,6 @@ function MercatorGroup<G extends Geometry, P>(props: MercatorGroupProps<G, P>) {
   );
 }
 
-const createSvgClickHandler = (
-  onPathClick: (id: string) => void,
-  setTooltip: (settings: TooltipSettings | undefined) => void,
-  isTouch: boolean
-) => {
-  return (event: React.MouseEvent) => {
-    const elm = event.target as HTMLElement | SVGElement;
-    const id = elm.getAttribute('data-id');
-
-    if (id) {
-      if (isTouch) {
-        positionTooltip(event, setTooltip, id);
-      } else {
-        onPathClick(id);
-      }
-    }
-  };
-};
-
 const createSvgMouseOverHandler = (
   timeout: MutableRefObject<number>,
   setTooltip: (settings: TooltipSettings | undefined) => void
@@ -288,25 +333,17 @@ const createSvgMouseOverHandler = (
         timeout.current = -1;
       }
 
-      positionTooltip(event, setTooltip, id);
+      const coords = localPoint(event);
+
+      if (coords) {
+        setTooltip({
+          left: coords.x + 5,
+          top: coords.y + 5,
+          data: id,
+        });
+      }
     }
   };
-};
-
-const positionTooltip = (
-  event: React.MouseEvent,
-  setTooltip: (settings: TooltipSettings | undefined) => void,
-  id: string
-) => {
-  const coords = localPoint(event);
-
-  if (coords) {
-    setTooltip({
-      left: coords.x + 5,
-      top: coords.y + 5,
-      data: id,
-    });
-  }
 };
 
 const createSvgMouseOutHandler = (

@@ -15,6 +15,7 @@ export interface Municipal {
   tested_overall: MunicipalTestedOverall;
   sewer?: MunicipalSewer;
   sewer_per_installation?: MunicipalSewerPerInstallation;
+  vaccine_coverage?: GmVaccineCoverage;
 }
 export interface GmDeceasedRivm {
   values: GmDeceasedRivmValue[];
@@ -91,6 +92,20 @@ export interface MunicipalSewerPerInstallationValue {
   rna_normalized: number;
   date_of_insertion_unix: number;
 }
+export interface GmVaccineCoverage {
+  values: GmVaccineCoverageValue[];
+  last_value: GmVaccineCoverageValue;
+}
+export interface GmVaccineCoverageValue {
+  partially_vaccinated: number;
+  partially_vaccinated_percentage: number;
+  fully_vaccinated: number;
+  fully_vaccinated_percentage: number;
+  partially_or_fully_vaccinated: number;
+  date_unix: number;
+  date_of_report_unix: number;
+  date_of_insertion_unix: number;
+}
 
 export interface Municipalities {
   last_generated: string;
@@ -131,6 +146,7 @@ export interface National {
   code: string;
   difference: NationalDifference;
   doctor: NationalDoctor;
+  g_number?: NlGNumber;
   infectious_people: NationalInfectiousPeople;
   intensive_care_nice: NationalIntensiveCareNice;
   tested_overall: NationalTestedOverall;
@@ -151,6 +167,7 @@ export interface National {
   elderly_at_home: NationalElderlyAtHome;
   vaccine_support: NlVaccineSupport;
   corona_melder_app: NlCoronaMelderApp;
+  vaccine_coverage?: NlVaccineCoverage;
   vaccine_delivery: NlVaccineDelivery;
   vaccine_delivery_estimate: NlVaccineDeliveryEstimate;
   vaccine_delivery_per_supplier?: NlVaccineDeliveryPerSupplier;
@@ -214,6 +231,16 @@ export interface NationalDoctorValue {
   date_end_unix: number;
   covid_symptoms_per_100k: number;
   covid_symptoms: number;
+  date_of_insertion_unix: number;
+}
+export interface NlGNumber {
+  values: NlGNumberValue[];
+  last_value: NlGNumberValue;
+}
+export interface NlGNumberValue {
+  g_number: number;
+  date_start_unix: number;
+  date_end_unix: number;
   date_of_insertion_unix: number;
 }
 export interface NationalInfectiousPeople {
@@ -483,6 +510,20 @@ export interface NlCoronaMelderAppValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
+export interface NlVaccineCoverage {
+  values: NlVaccineCoverageValue[];
+  last_value: NlVaccineCoverageValue;
+}
+export interface NlVaccineCoverageValue {
+  partially_vaccinated: number;
+  partially_vaccinated_percentage: number;
+  fully_vaccinated: number;
+  fully_vaccinated_percentage: number;
+  partially_or_fully_vaccinated: number;
+  date_unix: number;
+  date_of_report_unix: number;
+  date_of_insertion_unix: number;
+}
 export interface NlVaccineDelivery {
   values: NlVaccineDeliveryValue[];
   last_value: NlVaccineDeliveryValue;
@@ -669,6 +710,7 @@ export interface Regionaal {
   name: string;
   code: string;
   difference: RegionalDifference;
+  g_number?: VrGNumber;
   sewer: RegionalSewer;
   sewer_per_installation: RegionalSewerPerInstallation;
   tested_overall: RegionalTestedOverall;
@@ -684,6 +726,7 @@ export interface Regionaal {
   escalation_level: VrEscalationLevel;
   tested_overall_sum: VrTestedOverallSum;
   hospital_nice_sum: VrHospitalNiceSum;
+  vaccine_coverage: VrVaccineCoverage;
 }
 export interface RegionalDifference {
   tested_overall__infected_per_100k: DifferenceDecimal;
@@ -713,6 +756,16 @@ export interface DifferenceInteger {
   difference: number;
   old_date_unix: number;
   new_date_unix: number;
+}
+export interface VrGNumber {
+  values: VrGNumberValue[];
+  last_value: VrGNumberValue;
+}
+export interface VrGNumberValue {
+  g_number: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
 }
 export interface RegionalSewer {
   values: RegionalSewerValue[];
@@ -919,6 +972,20 @@ export interface VrHospitalNiceSumValue {
   admissions_per_1m: number;
   date_start_unix: number;
   date_end_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface VrVaccineCoverage {
+  values: VrVaccineCoverageValue[];
+  last_value: VrVaccineCoverageValue;
+}
+export interface VrVaccineCoverageValue {
+  partially_vaccinated: number;
+  partially_vaccinated_percentage: number;
+  fully_vaccinated: number;
+  fully_vaccinated_percentage: number;
+  partially_or_fully_vaccinated: number;
+  date_unix: number;
+  date_of_report_unix: number;
   date_of_insertion_unix: number;
 }
 

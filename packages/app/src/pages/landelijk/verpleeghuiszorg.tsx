@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import CoronaVirus from '~/assets/coronavirus.svg';
 import Locatie from '~/assets/locaties.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
@@ -13,8 +12,7 @@ import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
-import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
-import { createInfectedLocationsRegionalTooltip } from '~/components/choropleth/tooltips/region/create-infected-locations-regional-tooltip';
+import { InfectedLocationsRegionalTooltip } from '~/components/choropleth/tooltips/region/infected-locations-regional-tooltip';
 import { UnderReportedTooltip } from '~/domain/underreported/under-reported-tooltip';
 import { useIntl } from '~/intl';
 import {
@@ -28,8 +26,14 @@ import {
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { getTrailingDateRange } from '~/utils/get-trailing-date-range';
+import { useReverseRouter } from '~/utils/use-reverse-router';
+
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
+import {
+  RegionsNursingHome,
+  SafetyRegionProperties,
+} from '@corona-dashboard/common';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -47,9 +51,8 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
     7
   );
 
-  const router = useRouter();
-
   const { siteText } = useIntl();
+  const reverseRouter = useReverseRouter();
   const infectedLocationsText = siteText.verpleeghuis_besmette_locaties;
   const positiveTestedPeopleText =
     siteText.verpleeghuis_positief_geteste_personen;
@@ -213,14 +216,12 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
           >
             <SafetyRegionChoropleth
               data={choropleth.vr}
+              getLink={reverseRouter.vr.verpleeghuiszorg}
               metricName="nursing_home"
               metricProperty="infected_locations_percentage"
-              tooltipContent={createInfectedLocationsRegionalTooltip(
-                siteText.choropleth_tooltip.infected_locations,
-                regionThresholds.nursing_home.infected_locations_percentage,
-                createSelectRegionHandler(router, 'verpleeghuiszorg')
-              )}
-              onSelect={createSelectRegionHandler(router, 'verpleeghuiszorg')}
+              tooltipContent={(
+                context: SafetyRegionProperties & RegionsNursingHome
+              ) => <InfectedLocationsRegionalTooltip context={context} />}
             />
           </ChoroplethTile>
 

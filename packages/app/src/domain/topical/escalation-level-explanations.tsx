@@ -32,7 +32,7 @@ export function EscalationLevelExplanations() {
 
   return (
     <CollapsibleButton label={siteText.escalatie_niveau.tile_title}>
-      <Box my={3} px={{ _: 3, xs: 4, md: 5, lg: '12rem' }}>
+      <Box py={3} px={{ _: 3, xs: 4, md: 5, lg: '12rem' }}>
         <EscalationLevelExplanation
           level={1}
           explanation={siteText.escalatie_niveau.types['1'].toelichting}
