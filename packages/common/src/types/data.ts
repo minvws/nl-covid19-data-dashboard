@@ -171,7 +171,7 @@ export interface National {
   vaccine_delivery: NlVaccineDelivery;
   vaccine_delivery_estimate: NlVaccineDeliveryEstimate;
   vaccine_delivery_per_supplier?: NlVaccineDeliveryPerSupplier;
-  vaccine_delivery_estimate_time_span?: NlVaccineDeliveryEstimateTimeSpan;
+  vaccine_delivery_estimate_time_span: NlVaccineDeliveryEstimateTimeSpan;
   vaccine_administered: NlVaccineAdministered;
   vaccine_administered_estimate: NlVaccineAdministeredEstimate;
   vaccine_administered_care_institutions: NlVaccineAdministeredCareInstitutions;
@@ -183,7 +183,8 @@ export interface National {
   vaccine_administered_total: NlVaccineAdministeredTotal;
   vaccine_administered_rate_moving_average: NlVaccineAdministeredRateMovingAverage;
   vaccine_administered_planned: NlVaccineAdministeredPlanned;
-  vaccine_stock?: NlVaccineStock;
+  vaccine_coverage_per_age_group?: NlVaccineCoveragePerAgeGroup;
+  vaccine_stock: NlVaccineStock;
 }
 export interface NationalDifference {
   tested_overall__infected_per_100k: DifferenceDecimal;
@@ -690,6 +691,20 @@ export interface NlVaccineAdministeredPlannedValue {
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
+}
+export interface NlVaccineCoveragePerAgeGroup {
+  values: NlVaccineCoveragePerAgeGroupValue[];
+}
+export interface NlVaccineCoveragePerAgeGroupValue {
+  age_group_range: string;
+  age_group_percentage: number;
+  age_group_total: number;
+  fully_vaccinated: number;
+  partially_vaccinated: number;
+  fully_vaccinated_percentage: number;
+  date_unix: number;
+  date_of_insertion_unix: number;
+  date_of_report_unix: number;
 }
 export interface NlVaccineStock {
   values: NlVaccineStockValue[];

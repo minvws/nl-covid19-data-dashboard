@@ -3,14 +3,14 @@ import { useMemo } from 'react';
 import { LegendItem } from '~/components-styled/legend';
 import { SeriesIcon, TimespanAnnotationIcon } from '../components';
 import { DataOptions } from './common';
-import { SeriesConfig } from './series';
+import { SeriesConfig, isVisible } from './series';
 
 export function useLegendItems<T extends TimestampedValue>(
   config: SeriesConfig<T>,
   dataOptions?: DataOptions
 ) {
   const legendItems = useMemo(() => {
-    const items = [...config].reverse().map<LegendItem>((x) => ({
+    const items = config.filter(isVisible).map<LegendItem>((x) => ({
       color: x.color,
       label: x.label,
       shape: 'custom',

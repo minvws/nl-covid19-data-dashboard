@@ -203,7 +203,9 @@ const BehaviorPage = (props: StaticProps<typeof getStaticProps>) => {
           >
             {(timeframe) => (
               <TimeSeriesChart
-                title={corona_melder_app.waarschuwingen_over_tijd_grafiek.title}
+                tooltipTitle={
+                  corona_melder_app.waarschuwingen_over_tijd_grafiek.title
+                }
                 timeframe={timeframe}
                 values={data.corona_melder_app.values}
                 ariaLabelledBy={

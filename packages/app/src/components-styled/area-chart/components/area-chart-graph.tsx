@@ -93,7 +93,12 @@ export function AreaChartGraph<T extends TrendValue, K extends TrendValue>(
   ) => onHover(event);
 
   return (
-    <StyledSvg role="img" tabIndex={0} width={width} height={height}>
+    <StyledSvg
+      role="img"
+      tabIndex={0}
+      width={width}
+      viewBox={`0 0 ${width} ${height}`}
+    >
       <defs>
         {areas
           .map((x) => x.displays)
@@ -230,6 +235,7 @@ function getFill<T>(areaConfig: AreaDisplay<T>[], areaKey: string) {
 
 const StyledSvg = styled.svg(
   css({
+    width: '100%',
     '&:not(:root)': {
       overflow: 'visible',
     },

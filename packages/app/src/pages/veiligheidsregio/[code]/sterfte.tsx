@@ -43,7 +43,7 @@ export const getStaticProps = createGetStaticProps(
 const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
   const {
     data,
-    safetyRegionName: safetyRegion,
+    safetyRegionName,
     data: { deceased_cbs: dataCbs, deceased_rivm: dataRivm, difference },
     content,
     lastGenerated,
@@ -56,20 +56,26 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
 
   const metadata = {
     ...siteText.veiligheidsregio_index.metadata,
-    title: replaceVariablesInText(text.metadata.title, { safetyRegion }),
+    title: replaceVariablesInText(text.metadata.title, {
+      safetyRegion: safetyRegionName,
+    }),
     description: replaceVariablesInText(text.metadata.description, {
-      safetyRegion,
+      safetyRegion: safetyRegionName,
     }),
   };
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <SafetyRegionLayout data={data} lastGenerated={lastGenerated}>
+      <SafetyRegionLayout
+        data={data}
+        safetyRegionName={safetyRegionName}
+        lastGenerated={lastGenerated}
+      >
         <TileList>
           <ContentHeader
             category={siteText.veiligheidsregio_layout.headings.besmettingen}
             title={replaceVariablesInText(text.section_deceased_rivm.title, {
-              safetyRegion,
+              safetyRegion: safetyRegionName,
             })}
             icon={<CoronaVirusIcon />}
             subtitle={text.section_deceased_rivm.description}
