@@ -323,8 +323,8 @@ interface ListItemProps {
   icon: ReactNode;
   title: string;
   hasBorderBottom?: boolean;
-  description?: string;
   escalationColor?: string;
+  description?: string;
   date?: number | number[];
   children?: ReactNode;
   amount?: number;
