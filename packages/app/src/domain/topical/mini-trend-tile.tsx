@@ -1,7 +1,6 @@
 import css from '@styled-system/css';
 import { AxisBottom, AxisLeft, TickFormatter } from '@visx/axis';
 import { GridRows } from '@visx/grid';
-import { ParentSize } from '@visx/responsive';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components-styled/base';
@@ -34,7 +33,7 @@ export function MiniTrendTile<T extends TimestampedValue>(
 
   const value = trendData[trendData.length - 1][metricProperty];
 
-  const { sm } = useBreakpoints();
+  const { sm } = useBreakpoints(true);
 
   return (
     <Box position="relative" pb={{ _: '1.5rem', md: 0 }}>
@@ -66,27 +65,21 @@ export function MiniTrendTile<T extends TimestampedValue>(
 
       <StyledDiv>{text}</StyledDiv>
 
-      <ParentSize>
-        {(parent) => (
-          <LineChart
-            width={parent.width}
-            timeframe="5weeks"
-            values={trendData}
-            height={sm ? 180 : 140}
-            linesConfig={[
-              { metricProperty, areaFillOpacity: 0.2, strokeWidth: 3 },
-            ]}
-            componentCallback={ComponentCallback}
-            showMarkerLine
-            formatTooltip={(values) => formatNumber(values[0].__value)}
-            padding={{
-              top: 13,
-              left: 0,
-              right: 0,
-            }}
-          />
-        )}
-      </ParentSize>
+      <LineChart
+        initialWidth={400}
+        height={sm ? 180 : 140}
+        timeframe="5weeks"
+        values={trendData}
+        linesConfig={[{ metricProperty, areaFillOpacity: 0.2, strokeWidth: 3 }]}
+        componentCallback={ComponentCallback}
+        showMarkerLine
+        formatTooltip={(values) => formatNumber(values[0].__value)}
+        padding={{
+          top: 13,
+          left: 0,
+          right: 0,
+        }}
+      />
     </Box>
   );
 }
