@@ -1,32 +1,31 @@
 import {
-  ChoroplethThresholdsValue,
   RegionalHospitalNiceValue,
   SafetyRegionProperties,
 } from '@corona-dashboard/common';
-import { ReactNode } from 'react';
 import { InlineText } from '~/components-styled/typography';
-import { RegionSelectionHandler } from '../../select-handlers/create-select-region-handler';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
 import { TooltipSubject } from '~/components/choropleth/tooltips/tooltip-subject';
 import { useIntl } from '~/intl';
+import { useReverseRouter } from '~/utils/use-reverse-router';
+import { regionThresholds } from '../../region-thresholds';
 
-export const createRegionHospitalAdmissionsTooltip = (
-  subject: string,
-  thresholdValues: ChoroplethThresholdsValue[],
-  selectHandler: RegionSelectionHandler
-) => (
-  context: SafetyRegionProperties & RegionalHospitalNiceValue
-): ReactNode => {
-  const onSelect = (event: any) => {
-    event.stopPropagation();
-    selectHandler(context.vrcode);
-  };
-
+export function HospitalAdmissionsRegionalTooltip({
+  context,
+}: {
+  context: SafetyRegionProperties & RegionalHospitalNiceValue;
+}) {
   const { siteText, formatNumber } = useIntl();
+  const reverseRouter = useReverseRouter();
+  const subject = siteText.choropleth_tooltip.hospital_admissions;
+  const thresholdValues =
+    regionThresholds.hospital_nice.admissions_on_date_of_reporting;
 
   return (
     context && (
-      <TooltipContent title={context.vrname} onSelect={onSelect}>
+      <TooltipContent
+        title={context.vrname}
+        link={reverseRouter.vr.ziekenhuisopnames(context.vrcode)}
+      >
         <TooltipSubject
           subject={subject}
           thresholdValues={thresholdValues}
@@ -42,4 +41,4 @@ export const createRegionHospitalAdmissionsTooltip = (
       </TooltipContent>
     )
   );
-};
+}

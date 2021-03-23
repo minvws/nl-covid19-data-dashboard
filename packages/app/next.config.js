@@ -66,7 +66,7 @@ const nextConfig = {
     ],
   },*/
 
-  webpack(config, { isServer, webpack }) {
+  webpack(config, { isServer }) {
     if (
       isServer &&
       process.env.DISABLE_SITEMAP !== '1' &&
@@ -78,25 +78,6 @@ const nextConfig = {
         process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
       );
     }
-
-    /** To prevent importing two languages, we use the NormalModuleReplacementPlugin plugin
-     *  We match any import that uses APP_LOCALE and replace it with the value of
-     *  process.env.NEXT_PUBLIC_LOCALE
-     *  e.g. ~/src/locale/APP_LOCALE.json becomes ~/src/locale/nl.json
-     */
-    var appLocale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
-
-    config.plugins.push(
-      new webpack.NormalModuleReplacementPlugin(
-        /(.*)APP_LOCALE(\.*)/,
-        function (resource) {
-          resource.request = resource.request.replace(
-            /APP_LOCALE/,
-            `${appLocale}`
-          );
-        }
-      )
-    );
 
     config.module.rules.push({
       test: /\.svg$/,

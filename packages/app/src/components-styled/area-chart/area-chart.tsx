@@ -16,6 +16,7 @@ import { ValueAnnotation } from '~/components-styled/value-annotation';
 import { useIntl } from '~/intl';
 import theme from '~/style/theme';
 import { TimeframeOption } from '~/utils/timeframe';
+import { useElementSize } from '~/utils/use-element-size';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { LegendShape } from '../legend';
 import {
@@ -77,7 +78,7 @@ type AreaChartProps<T extends TimestampedValue, K extends TimestampedValue> = {
     >[],
     isPercentage?: boolean
   ) => React.ReactNode;
-  width: number;
+  initialWidth?: number;
   trends: TrendDescriptor<T>[];
   areas: AreaDescriptor<K>[];
   valueAnnotation?: string;
@@ -103,7 +104,7 @@ export function AreaChart<
   const {
     trends,
     areas,
-    width,
+    initialWidth = 840,
     valueAnnotation,
     timeframe = 'all',
     padding: overridePadding,
@@ -122,7 +123,9 @@ export function AreaChart<
     HoverPoint<(T & TimestampedTrendValue) | (K & TimestampedTrendValue)>
   >();
 
-  const breakpoints = useBreakpoints();
+  const [sizeRef, { width }] = useElementSize<HTMLDivElement>(initialWidth);
+
+  const breakpoints = useBreakpoints(true);
   const trendConfigs = useTrendConfigs(trends, timeframe);
   const areaConfigs = useAreaConfigs(areas, timeframe);
 
@@ -212,7 +215,7 @@ export function AreaChart<
           {valueAnnotation}
         </ValueAnnotation>
       )}
-      <Box position="relative">
+      <Box position="relative" ref={sizeRef}>
         <AreaChartGraph
           trends={trendConfigs}
           areas={areaConfigs}

@@ -1,8 +1,9 @@
 import { Box } from './base';
 import { Tile } from '~/components-styled/tile';
 import { Metadata, MetadataProps } from './metadata';
-import { Heading, Text } from './typography';
+import { Heading } from './typography';
 import { css } from '@styled-system/css';
+import { Markdown } from '~/components-styled/markdown';
 interface Illustration {
   image: string;
   alt: string;
@@ -34,14 +35,7 @@ export function KpiWithIllustrationTile({
         <Box mb={4} flex={{ _: '0 0 100%', lg: '1' }} pr={{ lg: 4 }}>
           <Heading level={3}>{title}</Heading>
           {children}
-          {description && (
-            <Text
-              as="div"
-              dangerouslySetInnerHTML={{
-                __html: description,
-              }}
-            />
-          )}
+          {description && <Markdown content={description} />}
         </Box>
         <Box flex={{ _: '0 0 100%', lg: '1' }} pl={{ lg: 4 }}>
           <img

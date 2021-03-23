@@ -43,9 +43,7 @@
     "proxy-polyfill": "^0.3.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "rehype-stringify": "^8.0.0",
-    "remark-external-links": "^8.0.0",
-    "remark-parse": "^9.0.0",
+    "react-markdown": "^5.0.3",
     "remark-rehype": "^8.0.0",
     "slugify": "^1.4.6",
     "styled-components": "^5.2.0",
@@ -53,7 +51,6 @@
     "swr": "^0.4.2",
     "topojson-client": "^3.1.0",
     "ts-is-present": "^1.1.5",
-    "unified": "^9.2.0",
     "use-debounce": "^5.2.0",
     "use-resize-observer": "^7.0.0"
   },
