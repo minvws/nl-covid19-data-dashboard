@@ -1,5 +1,6 @@
+import { LinePath } from '@visx/shape';
 import { Threshold } from '@visx/threshold';
-import { useCallback, useMemo } from 'react';
+import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
 import { useUniqueId } from '~/utils/use-unique-id';
 import { Bounds, SeriesDoubleValue, SeriesItem } from '../logic';
@@ -33,51 +34,51 @@ export function StackedAreaTrend({
     [series]
   );
 
-  const getPaddedY0 = useCallback(
-    (value: SeriesDoubleValue) => {
-      const y = getY0(value);
-      // return y;
-      return value.__value_a === 0 ? y : y - 2;
-    },
-    [getY0]
-  );
-
-  const getPaddedY1 = useCallback(
-    (value: SeriesDoubleValue) => {
-      const y = getY1(value);
-      return y;
-    },
-    [getY1]
-  );
+  const isBottomSeries = series.map(getY0).every((x) => x === bounds.height);
 
   return (
-    /**
-     * @TODO further implement styling. Not sure if Threshold is the best Visx
-     * component to accomplish this.
-     */
-    <Threshold<SeriesDoubleValue>
-      id={id}
-      data={nonNullSeries}
-      x={getX}
-      y0={getPaddedY0}
-      y1={getPaddedY1}
-      clipAboveTo={0}
-      clipBelowTo={bounds.height}
-      belowAreaProps={{
-        fill: color,
-        fillOpacity,
-      }}
-      /**
-       * When "value a" becomes higher than "value b", this will render the fill
-       * in with different properties. We probably don't need this if our range
-       * is always just a low and high value where the low never exceeds the
-       * high.
-       */
-      aboveAreaProps={{
-        fill: color,
-        fillOpacity,
-      }}
-    />
+    <g>
+      <Threshold<SeriesDoubleValue>
+        id={id}
+        data={nonNullSeries}
+        x={getX}
+        y0={getY0}
+        y1={getY1}
+        clipAboveTo={0}
+        clipBelowTo={bounds.height}
+        belowAreaProps={{
+          fill: color,
+          fillOpacity,
+        }}
+        /**
+         * When "value a" becomes higher than "value b", this will render the fill
+         * in with different properties. We probably don't need this if our range
+         * is always just a low and high value where the low never exceeds the
+         * high.
+         */
+        aboveAreaProps={{
+          fill: color,
+          fillOpacity,
+        }}
+      />
+
+      {/**
+       * The following LinePath is used as separator between series. The bottom
+       * serie, which should touch the X-axis, shouldn't render its linePath
+       * because that would overlap with the X-axis.
+       */}
+      {!isBottomSeries && (
+        <LinePath
+          data={nonNullSeries}
+          x={getX}
+          y={getY0}
+          stroke="white"
+          strokeWidth={2}
+          strokeLinecap="butt"
+          strokeLinejoin="round"
+        />
+      )}
+    </g>
   );
 }
 

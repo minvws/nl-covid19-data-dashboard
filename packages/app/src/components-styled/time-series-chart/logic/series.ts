@@ -230,9 +230,10 @@ export function getSeriesList<T extends TimestampedValue>(
 function getStackedAreaSeriesData<T extends TimestampedValue>(
   values: T[],
   metricProperty: keyof T,
-  seriesConfig: StackedAreaSeriesDefinition<T>[]
+  stackedAreaSeries: StackedAreaSeriesDefinition<T>[]
 ) {
-  const stackIndex = seriesConfig.findIndex(
+  const reversed = [...stackedAreaSeries].reverse();
+  const stackIndex = reversed.findIndex(
     (x) => x.metricProperty === metricProperty
   );
 
@@ -244,11 +245,9 @@ function getStackedAreaSeriesData<T extends TimestampedValue>(
    */
   let index = 0;
   while (index < stackIndex) {
-    getSeriesData(values, seriesConfig[index].metricProperty).forEach(
-      (x, i) => {
-        seriesLow[i].__value += x.__value || 0;
-      }
-    );
+    getSeriesData(values, reversed[index].metricProperty).forEach((x, i) => {
+      seriesLow[i].__value += x.__value || 0;
+    });
     index++;
   }
 

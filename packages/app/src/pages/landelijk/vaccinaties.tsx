@@ -257,23 +257,42 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           </TwoKpiSection>
 
           <ChartTile
-            title={text.grafiek.titel}
-            description={text.grafiek.omschrijving}
+            /**
+             * @TODO copy from locale files
+             */
+            title={'Aantal gevaccineerde mensen'}
+            description={`Deze grafiek laat zien hoeveel mensen in Nederland een prik hebben gehad en hoeveel mensen daarvan volledig en gedeeltelijk gevaccineerd zijn.
+            Met de huidige vaccinatieplan verwachten we dat ieder persoon die in Nederland wil zich laten vaccineren zou bij eind juli 2021 een eerste prik mogen krijgen.`}
             metadata={{
-              date: data.vaccine_delivery.last_value.date_of_report_unix,
+              date: mockDataRef.current.last_value.date_of_report_unix,
               source: text.bronnen.rivm,
             }}
           >
             <TimeSeriesChart
-              values={mockDataRef.current}
+              tooltipTitle={'Aantal gevaccineerde mensen'}
+              values={mockDataRef.current.values}
+              dataOptions={{
+                timespanAnnotations: [
+                  {
+                    start: Date.now() / 1000 - 60 * 60 * 24 * 5,
+                    end: mockDataRef.current.last_value.date_unix,
+                    shortLabel: '(niet compleet)',
+                    label:
+                      'Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen',
+                  },
+                ],
+              }}
               seriesConfig={[
                 {
-                  metricProperty: 'fully_vaccinated',
-                  type: 'stacked-area',
-                  label: 'Volledig gevaccineerde mensen',
-                  shortLabel: 'volledig gevaccineerd',
-                  color: colors.data.multiseries.cyan_dark,
-                  fillOpacity: 1,
+                  /**
+                   * @TODO This line should actually be the first in the tooltip/legend
+                   */
+                  metricProperty: 'partially_or_fully_vaccinated',
+                  type: 'line',
+                  label: 'Totaal aantal geprikte mensen',
+                  shortLabel: 'geprikte mensen',
+                  color: 'black',
+                  strokeWidth: 3,
                 },
                 {
                   metricProperty: 'partially_vaccinated',
@@ -283,20 +302,13 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                   color: colors.data.multiseries.cyan,
                   fillOpacity: 1,
                 },
-                // {
-                //   metricProperty: 'partially_or_fully_vaccinated',
-                //   type: 'stacked-area',
-                //   label: 'Volledig gevaccineerde mensen',
-                //   shortLabel: 'volledig gevaccineerd',
-                //   color: colors.data.multiseries.magenta,
-                //   fillOpacity: 1,
-                // },
                 {
-                  metricProperty: 'partially_or_fully_vaccinated',
-                  type: 'line',
-                  label: 'Totaal aantal geprikte mensen',
-                  color: 'black',
-                  strokeWidth: 3,
+                  metricProperty: 'fully_vaccinated',
+                  type: 'stacked-area',
+                  label: 'Volledig gevaccineerde mensen',
+                  shortLabel: 'volledig gevaccineerd',
+                  color: colors.data.multiseries.cyan_dark,
+                  fillOpacity: 1,
                 },
               ]}
             />
@@ -715,11 +727,14 @@ function HatchedSquare() {
 //   flex-shrink: 0;
 // `;
 
+/**
+ * @TODO Remove mock data generator
+ */
 function createNlVaccineCoverageValueMock() {
   const date = new Date('3 jan 2021');
 
   const initial = 10000;
-  let multiplier = 0.8;
+  let multiplier = 0.5;
 
   const mockValues: NlVaccineCoverageValue[] = [
     {
@@ -728,15 +743,13 @@ function createNlVaccineCoverageValueMock() {
       date_unix: date.getTime() / 1000,
       fully_vaccinated: initial,
       fully_vaccinated_percentage: 0,
-      partially_or_fully_vaccinated: initial,
+      partially_or_fully_vaccinated: initial + initial,
       partially_vaccinated: initial,
       partially_vaccinated_percentage: 0,
     },
   ];
 
   while (date.getTime() < Date.now()) {
-    date.setDate(date.getDate() + 2);
-
     const lastValue = mockValues[mockValues.length - 1];
 
     const dateSeconds = date.getTime() / 1000;
@@ -769,7 +782,12 @@ function createNlVaccineCoverageValueMock() {
       partially_vaccinated,
       partially_vaccinated_percentage,
     });
+
+    date.setDate(date.getDate() + 1);
   }
 
-  return mockValues;
+  return {
+    values: mockValues,
+    last_value: mockValues[mockValues.length - 1],
+  };
 }

@@ -38,7 +38,6 @@ export function SeriesIcon<T extends TimestampedValue>({
         <StackedAreaTrendIcon
           color={config.color}
           fillOpacity={config.fillOpacity}
-          strokeWidth={config.strokeWidth}
         />
       );
     default:

@@ -11,7 +11,6 @@ import { InlineText } from '~/components-styled/typography';
 import { VisuallyHidden } from '~/components-styled/visually-hidden';
 import { SeriesConfig } from '../../logic';
 import { SeriesIcon } from '../series-icon';
-import { TimespanAnnotationIcon } from '../timespan-annotation';
 import { TooltipData } from './types';
 import { useIntl } from '~/intl';
 
@@ -75,6 +74,11 @@ export function TooltipSeriesList<T extends TimestampedValue>({
     <section>
       <VisuallyHidden>{dateString}</VisuallyHidden>
 
+      {timespanAnnotation && (
+        <InlineText>
+          {timespanAnnotation.shortLabel || timespanAnnotation.label}
+        </InlineText>
+      )}
       <TooltipList>
         {seriesConfig.map((x) => {
           switch (x.type) {
@@ -157,23 +161,6 @@ export function TooltipSeriesList<T extends TimestampedValue>({
               );
           }
         })}
-
-        {timespanAnnotation && (
-          <TooltipListItem
-            icon={
-              <TimespanAnnotationIcon
-                color={timespanAnnotation.color}
-                fillOpacity={timespanAnnotation.fillOpacity}
-              />
-            }
-          >
-            <TooltipValueContainer>
-              <InlineText mr={2}>
-                {timespanAnnotation.shortLabel || timespanAnnotation.label}
-              </InlineText>
-            </TooltipValueContainer>
-          </TooltipListItem>
-        )}
       </TooltipList>
     </section>
   );
