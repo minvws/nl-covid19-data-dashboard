@@ -12,18 +12,18 @@ import { languages, LanguageKey } from '~/locale';
 
 if (typeof window !== 'undefined') {
   require('proxy-polyfill/proxy.min.js');
-}
 
-if (process.env.NODE_ENV === 'development') {
-  /**
-   * this polyfill allows next.js to show runtime errors in IE11
-   */
-  require('@webcomponents/shadydom');
-}
+  if (process.env.NODE_ENV === 'development') {
+    /**
+     * this polyfill allows next.js to show runtime errors in IE11
+     */
+    require('@webcomponents/shadydom');
+  }
 
-if (!window.ResizeObserver) {
-  const ResizeObserver = require('resize-observer-polyfill').default;
-  window.ResizeObserver = ResizeObserver;
+  if (!window.ResizeObserver) {
+    const ResizeObserver = require('resize-observer-polyfill').default;
+    window.ResizeObserver = ResizeObserver;
+  }
 }
 
 export default function App(props: AppProps) {
