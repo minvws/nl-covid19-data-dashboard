@@ -16,10 +16,11 @@ const english = JSON.parse(
 
 const objects = Object.entries(flatten(dutch)).map(([key, value]) => ({
   _type: 'message',
+  id: key,
   key,
   description: '',
   translations: {
-    nl: value,
+    default: value,
     en: get(english, key),
   },
 }));
