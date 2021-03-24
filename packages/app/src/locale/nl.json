@@ -2321,7 +2321,7 @@
     "stock": {
       "title": "Vaccins in voorraad",
       "description": "Dit getal laat zien hoeveel prikken we per vaccin type momenteel op voorraad hebben.",
-      "per_vaccine": "{{label}} {{amount}}"
+      "per_vaccine": "{{amount}} {{label}} prikken"
     },
     "delivery_estimate_time_span": {
       "title": "Vaccins in voorraad: Dit is voldoende om {{weeks}} weken mee te prikken.",
