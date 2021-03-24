@@ -1,7 +1,4 @@
-import {
-  NlVaccineDeliveryPerSupplier,
-  NlVaccineDeliveryPerSupplierValue,
-} from '@corona-dashboard/common';
+import { NlGNumber, NlGNumberValue } from '@corona-dashboard/common';
 import { ParentSize } from '@visx/responsive';
 import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
 import { TimeframeOption } from '~/utils/timeframe';
@@ -32,7 +29,7 @@ function generateDummyData() {
 }
 
 interface GNumberBarChartTileProps {
-  data: NlVaccineDeliveryPerSupplier;
+  data: NlGNumber;
   siteText: AllLanguages;
   timeframeOptions?: TimeframeOption[];
 }
@@ -48,10 +45,9 @@ export function GNumberBarChartTile({
     description: 'blah blah blah',
   };
 
-  const values: NlVaccineDeliveryPerSupplierValue[] = generateDummyData();
+  const values: NlGNumberValue[] = generateDummyData();
 
-  const last_value: NlVaccineDeliveryPerSupplierValue =
-    values[values.length - 1];
+  const last_value: NlGNumberValue = values[values.length - 1];
 
   const simplifiedData = values.map(
     ({ date_start_unix, date_end_unix, ...rest }) => ({
