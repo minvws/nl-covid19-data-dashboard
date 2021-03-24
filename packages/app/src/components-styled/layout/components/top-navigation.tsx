@@ -1,43 +1,32 @@
 import css from '@styled-system/css';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Close from '~/assets/close.svg';
 import Menu from '~/assets/menu.svg';
 import { MaxWidth } from '~/components-styled/max-width';
 import { VisuallyHidden } from '~/components-styled/visually-hidden';
-import text from '~/locale/index';
 import theme from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { useBreakpoints } from '~/utils/useBreakpoints';
+import { useIntl } from '~/intl';
 
 export function TopNavigation() {
   const router = useRouter();
 
-  const [isMenuOpen, setIsMenuOpen] = useState(true);
-  const [needsMobileMenuLink, setNeedsMobileMenuLink] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const breakpoints = useBreakpoints(true);
   const isSmallScreen = !breakpoints.md;
-  const [panelHeight, setPanelHeight] = useState(0);
-  const navMenu = useRef<HTMLDivElement>(null);
+  const [needsMobileMenuLink, setNeedsMobileMenuLink] = useState(false);
+  const { siteText } = useIntl();
 
   useEffect(() => {
-    // Menu is opened by default as fallback: JS opens it
-    setIsMenuOpen(false);
-    setPanelHeight(0);
-
     // Workaround to get the mobile menu opened when linking to a sub-page.
     setNeedsMobileMenuLink(isSmallScreen);
   }, [isSmallScreen]);
 
-  useEffect(() => {
-    setPanelHeight(isMenuOpen ? 1000 : 0);
-  }, [isMenuOpen]);
-
-  function toggleMenu() {
-    setIsMenuOpen(!isMenuOpen);
-  }
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
     <>
@@ -49,7 +38,9 @@ export function TopNavigation() {
         >
           {isMenuOpen ? <Close /> : <Menu />}
           <VisuallyHidden>
-            {isMenuOpen ? text.nav.menu.close_menu : text.nav.menu.open_menu}
+            {isMenuOpen
+              ? siteText.nav.menu.close_menu
+              : siteText.nav.menu.open_menu}
           </VisuallyHidden>
         </NavToggle>
       )}
@@ -57,19 +48,13 @@ export function TopNavigation() {
       <NavWrapper
         id="main-navigation"
         role="navigation"
-        aria-label={text.aria_labels.pagina_keuze}
-        ref={navMenu}
+        aria-label={siteText.aria_labels.pagina_keuze}
         css={css({
-          maxHeight: asResponsiveArray({ _: `${panelHeight}px`, md: '100%' }),
+          maxHeight: asResponsiveArray({
+            _: isMenuOpen ? '1000px' : 0,
+            md: '100%',
+          }),
           opacity: asResponsiveArray({ _: isMenuOpen ? 1 : 0, md: 1 }),
-          pointerEvents: asResponsiveArray({
-            _: isMenuOpen ? 'auto' : 'none',
-            md: 'auto',
-          }),
-          transition: asResponsiveArray({
-            _: 'max-height 0.4s ease-in-out, opacity 0.4s ease-in-out',
-            md: 'none',
-          }),
         })}
       >
         <MaxWidth>
@@ -81,7 +66,7 @@ export function TopNavigation() {
                 router.pathname.startsWith('/actueel')
               }
             >
-              {text.nav.links.actueel}
+              {siteText.nav.links.actueel}
             </NavItem>
             <NavItem
               href={`/landelijk/vaccinaties${
@@ -89,14 +74,14 @@ export function TopNavigation() {
               }`}
               isActive={router.pathname.startsWith('/landelijk')}
             >
-              {text.nav.links.index}
+              {siteText.nav.links.index}
             </NavItem>
             <NavItem href="/veiligheidsregio">
-              {text.nav.links.veiligheidsregio}
+              {siteText.nav.links.veiligheidsregio}
             </NavItem>
-            <NavItem href="/gemeente">{text.nav.links.gemeente}</NavItem>
+            <NavItem href="/gemeente">{siteText.nav.links.gemeente}</NavItem>
 
-            <NavItem href="/over">{text.nav.links.over}</NavItem>
+            <NavItem href="/over">{siteText.nav.links.over}</NavItem>
           </NavList>
         </MaxWidth>
       </NavWrapper>
@@ -145,6 +130,28 @@ const NavWrapper = styled.nav(
     width: '100%',
     borderTopWidth: '1px',
     p: 0,
+    maxHeight: asResponsiveArray({ _: '0', md: '100%' }),
+    transition: asResponsiveArray({
+      _: 'max-height 0.4s ease-in-out, opacity 0.4s ease-in-out',
+      md: 'none',
+    }),
+    overflow: 'hidden',
+
+    '.has-no-js &': {
+      animation: `show-menu 1s forwards`,
+      animationDelay: '1s',
+    },
+
+    [`@keyframes show-menu`]: {
+      from: {
+        maxHeight: 0,
+      },
+      to: {
+        opacity: 1,
+        maxHeight: '1000px',
+      },
+    },
+
     [`@media ${theme.mediaQueries.md}`]: {
       display: 'inline',
       width: 'auto',

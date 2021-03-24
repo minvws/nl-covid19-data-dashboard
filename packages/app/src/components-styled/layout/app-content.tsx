@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { ArrowIconLeft } from '~/components-styled/arrow-icon';
 import { Box } from '~/components-styled/base';
 import { MaxWidth } from '~/components-styled/max-width';
-import siteText from '~/locale/index';
+import { useIntl } from '~/intl';
 import { LinkWithIcon } from '../link-with-icon';
 
 interface AppContentProps {
@@ -14,19 +14,6 @@ interface AppContentProps {
   hideMenuButton?: boolean;
 }
 
-function getMenuOpenText(pathname: string) {
-  if (pathname.startsWith('/landelijk')) {
-    return siteText.nav.terug_naar_alle_cijfers_homepage;
-  }
-  if (pathname.startsWith('/veiligheidsregio')) {
-    return siteText.nav.terug_naar_alle_cijfers_veiligheidsregio;
-  }
-  if (pathname.startsWith('/gemeente')) {
-    return siteText.nav.terug_naar_alle_cijfers_gemeente;
-  }
-  return siteText.nav.terug_naar_alle_cijfers;
-}
-
 export function AppContent({
   children,
   sidebarComponent,
@@ -34,6 +21,7 @@ export function AppContent({
   hideMenuButton,
 }: AppContentProps) {
   const router = useRouter();
+  const { siteText } = useIntl();
 
   const menuOpenUrl = {
     pathname: router.pathname,
@@ -47,8 +35,13 @@ export function AppContent({
   const isMenuOpen =
     router.pathname == '/landelijk' || router.query.menu === '1';
 
-  const menuOpenText = getMenuOpenText(router.pathname);
-
+  const menuOpenText = router.pathname.startsWith('/landelijk')
+    ? siteText.nav.terug_naar_alle_cijfers_homepage
+    : router.pathname.startsWith('/veiligheidsregio')
+    ? siteText.nav.terug_naar_alle_cijfers_veiligheidsregio
+    : router.pathname.startsWith('/gemeente')
+    ? siteText.nav.terug_naar_alle_cijfers_gemeente
+    : siteText.nav.terug_naar_alle_cijfers;
   return (
     <MaxWidth px={[0, 0, 0, 0, 3]}>
       <AppContentContainer>

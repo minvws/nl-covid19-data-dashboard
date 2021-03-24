@@ -66,6 +66,9 @@
     "doctor": {
       "$ref": "doctor.json"
     },
+    "g_number": {
+      "$ref": "g_number.json"
+    },
     "infectious_people": {
       "$ref": "infectious_people.json"
     },
@@ -126,11 +129,20 @@
     "corona_melder_app": {
       "$ref": "corona_melder_app.json"
     },
+    "vaccine_coverage": {
+      "$ref": "vaccine_coverage.json"
+    },
     "vaccine_delivery": {
       "$ref": "vaccine_delivery.json"
     },
     "vaccine_delivery_estimate": {
       "$ref": "vaccine_delivery_estimate.json"
+    },
+    "vaccine_delivery_per_supplier": {
+      "$ref": "vaccine_delivery_per_supplier.json"
+    },
+    "vaccine_delivery_estimate_time_span": {
+      "$ref": "vaccine_delivery_estimate_time_span.json"
     },
     "vaccine_administered": {
       "$ref": "vaccine_administered.json"
@@ -164,6 +176,12 @@
     },
     "vaccine_administered_planned": {
       "$ref": "vaccine_administered_planned.json"
+    },
+    "vaccine_coverage_per_age_group": {
+      "$ref": "vaccine_coverage_per_age_group.json"
+    },
+    "vaccine_stock": {
+      "$ref": "vaccine_stock.json"
     }
   }
 }

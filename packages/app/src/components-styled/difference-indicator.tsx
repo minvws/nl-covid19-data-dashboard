@@ -1,9 +1,4 @@
-import {
-  DifferenceDecimal,
-  DifferenceInteger,
-  formatNumber,
-  formatPercentage,
-} from '@corona-dashboard/common';
+import { DifferenceDecimal, DifferenceInteger } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import {
@@ -18,44 +13,34 @@ import {
 import IconGelijk from '~/assets/gelijk.svg';
 import IconUp from '~/assets/pijl-omhoog.svg';
 import IconDown from '~/assets/pijl-omlaag.svg';
-import siteText from '~/locale/index';
-
-const text = siteText.toe_en_afname;
+import { useIntl } from '~/intl';
 
 interface DifferenceIndicatorProps {
   value: DifferenceDecimal | DifferenceInteger;
   isDecimal?: boolean;
   context?: 'sidebar' | 'tile' | 'inline';
+  maximumFractionDigits?: number;
   staticTimespan?: string;
-  differenceFractionDigits?: number;
 }
 
 export function DifferenceIndicator(props: DifferenceIndicatorProps) {
-  const {
-    value,
-    isDecimal,
-    context,
-    staticTimespan,
-    differenceFractionDigits,
-  } = props;
+  switch (props.context) {
+    case 'sidebar':
+      return <SidebarIndicator {...props} />;
 
-  if (context === 'sidebar') {
-    return renderSidebarIndicator(value);
+    case 'inline':
+      return <InlineIndicator {...props} />;
+
+    default:
+      return <TileIndicator {...props} />;
   }
-
-  if (context === 'inline') {
-    return renderInlineIndicator(value, isDecimal, differenceFractionDigits);
-  }
-
-  return renderTileIndicator(
-    value,
-    isDecimal,
-    staticTimespan,
-    differenceFractionDigits
-  );
 }
 
-function renderSidebarIndicator(value: DifferenceDecimal | DifferenceInteger) {
+function SidebarIndicator({
+  value,
+}: {
+  value: DifferenceDecimal | DifferenceInteger;
+}) {
   const { difference } = value;
 
   if (difference > 0) {
@@ -87,15 +72,25 @@ function renderSidebarIndicator(value: DifferenceDecimal | DifferenceInteger) {
   );
 }
 
-function renderInlineIndicator(
-  value: DifferenceDecimal | DifferenceInteger,
-  isDecimal?: boolean,
-  differenceFractionDigits?: number
-) {
+function InlineIndicator({
+  value,
+  isDecimal,
+  maximumFractionDigits,
+}: {
+  value: DifferenceDecimal | DifferenceInteger;
+  isDecimal?: boolean;
+  maximumFractionDigits?: number;
+}) {
+  const { siteText, formatPercentage, formatNumber } = useIntl();
+  const text = siteText.toe_en_afname;
+
   const { difference } = value;
 
   const differenceFormattedString = isDecimal
-    ? formatPercentage(Math.abs(difference), differenceFractionDigits)
+    ? formatPercentage(
+        Math.abs(difference),
+        maximumFractionDigits ? { maximumFractionDigits } : undefined
+      )
     : formatNumber(Math.abs(difference));
 
   if (difference > 0) {
@@ -136,16 +131,27 @@ function renderInlineIndicator(
   );
 }
 
-function renderTileIndicator(
-  value: DifferenceDecimal | DifferenceInteger,
-  isDecimal?: boolean,
-  staticTimespan?: string,
-  maximumFractionDigits?: number
-) {
+function TileIndicator({
+  value,
+  isDecimal,
+  staticTimespan,
+  maximumFractionDigits,
+}: {
+  value: DifferenceDecimal | DifferenceInteger;
+  isDecimal?: boolean;
+  maximumFractionDigits?: number;
+  staticTimespan?: string;
+}) {
+  const { siteText, formatNumber, formatPercentage } = useIntl();
+  const text = siteText.toe_en_afname;
+
   const { difference } = value;
 
   const differenceFormattedString = isDecimal
-    ? formatPercentage(Math.abs(difference), maximumFractionDigits)
+    ? formatPercentage(
+        Math.abs(difference),
+        maximumFractionDigits ? { maximumFractionDigits } : undefined
+      )
     : formatNumber(Math.abs(difference));
 
   const timespanTextNode = staticTimespan ?? text.vorige_waarde;

@@ -5,7 +5,8 @@ import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
 import { DifferenceIndicator } from '~/components-styled/difference-indicator';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
-import { formatNumber, formatPercentage } from '~/utils/formatNumber';
+import { useIntl } from '~/intl';
+
 interface KpiValueProps {
   absolute?: number;
   percentage?: number;
@@ -49,6 +50,8 @@ export function KpiValue({
   color = 'data.primary',
   ...otherProps
 }: KpiValueProps) {
+  const { formatPercentage, formatNumber } = useIntl();
+
   return (
     <Box mb={3}>
       {isDefined(percentage) && isDefined(absolute) ? (

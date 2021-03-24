@@ -45,7 +45,7 @@ export function useAgeDemographicCoordinates<
   metricProperty: keyof T,
   displayMaxPercentage?: number
 ) {
-  const [ref, { width }] = useElementSize<HTMLDivElement>(400);
+  const [ref, { width }] = useElementSize<HTMLDivElement>(840);
   const { xs, xl } = useBreakpoints();
   const isSmallScreen = !xl;
   const isExtraSmallScreen = xs;

@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import siteText from '~/locale';
+import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
 import { DataValue } from './use-municipality-data';
@@ -15,9 +15,10 @@ export function useChoroplethDataDescription<T>(
   area: 'vr' | 'gm',
   gemcodes?: string[]
 ) {
-  return useMemo(() => {
-    const dynamicTexts = getDynamicTextTemplates(metricName, metricProperty);
+  const { siteText } = useIntl();
+  const dynamicTexts = useDynamicTextTemplates(metricName, metricProperty);
 
+  return useMemo(() => {
     if (!dynamicTexts) {
       return '';
     }
@@ -72,7 +73,7 @@ export function useChoroplethDataDescription<T>(
       : replaceVariablesInText(dynamicTexts.full_sentence_single, {
           first: texts[0],
         });
-  }, [thresholds, gmValues, metricName, metricProperty, area, gemcodes]);
+  }, [dynamicTexts, siteText.choropleth, area, gemcodes, gmValues, thresholds]);
 }
 
 /**
@@ -84,10 +85,12 @@ export function useChoroplethDataDescription<T>(
  * is replaced with the currently selected restriction (extracted from the metric property)
  * and then returned.
  */
-function getDynamicTextTemplates<T>(
+function useDynamicTextTemplates<T>(
   metricName: keyof T,
   metricProperty: string
 ) {
+  const { siteText } = useIntl();
+
   if (metricName === 'behavior') {
     const parts = metricProperty.split('_');
     const restrictionKey = parts.slice(0, -1).join('_');

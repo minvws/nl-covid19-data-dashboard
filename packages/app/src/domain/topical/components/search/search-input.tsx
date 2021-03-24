@@ -5,13 +5,14 @@ import CloseIcon from '~/assets/close.svg';
 import SearchIcon from '~/assets/search-icon.svg';
 import { Box } from '~/components-styled/base';
 import { VisuallyHidden } from '~/components-styled/visually-hidden';
-import { default as siteText, default as text } from '~/locale';
+import { useIntl } from '~/intl';
 import { useSearchContext } from './context';
 
 const ICON_SPACE = 50;
 const ICON_SPACE_LARGE = 66;
 
 export function SearchInput() {
+  const { siteText } = useIntl();
   const { id, inputProps, setTerm } = useSearchContext();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -31,7 +32,7 @@ export function SearchInput() {
             setTerm('');
           }}
         >
-          <VisuallyHidden>{text.search.clear}</VisuallyHidden>
+          <VisuallyHidden>{siteText.search.clear}</VisuallyHidden>
           <CloseIcon />
         </IconContainer>
       )}

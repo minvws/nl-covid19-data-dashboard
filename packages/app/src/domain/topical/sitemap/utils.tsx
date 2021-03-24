@@ -1,12 +1,14 @@
-import siteText from '~/locale/index';
+import { useIntl } from '~/intl';
 import { LinkGroupProps } from './link-group';
 import { Municipal, National, Regionaal } from '@corona-dashboard/common';
 
-export function getDataSitemap(
+export function useDataSitemap(
   base: 'landelijk' | 'veiligheidsregio' | 'gemeente',
   code?: string,
   data?: National | Regionaal | Municipal
 ): LinkGroupProps[] {
+  const { siteText } = useIntl();
+
   if (base === 'gemeente' && code) {
     const baseUrl = `/${base}/${code}`;
 
