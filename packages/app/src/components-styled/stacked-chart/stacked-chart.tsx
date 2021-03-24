@@ -252,7 +252,7 @@ export function StackedChart<T extends TimestampedValue>(
       {
         label: expectedLabel,
         shape: 'custom' as const,
-        shapeComponent: HatchedSquare,
+        shapeComponent: <HatchedSquare />,
       },
     ];
   }, [config, hoveredIndex, metricProperties, hoverColors, expectedLabel]);

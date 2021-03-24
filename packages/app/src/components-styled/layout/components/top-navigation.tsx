@@ -1,6 +1,6 @@
 import css from '@styled-system/css';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Close from '~/assets/close.svg';
 import Menu from '~/assets/menu.svg';
@@ -15,30 +15,18 @@ import { useIntl } from '~/intl';
 export function TopNavigation() {
   const router = useRouter();
 
-  const [isMenuOpen, setIsMenuOpen] = useState(true);
-  const [needsMobileMenuLink, setNeedsMobileMenuLink] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const breakpoints = useBreakpoints(true);
   const isSmallScreen = !breakpoints.md;
-  const [panelHeight, setPanelHeight] = useState(0);
-  const navMenu = useRef<HTMLDivElement>(null);
+  const [needsMobileMenuLink, setNeedsMobileMenuLink] = useState(false);
   const { siteText } = useIntl();
 
   useEffect(() => {
-    // Menu is opened by default as fallback: JS opens it
-    setIsMenuOpen(false);
-    setPanelHeight(0);
-
     // Workaround to get the mobile menu opened when linking to a sub-page.
     setNeedsMobileMenuLink(isSmallScreen);
   }, [isSmallScreen]);
 
-  useEffect(() => {
-    setPanelHeight(isMenuOpen ? 1000 : 0);
-  }, [isMenuOpen]);
-
-  function toggleMenu() {
-    setIsMenuOpen(!isMenuOpen);
-  }
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
     <>
@@ -61,18 +49,12 @@ export function TopNavigation() {
         id="main-navigation"
         role="navigation"
         aria-label={siteText.aria_labels.pagina_keuze}
-        ref={navMenu}
         css={css({
-          maxHeight: asResponsiveArray({ _: `${panelHeight}px`, md: '100%' }),
+          maxHeight: asResponsiveArray({
+            _: isMenuOpen ? '1000px' : 0,
+            md: '100%',
+          }),
           opacity: asResponsiveArray({ _: isMenuOpen ? 1 : 0, md: 1 }),
-          pointerEvents: asResponsiveArray({
-            _: isMenuOpen ? 'auto' : 'none',
-            md: 'auto',
-          }),
-          transition: asResponsiveArray({
-            _: 'max-height 0.4s ease-in-out, opacity 0.4s ease-in-out',
-            md: 'none',
-          }),
         })}
       >
         <MaxWidth>
@@ -148,6 +130,28 @@ const NavWrapper = styled.nav(
     width: '100%',
     borderTopWidth: '1px',
     p: 0,
+    maxHeight: asResponsiveArray({ _: '0', md: '100%' }),
+    transition: asResponsiveArray({
+      _: 'max-height 0.4s ease-in-out, opacity 0.4s ease-in-out',
+      md: 'none',
+    }),
+    overflow: 'hidden',
+
+    '.has-no-js &': {
+      animation: `show-menu 1s forwards`,
+      animationDelay: '1s',
+    },
+
+    [`@keyframes show-menu`]: {
+      from: {
+        maxHeight: 0,
+      },
+      to: {
+        opacity: 1,
+        maxHeight: '1000px',
+      },
+    },
+
     [`@media ${theme.mediaQueries.md}`]: {
       display: 'inline',
       width: 'auto',

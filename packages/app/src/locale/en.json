@@ -264,6 +264,12 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
         "text": "RIVM"
       }
+    },
+    "tooltip_labels": {
+      "infected_per_100k": "",
+      "infected_percentage": "",
+      "tested_total": "",
+      "infected": ""
     }
   },
   "besmettelijke_personen": {
@@ -662,7 +668,9 @@
     "read_more": "Read more",
     "absolute_date_template": "on {{date}}",
     "inwoners": "residents",
-    "miljoen": "million"
+    "miljoen": "million",
+    "signaalwaarde": "",
+    "totaal": ""
   },
   "seoHead": {
     "default_description": "Information on the development of the coronavirus in The Netherlands.",
@@ -1899,9 +1907,6 @@
     "VR25": "http://www.veiligheidsregioflevoland.nl/"
   },
   "choropleth": {
-    "a11y": {
-      "tab_navigatie_button": "'Navigate with Tab through all {{subject}}"
-    },
     "verb": {
       "singular": "has",
       "plural": "have"
@@ -1983,6 +1988,9 @@
         "sentence": "{{count}} {{area}} between {{rangeLow}} and {{rangeHigh}} percent support {{verb}} for the measure '{{restriction}}'",
         "last_sentence": "{{count}} {{area}} more than {{rangeLow}} percent support {{verb}} for the measure '{{restriction}}'"
       }
+    },
+    "a11y": {
+      "tab_navigatie_button": ""
     }
   },
   "accessibility": {
@@ -2088,7 +2096,7 @@
       "description": "More data on vaccinations will be added in the near future, including:\n- vaccination coverage"
     },
     "grafiek": {
-      "titel": "Delivered and available doses and doses administered in total",
+      "titel": "Delivered and available doses & doses administered in total",
       "omschrijving": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks."
     },
     "verwachte_leveringen": {

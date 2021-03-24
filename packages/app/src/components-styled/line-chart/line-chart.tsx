@@ -128,9 +128,9 @@ export function LineChart<T extends TimestampedValue>({
   const benchmark = useMemo(
     () =>
       signaalwaarde
-        ? { value: signaalwaarde, label: text.common.barScale.signaalwaarde }
+        ? { value: signaalwaarde, label: text.common.signaalwaarde }
         : undefined,
-    [signaalwaarde, text.common.barScale.signaalwaarde]
+    [signaalwaarde, text.common.signaalwaarde]
   );
 
   const trendsList = useMemo(

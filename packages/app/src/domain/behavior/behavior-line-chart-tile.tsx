@@ -97,7 +97,7 @@ export function BehaviorLineChartTile({
       <Spacer mb={3} />
 
       <TimeSeriesChart
-        title={
+        tooltipTitle={
           type === 'compliance'
             ? siteText.gedrag_common.compliance
             : siteText.gedrag_common.support

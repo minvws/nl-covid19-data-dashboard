@@ -1,17 +1,26 @@
+import {
+  MunicipalitiesTestedOverall,
+  MunicipalityProperties,
+} from '@corona-dashboard/common';
 import Getest from '~/assets/test.svg';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
+import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
-import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { Markdown } from '~/components-styled/markdown';
 import { TileList } from '~/components-styled/tile-list';
+import { TimeSeriesChart } from '~/components-styled/time-series-chart';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
 import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
+import { Layout } from '~/domain/layout/layout';
+import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
+import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
@@ -27,14 +36,6 @@ import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 export { getStaticPaths } from '~/static-paths/gm';
-import { useIntl } from '~/intl';
-import { Layout } from '~/domain/layout/layout';
-import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
-import {
-  MunicipalitiesTestedOverall,
-  MunicipalityProperties,
-} from '@corona-dashboard/common';
-import { Markdown } from '~/components-styled/markdown';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -54,7 +55,7 @@ export const getStaticProps = createGetStaticProps(
 const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
   const { data, choropleth, municipalityName, content, lastGenerated } = props;
 
-  const { siteText, formatDateFromMilliseconds, formatNumber } = useIntl();
+  const { siteText } = useIntl();
   const reverseRouter = useReverseRouter();
   const text = siteText.gemeente_positief_geteste_personen;
   const lastValue = data.tested_overall.last_value;
@@ -127,56 +128,42 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <LineChartTile
+          <ChartTileWithTimeframe
             title={text.linechart_titel}
             description={text.linechart_toelichting}
-            values={data.tested_overall.values}
-            linesConfig={[
-              {
-                metricProperty: 'infected_per_100k',
-              },
-            ]}
             metadata={{
               source: text.bronnen.rivm,
             }}
-            formatTooltip={(values) => {
-              const value = values[0];
-              return (
-                <Text textAlign="center" m={0}>
-                  <span style={{ fontWeight: 'bold' }}>
-                    {formatDateFromMilliseconds(
-                      value.__date.getTime(),
-                      'medium'
-                    )}
-                  </span>
-                  <br />
-                  <span
-                    style={{
-                      height: '0.5em',
-                      width: '0.5em',
-                      marginBottom: '0.5px',
-                      backgroundColor: colors.data.primary,
-                      borderRadius: '50%',
-                      display: 'inline-block',
-                    }}
-                  />{' '}
-                  {replaceVariablesInText(
-                    siteText.common.tooltip.positive_tested_value,
-                    {
-                      totalPositiveValue: formatNumber(value.__value),
-                    }
-                  )}
-                  <br />
-                  {replaceVariablesInText(
-                    siteText.common.tooltip.positive_tested_people,
-                    {
-                      totalPositiveTestedPeople: formatNumber(value.infected),
-                    }
-                  )}
-                </Text>
-              );
-            }}
-          />
+          >
+            {(timeframe) => (
+              <TimeSeriesChart
+                values={data.tested_overall.values}
+                timeframe={timeframe}
+                seriesConfig={[
+                  {
+                    type: 'area',
+                    metricProperty: 'infected_per_100k',
+                    label:
+                      siteText.positief_geteste_personen.tooltip_labels
+                        .infected_per_100k,
+                    color: colors.data.primary,
+                  },
+                  {
+                    type: 'invisible',
+                    metricProperty: 'infected',
+                    label: siteText.common.totaal,
+                  },
+                ]}
+                dataOptions={{
+                  isPercentage: true,
+                  benchmark: {
+                    value: 7,
+                    label: siteText.common.signaalwaarde,
+                  },
+                }}
+              />
+            )}
+          </ChartTileWithTimeframe>
 
           <ChoroplethTile
             title={replaceVariablesInText(text.map_titel, {
