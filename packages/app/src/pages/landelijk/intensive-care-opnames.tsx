@@ -11,7 +11,10 @@ import { PageBarScale } from '~/components-styled/page-barscale';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
+import { Layout } from '~/domain/layout/layout';
+import { NationalLayout } from '~/domain/layout/national-layout';
 import { UnderReportedTooltip } from '~/domain/underreported/under-reported-tooltip';
+import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
@@ -28,9 +31,6 @@ import {
   DateRange,
   getTrailingDateRange,
 } from '~/utils/get-trailing-date-range';
-import { useIntl } from '~/intl';
-import { Layout } from '~/domain/layout/layout';
-import { NationalLayout } from '~/domain/layout/national-layout';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -100,9 +100,9 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                 data={data}
                 scope="nl"
                 metricName="intensive_care_nice"
-                metricProperty="admissions_moving_average"
+                metricProperty="admissions_on_date_of_reporting"
                 localeTextKey="ic_opnames_per_dag"
-                differenceKey="intensive_care_nice__admissions_moving_average"
+                differenceKey="intensive_care_nice__admissions_on_date_of_reporting"
               />
               <Text>{text.extra_uitleg}</Text>
             </KpiTile>
@@ -135,7 +135,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
             ariaDescription={graphDescriptions.intensive_care_opnames}
             linesConfig={[
               {
-                metricProperty: 'admissions_moving_average',
+                metricProperty: 'admissions_on_date_of_admission',
               },
             ]}
             signaalwaarde={10}

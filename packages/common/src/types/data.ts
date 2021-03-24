@@ -196,7 +196,7 @@ export interface NationalDifference {
   infectious_people__estimate: DifferenceInteger;
   hospital_nice__admissions_on_date_of_reporting: DifferenceInteger;
   hospital_lcps__beds_occupied_covid: DifferenceInteger;
-  intensive_care_nice__admissions_moving_average: DifferenceDecimal;
+  intensive_care_nice__admissions_on_date_of_reporting: DifferenceDecimal;
   intensive_care_lcps__beds_occupied_covid: DifferenceInteger;
   doctor__covid_symptoms_per_100k: DifferenceDecimal;
   doctor__covid_symptoms: DifferenceInteger;
@@ -260,7 +260,8 @@ export interface NationalIntensiveCareNice {
   last_value: NationalIntensiveCareNiceValue;
 }
 export interface NationalIntensiveCareNiceValue {
-  admissions_moving_average: number;
+  admissions_on_date_of_admission: number;
+  admissions_on_date_of_reporting: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
