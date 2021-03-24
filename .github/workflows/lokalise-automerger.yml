@@ -42,7 +42,7 @@ jobs:
         uses: buildsville/add-remove-label@v1
         with:
           token: ${{ github.token }}
-          label: lokalise
+          label: automerge
           type: add
 
       - name: Auto approve
@@ -62,6 +62,6 @@ jobs:
         uses: pascalgn/automerge-action@v0.12.0
         env:
           GITHUB_TOKEN: ${{ github.token }}
-          MERGE_LABELS: lokalise
+          MERGE_LABELS: automerge
           MERGE_METHOD: squash
           MERGE_DELETE_BRANCH: true

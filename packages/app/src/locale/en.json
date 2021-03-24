@@ -64,22 +64,22 @@
     "terug_naar_alle_cijfers_gemeente": "All data for this municipality"
   },
   "ic_opnames_per_dag": {
-    "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
+    "datums": "Last values obtained on {{dateOfReport}}. Is updated on a daily basis.",
     "bron": {
       "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
-      "text": "Stichting NICE"
+      "text": "NICE via RIVM"
     },
     "titel": "Intensive care admissions by day",
     "pagina_toelichting": "Daily number of COVID-19 patients admitted to a hospital intensive care unit (ICU), directly or from a regular hospital ward. To avoid doubles only the first IC admission of a patient counts. This number gives information about the severity of the disease en helps track the development of the epidemic.",
     "barscale_titel": "Intensive care admissions per day",
     "barscale_screenreader_text": "{{value}} intensive care-admissions by day. Alert value: {{signaalwaarde}} admissions per day.",
-    "extra_uitleg": "Number of confirmed COVID-19 cases who are admitted to a hospital intensive care unit (ICU) per day. This figure shows how many hospital admissions are reported per day. It may include hospital admissions that occurred in previous days.\n\nNote: Although hospitals try to register COVID-19 patients promptly, it is likely that the numbers of the last days are yet incomplete.",
+    "extra_uitleg": "Number of confirmed COVID-19 cases who are admitted to a hospital intensive care unit (ICU) per day. This figure shows how many hospital admissions are reported per day. It may include hospital admissions that occurred in previous days.",
     "linechart_titel": "ICU admissions over time",
     "bronnen": {
       "nice": {
-        "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
-        "text": "Stichting NICE",
-        "download": "https://stichting-nice.nl/covid-19/public/new-intake/confirmed/"
+        "href": "https://data.rivm.nl/covid-19/COVID-19_ic_opnames.html",
+        "text": "NICE via RIVM",
+        "download": "https://data.rivm.nl/covid-19/COVID-19_ic_opnames.csv"
       },
       "lnaz": {
         "href": "https://lcps.nu/datafeed/",
@@ -148,7 +148,7 @@
     }
   },
   "ziekenhuisopnames_per_dag": {
-    "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
+    "datums": "Last values obtained on {{dateOfReport}}. Is updated on a daily basis.",
     "bron": {
       "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
       "text": "NICE via RIVM"
