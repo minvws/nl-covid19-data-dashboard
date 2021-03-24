@@ -670,7 +670,7 @@
     "absolute_date_template": "on {{date}}",
     "inwoners": "residents",
     "miljoen": "million",
-    "signaalwaarde": "",
+    "signaalwaarde": "Alert value",
     "totaal": "Total"
   },
   "seoHead": {
