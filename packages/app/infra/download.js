@@ -7,6 +7,8 @@ const API_URL =
   process.env.API_URL ||
   'https://coronadashboard.rijksoverheid.nl/json/latest-data.zip';
 
+console.log(`Downloading json data from this location: ${API_URL}`);
+
 (async () => {
   await download(API_URL, './public/json', {
     extract: true,
