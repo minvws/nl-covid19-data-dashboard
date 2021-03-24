@@ -25,7 +25,6 @@ import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { InlineText, Text } from '~/components-styled/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
-import { VaccineSupportTooltip } from '~/domain/vaccine/components/vaccine-support-tooltip';
 import {
   MilestonesView,
   MilestoneViewProps,
@@ -548,21 +547,19 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <TwoKpiSection>
-            <KpiTile title={text.expected_page_additions.title}>
-              {additions.length > 0 && (
+          {additions.length > 0 && (
+            <TwoKpiSection>
+              <KpiTile title={text.expected_page_additions.title}>
                 <ul>
-                  {text.expected_page_additions.additions
-                    .filter((x) => x.length)
-                    .map((addition) => (
-                      <li key={addition}>
-                        <InlineText>{addition}</InlineText>
-                      </li>
-                    ))}
+                  {additions.map((addition) => (
+                    <li key={addition}>
+                      <InlineText>{addition}</InlineText>
+                    </li>
+                  ))}
                 </ul>
-              )}
-            </KpiTile>
-          </TwoKpiSection>
+              </KpiTile>
+            </TwoKpiSection>
+          )}
         </TileList>
       </NationalLayout>
     </Layout>
