@@ -85,7 +85,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const { milestones } = content;
 
   const additions = text.expected_page_additions.additions.filter(
-    (x) => x.length
+    (x) => x.trim().length
   );
 
   const vaccineNames = useVaccineNames(data.vaccine_administered.last_value);
