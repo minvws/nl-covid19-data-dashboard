@@ -1,44 +1,54 @@
-import fs from 'fs';
-import { groq } from 'next-sanity';
 import Head from 'next/head';
-import path from 'path';
+import { RichContent } from '~/components-styled/cms/rich-content';
 import { MaxWidth } from '~/components-styled/max-width';
-import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
-import { getClient, localize, PortableText } from '~/lib/sanity';
-import siteText, { targetLanguage } from '~/locale/index';
+import { useIntl } from '~/intl';
+import { Layout } from '~/domain/layout/layout';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
+import {
+  createGetContent,
+  getLastGeneratedDate,
+} from '~/static-props/get-data';
+import { RichContentBlock } from '~/types/cms';
 import styles from './over.module.scss';
 
-interface StaticProps {
-  props: OverProps;
+interface OverData {
+  title: string | null;
+  description: RichContentBlock[] | null;
 }
 
-interface OverProps {
-  data: {
-    title: string | null;
-    description: unknown[] | null;
-  };
-  lastGenerated: string;
-}
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  createGetContent<OverData>((_context) => {
+    //@TODO We need to switch this from process.env to context as soon as we use i18n routing
+    // const { locale } = context;
+    const locale = process.env.NEXT_PUBLIC_LOCALE;
+    return `
+    *[_type == 'overDitDashboard']{
+      ...,
+      "description": {
+        "_type": description._type,
+        "${locale}": [
+          ...description.${locale}[]
+          {
+            ...,
+            "asset": asset->
+           },
+        ]
+      }
+    }[0]
+    `;
+  })
+);
 
-export async function getStaticProps(): Promise<StaticProps> {
-  const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
-  const fileContents = fs.readFileSync(filePath, 'utf8');
-  const lastGenerated = JSON.parse(fileContents).last_generated;
-
-  const query = groq`
-  *[_type == 'overDitDashboard'][0]
-`;
-  const rawData = await getClient(false).fetch(query);
-  const data = localize(rawData, [targetLanguage, 'nl']);
-
-  return { props: { data, lastGenerated } };
-}
-
-const Over: FCWithLayout<OverProps> = (props) => {
-  const { data } = props;
+const Over = (props: StaticProps<typeof getStaticProps>) => {
+  const { siteText } = useIntl();
+  const { content, lastGenerated } = props;
 
   return (
-    <>
+    <Layout {...siteText.over_metadata} lastGenerated={lastGenerated}>
       <Head>
         <link
           key="dc-type"
@@ -56,19 +66,15 @@ const Over: FCWithLayout<OverProps> = (props) => {
       <div className={styles.container}>
         <MaxWidth>
           <div className={styles.maxwidth}>
-            {data.title && <h2>{data.title}</h2>}
-            {data.description && <PortableText blocks={data.description} />}
+            {content.title && <h2>{content.title}</h2>}
+            {content.description && (
+              <RichContent blocks={content.description} />
+            )}
           </div>
         </MaxWidth>
       </div>
-    </>
+    </Layout>
   );
 };
-
-const metadata = {
-  ...siteText.over_metadata,
-};
-
-Over.getLayout = getLayoutWithMetadata(metadata);
 
 export default Over;

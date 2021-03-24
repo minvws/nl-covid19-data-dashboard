@@ -1,48 +1,84 @@
-import fs from 'fs';
-import { groq } from 'next-sanity';
+import groupBy from 'lodash/groupBy';
 import Head from 'next/head';
-import path from 'path';
-import { Collapsable } from '~/components-styled/collapsable';
+import { Box } from '~/components-styled/base';
+import { RichContent } from '~/components-styled/cms/rich-content';
+import { CollapsibleSection } from '~/components-styled/collapsible';
 import { MaxWidth } from '~/components-styled/max-width';
-import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
-import { getClient, localize, PortableText } from '~/lib/sanity';
-import siteText, { targetLanguage } from '~/locale/index';
-import { CollapsibleList } from '~/types/cms';
+import { Heading } from '~/components-styled/typography';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
+import {
+  createGetContent,
+  getLastGeneratedDate,
+} from '~/static-props/get-data';
+import { FAQuestionAndAnswer, RichContentBlock } from '~/types/cms';
 import { getSkipLinkId } from '~/utils/skipLinks';
-import styles from './over.module.scss';
 
-interface StaticProps {
-  props: VeelgesteldeVragenProps;
+import { useIntl } from '~/intl';
+import { Layout } from '~/domain/layout/layout';
+
+interface VeelgesteldeVragenData {
+  title: string | null;
+  description: RichContentBlock[] | null;
+  questions: FAQuestionAndAnswer[];
 }
 
-interface VeelgesteldeVragenProps {
-  data: {
-    title: string | null;
-    description: unknown[] | null;
-    questions: CollapsibleList[];
-  };
-  lastGenerated: string;
-}
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  createGetContent<VeelgesteldeVragenData>((_context) => {
+    //@TODO We need to switch this from process.env to context as soon as we use i18n routing
+    // const { locale } = context;
+    const locale = process.env.NEXT_PUBLIC_LOCALE;
 
-export async function getStaticProps(): Promise<StaticProps> {
-  const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
-  const fileContents = fs.readFileSync(filePath, 'utf8');
-  const lastGenerated = JSON.parse(fileContents).last_generated;
+    return `*[_type == 'veelgesteldeVragen']{
+      ...,
+      "description": {
+        "_type": description._type,
+        "${locale}": [
+          ...description.${locale}[]
+          {
+            ...,
+            "asset": asset->
+          },
+        ]
+      },
+      "questions": [
+        ...questions[]
+        {
+          ...,
+          "group": group->group.${locale},
+          "content": {
+            ...content,
+            "${locale}": [...content.${locale}[]
+              {
+                ...,
+                "asset": asset->
+              },
+            ]
+          }
+      }]
+      
+    }[0]
+    `;
+  })
+);
 
-  const query = groq`
-  *[_type == 'veelgesteldeVragen'][0]
-`;
-  const rawData = await getClient(false).fetch(query);
-  const data = localize(rawData, [targetLanguage, 'nl']);
+const Verantwoording = (props: StaticProps<typeof getStaticProps>) => {
+  const { content, lastGenerated } = props;
+  const { siteText } = useIntl();
 
-  return { props: { data, lastGenerated } };
-}
-
-const Verantwoording: FCWithLayout<VeelgesteldeVragenProps> = (props) => {
-  const { data } = props;
+  const groups = groupBy<FAQuestionAndAnswer>(
+    content.questions,
+    (x) => x.group
+  );
 
   return (
-    <>
+    <Layout
+      {...siteText.veelgestelde_vragen_metadata}
+      lastGenerated={lastGenerated}
+    >
       <Head>
         <link
           key="dc-type"
@@ -57,34 +93,37 @@ const Verantwoording: FCWithLayout<VeelgesteldeVragenProps> = (props) => {
         />
       </Head>
 
-      <div className={styles.container}>
+      <Box fontSize={2} bg={'white'} pt={5} pb={4}>
         <MaxWidth>
-          <div className={styles.maxwidth}>
-            {data.title && <h2>{data.title}</h2>}
-            {data.description && <PortableText blocks={data.description} />}
-            {data.questions && (
-              <article className={styles.faqList}>
-                {data.questions.map((item) => {
+          <Box maxWidth="39em" margin="auto" mt={0} px={{ _: 4, md: 0 }}>
+            {content.title && <Heading level={1}>{content.title}</Heading>}
+            {content.description && (
+              <RichContent blocks={content.description} />
+            )}
+            {Object.entries(groups).map(([group, questions]) => (
+              <Box as="article" mt={4} key={group}>
+                <Heading level={2} fontSize={3}>
+                  {group}
+                </Heading>
+                {questions.map((item) => {
                   const id = getSkipLinkId(item.title);
                   return (
-                    <Collapsable key={id} id={id} summary={item.title}>
-                      <PortableText blocks={item.content} />
-                    </Collapsable>
+                    <CollapsibleSection key={id} id={id} summary={item.title}>
+                      {item.content && (
+                        <Box mt={3}>
+                          <RichContent blocks={item.content} />
+                        </Box>
+                      )}
+                    </CollapsibleSection>
                   );
                 })}
-              </article>
-            )}
-          </div>
+              </Box>
+            ))}
+          </Box>
         </MaxWidth>
-      </div>
-    </>
+      </Box>
+    </Layout>
   );
 };
-
-const metadata = {
-  ...siteText.veelgestelde_vragen_metadata,
-};
-
-Verantwoording.getLayout = getLayoutWithMetadata(metadata);
 
 export default Verantwoording;

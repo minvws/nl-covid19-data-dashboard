@@ -1,24 +1,19 @@
 import { useRouter } from 'next/router';
-import { ComboBox } from '~/components/comboBox';
+import { ComboBox } from '~/components-styled/combo-box/combo-box';
 import municipalities from '~/data/municipalSearchData';
-import siteText from '~/locale/index';
-import { useBreakpoints } from '~/utils/useBreakpoints';
+import { useIntl } from '~/intl';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export function MunicipalityComboBox() {
+  const { siteText } = useIntl();
+  const reverseRouter = useReverseRouter();
   const router = useRouter();
-  const breakpoints = useBreakpoints();
 
   return (
     <ComboBox
       placeholder={siteText.common.zoekveld_placeholder_gemeente}
       options={municipalities}
-      onSelect={(region) =>
-        router.push(
-          breakpoints.md
-            ? `/gemeente/${region.gemcode}/positief-geteste-mensen`
-            : `/gemeente/${region.gemcode}?menu=1`
-        )
-      }
+      onSelect={({ gemcode }) => router.push(reverseRouter.gm.index(gemcode))}
     />
   );
 }

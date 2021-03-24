@@ -1,0 +1,61 @@
+{
+  "definitions": {
+    "value": {
+      "title": "nl_vaccine_coverage_value",
+      "type": "object",
+      "required": [
+        "partially_vaccinated",
+        "partially_vaccinated_percentage",
+        "fully_vaccinated",
+        "fully_vaccinated_percentage",
+        "partially_or_fully_vaccinated",
+        "date_unix",
+        "date_of_report_unix",
+        "date_of_insertion_unix"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "partially_vaccinated": {
+          "type": "integer"
+        },
+        "partially_vaccinated_percentage": {
+          "type": "number"
+        },
+        "fully_vaccinated": {
+          "type": "integer"
+        },
+        "fully_vaccinated_percentage": {
+          "type": "number"
+        },
+        "partially_or_fully_vaccinated": {
+          "type": "integer"
+        },
+        "date_unix": {
+          "type": "integer"
+        },
+        "date_of_report_unix": {
+          "type": "integer"
+        },
+        "date_of_insertion_unix": {
+          "type": "integer"
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "nl_vaccine_coverage",
+  "type": "object",
+  "required": ["values", "last_value"],
+  "additionalProperties": false,
+  "properties": {
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/value"
+      }
+    },
+    "last_value": {
+      "$ref": "#/definitions/value"
+    }
+  }
+}

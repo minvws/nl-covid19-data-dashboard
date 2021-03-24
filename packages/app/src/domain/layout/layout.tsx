@@ -1,43 +1,21 @@
-import text from '~/locale/index';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { SEOHead } from '~/components/seoHead';
+import { SEOHead } from '~/components-styled/seo-head';
 import { AppFooter } from '~/components-styled/layout/app-footer';
 import { AppHeader } from '~/components-styled/layout/app-header';
 import { SkipLinkMenu } from '~/components-styled/skip-link-menu';
-import { ILastGeneratedData } from '~/static-props/last-generated-data';
+import { useIntl } from '~/intl';
 
 interface LayoutProps {
-  url?: string;
   title: string;
+  url?: string;
   description?: string;
   openGraphImage?: string;
   twitterImage?: string;
 }
 
-export type FCWithLayout<Props = void> = React.FC<Props> & {
-  getLayout: (page: React.ReactNode, pageProps: Props) => React.ReactNode;
-};
-
-export function getLayoutWithMetadata(metadata: LayoutProps) {
-  return function (page: React.ReactNode, pageProps: any) {
-    const lastGenerated = pageProps.lastGenerated;
-    return getLayout(metadata, lastGenerated)(<>{page}</>);
-  };
-}
-
-export function getLayout(layoutProps: LayoutProps, lastGenerated: string) {
-  return function (page: React.ReactNode): React.ReactNode {
-    return (
-      <Layout {...layoutProps} lastGenerated={lastGenerated}>
-        {page}
-      </Layout>
-    );
-  };
-}
-
 export function Layout(
-  props: LayoutProps & ILastGeneratedData & { children: React.ReactNode }
+  props: LayoutProps & { lastGenerated: string; children: React.ReactNode }
 ) {
   const {
     children,
@@ -50,6 +28,7 @@ export function Layout(
   } = props;
 
   const router = useRouter();
+  const { siteText } = useIntl();
 
   return (
     <div key={router.asPath}>
@@ -62,12 +41,12 @@ export function Layout(
       />
 
       <SkipLinkMenu
-        ariaLabel={text.aria_labels.skip_links}
+        ariaLabel={siteText.aria_labels.skip_links}
         links={[
-          { href: '#content', label: text.skiplinks.inhoud },
-          { href: '#main-navigation', label: text.skiplinks.nav },
-          { href: '#metric-navigation', label: text.skiplinks.metric_nav },
-          { href: '#footer-navigation', label: text.skiplinks.footer_nav },
+          { href: '#content', label: siteText.skiplinks.inhoud },
+          { href: '#main-navigation', label: siteText.skiplinks.nav },
+          { href: '#metric-navigation', label: siteText.skiplinks.metric_nav },
+          { href: '#footer-navigation', label: siteText.skiplinks.footer_nav },
         ]}
       />
 

@@ -1,5 +1,5 @@
 import { colors } from '~/style/theme';
-import { ChoroplethThresholdsValue } from './shared';
+import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
 
 const positiveTestedThresholds: ChoroplethThresholdsValue[] = [
   {
@@ -30,8 +30,12 @@ const positiveTestedThresholds: ChoroplethThresholdsValue[] = [
 
 const hospitalAdmissionsThresholds: ChoroplethThresholdsValue[] = [
   {
-    color: colors.data.scale.blue[0],
+    color: colors.data.underReported,
     threshold: 0,
+  },
+  {
+    color: colors.data.scale.blue[0],
+    threshold: 1,
   },
   {
     color: colors.data.scale.blue[1],
@@ -39,15 +43,15 @@ const hospitalAdmissionsThresholds: ChoroplethThresholdsValue[] = [
   },
   {
     color: colors.data.scale.blue[2],
-    threshold: 4,
+    threshold: 3,
   },
   {
     color: colors.data.scale.blue[3],
-    threshold: 6,
+    threshold: 4,
   },
   {
     color: colors.data.scale.blue[4],
-    threshold: 8,
+    threshold: 5,
   },
 ];
 
@@ -82,10 +86,42 @@ const elderlyAtHomeThresholds: ChoroplethThresholdsValue[] = [
   },
 ];
 
+const sewerThresholds: ChoroplethThresholdsValue[] = [
+  {
+    color: colors.data.scale.blue[0],
+    threshold: 0,
+  },
+  {
+    color: colors.data.scale.blue[1],
+    threshold: 50,
+  },
+  {
+    color: colors.data.scale.blue[2],
+    threshold: 250,
+  },
+  {
+    color: colors.data.scale.blue[3],
+    threshold: 500,
+  },
+  {
+    color: colors.data.scale.blue[4],
+    threshold: 750,
+  },
+  {
+    color: colors.data.scale.blue[5],
+    threshold: 1000,
+  },
+];
+
 export const municipalThresholds = {
   tested_overall: {
     infected_per_100k: positiveTestedThresholds,
   },
-  hospital_nice: { admissions_moving_average: hospitalAdmissionsThresholds },
+  hospital_nice: {
+    admissions_on_date_of_reporting: hospitalAdmissionsThresholds,
+  },
   elderly_at_home: elderlyAtHomeThresholds,
+  sewer: {
+    average: sewerThresholds,
+  },
 } as const;

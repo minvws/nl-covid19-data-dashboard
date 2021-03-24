@@ -1,14 +1,14 @@
+import { National } from '@corona-dashboard/common';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Arts from '~/assets/arts.svg';
 import ElderlyIcon from '~/assets/elderly.svg';
 import Gedrag from '~/assets/gedrag.svg';
 import Gehandicaptenzorg from '~/assets/gehandicapte-zorg.svg';
-import Maatregelen from '~/assets/maatregelen.svg';
-import Notification from '~/assets/notification.svg';
 import ReproIcon from '~/assets/reproductiegetal.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
+import VaccinatieIcon from '~/assets/vaccinaties.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
 import VirusIcon from '~/assets/virus.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
@@ -18,30 +18,16 @@ import {
   Menu,
   MetricMenuItemLink,
 } from '~/components-styled/aside/menu';
-import { SidebarMetric } from '~/components-styled/sidebar-metric';
-import { Layout } from '~/domain/layout/layout';
+import { Box } from '~/components-styled/base';
 import { AppContent } from '~/components-styled/layout/app-content';
-import siteText from '~/locale/index';
-import { NationalPageProps } from '~/static-props/nl-data';
-import theme from '~/style/theme';
+import { SidebarMetric } from '~/components-styled/sidebar-metric';
+import { useIntl } from '~/intl';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 
-export function getNationalLayout(
-  page: React.ReactNode,
-  pageProps: NationalPageProps
-) {
-  return (
-    <Layout
-      {...siteText.nationaal_metadata}
-      lastGenerated={pageProps.lastGenerated}
-    >
-      <NationalLayout {...pageProps}>{page}</NationalLayout>
-    </Layout>
-  );
-}
-
-interface NationalLayoutProps extends NationalPageProps {
-  children: React.ReactNode;
+interface NationalLayoutProps {
+  lastGenerated: string;
+  data: National;
+  children?: React.ReactNode;
 }
 
 /**
@@ -60,13 +46,14 @@ interface NationalLayoutProps extends NationalPageProps {
  * More info on persistent layouts:
  * https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
  */
-function NationalLayout(props: NationalLayoutProps) {
+export function NationalLayout(props: NationalLayoutProps) {
   const { children, data } = props;
   const router = useRouter();
   const breakpoints = useBreakpoints();
+  const { siteText } = useIntl();
 
   const isMenuOpen =
-    (router.pathname === '/' && !('menu' in router.query)) ||
+    (router.pathname === '/landelijk' && !('menu' in router.query)) ||
     router.query.menu === '1';
 
   return (
@@ -87,34 +74,45 @@ function NationalLayout(props: NationalLayoutProps) {
 
       <AppContent
         sidebarComponent={
-          <nav
+          <Box
+            as="nav"
             /** re-mount when route changes in order to blur anchors */
             key={router.asPath}
             id="metric-navigation"
             aria-label={siteText.aria_labels.metriek_navigatie}
             role="navigation"
+            pt={4}
           >
             <Menu>
-              <CategoryMenu title={siteText.nationaal_layout.headings.algemeen}>
+              <MetricMenuItemLink
+                href={{
+                  pathname: '/landelijk/maatregelen',
+                  query: breakpoints.md
+                    ? {} // only add menu flags on narrow devices
+                    : isMenuOpen
+                    ? { menu: '0' }
+                    : { menu: '1' },
+                }}
+                title={siteText.nationaal_maatregelen.titel_sidebar}
+                subtitle={siteText.nationaal_maatregelen.subtitel_sidebar}
+              />
+
+              <CategoryMenu
+                title={siteText.nationaal_layout.headings.vaccinaties}
+              >
                 <MetricMenuItemLink
-                  href={{
-                    pathname: '/',
-                    query: breakpoints.md
-                      ? {} // only add menu flags on narrow devices
-                      : isMenuOpen
-                      ? { menu: '0' }
-                      : { menu: '1' },
-                  }}
-                  icon={<Notification color={theme.colors.notification} />}
-                  title={siteText.laatste_ontwikkelingen.title}
-                  subtitle={siteText.laatste_ontwikkelingen.menu_subtitle}
-                />
-                <MetricMenuItemLink
-                  href="/landelijk/maatregelen"
-                  icon={<Maatregelen fill={theme.colors.restrictions} />}
-                  title={siteText.nationaal_maatregelen.titel_sidebar}
-                  subtitle={siteText.nationaal_maatregelen.subtitel_sidebar}
-                />
+                  href="/landelijk/vaccinaties"
+                  icon={<VaccinatieIcon />}
+                  title={siteText.vaccinaties.titel_sidebar}
+                >
+                  <SidebarMetric
+                    data={data}
+                    scope="nl"
+                    metricName="vaccine_administered_total"
+                    metricProperty="estimated"
+                    localeTextKey="vaccinaties"
+                  />
+                </MetricMenuItemLink>
               </CategoryMenu>
               <CategoryMenu
                 title={siteText.nationaal_layout.headings.besmettingen}
@@ -181,6 +179,7 @@ function NationalLayout(props: NationalLayoutProps) {
                     metricName="deceased_rivm"
                     metricProperty="covid_daily"
                     localeTextKey="sterfte"
+                    differenceKey="deceased_rivm__covid_daily"
                   />
                 </MetricMenuItemLink>
               </CategoryMenu>
@@ -195,7 +194,7 @@ function NationalLayout(props: NationalLayoutProps) {
                   {/**
                    * A next step could be to embed the SidebarMetric component in an even
                    * higher-level component which would also include the link and the
-                   * TitleWithIcon, seeing that both appear to use the same localeTextKey,
+                   * Title, seeing that both appear to use the same localeTextKey,
                    * and it would make sense to enforce the existence of standardized
                    * properties like title_sidebar.
                    */}
@@ -203,9 +202,9 @@ function NationalLayout(props: NationalLayoutProps) {
                     data={data}
                     scope="nl"
                     metricName="hospital_nice"
-                    metricProperty="admissions_moving_average"
+                    metricProperty="admissions_on_date_of_reporting"
                     localeTextKey="ziekenhuisopnames_per_dag"
-                    differenceKey="hospital_nice__admissions_moving_average"
+                    differenceKey="hospital_nice__admissions_on_date_of_reporting"
                     showBarScale={true}
                   />
                 </MetricMenuItemLink>
@@ -219,9 +218,9 @@ function NationalLayout(props: NationalLayoutProps) {
                     data={data}
                     scope="nl"
                     metricName="intensive_care_nice"
-                    metricProperty="admissions_moving_average"
+                    metricProperty="admissions_on_date_of_reporting"
                     localeTextKey="ic_opnames_per_dag"
-                    differenceKey="intensive_care_nice__admissions_moving_average"
+                    differenceKey="intensive_care_nice__admissions_on_date_of_reporting"
                     showBarScale={true}
                   />
                 </MetricMenuItemLink>
@@ -257,6 +256,7 @@ function NationalLayout(props: NationalLayoutProps) {
                     metricName="disability_care"
                     metricProperty="newly_infected_people"
                     localeTextKey="gehandicaptenzorg_positief_geteste_personen"
+                    differenceKey="disability_care__newly_infected_people"
                   />
                 </MetricMenuItemLink>
 
@@ -271,6 +271,7 @@ function NationalLayout(props: NationalLayoutProps) {
                     metricName="elderly_at_home"
                     metricProperty="positive_tested_daily"
                     localeTextKey="thuiswonende_ouderen"
+                    differenceKey="elderly_at_home__positive_tested_daily"
                   />
                 </MetricMenuItemLink>
               </CategoryMenu>
@@ -324,7 +325,7 @@ function NationalLayout(props: NationalLayoutProps) {
                 </MetricMenuItemLink>
               </CategoryMenu>
             </Menu>
-          </nav>
+          </Box>
         }
       >
         {children}

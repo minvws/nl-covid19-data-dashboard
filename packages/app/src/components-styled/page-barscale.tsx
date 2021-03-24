@@ -1,10 +1,12 @@
+import {
+  getLastFilledValue,
+  Metric,
+  MetricKeys,
+} from '@corona-dashboard/common';
 import { get } from 'lodash';
 import { isDefined } from 'ts-is-present';
-import { BarScale } from '~/components/barScale';
-import { Metric, MetricKeys } from '~/components/choropleth/shared';
-import siteText, { TALLLanguages } from '~/locale/index';
+import { BarScale } from '~/components-styled/bar-scale';
 import { assert } from '~/utils/assert';
-import { getLastFilledValue } from '~/utils/get-last-filled-value';
 import {
   DataScope,
   getMetricConfig,
@@ -12,6 +14,8 @@ import {
 } from '../metric-config';
 import { Box } from './base';
 import { DifferenceIndicator } from './difference-indicator';
+import { useIntl } from '~/intl';
+import { NlLocale } from '~/locale';
 
 /**
  * This component originated from SidebarBarScale, but is used on pages and
@@ -22,11 +26,12 @@ import { DifferenceIndicator } from './difference-indicator';
 interface PageBarScaleProps<T> {
   scope: DataScope;
   data: T;
-  localeTextKey: keyof TALLLanguages;
+  localeTextKey: keyof NlLocale;
   metricName: MetricKeys<T>;
   metricProperty: string;
   differenceKey?: string;
   differenceStaticTimespan?: string;
+  differenceFractionDigits?: number;
 }
 
 export function PageBarScale<T>({
@@ -37,7 +42,10 @@ export function PageBarScale<T>({
   localeTextKey,
   differenceKey,
   differenceStaticTimespan,
+  differenceFractionDigits,
 }: PageBarScaleProps<T>) {
+  const { siteText } = useIntl();
+
   const text = siteText[localeTextKey] as Record<string, string>;
 
   /**
@@ -108,7 +116,7 @@ export function PageBarScale<T>({
   }
 
   return (
-    <Box spacing={2}>
+    <Box spacing={2} mb={3}>
       <BarScale
         min={config.barScale.min}
         max={config.barScale.max}
@@ -125,6 +133,7 @@ export function PageBarScale<T>({
           value={differenceValue}
           isDecimal={config.isDecimal}
           staticTimespan={differenceStaticTimespan}
+          maximumFractionDigits={differenceFractionDigits}
         />
       )}
     </Box>

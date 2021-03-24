@@ -1,7 +1,8 @@
-import { useMemo, useState } from 'react';
+import ExperimenteelIcon from '~/assets/experimenteel.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
+import { ArticleStrip } from '~/components-styled/article-strip';
+import { ArticleSummary } from '~/components-styled/article-teaser';
 import { BarChart } from '~/components-styled/bar-chart/bar-chart';
-import { Box } from '~/components-styled/base';
 import {
   ChartTile,
   ChartTileWithTimeframe,
@@ -9,49 +10,51 @@ import {
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
-import { Select } from '~/components-styled/select';
+import { SewerChart } from '~/components-styled/sewer-chart';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { FCWithLayout } from '~/domain/layout/layout';
-import { getMunicipalityLayout } from '~/domain/layout/municipality-layout';
-import { SewerWaterChart } from '~/components/lineChart/sewer-water-chart';
-import { SEOHead } from '~/components/seoHead';
-import siteText from '~/locale/index';
+import { Text } from '~/components-styled/typography';
+import { WarningTile } from '~/components-styled/warning-tile';
+import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
-  getMunicipalityData,
-  getMunicipalityPaths,
-  IMunicipalityData,
-} from '~/static-props/municipality-data';
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
+import { useIntl } from '~/intl';
+import {
+  createGetContent,
+  getGmData,
+  getLastGeneratedDate,
+} from '~/static-props/get-data';
+import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import {
-  getInstallationNames,
-  getSewerWaterBarChartData,
-  getSewerWaterLineChartData,
-  getSewerWaterScatterPlotData,
-} from '~/utils/sewer-water/municipality-sewer-water.util';
+import { useSewerWaterBarChartData } from '~/utils/sewer-water/municipality-sewer-water.util';
+import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
+import { Layout } from '~/domain/layout/layout';
 
-const text = siteText.gemeente_rioolwater_metingen;
+export { getStaticPaths } from '~/static-paths/gm';
 
-const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
-  const { data, municipalityName } = props;
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getGmData,
+  createGetContent<{
+    articles?: ArticleSummary[];
+  }>((_context) => {
+    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+    return createPageArticlesQuery('sewerPage', locale);
+  })
+);
 
-  const {
-    lineChartData,
-    scatterPlotData,
-    barChartData,
-    sewerStationNames,
-  } = useMemo(() => {
-    return {
-      lineChartData: getSewerWaterLineChartData(data),
-      scatterPlotData: getSewerWaterScatterPlotData(data),
-      barChartData: getSewerWaterBarChartData(data),
-      sewerStationNames: getInstallationNames(data),
-    };
-  }, [data]);
+const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
+  const { data, municipalityName, content, lastGenerated } = props;
+  const { siteText } = useIntl();
+
+  const text = siteText.gemeente_rioolwater_metingen;
+  const graphDescriptions = siteText.accessibility.grafieken;
+
+  const barChartData = useSewerWaterBarChartData(data);
 
   const sewerAverages = data.sewer;
-
-  const [selectedInstallation, setSelectedInstallation] = useState<string>();
 
   if (!sewerAverages) {
     /**
@@ -62,156 +65,151 @@ const SewerWater: FCWithLayout<IMunicipalityData> = (props) => {
     return null;
   }
 
-  /**
-   * Only render a scatter plot when there's data coming from more than one
-   * sewer station
-   */
-  const enableScatterPlot = sewerStationNames.length > 1;
+  const metadata = {
+    ...siteText.gemeente_index.metadata,
+    title: replaceVariablesInText(text.metadata.title, {
+      municipalityName,
+    }),
+    description: replaceVariablesInText(text.metadata.description, {
+      municipalityName,
+    }),
+  };
 
   return (
-    <>
-      <SEOHead
-        title={replaceVariablesInText(text.metadata.title, {
-          municipalityName,
-        })}
-        description={replaceVariablesInText(text.metadata.description, {
-          municipalityName,
-        })}
-      />
-      <TileList>
-        <ContentHeader
-          category={siteText.gemeente_layout.headings.vroege_signalen}
-          title={replaceVariablesInText(text.titel, {
-            municipality: municipalityName,
-          })}
-          icon={<RioolwaterMonitoring />}
-          subtitle={text.pagina_toelichting}
-          metadata={{
-            datumsText: text.datums,
-            dateOrRange: {
-              start: sewerAverages.last_value.date_start_unix,
-              end: sewerAverages.last_value.date_end_unix,
-            },
-            dateOfInsertionUnix:
-              sewerAverages.last_value.date_of_insertion_unix,
-            dataSources: [text.bronnen.rivm],
-          }}
-          reference={text.reference}
-        />
-
-        <TwoKpiSection>
-          <KpiTile
-            title={text.barscale_titel}
-            description={text.extra_uitleg}
+    <Layout {...metadata} lastGenerated={lastGenerated}>
+      <MunicipalityLayout
+        data={data}
+        municipalityName={municipalityName}
+        lastGenerated={lastGenerated}
+      >
+        <TileList>
+          <ContentHeader
+            category={siteText.gemeente_layout.headings.vroege_signalen}
+            title={replaceVariablesInText(text.titel, {
+              municipality: municipalityName,
+            })}
+            icon={<RioolwaterMonitoring />}
+            subtitle={text.pagina_toelichting}
             metadata={{
-              date: [
-                sewerAverages.last_value.date_start_unix,
-                sewerAverages.last_value.date_end_unix,
-              ],
-              source: text.bronnen.rivm,
+              datumsText: text.datums,
+              dateOrRange: {
+                start: sewerAverages.last_value.date_start_unix,
+                end: sewerAverages.last_value.date_end_unix,
+              },
+              dateOfInsertionUnix:
+                sewerAverages.last_value.date_of_insertion_unix,
+              dataSources: [text.bronnen.rivm],
             }}
-          >
-            <KpiValue
-              data-cy="barscale_value"
-              absolute={sewerAverages.last_value.average}
-              valueAnnotation={siteText.waarde_annotaties.riool_normalized}
-              difference={data.difference.sewer__average}
-            />
-          </KpiTile>
+            reference={text.reference}
+          />
 
-          <KpiTile
-            title={text.total_installation_count_titel}
-            description={
-              text.total_installation_count_description +
-              `<p style="color:#595959">${text.rwzi_abbrev}</p>`
-            }
-            metadata={{
-              date: [
-                sewerAverages.last_value.date_start_unix,
-                sewerAverages.last_value.date_end_unix,
-              ],
-              source: text.bronnen.rivm,
-            }}
-          >
-            <KpiValue
-              data-cy="total_installation_count"
-              absolute={sewerAverages.last_value.total_installation_count}
-            />
-          </KpiTile>
-        </TwoKpiSection>
+          <WarningTile message={text.warning_method} icon={ExperimenteelIcon} />
 
-        {lineChartData && (
+          <ArticleStrip articles={content.articles} />
+
+          <TwoKpiSection>
+            <KpiTile
+              title={text.barscale_titel}
+              description={text.extra_uitleg}
+              metadata={{
+                date: [
+                  sewerAverages.last_value.date_start_unix,
+                  sewerAverages.last_value.date_end_unix,
+                ],
+                source: text.bronnen.rivm,
+              }}
+            >
+              <KpiValue
+                data-cy="barscale_value"
+                absolute={sewerAverages.last_value.average}
+                valueAnnotation={siteText.waarde_annotaties.riool_normalized}
+                difference={data.difference.sewer__average}
+              />
+            </KpiTile>
+
+            <KpiTile
+              title={text.total_measurements_title}
+              description={text.total_measurements_description}
+              metadata={{
+                date: [
+                  sewerAverages.last_value.date_start_unix,
+                  sewerAverages.last_value.date_end_unix,
+                ],
+                source: text.bronnen.rivm,
+              }}
+            >
+              <KpiValue
+                data-cy="total_number_of_samples"
+                absolute={sewerAverages.last_value.total_number_of_samples}
+              />
+              <Text>
+                {replaceComponentsInText(text.total_measurements_locations, {
+                  sampled_installation_count: (
+                    <strong>
+                      {sewerAverages.last_value.sampled_installation_count}
+                    </strong>
+                  ),
+                  total_installation_count: (
+                    <strong>
+                      {sewerAverages.last_value.total_installation_count}
+                    </strong>
+                  ),
+                })}
+              </Text>
+            </KpiTile>
+          </TwoKpiSection>
+
           <ChartTileWithTimeframe
             title={text.linechart_titel}
             metadata={{ source: text.bronnen.rivm }}
             timeframeOptions={['all', '5weeks']}
-            timeframeInitialValue="all"
           >
             {(timeframe) => (
-              <>
-                {enableScatterPlot && (
-                  <Box display="flex" justifyContent="flex-end">
-                    <Select
-                      options={sewerStationNames.map((x) => ({
-                        label: x,
-                        value: x,
-                      }))}
-                      value={selectedInstallation}
-                      placeholder={text.graph_selected_rwzi_placeholder}
-                      onChange={setSelectedInstallation}
-                      onClear={() => setSelectedInstallation(undefined)}
-                    />
-                  </Box>
-                )}
-                <SewerWaterChart
-                  timeframe={timeframe}
-                  scatterPlotValues={scatterPlotData}
-                  averageValues={lineChartData.averageValues}
-                  selectedInstallation={selectedInstallation}
-                  text={{
-                    average_label_text: lineChartData.averageLabelText,
-                    secondary_label_text: text.graph_secondary_label_text,
-                    daily_label_text: text.graph_daily_label_text_rwzi,
-                    range_description: text.graph_range_description,
-                  }}
-                  valueAnnotation={siteText.waarde_annotaties.riool_normalized}
-                />
-              </>
+              <SewerChart
+                data={data}
+                timeframe={timeframe}
+                valueAnnotation={siteText.waarde_annotaties.riool_normalized}
+                text={{
+                  select_station_placeholder:
+                    text.graph_selected_rwzi_placeholder,
+                  average_label_text: text.graph_average_label_text,
+                  secondary_label_text: text.graph_secondary_label_text,
+                  daily_label_text: text.graph_daily_label_text_rwzi,
+                  range_description: text.graph_range_description,
+                  display_outliers: text.display_outliers,
+                  hide_outliers: text.hide_outliers,
+                }}
+              />
             )}
           </ChartTileWithTimeframe>
-        )}
 
-        {barChartData && (
-          <ChartTile
-            title={replaceVariablesInText(text.bar_chart_title, {
-              municipality: municipalityName,
-            })}
-            metadata={{
-              date: [
-                sewerAverages.last_value.date_start_unix,
-                sewerAverages.last_value.date_end_unix,
-              ],
-              source: text.bronnen.rivm,
-            }}
-          >
-            <BarChart
-              values={barChartData.values}
-              xAxisTitle={text.bar_chart_axis_title}
-              accessibilityDescription={
-                text.bar_chart_accessibility_description
-              }
-              valueAnnotation={siteText.waarde_annotaties.riool_normalized}
-            />
-          </ChartTile>
-        )}
-      </TileList>
-    </>
+          {barChartData && (
+            <ChartTile
+              title={replaceVariablesInText(text.bar_chart_title, {
+                municipality: municipalityName,
+              })}
+              ariaDescription={graphDescriptions.rioolwater_meetwaarde}
+              metadata={{
+                date: [
+                  sewerAverages.last_value.date_start_unix,
+                  sewerAverages.last_value.date_end_unix,
+                ],
+                source: text.bronnen.rivm,
+              }}
+            >
+              <BarChart
+                values={barChartData.values}
+                xAxisTitle={text.bar_chart_axis_title}
+                accessibilityDescription={
+                  text.bar_chart_accessibility_description
+                }
+              />
+            </ChartTile>
+          )}
+        </TileList>
+      </MunicipalityLayout>
+    </Layout>
   );
 };
-
-SewerWater.getLayout = getMunicipalityLayout();
-
-export const getStaticProps = getMunicipalityData();
-export const getStaticPaths = getMunicipalityPaths();
 
 export default SewerWater;

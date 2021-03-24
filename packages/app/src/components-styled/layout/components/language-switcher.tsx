@@ -2,11 +2,10 @@ import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { Box } from '~/components-styled/base';
-import { getLocale } from '~/utils/getLocale';
 
 export function LanguageSwitcher() {
   const router = useRouter();
-  const locale = getLocale();
+  const locale = process.env.NEXT_PUBLIC_LOCALE;
 
   return (
     <Box height={55} mt={-55} textAlign="right">
@@ -19,7 +18,9 @@ export function LanguageSwitcher() {
       >
         NL
       </LanguageLink>
-      <span aria-hidden="true">|</span>
+
+      <Separator />
+
       <LanguageLink
         href={`https://coronadashboard.government.nl${router.asPath}`}
         lang="en-GB"
@@ -32,6 +33,12 @@ export function LanguageSwitcher() {
     </Box>
   );
 }
+const Separator = styled.span.attrs({ 'aria-hidden': 'true', children: '|' })(
+  css({
+    mx: 2,
+    display: 'inline-block',
+  })
+);
 
 const LanguageLink = styled.a<{ isActive: boolean }>((x) =>
   css({
@@ -39,10 +46,8 @@ const LanguageLink = styled.a<{ isActive: boolean }>((x) =>
     borderBottomColor: x.isActive ? 'button' : 'transparent',
     color: 'inherit',
     display: 'inline-block',
-    mx: 1,
     textAlign: 'center',
     textDecoration: 'none',
-    minWidth: 24,
 
     fontWeight: x.isActive ? 'heavy' : 'normal',
 

@@ -1,10 +1,11 @@
+import { DifferenceDecimal, DifferenceInteger } from '@corona-dashboard/common';
 import styled from 'styled-components';
 import { color } from 'styled-system';
 import { isDefined } from 'ts-is-present';
-import { formatNumber, formatPercentage } from '~/utils/formatNumber';
-import { ValueAnnotation } from '~/components-styled/value-annotation';
-import { DifferenceDecimal, DifferenceInteger } from '~/types/data';
+import { Box } from '~/components-styled/base';
 import { DifferenceIndicator } from '~/components-styled/difference-indicator';
+import { ValueAnnotation } from '~/components-styled/value-annotation';
+import { useIntl } from '~/intl';
 
 interface KpiValueProps {
   absolute?: number;
@@ -12,6 +13,8 @@ interface KpiValueProps {
   valueAnnotation?: string;
   difference?: DifferenceDecimal | DifferenceInteger;
   differenceStaticTimespan?: string;
+  text?: string;
+  color?: string;
 }
 
 /**
@@ -29,6 +32,7 @@ const StyledValue = styled.div(
     fontSize: '1.80203rem',
     fontWeight: 600,
     fontVariantNumeric: 'tabular-nums',
+    lineHeight: 1,
   },
   color
 );
@@ -42,20 +46,28 @@ export function KpiValue({
   valueAnnotation,
   difference,
   differenceStaticTimespan,
+  text,
+  color = 'data.primary',
   ...otherProps
 }: KpiValueProps) {
+  const { formatPercentage, formatNumber } = useIntl();
+
   return (
-    <>
+    <Box mb={3}>
       {isDefined(percentage) && isDefined(absolute) ? (
-        <StyledValue color="data.primary" {...otherProps}>
+        <StyledValue color={color} {...otherProps}>
           {`${formatNumber(absolute)} (${formatPercentage(percentage)}%)`}
         </StyledValue>
       ) : isDefined(percentage) ? (
-        <StyledValue color="data.primary" {...otherProps}>
+        <StyledValue color={color} {...otherProps}>
           {`${formatPercentage(percentage)}%`}
         </StyledValue>
+      ) : isDefined(text) ? (
+        <StyledValue color={color} {...otherProps}>
+          {text}
+        </StyledValue>
       ) : (
-        <StyledValue color="data.primary" {...otherProps}>
+        <StyledValue color={color} {...otherProps}>
           {formatNumber(absolute)}
         </StyledValue>
       )}
@@ -66,6 +78,6 @@ export function KpiValue({
         />
       )}
       {valueAnnotation && <ValueAnnotation>{valueAnnotation}</ValueAnnotation>}
-    </>
+    </Box>
   );
 }

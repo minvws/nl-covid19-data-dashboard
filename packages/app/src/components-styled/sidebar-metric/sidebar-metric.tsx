@@ -1,19 +1,23 @@
+import {
+  DifferenceKey,
+  getLastFilledValue,
+  Metric,
+  MetricKeys,
+} from '@corona-dashboard/common';
 import { get } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
-import { Metric, MetricKeys } from '~/components/choropleth/shared';
-import siteText, { TALLLanguages } from '~/locale/index';
 import {
   DataScope,
   getMetricConfig,
   metricContainsPartialData,
 } from '~/metric-config';
 import { assert } from '~/utils/assert';
-import { formatDateFromSeconds } from '~/utils/formatDate';
-import { getLastFilledValue } from '~/utils/get-last-filled-value';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { SidebarBarScale } from './sidebar-barscale';
 import { SidebarKpiValue } from './sidebar-kpi-value';
+import { useIntl } from '~/intl';
+import { AllLanguages } from '~/locale';
 
 interface SidebarMetricProps<T extends { difference: unknown }> {
   scope: DataScope;
@@ -24,8 +28,8 @@ interface SidebarMetricProps<T extends { difference: unknown }> {
    * Currently only behavior is doing that.
    */
   metricProperty?: string;
-  localeTextKey: keyof TALLLanguages;
-  differenceKey?: string;
+  localeTextKey: keyof AllLanguages;
+  differenceKey?: DifferenceKey;
   showBarScale?: boolean;
   annotationKey?: string;
 
@@ -51,6 +55,8 @@ export function SidebarMetric<T extends { difference: unknown }>({
   annotationKey,
   altBarScaleMetric,
 }: SidebarMetricProps<T>) {
+  const { siteText, formatDateFromSeconds } = useIntl();
+
   /**
    * @TODO this is still a bit messy due to improper typing. Not sure how to
    * fix this easily. The getLastFilledValue function is now strongly typed on
@@ -60,7 +66,7 @@ export function SidebarMetric<T extends { difference: unknown }>({
     ? getLastFilledValue((data[metricName] as unknown) as Metric<unknown>)
     : get(data, [metricName as string, 'last_value']);
 
-  const propertyValue = metricProperty && lastValue[metricProperty];
+  const propertyValue = metricProperty && lastValue?.[metricProperty];
 
   if (metricProperty) {
     assert(
@@ -88,7 +94,10 @@ export function SidebarMetric<T extends { difference: unknown }>({
     get(siteText, [localeTextKey, 'kpi_titel']) ||
     get(siteText, [localeTextKey, 'titel_kpi']);
 
-  assert(title, `Missing title at ${localeTextKey}.kpi_titel`);
+  assert(
+    title,
+    `Sidebar metric expects a title at ${localeTextKey}.kpi_titel or ${localeTextKey}.titel_kpi`
+  );
 
   const config = getMetricConfig(
     scope,
@@ -123,7 +132,7 @@ export function SidebarMetric<T extends { difference: unknown }>({
      */
     assert(
       isDefined(differenceValue),
-      `Missing value for difference:${differenceKey}`
+      `Missing value for difference:${String(differenceKey)}`
     );
   }
 

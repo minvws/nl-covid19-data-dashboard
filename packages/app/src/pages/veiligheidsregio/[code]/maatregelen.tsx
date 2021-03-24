@@ -1,117 +1,159 @@
+import css from '@styled-system/css';
 import { useRouter } from 'next/router';
-import Maatregelen from '~/assets/maatregelen.svg';
 import { AnchorTile } from '~/components-styled/anchor-tile';
-import { Box } from '~/components-styled/base';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiSection } from '~/components-styled/kpi-section';
+import { LockdownTable } from '~/domain/restrictions/lockdown-table';
 import { TileList } from '~/components-styled/tile-list';
-import { Heading, Text } from '~/components-styled/typography';
-import { FCWithLayout } from '~/domain/layout/layout';
-import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
-import { RestrictionsTable } from '~/components/restrictions/restrictions-table';
-import { EscalationLevel } from '~/components/restrictions/type';
-import { SEOHead } from '~/components/seoHead';
-import siteText from '~/locale/index';
+import { Heading } from '~/components-styled/typography';
+import { Box } from '~/components-styled/base/box';
+import { Layout } from '~/domain/layout/layout';
+import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
+import { useIntl } from '~/intl';
 import {
-  getSafetyRegionPaths,
-  getSafetyRegionStaticProps,
-  ISafetyRegionData,
-} from '~/static-props/safetyregion-data';
-import theme from '~/style/theme';
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
+import { LockdownData, RoadmapData } from '~/types/cms';
+
+import {
+  getLastGeneratedDate,
+  createGetContent,
+  getVrData,
+} from '~/static-props/get-data';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { useEscalationLevel } from '~/utils/use-escalation-level';
+import { RichContent } from '~/components-styled/cms/rich-content';
 
-const text = siteText.veiligheidsregio_maatregelen;
-type VRCode = keyof typeof siteText.veiligheidsregio_maatregelen_urls;
-type HeadingKey = keyof typeof siteText.maatregelen.headings;
+export { getStaticPaths } from '~/static-paths/vr';
 
-const RegionalRestrictions: FCWithLayout<ISafetyRegionData> = (props) => {
-  const { data, safetyRegionName } = props;
+type MaatregelenData = {
+  lockdown: LockdownData;
+  roadmap?: RoadmapData;
+};
+
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  getVrData,
+  createGetContent<MaatregelenData>((_context) => {
+    //@TODO We need to switch this from process.env to context as soon as we use i18n routing
+    // const { locale } = context;
+    const locale = process.env.NEXT_PUBLIC_LOCALE;
+
+    return `
+    {
+      'lockdown': *[_type == 'lockdown']{
+        ...,
+        "message": {
+          ...message,
+          "description": {
+            ...message.description,
+            "${locale}": [
+              ...message.description.${locale}[]
+              {
+                ...,
+                "asset": asset->
+              },
+            ]
+          },
+        }
+      }[0],
+      // We will need the roadmap when lockdown is disabled in the CMS.
+      // 'roadmap': *[_type == 'roadmap'][0]
+    }`;
+  })
+);
+
+const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
+  const { data, content, safetyRegionName, lastGenerated } = props;
+
+  const { siteText } = useIntl();
+  const text = siteText.veiligheidsregio_maatregelen;
+  type VRCode = keyof typeof siteText.veiligheidsregio_maatregelen_urls;
+
+  const { lockdown } = content;
+  const { showLockdown } = lockdown;
 
   const router = useRouter();
   const code = (router.query.code as unknown) as VRCode;
 
   const regioUrl = siteText.veiligheidsregio_maatregelen_urls[code];
 
-  const escalationLevel = useEscalationLevel(data.restrictions.values);
+  /**
+   * We will need this again when lockdown is disabled
+   */
+  // const escalationLevel = useEscalationLevel(data.restrictions.values);
 
   // Colors etc are determined by the effective escalation level which is 1, 2, 3 or 4.
   // Data is determined by the actual escalation level which can be 1, 2, 3, 4, 401, 402, 41
-  const effectiveEscalationLevel: EscalationLevel =
-    escalationLevel > 4 ? 4 : (escalationLevel as EscalationLevel);
+  // const effectiveEscalationLevel: EscalationLevel =
+  //   escalationLevel > 4 ? 4 : (escalationLevel as EscalationLevel);
 
-  const isNationalLevel = data.restrictions.values.every(
-    (res) => res.target_region === 'nl'
-  );
-
-  const key = isNationalLevel
-    ? 'landelijk'
-    : (escalationLevel.toString() as HeadingKey);
-  const restrictionInfo = siteText.maatregelen.headings[key];
+  const metadata = {
+    ...siteText.veiligheidsregio_index.metadata,
+    title: replaceVariablesInText(text.metadata.title, {
+      safetyRegionName,
+    }),
+    description: replaceVariablesInText(text.metadata.title, {
+      safetyRegionName,
+    }),
+  };
 
   return (
-    <>
-      <SEOHead
-        title={replaceVariablesInText(text.metadata.title, {
-          safetyRegionName,
-        })}
-        description={replaceVariablesInText(text.metadata.description, {
-          safetyRegionName,
-        })}
-      />
-      <TileList>
-        <ContentHeader
-          category={siteText.veiligheidsregio_layout.headings.algemeen}
-          icon={<Maatregelen fill={theme.colors.restrictions} />}
-          title={replaceVariablesInText(
-            siteText.veiligheidsregio_maatregelen.titel,
-            {
-              safetyRegionName,
-            }
-          )}
-        />
-
-        <KpiSection flexDirection="column">
-          <Heading level={3}>{restrictionInfo.extratoelichting.titel}</Heading>
-          <Box>
-            <Text m={0}>
-              {replaceVariablesInText(
-                restrictionInfo.extratoelichting.toelichting,
-                { safetyRegionName }
-              )}
-            </Text>
-          </Box>
-        </KpiSection>
-
-        <KpiSection display="flex" flexDirection="column">
-          <Heading level={3}>
-            {siteText.veiligheidsregio_maatregelen.tabel_titel}
-          </Heading>
-          <RestrictionsTable
-            data={data.restrictions.values}
-            escalationLevel={effectiveEscalationLevel}
+    <Layout {...metadata} lastGenerated={lastGenerated}>
+      <SafetyRegionLayout
+        data={data}
+        safetyRegionName={safetyRegionName}
+        lastGenerated={lastGenerated}
+      >
+        <TileList>
+          <ContentHeader
+            title={replaceVariablesInText(
+              siteText.veiligheidsregio_maatregelen.titel,
+              {
+                safetyRegionName,
+              }
+            )}
           />
-        </KpiSection>
 
-        <AnchorTile
-          external
-          shadow
-          title={text.titel_aanvullendemaatregelen}
-          href={regioUrl}
-          label={replaceVariablesInText(text.linktext_regionpage, {
-            safetyRegionName,
-          })}
-        >
-          {text.toelichting_aanvullendemaatregelen}
-        </AnchorTile>
-      </TileList>
-    </>
+          {showLockdown && (
+            <KpiSection flexDirection="column">
+              <Box
+                css={css({
+                  'p:last-child': {
+                    margin: '0',
+                  },
+                })}
+              >
+                <Heading level={3}>{lockdown.message.title}</Heading>
+                {lockdown.message.description ? (
+                  <RichContent blocks={lockdown.message.description} />
+                ) : null}
+              </Box>
+            </KpiSection>
+          )}
+
+          {showLockdown && (
+            <KpiSection display="flex" flexDirection="column">
+              <Heading level={3}>{lockdown.title}</Heading>
+              <LockdownTable data={lockdown} />
+            </KpiSection>
+          )}
+
+          <AnchorTile
+            external
+            shadow
+            title={text.titel_aanvullendemaatregelen}
+            href={regioUrl}
+            label={replaceVariablesInText(text.linktext_regionpage, {
+              safetyRegionName,
+            })}
+          >
+            {text.toelichting_aanvullendemaatregelen}
+          </AnchorTile>
+        </TileList>
+      </SafetyRegionLayout>
+    </Layout>
   );
 };
-
-RegionalRestrictions.getLayout = getSafetyRegionLayout();
-
-export const getStaticProps = getSafetyRegionStaticProps;
-export const getStaticPaths = getSafetyRegionPaths();
 
 export default RegionalRestrictions;

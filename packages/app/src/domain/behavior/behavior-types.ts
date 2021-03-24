@@ -1,5 +1,6 @@
 export const behaviorIdentifiers = [
   'wash_hands',
+  'curfew',
   'keep_distance',
   'work_from_home',
   'avoid_crowds',

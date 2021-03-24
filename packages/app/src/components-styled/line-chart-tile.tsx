@@ -1,28 +1,40 @@
-import { ParentSize } from '@visx/responsive';
-import { LineChart, LineChartProps } from '~/components-styled/line-chart';
-import { Value } from '~/components-styled/line-chart/helpers';
+import { TimestampedValue } from '@corona-dashboard/common';
+import slugify from 'slugify';
+import {
+  LineChart,
+  LineChartProps,
+} from '~/components-styled/line-chart/line-chart';
+import { assert } from '~/utils/assert';
 import { TimeframeOption } from '~/utils/timeframe';
 import { ChartTileWithTimeframe } from './chart-tile';
 import { MetadataProps } from './metadata';
-
-interface LineChartTileProps<T extends Value> extends LineChartProps<T> {
+interface LineChartTileProps<T extends TimestampedValue>
+  extends LineChartProps<T> {
   title: string;
   metadata: MetadataProps;
   description?: string;
   timeframeOptions?: TimeframeOption[];
   timeframeInitialValue?: TimeframeOption;
   footer?: React.ReactNode;
+  ariaDescription?: string;
 }
 
-export function LineChartTile<T extends Value>({
+export function LineChartTile<T extends TimestampedValue>({
   metadata,
   title,
   description,
   timeframeOptions = ['all', '5weeks', 'week'],
-  timeframeInitialValue = '5weeks',
+  timeframeInitialValue = 'all',
   footer,
+  ariaDescription,
   ...chartProps
 }: LineChartTileProps<T>) {
+  assert(
+    description || ariaDescription,
+    `This graph doesn't include a valid description nor an ariaDescription, please add one of them.`
+  );
+  const ariaLabelledBy = slugify(title);
+
   return (
     <ChartTileWithTimeframe
       title={title}
@@ -30,18 +42,16 @@ export function LineChartTile<T extends Value>({
       metadata={metadata}
       timeframeOptions={timeframeOptions}
       timeframeInitialValue={timeframeInitialValue}
+      ariaLabelledBy={ariaLabelledBy}
+      ariaDescription={ariaDescription}
     >
       {(timeframe) => (
         <>
-          <ParentSize>
-            {(parent) => (
-              <LineChart
-                {...chartProps}
-                width={parent.width}
-                timeframe={timeframe}
-              />
-            )}
-          </ParentSize>
+          <LineChart
+            {...chartProps}
+            timeframe={timeframe}
+            ariaLabelledBy={ariaLabelledBy}
+          />
           {footer}
         </>
       )}

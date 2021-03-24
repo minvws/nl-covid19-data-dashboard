@@ -1,7 +1,9 @@
+import { Municipal } from '@corona-dashboard/common';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
+import VirusIcon from '~/assets/virus.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { Category } from '~/components-styled/aside/category';
 import {
@@ -10,39 +12,31 @@ import {
   MetricMenuItemLink,
 } from '~/components-styled/aside/menu';
 import { Box } from '~/components-styled/base';
+import { AppContent } from '~/components-styled/layout/app-content';
 import { SidebarMetric } from '~/components-styled/sidebar-metric';
 import { Text } from '~/components-styled/typography';
-import { getLayout as getSiteLayout } from '~/domain/layout/layout';
-import { AppContent } from '~/components-styled/layout/app-content';
-import siteText from '~/locale/index';
-import { IMunicipalityData } from '~/static-props/municipality-data';
+import { useIntl } from '~/intl';
 import { getSafetyRegionForMunicipalityCode } from '~/utils/getSafetyRegionForMunicipalityCode';
 import { Link } from '~/utils/link';
 import { MunicipalityComboBox } from './components/municipality-combo-box';
 
-/**
- * When you navigate to /gemeente root from the top menu, there is no GM code
- * and the data will be undefined. That's why we use Partial here, so that TS
- * knows that data and other props from data are not guaranteed to be present.
- */
-interface MunicipalityLayoutProps extends Partial<IMunicipalityData> {
-  children: React.ReactNode;
-}
-
-export function getMunicipalityLayout() {
-  return function (
-    page: React.ReactNode,
-    pageProps: IMunicipalityData & {
-      lastGenerated: string;
+type MunicipalityLayoutProps = {
+  lastGenerated: string;
+  children?: React.ReactNode;
+} & (
+  | {
+      data: Municipal;
+      municipalityName: string;
     }
-  ): React.ReactNode {
-    const lastGenerated = pageProps.lastGenerated;
-    return getSiteLayout(
-      siteText.gemeente_metadata,
-      lastGenerated
-    )(<MunicipalityLayout {...pageProps}>{page}</MunicipalityLayout>);
-  };
-}
+  | {
+      /**
+       * the route `/gemeente` can render without sidebar and thus without `data`
+       */
+      isLandingPage: true;
+      data?: undefined;
+      municipalityName?: undefined;
+    }
+);
 
 /**
  * MunicipalityLayout is a composition of persistent layouts.
@@ -60,8 +54,10 @@ export function getMunicipalityLayout() {
  * More info on persistent layouts:
  * https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
  */
-function MunicipalityLayout(props: MunicipalityLayoutProps) {
+export function MunicipalityLayout(props: MunicipalityLayoutProps) {
   const { children, data, municipalityName } = props;
+
+  const { siteText } = useIntl();
   const router = useRouter();
   const { code } = router.query;
 
@@ -101,7 +97,7 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                 aria-label={siteText.aria_labels.metriek_navigatie}
               >
                 <Box>
-                  <Category marginBottom={0}>{municipalityName}</Category>
+                  <Category>{municipalityName}</Category>
                   {safetyRegion && (
                     <Text pl={3}>
                       {siteText.common.veiligheidsregio_label}{' '}
@@ -136,6 +132,23 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                             differenceKey="tested_overall__infected"
                           />
                         </MetricMenuItemLink>
+
+                        <MetricMenuItemLink
+                          href={`/gemeente/${code}/sterfte`}
+                          icon={<VirusIcon />}
+                          title={
+                            siteText.veiligheidsregio_sterfte.titel_sidebar
+                          }
+                        >
+                          <SidebarMetric
+                            data={data}
+                            scope="gm"
+                            metricName="deceased_rivm"
+                            metricProperty="covid_daily"
+                            localeTextKey="gemeente_sterfte"
+                            differenceKey="deceased_rivm__covid_daily"
+                          />
+                        </MetricMenuItemLink>
                       </CategoryMenu>
                       <CategoryMenu
                         title={siteText.gemeente_layout.headings.ziekenhuizen}
@@ -152,9 +165,9 @@ function MunicipalityLayout(props: MunicipalityLayoutProps) {
                             data={data}
                             scope="gm"
                             metricName="hospital_nice"
-                            metricProperty="admissions_moving_average"
+                            metricProperty="admissions_on_date_of_reporting"
                             localeTextKey="gemeente_ziekenhuisopnames_per_dag"
-                            differenceKey="hospital_nice__admissions_moving_average"
+                            differenceKey="hospital_nice__admissions_on_date_of_reporting"
                           />
                         </MetricMenuItemLink>
                       </CategoryMenu>

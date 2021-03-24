@@ -1,0 +1,69 @@
+{
+  "definitions": {
+    "value": {
+      "title": "nl_vaccine_delivery_per_supplier_value",
+      "type": "object",
+      "required": [
+        "total",
+        "bio_n_tech_pfizer",
+        "moderna",
+        "astra_zeneca",
+        "is_estimate",
+        "week_number",
+        "date_of_insertion_unix",
+        "date_start_unix",
+        "date_end_unix",
+        "date_of_report_unix"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "total": {
+          "type": "integer"
+        },
+        "bio_n_tech_pfizer": {
+          "type": "integer"
+        },
+        "moderna": {
+          "type": "integer"
+        },
+        "astra_zeneca": {
+          "type": "integer"
+        },
+        "is_estimate": {
+          "type": "boolean"
+        },
+        "week_number": {
+          "type": "integer"
+        },
+        "date_of_insertion_unix": {
+          "type": "integer"
+        },
+        "date_start_unix": {
+          "type": "integer"
+        },
+        "date_end_unix": {
+          "type": "integer"
+        },
+        "date_of_report_unix": {
+          "type": "integer"
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "nl_vaccine_delivery_per_supplier",
+  "type": "object",
+  "required": ["values", "last_value"],
+  "additionalProperties": false,
+  "properties": {
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/value"
+      }
+    },
+    "last_value": {
+      "$ref": "#/definitions/value"
+    }
+  }
+}

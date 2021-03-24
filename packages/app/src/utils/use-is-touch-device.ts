@@ -1,25 +1,39 @@
 import { useEffect, useState } from 'react';
+import { useIsMountedRef } from './use-is-mounted-ref';
 
 /**
  * Subsequential calls to the hook can read this static value for initial
  * touch state
  */
-let isTouchRegistered = false;
+let isTouch = false;
 
 export function useIsTouchDevice() {
-  const [isTouchDevice, setIsTouchDevice] = useState(isTouchRegistered);
+  const isMountedRef = useIsMountedRef();
+  const [isTouchDevice, setIsTouchDevice] = useState(isTouch);
 
   useEffect(() => {
     if (isTouchDevice) return;
 
     const handleTouchStart = () => {
-      isTouchRegistered = true;
+      isTouch = true;
       setIsTouchDevice(true);
     };
 
-    document.addEventListener('touchstart', handleTouchStart);
-    return () => document.removeEventListener('touchstart', handleTouchStart);
-  }, [isTouchDevice]);
+    const handleMouseMove = () => {
+      isTouch = false;
+      setIsTouchDevice(false);
+    };
+
+    !isTouchDevice && document.addEventListener('touchstart', handleTouchStart);
+    isTouchDevice && document.addEventListener('mousemove', handleMouseMove);
+
+    return () => {
+      !isTouchDevice &&
+        document.removeEventListener('touchstart', handleTouchStart);
+      isTouchDevice &&
+        document.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, [isMountedRef, isTouchDevice]);
 
   return isTouchDevice;
 }

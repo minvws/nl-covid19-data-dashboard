@@ -1,5 +1,5 @@
+import { DifferenceDecimal, DifferenceInteger } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import {
   color,
@@ -13,30 +13,34 @@ import {
 import IconGelijk from '~/assets/gelijk.svg';
 import IconUp from '~/assets/pijl-omhoog.svg';
 import IconDown from '~/assets/pijl-omlaag.svg';
-import siteText from '~/locale/index';
-import { DifferenceDecimal, DifferenceInteger } from '~/types/data';
-import { formatDateFromMilliseconds } from '~/utils/formatDate';
-import { formatNumber, formatPercentage } from '~/utils/formatNumber';
-
-const text = siteText.toe_en_afname;
-const DAY_IN_SECONDS = 24 * 60 * 60;
+import { useIntl } from '~/intl';
 
 interface DifferenceIndicatorProps {
   value: DifferenceDecimal | DifferenceInteger;
-  isContextSidebar?: boolean;
   isDecimal?: boolean;
+  context?: 'sidebar' | 'tile' | 'inline';
+  maximumFractionDigits?: number;
   staticTimespan?: string;
 }
 
 export function DifferenceIndicator(props: DifferenceIndicatorProps) {
-  const { isContextSidebar, value, isDecimal, staticTimespan } = props;
+  switch (props.context) {
+    case 'sidebar':
+      return <SidebarIndicator {...props} />;
 
-  return isContextSidebar
-    ? renderSidebarIndicator(value)
-    : renderTileIndicator(value, isDecimal, staticTimespan);
+    case 'inline':
+      return <InlineIndicator {...props} />;
+
+    default:
+      return <TileIndicator {...props} />;
+  }
 }
 
-function renderSidebarIndicator(value: DifferenceDecimal | DifferenceInteger) {
+function SidebarIndicator({
+  value,
+}: {
+  value: DifferenceDecimal | DifferenceInteger;
+}) {
   const { difference } = value;
 
   if (difference > 0) {
@@ -68,20 +72,89 @@ function renderSidebarIndicator(value: DifferenceDecimal | DifferenceInteger) {
   );
 }
 
-function renderTileIndicator(
-  value: DifferenceDecimal | DifferenceInteger,
-  isDecimal?: boolean,
-  staticTimespan?: string
-) {
-  const { difference, old_date_unix } = value;
+function InlineIndicator({
+  value,
+  isDecimal,
+  maximumFractionDigits,
+}: {
+  value: DifferenceDecimal | DifferenceInteger;
+  isDecimal?: boolean;
+  maximumFractionDigits?: number;
+}) {
+  const { siteText, formatPercentage, formatNumber } = useIntl();
+  const text = siteText.toe_en_afname;
+
+  const { difference } = value;
 
   const differenceFormattedString = isDecimal
-    ? formatPercentage(Math.abs(difference))
+    ? formatPercentage(
+        Math.abs(difference),
+        maximumFractionDigits ? { maximumFractionDigits } : undefined
+      )
     : formatNumber(Math.abs(difference));
 
-  const timespanTextNode = staticTimespan ?? (
-    <TimespanText date={old_date_unix} />
+  if (difference > 0) {
+    const splitText = text.toename.split(' ');
+
+    return (
+      <Container>
+        <Span fontWeight="bold">{differenceFormattedString}</Span>
+        <IconContainer color="red">
+          <IconUp />
+        </IconContainer>
+        <Span>{splitText[0]}</Span>
+      </Container>
+    );
+  }
+
+  if (difference < 0) {
+    const splitText = text.afname.split(' ');
+
+    return (
+      <Container>
+        <Span fontWeight="bold">{differenceFormattedString}</Span>
+        <IconContainer color="data.primary">
+          <IconDown />
+        </IconContainer>
+        <Span>{splitText[0]}</Span>
+      </Container>
+    );
+  }
+
+  return (
+    <Container>
+      <IconContainer color="lightGray">
+        <IconGelijk />
+      </IconContainer>
+      <Span>{text.gelijk}</Span>
+    </Container>
   );
+}
+
+function TileIndicator({
+  value,
+  isDecimal,
+  staticTimespan,
+  maximumFractionDigits,
+}: {
+  value: DifferenceDecimal | DifferenceInteger;
+  isDecimal?: boolean;
+  maximumFractionDigits?: number;
+  staticTimespan?: string;
+}) {
+  const { siteText, formatNumber, formatPercentage } = useIntl();
+  const text = siteText.toe_en_afname;
+
+  const { difference } = value;
+
+  const differenceFormattedString = isDecimal
+    ? formatPercentage(
+        Math.abs(difference),
+        maximumFractionDigits ? { maximumFractionDigits } : undefined
+      )
+    : formatNumber(Math.abs(difference));
+
+  const timespanTextNode = staticTimespan ?? text.vorige_waarde;
 
   if (difference > 0) {
     const splitText = text.toename.split(' ');
@@ -145,7 +218,7 @@ const IconContainer = styled(Span)(
   })
 );
 
-const Container = styled.div(
+const Container = styled.span(
   css({
     whiteSpace: 'nowrap',
     display: 'inline-block',
@@ -157,42 +230,3 @@ const Container = styled.div(
     },
   })
 );
-
-function TimespanText({ date }: { date: number }) {
-  const [isMounted, setIsMounted] = useState(false);
-  useEffect(() => setIsMounted(true), []);
-
-  const fullDate = formatDateFromMilliseconds(date * 1000, 'medium');
-  const text = getTimespanText(date);
-
-  return <Span title={fullDate}>{isMounted ? text : fullDate}</Span>;
-}
-
-/**
- * @TODO discuss logic for this
- *
- * 6 days is more like a week
- * and 13 days more like two weeks
- *
- * Think this way we can prevent rounding errors. In our data timespans should
- * typically be a few days or a week or multiple weeks anyway.
- */
-function getTimespanText(oldDate: number) {
-  const days = Math.floor((Date.now() / 1000 - oldDate) / DAY_IN_SECONDS);
-
-  if (days < 2) {
-    return text.tijdverloop.gisteren;
-  }
-
-  if (days < 7) {
-    return `${days} ${text.tijdverloop.dagen} ${text.tijdverloop.geleden}`;
-  }
-
-  const weeks = Math.floor(days / 7);
-
-  if (weeks < 2) {
-    return `${weeks} ${text.tijdverloop.week.enkelvoud} ${text.tijdverloop.geleden}`;
-  }
-
-  return `${weeks} ${text.tijdverloop.week.meervoud} ${text.tijdverloop.geleden}`;
-}

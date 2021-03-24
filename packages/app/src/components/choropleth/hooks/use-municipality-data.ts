@@ -1,14 +1,13 @@
 import { set } from 'lodash';
 import { useMemo } from 'react';
-import useSWR from 'swr';
-import { Municipalities } from '~/types/data';
+import { Municipalities } from '@corona-dashboard/common';
 import { assert } from '~/utils/assert';
 import {
   Dictionary,
   MunicipalGeoJSON,
-  MunicipalityProperties,
   MunicipalitiesMetricName,
-} from '../shared';
+  MunicipalityProperties,
+} from '@corona-dashboard/common';
 
 /**
  * This hook takes a metric name, extracts the associated data from the json/municipalities.json
@@ -37,9 +36,15 @@ export type GetMunicipalityDataFunctionType = (
   id: string
 ) => MunicipalityChoroplethValue;
 
+export type DataValue = {
+  value: number;
+  code: string;
+};
+
 type UseMunicipalityDataReturnValue = {
   getChoroplethValue: GetMunicipalityDataFunctionType;
   hasData: boolean;
+  values: DataValue[];
 };
 
 export function useMunicipalityNavigationData(
@@ -53,19 +58,20 @@ export function useMunicipalityNavigationData(
   return {
     getChoroplethValue: (id: string) => ({
       ...propertyData[id],
+      gmcode: propertyData[id].gmcode || propertyData[id].gemcode,
       __color_value: 0,
     }),
     hasData: true,
+    values: [],
   };
 }
 
-export function useMunicipalityData(
+export function useMunicipalityData<K extends MunicipalitiesMetricName>(
   featureCollection: MunicipalGeoJSON,
-  metricName: MunicipalitiesMetricName,
-  metricProperty: string
+  metricName: K,
+  metricProperty: string,
+  data: Pick<Municipalities, K>
 ): UseMunicipalityDataReturnValue {
-  const { data } = useSWR<Municipalities>('/json/GM_COLLECTION.json');
-
   return useMemo(() => {
     const propertyData = featureCollection.features.reduce(
       (acc, feature) =>
@@ -80,8 +86,15 @@ export function useMunicipalityData(
           __color_value: 0,
         }),
         hasData: false,
+        values: [],
       };
     }
+
+    const values =
+      (data?.[metricName] as any[])?.map((x) => ({
+        code: x.gmcode,
+        value: x[metricProperty],
+      })) ?? [];
 
     const metricsForAllMunicipalities = (data[metricName] as unknown) as
       | MunicipalityMetricValue[]
@@ -121,6 +134,6 @@ export function useMunicipalityData(
       return value || { ...propertyData[id], __color_value: 0 };
     };
 
-    return { getChoroplethValue, hasData };
+    return { getChoroplethValue, hasData, values };
   }, [data, metricName, metricProperty, featureCollection]);
 }

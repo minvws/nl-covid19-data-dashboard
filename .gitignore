@@ -15,6 +15,7 @@ node_modules
 /env
 /public/json
 .gitlab-ci.yml
+exports
 
 /*.code-workspace
 /cypress/screenshots

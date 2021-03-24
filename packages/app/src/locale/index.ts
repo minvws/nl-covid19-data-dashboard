@@ -1,21 +1,19 @@
-import en from './en.json';
 import nl from './nl.json';
+import en from './en.json';
 
-export type TNLLocale = typeof nl;
-export type TENLocale = typeof en;
+export type NlLocale = typeof nl;
+export type EnLocale = typeof en;
 
-export type TLanguages = {
-  nl: TNLLocale;
-  en: TENLocale;
+export type Languages = {
+  nl: NlLocale;
+  en: EnLocale;
 };
 
-export type TALLLanguages = TNLLocale | TENLocale;
-export type TLanguageKey = keyof TLanguages;
+export type AllLanguages = NlLocale | EnLocale;
 
-const languages: TLanguages = { en, nl } as const;
+export type LanguageKey = keyof Languages;
 
-export const targetLanguage: TLanguageKey =
-  (process.env.NEXT_PUBLIC_LOCALE as TLanguageKey) || 'nl';
-const dictionary: TALLLanguages = languages[targetLanguage];
-
-export default dictionary;
+export const languages = {
+  nl,
+  en,
+};

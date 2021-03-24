@@ -1,132 +1,118 @@
-import css from '@styled-system/css';
-import fs from 'fs';
-import { useRouter } from 'next/router';
-import path from 'path';
+import {
+  EscalationLevels,
+  SafetyRegionProperties,
+} from '@corona-dashboard/common';
 import { Box } from '~/components-styled/base';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
-import { EscalationLevelIcon } from '~/components-styled/escalation-level-icon';
-import { MessageTile } from '~/components-styled/message-tile';
+import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
+import { Markdown } from '~/components-styled/markdown';
 import { TileList } from '~/components-styled/tile-list';
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
+import { WarningTile } from '~/components-styled/warning-tile';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
-import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
-import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
-import styles from '~/components/choropleth/tooltips/tooltip.module.scss';
-import { FCWithLayout } from '~/domain/layout/layout';
+import { EscalationRegionalTooltip } from '~/components/choropleth/tooltips/region/escalation-regional-tooltip';
 import { SafetyRegionComboBox } from '~/domain/layout/components/safety-region-combo-box';
-import { getSafetyRegionLayout } from '~/domain/layout/safety-region-layout';
-import { SEOHead } from '~/components/seoHead';
-import { TALLLanguages } from '~/locale/index';
-import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
+import { Layout } from '~/domain/layout/layout';
+import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
+import { useIntl } from '~/intl';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
+import {
+  createGetChoroplethData,
+  getLastGeneratedDate,
+} from '~/static-props/get-data';
+import { createDate } from '~/utils/createDate';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 
-const escalationThresholds =
-  regionThresholds.escalation_levels.escalation_level;
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  createGetChoroplethData({
+    vr: ({ escalation_levels }) => ({ escalation_levels }),
+  })
+);
 
-interface EscalationMapLegendaProps {
-  text: TALLLanguages;
-}
-
-export const EscalationMapLegenda = (props: EscalationMapLegendaProps) => {
-  const { text } = props;
-
-  return (
-    <div className={styles.legenda} aria-label="legend">
-      <h3 css={css({ maxWidth: '20em' })}>
-        {text.escalatie_niveau.legenda.titel}
-      </h3>
-      {escalationThresholds.map((info) => (
-        <div
-          className={styles.escalationInfoLegenda}
-          key={`legenda-item-${info?.threshold}`}
-        >
-          <div className={styles.bubbleLegenda}>
-            <EscalationLevelIcon level={info.threshold} />
-          </div>
-          <div className={styles.escalationTextLegenda}>
-            {text.escalatie_niveau.types[info.threshold].titel}
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-};
-
-// Passing `any` to `FCWithLayout` because we
-// can't do `getStaticProps` on this page because we require
-// a code, but is is the screen we select a code (safety region).
-// All other pages which use `getSafetyRegionLayout` can assume
-// the data is always there. Making the data optional would mean
-// lots of unnecessary null checks on those pages.
-
-const SafetyRegion: FCWithLayout<any> = (props) => {
-  const router = useRouter();
+const SafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
   const breakpoints = useBreakpoints();
 
-  const { text } = props;
+  const { siteText, formatDate } = useIntl();
+  const reverseRouter = useReverseRouter();
+
+  const { choropleth, lastGenerated } = props;
+
+  const metadata = {
+    ...siteText.veiligheidsregio_index.metadata,
+  };
 
   return (
-    <>
-      <SEOHead
-        title={text.veiligheidsregio_index.metadata.title}
-        description={text.veiligheidsregio_index.metadata.description}
-      />
-
-      {!breakpoints.md && (
-        <Box bg="white">
-          <SafetyRegionComboBox />
-        </Box>
-      )}
-
-      <TileList>
-        {text.regionaal_index.belangrijk_bericht && (
-          <MessageTile message={text.regionaal_index.belangrijk_bericht} />
+    <Layout {...metadata} lastGenerated={lastGenerated}>
+      <SafetyRegionLayout isLandingPage lastGenerated={lastGenerated}>
+        {!breakpoints.md && (
+          <Box bg="white">
+            <SafetyRegionComboBox />
+          </Box>
         )}
 
-        <ChoroplethTile
-          title={text.veiligheidsregio_index.selecteer_titel}
-          description={
-            <>
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: text.veiligheidsregio_index.selecteer_toelichting,
-                }}
-              />
-              <EscalationMapLegenda text={text} />
-            </>
-          }
-        >
-          <SafetyRegionChoropleth
-            metricName="escalation_levels"
-            metricProperty="escalation_level"
-            onSelect={createSelectRegionHandler(router, 'maatregelen')}
-            tooltipContent={escalationTooltip(
-              createSelectRegionHandler(router, 'maatregelen')
-            )}
-          />
-        </ChoroplethTile>
-      </TileList>
-    </>
+        <TileList>
+          {siteText.regionaal_index.belangrijk_bericht && (
+            <WarningTile
+              message={siteText.regionaal_index.belangrijk_bericht}
+              variant="emphasis"
+            />
+          )}
+
+          <ChoroplethTile
+            title={siteText.veiligheidsregio_index.selecteer_titel}
+            description={
+              <>
+                <Box mb={3}>
+                  <Markdown
+                    content={replaceVariablesInText(
+                      siteText.veiligheidsregio_index.selecteer_toelichting,
+                      {
+                        last_update: formatDate(
+                          createDate(
+                            choropleth.vr.escalation_levels[0]
+                              .last_determined_unix
+                          ),
+                          'day-month'
+                        ),
+                      }
+                    )}
+                  />
+                </Box>
+                <EscalationMapLegenda
+                  data={choropleth.vr}
+                  metricName="escalation_levels"
+                  metricProperty="level"
+                  lastDetermined={
+                    choropleth.vr.escalation_levels[0].last_determined_unix
+                  }
+                />
+              </>
+            }
+          >
+            <SafetyRegionChoropleth
+              data={choropleth.vr}
+              getLink={reverseRouter.vr.index}
+              metricName="escalation_levels"
+              metricProperty="level"
+              tooltipContent={(
+                context: SafetyRegionProperties & EscalationLevels
+              ) => (
+                <EscalationRegionalTooltip
+                  context={context}
+                  getLink={reverseRouter.vr.index}
+                />
+              )}
+            />
+          </ChoroplethTile>
+        </TileList>
+      </SafetyRegionLayout>
+    </Layout>
   );
 };
-
-SafetyRegion.getLayout = getSafetyRegionLayout();
-
-interface StaticProps {
-  text: TALLLanguages;
-  lastGenerated: string;
-}
-
-export async function getStaticProps(): Promise<{ props: StaticProps }> {
-  const text = parseMarkdownInLocale(
-    (await import('../../locale/index')).default
-  );
-
-  const filePath = path.join(process.cwd(), 'public', 'json', 'NL.json');
-  const fileContents = fs.readFileSync(filePath, 'utf8');
-  const lastGenerated = JSON.parse(fileContents).last_generated;
-
-  return { props: { text, lastGenerated } };
-}
 
 export default SafetyRegion;

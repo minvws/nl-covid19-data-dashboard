@@ -13,8 +13,11 @@
     "@sanity/default-layout",
     "@sanity/default-login",
     "@sanity/desk-tool",
-    "@sanity/vision",
-    "@sanity/production-preview"
+    "@sanity/production-preview",
+    "tabs",
+    "./src/plugins/translate",
+    "@sanity/dashboard",
+    "dashboard-widget-document-list"
   ],
   "env": {
     "development": {
@@ -27,19 +30,27 @@
   "parts": [
     {
       "name": "part:@sanity/base/schema",
-      "path": "./schemas/schema"
+      "path": "./src/schemas/schema"
     },
     {
       "name": "part:@sanity/desk-tool/structure",
-      "path": "./desk-structure.js"
+      "path": "./src/desk-structure"
     },
     {
       "implements": "part:@sanity/production-preview/resolve-production-url",
-      "path": "./previews/resolveProductionUrl.js"
+      "path": "./src/previews/resolve-production-url"
     },
     {
       "implements": "part:@sanity/base/theme/variables/override-style",
-      "path": "variable-overrides.css"
+      "path": "./src/variable-overrides.css"
+    },
+    {
+      "implements": "part:@sanity/base/document-actions/resolver",
+      "path": "./src/resolve-document-actions"
+    },
+    {
+      "implements": "part:@sanity/dashboard/config",
+      "path": "./src/dashboard-config.js"
     }
   ]
 }

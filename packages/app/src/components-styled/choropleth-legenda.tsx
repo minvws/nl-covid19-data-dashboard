@@ -1,6 +1,6 @@
 import { css } from '@styled-system/css';
 import styled from 'styled-components';
-import { ChoroplethThresholdsValue } from '~/components/choropleth/shared';
+import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
 import { Box } from './base';
 
 interface ChoroplethLegendaProps {
@@ -16,14 +16,14 @@ export function ChoroplethLegenda({
     <Box width="100%" maxWidth={300}>
       {title && <h4>{title}</h4>}
       <List aria-label="legend">
-        {thresholds.map(({ color, threshold }, index) => (
+        {thresholds.map(({ color, threshold, label }, index) => (
           <Item key={color + threshold}>
             <LegendaColor
               color={color}
               first={index === 0}
               last={index === thresholds.length - 1}
             />
-            <Label>{threshold}</Label>
+            <Label>{label ?? threshold}</Label>
           </Item>
         ))}
       </List>

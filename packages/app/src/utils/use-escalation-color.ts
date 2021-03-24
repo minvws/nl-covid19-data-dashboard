@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { EscalationLevel } from '~/components/restrictions/type';
+import { EscalationLevel } from '~/domain/restrictions/type';
 import { assert } from './assert';
 
 export function useEscalationColor(level?: EscalationLevel) {
@@ -10,8 +10,7 @@ export function useEscalationColor(level?: EscalationLevel) {
       'Cannot resolve an escalation color for an undefined level'
     );
 
-    const escalationThresholds =
-      regionThresholds.escalation_levels.escalation_level;
+    const escalationThresholds = regionThresholds.escalation_levels.level;
 
     const escalationColor = escalationThresholds.find(
       (threshold) => threshold.threshold === level

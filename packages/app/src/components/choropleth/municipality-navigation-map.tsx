@@ -1,15 +1,21 @@
+import { MunicipalityProperties } from '@corona-dashboard/common';
+import css from '@styled-system/css';
 import { Feature, MultiPolygon } from 'geojson';
 import { ReactNode } from 'react';
-import { AspectRatio } from '~/components-styled/aspect-ratio';
 import { colors } from '~/style/theme';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { Choropleth } from './choropleth';
-import { useChartDimensions, useMunicipalityNavigationData } from './hooks';
-import { Path } from './path';
-import { MunicipalityProperties } from './shared';
+import {
+  useMunicipalityNavigationData,
+  useTabInteractiveButton,
+} from './hooks';
+import { HoverPathLink, Path } from './path';
 import { countryGeo, municipalGeo } from './topology';
+import { useReverseRouter } from '~/utils/use-reverse-router';
+import { useIntl } from '~/intl';
 
 type MunicipalityNavigationMapProps<T> = {
-  onSelect?: (context: MunicipalityProperties) => void;
+  onSelect?: (gmcode: string) => void;
   tooltipContent?: (
     context: MunicipalityProperties & { value: T }
   ) => ReactNode;
@@ -20,17 +26,18 @@ type MunicipalityNavigationMapProps<T> = {
  * municipalities but contains no data. It can be used for navigating at GM
  * index page.
  */
+
 export function MunicipalityNavigationMap<T>(
   props: MunicipalityNavigationMapProps<T>
 ) {
-  const { onSelect, tooltipContent } = props;
+  const { tooltipContent } = props;
 
-  const ratio = 1.2;
-  const [ref, dimensions] = useChartDimensions<HTMLDivElement>(ratio);
+  const { siteText } = useIntl();
+  const reverseRouter = useReverseRouter();
 
   const { getChoroplethValue } = useMunicipalityNavigationData(municipalGeo);
 
-  const featureCallback = (
+  const renderFeature = (
     feature: Feature<MultiPolygon, MunicipalityProperties>,
     path: string,
     _index: number
@@ -41,7 +48,7 @@ export function MunicipalityNavigationMap<T>(
       <Path
         key={gemcode}
         id={gemcode}
-        d={path}
+        pathData={path}
         fill={'#fff'}
         stroke={colors.blue}
         strokeWidth={0.5}
@@ -49,29 +56,35 @@ export function MunicipalityNavigationMap<T>(
     );
   };
 
-  const hoverCallback = (
+  const {
+    isTabInteractive,
+    tabInteractiveButton,
+    anchorEventHandlers,
+  } = useTabInteractiveButton(
+    replaceVariablesInText(siteText.choropleth.a11y.tab_navigatie_button, {
+      subject: siteText.choropleth.gm.plural,
+    })
+  );
+
+  const renderHover = (
     feature: Feature<MultiPolygon, MunicipalityProperties>,
     path: string
   ) => {
-    const { gemcode } = feature.properties;
+    const { gemcode, gemnaam } = feature.properties;
 
     return (
-      <Path
-        hoverable
-        id={gemcode}
+      <HoverPathLink
         key={gemcode}
-        d={path}
+        href={reverseRouter.gm.index(gemcode)}
+        title={gemnaam}
+        isTabInteractive={isTabInteractive}
+        id={gemcode}
+        pathData={path}
         stroke={colors.blue}
         fill={colors.blue}
+        {...anchorEventHandlers}
       />
     );
-  };
-
-  const onClick = (id: string) => {
-    if (onSelect) {
-      const data = getChoroplethValue(id);
-      onSelect(data as any);
-    }
   };
 
   const getTooltipContent = (id: string) => {
@@ -83,17 +96,17 @@ export function MunicipalityNavigationMap<T>(
   };
 
   return (
-    <AspectRatio ratio={1 / ratio} ref={ref}>
+    <div css={css({ bg: 'transparent', position: 'relative' })}>
+      {tabInteractiveButton}
       <Choropleth
         featureCollection={municipalGeo}
         hovers={municipalGeo}
         boundingBox={countryGeo}
-        dimensions={dimensions}
-        featureCallback={featureCallback}
-        hoverCallback={hoverCallback}
-        onPathClick={onClick}
+        renderFeature={renderFeature}
+        renderHover={renderHover}
         getTooltipContent={getTooltipContent}
+        showTooltipOnFocus={isTabInteractive}
       />
-    </AspectRatio>
+    </div>
   );
 }

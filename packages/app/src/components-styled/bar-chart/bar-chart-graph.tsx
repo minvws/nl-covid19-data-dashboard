@@ -56,16 +56,18 @@ export function BarChartGraph({
     getBarSize,
     getBarOffset,
     getLabel,
+    labelFontSize,
   } = coordinates;
 
   return (
     <StyledSvg
       width={width}
-      height={height}
+      viewBox={`0 0 ${width} ${height}`}
       role="img"
       aria-label={accessibilityDescription}
       tabIndex={0}
       onKeyUp={(event: KeyboardEvent<SVGElement>) => onKeyInput(event)}
+      css={css({ width: '100%' })}
     >
       {/* Vertical lines */}
       <GridColumns
@@ -75,7 +77,7 @@ export function BarChartGraph({
         left={spacing.left}
         top={spacing.top}
         numTicks={numTicks}
-        stroke={colors.border}
+        stroke={colors.silver}
       />
 
       {/* Axis line, match up with the vertical lines */}
@@ -89,6 +91,12 @@ export function BarChartGraph({
         tickFormat={(a) => `${a}`}
         tickComponent={TickValue}
         label={xAxisLabel}
+        labelProps={{
+          verticalAnchor: 'start',
+          textAnchor: 'middle',
+          width: barsWidth,
+          x: barsWidth / 2,
+        }}
         labelClassName="bar-chart-x-axis-label"
       />
 
@@ -100,8 +108,8 @@ export function BarChartGraph({
               verticalAnchor="middle"
               y={(getBarOffset(value) ?? 0) + labelScale.bandwidth() / 2}
               x={spacing.left - spacingLabel}
-              fill={colors.annotation}
-              fontSize={theme.fontSizes[0]}
+              fill={colors.body}
+              fontSize={labelFontSize}
             >
               {getLabel(value)}
             </Text>
@@ -113,7 +121,7 @@ export function BarChartGraph({
               height={labelScale.bandwidth()}
               width={barsWidth}
             />
-            
+
             {/* Bar has a minimum width of 5 pixels to stay visible / clickable */}
             <Bar
               x={spacing.left}
@@ -134,6 +142,12 @@ export function BarChartGraph({
 // Visx only allows to style labels through a classname
 const StyledSvg = styled.svg(
   css({
+    '&:not(:root)': {
+      overflow: 'visible',
+    },
+    '&:focus': {
+      outline: 'none',
+    },
     '& .bar-chart-x-axis-label': {
       fontSize: 1,
       fill: 'annotation',

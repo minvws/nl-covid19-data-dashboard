@@ -1,11 +1,10 @@
 /**
- * This component can be used to relay text that is visually hidden,
+ * This component can be used to relay content that is visually hidden,
  * and can be used to provide context or labels to screen readers.
  */
 
 import css from '@styled-system/css';
 import { ReactNode } from 'react';
-import { Text } from './typography';
 
 interface VisuallyHiddenProps {
   children: ReactNode;
@@ -13,7 +12,7 @@ interface VisuallyHiddenProps {
 
 export function VisuallyHidden({ children }: VisuallyHiddenProps) {
   return (
-    <Text
+    <div
       css={css({
         position: 'absolute',
         overflow: 'hidden',
@@ -26,6 +25,6 @@ export function VisuallyHidden({ children }: VisuallyHiddenProps) {
       })}
     >
       {children}
-    </Text>
+    </div>
   );
 }
