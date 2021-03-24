@@ -1992,7 +1992,7 @@
       "verpleeghuiszorg_overleden_getest": "This graph shows the number of deceased confirmed cases among nursing home residents.",
       "gehandicaptenzorg_positief_getest": "This graph shows the number of confirmed cases in disability care homes.",
       "gehandicaptenzorg_besmette_locaties": "This graph shows the progression of the number of infected disability care homes over time.",
-      "gehandicaptenzorg_overleden": "This graph shows the progression of the number of deceased disability care home residents over time.",
+      "gehandicaptenzorg_overleden": "This graph shows the progression of the number of deceased disability care home residents over time. ",
       "thuiswonende_ouderen_besmettingen": "This graph shows the progression over time in daily confirmed cases among over-70s living at home.",
       "thuiswonende_ouderen_overleden": "This graph shows the progression over time in the number of COVID-19 deaths among over-70s living at home.",
       "rioolwater_virusdeeltjes": "This graph shows the progression over time in the average amount of virus particles in waste water, per 100,000 residents.",
