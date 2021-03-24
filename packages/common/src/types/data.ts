@@ -742,7 +742,7 @@ export interface Regionaal {
   escalation_level: VrEscalationLevel;
   tested_overall_sum: VrTestedOverallSum;
   hospital_nice_sum: VrHospitalNiceSum;
-  vaccine_coverage: VrVaccineCoverage;
+  vaccine_coverage?: VrVaccineCoverage;
 }
 export interface RegionalDifference {
   tested_overall__infected_per_100k: DifferenceDecimal;
