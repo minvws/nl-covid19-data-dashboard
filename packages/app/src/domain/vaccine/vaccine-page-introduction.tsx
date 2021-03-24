@@ -56,6 +56,15 @@ export function VaccinePageIntroduction({
             <TwoKpiSection spacing={4}>
               <Box as="article" spacing={3}>
                 <Heading level={3}>
+                  {text.grafiek_gezette_prikken.titel}
+                </Heading>
+                <Text m={0}>{text.grafiek_gezette_prikken.omschrijving}</Text>
+                <VaccineAdministrationsOverTimeChart
+                  values={data.vaccine_administered_total.values}
+                />
+              </Box>
+              <Box as="article" spacing={3}>
+                <Heading level={3}>
                   {text.kpi_geplande_prikken_deze_week.titel}
                 </Heading>
                 <KpiValue
@@ -99,15 +108,6 @@ export function VaccinePageIntroduction({
                     );
                   })()}
                 </Text>
-              </Box>
-              <Box as="article" spacing={3}>
-                <Heading level={3}>
-                  {text.grafiek_gezette_prikken.titel}
-                </Heading>
-                <Text m={0}>{text.grafiek_gezette_prikken.omschrijving}</Text>
-                <VaccineAdministrationsOverTimeChart
-                  values={data.vaccine_administered_total.values}
-                />
               </Box>
             </TwoKpiSection>
 
