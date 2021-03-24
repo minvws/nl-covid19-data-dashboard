@@ -51,8 +51,8 @@ export default {
   ],
   preview: {
     select: {
-      title: 'description',
-      subtitle: 'value.nl',
+      title: 'key',
+      subtitle: 'translations.default',
     },
   },
 };
