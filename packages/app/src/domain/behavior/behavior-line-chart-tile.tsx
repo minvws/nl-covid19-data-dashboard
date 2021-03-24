@@ -11,7 +11,6 @@ import { Select } from '~/components-styled/select';
 import { Tile } from '~/components-styled/tile';
 import { TimeSeriesChart } from '~/components-styled/time-series-chart';
 import { Heading } from '~/components-styled/typography';
-import siteText from '~/locale/index';
 import { colors } from '~/style/theme';
 import {
   BehaviorIdentifier,
@@ -19,6 +18,7 @@ import {
   BehaviorType,
 } from './behavior-types';
 import { BehaviorTypeControl } from './components/behavior-type-control';
+import { useIntl } from '~/intl';
 
 interface BehaviorLineChartTileProps {
   values: NationalBehaviorValue[] | RegionalBehaviorValue[];
@@ -31,6 +31,8 @@ export function BehaviorLineChartTile({
   introduction,
   values,
 }: BehaviorLineChartTileProps) {
+  const { siteText } = useIntl();
+
   const [type, setType] = useState<BehaviorType>('compliance');
   const [currentId, setCurrentId] = useState<BehaviorIdentifier>('wash_hands');
   const selectedValueKey = `${currentId}_${type}` as keyof NationalBehaviorValue;
@@ -95,7 +97,7 @@ export function BehaviorLineChartTile({
       <Spacer mb={3} />
 
       <TimeSeriesChart
-        title={
+        tooltipTitle={
           type === 'compliance'
             ? siteText.gedrag_common.compliance
             : siteText.gedrag_common.support

@@ -22,19 +22,12 @@ import {
 } from '~/components-styled/line-chart/components';
 import { Text } from '~/components-styled/typography';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
-import text from '~/locale/index';
 import { colors } from '~/style/theme';
-import {
-  formatDateFromMilliseconds,
-  formatDateFromSeconds,
-} from '~/utils/formatDate';
-import { formatNumber, formatPercentage } from '~/utils/formatNumber';
+import { useIntl } from '~/intl';
 import { TimeframeOption } from '~/utils/timeframe';
+import { useElementSize } from '~/utils/use-element-size';
 import { HoverPoint, Marker, Tooltip, Trend } from './components';
 import { calculateYMax, getTrendData, TrendValue } from './logic';
-
-const formatYAxisFn = (y: number) => formatNumber(y);
-const formatYAxisPercentageFn = (y: number) => `${formatPercentage(y)}%`;
 
 export type LineConfig<T extends TimestampedValue> = {
   metricProperty: keyof T;
@@ -50,7 +43,7 @@ export type LineConfig<T extends TimestampedValue> = {
 export type LineChartProps<T extends TimestampedValue> = {
   values: T[];
   linesConfig: LineConfig<T>[];
-  width?: number;
+  initialWidth?: number;
   height?: number;
   timeframe?: TimeframeOption;
   signaalwaarde?: number;
@@ -73,7 +66,7 @@ export type LineChartProps<T extends TimestampedValue> = {
 export function LineChart<T extends TimestampedValue>({
   values,
   linesConfig,
-  width = 500,
+  initialWidth = 850,
   height = 250,
   /**
    * @TODO This is a weird default. The chart should show "all" by default
@@ -110,6 +103,23 @@ export function LineChart<T extends TimestampedValue>({
     hideTooltip,
   } = useTooltip<T & TrendValue>();
 
+  const [sizeRef, { width }] = useElementSize<HTMLDivElement>(initialWidth);
+  const { formatNumber, formatPercentage, siteText: text } = useIntl();
+
+  const formatYAxisFn = useCallback(
+    (y: number) => {
+      return formatNumber(y);
+    },
+    [formatNumber]
+  );
+
+  const formatYAxisPercentageFn = useCallback(
+    (y: number) => {
+      return `${formatPercentage(y)}%`;
+    },
+    [formatPercentage]
+  );
+
   const metricProperties = useMemo(
     () => linesConfig.map((x) => x.metricProperty),
     [linesConfig]
@@ -118,9 +128,9 @@ export function LineChart<T extends TimestampedValue>({
   const benchmark = useMemo(
     () =>
       signaalwaarde
-        ? { value: signaalwaarde, label: text.common.barScale.signaalwaarde }
+        ? { value: signaalwaarde, label: text.common.signaalwaarde }
         : undefined,
-    [signaalwaarde]
+    [signaalwaarde, text.common.signaalwaarde]
   );
 
   const trendsList = useMemo(
@@ -317,7 +327,7 @@ export function LineChart<T extends TimestampedValue>({
         <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
       )}
 
-      <Box position="relative">
+      <Box position="relative" ref={sizeRef}>
         <ChartAxes
           padding={padding}
           height={height}
@@ -346,9 +356,14 @@ export function LineChart<T extends TimestampedValue>({
             x={tooltipLeft + padding.left}
             y={tooltipTop + padding.top}
           >
-            {formatTooltip
-              ? formatTooltip(tooltipData)
-              : formatDefaultTooltip(tooltipData, isPercentage)}
+            {formatTooltip ? (
+              formatTooltip(tooltipData)
+            ) : (
+              <DefaultTooltip
+                values={tooltipData}
+                isPercentage={isPercentage}
+              />
+            )}
           </Tooltip>
         )}
 
@@ -384,11 +399,21 @@ export function LineChart<T extends TimestampedValue>({
   );
 }
 
-function formatDefaultTooltip<T extends TimestampedValue>(
-  values: (T & TrendValue)[],
-  isPercentage?: boolean
-) {
+function DefaultTooltip<T extends TimestampedValue>({
+  values,
+  isPercentage,
+}: {
+  values: (T & TrendValue)[];
+  isPercentage?: boolean;
+}) {
   // default tooltip assumes one line is rendered:
+
+  const {
+    formatDateFromMilliseconds,
+    formatDateFromSeconds,
+    formatPercentage,
+    formatNumber,
+  } = useIntl();
 
   if (isDateSeries(values)) {
     const value = values[0];

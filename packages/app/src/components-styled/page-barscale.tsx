@@ -6,7 +6,6 @@ import {
 import { get } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { BarScale } from '~/components-styled/bar-scale';
-import siteText, { Locale } from '~/locale/index';
 import { assert } from '~/utils/assert';
 import {
   DataScope,
@@ -15,6 +14,8 @@ import {
 } from '../metric-config';
 import { Box } from './base';
 import { DifferenceIndicator } from './difference-indicator';
+import { useIntl } from '~/intl';
+import { NlLocale } from '~/locale';
 
 /**
  * This component originated from SidebarBarScale, but is used on pages and
@@ -25,7 +26,7 @@ import { DifferenceIndicator } from './difference-indicator';
 interface PageBarScaleProps<T> {
   scope: DataScope;
   data: T;
-  localeTextKey: keyof Locale;
+  localeTextKey: keyof NlLocale;
   metricName: MetricKeys<T>;
   metricProperty: string;
   differenceKey?: string;
@@ -43,6 +44,8 @@ export function PageBarScale<T>({
   differenceStaticTimespan,
   differenceFractionDigits,
 }: PageBarScaleProps<T>) {
+  const { siteText } = useIntl();
+
   const text = siteText[localeTextKey] as Record<string, string>;
 
   /**
@@ -130,7 +133,7 @@ export function PageBarScale<T>({
           value={differenceValue}
           isDecimal={config.isDecimal}
           staticTimespan={differenceStaticTimespan}
-          differenceFractionDigits={differenceFractionDigits}
+          maximumFractionDigits={differenceFractionDigits}
         />
       )}
     </Box>

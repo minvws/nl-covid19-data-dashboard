@@ -59,7 +59,11 @@ function calculateMaximumLabelLength(labels: string[], fontSize: string) {
 
     return length;
   }
-  return longestLabel.length;
+
+  /**
+   * Multiply to give SSR y-axis enough space
+   */
+  return longestLabel.length * 4;
 }
 
 export function useBarChartCoordinates(

@@ -6,12 +6,11 @@ import { Box } from '~/components-styled/base';
 import { Tile } from '~/components-styled/tile';
 import { PercentageBar } from '~/components-styled/percentage-bar';
 import { Heading } from '~/components-styled/typography';
-import siteText from '~/locale/index';
+import { useIntl } from '~/intl';
 import {
   NationalBehaviorValue,
   RegionalBehaviorValue,
 } from '@corona-dashboard/common';
-import { formatPercentage } from '~/utils/formatNumber';
 import {
   BehaviorIdentifier,
   behaviorIdentifiers,
@@ -21,8 +20,6 @@ import {
 import { BehaviorIcon } from './components/behavior-icon';
 import { BehaviorTrend } from './components/behavior-trend';
 import { BehaviorTypeControl } from './components/behavior-type-control';
-
-const commonText = siteText.gedrag_common;
 
 type BehaviorValue = NationalBehaviorValue | RegionalBehaviorValue;
 
@@ -60,10 +57,12 @@ const Cell = styled.td((x) =>
 );
 
 /* Format raw list of behaviors into list for compliance or for support */
-function formatBehaviorType(
+function useFormatBehaviorType(
   behavior: BehaviorValue,
   type: BehaviorType
 ): BehaviorFormatted[] {
+  const { siteText } = useIntl();
+
   return behaviorIdentifiers
     .map((identifier) => {
       const percentage = behavior[
@@ -109,14 +108,14 @@ function sortBehavior(
   return { sortedCompliance, sortedSupport };
 }
 
-function formatAndSortBehavior(
+function useFormatAndSortBehavior(
   behavior: BehaviorValue
 ): {
   sortedCompliance: BehaviorFormatted[];
   sortedSupport: BehaviorFormatted[];
 } {
-  const compliance = formatBehaviorType(behavior, 'compliance');
-  const support = formatBehaviorType(behavior, 'support');
+  const compliance = useFormatBehaviorType(behavior, 'compliance');
+  const support = useFormatBehaviorType(behavior, 'support');
 
   return sortBehavior(compliance, support);
 }
@@ -128,8 +127,13 @@ export function BehaviorTableTile({
   footer,
   footerAsterisk,
 }: BehaviorTileProps) {
-  const { sortedCompliance, sortedSupport } = formatAndSortBehavior(behavior);
+  const { sortedCompliance, sortedSupport } = useFormatAndSortBehavior(
+    behavior
+  );
   const [behaviorType, setBehaviorType] = useState<BehaviorType>('compliance');
+
+  const { siteText, formatPercentage } = useIntl();
+  const commonText = siteText.gedrag_common;
 
   return (
     <Tile>

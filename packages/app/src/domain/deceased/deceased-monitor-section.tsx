@@ -5,10 +5,8 @@ import {
 import { AnchorTile } from '~/components-styled/anchor-tile';
 import { ChartTile } from '~/components-styled/chart-tile';
 import { TimeSeriesChart } from '~/components-styled/time-series-chart';
-import siteText from '~/locale/index';
+import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
-
-const text = siteText.section_sterftemonitor;
 
 export function DeceasedMonitorSection({
   data,
@@ -17,6 +15,9 @@ export function DeceasedMonitorSection({
   data: NationalDeceasedCbs | RegionalDeceasedCbs;
   showDataMessage?: boolean;
 }) {
+  const { siteText } = useIntl();
+  const text = siteText.section_sterftemonitor;
+
   return (
     <>
       {showDataMessage && (
@@ -36,7 +37,7 @@ export function DeceasedMonitorSection({
         description={text.deceased_monitor_chart_description}
       >
         <TimeSeriesChart
-          title={text.deceased_monitor_chart_title}
+          tooltipTitle={text.deceased_monitor_chart_title}
           values={data.values}
           ariaLabelledBy=""
           seriesConfig={[

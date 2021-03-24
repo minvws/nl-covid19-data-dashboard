@@ -1,7 +1,7 @@
 import React from 'react';
 import { Callback, createContext, Options } from './hotkey';
 
-type OptionsWithDisabled = Options & { disabled?: boolean };
+type OptionsWithDisabled = Options & { isDisabled?: boolean };
 
 export function useHotkey(
   hotkey: string | string[],
@@ -27,14 +27,14 @@ export function useHotkey(
      * We'll parse the serialized arguments to recreate the argument objects.
      */
     const hotkeyParsed: string | string[] = JSON.parse(hotkeySerialized);
-    const { disabled, ...options }: OptionsWithDisabled = JSON.parse(
+    const { isDisabled, ...options }: OptionsWithDisabled = JSON.parse(
       optionsSerialized
     );
 
     hotkeyContextRef.current?.destroy();
     hotkeyContextRef.current = undefined;
 
-    if (!disabled) {
+    if (!isDisabled) {
       const hotkeyContext = createContext(options);
       hotkeyContextRef.current = hotkeyContext;
 

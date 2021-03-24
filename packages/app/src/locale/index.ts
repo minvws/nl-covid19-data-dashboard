@@ -1,17 +1,19 @@
-import localefile from './APP_LOCALE';
+import nl from './nl.json';
+import en from './en.json';
 
-export type Locale = typeof localefile;
+export type NlLocale = typeof nl;
+export type EnLocale = typeof en;
 
 export type Languages = {
-  nl: Locale;
-  en: Locale;
+  nl: NlLocale;
+  en: EnLocale;
 };
+
+export type AllLanguages = NlLocale | EnLocale;
 
 export type LanguageKey = keyof Languages;
 
-export const targetLanguage: LanguageKey =
-  (process.env.NEXT_PUBLIC_LOCALE as LanguageKey) || 'nl';
-
-const dictionary: Locale = localefile;
-
-export default dictionary;
+export const languages = {
+  nl,
+  en,
+};
