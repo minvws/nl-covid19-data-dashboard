@@ -13,7 +13,7 @@ export function MunicipalityComboBox() {
     <ComboBox
       placeholder={siteText.common.zoekveld_placeholder_gemeente}
       options={municipalities}
-      onSelect={({ gemcode }) => router.push(reverseRouter.vr.index(gemcode))}
+      onSelect={({ gemcode }) => router.push(reverseRouter.gm.index(gemcode))}
     />
   );
 }
