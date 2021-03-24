@@ -12,7 +12,7 @@
       "additionalProperties": false,
       "properties": {
         "total": {
-          "type": "number"
+          "type": "integer"
         },
         "date_of_insertion_unix": {
           "type": "integer"
@@ -27,7 +27,7 @@
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_vaccine_estimate_delivery",
+  "title": "nl_vaccine_delivery_estimate",
   "type": "object",
   "required": ["values", "last_value"],
   "additionalProperties": false,

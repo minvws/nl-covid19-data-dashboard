@@ -73,7 +73,7 @@
     "pagina_toelichting": "Aantal mensen met COVID-19 dat per dag op de intensive care (IC) is opgenomen, direct of vanaf de verpleegafdeling in een ziekenhuis. Om dubbel tellen te voorkomen wordt alleen de eerste IC opname van een patient meegeteld. Een opname op de IC zegt iets over de ernst van het ziektebeloop en is daarom belangrijk om de ontwikkeling van de epidemie goed te monitoren.",
     "barscale_titel": "Intensive care-opnames per dag",
     "barscale_screenreader_text": "{{value}} intensive care-opnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
-    "extra_uitleg": "Aantal mensen met bevestigd COVID-19 dat per dag op een intensive care-afdeling van een ziekenhuis is opgenomen. Dit cijfer is een gemiddelde van de afgelopen drie dagen.\n\nLet op: Hoewel ziekenhuizen proberen om COVID-19 patiënten snel te registreren, is het aannemelijk dat de registratie achter loopt. Om deze reden zijn de aantallen van de afgelopen dagen meestal nog niet compleet.",
+    "extra_uitleg": "Aantal mensen met bevestigd COVID-19 dat per dag op een intensive care-afdeling van een ziekenhuis is opgenomen. Dit cijfer laat het aantal IC-opnames zien dat op één dag gemeld is. Dit kunnen ook meldingen zijn van opnames van eerdere dagen.\n\nLet op: Hoewel ziekenhuizen proberen om COVID-19 patiënten snel te registreren, is het aannemelijk dat de registratie achter loopt. Om deze reden zijn de aantallen van de afgelopen dagen meestal nog niet compleet.",
     "linechart_titel": "Intensive care-opnames door de tijd heen",
     "bronnen": {
       "nice": {
@@ -89,7 +89,7 @@
     },
     "kpi_bedbezetting": {
       "title": "IC-bedden bezet door patiënten met COVID-19",
-      "description": "Dit getal laat zien hoeveel IC-bedden bezet worden door patiënten met COVID-19. Het percentage geeft aan hoeveel dit is ten opzichte van alle bezette IC-bedden. Dit zegt dus niet iets over de maximale IC capaciteit."
+      "description": "Dit getal laat zien hoeveel IC-bedden bezet worden door patiënten met COVID-19. Het percentage geeft aan hoeveel dit is ten opzichte van alle bezette IC-bedden. Dit zegt dus niet iets over de maximale IC-capaciteit."
     },
     "chart_bedbezetting": {
       "title": "Bezetting IC-bedden door de tijd heen",
@@ -102,14 +102,15 @@
       "description": "Landelijk overzicht van het aantal mensen met bevestigd COVID-19 dat per dag op een intensive care-afdeling van een ziekenhuis is opgenomen."
     },
     "titel_sidebar": "Intensive care-opnames",
-    "titel_kpi": "Gemiddeld aantal intensive care-opnames over 3 dagen",
+    "titel_kpi": "Het aantal IC-opnames dat op één dag gemeld is",
     "reference": {
       "href": "/verantwoording#intensive-care",
       "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     },
-    "kpi_titel": "Gemiddeld aantal intensive care-opnames over 3 dagen",
+    "kpi_titel": "Het aantal IC-opnames dat op één dag gemeld is",
     "linechart_legend_trend_label": "Intensive care-opnames",
-    "linechart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
+    "linechart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+    "linechart_description": "In deze grafiek staan de IC-opnames vermeld op de dag dat mensen ook echt zijn opgenomen, in plaats van op de dag dat ze gemeld zijn. Zo kunnen we namelijk de ontwikkeling van het coronavirus in Nederland goed zien. Let op: omdat het aanmelden van IC-opnames vaak een paar dagen later gebeurt, zijn de meest recente dagen nooit compleet en kan het lijken alsof het aantal IC-opnames afneemt terwijl dit niet zo is."
   },
   "verdenkingen_huisartsen": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
@@ -195,7 +196,7 @@
       "legend_trend_label": "Bezetting gewone ziekenhuisbedden",
       "legend_inaccurate_label": "Cijfers zijn minder nauwkeurig"
     },
-    "linechart_description": "In deze grafiek staan de ziekenhuisopnames (inclusief directe IC opnames) vermeld op de dag dat mensen ook echt zijn opgenomen, in plaats van op de dag dat ze gemeld zijn. Zo kunnen we namelijk de ontwikkeling van het coronavirus in Nederland goed zien. Let op: omdat het aanmelden van ziekenhuisopnames vaak een paar dagen later gebeurt, zijn de meest recente dagen nooit compleet en kan het lijken alsof het aantal ziekenhuisopnames afneemt terwijl dit niet zo is.",
+    "linechart_description": "In deze grafiek staan de ziekenhuisopnames (inclusief directe IC-opnames) vermeld op de dag dat mensen ook echt zijn opgenomen, in plaats van op de dag dat ze gemeld zijn. Zo kunnen we namelijk de ontwikkeling van het coronavirus in Nederland goed zien. Let op: omdat het aanmelden van ziekenhuisopnames vaak een paar dagen later gebeurt, zijn de meest recente dagen nooit compleet en kan het lijken alsof het aantal ziekenhuisopnames afneemt terwijl dit niet zo is.",
     "metadata": {
       "title": "Ziekenhuisopnames | Coronadashboard | Rijksoverheid.nl",
       "description": "Landelijk overzicht van het aantal mensen met COVID-19 dat een ziekenhuis is opgenomen."
@@ -264,6 +265,12 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
         "text": "RIVM"
       }
+    },
+    "tooltip_labels": {
+      "infected_per_100k": "Positief getest per 100.000",
+      "infected_percentage": "Percentage positieve testen",
+      "tested_total": "Totaal aantal testen",
+      "infected": "Aantal positieve testen"
     }
   },
   "besmettelijke_personen": {
@@ -662,7 +669,9 @@
     "read_more": "Lees meer",
     "absolute_date_template": "op {{date}}",
     "inwoners": "inwoners",
-    "miljoen": "miljoen"
+    "miljoen": "miljoen",
+    "signaalwaarde": "Signaalwaarde",
+    "totaal": "Totaal"
   },
   "seoHead": {
     "default_description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
@@ -720,7 +729,7 @@
     "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
     "screen_reader_graph_content": "{{value}} opnames.",
     "barscale_titel": "Gemeld aantal ziekenhuisopnames per dag",
-    "extra_uitleg": "Aantal mensen uit deze veiligheidsregio met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer laat het aantal ziekenhuisopnames - inclusief directe IC opnames - zien dat op één dag gemeld is. Dit kunnen ook meldingen zijn van opnames van eerdere dagen. Patiënten kunnen in een ziekenhuis elders in Nederland zijn opgenomen.",
+    "extra_uitleg": "Aantal mensen uit deze veiligheidsregio met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer laat het aantal ziekenhuisopnames - inclusief directe IC-opnames - zien dat op één dag gemeld is. Dit kunnen ook meldingen zijn van opnames van eerdere dagen. Patiënten kunnen in een ziekenhuis elders in Nederland zijn opgenomen.",
     "map_titel": "Verdeling ziekenhuisopnames in {{safetyRegion}}",
     "map_toelichting": "Deze kaart laat zien in welke gemeenten of veiligheidsregio’s patiënten wonen die met COVID-19 in het ziekenhuis zijn opgenomen. Patiënten kunnen ook in een ziekenhuis in een ander deel van Nederland worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE.",
     "linechart_titel": "Ziekenhuisopnames door de tijd heen, op datum van opname",
@@ -729,7 +738,7 @@
       "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
       "text": "NICE via RIVM"
     },
-    "linechart_description": "In deze grafiek staan de ziekenhuisopnames (inclusief directe IC opnames) vermeld op de dag dat mensen ook echt zijn opgenomen, in plaats van op de dag dat ze gemeld zijn. Zo kunnen we namelijk de ontwikkeling van het coronavirus in Nederland goed zien. Let op: omdat het aanmelden van ziekenhuisopnames vaak een paar dagen later gebeurt, zijn de meest recente dagen nooit compleet en kan het lijken alsof het aantal ziekenhuisopnames afneemt terwijl dit niet zo is.",
+    "linechart_description": "In deze grafiek staan de ziekenhuisopnames (inclusief directe IC-opnames) vermeld op de dag dat mensen ook echt zijn opgenomen, in plaats van op de dag dat ze gemeld zijn. Zo kunnen we namelijk de ontwikkeling van het coronavirus in Nederland goed zien. Let op: omdat het aanmelden van ziekenhuisopnames vaak een paar dagen later gebeurt, zijn de meest recente dagen nooit compleet en kan het lijken alsof het aantal ziekenhuisopnames afneemt terwijl dit niet zo is.",
     "metadata": {
       "title": "Ziekenhuisopnames inwoners {{safetyRegionName}} | Coronadashboard | Rijksoverheid.nl",
       "description": "Overzicht van het aantal mensen in de veiligheidsregio {{safetyRegionName}} die met COVID-19 in het ziekenhuis zijn opgenomen."
@@ -855,7 +864,7 @@
     "datums": "Berekend: {{dateOfReport}}. Wordt dagelijks bijgewerkt.",
     "screen_reader_graph_content": "{{value}} opnames.",
     "barscale_titel": "Gemeld aantal ziekenhuisopnames per dag",
-    "extra_uitleg": "Aantal mensen uit deze gemeente met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer laat het aantal ziekenhuisopnames - inclusief directe IC opnames - zien dat op één dag gemeld is. Dit kunnen ook meldingen zijn van opnames van eerdere dagen. Patiënten kunnen in een ziekenhuis elders in Nederland zijn opgenomen.",
+    "extra_uitleg": "Aantal mensen uit deze gemeente met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer laat het aantal ziekenhuisopnames - inclusief directe IC-opnames - zien dat op één dag gemeld is. Dit kunnen ook meldingen zijn van opnames van eerdere dagen. Patiënten kunnen in een ziekenhuis elders in Nederland zijn opgenomen.",
     "map_titel": "Verdeling ziekenhuisopnames in veiligheidsregio van {{municipality}}",
     "map_toelichting": "Deze kaart laat zien in welke gemeenten of veiligheidsregio’s patiënten wonen die met COVID-19 in het ziekenhuis zijn opgenomen. Patiënten kunnen ook in een ziekenhuis in een ander deel van Nederland worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE.",
     "linechart_titel": "Ziekenhuisopnames door de tijd heen, op datum van opname",
@@ -864,7 +873,7 @@
       "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
       "text": "NICE via RIVM"
     },
-    "linechart_description": "In deze grafiek staan de ziekenhuisopnames (inclusief directe IC opnames) vermeld op de dag dat mensen ook echt zijn opgenomen, in plaats van op de dag dat ze gemeld zijn. Zo kunnen we namelijk de ontwikkeling van het coronavirus in Nederland goed zien. Let op: omdat het aanmelden van ziekenhuisopnames vaak een paar dagen later gebeurt, zijn de meest recente dagen nooit compleet en kan het lijken alsof het aantal ziekenhuisopnames afneemt terwijl dit niet zo is.",
+    "linechart_description": "In deze grafiek staan de ziekenhuisopnames (inclusief directe IC-opnames) vermeld op de dag dat mensen ook echt zijn opgenomen, in plaats van op de dag dat ze gemeld zijn. Zo kunnen we namelijk de ontwikkeling van het coronavirus in Nederland goed zien. Let op: omdat het aanmelden van ziekenhuisopnames vaak een paar dagen later gebeurt, zijn de meest recente dagen nooit compleet en kan het lijken alsof het aantal ziekenhuisopnames afneemt terwijl dit niet zo is.",
     "metadata": {
       "title": "Ziekenhuisopnames inwoners {{municipalityName}} | Coronadashboard | Rijksoverheid.nl",
       "description": "Overzicht van het aantal mensen in de gemeente {{municipalityName}} die met COVID-19 in het ziekenhuis zijn opgenomen."
@@ -1072,7 +1081,7 @@
     "linechart_percentage_titel": "Percentage positieve testen door de tijd heen",
     "linechart_percentage_toelichting": "Deze grafiek laat het dagelijks percentage GGD-testen zien met een positieve uitslag, ten opzichte van alle GGD-testen van die dag waarvan de uitslag bekend is. De gegevens zijn gesorteerd op de datum waarop de test bij de GGD plaatsvond. Het duurt gemiddeld één tot twee dagen voordat testuitslagen bekend zijn.",
     "linechart_totaltests_titel": "Aantal testen door de tijd heen",
-    "linechart_totaltests_toelichting": "Deze grafiek laat het dagelijks aantal bekende testuitslagen in de GGD-teststraten over tijd zien, en hoeveel daarvan een positieve uitslag hebben. De gegevens zijn gesorteerd op de datum waarop de test bij de GGD plaatsvond. Het duurt gemiddeld één tot twee dagen voordat testuitslagen bekend zijn.",
+    "linechart_totaltests_toelichting": "Deze grafiek laat het dagelijks aantal bekende testuitslagen in de GGD-teststraten door de tijd heen zien, en hoeveel daarvan een positieve uitslag hebben. De gegevens zijn gesorteerd op de datum waarop de test bij de GGD plaatsvond. Het duurt gemiddeld één tot twee dagen voordat testuitslagen bekend zijn.",
     "linechart_totaltests_legend_label": "GGD-testen waarvan uitslag bekend is",
     "linechart_positivetests_legend_label": "GGD-testen met een positieve uitslag",
     "reference": {
@@ -1111,7 +1120,7 @@
     "linechart_percentage_titel": "Percentage positieve testen door de tijd heen",
     "linechart_percentage_toelichting": "Deze grafiek laat het dagelijks percentage GGD-testen zien met een positieve uitslag, ten opzichte van alle GGD-testen van die dag waarvan de uitslag bekend is. De gegevens zijn gesorteerd op de datum waarop de test bij de GGD plaatsvond. Het duurt gemiddeld één tot twee dagen voordat testuitslagen bekend zijn.",
     "linechart_totaltests_titel": "Aantal testen door de tijd heen",
-    "linechart_totaltests_toelichting": "Deze grafiek laat het dagelijks aantal bekende testuitslagen in de GGD-teststraten over tijd zien, en hoeveel daarvan een positieve uitslag hebben. De gegevens zijn gesorteerd op de datum waarop de test bij de GGD plaatsvond. Het duurt gemiddeld één tot twee dagen voordat testuitslagen bekend zijn.",
+    "linechart_totaltests_toelichting": "Deze grafiek laat het dagelijks aantal bekende testuitslagen in de GGD-teststraten door de tijd heen zien, en hoeveel daarvan een positieve uitslag hebben. De gegevens zijn gesorteerd op de datum waarop de test bij de GGD plaatsvond. Het duurt gemiddeld één tot twee dagen voordat testuitslagen bekend zijn.",
     "linechart_totaltests_legend_label": "GGD-testen waarvan uitslag bekend is",
     "linechart_positivetests_legend_label": "GGD-testen met een positieve uitslag",
     "reference": {
@@ -1980,6 +1989,9 @@
         "sentence": "{{count}} {{area}} tussen de {{rangeLow}} en {{rangeHigh}} procent draagvlak {{verb}} voor de maatregel '{{restriction}}'",
         "last_sentence": "{{count}} {{area}} meer dan {{rangeLow}} procent draagvlak {{verb}} voor de maatregel '{{restriction}}'"
       }
+    },
+    "a11y": {
+      "tab_navigatie_button": "'Navigeer met Tab door alle {{subject}}"
     }
   },
   "accessibility": {
@@ -2067,6 +2079,16 @@
       "all_right": {
         "href": "",
         "text": "Ministerie van VWS",
+        "download": ""
+      },
+      "stock": {
+        "href": "",
+        "text": "",
+        "download": ""
+      },
+      "delivery_estimate_time_span": {
+        "href": "",
+        "text": "",
         "download": ""
       }
     },
@@ -2310,6 +2332,19 @@
         "href": "/",
         "text": "Voorraad & Levering"
       }
+    },
+    "stock": {
+      "title": "Vaccins in voorraad",
+      "description": "Dit getal laat zien hoeveel vaccins het RIVM op voorraad heeft. Een beschikbare voorraad van vijf dagen betekent bijvoorbeeld dat er genoeg vaccins klaar liggen in de opslag voor de mensen die in de vijf dagen daarna worden geprikt, ook als er onverwacht geen nieuwe vaccins worden geleverd.",
+      "per_vaccine": "{{amount}} {{label}} prikken"
+    },
+    "delivery_estimate_time_span": {
+      "title": "Vaccins in voorraad: Dit is voldoende om {{weeks}} weken mee te prikken.",
+      "description": "Dit getal laat zien hoeveel vaccins het RIVM op voorraad heeft. Een beschikbare voorraad van vijf dagen betekent bijvoorbeeld dat er genoeg vaccins klaar liggen in de opslag voor de mensen die in de vijf dagen daarna worden geprikt, ook als er onverwacht geen nieuwe vaccins worden geleverd."
+    },
+    "grafiek_leveringen": {
+      "titel": "Leveringen t/m week {{weekNumber}}",
+      "omschrijving": "Iets over deze grafiek"
     }
   },
   "editorial_detail": {
@@ -2417,7 +2452,7 @@
       },
       "intake_intensivecare_ma": {
         "value": {
-          "zero": "{{newDate}} zijn er geen nieuwe ic opnames gemeld.",
+          "zero": "{{newDate}} zijn er geen nieuwe IC-opnames gemeld.",
           "singular": "{{newDate}} is {{propertyValue}} nieuwe ic opname gemeld.",
           "plural": "{{newDate}} zijn {{propertyValue}} nieuwe intensive care-opnames gemeld."
         },
@@ -2514,9 +2549,9 @@
       },
       "intake_intensivecare_ma": {
         "value": {
-          "zero": "{{newDate}} zijn er geen intensive care opnames gemeld.",
+          "zero": "{{newDate}} zijn er geen intensive care-opnames gemeld.",
           "singular": "{{newDate}} is er {{propertyValue}} intensive care opname gemeld.",
-          "plural": "{{newDate}} zijn er {{propertyValue}} intensive care opnames gemeld."
+          "plural": "{{newDate}} zijn er {{propertyValue}} intensive care-opnames gemeld."
         },
         "difference": {
           "zero": "Dit is hetzelfde als {{relativeOldDate}}.",

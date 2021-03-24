@@ -10,10 +10,10 @@ import styled from 'styled-components';
 import { Box } from '~/components-styled/base';
 import { Text } from '~/components-styled/typography';
 import { colors } from '~/style/theme';
-import { formatPercentage } from '~/utils/formatNumber';
 import { AgeDemographicCoordinates } from './age-demographic-coordinates';
 import { AgeDemographicChartText, AgeDemographicDefaultValue } from './types';
 import { formatAgeGroupRange } from './utils';
+import { useIntl } from '~/intl';
 
 export const AGE_GROUP_TOOLTIP_WIDTH = 340;
 
@@ -72,6 +72,8 @@ function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
     ageGroupRange,
   } = coordinates;
 
+  const { formatPercentage } = useIntl();
+
   const hasClippedValue = !!values.find(
     (value) =>
       getIsClipped(value.age_group_percentage, displayMaxPercentage) ||
@@ -85,13 +87,14 @@ function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
     <Box>
       <svg
         width={width}
-        height={height}
+        viewBox={`0 0 ${width} ${height}`}
         role="img"
         id="age-demographic-chart"
         aria-label={text.accessibility_description}
         tabIndex={0}
         onKeyUp={(event) => onKeyInput(event)}
         css={css({
+          width: '100%',
           overflow: 'visible',
           '&:focus': {
             outline: 'none',

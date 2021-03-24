@@ -44,6 +44,9 @@
     "difference": {
       "$ref": "__difference.json"
     },
+    "g_number": {
+      "$ref": "g_number.json"
+    },
     "sewer": {
       "$ref": "sewer.json"
     },
@@ -88,6 +91,9 @@
     },
     "hospital_nice_sum": {
       "$ref": "hospital_nice_sum.json"
+    },
+    "vaccine_coverage": {
+      "$ref": "vaccine_coverage.json"
     }
   }
 }

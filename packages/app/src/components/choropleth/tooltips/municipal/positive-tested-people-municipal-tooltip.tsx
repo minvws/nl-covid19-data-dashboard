@@ -1,36 +1,34 @@
 import {
-  ChoroplethThresholdsValue,
   MunicipalitiesTestedOverall,
   MunicipalityProperties,
 } from '@corona-dashboard/common';
-import { ReactNode } from 'react';
 import { InlineText, Text } from '~/components-styled/typography';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
 import { TooltipSubject } from '~/components/choropleth/tooltips/tooltip-subject';
-import siteText from '~/locale/index';
-import { formatNumber, formatPercentage } from '~/utils/formatNumber';
+import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { MunicipalitySelectionHandler } from '../../select-handlers/create-select-municipal-handler';
-const text = siteText.common.tooltip;
+import { useReverseRouter } from '~/utils/use-reverse-router';
+import { municipalThresholds } from '../../municipal-thresholds';
 
-export const createPositiveTestedPeopleMunicipalTooltip = (
-  subject: string,
-  thresholdValues: ChoroplethThresholdsValue[],
-  selectHandler?: MunicipalitySelectionHandler
-) => (
-  context: MunicipalityProperties & MunicipalitiesTestedOverall
-): ReactNode => {
+export function PositiveTestedPeopleMunicipalTooltip({
+  context,
+}: {
+  context: MunicipalityProperties & MunicipalitiesTestedOverall;
+}) {
+  const { siteText, formatNumber, formatPercentage } = useIntl();
+  const reverseRouter = useReverseRouter();
+  const text = siteText.common.tooltip;
+
+  const subject = siteText.choropleth_tooltip.positive_tested_people;
+  const thresholdValues = municipalThresholds.tested_overall.infected_per_100k;
+
   const { gemnaam, infected_per_100k, infected } = context;
 
-  const onSelect = (event: any) => {
-    event.stopPropagation();
-    if (selectHandler) {
-      selectHandler(context.gmcode);
-    }
-  };
-
   return (
-    <TooltipContent title={gemnaam} onSelect={onSelect}>
+    <TooltipContent
+      title={gemnaam}
+      link={reverseRouter.gm.positiefGetesteMensen(context.gmcode)}
+    >
       <TooltipSubject
         subject={subject}
         thresholdValues={thresholdValues}
@@ -50,4 +48,4 @@ export const createPositiveTestedPeopleMunicipalTooltip = (
       </Text>
     </TooltipContent>
   );
-};
+}

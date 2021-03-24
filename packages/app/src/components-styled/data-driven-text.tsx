@@ -7,9 +7,9 @@ import {
 } from '@corona-dashboard/common';
 import { get } from 'lodash';
 import { isDefined } from 'ts-is-present';
-import siteText from '~/locale';
 import { assert } from '~/utils/assert';
-import { formatNumber } from '~/utils/formatNumber';
+import { useIntl } from '~/intl';
+
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { DifferenceIndicator } from './difference-indicator';
 import { RelativeDate } from './relative-date';
@@ -32,6 +32,8 @@ export function DataDrivenText({
   valueTexts,
   differenceTexts,
 }: DataDrivenTextProps) {
+  const { siteText, formatNumber } = useIntl();
+
   const lastValue = get(data, [metricName, 'last_value']);
 
   const propertyValue = metricProperty && lastValue[metricProperty];

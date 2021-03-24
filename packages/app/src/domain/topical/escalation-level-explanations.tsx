@@ -4,7 +4,7 @@ import { Box } from '~/components-styled/base';
 import { EscalationLevelInfoLabel } from '~/components-styled/escalation-level';
 import { LinkWithIcon } from '~/components-styled/link-with-icon';
 import { Text } from '~/components-styled/typography';
-import siteText from '~/locale';
+import { useIntl } from '~/intl';
 import { EscalationLevel } from '../restrictions/type';
 import { CollapsibleButton } from '~/components-styled/collapsible';
 
@@ -28,9 +28,11 @@ function EscalationLevelExplanation(props: EscalationLevelExplanationProps) {
 }
 
 export function EscalationLevelExplanations() {
+  const { siteText } = useIntl();
+
   return (
     <CollapsibleButton label={siteText.escalatie_niveau.tile_title}>
-      <Box my={3} px={{ _: 3, xs: 4, md: 5, lg: '12rem' }}>
+      <Box py={3} px={{ _: 3, xs: 4, md: 5, lg: '12rem' }}>
         <EscalationLevelExplanation
           level={1}
           explanation={siteText.escalatie_niveau.types['1'].toelichting}

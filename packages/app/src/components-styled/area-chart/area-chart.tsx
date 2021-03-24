@@ -1,10 +1,4 @@
-import {
-  formatNumber,
-  formatPercentage,
-  isDateSpanValue,
-  isDateValue,
-  TimestampedValue,
-} from '@corona-dashboard/common';
+import { TimestampedValue } from '@corona-dashboard/common';
 import { Group } from '@visx/group';
 import { scaleLinear, scaleTime } from '@visx/scale';
 import { Line } from '@visx/shape';
@@ -18,14 +12,11 @@ import {
   ChartPadding,
   HoverPoint,
 } from '~/components-styled/line-chart/components';
-import { Text as StyledText } from '~/components-styled/typography';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
+import { useIntl } from '~/intl';
 import theme from '~/style/theme';
-import {
-  formatDateFromMilliseconds,
-  formatDateFromSeconds,
-} from '~/utils/formatDate';
 import { TimeframeOption } from '~/utils/timeframe';
+import { useElementSize } from '~/utils/use-element-size';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { LegendShape } from '../legend';
 import {
@@ -81,13 +72,13 @@ export type DividerConfig = {
 };
 
 type AreaChartProps<T extends TimestampedValue, K extends TimestampedValue> = {
-  formatTooltip?: (
+  formatTooltip: (
     values: HoverPoint<
       (T & TimestampedTrendValue) | (K & TimestampedTrendValue)
     >[],
     isPercentage?: boolean
   ) => React.ReactNode;
-  width: number;
+  initialWidth?: number;
   trends: TrendDescriptor<T>[];
   areas: AreaDescriptor<K>[];
   valueAnnotation?: string;
@@ -98,27 +89,29 @@ type AreaChartProps<T extends TimestampedValue, K extends TimestampedValue> = {
   divider?: DividerConfig;
 };
 
-const dateToValue = (d: { valueOf(): number }) => d.valueOf() / 1000;
-const formatXAxis = (date: Date | { valueOf(): number }) =>
-  formatDateFromSeconds(dateToValue(date), 'axis');
-const formatYAxisFn = (y: number) => formatNumber(y / 1000000);
-const formatYAxisPercentageFn = (y: number) => `${formatPercentage(y)}%`;
-
 export function AreaChart<
   T extends TimestampedValue,
   K extends TimestampedValue
 >(props: AreaChartProps<T, K>) {
+  const { formatDateFromSeconds, formatNumber, formatPercentage } = useIntl();
+
+  const dateToValue = (d: { valueOf(): number }) => d.valueOf() / 1000;
+  const formatXAxis = (date: Date | { valueOf(): number }) =>
+    formatDateFromSeconds(dateToValue(date), 'axis');
+  const formatYAxisFn = (y: number) => formatNumber(y / 1000000);
+  const formatYAxisPercentageFn = (y: number) => `${formatPercentage(y)}%`;
+
   const {
     trends,
     areas,
-    width,
+    initialWidth = 840,
     valueAnnotation,
     timeframe = 'all',
     padding: overridePadding,
     signaalwaarde,
     isPercentage = false,
     divider,
-    formatTooltip = formatDefaultTooltip,
+    formatTooltip,
   } = props;
   const {
     tooltipData,
@@ -130,7 +123,9 @@ export function AreaChart<
     HoverPoint<(T & TimestampedTrendValue) | (K & TimestampedTrendValue)>
   >();
 
-  const breakpoints = useBreakpoints();
+  const [sizeRef, { width }] = useElementSize<HTMLDivElement>(initialWidth);
+
+  const breakpoints = useBreakpoints(true);
   const trendConfigs = useTrendConfigs(trends, timeframe);
   const areaConfigs = useAreaConfigs(areas, timeframe);
 
@@ -220,7 +215,7 @@ export function AreaChart<
           {valueAnnotation}
         </ValueAnnotation>
       )}
-      <Box position="relative">
+      <Box position="relative" ref={sizeRef}>
         <AreaChartGraph
           trends={trendConfigs}
           areas={areaConfigs}
@@ -334,60 +329,5 @@ function DividersUnmemoized(props: DividersProps) {
         );
       })}
     </>
-  );
-}
-
-function formatDefaultTooltip<
-  T extends TimestampedTrendValue,
-  K extends TimestampedTrendValue
->(values: HoverPoint<T | K>[], isPercentage?: boolean) {
-  if (!values.length) {
-    return null;
-  }
-
-  const data = values[0].data;
-
-  if (isDateValue(data)) {
-    return (
-      <Box>
-        <StyledText fontWeight="bold">
-          {`${formatDateFromMilliseconds(data.__date.getTime())}: `}
-        </StyledText>
-        {values.map((value) => (
-          <Box key={value.data.__value}>
-            {isPercentage
-              ? `${formatPercentage(value.data.__value)}%`
-              : formatNumber(value.data.__value)}
-          </Box>
-        ))}
-      </Box>
-    );
-  } else if (isDateSpanValue(data)) {
-    const dateStartString = formatDateFromSeconds(
-      data.date_start_unix,
-      'day-month'
-    );
-    const dateEndString = formatDateFromSeconds(
-      data.date_end_unix,
-      'day-month'
-    );
-    return (
-      <Box>
-        <StyledText fontWeight="bold">
-          {`${dateStartString} - ${dateEndString}: `}
-        </StyledText>
-        {values.map((value) => (
-          <Box key={value.data.__value}>
-            {isPercentage
-              ? `${formatPercentage(value.data.__value)}%`
-              : formatNumber(value.data.__value)}
-          </Box>
-        ))}
-      </Box>
-    );
-  }
-
-  throw new Error(
-    `Invalid value passed to format tooltip function: ${JSON.stringify(values)}`
   );
 }

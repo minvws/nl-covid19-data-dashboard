@@ -1,8 +1,6 @@
 import { Municipal } from '@corona-dashboard/common';
-import { formatDateFromSeconds } from '~/utils/formatDate';
-import { formatNumber } from '~/utils/formatNumber';
 
-import siteText from '~/locale/index';
+import { useIntl } from '~/intl';
 import { assert } from '../assert';
 import { colors } from '~/style/theme';
 import { BarChartValue } from '~/components-styled/bar-chart/bar-chart-coordinates';
@@ -11,8 +9,6 @@ import { BarChartValue } from '~/components-styled/bar-chart/bar-chart-coordinat
  * @TODO these helpers for VR and GM should be merged into one using generics.
  * All of this code seems duplicate now that the type names are unified.
  */
-
-const text = siteText.gemeente_rioolwater_metingen;
 
 // Specific interfaces to pass data between the formatting functions and the highcharts configs
 interface SewerWaterMetadata {
@@ -51,10 +47,12 @@ function getSewerWaterMetadata(data: Municipal): SewerWaterMetadata {
  * The formatting differs based on the amount of RWZI locations
  * @param data
  */
-export function getSewerWaterBarChartData(
+export function useSewerWaterBarChartData(
   data: Municipal
 ): SewerWaterBarChartData | undefined {
   const { dataAvailable, oneInstallation } = getSewerWaterMetadata(data);
+  const { siteText, formatDateFromSeconds, formatNumber } = useIntl();
+  const text = siteText.gemeente_rioolwater_metingen;
 
   if (!dataAvailable || oneInstallation) {
     return;
