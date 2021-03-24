@@ -624,7 +624,7 @@
     "select_region_municipality_legend": "Select a municipality:",
     "select_region_type_legend": "Show numbers from:",
     "your_municipality": "Municipality",
-    "belangrijk_bericht": "There remains a national lockdown until at least 30 March. [The lockdown measures apply throughout the whole country](https://coronadashboard.government.nl/landelijk/maatregelen)."
+    "belangrijk_bericht": "There remains a national lockdown until at least 20 April. [The lockdown measures apply throughout the whole country](https://coronadashboard.government.nl/landelijk/maatregelen)."
   },
   "common": {
     "metadata": {
@@ -991,7 +991,7 @@
       "title": "Level of risk per safety region | Coronavirus Dashboard | Government.nl",
       "description": "Overview of the level of risk per safety region in the Netherlands."
     },
-    "belangrijk_bericht": ""
+    "belangrijk_bericht": "There remains a national lockdown until at least 20 April. [The lockdown measures apply throughout the whole country](https://coronadashboard.government.nl/landelijk/maatregelen)."
   },
   "gemeente_index": {
     "selecteer_titel": "Select your municipality",
@@ -1992,7 +1992,7 @@
       "verpleeghuiszorg_overleden_getest": "This graph shows the number of deceased confirmed cases among nursing home residents.",
       "gehandicaptenzorg_positief_getest": "This graph shows the number of confirmed cases in disability care homes.",
       "gehandicaptenzorg_besmette_locaties": "This graph shows the progression of the number of infected disability care homes over time.",
-      "gehandicaptenzorg_overleden": "This graph shows the progression of the number of deceased disability care home residents over time.",
+      "gehandicaptenzorg_overleden": "This graph shows the progression of the number of deceased disability care home residents over time. ",
       "thuiswonende_ouderen_besmettingen": "This graph shows the progression over time in daily confirmed cases among over-70s living at home.",
       "thuiswonende_ouderen_overleden": "This graph shows the progression over time in the number of COVID-19 deaths among over-70s living at home.",
       "rioolwater_virusdeeltjes": "This graph shows the progression over time in the average amount of virus particles in waste water, per 100,000 residents.",
@@ -2131,7 +2131,7 @@
         }
       },
       "kpi_total": {
-        "title": "",
+        "title": "Number of doses administered",
         "value": "",
         "description": "",
         "date_of_report_unix": "",
@@ -2270,7 +2270,7 @@
         "legend_label": "Number of {{name}} doses administered",
         "doses_administered": "Number of doses administered",
         "doses_administered_estimated": "Expected number of doses administered",
-        "doses_administered_total": ""
+        "doses_administered_total": "Total"
       }
     },
     "current_amount_of_administrations_text": "So far approximately {{amount}} vaccine doses have been administered.",
@@ -2369,7 +2369,7 @@
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of the Netherlands",
       "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on {{last_update}}. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).",
-      "belangrijk_bericht": "There remains a national lockdown until at least 30 March. [The lockdown measures apply throughout the whole country](https://coronadashboard.government.nl/landelijk/maatregelen)."
+      "belangrijk_bericht": "There remains a national lockdown until at least 20 April. [The lockdown measures apply throughout the whole country](https://coronadashboard.government.nl/landelijk/maatregelen)."
     },
     "data_sitemap_titel": "Topics on this dashboard",
     "data_sitemap_toelichting": "Go directly to the following topics:",
