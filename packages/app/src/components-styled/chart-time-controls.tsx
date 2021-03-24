@@ -1,6 +1,6 @@
 import { RadioGroup } from '~/components-styled/radio-group';
-import text from '~/locale/index';
 import { TimeframeOption } from '~/utils/timeframe';
+import { useIntl } from '~/intl';
 
 interface ChartTimeControlsProps {
   timeframe: TimeframeOption;
@@ -15,8 +15,10 @@ export function ChartTimeControls(props: ChartTimeControlsProps) {
     timeframeOptions = ['all', '5weeks', 'week'],
   } = props;
 
+  const { siteText } = useIntl();
+
   const items = timeframeOptions.map((key) => ({
-    label: text.charts.time_controls[key],
+    label: siteText.charts.time_controls[key],
     value: key,
   }));
 

@@ -12,12 +12,14 @@ export type SeriesConfig<T extends TimestampedValue> = (
   | LineSeriesDefinition<T>
   | AreaSeriesDefinition<T>
   | RangeSeriesDefinition<T>
+  | InvisibleSeriesDefinition<T>
 )[];
 
 export type LineSeriesDefinition<T extends TimestampedValue> = {
   type: 'line';
   metricProperty: keyof T;
   label: string;
+  shortLabel?: string;
   color: string;
   style?: 'solid' | 'dashed';
   strokeWidth?: number;
@@ -28,6 +30,7 @@ export type RangeSeriesDefinition<T extends TimestampedValue> = {
   metricPropertyLow: keyof T;
   metricPropertyHigh: keyof T;
   label: string;
+  shortLabel?: string;
   color: string;
   style?: 'solid' | 'dashed';
   fillOpacity?: number;
@@ -37,11 +40,44 @@ export type AreaSeriesDefinition<T extends TimestampedValue> = {
   type: 'area';
   metricProperty: keyof T;
   label: string;
+  shortLabel?: string;
   color: string;
   style?: 'solid' | 'striped';
   fillOpacity?: number;
   strokeWidth?: number;
 };
+
+/**
+ * An invisible series config does not render any trend but the value shows up
+ * in the tooltip, in order with the rest of the items. This allows us to place
+ * any value from any metric property under or in between the others, with its
+ * own label.
+ *
+ * This can be used for example to show a total count at the bottom, or the
+ * percentage counterpart of an absolute value.
+ */
+export type InvisibleSeriesDefinition<T extends TimestampedValue> = {
+  type: 'invisible';
+  metricProperty: keyof T;
+  label: string;
+  /**
+   * The properties that only show in the tooltip are usually different from the
+   * chart configuration dataOptions, so we use a specific boolean here to
+   * indicate the format.
+   */
+  isPercentage?: boolean;
+};
+
+/**
+ * There are some places where we want to handle only series that are visually
+ * present in the chart. This is a reverse type guard that you can use in a
+ * filter and TS will understand what comes after is only the others.
+ */
+export function isVisible<T extends TimestampedValue>(
+  def: SeriesConfig<T>[number]
+): def is Exclude<typeof def, InvisibleSeriesDefinition<T>> {
+  return def.type !== 'invisible';
+}
 
 export function useSeriesList<T extends TimestampedValue>(
   values: T[],
@@ -74,11 +110,13 @@ export function calculateSeriesMaximum<T extends TimestampedValue>(
   seriesConfig: SeriesConfig<T>,
   benchmarkValue = -Infinity
 ) {
-  const metricProperties = seriesConfig.flatMap((x) =>
-    x.type === 'range'
-      ? [x.metricPropertyLow, x.metricPropertyHigh]
-      : x.metricProperty
-  );
+  const metricProperties = seriesConfig
+    .filter(isVisible)
+    .flatMap((x) =>
+      x.type === 'range'
+        ? [x.metricPropertyLow, x.metricPropertyHigh]
+        : x.metricProperty
+    );
 
   const peakValues = values.map((x) => {
     const trendValues = Object.values(pick(x, metricProperties)) as (
@@ -105,11 +143,11 @@ export type SeriesItem = {
   __date_unix: number;
 };
 export interface SeriesSingleValue extends SeriesItem {
-  __value: number;
+  __value?: number;
 }
 export interface SeriesDoubleValue extends SeriesItem {
-  __value_a: number;
-  __value_b: number;
+  __value_a?: number;
+  __value_b?: number;
 }
 
 export function isSeriesValue(
@@ -130,15 +168,17 @@ export function getSeriesList<T extends TimestampedValue>(
   values: T[],
   seriesConfig: SeriesConfig<T>
 ): SeriesList {
-  return seriesConfig.map((config) =>
-    config.type === 'range'
-      ? getRangeSeriesData(
-          values,
-          config.metricPropertyLow,
-          config.metricPropertyHigh
-        )
-      : getSeriesData(values, config.metricProperty)
-  );
+  return seriesConfig
+    .filter(isVisible)
+    .map((config) =>
+      config.type === 'range'
+        ? getRangeSeriesData(
+            values,
+            config.metricPropertyLow,
+            config.metricPropertyHigh
+          )
+        : getSeriesData(values, config.metricProperty)
+    );
 }
 
 export function getRangeSeriesData<T extends TimestampedValue>(
@@ -170,40 +210,30 @@ export function getSeriesData<T extends TimestampedValue>(
   }
 
   if (isDateSeries(values)) {
-    return (
-      values
-        .map((x) => ({
-          /**
-           * This is messy and could be improved.
-           */
-          __value: (x[metricProperty] as unknown) as number | null,
-          // @ts-expect-error @TODO figure out why the type guard doesn't work
-          __date_unix: x.date_unix,
-        }))
-        // Filter any possible null values
-        .filter((x) => isPresent(x.__value)) as SeriesSingleValue[]
-    );
+    return values.map((x) => ({
+      /**
+       * This is messy and could be improved.
+       */
+      __value: (x[metricProperty] ?? undefined) as number | undefined,
+      // @ts-expect-error @TODO figure out why the type guard doesn't work
+      __date_unix: x.date_unix,
+    }));
   }
 
   if (isDateSpanSeries(values)) {
-    return (
-      values
-        .map((x) => ({
-          /**
-           * This is messy and could be improved.
-           */
-          __value: (x[metricProperty] as unknown) as number | null,
-          __date_unix:
-            /**
-             * Here we set the date to be in the middle of the timespan, so that
-             * the chart can render the points in the middle of each span.
-             */
-            // @ts-expect-error @TODO figure out why the type guard doesn't work
-            x.date_start_unix + (x.date_end_unix - x.date_start_unix) / 2,
-        }))
-        // Filter any possible null values
-        .filter((x) => isPresent(x.__value)) as SeriesSingleValue[]
-    );
+    return values.map((x) => ({
+      /**
+       * This is messy and could be improved.
+       */
+      __value: (x[metricProperty] ?? undefined) as number | undefined,
+      __date_unix:
+        /**
+         * Here we set the date to be in the middle of the timespan, so that
+         * the chart can render the points in the middle of each span.
+         */
+        // @ts-expect-error @TODO figure out why the type guard doesn't work
+        x.date_start_unix + (x.date_end_unix - x.date_start_unix) / 2,
+    }));
   }
 
   throw new Error(`Incompatible timestamps are used in value ${values[0]}`);

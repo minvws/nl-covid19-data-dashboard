@@ -2,7 +2,7 @@ import { Box } from '~/components-styled/base';
 import { EscalationLevelIcon } from '~/components-styled/escalation-level-icon';
 import { Text } from '~/components-styled/typography';
 import { EscalationLevel } from '~/domain/restrictions/type';
-import siteText from '~/locale/index';
+import { useIntl } from '~/intl';
 import { useEscalationColor } from '~/utils/use-escalation-color';
 
 export type EscalationLevelProps = {
@@ -21,6 +21,8 @@ export function EscalationLevelInfoLabel({
   useLevelColor = false,
 }: EscalationLevelProps) {
   const escalationColor = useEscalationColor(level);
+  const { siteText } = useIntl();
+
   const color = useLevelColor ? escalationColor : 'inherit';
   return (
     <Box display="flex" alignItems="center" justifyContent="flex-start">
@@ -44,6 +46,7 @@ export function EscalationLevelInfoLabel({
 
 export function EscalationLevelInfo(props: EscalationLevelProps) {
   const { level } = props;
+  const { siteText } = useIntl();
 
   return (
     <Box

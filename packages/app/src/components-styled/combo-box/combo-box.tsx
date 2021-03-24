@@ -10,10 +10,10 @@ import { matchSorter } from 'match-sorter';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Box } from '~/components-styled/base';
-import text from '~/locale/index';
 import { assert } from '~/utils/assert';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { useThrottle } from '~/utils/useThrottle';
+import { useIntl } from '~/intl';
 
 type TOption = {
   displayName?: string;
@@ -43,6 +43,8 @@ type TProps<Option extends TOption> = {
  */
 export function ComboBox<Option extends TOption>(props: TProps<Option>) {
   const { options, placeholder } = props;
+
+  const { siteText } = useIntl();
 
   const router = useRouter();
   const { code } = router.query;
@@ -103,7 +105,7 @@ export function ComboBox<Option extends TOption>(props: TProps<Option>) {
               ))}
             </ComboboxList>
           ) : (
-            <span>{text.common.zoekveld_geen_resultaten}</span>
+            <span>{siteText.common.zoekveld_geen_resultaten}</span>
           )}
         </ComboboxPopover>
       </Combobox>

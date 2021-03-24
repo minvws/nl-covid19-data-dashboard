@@ -5,15 +5,15 @@
  * props. It might be easier to just create 2 or 3 different types of axes
  * layouts by forking this component.
  */
-import { formatNumber, formatPercentage } from '@corona-dashboard/common';
+import css from '@styled-system/css';
 import { AxisBottom, AxisLeft } from '@visx/axis';
 import { GridRows } from '@visx/grid';
 import { ScaleLinear } from 'd3-scale';
 import { memo, Ref, useCallback } from 'react';
 import { colors } from '~/style/theme';
 import { createDate } from '~/utils/createDate';
-import { formatDateFromSeconds } from '~/utils/formatDate';
 import { Bounds } from '../logic';
+import { useIntl } from '~/intl';
 
 type AxesProps = {
   bounds: Bounds;
@@ -34,10 +34,8 @@ type AxesProps = {
    */
   yAxisRef: Ref<SVGGElement>;
   yTickValues?: number[];
+  xTickValues: [number, number];
 };
-
-const formatYAxis = (y: number) => formatNumber(y);
-const formatYAxisPercentage = (y: number) => `${formatPercentage(y)}%`;
 
 type AnyTickFormatter = (value: any) => string;
 
@@ -45,12 +43,29 @@ export const Axes = memo(function Axes({
   numGridLines,
   bounds,
   isPercentage,
-  yTickValues,
   xScale,
   yScale,
+  yTickValues,
+  xTickValues,
   yAxisRef,
 }: AxesProps) {
-  const [startUnix, endUnix] = xScale.domain();
+  const [startUnix, endUnix] = xTickValues;
+
+  const { formatDateFromSeconds, formatNumber, formatPercentage } = useIntl();
+
+  const formatYAxis = useCallback(
+    (y: number) => {
+      return formatNumber(y);
+    },
+    [formatNumber]
+  );
+
+  const formatYAxisPercentage = useCallback(
+    (y: number) => {
+      return `${formatPercentage(y)}%`;
+    },
+    [formatPercentage]
+  );
 
   const formatXAxis = useCallback(
     (date_unix: number) => {
@@ -63,11 +78,11 @@ export const Axes = memo(function Axes({
         ? formatDateFromSeconds(date_unix, 'axis-with-year')
         : formatDateFromSeconds(date_unix, 'axis');
     },
-    [startUnix, endUnix]
+    [startUnix, endUnix, formatDateFromSeconds]
   );
 
   return (
-    <>
+    <g css={css({ pointerEvents: 'none' })}>
       <GridRows
         /**
          * Lighter gray grid lines are used for the lines that have no label on
@@ -91,7 +106,7 @@ export const Axes = memo(function Axes({
       />
       <AxisBottom
         scale={xScale}
-        tickValues={xScale.domain()}
+        tickValues={xTickValues}
         tickFormat={formatXAxis as AnyTickFormatter}
         top={bounds.height}
         stroke={colors.silver}
@@ -128,6 +143,6 @@ export const Axes = memo(function Axes({
           })}
         />
       </g>
-    </>
+    </g>
   );
 });

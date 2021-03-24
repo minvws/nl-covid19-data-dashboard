@@ -34,7 +34,7 @@ export function ChoroplethTile({
   metadata,
   ...dataProps
 }: ChoroplethTileProps) {
-  const breakpoints = useBreakpoints();
+  const breakpoints = useBreakpoints(true);
   const legendaComponent = legend && (
     <ChoroplethLegenda thresholds={legend.thresholds} title={legend.title} />
   );

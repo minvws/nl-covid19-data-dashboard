@@ -23,7 +23,8 @@
     "behavior",
     "escalation_level",
     "tested_overall_sum",
-    "hospital_nice_sum"
+    "hospital_nice_sum",
+    "vaccine_coverage"
   ],
   "additionalProperties": false,
   "properties": {
@@ -92,6 +93,9 @@
     },
     "hospital_nice_sum": {
       "$ref": "hospital_nice_sum.json"
+    },
+    "vaccine_coverage": {
+      "$ref": "vaccine_coverage.json"
     }
   }
 }
