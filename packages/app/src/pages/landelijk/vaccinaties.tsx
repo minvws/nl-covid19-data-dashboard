@@ -257,12 +257,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           </TwoKpiSection>
 
           <ChartTile
-            /**
-             * @TODO copy from locale files
-             */
-            title={'Aantal gevaccineerde mensen'}
-            description={`Deze grafiek laat zien hoeveel mensen in Nederland een prik hebben gehad en hoeveel mensen daarvan volledig en gedeeltelijk gevaccineerd zijn.
-            Met de huidige vaccinatieplan verwachten we dat ieder persoon die in Nederland wil zich laten vaccineren zou bij eind juli 2021 een eerste prik mogen krijgen.`}
+            title={text.grafiek_gevaccineerde_mensen.titel}
+            description={text.grafiek_gevaccineerde_mensen.omschrijving}
             metadata={{
               date: mockDataRef.current.last_value.date_of_report_unix,
               source: text.bronnen.rivm,
@@ -276,9 +272,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                   {
                     start: Date.now() / 1000 - 60 * 60 * 24 * 5,
                     end: mockDataRef.current.last_value.date_unix,
-                    shortLabel: '(niet compleet)',
-                    label:
-                      'Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen',
+                    label: text.grafiek_gevaccineerde_mensen.label_annotatie,
+                    shortLabel:
+                      text.grafiek_gevaccineerde_mensen.tooltip_label_annotatie,
                   },
                 ],
               }}
@@ -286,24 +282,35 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 {
                   metricProperty: 'partially_or_fully_vaccinated',
                   type: 'line',
-                  label: 'Totaal aantal geprikte mensen',
-                  shortLabel: 'geprikte mensen',
+                  label:
+                    text.grafiek_gevaccineerde_mensen.label_geprikte_mensen,
+                  shortLabel:
+                    text.grafiek_gevaccineerde_mensen
+                      .tooltip_label_geprikte_mensen,
                   color: 'black',
                   strokeWidth: 3,
                 },
                 {
                   metricProperty: 'partially_vaccinated',
                   type: 'stacked-area',
-                  label: 'Gedeeltelijk gevaccineerde mensen',
-                  shortLabel: 'gedeeltelijk gevaccineerd',
+                  label:
+                    text.grafiek_gevaccineerde_mensen
+                      .label_gedeeltelijk_gevaccineerd,
+                  shortLabel:
+                    text.grafiek_gevaccineerde_mensen
+                      .tooltip_label_gedeeltelijk_gevaccineerd,
                   color: colors.data.multiseries.cyan,
                   fillOpacity: 1,
                 },
                 {
                   metricProperty: 'fully_vaccinated',
                   type: 'stacked-area',
-                  label: 'Volledig gevaccineerde mensen',
-                  shortLabel: 'volledig gevaccineerd',
+                  label:
+                    text.grafiek_gevaccineerde_mensen
+                      .label_volledig_gevaccineerd,
+                  shortLabel:
+                    text.grafiek_gevaccineerde_mensen
+                      .tooltip_label_volledig_gevaccineerd,
                   color: colors.data.multiseries.cyan_dark,
                   fillOpacity: 1,
                 },

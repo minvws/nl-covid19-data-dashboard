@@ -3,9 +3,8 @@ import {
   isDateSpanSeries,
   TimestampedValue,
 } from '@corona-dashboard/common';
-import { pick } from 'lodash';
 import { useMemo } from 'react';
-import { isDefined, isPresent } from 'ts-is-present';
+import { isDefined } from 'ts-is-present';
 import { getValuesInTimeframe, TimeframeOption } from '~/utils/timeframe';
 
 export type SeriesConfig<T extends TimestampedValue> = (

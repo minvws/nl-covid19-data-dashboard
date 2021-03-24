@@ -2344,6 +2344,18 @@
     "grafiek_leveringen": {
       "titel": "",
       "omschrijving": ""
+    },
+    "grafiek_gevaccineerde_mensen": {
+      "titel": "Aantal gevaccineerde mensen",
+      "omschrijving": "Deze grafiek laat zien hoeveel mensen in Nederland een prik hebben gehad en hoeveel mensen daarvan volledig en gedeeltelijk gevaccineerd zijn. Met de huidige vaccinatieplan verwachten we dat ieder persoon die in Nederland wil zich laten vaccineren zou bij eind juli 2021 een eerste prik mogen krijgen.",
+      "label_annotatie": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+      "tooltip_label_annotatie": "(niet compleet)",
+      "label_geprikte_mensen": "Totaal aantal geprikte mensen",
+      "tooltip_label_geprikte_mensen": "Totaal aantal geprikte mensen",
+      "label_gedeeltelijk_gevaccineerd": "Gedeeltelijk gevaccineerde mensen",
+      "tooltip_label_gedeeltelijk_gevaccineerd": "gedeeltelijk gevaccineerd",
+      "label_volledig_gevaccineerd": "Volledig gevaccineerde mensen",
+      "tooltip_label_volledig_gevaccineerd": "volledig gevaccineerd"
     }
   },
   "editorial_detail": {
