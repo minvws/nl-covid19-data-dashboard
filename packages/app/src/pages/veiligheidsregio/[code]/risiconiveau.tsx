@@ -102,8 +102,8 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
 
   const escalationColor = useEscalationColor(currentLevel);
 
-  const positive_tested_per_100k = 38;
-  const hospital_admissions_per_million = 32;
+  const positive_tested_per_100k = 999;
+  const hospital_admissions_per_million = 999;
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
