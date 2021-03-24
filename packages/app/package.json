@@ -131,7 +131,6 @@
     "type-check": "yarn compile",
     "compile": "tsc --pretty --noEmit",
     "download": "node ./infra/download.js",
-    "extract": "formatjs extract 'src/**/*.ts*' --ignore 'src/**/*.d.ts' --out-file lang/nl.json --id-interpolation-pattern '[sha512:contenthash:base64:6]'",
     "clean": "rimraf .next"
   },
   "browserslist": [
