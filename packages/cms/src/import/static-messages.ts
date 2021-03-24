@@ -1,5 +1,6 @@
+import dotenv from 'dotenv';
 import flatten from 'flat';
-import fs from 'fs';
+import fs, { exists } from 'fs';
 import get from 'lodash/get';
 import path from 'path';
 
@@ -8,12 +9,15 @@ const { default: PQueue } = require('p-queue');
 import sanityClient from '@sanity/client';
 import sanityConfig from '../../sanity.json';
 
+const result = dotenv.config({
+  path: path.resolve(process.cwd(), '.env.local'),
+});
+
 // Set up the Sanity client
 const config = {
   dataset: 'development',
   projectId: sanityConfig.api.projectId,
-  token:
-    'skIgqrSoqBIW9EOPaz9IijLikKUSRDT2vtnMG0Et3OPEIC5h3cIhiJpnzvY8DoFx7B27L3eoUF7lJk08DIM6RUWclpe8yY7AwPzQZ6ITmd0ApJV7UZF3coH9d0EaieHapq0dQRLfseEarIb9oZNdI1AmPv5pG5qfAUusLMwm1yNM3he0HaeC',
+  token: process.env.SANITY_TOKEN,
   useCdn: false,
 };
 export const client = sanityClient(config);
