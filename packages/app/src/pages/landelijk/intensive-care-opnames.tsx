@@ -131,6 +131,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
 
           <LineChartTile
             title={text.linechart_titel}
+            description={text.linechart_description}
             values={dataIntake.values}
             ariaDescription={graphDescriptions.intensive_care_opnames}
             linesConfig={[
