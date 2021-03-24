@@ -1,4 +1,5 @@
 import css from '@styled-system/css';
+import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import BarChart from '~/assets/bar-chart.svg';
@@ -40,9 +41,11 @@ import {
   getVrData,
 } from '~/static-props/get-data';
 import { asResponsiveArray } from '~/style/utils';
+import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { useEscalationColor } from '~/utils/use-escalation-color';
+import { useBreakpoints } from '~/utils/useBreakpoints';
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
@@ -60,6 +63,8 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
   const { safetyRegionName, content, data, lastGenerated } = props;
 
   const { siteText, formatDateFromSeconds } = useIntl();
+  const breakpoints = useBreakpoints();
+  const router = useRouter();
 
   const text = siteText.vr_risiconiveau;
 
@@ -203,6 +208,17 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                 </UnorderedList>
               </Box>
             </Box>
+
+            {!breakpoints.lg && (
+              <Box mb={3}>
+                <Link
+                  passHref
+                  href={`/veiligheidsregio/${router.query.code}/maatregelen`}
+                >
+                  {text.momenteel.link_text}
+                </Link>
+              </Box>
+            )}
           </Tile>
 
           <TwoKpiSection>
@@ -303,7 +319,7 @@ function ListItem({
 
   return (
     <StyledList hasBorderBottom={hasBorderBottom}>
-      <Box display="flex" pb={children ? '0.75rem' : undefined}>
+      <Box display="flex" pb={children ? 3 : undefined}>
         <Box
           display="flex"
           alignItems="center"
@@ -379,9 +395,10 @@ const UnorderedList = styled.ul({
 
 const StyledList = styled.li<{ hasBorderBottom?: boolean }>((x) =>
   css({
-    paddingBottom: '0.75rem',
+    paddingBottom: 3,
     marginBottom: x.hasBorderBottom ? '0.75rem' : undefined,
-    borderBottom: x.hasBorderBottom ? '1px solid silver' : undefined,
+    borderBottom: x.hasBorderBottom ? '1px solid' : undefined,
+    borderBottomColor: x.hasBorderBottom ? 'border' : undefined,
 
     '&:last-of-type': {
       padding: 0,

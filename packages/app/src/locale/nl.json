@@ -2737,10 +2737,7 @@
         "description": "{{amount}} per 1 miljoen inwoners per week"
       },
       "next_determined": "Volgende inschaling:",
-      "link": {
-        "text": "Bekijk de maatregelen die gelden in deze veiligheidsregio.",
-        "href": "#"
-      }
+      "link_text": "Bekijk de maatregelen die gelden in deze veiligheidsregio."
     }
   },
   "gemeente_sterfte": {
