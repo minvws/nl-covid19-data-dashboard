@@ -284,9 +284,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               }}
               seriesConfig={[
                 {
-                  /**
-                   * @TODO This line should actually be the first in the tooltip/legend
-                   */
                   metricProperty: 'partially_or_fully_vaccinated',
                   type: 'line',
                   label: 'Totaal aantal geprikte mensen',

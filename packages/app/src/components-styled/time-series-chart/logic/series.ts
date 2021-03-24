@@ -118,45 +118,12 @@ export function useValuesInTimeframe<T extends TimestampedValue>(
  * values.
  */
 export function calculateSeriesMaximum<T extends TimestampedValue>(
-  values: T[],
-  seriesConfig: SeriesConfig<T>,
-  benchmarkValue = -Infinity
-) {
-  const metricProperties = seriesConfig
-    .filter(isVisible)
-    .flatMap((x) =>
-      x.type === 'range'
-        ? [x.metricPropertyLow, x.metricPropertyHigh]
-        : x.metricProperty
-    );
-
-  const peakValues = values.map((x) => {
-    const trendValues = Object.values(pick(x, metricProperties)) as (
-      | number
-      | null
-    )[];
-    return Math.max(...trendValues.filter(isPresent));
-  });
-
-  const overallMaximum = Math.max(...peakValues);
-
-  /**
-   * Value cannot be 0, hence the 1. If the value is below signaalwaarde, make
-   * sure the signaalwaarde floats in the middle
-   */
-
-  const artificialMax =
-    overallMaximum < benchmarkValue ? benchmarkValue * 2 : 0;
-
-  return Math.max(overallMaximum, artificialMax);
-}
-
-export function calculateSeriesMaximum2<T extends TimestampedValue>(
   seriesList: SeriesList,
   seriesConfig: SeriesConfig<T>,
   benchmarkValue = -Infinity
 ) {
   const values = seriesList
+    .filter((_, index) => isVisible(seriesConfig[index]))
     .flatMap((series) =>
       series.flatMap((x: SeriesSingleValue | SeriesDoubleValue) =>
         isSeriesValue(x) ? x.__value : [x.__value_a, x.__value_b]

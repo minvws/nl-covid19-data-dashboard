@@ -25,8 +25,7 @@ import {
 import { Benchmark } from './components/benchmark';
 import { Series } from './components/series';
 import {
-  // calculateSeriesMaximum,
-  calculateSeriesMaximum2,
+  calculateSeriesMaximum,
   DataOptions,
   SeriesConfig,
   useHoverState,
@@ -196,12 +195,8 @@ export function TimeSeriesChart<
    * The maximum is calculated over all values, because you don't want the
    * y-axis scaling to change when toggling the timeframe setting.
    */
-  // const calculatedSeriesMax = useMemo(
-  //   () => calculateSeriesMaximum(allValues, seriesConfig, benchmark?.value),
-  //   [allValues, seriesConfig, benchmark]
-  // );
   const calculatedSeriesMax = useMemo(
-    () => calculateSeriesMaximum2(seriesList, seriesConfig, benchmark?.value),
+    () => calculateSeriesMaximum(seriesList, seriesConfig, benchmark?.value),
     [seriesList, seriesConfig, benchmark?.value]
   );
 
