@@ -63,6 +63,7 @@ export function VaccinePageIntroduction({
                   values={data.vaccine_administered_total.values}
                 />
               </Box>
+
               <Box as="article" spacing={3}>
                 <Heading level={3}>
                   {text.kpi_geplande_prikken_deze_week.titel}
