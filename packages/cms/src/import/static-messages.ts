@@ -2,29 +2,19 @@ import flatten from 'flat';
 import fs from 'fs';
 import get from 'lodash/get';
 import path from 'path';
-import { assert } from '@corona-dashboard/common';
-
-import sanityConfig from '../../sanity.json';
 
 import sanityClient from '@sanity/client';
-// assert(
-//   process.env.NEXT_PUBLIC_SANITY_DATASET,
-//   'NEXT_PUBLIC_SANITY_DATASET is undefined'
-// );
+import sanityConfig from '../../sanity.json';
 
-// assert(
-//   process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-//   'NEXT_PUBLIC_SANITY_PROJECT_ID is undefined'
-// );
-
+// Set up the Sanity client
 const config = {
   dataset: 'development',
   projectId: sanityConfig.api.projectId,
   useCdn: false,
 };
-
 export const client = sanityClient(config);
 
+// Flatten the languages in objects
 const dutch = JSON.parse(
   fs.readFileSync(path.resolve(__dirname, '../../../app/src/locale/nl.json'), {
     encoding: 'utf8',
@@ -48,3 +38,5 @@ const objects = Object.entries(flatten(dutch)).map(([key, value]) => ({
 }));
 
 console.dir(objects);
+
+// Now for the magic part. Let's turn it into Sanity documents!
