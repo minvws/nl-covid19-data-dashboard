@@ -2131,7 +2131,7 @@
         }
       },
       "kpi_total": {
-        "title": "",
+        "title": "Number of doses administered",
         "value": "",
         "description": "",
         "date_of_report_unix": "",
@@ -2270,7 +2270,7 @@
         "legend_label": "Number of {{name}} doses administered",
         "doses_administered": "Number of doses administered",
         "doses_administered_estimated": "Expected number of doses administered",
-        "doses_administered_total": ""
+        "doses_administered_total": "Total"
       }
     },
     "current_amount_of_administrations_text": "So far approximately {{amount}} vaccine doses have been administered.",
