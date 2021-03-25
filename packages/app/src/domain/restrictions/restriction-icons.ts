@@ -1,92 +1,37 @@
-import BasisregelsAfstand from '~/assets/restrictions/basisregels_afstand.svg';
-import BasisregelsThuisBlijven from '~/assets/restrictions/basisregels_blijf-thuis.svg';
-import BasisregelsDrukte from '~/assets/restrictions/basisregels_drukte.svg';
-import BasisregelsElleboog from '~/assets/restrictions/basisregels_elleboog.svg';
-import BasisregelsGeenBezoek from '~/assets/restrictions/basisregels_geen-bezoek.svg';
-import BasisregelsHandenWassen from '~/assets/restrictions/basisregels_handenwassen.svg';
-import BasisregelsMondkapje from '~/assets/restrictions/basisregels_mondkapje.svg';
-import BasisregelsTesten from '~/assets/restrictions/basisregels_testen.svg';
-import ContactBeroepen from '~/assets/restrictions/contactberoepen.svg';
-import Groepen from '~/assets/restrictions/groepen.svg';
-import HorecaBestellen from '~/assets/restrictions/horeca-en-evenementen_bestellen.svg';
-import HorecaEtenEnDrinken from '~/assets/restrictions/horeca-en-evenementen_etendrinken.svg';
-import HorecaEvenementen from '~/assets/restrictions/horeca-en-evenementen_evenementen.svg';
-import OnderwijsKinderopvang from '~/assets/restrictions/onderwijs-en-kinderopvang_kinderopvang.svg';
-import OnderwijsNoodopvang from '~/assets/restrictions/onderwijs-en-kinderopvang_noodopvang.svg';
-import OnderwijsOpAfstand from '~/assets/restrictions/onderwijs-en-kinderopvang_op-afstand.svg';
-import PubliekeLocaties from '~/assets/restrictions/publiek-toegankelijke-locaties.svg';
-import SportBinnen from '~/assets/restrictions/sport_binnensportlocaties.svg';
-import SportBuiten from '~/assets/restrictions/sport_buiten.svg';
-import SportWedstrijden from '~/assets/restrictions/sport_wedstrijden.svg';
-import Thuis from '~/assets/restrictions/thuis.svg';
-import VervoerReizenBlijfThuis from '~/assets/restrictions/vervoer-en-reizen_blijfthuis.svg';
-import VervoerReizenBuitenland from '~/assets/restrictions/vervoer-en-reizen_buitenland.svg';
-import VervoerReizenOV from '~/assets/restrictions/vervoer-en-reizen_ov.svg';
-import WinkelsAlcohol from '~/assets/restrictions/winkelen-en-boodschappen_alcohol.svg';
-import WinkelsBoodschappen from '~/assets/restrictions/winkelen-en-boodschappen_open.svg';
-
-import avondklok from '~/assets/restrictions/avondklok.svg';
-import lopend from '~/assets/restrictions/lopend.svg';
-import bezoek from '~/assets/restrictions/bezoek.svg';
-import eenPersoonDoorgestreept from '~/assets/restrictions/een-persoon-doorgestreept.svg';
-import gedeeltelijkOpenRugzak from '~/assets/restrictions/gedeeltelijk-open-rugzak.svg';
-import geenWedstrijden from '~/assets/restrictions/geen-wedstrijden.svg';
-import sporterMetZweetband from '~/assets/restrictions/sporter-met-zweetband.svg';
-
-export const restrictionIcons: Record<
-  string,
-  React.FunctionComponent<React.SVGProps<SVGSVGElement>> | null
-> = {
-  '41_er_op_uit_1': null,
-  '41_er_op_uit_2': null,
-  '41_samenkomst_3': null,
-  '41_horeca_4': null,
-  '41_horeca_5': null,
-  '41_horeca_6': null,
-  '41_bezoek_7': null,
-  '41_bezoek_8': null,
-  '41_winkels_9': null,
-  '41_winkels_10': null,
-  '41_winkels_11': null,
-  '41_ov_12': null,
-  '41_ov_13': null,
-  '41_sport_14': null,
-  '41_sport_15': null,
-  '41_sport_16': null,
-  '41_sport_17': null,
-  '0_algemeen_18': OnderwijsOpAfstand,
-  '0_algemeen_19': BasisregelsAfstand,
-  '0_algemeen_20': BasisregelsDrukte,
-  '0_algemeen_21': BasisregelsHandenWassen,
-  '0_algemeen_22': BasisregelsElleboog,
-  '0_algemeen_23': BasisregelsMondkapje,
-  '0_algemeen_42': BasisregelsThuisBlijven,
-  '0_algemeen_43': BasisregelsTesten,
-  '0_algemeen_44': BasisregelsGeenBezoek,
-  '41_bezoek_24': Thuis,
-  '41_er_op_uit_25': Groepen,
-  '41_samenkomst_26': PubliekeLocaties,
-  '41_horeca_27': HorecaEtenEnDrinken,
-  '41_horeca_28': HorecaBestellen,
-  '41_horeca_29': HorecaEvenementen,
-  '41_winkels_30': PubliekeLocaties,
-  '41_winkels_31': WinkelsBoodschappen,
-  '41_winkels_32': WinkelsAlcohol,
-  '41_contactberoep_33': ContactBeroepen,
-  '41_sport_34': SportBuiten,
-  '41_sport_35': SportBinnen,
-  '41_sport_36': SportWedstrijden,
-  '41_ov_37': VervoerReizenBlijfThuis,
-  '41_ov_38': VervoerReizenBuitenland,
-  '41_ov_45': VervoerReizenOV,
-  '41_onderwijs_39': OnderwijsOpAfstand,
-  '41_onderwijs_40': OnderwijsKinderopvang,
-  '41_onderwijs_41': OnderwijsNoodopvang,
-  avondklok,
-  bezoek,
-  lopend,
-  eenPersoonDoorgestreept,
-  gedeeltelijkOpenRugzak,
-  geenWedstrijden,
-  sporterMetZweetband,
+export const restrictionIcons: Record<string, string | null> = {
+  '0_algemeen_18': 'onderwijs-en-kinderopvang_op-afstand.svg',
+  '0_algemeen_19': 'basisregels_afstand.svg',
+  '0_algemeen_20': 'basisregels_drukte.svg',
+  '0_algemeen_21': 'basisregels_handenwassen.svg',
+  '0_algemeen_22': 'basisregels_elleboog.svg',
+  '0_algemeen_23': 'basisregels_mondkapje.svg',
+  '0_algemeen_42': 'basisregels_blijf-thuis.svg',
+  '0_algemeen_43': 'basisregels_testen.svg',
+  '0_algemeen_44': 'basisregels_geen-bezoek.svg',
+  '41_bezoek_24': 'thuis.svg',
+  '41_er_op_uit_25': 'groepen.svg',
+  '41_samenkomst_26': 'publiek-toegankelijke-locaties.svg',
+  '41_horeca_27': 'horeca-en-evenementen_etendrinken.svg',
+  '41_horeca_28': 'horeca-en-evenementen_bestellen.svg',
+  '41_horeca_29': 'horeca-en-evenementen_evenementen.svg',
+  '41_winkels_30': 'publiek-toegankelijke-locaties.svg',
+  '41_winkels_31': 'winkelen-en-boodschappen_open.svg',
+  '41_winkels_32': 'winkelen-en-boodschappen_alcohol.svg',
+  '41_contactberoep_33': 'contactberoepen.svg',
+  '41_sport_34': 'sport_buiten.svg',
+  '41_sport_35': 'sport_binnensportlocaties.svg',
+  '41_sport_36': 'sport_wedstrijden.svg',
+  '41_ov_37': 'vervoer-en-reizen_blijfthuis.svg',
+  '41_ov_38': 'vervoer-en-reizen_buitenland.svg',
+  '41_ov_45': 'vervoer-en-reizen_ov.svg',
+  '41_onderwijs_39': 'onderwijs-en-kinderopvang_op-afstand.svg',
+  '41_onderwijs_40': 'onderwijs-en-kinderopvang_kinderopvang.svg',
+  '41_onderwijs_41': 'onderwijs-en-kinderopvang_noodopvang.svg',
+  avondklok: 'avondklok.svg',
+  bezoek: 'bezoek.svg',
+  lopend: 'lopend.svg',
+  eenPersoonDoorgestreept: 'een-persoon-doorgestreept.svg',
+  gedeeltelijkOpenRugzak: 'gedeeltelijk-open-rugzak.svg',
+  geenWedstrijden: 'geen-wedstrijden.svg',
+  sporterMetZweetband: 'sporter-met-zweetband.svg',
 };
