@@ -208,10 +208,18 @@ function getStackedAreaSeriesData<T extends TimestampedValue>(
   );
 
   const seriesHigh = getSeriesData(values, metricProperty);
-  const seriesLow = getSeriesData(values, metricProperty).map((x, index) => ({
-    ...x,
-    __value: sumValuesOnIndex(index),
-  }));
+  const seriesLow = getSeriesData(values, metricProperty);
+
+  seriesLow.forEach((x, index) => {
+    /**
+     * The series are rendered from top to bottom. To get the low value of
+     * the current series, we will sum up all values of the
+     * `seriesBelowCurrentSeries`.
+     */
+    x.__value = seriesBelowCurrentSeries
+      .map((x) => getSeriesData(values, x.metricProperty)[index])
+      .reduce((sum, x) => sum + (x.__value ?? 0), 0);
+  });
 
   return seriesLow.map((low, index) => {
     const valueLow = low.__value ?? 0;
@@ -223,16 +231,6 @@ function getStackedAreaSeriesData<T extends TimestampedValue>(
       __value_b: valueHigh,
     };
   });
-
-  function sumValuesOnIndex(index: number): number {
-    /**
-     * The series are rendered from top to bottom. To get the low value of
-     * the current series, we will sum up all values of the `seriesBelowCurrentSeries`.
-     */
-    return seriesBelowCurrentSeries
-      .map((x) => getSeriesData(values, x.metricProperty)[index])
-      .reduce((sum, x) => sum + (x.__value ?? 0), 0);
-  }
 }
 
 function getRangeSeriesData<T extends TimestampedValue>(
