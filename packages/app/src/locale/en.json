@@ -267,7 +267,7 @@
       }
     },
     "tooltip_labels": {
-      "infected_per_100k": "",
+      "infected_per_100k": "Confirmed cases per 100.000",
       "infected_percentage": "",
       "tested_total": "",
       "infected": ""
