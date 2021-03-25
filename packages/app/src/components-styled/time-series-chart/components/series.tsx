@@ -115,7 +115,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({
          * We will reverse the elements to ensure the first series will be
          * rendered as the last dom/svg-node. This way we make sure that the
          * first (and most-likely most important) series is actually rendered on
-         * top of the other trends.
+         * top of the other series.
          */
         .reverse()}
     </>
