@@ -69,11 +69,11 @@
       "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
       "text": "NICE via RIVM"
     },
-    "titel": "Intensive care-opnames per dag",
+    "titel": "Gemeld aantal intensive care-opnames per dag",
     "pagina_toelichting": "Aantal mensen met COVID-19 dat per dag op de intensive care (IC) is opgenomen, direct of vanaf de verpleegafdeling in een ziekenhuis. Om dubbel tellen te voorkomen wordt alleen de eerste IC-opname van een patiënt meegeteld. Een opname op de IC zegt iets over de ernst van het ziektebeloop en is daarom belangrijk om de ontwikkeling van de epidemie goed te monitoren.",
     "barscale_titel": "Intensive care-opnames per dag",
     "barscale_screenreader_text": "{{value}} intensive care-opnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
-    "extra_uitleg": "Aantal mensen met bevestigd COVID-19 dat per dag op een intensive care-afdeling van een ziekenhuis is opgenomen. Dit cijfer laat het aantal IC-opnames zien dat op één dag gemeld is. Dit kunnen ook meldingen zijn van opnames van eerdere dagen.",
+    "extra_uitleg": "Aantal mensen met bevestigd COVID-19 dat per dag op een intensive care-afdeling van een ziekenhuis is opgenomen. Dit cijfer laat het aantal IC-opnames zien dat op één dag gemeld is. Dit kunnen ook meldingen zijn van opnames van eerdere dagen.\n\nLet op: Vanaf 25 maart toont het dashboard het aantal gemelde IC-opnames per dag in plaats van het gemiddelde aantal opnames van de afgelopen drie dagen. Het getal hierboven is daarom niet vergelijkbaar met het getal dat voorheen op het dashboard stond.",
     "linechart_titel": "Intensive care-opnames door de tijd heen",
     "bronnen": {
       "nice": {
