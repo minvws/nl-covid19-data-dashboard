@@ -27,7 +27,7 @@ import {
   useScales,
   useHoverState,
 } from './logic';
-import { BarTrend, DateMarker, Axes } from './components';
+import { BarTrend, DateMarker, Axes, BarHover } from './components';
 
 /**
  * @TODO
@@ -188,8 +188,16 @@ export function VerticalBarChart<
             xScale={xScale}
             yScale={yScale}
             isPercentage={isPercentage}
-            yAxisRef={yAxisRef}
+            // yAxisRef={yAxisRef}
           />
+
+          {hoverState && (
+            <BarHover
+              point={hoverState.nearestPoint}
+              bounds={bounds}
+              barWidth={xScale.bandwidth()}
+            />
+          )}
 
           {seriesList.map((series, index) => (
             <BarTrend

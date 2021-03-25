@@ -1,14 +1,8 @@
 import { PositionScale } from '@visx/shape/lib/types';
 import { Group } from '@visx/group';
+import { Bar } from '@visx/shape';
 import { first, last } from 'lodash';
-import {
-  MouseEvent,
-  TouchEvent,
-  useCallback,
-  useState,
-  useMemo,
-  memo,
-} from 'react';
+import { MouseEvent, TouchEvent, useMemo, memo } from 'react';
 import {
   SeriesItem,
   SeriesSingleValue,
@@ -38,21 +32,6 @@ export const BarTrend = memo(function BarTrend({
   barWidth,
   onHover,
 }: BarTrendProps) {
-  const [hovered, setHovered] = useState<number | undefined>();
-
-  const handleHover = useCallback(
-    (event: TouchEvent<SVGElement> | MouseEvent<SVGElement>, index: number) => {
-      // if (event.type === 'mouseleave') {
-      //   setHovered(undefined);
-      // } else if (hovered !== index) {
-      //   setHovered(index);
-      // }
-
-      onHover(event, index);
-    },
-    [onHover]
-  );
-
   const hoverBarHeight = useMemo(() => {
     const range = yScale.range();
     return Math.abs((first(range) as number) - (last(range) as number));
@@ -77,24 +56,24 @@ export const BarTrend = memo(function BarTrend({
         const { x, y, height } = getRectPosition(value);
         return (
           <Group
-            onMouseLeave={(e) => handleHover(e, index)}
-            onMouseMove={(e) => handleHover(e, index)}
-            onTouchStart={(e) => handleHover(e, index)}
+            onMouseLeave={(e) => onHover(e, index)}
+            onMouseMove={(e) => onHover(e, index)}
+            onTouchStart={(e) => onHover(e, index)}
           >
-            <rect
+            <Bar
               /**
                * The captures mouse movements that align vertically
                * with the bar
                */
               id={`${barId}-hover`}
               key={`${barId}-hover`}
-              fill={hovered === index ? 'rgba(0, 0, 0, 0.03)' : 'transparent'}
+              fill={'transparent'}
               x={x}
               y={0}
               width={barWidth}
               height={hoverBarHeight}
             />
-            <rect
+            <Bar
               id={barId}
               key={barId}
               fill={fillColor}
