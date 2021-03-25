@@ -19,7 +19,9 @@ interface ChartContainerProps {
   padding: Padding;
   valueAnnotation?: string;
   ariaLabelledBy: string;
-  onHover: (event: Event) => void;
+  onHover:
+    | ((event: Event) => void)
+    | ((event: Event, valuesIndex: number) => void);
   onClick: (event: Event) => void;
 }
 

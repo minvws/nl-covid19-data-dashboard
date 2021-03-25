@@ -1,7 +1,7 @@
 import { TimestampedValue } from '@corona-dashboard/common';
 import { Bar } from '@visx/shape';
 import { useTooltip } from '@visx/tooltip';
-import { useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import useResizeObserver from 'use-resize-observer';
 import { Box } from '~/components-styled/base';
@@ -21,21 +21,13 @@ import {
 import { useDimensions } from '~/components-styled/time-series-chart/logic/dimensions';
 
 import {
-  BarSeriesDefinition,
-  useSeries,
+  BarSeriesConfig,
+  useSeriesList,
   useCalculatedSeriesMaximum,
   useScales,
   useHoverState,
 } from './logic';
 import { BarTrend, DateMarker } from './components';
-
-export type BarDefinition<T extends TimestampedValue> = {
-  type: 'bar';
-  metricProperty: keyof T;
-  label: string;
-  color: string;
-  style?: 'solid' | 'striped';
-};
 
 /**
  * @TODO
@@ -48,10 +40,13 @@ export type BarDefinition<T extends TimestampedValue> = {
  *   margin. This is currently not used in any charts but would be nice to solve
  *   at some point.
  */
-export type VerticalBarChartProps<T extends TimestampedValue> = {
+export type VerticalBarChartProps<
+  T extends TimestampedValue,
+  C extends BarSeriesConfig<T>
+> = {
   title: string; // Used for default tooltip formatting
   values: T[];
-  config: BarSeriesDefinition<T>;
+  seriesConfig: C;
   width: number;
   ariaLabelledBy: string;
   height?: number;
@@ -67,7 +62,6 @@ export type VerticalBarChartProps<T extends TimestampedValue> = {
    */
   numGridLines?: number;
   tickValues?: number[];
-  showDateMarker?: boolean;
   paddingLeft?: number;
   /**
    * The data specific options are grouped together. This way we can pass them
@@ -75,11 +69,15 @@ export type VerticalBarChartProps<T extends TimestampedValue> = {
    * contain things that are essential to rendering a full tooltip layout
    */
   dataOptions?: DataOptions;
+  onSeriesClick?: (seriesConfig: C[number], value: T) => void;
 };
 
-export function VerticalBarChart<T extends TimestampedValue>({
+export function VerticalBarChart<
+  T extends TimestampedValue,
+  C extends BarSeriesConfig<T>
+>({
   values: allValues,
-  config,
+  seriesConfig,
   width,
   height = 250,
   timeframe = 'all',
@@ -87,11 +85,11 @@ export function VerticalBarChart<T extends TimestampedValue>({
   dataOptions,
   numGridLines = 3,
   tickValues,
-  showDateMarker,
   paddingLeft,
   ariaLabelledBy,
+  onSeriesClick,
   title,
-}: VerticalBarChartProps<T>) {
+}: VerticalBarChartProps<T, C>) {
   const {
     tooltipData,
     tooltipLeft = 0,
@@ -116,9 +114,11 @@ export function VerticalBarChart<T extends TimestampedValue>({
   );
 
   const values = useValuesInTimeframe(allValues, timeframe);
-  const series = useSeries(values, config);
 
-  const calculatedMax = useCalculatedSeriesMaximum(values, config);
+  const seriesList = useSeriesList(values, seriesConfig);
+
+  const calculatedMax = useCalculatedSeriesMaximum(values, seriesConfig);
+
   const { xScale, yScale, getX, getY } = useScales({
     values,
     maximumValue: calculatedMax,
@@ -128,30 +128,37 @@ export function VerticalBarChart<T extends TimestampedValue>({
   });
 
   const [handleHover, hoverState] = useHoverState({
-    series,
-    paddingLeft: padding.left,
+    values,
+    seriesList,
+    seriesConfig,
     xScale,
     yScale,
   });
 
+  const handleClick = useCallback(() => {
+    if (onSeriesClick && tooltipData) {
+      onSeriesClick(seriesConfig[tooltipData.configIndex], tooltipData.value);
+    }
+  }, [onSeriesClick, seriesConfig, tooltipData]);
+
   useEffect(() => {
     if (hoverState) {
-      const { index, point } = hoverState;
+      const { valuesIndex, barPoints, nearestPoint } = hoverState;
 
       showTooltip({
         tooltipData: {
-          value: values[index],
-          valueKey: config.metricProperty,
-          config: [config],
+          value: values[valuesIndex],
+          configIndex: nearestPoint.seriesConfigIndex,
+          config: seriesConfig,
           options: dataOptions || {},
         },
-        tooltipLeft: point.x,
-        tooltipTop: point.y,
+        tooltipLeft: nearestPoint.x,
+        tooltipTop: nearestPoint.y,
       });
     } else {
       hideTooltip();
     }
-  }, [hoverState, config, values, hideTooltip, showTooltip, dataOptions]);
+  }, [hoverState, seriesConfig, values, hideTooltip, showTooltip, dataOptions]);
 
   return (
     <Box>
@@ -161,8 +168,10 @@ export function VerticalBarChart<T extends TimestampedValue>({
           height={height}
           padding={padding}
           ariaLabelledBy={ariaLabelledBy}
+          onHover={handleHover}
+          onClick={handleClick}
         >
-          <Axes
+          {/* <Axes
             bounds={bounds}
             numGridLines={numGridLines}
             yTickValues={tickValues}
@@ -170,33 +179,37 @@ export function VerticalBarChart<T extends TimestampedValue>({
             yScale={yScale}
             isPercentage={isPercentage}
             yAxisRef={yAxisRef}
-          />
-
-          <BarTrend
-            key={0}
-            series={series}
-            color={config.color}
-            secondaryColor={config.secondaryColor}
-            getX={getX}
-            getY={getY}
-            barWidth={xScale.bandwidth()}
-            yScale={yScale}
-            onHover={handleHover}
-          />
+          /> */}
+          {seriesList.map((series, index) => (
+            <BarTrend
+              key={0}
+              series={series}
+              color={seriesConfig[index].color}
+              secondaryColor={seriesConfig[index].secondaryColor}
+              getX={getX}
+              getY={getY}
+              barWidth={xScale.bandwidth()}
+              yScale={yScale}
+              onHover={handleHover}
+            />
+          ))}
         </ChartContainer>
 
-        <Tooltip
-          title={title}
-          data={tooltipData}
-          left={tooltipLeft}
-          top={tooltipTop}
-          isOpen={tooltipOpen}
-          formatTooltip={formatTooltip}
-        />
+        {tooltipOpen && tooltipData && (
+          <Tooltip
+            title={title}
+            data={tooltipData}
+            left={tooltipLeft}
+            top={tooltipTop}
+            bounds={bounds}
+            padding={padding}
+            formatTooltip={formatTooltip}
+          />
+        )}
 
         {hoverState && (
           <Overlay bounds={bounds} padding={padding}>
-            <DateMarker point={hoverState.point} />
+            <DateMarker point={hoverState.nearestPoint} />
           </Overlay>
         )}
       </Box>

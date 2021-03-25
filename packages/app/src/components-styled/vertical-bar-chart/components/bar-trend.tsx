@@ -15,7 +15,10 @@ type BarTrendProps = {
   getY: (v: SeriesSingleValue) => number;
   yScale: PositionScale;
   barWidth: number;
-  onHover: (event: TouchEvent<SVGElement> | MouseEvent<SVGElement>) => void;
+  onHover: (
+    event: TouchEvent<SVGElement> | MouseEvent<SVGElement>,
+    index: number
+  ) => void;
 };
 
 export function BarTrend({
@@ -32,13 +35,13 @@ export function BarTrend({
 
   const handleHover = useCallback(
     (event: TouchEvent<SVGElement> | MouseEvent<SVGElement>, index: number) => {
-      if (event.type === 'mouseleave') {
-        setHovered(undefined);
-      } else if (hovered !== index) {
-        setHovered(index);
-      }
+      // if (event.type === 'mouseleave') {
+      //   setHovered(undefined);
+      // } else if (hovered !== index) {
+      //   setHovered(index);
+      // }
 
-      onHover(event);
+      onHover(event, index);
     },
     [onHover]
   );
@@ -58,7 +61,11 @@ export function BarTrend({
     <Group>
       {series.map((value, index) => {
         const barId = `bar-${index}`;
-        const fillColor = value.__value > 0 ? color : secondaryColor;
+        const fillColor = value.__value
+          ? value.__value > 0
+            ? color
+            : secondaryColor
+          : 'transparent';
 
         const { x, y, height } = getRectPosition(value);
         return (

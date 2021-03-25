@@ -6,7 +6,7 @@ import { VerticalBarChart } from '~/components-styled/vertical-bar-chart';
 import { AllLanguages } from '~/locale/APP_LOCALE';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { formatPercentage } from '~/utils/formatNumber';
+import { useIntl } from '~/intl';
 import { rest } from 'lodash';
 
 function generateDummyData() {
@@ -39,6 +39,8 @@ export function GNumberBarChartTile({
   siteText,
   timeframeOptions = ['5weeks', 'week'],
 }: GNumberBarChartTileProps) {
+  const { formatPercentage } = useIntl();
+
   // const text = siteText.vaccinaties.grafiek_leveringen;
   const text = {
     title: 'Trend over time',
@@ -81,13 +83,15 @@ export function GNumberBarChartTile({
               dataOptions={{
                 isPercentage: true,
               }}
-              config={{
-                type: 'bar',
-                metricProperty: 'g_number',
-                color: colors.data.primary,
-                secondaryColor: colors.red,
-                label: 'lineee',
-              }}
+              seriesConfig={[
+                {
+                  type: 'bar',
+                  metricProperty: 'g_number',
+                  color: colors.data.primary,
+                  secondaryColor: colors.red,
+                  label: 'lineee',
+                },
+              ]}
               formatTooltip={({ value }) =>
                 `${formatPercentage(value.g_number)}% getaald`
               }

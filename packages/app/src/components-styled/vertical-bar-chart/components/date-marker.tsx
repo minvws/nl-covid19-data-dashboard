@@ -1,6 +1,7 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import { formatDateFromSeconds } from '~/utils/formatDate';
+import { TimestampedValue } from '@corona-dashboard/common';
+import { useIntl } from '~/intl';
 import { HoveredPoint } from '../logic';
 
 const LabelContainer = styled.div({
@@ -24,18 +25,24 @@ const Label = styled.span(
   })
 );
 
-interface DateMarkerProps {
-  point: HoveredPoint;
+interface DateMarkerProps<T extends TimestampedValue> {
+  point: HoveredPoint<T>;
 }
 
-export function DateMarker({ point }: DateMarkerProps) {
+export function DateMarker<T extends TimestampedValue>({
+  point,
+}: DateMarkerProps<T>) {
+  const { formatDateFromSeconds } = useIntl();
+
   return (
     <LabelContainer
       style={{
         left: point.x,
       }}
     >
-      <Label>{formatDateFromSeconds(point.value.__date_unix, 'axis')}</Label>
+      <Label>
+        {formatDateFromSeconds(point.seriesValue.__date_unix, 'axis')}
+      </Label>
     </LabelContainer>
   );
 }

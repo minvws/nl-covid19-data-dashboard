@@ -1,9 +1,11 @@
 import { TimestampedValue } from '@corona-dashboard/common';
+import { fromPairs } from 'lodash';
 import {
   DataOptions,
   SeriesConfig,
   TimespanAnnotationConfig,
 } from '../../logic';
+import { BarSeriesConfig } from '~/components-styled/vertical-bar-chart/logic';
 
 export type TooltipData<T extends TimestampedValue> = {
   value: T;
@@ -18,7 +20,7 @@ export type TooltipData<T extends TimestampedValue> = {
    * The full series config is passed to the tooltip so we can render whatever
    * is needed.
    */
-  config: SeriesConfig<T>;
+  config: SeriesConfig<T> | BarSeriesConfig<T>;
 
   /**
    * The options are also essential to know whether to format percentages or

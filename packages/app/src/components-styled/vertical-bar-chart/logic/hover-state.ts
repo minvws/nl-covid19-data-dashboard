@@ -1,99 +1,114 @@
 import { useCallback, useState, useRef } from 'react';
 import { ScaleBand, ScaleLinear } from 'd3-scale';
-import { localPoint } from '@visx/event';
+import { TimestampedValue } from '@corona-dashboard/common';
 import { isEmpty } from 'lodash';
-import { SeriesSingleValue } from '~/components-styled/time-series-chart/logic/series';
+import { isDefined, isPresent } from 'ts-is-present';
+import { BarSeriesConfig } from './series';
+import {
+  SeriesSingleValue,
+  Padding,
+} from '~/components-styled/time-series-chart/logic';
+import { BarSeriesList } from './series';
 
-interface UseHoverStateArgs {
-  series: SeriesSingleValue[];
-  paddingLeft: number;
+interface UseHoverStateArgs<T extends TimestampedValue> {
+  values: T[];
+  seriesList: BarSeriesList;
+  seriesConfig: BarSeriesConfig<T>;
   xScale: ScaleBand<number>;
   yScale: ScaleLinear<number, number>;
 }
 
-export type HoveredPoint = {
-  value: SeriesSingleValue;
+export type HoveredPoint<T> = {
+  seriesValue: SeriesSingleValue;
+  metricProperty: keyof T;
+  seriesConfigIndex: number;
+  color: string;
   x: number;
   y: number;
 };
 
-interface HoverState {
-  index: number;
-  point: HoveredPoint;
+interface HoverState<T> {
+  valuesIndex: number;
+  barPoints: HoveredPoint<T>[];
+  nearestPoint: HoveredPoint<T>;
 }
 
 type Event = React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>;
 
-export type HoverHandler = (event: Event) => void;
+export type HoverHandler = (event: Event, valuesIndex: number) => void;
 
-type UseHoverStateResponse = [HoverHandler, HoverState | undefined];
+type UseHoverStateResponse<T extends TimestampedValue> = [
+  HoverHandler,
+  HoverState<T> | undefined
+];
 
-export function useHoverState({
-  series,
-  paddingLeft,
+export function useHoverState<T extends TimestampedValue>({
+  values,
+  seriesList,
+  seriesConfig,
   xScale,
   yScale,
-}: UseHoverStateArgs): UseHoverStateResponse {
-  const [hoverState, setHoverState] = useState<HoverState>();
+}: UseHoverStateArgs<T>): UseHoverStateResponse<T> {
+  const [hoverState, setHoverState] = useState<HoverState<T>>();
   const timeoutRef = useRef<any>();
 
-  const bisect = useCallback(
-    function (xPosition: number): number {
-      const bandWidth = xScale.step();
-      return Math.floor((xPosition - paddingLeft) / bandWidth);
-    },
-    [paddingLeft, xScale]
-  );
+  const handleHover = useCallback((event: Event, valuesIndex: number) => {
+    if (isEmpty(values) || !isDefined(valuesIndex)) {
+      return;
+    }
 
-  const handleHover = useCallback(
-    (event: Event) => {
-      if (event.type === 'mouseleave') {
-        /**
-         * Here a timeout is used on the clear hover state to prevent the
-         * tooltip from getting jittery. Individual elements in the chart can
-         * send mouseleave events. This logic is maybe best moved to the the
-         * tooltip itself. Or maybe it can be simplified without a ref.
-         */
-        timeoutRef.current = setTimeout(() => {
-          setHoverState(undefined);
-          timeoutRef.current = undefined;
-        }, 200);
-        return;
-      }
-
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-
-      if (isEmpty(series)) {
-        return;
-      }
-
-      const mousePoint = localPoint(event);
-      if (!mousePoint) {
-        return;
-      }
-
-      const index = bisect(mousePoint.x);
-      const value = series[index];
-
-      if (!value) {
+    if (event.type === 'mouseleave') {
+      /**
+       * Here a timeout is used on the clear hover state to prevent the
+       * tooltip from getting jittery. Individual elements in the chart can
+       * send mouseleave events. This logic is maybe best moved to the the
+       * tooltip itself. Or maybe it can be simplified without a ref.
+       */
+      timeoutRef.current = setTimeout(() => {
         setHoverState(undefined);
-        return;
-      }
+        timeoutRef.current = undefined;
+      }, 200);
+      return;
+    }
 
-      setHoverState({
-        index,
-        point: {
-          value,
-          markerX: xScale(value.__date_unix) + xScale.bandwidth() / 2,
-          x: mousePoint?.x || 0,
-          y: mousePoint?.y || 0,
-        },
-      });
-    },
-    [bisect, series, xScale]
-  );
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
+    const barPoints: HoveredPoint<T>[] = seriesConfig
+      .map((config, index) => {
+        const seriesValue = seriesList[index][valuesIndex] as SeriesSingleValue;
+
+        const xValue = seriesValue.__date_unix;
+        const yValue = seriesValue.__value;
+
+        /**
+         * Filter series without Y value on the current valuesIndex
+         */
+        if (!isPresent(yValue)) {
+          return undefined;
+        }
+
+        return {
+          seriesValue,
+          x: xScale(xValue) + xScale.bandwidth() / 2,
+          y: yScale(yValue),
+          color: config.color,
+          metricProperty: config.metricProperty,
+          seriesConfigIndex: index,
+        };
+      })
+      .filter(isDefined);
+
+    setHoverState({
+      valuesIndex,
+      barPoints,
+      // NOTE: This is currently returning the first bar as the "nearestPoint"
+      // since this is only being used with one series. Additional logic should be
+      // added in the future if this chart is used to display multiple bars/stacked bars
+      nearestPoint: barPoints[0],
+    });
+  }, []);
 
   return [handleHover, hoverState];
 }
