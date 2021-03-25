@@ -30,7 +30,7 @@ export function VaccineCoveragePerAgeGroup(props: Props) {
         <CoverageRow hideBorder={index === arr.length - 1}>
           <AgeGroup
             range={formatAgeGroup(value.age_group_range, templates.agegroup)}
-            total={replaceVariablesInText(templates.agegroup.total_people, {
+            count={replaceVariablesInText(templates.agegroup.total_people, {
               total: formatNumber(value.age_group_total),
             })}
           />

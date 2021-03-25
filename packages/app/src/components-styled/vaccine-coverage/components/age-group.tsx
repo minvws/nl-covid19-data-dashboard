@@ -1,8 +1,8 @@
 import { Box } from '~/components-styled/base';
 import { InlineText } from '~/components-styled/typography';
 
-export function AgeGroup(props: { range: string; total: string }) {
-  const { range, total } = props;
+export function AgeGroup(props: { range: string; count: string }) {
+  const { range, count } = props;
   return (
     <Box flex="display" flexDirection="column">
       <Box>
@@ -11,7 +11,7 @@ export function AgeGroup(props: { range: string; total: string }) {
         </InlineText>
       </Box>
       <Box as="span">
-        <InlineText>{total}</InlineText>
+        <InlineText>{count}</InlineText>
       </Box>
     </Box>
   );
