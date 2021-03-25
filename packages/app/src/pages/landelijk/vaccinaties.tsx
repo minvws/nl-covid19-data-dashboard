@@ -1,6 +1,7 @@
 import {
   NlVaccineAdministeredEstimateValue,
   NlVaccineAdministeredValue,
+  NlVaccineCoveragePerAgeGroupValue,
   NlVaccineDeliveryEstimateValue,
   NlVaccineDeliveryValue,
 } from '@corona-dashboard/common';
@@ -18,10 +19,12 @@ import { KpiValue } from '~/components-styled/kpi-value';
 import { Legend } from '~/components-styled/legend';
 import { Markdown } from '~/components-styled/markdown';
 import { RadioGroup } from '~/components-styled/radio-group';
+import { Tile } from '~/components-styled/tile';
 import { TileList } from '~/components-styled/tile-list';
 import { TimeSeriesChart } from '~/components-styled/time-series-chart';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { InlineText, Text } from '~/components-styled/typography';
+import { Heading, InlineText, Text } from '~/components-styled/typography';
+import { VaccineCoveragePerAgeGroup } from '~/components-styled/vaccine-coverage/vaccine-coverage-per-age-group';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
 import {
@@ -89,6 +92,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
   const vaccineNames = useVaccineNames(data.vaccine_administered.last_value);
 
+  //const {vaccine_coverage_per_age_group} = data;
+  const vaccine_coverage_per_age_group = mockCoverageData();
   const [
     vaccineDeliveryValues,
     vaccineDeliveryEstimateValues,
@@ -366,6 +371,20 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             milestones={milestones.milestones}
             expectedMilestones={milestones.expectedMilestones}
           />
+
+          {vaccine_coverage_per_age_group ? (
+            <Tile>
+              <Heading level={2}>
+                {siteText.vaccinaties.vaccination_coverage.title}
+              </Heading>
+              <Text>
+                {siteText.vaccinaties.vaccination_coverage.toelichting}
+              </Text>
+              <VaccineCoveragePerAgeGroup
+                values={vaccine_coverage_per_age_group.values}
+              />
+            </Tile>
+          ) : null}
 
           <ContentHeader
             title={text.bereidheid_section.title}
@@ -665,3 +684,39 @@ function HatchedSquare() {
 //   margin-right: 0.5em;
 //   flex-shrink: 0;
 // `;
+
+// TODO: remove this when data is available
+function mockCoverageData(): { values: NlVaccineCoveragePerAgeGroupValue[] } {
+  const values = [
+    'total',
+    '18-29',
+    '30-39',
+    '40-49',
+    '50-59',
+    '60-69',
+    '70-79',
+    '80+',
+  ]
+    .map(createCoverageRow)
+    .reverse();
+  return { values };
+}
+
+function createCoverageRow(
+  ageGroup: string
+): NlVaccineCoveragePerAgeGroupValue {
+  const ageGroupTotal = Math.floor(Math.random() * 17000000) + 1000000;
+  const fullyVaccinated = Math.floor(Math.random() * ageGroupTotal) + 1;
+
+  return {
+    age_group_range: ageGroup,
+    age_group_percentage: Math.floor(Math.random() * 100) + 1,
+    age_group_total: ageGroupTotal,
+    fully_vaccinated: fullyVaccinated,
+    partially_vaccinated: Math.floor(Math.random() * ageGroupTotal) + 1,
+    fully_vaccinated_percentage: (fullyVaccinated / ageGroupTotal) * 100,
+    date_of_insertion_unix: 1616544000,
+    date_of_report_unix: 1616544000,
+    date_unix: 1616544000,
+  };
+}
