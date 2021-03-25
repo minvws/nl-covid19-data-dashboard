@@ -1,15 +1,14 @@
+import sanityClient from '@sanity/client';
 import dotenv from 'dotenv';
 import flatten from 'flat';
-import fs, { exists } from 'fs';
+import fs from 'fs';
 import get from 'lodash/get';
 import path from 'path';
+import sanityConfig from '../../sanity.json';
 
 const { default: PQueue } = require('p-queue');
 
-import sanityClient from '@sanity/client';
-import sanityConfig from '../../sanity.json';
-
-const result = dotenv.config({
+dotenv.config({
   path: path.resolve(process.cwd(), '.env.local'),
 });
 
@@ -36,8 +35,8 @@ const english = JSON.parse(
 
 const objects = Object.entries(flatten(dutch)).map(([key, value]) => ({
   _type: 'message',
-  _id: key,
-  key,
+  _id: key.split('.').join('::'),
+  key: key.split('.').join('::'),
   description: '',
   translations: {
     default: value,
