@@ -1,9 +1,7 @@
 import { TimestampedValue } from '@corona-dashboard/common';
-import { Bar } from '@visx/shape';
 import { useTooltip } from '@visx/tooltip';
-import { first, isEmpty, last } from 'lodash';
+import { first, last } from 'lodash';
 import { useCallback, useEffect, useMemo } from 'react';
-import { isDefined } from 'ts-is-present';
 import useResizeObserver from 'use-resize-observer';
 import { Box } from '~/components-styled/base';
 import { TimeframeOption } from '~/utils/timeframe';
@@ -16,9 +14,9 @@ import {
 } from '~/components-styled/time-series-chart/components';
 import {
   DataOptions,
+  useDimensions,
   useValuesInTimeframe,
 } from '~/components-styled/time-series-chart/logic';
-import { useDimensions } from '~/components-styled/time-series-chart/logic/dimensions';
 
 import {
   BarSeriesConfig,
@@ -29,17 +27,6 @@ import {
 } from './logic';
 import { BarTrend, DateMarker, Axes, BarHover } from './components';
 
-/**
- * @TODO
- *
- * - Render date start /end on x-axis for date spans series
- * - Configure y-axis for standard charts
- *
- * Known Issues:
- * - Nearest point / tooltip valueKey calculation seems to be off by some
- *   margin. This is currently not used in any charts but would be nice to solve
- *   at some point.
- */
 export type VerticalBarChartProps<
   T extends TimestampedValue,
   C extends BarSeriesConfig<T>

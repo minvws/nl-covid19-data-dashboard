@@ -1,14 +1,10 @@
 import { useCallback, useState, useRef } from 'react';
+import { isDefined, isPresent } from 'ts-is-present';
+import { isEmpty } from 'lodash';
 import { ScaleBand, ScaleLinear } from 'd3-scale';
 import { TimestampedValue } from '@corona-dashboard/common';
-import { isEmpty } from 'lodash';
-import { isDefined, isPresent } from 'ts-is-present';
-import { BarSeriesConfig } from './series';
-import {
-  SeriesSingleValue,
-  Padding,
-} from '~/components-styled/time-series-chart/logic';
-import { BarSeriesList } from './series';
+import { SeriesSingleValue } from '~/components-styled/time-series-chart/logic';
+import { BarSeriesList, BarSeriesConfig } from './series';
 
 interface UseHoverStateArgs<T extends TimestampedValue> {
   values: T[];
@@ -91,7 +87,7 @@ export function useHoverState<T extends TimestampedValue>({
 
         return {
           seriesValue,
-          x: xScale(xValue) + xScale.bandwidth() / 2,
+          x: xScale(xValue) || 0 + xScale.bandwidth() / 2,
           y: yScale(yValue),
           color: config.color,
           metricProperty: config.metricProperty,

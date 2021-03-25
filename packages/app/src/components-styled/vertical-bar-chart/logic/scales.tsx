@@ -23,18 +23,10 @@ export function useScales<T extends TimestampedValue>(args: {
   values: T[];
   maximumValue: number;
   minimumValue: number;
-  tickValues?: number[];
   bounds: Bounds;
   numTicks: number;
 }) {
-  const {
-    maximumValue,
-    minimumValue,
-    tickValues,
-    bounds,
-    numTicks,
-    values,
-  } = args;
+  const { maximumValue, minimumValue, bounds, numTicks, values } = args;
 
   return useMemo(() => {
     if (isEmpty(values)) {
@@ -59,14 +51,8 @@ export function useScales<T extends TimestampedValue>(args: {
       padding: 0.1,
     });
 
-    const yDomain = tickValues
-      ? [
-          Math.min(first(tickValues) as number, 0),
-          Math.max(last(tickValues) as number, maximumValue),
-        ]
-      : [Math.min(minimumValue, 0), maximumValue];
     const yScale = scaleLinear({
-      domain: yDomain,
+      domain: [0, maximumValue],
       range: [bounds.height, 0],
       nice: numTicks,
     });
@@ -79,5 +65,5 @@ export function useScales<T extends TimestampedValue>(args: {
     };
 
     return result;
-  }, [values, maximumValue, bounds, numTicks, tickValues]);
+  }, [values, maximumValue, bounds, numTicks]);
 }

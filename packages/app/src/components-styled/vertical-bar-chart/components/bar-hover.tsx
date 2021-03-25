@@ -1,7 +1,6 @@
 import { HoveredPoint } from '../logic';
 import { TimestampedValue } from '@corona-dashboard/common';
 import { Bounds } from '~/components-styled/time-series-chart/logic';
-import styled from 'styled-components';
 import { Bar } from '@visx/shape';
 
 type BarHoverProps<T extends TimestampedValue> = {

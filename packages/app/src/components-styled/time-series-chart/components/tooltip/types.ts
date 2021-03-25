@@ -1,5 +1,4 @@
 import { TimestampedValue } from '@corona-dashboard/common';
-import { fromPairs } from 'lodash';
 import {
   DataOptions,
   SeriesConfig,

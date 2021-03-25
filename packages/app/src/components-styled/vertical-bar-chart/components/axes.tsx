@@ -1,9 +1,6 @@
 /**
  * This version of Axes is designed to be used in the root component
- * composition. Some charts might need very specific axes formatting and then we
- * can easily swap this out without having to make everything configurable via
- * props. It might be easier to just create 2 or 3 different types of axes
- * layouts by forking this component.
+ * composition for bar charts
  */
 import css from '@styled-system/css';
 import { AxisBottom, AxisLeft } from '@visx/axis';
@@ -11,7 +8,6 @@ import { GridRows } from '@visx/grid';
 import { ScaleLinear, ScaleBand } from 'd3-scale';
 import { memo, Ref, useCallback } from 'react';
 import { colors } from '~/style/theme';
-import { createDate } from '~/utils/createDate';
 import { Bounds } from '~/components-styled/time-series-chart/logic';
 import { useIntl } from '~/intl';
 
