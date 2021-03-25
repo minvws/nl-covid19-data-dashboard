@@ -70,23 +70,21 @@ export function CoverageProgressBar(props: {
                 fill={data.color}
               />
             ))}
-            <line
-              x1={`${barData[barData.length - 1].percentage}%`}
-              x2={`${barData[barData.length - 1].percentage}%`}
-              y1={0}
-              y2={16}
-              strokeWidth="3"
-              stroke="white"
+            <rect
+              x={`${barData[barData.length - 1].percentage}%`}
+              y={0}
+              width="3"
+              height="16"
+              fill="white"
             />
           </g>
           <g>
-            <line
-              x1={`${scale(maxValue)}%`}
-              x2={`${scale(maxValue)}%`}
-              y1={-7}
-              y2={16}
-              strokeWidth="7"
-              stroke="#232423"
+            <rect
+              x={`${scale(maxValue)}%`}
+              y={-7}
+              width="7"
+              height="23"
+              fill="black"
             />
           </g>
         </svg>
