@@ -22,8 +22,7 @@
     "behavior",
     "escalation_level",
     "tested_overall_sum",
-    "hospital_nice_sum",
-    "vaccine_coverage"
+    "hospital_nice_sum"
   ],
   "additionalProperties": false,
   "properties": {
