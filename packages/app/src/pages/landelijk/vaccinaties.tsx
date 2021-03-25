@@ -55,6 +55,8 @@ const scaledVaccineIcon = (
   </Box>
 );
 
+const TEN_DAYS_IN_SECONDS = 10 * 24 * 60 * 60;
+
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   getNlData,
@@ -270,7 +272,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               dataOptions={{
                 timespanAnnotations: [
                   {
-                    start: Date.now() / 1000 - 60 * 60 * 24 * 5,
+                    start:
+                      mockDataRef.current.last_value.date_unix -
+                      TEN_DAYS_IN_SECONDS,
                     end: mockDataRef.current.last_value.date_unix,
                     label: text.grafiek_gevaccineerde_mensen.label_annotatie,
                     shortLabel:

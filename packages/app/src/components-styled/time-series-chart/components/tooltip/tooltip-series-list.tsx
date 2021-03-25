@@ -80,14 +80,11 @@ export function TooltipSeriesList<T extends TimestampedValue>({
         </InlineText>
       )}
       <TooltipList>
-        {seriesConfig.map((x) => {
+        {seriesConfig.map((x, index) => {
           switch (x.type) {
             case 'stacked-area':
               return (
-                <TooltipListItem
-                  key={x.metricProperty as string}
-                  icon={<SeriesIcon config={x} />}
-                >
+                <TooltipListItem key={index} icon={<SeriesIcon config={x} />}>
                   <TooltipValueContainer>
                     <InlineText mr={2}>{x.shortLabel || x.label}:</InlineText>
                     <b>
@@ -103,10 +100,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
 
             case 'range':
               return (
-                <TooltipListItem
-                  key={x.metricPropertyLow as string}
-                  icon={<SeriesIcon config={x} />}
-                >
+                <TooltipListItem key={index} icon={<SeriesIcon config={x} />}>
                   <TooltipValueContainer>
                     <InlineText mr={2}>{x.shortLabel || x.label}:</InlineText>
                     <b css={css({ whiteSpace: 'nowrap' })}>
@@ -127,10 +121,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
             case 'line':
             case 'area':
               return (
-                <TooltipListItem
-                  key={x.metricProperty as string}
-                  icon={<SeriesIcon config={x} />}
-                >
+                <TooltipListItem key={index} icon={<SeriesIcon config={x} />}>
                   <TooltipValueContainer>
                     <InlineText mr={2}>{x.shortLabel || x.label}:</InlineText>
                     <b>
@@ -146,7 +137,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
 
             case 'invisible':
               return (
-                <TooltipListItem key={x.metricProperty as string}>
+                <TooltipListItem key={index}>
                   <TooltipValueContainer>
                     <InlineText mr={2}>{x.label}:</InlineText>
                     <b>

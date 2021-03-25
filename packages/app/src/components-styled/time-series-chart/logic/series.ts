@@ -125,7 +125,7 @@ export function calculateSeriesMaximum<T extends TimestampedValue>(
     .filter((_, index) => isVisible(seriesConfig[index]))
     .flatMap((series) =>
       series.flatMap((x: SeriesSingleValue | SeriesDoubleValue) =>
-        isSeriesValue(x) ? x.__value : [x.__value_a, x.__value_b]
+        isSeriesSingleValue(x) ? x.__value : [x.__value_a, x.__value_b]
       )
     )
     .filter(isDefined);
@@ -154,7 +154,7 @@ export interface SeriesDoubleValue extends SeriesItem {
   __value_b?: number;
 }
 
-export function isSeriesValue(
+export function isSeriesSingleValue(
   value: SeriesSingleValue | SeriesDoubleValue
 ): value is SeriesSingleValue {
   return isDefined((value as any).__value);
@@ -198,30 +198,41 @@ function getStackedAreaSeriesData<T extends TimestampedValue>(
   metricProperty: keyof T,
   stackedAreaSeries: StackedAreaSeriesDefinition<T>[]
 ) {
-  const reversed = [...stackedAreaSeries].reverse();
-  const stackIndex = reversed.findIndex(
-    (x) => x.metricProperty === metricProperty
+  /**
+   * Stacked area series are rendered from top to bottom.
+   * The sum of a Y-value of all series below the current series equals the
+   * low value of a current series's Y-value.
+   */
+  const seriesBelowCurrentSeries = stackedAreaSeries.slice(
+    stackedAreaSeries.findIndex((x) => x.metricProperty === metricProperty) + 1
   );
 
   const seriesHigh = getSeriesData(values, metricProperty);
-  const seriesLow = values.map(() => ({ __value: 0 }));
-
-  /**
-   * get cumulative y value of all previous stacks
-   */
-  let index = 0;
-  while (index < stackIndex) {
-    getSeriesData(values, reversed[index].metricProperty).forEach((x, i) => {
-      seriesLow[i].__value += x.__value || 0;
-    });
-    index++;
-  }
-
-  return seriesHigh.map((x, index) => ({
-    __date_unix: x.__date_unix,
-    __value_a: seriesLow[index].__value ?? 0,
-    __value_b: (seriesLow[index].__value ?? 0) + (x.__value ?? 0),
+  const seriesLow = getSeriesData(values, metricProperty).map((x, index) => ({
+    ...x,
+    __value: sumValuesOnIndex(index),
   }));
+
+  return seriesLow.map((low, index) => {
+    const valueLow = low.__value ?? 0;
+    const valueHigh = valueLow + (seriesHigh[index].__value ?? 0);
+
+    return {
+      __date_unix: low.__date_unix,
+      __value_a: valueLow,
+      __value_b: valueHigh,
+    };
+  });
+
+  function sumValuesOnIndex(index: number): number {
+    /**
+     * The series are rendered from top to bottom. To get the low value of
+     * the current series, we will sum up all values of the `seriesBelowCurrentSeries`.
+     */
+    return seriesBelowCurrentSeries
+      .map((x) => getSeriesData(values, x.metricProperty)[index])
+      .reduce((sum, x) => sum + (x.__value ?? 0), 0);
+  }
 }
 
 function getRangeSeriesData<T extends TimestampedValue>(

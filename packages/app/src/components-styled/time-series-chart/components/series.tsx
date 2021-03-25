@@ -58,7 +58,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({
             case 'line':
               return (
                 <LineTrend
-                  key={config.metricProperty as string}
+                  key={index}
                   series={series as SeriesSingleValue[]}
                   color={config.color}
                   style={config.style}
@@ -86,7 +86,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({
             case 'range':
               return (
                 <RangeTrend
-                  key={config.metricPropertyLow as string}
+                  key={index}
                   series={series as SeriesDoubleValue[]}
                   color={config.color}
                   fillOpacity={config.fillOpacity}
@@ -99,7 +99,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({
             case 'stacked-area':
               return (
                 <StackedAreaTrend
-                  key={config.metricProperty as string}
+                  key={index}
                   series={series as SeriesDoubleValue[]}
                   color={config.color}
                   fillOpacity={config.fillOpacity}
