@@ -99,7 +99,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({
             case 'stacked-area':
               return (
                 <StackedAreaTrend
-                  key={`${config.metricProperty}${index}` as string}
+                  key={config.metricProperty as string}
                   series={series as SeriesDoubleValue[]}
                   color={config.color}
                   fillOpacity={config.fillOpacity}
