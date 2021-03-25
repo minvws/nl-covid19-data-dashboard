@@ -79,7 +79,7 @@ export const getStaticProps = createGetStaticProps(
   createGetContent<{
     articles: ArticleSummary[];
     editorial: EditorialSummary;
-    highlight: HighlightTeaserProps;
+    highlights: HighlightTeaserProps[];
   }>(getTopicalPageQuery)
 );
 
@@ -258,14 +258,14 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
               />
             </CollapsibleButton>
 
-            {content.editorial && content.highlight && (
+            {content.editorial && content.highlights && (
               <>
                 <TopicalSectionHeader
                   title={siteText.common_actueel.secties.artikelen.titel}
                 />
                 <EditorialTile
                   editorial={content.editorial}
-                  highlight={content.highlight}
+                  highlights={content.highlights}
                 />
               </>
             )}
