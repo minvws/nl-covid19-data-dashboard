@@ -287,7 +287,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                   },
                 ]}
                 dataOptions={{
-                  isPercentage: true,
                   benchmark: {
                     value: 7,
                     label: siteText.common.signaalwaarde,
