@@ -3,16 +3,14 @@ import { scaleLinear, scaleBand } from '@visx/scale';
 import { ScaleLinear, ScaleBand } from 'd3-scale';
 import { first, isEmpty, last } from 'lodash';
 import { useMemo } from 'react';
-import { Bounds } from '~/components-styled/time-series-chart/logic/common';
 import {
+  Bounds,
   SeriesItem,
   SeriesSingleValue,
-} from '~/components-styled/time-series-chart/logic/series';
-import {
   GetX,
   GetY,
   ONE_DAY_IN_SECONDS,
-} from '~/components-styled/time-series-chart/logic/scales';
+} from '~/components-styled/time-series-chart/logic';
 
 interface UseScalesResult {
   xScale: ScaleBand<number>;
@@ -24,11 +22,19 @@ interface UseScalesResult {
 export function useScales<T extends TimestampedValue>(args: {
   values: T[];
   maximumValue: number;
+  minimumValue: number;
   tickValues?: number[];
   bounds: Bounds;
   numTicks: number;
 }) {
-  const { maximumValue, tickValues, bounds, numTicks, values } = args;
+  const {
+    maximumValue,
+    minimumValue,
+    tickValues,
+    bounds,
+    numTicks,
+    values,
+  } = args;
 
   return useMemo(() => {
     if (isEmpty(values)) {
@@ -48,7 +54,7 @@ export function useScales<T extends TimestampedValue>(args: {
     }
 
     const xScale = scaleBand({
-      domain: values.map((x) => x.date_unix),
+      domain: values.map((x: TimestampedValue) => x.date_unix),
       range: [0, bounds.width],
       padding: 0.1,
     });
@@ -58,7 +64,7 @@ export function useScales<T extends TimestampedValue>(args: {
           Math.min(first(tickValues) as number, 0),
           Math.max(last(tickValues) as number, maximumValue),
         ]
-      : [0, maximumValue];
+      : [Math.min(minimumValue, 0), maximumValue];
     const yScale = scaleLinear({
       domain: yDomain,
       range: [bounds.height, 0],
@@ -69,7 +75,7 @@ export function useScales<T extends TimestampedValue>(args: {
       xScale,
       yScale,
       getX: (x: SeriesItem) => xScale(x.__date_unix) as number,
-      getY: (x: SeriesSingleValue) => yScale(x.__value),
+      getY: (x: SeriesSingleValue) => yScale(x.__value as number),
     };
 
     return result;

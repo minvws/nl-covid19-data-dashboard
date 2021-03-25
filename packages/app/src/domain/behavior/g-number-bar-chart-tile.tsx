@@ -77,9 +77,7 @@ export function GNumberBarChartTile({
               timeframe={timeframe}
               ariaLabelledBy="chart_g_number"
               values={simplifiedData}
-              showDateMarker
               numGridLines={3}
-              tickValues={[-50, 0, 50]}
               dataOptions={{
                 isPercentage: true,
               }}

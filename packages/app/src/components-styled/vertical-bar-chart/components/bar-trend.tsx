@@ -1,7 +1,14 @@
 import { PositionScale } from '@visx/shape/lib/types';
 import { Group } from '@visx/group';
 import { first, last } from 'lodash';
-import { MouseEvent, TouchEvent, useCallback, useState, useMemo } from 'react';
+import {
+  MouseEvent,
+  TouchEvent,
+  useCallback,
+  useState,
+  useMemo,
+  memo,
+} from 'react';
 import {
   SeriesItem,
   SeriesSingleValue,
@@ -21,7 +28,7 @@ type BarTrendProps = {
   ) => void;
 };
 
-export function BarTrend({
+export const BarTrend = memo(function BarTrend({
   series,
   color,
   secondaryColor = color,
@@ -101,7 +108,7 @@ export function BarTrend({
       })}
     </Group>
   );
-}
+});
 
 function getRectPositionFunction(
   zeroPosition: number,

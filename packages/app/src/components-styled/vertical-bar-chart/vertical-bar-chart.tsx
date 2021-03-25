@@ -1,13 +1,13 @@
 import { TimestampedValue } from '@corona-dashboard/common';
 import { Bar } from '@visx/shape';
 import { useTooltip } from '@visx/tooltip';
+import { first, isEmpty, last } from 'lodash';
 import { useCallback, useEffect, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import useResizeObserver from 'use-resize-observer';
 import { Box } from '~/components-styled/base';
 import { TimeframeOption } from '~/utils/timeframe';
 import {
-  Axes,
   ChartContainer,
   Tooltip,
   TooltipData,
@@ -23,11 +23,11 @@ import { useDimensions } from '~/components-styled/time-series-chart/logic/dimen
 import {
   BarSeriesConfig,
   useSeriesList,
-  useCalculatedSeriesMaximum,
+  useCalculatedSeriesExtremes,
   useScales,
   useHoverState,
 } from './logic';
-import { BarTrend, DateMarker } from './components';
+import { BarTrend, DateMarker, Axes } from './components';
 
 /**
  * @TODO
@@ -117,15 +117,24 @@ export function VerticalBarChart<
 
   const seriesList = useSeriesList(values, seriesConfig);
 
-  const calculatedMax = useCalculatedSeriesMaximum(values, seriesConfig);
+  const {
+    max: calculatedMax,
+    min: calculatedMin,
+  } = useCalculatedSeriesExtremes(values, seriesConfig);
 
   const { xScale, yScale, getX, getY } = useScales({
     values,
     maximumValue: calculatedMax,
+    minimumValue: calculatedMin,
     tickValues,
     bounds,
     numTicks: tickValues?.length || numGridLines,
   });
+
+  const xTickValues = useMemo(
+    () => [first(xScale.domain()), last(xScale.domain())] as [number, number],
+    [xScale]
+  );
 
   const [handleHover, hoverState] = useHoverState({
     values,
@@ -143,7 +152,7 @@ export function VerticalBarChart<
 
   useEffect(() => {
     if (hoverState) {
-      const { valuesIndex, barPoints, nearestPoint } = hoverState;
+      const { valuesIndex, nearestPoint } = hoverState;
 
       showTooltip({
         tooltipData: {
@@ -171,15 +180,17 @@ export function VerticalBarChart<
           onHover={handleHover}
           onClick={handleClick}
         >
-          {/* <Axes
+          <Axes
             bounds={bounds}
             numGridLines={numGridLines}
             yTickValues={tickValues}
+            xTickValues={xTickValues}
             xScale={xScale}
             yScale={yScale}
             isPercentage={isPercentage}
             yAxisRef={yAxisRef}
-          /> */}
+          />
+
           {seriesList.map((series, index) => (
             <BarTrend
               key={0}

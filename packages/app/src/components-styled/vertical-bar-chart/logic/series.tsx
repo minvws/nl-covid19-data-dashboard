@@ -41,11 +41,11 @@ export function getSeriesList<T extends TimestampedValue>(
   );
 }
 
-export function useCalculatedSeriesMaximum<T extends TimestampedValue>(
+export function useCalculatedSeriesExtremes<T extends TimestampedValue>(
   values: T[],
   seriesConfig: BarSeriesConfig<T>
 ) {
-  return useMemo(() => calculateSeriesMaximum(values, seriesConfig), [
+  return useMemo(() => calculateSeriesExtremes(values, seriesConfig), [
     values,
     seriesConfig,
   ]);
@@ -57,19 +57,25 @@ export function useCalculatedSeriesMaximum<T extends TimestampedValue>(
  * render lines, so that the axis scales with whatever key contains the highest
  * values.
  */
-export function calculateSeriesMaximum<T extends TimestampedValue>(
+export function calculateSeriesExtremes<T extends TimestampedValue>(
   values: T[],
   seriesConfig: BarSeriesConfig<T>
 ) {
   const metricProperties = seriesConfig.flatMap((x) => x.metricProperty);
 
-  const peakValues = values.map((x) => {
-    const trendValues = Object.values(pick(x, metricProperties)) as (
-      | number
-      | null
-    )[];
-    return Math.max(...trendValues.filter(isPresent));
-  });
+  const extremeValues = values
+    .map((x) => {
+      const trendValues = Object.values(pick(x, metricProperties)) as (
+        | number
+        | null
+      )[];
+      const presentValues = trendValues.filter(isPresent);
+      return [Math.min(...presentValues), Math.max(...presentValues)];
+    })
+    .flat();
 
-  return Math.max(...peakValues);
+  return {
+    max: Math.max(...extremeValues),
+    min: Math.min(...extremeValues),
+  };
 }
