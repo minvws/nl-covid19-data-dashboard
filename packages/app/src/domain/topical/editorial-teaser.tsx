@@ -10,7 +10,7 @@ import { Link } from '~/utils/link';
 
 export type EditorialSummary = Pick<
   Editorial,
-  'title' | 'slug' | 'summary' | 'cover'
+  'title' | 'slug' | 'summary' | 'cover' | 'publicationDate'
 >;
 
 type EditorialTeaserProps = {

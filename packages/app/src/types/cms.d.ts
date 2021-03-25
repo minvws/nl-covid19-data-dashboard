@@ -49,6 +49,7 @@ export interface Article {
   metaDescription: string;
   publicationDate: string;
   isHighlighted: boolean;
+  category: string;
 }
 
 export interface ImageBlock {

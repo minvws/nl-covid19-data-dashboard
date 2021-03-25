@@ -11,7 +11,7 @@ import { Heading, InlineText, Text } from './typography';
 
 export type ArticleSummary = Pick<
   Article,
-  'title' | 'slug' | 'summary' | 'cover'
+  'title' | 'slug' | 'summary' | 'cover' | 'category'
 >;
 
 type ArticleTeaserProps = {
@@ -20,10 +20,11 @@ type ArticleTeaserProps = {
   summary: Block;
   cover: ImageBlock;
   coverSizes: number[][];
+  category: string;
 };
 
 export function ArticleTeaser(props: ArticleTeaserProps) {
-  const { title, slug, summary, cover, coverSizes } = props;
+  const { title, slug, summary, cover, coverSizes, category } = props;
   const { siteText } = useIntl();
 
   return (
@@ -32,7 +33,15 @@ export function ArticleTeaser(props: ArticleTeaserProps) {
         <ZoomContainer height={200}>
           <BackgroundImage image={cover} height={200} sizes={coverSizes} />
         </ZoomContainer>
-        <Box padding={3}>
+        <Box pt={3}>
+          <InlineText
+            css={css({ textTransform: 'uppercase' })}
+            fontSize="0.75rem"
+            fontWeight="bold"
+            color="annotation"
+          >
+            {category}
+          </InlineText>
           <Heading
             level={3}
             mb={{ _: 1, sm: 3 }}
@@ -74,10 +83,6 @@ function ZoomContainerUnstyled({
 const StyledArticleTeaser = styled.a(
   css({
     display: 'block',
-    border: 'solid',
-    borderWidth: 1,
-    borderColor: 'lightGray',
-    borderRadius: 4,
     minHeight: '26rem',
     overflow: 'hidden',
     textDecoration: 'none',

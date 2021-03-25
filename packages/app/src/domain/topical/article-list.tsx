@@ -33,6 +33,7 @@ export function ArticleList({ articleSummaries }: ArticleListProps) {
             slug={summary.slug.current}
             summary={summary.summary}
             cover={summary.cover}
+            category={summary.category}
             coverSizes={[
               // viewport min-width 768px display images at max. 445px wide
               [768, 445],
@@ -44,7 +45,7 @@ export function ArticleList({ articleSummaries }: ArticleListProps) {
   );
 }
 
-const ArticleBox = styled.div(
+export const ArticleBox = styled.div(
   css({
     marginBottom: 4,
     width: asResponsiveArray({

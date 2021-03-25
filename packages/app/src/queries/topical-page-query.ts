@@ -11,6 +11,7 @@ export function getTopicalPageQuery(_context: GetStaticPropsContext) {
       "title":title.${locale},
       slug,
       "summary":summary.${locale},
+      "category":category.${locale},
       "cover": {
         ...cover,
         "asset": cover.asset->
@@ -20,22 +21,23 @@ export function getTopicalPageQuery(_context: GetStaticPropsContext) {
       "title":title.${locale},
       slug,
       "summary":summary.${locale},
+      publicationDate,
       "cover": {
         ...cover,
         "asset": cover.asset->
       }
     }[0],
-    "highlight": *[_type=='topicalPage'] {
-      "title":title.${locale},
-      "summary":summary.${locale},
-      "link": {
-        "label":label.${locale},
-        href
-      },
-      "cover": {
-        ...cover,
-        "asset": cover.asset->  
+    "highlights": *[_type=='topicalPage']{
+      highlights[]{
+        "title":title.${locale},
+        "category": category.${locale},
+        "label":label.nl,
+        href,
+        "cover": {
+          ...cover,
+          "asset": cover.asset->  
+        }
       }
-    }[0]
+    }[0].highlights
   }`;
 }

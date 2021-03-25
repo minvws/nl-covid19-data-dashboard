@@ -2,28 +2,40 @@ import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { ArrowIconRight } from '~/components-styled/arrow-icon';
-import { Block, ImageBlock } from '~/types/cms';
+import { useIntl } from '~/intl';
+import { ImageBlock } from '~/types/cms';
 import { Link } from '~/utils/link';
 import { BackgroundImage } from './background-image';
 import { Box } from './base';
-import { Heading, InlineText, Text } from './typography';
+import { PublicationDate } from './publication-date';
+import { Heading, InlineText } from './typography';
 
 export type HighlightTeaserProps = {
   title: string;
-  summary: Block;
   cover: ImageBlock;
-  link: {
-    href: string;
-    label: string;
-  };
+  label?: string;
+  href: string;
+  category: string;
+  publicationDate?: string;
+  isWeekly?: boolean;
 };
 
 export function HighlightTeaser(props: HighlightTeaserProps) {
-  const { title, link, summary, cover } = props;
+  const {
+    title,
+    href,
+    label,
+    cover,
+    category,
+    isWeekly,
+    publicationDate,
+  } = props;
+
+  const { siteText } = useIntl();
 
   return (
-    <Link passHref href={link.href}>
-      <StyledHightlightTeaser>
+    <Link passHref href={href}>
+      <StyledHightlightTeaser isWeekly={isWeekly}>
         <ZoomContainer height={200}>
           <BackgroundImage
             image={cover}
@@ -34,7 +46,21 @@ export function HighlightTeaser(props: HighlightTeaserProps) {
             ]}
           />
         </ZoomContainer>
-        <Box padding={3}>
+        <Box padding={isWeekly ? 3 : 0} pt={3}>
+          <InlineText
+            css={css({ textTransform: 'uppercase' })}
+            fontSize="0.75rem"
+            fontWeight="bold"
+            color="annotation"
+          >
+            {category}
+            {publicationDate && (
+              <>
+                {' - '}
+                <PublicationDate date={publicationDate} />
+              </>
+            )}
+          </InlineText>
           <Heading
             level={3}
             mb={{ _: 1, sm: 3 }}
@@ -43,10 +69,9 @@ export function HighlightTeaser(props: HighlightTeaserProps) {
           >
             {title}
           </Heading>
-          <Text>{summary}</Text>
 
           <InlineText aria-hidden="true" fontWeight="bold" color="link">
-            {link.label}
+            {label ? label : siteText.common.read_weekly}
             <Arrow />
           </InlineText>
         </Box>
@@ -73,17 +98,17 @@ function ZoomContainerUnstyled({
   );
 }
 
-const StyledHightlightTeaser = styled.a(
+const StyledHightlightTeaser = styled.a<{ isWeekly?: boolean }>((x) =>
   css({
     display: 'block',
-    border: 'solid',
-    borderWidth: 1,
-    borderColor: 'lightGray',
-    borderRadius: 4,
-    minHeight: '26rem',
     overflow: 'hidden',
     textDecoration: 'none',
-    color: 'body',
+    backgroundColor: x.isWeekly ? 'blue' : undefined,
+    color: x.isWeekly ? 'white' : 'body',
+
+    'span, time': {
+      color: x.isWeekly ? 'white' : undefined,
+    },
 
     [`${ZoomContainer}, ${Heading}`]: {
       transitionProperty: 'transform, color',
@@ -97,7 +122,7 @@ const StyledHightlightTeaser = styled.a(
         transitionTimingFunction: 'ease-in-out',
         transform: 'scale(1.04)',
       },
-      [Heading]: { color: 'link' },
+      [Heading]: { color: x.isWeekly ? undefined : 'link' },
     },
   })
 );

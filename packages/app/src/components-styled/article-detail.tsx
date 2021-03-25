@@ -2,13 +2,14 @@ import { ArrowIconLeft } from '~/components-styled/arrow-icon';
 
 import { Box } from '~/components-styled/base';
 import { ContentBlock } from '~/components-styled/cms/content-block';
-import { Heading } from '~/components-styled/typography';
+import { Heading, InlineText } from '~/components-styled/typography';
 import { useIntl } from '~/intl';
 import { Article } from '~/types/cms';
 import { ContentImage } from './cms/content-image';
 import { RichContent } from './cms/rich-content';
 import { LinkWithIcon } from './link-with-icon';
 import { PublicationDate } from './publication-date';
+import { css } from '@styled-system/css';
 interface ArticleDetailProps {
   article: Article;
 }
@@ -28,6 +29,14 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
         </LinkWithIcon>
 
         <Box spacing={2}>
+          <InlineText
+            css={css({ textTransform: 'uppercase' })}
+            fontSize="0.75rem"
+            fontWeight="bold"
+            color="annotation"
+          >
+            {article.category}
+          </InlineText>
           <Heading level={1} mb={0}>
             {article.title}
           </Heading>
