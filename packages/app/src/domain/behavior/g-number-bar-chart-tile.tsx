@@ -16,7 +16,7 @@ function generateDummyData() {
 
   for (let i = 0; i < 5 * 7; ++i) {
     data.push({
-      g_number: i % 3 === 0 ? -Math.random() * 50 : Math.random() * 50,
+      g_number: i % 3 === 0 ? -Math.random() * 40 : Math.random() * 40,
       date_of_insertion_unix: 0,
       date_start_unix: new Date(currentDate.getTime() - 7).getTime() / 1000,
       date_end_unix: currentDate.getTime() / 1000,

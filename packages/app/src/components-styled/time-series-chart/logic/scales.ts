@@ -31,11 +31,10 @@ interface UseScalesResult {
 export function useScales<T extends TimestampedValue>(args: {
   values: T[];
   maximumValue: number;
-  tickValues?: number[];
   bounds: Bounds;
   numTicks: number;
 }) {
-  const { maximumValue, tickValues, bounds, numTicks, values } = args;
+  const { maximumValue, bounds, numTicks, values } = args;
 
   return useMemo(() => {
     if (isEmpty(values)) {
@@ -64,14 +63,8 @@ export function useScales<T extends TimestampedValue>(args: {
       range: [0, bounds.width],
     });
 
-    const yDomain = tickValues
-      ? [
-          Math.min(first(tickValues), 0),
-          Math.max(last(tickValues), maximumValue),
-        ]
-      : [0, maximumValue];
     const yScale = scaleLinear({
-      domain: yDomain,
+      domain: [0, maximumValue],
       range: [bounds.height, 0],
       nice: numTicks,
     });
@@ -87,7 +80,7 @@ export function useScales<T extends TimestampedValue>(args: {
     };
 
     return result;
-  }, [values, maximumValue, bounds, numTicks, tickValues]);
+  }, [values, maximumValue, bounds, numTicks]);
 }
 
 /**

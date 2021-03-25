@@ -11,6 +11,7 @@ import {
   TooltipData,
   TooltipFormatter,
   Overlay,
+  Axes,
 } from '~/components-styled/time-series-chart/components';
 import {
   DataOptions,
@@ -25,7 +26,12 @@ import {
   useScales,
   useHoverState,
 } from './logic';
-import { BarTrend, DateMarker, Axes, BarHover } from './components';
+import {
+  BarTrend,
+  DateMarker,
+  BarHover,
+  // Axes
+} from './components';
 
 export type VerticalBarChartProps<
   T extends TimestampedValue,
@@ -175,7 +181,7 @@ export function VerticalBarChart<
             xScale={xScale}
             yScale={yScale}
             isPercentage={isPercentage}
-            // yAxisRef={yAxisRef}
+            yAxisRef={yAxisRef}
           />
 
           {hoverState && (

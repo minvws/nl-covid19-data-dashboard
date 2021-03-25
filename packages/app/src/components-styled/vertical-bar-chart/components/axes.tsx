@@ -45,6 +45,8 @@ export const Axes = memo(function Axes({
   xTickValues,
   yAxisRef,
 }: AxesProps) {
+  const [startUnix, endUnix] = xTickValues;
+
   const { formatDateFromSeconds, formatNumber, formatPercentage } = useIntl();
 
   const formatYAxis = useCallback(
@@ -95,12 +97,19 @@ export const Axes = memo(function Axes({
       <AxisBottom
         scale={xScale}
         tickValues={xTickValues}
+        // numTicks={5}
         tickFormat={formatXAxis as AnyTickFormatter}
         top={bounds.height}
         stroke={colors.silver}
         tickLabelProps={(x) => ({
           fill: colors.data.axisLabels,
           fontSize: 12,
+          /**
+           * Using anchor middle the line marker label will fall nicely on top
+           * of the axis label
+           */
+          // textAnchor:
+          //   x === startUnix ? 'start' : x === endUnix ? 'end' : 'middle',
           textAnchor: 'middle',
         })}
         hideTicks
