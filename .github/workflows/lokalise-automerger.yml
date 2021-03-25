@@ -64,4 +64,5 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           MERGE_LABELS: automerge
           MERGE_METHOD: squash
+          MERGE_RETRY_SLEEP: 300000 # 5 minutes
           MERGE_DELETE_BRANCH: true
