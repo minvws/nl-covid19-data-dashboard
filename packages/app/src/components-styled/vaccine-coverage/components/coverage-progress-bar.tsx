@@ -29,13 +29,13 @@ export function CoverageProgressBar(props: {
         percentage: fullyPercentage,
         value: fully,
         label: fullyLabel,
-        color: '#239BE6',
+        color: '#005083',
       },
       {
         percentage: partialPercentage,
         value: partially,
         label: partialLabel,
-        color: '#005083',
+        color: '#239BE6',
       },
     ].sort((a, b) => b.value - a.value);
   }, [
