@@ -33,8 +33,7 @@
         "infected_age_90_plus_per_100k",
         "infected_overall_per_100k",
         "date_unix",
-        "date_of_insertion_unix",
-        "date_of_report_unix"
+        "date_of_insertion_unix"
       ],
       "properties": {
         "infected_age_0_9_per_100k": {
@@ -74,9 +73,6 @@
           "type": "integer"
         },
         "date_of_insertion_unix": {
-          "type": "integer"
-        },
-        "date_of_report_unix": {
           "type": "integer"
         }
       }
