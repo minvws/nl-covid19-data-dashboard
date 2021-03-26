@@ -266,60 +266,68 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               source: text.bronnen.rivm,
             }}
           >
-            <TimeSeriesChart
-              tooltipTitle={'Aantal gevaccineerde mensen'}
-              values={mockDataRef.current.values}
-              dataOptions={{
-                timespanAnnotations: [
+            <Box spacing={3}>
+              <TimeSeriesChart
+                tooltipTitle={'Aantal gevaccineerde mensen'}
+                values={mockDataRef.current.values}
+                dataOptions={{
+                  timespanAnnotations: [
+                    {
+                      start:
+                        mockDataRef.current.last_value.date_unix -
+                        TEN_DAYS_IN_SECONDS,
+                      end: mockDataRef.current.last_value.date_unix,
+                      label: text.grafiek_gevaccineerde_mensen.label_annotatie,
+                      shortLabel:
+                        text.grafiek_gevaccineerde_mensen
+                          .tooltip_label_annotatie,
+                    },
+                  ],
+                }}
+                seriesConfig={[
                   {
-                    start:
-                      mockDataRef.current.last_value.date_unix -
-                      TEN_DAYS_IN_SECONDS,
-                    end: mockDataRef.current.last_value.date_unix,
-                    label: text.grafiek_gevaccineerde_mensen.label_annotatie,
+                    metricProperty: 'partially_or_fully_vaccinated',
+                    type: 'line',
+                    label:
+                      text.grafiek_gevaccineerde_mensen.label_geprikte_mensen,
                     shortLabel:
-                      text.grafiek_gevaccineerde_mensen.tooltip_label_annotatie,
+                      text.grafiek_gevaccineerde_mensen
+                        .tooltip_label_geprikte_mensen,
+                    color: 'black',
+                    strokeWidth: 3,
                   },
-                ],
-              }}
-              seriesConfig={[
-                {
-                  metricProperty: 'partially_or_fully_vaccinated',
-                  type: 'line',
-                  label:
-                    text.grafiek_gevaccineerde_mensen.label_geprikte_mensen,
-                  shortLabel:
-                    text.grafiek_gevaccineerde_mensen
-                      .tooltip_label_geprikte_mensen,
-                  color: 'black',
-                  strokeWidth: 3,
-                },
-                {
-                  metricProperty: 'partially_vaccinated',
-                  type: 'stacked-area',
-                  label:
-                    text.grafiek_gevaccineerde_mensen
-                      .label_gedeeltelijk_gevaccineerd,
-                  shortLabel:
-                    text.grafiek_gevaccineerde_mensen
-                      .tooltip_label_gedeeltelijk_gevaccineerd,
-                  color: colors.data.multiseries.cyan,
-                  fillOpacity: 1,
-                },
-                {
-                  metricProperty: 'fully_vaccinated',
-                  type: 'stacked-area',
-                  label:
-                    text.grafiek_gevaccineerde_mensen
-                      .label_volledig_gevaccineerd,
-                  shortLabel:
-                    text.grafiek_gevaccineerde_mensen
-                      .tooltip_label_volledig_gevaccineerd,
-                  color: colors.data.multiseries.cyan_dark,
-                  fillOpacity: 1,
-                },
-              ]}
-            />
+                  {
+                    metricProperty: 'partially_vaccinated',
+                    type: 'stacked-area',
+                    label:
+                      text.grafiek_gevaccineerde_mensen
+                        .label_gedeeltelijk_gevaccineerd,
+                    shortLabel:
+                      text.grafiek_gevaccineerde_mensen
+                        .tooltip_label_gedeeltelijk_gevaccineerd,
+                    color: colors.data.multiseries.cyan,
+                    fillOpacity: 1,
+                  },
+                  {
+                    metricProperty: 'fully_vaccinated',
+                    type: 'stacked-area',
+                    label:
+                      text.grafiek_gevaccineerde_mensen
+                        .label_volledig_gevaccineerd,
+                    shortLabel:
+                      text.grafiek_gevaccineerde_mensen
+                        .tooltip_label_volledig_gevaccineerd,
+                    color: colors.data.multiseries.cyan_dark,
+                    fillOpacity: 1,
+                  },
+                ]}
+              />
+              {text.grafiek_gevaccineerde_mensen.extra_bericht && (
+                <Markdown
+                  content={text.grafiek_gevaccineerde_mensen.extra_bericht}
+                />
+              )}
+            </Box>
           </ChartTile>
 
           <ChartTile
