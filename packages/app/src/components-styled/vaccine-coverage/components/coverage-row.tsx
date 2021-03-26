@@ -8,6 +8,7 @@ import { useBreakpoints } from '~/utils/useBreakpoints';
 type CoverageRowProps = {
   children: [ReactNode, ReactNode, ReactNode];
   hideBorder?: boolean;
+  borderColor?: string;
 };
 
 export function CoverageRow(props: CoverageRowProps) {
@@ -20,11 +21,12 @@ export function CoverageRow(props: CoverageRowProps) {
 }
 
 function MobileCoverageRow(props: CoverageRowProps) {
-  const { children, hideBorder = false } = props;
+  const { children, borderColor, hideBorder = false } = props;
   const [open, setOpen] = useState<'collapsed' | 'open'>('collapsed');
   return (
     <Row
       hideBorder={hideBorder}
+      borderColor={borderColor}
       width="100%"
       display="flex"
       flexDirection="column"
@@ -51,9 +53,9 @@ function MobileCoverageRow(props: CoverageRowProps) {
 }
 
 function DesktopCoverageRow(props: CoverageRowProps) {
-  const { children, hideBorder = false } = props;
+  const { children, borderColor, hideBorder = false } = props;
   return (
-    <Row hideBorder={hideBorder}>
+    <Row hideBorder={hideBorder} borderColor={borderColor}>
       <Box flex={0.4}>{children[0]}</Box>
       <Box flex={0.4}>{children[1]}</Box>
       <Box flex={1} display="flex" alignItems="flex-end">
@@ -63,20 +65,22 @@ function DesktopCoverageRow(props: CoverageRowProps) {
   );
 }
 
-const Row = styled(Box)<{ hideBorder: boolean }>(({ hideBorder }) => {
-  const cssProps = hideBorder
-    ? { display: 'flex', alignContent: 'center' }
-    : {
-        display: 'flex',
-        justifyContent: 'stretch',
-        borderBottomColor: 'border',
-        borderBottomStyle: 'solid',
-        borderBottomWidth: '1px',
-        pb: 3,
-        mb: 3,
-      };
-  return css(cssProps as any);
-});
+const Row = styled(Box)<{ hideBorder: boolean; borderColor?: string }>(
+  ({ hideBorder, borderColor = 'border' }) => {
+    const cssProps = hideBorder
+      ? { display: 'flex', alignContent: 'center' }
+      : {
+          display: 'flex',
+          justifyContent: 'stretch',
+          borderTopColor: borderColor,
+          borderTopStyle: 'solid',
+          borderTopWidth: '1px',
+          pt: 3,
+          my: 2,
+        };
+    return css(cssProps as any);
+  }
+);
 
 const Chevron = styled.div<{
   open: boolean;

@@ -23,13 +23,15 @@ export function VaccineCoveragePerAgeGroup(props: Props) {
 
   return (
     <Box display="flex" flexDirection="column">
-      <CoverageRow>
+      <CoverageRow hideBorder>
         <InlineText>{headers.agegroup}</InlineText>
         <InlineText>{headers.coverage}</InlineText>
         {breakpoints.md ? <InlineText>{headers.progress}</InlineText> : null}
       </CoverageRow>
       {values.map((value, index, arr) => (
-        <CoverageRow hideBorder={index === arr.length - 1}>
+        <CoverageRow
+          borderColor={index === arr.length - 1 ? 'black' : undefined}
+        >
           <AgeGroup
             range={formatAgeGroup(value.age_group_range, templates.agegroup)}
             total={replaceVariablesInText(templates.agegroup.total_people, {
