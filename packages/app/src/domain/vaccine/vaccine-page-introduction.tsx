@@ -23,14 +23,17 @@ export function VaccinePageIntroduction({
   text,
   data,
 }: VaccinePageIntroductionProps) {
-  const { siteText, formatPercentage, formatDateFromTo } = useIntl();
+  const { siteText, formatPercentage, formatDateSpan } = useIntl();
 
   const roundedMillion =
     Math.floor(
       (data.vaccine_administered_total.last_value.estimated / 1_000_000) * 10
     ) / 10;
 
-  const vaccineAdministeredDateRange = formatDateFromTo(
+  const [
+    vaccineAdministeredStartDate,
+    vaccineAdministeredEndDate,
+  ] = formatDateSpan(
     {
       seconds: data.vaccine_administered_planned.last_value.date_start_unix,
     },
@@ -85,11 +88,6 @@ export function VaccinePageIntroduction({
                 </Box>
               )}
               <Box as="article" spacing={3}>
-                <Heading level={3}>{text.kpi_vaccinatiegraad.titel}</Heading>
-                <KpiValue percentage={99} />
-                <Markdown content={text.kpi_vaccinatiegraad.omschrijving} />
-              </Box>
-              <Box as="article" spacing={3}>
                 <Heading level={3}>
                   {text.kpi_geplande_prikken_deze_week.titel}
                 </Heading>
@@ -100,8 +98,8 @@ export function VaccinePageIntroduction({
                   content={replaceVariablesInText(
                     text.kpi_geplande_prikken_deze_week.omschrijving,
                     {
-                      date_from: vaccineAdministeredDateRange.dateFrom,
-                      date_to: vaccineAdministeredDateRange.dateTo,
+                      date_from: vaccineAdministeredStartDate,
+                      date_to: vaccineAdministeredEndDate,
                     }
                   )}
                 />
