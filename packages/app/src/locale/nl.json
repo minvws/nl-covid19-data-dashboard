@@ -667,7 +667,6 @@
     "gisteren": "Gisteren",
     "vandaag": "Vandaag",
     "read_more": "Lees meer",
-    "read_weekly": "Lees het weekbericht",
     "absolute_date_template": "op {{date}}",
     "inwoners": "inwoners",
     "miljoen": "miljoen",
@@ -2387,7 +2386,9 @@
         "link": {
           "text": "Bekijk alle artikelen",
           "href": "/artikelen"
-        }
+        },
+        "read_weekly_message": "Lees het weekbericht",
+        "weekly_category": "Weekbericht"
       },
       "positief_getest_kaart": {
         "titel": "Positief geteste mensen in Nederland"

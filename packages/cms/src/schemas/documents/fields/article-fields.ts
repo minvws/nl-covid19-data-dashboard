@@ -10,7 +10,7 @@ export const ARTICLE_FIELDS = [
       }),
   },
   {
-    title: 'Category',
+    title: 'Categorie',
     name: 'category',
     type: 'localeString',
     validation: (Rule: any) =>

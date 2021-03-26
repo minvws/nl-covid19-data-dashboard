@@ -4,12 +4,11 @@ export default {
   type: 'document',
   fields: [
     {
-      title: 'Custom highlight blocks',
+      title: 'Uitgelichte items',
       name: 'highlights',
       type: 'array',
       of: [
         {
-          title: 'Highlighted articles',
           type: 'object',
           preview: {
             select: {
@@ -28,7 +27,7 @@ export default {
                 }),
             },
             {
-              title: 'Category',
+              title: 'Categorie',
               name: 'category',
               type: 'localeString',
               validation: (Rule: any) =>

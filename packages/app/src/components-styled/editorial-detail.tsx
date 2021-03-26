@@ -2,7 +2,7 @@ import { ArrowIconLeft } from '~/components-styled/arrow-icon';
 import { Box } from '~/components-styled/base';
 import { ContentBlock } from '~/components-styled/cms/content-block';
 import { ContentImage } from '~/components-styled/cms/content-image';
-import { Heading } from '~/components-styled/typography';
+import { Heading, InlineText } from '~/components-styled/typography';
 import { useIntl } from '~/intl';
 import { Editorial } from '~/types/cms';
 import { RichContent } from './cms/rich-content';
@@ -23,10 +23,20 @@ export function EditorialDetail({ editorial }: EditorialDetailProps) {
         </LinkWithIcon>
 
         <Box spacing={2}>
+          <InlineText
+            textTransform="uppercase"
+            fontSize="0.75rem"
+            fontWeight="bold"
+            color="annotation"
+          >
+            {editorial.category}
+          </InlineText>
           <Heading level={1} mb={0}>
             {editorial.title}
           </Heading>
-          <PublicationDate date={editorial.publicationDate} />
+          <InlineText color="annotation">
+            <PublicationDate date={editorial.publicationDate} />
+          </InlineText>
         </Box>
 
         <Box fontWeight="bold">

@@ -35,7 +35,7 @@ export function ArticleTeaser(props: ArticleTeaserProps) {
         </ZoomContainer>
         <Box pt={3}>
           <InlineText
-            css={css({ textTransform: 'uppercase' })}
+            textTransform="uppercase"
             fontSize="0.75rem"
             fontWeight="bold"
             color="annotation"

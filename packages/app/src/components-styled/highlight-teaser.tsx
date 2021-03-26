@@ -18,6 +18,7 @@ export type HighlightTeaserProps = {
   category: string;
   publicationDate?: string;
   isWeekly?: boolean;
+  variant?: 'blue';
 };
 
 export function HighlightTeaser(props: HighlightTeaserProps) {
@@ -27,15 +28,15 @@ export function HighlightTeaser(props: HighlightTeaserProps) {
     label,
     cover,
     category,
-    isWeekly,
     publicationDate,
+    variant,
   } = props;
 
   const { siteText } = useIntl();
 
   return (
     <Link passHref href={href}>
-      <StyledHightlightTeaser isWeekly={isWeekly}>
+      <StyledHightlightTeaser variant={variant}>
         <ZoomContainer height={200}>
           <BackgroundImage
             image={cover}
@@ -46,14 +47,16 @@ export function HighlightTeaser(props: HighlightTeaserProps) {
             ]}
           />
         </ZoomContainer>
-        <Box padding={isWeekly ? 3 : 0} pt={3}>
+        <Box padding={variant ? 3 : 0} pt={3}>
           <InlineText
-            css={css({ textTransform: 'uppercase' })}
+            textTransform="uppercase"
             fontSize="0.75rem"
             fontWeight="bold"
-            color="annotation"
+            color={variant ? 'white' : 'annotation'}
           >
-            {category}
+            {variant
+              ? siteText.common_actueel.secties.meer_lezen.weekly_category
+              : category}
             {publicationDate && (
               <>
                 {' - '}
@@ -70,8 +73,14 @@ export function HighlightTeaser(props: HighlightTeaserProps) {
             {title}
           </Heading>
 
-          <InlineText aria-hidden="true" fontWeight="bold" color="link">
-            {label ? label : siteText.common.read_weekly}
+          <InlineText
+            aria-hidden="true"
+            fontWeight="bold"
+            color={variant ? 'white' : 'link'}
+          >
+            {label
+              ? label
+              : siteText.common_actueel.secties.meer_lezen.read_weekly_message}
             <Arrow />
           </InlineText>
         </Box>
@@ -98,16 +107,16 @@ function ZoomContainerUnstyled({
   );
 }
 
-const StyledHightlightTeaser = styled.a<{ isWeekly?: boolean }>((x) =>
+const StyledHightlightTeaser = styled.a<{ variant?: string }>((x) =>
   css({
     display: 'block',
     overflow: 'hidden',
     textDecoration: 'none',
-    backgroundColor: x.isWeekly ? 'blue' : undefined,
-    color: x.isWeekly ? 'white' : 'body',
+    backgroundColor: x.variant ? x.variant : undefined,
+    color: x.variant ? 'white' : 'body',
 
     'span, time': {
-      color: x.isWeekly ? 'white' : undefined,
+      color: x.variant ? 'white' : undefined,
     },
 
     [`${ZoomContainer}, ${Heading}`]: {
@@ -122,7 +131,7 @@ const StyledHightlightTeaser = styled.a<{ isWeekly?: boolean }>((x) =>
         transitionTimingFunction: 'ease-in-out',
         transform: 'scale(1.04)',
       },
-      [Heading]: { color: x.isWeekly ? undefined : 'link' },
+      [Heading]: { color: x.variant ? undefined : 'link' },
     },
   })
 );

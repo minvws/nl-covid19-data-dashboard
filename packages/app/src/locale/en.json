@@ -667,7 +667,6 @@
     "gisteren": "Yesterday",
     "vandaag": "Today",
     "read_more": "Read more",
-    "read_weekly": "Read the weekly message",
     "absolute_date_template": "on {{date}}",
     "inwoners": "residents",
     "miljoen": "million",
@@ -2387,7 +2386,9 @@
         "link": {
           "text": "View all articles",
           "href": "/artikelen"
-        }
+        },
+        "read_weekly_message": "Read the week message",
+        "weekly_category": "Weekly"
       },
       "positief_getest_kaart": {
         "titel": "Confirmed cases in the Netherlands"

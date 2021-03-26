@@ -51,8 +51,8 @@ export const ArticleBox = styled.div(
     width: asResponsiveArray({
       _: '100%',
       sm: 'calc(50% - 16px)',
-      md: 'calc(33.33% - 32px)',
-      lg: 'calc(33.33% - 32px)',
+      md: 'calc(1 / 3 * 100% - 32px)',
+      lg: 'calc(1 / 3 * 100% - 32px)',
     }),
     '&:nth-child(even)': {
       ml: asResponsiveArray({ sm: '32px', md: 0, lg: 0, xl: 0 }),

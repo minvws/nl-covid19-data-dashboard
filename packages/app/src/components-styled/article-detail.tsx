@@ -9,7 +9,6 @@ import { ContentImage } from './cms/content-image';
 import { RichContent } from './cms/rich-content';
 import { LinkWithIcon } from './link-with-icon';
 import { PublicationDate } from './publication-date';
-import { css } from '@styled-system/css';
 interface ArticleDetailProps {
   article: Article;
 }
@@ -30,7 +29,7 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
 
         <Box spacing={2}>
           <InlineText
-            css={css({ textTransform: 'uppercase' })}
+            textTransform="uppercase"
             fontSize="0.75rem"
             fontWeight="bold"
             color="annotation"
@@ -40,7 +39,9 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
           <Heading level={1} mb={0}>
             {article.title}
           </Heading>
-          <PublicationDate date={article.publicationDate} />
+          <InlineText color="annotation">
+            <PublicationDate date={article.publicationDate} />
+          </InlineText>
         </Box>
 
         <Box fontWeight="bold" fontSize="1.25rem">

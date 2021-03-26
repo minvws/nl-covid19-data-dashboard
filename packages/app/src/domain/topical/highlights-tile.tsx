@@ -13,6 +13,7 @@ export interface weeklyHighlightProps {
     current: string;
   };
   summary: Block;
+  category: string;
   cover: ImageBlock;
   publicationDate: string;
 }
@@ -30,20 +31,21 @@ export function HighlightsTile(props: HighlightsTileProps) {
     <Box
       display="flex"
       spacingHorizontal={breakpoints.lg}
-      spacing={3}
       flexDirection={{ _: 'row', lg: 'row' }}
+      mr={0}
     >
       <ArticleBox>
         <HighlightTeaser
           cover={weeklyHighlight.cover}
-          href={weeklyHighlight.slug.current}
+          href={`weekberichten/${weeklyHighlight.slug.current}`}
           title={weeklyHighlight.title}
-          category={'Weekbericht'}
+          category={weeklyHighlight.category}
           publicationDate={weeklyHighlight.publicationDate}
           isWeekly
+          variant="blue"
         />
       </ArticleBox>
-      {highlights.map((item: HighlightTeaserProps, index: number) => (
+      {highlights.map((item, index) => (
         <ArticleBox key={index}>
           <HighlightTeaser
             cover={item.cover}
