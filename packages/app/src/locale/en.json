@@ -2359,9 +2359,9 @@
       "label_geprikte_mensen": "Totaal aantal geprikte mensen",
       "tooltip_label_geprikte_mensen": "Totaal aantal geprikte mensen",
       "label_gedeeltelijk_gevaccineerd": "Gedeeltelijk gevaccineerde mensen",
-      "tooltip_label_gedeeltelijk_gevaccineerd": "gedeeltelijk gevaccineerd",
+      "tooltip_label_gedeeltelijk_gevaccineerd": "Gedeeltelijk gevaccineerd",
       "label_volledig_gevaccineerd": "Volledig gevaccineerde mensen",
-      "tooltip_label_volledig_gevaccineerd": "volledig gevaccineerd",
+      "tooltip_label_volledig_gevaccineerd": "Volledig gevaccineerd",
       "extra_bericht": "Let op: data over vaccinatie komt uit verschillende bronnen (RIVM en CIMS). CIMS is op dit moment incompleet.  \n[Lees meer over incomplete CIMS data.](#)"
     }
   },
