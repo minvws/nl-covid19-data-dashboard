@@ -171,10 +171,6 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                     date={data.escalation_level.last_determined_unix}
                   />
                   <ListItem
-                    title={text.momenteel.last_determined}
-                    icon={<Calender />}
-                  />
-                  <ListItem
                     title={text.momenteel.established_with.title}
                     icon={<BarChart />}
                     date={[
@@ -358,7 +354,7 @@ function ListItem({
           )}
         </Text>
       </Box>
-      {description && amount && (
+      {description && amount && escalationColor && (
         <Box display="flex" alignItems="center" pl={18} ml={2}>
           <Box
             height={9}
@@ -369,7 +365,7 @@ function ListItem({
           />
           <Text m={0}>
             {replaceComponentsInText(description, {
-              amount: <InlineText fontWeight="bold">{`${amount} `}</InlineText>,
+              amount: <InlineText fontWeight="bold">{amount}</InlineText>,
             })}
           </Text>
         </Box>
@@ -400,7 +396,7 @@ const UnorderedList = styled.ul(() =>
     },
 
     'ul:first-of-type li': {
-      borderBottom: '0px solid blue',
+      borderBottom: 0,
       marginBottom: 0,
     },
   })
