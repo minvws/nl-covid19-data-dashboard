@@ -75,6 +75,7 @@ export function CoverageProgressBar(props: {
             />
             {barData.map((data) => (
               <rect
+                key={data.color}
                 x={0}
                 y={0}
                 width={`${data.percentage}%`}
@@ -104,15 +105,22 @@ export function CoverageProgressBar(props: {
         </svg>
       </Box>
       <Box display="flex">
-        {[...barData].reverse().map((ld, index) => (
-          <Box display="flex" alignItems="stretch" ml={index === 0 ? 0 : 2}>
+        {[...barData].reverse().map((data, index) => (
+          <Box
+            display="flex"
+            alignItems="stretch"
+            ml={index === 0 ? 0 : 2}
+            key={data.color}
+          >
             <Box>
-              <ColorIndicator color={ld.color} />
+              <ColorIndicator color={data.color} />
             </Box>
             <Box>
               <InlineText fontSize={{ _: 1, md: 2 }}>
-                {formatPercentage(ld.percentage, { maximumFractionDigits: 1 })}%
-                {` ${ld.label} `}({formatNumber(ld.value)})
+                {formatPercentage(data.percentage, {
+                  maximumFractionDigits: 1,
+                })}
+                %{` ${data.label} `}({formatNumber(data.value)})
               </InlineText>
             </Box>
           </Box>

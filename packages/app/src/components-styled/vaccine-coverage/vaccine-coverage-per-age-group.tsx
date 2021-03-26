@@ -31,6 +31,7 @@ export function VaccineCoveragePerAgeGroup(props: Props) {
       {values.map((value, index, arr) => (
         <CoverageRow
           borderColor={index === arr.length - 1 ? 'black' : undefined}
+          key={value.age_group_range}
         >
           <AgeGroup
             range={formatAgeGroup(value.age_group_range, templates.agegroup)}
