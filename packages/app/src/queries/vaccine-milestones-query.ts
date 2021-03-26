@@ -1,6 +1,6 @@
 export function getVaccineMilestonesQuery() {
-  //@TODO
-  // CONTEXT IS NOT PASSED TO THIS GETTER. FIGURE OUT HOW TO SOLVE THIS!
+  //@TODO We need to switch this from process.env to context as soon as we use i18n routing
+  // const { locale } = context;
   const locale = process.env.NEXT_PUBLIC_LOCALE;
 
   return `

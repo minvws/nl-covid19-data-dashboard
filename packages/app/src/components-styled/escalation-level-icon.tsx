@@ -7,16 +7,16 @@ import { useIntl } from '~/intl';
 
 const escalationThresholds = regionThresholds.escalation_levels.level;
 
+export type SizeVariants = 'small' | 'medium' | 'large';
+
 interface EscalationLevelIconProps {
   level: EscalationLevel;
-  isSmall?: boolean;
-  isBig?: boolean;
+  size?: SizeVariants;
 }
 
 export function EscalationLevelIcon({
   level,
-  isSmall,
-  isBig,
+  size = 'medium',
 }: EscalationLevelIconProps) {
   /* Colors are in a 0-indexed array */
   const color = escalationThresholds[level - 1].color;
@@ -28,8 +28,7 @@ export function EscalationLevelIcon({
       <StyledEscalationLevelIcon
         color={color}
         title={`${siteText.common.niveau} ${level}`}
-        isSmall={isSmall}
-        isBig={isBig}
+        size={size}
       >
         {level}
       </StyledEscalationLevelIcon>
@@ -39,16 +38,15 @@ export function EscalationLevelIcon({
 
 const StyledEscalationLevelIcon = styled.div<{
   color: string;
-  isSmall?: boolean;
-  isBig?: boolean;
-}>(({ color, isSmall, isBig }) => {
-  let size = asResponsiveArray({ _: 24, sm: 22 });
-  if (isSmall) size = asResponsiveArray({ _: 20, sm: 20 });
-  if (isBig) size = asResponsiveArray({ _: 45, sm: 45 });
+  size?: SizeVariants;
+}>(({ color, size }) => {
+  let sizeDimensions = 24;
+  if (size === 'small') sizeDimensions = 22;
+  if (size === 'large') sizeDimensions = 45;
 
   return css({
-    width: size,
-    height: size,
+    width: sizeDimensions,
+    height: sizeDimensions,
     borderRadius: '50%',
     backgroundColor: color,
     color: 'white',
@@ -56,8 +54,8 @@ const StyledEscalationLevelIcon = styled.div<{
     alignItems: 'center',
     justifyContent: 'center',
     fontSize:
-      isSmall || isBig
-        ? isSmall
+      size === 'small' || size === 'large'
+        ? size === 'small'
           ? 14 // small
           : 28 // big
         : asResponsiveArray({ _: 14, sm: 18 }), // default

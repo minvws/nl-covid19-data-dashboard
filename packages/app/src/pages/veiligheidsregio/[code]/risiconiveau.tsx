@@ -143,7 +143,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                     level={currentLevel}
                     fontSize={4}
                     useLevelColor
-                    hasBigIcon
+                    size="large"
                   />
                 </Box>
                 <Markdown content={text.types[currentLevel].toelichting} />
@@ -169,7 +169,10 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                     title={text.momenteel.last_determined}
                     icon={<Calender />}
                     date={data.escalation_level.last_determined_unix}
-                    hasBorderBottom
+                  />
+                  <ListItem
+                    title={text.momenteel.last_determined}
+                    icon={<Calender />}
                   />
                   <ListItem
                     title={text.momenteel.established_with.title}
@@ -178,7 +181,6 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                       data.escalation_level.based_on_statistics_from_unix,
                       data.escalation_level.based_on_statistics_to_unix,
                     ]}
-                    hasBorderBottom
                   >
                     <UnorderedList>
                       <ListItem
@@ -295,7 +297,6 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
 interface ListItemProps {
   icon: ReactNode;
   title: string;
-  hasBorderBottom?: boolean;
   escalationColor?: string;
   description?: string;
   date?: number | number[];
@@ -309,7 +310,6 @@ function ListItem({
   date,
   icon,
   children,
-  hasBorderBottom,
   description,
   escalationColor,
   amount,
@@ -318,7 +318,7 @@ function ListItem({
   const { siteText, formatDateFromSeconds } = useIntl();
 
   return (
-    <StyledList hasBorderBottom={hasBorderBottom}>
+    <StyledList>
       <Box display="flex" pb={children ? 3 : undefined}>
         <Box
           display="flex"
@@ -358,7 +358,7 @@ function ListItem({
           )}
         </Text>
       </Box>
-      {description && (
+      {description && amount && (
         <Box display="flex" alignItems="center" pl={18} ml={2}>
           <Box
             height={9}
@@ -383,25 +383,36 @@ function ListItem({
   );
 }
 
-const UnorderedList = styled.ul({
-  margin: 0,
-  padding: 0,
-  listStyleType: 'none',
+const UnorderedList = styled.ul(() =>
+  css({
+    margin: 0,
+    padding: 0,
+    listStyleType: 'none',
 
-  svg: {
-    width: '100%',
-  },
-});
+    svg: {
+      width: '100%',
+    },
 
-const StyledList = styled.li<{ hasBorderBottom?: boolean }>((x) =>
+    li: {
+      borderBottom: '1px solid',
+      borderBottomColor: 'border',
+      marginBottom: 3,
+    },
+
+    'ul:first-of-type li': {
+      borderBottom: '0px solid blue',
+      marginBottom: 0,
+    },
+  })
+);
+
+const StyledList = styled.li(() =>
   css({
     paddingBottom: 3,
-    marginBottom: x.hasBorderBottom ? '0.75rem' : undefined,
-    borderBottom: x.hasBorderBottom ? '1px solid' : undefined,
-    borderBottomColor: x.hasBorderBottom ? 'border' : undefined,
 
     '&:last-of-type': {
       padding: 0,
+      borderBottom: 0,
     },
   })
 );
