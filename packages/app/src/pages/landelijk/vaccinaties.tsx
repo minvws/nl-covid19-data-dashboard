@@ -699,6 +699,9 @@ function mockCoverageData(): { values: NlVaccineCoveragePerAgeGroupValue[] } {
   ]
     .map(createCoverageRow)
     .reverse();
+
+  values[2].fully_vaccinated = 0;
+
   return { values };
 }
 
