@@ -55,15 +55,10 @@ function DesktopCoverageRow(props: CoverageRowProps) {
   return (
     <Row hideBorder={hideBorder}>
       <Box flex={0.4}>{children[0]}</Box>
-      <Box
-        flex={0.4}
-        justifyContent="center"
-        display="flex"
-        alignContent="center"
-      >
-        {children[1]}
+      <Box flex={0.4}>{children[1]}</Box>
+      <Box flex={1} display="flex" alignItems="flex-end">
+        {children[2]}
       </Box>
-      <Box flex={1}>{children[2]}</Box>
     </Row>
   );
 }
@@ -78,7 +73,7 @@ const Row = styled(Box)<{ hideBorder: boolean }>(({ hideBorder }) => {
         borderBottomStyle: 'solid',
         borderBottomWidth: '1px',
         pb: 3,
-        mb: 4,
+        mb: 3,
       };
   return css(cssProps as any);
 });
