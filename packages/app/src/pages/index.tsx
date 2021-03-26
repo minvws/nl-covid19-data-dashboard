@@ -38,7 +38,7 @@ import { useDataSitemap } from '~/domain/topical/sitemap/utils';
 import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
 import { TopicalVaccineTile } from '~/domain/topical/topical-vaccine-tile';
-import { GNumberBarChartTile } from '~/domain/behavior/g-number-bar-chart-tile';
+import { GNumberBarChartTile } from '~/domain/tested/g-number-bar-chart-tile';
 import { getTopicalPageQuery } from '~/queries/topical-page-query';
 import {
   createGetStaticProps,
