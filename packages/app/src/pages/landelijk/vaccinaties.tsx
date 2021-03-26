@@ -268,8 +268,10 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           >
             <Box spacing={3}>
               <TimeSeriesChart
-                tooltipTitle={'Aantal gevaccineerde mensen'}
+                tooltipTitle={text.grafiek_gevaccineerde_mensen.titel}
                 values={mockDataRef.current.values}
+                // @TODO enable when this feature is available on develop
+                // formatTickValue={(x) => `${x / 1_000_000}`}
                 dataOptions={{
                   timespanAnnotations: [
                     {
