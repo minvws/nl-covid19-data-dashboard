@@ -12,15 +12,9 @@ export function CoverageProgressBar(props: {
   fully: number;
   fullyPercentage: number;
   total: number;
-  showsAbsoluteTotal: boolean;
+  showsTotals: boolean;
 }) {
-  const {
-    partially,
-    fully,
-    fullyPercentage,
-    total,
-    showsAbsoluteTotal,
-  } = props;
+  const { partially, fully, fullyPercentage, total, showsTotals } = props;
   const partialPercentage = (partially / total) * 100;
   const { siteText, formatPercentage, formatNumber } = useIntl();
   const {
@@ -30,7 +24,7 @@ export function CoverageProgressBar(props: {
   const maxValue = Math.max(partially, fully);
   const scale = useDynamicScale(maxValue, 0, total);
   const breakpoints = useBreakpoints(true);
-  const rectHeight = breakpoints.md ? (showsAbsoluteTotal ? 26 : 16) : 11;
+  const rectHeight = breakpoints.md ? (showsTotals ? 26 : 16) : 11;
 
   // sort shortest bar on top
   const barData = useMemo(() => {

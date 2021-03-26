@@ -42,7 +42,7 @@ export function VaccineCoveragePerAgeGroup(props: Props) {
             })}%`}
           />
           <CoverageProgressBar
-            showsAbsoluteTotal={index === arr.length - 1}
+            showsTotals={index === arr.length - 1}
             partially={value.partially_vaccinated}
             fully={value.fully_vaccinated}
             fullyPercentage={value.fully_vaccinated_percentage}
