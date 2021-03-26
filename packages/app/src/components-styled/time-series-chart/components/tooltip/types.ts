@@ -3,8 +3,15 @@ import {
   DataOptions,
   SeriesConfig,
   TimespanAnnotationConfig,
+  LineSeriesDefinition,
+  AreaSeriesDefinition,
+  RangeSeriesDefinition,
+  InvisibleSeriesDefinition,
 } from '../../logic';
-import { BarSeriesConfig } from '~/components-styled/vertical-bar-chart/logic';
+import {
+  BarSeriesDefinition,
+  BarSeriesConfig,
+} from '~/components-styled/vertical-bar-chart/logic';
 
 export type TooltipData<T extends TimestampedValue> = {
   value: T;
@@ -43,3 +50,11 @@ export type TooltipData<T extends TimestampedValue> = {
 export type TooltipFormatter<T extends TimestampedValue> = (
   tooltipData: TooltipData<T>
 ) => React.ReactNode;
+
+export type TooltipSeriesConfig<T extends TimestampedValue> = (
+  | LineSeriesDefinition<T>
+  | AreaSeriesDefinition<T>
+  | RangeSeriesDefinition<T>
+  | InvisibleSeriesDefinition<T>
+  | BarSeriesDefinition<T>
+)[];

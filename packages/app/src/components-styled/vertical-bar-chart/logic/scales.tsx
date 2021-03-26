@@ -1,4 +1,4 @@
-import { TimestampedValue } from '@corona-dashboard/common';
+import { TimestampedValue, isDateValue } from '@corona-dashboard/common';
 import { scaleLinear, scaleBand } from '@visx/scale';
 import { ScaleLinear, ScaleBand } from 'd3-scale';
 import { first, isEmpty, last } from 'lodash';
@@ -54,7 +54,9 @@ export function useScales<T extends TimestampedValue>(args: {
     }
 
     const xScale = scaleBand({
-      domain: values.map((x: TimestampedValue) => x.date_unix),
+      domain: values.map((x: TimestampedValue) =>
+        isDateValue(x) ? x.date_unix : x.date_end_unix
+      ),
       range: [0, bounds.width],
       padding: 0.1,
     });

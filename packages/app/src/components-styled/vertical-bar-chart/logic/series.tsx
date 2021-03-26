@@ -17,7 +17,6 @@ export type BarSeriesDefinition<T extends TimestampedValue> = {
   label: string;
   color: string;
   secondaryColor?: string;
-  style?: 'solid' | 'striped';
 };
 
 export function useSeriesList<T extends TimestampedValue>(

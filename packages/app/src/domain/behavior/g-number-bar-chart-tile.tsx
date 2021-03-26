@@ -1,13 +1,17 @@
-import { NlGNumber, NlGNumberValue } from '@corona-dashboard/common';
+import {
+  NlGNumber,
+  NlGNumberValue,
+  TimestampedValue,
+} from '@corona-dashboard/common';
 import { ParentSize } from '@visx/responsive';
 import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
 import { TimeframeOption } from '~/utils/timeframe';
 import { VerticalBarChart } from '~/components-styled/vertical-bar-chart';
-import { AllLanguages } from '~/locale/APP_LOCALE';
+import { AllLanguages } from '~/locale';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { useIntl } from '~/intl';
-import { rest } from 'lodash';
+import { InlineText } from '~/components-styled/typography';
 
 function generateDummyData() {
   const data = [];
@@ -47,11 +51,11 @@ export function GNumberBarChartTile({
     description: 'blah blah blah',
   };
 
+  // Dummy Data
   const values: NlGNumberValue[] = generateDummyData();
-
   const last_value: NlGNumberValue = values[values.length - 1];
 
-  const simplifiedData = values.map(
+  const simplifiedData: TimestampedValue[] = values.map(
     ({ date_start_unix, date_end_unix, ...rest }) => ({
       ...rest,
       date_unix: date_end_unix,
@@ -65,7 +69,7 @@ export function GNumberBarChartTile({
       timeframeOptions={timeframeOptions}
       metadata={{
         date: last_value.date_of_insertion_unix,
-        // source: "source",
+        // source: 'source',
       }}
     >
       {(timeframe) => (
@@ -84,15 +88,23 @@ export function GNumberBarChartTile({
               seriesConfig={[
                 {
                   type: 'bar',
-                  metricProperty: 'g_number',
+                  metricProperty: 'g_number' as keyof NlGNumberValue,
                   color: colors.data.primary,
                   secondaryColor: colors.red,
-                  label: 'lineee',
+                  label: 'G Number',
                 },
               ]}
-              formatTooltip={({ value }) =>
-                `${formatPercentage(value.g_number)}% getaald`
-              }
+              formatTooltip={({ value, configIndex, config }) => {
+                const metricProperty = config[configIndex].metricProperty;
+                return (
+                  <>
+                    <InlineText fontWeight="bold">
+                      {`${formatPercentage(value[metricProperty])} `}
+                    </InlineText>
+                    getaald
+                  </>
+                );
+              }}
             />
           )}
         </ParentSize>

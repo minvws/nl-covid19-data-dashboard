@@ -1,5 +1,6 @@
 import { TimestampedValue } from '@corona-dashboard/common';
 import { useTooltip } from '@visx/tooltip';
+import { Bar } from '@visx/shape';
 import { first, last } from 'lodash';
 import { useCallback, useEffect, useMemo } from 'react';
 import useResizeObserver from 'use-resize-observer';
@@ -26,12 +27,7 @@ import {
   useScales,
   useHoverState,
 } from './logic';
-import {
-  BarTrend,
-  DateMarker,
-  BarHover,
-  // Axes
-} from './components';
+import { BarTrend, DateMarker, BarHover } from './components';
 
 export type VerticalBarChartProps<
   T extends TimestampedValue,
@@ -162,6 +158,7 @@ export function VerticalBarChart<
     }
   }, [hoverState, seriesConfig, values, hideTooltip, showTooltip, dataOptions]);
 
+  const hasNegativeValues = yScale.domain()[0] < 0;
   return (
     <Box>
       <Box position="relative">
@@ -170,7 +167,6 @@ export function VerticalBarChart<
           height={height}
           padding={padding}
           ariaLabelledBy={ariaLabelledBy}
-          onHover={handleHover}
           onClick={handleClick}
         >
           <Axes
@@ -205,6 +201,17 @@ export function VerticalBarChart<
               onHover={handleHover}
             />
           ))}
+
+          {hasNegativeValues && (
+            <Bar
+              // Highlights 0 on the y-axis when there are negative values
+              x={0}
+              y={yScale(0) - 1}
+              width={bounds.width}
+              height={2}
+              fill="black"
+            />
+          )}
         </ChartContainer>
 
         {tooltipOpen && tooltipData && (

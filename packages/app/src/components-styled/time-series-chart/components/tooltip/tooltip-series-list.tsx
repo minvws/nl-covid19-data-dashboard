@@ -10,9 +10,10 @@ import { Box } from '~/components-styled/base';
 import { InlineText } from '~/components-styled/typography';
 import { VisuallyHidden } from '~/components-styled/visually-hidden';
 import { SeriesConfig } from '../../logic';
+import { BarSeriesConfig } from '~/components-styled/vertical-bar-chart/logic';
 import { SeriesIcon } from '../series-icon';
 import { TimespanAnnotationIcon } from '../timespan-annotation';
-import { TooltipData } from './types';
+import { TooltipData, TooltipSeriesConfig } from './types';
 import { useIntl } from '~/intl';
 
 export function TooltipSeriesList<T extends TimestampedValue>({
@@ -67,7 +68,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
 
   const dateString = getDateStringFromValue(value);
 
-  const seriesConfig: SeriesConfig<T> = markNearestPointOnly
+  const seriesConfig: TooltipSeriesConfig<T> = markNearestPointOnly
     ? [config[configIndex]]
     : [...config];
 
