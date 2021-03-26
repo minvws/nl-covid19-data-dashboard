@@ -1,12 +1,12 @@
 import css from '@styled-system/css';
 import { ArrowIconRight } from '~/components-styled/arrow-icon';
 import { Box } from '~/components-styled/base';
+import { CollapsibleButton } from '~/components-styled/collapsible';
 import { EscalationLevelInfoLabel } from '~/components-styled/escalation-level';
 import { LinkWithIcon } from '~/components-styled/link-with-icon';
 import { Text } from '~/components-styled/typography';
 import { useIntl } from '~/intl';
 import { EscalationLevel } from '../restrictions/type';
-import { CollapsibleButton } from '~/components-styled/collapsible';
 
 type EscalationLevelExplanationProps = {
   level: EscalationLevel;

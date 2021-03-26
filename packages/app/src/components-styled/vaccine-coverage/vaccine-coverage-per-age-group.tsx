@@ -2,6 +2,7 @@ import { NlVaccineCoveragePerAgeGroupValue } from '@corona-dashboard/common';
 import { InlineText } from '~/components-styled/typography';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { useBreakpoints } from '~/utils/useBreakpoints';
 import { Box } from '../base';
 import { AgeGroup } from './components/age-group';
 import { CoverageProgressBar } from './components/coverage-progress-bar';
@@ -18,19 +19,20 @@ export function VaccineCoveragePerAgeGroup(props: Props) {
   const { siteText, formatPercentage, formatNumber } = useIntl();
   const { headers } = siteText.vaccinaties.vaccination_coverage;
   const { templates } = siteText.vaccinaties.vaccination_coverage;
+  const breakpoints = useBreakpoints(true);
 
   return (
     <Box display="flex" flexDirection="column">
       <CoverageRow>
         <InlineText>{headers.agegroup}</InlineText>
         <InlineText>{headers.coverage}</InlineText>
-        <InlineText>{headers.progress}</InlineText>
+        {breakpoints.md ? <InlineText>{headers.progress}</InlineText> : null}
       </CoverageRow>
       {values.map((value, index, arr) => (
         <CoverageRow hideBorder={index === arr.length - 1}>
           <AgeGroup
             range={formatAgeGroup(value.age_group_range, templates.agegroup)}
-            count={replaceVariablesInText(templates.agegroup.total_people, {
+            total={replaceVariablesInText(templates.agegroup.total_people, {
               total: formatNumber(value.age_group_total),
             })}
           />

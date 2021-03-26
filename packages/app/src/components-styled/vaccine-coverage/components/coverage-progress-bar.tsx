@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Box } from '~/components-styled/base';
 import { InlineText } from '~/components-styled/typography';
 import { useIntl } from '~/intl';
+import { useBreakpoints } from '~/utils/useBreakpoints';
 import { useDynamicScale } from '~/utils/useDynamicScale';
 
 export function CoverageProgressBar(props: {
@@ -21,6 +22,8 @@ export function CoverageProgressBar(props: {
   } = siteText.vaccinaties.vaccination_coverage;
   const maxValue = Math.max(partially, fully);
   const scale = useDynamicScale(maxValue, 0, total);
+  const breakpoints = useBreakpoints(true);
+  const rectHeight = breakpoints.md ? 16 : 11;
 
   // sort shortest bar on top
   const barData = useMemo(() => {
@@ -48,8 +51,8 @@ export function CoverageProgressBar(props: {
   ]);
 
   return (
-    <Box>
-      <Box height="2rem" width="90%">
+    <Box width="100%" mt={{ _: 4, md: 0 }}>
+      <Box height={rectHeight * 2} width={{ _: undefined, md: '90%' }}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           css={css({
@@ -60,13 +63,19 @@ export function CoverageProgressBar(props: {
           })}
         >
           <g>
-            <rect x="0" y={13} width="100%" height="3" fill="#C1C1C1" />
+            <rect
+              x="0"
+              y={rectHeight - 3}
+              width="100%"
+              height="3"
+              fill="#C1C1C1"
+            />
             {barData.map((data) => (
               <rect
-                x="0"
+                x={0}
                 y={0}
                 width={`${data.percentage}%`}
-                height="16"
+                height={rectHeight}
                 fill={data.color}
               />
             ))}
@@ -74,16 +83,16 @@ export function CoverageProgressBar(props: {
               x={`${barData[barData.length - 1].percentage}%`}
               y={0}
               width="3"
-              height="16"
+              height={rectHeight}
               fill="white"
             />
           </g>
           <g>
             <rect
               x={`${scale(maxValue)}%`}
-              y={-7}
+              y={rectHeight - (rectHeight + 7)}
               width="7"
-              height="23"
+              height={rectHeight + 7}
               fill="black"
             />
           </g>
@@ -96,7 +105,7 @@ export function CoverageProgressBar(props: {
               <ColorIndicator color={ld.color} />
             </Box>
             <Box>
-              <InlineText>
+              <InlineText fontSize={{ _: 1, md: 2 }}>
                 {formatPercentage(ld.percentage, { maximumFractionDigits: 1 })}%
                 {` ${ld.label} `}({formatNumber(ld.value)})
               </InlineText>
