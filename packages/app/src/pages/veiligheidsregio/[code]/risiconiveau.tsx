@@ -355,13 +355,16 @@ function ListItem({
         </Text>
       </Box>
       {description && amount && escalationColor && (
-        <Box display="flex" alignItems="center" pl={18} ml={2}>
+        <Box display="flex" pl={18} ml={2}>
           <Box
+            minWidth="9px"
             height={9}
             width={9}
             backgroundColor={escalationColor}
             borderRadius="50%"
-            mr={2}
+            ml={2}
+            mr={1}
+            mt="7px"
           />
           <Text m={0}>
             {replaceComponentsInText(description, {
