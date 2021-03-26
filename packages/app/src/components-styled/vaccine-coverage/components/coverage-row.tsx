@@ -7,7 +7,6 @@ import { useBreakpoints } from '~/utils/useBreakpoints';
 
 type CoverageRowProps = {
   children: [ReactNode, ReactNode, ReactNode];
-  hideBorder?: boolean;
   borderColor?: string;
   isHeaderRow?: boolean;
 };
@@ -22,11 +21,11 @@ export function CoverageRow(props: CoverageRowProps) {
 }
 
 function MobileCoverageRow(props: CoverageRowProps) {
-  const { children, borderColor, hideBorder = false } = props;
+  const { children, borderColor, isHeaderRow = false } = props;
   const [open, setOpen] = useState<'collapsed' | 'open'>('collapsed');
   return (
     <Row
-      hideBorder={hideBorder}
+      hideBorder={isHeaderRow}
       borderColor={borderColor}
       width="100%"
       display="flex"
@@ -54,9 +53,9 @@ function MobileCoverageRow(props: CoverageRowProps) {
 }
 
 function DesktopCoverageRow(props: CoverageRowProps) {
-  const { children, borderColor, hideBorder = false, isHeaderRow } = props;
+  const { children, borderColor, isHeaderRow = false } = props;
   return (
-    <Row hideBorder={hideBorder} borderColor={borderColor}>
+    <Row hideBorder={isHeaderRow} borderColor={borderColor}>
       <Box flex={0.4}>{children[0]}</Box>
       <Box flex={0.4}>{children[1]}</Box>
       <Box
