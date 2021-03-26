@@ -2307,6 +2307,10 @@
       "titel": "Geplande prikken deze week",
       "omschrijving": "Aantal prikken dat Nederland verwacht te zetten van {{date_from}} tot en met {{date_to}}. Het echte aantal kan anders zijn, bijvoorbeeld doordat mensen hun afspraak afzeggen of door problemen met de leveringen van vaccins."
     },
+    "kpi_vaccinatiegraad": {
+      "titel": "Vaccinatiegraad",
+      "omschrijving": "Percentage mensen in Nederland dat **volledig** gevaccineerd is ten opzicht van alle mensen in Nederland die voor vaccinatie in aanmerking komen."
+    },
     "clock": {
       "title": "Iedere {{seconds}} seconden krijgt iemand een prik",
       "description": "Dit is een schatting. Deze schatting is gemaakt met het gemiddelde van {{amount}} prikken per dag tussen 8.00 en 20.00 uur in de afgelopen zeven dagen."
