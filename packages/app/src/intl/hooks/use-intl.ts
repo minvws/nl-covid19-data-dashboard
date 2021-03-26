@@ -216,17 +216,17 @@ export function useIntl() {
 
   /**
    * formatDateFromTo expects 2 dates and will return them as strings to be
-   * rendered as a date range with respect for dates spanning 2 different months.
+   * rendered as a date range with respect for a range spanning multiple months.
    *
    * eg.
    *
    *     formatDateFromTo(1 maart, 7 maart)
-   *     output: { dateFrom: '1', dateTo: '7 maart' }
+   *     output: ['1', '7 maart']
    *
    * or:
    *
    *    formatDateFromTo(29 maart, 4 april)
-   *    output: { dateFrom: '29 maart', dateTo: '4 april' }
+   *    output: ['29 maart', '4 april']
    */
   function formatDateFromTo(dateFromInput: DateInput, dateToInput: DateInput) {
     const dateFrom = getDate(dateFromInput);
@@ -239,7 +239,7 @@ export function useIntl() {
       : formatDate(dateFrom);
     const dateToText = formatDate(dateTo);
 
-    return { dateFrom: dateFromText, dateTo: dateToText };
+    return [dateFromText, dateToText] as [dateFrom: string, dateTo: string];
   }
 
   function formatDateFromSeconds(seconds: number, style?: formatStyle) {
