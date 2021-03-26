@@ -8,7 +8,6 @@ import {
   GetY,
   GetY0,
   GetY1,
-  HoverHandler,
   SeriesConfig,
   SeriesDoubleValue,
   SeriesList,
@@ -16,7 +15,6 @@ import {
 } from '../logic';
 
 interface SeriesProps<T extends TimestampedValue> {
-  onHover?: HoverHandler;
   seriesConfig: SeriesConfig<T>;
   seriesList: SeriesList;
   getX: GetX;
@@ -37,7 +35,6 @@ interface SeriesProps<T extends TimestampedValue> {
 export const Series = memo(SeriesUnmemoized) as typeof SeriesUnmemoized;
 
 function SeriesUnmemoized<T extends TimestampedValue>({
-  onHover,
   seriesConfig,
   seriesList,
   getX,
@@ -63,7 +60,6 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                 strokeWidth={config.strokeWidth}
                 getX={getX}
                 getY={getY}
-                onHover={(evt) => onHover && onHover(evt, index)}
               />
             );
           case 'area':
@@ -78,7 +74,6 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                 getX={getX}
                 getY={getY}
                 yScale={yScale}
-                onHover={(evt) => onHover && onHover(evt, index)}
               />
             );
 
