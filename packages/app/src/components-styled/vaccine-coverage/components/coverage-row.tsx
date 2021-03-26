@@ -9,6 +9,7 @@ type CoverageRowProps = {
   children: [ReactNode, ReactNode, ReactNode];
   hideBorder?: boolean;
   borderColor?: string;
+  isHeaderRow?: boolean;
 };
 
 export function CoverageRow(props: CoverageRowProps) {
@@ -53,12 +54,17 @@ function MobileCoverageRow(props: CoverageRowProps) {
 }
 
 function DesktopCoverageRow(props: CoverageRowProps) {
-  const { children, borderColor, hideBorder = false } = props;
+  const { children, borderColor, hideBorder = false, isHeaderRow } = props;
   return (
     <Row hideBorder={hideBorder} borderColor={borderColor}>
       <Box flex={0.4}>{children[0]}</Box>
       <Box flex={0.4}>{children[1]}</Box>
-      <Box flex={1} display="flex" alignItems="flex-end" pt={2}>
+      <Box
+        flex={1}
+        display="flex"
+        alignItems="flex-end"
+        pt={isHeaderRow ? 0 : 2}
+      >
         {children[2]}
       </Box>
     </Row>
