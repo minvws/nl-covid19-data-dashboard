@@ -34,8 +34,8 @@ import {
   useSeriesList,
   useValuesInTimeframe,
   getTimeDomain,
+  useDimensions,
 } from './logic';
-import { useDimensions } from './logic/dimensions';
 export type { SeriesConfig } from './logic';
 
 /**

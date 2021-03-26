@@ -1,16 +1,12 @@
-import {
-  NlGNumber,
-  NlGNumberValue,
-  TimestampedValue,
-} from '@corona-dashboard/common';
+import { NlGNumber, NlGNumberValue } from '@corona-dashboard/common';
 import { ParentSize } from '@visx/responsive';
 import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
-import { TimeframeOption } from '~/utils/timeframe';
+import { InlineText } from '~/components-styled/typography';
 import { VerticalBarChart } from '~/components-styled/vertical-bar-chart';
+import { useIntl } from '~/intl';
 import { AllLanguages } from '~/locale';
 import { colors } from '~/style/theme';
-import { useIntl } from '~/intl';
-import { InlineText } from '~/components-styled/typography';
+import { TimeframeOption } from '~/utils/timeframe';
 
 function generateDummyData() {
   const data = [];
@@ -54,12 +50,12 @@ export function GNumberBarChartTile({
   const values: NlGNumberValue[] = generateDummyData();
   const last_value: NlGNumberValue = values[values.length - 1];
 
-  const simplifiedData: TimestampedValue[] = values.map(
-    ({ date_stat_unix, date_end_unix, ...rest }) => ({
-      ...rest,
-      date_unix: date_end_unix,
-    })
-  );
+  // const simplifiedData: TimestampedValue[] = values.map(
+  //   ({ date_start_unix, date_end_unix, ...rest }) => ({
+  //     ...rest,
+  //     date_unix: date_end_unix,
+  //   })
+  // );
 
   return (
     <ChartTileWithTimeframe
@@ -79,7 +75,7 @@ export function GNumberBarChartTile({
               width={width}
               timeframe={timeframe}
               ariaLabelledBy="chart_g_number"
-              values={simplifiedData}
+              values={values}
               numGridLines={3}
               dataOptions={{
                 isPercentage: true,
@@ -87,7 +83,7 @@ export function GNumberBarChartTile({
               seriesConfig={[
                 {
                   type: 'bar',
-                  metricProperty: 'g_number' as keyof NlGNumberValue,
+                  metricProperty: 'g_number',
                   color: colors.data.primary,
                   secondaryColor: colors.red,
                   label: 'G Number',

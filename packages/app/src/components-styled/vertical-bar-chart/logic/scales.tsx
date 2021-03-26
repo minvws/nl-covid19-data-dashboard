@@ -9,8 +9,9 @@ import {
   SeriesSingleValue,
   GetX,
   GetY,
-  ONE_DAY_IN_SECONDS,
 } from '~/components-styled/time-series-chart/logic';
+
+const ONE_DAY_IN_SECONDS = 24 * 60 * 60;
 
 interface UseScalesResult {
   xScale: ScaleBand<number>;
@@ -48,8 +49,8 @@ export function useScales<T extends TimestampedValue>(args: {
           domain: [0, maximumValue],
           range: [bounds.height, 0],
         }),
-        getX: (_x: SeriesItem) => 0,
-        getY: (_x: SeriesSingleValue) => 0,
+        getX: (_x: SeriesItem) => 0 as number,
+        getY: (_x: SeriesSingleValue) => 0 as number,
       };
     }
 
