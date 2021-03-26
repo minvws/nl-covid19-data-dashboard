@@ -1,7 +1,7 @@
 import css from '@styled-system/css';
 import { ReactNode, useState } from 'react';
 import styled from 'styled-components';
-import { isDefined } from 'ts-is-present';
+import { isPresent } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 
@@ -37,7 +37,7 @@ function MobileCoverageRow(props: CoverageRowProps) {
           {children[1]}
         </Box>
         <Box flex="0.2">
-          {isDefined(children[2]) ? (
+          {isPresent(children[2]) ? (
             <Chevron
               open={open === 'open'}
               onClick={() => setOpen(open === 'open' ? 'collapsed' : 'open')}
@@ -45,7 +45,7 @@ function MobileCoverageRow(props: CoverageRowProps) {
           ) : null}
         </Box>
       </Box>
-      {isDefined(children[2]) && (
+      {isPresent(children[2]) && (
         <CollapsiblePanel data-state={open}>{children[2]}</CollapsiblePanel>
       )}
     </Row>
@@ -115,7 +115,7 @@ const CollapsiblePanel = styled(Box)(
     height: 0,
     opacity: 0,
     '&[data-state="open"]': {
-      height: 'calc(22px + 4rem)',
+      height: 'calc(22px + 5rem)',
       opacity: 1,
     },
     '&[data-state="collapsed"]': {

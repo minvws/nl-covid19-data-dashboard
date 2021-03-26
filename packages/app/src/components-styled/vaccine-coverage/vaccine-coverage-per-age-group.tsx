@@ -23,7 +23,7 @@ export function VaccineCoveragePerAgeGroup(props: Props) {
 
   return (
     <Box display="flex" flexDirection="column">
-      <CoverageRow hideBorder isHeaderRow>
+      <CoverageRow isHeaderRow>
         <InlineText>{headers.agegroup}</InlineText>
         <InlineText>{headers.coverage}</InlineText>
         {breakpoints.md ? <InlineText>{headers.progress}</InlineText> : null}
