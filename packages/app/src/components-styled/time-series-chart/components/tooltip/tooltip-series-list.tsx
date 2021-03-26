@@ -9,10 +9,7 @@ import styled from 'styled-components';
 import { Box } from '~/components-styled/base';
 import { InlineText } from '~/components-styled/typography';
 import { VisuallyHidden } from '~/components-styled/visually-hidden';
-import { SeriesConfig } from '../../logic';
-import { BarSeriesConfig } from '~/components-styled/vertical-bar-chart/logic';
 import { SeriesIcon } from '../series-icon';
-import { TimespanAnnotationIcon } from '../timespan-annotation';
 import { TooltipData, TooltipSeriesConfig } from './types';
 import { useIntl } from '~/intl';
 
@@ -76,15 +73,33 @@ export function TooltipSeriesList<T extends TimestampedValue>({
     <section>
       <VisuallyHidden>{dateString}</VisuallyHidden>
 
+      {timespanAnnotation && (
+        <InlineText>
+          {timespanAnnotation.shortLabel || timespanAnnotation.label}
+        </InlineText>
+      )}
       <TooltipList>
-        {seriesConfig.map((x) => {
+        {seriesConfig.map((x, index) => {
           switch (x.type) {
+            case 'stacked-area':
+              return (
+                <TooltipListItem key={index} icon={<SeriesIcon config={x} />}>
+                  <TooltipValueContainer>
+                    <InlineText mr={2}>{x.shortLabel || x.label}:</InlineText>
+                    <b>
+                      {getValueStringForKey(
+                        value,
+                        x.metricProperty,
+                        options.isPercentage
+                      )}
+                    </b>
+                  </TooltipValueContainer>
+                </TooltipListItem>
+              );
+
             case 'range':
               return (
-                <TooltipListItem
-                  key={x.metricPropertyLow as string}
-                  icon={<SeriesIcon config={x} />}
-                >
+                <TooltipListItem key={index} icon={<SeriesIcon config={x} />}>
                   <TooltipValueContainer>
                     <InlineText mr={2}>{x.shortLabel || x.label}:</InlineText>
                     <b css={css({ whiteSpace: 'nowrap' })}>
@@ -105,10 +120,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
             case 'line':
             case 'area':
               return (
-                <TooltipListItem
-                  key={x.metricProperty as string}
-                  icon={<SeriesIcon config={x} />}
-                >
+                <TooltipListItem key={index} icon={<SeriesIcon config={x} />}>
                   <TooltipValueContainer>
                     <InlineText mr={2}>{x.shortLabel || x.label}:</InlineText>
                     <b>
@@ -124,7 +136,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
 
             case 'invisible':
               return (
-                <TooltipListItem key={x.metricProperty as string}>
+                <TooltipListItem key={index}>
                   <TooltipValueContainer>
                     <InlineText mr={2}>{x.label}:</InlineText>
                     <b>
@@ -139,23 +151,6 @@ export function TooltipSeriesList<T extends TimestampedValue>({
               );
           }
         })}
-
-        {timespanAnnotation && (
-          <TooltipListItem
-            icon={
-              <TimespanAnnotationIcon
-                color={timespanAnnotation.color}
-                fillOpacity={timespanAnnotation.fillOpacity}
-              />
-            }
-          >
-            <TooltipValueContainer>
-              <InlineText mr={2}>
-                {timespanAnnotation.shortLabel || timespanAnnotation.label}
-              </InlineText>
-            </TooltipValueContainer>
-          </TooltipListItem>
-        )}
       </TooltipList>
     </section>
   );

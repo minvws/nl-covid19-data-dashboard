@@ -7,6 +7,7 @@ import {
   AreaSeriesDefinition,
   RangeSeriesDefinition,
   InvisibleSeriesDefinition,
+  StackedAreaSeriesDefinition,
 } from '../../logic';
 import {
   BarSeriesDefinition,
@@ -56,5 +57,6 @@ export type TooltipSeriesConfig<T extends TimestampedValue> = (
   | AreaSeriesDefinition<T>
   | RangeSeriesDefinition<T>
   | InvisibleSeriesDefinition<T>
+  | StackedAreaSeriesDefinition<T>
   | BarSeriesDefinition<T>
 )[];
