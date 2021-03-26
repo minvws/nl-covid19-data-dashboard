@@ -7,7 +7,7 @@ import { Box } from '../base';
 import { AgeGroup } from './components/age-group';
 import { CoverageProgressBar } from './components/coverage-progress-bar';
 import { CoverageRow } from './components/coverage-row';
-import { VaccinationCoveragePercentage } from './components/vaccination-coverage';
+import { VaccinationCoveragePercentage } from './components/vaccination-coverage-percentage';
 
 type Props = {
   values: NlVaccineCoveragePerAgeGroupValue[];
