@@ -9,13 +9,12 @@ import { TimeframeOption } from '~/utils/timeframe';
 import { VerticalBarChart } from '~/components-styled/vertical-bar-chart';
 import { AllLanguages } from '~/locale';
 import { colors } from '~/style/theme';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { useIntl } from '~/intl';
 import { InlineText } from '~/components-styled/typography';
 
 function generateDummyData() {
   const data = [];
-  let currentDate = new Date();
+  const currentDate = new Date();
   currentDate.setHours(0, 0, 0, 0);
 
   for (let i = 0; i < 5 * 7; ++i) {
@@ -48,7 +47,7 @@ export function GNumberBarChartTile({
   // const text = siteText.vaccinaties.grafiek_leveringen;
   const text = {
     title: 'Trend over time',
-    description: 'blah blah blah',
+    description: 'Chart Description',
   };
 
   // Dummy Data
@@ -56,7 +55,7 @@ export function GNumberBarChartTile({
   const last_value: NlGNumberValue = values[values.length - 1];
 
   const simplifiedData: TimestampedValue[] = values.map(
-    ({ date_start_unix, date_end_unix, ...rest }) => ({
+    ({ date_stat_unix, date_end_unix, ...rest }) => ({
       ...rest,
       date_unix: date_end_unix,
     })
@@ -94,12 +93,11 @@ export function GNumberBarChartTile({
                   label: 'G Number',
                 },
               ]}
-              formatTooltip={({ value, configIndex, config }) => {
-                const metricProperty = config[configIndex].metricProperty;
+              formatTooltip={({ value }) => {
                 return (
                   <>
                     <InlineText fontWeight="bold">
-                      {`${formatPercentage(value[metricProperty])} `}
+                      {`${formatPercentage(value.g_number)}% `}
                     </InlineText>
                     getaald
                   </>

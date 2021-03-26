@@ -56,6 +56,8 @@ export const BarTrend = memo(function BarTrend({
         const { x, y, height } = getRectPosition(value);
         return (
           <Group
+            id={barId}
+            key={barId}
             onMouseLeave={(e) => onHover(e, index)}
             onMouseMove={(e) => onHover(e, index)}
             onTouchStart={(e) => onHover(e, index)}
@@ -65,8 +67,6 @@ export const BarTrend = memo(function BarTrend({
                * The captures mouse movements that align vertically
                * with the bar
                */
-              id={`${barId}-hover`}
-              key={`${barId}-hover`}
               fill={'transparent'}
               x={x}
               y={0}
@@ -74,8 +74,6 @@ export const BarTrend = memo(function BarTrend({
               height={hoverBarHeight}
             />
             <Bar
-              id={barId}
-              key={barId}
               fill={fillColor}
               x={x}
               y={y}
