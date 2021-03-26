@@ -701,6 +701,7 @@ function mockCoverageData(): { values: NlVaccineCoveragePerAgeGroupValue[] } {
     .reverse();
 
   values[2].fully_vaccinated = 0;
+  values[2].fully_vaccinated_percentage = 0;
 
   return { values };
 }
