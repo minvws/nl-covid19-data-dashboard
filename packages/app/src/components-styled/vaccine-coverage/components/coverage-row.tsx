@@ -35,7 +35,7 @@ function MobileCoverageRow(props: CoverageRowProps) {
           {children[1]}
         </Box>
         <Box flex="0.2">
-          {children[2] ? (
+          {isDefined(children[2]) ? (
             <Chevron
               open={open === 'open'}
               onClick={() => setOpen(open === 'open' ? 'collapsed' : 'open')}
