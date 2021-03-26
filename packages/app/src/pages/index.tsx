@@ -147,7 +147,9 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               <Search />
             </Box>
 
+            {/* @ts-expect-error @TODO Pass in data and sitetext */}
             <GNumberBarChartTile />
+
             <MiniTrendTileLayout id="metric-navigation">
               <MiniTrendTile
                 title={text.mini_trend_tiles.positief_getest.title}
