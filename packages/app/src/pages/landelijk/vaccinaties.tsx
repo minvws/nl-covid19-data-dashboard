@@ -92,8 +92,10 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
   const vaccineNames = useVaccineNames(data.vaccine_administered.last_value);
 
+  // TODO: put this back this when data is available
   //const {vaccine_coverage_per_age_group} = data;
   const vaccine_coverage_per_age_group = mockCoverageData();
+
   const [
     vaccineDeliveryValues,
     vaccineDeliveryEstimateValues,
