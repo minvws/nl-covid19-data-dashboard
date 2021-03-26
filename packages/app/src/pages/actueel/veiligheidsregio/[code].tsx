@@ -29,8 +29,10 @@ import { PositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/too
 import { EscalationRegionalTooltip } from '~/components/choropleth/tooltips/region/escalation-regional-tooltip';
 import { ArticleList } from '~/domain/topical/article-list';
 import { ChoroplethTwoColumnLayout } from '~/domain/topical/choropleth-two-column-layout';
-import { EditorialSummary } from '~/domain/topical/editorial-teaser';
-import { EditorialTile } from '~/domain/topical/editorial-tile';
+import {
+  HighlightsTile,
+  weeklyHighlightProps,
+} from '~/domain/topical/highlights-tile';
 import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
@@ -77,7 +79,7 @@ export const getStaticProps = createGetStaticProps(
   }),
   createGetContent<{
     articles: ArticleSummary[];
-    editorial: EditorialSummary;
+    weeklyHighlight: weeklyHighlightProps;
     highlights: HighlightTeaserProps[];
   }>(getTopicalPageQuery)
 );
@@ -236,16 +238,17 @@ const TopicalSafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
               />
             </CollapsibleButton>
 
-            {content.editorial && content.highlights && (
-              <>
+            {content.weeklyHighlight && content.highlights && (
+              <Box pt={3}>
                 <TopicalSectionHeader
                   title={siteText.common_actueel.secties.artikelen.titel}
                 />
-                <EditorialTile
-                  editorial={content.editorial}
+
+                <HighlightsTile
+                  weeklyHighlight={content.weeklyHighlight}
                   highlights={content.highlights}
                 />
-              </>
+              </Box>
             )}
 
             <TopicalTile>

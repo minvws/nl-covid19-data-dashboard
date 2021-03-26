@@ -5,15 +5,25 @@ import {
 } from '~/components-styled/highlight-teaser';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { ArticleBox } from './article-list';
-import { EditorialSummary } from './editorial-teaser';
+import { Block, ImageBlock } from '~/types/cms';
 
-type EditorialTileProps = {
-  editorial: EditorialSummary;
+export interface weeklyHighlightProps {
+  title: string;
+  slug: {
+    current: string;
+  };
+  summary: Block;
+  cover: ImageBlock;
+  publicationDate: string;
+}
+
+interface HighlightsTileProps {
+  weeklyHighlight: weeklyHighlightProps;
   highlights: HighlightTeaserProps[];
-};
+}
 
-export function EditorialTile(props: EditorialTileProps) {
-  const { editorial, highlights } = props;
+export function HighlightsTile(props: HighlightsTileProps) {
+  const { weeklyHighlight, highlights } = props;
   const breakpoints = useBreakpoints();
 
   return (
@@ -25,11 +35,11 @@ export function EditorialTile(props: EditorialTileProps) {
     >
       <ArticleBox>
         <HighlightTeaser
-          cover={editorial.cover}
-          href={editorial.slug.current}
-          title={editorial.title}
+          cover={weeklyHighlight.cover}
+          href={weeklyHighlight.slug.current}
+          title={weeklyHighlight.title}
           category={'Weekbericht'}
-          publicationDate={editorial.publicationDate}
+          publicationDate={weeklyHighlight.publicationDate}
           isWeekly
         />
       </ArticleBox>
