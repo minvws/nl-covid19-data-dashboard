@@ -214,6 +214,34 @@ export function useIntl() {
     return formattedDate;
   }
 
+  /**
+   * formatDateFromTo expects 2 dates and will return them as strings to be
+   * rendered as a date range with respect for dates spanning 2 different months.
+   *
+   * eg.
+   *
+   *     formatDateFromTo(1 maart, 7 maart)
+   *     output: { dateFrom: '1', dateTo: '7 maart' }
+   *
+   * or:
+   *
+   *    formatDateFromTo(29 maart, 4 april)
+   *    output: { dateFrom: '29 maart', dateTo: '4 april' }
+   */
+  function formatDateFromTo(dateFromInput: DateInput, dateToInput: DateInput) {
+    const dateFrom = getDate(dateFromInput);
+    const dateTo = getDate(dateToInput);
+
+    const isSameMonth = dateFrom.getMonth() === dateTo.getMonth();
+
+    const dateFromText = isSameMonth
+      ? `${dateFrom.getDate()}`
+      : formatDate(dateFrom);
+    const dateToText = formatDate(dateTo);
+
+    return { dateFrom: dateFromText, dateTo: dateToText };
+  }
+
   function formatDateFromSeconds(seconds: number, style?: formatStyle) {
     assert(!isNaN(seconds), 'seconds is NaN');
 
@@ -245,6 +273,7 @@ export function useIntl() {
     formatDateFromSeconds,
     formatDateFromMilliseconds,
     formatRelativeDate,
+    formatDateFromTo,
     siteText,
     locale,
   };
