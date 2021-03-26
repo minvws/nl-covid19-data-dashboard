@@ -7,7 +7,7 @@ import { Box } from '../base';
 import { AgeGroup } from './components/age-group';
 import { CoverageProgressBar } from './components/coverage-progress-bar';
 import { CoverageRow } from './components/coverage-row';
-import { VaccinationCoverage } from './components/vaccination-coverage';
+import { VaccinationCoveragePercentage } from './components/vaccination-coverage';
 
 type Props = {
   values: NlVaccineCoveragePerAgeGroupValue[];
@@ -39,7 +39,7 @@ export function VaccineCoveragePerAgeGroup(props: Props) {
               total: formatNumber(value.age_group_total),
             })}
           />
-          <VaccinationCoverage
+          <VaccinationCoveragePercentage
             value={`${formatPercentage(value.fully_vaccinated_percentage, {
               maximumFractionDigits: 1,
             })}%`}
