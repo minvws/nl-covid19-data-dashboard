@@ -50,13 +50,6 @@ export function GNumberBarChartTile({
   const values: NlGNumberValue[] = generateDummyData();
   const last_value: NlGNumberValue = values[values.length - 1];
 
-  // const simplifiedData: TimestampedValue[] = values.map(
-  //   ({ date_start_unix, date_end_unix, ...rest }) => ({
-  //     ...rest,
-  //     date_unix: date_end_unix,
-  //   })
-  // );
-
   return (
     <ChartTileWithTimeframe
       title={text.title}

@@ -1,11 +1,12 @@
-import { TimestampedValue } from '@corona-dashboard/common';
+import {
+  isDateSeries,
+  isDateSpanSeries,
+  TimestampedValue,
+} from '@corona-dashboard/common';
 import { useMemo } from 'react';
 import { pick } from 'lodash';
 import { isPresent } from 'ts-is-present';
-import {
-  getSeriesData,
-  SeriesSingleValue,
-} from '~/components-styled/time-series-chart/logic/series';
+import { SeriesSingleValue } from '~/components-styled/time-series-chart/logic/series';
 
 export type BarSeriesConfig<
   T extends TimestampedValue
@@ -38,6 +39,48 @@ export function getSeriesList<T extends TimestampedValue>(
   return seriesConfig.map((config) =>
     getSeriesData(values, config.metricProperty)
   );
+}
+
+/**
+ * This function is almost exactly like getSeriesData from TimeSeriesChart
+ * except it uses the date_end_unix as the date __date_unix in a date span
+ */
+export function getSeriesData<T extends TimestampedValue>(
+  values: T[],
+  metricProperty: keyof T
+): SeriesSingleValue[] {
+  if (values.length === 0) {
+    /**
+     * It could happen that you are using an old dataset and select last week as
+     * a timeframe at which point the values will be empty. This would not
+     * happen on production, but for development we can just render nothing.
+     */
+    return [];
+  }
+
+  if (isDateSeries(values)) {
+    return values.map((x) => ({
+      /**
+       * This is messy and could be improved.
+       */
+      __value: (x[metricProperty] ?? undefined) as number | undefined,
+      // @ts-expect-error @TODO figure out why the type guard doesn't work
+      __date_unix: x.date_unix,
+    }));
+  }
+
+  if (isDateSpanSeries(values)) {
+    return values.map((x) => ({
+      /**
+       * This is messy and could be improved.
+       */
+      __value: (x[metricProperty] ?? undefined) as number | undefined,
+      // @ts-expect-error @TODO figure out why the type guard doesn't work
+      __date_unix: x.date_end_unix,
+    }));
+  }
+
+  throw new Error(`Incompatible timestamps are used in value ${values[0]}`);
 }
 
 export function useCalculatedSeriesExtremes<T extends TimestampedValue>(

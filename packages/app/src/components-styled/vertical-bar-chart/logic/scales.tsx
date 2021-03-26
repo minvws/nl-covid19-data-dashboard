@@ -81,5 +81,5 @@ export function useScales<T extends TimestampedValue>(args: {
     };
 
     return result;
-  }, [values, maximumValue, bounds, numTicks, tickValues]);
+  }, [values, maximumValue, minimumValue, bounds, numTicks, tickValues]);
 }
