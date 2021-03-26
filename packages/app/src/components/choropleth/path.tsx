@@ -68,7 +68,7 @@ export function HoverPathLink({
   );
 
   return (
-    <Link href={href}>
+    <Link href={href} prefetch={false}>
       <a
         aria-label={title}
         title={title}
