@@ -58,7 +58,7 @@ function DesktopCoverageRow(props: CoverageRowProps) {
     <Row hideBorder={hideBorder} borderColor={borderColor}>
       <Box flex={0.4}>{children[0]}</Box>
       <Box flex={0.4}>{children[1]}</Box>
-      <Box flex={1} display="flex" alignItems="flex-end">
+      <Box flex={1} display="flex" alignItems="flex-end" pt={2}>
         {children[2]}
       </Box>
     </Row>
