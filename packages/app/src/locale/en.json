@@ -1004,7 +1004,7 @@
   },
   "gemeente_index": {
     "selecteer_titel": "Select your municipality",
-    "selecteer_toelichting": "There are different measures per safety region and municipality",
+    "selecteer_toelichting": "The map below currently malfunctions. Please use the search form to look up your municipality. We're working on resolving the matter.",
     "metadata": {
       "title": "Municipality overview | Coronavirus Dashboard | Government.nl",
       "description": "Overview of municipalities in the Netherlands"

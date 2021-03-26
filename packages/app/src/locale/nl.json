@@ -1004,7 +1004,7 @@
   },
   "gemeente_index": {
     "selecteer_titel": "Selecteer een gemeente",
-    "selecteer_toelichting": "",
+    "selecteer_toelichting": "De kaart hieronder werkt momenteel niet goed. Gebruik daarom het zoekformulier om je gemeente te vinden. We werken aan een oplossing",
     "metadata": {
       "title": "Overzicht gemeentes | Coronadashboard | Rijksoverheid.nl",
       "description": "Overzichtspagina gemeentes in Nederland."
