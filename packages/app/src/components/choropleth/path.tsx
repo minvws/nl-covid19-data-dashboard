@@ -68,20 +68,19 @@ export function HoverPathLink({
   );
 
   return (
-    <Link href={href} prefetch={false}>
-      <a
-        aria-label={title}
-        title={title}
-        tabIndex={isTabInteractive ? undefined : -1}
-        aria-hidden={isTabInteractive ? undefined : 'true'}
-        data-id={pathProps.id}
-        onClick={handleClick}
-        onFocus={onFocus}
-        onBlur={onBlur}
-      >
-        <HoverPath isClickable {...pathProps} />
-      </a>
-    </Link>
+    <a
+      href={href}
+      aria-label={title}
+      title={title}
+      tabIndex={isTabInteractive ? undefined : -1}
+      aria-hidden={isTabInteractive ? undefined : 'true'}
+      data-id={pathProps.id}
+      onClick={handleClick}
+      onFocus={onFocus}
+      onBlur={onBlur}
+    >
+      <HoverPath isClickable {...pathProps} />
+    </a>
   );
 }
 
