@@ -227,7 +227,7 @@
     "kpi_titel": "Number of confirmed cases",
     "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.",
     "map_titel": "Distribution of confirmed cases in the Netherlands",
-    "map_toelichting": "These maps show how many confirmed cases of COVID-19 were reported yesterday per 100,000 inhabitants.",
+    "map_toelichting": "This map currently malfunctions. Please use the search form on the top of the page to look up your municipality or safety region. We're working on resolving the matter.\n\nThese maps show how many confirmed cases of COVID-19 were reported yesterday per 100,000 inhabitants.",
     "linechart_titel": "Number of confirmed cases over time (per 100,000 inhabitants)",
     "linechart_toelichting": "This graph shows how many confirmed cases of COVID-19 were reported in the selected period per 100,000 inhabitants.",
     "barchart_titel": "New cases by age group",
