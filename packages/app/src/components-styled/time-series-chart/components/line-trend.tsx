@@ -57,7 +57,7 @@ export function LineTrend({
       onMouseLeave={handleHover}
       onMouseOver={handleHover}
       onMouseMove={handleHover}
-      strokeLinecap="round"
+      strokeLinecap="butt"
       strokeLinejoin="round"
     />
   );
