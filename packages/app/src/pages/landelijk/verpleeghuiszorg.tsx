@@ -1,19 +1,27 @@
+import {
+  RegionsNursingHome,
+  SafetyRegionProperties,
+} from '@corona-dashboard/common';
 import CoronaVirus from '~/assets/coronavirus.svg';
 import Locatie from '~/assets/locaties.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
+import {
+  ChartTile,
+  ChartTileWithTimeframe,
+} from '~/components-styled/chart-tile';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
-import { LineChartTile } from '~/components-styled/line-chart-tile';
-import { addBackgroundRectangleCallback } from '~/components-styled/line-chart/logic';
 import { TileList } from '~/components-styled/tile-list';
+import { TimeSeriesChart } from '~/components-styled/time-series-chart';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { InfectedLocationsRegionalTooltip } from '~/components/choropleth/tooltips/region/infected-locations-regional-tooltip';
-import { UnderReportedTooltip } from '~/domain/underreported/under-reported-tooltip';
+import { Layout } from '~/domain/layout/layout';
+import { NationalLayout } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
 import {
   createGetStaticProps,
@@ -25,15 +33,8 @@ import {
   getNlData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
-import { getTrailingDateRange } from '~/utils/get-trailing-date-range';
+import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-
-import { Layout } from '~/domain/layout/layout';
-import { NationalLayout } from '~/domain/layout/national-layout';
-import {
-  RegionsNursingHome,
-  SafetyRegionProperties,
-} from '@corona-dashboard/common';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -46,7 +47,7 @@ export const getStaticProps = createGetStaticProps(
 const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
   const { data, choropleth, lastGenerated } = props;
   const nursinghomeData = data.nursing_home;
-  const nursinghomeDataUnderReportedValues = getTrailingDateRange(
+  const underReportedDateStart = getBoundaryDateStartUnix(
     nursinghomeData.values,
     7
   );
@@ -104,50 +105,37 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <LineChartTile
+          <ChartTileWithTimeframe
             metadata={{ source: positiveTestedPeopleText.bronnen.rivm }}
             title={positiveTestedPeopleText.linechart_titel}
-            values={nursinghomeData.values}
             ariaDescription={graphDescriptions.verpleeghuiszorg_positief_getest}
-            linesConfig={[
-              {
-                metricProperty: 'newly_infected_people',
-              },
-            ]}
-            componentCallback={addBackgroundRectangleCallback(
-              nursinghomeDataUnderReportedValues,
-              {
-                fill: colors.data.underReported,
-              }
+          >
+            {(timeframe) => (
+              <TimeSeriesChart
+                values={nursinghomeData.values}
+                timeframe={timeframe}
+                seriesConfig={[
+                  {
+                    type: 'bar',
+                    metricProperty: 'newly_infected_people',
+                    color: colors.data.primary,
+                    label:
+                      positiveTestedPeopleText.line_chart_legend_trend_label,
+                  },
+                ]}
+                dataOptions={{
+                  timespanAnnotations: [
+                    {
+                      start: underReportedDateStart,
+                      end: Infinity,
+                      label:
+                        positiveTestedPeopleText.line_chart_legend_inaccurate_label,
+                    },
+                  ],
+                }}
+              />
             )}
-            formatTooltip={(values) => {
-              const value = values[0];
-              const isInaccurateValue =
-                value.__date >= nursinghomeDataUnderReportedValues[0];
-
-              return (
-                <UnderReportedTooltip
-                  value={value}
-                  isInUnderReportedRange={isInaccurateValue}
-                  underReportedText={siteText.common.incomplete}
-                />
-              );
-            }}
-            legendItems={[
-              {
-                color: colors.data.primary,
-                label: positiveTestedPeopleText.line_chart_legend_trend_label,
-                shape: 'line',
-              },
-              {
-                color: colors.data.underReported,
-                label:
-                  positiveTestedPeopleText.line_chart_legend_inaccurate_label,
-                shape: 'square',
-              },
-            ]}
-            showLegend
-          />
+          </ChartTileWithTimeframe>
 
           <ContentHeader
             id="besmette-locaties"
@@ -225,22 +213,28 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             />
           </ChoroplethTile>
 
-          <LineChartTile
+          <ChartTileWithTimeframe
             metadata={{ source: infectedLocationsText.bronnen.rivm }}
             title={infectedLocationsText.linechart_titel}
-            values={nursinghomeData.values}
             ariaDescription={
               graphDescriptions.verpleeghuiszorg_besmette_locaties
             }
-            linesConfig={[
-              {
-                metricProperty: 'infected_locations_total',
-              },
-            ]}
-            padding={{
-              left: 35,
-            }}
-          />
+          >
+            {(timeframe) => (
+              <TimeSeriesChart
+                values={nursinghomeData.values}
+                timeframe={timeframe}
+                seriesConfig={[
+                  {
+                    type: 'area',
+                    metricProperty: 'infected_locations_total',
+                    label: '@TODO lokalize',
+                    color: colors.data.primary,
+                  },
+                ]}
+              />
+            )}
+          </ChartTileWithTimeframe>
 
           <ContentHeader
             id="sterfte"
@@ -274,51 +268,38 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <LineChartTile
+          <ChartTileWithTimeframe
             metadata={{ source: locationDeaths.bronnen.rivm }}
             title={locationDeaths.linechart_titel}
-            values={nursinghomeData.values}
             ariaDescription={
               graphDescriptions.verpleeghuiszorg_besmette_locaties
             }
-            linesConfig={[
-              {
-                metricProperty: 'deceased_daily',
-              },
-            ]}
-            formatTooltip={(values) => {
-              const value = values[0];
-              const isInaccurateValue =
-                value.__date >= nursinghomeDataUnderReportedValues[0];
-
-              return (
-                <UnderReportedTooltip
-                  value={value}
-                  isInUnderReportedRange={isInaccurateValue}
-                  underReportedText={siteText.common.incomplete}
-                />
-              );
-            }}
-            componentCallback={addBackgroundRectangleCallback(
-              nursinghomeDataUnderReportedValues,
-              {
-                fill: colors.data.underReported,
-              }
+          >
+            {(timeframe) => (
+              <TimeSeriesChart
+                values={nursinghomeData.values}
+                timeframe={timeframe}
+                seriesConfig={[
+                  {
+                    type: 'area',
+                    metricProperty: 'deceased_daily',
+                    label: locationDeaths.line_chart_legend_trend_label,
+                    color: colors.data.primary,
+                  },
+                ]}
+                dataOptions={{
+                  timespanAnnotations: [
+                    {
+                      start: underReportedDateStart,
+                      end: Infinity,
+                      label:
+                        positiveTestedPeopleText.line_chart_legend_inaccurate_label,
+                    },
+                  ],
+                }}
+              />
             )}
-            legendItems={[
-              {
-                color: colors.data.primary,
-                label: locationDeaths.line_chart_legend_trend_label,
-                shape: 'line',
-              },
-              {
-                color: colors.data.underReported,
-                label: locationDeaths.line_chart_legend_inaccurate_label,
-                shape: 'square',
-              },
-            ]}
-            showLegend
-          />
+          </ChartTileWithTimeframe>
         </TileList>
       </NationalLayout>
     </Layout>
