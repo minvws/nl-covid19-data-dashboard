@@ -43,9 +43,9 @@ export const getStaticProps = createGetStaticProps(
 
 const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
   const { data, choropleth, lastGenerated } = props;
-  const nursinghomeData = data.nursing_home;
+  const nursinghomeDataLastValue = data.nursing_home.last_value;
   const underReportedDateStart = getBoundaryDateStartUnix(
-    nursinghomeData.values,
+    data.nursing_home.values,
     7
   );
 
@@ -77,9 +77,9 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             subtitle={positiveTestedPeopleText.pagina_toelichting}
             metadata={{
               datumsText: positiveTestedPeopleText.datums,
-              dateOrRange: nursinghomeData.last_value.date_unix,
+              dateOrRange: nursinghomeDataLastValue.date_unix,
               dateOfInsertionUnix:
-                nursinghomeData.last_value.date_of_insertion_unix,
+                nursinghomeDataLastValue.date_of_insertion_unix,
               dataSources: [positiveTestedPeopleText.bronnen.rivm],
             }}
             reference={positiveTestedPeopleText.reference}
@@ -90,13 +90,13 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
               title={positiveTestedPeopleText.barscale_titel}
               description={positiveTestedPeopleText.extra_uitleg}
               metadata={{
-                date: nursinghomeData.last_value.date_unix,
+                date: nursinghomeDataLastValue.date_unix,
                 source: positiveTestedPeopleText.bronnen.rivm,
               }}
             >
               <KpiValue
                 data-cy="newly_infected_people"
-                absolute={nursinghomeData.last_value.newly_infected_people}
+                absolute={nursinghomeDataLastValue.newly_infected_people}
                 difference={data.difference.nursing_home__newly_infected_people}
               />
             </KpiTile>
@@ -109,7 +109,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
           >
             {(timeframe) => (
               <TimeSeriesChart
-                values={nursinghomeData.values}
+                values={data.nursing_home.values}
                 timeframe={timeframe}
                 seriesConfig={[
                   {
@@ -159,9 +159,9 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             subtitle={infectedLocationsText.pagina_toelichting}
             metadata={{
               datumsText: infectedLocationsText.datums,
-              dateOrRange: nursinghomeData.last_value.date_unix,
+              dateOrRange: nursinghomeDataLastValue.date_unix,
               dateOfInsertionUnix:
-                nursinghomeData.last_value.date_of_insertion_unix,
+                nursinghomeDataLastValue.date_of_insertion_unix,
               dataSources: [infectedLocationsText.bronnen.rivm],
             }}
             reference={infectedLocationsText.reference}
@@ -171,15 +171,15 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             <KpiTile
               title={infectedLocationsText.kpi_titel}
               metadata={{
-                date: nursinghomeData.last_value.date_unix,
+                date: nursinghomeDataLastValue.date_unix,
                 source: infectedLocationsText.bronnen.rivm,
               }}
             >
               <KpiValue
                 data-cy="infected_locations_total"
-                absolute={nursinghomeData.last_value.infected_locations_total}
+                absolute={nursinghomeDataLastValue.infected_locations_total}
                 percentage={
-                  nursinghomeData.last_value.infected_locations_percentage
+                  nursinghomeDataLastValue.infected_locations_percentage
                 }
                 difference={
                   data.difference.nursing_home__infected_locations_total
@@ -191,13 +191,13 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             <KpiTile
               title={infectedLocationsText.barscale_titel}
               metadata={{
-                date: nursinghomeData.last_value.date_unix,
+                date: nursinghomeDataLastValue.date_unix,
                 source: infectedLocationsText.bronnen.rivm,
               }}
             >
               <KpiValue
                 data-cy="newly_infected_locations"
-                absolute={nursinghomeData.last_value.newly_infected_locations}
+                absolute={nursinghomeDataLastValue.newly_infected_locations}
               />
               <Text>{infectedLocationsText.barscale_toelichting}</Text>
             </KpiTile>
@@ -207,7 +207,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             title={infectedLocationsText.map_titel}
             description={infectedLocationsText.map_toelichting}
             metadata={{
-              date: nursinghomeData.last_value.date_unix,
+              date: nursinghomeDataLastValue.date_unix,
               source: infectedLocationsText.bronnen.rivm,
             }}
             legend={{
@@ -236,7 +236,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
           >
             {(timeframe) => (
               <TimeSeriesChart
-                values={nursinghomeData.values}
+                values={data.nursing_home.values}
                 timeframe={timeframe}
                 seriesConfig={[
                   {
@@ -260,9 +260,9 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             subtitle={deceased.pagina_toelichting}
             metadata={{
               datumsText: deceased.datums,
-              dateOrRange: nursinghomeData.last_value.date_unix,
+              dateOrRange: nursinghomeDataLastValue.date_unix,
               dateOfInsertionUnix:
-                nursinghomeData.last_value.date_of_insertion_unix,
+                nursinghomeDataLastValue.date_of_insertion_unix,
               dataSources: [deceased.bronnen.rivm],
             }}
             reference={deceased.reference}
@@ -273,13 +273,13 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
               title={deceased.barscale_titel}
               description={deceased.extra_uitleg}
               metadata={{
-                date: nursinghomeData.last_value.date_unix,
+                date: nursinghomeDataLastValue.date_unix,
                 source: deceased.bronnen.rivm,
               }}
             >
               <KpiValue
                 data-cy="deceased_daily"
-                absolute={nursinghomeData.last_value.deceased_daily}
+                absolute={nursinghomeDataLastValue.deceased_daily}
               />
             </KpiTile>
           </TwoKpiSection>
@@ -290,7 +290,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
           >
             {(timeframe) => (
               <TimeSeriesChart
-                values={nursinghomeData.values}
+                values={data.nursing_home.values}
                 timeframe={timeframe}
                 seriesConfig={[
                   {

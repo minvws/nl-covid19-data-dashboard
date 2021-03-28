@@ -42,11 +42,15 @@ export function BarTrend({
     [bounds, getX, series, bandPadding]
   );
 
+  /**
+   * Clip bar width to minimum of 1px otherwise the shape disappears on
+   * mobile screens.
+   */
+  const barWidth = Math.max(xScale.bandwidth(), 1);
+
   return (
     <>
       {nonNullSeries.map((item, index) => {
-        const barWidth = Math.max(xScale.bandwidth(), 1);
-
         return (
           /**
            * We could use Visx shape Bar here, but it is almost the same as rect
