@@ -81,6 +81,8 @@ export const Axes = memo(function Axes({
     [startUnix, endUnix, formatDateFromSeconds]
   );
 
+  const hasYearLabel = formatXAxis(startUnix).length > 6;
+
   return (
     <g css={css({ pointerEvents: 'none' })}>
       <GridRows
@@ -115,10 +117,21 @@ export const Axes = memo(function Axes({
           fontSize: 12,
           /**
            * Using anchor middle the line marker label will fall nicely on top
-           * of the axis label
+           * of the axis label.
+           *
+           * The only times at which we can not use middle is if we are
+           * rendering a year in the label, because it becomes too long.
            */
           textAnchor:
-            x === startUnix ? 'start' : x === endUnix ? 'end' : 'middle',
+            x === startUnix
+              ? hasYearLabel
+                ? 'start'
+                : 'middle'
+              : x === endUnix
+              ? hasYearLabel
+                ? 'end'
+                : 'middle'
+              : 'middle',
         })}
         hideTicks
       />

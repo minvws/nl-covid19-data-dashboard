@@ -5,10 +5,7 @@ import {
 import CoronaVirus from '~/assets/coronavirus.svg';
 import Locatie from '~/assets/locaties.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
-import {
-  ChartTile,
-  ChartTileWithTimeframe,
-} from '~/components-styled/chart-tile';
+import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
@@ -115,6 +112,13 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                 values={nursinghomeData.values}
                 timeframe={timeframe}
                 seriesConfig={[
+                  {
+                    type: 'line',
+                    metricProperty: 'newly_infected_people',
+                    color: colors.data.primary,
+                    label:
+                      positiveTestedPeopleText.line_chart_legend_trend_label,
+                  },
                   {
                     type: 'bar',
                     metricProperty: 'newly_infected_people',

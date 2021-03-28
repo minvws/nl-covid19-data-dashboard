@@ -40,7 +40,12 @@ export function ChartContainer({
       viewBox={`0 0 ${width} ${height}`}
       role="img"
       aria-labelledby={ariaLabelledBy}
-      style={{ touchAction: 'pan-y', userSelect: 'none', width: '100%' }}
+      style={{
+        touchAction: 'pan-y',
+        userSelect: 'none',
+        width: '100%',
+        overflow: 'visible',
+      }}
       onTouchStart={onHover}
       onTouchMove={onHover}
       onMouseMove={onHover}
