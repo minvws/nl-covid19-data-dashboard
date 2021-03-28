@@ -54,7 +54,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
   const infectedLocationsText = siteText.verpleeghuis_besmette_locaties;
   const positiveTestedPeopleText =
     siteText.verpleeghuis_positief_geteste_personen;
-  const locationDeaths = siteText.verpleeghuis_oversterfte;
+  const deceased = siteText.verpleeghuis_oversterfte;
   const graphDescriptions = siteText.accessibility.grafieken;
 
   const metadata = {
@@ -118,13 +118,21 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                     color: colors.data.primary,
                     label:
                       positiveTestedPeopleText.line_chart_legend_trend_label,
+                    shortLabel:
+                      positiveTestedPeopleText.tooltip_labels
+                        .newly_infected_people,
                   },
                   {
                     type: 'bar',
+                    // @TODO connect with right property when data is available
+                    // metricProperty: 'newly_infected_people_moving_average',
                     metricProperty: 'newly_infected_people',
                     color: colors.data.primary,
                     label:
-                      positiveTestedPeopleText.line_chart_legend_trend_label,
+                      positiveTestedPeopleText.line_chart_legend_trend_moving_average_label,
+                    shortLabel:
+                      positiveTestedPeopleText.tooltip_labels
+                        .newly_infected_people_moving_average,
                   },
                 ]}
                 dataOptions={{
@@ -134,6 +142,8 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                       end: Infinity,
                       label:
                         positiveTestedPeopleText.line_chart_legend_inaccurate_label,
+                      shortLabel:
+                        positiveTestedPeopleText.tooltip_labels.inaccurate,
                     },
                   ],
                 }}
@@ -232,7 +242,9 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                   {
                     type: 'area',
                     metricProperty: 'infected_locations_total',
-                    label: '@TODO lokalize',
+                    label:
+                      siteText.verpleeghuis_besmette_locaties
+                        .linechart_tooltip_label,
                     color: colors.data.primary,
                   },
                 ]}
@@ -243,26 +255,26 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
           <ContentHeader
             id="sterfte"
             skipLinkAnchor={true}
-            title={locationDeaths.titel}
+            title={deceased.titel}
             icon={<CoronaVirus />}
-            subtitle={locationDeaths.pagina_toelichting}
+            subtitle={deceased.pagina_toelichting}
             metadata={{
-              datumsText: locationDeaths.datums,
+              datumsText: deceased.datums,
               dateOrRange: nursinghomeData.last_value.date_unix,
               dateOfInsertionUnix:
                 nursinghomeData.last_value.date_of_insertion_unix,
-              dataSources: [locationDeaths.bronnen.rivm],
+              dataSources: [deceased.bronnen.rivm],
             }}
-            reference={locationDeaths.reference}
+            reference={deceased.reference}
           />
 
           <TwoKpiSection>
             <KpiTile
-              title={locationDeaths.barscale_titel}
-              description={locationDeaths.extra_uitleg}
+              title={deceased.barscale_titel}
+              description={deceased.extra_uitleg}
               metadata={{
                 date: nursinghomeData.last_value.date_unix,
-                source: locationDeaths.bronnen.rivm,
+                source: deceased.bronnen.rivm,
               }}
             >
               <KpiValue
@@ -273,11 +285,8 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
           </TwoKpiSection>
 
           <ChartTileWithTimeframe
-            metadata={{ source: locationDeaths.bronnen.rivm }}
-            title={locationDeaths.linechart_titel}
-            ariaDescription={
-              graphDescriptions.verpleeghuiszorg_besmette_locaties
-            }
+            metadata={{ source: deceased.bronnen.rivm }}
+            title={deceased.linechart_titel}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -285,9 +294,21 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                 timeframe={timeframe}
                 seriesConfig={[
                   {
-                    type: 'area',
+                    type: 'line',
                     metricProperty: 'deceased_daily',
-                    label: locationDeaths.line_chart_legend_trend_label,
+                    label: deceased.line_chart_legend_trend_label,
+                    shortLabel: deceased.tooltip_labels.deceased_daily,
+                    color: colors.data.primary,
+                  },
+                  {
+                    type: 'bar',
+                    // @TODO connect with actual data when available
+                    // metricProperty: 'deceased_daily_moving_average',
+                    metricProperty: 'deceased_daily',
+                    label:
+                      deceased.line_chart_legend_trend_moving_average_label,
+                    shortLabel:
+                      deceased.tooltip_labels.deceased_daily_moving_average,
                     color: colors.data.primary,
                   },
                 ]}
@@ -296,8 +317,8 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                     {
                       start: underReportedDateStart,
                       end: Infinity,
-                      label:
-                        positiveTestedPeopleText.line_chart_legend_inaccurate_label,
+                      label: deceased.line_chart_legend_inaccurate_label,
+                      shortLabel: deceased.tooltip_labels.inaccurate,
                     },
                   ],
                 }}
