@@ -196,8 +196,8 @@ export function TimeSeriesChart<
    * y-axis scaling to change when toggling the timeframe setting.
    */
   const calculatedSeriesMax = useMemo(
-    () => calculateSeriesMaximum(allValues, seriesConfig, benchmark?.value),
-    [allValues, seriesConfig, benchmark]
+    () => calculateSeriesMaximum(seriesList, seriesConfig, benchmark?.value),
+    [seriesList, seriesConfig, benchmark?.value]
   );
 
   const seriesMax = isDefined(forcedMaximumValue)
@@ -307,20 +307,6 @@ export function TimeSeriesChart<
             yAxisRef={yAxisRef}
           />
 
-          {timespanAnnotations &&
-            timespanAnnotations.map((x, index) => (
-              <TimespanAnnotation
-                key={index}
-                start={x.start}
-                end={x.end}
-                color={x.color}
-                fillOpacity={x.fillOpacity}
-                domain={xScale.domain() as [number, number]}
-                getX={getX}
-                height={bounds.height}
-              />
-            ))}
-
           {/**
            * The renderSeries() callback has been replaced by this component. As
            * long as we use only very standardized series this might be a good
@@ -350,6 +336,21 @@ export function TimeSeriesChart<
               width={bounds.width}
             />
           )}
+
+          {/**
+           * Timespan annotations are rendered on top of the chart. It is
+           * transparent thanks to the `mix-blend-mode` set to `multiply`.
+           */}
+          {timespanAnnotations?.map((x, index) => (
+            <TimespanAnnotation
+              key={index}
+              start={x.start}
+              end={x.end}
+              domain={xScale.domain() as [number, number]}
+              getX={getX}
+              height={bounds.height}
+            />
+          ))}
         </ChartContainer>
 
         {tooltipOpen && tooltipData && (
