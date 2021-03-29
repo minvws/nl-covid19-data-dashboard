@@ -316,7 +316,14 @@ function ListItem({
   const { siteText, formatDateFromSeconds } = useIntl();
 
   return (
-    <StyledList>
+    <li
+      css={css({
+        paddingBottom: 3,
+        marginBottom: 3,
+        borderBottom: '1px solid',
+        borderBottomColor: 'border',
+      })}
+    >
       <Box display="flex">
         <Box
           display="flex"
@@ -357,7 +364,7 @@ function ListItem({
         </Text>
       </Box>
       {children}
-    </StyledList>
+    </li>
   );
 }
 
@@ -416,19 +423,12 @@ const UnorderedList = styled.ul(() =>
         pt: 3,
       },
     },
-  })
-);
 
-const StyledList = styled.li(() =>
-  css({
-    paddingBottom: 3,
-    marginBottom: 3,
-    borderBottom: '1px solid',
-    borderBottomColor: 'border',
-
-    '&:last-of-type': {
-      padding: 0,
-      borderBottom: 0,
+    li: {
+      '&:last-of-type': {
+        padding: 0,
+        borderBottom: 0,
+      },
     },
   })
 );
