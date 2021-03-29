@@ -52,7 +52,7 @@ export function AgeGroupLegend({
               data-text={item.label}
             >
               {item.label}
-              <Line color={item.color} />
+              <Line color={item.color} lineStyle={item.style ?? 'solid'} />
             </ItemButton>
           </Item>
         ))}
@@ -132,7 +132,7 @@ const ItemButton = styled.button<{
       },
     },
     '&:focus': {
-      outline: '1px dashed black',
+      background: 'lightGray',
     },
     '&:after': {
       content: 'attr(data-text)',
@@ -161,15 +161,18 @@ const ResetButton = styled.button<{ fontWeight?: SystemStyleObject }>(
     })
 );
 
-const Line = styled.div<{ color: string }>(({ color }) =>
-  css({
-    display: 'block',
-    position: 'absolute',
-    left: 10,
-    backgroundColor: color,
-    top: '9px',
-    width: '15px',
-    height: '3px',
-    borderRadius: '2px',
-  })
+const Line = styled.div<{ color: string; lineStyle: 'dashed' | 'solid' }>(
+  ({ color, lineStyle }) =>
+    css({
+      display: 'block',
+      position: 'absolute',
+      left: 10,
+      borderTopColor: color as SystemStyleObject,
+      borderTopStyle: lineStyle,
+      borderTopWidth: '3px',
+      top: '9px',
+      width: '15px',
+      height: 0,
+      borderRadius: '2px',
+    })
 );
