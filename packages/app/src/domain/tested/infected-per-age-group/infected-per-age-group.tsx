@@ -6,9 +6,9 @@ import { TimeSeriesChart } from '~/components-styled/time-series-chart';
 import { TooltipChildren } from '~/components-styled/time-series-chart/components';
 import { LineSeriesDefinition } from '~/components-styled/time-series-chart/logic';
 import { useIntl } from '~/intl';
-import { AgeGroupLegend } from './age-group-legend';
+import { AgeGroupLegend } from './components/age-group-legend';
 import { SERIES_CONFIG } from './series-config';
-import { useAgeGroupSelection } from './use-age-group-selection';
+import { useAgeGroupSelection } from './logic/use-age-group-selection';
 
 interface InfectedPerAgeGroup {
   values: NlTestedPerAgeGroupValue[];

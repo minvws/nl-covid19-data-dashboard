@@ -2841,8 +2841,8 @@
     }
   },
   "infected_per_agroup": {
-    "title": "Infected over time",
-    "description": "Infected over time",
+    "title": "Verdeling naar leeftijd",
+    "description": "Verdeling naar leeftijd ...",
     "legend": {
       "infected_age_0_9_per_100k": "0-9",
       "infected_age_10_19_per_100k": "10-19",
@@ -2856,6 +2856,7 @@
       "infected_age_90_plus_per_100k": "90+",
       "infected_overall_per_100k": "Alle leeftijden"
     },
-    "reset_button_label": "Reset"
+    "reset_button_label": "Reset",
+    "legend_help_text": "Selecteed een of meerdere leeftijdsgroepen om deze apart te bekijken."
   }
 }

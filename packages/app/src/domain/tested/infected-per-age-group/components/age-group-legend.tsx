@@ -2,6 +2,7 @@ import { NlTestedPerAgeGroupValue } from '@corona-dashboard/common';
 import css, { SystemStyleObject } from '@styled-system/css';
 import styled from 'styled-components';
 import { LineSeriesDefinition } from '~/components-styled/time-series-chart/logic';
+import { Text } from '~/components-styled/typography';
 import { useIntl } from '~/intl';
 
 interface AgeGroupLegendProps {
@@ -40,32 +41,35 @@ export function AgeGroupLegend({
   }
 
   return (
-    <Legend>
-      <List>
-        {seriesConfig.map((item) => (
-          <Item key={item.label}>
-            <ItemButton
-              onClick={() => toggleAgeGroup(item.metricProperty)}
-              isSelected={!hasAllSelected && item.isSelected}
-              color={item.color}
-              data-metric-property={item.metricProperty}
-              data-text={item.label}
-            >
-              {item.label}
-              <Line color={item.color} lineStyle={item.style ?? 'solid'} />
-            </ItemButton>
-          </Item>
-        ))}
-      </List>
-      <ResetButton
-        onClick={onReset}
-        css={css({
-          visibility: hasNoneSelected ? 'hidden' : 'visible',
-        })}
-      >
-        {text.reset_button_label}
-      </ResetButton>
-    </Legend>
+    <>
+      <Legend>
+        <List>
+          {seriesConfig.map((item) => (
+            <Item key={item.label}>
+              <ItemButton
+                onClick={() => toggleAgeGroup(item.metricProperty)}
+                isSelected={!hasAllSelected && item.isSelected}
+                color={item.color}
+                data-metric-property={item.metricProperty}
+                data-text={item.label}
+              >
+                {item.label}
+                <Line color={item.color} lineStyle={item.style ?? 'solid'} />
+              </ItemButton>
+            </Item>
+          ))}
+        </List>
+        <ResetButton
+          onClick={onReset}
+          css={css({
+            visibility: hasNoneSelected ? 'hidden' : 'visible',
+          })}
+        >
+          {text.reset_button_label}
+        </ResetButton>
+      </Legend>
+      <Text fontSize={1}>{text.legend_help_text}</Text>
+    </>
   );
 }
 
