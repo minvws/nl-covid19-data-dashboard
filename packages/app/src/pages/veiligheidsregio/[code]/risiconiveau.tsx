@@ -102,9 +102,6 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
 
   const escalationColor = useEscalationColor(currentLevel);
 
-  const positive_tested_per_100k = 999;
-  const hospital_admissions_per_million = 999;
-
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <SafetyRegionLayout
@@ -188,7 +185,9 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                             text.momenteel.positive_tests.description
                           }
                           escalationColor={escalationColor}
-                          amount={positive_tested_per_100k}
+                          amount={
+                            data.escalation_level.positive_tested_per_100k
+                          }
                         />
                       </ListItem>
                       <ListItem
@@ -200,7 +199,10 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                             text.momenteel.hospital_admissions.description
                           }
                           escalationColor={escalationColor}
-                          amount={hospital_admissions_per_million}
+                          amount={
+                            data.escalation_level
+                              .hospital_admissions_per_million
+                          }
                         />
                       </ListItem>
                     </UnorderedList>
