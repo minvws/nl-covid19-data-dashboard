@@ -37,7 +37,7 @@
     "title": "Coronavirus Dashboard",
     "text": "The Coronavirus Dashboard provides information on the development of the coronavirus in the Netherlands.",
     "link": "Read more about this dashboard",
-    "logo_alt": "Government of The Netherlands"
+    "logo_alt": "Government of the Netherlands"
   },
   "nav": {
     "links": {
@@ -674,7 +674,7 @@
     "totaal": "Total"
   },
   "seoHead": {
-    "default_description": "Information on the development of the coronavirus in The Netherlands.",
+    "default_description": "Information on the development of the coronavirus in the Netherlands.",
     "default_title": "Coronavirus Dashboard | COVID-19 | Government.nl",
     "default_url": "https://coronadashboard.government.nl/veelgestelde-vragen"
   },
@@ -2032,7 +2032,7 @@
     "graph": {
       "accessibility_description": "Graph with percentages for the distribution of the population and the distribution of age groups tested positively.",
       "clipped_value_message": "This value is larger than shown in the graph",
-      "age_group_percentage_title": "Age distribution in The Netherlands",
+      "age_group_percentage_title": "Age distribution in the Netherlands",
       "age_group_percentage_tooltip": "of the population is {{ageGroupRange}} years old",
       "value_percentage_title": "Deaths by age",
       "value_percentage_tooltip": "of the number of deceased persons is {{ageGroupRange}} years old",
@@ -2503,7 +2503,7 @@
       "description": "Current situation in safety region {{safetyRegionName}}"
     },
     "risiconiveaus": {
-      "selecteer_titel": "Risk level map of The Netherlands",
+      "selecteer_titel": "Risk level map of the Netherlands",
       "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on 17 March. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus)."
     },
     "risoconiveau_maatregelen": {
@@ -2563,7 +2563,7 @@
     "quick_links": {
       "header": "View all data on the dashboard",
       "links": {
-        "nationaal": "Data for The Netherlands",
+        "nationaal": "Data for the Netherlands",
         "veiligheidsregio": "Data for safety region {{safetyRegionName}}",
         "gemeente": "Data by municipality"
       }
@@ -2646,7 +2646,7 @@
     "quick_links": {
       "header": "View all data on the dashboard",
       "links": {
-        "nationaal": "Data for The Netherlands",
+        "nationaal": "Data for the Netherlands",
         "veiligheidsregio": "Data for the safety region {{safetyRegionName}}",
         "veiligheidsregio_fallback": "Data by safety region",
         "gemeente": "Data for the municipality {{municipalityName}}"
