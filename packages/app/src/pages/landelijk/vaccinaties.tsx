@@ -270,9 +270,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               <TimeSeriesChart
                 tooltipTitle={text.grafiek_gevaccineerde_mensen.titel}
                 values={mockDataRef.current.values}
-                // @TODO enable when this feature is available on develop
-                // formatTickValue={(x) => `${x / 1_000_000}`}
+                formatTickValue={(x) => `${x / 1_000_000}`}
                 dataOptions={{
+                  valueAnnotation: siteText.waarde_annotaties.x_miljoen,
                   timespanAnnotations: [
                     {
                       start:
@@ -772,15 +772,13 @@ function createNlVaccineCoverageValueMock() {
 
     const dateSeconds = date.getTime() / 1000;
 
-    const incrementFully = 1 + Math.random() * multiplier;
-    const incrementPartial = 1 + Math.random() * multiplier;
     multiplier = multiplier * 0.95;
 
     const fully_vaccinated = Math.floor(
-      lastValue.fully_vaccinated * incrementFully
+      lastValue.fully_vaccinated * (1 + multiplier)
     );
     const partially_vaccinated = Math.floor(
-      lastValue.partially_vaccinated * incrementPartial
+      lastValue.partially_vaccinated * (1 + multiplier)
     );
     const partially_or_fully_vaccinated =
       fully_vaccinated + partially_vaccinated;
