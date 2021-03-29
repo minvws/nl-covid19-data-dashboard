@@ -134,7 +134,7 @@ export function getTimeDomain<T extends TimestampedValue>(
   );
 }
 
-export const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
+const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
 
 /**
  * Calculate the width that one value spans on the chart x-axis. This assumes

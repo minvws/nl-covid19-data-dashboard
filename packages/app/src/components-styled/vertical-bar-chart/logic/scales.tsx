@@ -9,8 +9,9 @@ import {
   SeriesSingleValue,
   GetX,
   GetY,
-  ONE_DAY_IN_SECONDS,
 } from '~/components-styled/time-series-chart/logic';
+
+export const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
 
 interface UseScalesResult {
   xScale: ScaleBand<number>;

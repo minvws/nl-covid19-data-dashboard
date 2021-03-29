@@ -52,7 +52,6 @@ export const BarTrend = memo(function BarTrend({
   return (
     <Group>
       {nonNullSeries.map((value, index) => {
-        const barId = `bar-${index}`;
         const fillColor = value.__value
           ? value.__value > 0
             ? color
@@ -62,15 +61,14 @@ export const BarTrend = memo(function BarTrend({
         const { x, y, height } = getRectPosition(value);
         return (
           <Group
-            id={barId}
-            key={barId}
+            key={`bar-${index}`}
             onMouseLeave={(e) => onHover(e, index)}
             onMouseMove={(e) => onHover(e, index)}
             onTouchStart={(e) => onHover(e, index)}
           >
             <Bar
               /**
-               * The captures mouse movements that align vertically
+               * This captures mouse movements that align vertically
                * with the bar
                */
               fill={'transparent'}
