@@ -487,19 +487,21 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                   color={colors.data.vaccines.bio_n_tech_pfizer}
                   productName="BioNTech/Pfizer"
                   value={formatNumber(
-                    data.vaccine_stock.last_value.bio_n_tech_pfizer
+                    data.vaccine_stock.last_value.bio_n_tech_pfizer.total
                   )}
                 />
                 <VaccineStockRow
                   color={colors.data.vaccines.moderna}
                   productName="Moderna"
-                  value={formatNumber(data.vaccine_stock.last_value.moderna)}
+                  value={formatNumber(
+                    data.vaccine_stock.last_value.moderna.total
+                  )}
                 />
                 <VaccineStockRow
                   color={colors.data.vaccines.astra_zeneca}
                   productName="AstraZeneca"
                   value={formatNumber(
-                    data.vaccine_stock.last_value.astra_zeneca
+                    data.vaccine_stock.last_value.astra_zeneca.total
                   )}
                 />
               </Box>

@@ -1,5 +1,19 @@
 {
   "definitions": {
+    "product_stock_info": {
+      "title": "nl_vaccine_product_stock_info",
+      "type": "object",
+      "required": ["total", "ready_for_delivery"],
+      "additionalProperties": false,
+      "properties": {
+        "total": {
+          "type": "integer"
+        },
+        "ready_for_delivery": {
+          "type": "integer"
+        }
+      }
+    },
     "value": {
       "title": "nl_vaccine_stock_value",
       "type": "object",
@@ -14,16 +28,16 @@
       "additionalProperties": false,
       "properties": {
         "total": {
-          "type": "integer"
+          "$ref": "#/definitions/product_stock_info"
         },
         "bio_n_tech_pfizer": {
-          "type": "integer"
+          "$ref": "#/definitions/product_stock_info"
         },
         "moderna": {
-          "type": "integer"
+          "$ref": "#/definitions/product_stock_info"
         },
         "astra_zeneca": {
-          "type": "integer"
+          "$ref": "#/definitions/product_stock_info"
         },
         "date_of_insertion_unix": {
           "type": "integer"
