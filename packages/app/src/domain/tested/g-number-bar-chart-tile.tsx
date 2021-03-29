@@ -64,7 +64,7 @@ export function GNumberBarChartTile({
         <ParentSize>
           {({ width }) => (
             <VerticalBarChart
-              title="G Number"
+              title=""
               width={width}
               timeframe={timeframe}
               ariaLabelledBy="chart_g_number"
