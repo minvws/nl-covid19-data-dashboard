@@ -263,7 +263,8 @@
       "rivm": {
         "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv",
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
-        "text": "RIVM"
+        "text": "RIVM",
+        "aria_text": "Bekijk de databron van Postief geteste mensen op het RIVM"
       }
     },
     "tooltip_labels": {
