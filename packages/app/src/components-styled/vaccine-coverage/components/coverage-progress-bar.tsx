@@ -120,7 +120,8 @@ export function CoverageProgressBar(props: {
                 {formatPercentage(data.percentage, {
                   maximumFractionDigits: 1,
                 })}
-                %{` ${data.label} `}({formatNumber(data.value)})
+                {'% '}
+                {data.label} ({formatNumber(data.value)})
               </InlineText>
             </Box>
           </Box>
