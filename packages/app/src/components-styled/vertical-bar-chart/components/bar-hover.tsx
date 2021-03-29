@@ -17,11 +17,10 @@ export function BarHover<T extends TimestampedValue>({
   return (
     <Bar
       fill={'rgba(0, 0, 0, 0.03)'}
-      x={point.x}
+      x={point.x - barWidth / 2}
       y={0}
       width={barWidth}
       height={bounds.height}
-      transform={`translate(-${barWidth / 2}, 0)`}
     />
   );
 }

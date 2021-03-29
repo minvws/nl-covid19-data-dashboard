@@ -3,7 +3,7 @@ import { Group } from '@visx/group';
 import { Bar } from '@visx/shape';
 import { isPresent } from 'ts-is-present';
 import { first, last } from 'lodash';
-import { MouseEvent, TouchEvent, useMemo, memo } from 'react';
+import { useCallback, MouseEvent, TouchEvent, useMemo, memo } from 'react';
 import {
   SeriesItem,
   SeriesSingleValue,
@@ -43,22 +43,30 @@ export const BarTrend = memo(function BarTrend({
     return Math.abs((first(range) as number) - (last(range) as number));
   }, [yScale]);
 
-  const getRectPosition = getRectPositionFunction(
-    yScale(0) as number,
-    getX,
-    getY
+  const getRectPosition = useCallback(
+    (value: SeriesSingleValue) => {
+      const valuePosition = getY(value);
+      const zeroPosition = yScale(0) as number;
+
+      return {
+        x: getX(value),
+        y: Math.min(zeroPosition, valuePosition),
+        height: Math.abs(zeroPosition - valuePosition),
+      };
+    },
+    [yScale, getX, getY]
   );
 
   return (
     <Group>
-      {nonNullSeries.map((value, index) => {
-        const fillColor = value.__value
-          ? value.__value > 0
+      {nonNullSeries.map((item, index) => {
+        const fillColor = item.__value
+          ? item.__value > 0
             ? color
             : secondaryColor
           : 'transparent';
 
-        const { x, y, height } = getRectPosition(value);
+        const { x, y, height } = getRectPosition(item);
         return (
           <Group
             key={`bar-${index}`}
@@ -90,19 +98,3 @@ export const BarTrend = memo(function BarTrend({
     </Group>
   );
 });
-
-function getRectPositionFunction(
-  zeroPosition: number,
-  getX: (v: SeriesItem) => number,
-  getY: (v: SeriesSingleValue) => number
-) {
-  return function getRectPosition(value: SeriesSingleValue) {
-    const valuePosition = getY(value);
-
-    return {
-      x: getX(value),
-      y: Math.min(zeroPosition, valuePosition),
-      height: Math.abs(zeroPosition - valuePosition),
-    };
-  };
-}
