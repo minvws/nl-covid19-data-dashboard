@@ -85,6 +85,20 @@ export function NationalLayout(props: NationalLayoutProps) {
           >
             <Menu>
               <MetricMenuItemLink
+                title={siteText.nationaal_maatregelen.titel_sidebar}
+                subtitle={siteText.nationaal_maatregelen.subtitel_sidebar}
+                isButton
+                href={{
+                  pathname: '/landelijk/maatregelen',
+                  query: breakpoints.md
+                    ? {} // only add menu flags on narrow devices
+                    : isMenuOpen
+                    ? { menu: '0' }
+                    : { menu: '1' },
+                }}
+              />
+
+              {/* <MetricMenuItemLink
                 href={{
                   pathname: '/landelijk/maatregelen',
                   query: breakpoints.md
@@ -95,7 +109,7 @@ export function NationalLayout(props: NationalLayoutProps) {
                 }}
                 title={siteText.nationaal_maatregelen.titel_sidebar}
                 subtitle={siteText.nationaal_maatregelen.subtitel_sidebar}
-              />
+              /> */}
 
               <CategoryMenu
                 title={siteText.nationaal_layout.headings.vaccinaties}

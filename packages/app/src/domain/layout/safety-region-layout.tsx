@@ -114,6 +114,8 @@ export function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
                   <MetricMenuItemLink
                     href={`/veiligheidsregio/${code}/maatregelen`}
                     title={siteText.veiligheidsregio_maatregelen.titel_sidebar}
+                    isButton
+                    buttonVariant="top"
                     subtitle={
                       siteText.veiligheidsregio_maatregelen.subtitel_sidebar
                     }
@@ -121,6 +123,8 @@ export function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
                   <MetricMenuItemLink
                     href={`/veiligheidsregio/${code}/risiconiveau`}
                     title={siteText.veiligheidsregio_layout.headings.inschaling}
+                    isButton
+                    buttonVariant="bottom"
                   >
                     <Box mt={2}>
                       <EscalationLevelInfoLabel

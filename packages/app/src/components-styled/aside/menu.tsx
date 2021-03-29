@@ -11,6 +11,7 @@ import { Link } from '~/utils/link';
 import { Box } from '../base';
 import { Category } from './category';
 import { Title } from './title';
+import { asResponsiveArray } from '~/style/utils';
 
 type Url = UrlObject | string;
 
@@ -37,23 +38,15 @@ export function CategoryMenu({
   );
 }
 
-const MetricMenuItem = styled.li(
-  css({
-    borderBottom: '1px solid',
-    borderBottomColor: 'border',
-    '&:first-child': {
-      borderTop: '1px solid',
-      borderTopColor: 'border',
-    },
-  })
-);
-
+type buttonVariantType = 'top' | 'bottom' | 'default';
 interface MetricMenuItemLinkProps {
   title: string;
   icon?: ReactNode;
   href?: Url;
   subtitle?: string;
   children?: ReactNode;
+  isButton?: boolean;
+  buttonVariant?: buttonVariantType;
 }
 
 export function MetricMenuItemLink({
@@ -62,6 +55,8 @@ export function MetricMenuItemLink({
   title,
   subtitle,
   children: children,
+  isButton,
+  buttonVariant = 'default',
 }: MetricMenuItemLinkProps) {
   const router = useRouter();
 
@@ -87,11 +82,23 @@ export function MetricMenuItemLink({
   const isActive = isActivePath(router, href);
 
   return (
-    <MetricMenuItem>
-      <Link href={href} passHref>
-        <StyledLink isActive={isActive}>{content}</StyledLink>
-      </Link>
-    </MetricMenuItem>
+    <>
+      {isButton ? (
+        <MetricMenuButton isActive={isActive} buttonVariant={buttonVariant}>
+          <Link href={href} passHref>
+            <StyledLink isButton isActive={isActive}>
+              {content}
+            </StyledLink>
+          </Link>
+        </MetricMenuButton>
+      ) : (
+        <MetricMenuItem>
+          <Link href={href} passHref>
+            <StyledLink isActive={isActive}>{content}</StyledLink>
+          </Link>
+        </MetricMenuItem>
+      )}
+    </>
   );
 }
 
@@ -105,6 +112,41 @@ function isActivePath(router: NextRouter, href: Url) {
 /**
  * The following css is copied from the layout.scss file, it can be cleaned up
  */
+const MetricMenuItem = styled.li(
+  css({
+    borderBottom: '1px solid',
+    borderBottomColor: 'border',
+
+    '&:first-child': {
+      borderTop: '1px solid',
+      borderTopColor: 'border',
+    },
+  })
+);
+
+const MetricMenuButton = styled.li<{
+  buttonVariant: buttonVariantType;
+  isActive?: boolean;
+}>((x) =>
+  css({
+    borderRadius: x.buttonVariant === 'default' ? 5 : undefined,
+    border: '1px solid',
+    borderColor: 'border',
+
+    borderTopLeftRadius: x.buttonVariant === 'top' ? 5 : undefined,
+    borderTopRightRadius: x.buttonVariant === 'top' ? 5 : undefined,
+    borderBottomLeftRadius: x.buttonVariant === 'bottom' ? 5 : undefined,
+    borderBottomRightRadius: x.buttonVariant === 'bottom' ? 5 : undefined,
+
+    borderTop: x.buttonVariant === 'bottom' ? '0px' : undefined,
+
+    mx: 3,
+    overflow: 'hidden',
+    bg: x.isActive
+      ? asResponsiveArray({ _: null, lg: '#ebebeb' })
+      : 'transparent',
+  })
+);
 
 const ChildrenWrapper = styled.div(
   css({
@@ -118,7 +160,7 @@ const ChildrenWrapper = styled.div(
 const Unavailable = styled.span(
   css({
     display: 'block',
-    padding: '1rem',
+    padding: 3,
     color: 'gray',
 
     svg: {
@@ -128,18 +170,21 @@ const Unavailable = styled.span(
   })
 );
 
-const StyledLink = styled.a<{ isActive: boolean }>((x) =>
+const StyledLink = styled.a<{ isActive: boolean; isButton?: boolean }>((x) =>
   css({
-    padding: '1rem',
+    padding: 3,
     display: 'block',
     borderRight: '5px solid transparent',
     color: 'black',
     textDecoration: 'none',
     position: 'relative',
 
-    bg: x.isActive ? [null, null, null, '#ebebeb'] : 'transparent',
+    bg:
+      x.isActive && !x.isButton
+        ? asResponsiveArray({ _: null, lg: '#ebebeb' })
+        : 'transparent',
     borderRightColor: x.isActive
-      ? [null, null, null, 'sidebarLinkBorder']
+      ? asResponsiveArray({ _: null, lg: 'sidebarLinkBorder' })
       : 'transparent',
 
     '&:hover': {
@@ -151,7 +196,9 @@ const StyledLink = styled.a<{ isActive: boolean }>((x) =>
     },
 
     '&::after': {
-      content: x.isActive ? 'none' : ['none', null, null, "''"],
+      content: x.isActive
+        ? 'none'
+        : asResponsiveArray({ _: 'none', xs: undefined }),
       backgroundImage: `url('/images/chevron.svg')`,
       // match aspect ratio of chevron.svg
       backgroundSize: '0.6em 1.2em',
@@ -159,7 +206,7 @@ const StyledLink = styled.a<{ isActive: boolean }>((x) =>
       width: '0.6em',
       display: 'block',
       position: 'absolute',
-      right: '1em',
+      right: 3,
       top: '1.35em',
     },
   })
