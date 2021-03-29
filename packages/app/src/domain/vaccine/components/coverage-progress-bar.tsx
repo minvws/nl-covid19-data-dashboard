@@ -18,7 +18,7 @@ export function CoverageProgressBar(props: {
   const partialPercentage = (partially / total) * 100;
   const { siteText, formatPercentage, formatNumber } = useIntl();
   const {
-    partial: partialLabel,
+    partially: partialLabel,
     fully: fullyLabel,
   } = siteText.vaccinaties.vaccination_coverage;
   const maxValue = Math.max(partially, fully);

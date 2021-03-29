@@ -4,10 +4,8 @@ import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { Box } from '../../components-styled/base';
-import { AgeGroup } from './components/age-group';
 import { CoverageProgressBar } from './components/coverage-progress-bar';
 import { CoverageRow } from './components/coverage-row';
-import { VaccinationCoveragePercentage } from './components/vaccination-coverage-percentage';
 
 type Props = {
   values: NlVaccineCoveragePerAgeGroupValue[];
@@ -100,4 +98,31 @@ function formatAgeGroup(
       return templates.total;
     }
   }
+}
+
+function VaccinationCoveragePercentage(props: { value: string }) {
+  const { value } = props;
+  return (
+    <Box display="flex" width="50%" justifyContent="flex-end">
+      <InlineText color="blue" fontSize={{ _: 3, lg: 4 }} fontWeight="bold">
+        {value}
+      </InlineText>
+    </Box>
+  );
+}
+
+function AgeGroup(props: { range: string; total: string }) {
+  const { range, total } = props;
+  return (
+    <Box display="flex" flexDirection="column">
+      <Box>
+        <InlineText fontWeight="bold" fontSize={{ _: 2, md: 3 }}>
+          {range}
+        </InlineText>
+      </Box>
+      <Box as="span" fontSize={{ _: 1, md: 2 }}>
+        <InlineText>{total}</InlineText>
+      </Box>
+    </Box>
+  );
 }

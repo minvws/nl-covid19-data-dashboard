@@ -2065,7 +2065,7 @@
           "total_people": "{{total}} mensen"
         }
       },
-      "partial": "gedeeltelijk",
+      "partially": "gedeeltelijk",
       "fully": "volledig"
     },
     "bronnen": {
