@@ -9,8 +9,8 @@ import styled from 'styled-components';
 import { Box } from '~/components-styled/base';
 import { InlineText } from '~/components-styled/typography';
 import { VisuallyHidden } from '~/components-styled/visually-hidden';
-import { SeriesIcon } from '../series-icon';
 import { SeriesConfig } from '../../logic';
+import { SeriesIcon } from '../series-icon';
 import { TooltipData } from './types';
 import { useIntl } from '~/intl';
 
@@ -31,7 +31,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
   const { formatDateFromSeconds, formatPercentage, formatNumber } = useIntl();
 
   /**
-   * @TODO move this to a more common location
+   * @TODO This is copied from TimeSeriesChart - move to a shared location
    */
   function getDateStringFromValue(value: TimestampedValue) {
     if (isDateValue(value)) {

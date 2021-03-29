@@ -8,10 +8,10 @@ import { useElementSize } from '~/utils/use-element-size';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { TimeframeOption } from '~/utils/timeframe';
 import { Box } from '~/components-styled/base';
+
+// Time Series Chart components and logic
 import {
   ChartContainer,
-  TooltipData,
-  TooltipFormatter,
   Overlay,
   Axes,
 } from '~/components-styled/time-series-chart/components';
@@ -21,6 +21,7 @@ import {
   useValuesInTimeframe,
 } from '~/components-styled/time-series-chart/logic';
 
+// Bar Chart specific components and logic
 import {
   SeriesConfig,
   useSeriesList,
@@ -28,7 +29,14 @@ import {
   useScales,
   useHoverState,
 } from './logic';
-import { BarTrend, DateMarker, BarHover, Tooltip } from './components';
+import {
+  BarTrend,
+  DateMarker,
+  BarHover,
+  TooltipData,
+  TooltipFormatter,
+  Tooltip,
+} from './components';
 
 /**
  * Reference TimeSeriesChart for additional information on props
@@ -44,7 +52,7 @@ export type VerticalBarChartProps<
   ariaLabelledBy: string;
   height?: number;
   timeframe?: TimeframeOption;
-  formatTooltip?: TooltipFormatter<T>;
+  formatTooltip: TooltipFormatter<T>;
   numGridLines?: number;
   tickValues?: number[];
   paddingLeft?: number;
