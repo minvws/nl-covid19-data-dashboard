@@ -10,12 +10,10 @@ export interface DataOptions {
 }
 
 export interface TimespanAnnotationConfig {
-  color: string;
   start: number;
   end: number;
   label: string;
   shortLabel?: string;
-  fillOpacity?: number;
 }
 
 /**

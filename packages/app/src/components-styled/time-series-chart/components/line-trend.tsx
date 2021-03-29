@@ -38,7 +38,7 @@ export function LineTrend({
       stroke={color}
       strokeWidth={strokeWidth}
       strokeDasharray={style === 'dashed' ? 4 : undefined}
-      strokeLinecap="round"
+      strokeLinecap="butt"
       strokeLinejoin="round"
     />
   );
