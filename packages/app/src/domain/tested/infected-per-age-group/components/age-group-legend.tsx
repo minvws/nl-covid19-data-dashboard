@@ -6,9 +6,7 @@ import { Text } from '~/components-styled/typography';
 import { useIntl } from '~/intl';
 
 interface AgeGroupLegendProps {
-  seriesConfig: (LineSeriesDefinition<NlTestedPerAgeGroupValue> & {
-    isSelected: boolean;
-  })[];
+  seriesConfig: LineSeriesDefinition<NlTestedPerAgeGroupValue>[];
   ageGroupSelection: string[];
   onToggleAgeGroup: (ageGroupRange: string) => void;
   onReset: () => void;
@@ -44,20 +42,23 @@ export function AgeGroupLegend({
     <>
       <Legend>
         <List>
-          {seriesConfig.map((item) => (
-            <Item key={item.label}>
-              <ItemButton
-                onClick={() => toggleAgeGroup(item.metricProperty)}
-                isSelected={!hasAllSelected && item.isSelected}
-                color={item.color}
-                data-metric-property={item.metricProperty}
-                data-text={item.label}
-              >
-                {item.label}
-                <Line color={item.color} lineStyle={item.style ?? 'solid'} />
-              </ItemButton>
-            </Item>
-          ))}
+          {seriesConfig.map((item) => {
+            const isSelected = ageGroupSelection.includes(item.metricProperty);
+            return (
+              <Item key={item.label}>
+                <ItemButton
+                  onClick={() => toggleAgeGroup(item.metricProperty)}
+                  isActive={!hasAllSelected && isSelected}
+                  color={item.color}
+                  data-metric-property={item.metricProperty}
+                  data-text={item.label}
+                >
+                  {item.label}
+                  <Line color={item.color} lineStyle={item.style ?? 'solid'} />
+                </ItemButton>
+              </Item>
+            );
+          })}
         </List>
         <ResetButton
           onClick={onReset}
@@ -103,10 +104,10 @@ const Item = styled.li(
  * :after to widen the button to avoid font-weight bold jumps
  */
 const ItemButton = styled.button<{
-  isSelected: boolean;
+  isActive: boolean;
   color: string;
   text?: string;
-}>(({ isSelected, color }) =>
+}>(({ isActive, color }) =>
   css({
     appearance: 'none',
     background: 'tileGray',
@@ -115,8 +116,8 @@ const ItemButton = styled.button<{
     pl: 30,
     py: '3px',
     border: '3px solid',
-    borderColor: isSelected ? color : 'transparent',
-    fontWeight: isSelected ? 'bold' : 'normal',
+    borderColor: isActive ? color : 'transparent',
+    fontWeight: isActive ? 'bold' : 'normal',
     fontFamily: 'inherit',
     position: 'relative',
     outline: 'none',

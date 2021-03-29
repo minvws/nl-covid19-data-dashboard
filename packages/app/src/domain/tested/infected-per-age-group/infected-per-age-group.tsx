@@ -134,13 +134,8 @@ export function InfectedPerAgeGroup({ timeframe }: InfectedPerAgeGroup) {
   const { siteText } = useIntl();
   const text = siteText.infected_per_agroup;
 
-  const ageGroupLegendConfig: (LineSeriesDefinition<NlTestedPerAgeGroupValue> & {
-    isSelected: boolean;
-  })[] = useMemo(() => {
+  const ageGroupLegendConfig: LineSeriesDefinition<NlTestedPerAgeGroupValue>[] = useMemo(() => {
     return SERIES_CONFIG.map((baseAgeGroup) => {
-      const isSelected =
-        ageGroupSelection.includes(baseAgeGroup.metricProperty) ||
-        ageGroupSelection.length === 0;
       return {
         ...baseAgeGroup,
         type: 'line',
@@ -148,14 +143,17 @@ export function InfectedPerAgeGroup({ timeframe }: InfectedPerAgeGroup) {
           baseAgeGroup.metricProperty in text.legend
             ? text.legend[baseAgeGroup.metricProperty]
             : baseAgeGroup.metricProperty,
-        isSelected,
       };
     });
-  }, [ageGroupSelection, text.legend]);
+  }, [text.legend]);
 
   const ageGroupChartConfig = useMemo(() => {
-    return ageGroupLegendConfig.filter((x) => x.isSelected);
-  }, [ageGroupLegendConfig]);
+    return ageGroupLegendConfig.filter(
+      (item) =>
+        ageGroupSelection.includes(item.metricProperty) ||
+        ageGroupSelection.length === 0
+    );
+  }, [ageGroupLegendConfig, ageGroupSelection]);
 
   /* Conditionally wrap tooltip over two columns due to amount of items */
   const tooltipColumns =
