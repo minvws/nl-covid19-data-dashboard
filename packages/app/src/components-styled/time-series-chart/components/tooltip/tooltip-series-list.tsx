@@ -31,7 +31,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
   const { formatDateFromSeconds, formatPercentage, formatNumber } = useIntl();
 
   /**
-   * @TODO This is copied from TimeSeriesChart - move to a shared location
+   * @TODO move this to a more common location
    */
   function getDateStringFromValue(value: TimestampedValue) {
     if (isDateValue(value)) {

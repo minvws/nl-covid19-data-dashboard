@@ -4,27 +4,6 @@ import { TimestampedValue } from '@corona-dashboard/common';
 import { useIntl } from '~/intl';
 import { HoveredPoint } from '../logic';
 
-const LabelContainer = styled.div({
-  position: 'absolute',
-  pointerEvents: 'none',
-  top: '100%',
-
-  display: 'flex',
-  justifyContent: 'center',
-  marginTop: '7px',
-  transform: 'translate(-50%, 0)',
-  width: 100,
-});
-
-const Label = styled.span(
-  css({
-    backgroundColor: 'white',
-    px: '0.5em',
-    fontSize: 12,
-    fontWeight: 'bold',
-  })
-);
-
 interface DateMarkerProps<T extends TimestampedValue> {
   point: HoveredPoint<T>;
 }
@@ -46,3 +25,24 @@ export function DateMarker<T extends TimestampedValue>({
     </LabelContainer>
   );
 }
+
+const LabelContainer = styled.div({
+  position: 'absolute',
+  pointerEvents: 'none',
+  top: '100%',
+
+  display: 'flex',
+  justifyContent: 'center',
+  marginTop: '7px',
+  transform: 'translate(-50%, 0)',
+  width: 100,
+});
+
+const Label = styled.span(
+  css({
+    backgroundColor: 'white',
+    px: '0.5em',
+    fontSize: 12,
+    fontWeight: 'bold',
+  })
+);

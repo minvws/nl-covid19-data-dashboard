@@ -3,7 +3,6 @@ import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
 import { InlineText } from '~/components-styled/typography';
 import { VerticalBarChart } from '~/components-styled/vertical-bar-chart';
 import { useIntl } from '~/intl';
-import { AllLanguages } from '~/locale';
 import { colors } from '~/style/theme';
 import { TimeframeOption } from '~/utils/timeframe';
 
@@ -28,13 +27,11 @@ function generateDummyData() {
 
 interface GNumberBarChartTileProps {
   data: NlGNumber;
-  siteText: AllLanguages;
   timeframeOptions?: TimeframeOption[];
 }
 
 export function GNumberBarChartTile({
   data: __data,
-  // siteText,
   timeframeOptions = ['5weeks', 'week'],
 }: GNumberBarChartTileProps) {
   const { formatPercentage } = useIntl();
