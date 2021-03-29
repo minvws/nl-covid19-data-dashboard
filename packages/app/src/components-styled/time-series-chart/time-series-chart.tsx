@@ -116,6 +116,7 @@ export type TimeSeriesChartProps<
    */
   numGridLines?: number;
   tickValues?: number[];
+  formatTickValue?: (value: number) => string;
   paddingLeft?: number;
   /**
    * The data specific options are grouped together. This way we can pass them
@@ -147,6 +148,7 @@ export function TimeSeriesChart<
   dataOptions,
   numGridLines = 3,
   tickValues: yTickValues,
+  formatTickValue: formatYTickValue,
   paddingLeft,
   ariaLabelledBy,
   tooltipTitle,
@@ -196,8 +198,8 @@ export function TimeSeriesChart<
    * y-axis scaling to change when toggling the timeframe setting.
    */
   const calculatedSeriesMax = useMemo(
-    () => calculateSeriesMaximum(allValues, seriesConfig, benchmark?.value),
-    [allValues, seriesConfig, benchmark]
+    () => calculateSeriesMaximum(seriesList, seriesConfig, benchmark?.value),
+    [seriesList, seriesConfig, benchmark?.value]
   );
 
   const seriesMax = isDefined(forcedMaximumValue)
@@ -301,25 +303,12 @@ export function TimeSeriesChart<
             numGridLines={numGridLines}
             yTickValues={yTickValues}
             xTickValues={xTickValues}
+            formatYTickValue={formatYTickValue}
             xScale={xScale}
             yScale={yScale}
             isPercentage={isPercentage}
             yAxisRef={yAxisRef}
           />
-
-          {timespanAnnotations &&
-            timespanAnnotations.map((x, index) => (
-              <TimespanAnnotation
-                key={index}
-                start={x.start}
-                end={x.end}
-                color={x.color}
-                fillOpacity={x.fillOpacity}
-                domain={xScale.domain() as [number, number]}
-                getX={getX}
-                height={bounds.height}
-              />
-            ))}
 
           {/**
            * The renderSeries() callback has been replaced by this component. As
@@ -350,6 +339,21 @@ export function TimeSeriesChart<
               width={bounds.width}
             />
           )}
+
+          {/**
+           * Timespan annotations are rendered on top of the chart. It is
+           * transparent thanks to the `mix-blend-mode` set to `multiply`.
+           */}
+          {timespanAnnotations?.map((x, index) => (
+            <TimespanAnnotation
+              key={index}
+              start={x.start}
+              end={x.end}
+              domain={xScale.domain() as [number, number]}
+              getX={getX}
+              height={bounds.height}
+            />
+          ))}
         </ChartContainer>
 
         {tooltipOpen && tooltipData && (

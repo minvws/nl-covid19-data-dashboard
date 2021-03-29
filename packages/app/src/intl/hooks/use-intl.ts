@@ -46,7 +46,7 @@ function isDayBeforeYesterday(date: Date) {
   return isSameDay(date, subDays(Date.now(), 2));
 }
 
-type DateInput = { seconds: number } | { milliseconds: number };
+type DateDefinition = Date | { seconds: number } | { milliseconds: number };
 
 /**
  * Utility to create a Date from seconds or milliseconds
@@ -55,16 +55,23 @@ type DateInput = { seconds: number } | { milliseconds: number };
  *     getDate({      seconds: 1616066567 })
  *     getDate({ milliseconds: 1616066567880 })
  */
-function getDate(input: DateInput) {
-  if ('seconds' in input && isDefined(input.seconds)) {
-    return new Date(input.seconds * 1000);
+function parseDateDefinition(dateDefinition: DateDefinition) {
+  if (dateDefinition instanceof Date) {
+    return dateDefinition;
   }
 
-  if ('milliseconds' in input && isDefined(input.milliseconds)) {
-    return new Date(input.milliseconds);
+  if ('seconds' in dateDefinition && isDefined(dateDefinition.seconds)) {
+    return new Date(dateDefinition.seconds * 1000);
   }
 
-  throw new Error(`Unknown date input: ${JSON.stringify(input)}`);
+  if (
+    'milliseconds' in dateDefinition &&
+    isDefined(dateDefinition.milliseconds)
+  ) {
+    return new Date(dateDefinition.milliseconds);
+  }
+
+  throw new Error(`Unknown date input: ${JSON.stringify(dateDefinition)}`);
 }
 
 export function useIntl() {
@@ -178,8 +185,8 @@ export function useIntl() {
    * Returns one of `vandaag` | `gisteren` | `eergisteren`.
    * If given date is more than 2 days ago it will return `undefined`.
    */
-  function formatRelativeDate(input: DateInput) {
-    const date = getDate(input);
+  function formatRelativeDate(dateDefinition: DateDefinition) {
+    const date = parseDateDefinition(dateDefinition);
 
     if (typeof window === 'undefined') {
       throw new Error('formatRelativeDate cannot be called server-side');
@@ -214,6 +221,37 @@ export function useIntl() {
     return formattedDate;
   }
 
+  /**
+   * formatDateFromTo expects 2 dates and will return them as strings to be
+   * rendered as a date range with respect for a range spanning multiple months.
+   *
+   * eg.
+   *
+   *     formatDateFromTo(1 maart, 7 maart)
+   *     output: ['1', '7 maart']
+   *
+   * or:
+   *
+   *    formatDateFromTo(29 maart, 4 april)
+   *    output: ['29 maart', '4 april']
+   */
+  function formatDateSpan(
+    startDateDefinition: DateDefinition,
+    endDateDefinition: DateDefinition
+  ) {
+    const startDate = parseDateDefinition(startDateDefinition);
+    const endDate = parseDateDefinition(endDateDefinition);
+
+    const isSameMonth = startDate.getMonth() === endDate.getMonth();
+
+    const startDateText = isSameMonth
+      ? `${startDate.getDate()}`
+      : formatDate(startDate);
+    const endDateText = formatDate(endDate);
+
+    return [startDateText, endDateText] as [start: string, end: string];
+  }
+
   function formatDateFromSeconds(seconds: number, style?: formatStyle) {
     assert(!isNaN(seconds), 'seconds is NaN');
 
@@ -245,6 +283,7 @@ export function useIntl() {
     formatDateFromSeconds,
     formatDateFromMilliseconds,
     formatRelativeDate,
+    formatDateSpan,
     siteText,
     locale,
   };
