@@ -1,43 +1,45 @@
 {
   "definitions": {
-    "product_stock_info": {
-      "title": "nl_vaccine_product_stock_info",
-      "type": "object",
-      "required": ["total", "ready_for_delivery"],
-      "additionalProperties": false,
-      "properties": {
-        "total": {
-          "type": "integer"
-        },
-        "ready_for_delivery": {
-          "type": "integer"
-        }
-      }
-    },
     "value": {
       "title": "nl_vaccine_stock_value",
       "type": "object",
       "required": [
         "total",
-        "bio_n_tech_pfizer",
-        "moderna",
-        "astra_zeneca",
+        "total_ready_for_delivery",
+        "bio_n_tech_pfizer_total",
+        "moderna_total",
+        "astra_zeneca_total",
+        "bio_n_tech_pfizer_ready_for_delivery",
+        "moderna_ready_for_delivery",
+        "astra_zeneca_ready_for_delivery",
         "date_of_insertion_unix",
         "date_unix"
       ],
       "additionalProperties": false,
       "properties": {
         "total": {
-          "$ref": "#/definitions/product_stock_info"
+          "type": "integer"
         },
-        "bio_n_tech_pfizer": {
-          "$ref": "#/definitions/product_stock_info"
+        "total_ready_for_delivery": {
+          "type": "integer"
         },
-        "moderna": {
-          "$ref": "#/definitions/product_stock_info"
+        "bio_n_tech_pfizer_total": {
+          "type": "integer"
         },
-        "astra_zeneca": {
-          "$ref": "#/definitions/product_stock_info"
+        "bio_n_tech_pfizer_ready_for_delivery": {
+          "type": "integer"
+        },
+        "moderna_total": {
+          "type": "integer"
+        },
+        "moderna_ready_for_delivery": {
+          "type": "integer"
+        },
+        "astra_zeneca_total": {
+          "type": "integer"
+        },
+        "astra_zeneca_ready_for_delivery": {
+          "type": "integer"
         },
         "date_of_insertion_unix": {
           "type": "integer"

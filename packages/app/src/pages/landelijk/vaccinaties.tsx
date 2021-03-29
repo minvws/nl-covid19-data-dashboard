@@ -486,22 +486,33 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 <VaccineStockRow
                   color={colors.data.vaccines.bio_n_tech_pfizer}
                   productName="BioNTech/Pfizer"
-                  value={formatNumber(
-                    data.vaccine_stock.last_value.bio_n_tech_pfizer.total
+                  total={formatNumber(
+                    data.vaccine_stock.last_value.bio_n_tech_pfizer_total
+                  )}
+                  readyForDelivery={formatNumber(
+                    data.vaccine_stock.last_value
+                      .bio_n_tech_pfizer_ready_for_delivery
                   )}
                 />
                 <VaccineStockRow
                   color={colors.data.vaccines.moderna}
                   productName="Moderna"
-                  value={formatNumber(
-                    data.vaccine_stock.last_value.moderna.total
+                  total={formatNumber(
+                    data.vaccine_stock.last_value.moderna_total
+                  )}
+                  readyForDelivery={formatNumber(
+                    data.vaccine_stock.last_value.moderna_ready_for_delivery
                   )}
                 />
                 <VaccineStockRow
                   color={colors.data.vaccines.astra_zeneca}
                   productName="AstraZeneca"
-                  value={formatNumber(
-                    data.vaccine_stock.last_value.astra_zeneca.total
+                  total={formatNumber(
+                    data.vaccine_stock.last_value.astra_zeneca_total
+                  )}
+                  readyForDelivery={formatNumber(
+                    data.vaccine_stock.last_value
+                      .astra_zeneca_ready_for_delivery
                   )}
                 />
               </Box>
@@ -645,11 +656,12 @@ const ColorIndicator = styled.span<{
 type VaccineStockRowProps = {
   color: string;
   productName: string;
-  value: string;
+  total: string;
+  readyForDelivery: string;
 };
 
 function VaccineStockRow(props: VaccineStockRowProps) {
-  const { color, productName, value } = props;
+  const { color, productName, total, readyForDelivery } = props;
   return (
     <Box as="li" display="flex" flexDirection="row" alignItems="stretch">
       <Box>
@@ -660,8 +672,11 @@ function VaccineStockRow(props: VaccineStockRowProps) {
           {productName}:
         </InlineText>
       </Box>
+      <Box>
+        <strong>{total}</strong>
+      </Box>
       <Box marginLeft="auto">
-        <strong>{value}</strong>
+        <strong>{readyForDelivery}</strong>
       </Box>
     </Box>
   );

@@ -712,16 +712,16 @@ export interface NlVaccineStock {
   last_value: NlVaccineStockValue;
 }
 export interface NlVaccineStockValue {
-  total: NlVaccineProductStockInfo;
-  bio_n_tech_pfizer: NlVaccineProductStockInfo;
-  moderna: NlVaccineProductStockInfo;
-  astra_zeneca: NlVaccineProductStockInfo;
+  total: number;
+  total_ready_for_delivery: number;
+  bio_n_tech_pfizer_total: number;
+  bio_n_tech_pfizer_ready_for_delivery: number;
+  moderna_total: number;
+  moderna_ready_for_delivery: number;
+  astra_zeneca_total: number;
+  astra_zeneca_ready_for_delivery: number;
   date_of_insertion_unix: number;
   date_unix: number;
-}
-export interface NlVaccineProductStockInfo {
-  total: number;
-  ready_for_delivery: number;
 }
 
 export interface Regionaal {
