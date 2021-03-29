@@ -654,7 +654,7 @@ function HatchedSquare() {
   );
 }
 
-export function HatchedPattern() {
+function HatchedPattern() {
   const SIZE_LARGE = 8;
   const SIZE_SMALL = 4;
 
