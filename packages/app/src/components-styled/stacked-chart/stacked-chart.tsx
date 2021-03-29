@@ -451,9 +451,7 @@ export function StackedChart<T extends TimestampedValue>(
           css={css({ width: '100%' })}
           role="img"
         >
-          <defs>
-            <HatchedPattern />
-          </defs>
+          <HatchedPattern />
 
           <Group left={padding.left} top={padding.top}>
             <GridRows
@@ -661,7 +659,7 @@ export function HatchedPattern() {
   const SIZE_SMALL = 4;
 
   return (
-    <>
+    <defs>
       <pattern
         id="pattern-hatched"
         width={SIZE_LARGE}
@@ -692,6 +690,6 @@ export function HatchedPattern() {
           style={{ stroke: 'white', strokeWidth: 3 }}
         />
       </pattern>
-    </>
+    </defs>
   );
 }
