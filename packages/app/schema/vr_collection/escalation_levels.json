@@ -26,10 +26,10 @@
       "maximum": 4
     },
     "positive_tested_per_100k": {
-      "type": "integer"
+      "type": "number"
     },
     "hospital_admissions_per_million": {
-      "type": "integer"
+      "type": "number"
     },
     "based_on_statistics_to_unix": {
       "type": "integer"

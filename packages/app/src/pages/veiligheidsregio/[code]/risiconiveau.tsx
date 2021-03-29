@@ -182,19 +182,27 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                       <ListItem
                         title={text.momenteel.positive_tests.title}
                         icon={<Getest />}
-                        description={text.momenteel.positive_tests.description}
-                        escalationColor={escalationColor}
-                        amount={positive_tested_per_100k}
-                      />
+                      >
+                        <DataDescription
+                          description={
+                            text.momenteel.positive_tests.description
+                          }
+                          escalationColor={escalationColor}
+                          amount={positive_tested_per_100k}
+                        />
+                      </ListItem>
                       <ListItem
                         title={text.momenteel.hospital_admissions.title}
                         icon={<Ziekenhuis />}
-                        description={
-                          text.momenteel.hospital_admissions.description
-                        }
-                        escalationColor={escalationColor}
-                        amount={hospital_admissions_per_million}
-                      />
+                      >
+                        <DataDescription
+                          description={
+                            text.momenteel.hospital_admissions.description
+                          }
+                          escalationColor={escalationColor}
+                          amount={hospital_admissions_per_million}
+                        />
+                      </ListItem>
                     </UnorderedList>
                   </ListItem>
                   <ListItem
@@ -293,11 +301,8 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
 interface ListItemProps {
   icon: ReactNode;
   title: string;
-  escalationColor?: string;
-  description?: string;
   date?: number | number[];
   children?: ReactNode;
-  amount?: number;
   isAroundDate?: boolean;
 }
 
@@ -306,16 +311,13 @@ function ListItem({
   date,
   icon,
   children,
-  description,
-  escalationColor,
-  amount,
   isAroundDate,
 }: ListItemProps) {
   const { siteText, formatDateFromSeconds } = useIntl();
 
   return (
     <StyledList>
-      <Box display="flex" pb={children ? 3 : undefined}>
+      <Box display="flex">
         <Box
           display="flex"
           alignItems="center"
@@ -354,31 +356,40 @@ function ListItem({
           )}
         </Text>
       </Box>
-      {description && amount && escalationColor && (
-        <Box display="flex" pl={18} ml={2}>
-          <Box
-            minWidth="9px"
-            height={9}
-            width={9}
-            backgroundColor={escalationColor}
-            borderRadius="50%"
-            ml={2}
-            mr={1}
-            mt="7px"
-          />
-          <Text m={0}>
-            {replaceComponentsInText(description, {
-              amount: <InlineText fontWeight="bold">{amount}</InlineText>,
-            })}
-          </Text>
-        </Box>
-      )}
-      {children && (
-        <Box pl={18} ml={2}>
-          {children}
-        </Box>
-      )}
+      {children}
     </StyledList>
+  );
+}
+
+interface DataDescriptionProps {
+  escalationColor: string;
+  description: string;
+  amount: number;
+}
+
+function DataDescription({
+  description,
+  escalationColor,
+  amount,
+}: DataDescriptionProps) {
+  return (
+    <Box display="flex" pl={18} ml={2}>
+      <Box
+        minWidth="9px"
+        height={9}
+        width={9}
+        backgroundColor={escalationColor}
+        borderRadius="50%"
+        ml={2}
+        mr={1}
+        mt="7px"
+      />
+      <Text m={0}>
+        {replaceComponentsInText(description, {
+          amount: <InlineText fontWeight="bold">{amount}</InlineText>,
+        })}
+      </Text>
+    </Box>
   );
 }
 
@@ -392,15 +403,18 @@ const UnorderedList = styled.ul(() =>
       width: '100%',
     },
 
-    li: {
-      borderBottom: '1px solid',
-      borderBottomColor: 'border',
-      marginBottom: 3,
-    },
-
     'ul:first-of-type li': {
       borderBottom: 0,
       marginBottom: 0,
+    },
+
+    ul: {
+      pl: 22,
+      ml: 2,
+
+      'li:first-of-type': {
+        pt: 3,
+      },
     },
   })
 );
@@ -408,6 +422,9 @@ const UnorderedList = styled.ul(() =>
 const StyledList = styled.li(() =>
   css({
     paddingBottom: 3,
+    marginBottom: 3,
+    borderBottom: '1px solid',
+    borderBottomColor: 'border',
 
     '&:last-of-type': {
       padding: 0,
