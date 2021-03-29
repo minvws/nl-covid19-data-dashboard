@@ -1,5 +1,4 @@
 import { NlGNumber, NlGNumberValue } from '@corona-dashboard/common';
-import { ParentSize } from '@visx/responsive';
 import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
 import { InlineText } from '~/components-styled/typography';
 import { VerticalBarChart } from '~/components-styled/vertical-bar-chart';
@@ -63,40 +62,35 @@ export function GNumberBarChartTile({
       }}
     >
       {(timeframe) => (
-        <ParentSize>
-          {({ width }) => (
-            <VerticalBarChart
-              title=""
-              width={width}
-              timeframe={timeframe}
-              ariaLabelledBy="chart_g_number"
-              values={values}
-              numGridLines={3}
-              dataOptions={{
-                isPercentage: true,
-              }}
-              seriesConfig={[
-                {
-                  type: 'bar',
-                  metricProperty: 'g_number',
-                  color: colors.data.primary,
-                  secondaryColor: colors.red,
-                  label: 'G Number',
-                },
-              ]}
-              formatTooltip={({ value }) => {
-                return (
-                  <>
-                    <InlineText fontWeight="bold">
-                      {`${formatPercentage(value.g_number)}% `}
-                    </InlineText>
-                    getaald
-                  </>
-                );
-              }}
-            />
-          )}
-        </ParentSize>
+        <VerticalBarChart
+          title=""
+          timeframe={timeframe}
+          ariaLabelledBy="chart_g_number"
+          values={values}
+          numGridLines={3}
+          dataOptions={{
+            isPercentage: true,
+          }}
+          seriesConfig={[
+            {
+              type: 'bar',
+              metricProperty: 'g_number',
+              color: colors.data.primary,
+              secondaryColor: colors.red,
+              label: 'G Number',
+            },
+          ]}
+          formatTooltip={({ value }) => {
+            return (
+              <>
+                <InlineText fontWeight="bold">
+                  {`${formatPercentage(value.g_number)}% `}
+                </InlineText>
+                getaald
+              </>
+            );
+          }}
+        />
       )}
     </ChartTileWithTimeframe>
   );

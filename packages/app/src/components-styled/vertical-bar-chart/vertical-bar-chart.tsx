@@ -4,8 +4,10 @@ import { Bar } from '@visx/shape';
 import { first, last } from 'lodash';
 import { useCallback, useEffect, useMemo } from 'react';
 import useResizeObserver from 'use-resize-observer';
-import { Box } from '~/components-styled/base';
+import { useElementSize } from '~/utils/use-element-size';
+import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { TimeframeOption } from '~/utils/timeframe';
+import { Box } from '~/components-styled/base';
 import {
   ChartContainer,
   Tooltip,
@@ -36,7 +38,7 @@ export type VerticalBarChartProps<
   title: string; // Used for default tooltip formatting
   values: T[];
   seriesConfig: C;
-  width: number;
+  initialWidth?: number;
   ariaLabelledBy: string;
   height?: number;
   timeframe?: TimeframeOption;
@@ -67,7 +69,7 @@ export function VerticalBarChart<
 >({
   values: allValues,
   seriesConfig,
-  width,
+  initialWidth = 840,
   height = 250,
   timeframe = 'all',
   formatTooltip,
@@ -88,6 +90,8 @@ export function VerticalBarChart<
     tooltipOpen,
   } = useTooltip<TooltipData<T>>();
 
+  const [sizeRef, { width }] = useElementSize<HTMLDivElement>(initialWidth);
+
   const { isPercentage } = dataOptions || {};
 
   const {
@@ -99,7 +103,7 @@ export function VerticalBarChart<
   const { padding, bounds } = useDimensions(
     width,
     height,
-    paddingLeft ?? yAxisWidth + 10 // 10px seems to be enough padding
+    paddingLeft ?? yAxisWidth + 10
   );
 
   const values = useValuesInTimeframe(allValues, timeframe);
@@ -133,6 +137,8 @@ export function VerticalBarChart<
     yScale,
   });
 
+  useOnClickOutside([sizeRef], () => tooltipData && hideTooltip());
+
   const handleClick = useCallback(() => {
     if (onSeriesClick && tooltipData) {
       onSeriesClick(seriesConfig[tooltipData.configIndex], tooltipData.value);
@@ -160,7 +166,7 @@ export function VerticalBarChart<
 
   const hasNegativeValues = yScale.domain()[0] < 0;
   return (
-    <Box>
+    <Box ref={sizeRef}>
       <Box position="relative">
         <ChartContainer
           width={width}

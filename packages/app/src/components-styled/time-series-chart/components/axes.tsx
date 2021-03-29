@@ -35,6 +35,7 @@ type AxesProps = {
   yAxisRef: Ref<SVGGElement>;
   yTickValues?: number[];
   xTickValues: [number, number];
+  formatYTickValue?: (value: number) => string;
 };
 
 type AnyTickFormatter = (value: any) => string;
@@ -47,6 +48,7 @@ export const Axes = memo(function Axes({
   yScale,
   yTickValues,
   xTickValues,
+  formatYTickValue,
   yAxisRef,
 }: AxesProps) {
   const [startUnix, endUnix] = xTickValues;
@@ -131,7 +133,9 @@ export const Axes = memo(function Axes({
           hideAxisLine
           stroke={colors.silver}
           tickFormat={
-            isPercentage
+            formatYTickValue
+              ? (formatYTickValue as AnyTickFormatter)
+              : isPercentage
               ? (formatYAxisPercentage as AnyTickFormatter)
               : (formatYAxis as AnyTickFormatter)
           }
