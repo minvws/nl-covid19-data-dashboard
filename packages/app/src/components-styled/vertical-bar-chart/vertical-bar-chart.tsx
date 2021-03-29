@@ -31,11 +31,14 @@ import {
 } from './logic';
 import { BarTrend, DateMarker, BarHover } from './components';
 
+/**
+ * Reference TimeSeriesChart for additional information on props
+ */
 export type VerticalBarChartProps<
   T extends TimestampedValue,
   C extends BarSeriesConfig<T>
 > = {
-  title: string; // Used for default tooltip formatting
+  title?: string;
   values: T[];
   seriesConfig: C;
   initialWidth?: number;
@@ -43,22 +46,9 @@ export type VerticalBarChartProps<
   height?: number;
   timeframe?: TimeframeOption;
   formatTooltip?: TooltipFormatter<T>;
-  /**
-   * The number of grid lines also by default determines the number of y-axis
-   * ticks, but the number of ticks can be overruled with specific tick values
-   * via the tickValues prop.
-   *
-   * This way you can also have many more grid lines than tick values, like in
-   * the vaccine support chart.
-   */
   numGridLines?: number;
   tickValues?: number[];
   paddingLeft?: number;
-  /**
-   * The data specific options are grouped together. This way we can pass them
-   * together with the seriesConfig to the tooltip formatter. The options
-   * contain things that are essential to rendering a full tooltip layout
-   */
   dataOptions?: DataOptions;
   onSeriesClick?: (seriesConfig: C[number], value: T) => void;
 };

@@ -63,7 +63,6 @@ export function GNumberBarChartTile({
     >
       {(timeframe) => (
         <VerticalBarChart
-          title=""
           timeframe={timeframe}
           ariaLabelledBy="chart_g_number"
           values={values}

@@ -50,19 +50,11 @@ export function getSeriesData<T extends TimestampedValue>(
   metricProperty: keyof T
 ): SeriesSingleValue[] {
   if (values.length === 0) {
-    /**
-     * It could happen that you are using an old dataset and select last week as
-     * a timeframe at which point the values will be empty. This would not
-     * happen on production, but for development we can just render nothing.
-     */
     return [];
   }
 
   if (isDateSeries(values)) {
     return values.map((x) => ({
-      /**
-       * This is messy and could be improved.
-       */
       __value: (x[metricProperty] ?? undefined) as number | undefined,
       // @ts-expect-error @TODO figure out why the type guard doesn't work
       __date_unix: x.date_unix,
@@ -71,9 +63,6 @@ export function getSeriesData<T extends TimestampedValue>(
 
   if (isDateSpanSeries(values)) {
     return values.map((x) => ({
-      /**
-       * This is messy and could be improved.
-       */
       __value: (x[metricProperty] ?? undefined) as number | undefined,
       // @ts-expect-error @TODO figure out why the type guard doesn't work
       __date_unix: x.date_end_unix,
@@ -94,10 +83,10 @@ export function useCalculatedSeriesExtremes<T extends TimestampedValue>(
 }
 
 /**
- * From all the defined values, extract the highest number so we know how to
+ * From all the defined values, extract the highest and lowest number so we know how to
  * scale the y-axis. We need to do this for each of the keys that are used to
  * render lines, so that the axis scales with whatever key contains the highest
- * values.
+ * and lowest values.
  */
 export function calculateSeriesExtremes<T extends TimestampedValue>(
   values: T[],
