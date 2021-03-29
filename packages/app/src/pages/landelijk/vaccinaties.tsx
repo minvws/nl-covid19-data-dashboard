@@ -482,7 +482,25 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 source: text.bronnen.stock,
               }}
             >
-              <Box as="ul" p={0} width="50%">
+              <Box as="ul" p={0}>
+                <Box
+                  as="li"
+                  display="flex"
+                  flexDirection="row"
+                  alignItems="stretch"
+                >
+                  <Box flex={0.33}>
+                    <InlineText>{text.stock.columns.product_name}</InlineText>
+                  </Box>
+                  <Box flex={0.33} display="flex" justifyContent="flex-end">
+                    <InlineText>{text.stock.columns.in_stock}</InlineText>
+                  </Box>
+                  <Box flex={0.33} display="flex" justifyContent="flex-end">
+                    <InlineText>
+                      {text.stock.columns.ready_for_delivery}
+                    </InlineText>
+                  </Box>
+                </Box>
                 <VaccineStockRow
                   color={colors.data.vaccines.bio_n_tech_pfizer}
                   productName="BioNTech/Pfizer"
@@ -516,7 +534,11 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                   )}
                 />
               </Box>
-              <Text>{text.stock.description}</Text>
+              <Text>
+                {text.stock.description}
+                <br />
+                {text.stock.ready_for_delivery_description}
+              </Text>
             </KpiTile>
 
             <KpiTile
@@ -664,18 +686,16 @@ function VaccineStockRow(props: VaccineStockRowProps) {
   const { color, productName, total, readyForDelivery } = props;
   return (
     <Box as="li" display="flex" flexDirection="row" alignItems="stretch">
-      <Box>
+      <Box flex={0.33} display="flex" alignItems="center">
         <ColorIndicator color={color} />
-      </Box>
-      <Box flex={1}>
         <InlineText color={color} fontWeight="bold">
           {productName}:
         </InlineText>
       </Box>
-      <Box>
+      <Box flex={0.33} display="flex" justifyContent="flex-end">
         <strong>{total}</strong>
       </Box>
-      <Box marginLeft="auto">
+      <Box flex={0.33} display="flex" justifyContent="flex-end">
         <strong>{readyForDelivery}</strong>
       </Box>
     </Box>
