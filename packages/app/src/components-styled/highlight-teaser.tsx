@@ -10,7 +10,8 @@ import { Box } from './base';
 import { PublicationDate } from './publication-date';
 import { Heading, InlineText } from './typography';
 
-export type HighlightTeaserProps = {
+type HighlightTeaserVariantProps = 'blue' | 'default';
+export interface HighlightTeaserProps {
   title: string;
   cover: ImageBlock;
   label?: string;
@@ -18,8 +19,8 @@ export type HighlightTeaserProps = {
   category: string;
   publicationDate?: string;
   isWeekly?: boolean;
-  variant?: 'blue';
-};
+  variant?: HighlightTeaserVariantProps;
+}
 
 export function HighlightTeaser(props: HighlightTeaserProps) {
   const {
@@ -29,10 +30,12 @@ export function HighlightTeaser(props: HighlightTeaserProps) {
     cover,
     category,
     publicationDate,
-    variant,
+    variant = 'default',
   } = props;
 
   const { siteText } = useIntl();
+
+  const isDefault = variant === 'default';
 
   return (
     <Link passHref href={href}>
@@ -47,16 +50,16 @@ export function HighlightTeaser(props: HighlightTeaserProps) {
             ]}
           />
         </ZoomContainer>
-        <Box padding={variant ? 3 : 0} pt={3}>
+        <Box padding={isDefault ? 0 : 3} pt={3}>
           <InlineText
             textTransform="uppercase"
             fontSize="0.75rem"
             fontWeight="bold"
-            color={variant ? 'white' : 'annotation'}
+            color={isDefault ? 'annotation' : 'white'}
           >
-            {variant
-              ? siteText.common_actueel.secties.meer_lezen.weekly_category
-              : category}
+            {isDefault
+              ? category
+              : siteText.common_actueel.secties.meer_lezen.weekly_category}
             {publicationDate && (
               <>
                 {' - '}
@@ -76,7 +79,7 @@ export function HighlightTeaser(props: HighlightTeaserProps) {
           <InlineText
             aria-hidden="true"
             fontWeight="bold"
-            color={variant ? 'white' : 'link'}
+            color={variant === 'default' ? 'link' : 'white'}
           >
             {label
               ? label
@@ -107,16 +110,18 @@ function ZoomContainerUnstyled({
   );
 }
 
-const StyledHightlightTeaser = styled.a<{ variant?: string }>((x) =>
+const StyledHightlightTeaser = styled.a<{
+  variant?: HighlightTeaserVariantProps;
+}>((x) =>
   css({
     display: 'block',
     overflow: 'hidden',
     textDecoration: 'none',
     backgroundColor: x.variant ? x.variant : undefined,
-    color: x.variant ? 'white' : 'body',
+    color: x.variant === 'default' ? 'body' : 'white',
 
-    'span, time': {
-      color: x.variant ? 'white' : undefined,
+    span: {
+      color: x.variant === 'default' ? undefined : 'white',
     },
 
     [`${ZoomContainer}, ${Heading}`]: {
@@ -131,7 +136,7 @@ const StyledHightlightTeaser = styled.a<{ variant?: string }>((x) =>
         transitionTimingFunction: 'ease-in-out',
         transform: 'scale(1.04)',
       },
-      [Heading]: { color: x.variant ? undefined : 'link' },
+      [Heading]: { color: x.variant === 'default' ? 'link' : undefined },
     },
   })
 );

@@ -29,7 +29,7 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
 
         <Box spacing={2}>
           <InlineText
-            textTransform="uppercase"
+            textTransform={'uppercase'}
             fontSize="0.75rem"
             fontWeight="bold"
             color="annotation"

@@ -218,7 +218,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               />
             </CollapsibleButton>
 
-            {content.weeklyHighlight && content.highlights.length && (
+            {content.weeklyHighlight && content.highlights.length > 0 && (
               <Box pt={3}>
                 <TopicalSectionHeader
                   title={siteText.common_actueel.secties.artikelen.titel}

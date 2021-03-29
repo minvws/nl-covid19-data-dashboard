@@ -31,13 +31,14 @@ export function HighlightsTile(props: HighlightsTileProps) {
     <Box
       display="flex"
       spacingHorizontal={breakpoints.lg}
-      flexDirection={{ _: 'row', lg: 'row' }}
+      flexDirection={{ _: 'column', xs: 'row' }}
+      flexWrap="wrap"
       mr={0}
     >
       <ArticleBox>
         <HighlightTeaser
           cover={weeklyHighlight.cover}
-          href={`weekberichten/${weeklyHighlight.slug.current}`}
+          href={`/weekberichten/${weeklyHighlight.slug.current}`}
           title={weeklyHighlight.title}
           category={weeklyHighlight.category}
           publicationDate={weeklyHighlight.publicationDate}
