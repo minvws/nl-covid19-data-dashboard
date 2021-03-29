@@ -31,7 +31,7 @@ import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/to
 import { PositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/positive-tested-people-regional-tooltip';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
-import { InfectedPerAgeGroup } from '~/domain/tested/infected-per-age-group/infected-per-age-group';
+import { InfectedPerAgeGroup } from '~/domain/tested/infected-per-age-group';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
@@ -272,7 +272,8 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
           >
             {(timeframe) => (
               <InfectedPerAgeGroup
-                values={data.tested_per_age_group.values}
+                // @TODO remove mock data
+                // values={data.tested_per_age_group.values}
                 timeframe={timeframe}
               />
             )}
