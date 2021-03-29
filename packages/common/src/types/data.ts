@@ -183,6 +183,7 @@ export interface National {
   vaccine_administered_total: NlVaccineAdministeredTotal;
   vaccine_administered_rate_moving_average: NlVaccineAdministeredRateMovingAverage;
   vaccine_administered_planned: NlVaccineAdministeredPlanned;
+  vaccine_coverage_per_age_group?: NlVaccineCoveragePerAgeGroup;
   vaccine_stock?: NlVaccineStock;
 }
 export interface NationalDifference {
@@ -195,7 +196,7 @@ export interface NationalDifference {
   infectious_people__estimate: DifferenceInteger;
   hospital_nice__admissions_on_date_of_reporting: DifferenceInteger;
   hospital_lcps__beds_occupied_covid: DifferenceInteger;
-  intensive_care_nice__admissions_moving_average: DifferenceDecimal;
+  intensive_care_nice__admissions_on_date_of_reporting: DifferenceDecimal;
   intensive_care_lcps__beds_occupied_covid: DifferenceInteger;
   doctor__covid_symptoms_per_100k: DifferenceDecimal;
   doctor__covid_symptoms: DifferenceInteger;
@@ -259,7 +260,8 @@ export interface NationalIntensiveCareNice {
   last_value: NationalIntensiveCareNiceValue;
 }
 export interface NationalIntensiveCareNiceValue {
-  admissions_moving_average: number;
+  admissions_on_date_of_admission: number;
+  admissions_on_date_of_reporting: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -691,6 +693,20 @@ export interface NlVaccineAdministeredPlannedValue {
   date_end_unix: number;
   date_of_insertion_unix: number;
 }
+export interface NlVaccineCoveragePerAgeGroup {
+  values: NlVaccineCoveragePerAgeGroupValue[];
+}
+export interface NlVaccineCoveragePerAgeGroupValue {
+  age_group_range: string;
+  age_group_percentage: number;
+  age_group_total: number;
+  fully_vaccinated: number;
+  partially_vaccinated: number;
+  fully_vaccinated_percentage: number;
+  date_unix: number;
+  date_of_insertion_unix: number;
+  date_of_report_unix: number;
+}
 export interface NlVaccineStock {
   values: NlVaccineStockValue[];
   last_value: NlVaccineStockValue;
@@ -726,7 +742,7 @@ export interface Regionaal {
   escalation_level: VrEscalationLevel;
   tested_overall_sum: VrTestedOverallSum;
   hospital_nice_sum: VrHospitalNiceSum;
-  vaccine_coverage: VrVaccineCoverage;
+  vaccine_coverage?: VrVaccineCoverage;
 }
 export interface RegionalDifference {
   tested_overall__infected_per_100k: DifferenceDecimal;

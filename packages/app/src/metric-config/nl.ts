@@ -1,7 +1,6 @@
-import { MetricConfig, NO_METRIC_PROPERTY } from './common';
+import { MetricKeys, National } from '@corona-dashboard/common';
 import { colors } from '~/style/theme';
-import { National } from '@corona-dashboard/common';
-import { MetricKeys } from '@corona-dashboard/common';
+import { MetricConfig, NO_METRIC_PROPERTY } from './common';
 
 const GREEN = colors.data.gradient.green;
 const YELLOW = colors.data.gradient.yellow;
@@ -82,7 +81,7 @@ export const nl: NlConfig = {
     },
   },
   intensive_care_nice: {
-    admissions_moving_average: {
+    admissions_on_date_of_reporting: {
       isDecimal: true,
       barScale: {
         min: 0,

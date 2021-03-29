@@ -3,15 +3,16 @@ import {
   isDateSpanSeries,
   TimestampedValue,
 } from '@corona-dashboard/common';
-import { pick } from 'lodash';
 import { useMemo } from 'react';
-import { isDefined, isPresent } from 'ts-is-present';
+import { isDefined } from 'ts-is-present';
 import { getValuesInTimeframe, TimeframeOption } from '~/utils/timeframe';
 
 export type SeriesConfig<T extends TimestampedValue> = (
   | LineSeriesDefinition<T>
-  | AreaSeriesDefinition<T>
   | RangeSeriesDefinition<T>
+  | AreaSeriesDefinition<T>
+  | StackedAreaSeriesDefinition<T>
+  | InvisibleSeriesDefinition<T>
 )[];
 
 export type LineSeriesDefinition<T extends TimestampedValue> = {
@@ -46,6 +47,49 @@ export type AreaSeriesDefinition<T extends TimestampedValue> = {
   strokeWidth?: number;
 };
 
+export type StackedAreaSeriesDefinition<T extends TimestampedValue> = {
+  type: 'stacked-area';
+  metricProperty: keyof T;
+  label: string;
+  shortLabel?: string;
+  color: string;
+  style?: 'solid' | 'striped';
+  fillOpacity?: number;
+  strokeWidth?: number;
+};
+
+/**
+ * An invisible series config does not render any trend but the value shows up
+ * in the tooltip, in order with the rest of the items. This allows us to place
+ * any value from any metric property under or in between the others, with its
+ * own label.
+ *
+ * This can be used for example to show a total count at the bottom, or the
+ * percentage counterpart of an absolute value.
+ */
+export type InvisibleSeriesDefinition<T extends TimestampedValue> = {
+  type: 'invisible';
+  metricProperty: keyof T;
+  label: string;
+  /**
+   * The properties that only show in the tooltip are usually different from the
+   * chart configuration dataOptions, so we use a specific boolean here to
+   * indicate the format.
+   */
+  isPercentage?: boolean;
+};
+
+/**
+ * There are some places where we want to handle only series that are visually
+ * present in the chart. This is a reverse type guard that you can use in a
+ * filter and TS will understand what comes after is only the others.
+ */
+export function isVisible<T extends TimestampedValue>(
+  def: SeriesConfig<T>[number]
+): def is Exclude<typeof def, InvisibleSeriesDefinition<T>> {
+  return def.type !== 'invisible';
+}
+
 export function useSeriesList<T extends TimestampedValue>(
   values: T[],
   seriesConfig: SeriesConfig<T>
@@ -73,25 +117,20 @@ export function useValuesInTimeframe<T extends TimestampedValue>(
  * values.
  */
 export function calculateSeriesMaximum<T extends TimestampedValue>(
-  values: T[],
+  seriesList: SeriesList,
   seriesConfig: SeriesConfig<T>,
   benchmarkValue = -Infinity
 ) {
-  const metricProperties = seriesConfig.flatMap((x) =>
-    x.type === 'range'
-      ? [x.metricPropertyLow, x.metricPropertyHigh]
-      : x.metricProperty
-  );
+  const values = seriesList
+    .filter((_, index) => isVisible(seriesConfig[index]))
+    .flatMap((series) =>
+      series.flatMap((x: SeriesSingleValue | SeriesDoubleValue) =>
+        isSeriesSingleValue(x) ? x.__value : [x.__value_a, x.__value_b]
+      )
+    )
+    .filter(isDefined);
 
-  const peakValues = values.map((x) => {
-    const trendValues = Object.values(pick(x, metricProperties)) as (
-      | number
-      | null
-    )[];
-    return Math.max(...trendValues.filter(isPresent));
-  });
-
-  const overallMaximum = Math.max(...peakValues);
+  const overallMaximum = Math.max(...values);
 
   /**
    * Value cannot be 0, hence the 1. If the value is below signaalwaarde, make
@@ -115,7 +154,7 @@ export interface SeriesDoubleValue extends SeriesItem {
   __value_b?: number;
 }
 
-export function isSeriesValue(
+export function isSeriesSingleValue(
   value: SeriesSingleValue | SeriesDoubleValue
 ): value is SeriesSingleValue {
   return isDefined((value as any).__value);
@@ -133,18 +172,71 @@ export function getSeriesList<T extends TimestampedValue>(
   values: T[],
   seriesConfig: SeriesConfig<T>
 ): SeriesList {
-  return seriesConfig.map((config) =>
-    config.type === 'range'
-      ? getRangeSeriesData(
-          values,
-          config.metricPropertyLow,
-          config.metricPropertyHigh
-        )
-      : getSeriesData(values, config.metricProperty)
-  );
+  return seriesConfig
+    .filter(isVisible)
+    .map((config) =>
+      config.type === 'stacked-area'
+        ? getStackedAreaSeriesData(
+            values,
+            config.metricProperty,
+            seriesConfig.filter(
+              (x) => x.type === 'stacked-area'
+            ) as StackedAreaSeriesDefinition<T>[]
+          )
+        : config.type === 'range'
+        ? getRangeSeriesData(
+            values,
+            config.metricPropertyLow,
+            config.metricPropertyHigh
+          )
+        : getSeriesData(values, config.metricProperty)
+    );
 }
 
-export function getRangeSeriesData<T extends TimestampedValue>(
+function getStackedAreaSeriesData<T extends TimestampedValue>(
+  values: T[],
+  metricProperty: keyof T,
+  stackedAreaSeries: StackedAreaSeriesDefinition<T>[]
+) {
+  /**
+   * Stacked area series are rendered from top to bottom.
+   * The sum of a Y-value of all series below the current series equals the
+   * low value of a current series's Y-value.
+   */
+  const seriesBelowCurrentSeries = stackedAreaSeries.slice(
+    stackedAreaSeries.findIndex((x) => x.metricProperty === metricProperty) + 1
+  );
+
+  const seriesHigh = getSeriesData(values, metricProperty);
+  const seriesLow = getSeriesData(values, metricProperty);
+
+  seriesLow.forEach((seriesSingleValue, index) => {
+    /**
+     * The series are rendered from top to bottom. To get the low value of
+     * the current series, we will sum up all values of the
+     * `seriesBelowCurrentSeries`.
+     */
+
+    seriesSingleValue.__value = seriesBelowCurrentSeries
+      // for each serie we'll get the value of the current index
+      .map((x) => getSeriesData(values, x.metricProperty)[index])
+      // and then sum it up
+      .reduce((sum, x) => sum + (x.__value ?? 0), 0);
+  });
+
+  return seriesLow.map((low, index) => {
+    const valueLow = low.__value ?? 0;
+    const valueHigh = valueLow + (seriesHigh[index].__value ?? 0);
+
+    return {
+      __date_unix: low.__date_unix,
+      __value_a: valueLow,
+      __value_b: valueHigh,
+    };
+  });
+}
+
+function getRangeSeriesData<T extends TimestampedValue>(
   values: T[],
   metricPropertyLow: keyof T,
   metricPropertyHigh: keyof T
@@ -159,7 +251,7 @@ export function getRangeSeriesData<T extends TimestampedValue>(
   }));
 }
 
-export function getSeriesData<T extends TimestampedValue>(
+function getSeriesData<T extends TimestampedValue>(
   values: T[],
   metricProperty: keyof T
 ): SeriesSingleValue[] {

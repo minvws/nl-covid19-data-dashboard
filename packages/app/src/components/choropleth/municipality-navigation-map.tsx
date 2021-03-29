@@ -77,7 +77,7 @@ export function MunicipalityNavigationMap<T>(
         key={gemcode}
         href={reverseRouter.gm.index(gemcode)}
         title={gemnaam}
-        isTabInteractive
+        isTabInteractive={isTabInteractive}
         id={gemcode}
         pathData={path}
         stroke={colors.blue}
