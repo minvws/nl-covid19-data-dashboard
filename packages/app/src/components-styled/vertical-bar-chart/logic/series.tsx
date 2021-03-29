@@ -8,9 +8,7 @@ import { pick } from 'lodash';
 import { isPresent } from 'ts-is-present';
 import { SeriesSingleValue } from '~/components-styled/time-series-chart/logic/series';
 
-export type BarSeriesConfig<
-  T extends TimestampedValue
-> = BarSeriesDefinition<T>[];
+export type SeriesConfig<T extends TimestampedValue> = BarSeriesDefinition<T>[];
 
 export type BarSeriesDefinition<T extends TimestampedValue> = {
   type: 'bar';
@@ -22,7 +20,7 @@ export type BarSeriesDefinition<T extends TimestampedValue> = {
 
 export function useSeriesList<T extends TimestampedValue>(
   values: T[],
-  seriesConfig: BarSeriesConfig<T>
+  seriesConfig: SeriesConfig<T>
 ) {
   return useMemo(() => getSeriesList(values, seriesConfig), [
     values,
@@ -30,12 +28,12 @@ export function useSeriesList<T extends TimestampedValue>(
   ]);
 }
 
-export type BarSeriesList = SeriesSingleValue[][];
+export type SeriesList = SeriesSingleValue[][];
 
 export function getSeriesList<T extends TimestampedValue>(
   values: T[],
-  seriesConfig: BarSeriesConfig<T>
-): BarSeriesList {
+  seriesConfig: SeriesConfig<T>
+): SeriesList {
   return seriesConfig.map((config) =>
     getSeriesData(values, config.metricProperty)
   );
@@ -74,7 +72,7 @@ export function getSeriesData<T extends TimestampedValue>(
 
 export function useCalculatedSeriesExtremes<T extends TimestampedValue>(
   values: T[],
-  seriesConfig: BarSeriesConfig<T>
+  seriesConfig: SeriesConfig<T>
 ) {
   return useMemo(() => calculateSeriesExtremes(values, seriesConfig), [
     values,
@@ -90,7 +88,7 @@ export function useCalculatedSeriesExtremes<T extends TimestampedValue>(
  */
 export function calculateSeriesExtremes<T extends TimestampedValue>(
   values: T[],
-  seriesConfig: BarSeriesConfig<T>
+  seriesConfig: SeriesConfig<T>
 ) {
   const metricProperties = seriesConfig.flatMap((x) => x.metricProperty);
 

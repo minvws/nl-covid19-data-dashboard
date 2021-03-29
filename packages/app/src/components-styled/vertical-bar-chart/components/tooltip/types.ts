@@ -1,9 +1,6 @@
 import { TimestampedValue } from '@corona-dashboard/common';
-import {
-  DataOptions,
-  SeriesConfig,
-  TimespanAnnotationConfig,
-} from '../../logic';
+import { DataOptions } from '~/components-styled/time-series-chart/logic';
+import { SeriesConfig } from '../../logic';
 
 export type TooltipData<T extends TimestampedValue> = {
   value: T;
@@ -25,18 +22,6 @@ export type TooltipData<T extends TimestampedValue> = {
    * show date span annotation labels.
    */
   options: DataOptions;
-
-  /**
-   * When hovering a date span annotation, the tooltip needs to know about it so
-   * that it can render the label accordingly. I am assuming here that we won't
-   * ever define overlapping annotations for now.
-   */
-  timespanAnnotation?: TimespanAnnotationConfig;
-
-  /**
-   * Configuration to display the nearest point only in the tooltip
-   */
-  markNearestPointOnly?: boolean;
 };
 
 export type TooltipFormatter<T extends TimestampedValue> = (

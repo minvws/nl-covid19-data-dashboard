@@ -10,7 +10,6 @@ import { TimeframeOption } from '~/utils/timeframe';
 import { Box } from '~/components-styled/base';
 import {
   ChartContainer,
-  Tooltip,
   TooltipData,
   TooltipFormatter,
   Overlay,
@@ -23,20 +22,20 @@ import {
 } from '~/components-styled/time-series-chart/logic';
 
 import {
-  BarSeriesConfig,
+  SeriesConfig,
   useSeriesList,
   useCalculatedSeriesExtremes,
   useScales,
   useHoverState,
 } from './logic';
-import { BarTrend, DateMarker, BarHover } from './components';
+import { BarTrend, DateMarker, BarHover, Tooltip } from './components';
 
 /**
  * Reference TimeSeriesChart for additional information on props
  */
 export type VerticalBarChartProps<
   T extends TimestampedValue,
-  C extends BarSeriesConfig<T>
+  C extends SeriesConfig<T>
 > = {
   title?: string;
   values: T[];
@@ -55,7 +54,7 @@ export type VerticalBarChartProps<
 
 export function VerticalBarChart<
   T extends TimestampedValue,
-  C extends BarSeriesConfig<T>
+  C extends SeriesConfig<T>
 >({
   values: allValues,
   seriesConfig,

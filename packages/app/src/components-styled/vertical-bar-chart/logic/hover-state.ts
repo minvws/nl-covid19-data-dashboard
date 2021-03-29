@@ -4,12 +4,12 @@ import { isEmpty } from 'lodash';
 import { ScaleBand, ScaleLinear } from 'd3-scale';
 import { TimestampedValue } from '@corona-dashboard/common';
 import { SeriesSingleValue } from '~/components-styled/time-series-chart/logic';
-import { BarSeriesList, BarSeriesConfig } from './series';
+import { SeriesList, SeriesConfig } from './series';
 
 interface UseHoverStateArgs<T extends TimestampedValue> {
   values: T[];
-  seriesList: BarSeriesList;
-  seriesConfig: BarSeriesConfig<T>;
+  seriesList: SeriesList;
+  seriesConfig: SeriesConfig<T>;
   xScale: ScaleBand<number>;
   yScale: ScaleLinear<number, number>;
 }
