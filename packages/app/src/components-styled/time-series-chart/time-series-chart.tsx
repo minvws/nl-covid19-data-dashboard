@@ -116,6 +116,7 @@ export type TimeSeriesChartProps<
    */
   numGridLines?: number;
   tickValues?: number[];
+  formatTickValue?: (value: number) => string;
   paddingLeft?: number;
   /**
    * The data specific options are grouped together. This way we can pass them
@@ -147,6 +148,7 @@ export function TimeSeriesChart<
   dataOptions,
   numGridLines = 3,
   tickValues: yTickValues,
+  formatTickValue: formatYTickValue,
   paddingLeft,
   ariaLabelledBy,
   tooltipTitle,
@@ -301,6 +303,7 @@ export function TimeSeriesChart<
             numGridLines={numGridLines}
             yTickValues={yTickValues}
             xTickValues={xTickValues}
+            formatYTickValue={formatYTickValue}
             xScale={xScale}
             yScale={yScale}
             isPercentage={isPercentage}
