@@ -10,7 +10,7 @@ import { Box } from './base';
 import { PublicationDate } from './publication-date';
 import { Heading, InlineText } from './typography';
 
-type HighlightTeaserVariantProps = 'blue' | 'default';
+type HighlightTeaserVariant = 'blue' | 'default';
 export interface HighlightTeaserProps {
   title: string;
   cover: ImageBlock;
@@ -19,7 +19,7 @@ export interface HighlightTeaserProps {
   category: string;
   publicationDate?: string;
   isWeekly?: boolean;
-  variant?: HighlightTeaserVariantProps;
+  variant?: HighlightTeaserVariant;
 }
 
 export function HighlightTeaser(props: HighlightTeaserProps) {
@@ -111,7 +111,7 @@ function ZoomContainerUnstyled({
 }
 
 const StyledHightlightTeaser = styled.a<{
-  variant?: HighlightTeaserVariantProps;
+  variant?: HighlightTeaserVariant;
 }>((x) =>
   css({
     display: 'block',
