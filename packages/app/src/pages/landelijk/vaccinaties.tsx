@@ -569,21 +569,19 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
         </TwoKpiSection>
               */}
 
-          <TwoKpiSection>
-            <KpiTile title={text.expected_page_additions.title}>
-              {additions.length > 0 && (
+          {additions.length > 0 && (
+            <TwoKpiSection>
+              <KpiTile title={text.expected_page_additions.title}>
                 <ul>
-                  {text.expected_page_additions.additions
-                    .filter((x) => x.length)
-                    .map((addition) => (
-                      <li key={addition}>
-                        <InlineText>{addition}</InlineText>
-                      </li>
-                    ))}
+                  {additions.map((addition) => (
+                    <li key={addition}>
+                      <InlineText>{addition}</InlineText>
+                    </li>
+                  ))}
                 </ul>
-              )}
-            </KpiTile>
-          </TwoKpiSection>
+              </KpiTile>
+            </TwoKpiSection>
+          )}
         </TileList>
       </NationalLayout>
     </Layout>
