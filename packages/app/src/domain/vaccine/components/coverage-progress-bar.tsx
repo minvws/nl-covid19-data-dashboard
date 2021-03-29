@@ -55,7 +55,7 @@ export function CoverageProgressBar(props: {
 
   return (
     <Box width="100%" mt={{ _: 4, md: 0 }}>
-      <Box height={rectHeight + 8} width={{ _: undefined, md: '90%' }}>
+      <Box height={rectHeight + 8} width={{ md: '90%' }}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           css={css({

@@ -22,7 +22,7 @@ export function CoverageRow(props: CoverageRowProps) {
 
 function MobileCoverageRow(props: CoverageRowProps) {
   const { children, borderColor, isHeaderRow = false } = props;
-  const [open, setOpen] = useState<'collapsed' | 'open'>('collapsed');
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <Row
       hideBorder={isHeaderRow}
@@ -38,15 +38,14 @@ function MobileCoverageRow(props: CoverageRowProps) {
         </Box>
         <Box flex="0.2">
           {isPresent(children[2]) ? (
-            <Chevron
-              open={open === 'open'}
-              onClick={() => setOpen(open === 'open' ? 'collapsed' : 'open')}
-            />
+            <ChevronButton>
+              <Chevron isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
+            </ChevronButton>
           ) : null}
         </Box>
       </Box>
       {isPresent(children[2]) && (
-        <CollapsiblePanel data-state={open}>{children[2]}</CollapsiblePanel>
+        <CollapsiblePanel isOpen={isOpen}>{children[2]}</CollapsiblePanel>
       )}
     </Row>
   );
@@ -87,40 +86,40 @@ const Row = styled(Box)<{ hideBorder: boolean; borderColor?: string }>(
   }
 );
 
-const Chevron = styled.div<{
-  open: boolean;
-}>((x) =>
+const ChevronButton = styled.button(
   css({
-    ml: 2,
-    backgroundImage: 'url("/images/chevron-down.svg")',
-    backgroundSize: '0.9em 0.5em',
-    backgroundPosition: '0 50%',
-    backgroundRepeat: 'no-repeat',
-    height: '0.5em',
-    width: '1em',
-    display: 'inline-block',
-    transitionProperty: 'transform',
-    transitionDuration: '0.5s',
-    transform: x.open ? 'rotate(-180deg)' : '',
-    color: 'c4c4c4',
+    border: 'none',
+    bg: 'transparent',
+    height: '100%',
+    width: '100%',
+    '&:focus': { outline: 0 },
   })
 );
 
-const CollapsiblePanel = styled(Box)(
+const Chevron = styled.div<{
+  isOpen: boolean;
+}>((x) =>
+  css({
+    backgroundImage: 'url("/images/chevron-down-grey.svg")',
+    backgroundSize: '1.4em 0.9em',
+    backgroundPosition: '0 50%',
+    backgroundRepeat: 'no-repeat',
+    height: '0.9em',
+    width: '1.5em',
+    display: 'inline-block',
+    transitionProperty: 'transform',
+    transitionDuration: '0.5s',
+    transform: x.isOpen ? 'rotate(-180deg)' : '',
+  })
+);
+
+const CollapsiblePanel = styled.div<{ isOpen: boolean }>((x) =>
   css({
     transitionProperty: 'opacity, height',
     transitionDuration: '0.5s',
     width: '100%',
     overflow: 'hidden',
-    height: 0,
-    opacity: 0,
-    '&[data-state="open"]': {
-      height: 'calc(22px + 5rem)',
-      opacity: 1,
-    },
-    '&[data-state="collapsed"]': {
-      height: 0,
-      opacity: 0,
-    },
+    height: x.isOpen ? 'calc(22px + 5rem)' : 0,
+    opacity: x.isOpen ? 1 : 0,
   })
 );
