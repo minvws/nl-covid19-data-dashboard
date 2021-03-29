@@ -2,7 +2,7 @@ import {
   NlVaccineAdministeredEstimateValue,
   NlVaccineAdministeredValue,
   NlVaccineDeliveryEstimateValue,
-  NlVaccineDeliveryValue,
+  NlVaccineDeliveryValue
 } from '@corona-dashboard/common';
 import { css } from '@styled-system/css';
 import { useState } from 'react';
@@ -27,7 +27,7 @@ import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
 import {
   MilestonesView,
-  MilestoneViewProps,
+  MilestoneViewProps
 } from '~/domain/vaccine/milestones-view';
 import { useVaccineDeliveryData } from '~/domain/vaccine/use-vaccine-delivery-data';
 import { useVaccineNames } from '~/domain/vaccine/use-vaccine-names';
@@ -39,12 +39,12 @@ import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { getVaccineMilestonesQuery } from '~/queries/vaccine-milestones-query';
 import {
   createGetStaticProps,
-  StaticProps,
+  StaticProps
 } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
-  getNlData,
+  getNlData
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
@@ -582,16 +582,17 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             />
           ) : null}
 
-          {additions.length > 0 && (
             <TwoKpiSection>
               <KpiTile title={text.expected_page_additions.title}>
+                <Text>{text.expected_page_additions.description}</Text>
+                {additions.length > 0 && (
                 <ul>
                   {additions.map((addition) => (
                     <li key={addition}>
                       <InlineText>{addition}</InlineText>
                     </li>
                   ))}
-                </ul>
+                </ul>)}
               </KpiTile>
             </TwoKpiSection>
           )}
