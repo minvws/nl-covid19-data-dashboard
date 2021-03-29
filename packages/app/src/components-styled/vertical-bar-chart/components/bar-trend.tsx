@@ -1,6 +1,7 @@
 import { PositionScale } from '@visx/shape/lib/types';
 import { Group } from '@visx/group';
 import { Bar } from '@visx/shape';
+import { isPresent } from 'ts-is-present';
 import { first, last } from 'lodash';
 import { MouseEvent, TouchEvent, useMemo, memo } from 'react';
 import {
@@ -32,6 +33,11 @@ export const BarTrend = memo(function BarTrend({
   barWidth,
   onHover,
 }: BarTrendProps) {
+  const nonNullSeries = useMemo(
+    () => series.filter((x) => isPresent(x.__value)),
+    [series]
+  );
+
   const hoverBarHeight = useMemo(() => {
     const range = yScale.range();
     return Math.abs((first(range) as number) - (last(range) as number));
@@ -45,7 +51,7 @@ export const BarTrend = memo(function BarTrend({
 
   return (
     <Group>
-      {series.map((value, index) => {
+      {nonNullSeries.map((value, index) => {
         const barId = `bar-${index}`;
         const fillColor = value.__value
           ? value.__value > 0

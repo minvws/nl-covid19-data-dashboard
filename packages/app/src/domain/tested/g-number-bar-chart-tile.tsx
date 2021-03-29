@@ -47,14 +47,16 @@ export function GNumberBarChartTile({
   };
 
   // Dummy Data
-  const values: NlGNumberValue[] = generateDummyData();
-  const last_value: NlGNumberValue = values[values.length - 1];
+  const values: NlGNumberValue[] = __data?.values ?? generateDummyData();
+  const last_value: NlGNumberValue =
+    __data?.last_value ?? values[values.length - 1];
 
   return (
     <ChartTileWithTimeframe
       title={text.title}
       description={text.description}
       timeframeOptions={timeframeOptions}
+      timeframeInitialValue="5weeks"
       metadata={{
         date: last_value.date_of_insertion_unix,
         // source: 'source',

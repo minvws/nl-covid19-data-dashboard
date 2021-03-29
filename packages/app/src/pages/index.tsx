@@ -148,7 +148,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
             </Box>
 
             {/* @ts-expect-error @TODO Pass in data and sitetext */}
-            <GNumberBarChartTile />
+            <GNumberBarChartTile data={data?.g_number} />
 
             <MiniTrendTileLayout id="metric-navigation">
               <MiniTrendTile
