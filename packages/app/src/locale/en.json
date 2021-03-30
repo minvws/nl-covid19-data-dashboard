@@ -444,7 +444,8 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
         "text": "RIVM"
       }
-    }
+    },
+    "linechart_tooltip_label": ""
   },
   "verpleeghuis_positief_geteste_personen": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -483,7 +484,13 @@
     },
     "kpi_titel": "Number of confirmed cases per day",
     "line_chart_legend_trend_label": "",
-    "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
+    "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
+    "line_chart_legend_trend_moving_average_label": "",
+    "tooltip_labels": {
+      "inaccurate": "",
+      "newly_infected_people": "",
+      "newly_infected_people_moving_average": ""
+    }
   },
   "verpleeghuis_oversterfte": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -518,7 +525,13 @@
     },
     "kpi_titel": "Mortality per day",
     "line_chart_legend_trend_label": "",
-    "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
+    "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
+    "line_chart_legend_trend_moving_average_label": "",
+    "tooltip_labels": {
+      "inaccurate": "",
+      "deceased_daily": "",
+      "deceased_daily_moving_average": ""
+    }
   },
   "blok_verpleeghuis_zorg": {
     "title": "Nursing homes",
@@ -1075,7 +1088,7 @@
     "titel": "Percentage of positive test results at GGD test locations ",
     "summary_title": "{{percentage}} of the test results at GGD test locations had a positive result",
     "summary_link_cta": "More about the percentage of positive test results from GGD test locations only",
-    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
+    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
       "href": "https://data.rivm.nl/covid-19/COVID-19_uitgevoerde_testen.html",
       "text": "RIVM"
@@ -1114,7 +1127,7 @@
     "titel": "Percentage of positive test results at GGD test locations in {{safetyRegion}}",
     "summary_title": "{{percentage}} of the tests at GGD test locations had a positive result",
     "summary_link_cta": "More about the percentage of positive test results from GGD test locations only",
-    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
+    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
       "href": "https://data.rivm.nl/covid-19/COVID-19_uitgevoerde_testen.html",
       "text": "RIVM"
@@ -1174,7 +1187,13 @@
       }
     },
     "line_chart_legend_trend_label": "",
-    "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
+    "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
+    "line_chart_legend_trend_moving_average_label": "",
+    "tooltip_labels": {
+      "inaccurate": "",
+      "deceased_daily": "",
+      "deceased_daily_moving_average": ""
+    }
   },
   "veiligheidsregio_verpleeghuis_besmette_locaties": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -1205,7 +1224,8 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
         "text": "RIVM"
       }
-    }
+    },
+    "linechart_tooltip_label": ""
   },
   "veiligheidsregio_verpleeghuis_positief_geteste_personen": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -1242,7 +1262,13 @@
       }
     },
     "line_chart_legend_trend_label": "",
-    "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
+    "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
+    "line_chart_legend_trend_moving_average_label": "",
+    "tooltip_labels": {
+      "inaccurate": "",
+      "newly_infected_people": "",
+      "newly_infected_people_moving_average": ""
+    }
   },
   "data_warning_text": "",
   "veelgestelde_vragen_metadata": {
@@ -1680,7 +1706,7 @@
         }
       },
       "kpi_daily_title": "Confirmed cases among over-70s living at home",
-      "kpi_daily_description": "The number of people over 70 living at home who were reported as testing positive for COVID-19 yesterday.",
+      "kpi_daily_description": "The number of people over 70 living at home who were reported as testing positive for COVID-19 yesterday. About 2,3 miljon people over 70 live at home.",
       "kpi_daily_per_100k_title": "Daily confirmed cases per 100,000 among over-70s living at home ",
       "kpi_daily_per_100k_description": "This figure shows how many people over 70 living at home were reported as testing positive for COVID-19 yesterday, per 100,000 over-70s living at home. This figure makes it easier to compare the situation in different regions.",
       "line_chart_daily_title": "Newly confirmed cases among over-70s over time",

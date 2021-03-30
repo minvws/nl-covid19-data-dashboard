@@ -444,7 +444,8 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
         "text": "RIVM"
       }
-    }
+    },
+    "linechart_tooltip_label": "Aantal besmette locaties"
   },
   "verpleeghuis_positief_geteste_personen": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -483,7 +484,13 @@
     },
     "kpi_titel": "Aantal positief geteste bewoners per dag",
     "line_chart_legend_trend_label": "Aantal positief geteste bewoners",
-    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
+    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+    "line_chart_legend_trend_moving_average_label": "Gemiddeld aantal over afgelopen 7 dagen",
+    "tooltip_labels": {
+      "inaccurate": "Incompleet",
+      "newly_infected_people": "Gemeld aantal positief geteste bewoners",
+      "newly_infected_people_moving_average": "Gemiddeld aantal over afgelopen 7 dagen"
+    }
   },
   "verpleeghuis_oversterfte": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -518,7 +525,13 @@
     },
     "kpi_titel": "Sterfte per dag",
     "line_chart_legend_trend_label": "Aantal overleden bewoners",
-    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
+    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+    "line_chart_legend_trend_moving_average_label": "Gemiddeld aantal overleden bewoners over afgelopen 7 dagen.",
+    "tooltip_labels": {
+      "inaccurate": "Incompleet",
+      "deceased_daily": "Gemeld aantal overleden bewoners",
+      "deceased_daily_moving_average": "Gemiddeld aantal over afgelopen 7 dagen"
+    }
   },
   "blok_verpleeghuis_zorg": {
     "title": "Verpleeghuiszorg",
@@ -1075,7 +1088,7 @@
     "titel": "Percentage positief geteste personen via GGD-teststraten",
     "summary_title": "{{percentage}} van de GGD-testen was positief",
     "summary_link_cta": "Meer over het percentage positieve testen via alleen de GGD",
-    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "bron": {
       "href": "https://data.rivm.nl/covid-19/COVID-19_uitgevoerde_testen.html",
       "text": "RIVM"
@@ -1114,7 +1127,7 @@
     "titel": "Percentage positief geteste personen via GGD-teststraten in {{safetyRegion}}",
     "summary_title": "{{percentage}} van de GGD-testen was positief",
     "summary_link_cta": "Meer over het percentage positieve testen via alleen de GGD",
-    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "bron": {
       "href": "https://data.rivm.nl/covid-19/COVID-19_uitgevoerde_testen.html",
       "text": "RIVM"
@@ -1174,7 +1187,13 @@
       }
     },
     "line_chart_legend_trend_label": "Aantal overleden bewoners",
-    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
+    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+    "line_chart_legend_trend_moving_average_label": "Gemiddeld aantal overleden bewoners over afgelopen 7 dagen.",
+    "tooltip_labels": {
+      "inaccurate": "Incompleet",
+      "deceased_daily": "Gemeld aantal overleden bewoners",
+      "deceased_daily_moving_average": "Gemiddeld aantal over afgelopen 7 dagen"
+    }
   },
   "veiligheidsregio_verpleeghuis_besmette_locaties": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -1205,7 +1224,8 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
         "text": "RIVM"
       }
-    }
+    },
+    "linechart_tooltip_label": "Aantal besmette locaties"
   },
   "veiligheidsregio_verpleeghuis_positief_geteste_personen": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -1242,7 +1262,13 @@
       }
     },
     "line_chart_legend_trend_label": "Aantal positief geteste bewoners",
-    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
+    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+    "line_chart_legend_trend_moving_average_label": "Gemiddeld aantal over afgelopen 7 dagen",
+    "tooltip_labels": {
+      "inaccurate": "Incompleet",
+      "newly_infected_people": "Gemeld aantal positief geteste bewoners",
+      "newly_infected_people_moving_average": "Gemiddeld aantal over afgelopen 7 dagen"
+    }
   },
   "data_warning_text": "",
   "veelgestelde_vragen_metadata": {
@@ -1680,7 +1706,7 @@
         }
       },
       "kpi_daily_title": "Aantal positief geteste thuiswonende 70-plussers",
-      "kpi_daily_description": "Het aantal70-plussers waarvan gisteren is gemeld dat ze positief zijn getest op COVID-19.",
+      "kpi_daily_description": "Het aantal70-plussers waarvan gisteren is gemeld dat ze positief zijn getest op COVID-19. Er wonen zo’n 2,3 miljoen 70-plussers zelfstandig.",
       "kpi_daily_per_100k_title": "Aantal positief geteste thuiswonende 70-plussers per dag, per 100.000",
       "kpi_daily_per_100k_description": "Dit getal laat zien van hoeveel thuiswonende personen van 70 jaar of ouder gisteren is gemeld dat ze positief zijn getest op COVID-19,  per 100.000 thuiswonende 70-plussers. Deze berekening maakt het mogelijk om regio’s beter met elkaar te vergelijken.",
       "line_chart_daily_title": "Nieuwe besmettingen onder 70-plussers door de tijd heen",

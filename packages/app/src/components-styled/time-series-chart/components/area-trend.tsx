@@ -13,7 +13,6 @@ type AreaTrendProps = {
   color: string;
   fillOpacity?: number;
   strokeWidth?: number;
-  style?: 'solid' | 'striped';
   getX: (v: SeriesItem) => number;
   getY: (v: SeriesSingleValue) => number;
   yScale: PositionScale;

@@ -83,6 +83,13 @@ export const Axes = memo(function Axes({
     [startUnix, endUnix, formatDateFromSeconds]
   );
 
+  /**
+   * Long labels (like the ones including a year, are too long to be positioned
+   * centered on the x-axis tick. Usually a short date has a 2 digit number plus
+   * a space plus a three character month, which makes 6.
+   */
+  const isLongLabel = formatXAxis(startUnix).length > 6;
+
   return (
     <g css={css({ pointerEvents: 'none' })}>
       <GridRows
@@ -117,10 +124,21 @@ export const Axes = memo(function Axes({
           fontSize: 12,
           /**
            * Using anchor middle the line marker label will fall nicely on top
-           * of the axis label
+           * of the axis label.
+           *
+           * The only times at which we can not use middle is if we are
+           * rendering a year in the label, because it becomes too long.
            */
           textAnchor:
-            x === startUnix ? 'start' : x === endUnix ? 'end' : 'middle',
+            x === startUnix
+              ? isLongLabel
+                ? 'start'
+                : 'middle'
+              : x === endUnix
+              ? isLongLabel
+                ? 'end'
+                : 'middle'
+              : 'middle',
         })}
         hideTicks
       />

@@ -1,5 +1,6 @@
 export * from './area-trend';
 export * from './axes';
+export * from './bar-trend';
 export * from './chart-container';
 export * from './date-line-marker';
 export * from './date-span-marker';

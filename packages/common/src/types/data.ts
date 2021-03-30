@@ -368,7 +368,9 @@ export interface NationalNursingHome {
 }
 export interface NationalNursingHomeValue {
   newly_infected_people: number;
+  newly_infected_people_moving_average: number;
   deceased_daily: number;
+  deceased_daily_moving_average: number;
   newly_infected_locations: number;
   infected_locations_total: number;
   infected_locations_percentage: number;
@@ -860,10 +862,12 @@ export interface RegionalNursingHome {
 }
 export interface RegionalNursingHomeValue {
   newly_infected_people: number;
+  newly_infected_people_moving_average: number;
   newly_infected_locations: number;
   infected_locations_total: number;
   infected_locations_percentage: number;
   deceased_daily: number;
+  deceased_daily_moving_average: number;
   date_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;
