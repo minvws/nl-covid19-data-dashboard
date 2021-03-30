@@ -113,7 +113,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                 timeframe={timeframe}
                 seriesConfig={[
                   {
-                    type: 'line',
+                    type: 'bar',
                     metricProperty: 'newly_infected_people',
                     color: colors.data.primary,
                     label:
@@ -123,10 +123,8 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                         .newly_infected_people,
                   },
                   {
-                    type: 'bar',
-                    // @TODO connect with right property when data is available
-                    // metricProperty: 'newly_infected_people_moving_average',
-                    metricProperty: 'newly_infected_people',
+                    type: 'line',
+                    metricProperty: 'newly_infected_people_moving_average',
                     color: colors.data.primary,
                     label:
                       positiveTestedPeopleText.line_chart_legend_trend_moving_average_label,
@@ -294,17 +292,15 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                 timeframe={timeframe}
                 seriesConfig={[
                   {
-                    type: 'line',
+                    type: 'bar',
                     metricProperty: 'deceased_daily',
                     label: deceased.line_chart_legend_trend_label,
                     shortLabel: deceased.tooltip_labels.deceased_daily,
                     color: colors.data.primary,
                   },
                   {
-                    type: 'bar',
-                    // @TODO connect with actual data when available
-                    // metricProperty: 'deceased_daily_moving_average',
-                    metricProperty: 'deceased_daily',
+                    type: 'line',
+                    metricProperty: 'deceased_daily_moving_average',
                     label:
                       deceased.line_chart_legend_trend_moving_average_label,
                     shortLabel:
