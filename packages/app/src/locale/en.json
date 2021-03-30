@@ -1673,7 +1673,7 @@
         }
       },
       "kpi_daily_title": "Confirmed cases among over-70s living at home",
-      "kpi_daily_description": "The number of people over 70 living at home who were reported as testing positive for COVID-19 yesterday.",
+      "kpi_daily_description": "The number of people over 70 living at home who were reported as testing positive for COVID-19 yesterday. About 2,3 miljon people over 70 live at home.",
       "kpi_daily_per_100k_title": "Daily confirmed cases per 100,000 among over-70s living at home ",
       "kpi_daily_per_100k_description": "This figure shows how many people over 70 living at home were reported as testing positive for COVID-19 yesterday, per 100,000 over-70s living at home. This figure makes it easier to compare the situation in different regions.",
       "line_chart_daily_title": "Newly confirmed cases among over-70s over time",
