@@ -1,19 +1,19 @@
-import { NlVaccineAdministeredTotal } from '@corona-dashboard/common';
-
+import { National } from '@corona-dashboard/common';
 import Vaccinaties from '~/assets/vaccinaties.svg';
+import { ArrowIconRight } from '~/components-styled/arrow-icon';
 import { Box } from '~/components-styled/base';
 import { LinkWithIcon } from '~/components-styled/link-with-icon';
 import { Heading, Text } from '~/components-styled/typography';
+import { VaccineAdministrationsOverTimeChart } from '~/domain/vaccine/vaccine-administrations-over-time-chart';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { ArrowIconRight } from '~/components-styled/arrow-icon';
-import { VaccineAdministrationsOverTimeChart } from '~/domain/vaccine/vaccine-administrations-over-time-chart';
+
 interface TopicalVaccineProps {
-  data: NlVaccineAdministeredTotal;
+  data: National;
 }
 
 export function TopicalVaccineTile({ data }: TopicalVaccineProps) {
-  const estimated = data.last_value.estimated;
+  const estimated = data.vaccine_administered_total.last_value.estimated;
 
   const { siteText, formatNumber } = useIntl();
 
@@ -51,6 +51,13 @@ export function TopicalVaccineTile({ data }: TopicalVaccineProps) {
       <Text mt={0}>
         {replaceComponentsInText(text.administered_tests, {
           administeredVaccines: <strong>{formatNumber(estimated)}</strong>,
+          vaccine_coverage: data.vaccine_coverage ? (
+            <strong>
+              `${data.vaccine_coverage.last_value.fully_vaccinated_percentage}%`
+            </strong>
+          ) : (
+            <></>
+          ),
         })}
       </Text>
 
@@ -58,7 +65,9 @@ export function TopicalVaccineTile({ data }: TopicalVaccineProps) {
         {text.sub_title}
       </Text>
 
-      <VaccineAdministrationsOverTimeChart values={data.values} />
+      <VaccineAdministrationsOverTimeChart
+        values={data.vaccine_administered_total.values}
+      />
     </Box>
   );
 }

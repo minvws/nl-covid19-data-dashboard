@@ -2307,6 +2307,10 @@
       "titel": "Planned doses this week",
       "omschrijving": "Number of doses the Netherlands expects to administer from {{date_from}} to {{date_to}}. The actual number may differ, for example due to people cancelling their appointments or problems with vaccine deliveries."
     },
+    "kpi_vaccinatiegraad": {
+      "titel": "Vaccinatiegraad",
+      "omschrijving": "Percentage mensen in Nederland dat **volledig** gevaccineerd is ten opzicht van alle mensen in Nederland die voor vaccinatie in aanmerking komen."
+    },
     "clock": {
       "title": "One person is vaccinated every {{seconds}} seconds",
       "description": "This is an estimate. The estimated figure is based on an average of {{amount}} doses per day between 08.00 and 20.00 over the past seven days."
