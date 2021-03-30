@@ -327,7 +327,7 @@
     "titel": "Reproduction number",
     "pagina_toelichting": "The reproduction number shows how fast the virus is spreading. The number shows how many people are on average infected by one patient with COVID-19.",
     "barscale_titel": "Most recent reproduction number",
-    "barscale_toelichting": "Number of people infected by one infectious person.",
+    "barscale_toelichting": "Number of people infected by one infectious person. This number is always two weeks old, since more current calculations are to unreliable. ",
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
     "extra_uitleg": "The reproduction number shows how fast the virus is spreading. This number shows how many people are on average infected by one patient with COVID-19. The number of transmissions remains more or less constant when the reproduction number is 1, declines when it is less than 1 and increases when the number is above 1.",
     "linechart_titel": "The reproduction number over time",
@@ -684,9 +684,9 @@
     "absolute_date_template": "on {{date}}",
     "inwoners": "residents",
     "miljoen": "million",
-    "rond": "around",
     "signaalwaarde": "Alert value",
-    "totaal": "Total"
+    "totaal": "Total",
+    "rond": ""
   },
   "seoHead": {
     "default_description": "Information on the development of the coronavirus in the Netherlands.",
@@ -2756,24 +2756,25 @@
         "toelichting": "This is the risk level that currently applies in this region. The risk level is reassessed every 2 weeks based on the number of hospital admissions and the number of positive tests (new confirmed cases) at that time."
       }
     },
+    "escalation_level_last_determined": "This risk level has been determined on {{last_determined}}, based on the figures from {{based_from}} to {{based_to}}. The risk level will be reassessed around {{next_determined}}.",
     "momenteel": {
-      "description": "Dit is het risiconiveau dat nu geldt in deze regio. Het risiconiveau wordt elke twee weken bepaald op basis van het aantal ziekenhuisopnames en het aantal positieve testen van dat moment.",
-      "description_from_to": "Op {{last_determined}} is vastgesteld risiconiveau {{risk_level}}. De volgende ronde is op {{next_determined}}",
-      "last_determined": "Laatste inschaling:",
+      "description": "",
+      "description_from_to": "",
+      "last_determined": "",
       "established_with": {
-        "title": "Risiconiveau vastgesteld met de cijfers van:",
-        "description": "{{based_from}} t/m {{based_to}}"
+        "title": "",
+        "description": ""
       },
       "positive_tests": {
-        "title": "Positieve testen",
-        "description": "{{amount}} per 100.00 inwoners per week"
+        "title": "",
+        "description": ""
       },
       "hospital_admissions": {
-        "title": "Ziekenhuisopnames (incl. IC)",
-        "description": "{{amount}} per 1 miljoen inwoners per week"
+        "title": "",
+        "description": ""
       },
-      "next_determined": "Volgende inschaling:",
-      "link_text": "Bekijk de maatregelen die gelden in deze veiligheidsregio."
+      "next_determined": "",
+      "link_text": ""
     }
   },
   "gemeente_sterfte": {
@@ -2887,22 +2888,22 @@
     }
   },
   "infected_per_age_group": {
-    "title": "Verdeling naar leeftijd",
-    "description": "Verdeling naar leeftijd ...",
+    "title": "",
+    "description": "",
     "legend": {
-      "infected_age_0_9_per_100k": "0-9",
-      "infected_age_10_19_per_100k": "10-19",
-      "infected_age_20_29_per_100k": "20-29",
-      "infected_age_30_39_per_100k": "30-30",
-      "infected_age_40_49_per_100k": "40-49",
-      "infected_age_50_59_per_100k": "50-59",
-      "infected_age_60_69_per_100k": "60-69",
-      "infected_age_70_79_per_100k": "70-79",
-      "infected_age_80_89_per_100k": "80-89",
-      "infected_age_90_plus_per_100k": "90+",
-      "infected_overall_per_100k": "Alle leeftijden"
+      "infected_age_0_9_per_100k": "",
+      "infected_age_10_19_per_100k": "",
+      "infected_age_20_29_per_100k": "",
+      "infected_age_30_39_per_100k": "",
+      "infected_age_40_49_per_100k": "",
+      "infected_age_50_59_per_100k": "",
+      "infected_age_60_69_per_100k": "",
+      "infected_age_70_79_per_100k": "",
+      "infected_age_80_89_per_100k": "",
+      "infected_age_90_plus_per_100k": "",
+      "infected_overall_per_100k": ""
     },
-    "reset_button_label": "Reset",
-    "legend_help_text": "Selecteed een of meerdere leeftijdsgroepen om deze apart te bekijken."
+    "reset_button_label": "",
+    "legend_help_text": ""
   }
 }
