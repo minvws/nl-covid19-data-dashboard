@@ -6,6 +6,7 @@ import { TimestampedValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { ReactNode, useRef } from 'react';
 import styled from 'styled-components';
+import { isDefined } from 'ts-is-present';
 import useResizeObserver from 'use-resize-observer';
 import { Heading } from '~/components-styled/typography';
 import { useBoundingBox } from '~/utils/use-bounding-box';
@@ -171,16 +172,9 @@ export function TooltipContent(props: TooltipContentProps) {
     <StyledTooltipContent onClick={onSelect}>
       {title && <TooltipHeading title={title} />}
       {children && (
-        <div
-          css={css({
-            borderTop: title && '1px solid',
-            borderTopColor: title && 'border',
-            py: 2,
-            px: 3,
-          })}
-        >
+        <TooltipChildren hasTitle={isDefined(title)}>
           {children}
-        </div>
+        </TooltipChildren>
       )}
     </StyledTooltipContent>
   );
@@ -210,6 +204,16 @@ function TooltipHeading({ title }: { title: string }) {
     </div>
   );
 }
+
+export const TooltipChildren = styled.div<{ hasTitle?: boolean }>(
+  ({ hasTitle }) =>
+    css({
+      borderTop: hasTitle ? '1px solid' : '',
+      borderTopColor: hasTitle ? 'border' : '',
+      py: 2,
+      px: 3,
+    })
+);
 
 const StyledTooltipContent = styled.div((x) =>
   css({

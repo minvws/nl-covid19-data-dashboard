@@ -1,14 +1,13 @@
 import { TimestampedValue } from '@corona-dashboard/common';
 import { ScaleLinear } from 'd3-scale';
 import { memo } from 'react';
-import { AreaTrend, LineTrend, RangeTrend } from '.';
+import { AreaTrend, LineTrend, RangeTrend, BarTrend } from '.';
 import {
   Bounds,
   GetX,
   GetY,
   GetY0,
   GetY1,
-  HoverHandler,
   SeriesConfig,
   SeriesDoubleValue,
   SeriesList,
@@ -17,7 +16,6 @@ import {
 import { StackedAreaTrend } from './stacked-area-trend';
 
 interface SeriesProps<T extends TimestampedValue> {
-  onHover?: HoverHandler;
   seriesConfig: SeriesConfig<T>;
   seriesList: SeriesList;
   getX: GetX;
@@ -38,7 +36,6 @@ interface SeriesProps<T extends TimestampedValue> {
 export const Series = memo(SeriesUnmemoized) as typeof SeriesUnmemoized;
 
 function SeriesUnmemoized<T extends TimestampedValue>({
-  onHover,
   seriesConfig,
   seriesList,
   getX,
@@ -65,7 +62,6 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                   strokeWidth={config.strokeWidth}
                   getX={getX}
                   getY={getY}
-                  onHover={(evt) => onHover && onHover(evt, index)}
                 />
               );
             case 'area':
@@ -74,13 +70,23 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                   key={index}
                   series={series as SeriesSingleValue[]}
                   color={config.color}
-                  style={config.style}
                   fillOpacity={config.fillOpacity}
                   strokeWidth={config.strokeWidth}
                   getX={getX}
                   getY={getY}
                   yScale={yScale}
-                  onHover={(evt) => onHover && onHover(evt, index)}
+                />
+              );
+            case 'bar':
+              return (
+                <BarTrend
+                  key={index}
+                  series={series as SeriesSingleValue[]}
+                  color={config.color}
+                  fillOpacity={config.fillOpacity}
+                  getX={getX}
+                  getY={getY}
+                  bounds={bounds}
                 />
               );
             case 'range':
@@ -112,10 +118,10 @@ function SeriesUnmemoized<T extends TimestampedValue>({
           }
         })
         /**
-         * We will reverse the elements to ensure the first series will be
-         * rendered as the last dom/svg-node. This way we make sure that the
-         * first (and most-likely most important) series is actually rendered on
-         * top of the other series.
+         * We reverse the elements to ensure the first series will be rendered
+         * as the last dom/svg-node. This way we make sure that the first (and
+         * most-likely most important) series is actually rendered on top of the
+         * other series.
          */
         .reverse()}
     </>
