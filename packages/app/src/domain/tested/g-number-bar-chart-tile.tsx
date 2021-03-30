@@ -9,11 +9,13 @@ import { TimeframeOption } from '~/utils/timeframe';
 interface GNumberBarChartTileProps {
   data: NlGNumber | VrGNumber;
   timeframeOptions?: TimeframeOption[];
+  timeframeInitialValue?: TimeframeOption;
 }
 
 export function GNumberBarChartTile({
   data: __data,
   timeframeOptions = ['5weeks', 'week'],
+  timeframeInitialValue = '5weeks',
 }: GNumberBarChartTileProps) {
   const { formatPercentage, siteText } = useIntl();
 
@@ -27,7 +29,7 @@ export function GNumberBarChartTile({
       title={text.title}
       description={text.description}
       timeframeOptions={timeframeOptions}
-      timeframeInitialValue="5weeks"
+      timeframeInitialValue={timeframeInitialValue}
       metadata={{
         date: last_value.date_of_insertion_unix,
         source: text.bronnen,
