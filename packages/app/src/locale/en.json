@@ -289,8 +289,8 @@
     "toelichting_pagina": "A person who carries coronavirus can infect other people within a certain time frame. How long someone is infectious for differs from one person to another. The number of infectious people is estimated using data from various sources. It is not possible to know exactly how many people are infectious, but we can indicate whether there are dozens, hundreds, thousands or even more.",
     "barscale_titel": "Average number of infectious people per 100,000 inhabitants.",
     "barscale_screenreader_text": "{{value}} infectious people",
-    "cijfer_titel": "Estimated number of infectious people in the Netherlands:",
-    "cijfer_toelichting": "A calculation of how many people with COVID-19 can transmit the virus. This number is calculated by the RIVM.",
+    "cijfer_titel": "Number of infectious people in the Netherlands:",
+    "cijfer_toelichting": "A calculation of how many people with COVID-19 can transmit the virus. This number is always a week or to old because more recent calculations are not accurate enough.",
     "linechart_titel": "Number of infectious people over time (per 100,000 inhabitants)",
     "titel_sidebar": "Infectious people",
     "metadata": {
