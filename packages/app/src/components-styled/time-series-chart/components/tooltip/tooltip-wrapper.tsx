@@ -1,6 +1,7 @@
 import css from '@styled-system/css';
 import { ReactNode, useRef } from 'react';
 import styled from 'styled-components';
+import { isDefined } from 'ts-is-present';
 import useResizeObserver from 'use-resize-observer';
 import { Heading } from '~/components-styled/typography';
 import { useBoundingBox } from '~/utils/use-bounding-box';
