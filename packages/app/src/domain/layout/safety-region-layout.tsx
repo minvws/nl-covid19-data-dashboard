@@ -1,5 +1,4 @@
 import { Regionaal } from '@corona-dashboard/common';
-import css from '@styled-system/css';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import ElderlyIcon from '~/assets/elderly.svg';
