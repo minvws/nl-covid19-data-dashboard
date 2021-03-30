@@ -81,7 +81,12 @@ export const Axes = memo(function Axes({
     [startUnix, endUnix, formatDateFromSeconds]
   );
 
-  const hasYearLabel = formatXAxis(startUnix).length > 6;
+  /**
+   * Long labels (like the ones including a year, are too long to be positioned
+   * centered on the x-axis tick. Usually a short date has a 2 digit number plus
+   * a space plus a three character month, which makes 6.
+   */
+  const isLongLabel = formatXAxis(startUnix).length > 6;
 
   return (
     <g css={css({ pointerEvents: 'none' })}>
@@ -124,11 +129,11 @@ export const Axes = memo(function Axes({
            */
           textAnchor:
             x === startUnix
-              ? hasYearLabel
+              ? isLongLabel
                 ? 'start'
                 : 'middle'
               : x === endUnix
-              ? hasYearLabel
+              ? isLongLabel
                 ? 'end'
                 : 'middle'
               : 'middle',
