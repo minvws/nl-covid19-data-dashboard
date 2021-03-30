@@ -8,10 +8,10 @@ import styled from 'styled-components';
 import { HoverPoint } from '~/components-styled/area-chart/components/marker';
 import { TimestampedTrendValue } from '~/components-styled/area-chart/logic';
 import { Spacer } from '~/components-styled/base';
-import { Heading, Text } from '~/components-styled/typography';
-import { AllLanguages } from '~/locale';
-import { useIntl } from '~/intl';
+import { Heading } from '~/components-styled/typography';
 import { VisuallyHidden } from '~/components-styled/visually-hidden';
+import { useIntl } from '~/intl';
+import { AllLanguages } from '~/locale';
 
 export type TooltipValue = (
   | NlVaccineDeliveryValue
