@@ -276,8 +276,8 @@
   },
   "g_number": {
     "bar_chart": {
-      "title": "Trend over tijd",
-      "description": "Deze grafiek geeft de trend in de besmiettingsgevallen weer. Zolang het getal positief is, neemt het aantal besmettingen per dag toe. Zodra het getal negatief is, daalt het aantal besmettingen",
+      "title": "Ontwikkeling aantal positieve tests (Groeigetal) ",
+      "description": "Het Goreigetal (of G-getal) geeft in procenten weer of in de afgelopen 7 dagen meer of minder mensen positief sijn getest op corona dan in de 7 dagen ervoor. Big een positief Groeigetal is de trend dat het aantal positieve tests toeneemt. Bij een negatief Groeigetal is de trend dat het aantal positieve tests afneemt.",
       "negative_descriptor": "gedaald",
       "positive_descriptor": "nam toe",
       "bronnen": {
@@ -1243,19 +1243,6 @@
     },
     "line_chart_legend_trend_label": "Aantal positief geteste bewoners",
     "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
-  },
-  "veiligheidsregio_g_number": {
-    "bar_chart": {
-      "title": "Trend over tijd",
-      "description": "Deze grafiek geeft de trend in de besmiettingsgevallen weer. Zolang het getal positief is, neemt het aantal besmettingen per dag toe. Zodra het getal negatief is, daalt het aantal besmettingen",
-      "negative_descriptor": "gedaald",
-      "positive_descriptor": "nam toe",
-      "bronnen": {
-        "download": "",
-        "href": "",
-        "text": ""
-      }
-    }
   },
   "data_warning_text": "",
   "veelgestelde_vragen_metadata": {

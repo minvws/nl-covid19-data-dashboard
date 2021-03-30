@@ -13,7 +13,6 @@ export type SeriesConfig<T extends TimestampedValue> = BarSeriesDefinition<T>[];
 export type BarSeriesDefinition<T extends TimestampedValue> = {
   type: 'bar';
   metricProperty: keyof T;
-  label: string;
   color: string;
   secondaryColor?: string;
 };

@@ -69,7 +69,6 @@ export function GNumberBarChartTile({
               metricProperty: 'g_number',
               color: colors.data.primary,
               secondaryColor: colors.red,
-              label: 'G Number',
             },
           ]}
           formatTooltip={({ value }) => {
