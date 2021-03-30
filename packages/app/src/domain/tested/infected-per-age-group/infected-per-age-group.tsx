@@ -51,6 +51,7 @@ export function InfectedPerAgeGroup({
         values={values}
         timeframe={timeframe}
         seriesConfig={ageGroupChartConfig}
+        height={300}
         disableLegend
         formatTooltip={(data) => (
           <div css={css({ columns: tooltipColumns })}>

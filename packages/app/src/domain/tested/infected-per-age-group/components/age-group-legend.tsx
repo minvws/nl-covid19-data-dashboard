@@ -1,5 +1,6 @@
 import { NlTestedPerAgeGroupValue } from '@corona-dashboard/common';
 import css, { SystemStyleObject } from '@styled-system/css';
+import { grayscale } from 'polished';
 import styled from 'styled-components';
 import { LineSeriesDefinition } from '~/components-styled/time-series-chart/logic';
 import { Text } from '~/components-styled/typography';
@@ -58,10 +59,12 @@ export function AgeGroupLegend({
               </Item>
             );
           })}
+          <Item>
+            <ResetButton onClick={onReset} isVisible={hasSelection}>
+              {text.reset_button_label}
+            </ResetButton>
+          </Item>
         </List>
-        <ResetButton onClick={onReset} isVisible={hasSelection}>
-          {text.reset_button_label}
-        </ResetButton>
       </Legend>
       <Text fontSize={1}>{text.legend_help_text}</Text>
     </>
@@ -80,6 +83,7 @@ const List = styled.ul(
     listStyle: 'none',
     px: 0,
     m: 0,
+    mt: 2,
   })
 );
 
@@ -104,7 +108,7 @@ const ItemButton = styled.button<{
 }>(({ isActive, color }) =>
   css({
     appearance: 'none',
-    background: 'tileGray',
+    backgroundColor: 'tileGray',
     cursor: 'pointer',
     pr: 10,
     pl: 30,
@@ -148,14 +152,16 @@ const ItemButton = styled.button<{
 
 const ResetButton = styled.button<{ isVisible: boolean }>(({ isVisible }) =>
   css({
-    backgroundColor: 'blue',
-    color: 'white',
-    p: 20,
+    backgroundColor: 'transparent',
+    color: 'blue',
     py: '6px',
     border: 'none',
     fontFamily: 'inherit',
-    ml: 40,
     visibility: isVisible ? 'visible' : 'hidden',
+    textDecoration: 'underline',
+    '&:focus': {
+      outline: '2px dotted black',
+    },
   })
 );
 
