@@ -58,7 +58,6 @@ export function BarTrend({
            * hover state if we choose to implement that.
            */
           <rect
-            id={`bar-${index}`}
             key={index}
             /**
              * Position the bar centered on the point
