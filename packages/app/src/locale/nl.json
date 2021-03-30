@@ -684,6 +684,7 @@
     "absolute_date_template": "op {{date}}",
     "inwoners": "inwoners",
     "miljoen": "miljoen",
+    "rond": "rond",
     "signaalwaarde": "Signaalwaarde",
     "totaal": "Totaal"
   },
@@ -2755,7 +2756,25 @@
         "toelichting": "Dit is het risiconiveau dat nu geldt in deze regio. Het risiconiveau wordt elke twee weken bepaald op basis van het aantal ziekenhuisopnames en het aantal positieve testen van dat moment."
       }
     },
-    "escalation_level_last_determined": "Dit risiconiveau is bepaald op {{last_determined}}, op basis van de cijfers van {{based_from}} t/m {{based_to}}. Rond {{next_determined}} wordt het risiconiveau opnieuw bepaald."
+    "momenteel": {
+      "description": "Dit is het risiconiveau dat nu geldt in deze regio. Het risiconiveau wordt elke twee weken bepaald op basis van het aantal ziekenhuisopnames en het aantal positieve testen van dat moment.",
+      "description_from_to": "Op {{last_determined}} is vastgesteld risiconiveau {{risk_level}}. De volgende ronde is op {{next_determined}}",
+      "last_determined": "Laatste inschaling:",
+      "established_with": {
+        "title": "Risiconiveau vastgesteld met de cijfers van:",
+        "description": "{{based_from}} t/m {{based_to}}"
+      },
+      "positive_tests": {
+        "title": "Positieve testen",
+        "description": "{{amount}} per 100.00 inwoners per week"
+      },
+      "hospital_admissions": {
+        "title": "Ziekenhuisopnames (incl. IC)",
+        "description": "{{amount}} per 1 miljoen inwoners per week"
+      },
+      "next_determined": "Volgende inschaling:",
+      "link_text": "Bekijk de maatregelen die gelden in deze veiligheidsregio."
+    }
   },
   "gemeente_sterfte": {
     "titel_sidebar": "Sterfte",
