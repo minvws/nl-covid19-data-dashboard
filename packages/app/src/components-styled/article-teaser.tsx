@@ -20,7 +20,6 @@ type ArticleTeaserProps = {
   summary: Block;
   cover: ImageBlock;
   coverSizes: number[][];
-  category: string;
 };
 
 export function ArticleTeaser(props: ArticleTeaserProps) {
