@@ -1,9 +1,8 @@
 import { NlTestedPerAgeGroupValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useMemo } from 'react';
-import styled from 'styled-components';
 import { TimeSeriesChart } from '~/components-styled/time-series-chart';
-import { TooltipChildren } from '~/components-styled/time-series-chart/components';
+import { TooltipSeriesList } from '~/components-styled/time-series-chart/components/tooltip/tooltip-series-list';
 import { LineSeriesDefinition } from '~/components-styled/time-series-chart/logic';
 import { useIntl } from '~/intl';
 import { useList } from '~/utils/use-list';
@@ -151,21 +150,19 @@ export function InfectedPerAgeGroup({ timeframe }: InfectedPerAgeGroup) {
 
   /* Conditionally wrap tooltip over two columns due to amount of items */
   const tooltipColumns = list.length === 0 || list.length > 4 ? 2 : 1;
-  const InfectedPerAgeGroupWrapper = styled.div(
-    css({
-      [`${TooltipChildren}`]: {
-        columns: tooltipColumns,
-      },
-    })
-  );
 
   return (
-    <InfectedPerAgeGroupWrapper>
+    <>
       <TimeSeriesChart
         values={values}
         timeframe={timeframe}
         seriesConfig={ageGroupChartConfig}
         disableLegend
+        formatTooltip={(data) => (
+          <div css={css({ columns: tooltipColumns })}>
+            <TooltipSeriesList data={data} />
+          </div>
+        )}
       />
       <AgeGroupLegend
         seriesConfig={ageGroupLegendConfig}
@@ -173,6 +170,6 @@ export function InfectedPerAgeGroup({ timeframe }: InfectedPerAgeGroup) {
         onToggleAgeGroup={toggle}
         onReset={clear}
       />
-    </InfectedPerAgeGroupWrapper>
+    </>
   );
 }
