@@ -3,10 +3,9 @@ import {
   NlVaccineAdministeredValue,
   NlVaccineDeliveryEstimateValue,
   NlVaccineDeliveryValue,
-  NlVaccineCoverageValue,
 } from '@corona-dashboard/common';
 import { css } from '@styled-system/css';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import VaccinatiesIcon from '~/assets/vaccinaties.svg';
 import { AreaChart } from '~/components-styled/area-chart';
 import { ArticleStrip } from '~/components-styled/article-strip';
@@ -104,8 +103,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     title: text.metadata.title,
     description: text.metadata.description,
   };
-
-  const mockDataRef = useRef(createNlVaccineCoverageValueMock());
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -258,79 +255,86 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTile
-            title={text.grafiek_gevaccineerde_mensen.titel}
-            description={text.grafiek_gevaccineerde_mensen.omschrijving}
-            metadata={{
-              date: mockDataRef.current.last_value.date_of_report_unix,
-              source: text.bronnen.rivm,
-            }}
-          >
-            <Box spacing={3}>
-              <TimeSeriesChart
-                tooltipTitle={text.grafiek_gevaccineerde_mensen.titel}
-                values={mockDataRef.current.values}
-                formatTickValue={(x) => `${x / 1_000_000}`}
-                dataOptions={{
-                  valueAnnotation: siteText.waarde_annotaties.x_miljoen,
-                  timespanAnnotations: [
+          {/**
+           * @TODO This check can be removed when vaccine_coverage is not
+           * optional anymore.
+           */}
+          {data.vaccine_coverage && (
+            <ChartTile
+              title={text.grafiek_gevaccineerde_mensen.titel}
+              description={text.grafiek_gevaccineerde_mensen.omschrijving}
+              metadata={{
+                date: data.vaccine_coverage.last_value.date_of_report_unix,
+                source: text.bronnen.rivm,
+              }}
+            >
+              <Box spacing={3}>
+                <TimeSeriesChart
+                  tooltipTitle={text.grafiek_gevaccineerde_mensen.titel}
+                  values={data.vaccine_coverage.values}
+                  formatTickValue={(x) => `${x / 1_000_000}`}
+                  dataOptions={{
+                    valueAnnotation: siteText.waarde_annotaties.x_miljoen,
+                    timespanAnnotations: [
+                      {
+                        start:
+                          data.vaccine_coverage.last_value.date_unix -
+                          DAY_IN_SECONDS * 5,
+                        end: data.vaccine_coverage.last_value.date_unix,
+                        label:
+                          text.grafiek_gevaccineerde_mensen.label_annotatie,
+                        shortLabel:
+                          text.grafiek_gevaccineerde_mensen
+                            .tooltip_label_annotatie,
+                      },
+                    ],
+                  }}
+                  seriesConfig={[
                     {
-                      start:
-                        mockDataRef.current.last_value.date_unix -
-                        DAY_IN_SECONDS * 5,
-                      end: mockDataRef.current.last_value.date_unix,
-                      label: text.grafiek_gevaccineerde_mensen.label_annotatie,
+                      metricProperty: 'partially_or_fully_vaccinated',
+                      type: 'line',
+                      label:
+                        text.grafiek_gevaccineerde_mensen.label_geprikte_mensen,
                       shortLabel:
                         text.grafiek_gevaccineerde_mensen
-                          .tooltip_label_annotatie,
+                          .tooltip_label_geprikte_mensen,
+                      color: 'black',
+                      strokeWidth: 3,
                     },
-                  ],
-                }}
-                seriesConfig={[
-                  {
-                    metricProperty: 'partially_or_fully_vaccinated',
-                    type: 'line',
-                    label:
-                      text.grafiek_gevaccineerde_mensen.label_geprikte_mensen,
-                    shortLabel:
-                      text.grafiek_gevaccineerde_mensen
-                        .tooltip_label_geprikte_mensen,
-                    color: 'black',
-                    strokeWidth: 3,
-                  },
-                  {
-                    metricProperty: 'partially_vaccinated',
-                    type: 'stacked-area',
-                    label:
-                      text.grafiek_gevaccineerde_mensen
-                        .label_gedeeltelijk_gevaccineerd,
-                    shortLabel:
-                      text.grafiek_gevaccineerde_mensen
-                        .tooltip_label_gedeeltelijk_gevaccineerd,
-                    color: colors.data.multiseries.cyan,
-                    fillOpacity: 1,
-                  },
-                  {
-                    metricProperty: 'fully_vaccinated',
-                    type: 'stacked-area',
-                    label:
-                      text.grafiek_gevaccineerde_mensen
-                        .label_volledig_gevaccineerd,
-                    shortLabel:
-                      text.grafiek_gevaccineerde_mensen
-                        .tooltip_label_volledig_gevaccineerd,
-                    color: colors.data.multiseries.cyan_dark,
-                    fillOpacity: 1,
-                  },
-                ]}
-              />
-              {text.grafiek_gevaccineerde_mensen.extra_bericht && (
-                <Markdown
-                  content={text.grafiek_gevaccineerde_mensen.extra_bericht}
+                    {
+                      metricProperty: 'partially_vaccinated',
+                      type: 'stacked-area',
+                      label:
+                        text.grafiek_gevaccineerde_mensen
+                          .label_gedeeltelijk_gevaccineerd,
+                      shortLabel:
+                        text.grafiek_gevaccineerde_mensen
+                          .tooltip_label_gedeeltelijk_gevaccineerd,
+                      color: colors.data.multiseries.cyan,
+                      fillOpacity: 1,
+                    },
+                    {
+                      metricProperty: 'fully_vaccinated',
+                      type: 'stacked-area',
+                      label:
+                        text.grafiek_gevaccineerde_mensen
+                          .label_volledig_gevaccineerd,
+                      shortLabel:
+                        text.grafiek_gevaccineerde_mensen
+                          .tooltip_label_volledig_gevaccineerd,
+                      color: colors.data.multiseries.cyan_dark,
+                      fillOpacity: 1,
+                    },
+                  ]}
                 />
-              )}
-            </Box>
-          </ChartTile>
+                {text.grafiek_gevaccineerde_mensen.extra_bericht && (
+                  <Markdown
+                    content={text.grafiek_gevaccineerde_mensen.extra_bericht}
+                  />
+                )}
+              </Box>
+            </ChartTile>
+          )}
 
           <ChartTile
             title={text.grafiek.titel}
@@ -744,66 +748,3 @@ function HatchedSquare() {
 //   margin-right: 0.5em;
 //   flex-shrink: 0;
 // `;
-
-/**
- * @TODO Remove mock data generator
- */
-function createNlVaccineCoverageValueMock() {
-  const date = new Date('3 jan 2021');
-
-  const initial = 10000;
-  let multiplier = 0.5;
-
-  const mockValues: NlVaccineCoverageValue[] = [
-    {
-      date_of_insertion_unix: date.getTime() / 1000,
-      date_of_report_unix: date.getTime() / 1000,
-      date_unix: date.getTime() / 1000,
-      fully_vaccinated: initial,
-      fully_vaccinated_percentage: 0,
-      partially_or_fully_vaccinated: initial + initial,
-      partially_vaccinated: initial,
-      partially_vaccinated_percentage: 0,
-    },
-  ];
-
-  while (date.getTime() < Date.now()) {
-    const lastValue = mockValues[mockValues.length - 1];
-
-    const dateSeconds = date.getTime() / 1000;
-
-    multiplier = multiplier * 0.95;
-
-    const fully_vaccinated = Math.floor(
-      lastValue.fully_vaccinated * (1 + multiplier)
-    );
-    const partially_vaccinated = Math.floor(
-      lastValue.partially_vaccinated * (1 + multiplier)
-    );
-    const partially_or_fully_vaccinated =
-      fully_vaccinated + partially_vaccinated;
-
-    const fully_vaccinated_percentage =
-      fully_vaccinated / partially_or_fully_vaccinated;
-    const partially_vaccinated_percentage =
-      partially_vaccinated / partially_or_fully_vaccinated;
-
-    mockValues.push({
-      date_of_insertion_unix: dateSeconds,
-      date_of_report_unix: dateSeconds,
-      date_unix: dateSeconds,
-      fully_vaccinated,
-      fully_vaccinated_percentage,
-      partially_or_fully_vaccinated,
-      partially_vaccinated,
-      partially_vaccinated_percentage,
-    });
-
-    date.setDate(date.getDate() + 1);
-  }
-
-  return {
-    values: mockValues,
-    last_value: mockValues[mockValues.length - 1],
-  };
-}
