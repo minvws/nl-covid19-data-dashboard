@@ -2413,7 +2413,9 @@
         "link": {
           "text": "View all articles",
           "href": "/artikelen"
-        }
+        },
+        "read_weekly_message": "Read the week message",
+        "weekly_category": "Weekly"
       },
       "positief_getest_kaart": {
         "titel": "Confirmed cases in the Netherlands"
