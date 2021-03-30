@@ -34,13 +34,9 @@ export function GNumberBarChartTile({
   data: __data,
   timeframeOptions = ['5weeks', 'week'],
 }: GNumberBarChartTileProps) {
-  const { formatPercentage } = useIntl();
+  const { formatPercentage, siteText } = useIntl();
 
-  // const text = siteText.vaccinaties.grafiek_leveringen;
-  const text = {
-    title: 'Trend over time',
-    description: 'Chart Description',
-  };
+  const text = siteText.g_number.bar_chart;
 
   // Dummy Data
   const values: NlGNumberValue[] = __data?.values ?? generateDummyData();
@@ -55,7 +51,7 @@ export function GNumberBarChartTile({
       timeframeInitialValue="5weeks"
       metadata={{
         date: last_value.date_of_insertion_unix,
-        // source: 'source',
+        source: text.bronnen,
       }}
     >
       {(timeframe) => (
@@ -82,7 +78,9 @@ export function GNumberBarChartTile({
                 <InlineText fontWeight="bold">
                   {`${formatPercentage(value.g_number)}% `}
                 </InlineText>
-                getaald
+                {value.g_number > 0
+                  ? text.positive_descriptor
+                  : text.negative_descriptor}
               </>
             );
           }}

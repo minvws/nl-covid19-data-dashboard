@@ -278,7 +278,8 @@
     "bar_chart": {
       "title": "Trend over tijd",
       "description": "Deze grafiek geeft de trend in de besmiettingsgevallen weer. Zolang het getal positief is, neemt het aantal besmettingen per dag toe. Zodra het getal negatief is, daalt het aantal besmettingen",
-      "unit": "gedaald",
+      "negative_descriptor": "gedaald",
+      "positive_descriptor": "nam toe",
       "bronnen": {
         "download": "",
         "href": "",
@@ -1247,7 +1248,8 @@
     "bar_chart": {
       "title": "Trend over tijd",
       "description": "Deze grafiek geeft de trend in de besmiettingsgevallen weer. Zolang het getal positief is, neemt het aantal besmettingen per dag toe. Zodra het getal negatief is, daalt het aantal besmettingen",
-      "unit": "gedaald",
+      "negative_descriptor": "gedaald",
+      "positive_descriptor": "nam toe",
       "bronnen": {
         "download": "",
         "href": "",
