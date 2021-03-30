@@ -482,7 +482,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 source: text.bronnen.stock,
               }}
             >
-              <Box as="ul" p={0} width="50%">
+              <Box as="ul" p={0} width="60%">
                 <VaccineStockRow
                   color={colors.data.vaccines.bio_n_tech_pfizer}
                   productName="BioNTech/Pfizer"
@@ -651,10 +651,8 @@ function VaccineStockRow(props: VaccineStockRowProps) {
   const { color, productName, value } = props;
   return (
     <Box as="li" display="flex" flexDirection="row" alignItems="stretch">
-      <Box>
+      <Box flex={1} display="flex" alignItems="center">
         <ColorIndicator color={color} />
-      </Box>
-      <Box flex={1}>
         <InlineText color={color} fontWeight="bold">
           {productName}:
         </InlineText>
