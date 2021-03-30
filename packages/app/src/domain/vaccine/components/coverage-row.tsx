@@ -38,9 +38,9 @@ function MobileCoverageRow(props: CoverageRowProps) {
         </Box>
         <Box flex="0.2">
           {isPresent(children[2]) ? (
-            <ChevronButton>
+            <Button>
               <Chevron isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
-            </ChevronButton>
+            </Button>
           ) : null}
         </Box>
       </Box>
@@ -86,7 +86,7 @@ const Row = styled(Box)<{ hideBorder: boolean; borderColor?: string }>(
   }
 );
 
-const ChevronButton = styled.button(
+const Button = styled.button(
   css({
     border: 'none',
     bg: 'transparent',

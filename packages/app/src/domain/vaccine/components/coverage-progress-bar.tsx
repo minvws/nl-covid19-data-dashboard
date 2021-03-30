@@ -8,43 +8,43 @@ import { useBreakpoints } from '~/utils/useBreakpoints';
 import { useDynamicScale } from '~/utils/useDynamicScale';
 
 export function CoverageProgressBar(props: {
-  partially: number;
-  fully: number;
+  partiallyVaccinated: number;
+  fullyVaccinated: number;
   fullyPercentage: number;
   partiallyPercentage: number;
   total: number;
-  showsTotals: boolean;
+  showTotals: boolean;
 }) {
   const {
-    partially,
-    fully,
+    partiallyVaccinated,
+    fullyVaccinated,
     fullyPercentage,
     partiallyPercentage,
     total,
-    showsTotals,
+    showTotals,
   } = props;
   const { siteText, formatPercentage, formatNumber } = useIntl();
   const {
     partially: partialLabel,
     fully: fullyLabel,
   } = siteText.vaccinaties.vaccination_coverage;
-  const maxValue = Math.max(partially, fully);
+  const maxValue = Math.max(partiallyVaccinated, fullyVaccinated);
   const scale = useDynamicScale(maxValue, 0, total);
   const breakpoints = useBreakpoints(true);
-  const rectHeight = breakpoints.md ? (showsTotals ? 26 : 16) : 11;
+  const barHeight = breakpoints.md ? (showTotals ? 26 : 16) : 11;
 
   // sort shortest bar on top
   const barData = useMemo(() => {
     return [
       {
         percentage: fullyPercentage,
-        value: fully,
+        value: fullyVaccinated,
         label: fullyLabel,
         color: '#005083',
       },
       {
         percentage: partiallyPercentage,
-        value: partially,
+        value: partiallyVaccinated,
         label: partialLabel,
         color: '#239BE6',
       },
@@ -53,16 +53,16 @@ export function CoverageProgressBar(props: {
       .filter((x) => x.value > 0);
   }, [
     fullyPercentage,
-    fully,
+    fullyVaccinated,
     fullyLabel,
     partiallyPercentage,
-    partially,
+    partiallyVaccinated,
     partialLabel,
   ]);
 
   return (
     <Box width="100%" mt={{ _: 4, md: 0 }}>
-      <Box height={rectHeight + 8} width={{ md: '90%' }}>
+      <Box height={barHeight + 8} width={{ md: '90%' }}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           css={css({
@@ -75,7 +75,7 @@ export function CoverageProgressBar(props: {
           <g>
             <rect
               x="0"
-              y={rectHeight - 3}
+              y={barHeight - 3}
               width="100%"
               height="3"
               fill="#C1C1C1"
@@ -86,7 +86,7 @@ export function CoverageProgressBar(props: {
                 x={0}
                 y={0}
                 width={`${data.percentage}%`}
-                height={rectHeight}
+                height={barHeight}
                 fill={data.color}
               />
             ))}
@@ -94,8 +94,8 @@ export function CoverageProgressBar(props: {
               <rect
                 x={`${barData[barData.length - 1].percentage}%`}
                 y={0}
-                width="3"
-                height={rectHeight}
+                width={3}
+                height={barHeight}
                 fill="white"
               />
             )}
@@ -103,9 +103,9 @@ export function CoverageProgressBar(props: {
           <g>
             <rect
               x={`${scale(maxValue)}%`}
-              y={rectHeight - (rectHeight + 7)}
-              width="7"
-              height={rectHeight + 7}
+              y={barHeight - (barHeight + 7)}
+              width={7}
+              height={barHeight + 7}
               fill="black"
             />
           </g>
