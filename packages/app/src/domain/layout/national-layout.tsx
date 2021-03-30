@@ -24,6 +24,7 @@ import { AppContent } from '~/components-styled/layout/app-content';
 import { SidebarMetric } from '~/components-styled/sidebar-metric';
 import { useIntl } from '~/intl';
 import { useBreakpoints } from '~/utils/useBreakpoints';
+import css from '@styled-system/css';
 
 interface NationalLayoutProps {
   lastGenerated: string;
@@ -100,6 +101,7 @@ export function NationalLayout(props: NationalLayoutProps) {
 
               <CategoryMenu
                 title={siteText.nationaal_layout.headings.vaccinaties}
+                isSmallPaddingTop
               >
                 <MetricMenuItemLink
                   href="/landelijk/vaccinaties"
