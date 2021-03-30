@@ -10,16 +10,6 @@ export const ARTICLE_FIELDS = [
       }),
   },
   {
-    title: 'Categorie',
-    name: 'category',
-    type: 'localeString',
-    validation: (Rule: any) =>
-      Rule.fields({
-        nl: (fieldRule: any) => fieldRule.reset().required(),
-        en: (fieldRule: any) => fieldRule.reset().required(),
-      }),
-  },
-  {
     title: 'Slug',
     name: 'slug',
     type: 'slug',

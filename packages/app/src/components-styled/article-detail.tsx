@@ -28,14 +28,6 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
         </LinkWithIcon>
 
         <Box spacing={2}>
-          <InlineText
-            textTransform={'uppercase'}
-            fontSize="0.75rem"
-            fontWeight="bold"
-            color="annotation"
-          >
-            {article.category}
-          </InlineText>
           <Heading level={1} mb={0}>
             {article.title}
           </Heading>

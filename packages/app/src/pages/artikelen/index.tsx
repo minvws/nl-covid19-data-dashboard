@@ -24,7 +24,6 @@ export const getStaticProps = createGetStaticProps(
         "title":title.${locale},
         slug,
         "summary":summary.${locale},
-        "category":category.${locale},
         "cover": {
           ...cover,
           "asset": cover.asset->

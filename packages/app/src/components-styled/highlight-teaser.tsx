@@ -16,7 +16,7 @@ export interface HighlightTeaserProps {
   cover: ImageBlock;
   label?: string;
   href: string;
-  category: string;
+  category?: string;
   publicationDate?: string;
   isWeekly?: boolean;
   variant?: HighlightTeaserVariant;

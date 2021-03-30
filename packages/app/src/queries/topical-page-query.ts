@@ -11,7 +11,6 @@ export function getTopicalPageQuery(_context: GetStaticPropsContext) {
       "title":title.${locale},
       slug,
       "summary":summary.${locale},
-      "category":category.${locale},
       "cover": {
         ...cover,
         "asset": cover.asset->

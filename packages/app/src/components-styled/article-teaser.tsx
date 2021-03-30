@@ -24,7 +24,7 @@ type ArticleTeaserProps = {
 };
 
 export function ArticleTeaser(props: ArticleTeaserProps) {
-  const { title, slug, summary, cover, coverSizes, category } = props;
+  const { title, slug, summary, cover, coverSizes } = props;
   const { siteText } = useIntl();
 
   return (
@@ -34,14 +34,6 @@ export function ArticleTeaser(props: ArticleTeaserProps) {
           <BackgroundImage image={cover} height={200} sizes={coverSizes} />
         </ZoomContainer>
         <Box pt={3}>
-          <InlineText
-            textTransform="uppercase"
-            fontSize="0.75rem"
-            fontWeight="bold"
-            color="annotation"
-          >
-            {category}
-          </InlineText>
           <Heading
             level={3}
             mb={{ _: 1, sm: 3 }}
