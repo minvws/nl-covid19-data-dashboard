@@ -2426,7 +2426,7 @@
       "toegediende_vaccins": {
         "title": "Aantal gezette prikken",
         "sub_title": "",
-        "administered_tests": "Tot nu toe zijn er {{administeredVaccines}} prikken gezet. Dit cijfer omvat zowel eerste als tweede prikken.",
+        "administered_tests": "Dit cijfer omvat zowel eerste als tweede prikken. De vaccinatiegraad is ongeveer {{vaccine_coverage}}.",
         "supply": ""
       }
     },
