@@ -263,8 +263,8 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
           </ChartTileWithTimeframe>
 
           <ChartTileWithTimeframe
-            title={siteText.infected_per_agroup.title}
-            description={siteText.infected_per_agroup.description}
+            title={siteText.infected_per_age_group.title}
+            description={siteText.infected_per_age_group.description}
             metadata={{
               source: text.bronnen.rivm,
             }}

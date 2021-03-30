@@ -2841,7 +2841,7 @@
       "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     }
   },
-  "infected_per_agroup": {
+  "infected_per_age_group": {
     "title": "Verdeling naar leeftijd",
     "description": "Verdeling naar leeftijd ...",
     "legend": {

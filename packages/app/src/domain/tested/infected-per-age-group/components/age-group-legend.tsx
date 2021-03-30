@@ -19,10 +19,9 @@ export function AgeGroupLegend({
   onReset,
 }: AgeGroupLegendProps) {
   const { siteText } = useIntl();
-  const text = siteText.infected_per_agroup;
+  const text = siteText.infected_per_age_group;
 
-  const hasNoneSelected = ageGroupSelection.length === 0;
-  const hasAllSelected = ageGroupSelection.length === 0;
+  const hasSelection = ageGroupSelection.length !== 0;
 
   function toggleAgeGroup(metricProperty: string) {
     onToggleAgeGroup(metricProperty);
@@ -48,7 +47,7 @@ export function AgeGroupLegend({
               <Item key={item.label}>
                 <ItemButton
                   onClick={() => toggleAgeGroup(item.metricProperty)}
-                  isActive={!hasAllSelected && isSelected}
+                  isActive={hasSelection && isSelected}
                   color={item.color}
                   data-metric-property={item.metricProperty}
                   data-text={item.label}
@@ -60,12 +59,7 @@ export function AgeGroupLegend({
             );
           })}
         </List>
-        <ResetButton
-          onClick={onReset}
-          css={css({
-            visibility: hasNoneSelected ? 'hidden' : 'visible',
-          })}
-        >
+        <ResetButton onClick={onReset} isVisible={hasSelection}>
           {text.reset_button_label}
         </ResetButton>
       </Legend>
@@ -152,18 +146,17 @@ const ItemButton = styled.button<{
   })
 );
 
-const ResetButton = styled.button<{ fontWeight?: SystemStyleObject }>(
-  ({ fontWeight = 'normal' }) =>
-    css({
-      backgroundColor: 'blue',
-      color: 'white',
-      p: 20,
-      py: '6px',
-      border: 'none',
-      fontWeight,
-      fontFamily: 'inherit',
-      ml: 40,
-    })
+const ResetButton = styled.button<{ isVisible: boolean }>(({ isVisible }) =>
+  css({
+    backgroundColor: 'blue',
+    color: 'white',
+    p: 20,
+    py: '6px',
+    border: 'none',
+    fontFamily: 'inherit',
+    ml: 40,
+    visibility: isVisible ? 'visible' : 'hidden',
+  })
 );
 
 const Line = styled.div<{ color: string; lineStyle: 'dashed' | 'solid' }>(

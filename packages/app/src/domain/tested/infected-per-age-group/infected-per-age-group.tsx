@@ -6,9 +6,9 @@ import { TimeSeriesChart } from '~/components-styled/time-series-chart';
 import { TooltipChildren } from '~/components-styled/time-series-chart/components';
 import { LineSeriesDefinition } from '~/components-styled/time-series-chart/logic';
 import { useIntl } from '~/intl';
+import { useList } from '~/utils/use-list';
 import { AgeGroupLegend } from './components/age-group-legend';
 import { SERIES_CONFIG } from './series-config';
-import { useAgeGroupSelection } from './logic/use-age-group-selection';
 
 interface InfectedPerAgeGroup {
   values?: NlTestedPerAgeGroupValue[];
@@ -125,14 +125,10 @@ export function InfectedPerAgeGroup({ timeframe }: InfectedPerAgeGroup) {
   const values = mockData.reverse();
   // End mock data
 
-  const {
-    ageGroupSelection,
-    toggleAgeGroup,
-    resetAgeGroupSelection,
-  } = useAgeGroupSelection();
+  const { list, toggle, clear } = useList<string>();
 
   const { siteText } = useIntl();
-  const text = siteText.infected_per_agroup;
+  const text = siteText.infected_per_age_group;
 
   const ageGroupLegendConfig: LineSeriesDefinition<NlTestedPerAgeGroupValue>[] = useMemo(() => {
     return SERIES_CONFIG.map((baseAgeGroup) => {
@@ -149,15 +145,12 @@ export function InfectedPerAgeGroup({ timeframe }: InfectedPerAgeGroup) {
 
   const ageGroupChartConfig = useMemo(() => {
     return ageGroupLegendConfig.filter(
-      (item) =>
-        ageGroupSelection.includes(item.metricProperty) ||
-        ageGroupSelection.length === 0
+      (item) => list.includes(item.metricProperty) || list.length === 0
     );
-  }, [ageGroupLegendConfig, ageGroupSelection]);
+  }, [ageGroupLegendConfig, list]);
 
   /* Conditionally wrap tooltip over two columns due to amount of items */
-  const tooltipColumns =
-    ageGroupSelection.length === 0 || ageGroupSelection.length > 4 ? 2 : 1;
+  const tooltipColumns = list.length === 0 || list.length > 4 ? 2 : 1;
   const InfectedPerAgeGroupWrapper = styled.div(
     css({
       [`${TooltipChildren}`]: {
@@ -171,14 +164,14 @@ export function InfectedPerAgeGroup({ timeframe }: InfectedPerAgeGroup) {
       <TimeSeriesChart
         values={values}
         timeframe={timeframe}
-        seriesConfig={[...ageGroupChartConfig]}
+        seriesConfig={ageGroupChartConfig}
         disableLegend
       />
       <AgeGroupLegend
-        seriesConfig={[...ageGroupLegendConfig]}
-        ageGroupSelection={ageGroupSelection}
-        onToggleAgeGroup={toggleAgeGroup}
-        onReset={resetAgeGroupSelection}
+        seriesConfig={ageGroupLegendConfig}
+        ageGroupSelection={list}
+        onToggleAgeGroup={toggle}
+        onReset={clear}
       />
     </InfectedPerAgeGroupWrapper>
   );
