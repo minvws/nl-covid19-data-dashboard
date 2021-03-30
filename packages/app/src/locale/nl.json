@@ -2084,6 +2084,7 @@
     "title": "COVID-19-vaccinaties",
     "description": "Vaccineren is de belangrijkste stap naar een samenleving zonder coronaregels. Op 6 januari 2021 is Nederland begonnen met vaccineren. Uiteindelijk komt iedereen van 18 jaar of ouder aan de beurt. De cijfers op deze pagina laten zien hoeveel prikken zijn gezet en hoeveel vaccins er beschikbaar komen.",
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "bereidheid_datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt 3-wekelijks bijgewerkt.",
     "date_unix": "1613650547",
     "date_of_insertion_unix": "1613650547",
     "reference": {

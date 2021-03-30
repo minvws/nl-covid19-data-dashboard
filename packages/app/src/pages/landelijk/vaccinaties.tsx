@@ -373,7 +373,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             reference={text.bereidheid_section.reference}
             icon={scaledVaccineIcon}
             metadata={{
-              datumsText: text.datums,
+              datumsText: text.bereidheid_datums,
               dateOrRange:
                 data.vaccine_support.last_value.date_of_insertion_unix,
               dateOfInsertionUnix:
