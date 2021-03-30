@@ -14,7 +14,7 @@ interface GNumberBarChartTileProps {
 
 export function GNumberBarChartTile({
   data: __data,
-  timeframeOptions = ['5weeks', 'week'],
+  timeframeOptions = ['5weeks'],
   timeframeInitialValue = '5weeks',
 }: GNumberBarChartTileProps) {
   const { formatPercentage, siteText } = useIntl();
