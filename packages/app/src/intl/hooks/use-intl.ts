@@ -1,8 +1,9 @@
 import { isSameDay, isToday, isYesterday, subDays } from 'date-fns';
-import { createContext, useContext, useMemo } from 'react';
+import { useContext, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
-import { languages } from '~/locale';
+import { AllLanguages } from '~/locale';
 import { assert } from '~/utils/assert';
+import { IntlContext } from '..';
 
 // TypeScript is missing some types for `Intl.DateTimeFormat`.
 // https://github.com/microsoft/TypeScript/issues/35865
@@ -74,12 +75,9 @@ function parseDateDefinition(dateDefinition: DateDefinition) {
   throw new Error(`Unknown date input: ${JSON.stringify(dateDefinition)}`);
 }
 
-const IntlHelpersContext = createContext(createIntlHelperContext());
+export type IntlContextProps = ReturnType<typeof useIntlHelperContext>;
 
-function createIntlHelperContext() {
-  const locale = process.env.NEXT_PUBLIC_LOCALE;
-  const siteText = languages['nl'];
-
+export function useIntlHelperContext(locale: string, siteText: AllLanguages) {
   return useMemo(() => {
     // Number formatting
     const NumberFormat = new Intl.NumberFormat(locale);
@@ -292,8 +290,8 @@ function createIntlHelperContext() {
 }
 
 export function useIntl() {
-  const helpers = useContext(IntlHelpersContext);
+  const intlContext = useContext(IntlContext);
 
   // Return all localized helpers
-  return helpers;
+  return intlContext;
 }
