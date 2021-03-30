@@ -11,6 +11,7 @@ import { Spacer } from '~/components-styled/base';
 import { Heading, Text } from '~/components-styled/typography';
 import { AllLanguages } from '~/locale';
 import { useIntl } from '~/intl';
+import { VisuallyHidden } from '~/components-styled/visually-hidden';
 
 export type TooltipValue = (
   | NlVaccineDeliveryValue
@@ -45,9 +46,7 @@ export function FormatVaccinationsTooltip(
 
   return (
     <>
-      <Text as="span" fontWeight="bold">
-        {dateEndString}
-      </Text>
+      <VisuallyHidden>{dateEndString}</VisuallyHidden>
       <TooltipList>
         <TooltipListItem>
           <span>
