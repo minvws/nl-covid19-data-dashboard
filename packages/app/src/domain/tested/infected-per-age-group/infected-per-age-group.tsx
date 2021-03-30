@@ -10,120 +10,14 @@ import { AgeGroupLegend } from './components/age-group-legend';
 import { SERIES_CONFIG } from './series-config';
 
 interface InfectedPerAgeGroup {
-  values?: NlTestedPerAgeGroupValue[];
+  values: NlTestedPerAgeGroupValue[];
   timeframe: 'all' | '5weeks' | 'week';
 }
 
-export function InfectedPerAgeGroup({ timeframe }: InfectedPerAgeGroup) {
-  // @TODO remove mock data
-  // Start mock data
-  const mockData: NlTestedPerAgeGroupValue[] = [];
-
-  const currentDate = new Date();
-  currentDate.setHours(0, 0, 0, 0);
-
-  for (let i = 0; i < 5 * 7; ++i) {
-    const lastValue = mockData[mockData.length - 1];
-    mockData.push({
-      date_of_insertion_unix: 0,
-      date_unix: new Date(currentDate.getTime() - 7).getTime() / 1000,
-
-      infected_age_0_9_per_100k: Math.round(
-        Math.max(
-          0,
-          lastValue
-            ? lastValue.infected_age_0_9_per_100k + Math.random() * 50 - 25
-            : Math.random() * 200
-        )
-      ),
-      infected_age_10_19_per_100k: Math.round(
-        Math.max(
-          0,
-          lastValue
-            ? lastValue.infected_age_10_19_per_100k + Math.random() * 50 - 25
-            : Math.random() * 200
-        )
-      ),
-      infected_age_20_29_per_100k: Math.round(
-        Math.max(
-          0,
-          lastValue
-            ? lastValue.infected_age_20_29_per_100k + Math.random() * 50 - 25
-            : Math.random() * 200
-        )
-      ),
-      infected_age_30_39_per_100k: Math.round(
-        Math.max(
-          0,
-          lastValue
-            ? lastValue.infected_age_30_39_per_100k + Math.random() * 50 - 25
-            : Math.random() * 200
-        )
-      ),
-      infected_age_40_49_per_100k: Math.round(
-        Math.max(
-          0,
-          lastValue
-            ? lastValue.infected_age_40_49_per_100k + Math.random() * 50 - 25
-            : Math.random() * 200
-        )
-      ),
-      infected_age_50_59_per_100k: Math.round(
-        Math.max(
-          0,
-          lastValue
-            ? lastValue.infected_age_50_59_per_100k + Math.random() * 50 - 25
-            : Math.random() * 200
-        )
-      ),
-      infected_age_60_69_per_100k: Math.round(
-        Math.max(
-          0,
-          lastValue
-            ? lastValue.infected_age_60_69_per_100k + Math.random() * 50 - 25
-            : Math.random() * 200
-        )
-      ),
-      infected_age_70_79_per_100k: Math.round(
-        Math.max(
-          0,
-          lastValue
-            ? lastValue.infected_age_70_79_per_100k + Math.random() * 50 - 25
-            : Math.random() * 200
-        )
-      ),
-      infected_age_80_89_per_100k: Math.round(
-        Math.max(
-          0,
-          lastValue
-            ? lastValue.infected_age_80_89_per_100k + Math.random() * 50 - 25
-            : Math.random() * 200
-        )
-      ),
-      infected_age_90_plus_per_100k: Math.round(
-        Math.max(
-          0,
-          lastValue
-            ? lastValue.infected_age_90_plus_per_100k + Math.random() * 50 - 25
-            : Math.random() * 200
-        )
-      ),
-      infected_overall_per_100k: Math.round(
-        Math.max(
-          0,
-          lastValue
-            ? lastValue.infected_overall_per_100k + Math.random() * 50 - 25
-            : Math.random() * 200
-        )
-      ),
-    });
-
-    currentDate.setDate(currentDate.getDate() - 1);
-  }
-
-  const values = mockData.reverse();
-  // End mock data
-
+export function InfectedPerAgeGroup({
+  values,
+  timeframe,
+}: InfectedPerAgeGroup) {
   const { list, toggle, clear } = useList<string>();
 
   const { siteText } = useIntl();

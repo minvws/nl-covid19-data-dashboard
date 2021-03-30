@@ -271,8 +271,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
           >
             {(timeframe) => (
               <InfectedPerAgeGroup
-                // @TODO remove mock data
-                // values={data.tested_per_age_group.values}
+                values={data.tested_per_age_group.values}
                 timeframe={timeframe}
               />
             )}
