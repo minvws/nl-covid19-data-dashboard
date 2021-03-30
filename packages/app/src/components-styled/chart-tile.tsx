@@ -1,11 +1,11 @@
 import css from '@styled-system/css';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { TimeframeOption } from '~/utils/timeframe';
 import { Box } from './base';
 import { ChartTileContainer } from './chart-tile-container';
 import { ChartTimeControls } from './chart-time-controls';
 import { MetadataProps } from './metadata';
-import { Heading } from './typography';
+import { Heading, Text } from './typography';
 import { assert } from '~/utils/assert';
 import slugify from 'slugify';
 interface ChartTileProps {
@@ -138,5 +138,67 @@ function ChartTileHeader({
         </div>
       )}
     </Box>
+  );
+}
+// Atlijd timeframe invoegen
+
+// Header
+// Title
+// Descriptie        timeframetoggle
+
+// Graph
+
+// Metadata
+
+function NewChartTileHeader({
+  title,
+  description,
+  timeframeOptions,
+  onTimeframeChange,
+  timeframe,
+}) {
+  return (
+    <Box>
+      <Box>
+        <Heading level={3}>{title}</Heading>
+        <Text> {description}</Text>
+      </Box>
+      {timeframeOptions && (
+        <Box>
+          <ChartTimeControls
+            timeframeOptions={timeframeOptions}
+            timeframe={timeframe}
+            onChange={onTimeframeChange}
+          />
+        </Box>
+      )}
+    </Box>
+  );
+}
+
+export function NewChartTile({
+  title,
+  description,
+  children,
+  metadata,
+  timeframeOptions,
+  timeframeInitialValue = 'all',
+}) {
+  const [timeframe, setTimeframe] = useState<TimeframeOption>(
+    timeframeInitialValue
+  );
+
+  return (
+    <ChartTileContainer metadata={metadata}>
+      <NewChartTileHeader
+        title={title}
+        description={description}
+        timeframe={timeframe}
+        timeframeOptions={timeframeOptions}
+        onTimeframeChange={setTimeframe}
+      />
+      {timeframeOptions && React.cloneElement(children, { timeframe })}
+      {!timeframeOptions && children}
+    </ChartTileContainer>
   );
 }
