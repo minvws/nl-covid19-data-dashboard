@@ -118,7 +118,7 @@ export function AreaChartGraph<T extends TrendValue, K extends TrendValue>(
                 key={`pattern-${display.id}-${display.metricProperty}`}
                 id={`pattern-${display.id}-${display.metricProperty}`}
                 color={display.color}
-                smallscreen={!breakpoints.lg}
+                isSmallScreen={!breakpoints.lg}
               />
             );
           })}
@@ -248,13 +248,14 @@ const StyledSvg = styled.svg(
 type HatchedPatternProps = {
   id: string;
   color?: string;
-  smallscreen: boolean;
+  isSmallScreen: boolean;
 };
 
 function HatchedPattern(props: HatchedPatternProps) {
-  const { id, color, smallscreen } = props;
-  const size = smallscreen ? 5 : 10;
-  const strokeWidth = smallscreen ? 2 : 4;
+  const { id, color, isSmallScreen } = props;
+  const size = isSmallScreen ? 4 : 8;
+  const strokeWidth = isSmallScreen ? 3 : 4;
+
   return (
     <pattern
       id={id}
