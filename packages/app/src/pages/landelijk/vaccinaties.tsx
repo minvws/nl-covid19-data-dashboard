@@ -713,14 +713,17 @@ function createCoverageRow(
 ): NlVaccineCoveragePerAgeGroupValue {
   const ageGroupTotal = Math.floor(Math.random() * 17000000) + 1000000;
   const fullyVaccinated = Math.floor(Math.random() * ageGroupTotal) + 1;
+  const partiallyVaccinated = Math.floor(Math.random() * ageGroupTotal) + 1;
 
   return {
     age_group_range: ageGroup,
     age_group_percentage: Math.floor(Math.random() * 100) + 1,
     age_group_total: ageGroupTotal,
     fully_vaccinated: fullyVaccinated,
-    partially_vaccinated: Math.floor(Math.random() * ageGroupTotal) + 1,
+    partially_vaccinated: partiallyVaccinated,
     fully_vaccinated_percentage: (fullyVaccinated / ageGroupTotal) * 100,
+    partially_vaccinated_percentage:
+      (partiallyVaccinated / ageGroupTotal) * 100,
     date_of_insertion_unix: 1616544000,
     date_of_report_unix: 1616544000,
     date_unix: 1616544000,

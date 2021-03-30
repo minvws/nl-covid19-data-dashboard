@@ -11,11 +11,18 @@ export function CoverageProgressBar(props: {
   partially: number;
   fully: number;
   fullyPercentage: number;
+  partiallyPercentage: number;
   total: number;
   showsTotals: boolean;
 }) {
-  const { partially, fully, fullyPercentage, total, showsTotals } = props;
-  const partialPercentage = (partially / total) * 100;
+  const {
+    partially,
+    fully,
+    fullyPercentage,
+    partiallyPercentage,
+    total,
+    showsTotals,
+  } = props;
   const { siteText, formatPercentage, formatNumber } = useIntl();
   const {
     partially: partialLabel,
@@ -36,7 +43,7 @@ export function CoverageProgressBar(props: {
         color: '#005083',
       },
       {
-        percentage: partialPercentage,
+        percentage: partiallyPercentage,
         value: partially,
         label: partialLabel,
         color: '#239BE6',
@@ -48,7 +55,7 @@ export function CoverageProgressBar(props: {
     fullyPercentage,
     fully,
     fullyLabel,
-    partialPercentage,
+    partiallyPercentage,
     partially,
     partialLabel,
   ]);

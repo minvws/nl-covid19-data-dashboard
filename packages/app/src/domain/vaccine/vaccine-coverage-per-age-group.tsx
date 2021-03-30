@@ -47,6 +47,7 @@ export function VaccineCoveragePerAgeGroup(props: Props) {
             partially={value.partially_vaccinated}
             fully={value.fully_vaccinated}
             fullyPercentage={value.fully_vaccinated_percentage}
+            partiallyPercentage={value.partially_vaccinated_percentage}
             total={value.age_group_total}
           />
         </CoverageRow>
