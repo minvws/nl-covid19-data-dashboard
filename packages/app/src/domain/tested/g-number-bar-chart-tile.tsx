@@ -50,12 +50,12 @@ export function GNumberBarChartTile({
         formatTooltip={({ value }) => {
           return (
             <>
-              <InlineText fontWeight="bold">
-                {`${formatPercentage(value.g_number)}% `}
-              </InlineText>
               {value.g_number > 0
                 ? text.positive_descriptor
                 : text.negative_descriptor}
+              <InlineText fontWeight="bold">
+                {` ${formatPercentage(value.g_number)}%`}
+              </InlineText>
             </>
           );
         }}
