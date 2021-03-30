@@ -48,7 +48,6 @@ import { useDataSitemap } from '~/domain/topical/sitemap/utils';
 import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
 import { TopicalVaccineTile } from '~/domain/topical/topical-vaccine-tile';
-import { GNumberBarChartTile } from '~/domain/tested/g-number-bar-chart-tile';
 import { useIntl } from '~/intl';
 import { getTopicalPageQuery } from '~/queries/topical-page-query';
 import {
@@ -147,9 +146,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
             <Box width={{ lg: '65%' }}>
               <Search />
             </Box>
-
-            {/* @ts-expect-error @TODO g_number data isn't required yet */}
-            <GNumberBarChartTile data={data?.g_number} />
 
             <MiniTrendTileLayout id="metric-navigation">
               <MiniTrendTile
