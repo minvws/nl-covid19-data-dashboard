@@ -274,19 +274,6 @@
       "infected": ""
     }
   },
-  "g_number": {
-    "bar_chart": {
-      "title": "Trend over time",
-      "description": "This graph shows the trend in the contamination cases. As long as the number is positive, the number of infections per day increases. As soon as the number is negative, the number of infections decreases.",
-      "negative_descriptor": "decreased",
-      "positive_descriptor": "increased",
-      "bronnen": {
-        "download": "",
-        "href": "",
-        "text": ""
-      }
-    }
-  },
   "besmettelijke_personen": {
     "title": "Number of infectious people",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
@@ -300,11 +287,11 @@
     "lineLegendLabel": "Infectious people",
     "geen_signaalwaarde_beschikbaar": "Due to a technical problem the data is currently not showing as intended. This is being investigated.",
     "geen_signaalwaarde_beschikbaar_lees_waarom": "Read here why",
-    "toelichting_pagina": "A person who carries coronavirus can infect other people within a certain time frame. How long someone is infectious for differs from one person to another. The number of infectious people is estimated using data from various sources. It is not possible to know exactly how many people are infectious, but we can indicate whether there are dozens, hundreds, thousands or even more.",
+    "toelichting_pagina": "A person who carries coronavirus can infect other people within a certain time frame. If more people are infectious the virus spreads faster. It is not possible to know exactly how many people are infectious, but we can indicate whether there are dozens, hundreds, thousands or even more.",
     "barscale_titel": "Average number of infectious people per 100,000 inhabitants.",
     "barscale_screenreader_text": "{{value}} infectious people",
-    "cijfer_titel": "Estimated number of infectious people in the Netherlands:",
-    "cijfer_toelichting": "A calculation of how many people with COVID-19 can transmit the virus. This number is calculated by the RIVM.",
+    "cijfer_titel": "Number of infectious people in the Netherlands:",
+    "cijfer_toelichting": "A calculation of how many people with COVID-19 can transmit the virus. This number is always a week or to old because more recent calculations are not accurate enough.",
     "linechart_titel": "Number of infectious people over time (per 100,000 inhabitants)",
     "titel_sidebar": "Infectious people",
     "metadata": {
@@ -807,7 +794,13 @@
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -2084,7 +2077,6 @@
     "title": "COVID-19 vaccinations",
     "description": "Vaccination is the most important step towards getting life back to normal. The Netherlands began vaccinating people against COVID-19 on 6 January 2021. Eventually, the vaccine will be offered to everyone aged 18 and over. This page shows how many doses of vaccine have been administered and how many doses are on their way.",
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-    "bereidheid_datums": "Last values obtained on {{dateOfInsertion}}. Is updated every 3 weeks.",
     "date_unix": "1613650547",
     "date_of_insertion_unix": "1613650547",
     "reference": {
@@ -2173,7 +2165,11 @@
     "expected_page_additions": {
       "title": "Expected data on vaccinations",
       "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
-      "additions": ["", "", ""]
+      "additions": [
+        "",
+        "",
+        ""
+      ]
     },
     "data": {
       "difference": "",
@@ -2298,7 +2294,11 @@
       "kpi_expected_page_additions": {
         "title": "Expected data on vaccinations",
         "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
-        "additions": ["", "", ""]
+        "additions": [
+          "",
+          "",
+          ""
+        ]
       },
       "vaccination_chart": {
         "product_names": {
@@ -2373,7 +2373,8 @@
     "grafiek_leveringen": {
       "titel": "",
       "omschrijving": ""
-    }
+    },
+    "bereidheid_datums": ""
   },
   "editorial_detail": {
     "back_link": {
@@ -2415,8 +2416,8 @@
           "text": "View all articles",
           "href": "/artikelen"
         },
-        "read_weekly_message": "Read the week message",
-        "weekly_category": "Weekly"
+        "read_weekly_message": "",
+        "weekly_category": ""
       },
       "positief_getest_kaart": {
         "titel": "Confirmed cases in the Netherlands"
@@ -2907,5 +2908,18 @@
     },
     "reset_button_label": "",
     "legend_help_text": ""
+  },
+  "g_number": {
+    "bar_chart": {
+      "title": "",
+      "description": "",
+      "negative_descriptor": "",
+      "positive_descriptor": "",
+      "bronnen": {
+        "download": "",
+        "href": "",
+        "text": ""
+      }
+    }
   }
 }

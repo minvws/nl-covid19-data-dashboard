@@ -274,19 +274,6 @@
       "infected": "Aantal positieve testen"
     }
   },
-  "g_number": {
-    "bar_chart": {
-      "title": "Ontwikkeling aantal positieve tests (Groeigetal) ",
-      "description": "Het Goreigetal (of G-getal) geeft in procenten weer of in de afgelopen 7 dagen meer of minder mensen positief sijn getest op corona dan in de 7 dagen ervoor. Big een positief Groeigetal is de trend dat het aantal positieve tests toeneemt. Bij een negatief Groeigetal is de trend dat het aantal positieve tests afneemt.",
-      "negative_descriptor": "gedaald",
-      "positive_descriptor": "nam toe",
-      "bronnen": {
-        "download": "",
-        "href": "",
-        "text": ""
-      }
-    }
-  },
   "besmettelijke_personen": {
     "title": "Aantal besmettelijke mensen",
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
@@ -300,11 +287,11 @@
     "lineLegendLabel": "Besmettelijke mensen",
     "geen_signaalwaarde_beschikbaar": "Vanwege een storing is deze informatie op dit moment helaas niet compleet. Aan een oplossing wordt gewerkt.",
     "geen_signaalwaarde_beschikbaar_lees_waarom": "Lees hier waarom",
-    "toelichting_pagina": "Als iemand het coronavirus oploopt, dan is deze persoon een tijd lang besmettelijk voor anderen. Hoe lang dit duurt verschilt van persoon tot persoon. Het aantal besmettelijke mensen is een schatting op basis van een aantal gegevensbronnen. Het exacte aantal is onbekend, maar we kunnen wel aangeven of het gaat om tientallen, honderden, duizenden of meer. ",
+    "toelichting_pagina": "Als iemand het coronavirus oploopt, dan is deze persoon een tijd lang besmettelijk voor anderen. Hoe meer personen besmettelijk zijn, des te sneller kan de epidemie zich verspreiden. Het exacte aantal besmettelijke mensen is onbekend, maar we kunnen wel aangeven of het gaat om tientallen, honderden, duizenden of meer.",
     "barscale_titel": "Gemiddeld aantal besmettelijke mensen per 100.000 inwoners",
     "barscale_screenreader_text": "{{value}} besmettelijke mensen",
-    "cijfer_titel": "Geschat aantal besmettelijke mensen in Nederland:",
-    "cijfer_toelichting": "Een schatting van hoeveel mensen met COVID-19 besmettelijk zijn voor anderen. Dit getal wordt door het RIVM berekend.",
+    "cijfer_titel": "Aantal besmettelijke mensen in Nederland:",
+    "cijfer_toelichting": "Een berekening van het RIVM van hoeveel mensen met COVID-19 besmettelijk zijn voor anderen. Dit is altijd het aantal besmettelijke personen van een tot twee weken geleden, omdat de betrouwbaarheid van recentere berekeningen niet groot genoeg is.",
     "linechart_titel": "Aantal besmettelijke mensen door de tijd heen",
     "titel_sidebar": "Besmettelijke mensen",
     "metadata": {
@@ -807,7 +794,13 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
+    "barscale_keys": [
+      "0 tot 20",
+      "20 tot 40",
+      "40 tot 60",
+      "60 tot 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -2084,7 +2077,6 @@
     "title": "COVID-19-vaccinaties",
     "description": "Vaccineren is de belangrijkste stap naar een samenleving zonder coronaregels. Op 6 januari 2021 is Nederland begonnen met vaccineren. Uiteindelijk komt iedereen van 18 jaar of ouder aan de beurt. De cijfers op deze pagina laten zien hoeveel prikken zijn gezet en hoeveel vaccins er beschikbaar komen.",
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
-    "bereidheid_datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt 3-wekelijks bijgewerkt.",
     "date_unix": "1613650547",
     "date_of_insertion_unix": "1613650547",
     "reference": {
@@ -2173,7 +2165,11 @@
     "expected_page_additions": {
       "title": "Verwachte toevoegingen aan deze pagina",
       "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer de vaccinatiegraad.",
-      "additions": ["", "", ""]
+      "additions": [
+        "",
+        "",
+        ""
+      ]
     },
     "data": {
       "difference": "Do not remove this key. It is required as a temporary workaround",
@@ -2298,7 +2294,11 @@
       "kpi_expected_page_additions": {
         "title": "Verwachte toevoegingen aan deze pagina",
         "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer de vaccinatiegraad.",
-        "additions": ["", "", ""]
+        "additions": [
+          "",
+          "",
+          ""
+        ]
       },
       "vaccination_chart": {
         "product_names": {
@@ -2373,7 +2373,8 @@
     "grafiek_leveringen": {
       "titel": "Leveringen t/m week {{weekNumber}}",
       "omschrijving": "Iets over deze grafiek"
-    }
+    },
+    "bereidheid_datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt 3-wekelijks bijgewerkt."
   },
   "editorial_detail": {
     "back_link": {
@@ -2907,5 +2908,18 @@
     },
     "reset_button_label": "Reset",
     "legend_help_text": "Selecteed een of meerdere leeftijdsgroepen om deze apart te bekijken."
+  },
+  "g_number": {
+    "bar_chart": {
+      "title": "Ontwikkeling aantal positieve tests (Groeigetal) ",
+      "description": "Het Goreigetal (of G-getal) geeft in procenten weer of in de afgelopen 7 dagen meer of minder mensen positief sijn getest op corona dan in de 7 dagen ervoor. Big een positief Groeigetal is de trend dat het aantal positieve tests toeneemt. Bij een negatief Groeigetal is de trend dat het aantal positieve tests afneemt.",
+      "negative_descriptor": "gedaald",
+      "positive_descriptor": "nam toe",
+      "bronnen": {
+        "download": "",
+        "href": "",
+        "text": ""
+      }
+    }
   }
 }
