@@ -1,6 +1,5 @@
 import { NlTestedPerAgeGroupValue } from '@corona-dashboard/common';
 import css, { SystemStyleObject } from '@styled-system/css';
-import { grayscale } from 'polished';
 import styled from 'styled-components';
 import { LineSeriesDefinition } from '~/components-styled/time-series-chart/logic';
 import { Text } from '~/components-styled/typography';
