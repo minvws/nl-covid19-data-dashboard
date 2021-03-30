@@ -150,7 +150,7 @@ export interface National {
   infectious_people: NationalInfectiousPeople;
   intensive_care_nice: NationalIntensiveCareNice;
   tested_overall: NationalTestedOverall;
-  tested_per_age_group: NationalTestedPerAgeGroup;
+  tested_per_age_group: NlTestedPerAgeGroup;
   reproduction: NationalReproduction;
   sewer: NationalSewer;
   hospital_nice: NationalHospitalNice;
@@ -275,13 +275,22 @@ export interface NationalTestedOverallValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NationalTestedPerAgeGroup {
-  values: NationalTestedPerAgeGroupValue[];
+export interface NlTestedPerAgeGroup {
+  values: NlTestedPerAgeGroupValue[];
+  last_value: NlTestedPerAgeGroupValue;
 }
-export interface NationalTestedPerAgeGroupValue {
-  age_group_range: string;
-  infected_percentage: number;
-  age_group_percentage: number;
+export interface NlTestedPerAgeGroupValue {
+  infected_age_0_9_per_100k: number;
+  infected_age_10_19_per_100k: number;
+  infected_age_20_29_per_100k: number;
+  infected_age_30_39_per_100k: number;
+  infected_age_40_49_per_100k: number;
+  infected_age_50_59_per_100k: number;
+  infected_age_60_69_per_100k: number;
+  infected_age_70_79_per_100k: number;
+  infected_age_80_89_per_100k: number;
+  infected_age_90_plus_per_100k: number;
+  infected_overall_per_100k: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }

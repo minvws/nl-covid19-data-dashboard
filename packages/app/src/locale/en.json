@@ -2885,5 +2885,24 @@
       "href": "/verantwoording#mortality-monitor-CBS",
       "text": "Read more about the information on this page in the 'Explanation of data presented'."
     }
+  },
+  "infected_per_age_group": {
+    "title": "Verdeling naar leeftijd",
+    "description": "Verdeling naar leeftijd ...",
+    "legend": {
+      "infected_age_0_9_per_100k": "0-9",
+      "infected_age_10_19_per_100k": "10-19",
+      "infected_age_20_29_per_100k": "20-29",
+      "infected_age_30_39_per_100k": "30-30",
+      "infected_age_40_49_per_100k": "40-49",
+      "infected_age_50_59_per_100k": "50-59",
+      "infected_age_60_69_per_100k": "60-69",
+      "infected_age_70_79_per_100k": "70-79",
+      "infected_age_80_89_per_100k": "80-89",
+      "infected_age_90_plus_per_100k": "90+",
+      "infected_overall_per_100k": "Alle leeftijden"
+    },
+    "reset_button_label": "Reset",
+    "legend_help_text": "Selecteed een of meerdere leeftijdsgroepen om deze apart te bekijken."
   }
 }
