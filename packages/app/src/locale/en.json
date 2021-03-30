@@ -326,7 +326,7 @@
     "titel": "Reproduction number",
     "pagina_toelichting": "The reproduction number shows how fast the virus is spreading. The number shows how many people are on average infected by one patient with COVID-19.",
     "barscale_titel": "Most recent reproduction number",
-    "barscale_toelichting": "Number of people infected by one infectious person.",
+    "barscale_toelichting": "Number of people infected by one infectious person. This number is always two weeks old, since more current calculations are to unreliable.",
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
     "extra_uitleg": "The reproduction number shows how fast the virus is spreading. This number shows how many people are on average infected by one patient with COVID-19. The number of transmissions remains more or less constant when the reproduction number is 1, declines when it is less than 1 and increases when the number is above 1.",
     "linechart_titel": "The reproduction number over time",
