@@ -133,8 +133,8 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
             <Heading level={3} as="h2">
               {text.current_escalation_level}
             </Heading>
-            <Box display="flex" flexDirection={{ _: 'column', md: 'row' }}>
-              <Box width={{ _: '100%', md: '50%' }} pr={{ _: 0, md: 3 }}>
+            <Box display="flex" flexDirection={{ _: 'column', lg: 'row' }}>
+              <Box width={{ _: '100%', lg: '50%' }} pr={{ _: 0, lg: 3 }}>
                 <Box mb={3}>
                   <EscalationLevelInfoLabel
                     level={currentLevel}
@@ -160,7 +160,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                   })}
                 </Text>
               </Box>
-              <Box width={{ _: '100%', md: '50%' }} pl={{ _: 0, md: 3 }} mb={3}>
+              <Box width={{ _: '100%', lg: '50%' }} pl={{ _: 0, lg: 3 }} mb={3}>
                 <UnorderedList>
                   <ListItem
                     title={text.momenteel.last_determined}
