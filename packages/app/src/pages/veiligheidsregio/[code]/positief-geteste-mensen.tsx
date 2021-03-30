@@ -17,6 +17,7 @@ import { Markdown } from '~/components-styled/markdown';
 import { PageBarScale } from '~/components-styled/page-barscale';
 import { TileList } from '~/components-styled/tile-list';
 import { TimeSeriesChart } from '~/components-styled/time-series-chart';
+import { GNumberBarChartTile } from '~/domain/tested/g-number-bar-chart-tile';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components-styled/typography';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
@@ -226,6 +227,8 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               ) => <PositiveTestedPeopleMunicipalTooltip context={context} />}
             />
           </ChoroplethTile>
+
+          <GNumberBarChartTile data={data.g_number} />
 
           <ContentHeader
             id="ggd"

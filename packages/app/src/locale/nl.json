@@ -274,6 +274,19 @@
       "infected": "Aantal positieve testen"
     }
   },
+  "g_number": {
+    "bar_chart": {
+      "title": "Ontwikkeling aantal positieve tests (Groeigetal) ",
+      "description": "Het Goreigetal (of G-getal) geeft in procenten weer of in de afgelopen 7 dagen meer of minder mensen positief sijn getest op corona dan in de 7 dagen ervoor. Big een positief Groeigetal is de trend dat het aantal positieve tests toeneemt. Bij een negatief Groeigetal is de trend dat het aantal positieve tests afneemt.",
+      "negative_descriptor": "gedaald",
+      "positive_descriptor": "nam toe",
+      "bronnen": {
+        "download": "",
+        "href": "",
+        "text": ""
+      }
+    }
+  },
   "besmettelijke_personen": {
     "title": "Aantal besmettelijke mensen",
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
@@ -794,13 +807,7 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": [
-      "0 tot 20",
-      "20 tot 40",
-      "40 tot 60",
-      "60 tot 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -2165,11 +2172,7 @@
     "expected_page_additions": {
       "title": "Verwachte toevoegingen aan deze pagina",
       "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer de vaccinatiegraad.",
-      "additions": [
-        "",
-        "",
-        ""
-      ]
+      "additions": ["", "", ""]
     },
     "data": {
       "difference": "Do not remove this key. It is required as a temporary workaround",
@@ -2294,11 +2297,7 @@
       "kpi_expected_page_additions": {
         "title": "Verwachte toevoegingen aan deze pagina",
         "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer de vaccinatiegraad.",
-        "additions": [
-          "",
-          "",
-          ""
-        ]
+        "additions": ["", "", ""]
       },
       "vaccination_chart": {
         "product_names": {

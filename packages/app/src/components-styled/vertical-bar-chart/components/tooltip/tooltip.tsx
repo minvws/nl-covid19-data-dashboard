@@ -1,12 +1,7 @@
-/**
- * The default tooltip `TooltipSeriesList` can now display the full contents of
- * the series config with colors and all, instead of a single default item.
- */
 import { TimestampedValue } from '@corona-dashboard/common';
-import { Bounds, Padding } from '../../logic';
-import { TooltipSeriesList } from './tooltip-series-list';
-import { TooltipWrapper } from './tooltip-wrapper';
+import { Bounds, Padding } from '~/components-styled/time-series-chart/logic';
 import { TooltipData, TooltipFormatter } from './types';
+import { TooltipWrapper } from '~/components-styled/time-series-chart/components/tooltip/tooltip-wrapper';
 
 interface TooltipProps<T extends TimestampedValue> {
   title?: string;
@@ -15,7 +10,7 @@ interface TooltipProps<T extends TimestampedValue> {
   top: number;
   bounds: Bounds;
   padding: Padding;
-  formatTooltip?: TooltipFormatter<T>;
+  formatTooltip: TooltipFormatter<T>;
 }
 
 export function Tooltip<T extends TimestampedValue>({
@@ -27,15 +22,6 @@ export function Tooltip<T extends TimestampedValue>({
   bounds,
   padding,
 }: TooltipProps<T>) {
-  const content =
-    typeof formatTooltip === 'function' ? (
-      formatTooltip(tooltipData)
-    ) : (
-      <TooltipSeriesList data={tooltipData} />
-    );
-
-  if (!content) return null;
-
   return (
     <TooltipWrapper
       title={title}
@@ -44,7 +30,7 @@ export function Tooltip<T extends TimestampedValue>({
       bounds={bounds}
       padding={padding}
     >
-      {content}
+      {formatTooltip(tooltipData)}
     </TooltipWrapper>
   );
 }

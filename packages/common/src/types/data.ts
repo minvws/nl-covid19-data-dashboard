@@ -146,7 +146,7 @@ export interface National {
   code: string;
   difference: NationalDifference;
   doctor: NationalDoctor;
-  g_number?: NlGNumber;
+  g_number: NlGNumber;
   infectious_people: NationalInfectiousPeople;
   intensive_care_nice: NationalIntensiveCareNice;
   tested_overall: NationalTestedOverall;
@@ -737,7 +737,7 @@ export interface Regionaal {
   name: string;
   code: string;
   difference: RegionalDifference;
-  g_number?: VrGNumber;
+  g_number: VrGNumber;
   sewer: RegionalSewer;
   sewer_per_installation: RegionalSewerPerInstallation;
   tested_overall: RegionalTestedOverall;

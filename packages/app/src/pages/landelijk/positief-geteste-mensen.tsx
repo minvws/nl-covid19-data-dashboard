@@ -27,6 +27,7 @@ import { Heading, InlineText, Text } from '~/components-styled/typography';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
+import { GNumberBarChartTile } from '~/domain/tested/g-number-bar-chart-tile';
 import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
 import { PositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/positive-tested-people-regional-tooltip';
 import { Layout } from '~/domain/layout/layout';
@@ -276,6 +277,8 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               />
             )}
           </ChartTileWithTimeframe>
+
+          <GNumberBarChartTile data={data.g_number} />
 
           <ContentHeader
             title={ggdText.titel}
