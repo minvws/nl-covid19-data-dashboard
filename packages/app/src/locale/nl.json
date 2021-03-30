@@ -780,13 +780,7 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": [
-      "0 tot 20",
-      "20 tot 40",
-      "40 tot 60",
-      "60 tot 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -2138,11 +2132,7 @@
     "expected_page_additions": {
       "title": "Verwachte toevoegingen aan deze pagina",
       "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer de vaccinatiegraad.",
-      "additions": [
-        "",
-        "",
-        ""
-      ]
+      "additions": ["", "", ""]
     },
     "data": {
       "difference": "Do not remove this key. It is required as a temporary workaround",
@@ -2267,11 +2257,7 @@
       "kpi_expected_page_additions": {
         "title": "Verwachte toevoegingen aan deze pagina",
         "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer de vaccinatiegraad.",
-        "additions": [
-          "",
-          "",
-          ""
-        ]
+        "additions": ["", "", ""]
       },
       "vaccination_chart": {
         "product_names": {
@@ -2350,6 +2336,19 @@
     "grafiek_leveringen": {
       "titel": "Leveringen t/m week {{weekNumber}}",
       "omschrijving": "Iets over deze grafiek"
+    },
+    "grafiek_gevaccineerde_mensen": {
+      "titel": "Aantal gevaccineerde mensen",
+      "omschrijving": "Deze grafiek laat zien hoeveel mensen in Nederland een prik hebben gehad en hoeveel mensen daarvan volledig en gedeeltelijk gevaccineerd zijn. Met de huidige vaccinatieplan verwachten we dat ieder persoon die in Nederland wil zich laten vaccineren zou bij eind juli 2021 een eerste prik mogen krijgen.",
+      "label_annotatie": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+      "tooltip_label_annotatie": "(niet compleet)",
+      "label_geprikte_mensen": "Totaal aantal geprikte mensen",
+      "tooltip_label_geprikte_mensen": "Totaal aantal geprikte mensen",
+      "label_gedeeltelijk_gevaccineerd": "Gedeeltelijk gevaccineerde mensen",
+      "tooltip_label_gedeeltelijk_gevaccineerd": "Gedeeltelijk gevaccineerd",
+      "label_volledig_gevaccineerd": "Volledig gevaccineerde mensen",
+      "tooltip_label_volledig_gevaccineerd": "Volledig gevaccineerd",
+      "extra_bericht": "Let op: data over vaccinatie komt uit verschillende bronnen (RIVM en CIMS). CIMS is op dit moment incompleet.  \n[Lees meer over incomplete CIMS data.](#)"
     }
   },
   "editorial_detail": {
