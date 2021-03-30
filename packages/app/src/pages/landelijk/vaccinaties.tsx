@@ -631,21 +631,21 @@ function HatchedSquare() {
       <defs>
         <pattern
           id="hatch"
-          width="5"
-          height="5"
+          width="4"
+          height="4"
           patternTransform="rotate(-45 0 0)"
           patternUnits="userSpaceOnUse"
         >
-          <rect x="0" y="0" width="5" height="5" fill="white" />
           <line
             x1="0"
             y1="0"
             x2="0"
             y2="5"
-            style={{ stroke: 'black', strokeWidth: 3 }}
+            style={{ stroke: 'grey', strokeWidth: 3 }}
           />
         </pattern>
       </defs>
+      <rect height="15" width="15" fill="white" />
       <rect height="15" width="15" fill="url(#hatch)" />
     </svg>
   );
