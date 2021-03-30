@@ -140,40 +140,44 @@ function ChartTileHeader({
     </Box>
   );
 }
-// Atlijd timeframe invoegen
 
-// Header
-// Title
-// Descriptie        timeframetoggle
-
-// Graph
-
-// Metadata
+interface NewChartTileHeaderProps {
+  title: string;
+  description?: string;
+  children?: React.ReactNode;
+}
 
 function NewChartTileHeader({
   title,
   description,
-  timeframeOptions,
-  onTimeframeChange,
-  timeframe,
-}) {
+  children,
+}: NewChartTileHeaderProps) {
   return (
-    <Box>
-      <Box>
+    <Box display="flex" flexDirection={{ _: 'column', lg: 'row' }}>
+      <Box maxWidth="maxWidthText" pr={{ _: 0, lg: 3 }}>
         <Heading level={3}>{title}</Heading>
         <Text> {description}</Text>
       </Box>
-      {timeframeOptions && (
-        <Box>
-          <ChartTimeControls
-            timeframeOptions={timeframeOptions}
-            timeframe={timeframe}
-            onChange={onTimeframeChange}
-          />
+      {children && (
+        <Box
+          display="inline-table"
+          alignSelf={{ _: 'center', lg: 'flex-end' }}
+          mb={3}
+        >
+          {children}
         </Box>
       )}
     </Box>
   );
+}
+
+interface NewChartTileProps {
+  title: string;
+  metadata: MetadataProps;
+  description?: string;
+  children?: React.ReactNode;
+  timeframeOptions?: TimeframeOption[];
+  timeframeInitialValue?: TimeframeOption;
 }
 
 export function NewChartTile({
@@ -183,22 +187,27 @@ export function NewChartTile({
   metadata,
   timeframeOptions,
   timeframeInitialValue = 'all',
-}) {
+}: NewChartTileProps) {
   const [timeframe, setTimeframe] = useState<TimeframeOption>(
     timeframeInitialValue
   );
 
   return (
     <ChartTileContainer metadata={metadata}>
-      <NewChartTileHeader
-        title={title}
-        description={description}
-        timeframe={timeframe}
-        timeframeOptions={timeframeOptions}
-        onTimeframeChange={setTimeframe}
-      />
-      {timeframeOptions && React.cloneElement(children, { timeframe })}
-      {!timeframeOptions && children}
+      <NewChartTileHeader title={title} description={description}>
+        {timeframeOptions && (
+          <ChartTimeControls
+            timeframeOptions={timeframeOptions}
+            timeframe={timeframe}
+            onChange={setTimeframe}
+          />
+        )}
+      </NewChartTileHeader>
+
+      {timeframeOptions
+        ? // Assign the timeframe directly to the react element
+          React.cloneElement(children as React.ReactElement, { timeframe })
+        : children}
     </ChartTileContainer>
   );
 }

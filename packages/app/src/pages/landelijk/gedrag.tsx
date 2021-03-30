@@ -240,7 +240,8 @@ const BehaviorPage = (props: StaticProps<typeof getStaticProps>) => {
                 corona_melder_app.waarschuwingen_over_tijd_grafiek.bronnen
                   .coronamelder,
             }}
-            timeframeOptions={['all', '5weeks']}
+            timeframeInitialValue="week"
+            timeframeOptions={['all', 'week']}
           >
             <TimeSeriesChart
               tooltipTitle={
