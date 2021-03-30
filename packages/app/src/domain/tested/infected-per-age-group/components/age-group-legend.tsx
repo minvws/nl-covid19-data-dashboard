@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { LineSeriesDefinition } from '~/components-styled/time-series-chart/logic';
 import { Text } from '~/components-styled/typography';
 import { useIntl } from '~/intl';
+import { asResponsiveArray } from '~/style/utils';
 
 interface AgeGroupLegendProps {
   seriesConfig: LineSeriesDefinition<NlTestedPerAgeGroupValue>[];
@@ -90,7 +91,7 @@ const List = styled.ul(
 const Item = styled.li(
   css({
     mb: 2,
-    mr: 3,
+    mr: asResponsiveArray({ _: 2, md: 3 }),
     position: 'relative',
     display: 'inline-block',
   })
@@ -110,8 +111,8 @@ const ItemButton = styled.button<{
     appearance: 'none',
     backgroundColor: 'tileGray',
     cursor: 'pointer',
-    pr: 10,
-    pl: 30,
+    pr: asResponsiveArray({ _: '5px', md: 10 }),
+    pl: asResponsiveArray({ _: 25, md: 30 }),
     py: '3px',
     border: '3px solid',
     borderColor: isActive ? color : 'transparent',
@@ -170,7 +171,7 @@ const Line = styled.div<{ color: string; lineStyle: 'dashed' | 'solid' }>(
     css({
       display: 'block',
       position: 'absolute',
-      left: 10,
+      left: asResponsiveArray({ _: '5px', md: 10 }),
       borderTopColor: color as SystemStyleObject,
       borderTopStyle: lineStyle,
       borderTopWidth: '3px',
