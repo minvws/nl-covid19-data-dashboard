@@ -408,7 +408,6 @@
     "kpi_titel": "Total number of infected locations",
     "kpi_toelichting": "This figure is an estimate of the number of nursing homes where in the past 28 days at least one (new) COVID-19 infection (confirmed by a positive test) is reported. The percentage shows what proportion of the total number of nursing homes in the Netherlands this is.",
     "linechart_titel": "Total number of infected locations over time",
-    "linechart_tooltip_label": "Aantal besmette locaties",
     "barscale_screenreader_text": "{{value}} new locations where there is at least one confirmed case, per day.",
     "chloropleth_legenda": {
       "titel": "Percentage of infected nursing homes",
@@ -432,7 +431,8 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
         "text": "RIVM"
       }
-    }
+    },
+    "linechart_tooltip_label": ""
   },
   "verpleeghuis_positief_geteste_personen": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -470,13 +470,13 @@
       }
     },
     "kpi_titel": "Number of confirmed cases per day",
-    "line_chart_legend_trend_label": "Gemeld aantal positief geteste bewoners",
-    "line_chart_legend_trend_moving_average_label": "Gemiddeld aantal over afgelopen 7 dagen",
+    "line_chart_legend_trend_label": "",
     "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
+    "line_chart_legend_trend_moving_average_label": "",
     "tooltip_labels": {
-      "inaccurate": "Incompleet",
-      "newly_infected_people": "Gemeld aantal positief geteste bewoners",
-      "newly_infected_people_moving_average": "Gemiddeld aantal over afgelopen 7 dagen"
+      "inaccurate": "",
+      "newly_infected_people": "",
+      "newly_infected_people_moving_average": ""
     }
   },
   "verpleeghuis_oversterfte": {
@@ -511,13 +511,13 @@
       }
     },
     "kpi_titel": "Mortality per day",
-    "line_chart_legend_trend_label": "Aantal overleden bewoners",
-    "line_chart_legend_trend_moving_average_label": "Gemiddeld aantal overleden bewoners over afgelopen 7 dagen.",
+    "line_chart_legend_trend_label": "",
     "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
+    "line_chart_legend_trend_moving_average_label": "",
     "tooltip_labels": {
-      "inaccurate": "Incompleet",
-      "deceased_daily": "Gemeld aantal overleden bewoners",
-      "deceased_daily_moving_average": "Gemiddeld aantal over afgelopen 7 dagen"
+      "inaccurate": "",
+      "deceased_daily": "",
+      "deceased_daily_moving_average": ""
     }
   },
   "blok_verpleeghuis_zorg": {
@@ -793,7 +793,13 @@
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -1075,7 +1081,7 @@
     "titel": "Percentage of positive test results at GGD test locations ",
     "summary_title": "{{percentage}} of the test results at GGD test locations had a positive result",
     "summary_link_cta": "More about the percentage of positive test results from GGD test locations only",
-    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
+    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
       "href": "https://data.rivm.nl/covid-19/COVID-19_uitgevoerde_testen.html",
       "text": "RIVM"
@@ -1114,7 +1120,7 @@
     "titel": "Percentage of positive test results at GGD test locations in {{safetyRegion}}",
     "summary_title": "{{percentage}} of the tests at GGD test locations had a positive result",
     "summary_link_cta": "More about the percentage of positive test results from GGD test locations only",
-    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
+    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
       "href": "https://data.rivm.nl/covid-19/COVID-19_uitgevoerde_testen.html",
       "text": "RIVM"
@@ -1174,12 +1180,12 @@
       }
     },
     "line_chart_legend_trend_label": "",
-    "line_chart_legend_trend_moving_average_label": "Gemiddeld aantal overleden bewoners over afgelopen 7 dagen.",
     "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
+    "line_chart_legend_trend_moving_average_label": "",
     "tooltip_labels": {
-      "inaccurate": "Incompleet",
-      "deceased_daily": "Gemeld aantal overleden bewoners",
-      "deceased_daily_moving_average": "Gemiddeld aantal over afgelopen 7 dagen"
+      "inaccurate": "",
+      "deceased_daily": "",
+      "deceased_daily_moving_average": ""
     }
   },
   "veiligheidsregio_verpleeghuis_besmette_locaties": {
@@ -1195,7 +1201,6 @@
     "kpi_titel": "Total no. of infected locations",
     "kpi_toelichting": "This figure is an estimate of the number of nursing homes where in the past 28 days at least one (new) COVID-19 infection (confirmed by a positive test) is reported. The percentage shows what proportion of the total number of nursing homes in this safety region this is.",
     "linechart_titel": "Total number of infected locations over time",
-    "linechart_tooltip_label": "Aantal besmette locaties",
     "barscale_screenreader_text": "{{value}} new locations where there is at least one confirmed case, per day.",
     "metadata": {
       "title": "Infected nursing home locations in {{safetyRegionName}} | Coronavirus Dashboard | Government.nl",
@@ -1212,7 +1217,8 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
         "text": "RIVM"
       }
-    }
+    },
+    "linechart_tooltip_label": ""
   },
   "veiligheidsregio_verpleeghuis_positief_geteste_personen": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -1249,12 +1255,12 @@
       }
     },
     "line_chart_legend_trend_label": "",
-    "line_chart_legend_trend_moving_average_label": "Gemiddeld aantal over afgelopen 7 dagen",
     "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
+    "line_chart_legend_trend_moving_average_label": "",
     "tooltip_labels": {
-      "inaccurate": "Incompleet",
-      "newly_infected_people": "Gemeld aantal positief geteste bewoners",
-      "newly_infected_people_moving_average": "Gemiddeld aantal over afgelopen 7 dagen"
+      "inaccurate": "",
+      "newly_infected_people": "",
+      "newly_infected_people_moving_average": ""
     }
   },
   "data_warning_text": "",
@@ -2158,7 +2164,11 @@
     "expected_page_additions": {
       "title": "Expected data on vaccinations",
       "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
-      "additions": ["", "", ""]
+      "additions": [
+        "",
+        "",
+        ""
+      ]
     },
     "data": {
       "difference": "",
@@ -2283,7 +2293,11 @@
       "kpi_expected_page_additions": {
         "title": "Expected data on vaccinations",
         "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
-        "additions": ["", "", ""]
+        "additions": [
+          "",
+          "",
+          ""
+        ]
       },
       "vaccination_chart": {
         "product_names": {
