@@ -45,8 +45,6 @@ interface MetricMenuItemLinkProps {
   href?: Url;
   subtitle?: string;
   children?: ReactNode;
-  isButton?: boolean;
-  buttonVariant?: buttonVariantType;
 }
 
 export function MetricMenuItemLink({
@@ -55,8 +53,6 @@ export function MetricMenuItemLink({
   title,
   subtitle,
   children: children,
-  isButton,
-  buttonVariant = 'default',
 }: MetricMenuItemLinkProps) {
   const router = useRouter();
 
@@ -82,23 +78,47 @@ export function MetricMenuItemLink({
   const isActive = isActivePath(router, href);
 
   return (
+    <MetricMenuItem>
+      <Link href={href} passHref>
+        <StyledLink isActive={isActive}>{content}</StyledLink>
+      </Link>
+    </MetricMenuItem>
+  );
+}
+
+interface MetricMenuButtonProps {
+  title: string;
+  href: Url;
+  subtitle?: string;
+  children?: ReactNode;
+  buttonVariant?: buttonVariantType;
+}
+
+export function MetricMenuButtonLink({
+  title,
+  subtitle,
+  children,
+  href,
+  buttonVariant = 'default',
+}: MetricMenuButtonProps) {
+  const router = useRouter();
+  const isActive = isActivePath(router, href);
+
+  const content = (
     <>
-      {isButton ? (
-        <MetricMenuButton isActive={isActive} buttonVariant={buttonVariant}>
-          <Link href={href} passHref>
-            <StyledLink isButton isActive={isActive}>
-              {content}
-            </StyledLink>
-          </Link>
-        </MetricMenuButton>
-      ) : (
-        <MetricMenuItem>
-          <Link href={href} passHref>
-            <StyledLink isActive={isActive}>{content}</StyledLink>
-          </Link>
-        </MetricMenuItem>
-      )}
+      <Title title={title} subtitle={subtitle} />
+      {children && <ChildrenWrapper>{children}</ChildrenWrapper>}
     </>
+  );
+
+  return (
+    <MetricMenuButton isActive={isActive} buttonVariant={buttonVariant}>
+      <Link href={href} passHref>
+        <StyledLink isButton={true} isActive={isActive}>
+          {content}
+        </StyledLink>
+      </Link>
+    </MetricMenuButton>
   );
 }
 
@@ -143,7 +163,7 @@ const MetricMenuButton = styled.li<{
     mx: 3,
     overflow: 'hidden',
     bg: x.isActive
-      ? asResponsiveArray({ _: null, lg: '#ebebeb' })
+      ? asResponsiveArray({ _: null, md: '#ebebeb' })
       : 'transparent',
   })
 );
@@ -181,10 +201,10 @@ const StyledLink = styled.a<{ isActive: boolean; isButton?: boolean }>((x) =>
 
     bg:
       x.isActive && !x.isButton
-        ? asResponsiveArray({ _: null, lg: '#ebebeb' })
+        ? asResponsiveArray({ _: undefined, md: '#ebebeb' })
         : 'transparent',
     borderRightColor: x.isActive
-      ? asResponsiveArray({ _: null, lg: 'sidebarLinkBorder' })
+      ? asResponsiveArray({ _: undefined, md: 'sidebarLinkBorder' })
       : 'transparent',
 
     '&:hover': {

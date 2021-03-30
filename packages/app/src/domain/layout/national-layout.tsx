@@ -17,6 +17,7 @@ import {
   CategoryMenu,
   Menu,
   MetricMenuItemLink,
+  MetricMenuButtonLink,
 } from '~/components-styled/aside/menu';
 import { Box } from '~/components-styled/base';
 import { AppContent } from '~/components-styled/layout/app-content';
@@ -84,10 +85,9 @@ export function NationalLayout(props: NationalLayoutProps) {
             pt={4}
           >
             <Menu>
-              <MetricMenuItemLink
+              <MetricMenuButtonLink
                 title={siteText.nationaal_maatregelen.titel_sidebar}
                 subtitle={siteText.nationaal_maatregelen.subtitel_sidebar}
-                isButton
                 href={{
                   pathname: '/landelijk/maatregelen',
                   query: breakpoints.md
@@ -97,19 +97,6 @@ export function NationalLayout(props: NationalLayoutProps) {
                     : { menu: '1' },
                 }}
               />
-
-              {/* <MetricMenuItemLink
-                href={{
-                  pathname: '/landelijk/maatregelen',
-                  query: breakpoints.md
-                    ? {} // only add menu flags on narrow devices
-                    : isMenuOpen
-                    ? { menu: '0' }
-                    : { menu: '1' },
-                }}
-                title={siteText.nationaal_maatregelen.titel_sidebar}
-                subtitle={siteText.nationaal_maatregelen.subtitel_sidebar}
-              /> */}
 
               <CategoryMenu
                 title={siteText.nationaal_layout.headings.vaccinaties}
