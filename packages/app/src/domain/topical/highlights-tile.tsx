@@ -7,7 +7,7 @@ import { useBreakpoints } from '~/utils/useBreakpoints';
 import { ArticleBox } from './article-list';
 import { Block, ImageBlock } from '~/types/cms';
 
-export interface weeklyHighlightProps {
+export interface WeeklyHighlightProps {
   title: string;
   slug: {
     current: string;
@@ -19,7 +19,7 @@ export interface weeklyHighlightProps {
 }
 
 interface HighlightsTileProps {
-  weeklyHighlight: weeklyHighlightProps;
+  weeklyHighlight: WeeklyHighlightProps;
   highlights: HighlightTeaserProps[];
 }
 

@@ -30,7 +30,7 @@ import { ArticleList } from '~/domain/topical/article-list';
 import { ChoroplethTwoColumnLayout } from '~/domain/topical/choropleth-two-column-layout';
 import {
   HighlightsTile,
-  weeklyHighlightProps,
+  WeeklyHighlightProps,
 } from '~/domain/topical/highlights-tile';
 import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
@@ -80,7 +80,7 @@ export const getStaticProps = createGetStaticProps(
   }),
   createGetContent<{
     articles: ArticleSummary[];
-    weeklyHighlight: weeklyHighlightProps;
+    weeklyHighlight: WeeklyHighlightProps;
     highlights: HighlightTeaserProps[];
   }>(getTopicalPageQuery)
 );
