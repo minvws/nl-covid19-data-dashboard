@@ -84,6 +84,7 @@ const Line = styled(Shape)(
     top: '10px',
     width: '15px',
     height: '3px',
+    borderRadius: '2px',
   })
 );
 
