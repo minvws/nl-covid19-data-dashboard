@@ -26,14 +26,23 @@ export function Menu({ children }: { children: ReactNode }) {
 export function CategoryMenu({
   title,
   children,
-  isSmallPaddingTop,
+  hasSmallPaddingTop,
 }: {
   title: string;
   children: ReactNode;
-  isSmallPaddingTop?: boolean;
+  hasSmallPaddingTop?: boolean;
 }) {
   return (
-    <Box as="li" spacing={3} pt={isSmallPaddingTop ? 4 : 5}>
+    <Box
+      as="li"
+      spacing={3}
+      pt={hasSmallPaddingTop ? 4 : 5}
+      css={css({
+        '&:first-child': {
+          backgroundColor: 'red',
+        },
+      })}
+    >
       <Category>{title}</Category>
       <Menu>{children}</Menu>
     </Box>

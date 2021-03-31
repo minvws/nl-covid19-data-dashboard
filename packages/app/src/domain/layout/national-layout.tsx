@@ -101,7 +101,7 @@ export function NationalLayout(props: NationalLayoutProps) {
 
               <CategoryMenu
                 title={siteText.nationaal_layout.headings.vaccinaties}
-                isSmallPaddingTop
+                hasSmallPaddingTop
               >
                 <MetricMenuItemLink
                   href="/landelijk/vaccinaties"
