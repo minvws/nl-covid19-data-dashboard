@@ -13,6 +13,7 @@ import { SeriesConfig } from '../../logic';
 import { SeriesIcon } from '../series-icon';
 import { TooltipData } from './types';
 import { useIntl } from '~/intl';
+import { isPresent } from 'ts-is-present';
 
 export function TooltipSeriesList<T extends TimestampedValue>({
   data: tooltipData,
@@ -57,7 +58,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
   ) {
     const numberValue = (value[key] as unknown) as number | null;
 
-    return numberValue
+    return isPresent(numberValue)
       ? isPercentage
         ? `${formatPercentage(numberValue)}%`
         : formatNumber(numberValue)
@@ -120,6 +121,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
 
             case 'line':
             case 'area':
+            case 'bar':
               return (
                 <TooltipListItem key={index} icon={<SeriesIcon config={x} />}>
                   <TooltipValueContainer>

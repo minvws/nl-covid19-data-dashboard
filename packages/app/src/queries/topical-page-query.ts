@@ -16,26 +16,27 @@ export function getTopicalPageQuery(_context: GetStaticPropsContext) {
         "asset": cover.asset->
       }
     }[0..2],
-    'editorial': *[_type == 'editorial'] | order(publicationDate desc) {
+    'weeklyHighlight': *[_type == 'editorial'] | order(publicationDate desc) {
       "title":title.${locale},
       slug,
       "summary":summary.${locale},
+      publicationDate,
       "cover": {
         ...cover,
         "asset": cover.asset->
       }
     }[0],
-    "highlight": *[_type=='topicalPage'] {
-      "title":title.${locale},
-      "summary":summary.${locale},
-      "link": {
-        "label":label.${locale},
-        href
-      },
-      "cover": {
-        ...cover,
-        "asset": cover.asset->  
+    "highlights": *[_type=='topicalPage']{
+      highlights[]{
+        "title":title.${locale},
+        "category": category.${locale},
+        "label":label.nl,
+        href,
+        "cover": {
+          ...cover,
+          "asset": cover.asset->  
+        }
       }
-    }[0]
+    }[0].highlights
   }`;
 }

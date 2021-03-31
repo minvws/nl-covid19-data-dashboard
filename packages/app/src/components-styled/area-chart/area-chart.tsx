@@ -211,9 +211,7 @@ export function AreaChart<
   return (
     <>
       {isDefined(valueAnnotation) && (
-        <ValueAnnotation mb={2} fontSize={1}>
-          {valueAnnotation}
-        </ValueAnnotation>
+        <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
       )}
       <Box position="relative" ref={sizeRef}>
         <AreaChartGraph

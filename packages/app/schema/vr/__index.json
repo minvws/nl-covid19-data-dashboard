@@ -22,7 +22,8 @@
     "behavior",
     "escalation_level",
     "tested_overall_sum",
-    "hospital_nice_sum"
+    "hospital_nice_sum",
+    "g_number"
   ],
   "additionalProperties": false,
   "properties": {
