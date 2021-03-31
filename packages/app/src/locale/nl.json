@@ -472,11 +472,11 @@
     "kpi_titel": "Aantal positief geteste bewoners per dag",
     "line_chart_legend_trend_label": "Aantal positief geteste bewoners",
     "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
-    "line_chart_legend_trend_moving_average_label": "Gemiddeld aantal over afgelopen 7 dagen",
+    "line_chart_legend_trend_moving_average_label": "Gemiddeld aantal over de afgelopen 7 dagen",
     "tooltip_labels": {
       "inaccurate": "Incompleet",
       "newly_infected_people": "Gemeld aantal positief geteste bewoners",
-      "newly_infected_people_moving_average": "Gemiddeld aantal over afgelopen 7 dagen"
+      "newly_infected_people_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen"
     }
   },
   "verpleeghuis_oversterfte": {
@@ -513,11 +513,11 @@
     "kpi_titel": "Sterfte per dag",
     "line_chart_legend_trend_label": "Aantal overleden bewoners",
     "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
-    "line_chart_legend_trend_moving_average_label": "Gemiddeld aantal overleden bewoners over afgelopen 7 dagen.",
+    "line_chart_legend_trend_moving_average_label": "Gemiddeld aantal overleden bewoners over de afgelopen 7 dagen",
     "tooltip_labels": {
       "inaccurate": "Incompleet",
       "deceased_daily": "Gemeld aantal overleden bewoners",
-      "deceased_daily_moving_average": "Gemiddeld aantal over afgelopen 7 dagen"
+      "deceased_daily_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen"
     }
   },
   "blok_verpleeghuis_zorg": {
@@ -1182,11 +1182,11 @@
     },
     "line_chart_legend_trend_label": "Aantal overleden bewoners",
     "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
-    "line_chart_legend_trend_moving_average_label": "Gemiddeld aantal overleden bewoners over afgelopen 7 dagen.",
+    "line_chart_legend_trend_moving_average_label": "Gemiddeld aantal overleden bewoners over de afgelopen 7 dagen",
     "tooltip_labels": {
       "inaccurate": "Incompleet",
       "deceased_daily": "Gemeld aantal overleden bewoners",
-      "deceased_daily_moving_average": "Gemiddeld aantal over afgelopen 7 dagen"
+      "deceased_daily_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen"
     }
   },
   "veiligheidsregio_verpleeghuis_besmette_locaties": {
@@ -1261,7 +1261,7 @@
     "tooltip_labels": {
       "inaccurate": "Incompleet",
       "newly_infected_people": "Gemeld aantal positief geteste bewoners",
-      "newly_infected_people_moving_average": "Gemiddeld aantal over afgelopen 7 dagen"
+      "newly_infected_people_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen"
     }
   },
   "data_warning_text": "",
@@ -2111,7 +2111,7 @@
       },
       "stock": {
         "href": "",
-        "text": "",
+        "text": "RIVM",
         "download": ""
       },
       "delivery_estimate_time_span": {
@@ -2354,27 +2354,27 @@
       }
     },
     "stock_and_delivery_section": {
-      "title": "Voorraad & Levering",
-      "description": "Voorraad & Levering",
+      "title": "Leveringen & voorraad",
+      "description": "Leveringen & voorraad",
       "reference": {
-        "href": "/",
-        "text": "Voorraad & Levering"
+        "href": "/verantwoording#leveringen-en-voorraad-vaccins",
+        "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
       }
     },
     "stock": {
       "title": "Vaccins in voorraad",
-      "description": "Dit getal laat zien hoeveel vaccins het RIVM op voorraad heeft. Een beschikbare voorraad van vijf dagen betekent bijvoorbeeld dat er genoeg vaccins klaar liggen in de opslag voor de mensen die in de vijf dagen daarna worden geprikt, ook als er onverwacht geen nieuwe vaccins worden geleverd.",
-      "per_vaccine": "{{amount}} {{label}} prikken"
+      "description": "Dit getal laat zien hoeveel vaccins het RIVM op voorraad heeft per type vaccin. We houden niet meer vaccins in voorraad dan nodig is om te zorgen dat iedereen op tijd de tweede prik krijgt.",
+      "per_vaccine": "{{amount}} {{label}} vaccins"
     },
     "delivery_estimate_time_span": {
-      "title": "Vaccins in voorraad: Dit is voldoende om {{weeks}} weken mee te prikken.",
-      "description": "Dit getal laat zien hoeveel vaccins het RIVM op voorraad heeft. Een beschikbare voorraad van vijf dagen betekent bijvoorbeeld dat er genoeg vaccins klaar liggen in de opslag voor de mensen die in de vijf dagen daarna worden geprikt, ook als er onverwacht geen nieuwe vaccins worden geleverd."
+      "title": "",
+      "description": "Dit getal laat zien hoeveel vaccins het RIVM op voorraad heeft per type vaccin. We houden niet meer vaccins in voorraad dan nodig is om te zorgen dat iedereen op tijd de tweede prik krijgt."
     },
     "grafiek_leveringen": {
-      "titel": "Leveringen t/m week {{weekNumber}}",
-      "omschrijving": "Iets over deze grafiek"
+      "titel": "Leveringen",
+      "omschrijving": "Deze grafiek laat zien hoeveel COVID-19-vaccins Nederland per week heeft gekregen en verwacht te krijgen van de verschillende producenten."
     },
-    "bereidheid_datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt 3-wekelijks bijgewerkt."
+    "bereidheid_datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt elke drie weken bijgewerkt."
   },
   "editorial_detail": {
     "back_link": {
@@ -2891,13 +2891,13 @@
     }
   },
   "infected_per_age_group": {
-    "title": "Verdeling naar leeftijd",
-    "description": "Verdeling naar leeftijd ...",
+    "title": "Aantal positieve testen per leeftijdsgroep door de tijd heen",
+    "description": "Deze grafiek laat zien van hoeveel mensen in een bepaalde leeftijdsgroep gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
     "legend": {
       "infected_age_0_9_per_100k": "0-9",
       "infected_age_10_19_per_100k": "10-19",
       "infected_age_20_29_per_100k": "20-29",
-      "infected_age_30_39_per_100k": "30-30",
+      "infected_age_30_39_per_100k": "30-39",
       "infected_age_40_49_per_100k": "40-49",
       "infected_age_50_59_per_100k": "50-59",
       "infected_age_60_69_per_100k": "60-69",
@@ -2907,7 +2907,7 @@
       "infected_overall_per_100k": "Alle leeftijden"
     },
     "reset_button_label": "Reset",
-    "legend_help_text": "Selecteer een of meerdere leeftijdsgroepen om deze apart te bekijken."
+    "legend_help_text": "Selecteer één of meerdere leeftijdsgroepen om deze apart te bekijken."
   },
   "g_number": {
     "bar_chart": {
