@@ -84,6 +84,8 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
     }),
   };
 
+  const escalationColor = useEscalationColor(currentLevel);
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <SafetyRegionLayout

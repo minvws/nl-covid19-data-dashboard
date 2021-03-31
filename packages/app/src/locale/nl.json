@@ -2729,7 +2729,26 @@
         "toelichting": "Dit is het risiconiveau dat nu geldt in deze regio. Het risiconiveau wordt elke twee weken bepaald op basis van het aantal ziekenhuisopnames en het aantal positieve testen van dat moment."
       }
     },
-    "escalation_level_last_determined": "Dit risiconiveau is bepaald op {{last_determined}}, op basis van de cijfers van {{based_from}} t/m {{based_to}}. Rond {{next_determined}} wordt het risiconiveau opnieuw bepaald."
+    "escalation_level_last_determined": "Dit risiconiveau is bepaald op {{last_determined}}, op basis van de cijfers van {{based_from}} t/m {{based_to}}. Rond {{next_determined}} wordt het risiconiveau opnieuw bepaald.",
+    "momenteel": {
+      "description": "Dit is het risiconiveau dat nu geldt in deze regio. Het risiconiveau wordt elke twee weken bepaald op basis van het aantal ziekenhuisopnames en het aantal positieve testen van dat moment.",
+      "description_from_to": "",
+      "last_determined": "Dit risiconiveau is bepaald op {{date}}",
+      "established_with": {
+        "title": "Het risiconiveau is bepaald met de cijfers van ",
+        "description": "{{based_from}} t/m {{based_to}}"
+      },
+      "positive_tests": {
+        "title": "Positieve testen",
+        "description": "{{amount}} per 100.000 inwoners per week"
+      },
+      "hospital_admissions": {
+        "title": "Ziekenhuisopnames (incl. IC)",
+        "description": "{{amount}} per 1 miljoen inwoners per week"
+      },
+      "next_determined": "Het risiconiveau wordt opnieuw bepaald rond {{date}}",
+      "link_text": ""
+    }
   },
   "gemeente_sterfte": {
     "titel_sidebar": "Sterfte",
