@@ -432,7 +432,7 @@
         "text": "RIVM"
       }
     },
-    "linechart_tooltip_label": ""
+    "linechart_tooltip_label": "Number of infected nursing homes"
   },
   "verpleeghuis_positief_geteste_personen": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -470,12 +470,12 @@
       }
     },
     "kpi_titel": "Number of confirmed cases per day",
-    "line_chart_legend_trend_label": "",
+    "line_chart_legend_trend_label": "Number of confirmed cases",
     "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
     "line_chart_legend_trend_moving_average_label": "Average number over the past 7 days",
     "tooltip_labels": {
-      "inaccurate": "",
-      "newly_infected_people": "",
+      "inaccurate": "Incomplete",
+      "newly_infected_people": "Reported number of confirmed cases",
       "newly_infected_people_moving_average": "Average number over the past 7 days"
     }
   },
@@ -511,12 +511,12 @@
       }
     },
     "kpi_titel": "Mortality per day",
-    "line_chart_legend_trend_label": "",
+    "line_chart_legend_trend_label": "Number of deceased nursing home residents",
     "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
     "line_chart_legend_trend_moving_average_label": "Number of deceased residents over the past 7 days",
     "tooltip_labels": {
-      "inaccurate": "",
-      "deceased_daily": "",
+      "inaccurate": "Incomplete",
+      "deceased_daily": "Reported number of deceased nursing home residents",
       "deceased_daily_moving_average": "Average number over the past 7 days"
     }
   },
@@ -1180,12 +1180,12 @@
         "text": "RIVM"
       }
     },
-    "line_chart_legend_trend_label": "",
+    "line_chart_legend_trend_label": "Number of deceased nursing home residents",
     "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
     "line_chart_legend_trend_moving_average_label": "Number of deceased residents over the past 7 days",
     "tooltip_labels": {
-      "inaccurate": "",
-      "deceased_daily": "",
+      "inaccurate": "Incomplete",
+      "deceased_daily": "Reported number of deceased nursing home residents",
       "deceased_daily_moving_average": "Average number over the past 7 days"
     }
   },
@@ -1219,7 +1219,7 @@
         "text": "RIVM"
       }
     },
-    "linechart_tooltip_label": ""
+    "linechart_tooltip_label": "Number of infected nursing homes"
   },
   "veiligheidsregio_verpleeghuis_positief_geteste_personen": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -1255,12 +1255,12 @@
         "text": "RIVM"
       }
     },
-    "line_chart_legend_trend_label": "",
+    "line_chart_legend_trend_label": "Number of confirmed cases",
     "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
     "line_chart_legend_trend_moving_average_label": "Average number over the past 7 days",
     "tooltip_labels": {
-      "inaccurate": "",
-      "newly_infected_people": "",
+      "inaccurate": "Incomplete",
+      "newly_infected_people": "Reported number of confirmed cases",
       "newly_infected_people_moving_average": "Average number over the past 7 days"
     }
   },
