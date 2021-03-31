@@ -50,13 +50,7 @@ export function VaccineDeliveryBarChart({
 
   return (
     <ChartTile
-      title={replaceVariablesInText(text.titel, {
-        weekNumber: data.last_value.week_number,
-        date: intl.formatDateFromSeconds(
-          data.last_value.date_end_unix,
-          'day-month'
-        ),
-      })}
+      title={text.titel}
       metadata={{
         date: data.last_value.date_of_report_unix,
         source: siteText.vaccinaties.bronnen.rivm,
@@ -99,6 +93,11 @@ export function VaccineDeliveryBarChart({
             metricProperty: 'astra_zeneca',
             color: colors.data.vaccines.astra_zeneca,
             label: 'AstraZeneca',
+          },
+          {
+            metricProperty: 'janssen',
+            color: colors.data.vaccines.janssen,
+            label: 'Janssen',
           },
         ]}
         expectedLabel={
