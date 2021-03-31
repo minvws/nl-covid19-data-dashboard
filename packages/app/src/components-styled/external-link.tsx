@@ -13,11 +13,12 @@ export function ExternalLink({
   className,
   ariaLabel,
 }: ExternalLinkProps) {
-  if (ariaLabel || 0 === ariaLabel?.length)
+  if (ariaLabel || 0 === ariaLabel?.length) {
     assert(
       ariaLabel.length > 0,
       'When adding an ariaLabel props, please include some valid text for it'
     );
+  }
 
   return (
     <a
