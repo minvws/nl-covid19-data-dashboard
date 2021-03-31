@@ -24,7 +24,6 @@ import { AppContent } from '~/components-styled/layout/app-content';
 import { SidebarMetric } from '~/components-styled/sidebar-metric';
 import { useIntl } from '~/intl';
 import { useBreakpoints } from '~/utils/useBreakpoints';
-import css from '@styled-system/css';
 
 interface NationalLayoutProps {
   lastGenerated: string;
