@@ -715,6 +715,7 @@ export interface NlVaccineCoveragePerAgeGroupValue {
   partially_vaccinated: number;
   fully_vaccinated_percentage: number;
   partially_vaccinated_percentage: number;
+  partially_or_fully_vaccinated_percentage: number;
   date_unix: number;
   date_of_insertion_unix: number;
   date_of_report_unix: number;
