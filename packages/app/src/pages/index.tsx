@@ -38,8 +38,10 @@ import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import { ChoroplethTwoColumnLayout } from '~/domain/topical/choropleth-two-column-layout';
 import { Search } from '~/domain/topical/components/search';
-import { EditorialSummary } from '~/domain/topical/editorial-teaser';
-import { EditorialTile } from '~/domain/topical/editorial-tile';
+import {
+  HighlightsTile,
+  WeeklyHighlightProps,
+} from '~/domain/topical/highlights-tile';
 import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
@@ -76,8 +78,8 @@ export const getStaticProps = createGetStaticProps(
   }),
   createGetContent<{
     articles: ArticleSummary[];
-    editorial: EditorialSummary;
-    highlight: HighlightTeaserProps;
+    weeklyHighlight: WeeklyHighlightProps;
+    highlights: HighlightTeaserProps[];
   }>(getTopicalPageQuery),
   () => {
     const data = getNlData();
@@ -217,15 +219,15 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               />
             </CollapsibleButton>
 
-            {content.editorial && content.highlight && (
+            {content.weeklyHighlight && content.highlights.length > 0 && (
               <Box pt={3}>
                 <TopicalSectionHeader
                   title={siteText.common_actueel.secties.artikelen.titel}
                 />
 
-                <EditorialTile
-                  editorial={content.editorial}
-                  highlight={content.highlight}
+                <HighlightsTile
+                  weeklyHighlight={content.weeklyHighlight}
+                  highlights={content.highlights}
                 />
               </Box>
             )}

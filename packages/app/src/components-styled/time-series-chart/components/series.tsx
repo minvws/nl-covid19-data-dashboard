@@ -1,7 +1,7 @@
 import { TimestampedValue } from '@corona-dashboard/common';
 import { ScaleLinear } from 'd3-scale';
 import { memo } from 'react';
-import { AreaTrend, LineTrend, RangeTrend } from '.';
+import { AreaTrend, LineTrend, RangeTrend, BarTrend } from '.';
 import {
   Bounds,
   GetX,
@@ -70,12 +70,23 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                   key={index}
                   series={series as SeriesSingleValue[]}
                   color={config.color}
-                  style={config.style}
                   fillOpacity={config.fillOpacity}
                   strokeWidth={config.strokeWidth}
                   getX={getX}
                   getY={getY}
                   yScale={yScale}
+                />
+              );
+            case 'bar':
+              return (
+                <BarTrend
+                  key={index}
+                  series={series as SeriesSingleValue[]}
+                  color={config.color}
+                  fillOpacity={config.fillOpacity}
+                  getX={getX}
+                  getY={getY}
+                  bounds={bounds}
                 />
               );
             case 'range':
@@ -107,10 +118,10 @@ function SeriesUnmemoized<T extends TimestampedValue>({
           }
         })
         /**
-         * We will reverse the elements to ensure the first series will be
-         * rendered as the last dom/svg-node. This way we make sure that the
-         * first (and most-likely most important) series is actually rendered on
-         * top of the other series.
+         * We reverse the elements to ensure the first series will be rendered
+         * as the last dom/svg-node. This way we make sure that the first (and
+         * most-likely most important) series is actually rendered on top of the
+         * other series.
          */
         .reverse()}
     </>

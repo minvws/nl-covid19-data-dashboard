@@ -4,6 +4,8 @@
   "title": "vr_escalation_level",
   "required": [
     "level",
+    "positive_tested_per_100k",
+    "hospital_admissions_per_million",
     "based_on_statistics_to_unix",
     "based_on_statistics_from_unix",
     "next_determined_unix",
@@ -17,6 +19,12 @@
       "type": "number",
       "minimum": 1,
       "maximum": 4
+    },
+    "positive_tested_per_100k": {
+      "type": "number"
+    },
+    "hospital_admissions_per_million": {
+      "type": "number"
     },
     "based_on_statistics_to_unix": {
       "type": "integer"
