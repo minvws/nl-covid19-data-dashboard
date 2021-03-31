@@ -157,7 +157,7 @@ function NewChartTileHeader({
 }: NewChartTileHeaderProps) {
   return (
     <Box display="flex" flexDirection={{ _: 'column', lg: 'row' }}>
-      <Box maxWidth="maxWidthText" pr={{ _: 0, lg: 3 }}>
+      <Box maxWidth="maxWidthText" mr="auto" pr={{ _: 0, lg: 3 }}>
         <Heading level={3}>{title}</Heading>
         <Text> {description}</Text>
       </Box>

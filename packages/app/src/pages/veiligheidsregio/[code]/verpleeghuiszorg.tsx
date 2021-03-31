@@ -1,7 +1,7 @@
 import CoronaVirus from '~/assets/coronavirus.svg';
 import Locatie from '~/assets/locaties.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
-import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
+import { NewChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
@@ -110,52 +110,49 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTileWithTimeframe
+          <NewChartTile
             metadata={{ source: positiveTestedPeopleText.bronnen.rivm }}
             title={positiveTestedPeopleText.linechart_titel}
             ariaDescription={graphDescriptions.verpleeghuiszorg_positief_getest}
+            timeframeOptions={['all', '5weeks', 'week']}
           >
-            {(timeframe) => (
-              <TimeSeriesChart
-                values={data.nursing_home.values}
-                timeframe={timeframe}
-                seriesConfig={[
+            <TimeSeriesChart
+              values={data.nursing_home.values}
+              seriesConfig={[
+                {
+                  type: 'bar',
+                  metricProperty: 'newly_infected_people',
+                  color: colors.data.primary,
+                  label: positiveTestedPeopleText.line_chart_legend_trend_label,
+                  shortLabel:
+                    positiveTestedPeopleText.tooltip_labels
+                      .newly_infected_people,
+                },
+                {
+                  type: 'line',
+                  metricProperty: 'newly_infected_people_moving_average',
+                  color: colors.data.primary,
+                  label:
+                    positiveTestedPeopleText.line_chart_legend_trend_moving_average_label,
+                  shortLabel:
+                    positiveTestedPeopleText.tooltip_labels
+                      .newly_infected_people_moving_average,
+                },
+              ]}
+              dataOptions={{
+                timespanAnnotations: [
                   {
-                    type: 'bar',
-                    metricProperty: 'newly_infected_people',
-                    color: colors.data.primary,
+                    start: underReportedDateStart,
+                    end: Infinity,
                     label:
-                      positiveTestedPeopleText.line_chart_legend_trend_label,
+                      positiveTestedPeopleText.line_chart_legend_inaccurate_label,
                     shortLabel:
-                      positiveTestedPeopleText.tooltip_labels
-                        .newly_infected_people,
+                      positiveTestedPeopleText.tooltip_labels.inaccurate,
                   },
-                  {
-                    type: 'line',
-                    metricProperty: 'newly_infected_people_moving_average',
-                    color: colors.data.primary,
-                    label:
-                      positiveTestedPeopleText.line_chart_legend_trend_moving_average_label,
-                    shortLabel:
-                      positiveTestedPeopleText.tooltip_labels
-                        .newly_infected_people_moving_average,
-                  },
-                ]}
-                dataOptions={{
-                  timespanAnnotations: [
-                    {
-                      start: underReportedDateStart,
-                      end: Infinity,
-                      label:
-                        positiveTestedPeopleText.line_chart_legend_inaccurate_label,
-                      shortLabel:
-                        positiveTestedPeopleText.tooltip_labels.inaccurate,
-                    },
-                  ],
-                }}
-              />
-            )}
-          </ChartTileWithTimeframe>
+                ],
+              }}
+            />
+          </NewChartTile>
 
           <ContentHeader
             id="besmette-locaties"
@@ -207,30 +204,28 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTileWithTimeframe
+          <NewChartTile
             metadata={{ source: infectedLocationsText.bronnen.rivm }}
             title={infectedLocationsText.linechart_titel}
             ariaDescription={
               graphDescriptions.verpleeghuiszorg_besmette_locaties
             }
+            timeframeOptions={['all', '5weeks', 'week']}
           >
-            {(timeframe) => (
-              <TimeSeriesChart
-                values={data.nursing_home.values}
-                timeframe={timeframe}
-                seriesConfig={[
-                  {
-                    type: 'area',
-                    metricProperty: 'infected_locations_total',
-                    label:
-                      siteText.verpleeghuis_besmette_locaties
-                        .linechart_tooltip_label,
-                    color: colors.data.primary,
-                  },
-                ]}
-              />
-            )}
-          </ChartTileWithTimeframe>
+            <TimeSeriesChart
+              values={data.nursing_home.values}
+              seriesConfig={[
+                {
+                  type: 'area',
+                  metricProperty: 'infected_locations_total',
+                  label:
+                    siteText.verpleeghuis_besmette_locaties
+                      .linechart_tooltip_label,
+                  color: colors.data.primary,
+                },
+              ]}
+            />
+          </NewChartTile>
 
           <ContentHeader
             id="sterfte"
@@ -266,45 +261,42 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTileWithTimeframe
+          <NewChartTile
             metadata={{ source: deceased.bronnen.rivm }}
             title={deceased.linechart_titel}
+            timeframeOptions={['all', '5weeks', 'week']}
           >
-            {(timeframe) => (
-              <TimeSeriesChart
-                values={data.nursing_home.values}
-                timeframe={timeframe}
-                seriesConfig={[
+            <TimeSeriesChart
+              values={data.nursing_home.values}
+              seriesConfig={[
+                {
+                  type: 'bar',
+                  metricProperty: 'deceased_daily',
+                  label: deceased.line_chart_legend_trend_label,
+                  shortLabel: deceased.tooltip_labels.deceased_daily,
+                  color: colors.data.primary,
+                },
+                {
+                  type: 'line',
+                  metricProperty: 'deceased_daily_moving_average',
+                  label: deceased.line_chart_legend_trend_moving_average_label,
+                  shortLabel:
+                    deceased.tooltip_labels.deceased_daily_moving_average,
+                  color: colors.data.primary,
+                },
+              ]}
+              dataOptions={{
+                timespanAnnotations: [
                   {
-                    type: 'bar',
-                    metricProperty: 'deceased_daily',
-                    label: deceased.line_chart_legend_trend_label,
-                    shortLabel: deceased.tooltip_labels.deceased_daily,
-                    color: colors.data.primary,
+                    start: underReportedDateStart,
+                    end: Infinity,
+                    label: deceased.line_chart_legend_inaccurate_label,
+                    shortLabel: deceased.tooltip_labels.inaccurate,
                   },
-                  {
-                    type: 'line',
-                    metricProperty: 'deceased_daily_moving_average',
-                    label:
-                      deceased.line_chart_legend_trend_moving_average_label,
-                    shortLabel:
-                      deceased.tooltip_labels.deceased_daily_moving_average,
-                    color: colors.data.primary,
-                  },
-                ]}
-                dataOptions={{
-                  timespanAnnotations: [
-                    {
-                      start: underReportedDateStart,
-                      end: Infinity,
-                      label: deceased.line_chart_legend_inaccurate_label,
-                      shortLabel: deceased.tooltip_labels.inaccurate,
-                    },
-                  ],
-                }}
-              />
-            )}
-          </ChartTileWithTimeframe>
+                ],
+              }}
+            />
+          </NewChartTile>
         </TileList>
       </SafetyRegionLayout>
     </Layout>

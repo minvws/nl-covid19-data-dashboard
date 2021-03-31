@@ -3,10 +3,7 @@ import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
 import { BarChart } from '~/components-styled/bar-chart/bar-chart';
-import {
-  ChartTile,
-  ChartTileWithTimeframe,
-} from '~/components-styled/chart-tile';
+import { ChartTile, NewChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
@@ -159,32 +156,31 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTileWithTimeframe
+          <NewChartTile
             title={text.linechart_titel}
             metadata={{ source: text.bronnen.rivm }}
             timeframeOptions={['all', '5weeks']}
+            hasExtraToggle
           >
-            {(timeframe) => (
-              <SewerChart
-                data={data}
-                timeframe={timeframe}
-                valueAnnotation={siteText.waarde_annotaties.riool_normalized}
-                text={{
-                  select_station_placeholder:
-                    text.graph_selected_rwzi_placeholder,
-                  average_label_text: text.graph_average_label_text,
-                  secondary_label_text: text.graph_secondary_label_text,
-                  daily_label_text: text.graph_daily_label_text_rwzi,
-                  range_description: text.graph_range_description,
-                  display_outliers: text.display_outliers,
-                  hide_outliers: text.hide_outliers,
-                }}
-              />
-            )}
-          </ChartTileWithTimeframe>
+            <SewerChart
+              data={data}
+              timeframe={'all'}
+              valueAnnotation={siteText.waarde_annotaties.riool_normalized}
+              text={{
+                select_station_placeholder:
+                  text.graph_selected_rwzi_placeholder,
+                average_label_text: text.graph_average_label_text,
+                secondary_label_text: text.graph_secondary_label_text,
+                daily_label_text: text.graph_daily_label_text_rwzi,
+                range_description: text.graph_range_description,
+                display_outliers: text.display_outliers,
+                hide_outliers: text.hide_outliers,
+              }}
+            />
+          </NewChartTile>
 
           {barChartData && (
-            <ChartTile
+            <NewChartTile
               title={replaceVariablesInText(text.bar_chart_title, {
                 municipality: municipalityName,
               })}
@@ -204,7 +200,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                   text.bar_chart_accessibility_description
                 }
               />
-            </ChartTile>
+            </NewChartTile>
           )}
         </TileList>
       </MunicipalityLayout>

@@ -1,6 +1,6 @@
 import { getLastFilledValue } from '@corona-dashboard/common';
 import Ziektegolf from '~/assets/ziektegolf.svg';
-import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
+import { NewChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
@@ -76,37 +76,34 @@ const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTileWithTimeframe
+          <NewChartTile
             metadata={{ source: text.bronnen.rivm }}
             title={text.linechart_titel}
             timeframeOptions={['all', '5weeks']}
           >
-            {(timeframe) => (
-              <TimeSeriesChart
-                timeframe={timeframe}
-                tooltipTitle={text.linechart_titel}
-                values={data.infectious_people.values}
-                ariaLabelledBy=""
-                seriesConfig={[
-                  {
-                    type: 'range',
-                    metricPropertyLow: 'margin_low',
-                    metricPropertyHigh: 'margin_high',
-                    label: text.legenda_marge,
-                    shortLabel: text.rangeLegendLabel,
-                    color: colors.data.margin,
-                  },
-                  {
-                    type: 'line',
-                    metricProperty: 'estimate',
-                    label: text.legenda_line,
-                    shortLabel: text.lineLegendLabel,
-                    color: colors.data.primary,
-                  },
-                ]}
-              />
-            )}
-          </ChartTileWithTimeframe>
+            <TimeSeriesChart
+              tooltipTitle={text.linechart_titel}
+              values={data.infectious_people.values}
+              ariaLabelledBy=""
+              seriesConfig={[
+                {
+                  type: 'range',
+                  metricPropertyLow: 'margin_low',
+                  metricPropertyHigh: 'margin_high',
+                  label: text.legenda_marge,
+                  shortLabel: text.rangeLegendLabel,
+                  color: colors.data.margin,
+                },
+                {
+                  type: 'line',
+                  metricProperty: 'estimate',
+                  label: text.legenda_line,
+                  shortLabel: text.lineLegendLabel,
+                  color: colors.data.primary,
+                },
+              ]}
+            />
+          </NewChartTile>
         </TileList>
       </NationalLayout>
     </Layout>

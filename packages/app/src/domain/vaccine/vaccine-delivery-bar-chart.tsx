@@ -1,5 +1,5 @@
 import { NlVaccineDeliveryPerSupplier } from '@corona-dashboard/common';
-import { ChartTile } from '~/components-styled/chart-tile';
+import { NewChartTile } from '~/components-styled/chart-tile';
 import { StackedChart } from '~/components-styled/stacked-chart';
 import { AllLanguages } from '~/locale';
 import { colors } from '~/style/theme';
@@ -109,7 +109,7 @@ export function VaccineDeliveryBarChart({
   };
  */
   return (
-    <ChartTile
+    <NewChartTile
       title={replaceVariablesInText(text.titel, {
         weekNumber: data.last_value.week_number,
       })}
@@ -145,6 +145,6 @@ export function VaccineDeliveryBarChart({
           siteText.vaccinaties.data.vaccination_chart.legend.expected
         }
       />
-    </ChartTile>
+    </NewChartTile>
   );
 }

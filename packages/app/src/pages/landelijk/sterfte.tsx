@@ -2,7 +2,7 @@ import CoronaVirusIcon from '~/assets/coronavirus.svg';
 import { AgeDemographic } from '~/components-styled/age-demographic';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
-import { ChartTile } from '~/components-styled/chart-tile';
+import { NewChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
@@ -151,7 +151,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
             showLegend
           />
 
-          <ChartTile
+          <NewChartTile
             title={siteText.deceased_age_groups.title}
             description={siteText.deceased_age_groups.description}
             metadata={{
@@ -165,7 +165,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
               displayMaxPercentage={45}
               text={siteText.deceased_age_groups.graph}
             />
-          </ChartTile>
+          </NewChartTile>
 
           <ContentHeader
             title={siteText.section_sterftemonitor.title}

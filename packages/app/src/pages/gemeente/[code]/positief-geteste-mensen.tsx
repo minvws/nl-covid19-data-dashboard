@@ -5,7 +5,7 @@ import {
 import Getest from '~/assets/test.svg';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
-import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
+import { NewChartTile } from '~/components-styled/chart-tile';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
@@ -128,41 +128,39 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTileWithTimeframe
+          <NewChartTile
             title={text.linechart_titel}
             description={text.linechart_toelichting}
             metadata={{
               source: text.bronnen.rivm,
             }}
+            timeframeOptions={['all', '5weeks', 'week']}
           >
-            {(timeframe) => (
-              <TimeSeriesChart
-                values={data.tested_overall.values}
-                timeframe={timeframe}
-                seriesConfig={[
-                  {
-                    type: 'area',
-                    metricProperty: 'infected_per_100k',
-                    label:
-                      siteText.positief_geteste_personen.tooltip_labels
-                        .infected_per_100k,
-                    color: colors.data.primary,
-                  },
-                  {
-                    type: 'invisible',
-                    metricProperty: 'infected',
-                    label: siteText.common.totaal,
-                  },
-                ]}
-                dataOptions={{
-                  benchmark: {
-                    value: 7,
-                    label: siteText.common.signaalwaarde,
-                  },
-                }}
-              />
-            )}
-          </ChartTileWithTimeframe>
+            <TimeSeriesChart
+              values={data.tested_overall.values}
+              seriesConfig={[
+                {
+                  type: 'area',
+                  metricProperty: 'infected_per_100k',
+                  label:
+                    siteText.positief_geteste_personen.tooltip_labels
+                      .infected_per_100k,
+                  color: colors.data.primary,
+                },
+                {
+                  type: 'invisible',
+                  metricProperty: 'infected',
+                  label: siteText.common.totaal,
+                },
+              ]}
+              dataOptions={{
+                benchmark: {
+                  value: 7,
+                  label: siteText.common.signaalwaarde,
+                },
+              }}
+            />
+          </NewChartTile>
 
           <ChoroplethTile
             title={replaceVariablesInText(text.map_titel, {
