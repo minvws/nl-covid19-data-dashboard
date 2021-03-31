@@ -5,10 +5,7 @@ import Gedrag from '~/assets/gedrag.svg';
 import Phone from '~/assets/phone.svg';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
-import {
-  ChartTileWithTimeframe,
-  NewChartTile,
-} from '~/components-styled/chart-tile';
+import { NewChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
@@ -193,55 +190,18 @@ const BehaviorPage = (props: StaticProps<typeof getStaticProps>) => {
             </Tile>
           </TwoKpiSection>
 
-          <ChartTileWithTimeframe
-            metadata={{
-              source:
-                corona_melder_app.waarschuwingen_over_tijd_grafiek.bronnen
-                  .coronamelder,
-            }}
-            title={corona_melder_app.waarschuwingen_over_tijd_grafiek.title}
-            description={
-              corona_melder_app.waarschuwingen_over_tijd_grafiek.description
-            }
-          >
-            {(timeframe) => (
-              <TimeSeriesChart
-                tooltipTitle={
-                  corona_melder_app.waarschuwingen_over_tijd_grafiek.title
-                }
-                timeframe={timeframe}
-                values={data.corona_melder_app.values}
-                ariaLabelledBy={
-                  corona_melder_app.waarschuwingen_over_tijd_grafiek
-                    .ariaDescription
-                }
-                paddingLeft={40}
-                seriesConfig={[
-                  {
-                    type: 'area',
-                    metricProperty: 'warned_daily',
-                    label:
-                      corona_melder_app.waarschuwingen_over_tijd_grafiek.labels
-                        .warnings,
-                    color: colors.data.primary,
-                  },
-                ]}
-              />
-            )}
-          </ChartTileWithTimeframe>
-
           <NewChartTile
-            title={corona_melder_app.waarschuwingen_over_tijd_grafiek.title}
-            description={
-              corona_melder_app.waarschuwingen_over_tijd_grafiek.description
-            }
             metadata={{
               source:
                 corona_melder_app.waarschuwingen_over_tijd_grafiek.bronnen
                   .coronamelder,
             }}
-            timeframeInitialValue="week"
-            timeframeOptions={['all', 'week']}
+            title={corona_melder_app.waarschuwingen_over_tijd_grafiek.title}
+            description={
+              corona_melder_app.waarschuwingen_over_tijd_grafiek.description
+            }
+            timeframeOptions={['all', '5weeks', 'week']}
+            timeframeInitialValue="all"
           >
             <TimeSeriesChart
               tooltipTitle={
@@ -264,55 +224,6 @@ const BehaviorPage = (props: StaticProps<typeof getStaticProps>) => {
                 },
               ]}
             />
-          </NewChartTile>
-
-          <NewChartTile
-            title={corona_melder_app.waarschuwingen_over_tijd_grafiek.title}
-            description={
-              corona_melder_app.waarschuwingen_over_tijd_grafiek.description
-            }
-            metadata={{
-              source:
-                corona_melder_app.waarschuwingen_over_tijd_grafiek.bronnen
-                  .coronamelder,
-            }}
-          >
-            <TimeSeriesChart
-              tooltipTitle={
-                corona_melder_app.waarschuwingen_over_tijd_grafiek.title
-              }
-              values={data.corona_melder_app.values}
-              timeframe="5weeks"
-              ariaLabelledBy={
-                corona_melder_app.waarschuwingen_over_tijd_grafiek
-                  .ariaDescription
-              }
-              paddingLeft={40}
-              seriesConfig={[
-                {
-                  type: 'area',
-                  metricProperty: 'warned_daily',
-                  label:
-                    corona_melder_app.waarschuwingen_over_tijd_grafiek.labels
-                      .warnings,
-                  color: colors.data.primary,
-                },
-              ]}
-            />
-          </NewChartTile>
-
-          <NewChartTile
-            title={corona_melder_app.waarschuwingen_over_tijd_grafiek.title}
-            description={
-              corona_melder_app.waarschuwingen_over_tijd_grafiek.description
-            }
-            metadata={{
-              source:
-                corona_melder_app.waarschuwingen_over_tijd_grafiek.bronnen
-                  .coronamelder,
-            }}
-          >
-            <h1>test</h1>
           </NewChartTile>
         </TileList>
       </NationalLayout>

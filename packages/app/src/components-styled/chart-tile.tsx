@@ -8,6 +8,7 @@ import { MetadataProps } from './metadata';
 import { Heading, Text } from './typography';
 import { assert } from '~/utils/assert';
 import slugify from 'slugify';
+import { asResponsiveArray } from '~/style/utils';
 interface ChartTileProps {
   children: React.ReactNode;
   metadata: MetadataProps;
@@ -145,12 +146,14 @@ interface NewChartTileHeaderProps {
   title: string;
   description?: string;
   children?: React.ReactNode;
+  hasExtraToggle?: boolean;
 }
 
 function NewChartTileHeader({
   title,
   description,
   children,
+  hasExtraToggle,
 }: NewChartTileHeaderProps) {
   return (
     <Box display="flex" flexDirection={{ _: 'column', lg: 'row' }}>
@@ -161,8 +164,14 @@ function NewChartTileHeader({
       {children && (
         <Box
           display="inline-table"
-          alignSelf={{ _: 'center', lg: 'flex-end' }}
-          mb={3}
+          alignSelf={{ _: 'flex-start', lg: 'flex-end' }}
+          mb={hasExtraToggle ? asResponsiveArray({ _: 3, lg: 0 }) : 3}
+          css={css({
+            transform: hasExtraToggle
+              ? asResponsiveArray({ lg: 'translateY(100%)' })
+              : undefined,
+            zIndex: 3,
+          })}
         >
           {children}
         </Box>
@@ -178,6 +187,7 @@ interface NewChartTileProps {
   children?: React.ReactNode;
   timeframeOptions?: TimeframeOption[];
   timeframeInitialValue?: TimeframeOption;
+  hasExtraToggle?: boolean;
 }
 
 export function NewChartTile({
@@ -187,6 +197,7 @@ export function NewChartTile({
   metadata,
   timeframeOptions,
   timeframeInitialValue = 'all',
+  hasExtraToggle,
 }: NewChartTileProps) {
   const [timeframe, setTimeframe] = useState<TimeframeOption>(
     timeframeInitialValue
@@ -194,7 +205,11 @@ export function NewChartTile({
 
   return (
     <ChartTileContainer metadata={metadata}>
-      <NewChartTileHeader title={title} description={description}>
+      <NewChartTileHeader
+        title={title}
+        description={description}
+        hasExtraToggle={hasExtraToggle}
+      >
         {timeframeOptions && (
           <ChartTimeControls
             timeframeOptions={timeframeOptions}
@@ -203,10 +218,16 @@ export function NewChartTile({
           />
         )}
       </NewChartTileHeader>
-
+      {/* Clone element and assign a timeframe to it if there are timeframeOptions */}
       {timeframeOptions
-        ? // Assign the timeframe directly to the react element
-          React.cloneElement(children as React.ReactElement, { timeframe })
+        ? Array.isArray(children)
+          ? children.map((item, index) =>
+              React.cloneElement(item as React.ReactElement, {
+                timeframe,
+                key: index,
+              })
+            )
+          : React.cloneElement(children as React.ReactElement, { timeframe })
         : children}
     </ChartTileContainer>
   );

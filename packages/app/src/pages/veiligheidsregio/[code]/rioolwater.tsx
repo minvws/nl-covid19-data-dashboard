@@ -6,6 +6,7 @@ import { BarChart } from '~/components-styled/bar-chart/bar-chart';
 import {
   ChartTile,
   ChartTileWithTimeframe,
+  NewChartTile,
 } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
@@ -176,12 +177,35 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTileWithTimeframe>
 
+          <NewChartTile
+            title={text.linechart_titel}
+            description={text.extra_uitleg}
+            metadata={{ source: text.bronnen.rivm }}
+            timeframeOptions={['all', '5weeks']}
+            hasExtraToggle
+          >
+            <SewerChart
+              data={data}
+              timeframe={'5weeks'}
+              valueAnnotation={siteText.waarde_annotaties.riool_normalized}
+              text={{
+                select_station_placeholder:
+                  text.graph_selected_rwzi_placeholder,
+                average_label_text: text.graph_average_label_text,
+                secondary_label_text: text.graph_secondary_label_text,
+                daily_label_text: text.graph_daily_label_text_rwzi,
+                range_description: text.graph_range_description,
+                display_outliers: text.display_outliers,
+                hide_outliers: text.hide_outliers,
+              }}
+            />
+          </NewChartTile>
+
           {barChartData && (
-            <ChartTile
+            <NewChartTile
               title={replaceVariablesInText(text.bar_chart_title, {
                 safetyRegion: safetyRegionName,
               })}
-              ariaDescription={graphDescriptions.rioolwater_meetwaarde}
               metadata={{
                 date: [
                   sewerAverages.last_value.date_start_unix,
@@ -197,7 +221,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                   text.bar_chart_accessibility_description
                 }
               />
-            </ChartTile>
+            </NewChartTile>
           )}
         </TileList>
       </SafetyRegionLayout>
