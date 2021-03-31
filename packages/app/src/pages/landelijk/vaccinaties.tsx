@@ -354,6 +354,11 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             </Box>
           </ChartTile>
 
+          <VaccineDeliveryBarChart
+            data={data.vaccine_delivery_per_supplier}
+            siteText={siteText}
+          />
+
           <MilestonesView
             title={milestones.title}
             description={milestones.description}
