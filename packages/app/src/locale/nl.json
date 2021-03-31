@@ -1061,7 +1061,7 @@
       "geen_regio": "geen regio's",
       "regio_singular": "{{amount}} regio",
       "regio_plural": "{{amount}} regio's",
-      "determined_on": "Dit risiconiveau is bepaald op {{date}}"
+      "determined_on": "Risiconiveau bepaald op {{date}}"
     },
     "valid_from": "Geldig vanaf {{validFrom}}",
     "sidebar_label": "Risiconiveau:",
@@ -2762,22 +2762,22 @@
     "escalation_level_last_determined": "Dit risiconiveau is bepaald op {{last_determined}}, op basis van de cijfers van {{based_from}} t/m {{based_to}}. Rond {{next_determined}} wordt het risiconiveau opnieuw bepaald.",
     "momenteel": {
       "description": "Dit is het risiconiveau dat nu geldt in deze regio. Het risiconiveau wordt elke twee weken bepaald op basis van het aantal ziekenhuisopnames en het aantal positieve testen van dat moment.",
-      "description_from_to": "Op {{last_determined}} is vastgesteld risiconiveau {{risk_level}}. De volgende ronde is op {{next_determined}}",
-      "last_determined": "Dit risiconiveau is bepaald op ",
+      "description_from_to": "",
+      "last_determined": "Dit risiconiveau is bepaald op {{last_determined}}",
       "established_with": {
-        "title": "Risiconiveau vastgesteld met de cijfers van:",
+        "title": "Het risiconiveau is bepaald met de cijfers van ",
         "description": "{{based_from}} t/m {{based_to}}"
       },
       "positive_tests": {
         "title": "Positieve testen",
-        "description": "{{amount}} per 100.00 inwoners per week"
+        "description": "{{amount}} per 100.000 inwoners per week"
       },
       "hospital_admissions": {
         "title": "Ziekenhuisopnames (incl. IC)",
         "description": "{{amount}} per 1 miljoen inwoners per week"
       },
-      "next_determined": "Het risiconiveau wordt opnieuw bepaald rond ",
-      "link_text": "Bekijk de maatregelen die gelden in deze veiligheidsregio."
+      "next_determined": "Het risiconiveau wordt opnieuw bepaald rond {{next_determined}}",
+      "link_text": ""
     }
   },
   "gemeente_sterfte": {
