@@ -1,21 +1,14 @@
-import {
-  NlVaccineDeliveryPerSupplier,
-  NlVaccineDeliveryPerSupplierValue,
-} from '@corona-dashboard/common';
+import { NlVaccineDeliveryPerSupplier } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useState } from 'react';
 import { Box } from '~/components-styled/base';
-import {
-  ChartTile,
-  ChartTileWithTimeframe,
-} from '~/components-styled/chart-tile';
+import { ChartTile } from '~/components-styled/chart-tile';
 import { RadioGroup } from '~/components-styled/radio-group';
 import { StackedChart } from '~/components-styled/stacked-chart';
 import { Text } from '~/components-styled/typography';
 import { useIntl } from '~/intl';
 import { AllLanguages } from '~/locale';
 import { colors } from '~/style/theme';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 interface VaccineDeliveryBarChartProps {
   data: NlVaccineDeliveryPerSupplier;
@@ -33,7 +26,12 @@ export function VaccineDeliveryBarChart({
   const [timeframe, setTimeframe] = useState<Timeframe>(
     'delivered_and_expected'
   );
-  const isEstimateIndex = data.values.findIndex((value) => value.is_estimate);
+  /**
+   * The timeframe `delivered_and_expected` should display 4 delivered values
+   * and 4 expected values. We'll find the index of the first estimated value
+   * and slice values based on that index.
+   */
+  const estimateIndex = data.values.findIndex((value) => value.is_estimate);
 
   const timeframeOptions = [
     {
@@ -74,7 +72,7 @@ export function VaccineDeliveryBarChart({
         values={
           timeframe === 'all'
             ? data.values
-            : data.values.slice(isEstimateIndex - 4, isEstimateIndex + 4)
+            : data.values.slice(estimateIndex - 4, estimateIndex + 4)
         }
         valueAnnotation={siteText.waarde_annotaties.x_100k}
         formatTickValue={(x) => `${x / 100_000}`}
