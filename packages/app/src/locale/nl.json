@@ -1061,7 +1061,7 @@
       "geen_regio": "geen regio's",
       "regio_singular": "{{amount}} regio",
       "regio_plural": "{{amount}} regio's",
-      "determined_on": "Laatste inschaling: {{date}}"
+      "determined_on": "Dit risiconiveau is bepaald op {{date}}"
     },
     "valid_from": "Geldig vanaf {{validFrom}}",
     "sidebar_label": "Risiconiveau:",
@@ -2763,7 +2763,7 @@
     "momenteel": {
       "description": "Dit is het risiconiveau dat nu geldt in deze regio. Het risiconiveau wordt elke twee weken bepaald op basis van het aantal ziekenhuisopnames en het aantal positieve testen van dat moment.",
       "description_from_to": "Op {{last_determined}} is vastgesteld risiconiveau {{risk_level}}. De volgende ronde is op {{next_determined}}",
-      "last_determined": "Laatste inschaling:",
+      "last_determined": "Dit risiconiveau is bepaald op ",
       "established_with": {
         "title": "Risiconiveau vastgesteld met de cijfers van:",
         "description": "{{based_from}} t/m {{based_to}}"
@@ -2776,7 +2776,7 @@
         "title": "Ziekenhuisopnames (incl. IC)",
         "description": "{{amount}} per 1 miljoen inwoners per week"
       },
-      "next_determined": "Volgende inschaling:",
+      "next_determined": "Het risiconiveau wordt opnieuw bepaald rond ",
       "link_text": "Bekijk de maatregelen die gelden in deze veiligheidsregio."
     }
   },
@@ -2907,12 +2907,12 @@
       "infected_overall_per_100k": "Alle leeftijden"
     },
     "reset_button_label": "Reset",
-    "legend_help_text": "Selecteed een of meerdere leeftijdsgroepen om deze apart te bekijken."
+    "legend_help_text": "Selecteer een of meerdere leeftijdsgroepen om deze apart te bekijken."
   },
   "g_number": {
     "bar_chart": {
       "title": "Ontwikkeling aantal positieve tests (Groeigetal)",
-      "description": "Het Groeigetal (of G-getal) geeft in procenten weer of in de afgelopen 7 dagen meer of minder mensen positief zijn getest op corona dan in de 7 dagen ervoor. Bij een positief Groeigetal is de trend dat het aantal positieve tests toeneemt. Bij een negatief Groeigetal is de trend dat het aantal positieve tests afneemt.",
+      "description": "Het Groeigetal (of G-getal) geeft in procenten weer of in de afgelopen 7 dagen meer of minder mensen positief zijn getest op corona dan in de 7 dagen ervoor. Bij een positief Groeigetal is de trend dat het aantal positieve tests toeneemt. Bij een negatief Groeigetal is de trend dat het aantal positieve tests afneemt. De grafiek laat het Groeigetal van de laatste vijf weken zien.",
       "negative_descriptor": "minder",
       "positive_descriptor": "meer",
       "bronnen": {
