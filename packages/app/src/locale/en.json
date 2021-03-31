@@ -1061,7 +1061,7 @@
       "geen_regio": "no regions",
       "regio_singular": "{{amount}} region",
       "regio_plural": "{{amount}} regions",
-      "determined_on": ""
+      "determined_on": "This risk level has been determined on {{date}}"
     },
     "valid_from": "Valid from {{validFrom}}",
     "sidebar_label": "Risk level:",
@@ -2045,8 +2045,8 @@
     },
     "link_source": "Download date source for \"{{subject}}\" at {{source}}",
     "link_download": "View date source for \"{{subject}}\" at {{source}}",
-    "text_source": "",
-    "text_download": ""
+    "text_source": "View data source of \"{{subject}}\" at {{source}}",
+    "text_download": "Download the data for \"{{subject}}\" at {{source}}"
   },
   "deceased_age_groups": {
     "title": "COVID-19 deaths by age",
@@ -2763,7 +2763,7 @@
     "momenteel": {
       "description": "",
       "description_from_to": "",
-      "last_determined": "",
+      "last_determined": "This risk level has been determined on ",
       "established_with": {
         "title": "",
         "description": ""
@@ -2776,7 +2776,7 @@
         "title": "",
         "description": ""
       },
-      "next_determined": "",
+      "next_determined": "The risk level will be reassessed around",
       "link_text": ""
     }
   },
@@ -2912,7 +2912,7 @@
   "g_number": {
     "bar_chart": {
       "title": "Trend in daily positive tests (Growth rate)",
-      "description": "The Growth rate (or G rate) shows how the number of daily positive tests over the last 7 days has developed relative to the previous 7 days. A positive Growth rate indicates a rising trend in the number of positive tests. A negative Growth rate indicates a declining trend in the number of positive tests.",
+      "description": "The Growth rate (or G rate) shows how the number of daily positive tests over the last 7 days has developed relative to the previous 7 days. A positive Growth rate indicates a rising trend in the number of positive tests. A negative Growth rate indicates a declining trend in the number of positive tests. The graph shows the Growth rate of the last five weeks.",
       "negative_descriptor": "less",
       "positive_descriptor": "more",
       "bronnen": {
