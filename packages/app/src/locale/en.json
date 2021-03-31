@@ -69,7 +69,7 @@
       "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
       "text": "NICE via RIVM"
     },
-    "titel": "Intensive care admissions by day",
+    "titel": "Intensive care admissions reported per day",
     "pagina_toelichting": "Daily number of COVID-19 patients admitted to a hospital intensive care unit (ICU), directly or from a regular hospital ward. To avoid doubles only the first IC admission of a patient counts. This number gives information about the severity of the disease en helps track the development of the epidemic.",
     "barscale_titel": "Intensive care admissions per day",
     "barscale_screenreader_text": "{{value}} intensive care-admissions by day. Alert value: {{signaalwaarde}} admissions per day.",
@@ -276,7 +276,7 @@
   },
   "besmettelijke_personen": {
     "title": "Number of infectious people",
-    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
+    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated twice per week.",
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/097155aa-75eb-4caa-8ed3-4c6edb80467e",
       "text": "RIVM"
@@ -1019,7 +1019,7 @@
   },
   "gemeente_index": {
     "selecteer_titel": "Select your municipality",
-    "selecteer_toelichting": "There are different measures per safety region and municipality",
+    "selecteer_toelichting": "",
     "metadata": {
       "title": "Municipality overview | Coronavirus Dashboard | Government.nl",
       "description": "Overview of municipalities in the Netherlands"
@@ -1473,7 +1473,6 @@
   "infected_age_groups": {
     "title": "Distribution by age",
     "description": "The blue (right) bars in this graph show which age group positive tested persons belong to. The gray (left) bars show how large each age group is in relation to the entire Dutch population. The blue and gray bars together show whether age groups have relatively more or less positive tested persons. For example: 16% of all positive tested persons are in their twenties (blue bar) and 13% of all Dutch people are in their twenties (gray bar). In this example, the age group twenties has relatively more positive tested people. The chart is updated daily and covers only the most recently reported cases.",
-    "example": "For example: of all positive tested people is {{infectedPercentage}} between {{ageGroupRange}} years old. Of all Dutch people is {{ageGroupPercentage}} between {{ageGroupRange}} years old. ",
     "graph": {
       "age_group_percentage_title": "Distribution of age groups in the Netherlands",
       "age_group_percentage_tooltip": "of the population is {{ageGroupRange}} years old.",
@@ -1484,7 +1483,8 @@
       "clipped_value_message": "This value is higher than displayed in the figure.",
       "value_percentage_title": "Confirmed cases by age group",
       "value_percentage_tooltip": "of the confirmed cases are {{ageGroupRange}} years old"
-    }
+    },
+    "example": "For example: of all positive tested people is {{infectedPercentage}} between {{ageGroupRange}} years old. Of all Dutch people is {{ageGroupPercentage}} between {{ageGroupRange}} years old. "
   },
   "gehandicaptenzorg_besmette_locaties": {
     "datums": "Latest values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -2032,7 +2032,7 @@
       "verpleeghuiszorg_overleden_getest": "This graph shows the number of deceased confirmed cases among nursing home residents.",
       "gehandicaptenzorg_positief_getest": "This graph shows the number of confirmed cases in disability care homes.",
       "gehandicaptenzorg_besmette_locaties": "This graph shows the progression of the number of infected disability care homes over time.",
-      "gehandicaptenzorg_overleden": "This graph shows the progression of the number of deceased disability care home residents over time.",
+      "gehandicaptenzorg_overleden": "This graph shows the progression of the number of deceased disability care home residents over time. ",
       "thuiswonende_ouderen_besmettingen": "This graph shows the progression over time in daily confirmed cases among over-70s living at home.",
       "thuiswonende_ouderen_overleden": "This graph shows the progression over time in the number of COVID-19 deaths among over-70s living at home.",
       "rioolwater_virusdeeltjes": "This graph shows the progression over time in the average amount of virus particles in waste water, per 100,000 residents.",
@@ -2181,7 +2181,7 @@
         }
       },
       "kpi_total": {
-        "title": "",
+        "title": "Number of doses administered",
         "value": "",
         "description": "",
         "date_of_report_unix": "",
@@ -2858,6 +2858,10 @@
       }
     }
   },
+  "milestones": {
+    "toon_meer": "Show earlier events",
+    "verwacht": "Expected"
+  },
   "choropleth_tooltip": {
     "patients": {
       "singular": "patient",
@@ -2870,10 +2874,6 @@
     "sewer_regional": "Average number of virus particles:",
     "sewer_municipal": "Average number of virus particles:"
   },
-  "milestones": {
-    "toon_meer": "Show earlier events",
-    "verwacht": "Expected"
-  },
   "section_sterftemonitor_vr": {
     "title": "",
     "description": "Every week the national office Statistics Netherlands (CBS) publishes data on the total number of deaths and compares this to the predicted number of deaths, corrected for extreme temperatures, epidemics, etc. If more deaths occur than predicted, these are considered excess deaths. This graph may show a more complete picture of COVID-19 related deaths than the numbers reported by the GGD because not everyone who dies from COVID-19 has been tested for it.",
@@ -2882,12 +2882,12 @@
       "cbs": {
         "href": "https://mlzopendata.cbs.nl/#/MLZ/nl/dataset/40080NED",
         "text": "CBS",
-        "download": "https://dataderden.cbs.nl/ODataApi/OData/40080NED/TypedDataSet?$filter=(substringof(%272020W%27,%20Perioden)%20eq%20true)%20or%20(substringof(%272021W%27,%20Perioden)%20eq%20true)%20and%20(substringof(%27VR%27,%20RegioS)%20eq%20true)&$select=Perioden,%20RegioS,%20Overledenen_1"
+        "download": "https://dataderden.cbs.nl/ODataApi/OData/40080NED/TypedDataSet?$filter=(substringof({{272020W}}27,%20Perioden){{20eq}}20true){{20or}}20(substringof({{272021W}}27,%20Perioden){{20eq}}20true){{20and}}20(substringof({{27VR}}27,%20RegioS){{20eq}}20true)&$select=Perioden,%20RegioS,%20Overledenen_1"
       }
     },
     "reference": {
-      "href": "/verantwoording#mortality-monitor-CBS",
-      "text": "Read more about the information on this page in the 'Explanation of data presented'."
+      "href": "/verantwoording#sterftemonitor-CBS",
+      "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     }
   },
   "infected_per_age_group": {

@@ -69,11 +69,11 @@
       "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
       "text": "NICE via RIVM"
     },
-    "titel": "Intensive care-opnames per dag",
+    "titel": "Gemeld aantal intensive care-opnames per dag",
     "pagina_toelichting": "Aantal mensen met COVID-19 dat per dag op de intensive care (IC) is opgenomen, direct of vanaf de verpleegafdeling in een ziekenhuis. Om dubbel tellen te voorkomen wordt alleen de eerste IC-opname van een patiënt meegeteld. Een opname op de IC zegt iets over de ernst van het ziektebeloop en is daarom belangrijk om de ontwikkeling van de epidemie goed te monitoren.",
     "barscale_titel": "Intensive care-opnames per dag",
     "barscale_screenreader_text": "{{value}} intensive care-opnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
-    "extra_uitleg": "Aantal mensen met bevestigd COVID-19 dat per dag op een intensive care-afdeling van een ziekenhuis is opgenomen. Dit cijfer laat het aantal IC-opnames zien dat op één dag gemeld is. Dit kunnen ook meldingen zijn van opnames van eerdere dagen.",
+    "extra_uitleg": "Aantal mensen met bevestigd COVID-19 dat per dag op een intensive care-afdeling van een ziekenhuis is opgenomen. Dit cijfer laat het aantal IC-opnames zien dat op één dag gemeld is. Dit kunnen ook meldingen zijn van opnames van eerdere dagen.\n\nLet op: Vanaf 25 maart toont het dashboard het aantal gemelde IC-opnames per dag in plaats van het gemiddelde aantal opnames van de afgelopen drie dagen. Het getal hierboven is daarom niet vergelijkbaar met het getal dat voorheen op het dashboard stond.",
     "linechart_titel": "Intensive care-opnames door de tijd heen",
     "bronnen": {
       "nice": {
@@ -156,7 +156,7 @@
     "titel": "Ziekenhuisopnames per dag",
     "pagina_toelichting": "Groei van het aantal opgenomen patiënten met COVID-19 kan ervoor zorgen dat ziekenhuizen het te druk krijgen. Daarnaast geeft dit cijfer een goed beeld van hoe de epidemie zich ontwikkelt. We houden hier het aantal patiënten bij dat met COVID-19 wordt opgenomen in ziekenhuizen en het aantal bedden op gewone ziekenhuisafdelingen die door patiënten met COVID-19 wordt bezet. We houden dit zowel landelijk als regionaal bij en dat doen we op basis van verschillende bronnen.",
     "barscale_titel": "Gemeld aantal ziekenhuisopnames per dag",
-    "extra_uitleg": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer laat het aantal ziekenhuisopnames - inclusief directe IC-opnames - zien dat op één dag gemeld is. Dit kunnen ook meldingen zijn van opnames van eerdere dagen.",
+    "extra_uitleg": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer laat het aantal ziekenhuisopnames - inclusief directe IC-opnames - zien dat op één dag gemeld is. Dit kunnen ook meldingen zijn van opnames van eerdere dagen. ",
     "map_titel": "Woonplaats opgenomen patiënten",
     "map_toelichting": "Deze kaart laat zien in welke gemeenten of veiligheidsregio’s patiënten wonen die met COVID-19 in het ziekenhuis zijn opgenomen. Patiënten kunnen ook in een ziekenhuis in een ander deel van Nederland worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE.",
     "linechart_titel": "Ziekenhuisopnames door de tijd heen, op datum van opname",
@@ -276,7 +276,7 @@
   },
   "besmettelijke_personen": {
     "title": "Aantal besmettelijke mensen",
-    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt twee keer per week bijgewerkt.",
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/097155aa-75eb-4caa-8ed3-4c6edb80467e",
       "text": "RIVM"
@@ -1473,7 +1473,6 @@
   "infected_age_groups": {
     "title": "Verdeling naar leeftijd",
     "description": "De blauwe rechterbalken in deze grafiek laten zien tot welke leeftijdsgroep positief geteste personen behoren. De grijze linkerbalken tonen hoe groot elke leeftijdsgroep is ten opzichte van de hele Nederlandse bevolking. De blauwe en grijze balken laten samen zien of leeftijdsgroepen naar verhouding meer of minder positief geteste personen hebben. Bijvoorbeeld: van alle positief geteste personen is 16% een twintiger (blauwe balk) en van alle Nederlanders is 13% een twintiger (grijze balk). De leeftijdsgroep twintigers heeft in dit voorbeeld naar verhouding meer positief geteste personen. De grafiek wordt dagelijks bijgewerkt en gaat alleen over de meest recent gemelde gevallen.",
-    "example": "Bijvoorbeeld: Van alle positief geteste mensen is {{infectedPercentage}} tussen de {{ageGroupRange}} jaar. Van alle Nederlanders is {{ageGroupPercentage}} tussen de {{ageGroupRange}} jaar.",
     "graph": {
       "age_group_percentage_title": "Verdeling leeftijdsgroepen in Nederland",
       "age_group_percentage_tooltip": "van de bevolking is {{ageGroupRange}} jaar",
@@ -1484,7 +1483,8 @@
       "clipped_value_message": "Deze waarde is groter dan in de grafiek is weergegeven",
       "value_percentage_title": "Positieve testen per leeftijdsgroep",
       "value_percentage_tooltip": "van het aantal positief geteste mensen is {{ageGroupRange}} jaar"
-    }
+    },
+    "example": "Bijvoorbeeld: Van alle positief geteste mensen is {{infectedPercentage}} tussen de {{ageGroupRange}} jaar. Van alle Nederlanders is {{ageGroupPercentage}} tussen de {{ageGroupRange}} jaar."
   },
   "gehandicaptenzorg_besmette_locaties": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -2026,7 +2026,7 @@
     "grafieken": {
       "reproductiegetal_verloop": "Deze grafiek toont het reproductiegetal door de tijd heen.",
       "ziekenhuisopnames": "Deze grafiek toont het aantal ziekenhuisopnames door de tijd heen.",
-      "intensive_care_opnames": "Deze grafiek toont de intensive care-opnames door de tijd heen.",
+      "intensive_care_opnames": "Deze grafiek toon de intensive care opnames door de tijd heen.",
       "verpleeghuiszorg_positief_getest": "Deze grafiek toont het aantal bewoners van verpleeghuislocaties waarvan gemeld is dat ze positief getest zijn op COVID-19.",
       "verpleeghuiszorg_besmette_locaties": "Deze grafiek toont het aantal besmette verpleeghuislocaties door de tijd heen.",
       "verpleeghuiszorg_overleden_getest": "Deze grafiek toont het aantal overleden bewoners van verpleeghuislocaties waarvan gemeld is dat ze positief getest zijn op COVID-19.",
@@ -2858,6 +2858,10 @@
       }
     }
   },
+  "milestones": {
+    "toon_meer": "Toon eerdere gebeurtenissen",
+    "verwacht": "Verwacht"
+  },
   "choropleth_tooltip": {
     "patients": {
       "singular": "patiënt",
@@ -2870,10 +2874,6 @@
     "sewer_regional": "Gemiddeld aantal virusdeeltjes:",
     "sewer_municipal": "Gemiddeld aantal virusdeeltjes:"
   },
-  "milestones": {
-    "toon_meer": "Toon eerdere gebeurtenissen",
-    "verwacht": "Verwacht"
-  },
   "section_sterftemonitor_vr": {
     "title": "Sterftemonitor",
     "description": "Het Centraal Bureau voor de Statistiek (CBS) publiceert wekelijks het totaal aantal overleden mensen en vergelijkt dit aantal met het verwacht aantal overlijdens gecorrigeerd voor koude- of hittegolven, uitbraken en epidemieën. Er is sprake van oversterfte indien meer mensen overlijden dan verwacht. Deze grafiek geeft mogelijk een completer beeld van sterfte door COVID-19 dan de door de GGD’en gemelde COVID-19 sterfte, omdat niet alle mensen die overlijden aan COVID-19 getest zijn op COVID-19.",
@@ -2882,7 +2882,7 @@
       "cbs": {
         "href": "https://mlzopendata.cbs.nl/#/MLZ/nl/dataset/40080NED",
         "text": "CBS",
-        "download": "https://dataderden.cbs.nl/ODataApi/OData/40080NED/TypedDataSet?$filter=(substringof(%272020W%27,%20Perioden)%20eq%20true)%20or%20(substringof(%272021W%27,%20Perioden)%20eq%20true)%20and%20(substringof(%27VR%27,%20RegioS)%20eq%20true)&$select=Perioden,%20RegioS,%20Overledenen_1"
+        "download": "https://dataderden.cbs.nl/ODataApi/OData/40080NED/TypedDataSet?$filter=(substringof({{272020W}}27,%20Perioden){{20eq}}20true){{20or}}20(substringof({{272021W}}27,%20Perioden){{20eq}}20true){{20and}}20(substringof({{27VR}}27,%20RegioS){{20eq}}20true)&$select=Perioden,%20RegioS,%20Overledenen_1"
       }
     },
     "reference": {
