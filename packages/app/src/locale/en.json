@@ -1046,7 +1046,7 @@
       "geen_regio": "no regions",
       "regio_singular": "{{amount}} region",
       "regio_plural": "{{amount}} regions",
-      "determined_on": ""
+      "determined_on": "Risk level determined on {{date}}"
     },
     "valid_from": "Valid from {{validFrom}}",
     "sidebar_label": "Risk level:",

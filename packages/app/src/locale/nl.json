@@ -1046,7 +1046,7 @@
       "geen_regio": "geen regio's",
       "regio_singular": "{{amount}} regio",
       "regio_plural": "{{amount}} regio's",
-      "determined_on": "Laatste inschaling: {{date}}"
+      "determined_on": "Risiconiveau bepaald op {{date}}"
     },
     "valid_from": "Geldig vanaf {{validFrom}}",
     "sidebar_label": "Risiconiveau:",
