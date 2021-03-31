@@ -567,6 +567,9 @@ export interface NlVaccineDeliveryPerSupplierValue {
   bio_n_tech_pfizer: number;
   moderna: number;
   astra_zeneca: number;
+  cure_vac?: number;
+  janssen?: number;
+  sanofi?: number;
   is_estimate: boolean;
   week_number: number;
   date_of_insertion_unix: number;
