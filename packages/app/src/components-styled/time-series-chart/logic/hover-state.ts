@@ -206,6 +206,17 @@ export function useHoverState<T extends TimestampedValue>({
         }
 
         switch (config.type) {
+          case 'stacked-area':
+            return [
+              {
+                seriesValue,
+                x: xScale(xValue),
+                y: yScale(yValueB),
+                color: config.color,
+                metricProperty: config.metricProperty,
+                seriesConfigIndex: index,
+              },
+            ];
           case 'range':
             return [
               {

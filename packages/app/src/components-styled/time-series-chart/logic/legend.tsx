@@ -25,12 +25,7 @@ export function useLegendItems<T extends TimestampedValue>(
         items.push({
           label: annotation.label,
           shape: 'custom',
-          shapeComponent: (
-            <TimespanAnnotationIcon
-              color={annotation.color}
-              fillOpacity={annotation.fillOpacity}
-            />
-          ),
+          shapeComponent: <TimespanAnnotationIcon />,
         } as LegendItem);
       }
     }

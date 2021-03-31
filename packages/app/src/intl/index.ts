@@ -1,6 +1,2 @@
-import { createContext } from 'react';
-import { languages } from '~/locale';
-
-export const IntlContext = createContext(languages['nl']);
-
-export { useIntl } from './hooks/useIntl';
+export { useIntl } from './hooks/use-intl';
+export { IntlContext } from './intl-context';

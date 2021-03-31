@@ -2,28 +2,44 @@ import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { ArrowIconRight } from '~/components-styled/arrow-icon';
-import { Block, ImageBlock } from '~/types/cms';
+import { useIntl } from '~/intl';
+import { ImageBlock } from '~/types/cms';
 import { Link } from '~/utils/link';
 import { BackgroundImage } from './background-image';
 import { Box } from './base';
-import { Heading, InlineText, Text } from './typography';
+import { PublicationDate } from './publication-date';
+import { Heading, InlineText } from './typography';
 
-export type HighlightTeaserProps = {
+type HighlightTeaserVariant = 'blue' | 'default';
+export interface HighlightTeaserProps {
   title: string;
-  summary: Block;
   cover: ImageBlock;
-  link: {
-    href: string;
-    label: string;
-  };
-};
+  label?: string;
+  href: string;
+  category?: string;
+  publicationDate?: string;
+  isWeekly?: boolean;
+  variant?: HighlightTeaserVariant;
+}
 
 export function HighlightTeaser(props: HighlightTeaserProps) {
-  const { title, link, summary, cover } = props;
+  const {
+    title,
+    href,
+    label,
+    cover,
+    category,
+    publicationDate,
+    variant = 'default',
+  } = props;
+
+  const { siteText } = useIntl();
+
+  const isDefault = variant === 'default';
 
   return (
-    <Link passHref href={link.href}>
-      <StyledHightlightTeaser>
+    <Link passHref href={href}>
+      <StyledHightlightTeaser variant={variant}>
         <ZoomContainer height={200}>
           <BackgroundImage
             image={cover}
@@ -34,7 +50,23 @@ export function HighlightTeaser(props: HighlightTeaserProps) {
             ]}
           />
         </ZoomContainer>
-        <Box padding={3}>
+        <Box padding={isDefault ? 0 : 3} pt={3}>
+          <InlineText
+            textTransform="uppercase"
+            fontSize="0.75rem"
+            fontWeight="bold"
+            color={isDefault ? 'annotation' : 'white'}
+          >
+            {isDefault
+              ? category
+              : siteText.common_actueel.secties.meer_lezen.weekly_category}
+            {publicationDate && (
+              <>
+                {' - '}
+                <PublicationDate date={publicationDate} />
+              </>
+            )}
+          </InlineText>
           <Heading
             level={3}
             mb={{ _: 1, sm: 3 }}
@@ -43,10 +75,15 @@ export function HighlightTeaser(props: HighlightTeaserProps) {
           >
             {title}
           </Heading>
-          <Text>{summary}</Text>
 
-          <InlineText aria-hidden="true" fontWeight="bold" color="link">
-            {link.label}
+          <InlineText
+            aria-hidden="true"
+            fontWeight="bold"
+            color={variant === 'default' ? 'link' : 'white'}
+          >
+            {label
+              ? label
+              : siteText.common_actueel.secties.meer_lezen.read_weekly_message}
             <Arrow />
           </InlineText>
         </Box>
@@ -73,17 +110,19 @@ function ZoomContainerUnstyled({
   );
 }
 
-const StyledHightlightTeaser = styled.a(
+const StyledHightlightTeaser = styled.a<{
+  variant?: HighlightTeaserVariant;
+}>((x) =>
   css({
     display: 'block',
-    border: 'solid',
-    borderWidth: 1,
-    borderColor: 'lightGray',
-    borderRadius: 4,
-    minHeight: '26rem',
     overflow: 'hidden',
     textDecoration: 'none',
-    color: 'body',
+    backgroundColor: x.variant ? x.variant : undefined,
+    color: x.variant === 'default' ? 'body' : 'white',
+
+    span: {
+      color: x.variant === 'default' ? undefined : 'white',
+    },
 
     [`${ZoomContainer}, ${Heading}`]: {
       transitionProperty: 'transform, color',
@@ -97,7 +136,7 @@ const StyledHightlightTeaser = styled.a(
         transitionTimingFunction: 'ease-in-out',
         transform: 'scale(1.04)',
       },
-      [Heading]: { color: 'link' },
+      [Heading]: { color: x.variant === 'default' ? 'link' : undefined },
     },
   })
 );

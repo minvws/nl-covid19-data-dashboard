@@ -3,7 +3,6 @@ import { ReactNode } from 'react';
 import styled from 'styled-components';
 import Locatie from '~/assets/locatie.svg';
 import { Heading } from '~/components-styled/typography';
-import { Link } from '~/utils/link';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 
 interface IProps {
@@ -61,9 +60,9 @@ function TooltipHeader({
 }) {
   if (href) {
     return (
-      <Link href={href} passHref>
-        <StyledTooltipHeader as="a">{children}</StyledTooltipHeader>
-      </Link>
+      <StyledTooltipHeader href={href} as="a">
+        {children}
+      </StyledTooltipHeader>
     );
   }
 

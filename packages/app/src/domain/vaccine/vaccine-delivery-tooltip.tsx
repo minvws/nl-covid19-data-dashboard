@@ -8,9 +8,10 @@ import styled from 'styled-components';
 import { HoverPoint } from '~/components-styled/area-chart/components/marker';
 import { TimestampedTrendValue } from '~/components-styled/area-chart/logic';
 import { Spacer } from '~/components-styled/base';
-import { Text } from '~/components-styled/typography';
-import { AllLanguages } from '~/locale';
+import { Heading } from '~/components-styled/typography';
+import { VisuallyHidden } from '~/components-styled/visually-hidden';
 import { useIntl } from '~/intl';
+import { AllLanguages } from '~/locale';
 
 export type TooltipValue = (
   | NlVaccineDeliveryValue
@@ -45,9 +46,7 @@ export function FormatVaccinationsTooltip(
 
   return (
     <>
-      <Text as="span" fontWeight="bold">
-        {dateEndString}
-      </Text>
+      <VisuallyHidden>{dateEndString}</VisuallyHidden>
       <TooltipList>
         <TooltipListItem>
           <span>
@@ -58,7 +57,16 @@ export function FormatVaccinationsTooltip(
             {formatNumber(firstValue.data.total)}
           </TooltipValueContainer>
         </TooltipListItem>
+      </TooltipList>
 
+      <Heading level={5} my={1}>
+        {firstValue.label === text.vaccinaties.data.vaccination_chart.delivered
+          ? text.vaccinaties.data.vaccination_chart.doses_administered
+          : text.vaccinaties.data.vaccination_chart
+              .doses_administered_estimated}
+      </Heading>
+
+      <TooltipList>
         {otherValues.map((value) => (
           <TooltipListItem key={value.label}>
             <span>

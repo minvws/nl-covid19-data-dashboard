@@ -2,7 +2,7 @@ import { ArrowIconLeft } from '~/components-styled/arrow-icon';
 
 import { Box } from '~/components-styled/base';
 import { ContentBlock } from '~/components-styled/cms/content-block';
-import { Heading } from '~/components-styled/typography';
+import { Heading, InlineText } from '~/components-styled/typography';
 import { useIntl } from '~/intl';
 import { Article } from '~/types/cms';
 import { ContentImage } from './cms/content-image';
@@ -31,7 +31,9 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
           <Heading level={1} mb={0}>
             {article.title}
           </Heading>
-          <PublicationDate date={article.publicationDate} />
+          <InlineText color="annotation">
+            <PublicationDate date={article.publicationDate} />
+          </InlineText>
         </Box>
 
         <Box fontWeight="bold" fontSize="1.25rem">
