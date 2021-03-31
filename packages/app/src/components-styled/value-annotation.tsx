@@ -1,13 +1,19 @@
-import css from '@styled-system/css';
-import styled from 'styled-components';
+import { ReactNode } from 'react';
 import { Text } from '~/components-styled/typography';
 
 /**
  * A basic component for showing a gray annotation next to a chart or kpi value
  */
-export const ValueAnnotation = styled(Text).attrs({ as: 'div' })(
-  css({
-    color: 'annotation',
-    fontSize: 1,
-  })
-);
+export function ValueAnnotation({
+  children,
+  mb,
+}: {
+  children: ReactNode;
+  mb?: number;
+}) {
+  return (
+    <Text as="div" color="annotation" m={0} mb={mb} fontSize={1}>
+      {children}
+    </Text>
+  );
+}
