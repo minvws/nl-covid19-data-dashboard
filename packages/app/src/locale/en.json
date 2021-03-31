@@ -264,7 +264,7 @@
         "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv",
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
         "text": "RIVM",
-        "aria_text": "View the RIVM datasource"
+        "aria_text": ""
       }
     },
     "tooltip_labels": {
@@ -794,7 +794,13 @@
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -2159,7 +2165,11 @@
     "expected_page_additions": {
       "title": "Expected data on vaccinations",
       "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
-      "additions": ["", "", ""]
+      "additions": [
+        "",
+        "",
+        ""
+      ]
     },
     "data": {
       "difference": "",
@@ -2284,7 +2294,11 @@
       "kpi_expected_page_additions": {
         "title": "Expected data on vaccinations",
         "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
-        "additions": ["", "", ""]
+        "additions": [
+          "",
+          "",
+          ""
+        ]
       },
       "vaccination_chart": {
         "product_names": {
@@ -2749,7 +2763,7 @@
     "momenteel": {
       "description": "This is the risk level that currently applies in this region. The risk level is reassessed every 2 weeks based on the number of hospital admissions and the number of positive tests (new confirmed cases) at that time.",
       "description_from_to": "",
-      "last_determined": "This risk level has been determined on {{last_determined}}",
+      "last_determined": "This risk level has been determined on",
       "established_with": {
         "title": "The risk level is based on the figures from",
         "description": "{{based_from}} to {{based_to}}"
@@ -2762,7 +2776,7 @@
         "title": "Hospital admissions (including ICU)",
         "description": "{{amount}} per million residents per week"
       },
-      "next_determined": "The risk level will be reassessed around {{next_determined}}",
+      "next_determined": "The risk level will be reassessed",
       "link_text": ""
     }
   },
@@ -2878,7 +2892,7 @@
   },
   "infected_per_age_group": {
     "title": "Number of positive tests per age group over time",
-    "description": "This graph shows how many confirmed cases of COVID-19 in a selected age group were reported per 100,000 inhabitants.",
+    "description": "This graph shows the trend in positive cases for each age group, per 100,000 people in that age group.",
     "legend": {
       "infected_age_0_9_per_100k": "0-9",
       "infected_age_10_19_per_100k": "10-19",
@@ -2893,7 +2907,7 @@
       "infected_overall_per_100k": "All ages"
     },
     "reset_button_label": "Reset",
-    "legend_help_text": "Select one or more age groups to view them separately."
+    "legend_help_text": "Select one or more age groups that you want to see separately."
   },
   "g_number": {
     "bar_chart": {
@@ -2904,7 +2918,7 @@
       "bronnen": {
         "download": "",
         "href": "",
-        "text": "Ministry of Health, Welfare and Sport"
+        "text": "Ministry of Health, Welfare and Sport based on RIVM"
       }
     }
   }
