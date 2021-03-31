@@ -24,13 +24,13 @@ import useResizeObserver from 'use-resize-observer';
 import { Box } from '~/components-styled/base';
 import { Legend } from '~/components-styled/legend';
 import { InlineText } from '~/components-styled/typography';
+import { ValueAnnotation } from '~/components-styled/value-annotation';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { getValuesInTimeframe, TimeframeOption } from '~/utils/timeframe';
 import { useElementSize } from '~/utils/use-element-size';
 import { useIsMountedRef } from '~/utils/use-is-mounted-ref';
 import { useBreakpoints } from '~/utils/useBreakpoints';
-import { ValueAnnotation } from '~/components-styled/value-annotation';
 import {
   calculateSeriesMaximum,
   getSeriesData,
@@ -46,7 +46,6 @@ const tooltipStyles = {
 };
 
 const NO_HOVER_INDEX = -1;
-const NUM_100K = 100_000;
 
 type AnyTickFormatter = (value: any) => string;
 
@@ -192,15 +191,7 @@ export function StackedChart<T extends TimestampedValue>(
     [valuesInTimeframe, metricProperties]
   );
 
-  /**
-   * @TODO this logic is probably very specific to the vaccine availability
-   * chart so it should probably be moved outside once we start re-using this
-   * stacked chart for other things.
-   */
-  const seriesMax =
-    Math.ceil(
-      useMemo(() => calculateSeriesMaximum(series), [series]) / NUM_100K
-    ) * NUM_100K;
+  const seriesMax = useMemo(() => calculateSeriesMaximum(series), [series]);
 
   const [hoveredIndex, setHoveredIndex] = useState(NO_HOVER_INDEX);
 
@@ -469,16 +460,8 @@ export function StackedChart<T extends TimestampedValue>(
   const yScale = scaleLinear<number>({
     domain: [0, seriesMax],
     range: [yMax, 0],
+    nice: true,
   });
-
-  /**
-   * @TODO this logic is probably very specific to the vaccine availability
-   * chart so it should probably be moved outside once we start re-using this
-   * stacked chart for other things.
-   */
-  const tickValues = Array(yScale.domain()[1] / NUM_100K)
-    .fill(null)
-    .map((_, i) => (i + 1) * NUM_100K);
 
   return (
     <Box>
@@ -500,7 +483,6 @@ export function StackedChart<T extends TimestampedValue>(
               scale={yScale}
               width={bounds.width}
               stroke={colors.data.axis}
-              tickValues={tickValues}
             />
             <AxisBottom
               scale={xScale}
@@ -519,7 +501,6 @@ export function StackedChart<T extends TimestampedValue>(
             />
             <g ref={yAxisRef}>
               <AxisLeft
-                tickValues={tickValues}
                 scale={yScale}
                 hideTicks
                 hideAxisLine
