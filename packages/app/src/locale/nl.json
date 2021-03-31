@@ -2763,9 +2763,9 @@
     "momenteel": {
       "description": "Dit is het risiconiveau dat nu geldt in deze regio. Het risiconiveau wordt elke twee weken bepaald op basis van het aantal ziekenhuisopnames en het aantal positieve testen van dat moment.",
       "description_from_to": "",
-      "last_determined": "Dit risiconiveau is bepaald op {{last_determined}}",
+      "last_determined": "Dit risiconiveau is bepaald op",
       "established_with": {
-        "title": "Het risiconiveau is bepaald met de cijfers van ",
+        "title": "Het risiconiveau is bepaald met de cijfers van",
         "description": "{{based_from}} t/m {{based_to}}"
       },
       "positive_tests": {
@@ -2776,7 +2776,7 @@
         "title": "Ziekenhuisopnames (incl. IC)",
         "description": "{{amount}} per 1 miljoen inwoners per week"
       },
-      "next_determined": "Het risiconiveau wordt opnieuw bepaald rond {{next_determined}}",
+      "next_determined": "Het risiconiveau wordt opnieuw bepaald",
       "link_text": ""
     }
   },
@@ -2918,7 +2918,7 @@
       "bronnen": {
         "download": "",
         "href": "",
-        "text": "Ministerie van VWS"
+        "text": "Ministerie van VWS op basis van RIVM"
       }
     }
   }
