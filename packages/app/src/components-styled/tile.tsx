@@ -5,6 +5,7 @@ import { asResponsiveArray } from '~/style/utils';
 
 export const Tile = styled(Box).attrs({ as: 'article' })(
   css({
+    position: 'relative',
     display: 'flex',
     flexDirection: 'column',
     bg: 'white',
