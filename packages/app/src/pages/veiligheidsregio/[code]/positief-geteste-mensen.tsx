@@ -8,7 +8,7 @@ import { Anchor } from '~/components-styled/anchor';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
-import { NewChartTile } from '~/components-styled/chart-tile';
+import { ChartTile } from '~/components-styled/chart-tile';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
@@ -164,7 +164,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <NewChartTile
+          <ChartTile
             title={text.linechart_titel}
             description={text.linechart_toelichting}
             metadata={{
@@ -196,7 +196,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 },
               }}
             />
-          </NewChartTile>
+          </ChartTile>
 
           <ChoroplethTile
             title={replaceVariablesInText(text.map_titel, {
@@ -300,7 +300,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <NewChartTile
+          <ChartTile
             timeframeOptions={['all', '5weeks']}
             title={ggdText.linechart_percentage_titel}
             description={ggdText.linechart_percentage_toelichting}
@@ -322,9 +322,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               ]}
               dataOptions={{ isPercentage: true }}
             />
-          </NewChartTile>
+          </ChartTile>
 
-          <NewChartTile
+          <ChartTile
             timeframeOptions={['all', '5weeks']}
             title={ggdText.linechart_totaltests_titel}
             description={ggdText.linechart_totaltests_toelichting}
@@ -362,7 +362,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 },
               ]}
             />
-          </NewChartTile>
+          </ChartTile>
         </TileList>
       </SafetyRegionLayout>
     </Layout>

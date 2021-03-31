@@ -3,7 +3,7 @@ import {
   RegionalDeceasedCbs,
 } from '@corona-dashboard/common';
 import { AnchorTile } from '~/components-styled/anchor-tile';
-import { NewChartTile } from '~/components-styled/chart-tile';
+import { ChartTile } from '~/components-styled/chart-tile';
 import { TimeSeriesChart } from '~/components-styled/time-series-chart';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
@@ -31,7 +31,7 @@ export function DeceasedMonitorSection({
         </AnchorTile>
       )}
 
-      <NewChartTile
+      <NewChaChartTilertTile
         metadata={{ source: text.bronnen.cbs }}
         title={text.deceased_monitor_chart_title}
         description={text.deceased_monitor_chart_description}
@@ -67,7 +67,7 @@ export function DeceasedMonitorSection({
             },
           ]}
         />
-      </NewChartTile>
+      </ChartTile>
     </>
   );
 }

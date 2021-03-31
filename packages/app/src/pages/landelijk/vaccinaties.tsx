@@ -11,7 +11,7 @@ import { AreaChart } from '~/components-styled/area-chart';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
-import { ChartTile, NewChartTile } from '~/components-styled/chart-tile';
+import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
@@ -253,7 +253,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <NewChartTile
+          <ChartTile
             title={text.grafiek.titel}
             description={text.grafiek.omschrijving}
             metadata={{
@@ -351,7 +351,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 }))}
               />
             </Box>
-          </NewChartTile>
+          </ChartTile>
 
           {data.vaccine_delivery_per_supplier ? (
             <VaccineDeliveryBarChart
@@ -382,7 +382,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             }}
           />
 
-          <NewChartTile
+          <ChartTile
             title={text.grafiek_draagvlak.titel}
             description={text.grafiek_draagvlak.omschrijving}
             ariaDescription={
@@ -464,7 +464,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 },
               ]}
             />
-          </NewChartTile>
+          </ChartTile>
 
           {/*
         @TODO re-enable when data is available

@@ -6,7 +6,7 @@ import {
 } from '~/components-styled/line-chart/line-chart';
 import { assert } from '~/utils/assert';
 import { TimeframeOption } from '~/utils/timeframe';
-import { NewChartTile } from './chart-tile';
+import { ChartTile } from './chart-tile';
 import { MetadataProps } from './metadata';
 interface LineChartTileProps<T extends TimestampedValue>
   extends LineChartProps<T> {
@@ -35,7 +35,7 @@ export function LineChartTile<T extends TimestampedValue>({
   const ariaLabelledBy = slugify(title);
 
   return (
-    <NewChartTile
+    <ChartTile
       title={title}
       description={description}
       metadata={metadata}
@@ -45,6 +45,6 @@ export function LineChartTile<T extends TimestampedValue>({
       ariaDescription={ariaDescription}
     >
       <LineChart {...chartProps} ariaLabelledBy={ariaLabelledBy} />
-    </NewChartTile>
+    </ChartTile>
   );
 }

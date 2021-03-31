@@ -1,5 +1,5 @@
 import { NlGNumber, VrGNumber } from '@corona-dashboard/common';
-import { NewChartTile } from '~/components-styled/chart-tile';
+import { ChartTile } from '~/components-styled/chart-tile';
 import { InlineText } from '~/components-styled/typography';
 import { VerticalBarChart } from '~/components-styled/vertical-bar-chart';
 import { useIntl } from '~/intl';
@@ -23,7 +23,7 @@ export function GNumberBarChartTile({
   const last_value = __data.last_value;
 
   return (
-    <NewChartTile
+    <ChartTile
       title={text.title}
       description={text.description}
       metadata={{
@@ -60,6 +60,6 @@ export function GNumberBarChartTile({
           );
         }}
       />
-    </NewChartTile>
+    </ChartTile>
   );
 }

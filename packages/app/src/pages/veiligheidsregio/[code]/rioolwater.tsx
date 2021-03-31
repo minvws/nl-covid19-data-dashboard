@@ -3,11 +3,7 @@ import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
 import { BarChart } from '~/components-styled/bar-chart/bar-chart';
-import {
-  ChartTile,
-  ChartTileWithTimeframe,
-  NewChartTile,
-} from '~/components-styled/chart-tile';
+import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
@@ -152,7 +148,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <NewChartTile
+          <ChartTile
             title={text.linechart_titel}
             ariaDescription={graphDescriptions.rioolwater_meetwaarde}
             metadata={{ source: text.bronnen.rivm }}
@@ -174,10 +170,10 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 hide_outliers: text.hide_outliers,
               }}
             />
-          </NewChartTile>
+          </ChartTile>
 
           {barChartData && (
-            <NewChartTile
+            <ChartTile
               title={replaceVariablesInText(text.bar_chart_title, {
                 safetyRegion: safetyRegionName,
               })}
@@ -196,7 +192,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                   text.bar_chart_accessibility_description
                 }
               />
-            </NewChartTile>
+            </ChartTile>
           )}
         </TileList>
       </SafetyRegionLayout>

@@ -1,7 +1,7 @@
 import CoronaVirus from '~/assets/coronavirus.svg';
 import Locatie from '~/assets/locaties.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
-import { NewChartTile } from '~/components-styled/chart-tile';
+import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
@@ -110,7 +110,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <NewChartTile
+          <ChartTile
             metadata={{ source: positiveTestedPeopleText.bronnen.rivm }}
             title={positiveTestedPeopleText.linechart_titel}
             ariaDescription={graphDescriptions.verpleeghuiszorg_positief_getest}
@@ -152,7 +152,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                 ],
               }}
             />
-          </NewChartTile>
+          </ChartTile>
 
           <ContentHeader
             id="besmette-locaties"
@@ -204,7 +204,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <NewChartTile
+          <ChartTile
             metadata={{ source: infectedLocationsText.bronnen.rivm }}
             title={infectedLocationsText.linechart_titel}
             ariaDescription={
@@ -225,7 +225,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                 },
               ]}
             />
-          </NewChartTile>
+          </ChartTile>
 
           <ContentHeader
             id="sterfte"
@@ -261,7 +261,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <NewChartTile
+          <ChartTile
             metadata={{ source: deceased.bronnen.rivm }}
             title={deceased.linechart_titel}
             timeframeOptions={['all', '5weeks', 'week']}
@@ -296,7 +296,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                 ],
               }}
             />
-          </NewChartTile>
+          </ChartTile>
         </TileList>
       </SafetyRegionLayout>
     </Layout>
