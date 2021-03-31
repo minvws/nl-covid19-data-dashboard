@@ -96,7 +96,7 @@ export function MunicipalityNavigationMap<T>(
   };
 
   return (
-    <div css={css({ bg: 'transparent', position: 'relative' })}>
+    <div css={css({ bg: 'transparent', position: 'relative', width: '100%' })}>
       {tabInteractiveButton}
       <Choropleth
         featureCollection={municipalGeo}

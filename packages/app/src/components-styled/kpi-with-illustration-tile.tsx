@@ -49,7 +49,7 @@ export function KpiWithIllustrationTile({
           <p>{illustration.description}</p>
         </Box>
       </Box>
-      <Metadata {...metadata} />
+      <Metadata {...metadata} isTileFooter />
     </Tile>
   );
 }

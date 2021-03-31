@@ -37,7 +37,7 @@
     "title": "Coronavirus Dashboard",
     "text": "The Coronavirus Dashboard provides information on the development of the coronavirus in the Netherlands.",
     "link": "Read more about this dashboard",
-    "logo_alt": "Government of The Netherlands"
+    "logo_alt": "Government of the Netherlands"
   },
   "nav": {
     "links": {
@@ -64,22 +64,22 @@
     "terug_naar_alle_cijfers_gemeente": "All data for this municipality"
   },
   "ic_opnames_per_dag": {
-    "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
+    "datums": "Last values obtained on {{dateOfReport}}. Is updated on a daily basis.",
     "bron": {
       "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
-      "text": "Stichting NICE"
+      "text": "NICE via RIVM"
     },
     "titel": "Intensive care admissions by day",
     "pagina_toelichting": "Daily number of COVID-19 patients admitted to a hospital intensive care unit (ICU), directly or from a regular hospital ward. To avoid doubles only the first IC admission of a patient counts. This number gives information about the severity of the disease en helps track the development of the epidemic.",
     "barscale_titel": "Intensive care admissions per day",
     "barscale_screenreader_text": "{{value}} intensive care-admissions by day. Alert value: {{signaalwaarde}} admissions per day.",
-    "extra_uitleg": "Number of confirmed COVID-19 cases who are admitted to a hospital intensive care unit (ICU) per day. This figure shows how many hospital admissions are reported per day. It may include hospital admissions that occurred in previous days.\n\nNote: Although hospitals try to register COVID-19 patients promptly, it is likely that the numbers of the last days are yet incomplete.",
+    "extra_uitleg": "Number of confirmed COVID-19 cases who are admitted to a hospital intensive care unit (ICU) per day. This figure shows how many hospital admissions are reported per day. It may include hospital admissions that occurred in previous days.",
     "linechart_titel": "ICU admissions over time",
     "bronnen": {
       "nice": {
-        "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
-        "text": "Stichting NICE",
-        "download": "https://stichting-nice.nl/covid-19/public/new-intake/confirmed/"
+        "href": "https://data.rivm.nl/covid-19/COVID-19_ic_opnames.html",
+        "text": "NICE via RIVM",
+        "download": "https://data.rivm.nl/covid-19/COVID-19_ic_opnames.csv"
       },
       "lnaz": {
         "href": "https://lcps.nu/datafeed/",
@@ -109,7 +109,8 @@
     },
     "kpi_titel": "Number of ICU admissions reported on one day",
     "linechart_legend_trend_label": "ICU admissions",
-    "linechart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
+    "linechart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
+    "linechart_description": "This graph shows ICU admissions. The figure for each day indicates the number of people actually admitted on that day, not the number of admissions reported on that day. This gives a clear picture of the development of coronavirus in the Netherlands. There are often reporting delays of a few days for ICU admissions; data for the most recent days is therefore incomplete."
   },
   "verdenkingen_huisartsen": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
@@ -147,7 +148,7 @@
     }
   },
   "ziekenhuisopnames_per_dag": {
-    "datums": "Calculated: {{dateOfReport}}. Is updated on a daily basis.",
+    "datums": "Last values obtained on {{dateOfReport}}. Is updated on a daily basis.",
     "bron": {
       "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
       "text": "NICE via RIVM"
@@ -262,11 +263,12 @@
       "rivm": {
         "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv",
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
-        "text": "RIVM"
+        "text": "RIVM",
+        "aria_text": ""
       }
     },
     "tooltip_labels": {
-      "infected_per_100k": "",
+      "infected_per_100k": "Confirmed cases per 100.000",
       "infected_percentage": "",
       "tested_total": "",
       "infected": ""
@@ -285,11 +287,11 @@
     "lineLegendLabel": "Infectious people",
     "geen_signaalwaarde_beschikbaar": "Due to a technical problem the data is currently not showing as intended. This is being investigated.",
     "geen_signaalwaarde_beschikbaar_lees_waarom": "Read here why",
-    "toelichting_pagina": "A person who carries coronavirus can infect other people within a certain time frame. How long someone is infectious for differs from one person to another. The number of infectious people is estimated using data from various sources. It is not possible to know exactly how many people are infectious, but we can indicate whether there are dozens, hundreds, thousands or even more.",
+    "toelichting_pagina": "A person who carries coronavirus can infect other people within a certain time frame. If more people are infectious the virus spreads faster. It is not possible to know exactly how many people are infectious, but we can indicate whether there are dozens, hundreds, thousands or even more.",
     "barscale_titel": "Average number of infectious people per 100,000 inhabitants.",
     "barscale_screenreader_text": "{{value}} infectious people",
-    "cijfer_titel": "Estimated number of infectious people in the Netherlands:",
-    "cijfer_toelichting": "A calculation of how many people with COVID-19 can transmit the virus. This number is calculated by the RIVM.",
+    "cijfer_titel": "Number of infectious people in the Netherlands:",
+    "cijfer_toelichting": "A calculation of how many people with COVID-19 can transmit the virus. This number is always a week or to old because more recent calculations are not accurate enough.",
     "linechart_titel": "Number of infectious people over time (per 100,000 inhabitants)",
     "titel_sidebar": "Infectious people",
     "metadata": {
@@ -325,7 +327,7 @@
     "titel": "Reproduction number",
     "pagina_toelichting": "The reproduction number shows how fast the virus is spreading. The number shows how many people are on average infected by one patient with COVID-19.",
     "barscale_titel": "Most recent reproduction number",
-    "barscale_toelichting": "Number of people infected by one infectious person.",
+    "barscale_toelichting": "Number of people infected by one infectious person. This number is always two weeks old, since more current calculations are to unreliable. ",
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
     "extra_uitleg": "The reproduction number shows how fast the virus is spreading. This number shows how many people are on average infected by one patient with COVID-19. The number of transmissions remains more or less constant when the reproduction number is 1, declines when it is less than 1 and increases when the number is above 1.",
     "linechart_titel": "The reproduction number over time",
@@ -429,7 +431,8 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
         "text": "RIVM"
       }
-    }
+    },
+    "linechart_tooltip_label": ""
   },
   "verpleeghuis_positief_geteste_personen": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -439,7 +442,7 @@
     },
     "titel": "Nursing homes – Number of confirmed cases",
     "barscale_titel": "Number of confirmed cases in nursing homes per day",
-    "extra_uitleg": "Number of new confirmed cases in nursing homes that have been reported per day.",
+    "extra_uitleg": "Number of new confirmed cases in nursing homes that have been reported per day. About 125.000 people live in a nursing home.",
     "pagina_toelichting": "Number of new confirmed cases in nursing homes that have been reported per day. This number is an estimation of the number confirmed cases in nursing home inhabitants.\n\nThe calculation method has been changed on the 29th of September. Please also see the 'Explanation of the data presented'.",
     "linechart_titel": "Number of confirmed cases among residents over time",
     "barscale_screenreader_text": "{{value}} Number of residents who tested positive (confirmed cases).",
@@ -468,7 +471,13 @@
     },
     "kpi_titel": "Number of confirmed cases per day",
     "line_chart_legend_trend_label": "",
-    "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
+    "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
+    "line_chart_legend_trend_moving_average_label": "",
+    "tooltip_labels": {
+      "inaccurate": "",
+      "newly_infected_people": "",
+      "newly_infected_people_moving_average": ""
+    }
   },
   "verpleeghuis_oversterfte": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -503,7 +512,13 @@
     },
     "kpi_titel": "Mortality per day",
     "line_chart_legend_trend_label": "",
-    "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
+    "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
+    "line_chart_legend_trend_moving_average_label": "",
+    "tooltip_labels": {
+      "inaccurate": "",
+      "deceased_daily": "",
+      "deceased_daily_moving_average": ""
+    }
   },
   "blok_verpleeghuis_zorg": {
     "title": "Nursing homes",
@@ -669,11 +684,12 @@
     "absolute_date_template": "on {{date}}",
     "inwoners": "residents",
     "miljoen": "million",
-    "signaalwaarde": "",
-    "totaal": "Total"
+    "signaalwaarde": "Alert value",
+    "totaal": "Total",
+    "rond": ""
   },
   "seoHead": {
-    "default_description": "Information on the development of the coronavirus in The Netherlands.",
+    "default_description": "Information on the development of the coronavirus in the Netherlands.",
     "default_title": "Coronavirus Dashboard | COVID-19 | Government.nl",
     "default_url": "https://coronadashboard.government.nl/veelgestelde-vragen"
   },
@@ -1066,7 +1082,7 @@
     "titel": "Percentage of positive test results at GGD test locations ",
     "summary_title": "{{percentage}} of the test results at GGD test locations had a positive result",
     "summary_link_cta": "More about the percentage of positive test results from GGD test locations only",
-    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
+    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
       "href": "https://data.rivm.nl/covid-19/COVID-19_uitgevoerde_testen.html",
       "text": "RIVM"
@@ -1105,7 +1121,7 @@
     "titel": "Percentage of positive test results at GGD test locations in {{safetyRegion}}",
     "summary_title": "{{percentage}} of the tests at GGD test locations had a positive result",
     "summary_link_cta": "More about the percentage of positive test results from GGD test locations only",
-    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
+    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "bron": {
       "href": "https://data.rivm.nl/covid-19/COVID-19_uitgevoerde_testen.html",
       "text": "RIVM"
@@ -1165,7 +1181,13 @@
       }
     },
     "line_chart_legend_trend_label": "",
-    "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
+    "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
+    "line_chart_legend_trend_moving_average_label": "",
+    "tooltip_labels": {
+      "inaccurate": "",
+      "deceased_daily": "",
+      "deceased_daily_moving_average": ""
+    }
   },
   "veiligheidsregio_verpleeghuis_besmette_locaties": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -1196,7 +1218,8 @@
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/0179dd26-7bf6-4021-857f-8623aaf8e73a",
         "text": "RIVM"
       }
-    }
+    },
+    "linechart_tooltip_label": ""
   },
   "veiligheidsregio_verpleeghuis_positief_geteste_personen": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -1233,7 +1256,13 @@
       }
     },
     "line_chart_legend_trend_label": "",
-    "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
+    "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
+    "line_chart_legend_trend_moving_average_label": "",
+    "tooltip_labels": {
+      "inaccurate": "",
+      "newly_infected_people": "",
+      "newly_infected_people_moving_average": ""
+    }
   },
   "data_warning_text": "",
   "veelgestelde_vragen_metadata": {
@@ -1671,7 +1700,7 @@
         }
       },
       "kpi_daily_title": "Confirmed cases among over-70s living at home",
-      "kpi_daily_description": "The number of people over 70 living at home who were reported as testing positive for COVID-19 yesterday.",
+      "kpi_daily_description": "The number of people over 70 living at home who were reported as testing positive for COVID-19 yesterday. About 2,3 miljon people over 70 live at home.",
       "kpi_daily_per_100k_title": "Daily confirmed cases per 100,000 among over-70s living at home ",
       "kpi_daily_per_100k_description": "This figure shows how many people over 70 living at home were reported as testing positive for COVID-19 yesterday, per 100,000 over-70s living at home. This figure makes it easier to compare the situation in different regions.",
       "line_chart_daily_title": "Newly confirmed cases among over-70s over time",
@@ -1840,11 +1869,11 @@
       "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "cbs_message": {
-      "title": "Mortality in week 10 roughly the same as expected",
-      "published_text": "Date of publication: Friday 19 March",
-      "message": "In week 10 (8 to 14 March 2021 inclusive), the estimated number of deaths stood at 3,300. This number is approximately the same as expected for this period and nearly 250 up on the previous week (3,075). Mortality among long-term care users increased slightly as well, although it remained below the expected level. Statistics Netherlands (CBS) reports this based on the provisional weekly mortality figures. Since week 39 of 2020, weekly mortality has been higher than expected. In week 7 of 2021, the number of deaths was more or less equal to expected mortality for this period. In weeks 8 and 9, it was below the expected level. Estimated mortality for week 10 is virtually equal to the expected mortality for this period. The National Institute for Public Health and the Environment (RIVM) registered 136 COVID-19 deaths in week 10 (as at 16 March).",
+      "title": "In week 11, an estimated 3,100 deaths",
+      "published_text": "Date of publication: Friday 26 March",
+      "message": "In week 11 (15 to 21 March 2021 inclusive), the estimated number of deaths stood at 3,100. This is approximately 200 lower than expected for this period and over 100 lower than in the previous week (3,211). Mortality among long-term care users and people aged 80 years and over was below the expected level for this week. Statistics Netherlands (CBS) reports this based on the provisional weekly mortality figures. From week 39 of 2020 to week 6 of 2021 inclusive, weekly mortality was higher than expected. In week 7, the number of deaths was more or less the same as the expected mortality for this period; it was lower than expected in the subsequent weeks. The estimated mortality for week 11 is below the expected mortality as well. The National Institute for Public Health and the Environment (RIVM) registered 138 COVID-19 deaths in week 11 (as at 23 March).",
       "link": {
-        "href": "https://www.cbs.nl/en-gb/news/2021/11/mortality-in-week-10-roughly-the-same-as-expected",
+        "href": "https://www.cbs.nl/en-gb/news/2021/12/in-week-11-an-estimated-3-100-deaths",
         "text": "Read the full news item on the CBS website"
       }
     },
@@ -2021,7 +2050,7 @@
   },
   "deceased_age_groups": {
     "title": "COVID-19 deaths by age",
-    "description": "The blue bars on the right of this graph show the age distribution of people who have died from COVID 19. The grey bars on the left show how large each age group is in relation to the entire Dutch population. Taken together, the blue and grey bars show whether there are proportionately more or fewer COVID-19 deaths in each age group. If, for example, the graph shows that people in their sixties represent 12% of the Dutch population (grey bar) and that this same group represents 10% of the people in the Netherlands who have died from COVID-19 (blue bar), that means there are proportionately fewer deaths from COVID-19 among people in their sixties. The graph is updated daily and includes all deaths since the start of the COVID-19 pandemic. Please note that RIVM groups COVID-19 deaths among people younger than 50 together; the low numbers could otherwise be traceable back to individual people.",
+    "description": "The blue bars on the right of this graph show the age distribution of people who have died with COVID 19. The grey bars on the left show how large each age group is in relation to the entire Dutch population. Taken together, the blue and grey bars show whether there are proportionately more or fewer COVID-19 deaths in each age group. If, for example, the graph shows that people in their sixties represent 12% of the Dutch population (grey bar) and that this same group represents 10% of the people in the Netherlands who have died with COVID-19 (blue bar), that means there are proportionately fewer deaths with COVID-19 among people in their sixties. The graph is updated daily and includes all deaths since the start of the COVID-19 pandemic. Please note that RIVM groups COVID-19 deaths among people younger than 50 together; the low numbers could otherwise be traceable back to individual people.",
     "bronnen": {
       "rivm": {
         "text": "RIVM",
@@ -2031,7 +2060,7 @@
     "graph": {
       "accessibility_description": "Graph with percentages for the distribution of the population and the distribution of age groups tested positively.",
       "clipped_value_message": "This value is larger than shown in the graph",
-      "age_group_percentage_title": "Age distribution in The Netherlands",
+      "age_group_percentage_title": "Age distribution in the Netherlands",
       "age_group_percentage_tooltip": "of the population is {{ageGroupRange}} years old",
       "value_percentage_title": "Deaths by age",
       "value_percentage_tooltip": "of the number of deceased persons is {{ageGroupRange}} years old",
@@ -2344,7 +2373,8 @@
     "grafiek_leveringen": {
       "titel": "",
       "omschrijving": ""
-    }
+    },
+    "bereidheid_datums": ""
   },
   "editorial_detail": {
     "back_link": {
@@ -2385,7 +2415,9 @@
         "link": {
           "text": "View all articles",
           "href": "/artikelen"
-        }
+        },
+        "read_weekly_message": "",
+        "weekly_category": ""
       },
       "positief_getest_kaart": {
         "titel": "Confirmed cases in the Netherlands"
@@ -2395,7 +2427,7 @@
   },
   "nationaal_actueel": {
     "title": "The current situation in {{the_netherlands}}",
-    "the_netherlands": "The Netherlands",
+    "the_netherlands": "the Netherlands",
     "metadata": {
       "title": "Coronavirus Dashboard | COVID-19 | Government.nl",
       "description": "Information on the development of the coronavirus in the Netherlands."
@@ -2502,7 +2534,7 @@
       "description": "Current situation in safety region {{safetyRegionName}}"
     },
     "risiconiveaus": {
-      "selecteer_titel": "Risk level map of The Netherlands",
+      "selecteer_titel": "Risk level map of the Netherlands",
       "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on {{last_update}}. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus)."
     },
     "risoconiveau_maatregelen": {
@@ -2562,7 +2594,7 @@
     "quick_links": {
       "header": "View all data on the dashboard",
       "links": {
-        "nationaal": "Data for The Netherlands",
+        "nationaal": "Data for the Netherlands",
         "veiligheidsregio": "Data for safety region {{safetyRegionName}}",
         "gemeente": "Data by municipality"
       }
@@ -2645,7 +2677,7 @@
     "quick_links": {
       "header": "View all data on the dashboard",
       "links": {
-        "nationaal": "Data for The Netherlands",
+        "nationaal": "Data for the Netherlands",
         "veiligheidsregio": "Data for the safety region {{safetyRegionName}}",
         "veiligheidsregio_fallback": "Data by safety region",
         "gemeente": "Data for the municipality {{municipalityName}}"
@@ -2727,7 +2759,26 @@
         "toelichting": "This is the risk level that currently applies in this region. The risk level is reassessed every 2 weeks based on the number of hospital admissions and the number of positive tests (new confirmed cases) at that time."
       }
     },
-    "escalation_level_last_determined": "This risk level has been determined on {{last_determined}}, based on the figures from {{based_from}} to {{based_to}}. The risk level will be reassessed around {{next_determined}}."
+    "escalation_level_last_determined": "This risk level has been determined on {{last_determined}}, based on the figures from {{based_from}} to {{based_to}}. The risk level will be reassessed around {{next_determined}}.",
+    "momenteel": {
+      "description": "",
+      "description_from_to": "",
+      "last_determined": "",
+      "established_with": {
+        "title": "",
+        "description": ""
+      },
+      "positive_tests": {
+        "title": "",
+        "description": ""
+      },
+      "hospital_admissions": {
+        "title": "",
+        "description": ""
+      },
+      "next_determined": "",
+      "link_text": ""
+    }
   },
   "gemeente_sterfte": {
     "titel_sidebar": "Deaths",
@@ -2837,6 +2888,38 @@
     "reference": {
       "href": "/verantwoording#mortality-monitor-CBS",
       "text": "Read more about the information on this page in the 'Explanation of data presented'."
+    }
+  },
+  "infected_per_age_group": {
+    "title": "",
+    "description": "",
+    "legend": {
+      "infected_age_0_9_per_100k": "",
+      "infected_age_10_19_per_100k": "",
+      "infected_age_20_29_per_100k": "",
+      "infected_age_30_39_per_100k": "",
+      "infected_age_40_49_per_100k": "",
+      "infected_age_50_59_per_100k": "",
+      "infected_age_60_69_per_100k": "",
+      "infected_age_70_79_per_100k": "",
+      "infected_age_80_89_per_100k": "",
+      "infected_age_90_plus_per_100k": "",
+      "infected_overall_per_100k": ""
+    },
+    "reset_button_label": "",
+    "legend_help_text": ""
+  },
+  "g_number": {
+    "bar_chart": {
+      "title": "",
+      "description": "",
+      "negative_descriptor": "",
+      "positive_descriptor": "",
+      "bronnen": {
+        "download": "",
+        "href": "",
+        "text": ""
+      }
     }
   }
 }

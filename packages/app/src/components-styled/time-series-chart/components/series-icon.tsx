@@ -3,6 +3,8 @@ import { SeriesConfig } from '../logic';
 import { AreaTrendIcon } from './area-trend';
 import { LineTrendIcon } from './line-trend';
 import { RangeTrendIcon } from './range-trend';
+import { StackedAreaTrendIcon } from './stacked-area-trend';
+import { BarTrendIcon } from './bar-trend';
 
 interface SeriesIconProps<T extends TimestampedValue> {
   config: SeriesConfig<T>[number];
@@ -31,6 +33,17 @@ export function SeriesIcon<T extends TimestampedValue>({
           fillOpacity={config.fillOpacity}
           strokeWidth={config.strokeWidth}
         />
+      );
+    case 'stacked-area':
+      return (
+        <StackedAreaTrendIcon
+          color={config.color}
+          fillOpacity={config.fillOpacity}
+        />
+      );
+    case 'bar':
+      return (
+        <BarTrendIcon color={config.color} fillOpacity={config.fillOpacity} />
       );
     default:
       return null;

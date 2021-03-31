@@ -53,19 +53,6 @@ export type { SeriesConfig } from './logic';
  * The series config defines the type and visual properties for each of the
  * trends, like color and line/range/area type.
  *
- * Some of the customization functions have been stripped from the component
- * public API to reduce complexity and in an attempt to enforce consistency in
- * design. For example:
- *
- * - You can only set padding-left instead of all paddings, because only the
- *   left had a practical function (make space for larger numbers on the
- *   x-axis).
- * - The legend show/hide, items, shape and color are derived from seriesConfig
- *   definition and possibly other props that set things like date span
- *   annotations. We should be able to standardize this for all charts.
- * - formatAxis type callbacks have been removed as we should be able to
- *   standardize (a few flavors of) axis rendering.
- *
  * Components and logic are split up onto smaller abstractions so they can be
  * used more easily in composition. For example the Marker component is now
  * several components rendered separately inside an Overlay container. We might
@@ -75,16 +62,6 @@ export type { SeriesConfig } from './logic';
  * The scales for x and y are using the same type (LinearScale). This was done
  * to see if we can use the date_unix timestamps from the data directly
  * everywhere without unnecessary conversion to and from Date objects.
- *
- * @TODO
- *
- * - Render date start /end on x-axis for date spans series
- * - Configure y-axis for standard charts
- *
- * Known Issues:
- * - Nearest point / tooltip valueKey calculation seems to be off by some
- *   margin. This is currently not used in any charts but would be nice to solve
- *   at some point.
  */
 export type TimeSeriesChartProps<
   T extends TimestampedValue,
@@ -116,6 +93,7 @@ export type TimeSeriesChartProps<
    */
   numGridLines?: number;
   tickValues?: number[];
+  formatTickValue?: (value: number) => string;
   paddingLeft?: number;
   /**
    * The data specific options are grouped together. This way we can pass them
@@ -147,6 +125,7 @@ export function TimeSeriesChart<
   dataOptions,
   numGridLines = 3,
   tickValues: yTickValues,
+  formatTickValue: formatYTickValue,
   paddingLeft,
   ariaLabelledBy,
   tooltipTitle,
@@ -196,8 +175,8 @@ export function TimeSeriesChart<
    * y-axis scaling to change when toggling the timeframe setting.
    */
   const calculatedSeriesMax = useMemo(
-    () => calculateSeriesMaximum(allValues, seriesConfig, benchmark?.value),
-    [allValues, seriesConfig, benchmark]
+    () => calculateSeriesMaximum(seriesList, seriesConfig, benchmark?.value),
+    [seriesList, seriesConfig, benchmark?.value]
   );
 
   const seriesMax = isDefined(forcedMaximumValue)
@@ -301,25 +280,12 @@ export function TimeSeriesChart<
             numGridLines={numGridLines}
             yTickValues={yTickValues}
             xTickValues={xTickValues}
+            formatYTickValue={formatYTickValue}
             xScale={xScale}
             yScale={yScale}
             isPercentage={isPercentage}
             yAxisRef={yAxisRef}
           />
-
-          {timespanAnnotations &&
-            timespanAnnotations.map((x, index) => (
-              <TimespanAnnotation
-                key={index}
-                start={x.start}
-                end={x.end}
-                color={x.color}
-                fillOpacity={x.fillOpacity}
-                domain={xScale.domain() as [number, number]}
-                getX={getX}
-                height={bounds.height}
-              />
-            ))}
 
           {/**
            * The renderSeries() callback has been replaced by this component. As
@@ -350,6 +316,21 @@ export function TimeSeriesChart<
               width={bounds.width}
             />
           )}
+
+          {/**
+           * Timespan annotations are rendered on top of the chart. It is
+           * transparent thanks to the `mix-blend-mode` set to `multiply`.
+           */}
+          {timespanAnnotations?.map((x, index) => (
+            <TimespanAnnotation
+              key={index}
+              start={x.start}
+              end={x.end}
+              domain={xScale.domain() as [number, number]}
+              getX={getX}
+              height={bounds.height}
+            />
+          ))}
         </ChartContainer>
 
         {tooltipOpen && tooltipData && (

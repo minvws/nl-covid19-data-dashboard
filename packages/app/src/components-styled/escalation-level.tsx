@@ -1,5 +1,8 @@
 import { Box } from '~/components-styled/base';
-import { EscalationLevelIcon } from '~/components-styled/escalation-level-icon';
+import {
+  EscalationLevelIcon,
+  SizeVariants,
+} from '~/components-styled/escalation-level-icon';
 import { Text } from '~/components-styled/typography';
 import { EscalationLevel } from '~/domain/restrictions/type';
 import { useIntl } from '~/intl';
@@ -9,14 +12,14 @@ export type EscalationLevelProps = {
   level: EscalationLevel;
   fontSize?: number;
   useLevelColor?: boolean;
-  hasSmallIcon?: boolean;
+  size?: SizeVariants;
 };
 
-type EscalationLevelString = '1' | '2' | '3' | '4';
+export type EscalationLevelString = '1' | '2' | '3' | '4';
 
 export function EscalationLevelInfoLabel({
   level,
-  hasSmallIcon = false,
+  size,
   fontSize = 2,
   useLevelColor = false,
 }: EscalationLevelProps) {
@@ -26,7 +29,7 @@ export function EscalationLevelInfoLabel({
   const color = useLevelColor ? escalationColor : 'inherit';
   return (
     <Box display="flex" alignItems="center" justifyContent="flex-start">
-      <EscalationLevelIcon level={level} isSmall={hasSmallIcon} />
+      <EscalationLevelIcon level={level} size={size} />
       <Text
         as="span"
         ml={2}
