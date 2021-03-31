@@ -47,8 +47,8 @@ export type VerticalBarChartProps<
   values: T[];
   seriesConfig: C;
   initialWidth?: number;
+  initialHeight?: number;
   ariaLabelledBy: string;
-  height?: number;
   timeframe?: TimeframeOption;
   formatTooltip: TooltipFormatter<T>;
   numGridLines?: number;
@@ -65,7 +65,7 @@ export function VerticalBarChart<
   values: allValues,
   seriesConfig,
   initialWidth = 840,
-  height = 250,
+  initialHeight = 250,
   timeframe = 'all',
   formatTooltip,
   dataOptions,
@@ -86,6 +86,7 @@ export function VerticalBarChart<
   } = useTooltip<TooltipData<T>>();
 
   const [sizeRef, { width }] = useElementSize<HTMLDivElement>(initialWidth);
+  const height = (initialHeight / initialWidth) * width;
 
   const { isPercentage } = dataOptions || {};
 

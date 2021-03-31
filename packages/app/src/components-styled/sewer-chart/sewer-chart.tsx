@@ -37,7 +37,8 @@ interface SewerChartProps {
   data: Regionaal | Municipal;
   timeframe: TimeframeOption;
   valueAnnotation: string;
-  height?: number;
+  initialWidth?: number;
+  initialHeight?: number;
   text: {
     select_station_placeholder: string;
     average_label_text: string;
@@ -50,9 +51,17 @@ interface SewerChartProps {
 }
 
 export function SewerChart(props: SewerChartProps) {
-  const { data, timeframe, valueAnnotation, height = 300, text } = props;
+  const {
+    data,
+    timeframe,
+    valueAnnotation,
+    initialWidth = 840,
+    initialHeight = 300,
+    text,
+  } = props;
 
-  const [sizeRef, { width }] = useElementSize<HTMLDivElement>(840);
+  const [sizeRef, { width }] = useElementSize<HTMLDivElement>(initialWidth);
+  const height = (initialHeight / initialWidth) * width;
 
   const { siteText, formatDate, formatNumber } = useIntl();
 
@@ -262,7 +271,6 @@ export function SewerChart(props: SewerChartProps) {
         <svg
           role="img"
           width={width}
-          height={height}
           viewBox={`0 0 ${width} ${height}`}
           onPointerMove={handlePointerMove}
           onPointerLeave={handlePointerLeave}

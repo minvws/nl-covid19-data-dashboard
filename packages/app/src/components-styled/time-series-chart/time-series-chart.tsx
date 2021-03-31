@@ -80,7 +80,7 @@ export type TimeSeriesChartProps<
    * use the available width when the chart mounts.
    */
   initialWidth?: number;
-  height?: number;
+  initialHeight?: number;
   timeframe?: TimeframeOption;
   formatTooltip?: TooltipFormatter<T>;
   /**
@@ -119,7 +119,7 @@ export function TimeSeriesChart<
   values: allValues,
   seriesConfig,
   initialWidth = 840,
-  height = 250,
+  initialHeight = 250,
   timeframe = 'all',
   formatTooltip,
   dataOptions,
@@ -143,6 +143,7 @@ export function TimeSeriesChart<
   } = useTooltip<TooltipData<T>>();
 
   const [sizeRef, { width }] = useElementSize<HTMLDivElement>(initialWidth);
+  const height = (initialHeight / initialWidth) * width;
 
   const {
     valueAnnotation,
