@@ -8,7 +8,7 @@
 import css from '@styled-system/css';
 import { AxisBottom, AxisLeft } from '@visx/axis';
 import { GridRows } from '@visx/grid';
-import { ScaleLinear } from 'd3-scale';
+import { ScaleLinear, ScaleBand } from 'd3-scale';
 import { memo, Ref, useCallback } from 'react';
 import { colors } from '~/style/theme';
 import { createDate } from '~/utils/createDate';
@@ -17,7 +17,7 @@ import { useIntl } from '~/intl';
 
 type AxesProps = {
   bounds: Bounds;
-  xScale: ScaleLinear<number, number>;
+  xScale: ScaleLinear<number, number> | ScaleBand<number>;
   yScale: ScaleLinear<number, number>;
   isPercentage?: boolean;
   /**

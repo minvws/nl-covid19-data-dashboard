@@ -287,11 +287,11 @@
     "lineLegendLabel": "Infectious people",
     "geen_signaalwaarde_beschikbaar": "Due to a technical problem the data is currently not showing as intended. This is being investigated.",
     "geen_signaalwaarde_beschikbaar_lees_waarom": "Read here why",
-    "toelichting_pagina": "A person who carries coronavirus can infect other people within a certain time frame. How long someone is infectious for differs from one person to another. The number of infectious people is estimated using data from various sources. It is not possible to know exactly how many people are infectious, but we can indicate whether there are dozens, hundreds, thousands or even more.",
+    "toelichting_pagina": "A person who carries coronavirus can infect other people within a certain time frame. If more people are infectious the virus spreads faster. It is not possible to know exactly how many people are infectious, but we can indicate whether there are dozens, hundreds, thousands or even more.",
     "barscale_titel": "Average number of infectious people per 100,000 inhabitants.",
     "barscale_screenreader_text": "{{value}} infectious people",
-    "cijfer_titel": "Estimated number of infectious people in the Netherlands:",
-    "cijfer_toelichting": "A calculation of how many people with COVID-19 can transmit the virus. This number is calculated by the RIVM.",
+    "cijfer_titel": "Number of infectious people in the Netherlands:",
+    "cijfer_toelichting": "A calculation of how many people with COVID-19 can transmit the virus. This number is always a week or to old because more recent calculations are not accurate enough.",
     "linechart_titel": "Number of infectious people over time (per 100,000 inhabitants)",
     "titel_sidebar": "Infectious people",
     "metadata": {
@@ -327,7 +327,7 @@
     "titel": "Reproduction number",
     "pagina_toelichting": "The reproduction number shows how fast the virus is spreading. The number shows how many people are on average infected by one patient with COVID-19.",
     "barscale_titel": "Most recent reproduction number",
-    "barscale_toelichting": "Number of people infected by one infectious person.",
+    "barscale_toelichting": "Number of people infected by one infectious person. This number is always two weeks old, since more current calculations are to unreliable. ",
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
     "extra_uitleg": "The reproduction number shows how fast the virus is spreading. This number shows how many people are on average infected by one patient with COVID-19. The number of transmissions remains more or less constant when the reproduction number is 1, declines when it is less than 1 and increases when the number is above 1.",
     "linechart_titel": "The reproduction number over time",
@@ -684,9 +684,9 @@
     "absolute_date_template": "on {{date}}",
     "inwoners": "residents",
     "miljoen": "million",
-    "rond": "around",
     "signaalwaarde": "Alert value",
-    "totaal": "Total"
+    "totaal": "Total",
+    "rond": ""
   },
   "seoHead": {
     "default_description": "Information on the development of the coronavirus in the Netherlands.",
@@ -1061,7 +1061,7 @@
       "geen_regio": "no regions",
       "regio_singular": "{{amount}} region",
       "regio_plural": "{{amount}} regions",
-      "determined_on": ""
+      "determined_on": "This risk level has been determined on {{date}}"
     },
     "valid_from": "Valid from {{validFrom}}",
     "sidebar_label": "Risk level:",
@@ -2045,8 +2045,8 @@
     },
     "link_source": "Download date source for \"{{subject}}\" at {{source}}",
     "link_download": "View date source for \"{{subject}}\" at {{source}}",
-    "text_source": "",
-    "text_download": ""
+    "text_source": "View data source of \"{{subject}}\" at {{source}}",
+    "text_download": "Download the data for \"{{subject}}\" at {{source}}"
   },
   "deceased_age_groups": {
     "title": "COVID-19 deaths by age",
@@ -2373,7 +2373,8 @@
     "grafiek_leveringen": {
       "titel": "",
       "omschrijving": ""
-    }
+    },
+    "bereidheid_datums": ""
   },
   "editorial_detail": {
     "back_link": {
@@ -2414,7 +2415,9 @@
         "link": {
           "text": "View all articles",
           "href": "/artikelen"
-        }
+        },
+        "read_weekly_message": "",
+        "weekly_category": ""
       },
       "positief_getest_kaart": {
         "titel": "Confirmed cases in the Netherlands"
@@ -2756,24 +2759,25 @@
         "toelichting": "This is the risk level that currently applies in this region. The risk level is reassessed every 2 weeks based on the number of hospital admissions and the number of positive tests (new confirmed cases) at that time."
       }
     },
+    "escalation_level_last_determined": "This risk level has been determined on {{last_determined}}, based on the figures from {{based_from}} to {{based_to}}. The risk level will be reassessed around {{next_determined}}.",
     "momenteel": {
-      "description": "Dit is het risiconiveau dat nu geldt in deze regio. Het risiconiveau wordt elke twee weken bepaald op basis van het aantal ziekenhuisopnames en het aantal positieve testen van dat moment.",
-      "description_from_to": "Op {{last_determined}} is vastgesteld risiconiveau {{risk_level}}. De volgende ronde is op {{next_determined}}",
-      "last_determined": "Laatste inschaling:",
+      "description": "",
+      "description_from_to": "",
+      "last_determined": "This risk level has been determined on ",
       "established_with": {
-        "title": "Risiconiveau vastgesteld met de cijfers van:",
-        "description": "{{based_from}} t/m {{based_to}}"
+        "title": "",
+        "description": ""
       },
       "positive_tests": {
-        "title": "Positieve testen",
-        "description": "{{amount}} per 100.00 inwoners per week"
+        "title": "",
+        "description": ""
       },
       "hospital_admissions": {
-        "title": "Ziekenhuisopnames (incl. IC)",
-        "description": "{{amount}} per 1 miljoen inwoners per week"
+        "title": "",
+        "description": ""
       },
-      "next_determined": "Volgende inschaling:",
-      "link_text": "Bekijk de maatregelen die gelden in deze veiligheidsregio."
+      "next_determined": "The risk level will be reassessed around",
+      "link_text": ""
     }
   },
   "gemeente_sterfte": {
@@ -2887,22 +2891,35 @@
     }
   },
   "infected_per_age_group": {
-    "title": "Verdeling naar leeftijd",
-    "description": "Verdeling naar leeftijd ...",
+    "title": "",
+    "description": "",
     "legend": {
-      "infected_age_0_9_per_100k": "0-9",
-      "infected_age_10_19_per_100k": "10-19",
-      "infected_age_20_29_per_100k": "20-29",
-      "infected_age_30_39_per_100k": "30-30",
-      "infected_age_40_49_per_100k": "40-49",
-      "infected_age_50_59_per_100k": "50-59",
-      "infected_age_60_69_per_100k": "60-69",
-      "infected_age_70_79_per_100k": "70-79",
-      "infected_age_80_89_per_100k": "80-89",
-      "infected_age_90_plus_per_100k": "90+",
-      "infected_overall_per_100k": "Alle leeftijden"
+      "infected_age_0_9_per_100k": "",
+      "infected_age_10_19_per_100k": "",
+      "infected_age_20_29_per_100k": "",
+      "infected_age_30_39_per_100k": "",
+      "infected_age_40_49_per_100k": "",
+      "infected_age_50_59_per_100k": "",
+      "infected_age_60_69_per_100k": "",
+      "infected_age_70_79_per_100k": "",
+      "infected_age_80_89_per_100k": "",
+      "infected_age_90_plus_per_100k": "",
+      "infected_overall_per_100k": ""
     },
-    "reset_button_label": "Reset",
-    "legend_help_text": "Selecteed een of meerdere leeftijdsgroepen om deze apart te bekijken."
+    "reset_button_label": "",
+    "legend_help_text": ""
+  },
+  "g_number": {
+    "bar_chart": {
+      "title": "Trend in daily positive tests (Growth rate)",
+      "description": "The Growth rate (or G rate) shows how the number of daily positive tests over the last 7 days has developed relative to the previous 7 days. A positive Growth rate indicates a rising trend in the number of positive tests. A negative Growth rate indicates a declining trend in the number of positive tests. The graph shows the Growth rate of the last five weeks.",
+      "negative_descriptor": "less",
+      "positive_descriptor": "more",
+      "bronnen": {
+        "download": "",
+        "href": "",
+        "text": "Ministry of Health, Welfare and Sport"
+      }
+    }
   }
 }

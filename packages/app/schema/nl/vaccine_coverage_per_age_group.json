@@ -22,6 +22,7 @@
         "age_group_range",
         "age_group_total",
         "fully_vaccinated_percentage",
+        "partially_vaccinated_percentage",
         "date_of_insertion_unix",
         "date_unix",
         "date_of_report_unix",
@@ -45,6 +46,9 @@
           "type": "integer"
         },
         "fully_vaccinated_percentage": {
+          "type": "number"
+        },
+        "partially_vaccinated_percentage": {
           "type": "number"
         },
         "date_unix": {

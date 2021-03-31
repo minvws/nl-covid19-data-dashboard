@@ -6,6 +6,7 @@ import { TooltipSeriesList } from '~/components-styled/time-series-chart/compone
 import { LineSeriesDefinition } from '~/components-styled/time-series-chart/logic';
 import { useIntl } from '~/intl';
 import { useList } from '~/utils/use-list';
+import { useBreakpoints } from '~/utils/useBreakpoints';
 import { AgeGroupLegend } from './components/age-group-legend';
 import { SERIES_CONFIG } from './series-config';
 
@@ -19,6 +20,8 @@ export function InfectedPerAgeGroup({
   timeframe,
 }: InfectedPerAgeGroup) {
   const { list, toggle, clear } = useList<string>();
+
+  const breakpoints = useBreakpoints(true);
 
   const { siteText } = useIntl();
   const text = siteText.infected_per_age_group;
@@ -51,6 +54,7 @@ export function InfectedPerAgeGroup({
         values={values}
         timeframe={timeframe}
         seriesConfig={ageGroupChartConfig}
+        height={breakpoints.md ? 300 : 250}
         disableLegend
         formatTooltip={(data) => (
           <div css={css({ columns: tooltipColumns })}>
