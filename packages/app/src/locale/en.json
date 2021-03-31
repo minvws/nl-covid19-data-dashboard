@@ -1061,7 +1061,7 @@
       "geen_regio": "no regions",
       "regio_singular": "{{amount}} region",
       "regio_plural": "{{amount}} regions",
-      "determined_on": "This risk level has been determined on {{date}}"
+      "determined_on": "Risk level determined on {{date}}"
     },
     "valid_from": "Valid from {{validFrom}}",
     "sidebar_label": "Risk level:",
@@ -2761,22 +2761,22 @@
     },
     "escalation_level_last_determined": "This risk level has been determined on {{last_determined}}, based on the figures from {{based_from}} to {{based_to}}. The risk level will be reassessed around {{next_determined}}.",
     "momenteel": {
-      "description": "",
+      "description": "This is the risk level that currently applies in this region. The risk level is reassessed every 2 weeks based on the number of hospital admissions and the number of positive tests (new confirmed cases) at that time.",
       "description_from_to": "",
-      "last_determined": "This risk level has been determined on ",
+      "last_determined": "This risk level has been determined on {{last_determined}}",
       "established_with": {
-        "title": "",
-        "description": ""
+        "title": "The risk level is based on the figures from",
+        "description": "{{based_from}} to {{based_to}}"
       },
       "positive_tests": {
-        "title": "",
-        "description": ""
+        "title": "Positive tests",
+        "description": "{{amount}} per 100,000 residents per week"
       },
       "hospital_admissions": {
-        "title": "",
-        "description": ""
+        "title": "Hospital admissions (including ICU)",
+        "description": "{{amount}} per million residents per week"
       },
-      "next_determined": "The risk level will be reassessed around",
+      "next_determined": "The risk level will be reassessed around {{next_determined}}",
       "link_text": ""
     }
   },
