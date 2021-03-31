@@ -2911,14 +2911,14 @@
   },
   "g_number": {
     "bar_chart": {
-      "title": "",
-      "description": "",
-      "negative_descriptor": "",
-      "positive_descriptor": "",
+      "title": "Trend in daily positive tests (Growth rate)",
+      "description": "The Growth rate (or G rate) shows how the number of daily positive tests over the last 7 days has developed relative to the previous 7 days. A positive Growth rate indicates a rising trend in the number of positive tests. A negative Growth rate indicates a declining trend in the number of positive tests.",
+      "negative_descriptor": "less",
+      "positive_descriptor": "more",
       "bronnen": {
         "download": "",
         "href": "",
-        "text": ""
+        "text": "Ministry of Health, Welfare and Sport"
       }
     }
   }
