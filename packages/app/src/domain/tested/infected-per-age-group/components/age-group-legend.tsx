@@ -8,6 +8,7 @@ import { asResponsiveArray } from '~/style/utils';
 
 interface AgeGroupLegendProps {
   seriesConfig: LineSeriesDefinition<NlTestedPerAgeGroupValue>[];
+  alwaysEnabledConfig: LineSeriesDefinition<NlTestedPerAgeGroupValue>[];
   ageGroupSelection: string[];
   onToggleAgeGroup: (ageGroupRange: string) => void;
   onReset: () => void;
@@ -15,6 +16,7 @@ interface AgeGroupLegendProps {
 
 export function AgeGroupLegend({
   seriesConfig,
+  alwaysEnabledConfig,
   ageGroupSelection,
   onToggleAgeGroup,
   onReset,
@@ -26,6 +28,7 @@ export function AgeGroupLegend({
 
   return (
     <>
+      <Text fontSize={1}>{text.legend_help_text}</Text>
       <Legend>
         <List>
           {seriesConfig.map((item) => {
@@ -52,7 +55,24 @@ export function AgeGroupLegend({
           </Item>
         </List>
       </Legend>
-      <Text fontSize={1}>{text.legend_help_text}</Text>
+      <Legend>
+        <List>
+          {alwaysEnabledConfig.map((item) => {
+            return (
+              <Item key={item.label}>
+                <ItemText
+                  color={item.color}
+                  data-metric-property={item.metricProperty}
+                  data-text={item.label}
+                >
+                  {item.label}
+                  <Line color={item.color} lineStyle={item.style ?? 'solid'} />
+                </ItemText>
+              </Item>
+            );
+          })}
+        </List>
+      </Legend>
     </>
   );
 }
@@ -108,6 +128,7 @@ const ItemButton = styled.button<{
     display: 'inline-flex',
     flexDirection: 'column',
     alignItems: 'center',
+    fontSize: 1,
     justifyContent: 'space-between',
     '&:hover,&:focus': {
       '&:before': {
@@ -133,6 +154,19 @@ const ItemButton = styled.button<{
       fontWeight: 'bold',
       pr: '1px',
     },
+  })
+);
+const ItemText = styled.span(
+  css({
+    pr: asResponsiveArray({ _: '5px', md: 10 }),
+    pl: asResponsiveArray({ _: 25, md: 30 }),
+    py: '3px',
+    fontSize: 1,
+    border: '3px solid',
+    borderColor: 'transparent',
+    fontWeight: 'normal',
+    fontFamily: 'inherit',
+    position: 'relative',
   })
 );
 

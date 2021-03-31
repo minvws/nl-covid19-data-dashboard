@@ -5,6 +5,7 @@ import { TimeSeriesChart } from '~/components-styled/time-series-chart';
 import { TooltipSeriesList } from '~/components-styled/time-series-chart/components/tooltip/tooltip-series-list';
 import { LineSeriesDefinition } from '~/components-styled/time-series-chart/logic';
 import { useIntl } from '~/intl';
+import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { useList } from '~/utils/use-list';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { AgeGroupLegend } from './components/age-group-legend';
@@ -26,7 +27,15 @@ export function InfectedPerAgeGroup({
   const { siteText } = useIntl();
   const text = siteText.infected_per_age_group;
 
-  const ageGroupLegendConfig: LineSeriesDefinition<NlTestedPerAgeGroupValue>[] = useMemo(() => {
+  const underReportedDateStart = getBoundaryDateStartUnix(values, 7);
+
+  /* @TODO Always enabled is temporary logic pending on new UX */
+  const alwayEnabled = useMemo(() => {
+    return ['infected_overall_per_100k'];
+  }, []);
+
+  /* Enrich config with dynamic data / locale */
+  const ageGroupBaseConfig: LineSeriesDefinition<NlTestedPerAgeGroupValue>[] = useMemo(() => {
     return SERIES_CONFIG.map((baseAgeGroup) => {
       return {
         ...baseAgeGroup,
@@ -39,11 +48,27 @@ export function InfectedPerAgeGroup({
     });
   }, [text.legend]);
 
+  /* Filter for each config group */
   const ageGroupChartConfig = useMemo(() => {
-    return ageGroupLegendConfig.filter(
-      (item) => list.includes(item.metricProperty) || list.length === 0
+    const compareList = list.concat(...alwayEnabled);
+    return ageGroupBaseConfig.filter(
+      (item) =>
+        compareList.includes(item.metricProperty) ||
+        compareList.length === alwayEnabled.length
     );
-  }, [ageGroupLegendConfig, list]);
+  }, [ageGroupBaseConfig, list, alwayEnabled]);
+
+  const ageGroupLegendConfig = useMemo(() => {
+    return ageGroupBaseConfig.filter(
+      (item) => !alwayEnabled.includes(item.metricProperty)
+    );
+  }, [ageGroupBaseConfig, alwayEnabled]);
+
+  const alwaysEnabledConfig = useMemo(() => {
+    return ageGroupBaseConfig.filter((item) =>
+      alwayEnabled.includes(item.metricProperty)
+    );
+  }, []);
 
   /* Conditionally wrap tooltip over two columns due to amount of items */
   const tooltipColumns = list.length === 0 || list.length > 4 ? 2 : 1;
@@ -61,9 +86,21 @@ export function InfectedPerAgeGroup({
             <TooltipSeriesList data={data} />
           </div>
         )}
+        dataOptions={{
+          timespanAnnotations: [
+            {
+              start: underReportedDateStart,
+              end: Infinity,
+              label:
+                positiveTestedPeopleText.line_chart_legend_inaccurate_label,
+              shortLabel: positiveTestedPeopleText.tooltip_labels.inaccurate,
+            },
+          ],
+        }}
       />
       <AgeGroupLegend
         seriesConfig={ageGroupLegendConfig}
+        alwaysEnabledConfig={alwaysEnabledConfig}
         ageGroupSelection={list}
         onToggleAgeGroup={toggle}
         onReset={clear}
