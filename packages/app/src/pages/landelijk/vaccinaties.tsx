@@ -590,21 +590,20 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
         </TwoKpiSection>
               */}
 
-          {additions.length > 0 && (
-            <TwoKpiSection>
-              <KpiTile title={text.expected_page_additions.title}>
+          <TwoKpiSection>
+            <KpiTile title={text.expected_page_additions.title}>
+              {text.expected_page_additions.description}
+              {additions.length > 0 && (
                 <ul>
-                  {text.expected_page_additions.additions
-                    .filter((x) => x.length)
-                    .map((addition) => (
-                      <li key={addition}>
-                        <InlineText>{addition}</InlineText>
-                      </li>
-                    ))}
+                  {additions.map((addition) => (
+                    <li key={addition}>
+                      <InlineText>{addition}</InlineText>
+                    </li>
+                  ))}
                 </ul>
-              </KpiTile>
-            </TwoKpiSection>
-          )}
+              )}
+            </KpiTile>
+          </TwoKpiSection>
         </TileList>
       </NationalLayout>
     </Layout>
@@ -724,6 +723,7 @@ function createCoverageRow(
     fully_vaccinated_percentage: (fullyVaccinated / ageGroupTotal) * 100,
     partially_vaccinated_percentage:
       (partiallyVaccinated / ageGroupTotal) * 100,
+    partially_or_fully_vaccinated_percentage: 0,
     date_of_insertion_unix: 1616544000,
     date_of_report_unix: 1616544000,
     date_unix: 1616544000,
