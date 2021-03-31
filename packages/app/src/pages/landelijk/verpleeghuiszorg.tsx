@@ -106,6 +106,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{ source: positiveTestedPeopleText.bronnen.rivm }}
             title={positiveTestedPeopleText.linechart_titel}
             ariaDescription={graphDescriptions.verpleeghuiszorg_positief_getest}
+            timeframeOptions={['all', '5weeks']}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -228,6 +229,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTileWithTimeframe
             metadata={{ source: infectedLocationsText.bronnen.rivm }}
             title={infectedLocationsText.linechart_titel}
+            timeframeOptions={['all', '5weeks']}
             ariaDescription={
               graphDescriptions.verpleeghuiszorg_besmette_locaties
             }
@@ -285,6 +287,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTileWithTimeframe
             metadata={{ source: deceased.bronnen.rivm }}
             title={deceased.linechart_titel}
+            timeframeOptions={['all', '5weeks']}
           >
             {(timeframe) => (
               <TimeSeriesChart
