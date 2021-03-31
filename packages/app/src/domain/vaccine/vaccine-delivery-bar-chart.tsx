@@ -1,6 +1,7 @@
 import { NlVaccineDeliveryPerSupplier } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useState } from 'react';
+import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
 import { ChartTile } from '~/components-styled/chart-tile';
 import { RadioGroup } from '~/components-styled/radio-group';
@@ -46,6 +47,9 @@ export function VaccineDeliveryBarChart({
     },
   ];
 
+  const productNames =
+    siteText.vaccinaties.data.vaccination_chart.product_names;
+
   return (
     <ChartTile
       title={text.titel}
@@ -78,26 +82,28 @@ export function VaccineDeliveryBarChart({
         formatTickValue={(x) => `${x / 100_000}`}
         config={[
           {
-            metricProperty: 'bio_n_tech_pfizer',
+            metricProperty: 'bio_n_tech_pfizer' as const,
             color: colors.data.vaccines.bio_n_tech_pfizer,
-            label: 'BioNTech/Pfizer',
+            label: productNames.pfizer,
           },
           {
-            metricProperty: 'moderna',
+            metricProperty: 'moderna' as const,
             color: colors.data.vaccines.moderna,
-            label: 'Moderna',
+            label: productNames.moderna,
           },
           {
-            metricProperty: 'astra_zeneca',
+            metricProperty: 'astra_zeneca' as const,
             color: colors.data.vaccines.astra_zeneca,
-            label: 'AstraZeneca',
+            label: productNames.astra_zeneca,
           },
-          {
-            metricProperty: 'janssen',
-            color: colors.data.vaccines.janssen,
-            label: 'Janssen',
-          },
-        ]}
+          'janssen' in data.last_value
+            ? {
+                metricProperty: 'janssen' as const,
+                color: colors.data.vaccines.janssen,
+                label: productNames.janssen,
+              }
+            : undefined,
+        ].filter(isDefined)}
         expectedLabel={
           siteText.vaccinaties.data.vaccination_chart.legend.expected
         }
