@@ -2911,14 +2911,14 @@
   },
   "g_number": {
     "bar_chart": {
-      "title": "Ontwikkeling aantal positieve tests (Groeigetal) ",
-      "description": "Het Goreigetal (of G-getal) geeft in procenten weer of in de afgelopen 7 dagen meer of minder mensen positief sijn getest op corona dan in de 7 dagen ervoor. Big een positief Groeigetal is de trend dat het aantal positieve tests toeneemt. Bij een negatief Groeigetal is de trend dat het aantal positieve tests afneemt.",
-      "negative_descriptor": "gedaald",
-      "positive_descriptor": "nam toe",
+      "title": "Ontwikkeling aantal positieve tests (Groeigetal)",
+      "description": "Het Groeigetal (of G-getal) geeft in procenten weer of in de afgelopen 7 dagen meer of minder mensen positief zijn getest op corona dan in de 7 dagen ervoor. Bij een positief Groeigetal is de trend dat het aantal positieve tests toeneemt. Bij een negatief Groeigetal is de trend dat het aantal positieve tests afneemt.",
+      "negative_descriptor": "minder",
+      "positive_descriptor": "meer",
       "bronnen": {
         "download": "",
         "href": "",
-        "text": ""
+        "text": "Ministerie van VWS"
       }
     }
   }
