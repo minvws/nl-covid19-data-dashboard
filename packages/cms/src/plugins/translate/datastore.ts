@@ -1,13 +1,15 @@
 import { intersection } from 'lodash';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map, publishReplay, refCount, startWith, tap } from 'rxjs/operators';
-import config from './config.js';
+import config from './config';
 
 const onSelect$ = new BehaviorSubject(['nl']);
 
-export const setLangs = (langs) => onSelect$.next(langs);
+export const setLangs = (languages: string[]) => onSelect$.next(languages);
 
-const persistOn = (key, defaultValue) => (input$) => {
+const persistOn = (key: string, defaultValue: any) => (
+  input$: Observable<any>
+) => {
   let persisted;
   try {
     persisted = JSON.parse(window.localStorage.getItem(key));

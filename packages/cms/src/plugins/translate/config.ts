@@ -2,7 +2,7 @@ import { supportedLanguages } from '../../language/supported-languages';
 
 export default {
   supportedLanguages,
-  filterField: (enclosingType, field, selectedLanguageIds) =>
+  filterField: (enclosingType: any, field: any, selectedLanguageIds: any[]) =>
     !enclosingType.name.startsWith('locale') ||
     selectedLanguageIds.includes(field.name),
 };

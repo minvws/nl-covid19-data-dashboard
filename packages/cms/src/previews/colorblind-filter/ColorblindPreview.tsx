@@ -1,11 +1,10 @@
 /* eslint-disable react/no-multi-comp, react/no-did-mount-set-state */
-import React from 'react';
-import PropTypes from 'prop-types';
 import DefaultSelect from 'part:@sanity/components/selects/default';
-import filters from './filters.svg';
-import styles from './ColorblindPreview.css';
-
+import PropTypes from 'prop-types';
+import React from 'react';
 import { assemblePreviewUrl } from '../assemble-preview-url';
+import styles from './ColorblindPreview.css';
+import filters from './filters.svg';
 
 const FILTER_ITEMS = [
   { title: 'Protanopia', value: 'protanopia' },
@@ -19,7 +18,7 @@ const FILTER_ITEMS = [
   { title: 'No filter', value: null },
 ];
 
-class ColorblindPreview extends React.PureComponent {
+class ColorblindPreview extends React.PureComponent<any> {
   static propTypes = {
     document: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   };
@@ -32,7 +31,7 @@ class ColorblindPreview extends React.PureComponent {
     activeFilter: FILTER_ITEMS[0],
   };
 
-  handleFilterChange = (filter) => {
+  handleFilterChange = (filter: string) => {
     this.setState({ activeFilter: filter });
   };
 
@@ -54,7 +53,7 @@ class ColorblindPreview extends React.PureComponent {
         : 'none',
     };
 
-    const url = assemblePreviewUrl({ displayed, options });
+    const url = assemblePreviewUrl({ options });
 
     if (!url) {
       return (
@@ -73,7 +72,7 @@ class ColorblindPreview extends React.PureComponent {
           <DefaultSelect
             items={FILTER_ITEMS}
             value={activeFilter}
-            onChange={(value) => this.handleFilterChange(value)}
+            onChange={(value: any) => this.handleFilterChange(value)}
           />
         </div>
         <div className={styles.iframeContainer} style={filterStyle}>
