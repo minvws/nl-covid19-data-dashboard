@@ -19,8 +19,9 @@ import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
 import {
   MilestonesView,
-  MilestoneViewProps
+  MilestoneViewProps,
 } from '~/domain/vaccine/milestones-view';
+import { VaccineDeliveryAreaChart } from '~/domain/vaccine/vaccine-delivery-area-chart';
 import { VaccineDeliveryBarChart } from '~/domain/vaccine/vaccine-delivery-bar-chart';
 import { VaccinePageIntroduction } from '~/domain/vaccine/vaccine-page-introduction';
 import { useIntl } from '~/intl';
@@ -28,12 +29,12 @@ import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { getVaccineMilestonesQuery } from '~/queries/vaccine-milestones-query';
 import {
   createGetStaticProps,
-  StaticProps
+  StaticProps,
 } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
-  getNlData
+  getNlData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
@@ -457,20 +458,22 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
           <VaccineDeliveryBarChart data={data.vaccine_delivery_per_supplier} />
 
-            <TwoKpiSection>
-              <KpiTile title={text.expected_page_additions.title}>
-                <Text>{text.expected_page_additions.description}</Text>
-                {additions.length > 0 && (
+          <VaccineDeliveryAreaChart data={data} />
+
+          <TwoKpiSection>
+            <KpiTile title={text.expected_page_additions.title}>
+              <Text>{text.expected_page_additions.description}</Text>
+              {additions.length > 0 && (
                 <ul>
                   {additions.map((addition) => (
                     <li key={addition}>
                       <InlineText>{addition}</InlineText>
                     </li>
                   ))}
-                </ul>)}
-              </KpiTile>
-            </TwoKpiSection>
-          )}
+                </ul>
+              )}
+            </KpiTile>
+          </TwoKpiSection>
         </TileList>
       </NationalLayout>
     </Layout>
