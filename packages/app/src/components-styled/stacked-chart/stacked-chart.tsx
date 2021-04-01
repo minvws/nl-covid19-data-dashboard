@@ -265,14 +265,22 @@ export function StackedChart<T extends TimestampedValue>(
     [config]
   );
 
+  /**
+   * Date range labels (eg "28 okt - 3 dec") are ~85 px wide. Use that number
+   * to determine the amount of labels which should fit.
+   */
+  const numOfFittingLabels = Math.floor(width / 85);
   const isNarrowChart = width < 475;
-
   const formatDateString = useCallback(
     (date: Date, index: number, all: unknown[]) => {
       const { weekStartDate, weekEndDate } = getWeekInfo(date);
       const [start, end] = formatDateSpan(weekStartDate, weekEndDate, 'axis');
 
       const rangeText = `${start} - ${end}`;
+
+      if (all.length <= numOfFittingLabels) {
+        return rangeText;
+      }
 
       const isFirst = index === 0;
       const isLast = index === all.length - 1;
@@ -291,7 +299,7 @@ export function StackedChart<T extends TimestampedValue>(
         return rangeText;
       }
     },
-    [formatDate, formatDateSpan, isNarrowChart]
+    [formatDate, formatDateSpan, isNarrowChart, numOfFittingLabels]
   );
 
   /**
