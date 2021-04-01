@@ -170,7 +170,7 @@ export interface National {
   vaccine_coverage?: NlVaccineCoverage;
   vaccine_delivery: NlVaccineDelivery;
   vaccine_delivery_estimate: NlVaccineDeliveryEstimate;
-  vaccine_delivery_per_supplier?: NlVaccineDeliveryPerSupplier;
+  vaccine_delivery_per_supplier: NlVaccineDeliveryPerSupplier;
   vaccine_delivery_estimate_time_span: NlVaccineDeliveryEstimateTimeSpan;
   vaccine_administered: NlVaccineAdministered;
   vaccine_administered_estimate: NlVaccineAdministeredEstimate;
@@ -567,6 +567,9 @@ export interface NlVaccineDeliveryPerSupplierValue {
   bio_n_tech_pfizer: number;
   moderna: number;
   astra_zeneca: number;
+  cure_vac?: number;
+  janssen?: number;
+  sanofi?: number;
   is_estimate: boolean;
   week_number: number;
   date_of_insertion_unix: number;

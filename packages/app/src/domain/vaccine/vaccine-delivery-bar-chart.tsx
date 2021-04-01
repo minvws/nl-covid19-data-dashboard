@@ -1,148 +1,105 @@
 import { NlVaccineDeliveryPerSupplier } from '@corona-dashboard/common';
+import css from '@styled-system/css';
+import { useState } from 'react';
+import { isDefined } from 'ts-is-present';
+import { Box } from '~/components-styled/base';
 import { ChartTile } from '~/components-styled/chart-tile';
+import { RadioGroup } from '~/components-styled/radio-group';
 import { StackedChart } from '~/components-styled/stacked-chart';
-import { AllLanguages } from '~/locale';
+import { Text } from '~/components-styled/typography';
+import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
-interface VaccineDeliveryBarChartProps {
-  data: NlVaccineDeliveryPerSupplier;
-  siteText: AllLanguages;
-}
+type Timeframe = 'all' | 'recent_and_coming';
 
 export function VaccineDeliveryBarChart({
   data,
-  siteText,
-}: VaccineDeliveryBarChartProps) {
-  const text = siteText.vaccinaties.grafiek_leveringen;
+}: {
+  data: NlVaccineDeliveryPerSupplier;
+}) {
+  const intl = useIntl();
+  const text = intl.siteText.vaccinaties.grafiek_leveringen;
+  const [timeframe, setTimeframe] = useState<Timeframe>('recent_and_coming');
 
   /**
-   * @TODO Remove mock data, but leaving it in for now in case we need to work
-   * on the chart again before actual data is available.
+   * The timeframe `recent_and_coming` should display 4 delivered values
+   * and 4 expected values. We'll find the index of the first estimated value
+   * and slice values based on that index.
    */
-  /*  const values: NlVaccineDeliveryPerSupplierValue[] = [
+  const estimateIndex = data.values.findIndex((value) => value.is_estimate);
+
+  const timeframeOptions = [
     {
-      total: 23456,
-      bio_n_tech_pfizer: 1234,
-      moderna: 856,
-      astra_zeneca: 500,
-      is_estimate: false,
-      week_number: 1,
-      date_of_insertion_unix: 0,
-      date_start_unix: new Date('01-01-2020').getTime() / 1000,
-      date_end_unix: new Date('01-08-2020').getTime() / 1000,
-      date_of_report_unix: 0,
+      label: intl.siteText.charts.time_controls.all,
+      value: 'all',
     },
     {
-      total: 5456,
-      bio_n_tech_pfizer: 2345,
-      moderna: 500,
-      astra_zeneca: 1490,
-      is_estimate: false,
-      week_number: 2,
-      date_of_insertion_unix: 0,
-      date_start_unix: new Date('01-09-2020').getTime() / 1000,
-      date_end_unix: new Date('01-16-2020').getTime() / 1000,
-      date_of_report_unix: 0,
-    },
-    {
-      total: 126,
-      bio_n_tech_pfizer: 1265,
-      moderna: 2314,
-      astra_zeneca: 1789,
-      is_estimate: false,
-      week_number: 3,
-      date_of_insertion_unix: 0,
-      date_start_unix: new Date('01-17-2020').getTime() / 1000,
-      date_end_unix: new Date('01-24-2020').getTime() / 1000,
-      date_of_report_unix: 0,
-    },
-    {
-      total: 23456,
-      bio_n_tech_pfizer: 1234,
-      moderna: 856,
-      astra_zeneca: 500,
-      is_estimate: true,
-      week_number: 4,
-      date_of_insertion_unix: 0,
-      date_start_unix: new Date('01-25-2020').getTime() / 1000,
-      date_end_unix: new Date('01-31-2020').getTime() / 1000,
-      date_of_report_unix: 0,
-    },
-    {
-      total: 5456,
-      bio_n_tech_pfizer: 2345,
-      moderna: 500,
-      astra_zeneca: 1490,
-      is_estimate: true,
-      week_number: 5,
-      date_of_insertion_unix: 0,
-      date_start_unix: new Date('02-01-2020').getTime() / 1000,
-      date_end_unix: new Date('02-07-2020').getTime() / 1000,
-      date_of_report_unix: 0,
-    },
-    {
-      total: 126,
-      bio_n_tech_pfizer: 1265,
-      moderna: 2314,
-      astra_zeneca: 1789,
-      is_estimate: true,
-      week_number: 6,
-      date_of_insertion_unix: 0,
-      date_start_unix: new Date('02-08-2020').getTime() / 1000,
-      date_end_unix: new Date('02-14-2020').getTime() / 1000,
-      date_of_report_unix: 0,
+      label:
+        intl.siteText.vaccinaties.grafiek_leveringen
+          .timeframe_recent_en_verwacht,
+      value: 'recent_and_coming',
     },
   ];
 
-  const last_value: NlVaccineDeliveryPerSupplierValue = {
-    total: 126,
-    bio_n_tech_pfizer: 1265,
-    moderna: 2314,
-    astra_zeneca: 1789,
-    is_estimate: false,
-    week_number: 6,
-    date_of_insertion_unix: 0,
-    date_start_unix: new Date('02-08-2020').getTime() / 1000,
-    date_end_unix: new Date('02-14-2020').getTime() / 1000,
-    date_of_report_unix: new Date('02-16-2020').getTime() / 1000,
-  };
- */
+  const productNames =
+    intl.siteText.vaccinaties.data.vaccination_chart.product_names;
+
   return (
     <ChartTile
-      title={replaceVariablesInText(text.titel, {
-        weekNumber: data.last_value.week_number,
-      })}
-      description={text.omschrijving}
+      title={text.titel}
       metadata={{
         date: data.last_value.date_of_report_unix,
-        source: siteText.vaccinaties.bronnen.rivm,
+        source: intl.siteText.vaccinaties.bronnen.rivm,
       }}
+      description={
+        <Box display="flex" flexDirection={{ _: 'column', md: 'row' }}>
+          <Box flex={1} pr={{ md: 2 }}>
+            <Text>{text.omschrijving}</Text>
+          </Box>
+          <Box css={css({ '> *': { whiteSpace: 'nowrap' } })}>
+            <RadioGroup
+              value={timeframe}
+              onChange={(x) => setTimeframe(x)}
+              items={timeframeOptions}
+            />
+          </Box>
+        </Box>
+      }
     >
       <StackedChart
-        values={data.values}
+        values={
+          timeframe === 'all'
+            ? data.values
+            : data.values.slice(estimateIndex - 4, estimateIndex + 4)
+        }
+        valueAnnotation={intl.siteText.waarde_annotaties.x_100k}
+        formatTickValue={(x) => `${x / 100_000}`}
         config={[
           {
-            metricProperty: 'bio_n_tech_pfizer',
+            metricProperty: 'bio_n_tech_pfizer' as const,
             color: colors.data.vaccines.bio_n_tech_pfizer,
-            label: 'BioNTech/Pfizer',
+            label: productNames.pfizer,
           },
           {
-            metricProperty: 'moderna',
+            metricProperty: 'moderna' as const,
             color: colors.data.vaccines.moderna,
-            label: 'Moderna',
+            label: productNames.moderna,
           },
           {
-            metricProperty: 'astra_zeneca',
+            metricProperty: 'astra_zeneca' as const,
             color: colors.data.vaccines.astra_zeneca,
-            label: 'AstraZeneca',
+            label: productNames.astra_zeneca,
           },
-        ]}
-        formatXAxis={(__value, index) =>
-          `Week ${data.values[index].week_number}`
-        }
+          'janssen' in data.last_value
+            ? {
+                metricProperty: 'janssen' as const,
+                color: colors.data.vaccines.janssen,
+                label: productNames.janssen,
+              }
+            : undefined,
+        ].filter(isDefined)}
         expectedLabel={
-          siteText.vaccinaties.data.vaccination_chart.legend.expected
+          intl.siteText.vaccinaties.data.vaccination_chart.legend.expected
         }
       />
     </ChartTile>

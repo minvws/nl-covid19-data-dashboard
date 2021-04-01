@@ -16,24 +16,23 @@ import { SeriesPoint } from '@visx/shape/lib/types';
  * https://github.com/airbnb/visx/issues/904
  */
 import { defaultStyles, TooltipWithBounds, useTooltip } from '@visx/tooltip';
-import { NumberValue } from 'd3-scale';
 import { isEmpty, set } from 'lodash';
 import { transparentize } from 'polished';
 import { MouseEvent, TouchEvent, useCallback, useMemo, useState } from 'react';
 import styled from 'styled-components';
+import useResizeObserver from 'use-resize-observer';
 import { Box } from '~/components-styled/base';
 import { Legend } from '~/components-styled/legend';
 import { InlineText } from '~/components-styled/typography';
+import { ValueAnnotation } from '~/components-styled/value-annotation';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { getValuesInTimeframe } from '~/utils/timeframe';
+import { getValuesInTimeframe, TimeframeOption } from '~/utils/timeframe';
 import { useElementSize } from '~/utils/use-element-size';
 import { useIsMountedRef } from '~/utils/use-is-mounted-ref';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import {
   calculateSeriesMaximum,
-  formatDayMonth,
   getSeriesData,
   getTotalSumForMetricProperty,
   getWeekInfo,
@@ -46,22 +45,9 @@ const tooltipStyles = {
   zIndex: 100,
 };
 
-const NUM_TICKS = 3;
 const NO_HOVER_INDEX = -1;
-const NUM_1K = 1000;
-const NUM_100K = 100000;
-const NUM_1M = 1000000;
 
-const tickFormatNumber = (v: NumberValue) => {
-  const value1M = v.valueOf() / NUM_1M;
-  const value100K = v.valueOf() / NUM_100K;
-
-  return value1M > 1
-    ? `${value1M}mln`
-    : value100K > 0
-    ? `${value100K}00k`
-    : '0';
-};
+type AnyTickFormatter = (value: any) => string;
 
 /**
  * A timeout prevents the tooltip from closing directly when you move out of the
@@ -119,8 +105,15 @@ export type StackedChartProps<T extends TimestampedValue> = {
   formatTooltip?: TooltipFormatter;
   isPercentage?: boolean;
   formatXAxis?: TickFormatter<Date>;
+  formatTickValue?: (value: number) => string;
+  timeframe?: TimeframeOption;
 };
 
+/**
+ * @TODO the StackedChart is very specific to the vaccine availability
+ * chart so it should probably be refactored once we start re-using this
+ * chart for other things.
+ */
 export function StackedChart<T extends TimestampedValue>(
   props: StackedChartProps<T>
 ) {
@@ -135,11 +128,20 @@ export function StackedChart<T extends TimestampedValue>(
     initialWidth = 840,
     isPercentage,
     expectedLabel,
+    formatTickValue: formatYTickValue,
+    valueAnnotation,
+    timeframe = 'all',
   } = props;
 
   const [sizeRef, { width }] = useElementSize<HTMLDivElement>(initialWidth);
 
-  const { siteText, formatNumber, formatPercentage } = useIntl();
+  const {
+    siteText,
+    formatNumber,
+    formatDate,
+    formatPercentage,
+    formatDateSpan,
+  } = useIntl();
 
   const {
     tooltipData,
@@ -156,31 +158,28 @@ export function StackedChart<T extends TimestampedValue>(
   const isExtraSmallScreen = !breakpoints.sm;
   const isTinyScreen = !breakpoints.xs;
 
+  const {
+    width: yAxisWidth = 0,
+    ref: yAxisRef,
+    // @ts-expect-error useResizeObserver expects element extending HTMLElement
+  } = useResizeObserver<SVGElement>();
+
   const padding = useMemo(
     () =>
       ({
-        top: 0,
+        top: 10,
         right: isExtraSmallScreen ? 0 : 30,
-        bottom: 20,
-        left: 32,
+        bottom: 30,
+        left: yAxisWidth + 10, // 10px seems to be enough padding,
       } as const),
-    [isExtraSmallScreen]
+    [isExtraSmallScreen, yAxisWidth]
   );
 
   const height = isExtraSmallScreen ? 200 : 400;
 
-  const tickFormatPercentage = useCallback(
-    (v: NumberValue) => {
-      return `${formatPercentage(v.valueOf())}%`;
-    },
-    [formatPercentage]
-  );
-
   const metricProperties = useMemo(() => config.map((x) => x.metricProperty), [
     config,
   ]);
-
-  const timeframe = 'all';
 
   const valuesInTimeframe = useMemo(
     () => getValuesInTimeframe(values, timeframe),
@@ -266,13 +265,41 @@ export function StackedChart<T extends TimestampedValue>(
     [config]
   );
 
+  /**
+   * Date range labels (eg "28 okt - 3 dec") are ~85 px wide. Use that number
+   * to determine the amount of labels which should fit.
+   */
+  const numOfFittingLabels = Math.floor(width / 85);
+  const isNarrowChart = width < 475;
   const formatDateString = useCallback(
-    (date: Date) => {
-      const { weekNumber } = getWeekInfo(date);
+    (date: Date, index: number, all: unknown[]) => {
+      const { weekStartDate, weekEndDate } = getWeekInfo(date);
+      const [start, end] = formatDateSpan(weekStartDate, weekEndDate, 'axis');
 
-      return isTinyScreen ? `Wk ${weekNumber}` : `Week ${weekNumber}`;
+      const rangeText = `${start} - ${end}`;
+
+      if (all.length <= numOfFittingLabels) {
+        return rangeText;
+      }
+
+      const isFirst = index === 0;
+      const isLast = index === all.length - 1;
+
+      if (isNarrowChart) {
+        return isFirst
+          ? formatDate(weekStartDate, 'axis')
+          : isLast
+          ? formatDate(weekEndDate, 'axis')
+          : undefined;
+      }
+
+      const isAlternate = index % 2 === 0 && index !== all.length - 2;
+
+      if (isFirst || isLast || isAlternate) {
+        return rangeText;
+      }
     },
-    [isTinyScreen]
+    [formatDate, formatDateSpan, isNarrowChart, numOfFittingLabels]
   );
 
   /**
@@ -311,18 +338,24 @@ export function StackedChart<T extends TimestampedValue>(
     (data: SeriesValue, key: string, color: string) => {
       const date = getDate(data);
 
-      const isMillion = (v: number) => v / NUM_1M > 1;
-
       const { weekStartDate, weekEndDate } = getWeekInfo(date);
-
-      const isTotalMillion = isMillion(seriesSumByKey[key]);
-      const isWeekMillion = isMillion(data[key]);
 
       const allDates = series.map(getDate);
 
-      const { weekNumber: weekNumberFrom } = getWeekInfo(allDates[0]);
-      const { weekNumber: weekNumberTo } = getWeekInfo(
+      const { weekStartDate: weekStartDateAll } = getWeekInfo(allDates[0]);
+      const { weekEndDate: weekEndDateAll } = getWeekInfo(
         allDates[allDates.length - 1]
+      );
+
+      const [startSingle, endSingle] = formatDateSpan(
+        weekStartDate,
+        weekEndDate,
+        'axis'
+      );
+      const [startAll, endAll] = formatDateSpan(
+        weekStartDateAll,
+        weekEndDateAll,
+        'axis'
       );
 
       return (
@@ -334,45 +367,40 @@ export function StackedChart<T extends TimestampedValue>(
             </InlineText>
           </Box>
           <Box mb={2}>
-            <InlineText fontWeight="bold">
-              {`${formatDayMonth(weekStartDate)} - ${formatDayMonth(
-                weekEndDate
-              )}: `}
-            </InlineText>
-            {isWeekMillion
-              ? `${formatPercentage(data[key] / NUM_1M)} mln`
-              : `${formatNumber(Math.round(data[key] / NUM_1K))} k`}
+            <InlineText fontWeight="bold">{`${startSingle} - ${endSingle}: `}</InlineText>
+            {formatNumber(data[key])}
           </Box>
-
           <Box mb={2}>
-            <InlineText fontWeight="bold">
-              {`${replaceVariablesInText(
-                isTinyScreen
-                  ? siteText.vaccinaties.verwachte_leveringen
-                      .van_week_tot_week_klein_scherm
-                  : siteText.vaccinaties.verwachte_leveringen.van_week_tot_week,
-                { weekNumberFrom, weekNumberTo }
-              )}: `}
-            </InlineText>
-            {isTotalMillion
-              ? `${formatPercentage(seriesSumByKey[key] / NUM_1M)} mln `
-              : `${formatNumber(Math.round(seriesSumByKey[key] / NUM_1K))} k `}
-            {!isTinyScreen && siteText.waarde_annotaties.totaal}
+            <InlineText fontWeight="bold">{`${startAll} - ${endAll}: `}</InlineText>
+            {formatNumber(seriesSumByKey[key])}
+            {!isTinyScreen && ' ' + siteText.waarde_annotaties.totaal}
           </Box>
         </Box>
       );
     },
     [
-      seriesSumByKey,
       series,
+      formatDateSpan,
       labelByKey,
-      formatPercentage,
       formatNumber,
+      seriesSumByKey,
       isTinyScreen,
-      siteText.vaccinaties.verwachte_leveringen.van_week_tot_week_klein_scherm,
-      siteText.vaccinaties.verwachte_leveringen.van_week_tot_week,
       siteText.waarde_annotaties.totaal,
     ]
+  );
+
+  const formatYAxis = useCallback(
+    (y: number) => {
+      return formatNumber(y);
+    },
+    [formatNumber]
+  );
+
+  const formatYAxisPercentage = useCallback(
+    (y: number) => {
+      return `${formatPercentage(y)}%`;
+    },
+    [formatPercentage]
   );
 
   /**
@@ -439,12 +467,17 @@ export function StackedChart<T extends TimestampedValue>(
 
   const yScale = scaleLinear<number>({
     domain: [0, seriesMax],
+    range: [yMax, 0],
     nice: true,
-  }).range([yMax, 0]);
+  });
 
   return (
     <Box>
       <Box position="relative" ref={sizeRef}>
+        {valueAnnotation && (
+          <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
+        )}
+
         <svg
           width={width}
           viewBox={`0 0 ${width} ${height}`}
@@ -457,7 +490,6 @@ export function StackedChart<T extends TimestampedValue>(
             <GridRows
               scale={yScale}
               width={bounds.width}
-              numTicks={NUM_TICKS}
               stroke={colors.data.axis}
             />
             <AxisBottom
@@ -475,23 +507,28 @@ export function StackedChart<T extends TimestampedValue>(
               }}
               hideTicks
             />
-            <AxisLeft
-              scale={yScale}
-              numTicks={4}
-              hideTicks
-              hideAxisLine
-              stroke={colors.data.axis}
-              tickFormat={
-                isPercentage ? tickFormatPercentage : tickFormatNumber
-              }
-              tickLabelProps={() => ({
-                fill: colors.data.axisLabels,
-                fontSize: 12,
-                dx: 0,
-                textAnchor: 'end',
-                verticalAnchor: 'middle',
-              })}
-            />
+            <g ref={yAxisRef}>
+              <AxisLeft
+                scale={yScale}
+                hideTicks
+                hideAxisLine
+                stroke={colors.data.axis}
+                tickFormat={
+                  formatYTickValue
+                    ? (formatYTickValue as AnyTickFormatter)
+                    : isPercentage
+                    ? (formatYAxisPercentage as AnyTickFormatter)
+                    : (formatYAxis as AnyTickFormatter)
+                }
+                tickLabelProps={() => ({
+                  fill: colors.data.axisLabels,
+                  fontSize: 12,
+                  dx: 0,
+                  textAnchor: 'end',
+                  verticalAnchor: 'middle',
+                })}
+              />
+            </g>
             <BarStack<SeriesValue, string>
               data={series}
               keys={metricProperties as string[]}
@@ -648,7 +685,7 @@ const Square = styled.span<{ color: string }>((x) =>
 function HatchedSquare() {
   return (
     <svg height="15" width="15">
-      <rect height="15" width="15" fill="lightgray" />
+      <rect height="15" width="15" fill={colors.gray} />
       <rect height="15" width="15" fill="url(#pattern-hatched-small)" />
     </svg>
   );
