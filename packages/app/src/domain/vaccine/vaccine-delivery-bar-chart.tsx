@@ -10,7 +10,7 @@ import { Text } from '~/components-styled/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 
-type Timeframe = 'all' | 'delivered_and_expected';
+type Timeframe = 'all' | 'recent_and_coming';
 
 export function VaccineDeliveryBarChart({
   data,
@@ -19,12 +19,10 @@ export function VaccineDeliveryBarChart({
 }) {
   const intl = useIntl();
   const text = intl.siteText.vaccinaties.grafiek_leveringen;
-  const [timeframe, setTimeframe] = useState<Timeframe>(
-    'delivered_and_expected'
-  );
+  const [timeframe, setTimeframe] = useState<Timeframe>('recent_and_coming');
 
   /**
-   * The timeframe `delivered_and_expected` should display 4 delivered values
+   * The timeframe `recent_and_coming` should display 4 delivered values
    * and 4 expected values. We'll find the index of the first estimated value
    * and slice values based on that index.
    */
@@ -39,7 +37,7 @@ export function VaccineDeliveryBarChart({
       label:
         intl.siteText.vaccinaties.grafiek_leveringen
           .timeframe_recent_en_verwacht,
-      value: 'delivered_and_expected',
+      value: 'recent_and_coming',
     },
   ];
 
