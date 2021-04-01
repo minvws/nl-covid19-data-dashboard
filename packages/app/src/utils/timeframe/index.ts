@@ -70,7 +70,7 @@ export function getValuesInTimeframe<T extends TimestampedValue>(
 
   if (isDateSpanSeries(values)) {
     return values.filter(
-      (x: DateSpanValue) => x.date_start_unix >= boundary
+      (x: DateSpanValue) => x.date_end_unix >= boundary
     ) as T[];
   }
 

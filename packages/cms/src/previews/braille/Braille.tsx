@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import { Block } from '@sanity/types';
 // remember to install this dependency if you use this in your own project
 import br from 'braille';
 import DefaultSelect from 'part:@sanity/components/selects/default';
-
+import React, { useState } from 'react';
 import styles from './Braille.css';
 
 const defaultFields = ['title', 'excerpt', 'body'];
 
-const blocksToText = (blocks, opts = {}) => {
+const blocksToText = (blocks: Block<any>[], opts = {}) => {
   const defaultBehaviors = { nonTextBehavior: 'remove' };
   const options = Object.assign({}, defaultBehaviors, opts);
   return blocks
@@ -22,7 +22,7 @@ const blocksToText = (blocks, opts = {}) => {
     .join('\n\n');
 };
 
-function Braille({ document, fields }) {
+function Braille({ document, fields }: { document: any; fields: string[] }) {
   const { displayed } = document;
   const [activeField, setActiveField] = useState('title');
 
@@ -50,7 +50,7 @@ function Braille({ document, fields }) {
         <DefaultSelect
           items={fieldObjects}
           value={activeFieldObject}
-          onChange={({ title }) => setActiveField(title)}
+          onChange={({ title }: { title: string }) => setActiveField(title)}
         />
       </div>
       <h3 className={styles.transcriptHeading}>Transcript</h3>

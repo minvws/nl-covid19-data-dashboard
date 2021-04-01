@@ -150,7 +150,7 @@ export interface National {
   infectious_people: NationalInfectiousPeople;
   intensive_care_nice: NationalIntensiveCareNice;
   tested_overall: NationalTestedOverall;
-  tested_per_age_group: NlTestedPerAgeGroup;
+  tested_per_age_group?: NlTestedPerAgeGroup;
   reproduction: NationalReproduction;
   sewer: NationalSewer;
   hospital_nice: NationalHospitalNice;
@@ -715,6 +715,7 @@ export interface NlVaccineCoveragePerAgeGroupValue {
   partially_vaccinated: number;
   fully_vaccinated_percentage: number;
   partially_vaccinated_percentage: number;
+  partially_or_fully_vaccinated_percentage: number;
   date_unix: number;
   date_of_insertion_unix: number;
   date_of_report_unix: number;

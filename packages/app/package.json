@@ -122,6 +122,7 @@
     "export": "next export",
     "dev": "next",
     "build": "cross-env NEXT_TELEMETRY_DISABLED=1 && next build",
+    "build:en": "cross-env NEXT_PUBLIC_SANITY_DATASET=production NEXT_PUBLIC_LOCALE=en && yarn build",
     "start": "next start -H 0.0.0.0 -p 8080",
     "test": "jest --watch",
     "test:ci": "jest --ci",

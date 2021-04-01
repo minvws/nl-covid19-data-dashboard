@@ -15,8 +15,8 @@
       "text": "View the full message from the RIVM",
       "href": "https://www.rivm.nl/en/news/uk-variant-gains-ground-in-the-netherlands"
     },
-    "subtitel": "",
-    "datum": ""
+    "subtitel": "Wekelijkse landelijke toelichting",
+    "datum": "12 december 2020"
   },
   "error_titel": {
     "text": "Something went wrong"
@@ -264,14 +264,14 @@
         "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv",
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
         "text": "RIVM",
-        "aria_text": ""
+        "aria_text": "Bekijk de databron van Postief geteste mensen op het RIVM"
       }
     },
     "tooltip_labels": {
       "infected_per_100k": "Confirmed cases per 100.000",
-      "infected_percentage": "",
-      "tested_total": "",
-      "infected": ""
+      "infected_percentage": "Percentage positieve testen",
+      "tested_total": "Totaal aantal testen",
+      "infected": "Aantal positieve testen"
     }
   },
   "besmettelijke_personen": {
@@ -432,7 +432,7 @@
         "text": "RIVM"
       }
     },
-    "linechart_tooltip_label": ""
+    "linechart_tooltip_label": "Number of infected nursing homes"
   },
   "verpleeghuis_positief_geteste_personen": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -470,13 +470,13 @@
       }
     },
     "kpi_titel": "Number of confirmed cases per day",
-    "line_chart_legend_trend_label": "",
+    "line_chart_legend_trend_label": "Number of confirmed cases",
     "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
-    "line_chart_legend_trend_moving_average_label": "",
+    "line_chart_legend_trend_moving_average_label": "Average number over the past 7 days",
     "tooltip_labels": {
-      "inaccurate": "",
-      "newly_infected_people": "",
-      "newly_infected_people_moving_average": ""
+      "inaccurate": "Incomplete",
+      "newly_infected_people": "Reported number of confirmed cases",
+      "newly_infected_people_moving_average": "Average number over the past 7 days"
     }
   },
   "verpleeghuis_oversterfte": {
@@ -511,13 +511,13 @@
       }
     },
     "kpi_titel": "Mortality per day",
-    "line_chart_legend_trend_label": "",
+    "line_chart_legend_trend_label": "Number of deceased nursing home residents",
     "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
-    "line_chart_legend_trend_moving_average_label": "",
+    "line_chart_legend_trend_moving_average_label": "Number of deceased residents over the past 7 days",
     "tooltip_labels": {
-      "inaccurate": "",
-      "deceased_daily": "",
-      "deceased_daily_moving_average": ""
+      "inaccurate": "Incomplete",
+      "deceased_daily": "Reported number of deceased nursing home residents",
+      "deceased_daily_moving_average": "Average number over the past 7 days"
     }
   },
   "blok_verpleeghuis_zorg": {
@@ -550,7 +550,7 @@
     "rwzi_abbrev": "",
     "map_titel": "Average number of virus particles per 100,000 inhabitants",
     "map_toelichting": "This map shows the average number of virus particles per 100,000 inhabitants, per safety region.",
-    "legenda_titel": "",
+    "legenda_titel": "Legenda",
     "map_tooltip": "per 100,000 inhabitants",
     "map_tooltip_value": "{{value}} x100 billion",
     "reference": {
@@ -686,7 +686,7 @@
     "miljoen": "million",
     "signaalwaarde": "Alert value",
     "totaal": "Total",
-    "rond": ""
+    "rond": "rond"
   },
   "seoHead": {
     "default_description": "Information on the development of the coronavirus in the Netherlands.",
@@ -1061,7 +1061,7 @@
       "geen_regio": "no regions",
       "regio_singular": "{{amount}} region",
       "regio_plural": "{{amount}} regions",
-      "determined_on": ""
+      "determined_on": "Risk level determined on {{date}}"
     },
     "valid_from": "Valid from {{validFrom}}",
     "sidebar_label": "Risk level:",
@@ -1180,13 +1180,13 @@
         "text": "RIVM"
       }
     },
-    "line_chart_legend_trend_label": "",
+    "line_chart_legend_trend_label": "Number of deceased nursing home residents",
     "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
-    "line_chart_legend_trend_moving_average_label": "",
+    "line_chart_legend_trend_moving_average_label": "Number of deceased residents over the past 7 days",
     "tooltip_labels": {
-      "inaccurate": "",
-      "deceased_daily": "",
-      "deceased_daily_moving_average": ""
+      "inaccurate": "Incomplete",
+      "deceased_daily": "Reported number of deceased nursing home residents",
+      "deceased_daily_moving_average": "Average number over the past 7 days"
     }
   },
   "veiligheidsregio_verpleeghuis_besmette_locaties": {
@@ -1219,7 +1219,7 @@
         "text": "RIVM"
       }
     },
-    "linechart_tooltip_label": ""
+    "linechart_tooltip_label": "Number of infected nursing homes"
   },
   "veiligheidsregio_verpleeghuis_positief_geteste_personen": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -1255,13 +1255,13 @@
         "text": "RIVM"
       }
     },
-    "line_chart_legend_trend_label": "",
+    "line_chart_legend_trend_label": "Number of confirmed cases",
     "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
-    "line_chart_legend_trend_moving_average_label": "",
+    "line_chart_legend_trend_moving_average_label": "Average number over the past 7 days",
     "tooltip_labels": {
-      "inaccurate": "",
-      "newly_infected_people": "",
-      "newly_infected_people_moving_average": ""
+      "inaccurate": "Incomplete",
+      "newly_infected_people": "Reported number of confirmed cases",
+      "newly_infected_people_moving_average": "Average number over the past 7 days"
     }
   },
   "data_warning_text": "",
@@ -1551,7 +1551,7 @@
       }
     },
     "kpi_titel": "Daily number of disabililty care home residents who were reported as testing positive for COVID-19",
-    "line_chart_legend_trend_label": "",
+    "line_chart_legend_trend_label": "Aantal positief geteste bewoners",
     "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
   },
   "gehandicaptenzorg_oversterfte": {
@@ -1581,7 +1581,7 @@
       }
     },
     "kpi_titel": "Number of deceased residents",
-    "line_chart_legend_trend_label": "",
+    "line_chart_legend_trend_label": "Aantal overleden bewoners",
     "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
   },
   "veiligheidsregio_gehandicaptenzorg_oversterfte": {
@@ -1596,8 +1596,8 @@
     "barscale_screenreader_text": "{{value}}deceased residents.",
     "extra_uitleg": "This is an estimate of the number of COVID-19 related deaths reported yesterday among disability care home residents in this region.",
     "linechart_titel": "Number of deceased residents over time",
-    "map_titel": "",
-    "map_toelichting": "",
+    "map_titel": "Gehandicaptenzorg oversterfte in Nederland",
+    "map_toelichting": "Deze kaarten laten zien hoe de oversterfte in gehandicaptenzorglocaties is in Nederland per dag.",
     "titel_sidebar": "Death per day",
     "metadata": {
       "title": "Deceased residents of disability care homes in {{safetyRegionName}} | Coronavirus Dashboard | Government.nl",
@@ -1614,7 +1614,7 @@
         "text": "RIVM"
       }
     },
-    "line_chart_legend_trend_label": "",
+    "line_chart_legend_trend_label": "Aantal overleden bewoners",
     "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
   },
   "veiligheidsregio_gehandicaptenzorg_besmette_locaties": {
@@ -1626,7 +1626,7 @@
     "kpi_titel": "Total no. of infected locations ",
     "kpi_toelichting": "This figure shows the total number of disability care homes that have reported at least one confirmed COVID-19 case, based on a positive test, in the last 28 days. The percentage expresses the share of all disability care homes in the Netherlands with confirmed COVID-19 cases.",
     "linechart_titel": "Total number of infected locations over time",
-    "barscale_screenreader_text": "",
+    "barscale_screenreader_text": "{{value}} nieuwe locaties waarbij tenminste één bewoner positief getest is, per dag.",
     "metadata": {
       "title": "Infected disability care homes in {{safetyRegionName}} | Coronavirus Dashboard | Government.nl",
       "description": "Regional overview of the disability care homes in {{safetyRegionName}} that have reported at least one confirmed COVID-19 case."
@@ -1651,13 +1651,13 @@
     "extra_uitleg": "The number of disability care home residents in this region who were reported as testing positive for COVID-19 yesterday.",
     "pagina_toelichting": "People who live in disability care homes are often extra vulnerable to coronavirus infection. Because of this, Municipal health services (GGDs) monitor whether a persons who tests positive for COVID-19 lives in a disability care home. By doing so, measures can be taken if the number of cases in residential care increases.",
     "linechart_titel": "Number of confirmed cases among residents over time",
-    "barscale_screenreader_text": "",
+    "barscale_screenreader_text": "{{value}} positief geteste bewoners.",
     "titel_sidebar": "Number of confirmed cases (residents)",
     "chloropleth_legenda": {
-      "titel": "",
-      "geen_meldingen": ""
+      "titel": "Aantal per 100.000 inwoners",
+      "geen_meldingen": "Geen meldingen"
     },
-    "map_titel": "",
+    "map_titel": "Verdeling positief geteste mensen in Nederland",
     "map_toelichting": "These maps show how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
     "metadata": {
       "title": "Confirmed cases of disability care home residents in {{safetyRegionName}} | Coronavirus Dashboard | Government.nl",
@@ -1675,7 +1675,7 @@
       }
     },
     "kpi_titel": "Daily number of disabililty care home residents who were reported as testing positive for COVID-19",
-    "line_chart_legend_trend_label": "",
+    "line_chart_legend_trend_label": "Aantal positief geteste bewoners",
     "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
   },
   "thuiswonende_ouderen": {
@@ -1708,7 +1708,7 @@
       "choropleth_daily_description": "This map shows the differences between safety regions in the number of confirmed cases per 100,000 among over-70s living at home, as reported yesterday.",
       "choropleth_daily_legenda": "Number per 100,000 over-70s living at home",
       "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-      "line_chart_legend_trend_label": "",
+      "line_chart_legend_trend_label": "Nieuwe besmettingen",
       "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
     },
     "section_deceased": {
@@ -1729,7 +1729,7 @@
       "kpi_daily_description": "The number of people over 70 living at home who were reported as deceased due to COVID-19 yesterday.",
       "line_chart_daily_title": "Number of COVID-19 deaths among over-70s living at home over time",
       "datums": "Last values obtained on {{dateOfInsertion}}. Updated daily.",
-      "line_chart_legend_trend_label": "",
+      "line_chart_legend_trend_label": "Aantal overledenen",
       "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
     },
     "kpi_titel": "Confirmed cases"
@@ -1815,7 +1815,7 @@
       "kpi_covid_total_description": "This figure shows the number of COVID-19 patients reported dead, since the reporting of COVID-19 deaths started.",
       "line_chart_covid_daily_title": "Number of reported deaths from COVID-19 over time",
       "line_chart_covid_daily_description": "This graph shows the number of COVID-19 patients reported dead, in the selected period.",
-      "line_chart_covid_daily_legend_trend_label": "",
+      "line_chart_covid_daily_legend_trend_label": "Meldingen overleden patiënten",
       "line_chart_covid_daily_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
     },
     "kpi_titel": "Daily reported deaths from COVID-19"
@@ -1848,7 +1848,7 @@
       "kpi_covid_total_description": "This figure shows the number of COVID-19 patients in this safety region reported dead, since the reporting of COVID-19 deaths started.",
       "line_chart_covid_daily_title": "Number of COVID-19 patients reported dead over time",
       "line_chart_covid_daily_description": "This graph shows the number of COVID-19 patients in this safety region reported dead, in the selected period.",
-      "line_chart_covid_daily_legend_trend_label": "",
+      "line_chart_covid_daily_legend_trend_label": "Gemeld aantal overleden",
       "line_chart_covid_daily_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
     },
     "kpi_titel": "Daily reported deaths from COVID-19"
@@ -2019,7 +2019,7 @@
       }
     },
     "a11y": {
-      "tab_navigatie_button": ""
+      "tab_navigatie_button": "'Navigeer met Tab door alle {{subject}}"
     }
   },
   "accessibility": {
@@ -2045,8 +2045,8 @@
     },
     "link_source": "Download date source for \"{{subject}}\" at {{source}}",
     "link_download": "View date source for \"{{subject}}\" at {{source}}",
-    "text_source": "",
-    "text_download": ""
+    "text_source": "View data source of \"{{subject}}\" at {{source}}",
+    "text_download": "Download the data for \"{{subject}}\" at {{source}}"
   },
   "deceased_age_groups": {
     "title": "COVID-19 deaths by age",
@@ -2111,7 +2111,7 @@
       },
       "stock": {
         "href": "",
-        "text": "",
+        "text": "RIVM",
         "download": ""
       },
       "delivery_estimate_time_span": {
@@ -2172,30 +2172,30 @@
       ]
     },
     "data": {
-      "difference": "",
+      "difference": "Do not remove this key. It is required as a temporary workaround",
       "sidebar": {
         "last_value": {
-          "total_vaccinated": "",
-          "date_unix": "",
-          "date_of_insertion_unix": ""
+          "total_vaccinated": "874959",
+          "date_unix": "1613650547",
+          "date_of_insertion_unix": "1613650547"
         }
       },
       "kpi_total": {
-        "title": "",
-        "value": "",
+        "title": "Aantal gezette prikken",
+        "value": "687306",
         "description": "",
-        "date_of_report_unix": "",
-        "date_of_insertion_unix": "",
+        "date_of_report_unix": "1613650547",
+        "date_of_insertion_unix": "1613650547",
         "administered": [
           {
-            "value": "",
-            "description": "",
-            "report_date": ""
+            "value": "592755",
+            "description": "gemeld door GGD-GHOR",
+            "report_date": "Gemeld aantal tot en met 17 februari"
           },
           {
-            "value": "",
-            "description": "",
-            "report_date": ""
+            "value": "94551",
+            "description": "gemeld door LNAZ",
+            "report_date": "Gemeld aantal tot en met 17 februari"
           },
           {
             "value": "",
@@ -2213,36 +2213,36 @@
             "report_date": ""
           }
         ],
-        "description_first": "",
+        "description_first": "Dit getal laat zien hoeveel prikken zijn gemeld door GGD-GHOR en LNAZ. [Lees meer over de registratie in de 'Uitleg bij de cijfers'.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)",
         "description_second": "",
         "warning": "",
-        "first_tab_title": "",
-        "second_tab_title": "",
+        "first_tab_title": "Berekend aantal",
+        "second_tab_title": "Gemeld aantal",
         "tab_total_estimated": {
-          "value": "",
+          "value": "874959",
           "description": "",
-          "date_of_report_unix": "",
-          "date_of_insertion_unix": "",
+          "date_of_report_unix": "1613650547",
+          "date_of_insertion_unix": "1613650547",
           "administered": [
             {
-              "value": "",
-              "description": "",
-              "report_date": ""
+              "value": "592755",
+              "description": "gezet door GGD'en",
+              "report_date": "Gemeld aantal tot en met 17 februari"
             },
             {
-              "value": "",
-              "description": "",
-              "report_date": ""
+              "value": "94551",
+              "description": "gezet in ziekenhuizen",
+              "report_date": "Gemeld aantal tot en met 17 februari"
             },
             {
-              "value": "",
-              "description": "",
-              "report_date": ""
+              "value": "184706",
+              "description": "gezet in langdurige zorginstellingen",
+              "report_date": "Berekend aantal tot en met 17 februari"
             },
             {
-              "value": "",
-              "description": "",
-              "report_date": ""
+              "value": "2947",
+              "description": "gezet in huisartsenpraktijken",
+              "report_date": "Berekend aantal tot en met 17 februari"
             },
             {
               "value": "",
@@ -2256,10 +2256,10 @@
       },
       "kpi_expected_delivery": {
         "title": "Doses to be delivered",
-        "value": "",
+        "value": "2473700",
         "description": "This is the number of vaccine doses the Netherlands expects to receive over the next six weeks. The Netherlands will receive a new delivery each week. People need two separately administered doses for the vaccine to be maximally effective.",
-        "date_of_report_unix": "",
-        "date_of_insertion_unix": ""
+        "date_of_report_unix": "1613648204",
+        "date_of_insertion_unix": "1613648204"
       },
       "kpi_stock": {
         "title": "",
@@ -2306,7 +2306,7 @@
           "moderna": "Moderna",
           "astra_zeneca": "AstraZeneca",
           "cure_vac": "CureVac",
-          "janssen": "Janssen & Janssen",
+          "janssen": "Janssen",
           "sanofi": "Sanofi"
         },
         "delivered": "Delivered and available",
@@ -2320,7 +2320,7 @@
         "legend_label": "Number of {{name}} doses administered",
         "doses_administered": "Number of doses administered",
         "doses_administered_estimated": "Expected number of doses administered",
-        "doses_administered_total": ""
+        "doses_administered_total": "Total"
       }
     },
     "current_amount_of_administrations_text": "So far approximately {{amount}} vaccine doses have been administered.",
@@ -2354,27 +2354,27 @@
       }
     },
     "stock_and_delivery_section": {
-      "title": "",
-      "description": "",
+      "title": "Deliveries and stock",
+      "description": "Deliveries and stock",
       "reference": {
-        "href": "",
-        "text": ""
+        "href": "/verantwoording#deliveries-and-vaccine-doses-in-stock",
+        "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
       }
     },
     "stock": {
-      "title": "",
-      "description": "",
-      "per_vaccine": ""
+      "title": "Doses in stock",
+      "description": "This is the number of vaccine doses currently in stock at the National Institute for Public Health and the Environment (RIVM) per vaccine type. We are not holding aside any more vaccine than is necessary to make sure everyone can receive a second dose on time. ",
+      "per_vaccine": "{{amount}} {{label}} vaccine doses"
     },
     "delivery_estimate_time_span": {
       "title": "",
-      "description": ""
+      "description": "This is the number of vaccine doses currently in stock at the National Institute for Public Health and the Environment (RIVM) per vaccine type. We are not holding aside any more vaccine than is necessary to make sure everyone can receive a second dose on time. "
     },
     "grafiek_leveringen": {
-      "titel": "",
-      "omschrijving": ""
+      "titel": "Deliveries",
+      "omschrijving": "This graph shows how many doses of each COVID-19 vaccine the Netherlands has received and is expecting to receive in a given week."
     },
-    "bereidheid_datums": ""
+    "bereidheid_datums": "Last values obtained on {{dateOfInsertion}}. Is updated every three weeks."
   },
   "editorial_detail": {
     "back_link": {
@@ -2416,8 +2416,8 @@
           "text": "View all articles",
           "href": "/artikelen"
         },
-        "read_weekly_message": "",
-        "weekly_category": ""
+        "read_weekly_message": "Read the weekly report",
+        "weekly_category": "Weekly report"
       },
       "positief_getest_kaart": {
         "titel": "Confirmed cases in the Netherlands"
@@ -2524,7 +2524,7 @@
   "common.tooltip.positive_tested_value": "",
   "search": {
     "placeholder": "Search for a municipality of safety region",
-    "clear": "",
+    "clear": "Zoekopdracht wissen",
     "no_hits": "No {{subject}} found with “{{search}}”"
   },
   "veiligheidsregio_actueel": {
@@ -2761,22 +2761,22 @@
     },
     "escalation_level_last_determined": "This risk level has been determined on {{last_determined}}, based on the figures from {{based_from}} to {{based_to}}. The risk level will be reassessed around {{next_determined}}.",
     "momenteel": {
-      "description": "",
+      "description": "This is the risk level that currently applies in this region. The risk level is reassessed every 2 weeks based on the number of hospital admissions and the number of positive tests (new confirmed cases) at that time.",
       "description_from_to": "",
-      "last_determined": "",
+      "last_determined": "This risk level has been determined on",
       "established_with": {
-        "title": "",
-        "description": ""
+        "title": "The risk level is based on the figures from",
+        "description": "{{based_from}} to {{based_to}}"
       },
       "positive_tests": {
-        "title": "",
-        "description": ""
+        "title": "Positive tests",
+        "description": "{{amount}} per 100,000 residents per week"
       },
       "hospital_admissions": {
-        "title": "",
-        "description": ""
+        "title": "Hospital admissions (including ICU)",
+        "description": "{{amount}} per million residents per week"
       },
-      "next_determined": "",
+      "next_determined": "The risk level will be reassessed",
       "link_text": ""
     }
   },
@@ -2875,9 +2875,9 @@
     "verwacht": "Expected"
   },
   "section_sterftemonitor_vr": {
-    "title": "",
+    "title": "Sterftemonitor",
     "description": "Every week the national office Statistics Netherlands (CBS) publishes data on the total number of deaths and compares this to the predicted number of deaths, corrected for extreme temperatures, epidemics, etc. If more deaths occur than predicted, these are considered excess deaths. This graph may show a more complete picture of COVID-19 related deaths than the numbers reported by the GGD because not everyone who dies from COVID-19 has been tested for it.",
-    "datums": "",
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "bronnen": {
       "cbs": {
         "href": "https://mlzopendata.cbs.nl/#/MLZ/nl/dataset/40080NED",
@@ -2891,34 +2891,34 @@
     }
   },
   "infected_per_age_group": {
-    "title": "",
-    "description": "",
+    "title": "Number of positive tests per age group over time",
+    "description": "This graph shows the trend in positive cases for each age group, per 100,000 people in that age group.",
     "legend": {
-      "infected_age_0_9_per_100k": "",
-      "infected_age_10_19_per_100k": "",
-      "infected_age_20_29_per_100k": "",
-      "infected_age_30_39_per_100k": "",
-      "infected_age_40_49_per_100k": "",
-      "infected_age_50_59_per_100k": "",
-      "infected_age_60_69_per_100k": "",
-      "infected_age_70_79_per_100k": "",
-      "infected_age_80_89_per_100k": "",
-      "infected_age_90_plus_per_100k": "",
-      "infected_overall_per_100k": ""
+      "infected_age_0_9_per_100k": "0-9",
+      "infected_age_10_19_per_100k": "10-19",
+      "infected_age_20_29_per_100k": "20-29",
+      "infected_age_30_39_per_100k": "30-39",
+      "infected_age_40_49_per_100k": "40-49",
+      "infected_age_50_59_per_100k": "50-59",
+      "infected_age_60_69_per_100k": "60-69",
+      "infected_age_70_79_per_100k": "70-79",
+      "infected_age_80_89_per_100k": "80-89",
+      "infected_age_90_plus_per_100k": "90+",
+      "infected_overall_per_100k": "All ages"
     },
-    "reset_button_label": "",
-    "legend_help_text": ""
+    "reset_button_label": "Reset",
+    "legend_help_text": "Select one or more age groups that you want to see separately."
   },
   "g_number": {
     "bar_chart": {
-      "title": "",
-      "description": "",
-      "negative_descriptor": "",
-      "positive_descriptor": "",
+      "title": "Trend in daily positive tests (Growth rate)",
+      "description": "The Growth rate (or G rate) shows how the number of daily positive tests over the last 7 days has developed relative to the previous 7 days. A positive Growth rate indicates a rising trend in the number of positive tests. A negative Growth rate indicates a declining trend in the number of positive tests. The graph shows the Growth rate of the last five weeks.",
+      "negative_descriptor": "less",
+      "positive_descriptor": "more",
       "bronnen": {
         "download": "",
         "href": "",
-        "text": ""
+        "text": "Ministry of Health, Welfare and Sport based on RIVM"
       }
     }
   }

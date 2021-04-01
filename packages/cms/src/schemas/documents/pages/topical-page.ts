@@ -72,6 +72,12 @@ export default {
         }
       ],
       validation: (Rule: any) => Rule.required().unique().length(2),
+    },
+    {
+      title: 'empty-for-toggle',
+      name: 'empty',
+      type: 'localeString',
+      hidden: true,
     }
   ],
 };

@@ -1,20 +1,33 @@
 /* eslint-disable complexity */
 
 import { useValidationStatus } from '@sanity/react-hooks';
+import { ValidationMarker } from '@sanity/types';
 import {
   Inline,
   Label,
   studioTheme,
-  Tab,
+  Tab as TabAlias,
   TabList,
   ThemeProvider,
 } from '@sanity/ui';
-import React, { useMemo } from 'react';
+import React from 'react';
 import { MdErrorOutline } from 'react-icons/md';
 import Flag from 'react-world-flags';
-import schema from '../../schemas/schema';
+import {
+  SupportedLanguage,
+  SupportedLanguageId,
+} from '../../language/supported-languages';
 
-export default function SelectLanguage(props) {
+const Tab: any = TabAlias;
+
+type SelectLanguageProps = {
+  languages: SupportedLanguage[];
+  selected: string[];
+  onChange: (selected: string[]) => void;
+  document: any;
+};
+
+export default function SelectLanguage(props: SelectLanguageProps) {
   const { languages, selected, onChange, document } = props;
 
   const validation = useValidationStatus(document.id, document.type);
@@ -23,14 +36,6 @@ export default function SelectLanguage(props) {
     validation.markers,
     languages
   );
-
-  const hasLocaleFields = useMemo(() => {
-    return findLocaleFields(document.id, schema);
-  }, [document.id, schema]);
-
-  if (!hasLocaleFields) {
-    return null;
-  }
 
   return (
     <ThemeProvider theme={studioTheme}>
@@ -61,7 +66,7 @@ export default function SelectLanguage(props) {
               label={lang.title}
               onClick={() => onChange([lang.id])}
               selected={selected.includes(lang.id)}
-              space={2}
+              padding={2}
             />
           ))}
         </TabList>
@@ -70,28 +75,17 @@ export default function SelectLanguage(props) {
   );
 }
 
-function extractValidationErrorsPerLanguage(markers, languages) {
-  return languages.reduce((aggr, lang) => {
-    aggr[lang.id] = markers.some(checkForLanguage(lang.id));
-    return aggr;
-  }, {});
+function extractValidationErrorsPerLanguage(
+  markers: ValidationMarker[],
+  languages: SupportedLanguage[]
+) {
+  return languages.reduce<{ en: boolean; nl: boolean }>((errors, lang) => {
+    errors[lang.id] = markers.some(checkForLanguage(lang.id));
+    return errors;
+  }, {} as any) as { en: boolean; nl: boolean };
 }
 
-function checkForLanguage(languageId) {
-  return (marker) => marker.path.length === 2 && marker.path[1] === languageId;
-}
-
-function findLocaleFields(documentId, schema) {
-  const docSchema = schema._original.types.find(
-    (doc) => doc.name === documentId
-  );
-  if (!docSchema) {
-    return true;
-  }
-  return docSchema.fields.some(
-    (field) =>
-      field.type.startsWith('locale') ||
-      (field.type === 'array' &&
-        field.of.some((x) => x.type.startsWith('locale')))
-  );
+function checkForLanguage(languageId: SupportedLanguageId) {
+  return (marker: ValidationMarker) =>
+    marker.path[marker.path.length - 1] === languageId;
 }

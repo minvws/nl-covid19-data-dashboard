@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { LineSeriesDefinition } from '~/components-styled/time-series-chart/logic';
 import { Text } from '~/components-styled/typography';
 import { useIntl } from '~/intl';
+import { asResponsiveArray } from '~/style/utils';
 
 interface AgeGroupLegendProps {
   seriesConfig: LineSeriesDefinition<NlTestedPerAgeGroupValue>[];
@@ -23,20 +24,6 @@ export function AgeGroupLegend({
 
   const hasSelection = ageGroupSelection.length !== 0;
 
-  function toggleAgeGroup(metricProperty: string) {
-    onToggleAgeGroup(metricProperty);
-
-    /* Without setting focus, the focus is lost on re-render */
-    requestAnimationFrame(() => {
-      const item: HTMLElement | null = document.querySelector(
-        `button[data-metric-property=${metricProperty}]`
-      );
-      if (item) {
-        item.focus();
-      }
-    });
-  }
-
   return (
     <>
       <Legend>
@@ -46,7 +33,7 @@ export function AgeGroupLegend({
             return (
               <Item key={item.label}>
                 <ItemButton
-                  onClick={() => toggleAgeGroup(item.metricProperty)}
+                  onClick={() => onToggleAgeGroup(item.metricProperty)}
                   isActive={hasSelection && isSelected}
                   color={item.color}
                   data-metric-property={item.metricProperty}
@@ -58,10 +45,12 @@ export function AgeGroupLegend({
               </Item>
             );
           })}
+          <Item>
+            <ResetButton onClick={onReset} isVisible={hasSelection}>
+              {text.reset_button_label}
+            </ResetButton>
+          </Item>
         </List>
-        <ResetButton onClick={onReset} isVisible={hasSelection}>
-          {text.reset_button_label}
-        </ResetButton>
       </Legend>
       <Text fontSize={1}>{text.legend_help_text}</Text>
     </>
@@ -80,13 +69,14 @@ const List = styled.ul(
     listStyle: 'none',
     px: 0,
     m: 0,
+    mt: 2,
   })
 );
 
 const Item = styled.li(
   css({
     mb: 2,
-    mr: 3,
+    mr: asResponsiveArray({ _: 2, md: 3 }),
     position: 'relative',
     display: 'inline-block',
   })
@@ -104,10 +94,10 @@ const ItemButton = styled.button<{
 }>(({ isActive, color }) =>
   css({
     appearance: 'none',
-    background: 'tileGray',
+    backgroundColor: 'tileGray',
     cursor: 'pointer',
-    pr: 10,
-    pl: 30,
+    pr: asResponsiveArray({ _: '5px', md: 10 }),
+    pl: asResponsiveArray({ _: 25, md: 30 }),
     py: '3px',
     border: '3px solid',
     borderColor: isActive ? color : 'transparent',
@@ -148,14 +138,16 @@ const ItemButton = styled.button<{
 
 const ResetButton = styled.button<{ isVisible: boolean }>(({ isVisible }) =>
   css({
-    backgroundColor: 'blue',
-    color: 'white',
-    p: 20,
+    backgroundColor: 'transparent',
+    color: 'blue',
     py: '6px',
     border: 'none',
     fontFamily: 'inherit',
-    ml: 40,
     visibility: isVisible ? 'visible' : 'hidden',
+    textDecoration: 'underline',
+    '&:focus': {
+      outline: '2px dotted black',
+    },
   })
 );
 
@@ -164,7 +156,7 @@ const Line = styled.div<{ color: string; lineStyle: 'dashed' | 'solid' }>(
     css({
       display: 'block',
       position: 'absolute',
-      left: 10,
+      left: asResponsiveArray({ _: '5px', md: 10 }),
       borderTopColor: color as SystemStyleObject,
       borderTopStyle: lineStyle,
       borderTopWidth: '3px',
