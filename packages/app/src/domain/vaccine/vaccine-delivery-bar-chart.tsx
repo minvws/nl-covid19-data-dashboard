@@ -8,25 +8,21 @@ import { RadioGroup } from '~/components-styled/radio-group';
 import { StackedChart } from '~/components-styled/stacked-chart';
 import { Text } from '~/components-styled/typography';
 import { useIntl } from '~/intl';
-import { AllLanguages } from '~/locale';
 import { colors } from '~/style/theme';
-
-interface VaccineDeliveryBarChartProps {
-  data: NlVaccineDeliveryPerSupplier;
-  siteText: AllLanguages;
-}
 
 type Timeframe = 'all' | 'delivered_and_expected';
 
 export function VaccineDeliveryBarChart({
   data,
-  siteText,
-}: VaccineDeliveryBarChartProps) {
+}: {
+  data: NlVaccineDeliveryPerSupplier;
+}) {
   const intl = useIntl();
-  const text = siteText.vaccinaties.grafiek_leveringen;
+  const text = intl.siteText.vaccinaties.grafiek_leveringen;
   const [timeframe, setTimeframe] = useState<Timeframe>(
     'delivered_and_expected'
   );
+
   /**
    * The timeframe `delivered_and_expected` should display 4 delivered values
    * and 4 expected values. We'll find the index of the first estimated value
@@ -48,14 +44,14 @@ export function VaccineDeliveryBarChart({
   ];
 
   const productNames =
-    siteText.vaccinaties.data.vaccination_chart.product_names;
+    intl.siteText.vaccinaties.data.vaccination_chart.product_names;
 
   return (
     <ChartTile
       title={text.titel}
       metadata={{
         date: data.last_value.date_of_report_unix,
-        source: siteText.vaccinaties.bronnen.rivm,
+        source: intl.siteText.vaccinaties.bronnen.rivm,
       }}
       description={
         <Box display="flex" flexDirection={{ _: 'column', md: 'row' }}>
@@ -78,7 +74,7 @@ export function VaccineDeliveryBarChart({
             ? data.values
             : data.values.slice(estimateIndex - 4, estimateIndex + 4)
         }
-        valueAnnotation={siteText.waarde_annotaties.x_100k}
+        valueAnnotation={intl.siteText.waarde_annotaties.x_100k}
         formatTickValue={(x) => `${x / 100_000}`}
         config={[
           {
@@ -105,7 +101,7 @@ export function VaccineDeliveryBarChart({
             : undefined,
         ].filter(isDefined)}
         expectedLabel={
-          siteText.vaccinaties.data.vaccination_chart.legend.expected
+          intl.siteText.vaccinaties.data.vaccination_chart.legend.expected
         }
       />
     </ChartTile>
