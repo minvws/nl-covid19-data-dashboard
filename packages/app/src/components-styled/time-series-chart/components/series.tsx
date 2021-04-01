@@ -1,22 +1,21 @@
 import { TimestampedValue } from '@corona-dashboard/common';
 import { ScaleLinear } from 'd3-scale';
 import { memo } from 'react';
-import { AreaTrend, LineTrend, RangeTrend } from '.';
+import { AreaTrend, LineTrend, RangeTrend, BarTrend } from '.';
 import {
   Bounds,
   GetX,
   GetY,
   GetY0,
   GetY1,
-  HoverHandler,
   SeriesConfig,
   SeriesDoubleValue,
   SeriesList,
   SeriesSingleValue,
 } from '../logic';
+import { StackedAreaTrend } from './stacked-area-trend';
 
 interface SeriesProps<T extends TimestampedValue> {
-  onHover?: HoverHandler;
   seriesConfig: SeriesConfig<T>;
   seriesList: SeriesList;
   getX: GetX;
@@ -37,7 +36,6 @@ interface SeriesProps<T extends TimestampedValue> {
 export const Series = memo(SeriesUnmemoized) as typeof SeriesUnmemoized;
 
 function SeriesUnmemoized<T extends TimestampedValue>({
-  onHover,
   seriesConfig,
   seriesList,
   getX,
@@ -49,54 +47,83 @@ function SeriesUnmemoized<T extends TimestampedValue>({
 }: SeriesProps<T>) {
   return (
     <>
-      {seriesList.map((series, index) => {
-        const config = seriesConfig[index];
+      {seriesList
+        .map((series, index) => {
+          const config = seriesConfig[index];
 
-        switch (config.type) {
-          case 'line':
-            return (
-              <LineTrend
-                key={config.metricProperty as string}
-                series={series as SeriesSingleValue[]}
-                color={config.color}
-                style={config.style}
-                strokeWidth={config.strokeWidth}
-                getX={getX}
-                getY={getY}
-                onHover={(evt) => onHover && onHover(evt, index)}
-              />
-            );
-          case 'area':
-            return (
-              <AreaTrend
-                key={index}
-                series={series as SeriesSingleValue[]}
-                color={config.color}
-                style={config.style}
-                fillOpacity={config.fillOpacity}
-                strokeWidth={config.strokeWidth}
-                getX={getX}
-                getY={getY}
-                yScale={yScale}
-                onHover={(evt) => onHover && onHover(evt, index)}
-              />
-            );
-
-          case 'range':
-            return (
-              <RangeTrend
-                key={config.metricPropertyLow as string}
-                series={series as SeriesDoubleValue[]}
-                color={config.color}
-                fillOpacity={config.fillOpacity}
-                getX={getX}
-                getY0={getY0}
-                getY1={getY1}
-                bounds={bounds}
-              />
-            );
-        }
-      })}
+          switch (config.type) {
+            case 'line':
+              return (
+                <LineTrend
+                  key={index}
+                  series={series as SeriesSingleValue[]}
+                  color={config.color}
+                  style={config.style}
+                  strokeWidth={config.strokeWidth}
+                  getX={getX}
+                  getY={getY}
+                />
+              );
+            case 'area':
+              return (
+                <AreaTrend
+                  key={index}
+                  series={series as SeriesSingleValue[]}
+                  color={config.color}
+                  fillOpacity={config.fillOpacity}
+                  strokeWidth={config.strokeWidth}
+                  getX={getX}
+                  getY={getY}
+                  yScale={yScale}
+                />
+              );
+            case 'bar':
+              return (
+                <BarTrend
+                  key={index}
+                  series={series as SeriesSingleValue[]}
+                  color={config.color}
+                  fillOpacity={config.fillOpacity}
+                  getX={getX}
+                  getY={getY}
+                  bounds={bounds}
+                />
+              );
+            case 'range':
+              return (
+                <RangeTrend
+                  key={index}
+                  series={series as SeriesDoubleValue[]}
+                  color={config.color}
+                  fillOpacity={config.fillOpacity}
+                  getX={getX}
+                  getY0={getY0}
+                  getY1={getY1}
+                  bounds={bounds}
+                />
+              );
+            case 'stacked-area':
+              return (
+                <StackedAreaTrend
+                  key={index}
+                  series={series as SeriesDoubleValue[]}
+                  color={config.color}
+                  fillOpacity={config.fillOpacity}
+                  getX={getX}
+                  getY0={getY0}
+                  getY1={getY1}
+                  bounds={bounds}
+                />
+              );
+          }
+        })
+        /**
+         * We reverse the elements to ensure the first series will be rendered
+         * as the last dom/svg-node. This way we make sure that the first (and
+         * most-likely most important) series is actually rendered on top of the
+         * other series.
+         */
+        .reverse()}
     </>
   );
 }

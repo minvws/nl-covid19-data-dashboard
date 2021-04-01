@@ -373,7 +373,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             reference={text.bereidheid_section.reference}
             icon={scaledVaccineIcon}
             metadata={{
-              datumsText: text.datums,
+              datumsText: text.bereidheid_datums,
               dateOrRange:
                 data.vaccine_support.last_value.date_of_insertion_unix,
               dateOfInsertionUnix:
@@ -569,10 +569,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
         </TwoKpiSection>
               */}
 
-          <TwoKpiSection>
-            <KpiTile title={text.expected_page_additions.title}>
-              <Text>{text.expected_page_additions.description}</Text>
-              {additions.length > 0 && (
+          {additions.length > 0 && (
+            <TwoKpiSection>
+              <KpiTile title={text.expected_page_additions.title}>
                 <ul>
                   {additions.map((addition) => (
                     <li key={addition}>
@@ -580,9 +579,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                     </li>
                   ))}
                 </ul>
-              )}
-            </KpiTile>
-          </TwoKpiSection>
+              </KpiTile>
+            </TwoKpiSection>
+          )}
         </TileList>
       </NationalLayout>
     </Layout>
@@ -630,21 +629,21 @@ function HatchedSquare() {
       <defs>
         <pattern
           id="hatch"
-          width="5"
-          height="5"
+          width="4"
+          height="4"
           patternTransform="rotate(-45 0 0)"
           patternUnits="userSpaceOnUse"
         >
-          <rect x="0" y="0" width="5" height="5" fill="white" />
           <line
             x1="0"
             y1="0"
             x2="0"
             y2="5"
-            style={{ stroke: 'black', strokeWidth: 3 }}
+            style={{ stroke: 'grey', strokeWidth: 3 }}
           />
         </pattern>
       </defs>
+      <rect height="15" width="15" fill="white" />
       <rect height="15" width="15" fill="url(#hatch)" />
     </svg>
   );

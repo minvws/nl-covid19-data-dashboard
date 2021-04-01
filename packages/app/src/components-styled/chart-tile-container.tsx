@@ -16,7 +16,7 @@ export function ChartTileContainer({
       {metadata && (
         <>
           <Spacer m="auto" />
-          <Metadata {...metadata} />
+          <Metadata {...metadata} isTileFooter />
         </>
       )}
     </Tile>
