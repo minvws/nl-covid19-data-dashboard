@@ -11,7 +11,6 @@ import { Spacer } from '~/components-styled/base';
 import { Heading } from '~/components-styled/typography';
 import { VisuallyHidden } from '~/components-styled/visually-hidden';
 import { useIntl } from '~/intl';
-import { useIntl } from '~/intl';
 import { AllLanguages } from '~/locale';
 
 export type TooltipValue = (
