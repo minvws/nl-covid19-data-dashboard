@@ -276,62 +276,69 @@ export function TimeSeriesChart<
           onHover={handleHover}
           onClick={handleClick}
         >
-          <Axes
-            bounds={bounds}
-            numGridLines={numGridLines}
-            yTickValues={yTickValues}
-            xTickValues={xTickValues}
-            formatYTickValue={formatYTickValue}
-            xScale={xScale}
-            yScale={yScale}
-            isPercentage={isPercentage}
-            yAxisRef={yAxisRef}
-          />
-
           {/**
-           * The renderSeries() callback has been replaced by this component. As
-           * long as we use only very standardized series this might be a good
-           * idea because it removes quite some lines of code from the main
-           * component.
-           *
-           * With this amount of props if does feel like the wrong type of
-           * abstraction, but I still think it's an improvement over
-           * having it mixed in with the main component.
+           * Wrapping the chart content inside a group with pointer-events: none
+           * in order to fix an issue in Firefox where mouse movements were not
+           * captured when the user moved over a line.
            */}
-          <Series
-            seriesConfig={seriesConfig}
-            seriesList={seriesList}
-            getX={getX}
-            getY={getY}
-            getY0={getY0}
-            getY1={getY1}
-            bounds={bounds}
-            yScale={yScale}
-          />
-
-          {benchmark && (
-            <Benchmark
-              value={benchmark.value}
-              label={benchmark.label}
-              top={yScale(benchmark.value)}
-              width={bounds.width}
+          <g css={css({ pointerEvents: 'none' })}>
+            <Axes
+              bounds={bounds}
+              numGridLines={numGridLines}
+              yTickValues={yTickValues}
+              xTickValues={xTickValues}
+              formatYTickValue={formatYTickValue}
+              xScale={xScale}
+              yScale={yScale}
+              isPercentage={isPercentage}
+              yAxisRef={yAxisRef}
             />
-          )}
 
-          {/**
-           * Timespan annotations are rendered on top of the chart. It is
-           * transparent thanks to the `mix-blend-mode` set to `multiply`.
-           */}
-          {timespanAnnotations?.map((x, index) => (
-            <TimespanAnnotation
-              key={index}
-              start={x.start}
-              end={x.end}
-              domain={xScale.domain() as [number, number]}
+            {/**
+             * The renderSeries() callback has been replaced by this component. As
+             * long as we use only very standardized series this might be a good
+             * idea because it removes quite some lines of code from the main
+             * component.
+             *
+             * With this amount of props if does feel like the wrong type of
+             * abstraction, but I still think it's an improvement over
+             * having it mixed in with the main component.
+             */}
+            <Series
+              seriesConfig={seriesConfig}
+              seriesList={seriesList}
               getX={getX}
-              height={bounds.height}
+              getY={getY}
+              getY0={getY0}
+              getY1={getY1}
+              bounds={bounds}
+              yScale={yScale}
             />
-          ))}
+
+            {benchmark && (
+              <Benchmark
+                value={benchmark.value}
+                label={benchmark.label}
+                top={yScale(benchmark.value)}
+                width={bounds.width}
+              />
+            )}
+
+            {/**
+             * Timespan annotations are rendered on top of the chart. It is
+             * transparent thanks to the `mix-blend-mode` set to `multiply`.
+             */}
+            {timespanAnnotations?.map((x, index) => (
+              <TimespanAnnotation
+                key={index}
+                start={x.start}
+                end={x.end}
+                domain={xScale.domain() as [number, number]}
+                getX={getX}
+                height={bounds.height}
+              />
+            ))}
+          </g>
         </ChartContainer>
 
         {tooltipOpen && tooltipData && (
