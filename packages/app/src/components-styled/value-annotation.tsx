@@ -12,7 +12,7 @@ export function ValueAnnotation({
   mb?: number;
 }) {
   return (
-    <Text as="div" color="annotation" m={0} mb={mb} fontSize={1}>
+    <Text as="div" color="annotation" m={0} mb={mb} fontSize="12px">
       {children}
     </Text>
   );
