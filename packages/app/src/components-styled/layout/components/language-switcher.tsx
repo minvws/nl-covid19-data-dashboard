@@ -25,7 +25,7 @@ export function LanguageSwitcher() {
         href={`https://coronadashboard.government.nl${router.asPath}`}
         lang="en-GB"
         hrefLang="en-GB"
-        isActive={locale === 'en-GB'}
+        isActive={locale?.startsWith('en') ?? false}
         title="Website in English"
       >
         EN

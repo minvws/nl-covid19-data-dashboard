@@ -13,6 +13,7 @@
     "disability_care",
     "doctor",
     "elderly_at_home",
+    "g_number",
     "hospital_lcps",
     "hospital_nice",
     "infectious_people",
@@ -27,7 +28,6 @@
     "tested_ggd_daily",
     "tested_ggd_average",
     "tested_overall",
-    "tested_per_age_group",
     "vaccine_support",
     "vaccine_delivery",
     "vaccine_delivery_estimate",
@@ -43,7 +43,8 @@
     "vaccine_administered_rate_moving_average",
     "vaccine_administered_planned",
     "vaccine_stock",
-    "vaccine_delivery_estimate_time_span"
+    "vaccine_delivery_estimate_time_span",
+    "vaccine_delivery_per_supplier"
   ],
   "additionalProperties": false,
   "properties": {

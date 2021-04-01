@@ -146,11 +146,11 @@ export interface National {
   code: string;
   difference: NationalDifference;
   doctor: NationalDoctor;
-  g_number?: NlGNumber;
+  g_number: NlGNumber;
   infectious_people: NationalInfectiousPeople;
   intensive_care_nice: NationalIntensiveCareNice;
   tested_overall: NationalTestedOverall;
-  tested_per_age_group: NationalTestedPerAgeGroup;
+  tested_per_age_group?: NlTestedPerAgeGroup;
   reproduction: NationalReproduction;
   sewer: NationalSewer;
   hospital_nice: NationalHospitalNice;
@@ -170,7 +170,7 @@ export interface National {
   vaccine_coverage?: NlVaccineCoverage;
   vaccine_delivery: NlVaccineDelivery;
   vaccine_delivery_estimate: NlVaccineDeliveryEstimate;
-  vaccine_delivery_per_supplier?: NlVaccineDeliveryPerSupplier;
+  vaccine_delivery_per_supplier: NlVaccineDeliveryPerSupplier;
   vaccine_delivery_estimate_time_span: NlVaccineDeliveryEstimateTimeSpan;
   vaccine_administered: NlVaccineAdministered;
   vaccine_administered_estimate: NlVaccineAdministeredEstimate;
@@ -275,13 +275,22 @@ export interface NationalTestedOverallValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NationalTestedPerAgeGroup {
-  values: NationalTestedPerAgeGroupValue[];
+export interface NlTestedPerAgeGroup {
+  values: NlTestedPerAgeGroupValue[];
+  last_value: NlTestedPerAgeGroupValue;
 }
-export interface NationalTestedPerAgeGroupValue {
-  age_group_range: string;
-  infected_percentage: number;
-  age_group_percentage: number;
+export interface NlTestedPerAgeGroupValue {
+  infected_age_0_9_per_100k: number;
+  infected_age_10_19_per_100k: number;
+  infected_age_20_29_per_100k: number;
+  infected_age_30_39_per_100k: number;
+  infected_age_40_49_per_100k: number;
+  infected_age_50_59_per_100k: number;
+  infected_age_60_69_per_100k: number;
+  infected_age_70_79_per_100k: number;
+  infected_age_80_89_per_100k: number;
+  infected_age_90_plus_per_100k: number;
+  infected_overall_per_100k: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -368,7 +377,9 @@ export interface NationalNursingHome {
 }
 export interface NationalNursingHomeValue {
   newly_infected_people: number;
+  newly_infected_people_moving_average: number;
   deceased_daily: number;
+  deceased_daily_moving_average: number;
   newly_infected_locations: number;
   infected_locations_total: number;
   infected_locations_percentage: number;
@@ -556,6 +567,9 @@ export interface NlVaccineDeliveryPerSupplierValue {
   bio_n_tech_pfizer: number;
   moderna: number;
   astra_zeneca: number;
+  cure_vac?: number;
+  janssen?: number;
+  sanofi?: number;
   is_estimate: boolean;
   week_number: number;
   date_of_insertion_unix: number;
@@ -703,6 +717,8 @@ export interface NlVaccineCoveragePerAgeGroupValue {
   fully_vaccinated: number;
   partially_vaccinated: number;
   fully_vaccinated_percentage: number;
+  partially_vaccinated_percentage: number;
+  partially_or_fully_vaccinated_percentage: number;
   date_unix: number;
   date_of_insertion_unix: number;
   date_of_report_unix: number;
@@ -730,7 +746,7 @@ export interface Regionaal {
   name: string;
   code: string;
   difference: RegionalDifference;
-  g_number?: VrGNumber;
+  g_number: VrGNumber;
   sewer: RegionalSewer;
   sewer_per_installation: RegionalSewerPerInstallation;
   tested_overall: RegionalTestedOverall;
@@ -864,10 +880,12 @@ export interface RegionalNursingHome {
 }
 export interface RegionalNursingHomeValue {
   newly_infected_people: number;
+  newly_infected_people_moving_average: number;
   newly_infected_locations: number;
   infected_locations_total: number;
   infected_locations_percentage: number;
   deceased_daily: number;
+  deceased_daily_moving_average: number;
   date_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;
@@ -967,6 +985,8 @@ export interface RegionalElderlyAtHomeValue {
 }
 export interface VrEscalationLevel {
   level: number;
+  positive_tested_per_100k: number;
+  hospital_admissions_per_million: number;
   based_on_statistics_to_unix: number;
   based_on_statistics_from_unix: number;
   next_determined_unix: number;
@@ -1040,6 +1060,8 @@ export interface RegionsTestedOverall {
 export interface EscalationLevels {
   vrcode: string;
   level: number;
+  positive_tested_per_100k: number;
+  hospital_admissions_per_million: number;
   based_on_statistics_to_unix: number;
   based_on_statistics_from_unix: number;
   next_determined_unix: number;

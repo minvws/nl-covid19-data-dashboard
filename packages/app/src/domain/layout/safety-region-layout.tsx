@@ -13,6 +13,7 @@ import {
   CategoryMenu,
   Menu,
   MetricMenuItemLink,
+  MetricMenuButtonLink,
 } from '~/components-styled/aside/menu';
 import { Box } from '~/components-styled/base';
 import { EscalationLevelInfoLabel } from '~/components-styled/escalation-level';
@@ -111,25 +112,27 @@ export function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
                 </Text>
 
                 <Menu>
-                  <MetricMenuItemLink
+                  <MetricMenuButtonLink
                     href={`/veiligheidsregio/${code}/maatregelen`}
                     title={siteText.veiligheidsregio_maatregelen.titel_sidebar}
+                    buttonVariant="top"
                     subtitle={
                       siteText.veiligheidsregio_maatregelen.subtitel_sidebar
                     }
                   />
-                  <MetricMenuItemLink
+                  <MetricMenuButtonLink
                     href={`/veiligheidsregio/${code}/risiconiveau`}
                     title={siteText.veiligheidsregio_layout.headings.inschaling}
+                    buttonVariant="bottom"
                   >
                     <Box mt={2}>
                       <EscalationLevelInfoLabel
                         level={data.escalation_level.level as EscalationLevel}
-                        hasSmallIcon
+                        size="small"
                         useLevelColor
                       />
                     </Box>
-                  </MetricMenuItemLink>
+                  </MetricMenuButtonLink>
 
                   <CategoryMenu
                     title={

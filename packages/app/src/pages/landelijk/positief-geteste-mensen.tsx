@@ -1,7 +1,6 @@
 import {
   MunicipalitiesTestedOverall,
   MunicipalityProperties,
-  NationalTestedPerAgeGroup,
   RegionsTestedOverall,
   SafetyRegionProperties,
 } from '@corona-dashboard/common';
@@ -9,19 +8,12 @@ import css from '@styled-system/css';
 import { useState } from 'react';
 import Afname from '~/assets/afname.svg';
 import Getest from '~/assets/test.svg';
-import {
-  AgeDemographic,
-  formatAgeGroupRange,
-} from '~/components-styled/age-demographic';
 import { Anchor } from '~/components-styled/anchor';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
 import { RegionControlOption } from '~/components-styled/chart-region-controls';
-import {
-  ChartTile,
-  ChartTileWithTimeframe,
-} from '~/components-styled/chart-tile';
+import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
@@ -35,6 +27,7 @@ import { Heading, InlineText, Text } from '~/components-styled/typography';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
+import { GNumberBarChartTile } from '~/domain/tested/g-number-bar-chart-tile';
 import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
 import { PositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/positive-tested-people-regional-tooltip';
 import { Layout } from '~/domain/layout/layout';
@@ -52,9 +45,7 @@ import {
   getNlData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
-import { assert } from '~/utils/assert';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(
@@ -91,31 +82,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
   const dataOverallLastValue = data.tested_overall.last_value;
   const dataGgdAverageLastValue = data.tested_ggd_average.last_value;
   const dataGgdDailyValues = data.tested_ggd_daily.values;
-
-  /* Retrieves certain age demographic data to be used in the example text. */
-  function getAgeDemographicExampleData(data: NationalTestedPerAgeGroup) {
-    const ageGroupRange = '20-29';
-    const value = data.values.find((x) => x.age_group_range === ageGroupRange);
-
-    assert(
-      value,
-      `NationalTestedPerAgeGroup should contain a value for age group ${ageGroupRange}`
-    );
-
-    return {
-      ageGroupRange: formatAgeGroupRange(ageGroupRange),
-      ageGroupPercentage: `${formatPercentage(
-        value.age_group_percentage * 100
-      )}%`,
-      infectedPercentage: `${formatPercentage(
-        value.infected_percentage * 100
-      )}%`,
-    };
-  }
-
-  const ageDemographicExampleData = getAgeDemographicExampleData(
-    data.tested_per_age_group
-  );
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -296,23 +262,25 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTileWithTimeframe>
 
-          <ChartTile
-            title={siteText.infected_age_groups.title}
-            description={replaceVariablesInText(
-              siteText.infected_age_groups.description,
-              ageDemographicExampleData
-            )}
+          {/* 
+          @TODO re-enable after UX changes
+          <ChartTileWithTimeframe
+            title={siteText.infected_per_age_group.title}
+            description={siteText.infected_per_age_group.description}
             metadata={{
-              date: dataOverallLastValue.date_unix,
               source: text.bronnen.rivm,
             }}
           >
-            <AgeDemographic
-              data={data.tested_per_age_group}
-              metricProperty="infected_percentage"
-              text={siteText.infected_age_groups.graph}
-            />
-          </ChartTile>
+            {(timeframe) => (
+              <InfectedPerAgeGroup
+                values={data.tested_per_age_group.values}
+                timeframe={timeframe}
+              />
+            )}
+          </ChartTileWithTimeframe> */}
+
+          <GNumberBarChartTile data={data.g_number} />
+
           <ContentHeader
             title={ggdText.titel}
             skipLinkAnchor={true}
