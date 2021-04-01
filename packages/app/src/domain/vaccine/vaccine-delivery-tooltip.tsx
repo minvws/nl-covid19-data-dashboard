@@ -8,7 +8,9 @@ import styled from 'styled-components';
 import { HoverPoint } from '~/components-styled/area-chart/components/marker';
 import { TimestampedTrendValue } from '~/components-styled/area-chart/logic';
 import { Spacer } from '~/components-styled/base';
-import { Heading, Text } from '~/components-styled/typography';
+import { Heading } from '~/components-styled/typography';
+import { VisuallyHidden } from '~/components-styled/visually-hidden';
+import { useIntl } from '~/intl';
 import { useIntl } from '~/intl';
 import { AllLanguages } from '~/locale';
 
@@ -45,9 +47,7 @@ export function FormatVaccinationsTooltip(
 
   return (
     <>
-      <Text as="span" fontWeight="bold">
-        {dateEndString}
-      </Text>
+      <VisuallyHidden>{dateEndString}</VisuallyHidden>
       <TooltipList>
         <TooltipListItem>
           <span>
