@@ -1,5 +1,5 @@
 import css from '@styled-system/css';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TimeframeOption } from '~/utils/timeframe';
 import { Box } from './base';
 import { ChartTileContainer } from './chart-tile-container';
@@ -14,14 +14,14 @@ interface ChartTileHeaderProps {
   title: string;
   description?: string;
   children?: React.ReactNode;
-  hasExtraToggle?: boolean;
+  hasAdditionalNavigation?: boolean;
 }
 
 function ChartTileHeader({
   title,
   description,
   children,
-  hasExtraToggle,
+  hasAdditionalNavigation,
 }: ChartTileHeaderProps) {
   return (
     <Box display="flex" flexDirection={{ _: 'column', lg: 'row' }}>
@@ -33,9 +33,9 @@ function ChartTileHeader({
         <Box
           display="inline-table"
           alignSelf={{ _: 'flex-start', lg: 'flex-end' }}
-          mb={hasExtraToggle ? asResponsiveArray({ _: 3, lg: 0 }) : 3}
+          mb={hasAdditionalNavigation ? asResponsiveArray({ _: 3, lg: 0 }) : 3}
           css={css({
-            transform: hasExtraToggle
+            transform: hasAdditionalNavigation
               ? asResponsiveArray({ lg: 'translateY(100%)' })
               : undefined,
             zIndex: 3,
@@ -51,11 +51,14 @@ function ChartTileHeader({
 interface ChartTileProps {
   title: string;
   metadata: MetadataProps;
+  children: (
+    timeframe: TimeframeOption | React.ReactElement
+  ) => React.ReactNode;
   description?: string;
-  children?: React.ReactNode;
   timeframeOptions?: TimeframeOption[];
   timeframeInitialValue?: TimeframeOption;
-  hasExtraToggle?: boolean;
+  hasAdditionalNavigation?: boolean;
+  isSewerChart?: boolean;
 }
 
 export function ChartTile({
@@ -64,21 +67,26 @@ export function ChartTile({
   children,
   metadata,
   timeframeOptions,
-  timeframeInitialValue = 'all',
-  hasExtraToggle,
+  timeframeInitialValue,
+  hasAdditionalNavigation,
+  isSewerChart,
 }: ChartTileProps) {
-  const [timeframe, setTimeframe] = useState<TimeframeOption>(
-    timeframeInitialValue
-  );
+  const [timeframe, setTimeframe] = useState<TimeframeOption>();
+
+  useEffect(() => {
+    if (timeframeInitialValue) setTimeframe(timeframeInitialValue);
+    if (timeframeOptions && !timeframeInitialValue)
+      setTimeframe(timeframeOptions[0]);
+  }, [timeframeOptions, timeframeInitialValue]);
 
   return (
     <ChartTileContainer metadata={metadata}>
       <ChartTileHeader
         title={title}
         description={description}
-        hasExtraToggle={hasExtraToggle}
+        hasAdditionalNavigation={hasAdditionalNavigation}
       >
-        {timeframeOptions && (
+        {timeframeOptions && timeframe && (
           <ChartTimeControls
             timeframeOptions={timeframeOptions}
             timeframe={timeframe}
@@ -87,7 +95,7 @@ export function ChartTile({
         )}
       </ChartTileHeader>
       {/* Clone element and assign a timeframe to it if there are timeframeOptions */}
-      {timeframeOptions
+      {timeframeOptions && !isSewerChart
         ? Array.isArray(children)
           ? children.map((item, index) =>
               React.cloneElement(item as React.ReactElement, {

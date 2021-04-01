@@ -32,7 +32,6 @@ import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/to
 import { PositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/positive-tested-people-regional-tooltip';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
-import { InfectedPerAgeGroup } from '~/domain/tested/infected-per-age-group';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
@@ -262,7 +261,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             />
           </ChartTile>
 
-          <ChartTile
+          {/* 
+          @TODO re-enable after UX changes
+          <ChartTileWithTimeframe
             title={siteText.infected_per_age_group.title}
             description={siteText.infected_per_age_group.description}
             metadata={{
@@ -271,8 +272,13 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             timeframeOptions={['all', '5weeks', 'week']}
             timeframeInitialValue="all"
           >
-            <InfectedPerAgeGroup values={data.tested_per_age_group.values} />
-          </ChartTile>
+            {(timeframe) => (
+              <InfectedPerAgeGroup
+                values={data.tested_per_age_group.values}
+                timeframe={timeframe}
+              />
+            )}
+          </ChartTileWithTimeframe> */}
 
           <GNumberBarChartTile data={data.g_number} />
 

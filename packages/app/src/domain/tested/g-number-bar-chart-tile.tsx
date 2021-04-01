@@ -14,6 +14,8 @@ interface GNumberBarChartTileProps {
 
 export function GNumberBarChartTile({
   data: __data,
+  timeframeOptions = ['5weeks', 'week'],
+  timeframeInitialValue = '5weeks',
 }: GNumberBarChartTileProps) {
   const { formatPercentage, siteText } = useIntl();
 
@@ -26,13 +28,14 @@ export function GNumberBarChartTile({
     <ChartTile
       title={text.title}
       description={text.description}
+      timeframeOptions={timeframeOptions}
+      timeframeInitialValue={timeframeInitialValue}
       metadata={{
         date: last_value.date_of_insertion_unix,
         source: text.bronnen,
       }}
     >
       <VerticalBarChart
-        timeframe={'5weeks'}
         ariaLabelledBy="chart_g_number"
         values={values}
         numGridLines={3}
@@ -43,15 +46,15 @@ export function GNumberBarChartTile({
           {
             type: 'bar',
             metricProperty: 'g_number',
-            color: colors.data.primary,
-            secondaryColor: colors.red,
+            color: colors.red,
+            secondaryColor: colors.data.primary,
           },
         ]}
         formatTooltip={({ value }) => {
           return (
             <>
               <InlineText fontWeight="bold">
-                {`${formatPercentage(value.g_number)}% `}
+                {`${formatPercentage(Math.abs(value.g_number))}% `}
               </InlineText>
               {value.g_number > 0
                 ? text.positive_descriptor

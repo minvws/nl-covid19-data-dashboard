@@ -26,12 +26,14 @@ export function Menu({ children }: { children: ReactNode }) {
 export function CategoryMenu({
   title,
   children,
+  isFirstItem,
 }: {
   title: string;
   children: ReactNode;
+  isFirstItem?: boolean;
 }) {
   return (
-    <Box as="li" spacing={3} pt={5}>
+    <Box as="li" spacing={3} pt={isFirstItem ? 4 : 5}>
       <Category>{title}</Category>
       <Menu>{children}</Menu>
     </Box>
@@ -192,7 +194,10 @@ const Unavailable = styled.span(
 
 const StyledLink = styled.a<{ isActive: boolean; isButton?: boolean }>((x) =>
   css({
-    padding: 3,
+    p: 3,
+    py: x.isButton ? 3 : undefined,
+    pr: x.isButton ? 0 : undefined,
+    pb: x.isButton ? 2 : undefined,
     display: 'block',
     borderRight: '5px solid transparent',
     color: 'black',

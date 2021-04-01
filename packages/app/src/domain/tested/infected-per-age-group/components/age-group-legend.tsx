@@ -24,20 +24,6 @@ export function AgeGroupLegend({
 
   const hasSelection = ageGroupSelection.length !== 0;
 
-  function toggleAgeGroup(metricProperty: string) {
-    onToggleAgeGroup(metricProperty);
-
-    /* Without setting focus, the focus is lost on re-render */
-    requestAnimationFrame(() => {
-      const item: HTMLElement | null = document.querySelector(
-        `button[data-metric-property=${metricProperty}]`
-      );
-      if (item) {
-        item.focus();
-      }
-    });
-  }
-
   return (
     <>
       <Legend>
@@ -47,7 +33,7 @@ export function AgeGroupLegend({
             return (
               <Item key={item.label}>
                 <ItemButton
-                  onClick={() => toggleAgeGroup(item.metricProperty)}
+                  onClick={() => onToggleAgeGroup(item.metricProperty)}
                   isActive={hasSelection && isSelected}
                   color={item.color}
                   data-metric-property={item.metricProperty}

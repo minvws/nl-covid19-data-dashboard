@@ -153,11 +153,11 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             ariaDescription={graphDescriptions.rioolwater_meetwaarde}
             metadata={{ source: text.bronnen.rivm }}
             timeframeOptions={['all', '5weeks']}
-            hasExtraToggle
+            timeframeInitialValue="all"
+            hasAdditionalNavigation
           >
             <SewerChart
               data={data}
-              timeframe={'5weeks'}
               valueAnnotation={siteText.waarde_annotaties.riool_normalized}
               text={{
                 select_station_placeholder:

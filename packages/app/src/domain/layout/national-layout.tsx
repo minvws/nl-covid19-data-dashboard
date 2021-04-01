@@ -100,6 +100,7 @@ export function NationalLayout(props: NationalLayoutProps) {
 
               <CategoryMenu
                 title={siteText.nationaal_layout.headings.vaccinaties}
+                isFirstItem
               >
                 <MetricMenuItemLink
                   href="/landelijk/vaccinaties"

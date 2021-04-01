@@ -5,10 +5,11 @@ import { useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import '~/components-styled/combo-box/combo-box.scss';
 import { IntlContext } from '~/intl';
+import { useIntlHelperContext } from '~/intl/hooks/use-intl';
 import * as piwik from '~/lib/piwik';
+import { LanguageKey, languages } from '~/locale';
 import { GlobalStyle } from '~/style/global-style';
 import theme from '~/style/theme';
-import { languages, LanguageKey } from '~/locale';
 
 if (typeof window !== 'undefined') {
   require('proxy-polyfill/proxy.min.js');
@@ -33,6 +34,8 @@ export default function App(props: AppProps) {
   const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
   const text = languages[locale as LanguageKey];
 
+  const intlContext = useIntlHelperContext(locale, text);
+
   useEffect(() => {
     const handleRouteChange = (pathname: string) => {
       piwik.pageview();
@@ -50,7 +53,7 @@ export default function App(props: AppProps) {
 
   return (
     <ThemeProvider theme={theme}>
-      <IntlContext.Provider value={text}>
+      <IntlContext.Provider value={intlContext}>
         <GlobalStyle />
         <Component {...pageProps} />
       </IntlContext.Provider>

@@ -1,19 +1,16 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import DefaultSelect from 'part:@sanity/components/selects/default';
+import { Block } from '@sanity/types';
 import DefaultButton from 'part:@sanity/components/buttons/default';
+import DefaultSelect from 'part:@sanity/components/selects/default';
+import PropTypes from 'prop-types';
+import React from 'react';
 import styles from './TextToSpeechPreview.css';
 
 const defaultFields = ['title', 'excerpt', 'body'];
 const speechOptions = { rate: 0.9, pitch: 1, lang: 'en-US' };
 
-let speechSynth = null;
+const speechSynth = 'speechSynthesis' in window ? window.speechSynthesis : null;
 
-if ('speechSynthesis' in window) {
-  speechSynth = window.speechSynthesis;
-}
-
-const blocksToText = (blocks, opts = {}) => {
+const blocksToText = (blocks: Block<any>[], opts = {}) => {
   const defaultBehaviors = { nonTextBehavior: 'remove' };
   const options = Object.assign({}, defaultBehaviors, opts);
   return blocks
@@ -29,7 +26,7 @@ const blocksToText = (blocks, opts = {}) => {
 };
 
 // eslint-disable-next-line react/require-optimization
-class TextToSpeechPreview extends React.Component {
+class TextToSpeechPreview extends React.Component<any> {
   static propTypes = {
     document: PropTypes.object,
     options: PropTypes.shape({
@@ -50,22 +47,28 @@ class TextToSpeechPreview extends React.Component {
   fieldsAvailableForUtterance = () => {
     const { fields } = this.props.options;
     const { displayed } = this.props.document;
-    return (fields || defaultFields).filter((field) => !!displayed[field]);
+    return (fields || defaultFields).filter(
+      (field: string) => !!displayed[field]
+    );
   };
 
   textToSpeak() {
     const { activeField } = this.state;
     const { displayed } = this.props.document;
 
-    if (typeof displayed[activeField] === 'string') {
-      return displayed[activeField];
+    if (!activeField) {
+      return null;
+    }
+
+    if (typeof displayed[(activeField as unknown) as string] === 'string') {
+      return displayed[(activeField as unknown) as string];
     }
     // we're in Portable Text now, digging into blocks
-    return blocksToText(displayed[activeField]);
+    return blocksToText(displayed[(activeField as unknown) as string]);
   }
 
-  handleFieldChange = (field) => {
-    speechSynth.cancel();
+  handleFieldChange = (field: any) => {
+    speechSynth?.cancel();
     this.setState({ activeField: field.title });
   };
 
@@ -76,11 +79,11 @@ class TextToSpeechPreview extends React.Component {
     utterance.pitch = pitch;
     utterance.rate = rate;
     utterance.lang = lang;
-    speechSynth.speak(utterance);
+    speechSynth?.speak(utterance);
   };
 
   handleStopSpeaking = () => {
-    speechSynth.cancel();
+    speechSynth?.cancel();
   };
 
   componentWillMount = () => {
@@ -88,7 +91,7 @@ class TextToSpeechPreview extends React.Component {
   };
 
   componentDidUpdate() {
-    if (speechSynth.speaking) {
+    if (speechSynth?.speaking) {
       this.handleStopSpeaking();
       this.handleStartSpeaking();
     }
@@ -110,11 +113,13 @@ class TextToSpeechPreview extends React.Component {
     const { activeField } = this.state;
 
     // DefaultSelect wants objects, let's make some of those
-    const fieldObjects = this.fieldsAvailableForUtterance().map((field) => ({
-      title: field,
-    }));
+    const fieldObjects = this.fieldsAvailableForUtterance().map(
+      (field: string) => ({
+        title: field,
+      })
+    );
     const activeFieldObject = fieldObjects.find(
-      (obj) => obj.title === activeField
+      (obj: any) => obj.title === activeField
     );
 
     if (fieldObjects) {

@@ -160,7 +160,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             title={text.linechart_titel}
             metadata={{ source: text.bronnen.rivm }}
             timeframeOptions={['all', '5weeks']}
-            hasExtraToggle
+            hasAdditionalNavigation
           >
             <SewerChart
               data={data}
