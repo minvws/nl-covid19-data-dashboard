@@ -25,7 +25,7 @@ import { Box } from '~/components-styled/base';
 import { Legend } from '~/components-styled/legend';
 import { InlineText } from '~/components-styled/typography';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
+import theme, { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { getValuesInTimeframe } from '~/utils/timeframe';
 import { useElementSize } from '~/utils/use-element-size';
@@ -43,7 +43,7 @@ import {
 const tooltipStyles = {
   ...defaultStyles,
   padding: 0,
-  zIndex: 100,
+  zIndex: theme.zIndices.tooltip,
 };
 
 const NUM_TICKS = 3;

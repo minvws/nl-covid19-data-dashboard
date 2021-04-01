@@ -12,6 +12,7 @@ import {
   LayoutProps,
   position,
   PositionProps,
+  ResponsiveValue,
   shadow,
   ShadowProps,
   space,
@@ -22,12 +23,20 @@ import {
 import { spacing, SpacingProps } from '~/style/functions/spacing';
 import { styledShouldForwardProp } from '~/utils/styled-should-forward-prop';
 
+/**
+ * allow zIndex string values in order to assign zIndex object keys as values.
+ * Technically this just works, but the types don't allow it.
+ */
+type PositionPropsWithCorrectedZIndex = Omit<PositionProps, 'zIndex'> & {
+  zIndex?: ResponsiveValue<number | string>;
+};
+
 export type BoxProps = SpaceProps &
   SpacingProps &
   LayoutProps &
   FlexboxProps &
   ColorProps &
-  PositionProps &
+  PositionPropsWithCorrectedZIndex &
   TypographyProps &
   BordersProps &
   ShadowProps &

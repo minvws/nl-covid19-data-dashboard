@@ -1,6 +1,7 @@
 import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
+import theme from '~/style/theme';
 
 const BOUND_OFFSET = 70;
 
@@ -36,7 +37,7 @@ const TooltipContainer = styled.div<TooltipContainerProps>`
     py: 1,
     fontSize: 1,
   })};
-  z-index: 100;
+  z-index: ${theme.zIndices.tooltip};
 `;
 
 /**

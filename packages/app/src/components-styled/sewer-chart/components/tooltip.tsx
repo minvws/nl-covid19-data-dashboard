@@ -27,7 +27,7 @@ const TooltipContainer = styled.div(
     bg: 'white',
     boxShadow: 'tile',
     pointerEvents: 'none',
-    zIndex: 1000,
+    zIndex: 'tooltip',
     borderRadius: 1,
   })
 );

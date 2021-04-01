@@ -1,4 +1,6 @@
 import { useElementSize } from '~/utils/use-element-size';
+import { useIsMounted } from '~/utils/use-is-mounted';
+import { useViewport } from '~/utils/use-viewport';
 
 /**
  * This code was originally inspired by https://wattenberger.com/blog/react-and-d3
@@ -49,8 +51,14 @@ export function useChartDimensions<T extends HTMLElement>(
   initialWidth: number,
   aspectRatio: number
 ) {
+  const isMounted = useIsMounted();
+  const viewport = useViewport();
   const [ref, { width, height }] = useElementSize<T>(initialWidth);
-  const calculatedHeight = aspectRatio && width ? width * aspectRatio : height;
+  const calculatedHeight = Math.min(
+    // always fit the choropleth inside the viewport
+    isMounted ? viewport.height * 0.9 : Infinity,
+    aspectRatio && width ? width * aspectRatio : height
+  );
 
   return [
     ref,

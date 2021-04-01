@@ -132,7 +132,7 @@ export function Tooltip<T>({
         width: width ? `${width}px` : 'auto',
         boxShadow: 'tile',
         borderRadius: 1,
-        zIndex: 42,
+        zIndex: 'tooltip',
         left: tooltipState.coordinates?.left,
         top: tooltipState.coordinates?.top,
         '&[aria-hidden="true"]': {

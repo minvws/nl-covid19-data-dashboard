@@ -211,7 +211,7 @@ const ChoroplethMap: <T1, T3>(
           width={width}
           viewBox={`0 0 ${width} ${height}`}
           css={css({ display: 'block', bg: 'transparent', width: '100%' })}
-          onMouseMove={createSvgMouseOverHandler(timeout, setTooltip)}
+          onMouseMove={createSvgMouseOverHandler(timeout, setTooltip, ref)}
           onMouseOut={
             isTouch ? undefined : createSvgMouseOutHandler(timeout, setTooltip)
           }
@@ -321,19 +321,20 @@ function MercatorGroup<G extends Geometry, P>(props: MercatorGroupProps<G, P>) {
 
 const createSvgMouseOverHandler = (
   timeout: MutableRefObject<number>,
-  setTooltip: (settings: TooltipSettings | undefined) => void
+  setTooltip: (settings: TooltipSettings | undefined) => void,
+  ref: React.RefObject<HTMLElement>
 ) => {
   return (event: React.MouseEvent) => {
     const elm = event.target as HTMLElement | SVGElement;
     const id = elm.getAttribute('data-id');
 
-    if (id) {
+    if (id && ref.current) {
       if (timeout.current > -1) {
         clearTimeout(timeout.current);
         timeout.current = -1;
       }
 
-      const coords = localPoint(event);
+      const coords = localPoint(ref.current, event);
 
       if (coords) {
         setTooltip({

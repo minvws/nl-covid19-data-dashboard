@@ -170,6 +170,12 @@ const sizes = {
   maxWidthText: 600,
 };
 
+const zIndices = {
+  skipLink: 400,
+  tooltip: 500,
+  modal: 600,
+};
+
 const theme = {
   fonts,
   fontSizes,
@@ -182,6 +188,7 @@ const theme = {
   radii,
   shadows,
   sizes,
+  zIndices,
 } as const;
 
 type Theme = typeof theme;

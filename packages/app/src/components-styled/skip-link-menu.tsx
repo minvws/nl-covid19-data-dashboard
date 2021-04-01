@@ -22,7 +22,7 @@ export function SkipLinkMenu({
 const StyledSkipLinkMenu = styled.nav(
   css({
     position: 'absolute',
-    zIndex: '100',
+    zIndex: 'skipLink',
     top: '0',
     left: '50%',
     width: '100%',

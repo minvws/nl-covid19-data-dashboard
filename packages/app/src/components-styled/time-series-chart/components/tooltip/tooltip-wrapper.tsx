@@ -97,7 +97,7 @@ function Triangle({ left, top, isMounted }: TriangleProps) {
         position: 'absolute',
         left: 0,
         top: 0,
-        zIndex: 1010,
+        zIndex: 'tooltip',
         pointerEvents: 'none',
       })}
       style={{ transform: `translate(${left}px, ${top}px)` }}
@@ -134,7 +134,7 @@ const TooltipContainer = styled.div(
     bg: 'white',
     boxShadow: 'tooltip',
     pointerEvents: 'none',
-    zIndex: 1000,
+    zIndex: 'tooltip',
     borderRadius: 1,
     top: 0,
     willChange: 'transform',

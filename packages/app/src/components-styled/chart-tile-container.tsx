@@ -17,12 +17,13 @@ export function ChartTileContainer({
   children: React.ReactNode;
   metadata?: MetadataProps;
 }) {
+  const [isButtonVisible, setIsButtonVisible] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const breakpoints = useBreakpoints();
 
   const tile = (
     <Tile>
-      {breakpoints.md && (
+      {(isFullscreen || isButtonVisible) && breakpoints.md && (
         <FullscreenButton onClick={() => setIsFullscreen((x) => !x)} />
       )}
 
@@ -39,8 +40,14 @@ export function ChartTileContainer({
 
   return (
     <>
-      {tile}
-      {isFullscreen && (
+      <div
+        onPointerEnter={() => setIsButtonVisible(true)}
+        onPointerLeave={() => setIsButtonVisible(false)}
+      >
+        {tile}
+      </div>
+
+      {breakpoints.md && isFullscreen && (
         <FullscreenModal
           id="chart-tile-container"
           onClose={() => setIsFullscreen(false)}
@@ -102,7 +109,6 @@ function FullscreenModal({
   return (
     <Modal id={id}>
       <DisablePageScroll />
-      <Backdrop onClick={onClose} />
       <StyledFullscreenModal ref={focusRef}>
         <div ref={ref}>{children}</div>
       </StyledFullscreenModal>
@@ -115,35 +121,29 @@ const DisablePageScroll = createGlobalStyle`
     height: 100vh;
     overflow-y: hidden;
   }
-  html, body{
+  html, body {
     touch-action: none;
   }
 `;
 
-const Backdrop = styled.div(
-  css({
-    position: 'fixed',
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
-    background: 'rgba(0, 0, 0, 0.2)',
-    zIndex: 99999,
-  })
-);
-
 const StyledFullscreenModal = styled.div(
   css({
+    zIndex: 'modal',
+    touchAction: 'initial',
+
+    boxSizing: 'border-box',
     position: 'fixed',
-    top: 0,
-    left: 0,
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    background: 'rgba(0, 0, 0, 0.2)',
     width: '100%',
     height: '100%',
-    zIndex: 99999,
-    overflow: 'scroll',
+    display: 'grid',
+    alignItems: 'center',
+    overflowY: 'auto',
     px: '2vw',
     py: '2vh',
-    touchAction: 'initial',
   })
 );
 
