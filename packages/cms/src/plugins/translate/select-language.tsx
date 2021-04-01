@@ -1,7 +1,7 @@
 /* eslint-disable complexity */
 
 import { useValidationStatus } from '@sanity/react-hooks';
-import { Schema, ValidationMarker } from '@sanity/types';
+import { ValidationMarker } from '@sanity/types';
 import {
   Inline,
   Label,
@@ -10,14 +10,13 @@ import {
   TabList,
   ThemeProvider,
 } from '@sanity/ui';
-import React, { useMemo } from 'react';
+import React from 'react';
 import { MdErrorOutline } from 'react-icons/md';
 import Flag from 'react-world-flags';
 import {
   SupportedLanguage,
   SupportedLanguageId,
 } from '../../language/supported-languages';
-import schema from '../../schemas/schema';
 
 type SelectLanguageProps = {
   languages: SupportedLanguage[];
@@ -35,16 +34,6 @@ export default function SelectLanguage(props: SelectLanguageProps) {
     validation.markers,
     languages
   );
-
-  console.dir(validation.markers);
-
-  const hasLocaleFields = useMemo(() => {
-    return checkForLocaleFields(document.id, schema);
-  }, [document.id, schema]);
-
-  if (!hasLocaleFields) {
-    return null;
-  }
 
   return (
     <ThemeProvider theme={studioTheme}>
@@ -97,19 +86,4 @@ function extractValidationErrorsPerLanguage(
 function checkForLanguage(languageId: SupportedLanguageId) {
   return (marker: ValidationMarker) =>
     marker.path[marker.path.length - 1] === languageId;
-}
-
-function checkForLocaleFields(documentId: string, schema: Schema) {
-  const docSchema = (schema as any)._original.types.find(
-    (doc: any) => doc.name === documentId
-  );
-  if (!docSchema) {
-    return false;
-  }
-  return docSchema.fields.some(
-    (field: any) =>
-      field.type.startsWith('locale') ||
-      (field.type === 'array' &&
-        field.of.some((x: any) => x.type.startsWith('locale')))
-  );
 }
