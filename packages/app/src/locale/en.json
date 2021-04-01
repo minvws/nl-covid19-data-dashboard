@@ -2372,7 +2372,8 @@
     },
     "grafiek_leveringen": {
       "titel": "Deliveries",
-      "omschrijving": "This graph shows how many doses of each COVID-19 vaccine the Netherlands has received and is expecting to receive in a given week."
+      "omschrijving": "This graph shows how many doses of each COVID-19 vaccine the Netherlands has received and is expecting to receive in a given week.",
+      "timeframe_recent_en_verwacht": ""
     },
     "bereidheid_datums": "Last values obtained on {{dateOfInsertion}}. Is updated every three weeks."
   },

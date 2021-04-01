@@ -1,14 +1,7 @@
-import {
-  NlVaccineAdministeredEstimateValue,
-  NlVaccineAdministeredValue,
-  NlVaccineDeliveryEstimateValue,
-  NlVaccineDeliveryValue,
-} from '@corona-dashboard/common';
 import { css } from '@styled-system/css';
 import { useState } from 'react';
 import styled from 'styled-components';
 import VaccinatiesIcon from '~/assets/vaccinaties.svg';
-import { AreaChart } from '~/components-styled/area-chart';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
@@ -16,7 +9,6 @@ import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
-import { Legend } from '~/components-styled/legend';
 import { Markdown } from '~/components-styled/markdown';
 import { RadioGroup } from '~/components-styled/radio-group';
 import { TileList } from '~/components-styled/tile-list';
@@ -29,10 +21,8 @@ import {
   MilestonesView,
   MilestoneViewProps,
 } from '~/domain/vaccine/milestones-view';
-import { useVaccineDeliveryData } from '~/domain/vaccine/use-vaccine-delivery-data';
-import { useVaccineNames } from '~/domain/vaccine/use-vaccine-names';
+import { VaccineDeliveryAreaChart } from '~/domain/vaccine/vaccine-delivery-area-chart';
 import { VaccineDeliveryBarChart } from '~/domain/vaccine/vaccine-delivery-bar-chart';
-import { FormatVaccinationsTooltip } from '~/domain/vaccine/vaccine-delivery-tooltip';
 import { VaccinePageIntroduction } from '~/domain/vaccine/vaccine-page-introduction';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
@@ -87,15 +77,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const additions = text.expected_page_additions.additions.filter(
     (x) => x.trim().length
   );
-
-  const vaccineNames = useVaccineNames(data.vaccine_administered.last_value);
-
-  const [
-    vaccineDeliveryValues,
-    vaccineDeliveryEstimateValues,
-    vaccineAdministeredValues,
-    vaccineAdministeredEstimateValues,
-  ] = useVaccineDeliveryData(data);
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -253,106 +234,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               )}
             </KpiTile>
           </TwoKpiSection>
-
-          <ChartTile
-            title={text.grafiek.titel}
-            description={text.grafiek.omschrijving}
-            metadata={{
-              date: data.vaccine_delivery.last_value.date_of_report_unix,
-              source: text.bronnen.rivm,
-            }}
-          >
-            <Box>
-              <AreaChart<
-                NlVaccineDeliveryValue | NlVaccineDeliveryEstimateValue,
-                NlVaccineAdministeredValue | NlVaccineAdministeredEstimateValue
-              >
-                valueAnnotation={siteText.waarde_annotaties.x_miljoen}
-                timeframe="all"
-                formatTooltip={(values) =>
-                  FormatVaccinationsTooltip(values, siteText)
-                }
-                divider={{
-                  color: colors.annotation,
-                  leftLabel: text.data.vaccination_chart.left_divider_label,
-                  rightLabel: text.data.vaccination_chart.right_divider_label,
-                }}
-                trends={[
-                  {
-                    values: vaccineDeliveryValues,
-                    displays: [
-                      {
-                        metricProperty: 'total',
-                        strokeWidth: 3,
-                        color: 'black',
-                        legendLabel: text.data.vaccination_chart.delivered,
-                      },
-                    ],
-                  },
-                  {
-                    values: vaccineDeliveryEstimateValues,
-                    displays: [
-                      {
-                        metricProperty: 'total',
-                        style: 'dashed',
-                        strokeWidth: 3,
-                        legendLabel: text.data.vaccination_chart.estimated,
-                        color: 'black',
-                      },
-                    ],
-                  },
-                ]}
-                areas={[
-                  {
-                    values: vaccineAdministeredValues,
-                    displays: vaccineNames.map((key) => ({
-                      metricProperty: key as any,
-                      color: (colors.data.vaccines as any)[key],
-                      legendLabel: key,
-                    })),
-                  },
-                  {
-                    values: vaccineAdministeredEstimateValues,
-                    displays: vaccineNames.map((key) => ({
-                      metricProperty: key as any,
-                      pattern: 'hatched',
-                      color: (colors.data.vaccines as any)[key],
-                      legendLabel: key,
-                    })),
-                  },
-                ]}
-              />
-
-              <Legend
-                items={[
-                  {
-                    label: text.data.vaccination_chart.legend.available,
-                    color: 'black',
-                    shape: 'line',
-                  },
-                  {
-                    label: text.data.vaccination_chart.legend.expected,
-                    shape: 'custom',
-                    shapeComponent: <HatchedSquare />,
-                  },
-                ]}
-              />
-              <Legend
-                items={vaccineNames.map((key) => ({
-                  label: replaceVariablesInText(
-                    text.data.vaccination_chart.legend_label,
-                    {
-                      name: (text.data.vaccination_chart.product_names as any)[
-                        key
-                      ],
-                    }
-                  ),
-                  color: `data.vaccines.${key}`,
-                  shape: 'square',
-                }))}
-              />
-            </Box>
-          </ChartTile>
 
           <MilestonesView
             title={milestones.title}
@@ -540,17 +421,14 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          {data.vaccine_delivery_per_supplier ? (
-            <VaccineDeliveryBarChart
-              data={data.vaccine_delivery_per_supplier}
-              siteText={siteText}
-            />
-          ) : null}
+          <VaccineDeliveryBarChart data={data.vaccine_delivery_per_supplier} />
 
-          <TwoKpiSection>
-            <KpiTile title={text.expected_page_additions.title}>
-              <Text>{text.expected_page_additions.description}</Text>
-              {additions.length > 0 && (
+          <VaccineDeliveryAreaChart data={data} />
+
+          {additions.length > 0 && (
+            <TwoKpiSection>
+              <KpiTile title={text.expected_page_additions.title}>
+                <Text>{text.expected_page_additions.description}</Text>
                 <ul>
                   {additions.map((addition) => (
                     <li key={addition}>
@@ -558,9 +436,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                     </li>
                   ))}
                 </ul>
-              )}
-            </KpiTile>
-          </TwoKpiSection>
+              </KpiTile>
+            </TwoKpiSection>
+          )}
         </TileList>
       </NationalLayout>
     </Layout>
@@ -599,32 +477,6 @@ function VaccineAdministeredItem(props: VaccineAdministeredProps) {
         )}
       </InlineText>
     </Text>
-  );
-}
-
-function HatchedSquare() {
-  return (
-    <svg height="15" width="15">
-      <defs>
-        <pattern
-          id="hatch"
-          width="4"
-          height="4"
-          patternTransform="rotate(-45 0 0)"
-          patternUnits="userSpaceOnUse"
-        >
-          <line
-            x1="0"
-            y1="0"
-            x2="0"
-            y2="5"
-            style={{ stroke: 'grey', strokeWidth: 3 }}
-          />
-        </pattern>
-      </defs>
-      <rect height="15" width="15" fill="white" />
-      <rect height="15" width="15" fill="url(#hatch)" />
-    </svg>
   );
 }
 
