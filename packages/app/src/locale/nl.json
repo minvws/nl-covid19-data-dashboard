@@ -2907,7 +2907,11 @@
       "infected_overall_per_100k": "Alle leeftijden"
     },
     "reset_button_label": "Reset",
-    "legend_help_text": "Selecteer één of meerdere leeftijdsgroepen om deze apart te bekijken."
+    "legend_help_text": "Selecteer één of meerdere leeftijdsgroepen om deze apart te bekijken.",
+    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+    "tooltip_labels" : {
+      "inaccurate": "Niet compleet"
+    }
   },
   "g_number": {
     "bar_chart": {
