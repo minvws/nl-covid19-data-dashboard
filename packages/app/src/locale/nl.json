@@ -2355,7 +2355,7 @@
     },
     "stock_and_delivery_section": {
       "title": "Leveringen & voorraad",
-      "description": "Leveringen & voorraad",
+      "description": "Elke week krijgt Nederland vaccins. Het grootste deel van de vaccins is na een controle snel beschikbaar om mensen een prik te geven. Maar we houden ook een deel van de vaccins op voorraad om zeker te weten dat er genoeg vaccins zijn om afspraken de komende paar dagen gewoon door te kunnen laten gaan. De cijfers hieronder laten zien hoeveel vaccins we krijgen en hoeveel vaccins we op voorraad hebben.",
       "reference": {
         "href": "/verantwoording#leveringen-en-voorraad-vaccins",
         "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
@@ -2363,12 +2363,12 @@
     },
     "stock": {
       "title": "Vaccins in voorraad",
-      "description": "Dit getal laat zien hoeveel vaccins het RIVM op voorraad heeft per type vaccin. We houden niet meer vaccins in voorraad dan nodig is om te zorgen dat iedereen op tijd de tweede prik krijgt.",
+      "description": "Dit getal laat zien hoeveel vaccins het RIVM op voorraad heeft per type vaccin. We houden niet meer vaccins in voorraad dan nodig is om te zorgen dat afspraken in de komende dagen gewoon door kunnen gaan en iedereen op tijd de tweede prik krijgt.",
       "per_vaccine": "{{amount}} {{label}} vaccins"
     },
     "delivery_estimate_time_span": {
       "title": "",
-      "description": "Dit getal laat zien hoeveel vaccins het RIVM op voorraad heeft per type vaccin. We houden niet meer vaccins in voorraad dan nodig is om te zorgen dat iedereen op tijd de tweede prik krijgt."
+      "description": "Dit getal laat zien hoeveel vaccins het RIVM op voorraad heeft per type vaccin. We houden niet meer vaccins in voorraad dan nodig is om te zorgen dat afspraken in de komende dagen gewoon door kunnen gaan en iedereen op tijd de tweede prik krijgt."
     },
     "grafiek_leveringen": {
       "titel": "Leveringen",
