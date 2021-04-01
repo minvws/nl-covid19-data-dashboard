@@ -4,6 +4,8 @@ declare module 'part:@sanity/form-builder/patch-event' {
 
 declare module 'part:@sanity/base/client';
 
+declare module 'part:@sanity/base/document-actions';
+
 declare module 'all:part:@sanity/base/schema-type' {
   let types: any[];
   export default types;
