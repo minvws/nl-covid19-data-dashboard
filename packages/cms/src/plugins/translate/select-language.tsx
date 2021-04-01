@@ -6,7 +6,7 @@ import {
   Inline,
   Label,
   studioTheme,
-  Tab,
+  Tab as TabAlias,
   TabList,
   ThemeProvider,
 } from '@sanity/ui';
@@ -17,6 +17,8 @@ import {
   SupportedLanguage,
   SupportedLanguageId,
 } from '../../language/supported-languages';
+
+const Tab: any = TabAlias;
 
 type SelectLanguageProps = {
   languages: SupportedLanguage[];

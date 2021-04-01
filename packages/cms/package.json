@@ -25,6 +25,7 @@
     "@sanity/production-preview": "^2.2.6",
     "@sanity/ui": "^0.33.7",
     "@sanity/vision": "^2.7.3",
+    "braille": "^1.1.0",
     "download": "^8.0.0",
     "fs-extra": "^9.1.0",
     "prompts": "^2.4.0",

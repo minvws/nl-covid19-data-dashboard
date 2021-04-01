@@ -68,7 +68,7 @@ class TextToSpeechPreview extends React.Component<any> {
   }
 
   handleFieldChange = (field: any) => {
-    speechSynth.cancel();
+    speechSynth?.cancel();
     this.setState({ activeField: field.title });
   };
 
@@ -79,11 +79,11 @@ class TextToSpeechPreview extends React.Component<any> {
     utterance.pitch = pitch;
     utterance.rate = rate;
     utterance.lang = lang;
-    speechSynth.speak(utterance);
+    speechSynth?.speak(utterance);
   };
 
   handleStopSpeaking = () => {
-    speechSynth.cancel();
+    speechSynth?.cancel();
   };
 
   componentWillMount = () => {
@@ -91,7 +91,7 @@ class TextToSpeechPreview extends React.Component<any> {
   };
 
   componentDidUpdate() {
-    if (speechSynth.speaking) {
+    if (speechSynth?.speaking) {
       this.handleStopSpeaking();
       this.handleStartSpeaking();
     }
