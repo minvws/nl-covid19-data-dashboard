@@ -2359,8 +2359,8 @@
       }
     },
     "delivery_estimate_time_span": {
-      "title": "{{weeks}} weken",
-      "description": "Dit getal laat zien hoeveel vaccins het RIVM op voorraad heeft per type vaccin. We houden niet meer vaccins in voorraad dan nodig is om te zorgen dat iedereen op tijd de tweede prik krijgt."
+      "title": "Verwachte leveringen komende {{weeks}} weken",
+      "description": "Dit getal laat zien hoeveel vaccins we in totaal verwachten in de komende 4 weken. Dit zijn verschillende vaccins. Het overgrote gedeelte van de geleverde vaccins wordt direct ingezet. Een klein gedeelte gaat naar de voorraad om deze op peil te houden."
     },
     "grafiek_leveringen": {
       "titel": "Leveringen",
