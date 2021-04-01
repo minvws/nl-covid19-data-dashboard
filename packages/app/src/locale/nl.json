@@ -2910,7 +2910,7 @@
     "legend_help_text": "Selecteer één of meerdere leeftijdsgroepen om deze apart te bekijken.",
     "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
     "tooltip_labels" : {
-      "inaccurate": "Incompleet"
+      "inaccurate": "Niet compleet"
     }
   },
   "g_number": {

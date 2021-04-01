@@ -2,7 +2,10 @@ import { NlTestedPerAgeGroupValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useMemo } from 'react';
 import { TimeSeriesChart } from '~/components-styled/time-series-chart';
-import { TooltipSeriesList } from '~/components-styled/time-series-chart/components/tooltip/tooltip-series-list';
+import {
+  TooltipList,
+  TooltipSeriesList,
+} from '~/components-styled/time-series-chart/components/tooltip/tooltip-series-list';
 import { LineSeriesDefinition } from '~/components-styled/time-series-chart/logic';
 import { useIntl } from '~/intl';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
@@ -68,7 +71,7 @@ export function InfectedPerAgeGroup({
     return ageGroupBaseConfig.filter((item) =>
       alwayEnabled.includes(item.metricProperty)
     );
-  }, []);
+  }, [ageGroupBaseConfig, alwayEnabled]);
 
   /* Conditionally wrap tooltip over two columns due to amount of items */
   const tooltipColumns = list.length === 0 || list.length > 4 ? 2 : 1;
@@ -82,7 +85,7 @@ export function InfectedPerAgeGroup({
         height={breakpoints.md ? 300 : 250}
         disableLegend
         formatTooltip={(data) => (
-          <div css={css({ columns: tooltipColumns })}>
+          <div css={css({ [`${TooltipList}`]: { columns: tooltipColumns } })}>
             <TooltipSeriesList data={data} />
           </div>
         )}
@@ -91,9 +94,8 @@ export function InfectedPerAgeGroup({
             {
               start: underReportedDateStart,
               end: Infinity,
-              label:
-                positiveTestedPeopleText.line_chart_legend_inaccurate_label,
-              shortLabel: positiveTestedPeopleText.tooltip_labels.inaccurate,
+              label: text.line_chart_legend_inaccurate_label,
+              shortLabel: text.tooltip_labels.inaccurate,
             },
           ],
         }}

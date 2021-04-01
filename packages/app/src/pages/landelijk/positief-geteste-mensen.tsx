@@ -47,6 +47,7 @@ import {
 import { colors } from '~/style/theme';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+import { InfectedPerAgeGroup } from '~/domain/tested/infected-per-age-group';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -262,11 +263,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTileWithTimeframe>
 
-          {/* 
-          @TODO re-enable after UX changes
           <ChartTileWithTimeframe
             title={siteText.infected_per_age_group.title}
             description={siteText.infected_per_age_group.description}
+            timeframeOptions={['all', '5weeks']}
             metadata={{
               source: text.bronnen.rivm,
             }}
@@ -277,7 +277,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 timeframe={timeframe}
               />
             )}
-          </ChartTileWithTimeframe> */}
+          </ChartTileWithTimeframe>
 
           <GNumberBarChartTile data={data.g_number} />
 

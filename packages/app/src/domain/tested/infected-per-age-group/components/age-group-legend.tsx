@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { LineSeriesDefinition } from '~/components-styled/time-series-chart/logic';
 import { Text } from '~/components-styled/typography';
 import { useIntl } from '~/intl';
+import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 
 interface AgeGroupLegendProps {
@@ -28,7 +29,9 @@ export function AgeGroupLegend({
 
   return (
     <>
-      <Text fontSize={1}>{text.legend_help_text}</Text>
+      <Text fontSize={1} fontWeight="bold" mb={0} mt={2}>
+        {text.legend_help_text}
+      </Text>
       <Legend>
         <List>
           {seriesConfig.map((item) => {
@@ -39,7 +42,6 @@ export function AgeGroupLegend({
                   onClick={() => onToggleAgeGroup(item.metricProperty)}
                   isActive={hasSelection && isSelected}
                   color={item.color}
-                  data-metric-property={item.metricProperty}
                   data-text={item.label}
                 >
                   {item.label}
@@ -60,17 +62,19 @@ export function AgeGroupLegend({
           {alwaysEnabledConfig.map((item) => {
             return (
               <Item key={item.label}>
-                <ItemText
-                  color={item.color}
-                  data-metric-property={item.metricProperty}
-                  data-text={item.label}
-                >
+                <ItemText color={item.color} data-text={item.label}>
                   {item.label}
                   <Line color={item.color} lineStyle={item.style ?? 'solid'} />
                 </ItemText>
               </Item>
             );
           })}
+          <Item>
+            <ItemText data-text={text.line_chart_legend_inaccurate_label}>
+              {text.line_chart_legend_inaccurate_label}
+              <Square color={colors.data.underReported} />
+            </ItemText>
+          </Item>
         </List>
       </Legend>
     </>
@@ -159,11 +163,10 @@ const ItemButton = styled.button<{
 const ItemText = styled.span(
   css({
     pr: asResponsiveArray({ _: '5px', md: 10 }),
-    pl: asResponsiveArray({ _: 25, md: 30 }),
-    py: '3px',
+    pl: asResponsiveArray({ _: 20, md: 25 }),
+    py: '6px',
     fontSize: 1,
-    border: '3px solid',
-    borderColor: 'transparent',
+    border: 'none',
     fontWeight: 'normal',
     fontFamily: 'inherit',
     position: 'relative',
@@ -194,9 +197,26 @@ const Line = styled.div<{ color: string; lineStyle: 'dashed' | 'solid' }>(
       borderTopColor: color as SystemStyleObject,
       borderTopStyle: lineStyle,
       borderTopWidth: '3px',
-      top: '9px',
+      top: '10px',
       width: '15px',
       height: 0,
       borderRadius: '2px',
+      [`${ItemText} &`]: {
+        left: asResponsiveArray({ _: 0, md: '5px' }),
+        top: 13,
+      },
     })
+);
+
+const Square = styled.div<{ color: string }>(({ color }) =>
+  css({
+    content: '',
+    display: 'block',
+    position: 'absolute',
+    left: asResponsiveArray({ _: 0, md: '5px' }),
+    backgroundColor: color,
+    top: '5px',
+    width: '15px',
+    height: '15px',
+  })
 );
