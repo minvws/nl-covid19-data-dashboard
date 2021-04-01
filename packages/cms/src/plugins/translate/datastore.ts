@@ -1,16 +1,19 @@
 import { intersection } from 'lodash';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map, publishReplay, refCount, startWith, tap } from 'rxjs/operators';
-import config from './config.js';
+import { SupportedLanguageId } from '../../language/supported-languages';
+import config from './config';
 
 const onSelect$ = new BehaviorSubject(['nl']);
 
-export const setLangs = (langs) => onSelect$.next(langs);
+export const setLangs = (languages: string[]) => onSelect$.next(languages);
 
-const persistOn = (key, defaultValue) => (input$) => {
+const persistOn = (key: string, defaultValue: any) => (
+  input$: Observable<any>
+) => {
   let persisted;
   try {
-    persisted = JSON.parse(window.localStorage.getItem(key));
+    persisted = JSON.parse(window.localStorage.getItem(key) || '');
   } catch (err) {
     console.error(err);
   } // eslint-disable-line no-empty
@@ -32,7 +35,11 @@ export const selectedLanguages$ = onSelect$.pipe(
   persistOn('language-filter/selected-languages', SUPPORTED_LANG_IDS)
 );
 
-const defaultFilterField = (enclosingType, field, selectedLanguages) =>
+const defaultFilterField = (
+  enclosingType: any,
+  field: any,
+  selectedLanguages: SupportedLanguageId[]
+) =>
   !enclosingType.name.startsWith('locale') ||
   selectedLanguages.includes(field.name);
 
@@ -40,6 +47,7 @@ const filterField = config.filterField || defaultFilterField;
 
 export const filterFn$ = selectedLanguages$.pipe(
   map((langs) => {
-    return (enclosingType, field) => filterField(enclosingType, field, langs);
+    return (enclosingType: any, field: any) =>
+      filterField(enclosingType, field, langs);
   })
 );

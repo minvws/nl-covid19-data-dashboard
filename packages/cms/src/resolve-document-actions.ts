@@ -22,18 +22,21 @@ const documentAllowedActions = {
   toegankelijkheid: [DiscardChangesAction, PublishAction, UnpublishAction],
 };
 
-export default function resolveDocumentActions(props) {
+type DocumentTypes = keyof typeof documentAllowedActions;
+
+export default function resolveDocumentActions(document: any) {
   const current = onDocument$.getValue();
-  if (current?.id !== props.id) {
-    onDocument$.next(props);
+  if (current?.id !== document.id) {
+    onDocument$.next(document);
   }
 
-  const allowedActions = documentAllowedActions[props.type];
+  const allowedActions =
+    documentAllowedActions[(document.type as unknown) as DocumentTypes];
   if (!allowedActions) {
-    return defaultResolve(props);
+    return defaultResolve(document);
   }
 
-  return defaultResolve(props).filter(
-    (Action) => allowedActions.indexOf(Action) > -1
+  return defaultResolve(document).filter(
+    (action: any) => allowedActions.indexOf(action) > -1
   );
 }
