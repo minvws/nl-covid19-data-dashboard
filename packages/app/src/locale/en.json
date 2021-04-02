@@ -1811,8 +1811,7 @@
       "line_chart_covid_daily_description": "This graph shows the number of COVID-19 patients reported dead, in the selected period.",
       "line_chart_covid_daily_legend_trend_label": "Reports of deceased patients",
       "line_chart_covid_daily_legend_trend_short_label": "Deceased patients",
-      "line_chart_covid_daily_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
-      "line_chart_covid_daily_legend_inaccurate_short_label": "Incomplete data"
+      "line_chart_covid_daily_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
     },
     "kpi_titel": "Daily reported deaths from COVID-19"
   },
@@ -1846,8 +1845,7 @@
       "line_chart_covid_daily_description": "This graph shows the number of COVID-19 patients in this safety region reported dead, in the selected period.",
       "line_chart_covid_daily_legend_trend_label": "Reports of deceased patients",
       "line_chart_covid_daily_legend_trend_short_label": "Deceased patients",
-      "line_chart_covid_daily_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
-      "line_chart_covid_daily_legend_inaccurate_short_label": "Incomplete data"
+      "line_chart_covid_daily_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
     },
     "kpi_titel": "Daily reported deaths from COVID-19"
   },
@@ -2800,8 +2798,7 @@
       "line_chart_covid_daily_description": "This graph shows the number of COVID-19 patients in this municipality reported dead, in the selected period.",
       "line_chart_covid_daily_legend_trend_label": "Reports of deceased patients",
       "line_chart_covid_daily_legend_trend_short_label": "Deceased patients",
-      "line_chart_covid_daily_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
-      "line_chart_covid_daily_legend_inaccurate_short_label": "Incomplete data"
+      "line_chart_covid_daily_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
     },
     "kpi_titel": "Daily reported deaths from COVID-19"
   },

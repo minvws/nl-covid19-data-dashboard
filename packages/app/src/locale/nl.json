@@ -1811,8 +1811,7 @@
       "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel COVID-19 patiënten in de geselecteerde periode gemeld is dat ze zijn overleden.",
       "line_chart_covid_daily_legend_trend_label": "Meldingen overleden patiënten",
       "line_chart_covid_daily_legend_trend_short_label": "Overleden patiënten",
-      "line_chart_covid_daily_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
-      "line_chart_covid_daily_legend_inaccurate_short_label": "Niet compleet omdat"
+      "line_chart_covid_daily_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
     },
     "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
   },
@@ -1846,8 +1845,7 @@
       "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel COVID-19 patiënten in deze veiligheidsregio in de geselecteerde periode gemeld is dat ze zijn overleden.",
       "line_chart_covid_daily_legend_trend_label": "Gemeld aantal overleden",
       "line_chart_covid_daily_legend_trend_short_label": "Overleden patiënten",
-      "line_chart_covid_daily_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
-      "line_chart_covid_daily_legend_inaccurate_short_label": "Niet compleet omdat"
+      "line_chart_covid_daily_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
     },
     "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
   },
@@ -2800,8 +2798,7 @@
       "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel COVID-19 patiënten in deze gemeente in de geselecteerde periode gemeld is dat ze zijn overleden.",
       "line_chart_covid_daily_legend_trend_label": "Meldingen overleden patiënten",
       "line_chart_covid_daily_legend_trend_short_label": "Overleden patiënten",
-      "line_chart_covid_daily_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
-      "line_chart_covid_daily_legend_inaccurate_short_label": "Niet compleet omdat"
+      "line_chart_covid_daily_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
     },
     "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
   },

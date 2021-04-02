@@ -151,9 +151,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
                       label:
                         text.section_deceased_rivm
                           .line_chart_covid_daily_legend_inaccurate_label,
-                      shortLabel:
-                        text.section_deceased_rivm
-                          .line_chart_covid_daily_legend_inaccurate_short_label,
+                      shortLabel: siteText.common.incomplete,
                     },
                   ],
                 }}
