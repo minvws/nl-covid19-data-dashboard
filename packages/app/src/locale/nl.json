@@ -2355,7 +2355,7 @@
     },
     "stock_and_delivery_section": {
       "title": "Leveringen & voorraad",
-      "description": "Leveringen & voorraad",
+      "description": "Elke week krijgt Nederland vaccins. Het grootste deel van de vaccins is na een controle snel beschikbaar om mensen een prik te geven. Maar we houden ook een deel van de vaccins op voorraad om zeker te weten dat er genoeg vaccins zijn om afspraken de komende paar dagen gewoon door te kunnen laten gaan. De cijfers hieronder laten zien hoeveel vaccins we krijgen en hoeveel vaccins we op voorraad hebben.",
       "reference": {
         "href": "/verantwoording#leveringen-en-voorraad-vaccins",
         "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
@@ -2363,12 +2363,12 @@
     },
     "stock": {
       "title": "Vaccins in voorraad",
-      "description": "Dit getal laat zien hoeveel vaccins het RIVM op voorraad heeft per type vaccin. We houden niet meer vaccins in voorraad dan nodig is om te zorgen dat iedereen op tijd de tweede prik krijgt.",
+      "description": "Dit getal laat zien hoeveel vaccins het RIVM op voorraad heeft per type vaccin. We houden niet meer vaccins in voorraad dan nodig is om te zorgen dat afspraken in de komende dagen gewoon door kunnen gaan en iedereen op tijd de tweede prik krijgt.",
       "per_vaccine": "{{amount}} {{label}} vaccins"
     },
     "delivery_estimate_time_span": {
       "title": "",
-      "description": "Dit getal laat zien hoeveel vaccins het RIVM op voorraad heeft per type vaccin. We houden niet meer vaccins in voorraad dan nodig is om te zorgen dat iedereen op tijd de tweede prik krijgt."
+      "description": "Dit getal laat zien hoeveel vaccins het RIVM op voorraad heeft per type vaccin. We houden niet meer vaccins in voorraad dan nodig is om te zorgen dat afspraken in de komende dagen gewoon door kunnen gaan en iedereen op tijd de tweede prik krijgt."
     },
     "grafiek_leveringen": {
       "titel": "Leveringen",
@@ -2892,7 +2892,7 @@
   },
   "infected_per_age_group": {
     "title": "Aantal positieve testen per leeftijdsgroep door de tijd heen",
-    "description": "Deze grafiek laat zien van hoeveel mensen in een bepaalde leeftijdsgroep gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
+    "description": "Deze grafiek laat zien hoeveel mensen in een bepaalde leeftijdsgroep positief getest zijn op het coronavirus, per 100.000 inwoners. In de grafiek worden gemiddelden over de afgelopen zeven dagen getoond. Let op dat de cijfers niet overeenkomen met het aantal positief geteste mensen dat op andere plekken op deze pagina staat. Dit komt doordat de gegevens uit een andere databron komen. In dit bestand worden andere datums gebruikt, namelijk vooral de eerste ziektedag. Lees hier meer over in de cijferverantwoording.",
     "legend": {
       "infected_age_0_9_per_100k": "0-9",
       "infected_age_10_19_per_100k": "10-19",
@@ -2907,7 +2907,11 @@
       "infected_overall_per_100k": "Alle leeftijden"
     },
     "reset_button_label": "Reset",
-    "legend_help_text": "Selecteer één of meerdere leeftijdsgroepen om deze apart te bekijken."
+    "legend_help_text": "Selecteer één of meerdere leeftijdsgroepen om deze te bekijken",
+    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+    "tooltip_labels": {
+      "inaccurate": "Niet compleet"
+    }
   },
   "g_number": {
     "bar_chart": {
