@@ -6,9 +6,10 @@ import { MdQuestionAnswer } from 'react-icons/md';
 import { RiPagesFill } from 'react-icons/ri';
 import 'sanity-mobile-preview/dist/index.css?raw';
 
-// hiddenDocTypes will filter out all of the content models
-// we expose through other sections in the CMS.
-// for example, we will show categories through a custom panel
+/**
+ * This is a list of doc types we handle in the custom menu structure. All
+ * others will appear automatically at the bottom.
+ */
 const hiddenDocTypes = [
   'siteSettings',
   'topicalPage',
@@ -100,12 +101,12 @@ export default () =>
       addListItem(RiPagesFill, 'Vaccinaties', 'vaccinationsPage'),
       addListItem(GrCircleInformation, 'Toegankelijkheid', 'toegankelijkheid'),
 
-      // Add a visual divider (optional)
       S.divider(),
 
-      // This returns an array of all the document types
-      // defined in schema.jS. We filter out those that we have
-      // defined the structure above
+      /**
+       * Display all document types that haven't been handled in the structure
+       * above.
+       */
       ...S.documentTypeListItems().filter(
         (item) => !hiddenDocTypes.includes(item.getId() || '')
       ),
