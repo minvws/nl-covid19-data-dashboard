@@ -2,6 +2,15 @@ import { unflatten } from 'flat';
 import fs from 'fs';
 import { client } from '../client';
 import prettier from 'prettier';
+import path from 'path';
+
+const localeDirectory = path.resolve(
+  __dirname,
+  '..', // src
+  '..', // cms
+  '..', // packages
+  'app/src/locale'
+);
 
 client
   .fetch(`*[_type == 'lokalizeSubject'] | order(key asc)`)
@@ -20,14 +29,17 @@ client
     }
 
     fs.writeFileSync(
-      'nl_export.json',
+      /**
+       * @TODO rename these files ones we make the switch
+       */
+      path.join(localeDirectory, 'nl_export.json'),
       prettier.format(JSON.stringify(unflatten(nl)), { parser: 'json' }),
       {
         encoding: 'utf8',
       }
     );
     fs.writeFileSync(
-      'en_export.json',
+      path.join(localeDirectory, 'en_export.json'),
       prettier.format(JSON.stringify(unflatten(en)), { parser: 'json' }),
       {
         encoding: 'utf8',
