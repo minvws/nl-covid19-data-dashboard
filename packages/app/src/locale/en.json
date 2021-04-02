@@ -2907,7 +2907,11 @@
       "infected_overall_per_100k": "All ages"
     },
     "reset_button_label": "Reset",
-    "legend_help_text": "Select one or more age groups that you want to see separately."
+    "legend_help_text": "Select one or more age groups that you want to see separately.",
+    "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
+    "tooltip_labels": {
+      "inaccurate": "Incomplete"
+    }
   },
   "g_number": {
     "bar_chart": {
