@@ -728,14 +728,14 @@ export interface NlVaccineStock {
   last_value: NlVaccineStockValue;
 }
 export interface NlVaccineStockValue {
-  total_available?: number;
-  total_not_available?: number;
-  bio_n_tech_pfizer_available?: number;
-  bio_n_tech_pfizer_not_available?: number;
-  moderna_available?: number;
-  moderna_not_available?: number;
-  astra_zeneca_available?: number;
-  astra_zeneca_not_available?: number;
+  total_available: number;
+  total_not_available: number;
+  bio_n_tech_pfizer_available: number;
+  bio_n_tech_pfizer_not_available: number;
+  moderna_available: number;
+  moderna_not_available: number;
+  astra_zeneca_available: number;
+  astra_zeneca_not_available: number;
   date_of_insertion_unix: number;
   date_unix: number;
 }
