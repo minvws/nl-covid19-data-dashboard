@@ -107,9 +107,6 @@ for (const [key, dataText] of Object.entries(nl)) {
      * with an opaque id which allows us to freely change the key name, to
      * refactor the names we use in our code.
      *
-     * For this reason the key has its own field. It should not be editable as
-     * long as we use Lokalize so it is currently set to "hidden" in the schema.
-     *
      * The jsonKey__ prefix makes sure we don't clash with other documents in
      * sanity that have a non-opaque document id.
      */
@@ -128,9 +125,6 @@ for (const [key, dataText] of Object.entries(nl)) {
        * to.
        */
       .createOrReplace(document)
-      .then((doc: any) => {
-        // console.log(`A document was added or replaced with id ${doc?._id}`);
-      })
       .catch((err) => {
         console.error(
           `Failed to create document for key ${key}: ${err.message}`
