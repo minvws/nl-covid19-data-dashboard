@@ -2350,7 +2350,6 @@
     "stock": {
       "title": "Vaccins in voorraad",
       "description": "Dit getal laat zien hoeveel vaccins het RIVM op voorraad heeft per type vaccin. We houden niet meer vaccins in voorraad dan nodig is om te zorgen dat iedereen op tijd de tweede prik krijgt.",
-      "per_vaccine": "{{amount}} {{label}} prikken",
       "columns": {
         "product_name": "Vaccin type",
         "available": "Beschikbaar",
