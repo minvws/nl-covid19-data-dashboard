@@ -1,6 +1,11 @@
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
-import { NationalReproduction } from '@corona-dashboard/common';
+import { isPresent } from 'ts-is-present';
+import { last } from 'lodash';
+import {
+  NationalReproduction,
+  NationalReproductionValue,
+} from '@corona-dashboard/common';
 import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
 import { TimeSeriesChart } from '~/components-styled/time-series-chart';
 import { TimeframeOption } from '~/utils/timeframe';
@@ -12,7 +17,7 @@ interface ReproductionChartTileProps {
 }
 
 export function ReproductionChartTile({
-  data: __data,
+  data,
   timeframeOptions = ['all', '5weeks'],
   timeframeInitialValue = 'all',
 }: ReproductionChartTileProps) {
@@ -24,11 +29,8 @@ export function ReproductionChartTile({
    * of all the values before the first datapoint with a null value to
    * display in the chart
    */
-  const values = __data.values.slice(
-    0,
-    __data.values.map((x) => x.index_average).indexOf(null)
-  );
-  const last_value = __data.last_value;
+  const values = data.values.filter((x) => isPresent(x.index_average));
+  const last_value = last(values) as NationalReproductionValue;
 
   return (
     <ChartTileWithTimeframe

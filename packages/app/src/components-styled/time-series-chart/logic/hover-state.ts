@@ -188,7 +188,7 @@ export function useHoverState<T extends TimestampedValue>({
      * If there are no points getting hovered, hover state should be undefined
      */
     if (!linePoints.length) {
-      return undefined;
+      return;
     }
 
     /**

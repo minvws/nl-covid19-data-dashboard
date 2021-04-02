@@ -96,9 +96,7 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
             </KpiWithIllustrationTile>
           </TwoKpiSection>
 
-          {data.reproduction.values && (
-            <ReproductionChartTile data={data.reproduction} />
-          )}
+          <ReproductionChartTile data={data.reproduction} />
         </TileList>
       </NationalLayout>
     </Layout>
