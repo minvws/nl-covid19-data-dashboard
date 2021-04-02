@@ -370,13 +370,13 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                   flexDirection="row"
                   alignItems="stretch"
                 >
-                  <Box flex={0.33}>
+                  <Box flex={0.2}>
                     <InlineText>{text.stock.columns.product_name}</InlineText>
                   </Box>
-                  <Box flex={0.33} display="flex" justifyContent="flex-end">
+                  <Box flex={0.4} display="flex" justifyContent="flex-end">
                     <InlineText>{text.stock.columns.available}</InlineText>
                   </Box>
-                  <Box flex={0.33} display="flex" justifyContent="flex-end">
+                  <Box flex={0.4} display="flex" justifyContent="flex-end">
                     <InlineText>{text.stock.columns.not_available}</InlineText>
                   </Box>
                 </Box>
@@ -532,16 +532,16 @@ function VaccineStockRow(props: VaccineStockRowProps) {
   const { color, productName, total, readyForDelivery } = props;
   return (
     <Box as="li" display="flex" flexDirection="row" alignItems="stretch">
-      <Box flex={0.33} display="flex" alignItems="center">
+      <Box flex={0.2} display="flex" alignItems="center">
         <ColorIndicator color={color} />
         <InlineText color={color} fontWeight="bold">
           {productName}:
         </InlineText>
       </Box>
-      <Box flex={0.33} display="flex" justifyContent="flex-end">
+      <Box flex={0.4} display="flex" justifyContent="flex-end">
         <strong>{total}</strong>
       </Box>
-      <Box flex={0.33} display="flex" justifyContent="flex-end">
+      <Box flex={0.4} display="flex" justifyContent="flex-end">
         <strong>{readyForDelivery}</strong>
       </Box>
     </Box>
