@@ -17,28 +17,28 @@
       ],
       "additionalProperties": false,
       "properties": {
-        "total": {
+        "total_available": {
           "type": "integer"
         },
-        "total_ready_for_delivery": {
+        "total_not_available": {
           "type": "integer"
         },
-        "bio_n_tech_pfizer_total": {
+        "bio_n_tech_pfizer_available": {
           "type": "integer"
         },
-        "bio_n_tech_pfizer_ready_for_delivery": {
+        "bio_n_tech_pfizer_not_available": {
           "type": "integer"
         },
-        "moderna_total": {
+        "moderna_available": {
           "type": "integer"
         },
-        "moderna_ready_for_delivery": {
+        "moderna_not_available": {
           "type": "integer"
         },
-        "astra_zeneca_total": {
+        "astra_zeneca_available": {
           "type": "integer"
         },
-        "astra_zeneca_ready_for_delivery": {
+        "astra_zeneca_not_available": {
           "type": "integer"
         },
         "date_of_insertion_unix": {

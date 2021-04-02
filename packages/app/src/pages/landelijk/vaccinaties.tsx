@@ -374,52 +374,45 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                     <InlineText>{text.stock.columns.product_name}</InlineText>
                   </Box>
                   <Box flex={0.33} display="flex" justifyContent="flex-end">
-                    <InlineText>{text.stock.columns.in_stock}</InlineText>
+                    <InlineText>{text.stock.columns.available}</InlineText>
                   </Box>
                   <Box flex={0.33} display="flex" justifyContent="flex-end">
-                    <InlineText>
-                      {text.stock.columns.ready_for_delivery}
-                    </InlineText>
+                    <InlineText>{text.stock.columns.not_available}</InlineText>
                   </Box>
                 </Box>
                 <VaccineStockRow
                   color={colors.data.vaccines.bio_n_tech_pfizer}
                   productName="BioNTech/Pfizer"
                   total={formatNumber(
-                    data.vaccine_stock.last_value.bio_n_tech_pfizer_total
+                    data.vaccine_stock.last_value.bio_n_tech_pfizer_available
                   )}
                   readyForDelivery={formatNumber(
                     data.vaccine_stock.last_value
-                      .bio_n_tech_pfizer_ready_for_delivery
+                      .bio_n_tech_pfizer_not_available
                   )}
                 />
                 <VaccineStockRow
                   color={colors.data.vaccines.moderna}
                   productName="Moderna"
                   total={formatNumber(
-                    data.vaccine_stock.last_value.moderna_total
+                    data.vaccine_stock.last_value.moderna_available
                   )}
                   readyForDelivery={formatNumber(
-                    data.vaccine_stock.last_value.moderna_ready_for_delivery
+                    data.vaccine_stock.last_value.moderna_not_available
                   )}
                 />
                 <VaccineStockRow
                   color={colors.data.vaccines.astra_zeneca}
                   productName="AstraZeneca"
                   total={formatNumber(
-                    data.vaccine_stock.last_value.astra_zeneca_total
+                    data.vaccine_stock.last_value.astra_zeneca_available
                   )}
                   readyForDelivery={formatNumber(
-                    data.vaccine_stock.last_value
-                      .astra_zeneca_ready_for_delivery
+                    data.vaccine_stock.last_value.astra_zeneca_not_available
                   )}
                 />
               </Box>
-              <Text>
-                {text.stock.description}
-                <br />
-                {text.stock.ready_for_delivery_description}
-              </Text>
+              <Text>{text.stock.description}</Text>
             </KpiTile>
 
             <KpiTile

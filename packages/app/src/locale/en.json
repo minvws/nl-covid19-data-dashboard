@@ -2351,11 +2351,10 @@
       "title": "Doses in stock",
       "description": "This is the number of vaccine doses currently in stock at the National Institute for Public Health and the Environment (RIVM) per vaccine type. We are not holding aside any more vaccine than is necessary to make sure everyone can receive a second dose on time. ",
       "per_vaccine": "{{amount}} {{label}} vaccine doses",
-      "ready_for_delivery_description": "",
       "columns": {
         "product_name": "",
-        "in_stock": "",
-        "ready_for_delivery": ""
+        "available": "",
+        "not_available": ""
       }
     },
     "delivery_estimate_time_span": {
