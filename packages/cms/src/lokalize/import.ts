@@ -35,10 +35,10 @@ let issueCounter = 0;
 
 for (const [key, dataText] of Object.entries(nl)) {
   /**
-   * Some root-level keys only contain a string instead of an object
-   * structure. We can't handle those in our logic, so they are ignored. We
-   * should manually move these keys to a different location. Luckily there
-   * are only a few of them.
+   * Some root-level keys only contain a string instead of an object structure.
+   * We can't handle those in our logic, so they are ignored. We should manually
+   * move these keys to a different location. Luckily there are only a few of
+   * them.
    */
   if (typeof dataText === 'string') {
     console.warn(`Ignoring string value for key ${key}`);
@@ -62,7 +62,9 @@ for (const [key, dataText] of Object.entries(nl)) {
       if (!value) return;
 
       /**
-       * Anything that is not a string here should be an array
+       * Anything that is not a string here is expected to be an array. If these
+       * keys are still used in the app, the data will have to be converted or
+       * otherwise moved.
        */
       if (typeof value !== 'string') {
         console.warn(`Ignoring value type ${typeof value} for path ${path}`);
