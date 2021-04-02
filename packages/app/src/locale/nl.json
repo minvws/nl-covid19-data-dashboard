@@ -69,11 +69,11 @@
       "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
       "text": "NICE via RIVM"
     },
-    "titel": "Intensive care-opnames per dag",
+    "titel": "Gemeld aantal intensive care-opnames per dag",
     "pagina_toelichting": "Aantal mensen met COVID-19 dat per dag op de intensive care (IC) is opgenomen, direct of vanaf de verpleegafdeling in een ziekenhuis. Om dubbel tellen te voorkomen wordt alleen de eerste IC-opname van een patiënt meegeteld. Een opname op de IC zegt iets over de ernst van het ziektebeloop en is daarom belangrijk om de ontwikkeling van de epidemie goed te monitoren.",
     "barscale_titel": "Intensive care-opnames per dag",
     "barscale_screenreader_text": "{{value}} intensive care-opnames per dag. Signaalwaarde: {{signaalwaarde}} opnames per dag.",
-    "extra_uitleg": "Aantal mensen met bevestigd COVID-19 dat per dag op een intensive care-afdeling van een ziekenhuis is opgenomen. Dit cijfer laat het aantal IC-opnames zien dat op één dag gemeld is. Dit kunnen ook meldingen zijn van opnames van eerdere dagen.",
+    "extra_uitleg": "Aantal mensen met bevestigd COVID-19 dat per dag op een intensive care-afdeling van een ziekenhuis is opgenomen. Dit cijfer laat het aantal IC-opnames zien dat op één dag gemeld is. Dit kunnen ook meldingen zijn van opnames van eerdere dagen.\n\nLet op: Vanaf 25 maart toont het dashboard het aantal gemelde IC-opnames per dag in plaats van het gemiddelde aantal opnames van de afgelopen drie dagen. Het getal hierboven is daarom niet vergelijkbaar met het getal dat voorheen op het dashboard stond.",
     "linechart_titel": "Intensive care-opnames door de tijd heen",
     "bronnen": {
       "nice": {
@@ -156,7 +156,7 @@
     "titel": "Ziekenhuisopnames per dag",
     "pagina_toelichting": "Groei van het aantal opgenomen patiënten met COVID-19 kan ervoor zorgen dat ziekenhuizen het te druk krijgen. Daarnaast geeft dit cijfer een goed beeld van hoe de epidemie zich ontwikkelt. We houden hier het aantal patiënten bij dat met COVID-19 wordt opgenomen in ziekenhuizen en het aantal bedden op gewone ziekenhuisafdelingen die door patiënten met COVID-19 wordt bezet. We houden dit zowel landelijk als regionaal bij en dat doen we op basis van verschillende bronnen.",
     "barscale_titel": "Gemeld aantal ziekenhuisopnames per dag",
-    "extra_uitleg": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer laat het aantal ziekenhuisopnames - inclusief directe IC-opnames - zien dat op één dag gemeld is. Dit kunnen ook meldingen zijn van opnames van eerdere dagen.",
+    "extra_uitleg": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer laat het aantal ziekenhuisopnames - inclusief directe IC-opnames - zien dat op één dag gemeld is. Dit kunnen ook meldingen zijn van opnames van eerdere dagen. ",
     "map_titel": "Woonplaats opgenomen patiënten",
     "map_toelichting": "Deze kaart laat zien in welke gemeenten of veiligheidsregio’s patiënten wonen die met COVID-19 in het ziekenhuis zijn opgenomen. Patiënten kunnen ook in een ziekenhuis in een ander deel van Nederland worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE.",
     "linechart_titel": "Ziekenhuisopnames door de tijd heen, op datum van opname",
@@ -276,7 +276,7 @@
   },
   "besmettelijke_personen": {
     "title": "Aantal besmettelijke mensen",
-    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
+    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt twee keer per week bijgewerkt.",
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/097155aa-75eb-4caa-8ed3-4c6edb80467e",
       "text": "RIVM"
@@ -2026,7 +2026,7 @@
     "grafieken": {
       "reproductiegetal_verloop": "Deze grafiek toont het reproductiegetal door de tijd heen.",
       "ziekenhuisopnames": "Deze grafiek toont het aantal ziekenhuisopnames door de tijd heen.",
-      "intensive_care_opnames": "Deze grafiek toont de intensive care-opnames door de tijd heen.",
+      "intensive_care_opnames": "Deze grafiek toon de intensive care opnames door de tijd heen.",
       "verpleeghuiszorg_positief_getest": "Deze grafiek toont het aantal bewoners van verpleeghuislocaties waarvan gemeld is dat ze positief getest zijn op COVID-19.",
       "verpleeghuiszorg_besmette_locaties": "Deze grafiek toont het aantal besmette verpleeghuislocaties door de tijd heen.",
       "verpleeghuiszorg_overleden_getest": "Deze grafiek toont het aantal overleden bewoners van verpleeghuislocaties waarvan gemeld is dat ze positief getest zijn op COVID-19.",
@@ -2355,7 +2355,7 @@
     },
     "stock_and_delivery_section": {
       "title": "Leveringen & voorraad",
-      "description": "Elke week krijgt Nederland vaccins. Het grootste deel van de vaccins is na een controle snel beschikbaar om mensen een prik te geven. Maar we houden ook een deel van de vaccins op voorraad om zeker te weten dat er genoeg vaccins zijn om afspraken de komende paar dagen gewoon door te kunnen laten gaan. De cijfers hieronder laten zien hoeveel vaccins we krijgen en hoeveel vaccins we op voorraad hebben.",
+      "description": "Leveringen & voorraad",
       "reference": {
         "href": "/verantwoording#leveringen-en-voorraad-vaccins",
         "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
@@ -2363,12 +2363,12 @@
     },
     "stock": {
       "title": "Vaccins in voorraad",
-      "description": "Dit getal laat zien hoeveel vaccins het RIVM op voorraad heeft per type vaccin. We houden niet meer vaccins in voorraad dan nodig is om te zorgen dat afspraken in de komende dagen gewoon door kunnen gaan en iedereen op tijd de tweede prik krijgt.",
+      "description": "Dit getal laat zien hoeveel vaccins het RIVM op voorraad heeft per type vaccin. We houden niet meer vaccins in voorraad dan nodig is om te zorgen dat iedereen op tijd de tweede prik krijgt.",
       "per_vaccine": "{{amount}} {{label}} vaccins"
     },
     "delivery_estimate_time_span": {
       "title": "",
-      "description": "Dit getal laat zien hoeveel vaccins het RIVM op voorraad heeft per type vaccin. We houden niet meer vaccins in voorraad dan nodig is om te zorgen dat afspraken in de komende dagen gewoon door kunnen gaan en iedereen op tijd de tweede prik krijgt."
+      "description": "Dit getal laat zien hoeveel vaccins het RIVM op voorraad heeft per type vaccin. We houden niet meer vaccins in voorraad dan nodig is om te zorgen dat iedereen op tijd de tweede prik krijgt."
     },
     "grafiek_leveringen": {
       "titel": "Leveringen",
@@ -2882,7 +2882,7 @@
       "cbs": {
         "href": "https://mlzopendata.cbs.nl/#/MLZ/nl/dataset/40080NED",
         "text": "CBS",
-        "download": "https://dataderden.cbs.nl/ODataApi/OData/40080NED/TypedDataSet?$filter=(substringof(%272020W%27,%20Perioden)%20eq%20true)%20or%20(substringof(%272021W%27,%20Perioden)%20eq%20true)%20and%20(substringof(%27VR%27,%20RegioS)%20eq%20true)&$select=Perioden,%20RegioS,%20Overledenen_1"
+        "download": "https://dataderden.cbs.nl/ODataApi/OData/40080NED/TypedDataSet?$filter=(substringof({{272020W}}27,%20Perioden){{20eq}}20true){{20or}}20(substringof({{272021W}}27,%20Perioden){{20eq}}20true){{20and}}20(substringof({{27VR}}27,%20RegioS){{20eq}}20true)&$select=Perioden,%20RegioS,%20Overledenen_1"
       }
     },
     "reference": {
@@ -2892,7 +2892,7 @@
   },
   "infected_per_age_group": {
     "title": "Aantal positieve testen per leeftijdsgroep door de tijd heen",
-    "description": "Deze grafiek laat zien hoeveel mensen in een bepaalde leeftijdsgroep positief getest zijn op het coronavirus, per 100.000 inwoners. In de grafiek worden gemiddelden over de afgelopen zeven dagen getoond. Let op dat de cijfers niet overeenkomen met het aantal positief geteste mensen dat op andere plekken op deze pagina staat. Dit komt doordat de gegevens uit een andere databron komen. In dit bestand worden andere datums gebruikt, namelijk vooral de eerste ziektedag. Lees hier meer over in de cijferverantwoording.",
+    "description": "Deze grafiek laat zien van hoeveel mensen in een bepaalde leeftijdsgroep gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
     "legend": {
       "infected_age_0_9_per_100k": "0-9",
       "infected_age_10_19_per_100k": "10-19",
@@ -2907,7 +2907,7 @@
       "infected_overall_per_100k": "Alle leeftijden"
     },
     "reset_button_label": "Reset",
-    "legend_help_text": "Selecteer één of meerdere leeftijdsgroepen om deze te bekijken",
+    "legend_help_text": "Selecteer één of meerdere leeftijdsgroepen om deze apart te bekijken.",
     "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
     "tooltip_labels": {
       "inaccurate": "Niet compleet"
