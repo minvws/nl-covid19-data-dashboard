@@ -30,6 +30,7 @@ const hiddenDocTypes = [
   'vaccinationsPage',
   'toegankelijkheid',
   'escalationLevelPage',
+  'lokalizeSubject',
   'lokalizeString',
   'lokalizeText',
 ];
