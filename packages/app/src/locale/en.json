@@ -1869,11 +1869,11 @@
       "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "cbs_message": {
-      "title": "In week 11, an estimated 3,100 deaths",
-      "published_text": "Date of publication: Friday 26 March",
-      "message": "In week 11 (15 to 21 March 2021 inclusive), the estimated number of deaths stood at 3,100. This is approximately 200 lower than expected for this period and over 100 lower than in the previous week (3,211). Mortality among long-term care users and people aged 80 years and over was below the expected level for this week. Statistics Netherlands (CBS) reports this based on the provisional weekly mortality figures. From week 39 of 2020 to week 6 of 2021 inclusive, weekly mortality was higher than expected. In week 7, the number of deaths was more or less the same as the expected mortality for this period; it was lower than expected in the subsequent weeks. The estimated mortality for week 11 is below the expected mortality as well. The National Institute for Public Health and the Environment (RIVM) registered 138 COVID-19 deaths in week 11 (as at 23 March).",
+      "title": "In week 12, an estimated 3,100 deaths",
+      "published_text": "Date of publication: Friday 2 April",
+      "message": "In week 12 (22 to 28 March 2021 inclusive), the estimated number of deaths stood at 3,100. This is over 100 lower than expected for this period and nearly 100 higher than in the previous week (3,001). Mortality among long-term care users and people aged 80 years and over was below the expected level for this week; among the rest of the population, the number of deaths was approximately the same as expected. Statistics Netherlands (CBS) reports this based on the provisional weekly mortality figures. From week 39 of 2020 to week 6 of 2021 inclusive, weekly mortality was higher than expected. In week 7, the number of deaths was more or less the same as the expected mortality for this period; it was lower than expected in the subsequent weeks. The estimated mortality for week 12 is below the expected mortality as well. However, there is no undermortality yet, as the lower number of deaths is still within the expectation interval (the light blue area in the figure). The National Institute for Public Health and the Environment (RIVM) registered 123 COVID-19 deaths in week 12 (as at 30 March).",
       "link": {
-        "href": "https://www.cbs.nl/en-gb/news/2021/12/in-week-11-an-estimated-3-100-deaths",
+        "href": "https://www.cbs.nl/en-gb/news/2021/13/in-week-12-an-estimated-3-100-deaths",
         "text": "Read the full news item on the CBS website"
       }
     },
@@ -2892,7 +2892,7 @@
   },
   "infected_per_age_group": {
     "title": "Number of positive tests per age group over time",
-    "description": "This graph shows the trend in positive cases for each age group, per 100,000 people in that age group.",
+    "description": "This graph shows the trend in positive cases for each age group, per 100,000 people in that age group. The graph shows the seven-day rolling average. Please note that the numbers do not correspond to the number of positive people in other places on this page. This is because the data comes from a different data source. Other dates are used in this file. Read more about this in the frequently asked questions section.",
     "legend": {
       "infected_age_0_9_per_100k": "0-9",
       "infected_age_10_19_per_100k": "10-19",
@@ -2907,7 +2907,7 @@
       "infected_overall_per_100k": "All ages"
     },
     "reset_button_label": "Reset",
-    "legend_help_text": "Select one or more age groups that you want to see separately.",
+    "legend_help_text": "Select one or more age groups that you want to see",
     "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
     "tooltip_labels": {
       "inaccurate": "Incomplete"
