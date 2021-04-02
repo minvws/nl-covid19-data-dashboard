@@ -21,6 +21,8 @@ export const lokalizeSubject = {
   type: 'document',
   title: 'Lokalize',
   icon: FaLanguage,
+  // __experimental_actions: [/*'create',*/ 'update', /*'delete',*/ 'publish'],
+  __experimental_actions: ['create', 'update', 'delete', 'publish'],
   fields: [
     {
       title: 'Key',
@@ -33,7 +35,7 @@ export const lokalizeSubject = {
        */
       description:
         'A unique snake-cased key that will form the root-level JSON key.',
-      hidden: true,
+      // hidden: true,
     },
     {
       title: 'Texts',
@@ -44,7 +46,7 @@ export const lokalizeSubject = {
       /**
        * We can support multiple types for accommodating short and long texts.
        */
-      of: [{ type: 'lokalizeText' }, { type: 'lokalizeString' }],
+      of: [{ type: 'lokalizeText' }],
     },
   ],
   preview: {

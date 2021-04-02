@@ -9,8 +9,11 @@ export default {
     name: lang.id,
     type: 'text',
     rows: 4,
-    max: 1000,
-    // validation: (Rule: any) =>
-    //   Rule.max(1000).warning(`A title shouldn't be more than 1k characters.`),
+    /**
+     * Only NL is required. For EN we use NL as a fallback when exporting. Both
+     * can be 1000 chars long (default is 120)
+     */
+    validation: (Rule: any) =>
+      lang.id === 'nl' ? Rule.required().max(1000) : Rule.max(1000),
   })),
 };

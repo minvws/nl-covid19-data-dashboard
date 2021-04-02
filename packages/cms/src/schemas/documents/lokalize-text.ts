@@ -24,7 +24,7 @@ export const lokalizeText = {
        * This could be made editable later after we killed Lokalize. It would
        * allow us to clean up the used names.
        */
-      readOnly: true,
+      // readOnly: true,
     },
     {
       title: 'Text',

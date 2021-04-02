@@ -4,4 +4,3 @@
 
 export * from './lokalize-subject';
 export * from './lokalize-text';
-export * from './lokalize-string';
