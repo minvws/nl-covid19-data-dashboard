@@ -3,10 +3,7 @@ import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
 import { BarChart } from '~/components-styled/bar-chart/bar-chart';
-import {
-  ChartTile,
-  ChartTileWithTimeframe,
-} from '~/components-styled/chart-tile';
+import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
@@ -151,11 +148,12 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTileWithTimeframe
+          <ChartTile
             title={text.linechart_titel}
             ariaDescription={graphDescriptions.rioolwater_meetwaarde}
             metadata={{ source: text.bronnen.rivm }}
             timeframeOptions={['all', '5weeks']}
+            hasAdditionalNavigation
           >
             {(timeframe) => (
               <SewerChart
@@ -174,7 +172,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 }}
               />
             )}
-          </ChartTileWithTimeframe>
+          </ChartTile>
 
           {barChartData && (
             <ChartTile
