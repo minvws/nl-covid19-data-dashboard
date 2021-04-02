@@ -2,6 +2,7 @@ import { getLastFilledValue } from '@corona-dashboard/common';
 import Arts from '~/assets/arts.svg';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
+import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
@@ -9,6 +10,7 @@ import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { addBackgroundRectangleCallback } from '~/components-styled/line-chart/logic';
 import { PageBarScale } from '~/components-styled/page-barscale';
 import { TileList } from '~/components-styled/tile-list';
+import { TimeSeriesChart } from '~/components-styled/time-series-chart';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
 import { Layout } from '~/domain/layout/layout';
@@ -30,6 +32,7 @@ import { createDate } from '~/utils/createDate';
 import {
   DateRange,
   getTrailingDateRange,
+  getBoundaryDateStartUnix,
 } from '~/utils/get-trailing-date-range';
 
 export const getStaticProps = createGetStaticProps(
@@ -55,6 +58,8 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
   const bedsLastValue = getLastFilledValue(data.intensive_care_lcps);
 
   const intakeUnderReportedRange = getTrailingDateRange(dataIntake.values, 4);
+  const testRange = getBoundaryDateStartUnix(dataIntake.values, 4);
+  console.log(testRange);
 
   const lcpsOldDataRange = [
     createDate(data.intensive_care_lcps.values[0].date_unix),
@@ -129,6 +134,43 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
+          <ChartTileWithTimeframe
+            title={text.linechart_titel}
+            description={text.linechart_description}
+            metadata={{ source: text.bronnen.nice }}
+          >
+            {(timeframe) => (
+              <TimeSeriesChart
+                values={dataIntake.values}
+                timeframe={timeframe}
+                ariaLabelledBy={graphDescriptions.intensive_care_opnames}
+                dataOptions={{
+                  benchmark: {
+                    value: 10,
+                    label: 'Signaalwaarde',
+                  },
+                  timespanAnnotations: [
+                    {
+                      start: testRange,
+                      end: Infinity,
+                      label: 'label',
+                      shortLabel:
+                        'positiveTestedPeopleText.tooltip_labels.inaccurate',
+                    },
+                  ],
+                }}
+                seriesConfig={[
+                  {
+                    type: 'area',
+                    metricProperty: 'admissions_on_date_of_admission',
+                    label: 'test',
+                    color: colors.data.primary,
+                  },
+                ]}
+              />
+            )}
+          </ChartTileWithTimeframe>
+          {/* 
           <LineChartTile
             title={text.linechart_titel}
             description={text.linechart_description}
@@ -172,7 +214,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
               },
             ]}
             showLegend
-          />
+          /> */}
 
           <LineChartTile
             title={text.chart_bedbezetting.title}
