@@ -40,14 +40,12 @@ export default function SelectLanguage(props: SelectLanguageProps) {
   return (
     <ThemeProvider theme={studioTheme}>
       <Inline space={[3]}>
-        <Label size={2}>Kies een taal:</Label>
-
         <TabList space={1}>
           {languages.map((lang) => (
             <Tab
-              style={{
-                border: validationErrors[lang.id] ? '1px solid red' : undefined,
-              }}
+              // style={{
+              //   border: validationErrors[lang.id] ? '1px solid red' : undefined,
+              // }}
               key={lang.id}
               icon={
                 <>
@@ -56,14 +54,17 @@ export default function SelectLanguage(props: SelectLanguageProps) {
                     width="24"
                     height="12"
                   />
+                  {/*
+                    It seems like validation errors are already visible from the icon next to the flags
+
                   {validationErrors[lang.id] ? (
                     <MdErrorOutline
                       color={validationErrors[lang.id] ? 'red' : undefined}
                     />
-                  ) : null}
+                  ) : null} */}
                 </>
               }
-              label={lang.title}
+              // label={lang.title}
               onClick={() => onChange([lang.id])}
               selected={selected.includes(lang.id)}
               padding={2}

@@ -1,5 +1,5 @@
-import { StructureBuilder } from '@sanity/structure';
-// import StructureBuilder from '@sanity/desk-tool/structure-builder';
+import { StructureBuilder as S } from '@sanity/structure';
+// import S from '@sanity/desk-tool/structure-S';
 import { BsCardChecklist, BsLockFill, BsMap, BsTable } from 'react-icons/bs';
 import { GrCircleInformation, GrDashboard } from 'react-icons/gr';
 import { MdQuestionAnswer } from 'react-icons/md';
@@ -7,7 +7,7 @@ import { RiPagesFill } from 'react-icons/ri';
 import 'sanity-mobile-preview/dist/index.css?raw';
 
 // Build up the root of the preview URL
-// const remoteURL = procesStructureBuilder.env.SANITY_STUDIO_PREVIEW_SERVER;
+// const remoteURL = procesS.env.SANITY_STUDIO_PREVIEW_SERVER;
 // const localURL = "http://localhost:3000";
 // const previewURL =
 //   window.location.hostname === "localhost" ? localURL : remoteURL;
@@ -62,48 +62,43 @@ const hiddenDocTypes = [
   'vaccinationsPage',
   'toegankelijkheid',
   'escalationLevelPage',
+  'lokalizeString',
+  'lokalizeText',
 ];
 
 export default () =>
-  StructureBuilder.list()
+  S.list()
     .title('Content')
     .items([
-      StructureBuilder.listItem()
+      S.listItem()
         .title('Lockdown en Routekaart')
         .icon(BsTable)
         .child(
-          StructureBuilder.list()
+          S.list()
             .title('Lockdown en Routekaart')
             .items([
-              addListItem(StructureBuilder, BsLockFill, 'Lockdown', 'lockdown'),
-              addListItem(StructureBuilder, BsTable, 'Routekaart', 'roadmap'),
+              addListItem(BsLockFill, 'Lockdown', 'lockdown'),
+              addListItem(BsTable, 'Routekaart', 'roadmap'),
             ])
         ),
       addListItem(
-        StructureBuilder,
         GrCircleInformation,
         'Over dit dashboard',
         'overDitDashboard'
       ),
-      addListItem(StructureBuilder, GrDashboard, 'Actueel', 'topicalPage'),
-      addListItem(
-        StructureBuilder,
-        BsMap,
-        'Over de risiconiveaus',
-        'overRisicoNiveaus'
-      ),
-      StructureBuilder.listItem()
+      addListItem(GrDashboard, 'Actueel', 'topicalPage'),
+      addListItem(BsMap, 'Over de risiconiveaus', 'overRisicoNiveaus'),
+      S.listItem()
         .title('Veelgestelde vragen')
         .icon(MdQuestionAnswer)
         .child(
-          StructureBuilder.list()
+          S.list()
             .title('Groepen en Vragen')
             .items([
-              ...StructureBuilder.documentTypeListItems().filter(
+              ...S.documentTypeListItems().filter(
                 (item) => item.getId() === 'veelgesteldeVragenGroups'
               ),
               addListItem(
-                StructureBuilder,
                 MdQuestionAnswer,
                 'Veelgestelde vragen',
                 'veelgesteldeVragen'
@@ -111,90 +106,51 @@ export default () =>
             ])
         ),
       addListItem(
-        StructureBuilder,
         BsCardChecklist,
         'Cijferverantwoording',
         'cijferVerantwoording'
       ),
       addListItem(
-        StructureBuilder,
         RiPagesFill,
         'Inschaling risiconiveau',
         'escalationLevelPage'
       ),
-      addListItem(StructureBuilder, RiPagesFill, 'Sterfte', 'deceasedPage'),
-      addListItem(
-        StructureBuilder,
-        RiPagesFill,
-        'Gedrag en naleving',
-        'behaviorPage'
-      ),
-      addListItem(
-        StructureBuilder,
-        RiPagesFill,
-        'Ziekenhuis opnames',
-        'hospitalPage'
-      ),
-      addListItem(
-        StructureBuilder,
-        RiPagesFill,
-        'IC opnames',
-        'intensiveCarePage'
-      ),
-      addListItem(
-        StructureBuilder,
-        RiPagesFill,
-        'Positieve testen',
-        'positiveTestsPage'
-      ),
-      addListItem(
-        StructureBuilder,
-        RiPagesFill,
-        'Reproductiegetal',
-        'reproductionPage'
-      ),
-      addListItem(StructureBuilder, RiPagesFill, 'Rioolwater', 'sewerPage'),
-      addListItem(
-        StructureBuilder,
-        RiPagesFill,
-        'Vaccinaties',
-        'vaccinationsPage'
-      ),
-      addListItem(
-        StructureBuilder,
-        GrCircleInformation,
-        'Toegankelijkheid',
-        'toegankelijkheid'
-      ),
+      addListItem(RiPagesFill, 'Sterfte', 'deceasedPage'),
+      addListItem(RiPagesFill, 'Gedrag en naleving', 'behaviorPage'),
+      addListItem(RiPagesFill, 'Ziekenhuis opnames', 'hospitalPage'),
+      addListItem(RiPagesFill, 'IC opnames', 'intensiveCarePage'),
+      addListItem(RiPagesFill, 'Positieve testen', 'positiveTestsPage'),
+      addListItem(RiPagesFill, 'Reproductiegetal', 'reproductionPage'),
+      addListItem(RiPagesFill, 'Rioolwater', 'sewerPage'),
+      addListItem(RiPagesFill, 'Vaccinaties', 'vaccinationsPage'),
+      addListItem(GrCircleInformation, 'Toegankelijkheid', 'toegankelijkheid'),
 
       // Add a visual divider (optional)
-      StructureBuilder.divider(),
+      S.divider(),
 
       // This returns an array of all the document types
-      // defined in schema.jStructureBuilder. We filter out those that we have
+      // defined in schema.jS. We filter out those that we have
       // defined the structure above
-      ...StructureBuilder.documentTypeListItems().filter(
+      ...S.documentTypeListItems().filter(
         (item) => !hiddenDocTypes.includes(item.getId() || '')
       ),
     ]);
 
 function addListItem(
-  builder: typeof StructureBuilder,
   icon: React.FC,
   title: string,
   schemaType: string,
   documentId = schemaType
 ) {
-  return builder
-    .listItem()
+  return S.listItem()
     .title(title)
     .schemaType(schemaType)
     .icon(icon)
     .child(
-      StructureBuilder.editor()
+      S.editor()
         .title(title)
         .schemaType(schemaType)
         .documentId(documentId)
-        .views([builder.view.form()])
+        .views([S.view.form()])
     );
 }

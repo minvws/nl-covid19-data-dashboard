@@ -24,8 +24,10 @@ import veelgesteldeVragenGroepen from './documents/pages/veelgestelde-vragen-gro
 import veelgesteldeVragen from './documents/pages/veelgestelde-vragen-page';
 import toegankelijkheid from './documents/toegankelijkheid';
 
-// Static messages
-import staticMessage from './documents/i18n/static-message';
+/**
+ * Import the ones using named exports
+ */
+import * as allDocuments from './documents';
 
 import localeBlock from './locale/locale-block';
 import localeRichContentBlock from './locale/locale-rich-content-block';
@@ -73,6 +75,7 @@ export default createSchema({
     reproductionPage,
     sewerPage,
     vaccinationsPage,
+    ...Object.values(allDocuments),
 
     /** RESTRICTIONS */
     restrictionGroup,
@@ -93,8 +96,5 @@ export default createSchema({
     localeBlock,
     localeRichContentBlock,
     localeText,
-
-    /** Static messages */
-    staticMessage,
   ]),
 });
