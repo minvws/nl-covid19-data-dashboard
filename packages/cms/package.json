@@ -15,16 +15,16 @@
     "format": "prettier --write \"src/**/*.{js,ts,tsx}\" \"*.{js,json,md,yml}\""
   },
   "dependencies": {
-    "@sanity/base": "^2.7.2",
+    "@sanity/base": "^2.7.4",
     "@sanity/components": "^2.2.6",
-    "@sanity/core": "^2.7.2",
+    "@sanity/core": "^2.7.4",
     "@sanity/dashboard": "^2.7.0",
-    "@sanity/default-layout": "^2.7.2",
+    "@sanity/default-layout": "^2.7.4",
     "@sanity/default-login": "^2.7.0",
-    "@sanity/desk-tool": "^2.7.2",
+    "@sanity/desk-tool": "^2.7.4",
     "@sanity/production-preview": "^2.2.6",
     "@sanity/ui": "^0.33.7",
-    "@sanity/vision": "^2.7.3",
+    "@sanity/vision": "^2.7.4",
     "braille": "^1.1.0",
     "download": "^8.0.0",
     "fs-extra": "^9.1.0",
@@ -39,7 +39,7 @@
     "sanity-plugin-tabs": "^2.0.1"
   },
   "devDependencies": {
-    "@sanity/cli": "^2.7.2",
+    "@sanity/cli": "^2.7.4",
     "@types/download": "^6.2.4",
     "@types/fs-extra": "^9.0.6",
     "@types/prompts": "^2.0.9",
