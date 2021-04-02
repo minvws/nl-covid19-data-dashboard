@@ -1,7 +1,8 @@
 import { NlTestedPerAgeGroupValue } from '@corona-dashboard/common';
+import { LegendShape } from '~/components-styled/legend';
 import { colors } from '~/style/theme';
 
-export const SERIES_CONFIG: {
+export const BASE_SERIES_CONFIG: {
   metricProperty: keyof Omit<
     NlTestedPerAgeGroupValue,
     'date_unix' | 'date_of_insertion_unix'
@@ -55,3 +56,8 @@ export const SERIES_CONFIG: {
     style: 'dashed',
   },
 ];
+
+export const UNDER_REPORTED_CONFIG: { shape: LegendShape; color: string } = {
+  shape: 'square',
+  color: colors.data.underReported,
+};
