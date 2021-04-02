@@ -8,7 +8,6 @@ import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
-import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
@@ -40,6 +39,9 @@ import {
   RegionalSewerValue,
   SafetyRegionProperties,
 } from '@corona-dashboard/common';
+import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
+import { SplitLineChart } from '~/components-styled/split-line-chart';
+import { colors } from '~/style/theme';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -153,21 +155,58 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <LineChartTile
+          <ChartTileWithTimeframe
             title={text.linechart_titel}
             timeframeOptions={['all', '5weeks']}
             ariaDescription={graphDescriptions.rioolwater_virusdeeltjes}
-            values={sewerAverages.values}
-            linesConfig={[
-              {
-                metricProperty: 'average',
-              },
-            ]}
             metadata={{
               source: text.bronnen.rivm,
             }}
-            valueAnnotation={siteText.waarde_annotaties.riool_normalized}
-          />
+          >
+            {(timeframe) => (
+              <SplitLineChart
+                values={sewerAverages.values}
+                timeframe={timeframe}
+                seriesConfig={[
+                  {
+                    type: 'split-line',
+                    metricProperty: 'average',
+                    label: 'Weekgemiddelde',
+                    splitPoints: [
+                      {
+                        value: 0,
+                        color: colors.data.scale.blue[0],
+                        label: '0 - 200',
+                      },
+                      {
+                        value: 200,
+                        color: colors.data.scale.blue[1],
+                        label: '200 - 400',
+                      },
+                      {
+                        value: 400,
+                        color: colors.data.scale.blue[2],
+                        label: '400 - 600',
+                      },
+                      {
+                        value: 600,
+                        color: colors.data.scale.blue[3],
+                        label: '600 - 800',
+                      },
+                      {
+                        value: 800,
+                        color: colors.data.scale.blue[4],
+                        label: '800 - 1000',
+                      },
+                    ],
+                  },
+                ]}
+                dataOptions={{
+                  valueAnnotation: siteText.waarde_annotaties.riool_normalized,
+                }}
+              />
+            )}
+          </ChartTileWithTimeframe>
 
           <ChoroplethTile
             title={text.map_titel}

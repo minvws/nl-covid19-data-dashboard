@@ -180,6 +180,18 @@ export function useHoverState<T extends TimestampedValue>({
               metricProperty: config.metricProperty,
               seriesConfigIndex: index,
             };
+          case 'split-line':
+            return {
+              seriesValue,
+              x: xScale(xValue),
+              y: yScale(yValue),
+              /**
+               * @TODO look up the color from the current split based on yValue
+               */
+              color: config.splitPoints[0].color,
+              metricProperty: config.metricProperty,
+              seriesConfigIndex: index,
+            };
         }
       })
       .filter(isDefined);

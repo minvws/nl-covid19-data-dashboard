@@ -1,3 +1,8 @@
+/**
+ * This a fork of TimeSeriesChart to do a spike on the split lines chart design
+ * for the new sewer water concept.
+ *
+ */
 import { TimestampedValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useTooltip } from '@visx/tooltip';
@@ -6,67 +11,42 @@ import { isDefined } from 'ts-is-present';
 import useResizeObserver from 'use-resize-observer';
 import { Box } from '~/components-styled/base';
 import { Legend } from '~/components-styled/legend';
-import { ValueAnnotation } from '~/components-styled/value-annotation';
 import { TimeframeOption } from '~/utils/timeframe';
 import { useElementSize } from '~/utils/use-element-size';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
+import { ValueAnnotation } from '~/components-styled/value-annotation';
 import {
   Axes,
-  Benchmark,
   ChartContainer,
   DateLineMarker,
   DateSpanMarker,
   Overlay,
   PointMarkers,
-  Series,
   TimespanAnnotation,
   Tooltip,
   TooltipData,
   TooltipFormatter,
-} from './components';
+  Benchmark,
+  Series,
+} from '~/components-styled/time-series-chart/components';
 import {
   calculateSeriesMaximum,
   DataOptions,
-  getTimeDomain,
   SeriesConfig,
-  useDimensions,
   useHoverState,
-  useLegendItems,
   useScales,
   useSeriesList,
   useValuesInTimeframe,
-} from './logic';
-export type { SeriesConfig } from './logic';
+  getTimeDomain,
+  useDimensions,
+  SplitLineDefinition,
+} from '~/components-styled/time-series-chart/logic';
+import { useLegendItems } from './logic';
 
-/**
- * This chart started as a fork from MultiLineChart. It attempts to create a
- * more generic abstraction that can replace LineChart, MultiLineChart,
- * AreaChart and later possibly something like the vaccine delivery chart.
- *
- * The main focus in this iteration is to try to reduce complexity as much as
- * possible while rethinking the abstractions on which we build.
- *
- * It assumes that all data for the chart (regardless of multiple sources) is
- * passed in a single type on the values prop. If some trends do not overlap in
- * time, the remaining values should contain null for those properties.
- *
- * The series config defines the type and visual properties for each of the
- * trends, like color and line/range/area type.
- *
- * Components and logic are split up onto smaller abstractions so they can be
- * used more easily in composition. For example the Marker component is now
- * several components rendered separately inside an Overlay container. We might
- * not be able to avoid creating multiple chart root components, but with
- * smaller abstractions we should be able to re-use most elements and logic.
- *
- * The scales for x and y are using the same type (LinearScale). This was done
- * to see if we can use the date_unix timestamps from the data directly
- * everywhere without unnecessary conversion to and from Date objects.
- */
-export type TimeSeriesChartProps<
+interface SplitLineChartProps<
   T extends TimestampedValue,
   C extends SeriesConfig<T>
-> = {
+> {
   tooltipTitle?: string;
   values: T[];
   seriesConfig: C;
@@ -84,15 +64,11 @@ export type TimeSeriesChartProps<
   timeframe?: TimeframeOption;
   formatTooltip?: TooltipFormatter<T>;
   /**
-   * The number of grid lines also by default determines the number of y-axis
-   * ticks, but the number of ticks can be overruled with specific tick values
-   * via the tickValues prop.
-   *
-   * This way you can also have many more grid lines than tick values, like in
-   * the vaccine support chart.
+   * number of grid lines and tick values should be determined by the splitPoints
+   * config.
    */
-  numGridLines?: number;
-  tickValues?: number[];
+  // numGridLines?: number;
+  // tickValues?: number[];
   formatTickValue?: (value: number) => string;
   paddingLeft?: number;
   /**
@@ -110,9 +86,9 @@ export type TimeSeriesChartProps<
    * will result in a user interacting with the single nearest point only.
    */
   markNearestPointOnly?: boolean;
-};
+}
 
-export function TimeSeriesChart<
+export function SplitLineChart<
   T extends TimestampedValue,
   C extends SeriesConfig<T>
 >({
@@ -123,16 +99,11 @@ export function TimeSeriesChart<
   timeframe = 'all',
   formatTooltip,
   dataOptions,
-  numGridLines = 3,
-  tickValues: yTickValues,
   formatTickValue: formatYTickValue,
   paddingLeft,
   ariaLabelledBy,
   tooltipTitle,
-  disableLegend,
-  onSeriesClick,
-  markNearestPointOnly,
-}: TimeSeriesChartProps<T, C>) {
+}: SplitLineChartProps<T, C>) {
   const {
     tooltipData,
     tooltipLeft = 0,
@@ -164,11 +135,20 @@ export function TimeSeriesChart<
     paddingLeft ?? yAxisWidth + 10 // 10px seems to be enough padding
   );
 
+  /**
+   * @TODO generate legend items from the splitPoint values and colors
+   */
   const legendItems = useLegendItems(seriesConfig, dataOptions);
 
   const values = useValuesInTimeframe(allValues, timeframe);
 
   const seriesList = useSeriesList(values, seriesConfig);
+
+  const splitLineConfig = seriesConfig.find(
+    (x) => x.type === 'split-line'
+  ) as SplitLineDefinition<T>;
+
+  const yTickValues = splitLineConfig.splitPoints.map((x) => x.value);
 
   /**
    * The maximum is calculated over all values, because you don't want the
@@ -188,7 +168,7 @@ export function TimeSeriesChart<
       values,
       maximumValue: seriesMax,
       bounds,
-      numTicks: yTickValues?.length || numGridLines,
+      numTicks: yTickValues.length,
     }
   );
 
@@ -205,7 +185,6 @@ export function TimeSeriesChart<
     xScale,
     yScale,
     timespanAnnotations,
-    markNearestPointOnly,
   });
 
   useEffect(() => {
@@ -223,7 +202,6 @@ export function TimeSeriesChart<
           value: values[valuesIndex],
           config: seriesConfig,
           configIndex: nearestPoint.seriesConfigIndex,
-          markNearestPointOnly,
           options: dataOptions || {},
           /**
            * Pass the full annotation data. We could just pass the index because
@@ -249,16 +227,13 @@ export function TimeSeriesChart<
     showTooltip,
     dataOptions,
     timespanAnnotations,
-    markNearestPointOnly,
   ]);
 
   useOnClickOutside([sizeRef], () => tooltipData && hideTooltip());
 
   const handleClick = useCallback(() => {
-    if (onSeriesClick && tooltipData) {
-      onSeriesClick(seriesConfig[tooltipData.configIndex], tooltipData.value);
-    }
-  }, [onSeriesClick, seriesConfig, tooltipData]);
+    /* Nothing to do, but ChartContainer wants a click handler */
+  }, []);
 
   return (
     <Box ref={sizeRef}>
@@ -277,7 +252,7 @@ export function TimeSeriesChart<
         >
           <Axes
             bounds={bounds}
-            numGridLines={numGridLines}
+            numGridLines={yTickValues.length}
             yTickValues={yTickValues}
             xTickValues={xTickValues}
             formatYTickValue={formatYTickValue}
@@ -362,7 +337,7 @@ export function TimeSeriesChart<
         )}
       </Box>
 
-      {!disableLegend && legendItems.length > 0 && (
+      {legendItems.length > 0 && (
         <Box pl={paddingLeft}>
           <Legend items={legendItems} />
         </Box>
