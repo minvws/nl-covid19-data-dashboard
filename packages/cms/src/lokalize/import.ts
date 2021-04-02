@@ -73,10 +73,6 @@ for (const [key, dataText] of Object.entries(nl)) {
       }
 
       return {
-        /**
-         * @TODO we can maybe choose a different type here based on the length
-         * of value
-         */
         _type: 'lokalizeText',
         _key: path, // _key is required for arrays in Sanity
         path,
