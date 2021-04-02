@@ -6,8 +6,6 @@ import { ChartTileContainer } from './chart-tile-container';
 import { ChartTimeControls } from './chart-time-controls';
 import { MetadataProps } from './metadata';
 import { Heading, Text } from './typography';
-// import { assert } from '~/utils/assert';
-// import slugify from 'slugify';
 import { asResponsiveArray } from '~/style/utils';
 
 interface ChartTileHeaderProps {
