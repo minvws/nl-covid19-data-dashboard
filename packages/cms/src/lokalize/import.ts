@@ -35,15 +35,22 @@ let issueCounter = 0;
 
 for (const [key, dataText] of Object.entries(nl)) {
   /**
-   * Some keys contain a string directly, so they are not grouped under a
-   * subject. Not sure if it's worth supporting this use-case. Might be better
-   * to move them first to a different location.
+   * Some root-level keys only contain a string instead of an object
+   * structure. We can't handle those in our logic, so they are ignored. We
+   * should manually move these keys to a different location. Luckily there
+   * are only a few of them.
    */
   if (typeof dataText === 'string') {
     console.warn(`Ignoring string value for key ${key}`);
     issueCounter++;
     continue;
   }
+
+  /**
+   * The safe option prevents automatic conversion of arrays. Since they are not
+   * supported by our logic we want to keep them as arrays so they can be
+   * detected and ignored.
+   */
   const flatText = flatten(dataText, { safe: true }) as Record<string, string>;
 
   const texts = Object.entries(flatText)
@@ -54,6 +61,9 @@ for (const [key, dataText] of Object.entries(nl)) {
        */
       if (!value) return;
 
+      /**
+       * Anything that is not a string here should be an array
+       */
       if (typeof value !== 'string') {
         console.warn(`Ignoring value type ${typeof value} for path ${path}`);
         issueCounter++;
