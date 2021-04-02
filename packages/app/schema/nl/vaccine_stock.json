@@ -18,28 +18,28 @@
       "additionalProperties": false,
       "properties": {
         "total_available": {
-          "type": "integer"
+          "type": ["integer", "null"]
         },
         "total_not_available": {
-          "type": "integer"
+          "type": ["integer", "null"]
         },
         "bio_n_tech_pfizer_available": {
-          "type": "integer"
+          "type": ["integer", "null"]
         },
         "bio_n_tech_pfizer_not_available": {
-          "type": "integer"
+          "type": ["integer", "null"]
         },
         "moderna_available": {
-          "type": "integer"
+          "type": ["integer", "null"]
         },
         "moderna_not_available": {
-          "type": "integer"
+          "type": ["integer", "null"]
         },
         "astra_zeneca_available": {
-          "type": "integer"
+          "type": ["integer", "null"]
         },
         "astra_zeneca_not_available": {
-          "type": "integer"
+          "type": ["integer", "null"]
         },
         "date_of_insertion_unix": {
           "type": "integer"
