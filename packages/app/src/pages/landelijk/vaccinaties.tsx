@@ -453,9 +453,12 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
           <VaccineDeliveryAreaChart data={data} />
 
-          <TwoKpiSection>
+          {(text.expected_page_additions.description ||
+            additions.length > 0) && (
             <KpiTile title={text.expected_page_additions.title}>
-              <Text>{text.expected_page_additions.description}</Text>
+              {text.expected_page_additions.description && (
+                <Text>{text.expected_page_additions.description}</Text>
+              )}
               {additions.length > 0 && (
                 <ul>
                   {additions.map((addition) => (
@@ -466,7 +469,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 </ul>
               )}
             </KpiTile>
-          </TwoKpiSection>
+          )}
         </TileList>
       </NationalLayout>
     </Layout>
