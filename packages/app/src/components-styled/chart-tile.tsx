@@ -75,8 +75,6 @@ export function ChartTile({
   timeframeOptions,
   timeframeInitialValue,
   hasAdditionalNavigation,
-  ariaLabelledBy,
-  ariaDescription,
 }: ChartTileProps) {
   const [timeframe, setTimeframe] = useState<TimeframeOption>();
 
