@@ -7,7 +7,7 @@ import {
 import { localPoint } from '@visx/event';
 import { bisectCenter } from 'd3-array';
 import { ScaleLinear } from 'd3-scale';
-import { isEmpty } from 'lodash';
+import { isEmpty, throttle } from 'lodash';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
 import { Padding, TimespanAnnotationConfig } from './common';
@@ -64,6 +64,12 @@ export function useHoverState<T extends TimestampedValue>({
   markNearestPointOnly,
 }: UseHoverStateArgs<T>): UseHoverStateResponse<T> {
   const [point, setPoint] = useState<Point>();
+
+  const setPointThrottled = useMemo(
+    () => throttle((x: Point | undefined) => setPoint(x), 1000 / 60),
+    [setPoint]
+  );
+
   const timeoutRef = useRef<any>();
 
   const valuesDateUnix = useMemo(
@@ -129,10 +135,10 @@ export function useHoverState<T extends TimestampedValue>({
         clearTimeout(timeoutRef.current);
       }
 
-      const mousePoint = localPoint(event);
-      setPoint(mousePoint || undefined);
+      const mousePoint = localPoint(event) || undefined;
+      setPointThrottled(mousePoint);
     },
-    [values]
+    [values, setPointThrottled]
   );
 
   const hoverState = useMemo(() => {
