@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "nl_downscaling",
+  "type": "object",
+  "properties": {
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/value"
+      }
+    },
+    "last_value": {
+      "$ref": "#/definitions/value"
+    }
+  },
+  "required": ["values", "last_value"],
+  "additionalProperties": false,
+  "definitions": {
+    "value": {
+      "title": "nl_downscaling_value",
+      "type": "object",
+      "properties": {
+        "is_nl_downscale_possible": {
+          "type": "boolean"
+        },
+        "is_reproduction_downscale_possibile": {
+          "type": "boolean"
+        },
+        "is_intensive_care_nice_downscale_possible": {
+          "type": "boolean"
+        },
+        "is_hospital_nice_downscale_possible": {
+          "type": "boolean"
+        },
+        "intensive_care_nice_benchmark": {
+          "type": "number"
+        },
+        "reproduction_benchmark": {
+          "type": "number"
+        },
+        "hospital_nice_benchmark": {
+          "type": "number"
+        },
+        "days_needed_for_downscale": {
+          "type": "number"
+        },
+        "date_of_insertion_unix": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "is_nl_downscale_possible",
+        "is_reproduction_downscale_possibile",
+        "is_intensive_care_nice_downscale_possible",
+        "is_hospital_nice_downscale_possible",
+        "intensive_care_nice_benchmark",
+        "reproduction_benchmark",
+        "hospital_nice_benchmark",
+        "days_needed_for_downscale",
+        "date_of_insertion_unix"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
