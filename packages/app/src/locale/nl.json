@@ -49,7 +49,7 @@
       "veiligheidsregio": "Veiligheidsregio's",
       "gemeente": "Gemeentes",
       "over_risiconiveaus": "Over de risiconiveaus",
-      "veelgestelde_vragen": "Veelgestelde vragen",
+      "veelgestelde_vragen": "Veelgestelde vragen over dit dashboard",
       "actueel": "Actueel",
       "toegankelijkheid": "Toegankelijkheid"
     },
@@ -93,7 +93,7 @@
     },
     "chart_bedbezetting": {
       "title": "Bezetting IC-bedden door de tijd heen",
-      "description": "Deze grafiek toont het verloop van het aantal IC-bedden dat is bezet door patiënten met COVID-19. De gegevens vóór 1 juni zijn mogelijk minder betrouwbaar i.v.m. het opzetten van een registratie door het LCPS.",
+      "description": "Deze grafiek laat het aantal IC-bedden zien dat door de tijd heen is bezet door patiënten met COVID-19. Het gaat daarbij niet alleen om de dag van opname in het ziekenhuis, maar om alle dagen waarop patiënten met COVID-19 in het ziekenhuis lagen.",
       "legend_trend_label": "Bezetting IC-bedden",
       "legend_inaccurate_label": "Cijfers zijn minder nauwkeurig"
     },
