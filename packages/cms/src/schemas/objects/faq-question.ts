@@ -11,13 +11,32 @@ export default {
   name: 'faqQuestion',
   type: 'object',
   fields: [
-    { name: 'title', type: 'localeString', title: 'Titel' },
-    { name: 'content', type: 'localeBlock', title: 'Inhoud' },
+    {
+      name: 'title',
+      type: 'localeString',
+      title: 'Titel',
+      validation: (Rule: any) =>
+        Rule.fields({
+          nl: (fieldRule: any) => fieldRule.reset().required(),
+          en: (fieldRule: any) => fieldRule.reset().required(),
+        }),
+    },
+    {
+      name: 'content',
+      type: 'localeBlock',
+      title: 'Inhoud',
+      validation: (Rule: any) =>
+        Rule.fields({
+          nl: (fieldRule: any) => fieldRule.reset().required(),
+          en: (fieldRule: any) => fieldRule.reset().required(),
+        }),
+    },
     {
       name: 'group',
       type: 'reference',
       to: [{ type: 'veelgesteldeVragenGroups' }],
       title: 'Groep',
+      validation: (Rule: any) => Rule.reset().required(),
     },
   ],
   preview: {
