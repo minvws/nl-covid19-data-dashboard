@@ -20,16 +20,16 @@
       "title": "nl_downscaling_value",
       "type": "object",
       "properties": {
-        "is_nl_downscale_possible": {
+        "is_nl_possible": {
           "type": "boolean"
         },
-        "is_reproduction_downscale_possibile": {
+        "is_reproduction_possibile": {
           "type": "boolean"
         },
-        "is_intensive_care_nice_downscale_possible": {
+        "is_intensive_care_nice_possible": {
           "type": "boolean"
         },
-        "is_hospital_nice_downscale_possible": {
+        "is_hospital_nice_possible": {
           "type": "boolean"
         },
         "intensive_care_nice_benchmark": {
@@ -49,10 +49,10 @@
         }
       },
       "required": [
-        "is_nl_downscale_possible",
-        "is_reproduction_downscale_possibile",
-        "is_intensive_care_nice_downscale_possible",
-        "is_hospital_nice_downscale_possible",
+        "is_nl_possible",
+        "is_reproduction_possibile",
+        "is_intensive_care_nice_possible",
+        "is_hospital_nice_possible",
         "intensive_care_nice_benchmark",
         "reproduction_benchmark",
         "hospital_nice_benchmark",
