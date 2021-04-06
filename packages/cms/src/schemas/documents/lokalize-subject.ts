@@ -21,11 +21,6 @@ export const lokalizeSubject = {
   type: 'document',
   title: 'Lokalize',
   icon: FaLanguage,
-  /**
-   * We could limit what actions are allowed on these documents. It doesn't seem
-   * there is a way to limit this based on user role.
-   */
-  __experimental_actions: ['create', 'update', 'delete', 'publish'],
   fields: [
     {
       title: 'Key',
