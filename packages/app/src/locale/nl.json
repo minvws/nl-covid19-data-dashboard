@@ -287,7 +287,7 @@
     "lineLegendLabel": "Besmettelijke mensen",
     "geen_signaalwaarde_beschikbaar": "Vanwege een storing is deze informatie op dit moment helaas niet compleet. Aan een oplossing wordt gewerkt.",
     "geen_signaalwaarde_beschikbaar_lees_waarom": "Lees hier waarom",
-    "toelichting_pagina": "Als iemand het coronavirus oploopt, dan is deze persoon een tijd lang besmettelijk voor anderen. Hoe meer personen besmettelijk zijn, des te sneller kan de epidemie zich verspreiden. Het exacte aantal besmettelijke mensen is onbekend, maar we kunnen wel aangeven of het gaat om tientallen, honderden, duizenden of meer.",
+    "toelichting_pagina": "Als iemand het coronavirus oploopt, dan is deze persoon een tijd lang besmettelijk voor anderen. Hoe lang dit duurt verschilt van persoon tot persoon. Het aantal besmettingen blijft een schatting, maar we weten wel of het gaat om tientallen, honderden, duizenden of meer. ",
     "barscale_titel": "Gemiddeld aantal besmettelijke mensen per 100.000 inwoners",
     "barscale_screenreader_text": "{{value}} besmettelijke mensen",
     "cijfer_titel": "Aantal besmettelijke mensen in Nederland:",
@@ -2892,7 +2892,7 @@
   },
   "infected_per_age_group": {
     "title": "Aantal positieve testen per leeftijdsgroep door de tijd heen",
-    "description": "Deze grafiek laat zien van hoeveel mensen in een bepaalde leeftijdsgroep gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
+    "description": "Deze grafiek laat zien hoeveel mensen in een bepaalde leeftijdsgroep positief getest zijn op het coronavirus, per 100.000 inwoners. In de grafiek worden gemiddelden over de afgelopen zeven dagen getoond. Let op dat de cijfers niet overeenkomen met het aantal positief geteste mensen dat op andere plekken op deze pagina staat. Dit komt doordat de gegevens uit een andere databron komen. In dit bestand worden andere datums gebruikt, namelijk vooral de eerste ziektedag. Lees hier meer over in de cijferverantwoording.",
     "legend": {
       "infected_age_0_9_per_100k": "0-9",
       "infected_age_10_19_per_100k": "10-19",
@@ -2907,7 +2907,7 @@
       "infected_overall_per_100k": "Alle leeftijden"
     },
     "reset_button_label": "Reset",
-    "legend_help_text": "Selecteer één of meerdere leeftijdsgroepen om deze apart te bekijken.",
+    "legend_help_text": "Selecteer één of meerdere leeftijdsgroepen om deze te bekijken",
     "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
     "tooltip_labels": {
       "inaccurate": "Niet compleet"
