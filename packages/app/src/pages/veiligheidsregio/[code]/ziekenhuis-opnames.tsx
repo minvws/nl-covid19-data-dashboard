@@ -1,21 +1,24 @@
+import {
+  MunicipalHospitalNiceValue,
+  MunicipalityProperties,
+} from '@corona-dashboard/common';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
+import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
-import { LineChartTile } from '~/components-styled/line-chart-tile';
-import { addBackgroundRectangleCallback } from '~/components-styled/line-chart/logic/background-rectangle';
-import { Layout } from '~/domain/layout/layout';
-import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { TileList } from '~/components-styled/tile-list';
+import { TimeSeriesChart } from '~/components-styled/time-series-chart';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { HospitalAdmissionsMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/municipal-hospital-admissions-tooltip';
 import regionCodeToMunicipalCodeLookup from '~/data/regionCodeToMunicipalCodeLookup';
-import { UnderReportedTooltip } from '~/domain/underreported/under-reported-tooltip';
+import { Layout } from '~/domain/layout/layout';
+import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
@@ -29,13 +32,9 @@ import {
   getVrData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
-import { getTrailingDateRange } from '~/utils/get-trailing-date-range';
+import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import {
-  MunicipalHospitalNiceValue,
-  MunicipalityProperties,
-} from '@corona-dashboard/common';
 
 export { getStaticPaths } from '~/static-paths/vr';
 
@@ -59,13 +58,15 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   const reverseRouter = useReverseRouter();
 
   const text = siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
-  const graphDescriptions = siteText.accessibility.grafieken;
   const lastValue = data.hospital_nice.last_value;
 
   const municipalCodes = regionCodeToMunicipalCodeLookup[data.code];
   const selectedMunicipalCode = municipalCodes ? municipalCodes[0] : undefined;
 
-  const underReportedRange = getTrailingDateRange(data.hospital_nice.values, 4);
+  const underReportedRange = getBoundaryDateStartUnix(
+    data.hospital_nice.values,
+    4
+  );
 
   const metadata = {
     ...siteText.veiligheidsregio_index.metadata,
@@ -152,50 +153,36 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             />
           </ChoroplethTile>
 
-          <LineChartTile
+          <ChartTileWithTimeframe
             metadata={{ source: text.bronnen.rivm }}
             title={text.linechart_titel}
             description={text.linechart_description}
-            ariaDescription={graphDescriptions.ziekenhuis_opnames}
-            values={data.hospital_nice.values}
-            formatTooltip={(values) => {
-              const value = values[0];
-              const isInrange =
-                value.__date >= underReportedRange[0] &&
-                value.__date <= underReportedRange[1];
-              return (
-                <UnderReportedTooltip
-                  value={value}
-                  isInUnderReportedRange={isInrange}
-                  underReportedText={siteText.common.incomplete}
-                />
-              );
-            }}
-            linesConfig={[
-              {
-                metricProperty: 'admissions_on_date_of_admission',
-              },
-            ]}
-            componentCallback={addBackgroundRectangleCallback(
-              underReportedRange,
-              {
-                fill: colors.data.underReported,
-              }
+          >
+            {(timeframe) => (
+              <TimeSeriesChart
+                values={data.hospital_nice.values}
+                timeframe={timeframe}
+                seriesConfig={[
+                  {
+                    type: 'area',
+                    metricProperty: 'admissions_on_date_of_admission',
+                    label: text.linechart_legend_titel,
+                    color: colors.data.primary,
+                  },
+                ]}
+                dataOptions={{
+                  timespanAnnotations: [
+                    {
+                      start: underReportedRange,
+                      end: Infinity,
+                      label: text.linechart_legend_underreported_titel,
+                      shortLabel: siteText.common.incomplete,
+                    },
+                  ],
+                }}
+              />
             )}
-            legendItems={[
-              {
-                color: colors.data.primary,
-                label: text.linechart_legend_titel,
-                shape: 'line',
-              },
-              {
-                color: colors.data.underReported,
-                label: text.linechart_legend_underreported_titel,
-                shape: 'square',
-              },
-            ]}
-            showLegend
-          />
+          </ChartTileWithTimeframe>
         </TileList>
       </SafetyRegionLayout>
     </Layout>
