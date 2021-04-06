@@ -269,9 +269,9 @@
     },
     "tooltip_labels": {
       "infected_per_100k": "Confirmed cases per 100.000",
-      "infected_percentage": "Percentage positieve testen",
-      "tested_total": "Totaal aantal testen",
-      "infected": "Aantal positieve testen"
+      "infected_percentage": "Percentage confirmed cases",
+      "tested_total": "Total amount of confirmed cases",
+      "infected": "Number of confirmed cases"
     }
   },
   "besmettelijke_personen": {
