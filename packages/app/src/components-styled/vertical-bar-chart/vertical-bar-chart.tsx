@@ -1,42 +1,40 @@
 import { TimestampedValue } from '@corona-dashboard/common';
-import { useTooltip } from '@visx/tooltip';
 import { Bar } from '@visx/shape';
+import { useTooltip } from '@visx/tooltip';
 import { first, last } from 'lodash';
 import { useCallback, useEffect, useMemo } from 'react';
 import useResizeObserver from 'use-resize-observer';
-import { useElementSize } from '~/utils/use-element-size';
-import { useOnClickOutside } from '~/utils/use-on-click-outside';
-import { TimeframeOption } from '~/utils/timeframe';
 import { Box } from '~/components-styled/base';
-
 // Time Series Chart components and logic
 import {
+  Axes,
   ChartContainer,
   Overlay,
-  Axes,
 } from '~/components-styled/time-series-chart/components';
 import {
   DataOptions,
   useDimensions,
   useValuesInTimeframe,
 } from '~/components-styled/time-series-chart/logic';
-
+import { TimeframeOption } from '~/utils/timeframe';
+import { useElementSize } from '~/utils/use-element-size';
+import { useOnClickOutside } from '~/utils/use-on-click-outside';
+import {
+  BarHover,
+  BarTrend,
+  DateMarker,
+  Tooltip,
+  TooltipData,
+  TooltipFormatter,
+} from './components';
 // Bar Chart specific components and logic
 import {
   SeriesConfig,
-  useSeriesList,
   useCalculatedSeriesExtremes,
-  useScales,
   useHoverState,
+  useScales,
+  useSeriesList,
 } from './logic';
-import {
-  BarTrend,
-  DateMarker,
-  BarHover,
-  TooltipData,
-  TooltipFormatter,
-  Tooltip,
-} from './components';
 
 /**
  * Reference TimeSeriesChart for additional information on props
@@ -146,16 +144,20 @@ export function VerticalBarChart<
     if (hoverState) {
       const { valuesIndex, nearestPoint } = hoverState;
 
-      showTooltip({
-        tooltipData: {
-          value: values[valuesIndex],
-          configIndex: nearestPoint.seriesConfigIndex,
-          config: seriesConfig,
-          options: dataOptions || {},
-        },
-        tooltipLeft: nearestPoint.x,
-        tooltipTop: nearestPoint.y,
-      });
+      if (!values[valuesIndex]) {
+        hideTooltip();
+      } else {
+        showTooltip({
+          tooltipData: {
+            value: values[valuesIndex],
+            configIndex: nearestPoint.seriesConfigIndex,
+            config: seriesConfig,
+            options: dataOptions || {},
+          },
+          tooltipLeft: nearestPoint.x,
+          tooltipTop: nearestPoint.y,
+        });
+      }
     } else {
       hideTooltip();
     }

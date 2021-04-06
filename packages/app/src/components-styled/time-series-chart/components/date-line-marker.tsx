@@ -13,6 +13,44 @@ type LineProps = {
   color: string;
 };
 
+interface DateLineMarkerProps<T extends TimestampedValue> {
+  point: HoveredPoint<T>;
+  lineColor?: string;
+  /**
+   * The original data value gets passed in so that we can render the original
+   * date start/end in case of the data span value
+   */
+  value: T;
+}
+
+export function DateLineMarker<T extends TimestampedValue>({
+  lineColor = colors.data.primary,
+  point,
+  value,
+}: DateLineMarkerProps<T>) {
+  const isDateSpan = isDateSpanValue(value);
+  const { formatDateFromSeconds } = useIntl();
+
+  return (
+    <Container style={{ transform: `translateX(${point.x}px)` }}>
+      <Line color={lineColor} />
+      <LabelContainer>
+        <Label>
+          {isDateSpan
+            ? `${formatDateFromSeconds(
+                (value as DateSpanValue).date_start_unix,
+                'axis'
+              )} - ${formatDateFromSeconds(
+                (value as DateSpanValue).date_end_unix,
+                'axis'
+              )}`
+            : formatDateFromSeconds(point.seriesValue.__date_unix, 'axis')}
+        </Label>
+      </LabelContainer>
+    </Container>
+  );
+}
+
 const LabelContainer = styled.div({
   display: 'flex',
   justifyContent: 'center',
@@ -48,45 +86,3 @@ const Container = styled.div(
     bottom: 0,
   })
 );
-
-interface DateLineMarkerProps<T extends TimestampedValue> {
-  point: HoveredPoint<T>;
-  lineColor?: string;
-  /**
-   * The original data value gets passed in so that we can render the original
-   * date start/end in case of the data span value
-   */
-  value: T;
-}
-
-export function DateLineMarker<T extends TimestampedValue>({
-  lineColor = colors.data.primary,
-  point,
-  value,
-}: DateLineMarkerProps<T>) {
-  const isDateSpan = isDateSpanValue(value);
-  const { formatDateFromSeconds } = useIntl();
-
-  return (
-    <Container
-      style={{
-        left: point.x,
-      }}
-    >
-      <Line color={lineColor} />
-      <LabelContainer>
-        <Label>
-          {isDateSpan
-            ? `${formatDateFromSeconds(
-                (value as DateSpanValue).date_start_unix,
-                'axis'
-              )} - ${formatDateFromSeconds(
-                (value as DateSpanValue).date_end_unix,
-                'axis'
-              )}`
-            : formatDateFromSeconds(point.seriesValue.__date_unix, 'axis')}
-        </Label>
-      </LabelContainer>
-    </Container>
-  );
-}

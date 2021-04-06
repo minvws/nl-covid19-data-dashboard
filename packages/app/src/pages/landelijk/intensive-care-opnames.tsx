@@ -2,18 +2,17 @@ import { getLastFilledValue } from '@corona-dashboard/common';
 import Arts from '~/assets/arts.svg';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
+import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
-import { LineChartTile } from '~/components-styled/line-chart-tile';
-import { addBackgroundRectangleCallback } from '~/components-styled/line-chart/logic';
 import { PageBarScale } from '~/components-styled/page-barscale';
 import { TileList } from '~/components-styled/tile-list';
+import { TimeSeriesChart } from '~/components-styled/time-series-chart';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
-import { UnderReportedTooltip } from '~/domain/underreported/under-reported-tooltip';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
@@ -26,11 +25,7 @@ import {
   getNlData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
-import { createDate } from '~/utils/createDate';
-import {
-  DateRange,
-  getTrailingDateRange,
-} from '~/utils/get-trailing-date-range';
+import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -54,12 +49,10 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
 
   const bedsLastValue = getLastFilledValue(data.intensive_care_lcps);
 
-  const intakeUnderReportedRange = getTrailingDateRange(dataIntake.values, 4);
-
-  const lcpsOldDataRange = [
-    createDate(data.intensive_care_lcps.values[0].date_unix),
-    new Date('1 June 2020'),
-  ] as DateRange;
+  const intakeUnderReportedRange = getBoundaryDateStartUnix(
+    dataIntake.values,
+    4
+  );
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -129,92 +122,72 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <LineChartTile
+          <ChartTileWithTimeframe
             title={text.linechart_titel}
             description={text.linechart_description}
-            values={dataIntake.values}
-            ariaDescription={graphDescriptions.intensive_care_opnames}
-            linesConfig={[
-              {
-                metricProperty: 'admissions_on_date_of_admission',
-              },
-            ]}
-            signaalwaarde={10}
             metadata={{ source: text.bronnen.nice }}
-            formatTooltip={(values) => {
-              const value = values[0];
-              return (
-                <UnderReportedTooltip
-                  value={value}
-                  isInUnderReportedRange={
-                    value.__date >= intakeUnderReportedRange[0]
-                  }
-                  underReportedText={siteText.common.incomplete}
-                />
-              );
-            }}
-            componentCallback={addBackgroundRectangleCallback(
-              intakeUnderReportedRange,
-              {
-                fill: colors.data.underReported,
-              }
+          >
+            {(timeframe) => (
+              <TimeSeriesChart
+                values={dataIntake.values}
+                timeframe={timeframe}
+                ariaLabelledBy={graphDescriptions.intensive_care_opnames}
+                dataOptions={{
+                  benchmark: {
+                    value: 10,
+                    label: siteText.common.signaalwaarde,
+                  },
+                  timespanAnnotations: [
+                    {
+                      start: intakeUnderReportedRange,
+                      end: Infinity,
+                      label: text.linechart_legend_inaccurate_label,
+                      shortLabel: siteText.common.incomplete,
+                    },
+                  ],
+                }}
+                seriesConfig={[
+                  {
+                    type: 'area',
+                    metricProperty: 'admissions_on_date_of_admission',
+                    label: text.linechart_legend_trend_label,
+                    color: colors.data.primary,
+                  },
+                ]}
+              />
             )}
-            legendItems={[
-              {
-                color: colors.data.primary,
-                label: text.linechart_legend_trend_label,
-                shape: 'line',
-              },
-              {
-                color: colors.data.underReported,
-                label: text.linechart_legend_inaccurate_label,
-                shape: 'square',
-              },
-            ]}
-            showLegend
-          />
+          </ChartTileWithTimeframe>
 
-          <LineChartTile
+          <ChartTileWithTimeframe
             title={text.chart_bedbezetting.title}
             description={text.chart_bedbezetting.description}
-            values={data.intensive_care_lcps.values}
-            linesConfig={[
-              {
-                metricProperty: 'beds_occupied_covid',
-              },
-            ]}
             metadata={{ source: text.bronnen.lnaz }}
-            componentCallback={addBackgroundRectangleCallback(
-              lcpsOldDataRange,
-              {
-                fill: colors.data.underReported,
-              }
+          >
+            {(timeframe) => (
+              <TimeSeriesChart
+                values={data.intensive_care_lcps.values}
+                timeframe={timeframe}
+                dataOptions={{
+                  timespanAnnotations: [
+                    {
+                      start: data.intensive_care_lcps.values[0].date_unix,
+                      end: new Date('1 June 2020').getTime() / 1000,
+                      label: text.chart_bedbezetting.legend_inaccurate_label,
+                      shortLabel: siteText.common.incomplete,
+                    },
+                  ],
+                }}
+                seriesConfig={[
+                  {
+                    type: 'area',
+                    metricProperty: 'beds_occupied_covid',
+                    label: text.chart_bedbezetting.legend_trend_label,
+                    color: colors.data.primary,
+                  },
+                ]}
+              />
             )}
-            formatTooltip={(values) => {
-              const value = values[0];
-
-              return (
-                <UnderReportedTooltip
-                  value={value}
-                  isInUnderReportedRange={value.__date < lcpsOldDataRange[1]}
-                  underReportedText={siteText.common.incomplete}
-                />
-              );
-            }}
-            legendItems={[
-              {
-                color: colors.data.primary,
-                label: text.chart_bedbezetting.legend_trend_label,
-                shape: 'line',
-              },
-              {
-                color: colors.data.underReported,
-                label: text.chart_bedbezetting.legend_inaccurate_label,
-                shape: 'square',
-              },
-            ]}
-            showLegend
-          />
+          </ChartTileWithTimeframe>
         </TileList>
       </NationalLayout>
     </Layout>
