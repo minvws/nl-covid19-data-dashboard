@@ -71,15 +71,17 @@ export function ChartTile({
   children,
   metadata,
   timeframeOptions,
-  timeframeInitialValue,
+  timeframeInitialValue = 'all',
   hasAdditionalNavigation,
 }: ChartTileProps) {
   const [timeframe, setTimeframe] = useState<TimeframeOption>();
 
   useEffect(() => {
-    if (timeframeInitialValue) setTimeframe(timeframeInitialValue);
-    if (timeframeOptions && !timeframeInitialValue)
+    if (timeframeOptions && !timeframeOptions.includes(timeframeInitialValue)) {
       setTimeframe(timeframeOptions[0]);
+      return;
+    }
+    setTimeframe(timeframeInitialValue);
   }, [timeframeOptions, timeframeInitialValue]);
 
   return (
@@ -97,7 +99,8 @@ export function ChartTile({
           />
         )}
       </ChartTileHeader>
-      {timeframeOptions && typeof children === 'function'
+      {(timeframeOptions || timeframeInitialValue) &&
+      typeof children === 'function'
         ? children(timeframe as TimeframeOption)
         : children}
     </ChartTileContainer>
