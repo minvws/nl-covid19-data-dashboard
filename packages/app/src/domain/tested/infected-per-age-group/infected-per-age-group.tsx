@@ -81,7 +81,7 @@ export function InfectedPerAgeGroup({
     .concat([underReportedLegendItem]);
 
   /* Conditionally let tooltip span over multiple columns */
-  const hasMultipleColumns = list.length === 0 || list.length > 4;
+  const hasTwoColumns = list.length === 0 || list.length > 4;
 
   return (
     <>
@@ -92,10 +92,7 @@ export function InfectedPerAgeGroup({
         height={breakpoints.md ? 300 : 250}
         disableLegend
         formatTooltip={(data) => (
-          <TooltipSeriesList
-            data={data}
-            hasMultipleColumns={hasMultipleColumns}
-          />
+          <TooltipSeriesList data={data} hasTwoColumns={hasTwoColumns} />
         )}
         dataOptions={{
           timespanAnnotations: [
