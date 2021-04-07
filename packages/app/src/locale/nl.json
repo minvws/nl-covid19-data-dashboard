@@ -49,7 +49,7 @@
       "veiligheidsregio": "Veiligheidsregio's",
       "gemeente": "Gemeentes",
       "over_risiconiveaus": "Over de risiconiveaus",
-      "veelgestelde_vragen": "Veelgestelde vragen",
+      "veelgestelde_vragen": "Veelgestelde vragen over dit dashboard",
       "actueel": "Actueel",
       "toegankelijkheid": "Toegankelijkheid"
     },
@@ -93,7 +93,7 @@
     },
     "chart_bedbezetting": {
       "title": "Bezetting IC-bedden door de tijd heen",
-      "description": "Deze grafiek toont het verloop van het aantal IC-bedden dat is bezet door patiënten met COVID-19. De gegevens vóór 1 juni zijn mogelijk minder betrouwbaar i.v.m. het opzetten van een registratie door het LCPS.",
+      "description": "Deze grafiek laat het aantal IC-bedden zien dat door de tijd heen is bezet door patiënten met COVID-19. Het gaat daarbij niet alleen om de dag van opname in het ziekenhuis, maar om alle dagen waarop patiënten met COVID-19 in het ziekenhuis lagen.",
       "legend_trend_label": "Bezetting IC-bedden",
       "legend_inaccurate_label": "Cijfers zijn minder nauwkeurig"
     },
@@ -192,7 +192,7 @@
     },
     "chart_bedbezetting": {
       "title": "Bezetting gewone ziekenhuisbedden (zonder IC-bedden) door de tijd heen",
-      "description": "Deze grafiek toont het verloop in het aantal ziekenhuisbedden (exclusief IC-bedden) dat is bezet door patiënten met COVID-19. De gegevens vóór 1 juni zijn mogelijk minder betrouwbaar i.v.m. het opzetten van een registratie door het LCPS.",
+      "description": "Deze grafiek laat het aantal ziekenhuisbedden zien (IC-bedden niet meegerekend) dat door de tijd heen is bezet door patiënten met COVID-19. Het gaat daarbij niet alleen om de dag van opname in het ziekenhuis, maar om alle dagen waarop patiënten met COVID-19 in het ziekenhuis lagen.",
       "legend_trend_label": "Bezetting gewone ziekenhuisbedden",
       "legend_inaccurate_label": "Cijfers zijn minder nauwkeurig"
     },
@@ -287,7 +287,7 @@
     "lineLegendLabel": "Besmettelijke mensen",
     "geen_signaalwaarde_beschikbaar": "Vanwege een storing is deze informatie op dit moment helaas niet compleet. Aan een oplossing wordt gewerkt.",
     "geen_signaalwaarde_beschikbaar_lees_waarom": "Lees hier waarom",
-    "toelichting_pagina": "Als iemand het coronavirus oploopt, dan is deze persoon een tijd lang besmettelijk voor anderen. Hoe meer personen besmettelijk zijn, des te sneller kan de epidemie zich verspreiden. Het exacte aantal besmettelijke mensen is onbekend, maar we kunnen wel aangeven of het gaat om tientallen, honderden, duizenden of meer.",
+    "toelichting_pagina": "Als iemand het coronavirus oploopt, dan is deze persoon een tijd lang besmettelijk voor anderen. Hoe lang dit duurt verschilt van persoon tot persoon. Het aantal besmettingen blijft een schatting, maar we weten wel of het gaat om tientallen, honderden, duizenden of meer. ",
     "barscale_titel": "Gemiddeld aantal besmettelijke mensen per 100.000 inwoners",
     "barscale_screenreader_text": "{{value}} besmettelijke mensen",
     "cijfer_titel": "Aantal besmettelijke mensen in Nederland:",
@@ -686,7 +686,10 @@
     "miljoen": "miljoen",
     "signaalwaarde": "Signaalwaarde",
     "totaal": "Totaal",
-    "rond": "rond"
+    "rond": "rond",
+    "interactive_legend": {
+      "reset_button_label": "Reset"
+    }
   },
   "seoHead": {
     "default_description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",
@@ -794,13 +797,7 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": [
-      "0 tot 20",
-      "20 tot 40",
-      "40 tot 60",
-      "60 tot 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -1518,7 +1515,8 @@
         "href": "https://data.rivm.nl/covid-19/COVID-19_gehandicaptenzorg.html",
         "text": "RIVM"
       }
-    }
+    },
+    "linechart_metric_label": "Geïnfecteerde locaties"
   },
   "gehandicaptenzorg_positief_geteste_personen": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -1642,7 +1640,8 @@
         "href": "https://data.rivm.nl/covid-19/COVID-19_gehandicaptenzorg.html",
         "text": "RIVM"
       }
-    }
+    },
+    "linechart_metric_label": "Geïnfecteerde locaties"
   },
   "veiligheidsregio_gehandicaptenzorg_positief_geteste_personen": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -1816,6 +1815,7 @@
       "line_chart_covid_daily_title": "Meldingen van aan COVID-19 overleden patiënten door de tijd heen",
       "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel COVID-19 patiënten in de geselecteerde periode gemeld is dat ze zijn overleden.",
       "line_chart_covid_daily_legend_trend_label": "Meldingen overleden patiënten",
+      "line_chart_covid_daily_legend_trend_short_label": "Overleden patiënten",
       "line_chart_covid_daily_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
     },
     "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
@@ -1849,6 +1849,7 @@
       "line_chart_covid_daily_title": "Gemelde aantal overleden COVID-19 patiënten door de tijd heen",
       "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel COVID-19 patiënten in deze veiligheidsregio in de geselecteerde periode gemeld is dat ze zijn overleden.",
       "line_chart_covid_daily_legend_trend_label": "Gemeld aantal overleden",
+      "line_chart_covid_daily_legend_trend_short_label": "Overleden patiënten",
       "line_chart_covid_daily_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
     },
     "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
@@ -2165,11 +2166,7 @@
     "expected_page_additions": {
       "title": "Verwachte toevoegingen aan deze pagina",
       "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer de vaccinatiegraad.",
-      "additions": [
-        "",
-        "",
-        ""
-      ]
+      "additions": ["", "", ""]
     },
     "data": {
       "difference": "Do not remove this key. It is required as a temporary workaround",
@@ -2294,11 +2291,7 @@
       "kpi_expected_page_additions": {
         "title": "Verwachte toevoegingen aan deze pagina",
         "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer de vaccinatiegraad.",
-        "additions": [
-          "",
-          "",
-          ""
-        ]
+        "additions": ["", "", ""]
       },
       "vaccination_chart": {
         "product_names": {
@@ -2807,7 +2800,10 @@
       "kpi_covid_total_title": "Totaal aantal overleden COVID-19 patiënten",
       "kpi_covid_total_description": "Dit getal laat zien van hoeveel COVID-19 patiënten in deze gemeente in totaal is gemeld dat ze zijn overleden, sinds het begin van de meldingen.",
       "line_chart_covid_daily_title": "Gemelde aantal overleden COVID-19 patiënten door de tijd heen",
-      "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel COVID-19 patiënten in deze gemeente in de geselecteerde periode gemeld is dat ze zijn overleden."
+      "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel COVID-19 patiënten in deze gemeente in de geselecteerde periode gemeld is dat ze zijn overleden.",
+      "line_chart_covid_daily_legend_trend_label": "Meldingen overleden patiënten",
+      "line_chart_covid_daily_legend_trend_short_label": "Overleden patiënten",
+      "line_chart_covid_daily_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
     },
     "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
   },

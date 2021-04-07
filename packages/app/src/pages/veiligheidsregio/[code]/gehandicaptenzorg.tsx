@@ -4,20 +4,19 @@ import Locatie from '~/assets/locaties.svg';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
-import { LineChartTile } from '~/components-styled/line-chart-tile';
-import { addBackgroundRectangleCallback } from '~/components-styled/line-chart/logic';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
-import { UnderReportedTooltip } from '~/domain/underreported/under-reported-tooltip';
 import { useIntl } from '~/intl';
+import { TimeSeriesChart } from '~/components-styled/time-series-chart';
+import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
 import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
 import { getLastGeneratedDate, getVrData } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
-import { getTrailingDateRange } from '~/utils/get-trailing-date-range';
+import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { Layout } from '~/domain/layout/layout';
 import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
@@ -43,7 +42,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
 
   const lastValue = data.disability_care.last_value;
   const values = data.disability_care.values;
-  const underReportedValues = getTrailingDateRange(values, 7);
+  const underReportedDateStart = getBoundaryDateStartUnix(values, 7);
 
   const metadata = {
     ...siteText.veiligheidsregio_index.metadata,
@@ -108,51 +107,39 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <LineChartTile
+          <ChartTileWithTimeframe
             metadata={{ source: positiveTestPeopleText.bronnen.rivm }}
             title={positiveTestPeopleText.linechart_titel}
             ariaDescription={
               graphDescriptions.gehandicaptenzorg_positief_getest
             }
-            values={values}
-            linesConfig={[
-              {
-                metricProperty: 'newly_infected_people',
-              },
-            ]}
-            formatTooltip={(values) => {
-              const value = values[0];
-              const isInaccurateValue = value.__date >= underReportedValues[0];
-
-              return (
-                <UnderReportedTooltip
-                  value={value}
-                  isInUnderReportedRange={isInaccurateValue}
-                  underReportedText={siteText.common.incomplete}
-                />
-              );
-            }}
-            componentCallback={addBackgroundRectangleCallback(
-              underReportedValues,
-              {
-                fill: colors.data.underReported,
-              }
+          >
+            {(timeframe) => (
+              <TimeSeriesChart
+                values={values}
+                timeframe={timeframe}
+                seriesConfig={[
+                  {
+                    type: 'area',
+                    metricProperty: 'newly_infected_people',
+                    label: positiveTestPeopleText.line_chart_legend_trend_label,
+                    color: colors.data.primary,
+                  },
+                ]}
+                dataOptions={{
+                  timespanAnnotations: [
+                    {
+                      start: underReportedDateStart,
+                      end: Infinity,
+                      label:
+                        positiveTestPeopleText.line_chart_legend_inaccurate_label,
+                      shortLabel: siteText.common.incomplete,
+                    },
+                  ],
+                }}
+              />
             )}
-            legendItems={[
-              {
-                color: colors.data.primary,
-                label: positiveTestPeopleText.line_chart_legend_trend_label,
-                shape: 'line',
-              },
-              {
-                color: colors.data.underReported,
-                label:
-                  positiveTestPeopleText.line_chart_legend_inaccurate_label,
-                shape: 'square',
-              },
-            ]}
-            showLegend
-          />
+          </ChartTileWithTimeframe>
 
           <ContentHeader
             id="besmette-locaties"
@@ -205,21 +192,30 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
           </TwoKpiSection>
 
           {lastValue.infected_locations_total !== undefined && (
-            <LineChartTile
+            <ChartTileWithTimeframe
               title={locationsText.linechart_titel}
-              values={values}
-              ariaDescription={
-                graphDescriptions.gehandicaptenzorg_besmette_locaties
-              }
-              linesConfig={[
-                {
-                  metricProperty: 'infected_locations_total',
-                },
-              ]}
               metadata={{
                 source: locationsText.bronnen.rivm,
               }}
-            />
+              ariaDescription={
+                graphDescriptions.gehandicaptenzorg_besmette_locaties
+              }
+            >
+              {(timeframe) => (
+                <TimeSeriesChart
+                  values={values}
+                  timeframe={timeframe}
+                  seriesConfig={[
+                    {
+                      type: 'area',
+                      metricProperty: 'infected_locations_total',
+                      label: locationsText.linechart_metric_label,
+                      color: colors.data.primary,
+                    },
+                  ]}
+                />
+              )}
+            </ChartTileWithTimeframe>
           )}
 
           <ContentHeader
@@ -255,48 +251,36 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <LineChartTile
+          <ChartTileWithTimeframe
             metadata={{ source: mortalityText.bronnen.rivm }}
             title={mortalityText.linechart_titel}
-            values={values}
             ariaDescription={graphDescriptions.gehandicaptenzorg_overleden}
-            linesConfig={[
-              {
-                metricProperty: 'deceased_daily',
-              },
-            ]}
-            formatTooltip={(values) => {
-              const value = values[0];
-              const isInaccurateValue = value.__date >= underReportedValues[0];
-
-              return (
-                <UnderReportedTooltip
-                  value={value}
-                  isInUnderReportedRange={isInaccurateValue}
-                  underReportedText={siteText.common.incomplete}
-                />
-              );
-            }}
-            componentCallback={addBackgroundRectangleCallback(
-              underReportedValues,
-              {
-                fill: colors.data.underReported,
-              }
+          >
+            {(timeframe) => (
+              <TimeSeriesChart
+                values={values}
+                timeframe={timeframe}
+                seriesConfig={[
+                  {
+                    type: 'area',
+                    metricProperty: 'deceased_daily',
+                    label: mortalityText.line_chart_legend_trend_label,
+                    color: colors.data.primary,
+                  },
+                ]}
+                dataOptions={{
+                  timespanAnnotations: [
+                    {
+                      start: underReportedDateStart,
+                      end: Infinity,
+                      label: mortalityText.line_chart_legend_inaccurate_label,
+                      shortLabel: siteText.common.incomplete,
+                    },
+                  ],
+                }}
+              />
             )}
-            legendItems={[
-              {
-                color: colors.data.primary,
-                label: mortalityText.line_chart_legend_trend_label,
-                shape: 'line',
-              },
-              {
-                color: colors.data.underReported,
-                label: mortalityText.line_chart_legend_inaccurate_label,
-                shape: 'square',
-              },
-            ]}
-            showLegend
-          />
+          </ChartTileWithTimeframe>
         </TileList>
       </SafetyRegionLayout>
     </Layout>

@@ -68,13 +68,13 @@ const Label = styled.span(
   })
 );
 
-const Line = styled.div<LineProps>(
+const Line = styled.div<LineProps>((x) =>
   css({
     width: '1px',
     height: '100%',
     borderLeftWidth: '1px',
     borderLeftStyle: 'dashed',
-    borderLeftColor: (props) => props.color,
+    borderLeftColor: x.color,
   })
 );
 
