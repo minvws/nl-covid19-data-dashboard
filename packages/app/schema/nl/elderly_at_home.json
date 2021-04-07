@@ -23,7 +23,7 @@
         "positive_tested_daily": {
           "type": "integer"
         },
-        "positive_tested_moving_average": {
+        "positive_tested_daily_moving_average": {
           "type": "number"
         },
         "positive_tested_daily_per_100k": {
@@ -32,7 +32,7 @@
         "deceased_daily": {
           "type": "integer"
         },
-        "deceased_moving_average": {
+        "deceased_daily_moving_average": {
           "type": "number"
         },
         "date_unix": {
@@ -44,10 +44,10 @@
       },
       "required": [
         "positive_tested_daily",
-        "positive_tested_moving_average",
+        "positive_tested_daily_moving_average",
         "positive_tested_daily_per_100k",
         "deceased_daily",
-        "deceased_moving_average",
+        "deceased_daily_moving_average",
         "date_unix",
         "date_of_insertion_unix"
       ],

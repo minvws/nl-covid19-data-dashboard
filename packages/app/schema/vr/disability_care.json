@@ -38,7 +38,7 @@
         "deceased_daily": {
           "type": "integer"
         },
-        "deceased_moving_average": {
+        "deceased_daily_moving_average": {
           "type": "number"
         },
         "date_unix": {
@@ -59,7 +59,7 @@
         "infected_locations_total",
         "infected_locations_percentage",
         "deceased_daily",
-        "deceased_moving_average",
+        "deceased_daily_moving_average",
         "date_unix",
         "date_of_insertion_unix",
         "vrcode"
