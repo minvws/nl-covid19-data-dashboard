@@ -2367,7 +2367,12 @@
       "titel": "Deliveries",
       "omschrijving": "This graph shows how many doses of each COVID-19 vaccine the Netherlands has received and is expecting to receive in a given week."
     },
-    "bereidheid_datums": "Last values obtained on {{dateOfInsertion}}. Is updated every three weeks."
+    "bereidheid_datums": "Last values obtained on {{dateOfInsertion}}. Is updated every three weeks.",
+    "stock_per_vaccine_chart": {
+      "title": "Verwachtte voorraad per vaccin type",
+      "description": "Deze grafiek ....",
+      "tooltip_title": "Verwachtte voorraad per vaccin type"
+    }
   },
   "editorial_detail": {
     "back_link": {

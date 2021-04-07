@@ -33,6 +33,7 @@ import { useVaccineNames } from '~/domain/vaccine/use-vaccine-names';
 import { VaccineDeliveryBarChart } from '~/domain/vaccine/vaccine-delivery-bar-chart';
 import { FormatVaccinationsTooltip } from '~/domain/vaccine/vaccine-delivery-tooltip';
 import { VaccinePageIntroduction } from '~/domain/vaccine/vaccine-page-introduction';
+import { VaccineStockPerSupplierChart } from '~/domain/vaccine/vaccine-stock-per-supplier-chart';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { getVaccineMilestonesQuery } from '~/queries/vaccine-milestones-query';
@@ -568,6 +569,21 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           </KpiTile>
         </TwoKpiSection>
               */}
+
+          <ChartTile
+            title={text.stock_per_vaccine_chart.title}
+            description={text.stock_per_vaccine_chart.description}
+            metadata={{
+              source: text.bronnen.rivm,
+            }}
+          >
+            {/* @TODO remove conditional */}
+            {data.vaccine_stock && (
+              <VaccineStockPerSupplierChart
+                values={data.vaccine_stock.values}
+              />
+            )}
+          </ChartTile>
 
           {additions.length > 0 && (
             <TwoKpiSection>
