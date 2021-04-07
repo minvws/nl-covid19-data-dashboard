@@ -29,7 +29,10 @@ export function ReproductionChartTile({
    * of all the values before the first datapoint with a null value to
    * display in the chart
    */
-  const values = data.values.filter((x) => isPresent(x.index_average));
+  const values = data.values.slice(
+    0,
+    data.values.findIndex((x) => !isPresent(x.index_average))
+  );
   const last_value = last(values) as NationalReproductionValue;
 
   return (
@@ -51,7 +54,7 @@ export function ReproductionChartTile({
             {
               type: 'line',
               metricProperty: 'index_average',
-              label: 'R',
+              label: text.lineLegendLabel,
               color: colors.data.primary,
             },
           ]}
