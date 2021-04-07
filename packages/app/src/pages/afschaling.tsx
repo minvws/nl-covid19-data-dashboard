@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { Box } from '~/components-styled/base';
 import { ContentBlock } from '~/components-styled/cms/content-block';
 import { RichContent } from '~/components-styled/cms/rich-content';
-import { Heading } from '~/components-styled/typography';
+import { Heading, InlineText } from '~/components-styled/typography';
 import { WarningTile } from '~/components-styled/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
@@ -14,19 +14,28 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
+  getNlData,
 } from '~/static-props/get-data';
-import { AfschalingsPage } from '~/types/cms';
+import { AfschalingsPage, BinaryChoice } from '~/types/cms';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   createGetContent<AfschalingsPage>(
     (_context) => `*[_type == 'afschalingPage'][0]`
-  )
+  ),
+  getNlData
 );
 
 const Afschaling = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
-  const { lastGenerated, content } = props;
+  const { lastGenerated, content, data } = props;
+
+  const isDownscalePossible =
+    data.downscaling?.last_value.is_downscaling_possible;
+
+  const downScalableOption = content.downscalePossible.find(
+    (x) => x.binaryOption === isDownscalePossible
+  );
 
   return (
     <Layout {...siteText.over_metadata} lastGenerated={lastGenerated}>
@@ -67,6 +76,7 @@ const Afschaling = (props: StaticProps<typeof getStaticProps>) => {
             </Box>
           )}
           <Heading level={2}>{content.explanationTitle}</Heading>
+          <DownScalableExplanation data={downScalableOption} />
           <RichContent blocks={content.explanationDescription} />
         </ContentBlock>
       </Box>
@@ -75,3 +85,18 @@ const Afschaling = (props: StaticProps<typeof getStaticProps>) => {
 };
 
 export default Afschaling;
+
+function DownScalableExplanation({ data }: { data: BinaryChoice }) {
+  const color = data.binaryOption ? '#1991D3' : '#FA475E';
+  return (
+    <Box
+      borderLeftColor={color}
+      borderLeftWidth="3px"
+      borderLeftStyle="solid"
+      pl={3}
+    >
+      <InlineText fontWeight="bold">{data.binaryOptionLabel}</InlineText>.
+      <InlineText> {data.binaryOptionDescription}</InlineText>
+    </Box>
+  );
+}
