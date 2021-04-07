@@ -688,7 +688,7 @@
     "totaal": "Total",
     "rond": "rond",
     "interactive_legend": {
-      "reset_button_label": "Reset"
+      "reset_button_label": ""
     }
   },
   "seoHead": {
@@ -797,7 +797,13 @@
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -1814,9 +1820,9 @@
       "kpi_covid_total_description": "This figure shows the number of COVID-19 patients reported dead, since the reporting of COVID-19 deaths started.",
       "line_chart_covid_daily_title": "Number of reported deaths from COVID-19 over time",
       "line_chart_covid_daily_description": "This graph shows the number of COVID-19 patients reported dead, in the selected period.",
-      "line_chart_covid_daily_legend_trend_label": "Reports of deceased patients",
-      "line_chart_covid_daily_legend_trend_short_label": "Deceased patients",
-      "line_chart_covid_daily_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
+      "line_chart_covid_daily_legend_trend_label": "Meldingen overleden patiënten",
+      "line_chart_covid_daily_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
+      "line_chart_covid_daily_legend_trend_short_label": ""
     },
     "kpi_titel": "Daily reported deaths from COVID-19"
   },
@@ -1848,9 +1854,9 @@
       "kpi_covid_total_description": "This figure shows the number of COVID-19 patients in this safety region reported dead, since the reporting of COVID-19 deaths started.",
       "line_chart_covid_daily_title": "Number of COVID-19 patients reported dead over time",
       "line_chart_covid_daily_description": "This graph shows the number of COVID-19 patients in this safety region reported dead, in the selected period.",
-      "line_chart_covid_daily_legend_trend_label": "Reports of deceased patients",
-      "line_chart_covid_daily_legend_trend_short_label": "Deceased patients",
-      "line_chart_covid_daily_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
+      "line_chart_covid_daily_legend_trend_label": "Gemeld aantal overleden",
+      "line_chart_covid_daily_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
+      "line_chart_covid_daily_legend_trend_short_label": ""
     },
     "kpi_titel": "Daily reported deaths from COVID-19"
   },
@@ -2166,7 +2172,11 @@
     "expected_page_additions": {
       "title": "Expected data on vaccinations",
       "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
-      "additions": ["", "", ""]
+      "additions": [
+        "",
+        "",
+        ""
+      ]
     },
     "data": {
       "difference": "Do not remove this key. It is required as a temporary workaround",
@@ -2291,7 +2301,11 @@
       "kpi_expected_page_additions": {
         "title": "Expected data on vaccinations",
         "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
-        "additions": ["", "", ""]
+        "additions": [
+          "",
+          "",
+          ""
+        ]
       },
       "vaccination_chart": {
         "product_names": {
@@ -2801,9 +2815,9 @@
       "kpi_covid_total_description": "This figure shows the number of COVID-19 patients in this municipality reported dead, since the reporting of COVID-19 deaths started.",
       "line_chart_covid_daily_title": "Number of COVID-19 patients reported dead over time",
       "line_chart_covid_daily_description": "This graph shows the number of COVID-19 patients in this municipality reported dead, in the selected period.",
-      "line_chart_covid_daily_legend_trend_label": "Reports of deceased patients",
-      "line_chart_covid_daily_legend_trend_short_label": "Deceased patients",
-      "line_chart_covid_daily_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
+      "line_chart_covid_daily_legend_trend_label": "",
+      "line_chart_covid_daily_legend_trend_short_label": "",
+      "line_chart_covid_daily_legend_inaccurate_label": ""
     },
     "kpi_titel": "Daily reported deaths from COVID-19"
   },
