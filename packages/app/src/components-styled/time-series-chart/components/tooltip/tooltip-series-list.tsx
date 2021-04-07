@@ -18,10 +18,10 @@ import { colors } from '~/style/theme';
 
 export function TooltipSeriesList<T extends TimestampedValue>({
   data: tooltipData,
-  columns,
+  hasMultipleColumns,
 }: {
   data: TooltipData<T>;
-  columns: 1 | 2;
+  hasMultipleColumns?: boolean;
 }) {
   const {
     value,
@@ -83,7 +83,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
           {timespanAnnotation.shortLabel || timespanAnnotation.label}
         </Text>
       )}
-      <TooltipList columns={columns ?? 1}>
+      <TooltipList hasMultipleColumns={hasMultipleColumns}>
         {seriesConfig.map((x, index) => {
           switch (x.type) {
             case 'stacked-area':
@@ -162,13 +162,14 @@ export function TooltipSeriesList<T extends TimestampedValue>({
   );
 }
 
-export const TooltipList = styled.ol<{ columns: 1 | 2 }>(({ columns }) =>
-  css({
-    columns,
-    m: 0,
-    p: 0,
-    listStyle: 'none',
-  })
+export const TooltipList = styled.ol<{ hasMultipleColumns: boolean }>(
+  ({ hasMultipleColumns }) =>
+    css({
+      columns: hasMultipleColumns ? 2 : 1,
+      m: 0,
+      p: 0,
+      listStyle: 'none',
+    })
 );
 
 interface TooltipListItemProps {
