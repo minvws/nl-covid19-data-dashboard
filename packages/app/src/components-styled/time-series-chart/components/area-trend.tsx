@@ -1,10 +1,9 @@
-import { curveLinear, curveStep } from '@visx/curve';
 import { AreaClosed, LinePath } from '@visx/shape';
 import { PositionScale } from '@visx/shape/lib/types';
 import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
 import { useUniqueId } from '~/utils/use-unique-id';
-import { SeriesItem, SeriesSingleValue } from '../logic';
+import { SeriesItem, SeriesSingleValue, curves } from '../logic';
 
 const DEFAULT_FILL_OPACITY = 0.2;
 const DEFAULT_STROKE_WIDTH = 2;
@@ -45,7 +44,7 @@ export function AreaTrend({
         strokeWidth={strokeWidth}
         strokeLinecap="round"
         strokeLinejoin="round"
-        curve={curve === 'linear' ? curveLinear : curveStep}
+        curve={curves[curve]}
       />
       <AreaClosed
         data={nonNullSeries}
@@ -53,7 +52,7 @@ export function AreaTrend({
         y={getY}
         fill={color}
         fillOpacity={fillOpacity}
-        curve={curve === 'linear' ? curveLinear : curveStep}
+        curve={curves[curve]}
         yScale={yScale}
       />
     </>

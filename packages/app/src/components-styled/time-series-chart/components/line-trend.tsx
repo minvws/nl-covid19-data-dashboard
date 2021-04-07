@@ -1,8 +1,7 @@
-import { curveLinear, curveStep } from '@visx/curve';
 import { LinePath } from '@visx/shape';
 import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
-import { SeriesItem, SeriesSingleValue } from '../logic';
+import { SeriesItem, SeriesSingleValue, curves } from '../logic';
 
 export type LineStyle = 'solid' | 'dashed';
 
@@ -40,7 +39,7 @@ export function LineTrend({
       y={getY}
       stroke={color}
       strokeWidth={strokeWidth}
-      curve={curve === 'linear' ? curveLinear : curveStep}
+      curve={curves[curve]}
       strokeDasharray={style === 'dashed' ? 4 : undefined}
       strokeLinecap="butt"
       strokeLinejoin="round"
