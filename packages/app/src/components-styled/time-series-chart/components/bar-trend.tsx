@@ -6,7 +6,8 @@ import { useUniqueId } from '~/utils/use-unique-id';
 import {
   BenchmarkConfig,
   Bounds,
-  SeriesItem,
+  GetX,
+  GetY,
   SeriesSingleValue,
 } from '../logic';
 
@@ -16,8 +17,8 @@ type BarTrendProps = {
   series: SeriesSingleValue[];
   color: string;
   fillOpacity?: number;
-  getX: (v: SeriesItem) => number;
-  getY: (v: SeriesSingleValue) => number;
+  getX: GetX;
+  getY: GetY;
   bounds: Bounds;
   bandPadding?: number;
   benchmark?: BenchmarkConfig;
@@ -63,7 +64,7 @@ export function BarTrend({
     benchmark &&
     getY({
       __value: benchmark.value,
-      __date_unix: Date.now() / 1000,
+      __date_unix: 0, // __date_unix is not used by getY
     });
 
   return (
